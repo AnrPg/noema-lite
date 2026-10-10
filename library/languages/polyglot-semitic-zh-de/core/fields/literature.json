@@ -1,0 +1,55 @@
+{
+ "field": "literature",
+ "title": "Literature",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "lit.chapter",
+   "gloss": "chapter, section (of a book)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "lit.greatlearning",
+   "gloss": "the Great Learning (a Confucian classic)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "lit.stanza",
+   "gloss": "stanza, verse (of a song or poem, as opposed to the chorus)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "lit.verse",
+   "gloss": "verse (of a poem)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "lit.novel",
+   "gloss": "novel",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "lit.poem",
+   "gloss": "poem",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "lit.author",
+   "gloss": "author, writer",
+   "tier": 1,
+   "rank": 3
+  }
+ ]
+}

@@ -1,0 +1,342 @@
+{
+ "lexemes": [
+  {
+   "id": "de:er",
+   "lemma": "er",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "er",
+    "PRON;ACC": "ihn",
+    "PRON;DAT": "ihm"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:sie",
+   "lemma": "sie",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "sie",
+    "PRON;ACC": "sie",
+    "PRON;DAT": "ihr"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:essen",
+   "lemma": "essen",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "features": {
+    "principalParts": [
+     "essen",
+     "isst",
+     "aß",
+     "gegessen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "e>i",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "the object may be left out: Wir essen um sieben."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "essen",
+    "V;PRS;1;SG": "esse",
+    "V;PRS;2;SG": "isst",
+    "V;PRS;3;SG": "isst",
+    "V;PRS;1;PL": "essen",
+    "V;PRS;2;PL": "esst",
+    "V;PRS;3;PL": "essen"
+   },
+   "ref": {
+    "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and warm: shared meals (zusammen essen) are a social ritual.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat (of people)",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to have a meal, to dine (essen gehen = to eat out)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Isst du Fleisch?",
+      "tr": "Do you eat meat?",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Er isst gern Gemüse.",
+      "tr": "He likes eating vegetables.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen um sieben Uhr zu Abend.",
+      "tr": "We have dinner at seven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "Am Wochenende gehen wir essen.",
+      "tr": "At the weekend we go out to eat.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Mittag essen",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "zu Abend essen",
+      "tr": "to have dinner"
+     },
+     {
+      "text": "essen gehen",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das Auge isst mit.",
+      "tr": "The eye eats too.",
+      "kind": "saying",
+      "meaning": "How food looks matters.",
+      "register": "neutral"
+     },
+     {
+      "text": "Es wird nichts so heiß gegessen, wie es gekocht wird.",
+      "tr": "Nothing is eaten as hot as it is cooked.",
+      "kind": "proverb",
+      "meaning": "Things are rarely as bad as they first seem.",
+      "register": "neutral"
+     },
+     {
+      "text": "So jemand nicht will arbeiten, der soll auch nicht essen.",
+      "tr": "If anyone will not work, neither shall he eat.",
+      "kind": "quote",
+      "meaning": "Who does not work should not eat.",
+      "register": "literary",
+      "source": "Bible, 2 Thessalonians 3:10 (Luther translation, public domain)"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "aufessen",
+      "tr": "to eat up, finish one's food"
+     },
+     {
+      "text": "mitessen",
+      "tr": "to eat with others, join in"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "speisen",
+      "register": "formal",
+      "nuance": "elevated ‘to dine’: restaurants, menus, ceremonies"
+     },
+     {
+      "word": "zu sich nehmen",
+      "register": "formal",
+      "nuance": "to ingest, take (food) — medical or official language"
+     },
+     {
+      "word": "futtern",
+      "register": "colloquial",
+      "nuance": "to tuck in, eat heartily — playful"
+     },
+     {
+      "word": "fressen",
+      "register": "pejorative",
+      "nuance": "neutral for animals; said of people it means eating greedily, like an animal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "fasten",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ëȥȥen, Old High German ëȥȥan, from Proto-Germanic *etaną, from Proto-Indo-European *h₁ed-; cognate with English eat and Dutch eten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Animals do not ‘essen’ in German, they ‘fressen’ — using fressen for a person is rude or jokey.",
+     "The past participle is gegessen, with an extra -ge-; the old form gessen is obsolete."
+    ],
+    "pitfalls": [
+     "Stem vowel e → i: du isst, er isst (not *esst); and du isst / er isst are spelled the same.",
+     "Past tense with ß: ich aß, wir aßen."
+    ],
+    "subtleties": [
+     "Soup is eaten in German (Suppe essen), not drunk — unlike English ‘drink soup’ in some contexts or Chinese 喝汤."
+    ]
+   }
+  },
+  {
+   "id": "de:der",
+   "lemma": "der",
+   "pos": "DET",
+   "class": "def",
+   "senses": [
+    "det.def"
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "DET;NOM;SG;MASC": "der",
+    "DET;NOM;SG;FEM": "die",
+    "DET;NOM;SG;NEUT": "das",
+    "DET;ACC;SG;MASC": "den",
+    "DET;ACC;SG;FEM": "die",
+    "DET;ACC;SG;NEUT": "das",
+    "DET;DAT;SG;MASC": "dem",
+    "DET;DAT;SG;FEM": "der",
+    "DET;DAT;SG;NEUT": "dem",
+    "DET;GEN;SG;MASC": "des",
+    "DET;GEN;SG;FEM": "der",
+    "DET;GEN;SG;NEUT": "des",
+    "DET;NOM;PL": "die",
+    "DET;ACC;PL": "die",
+    "DET;DAT;PL": "den",
+    "DET;GEN;PL": "der"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:ein",
+   "lemma": "ein",
+   "pos": "DET",
+   "class": "indef",
+   "senses": [
+    "det.indef"
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "senseForms": []
+   },
+   "forms": {
+    "DET;NOM;SG;MASC": "ein",
+    "DET;NOM;SG;FEM": "eine",
+    "DET;NOM;SG;NEUT": "ein",
+    "DET;ACC;SG;MASC": "einen",
+    "DET;ACC;SG;FEM": "eine",
+    "DET;ACC;SG;NEUT": "ein",
+    "DET;DAT;SG;MASC": "einem",
+    "DET;DAT;SG;FEM": "einer",
+    "DET;DAT;SG;NEUT": "einem",
+    "DET;GEN;SG;MASC": "eines",
+    "DET;GEN;SG;FEM": "einer",
+    "DET;GEN;SG;NEUT": "eines"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:und",
+   "lemma": "und",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "features": {
+    "verbPosition": "none (position zero)"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": []
+}

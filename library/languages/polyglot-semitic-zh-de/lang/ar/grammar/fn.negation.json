@@ -1,0 +1,484 @@
+{
+ "function": "fn.negation",
+ "status": "realized",
+ "summary": "Arabic chooses the negator by the kind of sentence and by the tense. A present verb is negated with لَا right before it: لَا أُحِبُّ الشَّايَ (I don’t like tea). A sentence without a verb (“is not”, “is not here”, “does not have”) is negated with لَيْسَ — a verb with past-tense endings but present meaning, which agrees with the subject (لَسْتُ، لَيْسَتْ، لَسْنَا …) and puts a noun or adjective predicate in the accusative: هٰذَا لَيْسَ شَايًا; لَيْسَ عِنْدِي مَاءٌ. “No / not any” (I have no water) is said by negating the sentence: لَيْسَ عِنْدِي مَاءٌ; “there is no …” can also be لَا + a noun in -a without tanwīn (لَا شَكَّ, no doubt). Nothing = لَا شَيْءَ, nobody = لَا أَحَدَ, and with a verb لَا … شَيْئًا (not … anything); never = لَا … أَبَدًا; neither … nor = لَا … وَلَا … . One negation per clause is enough: the verb is negated, and “anything / anyone” after it stays a plain indefinite (لَا أُرِيدُ شَيْئًا). The past is negated with لَمْ + jussive (لَمْ آكُلْ), the future with لَنْ + subjunctive (لَنْ آكُلَ); مَا + past is classical and dialectal — these come with the past and the future. The answer “no” is also لَا.",
+ "procedure": {
+  "askYourself": [
+   "Is there a present verb? → لَا directly before it; the verb stays indicative (-u).",
+   "Is it a sentence without a verb (X is Y / X is here / I have)? → لَيْسَ, agreeing with the subject (لَسْتُ، لَيْسَتْ …); with عِنْدَ always لَيْسَ.",
+   "After لَيْسَ, is there a noun or adjective predicate? → accusative (شَايًا، مُعَلِّمًا).",
+   "Do I mean “not … anything / anybody”? → negate the verb and add شَيْئًا / أَحَدًا; as an answer or subject: لَا شَيْءَ، لَا أَحَدَ.",
+   "Do I mean “never”? → لَا + verb … أَبَدًا.",
+   "Two things denied? → the normal negation first, then وَلَا before the second.",
+   "Is it past or future? → لَمْ + jussive / لَنْ + subjunctive — not لَا (later lessons).",
+   "Is it the answer “no”? → لَا on its own, then a comma: لَا، شُكْرًا."
+  ]
+ },
+ "traps": [
+  "*لَا هٰذَا شَايٌ is wrong: a sentence without a verb takes لَيْسَ — هٰذَا لَيْسَ شَايًا.",
+  "*لَا عِنْدِي is wrong: عِنْدِي is not a verb — لَيْسَ عِنْدِي.",
+  "لَيْسَ looks like a past verb but means the present: لَسْتُ مُعَلِّمًا = I am not a teacher.",
+  "Do not double the negation: لَا أُرِيدُ شَيْئًا (not *لَا أُرِيدُ لَا شَيْءَ).",
+  "أَبَدًا alone after a positive verb means “forever” (literary), not “never”: say لَا … أَبَدًا.",
+  "Do not negate a past verb with لَا: “I didn’t eat” = لَمْ آكُلْ.",
+  "لَا “no” and لَا “not” are written the same; the answer is followed by a pause or comma: لَا، شُكْرًا."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:la",
+   "ar:laysa",
+   "ar:la_shay",
+   "ar:la_ahad",
+   "ar:wala"
+  ]
+ },
+ "paradigmCells": [
+  "V;PFV;1;SG",
+  "V;PFV;2;SG;MASC",
+  "V;PFV;2;SG;FEM",
+  "V;PFV;3;SG;MASC",
+  "V;PFV;3;SG;FEM",
+  "V;PFV;1;PL",
+  "V;PFV;2;PL;MASC",
+  "V;PFV;2;PL;FEM",
+  "V;PFV;3;PL;MASC",
+  "V;PFV;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:laysa"
+   ],
+   "cells": [
+    "V;PFV;1;SG",
+    "V;PFV;2;SG;MASC",
+    "V;PFV;2;SG;FEM",
+    "V;PFV;3;SG;MASC",
+    "V;PFV;3;SG;FEM",
+    "V;PFV;1;PL",
+    "V;PFV;2;PL;MASC",
+    "V;PFV;2;PL;FEM",
+    "V;PFV;3;PL;MASC",
+    "V;PFV;3;PL;FEM"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.negation",
+   "note": "Hebrew splits like Arabic: לֹא before verbs, אֵין for “there is not / does not have” (אֵין לִי — compare لَيْسَ عِنْدِي), and כְּלוּם / אַף אֶחָד for nothing / nobody — but Hebrew doubles the negation (אֲנִי לֹא רוֹצֶה כְּלוּם), Arabic does not."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.negation",
+   "note": "German chooses between nicht and kein by the word negated (kein Wasser); Arabic chooses by tense and sentence type (لَا، لَيْسَ، لَمْ، لَنْ) and has no word for kein."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "Chinese chooses 不 or 没 by aspect — a little like Arabic لَا (present) vs لَمْ (past); 没有 “not have” matches لَيْسَ عِنْدَ."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.have",
+   "note": "The negative of عِنْدِي is لَيْسَ عِنْدِي (lesson 6)."
+  }
+ ],
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "kind of sentence",
+    "negator",
+    "example"
+   ],
+   "rows": [
+    [
+     "present verb",
+     "لَا + verb",
+     "لَا أَشْرَبُ الْقَهْوَةَ. — I don’t drink coffee."
+    ],
+    [
+     "no verb: X is Y",
+     "لَيْسَ (agrees) + accusative",
+     "هٰذَا لَيْسَ شَايًا. — This is not tea."
+    ],
+    [
+     "no verb: X is here",
+     "لَيْسَ",
+     "الْقَهْوَةُ لَيْسَتْ هُنَا. — The coffee isn’t here."
+    ],
+    [
+     "to have (عِنْدَ)",
+     "لَيْسَ (always لَيْسَ)",
+     "لَيْسَ عِنْدَنَا مَاءٌ. — We have no water."
+    ],
+    [
+     "nothing / nobody",
+     "لَا شَيْءَ / لَا أَحَدَ",
+     "لَا شَيْءَ هُنَا. لَا أَحَدَ هُنَا."
+    ],
+    [
+     "not … anything",
+     "لَا + verb + شَيْئًا",
+     "لَا أُرِيدُ شَيْئًا. — I don’t want anything."
+    ],
+    [
+     "never",
+     "لَا + verb … أَبَدًا",
+     "لَا آكُلُ اللَّحْمَ أَبَدًا. — I never eat meat."
+    ],
+    [
+     "neither … nor",
+     "لَا … وَلَا … / لَيْسَ … وَلَا …",
+     "لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ."
+    ],
+    [
+     "past (later)",
+     "لَمْ + jussive",
+     "لَمْ آكُلْ. — I didn’t eat."
+    ],
+    [
+     "future (later)",
+     "لَنْ + subjunctive",
+     "لَنْ آكُلَ. — I won’t eat."
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.negationPosition",
+     "value": "before-verb"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "لَيْسَ",
+    "say"
+   ],
+   "rows": [
+    [
+     "I",
+     "لَسْتُ",
+     "lastu"
+    ],
+    [
+     "you (to a man)",
+     "لَسْتَ",
+     "lasta"
+    ],
+    [
+     "you (to a woman)",
+     "لَسْتِ",
+     "lasti"
+    ],
+    [
+     "he, it",
+     "لَيْسَ",
+     "laysa"
+    ],
+    [
+     "she, it",
+     "لَيْسَتْ",
+     "laysat"
+    ],
+    [
+     "we",
+     "لَسْنَا",
+     "lasnā"
+    ],
+    [
+     "you (several)",
+     "لَسْتُمْ",
+     "lastum"
+    ],
+    [
+     "you (women only)",
+     "لَسْتُنَّ",
+     "lastunna"
+    ],
+    [
+     "they",
+     "لَيْسُوا",
+     "laysū"
+    ],
+    [
+     "they (women only)",
+     "لَسْنَ",
+     "lasna"
+    ]
+   ],
+   "caption": "لَيْسَ “is not” conjugated like a past verb. Before a consonant ending the stem shortens to las-: لَسْتُ، لَسْنَا، لَسْنَ. (Two people: لَسْتُمَا، لَيْسَا، لَيْسَتَا — later.)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "لَا for verbs, لَيْسَ for sentences without a verb.",
+   "text": "لَا تَطْبُخُ (she doesn’t cook) — but هِيَ لَيْسَتْ هُنَا (she isn’t here). Since عِنْدِي is not a verb, “I don’t have” is لَيْسَ عِنْدِي, never *لَا عِنْدِي."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The predicate of لَيْسَ is accusative.",
+   "text": "هٰذَا شَايٌ → هٰذَا لَيْسَ شَايًا; أَنَا مُعَلِّمٌ → لَسْتُ مُعَلِّمًا. But in لَيْسَ عِنْدِي مَاءٌ the water is the subject: it stays nominative."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "one negation",
+     "points": [
+      "لَا أُرِيدُ شَيْئًا — I don’t want anything",
+      "لَا أَحَدَ هُنَا — nobody is here"
+     ]
+    },
+    {
+     "title": "not a second negation",
+     "points": [
+      "*لَا أُرِيدُ لَا شَيْءَ is wrong",
+      "after a negated verb: شَيْئًا (anything), أَحَدًا (anyone) — plain indefinites"
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek δεν θέλω τίποτα has the same shape as لَا أُرِيدُ شَيْئًا — a negated verb + “thing” — but τίποτα is negative by itself (alone it means “nothing”); شَيْئًا is a plain “something”, and “nothing” alone is لَا شَيْءَ."
+    },
+    {
+     "for": "ru",
+     "rel": "different",
+     "text": "Russian я ничего не хочу negates twice (ни- and не); Arabic negates once: لَا أُرِيدُ شَيْئًا."
+    },
+    {
+     "for": "es",
+     "rel": "different",
+     "text": "Spanish no quiero nada negates twice; Arabic once: لَا أُرِيدُ شَيْئًا."
+    },
+    {
+     "for": "en",
+     "rel": "same",
+     "text": "English “I don’t want anything” is built exactly like لَا أُرِيدُ شَيْئًا."
+    },
+    {
+     "for": "fr",
+     "rel": "different",
+     "text": "French ne … rien has two parts; Arabic needs only لَا before the verb: لَا أُرِيدُ شَيْئًا."
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "“No car”, “no water”.",
+   "text": "Arabic has no word for “no / not any” before a noun. Negate the sentence: لَيْسَ عِنْدِي سَيَّارَةٌ (I have no car), لَا أَشْرَبُ نَبِيذًا (I drink no wine). The لَا of “there is no …” with a bare noun in -a (لَا شَكَّ, لَا شَيْءَ, لَا أَحَدَ) is the same word, used in set phrases and in these two pronouns.",
+   "notes": [
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "German kein has no Arabic counterpart: negate the sentence — لَيْسَ عِنْدِي سَيَّارَةٌ (ich habe kein Auto)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Word order stays the same: put لَا right before the verb (الطِّفْلُ لَا يَأْكُلُ) and لَيْسَ at the start or after the subject (لَيْسَ عِنْدِي … / هٰذَا لَيْسَ …). أَبَدًا usually goes to the end."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“I don’t drink coffee.”",
+   "options": [
+    "لَا أَشْرَبُ الْقَهْوَةَ",
+    "لَيْسَ أَشْرَبُ الْقَهْوَةَ",
+    "لَمْ أَشْرَبُ الْقَهْوَةَ"
+   ],
+   "answer": "لَا أَشْرَبُ الْقَهْوَةَ",
+   "why": "A present verb is negated with لَا."
+  },
+  {
+   "q": "“This is not tea.”",
+   "options": [
+    "هٰذَا لَيْسَ شَايًا",
+    "هٰذَا لَا شَايٌ",
+    "هٰذَا لَيْسَ شَايٌ"
+   ],
+   "answer": "هٰذَا لَيْسَ شَايًا",
+   "why": "No verb → لَيْسَ, and its predicate is accusative (-an)."
+  },
+  {
+   "q": "“We have no water.”",
+   "options": [
+    "لَيْسَ عِنْدَنَا مَاءٌ",
+    "لَا عِنْدَنَا مَاءٌ",
+    "عِنْدَنَا لَا مَاءٌ"
+   ],
+   "answer": "لَيْسَ عِنْدَنَا مَاءٌ",
+   "why": "عِنْدَ is not a verb: negate the sentence with لَيْسَ; the water stays nominative."
+  },
+  {
+   "q": "“I am not a teacher.”",
+   "options": [
+    "لَسْتُ مُعَلِّمًا",
+    "لَيْسَ مُعَلِّمًا",
+    "لَا أَنَا مُعَلِّمٌ"
+   ],
+   "answer": "لَسْتُ مُعَلِّمًا",
+   "why": "لَيْسَ agrees with “I”: لَسْتُ; predicate accusative."
+  },
+  {
+   "q": "“I don’t want anything.”",
+   "options": [
+    "لَا أُرِيدُ شَيْئًا",
+    "لَا أُرِيدُ لَا شَيْءَ",
+    "أُرِيدُ لَا شَيْءَ"
+   ],
+   "answer": "لَا أُرِيدُ شَيْئًا",
+   "why": "One negation: لَا + verb + شَيْئًا."
+  },
+  {
+   "q": "“I never eat meat.”",
+   "options": [
+    "لَا آكُلُ اللَّحْمَ أَبَدًا",
+    "آكُلُ اللَّحْمَ أَبَدًا",
+    "أَبَدًا آكُلُ اللَّحْمَ"
+   ],
+   "answer": "لَا آكُلُ اللَّحْمَ أَبَدًا",
+   "why": "أَبَدًا means “never” only with a negated verb."
+  },
+  {
+   "q": "“I drink neither tea nor coffee.”",
+   "options": [
+    "لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ",
+    "لَا أَشْرَبُ الشَّايَ أَوِ الْقَهْوَةَ",
+    "وَلَا أَشْرَبُ الشَّايَ وَالْقَهْوَةَ"
+   ],
+   "answer": "لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ",
+   "why": "The normal negation, then وَلَا before the second item."
+  },
+  {
+   "q": "“She isn’t here.”",
+   "options": [
+    "لَيْسَتْ هُنَا",
+    "لَيْسَ هُنَا",
+    "لَا هِيَ هُنَا"
+   ],
+   "answer": "لَيْسَتْ هُنَا",
+   "why": "لَيْسَ agrees with a feminine subject: لَيْسَتْ."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.negation",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.negationPosition",
+   "value": "before-verb"
+  }
+ ],
+ "notes": [
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish also has separate words for sentences without a verb — değil (öğretmen değilim ≈ لَسْتُ مُعَلِّمًا) and yok for “there is not / have not” (suyum yok ≈ لَيْسَ عِنْدِي مَاءٌ); verbs take the suffix -me-, where Arabic puts لَا before them."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean also has a separate “is not” (아니다: 학생이 아니에요 ≈ لَسْتُ طَالِبًا) and “there is not / have not” (없다); verbs take 안 in front, as Arabic verbs take لَا."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi has a negative “is not”, नाही (तो इथे नाही ≈ هُوَ لَيْسَ هُنَا), as Arabic has لَيْسَ; but Marathi puts the negation after the verb, Arabic لَا before it."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi uses नहीं before the verb in every kind of sentence (मैं चाय नहीं पीता; वह यहाँ नहीं है); Arabic chooses: لَا for verbs, لَيْسَ for sentences without a verb."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian negates with a prefix on the verb (نمی‌خورم, I don’t eat; نیست, is not); Arabic uses separate words: لَا آكُلُ, لَيْسَ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese negates with an ending (食べない; 学生じゃない); Arabic with a word before the verb (لَا آكُلُ) or the verb لَيْسَ (لَسْتُ طَالِبًا)."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish negates with a verb that takes person endings (en, et, ei …); Arabic لَيْسَ is also a negative verb with person endings (لَسْتُ, لَسْتَ, لَيْسَ) — but only for sentences without another verb."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian has nincs for “there is not / have not” (nincs autóm), where Arabic says لَيْسَ عِنْدِي سَيَّارَةٌ; verbs take nem in front, like لَا."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also has a negative “is not”, si (mimi si mwalimu ≈ لَسْتُ مُعَلِّمًا), and negates verbs with prefixes (sili, I don’t eat); Arabic puts لَا before the verb."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda negates verbs with a prefix (te- / si-); Arabic puts the word لَا before the verb, and uses the verb لَيْسَ for sentences without a verb."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese không before the verb works like لَا (tôi không uống trà ≈ لَا أَشْرَبُ الشَّايَ); for “is not” with a noun it says không phải là, where Arabic uses لَيْسَ."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut negates with a suffix inside the verb (-nngit-); Arabic puts a separate word before the verb (لَا) or uses the verb لَيْسَ."
+  }
+ ]
+}

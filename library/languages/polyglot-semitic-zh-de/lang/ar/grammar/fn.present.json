@@ -1,0 +1,615 @@
+{
+ "function": "fn.present",
+ "status": "realized",
+ "summary": "Arabic has two basic verb forms, the perfect (past, with endings: أَكَلْتُ “I ate”) and the imperfect, which is the present: يَأْكُلُ “he eats, he is eating”. The present is built with a prefix that shows the person — ʾa- (I), ta- (you; she), ya- (he; they), na- (we) — and, for some persons, an ending: -īna (you, one woman), -ūna (you / they, men or mixed), -na (women only). So one word holds the person, the gender and the number: تَطْبُخِينَ = “you (a woman) cook”, and the pronoun is normally left out. Dictionaries list a verb by its past “he” form (أَكَلَ, “he ate”) — there is no infinitive — so learn each verb with its present: أَكَلَ / يَأْكُلُ, شَرِبَ / يَشْرَبُ, طَبَخَ / يَطْبُخُ. The vowel before the last root letter (u, a or i) must be learned with each simple verb; derived verbs have fixed patterns: أَرَادَ → يُرِيدُ, أَحَبَّ → يُحِبُّ (u in the prefix), اِشْتَرَى → يَشْتَرِي. One form covers “I eat”, “I am eating” and, from context, “I will eat”. Arabic also has forms for two people (the dual: يَأْكُلَانِ “they two eat”); they come later.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "pronoun",
+    "طَبَخَ → present",
+    "say",
+    "prefix … ending"
+   ],
+   "rows": [
+    [
+     "I",
+     "أَنَا",
+     "أَطْبُخُ",
+     "ʾaṭbuḫu",
+     "ʾa- … -u"
+    ],
+    [
+     "you (to a man)",
+     "أَنْتَ",
+     "تَطْبُخُ",
+     "taṭbuḫu",
+     "ta- … -u"
+    ],
+    [
+     "you (to a woman)",
+     "أَنْتِ",
+     "تَطْبُخِينَ",
+     "taṭbuḫīna",
+     "ta- … -īna"
+    ],
+    [
+     "he",
+     "هُوَ",
+     "يَطْبُخُ",
+     "yaṭbuḫu",
+     "ya- … -u"
+    ],
+    [
+     "she",
+     "هِيَ",
+     "تَطْبُخُ",
+     "taṭbuḫu",
+     "ta- … -u"
+    ],
+    [
+     "we",
+     "نَحْنُ",
+     "نَطْبُخُ",
+     "naṭbuḫu",
+     "na- … -u"
+    ],
+    [
+     "you (several)",
+     "أَنْتُمْ",
+     "تَطْبُخُونَ",
+     "taṭbuḫūna",
+     "ta- … -ūna"
+    ],
+    [
+     "you (women only)",
+     "أَنْتُنَّ",
+     "تَطْبُخْنَ",
+     "taṭbuḫna",
+     "ta- … -na"
+    ],
+    [
+     "they",
+     "هُمْ",
+     "يَطْبُخُونَ",
+     "yaṭbuḫūna",
+     "ya- … -ūna"
+    ],
+    [
+     "they (women only)",
+     "هُنَّ",
+     "يَطْبُخْنَ",
+     "yaṭbuḫna",
+     "ya- … -na"
+    ]
+   ],
+   "caption": "A regular (sound) verb: طَبَخَ / يَطْبُخُ “to cook”. The same prefixes and endings come back in every verb.",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Four prefixes, three endings.",
+   "text": "Prefix: أَ I · تَ you, she · يَ he, they · نَ we. Ending: -u in most persons; -īna for “you” to one woman; -ūna for “you” and “they” (men or mixed groups); -na for women only. تَطْبُخُ — تَطْبُخِينَ — تَطْبُخُونَ — تَطْبُخْنَ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "أَكَلَ (eat)",
+    "شَرِبَ (drink)",
+    "طَبَخَ (cook)"
+   ],
+   "rows": [
+    [
+     "أَنَا I",
+     "آكُلُ",
+     "أَشْرَبُ",
+     "أَطْبُخُ"
+    ],
+    [
+     "أَنْتَ you (to a man)",
+     "تَأْكُلُ",
+     "تَشْرَبُ",
+     "تَطْبُخُ"
+    ],
+    [
+     "أَنْتِ you (to a woman)",
+     "تَأْكُلِينَ",
+     "تَشْرَبِينَ",
+     "تَطْبُخِينَ"
+    ],
+    [
+     "هُوَ he",
+     "يَأْكُلُ",
+     "يَشْرَبُ",
+     "يَطْبُخُ"
+    ],
+    [
+     "هِيَ she",
+     "تَأْكُلُ",
+     "تَشْرَبُ",
+     "تَطْبُخُ"
+    ],
+    [
+     "نَحْنُ we",
+     "نَأْكُلُ",
+     "نَشْرَبُ",
+     "نَطْبُخُ"
+    ],
+    [
+     "أَنْتُمْ you (several)",
+     "تَأْكُلُونَ",
+     "تَشْرَبُونَ",
+     "تَطْبُخُونَ"
+    ],
+    [
+     "أَنْتُنَّ you (women only)",
+     "تَأْكُلْنَ",
+     "تَشْرَبْنَ",
+     "تَطْبُخْنَ"
+    ],
+    [
+     "هُمْ they",
+     "يَأْكُلُونَ",
+     "يَشْرَبُونَ",
+     "يَطْبُخُونَ"
+    ],
+    [
+     "هُنَّ they (women only)",
+     "يَأْكُلْنَ",
+     "يَشْرَبْنَ",
+     "يَطْبُخْنَ"
+    ]
+   ],
+   "caption": "Form I verbs: the stem vowel is u in يَأْكُلُ and يَطْبُخُ, a in يَشْرَبُ. “I eat” is آكُلُ: the hamza of the prefix and the hamza of the root merge into آ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "أَرَادَ (want)",
+    "أَحَبَّ (like)",
+    "اِشْتَرَى (buy)"
+   ],
+   "rows": [
+    [
+     "أَنَا I",
+     "أُرِيدُ",
+     "أُحِبُّ",
+     "أَشْتَرِي"
+    ],
+    [
+     "أَنْتَ you (to a man)",
+     "تُرِيدُ",
+     "تُحِبُّ",
+     "تَشْتَرِي"
+    ],
+    [
+     "أَنْتِ you (to a woman)",
+     "تُرِيدِينَ",
+     "تُحِبِّينَ",
+     "تَشْتَرِينَ"
+    ],
+    [
+     "هُوَ he",
+     "يُرِيدُ",
+     "يُحِبُّ",
+     "يَشْتَرِي"
+    ],
+    [
+     "هِيَ she",
+     "تُرِيدُ",
+     "تُحِبُّ",
+     "تَشْتَرِي"
+    ],
+    [
+     "نَحْنُ we",
+     "نُرِيدُ",
+     "نُحِبُّ",
+     "نَشْتَرِي"
+    ],
+    [
+     "أَنْتُمْ you (several)",
+     "تُرِيدُونَ",
+     "تُحِبُّونَ",
+     "تَشْتَرُونَ"
+    ],
+    [
+     "أَنْتُنَّ you (women only)",
+     "تُرِدْنَ",
+     "تُحْبِبْنَ",
+     "تَشْتَرِينَ"
+    ],
+    [
+     "هُمْ they",
+     "يُرِيدُونَ",
+     "يُحِبُّونَ",
+     "يَشْتَرُونَ"
+    ],
+    [
+     "هُنَّ they (women only)",
+     "يُرِدْنَ",
+     "يُحْبِبْنَ",
+     "يَشْتَرِينَ"
+    ]
+   ],
+   "caption": "Derived verbs: form IV أَرَادَ and أَحَبَّ take u in the prefix (أُرِيدُ، يُحِبُّ); form VIII اِشْتَرَى keeps a (يَشْتَرِي) and ends in -ī. Before -na the long ī of يُرِيدُ shortens (تُرِدْنَ) and the doubled b of يُحِبُّ splits (تُحْبِبْنَ)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "تَـ is two persons.",
+   "text": "تَشْرَبُ means “you (a man) drink” and “she drinks”; تَشْتَرِينَ means “you (a woman) buy” and also “you (women) buy”. The context — or a pronoun — tells you who."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "No pronoun needed.",
+   "text": "أَشْرَبُ الشَّايَ = I drink tea. Add the pronoun only to stress it: أَنَا أَشْرَبُ الشَّايَ، وَهُوَ يَشْرَبُ الْقَهْوَةَ (I drink tea, and he drinks coffee)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Noun first",
+     "points": [
+      "الْوَلَدُ يَأْكُلُ — الْأَوْلَادُ يَأْكُلُونَ",
+      "the verb agrees fully: singular, plural, gender"
+     ]
+    },
+    {
+     "title": "Verb first (the classic order)",
+     "points": [
+      "يَأْكُلُ الْوَلَدُ — يَأْكُلُ الْأَوْلَادُ",
+      "the verb stays singular before a noun subject; only the gender shows: تَأْكُلُ الْبِنْتُ"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "VSO"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Both orders are correct. In this course the sentences put the noun first, as in everyday writing; the verb-first versions are accepted as answers."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One present for “I eat”, “I am eating” — and often “I will eat”.",
+   "text": "آكُلُ = I eat / I am eating / (often) I will eat. The future can be marked with سَـ or سَوْفَ (سَآكُلُ, “I will eat”) — later. To negate the present put لَا before it (lesson 8): لَا آكُلُ.",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who does it? I → أَ, we → نَ, he / they → يَ, you / she → تَ.",
+   "Is it “you” to one woman? → -īna (تَشْرَبِينَ). “You” or “they” for men or a mixed group? → -ūna (تَشْرَبُونَ). Women only? → -na (تَشْرَبْنَ، يَشْرَبْنَ).",
+   "Which vowel does this verb have before its last root letter in the present (يَأْكُلُ u, يَشْرَبُ a, يَطْبُخُ u)? I take it from the verb’s present form, not from the past.",
+   "Is it a form IV verb (أَرَادَ، أَحَبَّ)? → u in the prefix: أُرِيدُ، يُحِبُّ.",
+   "Is the subject a noun? Noun first → full agreement (الْأَطْفَالُ يُرِيدُونَ); verb first → the verb stays singular (يُرِيدُ الْأَطْفَالُ).",
+   "Do I need the pronoun? Only for contrast or emphasis."
+  ]
+ },
+ "traps": [
+  "The citation form is the past “he” form: أَكَلَ means “he ate”, not “to eat”. The present is يَأْكُلُ.",
+  "Do not carry the past vowel into the present: شَرِبَ → يَشْرَبُ (not *يَشْرِبُ), أَكَلَ → يَأْكُلُ.",
+  "I eat = آكُلُ (ʾākulu), not *أَأْكُلُ: two hamzas merge into آ.",
+  "Form IV verbs take u in the prefix: أُحِبُّ، أُرِيدُ — not *أَحِبُّ، *أَرِيدُ.",
+  "Verb before a plural noun subject stays singular: يَشْرَبُ الطُّلَّابُ — but الطُّلَّابُ يَشْرَبُونَ.",
+  "تَشْتَرِينَ is both “you (one woman) buy” and “you (women) buy” — read the context."
+ ],
+ "evidence": {
+  "tags": [
+   "PRS"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;IND;1;SG",
+  "V;PRS;IND;2;SG;MASC",
+  "V;PRS;IND;2;SG;FEM",
+  "V;PRS;IND;3;SG;MASC",
+  "V;PRS;IND;3;SG;FEM",
+  "V;PRS;IND;1;PL",
+  "V;PRS;IND;2;PL;MASC",
+  "V;PRS;IND;2;PL;FEM",
+  "V;PRS;IND;3;PL;MASC",
+  "V;PRS;IND;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:akala",
+    "ar:shariba",
+    "ar:tabakha",
+    "ar:arada",
+    "ar:ahabba",
+    "ar:ishtara"
+   ],
+   "cells": [
+    "V;PRS;IND;1;SG",
+    "V;PRS;IND;2;SG;MASC",
+    "V;PRS;IND;2;SG;FEM",
+    "V;PRS;IND;3;SG;MASC",
+    "V;PRS;IND;3;SG;FEM",
+    "V;PRS;IND;1;PL",
+    "V;PRS;IND;2;PL;MASC",
+    "V;PRS;IND;2;PL;FEM",
+    "V;PRS;IND;3;PL;MASC",
+    "V;PRS;IND;3;PL;FEM"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.present"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“We drink” — which form?",
+   "options": [
+    "نَشْرَبُ",
+    "يَشْرَبُ",
+    "تَشْرَبُونَ",
+    "أَشْرَبُ"
+   ],
+   "answer": "نَشْرَبُ",
+   "why": "na- is “we”; ʾa- is “I”, ya- “he”, ta-…-ūna “you (pl)”."
+  },
+  {
+   "q": "“You (to a woman) want …” — which form of أَرَادَ?",
+   "options": [
+    "تُرِيدِينَ",
+    "تُرِيدُ",
+    "يُرِيدُ",
+    "تُرِيدُونَ"
+   ],
+   "answer": "تُرِيدِينَ",
+   "why": "ta- … -īna is “you” to one woman; تُرِيدُ is “you (a man)” or “she”."
+  },
+  {
+   "q": "تَطْبُخُ can mean …",
+   "options": [
+    "you (a man) cook / she cooks",
+    "I cook",
+    "they cook",
+    "we cook"
+   ],
+   "answer": "you (a man) cook / she cooks",
+   "why": "ta- … -u is both “you (m)” and “she”."
+  },
+  {
+   "q": "“I like” — which form of أَحَبَّ?",
+   "options": [
+    "أُحِبُّ",
+    "أَحِبُّ",
+    "أَحَبَّ",
+    "يُحِبُّ"
+   ],
+   "answer": "أُحِبُّ",
+   "why": "A form IV verb: u in the prefix. أَحَبَّ is the past “he liked”."
+  },
+  {
+   "q": "What does the dictionary form أَكَلَ mean?",
+   "options": [
+    "he ate",
+    "to eat",
+    "I eat",
+    "eat!"
+   ],
+   "answer": "he ate",
+   "why": "Arabic has no infinitive; verbs are listed by the past “he” form."
+  },
+  {
+   "q": "“The students drink juice”, verb first: which is correct?",
+   "options": [
+    "يَشْرَبُ الطُّلَّابُ الْعَصِيرَ",
+    "يَشْرَبُونَ الطُّلَّابُ الْعَصِيرَ",
+    "تَشْرَبُ الطُّلَّابُ الْعَصِيرَ"
+   ],
+   "answer": "يَشْرَبُ الطُّلَّابُ الْعَصِيرَ",
+   "why": "Before its noun subject the verb stays singular; noun first it would be الطُّلَّابُ يَشْرَبُونَ."
+  },
+  {
+   "q": "“They (women) cook” — which form?",
+   "options": [
+    "يَطْبُخْنَ",
+    "يَطْبُخُونَ",
+    "تَطْبُخْنَ",
+    "تَطْبُخِينَ"
+   ],
+   "answer": "يَطْبُخْنَ",
+   "why": "ya- … -na is “they (women only)”; ta- … -na is “you (women only)”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.present",
+   "note": "Hebrew’s present is a participle that changes by gender and number, not by person (אוֹכֵל، אוֹכֶלֶת، אוֹכְלִים، אוֹכְלוֹת) — so it needs the pronoun; Arabic marks the person with a prefix (أَ، تَ، يَ، نَ). The Hebrew future, though, is the twin of the Arabic present (יֹאכַל — يَأْكُلُ)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.present",
+   "note": "German conjugates with endings (ich esse, du isst, er isst) and always says the pronoun; Arabic uses prefixes and drops the pronoun."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.present",
+   "note": "Chinese verbs never change: 我吃, 你吃, 他吃 — the person is only in the pronoun, the time in words like 现在 or in particles."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.root.pattern",
+   "note": "The prefix vowel and the stem vowel are part of the verb’s pattern: yafʿalu (يَشْرَبُ), yafʿulu (يَأْكُلُ), yufʿilu (يُرِيدُ)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "syn.proDrop",
+   "value": "agreement"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "none"
+  },
+  {
+   "feature": "verb.infinitive",
+   "value": "finite-clause"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also shows the person in the verb and drops the pronoun (τρώω, τρως, τρώει); Arabic shows it mostly with a prefix (آكُلُ, تَأْكُلُ, يَأْكُلُ) and adds gender in the 2nd and 3rd person."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also marks the person with endings (ем, ешь, ест); Arabic mostly with prefixes (آكُلُ, تَأْكُلُ, يَأْكُلُ), and adds gender."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, the pronoun is dropped (como → آكُلُ) and the present also means “I am eating” and often the future; but Arabic marks the person mostly at the front of the verb."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English needs a pronoun and has two presents (I eat / I am eating); Arabic has one form, آكُلُ, for both — often for the future too — and the person is in the verb."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French je mange covers “I eat” and “I am eating”, like آكُلُ; but Arabic drops the pronoun and marks the person with prefixes."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi builds the present with a participle and है (मैं खाता हूँ / खाती हूँ) and shows the speaker’s gender even with “I”; Arabic uses one verb form with a prefix, and its “I” form has no gender (أَطْبُخُ)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also has a prefix in the present (mi-xor-am, I eat) and drops the pronoun; Arabic puts the person into the prefix itself and adds gender."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi verbs show the speaker’s gender even with “I” (मी जातो / मी जाते); the Arabic “I” form has no gender (أَذْهَبُ), but “you” and “he / she” do."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish piles endings at the back (yiyorum) and has two presents (-iyor, -ir); Arabic puts most of the information in the prefix (آكُلُ) and has one present."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese verbs do not change for person; Arabic verbs change for person, number and gender. Like 食べる, the Arabic present also serves for the future."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean verbs change for politeness, not for person; Arabic verbs change for person, number and gender, never for politeness."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish also marks the person with endings and drops the pronoun (syön, syöt); Arabic does it mostly with prefixes and adds gender. Both use the present for the future."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian also marks the person in the verb (eszem, eszel, eszik); Arabic adds gender and puts most of the marking in front."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also puts the person in front of the verb (ninakula, unakula, anakula), as Arabic does (آكُلُ, تَأْكُلُ, يَأْكُلُ); Arabic adds gender and has no separate tense marker like -na-."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda also puts a subject prefix in front of the verb; Arabic does the same (أَ، تَ، يَ، نَ) and adds gender."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese verbs never change and need a pronoun; Arabic verbs carry person, number and gender, so the pronoun is usually dropped."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut also packs the person into the verb, at the end (nirijunga, I eat); Arabic puts it mostly in front (آكُلُ)."
+  }
+ ]
+}

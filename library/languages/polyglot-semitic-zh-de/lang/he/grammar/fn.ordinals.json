@@ -1,0 +1,612 @@
+{
+ "function": "fn.ordinals",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number"
+  },
+  {
+   "feature": "num.agreement",
+   "value": "extensive"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-past"
+  },
+  {
+   "feature": "time.dayNames",
+   "value": "numbered"
+  }
+ ],
+ "summary": "Hebrew has ordinal numbers only from first to tenth: רִאשׁוֹן, שֵׁנִי, שְׁלִישִׁי, רְבִיעִי, חֲמִישִׁי, שִׁשִּׁי, שְׁבִיעִי, שְׁמִינִי, תְּשִׁיעִי, עֲשִׂירִי (and אַחֲרוֹן “last”). They are adjectives: they follow the noun and agree with it in gender, number and definiteness — הַבַּיִת הַשֵּׁנִי, הַקּוֹמָה הַשְּׁלִישִׁית, הַיָּמִים הָרִאשׁוֹנִים. From three to ten they share one pattern (קְטִילִי, feminine ־ִית). From eleven on there is no ordinal: the cardinal number with the article follows the noun (הַיּוֹם הָאַחַד עָשָׂר, הַמֵּאָה הָעֶשְׂרִים), and so does a long number. The weekdays are “the first day” … “the sixth day” (יוֹם רִאשׁוֹן … יוֹם שִׁשִּׁי), the seventh is שַׁבָּת. Dates use cardinals, not ordinals: the masculine number + בְּ + the month — אַרְבָּעָה בְּיוּלִי “the 4th of July”, בְּעֶשְׂרִים בְּמַאי “on the 20th of May”. The clock counts hours with feminine numbers after הַשָּׁעָה (הַשָּׁעָה שָׁלוֹשׁ), adds minutes with וְ (שָׁלוֹשׁ וְעֶשְׂרִים), and says quarters and halves with רֶבַע and חֵצִי: שָׁלוֹשׁ וָרֶבַע, רֶבַע לְאַרְבַּע, שָׁלוֹשׁ וָחֵצִי “half past three”.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "masc. plural",
+    "fem. plural"
+   ],
+   "rows": [
+    [
+     "1st",
+     "רִאשׁוֹן",
+     "רִאשׁוֹנָה",
+     "רִאשׁוֹנִים",
+     "רִאשׁוֹנוֹת"
+    ],
+    [
+     "2nd",
+     "שֵׁנִי",
+     "שְׁנִיָּה",
+     "שְׁנִיִּים",
+     "שְׁנִיּוֹת"
+    ],
+    [
+     "3rd",
+     "שְׁלִישִׁי",
+     "שְׁלִישִׁית",
+     "שְׁלִישִׁיִּים",
+     "שְׁלִישִׁיּוֹת"
+    ],
+    [
+     "4th",
+     "רְבִיעִי",
+     "רְבִיעִית",
+     "רְבִיעִיִּים",
+     "רְבִיעִיּוֹת"
+    ],
+    [
+     "5th",
+     "חֲמִישִׁי",
+     "חֲמִישִׁית",
+     "חֲמִישִׁיִּים",
+     "חֲמִישִׁיּוֹת"
+    ],
+    [
+     "6th",
+     "שִׁשִּׁי",
+     "שִׁשִּׁית",
+     "שִׁשִּׁיִּים",
+     "שִׁשִּׁיּוֹת"
+    ],
+    [
+     "7th",
+     "שְׁבִיעִי",
+     "שְׁבִיעִית",
+     "שְׁבִיעִיִּים",
+     "שְׁבִיעִיּוֹת"
+    ],
+    [
+     "8th",
+     "שְׁמִינִי",
+     "שְׁמִינִית",
+     "שְׁמִינִיִּים",
+     "שְׁמִינִיּוֹת"
+    ],
+    [
+     "9th",
+     "תְּשִׁיעִי",
+     "תְּשִׁיעִית",
+     "תְּשִׁיעִיִּים",
+     "תְּשִׁיעִיּוֹת"
+    ],
+    [
+     "10th",
+     "עֲשִׂירִי",
+     "עֲשִׂירִית",
+     "עֲשִׂירִיִּים",
+     "עֲשִׂירִיּוֹת"
+    ],
+    [
+     "last",
+     "אַחֲרוֹן",
+     "אַחֲרוֹנָה",
+     "אַחֲרוֹנִים",
+     "אַחֲרוֹנוֹת"
+    ]
+   ],
+   "caption": "Ten ordinals and “last”. With the article: הָרִאשׁוֹן, הַשֵּׁנִי, הַשְּׁלִישִׁי, הָרְבִיעִי, הָעֲשִׂירִי, הָאַחֲרוֹן.",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "An ordinal is an adjective",
+   "text": "It comes after the noun and copies its gender, number and article: יוֹם רִאשׁוֹן, הַיּוֹם הָרִאשׁוֹן, הַפַּעַם הָרִאשׁוֹנָה, הַיָּמִים הָרִאשׁוֹנִים. Without the article it can also follow a verb: הִיא הִגִּיעָה רִאשׁוֹנָה “she arrived first”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "After ten: the cardinal with the article",
+   "text": "There is no “eleventh”: הַקּוֹמָה הָאַחַת עֶשְׂרֵה “the eleventh floor”, הַמֵּאָה הָעֶשְׂרִים “the twentieth century” — the ordinary number, with the article, after the noun, agreeing in gender (קוֹמָה and מֵאָה are feminine).",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "day",
+    "literally"
+   ],
+   "rows": [
+    [
+     "יוֹם רִאשׁוֹן",
+     "the first day — Sunday"
+    ],
+    [
+     "יוֹם שֵׁנִי",
+     "the second day — Monday"
+    ],
+    [
+     "יוֹם שְׁלִישִׁי",
+     "the third day — Tuesday"
+    ],
+    [
+     "יוֹם רְבִיעִי",
+     "the fourth day — Wednesday"
+    ],
+    [
+     "יוֹם חֲמִישִׁי",
+     "the fifth day — Thursday"
+    ],
+    [
+     "יוֹם שִׁשִּׁי",
+     "the sixth day — Friday"
+    ],
+    [
+     "שַׁבָּת",
+     "the Sabbath — Saturday"
+    ]
+   ],
+   "caption": "The weekdays are numbered from Sunday (lesson 14).",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "date",
+    "said",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "4.7",
+     "אַרְבָּעָה בְּיוּלִי",
+     "the 4th of July"
+    ],
+    [
+     "20.5",
+     "עֶשְׂרִים בְּמַאי",
+     "the 20th of May"
+    ],
+    [
+     "2.6",
+     "שְׁנַיִם בְּיוּנִי",
+     "the 2nd of June"
+    ],
+    [
+     "on 20.5",
+     "בְּעֶשְׂרִים בְּמַאי",
+     "on the 20th of May"
+    ]
+   ],
+   "caption": "Dates: the masculine cardinal (the day, יוֹם, is masculine) + בְּ + the month — no ordinal."
+  },
+  {
+   "t": "table",
+   "head": [
+    "time",
+    "said",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "3:00",
+     "הַשָּׁעָה שָׁלוֹשׁ",
+     "it is three o’clock"
+    ],
+    [
+     "3:15",
+     "שָׁלוֹשׁ וָרֶבַע",
+     "a quarter past three"
+    ],
+    [
+     "3:20",
+     "שָׁלוֹשׁ וְעֶשְׂרִים",
+     "twenty past three"
+    ],
+    [
+     "3:30",
+     "שָׁלוֹשׁ וָחֵצִי",
+     "half past three"
+    ],
+    [
+     "2:45",
+     "רֶבַע לְשָׁלוֹשׁ",
+     "a quarter to three"
+    ],
+    [
+     "at 11",
+     "בְּאַחַת עֶשְׂרֵה",
+     "at eleven"
+    ]
+   ],
+   "caption": "The clock: feminine numbers (שָׁעָה is feminine); וְ / וָ “and” for past the hour, לְ “to” for before it.",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Half and quarter",
+   "text": "Before a noun, the construct: חֲצִי שָׁעָה “half an hour”, רֶבַע שָׁעָה “a quarter of an hour”, חֲצִי קִילוֹ. After a number, with וָ: שָׁלוֹשׁ וָחֵצִי, שָׁלוֹשׁ וָרֶבַע."
+  },
+  {
+   "t": "table",
+   "head": [
+    "time word",
+    "example"
+   ],
+   "rows": [
+    [
+     "מֵאָה “century” (f.)",
+     "הַמֵּאָה הָרִאשׁוֹנָה, הַמֵּאָה הָעֶשְׂרִים וְאַחַת"
+    ],
+    [
+     "עָשׂוֹר “decade” (m.)",
+     "בֶּעָשׂוֹר הָאַחֲרוֹן"
+    ],
+    [
+     "יוֹם הַשָּׁנָה “anniversary”",
+     "יוֹם הַשָּׁנָה הָעֲשִׂירִי שֶׁלָּנוּ"
+    ]
+   ],
+   "caption": "Counting time with ordinals up to ten, cardinals above."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Up to ten? → the ordinal",
+    "Above ten? → the cardinal with the article",
+    "After the noun",
+    "Agree: gender, number, article"
+   ],
+   "caption": "Saying “the …th”"
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is it 1–10? (רִאשׁוֹן … עֲשִׂירִי) or more? (הָאַחַד עָשָׂר, הָעֶשְׂרִים)",
+    "Is the noun masculine or feminine, singular or plural, with the article?",
+    "A date or a time? → cardinals: אַרְבָּעָה בְּיוּלִי, הַשָּׁעָה שָׁלוֹשׁ."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the number 1–10? → an ordinal (רִאשׁוֹן … עֲשִׂירִי); above ten → the cardinal with the article after the noun (הַיּוֹם הָעֶשְׂרִים).",
+   "What is the noun’s gender and number? → רִאשׁוֹן / רִאשׁוֹנָה / רִאשׁוֹנִים / רִאשׁוֹנוֹת; feminine of 3–10 in ־ִית.",
+   "Does the noun have the article? → the ordinal too: הַבַּיִת הַשֵּׁנִי (הָ before ר, א, ע: הָרִאשׁוֹן, הָרְבִיעִי, הָעֲשִׂירִי).",
+   "Is it a date? → masculine cardinal + בְּ + month: אַרְבָּעָה בְּיוּלִי.",
+   "Is it the clock? → הַשָּׁעָה + feminine number; minutes with וְ, “a quarter to” with רֶבַע לְ…, “half past” with וָחֵצִי."
+  ],
+  "steps": [
+   "Count: 1–10 or more?",
+   "Choose the ordinal (or the cardinal with the article).",
+   "Make it agree and put it after the noun."
+  ]
+ },
+ "traps": [
+  "*הָרִאשׁוֹן יוֹם — the ordinal comes after the noun: הַיּוֹם הָרִאשׁוֹן.",
+  "*הַקּוֹמָה הַשְּׁלִישִׁי — feminine noun, feminine ordinal: הַקּוֹמָה הַשְּׁלִישִׁית.",
+  "*הַבַּיִת שֵׁנִי — with a definite noun the ordinal also takes the article: הַבַּיִת הַשֵּׁנִי.",
+  "*הַיּוֹם הָאַחַד־עָשָׂרִי — there are no ordinals above ten: הַיּוֹם הָאַחַד עָשָׂר.",
+  "Dates are cardinals: *הָרְבִיעִי בְּיוּלִי is not the usual way — say אַרְבָּעָה בְּיוּלִי.",
+  "שְׁנִיָּה is also “a second” (of time), and שֵׁנִי “second” ≠ שְׁנֵי “two (of)”.",
+  "“Half past three” is שָׁלוֹשׁ וָחֵצִי (half after the hour, not before the next one)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:rishon",
+   "he:sheni",
+   "he:shlishi",
+   "he:revii",
+   "he:chamishi",
+   "he:shishi",
+   "he:shvii",
+   "he:shmini",
+   "he:tshii",
+   "he:asiri",
+   "he:acharon",
+   "he:chatsi",
+   "he:reva",
+   "he:shaa",
+   "he:taarich",
+   "he:yanuar",
+   "he:februar",
+   "he:merts",
+   "he:april",
+   "he:mai",
+   "he:yuni",
+   "he:yuli",
+   "he:ogust",
+   "he:september",
+   "he:oktober",
+   "he:november",
+   "he:detsember"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;SG;MASC",
+  "ADJ;SG;FEM",
+  "ADJ;PL;MASC",
+  "ADJ;PL;FEM",
+  "ADJ;SG;MASC;DEF",
+  "ADJ;SG;FEM;DEF"
+ ],
+ "needs": {
+  "ADJ": 5,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "lemmas": [
+    "he:rishon",
+    "he:sheni",
+    "he:shlishi",
+    "he:revii",
+    "he:chamishi",
+    "he:shishi",
+    "he:shvii",
+    "he:shmini",
+    "he:tshii",
+    "he:asiri",
+    "he:acharon"
+   ],
+   "cells": [
+    "ADJ;SG;FEM",
+    "ADJ;PL;MASC",
+    "ADJ;SG;MASC;DEF",
+    "ADJ;SG;FEM;DEF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“The third floor” (קוֹמָה is feminine):",
+   "options": [
+    "הַקּוֹמָה הַשְּׁלִישִׁית",
+    "הַקּוֹמָה הַשְּׁלִישִׁי",
+    "הַשְּׁלִישִׁית קוֹמָה"
+   ],
+   "answer": "הַקּוֹמָה הַשְּׁלִישִׁית",
+   "why": "The ordinal follows the noun and agrees with it: feminine ־ִית, and the article on both."
+  },
+  {
+   "q": "“The twentieth century”:",
+   "options": [
+    "הַמֵּאָה הָעֶשְׂרִים",
+    "הַמֵּאָה הָעֶשְׂרִימִית",
+    "הָעֶשְׂרִים מֵאָה"
+   ],
+   "answer": "הַמֵּאָה הָעֶשְׂרִים",
+   "why": "Above ten there are no ordinals: the cardinal with the article follows the noun."
+  },
+  {
+   "q": "“The 4th of July”:",
+   "options": [
+    "אַרְבָּעָה בְּיוּלִי",
+    "הָרְבִיעִי יוּלִי",
+    "יוּלִי הָרְבִיעִי"
+   ],
+   "answer": "אַרְבָּעָה בְּיוּלִי",
+   "why": "Dates use the masculine cardinal + בְּ + the month."
+  },
+  {
+   "q": "“Half past three”:",
+   "options": [
+    "שָׁלוֹשׁ וָחֵצִי",
+    "חֲצִי אַרְבַּע",
+    "חֲצִי לְשָׁלוֹשׁ"
+   ],
+   "answer": "שָׁלוֹשׁ וָחֵצִי",
+   "why": "The half hour is counted after the hour: three and a half."
+  },
+  {
+   "q": "“A quarter to three”:",
+   "options": [
+    "רֶבַע לְשָׁלוֹשׁ",
+    "שָׁלוֹשׁ פָּחוֹת רְבִיעִי",
+    "רְבִיעִי לְשָׁלוֹשׁ"
+   ],
+   "answer": "רֶבַע לְשָׁלוֹשׁ",
+   "why": "רֶבַע “a quarter” + לְ “to” + the hour (feminine number)."
+  },
+  {
+   "q": "Monday is יוֹם שֵׁנִי because …",
+   "options": [
+    "the week starts on Sunday, the first day",
+    "שֵׁנִי means “moon”",
+    "it is the second working day of the month"
+   ],
+   "answer": "the week starts on Sunday, the first day",
+   "why": "The weekdays are counted from Sunday: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי … יוֹם שִׁשִּׁי, then שַׁבָּת."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.ordinals",
+   "note": "Arabic has ordinals for every number (الحادي عشر, العشرون); Hebrew stops at עֲשִׂירִי and uses the cardinal with the article above ten. Both put the ordinal after the noun as an agreeing adjective."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.ordinals",
+   "note": "German makes ordinals for every number (der vierte, der zwanzigste) and uses them in dates (der vierte Juli); Hebrew uses cardinals for dates (אַרְבָּעָה בְּיוּלִי) and has no ordinal above ten."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.ordinals",
+   "note": "Chinese makes any ordinal with 第 (第三, 第二十) and writes dates from big to small (七月四日); Hebrew has ten ordinal words and says the day before the month."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has ordinals for every number (εικοστός) and declines them; Hebrew has them only up to עֲשִׂירִי. Greek dates use cardinals except the first (1η Μαΐου); Hebrew dates use cardinals throughout (אֶחָד בְּמַאי)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian dates use the ordinal (четвёртое июля); Hebrew uses the cardinal: אַרְבָּעָה בְּיוּלִי. And Hebrew has no ordinal above ten: הַיּוֹם הָעֶשְׂרִים “the twentieth day”."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish, too, often switches to cardinals after décimo (el siglo veinte, el piso once); Hebrew does it always above ten: הַמֵּאָה הָעֶשְׂרִים. Dates are cardinals in both (el cuatro de julio / אַרְבָּעָה בְּיוּלִי)."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "“The fourth of July” uses an ordinal; Hebrew uses a cardinal: אַרְבָּעָה בְּיוּלִי. And “twentieth” has no Hebrew word — הַמֵּאָה הָעֶשְׂרִים, “the century the twenty”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "As in French (le premier mai, but le quatre juillet), Hebrew dates use cardinals: אַרְבָּעָה בְּיוּלִי — even for the first (אֶחָד בְּמַאי). French has ordinals for every number (vingtième); Hebrew stops at ten."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German ordinals go on for ever (der zwanzigste) and are used for dates (am vierten Juli); Hebrew has ordinals only up to ten and dates with cardinals (בְּאַרְבָּעָה בְּיוּלִי). German “halb vier” is 3:30; Hebrew שָׁלוֹשׁ וָחֵצִי counts from three."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi ordinals agree like adjectives (तीसरा / तीसरी), as Hebrew ones do (שְׁלִישִׁי / שְׁלִישִׁית); Hebrew has them only up to ten and puts them after the noun."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian makes ordinals with ـم for every number (بیستم) and uses them in dates; Hebrew stops at עֲשִׂירִי and gives dates with cardinals: עֶשְׂרִים בְּמַאי."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi ordinals agree in gender like adjectives (तिसरा / तिसरी); so do Hebrew ones (שְׁלִישִׁי / שְׁלִישִׁית), which also take the article and follow the noun."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic has ordinals for every number (الْعِشْرُونَ, الْحَادِيَ عَشَرَ); Hebrew only up to ten. The first ten are related words: ثَالِث / שְׁלִישִׁי, رَابِع / רְבִיעִי, خَامِس / חֲמִישִׁי."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish makes every ordinal with -(i)nci (dördüncü, yirminci) before the noun; Hebrew has ten ordinal words, after the noun and agreeing (הַבַּיִת הָרְבִיעִי). Dates are cardinals in both (4 Temmuz / אַרְבָּעָה בְּיוּלִי)."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese makes ordinals with 第 or ～番目 (三番目) before the noun; Hebrew ordinals are adjectives after the noun: הַבַּיִת הַשְּׁלִישִׁי."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean has native ordinals (첫째, 둘째, 셋째) and Sino-Korean ones with 제 (제3); Hebrew has ten adjective ordinals after the noun, and cardinals with the article above ten."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish ordinals exist for every number and decline (neljäs, kahdeskymmenes) and are used in dates (neljäs heinäkuuta); Hebrew dates use cardinals: אַרְבָּעָה בְּיוּלִי. “puoli neljä” is 3:30; Hebrew שָׁלוֹשׁ וָחֵצִי counts from three."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian makes ordinals with -dik (negyedik) and uses them in dates (július negyedike); Hebrew uses cardinals in dates and has ordinals only up to ten. Hungarian “fél négy” is 3:30; Hebrew says שָׁלוֹשׁ וָחֵצִי."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili ordinals are -a + the number (wa tatu “third”), agreeing by noun class; Hebrew ordinals are separate words up to ten. Swahili counts the hours from dawn (saa moja = 7 a.m.); Hebrew counts from midnight and noon like the clock face."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese makes any ordinal with 第 (第三, 第二十) before the noun; Hebrew has ten ordinal adjectives after the noun and uses the cardinal with the article above ten: הַקּוֹמָה הָעֶשְׂרִים."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese makes ordinals with thứ (thứ ba “third”) and, like Hebrew, numbers the weekdays (thứ Hai “Monday”, as יוֹם שֵׁנִי “the second day”)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Polysynthetic languages tend to build ordinals with a suffix on the number stem; Hebrew has ten separate ordinal words (רִאשׁוֹן … עֲשִׂירִי) and above ten uses the cardinal with the article."
+  }
+ ]
+}

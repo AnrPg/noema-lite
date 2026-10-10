@@ -1,0 +1,34 @@
+/* ---------- P9 — listening and speaking (98_speech.js) ---------- */
+.lx-spk { border: 0; background: transparent; cursor: pointer; font-size: .9em; padding: 0 .25em; margin-inline-start: .15em; border-radius: 6px; line-height: 1.2; vertical-align: middle; opacity: .75; }
+.lx-spk:hover, .lx-spk:focus-visible { opacity: 1; background: var(--chip, rgba(127,127,127,.15)); }
+.lx-spk::before { content: '🔊'; }
+.lx-spk.lx-mute::before { content: '🔇'; }
+.lx-spk.lx-mute { opacity: .45; }
+.lx-player { gap: .5em; flex-wrap: wrap; align-items: center; margin: .6em 0; }
+.lx-play { font-size: 1.05em; }
+.lx-novoice { color: var(--muted, #888); }
+.lx-revealed { font-size: 1.3em; }
+.lx-tonechars { font-size: 2.2em; letter-spacing: .1em; }
+.lx-tonechars .lx-toneoff { opacity: .45; }
+.lx-tonechars .lx-tonehit { border-bottom: 3px solid currentColor; padding: 0 .05em; }
+.lx-hint { margin: .2em 0; }
+.lx-rec { gap: .5em; flex-wrap: wrap; align-items: center; margin: .5em 0; }
+.lx-rec audio { max-width: 100%; height: 36px; }
+.lx-recbtn.on { background: #c0392b; color: #fff; }
+.lx-selfgrade { gap: .5em; flex-wrap: wrap; align-items: center; margin-top: .4em; }
+.lx-heardbox { margin: .5em 0; }
+.lx-heard { margin: .3em 0; overflow-wrap: anywhere; }
+.lx-heardwords { display: flex; flex-wrap: wrap; gap: .3em; margin-top: .2em; }
+.lx-hw { padding: .05em .35em; border-radius: 6px; }
+.lx-hw.ok { background: rgba(46,160,90,.18); }
+.lx-hw.miss { background: rgba(200,60,60,.18); text-decoration: underline wavy rgba(200,60,60,.7); }
+.lx-srnote { margin-top: .4em; }
+.lx-devline div { margin: .1em 0; }
+.lx-reading { background: rgba(255,200,0,.25); border-radius: 4px; }
+.lx-readaloud { margin: .4em 0; }
+.lx-speechset select { max-width: 100%; }
+.lx-speechset .lx-setrow { flex-wrap: wrap; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .lx-tonechars { font-size: 1.8em; } .lx-voicesel { max-width: 60vw; } }
+
+/* a sorted word in a bin: the bin takes the tap (no 🔊 there) */
+.lx-sortbin .lx-spk{display:none}

@@ -1,0 +1,4711 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:yiyue",
+   "lemma": "一月",
+   "trad": "一月",
+   "pinyin": "yī yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.january"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "in dates 一 keeps yī (一月 yī yuè)"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Midwinter — cold, short days, and the new calendar year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "January",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.january"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一月很冷。",
+      "py": "Yīyuè hěn lěng.",
+      "tr": "January is very cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "我一月去北京。",
+      "py": "Wǒ yīyuè qù Běijīng.",
+      "tr": "I’m going to Beijing in January.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "一月一号是元旦。",
+      "py": "Yīyuè yī hào shì Yuándàn.",
+      "tr": "January 1st is New Year’s Day.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一月一号",
+      "tr": "January 1st"
+     },
+     {
+      "text": "今年一月",
+      "tr": "January this year"
+     },
+     {
+      "text": "一月初",
+      "tr": "early January"
+     },
+     {
+      "text": "一月底",
+      "tr": "the end of January"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "元月",
+      "register": "formal",
+      "nuance": "yuányuè: January — formal, rare"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 月 ‘month’: ‘month one’ — the months are simply numbered.",
+     "src": "morphemes: 一 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Chinese New Year (春节) is NOT on 一月一号 (元旦): it follows the lunar calendar and falls between late January and mid-February."
+    ],
+    "pitfalls": [
+     "一月 ‘January’ vs 一个月 ‘one month’: the 个 makes it a count.",
+     "‘In January’ needs no ‘in’: 我一月去北京."
+    ],
+    "subtleties": [
+     "The first month of the lunar calendar is 正月 zhēngyuè, not 一月."
+    ]
+   }
+  },
+  {
+   "id": "zh:eryue",
+   "lemma": "二月",
+   "trad": "二月",
+   "pinyin": "èr yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.february"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Late winter — often the time of Chinese New Year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "February",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.february"
+     }
+    ],
+    "examples": [
+     {
+      "text": "春节常常在二月。",
+      "py": "Chūnjié chángcháng zài èryuè.",
+      "tr": "The Spring Festival is often in February.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "二月有二十八天。",
+      "py": "Èryuè yǒu èrshíbā tiān.",
+      "tr": "February has 28 days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我的生日在二月。",
+      "py": "Wǒ de shēngrì zài èryuè.",
+      "tr": "My birthday is in February.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "二月一号",
+      "tr": "February 1st"
+     },
+     {
+      "text": "今年二月",
+      "tr": "February this year"
+     },
+     {
+      "text": "二月初",
+      "tr": "early February"
+     },
+     {
+      "text": "二月底",
+      "tr": "the end of February"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "二 ‘two’ + 月 ‘month’: ‘month two’ — the months are simply numbered.",
+     "src": "morphemes: 二 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "二月十四号 is 情人节, Valentine’s Day; the Chinese ‘lovers’ day’ is 七夕, in the lunar calendar."
+    ],
+    "pitfalls": [
+     "二月 with 二 — never *两月 (两 is for counting: 两个月 ‘two months’)."
+    ],
+    "subtleties": [
+     "To say something IS in a month, use 在: 我的生日在二月 ‘my birthday is in February’ — for doing something no 在 is needed: 我二月去."
+    ]
+   }
+  },
+  {
+   "id": "zh:sanyue",
+   "lemma": "三月",
+   "trad": "三月",
+   "pinyin": "sān yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.march"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Spring is coming — the first warm days.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "March",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.march"
+     }
+    ],
+    "examples": [
+     {
+      "text": "三月八号是妇女节。",
+      "py": "Sānyuè bā hào shì Fùnǚjié.",
+      "tr": "March 8th is Women’s Day.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "北京三月还很冷。",
+      "py": "Běijīng sānyuè hái hěn lěng.",
+      "tr": "Beijing is still cold in March.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "我们三月去旅行。",
+      "py": "Wǒmen sānyuè qù lǚxíng.",
+      "tr": "We’re travelling in March.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "三月一号",
+      "tr": "March 1st"
+     },
+     {
+      "text": "今年三月",
+      "tr": "March this year"
+     },
+     {
+      "text": "三月初",
+      "tr": "early March"
+     },
+     {
+      "text": "三月底",
+      "tr": "the end of March"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "三 ‘three’ + 月 ‘month’: ‘month three’ — the months are simply numbered.",
+     "src": "morphemes: 三 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "On 三八妇女节 (8 March) many women in China get half a day off."
+    ],
+    "pitfalls": [
+     "三月 ‘March’ vs 三个月 ‘three months’."
+    ],
+    "subtleties": [
+     "Short date names are common: 三八 ‘March 8th’, 五一 ‘May 1st’, 十一 ‘October 1st’ — month digit + day digit."
+    ]
+   }
+  },
+  {
+   "id": "zh:siyue",
+   "lemma": "四月",
+   "trad": "四月",
+   "pinyin": "sì yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.april"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Spring in full bloom — and the Qingming festival.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "April",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.april"
+     }
+    ],
+    "examples": [
+     {
+      "text": "四月是春天。",
+      "py": "Sìyuè shì chūntiān.",
+      "tr": "April is spring.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "清明节在四月。",
+      "py": "Qīngmíngjié zài sìyuè.",
+      "tr": "The Qingming festival is in April.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "我四月很忙。",
+      "py": "Wǒ sìyuè hěn máng.",
+      "tr": "I’m very busy in April.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "四月一号",
+      "tr": "April 1st"
+     },
+     {
+      "text": "今年四月",
+      "tr": "April this year"
+     },
+     {
+      "text": "四月初",
+      "tr": "early April"
+     },
+     {
+      "text": "四月底",
+      "tr": "the end of April"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "四 ‘four’ + 月 ‘month’: ‘month four’ — the months are simply numbered.",
+     "src": "morphemes: 四 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "At 清明节 (around 4–5 April) families sweep their ancestors’ graves — the ‘Tomb-Sweeping Day’."
+    ],
+    "pitfalls": [
+     "四月 sìyuè ‘April’ vs 十月 shíyuè ‘October’: sì and shí are easy to mishear — listen for the tone."
+    ],
+    "subtleties": [
+     "四 ‘four’ sounds like 死 sǐ ‘death’, so 4 is an unlucky number; the month is not affected."
+    ]
+   }
+  },
+  {
+   "id": "zh:wuyue",
+   "lemma": "五月",
+   "trad": "五月",
+   "pinyin": "wǔ yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.may"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm days, green trees — and the May Day holiday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "May",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.may"
+     }
+    ],
+    "examples": [
+     {
+      "text": "五月一号放假。",
+      "py": "Wǔyuè yī hào fàngjià.",
+      "tr": "May 1st is a holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "五月的北京很美。",
+      "py": "Wǔyuè de Běijīng hěn měi.",
+      "tr": "Beijing is beautiful in May.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我五月去中国。",
+      "py": "Wǒ wǔyuè qù Zhōngguó.",
+      "tr": "I’m going to China in May.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "五月一号",
+      "tr": "May 1st"
+     },
+     {
+      "text": "今年五月",
+      "tr": "May this year"
+     },
+     {
+      "text": "五月初",
+      "tr": "early May"
+     },
+     {
+      "text": "五月底",
+      "tr": "the end of May"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "五 ‘five’ + 月 ‘month’: ‘month five’ — the months are simply numbered.",
+     "src": "morphemes: 五 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "五一 (1 May, 劳动节 Labour Day) brings a holiday of several days — trains and sights are packed."
+    ],
+    "pitfalls": [
+     "五月 ‘May’ vs 五个月 ‘five months’."
+    ],
+    "subtleties": [
+     "‘Beijing in May’ is 五月的北京 — the time phrase with 的 before the noun."
+    ]
+   }
+  },
+  {
+   "id": "zh:liuyue",
+   "lemma": "六月",
+   "trad": "六月",
+   "pinyin": "liù yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.june"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Early summer — exams, long evenings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "June",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.june"
+     }
+    ],
+    "examples": [
+     {
+      "text": "六月一号是儿童节。",
+      "py": "Liùyuè yī hào shì Értóngjié.",
+      "tr": "June 1st is Children’s Day.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "六月学生们考试。",
+      "py": "Liùyuè xuéshengmen kǎoshì.",
+      "tr": "In June the students take exams.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "六月很热。",
+      "py": "Liùyuè hěn rè.",
+      "tr": "June is hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "六月一号",
+      "tr": "June 1st"
+     },
+     {
+      "text": "今年六月",
+      "tr": "June this year"
+     },
+     {
+      "text": "六月初",
+      "tr": "early June"
+     },
+     {
+      "text": "六月底",
+      "tr": "the end of June"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "六 ‘six’ + 月 ‘month’: ‘month six’ — the months are simply numbered.",
+     "src": "morphemes: 六 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "China’s university entrance exam, the 高考, starts on 7 June every year."
+    ],
+    "pitfalls": [
+     "六月 liùyuè ‘June’ vs 六个月 ‘six months’."
+    ],
+    "subtleties": [
+     "六一 ‘June 1st’ is short for 六一儿童节, Children’s Day."
+    ]
+   }
+  },
+  {
+   "id": "zh:qiyue",
+   "lemma": "七月",
+   "trad": "七月",
+   "pinyin": "qī yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.july"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "High summer — heat, holidays, the sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "July",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.july"
+     }
+    ],
+    "examples": [
+     {
+      "text": "七月学校放假。",
+      "py": "Qīyuè xuéxiào fàngjià.",
+      "tr": "In July the schools break up.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "七月我们去海边。",
+      "py": "Qīyuè wǒmen qù hǎibiān.",
+      "tr": "In July we go to the seaside.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "北京七月很热。",
+      "py": "Běijīng qīyuè hěn rè.",
+      "tr": "Beijing is hot in July.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "七月一号",
+      "tr": "July 1st"
+     },
+     {
+      "text": "今年七月",
+      "tr": "July this year"
+     },
+     {
+      "text": "七月初",
+      "tr": "early July"
+     },
+     {
+      "text": "七月底",
+      "tr": "the end of July"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "七 ‘seven’ + 月 ‘month’: ‘month seven’ — the months are simply numbered.",
+     "src": "morphemes: 七 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The summer holidays (暑假 ‘heat holiday’) of Chinese schools start in July and last until the end of August."
+    ],
+    "pitfalls": [
+     "七月 qīyuè ‘July’ vs 七个月 ‘seven months’."
+    ],
+    "subtleties": [
+     "七夕, the ‘lovers’ day’, is the 7th of the 7th lunar month — usually in August, not in 七月."
+    ]
+   }
+  },
+  {
+   "id": "zh:bayue",
+   "lemma": "八月",
+   "trad": "八月",
+   "pinyin": "bā yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.august"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Late summer — the lucky number eight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "August",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.august"
+     }
+    ],
+    "examples": [
+     {
+      "text": "八月八号是我的生日。",
+      "py": "Bāyuè bā hào shì wǒ de shēngrì.",
+      "tr": "August 8th is my birthday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "八月我们去旅游。",
+      "py": "Bāyuè wǒmen qù lǚyóu.",
+      "tr": "In August we go on holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "八月很热。",
+      "py": "Bāyuè hěn rè.",
+      "tr": "August is hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "八月一号",
+      "tr": "August 1st"
+     },
+     {
+      "text": "今年八月",
+      "tr": "August this year"
+     },
+     {
+      "text": "八月初",
+      "tr": "early August"
+     },
+     {
+      "text": "八月底",
+      "tr": "the end of August"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "八 ‘eight’ + 月 ‘month’: ‘month eight’ — the months are simply numbered.",
+     "src": "morphemes: 八 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "8 is a lucky number (八 bā rhymes with 发 fā ‘to prosper’): the Beijing Olympics opened on 8 August 2008 at 8 p.m."
+    ],
+    "pitfalls": [
+     "八月 bāyuè ‘August’ vs 八个月 ‘eight months’."
+    ],
+    "subtleties": [
+     "Telephone numbers and car plates with many 8s are sought after — and sold for good money."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiuyue",
+   "lemma": "九月",
+   "trad": "九月",
+   "pinyin": "jiǔ yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.september"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Back to school — the start of the school year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "September",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.september"
+     }
+    ],
+    "examples": [
+     {
+      "text": "九月开学。",
+      "py": "Jiǔyuè kāixué.",
+      "tr": "School starts in September.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "九月十号是教师节。",
+      "py": "Jiǔyuè shí hào shì Jiàoshījié.",
+      "tr": "September 10th is Teachers’ Day.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "九月的天气很好。",
+      "py": "Jiǔyuè de tiānqì hěn hǎo.",
+      "tr": "The weather in September is nice.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "九月一号",
+      "tr": "September 1st"
+     },
+     {
+      "text": "今年九月",
+      "tr": "September this year"
+     },
+     {
+      "text": "九月初",
+      "tr": "early September"
+     },
+     {
+      "text": "九月底",
+      "tr": "the end of September"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "九 ‘nine’ + 月 ‘month’: ‘month nine’ — the months are simply numbered.",
+     "src": "morphemes: 九 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "On 教师节, Teachers’ Day (10 September), pupils bring their teachers flowers and cards."
+    ],
+    "pitfalls": [
+     "九月 jiǔyuè ‘September’ vs 九个月 ‘nine months’."
+    ],
+    "subtleties": [
+     "九 jiǔ sounds like 久 jiǔ ‘long-lasting’ — a good number for weddings."
+    ]
+   }
+  },
+  {
+   "id": "zh:shiyue",
+   "lemma": "十月",
+   "trad": "十月",
+   "pinyin": "shí yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.october"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Golden autumn — the National Day holiday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "October",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.october"
+     }
+    ],
+    "examples": [
+     {
+      "text": "十月一号是国庆节。",
+      "py": "Shíyuè yī hào shì Guóqìngjié.",
+      "tr": "October 1st is National Day.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "十月我们放假七天。",
+      "py": "Shíyuè wǒmen fàngjià qī tiān.",
+      "tr": "In October we have seven days off.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "北京的十月很美。",
+      "py": "Běijīng de shíyuè hěn měi.",
+      "tr": "October in Beijing is beautiful.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "十月一号",
+      "tr": "October 1st"
+     },
+     {
+      "text": "今年十月",
+      "tr": "October this year"
+     },
+     {
+      "text": "十月初",
+      "tr": "early October"
+     },
+     {
+      "text": "十月底",
+      "tr": "the end of October"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "十 ‘ten’ + 月 ‘month’: ‘month ten’ — the months are simply numbered.",
+     "src": "morphemes: 十 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The week of holidays around 国庆节 (1 October) is called 黄金周 ‘golden week’ — half the country travels."
+    ],
+    "pitfalls": [
+     "十月 shíyuè ‘October’ vs 四月 sìyuè ‘April’: listen for shí (2nd tone) vs sì (4th tone)."
+    ],
+    "subtleties": [
+     "十一 means ‘eleven’ — and also ‘October 1st’, National Day: 十一我们去旅游."
+    ]
+   }
+  },
+  {
+   "id": "zh:shiyiyue",
+   "lemma": "十一月",
+   "trad": "十一月",
+   "pinyin": "shí yī yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.november"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "in dates 一 keeps yī (十一月 shí yī yuè)"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Late autumn — the first cold winds, and a famous shopping day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "November",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.november"
+     }
+    ],
+    "examples": [
+     {
+      "text": "十一月十一号是购物节。",
+      "py": "Shíyīyuè shíyī hào shì gòuwùjié.",
+      "tr": "November 11th is a shopping festival.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "我们十一月见。",
+      "py": "Wǒmen shíyīyuè jiàn.",
+      "tr": "See you in November.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "十一月有三十天。",
+      "py": "Shíyīyuè yǒu sānshí tiān.",
+      "tr": "November has 30 days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "十一月一号",
+      "tr": "November 1st"
+     },
+     {
+      "text": "今年十一月",
+      "tr": "November this year"
+     },
+     {
+      "text": "十一月初",
+      "tr": "early November"
+     },
+     {
+      "text": "十一月底",
+      "tr": "the end of November"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "十一 ‘eleven’ + 月 ‘month’: ‘month eleven’ — the months are simply numbered.",
+     "src": "morphemes: 十一 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "11/11 (双十一 ‘double eleven’) began as 光棍节 ‘Singles’ Day’ — four ones standing alone — and became the world’s biggest online shopping day."
+    ],
+    "pitfalls": [
+     "十一月 ‘November’ vs 十一个月 ‘eleven months’."
+    ],
+    "subtleties": [
+     "十一 alone is ‘eleven’ or ‘1 October’; with 月 it is November."
+    ]
+   }
+  },
+  {
+   "id": "zh:shieryue",
+   "lemma": "十二月",
+   "trad": "十二月",
+   "pinyin": "shí èr yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.december"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the year — cold days, lights, a new calendar.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "December",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.december"
+     }
+    ],
+    "examples": [
+     {
+      "text": "十二月二十五号是圣诞节。",
+      "py": "Shí'èryuè èrshíwǔ hào shì Shèngdànjié.",
+      "tr": "December 25th is Christmas.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "十二月很冷。",
+      "py": "Shí'èryuè hěn lěng.",
+      "tr": "December is cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "十二月我回家。",
+      "py": "Shí'èryuè wǒ huí jiā.",
+      "tr": "In December I go home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "十二月一号",
+      "tr": "December 1st"
+     },
+     {
+      "text": "今年十二月",
+      "tr": "December this year"
+     },
+     {
+      "text": "十二月初",
+      "tr": "early December"
+     },
+     {
+      "text": "十二月底",
+      "tr": "the end of December"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The months are simply numbered; there is no other everyday name (the old lunar months have names such as 正月 and 腊月, but they are different months).",
+    "etymology": {
+     "text": "十二 ‘twelve’ + 月 ‘month’: ‘month twelve’ — the months are simply numbered.",
+     "src": "morphemes: 十二 + 月 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Christmas (圣诞节) is not a public holiday in China, but shops decorate and people give apples (平安果 ‘peace fruit’, because 苹 píng sounds like 平安 píng’ān)."
+    ],
+    "pitfalls": [
+     "十二月 ‘December’ vs 十二个月 ‘twelve months’ (a whole year)."
+    ],
+    "subtleties": [
+     "The 12th month of the lunar calendar is 腊月 làyuè — the busy month before the New Year."
+    ]
+   }
+  },
+  {
+   "id": "zh:chuntian",
+   "lemma": "春天",
+   "trad": "春天",
+   "pinyin": "chūn tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.spring"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Spring — new leaves, blossom, a fresh start.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spring (the season)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.spring"
+     },
+     {
+      "id": "s2",
+      "def": "(figurative) hope, a new beginning",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "春天来了！",
+      "py": "Chūntiān lái le!",
+      "tr": "Spring is here!",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "北京的春天很短。",
+      "py": "Běijīng de chūntiān hěn duǎn.",
+      "tr": "Spring in Beijing is short.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "春天我们去公园。",
+      "py": "Chūntiān wǒmen qù gōngyuán.",
+      "tr": "In spring we go to the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "春天来了",
+      "tr": "spring has come"
+     },
+     {
+      "text": "春节",
+      "tr": "the Spring Festival (Chinese New Year)"
+     },
+     {
+      "text": "春卷",
+      "tr": "spring roll"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "一年之计在于春",
+      "tr": "the plan for the whole year lies in spring",
+      "kind": "proverb",
+      "meaning": "a good start is everything; plan early",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "春季",
+      "register": "formal",
+      "nuance": "chūnjì: spring — weather reports, written"
+     },
+     {
+      "word": "春",
+      "register": "literary",
+      "nuance": "chūn: spring — poetry, compounds"
+     }
+    ],
+    "etymology": {
+     "text": "春: grass (艸) + a swelling sprout (屯) + sun (日) — plants starting to grow in the sun; + 天 ‘day, season’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "春节 ‘Spring Festival’ is Chinese New Year — in January or February, still winter, but the start of spring in the old calendar.",
+     "Greek άνοιξη is the ‘opening’ (from ανοίγω), German Frühling the ‘early (season)’; the Chinese character shows a sprout in the sun."
+    ],
+    "pitfalls": [
+     "‘In spring’ needs no ‘in’: 春天我们去公园 — 在春天 is written style."
+    ],
+    "subtleties": [
+     "The four seasons in a row: 春夏秋冬; with 天: 春天, 夏天, 秋天, 冬天."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiatian",
+   "lemma": "夏天",
+   "trad": "夏天",
+   "pinyin": "xià tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.summer"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Summer — heat, cicadas, cold watermelon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "summer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.summer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "夏天很热。",
+      "py": "Xiàtiān hěn rè.",
+      "tr": "Summer is hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "夏天我们去海边。",
+      "py": "Xiàtiān wǒmen qù hǎibiān.",
+      "tr": "In summer we go to the seaside.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢夏天。",
+      "py": "Wǒ xǐhuan xiàtiān.",
+      "tr": "I like summer.",
+      "register": "neutral",
+      "context": "preferences",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "夏天很热",
+      "tr": "summer is hot"
+     },
+     {
+      "text": "今年夏天",
+      "tr": "this summer"
+     },
+     {
+      "text": "夏令营",
+      "tr": "summer camp"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "夏季",
+      "register": "formal",
+      "nuance": "xiàjì: summer — weather reports, written"
+     },
+     {
+      "word": "夏",
+      "register": "literary",
+      "nuance": "xià: summer — poetry, compounds"
+     }
+    ],
+    "etymology": {
+     "text": "夏: possibly a man under the scorching sun; + 天 ‘day, season’. The character is also the name of the Xia, the first dynasty of Chinese tradition.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "夏 is also the Xia dynasty — 华夏 is a poetic name for China and the Chinese."
+    ],
+    "pitfalls": [
+     "夏天 is the season; the school’s ‘summer holidays’ are 暑假."
+    ],
+    "subtleties": [
+     "Weather reports and seasons in writing use 夏季."
+    ]
+   }
+  },
+  {
+   "id": "zh:qiutian",
+   "lemma": "秋天",
+   "trad": "秋天",
+   "pinyin": "qiū tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.autumn"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Autumn — clear skies, harvest, mooncakes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "autumn, fall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.autumn"
+     }
+    ],
+    "examples": [
+     {
+      "text": "北京的秋天很美。",
+      "py": "Běijīng de qiūtiān hěn měi.",
+      "tr": "Autumn in Beijing is beautiful.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "中秋节在秋天。",
+      "py": "Zhōngqiūjié zài qiūtiān.",
+      "tr": "The Mid-Autumn Festival is in autumn.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "秋天我们去北京。",
+      "py": "Qiūtiān wǒmen qù Běijīng.",
+      "tr": "In autumn we’re going to Beijing.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "秋天的北京",
+      "tr": "Beijing in autumn"
+     },
+     {
+      "text": "中秋节",
+      "tr": "the Mid-Autumn Festival"
+     },
+     {
+      "text": "今年秋天",
+      "tr": "this autumn"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "秋高气爽",
+      "tr": "autumn sky high, air fresh",
+      "kind": "idiom",
+      "meaning": "clear, crisp autumn weather",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "秋季",
+      "register": "formal",
+      "nuance": "qiūjì: autumn — written, weather reports"
+     },
+     {
+      "word": "秋",
+      "register": "literary",
+      "nuance": "qiū: autumn — poetry, compounds"
+     }
+    ],
+    "etymology": {
+     "text": "秋: 禾 ‘grain’ with fire (火); the oldest forms show a cricket or locust. + 天 ‘day, season’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "秋 contains 禾 ‘grain’: autumn is harvest time — and German Herbst is a cousin of English harvest."
+    ],
+    "pitfalls": [
+     "‘In autumn’ needs no preposition: 秋天我们去北京."
+    ],
+    "subtleties": [
+     "British ‘autumn’ and American ‘fall’ are both 秋天; in writing 秋季."
+    ]
+   }
+  },
+  {
+   "id": "zh:dongtian",
+   "lemma": "冬天",
+   "trad": "冬天",
+   "pinyin": "dōng tiān",
+   "pos": "NOUN",
+   "senses": [
+    "time.winter"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Winter — snow in the north, hot tea, dumplings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.winter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "冬天很冷。",
+      "py": "Dōngtiān hěn lěng.",
+      "tr": "Winter is cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "冬天北京常常下雪。",
+      "py": "Dōngtiān Běijīng chángcháng xià xuě.",
+      "tr": "In winter it often snows in Beijing.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "冬天我喜欢喝热茶。",
+      "py": "Dōngtiān wǒ xǐhuan hē rè chá.",
+      "tr": "In winter I like drinking hot tea.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "冬天很冷",
+      "tr": "winter is cold"
+     },
+     {
+      "text": "冬至",
+      "tr": "the winter solstice"
+     },
+     {
+      "text": "冬瓜",
+      "tr": "winter melon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "冬季",
+      "register": "formal",
+      "nuance": "dōngjì: winter — written, weather reports"
+     },
+     {
+      "word": "冬",
+      "register": "literary",
+      "nuance": "dōng: winter — poetry, compounds"
+     }
+    ],
+    "etymology": {
+     "text": "冬: origin unclear, possibly related to 终 ‘end’ (the end of the year). + 天 ‘day, season’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "冬瓜 ‘winter melon’ keeps all winter; on 冬至, the winter solstice, northern Chinese eat dumplings."
+    ],
+    "pitfalls": [
+     "冬 dōng ‘winter’ and 东 dōng ‘east’ sound the same — the characters differ."
+    ],
+    "subtleties": [
+     "北方 ‘the north’ has cold, dry winters with central heating; the south has none, and indoor winters can feel colder."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhou",
+   "lemma": "周",
+   "trad": "週",
+   "pinyin": "zhōu",
+   "pos": "NOUN",
+   "senses": [
+    "time.week",
+    "abstract.circuit",
+    "pol.zhoudynasty"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": [
+     {
+      "trad": "週",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "trad": "周",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "周 counts by itself: 两周 ‘two weeks’ (no 个)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "register and counting",
+     "value": "week — counts by itself (三周), written"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The week as a unit — timetables, plans, ‘next week’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.week"
+     },
+     {
+      "id": "s2",
+      "def": "circle, circuit; all around",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.circuit"
+     },
+     {
+      "id": "s3",
+      "def": "the Zhou dynasty (a name)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.zhoudynasty"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一周有七天。",
+      "py": "Yì zhōu yǒu qī tiān.",
+      "tr": "A week has seven days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我下周去北京。",
+      "py": "Wǒ xià zhōu qù Běijīng.",
+      "tr": "I’m going to Beijing next week.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "周一到周五我工作。",
+      "py": "Zhōuyī dào zhōuwǔ wǒ gōngzuò.",
+      "tr": "I work Monday to Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "房子四周都是树。",
+      "py": "Fángzi sìzhōu dōu shì shù.",
+      "tr": "There are trees all around the house.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s2"
+     },
+     {
+      "text": "周朝有八百年的历史。",
+      "py": "Zhōucháo yǒu bābǎi nián de lìshǐ.",
+      "tr": "The Zhou dynasty lasted eight hundred years.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "下周",
+      "tr": "next week"
+     },
+     {
+      "text": "每周",
+      "tr": "every week"
+     },
+     {
+      "text": "周一",
+      "tr": "Monday"
+     },
+     {
+      "text": "周末",
+      "tr": "weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "星期",
+      "register": "neutral",
+      "nuance": "xīngqī: week — more spoken (S14)"
+     },
+     {
+      "word": "礼拜",
+      "register": "colloquial",
+      "nuance": "lǐbài: week — southern and older speech"
+     }
+    ],
+    "etymology": {
+     "text": "The traditional 週 adds 辶 ‘walking’ to 周 ‘circle, round’; it is the same word as 周.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "周 is a circuit: the week goes round and starts again; 周围 is ‘all around’."
+    ],
+    "pitfalls": [
+     "周 counts by itself: 两周 ‘two weeks’ — but 星期 takes 个: 两个星期."
+    ],
+    "subtleties": [
+     "周一 … 周日 are the short day names of timetables and signs (S14)."
+    ]
+   }
+  },
+  {
+   "id": "zh:yue",
+   "lemma": "月",
+   "trad": "月",
+   "pinyin": "yuè",
+   "pos": "NOUN",
+   "senses": [
+    "time.month",
+    "nature.moon"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The month — and the moon that measures it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "month",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.month"
+     },
+     {
+      "id": "s2",
+      "def": "moon (literary, in compounds: 月亮, 月饼)",
+      "register": [
+       "literary"
+      ],
+      "concept": "nature.moon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一年有十二个月。",
+      "py": "Yì nián yǒu shí'èr ge yuè.",
+      "tr": "A year has twelve months.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "这个月我很忙。",
+      "py": "Zhège yuè wǒ hěn máng.",
+      "tr": "I’m very busy this month.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "中秋节吃月饼。",
+      "py": "Zhōngqiūjié chī yuèbing.",
+      "tr": "At the Mid-Autumn Festival people eat mooncakes.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "这个月",
+      "tr": "this month"
+     },
+     {
+      "text": "下个月",
+      "tr": "next month"
+     },
+     {
+      "text": "上个月",
+      "tr": "last month"
+     },
+     {
+      "text": "三个月",
+      "tr": "three months"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "花好月圆",
+      "tr": "the flowers are in bloom, the moon is full",
+      "kind": "idiom",
+      "meaning": "perfect happiness (a wish for newly-weds)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "月份",
+      "register": "neutral",
+      "nuance": "yuèfèn: month (in dates, statistics: 五月份)"
+     },
+     {
+      "word": "月亮",
+      "register": "neutral",
+      "nuance": "yuèliang: the moon — the everyday word"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a crescent moon.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Turkish ay (moon and month) and Russian месяц, 月 is both the moon and the month."
+    ],
+    "pitfalls": [
+     "三月 is ‘March’, 三个月 ‘three months’: the 个 makes it a count."
+    ],
+    "subtleties": [
+     "The moon in speech is 月亮; 月 alone is the month (or the moon in poems and compounds: 月饼)."
+    ]
+   }
+  },
+  {
+   "id": "zh:nian",
+   "lemma": "年",
+   "trad": "年",
+   "pinyin": "nián",
+   "pos": "NOUN",
+   "senses": [
+    "time.year",
+    "time.newyear",
+    "abstract.age"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "年 is itself a counter: 两年 ‘two years’ (no 个)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The year — and New Year, the biggest festival.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.year"
+     },
+     {
+      "id": "s2",
+      "def": "the (Chinese) New Year: 过年",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.newyear"
+     },
+     {
+      "id": "s3",
+      "def": "age, years of life (年纪)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.age"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一年有十二个月。",
+      "py": "Yì nián yǒu shí'èr ge yuè.",
+      "tr": "A year has twelve months.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我学中文两年了。",
+      "py": "Wǒ xué Zhōngwén liǎng nián le.",
+      "tr": "I’ve been learning Chinese for two years.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     },
+     {
+      "text": "过年我们回家。",
+      "py": "Guònián wǒmen huí jiā.",
+      "tr": "At New Year we go home.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s2"
+     },
+     {
+      "text": "他年纪很大了。",
+      "py": "Tā niánjì hěn dà le.",
+      "tr": "He is very old now.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "今年",
+      "tr": "this year"
+     },
+     {
+      "text": "明年",
+      "tr": "next year"
+     },
+     {
+      "text": "去年",
+      "tr": "last year"
+     },
+     {
+      "text": "每年",
+      "tr": "every year"
+     },
+     {
+      "text": "过年",
+      "tr": "to celebrate New Year"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "年年有余",
+      "tr": "may every year bring a surplus",
+      "kind": "saying",
+      "meaning": "a New Year wish; 余 yú sounds like 鱼 ‘fish’, so fish is eaten",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "岁",
+      "register": "neutral",
+      "nuance": "suì: year of age — 三岁 ‘three years old’"
+     },
+     {
+      "word": "年度",
+      "register": "formal",
+      "nuance": "niándù: (business, school) year"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 禾 ‘grain’ + phonetic 人. It first meant ‘harvest’, then ‘year’ — one harvest a year.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "年 first meant ‘harvest’; a folk legend tells of a monster called 年 that was scared off with red paper and firecrackers — the origin story of New Year customs."
+    ],
+    "pitfalls": [
+     "年 counts by itself: 两年 ‘two years’ — *两个年 is wrong.",
+     "Age is 岁, not 年: 我三十岁."
+    ],
+    "subtleties": [
+     "Years are read digit by digit: 2026年 = 二〇二六年 èr líng èr liù nián."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiaoshi",
+   "lemma": "小时",
+   "trad": "小時",
+   "pinyin": "xiǎo shí",
+   "pos": "NOUN",
+   "senses": [
+    "time.hour",
+    "time.childhood"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 小時 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.hour",
+     "axis": "register",
+     "value": "hour — neutral"
+    },
+    {
+     "concept": "time.childhood",
+     "axis": "register",
+     "value": "literary, in set phrases (小时了了)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An hour — a length of time on the clock.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hour",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.hour"
+     },
+     {
+      "id": "s2",
+      "def": "(literary) childhood (小时候)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.childhood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "一天有二十四个小时。",
+      "py": "Yì tiān yǒu èrshísì ge xiǎoshí.",
+      "tr": "A day has 24 hours.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我每天工作八个小时。",
+      "py": "Wǒ měitiān gōngzuò bā ge xiǎoshí.",
+      "tr": "I work eight hours a day.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "坐火车要四个小时。",
+      "py": "Zuò huǒchē yào sì ge xiǎoshí.",
+      "tr": "It takes four hours by train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "小时了了，大未必佳。",
+      "py": "Xiǎoshí liǎoliǎo, dà wèibì jiā.",
+      "tr": "Clever as a child does not mean good as a grown-up.",
+      "register": "literary",
+      "context": "saying",
+      "sense": "s2"
+     },
+     {
+      "text": "想君小时，必当了了。",
+      "py": "Xiǎng jūn xiǎoshí, bì dāng liǎoliǎo.",
+      "tr": "You, sir, must have been very bright as a child (Kong Rong’s reply, in the Shishuo Xinyu).",
+      "register": "literary",
+      "context": "anecdote",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个小时",
+      "tr": "an hour"
+     },
+     {
+      "text": "半个小时",
+      "tr": "half an hour"
+     },
+     {
+      "text": "几个小时",
+      "tr": "a few hours"
+     },
+     {
+      "text": "小时工",
+      "tr": "hourly worker"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "钟头",
+      "register": "colloquial",
+      "nuance": "zhōngtóu: hour — spoken"
+     },
+     {
+      "word": "时",
+      "register": "formal",
+      "nuance": "shí: hour — written (24小时营业 ‘open 24 hours’)"
+     }
+    ],
+    "etymology": {
+     "text": "小 ‘small’ + 时 ‘time, (two-hour) period’: a ‘small 时’.",
+     "src": "morphemes: 小 + 时 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The old Chinese day had 12 时辰 of two hours each; the modern hour is half of one — a ‘small 时’."
+    ],
+    "pitfalls": [
+     "小时 is a length of time (三个小时 ‘three hours’); the time on the clock is 点 (三点 ‘three o’clock’)."
+    ],
+    "subtleties": [
+     "In writing 个 is often dropped: 24小时, 三小时."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhongtou",
+   "lemma": "钟头",
+   "trad": "鐘頭",
+   "pinyin": "zhōng tóu",
+   "pos": "NOUN",
+   "senses": [
+    "time.hour"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 鐘頭 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.hour",
+     "axis": "register",
+     "value": "hour — colloquial"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "An hour, the spoken way — ‘I waited a whole hour!’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hour (colloquial)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "time.hour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我等了你一个钟头！",
+      "py": "Wǒ děng le nǐ yí ge zhōngtóu!",
+      "tr": "I waited an hour for you!",
+      "register": "colloquial",
+      "context": "complaint",
+      "sense": "s1"
+     },
+     {
+      "text": "走路要半个钟头。",
+      "py": "Zǒulù yào bàn ge zhōngtóu.",
+      "tr": "It’s half an hour on foot.",
+      "register": "colloquial",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "他每天睡八个钟头。",
+      "py": "Tā měitiān shuì bā ge zhōngtóu.",
+      "tr": "He sleeps eight hours a day.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个钟头",
+      "tr": "an hour"
+     },
+     {
+      "text": "半个钟头",
+      "tr": "half an hour"
+     },
+     {
+      "text": "几个钟头",
+      "tr": "a few hours"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "小时",
+      "register": "neutral",
+      "nuance": "xiǎoshí: hour — the standard word"
+     }
+    ],
+    "etymology": {
+     "text": "钟 ‘bell; clock’ + 头 (noun suffix).",
+     "src": "morphemes: 钟 + 头 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "钟 is both ‘bell’ and ‘clock’: 钟头 ‘clock-head’ is the spoken hour."
+    ],
+    "pitfalls": [
+     "钟头 always takes 个: 两个钟头 (小时 can drop it in writing)."
+    ],
+    "subtleties": [
+     "钟头 is spoken, especially in the north; timetables and forms use 小时."
+    ]
+   }
+  },
+  {
+   "id": "zh:fenzhong",
+   "lemma": "分钟",
+   "trad": "分鐘",
+   "pinyin": "fēn zhōng",
+   "pos": "NOUN",
+   "senses": [
+    "time.minute"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 分鐘 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "分钟 counts by itself: 五分钟 ‘five minutes’ (no 个)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.minute",
+     "axis": "point or length",
+     "value": "minutes as a length of time (五分钟)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A minute — ‘just five minutes!’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "minute (a length of time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.minute"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请等五分钟。",
+      "py": "Qǐng děng wǔ fēnzhōng.",
+      "tr": "Please wait five minutes.",
+      "register": "neutral",
+      "context": "service",
+      "sense": "s1"
+     },
+     {
+      "text": "走路十分钟。",
+      "py": "Zǒulù shí fēnzhōng.",
+      "tr": "Ten minutes on foot.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "一个小时有六十分钟。",
+      "py": "Yí ge xiǎoshí yǒu liùshí fēnzhōng.",
+      "tr": "An hour has sixty minutes.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "五分钟",
+      "tr": "five minutes"
+     },
+     {
+      "text": "几分钟",
+      "tr": "a few minutes"
+     },
+     {
+      "text": "十分钟以后",
+      "tr": "in ten minutes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "分",
+      "register": "neutral",
+      "nuance": "fēn: minute on the clock (三点十分 ‘3:10’)"
+     }
+    ],
+    "etymology": {
+     "text": "分 ‘part, minute’ + 钟 ‘clock’.",
+     "src": "morphemes: 分 + 钟 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "十分 shífēn also means ‘very’ (十分好 ‘extremely good’) — 十分钟 is the ten minutes."
+    ],
+    "pitfalls": [
+     "No measure word: 五分钟, not *五个分钟."
+    ],
+    "subtleties": [
+     "分钟 is a length of time; the minute on the clock is 分: 八点十分 ‘8:10’."
+    ]
+   }
+  },
+  {
+   "id": "zh:fen.minute",
+   "lemma": "分",
+   "trad": "分",
+   "pinyin": "fēn",
+   "pos": "NOUN",
+   "senses": [
+    "time.minute",
+    "verb.divide",
+    "edu.mark",
+    "money.cent"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "on the clock 分 follows a number directly: 十分 ‘ten (minutes past)’"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.minute",
+     "axis": "point or length",
+     "value": "minutes past, on the clock (八点十分)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The minutes on the clock face — and things divided.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "minute (on the clock: 八点十分)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.minute"
+     },
+     {
+      "id": "s2",
+      "def": "to divide, to separate",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.divide"
+     },
+     {
+      "id": "s3",
+      "def": "point, mark (in a test)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "edu.mark"
+     },
+     {
+      "id": "s4",
+      "def": "fen, a cent (1/100 yuan)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "money.cent"
+     }
+    ],
+    "examples": [
+     {
+      "text": "现在八点十分。",
+      "py": "Xiànzài bā diǎn shí fēn.",
+      "tr": "It’s 8:10 now.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "我们七点四十分见。",
+      "py": "Wǒmen qī diǎn sìshí fēn jiàn.",
+      "tr": "Let’s meet at 7:40.",
+      "register": "neutral",
+      "context": "meetings",
+      "sense": "s1"
+     },
+     {
+      "text": "他考了九十分。",
+      "py": "Tā kǎo le jiǔshí fēn.",
+      "tr": "He got 90 points in the test.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
+     },
+     {
+      "text": "我们把蛋糕分成四块。",
+      "py": "Wǒmen bǎ dàngāo fēn chéng sì kuài.",
+      "tr": "We cut the cake into four pieces.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "以前一分钱能买一块糖。",
+      "py": "Yǐqián yì fēn qián néng mǎi yí kuài táng.",
+      "tr": "In the old days one fen could buy a sweet.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "八点十分",
+      "tr": "8:10"
+     },
+     {
+      "text": "差五分八点",
+      "tr": "five to eight"
+     },
+     {
+      "text": "分开",
+      "tr": "to separate"
+     },
+     {
+      "text": "一百分",
+      "tr": "full marks"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "分钟",
+      "register": "neutral",
+      "nuance": "fēnzhōng: minute — a length of time (五分钟)"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 八 ‘to separate’ + 刀 ‘knife’ — to cut apart.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "分 is the knife (刀) that splits (八): an hour divided into minutes, a yuan into cents."
+    ],
+    "pitfalls": [
+     "In speech the 分 after the minutes often drops: 八点二十 = 八点二十分 ‘8:20’."
+    ],
+    "subtleties": [
+     "‘A quarter’ is 刻 kè (八点一刻 ‘8:15’), ‘half past’ is 半 (八点半)."
+    ]
+   }
+  },
+  {
+   "id": "zh:dian",
+   "lemma": "点",
+   "trad": "點",
+   "pinyin": "diǎn",
+   "pos": "NOUN",
+   "senses": [
+    "time.oclock",
+    "abstract.point",
+    "verb.order"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 點 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "点 follows the number directly: 三点 ‘three o’clock’"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.order",
+     "axis": "what is ordered",
+     "value": "dishes from a menu, a song (点菜)"
+    },
+    {
+     "concept": "time.oclock",
+     "axis": "form",
+     "value": "o’clock after any number (三点)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The hour on the clock — what time is it?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "o’clock (telling the time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.oclock"
+     },
+     {
+      "id": "s2",
+      "def": "dot, point, spot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.point"
+     },
+     {
+      "id": "s3",
+      "def": "a little (一点)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s2"
+     },
+     {
+      "id": "s4",
+      "def": "(verb) to order (dishes): 点菜",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.order"
+     }
+    ],
+    "examples": [
+     {
+      "text": "现在几点？",
+      "py": "Xiànzài jǐ diǎn?",
+      "tr": "What time is it?",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "我七点吃早饭。",
+      "py": "Wǒ qī diǎn chī zǎofàn.",
+      "tr": "I have breakfast at seven.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "我们下午三点见。",
+      "py": "Wǒmen xiàwǔ sān diǎn jiàn.",
+      "tr": "Let’s meet at 3 p.m.",
+      "register": "neutral",
+      "context": "meetings",
+      "sense": "s1"
+     },
+     {
+      "text": "你点菜吧。",
+      "py": "Nǐ diǎn cài ba.",
+      "tr": "You order (the dishes).",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s4"
+     },
+     {
+      "text": "纸上有一个小黑点。",
+      "py": "Zhǐ shang yǒu yí ge xiǎo hēi diǎn.",
+      "tr": "There is a small black dot on the paper.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "几点",
+      "tr": "what time?"
+     },
+     {
+      "text": "三点半",
+      "tr": "half past three"
+     },
+     {
+      "text": "八点钟",
+      "tr": "eight o’clock"
+     },
+     {
+      "text": "点菜",
+      "tr": "to order food"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "点钟",
+      "register": "neutral",
+      "nuance": "diǎnzhōng: o’clock — the full form (三点钟)"
+     },
+     {
+      "word": "时",
+      "register": "formal",
+      "nuance": "shí: o’clock in writing (15时)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 黑 ‘black’ + phonetic 占 — a black dot.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "点 is a dot — the same word gives 一点 ‘a little’, 点菜 ‘to order dishes’ and 三点 ‘three o’clock’."
+    ],
+    "pitfalls": [
+     "2 o’clock is 两点, not *二点.",
+     "‘At seven’ needs no ‘at’: 我七点吃早饭 — the time stands before the verb.",
+     "一点 is ‘one o’clock’ — and also ‘a little’; the context decides."
+    ],
+    "subtleties": [
+     "Big before small: 下午三点 ‘3 p.m.’, 星期一上午十点 ‘Monday, 10 a.m.’."
+    ]
+   }
+  },
+  {
+   "id": "zh:riqi",
+   "lemma": "日期",
+   "trad": "日期",
+   "pinyin": "rì qī",
+   "pos": "NOUN",
+   "senses": [
+    "time.date"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.date",
+     "axis": "the date or the day number",
+     "value": "a date"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The date — on forms, tickets, documents.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "date",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.date"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请写上今天的日期。",
+      "py": "Qǐng xiěshang jīntiān de rìqī.",
+      "tr": "Please write today’s date.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "你知道考试的日期吗？",
+      "py": "Nǐ zhīdao kǎoshì de rìqī ma?",
+      "tr": "Do you know the date of the exam?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "票上的日期不对。",
+      "py": "Piào shang de rìqī bú duì.",
+      "tr": "The date on the ticket is wrong.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "今天的日期",
+      "tr": "today’s date"
+     },
+     {
+      "text": "出生日期",
+      "tr": "date of birth"
+     },
+     {
+      "text": "写日期",
+      "tr": "to write the date"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "号",
+      "register": "colloquial",
+      "nuance": "hào: day of the month in speech (五号)"
+     },
+     {
+      "word": "日",
+      "register": "formal",
+      "nuance": "rì: day of the month in writing (5日)"
+     }
+    ],
+    "etymology": {
+     "text": "日 ‘day’ + 期 ‘set time, period’.",
+     "src": "morphemes: 日 + 期 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Forms ask for your 出生日期 ‘date of birth’ — written year–month–day: 2026年10月8日."
+    ],
+    "pitfalls": [
+     "‘What’s the date?’ in speech is 今天几号？ — 日期 is the word of forms and documents."
+    ],
+    "subtleties": [
+     "Chinese dates go from big to small, year – month – day, the reverse of Greek and German (8.10.2026)."
+    ]
+   }
+  },
+  {
+   "id": "zh:hao",
+   "lemma": "号",
+   "trad": "號",
+   "pinyin": "hào",
+   "pos": "NOUN",
+   "senses": [
+    "time.date",
+    "abstract.number",
+    "measure.size"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 號 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "号 follows the number directly: 五号 ‘the 5th’"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.date",
+     "axis": "the date or the day number",
+     "value": "the day of the month (五号)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The day of the month — and every kind of number.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "day of the month, date",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.date"
+     },
+     {
+      "id": "s2",
+      "def": "number (room, house, phone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.number"
+     },
+     {
+      "id": "s3",
+      "def": "size (大号 ‘large’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "measure.size"
+     }
+    ],
+    "examples": [
+     {
+      "text": "今天几号？",
+      "py": "Jīntiān jǐ hào?",
+      "tr": "What’s the date today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "我的生日是五月三号。",
+      "py": "Wǒ de shēngrì shì wǔyuè sān hào.",
+      "tr": "My birthday is on May 3rd.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "你住几号？",
+      "py": "Nǐ zhù jǐ hào?",
+      "tr": "What number do you live at?",
+      "register": "neutral",
+      "context": "address",
+      "sense": "s2"
+     },
+     {
+      "text": "这件衣服有大号吗？",
+      "py": "Zhè jiàn yīfu yǒu dàhào ma?",
+      "tr": "Do you have this in a large size?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "几号",
+      "tr": "what date?"
+     },
+     {
+      "text": "五月一号",
+      "tr": "May 1st"
+     },
+     {
+      "text": "号码",
+      "tr": "number"
+     },
+     {
+      "text": "大号",
+      "tr": "large (size)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "日",
+      "register": "formal",
+      "nuance": "rì: day of the month in writing (5月1日)"
+     },
+     {
+      "word": "日期",
+      "register": "neutral",
+      "nuance": "rìqī: the date (forms, documents)"
+     }
+    ],
+    "etymology": {
+     "text": "口 ‘mouth’ + 丂 ‘exhaled breath’ — a cry; the traditional 號 adds 虎 ‘tiger’: a roar. From ‘call, name’ came ‘number’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "号 began as a shout (號 has a tiger in it); from ‘call, name’ it came to mean ‘number’ — and the number of the day."
+    ],
+    "pitfalls": [
+     "Speech says 号, writing 日: 五月一号 / 5月1日.",
+     "Month before day: 五月一号 — never *一号五月."
+    ],
+    "subtleties": [
+     "号 is also clothing size: 大号, 中号, 小号 — L, M, S."
+    ]
+   }
+  },
+  {
+   "id": "zh:shengri",
+   "lemma": "生日",
+   "trad": "生日",
+   "pinyin": "shēng rì",
+   "pos": "NOUN",
+   "senses": [
+    "time.birthday"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Birthdays — cake, candles, long noodles for a long life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "birthday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.birthday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你的生日是几月几号？",
+      "py": "Nǐ de shēngrì shì jǐ yuè jǐ hào?",
+      "tr": "When is your birthday?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "生日快乐！",
+      "py": "Shēngrì kuàilè!",
+      "tr": "Happy birthday!",
+      "register": "neutral",
+      "context": "celebration",
+      "sense": "s1"
+     },
+     {
+      "text": "明天是我妈妈的生日。",
+      "py": "Míngtiān shì wǒ māma de shēngrì.",
+      "tr": "Tomorrow is my mother’s birthday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "生日快乐",
+      "tr": "happy birthday"
+     },
+     {
+      "text": "过生日",
+      "tr": "to celebrate a birthday"
+     },
+     {
+      "text": "生日蛋糕",
+      "tr": "birthday cake"
+     },
+     {
+      "text": "生日礼物",
+      "tr": "birthday present"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "寿辰",
+      "register": "honorific",
+      "nuance": "shòuchén: birthday of an elderly person"
+     },
+     {
+      "word": "诞辰",
+      "register": "formal",
+      "nuance": "dànchén: birthday of a great person (anniversaries)"
+     }
+    ],
+    "etymology": {
+     "text": "生 ‘to be born’ + 日 ‘day’: ‘birth-day’, built like German Geburtstag and English birthday.",
+     "src": "morphemes: 生 + 日 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "On birthdays many Chinese eat 长寿面 ‘longevity noodles’ — long noodles for a long life."
+    ],
+    "pitfalls": [
+     "‘To have / celebrate a birthday’ is 过生日 (过 ‘to pass, to spend’).",
+     "Ask with 几月几号: 你的生日是几月几号？"
+    ],
+    "subtleties": [
+     "Many older people also keep a birthday in the lunar calendar, so it moves every year."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiaqi",
+   "lemma": "假期",
+   "trad": "假期",
+   "pinyin": "jià qī",
+   "pos": "NOUN",
+   "senses": [
+    "time.holiday"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "noun or verb",
+     "value": "the holiday (a period)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Holidays — time off, trips, no alarm clock.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "holiday, vacation (time off)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holiday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "假期你去哪里？",
+      "py": "Jiàqī nǐ qù nǎli?",
+      "tr": "Where are you going in the holidays?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这个假期我们去旅游。",
+      "py": "Zhège jiàqī wǒmen qù lǚyóu.",
+      "tr": "We’re going travelling this holiday.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "假期快乐！",
+      "py": "Jiàqī kuàilè!",
+      "tr": "Happy holidays!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "假期快乐",
+      "tr": "happy holidays"
+     },
+     {
+      "text": "寒假",
+      "tr": "winter holidays"
+     },
+     {
+      "text": "暑假",
+      "tr": "summer holidays"
+     },
+     {
+      "text": "假期里",
+      "tr": "during the holidays"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "假日",
+      "register": "formal",
+      "nuance": "jiàrì: holiday, day off"
+     },
+     {
+      "word": "节日",
+      "register": "neutral",
+      "nuance": "jiérì: festival, public holiday (a feast day)"
+     },
+     {
+      "word": "度假",
+      "register": "neutral",
+      "nuance": "dùjià: to be on holiday (verb)"
+     }
+    ],
+    "etymology": {
+     "text": "假 ‘leave, time off’ + 期 ‘period’.",
+     "src": "morphemes: 假 + 期 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Pupils have two long holidays: 寒假 ‘cold holiday’ in winter and 暑假 ‘heat holiday’ in summer."
+    ],
+    "pitfalls": [
+     "假 is jià in 假期 / 放假 (‘leave’) but jiǎ in 真假 ‘true and false’ — one character, two words."
+    ],
+    "subtleties": [
+     "A festival is a 节日 (春节, 国庆节); the time off is the 假期."
+    ]
+   }
+  },
+  {
+   "id": "zh:fangjia",
+   "lemma": "放假",
+   "trad": "放假",
+   "pinyin": "fàng jià",
+   "pos": "VERB",
+   "senses": [
+    "time.holiday"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "noun or verb",
+     "value": "to have time off"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "School’s out, the office is closed — the holidays begin.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have a holiday, to have time off",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holiday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们明天放假。",
+      "py": "Wǒmen míngtiān fàngjià.",
+      "tr": "We’re off tomorrow.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "学校七月放假。",
+      "py": "Xuéxiào qīyuè fàngjià.",
+      "tr": "School breaks up in July.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "国庆节放假七天。",
+      "py": "Guóqìngjié fàngjià qī tiān.",
+      "tr": "There are seven days off for National Day.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "放假了",
+      "tr": "the holidays have begun"
+     },
+     {
+      "text": "放暑假",
+      "tr": "to break up for the summer"
+     },
+     {
+      "text": "放三天假",
+      "tr": "to have three days off"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "休假",
+      "register": "neutral",
+      "nuance": "xiūjià: to take leave (from work)"
+     },
+     {
+      "word": "休息",
+      "register": "neutral",
+      "nuance": "xiūxi: to rest, to have a day off"
+     }
+    ],
+    "etymology": {
+     "text": "放 ‘to let go, to release’ + 假 ‘leave, time off’.",
+     "src": "morphemes: 放 + 假 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "放假 ‘release-holiday’: the school or the company lets you go."
+    ],
+    "pitfalls": [
+     "放假 is verb + object: ‘three days off’ is 放三天假 (the number goes inside) — or 放假三天."
+    ],
+    "subtleties": [
+     "放假了！ is the cry when the holidays begin."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": [
+     {
+      "verb": "放",
+      "object": "假",
+      "example": "放了三天假"
+     }
+    ],
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:yiqian.before",
+   "lemma": "以前",
+   "trad": "以前",
+   "pinyin": "yǐ qián",
+   "pos": "NOUN",
+   "senses": [
+    "prep.before",
+    "adv.formerly"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.before",
+     "axis": "register",
+     "value": "before — neutral; also ‘formerly’"
+    },
+    {
+     "concept": "adv.formerly",
+     "axis": "register",
+     "value": "formerly, in the past (以前我住在北京) — neutral"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Before — earlier than a time, or back in the old days.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "before (a time or event): 八点以前",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.before"
+     },
+     {
+      "id": "s2",
+      "def": "before, formerly, in the past",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.formerly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "八点以前我在家。",
+      "py": "Bā diǎn yǐqián wǒ zài jiā.",
+      "tr": "Before eight I’m at home.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "吃饭以前请洗手。",
+      "py": "Chīfàn yǐqián qǐng xǐ shǒu.",
+      "tr": "Please wash your hands before eating.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "以前我住在北京。",
+      "py": "Yǐqián wǒ zhù zài Běijīng.",
+      "tr": "I used to live in Beijing.",
+      "register": "neutral",
+      "context": "life story",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "…以前",
+      "tr": "before …"
+     },
+     {
+      "text": "很久以前",
+      "tr": "long ago"
+     },
+     {
+      "text": "以前的",
+      "tr": "former, of the past"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "之前",
+      "register": "neutral",
+      "nuance": "zhīqián: before — a little more written"
+     },
+     {
+      "word": "从前",
+      "register": "literary",
+      "nuance": "cóngqián: in the past, once upon a time (从前有一个…)"
+     }
+    ],
+    "etymology": {
+     "text": "以 ‘by, from’ + 前 ‘front, before’.",
+     "src": "morphemes: 以 + 前 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "很久很久以前 ‘long, long ago’ opens Chinese fairy tales, like Greek Μια φορά κι έναν καιρό."
+    ],
+    "pitfalls": [
+     "以前 comes AFTER the time or event: 八点以前 ‘before eight’ — German vor acht and Greek πριν από τις οχτώ put it first.",
+     "A past habit with 以前 needs no 了: 以前我常常去."
+    ],
+    "subtleties": [
+     "Alone at the start, 以前 means ‘in the past, formerly’: 以前我是老师 ‘I used to be a teacher’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhiqian",
+   "lemma": "之前",
+   "trad": "之前",
+   "pinyin": "zhī qián",
+   "pos": "NOUN",
+   "senses": [
+    "prep.before",
+    "adv.formerly"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.before",
+     "axis": "register",
+     "value": "before — more formal; also ‘ago’"
+    },
+    {
+     "concept": "adv.formerly",
+     "axis": "register",
+     "value": "previously; ago (三天之前) — more formal"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Before — a deadline, a step that comes first.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "before (a time or event)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.before"
+     },
+     {
+      "id": "s2",
+      "def": "before, previously; ago (三天之前)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.formerly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "星期五之前请给我打电话。",
+      "py": "Xīngqīwǔ zhīqián qǐng gěi wǒ dǎ diànhuà.",
+      "tr": "Please call me before Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "睡觉之前我喝一杯水。",
+      "py": "Shuìjiào zhīqián wǒ hē yì bēi shuǐ.",
+      "tr": "Before going to bed I drink a glass of water.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "之前我没去过中国。",
+      "py": "Zhīqián wǒ méi qùguo Zhōngguó.",
+      "tr": "I had never been to China before.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "…之前",
+      "tr": "before …"
+     },
+     {
+      "text": "三天之前",
+      "tr": "three days ago"
+     },
+     {
+      "text": "不久之前",
+      "tr": "not long ago"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "以前",
+      "register": "neutral",
+      "nuance": "yǐqián: before — the more spoken word"
+     },
+     {
+      "word": "前",
+      "register": "formal",
+      "nuance": "qián: before, ago — short, written (三天前)"
+     }
+    ],
+    "etymology": {
+     "text": "之 (the classical ‘of’) + 前 ‘front’: ‘its front’.",
+     "src": "morphemes: 之 + 前 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "之 is the classical ‘of’: 之前 is literally ‘its front’ — Classical Chinese inside a modern word."
+    ],
+    "pitfalls": [
+     "Like 以前, 之前 follows the time: 星期五之前, not *之前星期五."
+    ],
+    "subtleties": [
+     "With a length of time it means ‘ago’: 三天之前 / 三天前 ‘three days ago’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhihou",
+   "lemma": "之后",
+   "trad": "之後",
+   "pinyin": "zhī hòu",
+   "pos": "NOUN",
+   "senses": [
+    "prep.after",
+    "adv.then"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 之後 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.after",
+     "axis": "register",
+     "value": "after — more formal"
+    },
+    {
+     "concept": "adv.then",
+     "axis": "sequence or time after",
+     "value": "afterwards, after that time (more formal)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "After — the next step, what follows.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "after (a time or event)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.after"
+     },
+     {
+      "id": "s2",
+      "def": "afterwards, then; later (三天之后)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.then"
+     }
+    ],
+    "examples": [
+     {
+      "text": "吃饭之后我们去公园。",
+      "py": "Chīfàn zhīhòu wǒmen qù gōngyuán.",
+      "tr": "After eating we go to the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "十点之后别打电话。",
+      "py": "Shí diǎn zhīhòu bié dǎ diànhuà.",
+      "tr": "Don’t phone after ten.",
+      "register": "neutral",
+      "context": "etiquette",
+      "sense": "s1"
+     },
+     {
+      "text": "之后他回家了。",
+      "py": "Zhīhòu tā huí jiā le.",
+      "tr": "Afterwards he went home.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s2"
+     },
+     {
+      "text": "三天之后，他回来了。",
+      "py": "Sān tiān zhīhòu, tā huílai le.",
+      "tr": "Three days later he came back.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "…之后",
+      "tr": "after …"
+     },
+     {
+      "text": "三天之后",
+      "tr": "three days later"
+     },
+     {
+      "text": "不久之后",
+      "tr": "soon after"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "以后",
+      "register": "neutral",
+      "nuance": "yǐhòu: after — the more spoken word (S14)"
+     },
+     {
+      "word": "后来",
+      "register": "neutral",
+      "nuance": "hòulái: afterwards — about the past"
+     },
+     {
+      "word": "然后",
+      "register": "neutral",
+      "nuance": "ránhòu: then, and then"
+     }
+    ],
+    "etymology": {
+     "text": "之 (the classical ‘of’) + 后 ‘behind, after’.",
+     "src": "morphemes: 之 + 后 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "In Chinese the future is ‘behind’: 之后 / 以后, and 后天 ‘the back day’ is the day after tomorrow."
+    ],
+    "pitfalls": [
+     "之后 follows the event: 下课之后 ‘after class’ — German nach dem Unterricht puts it first."
+    ],
+    "subtleties": [
+     "With a length of time it means ‘later’: 三天之后 ‘three days later’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhidao",
+   "lemma": "直到",
+   "trad": "直到",
+   "pinyin": "zhí dào",
+   "pos": "ADP",
+   "senses": [
+    "prep.until"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.until",
+     "axis": "construction",
+     "value": "opens the phrase: until, not until (直到六点)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Until — all the way up to that point.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "until, up to",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.until"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他直到十二点才回家。",
+      "py": "Tā zhídào shí'èr diǎn cái huí jiā.",
+      "tr": "He didn’t come home until twelve.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我们直到星期五都很忙。",
+      "py": "Wǒmen zhídào xīngqīwǔ dōu hěn máng.",
+      "tr": "We’re busy right up to Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "直到今天我还记得。",
+      "py": "Zhídào jīntiān wǒ hái jìde.",
+      "tr": "I remember it to this day.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "直到…才…",
+      "tr": "not until …"
+     },
+     {
+      "text": "直到现在",
+      "tr": "until now"
+     },
+     {
+      "text": "直到今天",
+      "tr": "to this day"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "到",
+      "register": "neutral",
+      "nuance": "dào: until — the everyday short word (工作到五点)"
+     },
+     {
+      "word": "一直到",
+      "register": "neutral",
+      "nuance": "yìzhí dào: all the way until"
+     }
+    ],
+    "etymology": {
+     "text": "直 ‘straight, directly’ + 到 ‘to arrive; until’.",
+     "src": "morphemes: 直 + 到 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "‘Not until’ is said positively: 他直到十二点才回家 ‘only at twelve did he come home’ — 才 ‘only then’ does the work of the negation."
+    ],
+    "pitfalls": [
+     "‘Not until’ is 直到 … 才 …, without 不: *他直到十二点不回家 is wrong."
+    ],
+    "subtleties": [
+     "直到 stresses the long stretch up to the point; after a verb plain 到 is usual: 我睡到九点 ‘I slept until nine’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
+   }
+  },
+  {
+   "id": "zh:zicong",
+   "lemma": "自从",
+   "trad": "自從",
+   "pinyin": "zì cóng",
+   "pos": "ADP",
+   "senses": [
+    "prep.since"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.since",
+     "axis": "position",
+     "value": "opens the phrase (自从 + time), past only"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Since then — a turning point in the past and everything after it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "since (a point in the past)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.since"
+     }
+    ],
+    "examples": [
+     {
+      "text": "自从他来北京，我们常常见面。",
+      "py": "Zìcóng tā lái Běijīng, wǒmen chángcháng jiànmiàn.",
+      "tr": "Since he came to Beijing, we often meet.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "自从去年夏天，我没见过他。",
+      "py": "Zìcóng qùnián xiàtiān, wǒ méi jiànguo tā.",
+      "tr": "I haven’t seen him since last summer.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "自从有了孩子，他们很少旅行。",
+      "py": "Zìcóng yǒu le háizi, tāmen hěn shǎo lǚxíng.",
+      "tr": "Since they had children they rarely travel.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "自从…以后",
+      "tr": "since …"
+     },
+     {
+      "text": "自从…以来",
+      "tr": "ever since …"
+     },
+     {
+      "text": "自从那天",
+      "tr": "since that day"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "从…以来",
+      "register": "neutral",
+      "nuance": "cóng … yǐlái: since … (until now)"
+     },
+     {
+      "word": "打",
+      "register": "regional",
+      "nuance": "dǎ: from, since — northern colloquial (打去年起)"
+     }
+    ],
+    "etymology": {
+     "text": "自 ‘from’ (formal) + 从 ‘from’: two words for ‘from’ joined.",
+     "src": "morphemes: 自 + 从 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "自从 doubles ‘from’: 自 is the formal ‘from’ (来自中国 ‘from China’), 从 the everyday one."
+    ],
+    "pitfalls": [
+     "自从 is only for the past: ‘from tomorrow on’ is 从明天起, not *自从明天."
+    ],
+    "subtleties": [
+     "自从 usually closes with 以后 or 以来: 自从他来了以后… — the frame marks the stretch of time."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 自從 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
+   }
+  },
+  {
+   "id": "zh:yilai",
+   "lemma": "以来",
+   "trad": "以來",
+   "pinyin": "yǐ lái",
+   "pos": "ADP",
+   "senses": [
+    "prep.since"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.since",
+     "axis": "position",
+     "value": "closes the phrase (… 以来): since, for the past …"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Since, for the past … — a stretch of time reaching up to now.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "since; for (the past …), up to now",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.since"
+     }
+    ],
+    "examples": [
+     {
+      "text": "三年以来他都在北京工作。",
+      "py": "Sān nián yǐlái tā dōu zài Běijīng gōngzuò.",
+      "tr": "For the past three years he has worked in Beijing.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "从去年以来，我常常坐火车。",
+      "py": "Cóng qùnián yǐlái, wǒ chángcháng zuò huǒchē.",
+      "tr": "Since last year I often take the train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "这是有史以来最热的夏天。",
+      "py": "Zhè shì yǒushǐ yǐlái zuì rè de xiàtiān.",
+      "tr": "This is the hottest summer on record.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "从…以来",
+      "tr": "since …"
+     },
+     {
+      "text": "三年以来",
+      "tr": "for the past three years"
+     },
+     {
+      "text": "有史以来",
+      "tr": "in all history, on record"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "来",
+      "register": "formal",
+      "nuance": "lái: short written form (三年来)"
+     },
+     {
+      "word": "以后",
+      "register": "neutral",
+      "nuance": "yǐhòu: after, since then — not limited to the time up to now"
+     }
+    ],
+    "etymology": {
+     "text": "以 ‘by, from’ + 来 ‘to come’: ‘(time) coming up to now’.",
+     "src": "morphemes: 以 + 来 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "有史以来 ‘since there has been history’ = ‘ever, on record’."
+    ],
+    "pitfalls": [
+     "以来 closes the phrase: 从去年以来 / 三年以来 — and it always reaches up to now."
+    ],
+    "subtleties": [
+     "Like German seit + present (seit drei Jahren arbeitet er in Peking), 三年以来 + plain verb needs no special tense."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 以來 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "after"
+   }
+  },
+  {
+   "id": "zh:qijian",
+   "lemma": "期间",
+   "trad": "期間",
+   "pinyin": "qī jiān",
+   "pos": "NOUN",
+   "senses": [
+    "prep.during",
+    "time.period"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 期間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 期間 as ‘period; time; duration’; after a noun (假期期间, 春节期间) it is the standard word for ‘during’ — the use taught here"
+    }
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "During — a festival, a meeting, a holiday period.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "during (after a noun: 假期期间)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.during"
+     },
+     {
+      "id": "s2",
+      "def": "period, time",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.period"
+     }
+    ],
+    "examples": [
+     {
+      "text": "假期期间我在家。",
+      "py": "Jiàqī qījiān wǒ zài jiā.",
+      "tr": "During the holidays I’m at home.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "春节期间火车上人很多。",
+      "py": "Chūnjié qījiān huǒchē shang rén hěn duō.",
+      "tr": "During the Spring Festival the trains are crowded.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "会议期间请关手机。",
+      "py": "Huìyì qījiān qǐng guān shǒujī.",
+      "tr": "Please switch off your phones during the meeting.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "这段期间我很忙。",
+      "py": "Zhè duàn qījiān wǒ hěn máng.",
+      "tr": "I’m very busy during this period.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "…期间",
+      "tr": "during …"
+     },
+     {
+      "text": "春节期间",
+      "tr": "during the Spring Festival"
+     },
+     {
+      "text": "在…期间",
+      "tr": "during …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "的时候",
+      "register": "neutral",
+      "nuance": "de shíhou: when, while — after a verb phrase (吃饭的时候)"
+     },
+     {
+      "word": "里",
+      "register": "neutral",
+      "nuance": "li: in, during (假期里)"
+     },
+     {
+      "word": "时",
+      "register": "formal",
+      "nuance": "shí: when — written (吃饭时)"
+     }
+    ],
+    "etymology": {
+     "text": "期 ‘set time, period’ + 间 ‘interval, between’.",
+     "src": "morphemes: 期 + 间 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "间 is a gate (门) with the sun (日) shining through the gap — an ‘interval’ in space (之间, S12) and in time (期间)."
+    ],
+    "pitfalls": [
+     "期间 follows a noun or a named period: 假期期间 ‘during the holidays’; after a verb use …的时候: 吃饭的时候."
+    ],
+    "subtleties": [
+     "期间 is a bit formal (news, notices); in speech …的时候 or …里 is usual."
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.period",
+     "axis": "kind of period",
+     "value": "the time during which something happens, after the event (假期期间) — written"
+    }
+   ]
+  },
+  {
+   "id": "zh:shihou",
+   "lemma": "时候",
+   "trad": "時候",
+   "pinyin": "shí hou",
+   "pos": "NOUN",
+   "senses": [
+    "conj.when",
+    "time.moment"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 時候 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "role": "time, moment — after a clause, …的时候 is ‘when, while …’ (S15 as a frame of time, S18 as the linking word for ‘when’: 我饿的时候 ‘when I’m hungry’); 什么时候 ‘when?’ (S10)",
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "construction",
+     "value": "…的时候 after the clause: when, while"
+    },
+    {
+     "concept": "time.moment",
+     "axis": "register",
+     "value": "everyday: time, moment (那时候, 这个时候)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 時候 as ‘period of time; point in time’; the course concept is the clause frame …的時候 ‘when …’, the standard spoken equivalent of the conjunction (written: …時)"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The moment when something happens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "time, moment, (point in) time",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.moment"
+     },
+     {
+      "id": "s2",
+      "def": "(…的时候, after a clause) when, while — the Chinese ‘when’ comes after its clause",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.when"
+     }
+    ],
+    "examples": [
+     {
+      "text": "吃饭的时候别看手机。",
+      "py": "Chīfàn de shíhou bié kàn shǒujī.",
+      "tr": "Don’t look at your phone while eating.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2"
+     },
+     {
+      "text": "我小的时候住在北京。",
+      "py": "Wǒ xiǎo de shíhou zhù zài Běijīng.",
+      "tr": "When I was little I lived in Beijing.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s2"
+     },
+     {
+      "text": "他来的时候，我们都很高兴。",
+      "py": "Tā lái de shíhou, wǒmen dōu hěn gāoxìng.",
+      "tr": "When he came, we were all very happy.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s2"
+     },
+     {
+      "text": "这个时候他在家。",
+      "py": "Zhège shíhou tā zài jiā.",
+      "tr": "At this time he’s at home.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "…的时候",
+      "tr": "when …, while …"
+     },
+     {
+      "text": "那个时候",
+      "tr": "at that time"
+     },
+     {
+      "text": "什么时候",
+      "tr": "when?"
+     },
+     {
+      "text": "有时候",
+      "tr": "sometimes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "时间",
+      "register": "neutral",
+      "nuance": "shíjiān: time as an amount (我没有时间 ‘I have no time’)"
+     },
+     {
+      "word": "时",
+      "register": "formal",
+      "nuance": "shí: when — written (吃饭时)"
+     }
+    ],
+    "etymology": {
+     "text": "时 ‘time’ + 候 ‘to wait; season, moment’.",
+     "src": "morphemes: 时 + 候 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "时候 is the moment, 时间 the time you have: 我没有时间 ‘I have no time’ — never *没有时候."
+    ],
+    "pitfalls": [
+     "…的时候 comes AFTER the clause: 我吃饭的时候 ‘when I eat’ — English when and German wenn come first.",
+     "For ‘I have no time’ use 时间, not 时候.",
+     "Not a question: …的时候 is ‘when’ in a statement; the question ‘when?’ is 什么时候 (你什么时候来？)."
+    ],
+    "subtleties": [
+     "In careful speech 在 opens the frame: 在我小的时候 ‘when I was little’.",
+     "In writing the short …时 replaces …的时候: 吃饭时 ‘while eating’, 到北京时 ‘when (we) arrived in Beijing’."
+    ]
+   }
+  },
+  {
+   "id": "zh:ban",
+   "lemma": "半",
+   "trad": "半",
+   "pinyin": "bàn",
+   "pos": "NUM",
+   "senses": [
+    "num.half"
+   ],
+   "role": "half — 三点半 ‘half past three’, 半个小时 ‘half an hour’ (S15)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "num.half",
+     "axis": "bound or free",
+     "value": "bound: before a measure word or after the hour (半个小时, 三点半)"
+    }
+   ]
+  }
+ ],
+ "absent": [
+  {
+   "concept": "prep.attime",
+   "reason": "Chinese uses no preposition for a clock time: the time word itself stands before the verb.",
+   "use": "time + verb: 我七点吃早饭 ‘I have breakfast at seven’; 我们下午三点见 ‘let’s meet at 3 p.m.’. Formal writing may open with 在 (在下午三点), never in everyday speech."
+  },
+  {
+   "concept": "prep.onday",
+   "reason": "Chinese uses no preposition for a day: the day word stands before the verb (or at the start).",
+   "use": "星期一我工作 / 我星期一工作 ‘I work on Monday’; 五月一号放假 ‘there is a holiday on May 1st’. Formal 在 is possible (在星期一), but not with 今天 / 明天 / 昨天."
+  },
+  {
+   "concept": "prep.inmonth",
+   "reason": "Chinese uses no preposition for a month, a season or a year: the time word stands before the verb.",
+   "use": "我五月去北京 ‘I go to Beijing in May’; 冬天很冷 ‘it is cold in winter’; 2008年 … ‘in 2008 …’. Written style may add 在 (在2008年); to say what a month contains, 在 is the verb ‘to be in’: 我的生日在二月."
+  }
+ ]
+}

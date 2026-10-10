@@ -1,0 +1,1468 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:kurkum",
+   "lemma": "كُرْكُم",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.turmeric",
+    "sci.curcumin"
+   ],
+   "features": {
+    "root": {
+     "none": "an old wandering word (Aramaic kurkmā): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "kurkum",
+   "forms": {
+    "N;NOM;SG;INDF": "كُرْكُمٌ",
+    "N;ACC;SG;INDF": "كُرْكُمًا",
+    "N;GEN;SG;INDF": "كُرْكُمٍ",
+    "N;NOM;SG;DEF": "الْكُرْكُمُ",
+    "N;ACC;SG;DEF": "الْكُرْكُمَ",
+    "N;GEN;SG;DEF": "الْكُرْكُمِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The golden-yellow spice of rice dishes and pickles — and, lately, of health drinks.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "turmeric — the plant (Curcuma longa) and its rhizome, fresh or dried and ground (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.turmeric"
+     },
+     {
+      "id": "s2",
+      "def": "curcumin, the yellow pigment of turmeric (Wiktionary)",
+      "register": [
+       "technical"
+      ],
+      "domains": [
+       "chemistry"
+      ],
+      "concept": "sci.curcumin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَضَفْتُ قَلِيلًا مِنَ الْكُرْكُمِ إِلَى الْأَرُزِّ.",
+      "tr": "I added a little turmeric to the rice.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكُرْكُمُ يُعْطِي الطَّعَامَ لَوْنًا أَصْفَرَ.",
+      "tr": "Turmeric gives food a yellow colour.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ كُرْكُمًا طَازَجًا مِنَ السُّوقِ.",
+      "tr": "I bought fresh turmeric (root) at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "يَشْرَبُ كَثِيرُونَ الْحَلِيبَ بِالْكُرْكُمِ.",
+      "tr": "Many people drink milk with turmeric.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ اسْمُ الْكُرْكُمِ أَيْضًا عَلَى الْمَادَّةِ الصَّفْرَاءِ الَّتِي تُلَوِّنُهُ.",
+      "tr": "The name kurkum is also given to the yellow substance that colours it (curcumin).",
+      "register": "technical",
+      "context": "chemistry",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كُرْكُمٌ مَطْحُونٌ",
+      "tr": "ground turmeric"
+     },
+     {
+      "text": "جَذْرُ الْكُرْكُمِ",
+      "tr": "turmeric root"
+     },
+     {
+      "text": "أَرُزٌّ بِالْكُرْكُمِ",
+      "tr": "turmeric rice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "خرقوم",
+      "register": "regional",
+      "nuance": "Moroccan Arabic name of the spice (Wiktionary’s translation table, ḵarqūm)",
+      "region": "Morocco"
+     }
+    ],
+    "etymology": {
+     "text": "Semitic cognates are Aramaic kurkmā, Akkadian kurkanū and Hebrew כַּרְכֹּם (karkom), but Wiktionary prefers a path via India, from Sanskrit कुङ्कुम (kuṅkuma); akin to Middle Persian kurkum and Ancient Greek κρόκος (krókos).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The botanical name Curcuma is the Arabic word كُرْكُم, taken into Medieval Latin.",
+     "Hebrew כַּרְכֹּם (karkom), the saffron of the Song of Songs (4:14), is the same old word; turmeric itself is כּוּרְכּוּם (kurkum) in Modern Hebrew.",
+     "Greek κρόκος (krókos, crocus, saffron) is a relative of the word — Turkish uses a different, Persian name: zerdeçal (“yellow wood”)."
+    ],
+    "pitfalls": [
+     "Not saffron: saffron is زَعْفَرَان. Wiktionary even lists “Indian saffron” as a meaning of كُرْكُم, because the cheaper spice colours food the same way.",
+     "A mass noun without plural: one root is جَذْرُ كُرْكُمٍ, not *كُرْكُمَة."
+    ],
+    "subtleties": [
+     "One word for the fresh rhizome and the dried powder; when the difference matters say كُرْكُمٌ طَازَجٌ (fresh) or كُرْكُمٌ مَطْحُونٌ (ground).",
+     "In chemistry texts كُرْكُم can mean the pigment curcumin (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "ar:himhim",
+   "lemma": "حِمْحِم",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.borage",
+    "nature.bugloss"
+   ],
+   "features": {
+    "root": "ح م م",
+    "pattern": {
+     "none": "a reduplicated word (ḥim-ḥim): it fits no measure of ح م م"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḥimḥim",
+   "forms": {
+    "N;NOM;SG;INDF": "حِمْحِمٌ",
+    "N;ACC;SG;INDF": "حِمْحِمًا",
+    "N;GEN;SG;INDF": "حِمْحِمٍ",
+    "N;NOM;SG;DEF": "الْحِمْحِمُ",
+    "N;ACC;SG;DEF": "الْحِمْحِمَ",
+    "N;GEN;SG;DEF": "الْحِمْحِمِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "rare",
+    "register": [
+     "technical"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hairy leaves that taste of cucumber and sky-blue star-shaped flowers — a herb of the old Arab physicians.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "borage (Borago officinalis), its leaves and flowers (mass noun)",
+      "register": [
+       "technical"
+      ],
+      "concept": "veg.borage"
+     },
+     {
+      "id": "s2",
+      "def": "bugloss and viper’s bugloss — related plants of the genera Anchusa and Echium (Wiktionary)",
+      "register": [
+       "technical"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "nature.bugloss"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَزْهَارُ الْحِمْحِمِ زَرْقَاءُ.",
+      "tr": "Borage flowers are blue.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "تُؤْكَلُ أَوْرَاقُ الْحِمْحِمِ الصَّغِيرَةُ نِيئَةً فِي السَّلَطَةِ.",
+      "tr": "The young leaves of borage are eaten raw in salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "اِسْتَعْمَلَ الْأَطِبَّاءُ الْعَرَبُ الْحِمْحِمَ فِي أَدْوِيَةٍ تُسَبِّبُ الْعَرَقَ.",
+      "tr": "Arab physicians used borage in medicines that make one sweat.",
+      "register": "neutral",
+      "context": "history of medicine",
+      "sense": "s1"
+     },
+     {
+      "text": "زَرَعْتُ حِمْحِمًا فِي الْحَدِيقَةِ.",
+      "tr": "I planted borage in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ الْحِمْحِمُ فِي كُتُبِ النَّبَاتِ عَلَى أَنْوَاعٍ قَرِيبَةٍ مِنْ لِسَانِ الثَّوْرِ أَيْضًا.",
+      "tr": "In botanical books ḥimḥim is also used for related kinds of bugloss.",
+      "register": "technical",
+      "context": "botany",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ الْحِمْحِمِ",
+      "tr": "borage leaves"
+     },
+     {
+      "text": "أَزْهَارُ الْحِمْحِمِ",
+      "tr": "borage flowers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "Wiktionary gives no other name for borage; لِسَانُ الثَّوْرِ (“ox tongue”) is its relative bugloss (Anchusa, Echium), and the alternative form حَمَاحِم is the same word.",
+    "etymology": {
+     "text": "From the root ح م م (“to become hot, to have a fever”; compare حَمَّام “bath”): Arab physicians used the leaves in medicines that make one sweat (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives حُمَّى (fever) and حَمَّام (bath), the source of Turkish hamam, Greek χαμάμ and English hammam.",
+     "English borage comes from Medieval Latin borrago, which Wiktionary derives either from Latin borra (“rough hair”) or from Arabic أَبُو الْعَرَقِ (“father of sweat”)."
+    ],
+    "pitfalls": [
+     "Not لِسَانُ الثَّوْرِ: Wiktionary gives that name to bugloss (Anchusa, Echium), a close relative with similar hairy leaves.",
+     "A botanist’s and herbalist’s word: in a greengrocer’s or a cookbook most Arabic speakers will not know it without a picture."
+    ],
+    "subtleties": [
+     "Wiktionary uses حِمْحِم for borage and also for Anchusa and Echium; in a recipe it is borage.",
+     "A mass noun without plural: one plant = نَبْتَةُ حِمْحِمٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:sarmaq",
+   "lemma": "سَرْمَق",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.fathen",
+    "veg.orache"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Middle Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.orache",
+     "axis": "frequency",
+     "value": "technical / botanical name"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "sarmaq",
+   "forms": {
+    "N;NOM;SG;INDF": "سَرْمَقٌ",
+    "N;ACC;SG;INDF": "سَرْمَقًا",
+    "N;GEN;SG;INDF": "سَرْمَقٍ",
+    "N;NOM;SG;DEF": "السَّرْمَقُ",
+    "N;ACC;SG;DEF": "السَّرْمَقَ",
+    "N;GEN;SG;DEF": "السَّرْمَقِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "rare",
+    "register": [
+     "technical"
+    ],
+    "connotation": "neutral",
+    "feeling": "A dusty-green weed of fields and gardens — cooked like spinach in lean times and by foragers today.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goosefoot, fat hen, lamb’s quarters (Chenopodium; mass noun)",
+      "register": [
+       "technical"
+      ],
+      "concept": "veg.fathen"
+     },
+     {
+      "id": "s2",
+      "def": "orache (Atriplex) — Wiktionary gives this genus too",
+      "register": [
+       "technical"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "veg.orache"
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّرْمَقُ نَبَاتٌ بَرِّيٌّ يَنْمُو فِي الْحُقُولِ.",
+      "tr": "Fat hen is a wild plant that grows in fields.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "طَبَخَتْ جَدَّتِي السَّرْمَقَ مِثْلَ السَّبَانِخِ.",
+      "tr": "My grandmother cooked fat hen like spinach.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "تُؤْكَلُ أَوْرَاقُ السَّرْمَقِ الصَّغِيرَةُ.",
+      "tr": "The young leaves of fat hen are eaten.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ السَّرْمَقُ أَيْضًا عَلَى نَبَاتِ الْقَطَفِ.",
+      "tr": "sarmaq is also used for orache (qaṭaf).",
+      "register": "technical",
+      "context": "botany",
+      "sense": "s2"
+     },
+     {
+      "text": "فِي بَعْضِ الْمَعَاجِمِ السَّرْمَقُ هُوَ الْقَطَفُ.",
+      "tr": "In some dictionaries sarmaq is orache.",
+      "register": "technical",
+      "context": "dictionary",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ السَّرْمَقِ",
+      "tr": "fat-hen leaves"
+     },
+     {
+      "text": "سَرْمَقٌ بَرِّيٌّ",
+      "tr": "wild goosefoot"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday name; Wiktionary gives سَرْمَق with the alternative forms سَرْمَج and سَرْمَة, which are spellings of the same word.",
+    "etymology": {
+     "text": "From Middle Persian *sarmag (“garden orache, Atriplex hortensis”), found in Classical Persian as سرمه (sarma) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Latin genus name Chenopodium is Greek for “goose foot” (χήν + πούς), after the shape of the leaves — hence English goosefoot."
+    ],
+    "pitfalls": [
+     "Wiktionary uses سَرْمَق for goosefoot (Chenopodium) and for orache (Atriplex); for orache the usual word is قَطَف.",
+     "Few speakers know the word: in a shop or a recipe a description or the Latin name is safer."
+    ],
+    "subtleties": [
+     "The Persian source meant garden orache, yet Wiktionary gives the Arabic word first for goosefoot (Chenopodium): the two leafy weeds look alike, and the name covers both."
+    ]
+   }
+  },
+  {
+   "id": "ar:wasabi",
+   "lemma": "وَاسَابِي",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.wasabi"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Japanese): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "wāsābī",
+   "forms": {
+    "N;NOM;SG;INDF": "وَاسَابِي",
+    "N;ACC;SG;INDF": "وَاسَابِي",
+    "N;GEN;SG;INDF": "وَاسَابِي",
+    "N;NOM;SG;DEF": "الْوَاسَابِي",
+    "N;ACC;SG;DEF": "الْوَاسَابِي",
+    "N;GEN;SG;DEF": "الْوَاسَابِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org), translation table of “wasabi” (وَسَابِي, masculine); usual spelling واسابي",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A sharp green paste from sushi bars — one dab too many and it shoots up the nose.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wasabi — the Japanese plant (Eutrema japonicum) and the hot green paste made from its grated rhizome (mass noun, indeclinable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wasabi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يُقَدَّمُ السُّوشِي مَعَ الْوَاسَابِي وَالزَّنْجَبِيلِ.",
+      "tr": "Sushi is served with wasabi and ginger.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "الْوَاسَابِي حَارٌّ جِدًّا.",
+      "tr": "Wasabi is very hot.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ أُنْبُوبَ وَاسَابِي مِنَ الْمَتْجَرِ.",
+      "tr": "I bought a tube of wasabi at the shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَعْجُونُ الْوَاسَابِي",
+      "tr": "wasabi paste"
+     },
+     {
+      "text": "صَلْصَةُ الْوَاسَابِي",
+      "tr": "wasabi sauce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No native word: the Japanese name is borrowed; only its spelling varies (واسابي, وسابي).",
+    "etymology": {
+     "text": "Borrowed from Japanese 山葵 (wasabi). Wiktionary has no Arabic entry; its translation table gives وَسَابِي, masculine.",
+     "src": "Wiktionary (kaikki.org), translation table of “wasabi”"
+    },
+    "funFacts": [
+     "Most “wasabi” sold outside Japan is horseradish coloured green — in Arabic terms فُجْلٌ حَارٌّ (node veg.2a) rather than real wasabi."
+    ],
+    "pitfalls": [
+     "The spelling is not fixed: this course writes واسابي, with long ā, as it is usually written; Wiktionary’s translation table has وَسَابِي.",
+     "Indeclinable (ends in -ī): no case endings, only الـ for “the”: الْوَاسَابِي."
+    ],
+    "subtleties": [
+     "Masculine (Wiktionary): الْوَاسَابِي حَارٌّ, not *حَارَّةٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:rawand",
+   "lemma": "رَاوَنْد",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.rhubarb"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "rāwand",
+   "forms": {
+    "N;NOM;SG;INDF": "رَاوَنْدٌ",
+    "N;ACC;SG;INDF": "رَاوَنْدًا",
+    "N;GEN;SG;INDF": "رَاوَنْدٍ",
+    "N;NOM;SG;DEF": "الرَّاوَنْدُ",
+    "N;ACC;SG;DEF": "الرَّاوَنْدَ",
+    "N;GEN;SG;DEF": "الرَّاوَنْدِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sour pink stalks for European pies and jams — and, in the Arabic tradition, a bitter root from the apothecary.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rhubarb (Rheum): the plant, its sour edible stalks and its medicinal root (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.rhubarb"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الرَّاوَنْدُ حَامِضٌ جِدًّا.",
+      "tr": "Rhubarb is very sour.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "صَنَعْتُ مُرَبَّى الرَّاوَنْدِ بِالسُّكَّرِ.",
+      "tr": "I made rhubarb jam with sugar.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا تَأْكُلْ أَوْرَاقَ الرَّاوَنْدِ فَهِيَ سَامَّةٌ.",
+      "tr": "Don’t eat rhubarb leaves — they are poisonous.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "اُسْتُعْمِلَ جَذْرُ الرَّاوَنْدِ دَوَاءً مُنْذُ الْقِدَمِ.",
+      "tr": "Rhubarb root has been used as a medicine since ancient times.",
+      "register": "neutral",
+      "context": "history of medicine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سِيقَانُ الرَّاوَنْدِ",
+      "tr": "rhubarb stalks"
+     },
+     {
+      "text": "مُرَبَّى الرَّاوَنْدِ",
+      "tr": "rhubarb jam"
+     },
+     {
+      "text": "جَذْرُ الرَّاوَنْدِ",
+      "tr": "rhubarb root"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رِيبَاس",
+      "register": "neutral",
+      "nuance": "the wild Syrian rhubarb (Rheum ribes) of the region’s mountains, whose stalks are eaten; Wiktionary also gives it for currants (Ribes)"
+     }
+    ],
+    "etymology": {
+     "text": "From Persian ریوند (rivand) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish ravent and Russian ревень (revenʹ) come from the same Persian word; English rhubarb and German Rhabarber go back instead to Medieval Latin rheubarbarum, “foreign rhubarb”."
+    ],
+    "pitfalls": [
+     "Only the stalks are eaten: the leaves are poisonous (oxalic acid).",
+     "رِيبَاس is not simply a synonym: Wiktionary gives it for the wild Syrian rhubarb and also for currants."
+    ],
+    "subtleties": [
+     "In older Arabic texts رَاوَنْد is first of all the dried medicinal root (a purgative traded from Central and East Asia), not a food."
+    ]
+   }
+  },
+  {
+   "id": "ar:khawlanjan",
+   "lemma": "خَوْلَنْجَان",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.galangal"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḫawlanjān",
+   "forms": {
+    "N;NOM;SG;INDF": "خَوْلَنْجَانٌ",
+    "N;ACC;SG;INDF": "خَوْلَنْجَانًا",
+    "N;GEN;SG;INDF": "خَوْلَنْجَانٍ",
+    "N;NOM;SG;DEF": "الْخَوْلَنْجَانُ",
+    "N;ACC;SG;DEF": "الْخَوْلَنْجَانَ",
+    "N;GEN;SG;DEF": "الْخَوْلَنْجَانِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A pine-sharp cousin of ginger — Thai curries today, the herbalist’s drawer in the old Arab world.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "galangal (Alpinia, especially Alpinia officinarum), its aromatic rhizome (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.galangal"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْخَوْلَنْجَانُ يُشْبِهُ الزَّنْجَبِيلَ.",
+      "tr": "Galangal looks like ginger.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "أَضِفْ شَرَائِحَ مِنَ الْخَوْلَنْجَانِ إِلَى الْحَسَاءِ.",
+      "tr": "Add slices of galangal to the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "يُبَاعُ الْخَوْلَنْجَانُ الْمَطْحُونُ عِنْدَ الْعَطَّارِ.",
+      "tr": "Ground galangal is sold at the herbalist’s.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جَذْرُ الْخَوْلَنْجَانِ",
+      "tr": "galangal root"
+     },
+     {
+      "text": "خَوْلَنْجَانٌ مَطْحُونٌ",
+      "tr": "ground galangal"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "خُولَنْجَان",
+      "register": "neutral",
+      "nuance": "the same word vocalized with ū (ḵūlanjān); Wiktionary gives both"
+     }
+    ],
+    "etymology": {
+     "text": "From Persian قولنجان (qulanjân), from Sanskrit कुलञ्जन (kulañjana), possibly from Chinese 高良薑 (gāoliángjiāng) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English galangal came from this Arabic word through Old French — and if Wiktionary’s guess is right, the chain starts in Chinese 高良薑."
+    ],
+    "pitfalls": [
+     "Not ginger: galangal is harder, woodier and more peppery; زَنْجَبِيل does not replace it one for one."
+    ],
+    "subtleties": [
+     "Two vocalizations are standard: خَوْلَنْجَان (ḵawlanjān) and خُولَنْجَان (ḵūlanjān) (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qataf",
+   "lemma": "قَطَف",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.orache"
+   ],
+   "features": {
+    "root": {
+     "none": "the plant name comes from Syriac (qaṭəp̄ā), not from قَطَفَ “to pick”"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.orache",
+     "axis": "frequency",
+     "value": "the usual name"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "qaṭaf",
+   "forms": {
+    "N;NOM;SG;INDF": "قَطَفٌ",
+    "N;ACC;SG;INDF": "قَطَفًا",
+    "N;GEN;SG;INDF": "قَطَفٍ",
+    "N;NOM;SG;DEF": "الْقَطَفُ",
+    "N;ACC;SG;DEF": "الْقَطَفَ",
+    "N;GEN;SG;DEF": "الْقَطَفِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Silvery, salty leaves of a desert shrub — grazing for camels, a wild green for people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "orache, saltbush (Atriplex): the wild shrubs and the garden orache (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.orache"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَنْمُو الْقَطَفُ فِي الْأَرَاضِي الْمَالِحَةِ.",
+      "tr": "Saltbush grows on salty land.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "طَعْمُ أَوْرَاقِ الْقَطَفِ مَالِحٌ قَلِيلًا.",
+      "tr": "Orache leaves taste a little salty.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "تُطْبَخُ أَوْرَاقُ الْقَطَفِ مِثْلَ السَّبَانِخِ.",
+      "tr": "Orache leaves are cooked like spinach.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "تَأْكُلُ الْإِبِلُ الْقَطَفَ.",
+      "tr": "Camels eat saltbush.",
+      "register": "neutral",
+      "context": "animals",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ الْقَطَفِ",
+      "tr": "orache leaves"
+     },
+     {
+      "text": "شُجَيْرَاتُ الْقَطَفِ",
+      "tr": "saltbush shrubs"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَرْمَق",
+      "register": "technical",
+      "nuance": "older botanical name, from Persian “garden orache”; Wiktionary gives it for goosefoot (Chenopodium) as well"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the saltbush name must come from Classical Syriac ܩܛܦܐ (qaṭəp̄ā, “saltbush”), whose vocalization it mirrors; it only looks like the verb قَطَفَ (“to pick”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Job 30:4 describes starving men “who pluck saltbush” — הַקֹּטְפִים מַלּוּחַ — with the Hebrew twin of the verb قَطَفَ."
+    ],
+    "pitfalls": [
+     "Only the vowels separate قَطَف (qaṭaf, saltbush) from قَطْف (qaṭf, picking) and قِطْف (qiṭf, a bunch) (Wiktionary)."
+    ],
+    "subtleties": [
+     "Wiktionary gives the whole genus Atriplex: wild desert saltbushes and the cultivated garden orache share the name."
+    ]
+   }
+  },
+  {
+   "id": "ar:ushnan",
+   "lemma": "أُشْنَان",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.glasswort",
+    "sci.potash"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ʾušnān",
+   "forms": {
+    "N;NOM;SG;INDF": "أُشْنَانٌ",
+    "N;ACC;SG;INDF": "أُشْنَانًا",
+    "N;GEN;SG;INDF": "أُشْنَانٍ",
+    "N;NOM;SG;DEF": "الْأُشْنَانُ",
+    "N;ACC;SG;DEF": "الْأُشْنَانَ",
+    "N;GEN;SG;DEF": "الْأُشْنَانِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "dated",
+    "register": [
+     "literary"
+    ],
+    "connotation": "neutral",
+    "feeling": "Old-fashioned soap: salty marsh plants whose ash washed hands and clothes for centuries.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "glasswort, saltwort — salt-loving plants of the amaranth family, among them Salicornia (Wiktionary; mass noun)",
+      "register": [
+       "literary"
+      ],
+      "concept": "veg.glasswort"
+     },
+     {
+      "id": "s2",
+      "def": "potash — the alkaline ash of these plants, used for washing (Wiktionary)",
+      "register": [
+       "literary"
+      ],
+      "concept": "sci.potash"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَنْمُو الْأُشْنَانُ عَلَى شَوَاطِئِ الْبَحْرِ وَفِي السِّبَاخِ.",
+      "tr": "Glasswort grows on seashores and in salt marshes.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "سِيقَانُ الْأُشْنَانِ مَالِحَةٌ وَتُؤْكَلُ مُخَلَّلَةً.",
+      "tr": "Glasswort stems are salty and are eaten pickled.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَ النَّاسُ يَغْسِلُونَ أَيْدِيَهُمْ بِالْأُشْنَانِ.",
+      "tr": "People used to wash their hands with ushnan.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَمَادُ الْأُشْنَانِ",
+      "tr": "glasswort ash"
+     },
+     {
+      "text": "الْغَسْلُ بِالْأُشْنَانِ",
+      "tr": "washing with ushnan"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday modern word for the vegetable; modern texts tend to use the Latin genus name Salicornia or a description.",
+    "etymology": {
+     "text": "Borrowed from Classical Persian اُشْنَان (ušnān) or its Middle Persian ancestor; related to Arabic أُشْنَة (“moss, lichen”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ash of such plants was also called al-qily in Arabic — the origin of English alkali.",
+     "English glasswort tells the same story: the ash was used to make glass, and soap."
+    ],
+    "pitfalls": [
+     "A classical word for a group of salt plants (Salsola, Salicornia, Anabasis … in Wiktionary), not a greengrocer’s name for the sea vegetable."
+    ],
+    "subtleties": [
+     "In classical texts the word mostly means the washing agent, not a food: the same word names the plant and its ash."
+    ]
+   }
+  },
+  {
+   "id": "ar:jummar",
+   "lemma": "جُمَّار",
+   "pos": "NOUN",
+   "senses": [
+    "veg.heartofpalm"
+   ],
+   "features": {
+    "root": "ج م ر",
+    "pattern": "فُعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جُمَّارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a food (heart of palm): not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "jummār",
+   "forms": {
+    "N;NOM;SG;INDF": "جُمَّارٌ",
+    "N;ACC;SG;INDF": "جُمَّارًا",
+    "N;GEN;SG;INDF": "جُمَّارٍ",
+    "N;NOM;SG;DEF": "الْجُمَّارُ",
+    "N;ACC;SG;DEF": "الْجُمَّارَ",
+    "N;GEN;SG;DEF": "الْجُمَّارِ",
+    "N;NOM;PL;INDF": "جُمَّارَاتٌ",
+    "N;ACC;PL;INDF": "جُمَّارَاتٍ",
+    "N;GEN;PL;INDF": "جُمَّارَاتٍ",
+    "N;NOM;PL;DEF": "الْجُمَّارَاتُ",
+    "N;ACC;PL;DEF": "الْجُمَّارَاتِ",
+    "N;GEN;PL;DEF": "الْجُمَّارَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The white, crunchy, faintly sweet core of a date palm — a rare treat, because taking it kills the palm.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "heart of palm, palm cabbage — the edible core and growing bud of a palm, above all the date palm; plural جُمَّارَات",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.heartofpalm"
+     },
+     {
+      "id": "s2",
+      "def": "the pith of other fruits (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَكَلْنَا الْجُمَّارَ مَعَ التَّمْرِ.",
+      "tr": "We ate heart of palm with dates.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجُمَّارُ أَبْيَضُ وَطَرِيٌّ.",
+      "tr": "Heart of palm is white and tender.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ عُلْبَةَ جُمَّارٍ.",
+      "tr": "I bought a tin of hearts of palm.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "كُنَّا عِنْدَ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ فَأُتِيَ بِجُمَّارٍ.",
+      "tr": "We were with the Prophet, and some heart of palm was brought to him.",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جُمَّارُ النَّخْلِ",
+      "tr": "heart of the date palm"
+     },
+     {
+      "text": "سَلَطَةُ الْجُمَّارِ",
+      "tr": "heart-of-palm salad"
+     },
+     {
+      "text": "عُلْبَةُ جُمَّارٍ",
+      "tr": "a tin of hearts of palm"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "كُنَّا عِنْدَ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ فَأُتِيَ بِجُمَّارٍ",
+      "tr": "We were with the Prophet, and some heart of palm was brought to him",
+      "kind": "quote",
+      "source": "Ṣaḥīḥ al-Bukhārī, Kitāb al-ʿIlm (ʿAbdullāh ibn ʿUmar)",
+      "meaning": "The opening of the hadith in which the Prophet, with heart of palm brought to him, asks which tree is like a Muslim — the date palm.",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "قَلْب",
+      "register": "neutral",
+      "nuance": "“heart”: Wiktionary’s translation table also gives قَلْب (qalb, qilb, qulb) for the palm heart — the general word, not specific"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the alternative form جَامُور (jāmūr) shows Aramaic borrowing, like كَافُور (“bract of the date-palm inflorescence”) and تَمْر (“date”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the hadith of Ibn ʿUmar, heart of palm was brought to the Prophet and he asked his companions which tree is like a Muslim: the answer was the date palm."
+    ],
+    "pitfalls": [
+     "A date palm has only one growing point: cutting out the heart kills the tree, so جُمَّار of date palms is a by-product of felling.",
+     "Do not translate “heart of palm” word for word as قَلْبُ النَّخْلَةِ in a recipe — the word is جُمَّار."
+    ],
+    "subtleties": [
+     "Countable (plural جُمَّارَات, Wiktionary) for pieces or palms, but as food the singular is used like a mass noun: أَكَلْنَا الْجُمَّارَ.",
+     "Wiktionary also lists the alternative forms جُمَّارَة and جَامُور."
+    ]
+   }
+  },
+  {
+   "id": "ar:jarbuz",
+   "lemma": "جَرْبُوز",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.amaranth"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "jarbūz",
+   "forms": {
+    "N;NOM;SG;INDF": "جَرْبُوزٌ",
+    "N;ACC;SG;INDF": "جَرْبُوزًا",
+    "N;GEN;SG;INDF": "جَرْبُوزٍ",
+    "N;NOM;SG;DEF": "الْجَرْبُوزُ",
+    "N;ACC;SG;DEF": "الْجَرْبُوزَ",
+    "N;GEN;SG;DEF": "الْجَرْبُوزِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "rare",
+    "register": [
+     "technical"
+    ],
+    "connotation": "neutral",
+    "feeling": "A leafy wild green of the amaranth family — a weed to farmers, spinach to foragers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "amaranth greens, blite (Amaranthus blitum) and similar leafy plants of the amaranth family — Wiktionary: identified “not conclusively” (mass noun)",
+      "register": [
+       "technical"
+      ],
+      "concept": "veg.amaranth"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْجَرْبُوزُ نَبَاتٌ بَرِّيٌّ تُؤْكَلُ أَوْرَاقُهُ.",
+      "tr": "Amaranth is a wild plant whose leaves are eaten.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "طَبَخْنَا الْجَرْبُوزَ بِالثُّومِ وَالزَّيْتِ.",
+      "tr": "We cooked the amaranth greens with garlic and oil.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "قَطَفْتُ جَرْبُوزًا مِنْ طَرَفِ الْحَقْلِ.",
+      "tr": "I picked some amaranth at the edge of the field.",
+      "register": "neutral",
+      "context": "foraging",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ الْجَرْبُوزِ",
+      "tr": "amaranth leaves"
+     },
+     {
+      "text": "جَرْبُوزٌ مَطْبُوخٌ",
+      "tr": "cooked amaranth greens"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "يَرْبُوز",
+      "register": "obsolete",
+      "nuance": "obsolete form of the same word (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From Persian تاج خروس (tâj xorus, “amaranth”, literally “cockscomb”), from Middle Persian xrōs (“rooster”) + tāg (“crown, comb”); cognate with Jewish Palestinian Aramaic ירבוז (yarbūz) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Modern Hebrew יַרְבּוּז (yarbuz) is the everyday word for amaranth — the same old name, from the Aramaic form.",
+     "The Persian source means “rooster’s crown”, the same picture as English cockscomb, an ornamental relative."
+    ],
+    "pitfalls": [
+     "Wiktionary marks the identification as not conclusive: old texts use the name for several leafy plants of the amaranth family, goosefoots included."
+    ],
+    "subtleties": [
+     "Wiktionary lists the alternative forms يَرْبُوز (obsolete), أَرْبُوز and جَرْمُوز."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.burdock",
+   "reason": "Burdock is not eaten in Arab cuisines; there is no everyday word and Wiktionary has no Arabic entry.",
+   "use": "the loan الأرقطيون (from the Latin genus name Arctium) in herbal and botanical texts"
+  },
+  {
+   "concept": "veg.welshonion",
+   "reason": "The Welsh onion is not distinguished from other green onions.",
+   "use": "بَصَل أَخْضَر (spring onion, node veg.1)"
+  },
+  {
+   "concept": "veg.waterchestnut",
+   "reason": "The Chinese water chestnut is not part of Arab cuisines and has no Arabic name.",
+   "use": "a literal translation of the English name, or a description"
+  },
+  {
+   "concept": "veg.watercaltrop",
+   "reason": "Water caltrop is not part of Arab cuisines and has no established Arabic name.",
+   "use": "a description, or the Latin name Trapa"
+  },
+  {
+   "concept": "veg.purpleyam",
+   "reason": "True yams are not grown in most Arab countries (veg.yam is absent too); no word.",
+   "use": "a description (“purple yam”) or the Filipino name ube"
+  },
+  {
+   "concept": "veg.jicama",
+   "reason": "A Mexican tuber unknown in Arab cuisines.",
+   "use": "the Spanish name, transliterated in various ways"
+  },
+  {
+   "concept": "veg.cardoon",
+   "reason": "No established word: the cardoon is not distinguished from the artichoke in Modern Standard Arabic.",
+   "use": "a description as a kind of خُرْشُوف (artichoke, node veg.2b); Wiktionary records cardoon or artichoke as an obsolete sense of قُلْقَاس"
+  },
+  {
+   "concept": "veg.tigernut",
+   "reason": "The established name, حَبُّ الْعَزِيزِ (literally “the dear one’s grain”), is a construct phrase with no indefinite forms (Wiktionary shows only definite ones), so it cannot fill this course’s noun paradigm.",
+   "use": "حَبُّ الْعَزِيزِ (Wiktionary: chufa, tiger nut), a favourite snack in Egypt; Wiktionary’s translation table also gives حَبُّ الزَّلَمِ"
+  },
+  {
+   "concept": "veg.malabarspinach",
+   "reason": "Malabar spinach is not part of Arab cuisines and has no Arabic name.",
+   "use": "a literal translation of the English name, or a description"
+  },
+  {
+   "concept": "veg.elephantyam",
+   "reason": "A South and Southeast Asian tuber with no Arabic name.",
+   "use": "a description or the Indian name"
+  },
+  {
+   "concept": "veg.goodkinghenry",
+   "reason": "A European wild green with no Arabic name.",
+   "use": "a description as a kind of goosefoot, سَرْمَق (fat hen, this node)"
+  },
+  {
+   "concept": "veg.kurrat",
+   "reason": "No separate word: Wiktionary defines كُرَّاث, the leek of node veg.1, as Allium kurrat itself — one word covers both.",
+   "use": "كُرَّاث (node veg.1), pronounced kurrāt in Egypt, where kurrat is the everyday leek"
+  },
+  {
+   "concept": "veg.konjac",
+   "reason": "Konjac is not part of Arab cuisines; no Arabic name.",
+   "use": "the loan كونجاك on imported diet foods, or the Japanese name"
+  },
+  {
+   "concept": "veg.samphire",
+   "reason": "No established Arabic name for rock samphire (sea fennel).",
+   "use": "a literal translation of “sea fennel”, or the Latin name Crithmum"
+  },
+  {
+   "concept": "veg.oca",
+   "reason": "An Andean tuber unknown in Arab countries.",
+   "use": "the Spanish/Quechua name or a description"
+  },
+  {
+   "concept": "veg.nzspinach",
+   "reason": "Not grown or eaten in Arab countries; no Arabic name.",
+   "use": "a literal translation (“New Zealand spinach”) with سَبَانِخ"
+  },
+  {
+   "concept": "veg.yacon",
+   "reason": "An Andean root unknown in Arab cuisines.",
+   "use": "the Spanish name (yacón), mostly in the term “yacon syrup” on health foods"
+  },
+  {
+   "concept": "veg.mashua",
+   "reason": "An Andean tuber unknown in Arab countries.",
+   "use": "the Spanish/Quechua name or a description"
+  },
+  {
+   "concept": "veg.salsify",
+   "reason": "Salsify is not eaten in Arab cuisines; no established name for the vegetable.",
+   "use": "the European name or a description (a long white root)"
+  },
+  {
+   "concept": "veg.skirret",
+   "reason": "A medieval European root with no Arabic name.",
+   "use": "a description or the Latin name Sium sisarum"
+  },
+  {
+   "concept": "veg.arracacha",
+   "reason": "An Andean root unknown in Arab countries.",
+   "use": "the Spanish name or a description"
+  },
+  {
+   "concept": "veg.chineseartichoke",
+   "reason": "The Chinese artichoke (crosne) has no Arabic name.",
+   "use": "the French name crosne or a description"
+  },
+  {
+   "concept": "veg.landcress",
+   "reason": "Not distinguished from other cresses.",
+   "use": "رَشَاد (cress, node veg.2a) with a description"
+  },
+  {
+   "concept": "veg.treeonion",
+   "reason": "A garden curiosity with no Arabic name.",
+   "use": "a description (an onion that forms small bulbs on top of its stalk)"
+  },
+  {
+   "concept": "veg.celtuce",
+   "reason": "Celtuce is not part of Arab cuisines; no name.",
+   "use": "a description (lettuce grown for its stem) with خَسّ"
+  },
+  {
+   "concept": "veg.fiddlehead",
+   "reason": "Fern shoots are not eaten in Arab cuisines; no word.",
+   "use": "a description: براعم السرخس (“fern shoots”; سَرْخَس = fern)"
+  },
+  {
+   "concept": "veg.ramps",
+   "reason": "A North American wild onion with no Arabic name.",
+   "use": "a description such as wild leek, with كُرَّاث or ثُوم بَرِّيّ (wild garlic, node veg.2a)"
+  },
+  {
+   "concept": "veg.pearlonion",
+   "reason": "No fixed term for these small onions.",
+   "use": "a description: بصل صغير (“small onions”), with بَصَل (node veg.1)"
+  },
+  {
+   "concept": "veg.elephantgarlic",
+   "reason": "No established name for this large leek variety.",
+   "use": "a literal translation of the English name, with ثُوم"
+  },
+  {
+   "concept": "veg.rootparsley",
+   "reason": "Root parsley is rare in Arab markets; no word of its own.",
+   "use": "a description: جذر البقدونس (“parsley root”)"
+  }
+ ]
+}

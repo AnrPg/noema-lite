@@ -1,0 +1,147 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "Hebrew masculine nouns usually take -im (ים), feminine nouns -ot (וֹת); the vowels of the stem often change.",
+ "procedure": {
+  "askYourself": [
+   "Masculine or feminine?",
+   "Do the stem vowels shorten (גֶּזֶר → גְּזָרִים)?"
+  ]
+ },
+ "traps": [
+  "The ending does not always follow the gender: דְּלַעַת (pumpkin) is feminine, yet its plural is דְּלוּעִים (-im).",
+  "The stem vowels change in the plural: גֶּזֶר → גְּזָרִים, בָּצָל → בְּצָלִים."
+ ],
+ "evidence": {
+  "tags": [
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;PL;INDF"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;PL;INDF"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "As in Greek, the plural ending depends on the noun (-οι, -ες, -α ~ -ִים, -וֹת) and must be learnt with it; Hebrew adds vowel changes inside the stem (סֵפֶר → סְפָרִים)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "As in Russian, the ending depends on the noun and the stem can change; Hebrew has just two main endings, -ִים and -וֹת, and no case forms of the plural."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish adds -s / -es to every noun; Hebrew chooses between -ִים and -וֹת, often changes the stem vowels (סֵפֶר → סְפָרִים) and keeps a dual in a few words (יוֹמַיִם)."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English adds -s and has a few irregulars (man → men); in Hebrew stem changes are common (סֵפֶר → סְפָרִים, בַּיִת → בָּתִּים), so learn the plural with the word."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "The French plural is mostly silent (-s); the Hebrew plural is always heard: -ִים / -וֹת, often with a vowel change in the stem."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "As in German, the plural is learnt with each noun and can change the stem (Buch → Bücher ~ סֵפֶר → סְפָרִים); Hebrew has only two endings, but many stem changes."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi plurals depend on gender and ending (लड़का → लड़के, लड़की → लड़कियाँ), as Hebrew ones do (-ִים / -וֹת); Hebrew also changes vowels inside the stem."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "The Persian endings -ها / -ان do not depend on gender, and the noun stays singular after a number; the Hebrew ending depends on the noun, and the plural is used after every number from 2."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi plurals depend on gender and ending (मुलगा → मुलगे); Hebrew too — -ִים mostly for masculine, -וֹת mostly for feminine — with stem changes."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The sound plurals -ūna / -āt match -ִים / -וֹת, but Hebrew has no broken plurals: the inside of the word changes only its vowels (סֵפֶר → סְפָרִים, not like كِتَاب → كُتُب), and the dual lives only in a few words."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has one plural suffix (-ler / -lar, by vowel harmony) and drops it after numbers (üç kitap); Hebrew has two endings, stem changes, and a plural after every number (שְׁלוֹשָׁה סְפָרִים)."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese nouns usually have no plural form; in Hebrew the plural is obligatory — סֵפֶר “a book”, סְפָרִים “books” — and everything that agrees becomes plural too."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Korean marks the plural only optionally (-들); in Hebrew it is obligatory whenever there is more than one."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish marks the plural with -t or with -i- before a case ending; Hebrew uses -ִים / -וֹת and often changes the stem vowels."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adds -k (könyvek) but keeps the singular after numbers; Hebrew uses -ִים / -וֹת and always the plural after numbers."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili makes the plural by changing the class prefix (kitabu → vitabu, mtu → watu); Hebrew changes the ending (סֵפֶר → סְפָרִים) and often the stem vowels."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda changes the class prefix for the plural (omuntu → abantu, ekitabo → ebitabo); Hebrew changes the ending: -ִים / -וֹת."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns do not change for number (们 only for people); in Hebrew every countable noun has a plural, and it must be used: שְׁנֵי סְפָרִים."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese nouns do not change for number (những / các show it when needed); Hebrew nouns always take -ִים / -וֹת for more than one."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has singular, dual and plural endings for every noun (iglu, igluk, iglut); Hebrew has the plural for all nouns and the dual only for a few (יוֹמַיִם, עֵינַיִם)."
+  }
+ ]
+}

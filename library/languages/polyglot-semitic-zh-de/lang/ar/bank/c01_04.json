@@ -1,0 +1,4695 @@
+{
+ "sentences": [
+  {
+   "id": "ar.c01_04.001",
+   "frame": "fr.past.action",
+   "text": "اِسْتَيْقَظْتُ مُبَكِّرًا أَمْسِ.",
+   "tokens": [
+    {
+     "t": "اِسْتَيْقَظْتُ",
+     "l": "ar:istayqaza",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "I woke up early yesterday.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.002",
+   "frame": "fr.past.action",
+   "text": "لَمْ أَسْتَيْقِظْ مُبَكِّرًا أَمْسِ.",
+   "tokens": [
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "أَسْتَيْقِظْ",
+     "l": "ar:istayqaza",
+     "f": "V;JUS;1;SG"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "I didn’t wake up early yesterday.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.001",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.003",
+   "frame": "fr.past.action",
+   "text": "اِسْتَيْقَظْنَا مُبَكِّرًا أَمْسِ.",
+   "tokens": [
+    {
+     "t": "اِسْتَيْقَظْنَا",
+     "l": "ar:istayqaza",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "We woke up early yesterday.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.001",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.c01_04.004",
+   "frame": "fr.past.action",
+   "text": "نَهَضْتُ مِنَ السَّرِيرِ ثُمَّ اسْتَحْمَمْتُ.",
+   "tokens": [
+    {
+     "t": "نَهَضْتُ",
+     "l": "ar:nahada",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "السَّرِيرِ",
+     "l": "ar:sarir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "ثُمَّ",
+     "l": "ar:thumma"
+    },
+    {
+     "t": "اسْتَحْمَمْتُ",
+     "l": "ar:istahamma",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "I got out of bed, then I had a shower.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.005",
+   "frame": "fr.past.action",
+   "text": "لَبِسَتْ أُخْتِي وَخَرَجَتْ مِنَ الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "لَبِسَتْ",
+     "l": "ar:labisa",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "وَخَرَجَتْ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "خَرَجَتْ",
+       "l": "ar:kharaja",
+       "f": "V;PST;3;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "My sister got dressed and left the house.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.006",
+   "frame": "fr.past.action",
+   "text": "أَفْطَرْنَا فِي الْمَطْبَخِ.",
+   "tokens": [
+    {
+     "t": "أَفْطَرْنَا",
+     "l": "ar:aftara",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطْبَخِ",
+     "l": "ar:matbakh",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "We had breakfast in the kitchen.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.007",
+   "frame": "fr.past.action",
+   "text": "أَفْطَرْتَ فِي الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "أَفْطَرْتَ",
+     "l": "ar:aftara",
+     "f": "V;PST;2;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "You had breakfast at home.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.008",
+   "frame": "fr.past.action",
+   "text": "هَلْ أَفْطَرْتَ فِي الْبَيْتِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "أَفْطَرْتَ",
+     "l": "ar:aftara",
+     "f": "V;PST;2;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.yesno"
+   ],
+   "gloss": "Did you have breakfast at home?",
+   "level": "A2",
+   "variantOf": "ar.c01_04.007",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.c01_04.009",
+   "frame": "fr.past.action",
+   "text": "بَدَأْتُ الْعَمَلَ مُبَكِّرًا.",
+   "tokens": [
+    {
+     "t": "بَدَأْتُ",
+     "l": "ar:badaa",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "الْعَمَلَ",
+     "l": "ar:amal",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "I started work early.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.010",
+   "frame": "fr.past.action",
+   "text": "اِنْتَهَى الْعَمَلُ مُتَأَخِّرًا أَمْسِ.",
+   "tokens": [
+    {
+     "t": "اِنْتَهَى",
+     "l": "ar:intaha",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْعَمَلُ",
+     "l": "ar:amal",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُتَأَخِّرًا",
+     "l": "ar:mutaakhkhiran"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "Work finished late yesterday.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.011",
+   "frame": "fr.past.action",
+   "text": "عُدْتُ إِلَى الْبَيْتِ فِي الْمَسَاءِ.",
+   "tokens": [
+    {
+     "t": "عُدْتُ",
+     "l": "ar:ada",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَسَاءِ",
+     "l": "ar:masa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "I came home in the evening.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.012",
+   "frame": "fr.past.action",
+   "text": "أَعُودُ إِلَى الْبَيْتِ فِي الْمَسَاءِ.",
+   "tokens": [
+    {
+     "t": "أَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَسَاءِ",
+     "l": "ar:masa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.time.day"
+   ],
+   "gloss": "I come home in the evening.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.011",
+   "variant": {
+    "Tense": "PRS"
+   }
+  },
+  {
+   "id": "ar.c01_04.013",
+   "frame": "fr.past.action",
+   "text": "نِمْتُ جَيِّدًا.",
+   "tokens": [
+    {
+     "t": "نِمْتُ",
+     "l": "ar:nama",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "جَيِّدًا",
+     "l": "ar:jayyid",
+     "f": "ADJ;ACC;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I slept well.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.014",
+   "frame": "fr.past.action",
+   "text": "لَمْ أَنَمْ جَيِّدًا.",
+   "tokens": [
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "أَنَمْ",
+     "l": "ar:nama",
+     "f": "V;JUS;1;SG"
+    },
+    {
+     "t": "جَيِّدًا",
+     "l": "ar:jayyid",
+     "f": "ADJ;ACC;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I didn’t sleep well.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.013",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.015",
+   "frame": "fr.past.q",
+   "text": "مَتَى اسْتَيْقَظْتِ الْيَوْمَ؟",
+   "tokens": [
+    {
+     "t": "مَتَى",
+     "l": "ar:mata"
+    },
+    {
+     "t": "اسْتَيْقَظْتِ",
+     "l": "ar:istayqaza",
+     "f": "V;PST;2;SG;FEM"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh",
+    "fn.time.day"
+   ],
+   "gloss": "When did you (a woman) wake up today?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.016",
+   "frame": "fr.past.q",
+   "text": "مَتَى خَرَجْتُمْ مِنَ الْبَيْتِ؟",
+   "tokens": [
+    {
+     "t": "مَتَى",
+     "l": "ar:mata"
+    },
+    {
+     "t": "خَرَجْتُمْ",
+     "l": "ar:kharaja",
+     "f": "V;PST;2;PL;MASC"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "When did you (all) leave home?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.017",
+   "frame": "fr.past.action",
+   "text": "اِسْتَحَمَّ الْأَطْفَالُ ثُمَّ نَامُوا.",
+   "tokens": [
+    {
+     "t": "اِسْتَحَمَّ",
+     "l": "ar:istahamma",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "ثُمَّ",
+     "l": "ar:thumma"
+    },
+    {
+     "t": "نَامُوا",
+     "l": "ar:nama",
+     "f": "V;PST;3;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "The children had a bath, then they went to sleep.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.018",
+   "frame": "fr.past.action",
+   "text": "نَامَ الطِّفْلُ مُبَكِّرًا.",
+   "tokens": [
+    {
+     "t": "نَامَ",
+     "l": "ar:nama",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "The child fell asleep early.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.019",
+   "frame": "fr.past.action",
+   "text": "غَسَلْتُ الْفِنْجَانَ وَالصَّحْنَ.",
+   "tokens": [
+    {
+     "t": "غَسَلْتُ",
+     "l": "ar:ghasala",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "الْفِنْجَانَ",
+     "l": "ar:finjan",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالصَّحْنَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الصَّحْنَ",
+       "l": "ar:sahn",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "I washed the cup and the plate.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.020",
+   "frame": "fr.past.action",
+   "text": "غَسَلَ أَخِي الصَّحْنَ.",
+   "tokens": [
+    {
+     "t": "غَسَلَ",
+     "l": "ar:ghasala",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "الصَّحْنَ",
+     "l": "ar:sahn",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "My brother washed the plate.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.021",
+   "frame": "fr.past.action",
+   "text": "لَمْ يَغْسِلْ أَخِي الصَّحْنَ.",
+   "tokens": [
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "يَغْسِلْ",
+     "l": "ar:ghasala",
+     "f": "V;JUS;3;SG;MASC"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "الصَّحْنَ",
+     "l": "ar:sahn",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "My brother didn’t wash the plate.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.020",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.022",
+   "frame": "fr.past.neg",
+   "text": "الْيَوْمَ لَمْ أُفْطِرْ.",
+   "tokens": [
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "أُفْطِرْ",
+     "l": "ar:aftara",
+     "f": "V;JUS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "Today I haven’t had breakfast.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.023",
+   "frame": "fr.past.neg",
+   "text": "لَمْ يَسْتَحِمَّ الْأَطْفَالُ أَمْسِ.",
+   "tokens": [
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "يَسْتَحِمَّ",
+     "l": "ar:istahamma",
+     "f": "V;JUS;3;SG;MASC"
+    },
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "The children didn’t have a bath yesterday.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.024",
+   "frame": "fr.past.neg",
+   "text": "الْعَمَلُ لَمْ يَبْدَأْ.",
+   "tokens": [
+    {
+     "t": "الْعَمَلُ",
+     "l": "ar:amal",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "يَبْدَأْ",
+     "l": "ar:badaa",
+     "f": "V;JUS;3;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "The work hasn’t started.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.025",
+   "frame": "fr.past.action",
+   "text": "قَدْ وَصَلَ الْقِطَارُ.",
+   "tokens": [
+    {
+     "t": "قَدْ",
+     "l": "ar:qad"
+    },
+    {
+     "t": "وَصَلَ",
+     "l": "ar:wasala",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "The train has arrived.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.026",
+   "frame": "fr.past.q",
+   "text": "مَاذَا أَكَلْتُمْ عَلَى الْفَطُورِ؟",
+   "tokens": [
+    {
+     "t": "مَاذَا",
+     "l": "ar:madha"
+    },
+    {
+     "t": "أَكَلْتُمْ",
+     "l": "ar:akala",
+     "f": "V;PST;2;PL;MASC"
+    },
+    {
+     "t": "عَلَى",
+     "l": "ar:ala",
+     "f": "ADP"
+    },
+    {
+     "t": "الْفَطُورِ",
+     "l": "ar:fatur",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "What did you (all) have for breakfast?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.027",
+   "frame": "fr.past.action",
+   "text": "شَرِبْتُ قَهْوَةً وَأَكَلْتُ خُبْزًا.",
+   "tokens": [
+    {
+     "t": "شَرِبْتُ",
+     "l": "ar:shariba",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "قَهْوَةً",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "وَأَكَلْتُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "أَكَلْتُ",
+       "l": "ar:akala",
+       "f": "V;PST;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "خُبْزًا",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "I drank coffee and ate bread.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.028",
+   "frame": "fr.past.action",
+   "text": "نَهَضَ أَخِي مُبَكِّرًا.",
+   "tokens": [
+    {
+     "t": "نَهَضَ",
+     "l": "ar:nahada",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "My brother got up early.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.029",
+   "frame": "fr.past.action",
+   "text": "نَهَضَتْ أُخْتِي مُبَكِّرًا.",
+   "tokens": [
+    {
+     "t": "نَهَضَتْ",
+     "l": "ar:nahada",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "My sister got up early.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.028",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.c01_04.030",
+   "frame": "fr.past.action",
+   "text": "لَبِسَ الْأَطْفَالُ وَذَهَبُوا إِلَى الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "لَبِسَ",
+     "l": "ar:labisa",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "وَذَهَبُوا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "ذَهَبُوا",
+       "l": "ar:dhahaba",
+       "f": "V;PST;3;PL;MASC"
+      }
+     ]
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "The children got dressed and went to school.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.031",
+   "frame": "fr.past.q",
+   "text": "هَلْ لَبِسْتِ؟ الْحَافِلَةُ هُنَا!",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "لَبِسْتِ",
+     "l": "ar:labisa",
+     "f": "V;PST;2;SG;FEM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "الْحَافِلَةُ",
+     "l": "ar:hafila",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you dressed? The bus is here!",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.032",
+   "frame": "fr.used.to",
+   "text": "عِنْدَمَا كُنْتُ طِفْلًا، كُنْتُ أَلْعَبُ فِي الشَّارِعِ.",
+   "tokens": [
+    {
+     "t": "عِنْدَمَا",
+     "l": "ar:indama"
+    },
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "طِفْلًا",
+     "l": "ar:tifl",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "أَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الشَّارِعِ",
+     "l": "ar:shari",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "When I was a child, I used to play in the street.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.033",
+   "frame": "fr.used.to",
+   "text": "كُنَّا نَلْعَبُ مَعَ الْجِيرَانِ.",
+   "tokens": [
+    {
+     "t": "كُنَّا",
+     "l": "ar:kana",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "نَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "مَعَ",
+     "l": "ar:maa_with",
+     "f": "ADP"
+    },
+    {
+     "t": "الْجِيرَانِ",
+     "l": "ar:jar",
+     "f": "N;GEN;PL;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "We used to play with the neighbours.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.034",
+   "frame": "fr.was.doing",
+   "text": "كَانَتْ أُمِّي تَطْبُخُ عِنْدَمَا وَصَلْتُ.",
+   "tokens": [
+    {
+     "t": "كَانَتْ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "عِنْدَمَا",
+     "l": "ar:indama"
+    },
+    {
+     "t": "وَصَلْتُ",
+     "l": "ar:wasala",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "My mother was cooking when I arrived.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.035",
+   "frame": "fr.was.doing",
+   "text": "كَانَ أَبِي يَشْرَبُ الْقَهْوَةَ عِنْدَمَا اسْتَيْقَظْتُ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "عِنْدَمَا",
+     "l": "ar:indama"
+    },
+    {
+     "t": "اسْتَيْقَظْتُ",
+     "l": "ar:istayqaza",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "My father was drinking coffee when I woke up.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.036",
+   "frame": "fr.used.to",
+   "text": "كُنْتُ أَذْهَبُ إِلَى الرَّوْضَةِ مَعَ أَخِي.",
+   "tokens": [
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الرَّوْضَةِ",
+     "l": "ar:rawda",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "مَعَ",
+     "l": "ar:maa_with",
+     "f": "ADP"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "I used to go to kindergarten with my brother.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.037",
+   "frame": "fr.used.to",
+   "text": "كُنْتُ أُحِبُّ الْحَلِيبَ فِي طُفُولَتِي.",
+   "tokens": [
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْحَلِيبَ",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "طُفُولَتِي",
+     "l": "ar:tufula",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.possessive"
+   ],
+   "gloss": "In my childhood I used to like milk.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.038",
+   "frame": "fr.used.to",
+   "text": "كُنْتُ لَا أُحِبُّ الْحَلِيبَ فِي طُفُولَتِي.",
+   "tokens": [
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْحَلِيبَ",
+     "l": "ar:halib",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "طُفُولَتِي",
+     "l": "ar:tufula",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.possessive",
+    "fn.negation"
+   ],
+   "gloss": "In my childhood I didn’t like milk.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.037",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.039",
+   "frame": "fr.used.to",
+   "text": "كُنْتَ تَلْعَبُ مَعَ الْجِيرَانِ.",
+   "tokens": [
+    {
+     "t": "كُنْتَ",
+     "l": "ar:kana",
+     "f": "V;PST;2;SG;MASC"
+    },
+    {
+     "t": "تَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "مَعَ",
+     "l": "ar:maa_with",
+     "f": "ADP"
+    },
+    {
+     "t": "الْجِيرَانِ",
+     "l": "ar:jar",
+     "f": "N;GEN;PL;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "You used to play with the neighbours.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.040",
+   "frame": "fr.used.to",
+   "text": "هَلْ كُنْتَ تَلْعَبُ مَعَ الْجِيرَانِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "كُنْتَ",
+     "l": "ar:kana",
+     "f": "V;PST;2;SG;MASC"
+    },
+    {
+     "t": "تَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "مَعَ",
+     "l": "ar:maa_with",
+     "f": "ADP"
+    },
+    {
+     "t": "الْجِيرَانِ",
+     "l": "ar:jar",
+     "f": "N;GEN;PL;MASC;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.question.yesno"
+   ],
+   "gloss": "Did you use to play with the neighbours?",
+   "level": "A2",
+   "variantOf": "ar.c01_04.039",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.c01_04.041",
+   "frame": "fr.was.doing",
+   "text": "كَانَ الطِّفْلُ يَلْعَبُ فِي الْحَدِيقَةِ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْحَدِيقَةِ",
+     "l": "ar:hadiqa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "The child was playing in the park.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.042",
+   "frame": "fr.was.doing",
+   "text": "كَانَ الْأَطْفَالُ يَلْعَبُونَ فِي الْحَدِيقَةِ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "يَلْعَبُونَ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْحَدِيقَةِ",
+     "l": "ar:hadiqa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "The children were playing in the park.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.041",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.c01_04.043",
+   "frame": "fr.used.to",
+   "text": "كَانَ جَدِّي يَنْهَضُ مُبَكِّرًا كُلَّ يَوْمٍ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "جَدِّي",
+     "l": "ar:jadd",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَنْهَضُ",
+     "l": "ar:nahada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": "كُلَّ",
+     "l": "ar:kull",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "يَوْمٍ",
+     "l": "ar:yawm",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.time.day"
+   ],
+   "gloss": "My grandfather used to get up early every day.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.044",
+   "frame": "fr.used.to",
+   "text": "كُنَّا نُسَافِرُ إِلَى الْقَرْيَةِ فِي الْعُطْلَةِ.",
+   "tokens": [
+    {
+     "t": "كُنَّا",
+     "l": "ar:kana",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعُطْلَةِ",
+     "l": "ar:utla",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "We used to travel to the village in the holidays.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.045",
+   "frame": "fr.was.doing",
+   "text": "كُنْتُ أَنَامُ عِنْدَمَا عَادَ أَبِي.",
+   "tokens": [
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "أَنَامُ",
+     "l": "ar:nama",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "عِنْدَمَا",
+     "l": "ar:indama"
+    },
+    {
+     "t": "عَادَ",
+     "l": "ar:ada",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "I was sleeping when my father came back.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.046",
+   "frame": "fr.was.doing",
+   "text": "كَانَ الطِّفْلُ يَلْعَبُ بِلُعْبَةٍ جَدِيدَةٍ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "بِلُعْبَةٍ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "لُعْبَةٍ",
+       "l": "ar:luba",
+       "f": "N;GEN;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "جَدِيدَةٍ",
+     "l": "ar:jadid",
+     "f": "ADJ;GEN;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "The child was playing with a new toy.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.047",
+   "frame": "fr.used.to",
+   "text": "كُنَّا نَلْعَبُ لُعْبَةً جَمِيلَةً فِي الْعُطْلَةِ.",
+   "tokens": [
+    {
+     "t": "كُنَّا",
+     "l": "ar:kana",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "نَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "لُعْبَةً",
+     "l": "ar:luba",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "جَمِيلَةً",
+     "l": "ar:jamil",
+     "f": "ADJ;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعُطْلَةِ",
+     "l": "ar:utla",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "In the holidays we used to play a nice game.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.048",
+   "frame": "fr.used.to",
+   "text": "كَانَ الْجِيرَانُ يَلْعَبُونَ مَعَنَا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْجِيرَانُ",
+     "l": "ar:jar",
+     "f": "N;NOM;PL;MASC;DEF"
+    },
+    {
+     "t": "يَلْعَبُونَ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "مَعَنَا",
+     "l": "ar:maa_with",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "The neighbours used to play with us.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.049",
+   "frame": "fr.was.doing",
+   "text": "كُنَّا نَأْكُلُ عِنْدَمَا وَصَلَ الْجَارُ.",
+   "tokens": [
+    {
+     "t": "كُنَّا",
+     "l": "ar:kana",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "عِنْدَمَا",
+     "l": "ar:indama"
+    },
+    {
+     "t": "وَصَلَ",
+     "l": "ar:wasala",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْجَارُ",
+     "l": "ar:jar",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "We were eating when the neighbour arrived.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.050",
+   "frame": "fr.used.to",
+   "text": "هَلْ كُنْتِ تَذْهَبِينَ إِلَى الرَّوْضَةِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "كُنْتِ",
+     "l": "ar:kana",
+     "f": "V;PST;2;SG;FEM"
+    },
+    {
+     "t": "تَذْهَبِينَ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الرَّوْضَةِ",
+     "l": "ar:rawda",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.question.yesno"
+   ],
+   "gloss": "Did you (a woman) use to go to kindergarten?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.051",
+   "frame": "fr.past.action",
+   "text": "لَعِبْنَا فِي الْحَدِيقَةِ.",
+   "tokens": [
+    {
+     "t": "لَعِبْنَا",
+     "l": "ar:laiba",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْحَدِيقَةِ",
+     "l": "ar:hadiqa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "We played in the park.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.052",
+   "frame": "fr.past.action",
+   "text": "كُنَّا نَلْعَبُ فِي الْحَدِيقَةِ.",
+   "tokens": [
+    {
+     "t": "كُنَّا",
+     "l": "ar:kana",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "نَلْعَبُ",
+     "l": "ar:laiba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْحَدِيقَةِ",
+     "l": "ar:hadiqa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "We used to play in the park.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.051",
+   "variant": {
+    "Aspect": "HAB"
+   }
+  },
+  {
+   "id": "ar.c01_04.053",
+   "frame": "fr.past.action",
+   "text": "نَشَأْتُ فِي قَرْيَةٍ صَغِيرَةٍ.",
+   "tokens": [
+    {
+     "t": "نَشَأْتُ",
+     "l": "ar:nashaa",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "قَرْيَةٍ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": "صَغِيرَةٍ",
+     "l": "ar:saghir",
+     "f": "ADJ;GEN;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I grew up in a small village.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.054",
+   "frame": "fr.past.q",
+   "text": "أَيْنَ نَشَأْتِ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "نَشَأْتِ",
+     "l": "ar:nashaa",
+     "f": "V;PST;2;SG;FEM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "Where did you (a woman) grow up?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.055",
+   "frame": "fr.past.action",
+   "text": "تَذَكَّرْتُ الْمِفْتَاحَ.",
+   "tokens": [
+    {
+     "t": "تَذَكَّرْتُ",
+     "l": "ar:tadhakkara",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "الْمِفْتَاحَ",
+     "l": "ar:miftah",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I remembered the key.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.056",
+   "frame": "fr.past.action",
+   "text": "نَسِيتُ الْمِفْتَاحَ فِي الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "نَسِيتُ",
+     "l": "ar:nasiya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "الْمِفْتَاحَ",
+     "l": "ar:miftah",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I forgot the key at home.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.057",
+   "frame": "fr.past.action",
+   "text": "لَمْ أَنْسَ الْمِفْتَاحَ.",
+   "tokens": [
+    {
+     "t": "لَمْ",
+     "l": "ar:lam"
+    },
+    {
+     "t": "أَنْسَ",
+     "l": "ar:nasiya",
+     "f": "V;JUS;1;SG"
+    },
+    {
+     "t": "الْمِفْتَاحَ",
+     "l": "ar:miftah",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I didn’t forget the key.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.056",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.058",
+   "frame": "fr.future.plan",
+   "text": "سَأُسَافِرُ إِلَى مِصْرَ الْأُسْبُوعَ الْقَادِمَ.",
+   "tokens": [
+    {
+     "t": "سَأُسَافِرُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "أُسَافِرُ",
+       "l": "ar:safara",
+       "f": "V;PRS;IND;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "مِصْرَ",
+     "name": true
+    },
+    {
+     "t": "الْأُسْبُوعَ الْقَادِمَ",
+     "l": "ar:alusbua_alqadim"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "I will travel to Egypt next week.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.059",
+   "frame": "fr.future.plan",
+   "text": "لَنْ أُسَافِرَ إِلَى مِصْرَ الْأُسْبُوعَ الْقَادِمَ.",
+   "tokens": [
+    {
+     "t": "لَنْ",
+     "l": "ar:lan"
+    },
+    {
+     "t": "أُسَافِرَ",
+     "l": "ar:safara",
+     "f": "V;SBJV;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "مِصْرَ",
+     "name": true
+    },
+    {
+     "t": "الْأُسْبُوعَ الْقَادِمَ",
+     "l": "ar:alusbua_alqadim"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "I will not travel to Egypt next week.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.058",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.060",
+   "frame": "fr.future.plan",
+   "text": "سَنَزُورُ الْمَدِينَةَ الْقَدِيمَةَ غَدًا.",
+   "tokens": [
+    {
+     "t": "سَنَزُورُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "نَزُورُ",
+       "l": "ar:zara",
+       "f": "V;PRS;IND;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "الْمَدِينَةَ",
+     "l": "ar:madina",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "الْقَدِيمَةَ",
+     "l": "ar:qadim",
+     "f": "ADJ;ACC;SG;FEM;DEF"
+    },
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "We will visit the old city tomorrow.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.061",
+   "frame": "fr.future.plan",
+   "text": "سَوْفَ أَحْجِزُ غُرْفَةً فِي فُنْدُقٍ.",
+   "tokens": [
+    {
+     "t": "سَوْفَ",
+     "l": "ar:sawfa"
+    },
+    {
+     "t": "أَحْجِزُ",
+     "l": "ar:hajaza",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "غُرْفَةً",
+     "l": "ar:ghurfa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "فُنْدُقٍ",
+     "l": "ar:funduq",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "I will book a room in a hotel.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.062",
+   "frame": "fr.future.plan",
+   "text": "سَوْفَ نَحْجِزُ غُرْفَةً فِي فُنْدُقٍ.",
+   "tokens": [
+    {
+     "t": "سَوْفَ",
+     "l": "ar:sawfa"
+    },
+    {
+     "t": "نَحْجِزُ",
+     "l": "ar:hajaza",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "غُرْفَةً",
+     "l": "ar:ghurfa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "فُنْدُقٍ",
+     "l": "ar:funduq",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "We will book a room in a hotel.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.061",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.c01_04.063",
+   "frame": "fr.future.q",
+   "text": "أَيْنَ سَتَذْهَبُونَ فِي الْعُطْلَةِ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "سَتَذْهَبُونَ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "تَذْهَبُونَ",
+       "l": "ar:dhahaba",
+       "f": "V;PRS;IND;2;PL;MASC"
+      }
+     ]
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعُطْلَةِ",
+     "l": "ar:utla",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "Where will you (all) go in the holidays?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.064",
+   "frame": "fr.future.q",
+   "text": "مَتَى سَتَعُودُ مِنَ الرِّحْلَةِ؟",
+   "tokens": [
+    {
+     "t": "مَتَى",
+     "l": "ar:mata"
+    },
+    {
+     "t": "سَتَعُودُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "تَعُودُ",
+       "l": "ar:ada",
+       "f": "V;PRS;IND;2;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الرِّحْلَةِ",
+     "l": "ar:rihla",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "When will you come back from the trip?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.065",
+   "frame": "fr.future.q",
+   "text": "مَاذَا سَتَشْتَرِي؟",
+   "tokens": [
+    {
+     "t": "مَاذَا",
+     "l": "ar:madha"
+    },
+    {
+     "t": "سَتَشْتَرِي",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "تَشْتَرِي",
+       "l": "ar:ishtara",
+       "f": "V;PRS;IND;2;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "What will you buy?",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.066",
+   "frame": "fr.future.plan",
+   "text": "سَيَحْجِزُ أَبِي تَذْكِرَتَيْنِ.",
+   "tokens": [
+    {
+     "t": "سَيَحْجِزُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "يَحْجِزُ",
+       "l": "ar:hajaza",
+       "f": "V;PRS;IND;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "تَذْكِرَتَيْنِ",
+     "l": "ar:tadhkira",
+     "f": "N;ACC;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "My father will book two tickets.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.067",
+   "frame": "fr.future.plan",
+   "text": "لَنْ أَنْسَى جَوَازَ السَّفَرِ.",
+   "tokens": [
+    {
+     "t": "لَنْ",
+     "l": "ar:lan"
+    },
+    {
+     "t": "أَنْسَى",
+     "l": "ar:nasiya",
+     "f": "V;SBJV;1;SG"
+    },
+    {
+     "t": "جَوَازَ السَّفَرِ",
+     "l": "ar:jawaz_safar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "I won’t forget the passport.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.068",
+   "frame": "fr.be.where",
+   "text": "جَوَازُ السَّفَرِ فِي حَقِيبَةِ السَّفَرِ.",
+   "tokens": [
+    {
+     "t": "جَوَازُ السَّفَرِ",
+     "l": "ar:jawaz_safar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "حَقِيبَةِ السَّفَرِ",
+     "l": "ar:haqibat_safar",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The passport is in the suitcase.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.069",
+   "frame": "fr.future.plan",
+   "text": "سَيَزُورُ السُّيَّاحُ الْمَدِينَةَ الْقَدِيمَةَ.",
+   "tokens": [
+    {
+     "t": "سَيَزُورُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "يَزُورُ",
+       "l": "ar:zara",
+       "f": "V;PRS;IND;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "السُّيَّاحُ",
+     "l": "ar:saih",
+     "f": "N;NOM;PL;MASC;DEF"
+    },
+    {
+     "t": "الْمَدِينَةَ",
+     "l": "ar:madina",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "الْقَدِيمَةَ",
+     "l": "ar:qadim",
+     "f": "ADJ;ACC;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The tourists will visit the old city.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.070",
+   "frame": "fr.future.plan",
+   "text": "سَيَنْتَظِرُ الْمُرْشِدُ السُّيَّاحَ فِي الْفُنْدُقِ.",
+   "tokens": [
+    {
+     "t": "سَيَنْتَظِرُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "يَنْتَظِرُ",
+       "l": "ar:intazara",
+       "f": "V;PRS;IND;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "الْمُرْشِدُ",
+     "l": "ar:murshid",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "السُّيَّاحَ",
+     "l": "ar:saih",
+     "f": "N;ACC;PL;MASC;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْفُنْدُقِ",
+     "l": "ar:funduq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The guide will wait for the tourists at the hotel.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.071",
+   "frame": "fr.future.plan",
+   "text": "سَنُسَافِرُ إِلَى الْخَارِجِ السَّنَةَ الْقَادِمَةَ.",
+   "tokens": [
+    {
+     "t": "سَنُسَافِرُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "نُسَافِرُ",
+       "l": "ar:safara",
+       "f": "V;PRS;IND;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْخَارِجِ",
+     "l": "ar:kharij",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "السَّنَةَ الْقَادِمَةَ",
+     "l": "ar:assana_alqadima"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "We will travel abroad next year.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.072",
+   "frame": "fr.have",
+   "text": "عِنْدَنَا خُطَّةٌ جَدِيدَةٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "خُطَّةٌ",
+     "l": "ar:khutta",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "جَدِيدَةٌ",
+     "l": "ar:jadid",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have a new plan.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.073",
+   "frame": "fr.future.plan",
+   "text": "سَتَكُونُ الرِّحْلَةُ طَوِيلَةً.",
+   "tokens": [
+    {
+     "t": "سَتَكُونُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "تَكُونُ",
+       "l": "ar:kana",
+       "f": "V;PRS;IND;3;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "الرِّحْلَةُ",
+     "l": "ar:rihla",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "طَوِيلَةً",
+     "l": "ar:tawil",
+     "f": "ADJ;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The trip will be long.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.074",
+   "frame": "fr.future.plan",
+   "text": "سَتَحْجِزِينَ غُرْفَةً فِي الْفُنْدُقِ.",
+   "tokens": [
+    {
+     "t": "سَتَحْجِزِينَ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "تَحْجِزِينَ",
+       "l": "ar:hajaza",
+       "f": "V;PRS;IND;2;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "غُرْفَةً",
+     "l": "ar:ghurfa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْفُنْدُقِ",
+     "l": "ar:funduq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "You (a woman) will book a room in the hotel.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.075",
+   "frame": "fr.future.plan",
+   "text": "هَلْ سَتَحْجِزِينَ غُرْفَةً فِي الْفُنْدُقِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "سَتَحْجِزِينَ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "تَحْجِزِينَ",
+       "l": "ar:hajaza",
+       "f": "V;PRS;IND;2;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "غُرْفَةً",
+     "l": "ar:ghurfa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْفُنْدُقِ",
+     "l": "ar:funduq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.yesno"
+   ],
+   "gloss": "Will you (a woman) book a room in the hotel?",
+   "level": "A2",
+   "variantOf": "ar.c01_04.074",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.c01_04.076",
+   "frame": "fr.future.plan",
+   "text": "سَأَشْتَرِي حَقِيبَةَ سَفَرٍ جَدِيدَةً.",
+   "tokens": [
+    {
+     "t": "سَأَشْتَرِي",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "أَشْتَرِي",
+       "l": "ar:ishtara",
+       "f": "V;PRS;IND;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "حَقِيبَةَ سَفَرٍ",
+     "l": "ar:haqibat_safar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "جَدِيدَةً",
+     "l": "ar:jadid",
+     "f": "ADJ;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "I will buy a new suitcase.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.077",
+   "frame": "fr.future.plan",
+   "text": "سَأَزُورُ الْجِيرَانَ غَدًا.",
+   "tokens": [
+    {
+     "t": "سَأَزُورُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "أَزُورُ",
+       "l": "ar:zara",
+       "f": "V;PRS;IND;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "الْجِيرَانَ",
+     "l": "ar:jar",
+     "f": "N;ACC;PL;MASC;DEF"
+    },
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "I will visit the neighbours tomorrow.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.078",
+   "frame": "fr.future.plan",
+   "text": "أَزُورُ الْجِيرَانَ غَدًا.",
+   "tokens": [
+    {
+     "t": "أَزُورُ",
+     "l": "ar:zara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْجِيرَانَ",
+     "l": "ar:jar",
+     "f": "N;ACC;PL;MASC;DEF"
+    },
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.time.day"
+   ],
+   "gloss": "I’m visiting the neighbours tomorrow.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.077",
+   "variant": {
+    "Tense": "PRS"
+   }
+  },
+  {
+   "id": "ar.c01_04.079",
+   "frame": "fr.future.plan",
+   "text": "سَنَحْجِزُ الْفُنْدُقَ الْيَوْمَ.",
+   "tokens": [
+    {
+     "t": "سَنَحْجِزُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "نَحْجِزُ",
+       "l": "ar:hajaza",
+       "f": "V;PRS;IND;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "الْفُنْدُقَ",
+     "l": "ar:funduq",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "We will book the hotel today.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.080",
+   "frame": "fr.future.plan",
+   "text": "لَنْ نَحْجِزَ الْفُنْدُقَ الْيَوْمَ.",
+   "tokens": [
+    {
+     "t": "لَنْ",
+     "l": "ar:lan"
+    },
+    {
+     "t": "نَحْجِزَ",
+     "l": "ar:hajaza",
+     "f": "V;SBJV;1;PL"
+    },
+    {
+     "t": "الْفُنْدُقَ",
+     "l": "ar:funduq",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "We won’t book the hotel today.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.079",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.081",
+   "frame": "fr.future.plan",
+   "text": "الْمُرْشِدُ سَيَصِلُ فِي الْمَسَاءِ.",
+   "tokens": [
+    {
+     "t": "الْمُرْشِدُ",
+     "l": "ar:murshid",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "سَيَصِلُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "يَصِلُ",
+       "l": "ar:wasala",
+       "f": "V;PRS;IND;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَسَاءِ",
+     "l": "ar:masa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "The guide will arrive in the evening.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.082",
+   "frame": "fr.future.plan",
+   "text": "سَيُسَافِرُ السُّيَّاحُ بِالْحَافِلَةِ.",
+   "tokens": [
+    {
+     "t": "سَيُسَافِرُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "يُسَافِرُ",
+       "l": "ar:safara",
+       "f": "V;PRS;IND;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "السُّيَّاحُ",
+     "l": "ar:saih",
+     "f": "N;NOM;PL;MASC;DEF"
+    },
+    {
+     "t": "بِالْحَافِلَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْحَافِلَةِ",
+       "l": "ar:hafila",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The tourists will travel by bus.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.083",
+   "frame": "fr.future.plan",
+   "text": "سَوْفَ نَزُورُ الْمَدِينَةَ الْأُسْبُوعَ الْقَادِمَ.",
+   "tokens": [
+    {
+     "t": "سَوْفَ",
+     "l": "ar:sawfa"
+    },
+    {
+     "t": "نَزُورُ",
+     "l": "ar:zara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْمَدِينَةَ",
+     "l": "ar:madina",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "الْأُسْبُوعَ الْقَادِمَ",
+     "l": "ar:alusbua_alqadim"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "We will visit the city next week.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.084",
+   "frame": "fr.go.to",
+   "text": "أُسَافِرُ إِلَى الْقَرْيَةِ فِي الصَّيْفِ.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الصَّيْفِ",
+     "l": "ar:sayf",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "I travel to the village in the summer.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.085",
+   "frame": "fr.go.to",
+   "text": "سَأُسَافِرُ إِلَى الْقَرْيَةِ فِي الصَّيْفِ.",
+   "tokens": [
+    {
+     "t": "سَأُسَافِرُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "أُسَافِرُ",
+       "l": "ar:safara",
+       "f": "V;PRS;IND;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الصَّيْفِ",
+     "l": "ar:sayf",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "I will travel to the village in the summer.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.084",
+   "variant": {
+    "Tense": "FUT"
+   }
+  },
+  {
+   "id": "ar.c01_04.086",
+   "frame": "fr.ordinal",
+   "text": "الْيَوْمُ الْأَوَّلُ فِي الْمَدْرَسَةِ صَعْبٌ.",
+   "tokens": [
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْأَوَّلُ",
+     "l": "ar:awwal",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "صَعْبٌ",
+     "l": "ar:sab",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "The first day at school is hard.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.087",
+   "frame": "fr.ordinal",
+   "text": "بَيْتُنَا هُوَ الْبَيْتُ الثَّالِثُ فِي الشَّارِعِ.",
+   "tokens": [
+    {
+     "t": "بَيْتُنَا",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;POSS;PSS1P"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْبَيْتُ",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الثَّالِثُ",
+     "l": "ar:thalith",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الشَّارِعِ",
+     "l": "ar:shari",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "Our house is the third house in the street.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.088",
+   "frame": "fr.ordinal",
+   "text": "الْأَحَدُ هُوَ الْيَوْمُ الْأَوَّلُ مِنَ الْأُسْبُوعِ.",
+   "tokens": [
+    {
+     "t": "الْأَحَدُ",
+     "l": "ar:ahad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْأَوَّلُ",
+     "l": "ar:awwal",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْأُسْبُوعِ",
+     "l": "ar:usbu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.time.day"
+   ],
+   "gloss": "Sunday is the first day of the week.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.089",
+   "frame": "fr.ordinal",
+   "text": "السَّبْتُ هُوَ الْيَوْمُ السَّابِعُ.",
+   "tokens": [
+    {
+     "t": "السَّبْتُ",
+     "l": "ar:sabt",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "السَّابِعُ",
+     "l": "ar:sabi",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.time.day"
+   ],
+   "gloss": "Saturday is the seventh day.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.090",
+   "frame": "fr.ordinal",
+   "text": "هٰذَا هُوَ الْيَوْمُ الْأَخِيرُ مِنَ الرِّحْلَةِ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْأَخِيرُ",
+     "l": "ar:akhir",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الرِّحْلَةِ",
+     "l": "ar:rihla",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "This is the last day of the trip.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.091",
+   "frame": "fr.ordinal",
+   "text": "أَغُسْطُسُ هُوَ الشَّهْرُ الثَّامِنُ.",
+   "tokens": [
+    {
+     "t": "أَغُسْطُسُ",
+     "l": "ar:aghustus",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الشَّهْرُ",
+     "l": "ar:shahr",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الثَّامِنُ",
+     "l": "ar:thamin",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "August is the eighth month.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.092",
+   "frame": "fr.ordinal",
+   "text": "مَايُو هُوَ الشَّهْرُ الْخَامِسُ.",
+   "tokens": [
+    {
+     "t": "مَايُو",
+     "l": "ar:mayu",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الشَّهْرُ",
+     "l": "ar:shahr",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْخَامِسُ",
+     "l": "ar:khamis_ord",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "May is the fifth month.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.093",
+   "frame": "fr.ordinal",
+   "text": "هٰذِهِ الْمَدِينَةُ مِنَ الْقَرْنِ الْعَاشِرِ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "الْمَدِينَةُ",
+     "l": "ar:madina",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْقَرْنِ",
+     "l": "ar:qarn",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الْعَاشِرِ",
+     "l": "ar:ashir",
+     "f": "ADJ;GEN;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "This city is from the tenth century.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.094",
+   "frame": "fr.past.action",
+   "text": "بَقِيتُ فِي الْمَدِينَةِ عَقْدًا.",
+   "tokens": [
+    {
+     "t": "بَقِيتُ",
+     "l": "ar:baqiya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدِينَةِ",
+     "l": "ar:madina",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "عَقْدًا",
+     "l": "ar:aqd",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I stayed in the city for a decade.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.095",
+   "frame": "fr.ordinal",
+   "text": "الذِّكْرَى الثَّالِثَةُ يَوْمَ الْجُمُعَةِ.",
+   "tokens": [
+    {
+     "t": "الذِّكْرَى",
+     "l": "ar:dhikra",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الثَّالِثَةُ",
+     "l": "ar:thalith",
+     "f": "ADJ;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْجُمُعَةِ",
+     "l": "ar:jumua",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.time.day"
+   ],
+   "gloss": "The third anniversary is on Friday.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.096",
+   "frame": "fr.ordinal",
+   "text": "أَخِي هُوَ الطَّالِبُ الْأَوَّلُ.",
+   "tokens": [
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الطَّالِبُ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "الْأَوَّلُ",
+     "l": "ar:awwal",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "My brother is the top (first) student.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.097",
+   "frame": "fr.ordinal",
+   "text": "أُخْتِي هِيَ الطَّالِبَةُ الْأُولَى.",
+   "tokens": [
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الطَّالِبَةُ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "الْأُولَى",
+     "l": "ar:awwal",
+     "f": "ADJ;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "My sister is the top (first) student.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.096",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "ar.c01_04.098",
+   "frame": "fr.ordinal",
+   "text": "الرِّحْلَةُ الْأُولَى كَانَتْ جَمِيلَةً.",
+   "tokens": [
+    {
+     "t": "الرِّحْلَةُ",
+     "l": "ar:rihla",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْأُولَى",
+     "l": "ar:awwal",
+     "f": "ADJ;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "كَانَتْ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "جَمِيلَةً",
+     "l": "ar:jamil",
+     "f": "ADJ;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "The first trip was beautiful.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.099",
+   "frame": "fr.date",
+   "text": "الْيَوْمُ هُوَ الْخَامِسُ مِنْ مَايُو.",
+   "tokens": [
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْخَامِسُ",
+     "l": "ar:khamis_ord",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "مَايُو",
+     "l": "ar:mayu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "Today is the fifth of May.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.100",
+   "frame": "fr.date",
+   "text": "هَلِ الْيَوْمُ هُوَ الْخَامِسُ مِنْ مَايُو؟",
+   "tokens": [
+    {
+     "t": "هَلِ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْخَامِسُ",
+     "l": "ar:khamis_ord",
+     "f": "ADJ;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "مَايُو",
+     "l": "ar:mayu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is today the fifth of May?",
+   "level": "A2",
+   "variantOf": "ar.c01_04.099",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.c01_04.101",
+   "frame": "fr.date",
+   "text": "الْيَوْمُ لَيْسَ الْخَامِسَ مِنْ مَايُو.",
+   "tokens": [
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "الْخَامِسَ",
+     "l": "ar:khamis_ord",
+     "f": "ADJ;ACC;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "مَايُو",
+     "l": "ar:mayu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.negation"
+   ],
+   "gloss": "Today is not the fifth of May.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.099",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.c01_04.102",
+   "frame": "fr.date",
+   "text": "عِيدُ مِيلَادِي فِي الْأَوَّلِ مِنْ يَنَايِرَ.",
+   "tokens": [
+    {
+     "t": "عِيدُ مِيلَادِي",
+     "l": "ar:id_milad",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْأَوَّلِ",
+     "l": "ar:awwal",
+     "f": "ADJ;GEN;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "يَنَايِرَ",
+     "l": "ar:yanayir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "My birthday is on the first of January.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.103",
+   "frame": "fr.date",
+   "text": "وَصَلْنَا فِي الثَّانِي مِنْ مَايُو.",
+   "tokens": [
+    {
+     "t": "وَصَلْنَا",
+     "l": "ar:wasala",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الثَّانِي",
+     "l": "ar:thani",
+     "f": "ADJ;GEN;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "مَايُو",
+     "l": "ar:mayu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "We arrived on the second of May.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.104",
+   "frame": "fr.date",
+   "text": "سَنُسَافِرُ فِي الْعَاشِرِ مِنْ أَغُسْطُسَ.",
+   "tokens": [
+    {
+     "t": "سَنُسَافِرُ",
+     "parts": [
+      {
+       "t": "سَ",
+       "l": "ar:sa"
+      },
+      {
+       "t": "نُسَافِرُ",
+       "l": "ar:safara",
+       "f": "V;PRS;IND;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَاشِرِ",
+     "l": "ar:ashir",
+     "f": "ADJ;GEN;SG;MASC;DEF"
+    },
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "أَغُسْطُسَ",
+     "l": "ar:aghustus",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.future"
+   ],
+   "gloss": "We will travel on the tenth of August.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.105",
+   "frame": "fr.clock",
+   "text": "السَّاعَةُ الْآنَ الثَّالِثَةُ.",
+   "tokens": [
+    {
+     "t": "السَّاعَةُ",
+     "l": "ar:saa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْآنَ",
+     "l": "ar:alana"
+    },
+    {
+     "t": "الثَّالِثَةُ",
+     "l": "ar:thalith",
+     "f": "ADJ;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.time.day"
+   ],
+   "gloss": "It is three o’clock now.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.106",
+   "frame": "fr.clock",
+   "text": "السَّاعَةُ الْآنَ الثَّالِثَةُ وَالنِّصْفُ.",
+   "tokens": [
+    {
+     "t": "السَّاعَةُ",
+     "l": "ar:saa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْآنَ",
+     "l": "ar:alana"
+    },
+    {
+     "t": "الثَّالِثَةُ",
+     "l": "ar:thalith",
+     "f": "ADJ;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "وَالنِّصْفُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "النِّصْفُ",
+       "l": "ar:nisf",
+       "f": "N;NOM;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.connectors",
+    "fn.time.day"
+   ],
+   "gloss": "It is half past three now.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.107",
+   "frame": "fr.clock",
+   "text": "السَّاعَةُ الْخَامِسَةُ وَالرُّبْعُ.",
+   "tokens": [
+    {
+     "t": "السَّاعَةُ",
+     "l": "ar:saa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْخَامِسَةُ",
+     "l": "ar:khamis_ord",
+     "f": "ADJ;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "وَالرُّبْعُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الرُّبْعُ",
+       "l": "ar:rub",
+       "f": "N;NOM;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.connectors"
+   ],
+   "gloss": "It is a quarter past five.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.108",
+   "frame": "fr.clock",
+   "text": "أَسْتَيْقِظُ فِي السَّاعَةِ السَّادِسَةِ.",
+   "tokens": [
+    {
+     "t": "أَسْتَيْقِظُ",
+     "l": "ar:istayqaza",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "السَّادِسَةِ",
+     "l": "ar:sadis",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "gloss": "I wake up at six o’clock.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.109",
+   "frame": "fr.clock",
+   "text": "اِسْتَيْقَظْتُ فِي السَّاعَةِ السَّادِسَةِ.",
+   "tokens": [
+    {
+     "t": "اِسْتَيْقَظْتُ",
+     "l": "ar:istayqaza",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "السَّادِسَةِ",
+     "l": "ar:sadis",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "I woke up at six o’clock.",
+   "level": "A2",
+   "variantOf": "ar.c01_04.108",
+   "variant": {
+    "Tense": "PST"
+   }
+  },
+  {
+   "id": "ar.c01_04.110",
+   "frame": "fr.clock",
+   "text": "يَبْدَأُ الْعَمَلُ فِي السَّاعَةِ الثَّامِنَةِ وَالنِّصْفِ.",
+   "tokens": [
+    {
+     "t": "يَبْدَأُ",
+     "l": "ar:badaa",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْعَمَلُ",
+     "l": "ar:amal",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الثَّامِنَةِ",
+     "l": "ar:thamin",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": "وَالنِّصْفِ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "النِّصْفِ",
+       "l": "ar:nisf",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present",
+    "fn.connectors"
+   ],
+   "gloss": "Work starts at half past eight.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.111",
+   "frame": "fr.clock",
+   "text": "نَنَامُ فِي السَّاعَةِ الْعَاشِرَةِ.",
+   "tokens": [
+    {
+     "t": "نَنَامُ",
+     "l": "ar:nama",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الْعَاشِرَةِ",
+     "l": "ar:ashir",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "gloss": "We go to bed at ten o’clock.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.112",
+   "frame": "fr.clock",
+   "text": "وَصَلَ الْقِطَارُ فِي السَّاعَةِ التَّاسِعَةِ وَالرُّبْعِ.",
+   "tokens": [
+    {
+     "t": "وَصَلَ",
+     "l": "ar:wasala",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "التَّاسِعَةِ",
+     "l": "ar:tasi",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": "وَالرُّبْعِ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الرُّبْعِ",
+       "l": "ar:rub",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "The train arrived at a quarter past nine.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.113",
+   "frame": "fr.clock",
+   "text": "تَنْتَهِي الْمَدْرَسَةُ فِي السَّاعَةِ الرَّابِعَةِ.",
+   "tokens": [
+    {
+     "t": "تَنْتَهِي",
+     "l": "ar:intaha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْمَدْرَسَةُ",
+     "l": "ar:madrasa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الرَّابِعَةِ",
+     "l": "ar:rabi_ord",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "gloss": "School finishes at four o’clock.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.114",
+   "frame": "fr.clock",
+   "text": "أَمْسِ اسْتَيْقَظْتُ فِي السَّاعَةِ السَّادِسَةِ وَأَفْطَرْتُ فِي السَّاعَةِ السَّابِعَةِ.",
+   "tokens": [
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": "اسْتَيْقَظْتُ",
+     "l": "ar:istayqaza",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "السَّادِسَةِ",
+     "l": "ar:sadis",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": "وَأَفْطَرْتُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "أَفْطَرْتُ",
+       "l": "ar:aftara",
+       "f": "V;PST;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "السَّابِعَةِ",
+     "l": "ar:sabi",
+     "f": "ADJ;GEN;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.connectors",
+    "fn.time.day"
+   ],
+   "gloss": "Yesterday I woke up at six and had breakfast at seven.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.115",
+   "frame": "fr.past.action",
+   "text": "اِنْتَظَرْتُ نِصْفَ سَاعَةٍ.",
+   "tokens": [
+    {
+     "t": "اِنْتَظَرْتُ",
+     "l": "ar:intazara",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "نِصْفَ",
+     "l": "ar:nisf",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "سَاعَةٍ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "I waited half an hour.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.116",
+   "frame": "fr.past.action",
+   "text": "شَرِبْتُ نِصْفَ الْعَصِيرِ.",
+   "tokens": [
+    {
+     "t": "شَرِبْتُ",
+     "l": "ar:shariba",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "نِصْفَ",
+     "l": "ar:nisf",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْعَصِيرِ",
+     "l": "ar:asir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "I drank half of the juice.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.c01_04.117",
+   "frame": "fr.past.action",
+   "text": "اِنْتَظَرْنَا رُبْعَ سَاعَةٍ.",
+   "tokens": [
+    {
+     "t": "اِنْتَظَرْنَا",
+     "l": "ar:intazara",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "رُبْعَ",
+     "l": "ar:rub",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "سَاعَةٍ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "We waited a quarter of an hour.",
+   "level": "A2"
+  }
+ ]
+}

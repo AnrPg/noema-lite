@@ -1,0 +1,1751 @@
+{
+ "field": "verbs",
+ "title": "Everyday verbs",
+ "subgroups": [
+  {
+   "id": "eat",
+   "title": "Eating and drinking"
+  },
+  {
+   "id": "move",
+   "title": "Going and coming"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "The first verbs: eating and drinking, going and coming — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "verb.eat",
+   "gloss": "to eat",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "verb.drink",
+   "gloss": "to drink",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "verb.want",
+   "gloss": "to want",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "verb.like",
+   "gloss": "to like",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "verb.cook",
+   "gloss": "to cook",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "verb.buy",
+   "gloss": "to buy",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "verb.go",
+   "gloss": "to go",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "verb.come",
+   "gloss": "to come",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "verb.walk",
+   "gloss": "to walk, go on foot",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "verb.run",
+   "gloss": "to run",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "verb.drive",
+   "gloss": "to drive (a car)",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "verb.travel",
+   "gloss": "to travel",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "verb.return",
+   "gloss": "to return, come back",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "verb.enter",
+   "gloss": "to enter, go in",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "verb.leave",
+   "gloss": "to leave, go out (of a place)",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "verb.arrive",
+   "gloss": "to arrive",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "verb.stay",
+   "gloss": "to stay",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "verb.wait",
+   "gloss": "to wait",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "verb.abandon",
+   "gloss": "to leave, abandon (a person)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.accept",
+   "gloss": "to accept favourably, be pleased with (Biblical)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.accumulate",
+   "gloss": "to pile up, to accumulate (积累)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.acquire",
+   "gloss": "to acquire, obtain (wisdom, a friend, knowledge)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.advance",
+   "gloss": "to advance, to move forward",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.aux.perfect",
+   "gloss": "auxiliary of the perfect (have / be + past participle)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.be.located",
+   "gloss": "to be (located) at, to be in (a place)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.beaboutto",
+   "gloss": "to be about to (of things)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.become",
+   "gloss": "to be, to act as, to become (written: 成为, 以…为…)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.becomereligious",
+   "gloss": "to become religious (return to the faith)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.begoingto",
+   "gloss": "to be going to (near future)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.believe",
+   "gloss": "to believe, accept as true (“buy” a story)",
+   "tier": 1,
+   "rank": 113,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.beon",
+   "gloss": "to be on (TV, radio, cinema)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.bepossible",
+   "gloss": "to work, be possible, be OK (that won’t work)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.bereceived",
+   "gloss": "to be received, go down (well or badly)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.bid",
+   "gloss": "to bid (welcome); to tell, order (someone to do something)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.bloom",
+   "gloss": "to bloom, to blossom (of flowers)",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.boil",
+   "gloss": "to boil, stew (food in water)",
+   "tier": 1,
+   "rank": 138,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.bring",
+   "gloss": "to bring",
+   "tier": 1,
+   "rank": 60,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.bumpinto",
+   "gloss": "to bump into, crash into",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.call",
+   "gloss": "to call (out to someone), to shout",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.change",
+   "gloss": "to change, to replace (更新 to update)",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.cheaton",
+   "gloss": "to cheat on (a man) (slang: 他被绿了 he was cheated on)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.claim",
+   "gloss": "to claim (to have done something)",
+   "tier": 1,
+   "rank": 114,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.compare",
+   "gloss": "to compare; to compete",
+   "tier": 2,
+   "rank": 25,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.connect",
+   "gloss": "to connect, to join",
+   "tier": 2,
+   "rank": 26,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.corrode",
+   "gloss": "to eat away, to corrode",
+   "tier": 2,
+   "rank": 27,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.date",
+   "gloss": "to go out with, date (someone)",
+   "tier": 2,
+   "rank": 28,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.depart",
+   "gloss": "to depart, to set off (of a train, a bus)",
+   "tier": 2,
+   "rank": 29,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.depend",
+   "gloss": "to depend (on) (it depends on …)",
+   "tier": 2,
+   "rank": 30,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.deserve",
+   "gloss": "to deserve, be due",
+   "tier": 2,
+   "rank": 31,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.divide",
+   "gloss": "to divide, to separate, to share out",
+   "tier": 2,
+   "rank": 32,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.do",
+   "gloss": "to do, to have, to take (a stand-in verb: 来一杯咖啡 a coffee, please; 我来 let me do it)",
+   "tier": 2,
+   "rank": 33,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.escape",
+   "gloss": "to run away, to escape",
+   "tier": 2,
+   "rank": 34,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.exist",
+   "gloss": "to exist; there is / there are",
+   "tier": 2,
+   "rank": 35,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.fall",
+   "gloss": "to fall (of rain or snow: 下雨 it rains)",
+   "tier": 1,
+   "rank": 129,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.fallthrough",
+   "gloss": "to fall through, to come to nothing (这件事黄了)",
+   "tier": 2,
+   "rank": 37,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.fare",
+   "gloss": "to be, to fare (how someone is: how are you?)",
+   "tier": 2,
+   "rank": 38,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.finish",
+   "gloss": "to finish; (…不了) cannot manage",
+   "tier": 1,
+   "rank": 27,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.fit",
+   "gloss": "to fit (in), go in (a container, a room)",
+   "tier": 2,
+   "rank": 40,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.flop",
+   "gloss": "to flop (dated fandom slang)",
+   "tier": 2,
+   "rank": 41,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.follow",
+   "gloss": "to follow",
+   "tier": 2,
+   "rank": 42,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.function",
+   "gloss": "to work, to run (of a machine)",
+   "tier": 2,
+   "rank": 43,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.give",
+   "gloss": "to give",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.go.vehicle",
+   "gloss": "to go, travel (by vehicle)",
+   "tier": 2,
+   "rank": 45,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.godown",
+   "gloss": "to go down; to get off (a vehicle); to finish (下班, 下课)",
+   "tier": 2,
+   "rank": 46,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.goout",
+   "gloss": "to go out (in the evening, for fun)",
+   "tier": 2,
+   "rank": 47,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.goup",
+   "gloss": "to go up; to get on (a vehicle); to go to (school, work: 上学, 上班)",
+   "tier": 2,
+   "rank": 48,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.grow",
+   "gloss": "to grow (read zhǎng: 长大 grow up)",
+   "tier": 1,
+   "rank": 134,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.heat",
+   "gloss": "to heat up, to warm up (food)",
+   "tier": 2,
+   "rank": 50,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.hire",
+   "gloss": "to hire, to engage (someone)",
+   "tier": 2,
+   "rank": 51,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.holdview",
+   "gloss": "to hold the view (that)",
+   "tier": 2,
+   "rank": 52,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.invite",
+   "gloss": "to invite; to treat (someone to a meal)",
+   "tier": 1,
+   "rank": 143,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.keep",
+   "gloss": "to keep, to save, to leave (behind): 留言 leave a message",
+   "tier": 2,
+   "rank": 54,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.lack",
+   "gloss": "to lack, to be short of, to be missing",
+   "tier": 2,
+   "rank": 55,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.lead",
+   "gloss": "to lead, to command",
+   "tier": 2,
+   "rank": 56,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.leavealone",
+   "gloss": "to leave alone, let be (forget it!)",
+   "tier": 2,
+   "rank": 57,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.let",
+   "gloss": "to let, to make (someone do something); to tell (someone to)",
+   "tier": 1,
+   "rank": 152,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.letdown",
+   "gloss": "to let (someone) down, to wrong",
+   "tier": 2,
+   "rank": 59,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.lookforward",
+   "gloss": "to look forward to, can’t wait for",
+   "tier": 2,
+   "rank": 60,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.love",
+   "gloss": "to love (a person)",
+   "tier": 1,
+   "rank": 69,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.maintain",
+   "gloss": "to service, maintain (a machine)",
+   "tier": 2,
+   "rank": 62,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.makefunof",
+   "gloss": "to make fun of (拿…开心)",
+   "tier": 2,
+   "rank": 63,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.may",
+   "gloss": "may (possibility, concession: that may be)",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.mean",
+   "gloss": "to mean (What does that mean?)",
+   "tier": 1,
+   "rank": 115,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.miss",
+   "gloss": "to miss (a person, home), to long for",
+   "tier": 1,
+   "rank": 94,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.must",
+   "gloss": "must, have to (عَلَيْكَ أَنْ …)",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.need",
+   "gloss": "to need; to take, to cost (time, money)",
+   "tier": 1,
+   "rank": 41,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.nothave",
+   "gloss": "not to have; there is not (short for 没有)",
+   "tier": 2,
+   "rank": 69,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.open",
+   "gloss": "to open (a door, a window)",
+   "tier": 1,
+   "rank": 125,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.order",
+   "gloss": "to order (food, a taxi)",
+   "tier": 1,
+   "rank": 65,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.own",
+   "gloss": "to own; possession (所有权 ownership)",
+   "tier": 2,
+   "rank": 72,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.partfrom",
+   "gloss": "to part (from), to take leave (literary: 告别, 离别)",
+   "tier": 2,
+   "rank": 73,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.pass",
+   "gloss": "to cross, to pass; to spend (time), to celebrate (过生日)",
+   "tier": 2,
+   "rank": 74,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.produce",
+   "gloss": "to produce, to put out, to issue (出书 to publish a book)",
+   "tier": 2,
+   "rank": 75,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.reach",
+   "gloss": "to get to, reach (a place)",
+   "tier": 2,
+   "rank": 76,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.rely",
+   "gloss": "to rely on",
+   "tier": 2,
+   "rank": 77,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.remove",
+   "gloss": "to remove, to get rid of",
+   "tier": 2,
+   "rank": 78,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.repeat",
+   "gloss": "to repeat, do again",
+   "tier": 2,
+   "rank": 79,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.reply",
+   "gloss": "to reply, to answer (回电话 to call back)",
+   "tier": 2,
+   "rank": 80,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.request",
+   "gloss": "to ask, to request (someone to do something)",
+   "tier": 2,
+   "rank": 81,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.ride",
+   "gloss": "to ride (a bicycle, a horse, a motorbike)",
+   "tier": 2,
+   "rank": 82,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.run.election",
+   "gloss": "to run (for office), be a candidate",
+   "tier": 2,
+   "rank": 83,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.sit",
+   "gloss": "to sit, to take a seat",
+   "tier": 2,
+   "rank": 84,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.smoke",
+   "gloss": "to smoke (cigarettes, shisha)",
+   "tier": 2,
+   "rank": 85,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.start",
+   "gloss": "to start, to open, to hold (a shop, a meeting: 开店, 开会)",
+   "tier": 1,
+   "rank": 26,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.studyabroad",
+   "gloss": "to study abroad (short for 留学)",
+   "tier": 2,
+   "rank": 87,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.suffer",
+   "gloss": "to suffer, to endure (吃苦, 吃亏)",
+   "tier": 2,
+   "rank": 88,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.switchon",
+   "gloss": "to switch on, to turn on (a light, a machine)",
+   "tier": 2,
+   "rank": 89,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.take.medicine",
+   "gloss": "to take (medicine)",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.take.transport",
+   "gloss": "to go by, to take (a bus, a train, a plane — as a passenger)",
+   "tier": 2,
+   "rank": 91,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.talkdirty",
+   "gloss": "to tell dirty jokes, to post adult content (internet slang)",
+   "tier": 2,
+   "rank": 92,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.thank",
+   "gloss": "to thank",
+   "tier": 1,
+   "rank": 146,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.think",
+   "gloss": "to think; to think over; to suppose",
+   "tier": 1,
+   "rank": 112,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.treat",
+   "gloss": "to treat (someone in a certain way), behave towards",
+   "tier": 2,
+   "rank": 95,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.turnout",
+   "gloss": "to come out, turn out (well or badly)",
+   "tier": 2,
+   "rank": 96,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.usedto",
+   "gloss": "to be in the habit of, used to (do)",
+   "tier": 2,
+   "rank": 97,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.visit",
+   "gloss": "to visit (especially a sick person)",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.warm",
+   "gloss": "to warm (oneself) up",
+   "tier": 2,
+   "rank": 99,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.work",
+   "gloss": "to work; to have a job",
+   "tier": 2,
+   "rank": 100,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.wouldlike",
+   "gloss": "would like (polite wish)",
+   "tier": 1,
+   "rank": 66,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.wrap",
+   "gloss": "to wrap",
+   "tier": 2,
+   "rank": 102,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.write",
+   "gloss": "to write; script, calligraphy (literary)",
+   "tier": 2,
+   "rank": 103,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "verb.wakeup",
+   "gloss": "to wake up",
+   "tier": 1,
+   "rank": 19,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.getup",
+   "gloss": "to get up",
+   "tier": 1,
+   "rank": 20,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.wash",
+   "gloss": "to wash (oneself or something)",
+   "tier": 1,
+   "rank": 21,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.shower",
+   "gloss": "to take a shower",
+   "tier": 1,
+   "rank": 22,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.getdressed",
+   "gloss": "to get dressed",
+   "tier": 1,
+   "rank": 23,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.havebreakfast",
+   "gloss": "to have breakfast",
+   "tier": 1,
+   "rank": 24,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.leavehome",
+   "gloss": "to leave home, to go out",
+   "tier": 1,
+   "rank": 25,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.comehome",
+   "gloss": "to come home",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.gotobed",
+   "gloss": "to go to bed",
+   "tier": 1,
+   "rank": 29,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.fallasleep",
+   "gloss": "to fall asleep",
+   "tier": 1,
+   "rank": 30,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.sleep",
+   "gloss": "to sleep",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.play",
+   "gloss": "to play",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.growup",
+   "gloss": "to grow up",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.remember",
+   "gloss": "to remember",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.forget",
+   "gloss": "to forget",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.book",
+   "gloss": "to book, to reserve",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.can",
+   "gloss": "can, to be able to",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.should",
+   "gloss": "should, ought to",
+   "tier": 1,
+   "rank": 42,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.hurt",
+   "gloss": "to hurt (my head hurts)",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.rest",
+   "gloss": "to rest",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.getwell",
+   "gloss": "to get well, to recover",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.wear",
+   "gloss": "to wear, to have on",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.puton",
+   "gloss": "to put on (clothes)",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.takeoff",
+   "gloss": "to take off (clothes)",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.washoneself",
+   "gloss": "to wash (oneself)",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.shave",
+   "gloss": "to shave",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.comb",
+   "gloss": "to comb (one's hair)",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.brushteeth",
+   "gloss": "to brush (one's teeth)",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.dryoneself",
+   "gloss": "to dry oneself",
+   "tier": 1,
+   "rank": 54,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.meet",
+   "gloss": "to meet",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.send",
+   "gloss": "to send",
+   "tier": 1,
+   "rank": 57,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.show",
+   "gloss": "to show",
+   "tier": 1,
+   "rank": 58,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.tell",
+   "gloss": "to tell (someone something)",
+   "tier": 1,
+   "rank": 59,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.lend",
+   "gloss": "to lend",
+   "tier": 1,
+   "rank": 61,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.borrow",
+   "gloss": "to borrow",
+   "tier": 1,
+   "rank": 62,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.explain",
+   "gloss": "to explain",
+   "tier": 1,
+   "rank": 63,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.cost",
+   "gloss": "to cost",
+   "tier": 1,
+   "rank": 64,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.rain",
+   "gloss": "to rain",
+   "tier": 1,
+   "rank": 67,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.snow",
+   "gloss": "to snow",
+   "tier": 1,
+   "rank": 68,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.hate",
+   "gloss": "to hate",
+   "tier": 1,
+   "rank": 70,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.feel",
+   "gloss": "to feel",
+   "tier": 1,
+   "rank": 71,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.laugh",
+   "gloss": "to laugh",
+   "tier": 1,
+   "rank": 72,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.cry",
+   "gloss": "to cry, to weep",
+   "tier": 1,
+   "rank": 73,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.smile",
+   "gloss": "to smile",
+   "tier": 1,
+   "rank": 74,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.clean",
+   "gloss": "to clean",
+   "tier": 1,
+   "rank": 75,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.washdishes",
+   "gloss": "to wash the dishes",
+   "tier": 1,
+   "rank": 76,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.iron",
+   "gloss": "to iron",
+   "tier": 1,
+   "rank": 77,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.tidy",
+   "gloss": "to tidy up",
+   "tier": 1,
+   "rank": 78,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.sweep",
+   "gloss": "to sweep",
+   "tier": 1,
+   "rank": 79,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.happen",
+   "gloss": "to happen",
+   "tier": 1,
+   "rank": 80,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.find",
+   "gloss": "to find",
+   "tier": 1,
+   "rank": 81,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.lose",
+   "gloss": "to lose (something)",
+   "tier": 1,
+   "rank": 82,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.decide",
+   "gloss": "to decide",
+   "tier": 1,
+   "rank": 83,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.notice",
+   "gloss": "to notice",
+   "tier": 1,
+   "rank": 84,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.turn",
+   "gloss": "to turn",
+   "tier": 1,
+   "rank": 85,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.cross",
+   "gloss": "to cross (a street)",
+   "tier": 1,
+   "rank": 86,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.swim",
+   "gloss": "to swim",
+   "tier": 1,
+   "rank": 87,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.dance",
+   "gloss": "to dance",
+   "tier": 1,
+   "rank": 88,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.sing",
+   "gloss": "to sing",
+   "tier": 1,
+   "rank": 89,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.win",
+   "gloss": "to win",
+   "tier": 1,
+   "rank": 90,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.losegame",
+   "gloss": "to lose (a game)",
+   "tier": 1,
+   "rank": 91,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.try",
+   "gloss": "to try",
+   "tier": 1,
+   "rank": 92,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.stop",
+   "gloss": "to stop (doing)",
+   "tier": 1,
+   "rank": 93,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.repair",
+   "gloss": "to repair, to fix",
+   "tier": 1,
+   "rank": 95,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.solve",
+   "gloss": "to solve",
+   "tier": 1,
+   "rank": 96,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.help",
+   "gloss": "to help",
+   "tier": 1,
+   "rank": 97,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.hope",
+   "gloss": "to hope",
+   "tier": 1,
+   "rank": 98,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.wish",
+   "gloss": "to wish",
+   "tier": 1,
+   "rank": 99,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.regret",
+   "gloss": "to regret",
+   "tier": 1,
+   "rank": 100,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.choose",
+   "gloss": "to choose",
+   "tier": 1,
+   "rank": 101,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.build",
+   "gloss": "to build",
+   "tier": 1,
+   "rank": 102,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.invent",
+   "gloss": "to invent",
+   "tier": 1,
+   "rank": 103,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.discover",
+   "gloss": "to discover",
+   "tier": 1,
+   "rank": 104,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.found",
+   "gloss": "to found (a city, a company)",
+   "tier": 1,
+   "rank": 105,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.destroy",
+   "gloss": "to destroy",
+   "tier": 1,
+   "rank": 106,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.elect",
+   "gloss": "to elect",
+   "tier": 1,
+   "rank": 107,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.report",
+   "gloss": "to report",
+   "tier": 1,
+   "rank": 108,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.say",
+   "gloss": "to say",
+   "tier": 1,
+   "rank": 109,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.ask",
+   "gloss": "to ask (a question)",
+   "tier": 1,
+   "rank": 110,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.answer",
+   "gloss": "to answer",
+   "tier": 1,
+   "rank": 111,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.promise",
+   "gloss": "to promise",
+   "tier": 1,
+   "rank": 116,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.know.fact",
+   "gloss": "to know (a fact)",
+   "tier": 1,
+   "rank": 117,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.know.person",
+   "gloss": "to know (a person, a place), to be acquainted with",
+   "tier": 1,
+   "rank": 118,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.understand",
+   "gloss": "to understand",
+   "tier": 1,
+   "rank": 119,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.learn",
+   "gloss": "to learn",
+   "tier": 1,
+   "rank": 120,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.teach",
+   "gloss": "to teach",
+   "tier": 1,
+   "rank": 121,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.apply",
+   "gloss": "to apply (for a job)",
+   "tier": 1,
+   "rank": 122,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.employ",
+   "gloss": "to employ, to hire",
+   "tier": 1,
+   "rank": 123,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.retire",
+   "gloss": "to retire",
+   "tier": 1,
+   "rank": 124,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.close",
+   "gloss": "to close",
+   "tier": 1,
+   "rank": 126,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.rise",
+   "gloss": "to rise, to go up",
+   "tier": 1,
+   "rank": 127,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.raise",
+   "gloss": "to raise, to lift",
+   "tier": 1,
+   "rank": 128,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.drop",
+   "gloss": "to drop",
+   "tier": 1,
+   "rank": 130,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.wake",
+   "gloss": "to wake (someone) up",
+   "tier": 1,
+   "rank": 131,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.break",
+   "gloss": "to break",
+   "tier": 1,
+   "rank": 132,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.fix",
+   "gloss": "to fix, to mend",
+   "tier": 1,
+   "rank": 133,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.agree",
+   "gloss": "to agree",
+   "tier": 1,
+   "rank": 135,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.disagree",
+   "gloss": "to disagree",
+   "tier": 1,
+   "rank": 136,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.cut",
+   "gloss": "to cut",
+   "tier": 1,
+   "rank": 137,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.fry",
+   "gloss": "to fry",
+   "tier": 1,
+   "rank": 139,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.bake",
+   "gloss": "to bake",
+   "tier": 1,
+   "rank": 140,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.mix",
+   "gloss": "to mix",
+   "tier": 1,
+   "rank": 141,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.add",
+   "gloss": "to add",
+   "tier": 1,
+   "rank": 142,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.congratulate",
+   "gloss": "to congratulate",
+   "tier": 1,
+   "rank": 144,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.celebrate",
+   "gloss": "to celebrate",
+   "tier": 1,
+   "rank": 145,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.apologise",
+   "gloss": "to apologise",
+   "tier": 1,
+   "rank": 147,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.download",
+   "gloss": "to download",
+   "tier": 1,
+   "rank": 148,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.post",
+   "gloss": "to post (online)",
+   "tier": 1,
+   "rank": 149,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.charge",
+   "gloss": "to charge (a phone)",
+   "tier": 1,
+   "rank": 150,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.deliver",
+   "gloss": "to deliver",
+   "tier": 1,
+   "rank": 151,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.protect",
+   "gloss": "to protect",
+   "tier": 1,
+   "rank": 153,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.reduce",
+   "gloss": "to reduce",
+   "tier": 1,
+   "rank": 154,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.prove",
+   "gloss": "to prove",
+   "tier": 1,
+   "rank": 155,
+   "subgroup": "core"
+  },
+  {
+   "id": "verb.measure",
+   "gloss": "to measure",
+   "tier": 1,
+   "rank": 156,
+   "subgroup": "core"
+  }
+ ]
+}

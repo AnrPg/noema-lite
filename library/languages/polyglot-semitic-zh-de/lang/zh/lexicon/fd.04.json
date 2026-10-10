@@ -1,0 +1,3454 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:fangzi",
+   "lemma": "房子",
+   "trad": "房子",
+   "pinyin": "fáng zi",
+   "pos": "NOUN",
+   "senses": [
+    "home.house",
+    "home.room"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "栋",
+     "座",
+     "所",
+     "套",
+     "间"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.room",
+     "axis": "standard or regional",
+     "value": "room only in some regions (in standard Mandarin 房子 is the house)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Home and property — in today’s China also the big life goal of owning a flat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "house; a building to live in",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.house"
+     },
+     {
+      "id": "s2",
+      "def": "a flat, a home (as property: 买房子)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "room (regional: 一间房子)",
+      "register": [
+       "regional"
+      ],
+      "concept": "home.room"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是一栋老房子。",
+      "py": "Zhè shì yí dòng lǎo fángzi.",
+      "tr": "This is an old house.",
+      "register": "neutral",
+      "context": "in town",
+      "sense": "s1"
+     },
+     {
+      "text": "这栋房子很大。",
+      "py": "Zhè dòng fángzi hěn dà.",
+      "tr": "This house is big.",
+      "register": "neutral",
+      "context": "describing",
+      "sense": "s1"
+     },
+     {
+      "text": "他们在城里买了一套房子。",
+      "py": "Tāmen zài chéng lǐ mǎile yí tào fángzi.",
+      "tr": "They bought a flat in the city.",
+      "register": "neutral",
+      "context": "property",
+      "sense": "s2"
+     },
+     {
+      "text": "我家有三间房子。",
+      "py": "Wǒ jiā yǒu sān jiān fángzi.",
+      "tr": "Our home has three rooms.",
+      "register": "regional",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "这间房子是我的卧室。",
+      "py": "Zhè jiān fángzi shì wǒ de wòshì.",
+      "tr": "This room is my bedroom.",
+      "register": "regional",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "买房子",
+      "tr": "to buy a house / flat"
+     },
+     {
+      "text": "租房子",
+      "tr": "to rent a place"
+     },
+     {
+      "text": "老房子",
+      "tr": "an old house"
+     },
+     {
+      "text": "新房子",
+      "tr": "a new house"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "房奴",
+      "tr": "house slave",
+      "kind": "slang",
+      "meaning": "someone crushed by a mortgage",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "房屋",
+      "register": "formal",
+      "nuance": "‘buildings, housing’ — documents, statistics"
+     },
+     {
+      "word": "住宅",
+      "register": "formal",
+      "nuance": "‘residence, dwelling’ — official, estate agents"
+     },
+     {
+      "word": "别墅",
+      "register": "neutral",
+      "nuance": "‘villa, detached house’"
+     },
+     {
+      "word": "家",
+      "register": "neutral",
+      "nuance": "‘home’ — the family place, not the building: 我回家 ‘I’m going home’"
+     }
+    ],
+    "etymology": {
+     "text": "房 ‘room, house’ (户 ‘door’ + phonetic 方) + the toneless noun suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In mainland cities most people live in flats, so 买房子 ‘to buy a house’ usually means buying a flat — counted with 套 ‘set (of rooms)’."
+    ],
+    "pitfalls": [
+     "‘Home’ is 家: 我回家 ‘I go home’ — not *我回房子.",
+     "Measure words: 一栋 / 一座 / 一所房子 for a building, 一套房子 for a flat."
+    ],
+    "subtleties": [
+     "In some regions 房子 also means a single room: 一间房子."
+    ]
+   }
+  },
+  {
+   "id": "zh:gongyu",
+   "lemma": "公寓",
+   "trad": "公寓",
+   "pinyin": "gōng yù",
+   "pos": "NOUN",
+   "senses": [
+    "home.flat",
+    "home.apartmentbuilding"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "套",
+     "间",
+     "栋",
+     "座"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A flat in a block — often rented, serviced or for students.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "flat, apartment (one unit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.flat"
+     },
+     {
+      "id": "s2",
+      "def": "apartment building, block of flats",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.apartmentbuilding"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她住在一套小公寓里。",
+      "py": "Tā zhù zài yí tào xiǎo gōngyù li.",
+      "tr": "She lives in a small flat.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "我们租了一套公寓。",
+      "py": "Wǒmen zūle yí tào gōngyù.",
+      "tr": "We rented a flat.",
+      "register": "neutral",
+      "context": "renting",
+      "sense": "s1"
+     },
+     {
+      "text": "这栋公寓有二十层。",
+      "py": "Zhè dòng gōngyù yǒu èrshí céng.",
+      "tr": "This block of flats has twenty floors.",
+      "register": "neutral",
+      "context": "in town",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "租公寓",
+      "tr": "to rent a flat"
+     },
+     {
+      "text": "学生公寓",
+      "tr": "student flats, halls of residence"
+     },
+     {
+      "text": "公寓楼",
+      "tr": "apartment building"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "房子",
+      "register": "neutral",
+      "nuance": "the everyday word for one’s home — mainland speakers rarely call their own flat 公寓"
+     },
+     {
+      "word": "单元房",
+      "register": "neutral",
+      "nuance": "a flat in a residential block (mainland)"
+     },
+     {
+      "word": "套房",
+      "register": "neutral",
+      "nuance": "a self-contained flat or a hotel suite"
+     },
+     {
+      "word": "楼房",
+      "register": "neutral",
+      "nuance": "a multi-storey building, as opposed to a one-storey house"
+     }
+    ],
+    "etymology": {
+     "text": "公 ‘public, common’ + 寓 ‘to lodge; residence’ (宀 ‘roof’ + phonetic 禺).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Taiwan 公寓 is the classic walk-up block of four or five floors without a lift, as opposed to a 大樓 with a lift."
+    ],
+    "pitfalls": [
+     "Mainland speakers usually say 我家 or 我的房子 for their own flat; 公寓 suggests a rented or serviced apartment.",
+     "Measure words: 一套公寓 ‘a flat’, 一栋公寓 ‘a block of flats’."
+    ],
+    "subtleties": [
+     "学生公寓 are university halls of residence."
+    ]
+   }
+  },
+  {
+   "id": "zh:fangjian",
+   "lemma": "房间",
+   "trad": "房間",
+   "pinyin": "fáng jiān",
+   "pos": "NOUN",
+   "senses": [
+    "home.room"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 房間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "间",
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.room",
+     "axis": "standard or regional",
+     "value": "room — standard Mandarin"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A room of your own — at home or in a hotel.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "room (in a house, flat or hotel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.room"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的房间很小。",
+      "py": "Wǒ de fángjiān hěn xiǎo.",
+      "tr": "My room is small.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "这个房间有两张床。",
+      "py": "Zhège fángjiān yǒu liǎng zhāng chuáng.",
+      "tr": "This room has two beds.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "你好，我想订一个房间。",
+      "py": "Nǐ hǎo, wǒ xiǎng dìng yí ge fángjiān.",
+      "tr": "Hello, I’d like to book a room.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "订房间",
+      "tr": "to book a room"
+     },
+     {
+      "text": "打扫房间",
+      "tr": "to clean the room"
+     },
+     {
+      "text": "房间号",
+      "tr": "room number"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "屋子",
+      "register": "colloquial",
+      "nuance": "‘room’ — northern everyday word",
+      "region": "northern China"
+     },
+     {
+      "word": "房",
+      "register": "neutral",
+      "nuance": "short form in compounds: 书房 ‘study’, 厨房 ‘kitchen’"
+     },
+     {
+      "word": "室",
+      "register": "formal",
+      "nuance": "written ‘room’ in compounds: 卧室 ‘bedroom’, 教室 ‘classroom’"
+     }
+    ],
+    "etymology": {
+     "text": "房 ‘room, house’ + 间 ‘space between; room’ — 间 is also the measure word for rooms.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Rooms are named with 房 or 室: 厨房 kitchen, 书房 study, 卧室 bedroom, 浴室 bathroom."
+    ],
+    "pitfalls": [
+     "‘In the room’ needs 里: 在房间里 — not just *在房间."
+    ],
+    "subtleties": [
+     "Hotels sell 单人间 (single rooms) and 双人间 (double rooms) — 间 again."
+    ]
+   }
+  },
+  {
+   "id": "zh:men",
+   "lemma": "门",
+   "trad": "門",
+   "pinyin": "mén",
+   "pos": "NOUN",
+   "senses": [
+    "home.door",
+    "measure.clf.subject",
+    "mind.school"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 門 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "扇",
+     "道"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coming and going — the way in and out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "door; gate",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.door"
+     },
+     {
+      "id": "s2",
+      "def": "measure word for school subjects and languages (一门课)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "measure.clf.subject"
+     },
+     {
+      "id": "s3",
+      "def": "school (of thought), sect",
+      "register": [
+       "formal"
+      ],
+      "concept": "mind.school"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请关门。",
+      "py": "Qǐng guān mén.",
+      "tr": "Please close the door.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "门开着。",
+      "py": "Mén kāizhe.",
+      "tr": "The door is open.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "我这个学期有五门课。",
+      "py": "Wǒ zhège xuéqī yǒu wǔ mén kè.",
+      "tr": "I have five courses this semester.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s2"
+     },
+     {
+      "text": "颜回是孔门弟子。",
+      "py": "Yán Huí shì Kǒng mén dìzǐ.",
+      "tr": "Yan Hui was a disciple of the school of Confucius.",
+      "register": "formal",
+      "context": "history",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开门",
+      "tr": "to open the door; to open (a shop)"
+     },
+     {
+      "text": "关门",
+      "tr": "to close the door; to close"
+     },
+     {
+      "text": "门口",
+      "tr": "doorway, entrance"
+     },
+     {
+      "text": "大门",
+      "tr": "main gate"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "开门见山",
+      "tr": "open the door and see the mountain",
+      "kind": "idiom",
+      "meaning": "to come straight to the point",
+      "register": "neutral"
+     },
+     {
+      "text": "门当户对",
+      "tr": "the doors match, the houses match",
+      "kind": "idiom",
+      "meaning": "a marriage between families of equal standing",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "大门",
+      "register": "neutral",
+      "nuance": "the main door or gate of a building or compound"
+     },
+     {
+      "word": "房门",
+      "register": "neutral",
+      "nuance": "the door of a room"
+     },
+     {
+      "word": "户",
+      "register": "literary",
+      "nuance": "a single door; today in words like 窗户 and 户口 ‘household’"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a gate with two leaves; 户 ‘a (single) door’ is half of it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Shops 开门 ‘open the door’ in the morning and 关门 ‘close the door’ at night — the same words mean ‘open’ and ‘closed’, and 关门 also ‘go out of business’."
+    ],
+    "pitfalls": [
+     "Measure words: 一扇门 (a door panel), 一道门 (a doorway, a gate); 个 is common in speech."
+    ],
+    "subtleties": [
+     "The simplified 门 comes from the cursive form of 門; the radical appears in 们, 问, 间 and 闻."
+    ]
+   }
+  },
+  {
+   "id": "zh:chuanghu",
+   "lemma": "窗户",
+   "trad": "窗戶",
+   "pinyin": "chuāng hu",
+   "pos": "NOUN",
+   "senses": [
+    "home.window"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 窗戶 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "扇",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light and air; a view out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "window",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.window"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请打开窗户。",
+      "py": "Qǐng dǎkāi chuānghu.",
+      "tr": "Please open the window.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "窗户外面是公园。",
+      "py": "Chuānghu wàimiàn shì gōngyuán.",
+      "tr": "Outside the window there is a park.",
+      "register": "neutral",
+      "context": "describing a room",
+      "sense": "s1"
+     },
+     {
+      "text": "眼睛是心灵的窗户。",
+      "py": "Yǎnjing shì xīnlíng de chuānghu.",
+      "tr": "The eyes are the windows of the soul.",
+      "register": "neutral",
+      "context": "sayings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开窗户",
+      "tr": "to open the window"
+     },
+     {
+      "text": "关窗户",
+      "tr": "to close the window"
+     },
+     {
+      "text": "擦窗户",
+      "tr": "to clean the windows"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "眼睛是心灵的窗户",
+      "tr": "the eyes are the windows of the soul",
+      "kind": "saying",
+      "meaning": "you can read someone’s heart in their eyes",
+      "register": "neutral"
+     },
+     {
+      "text": "打开天窗说亮话",
+      "tr": "open the skylight and speak in the light",
+      "kind": "saying",
+      "meaning": "let’s speak frankly",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "窗",
+      "register": "neutral",
+      "nuance": "short form, usual in writing and compounds: 窗前, 窗外, 窗台"
+     },
+     {
+      "word": "窗子",
+      "register": "colloquial",
+      "nuance": "‘window’ in northern speech",
+      "region": "northern China"
+     },
+     {
+      "word": "窗口",
+      "register": "neutral",
+      "nuance": "a service window, a counter; a window on a computer screen"
+     }
+    ],
+    "etymology": {
+     "text": "窗 ‘window’ (穴 ‘hole’ + 囱) + 户 ‘(single) door’, toneless: chuānghu.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "窗口 is both the ticket window at a station and a window on a computer screen."
+    ],
+    "pitfalls": [
+     "The second syllable is toneless: chuānghu.",
+     "Measure word: 一扇窗户, like doors."
+    ],
+    "subtleties": [
+     "In writing and poetry the short 窗 is preferred: 窗前 ‘in front of the window’."
+    ]
+   }
+  },
+  {
+   "id": "zh:qiang",
+   "lemma": "墙",
+   "trad": "牆",
+   "pinyin": "qiáng",
+   "pos": "NOUN",
+   "senses": [
+    "home.wall",
+    "tech.firewall"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 牆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "面",
+     "堵"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Solid, separating, protecting — also the barrier around the Chinese internet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.wall"
+     },
+     {
+      "id": "s2",
+      "def": "(internet slang) the Great Firewall — 翻墙 ‘to climb over the wall’",
+      "register": [
+       "slang"
+      ],
+      "concept": "tech.firewall"
+     }
+    ],
+    "examples": [
+     {
+      "text": "墙上有一张画。",
+      "py": "Qiáng shang yǒu yì zhāng huà.",
+      "tr": "There is a picture on the wall.",
+      "register": "neutral",
+      "context": "describing a room",
+      "sense": "s1"
+     },
+     {
+      "text": "这面墙是白色的。",
+      "py": "Zhè miàn qiáng shì báisè de.",
+      "tr": "This wall is white.",
+      "register": "neutral",
+      "context": "decorating",
+      "sense": "s1"
+     },
+     {
+      "text": "他每天翻墙看新闻。",
+      "py": "Tā měi tiān fān qiáng kàn xīnwén.",
+      "tr": "Every day he gets around the firewall to read the news.",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "墙上",
+      "tr": "on the wall"
+     },
+     {
+      "text": "白墙",
+      "tr": "white wall"
+     },
+     {
+      "text": "围墙",
+      "tr": "enclosing wall"
+     },
+     {
+      "text": "翻墙",
+      "tr": "to climb the wall; to get around the firewall"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "墙头草",
+      "tr": "grass on top of a wall",
+      "kind": "idiom",
+      "meaning": "a fence-sitter, someone who bends with the wind",
+      "register": "colloquial"
+     },
+     {
+      "text": "狗急跳墙",
+      "tr": "a cornered dog will jump over a wall",
+      "kind": "idiom",
+      "meaning": "desperate people do desperate things",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "墙壁",
+      "register": "formal",
+      "nuance": "‘wall’ — its surface, written style"
+     },
+     {
+      "word": "围墙",
+      "register": "neutral",
+      "nuance": "a wall around a courtyard or compound"
+     },
+     {
+      "word": "城墙",
+      "register": "neutral",
+      "nuance": "a city wall"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 牆: phonetic 爿 + semantic 嗇 ‘wheat in a granary’; the simplified 墙 takes 土 ‘earth’ as its semantic part.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Great Wall is 长城 ‘the long city-wall’ — 城 originally meant a city wall."
+    ],
+    "pitfalls": [
+     "‘On the wall’ is 墙上 (wall + on): 墙上有一张画."
+    ],
+    "subtleties": [
+     "Measure words: 一面墙 or 一堵墙; a long wall can be 一道墙."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhuozi",
+   "lemma": "桌子",
+   "trad": "桌子",
+   "pinyin": "zhuō zi",
+   "pos": "NOUN",
+   "senses": [
+    "home.table"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张",
+     "套"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Meals together and work — the centre of a Chinese home is the dining table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "table; desk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.table"
+     }
+    ],
+    "examples": [
+     {
+      "text": "桌子上有一本书。",
+      "py": "Zhuōzi shang yǒu yì běn shū.",
+      "tr": "There is a book on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "这张桌子很旧。",
+      "py": "Zhè zhāng zhuōzi hěn jiù.",
+      "tr": "This table is old.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "我们换一张大桌子吧。",
+      "py": "Wǒmen huàn yì zhāng dà zhuōzi ba.",
+      "tr": "Let’s change to a bigger table.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一张桌子",
+      "tr": "a table"
+     },
+     {
+      "text": "饭桌",
+      "tr": "dining table"
+     },
+     {
+      "text": "书桌",
+      "tr": "desk"
+     },
+     {
+      "text": "擦桌子",
+      "tr": "to wipe the table"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "拍桌子",
+      "tr": "to bang the table",
+      "kind": "colloquial",
+      "meaning": "to lose one’s temper",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "书桌",
+      "register": "neutral",
+      "nuance": "‘desk’ — the book table"
+     },
+     {
+      "word": "餐桌",
+      "register": "formal",
+      "nuance": "‘dining table’ — shops, written"
+     },
+     {
+      "word": "桌",
+      "register": "neutral",
+      "nuance": "short form; also the measure word for tables of guests: 二十桌客人"
+     }
+    ],
+    "etymology": {
+     "text": "桌 from 卓 ‘high’ with 木 ‘wood’ — the table is the tall piece of furniture — + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "At a banquet guests are counted in tables: 我们请了二十桌 ‘we invited twenty tables (of guests)’."
+    ],
+    "pitfalls": [
+     "‘On the table’ = 桌子上.",
+     "Measure word 张 (for things with a flat top): 一张桌子 — 套 only for a set of furniture."
+    ],
+    "subtleties": [
+     "A desk is 书桌 ‘book table’; a round table, 圆桌."
+    ]
+   }
+  },
+  {
+   "id": "zh:yizi",
+   "lemma": "椅子",
+   "trad": "椅子",
+   "pinyin": "yǐ zi",
+   "pos": "NOUN",
+   "senses": [
+    "home.chair"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把",
+     "张"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A seat with a back to lean on.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chair",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.chair"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请坐这把椅子。",
+      "py": "Qǐng zuò zhè bǎ yǐzi.",
+      "tr": "Please sit on this chair.",
+      "register": "neutral",
+      "context": "visiting",
+      "sense": "s1"
+     },
+     {
+      "text": "房间里有四把椅子。",
+      "py": "Fángjiān li yǒu sì bǎ yǐzi.",
+      "tr": "There are four chairs in the room.",
+      "register": "neutral",
+      "context": "describing a room",
+      "sense": "s1"
+     },
+     {
+      "text": "这把椅子坐着很舒服。",
+      "py": "Zhè bǎ yǐzi zuòzhe hěn shūfu.",
+      "tr": "This chair is comfortable to sit on.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一把椅子",
+      "tr": "a chair"
+     },
+     {
+      "text": "坐在椅子上",
+      "tr": "to sit on a chair"
+     },
+     {
+      "text": "搬椅子",
+      "tr": "to move a chair"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "凳子",
+      "register": "neutral",
+      "nuance": "‘stool’ — a seat without a back"
+     },
+     {
+      "word": "座位",
+      "register": "neutral",
+      "nuance": "‘seat, place’ — in a bus, cinema, classroom"
+     },
+     {
+      "word": "沙发",
+      "register": "neutral",
+      "nuance": "‘sofa’ — borrowed from English"
+     }
+    ],
+    "etymology": {
+     "text": "椅 from 倚 ‘to lean’ (木 ‘wood’ + phonetic 奇) — the seat you lean back on — + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese people sat on mats on the floor until chairs spread during the Tang and Song dynasties."
+    ],
+    "pitfalls": [
+     "The usual measure word is 把 (a chair is ‘held’ by its back like a handle): 一把椅子; 张 is also used.",
+     "A seat without a back is 凳子, not 椅子."
+    ],
+    "subtleties": [
+     "‘To sit on a chair’ is 坐在椅子上 — 在 + chair + 上."
+    ]
+   }
+  },
+  {
+   "id": "zh:chuang",
+   "lemma": "床",
+   "trad": "床",
+   "pinyin": "chuáng",
+   "pos": "NOUN",
+   "senses": [
+    "home.bed"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Rest and comfort at the end of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bed"
+     },
+     {
+      "id": "s2",
+      "def": "(classical) couch, seat; possibly the railing of a well",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的床很大。",
+      "py": "Wǒ de chuáng hěn dà.",
+      "tr": "My bed is big.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们已经上床了。",
+      "py": "Háizimen yǐjīng shàng chuáng le.",
+      "tr": "The children are already in bed.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我每天七点起床。",
+      "py": "Wǒ měi tiān qī diǎn qǐchuáng.",
+      "tr": "I get up at seven every day.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一张床",
+      "tr": "a bed"
+     },
+     {
+      "text": "起床",
+      "tr": "to get up"
+     },
+     {
+      "text": "上床",
+      "tr": "to go to bed"
+     },
+     {
+      "text": "双人床",
+      "tr": "double bed"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "床前明月光，疑是地上霜。",
+      "tr": "Before my bed the bright moonlight — I take it for frost on the ground.",
+      "kind": "quote",
+      "meaning": "the opening of the most famous Chinese poem, learnt by every child",
+      "register": "poetic",
+      "source": "Li Bai (李白), 静夜思 ‘Quiet Night Thoughts’ (8th century)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "床铺",
+      "register": "formal",
+      "nuance": "‘bed, berth’ — beds as furniture or in dormitories"
+     },
+     {
+      "word": "炕",
+      "register": "regional",
+      "nuance": "kàng: the heated brick bed of northern China",
+      "region": "northern China"
+     },
+     {
+      "word": "卧铺",
+      "register": "neutral",
+      "nuance": "‘sleeper berth’ on a train"
+     }
+    ],
+    "etymology": {
+     "text": "广 ‘house’ + 木 ‘wood’: a wooden piece of furniture in the house; originally a variant of 牀.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Scholars still argue whether the 床 of Li Bai’s poem is a bed or the railing of a well — an old meaning dictionaries also record."
+    ],
+    "pitfalls": [
+     "上床 ‘to go to bed’ is also a euphemism for sex; ‘go to bed (to sleep)’ is safer as 睡觉."
+    ],
+    "subtleties": [
+     "起床 is ‘to get up’ — literally ‘rise from the bed’."
+    ]
+   }
+  },
+  {
+   "id": "zh:guizi",
+   "lemma": "柜子",
+   "trad": "櫃子",
+   "pinyin": "guì zi",
+   "pos": "NOUN",
+   "senses": [
+    "home.cupboard"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 櫃子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.cupboard",
+     "axis": "what it holds",
+     "value": "any cupboard or cabinet"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Storage: doors, shelves, things put away.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cupboard; cabinet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.cupboard"
+     }
+    ],
+    "examples": [
+     {
+      "text": "杯子在柜子里。",
+      "py": "Bēizi zài guìzi li.",
+      "tr": "The cups are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "这个柜子很重。",
+      "py": "Zhège guìzi hěn zhòng.",
+      "tr": "This cupboard is heavy.",
+      "register": "neutral",
+      "context": "moving house",
+      "sense": "s1"
+     },
+     {
+      "text": "我们需要一个新柜子。",
+      "py": "Wǒmen xūyào yí ge xīn guìzi.",
+      "tr": "We need a new cupboard.",
+      "register": "neutral",
+      "context": "furniture shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "衣柜",
+      "tr": "wardrobe"
+     },
+     {
+      "text": "书柜",
+      "tr": "bookcase"
+     },
+     {
+      "text": "鞋柜",
+      "tr": "shoe cabinet"
+     },
+     {
+      "text": "打开柜子",
+      "tr": "to open the cupboard"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "橱柜",
+      "register": "neutral",
+      "nuance": "kitchen cupboards"
+     },
+     {
+      "word": "衣柜",
+      "register": "neutral",
+      "nuance": "wardrobe, for clothes"
+     },
+     {
+      "word": "书柜",
+      "register": "neutral",
+      "nuance": "bookcase with doors"
+     },
+     {
+      "word": "柜台",
+      "register": "neutral",
+      "nuance": "a shop counter"
+     }
+    ],
+    "etymology": {
+     "text": "柜 (traditional 櫃: 木 ‘wood’ + phonetic 匱 ‘box’) + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "出柜 ‘to come out of the cupboard’ is the Chinese for coming out as gay — a calque of the English ‘come out of the closet’."
+    ],
+    "pitfalls": [
+     "‘In the cupboard’ is 柜子里.",
+     "A wardrobe for clothes is more precisely 衣柜."
+    ],
+    "subtleties": [
+     "柜台 (shop counter) and 保险柜 (a safe) contain the same 柜 ‘box, cabinet’."
+    ]
+   }
+  },
+  {
+   "id": "zh:yigui",
+   "lemma": "衣柜",
+   "trad": "衣櫃",
+   "pinyin": "yī guì",
+   "pos": "NOUN",
+   "senses": [
+    "home.cupboard"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 衣櫃 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.cupboard",
+     "axis": "what it holds",
+     "value": "clothes: the wardrobe"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clothes hanging inside — the bedroom cupboard.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wardrobe (cupboard for clothes)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.cupboard"
+     }
+    ],
+    "examples": [
+     {
+      "text": "衣服都在衣柜里。",
+      "py": "Yīfu dōu zài yīguì li.",
+      "tr": "The clothes are all in the wardrobe.",
+      "register": "neutral",
+      "context": "bedroom",
+      "sense": "s1"
+     },
+     {
+      "text": "我的衣柜太小了。",
+      "py": "Wǒ de yīguì tài xiǎo le.",
+      "tr": "My wardrobe is too small.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们买了一个新衣柜。",
+      "py": "Wǒmen mǎile yí ge xīn yīguì.",
+      "tr": "We bought a new wardrobe.",
+      "register": "neutral",
+      "context": "furniture shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大衣柜",
+      "tr": "big wardrobe"
+     },
+     {
+      "text": "整理衣柜",
+      "tr": "to tidy the wardrobe"
+     },
+     {
+      "text": "衣柜门",
+      "tr": "wardrobe door"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "衣橱",
+      "register": "neutral",
+      "nuance": "‘wardrobe’ — a common alternative, especially in writing"
+     },
+     {
+      "word": "柜子",
+      "register": "neutral",
+      "nuance": "any cupboard or cabinet"
+     },
+     {
+      "word": "壁橱",
+      "register": "neutral",
+      "nuance": "a built-in closet"
+     }
+    ],
+    "etymology": {
+     "text": "衣 ‘clothes’ (a pictogram of the collar and front of a garment) + 柜 ‘cabinet’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "衣 is a picture of the collar and front of a garment; as a component it becomes 衤, as in 衬衫 ‘shirt’."
+    ],
+    "pitfalls": [
+     "衣柜 is only for clothes; dishes go in a 碗柜 or 橱柜."
+    ],
+    "subtleties": [
+     "Chinese often name furniture by what it holds: 衣柜 ‘clothes cabinet’, 书柜 ‘book cabinet’, 鞋柜 ‘shoe cabinet’."
+    ]
+   }
+  },
+  {
+   "id": "zh:deng",
+   "lemma": "灯",
+   "trad": "燈",
+   "pinyin": "dēng",
+   "pos": "NOUN",
+   "senses": [
+    "home.lamp"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 燈 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "盏"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Light in the dark — warm lamps, red lanterns, traffic lights.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lamp; light",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.lamp"
+     },
+     {
+      "id": "s2",
+      "def": "traffic light (红绿灯)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请开灯。",
+      "py": "Qǐng kāi dēng.",
+      "tr": "Please turn on the light.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "房间里有一盏灯。",
+      "py": "Fángjiān li yǒu yì zhǎn dēng.",
+      "tr": "There is a lamp in the room.",
+      "register": "neutral",
+      "context": "describing a room",
+      "sense": "s1"
+     },
+     {
+      "text": "前面是红灯。",
+      "py": "Qiánmiàn shì hóng dēng.",
+      "tr": "The light ahead is red.",
+      "register": "neutral",
+      "context": "driving",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开灯",
+      "tr": "to turn on the light"
+     },
+     {
+      "text": "关灯",
+      "tr": "to turn off the light"
+     },
+     {
+      "text": "台灯",
+      "tr": "desk lamp"
+     },
+     {
+      "text": "红绿灯",
+      "tr": "traffic lights"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "灯红酒绿",
+      "tr": "red lanterns and green wine",
+      "kind": "idiom",
+      "meaning": "a life of luxury and dissipation",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "电灯",
+      "register": "neutral",
+      "nuance": "‘electric light’"
+     },
+     {
+      "word": "台灯",
+      "register": "neutral",
+      "nuance": "‘desk lamp, table lamp’"
+     },
+     {
+      "word": "灯笼",
+      "register": "neutral",
+      "nuance": "‘lantern’ — paper or silk, red at festivals"
+     },
+     {
+      "word": "灯光",
+      "register": "neutral",
+      "nuance": "‘light, lighting’ — the light itself"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 燈: 火 ‘fire’ + phonetic 登; the simplified 灯 (火 + 丁) is an old character adopted for it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Lantern Festival (元宵节) ends the New Year season with lanterns, 灯笼, everywhere."
+    ],
+    "pitfalls": [
+     "‘Turn the light on / off’ is 开灯 / 关灯 — 开 and 关 work for all devices.",
+     "Measure word 盏: 一盏灯 (个 in speech)."
+    ],
+    "subtleties": [
+     "灯 covers lamp and light: the device and the light it gives."
+    ]
+   }
+  },
+  {
+   "id": "zh:shu",
+   "lemma": "书",
+   "trad": "書",
+   "pinyin": "shū",
+   "pos": "NOUN",
+   "senses": [
+    "obj.book",
+    "comm.letter",
+    "verb.write"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 書 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "本",
+     "部"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Learning, culture and quiet reading — books are highly respected.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "book",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.book"
+     },
+     {
+      "id": "s2",
+      "def": "letter, document (in compounds: 情书 ‘love letter’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "comm.letter"
+     },
+     {
+      "id": "s3",
+      "def": "(literary) to write; script, calligraphy",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.write"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是一本书。",
+      "py": "Zhè shì yì běn shū.",
+      "tr": "This is a book.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "我在看书。",
+      "py": "Wǒ zài kàn shū.",
+      "tr": "I’m reading.",
+      "register": "neutral",
+      "context": "free time",
+      "sense": "s1"
+     },
+     {
+      "text": "他写了一封情书。",
+      "py": "Tā xiěle yì fēng qíngshū.",
+      "tr": "He wrote a love letter.",
+      "register": "neutral",
+      "context": "romance",
+      "sense": "s2"
+     },
+     {
+      "text": "王羲之是有名的书法家。",
+      "py": "Wáng Xīzhī shì yǒumíng de shūfǎjiā.",
+      "tr": "Wang Xizhi is a famous calligrapher.",
+      "register": "neutral",
+      "context": "art",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "看书",
+      "tr": "to read"
+     },
+     {
+      "text": "读书",
+      "tr": "to read; to study"
+     },
+     {
+      "text": "书店",
+      "tr": "bookshop"
+     },
+     {
+      "text": "书包",
+      "tr": "schoolbag"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "书香门第",
+      "tr": "a gate with the fragrance of books",
+      "kind": "idiom",
+      "meaning": "a family of scholars",
+      "register": "literary"
+     },
+     {
+      "text": "书中自有黄金屋",
+      "tr": "in books there are houses of gold",
+      "kind": "saying",
+      "meaning": "study brings wealth and success",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "书籍",
+      "register": "formal",
+      "nuance": "‘books’ as a category — libraries, statistics"
+     },
+     {
+      "word": "图书",
+      "register": "formal",
+      "nuance": "‘books’ — 图书馆 ‘library’"
+     },
+     {
+      "word": "课本",
+      "register": "neutral",
+      "nuance": "‘textbook’"
+     },
+     {
+      "word": "本子",
+      "register": "neutral",
+      "nuance": "‘notebook, exercise book’ — not a book to read"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 書: 聿 ‘writing brush’ + phonetic 者; the simplified 书 comes from its cursive form.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "读书 ‘to read books’ also means ‘to go to school, to study’: 他还在读书 ‘he is still a student’."
+    ],
+    "pitfalls": [
+     "Measure word 本: 一本书, never *一个书 in careful speech.",
+     "看书 ‘look at books’ is the everyday ‘to read’."
+    ],
+    "subtleties": [
+     "部 counts a book as a work: 一部小说 ‘a novel’."
+    ]
+   }
+  },
+  {
+   "id": "zh:bi",
+   "lemma": "笔",
+   "trad": "筆",
+   "pinyin": "bǐ",
+   "pos": "NOUN",
+   "senses": [
+    "obj.pen",
+    "measure.clf.sum"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 筆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "支",
+     "枝"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Writing — from the ink brush to the ballpoint.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pen; pencil; any writing instrument",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.pen"
+     },
+     {
+      "id": "s2",
+      "def": "writing brush (毛笔)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "measure word for sums of money and deals (一笔钱)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "measure.clf.sum"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你有笔吗？",
+      "py": "Nǐ yǒu bǐ ma?",
+      "tr": "Do you have a pen?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "这支笔不好写。",
+      "py": "Zhè zhī bǐ bù hǎo xiě.",
+      "tr": "This pen doesn’t write well.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "他借了一大笔钱。",
+      "py": "Tā jièle yí dà bǐ qián.",
+      "tr": "He borrowed a large sum of money.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "铅笔",
+      "tr": "pencil"
+     },
+     {
+      "text": "钢笔",
+      "tr": "fountain pen"
+     },
+     {
+      "text": "圆珠笔",
+      "tr": "ballpoint pen"
+     },
+     {
+      "text": "毛笔",
+      "tr": "writing brush"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "妙笔生花",
+      "tr": "a wonderful brush brings forth flowers",
+      "kind": "idiom",
+      "meaning": "brilliant writing",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "圆珠笔",
+      "register": "neutral",
+      "nuance": "ballpoint pen"
+     },
+     {
+      "word": "签字笔",
+      "register": "neutral",
+      "nuance": "gel pen, signing pen"
+     },
+     {
+      "word": "铅笔",
+      "register": "neutral",
+      "nuance": "pencil — ‘lead pen’"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 筆: 竹 ‘bamboo’ + 聿 ‘writing brush’; the simplified 笔 is 竹 ‘bamboo’ + 毛 ‘hair’ — what a brush is made of.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The simplified character tells you what a Chinese brush is: bamboo (竹) + hair (毛)."
+    ],
+    "pitfalls": [
+     "笔 alone is any pen; the kinds are compounds: 铅笔 pencil, 钢笔 fountain pen.",
+     "Measure word 支: 一支笔."
+    ],
+    "subtleties": [
+     "支 and 枝 are both written as its measure word; 支 is the mainland standard."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhi",
+   "lemma": "纸",
+   "trad": "紙",
+   "pinyin": "zhǐ",
+   "pos": "NOUN",
+   "senses": [
+    "obj.paper"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紙 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plain and useful — and one of China’s great inventions.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "paper",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.paper"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请给我一张纸。",
+      "py": "Qǐng gěi wǒ yì zhāng zhǐ.",
+      "tr": "Please give me a sheet of paper.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "请写在纸上。",
+      "py": "Qǐng xiě zài zhǐ shang.",
+      "tr": "Please write it on paper.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "这种纸很薄。",
+      "py": "Zhè zhǒng zhǐ hěn báo.",
+      "tr": "This kind of paper is thin.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一张纸",
+      "tr": "a sheet of paper"
+     },
+     {
+      "text": "白纸",
+      "tr": "white / blank paper"
+     },
+     {
+      "text": "报纸",
+      "tr": "newspaper"
+     },
+     {
+      "text": "纸巾",
+      "tr": "tissue"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "纸上谈兵",
+      "tr": "to discuss warfare on paper",
+      "kind": "idiom",
+      "meaning": "armchair strategy, theory without practice",
+      "register": "neutral"
+     },
+     {
+      "text": "纸老虎",
+      "tr": "paper tiger",
+      "kind": "idiom",
+      "meaning": "something that looks threatening but is weak",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "纸张",
+      "register": "formal",
+      "nuance": "‘paper’ as material, in bulk"
+     },
+     {
+      "word": "纸巾",
+      "register": "neutral",
+      "nuance": "tissue, napkin"
+     },
+     {
+      "word": "卫生纸",
+      "register": "neutral",
+      "nuance": "toilet paper"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 糸 ‘silk’ (the radical of textiles) + phonetic 氏.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English ‘paper tiger’ is a calque of the Chinese 纸老虎.",
+     "Papermaking is one of China’s ‘Four Great Inventions’; Cai Lun (蔡伦) improved it around 105 CE. English paper and German Papier come from Greek πάπυρος ‘papyrus’ — a different material."
+    ],
+    "pitfalls": [
+     "Paper is counted by the sheet: 一张纸 ‘a sheet of paper’ — no 个."
+    ],
+    "subtleties": [
+     "纸 is in many words: 报纸 newspaper, 纸币 banknote, 剪纸 paper-cutting."
+    ]
+   }
+  },
+  {
+   "id": "zh:shouji",
+   "lemma": "手机",
+   "trad": "手機",
+   "pinyin": "shǒu jī",
+   "pos": "NOUN",
+   "senses": [
+    "obj.phone"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 手機 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "部",
+     "台",
+     "支"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "obj.phone",
+     "axis": "kind of phone",
+     "value": "the mobile phone"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Always in your hand — phone, wallet and map in one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mobile phone, cell phone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.phone"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的手机没电了。",
+      "py": "Wǒ de shǒujī méi diàn le.",
+      "tr": "My phone’s battery is dead.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1"
+     },
+     {
+      "text": "你的手机号码是多少？",
+      "py": "Nǐ de shǒujī hàomǎ shì duōshao?",
+      "tr": "What’s your mobile number?",
+      "register": "neutral",
+      "context": "contacts",
+      "sense": "s1"
+     },
+     {
+      "text": "别老玩手机！",
+      "py": "Bié lǎo wán shǒujī!",
+      "tr": "Stop playing on your phone all the time!",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "玩手机",
+      "tr": "to play on the phone"
+     },
+     {
+      "text": "手机号",
+      "tr": "mobile number"
+     },
+     {
+      "text": "智能手机",
+      "tr": "smartphone"
+     },
+     {
+      "text": "手机壳",
+      "tr": "phone case"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "低头族",
+      "tr": "the head-down tribe",
+      "kind": "slang",
+      "meaning": "people always looking down at their phones",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "电话",
+      "register": "neutral",
+      "nuance": "‘telephone’ — also used for the mobile, and for the call or the number"
+     },
+     {
+      "word": "移动电话",
+      "register": "technical",
+      "nuance": "‘mobile telephone’ — official, technical"
+     },
+     {
+      "word": "大哥大",
+      "register": "dated",
+      "nuance": "the brick-sized mobile phone of the late 1980s and 1990s"
+     }
+    ],
+    "etymology": {
+     "text": "手 ‘hand’ (a pictogram of a hand with fingers) + 机 ‘machine’ (traditional 機): the ‘hand machine’.",
+     "src": "morphemes: 手 + 机 (Wiktionary)"
+    },
+    "funFacts": [
+     "German calls it das Handy — Chinese 手机 is also a ‘hand’ word."
+    ],
+    "pitfalls": [
+     "Measure word 部 or 台 (个 in speech): 一部手机.",
+     "‘Mobile number’ is 手机号 or 手机号码."
+    ],
+    "subtleties": [
+     "With apps such as WeChat (微信) the phone is also a wallet: 用手机付钱 ‘pay with the phone’."
+    ]
+   }
+  },
+  {
+   "id": "zh:dianhua",
+   "lemma": "电话",
+   "trad": "電話",
+   "pinyin": "diàn huà",
+   "pos": "NOUN",
+   "senses": [
+    "obj.phone",
+    "comm.phonecall",
+    "comm.phonenumber"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 電話 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "部"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "obj.phone",
+     "axis": "kind of phone",
+     "value": "any telephone, the landline; also a call"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Calls and numbers — the telephone and what you do with it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "telephone; phone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.phone"
+     },
+     {
+      "id": "s2",
+      "def": "phone call (打电话 ‘to phone’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "comm.phonecall"
+     },
+     {
+      "id": "s3",
+      "def": "phone number (colloquial)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "comm.phonenumber"
+     }
+    ],
+    "examples": [
+     {
+      "text": "电话在桌子上。",
+      "py": "Diànhuà zài zhuōzi shang.",
+      "tr": "The telephone is on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "办公室的电话坏了。",
+      "py": "Bàngōngshì de diànhuà huài le.",
+      "tr": "The office phone is broken.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "我给你打电话。",
+      "py": "Wǒ gěi nǐ dǎ diànhuà.",
+      "tr": "I’ll call you.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "你的电话是多少？",
+      "py": "Nǐ de diànhuà shì duōshao?",
+      "tr": "What’s your number?",
+      "register": "colloquial",
+      "context": "contacts",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "打电话",
+      "tr": "to make a phone call"
+     },
+     {
+      "text": "接电话",
+      "tr": "to answer the phone"
+     },
+     {
+      "text": "电话号码",
+      "tr": "phone number"
+     },
+     {
+      "text": "挂电话",
+      "tr": "to hang up"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "手机",
+      "register": "neutral",
+      "nuance": "mobile phone"
+     },
+     {
+      "word": "座机",
+      "register": "neutral",
+      "nuance": "landline phone"
+     },
+     {
+      "word": "电话机",
+      "register": "formal",
+      "nuance": "telephone set (the device)"
+     }
+    ],
+    "etymology": {
+     "text": "电 ‘electricity’ (originally ‘lightning’: 雨 ‘rain’ + 申, a picture of a lightning bolt) + 话 ‘speech, words’ (言 ‘word’ + phonetic): ‘electric speech’.",
+     "src": "morphemes: 电 + 话 (Wiktionary)"
+    },
+    "funFacts": [
+     "Greek τηλέφωνο is ‘far voice’, the old official German Fernsprecher ‘far speaker’ — Chinese 电话 is ‘electric speech’."
+    ],
+    "pitfalls": [
+     "‘To call someone’ is 给 + person + 打电话: 我给你打电话 — 打 ‘hit’ is the verb."
+    ],
+    "subtleties": [
+     "In speech 电话 often means the call or the number rather than the device."
+    ]
+   }
+  },
+  {
+   "id": "zh:yaoshi",
+   "lemma": "钥匙",
+   "trad": "鑰匙",
+   "pinyin": "yào shi",
+   "pos": "NOUN",
+   "senses": [
+    "obj.key"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 鑰匙 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small but important — getting in, and the key to a problem.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "key",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.key"
+     },
+     {
+      "id": "s2",
+      "def": "key (to a solution, figuratively)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的钥匙在哪儿？",
+      "py": "Wǒ de yàoshi zài nǎr?",
+      "tr": "Where are my keys?",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "这是一把钥匙。",
+      "py": "Zhè shì yì bǎ yàoshi.",
+      "tr": "This is a key.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "合作是成功的钥匙。",
+      "py": "Hézuò shì chénggōng de yàoshi.",
+      "tr": "Cooperation is the key to success.",
+      "register": "formal",
+      "context": "speeches",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一把钥匙",
+      "tr": "a key"
+     },
+     {
+      "text": "车钥匙",
+      "tr": "car key"
+     },
+     {
+      "text": "配钥匙",
+      "tr": "to have a key cut"
+     },
+     {
+      "text": "钥匙圈",
+      "tr": "key ring"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "一把钥匙开一把锁",
+      "tr": "one key opens one lock",
+      "kind": "saying",
+      "meaning": "every problem needs its own solution",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "锁匙",
+      "register": "regional",
+      "nuance": "‘key’ in the south and in Cantonese-speaking areas",
+      "region": "southern China"
+     },
+     {
+      "word": "门卡",
+      "register": "neutral",
+      "nuance": "‘key card’ — hotels and offices"
+     }
+    ],
+    "etymology": {
+     "text": "钥 (金 ‘metal’ + phonetic 龠) + 匙 ‘spoon’ (匕 ‘spoon’ + phonetic 是).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "匙 alone means ‘spoon’ (汤匙 tāngchí ‘soup spoon’); in 钥匙 it is a toneless shi."
+    ],
+    "pitfalls": [
+     "钥 is read yào here; the second syllable is toneless: yàoshi.",
+     "Measure word 把, as for things held by a handle: 一把钥匙."
+    ],
+    "subtleties": [
+     "钥匙 is both singular and plural: ‘my keys’ is still 我的钥匙."
+    ]
+   }
+  },
+  {
+   "id": "zh:bao",
+   "lemma": "包",
+   "trad": "包",
+   "pinyin": "bāo",
+   "pos": "NOUN",
+   "senses": [
+    "obj.bag",
+    "obj.parcel",
+    "food.bun",
+    "verb.wrap"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and practical — what you carry; also the word for wrapping.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bag (handbag, backpack, shoulder bag)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.bag"
+     },
+     {
+      "id": "s2",
+      "def": "parcel, package",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.parcel"
+     },
+     {
+      "id": "s3",
+      "def": "steamed bun (in 包子)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.bun"
+     },
+     {
+      "id": "s4",
+      "def": "to wrap (verb: 包饺子 ‘to make dumplings’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wrap"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的包在哪儿？",
+      "py": "Wǒ de bāo zài nǎr?",
+      "tr": "Where is my bag?",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "她买了一个新包。",
+      "py": "Tā mǎile yí ge xīn bāo.",
+      "tr": "She bought a new bag.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "我们一起包饺子吧。",
+      "py": "Wǒmen yìqǐ bāo jiǎozi ba.",
+      "tr": "Let’s make dumplings together.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s4"
+     },
+     {
+      "text": "请帮我把这些书打成一个包。",
+      "py": "Qǐng bāng wǒ bǎ zhèxiē shū dǎ chéng yí ge bāo.",
+      "tr": "Please help me pack these books into one parcel.",
+      "register": "neutral",
+      "context": "post",
+      "sense": "s2"
+     },
+     {
+      "text": "我早饭吃了两个包子。",
+      "py": "Wǒ zǎofàn chī le liǎng ge bāozi.",
+      "tr": "I had two steamed buns for breakfast.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "书包",
+      "tr": "schoolbag"
+     },
+     {
+      "text": "钱包",
+      "tr": "wallet"
+     },
+     {
+      "text": "背包",
+      "tr": "backpack"
+     },
+     {
+      "text": "手提包",
+      "tr": "handbag"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "包罗万象",
+      "tr": "to wrap up ten thousand things",
+      "kind": "idiom",
+      "meaning": "all-embracing, all-inclusive",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "袋子",
+      "register": "neutral",
+      "nuance": "‘bag, sack’ — of plastic, paper or cloth"
+     },
+     {
+      "word": "书包",
+      "register": "neutral",
+      "nuance": "schoolbag"
+     },
+     {
+      "word": "手提包",
+      "register": "formal",
+      "nuance": "handbag"
+     },
+     {
+      "word": "包包",
+      "register": "children",
+      "nuance": "‘bag’ in a cute, childlike way — also used for handbags"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a fetus (巳) in the womb (勹), or a swaddled baby.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "红包 ‘red packet’ is money in a red envelope — the classic New Year gift."
+    ],
+    "pitfalls": [
+     "A plastic bag is 塑料袋 or 袋子, not 包."
+    ],
+    "subtleties": [
+     "钱包 ‘money bag’ is a wallet; 包子 is a steamed filled bun."
+    ]
+   }
+  },
+  {
+   "id": "zh:beizi",
+   "lemma": "杯子",
+   "trad": "杯子",
+   "pinyin": "bēi zi",
+   "pos": "NOUN",
+   "senses": [
+    "obj.cup"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "只"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tea, water, coffee — the drinking vessel of every kind.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cup, mug, glass (any drinking vessel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.cup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "杯子在桌子上。",
+      "py": "Bēizi zài zhuōzi shang.",
+      "tr": "The cup is on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "我要一个大杯子。",
+      "py": "Wǒ yào yí ge dà bēizi.",
+      "tr": "I want a big cup.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "这个杯子是谁的？",
+      "py": "Zhège bēizi shì shéi de?",
+      "tr": "Whose cup is this?",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个杯子",
+      "tr": "a cup"
+     },
+     {
+      "text": "洗杯子",
+      "tr": "to wash the cups"
+     },
+     {
+      "text": "茶杯",
+      "tr": "teacup"
+     },
+     {
+      "text": "纸杯",
+      "tr": "paper cup"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "杯水车薪",
+      "tr": "a cup of water on a cartload of burning firewood",
+      "kind": "idiom",
+      "meaning": "a hopelessly small effort for a big problem",
+      "register": "neutral"
+     },
+     {
+      "text": "干杯",
+      "tr": "dry the cup",
+      "kind": "fixed expression",
+      "meaning": "cheers!",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "茶杯",
+      "register": "neutral",
+      "nuance": "teacup"
+     },
+     {
+      "word": "玻璃杯",
+      "register": "neutral",
+      "nuance": "a glass — when the material matters"
+     },
+     {
+      "word": "马克杯",
+      "register": "colloquial",
+      "nuance": "‘mug’ — from English"
+     },
+     {
+      "word": "杯",
+      "register": "neutral",
+      "nuance": "in compounds and as the measure word ‘a cup of’: 一杯茶"
+     }
+    ],
+    "etymology": {
+     "text": "杯 (木 ‘wood’ + phonetic 不) + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "干杯 ‘dry the cup’ is the Chinese ‘cheers!’ — traditionally you then empty it."
+    ],
+    "pitfalls": [
+     "杯子 is the cup itself; 杯 is the measure ‘a cup of’: 一个杯子 ‘a cup’, but 一杯茶 ‘a cup of tea’."
+    ],
+    "subtleties": [
+     "Chinese does not split cup and glass as English does: any drinking vessel can be 杯子."
+    ]
+   }
+  },
+  {
+   "id": "zh:bolibei",
+   "lemma": "玻璃杯",
+   "trad": "玻璃杯",
+   "pinyin": "bō li bēi",
+   "pos": "NOUN",
+   "senses": [
+    "obj.glass"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "只"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clear and fragile.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "glass (for drinking), tumbler",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.glass"
+     }
+    ],
+    "examples": [
+     {
+      "text": "玻璃杯很容易碎。",
+      "py": "Bōlibēi hěn róngyì suì.",
+      "tr": "Glasses break easily.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "请给我一个玻璃杯。",
+      "py": "Qǐng gěi wǒ yí ge bōlibēi.",
+      "tr": "Please give me a glass.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "他用玻璃杯喝茶。",
+      "py": "Tā yòng bōlibēi hē chá.",
+      "tr": "He drinks tea from a glass.",
+      "register": "neutral",
+      "context": "tea",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个玻璃杯",
+      "tr": "a glass"
+     },
+     {
+      "text": "玻璃杯碎了",
+      "tr": "the glass broke"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "杯子",
+      "register": "neutral",
+      "nuance": "any cup or glass — the everyday word"
+     },
+     {
+      "word": "酒杯",
+      "register": "neutral",
+      "nuance": "wine glass"
+     },
+     {
+      "word": "高脚杯",
+      "register": "neutral",
+      "nuance": "stemmed glass"
+     }
+    ],
+    "etymology": {
+     "text": "玻璃 ‘glass’ — an old loan from Prakrit phālia, Sanskrit sphaṭika ‘crystal’ — + 杯 ‘cup’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "玻璃 ‘glass’ came into Chinese from India: Sanskrit sphaṭika meant ‘crystal’."
+    ],
+    "pitfalls": [
+     "In daily speech people simply say 杯子; 玻璃杯 is used when the material matters."
+    ],
+    "subtleties": [
+     "玻璃 has a toneless second syllable: bōli."
+    ]
+   }
+  },
+  {
+   "id": "zh:panzi",
+   "lemma": "盘子",
+   "trad": "盤子",
+   "pinyin": "pán zi",
+   "pos": "NOUN",
+   "senses": [
+    "obj.plate",
+    "obj.tray"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 盤子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shared dishes in the middle of the table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plate, dish",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.plate"
+     },
+     {
+      "id": "s2",
+      "def": "tray",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.tray"
+     }
+    ],
+    "examples": [
+     {
+      "text": "盘子在柜子里。",
+      "py": "Pánzi zài guìzi li.",
+      "tr": "The plates are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "请把盘子洗一下。",
+      "py": "Qǐng bǎ pánzi xǐ yíxià.",
+      "tr": "Please wash the plates.",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     },
+     {
+      "text": "他在饭店端盘子。",
+      "py": "Tā zài fàndiàn duān pánzi.",
+      "tr": "He works as a waiter in a restaurant.",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "服务员端着一个盘子，上面有四杯茶。",
+      "py": "Fúwùyuán duān zhe yí ge pánzi, shàngmian yǒu sì bēi chá.",
+      "tr": "The waiter is carrying a tray with four cups of tea on it.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "洗盘子",
+      "tr": "to wash the plates"
+     },
+     {
+      "text": "端盘子",
+      "tr": "to carry plates; to work as a waiter"
+     },
+     {
+      "text": "大盘子",
+      "tr": "big plate"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "端盘子",
+      "tr": "to carry plates",
+      "kind": "colloquial",
+      "meaning": "to work as a waiter",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "碟子",
+      "register": "neutral",
+      "nuance": "small plate, saucer"
+     },
+     {
+      "word": "碗",
+      "register": "neutral",
+      "nuance": "bowl — at a Chinese meal everyone has a bowl"
+     },
+     {
+      "word": "盘",
+      "register": "neutral",
+      "nuance": "the measure ‘a plate of’: 一盘饺子"
+     }
+    ],
+    "etymology": {
+     "text": "盘 (traditional 盤: phonetic 般 + 皿 ‘vessel’) + the toneless suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "At a Chinese meal the dishes stand in the middle on 盘子, and each person eats from a bowl, 碗."
+    ],
+    "pitfalls": [
+     "盘子 is the plate; 盘 is the measure ‘a plate of’: 一个盘子 ‘a plate’, 一盘菜 ‘a plate of food’."
+    ],
+    "subtleties": [
+     "端盘子 ‘to carry plates’ is a colloquial way to say ‘to wait tables’."
+    ]
+   }
+  },
+  {
+   "id": "zh:dong",
+   "lemma": "栋",
+   "trad": "棟",
+   "pinyin": "dòng",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for buildings and houses: 一栋房子, 一栋楼; 座 and 所 are also used for houses",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 棟 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:jian",
+   "lemma": "间",
+   "trad": "間",
+   "pinyin": "jiān",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for rooms: 一间房子, 一间教室 (间 = ‘space between’)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:shan",
+   "lemma": "扇",
+   "trad": "扇",
+   "pinyin": "shàn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for doors and windows — panels that swing open, like a fan (扇子): 一扇门, 一扇窗户",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:mian",
+   "lemma": "面",
+   "trad": "面",
+   "pinyin": "miàn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for flat surfaces you face: walls, mirrors, flags — 一面墙, 一面镜子",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:zhang",
+   "lemma": "张",
+   "trad": "張",
+   "pinyin": "zhāng",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for flat things and things with a flat top: tables, beds, paper, photos, tickets — 一张桌子, 一张纸",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 張 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:ba",
+   "lemma": "把",
+   "trad": "把",
+   "pinyin": "bǎ",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for things held by a handle: chairs, keys, knives, umbrellas — 一把椅子, 一把钥匙",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:ben",
+   "lemma": "本",
+   "trad": "本",
+   "pinyin": "běn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for bound volumes: books, notebooks, magazines — 一本书",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:zhi.clf",
+   "lemma": "支",
+   "trad": "支",
+   "pinyin": "zhī",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for long thin things: pens, pencils, cigarettes — 一支笔",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:bu.clf",
+   "lemma": "部",
+   "trad": "部",
+   "pinyin": "bù",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for machines and works: phones, films, novels — 一部手机, 一部电影",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:zhan",
+   "lemma": "盏",
+   "trad": "盞",
+   "pinyin": "zhǎn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for lamps: 一盏灯",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 盞 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:bei",
+   "lemma": "杯",
+   "trad": "杯",
+   "pinyin": "bēi",
+   "pos": "CLF",
+   "senses": [],
+   "role": "a container used as a measure: ‘a cup of, a glass of’ — 一杯茶, 一杯水; the cup itself is 杯子 (一个杯子)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "container"
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

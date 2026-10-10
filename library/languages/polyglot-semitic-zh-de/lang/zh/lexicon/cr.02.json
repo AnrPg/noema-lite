@@ -1,0 +1,1670 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:zhe.part",
+   "lemma": "着",
+   "trad": "著",
+   "pinyin": "zhe",
+   "pos": "PART",
+   "senses": [],
+   "role": "aspect particle of a lasting state: after the verb, the action or the state it left goes on — 门开着 ‘the door is open’, 他坐着吃饭 ‘he eats sitting down’ (C02)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "features": {
+    "readings": {
+     "none": "in this use always the toneless zhe; 睡着 shuìzháo (C01) is another word with the same character"
+    },
+    "tradPerSense": {
+     "none": "traditional 著 for this particle"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "afterVerb"
+    ]
+   }
+  },
+  {
+   "id": "zh:xiaoshihou",
+   "lemma": "小时候",
+   "trad": "小時候",
+   "pinyin": "xiǎo shí hou",
+   "pos": "NOUN",
+   "senses": [
+    "time.childhood"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.childhood",
+     "axis": "register",
+     "value": "everyday speech: ‘when I was little’, a time word before the verb (我小时候…)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Old photos, the street where you played — when I was little.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "childhood; when one was little (a time word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.childhood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我小时候住在北京。",
+      "py": "Wǒ xiǎoshíhou zhù zài Běijīng.",
+      "tr": "When I was little I lived in Beijing.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "小时候我常常跟爷爷去公园。",
+      "py": "Xiǎoshíhou wǒ chángcháng gēn yéye qù gōngyuán.",
+      "tr": "As a child I often went to the park with Grandpa.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "这是我小时候的照片。",
+      "py": "Zhè shì wǒ xiǎoshíhou de zhàopiàn.",
+      "tr": "This is a photo of me as a child.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我小时候",
+      "tr": "when I was little"
+     },
+     {
+      "text": "小时候的朋友",
+      "tr": "a childhood friend"
+     },
+     {
+      "text": "小时候的事",
+      "tr": "things from one’s childhood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "童年",
+      "register": "formal",
+      "nuance": "tóngnián: childhood as a period — a noun (美好的童年)"
+     },
+     {
+      "word": "小时",
+      "register": "literary",
+      "nuance": "xiǎoshí: childhood — in set phrases (小时了了)"
+     },
+     {
+      "word": "儿时",
+      "register": "literary",
+      "nuance": "érshí: childhood (儿时的朋友)"
+     }
+    ],
+    "etymology": {
+     "text": "小时 ‘childhood’ (literally ‘small time’; Wiktionary lists this sense of 小时) + 候 ‘time, season’, as in 时候.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "小时候 contains 小时 ‘hour’: 三个小时 ‘three hours’ but 小时候 ‘when I was little’ — read to the end of the word."
+    ],
+    "pitfalls": [
+     "小时候 is a time word: it stands before the verb or at the very start (我小时候… / 小时候我…), never after the verb.",
+     "It already means ‘when I was a child’ — no …的时候 is added."
+    ],
+    "subtleties": [
+     "With 常常 / 总是 / 每天 it gives the ‘used to’ of childhood: 小时候我每天都玩 ‘I used to play every day’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 小時候 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted"
+    }
+   }
+  },
+  {
+   "id": "zh:tongnian",
+   "lemma": "童年",
+   "trad": "童年",
+   "pinyin": "tóng nián",
+   "pos": "NOUN",
+   "senses": [
+    "time.childhood"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.childhood",
+     "axis": "register",
+     "value": "written and reflective: childhood as a period, a noun (美好的童年)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Looking back: the years of being a child, warm or hard.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "childhood (the period)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.childhood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的童年很快乐。",
+      "py": "Wǒ de tóngnián hěn kuàilè.",
+      "tr": "My childhood was happy.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "他在农村度过了童年。",
+      "py": "Tā zài nóngcūn dùguòle tóngnián.",
+      "tr": "He spent his childhood in the countryside.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "童年的朋友最难忘。",
+      "py": "Tóngnián de péngyou zuì nánwàng.",
+      "tr": "Childhood friends are the hardest to forget.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "快乐的童年",
+      "tr": "a happy childhood"
+     },
+     {
+      "text": "童年的回忆",
+      "tr": "childhood memories"
+     },
+     {
+      "text": "度过童年",
+      "tr": "to spend one’s childhood"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "小时候",
+      "register": "neutral",
+      "nuance": "xiǎoshíhou: when I was little — the everyday time word"
+     },
+     {
+      "word": "幼年",
+      "register": "formal",
+      "nuance": "yòunián: early childhood, infancy"
+     },
+     {
+      "word": "儿时",
+      "register": "literary",
+      "nuance": "érshí: childhood"
+     }
+    ],
+    "etymology": {
+     "text": "童 ‘child’ (as in 儿童 ‘children’) + 年 ‘years’: ‘the child years’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "儿童节 ‘Children’s Day’ (1 June in the mainland) shares the 童 of 童年."
+    ],
+    "pitfalls": [
+     "童年 does not open a sentence as ‘when I was a child’ on its own: say 我小时候住在北京, or in writing 童年时…."
+    ],
+    "subtleties": [
+     "童年 sounds reflective — memoirs, songs, essays; in conversation people say 小时候."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  },
+  {
+   "id": "zh:wanju",
+   "lemma": "玩具",
+   "trad": "玩具",
+   "pinyin": "wán jù",
+   "pos": "NOUN",
+   "senses": [
+    "obj.toy"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Building blocks, a teddy bear, a toy car on the floor.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "toy, plaything",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.toy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我小时候的玩具。",
+      "py": "Zhè shì wǒ xiǎoshíhou de wánjù.",
+      "tr": "This is a toy from my childhood.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们在玩玩具。",
+      "py": "Háizimen zài wán wánjù.",
+      "tr": "The children are playing with their toys.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他给儿子买了一个新玩具。",
+      "py": "Tā gěi érzi mǎile yí ge xīn wánjù.",
+      "tr": "He bought his son a new toy.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "玩玩具",
+      "tr": "to play with toys"
+     },
+     {
+      "text": "买玩具",
+      "tr": "to buy toys"
+     },
+     {
+      "text": "玩具店",
+      "tr": "toy shop"
+     },
+     {
+      "text": "玩具车",
+      "tr": "toy car"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "玩意儿",
+      "register": "colloquial",
+      "nuance": "wányìr: thing, gadget, plaything (northern speech)"
+     }
+    ],
+    "etymology": {
+     "text": "玩 ‘to play’ + 具 ‘tool, implement’ (as in 工具 ‘tool’): ‘a play-tool’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "‘Play with toys’ is 玩玩具 — the same character twice: wán wánjù."
+    ],
+    "pitfalls": [
+     "Playing WITH a toy needs no word for ‘with’: the toy is the object, 玩玩具."
+    ],
+    "subtleties": [
+     "玩具 is a child’s toy; a grown-up’s gadget or ‘toy’ is jokingly 玩意儿."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "件"
+    ]
+   }
+  },
+  {
+   "id": "zh:youxi",
+   "lemma": "游戏",
+   "trad": "遊戲",
+   "pinyin": "yóu xì",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.game"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hide-and-seek in the courtyard, or a video game on a screen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "game (a playful or competitive activity, not a sport)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.game"
+     },
+     {
+      "id": "s2",
+      "def": "video game",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "(verb, written style) to play: 孩子们在游戏",
+      "register": [
+       "formal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们玩一个游戏吧！",
+      "py": "Wǒmen wán yí ge yóuxì ba!",
+      "tr": "Let’s play a game!",
+      "register": "informal",
+      "context": "play",
+      "sense": "s1"
+     },
+     {
+      "text": "这个游戏很容易。",
+      "py": "Zhège yóuxì hěn róngyì.",
+      "tr": "This game is easy.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "他每天玩两个小时的游戏。",
+      "py": "Tā měitiān wán liǎng ge xiǎoshí de yóuxì.",
+      "tr": "He plays video games for two hours every day.",
+      "register": "neutral",
+      "context": "computers",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "玩游戏",
+      "tr": "to play a game"
+     },
+     {
+      "text": "做游戏",
+      "tr": "to play (organised) games"
+     },
+     {
+      "text": "电子游戏",
+      "tr": "video games"
+     },
+     {
+      "text": "游戏规则",
+      "tr": "the rules of the game"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "比赛",
+      "register": "neutral",
+      "nuance": "bǐsài: match, competition (sport)"
+     },
+     {
+      "word": "电子游戏",
+      "register": "neutral",
+      "nuance": "diànzǐ yóuxì: video game, specifically"
+     }
+    ],
+    "etymology": {
+     "text": "游 ‘to roam, to swim; to play’ + 戏 ‘play, show’ (as in 戏剧 ‘drama’).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "游戏 is also the everyday word for video games: 打游戏 / 玩游戏 ‘play video games’."
+    ],
+    "pitfalls": [
+     "A sports match is not 游戏 but 比赛 (C21): 足球比赛 ‘a football match’."
+    ],
+    "subtleties": [
+     "做游戏 is playing organised games (at school, at a party); 玩游戏 is any game, very often a video game."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 遊戲 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  },
+  {
+   "id": "zh:wan.play",
+   "lemma": "玩",
+   "trad": "玩",
+   "pinyin": "wán",
+   "pos": "VERB",
+   "senses": [
+    "verb.play"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Children running in the park — and grown-ups having a good time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to play (children, games)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.play"
+     },
+     {
+      "id": "s2",
+      "def": "to have fun, to go out, to visit a place for pleasure (去北京玩)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子们在公园里玩。",
+      "py": "Háizimen zài gōngyuán li wán.",
+      "tr": "The children are playing in the park.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "小时候我常常跟邻居的孩子玩。",
+      "py": "Xiǎoshíhou wǒ chángcháng gēn línjū de háizi wán.",
+      "tr": "As a child I often played with the neighbours’ children.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "周末我们去北京玩吧！",
+      "py": "Zhōumò wǒmen qù Běijīng wán ba!",
+      "tr": "Let’s go to Beijing for the weekend!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "你玩得开心吗？",
+      "py": "Nǐ wán de kāixīn ma?",
+      "tr": "Did you have fun?",
+      "register": "informal",
+      "context": "chat",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "玩游戏",
+      "tr": "to play a game"
+     },
+     {
+      "text": "玩玩具",
+      "tr": "to play with toys"
+     },
+     {
+      "text": "去……玩",
+      "tr": "to go somewhere for fun"
+     },
+     {
+      "text": "好玩",
+      "tr": "fun, enjoyable"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "玩儿",
+      "register": "colloquial",
+      "nuance": "wánr: the same, with the northern -r"
+     },
+     {
+      "word": "玩耍",
+      "register": "formal",
+      "nuance": "wánshuǎ: play (of children)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 玉 ‘jade’ + phonetic 元 — the ancient toys made of jade (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "好玩 ‘fun’ is literally ‘good to play’: 北京很好玩 ‘Beijing is great fun’."
+    ],
+    "pitfalls": [
+     "玩 is not used for sports or instruments: 踢足球 ‘play football’, 打篮球 ‘play basketball’, 弹钢琴 ‘play the piano’ (C21)."
+    ],
+    "subtleties": [
+     "去北京玩 is ‘go to Beijing for a good time’ — 玩 covers sightseeing and fun for adults too."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "a single verb"
+    }
+   }
+  },
+  {
+   "id": "zh:zhangda",
+   "lemma": "长大",
+   "trad": "長大",
+   "pinyin": "zhǎng dà",
+   "pos": "VERB",
+   "senses": [
+    "verb.growup"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pencil marks on the door frame — children getting bigger, year by year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to grow up",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.growup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我在北京长大。",
+      "py": "Wǒ zài Běijīng zhǎngdà.",
+      "tr": "I grew up in Beijing.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "你长大了想做什么？",
+      "py": "Nǐ zhǎngdà le xiǎng zuò shénme?",
+      "tr": "What do you want to be when you grow up?",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们都长大了。",
+      "py": "Háizimen dōu zhǎngdà le.",
+      "tr": "The children have all grown up.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "长大了",
+      "tr": "has grown up"
+     },
+     {
+      "text": "在……长大",
+      "tr": "to grow up in …"
+     },
+     {
+      "text": "长大以后",
+      "tr": "when one grows up"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "成长",
+      "register": "formal",
+      "nuance": "chéngzhǎng: grow up, develop (also a person’s character, a company)"
+     },
+     {
+      "word": "成人",
+      "register": "formal",
+      "nuance": "chéngrén: become an adult; an adult"
+     }
+    ],
+    "etymology": {
+     "text": "长 zhǎng ‘to grow’ + 大 ‘big’: ‘grow big’ — a verb with its result.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "长 zhǎng ‘to grow’ and 长 cháng ‘long’ are one character: 长大 ‘grow up’, but 很长 ‘very long’."
+    ],
+    "pitfalls": [
+     "长大 already has its result and takes no object (*长大孩子); ‘to bring up a child’ is 养大 / 带大."
+    ],
+    "subtleties": [
+     "你长大了！ ‘How you’ve grown!’ is a common thing to say to a child."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading: zhǎngdà (alone, 长 is also cháng ‘long’, S16)"
+    },
+    "tradPerSense": {
+     "none": "traditional 長大 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "mei",
+    "separable": {
+     "none": "a verb with its result (长 + 大); nothing goes inside"
+    }
+   }
+  },
+  {
+   "id": "zh:jide",
+   "lemma": "记得",
+   "trad": "記得",
+   "pinyin": "jì de",
+   "pos": "VERB",
+   "senses": [
+    "verb.remember"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A face, a song, a street — still there in your memory.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to remember, to have in one’s memory",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.remember"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你还记得我吗？",
+      "py": "Nǐ hái jìde wǒ ma?",
+      "tr": "Do you still remember me?",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "我不记得他的名字了。",
+      "py": "Wǒ bú jìde tā de míngzi le.",
+      "tr": "I can’t remember his name any more.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "我记得那个幼儿园。",
+      "py": "Wǒ jìde nàge yòu’éryuán.",
+      "tr": "I remember that kindergarten.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "记得带护照！",
+      "py": "Jìde dài hùzhào!",
+      "tr": "Remember to take your passport!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "还记得",
+      "tr": "still remember"
+     },
+     {
+      "text": "不记得了",
+      "tr": "can’t remember (any more)"
+     },
+     {
+      "text": "记得带……",
+      "tr": "remember to bring …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "记住",
+      "register": "neutral",
+      "nuance": "jìzhu: memorize, get it into one’s memory (请记住)"
+     },
+     {
+      "word": "想起",
+      "register": "neutral",
+      "nuance": "xiǎngqǐ: recall, suddenly think of"
+     },
+     {
+      "word": "回忆",
+      "register": "formal",
+      "nuance": "huíyì: recollect; memories"
+     }
+    ],
+    "etymology": {
+     "text": "记 ‘to record, to remember’ + 得 (de, a verbal suffix, from 得 ‘to obtain’): ‘keep in mind’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "记得 + verb is also ‘remember to’: 记得给我打电话 ‘remember to call me’."
+    ],
+    "pitfalls": [
+     "Negated with 不: 我不记得了 ‘I don’t remember (any more)’ — not *我没记得."
+    ],
+    "subtleties": [
+     "记得 is having it in memory; 记住 is getting it in (‘memorize, note’); 想起来 is suddenly recalling it."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 記得 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu",
+    "separable": {
+     "none": "not a verb–object word"
+    }
+   }
+  },
+  {
+   "id": "zh:wangji",
+   "lemma": "忘记",
+   "trad": "忘記",
+   "pinyin": "wàng jì",
+   "pos": "VERB",
+   "senses": [
+    "verb.forget"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.forget",
+     "axis": "length and register",
+     "value": "the full word, neutral (忘记了, 别忘记)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A name on the tip of the tongue, a passport left behind.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to forget",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.forget"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我忘记了他的电话号码。",
+      "py": "Wǒ wàngjìle tā de diànhuà hàomǎ.",
+      "tr": "I’ve forgotten his phone number.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "别忘记带护照！",
+      "py": "Bié wàngjì dài hùzhào!",
+      "tr": "Don’t forget to take your passport!",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我永远不会忘记那个暑假。",
+      "py": "Wǒ yǒngyuǎn bú huì wàngjì nàge shǔjià.",
+      "tr": "I will never forget that summer holiday.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "忘记带……",
+      "tr": "to forget to bring …"
+     },
+     {
+      "text": "别忘记",
+      "tr": "don’t forget"
+     },
+     {
+      "text": "永远不会忘记",
+      "tr": "will never forget"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "忘",
+      "register": "colloquial",
+      "nuance": "wàng: forget — the short spoken form, mostly 忘了"
+     },
+     {
+      "word": "忘掉",
+      "register": "neutral",
+      "nuance": "wàngdiào: forget completely, put out of one’s mind"
+     },
+     {
+      "word": "遗忘",
+      "register": "literary",
+      "nuance": "yíwàng: forget, leave in oblivion"
+     }
+    ],
+    "etymology": {
+     "text": "忘 ‘to forget’ + 记 ‘to remember, to record’: ‘lose from memory’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "忘 is 亡 ‘to lose, to vanish’ above 心 ‘heart’: what has vanished from the heart (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Leaving something behind somewhere is 忘在: 我把护照忘在酒店了 ‘I left my passport at the hotel’ — the place follows 在."
+    ],
+    "subtleties": [
+     "忘记 sounds a little more careful than 忘了; the everyday cry is 我忘了！"
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 忘記 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word"
+    }
+   }
+  },
+  {
+   "id": "zh:wang",
+   "lemma": "忘",
+   "trad": "忘",
+   "pinyin": "wàng",
+   "pos": "VERB",
+   "senses": [
+    "verb.forget"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.forget",
+     "axis": "length and register",
+     "value": "short and spoken, mostly as 忘了 (我忘了！)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "‘Oh no, I forgot!’ — the everyday slip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to forget",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.forget"
+     },
+     {
+      "id": "s2",
+      "def": "to leave out, to neglect",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "对不起，我忘了！",
+      "py": "Duìbuqǐ, wǒ wàng le!",
+      "tr": "Sorry, I forgot!",
+      "register": "informal",
+      "context": "apology",
+      "sense": "s1"
+     },
+     {
+      "text": "别忘了吃早饭。",
+      "py": "Bié wàngle chī zǎofàn.",
+      "tr": "Don’t forget to eat breakfast.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我把钥匙忘在家里了。",
+      "py": "Wǒ bǎ yàoshi wàng zài jiā li le.",
+      "tr": "I left my keys at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "忘了",
+      "tr": "forgot"
+     },
+     {
+      "text": "别忘了",
+      "tr": "don’t forget"
+     },
+     {
+      "text": "忘在……",
+      "tr": "to leave something behind at …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "好了伤疤忘了疼",
+      "tr": "the scar has healed and the pain is forgotten",
+      "kind": "proverb",
+      "meaning": "once the trouble is over, people forget its lesson",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "忘记",
+      "register": "neutral",
+      "nuance": "wàngjì: forget — the full word"
+     },
+     {
+      "word": "忘掉",
+      "register": "neutral",
+      "nuance": "wàngdiào: forget completely"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 亡 + semantic 心 ‘heart’. Originally the same word as 亡 ‘to lose, to disappear’, later with a perfective suffix: ‘it has disappeared (from the mind)’ (Schuessler 2007, via Wiktionary). A doublet of 忙.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "忘 (wàng) and 忙 (máng ‘busy’) are both 亡 + heart — 忙 puts the heart at the side; Wiktionary calls them doublets."
+    ],
+    "pitfalls": [
+     "忘 alone is rare: say 忘了 or 忘记 — 我忘了他的名字, not *我忘他的名字."
+    ],
+    "subtleties": [
+     "别忘了 ‘don’t forget’ is one of the most frequent reminders of daily speech."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "a single verb"
+    }
+   }
+  },
+  {
+   "id": "zh:youeryuan",
+   "lemma": "幼儿园",
+   "trad": "幼兒園",
+   "pinyin": "yòu ér yuán",
+   "pos": "NOUN",
+   "senses": [
+    "place.kindergarten"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small chairs, songs and naps — the first school.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kindergarten, nursery school (about ages 3–6)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.kindergarten"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我儿子在幼儿园。",
+      "py": "Wǒ érzi zài yòu’éryuán.",
+      "tr": "My son is at kindergarten.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈每天早上送我去幼儿园。",
+      "py": "Māma měitiān zǎoshang sòng wǒ qù yòu’éryuán.",
+      "tr": "Mum took me to kindergarten every morning.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     },
+     {
+      "text": "这所幼儿园很大。",
+      "py": "Zhè suǒ yòu’éryuán hěn dà.",
+      "tr": "This kindergarten is big.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "上幼儿园",
+      "tr": "to go to kindergarten"
+     },
+     {
+      "text": "幼儿园老师",
+      "tr": "kindergarten teacher"
+     },
+     {
+      "text": "送孩子去幼儿园",
+      "tr": "to take the child to kindergarten"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "幼稚园",
+      "register": "regional",
+      "nuance": "yòuzhìyuán: kindergarten — Taiwan, Hong Kong, Singapore; dated in the mainland"
+     },
+     {
+      "word": "托儿所",
+      "register": "neutral",
+      "nuance": "tuō’érsuǒ: nursery, crèche (for the youngest children)"
+     }
+    ],
+    "etymology": {
+     "text": "A calque of German Kindergarten (Wiktionary): 幼儿 ‘small children’ + 园 ‘garden’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "幼儿园 is a word-for-word translation of German Kindergarten — ‘small-children garden’."
+    ],
+    "pitfalls": [
+     "幼稚 alone means ‘childish, naive’: calling an adult 幼稚 is an insult, even though 幼稚园 is the Taiwan word for kindergarten."
+    ],
+    "subtleties": [
+     "Children go to 幼儿园 from about three to six, then to 小学 ‘primary school’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 幼兒園 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "所",
+     "家"
+    ]
+   }
+  },
+  {
+   "id": "zh:linju",
+   "lemma": "邻居",
+   "trad": "鄰居",
+   "pinyin": "lín jū",
+   "pos": "NOUN",
+   "senses": [
+    "person.neighbour"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses 鄰居 ‘neighbor’ (American spelling); the course gloss is ‘neighbour’ — the same word."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The family across the landing, a greeting on the stairs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "neighbour(s)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.neighbour"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们的邻居很好。",
+      "py": "Wǒmen de línjū hěn hǎo.",
+      "tr": "Our neighbours are nice.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "他是我的邻居，住在旁边。",
+      "py": "Tā shì wǒ de línjū, zhù zài pángbiān.",
+      "tr": "He’s my neighbour; he lives next door.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "邻居家的狗很大。",
+      "py": "Línjū jiā de gǒu hěn dà.",
+      "tr": "The neighbours’ dog is big.",
+      "register": "neutral",
+      "context": "animals",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "老邻居",
+      "tr": "an old neighbour"
+     },
+     {
+      "text": "邻居家",
+      "tr": "the neighbours’ home"
+     },
+     {
+      "text": "隔壁邻居",
+      "tr": "the next-door neighbour"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "远亲不如近邻",
+      "tr": "a distant relative is not as good as a near neighbour",
+      "kind": "proverb",
+      "meaning": "people close by help more than family far away",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "街坊",
+      "register": "colloquial",
+      "nuance": "jiēfang: neighbours (of the same street or lane, northern speech)"
+     },
+     {
+      "word": "隔壁",
+      "register": "neutral",
+      "nuance": "gébì: next door (他住在隔壁)"
+     }
+    ],
+    "etymology": {
+     "text": "邻 ‘adjacent, neighbouring’ + 居 ‘to live; dwelling’: ‘the one who lives next to you’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The proverb 远亲不如近邻 says a neighbour close by is worth more than a relative far away."
+    ],
+    "pitfalls": [
+     "‘Next door’ as a place is 隔壁, not 邻居: 他住在隔壁 ‘he lives next door’."
+    ],
+    "subtleties": [
+     "邻居 is one neighbour or all of them: 我的邻居 — the number comes from context or 们 (邻居们)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 鄰居 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   }
+  },
+  {
+   "id": "zh:shujia",
+   "lemma": "暑假",
+   "trad": "暑假",
+   "pinyin": "shǔ jià",
+   "pos": "NOUN",
+   "senses": [
+    "time.holidays"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.holidays",
+     "axis": "which holidays",
+     "value": "the summer holidays (July – August)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses 暑假 ‘summer holiday; summer vacation’ — the summer part of the school holidays the concept names."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Long hot weeks without school — swimming, grandparents, ice lollies.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the summer holidays (of schools and universities)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holidays"
+     }
+    ],
+    "examples": [
+     {
+      "text": "暑假我们去奶奶家。",
+      "py": "Shǔjià wǒmen qù nǎinai jiā.",
+      "tr": "In the summer holidays we go to Grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这个暑假你有什么计划？",
+      "py": "Zhège shǔjià nǐ yǒu shénme jìhuà?",
+      "tr": "What are your plans for this summer holiday?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "小时候每个暑假我都去游泳。",
+      "py": "Xiǎoshíhou měi ge shǔjià wǒ dōu qù yóuyǒng.",
+      "tr": "As a child I went swimming every summer holiday.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "放暑假",
+      "tr": "to break up for the summer"
+     },
+     {
+      "text": "暑假作业",
+      "tr": "summer homework"
+     },
+     {
+      "text": "这个暑假",
+      "tr": "this summer holiday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "假期",
+      "register": "neutral",
+      "nuance": "jiàqī: holidays, time off in general"
+     },
+     {
+      "word": "暑期",
+      "register": "formal",
+      "nuance": "shǔqī: the summer vacation period (暑期班 ‘summer course’)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "寒假",
+      "note": "the winter holidays"
+     }
+    ],
+    "etymology": {
+     "text": "暑 ‘summer heat’ + 假 jià ‘leave, time off’: ‘the heat holiday’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "暑 is the hot season — 中暑 is ‘heatstroke’."
+    ],
+    "pitfalls": [
+     "假 is jià here (‘time off’), not jiǎ (‘false’): shǔjià."
+    ],
+    "subtleties": [
+     "In China the summer holidays usually run from July to the end of August; school starts again in September."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  },
+  {
+   "id": "zh:hanjia",
+   "lemma": "寒假",
+   "trad": "寒假",
+   "pinyin": "hán jià",
+   "pos": "NOUN",
+   "senses": [
+    "time.holidays"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.holidays",
+     "axis": "which holidays",
+     "value": "the winter holidays (around the Spring Festival, January – February)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses 寒假 ‘winter break; winter vacation’ — the winter part of the school holidays the concept names."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold days, firecrackers and family dinners around the New Year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the winter holidays (of schools and universities)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holidays"
+     }
+    ],
+    "examples": [
+     {
+      "text": "寒假我回家过春节。",
+      "py": "Hánjià wǒ huí jiā guò Chūnjié.",
+      "tr": "In the winter holidays I go home for the Spring Festival.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "寒假很短，只有一个月。",
+      "py": "Hánjià hěn duǎn, zhǐ yǒu yí ge yuè.",
+      "tr": "The winter holidays are short — only a month.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "你寒假去哪里？",
+      "py": "Nǐ hánjià qù nǎli?",
+      "tr": "Where are you going in the winter holidays?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "放寒假",
+      "tr": "to break up for the winter"
+     },
+     {
+      "text": "寒假作业",
+      "tr": "winter-holiday homework"
+     },
+     {
+      "text": "寒假期间",
+      "tr": "during the winter holidays"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "假期",
+      "register": "neutral",
+      "nuance": "jiàqī: holidays, time off in general"
+     },
+     {
+      "word": "春节假期",
+      "register": "neutral",
+      "nuance": "Chūnjié jiàqī: the Spring Festival holiday (for working people)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "暑假",
+      "note": "the summer holidays"
+     }
+    ],
+    "etymology": {
+     "text": "寒 ‘cold’ + 假 jià ‘leave, time off’: ‘the cold holiday’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The winter holidays are built around the Spring Festival, so their dates move every year with the lunar calendar."
+    ],
+    "pitfalls": [
+     "寒假 is for schools and universities; working people get the much shorter 春节假期."
+    ],
+    "subtleties": [
+     "寒 is the literary ‘cold’; in speech ‘cold’ is 冷 (S16), but the holiday keeps 寒."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "adv.usedto",
+   "reason": "No word and no verb form for the habitual past: Chinese uses a past time word with the plain verb.",
+   "use": "以前 / 小时候 / 那时候 + (常常, 总是, 每天 …) + verb, without 了: 我小时候常常去奶奶家 ‘I used to go to Grandma’s’; 以前我不喝咖啡 ‘I didn’t use to drink coffee’. The change since then: 现在 … 了 (现在我喝了)."
+  }
+ ]
+}

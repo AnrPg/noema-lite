@@ -1,0 +1,1747 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "noema.lang.v1",
+ "title": "noema-lite language course (docs/LANGUAGES.md §4)",
+ "description": "Structure of the files of a language course. tools/validate_lang.py checks this AND the rules between files (forms of the sentences = paradigm cells, DAG, coverage of every concept in every language, pinyin, vowel marks, NFC…). Pick the definition by file: course.json → #/$defs/course, core/fields/*.json → field, core/nodes.json → nodes, core/functions/*.json → function, core/frames.json → frames, lang/<code>/language.json → language, lang/<code>/lexicon/<node>.json → lexicon, lang/<code>/grammar/<function>.json → grammar, lang/<code>/bank/*.json → bank.",
+ "$defs": {
+  "course": {
+   "type": "object",
+   "required": [
+    "format",
+    "id",
+    "title",
+    "explainLang",
+    "languages"
+   ],
+   "properties": {
+    "format": {
+     "const": "noema.langcourse/v1"
+    },
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+     "type": "string"
+    },
+    "explainLang": {
+     "type": "string",
+     "description": "language of all explanations, glosses and feedback (default en)"
+    },
+    "languages": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "defaults": {
+     "type": "object",
+     "properties": {
+      "depth": {
+       "type": "object",
+       "additionalProperties": {
+        "enum": [
+         1,
+         2,
+         3
+        ]
+       }
+      },
+      "batch": {
+       "type": "integer",
+       "minimum": 3
+      },
+      "dailyMinutes": {
+       "type": "integer"
+      }
+     }
+    },
+    "knownLanguages": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "languages the learner already speaks (bridges only)"
+    },
+    "profiles": {
+     "enum": [
+      "required",
+      "optional"
+     ],
+     "description": "required (default): every content word has a full profile"
+    }
+   }
+  },
+  "field": {
+   "type": "object",
+   "required": [
+    "field",
+    "title",
+    "sources",
+    "concepts"
+   ],
+   "properties": {
+    "field": {
+     "type": "string"
+    },
+    "title": {
+     "type": "string"
+    },
+    "sources": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "subgroups": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "title"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "title": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "concepts": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "gloss",
+       "tier",
+       "rank"
+      ],
+      "properties": {
+       "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9_.-]+$"
+       },
+       "gloss": {
+        "type": "string"
+       },
+       "subgroup": {
+        "type": "string"
+       },
+       "tier": {
+        "enum": [
+         1,
+         2,
+         3
+        ]
+       },
+       "rank": {
+        "type": "integer",
+        "minimum": 1
+       },
+       "wikidata": {
+        "type": "string",
+        "pattern": "^Q[0-9]+$"
+       },
+       "media": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       },
+       "aka": {
+        "type": "string",
+        "description": "another name (e.g. the scientific name / Wikipedia title) — the reference check reads it too"
+       },
+       "pending": {
+        "type": "boolean",
+        "description": "a meaning known from a word, not taught by a node yet (D15)"
+       }
+      }
+     }
+    }
+   }
+  },
+  "nodes": {
+   "type": "object",
+   "required": [
+    "nodes"
+   ],
+   "properties": {
+    "nodes": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "kind",
+       "title",
+       "concepts",
+       "prereqs"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "kind": {
+        "enum": [
+         "core",
+         "field",
+         "lesson"
+        ]
+       },
+       "field": {
+        "type": "string"
+       },
+       "tier": {
+        "enum": [
+         1,
+         2,
+         3
+        ]
+       },
+       "title": {
+        "type": "string"
+       },
+       "concepts": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "prereqs": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "path": {
+        "enum": [
+         "isolating",
+         "agglutinating",
+         "fusional",
+         "polysynthetic"
+        ],
+        "description": "lessons: the path of the language type they belong to (D10)"
+       },
+       "langs": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "only these languages of the path (e.g. roots and patterns: ar, he)"
+       },
+       "functions": {
+        "description": "lessons: the grammar they teach — a list (every language) or {\"*\": [...], \"<type>\": [...], \"<language>\": [...]}",
+        "oneOf": [
+         {
+          "type": "array",
+          "items": {
+           "type": "string"
+          },
+          "minItems": 1
+         },
+         {
+          "type": "object",
+          "additionalProperties": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        ]
+       },
+       "step": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "lessons: the step of the foundations spine (S00–S18), the same in every path"
+       },
+       "stage": {
+        "enum": [
+         "foundations",
+         "core",
+         "advanced"
+        ],
+        "description": "foundations S00–S18, core C01–C48, advanced: open-ended modules (D17)"
+       },
+       "family": {
+        "enum": [
+         "field",
+         "grammar",
+         "lexicon",
+         "variety",
+         "text",
+         "culture"
+        ],
+        "description": "advanced modules (D17, §4.4.4)"
+       }
+      }
+     }
+    }
+   }
+  },
+  "function": {
+   "type": "object",
+   "required": [
+    "id",
+    "title"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^fn\\."
+    },
+    "title": {
+     "type": "string"
+    },
+    "category": {
+     "type": "string"
+    },
+    "level": {
+     "type": "string"
+    },
+    "after": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "tags": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "frames": {
+   "type": "object",
+   "required": [
+    "frames"
+   ],
+   "properties": {
+    "frames": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "meaning"
+      ],
+      "properties": {
+       "id": {
+        "type": "string",
+        "pattern": "^fr\\."
+       },
+       "meaning": {
+        "type": "string"
+       },
+       "slots": {
+        "type": "object"
+       },
+       "absent": {
+        "type": "object",
+        "additionalProperties": {
+         "type": "string"
+        },
+        "description": "language → why the frame has no sentence"
+       }
+      }
+     }
+    }
+   }
+  },
+  "language": {
+   "type": "object",
+   "required": [
+    "code",
+    "name",
+    "script",
+    "dir",
+    "tokenJoin",
+    "typology"
+   ],
+   "properties": {
+    "code": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "nativeName": {
+     "type": "string"
+    },
+    "script": {
+     "type": "string",
+     "description": "ISO 15924: Latn, Arab, Hebr, Hani, Deva, Cyrl…"
+    },
+    "dir": {
+     "enum": [
+      "ltr",
+      "rtl"
+     ]
+    },
+    "tokenJoin": {
+     "enum": [
+      "space",
+      "none"
+     ]
+    },
+    "capitalizeFirst": {
+     "type": "boolean"
+    },
+    "vowelMarks": {
+     "type": "boolean",
+     "description": "forms are stored fully vocalized (ar, he)"
+    },
+    "romanization": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "variants": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "extraTags": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "paradigmCells": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+      }
+     },
+     "description": "required cells per POS or POS.class"
+    },
+    "citationCells": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string",
+      "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+     },
+     "description": "the cell whose form is the lemma, per POS or POS.class"
+    },
+    "typology": {
+     "enum": [
+      "isolating",
+      "agglutinating",
+      "fusional",
+      "polysynthetic"
+     ],
+     "description": "the morphological type → the path of foundation lessons (D10)"
+    },
+    "wordFeatures": {
+     "type": "object",
+     "description": "the facade of each part of speech (D14, §4.5.1)",
+     "additionalProperties": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "title",
+        "type",
+        "phenomenon"
+       ],
+       "properties": {
+        "id": {
+         "type": "string"
+        },
+        "title": {
+         "type": "string"
+        },
+        "type": {
+         "enum": [
+          "enum",
+          "string",
+          "strings",
+          "bool",
+          "int",
+          "list"
+         ]
+        },
+        "values": {
+         "type": "array"
+        },
+        "item": {
+         "type": "object",
+         "additionalProperties": {
+          "type": "string"
+         }
+        },
+        "classes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "none": {
+         "type": "boolean"
+        },
+        "at": {
+         "const": "top"
+        },
+        "phenomenon": {
+         "oneOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         ]
+        },
+        "why": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "lexeme": {
+   "type": "object",
+   "required": [
+    "id",
+    "lemma",
+    "pos",
+    "senses",
+    "ref"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z]{2,3}:"
+    },
+    "lemma": {
+     "type": "string"
+    },
+    "pos": {
+     "enum": [
+      "NOUN",
+      "PROPN",
+      "VERB",
+      "AUX",
+      "ADJ",
+      "ADV",
+      "PRON",
+      "DET",
+      "ADP",
+      "CCONJ",
+      "SCONJ",
+      "NUM",
+      "PART",
+      "INTJ",
+      "CLF",
+      "X"
+     ]
+    },
+    "class": {
+     "type": "string"
+    },
+    "senses": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "role": {
+     "type": "string",
+     "description": "required when senses is empty"
+    },
+    "forms": {
+     "type": "object",
+     "propertyNames": {
+      "type": "string",
+      "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+     },
+     "additionalProperties": {
+      "type": "string"
+     }
+    },
+    "gender": {
+     "enum": [
+      "MASC",
+      "FEM",
+      "NEUT"
+     ]
+    },
+    "translit": {
+     "type": "string"
+    },
+    "root": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "prefix": {
+     "type": "boolean"
+    },
+    "trad": {
+     "type": "string"
+    },
+    "pinyin": {
+     "type": "string",
+     "description": "syllables separated by spaces, tone marks"
+    },
+    "measure": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "variants": {
+     "type": "array"
+    },
+    "ref": {
+     "type": "object",
+     "properties": {
+      "src": {
+       "type": "string"
+      },
+      "checked": {
+       "type": "string"
+      },
+      "override": {
+       "type": "object",
+       "additionalProperties": {
+        "type": "string"
+       },
+       "description": "accepted differences from the reference data: {\"pos\"|\"meaning\"|\"gender\"|\"<cell>\"|\"pinyin\"|\"trad\"|\"measure\"|\"all\": \"reason\"}"
+      }
+     }
+    },
+    "profile": {
+     "$ref": "#/$defs/profile"
+    },
+    "plene": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     }
+    },
+    "alts": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "other spellings of an invariant word, e.g. וּ and וַ for וְ"
+    },
+    "features": {
+     "type": "object",
+     "description": "the word's facade: every parameter its language declares for its part of speech (wordFeatures, D14, §4.5.1) — a value or {none: why}",
+     "additionalProperties": true
+    },
+    "contrasts": {
+     "type": "array",
+     "description": "when the language has several words for one concept: what separates this one (D14, §4.5.2)",
+     "items": {
+      "type": "object",
+      "required": [
+       "concept",
+       "axis",
+       "value"
+      ],
+      "properties": {
+       "concept": {
+        "type": "string"
+       },
+       "axis": {
+        "type": "string"
+       },
+       "value": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  },
+  "lexicon": {
+   "type": "object",
+   "required": [
+    "lexemes"
+   ],
+   "properties": {
+    "lexemes": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/lexeme"
+     }
+    },
+    "absent": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "concept",
+       "reason"
+      ],
+      "properties": {
+       "concept": {
+        "type": "string"
+       },
+       "reason": {
+        "type": "string"
+       },
+       "use": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  },
+  "grammar": {
+   "type": "object",
+   "required": [
+    "function",
+    "status",
+    "summary"
+   ],
+   "properties": {
+    "function": {
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "realized",
+      "periphrastic",
+      "absent"
+     ]
+    },
+    "summary": {
+     "type": "string"
+    },
+    "blocks": {
+     "type": "array"
+    },
+    "procedure": {
+     "type": "object",
+     "properties": {
+      "askYourself": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "steps": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "traps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "evidence": {
+     "type": "object",
+     "properties": {
+      "tags": {
+       "description": "cell tags a token must all have — or a list of such tag lists (any of them)",
+       "oneOf": [
+        {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        {
+         "type": "array",
+         "items": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         }
+        }
+       ]
+      },
+      "lemmas": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "punct": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "paradigmCells": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+     }
+    },
+    "needs": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "integer"
+     }
+    },
+    "generators": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "type"
+      ],
+      "properties": {
+       "type": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "quiz": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "q",
+       "options",
+       "answer",
+       "why"
+      ],
+      "properties": {
+       "q": {
+        "type": "string"
+       },
+       "options": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "minItems": 2
+       },
+       "answer": {
+        "type": "string"
+       },
+       "why": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "typology": {
+     "type": "object",
+     "required": [
+      "type",
+      "why"
+     ],
+     "properties": {
+      "type": {
+       "enum": [
+        "isolating",
+        "agglutinating",
+        "fusional",
+        "polysynthetic"
+       ]
+      },
+      "why": {
+       "type": "string"
+      },
+      "alsoShows": {
+       "type": "string"
+      }
+     }
+    },
+    "facts": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "label",
+       "value"
+      ]
+     }
+    },
+    "peculiarities": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "title",
+       "text"
+      ]
+     }
+    },
+    "forYou": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "lang",
+       "text"
+      ]
+     }
+    }
+   }
+  },
+  "token": {
+   "type": "object",
+   "required": [
+    "t"
+   ],
+   "properties": {
+    "t": {
+     "type": "string"
+    },
+    "l": {
+     "type": "string"
+    },
+    "f": {
+     "type": "string",
+     "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+    },
+    "p": {
+     "enum": [
+      true,
+      "open"
+     ]
+    },
+    "parts": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/token"
+     }
+    }
+   }
+  },
+  "bank": {
+   "type": "object",
+   "required": [
+    "sentences"
+   ],
+   "properties": {
+    "sentences": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "frame",
+       "text",
+       "tokens",
+       "functions",
+       "gloss"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "frame": {
+        "type": "string"
+       },
+       "text": {
+        "type": "string"
+       },
+       "tokens": {
+        "type": "array",
+        "items": {
+         "$ref": "#/$defs/token"
+        },
+        "minItems": 1
+       },
+       "functions": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "gloss": {
+        "type": "string"
+       },
+       "variantOf": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "variant": {
+        "type": "object"
+       },
+       "alts": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "level": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  },
+  "profile": {
+   "type": "object",
+   "description": "Every content word in depth (docs/LANGUAGES.md §4.6); tools/validate_lang.py enforces the minimums.",
+   "required": [
+    "frequency",
+    "status",
+    "register",
+    "connotation",
+    "feeling",
+    "senses",
+    "examples",
+    "synonyms"
+   ],
+   "properties": {
+    "frequency": {
+     "enum": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2"
+     ]
+    },
+    "status": {
+     "enum": [
+      "current",
+      "dated",
+      "archaic",
+      "obsolete",
+      "rare",
+      "neologism"
+     ]
+    },
+    "register": {
+     "oneOf": [
+      {
+       "enum": [
+        "archaic",
+        "children",
+        "colloquial",
+        "dated",
+        "dialectal",
+        "euphemistic",
+        "formal",
+        "honorific",
+        "humorous",
+        "informal",
+        "literary",
+        "neutral",
+        "obsolete",
+        "pejorative",
+        "poetic",
+        "regional",
+        "religious",
+        "scientific",
+        "slang",
+        "technical",
+        "vulgar"
+       ]
+      },
+      {
+       "type": "array",
+       "items": {
+        "enum": [
+         "archaic",
+         "children",
+         "colloquial",
+         "dated",
+         "dialectal",
+         "euphemistic",
+         "formal",
+         "honorific",
+         "humorous",
+         "informal",
+         "literary",
+         "neutral",
+         "obsolete",
+         "pejorative",
+         "poetic",
+         "regional",
+         "religious",
+         "scientific",
+         "slang",
+         "technical",
+         "vulgar"
+        ]
+       }
+      }
+     ]
+    },
+    "connotation": {
+     "enum": [
+      "neutral",
+      "positive",
+      "negative",
+      "mixed"
+     ]
+    },
+    "intensity": {
+     "enum": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      null
+     ]
+    },
+    "feeling": {
+     "type": "string"
+    },
+    "senses": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "def",
+       "register"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "def": {
+        "type": "string"
+       },
+       "concept": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "domains": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "status": {
+        "type": "string"
+       },
+       "of": {
+        "type": "string",
+        "description": "a nuance of this word's other sense (D15)"
+       }
+      }
+     }
+    },
+    "examples": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr",
+       "register",
+       "context",
+       "sense"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "context": {
+        "type": "string"
+       },
+       "sense": {
+        "type": "string"
+       },
+       "cell": {
+        "type": "string"
+       },
+       "py": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "collocations": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "particleVerbs": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "phrases": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr",
+       "kind",
+       "meaning"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       },
+       "kind": {
+        "enum": [
+         "idiom",
+         "proverb",
+         "saying",
+         "quote",
+         "slang",
+         "colloquial",
+         "fixed expression"
+        ]
+       },
+       "meaning": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "source": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "synonyms": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "word",
+       "register",
+       "nuance"
+      ],
+      "properties": {
+       "word": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "nuance": {
+        "type": "string"
+       },
+       "region": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "synonymsNone": {
+     "type": "string"
+    },
+    "antonyms": {
+     "type": "array"
+    },
+    "related": {
+     "type": "array"
+    },
+    "etymology": {
+     "type": "object",
+     "required": [
+      "text",
+      "src"
+     ],
+     "properties": {
+      "text": {
+       "type": "string"
+      },
+      "src": {
+       "type": "string"
+      }
+     }
+    },
+    "funFacts": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "pitfalls": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "subtleties": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "typology": {
+   "type": "object",
+   "required": [
+    "intro",
+    "types"
+   ],
+   "properties": {
+    "intro": {
+     "type": "string"
+    },
+    "spectrum": {
+     "type": "string"
+    },
+    "types": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "name",
+       "summary",
+       "examples"
+      ],
+      "properties": {
+       "id": {
+        "enum": [
+         "isolating",
+         "agglutinating",
+         "fusional",
+         "polysynthetic"
+        ]
+       },
+       "name": {
+        "type": "string"
+       },
+       "summary": {
+        "type": "string"
+       },
+       "learnFirst": {
+        "type": "string"
+       },
+       "languages": {
+        "type": "string"
+       },
+       "examples": {
+        "type": "array",
+        "minItems": 2,
+        "items": {
+         "type": "object",
+         "required": [
+          "lang",
+          "text",
+          "analysis"
+         ]
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "phenomena": {
+   "type": "object",
+   "description": "the catalogue of phenomena of a language (D14, §4.11)",
+   "required": [
+    "format",
+    "lang",
+    "name",
+    "typology",
+    "phenomena"
+   ],
+   "properties": {
+    "format": {
+     "const": "noema.langphenomena/v1"
+    },
+    "lang": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "typology": {
+     "type": "string"
+    },
+    "summary": {
+     "type": "string"
+    },
+    "sources": {
+     "type": "array"
+    },
+    "phenomena": {
+     "type": "array",
+     "minItems": 20,
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "title",
+       "area",
+       "what",
+       "examples",
+       "status"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "title": {
+        "type": "string"
+       },
+       "area": {
+        "enum": [
+         "script",
+         "orthography",
+         "phonology",
+         "morphology",
+         "syntax",
+         "lexicon",
+         "semantics",
+         "pragmatics",
+         "culture",
+         "numbers"
+        ]
+       },
+       "pos": {
+        "type": "array"
+       },
+       "rarity": {
+        "type": "string"
+       },
+       "sharedWith": {
+        "type": "array"
+       },
+       "what": {
+        "type": "string"
+       },
+       "examples": {
+        "type": "array",
+        "minItems": 1
+       },
+       "level": {
+        "type": "string"
+       },
+       "record": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "model": {
+        "type": "object"
+       },
+       "status": {
+        "enum": [
+         "covered",
+         "partial",
+         "missing"
+        ]
+       },
+       "gap": {
+        "type": "string"
+       },
+       "when": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "wordFeatures": {
+     "type": "object"
+    },
+    "distinctions": {
+     "type": "array"
+    },
+    "polysemy": {
+     "type": "array"
+    },
+    "conceptGaps": {
+     "type": "array"
+    }
+   }
+  }
+ }
+}

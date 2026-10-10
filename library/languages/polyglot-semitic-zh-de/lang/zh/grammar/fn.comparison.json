@@ -1,0 +1,445 @@
+{
+ "function": "fn.comparison",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "syn.comparison",
+   "value": "exceed"
+  },
+  {
+   "feature": "adj.comparativeForm",
+   "value": "analytic"
+  }
+ ],
+ "summary": "Chinese never changes the adjective to compare: it adds words. ‘Taller than’ is A 比 B + adjective — 我哥哥比我高 ‘my brother is taller than me’ — with the adjective bare (no 很). How much more follows the adjective (高一点 ‘a bit taller’, 快多了 ‘much faster’, 大两岁 ‘two years older’); 更 or 还 before it says ‘even more’. ‘Not as … as’ is A 没有 B + adjective (我没有他高), ‘as … as’ is A 跟 B 一样 + adjective (我跟他一样高). 更 + adjective is ‘more …’ when the other thing is understood (这个更好 ‘this one is better’), and 最 + adjective is ‘the most …’ (他最高 ‘he is the tallest’, 最好的饭馆 ‘the best restaurant’).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Pattern",
+    "Example"
+   ],
+   "rows": [
+    [
+     "A is more … than B",
+     "A 比 B + adjective",
+     "我哥哥比我高。 My brother is taller than me."
+    ],
+    [
+     "much more",
+     "A 比 B + adjective + 多了",
+     "飞机比火车快多了。 Planes are much faster than trains."
+    ],
+    [
+     "a little more",
+     "A 比 B + adjective + 一点",
+     "这个比那个贵一点。 This one is a bit dearer than that one."
+    ],
+    [
+     "by an amount",
+     "A 比 B + adjective + amount",
+     "我比我妹妹大两岁。 I’m two years older than my sister."
+    ],
+    [
+     "even more",
+     "A 比 B + 更 / 还 + adjective",
+     "今天比昨天更冷。 Today is even colder than yesterday."
+    ],
+    [
+     "not as … as",
+     "A 没有 B + adjective",
+     "我没有我哥哥高。 I’m not as tall as my brother."
+    ],
+    [
+     "as … as",
+     "A 跟 B 一样 + adjective",
+     "我跟他一样高。 I’m as tall as him."
+    ],
+    [
+     "more (than understood)",
+     "更 + adjective",
+     "这个更好。 This one is better."
+    ],
+    [
+     "the most",
+     "最 + adjective",
+     "他最高。 He is the tallest."
+    ]
+   ],
+   "caption": "Comparing: the adjective never changes",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "exceed"
+    },
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "我哥哥",
+    "比",
+    "我",
+    "高"
+   ],
+   "caption": "A 比 B + adjective — the adjective stays bare",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "exceed"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No 很 after 比",
+   "text": "*他比我很高 → 他比我高. To make it stronger, put 更 / 还 before the adjective (他比我还高 ‘even taller’) or 多了 after it (高多了 ‘much taller’)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The negative: 没有, not 不比",
+   "text": "他没有我高 ‘he is not as tall as me’ is the normal negative. 他不比我高 means ‘he is no taller than me’ — it corrects someone (we are about the same)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The amount goes after the adjective",
+   "text": "大两岁 ‘two years older’, 贵一点 ‘a bit dearer’, 快多了 ‘much faster’ — the quality first, then how much."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "更 — more",
+     "points": [
+      "这个更好。 This one is better.",
+      "我更喜欢茶。 I prefer tea."
+     ]
+    },
+    {
+     "title": "最 — the most",
+     "points": [
+      "这是最好的饭馆。 This is the best restaurant.",
+      "我最喜欢蓝色。 Blue is my favourite colour."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No -er, no -est",
+   "text": "高 · 比他高 · 更高 · 最高 — the adjective never changes. German changes the word (größer, am größten); Chinese adds a word.",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Questions",
+   "text": "他比你高吗？ ‘Is he taller than you?’ · 哪个更便宜？ ‘Which one is cheaper?’ · 谁最高？ ‘Who is the tallest?’"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Comparing without 比",
+   "text": "Two bare adjectives already contrast: 这个大，那个小 ‘this one is bigger, that one smaller’."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Three words do it all",
+   "text": "比 brings in what you compare with, 更 ‘more’ and 最 ‘most’ stand before the adjective, and the adjective itself never changes: 比我高, 更高, 最高.",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Colours: light and dark",
+   "text": "浅 ‘light’ and 深 ‘dark’ go straight before the colour: 浅蓝色 ‘light blue’, 深绿色 ‘dark green’. Colour nouns take 的 before a noun (红色的车) and 是…的 as a predicate (车是红色的); the one-syllable colours join a noun directly (红葡萄酒)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I comparing two things? → A 比 B + adjective.",
+   "Did I put 很 or 非常 after 比? → remove it: use 更 / 还 before the adjective, or 多了 / 一点 after it.",
+   "How much more? → after the adjective: 一点, 多了, or a number (大两岁).",
+   "Is it negative? → A 没有 B + adjective (‘not as … as’).",
+   "Are they equal? → A 跟 B 一样 + adjective.",
+   "The most of a group? → 最 + adjective (the group first: 我们家我爸爸最高).",
+   "Only one thing named, the other understood? → 更 + adjective (这个更好)."
+  ],
+  "steps": [
+   "Say A, then 比 + B.",
+   "Then the bare adjective.",
+   "Then, if needed, how much (一点, 多了, 两岁)."
+  ]
+ },
+ "traps": [
+  "*他比我很高 → 他比我高.",
+  "*他比我不高 → 他没有我高.",
+  "*他比我一点高 → 他比我高一点 (the amount after the adjective).",
+  "*我跟他一样很高 → 我跟他一样高.",
+  "*最很好, *更很好 → 最好, 更好.",
+  "他不比我高 (‘not taller — about the same’) ≠ 他没有我高 (‘not as tall’).",
+  "Older than (people) is 大, not 老: 他比我大两岁."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:bi.than",
+   "zh:geng",
+   "zh:zui",
+   "zh:yiyang",
+   "zh:mei"
+  ]
+ },
+ "needs": {
+  "ADJ": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘My brother is taller than me.’",
+   "options": [
+    "我哥哥比我高。",
+    "我哥哥比我很高。",
+    "我哥哥高比我。"
+   ],
+   "answer": "我哥哥比我高。",
+   "why": "A 比 B + the bare adjective — no 很."
+  },
+  {
+   "q": "‘I’m not as tall as my brother.’",
+   "options": [
+    "我没有我哥哥高。",
+    "我比我哥哥不高。",
+    "我不有我哥哥高。"
+   ],
+   "answer": "我没有我哥哥高。",
+   "why": "The negative comparison is A 没有 B + adjective."
+  },
+  {
+   "q": "‘He is two years older than me.’",
+   "options": [
+    "他比我大两岁。",
+    "他比我两岁大。",
+    "他比我老两岁。"
+   ],
+   "answer": "他比我大两岁。",
+   "why": "The amount follows the adjective, and age uses 大."
+  },
+  {
+   "q": "‘Blue is my favourite colour.’",
+   "options": [
+    "我最喜欢蓝色。",
+    "我喜欢最蓝色。",
+    "我很最喜欢蓝色。"
+   ],
+   "answer": "我最喜欢蓝色。",
+   "why": "最 goes before the verb or adjective it raises to the top."
+  },
+  {
+   "q": "‘I’m as tall as him.’",
+   "options": [
+    "我跟他一样高。",
+    "我跟他一样很高。",
+    "我一样他高。"
+   ],
+   "answer": "我跟他一样高。",
+   "why": "A 跟 B 一样 + the bare adjective."
+  },
+  {
+   "q": "‘Planes are much faster than trains.’",
+   "options": [
+    "飞机比火车快多了。",
+    "飞机比火车很快。",
+    "飞机比火车多快了。"
+   ],
+   "answer": "飞机比火车快多了。",
+   "why": "‘Much more’ is 多了 after the adjective."
+  },
+  {
+   "q": "‘light blue’",
+   "options": [
+    "浅蓝色",
+    "蓝色浅",
+    "黑蓝色"
+   ],
+   "answer": "浅蓝色",
+   "why": "浅 ‘light’ goes straight before the colour; dark blue is 深蓝色."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has an analytic comparative too (πιο ψηλός ‘more tall’ ~ 更高) besides ψηλότερος, but ‘than’ (από) follows the adjective: πιο ψηλός από μένα. Chinese puts 比 + the other thing before it: 比我高."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian выше / дороже change the adjective and put ‘than’ after it (выше меня); Chinese adds 比 before an unchanged adjective: 比我高. самый ~ 最."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish más alto que yo is analytic like Chinese (más ~ 更, el más alto ~ 最高), but que + the other thing follows the adjective; Chinese puts 比 + the other thing first: 比我高."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English taller / tallest change the adjective and ‘than’ follows it (taller than me); Chinese puts 比 + the other thing before an unchanged adjective: 比我高. ‘not as tall as’ ~ 没有…高; ‘as tall as’ ~ 跟…一样高."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French plus grand que moi is analytic like Chinese (plus ~ 更, le plus ~ 最), but que + the other thing follows the adjective; Chinese: 比我高."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German größer als ich changes the adjective and puts als after it; Chinese 比我高 adds 比 before an unchanged adjective. am größten ~ 最高."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi puts the thing compared with first, with से, and leaves the adjective unchanged: वह मुझसे लंबा है ~ 他比我高. सबसे ‘than all’ ~ 最: सबसे लंबा ~ 最高."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adds -tar to the adjective and az ‘than’ after it (bozorgtar az man ‘bigger than me’); Chinese leaves the adjective unchanged and puts 比 + the other thing first: 比我大."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts the other thing first with -पेक्षा and leaves the adjective unchanged: तो माझ्यापेक्षा उंच आहे ~ 他比我高; सगळ्यात ‘of all’ ~ 最."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic makes a new form of the adjective (kabīr → akbar) and puts min ‘than’ after it (akbar minnī ‘bigger than me’); Chinese leaves 大 alone and puts 比 + the other thing first: 比我大."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew yoter gadol mi- ‘more big than’ is analytic like 更大, but mi- follows the adjective; Chinese puts 比 first: 比我大. ha-khi gadol ~ 最大."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish also keeps the adjective unchanged and puts the other thing first: benden daha uzun ‘taller than me’ (-den ~ 比, daha ~ 更), en uzun ~ 最高."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese 私より高い ‘taller than me’ puts the other thing first, with より, and leaves the adjective unchanged — the Chinese 比我高 with the particle after the noun. 一番 / 最も ~ 最."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean 나보다 커요 ‘bigger than me’ puts the other thing first with 보다 and leaves the adjective unchanged; 더 ~ 更, 제일 ~ 最."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adds -mpi to the adjective (pitkä → pidempi) with kuin ‘than’ after it, or puts the other thing first in the partitive (minua pidempi); Chinese never changes the adjective: 比我高."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adds -bb to the adjective (magas → magasabb) and marks the other thing with -nál / -nél or mint; Chinese never changes the adjective: 比我高. leg-…-bb ~ 最."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says ‘tall more than me’: mrefu kuliko mimi; Chinese puts the other thing first: 比我高."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda compares with the verb ‘to surpass’ (-singa) after the adjective; Chinese 比 also comes from a verb (‘to compare’), but stands before the adjective: 比我高."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese puts hơn ‘more than’ after the adjective (cao hơn tôi ‘taller than me’) and nhất after it for ‘most’ (cao nhất); Chinese puts 比 and 最 before it: 比我高, 最高."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut makes the comparative with a suffix inside the word, and the thing compared with takes a ‘from’ ending; Chinese uses separate words and an unchanged adjective: 比我高."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.comparison",
+   "note": "German changes the adjective: größer als, am größten / der größte (with umlaut); Chinese leaves 大 as it is and adds 比 before the second thing and 最 before the adjective."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.comparison",
+   "note": "Arabic builds a new form from the root, the elative أَفْعَلُ + مِنْ (أَكْبَرُ مِنْ ‘bigger than’), which also serves as the superlative (أَكْبَرُ بَيْتٍ ‘the biggest house’); Chinese uses separate words, 比 and 最."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.comparison",
+   "note": "Hebrew, like Chinese, adds words and leaves the adjective unchanged: יוֹתֵר גָּדוֹל מִ… ‘bigger than’, הֲכִי גָּדוֹל ‘the biggest’ — 更 / 比 and 最 do the same jobs."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.adjective",
+   "note": "The bare adjective (without 很) is the comparison form: 他比我高."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "没有 (S08) is also the negative of a comparison: 我没有他高."
+  }
+ ]
+}

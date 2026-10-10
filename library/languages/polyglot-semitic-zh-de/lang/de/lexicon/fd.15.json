@@ -1,0 +1,4090 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Januar",
+   "lemma": "Januar",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.january"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Januar",
+    "N;ACC;SG": "Januar",
+    "N;DAT;SG": "Januar",
+    "N;GEN;SG": "Januars"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Januar"
+    ]
+   },
+   "variants": [
+    {
+     "lemma": "Jänner",
+     "region": "AT"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The year starts: cold, dark, new plans.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "January",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.january"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Januar ist es in Deutschland oft kalt.",
+      "tr": "In January it’s often cold in Germany.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Geburtstag ist im Januar.",
+      "tr": "My birthday is in January.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "Anfang Januar fahren wir in die Berge.",
+      "tr": "At the beginning of January we’re going to the mountains.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Januar",
+      "tr": "in January"
+     },
+     {
+      "text": "Anfang Januar",
+      "tr": "at the beginning of January"
+     },
+     {
+      "text": "Ende Januar",
+      "tr": "at the end of January"
+     },
+     {
+      "text": "Mitte Januar",
+      "tr": "in the middle of January"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Jänner",
+      "register": "regional",
+      "nuance": "January in Austria and South Tyrol – the official form there"
+     }
+    ],
+    "etymology": {
+     "text": "Learned borrowing from Latin Iānuārius. Doublet of the inherited Jänner.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Januar is the month of Janus, the two-faced Roman god of doors and beginnings – looking back at the old year and forward to the new."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Januar – not *in Januar.",
+     "In Austria (and South Tyrol) the month is der Jänner – it is the standard word there, also in writing."
+    ],
+    "subtleties": [
+     "Months are masculine: der Januar. With a date: am 3. Januar (am dritten Januar)."
+    ]
+   }
+  },
+  {
+   "id": "de:Februar",
+   "lemma": "Februar",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.february"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Februar",
+    "N;ACC;SG": "Februar",
+    "N;DAT;SG": "Februar",
+    "N;GEN;SG": "Februars"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Februar"
+    ]
+   },
+   "variants": [
+    {
+     "lemma": "Feber",
+     "region": "AT (dated)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The short month – carnival, the last snow.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "February",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.february"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Februar hat 28 oder 29 Tage.",
+      "tr": "February has 28 or 29 days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Februar feiern viele Menschen Karneval.",
+      "tr": "In February many people celebrate carnival.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Februar ist es noch kalt.",
+      "tr": "In February it’s still cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Februar",
+      "tr": "in February"
+     },
+     {
+      "text": "Anfang Februar",
+      "tr": "at the beginning of February"
+     },
+     {
+      "text": "Ende Februar",
+      "tr": "at the end of February"
+     },
+     {
+      "text": "Mitte Februar",
+      "tr": "in the middle of February"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Learned borrowing from Latin Februārius.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Roman Februarius was the month of februa, the festival of purification at the end of the old Roman year."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Februar – not *in Februar.",
+     "Pronounced Feb-ru-ar, three syllables; in Austria the dated form Feber is still heard."
+    ],
+    "subtleties": [
+     "Months are masculine: der Februar. With a date: am 3. Februar (am dritten Februar).",
+     "Carnival (Karneval, Fasching, Fastnacht) usually falls in February."
+    ]
+   }
+  },
+  {
+   "id": "de:März",
+   "lemma": "März",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.march"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "März",
+    "N;ACC;SG": "März",
+    "N;DAT;SG": "März",
+    "N;GEN;SG": "März"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Märzes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first warm days – spring begins.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "March",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.march"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im März beginnt der Frühling.",
+      "tr": "Spring begins in March.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "Ende März stellen wir die Uhren auf Sommerzeit um.",
+      "tr": "At the end of March we put the clocks forward to summer time.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Bruder hat im März Geburtstag.",
+      "tr": "My brother’s birthday is in March.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im März",
+      "tr": "in March"
+     },
+     {
+      "text": "Anfang März",
+      "tr": "at the beginning of March"
+     },
+     {
+      "text": "Ende März",
+      "tr": "at the end of March"
+     },
+     {
+      "text": "Mitte März",
+      "tr": "in the middle of March"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Inherited from Middle High German merze, from Latin (mensis) Martius.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "März is the month of Mars, the Roman god of war – the old Roman year began in March."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im März – not *in März.",
+     "März has an umlaut and ends in -z; the genitive is usually des März."
+    ],
+    "subtleties": [
+     "Months are masculine: der März. With a date: am 3. März (am dritten März).",
+     "Märzenbier is a strong beer traditionally brewed in March."
+    ]
+   }
+  },
+  {
+   "id": "de:April",
+   "lemma": "April",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.april"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "April",
+    "N;ACC;SG": "April",
+    "N;DAT;SG": "April",
+    "N;GEN;SG": "Aprils"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "April"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sun, rain, hail and sun again – the moody month.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "April",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.april"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im April regnet es oft.",
+      "tr": "It often rains in April.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Ostern ist oft im April.",
+      "tr": "Easter is often in April.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "Am 1. April macht man Scherze.",
+      "tr": "On the 1st of April people play jokes.",
+      "register": "neutral",
+      "context": "customs",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im April",
+      "tr": "in April"
+     },
+     {
+      "text": "Anfang April",
+      "tr": "at the beginning of April"
+     },
+     {
+      "text": "Ende April",
+      "tr": "at the end of April"
+     },
+     {
+      "text": "Mitte April",
+      "tr": "in the middle of April"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Der April macht, was er will.",
+      "tr": "April does what it wants.",
+      "kind": "saying",
+      "meaning": "April weather is unpredictable.",
+      "register": "neutral"
+     },
+     {
+      "text": "jemanden in den April schicken",
+      "tr": "to send someone into April",
+      "kind": "idiom",
+      "meaning": "to make an April fool of someone",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Inherited from Middle High German aberelle, from Latin Aprīlis.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The weather saying goes: Der April macht, was er will – April does what it wants."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im April – not *in April.",
+     "Stress on the second syllable: A-PRIL."
+    ],
+    "subtleties": [
+     "Months are masculine: der April. With a date: am 3. April (am dritten April).",
+     "“April, April!” is what Germans shout after an April fool’s trick; to fool someone is jemanden in den April schicken."
+    ]
+   }
+  },
+  {
+   "id": "de:Mai",
+   "lemma": "Mai",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.may"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Mai",
+    "N;ACC;SG": "Mai",
+    "N;DAT;SG": "Mai",
+    "N;GEN;SG": "Mais"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Mai"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Blossom, the maypole, the first of May off work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "May",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.may"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Mai blühen die Bäume.",
+      "tr": "In May the trees blossom.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "Der 1. Mai ist ein Feiertag.",
+      "tr": "The 1st of May is a public holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir heiraten im Mai.",
+      "tr": "We’re getting married in May.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Mai",
+      "tr": "in May"
+     },
+     {
+      "text": "Anfang Mai",
+      "tr": "at the beginning of May"
+     },
+     {
+      "text": "Ende Mai",
+      "tr": "at the end of May"
+     },
+     {
+      "text": "Mitte Mai",
+      "tr": "in the middle of May"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "From Middle High German meie, from Old High German meio, from Latin (mensis) Maius, the month of the Italic goddess of growth (Maia).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Labour Day, the 1st of May, is a public holiday in Germany and Austria (Tag der Arbeit)."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Mai – not *in Mai.",
+     "Mai is written with ai (not *Mei) and sounds like English “my”."
+    ],
+    "subtleties": [
+     "Months are masculine: der Mai. With a date: am 3. Mai (am dritten Mai).",
+     "Der Wonnemonat Mai (the month of delight) is the poetic name.",
+     "In many villages a decorated tree, der Maibaum, is set up on 1 May."
+    ]
+   }
+  },
+  {
+   "id": "de:Juni",
+   "lemma": "Juni",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.june"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Juni",
+    "N;ACC;SG": "Juni",
+    "N;DAT;SG": "Juni",
+    "N;GEN;SG": "Junis"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Juni"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Long light evenings, the first summer heat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "June",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.june"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Juni sind die Tage lang.",
+      "tr": "In June the days are long.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Juni fahren wir ans Meer.",
+      "tr": "In June we’re going to the seaside.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Schwester hat im Juni Geburtstag.",
+      "tr": "My sister’s birthday is in June.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Juni",
+      "tr": "in June"
+     },
+     {
+      "text": "Anfang Juni",
+      "tr": "at the beginning of June"
+     },
+     {
+      "text": "Ende Juni",
+      "tr": "at the end of June"
+     },
+     {
+      "text": "Mitte Juni",
+      "tr": "in the middle of June"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "From the Latin (mēnsis) Iūnius (“month of June”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The longest day of the year, the summer solstice, falls in June."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Juni – not *in Juni.",
+     "Juni and Juli sound almost the same – listen to the n / l."
+    ],
+    "subtleties": [
+     "Months are masculine: der Juni. With a date: am 3. Juni (am dritten Juni).",
+     "On the phone and in announcements Germans often say Juno for Juni and Julei for Juli, to keep them apart."
+    ]
+   }
+  },
+  {
+   "id": "de:Juli",
+   "lemma": "Juli",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.july"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Juli",
+    "N;ACC;SG": "Juli",
+    "N;DAT;SG": "Juli",
+    "N;GEN;SG": "Julis"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Juli"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer at its height – school holidays, the beach, the heat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "July",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.july"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Juli ist es sehr warm.",
+      "tr": "In July it’s very warm.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Juli haben die Kinder Ferien.",
+      "tr": "In July the children have their holidays.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren im Juli nach Griechenland.",
+      "tr": "We’re going to Greece in July.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Juli",
+      "tr": "in July"
+     },
+     {
+      "text": "Anfang Juli",
+      "tr": "at the beginning of July"
+     },
+     {
+      "text": "Ende Juli",
+      "tr": "at the end of July"
+     },
+     {
+      "text": "Mitte Juli",
+      "tr": "in the middle of July"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Learned borrowing from Latin Iūlius.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Juli is named after Julius Caesar, who was born in this month."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Juli – not *in Juli.",
+     "Juli and Juni are easily confused when spoken: Juli has the l."
+    ],
+    "subtleties": [
+     "Months are masculine: der Juli. With a date: am 3. Juli (am dritten Juli).",
+     "To be clear, people say Julei for Juli (and Juno for Juni)."
+    ]
+   }
+  },
+  {
+   "id": "de:August",
+   "lemma": "August",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.august"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "August",
+    "N;ACC;SG": "August",
+    "N;DAT;SG": "August",
+    "N;GEN;SG": "Augusts"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "August",
+     "Augustes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Holiday month – empty cities, full beaches.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "August",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.august"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im August machen viele Deutsche Urlaub.",
+      "tr": "In August many Germans go on holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Im August ist es in Griechenland sehr heiß.",
+      "tr": "In August it’s very hot in Greece.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Ende August fahren wir zurück.",
+      "tr": "At the end of August we go back.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im August",
+      "tr": "in August"
+     },
+     {
+      "text": "Anfang August",
+      "tr": "at the beginning of August"
+     },
+     {
+      "text": "Ende August",
+      "tr": "at the end of August"
+     },
+     {
+      "text": "Mitte August",
+      "tr": "in the middle of August"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Learned borrowing from Latin Augustus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "August is named after the emperor Augustus; der dumme August is the traditional German name for the clumsy circus clown."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im August – not *in August.",
+     "Stress on the second syllable: Au-GUST; August with stress on the first syllable is the man’s name."
+    ],
+    "subtleties": [
+     "Months are masculine: der August. With a date: am 3. August (am dritten August).",
+     "The genitive can be des August or des Augusts."
+    ]
+   }
+  },
+  {
+   "id": "de:September",
+   "lemma": "September",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.september"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "September",
+    "N;ACC;SG": "September",
+    "N;DAT;SG": "September",
+    "N;GEN;SG": "Septembers"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "September"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Back to school and work – the first cool mornings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "September",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.september"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im September beginnt der Herbst.",
+      "tr": "Autumn begins in September.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Oktoberfest beginnt im September.",
+      "tr": "The Oktoberfest starts in September.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Urlaub ist im September.",
+      "tr": "My holiday is in September.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im September",
+      "tr": "in September"
+     },
+     {
+      "text": "Anfang September",
+      "tr": "at the beginning of September"
+     },
+     {
+      "text": "Ende September",
+      "tr": "at the end of September"
+     },
+     {
+      "text": "Mitte September",
+      "tr": "in the middle of September"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Inherited from Middle High German september, from Latin September, from septem (“seven”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "September means “the seventh” (Latin septem): the old Roman year began in March, so September was month seven – like October (eight), November (nine) and December (ten)."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im September – not *in September.",
+     "Stress on the second syllable: Sep-TEM-ber."
+    ],
+    "subtleties": [
+     "Months are masculine: der September. With a date: am 3. September (am dritten September).",
+     "The Munich Oktoberfest starts in the second half of September and ends in early October."
+    ]
+   }
+  },
+  {
+   "id": "de:Oktober",
+   "lemma": "Oktober",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.october"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Oktober",
+    "N;ACC;SG": "Oktober",
+    "N;DAT;SG": "Oktober",
+    "N;GEN;SG": "Oktobers"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Oktober"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Golden leaves, the new university term, the first storms.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "October",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.october"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Oktober werden die Blätter bunt.",
+      "tr": "In October the leaves turn colourful.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "Am 3. Oktober ist in Deutschland ein Feiertag.",
+      "tr": "The 3rd of October is a public holiday in Germany.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Oktober fängt die Uni an.",
+      "tr": "University starts in October.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Oktober",
+      "tr": "in October"
+     },
+     {
+      "text": "Anfang Oktober",
+      "tr": "at the beginning of October"
+     },
+     {
+      "text": "Ende Oktober",
+      "tr": "at the end of October"
+     },
+     {
+      "text": "Mitte Oktober",
+      "tr": "in the middle of October"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "From Middle High German octōber, from Latin Octōber, from octō (“eight”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Oktober is “the eighth” (Latin octo, Greek ὀκτώ); its festival, the Oktoberfest, mostly takes place in September."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Oktober – not *in Oktober.",
+     "Spelt with k in German: Oktober (English October)."
+    ],
+    "subtleties": [
+     "Months are masculine: der Oktober. With a date: am 3. Oktober (am dritten Oktober).",
+     "The 3rd of October is the Day of German Unity (Tag der Deutschen Einheit), the national holiday."
+    ]
+   }
+  },
+  {
+   "id": "de:November",
+   "lemma": "November",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.november"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "November",
+    "N;ACC;SG": "November",
+    "N;DAT;SG": "November",
+    "N;GEN;SG": "Novembers"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "November"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grey, foggy, early darkness – the quiet month.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "November",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.november"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im November ist es oft grau.",
+      "tr": "In November it’s often grey.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Im November fahren wir nicht in Urlaub.",
+      "tr": "We don’t go on holiday in November.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Der November hat 30 Tage.",
+      "tr": "November has 30 days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im November",
+      "tr": "in November"
+     },
+     {
+      "text": "Anfang November",
+      "tr": "at the beginning of November"
+     },
+     {
+      "text": "Ende November",
+      "tr": "at the end of November"
+     },
+     {
+      "text": "Mitte November",
+      "tr": "in the middle of November"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Inherited from Middle High German november, from Latin November, from novem (“nine”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "November is “the ninth” (Latin novem) of the old Roman calendar."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im November – not *in November.",
+     "Stress on the second syllable: No-VEM-ber."
+    ],
+    "subtleties": [
+     "Months are masculine: der November. With a date: am 3. November (am dritten November).",
+     "Carnival officially starts on 11 November at 11:11 in the Rhineland."
+    ]
+   }
+  },
+  {
+   "id": "de:Dezember",
+   "lemma": "Dezember",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.december"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Dezember",
+    "N;ACC;SG": "Dezember",
+    "N;DAT;SG": "Dezember",
+    "N;GEN;SG": "Dezembers"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Dezember"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Christmas markets, candles, the end of the year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "December",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.december"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Dezember ist Weihnachten.",
+      "tr": "Christmas is in December.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "Am 31. Dezember feiern wir Silvester.",
+      "tr": "On the 31st of December we celebrate New Year’s Eve.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Dezember gibt es Weihnachtsmärkte.",
+      "tr": "In December there are Christmas markets.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Dezember",
+      "tr": "in December"
+     },
+     {
+      "text": "Anfang Dezember",
+      "tr": "at the beginning of December"
+     },
+     {
+      "text": "Ende Dezember",
+      "tr": "at the end of December"
+     },
+     {
+      "text": "Mitte Dezember",
+      "tr": "in the middle of December"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A month name has no synonym in standard German; regional forms are given as variants.",
+    "etymology": {
+     "text": "Inherited from Middle High German december, from Latin December, from decem (“ten”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Dezember is “the tenth” (Latin decem, Greek δέκα) – although it is the twelfth month today."
+    ],
+    "pitfalls": [
+     "In a month = im (in + dem): im Dezember – not *in Dezember.",
+     "Spelt with z: Dezember (English December)."
+    ],
+    "subtleties": [
+     "Months are masculine: der Dezember. With a date: am 3. Dezember (am dritten Dezember).",
+     "New Year’s Eve is Silvester in German, after Pope Sylvester I, whose feast day is 31 December."
+    ]
+   }
+  },
+  {
+   "id": "de:Frühling",
+   "lemma": "Frühling",
+   "pos": "NOUN",
+   "senses": [
+    "time.spring"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frühlinge",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: früh + -ling"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Frühling",
+    "N;ACC;SG": "Frühling",
+    "N;DAT;SG": "Frühling",
+    "N;GEN;SG": "Frühlings",
+    "N;NOM;PL": "Frühlinge",
+    "N;ACC;PL": "Frühlinge",
+    "N;DAT;PL": "Frühlingen",
+    "N;GEN;PL": "Frühlinge"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Blossom, birds, the first coffee outside – the year waking up.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spring (the season)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.spring"
+     },
+     {
+      "id": "s2",
+      "def": "springtime, youth (figurative)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Frühling blühen die Bäume.",
+      "tr": "In spring the trees blossom.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Frühling beginnt im März.",
+      "tr": "Spring begins in March.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Frühling fahren wir oft Fahrrad.",
+      "tr": "In spring we often go cycling.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Frühling",
+      "tr": "in spring"
+     },
+     {
+      "text": "der Frühlingsanfang",
+      "tr": "the first day of spring"
+     },
+     {
+      "text": "ein schöner Frühling",
+      "tr": "a beautiful spring"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Frühjahr",
+      "register": "neutral",
+      "nuance": "spring – the more matter-of-fact word, common in weather reports and business"
+     },
+     {
+      "word": "Lenz",
+      "register": "poetic",
+      "nuance": "spring – old poetic word"
+     }
+    ],
+    "etymology": {
+     "text": "15th century, from früh (“early”) + -ling.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Frühling is “the early one” (früh + -ling) of the year; Greek άνοιξη is the “opening” (ανοίγω); Turkish ilkbahar is the “first bahar” and autumn sonbahar the “last bahar”."
+    ],
+    "pitfalls": [
+     "In a season = im (in + dem): im Frühling – not *in Frühling; all four seasons are masculine.",
+     "Frühling (season) vs. die Feder (a spring in a mechanism) – different words."
+    ],
+    "subtleties": [
+     "Frühjahr and Frühling mean the same; Frühjahr is neuter: das Frühjahr."
+    ]
+   }
+  },
+  {
+   "id": "de:Sommer",
+   "lemma": "Sommer",
+   "pos": "NOUN",
+   "senses": [
+    "time.summer"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sommer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Sommer",
+    "N;ACC;SG": "Sommer",
+    "N;DAT;SG": "Sommer",
+    "N;GEN;SG": "Sommers",
+    "N;NOM;PL": "Sommer",
+    "N;ACC;PL": "Sommer",
+    "N;DAT;PL": "Sommern",
+    "N;GEN;PL": "Sommer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heat, long evenings, holidays by the sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "summer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.summer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Sommer fahren wir nach Griechenland.",
+      "tr": "In summer we go to Greece.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Sommer ist dieses Jahr sehr heiß.",
+      "tr": "The summer is very hot this year.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Sommer haben die Kinder sechs Wochen Ferien.",
+      "tr": "In summer the children have six weeks’ holiday.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Sommer",
+      "tr": "in summer"
+     },
+     {
+      "text": "die Sommerferien",
+      "tr": "the summer holidays"
+     },
+     {
+      "text": "ein heißer Sommer",
+      "tr": "a hot summer"
+     },
+     {
+      "text": "die Sommerzeit",
+      "tr": "summer time (clocks)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Eine Schwalbe macht noch keinen Sommer.",
+      "tr": "One swallow does not make a summer.",
+      "kind": "proverb",
+      "meaning": "One good sign is not proof that things have changed.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Sommerzeit",
+      "register": "neutral",
+      "nuance": "summertime; also daylight saving time"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Winter",
+      "note": "winter"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German sumer, from Old High German sumar, from Proto-West Germanic *sumar. The -o- is of Central and Low German origin; southern dialects say Summer. Cognate with Dutch zomer, English summer.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sommer is English summer; the southern dialects still say Summer, as English does."
+    ],
+    "pitfalls": [
+     "In a season = im (in + dem): im Sommer – not *in Sommer; all four seasons are masculine.",
+     "Plural die Sommer (no ending), dative den Sommern."
+    ],
+    "subtleties": [
+     "Altweibersommer (“old women’s summer”) is a warm spell in early autumn – an Indian summer."
+    ]
+   }
+  },
+  {
+   "id": "de:Herbst",
+   "lemma": "Herbst",
+   "pos": "NOUN",
+   "senses": [
+    "time.autumn"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Herbste",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Herbst",
+    "N;ACC;SG": "Herbst",
+    "N;DAT;SG": "Herbst",
+    "N;GEN;SG": "Herbstes",
+    "N;NOM;PL": "Herbste",
+    "N;ACC;PL": "Herbste",
+    "N;DAT;PL": "Herbsten",
+    "N;GEN;PL": "Herbste"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Herbsts"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Golden leaves, wine harvest, the first rainy days.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "autumn, fall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.autumn"
+     },
+     {
+      "id": "s2",
+      "def": "autumn of life (figurative)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Herbst werden die Tage kürzer.",
+      "tr": "In autumn the days get shorter.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Herbst ist meine Lieblingsjahreszeit.",
+      "tr": "Autumn is my favourite season.",
+      "register": "neutral",
+      "context": "preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Herbst reisen wir nach Italien.",
+      "tr": "In autumn we travel to Italy.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Herbst",
+      "tr": "in autumn"
+     },
+     {
+      "text": "der goldene Herbst",
+      "tr": "the golden autumn"
+     },
+     {
+      "text": "die Herbstferien",
+      "tr": "the autumn school holidays"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Spätjahr",
+      "register": "regional",
+      "nuance": "late year – southwestern German word for autumn"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German herbest, from Old High German herbist, from Proto-West Germanic *harbist. Compare Dutch herfst, English harvest.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Herbst is English harvest – in Old English hærfest was the name of the season itself, before autumn and fall."
+    ],
+    "pitfalls": [
+     "In a season = im (in + dem): im Herbst – not *in Herbst; all four seasons are masculine.",
+     "Herbst ends in -bst – three consonants; plural die Herbste is rare."
+    ],
+    "subtleties": [
+     "der Herbst des Lebens = the autumn of one’s life (old age), a literary image."
+    ]
+   }
+  },
+  {
+   "id": "de:Winter",
+   "lemma": "Winter",
+   "pos": "NOUN",
+   "senses": [
+    "time.winter"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Winter",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Winter",
+    "N;ACC;SG": "Winter",
+    "N;DAT;SG": "Winter",
+    "N;GEN;SG": "Winters",
+    "N;NOM;PL": "Winter",
+    "N;ACC;PL": "Winter",
+    "N;DAT;PL": "Wintern",
+    "N;GEN;PL": "Winter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Snow, short days, hot drinks – and Christmas.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.winter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Winter ist es kalt.",
+      "tr": "In winter it’s cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Winter fahren wir in die Berge.",
+      "tr": "In winter we go to the mountains.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Winter ist dieses Jahr lang.",
+      "tr": "Winter is long this year.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Winter",
+      "tr": "in winter"
+     },
+     {
+      "text": "ein kalter Winter",
+      "tr": "a cold winter"
+     },
+     {
+      "text": "der Winterschlaf",
+      "tr": "hibernation"
+     },
+     {
+      "text": "die Winterreifen",
+      "tr": "winter tyres"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "die kalte Jahreszeit",
+      "register": "neutral",
+      "nuance": "the cold season – a descriptive phrase"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Sommer",
+      "note": "summer"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German winder, winter, from Old High German wintar, from Proto-West Germanic *wintru, from Proto-Germanic *wintruz. Compare Dutch winter, English winter, Danish vinter.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Winter is spelt exactly as in English and Dutch – one of the easiest words for an English speaker."
+    ],
+    "pitfalls": [
+     "In a season = im (in + dem): im Winter – not *in Winter; all four seasons are masculine.",
+     "Plural die Winter (no ending), dative den Wintern."
+    ],
+    "subtleties": [
+     "der Winterschlaf (winter sleep) is the word for hibernation."
+    ]
+   }
+  },
+  {
+   "id": "de:Woche",
+   "lemma": "Woche",
+   "pos": "NOUN",
+   "senses": [
+    "time.week"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wochen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Woche",
+    "N;ACC;SG": "Woche",
+    "N;DAT;SG": "Woche",
+    "N;GEN;SG": "Woche",
+    "N;NOM;PL": "Wochen",
+    "N;ACC;PL": "Wochen",
+    "N;DAT;PL": "Wochen",
+    "N;GEN;PL": "Wochen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seven days – Monday to Sunday, the rhythm of work and weekend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.week"
+     },
+     {
+      "id": "s2",
+      "def": "the working week, weekdays (unter der Woche)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Woche hat sieben Tage.",
+      "tr": "The week has seven days.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir bleiben eine Woche in Berlin.",
+      "tr": "We’re staying in Berlin for a week.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Unter der Woche gehe ich früh ins Bett.",
+      "tr": "During the week I go to bed early.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "diese Woche",
+      "tr": "this week"
+     },
+     {
+      "text": "nächste Woche",
+      "tr": "next week"
+     },
+     {
+      "text": "jede Woche",
+      "tr": "every week"
+     },
+     {
+      "text": "unter der Woche",
+      "tr": "during the week, on weekdays"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "unter der Woche",
+      "tr": "under the week",
+      "kind": "fixed expression",
+      "meaning": "on weekdays, during the working week",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sieben Tage",
+      "register": "neutral",
+      "nuance": "seven days – when the exact length matters"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German woche, from Old High German wohha, from Proto-West Germanic *wikā, from Proto-Germanic *wikǭ, from Proto-Indo-European *weyg- (“to bend, wind, turn”). Compare Yiddish וואָך (vokh), English week, Dutch week.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Woche and English week go back to a root meaning “to turn, change” – the week as one turn of the days."
+    ],
+    "pitfalls": [
+     "Feminine: die Woche, plural die Wochen.",
+     "Duration without a preposition: Ich bleibe eine Woche (accusative).",
+     "In the week = in der Woche or unter der Woche (on weekdays); this week = diese Woche (no preposition)."
+    ],
+    "subtleties": [
+     "The week starts on Monday in Germany (and ISO calendars), not on Sunday."
+    ]
+   }
+  },
+  {
+   "id": "de:Monat",
+   "lemma": "Monat",
+   "pos": "NOUN",
+   "senses": [
+    "time.month"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Monate",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Monat",
+    "N;ACC;SG": "Monat",
+    "N;DAT;SG": "Monat",
+    "N;GEN;SG": "Monats",
+    "N;NOM;PL": "Monate",
+    "N;ACC;PL": "Monate",
+    "N;DAT;PL": "Monaten",
+    "N;GEN;PL": "Monate"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Monates"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Twelve of them in a year – rent, salary, the phases of the moon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "month",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.month"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Jahr hat zwölf Monate.",
+      "tr": "The year has twelve months.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bleibe einen Monat in Wien.",
+      "tr": "I’m staying in Vienna for a month.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Miete zahle ich jeden Monat.",
+      "tr": "I pay the rent every month.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "diesen Monat",
+      "tr": "this month"
+     },
+     {
+      "text": "nächsten Monat",
+      "tr": "next month"
+     },
+     {
+      "text": "jeden Monat",
+      "tr": "every month"
+     },
+     {
+      "text": "pro Monat",
+      "tr": "per month"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "vier Wochen",
+      "register": "neutral",
+      "nuance": "four weeks – often used instead of a month for short periods"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German mānōt, from Old High German mānōd, from Proto-West Germanic *mānōþ. See also Mond (moon). Compare Dutch maand, English month, Danish måned.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "month and moon are linked in many languages: German Monat / Mond, Greek μήνας / μήνη (moon), and Hebrew חֹדֶשׁ (month) belongs to חָדָשׁ (new) – the new moon."
+    ],
+    "pitfalls": [
+     "Masculine: der Monat (not *das): einen Monat, diesen Monat.",
+     "Plural die Monate, dative den Monaten."
+    ],
+    "subtleties": [
+     "Monat and Mond (moon) are one family – a month was measured by the moon."
+    ]
+   }
+  },
+  {
+   "id": "de:Jahr",
+   "lemma": "Jahr",
+   "pos": "NOUN",
+   "senses": [
+    "time.year"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jahre",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Jahr",
+    "N;ACC;SG": "Jahr",
+    "N;DAT;SG": "Jahr",
+    "N;GEN;SG": "Jahres",
+    "N;NOM;PL": "Jahre",
+    "N;ACC;PL": "Jahre",
+    "N;DAT;PL": "Jahren",
+    "N;GEN;PL": "Jahre"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Jahrs"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Four seasons, twelve months, birthdays and New Year’s fireworks.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.year"
+     },
+     {
+      "id": "s2",
+      "def": "year (of age): Ich bin 30 Jahre alt.",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Jahr hat vier Jahreszeiten.",
+      "tr": "The year has four seasons.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Frohes neues Jahr!",
+      "tr": "Happy New Year!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir wohnen seit zwei Jahren in Berlin.",
+      "tr": "We’ve been living in Berlin for two years.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Sohn ist fünf Jahre alt.",
+      "tr": "My son is five years old.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "dieses Jahr",
+      "tr": "this year"
+     },
+     {
+      "text": "nächstes Jahr",
+      "tr": "next year"
+     },
+     {
+      "text": "jedes Jahr",
+      "tr": "every year"
+     },
+     {
+      "text": "seit Jahren",
+      "tr": "for years"
+     },
+     {
+      "text": "Frohes neues Jahr!",
+      "tr": "Happy New Year!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Frohes neues Jahr!",
+      "tr": "Happy new year!",
+      "kind": "fixed expression",
+      "meaning": "Happy New Year!",
+      "register": "neutral"
+     },
+     {
+      "text": "Jahr für Jahr",
+      "tr": "year for year",
+      "kind": "fixed expression",
+      "meaning": "year after year",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Jahrgang",
+      "register": "neutral",
+      "nuance": "year (of birth, of a wine): Ich bin Jahrgang 1990."
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German jār, from Old High German jār, from Proto-West Germanic *jār. Compare Dutch jaar, English year, Danish år. Doublet of Uhr.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Jahr and Uhr are doublets: both go back to Proto-Indo-European *yeh₁- (“year, season”) – Uhr came the long way round, through Greek ὥρα and Latin hora."
+    ],
+    "pitfalls": [
+     "Neuter: das Jahr; plural die Jahre, dative den Jahren (seit zwei Jahren).",
+     "A year is said without a preposition: 2026 fahre ich nach Athen – or im Jahr 2026; *in 2026 is an anglicism."
+    ],
+    "subtleties": [
+     "Age: Ich bin 30 Jahre alt (or just Ich bin 30).",
+     "Jahreszeit = season (“year-time”)."
+    ]
+   }
+  },
+  {
+   "id": "de:Stunde",
+   "lemma": "Stunde",
+   "pos": "NOUN",
+   "senses": [
+    "time.hour",
+    "edu.lesson"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Stunden",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Stunde",
+    "N;ACC;SG": "Stunde",
+    "N;DAT;SG": "Stunde",
+    "N;GEN;SG": "Stunde",
+    "N;NOM;PL": "Stunden",
+    "N;ACC;PL": "Stunden",
+    "N;DAT;PL": "Stunden",
+    "N;GEN;PL": "Stunden"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sixty minutes – a lesson, a train ride, the wait at the doctor’s.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hour (60 minutes)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.hour"
+     },
+     {
+      "id": "s2",
+      "def": "lesson, class (Deutschstunde)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "edu.lesson"
+     },
+     {
+      "id": "s3",
+      "def": "hour, moment (die Stunde der Wahrheit)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Film dauert zwei Stunden.",
+      "tr": "The film lasts two hours.",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich warte schon eine Stunde.",
+      "tr": "I’ve been waiting for an hour already.",
+      "register": "neutral",
+      "context": "waiting",
+      "sense": "s1"
+     },
+     {
+      "text": "In einer Stunde sind wir in Hamburg.",
+      "tr": "In an hour we’ll be in Hamburg.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Deutschstunde beginnt um acht.",
+      "tr": "The German lesson starts at eight.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine halbe Stunde",
+      "tr": "half an hour"
+     },
+     {
+      "text": "eine Stunde lang",
+      "tr": "for an hour"
+     },
+     {
+      "text": "in einer Stunde",
+      "tr": "in an hour"
+     },
+     {
+      "text": "pro Stunde",
+      "tr": "per hour"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Stunde der Wahrheit",
+      "tr": "the hour of truth",
+      "kind": "fixed expression",
+      "meaning": "the moment of truth",
+      "register": "neutral"
+     },
+     {
+      "text": "Stunde null",
+      "tr": "hour zero",
+      "kind": "fixed expression",
+      "meaning": "zero hour, a completely new start (used of Germany in 1945)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sechzig Minuten",
+      "register": "neutral",
+      "nuance": "sixty minutes – exact"
+     },
+     {
+      "word": "Unterrichtsstunde",
+      "register": "formal",
+      "nuance": "lesson period (45 minutes at school)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German stunde, from Old High German stunta, from Proto-West Germanic *stundu, from Proto-Germanic *stundō (“point in time, hour”). Cognate with dated Dutch stond, English stound (“a while”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek ώρα is both “hour” and “o’clock”; German splits them into Stunde (duration) and Uhr (clock time)."
+    ],
+    "pitfalls": [
+     "Stunde = an hour of duration (zwei Stunden); Uhr = the time on the clock (zwei Uhr).",
+     "Feminine: die Stunde; eine Stunde, plural die Stunden."
+    ],
+    "subtleties": [
+     "A school “hour” is 45 minutes: eine Schulstunde.",
+     "stündlich = hourly."
+    ]
+   }
+  },
+  {
+   "id": "de:Minute",
+   "lemma": "Minute",
+   "pos": "NOUN",
+   "senses": [
+    "time.minute",
+    "sci.arcminute"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Minuten",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Minute",
+    "N;ACC;SG": "Minute",
+    "N;DAT;SG": "Minute",
+    "N;GEN;SG": "Minute",
+    "N;NOM;PL": "Minuten",
+    "N;ACC;PL": "Minuten",
+    "N;DAT;PL": "Minuten",
+    "N;GEN;PL": "Minuten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A short wait – “Eine Minute, bitte!”, five minutes to the station.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "minute (60 seconds)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.minute"
+     },
+     {
+      "id": "s2",
+      "def": "minute (of an angle)",
+      "register": [
+       "technical"
+      ],
+      "concept": "sci.arcminute"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Bus kommt in fünf Minuten.",
+      "tr": "The bus is coming in five minutes.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Eine Minute, bitte!",
+      "tr": "One minute, please!",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Bahnhof sind es zehn Minuten zu Fuß.",
+      "tr": "It’s ten minutes on foot to the station.",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Grad hat sechzig Minuten.",
+      "tr": "A degree has sixty minutes (of arc).",
+      "register": "technical",
+      "context": "geometry",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in fünf Minuten",
+      "tr": "in five minutes"
+     },
+     {
+      "text": "eine Minute",
+      "tr": "one minute"
+     },
+     {
+      "text": "pünktlich auf die Minute",
+      "tr": "on the dot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "in letzter Minute",
+      "tr": "in the last minute",
+      "kind": "fixed expression",
+      "meaning": "at the last minute",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Moment",
+      "register": "neutral",
+      "nuance": "moment: Einen Moment, bitte!"
+     },
+     {
+      "word": "Augenblick",
+      "register": "neutral",
+      "nuance": "moment (literally “blink of an eye”)"
+     }
+    ],
+    "etymology": {
+     "text": "15th century, from Medieval Latin minūta (“60th of an hour; note”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Minute comes from Latin pars minuta, “the small part” of an hour – the second (Sekunde) is the pars minuta secunda, the “second small part”."
+    ],
+    "pitfalls": [
+     "Feminine: die Minute, plural die Minuten.",
+     "With a clock time German says acht Uhr zehn (8:10) – the word Minuten is not used there."
+    ],
+    "subtleties": [
+     "in letzter Minute = at the last minute."
+    ]
+   }
+  },
+  {
+   "id": "de:Uhr",
+   "lemma": "Uhr",
+   "pos": "NOUN",
+   "senses": [
+    "time.oclock",
+    "obj.clock"
+   ],
+   "contrasts": [
+    {
+     "concept": "obj.clock",
+     "axis": "register",
+     "value": "the everyday word for any clock or watch"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Uhren",
+      "pattern": "-en",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "form": "Uhr",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ],
+      "note": "after a number the word does not change: acht Uhr"
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Uhr",
+    "N;ACC;SG": "Uhr",
+    "N;DAT;SG": "Uhr",
+    "N;GEN;SG": "Uhr",
+    "N;NOM;PL": "Uhren",
+    "N;ACC;PL": "Uhren",
+    "N;DAT;PL": "Uhren",
+    "N;GEN;PL": "Uhren"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The kitchen clock, a wristwatch – and every time you say the time: acht Uhr.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "o’clock (with the hour: acht Uhr – never in the plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.oclock"
+     },
+     {
+      "id": "s2",
+      "def": "clock, watch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.clock"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es ist acht Uhr.",
+      "tr": "It’s eight o’clock.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Zug fährt um zehn Uhr.",
+      "tr": "The train leaves at ten o’clock.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie viel Uhr ist es?",
+      "tr": "What time is it?",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Uhr ist kaputt.",
+      "tr": "My watch is broken.",
+      "register": "informal",
+      "context": "everyday objects",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "um acht Uhr",
+      "tr": "at eight o’clock"
+     },
+     {
+      "text": "Wie viel Uhr ist es?",
+      "tr": "What time is it?"
+     },
+     {
+      "text": "die Armbanduhr",
+      "tr": "the wristwatch"
+     },
+     {
+      "text": "rund um die Uhr",
+      "tr": "round the clock"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "rund um die Uhr",
+      "tr": "round about the clock",
+      "kind": "fixed expression",
+      "meaning": "round the clock, 24 hours a day",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Armbanduhr",
+      "register": "neutral",
+      "nuance": "wristwatch"
+     },
+     {
+      "word": "Wecker",
+      "register": "neutral",
+      "nuance": "alarm clock"
+     }
+    ],
+    "etymology": {
+     "text": "From late Middle High German ūre, from Middle Low German ûre (“hour”), from Middle Dutch ûre, from Old French houre, from Latin hōra, from Ancient Greek ὥρα (hṓra), from Proto-Indo-European *yeh₁- (“year, season”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Uhr comes from Greek ὥρα – a Greek speaker hears the same word: ώρα is both “hour” and “time”; German kept the clock sense."
+    ],
+    "pitfalls": [
+     "Uhr (clock time) vs. Stunde (duration): Es ist zwei Uhr. – Ich warte zwei Stunden.",
+     "In the time, Uhr never takes a plural: zehn Uhr, not *zehn Uhren (die Uhren are clocks)."
+    ],
+    "subtleties": [
+     "Official times use 24 hours: um 20 Uhr (= 8 p.m.); minutes follow Uhr: 8:15 = acht Uhr fünfzehn.",
+     "Wie spät ist es? and Wie viel Uhr ist es? both ask the time."
+    ]
+   }
+  },
+  {
+   "id": "de:Datum",
+   "lemma": "Datum",
+   "pos": "NOUN",
+   "senses": [
+    "time.date",
+    "tech.data"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Daten",
+      "pattern": "foreign",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "data exists only in the plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Datum",
+    "N;ACC;SG": "Datum",
+    "N;DAT;SG": "Datum",
+    "N;GEN;SG": "Datums",
+    "N;NOM;PL": "Daten",
+    "N;ACC;PL": "Daten",
+    "N;DAT;PL": "Daten",
+    "N;GEN;PL": "Daten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number on the calendar, on a letter, on a form.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "date (day of the month)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.date"
+     },
+     {
+      "id": "s2",
+      "def": "data (plural Daten: information)",
+      "register": [
+       "technical"
+      ],
+      "concept": "tech.data"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Welches Datum ist heute?",
+      "tr": "What’s the date today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Schreiben Sie bitte das Datum auf das Formular.",
+      "tr": "Please write the date on the form.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben die Daten im Computer.",
+      "tr": "We have the data on the computer.",
+      "register": "technical",
+      "context": "IT",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Datum von heute",
+      "tr": "today’s date"
+     },
+     {
+      "text": "das Geburtsdatum",
+      "tr": "the date of birth"
+     },
+     {
+      "text": "das Datum eintragen",
+      "tr": "to fill in the date"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Tag",
+      "register": "neutral",
+      "nuance": "day – Der Wievielte ist heute? asks the date with an ordinal"
+     },
+     {
+      "word": "Termin",
+      "register": "neutral",
+      "nuance": "appointment, fixed date – not the calendar number"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Latin datum.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin datum means “given”: Roman letters ended with datum Romae (“given at Rome”) and the day – so the word for “given” became the date."
+    ],
+    "pitfalls": [
+     "Datum is the calendar date, not a romantic date (that is ein Date / eine Verabredung) and not an appointment (ein Termin).",
+     "The plural Daten usually means “data”; several calendar dates are also Daten."
+    ],
+    "subtleties": [
+     "Germans write the date day.month.year: 8.10.2026, and say it with ordinals: der achte Oktober."
+    ]
+   }
+  },
+  {
+   "id": "de:Geburtstag",
+   "lemma": "Geburtstag",
+   "pos": "NOUN",
+   "senses": [
+    "time.birthday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Geburtstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Geburt",
+      "role": "modifier",
+      "linker": "-s-"
+     },
+     {
+      "part": "Tag",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Geburtstag",
+    "N;ACC;SG": "Geburtstag",
+    "N;DAT;SG": "Geburtstag",
+    "N;GEN;SG": "Geburtstags",
+    "N;NOM;PL": "Geburtstage",
+    "N;ACC;PL": "Geburtstage",
+    "N;DAT;PL": "Geburtstagen",
+    "N;GEN;PL": "Geburtstage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Geburtstages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cake, candles, calls from the family – “Alles Gute zum Geburtstag!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "birthday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.birthday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute ist mein Geburtstag.",
+      "tr": "Today is my birthday.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann hast du Geburtstag?",
+      "tr": "When is your birthday?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "Alles Gute zum Geburtstag!",
+      "tr": "Happy birthday!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Geburtstag haben",
+      "tr": "to have one’s birthday"
+     },
+     {
+      "text": "Geburtstag feiern",
+      "tr": "to celebrate a birthday"
+     },
+     {
+      "text": "Alles Gute zum Geburtstag!",
+      "tr": "Happy birthday!"
+     },
+     {
+      "text": "die Geburtstagsparty",
+      "tr": "the birthday party"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Herzlichen Glückwunsch zum Geburtstag!",
+      "tr": "Hearty congratulations on the birthday!",
+      "kind": "fixed expression",
+      "meaning": "Happy birthday!",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Wiegenfest",
+      "register": "humorous",
+      "nuance": "cradle celebration – jokey or old-fashioned"
+     },
+     {
+      "word": "Namenstag",
+      "register": "neutral",
+      "nuance": "name day – not a birthday, but celebrated in Catholic regions and in Greece"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German geburttac, from Old High German giburtitag; equivalent to Geburt (“birth”) + -s- + Tag (“day”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greece celebrates the name day (γιορτή) as much as the birthday; in Germany the birthday is the big day, the name day matters only in some Catholic regions."
+    ],
+    "pitfalls": [
+     "German says Ich habe Geburtstag (I have birthday – no article): Ich habe im Mai Geburtstag.",
+     "Do not wish happy birthday before the day: many Germans think it brings bad luck (vorher gratulieren)."
+    ],
+    "subtleties": [
+     "The joining -s- (Geburt-s-tag) is a Fugen-s, common in German compounds."
+    ]
+   }
+  },
+  {
+   "id": "de:Urlaub",
+   "lemma": "Urlaub",
+   "pos": "NOUN",
+   "senses": [
+    "time.holiday"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "whose time off",
+     "value": "one’s own time off work, a trip"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Urlaube",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Urlaub",
+    "N;ACC;SG": "Urlaub",
+    "N;DAT;SG": "Urlaub",
+    "N;GEN;SG": "Urlaubs",
+    "N;NOM;PL": "Urlaube",
+    "N;ACC;PL": "Urlaube",
+    "N;DAT;PL": "Urlauben",
+    "N;GEN;PL": "Urlaube"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Time off work: the beach, the mountains, the suitcase by the door.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "holiday, vacation (time off work)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holiday"
+     },
+     {
+      "id": "s2",
+      "def": "leave (from work or the army)",
+      "register": [
+       "dated"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im August haben wir Urlaub.",
+      "tr": "We’re on holiday in August.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren im Sommer in Urlaub.",
+      "tr": "We go on holiday in summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie war dein Urlaub?",
+      "tr": "How was your holiday?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Urlaub haben",
+      "tr": "to be on holiday (from work)"
+     },
+     {
+      "text": "in Urlaub fahren",
+      "tr": "to go on holiday"
+     },
+     {
+      "text": "Urlaub machen",
+      "tr": "to take a holiday"
+     },
+     {
+      "text": "im Urlaub sein",
+      "tr": "to be on holiday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Ferien",
+      "register": "neutral",
+      "nuance": "holidays of a school, a university or an institution – plural only; in Switzerland also one’s own vacation"
+     },
+     {
+      "word": "Reise",
+      "register": "neutral",
+      "nuance": "trip, journey – the travelling, not the time off"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German urloup. Related to erlauben (“to allow”). Cognate with English leave (“time off, permission to be away”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Urlaub was “permission to leave” – the English leave in “annual leave” is the same word, from the root of erlauben (to allow)."
+    ],
+    "pitfalls": [
+     "Urlaub is the time off from your job (Ich habe zwei Wochen Urlaub); school and university breaks are Ferien (plural only).",
+     "A public holiday (Christmas Day, 1 May) is ein Feiertag – neither Urlaub nor Ferien."
+    ],
+    "subtleties": [
+     "in Urlaub fahren and in den Urlaub fahren are both correct.",
+     "Urlaub nehmen = to take days off (from the employer)."
+    ]
+   }
+  },
+  {
+   "id": "de:Ferien",
+   "lemma": "Ferien",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "time.holiday"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "whose time off",
+     "value": "school, university or parliament holidays (plural only)"
+    }
+   ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Ferien)"
+    },
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;PL": "Ferien",
+    "N;ACC;PL": "Ferien",
+    "N;DAT;PL": "Ferien",
+    "N;GEN;PL": "Ferien"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "No school! – the long summer break, the autumn and Easter holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "holidays (of a school, university, parliament – plural only)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holiday"
+     },
+     {
+      "id": "s2",
+      "def": "vacation, holiday (one’s own; especially in Switzerland and Austria)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Sommer haben die Kinder sechs Wochen Ferien.",
+      "tr": "In summer the children have six weeks’ holiday.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "In den Ferien fahren wir zu Oma.",
+      "tr": "In the holidays we go to Grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Schöne Ferien!",
+      "tr": "Have a nice holiday!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir gehen im Juli in die Ferien.",
+      "tr": "We’re going on holiday in July.",
+      "register": "regional",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Ferien haben",
+      "tr": "to be on holiday (school)"
+     },
+     {
+      "text": "die Sommerferien",
+      "tr": "the summer holidays"
+     },
+     {
+      "text": "in den Ferien",
+      "tr": "in the holidays"
+     },
+     {
+      "text": "Schöne Ferien!",
+      "tr": "Have a nice holiday!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Urlaub",
+      "register": "neutral",
+      "nuance": "holiday from work – your own time off as an employee"
+     }
+    ],
+    "etymology": {
+     "text": "15th century, from Latin fēriae (“holidays, feast days”), with the Latin plural ending -ae replaced by German -en.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin feriae (festival days) also gave English fair (a market) and Spanish feria."
+    ],
+    "pitfalls": [
+     "Ferien has no singular: die Ferien sind …, in den Ferien – never *eine Ferie.",
+     "Ferien = school / university / institutional breaks; Urlaub = time off your job."
+    ],
+    "subtleties": [
+     "Each German state has its own school holiday dates, so the summer holidays are staggered across the country."
+    ]
+   }
+  },
+  {
+   "id": "de:bis",
+   "lemma": "bis",
+   "pos": "ADP",
+   "senses": [
+    "prep.until",
+    "prep.by.time",
+    "prep.upto"
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ],
+      "when": "mostly with no article (bis Montag, bis Berlin); before an article another preposition decides the case: bis zum Bahnhof"
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An end point – until Monday, see you tomorrow, as far as the station.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "until, till (time: bis Montag, bis acht Uhr)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.until"
+     },
+     {
+      "id": "s2",
+      "def": "by (a deadline: bis Freitag fertig)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.by.time"
+     },
+     {
+      "id": "s3",
+      "def": "to, as far as (place: bis Berlin, bis zum Bahnhof)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.upto"
+     },
+     {
+      "id": "s4",
+      "def": "von … bis …: from … to …",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bleibe bis Sonntag.",
+      "tr": "I’m staying until Sunday.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Bis morgen!",
+      "tr": "See you tomorrow!",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Geschäft ist von neun bis achtzehn Uhr offen.",
+      "tr": "The shop is open from nine to six.",
+      "register": "neutral",
+      "context": "opening hours",
+      "sense": "s4"
+     },
+     {
+      "text": "Der Bericht muss bis Freitag fertig sein.",
+      "tr": "The report must be finished by Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Bus fährt bis zum Bahnhof.",
+      "tr": "The bus goes as far as the station.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "bis morgen",
+      "tr": "see you tomorrow; until tomorrow"
+     },
+     {
+      "text": "bis bald",
+      "tr": "see you soon"
+     },
+     {
+      "text": "von … bis …",
+      "tr": "from … to …"
+     },
+     {
+      "text": "bis zum Abend",
+      "tr": "until the evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German biz, bit, bitze, from bī (“by”) + ze (“to”). Equivalent to modern bei and zu.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "bis is bei + zu fused – literally “by-to”, a point you go up to."
+    ],
+    "pitfalls": [
+     "bis alone before words without an article (bis Montag, bis morgen, bis acht Uhr, bis Berlin); with an article add zu: bis zum Abend, bis zur Post.",
+     "bis is “until” and also “by” (a deadline): Ich bin bis Montag hier (until) – Bis Montag ist es fertig (by)."
+    ],
+    "subtleties": [
+     "bis is also a conjunction: Warte, bis ich komme. (Wait until I come.)",
+     "Goodbyes name the next meeting: bis später, bis bald, bis morgen, bis Montag."
+    ]
+   }
+  },
+  {
+   "id": "de:seit",
+   "lemma": "seit",
+   "pos": "ADP",
+   "senses": [
+    "prep.since",
+    "prep.for.time"
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Something that started in the past and is still going on.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "since (a point in time: seit Montag)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.since"
+     },
+     {
+      "id": "s2",
+      "def": "for (a period still going on: seit zwei Jahren)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for.time"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin seit Montag in Berlin.",
+      "tr": "I’ve been in Berlin since Monday.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir warten seit zwanzig Minuten.",
+      "tr": "We’ve been waiting for twenty minutes.",
+      "register": "neutral",
+      "context": "waiting",
+      "sense": "s2"
+     },
+     {
+      "text": "Sie lernt seit einem Jahr Deutsch.",
+      "tr": "She has been learning German for a year.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s2"
+     },
+     {
+      "text": "Seit wann wohnst du hier?",
+      "tr": "How long have you been living here?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "seit Montag",
+      "tr": "since Monday"
+     },
+     {
+      "text": "seit zwei Jahren",
+      "tr": "for two years"
+     },
+     {
+      "text": "seit wann?",
+      "tr": "since when? how long?"
+     },
+     {
+      "text": "seit gestern",
+      "tr": "since yesterday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German sīt, from Old High German sīd, from Proto-Germanic *sīþuz. Akin to Old English sīþ. Related to Dutch sedert and sinds.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek and Russian use the present here too: Μένω εδώ από το 2020 / Я живу здесь два года – German works the same way; English is the odd one out with “have been living”."
+    ],
+    "pitfalls": [
+     "seit + PRESENT tense for something still going on: Ich wohne seit drei Jahren hier (not *habe … gewohnt, as English “have lived”).",
+     "seit always takes the dative: seit einem Jahr, seit zwei Wochen (Wochen = dative plural), seit dem Sommer.",
+     "seit (since / for, still going on) ≠ vor (ago): vor zwei Jahren = two years ago."
+    ],
+    "subtleties": [
+     "Seit wann …? (since when) and Wie lange schon …? both ask how long something has been going on.",
+     "seit is also a conjunction: seit ich hier wohne … (since I have been living here)."
+    ]
+   }
+  },
+  {
+   "id": "de:während",
+   "lemma": "während",
+   "pos": "ADP",
+   "senses": [
+    "prep.during",
+    "conj.while"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.during",
+     "axis": "what follows",
+     "value": "a period or an event, + genitive (während des Urlaubs)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "GEN",
+      "senses": [
+       "s1"
+      ],
+      "when": "in everyday speech also the dative: während dem Essen"
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Something happening inside a span of time – during the film, during the holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "during (+ genitive: während des Urlaubs)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.during"
+     },
+     {
+      "id": "s2",
+      "def": "while; whereas (conjunction: Während ich koche, …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.while"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Während der Woche arbeite ich viel.",
+      "tr": "During the week I work a lot.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Während des Films ist das Handy aus.",
+      "tr": "During the film the phone is off.",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s1"
+     },
+     {
+      "text": "Während der Ferien fahren wir ans Meer.",
+      "tr": "During the holidays we go to the seaside.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "Während ich koche, deckst du den Tisch.",
+      "tr": "While I cook, you lay the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "während der Woche",
+      "tr": "during the week"
+     },
+     {
+      "text": "während des Urlaubs",
+      "tr": "during the holiday"
+     },
+     {
+      "text": "während der Ferien",
+      "tr": "during the holidays"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From the present participle of währen (“to last, persist”), with rebracketing of währendes [noun], währender [noun] as während des [noun], während der [noun].",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "während is a frozen participle: “lasting” (währen = to last) – während des Krieges was once “the war lasting”."
+    ],
+    "pitfalls": [
+     "während takes the genitive in standard German: während des Urlaubs (masc./neut.: des + -s), während der Woche (fem.), während der Ferien (plural).",
+     "In everyday speech you will also hear the dative (während dem Essen) – avoid it in writing."
+    ],
+    "subtleties": [
+     "während is also a conjunction: Während ich koche, liest er. (While I cook, he reads.) – and it can mean “whereas”."
+    ]
+   }
+  },
+  {
+   "id": "de:um",
+   "lemma": "um",
+   "pos": "ADP",
+   "senses": [
+    "prep.attime",
+    "prep.around",
+    "prep.about",
+    "prep.by.difference",
+    "conj.inorderto"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.about",
+     "axis": "the words it goes with",
+     "value": "es geht um … (it is about)"
+    },
+    {
+     "concept": "conj.inorderto",
+     "axis": "construction",
+     "value": "um … zu + infinitive (the same subject)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "contractions": [
+     {
+      "form": "ums",
+      "article": "das"
+     }
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A point on the clock – at eight, at midnight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at (a clock time: um acht Uhr)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.attime"
+     },
+     {
+      "id": "s2",
+      "def": "around (um den Tisch, um die Ecke)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.around"
+     },
+     {
+      "id": "s3",
+      "def": "about (es geht um …: it is about …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.about"
+     },
+     {
+      "id": "s4",
+      "def": "by (a difference: um zehn Euro billiger)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.by.difference"
+     },
+     {
+      "id": "s5",
+      "def": "um … zu: in order to (Ich lerne Deutsch, um in Berlin zu arbeiten)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.inorderto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Zug fährt um acht Uhr.",
+      "tr": "The train leaves at eight o’clock.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     },
+     {
+      "text": "Um wie viel Uhr beginnt der Film?",
+      "tr": "At what time does the film start?",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sitzen um den Tisch.",
+      "tr": "We’re sitting around the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Es geht um meine Familie.",
+      "tr": "It’s about my family.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     },
+     {
+      "text": "Ich lerne Deutsch, um in Berlin zu arbeiten.",
+      "tr": "I am learning German in order to work in Berlin.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s5"
+     },
+     {
+      "text": "Er spart Geld, um ein Auto zu kaufen.",
+      "tr": "He is saving money to buy a car.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s5"
+     },
+     {
+      "text": "In dem Film geht es um eine Familie in Berlin.",
+      "tr": "The film is about a family in Berlin.",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s3"
+     },
+     {
+      "text": "Die Preise sind um zehn Prozent gestiegen.",
+      "tr": "Prices have risen by ten per cent.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "um acht Uhr",
+      "tr": "at eight o’clock"
+     },
+     {
+      "text": "um Mitternacht",
+      "tr": "at midnight"
+     },
+     {
+      "text": "um wie viel Uhr?",
+      "tr": "at what time?"
+     },
+     {
+      "text": "um die Ecke",
+      "tr": "round the corner"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
+    "etymology": {
+     "text": "From Middle High German umbe, ümbe, from Old High German umbi, from Proto-West Germanic *umbi. Cognate with Dutch om.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "um is a cousin of Greek ἀμφί (amphí, “around”, as in amphitheatre) and Latin ambi-."
+    ],
+    "pitfalls": [
+     "um is only for clock times: um acht Uhr – but am Montag (days), im Mai (months), in der Nacht.",
+     "Approximately = gegen or um … herum: gegen acht Uhr (around eight)."
+    ],
+    "subtleties": [
+     "um takes the accusative: um den Tisch, um die Ecke.",
+     "um … zu + infinitive = in order to (a later step)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

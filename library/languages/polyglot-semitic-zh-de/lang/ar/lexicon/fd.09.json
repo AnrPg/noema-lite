@@ -1,0 +1,1033 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:hal",
+   "lemma": "هَلْ",
+   "pos": "PART",
+   "senses": [
+    "part.question"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.question",
+     "axis": "form",
+     "value": "a separate word: the usual question marker"
+    }
+   ],
+   "translit": "hal",
+   "role": "Yes/no question particle: put it at the start of a statement to turn it into a question (هَلْ تُحِبُّ الْجَزَرَ؟).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral question marker of written Arabic.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes/no question marker (placed before the statement)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.question"
+     },
+     {
+      "id": "s2",
+      "def": "shall we …? (suggestion)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هَلْ تَتَكَلَّمُ الْعَرَبِيَّةَ؟",
+      "tr": "Do you speak Arabic?",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ عِنْدَكِ سَيَّارَةٌ؟",
+      "tr": "Do you (f) have a car?",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ نَشْرَبُ شَايًا؟",
+      "tr": "Shall we have some tea?",
+      "register": "neutral",
+      "context": "invitation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هَلْ مِنْ …؟",
+      "tr": "is there any …?"
+     },
+     {
+      "text": "هَلْ … أَمْ …؟",
+      "tr": "is it … or …?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَ",
+      "register": "formal",
+      "nuance": "prefix question marker (أَتُحِبُّ …؟); required before a negation: أَلَيْسَ …؟"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of هَـ (ha-, an old interrogative, now أَ) + لـ (l-, an affirmative particle) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Word order never changes in an Arabic question — هَلْ is all you add."
+    ],
+    "pitfalls": [
+     "Before al- it takes a helping vowel: هَلِ الْبَصَلُ طَازَجٌ؟ (not هَلْ الْ…).",
+     "Not before a negation: “don’t you like …?” = أَلَا تُحِبُّ …؟ (with أَ), not *هَلْ لَا …"
+    ],
+    "subtleties": [
+     "Spoken Arabic often drops هَلْ and uses intonation alone; in writing it is expected."
+    ]
+   },
+   "alts": [
+    "هَلِ"
+   ],
+   "prefix": false
+  },
+  {
+   "id": "ar:a",
+   "lemma": "أَ",
+   "pos": "PART",
+   "prefix": true,
+   "senses": [
+    "part.question"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.question",
+     "axis": "form",
+     "value": "a prefix written attached; also before a negation and in choice questions with أَمْ"
+    }
+   ],
+   "translit": "ʾa-",
+   "role": "Question prefix (formal): written together with the first word, it turns a statement into a yes/no question (أَتُرِيدُ شَايًا؟); it is the one used before a negation (أَلَا، أَلَيْسَ) and in choice questions with أَمْ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The short, classical way to ask — and the only way to ask “isn’t it?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes/no question prefix",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.question"
+     },
+     {
+      "id": "s2",
+      "def": "with أَمْ: which of the two? (a choice question)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَتُحِبُّ الْقَهْوَةَ؟",
+      "tr": "Do you like coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أَلَيْسَ هٰذَا بَيْتَكَ؟",
+      "tr": "Isn’t this your house?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَتَشْرَبُ شَايًا أَمْ قَهْوَةً؟",
+      "tr": "Will you drink tea or coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَلَا …؟",
+      "tr": "don’t …? (a negative question)"
+     },
+     {
+      "text": "أَلَيْسَ …؟",
+      "tr": "isn’t …?"
+     },
+     {
+      "text": "أَ … أَمْ …؟",
+      "tr": "… or …? (which one?)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هَلْ",
+      "register": "neutral",
+      "nuance": "the usual yes/no question word, a separate word; not before a negation"
+     }
+    ],
+    "etymology": {
+     "text": "From former هَـ (ha-), from Proto-Semitic *ha; cognate with Hebrew הֲ־ (hă-) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Biblical Hebrew asks with the same old particle: הֲ־ (ha-) — the cousin of Arabic أَ."
+    ],
+    "pitfalls": [
+     "It is written together with the next word: أَتُرِيدُ, not *أَ تُرِيدُ.",
+     "Before a word with al- it merges (آلْ…); beginners ask with هَلْ there."
+    ],
+    "subtleties": [
+     "هَلْ cannot stand before a negation, أَ can: أَلَا تُحِبُّ الشَّايَ؟ — answer بَلَى (yes, I do) or لَا (no)."
+    ]
+   }
+  },
+  {
+   "id": "ar:aw",
+   "lemma": "أَوْ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.or"
+   ],
+   "features": {
+    "governs": "words or clauses"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.or",
+     "axis": "statement / yes-no question or choice question",
+     "value": "statements; “any of them?”"
+    }
+   ],
+   "translit": "ʾaw",
+   "alts": [
+    "أَوِ"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Options in statements: this or that, it does not matter which.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "or (in statements; in a yes/no question: “any of them?”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.or"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ شَايًا أَوْ قَهْوَةً.",
+      "tr": "I’d like tea or coffee (either is fine).",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ عِنْدَكَ أَخٌ أَوْ أُخْتٌ؟",
+      "tr": "Do you have a brother or a sister (any siblings)?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَزُورُكَ الْيَوْمَ أَوْ غَدًا.",
+      "tr": "I’ll visit you today or tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "… أَوْ …",
+      "tr": "… or …"
+     },
+     {
+      "text": "إِمَّا … أَوْ …",
+      "tr": "either … or …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَمْ",
+      "register": "neutral",
+      "nuance": "or in a choice question (أَ … أَمْ …؟): which one?"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔaw; cognate with Hebrew אוֹ (’o) and Ugaritic ủ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אוֹ (o), “or”, is the same word."
+    ],
+    "pitfalls": [
+     "Before al- it takes a helping vowel: الشَّايَ أَوِ الْقَهْوَةَ (ʾawi l-qahwa)."
+    ],
+    "subtleties": [
+     "In a question أَوْ asks “yes or no?”: هَلْ تُرِيدُ سُكَّرًا أَوْ حَلِيبًا؟ = would you like anything — sugar or milk? (answer نَعَمْ / لَا). To ask “which one?” use أَمْ."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:am",
+   "lemma": "أَمْ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.or"
+   ],
+   "features": {
+    "governs": "words or clauses"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.or",
+     "axis": "statement / yes-no question or choice question",
+     "value": "which of the two? (choice questions)"
+    }
+   ],
+   "translit": "ʾam",
+   "alts": [
+    "أَمِ"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A choice: this one or that one?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "or — in a choice question (which of the two?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.or"
+     },
+     {
+      "id": "s2",
+      "def": "whether … or … (after سَوَاءٌ “it is the same”)",
+      "register": [
+       "formal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟",
+      "tr": "Do you want tea or coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أَهُوَ أَخُوكَ أَمْ صَدِيقُكَ؟",
+      "tr": "Is he your brother or your friend?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "سَوَاءٌ عَلَيَّ أَذَهَبْتَ أَمْ بَقِيتَ.",
+      "tr": "It’s all the same to me whether you go or stay.",
+      "register": "formal",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَ … أَمْ …؟",
+      "tr": "… or …? (which one?)"
+     },
+     {
+      "text": "هَلْ … أَمْ …؟",
+      "tr": "… or …? (modern style)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَوْ",
+      "register": "neutral",
+      "nuance": "or in statements and in yes/no questions (“any of them?”)"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of the interrogative particle أَ (ʔa) and an old conjunction *ʔim; compare إِمَّا (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أَمْ contains the question particle أَ itself (Wiktionary) — it was born in questions."
+    ],
+    "pitfalls": [
+     "أَمْ (ʾam, “or”) ≠ أُمّ (ʾumm, “mother”): the same two letters أم.",
+     "Before al- it becomes أَمِ: الشَّايَ أَمِ الْقَهْوَةَ."
+    ],
+    "subtleties": [
+     "Careful style asks a choice with أَ … أَمْ …; modern writing very often says هَلْ … أَمْ … too."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:rubbama",
+   "lemma": "رُبَّمَا",
+   "pos": "ADV",
+   "senses": [
+    "adv.maybe"
+   ],
+   "features": {
+    "root": {
+     "none": "a particle: رُبَّ + مَا"
+    },
+    "derivedFrom": "رُبَّ + مَا",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "rubbamā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Uncertain, open: “perhaps”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "maybe, perhaps",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.maybe"
+     }
+    ],
+    "examples": [
+     {
+      "text": "رُبَّمَا يَشْرَبُ أَبِي الشَّايَ.",
+      "tr": "Maybe my father will have tea.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "رُبَّمَا هُوَ فِي الْبَيْتِ.",
+      "tr": "Maybe he is at home.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تَأْتِي غَدًا؟ رُبَّمَا.",
+      "tr": "Are you coming tomorrow? — Maybe.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رُبَّمَا لَا",
+      "tr": "maybe not"
+     },
+     {
+      "text": "رُبَّمَا غَدًا",
+      "tr": "maybe tomorrow"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَدْ",
+      "register": "formal",
+      "nuance": "may, might — a particle right before a present verb: قَدْ يَأْتِي (he might come)"
+     },
+     {
+      "word": "يُمْكِنُ",
+      "register": "colloquial",
+      "nuance": "“maybe” in many dialects (literally “it is possible”)"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of رُبَّ (rubba) + مَا (mā) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "رُبَّ alone is an old particle “many a …”, as in the saying رُبَّ أَخٍ لَكَ لَمْ تَلِدْهُ أُمُّكَ — “many a brother of yours was not born of your mother”."
+    ],
+    "pitfalls": [
+     "A verb or a sentence follows directly, without أَنْ: رُبَّمَا يَأْتِي, not *رُبَّمَا أَنْ يَأْتِي."
+    ],
+    "subtleties": [
+     "Wiktionary also records the form rubamā (رُبَمَا), with one b."
+    ]
+   }
+  },
+  {
+   "id": "ar:haqqan",
+   "lemma": "حَقًّا",
+   "pos": "ADV",
+   "senses": [
+    "adv.really",
+    "adv.truly"
+   ],
+   "features": {
+    "root": "ح ق ق",
+    "derivedFrom": "حَقّ (truth), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ḥaqqan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses حَقًّا as “truly, verily, in truth”; standing alone as a question (حَقًّا؟) it is the “really?” of surprise."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Surprise and interest: “really?” — or emphasis: “truly”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "really? (surprise, interest)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.really"
+     },
+     {
+      "id": "s2",
+      "def": "truly, really (emphasis)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.truly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَقًّا؟ لَا أُصَدِّقُ!",
+      "tr": "Really? I don’t believe it!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي أَحَدَ عَشَرَ أَخًا. حَقًّا؟",
+      "tr": "I have eleven brothers. — Really?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الطَّعَامُ لَذِيذٌ حَقًّا.",
+      "tr": "This food is really delicious.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَقًّا؟",
+      "tr": "really?"
+     },
+     {
+      "text": "جَمِيلٌ حَقًّا",
+      "tr": "really beautiful"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِعْلًا",
+      "register": "neutral",
+      "nuance": "indeed, really — also “really?” in speech"
+     },
+     {
+      "word": "صَحِيح؟",
+      "register": "colloquial",
+      "nuance": "“true?” — the everyday “really?”"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ح ق ق (ḥ q q); adverbial accusative of حَقّ (ḥaqq, “true”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "حَقّ is also “right” and “truth” — Turkish hak (right, justice) is this word."
+    ],
+    "pitfalls": [
+     "The tanwīn sits on a doubled q: حَقًّا (ḥaqqan) — keep the šadda."
+    ],
+    "subtleties": [
+     "Alone, as a question, it shows surprise; inside a statement it intensifies: لَذِيذٌ حَقًّا (really tasty)."
+    ]
+   }
+  },
+  {
+   "id": "ar:taban",
+   "lemma": "طَبْعًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.ofcourse"
+   ],
+   "features": {
+    "root": "ط ب ع",
+    "derivedFrom": "طَبْع (nature), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ṭabʿan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Friendly certainty: “of course!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "of course, naturally",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.ofcourse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هَلْ تُحِبُّ الْقَهْوَةَ؟ طَبْعًا!",
+      "tr": "Do you like coffee? — Of course!",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "طَبْعًا أُسَاعِدُكَ.",
+      "tr": "Of course I’ll help you.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ طَبْعًا لَا يَعْرِفُ.",
+      "tr": "Naturally, he doesn’t know.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَبْعًا!",
+      "tr": "of course!"
+     },
+     {
+      "text": "طَبْعًا لَا",
+      "tr": "of course not"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِالطَّبْعِ",
+      "register": "formal",
+      "nuance": "of course — a little more formal"
+     },
+     {
+      "word": "بِكُلِّ تَأْكِيدٍ",
+      "register": "formal",
+      "nuance": "certainly, absolutely"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of طَبْع (ṭabʕ, “nature”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“By nature” → “naturally”, exactly like German natürlich and Greek φυσικά."
+    ],
+    "pitfalls": [
+     "ع (ʿayn) in the middle: ṭabʿan. The verb طَبَعَ of the same letters means “to print” (مَطْبَعَة, a printing press)."
+    ],
+    "subtleties": [
+     "It can stand alone as an answer or open the sentence: طَبْعًا أُسَاعِدُكَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:aydan",
+   "lemma": "أَيْضًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.also"
+   ],
+   "features": {
+    "root": "ء ي ض",
+    "derivedFrom": "أَيْض (returning), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ʾayḍan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Adding one more: “too, also”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "also, too, as well",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.also"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا أَيْضًا أُحِبُّ السَّمَكَ.",
+      "tr": "I like fish too.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "نَشْتَرِي خُبْزًا وَجُبْنًا أَيْضًا.",
+      "tr": "We’re buying bread and cheese as well.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ مُعَلِّمَةٌ وَكَاتِبَةٌ أَيْضًا.",
+      "tr": "She is a teacher and also a writer.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَأَنَا أَيْضًا",
+      "tr": "me too"
+     },
+     {
+      "text": "… وَأَيْضًا …",
+      "tr": "… and also …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كَذٰلِكَ",
+      "register": "formal",
+      "nuance": "likewise, also"
+     },
+     {
+      "word": "كَمَان",
+      "register": "colloquial",
+      "nuance": "“also, too” in Levantine and Egyptian Arabic"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of أَيْض (ʔayḍ, “return”), the verbal noun of آضَ (ʔāḍa, “to return”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “returning (to the same again)”."
+    ],
+    "pitfalls": [
+     "ض is the emphatic ḍ: أَيْضًا (ʾayḍan), not *أَيْدًا; and keep the final alif of the tanwīn."
+    ],
+    "subtleties": [
+     "“Me too” = وَأَنَا أَيْضًا or أَنَا كَذٰلِكَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:faqat",
+   "lemma": "فَقَطْ",
+   "pos": "ADV",
+   "senses": [
+    "adv.only"
+   ],
+   "features": {
+    "root": {
+     "none": "a particle: فَ + قَطْ"
+    },
+    "derivedFrom": "فَ + قَطْ",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "faqaṭ",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Limits: “only, just”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "only, just",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.only"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ قَهْوَةً فَقَطْ.",
+      "tr": "I just want a coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي أَخٌ وَاحِدٌ فَقَطْ.",
+      "tr": "I have only one brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "لِلْمُوَظَّفِينَ فَقَطْ",
+      "tr": "staff only",
+      "register": "neutral",
+      "context": "signs",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "… فَقَطْ",
+      "tr": "only …"
+     },
+     {
+      "text": "لَيْسَ … فَقَطْ، بَلْ …",
+      "tr": "not only … but also …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِلَّا",
+      "register": "neutral",
+      "nuance": "“nothing but” with a negation: لَا أَشْرَبُ إِلَّا الْمَاءَ (I drink only water)"
+     },
+     {
+      "word": "فَحَسْبُ",
+      "register": "formal",
+      "nuance": "only, merely — formal and literary"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of فَ (fa) + قَطْ (qaṭ) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "On cheques and invoices فَقَطْ is written after the amount in words so nothing can be added — there is even a verb for it, فَقَّطَ (Wiktionary)."
+    ],
+    "pitfalls": [
+     "It comes after the word it limits: قَهْوَةً فَقَطْ (only coffee) — not before it like English “only”."
+    ],
+    "subtleties": [
+     "لَيْسَ … فَقَطْ، بَلْ … = not only … but also …."
+    ]
+   }
+  },
+  {
+   "id": "ar:bala",
+   "lemma": "بَلَى",
+   "pos": "ADV",
+   "senses": [
+    "part.yes.contra"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "role": "Yes — contradicting a negative question or statement (like German doch): أَلَا تُحِبُّ الشَّايَ؟ بَلَى!",
+   "translit": "balā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Contradicting a “no”: the Arabic doch.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes (it is so), yes I do — answering a negative question, like German doch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes.contra"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَلَا تُحِبُّ الشَّايَ؟ بَلَى، أُحِبُّهُ.",
+      "tr": "Don’t you like tea? — Yes, I do.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أَلَيْسَ هٰذَا بَيْتَكَ؟ بَلَى.",
+      "tr": "Isn’t this your house? — Yes, it is.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَلَسْتُ بِرَبِّكُمْ قَالُوا بَلَى",
+      "tr": "“Am I not your Lord?” They said: “Yes, indeed.” (Qurʾān 7:172)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَلَى، …",
+      "tr": "yes (on the contrary), …"
+     },
+     {
+      "text": "بَلَى وَاللّٰهِ",
+      "tr": "yes, by God (emphatic)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نَعَمْ",
+      "register": "neutral",
+      "nuance": "plain yes: after a negative question it confirms the negative (“yes, I don’t”)"
+     }
+    ],
+    "etymology": {
+     "text": "A particle of Classical Arabic (Qurʾānic); Wiktionary records the use (“used to contradict a negative statement”) but gives no origin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German doch, French si, Arabic بَلَى: one word for “yes” against a “no”."
+    ],
+    "pitfalls": [
+     "To “Don’t you like tea?”, نَعَمْ means “right, I don’t”; say بَلَى for “yes, I do”."
+    ],
+    "subtleties": [
+     "In everyday speech many people answer نَعَمْ + the full sentence instead; بَلَى is the correct Standard form."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

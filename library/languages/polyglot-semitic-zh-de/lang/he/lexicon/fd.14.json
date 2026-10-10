@@ -1,0 +1,3242 @@
+{
+ "lexemes": [
+  {
+   "id": "he:yom-rishon",
+   "lemma": "יוֹם רִאשׁוֹן",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "time.sunday"
+   ],
+   "gender": "MASC",
+   "translit": "yom rishon",
+   "features": {
+    "spelling": "יום ראשון",
+    "root": {
+     "none": "a compound of two words (יוֹם + רִאשׁוֹן): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי רִאשׁוֹן",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "“on Sundays” = בִּימֵי רִאשׁוֹן"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use"
+    },
+    "construct": {
+     "none": "a day name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם רִאשׁוֹן",
+    "N;SG;INDF;PFX": "יּוֹם רִאשׁוֹן"
+   },
+   "note": "Literally “the first day”. On Sunday: בְּיוֹם רִאשׁוֹן (no article). Written short: יוֹם א׳.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Back to work: the first day of the Israeli week.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Sunday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.sunday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיּוֹם יוֹם רִאשׁוֹן.",
+      "tr": "Today is Sunday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם רִאשׁוֹן אֲנִי חוֹזֵר לָעֲבוֹדָה.",
+      "tr": "On Sunday I (m.) go back to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיִשְׂרָאֵל יוֹם רִאשׁוֹן הוּא יוֹם עֲבוֹדָה.",
+      "tr": "In Israel Sunday is a working day.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוֹם רִאשׁוֹן",
+      "tr": "on Sunday"
+     },
+     {
+      "text": "כָּל יוֹם רִאשׁוֹן",
+      "tr": "every Sunday"
+     },
+     {
+      "text": "יוֹם רִאשׁוֹן הַבָּא",
+      "tr": "next Sunday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם א׳",
+      "register": "neutral",
+      "nuance": "the written short form, with the letter א as the number 1 — on timetables, signs and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + רִאשׁוֹן “first”: the first day of the week counted from the Sabbath (Wiktionary lists the day names among the derived terms of יוֹם).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek counts the same way from Sunday: Δευτέρα “second” is Monday, Τρίτη “third” Tuesday, Τετάρτη, Πέμπτη.",
+     "Arabic too: الْأَحَد “the one” is Sunday, الْإِثْنَيْن “the two” Monday."
+    ],
+    "pitfalls": [
+     "In Israel the week starts on Sunday: יוֹם רִאשׁוֹן is a normal working day, not part of the weekend.",
+     "No article: בְּיוֹם רִאשׁוֹן “on Sunday”. בַּיּוֹם הָרִאשׁוֹן is “on the first day”."
+    ],
+    "subtleties": [
+     "Every weekday is a number: רִאשׁוֹן “first”, שֵׁנִי “second” … — only the seventh day has a name, שַׁבָּת."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-sheni",
+   "lemma": "יוֹם שֵׁנִי",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "time.monday"
+   ],
+   "gender": "MASC",
+   "translit": "yom sheni",
+   "features": {
+    "spelling": "יום שני",
+    "root": {
+     "none": "a compound of two words (יוֹם + שֵׁנִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי שֵׁנִי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "“on Mondays” = בִּימֵי שֵׁנִי"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use"
+    },
+    "construct": {
+     "none": "a day name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם שֵׁנִי"
+   },
+   "note": "Literally “the second day”. On Monday: בְּיוֹם שֵׁנִי (no article). Written short: יוֹם ב׳.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The second working day; the week is under way.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Monday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.monday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיּוֹם יוֹם שֵׁנִי.",
+      "tr": "Today is Monday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם שֵׁנִי יֵשׁ לִי שִׁעוּר עִבְרִית.",
+      "tr": "On Monday I have a Hebrew lesson.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "נִתְרָאֶה בְּיוֹם שֵׁנִי!",
+      "tr": "See you on Monday!",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוֹם שֵׁנִי",
+      "tr": "on Monday"
+     },
+     {
+      "text": "כָּל יוֹם שֵׁנִי",
+      "tr": "every Monday"
+     },
+     {
+      "text": "יוֹם שֵׁנִי בַּבֹּקֶר",
+      "tr": "Monday morning"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם ב׳",
+      "register": "neutral",
+      "nuance": "the written short form, with the letter ב as the number 2 — on timetables, signs and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + שֵׁנִי “second”: the second day of the week counted from the Sabbath (Wiktionary lists the day names among the derived terms of יוֹם).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek Δευτέρα and Hebrew יוֹם שֵׁנִי both mean “second (day)”.",
+     "Arabic الْإِثْنَيْن “the two” is Monday — the same idea with a cardinal number."
+    ],
+    "pitfalls": [
+     "שֵׁנִי is “second”, not “two” (שְׁנַיִם): Monday is “the second day”.",
+     "Chinese counts from Monday (星期一 “week-one” is Monday) — Hebrew counts from Sunday, so Monday is “two”."
+    ],
+    "subtleties": [
+     "In speech the word יוֹם is often dropped: נִתְרָאֶה בְּשֵׁנִי “see you on Monday”."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-shlishi",
+   "lemma": "יוֹם שְׁלִישִׁי",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "time.tuesday"
+   ],
+   "gender": "MASC",
+   "translit": "yom shlishi",
+   "features": {
+    "spelling": "יום שלישי",
+    "root": {
+     "none": "a compound of two words (יוֹם + שְׁלִישִׁי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי שְׁלִישִׁי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "“on Tuesdays” = בִּימֵי שְׁלִישִׁי"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use"
+    },
+    "construct": {
+     "none": "a day name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם שְׁלִישִׁי"
+   },
+   "note": "Literally “the third day”. On Tuesday: בְּיוֹם שְׁלִישִׁי (no article). Written short: יוֹם ג׳.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A lucky day: a favourite day for weddings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Tuesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tuesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָחָר יוֹם שְׁלִישִׁי.",
+      "tr": "Tomorrow is Tuesday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם שְׁלִישִׁי אֲנַחְנוּ נוֹסְעִים לִירוּשָׁלַיִם.",
+      "tr": "On Tuesday we are going to Jerusalem.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲתֻנָּה בְּיוֹם שְׁלִישִׁי.",
+      "tr": "The wedding is on Tuesday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוֹם שְׁלִישִׁי",
+      "tr": "on Tuesday"
+     },
+     {
+      "text": "כָּל יוֹם שְׁלִישִׁי",
+      "tr": "every Tuesday"
+     },
+     {
+      "text": "יוֹם שְׁלִישִׁי בָּעֶרֶב",
+      "tr": "Tuesday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם ג׳",
+      "register": "neutral",
+      "nuance": "the written short form, with the letter ג as the number 3 — on timetables, signs and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + שְׁלִישִׁי “third”: the third day of the week counted from the Sabbath (Wiktionary lists the day names among the derived terms of יוֹם).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek Τρίτη, Arabic الثُّلَاثَاء and Hebrew שְׁלִישִׁי: Tuesday is “three” in all three."
+    ],
+    "pitfalls": [
+     "Tuesday is the “third” day (שְׁלִישִׁי), not the “second”: count from Sunday."
+    ],
+    "subtleties": [
+     "Many Jewish weddings are on Tuesday: on the third day of Creation “God saw that it was good” twice (Genesis 1:10 and 1:12)."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-revii",
+   "lemma": "יוֹם רְבִיעִי",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "time.wednesday"
+   ],
+   "gender": "MASC",
+   "translit": "yom revi'i",
+   "features": {
+    "spelling": "יום רביעי",
+    "root": {
+     "none": "a compound of two words (יוֹם + רְבִיעִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי רְבִיעִי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "“on Wednesdays” = בִּימֵי רְבִיעִי"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use"
+    },
+    "construct": {
+     "none": "a day name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם רְבִיעִי"
+   },
+   "note": "Literally “the fourth day”. On Wednesday: בְּיוֹם רְבִיעִי (no article). Written short: יוֹם ד׳.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The middle of the working week.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Wednesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.wednesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יוֹם רְבִיעִי הוּא אֶמְצַע הַשָּׁבוּעַ.",
+      "tr": "Wednesday is the middle of the week.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "נִפָּגֵשׁ בְּיוֹם רְבִיעִי?",
+      "tr": "Shall we meet on Wednesday?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם רְבִיעִי הוּא עוֹבֵד מֵהַבַּיִת.",
+      "tr": "On Wednesday he works from home.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוֹם רְבִיעִי",
+      "tr": "on Wednesday"
+     },
+     {
+      "text": "כָּל יוֹם רְבִיעִי",
+      "tr": "every Wednesday"
+     },
+     {
+      "text": "יוֹם רְבִיעִי הַבָּא",
+      "tr": "next Wednesday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם ד׳",
+      "register": "neutral",
+      "nuance": "the written short form, with the letter ד as the number 4 — on timetables, signs and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + רְבִיעִי “fourth”: the fourth day of the week counted from the Sabbath (Wiktionary lists the day names among the derived terms of יוֹם).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek Τετάρτη, Arabic الْأَرْبِعَاء (from أَرْبَعَة “four”) and Hebrew רְבִיעִי (from אַרְבַּע): Wednesday is “four” in all three."
+    ],
+    "pitfalls": [
+     "The ע at the end of רְבִיעִי is pronounced in careful speech: revi‘i."
+    ],
+    "subtleties": [
+     "German Mittwoch and Russian среда call it “the middle”; Hebrew just counts: “the fourth”."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-chamishi",
+   "lemma": "יוֹם חֲמִישִׁי",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "time.thursday"
+   ],
+   "gender": "MASC",
+   "translit": "yom chamishi",
+   "features": {
+    "spelling": "יום חמישי",
+    "root": {
+     "none": "a compound of two words (יוֹם + חֲמִישִׁי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי חֲמִישִׁי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "“on Thursdays” = בִּימֵי חֲמִישִׁי"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use"
+    },
+    "construct": {
+     "none": "a day name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם חֲמִישִׁי"
+   },
+   "note": "Literally “the fifth day”. On Thursday: בְּיוֹם חֲמִישִׁי (no article). Written short: יוֹם ה׳.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last working day: Thursday night is going-out night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Thursday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.thursday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּיוֹם חֲמִישִׁי בָּעֶרֶב אֲנַחְנוּ יוֹצְאִים.",
+      "tr": "On Thursday evening we go out.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חוֹזֵר מֵחוּ״ל בְּיוֹם חֲמִישִׁי.",
+      "tr": "He is coming back from abroad on Thursday.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיּוֹם יוֹם חֲמִישִׁי.",
+      "tr": "Today is Thursday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוֹם חֲמִישִׁי",
+      "tr": "on Thursday"
+     },
+     {
+      "text": "חֲמִישִׁי בָּעֶרֶב",
+      "tr": "Thursday evening (going-out night)"
+     },
+     {
+      "text": "כָּל יוֹם חֲמִישִׁי",
+      "tr": "every Thursday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם ה׳",
+      "register": "neutral",
+      "nuance": "the written short form, with the letter ה as the number 5 — on timetables, signs and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + חֲמִישִׁי “fifth”: the fifth day of the week counted from the Sabbath (Wiktionary lists the day names among the derived terms of יוֹם).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic الْخَمِيس “Thursday” has the same root as חֲמִישִׁי: “five” (خَمْسَة / חָמֵשׁ).",
+     "Greek Πέμπτη “fifth” is Thursday too."
+    ],
+    "pitfalls": [
+     "Thursday is the fifth day: חֲמִישִׁי “fifth” (from חָמֵשׁ “five”)."
+    ],
+    "subtleties": [
+     "For most Israelis Thursday is the last working day, so Thursday evening is the big night out."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-shishi",
+   "lemma": "יוֹם שִׁשִּׁי",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "time.friday"
+   ],
+   "gender": "MASC",
+   "translit": "yom shishi",
+   "features": {
+    "spelling": "יום שישי",
+    "root": {
+     "none": "a compound of two words (יוֹם + שִׁשִּׁי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי שִׁשִּׁי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "“on Fridays” = בִּימֵי שִׁשִּׁי"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use"
+    },
+    "construct": {
+     "none": "a day name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם שִׁשִּׁי"
+   },
+   "plene": {
+    "N;SG;INDF": "יום שישי"
+   },
+   "note": "Literally “the sixth day”. On Friday: בְּיוֹם שִׁשִּׁי (no article). Written short: יוֹם ו׳.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A short day of shopping and cooking before Shabbat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Friday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.friday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּיוֹם שִׁשִּׁי אֲנַחְנוּ אוֹכְלִים אֵצֶל סָבְתָא.",
+      "tr": "On Friday we eat at Grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם שִׁשִּׁי הַחֲנֻיּוֹת נִסְגָּרוֹת מֻקְדָּם.",
+      "tr": "On Friday the shops close early.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיּוֹם יוֹם שִׁשִּׁי.",
+      "tr": "Today is Friday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּיוֹם שִׁשִּׁי",
+      "tr": "on Friday"
+     },
+     {
+      "text": "עֶרֶב שַׁבָּת",
+      "tr": "Friday evening (Shabbat eve)"
+     },
+     {
+      "text": "אֲרוּחַת שִׁשִּׁי",
+      "tr": "the Friday-night family dinner"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם ו׳",
+      "register": "neutral",
+      "nuance": "the written short form, with the letter ו as the number 6 — on timetables, signs and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + שִׁשִּׁי “sixth”: the sixth day of the week counted from the Sabbath (Wiktionary lists the day names among the derived terms of יוֹם).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek calls Friday Παρασκευή, “preparation” — for the Sabbath; Arabic الْجُمُعَة “the gathering” (the day of Friday prayer).",
+     "In Hebrew it is simply “the sixth (day)”, from שֵׁשׁ “six”."
+    ],
+    "pitfalls": [
+     "Friday is part of the Israeli weekend: many offices are closed and shops close early, in the afternoon.",
+     "Friday evening is already Shabbat: עֶרֶב שַׁבָּת."
+    ],
+    "subtleties": [
+     "Written in full spelling יום שישי; the vowelled form has a dagesh in the second ש: שִׁשִּׁי."
+    ]
+   }
+  },
+  {
+   "id": "he:shabat",
+   "lemma": "שַׁבָּת",
+   "pos": "NOUN",
+   "senses": [
+    "time.saturday",
+    "relig.sabbath",
+    "time.week"
+   ],
+   "gender": "FEM",
+   "translit": "shabat",
+   "features": {
+    "spelling": "שבת",
+    "root": "שׁ ב ת",
+    "pattern": {
+     "none": "probably borrowed (Akkadian šapattum): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "שַׁבָּתוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "Saturdays, Sabbaths; as “week” (s3) only the singular, in fixed phrases (אֶחָד בְּשַׁבָּת)"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שַׁבַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שַׁבְּתוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שַׁבָּת",
+    "N;SG;DEF": "הַשַּׁבָּת",
+    "N;PL;INDF": "שַׁבָּתוֹת",
+    "N;PL;DEF": "הַשַּׁבָּתוֹת",
+    "N;SG;CONST": "שַׁבַּת",
+    "N;PL;CONST": "שַׁבְּתוֹת"
+   },
+   "note": "Saturday — the only weekday with a name. בְּשַׁבָּת “on Saturday / on Shabbat”; שַׁבָּת שָׁלוֹם is the greeting from Friday afternoon on.",
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "period",
+     "value": "Mishnaic Hebrew (archaic)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Quiet streets, family meals, no buses: the day of rest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Saturday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.saturday"
+     },
+     {
+      "id": "s2",
+      "def": "the Sabbath, the weekly day of rest",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.sabbath"
+     },
+     {
+      "id": "s3",
+      "def": "week (Mishnaic Hebrew)",
+      "register": [
+       "archaic"
+      ],
+      "concept": "time.week"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיּוֹם שַׁבָּת.",
+      "tr": "Today is Saturday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּשַׁבָּת אֲנַחְנוּ בַּבַּיִת.",
+      "tr": "On Saturday we are at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּשַׁבָּת אֵין אוֹטוֹבּוּסִים בְּרֹב הֶעָרִים.",
+      "tr": "On Shabbat there are no buses in most cities.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     },
+     {
+      "text": "הֵם שׁוֹמְרֵי שַׁבָּת.",
+      "tr": "They keep the Sabbath.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s2"
+     },
+     {
+      "text": "בִּלְשׁוֹן חֲזַ״ל ״אֶחָד בְּשַׁבָּת״ פֵּרוּשׁוֹ יוֹם רִאשׁוֹן.",
+      "tr": "In the language of the Sages, “one in the shabbat (week)” means Sunday.",
+      "register": "neutral",
+      "context": "language history",
+      "sense": "s3"
+     },
+     {
+      "text": "בְּעִבְרִית שֶׁל הַמִּשְׁנָה ״שַׁבָּת״ הִיא גַּם שָׁבוּעַ שָׁלֵם.",
+      "tr": "In Mishnaic Hebrew “shabbat” is also a whole week.",
+      "register": "neutral",
+      "context": "language history",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שַׁבָּת שָׁלוֹם",
+      "tr": "Shabbat shalom (the Sabbath greeting)"
+     },
+     {
+      "text": "מוֹצָאֵי שַׁבָּת",
+      "tr": "Saturday night (after Shabbat ends)"
+     },
+     {
+      "text": "עֶרֶב שַׁבָּת",
+      "tr": "Friday evening, Shabbat eve"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שַׁבָּת שָׁלוֹם",
+      "tr": "a Sabbath of peace",
+      "kind": "fixed expression",
+      "meaning": "the Sabbath greeting (from Friday afternoon on)",
+      "register": "neutral"
+     },
+     {
+      "text": "זָכוֹר אֶת יוֹם הַשַּׁבָּת לְקַדְּשׁוֹ",
+      "tr": "remember the Sabbath day, to keep it holy",
+      "kind": "quote",
+      "meaning": "the fourth commandment",
+      "register": "religious",
+      "source": "Exodus 20:8"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יוֹם שַׁבָּת",
+      "register": "formal",
+      "nuance": "the full name, “the Sabbath day” (Wiktionary lists it among the day names)"
+     }
+    ],
+    "etymology": {
+     "text": "Possibly borrowed from Akkadian šapattum (“the middle day of the lunar month”) (Wiktionary). The verb שָׁבַת “to stop working, rest” has the same letters.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek Σάββατο, Russian суббота and German Samstag go back to this word; Arabic السَّبْت “Saturday” is its Semitic cousin.",
+     "A sabbatical year (שְׁנַת שַׁבָּתוֹן) is a “Sabbath” of a year — from the same word."
+    ],
+    "pitfalls": [
+     "Feminine: שַׁבָּת שְׁקֵטָה “a quiet Shabbat”.",
+     "Saturday is שַׁבָּת — there is no *יוֹם שְׁבִיעִי in use."
+    ],
+    "subtleties": [
+     "Shabbat starts on Friday at sunset and ends on Saturday night: the Jewish day runs from evening to evening.",
+     "מוֹצָאֵי שַׁבָּת “the going-out of Shabbat” is Saturday night — a lively evening in Israeli towns."
+    ]
+   }
+  },
+  {
+   "id": "he:sof-shavua",
+   "lemma": "סוֹף שָׁבוּעַ",
+   "pos": "NOUN",
+   "senses": [
+    "time.weekend",
+    "time.endofweek"
+   ],
+   "gender": "MASC",
+   "translit": "sof shavua",
+   "features": {
+    "spelling": "סוף שבוע",
+    "root": {
+     "none": "a compound of two words (סוֹף + שָׁבוּעַ): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "סוֹפֵי שָׁבוּעַ",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סוֹף שָׁבוּעַ",
+    "N;SG;DEF": "סוֹף הַשָּׁבוּעַ",
+    "N;PL;INDF": "סוֹפֵי שָׁבוּעַ",
+    "N;PL;DEF": "סוֹפֵי הַשָּׁבוּעַ"
+   },
+   "note": "The weekend — in Israel Friday and Saturday. “At the weekend” = בְּסוֹף הַשָּׁבוּעַ (the article goes on the second word). Colloquial short form סוֹפָ״שׁ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Friday and Saturday: the beach, the family, a trip up north.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "weekend (in Israel: Friday and Saturday)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.weekend"
+     },
+     {
+      "id": "s2",
+      "def": "the end of the week (בְּסוֹף הַשָּׁבוּעַ “at the end of this week”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.endofweek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה אַתָּה עוֹשֶׂה בְּסוֹף הַשָּׁבוּעַ?",
+      "tr": "What are you (m.) doing at the weekend?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "סוֹף שָׁבוּעַ נָעִים!",
+      "tr": "Have a nice weekend!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדּוּחַ מוּכָן בְּסוֹף הַשָּׁבוּעַ.",
+      "tr": "The report will be ready at the end of the week.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סוֹף שָׁבוּעַ נָעִים",
+      "tr": "have a nice weekend"
+     },
+     {
+      "text": "בְּסוֹף הַשָּׁבוּעַ",
+      "tr": "at the weekend; at the end of the week"
+     },
+     {
+      "text": "סוֹף שָׁבוּעַ אָרֹךְ",
+      "tr": "a long weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סוֹפָ״שׁ",
+      "register": "colloquial",
+      "nuance": "the short form, from the first letters: “sofash” (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "סוֹף “end” + שָׁבוּעַ “week”; Wiktionary gives no etymology and lists the short form סוֹפָ״שׁ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The short form סוֹפָ״שׁ is written with gershayim, like other Hebrew abbreviations (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The Israeli weekend is Friday and Saturday — Sunday is a working day.",
+     "With the article only the second word changes: סוֹף הַשָּׁבוּעַ; plural סוֹפֵי שָׁבוּעַ."
+    ],
+    "subtleties": [
+     "בְּסוֹף הַשָּׁבוּעַ can mean “at the weekend” or “at the end of the week” — the context decides."
+    ]
+   }
+  },
+  {
+   "id": "he:yom",
+   "lemma": "יוֹם",
+   "pos": "NOUN",
+   "senses": [
+    "time.day",
+    "time.daytime"
+   ],
+   "gender": "MASC",
+   "translit": "yom",
+   "features": {
+    "spelling": "יום",
+    "root": "י ו ם",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *yawm-)"
+    },
+    "plurals": [
+     {
+      "form": "יָמִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "יוֹמַיִם",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יוֹם"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "יְמֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "יָמִים",
+      "senses": [
+       "s3"
+      ],
+      "note": "mostly in the plural: בַּיָּמִים הָהֵם “in those days”"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם",
+    "N;SG;DEF": "הַיּוֹם",
+    "N;PL;INDF": "יָמִים",
+    "N;PL;DEF": "הַיָּמִים",
+    "N;DU;INDF": "יוֹמַיִם",
+    "N;SG;CONST": "יוֹם",
+    "N;PL;CONST": "יְמֵי"
+   },
+   "plene": {
+    "N;DU;INDF": "יומיים"
+   },
+   "note": "Irregular plural יָמִים. “Two days” is the dual יוֹמַיִם. With the article, הַיּוֹם is also the word “today”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Every day, all day, a good day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "day (24 hours; a date)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.day"
+     },
+     {
+      "id": "s2",
+      "def": "day, daytime (as opposed to night)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.daytime"
+     },
+     {
+      "id": "s3",
+      "def": "a time, era (בַּיָּמִים הָהֵם “in those days”)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ שִׁבְעָה יָמִים בְּשָׁבוּעַ.",
+      "tr": "There are seven days in a week.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "כָּל יוֹם אֲנִי הוֹלֵךְ לָעֲבוֹדָה.",
+      "tr": "Every day I (m.) go to work.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא עוֹבֵד יוֹם וָלַיְלָה.",
+      "tr": "He works day and night.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "אֵלֶּה הָיוּ יָמִים טוֹבִים.",
+      "tr": "Those were good days.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּל יוֹם",
+      "tr": "every day"
+     },
+     {
+      "text": "יוֹם עֲבוֹדָה",
+      "tr": "a working day"
+     },
+     {
+      "text": "יוֹמַיִם",
+      "tr": "two days"
+     },
+     {
+      "text": "יוֹם טוֹב!",
+      "tr": "have a good day!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וַיְהִי עֶרֶב וַיְהִי בֹקֶר יוֹם אֶחָד",
+      "tr": "and there was evening and there was morning, one day",
+      "kind": "quote",
+      "meaning": "the first day of Creation",
+      "register": "religious",
+      "source": "Genesis 1:5"
+     },
+     {
+      "text": "יוֹמָם וָלַיְלָה",
+      "tr": "by day and by night",
+      "kind": "fixed expression",
+      "meaning": "day and night, all the time",
+      "register": "literary"
+     },
+     {
+      "text": "בָּא בַּיָּמִים",
+      "tr": "came into the days",
+      "kind": "idiom",
+      "meaning": "got old",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יְמָמָה",
+      "register": "formal",
+      "nuance": "“a full day of 24 hours” — technical: פַּעַם בִּיְמָמָה “once every 24 hours”"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *yawm-, with *aw becoming ō; cognate with Arabic يَوْم (yawm) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic يَوْم (yawm) is the same word (Wiktionary).",
+     "The days of the week are all “day + number”: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי …"
+    ],
+    "pitfalls": [
+     "The plural is irregular: יָמִים (not *יוֹמִים).",
+     "הַיּוֹם is both “the day” and “today” — almost always “today”.",
+     "Two days is normally the dual יוֹמַיִם (rather than שְׁנֵי יָמִים)."
+    ],
+    "subtleties": [
+     "The Jewish day begins in the evening: “there was evening and there was morning — one day” (Genesis 1:5); Wiktionary gives the sense “from a nightfall until the following nightfall”."
+    ]
+   }
+  },
+  {
+   "id": "he:laila",
+   "lemma": "לַיְלָה",
+   "pos": "NOUN",
+   "senses": [
+    "time.night",
+    "time.tonight"
+   ],
+   "gender": "MASC",
+   "translit": "laila",
+   "features": {
+    "spelling": "לילה",
+    "root": "ל י ל",
+    "pattern": {
+     "none": "an old adverbial form of לַיִל (*layl-): no pattern"
+    },
+    "plurals": [
+     {
+      "form": "לֵילוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "לֵיל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "לֵילוֹת"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "הַלַּיְלָה",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: “tonight”"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "לַיְלָה",
+    "N;SG;DEF": "הַלַּיְלָה",
+    "N;PL;INDF": "לֵילוֹת",
+    "N;PL;DEF": "הַלֵּילוֹת",
+    "N;SG;DEF;PFX": "לַּיְלָה",
+    "N;SG;CONST": "לֵיל",
+    "N;PL;CONST": "לֵילוֹת"
+   },
+   "note": "Masculine although it ends in -ָה: לַיְלָה טוֹב. Plural לֵילוֹת. “At night” = בַּלַּיְלָה; “tonight” = הַלַּיְלָה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הַלַּיְלָה → (בַּ / לַ)לַּיְלָה; Wiktionary lists only the full definite form הַלַּיְלָה."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dark, quiet, the stars over the desert.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "night",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.night"
+     },
+     {
+      "id": "s2",
+      "def": "tonight (הַלַּיְלָה)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tonight"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּלַּיְלָה הַיְּלָדִים יְשֵׁנִים.",
+      "tr": "At night the children are asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא עוֹבֵד כָּל הַלַּיְלָה.",
+      "tr": "He works all night.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַלַּיְלָה אֲנַחְנוּ נִשְׁאָרִים בַּבַּיִת.",
+      "tr": "Tonight we are staying at home.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּלַּיְלָה",
+      "tr": "at night"
+     },
+     {
+      "text": "לַיְלָה טוֹב",
+      "tr": "good night"
+     },
+     {
+      "text": "חֲצוֹת הַלַּיְלָה",
+      "tr": "midnight"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לַיְלָה לָבָן",
+      "tr": "a white night",
+      "kind": "idiom",
+      "meaning": "a sleepless night",
+      "register": "neutral"
+     },
+     {
+      "text": "יוֹמָם וָלַיְלָה",
+      "tr": "by day and by night",
+      "kind": "fixed expression",
+      "meaning": "day and night, all the time",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לַיִל",
+      "register": "literary",
+      "nuance": "the poetic and older form (Wiktionary lists it as a synonym)"
+     }
+    ],
+    "etymology": {
+     "text": "Likely a remnant of the accusative (adverbial “at night”) of לַיִל, from Proto-Semitic *layl-; cognate with Arabic لَيْل (layl), لَيْلَة (layla) and Aramaic לֵילְיָא (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Thousand and One Nights are אֶלֶף לַיְלָה וְלַיְלָה in Hebrew.",
+     "Arabic لَيْلَة (layla) — and the name Layla — are the same word (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Masculine despite the -ָה: לַיְלָה אָרֹךְ “a long night”, לַיְלָה טוֹב “good night”.",
+     "Plural לֵילוֹת — masculine, but with -וֹת."
+    ],
+    "subtleties": [
+     "הַלַּיְלָה with the article is “tonight”, like הַיּוֹם “today”, הַבֹּקֶר “this morning”.",
+     "The final ה is not a feminine ending: it is probably an old case ending (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:boker",
+   "lemma": "בֹּקֶר",
+   "pos": "NOUN",
+   "senses": [
+    "time.morning",
+    "time.thismorning"
+   ],
+   "gender": "MASC",
+   "translit": "boker",
+   "features": {
+    "spelling": "בוקר",
+    "root": "ב ק ר",
+    "pattern": "קֹטֶל",
+    "plurals": [
+     {
+      "form": "בְּקָרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בֹּקֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בׇּקְרֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "הַבֹּקֶר",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: “this morning”"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "בֹּקֶר",
+    "N;SG;DEF": "הַבֹּקֶר",
+    "N;PL;INDF": "בְּקָרִים",
+    "N;PL;DEF": "הַבְּקָרִים",
+    "N;SG;DEF;PFX": "בֹּקֶר",
+    "N;SG;CONST": "בֹּקֶר",
+    "N;PL;CONST": "בׇּקְרֵי"
+   },
+   "plene": {
+    "N;SG;INDF": "בוקר",
+    "N;SG;DEF": "הבוקר",
+    "N;SG;DEF;PFX": "בוקר",
+    "N;SG;CONST": "בוקר",
+    "N;PL;CONST": "בוקרי"
+   },
+   "note": "“In the morning” = בַּבֹּקֶר; “this morning” = הַבֹּקֶר. Full spelling בוקר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הַבֹּקֶר → (בַּ / לַ)בֹּקֶר; Wiktionary lists only the full definite form הַבֹּקֶר."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Coffee, the first bus, “good morning”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "morning",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     },
+     {
+      "id": "s2",
+      "def": "this morning (הַבֹּקֶר)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.thismorning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּבֹּקֶר אֲנִי שׁוֹתָה קָפֶה.",
+      "tr": "In the morning I (f.) drink coffee.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "כָּל בֹּקֶר הִיא רָצָה בַּפַּארְק.",
+      "tr": "Every morning she runs in the park.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבֹּקֶר הוּא בָּא מֻקְדָּם.",
+      "tr": "This morning he came early.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּבֹּקֶר",
+      "tr": "in the morning"
+     },
+     {
+      "text": "הַבֹּקֶר",
+      "tr": "this morning"
+     },
+     {
+      "text": "בֹּקֶר טוֹב",
+      "tr": "good morning"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בֹּקֶר טוֹב, אֵלִיָּהוּ",
+      "tr": "good morning, Elijah",
+      "kind": "idiom",
+      "meaning": "said to someone who has only just noticed what everyone knows",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "שַׁחַר",
+      "register": "literary",
+      "nuance": "“dawn, daybreak” — the very first light"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ב־ק־ר, which appears only in pi‘el: בִּקֵּר “inspected” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Breakfast is אֲרוּחַת בֹּקֶר, “the morning meal” (lesson 7).",
+     "The answer to בֹּקֶר טוֹב can be בֹּקֶר אוֹר, “morning of light” (lesson 2)."
+    ],
+    "pitfalls": [
+     "“In the morning” needs the article: בַּבֹּקֶר (not *בְּבֹקֶר).",
+     "Masculine: בֹּקֶר טוֹב “good morning”, בֹּקֶר יָפֶה."
+    ],
+    "subtleties": [
+     "הַבֹּקֶר is “this morning” — the article alone means “this”, as in הַיּוֹם, הָעֶרֶב, הַלַּיְלָה."
+    ]
+   }
+  },
+  {
+   "id": "he:tsohorayim",
+   "lemma": "צָהֳרַיִם",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.noon"
+   ],
+   "gender": "MASC",
+   "translit": "tsohorayim",
+   "features": {
+    "spelling": "צהריים",
+    "root": "צ ה ר",
+    "pattern": {
+     "none": "a dual form (of צֹהַר “light”), not a pattern"
+    },
+    "plurals": {
+     "none": "no plural: the word is already a dual form"
+    },
+    "dual": {
+     "none": "the word is itself a dual form; it means one noon"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "צָהֳרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "צָהֳרַיִם",
+    "N;SG;DEF": "הַצָּהֳרַיִם",
+    "N;SG;DEF;PFX": "צָּהֳרַיִם",
+    "N;SG;CONST": "צָהֳרֵי"
+   },
+   "plene": {
+    "N;SG;INDF": "צהריים",
+    "N;SG;DEF": "הצהריים",
+    "N;SG;DEF;PFX": "צהריים"
+   },
+   "note": "A dual form, masculine, no plural: noon and the early afternoon (about 12–3). “At noon” = בַּצָּהֳרַיִם. Full spelling צהריים.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Midday heat, lunch, a short nap.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "noon, midday (the middle of the day, about 12–3)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.noon"
+     },
+     {
+      "id": "s2",
+      "def": "lunch (short for אֲרוּחַת צָהֳרַיִם)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּצָּהֳרַיִם אֲנַחְנוּ אוֹכְלִים בַּבַּיִת.",
+      "tr": "At noon we eat at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא מַגִּיעַ בְּשָׁעָה שְׁתֵּים עֶשְׂרֵה בַּצָּהֳרַיִם.",
+      "tr": "He arrives at twelve noon.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה יֵשׁ לַצָּהֳרַיִם?",
+      "tr": "What’s for lunch?",
+      "register": "colloquial",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּצָּהֳרַיִם",
+      "tr": "at noon, at midday"
+     },
+     {
+      "text": "אֲרוּחַת צָהֳרַיִם",
+      "tr": "lunch"
+     },
+     {
+      "text": "שְׁנַת צָהֳרַיִם",
+      "tr": "an afternoon nap, siesta"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חֲצוֹת הַיּוֹם",
+      "register": "formal",
+      "nuance": "“midday” — exactly twelve o’clock"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic ظُهْر (ẓuhr) and Aramaic ṭahrā; a dual, like עַרְבַּיִם “dusk” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic ظُهْر is the same word: صَلَاةُ الظُّهْرِ is the noon prayer (Wiktionary gives the cognate)."
+    ],
+    "pitfalls": [
+     "Masculine and dual-looking (-ַיִם), but one noon: no plural.",
+     "בַּצָּהֳרַיִם is a stretch of time (about 12–3), not only twelve o’clock."
+    ],
+    "subtleties": [
+     "שְׁנַת צָהֳרַיִם “a noon sleep” is a nap, written short שנ״צ (Wiktionary).",
+     "The first vowel is a short o (tsohoráyim), as in אֲרוּחַת צָהֳרַיִם."
+    ]
+   }
+  },
+  {
+   "id": "he:achar-hatsohorayim",
+   "lemma": "אַחַר הַצָּהֳרַיִם",
+   "pos": "ADV",
+   "senses": [
+    "time.afternoon"
+   ],
+   "translit": "achar hatsohorayim",
+   "alts": [
+    "אחר הצהריים"
+   ],
+   "features": {
+    "spelling": "אחר הצהריים",
+    "derivedFrom": "אַחַר “after” + הַצָּהֳרַיִם “the noon”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "“In the afternoon”, without a preposition: אַחַר הַצָּהֳרַיִם אֲנִי בַּבַּיִת. Written short אחה״צ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "After lunch: homework, the park, coffee.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in the afternoon; the afternoon",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.afternoon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַחַר הַצָּהֳרַיִם אֲנִי בַּבַּיִת.",
+      "tr": "In the afternoon I am at home.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "נִתְרָאֶה אַחַר הַצָּהֳרַיִם!",
+      "tr": "See you in the afternoon!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים בַּפַּארְק אַחַר הַצָּהֳרַיִם.",
+      "tr": "The children are in the park in the afternoon.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַיּוֹם אַחַר הַצָּהֳרַיִם",
+      "tr": "this afternoon"
+     },
+     {
+      "text": "מָחָר אַחַר הַצָּהֳרַיִם",
+      "tr": "tomorrow afternoon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַחֲרֵי הַצָּהֳרַיִם",
+      "register": "colloquial",
+      "nuance": "the everyday pronunciation, with אַחֲרֵי “after”"
+     },
+     {
+      "word": "אחה״צ",
+      "register": "neutral",
+      "nuance": "the written abbreviation, on timetables and in messages"
+     }
+    ],
+    "etymology": {
+     "text": "אַחַר “after” + הַצָּהֳרַיִם “the noon” (the parts are in Wiktionary; the phrase has no entry of its own).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “afternoon”, German Nachmittag and Hebrew אַחַר הַצָּהֳרַיִם are all built the same way: “after-noon”."
+    ],
+    "pitfalls": [
+     "No בְּ in front: אַחַר הַצָּהֳרַיִם “in the afternoon” — unlike בַּבֹּקֶר, בָּעֶרֶב."
+    ],
+    "subtleties": [
+     "“This afternoon” is הַיּוֹם אַחַר הַצָּהֳרַיִם."
+    ]
+   }
+  },
+  {
+   "id": "he:erev",
+   "lemma": "עֶרֶב",
+   "pos": "NOUN",
+   "senses": [
+    "time.evening",
+    "time.eve"
+   ],
+   "gender": "MASC",
+   "translit": "erev",
+   "features": {
+    "spelling": "ערב",
+    "root": "ע ר ב",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "עֲרָבִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use (עַרְבַּיִם only in בֵּין הָעַרְבַּיִם “at dusk”)"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עֶרֶב"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עַרְבֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עֶרֶב",
+    "N;SG;DEF": "הָעֶרֶב",
+    "N;PL;INDF": "עֲרָבִים",
+    "N;PL;DEF": "הָעֲרָבִים",
+    "N;SG;DEF;PFX": "עֶרֶב",
+    "N;SG;CONST": "עֶרֶב",
+    "N;PL;CONST": "עַרְבֵי"
+   },
+   "note": "“In the evening” = בָּעֶרֶב; “this evening” = הָעֶרֶב. Before a holiday: עֶרֶב שַׁבָּת “Shabbat eve (Friday evening)”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sunset, dinner, a walk when it gets cooler.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.evening"
+     },
+     {
+      "id": "s2",
+      "def": "eve, the day before (a holiday): עֶרֶב שַׁבָּת, עֶרֶב פֶּסַח",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.eve"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בָּעֶרֶב אֲנַחְנוּ אוֹכְלִים אֲרוּחַת עֶרֶב.",
+      "tr": "In the evening we eat dinner.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעֶרֶב אֲנִי נִשְׁאָר בַּבַּיִת.",
+      "tr": "This evening I (m.) am staying at home.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּעֶרֶב שַׁבָּת כָּל הַמִּשְׁפָּחָה בַּבַּיִת.",
+      "tr": "On Shabbat eve the whole family is at home.",
+      "register": "neutral",
+      "context": "tradition",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בָּעֶרֶב",
+      "tr": "in the evening"
+     },
+     {
+      "text": "הָעֶרֶב",
+      "tr": "this evening, tonight"
+     },
+     {
+      "text": "עֶרֶב טוֹב",
+      "tr": "good evening"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בֵּין הָעַרְבַּיִם",
+      "tr": "between the two evenings",
+      "kind": "fixed expression",
+      "meaning": "at dusk, at twilight",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לִפְנוֹת עֶרֶב",
+      "register": "neutral",
+      "nuance": "“towards evening”, late afternoon (Wiktionary)"
+     },
+     {
+      "word": "בֵּין הָעַרְבַּיִם",
+      "register": "literary",
+      "nuance": "“at dusk, twilight” (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Cognates include Arabic غَرْب (ḡarb, “west”) (Wiktionary) — the west is where the sun sets in the evening.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic غَرْب “west” is the same Semitic word (Wiktionary) — and so is the name Maghreb (الْمَغْرِب), “the place of sunset”."
+    ],
+    "pitfalls": [
+     "“In the evening” takes the article: בָּעֶרֶב (בְּ + הָ); “this evening” is הָעֶרֶב alone.",
+     "עֶרֶב + a holiday is the day before: עֶרֶב שַׁבָּת is Friday (evening), not Saturday evening."
+    ],
+    "subtleties": [
+     "The Jewish day begins in the evening — so עֶרֶב comes first in “there was evening and there was morning” (Genesis 1:5)."
+    ]
+   }
+  },
+  {
+   "id": "he:hayom",
+   "lemma": "הַיּוֹם",
+   "pos": "ADV",
+   "senses": [
+    "time.today",
+    "adv.nowadays"
+   ],
+   "translit": "hayom",
+   "features": {
+    "spelling": "היום",
+    "derivedFrom": "הַ + יוֹם “the day”",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Here and now: today’s plans.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "today",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.today"
+     },
+     {
+      "id": "s2",
+      "def": "nowadays, these days",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.nowadays"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיּוֹם יוֹם שֵׁנִי.",
+      "tr": "Today is Monday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה אַתָּה עוֹשֶׂה הַיּוֹם?",
+      "tr": "What are you (m.) doing today?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיּוֹם כֻּלָּם עִם טֶלֶפוֹן.",
+      "tr": "Nowadays everyone has a phone.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַיּוֹם בַּבֹּקֶר",
+      "tr": "this morning"
+     },
+     {
+      "text": "עַד הַיּוֹם",
+      "tr": "to this day, until today"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כַּיּוֹם",
+      "register": "formal",
+      "nuance": "“nowadays, at present” — in writing"
+     }
+    ],
+    "etymology": {
+     "text": "הַ “the” + יוֹם “day” (Wiktionary): “the day” = today.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German heute comes from a phrase meaning “on this day” — Hebrew says just “the day”."
+    ],
+    "pitfalls": [
+     "Today is “the day”: הַיּוֹם looks exactly like הַיּוֹם “the day” (יוֹם with the article) — almost always it means “today”."
+    ],
+    "subtleties": [
+     "The same pattern gives הַבֹּקֶר “this morning”, הָעֶרֶב “this evening” and הַלַּיְלָה “tonight”."
+    ]
+   }
+  },
+  {
+   "id": "he:machar",
+   "lemma": "מָחָר",
+   "pos": "ADV",
+   "senses": [
+    "time.tomorrow"
+   ],
+   "translit": "machar",
+   "features": {
+    "spelling": "מחר",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plans and promises: see you tomorrow.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tomorrow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tomorrow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָחָר יוֹם שְׁלִישִׁי.",
+      "tr": "Tomorrow is Tuesday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "נִתְרָאֶה מָחָר!",
+      "tr": "See you tomorrow!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "מָחָר אֲנִי נוֹסֵעַ לְחֵיפָה.",
+      "tr": "Tomorrow I (m.) am going to Haifa.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מָחָר בַּבֹּקֶר",
+      "tr": "tomorrow morning"
+     },
+     {
+      "text": "עַד מָחָר",
+      "tr": "by tomorrow, until tomorrow"
+     },
+     {
+      "text": "מָחֳרָתַיִם",
+      "tr": "the day after tomorrow"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אָכוֹל וְשָׁתוֹ כִּי מָחָר נָמוּת",
+      "tr": "eat and drink, for tomorrow we die",
+      "kind": "quote",
+      "meaning": "enjoy life while you can",
+      "register": "literary",
+      "source": "Isaiah 22:13"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לְמָחֳרָת",
+      "register": "neutral",
+      "nuance": "“the next day” — in a story about the past or the future, not “tomorrow from today”"
+     }
+    ],
+    "etymology": {
+     "text": "Probably a prefixed formation related to אַחַר “hind part, after”; cognate with Aramaic מחר (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מָחָר is related to אַחַר “after” (Wiktionary): tomorrow is “the after-day”."
+    ],
+    "pitfalls": [
+     "With מָחָר the present tense is enough for a plan: מָחָר אֲנִי נוֹסֵעַ “tomorrow I’m going” — as in German Morgen fahre ich.",
+     "“The next day” in a story is לְמָחֳרָת, not מָחָר."
+    ],
+    "subtleties": [
+     "The day after tomorrow is a dual: מָחֳרָתַיִם (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:etmol",
+   "lemma": "אֶתְמוֹל",
+   "pos": "ADV",
+   "senses": [
+    "time.yesterday"
+   ],
+   "translit": "etmol",
+   "features": {
+    "spelling": "אתמול",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "note": "Speaking about yesterday needs the past tense (lesson C01); for now: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן “yesterday was Sunday”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What happened: yesterday’s news.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yesterday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.yesterday"
+     },
+     {
+      "id": "s2",
+      "def": "the recent past",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן.",
+      "tr": "Yesterday was Sunday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶתְמוֹל הִיא חָזְרָה מְאֻחָר.",
+      "tr": "Yesterday she came back late.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "לֹא נוֹלַדְתִּי אֶתְמוֹל.",
+      "tr": "I wasn’t born yesterday.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֶתְמוֹל בָּעֶרֶב",
+      "tr": "yesterday evening"
+     },
+     {
+      "text": "מֵאֶתְמוֹל",
+      "tr": "since yesterday"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֹא נוֹלַדְתִּי אֶתְמוֹל",
+      "tr": "I wasn’t born yesterday",
+      "kind": "saying",
+      "meaning": "I’m not naive, you can’t fool me",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "תְּמוֹל",
+      "register": "literary",
+      "nuance": "the older, literary form (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "A form with a prefixed vowel of the now literary תְּמוֹל; compare Aramaic אֶתְמָלִי and Akkadian ittimali (timāli with a prefix) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Aramaic אֶתְמָלִי and Akkadian ittimali add the same kind of prefix to the old word for “yesterday” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "It needs a past-tense verb or הָיָה “was”: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן.",
+     "The day before yesterday is שִׁלְשׁוֹם, not *לִפְנֵי אֶתְמוֹל."
+    ],
+    "subtleties": [
+     "תְּמוֹל שִׁלְשׁוֹם “yesterday and the day before” is a literary “formerly”."
+    ]
+   }
+  },
+  {
+   "id": "he:achshav",
+   "lemma": "עַכְשָׁו",
+   "pos": "ADV",
+   "senses": [
+    "adv.now"
+   ],
+   "translit": "achshav",
+   "alts": [
+    "עכשיו"
+   ],
+   "features": {
+    "spelling": "עכשיו",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "Written without vowels as עכשיו (with a י).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right now, this minute.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "now",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.now"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי בָּא עַכְשָׁו!",
+      "tr": "I’m coming now!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "עַכְשָׁו הַשָּׁעָה חָמֵשׁ.",
+      "tr": "It’s five o’clock now.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "לֹא עַכְשָׁו, אַחַר כָּךְ.",
+      "tr": "Not now, later.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַד עַכְשָׁו",
+      "tr": "until now, so far"
+     },
+     {
+      "text": "מֵעַכְשָׁו",
+      "tr": "from now on"
+     },
+     {
+      "text": "דַּוְקָא עַכְשָׁו",
+      "tr": "now of all times"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כָּעֵת",
+      "register": "formal",
+      "nuance": "“now, at present” — the news, official texts"
+     },
+     {
+      "word": "עַתָּה",
+      "register": "literary",
+      "nuance": "“now” — Biblical and poetic"
+     }
+    ],
+    "etymology": {
+     "text": "Perhaps from עַד כְּשָׁעָה or עַד כְּשֶׁהוּא; attested since Late Antiquity. The spelling with י keeps the reader from reading the ו as “o” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same trick of spelling — a silent י before the final ו — is in סתיו “autumn” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Unvowelled it is written עכשיו — the י is silent: akhshav."
+    ],
+    "subtleties": [
+     "עַד עַכְשָׁו “until now” also means “so far”: עַד עַכְשָׁו הַכֹּל בְּסֵדֶר."
+    ]
+   }
+  },
+  {
+   "id": "he:achar-kach",
+   "lemma": "אַחַר כָּךְ",
+   "pos": "ADV",
+   "senses": [
+    "adv.later",
+    "adv.then"
+   ],
+   "translit": "achar kach",
+   "features": {
+    "spelling": "אחר כך",
+    "derivedFrom": "אַחַר “after” + כָּךְ “so, this”",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "use",
+     "value": "the next step in a sequence: “after that, later”"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "First this, then that.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "later, afterwards, then",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.later"
+     },
+     {
+      "id": "s2",
+      "def": "then, after that (the next step in a sequence)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.then"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי בָּא אַחַר כָּךְ.",
+      "tr": "I’ll come later.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "קֹדֶם אוֹכְלִים, אַחַר כָּךְ יוֹצְאִים.",
+      "tr": "First we eat, then we go out.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "נְדַבֵּר אַחַר כָּךְ.",
+      "tr": "We’ll talk later.",
+      "register": "informal",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא קוֹנֶה לֶחֶם, וְאַחַר כָּךְ הוּא חוֹזֵר הַבַּיְתָה.",
+      "tr": "He buys bread, and then he goes back home.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קֹדֶם … אַחַר כָּךְ",
+      "tr": "first … then"
+     },
+     {
+      "text": "רַק אַחַר כָּךְ",
+      "tr": "only afterwards"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַחֲרֵי זֶה",
+      "register": "colloquial",
+      "nuance": "“after that”"
+     },
+     {
+      "word": "לְאַחַר מִכֵּן",
+      "register": "formal",
+      "nuance": "“thereafter” — written style"
+     },
+     {
+      "word": "יוֹתֵר מְאֻחָר",
+      "register": "neutral",
+      "nuance": "“later” in the sense of “at a later time” (lesson 17: comparatives)"
+     },
+     {
+      "word": "וְאָז",
+      "register": "neutral",
+      "nuance": "“and then” — the usual link in a story (lesson 18)"
+     }
+    ],
+    "etymology": {
+     "text": "From אַחַר “after” + כָּךְ “so, thus” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German danach / nachher and Hebrew אַחַר כָּךְ are built alike: “after” + “that / so”."
+    ],
+    "pitfalls": [
+     "Two words, with a final ךְ: אַחַר כָּךְ.",
+     "אַחַר כָּךְ stands alone (“afterwards”); before a noun use אַחֲרֵי: אַחֲרֵי הָאֲרוּחָה (lesson 15)."
+    ],
+    "subtleties": [
+     "קֹדֶם … אַחַר כָּךְ “first … then” is the usual way to put steps in order."
+    ]
+   }
+  },
+  {
+   "id": "he:bekarov",
+   "lemma": "בְּקָרוֹב",
+   "pos": "ADV",
+   "senses": [
+    "adv.soon"
+   ],
+   "translit": "bekarov",
+   "features": {
+    "spelling": "בקרוב",
+    "derivedFrom": "בְּ + קָרוֹב “near”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Coming soon: “see you soon!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soon, shortly",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.soon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָאוֹטוֹבּוּס מַגִּיעַ בְּקָרוֹב.",
+      "tr": "The bus is coming soon.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "נִתְרָאֶה בְּקָרוֹב!",
+      "tr": "See you soon!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּקָרוֹב בְּבָתֵּי הַקּוֹלְנוֹעַ",
+      "tr": "Coming soon to cinemas",
+      "register": "neutral",
+      "context": "advertising",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נִתְרָאֶה בְּקָרוֹב",
+      "tr": "see you soon"
+     },
+     {
+      "text": "בְּקָרוֹב מְאֹד",
+      "tr": "very soon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עוֹד מְעַט",
+      "register": "colloquial",
+      "nuance": "“in a little while” — sooner, in the next minutes"
+     },
+     {
+      "word": "תֵּכֶף",
+      "register": "colloquial",
+      "nuance": "“right away, in a moment”"
+     }
+    ],
+    "etymology": {
+     "text": "From בְּ “in” + קָרוֹב “close, near” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “in near”: time is spoken of as distance, as in English “in the near future”."
+    ],
+    "pitfalls": [
+     "Not “near”: קָרוֹב is “near” (lesson 12); בְּקָרוֹב is “soon”."
+    ],
+    "subtleties": [
+     "עוֹד מְעַט and תֵּכֶף are minutes away; בְּקָרוֹב can be days or weeks."
+    ]
+   }
+  },
+  {
+   "id": "he:mukdam",
+   "lemma": "מֻקְדָּם",
+   "pos": "ADV",
+   "senses": [
+    "adv.early",
+    "adj.early"
+   ],
+   "translit": "mukdam",
+   "alts": [
+    "מוקדם"
+   ],
+   "features": {
+    "spelling": "מוקדם",
+    "derivedFrom": "the huf‘al participle of ק־ד־ם (also an adjective)",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "note": "Full spelling מוקדם. Also an adjective (“early, preliminary”).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first bus, an early start.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "early",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.early"
+     },
+     {
+      "id": "s2",
+      "def": "early, preliminary (adjective)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.early"
+     }
+    ],
+    "examples": [
+     {
+      "text": "תַּגִּיעַ מֻקְדָּם!",
+      "tr": "Come early! (to a man)",
+      "register": "colloquial",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא יוֹצֵאת מֻקְדָּם מֵהַבַּיִת.",
+      "tr": "She leaves the house early.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "עוֹד מֻקְדָּם.",
+      "tr": "It’s still early.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֻקְדָּם בַּבֹּקֶר",
+      "tr": "early in the morning"
+     },
+     {
+      "text": "מֻקְדָּם מִדַּי",
+      "tr": "too early"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּהַשְׁכָּמָה",
+      "register": "formal",
+      "nuance": "“early in the morning, at daybreak”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "מְאֻחָר",
+      "note": "late"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ק־ד־ם “before, in front” (as in קֹדֶם “first, before” and קָדִימָה “forward”); Wiktionary gives no etymology of its own.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives קֶדֶם “the east” — where the day begins."
+    ],
+    "pitfalls": [
+     "Full spelling מוקדם; do not confuse unvowelled מקדם with מְקַדֵּם “promotes; coefficient”."
+    ],
+    "subtleties": [
+     "As an adjective it agrees: בְּחִירוֹת מֻקְדָּמוֹת “early elections”."
+    ]
+   }
+  },
+  {
+   "id": "he:meuchar",
+   "lemma": "מְאֻחָר",
+   "pos": "ADV",
+   "senses": [
+    "adv.late",
+    "adj.late"
+   ],
+   "translit": "me'uchar",
+   "alts": [
+    "מאוחר"
+   ],
+   "features": {
+    "spelling": "מאוחר",
+    "derivedFrom": "the pu‘al participle of א־ח־ר (also an adjective)",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "note": "Full spelling מאוחר. To be late (for something) is the verb אִחֵר: הוּא מְאַחֵר “he is late”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary files מְאֻחָר “late, belated” only as an adjective (a page reached through its defective spelling); the only adverb under the same letters is מֵאַחַר “since, because”, another word. מְאֻחָר is the everyday adverb “late” (הוּא חוֹזֵר מְאֻחָר)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last bus, a late dinner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "late",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.late"
+     },
+     {
+      "id": "s2",
+      "def": "late, belated (adjective)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.late"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא חוֹזֵר מְאֻחָר מֵהָעֲבוֹדָה.",
+      "tr": "He comes back late from work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה מְאֻחָר, אֲנִי הוֹלֵךְ.",
+      "tr": "It’s late, I’m off.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "עָדִיף מְאֻחָר מֵאֲשֶׁר אַף פַּעַם.",
+      "tr": "Better late than never.",
+      "register": "neutral",
+      "context": "saying",
+      "sense": "s1"
+     },
+     {
+      "text": "נְדַבֵּר עַל זֶה בְּשָׁלָב מְאֻחָר יוֹתֵר.",
+      "tr": "We will talk about it at a later stage.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְאֻחָר בַּלַּיְלָה",
+      "tr": "late at night"
+     },
+     {
+      "text": "מְאֻחָר מִדַּי",
+      "tr": "too late"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עָדִיף מְאֻחָר מֵאֲשֶׁר אַף פַּעַם",
+      "tr": "better late than never",
+      "kind": "saying",
+      "meaning": "it is better to do something late than not at all",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בְּאִחוּר",
+      "register": "neutral",
+      "nuance": "“with a delay” — a train or a flight that is late"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "מֻקְדָּם",
+      "note": "early"
+     }
+    ],
+    "etymology": {
+     "text": "The past participle of אִחֵר “to be late” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מְאֻחָר and אַחַר “after” share the root א־ח־ר: being late is being “after”."
+    ],
+    "pitfalls": [
+     "“He is late” (not on time) is the verb: הוּא מְאַחֵר — not *הוּא מְאֻחָר.",
+     "Full spelling מאוחר."
+    ],
+    "subtleties": [
+     "מְאֻחָר מִדַּי “too late” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:tamid",
+   "lemma": "תָּמִיד",
+   "pos": "ADV",
+   "senses": [
+    "adv.always"
+   ],
+   "translit": "tamid",
+   "features": {
+    "spelling": "תמיד",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Habits that never change.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "always",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.always"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא תָּמִיד בָּא בַּזְּמַן.",
+      "tr": "He always comes on time.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי תָּמִיד שׁוֹתֶה תֵּה בָּעֶרֶב.",
+      "tr": "I (m.) always drink tea in the evening.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "כְּמוֹ תָּמִיד, הָאוֹטוֹבּוּס מְאַחֵר.",
+      "tr": "As always, the bus is late.",
+      "register": "informal",
+      "context": "transport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּמוֹ תָּמִיד",
+      "tr": "as always"
+     },
+     {
+      "text": "לֹא תָּמִיד",
+      "tr": "not always"
+     },
+     {
+      "text": "לְתָמִיד",
+      "tr": "forever"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כָּל הַזְּמַן",
+      "register": "colloquial",
+      "nuance": "“all the time” — often with a complaint"
+     },
+     {
+      "word": "לְעוֹלָם",
+      "register": "literary",
+      "nuance": "“ever, forever”; with a negation “never”"
+     }
+    ],
+    "etymology": {
+     "text": "Of uncertain origin: Ernest Klein connects it with מוד, related to מדד “to measure” and Arabic مَدَّ “to stretch”; others think of עמד “to stand” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The daily Temple offering was called הַתָּמִיד, “the constant (one)”."
+    ],
+    "pitfalls": [
+     "Usually before the verb: הוּא תָּמִיד בָּא (after the verb is possible, but less common)."
+    ],
+    "subtleties": [
+     "לְתָמִיד “forever” and נֵר תָּמִיד “the eternal light” of a synagogue (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:leitim-krovot",
+   "lemma": "לְעִתִּים קְרוֹבוֹת",
+   "pos": "ADV",
+   "senses": [
+    "adv.often"
+   ],
+   "translit": "le'itim krovot",
+   "alts": [
+    "לעיתים קרובות"
+   ],
+   "features": {
+    "spelling": "לעיתים קרובות",
+    "derivedFrom": "לְ + עִתִּים “times” + קְרוֹבוֹת “near”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "Full spelling לעיתים קרובות. In speech people often just say הַרְבֵּה “a lot”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Things that happen again and again.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "often, frequently",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.often"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לְעִתִּים קְרוֹבוֹת אֲנַחְנוּ נוֹסְעִים לְחֵיפָה.",
+      "tr": "We often travel to Haifa.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא בָּאָה לְכָאן לְעִתִּים קְרוֹבוֹת.",
+      "tr": "She comes here often.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה קוֹרֶה לְעִתִּים קְרוֹבוֹת.",
+      "tr": "It happens often.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְעִתִּים קְרוֹבוֹת מְאֹד",
+      "tr": "very often"
+     },
+     {
+      "text": "לֹא לְעִתִּים קְרוֹבוֹת",
+      "tr": "not often"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הַרְבֵּה",
+      "register": "colloquial",
+      "nuance": "“a lot”: אֲנַחְנוּ נוֹסְעִים הַרְבֵּה לְחֵיפָה"
+     },
+     {
+      "word": "לְעִתִּים תְּכוּפוֹת",
+      "register": "formal",
+      "nuance": "“frequently” — written style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "לְעִתִּים רְחוֹקוֹת",
+      "note": "rarely"
+     }
+    ],
+    "etymology": {
+     "text": "From לְעִתִּים “at times” and קָרוֹב “close, near” (Wiktionary): “at close times”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Time as distance again: “often” is “at near times”, “rarely” “at far times”."
+    ],
+    "pitfalls": [
+     "It sounds a little formal; in conversation הַרְבֵּה is more natural.",
+     "Full spelling לעיתים קרובות."
+    ],
+    "subtleties": [
+     "The opposite is לְעִתִּים רְחוֹקוֹת “rarely”, literally “at far-apart times” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:lifamim",
+   "lemma": "לִפְעָמִים",
+   "pos": "ADV",
+   "senses": [
+    "adv.sometimes"
+   ],
+   "translit": "lif'amim",
+   "features": {
+    "spelling": "לפעמים",
+    "derivedFrom": "לְ + פְּעָמִים “times”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Now and then.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sometimes, at times",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.sometimes"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לִפְעָמִים אֲנִי הוֹלֵךְ בָּרֶגֶל.",
+      "tr": "Sometimes I (m.) walk.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "לִפְעָמִים הוּא מְאַחֵר.",
+      "tr": "Sometimes he is late.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה קוֹרֶה לִפְעָמִים.",
+      "tr": "It happens sometimes.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רַק לִפְעָמִים",
+      "tr": "only sometimes"
+     },
+     {
+      "text": "לִפְעָמִים כֵּן, לִפְעָמִים לֹא",
+      "tr": "sometimes yes, sometimes no"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מִדֵּי פַּעַם",
+      "register": "neutral",
+      "nuance": "“from time to time”"
+     },
+     {
+      "word": "לְעִתִּים",
+      "register": "formal",
+      "nuance": "“at times”"
+     }
+    ],
+    "etymology": {
+     "text": "From לְ “to, for” + פְּעָמִים “times” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Built like German manchmal and Greek μερικές φορές: “(some) times”."
+    ],
+    "pitfalls": [
+     "פְּעָמִים alone is “times” (שָׁלוֹשׁ פְּעָמִים “three times”); with לְ it becomes “sometimes”."
+    ],
+    "subtleties": [
+     "After לְ the פּ softens: lif‘amim."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

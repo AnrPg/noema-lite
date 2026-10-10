@@ -1,0 +1,5136 @@
+{
+ "sentences": [
+  {
+   "id": "zh.f2.001",
+   "frame": "fr.count",
+   "text": "一、二、三、四、五！",
+   "tokens": [
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "二",
+     "l": "zh:er"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "四",
+     "l": "zh:si"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "One, two, three, four, five!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.002",
+   "frame": "fr.count",
+   "text": "六、七、八、九、十！",
+   "tokens": [
+    {
+     "t": "六",
+     "l": "zh:liu"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "七",
+     "l": "zh:qi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "九",
+     "l": "zh:jiu"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十",
+     "l": "zh:shi.num"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Six, seven, eight, nine, ten!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.003",
+   "frame": "fr.count",
+   "text": "十一、十二、十三、十四、十五！",
+   "tokens": [
+    {
+     "t": "十一",
+     "l": "zh:shiyi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十二",
+     "l": "zh:shier"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十三",
+     "l": "zh:shisan"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十四",
+     "l": "zh:shisi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十五",
+     "l": "zh:shiwu"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Eleven, twelve, thirteen, fourteen, fifteen!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.004",
+   "frame": "fr.count",
+   "text": "十六、十七、十八、十九、二十！",
+   "tokens": [
+    {
+     "t": "十六",
+     "l": "zh:shiliu"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十七",
+     "l": "zh:shiqi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十八",
+     "l": "zh:shiba"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "十九",
+     "l": "zh:shijiu"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "二十",
+     "l": "zh:ershi"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Sixteen, seventeen, eighteen, nineteen, twenty!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.005",
+   "frame": "fr.count",
+   "text": "三十、四十、五十、六十、七十、八十、九十、一百！",
+   "tokens": [
+    {
+     "t": "三十",
+     "l": "zh:sanshi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "四十",
+     "l": "zh:sishi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "五十",
+     "l": "zh:wushi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "六十",
+     "l": "zh:liushi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "七十",
+     "l": "zh:qishi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "八十",
+     "l": "zh:bashi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "九十",
+     "l": "zh:jiushi"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "一百",
+     "l": "zh:yibai"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "Thirty, forty, fifty, sixty, seventy, eighty, ninety, a hundred!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.006",
+   "frame": "fr.count",
+   "text": "我二十岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "二十",
+     "l": "zh:ershi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I am twenty (years old).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.007",
+   "frame": "fr.count",
+   "text": "他十八岁，她十九岁。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "十八",
+     "l": "zh:shiba"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "十九",
+     "l": "zh:shijiu"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is eighteen and she is nineteen.",
+   "alts": [
+    "她十九岁，他十八岁。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.008",
+   "frame": "fr.count",
+   "text": "老师五十岁。",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "五十",
+     "l": "zh:wushi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "The teacher is fifty.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.009",
+   "frame": "fr.count",
+   "text": "这个孩子两岁。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This child is two.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.010",
+   "frame": "fr.count",
+   "text": "那个男人四十岁，那个女人三十岁。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "男人",
+     "l": "zh:nanren"
+    },
+    {
+     "t": "四十",
+     "l": "zh:sishi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女人",
+     "l": "zh:nvren"
+    },
+    {
+     "t": "三十",
+     "l": "zh:sanshi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "That man is forty, that woman is thirty.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.011",
+   "frame": "fr.count",
+   "text": "这位老师七十岁。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "七十",
+     "l": "zh:qishi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This teacher is seventy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.012",
+   "frame": "fr.count",
+   "text": "那个人八十岁，不是九十岁。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "八十",
+     "l": "zh:bashi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "九十",
+     "l": "zh:jiushi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "That person is eighty, not ninety.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.013",
+   "frame": "fr.count",
+   "text": "他一百零一岁！",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "一百",
+     "l": "zh:yibai"
+    },
+    {
+     "t": "零",
+     "l": "zh:ling"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a hundred and one!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.014",
+   "frame": "fr.count",
+   "text": "这一千本书都在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "一千",
+     "l": "zh:yiqian"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "All these thousand books are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.015",
+   "frame": "fr.be.person",
+   "text": "那两个人是老师。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "Those two people are teachers.",
+   "variantOf": "zh.f1.062",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.016",
+   "frame": "fr.be.person",
+   "text": "那三个女孩是学生。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女孩",
+     "l": "zh:nvhai"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "Those three girls are students.",
+   "variantOf": "zh.f1.066",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.017",
+   "frame": "fr.be.where",
+   "text": "这两位老师在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "These two teachers are here.",
+   "variantOf": "zh.f1.075",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.018",
+   "frame": "fr.be.where",
+   "text": "那两个孩子在那里。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "Those two children are over there.",
+   "variantOf": "zh.f1.077",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.019",
+   "frame": "fr.thing.here",
+   "text": "这三本书在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "These three books are here.",
+   "variantOf": "zh.f1.095",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.020",
+   "frame": "fr.thing.here",
+   "text": "这五把椅子在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "椅子",
+     "l": "zh:yizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "These five chairs are here.",
+   "variantOf": "zh.f1.105",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.021",
+   "frame": "fr.thing.here",
+   "text": "这十个杯子在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "十",
+     "l": "zh:shi.num"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "These ten cups are here.",
+   "variantOf": "zh.f1.108",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.022",
+   "frame": "fr.be.person",
+   "text": "这十二个学生是朋友。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "十二",
+     "l": "zh:shier"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "These twelve students are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.023",
+   "frame": "fr.thing.here",
+   "text": "那两张桌子在那里。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "Those two tables are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.024",
+   "frame": "fr.thing.here",
+   "text": "这四把钥匙在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "四",
+     "l": "zh:si"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "These four keys are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.025",
+   "frame": "fr.thing.here",
+   "text": "那六张床在那里。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "六",
+     "l": "zh:liu"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "床",
+     "l": "zh:chuang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "Those six beds are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.026",
+   "frame": "fr.count",
+   "text": "这里人很多。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative"
+   ],
+   "gloss": "There are a lot of people here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.027",
+   "frame": "fr.count",
+   "text": "这里人多，那里人少。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "多",
+     "l": "zh:duo"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "少",
+     "l": "zh:shao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative"
+   ],
+   "gloss": "It’s crowded here and quiet over there.",
+   "alts": [
+    "那里人少，这里人多。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.028",
+   "frame": "fr.count",
+   "text": "这里人很少。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "少",
+     "l": "zh:shao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative"
+   ],
+   "gloss": "There are very few people here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.029",
+   "frame": "fr.count",
+   "text": "学生很多，老师不多。",
+   "tokens": [
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "不多",
+     "l": "zh:buduo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals"
+   ],
+   "gloss": "There are many students but not many teachers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.030",
+   "frame": "fr.be.where",
+   "text": "很多学生在那里。",
+   "tokens": [
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Many students are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.031",
+   "frame": "fr.be.person",
+   "text": "我们都是学生。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are all students.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.032",
+   "frame": "fr.be.person",
+   "text": "他们都是老师。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are all teachers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.033",
+   "frame": "fr.be.where",
+   "text": "所有人都在这里。",
+   "tokens": [
+    {
+     "t": "所有",
+     "l": "zh:suoyou"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Everyone is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.034",
+   "frame": "fr.thing.here",
+   "text": "这些书都在这里。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These books are all here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.035",
+   "frame": "fr.be.where",
+   "text": "有些人在这里，有些人在那里。",
+   "tokens": [
+    {
+     "t": "有些",
+     "l": "zh:youxie"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "有些",
+     "l": "zh:youxie"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Some people are here, some are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.036",
+   "frame": "fr.thing.here",
+   "text": "一些书在这里，一些书在那里。",
+   "tokens": [
+    {
+     "t": "一些",
+     "l": "zh:yixie"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "一些",
+     "l": "zh:yixie"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Some books are here, some are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.037",
+   "frame": "fr.greet",
+   "text": "少一点，谢谢！",
+   "tokens": [
+    {
+     "t": "少",
+     "l": "zh:shao"
+    },
+    {
+     "t": "一点",
+     "l": "zh:yidian"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.greetings"
+   ],
+   "gloss": "A bit less, thanks!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.038",
+   "frame": "fr.be.where",
+   "text": "这一千多个学生都在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "一千",
+     "l": "zh:yiqian"
+    },
+    {
+     "t": "多",
+     "l": "zh:duo"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "All these thousand-odd students are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.039",
+   "frame": "fr.be.where",
+   "text": "孩子在这里。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The child is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.040",
+   "frame": "fr.be.where",
+   "text": "孩子们在这里。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The children are here.",
+   "variantOf": "zh.f2.039",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.041",
+   "frame": "fr.be.where",
+   "text": "孩子们都在这里。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The children are all here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.042",
+   "frame": "fr.greet",
+   "text": "孩子们，早上好！",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "早上好",
+     "l": "zh:zaoshanghao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good morning, children!",
+   "alts": [
+    "早上好，孩子们！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.043",
+   "frame": "fr.greet",
+   "text": "朋友们，晚上好！",
+   "tokens": [
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "晚上好",
+     "l": "zh:wanshanghao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good evening, friends!",
+   "alts": [
+    "晚上好，朋友们！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.044",
+   "frame": "fr.greet",
+   "text": "学生们，再见！",
+   "tokens": [
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "再见",
+     "l": "zh:zaijian"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Goodbye, students!",
+   "alts": [
+    "再见，学生们！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.045",
+   "frame": "fr.have",
+   "text": "我有一个哥哥。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have an elder brother.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.046",
+   "frame": "fr.have",
+   "text": "我有两个哥哥。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have two elder brothers.",
+   "variantOf": "zh.f2.045",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.047",
+   "frame": "fr.have",
+   "text": "她有一个妹妹。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She has a younger sister.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.048",
+   "frame": "fr.have",
+   "text": "她有三个妹妹。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She has three younger sisters.",
+   "variantOf": "zh.f2.047",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.049",
+   "frame": "fr.have",
+   "text": "老师有一个女儿。",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word"
+   ],
+   "gloss": "The teacher has a daughter.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.050",
+   "frame": "fr.have",
+   "text": "老师有两个女儿。",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "The teacher has two daughters.",
+   "variantOf": "zh.f2.049",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.051",
+   "frame": "fr.have",
+   "text": "他有三个孩子：两个儿子和一个女儿。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "：",
+     "p": true
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "儿子",
+     "l": "zh:erzi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He has three children: two sons and a daughter.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.052",
+   "frame": "fr.have",
+   "text": "我家有四口人：爸爸、妈妈、哥哥和我。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "四",
+     "l": "zh:si"
+    },
+    {
+     "t": "口",
+     "l": "zh:kou"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "：",
+     "p": true
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "、",
+     "p": true
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "There are four of us in my family: dad, mum, my elder brother and me.",
+   "alts": [
+    "我们家有四口人：爸爸、妈妈、哥哥和我。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.053",
+   "frame": "fr.have",
+   "text": "我们家有五口人。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "口",
+     "l": "zh:kou"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "There are five people in our family.",
+   "alts": [
+    "我家有五口人。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.054",
+   "frame": "fr.have",
+   "text": "我有很多亲戚。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "亲戚",
+     "l": "zh:qinqi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have lots of relatives.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.055",
+   "frame": "fr.have",
+   "text": "爷爷有六个孙子。",
+   "tokens": [
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "六",
+     "l": "zh:liu"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孙子",
+     "l": "zh:sunzi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "Grandpa has six grandsons.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.056",
+   "frame": "fr.have",
+   "text": "外婆有两个外孙女。",
+   "tokens": [
+    {
+     "t": "外婆",
+     "l": "zh:waipo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "外孙女",
+     "l": "zh:waisunnv"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "Grandma (my mother’s mother) has two granddaughters.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.057",
+   "frame": "fr.have",
+   "text": "他们有一个宝宝。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "宝宝",
+     "l": "zh:baobao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They have a baby.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.058",
+   "frame": "fr.have",
+   "text": "我姐姐有一个儿子。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "姐姐",
+     "l": "zh:jiejie"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "儿子",
+     "l": "zh:erzi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word"
+   ],
+   "gloss": "My elder sister has a son.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.059",
+   "frame": "fr.have",
+   "text": "我有一千本书！",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一千",
+     "l": "zh:yiqian"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a thousand books!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.060",
+   "frame": "fr.have",
+   "text": "我妈妈有两个姐妹。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "姐妹",
+     "l": "zh:jiemei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "My mother has two sisters.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.061",
+   "frame": "fr.have",
+   "text": "我叔叔有一个儿子和两个女儿。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "叔叔",
+     "l": "zh:shushu"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "儿子",
+     "l": "zh:erzi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "My uncle (my father’s younger brother) has a son and two daughters.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.062",
+   "frame": "fr.have",
+   "text": "我有三个堂哥。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "堂哥",
+     "l": "zh:tangge"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have three older cousins (sons of my father’s brothers).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.063",
+   "frame": "fr.have",
+   "text": "我有一个表姐和两个表弟。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "表姐",
+     "l": "zh:biaojie"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "表弟",
+     "l": "zh:biaodi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have an older female cousin and two younger male cousins.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.064",
+   "frame": "fr.have",
+   "text": "这个家庭有三个孩子。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "家庭",
+     "l": "zh:jiating"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This family has three children.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.065",
+   "frame": "fr.have",
+   "text": "我舅舅有两个孩子。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "舅舅",
+     "l": "zh:jiujiu"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "My uncle (my mother’s brother) has two children.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.066",
+   "frame": "fr.have",
+   "text": "我有很多书。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a lot of books.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.067",
+   "frame": "fr.have",
+   "text": "你有一把钥匙。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You have a key.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.068",
+   "frame": "fr.have",
+   "text": "我伯伯有两个孙女。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "伯伯",
+     "l": "zh:bobo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孙女",
+     "l": "zh:sunnv"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "My uncle (my father’s elder brother) has two granddaughters.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.069",
+   "frame": "fr.have",
+   "text": "我有一个侄子和两个侄女。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "侄子",
+     "l": "zh:zhizi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "侄女",
+     "l": "zh:zhinv"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.measure.word",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a nephew and two nieces (my brother’s children).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.070",
+   "frame": "fr.poss",
+   "text": "这是我妈妈。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my mother.",
+   "alts": [
+    "这是我的妈妈。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.071",
+   "frame": "fr.poss",
+   "text": "那是我妈妈。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "That is my mother.",
+   "variantOf": "zh.f2.070",
+   "variant": {
+    "Deixis": "FAR"
+   },
+   "alts": [
+    "那是我的妈妈。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.072",
+   "frame": "fr.poss",
+   "text": "这是我母亲。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "母亲",
+     "l": "zh:muqin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my mother. (formal)",
+   "variantOf": "zh.f2.070",
+   "variant": {
+    "Formality": "formal"
+   },
+   "alts": [
+    "这是我的母亲。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.073",
+   "frame": "fr.poss",
+   "text": "这是我爸爸。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my dad.",
+   "alts": [
+    "这是我的爸爸。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.074",
+   "frame": "fr.poss",
+   "text": "这是我父亲。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "父亲",
+     "l": "zh:fuqin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my father. (formal)",
+   "variantOf": "zh.f2.073",
+   "variant": {
+    "Formality": "formal"
+   },
+   "alts": [
+    "这是我的父亲。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.075",
+   "frame": "fr.poss",
+   "text": "这是我爸爸，那是我妈妈。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my dad, that is my mum.",
+   "alts": [
+    "那是我妈妈，这是我爸爸。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.076",
+   "frame": "fr.poss",
+   "text": "这是我的书。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my book.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.077",
+   "frame": "fr.poss",
+   "text": "这些是我的书。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These are my books.",
+   "variantOf": "zh.f2.076",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.078",
+   "frame": "fr.poss",
+   "text": "那是你的钥匙。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "That is your key.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.079",
+   "frame": "fr.poss",
+   "text": "这是他的手机。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is his phone.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.080",
+   "frame": "fr.poss",
+   "text": "这是她的手机。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is her phone.",
+   "variantOf": "zh.f2.079",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.081",
+   "frame": "fr.poss",
+   "text": "这是我丈夫。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "丈夫",
+     "l": "zh:zhangfu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my husband.",
+   "alts": [
+    "这是我的丈夫。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.082",
+   "frame": "fr.poss",
+   "text": "这是我老公。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "老公",
+     "l": "zh:laogong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my hubby. (colloquial)",
+   "variantOf": "zh.f2.081",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.083",
+   "frame": "fr.poss",
+   "text": "这是我妻子。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妻子",
+     "l": "zh:qizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my wife.",
+   "alts": [
+    "这是我的妻子。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.084",
+   "frame": "fr.poss",
+   "text": "这是我老婆。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "老婆",
+     "l": "zh:laopo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my wife. (colloquial)",
+   "variantOf": "zh.f2.083",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.085",
+   "frame": "fr.poss",
+   "text": "这是我们的老师。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is our teacher.",
+   "alts": [
+    "这是我们老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.086",
+   "frame": "fr.poss",
+   "text": "他们的房子在那里。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Their house is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.087",
+   "frame": "fr.poss",
+   "text": "这是我们的宝宝。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "宝宝",
+     "l": "zh:baobao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is our baby.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.088",
+   "frame": "fr.be.person",
+   "text": "我哥哥是老师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.copula"
+   ],
+   "gloss": "My elder brother is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.089",
+   "frame": "fr.count",
+   "text": "我爸爸五十岁，我妈妈四十八岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "五十",
+     "l": "zh:wushi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "四十",
+     "l": "zh:sishi"
+    },
+    {
+     "t": "八",
+     "l": "zh:ba.num"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My father is fifty and my mother forty-eight.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.090",
+   "frame": "fr.be.person",
+   "text": "我的父母都是老师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "父母",
+     "l": "zh:fumu"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.copula"
+   ],
+   "gloss": "My parents are both teachers.",
+   "alts": [
+    "我父母都是老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.091",
+   "frame": "fr.poss",
+   "text": "这位是我伯母。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "伯母",
+     "l": "zh:bomu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is my aunt (the wife of my father’s elder brother).",
+   "alts": [
+    "这位是我的伯母。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.092",
+   "frame": "fr.be.where",
+   "text": "我舅舅和舅妈在这里。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "舅舅",
+     "l": "zh:jiujiu"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "舅妈",
+     "l": "zh:jiuma"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "My uncle and aunt (my mother’s brother and his wife) are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.093",
+   "frame": "fr.be.person",
+   "text": "我姑姑和姑父都是老师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "姑姑",
+     "l": "zh:gugu"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "姑父",
+     "l": "zh:gufu"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.copula"
+   ],
+   "gloss": "My aunt (my father’s sister) and her husband are both teachers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.094",
+   "frame": "fr.poss",
+   "text": "他是我表哥，不是我哥哥。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "表哥",
+     "l": "zh:biaoge"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is my cousin, not my brother.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.095",
+   "frame": "fr.poss",
+   "text": "她是我堂妹。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "堂妹",
+     "l": "zh:tangmei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She is my younger cousin (my father’s brother’s daughter).",
+   "alts": [
+    "她是我的堂妹。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.096",
+   "frame": "fr.poss",
+   "text": "这是我侄子，那是我外甥。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "侄子",
+     "l": "zh:zhizi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "外甥",
+     "l": "zh:waisheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my nephew (my brother’s son), that is my nephew (my sister’s son).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.097",
+   "frame": "fr.count",
+   "text": "我女儿两岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "女儿",
+     "l": "zh:nver"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My daughter is two.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.098",
+   "frame": "fr.be.person",
+   "text": "我们是一家人。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "家人",
+     "l": "zh:jiaren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are one family.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.099",
+   "frame": "fr.be.where",
+   "text": "我家在这里。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "My home is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.100",
+   "frame": "fr.poss",
+   "text": "这是我的家人。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "家人",
+     "l": "zh:jiaren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my family.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.101",
+   "frame": "fr.poss",
+   "text": "他是我的亲戚。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "亲戚",
+     "l": "zh:qinqi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is a relative of mine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.102",
+   "frame": "fr.be.person",
+   "text": "她们是姐妹。",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "姐妹",
+     "l": "zh:jiemei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are sisters.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.103",
+   "frame": "fr.be.person",
+   "text": "他们是兄弟。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "兄弟",
+     "l": "zh:xiongdi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are brothers.",
+   "variantOf": "zh.f2.102",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.104",
+   "frame": "fr.be.where",
+   "text": "我的祖父母都在这里。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "祖父母",
+     "l": "zh:zufumu"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "My grandparents are both here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.105",
+   "frame": "fr.be.person",
+   "text": "我爷爷和外公都是老师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "外公",
+     "l": "zh:waigong"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.copula"
+   ],
+   "gloss": "Both my grandfathers are teachers.",
+   "alts": [
+    "我外公和爷爷都是老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.106",
+   "frame": "fr.poss",
+   "text": "这是我奶奶，那是我外婆。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "外婆",
+     "l": "zh:waipo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my grandmother on my father’s side, that is my grandmother on my mother’s side.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.107",
+   "frame": "fr.poss",
+   "text": "那个婴儿是我的外孙。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "婴儿",
+     "l": "zh:yinger"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "外孙",
+     "l": "zh:waisun"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That baby is my grandson (my daughter’s son).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.108",
+   "frame": "fr.poss",
+   "text": "这是我的孙女。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "孙女",
+     "l": "zh:sunnv"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my granddaughter (my son’s daughter).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.109",
+   "frame": "fr.be.where",
+   "text": "我叔叔和婶婶在那里。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "叔叔",
+     "l": "zh:shushu"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "婶婶",
+     "l": "zh:shenshen"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "My uncle and aunt (my father’s younger brother and his wife) are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.110",
+   "frame": "fr.count",
+   "text": "我伯伯六十岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "伯伯",
+     "l": "zh:bobo"
+    },
+    {
+     "t": "六十",
+     "l": "zh:liushi"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My uncle (my father’s elder brother) is sixty.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.111",
+   "frame": "fr.be.person",
+   "text": "阿姨是我妈妈的妹妹。",
+   "tokens": [
+    {
+     "t": "阿姨",
+     "l": "zh:ayi"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.copula"
+   ],
+   "gloss": "Auntie is my mother’s younger sister.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.112",
+   "frame": "fr.be.where",
+   "text": "我姨父和阿姨都在这里。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "姨父",
+     "l": "zh:yifu"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "阿姨",
+     "l": "zh:ayi"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "My uncle and aunt (my mother’s sister and her husband) are both here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.113",
+   "frame": "fr.count",
+   "text": "我的侄女五岁，我的外甥女三岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "侄女",
+     "l": "zh:zhinv"
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "外甥女",
+     "l": "zh:waishengnv"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My niece (brother’s daughter) is five, my niece (sister’s daughter) is three.",
+   "alts": [
+    "我侄女五岁，我外甥女三岁。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.114",
+   "frame": "fr.be.person",
+   "text": "我的弟弟和妹妹都是学生。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "弟弟",
+     "l": "zh:didi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.copula"
+   ],
+   "gloss": "My younger brother and sister are both students.",
+   "alts": [
+    "我弟弟和妹妹都是学生。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.115",
+   "frame": "fr.poss",
+   "text": "那是我堂姐，这是我表妹。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "堂姐",
+     "l": "zh:tangjie"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "表妹",
+     "l": "zh:biaomei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "That is my older cousin (father’s side), this is my younger cousin (mother’s side).",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.116",
+   "frame": "fr.count",
+   "text": "我堂弟十八岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "堂弟",
+     "l": "zh:tangdi"
+    },
+    {
+     "t": "十八",
+     "l": "zh:shiba"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals"
+   ],
+   "gloss": "My younger cousin (my father’s brother’s son) is eighteen.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.117",
+   "frame": "fr.be.person",
+   "text": "这些孩子都是我的孙子。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "孙子",
+     "l": "zh:sunzi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.numerals",
+    "fn.copula"
+   ],
+   "gloss": "These children are all my grandsons.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.118",
+   "frame": "fr.poss",
+   "text": "这是她的家，不是我的家。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is her home, not mine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f2.119",
+   "frame": "fr.be.person",
+   "text": "我们的孩子都是学生。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.numerals",
+    "fn.copula"
+   ],
+   "gloss": "Our children are all students.",
+   "level": "A1"
+  }
+ ]
+}

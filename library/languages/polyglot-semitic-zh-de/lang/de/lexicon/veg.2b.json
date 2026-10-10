@@ -1,0 +1,2839 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Okra",
+   "lemma": "Okra",
+   "pos": "NOUN",
+   "senses": [
+    "veg.okra"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Okras",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Okra",
+    "N;ACC;SG": "Okra",
+    "N;DAT;SG": "Okra",
+    "N;GEN;SG": "Okra",
+    "N;NOM;PL": "Okras",
+    "N;ACC;PL": "Okras",
+    "N;DAT;PL": "Okras",
+    "N;GEN;PL": "Okras"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Green pods from Greek, Turkish, Arab and Indian kitchens – loved or disliked for their slime.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "okra (Abelmoschus esculentus and its green pods)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.okra",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Okra wird beim Kochen etwas schleimig.",
+      "tr": "Okra gets a little slimy when cooked.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In Griechenland heißen Okras Bamies und werden mit Tomaten geschmort.",
+      "tr": "In Greece okra is called bamies and is stewed with tomatoes.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Im türkischen Supermarkt gibt es frische Okras.",
+      "tr": "There is fresh okra at the Turkish supermarket.",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Okra schmoren",
+      "tr": "to stew okra"
+     },
+     {
+      "text": "Okra mit Tomaten",
+      "tr": "okra with tomatoes"
+     },
+     {
+      "text": "die Okraschote",
+      "tr": "the okra pod"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Bamia",
+      "register": "neutral",
+      "nuance": "the Arabic/Turkish name, used in Turkish and Arabic shops"
+     },
+     {
+      "word": "Gemüse-Eibisch",
+      "register": "technical",
+      "nuance": "botanical name (“vegetable marshmallow”)"
+     }
+    ],
+    "etymology": {
+     "text": "From an unknown West African language, perhaps via English okra.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek μπάμιες, Turkish bamya, Arabic بَامِيَة (bāmiya) and Hebrew בַּמְיָה (bamya) are all the same word – German Bamia comes from it too."
+    ],
+    "pitfalls": [
+     "Plural Okras; one pod is eine Okra or eine Okraschote."
+    ],
+    "subtleties": [
+     "The slime (mucilage) is wanted in some dishes as a thickener and avoided in others by frying the pods or adding acid."
+    ]
+   }
+  },
+  {
+   "id": "de:Ackerbohne",
+   "lemma": "Ackerbohne",
+   "pos": "NOUN",
+   "senses": [
+    "veg.broadbean"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ackerbohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Acker",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Ackerbohne",
+    "N;ACC;SG": "Ackerbohne",
+    "N;DAT;SG": "Ackerbohne",
+    "N;GEN;SG": "Ackerbohne",
+    "N;NOM;PL": "Ackerbohnen",
+    "N;ACC;PL": "Ackerbohnen",
+    "N;DAT;PL": "Ackerbohnen",
+    "N;GEN;PL": "Ackerbohnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An old European field crop: big green beans, peasant food and modern plant protein.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "broad bean, fava bean (Vicia faba)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.broadbean",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Ackerbohne ist eine sehr alte Kulturpflanze.",
+      "tr": "The broad bean is a very old crop.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Junge Ackerbohnen schmecken frisch und leicht süß.",
+      "tr": "Young broad beans taste fresh and slightly sweet.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Supermarkt heißen Ackerbohnen meistens „dicke Bohnen“.",
+      "tr": "In the supermarket broad beans are usually called “dicke Bohnen”.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "junge Ackerbohnen",
+      "tr": "young broad beans"
+     },
+     {
+      "text": "Ackerbohnen aus der Schote lösen",
+      "tr": "to shell broad beans"
+     },
+     {
+      "text": "das Ackerbohnenmehl",
+      "tr": "broad bean flour"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "dicke Bohne",
+      "register": "neutral",
+      "nuance": "the usual name in cooking and shops, especially in western Germany"
+     },
+     {
+      "word": "Saubohne",
+      "register": "regional",
+      "nuance": "name in Austria and southern Germany, where the bean was mostly fodder",
+      "region": "AT, south"
+     },
+     {
+      "word": "große Bohne",
+      "register": "neutral",
+      "nuance": "another descriptive name"
+     }
+    ],
+    "etymology": {
+     "text": "Acker (“field”, from Old High German ackar) + Bohne (“bean”, from Old High German bōna, cognate with English bean).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic فُول (fūl), as in the Egyptian dish fūl medames, and Hebrew פּוֹל (pol) name this bean; Greek says κουκιά, Turkish bakla."
+    ],
+    "pitfalls": [
+     "Some people with an inherited enzyme deficiency (G6PD) must not eat them: favism.",
+     "Do not confuse with grüne Bohnen (green beans, Bohne in veg.1)."
+    ],
+    "subtleties": [
+     "Before the Phaseolus beans arrived from America, this was the bean of Europe."
+    ]
+   }
+  },
+  {
+   "id": "de:Bittermelone",
+   "lemma": "Bittermelone",
+   "pos": "NOUN",
+   "senses": [
+    "veg.bittermelon"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bittermelonen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "bitter",
+      "role": "modifier"
+     },
+     {
+      "part": "Melone",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Bittermelone",
+    "N;ACC;SG": "Bittermelone",
+    "N;DAT;SG": "Bittermelone",
+    "N;GEN;SG": "Bittermelone",
+    "N;NOM;PL": "Bittermelonen",
+    "N;ACC;PL": "Bittermelonen",
+    "N;DAT;PL": "Bittermelonen",
+    "N;GEN;PL": "Bittermelonen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wrinkled green gourd of Asian cooking – bitter on purpose.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bitter melon, bitter gourd (Momordica charantia)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.bittermelon",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Bittermelone ist grün und hat eine warzige Schale.",
+      "tr": "The bitter melon is green and has a warty skin.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "Bittermelone ist so bitter, dass man sie vor dem Kochen oft salzt.",
+      "tr": "Bitter melon is so bitter that people often salt it before cooking.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In Okinawa brät man Bittermelone mit Tofu und Ei.",
+      "tr": "In Okinawa bitter melon is stir-fried with tofu and egg.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Bittermelone salzen",
+      "tr": "to salt bitter melon"
+     },
+     {
+      "text": "gebratene Bittermelone",
+      "tr": "stir-fried bitter melon"
+     },
+     {
+      "text": "Bittermelone mit Ei",
+      "tr": "bitter melon with egg"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Bittergurke",
+      "register": "neutral",
+      "nuance": "equally common name (“bitter cucumber”)"
+     },
+     {
+      "word": "Goya-Gurke",
+      "register": "neutral",
+      "nuance": "after the Okinawan name goya"
+     }
+    ],
+    "etymology": {
+     "text": "From bitter + Melone; Melone is from Italian melone and Middle French melon, from Late Latin mēlō, from Ancient Greek μηλοπέπων (mēlopépōn).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 苦瓜 (kǔguā) also means literally “bitter melon”."
+    ],
+    "pitfalls": [
+     "It is not a sweet melon: it is cooked as a vegetable."
+    ],
+    "subtleties": [
+     "The bitterness is valued in Asian cooking and traditional medicine rather than hidden."
+    ]
+   }
+  },
+  {
+   "id": "de:Flaschenkürbis",
+   "lemma": "Flaschenkürbis",
+   "pos": "NOUN",
+   "senses": [
+    "veg.bottlegourd"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Flaschenkürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Flasche",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Flaschenkürbis",
+    "N;ACC;SG": "Flaschenkürbis",
+    "N;DAT;SG": "Flaschenkürbis",
+    "N;GEN;SG": "Flaschenkürbisses",
+    "N;NOM;PL": "Flaschenkürbisse",
+    "N;ACC;PL": "Flaschenkürbisse",
+    "N;DAT;PL": "Flaschenkürbissen",
+    "N;GEN;PL": "Flaschenkürbisse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Gourds turned into bottles, bowls and drums; a mild vegetable when young.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bottle gourd, calabash (Lagenaria siceraria)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.bottlegourd",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Aus getrockneten Flaschenkürbissen macht man Gefäße und Instrumente.",
+      "tr": "Containers and instruments are made from dried bottle gourds.",
+      "register": "neutral",
+      "context": "crafts",
+      "sense": "s1"
+     },
+     {
+      "text": "Junge Flaschenkürbisse kann man wie Zucchini kochen.",
+      "tr": "Young bottle gourds can be cooked like courgettes.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In Indien heißt der Flaschenkürbis Lauki.",
+      "tr": "In India the bottle gourd is called lauki.",
+      "register": "neutral",
+      "context": "international food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "junger Flaschenkürbis",
+      "tr": "young bottle gourd"
+     },
+     {
+      "text": "getrockneter Flaschenkürbis",
+      "tr": "dried bottle gourd"
+     },
+     {
+      "text": "ein Gefäß aus einem Flaschenkürbis",
+      "tr": "a vessel made from a bottle gourd"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kalebasse",
+      "register": "neutral",
+      "nuance": "especially the dried fruit used as a container or instrument"
+     }
+    ],
+    "etymology": {
+     "text": "From Flasche (“bottle”) + -n- + Kürbis (“gourd, pumpkin”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is one of the oldest cultivated plants, used as a container long before pottery; Chinese calls it 葫芦 (húlu)."
+    ],
+    "pitfalls": [
+     "Masculine like Kürbis: der Flaschenkürbis, des Flaschenkürbisses, plural die Flaschenkürbisse."
+    ],
+    "subtleties": [
+     "Only young, tender fruits are eaten; ripe ones become hard and woody."
+    ]
+   }
+  },
+  {
+   "id": "de:Artischocke",
+   "lemma": "Artischocke",
+   "pos": "NOUN",
+   "senses": [
+    "veg.artichoke"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Artischocken",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Artischocke",
+    "N;ACC;SG": "Artischocke",
+    "N;DAT;SG": "Artischocke",
+    "N;GEN;SG": "Artischocke",
+    "N;NOM;PL": "Artischocken",
+    "N;ACC;PL": "Artischocken",
+    "N;DAT;PL": "Artischocken",
+    "N;GEN;PL": "Artischocken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mediterranean delicacy: leaf by leaf, dipped in sauce, down to the tender heart.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artichoke (the edible flower bud of Cynara cardunculus var. scolymus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.artichoke",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Bei der Artischocke isst man den unteren Teil der Blätter und den Boden.",
+      "tr": "With an artichoke you eat the lower part of the leaves and the base.",
+      "register": "neutral",
+      "context": "eating",
+      "sense": "s1"
+     },
+     {
+      "text": "Artischockenherzen aus dem Glas passen gut auf die Pizza.",
+      "tr": "Artichoke hearts from a jar go well on pizza.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Artischocke ist eigentlich eine Blütenknospe.",
+      "tr": "The artichoke is actually a flower bud.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Artischockenherz",
+      "tr": "the artichoke heart"
+     },
+     {
+      "text": "der Artischockenboden",
+      "tr": "the artichoke bottom"
+     },
+     {
+      "text": "Artischocken dämpfen",
+      "tr": "to steam artichokes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in German.",
+    "etymology": {
+     "text": "From Northern Italian articiocco, from Provençal archichaut, from Old Spanish alcarchofa, from Andalusian Arabic الْخَرْشُوف (al-ḵaršūf), from Arabic الْخُرْشُوف (al-ḵuršūf).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word goes back to Arabic (al-)ḵuršūf; Hebrew has the related חֻרְשָׁף (ḥuršaf), Greek αγκινάρα, Turkish enginar."
+    ],
+    "pitfalls": [
+     "Plural Artischocken. The hairy “choke” inside (das Heu) is not eaten."
+    ],
+    "subtleties": [
+     "The bitter Italian liqueur Cynar is made with artichoke and named after its Latin name Cynara."
+    ]
+   }
+  },
+  {
+   "id": "de:Kohlrabi",
+   "lemma": "Kohlrabi",
+   "pos": "NOUN",
+   "senses": [
+    "veg.kohlrabi"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kohlrabis",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word (from Italian cavoli rape)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kohlrabi",
+    "N;ACC;SG": "Kohlrabi",
+    "N;DAT;SG": "Kohlrabi",
+    "N;GEN;SG": "Kohlrabis",
+    "N;NOM;PL": "Kohlrabis",
+    "N;ACC;PL": "Kohlrabis",
+    "N;DAT;PL": "Kohlrabis",
+    "N;GEN;PL": "Kohlrabis"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A typically German vegetable: crunchy, mild, eaten raw as a snack or in a light sauce.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kohlrabi (Brassica oleracea var. gongylodes)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kohlrabi",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Kohlrabi kann man roh als Snack essen.",
+      "tr": "You can eat kohlrabi raw as a snack.",
+      "register": "neutral",
+      "context": "snacks",
+      "sense": "s1"
+     },
+     {
+      "text": "Beim Kohlrabi wächst die Knolle über der Erde.",
+      "tr": "With kohlrabi the bulb grows above the ground.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute koche ich Kohlrabi in einer hellen Soße.",
+      "tr": "Today I am cooking kohlrabi in a white sauce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kohlrabi schälen",
+      "tr": "to peel kohlrabi"
+     },
+     {
+      "text": "das Kohlrabigemüse",
+      "tr": "kohlrabi in sauce (as a dish)"
+     },
+     {
+      "text": "roher Kohlrabi",
+      "tr": "raw kohlrabi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kohlrübe",
+      "register": "regional",
+      "nuance": "Austrian name for kohlrabi (elsewhere Kohlrübe means rutabaga)",
+      "region": "AT"
+     }
+    ],
+    "etymology": {
+     "text": "From Italian cavoli rape, plural of cavolo rapa; the first element was altered after Kohl (“cabbage”), which is cognate with the Italian through Latin caulis.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English kohlrabi and Russian кольраби were borrowed from German."
+    ],
+    "pitfalls": [
+     "Masculine: der Kohlrabi, plural die Kohlrabis."
+    ],
+    "subtleties": [
+     "The “bulb” is a thickened stem, not a root."
+    ]
+   }
+  },
+  {
+   "id": "de:Rosenkohl",
+   "lemma": "Rosenkohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.brusselssprout"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Rose",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Rosenkohl",
+    "N;ACC;SG": "Rosenkohl",
+    "N;DAT;SG": "Rosenkohl",
+    "N;GEN;SG": "Rosenkohls"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Kohlsprossen",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Little green rosettes – the childhood vegetable many people hated, now milder and back in fashion.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Brussels sprout(s)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.brusselssprout",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Viele Kinder mögen keinen Rosenkohl.",
+      "tr": "Many children don’t like Brussels sprouts.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     },
+     {
+      "text": "Rosenkohl schmeckt nach dem ersten Frost milder.",
+      "tr": "Brussels sprouts taste milder after the first frost.",
+      "register": "neutral",
+      "context": "seasonal food",
+      "sense": "s1"
+     },
+     {
+      "text": "In Österreich heißt Rosenkohl Kohlsprossen.",
+      "tr": "In Austria Brussels sprouts are called Kohlsprossen.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Rosenkohl putzen",
+      "tr": "to trim Brussels sprouts"
+     },
+     {
+      "text": "ein Röschen Rosenkohl",
+      "tr": "one Brussels sprout"
+     },
+     {
+      "text": "Rosenkohl mit Butter",
+      "tr": "Brussels sprouts with butter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kohlsprossen",
+      "register": "regional",
+      "nuance": "the Austrian word (die Kohlsprossen, plural)",
+      "region": "AT"
+     }
+    ],
+    "etymology": {
+     "text": "Rose + -n- + Kohl. Named after the rose-shaped part that is eaten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English and French name it after Brussels (Brussels sprouts, choux de Bruxelles); German names it after its rose-like shape."
+    ],
+    "pitfalls": [
+     "No plural: Rosenkohl is uncountable; one sprout is ein Röschen or ein Rosenkohlröschen."
+    ],
+    "subtleties": [
+     "Newer varieties are less bitter than the ones many adults remember from childhood."
+    ]
+   }
+  },
+  {
+   "id": "de:Chayote",
+   "lemma": "Chayote",
+   "pos": "NOUN",
+   "senses": [
+    "veg.chayote"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Chayoten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Chayote",
+    "N;ACC;SG": "Chayote",
+    "N;DAT;SG": "Chayote",
+    "N;GEN;SG": "Chayote",
+    "N;NOM;PL": "Chayoten",
+    "N;ACC;PL": "Chayoten",
+    "N;DAT;PL": "Chayoten",
+    "N;GEN;PL": "Chayoten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A pale-green, pear-shaped gourd from Central America and the Caribbean; mild and crunchy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chayote (Sechium edule and its fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chayote",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Chayote ist birnenförmig und hellgrün.",
+      "tr": "The chayote is pear-shaped and light green.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Karibik nennt man die Chayote auch Christophine.",
+      "tr": "In the Caribbean the chayote is also called christophine.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     },
+     {
+      "text": "Chayoten kann man roh in den Salat reiben oder kochen.",
+      "tr": "Chayotes can be grated raw into salad or cooked.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Chayote schälen",
+      "tr": "to peel chayote"
+     },
+     {
+      "text": "gefüllte Chayoten",
+      "tr": "stuffed chayotes"
+     },
+     {
+      "text": "gekochte Chayote",
+      "tr": "boiled chayote"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Christophine",
+      "register": "regional",
+      "nuance": "the Caribbean name, also used in German"
+     }
+    ],
+    "etymology": {
+     "text": "From Spanish chayote, from Classical Nahuatl chayohtli (Wiktionary, English entry chayote).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The fruit contains a single large, flat seed."
+    ],
+    "pitfalls": [
+     "Feminine: die Chayote, plural die Chayoten; pronounced tscha-JO-te."
+    ],
+    "subtleties": [
+     "It belongs to the gourd family, like Kürbis and Gurke."
+    ]
+   }
+  },
+  {
+   "id": "de:Wachskürbis",
+   "lemma": "Wachskürbis",
+   "pos": "NOUN",
+   "senses": [
+    "veg.wintermelon"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wachskürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Wachs",
+      "role": "modifier"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wachskürbis",
+    "N;ACC;SG": "Wachskürbis",
+    "N;DAT;SG": "Wachskürbis",
+    "N;GEN;SG": "Wachskürbisses",
+    "N;NOM;PL": "Wachskürbisse",
+    "N;ACC;PL": "Wachskürbisse",
+    "N;DAT;PL": "Wachskürbissen",
+    "N;GEN;PL": "Wachskürbisse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A huge pale gourd from Chinese cooking, used in clear soups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winter melon, ash gourd (Benincasa hispida)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wintermelon",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Wachskürbis hat eine weiße, wachsartige Schicht auf der Schale.",
+      "tr": "The winter melon has a white, waxy layer on its skin.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein ganzer Wachskürbis hält sich monatelang.",
+      "tr": "A whole winter melon keeps for months.",
+      "register": "neutral",
+      "context": "storage",
+      "sense": "s1"
+     },
+     {
+      "text": "In China kocht man Suppe mit Wachskürbis.",
+      "tr": "In China soup is cooked with winter melon.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Stück Wachskürbis",
+      "tr": "a piece of winter melon"
+     },
+     {
+      "text": "Wachskürbis schälen",
+      "tr": "to peel winter melon"
+     },
+     {
+      "text": "die Wachskürbissuppe",
+      "tr": "winter melon soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wintermelone",
+      "register": "neutral",
+      "nuance": "translated from the English name"
+     }
+    ],
+    "etymology": {
+     "text": "From Wachs (“wax”) + Kürbis (“gourd, pumpkin”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 冬瓜 (dōngguā) means “winter melon” – it keeps until winter."
+    ],
+    "pitfalls": [
+     "Masculine like Kürbis: der Wachskürbis, des Wachskürbisses, plural die Wachskürbisse."
+    ],
+    "subtleties": [
+     "Despite the English name winter melon it is not sweet; it is cooked as a vegetable."
+    ]
+   }
+  },
+  {
+   "id": "de:Schwammgurke",
+   "lemma": "Schwammgurke",
+   "pos": "NOUN",
+   "senses": [
+    "veg.luffa"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schwammgurken",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Schwamm",
+      "role": "modifier"
+     },
+     {
+      "part": "Gurke",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Schwammgurke",
+    "N;ACC;SG": "Schwammgurke",
+    "N;DAT;SG": "Schwammgurke",
+    "N;GEN;SG": "Schwammgurke",
+    "N;NOM;PL": "Schwammgurken",
+    "N;ACC;PL": "Schwammgurken",
+    "N;DAT;PL": "Schwammgurken",
+    "N;GEN;PL": "Schwammgurken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "From vegetable to bath sponge: a gourd that turns into a natural scrubber.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "luffa, sponge gourd (Luffa)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.luffa",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Aus der getrockneten Schwammgurke macht man einen Luffaschwamm.",
+      "tr": "A loofah sponge is made from the dried sponge gourd.",
+      "register": "neutral",
+      "context": "household",
+      "sense": "s1"
+     },
+     {
+      "text": "Junge Schwammgurken isst man in Asien als Gemüse.",
+      "tr": "In Asia young sponge gourds are eaten as a vegetable.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Schwammgurke wächst an langen Ranken.",
+      "tr": "The sponge gourd grows on long tendrils.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Luffaschwamm",
+      "tr": "loofah sponge"
+     },
+     {
+      "text": "junge Schwammgurken",
+      "tr": "young sponge gourds"
+     },
+     {
+      "text": "getrocknete Schwammgurke",
+      "tr": "dried sponge gourd"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Luffa",
+      "register": "neutral",
+      "nuance": "the botanical and trade name, best known from bath sponges"
+     }
+    ],
+    "etymology": {
+     "text": "From Schwamm (“sponge”) + Gurke (“cucumber”); Gurke is borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Luffa comes from Arabic لُوفَة (lūfa), the same word as English loofah."
+    ],
+    "pitfalls": [
+     "Feminine because of Gurke: die Schwammgurke, plural die Schwammgurken."
+    ],
+    "subtleties": [
+     "Only young fruits are edible; ripe ones dry into a fibrous net – the sponge."
+    ]
+   }
+  },
+  {
+   "id": "de:Grünkohl",
+   "lemma": "Grünkohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.kale",
+    "food.kalestew"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Grünkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "grün",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Grünkohl",
+    "N;ACC;SG": "Grünkohl",
+    "N;DAT;SG": "Grünkohl",
+    "N;GEN;SG": "Grünkohls",
+    "N;NOM;PL": "Grünkohle",
+    "N;ACC;PL": "Grünkohle",
+    "N;DAT;PL": "Grünkohlen",
+    "N;GEN;PL": "Grünkohle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Northern German winter tradition – kale tours, sausage and schnapps – and a modern superfood.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kale (Brassica oleracea var. sabellica)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kale",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "kale stew, a winter dish of northern Germany",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.kalestew"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Grünkohl schmeckt nach dem ersten Frost am besten.",
+      "tr": "Kale tastes best after the first frost.",
+      "register": "neutral",
+      "context": "seasonal food",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Winter machen wir mit Freunden eine Kohlfahrt und essen danach Grünkohl mit Pinkel.",
+      "tr": "In winter we go on a kale tour with friends and then eat kale with Pinkel sausage.",
+      "register": "informal",
+      "context": "regional custom",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute gibt es bei uns Grünkohl.",
+      "tr": "Today we are having kale stew.",
+      "register": "informal",
+      "context": "home cooking",
+      "sense": "s2"
+     },
+     {
+      "text": "Grünkohl ist inzwischen auch als Superfood beliebt.",
+      "tr": "Kale has now also become popular as a superfood.",
+      "register": "neutral",
+      "context": "food trends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Grünkohl mit Pinkel",
+      "tr": "kale with Pinkel sausage"
+     },
+     {
+      "text": "die Kohlfahrt",
+      "tr": "kale tour (winter outing)"
+     },
+     {
+      "text": "die Grünkohl-Chips",
+      "tr": "kale chips"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Braunkohl",
+      "register": "regional",
+      "nuance": "regional name in parts of northern Germany"
+     },
+     {
+      "word": "Federkohl",
+      "register": "neutral",
+      "nuance": "less common name, after the feathery leaves"
+     },
+     {
+      "word": "norddeutsche Palme",
+      "register": "humorous",
+      "nuance": "joking name: the tall plant as the “palm tree of northern Germany”"
+     }
+    ],
+    "etymology": {
+     "text": "grün (“green”) + Kohl (“cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "On a Kohlfahrt groups walk through the winter countryside with a handcart of drinks, then eat kale; the best eater may be crowned Kohlkönig."
+    ],
+    "pitfalls": [
+     "The plural Grünkohle is rare; normally uncountable."
+    ],
+    "subtleties": [
+     "In northern Germany Grünkohl also means the whole dish (kale stewed with sausage): Heute gibt es Grünkohl."
+    ]
+   }
+  },
+  {
+   "id": "de:Pak_Choi",
+   "lemma": "Pak Choi",
+   "pos": "NOUN",
+   "senses": [
+    "veg.bokchoy"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Pak Chois",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "two words (from Cantonese), not a German compound"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Pak Choi",
+    "N;ACC;SG": "Pak Choi",
+    "N;DAT;SG": "Pak Choi",
+    "N;GEN;SG": "Pak Chois",
+    "N;NOM;PL": "Pak Chois",
+    "N;ACC;PL": "Pak Chois",
+    "N;DAT;PL": "Pak Chois",
+    "N;GEN;PL": "Pak Chois"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asian stir-fries with crunchy white stalks; now grown and sold in Germany too.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bok choy, pak choi (Brassica rapa subsp. chinensis)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.bokchoy",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Pak Choi brät man kurz im Wok mit Knoblauch und Ingwer.",
+      "tr": "Pak choi is briefly stir-fried in the wok with garlic and ginger.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Den Pak Choi längs halbieren und gut waschen.",
+      "tr": "Halve the pak choi lengthwise and wash it well.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Bioladen gibt es jetzt auch Pak Choi aus der Region.",
+      "tr": "The organic shop now also has local pak choi.",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Pak Choi im Wok",
+      "tr": "pak choi in the wok"
+     },
+     {
+      "text": "gebratener Pak Choi",
+      "tr": "stir-fried pak choi"
+     },
+     {
+      "text": "der Baby-Pak-Choi",
+      "tr": "baby pak choi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Pak-Choi",
+      "register": "neutral",
+      "nuance": "hyphenated spelling of the same word"
+     },
+     {
+      "word": "Pok Choi",
+      "register": "neutral",
+      "nuance": "alternative spelling"
+     }
+    ],
+    "etymology": {
+     "text": "Like English bok choy (Wiktionary): borrowed from Cantonese 白菜 (baak⁶ coi³, “white vegetable”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Mandarin 白菜 (báicài) usually means napa cabbage (Chinakohl) – the same characters, a different vegetable."
+    ],
+    "pitfalls": [
+     "Two words, masculine: der Pak Choi, des Pak Chois, plural die Pak Chois. Also spelled Pak-Choi or Pok Choi."
+    ],
+    "subtleties": [
+     "Both leaves and stalks are eaten; the white stalks stay crunchy when cooked briefly."
+    ]
+   }
+  },
+  {
+   "id": "de:Chinakohl",
+   "lemma": "Chinakohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.napacabbage"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Chinakohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "China",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Chinakohl",
+    "N;ACC;SG": "Chinakohl",
+    "N;DAT;SG": "Chinakohl",
+    "N;GEN;SG": "Chinakohls",
+    "N;NOM;PL": "Chinakohle",
+    "N;ACC;PL": "Chinakohle",
+    "N;DAT;PL": "Chinakohlen",
+    "N;GEN;PL": "Chinakohle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mild, juicy, pale-green cabbage: salads, stir-fries and kimchi.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Napa cabbage, Chinese cabbage (Brassica rapa subsp. pekinensis)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.napacabbage",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Chinakohl ist zarter als Weißkohl.",
+      "tr": "Napa cabbage is more tender than white cabbage.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "Aus Chinakohl macht man in Korea Kimchi.",
+      "tr": "In Korea kimchi is made from napa cabbage.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich schneide den Chinakohl in feine Streifen für den Salat.",
+      "tr": "I cut the napa cabbage into fine strips for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Kopf Chinakohl",
+      "tr": "a head of napa cabbage"
+     },
+     {
+      "text": "der Chinakohlsalat",
+      "tr": "napa cabbage salad"
+     },
+     {
+      "text": "Chinakohl in Streifen",
+      "tr": "napa cabbage in strips"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Pekingkohl",
+      "register": "neutral",
+      "nuance": "older name, “Peking cabbage”"
+     }
+    ],
+    "etymology": {
+     "text": "China + Kohl (“cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 大白菜 (dàbáicài, “big white vegetable”) is a winter staple of northern China."
+    ],
+    "pitfalls": [
+     "Plural Chinakohle for several heads, but usually: zwei Köpfe Chinakohl."
+    ],
+    "subtleties": [
+     "Unlike white cabbage it is tender enough to eat raw without long preparation."
+    ]
+   }
+  },
+  {
+   "id": "de:Jalapeño",
+   "lemma": "Jalapeño",
+   "pos": "NOUN",
+   "senses": [
+    "veg.jalapeno"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jalapeños",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Jalapeño",
+    "N;ACC;SG": "Jalapeño",
+    "N;DAT;SG": "Jalapeño",
+    "N;GEN;SG": "Jalapeños",
+    "N;NOM;PL": "Jalapeños",
+    "N;ACC;PL": "Jalapeños",
+    "N;DAT;PL": "Jalapeños",
+    "N;GEN;PL": "Jalapeños"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tex-Mex heat: nachos, burgers and pickled green slices.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "jalapeño (a medium-hot chilli pepper)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.jalapeno",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Jalapeños sind mittelscharf.",
+      "tr": "Jalapeños are medium hot.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf die Nachos kommen Käse und Jalapeños.",
+      "tr": "Cheese and jalapeños go on the nachos.",
+      "register": "neutral",
+      "context": "snacks",
+      "sense": "s1"
+     },
+     {
+      "text": "Geräucherte Jalapeños heißen Chipotle.",
+      "tr": "Smoked jalapeños are called chipotle.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eingelegte Jalapeños",
+      "tr": "pickled jalapeños"
+     },
+     {
+      "text": "gefüllte Jalapeños",
+      "tr": "stuffed jalapeños"
+     },
+     {
+      "text": "ein Glas Jalapeños",
+      "tr": "a jar of jalapeños"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No German synonym; it is a kind of Chili or Chilischote.",
+    "etymology": {
+     "text": "Borrowed from Spanish jalapeño, from Jalapa (the city of Xalapa in Veracruz, Mexico) + the adjective suffix -eño (Wiktionary, Spanish entry; Duden: “after the Mexican city”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The city name Xalapa comes from Nahuatl, from xalli (“sand”) and atl (“water”)."
+    ],
+    "pitfalls": [
+     "Masculine (der Jalapeño, Duden); plural die Jalapeños. The ñ is often written n in shops (Jalapeno)."
+    ],
+    "subtleties": [
+     "Pronounced the Spanish way: cha-la-PE-njo."
+    ]
+   }
+  },
+  {
+   "id": "de:Rotkohl",
+   "lemma": "Rotkohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.redcabbage"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Rotkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "rot",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Rotkohl",
+    "N;ACC;SG": "Rotkohl",
+    "N;DAT;SG": "Rotkohl",
+    "N;GEN;SG": "Rotkohls",
+    "N;NOM;PL": "Rotkohle",
+    "N;ACC;PL": "Rotkohle",
+    "N;DAT;PL": "Rotkohlen",
+    "N;GEN;PL": "Rotkohle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Blaukraut",
+     "region": "Bavaria, AT"
+    },
+    {
+     "lemma": "Rotkraut",
+     "region": "west, south-west"
+    }
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Christmas dinner: braised red cabbage with apples next to roast goose and dumplings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red cabbage",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.redcabbage",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zu Rotkohl gibt es bei uns Klöße und Gänsebraten.",
+      "tr": "At our house red cabbage comes with dumplings and roast goose.",
+      "register": "neutral",
+      "context": "festive food",
+      "sense": "s1"
+     },
+     {
+      "text": "Rotkohl wird mit Essig rot und mit Natron blau.",
+      "tr": "Red cabbage turns red with vinegar and blue with baking soda.",
+      "register": "neutral",
+      "context": "science",
+      "sense": "s1"
+     },
+     {
+      "text": "In Bayern sagt man Blaukraut statt Rotkohl.",
+      "tr": "In Bavaria people say Blaukraut instead of Rotkohl.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Rotkohl mit Äpfeln",
+      "tr": "red cabbage with apples"
+     },
+     {
+      "text": "ein Kopf Rotkohl",
+      "tr": "a head of red cabbage"
+     },
+     {
+      "text": "Rotkohl schmoren",
+      "tr": "to braise red cabbage"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Blaukraut",
+      "register": "regional",
+      "nuance": "the word in Bavaria and Austria",
+      "region": "Bavaria, AT"
+     },
+     {
+      "word": "Rotkraut",
+      "register": "regional",
+      "nuance": "used in the west and south-west",
+      "region": "west, south-west"
+     },
+     {
+      "word": "Blaukohl",
+      "register": "regional",
+      "nuance": "rarer regional name"
+     }
+    ],
+    "etymology": {
+     "text": "From rot (“red”) + Kohl (“cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Red cabbage juice is a natural pH indicator – a classic school experiment."
+    ],
+    "pitfalls": [
+     "The plural Rotkohle is rare; say zwei Köpfe Rotkohl."
+    ],
+    "subtleties": [
+     "The regional split Rotkohl / Rotkraut / Blaukraut is one of the best-known maps of German regional words."
+    ]
+   }
+  },
+  {
+   "id": "de:Feuerbohne",
+   "lemma": "Feuerbohne",
+   "pos": "NOUN",
+   "senses": [
+    "veg.runnerbean"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Feuerbohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Feuer",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Feuerbohne",
+    "N;ACC;SG": "Feuerbohne",
+    "N;DAT;SG": "Feuerbohne",
+    "N;GEN;SG": "Feuerbohne",
+    "N;NOM;PL": "Feuerbohnen",
+    "N;ACC;PL": "Feuerbohnen",
+    "N;DAT;PL": "Feuerbohnen",
+    "N;GEN;PL": "Feuerbohnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Käferbohne",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Scarlet flowers climbing up a garden fence; big speckled beans from Styria.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "runner bean, scarlet runner bean (Phaseolus coccineus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.runnerbean",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Feuerbohne hat leuchtend rote Blüten.",
+      "tr": "The runner bean has bright red flowers.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Steiermark isst man Käferbohnen, das sind Feuerbohnen.",
+      "tr": "In Styria people eat Käferbohnen, which are runner beans.",
+      "register": "neutral",
+      "context": "regional food",
+      "sense": "s1"
+     },
+     {
+      "text": "Feuerbohnen darf man nie roh essen.",
+      "tr": "You must never eat runner beans raw.",
+      "register": "neutral",
+      "context": "food safety",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Feuerbohnen kochen",
+      "tr": "to cook runner beans"
+     },
+     {
+      "text": "Feuerbohnen anbauen",
+      "tr": "to grow runner beans"
+     },
+     {
+      "text": "gekochte Feuerbohnen",
+      "tr": "cooked runner beans"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Käferbohne",
+      "register": "regional",
+      "nuance": "the Austrian word, especially in Styria",
+      "region": "AT"
+     },
+     {
+      "word": "Prunkbohne",
+      "register": "neutral",
+      "nuance": "garden name, after the showy flowers"
+     }
+    ],
+    "etymology": {
+     "text": "From Feuer (“fire”) + Bohne (“bean”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Styrian runner bean (Steirische Käferbohne) has protected designation of origin in the EU."
+    ],
+    "pitfalls": [
+     "Raw beans contain phasin and are poisonous; always cook them well."
+    ],
+    "subtleties": [
+     "The name refers to the fiery red flowers, not to a hot taste."
+    ]
+   }
+  },
+  {
+   "id": "de:Blattkohl",
+   "lemma": "Blattkohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.collards"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Blattkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Blatt",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Blattkohl",
+    "N;ACC;SG": "Blattkohl",
+    "N;DAT;SG": "Blattkohl",
+    "N;GEN;SG": "Blattkohls",
+    "N;NOM;PL": "Blattkohle",
+    "N;ACC;PL": "Blattkohle",
+    "N;DAT;PL": "Blattkohlen",
+    "N;GEN;PL": "Blattkohle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Big flat cabbage leaves: soul food of the American South, little known in Germany.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "collard greens (Brassica oleracea var. viridis)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.collards",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Blattkohl bildet keinen Kopf, sondern nur große Blätter.",
+      "tr": "Collards do not form a head, only big leaves.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "In den Südstaaten der USA isst man Blattkohl als Collard Greens.",
+      "tr": "In the southern US states collards are eaten as “collard greens”.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Blattkohl muss länger kochen als Spinat.",
+      "tr": "Collards need to cook longer than spinach.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Blattkohl dünsten",
+      "tr": "to steam collards"
+     },
+     {
+      "text": "Blattkohl mit Speck",
+      "tr": "collards with bacon"
+     },
+     {
+      "text": "junger Blattkohl",
+      "tr": "young collards"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No established German synonym; recipes often use the English name Collard Greens.",
+    "etymology": {
+     "text": "From Blatt (“leaf”) + Kohl (“cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Portuguese caldo verde (“green soup”) is traditionally made with a similar leaf cabbage, couve galega."
+    ],
+    "pitfalls": [
+     "Do not confuse with Grünkohl (kale), which has curly leaves.",
+     "The plural Blattkohle is rare; normally uncountable."
+    ],
+    "subtleties": [
+     "Most Germans know collards only from American food; recipes often keep the English name."
+    ]
+   }
+  },
+  {
+   "id": "de:Kirschtomate",
+   "lemma": "Kirschtomate",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cherrytomato"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kirschtomaten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Kirsche",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Tomate",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kirschtomate",
+    "N;ACC;SG": "Kirschtomate",
+    "N;DAT;SG": "Kirschtomate",
+    "N;GEN;SG": "Kirschtomate",
+    "N;NOM;PL": "Kirschtomaten",
+    "N;ACC;PL": "Kirschtomaten",
+    "N;DAT;PL": "Kirschtomaten",
+    "N;GEN;PL": "Kirschtomaten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small, sweet and bright – snack boxes, salads and balcony gardens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cherry tomato",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cherrytomato",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Kirschtomaten sind klein und süß.",
+      "tr": "Cherry tomatoes are small and sweet.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder essen Kirschtomaten als Snack.",
+      "tr": "The children eat cherry tomatoes as a snack.",
+      "register": "neutral",
+      "context": "snacks",
+      "sense": "s1"
+     },
+     {
+      "text": "Für den Salat halbiere ich die Kirschtomaten.",
+      "tr": "For the salad I halve the cherry tomatoes.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kirschtomaten halbieren",
+      "tr": "to halve cherry tomatoes"
+     },
+     {
+      "text": "eine Schale Kirschtomaten",
+      "tr": "a punnet of cherry tomatoes"
+     },
+     {
+      "text": "gelbe Kirschtomaten",
+      "tr": "yellow cherry tomatoes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Cocktailtomate",
+      "register": "neutral",
+      "nuance": "very common name in shops"
+     },
+     {
+      "word": "Cherrytomate",
+      "register": "neutral",
+      "nuance": "English-based name, also common"
+     }
+    ],
+    "etymology": {
+     "text": "From Kirsch- (“cherry”, combining form of Kirsche) + Tomate (“tomato”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek calls them ντοματίνια (domatínia), “little tomatoes”."
+    ],
+    "pitfalls": [
+     "Plural Kirschtomaten; mostly used in the plural."
+    ],
+    "subtleties": [
+     "Kirsch- is the combining form of Kirsche, as in Kirschkuchen (cherry cake)."
+    ]
+   }
+  },
+  {
+   "id": "de:Sojasprosse",
+   "lemma": "Sojasprosse",
+   "pos": "NOUN",
+   "senses": [
+    "veg.beansprout"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sojasprossen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Soja",
+      "role": "modifier"
+     },
+     {
+      "part": "Sprosse",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Sojasprosse",
+    "N;ACC;SG": "Sojasprosse",
+    "N;DAT;SG": "Sojasprosse",
+    "N;GEN;SG": "Sojasprosse",
+    "N;NOM;PL": "Sojasprossen",
+    "N;ACC;PL": "Sojasprossen",
+    "N;DAT;PL": "Sojasprossen",
+    "N;GEN;PL": "Sojasprossen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy white sprouts in spring rolls and Asian stir-fries.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bean sprouts (sprouted mung beans or soybeans)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.beansprout",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sojasprossen sind meistens eigentlich Mungbohnensprossen.",
+      "tr": "Bean sprouts sold as “soy sprouts” are usually really mung bean sprouts.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "In die Frühlingsrollen kommen Sojasprossen und Karotten.",
+      "tr": "Bean sprouts and carrots go into the spring rolls.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Sojasprossen sollte man vor dem Essen kurz kochen oder braten.",
+      "tr": "Bean sprouts should be briefly boiled or fried before eating.",
+      "register": "neutral",
+      "context": "food safety",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frische Sojasprossen",
+      "tr": "fresh bean sprouts"
+     },
+     {
+      "text": "Sojasprossen anbraten",
+      "tr": "to stir-fry bean sprouts"
+     },
+     {
+      "text": "Sojasprossen aus dem Glas",
+      "tr": "bean sprouts from a jar"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Mungbohnensprossen",
+      "register": "technical",
+      "nuance": "the correct name for most sprouts sold as Sojasprossen"
+     },
+     {
+      "word": "Bohnensprossen",
+      "register": "neutral",
+      "nuance": "general name"
+     }
+    ],
+    "etymology": {
+     "text": "Soja (“soy”, borrowed from Japanese 醤油, soya) + Sprosse (“sprout”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 豆芽 (dòuyá) simply means “bean sprout”."
+    ],
+    "pitfalls": [
+     "Feminine and mostly plural: die Sojasprossen; the singular die Sojasprosse is rare."
+    ],
+    "subtleties": [
+     "The name is misleading: real soybean sprouts are bigger and less common than the mung bean sprouts sold under this name."
+    ]
+   }
+  },
+  {
+   "id": "de:Butternusskürbis",
+   "lemma": "Butternusskürbis",
+   "pos": "NOUN",
+   "senses": [
+    "veg.butternut"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Butternusskürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Butternuss",
+      "role": "modifier"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Butternusskürbis",
+    "N;ACC;SG": "Butternusskürbis",
+    "N;DAT;SG": "Butternusskürbis",
+    "N;GEN;SG": "Butternusskürbisses",
+    "N;NOM;PL": "Butternusskürbisse",
+    "N;ACC;PL": "Butternusskürbisse",
+    "N;DAT;PL": "Butternusskürbissen",
+    "N;GEN;PL": "Butternusskürbisse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Autumn markets and creamy soups: a pear-shaped, sweet and nutty squash.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "butternut squash",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.butternut",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Den Butternusskürbis muss man vor dem Kochen schälen.",
+      "tr": "You have to peel the butternut squash before cooking.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Butternusskürbis schmeckt nussig und buttrig.",
+      "tr": "Butternut squash tastes nutty and buttery.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Herbst gibt es auf dem Markt Hokkaido und Butternusskürbis.",
+      "tr": "In autumn the market has Hokkaido and butternut squash.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Butternusskürbis schälen",
+      "tr": "to peel butternut squash"
+     },
+     {
+      "text": "gerösteter Butternusskürbis",
+      "tr": "roasted butternut squash"
+     },
+     {
+      "text": "ein Stück Butternusskürbis",
+      "tr": "a piece of butternut squash"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Butternut",
+      "register": "neutral",
+      "nuance": "short name, as in English; common on markets"
+     }
+    ],
+    "etymology": {
+     "text": "Calque of English butternut (squash): Butter (“butter”) + Nuss (“nut”) + Kürbis (“pumpkin, squash”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The butternut was bred in the USA in the 1940s."
+    ],
+    "pitfalls": [
+     "Unlike Hokkaido, its skin is usually peeled.",
+     "Masculine like Kürbis: des Butternusskürbisses, plural die Butternusskürbisse."
+    ],
+    "subtleties": [
+     "The seeds sit only in the round end; the long neck is solid flesh."
+    ]
+   }
+  },
+  {
+   "id": "de:Zuckerschote",
+   "lemma": "Zuckerschote",
+   "pos": "NOUN",
+   "senses": [
+    "veg.snowpea"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zuckerschoten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Zucker",
+      "role": "modifier"
+     },
+     {
+      "part": "Schote",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Zuckerschote",
+    "N;ACC;SG": "Zuckerschote",
+    "N;DAT;SG": "Zuckerschote",
+    "N;GEN;SG": "Zuckerschote",
+    "N;NOM;PL": "Zuckerschoten",
+    "N;ACC;PL": "Zuckerschoten",
+    "N;DAT;PL": "Zuckerschoten",
+    "N;GEN;PL": "Zuckerschoten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Kefe",
+     "region": "CH"
+    }
+   ],
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flat, sweet, crunchy pods – Asian stir-fries and quick side dishes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "snow pea, mangetout (flat edible-podded pea)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.snowpea",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zuckerschoten isst man mit der Schote.",
+      "tr": "Snow peas are eaten with the pod.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "Zuckerschoten brate ich nur kurz, damit sie knackig bleiben.",
+      "tr": "I fry snow peas only briefly so that they stay crunchy.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Schweiz heißen Zuckerschoten Kefen.",
+      "tr": "In Switzerland snow peas are called Kefen.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "knackige Zuckerschoten",
+      "tr": "crunchy snow peas"
+     },
+     {
+      "text": "Zuckerschoten blanchieren",
+      "tr": "to blanch snow peas"
+     },
+     {
+      "text": "Zuckerschoten im Wok",
+      "tr": "snow peas in the wok"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kaiserschote",
+      "register": "neutral",
+      "nuance": "another common name"
+     },
+     {
+      "word": "Kefe",
+      "register": "regional",
+      "nuance": "the Swiss word (die Kefe, plural Kefen)",
+      "region": "CH"
+     },
+     {
+      "word": "Zuckererbse",
+      "register": "neutral",
+      "nuance": "often used for the same pods, but also for the plump sugar snap pea"
+     }
+    ],
+    "etymology": {
+     "text": "Zucker (“sugar”) + Schote (“pod”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese calls them 荷兰豆 (hélándòu), “Dutch beans”; French mangetout means “eat-all”."
+    ],
+    "pitfalls": [
+     "Pull off the string along the edge before cooking.",
+     "Zuckererbse is often used for the same pods but also means the plump sugar snap pea."
+    ],
+    "subtleties": [
+     "Schote means the pod, so the name tells you that the sweet pod itself is eaten."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

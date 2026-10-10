@@ -1,0 +1,990 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:laysa",
+   "lemma": "لَيْسَ",
+   "pos": "VERB",
+   "class": "defective",
+   "senses": [
+    "part.not"
+   ],
+   "features": {
+    "root": "ل ي س",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": {
+     "none": "no present: لَيْسَ is itself the present negation (“is not”)"
+    },
+    "masdar": {
+     "none": "a frozen verb (only the past forms, meaning the present): it has no maṣdar"
+    },
+    "participles": {
+     "none": "a frozen verb: no participles"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the predicate, often with بِـ (لَيْسَ كَبِيرًا / لَيْسَ بِكَبِيرٍ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "a sentence without a verb (is not); conjugated"
+    }
+   ],
+   "translit": "laysa",
+   "forms": {
+    "V;PFV;1;SG": "لَسْتُ",
+    "V;PFV;2;SG;MASC": "لَسْتَ",
+    "V;PFV;3;SG;MASC": "لَيْسَ",
+    "V;PFV;1;PL": "لَسْنَا",
+    "V;PFV;2;PL;MASC": "لَسْتُمْ",
+    "V;PFV;3;PL;MASC": "لَيْسُوا",
+    "V;PFV;2;SG;FEM": "لَسْتِ",
+    "V;PFV;3;SG;FEM": "لَيْسَتْ",
+    "V;PFV;2;PL;FEM": "لَسْتُنَّ",
+    "V;PFV;3;PL;FEM": "لَسْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The “is not” of Arabic: a whole verb that only negates.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "is not, am not, are not — negates a sentence without a verb (present)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا لَيْسَ بَصَلًا.",
+      "tr": "This is not onion.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "لَسْتُ جَائِعًا.",
+      "tr": "I am not hungry.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "لَيْسَ عِنْدِي وَقْتٌ الْيَوْمَ.",
+      "tr": "I don’t have time today.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَطْعَمُ لَيْسَ بَعِيدًا.",
+      "tr": "The restaurant isn’t far.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "لَيْسَتْ هُنَا.",
+      "tr": "She isn’t here.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَيْسَ … فَقَطْ، بَلْ …",
+      "tr": "not only … but also …"
+     },
+     {
+      "text": "لَيْسَ مِنَ السَّهْلِ",
+      "tr": "it is not easy"
+     },
+     {
+      "text": "لَيْسَ إِلَّا",
+      "tr": "nothing but, only"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "لَيْسَ الْخَبَرُ كَالْمُعَايَنَةِ",
+      "tr": "hearing is not like seeing",
+      "kind": "saying",
+      "meaning": "seeing for yourself is better than any report",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "غَيْرُ",
+      "register": "neutral",
+      "nuance": "“non-, un-, other than” before a noun or adjective: غَيْرُ صَحِيحٍ = incorrect (a noun, not a verb)"
+     },
+     {
+      "word": "مَا",
+      "register": "literary",
+      "nuance": "negates a nominal sentence in classical style: مَا هٰذَا بَشَرًا (Qurʾān 12:31, “this is not a human being”)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كَانَ",
+      "note": "to be"
+     }
+    ],
+    "etymology": {
+     "text": "Uncertain (Wiktionary): traditionally explained as a contraction of لَا “not” + an old existential أَيْس “there is”, which would be cognate with Hebrew יֵשׁ (yesh, “there is”) — or of an unexplained verb لَيِسَ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic has no verb for “is” in the present — but it has one for “is not”."
+    ],
+    "pitfalls": [
+     "Its predicate is accusative: هُوَ طَبِيبٌ → لَيْسَ طَبِيبًا.",
+     "It looks like a past verb (لَيْسَ، لَسْتُ، لَيْسُوا) but means the present: لَسْتُ جَائِعًا = I am not hungry.",
+     "To negate a present verb use لَا, not لَيْسَ: لَا أُحِبُّ (I don’t like)."
+    ],
+    "subtleties": [
+     "The stem shortens to las- before consonant endings: لَيْسَ but لَسْتُ، لَسْنَا، لَسْنَ.",
+     "It agrees with its subject: هٰذِهِ لَيْسَتْ جَزَرَةً (feminine), هٰذَا لَيْسَ بَصَلًا (masculine)."
+    ]
+   }
+  },
+  {
+   "id": "ar:la",
+   "lemma": "لَا",
+   "pos": "PART",
+   "senses": [
+    "part.not",
+    "det.none",
+    "part.dont"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "a present verb; a prohibition with the jussive"
+    }
+   ],
+   "translit": "lā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The workhorse negation of the present; also in many fixed phrases.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not — negates a present-tense verb",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "no, not any — “there is no …” (لَا + a noun in -a without tanwīn: لَا شَكَّ); “I have no …” is لَيْسَ عِنْدِي …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.none"
+     },
+     {
+      "id": "s3",
+      "def": "don’t … (prohibition, with a jussive verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.dont"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا أَفْهَمُ.",
+      "tr": "I don’t understand.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ لَا تَأْكُلُ اللَّحْمَ.",
+      "tr": "She doesn’t eat meat.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا شَكَّ فِي ذٰلِكَ.",
+      "tr": "There is no doubt about that.",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s2"
+     },
+     {
+      "text": "لَا مَاءَ فِي الْبَيْتِ.",
+      "tr": "There is no water in the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "لَا تَقْلَقْ!",
+      "tr": "Don’t worry!",
+      "register": "neutral",
+      "context": "comfort",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَا بَأْسَ",
+      "tr": "no problem, it’s all right"
+     },
+     {
+      "text": "لَا شَكَّ",
+      "tr": "no doubt"
+     },
+     {
+      "text": "لَا بُدَّ مِنْ …",
+      "tr": "… is necessary, unavoidable"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "لَا يُلْدَغُ الْمُؤْمِنُ مِنْ جُحْرٍ وَاحِدٍ مَرَّتَيْنِ",
+      "tr": "a believer is not stung from the same hole twice",
+      "kind": "proverb",
+      "meaning": "a wise person does not fall for the same trick twice (a hadith used as a proverb)",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "لَيْسَ",
+      "register": "neutral",
+      "nuance": "negates a sentence without a verb (“is not”), conjugated"
+     },
+     {
+      "word": "لَمْ",
+      "register": "neutral",
+      "nuance": "negates the past, with the jussive: لَمْ آكُلْ (I didn’t eat)"
+     },
+     {
+      "word": "لَنْ",
+      "register": "neutral",
+      "nuance": "negates the future, with the subjunctive: لَنْ آكُلَ (I won’t eat)"
+     },
+     {
+      "word": "مَا",
+      "register": "literary",
+      "nuance": "negates a past verb (also very common in the dialects): مَا أَكَلْتُ"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *lā; compare Hebrew לֹא (lo).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Modern Arabic uses لَا like a prefix “non-, un-”: لَاسِلْكِيّ (wireless, lit. “no-wire-ish”)."
+    ],
+    "pitfalls": [
+     "لَا negates the present only. Past: لَمْ + jussive (لَمْ آكُلْ); future: لَنْ + subjunctive (لَنْ آكُلَ).",
+     "Written exactly like the answer لَا “no” — read the position: before a verb it means “not”."
+    ],
+    "subtleties": [
+     "The verb after لَا stays indicative: لَا أُحِبُّ (-u); after لَا of prohibition it is jussive: لَا تَقْلَقْ (-∅).",
+     "لَا + noun = “there is no”: لَا شَكَّ — the noun takes -a without tanwīn.",
+     "“I have no car” is not said with لَا: لَيْسَ عِنْدِي سَيَّارَةٌ — the “no” goes on the verbless sentence (لَيْسَ)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:ma_neg",
+   "lemma": "مَا",
+   "pos": "PART",
+   "senses": [
+    "part.not"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "a past verb (literary in MSA, everyday in the dialects)"
+    }
+   ],
+   "translit": "mā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "literary",
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "The negation of the past in older and literary Arabic — and the everyday “not” of the spoken dialects.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not — negates a past verb: مَا ذَهَبْتُ (I did not go); literary in MSA, everyday in the dialects",
+      "register": [
+       "literary",
+       "colloquial"
+      ],
+      "concept": "part.not"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَا ذَهَبْتُ إِلَى الْعَمَلِ أَمْسِ.",
+      "tr": "I didn’t go to work yesterday.",
+      "register": "literary",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا رَأَيْتُ مِثْلَهُ قَطُّ.",
+      "tr": "I have never seen anything like it.",
+      "register": "literary",
+      "context": "storytelling",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَا … إِلَّا …",
+      "tr": "only … (lit. not … except …)"
+     },
+     {
+      "text": "مَا … قَطُّ",
+      "tr": "never (in the past)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَمْ",
+      "register": "neutral",
+      "nuance": "the standard negation of the past in MSA, with the jussive: لَمْ أَذْهَبْ"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary lists it as a particle meaning “not; never”, an entry of its own beside the pronoun مَا “what”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The dialects negate almost everything with مَا (Egyptian and Levantine مَا رُحْتِش / مَا رُحْت, “I didn’t go”), while MSA prefers لَمْ."
+    ],
+    "pitfalls": [
+     "مَا + a past verb = not (مَا ذَهَبْتُ); مَا before a noun or in a question = what (مَا هٰذَا؟) — the word after it tells which."
+    ],
+    "subtleties": [
+     "In MSA the neutral negation of the past is لَمْ + jussive (لَمْ أَذْهَبْ); مَا + past sounds literary or emphatic."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:la_shay",
+   "lemma": "لَا شَيْءَ",
+   "pos": "PRON",
+   "class": "neg",
+   "senses": [
+    "pron.nothing"
+   ],
+   "translit": "lā šayʾa",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A short, complete answer: “nothing”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nothing (as an answer, or “there is nothing …”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nothing"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تُرِيدُ؟ لَا شَيْءَ، شُكْرًا.",
+      "tr": "What would you like? — Nothing, thanks.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا شَيْءَ هُنَا.",
+      "tr": "There is nothing here.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا شَيْءَ أَجْمَلُ مِنَ الْبَيْتِ.",
+      "tr": "Nothing is nicer than home.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَا شَيْءَ هُنَا",
+      "tr": "there is nothing here"
+     },
+     {
+      "text": "لَا شَيْءَ، شُكْرًا",
+      "tr": "nothing, thank you"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَا … شَيْئًا",
+      "register": "neutral",
+      "nuance": "with a verb: لَا أُرِيدُ شَيْئًا = I don’t want anything"
+     }
+    ],
+    "etymology": {
+     "text": "لَا (“not, no”) + شَيْء (“thing”) in the accusative without tanwīn, the form after the لَا that denies a whole kind (Wiktionary has both words).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Built exactly like English “no-thing”: لَا + شَيْء."
+    ],
+    "pitfalls": [
+     "With a verb, use لَا + verb + شَيْئًا: لَا أُرِيدُ شَيْئًا (I don’t want anything) — not *أُرِيدُ لَا شَيْءَ."
+    ],
+    "subtleties": [
+     "شَيْءَ has -a without tanwīn: this is the لَا that denies a whole class (لَا النَّافِيَةُ لِلْجِنْسِ), as in لَا شَكَّ (no doubt)."
+    ]
+   }
+  },
+  {
+   "id": "ar:la_ahad",
+   "lemma": "لَا أَحَدَ",
+   "pos": "PRON",
+   "class": "neg",
+   "senses": [
+    "pron.nobody"
+   ],
+   "translit": "lā ʾaḥada",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An empty room, a closed door: “nobody”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nobody, no one",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nobody"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا أَحَدَ هُنَا.",
+      "tr": "Nobody is here.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "مَنْ فِي الْبَيْتِ؟ لَا أَحَدَ.",
+      "tr": "Who is in the house? — Nobody.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا أَحَدَ يَأْكُلُ اللَّحْمَ فِي بَيْتِنَا.",
+      "tr": "Nobody eats meat in our house.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَا أَحَدَ هُنَا",
+      "tr": "nobody is here"
+     },
+     {
+      "text": "لَا أَحَدَ يَعْرِفُ",
+      "tr": "nobody knows"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَا … أَحَدًا",
+      "register": "neutral",
+      "nuance": "with a verb and an object: لَا أَرَى أَحَدًا = I don’t see anybody"
+     }
+    ],
+    "etymology": {
+     "text": "لَا (“not, no”) + أَحَد (“one; someone, anyone”), related to وَاحِد (“one”) and cognate with Hebrew אֶחָד (ekhád, “one”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same أَحَد is in أَحَدَ عَشَرَ (eleven, “one-ten”) and in الْأَحَد, Sunday, “day one” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "As an object after a negated verb you need أَحَدًا: لَا أَرَى أَحَدًا (I don’t see anyone)."
+    ],
+    "subtleties": [
+     "After لَا أَحَدَ a verb can follow: لَا أَحَدَ يَأْكُلُ (nobody eats) — the verb is masculine singular."
+    ]
+   }
+  },
+  {
+   "id": "ar:abadan",
+   "lemma": "أَبَدًا",
+   "pos": "ADV",
+   "senses": [
+    "adv.never",
+    "adv.forever"
+   ],
+   "features": {
+    "root": "ء ب د",
+    "derivedFrom": "أَبَد (eternity), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʾabadan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Firm and final: “never!”, “not at all!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "never (with a negated verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.never"
+     },
+     {
+      "id": "s2",
+      "def": "not at all!, absolutely not! (alone)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "forever, always (literary, without a negation)",
+      "register": [
+       "literary"
+      ],
+      "concept": "adv.forever"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا أَشْرَبُ الْقَهْوَةَ أَبَدًا.",
+      "tr": "I never drink coffee.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ لَا يَطْبُخُ أَبَدًا.",
+      "tr": "He never cooks.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ أَنْتَ غَاضِبٌ؟ أَبَدًا!",
+      "tr": "Are you angry? — Not at all!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "خَالِدِينَ فِيهَا أَبَدًا",
+      "tr": "abiding therein forever (Qurʾān 4:57)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَا … أَبَدًا",
+      "tr": "never"
+     },
+     {
+      "text": "أَبَدًا!",
+      "tr": "not at all!"
+     },
+     {
+      "text": "إِلَى الْأَبَدِ",
+      "tr": "forever (with the noun أَبَد)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَطُّ",
+      "register": "formal",
+      "nuance": "never — only with a negated past: مَا رَأَيْتُهُ قَطُّ (I have never seen him)"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of أَبَد (ʔabad, “eternity”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “eternally”: the noun أَبَد is in إِلَى الْأَبَدِ, “forever”."
+    ],
+    "pitfalls": [
+     "For “never” it needs a negation: لَا آكُلُ اللَّحْمَ أَبَدًا. Without one, in literary style, it means “forever”.",
+     "With a past verb use لَمْ … أَبَدًا or مَا … قَطُّ (later lessons), not لَا."
+    ],
+    "subtleties": [
+     "It usually comes at the end of the sentence: لَا أَشْرَبُ الْقَهْوَةَ أَبَدًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:wala",
+   "lemma": "وَلَا",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.neithernor",
+    "adv.even"
+   ],
+   "features": {
+    "governs": "words or clauses"
+   },
+   "contrasts": [
+    {
+     "concept": "adv.even",
+     "axis": "construction",
+     "value": "(not) even, (not) a single — after a negation"
+    }
+   ],
+   "translit": "wa-lā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Saying no to two things at once.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nor; لَا … وَلَا … = neither … nor …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.neithernor"
+     },
+     {
+      "id": "s2",
+      "def": "(not) even, (not) a single …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.even"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ.",
+      "tr": "I drink neither tea nor coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "لَيْسَ عِنْدِي أَخٌ وَلَا أُخْتٌ.",
+      "tr": "I have neither a brother nor a sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الطِّفْلُ لَا يَأْكُلُ وَلَا يَشْرَبُ.",
+      "tr": "The child neither eats nor drinks.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "لَمْ يَقُلْ وَلَا كَلِمَةً.",
+      "tr": "He didn’t say a single word.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَا … وَلَا …",
+      "tr": "neither … nor …"
+     },
+     {
+      "text": "لَيْسَ … وَلَا …",
+      "tr": "is neither … nor …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "Arabic has no separate word: the normal negation of the sentence is repeated with وَ (وَلَا).",
+    "etymology": {
+     "text": "وَ (wa, “and”) + لَا (lā, “not”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek ούτε … ούτε and Russian ни … ни also repeat the negation; Arabic repeats it with “and”: وَلَا."
+    ],
+    "pitfalls": [
+     "The first part is the normal negation of the sentence: لَا before a present verb, لَيْسَ in a sentence without a verb; only the second part is وَلَا."
+    ],
+    "subtleties": [
+     "The nouns keep the case of their place: لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ (both accusative); لَيْسَ عِنْدِي أَخٌ وَلَا أُخْتٌ (both nominative)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:shay_thing",
+   "lemma": "شَيْء",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.thing",
+    "pron.anything",
+    "pron.something"
+   ],
+   "features": {
+    "root": "ش ي ء",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَشْيَاء",
+      "kind": "broken",
+      "declension": "diptote",
+      "note": "things: a diptote, although it looks like أَفْعَال (grammarians disagree on its measure)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شَيْئَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "role": "thing, something; after a negated verb “anything”: لَا أُرِيدُ شَيْئًا = I don’t want anything. Needed for “nothing” with a verb.",
+   "gender": "MASC",
+   "translit": "šayʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "شَيْءٌ",
+    "N;ACC;SG;INDF": "شَيْئًا",
+    "N;GEN;SG;INDF": "شَيْءٍ",
+    "N;NOM;SG;DEF": "الشَّيْءُ",
+    "N;ACC;SG;DEF": "الشَّيْءَ",
+    "N;GEN;SG;DEF": "الشَّيْءِ",
+    "N;NOM;PL;INDF": "أَشْيَاءُ",
+    "N;ACC;PL;INDF": "أَشْيَاءَ",
+    "N;GEN;PL;INDF": "أَشْيَاءَ",
+    "N;NOM;PL;DEF": "الْأَشْيَاءُ",
+    "N;ACC;PL;DEF": "الْأَشْيَاءَ",
+    "N;GEN;PL;DEF": "الْأَشْيَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The all-purpose word: something, anything, everything.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thing (an object, a matter)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.thing"
+     },
+     {
+      "id": "s2",
+      "def": "(after a negated verb) anything",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.anything"
+     },
+     {
+      "id": "s3",
+      "def": "something (شَيْءٌ, شَيْءٌ مَا)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.something"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هَلْ تُرِيدُ شَيْئًا؟",
+      "tr": "Would you like something?",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s3"
+     },
+     {
+      "text": "لَا أُرِيدُ شَيْئًا، شُكْرًا.",
+      "tr": "I don’t want anything, thanks.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "عِنْدِي أَشْيَاءُ كَثِيرَةٌ فِي حَقِيبَتِي.",
+      "tr": "I have lots of things in my bag.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "سَمِعْتُ شَيْئًا مَا فِي الْمَطْبَخِ.",
+      "tr": "I heard something in the kitchen.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شَيْئًا فَشَيْئًا",
+      "tr": "little by little"
+     },
+     {
+      "text": "كُلُّ شَيْءٍ",
+      "tr": "everything"
+     },
+     {
+      "text": "لَا شَيْءَ",
+      "tr": "nothing"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الشَّيْءُ بِالشَّيْءِ يُذْكَرُ",
+      "tr": "one thing is mentioned with another",
+      "kind": "saying",
+      "meaning": "that reminds me — said when one topic brings up another",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "أَمْر",
+      "register": "neutral",
+      "nuance": "a matter, an affair (abstract), not a physical thing"
+     }
+    ],
+    "etymology": {
+     "text": "A word of the root ش ي ء (Wiktionary), the root of شَاءَ, “to will, to want” (إِنْ شَاءَ اللّٰهُ); Wiktionary’s entry has no etymology section.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "شَيْء shares its root with شَاءَ, the “will” of إِنْ شَاءَ اللّٰهُ (God willing)."
+    ],
+    "pitfalls": [
+     "Accusative indefinite شَيْئًا: the hamza sits on a yāʾ seat (ئ) before the ending.",
+     "The plural أَشْيَاءُ is a diptote: no tanwīn."
+    ],
+    "subtleties": [
+     "After a negated verb it means “anything”: لَا آكُلُ شَيْئًا (I’m not eating anything) — one negation, like English “not … anything”."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

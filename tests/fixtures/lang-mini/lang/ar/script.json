@@ -1,0 +1,816 @@
+{
+ "format": "noema.langscript/v1",
+ "lang": "ar",
+ "script": "Arab",
+ "dir": "rtl",
+ "kind": "abjad",
+ "about": "Reference data for the Arabic script: letters, positional forms (from the Unicode presentation forms), sounds, the course’s transliteration, vowel marks. Built by tools/lang_script.py.",
+ "sources": [
+  "Unicode Character Database (letter names, presentation forms → joining)",
+  "DIN 31635 (transliteration, as the course writes it: j for ج)",
+  "Wikipedia: Arabic alphabet; Arabic phonology"
+ ],
+ "letters": [
+  {
+   "ch": "ا",
+   "name": "ʾalif",
+   "translit": "ā",
+   "sound": "aː",
+   "joins": "right",
+   "forms": {
+    "isolated": "ا",
+    "final": "‍ا"
+   },
+   "unicode": "ARABIC LETTER ALEF",
+   "note": "a long ā; also the seat of a hamza (أ إ) and the silent alif of hamzat al-waṣl"
+  },
+  {
+   "ch": "ب",
+   "name": "bāʾ",
+   "translit": "b",
+   "sound": "b",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ب",
+    "initial": "ب‍",
+    "medial": "‍ب‍",
+    "final": "‍ب"
+   },
+   "unicode": "ARABIC LETTER BEH",
+   "sun": false
+  },
+  {
+   "ch": "ت",
+   "name": "tāʾ",
+   "translit": "t",
+   "sound": "t",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ت",
+    "initial": "ت‍",
+    "medial": "‍ت‍",
+    "final": "‍ت"
+   },
+   "unicode": "ARABIC LETTER TEH",
+   "sun": true
+  },
+  {
+   "ch": "ث",
+   "name": "ṯāʾ",
+   "translit": "ṯ",
+   "sound": "θ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ث",
+    "initial": "ث‍",
+    "medial": "‍ث‍",
+    "final": "‍ث"
+   },
+   "unicode": "ARABIC LETTER THEH",
+   "sun": true
+  },
+  {
+   "ch": "ج",
+   "name": "jīm",
+   "translit": "j",
+   "sound": "d͡ʒ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ج",
+    "initial": "ج‍",
+    "medial": "‍ج‍",
+    "final": "‍ج"
+   },
+   "unicode": "ARABIC LETTER JEEM",
+   "sun": false,
+   "note": "said ʒ or ɡ in some regions"
+  },
+  {
+   "ch": "ح",
+   "name": "ḥāʾ",
+   "translit": "ḥ",
+   "sound": "ħ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ح",
+    "initial": "ح‍",
+    "medial": "‍ح‍",
+    "final": "‍ح"
+   },
+   "unicode": "ARABIC LETTER HAH",
+   "sun": false,
+   "note": "a voiceless h from the throat"
+  },
+  {
+   "ch": "خ",
+   "name": "ḫāʾ",
+   "translit": "ḫ",
+   "sound": "x",
+   "joins": "dual",
+   "forms": {
+    "isolated": "خ",
+    "initial": "خ‍",
+    "medial": "‍خ‍",
+    "final": "‍خ"
+   },
+   "unicode": "ARABIC LETTER KHAH",
+   "sun": false
+  },
+  {
+   "ch": "د",
+   "name": "dāl",
+   "translit": "d",
+   "sound": "d",
+   "joins": "right",
+   "forms": {
+    "isolated": "د",
+    "final": "‍د"
+   },
+   "unicode": "ARABIC LETTER DAL",
+   "sun": true
+  },
+  {
+   "ch": "ذ",
+   "name": "ḏāl",
+   "translit": "ḏ",
+   "sound": "ð",
+   "joins": "right",
+   "forms": {
+    "isolated": "ذ",
+    "final": "‍ذ"
+   },
+   "unicode": "ARABIC LETTER THAL",
+   "sun": true
+  },
+  {
+   "ch": "ر",
+   "name": "rāʾ",
+   "translit": "r",
+   "sound": "r",
+   "joins": "right",
+   "forms": {
+    "isolated": "ر",
+    "final": "‍ر"
+   },
+   "unicode": "ARABIC LETTER REH",
+   "sun": true,
+   "note": "a rolled or tapped r"
+  },
+  {
+   "ch": "ز",
+   "name": "zāy",
+   "translit": "z",
+   "sound": "z",
+   "joins": "right",
+   "forms": {
+    "isolated": "ز",
+    "final": "‍ز"
+   },
+   "unicode": "ARABIC LETTER ZAIN",
+   "sun": true
+  },
+  {
+   "ch": "س",
+   "name": "sīn",
+   "translit": "s",
+   "sound": "s",
+   "joins": "dual",
+   "forms": {
+    "isolated": "س",
+    "initial": "س‍",
+    "medial": "‍س‍",
+    "final": "‍س"
+   },
+   "unicode": "ARABIC LETTER SEEN",
+   "sun": true
+  },
+  {
+   "ch": "ش",
+   "name": "šīn",
+   "translit": "š",
+   "sound": "ʃ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ش",
+    "initial": "ش‍",
+    "medial": "‍ش‍",
+    "final": "‍ش"
+   },
+   "unicode": "ARABIC LETTER SHEEN",
+   "sun": true
+  },
+  {
+   "ch": "ص",
+   "name": "ṣād",
+   "translit": "ṣ",
+   "sound": "sˤ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ص",
+    "initial": "ص‍",
+    "medial": "‍ص‍",
+    "final": "‍ص"
+   },
+   "unicode": "ARABIC LETTER SAD",
+   "sun": true,
+   "note": "emphatic (pharyngealized) s"
+  },
+  {
+   "ch": "ض",
+   "name": "ḍād",
+   "translit": "ḍ",
+   "sound": "dˤ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ض",
+    "initial": "ض‍",
+    "medial": "‍ض‍",
+    "final": "‍ض"
+   },
+   "unicode": "ARABIC LETTER DAD",
+   "sun": true,
+   "note": "emphatic d"
+  },
+  {
+   "ch": "ط",
+   "name": "ṭāʾ",
+   "translit": "ṭ",
+   "sound": "tˤ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ط",
+    "initial": "ط‍",
+    "medial": "‍ط‍",
+    "final": "‍ط"
+   },
+   "unicode": "ARABIC LETTER TAH",
+   "sun": true,
+   "note": "emphatic t"
+  },
+  {
+   "ch": "ظ",
+   "name": "ẓāʾ",
+   "translit": "ẓ",
+   "sound": "ðˤ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ظ",
+    "initial": "ظ‍",
+    "medial": "‍ظ‍",
+    "final": "‍ظ"
+   },
+   "unicode": "ARABIC LETTER ZAH",
+   "sun": true,
+   "note": "emphatic ḏ"
+  },
+  {
+   "ch": "ع",
+   "name": "ʿayn",
+   "translit": "ʿ",
+   "sound": "ʕ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ع",
+    "initial": "ع‍",
+    "medial": "‍ع‍",
+    "final": "‍ع"
+   },
+   "unicode": "ARABIC LETTER AIN",
+   "sun": false,
+   "note": "a voiced sound from the throat"
+  },
+  {
+   "ch": "غ",
+   "name": "ġayn",
+   "translit": "ġ",
+   "sound": "ɣ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "غ",
+    "initial": "غ‍",
+    "medial": "‍غ‍",
+    "final": "‍غ"
+   },
+   "unicode": "ARABIC LETTER GHAIN",
+   "sun": false
+  },
+  {
+   "ch": "ف",
+   "name": "fāʾ",
+   "translit": "f",
+   "sound": "f",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ف",
+    "initial": "ف‍",
+    "medial": "‍ف‍",
+    "final": "‍ف"
+   },
+   "unicode": "ARABIC LETTER FEH",
+   "sun": false
+  },
+  {
+   "ch": "ق",
+   "name": "qāf",
+   "translit": "q",
+   "sound": "q",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ق",
+    "initial": "ق‍",
+    "medial": "‍ق‍",
+    "final": "‍ق"
+   },
+   "unicode": "ARABIC LETTER QAF",
+   "sun": false,
+   "note": "a k from far back in the throat"
+  },
+  {
+   "ch": "ك",
+   "name": "kāf",
+   "translit": "k",
+   "sound": "k",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ك",
+    "initial": "ك‍",
+    "medial": "‍ك‍",
+    "final": "‍ك"
+   },
+   "unicode": "ARABIC LETTER KAF",
+   "sun": false
+  },
+  {
+   "ch": "ل",
+   "name": "lām",
+   "translit": "l",
+   "sound": "l",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ل",
+    "initial": "ل‍",
+    "medial": "‍ل‍",
+    "final": "‍ل"
+   },
+   "unicode": "ARABIC LETTER LAM",
+   "sun": true
+  },
+  {
+   "ch": "م",
+   "name": "mīm",
+   "translit": "m",
+   "sound": "m",
+   "joins": "dual",
+   "forms": {
+    "isolated": "م",
+    "initial": "م‍",
+    "medial": "‍م‍",
+    "final": "‍م"
+   },
+   "unicode": "ARABIC LETTER MEEM",
+   "sun": false
+  },
+  {
+   "ch": "ن",
+   "name": "nūn",
+   "translit": "n",
+   "sound": "n",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ن",
+    "initial": "ن‍",
+    "medial": "‍ن‍",
+    "final": "‍ن"
+   },
+   "unicode": "ARABIC LETTER NOON",
+   "sun": true
+  },
+  {
+   "ch": "ه",
+   "name": "hāʾ",
+   "translit": "h",
+   "sound": "h",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ه",
+    "initial": "ه‍",
+    "medial": "‍ه‍",
+    "final": "‍ه"
+   },
+   "unicode": "ARABIC LETTER HEH",
+   "sun": false
+  },
+  {
+   "ch": "و",
+   "name": "wāw",
+   "translit": "w",
+   "sound": "w",
+   "joins": "right",
+   "forms": {
+    "isolated": "و",
+    "final": "‍و"
+   },
+   "unicode": "ARABIC LETTER WAW",
+   "sun": false,
+   "note": "also the long vowel ū"
+  },
+  {
+   "ch": "ي",
+   "name": "yāʾ",
+   "translit": "y",
+   "sound": "j",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ي",
+    "initial": "ي‍",
+    "medial": "‍ي‍",
+    "final": "‍ي"
+   },
+   "unicode": "ARABIC LETTER YEH",
+   "sun": false,
+   "note": "also the long vowel ī"
+  },
+  {
+   "ch": "ء",
+   "name": "hamza",
+   "translit": "ʾ",
+   "sound": "ʔ",
+   "joins": "none",
+   "forms": {
+    "isolated": "ء"
+   },
+   "unicode": "ARABIC LETTER HAMZA",
+   "note": "the glottal stop on its own (on the line)"
+  },
+  {
+   "ch": "أ",
+   "name": "hamza on alif",
+   "translit": "ʾ",
+   "sound": "ʔ",
+   "joins": "right",
+   "forms": {
+    "isolated": "أ",
+    "final": "‍أ"
+   },
+   "unicode": "ARABIC LETTER ALEF WITH HAMZA ABOVE",
+   "note": "hamza with a or u"
+  },
+  {
+   "ch": "إ",
+   "name": "hamza under alif",
+   "translit": "ʾ",
+   "sound": "ʔ",
+   "joins": "right",
+   "forms": {
+    "isolated": "إ",
+    "final": "‍إ"
+   },
+   "unicode": "ARABIC LETTER ALEF WITH HAMZA BELOW",
+   "note": "hamza with i"
+  },
+  {
+   "ch": "آ",
+   "name": "alif madda",
+   "translit": "ʾā",
+   "sound": "ʔaː",
+   "joins": "right",
+   "forms": {
+    "isolated": "آ",
+    "final": "‍آ"
+   },
+   "unicode": "ARABIC LETTER ALEF WITH MADDA ABOVE",
+   "note": "hamza + long ā"
+  },
+  {
+   "ch": "ؤ",
+   "name": "hamza on wāw",
+   "translit": "ʾ",
+   "sound": "ʔ",
+   "joins": "right",
+   "forms": {
+    "isolated": "ؤ",
+    "final": "‍ؤ"
+   },
+   "unicode": "ARABIC LETTER WAW WITH HAMZA ABOVE"
+  },
+  {
+   "ch": "ئ",
+   "name": "hamza on yāʾ",
+   "translit": "ʾ",
+   "sound": "ʔ",
+   "joins": "dual",
+   "forms": {
+    "isolated": "ئ",
+    "initial": "ئ‍",
+    "medial": "‍ئ‍",
+    "final": "‍ئ"
+   },
+   "unicode": "ARABIC LETTER YEH WITH HAMZA ABOVE",
+   "note": "written without dots"
+  },
+  {
+   "ch": "ة",
+   "name": "tāʾ marbūṭa",
+   "translit": "a",
+   "sound": "a",
+   "joins": "right",
+   "forms": {
+    "isolated": "ة",
+    "final": "‍ة"
+   },
+   "unicode": "ARABIC LETTER TEH MARBUTA",
+   "note": "only at the end of a word; said -a in pause, -at before an ending or in a construct"
+  },
+  {
+   "ch": "ى",
+   "name": "alif maqṣūra",
+   "translit": "ā",
+   "sound": "aː",
+   "joins": "right",
+   "forms": {
+    "isolated": "ى",
+    "final": "‍ى"
+   },
+   "unicode": "ARABIC LETTER ALEF MAKSURA",
+   "note": "only at the end of a word: a long ā written like a yāʾ without dots"
+  },
+  {
+   "ch": "ٱ",
+   "name": "alif waṣla",
+   "translit": "",
+   "sound": "",
+   "joins": "right",
+   "forms": {
+    "isolated": "ٱ",
+    "final": "‍ٱ"
+   },
+   "unicode": "ARABIC LETTER ALEF WASLA",
+   "note": "the alif of hamzat al-waṣl: silent inside a sentence"
+  },
+  {
+   "ch": "لا",
+   "name": "lām-alif",
+   "translit": "lā",
+   "sound": "laː",
+   "joins": "right",
+   "ligature": true,
+   "forms": {
+    "isolated": "لا",
+    "final": "‍لا"
+   },
+   "note": "lām followed by alif is always written as one sign"
+  }
+ ],
+ "marks": [
+  {
+   "ch": "َ",
+   "name": "fatḥa",
+   "translit": "a",
+   "what": "short a",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ِ",
+   "name": "kasra",
+   "translit": "i",
+   "what": "short i",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ُ",
+   "name": "ḍamma",
+   "translit": "u",
+   "what": "short u",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ْ",
+   "name": "sukūn",
+   "translit": "",
+   "what": "no vowel after the letter",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ّ",
+   "name": "šadda",
+   "translit": "(double)",
+   "what": "the letter is doubled",
+   "kind": "shadda"
+  },
+  {
+   "ch": "ً",
+   "name": "tanwīn fatḥ",
+   "translit": "an",
+   "what": "-an (indefinite accusative)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ٍ",
+   "name": "tanwīn kasr",
+   "translit": "in",
+   "what": "-in (indefinite genitive)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ٌ",
+   "name": "tanwīn ḍamm",
+   "translit": "un",
+   "what": "-un (indefinite nominative)",
+   "kind": "vowel"
+  },
+  {
+   "ch": "ٰ",
+   "name": "dagger alif",
+   "translit": "ā",
+   "what": "a long ā written above the letter (هٰذَا)",
+   "kind": "vowel"
+  }
+ ],
+ "groups": [
+  {
+   "id": "ar.g1",
+   "title": "Alif and the “tooth” letters",
+   "items": [
+    "ا",
+    "ب",
+    "ت",
+    "ث",
+    "ن",
+    "ي"
+   ]
+  },
+  {
+   "id": "ar.g2",
+   "title": "The short vowels, sukūn and šadda",
+   "items": [
+    "َ",
+    "ِ",
+    "ُ",
+    "ْ",
+    "ّ"
+   ]
+  },
+  {
+   "id": "ar.g3",
+   "title": "The “cup” letters",
+   "items": [
+    "ج",
+    "ح",
+    "خ"
+   ]
+  },
+  {
+   "id": "ar.g4",
+   "title": "Letters that never join the next one",
+   "items": [
+    "د",
+    "ذ",
+    "ر",
+    "ز",
+    "و"
+   ]
+  },
+  {
+   "id": "ar.g5",
+   "title": "The “wave” and “loop” letters",
+   "items": [
+    "س",
+    "ش",
+    "ص",
+    "ض"
+   ]
+  },
+  {
+   "id": "ar.g6",
+   "title": "Upright and “eye” letters",
+   "items": [
+    "ط",
+    "ظ",
+    "ع",
+    "غ"
+   ]
+  },
+  {
+   "id": "ar.g7",
+   "title": "The rest of the alphabet",
+   "items": [
+    "ف",
+    "ق",
+    "ك",
+    "ل",
+    "م",
+    "ه"
+   ]
+  },
+  {
+   "id": "ar.g8",
+   "title": "Hamza, tāʾ marbūṭa, alif maqṣūra, lām-alif, tanwīn",
+   "items": [
+    "ء",
+    "أ",
+    "إ",
+    "آ",
+    "ؤ",
+    "ئ",
+    "ة",
+    "ى",
+    "ٱ",
+    "لا",
+    "ً",
+    "ٍ",
+    "ٌ",
+    "ٰ"
+   ]
+  }
+ ],
+ "lookalikes": [
+  [
+   "ب",
+   "ت",
+   "ث",
+   "ن",
+   "ي"
+  ],
+  [
+   "ج",
+   "ح",
+   "خ"
+  ],
+  [
+   "د",
+   "ذ"
+  ],
+  [
+   "ر",
+   "ز"
+  ],
+  [
+   "س",
+   "ش"
+  ],
+  [
+   "ص",
+   "ض"
+  ],
+  [
+   "ط",
+   "ظ"
+  ],
+  [
+   "ع",
+   "غ"
+  ],
+  [
+   "ف",
+   "ق"
+  ],
+  [
+   "ه",
+   "ة"
+  ],
+  [
+   "ى",
+   "ي"
+  ],
+  [
+   "ا",
+   "أ",
+   "إ",
+   "آ"
+  ],
+  [
+   "و",
+   "ؤ"
+  ],
+  [
+   "د",
+   "ر"
+  ]
+ ],
+ "keyboard": {
+  "rows": [
+   "ض ص ث ق ف غ ع ه خ ح ج د",
+   "ش س ي ب ل ا ت ن م ك ط",
+   "ئ ء ؤ ر لا ى ة و ز ظ",
+   "ذ أ إ آ"
+  ],
+  "marks": [
+   "َ",
+   "ِ",
+   "ُ",
+   "ْ",
+   "ّ",
+   "ً",
+   "ٍ",
+   "ٌ",
+   "ٰ"
+  ],
+  "punct": [
+   "،",
+   "؛",
+   "؟",
+   ".",
+   "!"
+  ]
+ }
+}

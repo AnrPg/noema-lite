@@ -1,0 +1,631 @@
+{
+ "lexemes": [
+  {
+   "id": "he:ze",
+   "lemma": "זֶה",
+   "pos": "PRON",
+   "class": "dem",
+   "senses": [
+    "dem.this",
+    "dem.these"
+   ],
+   "translit": "ze",
+   "features": {
+    "spelling": "זה",
+    "agreement": "inflected",
+    "meaningForms": [
+     {
+      "form": "אֵלֶּה, הָאֵלֶּה",
+      "senses": [
+       "s3"
+      ],
+      "note": "a separate stem for “these”, the same for both genders"
+     }
+    ]
+   },
+   "forms": {
+    "PRON;SG;MASC": "זֶה",
+    "PRON;SG;FEM": "זֹאת",
+    "PRON;PL": "אֵלֶּה",
+    "PRON;SG;MASC;DEF": "הַזֶּה",
+    "PRON;SG;FEM;DEF": "הַזֹּאת",
+    "PRON;PL;DEF": "הָאֵלֶּה"
+   },
+   "note": "Alone (presenting: “this is …”) it has no article: זֶה / זֹאת / אֵלֶּה. After a definite noun (“this …”) it takes the article like an adjective: הַבַּיִת הַזֶּה, הַמְּנוֹרָה הַזֹּאת, הַסְּפָרִים הָאֵלֶּה — the DEF cells.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing at things: “this one!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "this, this one (demonstrative): זֶה (m), זֹאת (f); after a noun הַזֶּה / הַזֹּאת",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.this"
+     },
+     {
+      "id": "s2",
+      "def": "it (empty subject: זֶה טָעִים “it’s tasty”)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "these: אֵלֶּה (m. and f.); after a noun הָאֵלֶּה",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.these"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה זֶה?",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת הַבַּת שֶׁלִּי.",
+      "tr": "This is my daughter.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֵּפֶר הַזֶּה מְעַנְיֵן.",
+      "tr": "This book is interesting.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה טָעִים!",
+      "tr": "It’s tasty!",
+      "register": "informal",
+      "context": "meal",
+      "sense": "s2"
+     },
+     {
+      "text": "אֵלֶּה הַיְּלָדִים שֶׁלִּי.",
+      "tr": "These are my children.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s3"
+     },
+     {
+      "text": "הַכִּסְּאוֹת הָאֵלֶּה חֲדָשִׁים.",
+      "tr": "These chairs are new.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מָה זֶה?",
+      "tr": "what’s this?"
+     },
+     {
+      "text": "זֶה הַכֹּל",
+      "tr": "that’s all"
+     },
+     {
+      "text": "בַּזְּמַן הַזֶּה",
+      "tr": "at this time"
+     },
+     {
+      "text": "הַיּוֹם הַזֶּה",
+      "tr": "this day"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "זוֹ",
+      "register": "formal",
+      "nuance": "a shorter feminine variant of זֹאת, common in writing"
+     },
+     {
+      "word": "אֵלּוּ",
+      "register": "formal",
+      "nuance": "a variant of the plural אֵלֶּה"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ḏV- (“this”). Cognates include Aramaic דִּי (dī) and Arabic ذا. Compare also the definite form הַזֶּה (hazé) and Arabic هٰذَا (hāḏā).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew ז regularly matches Arabic ذ (dh): זֶה ~ ذَا, זָהָב ~ ذَهَب (gold)."
+    ],
+    "pitfalls": [
+     "Agreement: זֶה for a masculine noun, זֹאת for a feminine one, אֵלֶּה for plurals — זֶה בַּיִת, זֹאת דִּירָה, אֵלֶּה סְפָרִים.",
+     "“This is a book” is זֶה סֵפֶר; “this book” is הַסֵּפֶר הַזֶּה — after a noun the demonstrative takes the article, and so does the noun.",
+     "אֵלֶּה has one form for both genders: הַסְּפָרִים הָאֵלֶּה, הַמְּנוֹרוֹת הָאֵלֶּה."
+    ],
+    "subtleties": [
+     "In casual speech זֶה is used for everything, even feminine and plural things: זֶה עַגְבָנִיָּה, זֶה טָעִים.",
+     "Presenting something far away also uses זֶה: זֶה הַבַּיִת שֶׁלִּי “that (over there) is my house” — Hebrew does not need “that” here."
+    ]
+   }
+  },
+  {
+   "id": "he:hahu",
+   "lemma": "הַהוּא",
+   "pos": "DET",
+   "class": "dem",
+   "senses": [
+    "dem.that",
+    "dem.those"
+   ],
+   "translit": "hahu",
+   "features": {
+    "spelling": "ההוא",
+    "position": "after",
+    "meaningForms": [
+     {
+      "form": "הָהֵם, הָהֵן",
+      "senses": [
+       "s2"
+      ],
+      "note": "“those”: masculine הָהֵם, feminine הָהֵן"
+     }
+    ]
+   },
+   "forms": {
+    "DET;SG;MASC": "הַהוּא",
+    "DET;SG;FEM": "הַהִיא",
+    "DET;PL;MASC": "הָהֵם",
+    "DET;PL;FEM": "הָהֵן"
+   },
+   "note": "The article + the third-person pronoun: הַהוּא (m), הַהִיא (f), הָהֵם (m. pl.), הָהֵן (f. pl.). It follows a definite noun: הַבַּיִת הַהוּא “that house”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing away — that one, over there, back then.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that (after a definite noun: הָאִישׁ הַהוּא “that man”); colloquially also “that one, that guy”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.that"
+     },
+     {
+      "id": "s2",
+      "def": "those: הָהֵם (m), הָהֵן (f)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.those"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָאִישׁ הַהוּא מוֹרֶה.",
+      "tr": "That man is a teacher.",
+      "register": "neutral",
+      "context": "pointing at people",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי הַהוּא?",
+      "tr": "Who’s that guy?",
+      "register": "colloquial",
+      "context": "party",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּיָּמִים הָהֵם לֹא הָיָה טֶלֶפוֹן.",
+      "tr": "In those days there was no telephone.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     },
+     {
+      "text": "הַבָּתִּים הָהֵם יְשָׁנִים.",
+      "tr": "Those houses are old.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּיָּמִים הָהֵם",
+      "tr": "in those days"
+     },
+     {
+      "text": "בָּרֶגַע הַהוּא",
+      "tr": "at that moment"
+     },
+     {
+      "text": "בַּזְּמַן הַהוּא",
+      "tr": "at that time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הַלָּז",
+      "register": "literary",
+      "nuance": "an old literary “that”"
+     }
+    ],
+    "etymology": {
+     "text": "The article הַ־ + the pronoun הוּא “he” (הִיא “she”, הֵם / הֵן “they”): literally “the he”. Wiktionary lists הַהוּא as a determiner “that” and הַהִיא as its feminine.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic also uses a separate “that” (ذٰلِكَ, تِلْكَ) but puts it before the noun: ذٰلِكَ الْبَيْتُ “that house” — Hebrew says “the house the-he”."
+    ],
+    "pitfalls": [
+     "It comes after the noun, and the noun needs the article too: הַבַּיִת הַהוּא (not *בַּיִת הַהוּא, not *הַהוּא בַּיִת).",
+     "“That is a teacher” (presenting) is זֶה מוֹרֶה, not *הַהוּא מוֹרֶה."
+    ],
+    "subtleties": [
+     "Alone, הַהוּא / הַהִיא mean “that guy / that woman” — a little dismissive.",
+     "The plural keeps the gender of the noun, not of its ending: הַחַלּוֹנוֹת הָהֵם (m), הַנָּשִׁים הָהֵן (f)."
+    ]
+   }
+  },
+  {
+   "id": "he:po",
+   "lemma": "פֹּה",
+   "pos": "ADV",
+   "senses": [
+    "adv.here"
+   ],
+   "translit": "po",
+   "features": {
+    "spelling": "פה",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.here",
+     "axis": "register",
+     "value": "everyday speech"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Here and now, everyday speech.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "here, at this place",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.here"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַגֶּזֶר פֹּה.",
+      "tr": "The carrot is here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי גָּר פֹּה.",
+      "tr": "I (m.) live here.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה רָחוֹק מִפֹּה?",
+      "tr": "Is it far from here?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פֹּה וְשָׁם",
+      "tr": "here and there"
+     },
+     {
+      "text": "מִפֹּה",
+      "tr": "from here"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "פֹּה קָבוּר הַכֶּלֶב",
+      "tr": "here the dog is buried",
+      "kind": "idiom",
+      "meaning": "that’s the crux of the matter",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "כָּאן",
+      "register": "neutral",
+      "nuance": "the same meaning, a little more formal; typical of signs, news and writing"
+     },
+     {
+      "word": "הֵנָּה",
+      "register": "neutral",
+      "nuance": "“(to) here” with verbs of motion: בּוֹא הֵנָּה! “come here!”"
+     }
+    ],
+    "etymology": {
+     "text": "Compare with Egyptian pj (“this”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The idiom פֹּה קָבוּר הַכֶּלֶב is a calque of German “Da liegt der Hund begraben”."
+    ],
+    "pitfalls": [
+     "Homograph: פֶּה “mouth” is also written פה without vowels.",
+     "“Come here” uses הֵנָּה (direction): בּוֹא הֵנָּה, not פֹּה."
+    ],
+    "subtleties": [
+     "פֹּה is the everyday word; כָּאן is equally correct but sounds a little more formal."
+    ]
+   }
+  },
+  {
+   "id": "he:kan",
+   "lemma": "כָּאן",
+   "pos": "ADV",
+   "senses": [
+    "adv.here"
+   ],
+   "translit": "kan",
+   "features": {
+    "spelling": "כאן",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.here",
+     "axis": "register",
+     "value": "neutral to formal; usual in writing"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Signs, announcements, a slightly more careful “here”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "here, at this place",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.here"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָעַגְבָנִיּוֹת כָּאן.",
+      "tr": "The tomatoes are here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אָסוּר לְעַשֵּׁן כָּאן.",
+      "tr": "Smoking is forbidden here.",
+      "register": "formal",
+      "context": "signs",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתַּחֲנָה רְחוֹקָה מִכָּאן?",
+      "tr": "Is the station far from here?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַד כָּאן",
+      "tr": "that’s it; up to here"
+     },
+     {
+      "text": "מִכָּאן וָאֵילָךְ",
+      "tr": "from now on (formal)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פֹּה",
+      "register": "neutral",
+      "nuance": "the everyday word, a little more casual"
+     }
+    ],
+    "etymology": {
+     "text": "From כְּ־ + אָן (“where”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Israel’s public broadcaster (since 2017) is called כָּאן — “here”.",
+     "The old word אָן “whither” lives on in לְאָן “where to?”."
+    ],
+    "pitfalls": [
+     "כָּאן (kan, here) vs כֵּן (ken, yes): only the vowel differs."
+    ],
+    "subtleties": [
+     "עַד כָּאן! can mean “that’s enough!” — and closes a news item."
+    ]
+   }
+  },
+  {
+   "id": "he:sham",
+   "lemma": "שָׁם",
+   "pos": "ADV",
+   "senses": [
+    "adv.there"
+   ],
+   "translit": "sham",
+   "features": {
+    "spelling": "שם",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Over there — distance, elsewhere.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "there (at that place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.there"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסְּפָרִים שָׁם, עַל הַמַּדָּף.",
+      "tr": "The books are there, on the shelf.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "גַּרְתִּי שָׁם שָׁנָה.",
+      "tr": "I lived there for a year.",
+      "register": "neutral",
+      "context": "life story",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי שָׁם?",
+      "tr": "Who’s there?",
+      "register": "neutral",
+      "context": "at the door",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פֹּה וְשָׁם",
+      "tr": "here and there"
+     },
+     {
+      "text": "מִשָּׁם",
+      "tr": "from there"
+     },
+     {
+      "text": "שָׁמָּה",
+      "tr": "(to) there — with verbs of motion"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שָׁמָּה",
+      "register": "neutral",
+      "nuance": "“to there, thither” — direction with verbs of motion; in speech also simply “there”"
+     },
+     {
+      "word": "בַּמָּקוֹם הַהוּא",
+      "register": "formal",
+      "nuance": "“in that place” — a description, not a single word"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "פֹּה",
+      "note": "here"
+     },
+     {
+      "word": "כָּאן",
+      "note": "here"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic ثَمَّ (ṯamma), Aramaic תַּמָּה (tammā), תַּמָּן (tammān), Ugaritic ṯm.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שׁ often answers Arabic ث (th): שָׁם ~ ثَمَّ (thamma), שָׁלוֹשׁ ~ ثَلَاث (thalāth, “three”)."
+    ],
+    "pitfalls": [
+     "Homographs: unvocalized שם is also שֵׁם “name” and the verb שָׂם “puts” — the context decides.",
+     "With motion (“go there”) Hebrew prefers שָׁמָּה or לְשָׁם: אֲנִי הוֹלֵךְ לְשָׁם."
+    ],
+    "subtleties": [
+     "שָׁם is simply “not here”: Hebrew has no separate “there near you” like Turkish şurada (beside orada)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

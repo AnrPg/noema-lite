@@ -1,0 +1,476 @@
+{
+ "function": "fn.past.ongoing",
+ "status": "periphrastic",
+ "summary": "Arabic has no special verb form for “was doing” or “used to do”: it puts كَانَ “was” in the past before a verb in the present (the imperfect), and both verbs agree with the subject: كُنْتُ أَلْعَبُ “I was playing / I used to play”, كَانَتْ أُمِّي تَطْبُخُ “my mother was cooking”, كُنَّا نُسَافِرُ “we used to travel”. The same construction is the background of a past moment (كُنْتُ أَنَامُ عِنْدَمَا عَادَ أَبِي “I was sleeping when my father came back”) and a past habit (كُنْتُ أَذْهَبُ إِلَى الرَّوْضَةِ “I used to go to kindergarten”); a time clause with عِنْدَمَا or words like كُلَّ يَوْمٍ, دَائِمًا, فِي طُفُولَتِي show which. The plain past (لَعِبْتُ) is one finished event. The negative puts لَا before the second verb (كُنْتُ لَا أُحِبُّ الْحَلِيبَ “I didn’t like milk”) or uses لَمْ أَكُنْ + present.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "كَانَ (past)",
+    "لَعِبَ (present)",
+    "together"
+   ],
+   "rows": [
+    [
+     "أَنَا I",
+     "كُنْتُ",
+     "أَلْعَبُ",
+     "كُنْتُ أَلْعَبُ"
+    ],
+    [
+     "أَنْتَ you (to a man)",
+     "كُنْتَ",
+     "تَلْعَبُ",
+     "كُنْتَ تَلْعَبُ"
+    ],
+    [
+     "أَنْتِ you (to a woman)",
+     "كُنْتِ",
+     "تَلْعَبِينَ",
+     "كُنْتِ تَلْعَبِينَ"
+    ],
+    [
+     "هُوَ he",
+     "كَانَ",
+     "يَلْعَبُ",
+     "كَانَ يَلْعَبُ"
+    ],
+    [
+     "هِيَ she",
+     "كَانَتْ",
+     "تَلْعَبُ",
+     "كَانَتْ تَلْعَبُ"
+    ],
+    [
+     "نَحْنُ we",
+     "كُنَّا",
+     "نَلْعَبُ",
+     "كُنَّا نَلْعَبُ"
+    ],
+    [
+     "أَنْتُمْ you (several)",
+     "كُنْتُمْ",
+     "تَلْعَبُونَ",
+     "كُنْتُمْ تَلْعَبُونَ"
+    ],
+    [
+     "أَنْتُنَّ you (women only)",
+     "كُنْتُنَّ",
+     "تَلْعَبْنَ",
+     "كُنْتُنَّ تَلْعَبْنَ"
+    ],
+    [
+     "هُمْ they",
+     "كَانُوا",
+     "يَلْعَبُونَ",
+     "كَانُوا يَلْعَبُونَ"
+    ],
+    [
+     "هُنَّ they (women only)",
+     "كُنَّ",
+     "يَلْعَبْنَ",
+     "كُنَّ يَلْعَبْنَ"
+    ]
+   ],
+   "caption": "كَانَ in the past + the present of the main verb, both for the same person: “I was playing / used to play”, “you were playing” …",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Two verbs, one person.",
+   "text": "Both verbs carry the person: كُنْتُ أَلْعَبُ (I … I), كُنَّا نَلْعَبُ (we … we), كَانُوا يَلْعَبُونَ (they … they). كَانَ gives the time (past), the second verb the kind of action (ongoing or repeated)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "One finished event: the past",
+     "points": [
+      "لَعِبْنَا فِي الْحَدِيقَةِ.",
+      "we played in the park (once, it is over)"
+     ]
+    },
+    {
+     "title": "Ongoing or habit: كَانَ + present",
+     "points": [
+      "كُنَّا نَلْعَبُ فِي الْحَدِيقَةِ.",
+      "we were playing / we used to play in the park"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "inflectional"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "background (كَانَ + present)",
+    "event (past)"
+   ],
+   "rows": [
+    [
+     "كَانَتْ أُمِّي تَطْبُخُ",
+     "عِنْدَمَا وَصَلْتُ."
+    ],
+    [
+     "كَانَ أَبِي يَشْرَبُ الْقَهْوَةَ",
+     "عِنْدَمَا اسْتَيْقَظْتُ."
+    ],
+    [
+     "كُنَّا نَأْكُلُ",
+     "عِنْدَمَا وَصَلَ الْجَارُ."
+    ],
+    [
+     "كُنْتُ أَنَامُ",
+     "عِنْدَمَا عَادَ أَبِي."
+    ]
+   ],
+   "caption": "“Was doing … when …”: the long action in كَانَ + present, the short one in the past after عِنْدَمَا."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "A noun subject after كَانَ.",
+   "text": "Verb first, كَانَ stays singular (كَانَتْ for a feminine noun) and the second verb agrees fully, because it follows the noun: كَانَ الْأَطْفَالُ يَلْعَبُونَ. Noun first, both agree: الْأَطْفَالُ كَانُوا يَلْعَبُونَ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The negative.",
+   "text": "كُنْتُ لَا أُحِبُّ الْحَلِيبَ — لَا before the present verb (the simplest); لَمْ أَكُنْ أُحِبُّ الْحَلِيبَ — لَمْ + the jussive of كَانَ (أَكُنْ); مَا كُنْتُ أُحِبُّ … — literary. All three: “I didn’t (use to) like milk”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "كَانَ alone is “was”.",
+   "text": "With a noun or an adjective كَانَ is just the past of “to be”: كَانَتِ الرِّحْلَةُ طَوِيلَةً “the trip was long”. Only كَانَ + a present verb is the ongoing or habitual past."
+  },
+  {
+   "t": "p",
+   "text": "Words that point to a habit: كُلَّ يَوْمٍ (every day), دَائِمًا (always), أَحْيَانًا (sometimes), كَثِيرًا (often), فِي طُفُولَتِي (in my childhood), عِنْدَمَا كُنْتُ طِفْلًا (when I was a child). A verb can make the habit explicit: اِعْتَادَ أَنْ + subjunctive “to be in the habit of”."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Was it going on at that moment (the background of another event)? → كَانَ + present.",
+   "Was it a habit, something repeated (used to)? → كَانَ + present.",
+   "Was it one finished event? → the plain past (لَعِبْتُ).",
+   "Who? كَانَ in the past form of that person (كُنْتُ، كَانَتْ، كُنَّا …) and the second verb in the present of the same person (أَلْعَبُ، تَلْعَبُ، نَلْعَبُ …).",
+   "Is the subject a noun after كَانَ? → كَانَ singular (كَانَتْ for a feminine noun); the second verb agrees fully: كَانَ الْأَطْفَالُ يَلْعَبُونَ.",
+   "Negative? → لَا before the present verb (كُنْتُ لَا أُحِبُّ) or لَمْ أَكُنْ + present."
+  ]
+ },
+ "traps": [
+  "The second verb is present, not past: كُنْتُ أَلْعَبُ, not *كُنْتُ لَعِبْتُ (كَانَ + past, usually with قَدْ, is “had done” — a later lesson).",
+  "Both verbs agree with the same person: كُنَّا نَلْعَبُ, not *كُنَّا أَلْعَبُ.",
+  "There is no word for “used to”: the habit is in كَانَ + present and in the time words.",
+  "The present alone is not a past habit: أَلْعَبُ فِي الشَّارِعِ is “I play in the street” (now).",
+  "كَانَتْ before al- takes a helping vowel: كَانَتِ الْبِنْتُ تَلْعَبُ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:kana"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;1;SG",
+  "V;PST;2;SG;MASC",
+  "V;PST;2;SG;FEM",
+  "V;PST;3;SG;MASC",
+  "V;PST;3;SG;FEM",
+  "V;PST;1;PL",
+  "V;PST;2;PL;MASC",
+  "V;PST;2;PL;FEM",
+  "V;PST;3;PL;MASC",
+  "V;PST;3;PL;FEM",
+  "V;PRS;IND;1;SG",
+  "V;PRS;IND;2;SG;MASC",
+  "V;PRS;IND;2;SG;FEM",
+  "V;PRS;IND;3;SG;MASC",
+  "V;PRS;IND;3;SG;FEM",
+  "V;PRS;IND;1;PL",
+  "V;PRS;IND;2;PL;MASC",
+  "V;PRS;IND;2;PL;FEM",
+  "V;PRS;IND;3;PL;MASC",
+  "V;PRS;IND;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:kana"
+   ],
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;2;SG;MASC",
+    "V;PST;2;SG;FEM",
+    "V;PST;3;SG;MASC",
+    "V;PST;3;SG;FEM",
+    "V;PST;1;PL",
+    "V;PST;2;PL;MASC",
+    "V;PST;2;PL;FEM",
+    "V;PST;3;PL;MASC",
+    "V;PST;3;PL;FEM"
+   ],
+   "count": 10
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Aspect"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“We used to play” — which is correct?",
+   "options": [
+    "كُنَّا نَلْعَبُ",
+    "كُنَّا لَعِبْنَا",
+    "كُنَّا أَلْعَبُ",
+    "لَعِبْنَا"
+   ],
+   "answer": "كُنَّا نَلْعَبُ",
+   "why": "كَانَ in the past + the present, both for “we”."
+  },
+  {
+   "q": "كَانَتْ أُمِّي تَطْبُخُ عِنْدَمَا وَصَلْتُ means …",
+   "options": [
+    "My mother was cooking when I arrived.",
+    "My mother cooked when I arrived.",
+    "My mother will cook when I arrive.",
+    "My mother cooks when I arrive."
+   ],
+   "answer": "My mother was cooking when I arrived.",
+   "why": "كَانَ + present is the background; the past وَصَلْتُ is the event."
+  },
+  {
+   "q": "“The children were playing”, verb first: which is correct?",
+   "options": [
+    "كَانَ الْأَطْفَالُ يَلْعَبُونَ",
+    "كَانُوا الْأَطْفَالُ يَلْعَبُونَ",
+    "كَانَ الْأَطْفَالُ يَلْعَبُ"
+   ],
+   "answer": "كَانَ الْأَطْفَالُ يَلْعَبُونَ",
+   "why": "كَانَ before the noun stays singular; the second verb comes after the noun and agrees fully."
+  },
+  {
+   "q": "Which word is Arabic’s “used to”?",
+   "options": [
+    "there is none: كَانَ + present",
+    "سَوْفَ",
+    "قَدْ",
+    "لَمْ"
+   ],
+   "answer": "there is none: كَانَ + present",
+   "why": "The habitual past is a construction: كُنْتُ أَذْهَبُ “I used to go”."
+  },
+  {
+   "q": "“I didn’t (use to) like milk” — which is NOT correct?",
+   "options": [
+    "كُنْتُ لَمْ أُحِبُّ الْحَلِيبَ",
+    "كُنْتُ لَا أُحِبُّ الْحَلِيبَ",
+    "لَمْ أَكُنْ أُحِبُّ الْحَلِيبَ"
+   ],
+   "answer": "كُنْتُ لَمْ أُحِبُّ الْحَلِيبَ",
+   "why": "لَمْ needs the jussive and does not go before the present indicative; say كُنْتُ لَا أُحِبُّ or لَمْ أَكُنْ أُحِبُّ."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.past.ongoing",
+   "note": "Hebrew builds the same construction with הָיָה + the present participle (הָיִיתִי מְשַׂחֵק “I used to play”), parallel to كُنْتُ أَلْعَبُ."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.past.ongoing",
+   "note": "German uses the plain Präteritum or Perfekt with früher / immer (früher spielte ich auf der Straße); Arabic marks the habit with كَانَ + present."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.past.ongoing",
+   "note": "Chinese uses 以前 / 常常 for a past habit and 在 / 正在 for an action in progress; the verb does not change. Arabic uses كَانَ + present for both."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.past",
+   "note": "The plain past (لَعِبْتُ) is one finished event; كَانَ + present (كُنْتُ أَلْعَبُ) is the ongoing or repeated past."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "verb.progressive",
+   "value": "none"
+  },
+  {
+   "feature": "verb.past",
+   "value": "past"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "inflectional"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has a one-word imperfect for both meanings (έπαιζα “I was playing / used to play”); Arabic expresses the same two meanings with two verbs, كَانَ + present (كُنْتُ أَلْعَبُ)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian uses the imperfective past for both (я играл “I was playing / used to play”); Arabic builds it from كَانَ + present (كُنْتُ أَلْعَبُ)."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "The imperfecto (jugaba) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two words, and the preterite (jugué) matches the plain past لَعِبْتُ."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English splits “was playing” from “used to / would play”; Arabic has one construction for both, كُنْتُ أَلْعَبُ, and no word for “used to”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "The imparfait (je jouais) has both meanings, like كُنْتُ أَلْعَبُ; the passé composé (j’ai joué) matches the plain past لَعِبْتُ."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German uses the same Präteritum or Perfekt for an event and a habit and adds früher or immer; Arabic marks the ongoing or habitual past in the verb phrase: كَانَ + present."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi has a habitual past (मैं खेलता था “I used to play”) and a progressive past (मैं खेल रहा था); Arabic uses one construction, كَانَ + present, for both — also built with “was”."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian uses the past with mi- for habit and background (بازی می‌کردم “I was playing / used to play”); Arabic uses كَانَ + present (كُنْتُ أَلْعَبُ)."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi has a habitual past (मी खेळायचो “I used to play”) and a progressive past (मी खेळत होतो); Arabic uses كَانَ + present for both."
+  },
+  {
+   "for": "he",
+   "rel": "same",
+   "text": "Hebrew uses the same pattern: הָיָה + the present participle (הָיִיתִי מְשַׂחֵק “I used to play”), parallel to كُنْتُ أَلْعَبُ."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has suffixes for the past progressive (oynuyordum) and the past habit (oynardım); Arabic has no such forms and uses كَانَ + present."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese says “was doing” with -te ita (遊んでいた); Arabic uses كَانَ + present, which also covers “used to”."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean has -고 있었다 for “was doing” (놀고 있었다) and -곤 했다 for a habit (놀곤 했다); Arabic uses one construction, كَانَ + present."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish mostly uses the plain past (leikin) with time words, or olin leikkimässä for “was playing”; Arabic always marks it with كَانَ + present."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian uses the plain past for both (játszottam) and adds words like régen “in the old days”; Arabic marks the ongoing or habitual past with كَانَ + present."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also combines “was” with a second verb (nilikuwa nikicheza “I was playing”), close to كُنْتُ أَلْعَبُ."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese marks “in progress” with 在 / 正在 and a past habit with 以前 / 常常 (我以前常常在街上玩); the verb does not change. Arabic uses كَانَ + present."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses đang for an action in progress and hay / thường for habit, with time words like hồi nhỏ “as a child”; Arabic uses كَانَ + present."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Polysynthetic languages usually put habit and duration into the verb word as suffixes; Arabic expresses them with two separate verbs, كَانَ + present."
+  }
+ ]
+}

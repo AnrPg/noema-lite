@@ -1,0 +1,23 @@
+{
+ "field": "mind",
+ "title": "Mind and thinking",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "mind.ego",
+   "gloss": "the ego, the self",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "mind.school",
+   "gloss": "school (of thought), sect",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  }
+ ]
+}

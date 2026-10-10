@@ -1,0 +1,28 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:nihao",
+   "lemma": "你好",
+   "trad": "你好",
+   "pinyin": "nǐ hǎo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ]
+}

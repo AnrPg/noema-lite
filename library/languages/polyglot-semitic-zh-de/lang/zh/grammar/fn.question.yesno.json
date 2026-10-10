@@ -1,0 +1,396 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.polarQuestion",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.questionParticlePosition",
+   "value": "final"
+  }
+ ],
+ "summary": "To ask a yes/no question, put 吗 ma at the end of the statement: 你喝茶。→ 你喝茶吗？ Nothing moves. A second way repeats the verb with 不 in between (A-not-A): 你喝不喝茶？, 是不是, 要不要, and with 有: 有没有 — then without 吗. To offer a choice, join the options with 还是 ‘or’: 你喝茶还是咖啡？ (no 吗); 或者 ‘or’ is for statements. There is no all-purpose ‘yes’ or ‘no’: you answer with the verb (喝。/ 不喝。, 有。/ 没有。, 是。/ 不是。) or with 对 ‘right’, 当然 ‘of course’, 也许 ‘maybe’. To a negative question 对 agrees with the negative: 你不喝咖啡吗？— 对，我不喝。",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "你喝茶。",
+    "+ 吗",
+    "你喝茶吗？"
+   ],
+   "caption": "Statement + 吗 = yes/no question",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "final"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Form",
+    "Example",
+    "Note"
+   ],
+   "rows": [
+    [
+     "statement + 吗",
+     "你喝咖啡吗？",
+     "the neutral question"
+    ],
+    [
+     "A-not-A",
+     "你喝不喝咖啡？ 你有没有咖啡？ 这是不是你的？",
+     "a little more direct; never with 吗; 有 → 有没有"
+    ],
+    [
+     "A 还是 B",
+     "你喝茶还是咖啡？",
+     "a choice between two; no 吗"
+    ]
+   ],
+   "caption": "Three ways to ask",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Question",
+    "Yes",
+    "No"
+   ],
+   "rows": [
+    [
+     "你喝茶吗？",
+     "喝。",
+     "不喝。"
+    ],
+    [
+     "你有牛奶吗？",
+     "有。",
+     "没有。"
+    ],
+    [
+     "这是糖吗？",
+     "是。/ 对。",
+     "不是。"
+    ],
+    [
+     "你要不要咖啡？",
+     "要。",
+     "不要。"
+    ],
+    [
+     "你喜欢鱼吗？",
+     "喜欢。",
+     "不喜欢。"
+    ]
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "还是 — or? (asking for a choice)",
+     "points": [
+      "你要米饭还是面包？ Rice or bread?",
+      "no 吗"
+     ]
+    },
+    {
+     "title": "或者 — or (stating)",
+     "points": [
+      "我早饭喝茶或者咖啡。 For breakfast I drink tea or coffee.",
+      "你要茶或者咖啡吗？ Would you like some tea or coffee?"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Answering a negative question",
+   "text": "你不喝咖啡吗？ ‘Don’t you drink coffee?’ — 对，我不喝。 ‘Right, I don’t.’ / 不，我喝。 ‘No — I do.’ 对 and 是 agree with what was said; German contradicts a negative question with doch, Chinese with 不 + the verb."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Short replies of S09",
+   "text": "真的吗？ ‘Really?’ — 当然！ ‘Of course!’ — 也许。 ‘Maybe.’ — 我也是。 ‘Me too.’"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Question words never take 吗",
+   "text": "你喝什么？ ‘What do you drink?’ — with 吗 (你喝什么吗？) it means ‘Do you drink anything?’."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "A-not-A with two-syllable verbs",
+   "text": "喜欢 → 喜欢不喜欢 or the shorter 喜不喜欢 — both are heard: 你喜欢不喜欢鱼？"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there already a question word (什么, 哪里 …)? → no 吗.",
+   "Is it a yes/no question? → statement + 吗, or verb-不-verb.",
+   "Did I use verb-不-verb (要不要, 是不是)? → then no 吗.",
+   "Is the verb 有? → the A-not-A form is 有没有.",
+   "Do I offer a choice between two things? → A 还是 B, without 吗.",
+   "Is it a statement with ‘or’? → 或者.",
+   "How do I answer? → repeat the verb, or its negation (要 / 不要; 有 / 没有; 是 / 不是).",
+   "Was the question negative (你不 … 吗？)? → 对 confirms the negative: 对，我不喝."
+  ],
+  "steps": [
+   "Write the statement in normal word order.",
+   "Add 吗 before the question mark — or replace the verb by verb + 不 + verb — or join two options with 还是.",
+   "Use a full-width question mark ？."
+  ]
+ },
+ "traps": [
+  "*你喝什么吗？ for ‘what do you drink?’ — 什么 + 吗 means ‘anything’.",
+  "*你要不要咖啡吗？ — A-not-A and 吗 never combine.",
+  "Don’t invert subject and verb as German does: 你喝茶吗？ keeps the statement order.",
+  "Answering 是 to every question sounds wrong: to 你要咖啡吗？ answer 要。, not 是。",
+  "*你喝茶或者咖啡？ to offer a choice → 你喝茶还是咖啡？",
+  "*你喝茶还是咖啡吗？ — a 还是 question takes no 吗.",
+  "To ‘Don’t you drink coffee?’ the answer 对 means ‘right, I don’t’."
+ ],
+ "evidence": {
+  "punct": [
+   "？",
+   "?"
+  ],
+  "exclude": [
+   "zh:shenme",
+   "zh:nali",
+   "zh:shei",
+   "zh:sheide",
+   "zh:shenmeshihou",
+   "zh:zenme",
+   "zh:zenmeyang",
+   "zh:weishenme",
+   "zh:duoshao",
+   "zh:ji",
+   "zh:na.which"
+  ]
+ },
+ "needs": {
+  "VERB": 3,
+  "NOUN": 5
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek asks yes/no questions by intonation alone (Πίνεις τσάι;); Chinese needs 吗 or verb-不-verb — raising the voice is not enough. ναι / όχι have no single Chinese match: answer with the verb (喝 / 不喝)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian asks by intonation (Ты пьёшь чай?) or with literary ли; Chinese adds 吗 at the end. да / нет become the verb: 喝 / 不喝, 有 / 没有."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish asks by intonation (¿Bebes té?); Chinese adds 吗. sí / no become the verb: 喝 / 不喝."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English inverts or uses ‘do’ (Do you drink tea?); Chinese keeps the statement and adds 吗: 你喝茶吗？ There is no all-purpose yes / no: 喝 / 不喝, 是 / 不是. To a negative question 对 confirms the negative (‘right, I don’t’)."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French est-ce que makes a question without changing the order — like 吗, but at the other end of the sentence. oui / non / si become the verb in Chinese."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German inverts (Trinkst du Tee?) and answers a negative question with doch; Chinese keeps the order, adds 吗, contradicts with 不 + verb or confirms with 对."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi क्या at the start marks a yes/no question without changing the order (क्या तुम चाय पीते हो?) — like 吗, but at the beginning. हाँ / नहीं become the verb in Chinese."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian āyā at the start may mark a question without changing the order; Chinese 吗 at the end is the normal way. bale / na become the verb in Chinese."
+  },
+  {
+   "for": "mr",
+   "rel": "same",
+   "text": "Marathi का at the end of the sentence (तू चहा पितोस का? ‘do you drink tea?’) is exactly 吗."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic hal at the start marks a yes/no question (hal tashrabu shāy?); Chinese puts 吗 at the end. naʿam / lā become the verb in Chinese."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew asks mostly by intonation (ata shote te?), formally with ha-im at the start; Chinese adds 吗 at the end. ken / lo become the verb in Chinese."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish mı / mi / mu / mü is a question particle like 吗, but it follows the word asked about and changes its vowel; 吗 always closes the sentence and never changes. evet / hayır become the verb in Chinese."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese か at the end of the sentence (お茶を飲みますか) is exactly 吗. Japanese はい to a negative question also confirms the negative — like Chinese 对."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks questions with the verb ending and intonation (차 마셔요?); Chinese adds the separate word 吗. Korean 네 to a negative question confirms the negative — like 对."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish puts -ko / -kö on the first word and moves the verb first (Juotko teetä?); Chinese changes nothing and adds 吗. But Finnish answers by repeating the verb (Juon / En juo) — exactly like 喝 / 不喝."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian asks by intonation alone (Teát iszol?) or with -e; Chinese adds 吗. igen / nem become the verb in Chinese."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili asks by intonation or with je at the start (Je, unakunywa chai?); Chinese adds 吗 at the end."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda asks yes/no questions by intonation; Chinese needs 吗 or verb-不-verb, because the pitch of each syllable already belongs to its tone."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese có … không? frames the verb (anh có uống trà không?) — the nearest relative of 有没有 and 喝不喝; Chinese also has the simpler 吗."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut makes a question with a special verb ending (an interrogative mood); Chinese leaves the verb alone and adds 吗."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "German puts the verb first (Trinkst du Tee?) and contradicts a negative question with doch; Chinese keeps the statement order, adds 吗, and answers with the verb."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.question.yesno",
+   "note": "Arabic opens the question with hal or ʾa-; Chinese closes it with 吗. Arabic أَمْ ‘or’ in questions vs أَوْ in statements is the same split as 还是 / 或者."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.question.yesno",
+   "note": "Hebrew often uses intonation alone (or הַאִם at the start); Chinese keeps its tones and uses 吗 instead."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘Do you drink tea?’",
+   "options": [
+    "你喝茶吗？",
+    "你喝不喝茶吗？",
+    "吗你喝茶？"
+   ],
+   "answer": "你喝茶吗？",
+   "why": "Statement + 吗; A-not-A never takes 吗."
+  },
+  {
+   "q": "‘Tea or coffee?’ (offering a choice)",
+   "options": [
+    "你喝茶还是咖啡？",
+    "你喝茶或者咖啡？",
+    "你喝茶还是咖啡吗？"
+   ],
+   "answer": "你喝茶还是咖啡？",
+   "why": "还是 asks for a choice, without 吗."
+  },
+  {
+   "q": "你有牛奶吗？ — the short ‘yes’:",
+   "options": [
+    "有。",
+    "是。",
+    "吗。"
+   ],
+   "answer": "有。",
+   "why": "Answer with the verb."
+  },
+  {
+   "q": "你要不要咖啡？ means …",
+   "options": [
+    "Do you want coffee?",
+    "You don’t want coffee.",
+    "Don’t you want coffee?"
+   ],
+   "answer": "Do you want coffee?",
+   "why": "A-not-A is a plain yes/no question."
+  },
+  {
+   "q": "你不吃肉吗？ — 对。 means …",
+   "options": [
+    "Right, I don’t eat meat.",
+    "Yes, I do eat meat.",
+    "Maybe."
+   ],
+   "answer": "Right, I don’t eat meat.",
+   "why": "对 agrees with the negative question."
+  },
+  {
+   "q": "‘For breakfast I drink tea or coffee.’",
+   "options": [
+    "我早饭喝茶或者咖啡。",
+    "我早饭喝茶还是咖啡。",
+    "我早饭喝茶吗咖啡。"
+   ],
+   "answer": "我早饭喝茶或者咖啡。",
+   "why": "In a statement ‘or’ is 或者."
+  }
+ ]
+}

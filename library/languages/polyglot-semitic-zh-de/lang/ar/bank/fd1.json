@@ -1,0 +1,3548 @@
+{
+ "sentences": [
+  {
+   "id": "ar.f1.001",
+   "frame": "fr.be.person",
+   "text": "أَنَا طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am a student. (a man speaking)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.002",
+   "frame": "fr.be.person",
+   "text": "أَنَا طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am a student. (a woman speaking)",
+   "variantOf": "ar.f1.001",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.003",
+   "frame": "fr.be.person",
+   "text": "نَحْنُ طُلَّابٌ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "طُلَّابٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are students.",
+   "variantOf": "ar.f1.001",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.004",
+   "frame": "fr.be.person",
+   "text": "كُنْتُ طَالِبًا.",
+   "tokens": [
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "طَالِبًا",
+     "l": "ar:talib",
+     "f": "N;ACC;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "I was a student. (a man speaking)",
+   "variantOf": "ar.f1.001",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "أَنَا كُنْتُ طَالِبًا."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.005",
+   "frame": "fr.be.person",
+   "text": "أَنْتَ مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are a teacher. (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.006",
+   "frame": "fr.be.person",
+   "text": "أَنْتِ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are a teacher. (to a woman)",
+   "variantOf": "ar.f1.005",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.007",
+   "frame": "fr.be.person",
+   "text": "أَنْتُمْ مُعَلِّمُونَ.",
+   "tokens": [
+    {
+     "t": "أَنْتُمْ",
+     "l": "ar:antum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "مُعَلِّمُونَ",
+     "l": "ar:muallim",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are teachers. (to men or a mixed group)",
+   "variantOf": "ar.f1.005",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.008",
+   "frame": "fr.be.person",
+   "text": "أَنْتُنَّ مُعَلِّمَاتٌ.",
+   "tokens": [
+    {
+     "t": "أَنْتُنَّ",
+     "l": "ar:antunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "مُعَلِّمَاتٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;PL;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are teachers. (to women)",
+   "variantOf": "ar.f1.006",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.009",
+   "frame": "fr.be.person",
+   "text": "هُوَ صَدِيقٌ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "صَدِيقٌ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is a friend.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.010",
+   "frame": "fr.be.person",
+   "text": "هِيَ صَدِيقَةٌ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "صَدِيقَةٌ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She is a friend.",
+   "variantOf": "ar.f1.009",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.011",
+   "frame": "fr.be.person",
+   "text": "هُمْ أَصْدِقَاءُ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أَصْدِقَاءُ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are friends.",
+   "variantOf": "ar.f1.009",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.012",
+   "frame": "fr.be.person",
+   "text": "هُنَّ صَدِيقَاتٌ.",
+   "tokens": [
+    {
+     "t": "هُنَّ",
+     "l": "ar:hunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "صَدِيقَاتٌ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;PL;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They (women) are friends.",
+   "variantOf": "ar.f1.010",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.013",
+   "frame": "fr.be.person",
+   "text": "كَانُوا أَصْدِقَاءَ.",
+   "tokens": [
+    {
+     "t": "كَانُوا",
+     "l": "ar:kana",
+     "f": "V;PST;3;PL;MASC"
+    },
+    {
+     "t": "أَصْدِقَاءَ",
+     "l": "ar:sadiq",
+     "f": "N;ACC;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "They were friends.",
+   "variantOf": "ar.f1.011",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "هُمْ كَانُوا أَصْدِقَاءَ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.014",
+   "frame": "fr.be.person",
+   "text": "هُوَ وَلَدٌ، وَهِيَ بِنْتٌ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "وَلَدٌ",
+     "l": "ar:walad",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَهِيَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "هِيَ",
+       "l": "ar:hiya",
+       "f": "PRON;NOM"
+      }
+     ]
+    },
+    {
+     "t": "بِنْتٌ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is a boy, and she is a girl.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.015",
+   "frame": "fr.be.person",
+   "text": "الرَّجُلُ مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "الرَّجُلُ",
+     "l": "ar:rajul",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The man is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.016",
+   "frame": "fr.be.person",
+   "text": "الْمَرْأَةُ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "الْمَرْأَةُ",
+     "l": "ar:imraa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The woman is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.017",
+   "frame": "fr.be.person",
+   "text": "الْوَلَدُ طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "الْوَلَدُ",
+     "l": "ar:walad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The boy is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.018",
+   "frame": "fr.be.person",
+   "text": "الْبِنْتُ طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "الْبِنْتُ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The girl is a pupil.",
+   "variantOf": "ar.f1.017",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.019",
+   "frame": "fr.be.person",
+   "text": "هُمْ أَطْفَالٌ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أَطْفَالٌ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are children.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.020",
+   "frame": "fr.be.person",
+   "text": "الطِّفْلُ شَخْصٌ.",
+   "tokens": [
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "شَخْصٌ",
+     "l": "ar:shakhs",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "A child is a person.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.021",
+   "frame": "fr.be.person",
+   "text": "كَانَ النَّاسُ أَصْدِقَاءَ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "النَّاسُ",
+     "l": "ar:nas",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "أَصْدِقَاءَ",
+     "l": "ar:sadiq",
+     "f": "N;ACC;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The people were friends.",
+   "alts": [
+    "النَّاسُ كَانُوا أَصْدِقَاءَ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.022",
+   "frame": "fr.be.person",
+   "text": "هِيَ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.023",
+   "frame": "fr.be.person",
+   "text": "كَانَتْ مُعَلِّمَةً.",
+   "tokens": [
+    {
+     "t": "كَانَتْ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "مُعَلِّمَةً",
+     "l": "ar:muallim",
+     "f": "N;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "She was a teacher.",
+   "variantOf": "ar.f1.022",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "هِيَ كَانَتْ مُعَلِّمَةً."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.024",
+   "frame": "fr.be.person",
+   "text": "نَحْنُ أَصْدِقَاءُ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أَصْدِقَاءُ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.025",
+   "frame": "fr.be.person",
+   "text": "الْمُعَلِّمُ وَالطُّلَّابُ أَصْدِقَاءُ.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "وَالطُّلَّابُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الطُّلَّابُ",
+       "l": "ar:talib",
+       "f": "N;NOM;PL;MASC;DEF"
+      }
+     ]
+    },
+    {
+     "t": "أَصْدِقَاءُ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The teacher and the students are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.026",
+   "frame": "fr.be.person",
+   "text": "أَنْتَ طَالِبٌ، وَأَنَا مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَأَنَا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "أَنَا",
+       "l": "ar:ana",
+       "f": "PRON;NOM"
+      }
+     ]
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are a student, and I am a teacher. (to a man, a man speaking)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.027",
+   "frame": "fr.greet",
+   "text": "مَرْحَبًا!",
+   "tokens": [
+    {
+     "t": "مَرْحَبًا",
+     "l": "ar:marhaban"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.028",
+   "frame": "fr.greet",
+   "text": "مَرْحَبًا! أَهْلًا!",
+   "tokens": [
+    {
+     "t": "مَرْحَبًا",
+     "l": "ar:marhaban"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "أَهْلًا",
+     "l": "ar:ahlan"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello! — Hi!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.029",
+   "frame": "fr.greet",
+   "text": "السَّلَامُ عَلَيْكُمْ! وَعَلَيْكُمُ السَّلَامُ!",
+   "tokens": [
+    {
+     "t": "السَّلَامُ عَلَيْكُمْ",
+     "l": "ar:assalamu_alaykum"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "وَعَلَيْكُمُ السَّلَامُ",
+     "l": "ar:waalaykumu_ssalam"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Peace be upon you! — And upon you be peace!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.030",
+   "frame": "fr.greet",
+   "text": "صَبَاحُ الْخَيْرِ! صَبَاحُ النُّورِ!",
+   "tokens": [
+    {
+     "t": "صَبَاحُ الْخَيْرِ",
+     "l": "ar:sabah_alkhayr"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "صَبَاحُ النُّورِ",
+     "l": "ar:sabah_annur"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good morning! — Good morning! (lit. morning of light)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.031",
+   "frame": "fr.greet",
+   "text": "مَسَاءُ الْخَيْرِ! مَسَاءُ النُّورِ!",
+   "tokens": [
+    {
+     "t": "مَسَاءُ الْخَيْرِ",
+     "l": "ar:masa_alkhayr"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "مَسَاءُ النُّورِ",
+     "l": "ar:masa_annur"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good evening! — Good evening! (lit. evening of light)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.032",
+   "frame": "fr.greet",
+   "text": "كَيْفَ حَالُكَ؟ بِخَيْرٍ، شُكْرًا.",
+   "tokens": [
+    {
+     "t": "كَيْفَ حَالُكَ",
+     "l": "ar:kayfa_haluka"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "بِخَيْرٍ",
+     "l": "ar:bikhayr"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "شُكْرًا",
+     "l": "ar:shukran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "How are you? (to a man) — Fine, thanks.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.033",
+   "frame": "fr.greet",
+   "text": "كَيْفَ حَالُكِ؟ بِخَيْرٍ، شُكْرًا.",
+   "tokens": [
+    {
+     "t": "كَيْفَ حَالُكِ",
+     "l": "ar:kayfa_haluki"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "بِخَيْرٍ",
+     "l": "ar:bikhayr"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "شُكْرًا",
+     "l": "ar:shukran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "How are you? (to a woman) — Fine, thanks.",
+   "variantOf": "ar.f1.032",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.034",
+   "frame": "fr.greet",
+   "text": "كَيْفَ حَالُكَ؟ الْحَمْدُ لِلّٰهِ، أَنَا بِخَيْرٍ.",
+   "tokens": [
+    {
+     "t": "كَيْفَ حَالُكَ",
+     "l": "ar:kayfa_haluka"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "الْحَمْدُ لِلّٰهِ",
+     "l": "ar:alhamdulillah"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "بِخَيْرٍ",
+     "l": "ar:bikhayr"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How are you? (to a man) — Thank God, I am fine.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.035",
+   "frame": "fr.greet",
+   "text": "شُكْرًا! عَفْوًا.",
+   "tokens": [
+    {
+     "t": "شُكْرًا",
+     "l": "ar:shukran"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "عَفْوًا",
+     "l": "ar:afwan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thank you! — You’re welcome.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.036",
+   "frame": "fr.greet",
+   "text": "أَنَا آسِفٌ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آسِفٌ",
+     "l": "ar:asif",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am sorry. (a man speaking)",
+   "alts": [
+    "آسِفٌ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.037",
+   "frame": "fr.greet",
+   "text": "أَنَا آسِفَةٌ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آسِفَةٌ",
+     "l": "ar:asif",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am sorry. (a woman speaking)",
+   "variantOf": "ar.f1.036",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "alts": [
+    "آسِفَةٌ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.038",
+   "frame": "fr.greet",
+   "text": "عُذْرًا، أَنَا آسِفٌ.",
+   "tokens": [
+    {
+     "t": "عُذْرًا",
+     "l": "ar:udhran"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آسِفٌ",
+     "l": "ar:asif",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "Pardon me, I am sorry. (a man speaking)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.039",
+   "frame": "fr.greet",
+   "text": "لَوْ سَمَحْتَ!",
+   "tokens": [
+    {
+     "t": "لَوْ سَمَحْتَ",
+     "l": "ar:law_samahta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Excuse me! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.040",
+   "frame": "fr.greet",
+   "text": "لَوْ سَمَحْتِ!",
+   "tokens": [
+    {
+     "t": "لَوْ سَمَحْتِ",
+     "l": "ar:law_samahti"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Excuse me! (to a woman)",
+   "variantOf": "ar.f1.039",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.041",
+   "frame": "fr.greet",
+   "text": "نَعَمْ، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Yes, please. (to a man)",
+   "alts": [
+    "نَعَمْ، لَوْ سَمَحْتَ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.042",
+   "frame": "fr.greet",
+   "text": "نَعَمْ، مِنْ فَضْلِكِ.",
+   "tokens": [
+    {
+     "t": "نَعَمْ",
+     "l": "ar:naam"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكِ",
+     "l": "ar:min_fadliki"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Yes, please. (to a woman)",
+   "variantOf": "ar.f1.041",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "alts": [
+    "نَعَمْ، لَوْ سَمَحْتِ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.043",
+   "frame": "fr.greet",
+   "text": "لَا، شُكْرًا.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la_no"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "شُكْرًا",
+     "l": "ar:shukran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "No, thank you.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.044",
+   "frame": "fr.greet",
+   "text": "مَعَ السَّلَامَةِ! إِلَى اللِّقَاءِ!",
+   "tokens": [
+    {
+     "t": "مَعَ السَّلَامَةِ",
+     "l": "ar:maa_assalama"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "إِلَى اللِّقَاءِ",
+     "l": "ar:ila_alliqa"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Goodbye! — Goodbye, until next time!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.045",
+   "frame": "fr.greet",
+   "text": "تُصْبِحُ عَلَى خَيْرٍ!",
+   "tokens": [
+    {
+     "t": "تُصْبِحُ عَلَى خَيْرٍ",
+     "l": "ar:tusbihu"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good night! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.046",
+   "frame": "fr.greet",
+   "text": "تُصْبِحِينَ عَلَى خَيْرٍ!",
+   "tokens": [
+    {
+     "t": "تُصْبِحِينَ عَلَى خَيْرٍ",
+     "l": "ar:tusbihina"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good night! (to a woman)",
+   "variantOf": "ar.f1.045",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.047",
+   "frame": "fr.greet",
+   "text": "أَرَاكَ لَاحِقًا!",
+   "tokens": [
+    {
+     "t": "أَرَاكَ لَاحِقًا",
+     "l": "ar:araka_lahiqan"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "See you later! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.048",
+   "frame": "fr.greet",
+   "text": "أَرَاكِ لَاحِقًا!",
+   "tokens": [
+    {
+     "t": "أَرَاكِ لَاحِقًا",
+     "l": "ar:araki_lahiqan"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "See you later! (to a woman)",
+   "variantOf": "ar.f1.047",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.049",
+   "frame": "fr.greet",
+   "text": "مَرْحَبًا، أَنَا طَالِبَةٌ. تَشَرَّفْنَا!",
+   "tokens": [
+    {
+     "t": "مَرْحَبًا",
+     "l": "ar:marhaban"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "تَشَرَّفْنَا",
+     "l": "ar:tasharrafna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "Hello, I am a student (a woman speaking). Nice to meet you!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.050",
+   "frame": "fr.greet",
+   "text": "أَهْلًا، أَنَا مُعَلِّمٌ. فُرْصَةٌ سَعِيدَةٌ!",
+   "tokens": [
+    {
+     "t": "أَهْلًا",
+     "l": "ar:ahlan"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "فُرْصَةٌ سَعِيدَةٌ",
+     "l": "ar:fursa_saida"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "Hi, I am a teacher (a man speaking). Pleased to meet you!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.051",
+   "frame": "fr.greet",
+   "text": "صَبَاحُ الْخَيْرِ! كَيْفَ حَالُكِ؟",
+   "tokens": [
+    {
+     "t": "صَبَاحُ الْخَيْرِ",
+     "l": "ar:sabah_alkhayr"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "كَيْفَ حَالُكِ",
+     "l": "ar:kayfa_haluki"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good morning! How are you? (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.052",
+   "frame": "fr.greet",
+   "text": "مَسَاءُ الْخَيْرِ! كَيْفَ حَالُكَ؟",
+   "tokens": [
+    {
+     "t": "مَسَاءُ الْخَيْرِ",
+     "l": "ar:masa_alkhayr"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "كَيْفَ حَالُكَ",
+     "l": "ar:kayfa_haluka"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good evening! How are you? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.053",
+   "frame": "fr.be.person",
+   "text": "هٰذَا طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a student. (a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.054",
+   "frame": "fr.be.person",
+   "text": "هٰذِهِ طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a student. (a woman)",
+   "variantOf": "ar.f1.053",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.055",
+   "frame": "fr.be.person",
+   "text": "هٰؤُلَاءِ طُلَّابٌ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "طُلَّابٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.agreement"
+   ],
+   "gloss": "These are students.",
+   "variantOf": "ar.f1.053",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.056",
+   "frame": "fr.be.person",
+   "text": "ذٰلِكَ طَالِبٌ.",
+   "tokens": [
+    {
+     "t": "ذٰلِكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "طَالِبٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "That is a student. (a man)",
+   "variantOf": "ar.f1.053",
+   "variant": {
+    "Deixis": "FAR"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.057",
+   "frame": "fr.be.person",
+   "text": "ذٰلِكَ مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "ذٰلِكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "That is a teacher. (a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.058",
+   "frame": "fr.be.person",
+   "text": "تِلْكَ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "تِلْكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "That is a teacher. (a woman)",
+   "variantOf": "ar.f1.057",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.059",
+   "frame": "fr.be.person",
+   "text": "أُولٰئِكَ مُعَلِّمُونَ.",
+   "tokens": [
+    {
+     "t": "أُولٰئِكَ",
+     "l": "ar:ulaika",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "مُعَلِّمُونَ",
+     "l": "ar:muallim",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.agreement"
+   ],
+   "gloss": "Those are teachers.",
+   "variantOf": "ar.f1.057",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.060",
+   "frame": "fr.be.where",
+   "text": "هٰذَا الطَّالِبُ هُنَا.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "الطَّالِبُ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite"
+   ],
+   "gloss": "This student is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.061",
+   "frame": "fr.be.where",
+   "text": "ذٰلِكَ الرَّجُلُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "ذٰلِكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "الرَّجُلُ",
+     "l": "ar:rajul",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite"
+   ],
+   "gloss": "That man is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.062",
+   "frame": "fr.be.person",
+   "text": "هٰذِهِ الْمَرْأَةُ مُعَلِّمَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "الْمَرْأَةُ",
+     "l": "ar:imraa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُعَلِّمَةٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This woman is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.063",
+   "frame": "fr.be.person",
+   "text": "أُولٰئِكَ النَّاسُ أَصْدِقَاءُ.",
+   "tokens": [
+    {
+     "t": "أُولٰئِكَ",
+     "l": "ar:ulaika",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "النَّاسُ",
+     "l": "ar:nas",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "أَصْدِقَاءُ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "Those people are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.064",
+   "frame": "fr.be.person",
+   "text": "هٰؤُلَاءِ الْأَوْلَادُ أَصْدِقَاءُ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "الْأَوْلَادُ",
+     "l": "ar:walad",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "أَصْدِقَاءُ",
+     "l": "ar:sadiq",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "These boys are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.065",
+   "frame": "fr.be.person",
+   "text": "تِلْكَ الْبِنْتُ طَالِبَةٌ.",
+   "tokens": [
+    {
+     "t": "تِلْكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "الْبِنْتُ",
+     "l": "ar:bint",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "طَالِبَةٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "That girl is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.066",
+   "frame": "fr.be.where",
+   "text": "أَنَا هُنَا.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.067",
+   "frame": "fr.be.where",
+   "text": "نَحْنُ هُنَا.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are here.",
+   "variantOf": "ar.f1.066",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.068",
+   "frame": "fr.be.where",
+   "text": "هُوَ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.069",
+   "frame": "fr.be.where",
+   "text": "هِيَ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She is over there.",
+   "variantOf": "ar.f1.068",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.070",
+   "frame": "fr.be.where",
+   "text": "الْمُعَلِّمُ هُنَا، وَالطُّلَّابُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَالطُّلَّابُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الطُّلَّابُ",
+       "l": "ar:talib",
+       "f": "N;NOM;PL;MASC;DEF"
+      }
+     ]
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite"
+   ],
+   "gloss": "The teacher is here, and the students are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.071",
+   "frame": "fr.be.person",
+   "text": "هٰذَا الشَّخْصُ مُعَلِّمٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "الشَّخْصُ",
+     "l": "ar:shakhs",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُعَلِّمٌ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This person is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.072",
+   "frame": "fr.be.where",
+   "text": "الْمُعَلِّمُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite"
+   ],
+   "gloss": "The teacher is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.073",
+   "frame": "fr.be.where",
+   "text": "كَانَ الْمُعَلِّمُ هُنَا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْمُعَلِّمُ",
+     "l": "ar:muallim",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite"
+   ],
+   "gloss": "The teacher was here.",
+   "variantOf": "ar.f1.072",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "الْمُعَلِّمُ كَانَ هُنَا."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.074",
+   "frame": "fr.be.where",
+   "text": "الْأَطْفَالُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite"
+   ],
+   "gloss": "The children are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.075",
+   "frame": "fr.be.person",
+   "text": "هٰؤُلَاءِ طَالِبَاتٌ.",
+   "tokens": [
+    {
+     "t": "هٰؤُلَاءِ",
+     "l": "ar:haulai",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "طَالِبَاتٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.agreement"
+   ],
+   "gloss": "These are students. (women)",
+   "variantOf": "ar.f1.054",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.076",
+   "frame": "fr.be.where",
+   "text": "هُنَاكَ طُلَّابٌ.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "طُلَّابٌ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "There are students (over there).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.077",
+   "frame": "fr.this.is",
+   "text": "هٰذَا بَيْتٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "بَيْتٌ",
+     "l": "ar:bayt",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "This is a house.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.078",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ شَقَّةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "شَقَّةٌ",
+     "l": "ar:shaqqa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "This is a flat.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.079",
+   "frame": "fr.thing.here",
+   "text": "هُنَا غُرْفَةٌ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "غُرْفَةٌ",
+     "l": "ar:ghurfa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "There is a room here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.080",
+   "frame": "fr.thing.here",
+   "text": "الْغُرْفَةُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْغُرْفَةُ",
+     "l": "ar:ghurfa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "The room is here.",
+   "variantOf": "ar.f1.079",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.081",
+   "frame": "fr.thing.here",
+   "text": "هُنَاكَ بَابٌ.",
+   "tokens": [
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": "بَابٌ",
+     "l": "ar:bab",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "There is a door (over there).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.082",
+   "frame": "fr.thing.here",
+   "text": "الْبَابُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْبَابُ",
+     "l": "ar:bab",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "The door is over there.",
+   "variantOf": "ar.f1.081",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.083",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ نَافِذَةٌ، وَهٰذَا جِدَارٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "نَافِذَةٌ",
+     "l": "ar:nafidha",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَهٰذَا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "هٰذَا",
+       "l": "ar:hadha",
+       "f": "PRON;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "جِدَارٌ",
+     "l": "ar:jidar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula"
+   ],
+   "gloss": "This is a window, and this is a wall.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.084",
+   "frame": "fr.thing.here",
+   "text": "الطَّاوِلَةُ هُنَا، وَالْكُرْسِيُّ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الطَّاوِلَةُ",
+     "l": "ar:tawila",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَالْكُرْسِيُّ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْكُرْسِيُّ",
+       "l": "ar:kursi",
+       "f": "N;NOM;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula"
+   ],
+   "gloss": "The table is here, and the chair is over there.",
+   "alts": [
+    "الْكُرْسِيُّ هُنَاكَ، وَالطَّاوِلَةُ هُنَا."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.085",
+   "frame": "fr.this.is",
+   "text": "ذٰلِكَ سَرِيرٌ، وَتِلْكَ خِزَانَةٌ.",
+   "tokens": [
+    {
+     "t": "ذٰلِكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "سَرِيرٌ",
+     "l": "ar:sarir",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَتِلْكَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "تِلْكَ",
+       "l": "ar:dhalika",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "خِزَانَةٌ",
+     "l": "ar:khizana",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "That is a bed, and that is a wardrobe.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.086",
+   "frame": "fr.this.is",
+   "text": "هٰذَا مِصْبَاحٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "مِصْبَاحٌ",
+     "l": "ar:misbah",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula"
+   ],
+   "gloss": "This is a lamp.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.087",
+   "frame": "fr.this.is",
+   "text": "هٰذَا كِتَابٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "كِتَابٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "This is a book.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.088",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ كُتُبٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "كُتُبٌ",
+     "l": "ar:kitab",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "These are books.",
+   "variantOf": "ar.f1.087",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.089",
+   "frame": "fr.thing.here",
+   "text": "هُنَا قَلَمٌ.",
+   "tokens": [
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "قَلَمٌ",
+     "l": "ar:qalam",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "There is a pen here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.090",
+   "frame": "fr.thing.here",
+   "text": "الْقَلَمُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقَلَمُ",
+     "l": "ar:qalam",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "The pen is here.",
+   "variantOf": "ar.f1.089",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.091",
+   "frame": "fr.this.is",
+   "text": "هٰذَا وَرَقٌ، وَهٰذِهِ وَرَقَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "وَرَقٌ",
+     "l": "ar:waraq",
+     "f": "N;NOM;COLL;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَهٰذِهِ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "هٰذِهِ",
+       "l": "ar:hadha",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "وَرَقَةٌ",
+     "l": "ar:waraq",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula"
+   ],
+   "gloss": "This is paper, and this is a sheet of paper.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.092",
+   "frame": "fr.thing.here",
+   "text": "الْهَاتِفُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْهَاتِفُ",
+     "l": "ar:hatif",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "The phone is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.093",
+   "frame": "fr.thing.here",
+   "text": "كَانَ الْهَاتِفُ هُنَا.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "الْهَاتِفُ",
+     "l": "ar:hatif",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "The phone was here.",
+   "variantOf": "ar.f1.092",
+   "variant": {
+    "Tense": "PST"
+   },
+   "alts": [
+    "الْهَاتِفُ كَانَ هُنَا."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.094",
+   "frame": "fr.thing.here",
+   "text": "الْمِفْتَاحُ؟ هُوَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمِفْتَاحُ",
+     "l": "ar:miftah",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "The key? It is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.095",
+   "frame": "fr.thing.here",
+   "text": "الْمَفَاتِيحُ؟ هِيَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمَفَاتِيحُ",
+     "l": "ar:miftah",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "The keys? They are here.",
+   "variantOf": "ar.f1.094",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.096",
+   "frame": "fr.thing.here",
+   "text": "الْحَقِيبَةُ؟ هِيَ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْحَقِيبَةُ",
+     "l": "ar:haqiba",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "The bag? It is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.097",
+   "frame": "fr.this.is",
+   "text": "هٰذَا فِنْجَانٌ، وَتِلْكَ كَأْسٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "فِنْجَانٌ",
+     "l": "ar:finjan",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَتِلْكَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "تِلْكَ",
+       "l": "ar:dhalika",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "كَأْسٌ",
+     "l": "ar:kas",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is a cup, and that is a glass.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.098",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ كَأْسٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "كَأْسٌ",
+     "l": "ar:kas",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "This is a glass.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.099",
+   "frame": "fr.thing.here",
+   "text": "الصُّحُونُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الصُّحُونُ",
+     "l": "ar:sahn",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula"
+   ],
+   "gloss": "The plates are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.100",
+   "frame": "fr.this.is",
+   "text": "ذٰلِكَ صَحْنٌ.",
+   "tokens": [
+    {
+     "t": "ذٰلِكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "صَحْنٌ",
+     "l": "ar:sahn",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "That is a plate.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.101",
+   "frame": "fr.this.is",
+   "text": "تِلْكَ صُحُونٌ.",
+   "tokens": [
+    {
+     "t": "تِلْكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "صُحُونٌ",
+     "l": "ar:sahn",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Those are plates.",
+   "variantOf": "ar.f1.100",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.102",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ حَقِيبَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "حَقِيبَةٌ",
+     "l": "ar:haqiba",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "This is a bag.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.103",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ حَقَائِبُ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "حَقَائِبُ",
+     "l": "ar:haqiba",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "These are bags.",
+   "variantOf": "ar.f1.102",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.104",
+   "frame": "fr.thing.here",
+   "text": "الْكُتُبُ هُنَا، وَالْأَقْلَامُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْكُتُبُ",
+     "l": "ar:kitab",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَالْأَقْلَامُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْأَقْلَامُ",
+       "l": "ar:qalam",
+       "f": "N;NOM;PL;DEF"
+      }
+     ]
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "gloss": "The books are here, and the pens are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.105",
+   "frame": "fr.thing.here",
+   "text": "الْكُتُبُ؟ هِيَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْكُتُبُ",
+     "l": "ar:kitab",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "The books? They are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.106",
+   "frame": "fr.thing.here",
+   "text": "الطَّالِبُ هُنَا، وَالْحَقِيبَةُ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الطَّالِبُ",
+     "l": "ar:talib",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَالْحَقِيبَةُ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْحَقِيبَةُ",
+       "l": "ar:haqiba",
+       "f": "N;NOM;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.copula"
+   ],
+   "gloss": "The student is here, and the bag is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.107",
+   "frame": "fr.thing.here",
+   "text": "الْكَأْسُ؟ هِيَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْكَأْسُ",
+     "l": "ar:kas",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "The glass? It is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.108",
+   "frame": "fr.thing.here",
+   "text": "الْفِنْجَانُ؟ هُوَ هُنَاكَ.",
+   "tokens": [
+    {
+     "t": "الْفِنْجَانُ",
+     "l": "ar:finjan",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَاكَ",
+     "l": "ar:hunaka"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "The cup? It is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f1.109",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ الْغُرْفَةُ هُنَا.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "الْغُرْفَةُ",
+     "l": "ar:ghurfa",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula"
+   ],
+   "gloss": "This room is here.",
+   "level": "A1"
+  }
+ ]
+}

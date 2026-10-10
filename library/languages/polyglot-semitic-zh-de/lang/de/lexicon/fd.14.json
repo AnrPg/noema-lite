@@ -1,0 +1,3588 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Montag",
+   "lemma": "Montag",
+   "pos": "NOUN",
+   "senses": [
+    "time.monday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Montage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Mond + Tag (“day of the moon”)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Montag",
+    "N;ACC;SG": "Montag",
+    "N;DAT;SG": "Montag",
+    "N;GEN;SG": "Montags",
+    "N;NOM;PL": "Montage",
+    "N;ACC;PL": "Montage",
+    "N;DAT;PL": "Montagen",
+    "N;GEN;PL": "Montage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Montages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The start of the working week – alarm clocks, the first coffee, “Montag schon wieder!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Monday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.monday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Montag gehe ich wieder zur Arbeit.",
+      "tr": "On Monday I go back to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute ist Montag.",
+      "tr": "Today is Monday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Montags ist das Museum geschlossen.",
+      "tr": "The museum is closed on Mondays.",
+      "register": "neutral",
+      "context": "opening hours",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Montag",
+      "tr": "on Monday"
+     },
+     {
+      "text": "montags",
+      "tr": "on Mondays"
+     },
+     {
+      "text": "nächsten Montag",
+      "tr": "next Monday"
+     },
+     {
+      "text": "Montagmorgen",
+      "tr": "Monday morning"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "blauer Montag",
+      "tr": "blue Monday",
+      "kind": "fixed expression",
+      "meaning": "a Monday taken off work without a good reason",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
+    "etymology": {
+     "text": "From Middle High German mōntac, māntac, from Old High German mānotag, from Proto-West Germanic *mānini dag (“day of the moon”), equivalent to Mond + Tag. Compare Dutch maandag, English Monday, Danish mandag.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Montag is the “moon day” (Mond + Tag), a calque of Latin dies Lunae; Greek Δευτέρα and Hebrew יוֹם שֵׁנִי count instead: “the second (day)”, and Chinese says 星期一, “week-one”."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Montag – not *in Montag or *an Montag without the article.",
+     "Days are masculine: der Montag, plural die Montage."
+    ],
+    "subtleties": [
+     "Every Monday = montags (lower case, with -s: an adverb): Montags ist das Museum geschlossen.",
+     "Ein blauer Montag is a Monday someone skips work (blaumachen = to skive off)."
+    ]
+   }
+  },
+  {
+   "id": "de:Dienstag",
+   "lemma": "Dienstag",
+   "pos": "NOUN",
+   "senses": [
+    "time.tuesday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Dienstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically “day of Thingsus” (a Germanic god), not Dienst + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Dienstag",
+    "N;ACC;SG": "Dienstag",
+    "N;DAT;SG": "Dienstag",
+    "N;GEN;SG": "Dienstags",
+    "N;NOM;PL": "Dienstage",
+    "N;ACC;PL": "Dienstage",
+    "N;DAT;PL": "Dienstagen",
+    "N;GEN;PL": "Dienstage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Dienstages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The second working day – the week has started, the weekend is still far.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Tuesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tuesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Dienstag habe ich einen Termin beim Arzt.",
+      "tr": "On Tuesday I have a doctor’s appointment.",
+      "register": "neutral",
+      "context": "appointments",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist heute Dienstag oder Mittwoch?",
+      "tr": "Is today Tuesday or Wednesday?",
+      "register": "informal",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Dienstags kochen wir immer Suppe.",
+      "tr": "On Tuesdays we always cook soup.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Dienstag",
+      "tr": "on Tuesday"
+     },
+     {
+      "text": "dienstags",
+      "tr": "on Tuesdays"
+     },
+     {
+      "text": "Dienstagabend",
+      "tr": "Tuesday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
+    "etymology": {
+     "text": "Spread via the Lower Rhineland from Middle Low German dingesdach and Middle Dutch dinsendach, replacing older High German forms (Middle High German ziestac, Bavarian Ertag). Probably from Proto-Germanic *þingas-dagaz (“day of Thingsus”, a Germanic god, or “day of the Thing”, the council). Cognate with Dutch dinsdag.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English Tuesday is Tiw’s day; German took a different name from the north – southern dialects still say Ertag or Zischtig."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Dienstag – not *in Dienstag or *an Dienstag without the article.",
+     "Dienstag is not related to der Dienst (service, duty), although it looks like it."
+    ],
+    "subtleties": [
+     "Every Tuesday = dienstags (lower case, with -s: an adverb): Dienstags kochen wir immer Suppe."
+    ]
+   }
+  },
+  {
+   "id": "de:Mittwoch",
+   "lemma": "Mittwoch",
+   "pos": "NOUN",
+   "senses": [
+    "time.wednesday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mittwoche",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Mitte + Woche (“mid-week”), but masculine like the other days"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Mittwoch",
+    "N;ACC;SG": "Mittwoch",
+    "N;DAT;SG": "Mittwoch",
+    "N;GEN;SG": "Mittwochs",
+    "N;NOM;PL": "Mittwoche",
+    "N;ACC;PL": "Mittwoche",
+    "N;DAT;PL": "Mittwochen",
+    "N;GEN;PL": "Mittwoche"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Mittwoches"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Midweek – the hump of the working week.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Wednesday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.wednesday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Mittwoch fahre ich nach Berlin.",
+      "tr": "On Wednesday I’m going to Berlin.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute ist schon Mittwoch!",
+      "tr": "It’s Wednesday already today!",
+      "register": "informal",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Mittwochs gehe ich zu Fuß zur Arbeit.",
+      "tr": "On Wednesdays I walk to work.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Mittwoch",
+      "tr": "on Wednesday"
+     },
+     {
+      "text": "mittwochs",
+      "tr": "on Wednesdays"
+     },
+     {
+      "text": "Mittwochabend",
+      "tr": "Wednesday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
+    "etymology": {
+     "text": "From Middle High German mittewoche, from Old High German mittawehha (literally “middle of the week”), calqued on Ecclesiastical Latin media hebdomas. Equivalent to Mitte (“middle”) + Woche (“week”); it became masculine after the other weekdays. Compare English midweek.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Mittwoch is “mid-week” – the old “Odin’s day” (English Wednesday) was dropped in German long ago; Greek Τετάρτη and Hebrew יוֹם רְבִיעִי count it as “the fourth (day)”."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Mittwoch – not *in Mittwoch or *an Mittwoch without the article.",
+     "Mittwoch is the only weekday not ending in -tag, but it is masculine like the others: der Mittwoch (although die Woche is feminine)."
+    ],
+    "subtleties": [
+     "Every Wednesday = mittwochs (lower case, with -s: an adverb): Mittwochs gehe ich zu Fuß zur Arbeit."
+    ]
+   }
+  },
+  {
+   "id": "de:Donnerstag",
+   "lemma": "Donnerstag",
+   "pos": "NOUN",
+   "senses": [
+    "time.thursday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Donnerstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically “day of Donar” (Thor, the thunder god): Donner + s + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Donnerstag",
+    "N;ACC;SG": "Donnerstag",
+    "N;DAT;SG": "Donnerstag",
+    "N;GEN;SG": "Donnerstags",
+    "N;NOM;PL": "Donnerstage",
+    "N;ACC;PL": "Donnerstage",
+    "N;DAT;PL": "Donnerstagen",
+    "N;GEN;PL": "Donnerstage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Donnerstages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Almost the weekend – late shopping, evening plans.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Thursday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.thursday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Donnerstag kommt meine Mutter.",
+      "tr": "My mother is coming on Thursday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Markt ist am Donnerstag.",
+      "tr": "The market is on Thursday.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Donnerstags essen wir im Restaurant.",
+      "tr": "On Thursdays we eat at the restaurant.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Donnerstag",
+      "tr": "on Thursday"
+     },
+     {
+      "text": "donnerstags",
+      "tr": "on Thursdays"
+     },
+     {
+      "text": "Donnerstagabend",
+      "tr": "Thursday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
+    "etymology": {
+     "text": "From Middle High German donerstac, from Old High German donarestag, from Proto-West Germanic *Þunras dag (“day of the thunder god”). Compare Dutch donderdag, English Thursday, Danish torsdag.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Donnerstag is the day of Donar (Thor), the thunder god – der Donner is still “thunder”; it translates Latin dies Iovis (Jupiter’s day), Greek Πέμπτη is simply “the fifth”."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Donnerstag – not *in Donnerstag or *an Donnerstag without the article.",
+     "Donnerstag / Dienstag: both start with D – learners mix them up; Donner = thunder helps."
+    ],
+    "subtleties": [
+     "Every Thursday = donnerstags (lower case, with -s: an adverb): Donnerstags essen wir im Restaurant."
+    ]
+   }
+  },
+  {
+   "id": "de:Freitag",
+   "lemma": "Freitag",
+   "pos": "NOUN",
+   "senses": [
+    "time.friday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Freitage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically “day of Frija” (a Germanic goddess), not frei + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Freitag",
+    "N;ACC;SG": "Freitag",
+    "N;DAT;SG": "Freitag",
+    "N;GEN;SG": "Freitags",
+    "N;NOM;PL": "Freitage",
+    "N;ACC;PL": "Freitage",
+    "N;DAT;PL": "Freitagen",
+    "N;GEN;PL": "Freitage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Freitages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last working day – “Endlich Freitag!”, the weekend is coming.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Friday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.friday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Freitag gehen wir ins Kino.",
+      "tr": "On Friday we’re going to the cinema.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Endlich ist Freitag!",
+      "tr": "Finally it’s Friday!",
+      "register": "informal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Freitags isst er immer Fisch.",
+      "tr": "On Fridays he always eats fish.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Freitag",
+      "tr": "on Friday"
+     },
+     {
+      "text": "freitags",
+      "tr": "on Fridays"
+     },
+     {
+      "text": "Freitagabend",
+      "tr": "Friday evening"
+     },
+     {
+      "text": "Karfreitag",
+      "tr": "Good Friday"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
+    "etymology": {
+     "text": "From Middle High German vrītac, from Old High German frīatag, from Proto-West Germanic *Frījā dag (“day of Frigg”), calque of Latin dies Veneris. Compare Dutch vrijdag, English Friday, Danish fredag.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Freitag translates Latin dies Veneris (Venus’s day) with a Germanic goddess; Arabic الجُمُعَة (Friday) means “the gathering” – the day of the congregational prayer."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Freitag – not *in Freitag or *an Freitag without the article.",
+     "Freitag has nothing to do with frei (free) – it is the day of the goddess Frija."
+    ],
+    "subtleties": [
+     "Every Friday = freitags (lower case, with -s: an adverb): Freitags isst er immer Fisch.",
+     "Karfreitag (Good Friday) is a public holiday all over Germany."
+    ]
+   }
+  },
+  {
+   "id": "de:Samstag",
+   "lemma": "Samstag",
+   "pos": "NOUN",
+   "senses": [
+    "time.saturday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Samstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; from Greek sábbaton (the Sabbath) + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Samstag",
+    "N;ACC;SG": "Samstag",
+    "N;DAT;SG": "Samstag",
+    "N;GEN;SG": "Samstags",
+    "N;NOM;PL": "Samstage",
+    "N;ACC;PL": "Samstage",
+    "N;DAT;PL": "Samstagen",
+    "N;GEN;PL": "Samstage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Samstages"
+    ]
+   },
+   "variants": [
+    {
+     "lemma": "Sonnabend",
+     "region": "northern and eastern Germany"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shopping, football, the market – the first day of the weekend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Saturday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.saturday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Samstag kaufen wir auf dem Markt ein.",
+      "tr": "On Saturday we do our shopping at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Samstag habe ich frei.",
+      "tr": "I’m off on Saturday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Samstags spielt mein Sohn Fußball.",
+      "tr": "My son plays football on Saturdays.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Samstag",
+      "tr": "on Saturday"
+     },
+     {
+      "text": "samstags",
+      "tr": "on Saturdays"
+     },
+     {
+      "text": "Samstagabend",
+      "tr": "Saturday evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Sonnabend",
+      "register": "regional",
+      "nuance": "Saturday in northern and eastern Germany – literally “Sunday eve”"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German sameȥtac, from Old High German sambaȥtag (“Sabbath day”), from Gothic *sambatō, an alteration of Biblical sabbatō, from Koine Greek σάββατον (sábbaton, “Sabbath”). Compare French samedi, Hungarian szombat.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Samstag, Greek Σάββατο, Russian суббота, Arabic السَّبْت (as-sabt) and Hebrew שַׁבָּת (shabbat) all come from or share the Semitic word for the Sabbath – one word across the course languages."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Samstag – not *in Samstag or *an Samstag without the article.",
+     "North and east say Sonnabend, the rest of Germany, Austria and Switzerland Samstag – both are correct standard German."
+    ],
+    "subtleties": [
+     "Every Saturday = samstags (lower case, with -s: an adverb): Samstags spielt mein Sohn Fußball.",
+     "Many shops close early on Saturday in small towns; on Sunday almost all are closed."
+    ]
+   }
+  },
+  {
+   "id": "de:Sonntag",
+   "lemma": "Sonntag",
+   "pos": "NOUN",
+   "senses": [
+    "time.sunday"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sonntage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Sonne + Tag (“day of the sun”)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Sonntag",
+    "N;ACC;SG": "Sonntag",
+    "N;DAT;SG": "Sonntag",
+    "N;GEN;SG": "Sonntags",
+    "N;NOM;PL": "Sonntage",
+    "N;ACC;PL": "Sonntage",
+    "N;DAT;PL": "Sonntagen",
+    "N;GEN;PL": "Sonntage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Sonntages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Quiet streets, closed shops, coffee and cake with the family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Sunday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.sunday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Sonntag besuchen wir meine Oma.",
+      "tr": "On Sunday we visit my grandma.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Sonntags sind die Geschäfte zu.",
+      "tr": "On Sundays the shops are closed.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute ist Sonntag, wir bleiben zu Hause.",
+      "tr": "Today is Sunday, we’re staying at home.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Sonntag",
+      "tr": "on Sunday"
+     },
+     {
+      "text": "sonntags",
+      "tr": "on Sundays"
+     },
+     {
+      "text": "Sonntagmorgen",
+      "tr": "Sunday morning"
+     },
+     {
+      "text": "der Sonntagsbraten",
+      "tr": "the Sunday roast"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
+    "etymology": {
+     "text": "From Middle High German sunne(n)tac, from Old High German sunnūntag, from late Proto-West Germanic *sunnōn dag (“day of the sun”), a calque of Latin diēs Sōlis. Equivalent to Sonne + Tag. Compare Dutch zondag, English Sunday.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sonntag is the “sun day”; Greek Κυριακή is “the Lord’s day”, and Hebrew יוֹם רִאשׁוֹן (“first day”) and Arabic الأَحَد (“the one”) count it as the first day – the week begins on Sunday there."
+    ],
+    "pitfalls": [
+     "On a day = am (an + dem): am Sonntag – not *in Sonntag or *an Sonntag without the article.",
+     "In Germany the week starts on Monday; Sunday is the seventh day."
+    ],
+    "subtleties": [
+     "Every Sunday = sonntags (lower case, with -s: an adverb): Sonntags sind die Geschäfte zu.",
+     "Sonntagsruhe: by law most shops are closed on Sundays and public holidays."
+    ]
+   }
+  },
+  {
+   "id": "de:Wochenende",
+   "lemma": "Wochenende",
+   "pos": "NOUN",
+   "senses": [
+    "time.weekend"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wochenenden",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Woche",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Ende",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wochenende",
+    "N;ACC;SG": "Wochenende",
+    "N;DAT;SG": "Wochenende",
+    "N;GEN;SG": "Wochenendes",
+    "N;NOM;PL": "Wochenenden",
+    "N;ACC;PL": "Wochenenden",
+    "N;DAT;PL": "Wochenenden",
+    "N;GEN;PL": "Wochenenden"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Saturday and Sunday – sleeping in, trips, friends, “Schönes Wochenende!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "weekend",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.weekend"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Wochenende fahren wir in die Berge.",
+      "tr": "At the weekend we’re going to the mountains.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Schönes Wochenende!",
+      "tr": "Have a nice weekend!",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Was machst du am Wochenende?",
+      "tr": "What are you doing at the weekend?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Wochenende",
+      "tr": "at / on the weekend"
+     },
+     {
+      "text": "Schönes Wochenende!",
+      "tr": "Have a nice weekend!"
+     },
+     {
+      "text": "übers Wochenende",
+      "tr": "over the weekend"
+     },
+     {
+      "text": "ein langes Wochenende",
+      "tr": "a long weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No real synonym; WE is only an abbreviation in writing.",
+    "etymology": {
+     "text": "Compound of Woche (“week”) + -n- + Ende (“end”). The modern sense since the 19th century after English weekend, in general use since about 1920.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wochenende copies English weekend piece by piece – Greek also uses its own word, Σαββατοκύριακο (“Saturday-Sunday”)."
+    ],
+    "pitfalls": [
+     "Neuter (because of das Ende): das Wochenende.",
+     "At the weekend = am Wochenende (an + dem, like am Montag) – not *im Wochenende."
+    ],
+    "subtleties": [
+     "Wochenende is a loan translation of English weekend – one of many words German built from its own parts on an English model."
+    ]
+   }
+  },
+  {
+   "id": "de:Tag",
+   "lemma": "Tag",
+   "pos": "NOUN",
+   "senses": [
+    "time.day",
+    "time.daytime",
+    "pol.assembly"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tage",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "Tage",
+      "pattern": "-e",
+      "senses": [
+       "s3"
+      ],
+      "note": "in the compounds: die Landtage, die Bundestage"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "-tag",
+      "senses": [
+       "s3"
+      ],
+      "note": "only in compounds: der Landtag, der Bundestag"
+     }
+    ]
+   },
+   "forms": {
+    "N;NOM;SG": "Tag",
+    "N;ACC;SG": "Tag",
+    "N;DAT;SG": "Tag",
+    "N;GEN;SG": "Tages",
+    "N;NOM;PL": "Tage",
+    "N;ACC;PL": "Tage",
+    "N;DAT;PL": "Tagen",
+    "N;GEN;PL": "Tage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Tags"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The basic unit of life: from morning to night, every day, “Guten Tag!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "day (24 hours; a date)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.day"
+     },
+     {
+      "id": "s2",
+      "def": "day, daytime (opposite of night)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.daytime"
+     },
+     {
+      "id": "s3",
+      "def": "day (of a meeting): Landtag, Reichstag – an assembly",
+      "register": [
+       "technical"
+      ],
+      "concept": "pol.assembly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Welcher Tag ist heute?",
+      "tr": "What day is it today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich trinke jeden Tag zwei Tassen Kaffee.",
+      "tr": "I drink two cups of coffee every day.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir bleiben drei Tage in Wien.",
+      "tr": "We’re staying in Vienna for three days.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Tag ist es warm, in der Nacht kalt.",
+      "tr": "It’s warm during the day, cold at night.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Landtag tagt heute in Düsseldorf.",
+      "tr": "The state parliament is in session in Düsseldorf today.",
+      "register": "technical",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jeden Tag",
+      "tr": "every day"
+     },
+     {
+      "text": "den ganzen Tag",
+      "tr": "all day"
+     },
+     {
+      "text": "am Tag",
+      "tr": "during the day"
+     },
+     {
+      "text": "eines Tages",
+      "tr": "one day"
+     },
+     {
+      "text": "Guten Tag!",
+      "tr": "Hello! / Good day!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Morgen ist auch noch ein Tag.",
+      "tr": "Tomorrow is also a day.",
+      "kind": "saying",
+      "meaning": "It can wait until tomorrow.",
+      "register": "neutral"
+     },
+     {
+      "text": "Man soll den Tag nicht vor dem Abend loben.",
+      "tr": "Don’t praise the day before the evening.",
+      "kind": "proverb",
+      "meaning": "Don’t count your chickens before they hatch.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Datum",
+      "register": "neutral",
+      "nuance": "date – the number of the day in the calendar"
+     },
+     {
+      "word": "Tageszeit",
+      "register": "neutral",
+      "nuance": "time of day"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Nacht",
+      "note": "night"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German tac, from Old High German tag, from Proto-West Germanic *dag, from Proto-Germanic *dagaz. From the meaning “a fixed day for a meeting” come Reichstag, Landtag and tagen (“to hold a meeting”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tag and English day are the same word; Greek ημέρα gives the “ephemeral” (lasting a day)."
+    ],
+    "pitfalls": [
+     "Masculine: der Tag, plural die Tage, dative plural den Tagen.",
+     "Duration needs no preposition: Ich bleibe drei Tage (accusative); für drei Tage is also possible, especially for plans.",
+     "jeden Tag (every day) is accusative: jed-en because Tag is masculine."
+    ],
+    "subtleties": [
+     "Guten Tag is said from late morning to early evening; Tag! alone is a short casual greeting.",
+     "Reichstag and Bundestag are “diets”: assemblies that once met on a fixed day."
+    ]
+   }
+  },
+  {
+   "id": "de:Nacht",
+   "lemma": "Nacht",
+   "pos": "NOUN",
+   "senses": [
+    "time.night"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nächte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Nacht",
+    "N;ACC;SG": "Nacht",
+    "N;DAT;SG": "Nacht",
+    "N;GEN;SG": "Nacht",
+    "N;NOM;PL": "Nächte",
+    "N;ACC;PL": "Nächte",
+    "N;DAT;PL": "Nächten",
+    "N;GEN;PL": "Nächte"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Darkness, sleep, stars – and long summer nights out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "night",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.night"
+     },
+     {
+      "id": "s2",
+      "def": "darkness (figurative)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "In der Nacht schläft das Baby gut.",
+      "tr": "At night the baby sleeps well.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Gute Nacht!",
+      "tr": "Good night!",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir bleiben zwei Nächte im Hotel.",
+      "tr": "We’re staying two nights at the hotel.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in der Nacht",
+      "tr": "at night"
+     },
+     {
+      "text": "heute Nacht",
+      "tr": "tonight; last night"
+     },
+     {
+      "text": "die ganze Nacht",
+      "tr": "all night"
+     },
+     {
+      "text": "Gute Nacht!",
+      "tr": "Good night!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Nacht zum Tag machen",
+      "tr": "to make the night into day",
+      "kind": "idiom",
+      "meaning": "to stay up all night",
+      "register": "neutral"
+     },
+     {
+      "text": "bei Nacht und Nebel",
+      "tr": "by night and fog",
+      "kind": "idiom",
+      "meaning": "secretly, under cover of darkness",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Abend",
+      "register": "neutral",
+      "nuance": "evening – before bedtime; “tonight” for going out is heute Abend"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Tag",
+      "note": "day"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German naht, from Old High German naht, from Proto-West Germanic *naht, from Proto-Germanic *nahts, from Proto-Indo-European *nókʷts.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Nacht, English night, Greek νύχτα (νύξ), Latin nox and Russian ночь all come from Proto-Indo-European *nókʷts."
+    ],
+    "pitfalls": [
+     "At night = in der Nacht (in + dative feminine) – the one part of the day that does not take am: am Morgen, am Abend, but in der Nacht.",
+     "Plural with umlaut: die Nächte."
+    ],
+    "subtleties": [
+     "heute Nacht means tonight or last night – context decides: Heute Nacht habe ich schlecht geschlafen (last night).",
+     "nachts (lower case) = at night, every night: Nachts ist es hier ruhig."
+    ]
+   }
+  },
+  {
+   "id": "de:Morgen",
+   "lemma": "Morgen",
+   "pos": "NOUN",
+   "senses": [
+    "time.morning",
+    "measure.morgen",
+    "time.future"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "kind of word",
+     "value": "the noun (der Morgen, am Morgen)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Morgen",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "zehn Morgen Land (the measure)"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Morgen: the future, tomorrow",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Morgen",
+    "N;ACC;SG": "Morgen",
+    "N;DAT;SG": "Morgen",
+    "N;GEN;SG": "Morgens",
+    "N;NOM;PL": "Morgen",
+    "N;ACC;PL": "Morgen",
+    "N;DAT;PL": "Morgen",
+    "N;GEN;PL": "Morgen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee, the first light, “Guten Morgen!” – the hours from waking up to late morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "morning",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     },
+     {
+      "id": "s2",
+      "def": "morgen (an old land measure)",
+      "register": [
+       "dated"
+      ],
+      "concept": "measure.morgen"
+     },
+     {
+      "id": "s3",
+      "def": "das Morgen: the future, tomorrow (as a noun)",
+      "register": [
+       "literary"
+      ],
+      "concept": "time.future"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Morgen trinke ich Kaffee.",
+      "tr": "In the morning I drink coffee.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Morgen, wie geht es Ihnen?",
+      "tr": "Good morning, how are you?",
+      "register": "formal",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute Morgen war ich beim Arzt.",
+      "tr": "This morning I was at the doctor’s.",
+      "register": "neutral",
+      "context": "appointments",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Bauer besaß zehn Morgen Land.",
+      "tr": "The farmer owned ten morgen of land.",
+      "register": "dated",
+      "context": "history",
+      "sense": "s2"
+     },
+     {
+      "text": "Niemand weiß, was das Morgen bringt.",
+      "tr": "Nobody knows what tomorrow brings.",
+      "register": "literary",
+      "context": "the future",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Morgen",
+      "tr": "in the morning"
+     },
+     {
+      "text": "heute Morgen",
+      "tr": "this morning"
+     },
+     {
+      "text": "jeden Morgen",
+      "tr": "every morning"
+     },
+     {
+      "text": "Guten Morgen!",
+      "tr": "Good morning!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Morgenstund hat Gold im Mund.",
+      "tr": "The morning hour has gold in its mouth.",
+      "kind": "proverb",
+      "meaning": "The early bird catches the worm.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Vormittag",
+      "register": "neutral",
+      "nuance": "late morning – from about 9 to 12 o’clock"
+     },
+     {
+      "word": "Frühe",
+      "register": "literary",
+      "nuance": "early morning: in aller Frühe (at the crack of dawn)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Abend",
+      "note": "evening"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German morgen, from Old High German morgan, from Proto-West Germanic *morgan, from Proto-Germanic *murganaz, from Proto-Indo-European *merkʷ- (“to blink, twinkle”). Compare Dutch morgen, English morn and morrow, Swedish morgon.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "morgen (tomorrow) grew out of der Morgen: “in the morning” came to mean “the next morning” – English morrow and morning did the same."
+    ],
+    "pitfalls": [
+     "der Morgen (morning, capital M) ≠ morgen (tomorrow, lower case); tomorrow morning is morgen früh (not *morgen Morgen).",
+     "With heute, gestern the noun keeps its capital: heute Morgen, gestern Morgen.",
+     "In the morning = am Morgen; every morning = morgens."
+    ],
+    "subtleties": [
+     "Plural die Morgen (same as the singular): Die Morgen sind jetzt kalt."
+    ]
+   }
+  },
+  {
+   "id": "de:Mittag",
+   "lemma": "Mittag",
+   "pos": "NOUN",
+   "senses": [
+    "time.noon"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mittage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically mitt- (“middle”) + Tag"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Mittag: lunch (informal, regional)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Mittag",
+    "N;ACC;SG": "Mittag",
+    "N;DAT;SG": "Mittag",
+    "N;GEN;SG": "Mittags",
+    "N;NOM;PL": "Mittage",
+    "N;ACC;PL": "Mittage",
+    "N;DAT;PL": "Mittagen",
+    "N;GEN;PL": "Mittage"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Midday – the lunch break, the sun at its highest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "noon, midday (about 12 to 2 o’clock)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.noon"
+     },
+     {
+      "id": "s2",
+      "def": "lunch, lunch break",
+      "register": [
+       "informal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Mittag essen wir in der Kantine.",
+      "tr": "At midday we eat in the canteen.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute Mittag koche ich Suppe.",
+      "tr": "At lunchtime today I’m cooking soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir machen jetzt Mittag.",
+      "tr": "We’re taking our lunch break now.",
+      "register": "informal",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Mittag",
+      "tr": "at midday"
+     },
+     {
+      "text": "zu Mittag essen",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "heute Mittag",
+      "tr": "at noon today"
+     },
+     {
+      "text": "die Mittagspause",
+      "tr": "the lunch break"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Mittagszeit",
+      "register": "neutral",
+      "nuance": "lunchtime"
+     },
+     {
+      "word": "zwölf Uhr",
+      "register": "neutral",
+      "nuance": "twelve o’clock – the exact time"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German mittetac, from Old High German mittitac, compound of mitti (see Mitte) and tac (see Tag). Cognate with Dutch middag.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Mittag is “mid-day” (Mitte + Tag), like Dutch middag and Greek μεσημέρι (μέσος + ημέρα, “middle of the day”)."
+    ],
+    "pitfalls": [
+     "Mittag is a time of day; the meal is das Mittagessen (fd.07): Zu Mittag gibt es Suppe.",
+     "zu Mittag essen = to have lunch; am Mittag = at midday."
+    ],
+    "subtleties": [
+     "Mittag is not a point but a span, roughly 12 to 2 – noon exactly is zwölf Uhr.",
+     "mittags (lower case) = at midday, every midday."
+    ]
+   }
+  },
+  {
+   "id": "de:Nachmittag",
+   "lemma": "Nachmittag",
+   "pos": "NOUN",
+   "senses": [
+    "time.afternoon"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nachmittage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "nach",
+      "role": "modifier"
+     },
+     {
+      "part": "Mittag",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Nachmittag",
+    "N;ACC;SG": "Nachmittag",
+    "N;DAT;SG": "Nachmittag",
+    "N;GEN;SG": "Nachmittags",
+    "N;NOM;PL": "Nachmittage",
+    "N;ACC;PL": "Nachmittage",
+    "N;DAT;PL": "Nachmittagen",
+    "N;GEN;PL": "Nachmittage"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Nachmittages"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee and cake time – Kaffee und Kuchen at four o’clock.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "afternoon (about 2 to 6 o’clock)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.afternoon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Nachmittag gehen die Kinder in den Park.",
+      "tr": "In the afternoon the children go to the park.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute Nachmittag bin ich zu Hause.",
+      "tr": "This afternoon I’m at home.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir trinken am Nachmittag Kaffee.",
+      "tr": "We drink coffee in the afternoon.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Nachmittag",
+      "tr": "in the afternoon"
+     },
+     {
+      "text": "heute Nachmittag",
+      "tr": "this afternoon"
+     },
+     {
+      "text": "nachmittags",
+      "tr": "in the afternoons"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "nach dem Mittagessen",
+      "register": "neutral",
+      "nuance": "after lunch – a looser way to say it"
+     }
+    ],
+    "etymology": {
+     "text": "nach (“after”) + Mittag (“midday”). Compare Dutch namiddag.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Nachmittag is “after-midday”, the same idea as Latin post meridiem (p.m.) and Greek απόγευμα (after the lunch, γεύμα)."
+    ],
+    "pitfalls": [
+     "In the afternoon = am Nachmittag; every afternoon = nachmittags.",
+     "heute Nachmittag (this afternoon) – Nachmittag keeps its capital."
+    ],
+    "subtleties": [
+     "Kaffee und Kuchen at about 3–4 p.m. is a German afternoon institution, especially on Sundays."
+    ]
+   }
+  },
+  {
+   "id": "de:Abend",
+   "lemma": "Abend",
+   "pos": "NOUN",
+   "senses": [
+    "time.evening",
+    "art.soiree"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.evening",
+     "axis": "kind of word",
+     "value": "the noun (der Abend, am Abend)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Abende",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Abend",
+    "N;ACC;SG": "Abend",
+    "N;DAT;SG": "Abend",
+    "N;GEN;SG": "Abends",
+    "N;NOM;PL": "Abende",
+    "N;ACC;PL": "Abende",
+    "N;DAT;PL": "Abenden",
+    "N;GEN;PL": "Abende"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "After work: dinner, television, friends – “Guten Abend!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.evening"
+     },
+     {
+      "id": "s2",
+      "def": "evening event, party: ein bunter Abend",
+      "register": [
+       "neutral"
+      ],
+      "concept": "art.soiree"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Abend essen wir zusammen.",
+      "tr": "In the evening we eat together.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Was machst du heute Abend?",
+      "tr": "What are you doing tonight?",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Abend, meine Damen und Herren!",
+      "tr": "Good evening, ladies and gentlemen!",
+      "register": "formal",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Verein lädt zu einem bunten Abend mit Musik ein.",
+      "tr": "The club invites everyone to an evening of entertainment with music.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Abend",
+      "tr": "in the evening"
+     },
+     {
+      "text": "heute Abend",
+      "tr": "this evening, tonight"
+     },
+     {
+      "text": "Guten Abend!",
+      "tr": "Good evening!"
+     },
+     {
+      "text": "der Feierabend",
+      "tr": "the end of the working day"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Es ist noch nicht aller Tage Abend.",
+      "tr": "It is not yet the evening of all days.",
+      "kind": "saying",
+      "meaning": "It’s not over yet; things may still change.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Feierabend",
+      "register": "neutral",
+      "nuance": "the time after work – literally “celebration evening”: Schönen Feierabend!"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Morgen",
+      "note": "morning"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ābent, from Old High German āband, from Proto-West Germanic *ābanþ, from Proto-Germanic *ēbanþs. Compare Dutch avond, English even (evening) and eve.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Abend is English eve and evening – Christmas Eve is Heiligabend, the “holy evening”."
+    ],
+    "pitfalls": [
+     "In the evening = am Abend; every evening = abends.",
+     "Tonight (going out) = heute Abend, not *heute Nacht."
+    ],
+    "subtleties": [
+     "Abend has a long -a- and the stress on A-; plural die Abende.",
+     "Heiligabend is Christmas Eve – the main day of Christmas in Germany, when presents are given."
+    ]
+   }
+  },
+  {
+   "id": "de:heute",
+   "lemma": "heute",
+   "pos": "ADV",
+   "senses": [
+    "time.today",
+    "adv.nowadays"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The day you are living – plans, the date, “today’s” news.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "today",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.today"
+     },
+     {
+      "id": "s2",
+      "def": "nowadays, today (in our time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.nowadays"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute ist Montag.",
+      "tr": "Today is Monday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Was kochst du heute?",
+      "tr": "What are you cooking today?",
+      "register": "informal",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute reisen viele Menschen mit dem Flugzeug.",
+      "tr": "Nowadays many people travel by plane.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "heute Abend",
+      "tr": "this evening, tonight"
+     },
+     {
+      "text": "heute Morgen",
+      "tr": "this morning"
+     },
+     {
+      "text": "bis heute",
+      "tr": "until today, to this day"
+     },
+     {
+      "text": "ab heute",
+      "tr": "from today"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "von heute auf morgen",
+      "tr": "from today to tomorrow",
+      "kind": "idiom",
+      "meaning": "overnight, all of a sudden",
+      "register": "neutral"
+     },
+     {
+      "text": "Was du heute kannst besorgen, das verschiebe nicht auf morgen.",
+      "tr": "What you can do today, don’t put off till tomorrow.",
+      "kind": "proverb",
+      "meaning": "Don’t put off till tomorrow what you can do today.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "heutzutage",
+      "register": "neutral",
+      "nuance": "nowadays – only the “in our time” meaning"
+     },
+     {
+      "word": "heut",
+      "register": "colloquial",
+      "nuance": "today – the spoken short form"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "gestern",
+      "note": "yesterday"
+     },
+     {
+      "word": "morgen",
+      "note": "tomorrow"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German hiute, from Old High German hiutu, a contraction of *hiu tagu, from Proto-Germanic *hinō dagō (“on this day”). Compare Old English hēodæġ and Dutch heden.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "heute is literally “this day” (*hiu tagu) – Greek σήμερα (from ἡμέρα, day) and Turkish bugün (bu gün, “this day”) are built the same way."
+    ],
+    "pitfalls": [
+     "heute + a part of the day: heute Morgen, heute Mittag, heute Abend (capital letters), but tonight in bed = heute Nacht.",
+     "A time word at the start pushes the verb before the subject: Heute gehe ich … (not *Heute ich gehe …)."
+    ],
+    "subtleties": [
+     "das Heute (noun) = the present: im Hier und Heute."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:morgen",
+   "lemma": "morgen",
+   "pos": "ADV",
+   "senses": [
+    "time.tomorrow"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The next day – plans, appointments, “Bis morgen!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tomorrow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.tomorrow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Morgen fahre ich nach Hamburg.",
+      "tr": "Tomorrow I’m going to Hamburg.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Bis morgen!",
+      "tr": "See you tomorrow!",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "Kommst du morgen früh?",
+      "tr": "Are you coming tomorrow morning?",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "morgen früh",
+      "tr": "tomorrow morning"
+     },
+     {
+      "text": "morgen Abend",
+      "tr": "tomorrow evening"
+     },
+     {
+      "text": "bis morgen",
+      "tr": "see you tomorrow; by tomorrow"
+     },
+     {
+      "text": "übermorgen",
+      "tr": "the day after tomorrow"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "am nächsten Tag",
+      "register": "neutral",
+      "nuance": "the next day – in a story, not counted from today"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "gestern",
+      "note": "yesterday"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German morgene, from Old High German morgane, from Proto-West Germanic *morgin. Cognate with English morrow, morn.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “morrow” (tomorrow) is the same word; the morning became the next morning in both languages."
+    ],
+    "pitfalls": [
+     "morgen (tomorrow, small m) ≠ der Morgen (morning, capital M).",
+     "Tomorrow morning = morgen früh – never *morgen Morgen.",
+     "German uses the present tense for tomorrow: Morgen fahre ich … (I’m going / I’ll go)."
+    ],
+    "subtleties": [
+     "übermorgen = the day after tomorrow, vorgestern = the day before yesterday."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:gestern",
+   "lemma": "gestern",
+   "pos": "ADV",
+   "senses": [
+    "time.yesterday"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The day just gone – what happened, where you were.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yesterday",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.yesterday"
+     },
+     {
+      "id": "s2",
+      "def": "in the past (figurative: nicht von gestern)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Gestern war Sonntag.",
+      "tr": "Yesterday was Sunday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "Gestern Abend war ich zu Hause.",
+      "tr": "Yesterday evening I was at home.",
+      "register": "neutral",
+      "context": "telling a story",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin doch nicht von gestern!",
+      "tr": "I wasn’t born yesterday!",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gestern Abend",
+      "tr": "yesterday evening, last night"
+     },
+     {
+      "text": "gestern Morgen",
+      "tr": "yesterday morning"
+     },
+     {
+      "text": "vorgestern",
+      "tr": "the day before yesterday"
+     },
+     {
+      "text": "seit gestern",
+      "tr": "since yesterday"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "nicht von gestern sein",
+      "tr": "not to be from yesterday",
+      "kind": "idiom",
+      "meaning": "not to be born yesterday, not to be naive",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "am Vortag",
+      "register": "formal",
+      "nuance": "the day before – reports, not counted from today"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "morgen",
+      "note": "tomorrow"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German gestern, from Old High German gesteron, from Proto-West Germanic *gesteran. Cognate with English yester(day) and Dutch gisteren.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "gestern is the yester- of English yesterday; Greek χθες and Latin heri share the same old root."
+    ],
+    "pitfalls": [
+     "gestern needs the past: Gestern war ich zu Hause (war = was, the past of sein – the past comes in the next stage).",
+     "Last night (evening) = gestern Abend; last night (in bed) = heute Nacht."
+    ],
+    "subtleties": [
+     "gestern Abend, gestern Morgen: the part of the day keeps its capital letter."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:jetzt",
+   "lemma": "jetzt",
+   "pos": "ADV",
+   "senses": [
+    "adv.now"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "This very moment – “Jetzt oder nie!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "now, at this moment",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.now"
+     },
+     {
+      "id": "s2",
+      "def": "now (adding emphasis): Was ist jetzt los?",
+      "register": [
+       "informal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe jetzt nach Hause.",
+      "tr": "I’m going home now.",
+      "register": "neutral",
+      "context": "leaving",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo bist du jetzt?",
+      "tr": "Where are you now?",
+      "register": "informal",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "Was machen wir jetzt?",
+      "tr": "What do we do now?",
+      "register": "informal",
+      "context": "problem",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jetzt gleich",
+      "tr": "right now"
+     },
+     {
+      "text": "bis jetzt",
+      "tr": "until now, so far"
+     },
+     {
+      "text": "ab jetzt",
+      "tr": "from now on"
+     },
+     {
+      "text": "jetzt oder nie",
+      "tr": "now or never"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Jetzt oder nie!",
+      "tr": "Now or never!",
+      "kind": "fixed expression",
+      "meaning": "Now or never!",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nun",
+      "register": "formal",
+      "nuance": "now – more written or literary; also “well…” at the start of a sentence"
+     },
+     {
+      "word": "gerade",
+      "register": "neutral",
+      "nuance": "just now, at the moment"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German iez, ieze, iezuo, from Old High German iozuo (“straightaway, at once”), equivalent to je + zu. Compare English yet and Yiddish יעצט (yetst).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "jetzt is related to English yet; Yiddish יעצט (yetst) is the same word written in Hebrew letters."
+    ],
+    "pitfalls": [
+     "jetzt (now) and gleich (in a moment) are different: Ich komme gleich = I’m coming in a minute."
+    ],
+    "subtleties": [
+     "jetzt is also a filler word that adds urgency: Jetzt sag mal … (Come on, tell me …)."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:später",
+   "lemma": "später",
+   "pos": "ADV",
+   "senses": [
+    "adv.later"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not now – a little bit on, after this.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "later",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.later"
+     },
+     {
+      "id": "s2",
+      "def": "later, in the future (in years)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich rufe dich später an.",
+      "tr": "I’ll call you later.",
+      "register": "informal",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen später.",
+      "tr": "We’ll eat later.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Später will er Arzt werden.",
+      "tr": "Later he wants to become a doctor.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "bis später",
+      "tr": "see you later"
+     },
+     {
+      "text": "später kommen",
+      "tr": "to come later"
+     },
+     {
+      "text": "zwei Stunden später",
+      "tr": "two hours later"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "nachher",
+      "register": "neutral",
+      "nuance": "later, afterwards – later today"
+     },
+     {
+      "word": "danach",
+      "register": "neutral",
+      "nuance": "after that, then"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "früher",
+      "note": "earlier; in the past"
+     }
+    ],
+    "etymology": {
+     "text": "Comparative of spät (“late”), from Middle High German spǣte, from Old High German spāti.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bis später, bis bald, bis morgen: German says goodbye by naming when you meet again – like Greek τα λέμε αργότερα / αύριο."
+    ],
+    "pitfalls": [
+     "später is the comparative of spät (late, later) but works as its own adverb: Ich komme später.",
+     "Bis später! = See you later (the same day)."
+    ],
+    "subtleties": [
+     "nachher is “later today”; später can be minutes or years away."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "itself the comparative of spät"
+    }
+   }
+  },
+  {
+   "id": "de:bald",
+   "lemma": "bald",
+   "pos": "ADV",
+   "senses": [
+    "adv.soon"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not long now – the holidays, the bus, a visit.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soon",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.soon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Bus kommt bald.",
+      "tr": "The bus is coming soon.",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Bis bald!",
+      "tr": "See you soon!",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "Bald sind Ferien!",
+      "tr": "The holidays are coming soon!",
+      "register": "informal",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "bis bald",
+      "tr": "see you soon"
+     },
+     {
+      "text": "so bald wie möglich",
+      "tr": "as soon as possible"
+     },
+     {
+      "text": "bald wieder",
+      "tr": "soon again"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "gleich",
+      "register": "neutral",
+      "nuance": "in a moment, right away – sooner than bald"
+     },
+     {
+      "word": "demnächst",
+      "register": "formal",
+      "nuance": "shortly, in the near future"
+     },
+     {
+      "word": "in Kürze",
+      "register": "formal",
+      "nuance": "shortly – announcements"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German balde, from Old High German baldo, adverb of bald (“bold, quick”), from Proto-Germanic *balþaz. Cognate with Dutch boud, English bold.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "bald is English bold: being “bold” once meant being quick and keen, so “quickly” became “soon”."
+    ],
+    "pitfalls": [
+     "bald (soon) vs. gleich (in a moment): Ich komme gleich (in a minute) – Ich komme bald (soon, some time).",
+     "Comparative eher (sooner), not *balder: Ich komme eher."
+    ],
+    "subtleties": [
+     "bald … bald … = now … now …: bald hier, bald dort."
+    ]
+   },
+   "features": {
+    "comparison": [
+     "eher",
+     "am ehesten"
+    ]
+   }
+  },
+  {
+   "id": "de:früh",
+   "lemma": "früh",
+   "pos": "ADV",
+   "senses": [
+    "adv.early",
+    "time.morning"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "kind of word",
+     "value": "after a day word: morgen früh, heute früh"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The alarm at six, the first train, the market at dawn.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "early",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.early"
+     },
+     {
+      "id": "s2",
+      "def": "in the morning (morgen früh; regionally also heute früh)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich stehe immer früh auf.",
+      "tr": "I always get up early.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir fahren morgen früh nach Berlin.",
+      "tr": "We’re going to Berlin tomorrow morning.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "Es ist noch zu früh für Wein.",
+      "tr": "It’s still too early for wine.",
+      "register": "informal",
+      "context": "joking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich rufe dich morgen früh an.",
+      "tr": "I’ll call you tomorrow morning.",
+      "register": "neutral",
+      "context": "phone calls",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "früh am Morgen",
+      "tr": "early in the morning"
+     },
+     {
+      "text": "morgen früh",
+      "tr": "tomorrow morning"
+     },
+     {
+      "text": "zu früh",
+      "tr": "too early"
+     },
+     {
+      "text": "früh aufstehen",
+      "tr": "to get up early"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Früh übt sich, was ein Meister werden will.",
+      "tr": "Early practises who wants to become a master.",
+      "kind": "quote",
+      "meaning": "Masters start practising young.",
+      "register": "neutral",
+      "source": "Friedrich Schiller, Wilhelm Tell (1804)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zeitig",
+      "register": "regional",
+      "nuance": "early, in good time – southern Germany, Austria"
+     },
+     {
+      "word": "rechtzeitig",
+      "register": "neutral",
+      "nuance": "in time, on time"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "spät",
+      "note": "late"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vrüe, vrüeje, from Old High German fruoi, from Proto-West Germanic *frō(ī) (“early”). Cognate with Dutch vroeg.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "der Frühling (spring) is the “early” part of the year: früh + -ling."
+    ],
+    "pitfalls": [
+     "früh is also an adjective: am frühen Morgen (early in the morning) – the ending comes with the noun.",
+     "Comparative früher means “earlier” and also “in the past, formerly”: Früher war alles anders."
+    ],
+    "subtleties": [
+     "morgen früh is the normal way to say tomorrow morning."
+    ]
+   },
+   "features": {
+    "comparison": [
+     "früher",
+     "am frühesten"
+    ]
+   }
+  },
+  {
+   "id": "de:spät",
+   "lemma": "spät",
+   "pos": "ADV",
+   "senses": [
+    "adv.late"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files spät only as an adjective; German uses adjectives unchanged as adverbs (Er kommt spät), and the course teaches spät here as the adverb “late” (adv.late)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last bus, a long evening – and the question “Wie spät ist es?”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "late",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.late"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er kommt immer spät nach Hause.",
+      "tr": "He always comes home late.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist schon spät, ich gehe jetzt.",
+      "tr": "It’s late already, I’m going now.",
+      "register": "informal",
+      "context": "leaving",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie spät ist es?",
+      "tr": "What time is it?",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu spät kommen",
+      "tr": "to be late"
+     },
+     {
+      "text": "spät am Abend",
+      "tr": "late in the evening"
+     },
+     {
+      "text": "Wie spät ist es?",
+      "tr": "What time is it?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Besser spät als nie.",
+      "tr": "Better late than never.",
+      "kind": "proverb",
+      "meaning": "Better late than never.",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "verspätet",
+      "register": "formal",
+      "nuance": "delayed – trains, planes: Der Zug ist verspätet."
+     },
+     {
+      "word": "zu spät",
+      "register": "neutral",
+      "nuance": "too late, late (for an appointment)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "früh",
+      "note": "early"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German spǣte, from Old High German spāti, from Proto-West Germanic *spādī, from Proto-Germanic *spēdiz. Probably related to sparen (“to spare”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Asking “how late is it?” for the time is typically German; Greek asks τι ώρα είναι; (what hour is it?), like Wie viel Uhr ist es?"
+    ],
+    "pitfalls": [
+     "To be late = zu spät kommen (not *spät sein): Ich komme zu spät.",
+     "“Wie spät ist es?” asks the time – the answer is Es ist acht Uhr."
+    ],
+    "subtleties": [
+     "später is its comparative and also the adverb “later”.",
+     "die Verspätung = the delay (of a train)."
+    ]
+   },
+   "features": {
+    "comparison": [
+     "später",
+     "am spätesten"
+    ]
+   }
+  },
+  {
+   "id": "de:immer",
+   "lemma": "immer",
+   "pos": "ADV",
+   "senses": [
+    "adv.always",
+    "adv.moreandmore",
+    "adv.still"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.still",
+     "axis": "alone or in a phrase",
+     "value": "only in immer noch / noch immer (stronger: still, even now)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Every time, without exception – and “immer noch” when it still goes on.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "always",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.always"
+     },
+     {
+      "id": "s2",
+      "def": "more and more (with a comparative: immer mehr)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.moreandmore"
+     },
+     {
+      "id": "s3",
+      "def": "immer noch: still",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.still"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke immer Tee am Morgen.",
+      "tr": "I always drink tea in the morning.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Bus ist immer voll.",
+      "tr": "The bus is always full.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Es kommen immer mehr Touristen.",
+      "tr": "More and more tourists are coming.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "Er ist immer noch im Büro.",
+      "tr": "He’s still at the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "wie immer",
+      "tr": "as always"
+     },
+     {
+      "text": "für immer",
+      "tr": "forever"
+     },
+     {
+      "text": "immer noch",
+      "tr": "still"
+     },
+     {
+      "text": "immer mehr",
+      "tr": "more and more"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Immer mit der Ruhe!",
+      "tr": "Always with calm!",
+      "kind": "fixed expression",
+      "meaning": "Take it easy! Calm down!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "stets",
+      "register": "formal",
+      "nuance": "always – written, a little old-fashioned"
+     },
+     {
+      "word": "jedes Mal",
+      "register": "neutral",
+      "nuance": "every time"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "nie",
+      "note": "never"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German iemer, from Old High German iomēr (“always”), from io (“ever”) + mēr (“more”). Cognate with Dutch immer.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "immer is literally “ever more” (io + mēr) – English “evermore” is built the same way."
+    ],
+    "pitfalls": [
+     "immer noch / noch immer = still (not *immer alone): Er wartet immer noch.",
+     "Frequency words stand after the verb (and after a pronoun object): Ich trinke immer Tee."
+    ],
+    "subtleties": [
+     "immer wieder = again and again; immer mit der Ruhe = take it easy."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:oft",
+   "lemma": "oft",
+   "pos": "ADV",
+   "senses": [
+    "adv.often"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Again and again – a habit, a favourite place.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "often",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.often"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir essen oft Fisch.",
+      "tr": "We often eat fish.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie oft fährt der Bus?",
+      "tr": "How often does the bus run?",
+      "register": "neutral",
+      "context": "public transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin nicht oft zu Hause.",
+      "tr": "I’m not often at home.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sehr oft",
+      "tr": "very often"
+     },
+     {
+      "text": "wie oft?",
+      "tr": "how often?"
+     },
+     {
+      "text": "nicht oft",
+      "tr": "not often"
+     },
+     {
+      "text": "so oft wie möglich",
+      "tr": "as often as possible"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "häufig",
+      "register": "neutral",
+      "nuance": "frequently – a little more formal"
+     },
+     {
+      "word": "öfters",
+      "register": "colloquial",
+      "nuance": "quite often, now and then"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "selten",
+      "note": "rarely"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ofte, oft, from Old High German ofta, ofto, from Proto-Germanic *ufta. Cognate with Dutch oft, English oft and often.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "oft is English oft (as in oft-quoted) – English added -en to make often."
+    ],
+    "pitfalls": [
+     "Comparative öfter (more often), with umlaut: Ich komme öfter.",
+     "Wie oft? asks how often: Wie oft trinkst du Kaffee? – Dreimal am Tag."
+    ],
+    "subtleties": [
+     "öfter alone also means “now and then, quite often”: Ich sehe ihn öfter."
+    ]
+   },
+   "features": {
+    "comparison": [
+     "öfter",
+     "am öftesten"
+    ]
+   }
+  },
+  {
+   "id": "de:manchmal",
+   "lemma": "manchmal",
+   "pos": "ADV",
+   "senses": [
+    "adv.sometimes"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Now and then – not always, not never.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sometimes",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.sometimes"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Manchmal fahre ich mit dem Fahrrad.",
+      "tr": "Sometimes I go by bike.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen manchmal im Restaurant.",
+      "tr": "We sometimes eat at a restaurant.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Manchmal ist es besser, zu warten.",
+      "tr": "Sometimes it’s better to wait.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nur manchmal",
+      "tr": "only sometimes"
+     },
+     {
+      "text": "manchmal … manchmal …",
+      "tr": "sometimes … sometimes …"
+     },
+     {
+      "text": "ganz manchmal",
+      "tr": "very occasionally"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ab und zu",
+      "register": "neutral",
+      "nuance": "now and then"
+     },
+     {
+      "word": "hin und wieder",
+      "register": "neutral",
+      "nuance": "every now and then"
+     },
+     {
+      "word": "gelegentlich",
+      "register": "formal",
+      "nuance": "occasionally"
+     }
+    ],
+    "etymology": {
+     "text": "From manch (“some, many a”) + Mal (“time, occasion”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "manchmal is literally “some times” – exactly the English sometimes, piece by piece."
+    ],
+    "pitfalls": [
+     "manchmal is one word, lower case.",
+     "At the start it pushes the verb before the subject: Manchmal fahre ich … (not *Manchmal ich fahre …)."
+    ],
+    "subtleties": [
+     "das Mal (time, occasion) builds einmal (once), zweimal (twice), jedes Mal (every time), manchmal (some times)."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:morgens",
+   "lemma": "morgens",
+   "pos": "ADV",
+   "senses": [
+    "time.morning",
+    "time.am"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "kind of word",
+     "value": "the adverb: every morning, or a.m. (um sieben Uhr morgens)"
+    }
+   ],
+   "role": "in the mornings, every morning (habit) – adverb from der Morgen; compare morgen = tomorrow",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Every morning, as a habit – coffee at seven, the bus at eight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in the morning(s), every morning",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.morning"
+     },
+     {
+      "id": "s2",
+      "def": "a.m. (with a time: um sieben Uhr morgens)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.am"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Morgens trinke ich Kaffee.",
+      "tr": "In the mornings I drink coffee.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich gehe morgens zu Fuß zur Arbeit.",
+      "tr": "I walk to work in the mornings.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Zug fährt um sechs Uhr morgens.",
+      "tr": "The train leaves at six in the morning.",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "morgens früh",
+      "tr": "early in the morning"
+     },
+     {
+      "text": "von morgens bis abends",
+      "tr": "from morning till night"
+     },
+     {
+      "text": "um acht Uhr morgens",
+      "tr": "at eight a.m."
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "am Morgen",
+      "register": "neutral",
+      "nuance": "in the morning – one morning or in general"
+     },
+     {
+      "word": "jeden Morgen",
+      "register": "neutral",
+      "nuance": "every morning"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German morgens, adverbial genitive of morgen (modern der Morgen). Equivalent to Morgen + -s.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The -s is an old genitive (“of the morning”), like English “of a morning” or the -s of English nowadays."
+    ],
+    "pitfalls": [
+     "morgens (lower case, -s) = in the mornings, as a habit; am Morgen = in the morning (one or in general); morgen = tomorrow."
+    ],
+    "subtleties": [
+     "The same pattern: mittags, nachmittags, abends, nachts, montags, sonntags – all habitual, all lower case."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:abends",
+   "lemma": "abends",
+   "pos": "ADV",
+   "senses": [
+    "time.evening",
+    "time.pm"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.evening",
+     "axis": "kind of word",
+     "value": "the adverb: every evening, or p.m."
+    }
+   ],
+   "role": "in the evenings, every evening (habit) – adverb from der Abend",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Every evening – dinner, the news, a walk.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in the evening(s), every evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.evening"
+     },
+     {
+      "id": "s2",
+      "def": "p.m. (with a time: um acht Uhr abends)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.pm"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Abends essen wir zusammen.",
+      "tr": "In the evenings we eat together.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin abends oft müde.",
+      "tr": "I’m often tired in the evenings.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Restaurant ist bis zehn Uhr abends offen.",
+      "tr": "The restaurant is open until ten in the evening.",
+      "register": "neutral",
+      "context": "opening hours",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "spät abends",
+      "tr": "late in the evening"
+     },
+     {
+      "text": "von morgens bis abends",
+      "tr": "from morning till night"
+     },
+     {
+      "text": "um acht Uhr abends",
+      "tr": "at eight p.m."
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "am Abend",
+      "register": "neutral",
+      "nuance": "in the evening – one evening or in general"
+     },
+     {
+      "word": "jeden Abend",
+      "register": "neutral",
+      "nuance": "every evening"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ābendes, adverbial genitive of ābent (modern der Abend). From Abend + -s.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like morgens, abends is an old genitive: “of an evening”."
+    ],
+    "pitfalls": [
+     "abends (lower case) = in the evenings, as a habit; am Abend = in the evening; heute Abend = this evening."
+    ],
+    "subtleties": [
+     "German has no a.m./p.m.: it says morgens / abends or uses the 24-hour clock: um 20 Uhr."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  }
+ ],
+ "absent": []
+}

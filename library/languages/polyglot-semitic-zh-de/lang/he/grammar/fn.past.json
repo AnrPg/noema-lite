@@ -1,0 +1,541 @@
+{
+ "function": "fn.past",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "verb.past",
+   "value": "past"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  },
+  {
+   "feature": "verb.perfect",
+   "value": "none"
+  },
+  {
+   "feature": "syn.proDrop",
+   "value": "partial"
+  }
+ ],
+ "summary": "The Hebrew past (עָבָר) is one tense with person endings added to the stem: ‑תִּי “I”, ‑תָּ “you (m.)”, ‑תְּ “you (f.)”, nothing for “he”, ‑ָה “she”, ‑נוּ “we”, ‑תֶּם / ‑תֶּן “you (pl.)”, ‑וּ “they”: זָכַרְתִּי, זָכַרְתָּ, זָכַרְתְּ, זָכַר, זָכְרָה, זָכַרְנוּ, זְכַרְתֶּם, זְכַרְתֶּן, זָכְרוּ. The 3rd person masculine singular, with no ending, is the form under which every verb is listed. Because the ending shows the person, the pronoun is usually dropped in the 1st and 2nd person (קַמְתִּי בְּשֶׁבַע “I got up at seven”), while the 3rd person keeps its subject (הוּא קָם). Gender shows in “you” (sg. and pl.) and in “he / she”; “I”, “we” and “they” have one form for both. There is no aspect: the same form says “I got up”, “I have got up” and, with a word of time, what was going on; repeated or habitual actions are the next lesson (הָיָה + present, C02). The endings are the same in every pattern (binyan); the stem vowels belong to the pattern: paʿal קַמְתִּי, גָּדַלְתִּי; piʿel סִיַּמְתִּי; hifʿil הִתְחַלְתִּי; nifʿal נִרְדַּמְתִּי; hitpaʿel הִתְלַבַּשְׁתִּי. Negation is לֹא before the verb, a question is the same sentence with a question mark or a question word: לֹא קַמְתִּי, מָתַי קַמְתָּ?",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "ending",
+    "זָכַר “remember”",
+    "said"
+   ],
+   "rows": [
+    [
+     "אֲנִי",
+     "‑תִּי",
+     "זָכַרְתִּי",
+     "zacharti"
+    ],
+    [
+     "אַתָּה",
+     "‑תָּ",
+     "זָכַרְתָּ",
+     "zacharta"
+    ],
+    [
+     "אַתְּ",
+     "‑תְּ",
+     "זָכַרְתְּ",
+     "zachart"
+    ],
+    [
+     "הוּא",
+     "—",
+     "זָכַר",
+     "zachar"
+    ],
+    [
+     "הִיא",
+     "‑ָה",
+     "זָכְרָה",
+     "zachra"
+    ],
+    [
+     "אֲנַחְנוּ",
+     "‑נוּ",
+     "זָכַרְנוּ",
+     "zacharnu"
+    ],
+    [
+     "אַתֶּם",
+     "‑תֶּם",
+     "זְכַרְתֶּם",
+     "zchartem"
+    ],
+    [
+     "אַתֶּן",
+     "‑תֶּן",
+     "זְכַרְתֶּן",
+     "zcharten"
+    ],
+    [
+     "הֵם / הֵן",
+     "‑וּ",
+     "זָכְרוּ",
+     "zachru"
+    ]
+   ],
+   "caption": "Nine forms, one for every person; the ending tells who did it. In paʿal the first vowel is reduced in the 2nd person plural (זְכַרְתֶּם).",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The ending is the subject",
+   "text": "קַמְתִּי is a whole sentence: “I got up”. In the 1st and 2nd person the pronoun is normally left out (אֲנִי קַמְתִּי only for emphasis); in the 3rd person the subject is said: הוּא קָם, הַתִּינוֹק נִרְדַּם.",
+   "typology": [
+    {
+     "feature": "syn.proDrop",
+     "value": "partial"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "I",
+    "he",
+    "she",
+    "they",
+    "verbs"
+   ],
+   "rows": [
+    [
+     "paʿal",
+     "גָּדַלְתִּי",
+     "גָּדַל",
+     "גָּדְלָה",
+     "גָּדְלוּ",
+     "גָּדַל, זָכַר, שָׁכַח, רָחַץ, יָשַׁן"
+    ],
+    [
+     "paʿal, hollow root (ק־ו־ם)",
+     "קַמְתִּי",
+     "קָם",
+     "קָמָה",
+     "קָמוּ",
+     "קָם"
+    ],
+    [
+     "piʿel",
+     "סִיַּמְתִּי",
+     "סִיֵּם",
+     "סִיְּמָה",
+     "סִיְּמוּ",
+     "סִיֵּם, שִׂחֵק, בִּקֵּר"
+    ],
+    [
+     "hifʿil",
+     "הִתְחַלְתִּי",
+     "הִתְחִיל",
+     "הִתְחִילָה",
+     "הִתְחִילוּ",
+     "הִתְחִיל, הִזְמִין"
+    ],
+    [
+     "nifʿal",
+     "נִרְדַּמְתִּי",
+     "נִרְדַּם",
+     "נִרְדְּמָה",
+     "נִרְדְּמוּ",
+     "נִרְדַּם"
+    ],
+    [
+     "hitpaʿel",
+     "הִתְלַבַּשְׁתִּי",
+     "הִתְלַבֵּשׁ",
+     "הִתְלַבְּשָׁה",
+     "הִתְלַבְּשׁוּ",
+     "הִתְלַבֵּשׁ, הִתְקַלֵּחַ, הִתְעוֹרֵר"
+    ]
+   ],
+   "caption": "The same endings in every pattern; the vowels of the stem come with the pattern."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "I",
+    "you (m.)",
+    "you (f.)",
+    "he",
+    "she",
+    "we",
+    "you (pl.)",
+    "they"
+   ],
+   "rows": [
+    [
+     "get up",
+     "קַמְתִּי",
+     "קַמְתָּ",
+     "קַמְתְּ",
+     "קָם",
+     "קָמָה",
+     "קַמְנוּ",
+     "קַמְתֶּם",
+     "קָמוּ"
+    ],
+    [
+     "sleep",
+     "יָשַׁנְתִּי",
+     "יָשַׁנְתָּ",
+     "יָשַׁנְתְּ",
+     "יָשַׁן",
+     "יָשְׁנָה",
+     "יָשַׁנּוּ",
+     "יְשַׁנְתֶּם",
+     "יָשְׁנוּ"
+    ],
+    [
+     "start",
+     "הִתְחַלְתִּי",
+     "הִתְחַלְתָּ",
+     "הִתְחַלְתְּ",
+     "הִתְחִיל",
+     "הִתְחִילָה",
+     "הִתְחַלְנוּ",
+     "הִתְחַלְתֶּם",
+     "הִתְחִילוּ"
+    ],
+    [
+     "shower",
+     "הִתְקַלַּחְתִּי",
+     "הִתְקַלַּחְתָּ",
+     "הִתְקַלַּחְתְּ",
+     "הִתְקַלֵּחַ",
+     "הִתְקַלְּחָה",
+     "הִתְקַלַּחְנוּ",
+     "הִתְקַלַּחְתֶּם",
+     "הִתְקַלְּחוּ"
+    ]
+   ],
+   "caption": "The daily routine in the past. The 2nd person feminine plural (‑תֶּן) follows the masculine: קַמְתֶּן, יְשַׁנְתֶּן."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Vowels that move",
+   "text": "In hifʿil the i of the stem becomes a before the endings of the 1st and 2nd person: הִתְחִיל but הִתְחַלְתִּי, הִזְמִין but הִזְמַנְתִּי. When the root ends in נ, the נ of “we” merges with it: יָשַׁנּוּ “we slept”, הִזְמַנּוּ “we booked”. Before ‑ָה and ‑וּ the vowel of the stem drops: זָכַר → זָכְרָה, זָכְרוּ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "One past for everything",
+   "text": "The same form is “I got up”, “I have got up” and “I did get up”: קַמְתִּי. “Already” or “not yet” make the result clear, a time phrase tells when (אֶתְמוֹל קַמְתִּי בְּשֶׁבַע). No helper verb is needed for questions or negation: קַמְתָּ? “did you get up?”, לֹא קַמְתִּי “I didn’t get up”.",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "none"
+    },
+    {
+     "feature": "verb.perfective",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "written",
+    "past",
+    "present"
+   ],
+   "rows": [
+    [
+     "קם",
+     "קָם “he got up”",
+     "קָם “he gets up” — the same word"
+    ],
+    [
+     "קמה",
+     "קָמָה “she got up” (KA-ma)",
+     "קָמָה “she gets up” (ka-MA)"
+    ],
+    [
+     "ישן",
+     "יָשַׁן “he slept”",
+     "יָשֵׁן “he sleeps” (and the adjective יָשָׁן “old”)"
+    ]
+   ],
+   "caption": "Hollow and stative verbs: past and present can look alike — the context (a word of time) decides."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Who did it?",
+    "Take the verb’s past stem",
+    "Add the person ending",
+    "לֹא in front for “not”",
+    "A word of time: אֶתְמוֹל, בַּבֹּקֶר …"
+   ],
+   "caption": "Building a sentence in the past"
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Who did it — I, you (m./f.), he, she, we, you (pl.), they?",
+    "Which pattern is the verb? (the stem vowels)",
+    "Is it hifʿil? → a before ‑תִּי / ‑נוּ / ‑תֶּם (הִתְחַלְתִּי)."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who did it? The ending must match: ‑תִּי, ‑תָּ, ‑תְּ, —, ‑ָה, ‑נוּ, ‑תֶּם / ‑תֶּן, ‑וּ.",
+   "Speaking to a woman? ‑תְּ (קַמְתְּ); to a man ‑תָּ (קַמְתָּ). About a woman: ‑ָה (קָמָה).",
+   "1st or 2nd person? The pronoun can go: קַמְתִּי. 3rd person? Say the subject: הוּא קָם.",
+   "Which pattern? paʿal קַמְתִּי, piʿel סִיַּמְתִּי, hifʿil הִתְחַלְתִּי (i → a), nifʿal נִרְדַּמְתִּי, hitpaʿel הִתְלַבַּשְׁתִּי.",
+   "Negative? לֹא right before the verb. Question? A question mark or a question word (מָתַי, אֵיךְ) — the verb does not change."
+  ],
+  "steps": [
+   "Find the subject.",
+   "Take the past stem of the verb (its pattern).",
+   "Add the person ending.",
+   "Put לֹא before it for the negative."
+  ]
+ },
+ "traps": [
+  "*אֲנִי קַמְתָּ — the ending must be the 1st person: (אֲנִי) קַמְתִּי.",
+  "*הִתְחִילְתִּי — in hifʿil the i becomes a before ‑תִּי: הִתְחַלְתִּי.",
+  "*הִיא קָם — “she” takes ‑ָה: הִיא קָמָה; *הִיא הִתְלַבֵּשׁ → הִיא הִתְלַבְּשָׁה.",
+  "*אֲנַחְנוּ יָשַׁנְנוּ — with a final נ the two merge: יָשַׁנּוּ.",
+  "“They” has one form for men and women: הֵם קָמוּ, הֵן קָמוּ.",
+  "Past and present can look the same (קָם, קָמָה): a word of time decides.",
+  "No helper verb in questions or negation: *עָשִׂיתָ לָקוּם? — just קַמְתָּ?, לֹא קַמְתִּי."
+ ],
+ "evidence": {
+  "tags": [
+   "V",
+   "PST"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;1;SG",
+  "V;PST;2;SG;MASC",
+  "V;PST;2;SG;FEM",
+  "V;PST;3;SG;MASC",
+  "V;PST;3;SG;FEM",
+  "V;PST;1;PL",
+  "V;PST;2;PL;MASC",
+  "V;PST;2;PL;FEM",
+  "V;PST;3;PL"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "he:hitorer",
+    "he:kam",
+    "he:rachats",
+    "he:hitkaleach",
+    "he:hitlabesh",
+    "he:hitchil",
+    "he:siyem",
+    "he:nirdam",
+    "he:yashan-v",
+    "he:sichek",
+    "he:gadal",
+    "he:zachar",
+    "he:shachach",
+    "he:hizmin",
+    "he:biker"
+   ],
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;2;SG;MASC",
+    "V;PST;2;SG;FEM",
+    "V;PST;3;SG;FEM",
+    "V;PST;1;PL",
+    "V;PST;3;PL"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Person"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.past",
+   "note": "The Arabic perfect is built the same way, with related endings: كَتَبْتُ / כָּתַבְתִּי, كَتَبْتَ / כָּתַבְתָּ, كَتَبَتْ / כָּתְבָה; Arabic keeps more forms (dual, feminine plural) and its perfect is also an aspect."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.past",
+   "note": "German speaks of the past mostly with the Perfekt, haben / sein + participle (ich bin aufgestanden); Hebrew has one form with endings and no helper verb: קַמְתִּי."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.past",
+   "note": "Chinese verbs do not change: 了 and 过 and words of time show the past (我七点起床了); in Hebrew the verb itself carries the past and the person: קַמְתִּי בְּשֶׁבַע."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has two pasts — the aorist for a finished act (σηκώθηκα) and the imperfect for a habit or a process (σηκωνόμουν); Hebrew has one past form, קַמְתִּי, and says habits with הָיָה + present. Like Greek, the ending shows the person, so the pronoun can be dropped (in Hebrew in the 1st and 2nd person)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "The Russian past shows gender and number but not person (встал / встала), so я / ты are needed; the Hebrew past shows the person: קַמְתִּי, קַמְתָּ, קַמְתְּ. And there are no aspect pairs (встал / вставал): one form, קַמְתִּי."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish chooses between pretérito, imperfecto and perfecto (me levanté, me levantaba, me he levantado); Hebrew has just קַמְתִּי. As in Spanish, the ending shows the person, so the pronoun is left out: קַמְתִּי “(yo) me levanté”."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "One Hebrew form covers “I got up”, “I have got up” and “I did get up”: קַמְתִּי — no “have”, no “did” in questions (קַמְתָּ? “did you get up?”) or negation (לֹא קַמְתִּי). The ending shows the person, so the pronoun usually goes."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "Where French uses the passé composé (je me suis levé) or the imparfait (je me levais), Hebrew has one simple form, קַמְתִּי, without auxiliary — and the ending, not a pronoun, shows the person."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German uses the Perfekt with haben / sein in speech (ich habe gegessen, ich bin aufgestanden); Hebrew has one simple past with endings, אָכַלְתִּי, קַמְתִּי — no auxiliary and no participle. It also marks gender in “you” and “he / she”: קַמְתָּ / קַמְתְּ."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "The Hindi past agrees in gender and number and, with ने, with the object (मैंने खाना खाया); the Hebrew past always agrees with the subject and marks the person: אָכַלְתִּי “I ate”, for a man and for a woman."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian builds the past from a past stem plus person endings (خوردم، خوردی، خورد) — the same idea as Hebrew אָכַלְתִּי, אָכַלְתָּ, אָכַל; Hebrew adds gender in “you” and “he / she”, and has no ongoing past like می‌خوردم (it uses הָיָה + present)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks the speaker’s gender in the past (मी गेलो / मी गेले); in Hebrew the 1st person has one form for men and women (קַמְתִּי), and gender appears only in “you” and “he / she” (קַמְתָּ / קַמְתְּ, קָם / קָמָה)."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The Hebrew past is the cousin of the Arabic perfect: suffixes on the stem, with endings that sound alike (كَتَبْتُ / כָּתַבְתִּי, كَتَبْنَا / כָּתַבְנוּ). Hebrew has fewer forms (no dual, one form for “they”) and the form is only a past, not an aspect."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Like Turkish -di + person ending (kalktım, kalktın, kalktı), the Hebrew past puts the person at the end: קַמְתִּי, קַמְתָּ, קָם — but Hebrew also marks gender (קַמְתְּ for a woman) and has no separate reported past like -miş."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks the past with -ta and nothing about the subject (起きた); a Hebrew past form tells who: קַמְתִּי “I got up”, קָמָה “she got up”."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks the past with -었/았- and politeness, not the subject (일어났어요); the Hebrew past ending is the subject: קַמְתִּי, קַמְנוּ."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish adds person endings to a past stem (nousin, nousit, nousi) — so does Hebrew (קַמְתִּי, קַמְתָּ, קָם). Hebrew has no perfect like olen noussut: the simple past serves."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian marks the past with -t / -tt and adds person endings (keltem, keltél, kelt); Hebrew too puts the person in the ending (קַמְתִּי, קַמְתָּ, קָם), and adds gender instead of a definite conjugation."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili puts the past marker -li- and the person in front (niliamka “I woke up”); Hebrew puts the person at the end of a past stem: הִתְעוֹרַרְתִּי."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda distinguishes recent and remote past inside the verb; Hebrew has a single past, הִתְעוֹרַרְתִּי, for yesterday and for long ago — words of time do the rest."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese verbs never change — 了, 过 and words of time show the past (我昨天七点起床了); in Hebrew the verb changes: קַמְתִּי, and the ending also shows the person."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese may put đã before the verb and often leaves the past to the context; in Hebrew the past form is obligatory: אֶתְמוֹל קַמְתִּי, never *אֶתְמוֹל אֲנִי קָם."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut grades the past by distance in suffixes on one long verb; Hebrew has one past form for every distance, with separate words of time (אֶתְמוֹל, לִפְנֵי שָׁנָה)."
+  }
+ ]
+}

@@ -28,3 +28,22 @@ node "$ROOT/tests/curriculum_share.js" "$T"
 node "$ROOT/tests/shelf.js" "$T"
 node "$ROOT/tests/sources.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed
+# foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI
+python3 "$ROOT/tests/lang_rules.py"
+python3 "$ROOT/tests/lang_validate.py"
+python3 "$ROOT/tests/lang_refcheck.py"
+python3 "$ROOT/tools/lang_phenomena.py" > /dev/null   # the catalogues of phenomena agree with the implementation (D14)
+node "$ROOT/tests/langcore.js"
+node "$ROOT/tests/lang_courses.js"
+node "$ROOT/tests/lang_ui.js" "$T"
+node "$ROOT/tests/lang_lessons.js" "$T"
+node "$ROOT/tests/lang_grammar.js" "$T"   # the grammar lane (P5): generators, validator, widgets, lane, session
+node "$ROOT/tests/lang_vocab2.js" "$T"   # vocabulary depth: the remaining §6.2 types (P5v)
+node "$ROOT/tests/lang_sync.js" "$T"   # progress across devices (docs/SYNC.md)
+node "$ROOT/tests/lang_script.js" "$T"   # P4: script modules, keyboards, pinyin input, the 🔤 lane (docs/LANGUAGES.md §4.9, §6.1, §8)
+node "$ROOT/tests/lang_poly.js" "$T"   # P6 polyglot layer: parallel sentences, bridges, comparisons, the five polyglot exercises, the compare lane
+node "$ROOT/tests/lang_prod.js" "$T"     # production and reading, the tutor (P7; Gemini mocked)
+node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: tasks, checks, connector, app (docs/LANGUAGES.md §10.1)
+node "$ROOT/tests/lang_speech.js" "$T"   # P9 listening and speaking: speech synthesis, dictation, shadowing, recognition (speech services mocked)
+node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end to end — three learners, two widths, every route (docs/LANGUAGES.md §13 QA)
+node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new frame: the Languages tab, #/lang/<course>/…, Today, + New language (docs/LANGUAGES.md §8)

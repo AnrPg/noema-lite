@@ -1,0 +1,735 @@
+{
+ "function": "fn.past",
+ "status": "realized",
+ "summary": "The past (the perfect, al-māḍī) is a verb form of its own: the past stem with an ending for the person — غَسَلْتُ “I washed”, غَسَلَ “he washed”, غَسَلْنَا “we washed”. It says that an action is done and over: اِسْتَيْقَظْتُ مُبَكِّرًا “I woke up early”. The ending shows person, number and, in the 2nd and 3rd person, gender, so the pronoun is normally left out. The past is also the dictionary form of every verb: نَامَ is “he slept”. It is negated with لَمْ + the jussive, a present-stem form without the final -u: لَمْ أَسْتَيْقِظْ “I did not wake up” — not with لَا. (مَا + past, مَا نِمْتُ, is literary or dialectal.) قَدْ before the past stresses that the action is complete: قَدْ وَصَلَ الْقِطَارُ “the train has arrived”. There is no separate perfect tense: one form covers “I slept” and “I have slept”.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "pronoun",
+    "غَسَلَ → past",
+    "say",
+    "ending"
+   ],
+   "rows": [
+    [
+     "I",
+     "أَنَا",
+     "غَسَلْتُ",
+     "ġasaltu",
+     "-tu"
+    ],
+    [
+     "you (to a man)",
+     "أَنْتَ",
+     "غَسَلْتَ",
+     "ġasalta",
+     "-ta"
+    ],
+    [
+     "you (to a woman)",
+     "أَنْتِ",
+     "غَسَلْتِ",
+     "ġasalti",
+     "-ti"
+    ],
+    [
+     "he",
+     "هُوَ",
+     "غَسَلَ",
+     "ġasala",
+     "-a"
+    ],
+    [
+     "she",
+     "هِيَ",
+     "غَسَلَتْ",
+     "ġasalat",
+     "-at"
+    ],
+    [
+     "we",
+     "نَحْنُ",
+     "غَسَلْنَا",
+     "ġasalnā",
+     "-nā"
+    ],
+    [
+     "you (several)",
+     "أَنْتُمْ",
+     "غَسَلْتُمْ",
+     "ġasaltum",
+     "-tum"
+    ],
+    [
+     "you (women only)",
+     "أَنْتُنَّ",
+     "غَسَلْتُنَّ",
+     "ġasaltunna",
+     "-tunna"
+    ],
+    [
+     "they",
+     "هُمْ",
+     "غَسَلُوا",
+     "ġasalū",
+     "-ū"
+    ],
+    [
+     "they (women only)",
+     "هُنَّ",
+     "غَسَلْنَ",
+     "ġasalna",
+     "-na"
+    ]
+   ],
+   "caption": "A sound verb: غَسَلَ “to wash”. The same endings come back on every verb in the past.",
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "past"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Endings, not prefixes.",
+   "text": "-tu I · -ta you (m.) · -ti you (f.) · -a he · -at she · -nā we · -tum you (pl.) · -tunna you (women) · -ū they · -na they (women). The present puts the person in front (أَغْسِلُ); the past puts it at the end (غَسَلْتُ). The ending -ū is written وا with a silent alif: غَسَلُوا."
+  },
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "نَامَ (sleep)",
+    "عَادَ (return)",
+    "نَسِيَ (forget)",
+    "اِنْتَهَى (finish)",
+    "اِسْتَحَمَّ (shower)"
+   ],
+   "rows": [
+    [
+     "أَنَا I",
+     "نِمْتُ",
+     "عُدْتُ",
+     "نَسِيتُ",
+     "اِنْتَهَيْتُ",
+     "اِسْتَحْمَمْتُ"
+    ],
+    [
+     "هُوَ he",
+     "نَامَ",
+     "عَادَ",
+     "نَسِيَ",
+     "اِنْتَهَى",
+     "اِسْتَحَمَّ"
+    ],
+    [
+     "هِيَ she",
+     "نَامَتْ",
+     "عَادَتْ",
+     "نَسِيَتْ",
+     "اِنْتَهَتْ",
+     "اِسْتَحَمَّتْ"
+    ],
+    [
+     "نَحْنُ we",
+     "نِمْنَا",
+     "عُدْنَا",
+     "نَسِينَا",
+     "اِنْتَهَيْنَا",
+     "اِسْتَحْمَمْنَا"
+    ],
+    [
+     "هُمْ they",
+     "نَامُوا",
+     "عَادُوا",
+     "نَسُوا",
+     "اِنْتَهَوْا",
+     "اِسْتَحَمُّوا"
+    ],
+    [
+     "هُنَّ they (women only)",
+     "نِمْنَ",
+     "عُدْنَ",
+     "نَسِينَ",
+     "اِنْتَهَيْنَ",
+     "اِسْتَحْمَمْنَ"
+    ]
+   ],
+   "caption": "Weak verbs. Hollow verbs (نَامَ، عَادَ) shorten the long ā before an ending that starts with a consonant: نِمْتُ، عُدْتُ. Defective verbs keep a y before such endings (نَسِيتُ، اِنْتَهَيْتُ) and lose it before -ū (نَسُوا، اِنْتَهَوْا). Doubled verbs split the double letter: اِسْتَحْمَمْتُ.",
+   "typology": [
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "نِمْتُ or نُمْتُ? Ask the present.",
+   "text": "The short vowel of a hollow verb in “I, you, we” comes from the present: يَنَامُ (ā) → نِمْتُ; يَعُودُ (ū) → عُدْتُ; يَزُورُ (ū) → زُرْتُ. With the endings -a, -at, -ū the long ā stays: نَامَ، نَامَتْ، نَامُوا."
+  },
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "present",
+    "after لَمْ (jussive)"
+   ],
+   "rows": [
+    [
+     "أَنَا I",
+     "أَسْتَيْقِظُ",
+     "لَمْ أَسْتَيْقِظْ"
+    ],
+    [
+     "أَنْتَ you (to a man)",
+     "تَسْتَيْقِظُ",
+     "لَمْ تَسْتَيْقِظْ"
+    ],
+    [
+     "أَنْتِ you (to a woman)",
+     "تَسْتَيْقِظِينَ",
+     "لَمْ تَسْتَيْقِظِي"
+    ],
+    [
+     "هُوَ he",
+     "يَسْتَيْقِظُ",
+     "لَمْ يَسْتَيْقِظْ"
+    ],
+    [
+     "هِيَ she",
+     "تَسْتَيْقِظُ",
+     "لَمْ تَسْتَيْقِظْ"
+    ],
+    [
+     "نَحْنُ we",
+     "نَسْتَيْقِظُ",
+     "لَمْ نَسْتَيْقِظْ"
+    ],
+    [
+     "أَنْتُمْ you (several)",
+     "تَسْتَيْقِظُونَ",
+     "لَمْ تَسْتَيْقِظُوا"
+    ],
+    [
+     "أَنْتُنَّ you (women only)",
+     "تَسْتَيْقِظْنَ",
+     "لَمْ تَسْتَيْقِظْنَ"
+    ],
+    [
+     "هُمْ they",
+     "يَسْتَيْقِظُونَ",
+     "لَمْ يَسْتَيْقِظُوا"
+    ],
+    [
+     "هُنَّ they (women only)",
+     "يَسْتَيْقِظْنَ",
+     "لَمْ يَسْتَيْقِظْنَ"
+    ]
+   ],
+   "caption": "The negative past: لَمْ + the jussive. Take the present, drop the final -u (أَسْتَيْقِظُ → أَسْتَيْقِظْ) and the -na of -īna / -ūna (تَسْتَيْقِظِينَ → تَسْتَيْقِظِي، يَسْتَيْقِظُونَ → يَسْتَيْقِظُوا); -na of the feminine plural stays.",
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "verb.subjunctive",
+     "value": "inflectional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Weak verbs after لَمْ.",
+   "text": "Hollow verbs shorten the long vowel: أَنَامُ → لَمْ أَنَمْ “I didn’t sleep”. Defective verbs lose the final long vowel: أَنْسَى → لَمْ أَنْسَ, يَنْتَهِي → لَمْ يَنْتَهِ. Doubled verbs take -a: لَمْ يَسْتَحِمَّ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "statement",
+    "negated"
+   ],
+   "rows": [
+    [
+     "اِسْتَيْقَظْتُ مُبَكِّرًا.",
+     "لَمْ أَسْتَيْقِظْ مُبَكِّرًا."
+    ],
+    [
+     "نِمْتُ جَيِّدًا.",
+     "لَمْ أَنَمْ جَيِّدًا."
+    ],
+    [
+     "غَسَلَ أَخِي الصَّحْنَ.",
+     "لَمْ يَغْسِلْ أَخِي الصَّحْنَ."
+    ],
+    [
+     "نَسِيتُ الْمِفْتَاحَ.",
+     "لَمْ أَنْسَ الْمِفْتَاحَ."
+    ]
+   ],
+   "caption": "The verb after لَمْ is never a past form: لَمْ أَنَمْ, not *لَمْ نِمْتُ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "قَدْ: “has (already)”.",
+   "text": "قَدْ + past stresses that something is complete or has just happened: قَدْ وَصَلَ الْقِطَارُ “the train has arrived”. Often with لَـ: لَقَدْ نِمْتُ كَثِيرًا “I really slept a lot”. Without قَدْ the past says the same thing more plainly: وَصَلَ الْقِطَارُ.",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Questions in the past.",
+   "text": "هَلْ + past: هَلْ أَفْطَرْتَ؟ “did you have breakfast / have you had breakfast?”; a question word first: مَتَى اسْتَيْقَظْتِ؟ “when did you wake up?”. A short negative answer: لَا، لَمْ أُفْطِرْ بَعْدُ “no, not yet”."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Verb first",
+     "points": [
+      "نَامَ الْأَطْفَالُ.",
+      "the verb stays singular before a noun subject; only the gender shows: نَامَتِ الْبِنْتُ"
+     ]
+    },
+    {
+     "title": "Noun first",
+     "points": [
+      "الْأَطْفَالُ نَامُوا.",
+      "the verb agrees fully after its subject"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "VSO"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Helping vowels.",
+   "text": "An ending with sukūn takes a helping vowel before al-: نَامَتْ → نَامَتِ الْبِنْتُ (the girl slept). Putting the noun first avoids the question: الْبِنْتُ نَامَتْ."
+  },
+  {
+   "t": "p",
+   "text": "مَا + past (مَا نِمْتُ “I didn’t sleep”) is the negation of older and literary Arabic and of the spoken dialects; in Modern Standard Arabic لَمْ + jussive is the neutral choice. لَا + past is not a negation of a fact: it appears in wishes and oaths (لَا سَمَحَ اللّٰهُ “God forbid”)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the action done and over (yesterday, last year, already)? → the past.",
+   "Who did it? Past stem + ending: -tu I, -ta / -ti you, -a he, -at she, -nā we, -tum / -tunna you (pl.), -ū / -na they.",
+   "Is the verb hollow (نَامَ، عَادَ)? Before -tu, -ta, -ti, -nā, -tum, -na the long ā is short: نِمْتُ، عُدْتُ — the vowel comes from the present.",
+   "Is it defective (نَسِيَ، اِنْتَهَى)? → نَسِيتُ / نَسُوا, اِنْتَهَيْتُ / اِنْتَهَوْا.",
+   "Is it negative? → لَمْ + the jussive (لَمْ أَنَمْ), never لَمْ + a past form and not لَا + past.",
+   "Is the subject a noun after the verb? → the verb stays singular: نَامَ الْأَطْفَالُ.",
+   "Do I want to stress that it is already done? → قَدْ + past."
+  ]
+ },
+ "traps": [
+  "The dictionary form is the past “he” form: نَامَ is “he slept”, not “to sleep”.",
+  "-tu, -ta and -ti differ only in the vowel: غَسَلْتُ (I) / غَسَلْتَ (you, m.) / غَسَلْتِ (you, f.) — unvocalized all three are غسلت.",
+  "“She” ends in -at with sukūn: غَسَلَتْ; before al- it becomes -ati: غَسَلَتِ الْبِنْتُ.",
+  "The ending -ū is written وا (نَامُوا، ذَهَبُوا); the alif is not pronounced.",
+  "After لَمْ the verb is a present-stem form: لَمْ أَذْهَبْ, not *لَمْ ذَهَبْتُ.",
+  "Hollow verbs: نِمْتُ (i) but عُدْتُ (u) — read the vowel off the present (يَنَامُ / يَعُودُ)."
+ ],
+ "evidence": {
+  "tags": [
+   "PST"
+  ],
+  "lemmas": [
+   "ar:lam",
+   "ar:qad"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;1;SG",
+  "V;PST;2;SG;MASC",
+  "V;PST;2;SG;FEM",
+  "V;PST;3;SG;MASC",
+  "V;PST;3;SG;FEM",
+  "V;PST;1;PL",
+  "V;PST;2;PL;MASC",
+  "V;PST;2;PL;FEM",
+  "V;PST;3;PL;MASC",
+  "V;PST;3;PL;FEM",
+  "V;JUS;1;SG",
+  "V;JUS;2;SG;MASC",
+  "V;JUS;2;SG;FEM",
+  "V;JUS;3;SG;MASC",
+  "V;JUS;3;SG;FEM",
+  "V;JUS;1;PL",
+  "V;JUS;2;PL;MASC",
+  "V;JUS;2;PL;FEM",
+  "V;JUS;3;PL;MASC",
+  "V;JUS;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:akala",
+    "ar:shariba",
+    "ar:tabakha",
+    "ar:dhahaba",
+    "ar:kharaja",
+    "ar:ada",
+    "ar:safara",
+    "ar:istayqaza",
+    "ar:nahada",
+    "ar:ghasala",
+    "ar:labisa",
+    "ar:aftara",
+    "ar:badaa",
+    "ar:intaha",
+    "ar:nama",
+    "ar:istahamma"
+   ],
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;2;SG;MASC",
+    "V;PST;2;SG;FEM",
+    "V;PST;3;SG;MASC",
+    "V;PST;3;SG;FEM",
+    "V;PST;1;PL",
+    "V;PST;2;PL;MASC",
+    "V;PST;2;PL;FEM",
+    "V;PST;3;PL;MASC",
+    "V;PST;3;PL;FEM"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:istayqaza",
+    "ar:nahada",
+    "ar:ghasala",
+    "ar:labisa",
+    "ar:aftara",
+    "ar:badaa",
+    "ar:intaha",
+    "ar:nama",
+    "ar:istahamma"
+   ],
+   "cells": [
+    "V;JUS;1;SG",
+    "V;JUS;2;SG;MASC",
+    "V;JUS;2;SG;FEM",
+    "V;JUS;3;SG;MASC",
+    "V;JUS;3;SG;FEM",
+    "V;JUS;1;PL",
+    "V;JUS;2;PL;MASC",
+    "V;JUS;2;PL;FEM",
+    "V;JUS;3;PL;MASC",
+    "V;JUS;3;PL;FEM"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“We woke up” — which form?",
+   "options": [
+    "اِسْتَيْقَظْنَا",
+    "اِسْتَيْقَظْتُ",
+    "نَسْتَيْقِظُ",
+    "اِسْتَيْقَظُوا"
+   ],
+   "answer": "اِسْتَيْقَظْنَا",
+   "why": "-nā is “we” in the past; نَسْتَيْقِظُ is the present."
+  },
+  {
+   "q": "“I slept” — which form of نَامَ?",
+   "options": [
+    "نِمْتُ",
+    "نُمْتُ",
+    "نَامْتُ",
+    "أَنَامُ"
+   ],
+   "answer": "نِمْتُ",
+   "why": "A hollow verb with ā in the present (يَنَامُ) has i in the short stem: نِمْتُ."
+  },
+  {
+   "q": "“She forgot” — which form?",
+   "options": [
+    "نَسِيَتْ",
+    "نَسِيتِ",
+    "نَسِيتُ",
+    "نَسُوا"
+   ],
+   "answer": "نَسِيَتْ",
+   "why": "-at is “she”; نَسِيتِ is “you (a woman) forgot”."
+  },
+  {
+   "q": "“I didn’t sleep” — which is correct?",
+   "options": [
+    "لَمْ أَنَمْ",
+    "لَمْ نِمْتُ",
+    "لَا نِمْتُ",
+    "لَمْ أَنَامُ"
+   ],
+   "answer": "لَمْ أَنَمْ",
+   "why": "لَمْ + jussive: the present أَنَامُ without -u, with the long ā shortened."
+  },
+  {
+   "q": "What does قَدْ add in قَدْ وَصَلَ الْقِطَارُ?",
+   "options": [
+    "that it has already happened",
+    "that it will happen",
+    "a question",
+    "a negation"
+   ],
+   "answer": "that it has already happened",
+   "why": "قَدْ + past stresses completion: “the train has arrived”."
+  },
+  {
+   "q": "“The children slept”, verb first: which is correct?",
+   "options": [
+    "نَامَ الْأَطْفَالُ",
+    "نَامُوا الْأَطْفَالُ",
+    "نَامَتِ الْأَطْفَالُ"
+   ],
+   "answer": "نَامَ الْأَطْفَالُ",
+   "why": "Before its noun subject the verb stays singular; noun first it would be الْأَطْفَالُ نَامُوا."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.past",
+   "note": "Hebrew has the same Semitic suffix past: Arabic -tu, -nā match Hebrew -ti, -nu (יָשַׁנְתִּי “I slept”, כָּתַבְנוּ “we wrote”); Hebrew negates it with לֹא, Arabic with لَمْ + jussive."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.past",
+   "note": "German speaks of the past mostly with the Perfekt (ich habe geschlafen, ich bin aufgewacht); Arabic has one synthetic past (نِمْتُ، اِسْتَيْقَظْتُ) with no auxiliary."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.past",
+   "note": "Chinese marks completion with 了 after an unchanged verb (我起床了); Arabic changes the verb itself (نَهَضْتُ)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.present",
+   "note": "The present puts the person in a prefix (أَغْسِلُ، تَغْسِلُ); the past in an ending (غَسَلْتُ، غَسَلَتْ). The jussive after لَمْ is built from the present."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "verb.past",
+   "value": "past"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "inflectional"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "obligatory"
+  },
+  {
+   "feature": "verb.perfect",
+   "value": "none"
+  },
+  {
+   "feature": "syn.negation",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.proDrop",
+   "value": "agreement"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also has a past with person endings and no pronoun (κοιμήθηκα “I slept”); the Arabic past (نِمْتُ) matches the Greek aorist of a completed action, and the Greek imperfect (κοιμόμουν) matches كُنْتُ أَنَامُ of the next lesson."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian marks completion with perfective verbs (проснулся / просыпался) and its past agrees in gender and number, not person; Arabic has one past form (اِسْتَيْقَظْتُ) whose ending shows the person, and the gender only in the 2nd and 3rd person."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Like the preterite (me desperté), the Arabic past is one word with a person ending; Arabic has no separate perfect (me he despertado): both are اِسْتَيْقَظْتُ, with قَدْ to stress “already”."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English has “woke up” and “have woken up”; Arabic has one past (اِسْتَيْقَظْتُ), optionally with قَدْ. The negative needs no “did”: لَمْ + a special form of the verb (لَمْ أَسْتَيْقِظْ)."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "Spoken French tells the past with the passé composé (je me suis réveillé, j’ai dormi); the Arabic past is a single word with an ending (اِسْتَيْقَظْتُ، نِمْتُ), closer to the written passé simple."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German mostly uses the Perfekt with haben / sein (ich bin aufgewacht); Arabic has one synthetic past (اِسْتَيْقَظْتُ) and no auxiliary or participle."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi builds the past from a participle that agrees in gender and number (मैं उठा / मैं उठी) and marks the subject of a transitive past with ने; the Arabic past agrees through endings and never changes the case of the subject."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also has a separate past stem with person endings (خوابیدم “I slept”); the Arabic past works the same way (نِمْتُ), but its stem comes from root and pattern."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "The Marathi past shows the speaker’s gender even with “I” (मी उठलो / मी उठले); the Arabic past has one form for “I” (اِسْتَيْقَظْتُ) and shows gender only in the 2nd and 3rd person (اِسْتَيْقَظْتَ / اِسْتَيْقَظْتِ)."
+  },
+  {
+   "for": "he",
+   "rel": "same",
+   "text": "Hebrew has the same suffix past: Arabic -tu, -nā, -ū match Hebrew -ti, -nu, -u (כָּתַבְתִּי, כָּתַבְנוּ, כָּתְבוּ); Hebrew negates it with לֹא, Arabic with لَمْ + jussive."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts a past suffix before the person ending (uyandım “I woke up”) and has a second, hearsay past in -miş; Arabic has one past (اِسْتَيْقَظْتُ) and no evidential distinction."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks the past with -ta (起きた) and never marks the person; the Arabic ending carries person, number and gender (اِسْتَيْقَظْتُ / اِسْتَيْقَظَتْ)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adds the past marker -았/었- and a politeness ending (일어났어요); Arabic changes the ending for person, number and gender, never for politeness."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish also has a past with person endings (heräsin, heräsit); Arabic adds gender (اِسْتَيْقَظْتَ / اِسْتَيْقَظْتِ) and negates with a particle, لَمْ, instead of a negative verb (en herännyt)."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian marks the past with -t / -tt plus a person ending (felébredtem); the Arabic past also packs the person into one ending (اِسْتَيْقَظْتُ) and adds gender."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili marks the past with -li- inside the verb (niliamka “I woke up”); Arabic uses a separate past stem with endings (اِسْتَيْقَظْتُ)."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda distinguishes a near and a remote past in the verb; Arabic has one past for any time before now and adds time words (أَمْسِ، قَبْلَ سَنَةٍ)."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese marks completion with 了 and experience with 过 after an unchanged verb (我起床了); Arabic changes the verb itself (نَهَضْتُ) and has no special marker for “have ever done”."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese may put đã before the verb or leave the time to context (tôi đã ngủ); in Arabic the past form is obligatory (نِمْتُ)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks how long ago something happened (earlier today, yesterday, long ago) with suffixes inside the verb; Arabic has one past and adds time words (أَمْسِ، قَبْلَ سَنَةٍ)."
+  }
+ ]
+}

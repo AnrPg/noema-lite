@@ -1,0 +1,560 @@
+{
+ "function": "fn.possessive",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "syn.genitiveNoun",
+   "value": "gen-noun"
+  },
+  {
+   "feature": "nom.genitive",
+   "value": "adposition-or-particle"
+  },
+  {
+   "feature": "nom.possessiveAffixes",
+   "value": "none"
+  },
+  {
+   "feature": "nom.constructState",
+   "value": "none"
+  }
+ ],
+ "summary": "Chinese has no words for ‘my, your, his’: the personal pronoun + the particle 的 does it — 我的书 ‘my book’, 你的钥匙 ‘your key’, 他们的房子 ‘their house’. 的 links any owner to a thing (老师的书 ‘the teacher’s book’). With close family, one’s home and one’s own group the 的 is usually dropped: 我妈妈 ‘my mother’, 我家 ‘my family, my home’, 我们老师 ‘our teacher’.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Pronoun",
+    "+ 的",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "我",
+     "我的 wǒ de",
+     "my, mine"
+    ],
+    [
+     "你 / 您",
+     "你的 / 您的",
+     "your (one person; 您 polite)"
+    ],
+    [
+     "他",
+     "他的 tā de",
+     "his"
+    ],
+    [
+     "她",
+     "她的 tā de",
+     "her"
+    ],
+    [
+     "它",
+     "它的 tā de",
+     "its"
+    ],
+    [
+     "我们",
+     "我们的",
+     "our"
+    ],
+    [
+     "你们",
+     "你们的",
+     "your (several)"
+    ],
+    [
+     "他们 / 她们",
+     "他们的 / 她们的",
+     "their"
+    ]
+   ],
+   "caption": "his and her sound the same: tā de"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "owner",
+    "的",
+    "thing"
+   ],
+   "caption": "我 + 的 + 书 = my book; 老师 + 的 + 钥匙 = the teacher’s key",
+   "typology": [
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "gen-noun"
+    },
+    {
+     "feature": "nom.genitive",
+     "value": "adposition-or-particle"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "with 的 — things, most nouns",
+     "points": [
+      "我的书 my book",
+      "你的手机 your phone",
+      "老师的钥匙 the teacher’s key"
+     ]
+    },
+    {
+     "title": "without 的 — family, home, own group",
+     "points": [
+      "我妈妈 my mother",
+      "我哥哥 my elder brother",
+      "我家 my family / home",
+      "我们老师 our teacher"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "father’s side",
+    "mother’s side"
+   ],
+   "rows": [
+    [
+     "grandfather",
+     "爷爷",
+     "外公 (north: 姥爷)"
+    ],
+    [
+     "grandmother",
+     "奶奶",
+     "外婆 (north: 姥姥)"
+    ],
+    [
+     "uncle (blood)",
+     "伯伯 (older than father), 叔叔 (younger)",
+     "舅舅"
+    ],
+    [
+     "his wife",
+     "伯母, 婶婶",
+     "舅妈"
+    ],
+    [
+     "aunt (blood)",
+     "姑姑",
+     "阿姨 / 姨妈"
+    ],
+    [
+     "her husband",
+     "姑父",
+     "姨父"
+    ],
+    [
+     "cousins",
+     "堂哥 堂姐 堂弟 堂妹 (children of 伯伯 / 叔叔)",
+     "表哥 表姐 表弟 表妹 (also the children of 姑姑)"
+    ]
+   ],
+   "caption": "The family system: every relative is named by side, sex and age",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "bifurcate-collateral"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "new",
+     "text": "English uncle, aunt and cousin cover all of these; Chinese names each one by side, sex and age: ‘my uncle’ has five translations (伯伯, 叔叔, 舅舅, 姑父, 姨父)."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish makes the same split by side: amca (father’s brother) ~ 伯伯 / 叔叔, dayı (mother’s brother) ~ 舅舅, hala (father’s sister) ~ 姑姑, teyze (mother’s sister) ~ 阿姨 / 姨妈. Chinese adds the age of the father’s brothers."
+    },
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Hindi splits like Chinese, even by age: ताऊ (father’s elder brother) ~ 伯伯, चाचा (father’s younger brother) ~ 叔叔, मामा ~ 舅舅, बुआ ~ 姑姑, मौसी ~ 阿姨 / 姨妈."
+    },
+    {
+     "for": "ar",
+     "rel": "similar",
+     "text": "Arabic separates ʿamm / ʿamma (father’s brother / sister) from khāl / khāla (mother’s brother / sister), like 叔叔 / 姑姑 vs 舅舅 / 阿姨; Chinese also splits the father’s brothers by age."
+    },
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian amu / amme (father’s side) and dāyi / khāle (mother’s side) make the same split as 叔叔 / 姑姑 and 舅舅 / 阿姨; Chinese also splits the father’s brothers by age (伯伯 / 叔叔)."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "male",
+    "female"
+   ],
+   "rows": [
+    [
+     "older sibling",
+     "哥哥",
+     "姐姐"
+    ],
+    [
+     "younger sibling",
+     "弟弟",
+     "妹妹"
+    ],
+    [
+     "siblings as a group",
+     "兄弟",
+     "姐妹"
+    ],
+    [
+     "son’s children",
+     "孙子",
+     "孙女"
+    ],
+    [
+     "daughter’s children",
+     "外孙",
+     "外孙女"
+    ],
+    [
+     "brother’s children",
+     "侄子",
+     "侄女"
+    ],
+    [
+     "sister’s children",
+     "外甥",
+     "外甥女"
+    ]
+   ],
+   "caption": "Siblings, grandchildren, nephews and nieces",
+   "typology": [
+    {
+     "feature": "lex.siblingAge",
+     "value": "elder-younger"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "new",
+     "text": "English brother and sister say nothing about age; Chinese must choose 哥哥 or 弟弟, 姐姐 or 妹妹."
+    },
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese makes the same four-way split: 兄 / 弟 / 姉 / 妹 — even the characters are the ones Chinese uses (哥 aside)."
+    },
+    {
+     "for": "ko",
+     "rel": "similar",
+     "text": "Korean also splits by age, and even by the speaker’s sex (형 / 오빠 ‘older brother’ for a man / a woman); Chinese 哥哥 is the same for every speaker."
+    },
+    {
+     "for": "hu",
+     "rel": "same",
+     "text": "Hungarian has the same four words: báty ~ 哥哥, öcs ~ 弟弟, nővér ~ 姐姐, húg ~ 妹妹."
+    },
+    {
+     "for": "vi",
+     "rel": "similar",
+     "text": "Vietnamese anh / chị (older brother / sister) and em (younger, either sex) split by age; Chinese also splits the younger ones by sex: 弟弟 / 妹妹."
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "外 ‘outside’ = through a woman of the family",
+   "text": "The mother’s parents (外公, 外婆), a daughter’s children (外孙, 外孙女) and a sister’s children (外甥, 外甥女) all carry 外: in the old patrilineal family they belonged to another family line."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "One particle for everything",
+   "text": "Where German changes mein / meine / meinen, 的 never changes: 我的哥哥, 我的姐姐, 我的书 — one form for every noun, one or many."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Owner first",
+   "text": "The owner always comes first: 老师的书 ‘the teacher’s book’, never *书的老师 (that would mean ‘the book’s teacher’)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is the owner? → owner (pronoun or noun) + 的 + thing: 我的书, 老师的书.",
+   "Is the ‘thing’ a family member, my home or my own group (class, school, country)? → 的 is usually dropped: 我妈妈, 我家, 我们学校.",
+   "Is it ‘his’ or ‘her’? → 他的 / 她的 — the same sound, only the character differs.",
+   "Is it ‘mine, yours’ standing alone? → 我的, 你的: 这本书是我的.",
+   "Which relative exactly? → father’s side or mother’s side, older or younger than you (or than the parent), male or female."
+  ],
+  "steps": [
+   "Owner",
+   "(的)",
+   "thing or relative"
+  ]
+ },
+ "traps": [
+  "*我书 → 我的书: things keep 的.",
+  "*的我书, *书的我 → 我的书: 的 comes right after the owner.",
+  "他的 and 她的 both sound tā de — only writing shows ‘his’ or ‘her’.",
+  "叔叔, 伯伯 and 舅舅 are not interchangeable: father’s younger brother, father’s elder brother, mother’s brother.",
+  "堂 cousins are only the children of the father’s brothers; all other cousins are 表."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:de",
+   "zh:wo",
+   "zh:ni",
+   "zh:nin",
+   "zh:ta.he",
+   "zh:ta.she",
+   "zh:ta.it",
+   "zh:women",
+   "zh:zanmen",
+   "zh:nimen",
+   "zh:tamen.m",
+   "zh:tamen.f",
+   "zh:tamen.it",
+   "zh:sheide"
+  ]
+ },
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.possessive"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘my book’",
+   "options": [
+    "我的书",
+    "我书",
+    "书的我"
+   ],
+   "answer": "我的书",
+   "why": "Owner + 的 + thing; with things 的 stays."
+  },
+  {
+   "q": "‘my mother’ (everyday)",
+   "options": [
+    "我妈妈",
+    "妈妈我",
+    "的我妈妈"
+   ],
+   "answer": "我妈妈",
+   "why": "With close family 的 is usually dropped (我的妈妈 is also correct)."
+  },
+  {
+   "q": "Your father’s younger brother is your …",
+   "options": [
+    "叔叔",
+    "伯伯",
+    "舅舅",
+    "姑父"
+   ],
+   "answer": "叔叔",
+   "why": "伯伯 is older than your father; 舅舅 is your mother’s brother; 姑父 the husband of your father’s sister."
+  },
+  {
+   "q": "Your mother’s brother is your …",
+   "options": [
+    "舅舅",
+    "叔叔",
+    "伯伯",
+    "姨父"
+   ],
+   "answer": "舅舅",
+   "why": "All the mother’s brothers are 舅舅."
+  },
+  {
+   "q": "Your mother’s father is your …",
+   "options": [
+    "外公",
+    "爷爷",
+    "伯伯",
+    "舅舅"
+   ],
+   "answer": "外公",
+   "why": "外 marks the mother’s side; 爷爷 is the father’s father."
+  },
+  {
+   "q": "The son of your father’s sister, older than you, is your …",
+   "options": [
+    "表哥",
+    "堂哥",
+    "哥哥",
+    "外甥"
+   ],
+   "answer": "表哥",
+   "why": "堂 is only for the children of the father’s brothers."
+  },
+  {
+   "q": "Your sister’s son is your …",
+   "options": [
+    "外甥",
+    "侄子",
+    "孙子",
+    "外孙"
+   ],
+   "answer": "外甥",
+   "why": "侄子 is your brother’s son; 外孙 your daughter’s son."
+  },
+  {
+   "q": "In speech, how do 他的书 and 她的书 differ?",
+   "options": [
+    "They sound the same",
+    "她的 has another tone",
+    "她的 has no 的"
+   ],
+   "answer": "They sound the same",
+   "why": "Both are tā de shū."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek puts the possessive after the noun as a clitic (το βιβλίο μου ‘my book’) and the owner after it in the genitive (το βιβλίο του δασκάλου); Chinese puts the owner first with 的: 我的书, 老师的书."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian мой / моя / моё agree with the thing owned, and the owner follows in the genitive (книга учителя); Chinese 的 never changes and the owner comes first: 老师的书."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish mi / mis agree in number, and de puts the owner after the thing (el libro del profesor); Chinese reverses the order: 老师的书, literally ‘teacher 的 book’."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English ’s already puts the owner first (the teacher’s book ~ 老师的书), and my / your never change — like 我的. The ‘of’ construction is the reverse: ‘the book of the teacher’ is still 老师的书."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French mon / ma / mes agree with the thing owned, and de puts the owner after it (le livre du professeur); Chinese: owner first, 的, then the thing — 老师的书."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German Annas Buch puts the owner first like 安娜的书, but mein / meine / meinen change; 的 never does. das Buch von Anna is the reverse order — Chinese has only 安娜的书."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi puts the owner first with का / की / के (राम की किताब ‘Ram’s book’) — the order of 的 — but का agrees with the thing owned, 的 never does. मेरा / मेरी ↔ 我的."
+  },
+  {
+   "for": "fa",
+   "rel": "trap",
+   "text": "Persian ezafe puts the thing first: ketāb-e man ‘book of me’; Chinese reverses it: 我的书. Persian can also suffix the owner (ketābam ‘my book’); Chinese has no possessive endings."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts the owner first with an agreeing ending (रामचे पुस्तक ‘Ram’s book’, माझी आई ‘my mother’); Chinese has the same order with an unchanging 的, and drops it with family: 我妈妈."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic puts the thing first and changes it (kitābu l-muʿallimi ‘the teacher’s book’) or adds a suffix (kitābī ‘my book’); Chinese leaves the thing unchanged and puts owner + 的 first: 老师的书, 我的书."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew uses shel after the thing (ha-sefer shel ha-more), a construct form or a suffix (sifri ‘my book’); Chinese puts owner + 的 before an unchanged noun: 老师的书, 我的书."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish puts the owner first too (öğretmenin kitabı ‘the teacher’s book’) but marks both words; Chinese marks only the owner, with 的, and the thing stays bare."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese の is Chinese 的 in all but sound: 私の本 ~ 我的书, 先生の本 ~ 老师的书 — owner first, one unchanging particle."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean 의 works like 的 (나의 책 ~ 我的书), and Korean too leaves it out with family and one’s own group: 우리 엄마 ‘my / our mum’ ~ 我妈妈, 我们老师."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish marks the owner with -n and the thing with a possessive suffix (minun kirjani ‘my book’); Chinese only adds 的 to the owner: 我的书."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks the thing owned (a tanár könyve ‘the teacher’s book’, könyvem ‘my book’); Chinese marks the owner with 的 and leaves the thing alone: 老师的书."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili puts the thing first with an agreeing ‘of’ (kitabu cha mwalimu ‘the teacher’s book’, kitabu changu ‘my book’); Chinese puts the owner first with an unchanging 的: 老师的书, 我的书."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda puts the thing first with an agreeing possessive (ekitabo kyange ‘my book’, ebitabo byange ‘my books’); Chinese puts the owner first, and 的 never changes: 我的书."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese puts the owner after the thing, with của (sách của tôi ‘my book’) or without it (mẹ tôi ‘my mother’); Chinese reverses the order: 我的书, 我妈妈."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks the owner with a case ending and the thing with a possessive ending — ‘my mother’ is one word, anaanaga. Chinese uses separate words: 我(的)妈妈."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.possessive",
+   "note": "German possessives agree with the noun (mein Bruder, meine Schwester, meinen Bruder); Chinese has one unchanging 的 after the owner."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.possessive",
+   "note": "Arabic attaches a suffix to the noun (كِتَابِي ‘my book’, أُمِّي ‘my mother’); Chinese puts the owner first: 我的书, 我妈妈."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.possessive",
+   "note": "Hebrew puts שֶׁלִּי after the noun (הַסֵּפֶר שֶׁלִּי) or a suffix on it (אִמִּי); Chinese 我的 comes before the noun."
+  }
+ ]
+}

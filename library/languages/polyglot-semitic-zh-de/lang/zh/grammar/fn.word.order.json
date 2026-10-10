@@ -1,0 +1,383 @@
+{
+ "function": "fn.word.order",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.wordOrder",
+   "value": "SVO"
+  },
+  {
+   "feature": "syn.obliquePosition",
+   "value": "XVO"
+  },
+  {
+   "feature": "syn.topicProminence",
+   "value": "topic-prominent"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "none"
+  }
+ ],
+ "summary": "Chinese word order is fixed, and it carries much of the grammar: subject – (time) – (place) – verb – object. The place, with 在, comes before the verb: 我在家吃饭 ‘I eat at home’ — never after it. The small words that modify the verb — 不 and 没 (S08), 都, 也 and 只 (S09) — stand right before it (or before 在 + place): 我们都不喝啤酒 ‘none of us drinks beer’. A topic can open the sentence: 早饭我吃面包 or 我早饭吃面包 ‘for breakfast I have bread’. Questions keep the same order (S09, S10).",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "subject",
+    "time (S14)",
+    "place: 在 …",
+    "不 / 都 / 也 / 只",
+    "verb",
+    "object"
+   ],
+   "caption": "The order of a Chinese sentence",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    },
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Subject",
+    "Time (S14)",
+    "Place",
+    "Adverb",
+    "Verb",
+    "Object"
+   ],
+   "rows": [
+    [
+     "我",
+     "",
+     "在家",
+     "",
+     "吃",
+     "饭"
+    ],
+    [
+     "我们",
+     "",
+     "在这里",
+     "都",
+     "喝",
+     "茶"
+    ],
+    [
+     "他",
+     "",
+     "",
+     "不",
+     "吃",
+     "肉"
+    ],
+    [
+     "我妈妈",
+     "今天",
+     "在家",
+     "",
+     "做饭",
+     ""
+    ],
+    [
+     "我",
+     "明天",
+     "",
+     "也",
+     "买",
+     "面包"
+    ]
+   ],
+   "caption": "Time and place come before the verb"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German: the verb in second place (V2)",
+     "points": [
+      "Heute esse ich zu Hause Brot.",
+      "Zu Hause esse ich Brot."
+     ]
+    },
+    {
+     "title": "Chinese: the verb after time and place",
+     "points": [
+      "我今天在家吃面包。",
+      "今天我在家吃面包。"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The place does not follow the verb",
+   "text": "‘I eat at home’ is 我在家吃饭 — *我吃饭在家, with the place after the verb, is wrong."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Adverbs stick to the verb",
+   "text": "都 ‘all’, 也 ‘also’, 只 ‘only’, 不 and 没 stand right before the verb, or before 在 + place: 我们都在家吃饭 ‘we all eat at home’, 他不在家吃饭 ‘he doesn’t eat at home’."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Topic first",
+   "text": "Something already in the conversation can open the sentence: 早饭我吃面包 / 我早饭吃面包 ‘breakfast — I have bread’. The rest keeps its order.",
+   "typology": [
+    {
+     "feature": "syn.topicProminence",
+     "value": "topic-prominent"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Before the verb: everything that frames the action",
+   "text": "Time, place and the small adverbs come before the verb; only the object follows it: 我今天在家吃饭 ‘I eat at home today’.",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who? → first (a topic or a time word may come before it).",
+   "When? → a time word before the verb, before or after the subject (S14).",
+   "Where? → 在 + place before the verb.",
+   "Is there 不, 没, 都, 也 or 只? → right before the verb (or before 在 + place).",
+   "What? → the object after the verb."
+  ],
+  "steps": [
+   "Subject",
+   "time",
+   "place (在 …)",
+   "adverb (不 / 都 / 也 / 只)",
+   "verb",
+   "object"
+  ]
+ },
+ "traps": [
+  "*我吃饭在家 → 我在家吃饭.",
+  "*我喝不茶 → 我不喝茶.",
+  "*我们喝都茶 → 我们都喝茶.",
+  "German V2 does not apply: *今天吃我面包 → 今天我吃面包."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:chi",
+   "zh:he.drink",
+   "zh:mai",
+   "zh:yao",
+   "zh:xiang",
+   "zh:xihuan",
+   "zh:you",
+   "zh:zuofan"
+  ]
+ },
+ "needs": {
+  "VERB": 3,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘We eat at home.’",
+   "options": [
+    "我们在家吃饭。",
+    "我们吃饭在家。",
+    "在家吃饭我们。"
+   ],
+   "answer": "我们在家吃饭。",
+   "why": "在 + place before the verb."
+  },
+  {
+   "q": "‘He doesn’t drink coffee.’",
+   "options": [
+    "他不喝咖啡。",
+    "他喝不咖啡。",
+    "他喝咖啡不。"
+   ],
+   "answer": "他不喝咖啡。",
+   "why": "不 right before the verb."
+  },
+  {
+   "q": "‘They all like fruit.’",
+   "options": [
+    "他们都喜欢水果。",
+    "都他们喜欢水果。",
+    "他们喜欢都水果。"
+   ],
+   "answer": "他们都喜欢水果。",
+   "why": "都 after the subject, before the verb."
+  },
+  {
+   "q": "Which one is NOT correct Chinese?",
+   "options": [
+    "我吃面包早饭。",
+    "我早饭吃面包。",
+    "早饭我吃面包。"
+   ],
+   "answer": "我吃面包早饭。",
+   "why": "The topic 早饭 stands before the verb, never at the end."
+  },
+  {
+   "q": "German ‘Zu Hause koche ich.’ in Chinese:",
+   "options": [
+    "我在家做饭。",
+    "在家做饭我。",
+    "做饭我在家。"
+   ],
+   "answer": "我在家做饭。",
+   "why": "Subject – place – verb."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek is SVO but very free (Το ψωμί το τρώω εγώ) and puts place and time after the verb (τρώω στο σπίτι); Chinese order is fixed, and place and time come before the verb: 我在家吃饭."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian order is free because case shows the roles; Chinese order is fixed because nothing else shows them. Я ем дома ‘I eat at home’ becomes 我在家吃饭 — the place moves in front of the verb."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish is SVO with place and time usually after the verb (como en casa); Chinese puts them before it: 我在家吃饭."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English is SVO too, but puts place and time at the end (I eat at home today); Chinese puts them before the verb (我今天在家吃饭). *我吃饭在家 is the typical mistake."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French is SVO with place and time after the verb (je mange à la maison); Chinese: 我在家吃饭. French object pronouns go before the verb (je le mange); Chinese ones stay after it."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German V2 moves the verb to second place (Heute esse ich zu Hause); Chinese never moves it: 今天我在家吃饭. German puts the place after the verb; Chinese before it."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi puts time and place before the verb too (मैं घर पर खाना खाता हूँ), like Chinese; but the Hindi object also precedes the verb (SOV), while the Chinese one follows it: 我在家吃饭."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian puts time and place before the verb (man dar khāne ghazā mikhoram) — the Chinese position — and the object too; Chinese puts the object after the verb."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts time, place and object all before the verb (मी घरी जेवतो ‘I eat at home’); Chinese agrees for time and place (我在家吃饭) but puts the object after the verb."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic puts the verb or the subject first (akala l-waladu / al-waladu akala) and the place after the verb (fī l-bayt); Chinese fixes subject – place – verb – object."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew is SVO with the place after the verb (ani okhel ba-bayit); Chinese puts it before: 我在家吃饭."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish also puts time and place before the verb (Ben evde yemek yerim ‘I eat at home’); Chinese differs in putting the object after the verb: 我在家吃饭."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese puts time and place before the verb, as Chinese does (家でご飯を食べる), and has a topic slot (は), like the Chinese topic first. But the Japanese object precedes the verb; the Chinese one follows."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean, like Chinese, puts time and place before the verb (집에서 밥을 먹어요) and has a topic slot (은 / 는); unlike Chinese, the object also precedes the verb."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish is SVO but freer, with place and time often after the verb (syön kotona); Chinese fixes them before the verb: 我在家吃饭."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian order follows focus — the stressed element goes right before the verb; Chinese order follows the roles and is fixed: subject – time – place – verb – object."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili is SVO with place and time after the verb (ninakula nyumbani ‘I eat at home’); Chinese puts them before: 我在家吃饭."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda is SVO with the place after the verb; Chinese puts place and time before the verb and only the object after it."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese is SVO like Chinese but usually puts the place after the verb (tôi ăn cơm ở nhà); Chinese says 我在家吃饭 — same type of language, opposite position."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut packs subject and object into the verb word, which usually comes last; Chinese builds the sentence from separate words in a fixed order: subject – time – place – verb – object."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "German keeps the verb in second place and can front the object (Den Tee trinke ich) because the accusative shows the role; Chinese keeps subject – (time) – (place) – verb – object."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.object",
+   "note": "Arabic often starts with the verb (يَشْرَبُ الْوَلَدُ الشَّايَ ‘the boy drinks the tea’) and its case endings allow other orders; a Chinese sentence never starts with the verb in a statement."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.object",
+   "note": "Hebrew is subject – verb – object like Chinese, but the place usually follows the verb (אֲנִי אוֹכֵל בַּבַּיִת); Chinese puts it before: 我在家吃饭."
+  }
+ ]
+}

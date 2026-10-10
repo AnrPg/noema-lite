@@ -1,0 +1,96 @@
+{
+ "intro": "Languages build words and sentences in different ways. Linguists sort them by how much one word can hold and how its pieces are joined — morphological typology. There are four classic types. Most languages mix them, so a type names a language's main tendency, not a box it fits exactly. The type decides what you must learn first, so every language of this course follows the path of its type.",
+ "types": [
+  {
+   "id": "isolating",
+   "name": "Isolating (analytic)",
+   "summary": "Words do not change their form. Grammar is carried by word order and by separate small words: particles, measure words, helper verbs. One word ≈ one piece of meaning.",
+   "learnFirst": "word order, the small grammar words (particles, measure words), and — in tone languages — the tones; there are no endings and no tables to learn.",
+   "examples": [
+    {
+     "lang": "zh",
+     "text": "我昨天吃了三个苹果。",
+     "tr": "I ate three apples yesterday.",
+     "analysis": "wǒ ‘I’ · zuótiān ‘yesterday’ · chī ‘eat’ · le (particle: done) · sān ‘three’ · ge (measure word) · píngguǒ ‘apple’ — the past and the plural are not marked on any word."
+    },
+    {
+     "lang": "vi",
+     "text": "Tôi ăn ba quả táo.",
+     "tr": "I eat three apples.",
+     "analysis": "tôi ‘I’ · ăn ‘eat’ · ba ‘three’ · quả (classifier for fruit) · táo ‘apple’ — the same building blocks as in Chinese."
+    }
+   ],
+   "languages": "Mandarin and the other Chinese languages, Vietnamese, Thai, Yoruba; English leans strongly this way (I will have eaten)."
+  },
+  {
+   "id": "agglutinating",
+   "name": "Agglutinating",
+   "summary": "Words are built by gluing endings (or prefixes) on one after another. Each piece has one meaning and keeps its shape, apart from sound rules such as vowel harmony. A long word is read piece by piece.",
+   "learnFirst": "the pieces and their fixed order, vowel harmony, and the case endings that do the work of prepositions.",
+   "examples": [
+    {
+     "lang": "tr",
+     "text": "evlerimizden",
+     "tr": "from our houses",
+     "analysis": "ev ‘house’ + -ler (plural) + -imiz ‘our’ + -den ‘from’ — one meaning per piece, always in this order."
+    },
+    {
+     "lang": "fi",
+     "text": "taloissammekin",
+     "tr": "in our houses, too",
+     "analysis": "talo ‘house’ + -i- (plural) + -ssa ‘in’ + -mme ‘our’ + -kin ‘too’."
+    }
+   ],
+   "languages": "Turkish, Finnish, Hungarian, Japanese, Korean, Swahili, Quechua."
+  },
+  {
+   "id": "fusional",
+   "name": "Fusional (inflecting)",
+   "summary": "Words change form too, but one ending carries several meanings at once (fused), the stem itself may change, and the endings differ from one word class to another — so they are learned in tables (paradigms), with gender and agreement.",
+   "learnFirst": "gender and agreement, the most frequent tables (articles, pronouns, the present tense), and learning every noun with its gender and plural.",
+   "examples": [
+    {
+     "lang": "el",
+     "text": "του λόγου",
+     "tr": "of the word, of the reason",
+     "analysis": "-ου says genitive + singular at once; there is no separate piece for each meaning, and other noun classes use other endings for the same job (της γυναίκας)."
+    },
+    {
+     "lang": "ru",
+     "text": "книгами",
+     "tr": "with books",
+     "analysis": "книг- ‘book’ + -ами = instrumental + plural in one ending."
+    },
+    {
+     "lang": "ar",
+     "text": "كَتَبَ · كِتَاب · كَاتِب · مَكْتَب",
+     "tr": "he wrote · book · writer · office",
+     "analysis": "the root k-t-b ‘writing’ is woven into vowel patterns inside the word — Semitic fusional morphology (also called introflexive)."
+    }
+   ],
+   "languages": "Greek, Latin, Russian, German, the Romance languages; Arabic and Hebrew, with roots and patterns inside the word."
+  },
+  {
+   "id": "polysynthetic",
+   "name": "Polysynthetic",
+   "summary": "One verb can hold what other languages say with a whole sentence: the subject, the object, often a noun and adverbs are built into it.",
+   "learnFirst": "the order of the pieces inside the verb, and the person markers for the subject and the object.",
+   "examples": [
+    {
+     "lang": "iu",
+     "text": "tusaatsiarunnanngittualuujunga",
+     "tr": "I can’t hear very well.",
+     "analysis": "tusaa- ‘hear’ + -tsiaq- ‘well’ + -junnaq- ‘be able’ + -nngit- ‘not’ + -tualuu- ‘very much’ + -junga ‘I’ — a whole sentence in one word (Inuktitut)."
+    },
+    {
+     "lang": "nah",
+     "text": "ninacaqua",
+     "tr": "I eat meat.",
+     "analysis": "ni- ‘I’ + naca- ‘meat’ + qua ‘eat’ — the object noun is built into the verb (noun incorporation, Classical Nahuatl)."
+    }
+   ],
+   "languages": "Inuktitut and the other Inuit languages, Mohawk, Cherokee, Nahuatl, Chukchi, many languages of the Americas and Siberia."
+  }
+ ],
+ "spectrum": "No language is pure. English is mostly analytic but keeps fused forms (went, children). German is fusional but builds compounds the agglutinating way (Gemüsesuppe = Gemüse + Suppe). Turkish is agglutinating with a few fused forms. Chinese builds compounds and has a few suffix-like particles. A language follows the path of its main type here; its other traits are taught as its peculiarities."
+}

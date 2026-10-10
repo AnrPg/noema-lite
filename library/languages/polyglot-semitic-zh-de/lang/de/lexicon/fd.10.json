@@ -1,0 +1,4736 @@
+{
+ "lexemes": [
+  {
+   "id": "de:was",
+   "lemma": "was",
+   "pos": "PRON",
+   "class": "int",
+   "senses": [
+    "q.what",
+    "pron.what",
+    "pron.something"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "was",
+    "PRON;ACC": "was",
+    "PRON;GEN": "wessen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity – and, alone and sharp, a slightly rude “What?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (interrogative pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "what, which (relative: alles, was …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.what"
+     },
+     {
+      "id": "s3",
+      "def": "something (= etwas, colloquial: Ich habe was gefunden)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "pron.something"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was trinkst du?",
+      "tr": "What are you drinking?",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Was ist das?",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "naming things",
+      "sense": "s1"
+     },
+     {
+      "text": "Alles, was du brauchst, ist im Kühlschrank.",
+      "tr": "Everything you need is in the fridge.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Willst du was essen?",
+      "tr": "Do you want something to eat?",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Was ist los?",
+      "tr": "What's the matter?"
+     },
+     {
+      "text": "Was für ein …?",
+      "tr": "What kind of …?"
+     },
+     {
+      "text": "Was kostet das?",
+      "tr": "How much is this?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Was ist los?",
+      "tr": "What's loose?",
+      "kind": "fixed expression",
+      "meaning": "What's going on? / What's wrong?",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Wie bitte?",
+      "register": "neutral",
+      "nuance": "“Pardon?” – the polite way to ask someone to repeat; a bare Was? sounds rude"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German waȥ, from Old High German waȥ, from Proto-West Germanic *hwat, from Proto-Germanic *hwat, from Proto-Indo-European *kʷod. Cognate with Dutch wat, English what, Danish hvad.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German w- question words match English wh- words: was – what, wo – where, wer – who (careful!)."
+    ],
+    "pitfalls": [
+     "False friend: German was = what, not the English past tense “was” (that is war).",
+     "After prepositions standard German uses wo(r)- + preposition: Womit? Worüber? – mit was is colloquial."
+    ],
+    "subtleties": [
+     "Was? alone sounds abrupt; Wie bitte? is the polite version."
+    ]
+   }
+  },
+  {
+   "id": "de:wo",
+   "lemma": "wo",
+   "pos": "ADV",
+   "senses": [
+    "q.where",
+    "pron.where",
+    "adv.somewhere"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Searching for something – the keys, the station, the garlic.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where? (at what place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "where (relative: die Stadt, wo ich wohne)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.where"
+     },
+     {
+      "id": "s3",
+      "def": "somewhere (= irgendwo, colloquial)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.somewhere"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wo ist die Kartoffel?",
+      "tr": "Where is the potato?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Entschuldigung, wo ist der Bahnhof?",
+      "tr": "Excuse me, where is the station?",
+      "register": "formal",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist die Stadt, wo ich geboren bin.",
+      "tr": "That's the town where I was born.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich habe meine Brille wo liegen lassen.",
+      "tr": "I've left my glasses somewhere.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wo wohnst du?",
+      "tr": "Where do you live?"
+     },
+     {
+      "text": "irgendwo",
+      "tr": "somewhere"
+     },
+     {
+      "text": "überall, wo …",
+      "tr": "everywhere where …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "an welchem Ort",
+      "register": "formal",
+      "nuance": "at which place – stiff, written"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "With a widespread dialectal shift from -ā- to -ō-, from Middle High German wā, wār, from Old High German wār, hwār, from Proto-West Germanic *hwār, from Proto-Germanic *hwēr, *hwar; ultimately from Proto-Indo-European *kʷís, whence also wer. Cognate with English where.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old -r of wo (compare English where) survives in compounds: woran, worauf, worin."
+    ],
+    "pitfalls": [
+     "wo is only for location: wohin = where to (Wohin gehst du?), woher = where from (Woher kommst du?).",
+     "False friend: German wo = where, German wer = who."
+    ],
+    "subtleties": [
+     "In southern German speech wo is also used as a relative pronoun (der Mann, wo …) – nonstandard."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:wer",
+   "lemma": "wer",
+   "pos": "PRON",
+   "class": "intp",
+   "senses": [
+    "q.who",
+    "q.whose",
+    "pron.who",
+    "pron.someone"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": [
+     {
+      "form": "wessen",
+      "senses": [
+       "s2"
+      ],
+      "note": "the genitive (formal); in speech: von wem?"
+     }
+    ]
+   },
+   "forms": {
+    "PRON;NOM": "wer",
+    "PRON;ACC": "wen",
+    "PRON;DAT": "wem",
+    "PRON;GEN": "wessen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A face at the door, a voice on the phone: Wer ist da? – the question about a person.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "who? (interrogative pronoun) – wer (subject), wen (object), wem (dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.who"
+     },
+     {
+      "id": "s2",
+      "def": "whose? – the genitive wessen (formal); in speech: von wem? / wem gehört …?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.whose"
+     },
+     {
+      "id": "s3",
+      "def": "whoever, he who (relative: Wer …, der …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.who"
+     },
+     {
+      "id": "s4",
+      "def": "somebody, anybody (= jemand)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "pron.someone"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wer ist das?",
+      "tr": "Who is that?",
+      "register": "neutral",
+      "context": "introducing people",
+      "sense": "s1"
+     },
+     {
+      "text": "Mit wem wohnst du zusammen?",
+      "tr": "Who do you live with?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wen suchen Sie?",
+      "tr": "Who are you looking for?",
+      "register": "formal",
+      "context": "at a reception desk",
+      "sense": "s1"
+     },
+     {
+      "text": "Wessen Tasche ist das?",
+      "tr": "Whose bag is this?",
+      "register": "formal",
+      "context": "lost property",
+      "sense": "s2"
+     },
+     {
+      "text": "Von wem ist das Buch? – Von meiner Schwester.",
+      "tr": "Whose book is it? – My sister’s.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s2"
+     },
+     {
+      "text": "Ist da wer?",
+      "tr": "Is anybody there?",
+      "register": "colloquial",
+      "context": "at the door",
+      "sense": "s4"
+     },
+     {
+      "text": "Wer zu spät kommt, muss draußen warten.",
+      "tr": "Whoever comes late has to wait outside.",
+      "register": "neutral",
+      "context": "rules",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wer ist da?",
+      "tr": "Who’s there?"
+     },
+     {
+      "text": "Wer von euch …?",
+      "tr": "Which of you …?"
+     },
+     {
+      "text": "mit wem",
+      "tr": "with whom"
+     },
+     {
+      "text": "für wen",
+      "tr": "for whom"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wer zuletzt lacht, lacht am besten.",
+      "tr": "Who laughs last laughs best.",
+      "kind": "proverb",
+      "meaning": "he who laughs last laughs longest",
+      "register": "neutral"
+     },
+     {
+      "text": "Wer A sagt, muss auch B sagen.",
+      "tr": "Whoever says A must also say B.",
+      "kind": "proverb",
+      "meaning": "once you start something, you have to go on with it",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: wer is the only word for “who?”; welcher asks “which one” from a known set.",
+    "etymology": {
+     "text": "From Middle High German wër, from Old High German wër, from Proto-West Germanic *hwaʀ. Related to wo; compare English who.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "wer, wen, wem, wessen end like the article der, den, dem, des – learn the two sets together.",
+     "One Indo-European question root *kʷ- is behind German wer, was, wo, English who, what, where, Latin quis, Greek τίς and Russian кто, что."
+    ],
+    "pitfalls": [
+     "wer = who, wo = where – a classic mix-up (English “where” looks like wer).",
+     "Choose the case: Wer kocht? (subject) – Wen fragst du? (object) – Mit wem? (dative) – Wessen? (owner).",
+     "wer takes a singular verb (Wer kocht heute?) – except when sein links it to a plural noun: Wer sind diese Leute?"
+    ],
+    "subtleties": [
+     "wessen sounds formal or written; everyday speech says Von wem ist das? or Wem gehört das?",
+     "wer has no feminine and no plural: it asks about a man, a woman or several people alike."
+    ]
+   }
+  },
+  {
+   "id": "de:wann",
+   "lemma": "wann",
+   "pos": "ADV",
+   "senses": [
+    "q.when",
+    "adv.sometime"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Making plans and checking times – When do we eat? When does the train leave?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when? (at what time; also in indirect questions: Ich weiß nicht, wann …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.when"
+     },
+     {
+      "id": "s2",
+      "def": "sometime (= irgendwann)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.sometime"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wann essen wir?",
+      "tr": "When are we eating?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wann fährt der Zug nach Berlin?",
+      "tr": "When does the train to Berlin leave?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Seit wann wohnen Sie hier?",
+      "tr": "How long have you been living here?",
+      "register": "formal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Bis wann bist du im Büro?",
+      "tr": "Until when are you at the office?",
+      "register": "informal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Komm doch mal wann vorbei!",
+      "tr": "Drop by sometime!",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "seit wann",
+      "tr": "since when, how long"
+     },
+     {
+      "text": "bis wann",
+      "tr": "until when, by when"
+     },
+     {
+      "text": "ab wann",
+      "tr": "from when"
+     },
+     {
+      "text": "dann und wann",
+      "tr": "now and then"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "dann und wann",
+      "tr": "then and when",
+      "kind": "fixed expression",
+      "meaning": "now and then, from time to time",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "um wie viel Uhr",
+      "register": "neutral",
+      "nuance": "at what time – for clock times only"
+     },
+     {
+      "word": "zu welcher Zeit",
+      "register": "formal",
+      "nuance": "at what time – stiff, written"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wanne, Old High German wanne, from Proto-West Germanic *hwannā, *hwan, from Proto-Germanic *hwan. Cognate with English when.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “when” is three German words: wann (question), wenn (whenever, if) and als (once, in the past)."
+    ],
+    "pitfalls": [
+     "wann asks (also in indirect questions: Weißt du, wann …?). The “when” that joins two clauses is wenn or als (S18): Wenn ich Zeit habe, … – not *Wann ich Zeit habe."
+    ],
+    "subtleties": [
+     "For a clock time Germans often ask Um wie viel Uhr …?; Wann …? is wider (a day, a time of day, a date)."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:wie",
+   "lemma": "wie",
+   "pos": "ADV",
+   "senses": [
+    "q.how",
+    "prep.like"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday question word: names, the weather, how things are going.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how? (manner, state)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.how"
+     },
+     {
+      "id": "s2",
+      "def": "how (+ adjective or adverb): wie alt, wie groß, wie lange",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "as, like (comparison: so groß wie …, wie immer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.like"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wie heißt du?",
+      "tr": "What’s your name? (literally: How are you called?)",
+      "register": "informal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie ist das Wetter in Athen?",
+      "tr": "What’s the weather like in Athens?",
+      "register": "neutral",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie alt bist du?",
+      "tr": "How old are you?",
+      "register": "informal",
+      "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "Er ist so groß wie sein Vater.",
+      "tr": "He is as tall as his father.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wie bitte?",
+      "tr": "Pardon?"
+     },
+     {
+      "text": "Wie geht’s?",
+      "tr": "How are you?"
+     },
+     {
+      "text": "wie alt",
+      "tr": "how old"
+     },
+     {
+      "text": "wie immer",
+      "tr": "as always"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wie man sich bettet, so liegt man.",
+      "tr": "As one makes one’s bed, so one lies.",
+      "kind": "proverb",
+      "meaning": "you have to live with the consequences of your choices",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "auf welche Weise",
+      "register": "formal",
+      "nuance": "in what way – asks only about the manner"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wie, a merger of Old High German hwio (from Proto-Germanic *hwaiwa) and hwē, hwie (from Proto-Germanic *hwē), a fossilized instrumental of the question stem *hwaz, *hwat (“who, what”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek and Russian ask the name with “how” too: Πώς σε λένε; – Как тебя зовут? Turkish asks “what”: Adın ne?"
+    ],
+    "pitfalls": [
+     "“What’s your name?” is Wie heißt du? / Wie heißen Sie? – not *Was heißt du? (Was heißt …? asks what a word means: Was heißt „Haus“ auf Griechisch?).",
+     "wie viel = how much; “how many” before a plural is wie viele."
+    ],
+    "subtleties": [
+     "Wie? alone is a casual “what?/pardon?”; Wie bitte? is the polite form.",
+     "so … wie = as … as (so alt wie ich); after a comparative German uses als: älter als ich."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:warum",
+   "lemma": "warum",
+   "pos": "ADV",
+   "senses": [
+    "q.why"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity, sometimes reproach: Why? Why not?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "why? for what reason",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.why"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Warum trinkst du keinen Kaffee?",
+      "tr": "Why don’t you drink coffee?",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Warum ist der Laden heute zu?",
+      "tr": "Why is the shop closed today?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Kommst du mit? – Warum nicht?",
+      "tr": "Are you coming along? – Why not?",
+      "register": "colloquial",
+      "context": "making plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich weiß nicht, warum er nicht hier ist.",
+      "tr": "I don’t know why he isn’t here.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Warum nicht?",
+      "tr": "Why not? / Sure."
+     },
+     {
+      "text": "warum auch immer",
+      "tr": "for whatever reason"
+     },
+     {
+      "text": "das Warum",
+      "tr": "the reason why (as a noun)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "wieso",
+      "register": "colloquial",
+      "nuance": "why – very common in speech, a little softer"
+     },
+     {
+      "word": "weshalb",
+      "register": "formal",
+      "nuance": "why – a little more formal or written"
+     },
+     {
+      "word": "wozu",
+      "register": "neutral",
+      "nuance": "what for – asks about the purpose, not the cause"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German warumme, war umbe, from Old High German wār umbe; equivalent to wo (“where”) + um (“for the purpose of”), thus “for what purpose”. Doublet of worum. Compare Dutch waarom.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "warum is built like Greek γιατί (για + τι, “for what”), Russian почему (по + чему) and Turkish neden (ne + den, “from what”): every language asks “for/from what?”."
+    ],
+    "pitfalls": [
+     "The answer usually starts with weil, and the verb goes to the end (S18): Warum? – Weil ich müde bin."
+    ],
+    "subtleties": [
+     "Warum nicht? is also a relaxed “yes”: Kaffee? – Warum nicht?"
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:wie_viel",
+   "lemma": "wie viel",
+   "pos": "DET",
+   "senses": [
+    "q.howmany"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.howmany",
+     "axis": "count or mass noun",
+     "value": "with a mass noun (wie viel Zucker); colloquially also with a plural"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shopping and cooking: how much sugar, how much money?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how much? (before an uncountable noun, or alone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.howmany"
+     },
+     {
+      "id": "s2",
+      "def": "how many? (colloquial, before a plural noun – standard: wie viele)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wie viel Zucker möchtest du?",
+      "tr": "How much sugar would you like?",
+      "register": "informal",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie viel kostet das?",
+      "tr": "How much does this cost?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie viel Uhr ist es?",
+      "tr": "What time is it?",
+      "register": "neutral",
+      "context": "the time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wie viel kostet …?",
+      "tr": "How much is …?"
+     },
+     {
+      "text": "um wie viel Uhr",
+      "tr": "at what time"
+     },
+     {
+      "text": "wie viel Geld",
+      "tr": "how much money"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; for clock times Germans also ask Wann? or Um wie viel Uhr?",
+    "etymology": {
+     "text": "Univerbation of wie + viel; the one-word spelling wieviel was standard until the 1996 spelling reform.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek πόσο / πόσοι, Russian сколько and Turkish kaç / ne kadar split “how much” and “how many” in their own ways – German does it with one ending: viel / viele."
+    ],
+    "pitfalls": [
+     "wie viel + singular (uncountable) – wie viel Wasser; with a plural noun use wie viele: wie viele Äpfel.",
+     "Two words today (wie viel); the older spelling wieviel is still often seen."
+    ],
+    "subtleties": [
+     "In everyday speech wie viel also comes before plurals (Wie viel Kinder hast du?), but written standard German says wie viele."
+    ]
+   },
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   }
+  },
+  {
+   "id": "de:wie_viele",
+   "lemma": "wie viele",
+   "pos": "DET",
+   "class": "quantpl",
+   "senses": [
+    "q.howmany"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.howmany",
+     "axis": "count or mass noun",
+     "value": "with a plural (wie viele Kinder)"
+    }
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "DET;NOM;PL": "wie viele",
+    "DET;ACC;PL": "wie viele",
+    "DET;DAT;PL": "wie vielen",
+    "DET;GEN;PL": "wie vieler"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Counting people and things: how many children, how many rooms?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how many? (before a plural noun; declines like viele: mit wie vielen …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.howmany"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wie viele Kinder haben Sie?",
+      "tr": "How many children do you have?",
+      "register": "formal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie viele Leute sind hier?",
+      "tr": "How many people are here?",
+      "register": "neutral",
+      "context": "a party",
+      "sense": "s1"
+     },
+     {
+      "text": "Mit wie vielen Leuten wohnst du zusammen?",
+      "tr": "How many people do you live with?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "wie viele Kinder",
+      "tr": "how many children"
+     },
+     {
+      "text": "mit wie vielen …",
+      "tr": "with how many … (dative plural)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in standard German; colloquially many people say wie viel before plurals too.",
+    "etymology": {
+     "text": "From wie (“how”) + viele, the plural of viel (“much”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The question word and its noun stay together in first place: Wie viele Brüder hast du? – never *Wie viele hast du Brüder? in standard German."
+    ],
+    "pitfalls": [
+     "wie viele goes with plural nouns (wie viele Äpfel); for uncountable things use wie viel (wie viel Milch).",
+     "After a dative preposition it takes -n: mit wie vielen Kindern."
+    ],
+    "subtleties": [
+     "The answer is a number or viele / wenige / keine: Wie viele? – Drei."
+    ]
+   }
+  },
+  {
+   "id": "de:welcher",
+   "lemma": "welcher",
+   "pos": "DET",
+   "class": "int",
+   "senses": [
+    "q.which",
+    "pron.which",
+    "quant.some"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.which",
+     "axis": "register",
+     "value": "formal written style (der Mann, welcher …)"
+    },
+    {
+     "concept": "quant.some",
+     "axis": "which kind of “some”",
+     "value": "some, any – standing for a noun already named (Ich habe welche)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "DET;NOM;SG;MASC": "welcher",
+    "DET;NOM;SG;FEM": "welche",
+    "DET;NOM;SG;NEUT": "welches",
+    "DET;ACC;SG;MASC": "welchen",
+    "DET;ACC;SG;FEM": "welche",
+    "DET;ACC;SG;NEUT": "welches",
+    "DET;DAT;SG;MASC": "welchem",
+    "DET;DAT;SG;FEM": "welcher",
+    "DET;DAT;SG;NEUT": "welchem",
+    "DET;GEN;SG;MASC": "welches",
+    "DET;GEN;SG;FEM": "welcher",
+    "DET;GEN;SG;NEUT": "welches",
+    "DET;NOM;PL": "welche",
+    "DET;ACC;PL": "welche",
+    "DET;DAT;PL": "welchen",
+    "DET;GEN;PL": "welcher"
+   },
+   "formsAlt": {
+    "DET;GEN;SG;MASC": [
+     "welchen"
+    ],
+    "DET;GEN;SG;NEUT": [
+     "welchen"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A choice in front of you: which bag, which tea, which bus?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "which? what? (choosing from a known set; declines like dieser)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.which"
+     },
+     {
+      "id": "s2",
+      "def": "which, who (relative pronoun)",
+      "register": [
+       "literary"
+      ],
+      "concept": "pron.which"
+     },
+     {
+      "id": "s3",
+      "def": "some, any (as a pronoun: Hast du Milch? – Ja, ich habe welche.)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "quant.some"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Welcher Bus fährt zum Bahnhof?",
+      "tr": "Which bus goes to the station?",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Welche Tasche ist deine?",
+      "tr": "Which bag is yours?",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Welchen Tee möchten Sie?",
+      "tr": "Which tea would you like?",
+      "register": "formal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du Milch? – Ja, im Kühlschrank ist welche.",
+      "tr": "Do you have milk? – Yes, there’s some in the fridge.",
+      "register": "colloquial",
+      "context": "kitchen",
+      "sense": "s3"
+     },
+     {
+      "text": "Der Mann, welcher dort steht, ist mein Vater.",
+      "tr": "The man who is standing there is my father.",
+      "register": "literary",
+      "context": "formal writing",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich habe keine Äpfel mehr. Hast du welche?",
+      "tr": "I have no apples left. Do you have any?",
+      "register": "colloquial",
+      "context": "kitchen",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "welche Farbe",
+      "tr": "what colour"
+     },
+     {
+      "text": "in welcher Stadt",
+      "tr": "in which city"
+     },
+     {
+      "text": "welcher von beiden",
+      "tr": "which of the two"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "was für ein",
+      "register": "neutral",
+      "nuance": "what kind of – asks for the kind, not for one item of a known set"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German welich, from Old High German welih, wilih, from Proto-Germanic *hwilīkaz. Compare English which.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "welcher and English which go back to one Germanic word *hwi-līk- “what-like”; the same *-līk- is in English such and German solcher."
+    ],
+    "pitfalls": [
+     "welcher declines like dieser (and der): welcher Mann, welche Frau, welches Kind; accusative welchen Mann; dative welchem Mann.",
+     "English “what + noun” is often welcher in German: What colour? – Welche Farbe?"
+    ],
+    "subtleties": [
+     "Welcher …? picks from things you can see or know; Was für ein …? asks about the type: Was für ein Auto hast du? – Ein kleines.",
+     "Colloquial welche = “some”: Ich habe welche. (I have some.)"
+    ]
+   }
+  },
+  {
+   "id": "de:von_Beruf",
+   "lemma": "von Beruf",
+   "pos": "ADV",
+   "senses": [
+    "adv.byprofession"
+   ],
+   "role": "by profession – the phrase of the job question: Was sind Sie von Beruf? (What do you do for a living?)",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small talk with someone new: name, where from – and the job.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "by profession, by trade (Was sind Sie von Beruf? – Ich bin Ärztin.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.byprofession"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was sind Sie von Beruf?",
+      "tr": "What do you do for a living?",
+      "register": "formal",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "Was bist du von Beruf?",
+      "tr": "What do you do (for a living)?",
+      "register": "informal",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist von Beruf Koch, aber er malt gern.",
+      "tr": "He is a cook by profession, but he likes painting.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Was sind Sie von Beruf?",
+      "tr": "What is your job?"
+     },
+     {
+      "text": "von Beruf Lehrerin sein",
+      "tr": "to be a teacher by profession"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "beruflich",
+      "register": "neutral",
+      "nuance": "as an adverb: Was machst du beruflich? – the most common everyday question"
+     },
+     {
+      "word": "Was arbeiten Sie?",
+      "register": "colloquial",
+      "nuance": "What work do you do? – direct, common in speech"
+     }
+    ],
+    "etymology": {
+     "text": "From von (“of, from”) + Beruf (“occupation, profession”), from berufen (“to call”), literally “calling”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Beruf, like English “vocation” (Latin vocare, “to call”), means “a calling”; Max Weber traced its double sense – trade and calling from God – to Luther’s Bible translation."
+    ],
+    "pitfalls": [
+     "The answer has no article: Ich bin Ärztin. – not *Ich bin eine Ärztin.",
+     "The question is Was …?, not *Wer bist du von Beruf? (wer asks who you are, not your job)."
+    ],
+    "subtleties": [
+     "Beruf is a trained profession (a calling); a job is die Stelle or, informally, der Job."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:Arzt",
+   "lemma": "Arzt",
+   "pos": "NOUN",
+   "senses": [
+    "job.doctor"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.doctor",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ärzte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Arzt",
+    "N;ACC;SG": "Arzt",
+    "N;DAT;SG": "Arzt",
+    "N;GEN;SG": "Arztes",
+    "N;NOM;PL": "Ärzte",
+    "N;ACC;PL": "Ärzte",
+    "N;DAT;PL": "Ärzten",
+    "N;GEN;PL": "Ärzte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Arzts"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "White coat, waiting room, a prescription – the family doctor (Hausarzt) is the first stop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "doctor, physician (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.doctor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin Arzt.",
+      "tr": "I am a doctor.",
+      "register": "neutral",
+      "context": "introducing oneself",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich muss morgen zum Arzt.",
+      "tr": "I have to go to the doctor tomorrow.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Arzt sagt, ich soll im Bett bleiben.",
+      "tr": "The doctor says I should stay in bed.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Stadt gibt es viele Ärzte.",
+      "tr": "There are many doctors in the town.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zum Arzt gehen",
+      "tr": "to go to the doctor"
+     },
+     {
+      "text": "beim Arzt",
+      "tr": "at the doctor’s"
+     },
+     {
+      "text": "der Hausarzt",
+      "tr": "GP, family doctor"
+     },
+     {
+      "text": "der Zahnarzt",
+      "tr": "dentist"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Fragen Sie Ihren Arzt oder Apotheker.",
+      "tr": "Ask your doctor or pharmacist.",
+      "kind": "fixed expression",
+      "meaning": "the closing line of every German medicine advert (… zu Risiken und Nebenwirkungen …)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Doktor",
+      "register": "colloquial",
+      "nuance": "the doctor in everyday speech – also the academic title Dr."
+     },
+     {
+      "word": "Mediziner",
+      "register": "technical",
+      "nuance": "a medical professional; someone who studied medicine"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German arzet, arzāt, from Old High German arzāt, from Latin archīāter (“physician”), from Ancient Greek ἀρχίατρος (arkhíatros, “chief physician”), from ἀρχι- (arkhi-) + ἰατρός (iatrós, “healer”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arzt comes from Greek ἀρχίατρος “chief physician” – the same ἰατρός as Greek γιατρός."
+    ],
+    "pitfalls": [
+     "No article for a job after sein or werden: Ich bin Arzt – unless an adjective comes in: ein guter Arzt.",
+     "Plural with umlaut: die Ärzte; dative plural den Ärzten."
+    ],
+    "subtleties": [
+     "Patients sometimes say Herr Doktor / Frau Doktor; the job itself is Arzt / Ärztin."
+    ]
+   }
+  },
+  {
+   "id": "de:Ärztin",
+   "lemma": "Ärztin",
+   "pos": "NOUN",
+   "senses": [
+    "job.doctor"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.doctor",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ärztinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Arzt + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Ärztin",
+    "N;ACC;SG": "Ärztin",
+    "N;DAT;SG": "Ärztin",
+    "N;GEN;SG": "Ärztin",
+    "N;NOM;PL": "Ärztinnen",
+    "N;ACC;PL": "Ärztinnen",
+    "N;DAT;PL": "Ärztinnen",
+    "N;GEN;PL": "Ärztinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman doctor – most medical students in Germany today are women.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "doctor, physician (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.doctor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Schwester ist Ärztin.",
+      "tr": "My sister is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Ärztin hat heute keine Zeit.",
+      "tr": "The doctor has no time today.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist hier eine Ärztin oder ein Arzt?",
+      "tr": "Is there a doctor here?",
+      "register": "neutral",
+      "context": "emergency",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Hausärztin",
+      "tr": "GP, family doctor (female)"
+     },
+     {
+      "text": "die Zahnärztin",
+      "tr": "dentist (female)"
+     },
+     {
+      "text": "Ärztinnen und Ärzte",
+      "tr": "doctors (both forms)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Medizinerin",
+      "register": "technical",
+      "nuance": "a woman who studied medicine; a medical professional"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German arzātīn, arzātinne. Equivalent to Arzt + -in, with umlaut.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Several job feminines take an umlaut: Arzt → Ärztin, Koch → Köchin, Anwalt → Anwältin, Bauer → Bäuerin."
+    ],
+    "pitfalls": [
+     "Umlaut in the feminine: Arzt → Ärztin (not *Arztin).",
+     "No article for a job after sein: Sie ist Ärztin – unless an adjective comes in: eine gute Ärztin."
+    ],
+    "subtleties": [
+     "Ärztinnen und Ärzte: official texts name both forms; the masculine plural Ärzte traditionally covers everyone."
+    ]
+   }
+  },
+  {
+   "id": "de:Krankenpfleger",
+   "lemma": "Krankenpfleger",
+   "pos": "NOUN",
+   "senses": [
+    "job.nurse"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a man (the official term)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenpfleger",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Pfleger",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Krankenpfleger",
+    "N;ACC;SG": "Krankenpfleger",
+    "N;DAT;SG": "Krankenpfleger",
+    "N;GEN;SG": "Krankenpflegers",
+    "N;NOM;PL": "Krankenpfleger",
+    "N;ACC;PL": "Krankenpfleger",
+    "N;DAT;PL": "Krankenpflegern",
+    "N;GEN;PL": "Krankenpfleger"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Night shifts on a hospital ward – caring, hard work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nurse (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Bruder ist Krankenpfleger.",
+      "tr": "My brother is a nurse.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Krankenpfleger bringt das Essen.",
+      "tr": "The nurse brings the food.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "Krankenpfleger arbeiten oft nachts.",
+      "tr": "Nurses often work at night.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "als Krankenpfleger arbeiten",
+      "tr": "to work as a nurse"
+     },
+     {
+      "text": "der Altenpfleger",
+      "tr": "geriatric nurse, carer for the elderly"
+     },
+     {
+      "text": "die Pflege",
+      "tr": "nursing, care"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Pfleger",
+      "register": "colloquial",
+      "nuance": "short form – also a keeper: Tierpfleger (zookeeper)"
+     },
+     {
+      "word": "Pflegefachmann",
+      "register": "technical",
+      "nuance": "the official job title in Germany since 2020"
+     },
+     {
+      "word": "Pflegekraft",
+      "register": "formal",
+      "nuance": "nurse, care worker – gender-neutral, used in official texts"
+     }
+    ],
+    "etymology": {
+     "text": "From Kranke(r) (“sick person”) + Pfleger (“carer”, from pflegen “to care for”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kranken- means “of the sick”: das Krankenhaus is the “house of the sick”, the Krankenpfleger the “carer of the sick”."
+    ],
+    "pitfalls": [
+     "The male counterpart of Krankenschwester is Krankenpfleger – there is no *Krankenbruder.",
+     "Plural = singular: die Krankenpfleger; dative plural den Krankenpflegern."
+    ],
+    "subtleties": [
+     "Since 2020 the training in Germany is called Pflegefachfrau / Pflegefachmann; Krankenpfleger(in) remains the everyday word."
+    ]
+   }
+  },
+  {
+   "id": "de:Krankenpflegerin",
+   "lemma": "Krankenpflegerin",
+   "pos": "NOUN",
+   "senses": [
+    "job.nurse"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a woman (the official term)"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenpflegerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Pflegerin",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Krankenpflegerin",
+    "N;ACC;SG": "Krankenpflegerin",
+    "N;DAT;SG": "Krankenpflegerin",
+    "N;GEN;SG": "Krankenpflegerin",
+    "N;NOM;PL": "Krankenpflegerinnen",
+    "N;ACC;PL": "Krankenpflegerinnen",
+    "N;DAT;PL": "Krankenpflegerinnen",
+    "N;GEN;PL": "Krankenpflegerinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Caring and competent – the neutral, modern word for a woman nurse.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nurse (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist Krankenpflegerin im Krankenhaus.",
+      "tr": "She is a nurse at the hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Krankenpflegerin misst das Fieber.",
+      "tr": "The nurse takes the temperature.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "Krankenpflegerinnen und Krankenpfleger sind sehr wichtig.",
+      "tr": "Nurses are very important.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "als Krankenpflegerin arbeiten",
+      "tr": "to work as a nurse"
+     },
+     {
+      "text": "die Kinderkrankenpflegerin",
+      "tr": "children’s nurse"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Krankenschwester",
+      "register": "neutral",
+      "nuance": "the traditional everyday word – still very common, no longer an official title"
+     },
+     {
+      "word": "Pflegefachfrau",
+      "register": "technical",
+      "nuance": "the official job title in Germany since 2020"
+     }
+    ],
+    "etymology": {
+     "text": "From Krankenpfleger + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek νοσηλεύτρια (from νόσος, “illness”), the German word names the illness: krank (sick) + Pflegerin (carer)."
+    ],
+    "pitfalls": [
+     "A long but regular word: feminine -in, plural -innen (die Krankenpflegerinnen)."
+    ],
+    "subtleties": [
+     "Many people still say Krankenschwester; Krankenpflegerin sounds neutral and professional."
+    ]
+   }
+  },
+  {
+   "id": "de:Krankenschwester",
+   "lemma": "Krankenschwester",
+   "pos": "NOUN",
+   "senses": [
+    "job.nurse"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a woman (the traditional term)"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenschwestern",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Schwester",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Krankenschwester",
+    "N;ACC;SG": "Krankenschwester",
+    "N;DAT;SG": "Krankenschwester",
+    "N;GEN;SG": "Krankenschwester",
+    "N;NOM;PL": "Krankenschwestern",
+    "N;ACC;PL": "Krankenschwestern",
+    "N;DAT;PL": "Krankenschwestern",
+    "N;GEN;PL": "Krankenschwestern"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "dated",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The traditional word for a nurse – still heard everywhere, though no longer an official title.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nurse (female) – the traditional word",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Mutter war Krankenschwester.",
+      "tr": "My mother was a nurse.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Krankenschwester bringt die Tabletten.",
+      "tr": "The nurse brings the pills.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie arbeitet als Krankenschwester in einer Klinik.",
+      "tr": "She works as a nurse in a clinic.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "als Krankenschwester arbeiten",
+      "tr": "to work as a nurse"
+     },
+     {
+      "text": "die Kinderkrankenschwester",
+      "tr": "children’s nurse"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Krankenpflegerin",
+      "register": "neutral",
+      "nuance": "the neutral, more modern word"
+     },
+     {
+      "word": "Pflegefachfrau",
+      "register": "technical",
+      "nuance": "the official job title since 2020"
+     },
+     {
+      "word": "Schwester",
+      "register": "dated",
+      "nuance": "as a form of address in hospitals: Schwester, können Sie mir helfen?"
+     }
+    ],
+    "etymology": {
+     "text": "From Kranker (“sick person”) + Schwester (“sister”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The “sister” goes back to the nursing nuns and deaconesses. Hebrew אָחוֹת (aḥot) means both “sister” and “nurse”, and in British hospitals a senior nurse is still called “Sister”."
+    ],
+    "pitfalls": [
+     "There is no masculine *Krankenbruder: a man is Krankenpfleger.",
+     "Plural -n: die Krankenschwestern."
+    ],
+    "subtleties": [
+     "Official titles no longer use it (Gesundheits- und Krankenpflegerin from 2004, Pflegefachfrau since 2020), but it is still very common in everyday speech."
+    ]
+   }
+  },
+  {
+   "id": "de:Ingenieur",
+   "lemma": "Ingenieur",
+   "pos": "NOUN",
+   "senses": [
+    "job.engineer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.engineer",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ingenieure",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Ingenieur",
+    "N;ACC;SG": "Ingenieur",
+    "N;DAT;SG": "Ingenieur",
+    "N;GEN;SG": "Ingenieurs",
+    "N;NOM;PL": "Ingenieure",
+    "N;ACC;PL": "Ingenieure",
+    "N;DAT;PL": "Ingenieuren",
+    "N;GEN;PL": "Ingenieure"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bridges, machines, cars – the profession behind “Made in Germany”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "engineer (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.engineer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Vater ist Ingenieur.",
+      "tr": "My father is an engineer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Firma sucht zwei Ingenieure.",
+      "tr": "The company is looking for two engineers.",
+      "register": "neutral",
+      "context": "job advert",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist Ingenieur bei einer Autofirma.",
+      "tr": "He is an engineer at a car company.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Bauingenieur",
+      "tr": "civil engineer"
+     },
+     {
+      "text": "der Maschinenbauingenieur",
+      "tr": "mechanical engineer"
+     },
+     {
+      "text": "Diplom-Ingenieur (Dipl.-Ing.)",
+      "tr": "the traditional German engineering degree"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Techniker",
+      "register": "neutral",
+      "nuance": "technician – a lower qualification, not a university-trained engineer"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French ingénieur, ultimately from Latin ingenium (“talent, cleverness”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian инженер and German Ingenieur are the same French word; Greek says μηχανικός, and Turkish mühendis is the Arabic مُهَنْدِس (muhandis)."
+    ],
+    "pitfalls": [
+     "French spelling and sound: g like the s in “measure” [ʒ], -ieur [iøːɐ̯].",
+     "Plural Ingenieure (not *Ingenieurs); dative plural den Ingenieuren."
+    ],
+    "subtleties": [
+     "In Germany and Austria the engineering degree is shown like a title on doorbells and letters: Dipl.-Ing. Müller."
+    ]
+   }
+  },
+  {
+   "id": "de:Ingenieurin",
+   "lemma": "Ingenieurin",
+   "pos": "NOUN",
+   "senses": [
+    "job.engineer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.engineer",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ingenieurinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Ingenieur + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Ingenieurin",
+    "N;ACC;SG": "Ingenieurin",
+    "N;DAT;SG": "Ingenieurin",
+    "N;GEN;SG": "Ingenieurin",
+    "N;NOM;PL": "Ingenieurinnen",
+    "N;ACC;PL": "Ingenieurinnen",
+    "N;DAT;PL": "Ingenieurinnen",
+    "N;GEN;PL": "Ingenieurinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman in a technical profession – still a minority, but growing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "engineer (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.engineer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin Ingenieurin.",
+      "tr": "I am an engineer.",
+      "register": "neutral",
+      "context": "introducing oneself",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Ingenieurin erklärt den Plan.",
+      "tr": "The engineer explains the plan.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Immer mehr Frauen werden Ingenieurinnen.",
+      "tr": "More and more women become engineers.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Bauingenieurin",
+      "tr": "civil engineer (female)"
+     },
+     {
+      "text": "als Ingenieurin arbeiten",
+      "tr": "to work as an engineer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Technikerin",
+      "register": "neutral",
+      "nuance": "technician – a lower qualification"
+     }
+    ],
+    "etymology": {
+     "text": "From Ingenieur (“engineer”) + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German feminine job words with -in are as old as Middle High German (arzātīn, “woman doctor”)."
+    ],
+    "pitfalls": [
+     "The same French sound as Ingenieur; plural Ingenieurinnen."
+    ],
+    "subtleties": [
+     "A woman says Ich bin Ingenieurin – German marks the sex of the person in the job word."
+    ]
+   }
+  },
+  {
+   "id": "de:Fahrer",
+   "lemma": "Fahrer",
+   "pos": "NOUN",
+   "senses": [
+    "job.driver"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.driver",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fahrer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: fahren + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Fahrer",
+    "N;ACC;SG": "Fahrer",
+    "N;DAT;SG": "Fahrer",
+    "N;GEN;SG": "Fahrers",
+    "N;NOM;PL": "Fahrer",
+    "N;ACC;PL": "Fahrer",
+    "N;DAT;PL": "Fahrern",
+    "N;GEN;PL": "Fahrer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Behind the wheel of a bus, a taxi or a lorry.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "driver (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.driver"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist Fahrer bei einer Firma.",
+      "tr": "He is a driver for a company.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Fahrer wartet vor dem Haus.",
+      "tr": "The driver is waiting in front of the house.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Busfahrer ist sehr freundlich.",
+      "tr": "The bus driver is very friendly.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Busfahrer",
+      "tr": "bus driver"
+     },
+     {
+      "text": "der Taxifahrer",
+      "tr": "taxi driver"
+     },
+     {
+      "text": "der Lkw-Fahrer",
+      "tr": "lorry/truck driver"
+     },
+     {
+      "text": "der Beifahrer",
+      "tr": "front-seat passenger"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Chauffeur",
+      "register": "dated",
+      "nuance": "a private driver; in Switzerland the normal word for a professional driver"
+     },
+     {
+      "word": "Lenker",
+      "register": "regional",
+      "nuance": "driver of a vehicle (Austrian and Swiss official language)"
+     }
+    ],
+    "etymology": {
+     "text": "From fahren (“to drive, to travel”) + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "fahren is related to English fare, as in farewell (“go well”)."
+    ],
+    "pitfalls": [
+     "Plural = singular: die Fahrer; dative plural den Fahrern.",
+     "The person driven is a Fahrgast (passenger), not a Fahrer."
+    ],
+    "subtleties": [
+     "fahren covers going by any vehicle, so Fahrer is anyone at the controls – also of a bike: der Radfahrer (cyclist)."
+    ]
+   }
+  },
+  {
+   "id": "de:Fahrerin",
+   "lemma": "Fahrerin",
+   "pos": "NOUN",
+   "senses": [
+    "job.driver"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.driver",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fahrerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Fahrer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Fahrerin",
+    "N;ACC;SG": "Fahrerin",
+    "N;DAT;SG": "Fahrerin",
+    "N;GEN;SG": "Fahrerin",
+    "N;NOM;PL": "Fahrerinnen",
+    "N;ACC;PL": "Fahrerinnen",
+    "N;DAT;PL": "Fahrerinnen",
+    "N;GEN;PL": "Fahrerinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary defines Fahrerin only as the “female equivalent of Fahrer” (driver)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman driving a bus, a taxi or a lorry.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "driver (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.driver"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Tante ist Fahrerin.",
+      "tr": "My aunt is a driver.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Busfahrerin hält an der Schule.",
+      "tr": "The bus driver stops at the school.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Fahrerin bringt die Kinder zur Schule.",
+      "tr": "The driver takes the children to school.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Busfahrerin",
+      "tr": "bus driver (female)"
+     },
+     {
+      "text": "die Taxifahrerin",
+      "tr": "taxi driver (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Chauffeurin",
+      "register": "dated",
+      "nuance": "a private driver (female)"
+     }
+    ],
+    "etymology": {
+     "text": "From Fahrer (“driver”) + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In German road signs and laws the neutral form is Fahrzeugführer (vehicle operator) – few people say it aloud."
+    ],
+    "pitfalls": [
+     "Plural Fahrerinnen; no umlaut."
+    ],
+    "subtleties": [
+     "A Beifahrerin is the woman in the passenger seat, not a second driver."
+    ]
+   }
+  },
+  {
+   "id": "de:Koch",
+   "lemma": "Koch",
+   "pos": "NOUN",
+   "senses": [
+    "job.cook"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.cook",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Köche",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Koch: porridge, mush (Austria)"
+     }
+    ],
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Koch",
+    "N;ACC;SG": "Koch",
+    "N;DAT;SG": "Koch",
+    "N;GEN;SG": "Kochs",
+    "N;NOM;PL": "Köche",
+    "N;ACC;PL": "Köche",
+    "N;DAT;PL": "Köchen",
+    "N;GEN;PL": "Köche"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Koches"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A hot kitchen, a white hat, the smell of soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cook, chef (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist Koch in einem Restaurant.",
+      "tr": "He is a cook in a restaurant.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Koch kocht heute Fisch.",
+      "tr": "The cook is cooking fish today.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Küche arbeiten drei Köche.",
+      "tr": "Three cooks work in the kitchen.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Chefkoch",
+      "tr": "head chef"
+     },
+     {
+      "text": "der Hobbykoch",
+      "tr": "amateur cook"
+     },
+     {
+      "text": "eine Ausbildung zum Koch",
+      "tr": "training as a cook"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Viele Köche verderben den Brei.",
+      "tr": "Many cooks spoil the porridge.",
+      "kind": "proverb",
+      "meaning": "too many cooks spoil the broth",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Küchenchef",
+      "register": "neutral",
+      "nuance": "head chef – the boss of a restaurant kitchen"
+     },
+     {
+      "word": "Smutje",
+      "register": "colloquial",
+      "nuance": "ship’s cook (sailors’ word)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German koch, from Old High German choch, from Proto-West Germanic *kok, borrowed from Latin coquus (“cook”). Compare English cook.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Koch is also a common surname – Robert Koch discovered the tuberculosis bacterium in 1882."
+    ],
+    "pitfalls": [
+     "der Koch (the cook) – kochen (to cook) – die Küche (the kitchen): Der Koch kocht in der Küche.",
+     "Plural with umlaut: die Köche."
+    ],
+    "subtleties": [
+     "German Chef means boss, not chef: the chef of a restaurant is der Küchenchef or Chefkoch."
+    ]
+   }
+  },
+  {
+   "id": "de:Köchin",
+   "lemma": "Köchin",
+   "pos": "NOUN",
+   "senses": [
+    "job.cook"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.cook",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Köchinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Koch + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Köchin",
+    "N;ACC;SG": "Köchin",
+    "N;DAT;SG": "Köchin",
+    "N;GEN;SG": "Köchin",
+    "N;NOM;PL": "Köchinnen",
+    "N;ACC;PL": "Köchinnen",
+    "N;DAT;PL": "Köchinnen",
+    "N;GEN;PL": "Köchinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman who cooks for a living – or a grandmother everyone praises.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cook, chef (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist Köchin in einem Hotel.",
+      "tr": "She is a cook in a hotel.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Oma ist eine gute Köchin.",
+      "tr": "My grandma is a good cook.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Köchin probiert die Suppe.",
+      "tr": "The cook tastes the soup.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine gute Köchin sein",
+      "tr": "to be a good cook"
+     },
+     {
+      "text": "die Chefköchin",
+      "tr": "head chef (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Küchenchefin",
+      "register": "neutral",
+      "nuance": "head chef (female)"
+     }
+    ],
+    "etymology": {
+     "text": "From Koch + -in, with umlaut.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Ärztin and Anwältin, Köchin shows how the feminine -in often brings an umlaut."
+    ],
+    "pitfalls": [
+     "Umlaut: Koch → Köchin; plural Köchinnen.",
+     "With an adjective the article comes back: Sie ist Köchin – Sie ist eine gute Köchin."
+    ],
+    "subtleties": [
+     "eine gute Köchin can describe any woman who cooks well, not only a professional."
+    ]
+   }
+  },
+  {
+   "id": "de:Verkäufer",
+   "lemma": "Verkäufer",
+   "pos": "NOUN",
+   "senses": [
+    "job.seller",
+    "person.seller"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.seller",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Verkäufer",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: verkaufen + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Verkäufer",
+    "N;ACC;SG": "Verkäufer",
+    "N;DAT;SG": "Verkäufer",
+    "N;GEN;SG": "Verkäufers",
+    "N;NOM;PL": "Verkäufer",
+    "N;ACC;PL": "Verkäufer",
+    "N;DAT;PL": "Verkäufern",
+    "N;GEN;PL": "Verkäufer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The person behind the counter who helps you find things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop assistant, salesperson (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.seller"
+     },
+     {
+      "id": "s2",
+      "def": "seller, vendor (in a sale)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.seller"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Verkäufer ist sehr freundlich.",
+      "tr": "The shop assistant is very friendly.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Er arbeitet als Verkäufer im Supermarkt.",
+      "tr": "He works as a shop assistant in the supermarket.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Verkäufer und der Käufer sind sich einig.",
+      "tr": "The seller and the buyer agree.",
+      "register": "formal",
+      "context": "contract",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Autoverkäufer",
+      "tr": "car salesman"
+     },
+     {
+      "text": "den Verkäufer fragen",
+      "tr": "to ask the shop assistant"
+     },
+     {
+      "text": "der Straßenverkäufer",
+      "tr": "street vendor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kaufmann im Einzelhandel",
+      "register": "technical",
+      "nuance": "the official title of a trained retail salesperson"
+     },
+     {
+      "word": "Händler",
+      "register": "neutral",
+      "nuance": "trader, dealer – usually owns or runs the business"
+     }
+    ],
+    "etymology": {
+     "text": "From verkaufen (“to sell”) + -er. Cognate with Dutch verkoper.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "kaufen comes from Latin caupo (“small trader, innkeeper”) – a cousin of English cheap (Old English cēap, “trade”)."
+    ],
+    "pitfalls": [
+     "verkaufen = to sell, kaufen = to buy: the Verkäufer sells, the Käufer or Kunde buys.",
+     "Plural = singular: die Verkäufer; dative den Verkäufern."
+    ],
+    "subtleties": [
+     "In a shop der Verkäufer is the assistant; in a contract it is the seller (Verkäufer – Käufer)."
+    ]
+   }
+  },
+  {
+   "id": "de:Verkäuferin",
+   "lemma": "Verkäuferin",
+   "pos": "NOUN",
+   "senses": [
+    "job.seller"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.seller",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Verkäuferinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Verkäufer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Verkäuferin",
+    "N;ACC;SG": "Verkäuferin",
+    "N;DAT;SG": "Verkäuferin",
+    "N;GEN;SG": "Verkäuferin",
+    "N;NOM;PL": "Verkäuferinnen",
+    "N;ACC;PL": "Verkäuferinnen",
+    "N;DAT;PL": "Verkäuferinnen",
+    "N;GEN;PL": "Verkäuferinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses Verkäuferin as “(feminine) seller, vendor” – in a shop, the shop assistant / saleswoman."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman serving customers in a shop, a bakery or a market stall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop assistant, saleswoman",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.seller"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Verkäuferin hilft mir.",
+      "tr": "The shop assistant is helping me.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Cousine ist Verkäuferin in einer Bäckerei.",
+      "tr": "My cousin is a shop assistant in a bakery.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Fragen Sie doch die Verkäuferin!",
+      "tr": "Why don’t you ask the shop assistant?",
+      "register": "formal",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Bäckereiverkäuferin",
+      "tr": "bakery shop assistant"
+     },
+     {
+      "text": "als Verkäuferin arbeiten",
+      "tr": "to work as a shop assistant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kauffrau im Einzelhandel",
+      "register": "technical",
+      "nuance": "the official title of a trained retail saleswoman"
+     }
+    ],
+    "etymology": {
+     "text": "From Verkäufer + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The agent noun takes an umlaut: kaufen → Käufer, verkaufen → Verkäufer(in) – as in backen → Bäcker."
+    ],
+    "pitfalls": [
+     "Umlaut stays: Verkäuferin (from verkaufen → Verkäufer).",
+     "Plural Verkäuferinnen."
+    ],
+    "subtleties": [
+     "In German shops you call a shop assistant with Entschuldigung! – not with a title."
+    ]
+   }
+  },
+  {
+   "id": "de:Arbeiter",
+   "lemma": "Arbeiter",
+   "pos": "NOUN",
+   "senses": [
+    "job.worker"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.worker",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Arbeiter",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: arbeiten + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Arbeiter",
+    "N;ACC;SG": "Arbeiter",
+    "N;DAT;SG": "Arbeiter",
+    "N;GEN;SG": "Arbeiters",
+    "N;NOM;PL": "Arbeiter",
+    "N;ACC;PL": "Arbeiter",
+    "N;DAT;PL": "Arbeitern",
+    "N;GEN;PL": "Arbeiter"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Overalls and helmets: a factory, a building site.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "worker, labourer (male or of unspecified gender) – usually manual work",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.worker"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist Arbeiter in einer Fabrik.",
+      "tr": "He is a worker in a factory.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Arbeiter essen um zwölf Uhr.",
+      "tr": "The workers eat at twelve o’clock.",
+      "register": "neutral",
+      "context": "building site",
+      "sense": "s1"
+     },
+     {
+      "text": "In den 1960er-Jahren kamen viele Arbeiter aus Griechenland und der Türkei.",
+      "tr": "In the 1960s many workers came from Greece and Turkey.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Bauarbeiter",
+      "tr": "construction worker"
+     },
+     {
+      "text": "der Fabrikarbeiter",
+      "tr": "factory worker"
+     },
+     {
+      "text": "der Gastarbeiter",
+      "tr": "guest worker (historical)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Arbeitnehmer",
+      "register": "formal",
+      "nuance": "employee – the legal term for anyone employed"
+     },
+     {
+      "word": "Angestellter",
+      "register": "neutral",
+      "nuance": "salaried (office) employee – traditionally the opposite of the manual Arbeiter"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German arbeiter; by surface analysis arbeiten (“to work”) + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From 1960 (Greece) and 1961 (Turkey) West Germany recruited Gastarbeiter; many Greek and Turkish families in Germany go back to them."
+    ],
+    "pitfalls": [
+     "Arbeiter usually means a manual worker; an office worker is ein Angestellter.",
+     "Plural = singular: die Arbeiter; dative den Arbeitern."
+    ],
+    "subtleties": [
+     "die Arbeit (work) – arbeiten (to work) – der Arbeiter (worker): one family of words."
+    ]
+   }
+  },
+  {
+   "id": "de:Arbeiterin",
+   "lemma": "Arbeiterin",
+   "pos": "NOUN",
+   "senses": [
+    "job.worker",
+    "animal.workerbee"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.worker",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Arbeiterinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Arbeiter + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Arbeiterin",
+    "N;ACC;SG": "Arbeiterin",
+    "N;DAT;SG": "Arbeiterin",
+    "N;GEN;SG": "Arbeiterin",
+    "N;NOM;PL": "Arbeiterinnen",
+    "N;ACC;PL": "Arbeiterinnen",
+    "N;DAT;PL": "Arbeiterinnen",
+    "N;GEN;PL": "Arbeiterinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman in a factory – or a busy worker bee.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "worker, labourer (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.worker"
+     },
+     {
+      "id": "s2",
+      "def": "worker bee",
+      "register": [
+       "technical"
+      ],
+      "concept": "animal.workerbee"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist Arbeiterin in einer Fabrik.",
+      "tr": "She is a worker in a factory.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Arbeiterinnen bekommen mehr Geld.",
+      "tr": "The (women) workers get more money.",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Arbeiterin bringt Nektar in den Bienenstock.",
+      "tr": "The worker bee brings nectar into the hive.",
+      "register": "technical",
+      "context": "beekeeping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Fabrikarbeiterin",
+      "tr": "factory worker (female)"
+     },
+     {
+      "text": "die Textilarbeiterin",
+      "tr": "textile worker (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Arbeitnehmerin",
+      "register": "formal",
+      "nuance": "employee (female) – legal term"
+     }
+    ],
+    "etymology": {
+     "text": "From Arbeiter (“labourer, worker”) + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arbeit is related to Russian работа (rabota) – and to “robot”, from Czech robota (forced labour)."
+    ],
+    "pitfalls": [
+     "Plural Arbeiterinnen; no umlaut."
+    ],
+    "subtleties": [
+     "In beekeeping die Arbeiterin is the worker bee – all worker bees are female."
+    ]
+   }
+  },
+  {
+   "id": "de:Bauer",
+   "lemma": "Bauer",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer",
+    "sport.pawn",
+    "person.boor"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "everyday: a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bauern",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Bauer: a birdcage"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Bauer",
+    "N;ACC;SG": "Bauern",
+    "N;DAT;SG": "Bauern",
+    "N;GEN;SG": "Bauern",
+    "N;NOM;PL": "Bauern",
+    "N;ACC;PL": "Bauern",
+    "N;DAT;PL": "Bauern",
+    "N;GEN;PL": "Bauern"
+   },
+   "formsAlt": {
+    "N;ACC;SG": [
+     "Bauer"
+    ],
+    "N;DAT;SG": [
+     "Bauer"
+    ],
+    "N;GEN;SG": [
+     "Bauers"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fields, cows and a farmhouse – and in chess, the humble pawn.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     },
+     {
+      "id": "s2",
+      "def": "peasant (historical)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "pawn (chess)",
+      "register": [
+       "technical"
+      ],
+      "concept": "sport.pawn"
+     },
+     {
+      "id": "s4",
+      "def": "boor, yokel",
+      "register": [
+       "pejorative"
+      ],
+      "concept": "person.boor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Bauer hat viele Kühe.",
+      "tr": "The farmer has many cows.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Opa war Bauer.",
+      "tr": "My grandpa was a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Bauer kann nur nach vorne ziehen.",
+      "tr": "The pawn can only move forward.",
+      "register": "technical",
+      "context": "chess",
+      "sense": "s3"
+     },
+     {
+      "text": "Du Bauer, kannst du nicht mal danke sagen?",
+      "tr": "You boor, can’t you even say thank you?",
+      "register": "pejorative",
+      "context": "insults",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Bauernhof",
+      "tr": "farm"
+     },
+     {
+      "text": "der Biobauer",
+      "tr": "organic farmer"
+     },
+     {
+      "text": "der Bauernmarkt",
+      "tr": "farmers’ market"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Was der Bauer nicht kennt, frisst er nicht.",
+      "tr": "What the farmer doesn’t know, he doesn’t eat.",
+      "kind": "proverb",
+      "meaning": "people refuse what is new to them",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Landwirt",
+      "register": "formal",
+      "nuance": "the professional, official word for a farmer"
+     },
+     {
+      "word": "Landmann",
+      "register": "literary",
+      "nuance": "countryman, farmer – old-fashioned"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German būre, gebūre, from Old High German būr (“peasant”), gibūr, gibūro, from Proto-West Germanic *būr, from Proto-Germanic *būraz (“inhabitant, dweller”). Compare English boor.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same word gave Dutch boer (whence the Boers of South Africa) and is hidden in Nachbar, “the one who dwells near” – like English neighbour."
+    ],
+    "pitfalls": [
+     "Bauer is a weak (n-)noun in standard German: den Bauern, dem Bauern, des Bauern – the same form as the plural.",
+     "It can sound condescending (= country bumpkin); Landwirt is the neutral professional word."
+    ],
+    "subtleties": [
+     "In chess der Bauer is the pawn; in some card games the jack is called Bauer."
+    ]
+   }
+  },
+  {
+   "id": "de:Bäuerin",
+   "lemma": "Bäuerin",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "everyday: a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bäuerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Bauer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Bäuerin",
+    "N;ACC;SG": "Bäuerin",
+    "N;DAT;SG": "Bäuerin",
+    "N;GEN;SG": "Bäuerin",
+    "N;NOM;PL": "Bäuerinnen",
+    "N;ACC;PL": "Bäuerinnen",
+    "N;DAT;PL": "Bäuerinnen",
+    "N;GEN;PL": "Bäuerinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The farmer’s wife of old pictures – today a farmer in her own right.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer (female); farmer’s wife",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Bäuerin verkauft Eier auf dem Markt.",
+      "tr": "The farmer sells eggs at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Großmutter war Bäuerin.",
+      "tr": "My grandmother was a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Bäuerin melkt die Kühe.",
+      "tr": "The farmer milks the cows.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Biobäuerin",
+      "tr": "organic farmer (female)"
+     },
+     {
+      "text": "die Bäuerin auf dem Hof",
+      "tr": "the farmer on the farm"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Landwirtin",
+      "register": "formal",
+      "nuance": "the professional, official word"
+     }
+    ],
+    "etymology": {
+     "text": "From Bauer (“peasant”) + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bauer and Bäuerin are related to bauen, which once meant “to dwell” and “to till the land” – today “to build”."
+    ],
+    "pitfalls": [
+     "Umlaut: Bauer → Bäuerin (also spelled Bäurin); plural Bäuerinnen."
+    ],
+    "subtleties": [
+     "Traditionally die Bäuerin also meant the farmer’s wife; today it is the job of a woman farmer."
+    ]
+   }
+  },
+  {
+   "id": "de:Landwirt",
+   "lemma": "Landwirt",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "official: a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Landwirte",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Land",
+      "role": "modifier"
+     },
+     {
+      "part": "Wirt",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Landwirt",
+    "N;ACC;SG": "Landwirt",
+    "N;DAT;SG": "Landwirt",
+    "N;GEN;SG": "Landwirts",
+    "N;NOM;PL": "Landwirte",
+    "N;ACC;PL": "Landwirte",
+    "N;DAT;PL": "Landwirten",
+    "N;GEN;PL": "Landwirte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Landwirtes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tractors, subsidies and modern farming – the professional word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer, agriculturist (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Onkel ist Landwirt.",
+      "tr": "My uncle is a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Viele Landwirte verkaufen ihre Milch an eine Molkerei.",
+      "tr": "Many farmers sell their milk to a dairy.",
+      "register": "formal",
+      "context": "economy",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Landwirt arbeitet den ganzen Tag auf dem Feld.",
+      "tr": "The farmer works in the field all day.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Landwirtschaft",
+      "tr": "agriculture"
+     },
+     {
+      "text": "der Biolandwirt",
+      "tr": "organic farmer"
+     },
+     {
+      "text": "als Landwirt arbeiten",
+      "tr": "to work as a farmer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Bauer",
+      "register": "neutral",
+      "nuance": "the everyday word – can sound rustic"
+     },
+     {
+      "word": "Farmer",
+      "register": "neutral",
+      "nuance": "a large-scale farmer, especially overseas (America, Africa)"
+     }
+    ],
+    "etymology": {
+     "text": "Land (“land”) + Wirt (“host; caretaker”); chiefly a back-formation from Landwirtschaft (“agriculture”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Landwirtschaft (agriculture) is literally “land-economy” – Wirtschaft alone means economy, and also a pub."
+    ],
+    "pitfalls": [
+     "Wirt alone is a landlord or innkeeper (der Gastwirt): the Landwirt “runs the land”.",
+     "Plural Landwirte; dative den Landwirten."
+    ],
+    "subtleties": [
+     "Politicians and newspapers say Landwirte; people in the village say Bauern."
+    ]
+   }
+  },
+  {
+   "id": "de:Landwirtin",
+   "lemma": "Landwirtin",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "official: a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Landwirtinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Land",
+      "role": "modifier"
+     },
+     {
+      "part": "Wirtin",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Landwirtin",
+    "N;ACC;SG": "Landwirtin",
+    "N;DAT;SG": "Landwirtin",
+    "N;GEN;SG": "Landwirtin",
+    "N;NOM;PL": "Landwirtinnen",
+    "N;ACC;PL": "Landwirtinnen",
+    "N;DAT;PL": "Landwirtinnen",
+    "N;GEN;PL": "Landwirtinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman running a farm – the professional title.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer, agriculturist (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Tante ist Landwirtin.",
+      "tr": "My aunt is a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Landwirtin hat zwanzig Kühe.",
+      "tr": "The farmer has twenty cows.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s1"
+     },
+     {
+      "text": "Immer mehr Frauen werden Landwirtinnen.",
+      "tr": "More and more women become farmers.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Biolandwirtin",
+      "tr": "organic farmer (female)"
+     },
+     {
+      "text": "als Landwirtin arbeiten",
+      "tr": "to work as a farmer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Bäuerin",
+      "register": "neutral",
+      "nuance": "the everyday word"
+     }
+    ],
+    "etymology": {
+     "text": "From Landwirt (“farmer”) + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wirtin alone is a landlady or the woman who runs a pub."
+    ],
+    "pitfalls": [
+     "Plural Landwirtinnen; no umlaut."
+    ],
+    "subtleties": [
+     "Landwirtin is the title of the trained profession; Bäuerin is how neighbours talk."
+    ]
+   }
+  },
+  {
+   "id": "de:Polizist",
+   "lemma": "Polizist",
+   "pos": "NOUN",
+   "senses": [
+    "job.police"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.police",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Polizisten",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "derived: Polizei + -ist"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Polizist",
+    "N;ACC;SG": "Polizisten",
+    "N;DAT;SG": "Polizisten",
+    "N;GEN;SG": "Polizisten",
+    "N;NOM;PL": "Polizisten",
+    "N;ACC;PL": "Polizisten",
+    "N;DAT;PL": "Polizisten",
+    "N;GEN;PL": "Polizisten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A uniform, a patrol car – help, or a fine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "police officer (male or of unspecified gender), policeman",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.police"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Nachbar ist Polizist.",
+      "tr": "My neighbour is a police officer.",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Polizist fragt nach meinem Ausweis.",
+      "tr": "The police officer asks for my ID.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "Frag doch den Polizisten!",
+      "tr": "Why don’t you ask the police officer?",
+      "register": "informal",
+      "context": "asking the way",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Polizei",
+      "tr": "the police"
+     },
+     {
+      "text": "die Polizei rufen",
+      "tr": "to call the police"
+     },
+     {
+      "text": "der Verkehrspolizist",
+      "tr": "traffic officer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Polizeibeamter",
+      "register": "formal",
+      "nuance": "police officer – official"
+     },
+     {
+      "word": "Bulle",
+      "register": "slang",
+      "nuance": "cop – pejorative, can be insulting"
+     },
+     {
+      "word": "Schutzmann",
+      "register": "dated",
+      "nuance": "constable, bobby"
+     }
+    ],
+    "etymology": {
+     "text": "From Polizei (“police”) + -ist; Polizei from Medieval Latin policia, from Late Latin polītīa, from Ancient Greek πολιτεία (politeía), from πολίτης (polítēs, “citizen”), from πόλις (pólis, “city”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Polizist goes back to Greek πόλις, like Politik and Greek πολίτης."
+    ],
+    "pitfalls": [
+     "Weak noun: den Polizisten, dem Polizisten, des Polizisten (all with -en).",
+     "die Polizei (the police force) is singular: Die Polizei kommt."
+    ],
+    "subtleties": [
+     "Bulle is common slang but rude to an officer’s face."
+    ]
+   }
+  },
+  {
+   "id": "de:Polizistin",
+   "lemma": "Polizistin",
+   "pos": "NOUN",
+   "senses": [
+    "job.police"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.police",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Polizistinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Polizist + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Polizistin",
+    "N;ACC;SG": "Polizistin",
+    "N;DAT;SG": "Polizistin",
+    "N;GEN;SG": "Polizistin",
+    "N;NOM;PL": "Polizistinnen",
+    "N;ACC;PL": "Polizistinnen",
+    "N;DAT;PL": "Polizistinnen",
+    "N;GEN;PL": "Polizistinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman in uniform – a policewoman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "police officer (female), policewoman",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.police"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Schwester ist Polizistin.",
+      "tr": "My sister is a police officer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Polizistin hilft dem Kind.",
+      "tr": "The policewoman helps the child.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "Zwei Polizistinnen stehen vor der Bank.",
+      "tr": "Two policewomen are standing in front of the bank.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Verkehrspolizistin",
+      "tr": "traffic officer (female)"
+     },
+     {
+      "text": "als Polizistin arbeiten",
+      "tr": "to work as a police officer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Polizeibeamtin",
+      "register": "formal",
+      "nuance": "police officer (female) – official"
+     }
+    ],
+    "etymology": {
+     "text": "From Polizist + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German police forces belong to the federal states (Länder); the Bundespolizei guards borders, airports and stations."
+    ],
+    "pitfalls": [
+     "Unlike the weak Polizist, Polizistin has no case endings: die, der, der, die Polizistin."
+    ],
+    "subtleties": [
+     "In German police ranks titles change (Polizeimeisterin, Kommissarin); in everyday speech: Polizistin."
+    ]
+   }
+  },
+  {
+   "id": "de:Anwalt",
+   "lemma": "Anwalt",
+   "pos": "NOUN",
+   "senses": [
+    "job.lawyer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.lawyer",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Anwälte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Anwalt",
+    "N;ACC;SG": "Anwalt",
+    "N;DAT;SG": "Anwalt",
+    "N;GEN;SG": "Anwalts",
+    "N;NOM;PL": "Anwälte",
+    "N;ACC;PL": "Anwälte",
+    "N;DAT;PL": "Anwälten",
+    "N;GEN;PL": "Anwälte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Anwaltes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A suit, a briefcase, a court – someone who speaks for you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lawyer, attorney (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.lawyer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich brauche einen Anwalt.",
+      "tr": "I need a lawyer.",
+      "register": "neutral",
+      "context": "legal trouble",
+      "sense": "s1"
+     },
+     {
+      "text": "Er ist Anwalt in Berlin.",
+      "tr": "He is a lawyer in Berlin.",
+      "register": "neutral",
+      "context": "introducing someone",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Anwälte sprechen mit dem Richter.",
+      "tr": "The lawyers are talking to the judge.",
+      "register": "formal",
+      "context": "court",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sich einen Anwalt nehmen",
+      "tr": "to get a lawyer"
+     },
+     {
+      "text": "der Rechtsanwalt",
+      "tr": "attorney (the full title)"
+     },
+     {
+      "text": "der Staatsanwalt",
+      "tr": "public prosecutor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Rechtsanwalt",
+      "register": "formal",
+      "nuance": "the full official title"
+     },
+     {
+      "word": "Jurist",
+      "register": "neutral",
+      "nuance": "someone who studied law – not necessarily a practising lawyer"
+     },
+     {
+      "word": "Advokat",
+      "register": "dated",
+      "nuance": "advocate – old-fashioned (still used in Switzerland)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German anwalde, from Old High German anawalto (“one who has power over something”), from walten (“to rule, hold sway”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Anwalt shares the root of walten, Gewalt (power, force) and English wield."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Anwälte; dative den Anwälten.",
+     "A Staatsanwalt is the prosecutor – not a lawyer who defends you."
+    ],
+    "subtleties": [
+     "Herr Rechtsanwalt / Frau Rechtsanwältin is how letters address a lawyer."
+    ]
+   }
+  },
+  {
+   "id": "de:Anwältin",
+   "lemma": "Anwältin",
+   "pos": "NOUN",
+   "senses": [
+    "job.lawyer"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.lawyer",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Anwältinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Anwalt + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Anwältin",
+    "N;ACC;SG": "Anwältin",
+    "N;DAT;SG": "Anwältin",
+    "N;GEN;SG": "Anwältin",
+    "N;NOM;PL": "Anwältinnen",
+    "N;ACC;PL": "Anwältinnen",
+    "N;DAT;PL": "Anwältinnen",
+    "N;GEN;PL": "Anwältinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary defines Anwältin only as the “female equivalent of Anwalt” (lawyer)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman lawyer – in court, in an office, on the phone with clients.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lawyer, attorney (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.lawyer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Mutter ist Anwältin.",
+      "tr": "My mother is a lawyer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Anwältin hat viele Mandanten.",
+      "tr": "The lawyer has many clients.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Frau Rechtsanwältin, wir haben eine Frage.",
+      "tr": "Counsellor, we have a question.",
+      "register": "formal",
+      "context": "letter",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Rechtsanwältin",
+      "tr": "attorney (female, full title)"
+     },
+     {
+      "text": "die Staatsanwältin",
+      "tr": "public prosecutor (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Juristin",
+      "register": "neutral",
+      "nuance": "a woman who studied law"
+     }
+    ],
+    "etymology": {
+     "text": "From Anwalt + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Women have been admitted as lawyers in Germany only since 1922."
+    ],
+    "pitfalls": [
+     "Umlaut: Anwalt → Anwältin; plural Anwältinnen."
+    ],
+    "subtleties": [
+     "In letters: Sehr geehrte Frau Rechtsanwältin …"
+    ]
+   }
+  },
+  {
+   "id": "de:Künstler",
+   "lemma": "Künstler",
+   "pos": "NOUN",
+   "senses": [
+    "job.artist"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.artist",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Künstler",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Kunst + -ler"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Künstler",
+    "N;ACC;SG": "Künstler",
+    "N;DAT;SG": "Künstler",
+    "N;GEN;SG": "Künstlers",
+    "N;NOM;PL": "Künstler",
+    "N;ACC;PL": "Künstler",
+    "N;DAT;PL": "Künstlern",
+    "N;GEN;PL": "Künstler"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A studio, paint on the hands, an exhibition – or music on a stage.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artist (male or of unspecified gender)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.artist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist Künstler und malt Bilder.",
+      "tr": "He is an artist and paints pictures.",
+      "register": "neutral",
+      "context": "art",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Künstler zeigen ihre Bilder im Museum.",
+      "tr": "The artists show their pictures in the museum.",
+      "register": "neutral",
+      "context": "exhibition",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Onkel ist ein echter Lebenskünstler.",
+      "tr": "My uncle really knows how to enjoy life.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der bildende Künstler",
+      "tr": "visual artist"
+     },
+     {
+      "text": "der Straßenkünstler",
+      "tr": "street artist"
+     },
+     {
+      "text": "der Lebenskünstler",
+      "tr": "someone who knows how to live well (with little)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Maler",
+      "register": "neutral",
+      "nuance": "painter – also a house painter"
+     },
+     {
+      "word": "Kreativer",
+      "register": "colloquial",
+      "nuance": "a creative (designer, artist)"
+     }
+    ],
+    "etymology": {
+     "text": "From Kunst (“art”) + -ler; Kunst is derived from können (“to be able”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kunst comes from können – art as “what you can do”, like Greek τέχνη (skill, craft, art)."
+    ],
+    "pitfalls": [
+     "False friend: German Artist is a circus performer (acrobat); an artist is ein Künstler.",
+     "Plural = singular: die Künstler; dative den Künstlern."
+    ],
+    "subtleties": [
+     "Lebenskünstler is half praise, half irony: someone who gets by happily with little."
+    ]
+   }
+  },
+  {
+   "id": "de:Künstlerin",
+   "lemma": "Künstlerin",
+   "pos": "NOUN",
+   "senses": [
+    "job.artist"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.artist",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Künstlerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Künstler + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Künstlerin",
+    "N;ACC;SG": "Künstlerin",
+    "N;DAT;SG": "Künstlerin",
+    "N;GEN;SG": "Künstlerin",
+    "N;NOM;PL": "Künstlerinnen",
+    "N;ACC;PL": "Künstlerinnen",
+    "N;DAT;PL": "Künstlerinnen",
+    "N;GEN;PL": "Künstlerinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman painter, sculptor, musician or performer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artist (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.artist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Freundin ist Künstlerin.",
+      "tr": "My friend is an artist.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Künstlerin zeigt ihre Bilder in Wien.",
+      "tr": "The artist is showing her pictures in Vienna.",
+      "register": "neutral",
+      "context": "exhibition",
+      "sense": "s1"
+     },
+     {
+      "text": "Viele Künstlerinnen leben in Berlin.",
+      "tr": "Many (women) artists live in Berlin.",
+      "register": "neutral",
+      "context": "city life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die bildende Künstlerin",
+      "tr": "visual artist (female)"
+     },
+     {
+      "text": "die Straßenkünstlerin",
+      "tr": "street artist (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Malerin",
+      "register": "neutral",
+      "nuance": "painter (female)"
+     }
+    ],
+    "etymology": {
+     "text": "From Künstler (“artist”) + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Käthe Kollwitz was the first woman elected to the Prussian Academy of Arts (1919)."
+    ],
+    "pitfalls": [
+     "Plural Künstlerinnen."
+    ],
+    "subtleties": [
+     "Artistin in German means a circus performer, not an artist."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

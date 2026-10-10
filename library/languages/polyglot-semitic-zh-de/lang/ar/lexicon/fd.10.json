@@ -1,0 +1,3187 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:madha",
+   "lemma": "مَاذَا",
+   "pos": "PRON",
+   "senses": [
+    "q.what"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.what",
+     "axis": "what follows",
+     "value": "before a verb"
+    }
+   ],
+   "translit": "māḏā",
+   "class": "int",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The question before a verb: what do you…?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (especially before a verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تَأْكُلُ؟",
+      "tr": "What are you eating?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تُرِيدِينَ؟",
+      "tr": "What do you (f) want?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا حَدَثَ؟",
+      "tr": "What happened?",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تَفْعَلُ؟",
+      "tr": "What are you doing?",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِمَاذَا",
+      "tr": "why? (lit. “for what?”) — a word of its own, lesson 10"
+     },
+     {
+      "text": "مَاذَا عَنْ …؟",
+      "tr": "what about …?"
+     },
+     {
+      "text": "مَاذَا بِكَ؟",
+      "tr": "what’s wrong with you?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَا",
+      "register": "neutral",
+      "nuance": "before nouns and pronouns: مَا هٰذَا؟ مَا اسْمُكَ؟"
+     },
+     {
+      "word": "إِيه",
+      "register": "regional",
+      "nuance": "spoken “what”, after the verb",
+      "region": "Egypt"
+     },
+     {
+      "word": "شُو",
+      "register": "regional",
+      "nuance": "spoken “what”",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "From مَا (mā) + ذَا (ḏā).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "لِمَاذَا, “why”, is literally “for what”."
+    ],
+    "pitfalls": [
+     "Use مَاذَا before a verb (مَاذَا تَشْرَبُ؟) but مَا before a noun or pronoun (مَا هٰذَا؟)."
+    ],
+    "subtleties": [
+     "Formal Arabic also uses مَاذَا before a past verb: مَاذَا فَعَلْتَ؟ (what did you do?)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ma",
+   "lemma": "مَا",
+   "pos": "PRON",
+   "senses": [
+    "q.what",
+    "adv.how.excl",
+    "pron.what"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.what",
+     "axis": "what follows",
+     "value": "before a noun or a pronoun"
+    }
+   ],
+   "translit": "mā",
+   "class": "int",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Short and frequent — and with many jobs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (before a noun or pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "how …! (exclamation: مَا أَفْعَلَ …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.how.excl"
+     },
+     {
+      "id": "s4",
+      "def": "what, that which (relative): أَعْرِفُ مَا تَقْصِدُ (I know what you mean)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.what"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَا هٰذَا؟",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا اسْمُكَ؟",
+      "tr": "What is your name?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا رَأْيُكَ؟",
+      "tr": "What do you think?",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا أَجْمَلَ الْبَحْرَ!",
+      "tr": "How beautiful the sea is!",
+      "register": "neutral",
+      "context": "exclamation",
+      "sense": "s2"
+     },
+     {
+      "text": "أَعْرِفُ مَا تَقْصِدُ.",
+      "tr": "I know what you mean.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَا اسْمُكَ؟",
+      "tr": "what is your name?"
+     },
+     {
+      "text": "مَا رَأْيُكَ؟",
+      "tr": "what do you think?"
+     },
+     {
+      "text": "مَا الْأَمْرُ؟",
+      "tr": "what’s the matter?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَاذَا",
+      "register": "neutral",
+      "nuance": "the form used before a verb: مَاذَا تَأْكُلُ؟"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Hebrew מָה (ma) and Ugaritic mh.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מָה (ma, “what”) is the same Semitic word."
+    ],
+    "pitfalls": [
+     "مَا is also the negation “not” (مَا أَكَلْتُ = I didn’t eat) and the relative “what, that which” (أَعْرِفُ مَا تُرِيدُ = I know what you want). Only position and context tell them apart."
+    ],
+    "subtleties": [
+     "In the exclamation مَا أَجْمَلَ …! the noun is accusative: مَا أَجْمَلَ الْبَحْرَ!"
+    ]
+   }
+  },
+  {
+   "id": "ar:ayna",
+   "lemma": "أَيْنَ",
+   "pos": "ADV",
+   "senses": [
+    "q.where"
+   ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle (Wiktionary relates it to ء ي ن)"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʾayna",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Finding your way: places, people, things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where? (also مِنْ أَيْنَ “from where”, إِلَى أَيْنَ “where to”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "how can … compare with …? (أَيْنَ X مِنْ Y — implying there is no comparison)",
+      "register": [
+       "formal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيْنَ الْمَحَطَّةُ؟",
+      "tr": "Where is the station?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ أَيْنَ أَنْتِ؟",
+      "tr": "Where are you from? (to a woman)",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "إِلَى أَيْنَ تَذْهَبُ؟",
+      "tr": "Where are you going?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ هٰذَا مِنْ ذَاكَ؟",
+      "tr": "How can this even compare with that?",
+      "register": "formal",
+      "context": "comparison",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِنْ أَيْنَ",
+      "tr": "from where"
+     },
+     {
+      "text": "إِلَى أَيْنَ",
+      "tr": "where to"
+     },
+     {
+      "text": "أَيْنَمَا",
+      "tr": "wherever"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "وَيْن",
+      "register": "regional",
+      "nuance": "spoken “where”",
+      "region": "Levant, Gulf, Iraq"
+     },
+     {
+      "word": "فِين",
+      "register": "regional",
+      "nuance": "spoken “where”",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ء ي ن (“to come or approach”, “to draw near to a place or time”); related to آن (ʾān, “time, now”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Qurʾān asks: فَأَيْنَ تَذْهَبُونَ؟ — “So where are you going?” (81:26)."
+    ],
+    "pitfalls": [
+     "No verb “is” after it: أَيْنَ الْمَحَطَّةُ؟ = where is the station? The noun is nominative.",
+     "أَيْنَ always ends in -a; it never takes case endings."
+    ],
+    "subtleties": [
+     "أَيْنَمَا + jussive = “wherever”: أَيْنَمَا تَذْهَبْ أَذْهَبْ (wherever you go, I go)."
+    ]
+   }
+  },
+  {
+   "id": "ar:man",
+   "lemma": "مَنْ",
+   "pos": "PRON",
+   "class": "int",
+   "senses": [
+    "q.who",
+    "pron.who"
+   ],
+   "translit": "man",
+   "alts": [
+    "مَنِ"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking about people: who?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "who? (about people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.who"
+     },
+     {
+      "id": "s2",
+      "def": "who, the one who; whoever (relative and conditional)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.who"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَنْ أَنْتَ؟",
+      "tr": "Who are you?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "مَنْ هٰذِهِ الْمَرْأَةُ؟",
+      "tr": "Who is this woman?",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "مَنْ يَطْبُخُ الْيَوْمَ؟",
+      "tr": "Who is cooking today?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "مَنْ جَدَّ وَجَدَ.",
+      "tr": "Whoever strives, finds.",
+      "register": "neutral",
+      "context": "proverb",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَنْ هُوَ؟ / مَنْ هِيَ؟",
+      "tr": "who is he? / who is she?"
+     },
+     {
+      "text": "مَعَ مَنْ؟",
+      "tr": "with whom?"
+     },
+     {
+      "text": "لِمَنْ؟",
+      "tr": "whose? (for whom?)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مَنْ جَدَّ وَجَدَ، وَمَنْ زَرَعَ حَصَدَ",
+      "tr": "whoever strives finds, whoever sows reaps",
+      "kind": "proverb",
+      "meaning": "effort is rewarded",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "مين",
+      "register": "regional",
+      "nuance": "the spoken “who” of Egypt and the Levant (mīn)",
+      "region": "Egypt, Levant"
+     },
+     {
+      "word": "منو",
+      "register": "regional",
+      "nuance": "the spoken “who” of Iraq and the Gulf (minū)",
+      "region": "Iraq, Gulf"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man), Geʿez መኑ (männu) and Amharic ማን (man) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Amharic ማን (man), “who”, is the same Semitic word (Wiktionary).",
+     "One word for any person: مَنْ does not change for gender or number — مَنْ هُوَ؟ مَنْ هِيَ؟ مَنْ هُمْ؟"
+    ],
+    "pitfalls": [
+     "Without vowels مَنْ (man, who) and مِنْ (min, from) are both written من — read the context.",
+     "مَنْ is for people, مَا / مَاذَا for things: مَنْ هٰذَا؟ (who is this?) but مَا هٰذَا؟ (what is this?)."
+    ],
+    "subtleties": [
+     "Before al- it takes a helping vowel i: مَنِ الطَّبِيبُ؟ (who is the doctor?).",
+     "As a relative or conditional word it means “whoever”: مَنْ جَدَّ وَجَدَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:mata",
+   "lemma": "مَتَى",
+   "pos": "ADV",
+   "senses": [
+    "q.when",
+    "conj.when"
+   ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "kind of clause",
+     "value": "whenever: a condition (+ jussive)"
+    }
+   ],
+   "translit": "matā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Time and plans: when?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when? (at what time?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.when"
+     },
+     {
+      "id": "s2",
+      "def": "whenever (conditional)",
+      "register": [
+       "formal"
+      ],
+      "concept": "conj.when"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَتَى تَأْكُلُ الْغَدَاءَ؟",
+      "tr": "When do you eat lunch?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى الْعَشَاءُ؟",
+      "tr": "When is dinner?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "إِلَى مَتَى؟",
+      "tr": "Until when? (How much longer?)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "تَعَالَ مَتَى شِئْتَ.",
+      "tr": "Come whenever you like.",
+      "register": "formal",
+      "context": "invitation",
+      "sense": "s2"
+     },
+     {
+      "text": "مَتَى تَزُرْنَا تَجِدْنَا فِي الْبَيْتِ.",
+      "tr": "Whenever you visit us, you will find us at home.",
+      "register": "formal",
+      "context": "invitation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "إِلَى مَتَى؟",
+      "tr": "until when? how much longer?"
+     },
+     {
+      "text": "مُنْذُ مَتَى؟",
+      "tr": "since when?"
+     },
+     {
+      "text": "مَتَى شِئْتَ",
+      "tr": "whenever you like"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إمتى",
+      "register": "regional",
+      "nuance": "the spoken “when” of Egypt (imta)",
+      "region": "Egypt"
+     },
+     {
+      "word": "إيمتى",
+      "register": "regional",
+      "nuance": "the spoken “when” of the Levant (ēmta)",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares مَا (mā, “what?”) and مَنْ (man, “who?”); cognate with Hebrew מָתַי (matai).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מָתַי (matáy), “when?”, is the same word — one of the easiest bridges between the two languages."
+    ],
+    "pitfalls": [
+     "No helper verb and no inversion: مَتَى تَأْكُلُ؟ is literally “when you-eat?”.",
+     "Written with ى (alif maqṣūra) but read -ā: matā."
+    ],
+    "subtleties": [
+     "With a noun no verb is needed: مَتَى الْعَشَاءُ؟ (When is dinner?) — the noun is nominative.",
+     "In formal conditional sentences مَتَى means “whenever”: مَتَى شِئْتَ (whenever you wish)."
+    ]
+   }
+  },
+  {
+   "id": "ar:kayfa",
+   "lemma": "كَيْفَ",
+   "pos": "ADV",
+   "senses": [
+    "q.how"
+   ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": [
+     {
+      "form": "كَيْفَمَا",
+      "what": "with مَا: however, in whatever way",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "translit": "kayfa",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking after ways and well-being: how?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how? (in what way, in what state)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.how"
+     },
+     {
+      "id": "s2",
+      "def": "however, in whatever way (كَيْفَمَا)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَيْفَ حَالُكَ؟",
+      "tr": "How are you?",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "كَيْفَ تَشْرَبُ الْقَهْوَةَ؟",
+      "tr": "How do you take your coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "كَيْفَ أَذْهَبُ إِلَى الْمَحَطَّةِ؟",
+      "tr": "How do I get to the station?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَيْفَ حَالُكَ؟",
+      "tr": "how are you?"
+     },
+     {
+      "text": "كَيْفَ الْحَالُ؟",
+      "tr": "how are things?"
+     },
+     {
+      "text": "كَيْفَ ذٰلِكَ؟",
+      "tr": "how so?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ازاي",
+      "register": "regional",
+      "nuance": "the spoken “how” of Egypt (izzāy)",
+      "region": "Egypt"
+     },
+     {
+      "word": "كيف",
+      "register": "regional",
+      "nuance": "pronounced kīf in the Levant and the Maghreb",
+      "region": "Levant, Maghreb"
+     },
+     {
+      "word": "شلون",
+      "register": "regional",
+      "nuance": "the spoken “how” of Iraq and the Gulf (šlōn)",
+      "region": "Iraq, Gulf"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology for the adverb; the noun كَيْف (kayf, “condition, state; mood, pleasure”) is the same word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The noun كَيْف (state, mood, pleasure) went into Turkish as keyif (good mood, pleasure) and from there into Greek as κέφι (kéfi, high spirits)."
+    ],
+    "pitfalls": [
+     "كَيْفَ asks “how?” — “how many?” is كَمْ and “how much (price)?” is بِكَمْ.",
+     "It always ends in -a: kayfa, never with case endings."
+    ],
+    "subtleties": [
+     "كَيْفَ + a noun asks after a state: كَيْفَ الْعَمَلُ؟ (How is work?).",
+     "كَيْفَمَا = however, in whatever way (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "ar:limadha",
+   "lemma": "لِمَاذَا",
+   "pos": "ADV",
+   "senses": [
+    "q.why"
+   ],
+   "features": {
+    "root": {
+     "none": "a particle: لِ + مَاذَا"
+    },
+    "derivedFrom": "لِ + مَاذَا (what?)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "li-māḏā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity and complaint: why?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "why? (lit. “for what?”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.why"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لِمَاذَا لَا تَأْكُلُ؟",
+      "tr": "Why aren’t you eating?",
+      "register": "neutral",
+      "context": "family meal",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَاذَا أَنْتَ هُنَا؟",
+      "tr": "Why are you here?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَاذَا تَدْرُسُ الْعَرَبِيَّةَ؟",
+      "tr": "Why are you learning Arabic?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِمَاذَا لَا …؟",
+      "tr": "why not …? why don’t …?"
+     },
+     {
+      "text": "لِمَاذَا؟ — لِأَنَّ …",
+      "tr": "why? — because …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لِمَ",
+      "register": "formal",
+      "nuance": "the short literary form (lima)"
+     },
+     {
+      "word": "ليش",
+      "register": "regional",
+      "nuance": "the spoken “why” of the Levant and the Gulf (lēš)",
+      "region": "Levant, Gulf"
+     },
+     {
+      "word": "ليه",
+      "register": "regional",
+      "nuance": "the spoken “why” of Egypt (lēh)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From لِـ (li-, “for”) + مَاذَا (māḏā, “what”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “for what?” — built like Greek γιατί (για + τι), Russian почему (по + чему) and Turkish niçin (ne + için)."
+    ],
+    "pitfalls": [
+     "Written as one word: لِمَاذَا, not *لِ مَاذَا.",
+     "The answer starts with لِأَنَّ + a noun or a pronoun ending (لِأَنَّهُ، لِأَنِّي) — that comes in lesson 18."
+    ],
+    "subtleties": [
+     "لِمَاذَا لَا …؟ also makes a suggestion: لِمَاذَا لَا نَأْكُلُ هُنَا؟ (Why don’t we eat here?)."
+    ]
+   }
+  },
+  {
+   "id": "ar:kam",
+   "lemma": "كَمْ",
+   "pos": "ADV",
+   "senses": [
+    "q.howmany"
+   ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "kam",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Counting and prices: how many? how much?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how many? how much? — followed by a noun in the accusative singular, indefinite (كَمْ أَخًا؟)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.howmany"
+     },
+     {
+      "id": "s2",
+      "def": "how many …! how much …! (exclamation, with مِنْ or a genitive)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَمْ أَخًا عِنْدَكَ؟",
+      "tr": "How many brothers do you have?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "كَمْ كِتَابًا تَشْتَرِي؟",
+      "tr": "How many books are you buying?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "بِكَمْ هٰذَا؟",
+      "tr": "How much is this?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "كَمْ عُمْرُكَ؟",
+      "tr": "How old are you?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَمْ عُمْرُكَ؟",
+      "tr": "how old are you? (lit. how much is your age?)"
+     },
+     {
+      "text": "بِكَمْ …؟",
+      "tr": "how much does … cost?"
+     },
+     {
+      "text": "كَمِ السَّاعَةُ؟",
+      "tr": "what time is it?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كام",
+      "register": "regional",
+      "nuance": "the spoken “how many / how much” of Egypt (kām)",
+      "region": "Egypt"
+     },
+     {
+      "word": "قديش",
+      "register": "regional",
+      "nuance": "the spoken “how much” of the Levant (qaddēš)",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "A basic Semitic question word; Wiktionary gives no etymology for it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew כַּמָּה (kamá), “how many, how much”, is its cousin."
+    ],
+    "pitfalls": [
+     "After كَمْ the noun is singular and accusative indefinite: كَمْ أَخًا؟ — not *كَمْ إِخْوَةً؟ (unlike English “how many brothers”).",
+     "The price is asked with بِ: بِكَمْ هٰذَا؟ — كَمْ alone asks for a number."
+    ],
+    "subtleties": [
+     "Wiktionary: after a preposition (بِكَمْ) the noun may also be genitive — بِكَمْ دِرْهَمٍ؟.",
+     "Before al- it takes the helping vowel i: كَمِ السَّاعَةُ؟."
+    ]
+   }
+  },
+  {
+   "id": "ar:ayy",
+   "lemma": "أَيّ",
+   "pos": "DET",
+   "class": "int",
+   "senses": [
+    "q.which",
+    "det.any"
+   ],
+   "translit": "ʾayy",
+   "forms": {
+    "DET;NOM;CONST": "أَيُّ",
+    "DET;ACC;CONST": "أَيَّ",
+    "DET;GEN;CONST": "أَيِّ",
+    "DET;NOM;FEM;CONST": "أَيَّةُ",
+    "DET;ACC;FEM;CONST": "أَيَّةَ",
+    "DET;GEN;FEM;CONST": "أَيَّةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Choosing among several: which?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "which? what …? — أَيّ + an indefinite noun in the genitive (أَيُّ كِتَابٍ؟)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.which"
+     },
+     {
+      "id": "s2",
+      "def": "any (in questions and negations: أَيُّ شَيْءٍ, anything)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.any"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيَّ كِتَابٍ تُرِيدُ؟",
+      "tr": "Which book do you want?",
+      "register": "neutral",
+      "context": "bookshop",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي أَيِّ بَيْتٍ تَسْكُنُ؟",
+      "tr": "Which house do you live in?",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيُّ يَوْمٍ الْيَوْمَ؟",
+      "tr": "What day is it today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ عِنْدَكَ أَيُّ سُؤَالٍ؟",
+      "tr": "Do you have any question?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَيُّ وَاحِدٍ؟",
+      "tr": "which one?"
+     },
+     {
+      "text": "أَيُّ شَيْءٍ",
+      "tr": "anything"
+     },
+     {
+      "text": "فِي أَيِّ وَقْتٍ",
+      "tr": "at any time; at what time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَيَّة",
+      "register": "formal",
+      "nuance": "the feminine form, possible before a feminine noun: أَيَّةُ مَدِينَةٍ؟"
+     },
+     {
+      "word": "أنهي",
+      "register": "regional",
+      "nuance": "the spoken “which” of Egypt (anhī)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔayy- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أَيّ is the only Arabic question word that declines: أَيُّ, أَيَّ, أَيِّ — it takes the case of its place in the sentence."
+    ],
+    "pitfalls": [
+     "The noun after أَيّ is genitive and indefinite: أَيَّ كِتَابٍ, not *أَيَّ الْكِتَابَ.",
+     "Its own case depends on its job: subject أَيُّ, object أَيَّ, after a preposition أَيِّ (فِي أَيِّ بَيْتٍ؟).",
+     "Not أَيْ (ʾay, “that is, namely”)."
+    ],
+    "subtleties": [
+     "With a feminine noun both أَيُّ مَدِينَةٍ and أَيَّةُ مَدِينَةٍ are correct; أَيُّ is more common.",
+     "With a pronoun ending: أَيُّهُمْ؟ (which of them?), أَيُّهُمَا؟ (which of the two?)."
+    ]
+   }
+  },
+  {
+   "id": "ar:liman",
+   "lemma": "لِمَنْ",
+   "pos": "DET",
+   "senses": [
+    "q.whose",
+    "q.forwhom"
+   ],
+   "translit": "li-man",
+   "alts": [
+    "لِمَنِ"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Who owns it? — whose?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "whose? (lit. “to whom?”) — لِمَنْ + the thing: لِمَنْ هٰذَا الْكِتَابُ؟",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.whose"
+     },
+     {
+      "id": "s2",
+      "def": "for whom? to whom?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.forwhom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لِمَنْ هٰذَا الْقَلَمُ؟",
+      "tr": "Whose pen is this?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَنْ هٰذِهِ الْحَقِيبَةُ؟",
+      "tr": "Whose bag is this?",
+      "register": "neutral",
+      "context": "lost property",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَنْ تَطْبُخُ؟",
+      "tr": "Who are you cooking for?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِمَنْ هٰذَا؟",
+      "tr": "whose is this?"
+     },
+     {
+      "text": "هٰذَا لِي",
+      "tr": "this is mine (the answer)"
+     },
+     {
+      "text": "لِمَنِ الْبَيْتُ؟",
+      "tr": "whose is the house?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لمين",
+      "register": "regional",
+      "nuance": "the spoken form in Egypt and the Levant (la-mīn)",
+      "region": "Egypt, Levant"
+     },
+     {
+      "word": "بتاع مين",
+      "register": "regional",
+      "nuance": "Egyptian “whose?” (lit. “belonging to whom?”)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From لِ (li, “for, belonging to”) + مَنْ (man, “who”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "No special word for “whose”: Arabic asks “to whom (is) this book?”, like French à qui est ce livre ? — German wessen and Greek ποιανού are case forms instead."
+    ],
+    "pitfalls": [
+     "Answer with لِ + the owner: هٰذَا لِأَبِي (it is my father’s), هٰذَا لِي (it is mine) — لِي, never *لِأَنَا."
+    ],
+    "subtleties": [
+     "Also correct: كِتَابُ مَنْ هٰذَا؟ (whose book is this?), with مَنْ as the second word of a construct.",
+     "Before al- it takes the helping vowel i: لِمَنِ الْكِتَابُ؟."
+    ]
+   }
+  },
+  {
+   "id": "ar:tabib",
+   "lemma": "طَبِيب",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.doctor"
+   ],
+   "features": {
+    "root": "ط ب ب",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَطِبَّاء",
+      "kind": "broken",
+      "pattern": "أَفْعِلَاء",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "طَبِيبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ṭabīb",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "طَبِيبٌ",
+    "N;NOM;PL;MASC;INDF": "أَطِبَّاءُ",
+    "N;NOM;DU;MASC;INDF": "طَبِيبَانِ",
+    "N;NOM;SG;FEM;INDF": "طَبِيبَةٌ",
+    "N;NOM;PL;FEM;INDF": "طَبِيبَاتٌ",
+    "N;NOM;DU;FEM;INDF": "طَبِيبَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الطَّبِيبُ",
+    "N;NOM;PL;MASC;DEF": "الْأَطِبَّاءُ",
+    "N;NOM;DU;MASC;DEF": "الطَّبِيبَانِ",
+    "N;NOM;SG;FEM;DEF": "الطَّبِيبَةُ",
+    "N;NOM;PL;FEM;DEF": "الطَّبِيبَاتُ",
+    "N;NOM;DU;FEM;DEF": "الطَّبِيبَتَانِ",
+    "N;ACC;SG;MASC;INDF": "طَبِيبًا",
+    "N;ACC;PL;MASC;INDF": "أَطِبَّاءَ",
+    "N;ACC;DU;MASC;INDF": "طَبِيبَيْنِ",
+    "N;ACC;SG;FEM;INDF": "طَبِيبَةً",
+    "N;ACC;PL;FEM;INDF": "طَبِيبَاتٍ",
+    "N;ACC;DU;FEM;INDF": "طَبِيبَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الطَّبِيبَ",
+    "N;ACC;PL;MASC;DEF": "الْأَطِبَّاءَ",
+    "N;ACC;DU;MASC;DEF": "الطَّبِيبَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الطَّبِيبَةَ",
+    "N;ACC;PL;FEM;DEF": "الطَّبِيبَاتِ",
+    "N;ACC;DU;FEM;DEF": "الطَّبِيبَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "طَبِيبٍ",
+    "N;GEN;PL;MASC;INDF": "أَطِبَّاءَ",
+    "N;GEN;DU;MASC;INDF": "طَبِيبَيْنِ",
+    "N;GEN;SG;FEM;INDF": "طَبِيبَةٍ",
+    "N;GEN;PL;FEM;INDF": "طَبِيبَاتٍ",
+    "N;GEN;DU;FEM;INDF": "طَبِيبَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الطَّبِيبِ",
+    "N;GEN;PL;MASC;DEF": "الْأَطِبَّاءِ",
+    "N;GEN;DU;MASC;DEF": "الطَّبِيبَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الطَّبِيبَةِ",
+    "N;GEN;PL;FEM;DEF": "الطَّبِيبَاتِ",
+    "N;GEN;DU;FEM;DEF": "الطَّبِيبَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Trust and respect — a career many families dream of for their children.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "doctor, physician (feminine طَبِيبَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.doctor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُخْتِي طَبِيبَةٌ فِي الْمُسْتَشْفَى.",
+      "tr": "My sister is a doctor at the hospital.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا مَرِيضٌ، أُرِيدُ طَبِيبًا.",
+      "tr": "I’m ill — I need a doctor.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "الطَّبِيبُ فِي الْعِيَادَةِ الْيَوْمَ.",
+      "tr": "The doctor is at the practice today.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَبِيبُ أَسْنَانٍ",
+      "tr": "dentist"
+     },
+     {
+      "text": "طَبِيبٌ عَامٌّ",
+      "tr": "general practitioner"
+     },
+     {
+      "text": "عِيَادَةُ الطَّبِيبِ",
+      "tr": "the doctor’s practice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دكتور",
+      "register": "colloquial",
+      "nuance": "the everyday word and form of address (duktūr / doktōr): يَا دُكْتُورُ"
+     },
+     {
+      "word": "حَكِيم",
+      "register": "dated",
+      "nuance": "literally “wise man”; the old word for a doctor, still heard in the Levant and Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ط ب ب (ṭ b b, “medicine”: طِبّ), on the pattern faʿīl; Wiktionary gives no older etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "طِبّ (ṭibb, medicine) is the same root: Turkish tıp (medicine) and tabip (physician) come from it."
+    ],
+    "pitfalls": [
+     "The plural is broken and a diptote: أَطِبَّاءُ (no tanwīn), not *طَبِيبُونَ; women doctors are طَبِيبَات."
+    ],
+    "subtleties": [
+     "In speech a doctor is addressed as دُكْتُور / دُكْتُورَة; طَبِيب is the word for the profession.",
+     "Wiktionary also lists the rarer plural أَطِبَّة."
+    ]
+   }
+  },
+  {
+   "id": "ar:mumarrid",
+   "lemma": "مُمَرِّض",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.nurse"
+   ],
+   "features": {
+    "root": "م ر ض",
+    "pattern": "مُفَعِّل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُمَرِّضُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُمَرِّضَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "mumarriḍ",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "مُمَرِّضٌ",
+    "N;NOM;PL;MASC;INDF": "مُمَرِّضُونَ",
+    "N;NOM;DU;MASC;INDF": "مُمَرِّضَانِ",
+    "N;NOM;SG;FEM;INDF": "مُمَرِّضَةٌ",
+    "N;NOM;PL;FEM;INDF": "مُمَرِّضَاتٌ",
+    "N;NOM;DU;FEM;INDF": "مُمَرِّضَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْمُمَرِّضُ",
+    "N;NOM;PL;MASC;DEF": "الْمُمَرِّضُونَ",
+    "N;NOM;DU;MASC;DEF": "الْمُمَرِّضَانِ",
+    "N;NOM;SG;FEM;DEF": "الْمُمَرِّضَةُ",
+    "N;NOM;PL;FEM;DEF": "الْمُمَرِّضَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْمُمَرِّضَتَانِ",
+    "N;ACC;SG;MASC;INDF": "مُمَرِّضًا",
+    "N;ACC;PL;MASC;INDF": "مُمَرِّضِينَ",
+    "N;ACC;DU;MASC;INDF": "مُمَرِّضَيْنِ",
+    "N;ACC;SG;FEM;INDF": "مُمَرِّضَةً",
+    "N;ACC;PL;FEM;INDF": "مُمَرِّضَاتٍ",
+    "N;ACC;DU;FEM;INDF": "مُمَرِّضَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْمُمَرِّضَ",
+    "N;ACC;PL;MASC;DEF": "الْمُمَرِّضِينَ",
+    "N;ACC;DU;MASC;DEF": "الْمُمَرِّضَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْمُمَرِّضَةَ",
+    "N;ACC;PL;FEM;DEF": "الْمُمَرِّضَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْمُمَرِّضَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "مُمَرِّضٍ",
+    "N;GEN;PL;MASC;INDF": "مُمَرِّضِينَ",
+    "N;GEN;DU;MASC;INDF": "مُمَرِّضَيْنِ",
+    "N;GEN;SG;FEM;INDF": "مُمَرِّضَةٍ",
+    "N;GEN;PL;FEM;INDF": "مُمَرِّضَاتٍ",
+    "N;GEN;DU;FEM;INDF": "مُمَرِّضَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْمُمَرِّضِ",
+    "N;GEN;PL;MASC;DEF": "الْمُمَرِّضِينَ",
+    "N;GEN;DU;MASC;DEF": "الْمُمَرِّضَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْمُمَرِّضَةِ",
+    "N;GEN;PL;FEM;DEF": "الْمُمَرِّضَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْمُمَرِّضَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Care and patience at the bedside.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nurse (feminine مُمَرِّضَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي مُمَرِّضَةٌ.",
+      "tr": "My mother is a nurse.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُمَرِّضَةُ تُسَاعِدُ الطَّبِيبَ.",
+      "tr": "The nurse is helping the doctor.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     },
+     {
+      "text": "يَعْمَلُ أَخِي مُمَرِّضًا فِي الْمُسْتَشْفَى.",
+      "tr": "My brother works as a nurse in the hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُمَرِّضَةٌ فِي الْمُسْتَشْفَى",
+      "tr": "a nurse in the hospital"
+     },
+     {
+      "text": "مَدْرَسَةُ التَّمْرِيضِ",
+      "tr": "nursing school"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: مُمَرِّض / مُمَرِّضَة is the standard word everywhere; nursing is التَّمْرِيض.",
+    "etymology": {
+     "text": "Active participle of the form II verb مَرَّضَ (marraḍa, “to nurse, to tend the sick”), from the root م ر ض (m r ḍ, “illness”) (Wiktionary root).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives مَرِيض (ill; a patient) and مَرَض (illness): the nurse is “the one who tends the ill”."
+    ],
+    "pitfalls": [
+     "Most nurses in the Arab world are women, so you will hear مُمَرِّضَة far more often — a male nurse is مُمَرِّض.",
+     "Do not confuse it with مَرِيض (marīḍ, ill, a patient): same root, the other side of the bed."
+    ],
+    "subtleties": [
+     "The pattern mufaʿʿil (مُمَرِّض, مُعَلِّم) names someone who does something for others."
+    ]
+   }
+  },
+  {
+   "id": "ar:muhandis",
+   "lemma": "مُهَنْدِس",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.engineer",
+    "job.architect"
+   ],
+   "features": {
+    "root": "ه ن د س",
+    "pattern": "مُفَعْلِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُهَنْدِسُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مُهَنْدِسَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "muhandis",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "مُهَنْدِسٌ",
+    "N;NOM;PL;MASC;INDF": "مُهَنْدِسُونَ",
+    "N;NOM;DU;MASC;INDF": "مُهَنْدِسَانِ",
+    "N;NOM;SG;FEM;INDF": "مُهَنْدِسَةٌ",
+    "N;NOM;PL;FEM;INDF": "مُهَنْدِسَاتٌ",
+    "N;NOM;DU;FEM;INDF": "مُهَنْدِسَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْمُهَنْدِسُ",
+    "N;NOM;PL;MASC;DEF": "الْمُهَنْدِسُونَ",
+    "N;NOM;DU;MASC;DEF": "الْمُهَنْدِسَانِ",
+    "N;NOM;SG;FEM;DEF": "الْمُهَنْدِسَةُ",
+    "N;NOM;PL;FEM;DEF": "الْمُهَنْدِسَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْمُهَنْدِسَتَانِ",
+    "N;ACC;SG;MASC;INDF": "مُهَنْدِسًا",
+    "N;ACC;PL;MASC;INDF": "مُهَنْدِسِينَ",
+    "N;ACC;DU;MASC;INDF": "مُهَنْدِسَيْنِ",
+    "N;ACC;SG;FEM;INDF": "مُهَنْدِسَةً",
+    "N;ACC;PL;FEM;INDF": "مُهَنْدِسَاتٍ",
+    "N;ACC;DU;FEM;INDF": "مُهَنْدِسَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْمُهَنْدِسَ",
+    "N;ACC;PL;MASC;DEF": "الْمُهَنْدِسِينَ",
+    "N;ACC;DU;MASC;DEF": "الْمُهَنْدِسَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْمُهَنْدِسَةَ",
+    "N;ACC;PL;FEM;DEF": "الْمُهَنْدِسَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْمُهَنْدِسَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "مُهَنْدِسٍ",
+    "N;GEN;PL;MASC;INDF": "مُهَنْدِسِينَ",
+    "N;GEN;DU;MASC;INDF": "مُهَنْدِسَيْنِ",
+    "N;GEN;SG;FEM;INDF": "مُهَنْدِسَةٍ",
+    "N;GEN;PL;FEM;INDF": "مُهَنْدِسَاتٍ",
+    "N;GEN;DU;FEM;INDF": "مُهَنْدِسَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْمُهَنْدِسِ",
+    "N;GEN;PL;MASC;DEF": "الْمُهَنْدِسِينَ",
+    "N;GEN;DU;MASC;DEF": "الْمُهَنْدِسَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْمُهَنْدِسَةِ",
+    "N;GEN;PL;FEM;DEF": "الْمُهَنْدِسَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْمُهَنْدِسَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bridges, buildings and machines — a prestigious profession.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "engineer (feminine مُهَنْدِسَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.engineer"
+     },
+     {
+      "id": "s2",
+      "def": "architect; surveyor (older senses)",
+      "register": [
+       "dated"
+      ],
+      "concept": "job.architect"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَبِي مُهَنْدِسٌ.",
+      "tr": "My father is an engineer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ مُهَنْدِسَةٌ فِي شَرِكَةٍ كَبِيرَةٍ.",
+      "tr": "She is an engineer at a big company.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُهَنْدِسُونَ يَبْنُونَ جِسْرًا جَدِيدًا.",
+      "tr": "The engineers are building a new bridge.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "صَمَّمَ هٰذَا الْمَسْجِدَ مُهَنْدِسٌ مِنْ إِسْطَنْبُولَ.",
+      "tr": "An architect from Istanbul designed this mosque.",
+      "register": "dated",
+      "context": "architecture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُهَنْدِسٌ مَدَنِيٌّ",
+      "tr": "civil engineer"
+     },
+     {
+      "text": "مُهَنْدِسٌ مِعْمَارِيٌّ",
+      "tr": "architect"
+     },
+     {
+      "text": "كُلِّيَّةُ الْهَنْدَسَةِ",
+      "tr": "faculty of engineering"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "باشمهندس",
+      "register": "colloquial",
+      "nuance": "Egyptian honorific address to an engineer (from Turkish baş, “chief”)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ه ن د س (h n d s), from هَنْدَسَة (handasa, “geometry, architecture, engineering”), from earlier هَنْدَزَة, from هَنْدَاز, borrowed from Middle Persian handāz- (“to plan, reckon”) or handāzag (“measure”) (> Persian andâze) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish mühendis (engineer) is this Arabic word; its Persian source survives in Persian andâze, “measure”."
+    ],
+    "pitfalls": [
+     "Four root letters (ه ن د س): the plural is sound, مُهَنْدِسُونَ — no broken plural."
+    ],
+    "subtleties": [
+     "هَنْدَسَة is both “engineering” and “geometry”; Wiktionary also lists the older senses “geometer, architect, surveyor”."
+    ]
+   }
+  },
+  {
+   "id": "ar:saiq",
+   "lemma": "سَائِق",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.driver"
+   ],
+   "features": {
+    "root": "س و ق",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "سَائِقُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَائِقَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "sāʾiq",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "سَائِقٌ",
+    "N;NOM;PL;MASC;INDF": "سَائِقُونَ",
+    "N;NOM;DU;MASC;INDF": "سَائِقَانِ",
+    "N;NOM;SG;FEM;INDF": "سَائِقَةٌ",
+    "N;NOM;PL;FEM;INDF": "سَائِقَاتٌ",
+    "N;NOM;DU;FEM;INDF": "سَائِقَتَانِ",
+    "N;NOM;SG;MASC;DEF": "السَّائِقُ",
+    "N;NOM;PL;MASC;DEF": "السَّائِقُونَ",
+    "N;NOM;DU;MASC;DEF": "السَّائِقَانِ",
+    "N;NOM;SG;FEM;DEF": "السَّائِقَةُ",
+    "N;NOM;PL;FEM;DEF": "السَّائِقَاتُ",
+    "N;NOM;DU;FEM;DEF": "السَّائِقَتَانِ",
+    "N;ACC;SG;MASC;INDF": "سَائِقًا",
+    "N;ACC;PL;MASC;INDF": "سَائِقِينَ",
+    "N;ACC;DU;MASC;INDF": "سَائِقَيْنِ",
+    "N;ACC;SG;FEM;INDF": "سَائِقَةً",
+    "N;ACC;PL;FEM;INDF": "سَائِقَاتٍ",
+    "N;ACC;DU;FEM;INDF": "سَائِقَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "السَّائِقَ",
+    "N;ACC;PL;MASC;DEF": "السَّائِقِينَ",
+    "N;ACC;DU;MASC;DEF": "السَّائِقَيْنِ",
+    "N;ACC;SG;FEM;DEF": "السَّائِقَةَ",
+    "N;ACC;PL;FEM;DEF": "السَّائِقَاتِ",
+    "N;ACC;DU;FEM;DEF": "السَّائِقَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "سَائِقٍ",
+    "N;GEN;PL;MASC;INDF": "سَائِقِينَ",
+    "N;GEN;DU;MASC;INDF": "سَائِقَيْنِ",
+    "N;GEN;SG;FEM;INDF": "سَائِقَةٍ",
+    "N;GEN;PL;FEM;INDF": "سَائِقَاتٍ",
+    "N;GEN;DU;FEM;INDF": "سَائِقَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "السَّائِقِ",
+    "N;GEN;PL;MASC;DEF": "السَّائِقِينَ",
+    "N;GEN;DU;MASC;DEF": "السَّائِقَيْنِ",
+    "N;GEN;SG;FEM;DEF": "السَّائِقَةِ",
+    "N;GEN;PL;FEM;DEF": "السَّائِقَاتِ",
+    "N;GEN;DU;FEM;DEF": "السَّائِقَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Taxis, buses and long roads.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "driver (feminine سَائِقَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.driver"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُوَ سَائِقُ تَاكْسِي.",
+      "tr": "He is a taxi driver.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّائِقُ يَنْتَظِرُ أَمَامَ الْبَيْتِ.",
+      "tr": "The driver is waiting in front of the house.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "أَخِي سَائِقُ حَافِلَةٍ.",
+      "tr": "My brother is a bus driver.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَائِقُ تَاكْسِي",
+      "tr": "taxi driver"
+     },
+     {
+      "text": "سَائِقُ حَافِلَةٍ",
+      "tr": "bus driver"
+     },
+     {
+      "text": "رُخْصَةُ الْقِيَادَةِ",
+      "tr": "driving licence"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سواق",
+      "register": "colloquial",
+      "nuance": "the spoken word (sawwāq), above all in Egypt",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of سَاقَ (sāqa, “to drive”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "سَاقَ first meant driving animals before you; the verbal noun سَوْق is now also “driving (a car)” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The hamza sits on a yāʾ seat: سَائِق (sāʾiq); spoken Arabic often says sāyiq.",
+     "Wiktionary lists the plurals سَائِقُونَ, سَاقَة and سُوَّاق; the sound سَائِقُونَ is the safe one."
+    ],
+    "subtleties": [
+     "The fāʿil pattern makes “the one who does”: سَائِق (driver), طَالِب (student), بَائِع (seller)."
+    ]
+   }
+  },
+  {
+   "id": "ar:tabbakh",
+   "lemma": "طَبَّاخ",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.cook"
+   ],
+   "features": {
+    "root": "ط ب خ",
+    "pattern": "فَعَّال",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "طَبَّاخُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "طَبَّاخَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ṭabbāḫ",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "طَبَّاخٌ",
+    "N;NOM;PL;MASC;INDF": "طَبَّاخُونَ",
+    "N;NOM;DU;MASC;INDF": "طَبَّاخَانِ",
+    "N;NOM;SG;FEM;INDF": "طَبَّاخَةٌ",
+    "N;NOM;PL;FEM;INDF": "طَبَّاخَاتٌ",
+    "N;NOM;DU;FEM;INDF": "طَبَّاخَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الطَّبَّاخُ",
+    "N;NOM;PL;MASC;DEF": "الطَّبَّاخُونَ",
+    "N;NOM;DU;MASC;DEF": "الطَّبَّاخَانِ",
+    "N;NOM;SG;FEM;DEF": "الطَّبَّاخَةُ",
+    "N;NOM;PL;FEM;DEF": "الطَّبَّاخَاتُ",
+    "N;NOM;DU;FEM;DEF": "الطَّبَّاخَتَانِ",
+    "N;ACC;SG;MASC;INDF": "طَبَّاخًا",
+    "N;ACC;PL;MASC;INDF": "طَبَّاخِينَ",
+    "N;ACC;DU;MASC;INDF": "طَبَّاخَيْنِ",
+    "N;ACC;SG;FEM;INDF": "طَبَّاخَةً",
+    "N;ACC;PL;FEM;INDF": "طَبَّاخَاتٍ",
+    "N;ACC;DU;FEM;INDF": "طَبَّاخَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الطَّبَّاخَ",
+    "N;ACC;PL;MASC;DEF": "الطَّبَّاخِينَ",
+    "N;ACC;DU;MASC;DEF": "الطَّبَّاخَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الطَّبَّاخَةَ",
+    "N;ACC;PL;FEM;DEF": "الطَّبَّاخَاتِ",
+    "N;ACC;DU;FEM;DEF": "الطَّبَّاخَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "طَبَّاخٍ",
+    "N;GEN;PL;MASC;INDF": "طَبَّاخِينَ",
+    "N;GEN;DU;MASC;INDF": "طَبَّاخَيْنِ",
+    "N;GEN;SG;FEM;INDF": "طَبَّاخَةٍ",
+    "N;GEN;PL;FEM;INDF": "طَبَّاخَاتٍ",
+    "N;GEN;DU;FEM;INDF": "طَبَّاخَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الطَّبَّاخِ",
+    "N;GEN;PL;MASC;DEF": "الطَّبَّاخِينَ",
+    "N;GEN;DU;MASC;DEF": "الطَّبَّاخَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الطَّبَّاخَةِ",
+    "N;GEN;PL;FEM;DEF": "الطَّبَّاخَاتِ",
+    "N;GEN;DU;FEM;DEF": "الطَّبَّاخَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pots, spices and a busy kitchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cook, chef (feminine طَبَّاخَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَدِّي كَانَ طَبَّاخًا فِي مَطْعَمٍ.",
+      "tr": "My grandfather was a cook in a restaurant.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الطَّبَّاخُ يَطْبُخُ السَّمَكَ.",
+      "tr": "The cook is cooking the fish.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "أُمِّي طَبَّاخَةٌ مَاهِرَةٌ.",
+      "tr": "My mother is a skilled cook.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَبَّاخٌ مَاهِرٌ",
+      "tr": "a skilled cook"
+     },
+     {
+      "text": "رَئِيسُ الطَّبَّاخِينَ",
+      "tr": "head chef"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "طَاهٍ",
+      "register": "formal",
+      "nuance": "cook, chef — the formal written word"
+     },
+     {
+      "word": "شيف",
+      "register": "colloquial",
+      "nuance": "chef (from French), in restaurants and on television"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ط ب خ (ṭ b ḫ); cognate with Hebrew טַבָּח (tabbaḥ, “butcher, cook”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "faʿʿāl is the pattern of trades: طَبَّاخ (cook), خَبَّاز (baker), نَجَّار (carpenter), فَنَّان (artist).",
+     "Hebrew טַבָּח (tabach, cook) has the same root and the same pattern."
+    ],
+    "pitfalls": [
+     "The bāʾ is doubled (šadda): ṭabbāḫ; خ is the ch of German Bach."
+    ],
+    "subtleties": [
+     "At home one says أُمِّي تَطْبُخُ (my mother cooks); طَبَّاخ is the profession — or someone known as a good cook."
+    ]
+   }
+  },
+  {
+   "id": "ar:bai",
+   "lemma": "بَائِع",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.seller"
+   ],
+   "features": {
+    "root": "ب ي ع",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "بَاعَة",
+      "kind": "broken",
+      "pattern": "فَعَلَة",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "بَائِعُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَائِعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "bāʾiʿ",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "بَائِعٌ",
+    "N;NOM;PL;MASC;INDF": "بَاعَةٌ",
+    "N;NOM;DU;MASC;INDF": "بَائِعَانِ",
+    "N;NOM;SG;FEM;INDF": "بَائِعَةٌ",
+    "N;NOM;PL;FEM;INDF": "بَائِعَاتٌ",
+    "N;NOM;DU;FEM;INDF": "بَائِعَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْبَائِعُ",
+    "N;NOM;PL;MASC;DEF": "الْبَاعَةُ",
+    "N;NOM;DU;MASC;DEF": "الْبَائِعَانِ",
+    "N;NOM;SG;FEM;DEF": "الْبَائِعَةُ",
+    "N;NOM;PL;FEM;DEF": "الْبَائِعَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْبَائِعَتَانِ",
+    "N;ACC;SG;MASC;INDF": "بَائِعًا",
+    "N;ACC;PL;MASC;INDF": "بَاعَةً",
+    "N;ACC;DU;MASC;INDF": "بَائِعَيْنِ",
+    "N;ACC;SG;FEM;INDF": "بَائِعَةً",
+    "N;ACC;PL;FEM;INDF": "بَائِعَاتٍ",
+    "N;ACC;DU;FEM;INDF": "بَائِعَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْبَائِعَ",
+    "N;ACC;PL;MASC;DEF": "الْبَاعَةَ",
+    "N;ACC;DU;MASC;DEF": "الْبَائِعَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْبَائِعَةَ",
+    "N;ACC;PL;FEM;DEF": "الْبَائِعَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْبَائِعَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "بَائِعٍ",
+    "N;GEN;PL;MASC;INDF": "بَاعَةٍ",
+    "N;GEN;DU;MASC;INDF": "بَائِعَيْنِ",
+    "N;GEN;SG;FEM;INDF": "بَائِعَةٍ",
+    "N;GEN;PL;FEM;INDF": "بَائِعَاتٍ",
+    "N;GEN;DU;FEM;INDF": "بَائِعَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْبَائِعِ",
+    "N;GEN;PL;MASC;DEF": "الْبَاعَةِ",
+    "N;GEN;DU;MASC;DEF": "الْبَائِعَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْبَائِعَةِ",
+    "N;GEN;PL;FEM;DEF": "الْبَائِعَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْبَائِعَتَيْنِ"
+   },
+   "formsAlt": {
+    "N;NOM;PL;MASC;INDF": [
+     "بَائِعُونَ"
+    ],
+    "N;NOM;PL;MASC;DEF": [
+     "الْبَائِعُونَ"
+    ],
+    "N;ACC;PL;MASC;INDF": [
+     "بَائِعِينَ"
+    ],
+    "N;ACC;PL;MASC;DEF": [
+     "الْبَائِعِينَ"
+    ],
+    "N;GEN;PL;MASC;INDF": [
+     "بَائِعِينَ"
+    ],
+    "N;GEN;PL;MASC;DEF": [
+     "الْبَائِعِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses بَائِع as “seller”; the concept’s shop assistant / salesperson is the seller in a shop, and Wiktionary has no separate sense for it."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shops and market stalls: the person behind the counter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seller; shop assistant, salesperson (feminine بَائِعَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.seller"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَائِعُ فِي هٰذَا الْمَحَلِّ لَطِيفٌ.",
+      "tr": "The shop assistant in this shop is nice.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ بَائِعُ خُضَارٍ فِي السُّوقِ.",
+      "tr": "He sells vegetables at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "أُخْتِي بَائِعَةٌ فِي مَحَلِّ مَلَابِسَ.",
+      "tr": "My sister is a shop assistant in a clothes shop.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَائِعٌ مُتَجَوِّلٌ",
+      "tr": "street vendor"
+     },
+     {
+      "text": "بَائِعُ الْجَرَائِدِ",
+      "tr": "newspaper seller"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُوَظَّفُ مَبِيعَاتٍ",
+      "register": "formal",
+      "nuance": "sales employee — in companies and job adverts"
+     },
+     {
+      "word": "تَاجِر",
+      "register": "neutral",
+      "nuance": "merchant, trader — the owner of the business rather than the assistant"
+     }
+    ],
+    "etymology": {
+     "text": "Active participle of بَاعَ (bāʕa, “to sell”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The market pair: بَائِع (seller, from بَاعَ) and مُشْتَرٍ (buyer, from اِشْتَرَى — the verb of lesson 7)."
+    ],
+    "pitfalls": [
+     "Two masculine plurals: بَاعَة (common for vendors: الْبَاعَةُ) and the sound بَائِعُونَ; women: بَائِعَات.",
+     "The hamza sits on a yāʾ seat: بَائِع (bāʾiʿ)."
+    ],
+    "subtleties": [
+     "The shop owner is صَاحِبُ الْمَحَلِّ, the merchant تَاجِر; بَائِع is whoever sells to you."
+    ]
+   }
+  },
+  {
+   "id": "ar:amil",
+   "lemma": "عَامِل",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.worker",
+    "abstract.factor"
+   ],
+   "features": {
+    "root": "ع م ل",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "عُمَّال",
+      "kind": "broken",
+      "pattern": "فُعَّال",
+      "declension": "triptote",
+      "note": "workers",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "عَامِلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "employees, those working (الْعَامِلُونَ فِي الشَّرِكَةِ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "عَوَامِل",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "note": "factors",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "عَامِلَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ʿāmil",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "عَامِلٌ",
+    "N;NOM;PL;MASC;INDF": "عُمَّالٌ",
+    "N;NOM;DU;MASC;INDF": "عَامِلَانِ",
+    "N;NOM;SG;FEM;INDF": "عَامِلَةٌ",
+    "N;NOM;PL;FEM;INDF": "عَامِلَاتٌ",
+    "N;NOM;DU;FEM;INDF": "عَامِلَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْعَامِلُ",
+    "N;NOM;PL;MASC;DEF": "الْعُمَّالُ",
+    "N;NOM;DU;MASC;DEF": "الْعَامِلَانِ",
+    "N;NOM;SG;FEM;DEF": "الْعَامِلَةُ",
+    "N;NOM;PL;FEM;DEF": "الْعَامِلَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْعَامِلَتَانِ",
+    "N;ACC;SG;MASC;INDF": "عَامِلًا",
+    "N;ACC;PL;MASC;INDF": "عُمَّالًا",
+    "N;ACC;DU;MASC;INDF": "عَامِلَيْنِ",
+    "N;ACC;SG;FEM;INDF": "عَامِلَةً",
+    "N;ACC;PL;FEM;INDF": "عَامِلَاتٍ",
+    "N;ACC;DU;FEM;INDF": "عَامِلَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْعَامِلَ",
+    "N;ACC;PL;MASC;DEF": "الْعُمَّالَ",
+    "N;ACC;DU;MASC;DEF": "الْعَامِلَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْعَامِلَةَ",
+    "N;ACC;PL;FEM;DEF": "الْعَامِلَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْعَامِلَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "عَامِلٍ",
+    "N;GEN;PL;MASC;INDF": "عُمَّالٍ",
+    "N;GEN;DU;MASC;INDF": "عَامِلَيْنِ",
+    "N;GEN;SG;FEM;INDF": "عَامِلَةٍ",
+    "N;GEN;PL;FEM;INDF": "عَامِلَاتٍ",
+    "N;GEN;DU;FEM;INDF": "عَامِلَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْعَامِلِ",
+    "N;GEN;PL;MASC;DEF": "الْعُمَّالِ",
+    "N;GEN;DU;MASC;DEF": "الْعَامِلَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْعَامِلَةِ",
+    "N;GEN;PL;FEM;DEF": "الْعَامِلَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْعَامِلَتَيْنِ"
+   },
+   "formsAlt": {
+    "N;NOM;PL;MASC;INDF": [
+     "عَامِلُونَ"
+    ],
+    "N;NOM;PL;MASC;DEF": [
+     "الْعَامِلُونَ"
+    ],
+    "N;ACC;PL;MASC;INDF": [
+     "عَامِلِينَ"
+    ],
+    "N;ACC;PL;MASC;DEF": [
+     "الْعَامِلِينَ"
+    ],
+    "N;GEN;PL;MASC;INDF": [
+     "عَامِلِينَ"
+    ],
+    "N;GEN;PL;MASC;DEF": [
+     "الْعَامِلِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Factories, building sites and the 1st of May.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "worker, labourer; employee (feminine عَامِلَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.worker"
+     },
+     {
+      "id": "s2",
+      "def": "factor (also in mathematics; plural عَوَامِل)",
+      "register": [
+       "technical"
+      ],
+      "concept": "abstract.factor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَبِي عَامِلٌ فِي مَصْنَعٍ.",
+      "tr": "My father is a worker in a factory.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "الْعُمَّالُ يَبْنُونَ بَيْتًا جَدِيدًا.",
+      "tr": "The workers are building a new house.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ الْعُمَّالِ فِي الْأَوَّلِ مِنْ مَايُو.",
+      "tr": "Labour Day is on the first of May.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "الْوَقْتُ عَامِلٌ مُهِمٌّ.",
+      "tr": "Time is an important factor.",
+      "register": "technical",
+      "context": "business",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِيدُ الْعُمَّالِ",
+      "tr": "Labour Day"
+     },
+     {
+      "text": "عَامِلُ بِنَاءٍ",
+      "tr": "construction worker"
+     },
+     {
+      "text": "عَامِلَةُ نَظَافَةٍ",
+      "tr": "cleaner (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُوَظَّف",
+      "register": "neutral",
+      "nuance": "employee, office worker (white-collar)"
+     },
+     {
+      "word": "أَجِير",
+      "register": "dated",
+      "nuance": "hired hand, day labourer"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of عَمِلَ (ʕamila, “to do, to act, to work”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives عَمَل (work) — a place word of the next lesson; Turkish amele (labourer) comes from the Arabic plural عَمَلَة."
+    ],
+    "pitfalls": [
+     "“Workers” is usually the broken plural عُمَّال; عَوَامِل is the plural of the other عَامِل, “factor”."
+    ],
+    "subtleties": [
+     "عَامِل is manual or factory work; an office employee is مُوَظَّف."
+    ]
+   }
+  },
+  {
+   "id": "ar:muzari",
+   "lemma": "مُزَارِع",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.farmer"
+   ],
+   "features": {
+    "root": "ز ر ع",
+    "pattern": "مُفَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُزَارِعُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُزَارِعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "connotation and modernity",
+     "value": "farmer (neutral, modern)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "muzāriʿ",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "مُزَارِعٌ",
+    "N;NOM;PL;MASC;INDF": "مُزَارِعُونَ",
+    "N;NOM;DU;MASC;INDF": "مُزَارِعَانِ",
+    "N;NOM;SG;MASC;DEF": "الْمُزَارِعُ",
+    "N;NOM;PL;MASC;DEF": "الْمُزَارِعُونَ",
+    "N;NOM;DU;MASC;DEF": "الْمُزَارِعَانِ",
+    "N;ACC;SG;MASC;INDF": "مُزَارِعًا",
+    "N;ACC;PL;MASC;INDF": "مُزَارِعِينَ",
+    "N;ACC;DU;MASC;INDF": "مُزَارِعَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْمُزَارِعَ",
+    "N;ACC;PL;MASC;DEF": "الْمُزَارِعِينَ",
+    "N;ACC;DU;MASC;DEF": "الْمُزَارِعَيْنِ",
+    "N;GEN;SG;MASC;INDF": "مُزَارِعٍ",
+    "N;GEN;PL;MASC;INDF": "مُزَارِعِينَ",
+    "N;GEN;DU;MASC;INDF": "مُزَارِعَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْمُزَارِعِ",
+    "N;GEN;PL;MASC;DEF": "الْمُزَارِعِينَ",
+    "N;GEN;DU;MASC;DEF": "الْمُزَارِعَيْنِ",
+    "N;NOM;SG;FEM;INDF": "مُزَارِعَةٌ",
+    "N;ACC;SG;FEM;INDF": "مُزَارِعَةً",
+    "N;GEN;SG;FEM;INDF": "مُزَارِعَةٍ",
+    "N;NOM;SG;FEM;DEF": "الْمُزَارِعَةُ",
+    "N;ACC;SG;FEM;DEF": "الْمُزَارِعَةَ",
+    "N;GEN;SG;FEM;DEF": "الْمُزَارِعَةِ",
+    "N;NOM;PL;FEM;INDF": "مُزَارِعَاتٌ",
+    "N;ACC;PL;FEM;INDF": "مُزَارِعَاتٍ",
+    "N;GEN;PL;FEM;INDF": "مُزَارِعَاتٍ",
+    "N;NOM;PL;FEM;DEF": "الْمُزَارِعَاتُ",
+    "N;ACC;PL;FEM;DEF": "الْمُزَارِعَاتِ",
+    "N;GEN;PL;FEM;DEF": "الْمُزَارِعَاتِ",
+    "N;NOM;DU;FEM;INDF": "مُزَارِعَتَانِ",
+    "N;ACC;DU;FEM;INDF": "مُزَارِعَتَيْنِ",
+    "N;GEN;DU;FEM;INDF": "مُزَارِعَتَيْنِ",
+    "N;NOM;DU;FEM;DEF": "الْمُزَارِعَتَانِ",
+    "N;ACC;DU;FEM;DEF": "الْمُزَارِعَتَيْنِ",
+    "N;GEN;DU;FEM;DEF": "الْمُزَارِعَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fields, harvests and early mornings — the neutral, modern word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer (feminine مُزَارِعَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَدِّي مُزَارِعٌ فِي قَرْيَةٍ صَغِيرَةٍ.",
+      "tr": "My grandfather is a farmer in a small village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُزَارِعُونَ يَزْرَعُونَ الْقَمْحَ.",
+      "tr": "The farmers grow wheat.",
+      "register": "neutral",
+      "context": "agriculture",
+      "sense": "s1"
+     },
+     {
+      "text": "يَبِيعُ الْمُزَارِعُ الْخُضَارَ فِي السُّوقِ.",
+      "tr": "The farmer sells vegetables at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُزَارِعٌ صَغِيرٌ",
+      "tr": "smallholder"
+     },
+     {
+      "text": "مُزَارِعُو الْقَمْحِ",
+      "tr": "wheat farmers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فَلَّاح",
+      "register": "neutral",
+      "nuance": "farmer, peasant who works the land himself — traditional and rural (above all in Egypt)"
+     }
+    ],
+    "etymology": {
+     "text": "Occupational noun from the root ز ر ع (z r ʕ, “sowing”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root ز ر ع gives زَرَعَ (to sow, to plant), زِرَاعَة (agriculture) and مَزْرَعَة (farm); Hebrew זֶרַע (zera, seed) is a cognate."
+    ],
+    "pitfalls": [
+     "مُزَارِع (muzāriʿ, a farmer) vs مَزَارِع (mazāriʿ, farms — plural of مَزْرَعَة): one vowel makes the difference."
+    ],
+    "subtleties": [
+     "مُزَارِع is the neutral modern word (farm owner, agricultural worker); فَلَّاح evokes the traditional peasant.",
+     "Wiktionary gives no feminine; مُزَارِعَة (plural مُزَارِعَات) is the regular feminine used for women farmers."
+    ]
+   }
+  },
+  {
+   "id": "ar:fallah",
+   "lemma": "فَلَّاح",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.farmer"
+   ],
+   "features": {
+    "root": "ف ل ح",
+    "pattern": "فَعَّال",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "فَلَّاحُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فَلَّاحَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "connotation and modernity",
+     "value": "peasant, traditional farmer"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "fallāḥ",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "فَلَّاحٌ",
+    "N;NOM;PL;MASC;INDF": "فَلَّاحُونَ",
+    "N;NOM;DU;MASC;INDF": "فَلَّاحَانِ",
+    "N;NOM;SG;FEM;INDF": "فَلَّاحَةٌ",
+    "N;NOM;PL;FEM;INDF": "فَلَّاحَاتٌ",
+    "N;NOM;DU;FEM;INDF": "فَلَّاحَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْفَلَّاحُ",
+    "N;NOM;PL;MASC;DEF": "الْفَلَّاحُونَ",
+    "N;NOM;DU;MASC;DEF": "الْفَلَّاحَانِ",
+    "N;NOM;SG;FEM;DEF": "الْفَلَّاحَةُ",
+    "N;NOM;PL;FEM;DEF": "الْفَلَّاحَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْفَلَّاحَتَانِ",
+    "N;ACC;SG;MASC;INDF": "فَلَّاحًا",
+    "N;ACC;PL;MASC;INDF": "فَلَّاحِينَ",
+    "N;ACC;DU;MASC;INDF": "فَلَّاحَيْنِ",
+    "N;ACC;SG;FEM;INDF": "فَلَّاحَةً",
+    "N;ACC;PL;FEM;INDF": "فَلَّاحَاتٍ",
+    "N;ACC;DU;FEM;INDF": "فَلَّاحَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْفَلَّاحَ",
+    "N;ACC;PL;MASC;DEF": "الْفَلَّاحِينَ",
+    "N;ACC;DU;MASC;DEF": "الْفَلَّاحَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْفَلَّاحَةَ",
+    "N;ACC;PL;FEM;DEF": "الْفَلَّاحَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْفَلَّاحَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "فَلَّاحٍ",
+    "N;GEN;PL;MASC;INDF": "فَلَّاحِينَ",
+    "N;GEN;DU;MASC;INDF": "فَلَّاحَيْنِ",
+    "N;GEN;SG;FEM;INDF": "فَلَّاحَةٍ",
+    "N;GEN;PL;FEM;INDF": "فَلَّاحَاتٍ",
+    "N;GEN;DU;FEM;INDF": "فَلَّاحَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْفَلَّاحِ",
+    "N;GEN;PL;MASC;DEF": "الْفَلَّاحِينَ",
+    "N;GEN;DU;MASC;DEF": "الْفَلَّاحَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْفَلَّاحَةِ",
+    "N;GEN;PL;FEM;DEF": "الْفَلَّاحَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْفَلَّاحَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The peasant of the Nile valley and the village fields.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer, peasant (feminine فَلَّاحَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْفَلَّاحُ يَعْمَلُ فِي الْحَقْلِ مِنَ الصَّبَاحِ.",
+      "tr": "The farmer has been working in the field since the morning.",
+      "register": "neutral",
+      "context": "countryside",
+      "sense": "s1"
+     },
+     {
+      "text": "جَدِّي فَلَّاحٌ مِنْ قَرْيَةٍ فِي مِصْرَ.",
+      "tr": "My grandfather is a farmer from a village in Egypt.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْفَلَّاحُونَ يَبِيعُونَ الْخُضَارَ فِي السُّوقِ.",
+      "tr": "The farmers sell vegetables at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْفَلَّاحُ الْمِصْرِيُّ",
+      "tr": "the Egyptian peasant"
+     },
+     {
+      "text": "أَرْضُ الْفَلَّاحِ",
+      "tr": "the farmer’s land"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُزَارِع",
+      "register": "neutral",
+      "nuance": "farmer — the modern, neutral word"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ف ل ح (f l ḥ). The sense “farmer” is assumed to be borrowed from Aramaic pallāḥā (“worker; peasant”), since Aramaic speakers farmed while most Arabic speakers were nomads; فَلَحَ (“to plough”) would then come from the noun (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The call to prayer says حَيَّ عَلَى الْفَلَاحِ, “come to success”: فَلَاح (success) has the same letters, with a single l."
+    ],
+    "pitfalls": [
+     "فَلَّاح (fallāḥ, doubled l) = farmer; فَلَاح (falāḥ) = success, salvation.",
+     "In some contexts فَلَّاح can sound condescending (“peasant, yokel”); مُزَارِع is the safe neutral word."
+    ],
+    "subtleties": [
+     "Two words, one concept: مُزَارِع for farming as a profession, فَلَّاح for the traditional peasant — the profile of each says which."
+    ]
+   }
+  },
+  {
+   "id": "ar:shurti",
+   "lemma": "شُرْطِيّ",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.police"
+   ],
+   "features": {
+    "root": "ش ر ط",
+    "pattern": "فُعْلِيّ",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "شُرْطِيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شُرْطِيَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "šurṭī",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "شُرْطِيٌّ",
+    "N;NOM;PL;MASC;INDF": "شُرْطِيُّونَ",
+    "N;NOM;DU;MASC;INDF": "شُرْطِيَّانِ",
+    "N;NOM;SG;FEM;INDF": "شُرْطِيَّةٌ",
+    "N;NOM;PL;FEM;INDF": "شُرْطِيَّاتٌ",
+    "N;NOM;DU;FEM;INDF": "شُرْطِيَّتَانِ",
+    "N;NOM;SG;MASC;DEF": "الشُّرْطِيُّ",
+    "N;NOM;PL;MASC;DEF": "الشُّرْطِيُّونَ",
+    "N;NOM;DU;MASC;DEF": "الشُّرْطِيَّانِ",
+    "N;NOM;SG;FEM;DEF": "الشُّرْطِيَّةُ",
+    "N;NOM;PL;FEM;DEF": "الشُّرْطِيَّاتُ",
+    "N;NOM;DU;FEM;DEF": "الشُّرْطِيَّتَانِ",
+    "N;ACC;SG;MASC;INDF": "شُرْطِيًّا",
+    "N;ACC;PL;MASC;INDF": "شُرْطِيِّينَ",
+    "N;ACC;DU;MASC;INDF": "شُرْطِيَّيْنِ",
+    "N;ACC;SG;FEM;INDF": "شُرْطِيَّةً",
+    "N;ACC;PL;FEM;INDF": "شُرْطِيَّاتٍ",
+    "N;ACC;DU;FEM;INDF": "شُرْطِيَّتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الشُّرْطِيَّ",
+    "N;ACC;PL;MASC;DEF": "الشُّرْطِيِّينَ",
+    "N;ACC;DU;MASC;DEF": "الشُّرْطِيَّيْنِ",
+    "N;ACC;SG;FEM;DEF": "الشُّرْطِيَّةَ",
+    "N;ACC;PL;FEM;DEF": "الشُّرْطِيَّاتِ",
+    "N;ACC;DU;FEM;DEF": "الشُّرْطِيَّتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "شُرْطِيٍّ",
+    "N;GEN;PL;MASC;INDF": "شُرْطِيِّينَ",
+    "N;GEN;DU;MASC;INDF": "شُرْطِيَّيْنِ",
+    "N;GEN;SG;FEM;INDF": "شُرْطِيَّةٍ",
+    "N;GEN;PL;FEM;INDF": "شُرْطِيَّاتٍ",
+    "N;GEN;DU;FEM;INDF": "شُرْطِيَّتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الشُّرْطِيِّ",
+    "N;GEN;PL;MASC;DEF": "الشُّرْطِيِّينَ",
+    "N;GEN;DU;MASC;DEF": "الشُّرْطِيَّيْنِ",
+    "N;GEN;SG;FEM;DEF": "الشُّرْطِيَّةِ",
+    "N;GEN;PL;FEM;DEF": "الشُّرْطِيَّاتِ",
+    "N;GEN;DU;FEM;DEF": "الشُّرْطِيَّتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Uniforms, traffic and order in the streets.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "police officer, policeman (feminine شُرْطِيَّة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.police"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الشُّرْطِيُّ فِي الشَّارِعِ.",
+      "tr": "The police officer is in the street.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "اِسْأَلِ الشُّرْطِيَّ عَنِ الطَّرِيقِ.",
+      "tr": "Ask the policeman the way.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَخِي شُرْطِيٌّ فِي الْمَدِينَةِ.",
+      "tr": "My brother is a police officer in the city.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَجُلُ شُرْطَةٍ",
+      "tr": "policeman"
+     },
+     {
+      "text": "مَرْكَزُ الشُّرْطَةِ",
+      "tr": "police station"
+     },
+     {
+      "text": "شُرْطِيُّ الْمُرُورِ",
+      "tr": "traffic policeman"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَجُلُ شُرْطَةٍ",
+      "register": "neutral",
+      "nuance": "policeman (lit. “man of the police”) — very common, plural رِجَالُ الشُّرْطَةِ"
+     },
+     {
+      "word": "بوليس",
+      "register": "colloquial",
+      "nuance": "police, policeman (from French police), in Egypt and elsewhere"
+     }
+    ],
+    "etymology": {
+     "text": "From شُرْطَة (šurṭa, “police”) + the nisba suffix ـِيّ (-iyy) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The nisba ending -iyy makes “one belonging to”: شُرْطَة → شُرْطِيّ (policeman), like مِصْر → مِصْرِيّ (Egyptian)."
+    ],
+    "pitfalls": [
+     "The final yāʾ is doubled: شُرْطِيٌّ (šurṭiyyun), accusative شُرْطِيًّا.",
+     "Wiktionary gives two vowelings: šurṭiyy (شُرْطِيّ) and šuraṭiyy (شُرَطِيّ)."
+    ],
+    "subtleties": [
+     "The plural شُرْطِيُّونَ is correct, but people more often say رِجَالُ الشُّرْطَةِ (“men of the police”)."
+    ]
+   }
+  },
+  {
+   "id": "ar:muhami",
+   "lemma": "مُحَامٍ",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.lawyer"
+   ],
+   "features": {
+    "root": "ح م ي",
+    "pattern": "مُفَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُحَامُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُحَامِيَانِ",
+    "declension": "defective",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "muḥāmī",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "مُحَامٍ",
+    "N;NOM;PL;MASC;INDF": "مُحَامُونَ",
+    "N;NOM;DU;MASC;INDF": "مُحَامِيَانِ",
+    "N;NOM;SG;FEM;INDF": "مُحَامِيَةٌ",
+    "N;NOM;PL;FEM;INDF": "مُحَامِيَاتٌ",
+    "N;NOM;DU;FEM;INDF": "مُحَامِيَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْمُحَامِي",
+    "N;NOM;PL;MASC;DEF": "الْمُحَامُونَ",
+    "N;NOM;DU;MASC;DEF": "الْمُحَامِيَانِ",
+    "N;NOM;SG;FEM;DEF": "الْمُحَامِيَةُ",
+    "N;NOM;PL;FEM;DEF": "الْمُحَامِيَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْمُحَامِيَتَانِ",
+    "N;ACC;SG;MASC;INDF": "مُحَامِيًا",
+    "N;ACC;PL;MASC;INDF": "مُحَامِينَ",
+    "N;ACC;DU;MASC;INDF": "مُحَامِيَيْنِ",
+    "N;ACC;SG;FEM;INDF": "مُحَامِيَةً",
+    "N;ACC;PL;FEM;INDF": "مُحَامِيَاتٍ",
+    "N;ACC;DU;FEM;INDF": "مُحَامِيَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْمُحَامِيَ",
+    "N;ACC;PL;MASC;DEF": "الْمُحَامِينَ",
+    "N;ACC;DU;MASC;DEF": "الْمُحَامِيَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْمُحَامِيَةَ",
+    "N;ACC;PL;FEM;DEF": "الْمُحَامِيَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْمُحَامِيَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "مُحَامٍ",
+    "N;GEN;PL;MASC;INDF": "مُحَامِينَ",
+    "N;GEN;DU;MASC;INDF": "مُحَامِيَيْنِ",
+    "N;GEN;SG;FEM;INDF": "مُحَامِيَةٍ",
+    "N;GEN;PL;FEM;INDF": "مُحَامِيَاتٍ",
+    "N;GEN;DU;FEM;INDF": "مُحَامِيَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْمُحَامِي",
+    "N;GEN;PL;MASC;DEF": "الْمُحَامِينَ",
+    "N;GEN;DU;MASC;DEF": "الْمُحَامِيَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْمُحَامِيَةِ",
+    "N;GEN;PL;FEM;DEF": "الْمُحَامِيَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْمُحَامِيَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Courtrooms and contracts: the one who defends you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lawyer, attorney (feminine مُحَامِيَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.lawyer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُخْتِي مُحَامِيَةٌ.",
+      "tr": "My sister is a lawyer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُحَامِي فِي الْمَحْكَمَةِ الْيَوْمَ.",
+      "tr": "The lawyer is in court today.",
+      "register": "neutral",
+      "context": "law",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ مُحَامِيًا جَيِّدًا.",
+      "tr": "I need a good lawyer.",
+      "register": "neutral",
+      "context": "problems",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَكْتَبُ مُحَامَاةٍ",
+      "tr": "law firm"
+     },
+     {
+      "text": "نِقَابَةُ الْمُحَامِينَ",
+      "tr": "the bar association"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُسْتَشَارٌ قَانُونِيٌّ",
+      "register": "formal",
+      "nuance": "legal adviser"
+     },
+     {
+      "word": "وَكِيل",
+      "register": "neutral",
+      "nuance": "attorney, legal representative; also an agent in general"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of حَامَى (ḥāmā, “to defend”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the defender”: the same root ح م ي gives حِمَايَة (protection)."
+    ],
+    "pitfalls": [
+     "A defective noun: مُحَامٍ (muḥāmin) without the article, الْمُحَامِي (al-muḥāmī) with it, accusative مُحَامِيًا — the ī appears only when something follows it.",
+     "Spoken Arabic says muḥāmi everywhere, and you will often see the spelling مُحَامِي even without the article."
+    ],
+    "subtleties": [
+     "The feminine is regular: مُحَامِيَة, مُحَامِيَات; the masculine plural is sound: مُحَامُونَ / مُحَامِينَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:fannan",
+   "lemma": "فَنَّان",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "job.artist"
+   ],
+   "features": {
+    "root": "ف ن ن",
+    "pattern": "فَعَّال",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "فَنَّانُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فَنَّانَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "fannān",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "فَنَّانٌ",
+    "N;NOM;PL;MASC;INDF": "فَنَّانُونَ",
+    "N;NOM;DU;MASC;INDF": "فَنَّانَانِ",
+    "N;NOM;SG;FEM;INDF": "فَنَّانَةٌ",
+    "N;NOM;PL;FEM;INDF": "فَنَّانَاتٌ",
+    "N;NOM;DU;FEM;INDF": "فَنَّانَتَانِ",
+    "N;NOM;SG;MASC;DEF": "الْفَنَّانُ",
+    "N;NOM;PL;MASC;DEF": "الْفَنَّانُونَ",
+    "N;NOM;DU;MASC;DEF": "الْفَنَّانَانِ",
+    "N;NOM;SG;FEM;DEF": "الْفَنَّانَةُ",
+    "N;NOM;PL;FEM;DEF": "الْفَنَّانَاتُ",
+    "N;NOM;DU;FEM;DEF": "الْفَنَّانَتَانِ",
+    "N;ACC;SG;MASC;INDF": "فَنَّانًا",
+    "N;ACC;PL;MASC;INDF": "فَنَّانِينَ",
+    "N;ACC;DU;MASC;INDF": "فَنَّانَيْنِ",
+    "N;ACC;SG;FEM;INDF": "فَنَّانَةً",
+    "N;ACC;PL;FEM;INDF": "فَنَّانَاتٍ",
+    "N;ACC;DU;FEM;INDF": "فَنَّانَتَيْنِ",
+    "N;ACC;SG;MASC;DEF": "الْفَنَّانَ",
+    "N;ACC;PL;MASC;DEF": "الْفَنَّانِينَ",
+    "N;ACC;DU;MASC;DEF": "الْفَنَّانَيْنِ",
+    "N;ACC;SG;FEM;DEF": "الْفَنَّانَةَ",
+    "N;ACC;PL;FEM;DEF": "الْفَنَّانَاتِ",
+    "N;ACC;DU;FEM;DEF": "الْفَنَّانَتَيْنِ",
+    "N;GEN;SG;MASC;INDF": "فَنَّانٍ",
+    "N;GEN;PL;MASC;INDF": "فَنَّانِينَ",
+    "N;GEN;DU;MASC;INDF": "فَنَّانَيْنِ",
+    "N;GEN;SG;FEM;INDF": "فَنَّانَةٍ",
+    "N;GEN;PL;FEM;INDF": "فَنَّانَاتٍ",
+    "N;GEN;DU;FEM;INDF": "فَنَّانَتَيْنِ",
+    "N;GEN;SG;MASC;DEF": "الْفَنَّانِ",
+    "N;GEN;PL;MASC;DEF": "الْفَنَّانِينَ",
+    "N;GEN;DU;MASC;DEF": "الْفَنَّانَيْنِ",
+    "N;GEN;SG;FEM;DEF": "الْفَنَّانَةِ",
+    "N;GEN;PL;FEM;DEF": "الْفَنَّانَاتِ",
+    "N;GEN;DU;FEM;DEF": "الْفَنَّانَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Painters, singers and actors — the world of فَنّ, art.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artist — painter, musician, actor (feminine فَنَّانَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.artist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هِيَ فَنَّانَةٌ مَشْهُورَةٌ.",
+      "tr": "She is a famous artist.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "أَخِي فَنَّانٌ، يَرْسُمُ كُلَّ يَوْمٍ.",
+      "tr": "My brother is an artist; he paints every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تُحِبُّ أُمِّي هٰذَا الْفَنَّانَ.",
+      "tr": "My mother loves this singer.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فَنَّانٌ تَشْكِيلِيٌّ",
+      "tr": "visual artist (painter, sculptor)"
+     },
+     {
+      "text": "فَنَّانٌ مَشْهُورٌ",
+      "tr": "a famous artist"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَسَّام",
+      "register": "neutral",
+      "nuance": "painter, illustrator"
+     },
+     {
+      "word": "مُطْرِب",
+      "register": "neutral",
+      "nuance": "singer — though singers are very often called فَنَّان"
+     }
+    ],
+    "etymology": {
+     "text": "Occupational noun from فَنّ (fann, “art”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Arab world الْفَنَّانُ … very often introduces a singer or an actor; Turkish fen (science, technique) is the same word فَنّ."
+    ],
+    "pitfalls": [
+     "The n is doubled: فَنَّان (fannān) — the faʿʿāl pattern of professions."
+    ],
+    "subtleties": [
+     "فَنّ (art) has the plural فُنُون: كُلِّيَّةُ الْفُنُونِ الْجَمِيلَةِ (faculty of fine arts)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

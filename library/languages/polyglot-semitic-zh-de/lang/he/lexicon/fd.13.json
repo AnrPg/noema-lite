@@ -1,0 +1,3635 @@
+{
+ "lexemes": [
+  {
+   "id": "he:halach",
+   "lemma": "הָלַךְ",
+   "pos": "VERB",
+   "senses": [
+    "verb.go",
+    "verb.walk",
+    "verb.begoingto"
+   ],
+   "translit": "halach",
+   "features": {
+    "spelling": "הלך",
+    "root": "ה ל ך",
+    "binyan": "paal",
+    "rootClass": [
+     "irregular"
+    ],
+    "future": "יֵלֵךְ",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "verbalNoun": "הֲלִיכָה",
+    "meaningForms": [
+     {
+      "form": "הוֹלֵךְ, הוֹלֶכֶת, הוֹלְכִים, הוֹלְכוֹת",
+      "senses": [
+       "s4"
+      ],
+      "note": "only the present + an infinitive: הוֹלֵךְ לִקְנוֹת “is going to buy”"
+     }
+    ]
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "הָלַךְ",
+    "V;PRS;SG;MASC": "הוֹלֵךְ",
+    "V;PRS;SG;FEM": "הוֹלֶכֶת",
+    "V;PRS;PL;MASC": "הוֹלְכִים",
+    "V;PRS;PL;FEM": "הוֹלְכוֹת",
+    "V;NFIN": "לָלֶכֶת",
+    "V;IMP;2;SG;MASC": "לֵךְ",
+    "V;IMP;2;SG;FEM": "לְכִי",
+    "V;IMP;2;PL;MASC": "לְכוּ",
+    "V;FUT;2;SG;MASC": "תֵּלֵךְ",
+    "V;FUT;2;SG;FEM": "תֵּלְכִי",
+    "V;FUT;2;PL;MASC": "תֵּלְכוּ"
+   },
+   "note": "Going on foot, or going to a place in general (הוֹלֵךְ לָעֲבוֹדָה). A trip by bus, car, train or plane is נָסַע. The future and the imperative lose the ה: תֵּלֵךְ, לֵךְ; infinitive לָלֶכֶת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Walking through town, going to work, going home — the first verb of movement.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go (to a place, in general; within a town often on foot)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.go"
+     },
+     {
+      "id": "s2",
+      "def": "to walk, go on foot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.walk"
+     },
+     {
+      "id": "s3",
+      "def": "to leave, be off (אֲנִי הוֹלֵךְ “I’m off”)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s4",
+      "def": "to be going to (הוֹלֵךְ + infinitive: the near future)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.begoingto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי הוֹלֵךְ לָעֲבוֹדָה.",
+      "tr": "I (m.) am going to work.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "לְאָן אַתָּה הוֹלֵךְ?",
+      "tr": "Where are you (m.) going?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא הוֹלֶכֶת בָּרֶגֶל לְבֵית הַסֵּפֶר.",
+      "tr": "She walks to school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "אֲנַחְנוּ הוֹלְכִים בַּפַּארְק כָּל עֶרֶב.",
+      "tr": "We walk in the park every evening.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s2"
+     },
+     {
+      "text": "טוֹב, אֲנִי הוֹלֵךְ.",
+      "tr": "OK, I’m off.",
+      "register": "colloquial",
+      "context": "leaving",
+      "sense": "s3"
+     },
+     {
+      "text": "זֶה הוֹלֵךְ לִהְיוֹת יוֹם אָרֹךְ.",
+      "tr": "It’s going to be a long day.",
+      "register": "colloquial",
+      "context": "plans",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הָלַךְ בָּרֶגֶל",
+      "tr": "went on foot, walked"
+     },
+     {
+      "text": "הָלַךְ הַבַּיְתָה",
+      "tr": "went home"
+     },
+     {
+      "text": "הָלַךְ לִישֹׁן",
+      "tr": "went to sleep"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֵךְ תֵּדַע",
+      "tr": "go and know",
+      "kind": "colloquial",
+      "meaning": "who knows, you never can tell",
+      "register": "colloquial"
+     },
+     {
+      "text": "הָלַךְ לְאִבּוּד",
+      "tr": "went to loss",
+      "kind": "fixed expression",
+      "meaning": "got lost",
+      "register": "neutral"
+     },
+     {
+      "text": "הָלוֹךְ וָשׁוֹב",
+      "tr": "going and returning",
+      "kind": "fixed expression",
+      "meaning": "there and back, a round trip (a return ticket)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "צָעַד",
+      "register": "literary",
+      "nuance": "“to step, march” — measured steps; in the news and in writing (צָעַד לְאֹרֶךְ הַחוֹף “walked along the beach”)"
+     },
+     {
+      "word": "טִיֵּל",
+      "register": "neutral",
+      "nuance": "“to stroll, go for a walk; to travel for pleasure” — walking for its own sake"
+     },
+     {
+      "word": "נָסַע",
+      "register": "neutral",
+      "nuance": "not a synonym but the partner: going by bus, car, train or plane"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "בָּא",
+      "note": "to come"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *halak- (Wiktionary). The future, the imperative and the infinitive are built as if the root were י־ל־ך: תֵּלֵךְ, לֵךְ, לָלֶכֶת.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "הֲלָכָה, Jewish religious law, comes from the same root: “the way one walks”.",
+     "A pedestrian is a הוֹלֵךְ רֶגֶל — “one who goes by foot”."
+    ],
+    "pitfalls": [
+     "A trip by vehicle is נָסַע, not הָלַךְ: אֲנִי נוֹסֵעַ לְחֵיפָה “I am going to Haifa” (by bus, car, train). הָלַךְ is on foot, or going somewhere in town in general (הוֹלֵךְ לָעֲבוֹדָה).",
+     "The ה disappears in the future and the imperative: תֵּלֵךְ “you will go”, לֵךְ “go!” — and the infinitive is לָלֶכֶת."
+    ],
+    "subtleties": [
+     "הוֹלֵךְ + infinitive is the colloquial “going to”: הוּא הוֹלֵךְ לִקְנוֹת “he is going to buy”, exactly as in English.",
+     "Like German gehen (on foot) vs fahren (by vehicle): הָלַךְ vs נָסַע."
+    ]
+   }
+  },
+  {
+   "id": "he:ba",
+   "lemma": "בָּא",
+   "pos": "VERB",
+   "senses": [
+    "verb.come",
+    "part.lets"
+   ],
+   "translit": "ba",
+   "features": {
+    "spelling": "בא",
+    "root": "ב ו א",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-vav",
+     "lamed-alef"
+    ],
+    "future": "יָבוֹא",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in everyday use (בִּיאָה is a different, technical word; “arrival” is הַגָּעָה)"
+    },
+    "meaningForms": [
+     {
+      "form": "בּוֹא, בּוֹאִי, בּוֹאוּ",
+      "senses": [
+       "s3"
+      ],
+      "note": "only the imperative, + a verb in the future: בּוֹא נֵלֵךְ “let’s go”"
+     }
+    ]
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "בָּא",
+    "V;PRS;SG;MASC": "בָּא",
+    "V;PRS;SG;FEM": "בָּאָה",
+    "V;PRS;PL;MASC": "בָּאִים",
+    "V;PRS;PL;FEM": "בָּאוֹת",
+    "V;NFIN": "לָבוֹא",
+    "V;IMP;2;SG;MASC": "בּוֹא",
+    "V;IMP;2;SG;FEM": "בּוֹאִי",
+    "V;IMP;2;PL;MASC": "בּוֹאוּ",
+    "V;FUT;2;SG;MASC": "תָּבוֹא",
+    "V;FUT;2;SG;FEM": "תָּבוֹאִי",
+    "V;FUT;2;PL;MASC": "תָּבוֹאוּ"
+   },
+   "note": "A hollow verb: the past and the present look alike in the masculine singular (בָּא “came” / “comes”). Imperative בּוֹא, בּוֹאִי, בּוֹאוּ; infinitive לָבוֹא.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Someone on the way to you: guests, the bus, the holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.come"
+     },
+     {
+      "id": "s2",
+      "def": "to come from (a place: origin)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "let’s … (בּוֹא / בּוֹאוּ + a verb in the future)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "part.lets"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָאוֹטוֹבּוּס בָּא.",
+      "tr": "The bus is coming.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתָּה בָּא הַבַּיְתָה?",
+      "tr": "When are you (m.) coming home?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בּוֹאִי לַמִּטְבָּח!",
+      "tr": "Come to the kitchen! (to a woman)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם בָּאִים מֵחֵיפָה.",
+      "tr": "They come from Haifa.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "בּוֹאוּ נֵלֵךְ!",
+      "tr": "Let’s go!",
+      "register": "colloquial",
+      "context": "outing",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בָּא הַבַּיְתָה",
+      "tr": "comes home"
+     },
+     {
+      "text": "בָּא לְבַקֵּר",
+      "tr": "comes to visit"
+     },
+     {
+      "text": "בָּרוּךְ הַבָּא",
+      "tr": "welcome (“blessed is the one who comes”)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בָּרוּךְ הַבָּא",
+      "tr": "blessed is the one who comes",
+      "kind": "fixed expression",
+      "meaning": "welcome! (to a woman: בְּרוּכָה הַבָּאָה)",
+      "register": "neutral"
+     },
+     {
+      "text": "בָּא בַּיָּמִים",
+      "tr": "came into the days",
+      "kind": "idiom",
+      "meaning": "got on in years, was old",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "הִגִּיעַ",
+      "register": "neutral",
+      "nuance": "“to arrive, reach” — the end of the way, not the coming itself"
+     },
+     {
+      "word": "הוֹפִיעַ",
+      "register": "formal",
+      "nuance": "“to appear, show up”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הָלַךְ",
+      "note": "to go"
+     },
+     {
+      "word": "יָצָא",
+      "note": "to go out"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Phoenician 𐤁𐤀 (bʾ), Arabic بَاءَ (bāʔa, “to return, come back”) and Ge’ez ቦአ (boʾä, “to enter”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The sign at the entrance of a town or a home, בָּרוּךְ הַבָּא, uses this verb — like Greek καλώς ήρθες “well you came”.",
+     "The coming days, the next world: הָעוֹלָם הַבָּא “the world to come”."
+    ],
+    "pitfalls": [
+     "The masculine singular past and present are the same word: הוּא בָּא is “he comes” or “he came” — the context decides.",
+     "The imperative has a holam: בּוֹא, בּוֹאִי, בּוֹאוּ (not *בָּא!)."
+    ],
+    "subtleties": [
+     "בּוֹא / בּוֹאוּ + future verb is “let’s …”: בּוֹאוּ נֵלֵךְ “let’s go”, בּוֹא נֹאכַל “let’s eat”.",
+     "Coming from somewhere is בָּא מִ…: הִיא בָּאָה מֵהָעֲבוֹדָה “she is coming from work”."
+    ]
+   }
+  },
+  {
+   "id": "he:rats",
+   "lemma": "רָץ",
+   "pos": "VERB",
+   "senses": [
+    "verb.run",
+    "verb.run.election"
+   ],
+   "translit": "rats",
+   "features": {
+    "spelling": "רץ",
+    "root": "ר ו ץ",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-vav"
+    ],
+    "future": "יָרוּץ",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "רִיצָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "רָץ",
+    "V;PRS;SG;MASC": "רָץ",
+    "V;PRS;SG;FEM": "רָצָה",
+    "V;PRS;PL;MASC": "רָצִים",
+    "V;PRS;PL;FEM": "רָצוֹת",
+    "V;NFIN": "לָרוּץ",
+    "V;IMP;2;SG;MASC": "רוּץ",
+    "V;IMP;2;SG;FEM": "רוּצִי",
+    "V;IMP;2;PL;MASC": "רוּצוּ",
+    "V;FUT;2;SG;MASC": "תָּרוּץ",
+    "V;FUT;2;SG;FEM": "תָּרוּצִי",
+    "V;FUT;2;PL;MASC": "תָּרוּצוּ"
+   },
+   "note": "A hollow verb like בָּא: רָץ “ran / runs”, רָצָה “she ran / she runs”. Do not mix it up with רָצָה “wanted” (from רָצָה, lesson 7). Infinitive לָרוּץ, imperative רוּץ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Running for the bus, jogging on the beach, children in the park.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to run",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.run"
+     },
+     {
+      "id": "s2",
+      "def": "to hurry, rush somewhere (רָץ לַשּׁוּק “dashes to the market”)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to run (in an election), be a candidate",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.run.election"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים רָצִים בַּפַּארְק.",
+      "tr": "The children are running in the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא רָצָה כָּל בֹּקֶר.",
+      "tr": "She runs every morning.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי רָץ לַסּוּפֶּר וְחוֹזֵר.",
+      "tr": "I’ll dash to the supermarket and come back.",
+      "register": "colloquial",
+      "context": "errands",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא רָץ לְרָאשׁוּת הָעִיר.",
+      "tr": "He is running for mayor.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רָץ אַחֲרֵי הָאוֹטוֹבּוּס",
+      "tr": "runs after the bus"
+     },
+     {
+      "text": "רָץ מָרָתוֹן",
+      "tr": "runs a marathon"
+     },
+     {
+      "text": "רָץ מַהֵר",
+      "tr": "runs fast"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מִהֵר",
+      "register": "neutral",
+      "nuance": "“to hurry” — about haste, not about running"
+     },
+     {
+      "word": "דָּהַר",
+      "register": "literary",
+      "nuance": "“to gallop, race” — horses, or someone dashing"
+     }
+    ],
+    "etymology": {
+     "text": "A hollow root ר־ו־ץ. Compare Ge’ez ሮጸ (roṣä, “to run”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The chess bishop is a רָץ, “runner”, like German der Läufer (Wiktionary).",
+     "A runner (athlete) is a רָץ too: the same form is also a noun."
+    ],
+    "pitfalls": [
+     "רָצָה is “she runs” and “she ran” (from רָץ) and also “he wanted” (from רָצָה, lesson 7): the same letters and the same vowels — only the context (and the stress) tells them apart.",
+     "The imperative and the infinitive have וּ: רוּץ! לָרוּץ."
+    ],
+    "subtleties": [
+     "רָץ לְ… with a place is “dashes to”: רָץ לַבַּנְק “dashes to the bank”."
+    ]
+   }
+  },
+  {
+   "id": "he:nahag",
+   "lemma": "נָהַג",
+   "pos": "VERB",
+   "senses": [
+    "verb.drive",
+    "verb.usedto",
+    "verb.treat"
+   ],
+   "translit": "nahag",
+   "features": {
+    "spelling": "נהג",
+    "root": "נ ה ג",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יִנְהַג",
+    "governs": [
+     {
+      "prep": "be",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "נְהִיגָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "נָהַג",
+    "V;PRS;SG;MASC": "נוֹהֵג",
+    "V;PRS;SG;FEM": "נוֹהֶגֶת",
+    "V;PRS;PL;MASC": "נוֹהֲגִים",
+    "V;PRS;PL;FEM": "נוֹהֲגוֹת",
+    "V;NFIN": "לִנְהֹג",
+    "V;IMP;2;SG;MASC": "נְהַג",
+    "V;IMP;2;SG;FEM": "נַהֲגִי",
+    "V;IMP;2;PL;MASC": "נַהֲגוּ",
+    "V;FUT;2;SG;MASC": "תִּנְהַג",
+    "V;FUT;2;SG;FEM": "תִּנְהֲגִי",
+    "V;FUT;2;PL;MASC": "תִּנְהֲגוּ"
+   },
+   "plene": {
+    "V;NFIN": "לנהוג"
+   },
+   "note": "To drive (a vehicle); the driver is נֶהָג (lesson 10). The vehicle takes בְּ: נוֹהֵג בִּמְכוֹנִית. Infinitive לִנְהֹג (full spelling לנהוג).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "At the wheel: traffic on the motorway, a driving licence at seventeen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drive (a car, a bus …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drive"
+     },
+     {
+      "id": "s2",
+      "def": "to be in the habit of, usually do (נָהַג לְ… + infinitive)",
+      "register": [
+       "formal"
+      ],
+      "concept": "verb.usedto"
+     },
+     {
+      "id": "s3",
+      "def": "to behave, treat (someone) in a certain way (נָהַג בְּ…)",
+      "register": [
+       "formal"
+      ],
+      "concept": "verb.treat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַבָּא נוֹהֵג בִּמְכוֹנִית חֲדָשָׁה.",
+      "tr": "Dad drives a new car.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא נוֹהֶגֶת אוֹטוֹבּוּס בְּתֵל אָבִיב.",
+      "tr": "She drives a bus in Tel Aviv.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אַל תִּנְהַג מַהֵר!",
+      "tr": "Don’t drive fast!",
+      "register": "neutral",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא נָהַג לָשֶׁבֶת כָּאן כָּל בֹּקֶר.",
+      "tr": "He used to sit here every morning.",
+      "register": "formal",
+      "context": "habits",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא נָהַג בָּהּ בְּכָבוֹד.",
+      "tr": "He treated her with respect.",
+      "register": "formal",
+      "context": "manners",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נוֹהֵג בִּמְכוֹנִית",
+      "tr": "drives a car"
+     },
+     {
+      "text": "רִשְׁיוֹן נְהִיגָה",
+      "tr": "driving licence"
+     },
+     {
+      "text": "נוֹהֵג בִּזְהִירוּת",
+      "tr": "drives carefully"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הֵסִיעַ",
+      "register": "neutral",
+      "nuance": "“to drive (someone), give a lift”: הוּא מַסִּיעַ אוֹתִי לָעֲבוֹדָה — the passengers are the object"
+     },
+     {
+      "word": "נָסַע",
+      "register": "neutral",
+      "nuance": "“to go by vehicle” — also as a passenger; נָהַג is only the one at the wheel"
+     }
+    ],
+    "etymology": {
+     "text": "From the root נ־ה־ג; Wiktionary gives no further etymology. From the same root: נֶהָג “driver”, נְהִיגָה “driving”, מִנְהָג “custom” and הִתְנַהֲגוּת “behaviour” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives מִנְהָג “custom” and הִתְנַהֲגוּת “behaviour”: the old meaning is “to lead, guide” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The passenger does not נוֹהֵג: אֲנִי נוֹסֵעַ בַּמּוֹנִית “I’m going by taxi”, the driver נוֹהֵג.",
+     "The vehicle takes בְּ in careful speech (נוֹהֵג בִּמְכוֹנִית); in everyday speech also a plain object: נוֹהֵג אוֹטוֹבּוּס."
+    ],
+    "subtleties": [
+     "One root, three ideas: driving (נְהִיגָה), custom (מִנְהָג) and behaviour (הִתְנַהֲגוּת) — all about “leading” in a certain way."
+    ]
+   }
+  },
+  {
+   "id": "he:nasa",
+   "lemma": "נָסַע",
+   "pos": "VERB",
+   "senses": [
+    "verb.travel",
+    "verb.leave"
+   ],
+   "translit": "nasa",
+   "features": {
+    "spelling": "נסע",
+    "root": "נ ס ע",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-nun",
+     "lamed-guttural"
+    ],
+    "future": "יִסַּע",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "be",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "נְסִיעָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "נָסַע",
+    "V;PRS;SG;MASC": "נוֹסֵעַ",
+    "V;PRS;SG;FEM": "נוֹסַעַת",
+    "V;PRS;PL;MASC": "נוֹסְעִים",
+    "V;PRS;PL;FEM": "נוֹסְעוֹת",
+    "V;NFIN": "לִנְסֹעַ",
+    "V;IMP;2;SG;MASC": "סַע",
+    "V;IMP;2;SG;FEM": "סְעִי",
+    "V;IMP;2;PL;MASC": "סְעוּ",
+    "V;FUT;2;SG;MASC": "תִּסַּע",
+    "V;FUT;2;SG;FEM": "תִּסְּעִי",
+    "V;FUT;2;PL;MASC": "תִּסְּעוּ"
+   },
+   "plene": {
+    "V;NFIN": "לנסוע",
+    "V;FUT;2;SG;MASC": "תיסע",
+    "V;FUT;2;SG;FEM": "תיסעי",
+    "V;FUT;2;PL;MASC": "תיסעו"
+   },
+   "note": "To go by vehicle and to travel. The imperative and the future lose the נ: סַע!, תִּסַּע. Infinitive לִנְסֹעַ (full spelling לנסוע).",
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "how one leaves",
+     "value": "sets off by vehicle (the train is leaving)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Trips and journeys: the bus to Jerusalem, the flight abroad, the summer holiday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to travel, go (somewhere) by vehicle",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.travel"
+     },
+     {
+      "id": "s2",
+      "def": "to ride, go (in a bus, a car, a train) as a passenger",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to leave, set off (by vehicle): הָרַכֶּבֶת נוֹסַעַת “the train is leaving”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּקַּיִץ אֲנַחְנוּ נוֹסְעִים לְאֵילַת.",
+      "tr": "In the summer we travel to Eilat.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא נוֹסַעַת לְחוּ״ל.",
+      "tr": "She is travelling abroad.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי נוֹסֵעַ לָעֲבוֹדָה בְּאוֹטוֹבּוּס.",
+      "tr": "I (m.) go to work by bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s2"
+     },
+     {
+      "text": "סַע לְאַט!",
+      "tr": "Drive slowly! (to a man)",
+      "register": "neutral",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאוֹטוֹבּוּס נוֹסֵעַ עוֹד דַּקָּה.",
+      "tr": "The bus is leaving in a minute.",
+      "register": "colloquial",
+      "context": "transport",
+      "sense": "s3"
+     },
+     {
+      "text": "הָרַכֶּבֶת נוֹסַעַת בְּעוֹד חָמֵשׁ דַּקּוֹת!",
+      "tr": "The train leaves in five minutes!",
+      "register": "neutral",
+      "context": "station",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נוֹסֵעַ בְּאוֹטוֹבּוּס",
+      "tr": "goes by bus"
+     },
+     {
+      "text": "נוֹסֵעַ לְחוּ״ל",
+      "tr": "travels abroad"
+     },
+     {
+      "text": "נְסִיעָה טוֹבָה!",
+      "tr": "have a good trip!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "נְסִיעָה טוֹבָה!",
+      "tr": "a good journey!",
+      "kind": "fixed expression",
+      "meaning": "have a good trip!",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "טִיֵּל",
+      "register": "neutral",
+      "nuance": "“to travel for pleasure, tour, hike” — a trip to see places"
+     },
+     {
+      "word": "הִפְלִיג",
+      "register": "formal",
+      "nuance": "“to sail” — by ship"
+     },
+     {
+      "word": "טָס",
+      "register": "neutral",
+      "nuance": "“to fly” — by plane: אֲנִי טָס לְאַתּוּנָה"
+     }
+    ],
+    "etymology": {
+     "text": "From the root נ־ס־ע (Wiktionary); related to מַסָּע “journey” and הִסִּיעַ “to give a lift” (Wiktionary). The old sense is “to pull up (the tent pegs)” — to break camp and move on.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary’s oldest senses of נָסַע are “to pull up” and “to remove a camp”: travellers in the desert pulled up their tent pegs to move on.",
+     "A passenger is a נוֹסֵעַ, and “Dear passengers” on an Israeli train is נוֹסְעִים יְקָרִים."
+    ],
+    "pitfalls": [
+     "Going by bus, car or train is נָסַע even inside the town: אֲנִי נוֹסֵעַ לַשּׁוּק בְּאוֹטוֹבּוּס. הָלַךְ would mean you walk.",
+     "The נ falls away in the imperative and the future: סַע “go! drive!”, תִּסַּע “you will go”."
+    ],
+    "subtleties": [
+     "A passenger is a נוֹסֵעַ — the same word as “travelling”.",
+     "Like German fahren: a trip by any vehicle, as driver or passenger — while נָהַג is only the driver."
+    ]
+   }
+  },
+  {
+   "id": "he:chazar",
+   "lemma": "חָזַר",
+   "pos": "VERB",
+   "senses": [
+    "verb.return",
+    "verb.repeat",
+    "verb.becomereligious"
+   ],
+   "translit": "chazar",
+   "features": {
+    "spelling": "חזר",
+    "root": "ח ז ר",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-guttural"
+    ],
+    "future": "יַחֲזֹר",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "al",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "be",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "חֲזָרָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "חָזַר",
+    "V;PRS;SG;MASC": "חוֹזֵר",
+    "V;PRS;SG;FEM": "חוֹזֶרֶת",
+    "V;PRS;PL;MASC": "חוֹזְרִים",
+    "V;PRS;PL;FEM": "חוֹזְרוֹת",
+    "V;NFIN": "לַחֲזֹר",
+    "V;IMP;2;SG;MASC": "חֲזֹר",
+    "V;IMP;2;SG;FEM": "חִזְרִי",
+    "V;IMP;2;PL;MASC": "חִזְרוּ",
+    "V;FUT;2;SG;MASC": "תַּחְזֹר",
+    "V;FUT;2;SG;FEM": "תַּחְזְרִי",
+    "V;FUT;2;PL;MASC": "תַּחְזְרוּ"
+   },
+   "plene": {
+    "V;NFIN": "לחזור",
+    "V;IMP;2;SG;MASC": "חזור",
+    "V;FUT;2;SG;MASC": "תחזור"
+   },
+   "note": "To come back, go back: חוֹזֵר הַבַּיְתָה “comes home”, חוֹזֵר מֵהָעֲבוֹדָה. Also “to repeat”. Infinitive לַחֲזֹר (full spelling לחזור).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coming back home in the evening, returning from a trip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to return, come back, go back",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.return"
+     },
+     {
+      "id": "s2",
+      "def": "to repeat, do again (חָזַר עַל …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.repeat"
+     },
+     {
+      "id": "s3",
+      "def": "to become religious (חָזַר בִּתְשׁוּבָה)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.becomereligious"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַבָּא חוֹזֵר הַבַּיְתָה בָּעֶרֶב.",
+      "tr": "Dad comes home in the evening.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתְּ חוֹזֶרֶת מֵהָעֲבוֹדָה?",
+      "tr": "When do you (f.) come back from work?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "חֲזֹר עַל הַמִּשְׁפָּט, בְּבַקָּשָׁה.",
+      "tr": "Repeat the sentence, please.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא חָזַר בִּתְשׁוּבָה לִפְנֵי שָׁנָה.",
+      "tr": "He became religious a year ago.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חוֹזֵר הַבַּיְתָה",
+      "tr": "comes home"
+     },
+     {
+      "text": "חוֹזֵר מֵהָעֲבוֹדָה",
+      "tr": "comes back from work"
+     },
+     {
+      "text": "חוֹזֵר עַל הַשִּׁעוּר",
+      "tr": "goes over the lesson"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "חָזַר בּוֹ",
+      "tr": "returned in himself",
+      "kind": "idiom",
+      "meaning": "he took it back, changed his mind",
+      "register": "neutral"
+     },
+     {
+      "text": "חָזַר לְעַצְמוֹ",
+      "tr": "came back to himself",
+      "kind": "idiom",
+      "meaning": "he came to, recovered",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "שָׁב",
+      "register": "literary",
+      "nuance": "“to return” — the Biblical and poetic word (Wiktionary lists it as a synonym)"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ח־ז־ר; Wiktionary gives no further etymology. Derived: הָלוֹךְ וְחָזוֹר “there and back” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A school circular, a letter that “goes round”, is a חוֹזֵר — the same form of this verb."
+    ],
+    "pitfalls": [
+     "“To repeat” takes עַל: חוֹזֵר עַל הַמִּלָּה “repeats the word” — without עַל it means “comes back”.",
+     "Coming home is חוֹזֵר הַבַּיְתָה — no לְ before הַבַּיְתָה."
+    ],
+    "subtleties": [
+     "חוֹזֵר בִּתְשׁוּבָה “returns in repentance” means someone becomes religious; the opposite, חוֹזֵר בִּשְׁאֵלָה, someone who leaves religion."
+    ]
+   }
+  },
+  {
+   "id": "he:nichnas",
+   "lemma": "נִכְנַס",
+   "pos": "VERB",
+   "senses": [
+    "verb.enter",
+    "verb.bumpinto"
+   ],
+   "translit": "nichnas",
+   "features": {
+    "spelling": "נכנס",
+    "root": "כ נ ס",
+    "binyan": "nifal",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יִכָּנֵס",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "be",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "כְּנִיסָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "נִכְנַס",
+    "V;PRS;SG;MASC": "נִכְנָס",
+    "V;PRS;SG;FEM": "נִכְנֶסֶת",
+    "V;PRS;PL;MASC": "נִכְנָסִים",
+    "V;PRS;PL;FEM": "נִכְנָסוֹת",
+    "V;NFIN": "לְהִכָּנֵס",
+    "V;IMP;2;SG;MASC": "הִכָּנֵס",
+    "V;IMP;2;SG;FEM": "הִכָּנְסִי",
+    "V;IMP;2;PL;MASC": "הִכָּנְסוּ",
+    "V;FUT;2;SG;MASC": "תִּכָּנֵס",
+    "V;FUT;2;SG;FEM": "תִּכָּנְסִי",
+    "V;FUT;2;PL;MASC": "תִּכָּנְסוּ"
+   },
+   "plene": {
+    "V;NFIN": "להיכנס",
+    "V;IMP;2;SG;MASC": "היכנס",
+    "V;IMP;2;SG;FEM": "היכנסי",
+    "V;IMP;2;PL;MASC": "היכנסו",
+    "V;FUT;2;SG;MASC": "תיכנס",
+    "V;FUT;2;SG;FEM": "תיכנסי",
+    "V;FUT;2;PL;MASC": "תיכנסו"
+   },
+   "note": "“To go in, come in”, with לְ: נִכְנָס לַחֶדֶר “goes into the room”. A nif‘al verb: the imperative and the infinitive start with הִ: הִכָּנֵס!, לְהִכָּנֵס.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A door opens: come in, welcome!",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to enter, go in, come in (with לְ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.enter"
+     },
+     {
+      "id": "s2",
+      "def": "to get into (a state): נִכְנַס לְלַחַץ “got stressed”",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to bump into (בְּ…): נִכְנַס בַּקִּיר “drove into the wall”",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.bumpinto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמּוֹרָה נִכְנֶסֶת לַכִּתָּה.",
+      "tr": "The teacher (f.) comes into the classroom.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הִכָּנְסִי, בְּבַקָּשָׁה!",
+      "tr": "Come in, please! (to a woman)",
+      "register": "formal",
+      "context": "guests",
+      "sense": "s1"
+     },
+     {
+      "text": "תִּכָּנֵס, הַדֶּלֶת פְּתוּחָה.",
+      "tr": "Come in, the door is open. (to a man)",
+      "register": "colloquial",
+      "context": "guests",
+      "sense": "s1"
+     },
+     {
+      "text": "אַל תִּכָּנֵס לְלַחַץ.",
+      "tr": "Don’t get stressed.",
+      "register": "colloquial",
+      "context": "feelings",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא נִכְנַס בַּקִּיר עִם הַמְּכוֹנִית.",
+      "tr": "He drove into the wall with the car.",
+      "register": "colloquial",
+      "context": "accident",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נִכְנָס לַבַּיִת",
+      "tr": "goes into the house"
+     },
+     {
+      "text": "הַכְּנִיסָה אֲסוּרָה",
+      "tr": "no entry"
+     },
+     {
+      "text": "נִכְנַס לְתֹקֶף",
+      "tr": "came into force"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "נִכְנַס יַיִן יָצָא סוֹד",
+      "tr": "wine went in, a secret came out",
+      "kind": "proverb",
+      "meaning": "drink loosens the tongue (in vino veritas)",
+      "register": "neutral"
+     },
+     {
+      "text": "נִכְנַס לְתֹקֶף",
+      "tr": "came into force",
+      "kind": "fixed expression",
+      "meaning": "took effect (a law, a rule)",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בָּא",
+      "register": "neutral",
+      "nuance": "“to come” — Biblical בָּא אֶל can also mean “entered”"
+     },
+     {
+      "word": "חָדַר",
+      "register": "formal",
+      "nuance": "“to penetrate, get into, break in” — with force or with difficulty"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "יָצָא",
+      "note": "to go out"
+     }
+    ],
+    "etymology": {
+     "text": "Nif‘al of the root כ־נ־ס “to gather, bring in”; related to הִכְנִיס “to bring in, put in” (Wiktionary). The parliament, the כְּנֶסֶת, and כְּנִיסָה “entrance” come from the same root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Israeli parliament, the כְּנֶסֶת “assembly”, is from the same root כ־נ־ס.",
+     "The proverb נִכְנַס יַיִן יָצָא סוֹד uses both verbs of this lesson: wine “enters”, the secret “goes out”."
+    ],
+    "pitfalls": [
+     "Entering takes לְ: נִכְנַס לַחֶדֶר “entered the room” — not *נִכְנַס בַּחֶדֶר: with בְּ the verb means “to bump into, crash into” (נִכְנַס בַּקִּיר).",
+     "The nif‘al imperative starts with הִ and doubles the first root letter: הִכָּנֵס (hikanes), not *נִכְנַס."
+    ],
+    "subtleties": [
+     "In speech people say תִּכָּנֵס / תִּכָּנְסִי (the future) rather than the more formal הִכָּנֵס.",
+     "Signs say הַכְּנִיסָה אֲסוּרָה “entry is forbidden” or אֵין כְּנִיסָה “no entry”."
+    ]
+   }
+  },
+  {
+   "id": "he:yatsa",
+   "lemma": "יָצָא",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave",
+    "verb.turnout",
+    "verb.date"
+   ],
+   "translit": "yatsa",
+   "features": {
+    "spelling": "יצא",
+    "root": "י צ א",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-yod",
+     "lamed-alef"
+    ],
+    "future": "יֵצֵא",
+    "governs": [
+     {
+      "prep": "mi",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s3"
+      ]
+     },
+     {
+      "prep": "im",
+      "senses": [
+       "s4"
+      ]
+     }
+    ],
+    "verbalNoun": "יְצִיאָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "יָצָא",
+    "V;PRS;SG;MASC": "יוֹצֵא",
+    "V;PRS;SG;FEM": "יוֹצֵאת",
+    "V;PRS;PL;MASC": "יוֹצְאִים",
+    "V;PRS;PL;FEM": "יוֹצְאוֹת",
+    "V;NFIN": "לָצֵאת",
+    "V;IMP;2;SG;MASC": "צֵא",
+    "V;IMP;2;SG;FEM": "צְאִי",
+    "V;IMP;2;PL;MASC": "צְאוּ",
+    "V;FUT;2;SG;MASC": "תֵּצֵא",
+    "V;FUT;2;SG;FEM": "תֵּצְאִי",
+    "V;FUT;2;PL;MASC": "תֵּצְאוּ"
+   },
+   "note": "“To go out (of), leave (a place)”, with מִ: יוֹצֵא מֵהַבַּיִת. Leaving a person or a place behind for good is עָזַב. The י falls away: צֵא!, לָצֵאת.",
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "how one leaves",
+     "value": "goes out of a place (יָצָא מִ…)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Doors and exits: leaving the house in the morning, the train pulling out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go out (of), leave, exit (with מִ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "to depart (a train, a bus, a flight)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to come out, turn out, result (הָעוּגָה יָצְאָה טוֹבָה “the cake came out well”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.turnout"
+     },
+     {
+      "id": "s4",
+      "def": "to go out (in the evening), date (יוֹצֵא עִם …)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.date"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי יוֹצֵא מֵהַבַּיִת בַּבֹּקֶר.",
+      "tr": "I (m.) leave the house in the morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "צֵא מֵהַמִּטְבָּח!",
+      "tr": "Get out of the kitchen!",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ.",
+      "tr": "The train leaves at five.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s2"
+     },
+     {
+      "text": "הַכֹּל יָצָא טוֹב.",
+      "tr": "Everything came out well.",
+      "register": "neutral",
+      "context": "photos",
+      "sense": "s3"
+     },
+     {
+      "text": "הֵם יוֹצְאִים כְּבָר שָׁנָה.",
+      "tr": "They have been going out for a year.",
+      "register": "colloquial",
+      "context": "relationships",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יוֹצֵא מֵהַבַּיִת",
+      "tr": "leaves the house"
+     },
+     {
+      "text": "יָצָא לְחֻפְשָׁה",
+      "tr": "went on holiday"
+     },
+     {
+      "text": "יְצִיאַת חֵרוּם",
+      "tr": "emergency exit"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "יוֹצֵא דֹּפֶן",
+      "tr": "going out of the wall",
+      "kind": "idiom",
+      "meaning": "exceptional, out of the ordinary",
+      "register": "neutral"
+     },
+     {
+      "text": "יָצָא לוֹ מֵהָאַף",
+      "tr": "it came out of his nose",
+      "kind": "idiom",
+      "meaning": "he was fed up with it",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "עָזַב",
+      "register": "neutral",
+      "nuance": "“to leave (behind), quit, abandon” — for good, with אֶת: עָזַב אֶת הָעִיר"
+     },
+     {
+      "word": "הִסְתַּלֵּק",
+      "register": "colloquial",
+      "nuance": "“to clear off, slip away”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "נִכְנַס",
+      "note": "to enter"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Ge’ez ወፅአ (wäṣ́ʾä), Akkadian waṣûm and Ugaritic yṣả (Wiktionary). The first root letter (originally ו) falls away in the future, the imperative and the infinitive: תֵּצֵא, צֵא, לָצֵאת.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Exodus is יְצִיאַת מִצְרַיִם, the “going out of Egypt” (the book itself is called שְׁמוֹת “Names”).",
+     "Idiom: יוֹצֵא דֹּפֶן, literally “coming out of the side wall”, means “exceptional” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Going out of a place takes מִ: יוֹצֵא מֵהַחֶדֶר. “I am leaving Tel Aviv (moving away)” is עוֹזֵב אֶת תֵּל אָבִיב.",
+     "The imperative is just צֵא — the י is gone."
+    ],
+    "subtleties": [
+     "The exit is the יְצִיאָה, the way out; the entrance כְּנִיסָה — both on Israeli signs.",
+     "יָצָא also means “turned out”: יָצָא טוֹב “it came out well”."
+    ]
+   }
+  },
+  {
+   "id": "he:azav",
+   "lemma": "עָזַב",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave",
+    "verb.leavealone"
+   ],
+   "translit": "azav",
+   "features": {
+    "spelling": "עזב",
+    "root": "ע ז ב",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-guttural"
+    ],
+    "future": "יַעֲזֹב",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "עֲזִיבָה",
+    "meaningForms": [
+     {
+      "form": "עֲזֹב, עִזְבִי, עִזְבוּ",
+      "senses": [
+       "s2"
+      ],
+      "note": "mostly the imperative: עֲזֹב! “forget it, leave it!”"
+     }
+    ]
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "עָזַב",
+    "V;PRS;SG;MASC": "עוֹזֵב",
+    "V;PRS;SG;FEM": "עוֹזֶבֶת",
+    "V;PRS;PL;MASC": "עוֹזְבִים",
+    "V;PRS;PL;FEM": "עוֹזְבוֹת",
+    "V;NFIN": "לַעֲזֹב",
+    "V;IMP;2;SG;MASC": "עֲזֹב",
+    "V;IMP;2;SG;FEM": "עִזְבִי",
+    "V;IMP;2;PL;MASC": "עִזְבוּ",
+    "V;FUT;2;SG;MASC": "תַּעֲזֹב",
+    "V;FUT;2;SG;FEM": "תַּעַזְבִי",
+    "V;FUT;2;PL;MASC": "תַּעַזְבוּ"
+   },
+   "plene": {
+    "V;NFIN": "לעזוב",
+    "V;IMP;2;SG;MASC": "עזוב",
+    "V;FUT;2;SG;MASC": "תעזוב"
+   },
+   "note": "“To leave (behind)”: a place, a job, a person — for good or for a long time; the object takes אֶת: עָזַב אֶת הָעִיר. Simply going out of a room is יָצָא מִ…",
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "how one leaves",
+     "value": "leaves behind for good (עָזַב אֶת …)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Goodbyes: moving out, quitting a job, leaving someone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to leave (a place, a job, a person), depart from",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "to leave alone, let be (עֲזֹב! “forget it!”)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.leavealone"
+     },
+     {
+      "id": "s3",
+      "def": "to abandon",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵם עוֹזְבִים אֶת הָעִיר.",
+      "tr": "They are leaving the city.",
+      "register": "neutral",
+      "context": "moving",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא עוֹזֶבֶת אֶת הָעֲבוֹדָה.",
+      "tr": "She is leaving her job.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "עֲזֹב, זֶה לֹא חָשׁוּב.",
+      "tr": "Forget it, it’s not important.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "אַל תַּעַזְבִי אוֹתִי!",
+      "tr": "Don’t leave me! (to a woman)",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עָזַב אֶת הַבַּיִת",
+      "tr": "left home"
+     },
+     {
+      "text": "עָזַב אֶת הָעֲבוֹדָה",
+      "tr": "quit the job"
+     },
+     {
+      "text": "עֲזֹב אוֹתִי!",
+      "tr": "leave me alone!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עֲזֹב אוֹתְךָ",
+      "tr": "leave yourself",
+      "kind": "colloquial",
+      "meaning": "forget it, drop it",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יָצָא",
+      "register": "neutral",
+      "nuance": "“to go out (of a place)” — momentary, with מִ"
+     },
+     {
+      "word": "נָטַשׁ",
+      "register": "formal",
+      "nuance": "“to abandon, desert” — stronger and more negative"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "נִשְׁאַר",
+      "note": "to stay"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʕazab-; cognate with Arabic عَزَبَ (ʕazaba, “to be remote or absent”) and Akkadian ezēbum (“to leave”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The cognate Akkadian ezēbum also meant “to leave” — the word is older than Hebrew itself (Wiktionary)."
+    ],
+    "pitfalls": [
+     "עָזַב takes a direct object with אֶת: עוֹזֵב אֶת הַבַּיִת — no מִ. Going out of a room for a moment is יָצָא מֵהַחֶדֶר.",
+     "Colloquial עֲזֹב! (to a man) / עִזְבִי! (to a woman) is “forget it, never mind”, not “leave!”."
+    ],
+    "subtleties": [
+     "Arabic عَزَب “unmarried” (a bachelor, “left alone”) comes from the same Semitic root (Wiktionary’s cognate عَزَبَ “to be remote or absent”)."
+    ]
+   }
+  },
+  {
+   "id": "he:higia",
+   "lemma": "הִגִּיעַ",
+   "pos": "VERB",
+   "senses": [
+    "verb.arrive",
+    "verb.deserve"
+   ],
+   "translit": "higia",
+   "features": {
+    "spelling": "הגיע",
+    "root": "נ ג ע",
+    "binyan": "hifil",
+    "rootClass": [
+     "pe-nun",
+     "lamed-guttural"
+    ],
+    "future": "יַגִּיעַ",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "הַגָּעָה",
+    "meaningForms": [
+     {
+      "form": "מַגִּיעַ",
+      "senses": [
+       "s2"
+      ],
+      "note": "mostly the impersonal present: מַגִּיעַ לְךָ “you deserve it”; past הִגִּיעַ לוֹ"
+     }
+    ]
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "הִגִּיעַ",
+    "V;PRS;SG;MASC": "מַגִּיעַ",
+    "V;PRS;SG;FEM": "מַגִּיעָה",
+    "V;PRS;PL;MASC": "מַגִּיעִים",
+    "V;PRS;PL;FEM": "מַגִּיעוֹת",
+    "V;NFIN": "לְהַגִּיעַ",
+    "V;IMP;2;SG;MASC": "הַגַּע",
+    "V;IMP;2;SG;FEM": "הַגִּיעִי",
+    "V;IMP;2;PL;MASC": "הַגִּיעוּ",
+    "V;FUT;2;SG;MASC": "תַּגִּיעַ",
+    "V;FUT;2;SG;FEM": "תַּגִּיעִי",
+    "V;FUT;2;PL;MASC": "תַּגִּיעוּ"
+   },
+   "note": "To arrive, reach; the destination takes לְ: מַגִּיעַ לַתַּחֲנָה. A hif‘il verb: present מַגִּיעַ, imperative הַגַּע (rare: people say תַּגִּיעַ).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The end of the way: the bus arrives, the guests are here.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to arrive, get to, reach (with לְ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.arrive"
+     },
+     {
+      "id": "s2",
+      "def": "to be due, deserve (מַגִּיעַ לְ… “… deserves”)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.deserve"
+     },
+     {
+      "id": "s3",
+      "def": "to come from (origin): מַגִּיעַ מִ…",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָאוֹטוֹבּוּס מַגִּיעַ לַתַּחֲנָה.",
+      "tr": "The bus is arriving at the stop.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתֶּם מַגִּיעִים?",
+      "tr": "When are you (pl.) arriving?",
+      "register": "neutral",
+      "context": "guests",
+      "sense": "s1"
+     },
+     {
+      "text": "תַּגִּיעַ מֻקְדָּם!",
+      "tr": "Come early! (to a man, colloquial)",
+      "register": "colloquial",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "מַגִּיעַ לָהּ!",
+      "tr": "She deserves it!",
+      "register": "colloquial",
+      "context": "praise",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַגִּיעַ לַבַּיִת",
+      "tr": "gets home"
+     },
+     {
+      "text": "מַגִּיעַ בַּזְּמַן",
+      "tr": "arrives on time"
+     },
+     {
+      "text": "מַגִּיעַ לְךָ",
+      "tr": "you deserve it"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מַגִּיעַ לְךָ",
+      "tr": "it reaches you",
+      "kind": "colloquial",
+      "meaning": "you deserve it (good or bad)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בָּא",
+      "register": "neutral",
+      "nuance": "“to come” — the movement; הִגִּיעַ is the arrival"
+     },
+     {
+      "word": "נָחַת",
+      "register": "neutral",
+      "nuance": "“to land” — a plane arriving: הַמָּטוֹס נָחַת"
+     }
+    ],
+    "etymology": {
+     "text": "Hif‘il of the root נ־ג־ע “to touch”: to arrive is “to make touch, reach”. Wiktionary gives no further etymology; from the same root נָגַע “touched”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root נ־ג־ע means “to touch”: arriving is “touching” the place — and מַגָּע is “contact”."
+    ],
+    "pitfalls": [
+     "The destination takes לְ, not בְּ: מַגִּיעַ לַתַּחֲנָה “arrives at the stop” (German: kommt an der Haltestelle an — Hebrew says “arrives to”).",
+     "The נ of the root is hidden in a dagesh: הִגִּיעַ, מַגִּיעַ — look for נ־ג־ע."
+    ],
+    "subtleties": [
+     "מַגִּיעַ לְךָ “you deserve it” — said in praise and in reproach.",
+     "The imperative הַגַּע is rare and formal; in speech say תַּגִּיעַ / תַּגִּיעִי."
+    ]
+   }
+  },
+  {
+   "id": "he:nishar",
+   "lemma": "נִשְׁאַר",
+   "pos": "VERB",
+   "senses": [
+    "verb.stay"
+   ],
+   "translit": "nish'ar",
+   "features": {
+    "spelling": "נשאר",
+    "root": "שׁ א ר",
+    "binyan": "nifal",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יִשָּׁאֵר",
+    "governs": [
+     {
+      "prep": "be",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "הִשָּׁאֲרוּת",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "נִשְׁאַר",
+    "V;PRS;SG;MASC": "נִשְׁאָר",
+    "V;PRS;SG;FEM": "נִשְׁאֶרֶת",
+    "V;PRS;PL;MASC": "נִשְׁאָרִים",
+    "V;PRS;PL;FEM": "נִשְׁאָרוֹת",
+    "V;NFIN": "לְהִשָּׁאֵר",
+    "V;IMP;2;SG;MASC": "הִשָּׁאֵר",
+    "V;IMP;2;SG;FEM": "הִשָּׁאֲרִי",
+    "V;IMP;2;PL;MASC": "הִשָּׁאֲרוּ",
+    "V;FUT;2;SG;MASC": "תִּשָּׁאֵר",
+    "V;FUT;2;SG;FEM": "תִּשָּׁאֲרִי",
+    "V;FUT;2;PL;MASC": "תִּשָּׁאֲרוּ"
+   },
+   "plene": {
+    "V;NFIN": "להישאר",
+    "V;IMP;2;SG;MASC": "הישאר",
+    "V;IMP;2;SG;FEM": "הישארי",
+    "V;IMP;2;PL;MASC": "הישארו",
+    "V;FUT;2;SG;MASC": "תישאר",
+    "V;FUT;2;SG;FEM": "תישארי",
+    "V;FUT;2;PL;MASC": "תישארו"
+   },
+   "note": "To stay, remain; the place takes בְּ: נִשְׁאָר בַּבַּיִת. Also “to be left (over)”. Imperative הִשָּׁאֵר, infinitive לְהִשָּׁאֵר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Staying at home on a rainy day; what is left on the plate.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to stay, remain (somewhere)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.stay"
+     },
+     {
+      "id": "s2",
+      "def": "to be left (over)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיּוֹם אֲנִי נִשְׁאָר בַּבַּיִת.",
+      "tr": "Today I (m.) am staying at home.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הִשָּׁאֲרִי פֹּה!",
+      "tr": "Stay here! (to a woman)",
+      "register": "neutral",
+      "context": "instructions",
+      "sense": "s1"
+     },
+     {
+      "text": "לֹא נִשְׁאָר לֶחֶם.",
+      "tr": "There’s no bread left.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נִשְׁאָר בַּבַּיִת",
+      "tr": "stays at home"
+     },
+     {
+      "text": "נִשְׁאָר לִישֹׁן",
+      "tr": "stays the night"
+     },
+     {
+      "text": "נִשְׁאָר בְּקֶשֶׁר",
+      "tr": "stays in touch"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בֵּין הַשְּׁאָר",
+      "tr": "among the rest",
+      "kind": "fixed expression",
+      "meaning": "among other things",
+      "register": "neutral"
+     },
+     {
+      "text": "נִשְׁאַר בַּחַיִּים",
+      "tr": "remained among the living",
+      "kind": "fixed expression",
+      "meaning": "survived",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "שָׁהָה",
+      "register": "formal",
+      "nuance": "“to stay, sojourn” — formal, about a period of time"
+     },
+     {
+      "word": "נִשְׁאַר עַל כַּנּוֹ",
+      "register": "formal",
+      "nuance": "“remained in place, unchanged”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "עָזַב",
+      "note": "to leave"
+     },
+     {
+      "word": "יָצָא",
+      "note": "to go out"
+     }
+    ],
+    "etymology": {
+     "text": "Nif‘al of the root שׁ־א־ר “remain”; Wiktionary gives no further etymology. From the same root: שְׁאָר “remainder, rest” (בֵּין הַשְּׁאָר “among other things”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The “remnant” of Israel in the prophets is שְׁאָר / שְׁאֵרִית — the same root."
+    ],
+    "pitfalls": [
+     "The place takes בְּ: נִשְׁאָר בַּבַּיִת “stays at home” (no movement, so no לְ).",
+     "The nif‘al imperative and infinitive start with הִ and double the ש: הִשָּׁאֵר, לְהִשָּׁאֵר."
+    ],
+    "subtleties": [
+     "“To be left” has the thing as its subject: נִשְׁאַר לֶחֶם “bread is left”, לֹא נִשְׁאַר כְּלוּם “nothing is left”."
+    ]
+   }
+  },
+  {
+   "id": "he:chika",
+   "lemma": "חִכָּה",
+   "pos": "VERB",
+   "senses": [
+    "verb.wait",
+    "verb.lookforward"
+   ],
+   "translit": "chika",
+   "features": {
+    "spelling": "חיכה",
+    "root": "ח כ ה",
+    "binyan": "piel",
+    "rootClass": [
+     "lamed-he",
+     "pe-guttural"
+    ],
+    "future": "יְחַכֶּה",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in everyday use (חִכּוּי is rare); “waiting” is הַמְתָּנָה, from הִמְתִּין"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "חִכָּה",
+    "V;PRS;SG;MASC": "מְחַכֶּה",
+    "V;PRS;SG;FEM": "מְחַכָּה",
+    "V;PRS;PL;MASC": "מְחַכִּים",
+    "V;PRS;PL;FEM": "מְחַכּוֹת",
+    "V;NFIN": "לְחַכּוֹת",
+    "V;IMP;2;SG;MASC": "חַכֵּה",
+    "V;IMP;2;SG;FEM": "חַכִּי",
+    "V;IMP;2;PL;MASC": "חַכּוּ",
+    "V;FUT;2;SG;MASC": "תְּחַכֶּה",
+    "V;FUT;2;SG;FEM": "תְּחַכִּי",
+    "V;FUT;2;PL;MASC": "תְּחַכּוּ"
+   },
+   "plene": {
+    "V;PST;3;SG;MASC": "חיכה"
+   },
+   "note": "To wait; what you wait for takes לְ: מְחַכֶּה לָאוֹטוֹבּוּס “waits for the bus”. A pi‘el verb: present מְחַכֶּה, imperative חַכֵּה, infinitive לְחַכּוֹת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bus stops, queues, “one moment!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wait, wait for (with לְ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wait"
+     },
+     {
+      "id": "s2",
+      "def": "to look forward to (מְחַכֶּה לְ… “can’t wait for …”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.lookforward"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְחַכֶּה לָאוֹטוֹבּוּס.",
+      "tr": "I (m.) am waiting for the bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "חַכֵּה רֶגַע!",
+      "tr": "Wait a moment! (to a man)",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים מְחַכִּים לַחֻפְשָׁה.",
+      "tr": "The children are looking forward to the holiday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְחַכֶּה לָאוֹטוֹבּוּס",
+      "tr": "waits for the bus"
+     },
+     {
+      "text": "חַכֵּה רֶגַע",
+      "tr": "wait a moment"
+     },
+     {
+      "text": "מְחַכֶּה בַּתּוֹר",
+      "tr": "waits in the queue"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "חַכֵּה וְתִרְאֶה",
+      "tr": "wait and you will see",
+      "kind": "saying",
+      "meaning": "wait and see",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "הִמְתִּין",
+      "register": "formal",
+      "nuance": "“to wait” — formal; on the phone: נָא לְהַמְתִּין “please hold” (Wiktionary lists it as a synonym)"
+     }
+    ],
+    "etymology": {
+     "text": "Pi‘el of the root ח־כ־ה; Wiktionary gives no further etymology and lists הִמְתִּין as its synonym.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The recorded voice on Israeli phone lines says נָא לְהַמְתִּין — the formal partner of חִכָּה."
+    ],
+    "pitfalls": [
+     "What you wait for takes לְ (not בִּשְׁבִיל): מְחַכֶּה לְאִמָּא “waiting for Mum”, לָאוֹטוֹבּוּס “for the bus”.",
+     "The ending -ֶה of the masculine present becomes -ָה in the feminine: מְחַכֶּה (m.) / מְחַכָּה (f.)."
+    ],
+    "subtleties": [
+     "In speech the command is mostly the future: תְּחַכֶּה רֶגַע, תְּחַכִּי רֶגַע; חַכֵּה! is shorter and sharper.",
+     "אֲנִי מְחַכֶּה לְ… also means “I’m looking forward to …”."
+    ]
+   }
+  },
+  {
+   "id": "he:otobus",
+   "lemma": "אוֹטוֹבּוּס",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bus"
+   ],
+   "gender": "MASC",
+   "translit": "otobus",
+   "features": {
+    "spelling": "אוטובוס",
+    "root": {
+     "none": "a loanword (an internationalism, from French autobus): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אוֹטוֹבּוּסִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אוֹטוֹבּוּס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אוֹטוֹבּוּסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אוֹטוֹבּוּס",
+    "N;SG;DEF": "הָאוֹטוֹבּוּס",
+    "N;PL;INDF": "אוֹטוֹבּוּסִים",
+    "N;PL;DEF": "הָאוֹטוֹבּוּסִים",
+    "N;SG;DEF;PFX": "אוֹטוֹבּוּס",
+    "N;SG;CONST": "אוֹטוֹבּוּס",
+    "N;PL;CONST": "אוֹטוֹבּוּסֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The green and red buses of Israeli towns, the long ride to Eilat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bus",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bus"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי נוֹסֵעַ לָעֲבוֹדָה בְּאוֹטוֹבּוּס.",
+      "tr": "I (m.) go to work by bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאוֹטוֹבּוּס מַגִּיעַ בְּעוֹד חָמֵשׁ דַּקּוֹת.",
+      "tr": "The bus is coming in five minutes.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיזֶה אוֹטוֹבּוּס נוֹסֵעַ לַתַּחֲנָה הַמֶּרְכָּזִית?",
+      "tr": "Which bus goes to the central station?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּחֲנַת אוֹטוֹבּוּס",
+      "tr": "bus stop"
+     },
+     {
+      "text": "נֶהָג אוֹטוֹבּוּס",
+      "tr": "bus driver"
+     },
+     {
+      "text": "עוֹלֶה עַל הָאוֹטוֹבּוּס",
+      "tr": "gets on the bus"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הַסָּעָה",
+      "register": "neutral",
+      "nuance": "“a shuttle, transport” — a bus hired to take a group"
+     }
+    ],
+    "etymology": {
+     "text": "An internationalism, from French autobus, coined in Paris in 1907 from “omnibus automobile”; compare Arabic أُتُوبُوس (ʔutūbūs) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek λεωφορείο, Turkish otobüs, Arabic أُتُوبِيس / أُتُوبُوس and Hebrew אוֹטוֹבּוּס: three of them borrowed the French autobus."
+    ],
+    "pitfalls": [
+     "You get “on” a bus with עָלָה עַל: עוֹלֶה עַל הָאוֹטוֹבּוּס; you get off with יָרַד מִ: יוֹרֵד מֵהָאוֹטוֹבּוּס.",
+     "Stress on the first syllable: ótobus."
+    ],
+    "subtleties": [
+     "Travelling by bus is נוֹסֵעַ בְּאוֹטוֹבּוּס (also בָּאוֹטוֹבּוּס) — never הוֹלֵךְ."
+    ]
+   }
+  },
+  {
+   "id": "he:rakevet",
+   "lemma": "רַכֶּבֶת",
+   "pos": "NOUN",
+   "senses": [
+    "tr.train"
+   ],
+   "gender": "FEM",
+   "translit": "rakevet",
+   "features": {
+    "spelling": "רכבת",
+    "root": "ר כ ב",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "רַכָּבוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רַכֶּבֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רַכְּבוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "רַכֶּבֶת",
+    "N;SG;DEF": "הָרַכֶּבֶת",
+    "N;PL;INDF": "רַכָּבוֹת",
+    "N;PL;DEF": "הָרַכָּבוֹת",
+    "N;SG;DEF;PFX": "רַכֶּבֶת",
+    "N;SG;CONST": "רַכֶּבֶת",
+    "N;PL;CONST": "רַכְּבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The coastal train from Haifa to Tel Aviv, the fast line to Jerusalem.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "train",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.train"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ.",
+      "tr": "The train leaves at five.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ נוֹסְעִים לְחֵיפָה בָּרַכֶּבֶת.",
+      "tr": "We are going to Haifa by train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹהֲבִים רַכָּבוֹת.",
+      "tr": "The children love trains.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּחֲנַת רַכֶּבֶת",
+      "tr": "railway station"
+     },
+     {
+      "text": "רַכֶּבֶת קַלָּה",
+      "tr": "light rail, tram"
+     },
+     {
+      "text": "רַכֶּבֶת הָרִים",
+      "tr": "roller coaster"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "רַכֶּבֶת קַלָּה",
+      "register": "neutral",
+      "nuance": "“light rail, tram” — the city train of Jerusalem and Tel Aviv"
+     }
+    ],
+    "etymology": {
+     "text": "Coined by Eliezer Ben-Yehuda, from the root of “riding” ר־כ־ב (Wiktionary); related to רֶכֶב “vehicle”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Ben-Yehuda built the word on the pattern of other “things you ride” from ר־כ־ב “to ride”: רֶכֶב “vehicle”, רַכָּב “rider”.",
+     "Arabic مَرْكَبَة “vehicle” and رَكِبَ “to ride” share the root."
+    ],
+    "pitfalls": [
+     "Feminine, though it does not end in -ָה: רַכֶּבֶת מְהִירָה “a fast train” (the ending -ֶת is feminine).",
+     "The article before ר is הָ (qamats): הָרַכֶּבֶת, and so בָּרַכֶּבֶת “by train”."
+    ],
+    "subtleties": [
+     "A roller coaster is a רַכֶּבֶת הָרִים, a “mountain train” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:matos",
+   "lemma": "מָטוֹס",
+   "pos": "NOUN",
+   "senses": [
+    "tr.plane"
+   ],
+   "gender": "MASC",
+   "translit": "matos",
+   "features": {
+    "spelling": "מטוס",
+    "root": "ט ו ס",
+    "pattern": {
+     "none": "a noun of the hollow root ט־ו־ס with the prefix מָ־; no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "מְטוֹסִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְטוֹס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְטוֹסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מָטוֹס",
+    "N;SG;DEF": "הַמָּטוֹס",
+    "N;PL;INDF": "מְטוֹסִים",
+    "N;PL;DEF": "הַמְּטוֹסִים",
+    "N;SG;CONST": "מְטוֹס",
+    "N;PL;CONST": "מְטוֹסֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ben Gurion airport, the flight to Athens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aeroplane, airplane",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.plane"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמָּטוֹס מַגִּיעַ בְּשָׁעָה עֶשֶׂר.",
+      "tr": "The plane arrives at ten.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ טָסִים לְאַתּוּנָה בְּמָטוֹס קָטָן.",
+      "tr": "We are flying to Athens in a small plane.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיֶּלֶד מְצַיֵּר מְטוֹסִים.",
+      "tr": "The boy is drawing planes.",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כַּרְטִיס טִיסָה",
+      "tr": "plane ticket"
+     },
+     {
+      "text": "עוֹלֶה לַמָּטוֹס",
+      "tr": "boards the plane"
+     },
+     {
+      "text": "נוֹשֵׂאת מְטוֹסִים",
+      "tr": "aircraft carrier"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֲוִירוֹן",
+      "register": "dated",
+      "nuance": "the older word for “aeroplane” (Wiktionary lists it as related), now mostly in children’s language"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ט־ו־ס “to fly” (טָס “flies”) on the pattern מָקוֹם — “the flying thing”; Wiktionary gives no etymology of its own and lists אֲוִירוֹן as related.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מָטוֹס, טִיסָה “flight” and טַיָּס “pilot” all come from ט־ו־ס “to fly”."
+    ],
+    "pitfalls": [
+     "Flying is טָס, not נָסַע: אֲנִי טָס לְאַתּוּנָה “I am flying to Athens”.",
+     "The plural shortens the first vowel: מָטוֹס → מְטוֹסִים."
+    ],
+    "subtleties": [
+     "A flight is a טִיסָה, from the same root: כַּרְטִיס טִיסָה “a plane ticket”."
+    ]
+   }
+  },
+  {
+   "id": "he:monit",
+   "lemma": "מוֹנִית",
+   "pos": "NOUN",
+   "senses": [
+    "tr.taxi"
+   ],
+   "gender": "FEM",
+   "translit": "monit",
+   "features": {
+    "spelling": "מונית",
+    "root": "מ נ ה",
+    "pattern": {
+     "none": "built from מוֹנֶה “meter” with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "מוֹנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מוֹנִית",
+    "N;SG;DEF": "הַמּוֹנִית",
+    "N;PL;INDF": "מוֹנִיּוֹת",
+    "N;PL;DEF": "הַמּוֹנִיּוֹת",
+    "N;SG;CONST": "מוֹנִית",
+    "N;PL;CONST": "מוֹנִיּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A yellow light on the roof, the meter ticking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "taxi, cab",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.taxi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי לוֹקֵחַ מוֹנִית לִשְׂדֵה הַתְּעוּפָה.",
+      "tr": "I (m.) am taking a taxi to the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹנִית מְחַכָּה לְמַטָּה.",
+      "tr": "The taxi is waiting downstairs.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "סְעִי בְּמוֹנִית, זֶה מְאֻחָר!",
+      "tr": "Take a taxi, it’s late! (to a woman)",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נֶהָג מוֹנִית",
+      "tr": "taxi driver"
+     },
+     {
+      "text": "מוֹנִית שֵׁרוּת",
+      "tr": "shared taxi (a minibus on a fixed route)"
+     },
+     {
+      "text": "מַזְמִין מוֹנִית",
+      "tr": "orders a taxi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "טַקְסִי",
+      "register": "colloquial",
+      "nuance": "the international word, heard in speech; מוֹנִית is the standard Hebrew"
+     }
+    ],
+    "etymology": {
+     "text": "From מוֹנֶה “counter, meter” + ־ִית: a car with a meter — just as “taxi” comes from “taximeter”. Wiktionary gives no etymology of its own.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “taxi” is short for “taximeter”; Hebrew built its word the same way, from מוֹנֶה “meter”."
+    ],
+    "pitfalls": [
+     "Feminine: הַמּוֹנִית מְחַכָּה “the taxi is waiting” (f.).",
+     "In the plural the י is doubled: מוֹנִיּוֹת (moniyot)."
+    ],
+    "subtleties": [
+     "A מוֹנִית שֵׁרוּת (“service taxi”, a שֵׁרוּת) is a shared minibus that runs on a fixed line, also on Shabbat in some cities."
+    ]
+   }
+  },
+  {
+   "id": "he:mechonit",
+   "lemma": "מְכוֹנִית",
+   "pos": "NOUN",
+   "senses": [
+    "tr.car"
+   ],
+   "gender": "FEM",
+   "translit": "mechonit",
+   "features": {
+    "spelling": "מכונית",
+    "root": "כ ו ן",
+    "pattern": {
+     "none": "built from מְכוֹנָה “machine” with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "מְכוֹנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְכוֹנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְכוֹנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מְכוֹנִית",
+    "N;SG;DEF": "הַמְּכוֹנִית",
+    "N;PL;INDF": "מְכוֹנִיּוֹת",
+    "N;PL;DEF": "הַמְּכוֹנִיּוֹת",
+    "N;SG;DEF;PFX": "מְּכוֹנִית",
+    "N;SG;CONST": "מְכוֹנִית",
+    "N;PL;CONST": "מְכוֹנִיּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;INDF": "The plural of nouns in ־ִית is written with a dagesh in the י (־ִיּוֹת), as Wiktionary itself vowels מוֹנִית → מוֹנִיּוֹת; its table for מְכוֹנִית omits the dagesh.",
+     "N;PL;CONST": "pointed with a dagesh in the י like the plural itself (־ִיּוֹת, see N;PL;INDF); Wiktionary’s table omits the dagesh."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Traffic jams on the Ayalon, the family car on a Friday trip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "car, automobile",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.car"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָנוּ מְכוֹנִית חֲדָשָׁה.",
+      "tr": "We have a new car.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא נוֹהֵג בַּמְּכוֹנִית.",
+      "tr": "Dad is driving the car.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמְּכוֹנִית שֶׁלִּי בַּמּוּסָךְ.",
+      "tr": "My car is at the garage.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נוֹהֵג בִּמְכוֹנִית",
+      "tr": "drives a car"
+     },
+     {
+      "text": "נוֹסֵעַ בִּמְכוֹנִית",
+      "tr": "goes by car"
+     },
+     {
+      "text": "מְכוֹנִית חֲדָשָׁה",
+      "tr": "a new car"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אוֹטוֹ",
+      "register": "colloquial",
+      "nuance": "the everyday “car” (masculine!): הָאוֹטוֹ שֶׁלִּי — Wiktionary lists it as a synonym"
+     },
+     {
+      "word": "רֶכֶב",
+      "register": "formal",
+      "nuance": "“vehicle” — official, in insurance and the news (רֶכֶב פְּרָטִי “private car”)"
+     }
+    ],
+    "etymology": {
+     "text": "From מְכוֹנָה “machine” + ־ִית (Wiktionary): “the little machine”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Auto, Greek αυτοκίνητο and Hebrew אוֹטוֹ: the “self-moving” car went round the world; מְכוֹנִית is Hebrew’s own “little machine”."
+    ],
+    "pitfalls": [
+     "Feminine (-ִית): מְכוֹנִית חֲדָשָׁה; but the colloquial אוֹטוֹ is masculine: אוֹטוֹ חָדָשׁ.",
+     "In the plural the י is doubled: מְכוֹנִיּוֹת."
+    ],
+    "subtleties": [
+     "In speech אוֹטוֹ is at least as common as מְכוֹנִית; in writing מְכוֹנִית or רֶכֶב."
+    ]
+   }
+  },
+  {
+   "id": "he:ofanayim",
+   "lemma": "אוֹפַנַּיִם",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "tr.bicycle"
+   ],
+   "gender": "MASC",
+   "translit": "ofanayim",
+   "features": {
+    "spelling": "אופניים",
+    "root": "א פ ן",
+    "pattern": {
+     "none": "the dual of אוֹפַן “wheel”, not a pattern of its own"
+    },
+    "plurals": {
+     "none": "dual in form: the same word is one bicycle and many bicycles"
+    },
+    "dual": {
+     "none": "the word itself is a dual (“two wheels”)"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "אוֹפַנֵּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;PL;INDF": "אוֹפַנַּיִם",
+    "N;PL;DEF": "הָאוֹפַנַּיִם",
+    "N;PL;CONST": "אוֹפַנֵּי"
+   },
+   "plene": {
+    "N;PL;INDF": "אופניים",
+    "N;PL;DEF": "האופניים"
+   },
+   "note": "Only plural (a dual form, “two wheels”), masculine: הָאוֹפַנַּיִם חֲדָשִׁים “the bicycle is new”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Riding along the Tel Aviv promenade on a Saturday morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bicycle, bike",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bicycle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיֶּלֶד רוֹכֵב עַל אוֹפַנַּיִם.",
+      "tr": "The boy is riding a bike.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא נוֹסַעַת לָעֲבוֹדָה בְּאוֹפַנַּיִם.",
+      "tr": "She goes to work by bike.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאוֹפַנַּיִם שֶׁלִּי בַּחוּץ.",
+      "tr": "My bike is outside.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רוֹכֵב עַל אוֹפַנַּיִם",
+      "tr": "rides a bicycle"
+     },
+     {
+      "text": "אוֹפַנַּיִם חַשְׁמַלִּיִּים",
+      "tr": "electric bicycle"
+     },
+     {
+      "text": "שְׁבִיל אוֹפַנַּיִם",
+      "tr": "cycle path"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אוֹפַנּוֹעַ",
+      "register": "neutral",
+      "nuance": "not a synonym: “motorbike” — אוֹפַן + מָנוֹעַ “engine”"
+     }
+    ],
+    "etymology": {
+     "text": "The dual of אוֹפַן “wheel” (poetic or dated), from the root א־פ־ן; coined by Eliezer Ben-Yehuda in 1903 (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “a pair of wheels”: the dual ending ־ַיִם, as in עֵינַיִם “eyes” and מִשְׁקָפַיִם “glasses”.",
+     "A motorbike is an אוֹפַנּוֹעַ: אוֹפַן “wheel” + מָנוֹעַ “engine”."
+    ],
+    "pitfalls": [
+     "Grammatically plural: הָאוֹפַנַּיִם שֶׁלִּי חֲדָשִׁים “my bike is new” (plural adjective).",
+     "There is no singular for “a bike”: אוֹפַן is a poetic “wheel”."
+    ],
+    "subtleties": [
+     "You ride (רוֹכֵב) “on” a bike: רוֹכֵב עַל אוֹפַנַּיִם — as on a horse."
+    ]
+   }
+  },
+  {
+   "id": "he:sira",
+   "lemma": "סִירָה",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat"
+   ],
+   "gender": "FEM",
+   "translit": "sira",
+   "features": {
+    "spelling": "סירה",
+    "root": {
+     "none": "a primary noun with no verb root in use"
+    },
+    "pattern": {
+     "none": "a primary noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "סִירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סִירַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סִירָה",
+    "N;SG;DEF": "הַסִּירָה",
+    "N;PL;INDF": "סִירוֹת",
+    "N;PL;DEF": "הַסִּירוֹת",
+    "N;SG;CONST": "סִירַת",
+    "N;PL;CONST": "סִירוֹת"
+   },
+   "note": "A boat (small): a rowing boat, a fishing boat. A big ship is סְפִינָה (or אֳנִיָּה).",
+   "contrasts": [
+    {
+     "concept": "tr.boat",
+     "axis": "size",
+     "value": "a small boat"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Fishing boats on the Sea of Galilee, a rowing boat in the park.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "boat (small: rowing boat, motorboat, fishing boat)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ סִירוֹת עַל הַכִּנֶּרֶת.",
+      "tr": "There are boats on the Sea of Galilee.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסִּירָה שֶׁל הַדַּיָּג חוֹזֶרֶת בַּבֹּקֶר.",
+      "tr": "The fisherman’s boat comes back in the morning.",
+      "register": "neutral",
+      "context": "sea",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ שׁוֹכְרִים סִירָה בַּפַּארְק.",
+      "tr": "We are renting a boat in the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סִירַת דַּיָּגִים",
+      "tr": "fishing boat"
+     },
+     {
+      "text": "סִירַת מָנוֹעַ",
+      "tr": "motorboat"
+     },
+     {
+      "text": "סִירַת מִפְרָשׂ",
+      "tr": "sailing boat"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סְפִינָה",
+      "register": "neutral",
+      "nuance": "“ship” — big, seagoing"
+     },
+     {
+      "word": "אֳנִיָּה",
+      "register": "formal",
+      "nuance": "“ship” — big; the Biblical word"
+     }
+    ],
+    "etymology": {
+     "text": "Biblical Hebrew: סִירוֹת דּוּגָה “fishing boats” (Amos 4:2); Wiktionary gives no etymology and lists אֳנִיָּה as related.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "All three water words are feminine: סִירָה, סְפִינָה and אֳנִיָּה."
+    ],
+    "pitfalls": [
+     "A boat is small: a big ship is סְפִינָה or אֳנִיָּה.",
+     "Feminine: סִירָה קְטַנָּה “a small boat”."
+    ],
+    "subtleties": [
+     "A boatman is a סִירַאי (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:sfina",
+   "lemma": "סְפִינָה",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat",
+    "relig.nave"
+   ],
+   "gender": "FEM",
+   "translit": "sfina",
+   "features": {
+    "spelling": "ספינה",
+    "root": "ס פ ן",
+    "pattern": "קְטִילָה",
+    "plurals": [
+     {
+      "form": "סְפִינוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְפִינַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְפִינוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סְפִינָה",
+    "N;SG;DEF": "הַסְּפִינָה",
+    "N;PL;INDF": "סְפִינוֹת",
+    "N;PL;DEF": "הַסְּפִינוֹת",
+    "N;SG;CONST": "סְפִינַת",
+    "N;PL;CONST": "סְפִינוֹת"
+   },
+   "note": "A ship (big). A small boat is סִירָה.",
+   "contrasts": [
+    {
+     "concept": "tr.boat",
+     "axis": "size",
+     "value": "a ship, a large boat"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cargo ships in the port of Haifa, a cruise ship to Rhodes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ship, (large) boat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     },
+     {
+      "id": "s2",
+      "def": "nave (of a church)",
+      "register": [
+       "technical"
+      ],
+      "concept": "relig.nave"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסְּפִינָה יוֹצֵאת מֵחֵיפָה בָּעֶרֶב.",
+      "tr": "The ship leaves Haifa in the evening.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ הַרְבֵּה סְפִינוֹת בַּנָּמָל.",
+      "tr": "There are many ships in the port.",
+      "register": "neutral",
+      "context": "sea",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּפִינָה שֶׁל הַכְּנֵסִיָּה גְּבוֹהָה מְאֹד.",
+      "tr": "The nave of the church is very high.",
+      "register": "neutral",
+      "context": "architecture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְפִינַת מַשָּׂא",
+      "tr": "cargo ship"
+     },
+     {
+      "text": "סְפִינַת תַּעֲנוּגוֹת",
+      "tr": "cruise ship"
+     },
+     {
+      "text": "סְפִינַת הַמִּדְבָּר",
+      "tr": "the ship of the desert (the camel)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֳנִיָּה",
+      "register": "formal",
+      "nuance": "“ship” — the Biblical and formal word (Wiktionary lists both as related)"
+     },
+     {
+      "word": "סִירָה",
+      "register": "neutral",
+      "nuance": "“boat” — small"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Aramaic (sǝp̄īntā), from which Arabic سَفِينَة (safīna, “ship, vessel”) was also taken (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic سَفِينَة (safīna) and Hebrew סְפִינָה are the same Aramaic word (Wiktionary)."
+    ],
+    "pitfalls": [
+     "A big ship: a rowing boat or a fishing boat is a סִירָה.",
+     "Before another noun it is סְפִינַת: סְפִינַת מַשָּׂא “a cargo ship”."
+    ],
+    "subtleties": [
+     "סְפִינַת הַמִּדְבָּר “the ship of the desert” is the camel, as in many languages (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:kartis",
+   "lemma": "כַּרְטִיס",
+   "pos": "NOUN",
+   "senses": [
+    "tr.ticket",
+    "obj.card"
+   ],
+   "gender": "MASC",
+   "translit": "kartis",
+   "features": {
+    "spelling": "כרטיס",
+    "root": {
+     "none": "a loanword (Greek χάρτης): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "כַּרְטִיסִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כַּרְטִיס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כַּרְטִיסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כַּרְטִיס",
+    "N;SG;DEF": "הַכַּרְטִיס",
+    "N;PL;INDF": "כַּרְטִיסִים",
+    "N;PL;DEF": "הַכַּרְטִיסִים",
+    "N;SG;CONST": "כַּרְטִיס",
+    "N;PL;CONST": "כַּרְטִיסֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bus cards, cinema tickets, a boarding pass.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ticket (for a bus, train, plane, concert)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.ticket"
+     },
+     {
+      "id": "s2",
+      "def": "card",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.card"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לְךָ כַּרְטִיס לָאוֹטוֹבּוּס?",
+      "tr": "Do you (m.) have a ticket for the bus?",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי קוֹנָה שְׁנֵי כַּרְטִיסִים לָרַכֶּבֶת.",
+      "tr": "I (f.) am buying two train tickets.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לְךָ כַּרְטִיס אַשְׁרַאי?",
+      "tr": "Do you (m.) have a credit card?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כַּרְטִיס הָלוֹךְ וָשׁוֹב",
+      "tr": "return ticket"
+     },
+     {
+      "text": "כַּרְטִיס טִיסָה",
+      "tr": "plane ticket"
+     },
+     {
+      "text": "כַּרְטִיס אַשְׁרַאי",
+      "tr": "credit card"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כַּרְטִיסִיָּה",
+      "register": "neutral",
+      "nuance": "“a ticket card, a book of tickets” — several rides on one card"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Ancient Greek χάρτης (khártēs) “papyrus, sheet”, from χαράσσω “I scratch, inscribe” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From Greek χάρτης — the same word as Greek χαρτί “paper”, χάρτης “map” and English “chart”, “card”."
+    ],
+    "pitfalls": [
+     "After בְּ the כּ softens: בְּכַרְטִיס (bekhartis).",
+     "A ticket “for” the bus takes לְ: כַּרְטִיס לָאוֹטוֹבּוּס, לַהַצָּגָה."
+    ],
+    "subtleties": [
+     "The same word is “card”: כַּרְטִיס אַשְׁרַאי “credit card”, כַּרְטִיס בְּרָכָה “greeting card” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:baregel",
+   "lemma": "בָּרֶגֶל",
+   "pos": "ADV",
+   "senses": [
+    "tr.onfoot"
+   ],
+   "translit": "baregel",
+   "features": {
+    "spelling": "ברגל",
+    "derivedFrom": "בְּ + הָ + רֶגֶל “foot”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "One word: בְּ + הָ + רֶגֶל “by the foot”. הוֹלֵךְ בָּרֶגֶל “walks, goes on foot”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Short distances in town: ten minutes on foot.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on foot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.onfoot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי הוֹלֵךְ לָעֲבוֹדָה בָּרֶגֶל.",
+      "tr": "I (m.) walk to work.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה עֶשֶׂר דַּקּוֹת בָּרֶגֶל.",
+      "tr": "It’s ten minutes on foot.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם בָּאִים בָּרֶגֶל מֵהַכְּפָר.",
+      "tr": "They come on foot from the village.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הוֹלֵךְ בָּרֶגֶל",
+      "tr": "walks, goes on foot"
+     },
+     {
+      "text": "עֶשֶׂר דַּקּוֹת בָּרֶגֶל",
+      "tr": "ten minutes’ walk"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: בָּרֶגֶל is the everyday way to say “on foot”.",
+    "etymology": {
+     "text": "בְּ “in, by” + the article + רֶגֶל “foot, leg”, from Proto-Semitic *rigl- (Wiktionary lists בָּרֶגֶל among its derived terms).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic رِجْل (rijl) “foot, leg” is the same Semitic word as רֶגֶל.",
+     "The three pilgrimage festivals are the שָׁלוֹשׁ רְגָלִים, literally “three feet” — the times when people went up to Jerusalem."
+    ],
+    "pitfalls": [
+     "It is one word with the article inside: בָּרֶגֶל, not *בְּרֶגֶל."
+    ],
+    "subtleties": [
+     "A pedestrian is a הוֹלֵךְ רֶגֶל; “football” is כַּדּוּרֶגֶל — the same רֶגֶל (Wiktionary)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

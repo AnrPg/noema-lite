@@ -1,0 +1,1923 @@
+{
+ "lexemes": [
+  {
+   "id": "he:tochnit",
+   "lemma": "תׇּכְנִית",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.plan"
+   ],
+   "gender": "FEM",
+   "translit": "tochnit",
+   "features": {
+    "spelling": "תוכנית",
+    "root": "ת כ ן",
+    "pattern": {
+     "none": "built with the ending ־ִית on the root ת־כ־ן (as in תִּכְנֵן “to plan”), not one of the common patterns"
+    },
+    "plurals": [
+     {
+      "form": "תׇּכְנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תׇּכְנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תׇּכְנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תׇּכְנִית",
+    "N;SG;DEF": "הַתׇּכְנִית",
+    "N;PL;INDF": "תׇּכְנִיּוֹת",
+    "N;PL;DEF": "הַתׇּכְנִיּוֹת",
+    "N;SG;CONST": "תׇּכְנִית",
+    "N;PL;CONST": "תׇּכְנִיּוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "תוכנית",
+    "N;SG;DEF": "התוכנית",
+    "N;PL;INDF": "תוכניות",
+    "N;PL;DEF": "התוכניות",
+    "N;SG;CONST": "תוכנית",
+    "N;PL;CONST": "תוכניות"
+   },
+   "note": "A plan (also a programme). Feminine; full spelling תוכנית.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A list on the fridge, a map spread on the table before a trip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a plan",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.plan"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה הַתׇּכְנִיּוֹת שֶׁלְּךָ לַחֹפֶשׁ?",
+      "tr": "What are your (m.) plans for the holidays?",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי תׇּכְנִית: נִסַּע לְאֵילַת.",
+      "tr": "I have a plan: we’ll go to Eilat.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתׇּכְנִית הִשְׁתַּנְּתָה.",
+      "tr": "The plan changed.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְפִי הַתׇּכְנִית",
+      "tr": "according to plan"
+     },
+     {
+      "text": "תׇּכְנִיּוֹת לֶעָתִיד",
+      "tr": "plans for the future"
+     },
+     {
+      "text": "שִׁנָּה אֶת הַתׇּכְנִיּוֹת",
+      "tr": "changed the plans"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תִּכְנוּן",
+      "register": "neutral",
+      "nuance": "“planning” — the activity, not the plan"
+     },
+     {
+      "word": "כַּוָּנָה",
+      "register": "neutral",
+      "nuance": "“an intention” — what one means to do, less worked out"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ת־כ־ן, as in תִּכְנֵן “to plan” (which Wiktionary lists under “plan”), with the ending ־ִית; Wiktionary gives no etymology for the noun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same word is a TV programme (תׇּכְנִית טֶלֶוִיזְיָה) and a computer program (Wiktionary’s senses); software is the related תׇּכְנָה."
+    ],
+    "pitfalls": [
+     "The first vowel is a short o (qamats katan): tochnít; the everyday spelling is תוכנית (also written תכנית).",
+     "Wiktionary’s other senses — a TV or radio programme, a computer program, a business plan — use the same word: context decides."
+    ],
+    "subtleties": [
+     "Plans for a weekend are usually plural: יֵשׁ לָנוּ תׇּכְנִיּוֹת לְסוֹף הַשָּׁבוּעַ."
+    ]
+   }
+  },
+  {
+   "id": "he:tiyul",
+   "lemma": "טִיּוּל",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.trip"
+   ],
+   "gender": "MASC",
+   "translit": "tiyul",
+   "features": {
+    "spelling": "טיול",
+    "root": "ט י ל",
+    "pattern": "קִטּוּל",
+    "plurals": [
+     {
+      "form": "טִיּוּלִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "טִיּוּל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "טִיּוּלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "טִיּוּל",
+    "N;SG;DEF": "הַטִּיּוּל",
+    "N;PL;INDF": "טִיּוּלִים",
+    "N;PL;DEF": "הַטִּיּוּלִים",
+    "N;SG;CONST": "טִיּוּל",
+    "N;PL;CONST": "טִיּוּלֵי"
+   },
+   "note": "A trip, an outing, a hike. Verbal noun of טִיֵּל.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses טִיּוּל as “tour, voyage; walk, hike”, none of which uses the words of the course gloss “trip, journey”; these are the same meaning (יָצָאנוּ לְטִיּוּל “we went on a trip”)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Backpacks, water bottles, a path in the hills of the Galilee.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a trip, a tour, an outing; a hike, a walk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.trip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יָצָאנוּ לְטִיּוּל בַּצָּפוֹן.",
+      "tr": "We went on a trip to the north.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיךְ הָיָה הַטִּיּוּל?",
+      "tr": "How was the trip?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "אַחֲרֵי הַצָּבָא הוּא יָצָא לְטִיּוּל אָרֹךְ.",
+      "tr": "After the army he went on a long trip.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יָצָא לְטִיּוּל",
+      "tr": "went on a trip"
+     },
+     {
+      "text": "טִיּוּל שְׁנָתִי",
+      "tr": "the school’s annual trip"
+     },
+     {
+      "text": "טִיּוּל רַגְלִי",
+      "tr": "a hike, a walking trip"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נְסִיעָה",
+      "register": "neutral",
+      "nuance": "“a ride, a journey” — the travelling itself, by vehicle"
+     },
+     {
+      "word": "מַסָּע",
+      "register": "literary",
+      "nuance": "“a long journey, an expedition” (Wiktionary lists it as a synonym)"
+     },
+     {
+      "word": "סִיּוּר",
+      "register": "neutral",
+      "nuance": "“a tour” — a guided visit of a site or a town"
+     }
+    ],
+    "etymology": {
+     "text": "The verbal noun of טִיֵּל “to stroll, travel”, root ט־י־ל, in the pattern קִטּוּל (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "After military service many young Israelis go on “the big trip”, הַטִּיּוּל הַגָּדוֹל, abroad for months."
+    ],
+    "pitfalls": [
+     "A trip for pleasure; a business trip is a נְסִיעַת עֲסָקִים.",
+     "The י is a consonant and doubled: tiyúl (full spelling טיול)."
+    ],
+    "subtleties": [
+     "טִיּוּל is any outing — from a walk round the block to a month in India."
+    ]
+   }
+  },
+  {
+   "id": "he:malon",
+   "lemma": "מָלוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "place.hotel"
+   ],
+   "gender": "MASC",
+   "translit": "malon",
+   "features": {
+    "spelling": "מלון",
+    "root": "ל ו ן",
+    "pattern": "מִקְטָל",
+    "plurals": [
+     {
+      "form": "מְלוֹנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְלוֹן",
+      "note": "in names: מְלוֹן הַמֶּלֶךְ דָּוִד “the King David Hotel”"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מָלוֹן",
+    "N;SG;DEF": "הַמָּלוֹן",
+    "N;PL;INDF": "מְלוֹנוֹת",
+    "N;PL;DEF": "הַמְּלוֹנוֹת",
+    "N;SG;DEF;PFX": "מָּלוֹן",
+    "N;SG;CONST": "מְלוֹן"
+   },
+   "note": "A hotel. Masculine, plural מְלוֹנוֹת; also בֵּית מָלוֹן.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A reception desk, a key card, breakfast on the terrace.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a hotel",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hotel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִזְמַנּוּ חֶדֶר בְּמָלוֹן לְיַד הַיָּם.",
+      "tr": "We booked a room in a hotel by the sea.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמָּלוֹן הָיָה נָקִי וְיָפֶה.",
+      "tr": "The hotel was clean and nice.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּאֵיזֶה מָלוֹן אַתֶּם גָּרִים?",
+      "tr": "Which hotel are you (pl.) staying at?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּית מָלוֹן",
+      "tr": "a hotel (the fuller form)"
+     },
+     {
+      "text": "חֶדֶר בְּמָלוֹן",
+      "tr": "a hotel room"
+     },
+     {
+      "text": "מָלוֹן חֲמִשָּׁה כּוֹכָבִים",
+      "tr": "a five-star hotel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בֵּית מָלוֹן",
+      "register": "neutral",
+      "nuance": "the fuller form, the same meaning (Wiktionary lists both as synonyms)"
+     },
+     {
+      "word": "אַכְסַנְיָה",
+      "register": "neutral",
+      "nuance": "“a hostel, an inn” (אַכְסַנְיַת נֹעַר “youth hostel”)"
+     },
+     {
+      "word": "צִימֶר",
+      "register": "colloquial",
+      "nuance": "a guest cabin in the countryside, from German Zimmer"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ל־ו־ן of לָן “to lodge, stay the night” (Wiktionary: “see לָן”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root is “to spend the night”: a מָלוֹן is a place to lodge, like the biblical מָלוֹן “lodging place”."
+    ],
+    "pitfalls": [
+     "Three words share the everyday spelling מלון: מָלוֹן “hotel”, מֶלוֹן “melon” — and the full spelling of מִלּוֹן “dictionary” is מילון (Wiktionary).",
+     "Masculine with a plural in -וֹת: מְלוֹנוֹת גְּדוֹלִים."
+    ],
+    "subtleties": [
+     "Staying at a hotel is גָּר בְּמָלוֹן or, more precisely, לָן בְּמָלוֹן “spends the night at a hotel”."
+    ]
+   }
+  },
+  {
+   "id": "he:hizmin",
+   "lemma": "הִזְמִין",
+   "pos": "VERB",
+   "senses": [
+    "verb.book",
+    "verb.order",
+    "verb.invite"
+   ],
+   "translit": "hizmin",
+   "features": {
+    "spelling": "הזמין",
+    "root": "ז מ ן",
+    "binyan": "hifil",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יַזְמִין",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "הַזְמָנָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "הִזְמַנְתִּי",
+    "V;PST;2;SG;MASC": "הִזְמַנְתָּ",
+    "V;PST;2;SG;FEM": "הִזְמַנְתְּ",
+    "V;PST;3;SG;MASC": "הִזְמִין",
+    "V;PST;3;SG;FEM": "הִזְמִינָה",
+    "V;PST;1;PL": "הִזְמַנּוּ",
+    "V;PST;2;PL;MASC": "הִזְמַנְתֶּם",
+    "V;PST;2;PL;FEM": "הִזְמַנְתֶּן",
+    "V;PST;3;PL": "הִזְמִינוּ",
+    "V;PRS;SG;MASC": "מַזְמִין",
+    "V;PRS;SG;FEM": "מַזְמִינָה",
+    "V;PRS;PL;MASC": "מַזְמִינִים",
+    "V;PRS;PL;FEM": "מַזְמִינוֹת",
+    "V;FUT;1;SG": "אַזְמִין",
+    "V;FUT;2;SG;MASC": "תַּזְמִין",
+    "V;FUT;2;SG;FEM": "תַּזְמִינִי",
+    "V;FUT;3;SG;MASC": "יַזְמִין",
+    "V;FUT;3;SG;FEM": "תַּזְמִין",
+    "V;FUT;1;PL": "נַזְמִין",
+    "V;FUT;2;PL;MASC": "תַּזְמִינוּ",
+    "V;FUT;3;PL;MASC": "יַזְמִינוּ",
+    "V;IMP;2;SG;MASC": "הַזְמֵן",
+    "V;IMP;2;SG;FEM": "הַזְמִינִי",
+    "V;IMP;2;PL;MASC": "הַזְמִינוּ",
+    "V;NFIN": "לְהַזְמִין"
+   },
+   "note": "To book, reserve; to order; to invite. Hif‘il of ז־מ־ן: past הִזְמִין / הִזְמַנְתִּי, present מַזְמִין, future יַזְמִין, infinitive לְהַזְמִין. Noun: הַזְמָנָה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary’s glosses of הִזְמִין (“to invite; to order: to request a product or service”) do not contain the words of the course gloss “to book, to reserve”; booking a room or a table is requesting a service, the standard use (הִזְמַנּוּ חֶדֶר בְּמָלוֹן)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A phone call to a hotel, a waiter with a notepad, a wedding invitation in the post.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to book, reserve (a room, a table, tickets)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.book"
+     },
+     {
+      "id": "s2",
+      "def": "to order (food, a taxi, goods)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.order"
+     },
+     {
+      "id": "s3",
+      "def": "to invite (to an event: לְ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.invite"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִזְמַנְתִּי חֶדֶר לִשְׁלוֹשָׁה לֵילוֹת.",
+      "tr": "I booked a room for three nights.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "כְּבָר הִזְמַנְתֶּם כַּרְטִיסִים?",
+      "tr": "Have you (pl.) already booked tickets?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הִזְמַנְתִּי פִּיצָה הַבַּיְתָה.",
+      "tr": "I ordered a pizza (to the house).",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "אֶפְשָׁר לְהַזְמִין?",
+      "tr": "Can we order?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     },
+     {
+      "text": "הֵם הִזְמִינוּ אוֹתָנוּ לַחֲתֻנָּה.",
+      "tr": "They invited us to the wedding.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     },
+     {
+      "text": "אֲנִי מַזְמִין אֶתְכֶם לַאֲרוּחַת עֶרֶב.",
+      "tr": "I’m inviting you (pl.) to dinner.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הִזְמִין חֶדֶר",
+      "tr": "booked a room"
+     },
+     {
+      "text": "הִזְמִין מָקוֹם",
+      "tr": "reserved a place"
+     },
+     {
+      "text": "הִזְמִין מוֹנִית",
+      "tr": "ordered a taxi"
+     },
+     {
+      "text": "הִזְמִין לַחֲתֻנָּה",
+      "tr": "invited to the wedding"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שָׁמַר מָקוֹם",
+      "register": "colloquial",
+      "nuance": "“to keep a place” — informally, for someone"
+     },
+     {
+      "word": "קָבַע תּוֹר",
+      "register": "neutral",
+      "nuance": "“to make an appointment” — a doctor, a hairdresser"
+     }
+    ],
+    "etymology": {
+     "text": "Hif‘il of the root ז־מ־ן, the root of זְמַן “time” (Wiktionary gives no etymology; its senses are “to invite” and “to order: to request a product or service”). The verbal noun הַזְמָנָה is a booking, an order and an invitation.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One noun for three things: הַזְמָנָה is a hotel booking, an order in a shop and a wedding invitation."
+    ],
+    "pitfalls": [
+     "The present starts with מַ־ (hif‘il): מַזְמִין, מַזְמִינָה.",
+     "In the past the i becomes a before the endings of the 1st and 2nd person: הִזְמִין but הִזְמַנְתִּי, and in “we” the two נ merge: הִזְמַנּוּ.",
+     "Inviting someone takes the person as object and the event with לְ: הִזְמִינוּ אוֹתָנוּ לַחֲתֻנָּה."
+    ],
+    "subtleties": [
+     "Which meaning? A room or a table → booked; food or a taxi → ordered; a person → invited."
+    ]
+   }
+  },
+  {
+   "id": "he:darkon",
+   "lemma": "דַּרְכּוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "obj.passport"
+   ],
+   "gender": "MASC",
+   "translit": "darkon",
+   "features": {
+    "spelling": "דרכון",
+    "root": "ד ר ך",
+    "pattern": {
+     "none": "the noun דֶּרֶךְ “way” + the ending ־וֹן, not a pattern (Wiktionary)"
+    },
+    "plurals": [
+     {
+      "form": "דַּרְכּוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דַּרְכּוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דַּרְכּוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "דַּרְכּוֹן",
+    "N;SG;DEF": "הַדַּרְכּוֹן",
+    "N;PL;INDF": "דַּרְכּוֹנִים",
+    "N;PL;DEF": "הַדַּרְכּוֹנִים",
+    "N;SG;CONST": "דַּרְכּוֹן",
+    "N;PL;CONST": "דַּרְכּוֹנֵי"
+   },
+   "note": "A passport. Masculine, plural דַּרְכּוֹנִים.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The airport queue, a stamp, the panic of “where is it?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a passport",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.passport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַל תִּשְׁכַּח אֶת הַדַּרְכּוֹן!",
+      "tr": "Don’t forget the passport!",
+      "register": "informal",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדַּרְכּוֹן שֶׁלִּי כְּבָר לֹא בְּתֹקֶף.",
+      "tr": "My passport is no longer valid.",
+      "register": "neutral",
+      "context": "documents",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ שְׁנֵי דַּרְכּוֹנִים.",
+      "tr": "She has two passports.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּקֹּרֶת דַּרְכּוֹנִים",
+      "tr": "passport control"
+     },
+     {
+      "text": "דַּרְכּוֹן בְּתֹקֶף",
+      "tr": "a valid passport"
+     },
+     {
+      "text": "חִדֵּשׁ אֶת הַדַּרְכּוֹן",
+      "tr": "renewed the passport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; the identity card תְּעוּדַת זֶהוּת is another document.",
+    "etymology": {
+     "text": "דֶּרֶךְ “way, road” + the ending ־וֹן (Wiktionary): “the document for the road”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A modern coinage built from “way”: the passport is the “road document”."
+    ],
+    "pitfalls": [
+     "Not the identity card: that is תְּעוּדַת זֶהוּת (ת״ז).",
+     "The construct plural is דַּרְכּוֹנֵי: דַּרְכּוֹנֵי הַיְּלָדִים “the children’s passports”."
+    ],
+    "subtleties": [
+     "Valid = בְּתֹקֶף, expired = לֹא בְּתֹקֶף or פָּג תֹּקֶף."
+    ]
+   }
+  },
+  {
+   "id": "he:mizvada",
+   "lemma": "מִזְוָדָה",
+   "pos": "NOUN",
+   "senses": [
+    "obj.suitcase"
+   ],
+   "gender": "FEM",
+   "translit": "mizvada",
+   "features": {
+    "spelling": "מזוודה",
+    "root": "ז ו ד",
+    "pattern": "מִקְטָלָה",
+    "plurals": [
+     {
+      "form": "מִזְוָדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִזְוֶדֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִזְוְדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מִזְוָדָה",
+    "N;SG;DEF": "הַמִּזְוָדָה",
+    "N;PL;INDF": "מִזְוָדוֹת",
+    "N;PL;DEF": "הַמִּזְוָדוֹת",
+    "N;SG;CONST": "מִזְוֶדֶת",
+    "N;PL;CONST": "מִזְוְדוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "מזוודה",
+    "N;SG;DEF": "המזוודה",
+    "N;PL;INDF": "מזוודות",
+    "N;PL;DEF": "המזוודות",
+    "N;SG;CONST": "מזוודת",
+    "N;PL;CONST": "מזוודות"
+   },
+   "note": "A suitcase. Feminine; full spelling מזוודה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Packing the night before, wheels rattling through the terminal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a suitcase (Wiktionary also: a briefcase)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.suitcase"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אָרַזְתִּי אֶת הַמִּזְוָדָה בַּלַּיְלָה.",
+      "tr": "I packed the suitcase at night.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּזְוָדָה כְּבֵדָה מִדַּי.",
+      "tr": "The suitcase is too heavy.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הַמִּזְוָדוֹת שֶׁלָּנוּ?",
+      "tr": "Where are our suitcases?",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אָרַז מִזְוָדָה",
+      "tr": "packed a suitcase"
+     },
+     {
+      "text": "מִזְוָדָה כְּבֵדָה",
+      "tr": "a heavy suitcase"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תִּיק",
+      "register": "neutral",
+      "nuance": "“a bag” — smaller, carried in the hand or on the back"
+     }
+    ],
+    "etymology": {
+     "text": "A noun of the pattern מִקְטָלָה (Wiktionary) on the root ז־ו־ד; Wiktionary gives no further etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ו is a consonant: miz-va-da — which is why the everyday spelling doubles it, מזוודה."
+    ],
+    "pitfalls": [
+     "The consonant ו is doubled in everyday spelling: מזוודה, מזוודות.",
+     "Feminine: מִזְוָדָה כְּבֵדָה."
+    ],
+    "subtleties": [
+     "The construct changes the vowels: מִזְוֶדֶת עוֹר “a leather suitcase”."
+    ]
+   }
+  },
+  {
+   "id": "he:chuts-laarets",
+   "lemma": "חוּץ לָאָרֶץ",
+   "pos": "NOUN",
+   "class": "cal",
+   "senses": [
+    "place.abroad"
+   ],
+   "gender": "MASC",
+   "translit": "chuts la'arets",
+   "features": {
+    "spelling": "חוץ לארץ",
+    "root": {
+     "none": "a fixed phrase of three words (חוּץ + לְ + הָאָרֶץ)"
+    },
+    "pattern": {
+     "none": "a fixed phrase, not one pattern"
+    },
+    "plurals": {
+     "none": "a name for “the world outside Israel”: no plural"
+    },
+    "dual": {
+     "none": "no dual"
+    },
+    "construct": {
+     "none": "a fixed phrase: not put into the construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חוּץ לָאָרֶץ"
+   },
+   "note": "Abroad — the world outside Israel. Used like a place name (no article): לְחוּץ לָאָרֶץ, בְּחוּץ לָאָרֶץ; colloquially חוּ״ל.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Departures board at Ben Gurion airport; relatives “in chul”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "abroad, foreign countries (the world outside Israel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.abroad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא גָּרָה בְּחוּץ לָאָרֶץ.",
+      "tr": "She lives abroad.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "נָסַעְנוּ לְחוּץ לָאָרֶץ בַּקַּיִץ.",
+      "tr": "We went abroad in the summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חָזַר מֵחוּץ לָאָרֶץ.",
+      "tr": "He came back from abroad.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נָסַע לְחוּץ לָאָרֶץ",
+      "tr": "went abroad"
+     },
+     {
+      "text": "גָּר בְּחוּץ לָאָרֶץ",
+      "tr": "lives abroad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חוּ״ל",
+      "register": "colloquial",
+      "nuance": "the abbreviation, said chul — the everyday word: נוֹסְעִים לְחוּ״ל (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From חוּץ “outside” + לְ־ + הָאָרֶץ “the land”: literally “outside of the country”; a fixed expression from Mishnaic Hebrew (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "הָאָרֶץ, “the land”, means Israel here; Israelis say בָּאָרֶץ “in the country” for Israel and בְּחוּ״ל for everywhere else."
+    ],
+    "pitfalls": [
+     "It behaves like a place name: no article, and the preposition goes in front — לְחוּץ לָאָרֶץ “(to) abroad”, בְּחוּץ לָאָרֶץ “(in) abroad”, מֵחוּץ לָאָרֶץ “from abroad”.",
+     "Masculine (Wiktionary), but it is rarely the subject of a sentence."
+    ],
+    "subtleties": [
+     "The point of view is Israel’s: for a speaker in Israel, every other country is חוּ״ל."
+    ]
+   }
+  },
+  {
+   "id": "he:biker",
+   "lemma": "בִּקֵּר",
+   "pos": "VERB",
+   "senses": [
+    "verb.visit"
+   ],
+   "translit": "biker",
+   "features": {
+    "spelling": "ביקר",
+    "root": "ב ק ר",
+    "binyan": "piel",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יְבַקֵּר",
+    "governs": [
+     {
+      "prep": "be",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "et",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "בִּקּוּר",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "בִּקַּרְתִּי",
+    "V;PST;2;SG;MASC": "בִּקַּרְתָּ",
+    "V;PST;2;SG;FEM": "בִּקַּרְתְּ",
+    "V;PST;3;SG;MASC": "בִּקֵּר",
+    "V;PST;3;SG;FEM": "בִּקְּרָה",
+    "V;PST;1;PL": "בִּקַּרְנוּ",
+    "V;PST;2;PL;MASC": "בִּקַּרְתֶּם",
+    "V;PST;2;PL;FEM": "בִּקַּרְתֶּן",
+    "V;PST;3;PL": "בִּקְּרוּ",
+    "V;PRS;SG;MASC": "מְבַקֵּר",
+    "V;PRS;SG;FEM": "מְבַקֶּרֶת",
+    "V;PRS;PL;MASC": "מְבַקְּרִים",
+    "V;PRS;PL;FEM": "מְבַקְּרוֹת",
+    "V;FUT;1;SG": "אֲבַקֵּר",
+    "V;FUT;2;SG;MASC": "תְּבַקֵּר",
+    "V;FUT;2;SG;FEM": "תְּבַקְּרִי",
+    "V;FUT;3;SG;MASC": "יְבַקֵּר",
+    "V;FUT;3;SG;FEM": "תְּבַקֵּר",
+    "V;FUT;1;PL": "נְבַקֵּר",
+    "V;FUT;2;PL;MASC": "תְּבַקְּרוּ",
+    "V;FUT;3;PL;MASC": "יְבַקְּרוּ",
+    "V;IMP;2;SG;MASC": "בַּקֵּר",
+    "V;IMP;2;SG;FEM": "בַּקְּרִי",
+    "V;IMP;2;PL;MASC": "בַּקְּרוּ",
+    "V;NFIN": "לְבַקֵּר"
+   },
+   "plene": {
+    "V;PST;1;SG": "ביקרתי",
+    "V;PST;2;SG;MASC": "ביקרת",
+    "V;PST;2;SG;FEM": "ביקרת",
+    "V;PST;3;SG;MASC": "ביקר",
+    "V;PST;3;SG;FEM": "ביקרה",
+    "V;PST;1;PL": "ביקרנו",
+    "V;PST;2;PL;MASC": "ביקרתם",
+    "V;PST;2;PL;FEM": "ביקרתן",
+    "V;PST;3;PL": "ביקרו"
+   },
+   "note": "To visit. Pi‘el: past בִּקֵּר / בִּקַּרְתִּי (full spelling ביקר), present מְבַקֵּר, future יְבַקֵּר, infinitive לְבַקֵּר. A place with בְּ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandma’s door on Saturday, a museum on a holiday, flowers for someone in hospital.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to visit (a place: בְּ; a person: אֶת, colloquially אֵצֶל)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.visit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּקַּיִץ בִּקַּרְנוּ בְּרוֹמָא.",
+      "tr": "In the summer we visited Rome.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "בִּקַּרְנוּ אֶת סָבְתָא בְּבֵית הַחוֹלִים.",
+      "tr": "We visited Grandma in hospital.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "תָּבוֹאוּ לְבַקֵּר!",
+      "tr": "Come and visit!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּקֵּר בְּמוּזֵאוֹן",
+      "tr": "visited a museum"
+     },
+     {
+      "text": "בִּקֵּר אֵצֶל חֲבֵרִים",
+      "tr": "visited friends"
+     },
+     {
+      "text": "שְׁעוֹת בִּקּוּר",
+      "tr": "visiting hours"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קָפַץ לְ…",
+      "register": "colloquial",
+      "nuance": "“to pop over, drop in” — a short visit (קָפַצְתִּי אֵלֶיהָ)"
+     },
+     {
+      "word": "סִיֵּר",
+      "register": "neutral",
+      "nuance": "“to tour, go round” — a site, a town"
+     }
+    ],
+    "etymology": {
+     "text": "Pi‘el of the root ב־ק־ר (Wiktionary gives no etymology; its senses are “to visit”, “to inspect” and “to criticize”). The noun is בִּקּוּר “visit”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A מְבַקֵּר is both a visitor and a critic — the verb also means “to criticize”."
+    ],
+    "pitfalls": [
+     "A place takes בְּ: בִּקַּרְנוּ בְּרוֹמָא — not *בִּקַּרְנוּ רוֹמָא.",
+     "Wiktionary also gives “to inspect” and “to criticize” (בִּקֵּר אֶת הַמֶּמְשָׁלָה “criticized the government”): with a person as object, context decides between visiting and criticizing — in speech, visiting a person is usually בִּקֵּר אֵצֶל."
+    ],
+    "subtleties": [
+     "The past has i in the first syllable (full spelling ביקר, ביקרתי); the present מְבַקֵּר has none."
+    ]
+   }
+  },
+  {
+   "id": "he:tayar",
+   "lemma": "תַּיָּר",
+   "pos": "NOUN",
+   "senses": [
+    "person.tourist"
+   ],
+   "gender": "MASC",
+   "translit": "tayar",
+   "features": {
+    "spelling": "תייר",
+    "root": "ת י ר",
+    "pattern": "קַטָּל",
+    "plurals": [
+     {
+      "form": "תַּיָּרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּיָּרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תַּיָּר",
+    "N;SG;DEF": "הַתַּיָּר",
+    "N;PL;INDF": "תַּיָּרִים",
+    "N;PL;DEF": "הַתַּיָּרִים",
+    "N;PL;CONST": "תַּיָּרֵי"
+   },
+   "plene": {
+    "N;SG;INDF": "תייר",
+    "N;SG;DEF": "התייר",
+    "N;PL;INDF": "תיירים",
+    "N;PL;DEF": "התיירים",
+    "N;PL;CONST": "תיירי"
+   },
+   "note": "A tourist (a man). A woman: תַּיֶּרֶת. Plural תַּיָּרִים.",
+   "contrasts": [
+    {
+     "concept": "person.tourist",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cameras in the Old City, maps unfolded on a street corner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a tourist (a man; the plural also for a mixed group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.tourist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ הַרְבֵּה תַּיָּרִים בִּירוּשָׁלַיִם.",
+      "tr": "There are lots of tourists in Jerusalem.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתַּיָּר שָׁאַל אוֹתִי אֵיפֹה הַתַּחֲנָה.",
+      "tr": "The tourist asked me where the station is.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ לֹא תַּיָּרִים, אֲנַחְנוּ גָּרִים פֹּה.",
+      "tr": "We aren’t tourists, we live here.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קְבוּצַת תַּיָּרִים",
+      "tr": "a group of tourists"
+     },
+     {
+      "text": "תַּיָּרִים מֵחוּץ לָאָרֶץ",
+      "tr": "tourists from abroad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְטַיֵּל",
+      "register": "neutral",
+      "nuance": "“a traveller, hiker” — someone on a trip, also at home"
+     },
+     {
+      "word": "מְבַקֵּר",
+      "register": "neutral",
+      "nuance": "“a visitor” — to a site, a museum, a country"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ת־י־ר / ת־ו־ר “to explore, scout” in the pattern קַטָּל, the pattern of trades (Wiktionary). The spies of Numbers 13 were sent “to scout” (לָתוּר) the land.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tourism is תַּיָּרוּת — the same root as the biblical spies who “scouted” the land."
+    ],
+    "pitfalls": [
+     "A woman is a תַּיֶּרֶת; a mixed group is תַּיָּרִים.",
+     "The י is doubled: tayár (full spelling תייר)."
+    ],
+    "subtleties": [
+     "An Israeli travelling in Israel is a מְטַיֵּל, not a תַּיָּר."
+    ]
+   }
+  },
+  {
+   "id": "he:tayeret",
+   "lemma": "תַּיֶּרֶת",
+   "pos": "NOUN",
+   "senses": [
+    "person.tourist"
+   ],
+   "gender": "FEM",
+   "translit": "tayeret",
+   "features": {
+    "spelling": "תיירת",
+    "root": "ת י ר",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "תַּיָּרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "not used in the construct in everyday Hebrew"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תַּיֶּרֶת",
+    "N;SG;DEF": "הַתַּיֶּרֶת",
+    "N;PL;INDF": "תַּיָּרוֹת",
+    "N;PL;DEF": "הַתַּיָּרוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "תיירת",
+    "N;SG;DEF": "התיירת",
+    "N;PL;INDF": "תיירות",
+    "N;PL;DEF": "התיירות"
+   },
+   "note": "A tourist (a woman). Plural תַּיָּרוֹת.",
+   "contrasts": [
+    {
+     "concept": "person.tourist",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary has no entry for תיירת; the check falls back to the full spelling of the plural, תיירות, which is also the noun “tourism” (Wiktionary lists תיירת as the feminine counterpart of תַּיָּר)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman with a backpack and a guidebook asking the way.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a tourist (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.tourist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "תַּיֶּרֶת מִגֶּרְמַנְיָה צִלְּמָה אֶת הַכֹּתֶל.",
+      "tr": "A tourist from Germany photographed the Western Wall.",
+      "register": "neutral",
+      "context": "sightseeing",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתַּיָּרוֹת הִגִּיעוּ בְּאוֹטוֹבּוּס.",
+      "tr": "The (women) tourists came by bus.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "תַּיֶּרֶת אַחַת שָׁאֲלָה עַל הַמָּלוֹן.",
+      "tr": "One tourist (f.) asked about the hotel.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּיֶּרֶת מֵחוּץ לָאָרֶץ",
+      "tr": "a tourist (f.) from abroad"
+     },
+     {
+      "text": "קְבוּצַת תַּיָּרוֹת",
+      "tr": "a group of (women) tourists"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְטַיֶּלֶת",
+      "register": "neutral",
+      "nuance": "“a traveller, hiker (f.)” — someone on a trip, also at home"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of תַּיָּר (Wiktionary lists תיירת as its feminine counterpart), with the ending ־ֶת.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ending ־ֶת makes the ־ָ־ of תַּיָּר an ־ֶ־: tayéret."
+    ],
+    "pitfalls": [
+     "Women only: a group with one man is תַּיָּרִים."
+    ],
+    "subtleties": [
+     "The plural goes back to the vowel of the masculine: תַּיָּרוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:madrich",
+   "lemma": "מַדְרִיךְ",
+   "pos": "NOUN",
+   "senses": [
+    "person.guide"
+   ],
+   "gender": "MASC",
+   "translit": "madrich",
+   "features": {
+    "spelling": "מדריך",
+    "root": "ד ר ך",
+    "pattern": "מַקְטִיל",
+    "plurals": [
+     {
+      "form": "מַדְרִיכִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַדְרִיךְ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מַדְרִיכֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מַדְרִיךְ",
+    "N;SG;DEF": "הַמַּדְרִיךְ",
+    "N;PL;INDF": "מַדְרִיכִים",
+    "N;PL;DEF": "הַמַּדְרִיכִים",
+    "N;SG;CONST": "מַדְרִיךְ",
+    "N;PL;CONST": "מַדְרִיכֵי"
+   },
+   "note": "A guide (a man); also an instructor, a guidebook. A woman: מַדְרִיכָה.",
+   "contrasts": [
+    {
+     "concept": "person.guide",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A raised umbrella at the head of a group, stories at every corner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a guide (a man; the plural also for a mixed group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.guide"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמַּדְרִיךְ הִסְבִּיר לָנוּ עַל הָעִיר הָעַתִּיקָה.",
+      "tr": "The guide told us about the Old City.",
+      "register": "neutral",
+      "context": "sightseeing",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא עוֹבֵד כְּמַדְרִיךְ טִיּוּלִים.",
+      "tr": "He works as a tour guide.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּטִּיּוּל הָיוּ שְׁנֵי מַדְרִיכִים.",
+      "tr": "There were two guides on the trip.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַדְרִיךְ טִיּוּלִים",
+      "tr": "a tour guide"
+     },
+     {
+      "text": "מַדְרִיךְ בַּמּוּזֵאוֹן",
+      "tr": "a guide at the museum"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מוֹרֵה דֶּרֶךְ",
+      "register": "formal",
+      "nuance": "“one who shows the way” — a (licensed) guide (Wiktionary lists it under “guide”)"
+     }
+    ],
+    "etymology": {
+     "text": "The present participle of הִדְרִיךְ “to guide”, root ד־ר־ך “way”, in the pattern מַקְטִיל (Wiktionary): “the one who shows the way”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "דֶּרֶךְ “way” gives the guide (מַדְרִיךְ), the passport (דַּרְכּוֹן) and the guidance (הַדְרָכָה)."
+    ],
+    "pitfalls": [
+     "Wiktionary’s other senses — a youth counsellor, an instructor, a guidebook — use the same word: context decides.",
+     "A woman is a מַדְרִיכָה."
+    ],
+    "subtleties": [
+     "A tour guide is usually מַדְרִיךְ טִיּוּלִים; in the youth movements a מַדְרִיךְ is a group leader."
+    ]
+   }
+  },
+  {
+   "id": "he:madricha",
+   "lemma": "מַדְרִיכָה",
+   "pos": "NOUN",
+   "senses": [
+    "person.guide"
+   ],
+   "gender": "FEM",
+   "translit": "madricha",
+   "features": {
+    "spelling": "מדריכה",
+    "root": "ד ר ך",
+    "pattern": "מַקְטִילָה",
+    "plurals": [
+     {
+      "form": "מַדְרִיכוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַדְרִיכַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מַדְרִיכוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מַדְרִיכָה",
+    "N;SG;DEF": "הַמַּדְרִיכָה",
+    "N;PL;INDF": "מַדְרִיכוֹת",
+    "N;PL;DEF": "הַמַּדְרִיכוֹת",
+    "N;SG;CONST": "מַדְרִיכַת",
+    "N;PL;CONST": "מַדְרִיכוֹת"
+   },
+   "note": "A guide (a woman). Plural מַדְרִיכוֹת.",
+   "contrasts": [
+    {
+     "concept": "person.guide",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A guide with a microphone on the bus, counting heads.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a guide (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.guide"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמַּדְרִיכָה דִּבְּרָה אַנְגְּלִית וְעִבְרִית.",
+      "tr": "The guide (f.) spoke English and Hebrew.",
+      "register": "neutral",
+      "context": "sightseeing",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מַדְרִיכַת טִיּוּלִים.",
+      "tr": "She is a tour guide.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמַּדְרִיכוֹת חִכּוּ לַקְּבוּצָה.",
+      "tr": "The guides (f.) waited for the group.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַדְרִיכַת טִיּוּלִים",
+      "tr": "a tour guide (f.)"
+     },
+     {
+      "text": "הַמַּדְרִיכָה שֶׁל הַקְּבוּצָה",
+      "tr": "the group’s guide (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מוֹרַת דֶּרֶךְ",
+      "register": "formal",
+      "nuance": "“one who shows the way” (f.) — a (licensed) guide"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of מַדְרִיךְ (Wiktionary lists it as its feminine counterpart), root ד־ר־ך “way”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the youth movements the מַדְרִיכָה is the leader of a group of children."
+    ],
+    "pitfalls": [
+     "Women only: a group with one man is מַדְרִיכִים.",
+     "Construct: מַדְרִיכַת טִיּוּלִים (־ַת)."
+    ],
+    "subtleties": [
+     "Like the masculine, also “instructor, counsellor”."
+    ]
+   }
+  },
+  {
+   "id": "he:bashavua-haba",
+   "lemma": "בַּשָּׁבוּעַ הַבָּא",
+   "pos": "ADV",
+   "senses": [
+    "time.nextweek"
+   ],
+   "translit": "bashavua haba",
+   "features": {
+    "spelling": "בשבוע הבא",
+    "derivedFrom": "בְּ + הַשָּׁבוּעַ “the week” + הַבָּא “the coming” (the present of בָּא with the article)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "Next week (adverb of time). As a subject: הַשָּׁבוּעַ הַבָּא. Last week: בַּשָּׁבוּעַ שֶׁעָבַר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org): no entry for the phrase; its words checked one by one",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The diary page after this one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextweek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּשָּׁבוּעַ הַבָּא נִסַּע לְאֵילַת.",
+      "tr": "Next week we’ll go to Eilat.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "נִתְרָאֶה בַּשָּׁבוּעַ הַבָּא!",
+      "tr": "See you next week!",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבְּחִינָה בַּשָּׁבוּעַ הַבָּא.",
+      "tr": "The exam is next week.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּשָּׁבוּעַ הַבָּא בְּיוֹם שֵׁנִי",
+      "tr": "next week on Monday"
+     },
+     {
+      "text": "עַד הַשָּׁבוּעַ הַבָּא",
+      "tr": "until next week"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּעוֹד שָׁבוּעַ",
+      "register": "neutral",
+      "nuance": "“in a week (from now)” — counted from today"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "בַּשָּׁבוּעַ שֶׁעָבַר",
+      "note": "last week (“in the week that passed”)"
+     }
+    ],
+    "etymology": {
+     "text": "A phrase: בְּ “in” + הַשָּׁבוּעַ “the week” + הַבָּא, the present (participle) of בָּא “to come” with the article — “in the coming week”. Wiktionary has no entry for the phrase.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Next” is “the coming one”: הַבָּא, הַבָּאָה — the verb בָּא used as an adjective."
+    ],
+    "pitfalls": [
+     "As the subject there is no בְּ: הַשָּׁבוּעַ הַבָּא יִהְיֶה קָשֶׁה “next week will be hard”.",
+     "“Last week” is not built with אַחֲרוֹן: it is בַּשָּׁבוּעַ שֶׁעָבַר."
+    ],
+    "subtleties": [
+     "הַבָּא agrees with its noun: הַשָּׁבוּעַ הַבָּא, הַשָּׁנָה הַבָּאָה, יוֹם רִאשׁוֹן הַבָּא “next Sunday”."
+    ]
+   }
+  },
+  {
+   "id": "he:bashana-habaa",
+   "lemma": "בַּשָּׁנָה הַבָּאָה",
+   "pos": "ADV",
+   "senses": [
+    "time.nextyear"
+   ],
+   "translit": "bashana haba'a",
+   "features": {
+    "spelling": "בשנה הבאה",
+    "derivedFrom": "בְּ + הַשָּׁנָה “the year” + הַבָּאָה “the coming” (feminine: שָׁנָה is feminine)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "Next year (adverb of time). Feminine agreement: הַבָּאָה. Last year: בַּשָּׁנָה שֶׁעָבְרָה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org): no entry for the phrase; its words checked one by one",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "New Year’s resolutions; the Passover wish for Jerusalem.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextyear"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּשָּׁנָה הַבָּאָה אֲנִי אַתְחִיל לִלְמֹד בָּאוּנִיבֶרְסִיטָה.",
+      "tr": "Next year I’ll start studying at university.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשָּׁנָה הַבָּאָה נְבַקֵּר בְּיָוָן.",
+      "tr": "Next year we’ll visit Greece.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲתֻנָּה תִּהְיֶה בַּשָּׁנָה הַבָּאָה.",
+      "tr": "The wedding will be next year.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּשָּׁנָה הַבָּאָה בַּקַּיִץ",
+      "tr": "next year in the summer"
+     },
+     {
+      "text": "עַד הַשָּׁנָה הַבָּאָה",
+      "tr": "until next year"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לְשָׁנָה הַבָּאָה בִּירוּשָׁלַיִם",
+      "tr": "next year in Jerusalem",
+      "kind": "fixed expression",
+      "meaning": "the wish that closes the Passover Seder",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בְּעוֹד שָׁנָה",
+      "register": "neutral",
+      "nuance": "“in a year (from now)” — counted from today"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "בַּשָּׁנָה שֶׁעָבְרָה",
+      "note": "last year"
+     }
+    ],
+    "etymology": {
+     "text": "A phrase: בְּ “in” + הַשָּׁנָה “the year” + הַבָּאָה, the feminine present (participle) of בָּא “to come” with the article. Wiktionary has no entry for the phrase.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Passover Seder ends with לְשָׁנָה הַבָּאָה בִּירוּשָׁלַיִם, “next year in Jerusalem”."
+    ],
+    "pitfalls": [
+     "Feminine, because שָׁנָה is feminine: הַבָּאָה — and “last year” is בַּשָּׁנָה שֶׁעָבְרָה (feminine verb).",
+     "As the subject there is no בְּ: הַשָּׁנָה הַבָּאָה תִּהְיֶה טוֹבָה."
+    ],
+    "subtleties": [
+     "With לְ it is a wish or a deadline: לְשָׁנָה הַבָּאָה “for next year”."
+    ]
+   }
+  }
+ ]
+}

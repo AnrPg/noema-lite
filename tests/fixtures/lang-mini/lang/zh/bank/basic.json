@@ -1,0 +1,176 @@
+{
+ "sentences": [
+  {
+   "id": "zh.s.001",
+   "frame": "fr.eat.def",
+   "text": "她吃胡萝卜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats the carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.002",
+   "frame": "fr.eat.indef",
+   "text": "他吃一个洋葱。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats an onion.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.003",
+   "frame": "fr.eat.generic",
+   "text": "她吃黄瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.004",
+   "frame": "fr.eat.and",
+   "text": "他吃胡萝卜和洋葱。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the carrot and the onion.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.005",
+   "frame": "fr.eat.def.pl",
+   "text": "她吃茄子。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats the eggplants.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.006",
+   "frame": "fr.eat.def2",
+   "text": "他吃南瓜。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the pumpkin.",
+   "level": "A1"
+  }
+ ]
+}

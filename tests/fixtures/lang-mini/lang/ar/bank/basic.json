@@ -1,0 +1,246 @@
+{
+ "sentences": [
+  {
+   "id": "ar.s.001",
+   "frame": "fr.eat.def",
+   "text": "هِيَ تَأْكُلُ الْجَزَرَةَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْجَزَرَةَ",
+     "l": "ar:jazar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats the carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s.002",
+   "frame": "fr.eat.indef",
+   "text": "هُوَ يَأْكُلُ بَصَلَةً.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "بَصَلَةً",
+     "l": "ar:basal",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats an onion.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s.003",
+   "frame": "fr.eat.generic",
+   "text": "هِيَ تَأْكُلُ الْخِيَارَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْخِيَارَ",
+     "l": "ar:khiyar",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats cucumbers (in general).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s.004",
+   "frame": "fr.eat.and",
+   "text": "هُوَ يَأْكُلُ الْجَزَرَةَ وَالْبَصَلَةَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْجَزَرَةَ",
+     "l": "ar:jazar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْبَصَلَةَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْبَصَلَةَ",
+       "l": "ar:basal",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the carrot and the onion.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s.005",
+   "frame": "fr.eat.def.pl",
+   "text": "هِيَ تَأْكُلُ الْبَاذِنْجَانَاتِ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْبَاذِنْجَانَاتِ",
+     "l": "ar:badhinjan",
+     "f": "N;ACC;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the eggplants.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s.006",
+   "frame": "fr.eat.def2",
+   "text": "هُوَ يَأْكُلُ الْقَرْعَةَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقَرْعَةَ",
+     "l": "ar:qar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s.007",
+   "frame": "fr.eat.def",
+   "text": "هِيَ تَأْكُلُ الْجَزَرَاتِ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْجَزَرَاتِ",
+     "l": "ar:jazar",
+     "f": "N;ACC;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the carrots.",
+   "level": "A1",
+   "variantOf": "ar.s.001",
+   "variant": {
+    "Number": "PL"
+   }
+  }
+ ],
+ "fieldExemptions": [
+  {
+   "field": "food.vegetables",
+   "function": "fn.root.pattern",
+   "reason": "the mini course has no vegetable word whose root family it teaches"
+  }
+ ]
+}

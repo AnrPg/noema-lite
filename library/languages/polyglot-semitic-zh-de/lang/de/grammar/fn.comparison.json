@@ -1,0 +1,592 @@
+{
+ "function": "fn.comparison",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "adj.comparativeForm",
+   "value": "affix"
+  },
+  {
+   "feature": "syn.comparison",
+   "value": "particle"
+  }
+ ],
+ "summary": "German compares with endings, not with words for “more” and “most”: the comparative adds -er (schnell → schneller), and “than” is als: Der Zug ist schneller als der Bus (the pronoun after als stays nominative: älter als ich). The superlative has two forms: am …-sten after sein and with verbs (Der Zug ist am schnellsten; Er fährt am schnellsten), and der / die / das …-ste before a noun (der schnellste Zug). Most short adjectives with a, o, u take an umlaut: alt – älter – am ältesten, groß – größer, jung – jünger, kurz – kürzer, lang – länger, kalt – kälter, warm – wärmer (but not all: blau – blauer, froh – froher). After -t, -d, -s, -ß, -z, -sch the superlative adds -est: am ältesten, am heißesten, am kürzesten. A few are irregular: gut – besser – am besten, viel – mehr – am meisten, hoch – höher – am höchsten, nah – näher – am nächsten, gern – lieber – am liebsten. Comparative and superlative before a noun take the normal endings: ein größeres Haus, der ältere Bruder, die größten Zimmer. Equality is so … wie: so groß wie ich. Colours: all colour words decline (ein rotes Auto) except orange, rosa and lila; light and dark shades are compounds written as one word – hellblau, dunkelrot, dunkelgrün.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "basic",
+    "comparative (+ als)",
+    "superlative (am …)",
+    "before a noun"
+   ],
+   "rows": [
+    [
+     "schnell",
+     "schneller",
+     "am schnellsten",
+     "der schnellste Zug"
+    ],
+    [
+     "klein",
+     "kleiner",
+     "am kleinsten",
+     "das kleinste Zimmer"
+    ],
+    [
+     "alt",
+     "älter",
+     "am ältesten",
+     "der älteste Bruder"
+    ],
+    [
+     "groß",
+     "größer",
+     "am größten",
+     "das größte Haus"
+    ],
+    [
+     "jung",
+     "jünger",
+     "am jüngsten",
+     "die jüngste Schwester"
+    ],
+    [
+     "kurz",
+     "kürzer",
+     "am kürzesten",
+     "der kürzeste Weg"
+    ],
+    [
+     "heiß",
+     "heißer",
+     "am heißesten",
+     "der heißeste Tag"
+    ],
+    [
+     "teuer",
+     "teurer",
+     "am teuersten",
+     "das teuerste Auto"
+    ],
+    [
+     "dunkel",
+     "dunkler",
+     "am dunkelsten",
+     "die dunkelste Nacht"
+    ]
+   ],
+   "caption": "Regular comparison – watch the umlaut and the -est after t, s, ß, z",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "affix"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "basic",
+    "comparative",
+    "superlative"
+   ],
+   "rows": [
+    [
+     "gut",
+     "besser",
+     "am besten / der beste"
+    ],
+    [
+     "viel",
+     "mehr",
+     "am meisten / die meisten"
+    ],
+    [
+     "hoch",
+     "höher",
+     "am höchsten / der höchste"
+    ],
+    [
+     "nah",
+     "näher",
+     "am nächsten / der nächste"
+    ],
+    [
+     "gern",
+     "lieber",
+     "am liebsten"
+    ]
+   ],
+   "caption": "Irregular – learn these by heart"
+  },
+  {
+   "t": "table",
+   "head": [
+    "you want to say",
+    "German",
+    "example"
+   ],
+   "rows": [
+    [
+     "bigger than",
+     "-er + als",
+     "Mein Bruder ist größer als ich."
+    ],
+    [
+     "as big as",
+     "so … wie",
+     "Er ist so groß wie ich."
+    ],
+    [
+     "the biggest (after sein / with a verb)",
+     "am …-sten",
+     "Dieses Zimmer ist am größten."
+    ],
+    [
+     "the biggest + noun",
+     "der / die / das …-ste",
+     "das größte Zimmer"
+    ],
+    [
+     "more + noun",
+     "mehr (no ending)",
+     "Im Sommer trinken wir mehr Wasser."
+    ],
+    [
+     "most (with a verb)",
+     "am meisten",
+     "Was magst du am meisten?"
+    ],
+    [
+     "most + plural noun",
+     "die meisten",
+     "die meisten Kinder"
+    ]
+   ],
+   "caption": "Comparing",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "particle"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "colour",
+    "example",
+    "note"
+   ],
+   "rows": [
+    [
+     "weiß, schwarz, rot, blau, grün, gelb, braun, grau",
+     "ein rotes Auto, der blaue Stift",
+     "normal adjective endings"
+    ],
+    [
+     "orange, rosa, lila",
+     "ein rosa Kleid, eine lila Tasche",
+     "no endings in careful German (speech: ein rosanes Kleid – colloquial)"
+    ],
+    [
+     "light / dark shades",
+     "hellblau, dunkelrot, dunkelgrün",
+     "one word: ein hellblaues Hemd"
+    ],
+    [
+     "as nouns",
+     "das Rot, das Blau",
+     "neuter, capitalised"
+    ]
+   ],
+   "caption": "Colours",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Russian splits blue into синий (dark) and голубой (light); German has one word, blau, and adds hell- / dunkel- when needed (hellblau)."
+    },
+    {
+     "for": "vi",
+     "rel": "trap",
+     "text": "xanh covers green and blue (xanh lá cây, xanh dương); German always separates grün and blau."
+    }
+   ],
+   "typology": [
+    {
+     "feature": "sem.greenBlue",
+     "value": "distinct"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "than = als",
+   "text": "größer als ich – not *größer wie ich (colloquial/regional, wrong in writing) and not *als mich. “as … as” is so … wie."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "mehr never changes",
+   "text": "mehr Bücher, mehr Milch – no ending. nicht mehr means “no longer”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "am …-sten or der …-ste?",
+   "text": "After sein both work when a noun is understood (Dieser Zug ist der schnellste / am schnellsten), but with a verb only am: Er läuft am schnellsten."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself when you compare",
+   "questions": [
+    "Two things? → comparative -er + als.",
+    "Equal? → so … wie.",
+    "The top one, after sein or with a verb? → am …-sten.",
+    "The top one before a noun? → der / die / das …-ste + ending.",
+    "Short word with a, o, u? → probably an umlaut (älter, größer, jünger).",
+    "Ends in t, d, s, ß, z? → -esten (am ältesten, am heißesten).",
+    "gut, viel, hoch, nah, gern? → irregular."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I comparing two things? → -er + als (größer als …), pronoun in the nominative.",
+   "Are they equal? → so … wie.",
+   "The top one after sein or with a verb? → am …-sten.",
+   "The top one before a noun? → der / die / das …-ste with the normal ending.",
+   "Short adjective with a, o, u? → check the umlaut (alt – älter).",
+   "Does it end in -t, -d, -s, -ß, -z? → superlative -est.",
+   "Is it gut, viel, hoch, nah, gern? → besser, mehr, höher, näher, lieber.",
+   "A colour? orange, rosa, lila take no endings; shades are hellblau, dunkelrot."
+  ],
+  "steps": [
+   "Choose comparative, superlative or so … wie.",
+   "Build the form (umlaut, -est, irregular).",
+   "Before a noun, add the adjective ending."
+  ]
+ },
+ "traps": [
+  "als, not wie, after a comparative: größer als ich.",
+  "Pronoun after als in the nominative: älter als ich (not *als mich).",
+  "Umlaut: älter, größer, jünger, kürzer, länger, kälter, wärmer.",
+  "gut – besser – am besten; viel – mehr – am meisten; hoch – höher – am höchsten.",
+  "mehr takes no ending: mehr Bücher.",
+  "die meisten Leute (most people), not *am meisten Leute.",
+  "orange, rosa, lila take no endings in careful German.",
+  "Light and dark shades are one word: hellblau, dunkelrot."
+ ],
+ "paradigmCells": [
+  "ADJ;CMPR",
+  "ADJ;SPRL",
+  "ADJ;NOM;SG;MASC;WEAK;SPRL"
+ ],
+ "evidence": {
+  "tags": [
+   "SPRL"
+  ],
+  "lemmas": [
+   "de:als",
+   "de:mehr",
+   "de:am_meisten"
+  ]
+ },
+ "needs": {
+  "ADJ": 8
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;CMPR",
+    "ADJ;SPRL"
+   ],
+   "count": 10
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "concepts": [
+    "adj."
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;WEAK;SPRL",
+    "ADJ;NOM;SG;NEUT;WEAK;SPRL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.comparison"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "frames": [
+     "fr.colour"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "frames": [
+     "fr.colour"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Mein Bruder ist ___ als ich. (alt)",
+   "options": [
+    "älter",
+    "alter",
+    "ältester"
+   ],
+   "answer": "älter",
+   "why": "Comparative with umlaut: alt → älter."
+  },
+  {
+   "q": "Der Zug ist schneller ___ der Bus.",
+   "options": [
+    "als",
+    "wie",
+    "dann"
+   ],
+   "answer": "als",
+   "why": "After a comparative “than” is als."
+  },
+  {
+   "q": "Er ist älter als ___.",
+   "options": [
+    "ich",
+    "mich",
+    "mir"
+   ],
+   "answer": "ich",
+   "why": "After als the pronoun stays nominative."
+  },
+  {
+   "q": "gut – besser – ___",
+   "options": [
+    "am besten",
+    "am gutesten",
+    "am bessersten"
+   ],
+   "answer": "am besten",
+   "why": "gut is irregular: besser, am besten."
+  },
+  {
+   "q": "Im Juli ist es ___.",
+   "options": [
+    "am heißesten",
+    "am heißsten",
+    "heißest"
+   ],
+   "answer": "am heißesten",
+   "why": "heiß ends in ß → -est: am heißesten."
+  },
+  {
+   "q": "Das ist ___ Zimmer.",
+   "options": [
+    "das größte",
+    "das am größten",
+    "das größer"
+   ],
+   "answer": "das größte",
+   "why": "Before a noun: der / die / das …-ste."
+  },
+  {
+   "q": "Er ist ___ groß ___ ich. (as tall as)",
+   "options": [
+    "so … wie",
+    "so … als",
+    "mehr … wie"
+   ],
+   "answer": "so … wie",
+   "why": "Equality is so … wie."
+  },
+  {
+   "q": "Sie hat eine ___ Tasche. (pink)",
+   "options": [
+    "rosa",
+    "rosae",
+    "rosane"
+   ],
+   "answer": "rosa",
+   "why": "rosa takes no ending in careful German."
+  },
+  {
+   "q": "light blue",
+   "options": [
+    "hellblau",
+    "leichtblau",
+    "hell blaue"
+   ],
+   "answer": "hellblau",
+   "why": "Shades are compounds with hell- / dunkel-; leicht is light in weight."
+  },
+  {
+   "q": "Most children like ice cream.",
+   "options": [
+    "Die meisten Kinder mögen Eis.",
+    "Am meisten Kinder mögen Eis.",
+    "Mehr Kinder mögen Eis."
+   ],
+   "answer": "Die meisten Kinder mögen Eis.",
+   "why": "most + plural noun = die meisten."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.comparison",
+   "note": "Arabic has one pattern, the elative أَفْعَلُ, for both: أَكْبَرُ مِنْ (bigger than – مِنْ is “than”), and the superlative أَكْبَرُ بَيْتٍ / الْأَكْبَرُ (the biggest)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.comparison",
+   "note": "Hebrew uses words, not endings: גָּדוֹל יוֹתֵר מִ… (bigger than), הֲכִי גָּדוֹל (the biggest, everyday) or הַגָּדוֹל בְּיוֹתֵר (formal)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.comparison",
+   "note": "Chinese puts 比 between the two things: 他比我高 (he is taller than me) – the adjective never changes; 更 = even more, 最 = most (最大)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.adjective",
+   "note": "Comparative and superlative before a noun take the endings of S16: ein größeres Haus, die größten Zimmer."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has -τερος (γρηγορότερος) beside πιο + adjective; German always uses the ending: schneller, also for long words (interessanter). than is als, with the nominative: älter als ich."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "быстрее is like schneller; but “than” is als + nominative (älter als ich), never a genitive (старше меня)."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish uses más … que (más rápido que); German adds -er and uses als: schneller als. The superlative is am schnellsten or der schnellste."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "German always uses -er, even for long adjectives: interessanter, not *mehr interessant. “than” is als, not wie; “as … as” is so … wie."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French uses plus … que; German adds -er and als: schneller als. meilleur is besser."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi compares with se (“from”): vah mujhse lambā hai; German adds -er to the adjective and uses als: Er ist größer als ich. sabse (“from all”) is am …-sten."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "bozorgtar az man is größer als ich: a suffix and a word for “than”; -tarin (bozorgtarin) is der größte."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi compares with -peksha (“than”) on the other noun and keeps the adjective; German changes the adjective (größer) and uses als."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic makes one pattern ʾafʿal for “bigger” and “biggest” (kabīr → ʾakbar) with min; German has two forms (größer, am größten) and als."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew adds yoter (more) and mi- (than): gadol yoter mi-; German changes the adjective itself: größer als."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts the compared thing in the ablative and may add daha (benden daha büyük); German changes the adjective (größer) and uses als: größer als ich."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese adjectives do not change: kare wa watashi yori takai (“he than me tall”); German says Er ist größer als ich, and the superlative is am größten (Japanese ichiban)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adds boda (than) and deo (more) without changing the adjective; German adds -er."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish -mpi (nopeampi) and -in (nopein) are endings like German -er and -st: schneller, am schnellsten; kuin is als."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "-bb (nagyobb) and leg-…-bb (legnagyobb) are endings like German -er and -st; mint is als."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says mrefu kuliko mimi (“tall where there is me”); German changes the adjective: größer als ich."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "比 sits before the compared thing and the adjective does not change (他比我高); German changes the adjective and uses als: Er ist größer als ich."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "hơn follows the adjective (cao hơn tôi), which never changes; German adds -er (größer als ich) and the superlative ending -st."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut adds a suffix meaning “more” to the word for the quality and puts the thing compared in the case meaning “from”; German has the ending -er and the word als."
+  }
+ ]
+}

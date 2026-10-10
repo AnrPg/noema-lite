@@ -1,0 +1,138 @@
+{
+ "field": "transport",
+ "title": "Transport",
+ "subgroups": [
+  {
+   "id": "tr",
+   "title": "Transport"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  }
+ ],
+ "sources": [
+  "How we travel — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "tr.bus",
+   "gloss": "bus",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "tr.train",
+   "gloss": "train",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "tr.plane",
+   "gloss": "plane",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "tr.taxi",
+   "gloss": "taxi",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "tr.car",
+   "gloss": "car",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "tr.bicycle",
+   "gloss": "bicycle",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "tr.boat",
+   "gloss": "boat, ship",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "tr.onfoot",
+   "gloss": "on foot",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "tr.ticket",
+   "gloss": "ticket",
+   "subgroup": "tr",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "tr.caravan",
+   "gloss": "caravan, a line of camels",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.flight",
+   "gloss": "a flight",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.motorcycle",
+   "gloss": "motorcycle",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.oneway",
+   "gloss": "single, one-way (ticket)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.onhorseback",
+   "gloss": "on horseback (literally)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.roundabout",
+   "gloss": "roundabout, traffic circle",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.tram",
+   "gloss": "tram, streetcar",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  }
+ ]
+}

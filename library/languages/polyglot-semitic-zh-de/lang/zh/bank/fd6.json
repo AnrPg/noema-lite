@@ -1,0 +1,6175 @@
+{
+ "sentences": [
+  {
+   "id": "zh.f6.001",
+   "frame": "fr.adj.pred",
+   "text": "这个房子很大。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This house is big.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.002",
+   "frame": "fr.adj.pred",
+   "text": "这个房子不大。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.negation"
+   ],
+   "gloss": "This house isn’t big.",
+   "variantOf": "zh.f6.001",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.003",
+   "frame": "fr.adj.pred",
+   "text": "这个房子大吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this house big?",
+   "variantOf": "zh.f6.001",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.004",
+   "frame": "fr.adj.pred",
+   "text": "我的房间很小。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "小",
+     "l": "zh:xiao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "My room is small.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.005",
+   "frame": "fr.adj.pred",
+   "text": "这条街很长。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "条",
+     "l": "zh:tiao"
+    },
+    {
+     "t": "街",
+     "l": "zh:jie"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "长",
+     "l": "zh:chang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This street is long.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.006",
+   "frame": "fr.adj.pred",
+   "text": "假期很短。",
+   "tokens": [
+    {
+     "t": "假期",
+     "l": "zh:jiaqi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "短",
+     "l": "zh:duan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "The holidays are short.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.007",
+   "frame": "fr.adj.pred",
+   "text": "我哥哥很高。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "高",
+     "l": "zh:gao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "My older brother is tall.",
+   "alts": [
+    "我的哥哥很高。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.008",
+   "frame": "fr.adj.pred",
+   "text": "这家饭馆不好。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "好",
+     "l": "zh:hao.good"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.negation"
+   ],
+   "gloss": "This restaurant isn’t good.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.009",
+   "frame": "fr.adj.pred",
+   "text": "他不是坏人。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "坏",
+     "l": "zh:huai"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.negation",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He isn’t a bad person.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.010",
+   "frame": "fr.adj.pred",
+   "text": "我的手机坏了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "坏",
+     "l": "zh:huai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.possessive",
+    "fn.aspect"
+   ],
+   "gloss": "My phone is broken.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.011",
+   "frame": "fr.adj.pred",
+   "text": "这本书很旧。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "旧",
+     "l": "zh:jiu.old"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This book is old.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.012",
+   "frame": "fr.adj.pred",
+   "text": "我们的老师很年轻。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "年轻",
+     "l": "zh:nianqing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "Our teacher is young.",
+   "alts": [
+    "我们老师很年轻。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.013",
+   "frame": "fr.adj.pred",
+   "text": "我爷爷老了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "老",
+     "l": "zh:lao"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.possessive",
+    "fn.aspect"
+   ],
+   "gloss": "My grandpa has got old.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.014",
+   "frame": "fr.adj.pred",
+   "text": "今天很热。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "热",
+     "l": "zh:re"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.time.day"
+   ],
+   "gloss": "It’s hot today.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.015",
+   "frame": "fr.adj.pred",
+   "text": "今天不热。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "热",
+     "l": "zh:re"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.time.day",
+    "fn.negation"
+   ],
+   "gloss": "It isn’t hot today.",
+   "variantOf": "zh.f6.014",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.016",
+   "frame": "fr.adj.pred",
+   "text": "今天热吗？",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "热",
+     "l": "zh:re"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.time.day",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is it hot today?",
+   "variantOf": "zh.f6.014",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.017",
+   "frame": "fr.adj.pred",
+   "text": "北京冬天很冷。",
+   "tokens": [
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "冬天",
+     "l": "zh:dongtian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.prep.time"
+   ],
+   "gloss": "Beijing is cold in winter.",
+   "alts": [
+    "冬天北京很冷。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.018",
+   "frame": "fr.adj.pred",
+   "text": "春天很暖和。",
+   "tokens": [
+    {
+     "t": "春天",
+     "l": "zh:chuntian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "暖和",
+     "l": "zh:nuanhuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.prep.time"
+   ],
+   "gloss": "Spring is warm.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.019",
+   "frame": "fr.adj.pred",
+   "text": "这个房间很暖和。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "暖和",
+     "l": "zh:nuanhuo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This room is warm.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.020",
+   "frame": "fr.adj.pred",
+   "text": "她很漂亮。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "漂亮",
+     "l": "zh:piaoliang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is pretty.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.021",
+   "frame": "fr.adj.pred",
+   "text": "这个包很漂亮。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "漂亮",
+     "l": "zh:piaoliang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This bag is pretty.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.022",
+   "frame": "fr.adj.pred",
+   "text": "这个包漂亮吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "漂亮",
+     "l": "zh:piaoliang"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this bag pretty?",
+   "variantOf": "zh.f6.021",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.023",
+   "frame": "fr.adj.pred",
+   "text": "这本书好看吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "好看",
+     "l": "zh:haokan"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this book any good?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.024",
+   "frame": "fr.adj.pred",
+   "text": "这个城市很美。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "城市",
+     "l": "zh:chengshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "美",
+     "l": "zh:mei.beautiful"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This city is beautiful.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.025",
+   "frame": "fr.adj.pred",
+   "text": "这把椅子很丑。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "椅子",
+     "l": "zh:yizi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "丑",
+     "l": "zh:chou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This chair is ugly.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.026",
+   "frame": "fr.adj.pred",
+   "text": "这盏灯很难看。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "盏",
+     "l": "zh:zhan"
+    },
+    {
+     "t": "灯",
+     "l": "zh:deng"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "难看",
+     "l": "zh:nankan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This lamp is hideous.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.027",
+   "frame": "fr.adj.pred",
+   "text": "做饭很容易。",
+   "tokens": [
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "容易",
+     "l": "zh:rongyi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "Cooking is easy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.028",
+   "frame": "fr.adj.pred",
+   "text": "这份工作很难。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "份",
+     "l": "zh:fen"
+    },
+    {
+     "t": "工作",
+     "l": "zh:gongzuo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "难",
+     "l": "zh:nan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This job is hard.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.029",
+   "frame": "fr.adj.pred",
+   "text": "这里的苹果很便宜。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "The apples here are cheap.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.030",
+   "frame": "fr.adj.pred",
+   "text": "这里的苹果便宜吗？",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are the apples here cheap?",
+   "variantOf": "zh.f6.029",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.031",
+   "frame": "fr.adj.pred",
+   "text": "咖啡很贵。",
+   "tokens": [
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "Coffee is expensive.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.032",
+   "frame": "fr.adj.pred",
+   "text": "咖啡不贵。",
+   "tokens": [
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.negation"
+   ],
+   "gloss": "Coffee isn’t expensive.",
+   "variantOf": "zh.f6.031",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.033",
+   "frame": "fr.adj.pred",
+   "text": "葡萄酒贵不贵？",
+   "tokens": [
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the wine expensive?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.034",
+   "frame": "fr.adj.pred",
+   "text": "我今天很高兴。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "高兴",
+     "l": "zh:gaoxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject",
+    "fn.time.day"
+   ],
+   "gloss": "I’m very happy today.",
+   "alts": [
+    "今天我很高兴。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.035",
+   "frame": "fr.adj.pred",
+   "text": "妈妈今天很开心。",
+   "tokens": [
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "开心",
+     "l": "zh:kaixin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.time.day"
+   ],
+   "gloss": "Mum is really happy today.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.036",
+   "frame": "fr.adj.pred",
+   "text": "她很难过。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "难过",
+     "l": "zh:nanguo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is sad.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.037",
+   "frame": "fr.adj.pred",
+   "text": "孩子很伤心。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "伤心",
+     "l": "zh:shangxin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "The child is heartbroken.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.038",
+   "frame": "fr.adj.pred",
+   "text": "我很累。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "累",
+     "l": "zh:lei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m tired.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.039",
+   "frame": "fr.adj.pred",
+   "text": "我不累。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "累",
+     "l": "zh:lei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject",
+    "fn.negation"
+   ],
+   "gloss": "I’m not tired.",
+   "variantOf": "zh.f6.038",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.040",
+   "frame": "fr.adj.pred",
+   "text": "我饿了。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject",
+    "fn.aspect"
+   ],
+   "gloss": "I’m hungry.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.041",
+   "frame": "fr.adj.pred",
+   "text": "孩子们饿了。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.aspect"
+   ],
+   "gloss": "The children are hungry.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.042",
+   "frame": "fr.adj.pred",
+   "text": "孩子们饿了吗？",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.aspect",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are the children hungry?",
+   "variantOf": "zh.f6.041",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.043",
+   "frame": "fr.adj.pred",
+   "text": "我渴了，我要喝水。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "渴",
+     "l": "zh:ke.thirsty"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "水",
+     "l": "zh:shui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.pronoun.subject",
+    "fn.aspect",
+    "fn.object"
+   ],
+   "gloss": "I’m thirsty — I want some water.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.044",
+   "frame": "fr.adj.pred",
+   "text": "火车很快。",
+   "tokens": [
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "快",
+     "l": "zh:kuai.fast"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "The train is fast.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.045",
+   "frame": "fr.adj.pred",
+   "text": "这辆公共汽车很慢。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "慢",
+     "l": "zh:man"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This bus is slow.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.046",
+   "frame": "fr.adj.attr",
+   "text": "这是一栋大房子。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "栋",
+     "l": "zh:dong"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This is a big house.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.047",
+   "frame": "fr.adj.attr",
+   "text": "我想买一个小包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "小",
+     "l": "zh:xiao"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I want to buy a small bag.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.048",
+   "frame": "fr.adj.attr",
+   "text": "他是一个好老师。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "好",
+     "l": "zh:hao.good"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a good teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.049",
+   "frame": "fr.adj.attr",
+   "text": "她是我的好朋友。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "好",
+     "l": "zh:hao.good"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "She is my good friend.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.050",
+   "frame": "fr.adj.attr",
+   "text": "他有很多新书。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "新",
+     "l": "zh:xin"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "He has a lot of new books.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.051",
+   "frame": "fr.adj.attr",
+   "text": "我有一部新手机。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "部",
+     "l": "zh:bu.clf"
+    },
+    {
+     "t": "新",
+     "l": "zh:xin"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a new phone.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.052",
+   "frame": "fr.adj.attr",
+   "text": "我有一个很漂亮的房间。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "漂亮",
+     "l": "zh:piaoliang"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I have a very beautiful room.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.053",
+   "frame": "fr.adj.attr",
+   "text": "这是一家便宜的饭馆。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This is a cheap restaurant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.054",
+   "frame": "fr.adj.attr",
+   "text": "我喜欢热茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "热",
+     "l": "zh:re"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like hot tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.055",
+   "frame": "fr.adj.attr",
+   "text": "我要一杯热咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "杯",
+     "l": "zh:bei"
+    },
+    {
+     "t": "热",
+     "l": "zh:re"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.measure.word",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like a cup of hot coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.056",
+   "frame": "fr.adj.attr",
+   "text": "他是我的老朋友。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "老",
+     "l": "zh:lao"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "He is an old friend of mine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.057",
+   "frame": "fr.adj.attr",
+   "text": "那个年轻的女人是医生。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "年轻",
+     "l": "zh:nianqing"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "女人",
+     "l": "zh:nvren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "医生",
+     "l": "zh:yisheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "That young woman is a doctor.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.058",
+   "frame": "fr.adj.attr",
+   "text": "那位老人是我爷爷。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "老",
+     "l": "zh:lao"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "That old man is my grandpa.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.059",
+   "frame": "fr.adj.attr",
+   "text": "我不喜欢冷咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I don’t like cold coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.060",
+   "frame": "fr.adj.attr",
+   "text": "我要大的，不要小的。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "小",
+     "l": "zh:xiao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I want the big one, not the small one.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.061",
+   "frame": "fr.adj.attr",
+   "text": "我爸爸有一辆新车。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "新",
+     "l": "zh:xin"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "My dad has a new car.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.062",
+   "frame": "fr.adj.attr",
+   "text": "我们去一家好饭馆吧。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "好",
+     "l": "zh:hao.good"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.direction",
+    "fn.imperative",
+    "fn.measure.word"
+   ],
+   "gloss": "Let’s go to a good restaurant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.063",
+   "frame": "fr.colour",
+   "text": "我的车是白色的。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "白色",
+     "l": "zh:baise"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My car is white.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.064",
+   "frame": "fr.colour",
+   "text": "我想喝白葡萄酒。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "白",
+     "l": "zh:bai"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’d like some white wine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.065",
+   "frame": "fr.colour",
+   "text": "她有一个黑色的包。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "黑色",
+     "l": "zh:heise"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word"
+   ],
+   "gloss": "She has a black bag.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.066",
+   "frame": "fr.colour",
+   "text": "他喝黑咖啡。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "黑",
+     "l": "zh:hei"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He drinks black coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.067",
+   "frame": "fr.colour",
+   "text": "外面很黑。",
+   "tokens": [
+    {
+     "t": "外面",
+     "l": "zh:waimian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "黑",
+     "l": "zh:hei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.prep.place"
+   ],
+   "gloss": "It’s dark outside.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.068",
+   "frame": "fr.colour",
+   "text": "我喜欢红色。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "红色",
+     "l": "zh:hongse"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like red.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.069",
+   "frame": "fr.colour",
+   "text": "我爸爸喜欢红葡萄酒。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "红",
+     "l": "zh:hong"
+    },
+    {
+     "t": "葡萄酒",
+     "l": "zh:putaojiu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.possessive"
+   ],
+   "gloss": "My dad likes red wine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.070",
+   "frame": "fr.colour",
+   "text": "这个苹果很红。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "红",
+     "l": "zh:hong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This apple is very red.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.071",
+   "frame": "fr.colour",
+   "text": "我们的门是蓝色的。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "门",
+     "l": "zh:men"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "蓝色",
+     "l": "zh:lanse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "Our door is blue.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.072",
+   "frame": "fr.colour",
+   "text": "那辆蓝色的车是我爸爸的。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "蓝色",
+     "l": "zh:lanse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "That blue car is my dad’s.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.073",
+   "frame": "fr.colour",
+   "text": "我的自行车是蓝的。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "自行车",
+     "l": "zh:zixingche"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "蓝",
+     "l": "zh:lan"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My bike is blue.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.074",
+   "frame": "fr.colour",
+   "text": "我喜欢喝绿茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "绿",
+     "l": "zh:lv"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like drinking green tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.075",
+   "frame": "fr.colour",
+   "text": "他的包是绿色的。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "绿色",
+     "l": "zh:lvse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "His bag is green.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.076",
+   "frame": "fr.colour",
+   "text": "这辆出租车是黄色的。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "出租车",
+     "l": "zh:chuzuche"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "黄色",
+     "l": "zh:huangse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This taxi is yellow.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.077",
+   "frame": "fr.colour",
+   "text": "我的杯子是黄的。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "黄",
+     "l": "zh:huang"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My cup is yellow.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.078",
+   "frame": "fr.colour",
+   "text": "我爸爸有一个棕色的包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "棕色",
+     "l": "zh:zongse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word",
+    "fn.possessive"
+   ],
+   "gloss": "My dad has a brown bag.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.079",
+   "frame": "fr.colour",
+   "text": "我的沙发是咖啡色的。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "沙发",
+     "l": "zh:shafa"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "咖啡色",
+     "l": "zh:kafeise"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "My sofa is brown.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.080",
+   "frame": "fr.colour",
+   "text": "他有一辆灰色的车。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "辆",
+     "l": "zh:liang.clf"
+    },
+    {
+     "t": "灰色",
+     "l": "zh:huise"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word"
+   ],
+   "gloss": "He has a grey car.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.081",
+   "frame": "fr.colour",
+   "text": "我要那个橙色的杯子。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "橙色",
+     "l": "zh:chengse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "I want that orange cup.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.082",
+   "frame": "fr.colour",
+   "text": "这个房间的墙是橘黄色的。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "墙",
+     "l": "zh:qiang"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "橘黄色",
+     "l": "zh:juhuangse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "The walls of this room are orange.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.083",
+   "frame": "fr.colour",
+   "text": "我妹妹喜欢粉红色。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "粉红色",
+     "l": "zh:fenhongse"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.possessive"
+   ],
+   "gloss": "My younger sister likes pink.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.084",
+   "frame": "fr.colour",
+   "text": "她有一部粉色的手机。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "部",
+     "l": "zh:bu.clf"
+    },
+    {
+     "t": "粉色",
+     "l": "zh:fense"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.measure.word"
+   ],
+   "gloss": "She has a pink phone.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.085",
+   "frame": "fr.colour",
+   "text": "我不喜欢紫色。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "紫色",
+     "l": "zh:zise"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I don’t like purple.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.086",
+   "frame": "fr.colour",
+   "text": "我喜欢浅蓝色。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "浅",
+     "l": "zh:qian"
+    },
+    {
+     "t": "蓝色",
+     "l": "zh:lanse"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like light blue.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.087",
+   "frame": "fr.colour",
+   "text": "他的车是深蓝色的。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "深",
+     "l": "zh:shen"
+    },
+    {
+     "t": "蓝色",
+     "l": "zh:lanse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "gloss": "His car is dark blue.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.088",
+   "frame": "fr.colour",
+   "text": "卧室的墙是浅绿色的。",
+   "tokens": [
+    {
+     "t": "卧室",
+     "l": "zh:woshi"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "墙",
+     "l": "zh:qiang"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "浅",
+     "l": "zh:qian"
+    },
+    {
+     "t": "绿色",
+     "l": "zh:lvse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula"
+   ],
+   "gloss": "The bedroom walls are light green.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.089",
+   "frame": "fr.colour",
+   "text": "我要深绿色的。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "深",
+     "l": "zh:shen"
+    },
+    {
+     "t": "绿色",
+     "l": "zh:lvse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I want the dark green one.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.090",
+   "frame": "fr.compare",
+   "text": "我哥哥比我高。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "高",
+     "l": "zh:gao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "My older brother is taller than me.",
+   "alts": [
+    "我的哥哥比我高。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.091",
+   "frame": "fr.compare",
+   "text": "我哥哥没有我高。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "高",
+     "l": "zh:gao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.negation",
+    "fn.possessive"
+   ],
+   "gloss": "My older brother isn’t as tall as me.",
+   "variantOf": "zh.f6.090",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "我的哥哥没有我高。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.092",
+   "frame": "fr.compare",
+   "text": "今天比昨天冷。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.time.day"
+   ],
+   "gloss": "Today is colder than yesterday.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.093",
+   "frame": "fr.compare",
+   "text": "今天没有昨天冷。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.time.day",
+    "fn.negation"
+   ],
+   "gloss": "Today isn’t as cold as yesterday.",
+   "variantOf": "zh.f6.092",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.094",
+   "frame": "fr.compare",
+   "text": "今天比昨天冷吗？",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.time.day",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is today colder than yesterday?",
+   "variantOf": "zh.f6.092",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.095",
+   "frame": "fr.compare",
+   "text": "这个房间比那个房间大。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This room is bigger than that one.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.096",
+   "frame": "fr.compare",
+   "text": "这个房间没有那个房间大。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.negation"
+   ],
+   "gloss": "This room isn’t as big as that one.",
+   "variantOf": "zh.f6.095",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.097",
+   "frame": "fr.compare",
+   "text": "咖啡比茶贵。",
+   "tokens": [
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "Coffee is more expensive than tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.098",
+   "frame": "fr.compare",
+   "text": "咖啡没有茶贵。",
+   "tokens": [
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.negation"
+   ],
+   "gloss": "Coffee isn’t as expensive as tea.",
+   "variantOf": "zh.f6.097",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.099",
+   "frame": "fr.compare",
+   "text": "咖啡比茶贵吗？",
+   "tokens": [
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is coffee more expensive than tea?",
+   "variantOf": "zh.f6.097",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.100",
+   "frame": "fr.compare",
+   "text": "飞机比火车快多了。",
+   "tokens": [
+    {
+     "t": "飞机",
+     "l": "zh:feiji"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "快",
+     "l": "zh:kuai.fast"
+    },
+    {
+     "t": "多",
+     "l": "zh:duo"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "Planes are much faster than trains.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.101",
+   "frame": "fr.compare",
+   "text": "我比我妹妹大两岁。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妹妹",
+     "l": "zh:meimei"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "岁",
+     "l": "zh:sui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "I’m two years older than my younger sister.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.102",
+   "frame": "fr.compare",
+   "text": "那个包更好看。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "更",
+     "l": "zh:geng"
+    },
+    {
+     "t": "好看",
+     "l": "zh:haokan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "That bag is nicer.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.103",
+   "frame": "fr.compare",
+   "text": "我更喜欢茶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "更",
+     "l": "zh:geng"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I prefer tea.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.104",
+   "frame": "fr.compare",
+   "text": "我最喜欢蓝色。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "最",
+     "l": "zh:zui"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "蓝色",
+     "l": "zh:lanse"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Blue is my favourite colour.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.105",
+   "frame": "fr.compare",
+   "text": "我们家我爸爸最高。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "最",
+     "l": "zh:zui"
+    },
+    {
+     "t": "高",
+     "l": "zh:gao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "In our family my dad is the tallest.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.106",
+   "frame": "fr.compare",
+   "text": "这是这个城市最大的公园。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "城市",
+     "l": "zh:chengshi"
+    },
+    {
+     "t": "最",
+     "l": "zh:zui"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This is the biggest park in the city.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.107",
+   "frame": "fr.compare",
+   "text": "我跟我哥哥一样高。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "哥哥",
+     "l": "zh:gege"
+    },
+    {
+     "t": "一样",
+     "l": "zh:yiyang"
+    },
+    {
+     "t": "高",
+     "l": "zh:gao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.prep.core",
+    "fn.possessive"
+   ],
+   "gloss": "I’m as tall as my older brother.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.108",
+   "frame": "fr.compare",
+   "text": "这两个杯子一样大。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "一样",
+     "l": "zh:yiyang"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "These two cups are the same size.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.109",
+   "frame": "fr.compare",
+   "text": "哪个更便宜？",
+   "tokens": [
+    {
+     "t": "哪",
+     "l": "zh:na.which"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "更",
+     "l": "zh:geng"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.measure.word",
+    "fn.question.wh"
+   ],
+   "gloss": "Which one is cheaper?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.110",
+   "frame": "fr.compare",
+   "text": "坐出租车比坐公共汽车贵。",
+   "tokens": [
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "出租车",
+     "l": "zh:chuzuche"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "公共汽车",
+     "l": "zh:gonggongqiche"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.direction"
+   ],
+   "gloss": "Taking a taxi costs more than taking the bus.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.111",
+   "frame": "fr.compare",
+   "text": "红苹果比绿苹果贵。",
+   "tokens": [
+    {
+     "t": "红",
+     "l": "zh:hong"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "绿",
+     "l": "zh:lv"
+    },
+    {
+     "t": "苹果",
+     "l": "zh:pingguo"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "Red apples are dearer than green apples.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.112",
+   "frame": "fr.compare",
+   "text": "我的手机比你的新。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "新",
+     "l": "zh:xin"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "My phone is newer than yours.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.113",
+   "frame": "fr.compare",
+   "text": "这本书比那本书难。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "难",
+     "l": "zh:nan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This book is harder than that one.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.114",
+   "frame": "fr.compare",
+   "text": "这里八月最热。",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "八月",
+     "l": "zh:bayue"
+    },
+    {
+     "t": "最",
+     "l": "zh:zui"
+    },
+    {
+     "t": "热",
+     "l": "zh:re"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.prep.time",
+    "fn.demonstrative"
+   ],
+   "gloss": "August is the hottest month here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.115",
+   "frame": "fr.compare",
+   "text": "这个比那个贵一点。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "一点",
+     "l": "zh:yidian"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.numerals"
+   ],
+   "gloss": "This one is a bit dearer than that one.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.116",
+   "frame": "fr.compare",
+   "text": "白色的车比黑色的车便宜吗？",
+   "tokens": [
+    {
+     "t": "白色",
+     "l": "zh:baise"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "黑色",
+     "l": "zh:heise"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "车",
+     "l": "zh:che"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are white cars cheaper than black cars?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.117",
+   "frame": "fr.compare",
+   "text": "今天比昨天更冷。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "昨天",
+     "l": "zh:zuotian"
+    },
+    {
+     "t": "更",
+     "l": "zh:geng"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.time.day"
+   ],
+   "gloss": "Today is even colder than yesterday.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.118",
+   "frame": "fr.link",
+   "text": "我很累，但是我很高兴。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "累",
+     "l": "zh:lei"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "但是",
+     "l": "zh:danshi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "高兴",
+     "l": "zh:gaoxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m tired, but I’m happy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.119",
+   "frame": "fr.link",
+   "text": "这个包很漂亮，可是很贵。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "漂亮",
+     "l": "zh:piaoliang"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "可是",
+     "l": "zh:keshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "This bag is pretty, but it’s expensive.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.120",
+   "frame": "fr.link",
+   "text": "我喜欢茶，但是我不喜欢咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茶",
+     "l": "zh:cha"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "但是",
+     "l": "zh:danshi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.negation",
+    "fn.object",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I like tea, but I don’t like coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.121",
+   "frame": "fr.link",
+   "text": "因为今天很冷，所以我们不去公园。",
+   "tokens": [
+    {
+     "t": "因为",
+     "l": "zh:yinwei"
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.negation",
+    "fn.direction"
+   ],
+   "gloss": "Because it’s cold today, we aren’t going to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.122",
+   "frame": "fr.link",
+   "text": "因为我饿了，所以我想吃饭。",
+   "tokens": [
+    {
+     "t": "因为",
+     "l": "zh:yinwei"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Because I’m hungry, I want to eat.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.123",
+   "frame": "fr.link",
+   "text": "我很渴，所以我喝了很多水。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "渴",
+     "l": "zh:ke.thirsty"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "水",
+     "l": "zh:shui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.aspect",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I was thirsty, so I drank a lot of water.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.124",
+   "frame": "fr.link",
+   "text": "因为火车比汽车快，所以我们坐火车去。",
+   "tokens": [
+    {
+     "t": "因为",
+     "l": "zh:yinwei"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "汽车",
+     "l": "zh:qiche"
+    },
+    {
+     "t": "快",
+     "l": "zh:kuai.fast"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "坐",
+     "l": "zh:zuo"
+    },
+    {
+     "t": "火车",
+     "l": "zh:huoche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.comparison",
+    "fn.direction"
+   ],
+   "gloss": "Because trains are faster than cars, we’re going by train.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.125",
+   "frame": "fr.link",
+   "text": "我们吃午饭，然后去公园。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "午饭",
+     "l": "zh:wufan"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "然后",
+     "l": "zh:ranhou"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.direction",
+    "fn.object"
+   ],
+   "gloss": "We’ll have lunch, then go to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.126",
+   "frame": "fr.link",
+   "text": "我去超市买牛奶，然后回家。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "然后",
+     "l": "zh:ranhou"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.direction",
+    "fn.object"
+   ],
+   "gloss": "I’m going to the supermarket to buy milk, then home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.127",
+   "frame": "fr.link",
+   "text": "我妈妈做饭，然后我们一起吃。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "然后",
+     "l": "zh:ranhou"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.possessive"
+   ],
+   "gloss": "My mum cooks, then we eat together.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.128",
+   "frame": "fr.link",
+   "text": "我累的时候就喝咖啡。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "累",
+     "l": "zh:lei"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.object"
+   ],
+   "gloss": "When I’m tired, I have a coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.129",
+   "frame": "fr.link",
+   "text": "我小的时候很喜欢喝牛奶。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "小",
+     "l": "zh:xiao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "牛奶",
+     "l": "zh:niunai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.object"
+   ],
+   "gloss": "When I was little I loved drinking milk.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.130",
+   "frame": "fr.link",
+   "text": "我回家的时候，妈妈在做饭。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "做饭",
+     "l": "zh:zuofan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.aspect",
+    "fn.direction"
+   ],
+   "gloss": "When I got home, Mum was cooking.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.131",
+   "frame": "fr.link",
+   "text": "他来的时候，我们都很高兴。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "来",
+     "l": "zh:lai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "高兴",
+     "l": "zh:gaoxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.direction"
+   ],
+   "gloss": "When he came, we were all very happy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.132",
+   "frame": "fr.link",
+   "text": "如果明天冷，我们就不去公园。",
+   "tokens": [
+    {
+     "t": "如果",
+     "l": "zh:ruguo"
+    },
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.negation",
+    "fn.direction"
+   ],
+   "gloss": "If it’s cold tomorrow, we won’t go to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.133",
+   "frame": "fr.link",
+   "text": "如果明天不冷，我们就去公园。",
+   "tokens": [
+    {
+     "t": "如果",
+     "l": "zh:ruguo"
+    },
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.negation",
+    "fn.direction"
+   ],
+   "gloss": "If it isn’t cold tomorrow, we’ll go to the park.",
+   "variantOf": "zh.f6.132",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.134",
+   "frame": "fr.link",
+   "text": "如果你饿了，我们就去吃饭。",
+   "tokens": [
+    {
+     "t": "如果",
+     "l": "zh:ruguo"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.direction"
+   ],
+   "gloss": "If you’re hungry, we’ll go and eat.",
+   "alts": [
+    "你如果饿了，我们就去吃饭。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.135",
+   "frame": "fr.link",
+   "text": "你累的话，就回家吧。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "累",
+     "l": "zh:lei"
+    },
+    {
+     "t": "的话",
+     "l": "zh:dehua"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "回",
+     "l": "zh:hui"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "If you’re tired, go home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.136",
+   "frame": "fr.link",
+   "text": "如果你想去，我们明天去北京。",
+   "tokens": [
+    {
+     "t": "如果",
+     "l": "zh:ruguo"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "北京",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.direction"
+   ],
+   "gloss": "If you want to go, we’ll go to Beijing tomorrow.",
+   "alts": [
+    "如果你想去，明天我们去北京。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.137",
+   "frame": "fr.link",
+   "text": "明天不冷的话，我们去公园。",
+   "tokens": [
+    {
+     "t": "明天",
+     "l": "zh:mingtian"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "冷",
+     "l": "zh:leng"
+    },
+    {
+     "t": "的话",
+     "l": "zh:dehua"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "公园",
+     "l": "zh:gongyuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.negation",
+    "fn.direction"
+   ],
+   "gloss": "If it isn’t cold tomorrow, we’re going to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.138",
+   "frame": "fr.link",
+   "text": "虽然这个房子很小，但是很漂亮。",
+   "tokens": [
+    {
+     "t": "虽然",
+     "l": "zh:suiran"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "小",
+     "l": "zh:xiao"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "但是",
+     "l": "zh:danshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "漂亮",
+     "l": "zh:piaoliang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.measure.word"
+   ],
+   "gloss": "Although this house is small, it is pretty.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.139",
+   "frame": "fr.link",
+   "text": "他虽然很累，可是很高兴。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "虽然",
+     "l": "zh:suiran"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "累",
+     "l": "zh:lei"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "可是",
+     "l": "zh:keshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "高兴",
+     "l": "zh:gaoxing"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Although he is tired, he is happy.",
+   "alts": [
+    "虽然他很累，可是很高兴。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.140",
+   "frame": "fr.link",
+   "text": "虽然咖啡很贵，但是我每天都喝。",
+   "tokens": [
+    {
+     "t": "虽然",
+     "l": "zh:suiran"
+    },
+    {
+     "t": "咖啡",
+     "l": "zh:kafei"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "但是",
+     "l": "zh:danshi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.time.day"
+   ],
+   "gloss": "Although coffee is expensive, I drink it every day.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.141",
+   "frame": "fr.link",
+   "text": "我饿了，所以我想吃面包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.aspect",
+    "fn.object"
+   ],
+   "gloss": "I’m hungry, so I want to eat some bread.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.142",
+   "frame": "fr.link",
+   "text": "我不饿，所以我不想吃面包。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "面包",
+     "l": "zh:mianbao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.negation",
+    "fn.object"
+   ],
+   "gloss": "I’m not hungry, so I don’t want to eat any bread.",
+   "variantOf": "zh.f6.141",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.143",
+   "frame": "fr.link",
+   "text": "因为这家饭馆很便宜，所以我们常常去。",
+   "tokens": [
+    {
+     "t": "因为",
+     "l": "zh:yinwei"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia.clf"
+    },
+    {
+     "t": "饭馆",
+     "l": "zh:fanguan"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "常常",
+     "l": "zh:changchang"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.measure.word",
+    "fn.time.day"
+   ],
+   "gloss": "Because this restaurant is cheap, we go there often.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f6.144",
+   "frame": "fr.link",
+   "text": "他去银行，然后去邮局。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "银行",
+     "l": "zh:yinhang"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "然后",
+     "l": "zh:ranhou"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "邮局",
+     "l": "zh:youju"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.direction"
+   ],
+   "gloss": "He goes to the bank, then to the post office.",
+   "level": "A1"
+  }
+ ]
+}

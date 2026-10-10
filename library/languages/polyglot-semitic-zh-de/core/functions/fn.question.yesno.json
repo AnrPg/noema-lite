@@ -1,0 +1,10 @@
+{
+ "id": "fn.question.yesno",
+ "title": "Yes/no questions",
+ "category": "syntax",
+ "level": "A1",
+ "after": [],
+ "tags": [
+  "Mood"
+ ]
+}

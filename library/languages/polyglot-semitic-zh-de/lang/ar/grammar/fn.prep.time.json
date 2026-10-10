@@ -1,0 +1,625 @@
+{
+ "function": "fn.prep.time",
+ "status": "realized",
+ "summary": "The time prepositions take the genitive like every preposition: قَبْلَ (before), بَعْدَ (after), حَتَّى (until; from … to … = مِنْ … إِلَى …), مُنْذُ (since; for a period up to now), خِلَالَ and أَثْنَاءَ (during). قَبْلَ, بَعْدَ, خِلَالَ and أَثْنَاءَ are old nouns in the accusative, like أَمَامَ in lesson 12: they end in -a and take pronoun endings (قَبْلِي, بَعْدَكَ, خِلَالَهُ). “At / on / in” a time is فِي for all three — فِي السَّاعَةِ الْخَامِسَةِ, فِي يَوْمِ الْجُمُعَةِ, فِي يَنَايِرَ, فِي الصَّيْفِ — where German needs um / am / im; often no preposition is needed at all (يَوْمَ الْجُمُعَةِ, صَيْفًا), and عِنْدَ marks a moment (عِنْدَ الظُّهْرِ). قَبْلَ + a span means “ago” (قَبْلَ سَنَةٍ), بَعْدَ + a span “in” (بَعْدَ أُسْبُوعٍ). مُنْذُ goes with the present for what is still going on — أَعِيشُ هُنَا مُنْذُ سَنَةٍ, exactly like German “ich wohne seit einem Jahr hier”. Arabic has no word for “o’clock”: the hour is السَّاعَةُ + a feminine ordinal, السَّاعَةُ الْخَامِسَةُ (“the fifth hour”). The months have two sets of names: old Syriac ones (كَانُونُ الثَّانِي, شُبَاطُ …) in Syria, Lebanon, Jordan, Palestine and Iraq, Latin ones (يَنَايِرُ, فِبْرَايِرُ …) in Egypt, Sudan and the Arabian Peninsula; a month name is a diptote: فِي يَنَايِرَ, فِي شُبَاطَ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "preposition",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "قَبْلَ",
+     "before; ago",
+     "أَشْرَبُ الْقَهْوَةَ قَبْلَ الْفَطُورِ. — وَصَلْتُ قَبْلَ سَاعَةٍ."
+    ],
+    [
+     "بَعْدَ",
+     "after; in (from now)",
+     "نَشْرَبُ الشَّايَ بَعْدَ الْغَدَاءِ. — أُسَافِرُ بَعْدَ أُسْبُوعٍ."
+    ],
+    [
+     "حَتَّى",
+     "until",
+     "أَعْمَلُ حَتَّى الْمَسَاءِ."
+    ],
+    [
+     "مِنْ … إِلَى …",
+     "from … to …",
+     "مِنَ الصَّبَاحِ إِلَى الْمَسَاءِ"
+    ],
+    [
+     "مُنْذُ",
+     "since; for (up to now)",
+     "أَنْتَظِرُ مُنْذُ الصَّبَاحِ. — أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+    ],
+    [
+     "خِلَالَ",
+     "during; within",
+     "خِلَالَ الْعُطْلَةِ — خِلَالَ سَاعَةٍ"
+    ],
+    [
+     "أَثْنَاءَ",
+     "during, while",
+     "أَثْنَاءَ الْأَكْلِ"
+    ],
+    [
+     "فِي",
+     "at / on / in (a time)",
+     "فِي السَّاعَةِ الْخَامِسَةِ — فِي يَوْمِ الْجُمُعَةِ — فِي الصَّيْفِ"
+    ],
+    [
+     "عِنْدَ",
+     "at (a moment)",
+     "عِنْدَ الظُّهْرِ"
+    ]
+   ],
+   "caption": "All of them with the genitive."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "meaning",
+    "Arabic"
+   ],
+   "rows": [
+    [
+     "clock",
+     "at five",
+     "فِي السَّاعَةِ الْخَامِسَةِ"
+    ],
+    [
+     "day",
+     "on Monday",
+     "يَوْمَ الِاثْنَيْنِ / فِي يَوْمِ الِاثْنَيْنِ"
+    ],
+    [
+     "month",
+     "in May",
+     "فِي أَيَّارَ / فِي مَايُو"
+    ],
+    [
+     "season",
+     "in summer",
+     "فِي الصَّيْفِ / صَيْفًا"
+    ]
+   ],
+   "caption": "One فِي — or the bare accusative — for at / on / in.",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English needs three prepositions — at five, on Monday, in May; Arabic has one فِي for all of them, or none."
+    },
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "German um / am / im all become فِي — or nothing: um fünf = فِي السَّاعَةِ الْخَامِسَةِ, am Montag = يَوْمَ الِاثْنَيْنِ."
+    },
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek uses στις for the hour (στις πέντε) and a bare accusative for days, months and seasons (τη Δευτέρα, τον Μάιο, το καλοκαίρι) — like the Arabic bare accusative يَوْمَ الِاثْنَيْنِ, صَيْفًا."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "French à cinq heures, lundi, en mai, en été; Arabic: فِي for all, or the bare accusative."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "time",
+    "Arabic",
+    "literally"
+   ],
+   "rows": [
+    [
+     "1:00",
+     "السَّاعَةُ الْوَاحِدَةُ",
+     "the hour, the one"
+    ],
+    [
+     "2:00",
+     "السَّاعَةُ الثَّانِيَةُ",
+     "the second hour"
+    ],
+    [
+     "3:00",
+     "السَّاعَةُ الثَّالِثَةُ",
+     "the third hour"
+    ],
+    [
+     "4:00",
+     "السَّاعَةُ الرَّابِعَةُ",
+     "the fourth hour"
+    ],
+    [
+     "5:00",
+     "السَّاعَةُ الْخَامِسَةُ",
+     "the fifth hour"
+    ],
+    [
+     "6:00",
+     "السَّاعَةُ السَّادِسَةُ",
+     "the sixth hour"
+    ],
+    [
+     "7:00",
+     "السَّاعَةُ السَّابِعَةُ",
+     "the seventh hour"
+    ],
+    [
+     "8:00",
+     "السَّاعَةُ الثَّامِنَةُ",
+     "the eighth hour"
+    ],
+    [
+     "9:00",
+     "السَّاعَةُ التَّاسِعَةُ",
+     "the ninth hour"
+    ],
+    [
+     "10:00",
+     "السَّاعَةُ الْعَاشِرَةُ",
+     "the tenth hour"
+    ],
+    [
+     "11:00",
+     "السَّاعَةُ الْحَادِيَةَ عَشْرَةَ",
+     "the eleventh hour"
+    ],
+    [
+     "12:00",
+     "السَّاعَةُ الثَّانِيَةَ عَشْرَةَ",
+     "the twelfth hour"
+    ],
+    [
+     "5:15",
+     "الْخَامِسَةُ وَالرُّبْعُ",
+     "five and the quarter"
+    ],
+    [
+     "5:30",
+     "الْخَامِسَةُ وَالنِّصْفُ",
+     "five and the half"
+    ],
+    [
+     "4:45",
+     "الْخَامِسَةُ إِلَّا رُبْعًا",
+     "five minus a quarter"
+    ]
+   ],
+   "caption": "كَمِ السَّاعَةُ؟ — What time is it? There is no word for “o’clock”; in everyday speech the cardinal is common (السَّاعَة خَمْسَة).",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "#",
+    "Syria, Lebanon, Jordan, Palestine, Iraq",
+    "Egypt, Sudan, Arabian Peninsula"
+   ],
+   "rows": [
+    [
+     "1",
+     "كَانُون الثَّانِي",
+     "يَنَايِر"
+    ],
+    [
+     "2",
+     "شُبَاط",
+     "فِبْرَايِر"
+    ],
+    [
+     "3",
+     "آذَار",
+     "مَارِس"
+    ],
+    [
+     "4",
+     "نَيْسَان",
+     "أَبْرِيل"
+    ],
+    [
+     "5",
+     "أَيَّار",
+     "مَايُو"
+    ],
+    [
+     "6",
+     "حَزِيرَان",
+     "يُونْيُو"
+    ],
+    [
+     "7",
+     "تَمُّوز",
+     "يُولْيُو"
+    ],
+    [
+     "8",
+     "آبُ",
+     "أَغُسْطُس"
+    ],
+    [
+     "9",
+     "أَيْلُول",
+     "سِبْتِمْبِر"
+    ],
+    [
+     "10",
+     "تِشْرِين الْأَوَّل",
+     "أُكْتُوبِر"
+    ],
+    [
+     "11",
+     "تِشْرِين الثَّانِي",
+     "نُوفِمْبِر"
+    ],
+    [
+     "12",
+     "كَانُون الْأَوَّل",
+     "دِيسِمْبِر"
+    ]
+   ],
+   "caption": "The Syriac names go back to Babylonian months and are cousins of the Hebrew month names (שְׁבָט, אֲדָר, נִיסָן …); the others come from Latin. The Maghreb uses other forms again (جانفي, يوليوز …).",
+   "typology": [
+    {
+     "feature": "time.monthNames",
+     "value": "latin-derived"
+    }
+   ],
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "The Latin-based set (يَنَايِر, فِبْرَايِر, مَارِس …) matches Ιανουάριος, Φεβρουάριος, Μάρτιος …"
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "Algeria and Tunisia use month names taken from French: جانفي (janvier), جويلية (juillet), أوت (août)."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish Şubat, Nisan, Haziran, Temmuz, Eylül are the Syriac names شُبَاط, نَيْسَان, حَزِيرَان, تَمُّوز, أَيْلُول."
+    },
+    {
+     "for": "fa",
+     "rel": "different",
+     "text": "Iran uses its own solar months (فروردین, اردیبهشت …), related to neither Arabic set."
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "مُنْذُ + present.",
+   "text": "For something that started in the past and still goes on, Arabic uses the present, like German seit: أَدْرُسُ الْعَرَبِيَّةَ مُنْذُ سَنَةٍ = Ich lerne seit einem Jahr Arabisch. With a past verb مُنْذُ means “ago”: وَصَلَ مُنْذُ سَاعَةٍ.",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English uses the perfect (I have been learning Arabic for a year); Arabic uses the present: أَدْرُسُ الْعَرَبِيَّةَ مُنْذُ سَنَةٍ."
+    },
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "French depuis + present is مُنْذُ + present: j’apprends l’arabe depuis un an."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "Spanish desde hace + present (estudio árabe desde hace un año) is مُنْذُ + present."
+    },
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "Russian also uses the present here (я учу арабский уже год), like مُنْذُ + present."
+    },
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "Greek also uses the present (μαθαίνω αραβικά εδώ και ένα χρόνο), like مُنْذُ + present."
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Before ≠ in front of.",
+   "text": "قَبْلَ is time (قَبْلَ الْعَشَاءِ, before dinner); in front of a place is أَمَامَ (أَمَامَ الْبَيْتِ). After is بَعْدَ; behind is خَلْفَ / وَرَاءَ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Ago and in.",
+   "text": "قَبْلَ سَاعَةٍ = an hour ago; بَعْدَ سَاعَةٍ = in an hour; خِلَالَ سَاعَةٍ = within an hour."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "خِلَالَ",
+     "points": [
+      "the whole span: خِلَالَ الْأُسْبُوعِ (during the week)",
+      "within: خِلَالَ سَاعَةٍ"
+     ]
+    },
+    {
+     "title": "أَثْنَاءَ",
+     "points": [
+      "at the same time as an activity: أَثْنَاءَ الْأَكْلِ (while eating)",
+      "often with a verbal noun"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Dates: the day as an ordinal + مِنْ + the month: الْخَامِسُ مِنْ أَيَّارَ (the fifth of May), فِي الْأَوَّلِ مِنْ يَنَايِرَ (on the first of January). In speech the cardinal is common."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Before or after? → قَبْلَ / بَعْدَ + genitive. In front of a place? → أَمَامَ instead.",
+   "Until? → حَتَّى + genitive; from … to … → مِنْ … إِلَى ….",
+   "Since / for, and still going on? → مُنْذُ + genitive, with the verb in the present.",
+   "During? The whole span → خِلَالَ; at the same time as an activity → أَثْنَاءَ.",
+   "At / on / in a time? → فِي (عِنْدَ for a moment), or the accusative alone: يَوْمَ الْجُمُعَةِ, صَيْفًا.",
+   "Ago or in? → قَبْلَ + span / بَعْدَ + span.",
+   "Clock time? → السَّاعَةُ + a feminine ordinal; one o’clock السَّاعَةُ الْوَاحِدَةُ.",
+   "Which month names does my listener use? Levant and Iraq → the Syriac names; Egypt, Sudan, the Gulf → the Latin names."
+  ]
+ },
+ "traps": [
+  "*قَبْلَ الصَّبَاحُ → قَبْلَ الصَّبَاحِ (genitive).",
+  "*مُنْذُ سَنَةٌ → مُنْذُ سَنَةٍ.",
+  "For “I have been living here for a year” use the present: أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "*أَمَامَ الْعَشَاءِ → قَبْلَ الْعَشَاءِ (time, not place).",
+  "*فِي يَنَايِرٍ → فِي يَنَايِرَ: a month name takes no tanwīn.",
+  "In standard Arabic the hour is an ordinal: السَّاعَةُ الْخَامِسَةُ, not *السَّاعَةُ خَمْسَةٌ.",
+  "حَتَّى and مُنْذُ take no pronoun endings in modern style; قَبْلَ, بَعْدَ, خِلَالَ, أَثْنَاءَ do (قَبْلِي, بَعْدَكَ)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:qabla",
+   "ar:bada",
+   "ar:hatta",
+   "ar:mundhu",
+   "ar:khilala",
+   "ar:athnaa",
+   "ar:fi",
+   "ar:inda",
+   "ar:ila"
+  ]
+ },
+ "paradigmCells": [
+  "ADP;1;SG",
+  "ADP;2;SG;MASC",
+  "ADP;2;SG;FEM",
+  "ADP;3;SG;MASC",
+  "ADP;3;SG;FEM",
+  "ADP;1;PL"
+ ],
+ "needs": {
+  "ADP": 3,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADP",
+   "lemmas": [
+    "ar:qabla",
+    "ar:bada",
+    "ar:khilala",
+    "ar:athnaa"
+   ],
+   "cells": [
+    "ADP;1;SG",
+    "ADP;2;SG;MASC",
+    "ADP;2;SG;FEM",
+    "ADP;3;SG;MASC",
+    "ADP;3;SG;FEM",
+    "ADP;1;PL"
+   ],
+   "count": 8
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.time"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“before breakfast”",
+   "options": [
+    "قَبْلَ الْفَطُورِ",
+    "قَبْلَ الْفَطُورُ",
+    "أَمَامَ الْفَطُورِ"
+   ],
+   "answer": "قَبْلَ الْفَطُورِ",
+   "why": "Time: قَبْلَ + genitive (أَمَامَ is “in front of”)."
+  },
+  {
+   "q": "“I’ve been waiting since the morning.”",
+   "options": [
+    "أَنْتَظِرُ مُنْذُ الصَّبَاحِ.",
+    "اِنْتَظَرْتُ مُنْذُ الصَّبَاحُ.",
+    "أَنْتَظِرُ حَتَّى الصَّبَاحِ."
+   ],
+   "answer": "أَنْتَظِرُ مُنْذُ الصَّبَاحِ.",
+   "why": "Still going on: present + مُنْذُ + genitive."
+  },
+  {
+   "q": "“at five o’clock”",
+   "options": [
+    "فِي السَّاعَةِ الْخَامِسَةِ",
+    "فِي السَّاعَةِ خَمْسَةٍ",
+    "عَلَى السَّاعَةِ الْخَامِسَةُ"
+   ],
+   "answer": "فِي السَّاعَةِ الْخَامِسَةِ",
+   "why": "The hour + a feminine ordinal, after فِي in the genitive."
+  },
+  {
+   "q": "“an hour ago”",
+   "options": [
+    "قَبْلَ سَاعَةٍ",
+    "بَعْدَ سَاعَةٍ",
+    "خِلَالَ سَاعَةٍ"
+   ],
+   "answer": "قَبْلَ سَاعَةٍ",
+   "why": "قَبْلَ + span = ago; بَعْدَ + span = in; خِلَالَ = within."
+  },
+  {
+   "q": "Which is the Egyptian name of the month called آذَار in Damascus?",
+   "options": [
+    "مَارِس",
+    "مَايُو",
+    "أَبْرِيل",
+    "يُونْيُو"
+   ],
+   "answer": "مَارِس",
+   "why": "آذَار = March = مَارِس."
+  },
+  {
+   "q": "“in January” (Levantine name)",
+   "options": [
+    "فِي كَانُونَ الثَّانِي",
+    "فِي كَانُونٍ الثَّانِي",
+    "فِي تِشْرِينَ الثَّانِي"
+   ],
+   "answer": "فِي كَانُونَ الثَّانِي",
+   "why": "كَانُونُ الثَّانِي is January (a diptote: -a in the genitive); تِشْرِينُ الثَّانِي is November."
+  },
+  {
+   "q": "“I don’t talk while eating.”",
+   "options": [
+    "لَا أَتَكَلَّمُ أَثْنَاءَ الْأَكْلِ.",
+    "لَا أَتَكَلَّمُ قَبْلَ الْأَكْلُ.",
+    "لَا أَتَكَلَّمُ مُنْذُ الْأَكْلِ."
+   ],
+   "answer": "لَا أَتَكَلَّمُ أَثْنَاءَ الْأَكْلِ.",
+   "why": "At the same time as an activity: أَثْنَاءَ + genitive."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.prep.time",
+   "note": "Hebrew: לִפְנֵי (before), אַחֲרֵי (after), עַד (until — a cousin of حَتَّى), מֵאָז (since), בְּמֶשֶׁךְ (during); בְּ for at / on / in: בְּחָמֵשׁ, בְּיוֹם שֵׁנִי. The month names שְׁבָט, אֲדָר, נִיסָן … are the twins of شُبَاط, آذَار, نَيْسَان."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.time",
+   "note": "German: vor, nach, bis, seit (+ present, like مُنْذُ), während (+ genitive, like Arabic); um / am / im where Arabic has one فِي."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.time",
+   "note": "Chinese puts 以前 / 以后 after the time (饭前, 饭后 = before / after the meal), uses 从 … 到 … for from … to, and says the hour with a cardinal: 五点 (five o’clock)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.time.day",
+   "note": "Lesson 14: the days, the parts of the day and the accusative of time (يَوْمَ الْجُمُعَةِ, صَبَاحًا)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.place",
+   "note": "قَبْلَ, بَعْدَ, خِلَالَ, أَثْنَاءَ behave like أَمَامَ, خَلْفَ: an -a ending, the genitive, pronoun endings."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "time.monthNames",
+   "value": "latin-derived"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-past"
+  }
+ ],
+ "notes": [
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish saat (hour) and dakika (minute) are the Arabic سَاعَة and دَقِيقَة; but Turkish puts önce / sonra after the noun (kahvaltıdan önce), Arabic قَبْلَ / بَعْدَ before it (قَبْلَ الْفَطُورِ)."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili kabla ya (before) and baada ya (after) are Arabic قَبْلَ and بَعْدَ; saa (hour) is سَاعَة and dakika is دَقِيقَة."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi puts time words after the noun — खाने से पहले (before eating), खाने के बाद (after eating), with बाद from Arabic بَعْدَ; Arabic puts قَبْلَ / بَعْدَ before the noun."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian قبل از / بعد از (before / after) are the Arabic words قَبْلَ / بَعْدَ; Arabic needs no از: قَبْلَ الْفَطُورِ."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi puts पूर्वी / नंतर after the noun (जेवणानंतर, after the meal); Arabic puts قَبْلَ / بَعْدَ before it."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese puts 前 / 後 after the noun (食事の前に, 食事の後で); Arabic puts قَبْلَ / بَعْدَ before it."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish says ennen aamiaista (before breakfast, partitive) and aamiaisen jälkeen (after breakfast); Arabic: قَبْلَ / بَعْدَ + genitive, always before the noun."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian puts előtt / után after the noun (reggeli előtt); Arabic puts قَبْلَ / بَعْدَ first."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese trước and sau come before the noun (trước bữa sáng), like قَبْلَ الْفَطُورِ; but the hour is a cardinal (năm giờ), where Arabic uses an ordinal (السَّاعَةُ الْخَامِسَةُ)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks time with case endings on time words (the locative -mi); Arabic uses prepositions before the noun or the bare accusative."
+  }
+ ]
+}

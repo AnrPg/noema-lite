@@ -1,0 +1,1516 @@
+{
+ "sentences": [
+  {
+   "id": "zh.s.0001",
+   "frame": "fr.eat.def",
+   "text": "他吃茄子。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats the eggplant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0002",
+   "frame": "fr.eat.def",
+   "text": "他不吃茄子。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "He doesn't eat the eggplant.",
+   "variantOf": "zh.s.0001",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0003",
+   "frame": "fr.eat.def",
+   "text": "他没吃茄子。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "He didn't eat the eggplant.",
+   "variantOf": "zh.s.0001",
+   "variant": {
+    "Polarity": "NEG",
+    "Aspect": "PFV"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0004",
+   "frame": "fr.eat.def",
+   "text": "他吃茄子吗？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does he eat the eggplant?",
+   "variantOf": "zh.s.0001",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0005",
+   "frame": "fr.eat.def",
+   "text": "她吃黄瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She eats the cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0006",
+   "frame": "fr.eat.def",
+   "text": "我吃这个西红柿。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm eating this tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0007",
+   "frame": "fr.buy.indef",
+   "text": "我买一个南瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I'm buying a pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0008",
+   "frame": "fr.buy.indef",
+   "text": "她买一根黄瓜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0009",
+   "frame": "fr.buy.indef",
+   "text": "他们买一头大蒜。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "头",
+     "l": "zh:tou"
+    },
+    {
+     "t": "大蒜",
+     "l": "zh:dasuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They buy a head of garlic.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0010",
+   "frame": "fr.buy.indef",
+   "text": "我们买一棵生菜。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "生菜",
+     "l": "zh:shengcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a head of lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0011",
+   "frame": "fr.like.generic",
+   "text": "我喜欢西红柿。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0012",
+   "frame": "fr.like.generic",
+   "text": "她喜欢土豆。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She likes potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0013",
+   "frame": "fr.like.generic",
+   "text": "她喜欢土豆吗？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does she like potatoes?",
+   "variantOf": "zh.s.0012",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0014",
+   "frame": "fr.like.generic",
+   "text": "他们喜欢玉米。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They like corn.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0015",
+   "frame": "fr.like.generic",
+   "text": "我喜欢西红柿和黄瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I like tomatoes and cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0016",
+   "frame": "fr.like.generic",
+   "text": "他喜欢番茄。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "番茄",
+     "l": "zh:fanqie"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He likes tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0017",
+   "frame": "fr.notlike.generic",
+   "text": "我不喜欢洋葱。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don't like onions.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0018",
+   "frame": "fr.notlike.generic",
+   "text": "他不喜欢茄子。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "He doesn't like eggplant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0019",
+   "frame": "fr.notlike.generic",
+   "text": "她们不喜欢芹菜。",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "芹菜",
+     "l": "zh:qincai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "They (the women) don't like celery.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0020",
+   "frame": "fr.want.q",
+   "text": "你要黄瓜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want cucumbers?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0021",
+   "frame": "fr.want.q",
+   "text": "你要不要黄瓜？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want cucumbers or not?",
+   "variantOf": "zh.s.0020",
+   "variant": {
+    "QuestionForm": "A-not-A"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0022",
+   "frame": "fr.want.q",
+   "text": "您要西兰花吗？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "西兰花",
+     "l": "zh:xilanhua"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like broccoli? (polite)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0023",
+   "frame": "fr.want.q",
+   "text": "你要红薯吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "红薯",
+     "l": "zh:hongshu"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you want sweet potatoes?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0024",
+   "frame": "fr.want.q",
+   "text": "你想吃玉米吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Would you like to eat corn?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0025",
+   "frame": "fr.this.is",
+   "text": "这是西红柿。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0026",
+   "frame": "fr.this.is",
+   "text": "这是西红柿吗？",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this a tomato?",
+   "variantOf": "zh.s.0025",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0027",
+   "frame": "fr.this.is",
+   "text": "这不是西红柿。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This isn't a tomato.",
+   "variantOf": "zh.s.0025",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0028",
+   "frame": "fr.this.is",
+   "text": "这是一个土豆。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a potato.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0029",
+   "frame": "fr.this.is",
+   "text": "这是菠菜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "菠菜",
+     "l": "zh:bocai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is spinach.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0030",
+   "frame": "fr.where.def",
+   "text": "西红柿在哪里？",
+   "tokens": [
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Where is the tomato?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0031",
+   "frame": "fr.where.def",
+   "text": "土豆在哪里？",
+   "tokens": [
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Where are the potatoes?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0032",
+   "frame": "fr.where.def",
+   "text": "大蒜在哪里？",
+   "tokens": [
+    {
+     "t": "大蒜",
+     "l": "zh:dasuan"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "哪里",
+     "l": "zh:nali"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Where is the garlic?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0033",
+   "frame": "fr.have.indef",
+   "text": "我有一个南瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have a pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0034",
+   "frame": "fr.have.indef",
+   "text": "我没有南瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don't have a pumpkin.",
+   "variantOf": "zh.s.0033",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0035",
+   "frame": "fr.have.indef",
+   "text": "她有一根胡萝卜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has a carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0036",
+   "frame": "fr.have.indef",
+   "text": "她有胡萝卜吗？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does she have a carrot?",
+   "variantOf": "zh.s.0035",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0037",
+   "frame": "fr.have.indef",
+   "text": "她有没有胡萝卜？",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Does she have a carrot or not?",
+   "variantOf": "zh.s.0035",
+   "variant": {
+    "Mood": "INT",
+    "QuestionForm": "A-not-A"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0038",
+   "frame": "fr.have.indef",
+   "text": "我们有一颗洋葱。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have an onion.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0039",
+   "frame": "fr.have.indef",
+   "text": "他有一条茄子。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "条",
+     "l": "zh:tiao"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has an eggplant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0040",
+   "frame": "fr.here.def",
+   "text": "西红柿在这里。",
+   "tokens": [
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The tomato is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0041",
+   "frame": "fr.here.def",
+   "text": "黄瓜在这里。",
+   "tokens": [
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The cucumber is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0042",
+   "frame": "fr.here.def",
+   "text": "黄瓜不在这里。",
+   "tokens": [
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "The cucumber isn't here.",
+   "variantOf": "zh.s.0041",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0043",
+   "frame": "fr.here.def",
+   "text": "辣椒在这里。",
+   "tokens": [
+    {
+     "t": "辣椒",
+     "l": "zh:lajiao"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "The chili peppers are here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0044",
+   "frame": "fr.here.def",
+   "text": "辣椒在这里吗？",
+   "tokens": [
+    {
+     "t": "辣椒",
+     "l": "zh:lajiao"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Are the chili peppers here?",
+   "variantOf": "zh.s.0043",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0045",
+   "frame": "fr.drink.what",
+   "text": "你喝什么？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What do you drink?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0046",
+   "frame": "fr.drink.what",
+   "text": "他喝什么？",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What does he drink?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0047",
+   "frame": "fr.drink.what",
+   "text": "她们喝什么？",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What do they (the women) drink?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.s.0048",
+   "frame": "fr.drink.what",
+   "text": "您喝什么？",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "喝",
+     "l": "zh:he.drink"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What would you like to drink? (polite)",
+   "level": "A1"
+  }
+ ]
+}

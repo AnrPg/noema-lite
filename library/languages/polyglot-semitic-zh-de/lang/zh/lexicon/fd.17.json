@@ -1,0 +1,3389 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:baise",
+   "lemma": "白色",
+   "trad": "白色",
+   "pinyin": "bái sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.white"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.white",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢白色, 白色的车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clean walls, snow — and, in China, mourning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "white (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.white"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的车是白色的。",
+      "py": "Wǒ de chē shì báisè de.",
+      "tr": "My car is white.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "我们家的墙是白色的。",
+      "py": "Wǒmen jiā de qiáng shì báisè de.",
+      "tr": "The walls in our home are white.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢白色。",
+      "py": "Wǒ xǐhuan báisè.",
+      "tr": "I like white.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "白色的车",
+      "tr": "a white car"
+     },
+     {
+      "text": "白色的墙",
+      "tr": "a white wall"
+     },
+     {
+      "text": "白色的衣服",
+      "tr": "white clothes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "白",
+      "register": "neutral",
+      "nuance": "bái: white — the adjective, joined straight to a noun (白葡萄酒)"
+     }
+    ],
+    "etymology": {
+     "text": "白 ‘white’ + 色 ‘colour’. 色 began as a hand pressing down a kneeling person and was borrowed for ‘colour, look’.",
+     "src": "morphemes: 白 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "White is the traditional colour of mourning: a funeral is a 白事 ‘white affair’, a wedding a 红事 ‘red affair’."
+    ],
+    "pitfalls": [
+     "Don’t wrap a present in white or write a name in white: white belongs to funerals in traditional China."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:bai",
+   "lemma": "白",
+   "trad": "白",
+   "pinyin": "bái",
+   "pos": "ADJ",
+   "senses": [
+    "colour.white",
+    "adj.plain",
+    "adv.invain"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.white",
+     "axis": "noun or adjective",
+     "value": "the adjective (白衣服, 很白)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "White — and clear, plain, or for nothing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "white",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.white"
+     },
+     {
+      "id": "s2",
+      "def": "clear, plain (明白 ‘to understand’, 白开水 ‘plain boiled water’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.plain"
+     },
+     {
+      "id": "s3",
+      "def": "(adverb) in vain, for nothing; for free",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.invain"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我想喝白葡萄酒。",
+      "py": "Wǒ xiǎng hē bái pútaojiǔ.",
+      "tr": "I’d like white wine.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "她的皮肤很白。",
+      "py": "Tā de pífū hěn bái.",
+      "tr": "Her skin is very fair.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "我爷爷有很多白头发。",
+      "py": "Wǒ yéye yǒu hěn duō bái tóufa.",
+      "tr": "My grandpa has a lot of grey hair.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他白跑了一趟。",
+      "py": "Tā bái pǎo le yí tàng.",
+      "tr": "He made the trip for nothing.",
+      "register": "colloquial",
+      "context": "errands",
+      "sense": "s3"
+     },
+     {
+      "text": "我只喝白开水。",
+      "py": "Wǒ zhǐ hē báikāishuǐ.",
+      "tr": "I only drink plain boiled water.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "白葡萄酒",
+      "tr": "white wine"
+     },
+     {
+      "text": "白米饭",
+      "tr": "plain white rice"
+     },
+     {
+      "text": "白开水",
+      "tr": "plain boiled water"
+     },
+     {
+      "text": "白头发",
+      "tr": "white / grey hair"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "白头偕老",
+      "tr": "white heads, growing old together",
+      "kind": "idiom",
+      "meaning": "to grow old together (a wedding wish)",
+      "register": "literary"
+     },
+     {
+      "text": "红白喜事",
+      "tr": "red and white happy events",
+      "kind": "fixed expression",
+      "meaning": "weddings and funerals",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "白色",
+      "register": "neutral",
+      "nuance": "báisè: white — the colour as a noun (白色的车)"
+     }
+    ],
+    "etymology": {
+     "text": "Explained either as a pictogram of an acorn or of a human head; perhaps from Proto-Sino-Tibetan *bawk ‘white’ (STEDT) and paired in sound with 黑 ‘black’ (OC *bˤrak vs *m̥ˤək).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "白天 ‘daytime’ is ‘the white of the day’, and 明白 ‘to understand’ is ‘bright and white’ — clear."
+    ],
+    "pitfalls": [
+     "白 + verb can mean ‘for nothing’ or ‘for free’: 白跑 ‘a wasted trip’, 白吃 ‘eat without paying’.",
+     "Grey hair is 白头发 ‘white hair’ in Chinese."
+    ],
+    "subtleties": [
+     "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:heise",
+   "lemma": "黑色",
+   "trad": "黑色",
+   "pinyin": "hēi sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.black"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.black",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢黑色, 黑色的车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Black clothes, black cars — elegant and serious.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "black (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.black"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她有一个黑色的包。",
+      "py": "Tā yǒu yí ge hēisè de bāo.",
+      "tr": "She has a black bag.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "我的手机是黑色的。",
+      "py": "Wǒ de shǒujī shì hēisè de.",
+      "tr": "My phone is black.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "他喜欢穿黑色的衣服。",
+      "py": "Tā xǐhuan chuān hēisè de yīfu.",
+      "tr": "He likes wearing black clothes.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "黑色的包",
+      "tr": "a black bag"
+     },
+     {
+      "text": "黑色的车",
+      "tr": "a black car"
+     },
+     {
+      "text": "黑色幽默",
+      "tr": "black humour"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "黑",
+      "register": "neutral",
+      "nuance": "hēi: black — the adjective (黑咖啡); also ‘dark’"
+     }
+    ],
+    "etymology": {
+     "text": "黑 ‘black’ + 色 ‘colour’. 色 began as a hand pressing down a kneeling person and was borrowed for ‘colour, look’.",
+     "src": "morphemes: 黑 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "黑色幽默 ‘black humour’ was translated word for word from English."
+    ],
+    "pitfalls": [
+     "Black hair and eyes are just 黑: 黑头发, 黑眼睛 — where English says ‘dark eyes’."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:hei",
+   "lemma": "黑",
+   "trad": "黑",
+   "pinyin": "hēi",
+   "pos": "ADJ",
+   "senses": [
+    "colour.black",
+    "adj.dark.nolight",
+    "adj.illegal"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.black",
+     "axis": "noun or adjective",
+     "value": "the adjective (黑头发, 很黑)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Black, dark — and shady.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "black",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.black"
+     },
+     {
+      "id": "s2",
+      "def": "dark (without light)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.dark.nolight"
+     },
+     {
+      "id": "s3",
+      "def": "illegal, shady (黑车 ‘unlicensed taxi’, 黑市 ‘black market’)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.illegal"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他喝黑咖啡。",
+      "py": "Tā hē hēi kāfēi.",
+      "tr": "He drinks black coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "她的头发很黑。",
+      "py": "Tā de tóufa hěn hēi.",
+      "tr": "Her hair is very black.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "外面很黑。",
+      "py": "Wàimian hěn hēi.",
+      "tr": "It’s dark outside.",
+      "register": "neutral",
+      "context": "evening",
+      "sense": "s2"
+     },
+     {
+      "text": "别坐黑车！",
+      "py": "Bié zuò hēichē!",
+      "tr": "Don’t take an unlicensed taxi!",
+      "register": "colloquial",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "黑咖啡",
+      "tr": "black coffee"
+     },
+     {
+      "text": "黑头发",
+      "tr": "black hair"
+     },
+     {
+      "text": "天黑",
+      "tr": "nightfall, it gets dark"
+     },
+     {
+      "text": "黑市",
+      "tr": "black market"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "黑白分明",
+      "tr": "black and white clearly apart",
+      "kind": "idiom",
+      "meaning": "clear-cut; right and wrong clearly distinguished",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "黑色",
+      "register": "neutral",
+      "nuance": "hēisè: black — the colour as a noun (黑色的包)"
+     },
+     {
+      "word": "暗",
+      "register": "neutral",
+      "nuance": "àn: dark, dim — of light (房间很暗)"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of uncertain origin (bronze forms add dots to a head, often read as facial tattoos); from Proto-Sino-Tibetan *s-maŋ ~ s-mak; cognate with 墨 ‘ink’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "黑 is related to 墨 ‘ink’ — and 黑客 ‘hacker’ was made to sound like the English word while meaning ‘dark guest’."
+    ],
+    "pitfalls": [
+     "Darkness is 黑 (外面很黑 ‘it’s dark outside’), but a dark COLOUR is 深: 深蓝色 ‘dark blue’, never *黑蓝色."
+    ],
+    "subtleties": [
+     "天黑了 ‘it has got dark’ — 了 for the change (S14).",
+     "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:hongse",
+   "lemma": "红色",
+   "trad": "紅色",
+   "pinyin": "hóng sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.red"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.red",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢红色, 红色的车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Luck, joy, festivals — the happiest colour in China.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.red"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢红色。",
+      "py": "Wǒ xǐhuan hóngsè.",
+      "tr": "I like red.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "她的包是红色的。",
+      "py": "Tā de bāo shì hóngsè de.",
+      "tr": "Her bag is red.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "过年的时候到处都是红色。",
+      "py": "Guònián de shíhou dàochù dōu shì hóngsè.",
+      "tr": "At New Year there is red everywhere.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "红色的包",
+      "tr": "a red bag"
+     },
+     {
+      "text": "红色的车",
+      "tr": "a red car"
+     },
+     {
+      "text": "红色的灯笼",
+      "tr": "red lanterns"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "红",
+      "register": "neutral",
+      "nuance": "hóng: red — the adjective (红葡萄酒, 脸红)"
+     }
+    ],
+    "etymology": {
+     "text": "红 ‘red’ + 色 ‘colour’. 色 began as a hand pressing down a kneeling person and was borrowed for ‘colour, look’.",
+     "src": "morphemes: 红 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "On Chinese stock screens rising prices are red and falling ones green — the opposite of Western markets.",
+     "Money at New Year comes in a 红包 ‘red envelope’."
+    ],
+    "pitfalls": [
+     "红茶 ‘red tea’ is what English calls BLACK tea."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:hong",
+   "lemma": "红",
+   "trad": "紅",
+   "pinyin": "hóng",
+   "pos": "ADJ",
+   "senses": [
+    "colour.red",
+    "adj.popular"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.popular",
+     "axis": "kind of popular",
+     "value": "famous, a star (走红, 网红)"
+    },
+    {
+     "concept": "colour.red",
+     "axis": "noun or adjective",
+     "value": "the adjective (红苹果, 很红)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Red — luck, a blush, fame.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.red"
+     },
+     {
+      "id": "s2",
+      "def": "popular, famous (走红, 网红 ‘internet celebrity’)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.popular"
+     },
+     {
+      "id": "s3",
+      "def": "revolutionary, communist (红军 ‘the Red Army’)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢红葡萄酒。",
+      "py": "Wǒ xǐhuan hóng pútaojiǔ.",
+      "tr": "I like red wine.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "这个苹果很红。",
+      "py": "Zhège píngguǒ hěn hóng.",
+      "tr": "This apple is very red.",
+      "register": "neutral",
+      "context": "fruit",
+      "sense": "s1"
+     },
+     {
+      "text": "她的脸红了。",
+      "py": "Tā de liǎn hóng le.",
+      "tr": "She blushed.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "这个歌手现在很红。",
+      "py": "Zhège gēshǒu xiànzài hěn hóng.",
+      "tr": "This singer is really popular now.",
+      "register": "colloquial",
+      "context": "music",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "红葡萄酒",
+      "tr": "red wine"
+     },
+     {
+      "text": "红茶",
+      "tr": "black tea (‘red tea’)"
+     },
+     {
+      "text": "红包",
+      "tr": "red envelope (with money)"
+     },
+     {
+      "text": "脸红",
+      "tr": "to blush"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "红白喜事",
+      "tr": "red and white happy events",
+      "kind": "fixed expression",
+      "meaning": "weddings and funerals",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "红色",
+      "register": "neutral",
+      "nuance": "hóngsè: red — the colour as a noun (红色的包)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound (traditional 紅): semantic 糸 ‘silk’ + phonetic 工. First the lighter shades of red, it gradually replaced 赤 chì as the basic word for ‘red’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old word for red was 赤 chì (still in 赤道 ‘equator’, the ‘red road’); 红 took over later.",
+     "网红 ‘internet celebrity’ is ‘net-red’: being red = being famous."
+    ],
+    "pitfalls": [
+     "红茶 is black tea, 红酒 red wine, 红眼睛 red (tired) eyes — and 眼红 ‘red-eyed’ means envious."
+    ],
+    "subtleties": [
+     "脸红了 ‘the face went red’ = to blush.",
+     "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:lanse",
+   "lemma": "蓝色",
+   "trad": "藍色",
+   "pinyin": "lán sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.blue"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 藍色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.blue",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢蓝色, 蓝色的车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sky and sea — calm and cool.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "blue (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.blue"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们的门是蓝色的。",
+      "py": "Wǒmen de mén shì lánsè de.",
+      "tr": "Our door is blue.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我最喜欢蓝色。",
+      "py": "Wǒ zuì xǐhuan lánsè.",
+      "tr": "Blue is my favourite colour.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "天是蓝色的，海也是蓝色的。",
+      "py": "Tiān shì lánsè de, hǎi yě shì lánsè de.",
+      "tr": "The sky is blue, and so is the sea.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "蓝色的门",
+      "tr": "a blue door"
+     },
+     {
+      "text": "深蓝色",
+      "tr": "dark blue"
+     },
+     {
+      "text": "浅蓝色",
+      "tr": "light blue"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "蓝",
+      "register": "neutral",
+      "nuance": "lán: blue — the adjective (蓝天 ‘blue sky’)"
+     }
+    ],
+    "etymology": {
+     "text": "蓝 ‘blue’ + 色 ‘colour’. 色 began as a hand pressing down a kneeling person and was borrowed for ‘colour, look’.",
+     "src": "morphemes: 蓝 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "蓝 was first the indigo plant (it has 艹 ‘grass’ on top): blue is named after the dye."
+    ],
+    "pitfalls": [
+     "蓝 lán ‘blue’ sounds like 篮 lán ‘basket’ (篮球 ‘basketball’) and 兰 lán ‘orchid’ — the characters differ."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:lan",
+   "lemma": "蓝",
+   "trad": "藍",
+   "pinyin": "lán",
+   "pos": "ADJ",
+   "senses": [
+    "colour.blue",
+    "nature.indigo"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.blue",
+     "axis": "noun or adjective",
+     "value": "the adjective (蓝天, 很蓝)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Blue skies and blue eyes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "blue",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.blue"
+     },
+     {
+      "id": "s2",
+      "def": "indigo plant (the dye)",
+      "register": [
+       "technical"
+      ],
+      "concept": "nature.indigo"
+     }
+    ],
+    "examples": [
+     {
+      "text": "今天天很蓝。",
+      "py": "Jīntiān tiān hěn lán.",
+      "tr": "The sky is very blue today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "她的眼睛很蓝。",
+      "py": "Tā de yǎnjing hěn lán.",
+      "tr": "Her eyes are very blue.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "我的车是蓝的。",
+      "py": "Wǒ de chē shì lán de.",
+      "tr": "My car is blue.",
+      "register": "informal",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "青出于蓝而胜于蓝。",
+      "py": "Qīng chū yú lán ér shèng yú lán.",
+      "tr": "Blue dye comes from the indigo plant yet is bluer than it (the pupil surpasses the master).",
+      "register": "literary",
+      "context": "saying",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "蓝天",
+      "tr": "blue sky"
+     },
+     {
+      "text": "蓝眼睛",
+      "tr": "blue eyes"
+     },
+     {
+      "text": "深蓝",
+      "tr": "dark blue"
+     },
+     {
+      "text": "浅蓝",
+      "tr": "light blue"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "青出于蓝而胜于蓝",
+      "tr": "blue comes from indigo yet surpasses it",
+      "kind": "saying",
+      "meaning": "the student surpasses the master",
+      "register": "literary",
+      "source": "Xunzi, 劝学 (3rd century BC)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "蓝色",
+      "register": "neutral",
+      "nuance": "lánsè: blue — the colour as a noun"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound (traditional 藍): semantic 艸 ‘grass’ + phonetic 監; from Proto-Sino-Tibetan *g-ram ‘indigo’ (Tibetan རམས rams).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "青出于蓝 ‘blue comes from indigo’: the dye is bluer than the plant — the pupil outshines the teacher."
+    ],
+    "pitfalls": [
+     "Older Chinese 青 qīng covered both blue and green (青山 ‘green hills’, 青天 ‘blue sky’); modern 蓝 is only blue."
+    ],
+    "subtleties": [
+     "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:lvse",
+   "lemma": "绿色",
+   "trad": "綠色",
+   "pinyin": "lǜ sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.green"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 綠色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.green",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢绿色, 绿色的车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh leaves and green lights — and ‘eco’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "green (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.green"
+     },
+     {
+      "id": "s2",
+      "def": "environmentally friendly, organic",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢绿色。",
+      "py": "Wǒ xǐhuan lǜsè.",
+      "tr": "I like green.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "他的自行车是绿色的。",
+      "py": "Tā de zìxíngchē shì lǜsè de.",
+      "tr": "His bike is green.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "这是绿色食品。",
+      "py": "Zhè shì lǜsè shípǐn.",
+      "tr": "This is organic food.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "绿色的车",
+      "tr": "a green car"
+     },
+     {
+      "text": "绿色食品",
+      "tr": "organic, eco food"
+     },
+     {
+      "text": "浅绿色",
+      "tr": "light green"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "绿",
+      "register": "neutral",
+      "nuance": "lǜ: green — the adjective (绿茶 ‘green tea’)"
+     }
+    ],
+    "etymology": {
+     "text": "绿 ‘green’ + 色 ‘colour’. 色 began as a hand pressing down a kneeling person and was borrowed for ‘colour, look’.",
+     "src": "morphemes: 绿 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "绿色 also means ‘green’ in the ecological sense: 绿色食品 ‘organic food’, 绿色出行 ‘green travel’."
+    ],
+    "pitfalls": [
+     "The vowel is ü: lǜ, typed lv on a pinyin keyboard — 路 lù ‘road’ is a different syllable."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:lv",
+   "lemma": "绿",
+   "trad": "綠",
+   "pinyin": "lǜ",
+   "pos": "ADJ",
+   "senses": [
+    "colour.green",
+    "verb.cheaton"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.green",
+     "axis": "noun or adjective",
+     "value": "the adjective (绿茶, 很绿)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Green leaves, green tea, the green light.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "green",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.green"
+     },
+     {
+      "id": "s2",
+      "def": "(slang) to cheat on (a man): 他被绿了 ‘he was cheated on’",
+      "register": [
+       "slang"
+      ],
+      "concept": "verb.cheaton"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢喝绿茶。",
+      "py": "Wǒ xǐhuan hē lǜchá.",
+      "tr": "I like drinking green tea.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "春天，山都绿了。",
+      "py": "Chūntiān, shān dōu lǜ le.",
+      "tr": "In spring the hills all turn green.",
+      "register": "literary",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "绿灯了，走吧！",
+      "py": "Lǜdēng le, zǒu ba!",
+      "tr": "The light’s green — let’s go!",
+      "register": "informal",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "听说他被女朋友绿了。",
+      "py": "Tīngshuō tā bèi nǚpéngyou lǜ le.",
+      "tr": "I hear his girlfriend cheated on him.",
+      "register": "slang",
+      "context": "gossip",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "绿茶",
+      "tr": "green tea"
+     },
+     {
+      "text": "绿灯",
+      "tr": "green light"
+     },
+     {
+      "text": "红绿灯",
+      "tr": "traffic lights"
+     },
+     {
+      "text": "浅绿",
+      "tr": "light green"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "戴绿帽子",
+      "tr": "to wear a green hat",
+      "kind": "colloquial",
+      "meaning": "(of a man) to be cheated on by one’s partner",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "绿色",
+      "register": "neutral",
+      "nuance": "lǜsè: green — the colour as a noun"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound (traditional 綠): semantic 糸 ‘silk’ + phonetic 彔; Starostin connects it with Proto-Sino-Tibetan *rwak ‘leaf’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "红绿灯 ‘red-green lights’ is the everyday word for traffic lights."
+    ],
+    "pitfalls": [
+     "Never give a Chinese man a green hat: 戴绿帽子 means his partner is cheating on him."
+    ],
+    "subtleties": [
+     "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 綠 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:huangse",
+   "lemma": "黄色",
+   "trad": "黃色",
+   "pinyin": "huáng sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.yellow",
+    "adj.pornographic"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 黃色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.yellow",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢黄色, 黄色的车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sunflowers, autumn leaves — and the emperor’s colour.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yellow (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.yellow"
+     },
+     {
+      "id": "s2",
+      "def": "pornographic, obscene",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.pornographic"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这辆出租车是黄色的。",
+      "py": "Zhè liàng chūzūchē shì huángsè de.",
+      "tr": "This taxi is yellow.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "我妹妹喜欢黄色。",
+      "py": "Wǒ mèimei xǐhuan huángsè.",
+      "tr": "My younger sister likes yellow.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "我家的灯是黄色的。",
+      "py": "Wǒ jiā de dēng shì huángsè de.",
+      "tr": "The lamps in my home are yellow.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "这是一部黄色电影。",
+      "py": "Zhè shì yí bù huángsè diànyǐng.",
+      "tr": "This is a pornographic film.",
+      "register": "colloquial",
+      "context": "films",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "黄色的车",
+      "tr": "a yellow car"
+     },
+     {
+      "text": "黄色的灯",
+      "tr": "a yellow lamp"
+     },
+     {
+      "text": "黄色的花",
+      "tr": "yellow flowers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "黄",
+      "register": "neutral",
+      "nuance": "huáng: yellow — the adjective (黄油 ‘butter’)"
+     }
+    ],
+    "etymology": {
+     "text": "黄 ‘yellow’ + 色 ‘colour’. 色 began as a hand pressing down a kneeling person and was borrowed for ‘colour, look’.",
+     "src": "morphemes: 黄 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Bright yellow was the colour of the emperor: only he could wear it."
+    ],
+    "pitfalls": [
+     "黄色 also means ‘pornographic’ (黄色电影 ‘porn film’) — say 黄颜色 or name the thing to avoid the second meaning."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:huang",
+   "lemma": "黄",
+   "trad": "黃",
+   "pinyin": "huáng",
+   "pos": "ADJ",
+   "senses": [
+    "colour.yellow",
+    "verb.fallthrough"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.yellow",
+     "axis": "noun or adjective",
+     "value": "the adjective (黄瓜, 叶子黄了)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Yellow — autumn leaves, egg yolk, the Yellow River.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yellow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.yellow"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial) to fall through, come to nothing: 这件事黄了",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.fallthrough"
+     }
+    ],
+    "examples": [
+     {
+      "text": "秋天，叶子黄了。",
+      "py": "Qiūtiān, yèzi huáng le.",
+      "tr": "In autumn the leaves turn yellow.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "我的自行车是黄的。",
+      "py": "Wǒ de zìxíngchē shì huáng de.",
+      "tr": "My bike is yellow.",
+      "register": "informal",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "那件事黄了。",
+      "py": "Nà jiàn shì huáng le.",
+      "tr": "That plan fell through.",
+      "register": "colloquial",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "黄油",
+      "tr": "butter (‘yellow oil’)"
+     },
+     {
+      "text": "蛋黄",
+      "tr": "egg yolk"
+     },
+     {
+      "text": "黄河",
+      "tr": "the Yellow River"
+     },
+     {
+      "text": "黄瓜",
+      "tr": "cucumber (‘yellow melon’)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "黄金时间",
+      "tr": "golden time",
+      "kind": "fixed expression",
+      "meaning": "prime time; the best time for something",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "黄色",
+      "register": "neutral",
+      "nuance": "huángsè: yellow — the colour as a noun"
+     }
+    ],
+    "etymology": {
+     "text": "A pictogram whose original meaning is debated (a person with a jade ring, or the original of 尪); borrowed for ‘yellow’ already in the oracle-bone inscriptions.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "黄瓜 ‘cucumber’ is literally ‘yellow melon’, although we eat it green.",
+     "黄 (Huang, Wong) is one of the most common Chinese surnames."
+    ],
+    "pitfalls": [
+     "黄了 can mean ‘fell through’: 生意黄了 ‘the deal is off’ — nothing yellow about it."
+    ],
+    "subtleties": [
+     "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 黃 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:zongse",
+   "lemma": "棕色",
+   "trad": "棕色",
+   "pinyin": "zōng sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.brown"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.brown",
+     "axis": "register",
+     "value": "brown — standard"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wood, earth, chocolate — warm and plain.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brown (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.brown"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爸爸有一个棕色的包。",
+      "py": "Wǒ bàba yǒu yí ge zōngsè de bāo.",
+      "tr": "My dad has a brown bag.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他的眼睛是棕色的。",
+      "py": "Tā de yǎnjing shì zōngsè de.",
+      "tr": "His eyes are brown.",
+      "register": "neutral",
+      "context": "appearance",
+      "sense": "s1"
+     },
+     {
+      "text": "我想买一张棕色的桌子。",
+      "py": "Wǒ xiǎng mǎi yì zhāng zōngsè de zhuōzi.",
+      "tr": "I want to buy a brown table.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "棕色的包",
+      "tr": "a brown bag"
+     },
+     {
+      "text": "棕色的眼睛",
+      "tr": "brown eyes"
+     },
+     {
+      "text": "深棕色",
+      "tr": "dark brown"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "咖啡色",
+      "register": "colloquial",
+      "nuance": "kāfēisè: brown — ‘coffee-coloured’, very common in speech"
+     },
+     {
+      "word": "褐色",
+      "register": "formal",
+      "nuance": "hèsè: brown — technical (animals, soil, eyes)"
+     }
+    ],
+    "etymology": {
+     "text": "棕 ‘palm (fibre)’ + 色 ‘colour’; 棕 was first written 椶 (木 ‘tree’ + phonetic).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "棕 is the palm tree: brown is the colour of palm fibre (棕榈 zōnglǘ ‘palm’)."
+    ],
+    "pitfalls": [
+     "Brown bread is 全麦面包 ‘whole-wheat bread’, not *棕色面包."
+    ],
+    "subtleties": [
+     "棕色 is the standard word; in everyday speech 咖啡色 is just as common.",
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:kafeise",
+   "lemma": "咖啡色",
+   "trad": "咖啡色",
+   "pinyin": "kā fēi sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.brown"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.brown",
+     "axis": "register",
+     "value": "coffee-coloured — everyday"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The colour of coffee — warm brown.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brown (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.brown"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我的沙发是咖啡色的。",
+      "py": "Wǒ de shāfā shì kāfēisè de.",
+      "tr": "My sofa is brown.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "她有一双咖啡色的鞋。",
+      "py": "Tā yǒu yì shuāng kāfēisè de xié.",
+      "tr": "She has a pair of brown shoes.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "咖啡色很好看。",
+      "py": "Kāfēisè hěn hǎokàn.",
+      "tr": "Brown looks nice.",
+      "register": "informal",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "咖啡色的沙发",
+      "tr": "a brown sofa"
+     },
+     {
+      "text": "咖啡色的鞋",
+      "tr": "brown shoes"
+     },
+     {
+      "text": "浅咖啡色",
+      "tr": "light brown"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "棕色",
+      "register": "neutral",
+      "nuance": "zōngsè: brown — the standard word"
+     }
+    ],
+    "etymology": {
+     "text": "咖啡 ‘coffee’ (a loanword) + 色 ‘colour’: ‘coffee colour’.",
+     "src": "morphemes: 咖啡 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Chinese names many colours after things: 咖啡色 ‘coffee colour’, 橘黄色 ‘tangerine yellow’, 天蓝色 ‘sky blue’."
+    ],
+    "pitfalls": [
+     "咖啡色 is a colour, not coffee: 咖啡色的包 is a brown bag."
+    ],
+    "subtleties": [
+     "More common than 棕色 in everyday speech, especially for clothes and furniture.",
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:huise",
+   "lemma": "灰色",
+   "trad": "灰色",
+   "pinyin": "huī sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.grey"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 灰色 as “gray (color)” — the American spelling of the course gloss “grey”; the same colour"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ash, clouds, concrete — quiet and dull.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grey (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.grey"
+     },
+     {
+      "id": "s2",
+      "def": "gloomy; unofficial, in-between (灰色地带 ‘grey area’)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他有一辆灰色的车。",
+      "py": "Tā yǒu yí liàng huīsè de chē.",
+      "tr": "He has a grey car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "我不喜欢灰色。",
+      "py": "Wǒ bù xǐhuan huīsè.",
+      "tr": "I don’t like grey.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "这是灰色地带。",
+      "py": "Zhè shì huīsè dìdài.",
+      "tr": "This is a grey area.",
+      "register": "neutral",
+      "context": "law",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "灰色的车",
+      "tr": "a grey car"
+     },
+     {
+      "text": "灰色地带",
+      "tr": "grey area"
+     },
+     {
+      "text": "浅灰色",
+      "tr": "light grey"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "灰",
+      "register": "neutral",
+      "nuance": "huī: grey; ash, dust (as a colour mostly in compounds: 浅灰, 灰白)"
+     }
+    ],
+    "etymology": {
+     "text": "灰 ‘ash’ (ideogram: 又 ‘hand’ + 火 ‘fire’ — fire that can be touched) + 色 ‘colour’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "灰 is ash: a hand (又) and fire (火) — fire you can touch is ash. Grey is ‘ash colour’.",
+     "灰心 ‘ash heart’ means to lose heart."
+    ],
+    "pitfalls": [
+     "Grey hair is 白头发 ‘white hair’, not *灰头发."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:chengse",
+   "lemma": "橙色",
+   "trad": "橙色",
+   "pinyin": "chéng sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.orange"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.orange",
+     "axis": "shade",
+     "value": "orange"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Oranges, sunsets, safety vests — bright and warm.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "orange (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.orange"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我要那个橙色的杯子。",
+      "py": "Wǒ yào nàge chéngsè de bēizi.",
+      "tr": "I want that orange cup.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "他的自行车是橙色的。",
+      "py": "Tā de zìxíngchē shì chéngsè de.",
+      "tr": "His bike is orange.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "我很喜欢橙色。",
+      "py": "Wǒ hěn xǐhuan chéngsè.",
+      "tr": "I really like orange.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "橙色的杯子",
+      "tr": "an orange cup"
+     },
+     {
+      "text": "橙色的灯",
+      "tr": "an orange light"
+     },
+     {
+      "text": "浅橙色",
+      "tr": "light orange"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "橘黄色",
+      "register": "neutral",
+      "nuance": "júhuángsè: orange — ‘tangerine yellow’"
+     },
+     {
+      "word": "橘色",
+      "register": "informal",
+      "nuance": "júsè: orange (short form)"
+     }
+    ],
+    "etymology": {
+     "text": "橙 ‘orange (the fruit; 木 + phonetic 登)’ + 色 ‘colour’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like English, Chinese names the colour after the fruit: 橙子 chéngzi ‘orange’ → 橙色."
+    ],
+    "pitfalls": [
+     "橙 chéng (2nd tone) — the fruit is 橙子, the juice 橙汁."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:juhuangse",
+   "lemma": "橘黄色",
+   "trad": "橘黃色",
+   "pinyin": "jú huáng sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.orange"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 橘黃色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.orange",
+     "axis": "shade",
+     "value": "tangerine yellow, a yellowish orange"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tangerine orange — warm lamplight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "orange (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.orange"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个房间的墙是橘黄色的。",
+      "py": "Zhège fángjiān de qiáng shì júhuángsè de.",
+      "tr": "The walls of this room are orange.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢橘黄色的灯。",
+      "py": "Wǒ xǐhuan júhuángsè de dēng.",
+      "tr": "I like orange lamps.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "他穿了一件橘黄色的衣服。",
+      "py": "Tā chuān le yí jiàn júhuángsè de yīfu.",
+      "tr": "He was wearing an orange top.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "橘黄色的灯",
+      "tr": "an orange lamp"
+     },
+     {
+      "text": "橘黄色的墙",
+      "tr": "an orange wall"
+     },
+     {
+      "text": "橘黄色的衣服",
+      "tr": "orange clothes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "橙色",
+      "register": "neutral",
+      "nuance": "chéngsè: orange — the standard colour term"
+     }
+    ],
+    "etymology": {
+     "text": "橘 ‘tangerine’ + 黄 ‘yellow’ + 色 ‘colour’: ‘tangerine yellow’.",
+     "src": "morphemes: 橘 + 黄 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "橘黄色 is ‘tangerine yellow’: 橘子 is the tangerine, native to southern China."
+    ],
+    "pitfalls": [
+     "橘 is also written 桔 in 桔子 — the same fruit."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:fenhongse",
+   "lemma": "粉红色",
+   "trad": "粉紅色",
+   "pinyin": "fěn hóng sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.pink"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 粉紅色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.pink",
+     "axis": "length",
+     "value": "the full form"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pink — sweet, soft, romantic.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pink (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.pink"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我妹妹喜欢粉红色。",
+      "py": "Wǒ mèimei xǐhuan fěnhóngsè.",
+      "tr": "My younger sister likes pink.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "她的房间是粉红色的。",
+      "py": "Tā de fángjiān shì fěnhóngsè de.",
+      "tr": "Her room is pink.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我想买一个粉红色的包。",
+      "py": "Wǒ xiǎng mǎi yí ge fěnhóngsè de bāo.",
+      "tr": "I want to buy a pink bag.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "粉红色的包",
+      "tr": "a pink bag"
+     },
+     {
+      "text": "粉红色的花",
+      "tr": "pink flowers"
+     },
+     {
+      "text": "浅粉红色",
+      "tr": "light pink"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "粉色",
+      "register": "neutral",
+      "nuance": "fěnsè: pink — the shorter word, very common"
+     }
+    ],
+    "etymology": {
+     "text": "粉 ‘(face) powder’ + 红 ‘red’ + 色 ‘colour’: ‘powder red’. 粉 (米 ‘rice’ + phonetic 分) first meant face powder, then its colour.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "粉 was first face powder made of rice (米): pink is ‘powder red’, the colour of a powdered face."
+    ],
+    "pitfalls": [
+     "粉 alone (slang) is a ‘fan’ — 粉丝, from English fans."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:fense",
+   "lemma": "粉色",
+   "trad": "粉色",
+   "pinyin": "fěn sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.pink"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.pink",
+     "axis": "length",
+     "value": "the short form (very common)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pink, the everyday short word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pink (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.pink"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她有一部粉色的手机。",
+      "py": "Tā yǒu yí bù fěnsè de shǒujī.",
+      "tr": "She has a pink phone.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "我不喜欢粉色。",
+      "py": "Wǒ bù xǐhuan fěnsè.",
+      "tr": "I don’t like pink.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "粉色的花很漂亮。",
+      "py": "Fěnsè de huā hěn piàoliang.",
+      "tr": "Pink flowers are pretty.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "粉色的手机",
+      "tr": "a pink phone"
+     },
+     {
+      "text": "粉色的花",
+      "tr": "pink flowers"
+     },
+     {
+      "text": "浅粉色",
+      "tr": "light pink"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "粉红色",
+      "register": "neutral",
+      "nuance": "fěnhóngsè: pink — the full word"
+     }
+    ],
+    "etymology": {
+     "text": "粉 ‘powder’ + 色 ‘colour’ — short for 粉红色.",
+     "src": "morphemes: 粉 + 色 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "粉丝 means both ‘fans’ (from English) and ‘glass noodles’."
+    ],
+    "pitfalls": [
+     "粉色 and 粉红色 mean the same; 粉色 is shorter and more frequent in speech."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:zise",
+   "lemma": "紫色",
+   "trad": "紫色",
+   "pinyin": "zǐ sè",
+   "pos": "NOUN",
+   "senses": [
+    "colour.purple"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Purple — lavender, plums, imperial grandeur.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "purple (the colour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "colour.purple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我不喜欢紫色。",
+      "py": "Wǒ bù xǐhuan zǐsè.",
+      "tr": "I don’t like purple.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "茄子是紫色的。",
+      "py": "Qiézi shì zǐsè de.",
+      "tr": "Aubergines are purple.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "她有一个紫色的包。",
+      "py": "Tā yǒu yí ge zǐsè de bāo.",
+      "tr": "She has a purple bag.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "紫色的花",
+      "tr": "purple flowers"
+     },
+     {
+      "text": "紫色的包",
+      "tr": "a purple bag"
+     },
+     {
+      "text": "深紫色",
+      "tr": "dark purple"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "紫",
+      "register": "neutral",
+      "nuance": "zǐ: purple (in compounds: 紫红 ‘purplish red’)"
+     }
+    ],
+    "etymology": {
+     "text": "紫 ‘purple’ (phonetic 此 + semantic 糸 ‘silk’) + 色 ‘colour’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Forbidden City is 紫禁城 ‘the Purple Forbidden City’ — purple after the Pole Star, home of the heavenly emperor."
+    ],
+    "pitfalls": [
+     "A red onion is 紫洋葱 ‘purple onion’, and 紫菜 is seaweed (nori), not a purple vegetable."
+    ],
+    "subtleties": [
+     "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
+     "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ]
+   }
+  },
+  {
+   "id": "zh:qian",
+   "lemma": "浅",
+   "trad": "淺",
+   "pinyin": "qiǎn",
+   "pos": "ADJ",
+   "senses": [
+    "adj.light",
+    "adj.shallow"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shallow water, pale colours, easy words.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "light, pale (of colours)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.light"
+     },
+     {
+      "id": "s2",
+      "def": "shallow (water)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.shallow"
+     },
+     {
+      "id": "s3",
+      "def": "simple, easy to understand",
+      "register": [
+       "neutral"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢浅蓝色。",
+      "py": "Wǒ xǐhuan qiǎnlánsè.",
+      "tr": "I like light blue.",
+      "register": "neutral",
+      "context": "colours",
+      "sense": "s1"
+     },
+     {
+      "text": "这个房间是浅绿色的。",
+      "py": "Zhège fángjiān shì qiǎnlǜsè de.",
+      "tr": "This room is light green.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "这里的水很浅。",
+      "py": "Zhèli de shuǐ hěn qiǎn.",
+      "tr": "The water is shallow here.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "浅蓝色",
+      "tr": "light blue"
+     },
+     {
+      "text": "浅色",
+      "tr": "light colours"
+     },
+     {
+      "text": "水很浅",
+      "tr": "the water is shallow"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "深入浅出",
+      "tr": "go in deep, come out shallow",
+      "kind": "idiom",
+      "meaning": "to explain profound things in simple words",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "淡",
+      "register": "neutral",
+      "nuance": "dàn: pale, light — colours (淡蓝 ‘pale blue’), also mild tastes"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "深",
+      "note": "dark; deep"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound (traditional 淺): semantic 氵 ‘water’ + phonetic 戔 — first ‘shallow’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese uses the words for water depth for colours: 浅 ‘shallow’ = light, 深 ‘deep’ = dark."
+    ],
+    "pitfalls": [
+     "‘Light’ has three Chinese words: a light colour 浅, light in weight 轻 qīng, bright with light 亮 liàng."
+    ],
+    "subtleties": [
+     "浅 joins the colour word directly: 浅蓝色, 浅绿色 (no 的)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 淺 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:shen",
+   "lemma": "深",
+   "trad": "深",
+   "pinyin": "shēn",
+   "pos": "ADJ",
+   "senses": [
+    "adj.dark",
+    "adj.deep"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Deep water, dark colours, late at night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dark, deep (of colours)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.dark"
+     },
+     {
+      "id": "s2",
+      "def": "deep (water, feelings, meaning)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.deep"
+     },
+     {
+      "id": "s3",
+      "def": "late (in time): 深夜 ‘late at night’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他的车是深蓝色的。",
+      "py": "Tā de chē shì shēnlánsè de.",
+      "tr": "His car is dark blue.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "我喜欢深色的衣服。",
+      "py": "Wǒ xǐhuan shēnsè de yīfu.",
+      "tr": "I like dark clothes.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "这条河很深。",
+      "py": "Zhè tiáo hé hěn shēn.",
+      "tr": "This river is deep.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "深蓝色",
+      "tr": "dark blue"
+     },
+     {
+      "text": "深色",
+      "tr": "dark colours"
+     },
+     {
+      "text": "很深",
+      "tr": "very deep"
+     },
+     {
+      "text": "深夜",
+      "tr": "late at night"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "深入浅出",
+      "tr": "go in deep, come out shallow",
+      "kind": "idiom",
+      "meaning": "to explain profound things in simple words",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "暗",
+      "register": "neutral",
+      "nuance": "àn: dark, dim, dull — of light and of dull colours (暗红 ‘dark, dull red’)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "浅",
+      "note": "light; shallow"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 氵 ‘water’ + phonetic — first ‘deep’ (of water).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "深 and 浅 are a water pair — deep and shallow — used for strong and pale colours."
+    ],
+    "pitfalls": [
+     "A dark ROOM is 暗 or 黑 (房间很暗), not 深: 深 is for colours, water and feelings."
+    ],
+    "subtleties": [
+     "深 joins the colour word directly: 深蓝色, 深绿色 (no 的)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:geng",
+   "lemma": "更",
+   "trad": "更",
+   "pinyin": "gèng",
+   "pos": "ADV",
+   "senses": [
+    "adv.more",
+    "verb.change"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "One step further: even more.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "more, even more (before an adjective or a verb of liking)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.more"
+     },
+     {
+      "id": "s2",
+      "def": "(read gēng) to change, replace (更新 ‘to update’)",
+      "register": [
+       "formal"
+      ],
+      "concept": "verb.change"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个更好。",
+      "py": "Zhège gèng hǎo.",
+      "tr": "This one is better.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "我更喜欢茶。",
+      "py": "Wǒ gèng xǐhuan chá.",
+      "tr": "I prefer tea.",
+      "register": "neutral",
+      "context": "preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "今天比昨天更冷。",
+      "py": "Jīntiān bǐ zuótiān gèng lěng.",
+      "tr": "Today is even colder than yesterday.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "手机要更新了。",
+      "py": "Shǒujī yào gēngxīn le.",
+      "tr": "The phone needs an update.",
+      "register": "neutral",
+      "context": "technology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "更好",
+      "tr": "better"
+     },
+     {
+      "text": "更多",
+      "tr": "more"
+     },
+     {
+      "text": "更喜欢",
+      "tr": "to prefer"
+     },
+     {
+      "text": "更大",
+      "tr": "bigger"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "欲穷千里目，更上一层楼",
+      "tr": "to see a thousand li further, climb one more storey",
+      "kind": "quote",
+      "meaning": "to see further, rise higher (said of striving for more)",
+      "register": "literary",
+      "source": "Wang Zhihuan, 登鹳雀楼 (Tang dynasty)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "还",
+      "register": "neutral",
+      "nuance": "hái: even (more) — in comparisons, with surprise: 他比我还高 ‘he is even taller than me’"
+     },
+     {
+      "word": "更加",
+      "register": "formal",
+      "nuance": "gèngjiā: even more (written)"
+     }
+    ],
+    "etymology": {
+     "text": "Originally an ideogram of two chariots (丙); later a hand with a whip 攴 was added and one 丙 dropped (Shuowen 㪅).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "更上一层楼 ‘climb one more storey’ comes from a famous Tang poem and is used for any further progress."
+    ],
+    "pitfalls": [
+     "更 gèng ‘more’ vs 更 gēng ‘to change’ (更新 ‘update’) — same character, two readings.",
+     "Never 很 with 更: *更很好 → 更好."
+    ],
+    "subtleties": [
+     "更 compares even without 比: 我觉得这个更好 ‘I think this one is better’.",
+     "更 can come after a 比-phrase: 他比我更高 ‘he is (even) taller than me’."
+    ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "gèng",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "gēng",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:zui",
+   "lemma": "最",
+   "trad": "最",
+   "pinyin": "zuì",
+   "pos": "ADV",
+   "senses": [
+    "adv.most"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The top of the scale — the most, the best.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "most, the most, -est",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.most"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我最喜欢蓝色。",
+      "py": "Wǒ zuì xǐhuan lánsè.",
+      "tr": "Blue is my favourite colour.",
+      "register": "neutral",
+      "context": "preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "他是我们家最高的。",
+      "py": "Tā shì wǒmen jiā zuì gāo de.",
+      "tr": "He is the tallest in our family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这是最好的饭馆。",
+      "py": "Zhè shì zuì hǎo de fànguǎn.",
+      "tr": "This is the best restaurant.",
+      "register": "neutral",
+      "context": "restaurants",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "最好",
+      "tr": "best; had better"
+     },
+     {
+      "text": "最大",
+      "tr": "biggest"
+     },
+     {
+      "text": "最喜欢",
+      "tr": "to like best"
+     },
+     {
+      "text": "最后",
+      "tr": "last, finally"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "最为",
+      "register": "formal",
+      "nuance": "zuìwéi: most (written, before two-syllable adjectives: 最为重要)"
+     }
+    ],
+    "etymology": {
+     "text": "Originally 㝡: semantic 宀 ‘roof’ + phonetic 取 ‘to gather’; marks were added to set apart the sense ‘the most’, and the top later became 曰 in simplified writing.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "最后 ‘finally, the last’ is ‘most behind’."
+    ],
+    "pitfalls": [
+     "No 很 with 最: *最很高 → 最高.",
+     "最好 + verb means ‘you had better’: 你最好早点走 ‘you’d better leave early’."
+    ],
+    "subtleties": [
+     "最 + adjective + 的 = ‘the …-est (one)’: 最大的 ‘the biggest’; the group comes first: 我们家我爸爸最高."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:bi.than",
+   "lemma": "比",
+   "trad": "比",
+   "pinyin": "bǐ",
+   "pos": "ADP",
+   "senses": [
+    "conj.than",
+    "verb.compare",
+    "prep.to.score"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Side by side: one thing measured against another.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "than; compared with (A 比 B + adjective)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.than"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to compare; to compete",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.compare"
+     },
+     {
+      "id": "s3",
+      "def": "to (in scores and ratios: 三比二 ‘3:2’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.to.score"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我哥哥比我高。",
+      "py": "Wǒ gēge bǐ wǒ gāo.",
+      "tr": "My older brother is taller than me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "今天比昨天热。",
+      "py": "Jīntiān bǐ zuótiān rè.",
+      "tr": "Today is hotter than yesterday.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "我们比一比。",
+      "py": "Wǒmen bǐ yi bǐ.",
+      "tr": "Let’s compare (them).",
+      "register": "informal",
+      "context": "games",
+      "sense": "s2"
+     },
+     {
+      "text": "中国队三比二赢了。",
+      "py": "Zhōngguó duì sān bǐ èr yíng le.",
+      "tr": "The Chinese team won 3–2.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "比…还",
+      "tr": "even more than"
+     },
+     {
+      "text": "比较",
+      "tr": "rather, fairly; to compare"
+     },
+     {
+      "text": "比赛",
+      "tr": "match, competition"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "人比人，气死人",
+      "tr": "person compared with person, the anger kills you",
+      "kind": "saying",
+      "meaning": "comparing yourself with others only makes you miserable",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "跟…比",
+      "register": "neutral",
+      "nuance": "gēn … bǐ: compared with … (跟去年比 ‘compared with last year’)"
+     }
+    ],
+    "etymology": {
+     "text": "Explained as two 匕 side by side (phono-semantic, Chu Wan-li) or as an ideogram ‘to juxtapose’ (Shuowen); graphically like 从 and 北 but unrelated.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "比 looks like two people standing side by side — the picture of comparing."
+    ],
+    "pitfalls": [
+     "After 比 + noun the adjective stands alone: *他比我很高 → 他比我高 (or 他比我高多了 ‘much taller’).",
+     "The negation is 没有, not 不比: 他没有我高 ‘he isn’t as tall as me’; 他不比我高 means ‘he’s no taller than me’ (we’re about the same)."
+    ],
+    "subtleties": [
+     "The difference comes after the adjective: 他比我大两岁 ‘he is two years older than me’, 贵一点 ‘a bit more expensive’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
+   }
+  },
+  {
+   "id": "zh:yiyang",
+   "lemma": "一样",
+   "trad": "一樣",
+   "pinyin": "yī yàng",
+   "pos": "ADJ",
+   "senses": [
+    "adj.same",
+    "conj.asas",
+    "prep.like"
+   ],
+   "role": "the same, alike: A 跟 B 一样 (+ adjective) ‘A is as … as B’, 不一样 ‘different’ (S17)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Alike, the same — two things side by side.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the same, alike",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.same"
+     },
+     {
+      "id": "s2",
+      "def": "(A 跟 B 一样 + adjective) as … as",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.asas"
+     },
+     {
+      "id": "s3",
+      "def": "(像…一样) just like",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.like"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这两个杯子一样。",
+      "py": "Zhè liǎng ge bēizi yíyàng.",
+      "tr": "These two cups are the same.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们的想法不一样。",
+      "py": "Wǒmen de xiǎngfǎ bù yíyàng.",
+      "tr": "We see it differently.",
+      "register": "neutral",
+      "context": "opinions",
+      "sense": "s1"
+     },
+     {
+      "text": "我跟我哥哥一样高。",
+      "py": "Wǒ gēn wǒ gēge yíyàng gāo.",
+      "tr": "I’m as tall as my older brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "她像妈妈一样漂亮。",
+      "py": "Tā xiàng māma yíyàng piàoliang.",
+      "tr": "She is as pretty as her mother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "不一样",
+      "tr": "different"
+     },
+     {
+      "text": "跟…一样",
+      "tr": "the same as"
+     },
+     {
+      "text": "一模一样",
+      "tr": "exactly alike"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "一模一样",
+      "tr": "one mould, one shape",
+      "kind": "fixed expression",
+      "meaning": "exactly alike, identical",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "相同",
+      "register": "formal",
+      "nuance": "xiāngtóng: identical, the same (written)"
+     },
+     {
+      "word": "同样",
+      "register": "formal",
+      "nuance": "tóngyàng: likewise, equally"
+     }
+    ],
+    "etymology": {
+     "text": "一 ‘one’ + 样 ‘kind, manner, shape’: ‘of one kind’.",
+     "src": "morphemes: 一 + 样 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "一模一样 ‘one mould, one shape’ — like two prints from the same mould."
+    ],
+    "pitfalls": [
+     "No 很 in an equal comparison: *我跟他一样很高 → 我跟他一样高.",
+     "一 is read yí here (before the 4th tone of 样)."
+    ],
+    "subtleties": [
+     "不一样 ‘not the same’ is the everyday word for ‘different’: 我们不一样."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 一樣 for every sense"
+    },
+    "toneSandhi": "yí yàng"
+   }
+  }
+ ]
+}

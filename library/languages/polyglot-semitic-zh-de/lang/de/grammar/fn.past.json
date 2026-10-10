@@ -1,0 +1,499 @@
+{
+ "function": "fn.past",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "verb.past",
+   "value": "past"
+  },
+  {
+   "feature": "verb.perfect",
+   "value": "possessive"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "obligatory"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "v2-and-final"
+  }
+ ],
+ "summary": "German has one past time and two ways to say it. In speech the usual form is the Perfekt: a form of haben or sein in second place and the Partizip II (past participle) at the end of the clause – Ich habe gefrühstückt. Ich bin um sechs aufgestanden. In written narration (stories, news, novels) the one-word Präteritum is used: Er stand auf und duschte. Both say the same thing: the action is over. Neither marks whether it was finished or still going on – German has no aspect – and there are no degrees of “how long ago”. Most verbs take haben; verbs of movement and of a change of state without an object take sein (aufstehen, aufwachen, einschlafen, losgehen, heimkommen, gehen, fahren, kommen), and so do sein and bleiben. The Partizip II is built with ge-: ge-…-t for weak verbs (gefrühstückt, geduscht), ge-…-en and often a new vowel for strong verbs (geschlafen, gewaschen). A separable particle comes first (auf-ge-standen, an-ge-zogen, heim-ge-kommen); verbs with an inseparable prefix (be-, er-, ver- …) and verbs in -ieren take no ge- (begonnen, beendet, vergessen, reserviert). sein and haben prefer the Präteritum even in speech: Gestern war Sonntag. Er hatte Hunger.",
+ "blocks": [
+  {
+   "t": "table",
+   "caption": "The Perfekt: haben or sein in second place + the Partizip II at the end",
+   "head": [
+    "",
+    "frühstücken (haben)",
+    "aufstehen (sein)"
+   ],
+   "rows": [
+    [
+     "ich",
+     "habe … gefrühstückt",
+     "bin … aufgestanden"
+    ],
+    [
+     "du",
+     "hast … gefrühstückt",
+     "bist … aufgestanden"
+    ],
+    [
+     "er / sie / es",
+     "hat … gefrühstückt",
+     "ist … aufgestanden"
+    ],
+    [
+     "wir",
+     "haben … gefrühstückt",
+     "sind … aufgestanden"
+    ],
+    [
+     "ihr",
+     "habt … gefrühstückt",
+     "seid … aufgestanden"
+    ],
+    [
+     "sie / Sie",
+     "haben … gefrühstückt",
+     "sind … aufgestanden"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "possessive"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "How the Partizip II is built",
+   "head": [
+    "kind of verb",
+    "pattern",
+    "examples"
+   ],
+   "rows": [
+    [
+     "weak (regular)",
+     "ge- + stem + -t",
+     "duschen → geduscht, frühstücken → gefrühstückt, spielen → gespielt"
+    ],
+    [
+     "strong",
+     "ge- + stem (often a new vowel) + -en",
+     "schlafen → geschlafen, waschen → gewaschen, gehen → gegangen, trinken → getrunken"
+    ],
+    [
+     "separable (auf-, an-, ein-, los-, heim- …)",
+     "particle + ge- + stem + -t / -en",
+     "aufwachen → aufgewacht, aufstehen → aufgestanden, anziehen → angezogen, einschlafen → eingeschlafen"
+    ],
+    [
+     "inseparable prefix (be-, er-, ver- …)",
+     "no ge-",
+     "beginnen → begonnen, beenden → beendet, vergessen → vergessen, verlassen → verlassen"
+    ],
+    [
+     "verbs in -ieren",
+     "no ge-, ending -t",
+     "reservieren → reserviert"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "verb.participles",
+     "value": "few"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "haben or sein?",
+   "text": "sein: the subject moves from one place to another or changes its state, and there is no accusative object – Ich bin aufgewacht, aufgestanden, losgegangen, heimgekommen, eingeschlafen; also sein and bleiben (Ich bin zu Hause geblieben). haben: everything else – Ich habe geschlafen, gefrühstückt, geduscht – and every reflexive verb: Ich habe mich angezogen. schlafen takes haben (a state), einschlafen takes sein (a change)."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Ich",
+    "bin",
+    "heute um sechs Uhr",
+    "aufgestanden."
+   ],
+   "caption": "The sentence bracket: the auxiliary is the second element, the participle waits at the very end",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Perfekt in speech, Präteritum in writing",
+   "text": "Gestern bin ich früh aufgestanden (speech) – Er stand früh auf (a story). The meaning is the same. In everyday speech sein and haben are used in the Präteritum: Ich war müde. Er hatte keine Zeit. The Präteritum of other verbs comes in the next lesson.",
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "past"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No aspect, no “just now”",
+   "text": "Ich habe gefrühstückt = I had breakfast, I have had breakfast, I was having breakfast (in context). The Perfekt can go with a past time word: Ich habe gestern gefrühstückt. Whether an action was finished is said with words (schon, fertig), not with the verb form.",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Where does ge- go?",
+   "text": "With separable verbs ge- goes between the particle and the stem: aufgestanden, angezogen, losgegangen – not *geaufstanden. With be-, er-, ver- and -ieren there is no ge- at all: begonnen, erinnert, vergessen, reserviert."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The daily routine in the past",
+   "text": "Ich bin um sechs aufgewacht, um halb sieben aufgestanden, habe geduscht, mich angezogen und gefrühstückt. Um acht bin ich losgegangen. Um fünf habe ich mit der Arbeit aufgehört, um sieben bin ich heimgekommen und um elf eingeschlafen."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I speaking (Perfekt) or writing a story (Präteritum)? With sein and haben: war, hatte.",
+   "Does the verb mean moving or changing state, with no accusative object? → sein; otherwise → haben (also every reflexive verb).",
+   "Weak or strong? weak: ge-…-t; strong: ge-…-en, often with a new vowel (learn the principal parts).",
+   "Is there a separable particle (auf, an, ein, los, heim)? → particle + ge + stem: aufgestanden.",
+   "Is there an inseparable prefix (be-, er-, ver-) or -ieren? → no ge-: begonnen, reserviert.",
+   "Is the auxiliary in second place and the participle at the very end?"
+  ],
+  "steps": [
+   "Choose haben or sein and conjugate it for the subject.",
+   "Build the Partizip II.",
+   "Put the auxiliary second and the participle last; the time word and the rest go in between."
+  ]
+ },
+ "traps": [
+  "Ich bin aufgestanden – not *Ich habe aufgestanden (change of position → sein).",
+  "Ich habe geschlafen, but Ich bin eingeschlafen.",
+  "Ich habe mich angezogen – reflexive verbs take haben.",
+  "aufgestanden, angezogen – not *geaufstanden, *geanzogen.",
+  "begonnen, beendet, vergessen, reserviert – no ge-.",
+  "The participle goes to the end: Ich habe um sieben gefrühstückt – not *Ich habe gefrühstückt um sieben (in writing).",
+  "Ich habe gestern gegessen is correct: the Perfekt goes with a past time word."
+ ],
+ "evidence": {
+  "tags": [
+   "V",
+   "PST"
+  ]
+ },
+ "paradigmCells": [
+  "V;PTCP;PST",
+  "V;PST;3;SG"
+ ],
+ "needs": {
+  "VERB": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;PTCP;PST"
+   ],
+   "lemmas": [
+    "de:aufwachen",
+    "de:aufstehen",
+    "de:waschen",
+    "de:duschen",
+    "de:anziehen",
+    "de:frühstücken",
+    "de:losgehen",
+    "de:anfangen",
+    "de:beginnen",
+    "de:aufhören",
+    "de:beenden",
+    "de:heimkommen",
+    "de:einschlafen",
+    "de:schlafen",
+    "de:essen",
+    "de:trinken",
+    "de:kaufen",
+    "de:kochen",
+    "de:gehen",
+    "de:kommen",
+    "de:fahren",
+    "de:bleiben",
+    "de:warten",
+    "de:reisen",
+    "de:laufen",
+    "de:verlassen",
+    "de:ankommen",
+    "de:zurückkommen",
+    "de:weggehen",
+    "de:sein",
+    "de:haben"
+   ],
+   "count": 14
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Ich ___ um sechs aufgestanden.",
+   "options": [
+    "bin",
+    "habe",
+    "war"
+   ],
+   "answer": "bin",
+   "why": "aufstehen is a change of position without an object → sein: Ich bin aufgestanden."
+  },
+  {
+   "q": "Wir ___ um sieben gefrühstückt.",
+   "options": [
+    "haben",
+    "sind",
+    "werden"
+   ],
+   "answer": "haben",
+   "why": "frühstücken takes haben."
+  },
+  {
+   "q": "Das Baby ___ endlich eingeschlafen.",
+   "options": [
+    "ist",
+    "hat"
+   ],
+   "answer": "ist",
+   "why": "einschlafen is a change of state → sein (but: Das Baby hat geschlafen)."
+  },
+  {
+   "q": "Ich habe mich schnell ___. (anziehen)",
+   "options": [
+    "angezogen",
+    "geanzogen",
+    "anzogen",
+    "angezieht"
+   ],
+   "answer": "angezogen",
+   "why": "Separable and strong: an + ge + zogen."
+  },
+  {
+   "q": "Die Schule hat um acht ___. (beginnen)",
+   "options": [
+    "begonnen",
+    "gebeginnt",
+    "begannen",
+    "gebegonnen"
+   ],
+   "answer": "begonnen",
+   "why": "be- is inseparable: no ge-; strong participle begonnen."
+  },
+  {
+   "q": "Ich habe einen Tisch ___. (reservieren)",
+   "options": [
+    "reserviert",
+    "gereserviert",
+    "reservieren"
+   ],
+   "answer": "reserviert",
+   "why": "Verbs in -ieren take no ge-."
+  },
+  {
+   "q": "Which is the usual spoken past of “I slept well”?",
+   "options": [
+    "Ich habe gut geschlafen.",
+    "Ich schlief gut.",
+    "Ich bin gut geschlafen."
+   ],
+   "answer": "Ich habe gut geschlafen.",
+   "why": "Speech uses the Perfekt; schlafen takes haben. Ich schlief gut is correct but sounds written."
+  },
+  {
+   "q": "Gestern ___ ich müde. (sein)",
+   "options": [
+    "war",
+    "habe gewesen",
+    "wurde"
+   ],
+   "answer": "war",
+   "why": "sein usually takes the Präteritum even in speech (Ich bin müde gewesen exists but is less common); never *habe gewesen; wurde means “became”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.past",
+   "note": "Arabic has one past form with person endings (فَعَلَ: كَتَبْتُ katabtu, كَتَبَ kataba) and no auxiliary."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.past",
+   "note": "The Hebrew past is one word with person, gender and number endings (כָּתַבְתִּי, כָּתַב, כָּתְבָה); no auxiliary, no participle."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.past",
+   "note": "Chinese does not change the verb: 了 marks a completed action and time words (昨天) set the time."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.past.ongoing",
+   "note": "The Präteritum of the common verbs and früher (used to) come in the next lesson."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek separates aorist and imperfect (έφαγα / έτρωγα); German has no aspect: Ich habe gegessen and Ich aß cover both. The German Perfekt (habe gegessen) is the everyday spoken past, while the Greek perfect (έχω φάει) is used much less than the aorist."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian chooses between aspects (делал / сделал) and marks gender in the past (делал / делала); German marks neither: Ich habe gemacht. The two German forms (Perfekt, Präteritum) differ in register, not in meaning."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Ich habe gegessen translates both comí and he comido – the Perfekt goes happily with ayer: Ich habe gestern gegessen. Unlike haber, German also uses sein: Ich bin gegangen."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "Ich habe gestern gefrühstückt is fine, although “I have had breakfast yesterday” is not: the German Perfekt is simply the spoken past. Some verbs take sein (Ich bin aufgestanden), and the participle goes to the end."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Like the passé composé, the Perfekt is the spoken past and chooses between haben and sein (être) for movement. But reflexive verbs take haben in German: Ich habe mich angezogen (je me suis habillé). The Präteritum plays the role of the written passé simple."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "The Hindi perfective past agrees in gender and number and transitive verbs take ने (मैंने खाना खाया); the German past never shows gender and has no ergative: ich habe gegessen, sie hat gegessen."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian builds its past from the past stem with person endings (raftam “I went”); German speech needs an auxiliary and a participle at the end: Ich bin gegangen."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi past forms show the gender (तो गेला / ती गेली); German does not: er ist gegangen, sie ist gegangen."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic says the past with one word with person endings (kataba, katabtu); German speech uses two words, the auxiliary second and the participle at the end, and shows no gender."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "The Hebrew past is a single inflected verb (katavti, katav, katva); the German Perfekt is auxiliary + participle and does not change for gender."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish distinguishes the witnessed past -di (geldi) from the reported or inferred -miş (gelmiş); the German past forms say nothing about how you know: Er ist gekommen."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese adds one past ending at the end of the verb (tabeta, tabemashita); German splits the verb: the auxiliary is second and the participle last (Ich habe … gegessen), and chooses between haben and sein."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Korean marks the past with a suffix in the verb (먹었어요); German uses haben or sein + the participle at the end of the clause."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish also has a simple past (söin) and a perfect with an auxiliary (olen syönyt); but the Finnish participle agrees in number and the auxiliary is always olla, while German chooses haben or sein and never changes the participle."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian has one past suffix -t / -tt (ettem) and no auxiliary; German speech uses the Perfekt with haben / sein."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili marks the past with the prefix -li- (nilikula) and the perfect with -me- (nimekula); in German the past is either one word (aß) or an auxiliary + participle (habe gegessen), with no difference in meaning."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda distinguishes a near past from a remote past with different tense markers; German has one past for any distance in time."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese verbs never change and 了 marks completion; German must put the verb in the past (habe gefrühstückt), even when a time word like gestern already says it."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese may add đã or rely on time words; in German the past is obligatory on the verb: Gestern bin ich früh aufgestanden."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks past time with suffixes inside the long verb word and distinguishes how long ago it happened; German has one past and builds it with separate words (auxiliary + participle)."
+  }
+ ]
+}

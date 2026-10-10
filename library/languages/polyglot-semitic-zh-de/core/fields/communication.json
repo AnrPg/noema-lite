@@ -1,0 +1,106 @@
+{
+ "field": "communication",
+ "title": "Communication",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "comm.caller",
+   "gloss": "an unseen caller, a voice calling out",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "comm.document",
+   "gloss": "document, papers",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "comm.firstreply",
+   "gloss": "the first reply in a forum thread (internet slang)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "comm.letter",
+   "gloss": "letter (a written message)",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "comm.mail",
+   "gloss": "post, mail (letters and parcels)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "comm.memo",
+   "gloss": "memorandum, note",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "comm.news",
+   "gloss": "the news",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "comm.phonecall",
+   "gloss": "phone call",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "comm.phonenumber",
+   "gloss": "phone number",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "comm.tearjerker",
+   "gloss": "a sad, tear-jerking story (neologism)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "comm.message",
+   "gloss": "message",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "comm.address",
+   "gloss": "address",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "comm.email",
+   "gloss": "e-mail",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "comm.form",
+   "gloss": "form (to fill in)",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "comm.signature",
+   "gloss": "signature",
+   "tier": 1,
+   "rank": 8
+  }
+ ]
+}

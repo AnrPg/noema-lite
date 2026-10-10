@@ -1,0 +1,3927 @@
+{
+ "lexemes": [
+  {
+   "id": "he:ma",
+   "lemma": "מָה",
+   "pos": "PRON",
+   "senses": [
+    "q.what",
+    "adv.how.excl",
+    "pron.what"
+   ],
+   "translit": "ma",
+   "features": {
+    "spelling": "מה",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.how.excl",
+     "axis": "register",
+     "value": "a little more literary (מָה יָפֶה!)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity; also surprise and admiration.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (interrogative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "how …! (in exclamations: מָה יָפֶה!)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.how.excl"
+     },
+     {
+      "id": "s3",
+      "def": "what, that which (relative: מַה שֶּׁ… — זֶה מַה שֶּׁרָצִיתִי “that’s what I wanted”; with an infinitive: אֵין לִי מָה לַעֲשׂוֹת “I have nothing to do”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.what"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה אַתָּה שׁוֹתֶה?",
+      "tr": "What are you (m.) drinking?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה זֶה?",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה נִשְׁמָע?",
+      "tr": "How are things? (“What is heard?”)",
+      "register": "colloquial",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה יָפֶה!",
+      "tr": "How beautiful!",
+      "register": "informal",
+      "context": "exclamation",
+      "sense": "s2"
+     },
+     {
+      "text": "אֵין לִי מָה לַעֲשׂוֹת הַיּוֹם.",
+      "tr": "I have nothing to do today (literally “I have not what to do”).",
+      "register": "neutral",
+      "context": "free time",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מָה נִשְׁמָע?",
+      "tr": "how are you? what’s up?"
+     },
+     {
+      "text": "מָה הַשָּׁעָה?",
+      "tr": "what time is it?"
+     },
+     {
+      "text": "מָה פִּתְאֹם!",
+      "tr": "no way!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מַה נִּשְׁתַּנָּה הַלַּיְלָה הַזֶּה",
+      "tr": "what has changed (on) this night",
+      "kind": "quote",
+      "meaning": "the Four Questions of the Seder",
+      "register": "religious",
+      "source": "Passover Haggadah"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מַה",
+      "register": "literary",
+      "nuance": "the classical spelling with patah, followed by a doubled consonant: מַה נִּשְׁתַּנָּה"
+     }
+    ],
+    "etymology": {
+     "text": "Cognates such as Aramaic מָה (mā, “what”), Arabic مَا (mā, “what”) and Ugaritic 𐎎𐎅 (mh) can be found across the Central Semitic languages.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Passover Seder’s Four Questions open with מַה נִּשְׁתַּנָּה הַלַּיְלָה הַזֶּה — “What makes this night different?”"
+    ],
+    "pitfalls": [
+     "No verb “is” is needed: מָה זֶה? = What is this?",
+     "“Which …?” is usually אֵיזֶה / אֵיזוֹ, not מָה: אֵיזֶה יָרָק? (which vegetable?)."
+    ],
+    "subtleties": [
+     "מָה alone (“What?!”) can express surprise or impatience, depending on the tone."
+    ]
+   }
+  },
+  {
+   "id": "he:eifo",
+   "lemma": "אֵיפֹה",
+   "pos": "ADV",
+   "senses": [
+    "q.where"
+   ],
+   "translit": "eifo",
+   "features": {
+    "spelling": "איפה",
+    "derivedFrom": {
+     "none": "a basic question word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "q.where",
+     "axis": "place or direction",
+     "value": "at what place? (location)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Looking for things, people and places.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where? (at what place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "where (in indirect questions: אֲנִי לֹא יוֹדֵעַ אֵיפֹה …)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיפֹה הַגֶּזֶר?",
+      "tr": "Where is the carrot?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה אַתָּה גָּר?",
+      "tr": "Where do you (m.) live?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הַשֵּׁרוּתִים?",
+      "tr": "Where are the toilets?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא יוֹדֵעַ אֵיפֹה הוּא.",
+      "tr": "I (m.) don’t know where he is.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֵאֵיפֹה?",
+      "tr": "from where?"
+     },
+     {
+      "text": "אֵיפֹה אַתָּה?",
+      "tr": "where are you (m.)?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הֵיכָן",
+      "register": "formal",
+      "nuance": "the formal and literary “where”"
+     },
+     {
+      "word": "אַיֵּה",
+      "register": "literary",
+      "nuance": "a poetic, Biblical “where (is)?”"
+     }
+    ],
+    "etymology": {
+     "text": "From אֵי (e, “where”) + פֹּה (po, “here”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is literally “where-here”: אֵי + פֹּה.",
+     "Do not confuse it with אֵיפָה “ephah” (a Biblical dry measure): אֵיפָה וְאֵיפָה (“an ephah and an ephah”) means a double standard."
+    ],
+    "pitfalls": [
+     "“Where to?” is לְאָן, not אֵיפֹה: לְאָן אַתָּה הוֹלֵךְ?",
+     "Spelled with a final ה although it is pronounced efó."
+    ],
+    "subtleties": [
+     "“Where are you from?” is מֵאֵיפֹה אַתָּה? (מֵ = from)."
+    ]
+   }
+  },
+  {
+   "id": "he:mi",
+   "lemma": "מִי",
+   "pos": "PRON",
+   "senses": [
+    "q.who",
+    "pron.who"
+   ],
+   "translit": "mi",
+   "features": {
+    "spelling": "מי",
+    "agreement": "both",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "note": "Invariable: מִי הוּא? מִי הִיא? מִי הֵם? — the same word for one person or many, man or woman.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Who is it? Who is coming? — the first question at the door and on the phone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "who? (asking about a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.who"
+     },
+     {
+      "id": "s2",
+      "def": "whoever, the one who (מִי שֶׁ…)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.who"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מִי זֶה?",
+      "tr": "Who is this?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי הָרוֹפֵא שֶׁלְּךָ?",
+      "tr": "Who is your (m.) doctor?",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי רוֹצֶה קָפֶה?",
+      "tr": "Who wants coffee?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "מִי שֶׁרוֹצֶה, יָבוֹא.",
+      "tr": "Whoever wants to, will come.",
+      "register": "neutral",
+      "context": "invitations",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֶׁל מִי?",
+      "tr": "whose?"
+     },
+     {
+      "text": "עִם מִי?",
+      "tr": "with whom?"
+     },
+     {
+      "text": "לְמִי?",
+      "tr": "to whom? for whom?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מִי יִתֵּן",
+      "tr": "who will give",
+      "kind": "idiom",
+      "meaning": "if only …, I wish (מִי יִתֵּן וְ…)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: מִי is the only “who?”.",
+    "etymology": {
+     "text": "Compare Ugaritic 𐎎𐎊 (my), Phoenician 𐤌𐤉 (my), El-Amarna Akkadian mīya “who”, and Levantine, Egyptian and Hijazi Arabic مين (mīn) “who” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The name מִיכָאֵל (Michael) is a question: מִי כָּאֵל — “who is like God?”.",
+     "Spoken Arabic of the Levant and Egypt says مين (mīn) for “who” — very close to מִי."
+    ],
+    "pitfalls": [
+     "מִי is “who”, מָה is “what”: מִי זֶה? asks about a person, מָה זֶה? about a thing.",
+     "Unvowelled מי can also be מֵי “water(s) of” (מֵי־ before a noun) — context decides."
+    ],
+    "subtleties": [
+     "It never changes: מִי הִיא? “who is she?”, מִי הֵם? “who are they?”"
+    ]
+   }
+  },
+  {
+   "id": "he:matay",
+   "lemma": "מָתַי",
+   "pos": "ADV",
+   "senses": [
+    "q.when"
+   ],
+   "translit": "matai",
+   "features": {
+    "spelling": "מתי",
+    "derivedFrom": {
+     "none": "a basic question word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Timetables, appointments, “when is dinner?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when? (at what time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.when"
+     },
+     {
+      "id": "s2",
+      "def": "when (in an indirect question: אֲנִי לֹא יוֹדֵעַ מָתַי …)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָתַי אֲרוּחַת הָעֶרֶב?",
+      "tr": "When is dinner?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתָּה בַּבַּיִת?",
+      "tr": "When are you (m.) at home?",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי הָרוֹפְאָה פֹּה?",
+      "tr": "When is the doctor (f.) here?",
+      "register": "neutral",
+      "context": "clinic",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא יוֹדַעַת מָתַי הוּא בָּא.",
+      "tr": "I (f.) don’t know when he is coming.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַד מָתַי?",
+      "tr": "until when? how much longer?"
+     },
+     {
+      "text": "מָתַי בְּדִיּוּק?",
+      "tr": "when exactly?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֵימָתַי",
+      "register": "literary",
+      "nuance": "the old, Rabbinic “when” — known from the first words of the Mishnah, מֵאֵימָתַי"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic مَتَى (matā) “when” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Mishnah opens with a “when?”: מֵאֵימָתַי קוֹרִין אֶת שְׁמַע בְּעַרְבִית — “From when may one recite the Shema in the evening?” (Berakhot 1:1).",
+     "Arabic مَتَى (matā) is the same word."
+    ],
+    "pitfalls": [
+     "מָתַי only asks. The “when” of a statement (“when I come …”) is כְּשֶׁ… or כַּאֲשֶׁר (lesson 18).",
+     "Unvowelled מתי can also be the name מַתִּי (Mati) — context decides."
+    ],
+    "subtleties": [
+     "Stress on the last syllable: ma-TAI."
+    ]
+   }
+  },
+  {
+   "id": "he:eich",
+   "lemma": "אֵיךְ",
+   "pos": "ADV",
+   "senses": [
+    "q.how"
+   ],
+   "translit": "eich",
+   "features": {
+    "spelling": "איך",
+    "derivedFrom": {
+     "none": "a basic question word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "How is it? How do you do it? — curiosity about manner and quality.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how? (in what way; in what state)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.how"
+     },
+     {
+      "id": "s2",
+      "def": "how (in an indirect question: אֲנִי לֹא יוֹדֵעַ אֵיךְ …)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיךְ הַמָּרָק?",
+      "tr": "How is the soup?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיךְ אוֹמְרִים תּוֹדָה בִּיוָנִית?",
+      "tr": "How do you say “thank you” in Greek?",
+      "register": "neutral",
+      "context": "language class",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיךְ קוֹרְאִים לְךָ?",
+      "tr": "What is your (m.) name? (“How do they call you?”)",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא יוֹדֵעַ אֵיךְ מְבַשְּׁלִים אֶת זֶה.",
+      "tr": "I (m.) don’t know how to cook this.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֵיךְ קוֹרְאִים לְךָ?",
+      "tr": "what’s your name? (“how do they call you?”)"
+     },
+     {
+      "text": "אֵיךְ הוֹלֵךְ?",
+      "tr": "how’s it going?"
+     },
+     {
+      "text": "אֵיךְ אוֹמְרִים …?",
+      "tr": "how do you say …?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֵיךְ נָפְלוּ גִבּוֹרִים",
+      "tr": "how the mighty have fallen",
+      "kind": "quote",
+      "meaning": "a lament over a great fall",
+      "register": "literary",
+      "source": "2 Samuel 1:19"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "כֵּיצַד",
+      "register": "formal",
+      "nuance": "the formal “how” of instructions, the news and writing"
+     }
+    ],
+    "etymology": {
+     "text": "Biblical Hebrew (אֵיךְ נָפְלוּ גִבּוֹרִים, 2 Samuel 1:19). Wiktionary gives no etymology; it begins with the question element אֵי־ of אֵיפֹה “where” and אֵיזֶה “which”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek Πώς σε λένε; Russian Как тебя зовут? and German Wie heißt du? ask the name with “how” too — exactly like אֵיךְ קוֹרְאִים לְךָ?"
+    ],
+    "pitfalls": [
+     "“What is your name?” is אֵיךְ קוֹרְאִים לְךָ? — with “how”, not “what” (or מָה הַשֵּׁם שֶׁלְּךָ?).",
+     "“How are you?” is not built with אֵיךְ: say מַה שְּׁלוֹמְךָ? or מָה נִשְׁמָע? (lesson 2)."
+    ],
+    "subtleties": [
+     "The final ךְ carries a shva and is said ech, one syllable."
+    ]
+   }
+  },
+  {
+   "id": "he:lama",
+   "lemma": "לָמָּה",
+   "pos": "ADV",
+   "senses": [
+    "q.why"
+   ],
+   "translit": "lama",
+   "features": {
+    "spelling": "למה",
+    "derivedFrom": "לְ + מָה “for what?”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "q.why",
+     "axis": "register",
+     "value": "everyday"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “why?” — curious, or reproachful, depending on the voice.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "why? (everyday)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.why"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לָמָּה אַתָּה לֹא אוֹכֵל?",
+      "tr": "Why aren’t you (m.) eating?",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "לָמָּה הַחֲנוּת סְגוּרָה?",
+      "tr": "Why is the shop closed?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "לָמָּה לֹא?",
+      "tr": "Why not?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "לָמָּה הִיא בְּבֵית חוֹלִים?",
+      "tr": "Why is she in hospital?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לָמָּה לֹא?",
+      "tr": "why not?"
+     },
+     {
+      "text": "אֲבָל לָמָּה?",
+      "tr": "but why?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֵלִי אֵלִי לָמָה עֲזַבְתָּנִי",
+      "tr": "my God, my God, why have you forsaken me",
+      "kind": "quote",
+      "meaning": "despair; the words quoted in Aramaic in the Gospels (Eli, Eli, lema sabachthani)",
+      "register": "religious",
+      "source": "Psalms 22:2"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מַדּוּעַ",
+      "register": "formal",
+      "nuance": "the formal “why” of the news, of teachers and of official letters"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic لِمَا “for what, why” (Wiktionary); built from לְ “for” + מָה “what”: “for what?”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The cry “Ηλί, ηλί, λαμά σαβαχθανί” of the Greek Gospels (Matthew 27:46) quotes Psalm 22 — the same לָמָה.",
+     "Wiktionary also gives the spelling לָמָה without the dot in the מ."
+    ],
+    "pitfalls": [
+     "The answer “because” is כִּי in speech (מִשּׁוּם שֶׁ… in formal style) — lesson 18.",
+     "In everyday speech it is stressed on the first syllable: LA-ma."
+    ],
+    "subtleties": [
+     "לָמָּה can sound like a reproach (לָמָּה לֹא?! “why not?!”); the same question with מַדּוּעַ sounds like a news report."
+    ]
+   }
+  },
+  {
+   "id": "he:madua",
+   "lemma": "מַדּוּעַ",
+   "pos": "ADV",
+   "senses": [
+    "q.why"
+   ],
+   "translit": "madua",
+   "features": {
+    "spelling": "מדוע",
+    "derivedFrom": {
+     "none": "a basic question word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "q.why",
+     "axis": "register",
+     "value": "formal and written"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "The serious “why?” of headlines, teachers and inquiries.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "why? (formal and written)",
+      "register": [
+       "formal"
+      ],
+      "concept": "q.why"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מַדּוּעַ הָרוֹפְאִים לֹא בָּעֲבוֹדָה?",
+      "tr": "Why are the doctors not at work?",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "מַדּוּעַ אַתָּה כָּאן?",
+      "tr": "Why are you (m.) here?",
+      "register": "formal",
+      "context": "literature",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשּׁוֹטֵר שָׁאַל מַדּוּעַ הוּא שָׁם.",
+      "tr": "The police officer asked why he was there.",
+      "register": "formal",
+      "context": "police report",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַדּוּעַ לֹא?",
+      "tr": "why not? (formal)"
+     },
+     {
+      "text": "מַדּוּעַ זֶה חָשׁוּב?",
+      "tr": "why is it important?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לָמָּה",
+      "register": "neutral",
+      "nuance": "the everyday “why” — what friends and family say"
+     }
+    ],
+    "etymology": {
+     "text": "Contraction of מָה “what [is]” + יָדוּעַ “known” (Wiktionary): “what is known (about it)?”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is a fossil sentence: מָה יָדוּעַ “what is known?” became one word, מַדּוּעַ."
+    ],
+    "pitfalls": [
+     "In conversation מַדּוּעַ sounds bookish: friends say לָמָּה.",
+     "The final ־ַעַ is a “stolen” patah, said before the ע: ma-DU-a."
+    ],
+    "subtleties": [
+     "Both mean exactly “why”: the difference is only the register — like German warum (both) vs. English why / wherefore."
+    ]
+   }
+  },
+  {
+   "id": "he:eize",
+   "lemma": "אֵיזֶה",
+   "pos": "DET",
+   "class": "int",
+   "senses": [
+    "q.which",
+    "det.whata",
+    "det.some"
+   ],
+   "translit": "eize",
+   "features": {
+    "spelling": "איזה",
+    "position": "before",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "DET;SG;MASC": "אֵיזֶה",
+    "DET;SG;FEM": "אֵיזוֹ",
+    "DET;PL": "אֵילוּ"
+   },
+   "note": "Before the noun, agreeing with it: אֵיזֶה סֵפֶר? אֵיזוֹ כּוֹס? אֵילוּ סְפָרִים?",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Choosing: which one? which book, which glass?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "which? what (kind of)? — before a noun",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.which"
+     },
+     {
+      "id": "s2",
+      "def": "what a …! (in exclamations: אֵיזֶה יוֹפִי!)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "det.whata"
+     },
+     {
+      "id": "s3",
+      "def": "some (any): אֵיזֶה סֵפֶר “some book or other”",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "det.some"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיזֶה סֵפֶר אַתָּה רוֹצֶה?",
+      "tr": "Which book do you (m.) want?",
+      "register": "neutral",
+      "context": "bookshop",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיזוֹ כּוֹס שֶׁלְּךָ?",
+      "tr": "Which glass is yours (m.)?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵילוּ סְפָרִים שֶׁלָּהּ?",
+      "tr": "Which books are hers?",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיזֶה יוֹפִי!",
+      "tr": "How lovely!",
+      "register": "colloquial",
+      "context": "exclamation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּאֵיזֶה רְחוֹב?",
+      "tr": "in which street?"
+     },
+     {
+      "text": "בְּאֵיזוֹ שָׁעָה?",
+      "tr": "at what time?"
+     },
+     {
+      "text": "אֵיזֶה יוֹפִי!",
+      "tr": "how lovely!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: אֵיזֶה / אֵיזוֹ / אֵילוּ is the only “which?”.",
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it is the question element אֵי־ (as in אֵיפֹה “where”) + זֶה “this” (feminine אֵיזוֹ, with זוֹ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek ποιος / ποια / ποιο changes for gender just like אֵיזֶה / אֵיזוֹ."
+    ],
+    "pitfalls": [
+     "It agrees with the noun: אֵיזֶה (m.), אֵיזוֹ (f.), אֵילוּ (plural). In everyday speech many people say אֵיזֶה for all — but write אֵיזוֹ before a feminine noun.",
+     "Unvowelled אילו is also אֵלּוּ “these” and אִלּוּ “if (only)” — only the vowels tell them apart."
+    ],
+    "subtleties": [
+     "מָה + noun is not “which …?”: “which book?” is אֵיזֶה סֵפֶר?, never *מָה סֵפֶר?"
+    ]
+   }
+  },
+  {
+   "id": "he:shel-mi",
+   "lemma": "שֶׁל מִי",
+   "pos": "PRON",
+   "senses": [
+    "q.whose"
+   ],
+   "translit": "shel mi",
+   "features": {
+    "spelling": "של מי",
+    "agreement": "both",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "Two words, one question: שֶׁל “of” + מִי “who”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lost and found: whose bag is this?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "whose? (of whom?)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.whose"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שֶׁל מִי הַתִּיק הַזֶּה?",
+      "tr": "Whose bag is this?",
+      "register": "neutral",
+      "context": "lost and found",
+      "sense": "s1"
+     },
+     {
+      "text": "שֶׁל מִי הַמַּפְתְּחוֹת?",
+      "tr": "Whose keys are these?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֵּפֶר שֶׁל מִי?",
+      "tr": "Whose book is it?",
+      "register": "colloquial",
+      "context": "classroom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֶׁל מִי זֶה?",
+      "tr": "whose is this?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "שֶׁל “of” (lesson 6) + מִי “who”: literally “of whom?”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German wessen, Russian чей and Greek ποιανού are single words; Hebrew builds “whose” like English “of whom”."
+    ],
+    "pitfalls": [
+     "There is no one-word “whose”: always שֶׁל מִי, at the start or at the end of the question — שֶׁל מִי הַתִּיק? / הַתִּיק שֶׁל מִי?"
+    ],
+    "subtleties": [
+     "The answer uses the same שֶׁל: שֶׁלִּי “mine”, שֶׁל אַבָּא “Dad’s”."
+    ]
+   }
+  },
+  {
+   "id": "he:rofe",
+   "lemma": "רוֹפֵא",
+   "pos": "NOUN",
+   "senses": [
+    "job.doctor"
+   ],
+   "gender": "MASC",
+   "translit": "rofe",
+   "features": {
+    "spelling": "רופא",
+    "root": "ר פ א",
+    "pattern": "קוֹטֵל",
+    "plurals": [
+     {
+      "form": "רוֹפְאִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רוֹפֵא"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רוֹפְאֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "רוֹפֵא",
+    "N;SG;DEF": "הָרוֹפֵא",
+    "N;PL;INDF": "רוֹפְאִים",
+    "N;PL;DEF": "הָרוֹפְאִים",
+    "N;SG;CONST": "רוֹפֵא",
+    "N;PL;CONST": "רוֹפְאֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.doctor",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A white coat, a queue at the clinic — and the trusted family doctor.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "doctor, physician",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.doctor"
+     },
+     {
+      "id": "s2",
+      "def": "healer (in prayers: “who heals”)",
+      "register": [
+       "religious"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא רוֹפֵא בְּבֵית חוֹלִים.",
+      "tr": "He is a doctor in a hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי צָרִיךְ רוֹפֵא.",
+      "tr": "I (m.) need a doctor.",
+      "register": "neutral",
+      "context": "emergency",
+      "sense": "s1"
+     },
+     {
+      "text": "הָרוֹפֵא שֶׁלִּי טוֹב מְאוֹד.",
+      "tr": "My doctor is very good.",
+      "register": "neutral",
+      "context": "clinic",
+      "sense": "s1"
+     },
+     {
+      "text": "רוֹפֵא חוֹלֵי עַמּוֹ יִשְׂרָאֵל",
+      "tr": "who heals the sick of His people Israel",
+      "register": "religious",
+      "context": "prayer",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רוֹפֵא מִשְׁפָּחָה",
+      "tr": "a family doctor, a GP"
+     },
+     {
+      "text": "רוֹפֵא שִׁנַּיִם",
+      "tr": "a dentist (“teeth doctor”)"
+     },
+     {
+      "text": "רוֹפֵא יְלָדִים",
+      "tr": "a paediatrician"
+     },
+     {
+      "text": "לָלֶכֶת לָרוֹפֵא",
+      "tr": "to go to the doctor"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "רוֹפֵא אֱלִיל",
+      "tr": "idol doctor",
+      "kind": "idiom",
+      "meaning": "a quack, a witch doctor",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "דּוֹקְטוֹר",
+      "register": "colloquial",
+      "nuance": "the title “Doctor” (written ד״ר before a name); as a word for the job it is informal"
+     }
+    ],
+    "etymology": {
+     "text": "Present participle of רָפָא “to heal” (Wiktionary: the noun follows from the verb), from Proto-West Semitic *rpʔ “to heal, to protect”; compare Arabic رَفَأَ (rafaʔa) “to mend”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The name רְפָאֵל (Raphael) means “God heals” — the same root ר־פ־א.",
+     "To a sick person Israelis wish רְפוּאָה שְׁלֵמָה “a complete healing” — from the same root."
+    ],
+    "pitfalls": [
+     "A woman doctor is רוֹפְאָה.",
+     "The final א is silent: ro-FE; with the article הָרוֹפֵא (qamats: ר never doubles)."
+    ],
+    "subtleties": [
+     "“To go to the doctor” takes the article, as in English: לָלֶכֶת לָרוֹפֵא."
+    ]
+   }
+  },
+  {
+   "id": "he:rofa",
+   "lemma": "רוֹפְאָה",
+   "pos": "NOUN",
+   "senses": [
+    "job.doctor"
+   ],
+   "gender": "FEM",
+   "translit": "rof'a",
+   "features": {
+    "spelling": "רופאה",
+    "root": "ר פ א",
+    "pattern": "קוֹטְלָה",
+    "plurals": [
+     {
+      "form": "רוֹפְאוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רוֹפְאַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רוֹפְאוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "רוֹפְאָה",
+    "N;SG;DEF": "הָרוֹפְאָה",
+    "N;PL;INDF": "רוֹפְאוֹת",
+    "N;PL;DEF": "הָרוֹפְאוֹת",
+    "N;SG;CONST": "רוֹפְאַת",
+    "N;PL;CONST": "רוֹפְאוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.doctor",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The doctor who is a woman — common in Israeli clinics and hospitals.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "doctor (a woman), physician",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.doctor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא שֶׁלִּי רוֹפְאָה.",
+      "tr": "My mother is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הָרוֹפְאָה בְּבֵית הַחוֹלִים.",
+      "tr": "The doctor (f.) is at the hospital.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא רוֹפְאָה טוֹבָה מְאוֹד.",
+      "tr": "She is a very good doctor.",
+      "register": "neutral",
+      "context": "clinic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רוֹפְאַת מִשְׁפָּחָה",
+      "tr": "a family doctor (f.)"
+     },
+     {
+      "text": "רוֹפְאַת שִׁנַּיִם",
+      "tr": "a dentist (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the written title ד״ר is the same for women and men.",
+    "etymology": {
+     "text": "Feminine of רוֹפֵא “doctor”, the present participle of רָפָא “to heal” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian says врач for a woman too; Hebrew, like German Ärztin, always marks a woman doctor: רוֹפְאָה."
+    ],
+    "pitfalls": [
+     "The plural רוֹפְאוֹת is for women only; a mixed group is רוֹפְאִים."
+    ],
+    "subtleties": [
+     "Before another noun it becomes רוֹפְאַת: רוֹפְאַת יְלָדִים “a paediatrician (f.)” (Wiktionary also gives רוֹפֵאת־)."
+    ]
+   }
+  },
+  {
+   "id": "he:mehandes",
+   "lemma": "מְהַנְדֵּס",
+   "pos": "NOUN",
+   "senses": [
+    "job.engineer"
+   ],
+   "gender": "MASC",
+   "translit": "mehandes",
+   "features": {
+    "spelling": "מהנדס",
+    "root": "ה נ ד ס",
+    "pattern": "מְקַטֵּל",
+    "plurals": [
+     {
+      "form": "מְהַנְדְּסִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְהַנְדֵּס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְהַנְדְּסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מְהַנְדֵּס",
+    "N;SG;DEF": "הַמְּהַנְדֵּס",
+    "N;PL;INDF": "מְהַנְדְּסִים",
+    "N;PL;DEF": "הַמְּהַנְדְּסִים",
+    "N;SG;CONST": "מְהַנְדֵּס",
+    "N;PL;CONST": "מְהַנְדְּסֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.engineer",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Bridges, buildings and start-ups — a prestige job in Israel’s high-tech world.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "engineer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.engineer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא מְהַנְדֵּס.",
+      "tr": "He is an engineer.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמְּהַנְדְּסִים בַּמִּשְׂרָד.",
+      "tr": "The engineers are in the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אָחִי מְהַנְדֵּס תּוֹכְנָה.",
+      "tr": "My brother is a software engineer.",
+      "register": "neutral",
+      "context": "high-tech",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְהַנְדֵּס תּוֹכְנָה",
+      "tr": "a software engineer"
+     },
+     {
+      "text": "מְהַנְדֵּס בִּנְיָן",
+      "tr": "a civil (structural) engineer"
+     },
+     {
+      "text": "מְהַנְדֵּס חַשְׁמַל",
+      "tr": "an electrical engineer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; the field is הַנְדָּסָה “engineering”.",
+    "etymology": {
+     "text": "From the verb הִנְדֵּס “to engineer” (Wiktionary: the noun follows from the verb), built on הַנְדָּסָה “engineering; geometry”, from Arabic هَنْدَسَة (handasa), from the Iranian source of Persian اندازه (andâze) “measuring”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish mühendis “engineer” comes from Arabic مُهَنْدِس (muhandis) — the same word as מְהַנְדֵּס.",
+     "Arabic هَنْدَسَة and Hebrew הַנְדָּסָה mean both “engineering” and “geometry” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "With the article the מ doubles: הַמְּהַנְדֵּס.",
+     "Stress on the last syllable: me-han-DES; plural מְהַנְדְּסִים."
+    ],
+    "subtleties": [
+     "It has the shape of a piʿel present form (מְ־ … ־ֵ־), the shape of many “doers”: מְבַשֵּׁל “cooking”, מְהַנְדֵּס “engineer”."
+    ]
+   }
+  },
+  {
+   "id": "he:mehandeset",
+   "lemma": "מְהַנְדֶּסֶת",
+   "pos": "NOUN",
+   "senses": [
+    "job.engineer"
+   ],
+   "gender": "FEM",
+   "translit": "mehandeset",
+   "features": {
+    "spelling": "מהנדסת",
+    "root": "ה נ ד ס",
+    "pattern": "מְקַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "מְהַנְדְּסוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְהַנְדֶּסֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְהַנְדְּסוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מְהַנְדֶּסֶת",
+    "N;SG;DEF": "הַמְּהַנְדֶּסֶת",
+    "N;PL;INDF": "מְהַנְדְּסוֹת",
+    "N;PL;DEF": "הַמְּהַנְדְּסוֹת",
+    "N;SG;CONST": "מְהַנְדֶּסֶת",
+    "N;PL;CONST": "מְהַנְדְּסוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.engineer",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The woman engineer — in software, building and industry.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "engineer (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.engineer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא מְהַנְדֶּסֶת.",
+      "tr": "She is an engineer.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמְּהַנְדֶּסֶת בַּמִּשְׂרָד.",
+      "tr": "The engineer (f.) is in the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה מְהַנְדְּסוֹת.",
+      "tr": "There are many women engineers here.",
+      "register": "neutral",
+      "context": "high-tech",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְהַנְדֶּסֶת תּוֹכְנָה",
+      "tr": "a software engineer (f.)"
+     },
+     {
+      "text": "מְהַנְדֶּסֶת בִּנְיָן",
+      "tr": "a civil engineer (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Feminine of מְהַנְדֵּס “engineer” (Wiktionary), from הַנְדָּסָה “engineering”, from Arabic هَنْدَسَة (handasa).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ending ־ֶת marks feminine job nouns of this shape: מְהַנְדֶּסֶת, מוֹכֶרֶת, שׁוֹטֶרֶת."
+    ],
+    "pitfalls": [
+     "The ending is ־ֶסֶת (me-han-DE-set), stress on the second-last syllable; plural מְהַנְדְּסוֹת."
+    ],
+    "subtleties": [
+     "A mixed team is מְהַנְדְּסִים; מְהַנְדְּסוֹת means women only."
+    ]
+   }
+  },
+  {
+   "id": "he:nehag",
+   "lemma": "נֶהָג",
+   "pos": "NOUN",
+   "senses": [
+    "job.driver"
+   ],
+   "gender": "MASC",
+   "translit": "nehag",
+   "features": {
+    "spelling": "נהג",
+    "root": "נ ה ג",
+    "pattern": "קַטָּל",
+    "plurals": [
+     {
+      "form": "נֶהָגִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נֶהַג"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נֶהָגֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "נֶהָג",
+    "N;SG;DEF": "הַנֶּהָג",
+    "N;PL;INDF": "נֶהָגִים",
+    "N;PL;DEF": "הַנֶּהָגִים",
+    "N;SG;CONST": "נֶהַג",
+    "N;PL;CONST": "נֶהָגֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.driver",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF": "Wiktionary gives both נַהָג and נֶהָג as the headword but shows the definite form only for נַהָג (הַנַּהָג); הַנֶּהָג is the definite form of the everyday vocalization נֶהָג used here.",
+     "N;SG;INDF": "Wiktionary gives both נַהָג and נֶהָג as the headword (its declension table follows נַהָג); the course uses the everyday vocalization נֶהָג (nehag) and mentions נַהָג as the normative one.",
+     "N;PL;DEF": "the definite plural of the everyday vocalization נֶהָג (Wiktionary’s table shows only that of נַהָג, הַנַּהָגִים; it lists the indefinite plural נֶהָגִים too).",
+     "N;SG;CONST": "the construct of the everyday vocalization נֶהָג used here (Wiktionary’s נַהַג־ follows the normative נַהָג).",
+     "N;PL;CONST": "the construct plural of the everyday vocalization נֶהָג (Wiktionary’s נַהָגֵי־ follows the normative נַהָג)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Buses, taxis and lorries on Israel’s busy roads.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "driver (of a vehicle)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.driver"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא נֶהָג מוֹנִית.",
+      "tr": "He is a taxi driver.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנֶּהָג לֹא פֹּה.",
+      "tr": "The driver isn’t here.",
+      "register": "neutral",
+      "context": "bus",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָנוּ נֶהָג טוֹב.",
+      "tr": "We have a good driver.",
+      "register": "neutral",
+      "context": "trip",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נֶהָג אוֹטוֹבּוּס",
+      "tr": "a bus driver"
+     },
+     {
+      "text": "נֶהָג מוֹנִית",
+      "tr": "a taxi driver"
+     },
+     {
+      "text": "נֶהָג חָדָשׁ",
+      "tr": "a new (learner) driver"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נַהָג",
+      "register": "formal",
+      "nuance": "the normative vocalization of the same word (nahag); Wiktionary gives both, and everyday speech says nehag"
+     }
+    ],
+    "etymology": {
+     "text": "From the root נ־ה־ג of נָהַג “to drive; to lead; to behave” (Wiktionary), on the pattern קַטָּל of many professions, like טַבָּח “cook”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives מִנְהָג “custom” and מַנְהִיג “leader”: a driver, a leader and a custom all “lead”."
+    ],
+    "pitfalls": [
+     "With the article the נ doubles: הַנֶּהָג.",
+     "Unvowelled נהג is also the verb נָהַג “he drove; he used to”."
+    ],
+    "subtleties": [
+     "The feminine is נַהֶגֶת (with patah), plural נַהָגוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:naheget",
+   "lemma": "נַהֶגֶת",
+   "pos": "NOUN",
+   "senses": [
+    "job.driver"
+   ],
+   "gender": "FEM",
+   "translit": "naheget",
+   "features": {
+    "spelling": "נהגת",
+    "root": "נ ה ג",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "נַהָגוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נַהֶגֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נַהֲגוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "נַהֶגֶת",
+    "N;SG;DEF": "הַנַּהֶגֶת",
+    "N;PL;INDF": "נַהָגוֹת",
+    "N;PL;DEF": "הַנַּהָגוֹת",
+    "N;SG;CONST": "נַהֶגֶת",
+    "N;PL;CONST": "נַהֲגוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.driver",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman at the wheel of a bus or a taxi.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "driver (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.driver"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא נַהֶגֶת אוֹטוֹבּוּס.",
+      "tr": "She is a bus driver.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנַּהֶגֶת נֶחְמָדָה.",
+      "tr": "The driver (f.) is nice.",
+      "register": "neutral",
+      "context": "bus",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא שֶׁלִּי נַהֶגֶת מוֹנִית.",
+      "tr": "My mother is a taxi driver.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נַהֶגֶת אוֹטוֹבּוּס",
+      "tr": "a bus driver (f.)"
+     },
+     {
+      "text": "נַהֶגֶת מוֹנִית",
+      "tr": "a taxi driver (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Feminine of נַהָג / נֶהָג “driver” (Wiktionary), root נ־ה־ג “to drive, to lead”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Most Israeli job nouns of the pattern קַטָּל make their feminine in ־ֶת: נַהֶגֶת, טַבַּחַת."
+    ],
+    "pitfalls": [
+     "The first vowel is a patah (na-HE-get), unlike the masculine נֶהָג; with the article: הַנַּהֶגֶת."
+    ],
+    "subtleties": [
+     "Plural נַהָגוֹת (women only)."
+    ]
+   }
+  },
+  {
+   "id": "he:tabach",
+   "lemma": "טַבָּח",
+   "pos": "NOUN",
+   "senses": [
+    "job.cook",
+    "job.butcher"
+   ],
+   "gender": "MASC",
+   "translit": "tabach",
+   "features": {
+    "spelling": "טבח",
+    "root": "ט ב ח",
+    "pattern": "קַטָּל",
+    "plurals": [
+     {
+      "form": "טַבָּחִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "טַבַּח"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "טַבָּחֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "טַבָּח",
+    "N;SG;DEF": "הַטַּבָּח",
+    "N;PL;INDF": "טַבָּחִים",
+    "N;PL;DEF": "הַטַּבָּחִים",
+    "N;SG;CONST": "טַבַּח",
+    "N;PL;CONST": "טַבָּחֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.cook",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The cook in a restaurant, a school or an army kitchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cook, chef (the job)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.cook"
+     },
+     {
+      "id": "s2",
+      "def": "butcher; (in the Bible) guard",
+      "register": [
+       "archaic"
+      ],
+      "concept": "job.butcher"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא טַבָּח בְּמִסְעָדָה.",
+      "tr": "He is a cook in a restaurant.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַטַּבָּח מְבַשֵּׁל מָרָק.",
+      "tr": "The cook is cooking soup.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "פּוֹטִיפַר שַׂר הַטַּבָּחִים",
+      "tr": "Potiphar, the captain of the guard (“chief of the butchers”)",
+      "register": "archaic",
+      "context": "Bible (Genesis 37:36)",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "טַבָּח רָאשִׁי",
+      "tr": "a head cook"
+     },
+     {
+      "text": "טַבָּח בְּמִסְעָדָה",
+      "tr": "a cook in a restaurant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שֶׁף",
+      "register": "neutral",
+      "nuance": "a chef — the head of a restaurant kitchen, or a celebrated cook"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate to Arabic طَبَّاخ (ṭabbāḵ) “a cook” (Wiktionary). The same root gives מִטְבָּח “kitchen” (lesson 12) and טָבַח “to slaughter”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish mutfak “kitchen” comes from Arabic مَطْبَخ (maṭbaḵ) — the same word as Hebrew מִטְבָּח, from the root of טַבָּח."
+    ],
+    "pitfalls": [
+     "“To cook” is בִּשֵּׁל (lesson 7) — the verb of this root, טָבַח, means “to slaughter”!",
+     "Unvowelled טבח is also טֶבַח “a massacre”."
+    ],
+    "subtleties": [
+     "The feminine is טַבַּחַת (Wiktionary); job ads also use the form טַבָּחִית."
+    ]
+   }
+  },
+  {
+   "id": "he:tabachat",
+   "lemma": "טַבַּחַת",
+   "pos": "NOUN",
+   "senses": [
+    "job.cook"
+   ],
+   "gender": "FEM",
+   "translit": "tabachat",
+   "features": {
+    "spelling": "טבחת",
+    "root": "ט ב ח",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "טַבָּחוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "טַבַּחַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "טַבְּחוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "טַבַּחַת",
+    "N;SG;DEF": "הַטַּבַּחַת",
+    "N;PL;INDF": "טַבָּחוֹת",
+    "N;PL;DEF": "הַטַּבָּחוֹת",
+    "N;SG;CONST": "טַבַּחַת",
+    "N;PL;CONST": "טַבְּחוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.cook",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman who cooks for a living.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cook, chef (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא טַבַּחַת בְּמִסְעָדָה.",
+      "tr": "She is a cook in a restaurant.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַטַּבַּחַת מְבַשֶּׁלֶת אֹרֶז.",
+      "tr": "The cook (f.) is cooking rice.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲחוֹתִי טַבַּחַת.",
+      "tr": "My sister is a cook.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "טַבַּחַת רָאשִׁית",
+      "tr": "a head cook (f.)"
+     },
+     {
+      "text": "טַבַּחַת בְּמִסְעָדָה",
+      "tr": "a cook (f.) in a restaurant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "טַבָּחִית",
+      "register": "colloquial",
+      "nuance": "another feminine form, common in job ads and speech"
+     }
+    ],
+    "etymology": {
+     "text": "Feminine of טַבָּח “cook” (Wiktionary), cognate to Arabic طَبَّاخ (ṭabbāḵ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The kitchen she works in, מִטְבָּח, is built from the same root."
+    ],
+    "pitfalls": [
+     "The ending ־ַחַת has two patahs: ta-BA-chat; plural טַבָּחוֹת."
+    ],
+    "subtleties": [
+     "A female chef is often simply שֶׁפִית or שֶׁף."
+    ]
+   }
+  },
+  {
+   "id": "he:mocher",
+   "lemma": "מוֹכֵר",
+   "pos": "NOUN",
+   "senses": [
+    "job.seller"
+   ],
+   "gender": "MASC",
+   "translit": "mocher",
+   "features": {
+    "spelling": "מוכר",
+    "root": "מ כ ר",
+    "pattern": "קוֹטֵל",
+    "plurals": [
+     {
+      "form": "מוֹכְרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹכֵר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹכְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מוֹכֵר",
+    "N;SG;DEF": "הַמּוֹכֵר",
+    "N;PL;INDF": "מוֹכְרִים",
+    "N;PL;DEF": "הַמּוֹכְרִים",
+    "N;SG;CONST": "מוֹכֵר",
+    "N;PL;CONST": "מוֹכְרֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.seller",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The man behind the counter or at the market stall, calling out his prices.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salesperson, shop assistant, seller",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.seller"
+     },
+     {
+      "id": "s2",
+      "def": "seller (in a sale, as opposed to the buyer)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא מוֹכֵר בַּחֲנוּת.",
+      "tr": "He is a salesman in a shop.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹכֵר בַּשּׁוּק נֶחְמָד.",
+      "tr": "The seller at the market is nice.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹכֵר וְהַקּוֹנֶה",
+      "tr": "the seller and the buyer",
+      "register": "neutral",
+      "context": "trade",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מוֹכֵר בַּחֲנוּת",
+      "tr": "a shop assistant"
+     },
+     {
+      "text": "מוֹכֵר פֵּרוֹת",
+      "tr": "a fruit seller"
+     },
+     {
+      "text": "מוֹכֵר עִתּוֹנִים",
+      "tr": "a newspaper seller"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "זַבָּן",
+      "register": "neutral",
+      "nuance": "a shop assistant behind the counter"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "קוֹנֶה",
+      "note": "buyer, customer"
+     }
+    ],
+    "etymology": {
+     "text": "Present participle of מָכַר “to sell”, from the root מ־כ־ר (Wiktionary: the noun follows from the verb).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Joseph’s brothers “sold” him with this verb: וַיִּמְכְּרוּ אֶת יוֹסֵף (Genesis 37:28)."
+    ],
+    "pitfalls": [
+     "It is also the present tense of the verb: הוּא מוֹכֵר פֵּרוֹת “he sells fruit”.",
+     "Unvowelled מוכר is also מֻכָּר “familiar, known” (Wiktionary)."
+    ],
+    "subtleties": [
+     "Many job words are present-tense verb forms used as nouns: מוֹכֵר “selling → seller”, שׁוֹטֵר, פּוֹעֵל."
+    ]
+   }
+  },
+  {
+   "id": "he:mocheret",
+   "lemma": "מוֹכֶרֶת",
+   "pos": "NOUN",
+   "senses": [
+    "job.seller"
+   ],
+   "gender": "FEM",
+   "translit": "mocheret",
+   "features": {
+    "spelling": "מוכרת",
+    "root": "מ כ ר",
+    "pattern": "קוֹטֶלֶת",
+    "plurals": [
+     {
+      "form": "מוֹכְרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹכֶרֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹכְרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מוֹכֶרֶת",
+    "N;SG;DEF": "הַמּוֹכֶרֶת",
+    "N;PL;INDF": "מוֹכְרוֹת",
+    "N;PL;DEF": "הַמּוֹכְרוֹת",
+    "N;SG;CONST": "מוֹכֶרֶת",
+    "N;PL;CONST": "מוֹכְרוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.seller",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The saleswoman at the till or in a clothes shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "saleswoman, shop assistant (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.seller"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא מוֹכֶרֶת בַּחֲנוּת.",
+      "tr": "She is a shop assistant.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹכֶרֶת בַּסּוּפֶּר.",
+      "tr": "The saleswoman is at the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹכְרוֹת בַּשּׁוּק.",
+      "tr": "The saleswomen are at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מוֹכֶרֶת בַּחֲנוּת",
+      "tr": "a shop assistant (f.)"
+     },
+     {
+      "text": "מוֹכֶרֶת בַּשּׁוּק",
+      "tr": "a market seller (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "זַבָּנִית",
+      "register": "neutral",
+      "nuance": "a shop assistant (f.) behind the counter"
+     }
+    ],
+    "etymology": {
+     "text": "Feminine of מוֹכֵר, the present participle of מָכַר “to sell” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The feminine present tense of almost every paʿal verb looks like this: מוֹכֶרֶת, אוֹכֶלֶת, שׁוֹטֶרֶת."
+    ],
+    "pitfalls": [
+     "Stress on the second-last syllable: mo-CHE-ret; plural מוֹכְרוֹת."
+    ],
+    "subtleties": [
+     "It is also the verb: הִיא מוֹכֶרֶת פֵּרוֹת “she sells fruit”."
+    ]
+   }
+  },
+  {
+   "id": "he:poel",
+   "lemma": "פּוֹעֵל",
+   "pos": "NOUN",
+   "senses": [
+    "job.worker"
+   ],
+   "gender": "MASC",
+   "translit": "po'el",
+   "features": {
+    "spelling": "פועל",
+    "root": "פ ע ל",
+    "pattern": "קוֹטֵל",
+    "plurals": [
+     {
+      "form": "פּוֹעֲלִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פּוֹעֵל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פּוֹעֲלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "פּוֹעֵל",
+    "N;SG;DEF": "הַפּוֹעֵל",
+    "N;PL;INDF": "פּוֹעֲלִים",
+    "N;PL;DEF": "הַפּוֹעֲלִים",
+    "N;SG;CONST": "פּוֹעֵל",
+    "N;PL;CONST": "פּוֹעֲלֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.worker",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hard hats on a building site; the workers of the labour movement.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "worker, labourer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.worker"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא פּוֹעֵל בִּנְיָן.",
+      "tr": "He is a construction worker.",
+      "register": "neutral",
+      "context": "building site",
+      "sense": "s1"
+     },
+     {
+      "text": "הַפּוֹעֲלִים אוֹכְלִים אֲרוּחַת צָהֳרַיִם.",
+      "tr": "The workers are having lunch.",
+      "register": "neutral",
+      "context": "break",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה פּוֹעֲלִים.",
+      "tr": "There are many workers here.",
+      "register": "neutral",
+      "context": "factory",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פּוֹעֵל בִּנְיָן",
+      "tr": "a construction worker"
+     },
+     {
+      "text": "פּוֹעֵל חַקְלָאִי",
+      "tr": "a farm worker"
+     },
+     {
+      "text": "פּוֹעֲלִים זָרִים",
+      "tr": "foreign workers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עוֹבֵד",
+      "register": "neutral",
+      "nuance": "an employee — anyone who works, also in an office; פּוֹעֵל is a manual worker"
+     }
+    ],
+    "etymology": {
+     "text": "Present participle of פָּעַל “to do, to act, to work”, cognate with Arabic فَعَلَ (faʕala) “to do”, from Proto-Semitic *paʕala (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew grammar names its verb patterns with this root: פָּעַל, פִּעֵל, הִפְעִיל … and “a verb” is פֹּעַל.",
+     "הַפּוֹעֵל “the worker” is the name of many Israeli sports clubs (Wiktionary), founded by the labour movement."
+    ],
+    "pitfalls": [
+     "Unvowelled פועל is also פֹּעַל “verb” (the grammar word).",
+     "The plural has a hataf patah: פּוֹעֲלִים."
+    ],
+    "subtleties": [
+     "פּוֹעֵל is manual work; an office employee is עוֹבֵד."
+    ]
+   }
+  },
+  {
+   "id": "he:poelet",
+   "lemma": "פּוֹעֶלֶת",
+   "pos": "NOUN",
+   "senses": [
+    "job.worker"
+   ],
+   "gender": "FEM",
+   "translit": "po'elet",
+   "features": {
+    "spelling": "פועלת",
+    "root": "פ ע ל",
+    "pattern": "קוֹטֶלֶת",
+    "plurals": [
+     {
+      "form": "פּוֹעֲלוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פּוֹעֶלֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פּוֹעֲלוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "פּוֹעֶלֶת",
+    "N;SG;DEF": "הַפּוֹעֶלֶת",
+    "N;PL;INDF": "פּוֹעֲלוֹת",
+    "N;PL;DEF": "הַפּוֹעֲלוֹת",
+    "N;SG;CONST": "פּוֹעֶלֶת",
+    "N;PL;CONST": "פּוֹעֲלוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.worker",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman on the factory floor or in the fields.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "worker, labourer (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.worker"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא פּוֹעֶלֶת בְּמִפְעָל.",
+      "tr": "She is a factory worker.",
+      "register": "neutral",
+      "context": "factory",
+      "sense": "s1"
+     },
+     {
+      "text": "הַפּוֹעֲלוֹת בַּשָּׂדֶה.",
+      "tr": "The (women) workers are in the field.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא שֶׁלּוֹ פּוֹעֶלֶת.",
+      "tr": "His mother is a worker.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פּוֹעֶלֶת בְּמִפְעָל",
+      "tr": "a factory worker (f.)"
+     },
+     {
+      "text": "פּוֹעֶלֶת חַקְלָאִית",
+      "tr": "a farm worker (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עוֹבֶדֶת",
+      "register": "neutral",
+      "nuance": "an employee (f.), in any kind of job"
+     }
+    ],
+    "etymology": {
+     "text": "Feminine of פּוֹעֵל “worker” (Wiktionary), from פָּעַל “to do, to work”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מוֹעֶצֶת הַפּוֹעֲלוֹת, the Women Workers’ Council of the labour movement (founded in 1921), is the ancestor of today’s women’s organisation נַעֲמַ״ת."
+    ],
+    "pitfalls": [
+     "Plural פּוֹעֲלוֹת (women only), with a hataf patah under the ע."
+    ],
+    "subtleties": [
+     "It is also the verb form “(she) acts, works”: הַתָּרוּפָה פּוֹעֶלֶת “the medicine works”."
+    ]
+   }
+  },
+  {
+   "id": "he:chaklai",
+   "lemma": "חַקְלַאי",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer",
+    "job.agronomist"
+   ],
+   "gender": "MASC",
+   "translit": "chaklai",
+   "features": {
+    "spelling": "חקלאי",
+    "root": "ח ק ל",
+    "pattern": {
+     "none": "חֲקַל “field” + the suffix ־ַאי, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַקְלָאִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חַקְלַאי"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַקְלָאֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חַקְלַאי",
+    "N;SG;DEF": "הַחַקְלַאי",
+    "N;PL;INDF": "חַקְלָאִים",
+    "N;PL;DEF": "הַחַקְלָאִים",
+    "N;SG;CONST": "חַקְלַאי",
+    "N;PL;CONST": "חַקְלָאֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Fields, orchards and greenhouses of the moshav and the kibbutz.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     },
+     {
+      "id": "s2",
+      "def": "agronomist",
+      "register": [
+       "technical"
+      ],
+      "concept": "job.agronomist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבָּא שֶׁלִּי חַקְלַאי.",
+      "tr": "My grandfather is a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחַקְלָאִים בַּשָּׂדֶה.",
+      "tr": "The farmers are in the field.",
+      "register": "neutral",
+      "context": "fields",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחַקְלַאי מוֹכֵר פֵּרוֹת בַּשּׁוּק.",
+      "tr": "The farmer sells fruit at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חַקְלַאי בְּמִשְׂרַד הַחַקְלָאוּת וּמְיַעֵץ לַמְּגַדְּלִים.",
+      "tr": "He is an agronomist at the Ministry of Agriculture and advises the growers.",
+      "register": "technical",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חַקְלַאי בַּמּוֹשָׁב",
+      "tr": "a farmer in the moshav (farming village)"
+     },
+     {
+      "text": "תּוֹצֶרֶת חַקְלָאִית",
+      "tr": "farm produce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אִכָּר",
+      "register": "dated",
+      "nuance": "a farmer, a peasant — the word of the early Zionist settlers"
+     }
+    ],
+    "etymology": {
+     "text": "From חֲקַל “field” (Aramaic) + the suffix ־ַאי (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "חֲקַל is the Aramaic “field” of Akeldama, “the field of blood” (Acts 1:19).",
+     "The suffix ־ַאי makes other professions too: עִתּוֹנַאי “journalist”."
+    ],
+    "pitfalls": [
+     "The plural has a qamats: חַקְלַאי → חַקְלָאִים.",
+     "Unvowelled חקלאי is also the adjective חַקְלָאִי “agricultural”."
+    ],
+    "subtleties": [
+     "Agriculture is חַקְלָאוּת, from the same word."
+    ]
+   }
+  },
+  {
+   "id": "he:chaklait",
+   "lemma": "חַקְלָאִית",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer"
+   ],
+   "gender": "FEM",
+   "translit": "chakla'it",
+   "features": {
+    "spelling": "חקלאית",
+    "root": "ח ק ל",
+    "pattern": {
+     "none": "the feminine of חַקְלַאי (suffix ־ִית), not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַקְלָאִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חַקְלָאִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַקְלָאִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חַקְלָאִית",
+    "N;SG;DEF": "הַחַקְלָאִית",
+    "N;PL;INDF": "חַקְלָאִיּוֹת",
+    "N;PL;DEF": "הַחַקְלָאִיּוֹת",
+    "N;SG;CONST": "חַקְלָאִית",
+    "N;PL;CONST": "חַקְלָאִיּוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The woman who works her land.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא חַקְלָאִית.",
+      "tr": "She is a farmer.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחַקְלָאִית בַּשּׁוּק.",
+      "tr": "The farmer (f.) is at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבְתָא שֶׁלִּי הָיְתָה חַקְלָאִית.",
+      "tr": "My grandmother was a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חַקְלָאִית צְעִירָה",
+      "tr": "a young farmer (f.)"
+     },
+     {
+      "text": "חַקְלָאִית בַּקִּבּוּץ",
+      "tr": "a farmer (f.) on the kibbutz"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in current use.",
+    "etymology": {
+     "text": "Feminine of חַקְלַאי “farmer” (Wiktionary), from Aramaic חֲקַל “field”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The feminine ending ־ִית appears in many job and nationality words: סְטוּדֶנְטִית, אׇמָּנִית, יִשְׂרְאֵלִית."
+    ],
+    "pitfalls": [
+     "Unvowelled חקלאית is also the feminine adjective “agricultural”: תּוֹצֶרֶת חַקְלָאִית."
+    ],
+    "subtleties": [
+     "Plural חַקְלָאִיּוֹת, with a doubled י."
+    ]
+   }
+  },
+  {
+   "id": "he:shoter",
+   "lemma": "שׁוֹטֵר",
+   "pos": "NOUN",
+   "senses": [
+    "job.police",
+    "job.overseer"
+   ],
+   "gender": "MASC",
+   "translit": "shoter",
+   "features": {
+    "spelling": "שוטר",
+    "root": "שׁ ט ר",
+    "pattern": "קוֹטֵל",
+    "plurals": [
+     {
+      "form": "שׁוֹטְרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שׁוֹטֵר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שׁוֹטְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שׁוֹטֵר",
+    "N;SG;DEF": "הַשּׁוֹטֵר",
+    "N;PL;INDF": "שׁוֹטְרִים",
+    "N;PL;DEF": "הַשּׁוֹטְרִים",
+    "N;SG;CONST": "שׁוֹטֵר",
+    "N;PL;CONST": "שׁוֹטְרֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "job.police",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Blue uniforms at the square, at the station, at the traffic lights.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "police officer, policeman",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.police"
+     },
+     {
+      "id": "s2",
+      "def": "officer, overseer (in ancient Israel)",
+      "register": [
+       "archaic"
+      ],
+      "concept": "job.overseer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשּׁוֹטֵר בָּרְחוֹב.",
+      "tr": "The police officer is in the street.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא שֶׁלָּהּ שׁוֹטֵר.",
+      "tr": "Her father is a police officer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ שׁוֹטְרִים בַּכִּכָּר.",
+      "tr": "There are police officers in the square.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "בִּימֵי הַתַּנַ״ךְ הַשּׁוֹטֵר הָיָה מְמֻנֶּה עַל הָעָם, לֹא אִישׁ מִשְׁטָרָה.",
+      "tr": "In Biblical times the shoter was an officer set over the people, not a policeman.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שׁוֹטֵר תְּנוּעָה",
+      "tr": "a traffic police officer"
+     },
+     {
+      "text": "שׁוֹטֵר סִיּוּר",
+      "tr": "a patrol officer"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שֹׁפְטִים וְשֹׁטְרִים תִּתֶּן לְךָ",
+      "tr": "judges and officers you shall appoint for yourself",
+      "kind": "quote",
+      "meaning": "the Biblical command to set up courts and officials",
+      "register": "religious",
+      "source": "Deuteronomy 16:18"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No neutral synonym; the force is מִשְׁטָרָה “police”.",
+    "etymology": {
+     "text": "Believed to have originally meant “scribe” (so translated in the Septuagint); likely ultimately from Akkadian šaṭārum “to write, to inscribe” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Septuagint translated the word “scribe” (Wiktionary): the first שׁוֹטְרִים were officials who wrote."
+    ],
+    "pitfalls": [
+     "“The police” is הַמִּשְׁטָרָה; שׁוֹטֵר is one officer."
+    ],
+    "subtleties": [
+     "The same root gives שְׁטָר “a document; a banknote” — the old meaning “to write”."
+    ]
+   }
+  },
+  {
+   "id": "he:shoteret",
+   "lemma": "שׁוֹטֶרֶת",
+   "pos": "NOUN",
+   "senses": [
+    "job.police"
+   ],
+   "gender": "FEM",
+   "translit": "shoteret",
+   "features": {
+    "spelling": "שוטרת",
+    "root": "שׁ ט ר",
+    "pattern": "קוֹטֶלֶת",
+    "plurals": [
+     {
+      "form": "שׁוֹטְרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שׁוֹטֶרֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שׁוֹטְרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שׁוֹטֶרֶת",
+    "N;SG;DEF": "הַשּׁוֹטֶרֶת",
+    "N;PL;INDF": "שׁוֹטְרוֹת",
+    "N;PL;DEF": "הַשּׁוֹטְרוֹת",
+    "N;SG;CONST": "שׁוֹטֶרֶת",
+    "N;PL;CONST": "שׁוֹטְרוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "job.police",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The policewoman on patrol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "policewoman, police officer (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.police"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא שׁוֹטֶרֶת.",
+      "tr": "She is a police officer.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשּׁוֹטֶרֶת בַּתַּחֲנָה.",
+      "tr": "The policewoman is at the station.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשּׁוֹטֶרֶת עוֹמֶדֶת בַּכִּכָּר.",
+      "tr": "The policewoman is standing in the square.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שׁוֹטֶרֶת תְּנוּעָה",
+      "tr": "a traffic police officer (f.)"
+     },
+     {
+      "text": "שׁוֹטֶרֶת סִיּוּר",
+      "tr": "a patrol officer (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Feminine of שׁוֹטֵר “police officer” (Wiktionary), probably from Akkadian šaṭārum “to write”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like מוֹכֶרֶת and פּוֹעֶלֶת, it is a feminine present-tense form that became a job noun."
+    ],
+    "pitfalls": [
+     "Stress on the second-last syllable: sho-TE-ret; plural שׁוֹטְרוֹת."
+    ],
+    "subtleties": [
+     "Before a noun the form stays the same: שׁוֹטֶרֶת־ (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:orech-din",
+   "lemma": "עוֹרֵךְ דִּין",
+   "pos": "NOUN",
+   "senses": [
+    "job.lawyer"
+   ],
+   "gender": "MASC",
+   "translit": "orech din",
+   "features": {
+    "spelling": "עורך דין",
+    "root": {
+     "none": "a compound of two words (עוֹרֵךְ + דִּין): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "עוֹרְכֵי דִּין",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עוֹרֵךְ דִּין",
+    "N;SG;DEF": "עוֹרֵךְ הַדִּין",
+    "N;PL;INDF": "עוֹרְכֵי דִּין",
+    "N;PL;DEF": "עוֹרְכֵי הַדִּין"
+   },
+   "contrasts": [
+    {
+     "concept": "job.lawyer",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Contracts, courts and a law office in the city centre.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lawyer, attorney",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.lawyer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא עוֹרֵךְ דִּין.",
+      "tr": "He is a lawyer.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "עוֹרֵךְ הַדִּין שֶׁלִּי בַּמִּשְׂרָד.",
+      "tr": "My lawyer is in the office.",
+      "register": "neutral",
+      "context": "business",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי צָרִיךְ עוֹרֵךְ דִּין טוֹב.",
+      "tr": "I (m.) need a good lawyer.",
+      "register": "neutral",
+      "context": "legal trouble",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִשְׂרַד עוֹרְכֵי דִּין",
+      "tr": "a law firm"
+     },
+     {
+      "text": "לִשְׂכֹּר עוֹרֵךְ דִּין",
+      "tr": "to hire a lawyer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פְּרַקְלִיט",
+      "register": "formal",
+      "nuance": "counsel, advocate — formal; the State Attorney’s office is the פְּרַקְלִיטוּת"
+     },
+     {
+      "word": "עו״ד",
+      "register": "formal",
+      "nuance": "the written abbreviation, used before a name: עו״ד לֵוִי"
+     }
+    ],
+    "etymology": {
+     "text": "עוֹרֵךְ “one who arranges”, present participle of עָרַךְ “to arrange, to draw up”, + דִּין “law, judgement”, cognate with Arabic دِين (dīn) and Aramaic דִּינָא (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "פְּרַקְלִיט “counsel” is Greek παράκλητος (“one called to help”), borrowed in Rabbinic times."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: עוֹרֵךְ הַדִּין “the lawyer” (the everyday הָעוֹרֵךְ דִּין is not standard).",
+     "The plural changes the first word: עוֹרְכֵי דִּין."
+    ],
+    "subtleties": [
+     "עוֹרֵךְ alone is an “editor” (of a newspaper, a book or a film)."
+    ]
+   }
+  },
+  {
+   "id": "he:orechet-din",
+   "lemma": "עוֹרֶכֶת דִּין",
+   "pos": "NOUN",
+   "senses": [
+    "job.lawyer"
+   ],
+   "gender": "FEM",
+   "translit": "orechet din",
+   "features": {
+    "spelling": "עורכת דין",
+    "root": {
+     "none": "a compound of two words (עוֹרֶכֶת + דִּין): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "עוֹרְכוֹת דִּין",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עוֹרֶכֶת דִּין",
+    "N;SG;DEF": "עוֹרֶכֶת הַדִּין",
+    "N;PL;INDF": "עוֹרְכוֹת דִּין",
+    "N;PL;DEF": "עוֹרְכוֹת הַדִּין"
+   },
+   "contrasts": [
+    {
+     "concept": "job.lawyer",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman lawyer — in court, in a law office, in a contract meeting.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lawyer, attorney (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.lawyer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא עוֹרֶכֶת דִּין.",
+      "tr": "She is a lawyer.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "עוֹרֶכֶת הַדִּין בְּבֵית הַמִּשְׁפָּט.",
+      "tr": "The lawyer (f.) is at the court.",
+      "register": "neutral",
+      "context": "court",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא שֶׁלִּי עוֹרֶכֶת דִּין.",
+      "tr": "My mother is a lawyer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עוֹרֶכֶת דִּין צְעִירָה",
+      "tr": "a young lawyer (f.)"
+     },
+     {
+      "text": "מִשְׂרַד עוֹרְכֵי דִּין",
+      "tr": "a law firm"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פְּרַקְלִיטָה",
+      "register": "formal",
+      "nuance": "counsel, advocate (f.) — formal"
+     }
+    ],
+    "etymology": {
+     "text": "Feminine of עוֹרֵךְ דִּין (Wiktionary): עוֹרֶכֶת “one who arranges” + דִּין “law”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "דִּין “law” is the same word as Arabic دِين (dīn), which came to mean “religion”."
+    ],
+    "pitfalls": [
+     "“The lawyer (f.)” is עוֹרֶכֶת הַדִּין — the article on the second word."
+    ],
+    "subtleties": [
+     "The written abbreviation עו״ד serves for women too."
+    ]
+   }
+  },
+  {
+   "id": "he:oman",
+   "lemma": "אׇמָּן",
+   "pos": "NOUN",
+   "senses": [
+    "job.artist"
+   ],
+   "gender": "MASC",
+   "translit": "oman",
+   "features": {
+    "spelling": "אומן",
+    "root": "א מ ן",
+    "pattern": {
+     "none": "borrowed from Aramaic (אוּמָּנָא): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אׇמָּנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אׇמַּן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אׇמָּנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אׇמָּן",
+    "N;SG;DEF": "הָאׇמָּן",
+    "N;PL;INDF": "אׇמָּנִים",
+    "N;PL;DEF": "הָאׇמָּנִים",
+    "N;SG;CONST": "אׇמַּן",
+    "N;PL;CONST": "אׇמָּנֵי"
+   },
+   "plene": {
+    "N;SG;INDF": "אומן",
+    "N;SG;DEF": "האומן",
+    "N;PL;INDF": "אומנים",
+    "N;PL;DEF": "האומנים",
+    "N;SG;CONST": "אומן",
+    "N;PL;CONST": "אומני"
+   },
+   "contrasts": [
+    {
+     "concept": "job.artist",
+     "axis": "gender of the person",
+     "value": "a man (also the profession in general; the plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Galleries, studios and street art in Tel Aviv and Jerusalem.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artist",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.artist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אׇמָּן.",
+      "tr": "He is an artist.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאׇמָּן מְצַיֵּר בַּפַּארְק.",
+      "tr": "The artist is painting in the park.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ הַרְבֵּה אׇמָּנִים בָּעִיר הַזֹּאת.",
+      "tr": "There are many artists in this city.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אׇמָּן רְחוֹב",
+      "tr": "a street artist"
+     },
+     {
+      "text": "אׇמָּן יִשְׂרְאֵלִי",
+      "tr": "an Israeli artist"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צַיָּר",
+      "register": "neutral",
+      "nuance": "a painter — one kind of artist"
+     },
+     {
+      "word": "אֻמָּן",
+      "register": "neutral",
+      "nuance": "a craftsman, an artisan; a master of a skill — written the same (אומן) but said uman"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives the origin under the related אֻמָּן “craftsman”: borrowed from Aramaic אוּמָּנָא (ʾūmmānā) “artist, artisan, craftsman”, from Akkadian ummānu “expert, artisan”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its ancestor, Akkadian ummānu (Wiktionary), was an “expert”: an artist was first of all a master of a craft."
+    ],
+    "pitfalls": [
+     "Unvowelled אומן is three words: אׇמָּן “artist” (oman), אֻמָּן “craftsman” (uman) and אוֹמֵן “foster parent” (omen).",
+     "The first vowel is a short o (qamats qatan ׇ): o-MAN — not אָמֵן “amen”."
+    ],
+    "subtleties": [
+     "Art is אׇמָּנוּת, from the same word."
+    ]
+   }
+  },
+  {
+   "id": "he:omanit",
+   "lemma": "אׇמָּנִית",
+   "pos": "NOUN",
+   "senses": [
+    "job.artist"
+   ],
+   "gender": "FEM",
+   "translit": "omanit",
+   "features": {
+    "spelling": "אומנית",
+    "root": "א מ ן",
+    "pattern": {
+     "none": "אׇמָּן + the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "אׇמָּנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אׇמָּנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אׇמָּנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אׇמָּנִית",
+    "N;SG;DEF": "הָאׇמָּנִית",
+    "N;PL;INDF": "אׇמָּנִיּוֹת",
+    "N;PL;DEF": "הָאׇמָּנִיּוֹת",
+    "N;SG;CONST": "אׇמָּנִית",
+    "N;PL;CONST": "אׇמָּנִיּוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "אומנית",
+    "N;SG;DEF": "האומנית",
+    "N;PL;INDF": "אומניות",
+    "N;PL;DEF": "האומניות",
+    "N;SG;CONST": "אומנית",
+    "N;PL;CONST": "אומניות"
+   },
+   "contrasts": [
+    {
+     "concept": "job.artist",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The woman artist — a painter, a singer, an actress.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artist (a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.artist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא אׇמָּנִית.",
+      "tr": "She is an artist.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאׇמָּנִית בַּסָּלוֹן.",
+      "tr": "The artist (f.) is in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אׇמָּנִית יְדוּעָה.",
+      "tr": "She is a well-known artist.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אׇמָּנִית רְחוֹב",
+      "tr": "a street artist (f.)"
+     },
+     {
+      "text": "אׇמָּנִית יִשְׂרְאֵלִית",
+      "tr": "an Israeli artist (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צַיֶּרֶת",
+      "register": "neutral",
+      "nuance": "a painter (f.)"
+     }
+    ],
+    "etymology": {
+     "text": "Feminine of אׇמָּן “artist”, from Aramaic אוּמָּנָא and Akkadian ummānu “expert, artisan” (Wiktionary, under אֻמָּן).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The feminine suffix ־ִית is the same as in סְטוּדֶנְטִית and חַקְלָאִית."
+    ],
+    "pitfalls": [
+     "Written אומנית in full spelling; the first vowel is a short o: o-ma-NIT."
+    ],
+    "subtleties": [
+     "Plural אׇמָּנִיּוֹת with a doubled י."
+    ]
+   }
+  },
+  {
+   "id": "he:lean",
+   "lemma": "לְאָן",
+   "pos": "ADV",
+   "senses": [
+    "q.where"
+   ],
+   "translit": "le'an",
+   "role": "“where to?” — the question word for a direction: לְאָן אַתָּה הוֹלֵךְ? “where are you going?”. (Where, at what place = אֵיפֹה; where from = מֵאֵיפֹה.)",
+   "features": {
+    "spelling": "לאן",
+    "derivedFrom": "לְ + אָן “where” (old)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "q.where",
+     "axis": "place or direction",
+     "value": "to what place? (direction)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Before a trip: where to?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where to? whither?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לְאָן אַתָּה הוֹלֵךְ?",
+      "tr": "Where are you (m.) going?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "לְאָן הָאוֹטוֹבּוּס הַזֶּה נוֹסֵעַ?",
+      "tr": "Where does this bus go?",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "לְאָן אַתֶּם נוֹסְעִים בַּקַּיִץ?",
+      "tr": "Where are you (pl.) travelling in the summer?",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְאָן הוֹלְכִים?",
+      "tr": "where are we / you going?"
+     },
+     {
+      "text": "לְאָן נוֹסְעִים?",
+      "tr": "where are we going (by car)?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לְאֵיפֹה",
+      "register": "colloquial",
+      "nuance": "“where to” in casual speech — לְאָן is the correct form"
+     }
+    ],
+    "etymology": {
+     "text": "From לְ “to” + אָן “where” (Wiktionary). אָן alone is Biblical: עַד אָנָה “until when, how long?”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German keeps the same three questions apart as Hebrew: wo? (אֵיפֹה), wohin? (לְאָן), woher? (מֵאֵיפֹה)."
+    ],
+    "pitfalls": [
+     "With movement ask לְאָן, not אֵיפֹה: לְאָן אַתָּה נוֹסֵעַ? — like German wohin vs wo."
+    ],
+    "subtleties": [
+     "Casual speech also says לְאֵיפֹה; write לְאָן."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

@@ -1,0 +1,722 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:mei",
+   "lemma": "没",
+   "trad": "沒",
+   "pinyin": "méi",
+   "pos": "ADV",
+   "senses": [
+    "part.not",
+    "verb.nothave"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "time and verb",
+     "value": "what did not happen or has not happened; 有"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Matter-of-fact: something is missing or did not happen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not (before 有; and before a verb: did not, has not)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "(short for 没有) not have; there isn’t",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.nothave"
+     },
+     {
+      "id": "s3",
+      "def": "not as … as (in comparisons)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我没有时间。",
+      "tr": "I don't have time.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Wǒ méiyǒu shíjiān."
+     },
+     {
+      "text": "他昨天没来。",
+      "tr": "He didn't come yesterday.",
+      "register": "neutral",
+      "context": "past events",
+      "sense": "s1",
+      "py": "Tā zuótiān méi lái."
+     },
+     {
+      "text": "我还没吃饭。",
+      "tr": "I haven't eaten yet.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1",
+      "py": "Wǒ hái méi chīfàn."
+     },
+     {
+      "text": "我没钱。",
+      "tr": "I've got no money.",
+      "register": "colloquial",
+      "context": "money",
+      "sense": "s2",
+      "py": "Wǒ méi qián."
+     },
+     {
+      "text": "他没你高。",
+      "tr": "He isn't as tall as you.",
+      "register": "neutral",
+      "context": "comparisons",
+      "sense": "s3",
+      "py": "Tā méi nǐ gāo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "没有",
+      "tr": "not have; did not"
+     },
+     {
+      "text": "没关系",
+      "tr": "it doesn't matter"
+     },
+     {
+      "text": "没事",
+      "tr": "it's nothing; I'm fine"
+     },
+     {
+      "text": "没意思",
+      "tr": "boring"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "没门儿",
+      "tr": "no door",
+      "kind": "slang",
+      "meaning": "no way!",
+      "register": "colloquial"
+     },
+     {
+      "text": "没大没小",
+      "tr": "no big, no small",
+      "kind": "idiom",
+      "meaning": "disrespectful of age and rank",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "不",
+      "register": "neutral",
+      "nuance": "negates habits, wishes, the future, adjectives and 是"
+     },
+     {
+      "word": "无",
+      "register": "literary",
+      "nuance": "wú: ‘without, there is no’ in written style (无人 ‘nobody’)"
+     },
+     {
+      "word": "未",
+      "register": "literary",
+      "nuance": "wèi: ‘not yet’ in written style (未成年 ‘under age’)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 水 (‘water’) + phonetic; the character’s old meaning is ‘to sink’. The negator méi is possibly a colloquial variant of 勿 or 未 influenced by 有 — not derived from ‘to sink’ (Schuessler).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The traditional form 沒 has 𠬛 on the right; the simplified 没 writes 殳 (几 over 又) instead."
+    ],
+    "pitfalls": [
+     "Never *没是 — the negation of 是 is 不是.",
+     "Don’t add 了 after 没 + verb: 我没吃 (not *我没吃了).",
+     "In 沉没 (chénmò, ‘to sink’) the same character is read mò."
+    ],
+    "subtleties": [
+     "没 describes facts, 不 describes will and habits: 我不吃肉 ‘I don’t eat meat’ vs 我没吃肉 ‘I didn’t eat (the) meat’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 沒 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:shenmedou",
+   "lemma": "什么都",
+   "trad": "什麼都",
+   "pinyin": "shén me dōu",
+   "pos": "PRON",
+   "senses": [
+    "pron.nothing",
+    "pron.everything"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "With a negation: an empty fridge, a child who refuses to eat — nothing at all.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(with 不 / 没) nothing, not anything",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nothing"
+     },
+     {
+      "id": "s2",
+      "def": "(without a negation) everything, anything at all",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.everything"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我什么都不想吃。",
+      "py": "Wǒ shénme dōu bù xiǎng chī.",
+      "tr": "I don’t feel like eating anything.",
+      "register": "neutral",
+      "context": "appetite",
+      "sense": "s1"
+     },
+     {
+      "text": "他什么都没说。",
+      "py": "Tā shénme dōu méi shuō.",
+      "tr": "He said nothing.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "冰箱里什么都没有。",
+      "py": "Bīngxiāng lǐ shénme dōu méiyǒu.",
+      "tr": "There’s nothing in the fridge.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "这个孩子什么都吃。",
+      "py": "Zhège háizi shénme dōu chī.",
+      "tr": "This child eats everything.",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "什么都不 + verb",
+      "tr": "nothing (will, habit)"
+     },
+     {
+      "text": "什么都没 + verb",
+      "tr": "nothing (did not happen)"
+     },
+     {
+      "text": "什么都没有",
+      "tr": "there is nothing; to have nothing"
+     },
+     {
+      "text": "什么都行",
+      "tr": "anything is fine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "什么也",
+      "register": "neutral",
+      "nuance": "shénme yě: the same in negative sentences (什么也没有); 什么都 also works without a negation"
+     },
+     {
+      "word": "没什么",
+      "register": "neutral",
+      "nuance": "méi shénme: ‘nothing much, it’s nothing’ — also a reply to thanks or an apology"
+     },
+     {
+      "word": "一无所有",
+      "register": "literary",
+      "nuance": "yīwúsuǒyǒu: an idiom, ‘to own nothing at all’"
+     }
+    ],
+    "etymology": {
+     "text": "什么 ‘what’ + 都 ‘all’: ‘whatever — all of it’; with a negation, ‘nothing’.",
+     "src": "morphemes: 什么 + 都"
+    },
+    "funFacts": [
+     "Chinese builds ‘nothing, nobody, nowhere’ from question words: 什么都不 ‘nothing’, 谁都不 ‘nobody’, 哪儿都不 ‘nowhere’ — like Russian ничего, никто, нигде from что, кто, где."
+    ],
+    "pitfalls": [
+     "The negation comes after 什么都, right before the verb: 我什么都不吃 — never *我不什么都吃.",
+     "Choose the negator as usual: 不 for will and habits (什么都不吃 ‘won’t eat anything’), 没 for facts (什么都没买 ‘bought nothing’), and always 什么都没有 with 有."
+    ],
+    "subtleties": [
+     "什么都 is a phrase, not one word: 什么 ‘what’ + 都 ‘all’. With 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
+     "Without a negation it means ‘everything’: 他什么都吃 ‘he eats everything’.",
+     "什么都 stands before the verb even though it is the object: 我什么都不要 ‘I don’t want anything’."
+    ]
+   },
+   "role": "什么都 is a phrase, not one word: 什么 ‘what’ + 都 ‘all’. With 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 什麼都 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:meiyouren",
+   "lemma": "没有人",
+   "trad": "沒有人",
+   "pinyin": "méi yǒu rén",
+   "pos": "PRON",
+   "senses": [
+    "pron.nobody"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An empty house, an unanswered question — ‘there is no one’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nobody, no one (‘there is no one who …’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.nobody"
+     }
+    ],
+    "examples": [
+     {
+      "text": "没有人在家。",
+      "py": "Méiyǒu rén zài jiā.",
+      "tr": "Nobody is at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "这里没有人。",
+      "py": "Zhèlǐ méiyǒu rén.",
+      "tr": "There’s nobody here.",
+      "register": "neutral",
+      "context": "places",
+      "sense": "s1"
+     },
+     {
+      "text": "没有人知道他在哪儿。",
+      "py": "Méiyǒu rén zhīdào tā zài nǎr.",
+      "tr": "Nobody knows where he is.",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "没有人知道",
+      "tr": "nobody knows"
+     },
+     {
+      "text": "没有人在",
+      "tr": "nobody is there"
+     },
+     {
+      "text": "没有人喜欢",
+      "tr": "nobody likes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "没人",
+      "register": "colloquial",
+      "nuance": "méi rén: the short spoken form — 没人在家"
+     },
+     {
+      "word": "谁都不",
+      "register": "neutral",
+      "nuance": "shéi dōu bù + verb: ‘nobody (wants, likes …)’ — 谁都不想去 ‘nobody wants to go’"
+     },
+     {
+      "word": "无人",
+      "register": "formal",
+      "nuance": "wúrén: written ‘nobody, unmanned’ — 无人机 ‘drone’"
+     }
+    ],
+    "etymology": {
+     "text": "没有 ‘there is not’ + 人 ‘person’: ‘there is no person (who …)’.",
+     "src": "morphemes: 没有 + 人"
+    },
+    "funFacts": [
+     "Like Turkish kimse yok ‘there is nobody’ (yok = ‘there is not’), Chinese says ‘nobody’ with ‘there is not’ — 没有人."
+    ],
+    "pitfalls": [
+     "没有人 opens the sentence: 没有人在家 ‘nobody is at home’ — *人没有在家 would mean ‘the person is not at home’.",
+     "As an object Chinese does not use 没有人: ‘I don’t know anybody’ is 我谁都不认识 (S10) — not *我认识没有人."
+    ],
+    "subtleties": [
+     "没有人 is a phrase, not one word: 没有 ‘there is no’ + 人 ‘person’ — literally ‘there is nobody who …’; it is kept as one entry for the concept ‘nobody’.",
+     "没有人 = ‘there isn’t anyone (who …)’; for ‘nobody wants / likes’ 谁都不 + verb is just as common."
+    ]
+   },
+   "role": "没有人 is a phrase, not one word: 没有 ‘there is no’ + 人 ‘person’ — literally ‘there is nobody who …’; it is kept as one entry for the concept ‘nobody’.",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 沒有人 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:conglai",
+   "lemma": "从来",
+   "trad": "從來",
+   "pinyin": "cóng lái",
+   "pos": "ADV",
+   "senses": [
+    "adv.never",
+    "adv.always"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.always",
+     "axis": "sentence type",
+     "value": "all along — mostly with a negation (从来不 ‘never’); in positive sentences rarer"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Firm habits and principles: ‘I have never …’, ‘he never …’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(with 不 / 没) never, not ever",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.never"
+     },
+     {
+      "id": "s2",
+      "def": "always, all along (in positive sentences, less common)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.always"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我从来不喝酒。",
+      "py": "Wǒ cónglái bù hē jiǔ.",
+      "tr": "I never drink alcohol.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "他从来不迟到。",
+      "py": "Tā cónglái bù chídào.",
+      "tr": "He is never late.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "我从来没去过中国。",
+      "py": "Wǒ cónglái méi qùguo Zhōngguó.",
+      "tr": "I have never been to China.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他从来就是这样。",
+      "py": "Tā cónglái jiù shì zhèyàng.",
+      "tr": "He has always been like this.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s2"
+     },
+     {
+      "text": "他从来都很认真。",
+      "py": "Tā cónglái dōu hěn rènzhēn.",
+      "tr": "He has always been very conscientious.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "从来不",
+      "tr": "never (by habit or by choice)"
+     },
+     {
+      "text": "从来没(有) … 过",
+      "tr": "have never (ever) done"
+     },
+     {
+      "text": "从来都",
+      "tr": "always, all along"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "从不",
+      "register": "formal",
+      "nuance": "cóngbù: the short written form — 他从不迟到"
+     },
+     {
+      "word": "从没",
+      "register": "neutral",
+      "nuance": "cóngméi: ‘never (has it happened)’, usually with 过"
+     },
+     {
+      "word": "从未",
+      "register": "literary",
+      "nuance": "cóngwèi: ‘never before’, in writing"
+     }
+    ],
+    "etymology": {
+     "text": "从 ‘from’ + 来 ‘to come’: ‘from the past until now, all along’; with a negation ‘never’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "从来 is literally ‘from-come’: ‘from back then until now’. Like English ‘ever’, it needs a negation to mean ‘never’: 从来不 = ‘not ever’."
+    ],
+    "pitfalls": [
+     "从来 alone is not ‘never’: say 我从来不吃肉 — *我从来吃肉 is wrong.",
+     "For what has never happened use 从来没 + verb + 过 (过 comes in S14): 我从来没去过中国; for habits 从来不: 我从来不喝酒."
+    ],
+    "subtleties": [
+     "从来不 = never, by habit or choice; 从来没 = it has never happened."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 從來 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:yebu",
+   "lemma": "也不",
+   "trad": "也不",
+   "pinyin": "yě bù",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.neithernor"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Adding a second ‘no’: not this — and not that either.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nor; and not … either (不 A，也不 B = neither A nor B)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.neithernor"
+     },
+     {
+      "id": "s2",
+      "def": "not … either, neither (me)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我不喝茶，也不喝咖啡。",
+      "py": "Wǒ bù hē chá, yě bù hē kāfēi.",
+      "tr": "I drink neither tea nor coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "他不吃肉，也不吃鱼。",
+      "py": "Tā bù chī ròu, yě bù chī yú.",
+      "tr": "He eats neither meat nor fish.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "她既不抽烟，也不喝酒。",
+      "py": "Tā jì bù chōuyān, yě bù hē jiǔ.",
+      "tr": "She neither smokes nor drinks.",
+      "register": "formal",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "你不去？我也不去。",
+      "py": "Nǐ bú qù? Wǒ yě bú qù.",
+      "tr": "You’re not going? I’m not either.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "不 … 也不 …",
+      "tr": "not … nor …"
+     },
+     {
+      "text": "既不 … 也不 …",
+      "tr": "neither … nor … (emphatic)"
+     },
+     {
+      "text": "一点也不",
+      "tr": "not at all"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "也没",
+      "register": "neutral",
+      "nuance": "yě méi: the same with 没 — for facts and with 有: 我没有哥哥，也没有姐姐"
+     }
+    ],
+    "etymology": {
+     "text": "也 ‘also’ + 不 ‘not’: ‘also not’ — neither, nor.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German has weder … noch, Turkish ne … ne, Russian ни … ни; Chinese has no special pair — it says ‘not … also not …’: 不 … 也不 …."
+    ],
+    "pitfalls": [
+     "也 stands before 不: 我也不喝 — never *我不也喝.",
+     "With 有 and with past facts it is 也没: 我没有哥哥，也没有姐姐; 他没吃肉，也没吃鱼."
+    ],
+    "subtleties": [
+     "也不 is a phrase, not one word: 也 ‘also’ + 不 ‘not’. Repeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
+     "既不 … 也不 … is more formal and emphatic than 不 … 也不 ….",
+     "Before a 4th tone it is said yě bú: 也不要, 也不是."
+    ]
+   },
+   "role": "也不 is a phrase, not one word: 也 ‘also’ + 不 ‘not’. Repeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yě bú before a 4th-tone syllable (也不是, 也不去); yě bù before the others (也不吃)"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.none",
+   "reason": "Chinese has no determiner meaning ‘no, not any’ (German kein, Greek κανένας): the verb is negated and the noun stays bare.",
+   "use": "没有 + noun for ‘have no / there is no’: 我没有哥哥 ‘I have no older brother’, 这里没有盐 ‘there is no salt here’ (一个 drops out); with other verbs 不 / 没 + verb + noun: 我不吃肉 ‘I eat no meat’."
+  }
+ ]
+}

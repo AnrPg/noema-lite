@@ -1,0 +1,5800 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:kanun_thani",
+   "lemma": "كَانُون الثَّانِي",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.january"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.january",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "kānūn aṯ-ṯānī",
+   "forms": {
+    "N;NOM;SG;DEF": "كَانُونُ الثَّانِي",
+    "N;ACC;SG;DEF": "كَانُونَ الثَّانِيَ",
+    "N;GEN;SG;DEF": "كَانُونَ الثَّانِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "January — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.january"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَانُونُ الثَّانِي هُوَ الشَّهْرُ الْأَوَّلُ مِنَ السَّنَةِ.",
+      "tr": "January is the first month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي كَانُونَ الثَّانِي.",
+      "tr": "My birthday is in January.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "رَأْسُ السَّنَةِ فِي الْأَوَّلِ مِنْ كَانُونَ الثَّانِي.",
+      "tr": "New Year’s Day is on the first of January.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي كَانُونَ الثَّانِي",
+      "tr": "in January"
+     },
+     {
+      "text": "شَهْرُ كَانُونَ الثَّانِي",
+      "tr": "the month of January"
+     },
+     {
+      "text": "مُنْتَصَفُ كَانُونَ الثَّانِي",
+      "tr": "mid-January"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "يَنَايِر",
+      "register": "regional",
+      "nuance": "January in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Classical Syriac ܟܢܘܢ ܒ (“the second Kānūn”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the second Kānūn”: كَانُونُ الْأَوَّلُ (December) is the first."
+    ],
+    "pitfalls": [
+     "Two words, both declined: كَانُونُ الثَّانِي (nominative), فِي كَانُونَ الثَّانِي (genitive); the first word is a diptote (no tanwīn)."
+    ],
+    "subtleties": [
+     "Unlike most of the Syriac month names it has no twin among the Hebrew months."
+    ]
+   }
+  },
+  {
+   "id": "ar:shubat",
+   "lemma": "شُبَاط",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.february"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.february",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "šubāṭ",
+   "forms": {
+    "N;NOM;SG;DEF": "شُبَاطُ",
+    "N;ACC;SG;DEF": "شُبَاطَ",
+    "N;GEN;SG;DEF": "شُبَاطَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "February — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.february"
+     }
+    ],
+    "examples": [
+     {
+      "text": "شُبَاطُ هُوَ الشَّهْرُ الثَّانِي مِنَ السَّنَةِ.",
+      "tr": "February is the second month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي شُبَاطَ.",
+      "tr": "My birthday is in February.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "شُبَاطُ أَقْصَرُ شُهُورِ السَّنَةِ.",
+      "tr": "February is the shortest month of the year.",
+      "register": "neutral",
+      "context": "calendar facts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي شُبَاطَ",
+      "tr": "in February"
+     },
+     {
+      "text": "شَهْرُ شُبَاطَ",
+      "tr": "the month of February"
+     },
+     {
+      "text": "مُنْتَصَفُ شُبَاطَ",
+      "tr": "mid-February"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِبْرَايِر",
+      "register": "regional",
+      "nuance": "February in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Classical Syriac ܫܒܛ (šḇāṭ), ultimately from Akkadian Šabāṭum; cognate with Hebrew שְׁבָט (Shevat).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שְׁבָט (Shevat) is the same old Babylonian month name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي شُبَاطَ."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:adhar",
+   "lemma": "آذَار",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.march"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.march",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾāḏār",
+   "forms": {
+    "N;NOM;SG;DEF": "آذَارُ",
+    "N;ACC;SG;DEF": "آذَارَ",
+    "N;GEN;SG;DEF": "آذَارَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "March — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.march"
+     }
+    ],
+    "examples": [
+     {
+      "text": "آذَارُ هُوَ الشَّهْرُ الثَّالِثُ مِنَ السَّنَةِ.",
+      "tr": "March is the third month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي آذَارَ.",
+      "tr": "My birthday is in March.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ الْأُمِّ فِي الْحَادِي وَالْعِشْرِينَ مِنْ آذَارَ.",
+      "tr": "Mother’s Day is on the twenty-first of March.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي آذَارَ",
+      "tr": "in March"
+     },
+     {
+      "text": "شَهْرُ آذَارَ",
+      "tr": "the month of March"
+     },
+     {
+      "text": "مُنْتَصَفُ آذَارَ",
+      "tr": "mid-March"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَارِس",
+      "register": "regional",
+      "nuance": "March in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Classical Syriac ܐܕܪ (ʾāḏār), ultimately from Akkadian addāru; cognate with Hebrew אֲדָר (Adar).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אֲדָר (Adar), the month of Purim, is the same name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي آذَارَ."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:naysan",
+   "lemma": "نَيْسَان",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.april"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.april",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "naysān",
+   "forms": {
+    "N;NOM;SG;DEF": "نَيْسَانُ",
+    "N;ACC;SG;DEF": "نَيْسَانَ",
+    "N;GEN;SG;DEF": "نَيْسَانَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "April — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.april"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَيْسَانُ هُوَ الشَّهْرُ الرَّابِعُ مِنَ السَّنَةِ.",
+      "tr": "April is the fourth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي نَيْسَانَ.",
+      "tr": "My birthday is in April.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَوُّ جَمِيلٌ فِي نَيْسَانَ.",
+      "tr": "The weather is lovely in April.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي نَيْسَانَ",
+      "tr": "in April"
+     },
+     {
+      "text": "شَهْرُ نَيْسَانَ",
+      "tr": "the month of April"
+     },
+     {
+      "text": "مُنْتَصَفُ نَيْسَانَ",
+      "tr": "mid-April"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَبْرِيل",
+      "register": "regional",
+      "nuance": "April in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Classical Syriac ܢܝܣܢ (nīsān), from Aramaic נִיסָן, from Akkadian nisannum; cognate with Hebrew נִיסָן (Nisan).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew נִיסָן (Nisan), the month of Passover, is the same name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي نَيْسَانَ.",
+     "Wiktionary’s table declines it with tanwīn; as a foreign proper name of more than three letters it is normally a diptote, the form taught here."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:ayyar",
+   "lemma": "أَيَّار",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.may"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.may",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾayyār",
+   "forms": {
+    "N;NOM;SG;DEF": "أَيَّارُ",
+    "N;ACC;SG;DEF": "أَيَّارَ",
+    "N;GEN;SG;DEF": "أَيَّارَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "May — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.may"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيَّارُ هُوَ الشَّهْرُ الْخَامِسُ مِنَ السَّنَةِ.",
+      "tr": "May is the fifth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي أَيَّارَ.",
+      "tr": "My birthday is in May.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ الْعُمَّالِ فِي الْأَوَّلِ مِنْ أَيَّارَ.",
+      "tr": "Labour Day is on the first of May.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي أَيَّارَ",
+      "tr": "in May"
+     },
+     {
+      "text": "شَهْرُ أَيَّارَ",
+      "tr": "the month of May"
+     },
+     {
+      "text": "مُنْتَصَفُ أَيَّارَ",
+      "tr": "mid-May"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَايُو",
+      "register": "regional",
+      "nuance": "May in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Classical Syriac ܐܝܪ (ʾīyār), ultimately from Akkadian Ayyārum; cognate with Hebrew אִיָּר (Iyar).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אִיָּר (Iyar) is the same name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أَيَّارَ."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:haziran",
+   "lemma": "حَزِيرَان",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.june"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.june",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ḥazīrān",
+   "forms": {
+    "N;NOM;SG;DEF": "حَزِيرَانُ",
+    "N;ACC;SG;DEF": "حَزِيرَانَ",
+    "N;GEN;SG;DEF": "حَزِيرَانَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "June — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.june"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَزِيرَانُ هُوَ الشَّهْرُ السَّادِسُ مِنَ السَّنَةِ.",
+      "tr": "June is the sixth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي حَزِيرَانَ.",
+      "tr": "My birthday is in June.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "يَبْدَأُ الصَّيْفُ فِي حَزِيرَانَ.",
+      "tr": "Summer starts in June.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي حَزِيرَانَ",
+      "tr": "in June"
+     },
+     {
+      "text": "شَهْرُ حَزِيرَانَ",
+      "tr": "the month of June"
+     },
+     {
+      "text": "مُنْتَصَفُ حَزِيرَانَ",
+      "tr": "mid-June"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "يُونْيُو",
+      "register": "regional",
+      "nuance": "June in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Classical Syriac ܚܙܝܪܢ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Unlike شُبَاط, آذَار or نَيْسَان, it has no twin among the Hebrew month names (the Hebrew month at this time of year is סִיוָן, Sivan)."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي حَزِيرَانَ."
+    ],
+    "subtleties": [
+     "Unlike most of the Syriac month names it has no twin among the Hebrew months."
+    ]
+   }
+  },
+  {
+   "id": "ar:tammuz",
+   "lemma": "تَمُّوز",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.july"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.july",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "tammūz",
+   "forms": {
+    "N;NOM;SG;DEF": "تَمُّوزُ",
+    "N;ACC;SG;DEF": "تَمُّوزَ",
+    "N;GEN;SG;DEF": "تَمُّوزَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "July — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.july"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَمُّوزُ هُوَ الشَّهْرُ السَّابِعُ مِنَ السَّنَةِ.",
+      "tr": "July is the seventh month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي تَمُّوزَ.",
+      "tr": "My birthday is in July.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "تَمُّوزُ شَهْرٌ حَارٌّ جِدًّا.",
+      "tr": "July is a very hot month.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي تَمُّوزَ",
+      "tr": "in July"
+     },
+     {
+      "text": "شَهْرُ تَمُّوزَ",
+      "tr": "the month of July"
+     },
+     {
+      "text": "مُنْتَصَفُ تَمُّوزَ",
+      "tr": "mid-July"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "يُولْيُو",
+      "register": "regional",
+      "nuance": "July in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Classical Syriac ܬܡܘܙ (tāmūz), ultimately from Akkadian dumuzu (the god Dumuzi); cognate with Hebrew תַּמּוּז (Tammuz).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Named after the old Mesopotamian god Dumuzi (Tammuz); Hebrew תַּמּוּז is the same name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي تَمُّوزَ."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:ab_month",
+   "lemma": "آبْ",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.august"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.august",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾāb",
+   "forms": {
+    "N;NOM;SG;DEF": "آبُ",
+    "N;ACC;SG;DEF": "آبَ",
+    "N;GEN;SG;DEF": "آبَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "August — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.august"
+     }
+    ],
+    "examples": [
+     {
+      "text": "آبُ هُوَ الشَّهْرُ الثَّامِنُ مِنَ السَّنَةِ.",
+      "tr": "August is the eighth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي آبَ.",
+      "tr": "My birthday is in August.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "نُسَافِرُ إِلَى الْبَحْرِ فِي آبَ.",
+      "tr": "We go to the sea in August.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي آبَ",
+      "tr": "in August"
+     },
+     {
+      "text": "شَهْرُ آبَ",
+      "tr": "the month of August"
+     },
+     {
+      "text": "مُنْتَصَفُ آبَ",
+      "tr": "mid-August"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَغُسْطُس",
+      "register": "regional",
+      "nuance": "August in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Classical Syriac ܐܒ (ʾāḇ), ultimately from Akkadian Abum; cognate with Hebrew אָב (Av).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אָב (Av) is the same name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي آبَ.",
+     "Do not confuse آب (August) with أَب (father, lesson 6): the month has a long ā (ʾāb), written with madda."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:aylul",
+   "lemma": "أَيْلُول",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.september"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.september",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾaylūl",
+   "forms": {
+    "N;NOM;SG;DEF": "أَيْلُولُ",
+    "N;ACC;SG;DEF": "أَيْلُولَ",
+    "N;GEN;SG;DEF": "أَيْلُولَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "September — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.september"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيْلُولُ هُوَ الشَّهْرُ التَّاسِعُ مِنَ السَّنَةِ.",
+      "tr": "September is the ninth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي أَيْلُولَ.",
+      "tr": "My birthday is in September.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "تَبْدَأُ الْمَدْرَسَةُ فِي أَيْلُولَ.",
+      "tr": "School starts in September.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي أَيْلُولَ",
+      "tr": "in September"
+     },
+     {
+      "text": "شَهْرُ أَيْلُولَ",
+      "tr": "the month of September"
+     },
+     {
+      "text": "مُنْتَصَفُ أَيْلُولَ",
+      "tr": "mid-September"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سِبْتِمْبِر",
+      "register": "regional",
+      "nuance": "September in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Classical Syriac ܐܝܠܘܠ (ʾīlūl), ultimately from Akkadian ulūlu; cognate with Hebrew אֱלוּל (Elul).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אֱלוּל (Elul) is the same name."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أَيْلُولَ."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:tishrin_awwal",
+   "lemma": "تِشْرِين الْأَوَّل",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.october"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.october",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "tišrīn al-ʾawwal",
+   "forms": {
+    "N;NOM;SG;DEF": "تِشْرِينُ الْأَوَّلُ",
+    "N;ACC;SG;DEF": "تِشْرِينَ الْأَوَّلَ",
+    "N;GEN;SG;DEF": "تِشْرِينَ الْأَوَّلِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "October — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.october"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تِشْرِينُ الْأَوَّلُ هُوَ الشَّهْرُ الْعَاشِرُ مِنَ السَّنَةِ.",
+      "tr": "October is the tenth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي تِشْرِينَ الْأَوَّلِ.",
+      "tr": "My birthday is in October.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "تِشْرِينُ الْأَوَّلُ شَهْرٌ مِنْ شُهُورِ الْخَرِيفِ.",
+      "tr": "October is one of the autumn months.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي تِشْرِينَ الْأَوَّلِ",
+      "tr": "in October"
+     },
+     {
+      "text": "شَهْرُ تِشْرِينَ الْأَوَّلِ",
+      "tr": "the month of October"
+     },
+     {
+      "text": "مُنْتَصَفُ تِشْرِينَ الْأَوَّلِ",
+      "tr": "mid-October"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أُكْتُوبِر",
+      "register": "regional",
+      "nuance": "October in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from تِشْرِين, from Classical Syriac ܬܫܪܝܢ (tešrīn, “autumn month”), ultimately from Akkadian tišritum, cognate with Hebrew תִּשְׁרֵי (Tishrei) + الْأَوَّل (the first).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew תִּשְׁרֵי (Tishrei), the month of the Jewish New Year, is the same name."
+    ],
+    "pitfalls": [
+     "Two words, both declined: تِشْرِينُ الْأَوَّلُ (nominative), فِي تِشْرِينَ الْأَوَّلِ (genitive); the first word is a diptote (no tanwīn)."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:tishrin_thani",
+   "lemma": "تِشْرِين الثَّانِي",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.november"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.november",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "tišrīn aṯ-ṯānī",
+   "forms": {
+    "N;NOM;SG;DEF": "تِشْرِينُ الثَّانِي",
+    "N;ACC;SG;DEF": "تِشْرِينَ الثَّانِيَ",
+    "N;GEN;SG;DEF": "تِشْرِينَ الثَّانِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "November — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.november"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تِشْرِينُ الثَّانِي هُوَ الشَّهْرُ الْحَادِيَ عَشَرَ مِنَ السَّنَةِ.",
+      "tr": "November is the eleventh month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي تِشْرِينَ الثَّانِي.",
+      "tr": "My birthday is in November.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "تَسْقُطُ الْأَمْطَارُ فِي تِشْرِينَ الثَّانِي.",
+      "tr": "The rains fall in November.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي تِشْرِينَ الثَّانِي",
+      "tr": "in November"
+     },
+     {
+      "text": "شَهْرُ تِشْرِينَ الثَّانِي",
+      "tr": "the month of November"
+     },
+     {
+      "text": "مُنْتَصَفُ تِشْرِينَ الثَّانِي",
+      "tr": "mid-November"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نُوفِمْبِر",
+      "register": "regional",
+      "nuance": "November in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from تِشْرِين (Classical Syriac tešrīn, “autumn month”; Akkadian tišritum) + الثَّانِي (the second).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Two “Tishrin” months follow each other: the first (October) and the second (November)."
+    ],
+    "pitfalls": [
+     "Two words, both declined: تِشْرِينُ الثَّانِي (nominative), فِي تِشْرِينَ الثَّانِي (genitive); the first word is a diptote (no tanwīn)."
+    ],
+    "subtleties": [
+     "The Hebrew month with the same old name falls at another time of the year: the Jewish calendar follows the moon and the sun."
+    ]
+   }
+  },
+  {
+   "id": "ar:kanun_awwal",
+   "lemma": "كَانُون الْأَوَّل",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.december"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.december",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "kānūn al-ʾawwal",
+   "forms": {
+    "N;NOM;SG;DEF": "كَانُونُ الْأَوَّلُ",
+    "N;ACC;SG;DEF": "كَانُونَ الْأَوَّلَ",
+    "N;GEN;SG;DEF": "كَانُونَ الْأَوَّلِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "December — the name used in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.december"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَانُونُ الْأَوَّلُ هُوَ الشَّهْرُ الثَّانِيَ عَشَرَ مِنَ السَّنَةِ.",
+      "tr": "December is the twelfth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي كَانُونَ الْأَوَّلِ.",
+      "tr": "My birthday is in December.",
+      "register": "neutral",
+      "context": "birthdays",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ الْمِيلَادِ فِي الْخَامِسِ وَالْعِشْرِينَ مِنْ كَانُونَ الْأَوَّلِ.",
+      "tr": "Christmas is on the twenty-fifth of December.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي كَانُونَ الْأَوَّلِ",
+      "tr": "in December"
+     },
+     {
+      "text": "شَهْرُ كَانُونَ الْأَوَّلِ",
+      "tr": "the month of December"
+     },
+     {
+      "text": "مُنْتَصَفُ كَانُونَ الْأَوَّلِ",
+      "tr": "mid-December"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دِيسِمْبِر",
+      "register": "regional",
+      "nuance": "December in Egypt, Sudan and the Arabian Peninsula",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Classical Syriac ܟܢܘܢ ܐ (“the first Kānūn”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The year ends with the “first” Kānūn and starts with the “second” one."
+    ],
+    "pitfalls": [
+     "Two words, both declined: كَانُونُ الْأَوَّلُ (nominative), فِي كَانُونَ الْأَوَّلِ (genitive); the first word is a diptote (no tanwīn)."
+    ],
+    "subtleties": [
+     "Unlike most of the Syriac month names it has no twin among the Hebrew months."
+    ]
+   }
+  },
+  {
+   "id": "ar:yanayir",
+   "lemma": "يَنَايِر",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.january"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.january",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "yanāyir",
+   "forms": {
+    "N;NOM;SG;DEF": "يَنَايِرُ",
+    "N;ACC;SG;DEF": "يَنَايِرَ",
+    "N;GEN;SG;DEF": "يَنَايِرَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "January — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.january"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَنَايِرُ هُوَ الشَّهْرُ الْأَوَّلُ مِنَ السَّنَةِ.",
+      "tr": "January is the first month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي يَنَايِرَ.",
+      "tr": "I’m travelling in January.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "رَأْسُ السَّنَةِ فِي الْأَوَّلِ مِنْ يَنَايِرَ.",
+      "tr": "New Year’s Day is on the first of January.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي يَنَايِرَ",
+      "tr": "in January"
+     },
+     {
+      "text": "شَهْرُ يَنَايِرَ",
+      "tr": "the month of January"
+     },
+     {
+      "text": "مُنْتَصَفُ يَنَايِرَ",
+      "tr": "mid-January"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كَانُون الثَّانِي",
+      "register": "regional",
+      "nuance": "January in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: ultimately from Latin Iānuārius; compare Italian gennaio for the pronunciation.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Ιανουάριος, Januar, январь."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي يَنَايِرَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:fibrayir",
+   "lemma": "فِبْرَايِر",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.february"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.february",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "fibrāyir",
+   "forms": {
+    "N;NOM;SG;DEF": "فِبْرَايِرُ",
+    "N;ACC;SG;DEF": "فِبْرَايِرَ",
+    "N;GEN;SG;DEF": "فِبْرَايِرَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "February — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.february"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِبْرَايِرُ هُوَ الشَّهْرُ الثَّانِي مِنَ السَّنَةِ.",
+      "tr": "February is the second month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي فِبْرَايِرَ.",
+      "tr": "I’m travelling in February.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "فِبْرَايِرُ أَقْصَرُ شُهُورِ السَّنَةِ.",
+      "tr": "February is the shortest month of the year.",
+      "register": "neutral",
+      "context": "calendar facts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي فِبْرَايِرَ",
+      "tr": "in February"
+     },
+     {
+      "text": "شَهْرُ فِبْرَايِرَ",
+      "tr": "the month of February"
+     },
+     {
+      "text": "مُنْتَصَفُ فِبْرَايِرَ",
+      "tr": "mid-February"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شُبَاط",
+      "register": "regional",
+      "nuance": "February in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: ultimately from Latin Februarius; compare Italian febbraio for the pronunciation.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Φεβρουάριος, Februar, февраль."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي فِبْرَايِرَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:maris",
+   "lemma": "مَارِس",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.march"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.march",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "māris",
+   "forms": {
+    "N;NOM;SG;DEF": "مَارِسُ",
+    "N;ACC;SG;DEF": "مَارِسَ",
+    "N;GEN;SG;DEF": "مَارِسَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary’s noun مَارْس is a backgammon term; the month is its proper-name entry مَارِس, “March (third month of the Gregorian calendar)”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "March — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.march"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَارِسُ هُوَ الشَّهْرُ الثَّالِثُ مِنَ السَّنَةِ.",
+      "tr": "March is the third month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي مَارِسَ.",
+      "tr": "I’m travelling in March.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "يَبْدَأُ الرَّبِيعُ فِي مَارِسَ.",
+      "tr": "Spring starts in March.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي مَارِسَ",
+      "tr": "in March"
+     },
+     {
+      "text": "شَهْرُ مَارِسَ",
+      "tr": "the month of March"
+     },
+     {
+      "text": "مُنْتَصَفُ مَارِسَ",
+      "tr": "mid-March"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "آذَار",
+      "register": "regional",
+      "nuance": "March in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin Martius; the same word is also Mars, the god.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Μάρτιος, März, март — the month of Mars."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي مَارِسَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:abril",
+   "lemma": "أَبْرِيل",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.april"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.april",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾabrīl",
+   "forms": {
+    "N;NOM;SG;DEF": "أَبْرِيلُ",
+    "N;ACC;SG;DEF": "أَبْرِيلَ",
+    "N;GEN;SG;DEF": "أَبْرِيلَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "April — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.april"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَبْرِيلُ هُوَ الشَّهْرُ الرَّابِعُ مِنَ السَّنَةِ.",
+      "tr": "April is the fourth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي أَبْرِيلَ.",
+      "tr": "I’m travelling in April.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَوُّ لَطِيفٌ فِي أَبْرِيلَ.",
+      "tr": "The weather is pleasant in April.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي أَبْرِيلَ",
+      "tr": "in April"
+     },
+     {
+      "text": "شَهْرُ أَبْرِيلَ",
+      "tr": "the month of April"
+     },
+     {
+      "text": "مُنْتَصَفُ أَبْرِيلَ",
+      "tr": "mid-April"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نَيْسَان",
+      "register": "regional",
+      "nuance": "April in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin Aprilis.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Απρίλιος, April, апрель. Also spelled إِبْرِيل."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أَبْرِيلَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:mayu",
+   "lemma": "مَايُو",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.may"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.may",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "māyū",
+   "forms": {
+    "N;NOM;SG;DEF": "مَايُو",
+    "N;ACC;SG;DEF": "مَايُو",
+    "N;GEN;SG;DEF": "مَايُو"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "May — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.may"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَايُو هُوَ الشَّهْرُ الْخَامِسُ مِنَ السَّنَةِ.",
+      "tr": "May is the fifth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي مَايُو.",
+      "tr": "I’m travelling in May.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ الْعُمَّالِ فِي الْأَوَّلِ مِنْ مَايُو.",
+      "tr": "Labour Day is on the first of May.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي مَايُو",
+      "tr": "in May"
+     },
+     {
+      "text": "شَهْرُ مَايُو",
+      "tr": "the month of May"
+     },
+     {
+      "text": "مُنْتَصَفُ مَايُو",
+      "tr": "mid-May"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَيَّار",
+      "register": "regional",
+      "nuance": "May in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: ultimately from Latin Maius.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Μάιος, Mai, май."
+    ],
+    "pitfalls": [
+     "It ends in a long vowel and never changes: مَايُو, فِي مَايُو."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:yunyu",
+   "lemma": "يُونْيُو",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.june"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.june",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "yūnyū",
+   "forms": {
+    "N;NOM;SG;DEF": "يُونْيُو",
+    "N;ACC;SG;DEF": "يُونْيُو",
+    "N;GEN;SG;DEF": "يُونْيُو"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "June — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.june"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يُونْيُو هُوَ الشَّهْرُ السَّادِسُ مِنَ السَّنَةِ.",
+      "tr": "June is the sixth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي يُونْيُو.",
+      "tr": "I’m travelling in June.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "يَبْدَأُ الصَّيْفُ فِي يُونْيُو.",
+      "tr": "Summer starts in June.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي يُونْيُو",
+      "tr": "in June"
+     },
+     {
+      "text": "شَهْرُ يُونْيُو",
+      "tr": "the month of June"
+     },
+     {
+      "text": "مُنْتَصَفُ يُونْيُو",
+      "tr": "mid-June"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَزِيرَان",
+      "register": "regional",
+      "nuance": "June in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: ultimately from Latin Iunius.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Ιούνιος, Juni, июнь."
+    ],
+    "pitfalls": [
+     "It ends in a long vowel and never changes: يُونْيُو, فِي يُونْيُو.",
+     "Egypt also writes يونيه; Morocco uses its own forms (يُونْيُو is shared)."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:yulyu",
+   "lemma": "يُولْيُو",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.july"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.july",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "yūlyū",
+   "forms": {
+    "N;NOM;SG;DEF": "يُولْيُو",
+    "N;ACC;SG;DEF": "يُولْيُو",
+    "N;GEN;SG;DEF": "يُولْيُو"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "July — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.july"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يُولْيُو هُوَ الشَّهْرُ السَّابِعُ مِنَ السَّنَةِ.",
+      "tr": "July is the seventh month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي يُولْيُو.",
+      "tr": "I’m travelling in July.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "يُولْيُو شَهْرٌ حَارٌّ فِي مِصْرَ.",
+      "tr": "July is a hot month in Egypt.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي يُولْيُو",
+      "tr": "in July"
+     },
+     {
+      "text": "شَهْرُ يُولْيُو",
+      "tr": "the month of July"
+     },
+     {
+      "text": "مُنْتَصَفُ يُولْيُو",
+      "tr": "mid-July"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَمُّوز",
+      "register": "regional",
+      "nuance": "July in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: ultimately from Latin Iulius.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Ιούλιος, Juli, июль — Julius Caesar’s month."
+    ],
+    "pitfalls": [
+     "It ends in a long vowel and never changes: يُولْيُو, فِي يُولْيُو.",
+     "Egypt also writes يوليه; Morocco says يوليوز."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:aghustus",
+   "lemma": "أَغُسْطُس",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.august"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.august",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾaġusṭus",
+   "forms": {
+    "N;NOM;SG;DEF": "أَغُسْطُسُ",
+    "N;ACC;SG;DEF": "أَغُسْطُسَ",
+    "N;GEN;SG;DEF": "أَغُسْطُسَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "August — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.august"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَغُسْطُسُ هُوَ الشَّهْرُ الثَّامِنُ مِنَ السَّنَةِ.",
+      "tr": "August is the eighth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي أَغُسْطُسَ.",
+      "tr": "I’m travelling in August.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "نُسَافِرُ إِلَى الْإِسْكَنْدَرِيَّةِ فِي أَغُسْطُسَ.",
+      "tr": "We go to Alexandria in August.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي أَغُسْطُسَ",
+      "tr": "in August"
+     },
+     {
+      "text": "شَهْرُ أَغُسْطُسَ",
+      "tr": "the month of August"
+     },
+     {
+      "text": "مُنْتَصَفُ أَغُسْطُسَ",
+      "tr": "mid-August"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "آب",
+      "register": "regional",
+      "nuance": "August in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin Augustus; also the Roman name August(us).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Αύγουστος, August, август — the month of the emperor Augustus."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أَغُسْطُسَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:sibtimbir",
+   "lemma": "سِبْتِمْبِر",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.september"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.september",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "sibtimbir",
+   "forms": {
+    "N;NOM;SG;DEF": "سِبْتِمْبِرُ",
+    "N;ACC;SG;DEF": "سِبْتِمْبِرَ",
+    "N;GEN;SG;DEF": "سِبْتِمْبِرَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "September — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.september"
+     }
+    ],
+    "examples": [
+     {
+      "text": "سِبْتِمْبِرُ هُوَ الشَّهْرُ التَّاسِعُ مِنَ السَّنَةِ.",
+      "tr": "September is the ninth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي سِبْتِمْبِرَ.",
+      "tr": "I’m travelling in September.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "تَبْدَأُ الدِّرَاسَةُ فِي سِبْتِمْبِرَ.",
+      "tr": "Classes start in September.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي سِبْتِمْبِرَ",
+      "tr": "in September"
+     },
+     {
+      "text": "شَهْرُ سِبْتِمْبِرَ",
+      "tr": "the month of September"
+     },
+     {
+      "text": "مُنْتَصَفُ سِبْتِمْبِرَ",
+      "tr": "mid-September"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَيْلُول",
+      "register": "regional",
+      "nuance": "September in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin September (from septem, “seven”); also vocalized سِبْتَمْبِر, سَبْتَمْبَر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Σεπτέμβριος, September, сентябрь — once the seventh month (septem)."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي سِبْتِمْبِرَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:uktubir",
+   "lemma": "أُكْتُوبِر",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.october"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.october",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾuktūbir",
+   "forms": {
+    "N;NOM;SG;DEF": "أُكْتُوبِرُ",
+    "N;ACC;SG;DEF": "أُكْتُوبِرَ",
+    "N;GEN;SG;DEF": "أُكْتُوبِرَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "October — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.october"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُكْتُوبِرُ هُوَ الشَّهْرُ الْعَاشِرُ مِنَ السَّنَةِ.",
+      "tr": "October is the tenth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي أُكْتُوبِرَ.",
+      "tr": "I’m travelling in October.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "مَدِينَةُ السَّادِسِ مِنْ أُكْتُوبِرَ قَرِيبَةٌ مِنَ الْقَاهِرَةِ.",
+      "tr": "The city of 6th of October is near Cairo.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي أُكْتُوبِرَ",
+      "tr": "in October"
+     },
+     {
+      "text": "شَهْرُ أُكْتُوبِرَ",
+      "tr": "the month of October"
+     },
+     {
+      "text": "مُنْتَصَفُ أُكْتُوبِرَ",
+      "tr": "mid-October"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تِشْرِين الْأَوَّل",
+      "register": "regional",
+      "nuance": "October in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin October (from octo, “eight”); also vocalized أُكْتُوبَر, أَكْتُوبَر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Οκτώβριος, Oktober, октябрь — once the eighth month (octo)."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أُكْتُوبِرَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:nufimbir",
+   "lemma": "نُوفِمْبِر",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.november"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.november",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "nūfimbir",
+   "forms": {
+    "N;NOM;SG;DEF": "نُوفِمْبِرُ",
+    "N;ACC;SG;DEF": "نُوفِمْبِرَ",
+    "N;GEN;SG;DEF": "نُوفِمْبِرَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files the names of the months as proper names (pos “name”); in the course they are nouns of the time vocabulary. The entry gives this meaning and these case forms."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "November — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.november"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نُوفِمْبِرُ هُوَ الشَّهْرُ الْحَادِيَ عَشَرَ مِنَ السَّنَةِ.",
+      "tr": "November is the eleventh month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي نُوفِمْبِرَ.",
+      "tr": "I’m travelling in November.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَوُّ بَارِدٌ قَلِيلًا فِي نُوفِمْبِرَ.",
+      "tr": "The weather is a little cold in November.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي نُوفِمْبِرَ",
+      "tr": "in November"
+     },
+     {
+      "text": "شَهْرُ نُوفِمْبِرَ",
+      "tr": "the month of November"
+     },
+     {
+      "text": "مُنْتَصَفُ نُوفِمْبِرَ",
+      "tr": "mid-November"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تِشْرِين الثَّانِي",
+      "register": "regional",
+      "nuance": "November in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin November (from novem, “nine”); also vocalized نُوفِمْبَر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Νοέμβριος, November, ноябрь — once the ninth month (novem)."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي نُوفِمْبِرَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:disimbir",
+   "lemma": "دِيسِمْبِر",
+   "pos": "NOUN",
+   "class": "def",
+   "senses": [
+    "time.december"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.december",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "dīsimbir",
+   "forms": {
+    "N;NOM;SG;DEF": "دِيسِمْبِرُ",
+    "N;ACC;SG;DEF": "دِيسِمْبِرَ",
+    "N;GEN;SG;DEF": "دِيسِمْبِرَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A month of the year, its weather and its holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "December — the name used in Egypt, Sudan and the Arabian Peninsula (in the Maghreb with local forms)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.december"
+     }
+    ],
+    "examples": [
+     {
+      "text": "دِيسِمْبِرُ هُوَ الشَّهْرُ الثَّانِيَ عَشَرَ مِنَ السَّنَةِ.",
+      "tr": "December is the twelfth month of the year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ فِي دِيسِمْبِرَ.",
+      "tr": "I’m travelling in December.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ الْمِيلَادِ فِي الْخَامِسِ وَالْعِشْرِينَ مِنْ دِيسِمْبِرَ.",
+      "tr": "Christmas is on the twenty-fifth of December.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي دِيسِمْبِرَ",
+      "tr": "in December"
+     },
+     {
+      "text": "شَهْرُ دِيسِمْبِرَ",
+      "tr": "the month of December"
+     },
+     {
+      "text": "مُنْتَصَفُ دِيسِمْبِرَ",
+      "tr": "mid-December"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كَانُون الْأَوَّل",
+      "register": "regional",
+      "nuance": "December in Syria, Lebanon, Jordan, Palestine and Iraq",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: borrowed from Latin December (from decem, “ten”); also vocalized دِيسَمْبِر, دِيسَمْبَر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Greek, German and Russian, these names come from Latin: Δεκέμβριος, Dezember, декабрь — once the tenth month (decem)."
+    ],
+    "pitfalls": [
+     "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي دِيسِمْبِرَ."
+    ],
+    "subtleties": [
+     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+    ]
+   }
+  },
+  {
+   "id": "ar:rabi",
+   "lemma": "رَبِيع",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.spring",
+    "nature.pasture"
+   ],
+   "features": {
+    "root": "ر ب ع",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every spring: كُلَّ رَبِيعٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "rabīʿ",
+   "forms": {
+    "N;NOM;SG;INDF": "رَبِيعٌ",
+    "N;NOM;SG;DEF": "الرَّبِيعُ",
+    "N;ACC;SG;INDF": "رَبِيعًا",
+    "N;ACC;SG;DEF": "الرَّبِيعَ",
+    "N;GEN;SG;INDF": "رَبِيعٍ",
+    "N;GEN;SG;DEF": "الرَّبِيعِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flowers, green fields, mild air.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spring (the season)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.spring"
+     },
+     {
+      "id": "s2",
+      "def": "spring grass, pasture (Wiktionary)",
+      "register": [
+       "literary"
+      ],
+      "concept": "nature.pasture"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الرَّبِيعُ جَمِيلٌ فِي الْقَرْيَةِ.",
+      "tr": "Spring is beautiful in the village.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "نُسَافِرُ فِي الرَّبِيعِ.",
+      "tr": "We travel in the spring.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "الرَّبِيعُ الْعَرَبِيُّ",
+      "tr": "the Arab Spring (2011)",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "رَعَتِ الْإِبِلُ الرَّبِيعَ بَعْدَ الْمَطَرِ.",
+      "tr": "The camels grazed on the fresh spring pasture after the rain.",
+      "register": "literary",
+      "context": "desert life",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الرَّبِيعِ",
+      "tr": "in spring"
+     },
+     {
+      "text": "فَصْلُ الرَّبِيعِ",
+      "tr": "the spring season"
+     },
+     {
+      "text": "الرَّبِيعُ الْعَرَبِيُّ",
+      "tr": "the Arab Spring"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for the season.",
+    "etymology": {
+     "text": "From the root ر ب ع; Wiktionary: spring (season); spring grain; spring vegetation, pasture. Plurals أَرْبِعَة, أَرْبِعَاء, رِبَاع.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One of its plurals, أَرْبِعَاء, is spelled like Wednesday (Wiktionary).",
+     "Two months of the Islamic calendar are named after it: ربيع الأول and ربيع الآخر."
+    ],
+    "pitfalls": [
+     "Masculine: الرَّبِيعُ جَمِيلٌ.",
+     "It shares the letters ر ب ع with أَرْبَعَة (four) and رُبْع (a quarter)."
+    ],
+    "subtleties": [
+     "The seasons are usually definite: فِي الرَّبِيعِ, الرَّبِيعُ قَادِمٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:sayf",
+   "lemma": "صَيْف",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.summer"
+   ],
+   "features": {
+    "root": "ص ي ف",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every summer: كُلَّ صَيْفٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ṣayf",
+   "forms": {
+    "N;NOM;SG;INDF": "صَيْفٌ",
+    "N;NOM;SG;DEF": "الصَّيْفُ",
+    "N;ACC;SG;INDF": "صَيْفًا",
+    "N;ACC;SG;DEF": "الصَّيْفَ",
+    "N;GEN;SG;INDF": "صَيْفٍ",
+    "N;GEN;SG;DEF": "الصَّيْفِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heat, the sea, long holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "summer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.summer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الصَّيْفُ حَارٌّ فِي مِصْرَ.",
+      "tr": "Summer is hot in Egypt.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "نَذْهَبُ إِلَى الْبَحْرِ فِي الصَّيْفِ.",
+      "tr": "We go to the sea in summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "عُطْلَةُ الصَّيْفِ طَوِيلَةٌ.",
+      "tr": "The summer holiday is long.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الصَّيْفِ",
+      "tr": "in summer"
+     },
+     {
+      "text": "عُطْلَةُ الصَّيْفِ",
+      "tr": "the summer holiday"
+     },
+     {
+      "text": "صَيْفًا",
+      "tr": "in summer (adverb)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَيْظ",
+      "register": "literary",
+      "nuance": "the heat of summer, the hottest season"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "شِتَاء",
+      "note": "winter"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: perhaps a euphemism for قَيْظ, the word for “summer” in other West Semitic languages, from the root ص ف و “to be clear”. Plurals أَصْيَاف, صُيُوف.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَصِيف is a summer resort, and صَيْفِيّ “summer” as an adjective: مَلَابِسُ صَيْفِيَّةٌ (summer clothes)."
+    ],
+    "pitfalls": [
+     "صَيْف (summer, with ص) and ضَيْف (guest, with ض) sound alike to beginners."
+    ],
+    "subtleties": [
+     "“In summer” is فِي الصَّيْفِ or simply صَيْفًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:kharif",
+   "lemma": "خَرِيف",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.autumn"
+   ],
+   "features": {
+    "root": "خ ر ف",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every autumn: كُلَّ خَرِيفٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḫarīf",
+   "forms": {
+    "N;NOM;SG;INDF": "خَرِيفٌ",
+    "N;NOM;SG;DEF": "الْخَرِيفُ",
+    "N;ACC;SG;INDF": "خَرِيفًا",
+    "N;ACC;SG;DEF": "الْخَرِيفَ",
+    "N;GEN;SG;INDF": "خَرِيفٍ",
+    "N;GEN;SG;DEF": "الْخَرِيفِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Falling leaves, the first rain, the new school year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "autumn, fall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.autumn"
+     },
+     {
+      "id": "s2",
+      "def": "harvest; a year (one agricultural cycle) (Wiktionary)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَبْدَأُ الْمَدْرَسَةُ فِي الْخَرِيفِ.",
+      "tr": "School starts in the autumn.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "الْخَرِيفُ بَارِدٌ قَلِيلًا.",
+      "tr": "Autumn is a little cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ فِي خَرِيفِ الْعُمْرِ.",
+      "tr": "He is in the autumn of his life.",
+      "register": "literary",
+      "context": "life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْخَرِيفِ",
+      "tr": "in autumn"
+     },
+     {
+      "text": "أَوْرَاقُ الْخَرِيفِ",
+      "tr": "autumn leaves"
+     },
+     {
+      "text": "خَرِيفُ الْعُمْرِ",
+      "tr": "the autumn of life (old age)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for the season.",
+    "etymology": {
+     "text": "Wiktionary: from the root خ ر ف, “to gather produce, to ripen”; cognate with Hebrew חֹרֶף (khóref), Old South Arabian ḫrf, Mehri ḫarf, Geʿez ኀሪፍ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew חֹרֶף (khóref) is the same word — but it means winter."
+    ],
+    "pitfalls": [
+     "خَرِيف (autumn) and خَرُوف (sheep) differ in one vowel letter."
+    ],
+    "subtleties": [
+     "In Sudan الْخَرِيف is the rainy season in the middle of the year."
+    ]
+   }
+  },
+  {
+   "id": "ar:shita",
+   "lemma": "شِتَاء",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "time.winter"
+   ],
+   "features": {
+    "root": "ش ت و",
+    "pattern": "فِعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every winter: كُلَّ شِتَاءٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "šitāʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "شِتَاءٌ",
+    "N;NOM;SG;DEF": "الشِّتَاءُ",
+    "N;ACC;SG;INDF": "شِتَاءً",
+    "N;ACC;SG;DEF": "الشِّتَاءَ",
+    "N;GEN;SG;INDF": "شِتَاءٍ",
+    "N;GEN;SG;DEF": "الشِّتَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rain, cold, tea by the heater.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.winter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الشِّتَاءُ بَارِدٌ فِي الْجِبَالِ.",
+      "tr": "Winter is cold in the mountains.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الشِّتَاءِ نَشْرَبُ الشَّايَ كَثِيرًا.",
+      "tr": "In winter we drink a lot of tea.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "جَاءَ الشِّتَاءُ.",
+      "tr": "Winter has come.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الشِّتَاءِ",
+      "tr": "in winter"
+     },
+     {
+      "text": "فَصْلُ الشِّتَاءِ",
+      "tr": "the winter season"
+     },
+     {
+      "text": "شِتَاءً",
+      "tr": "in winter (adverb)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other common word for the season.",
+    "etymology": {
+     "text": "Wiktionary: cognate to Classical Syriac ܣܬܘܐ (saṯwā, “winter”) and Hebrew סְתָו (s’táv, “autumn”). Plurals أَشْتِيَة, شُتِيّ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew סְתָו (stav) is the same old word — and means autumn; in the Levant شِتِي is also “rain”."
+    ],
+    "pitfalls": [
+     "The final hamza: شِتَاءٌ, شِتَاءً (no extra alif)."
+    ],
+    "subtleties": [
+     "In Levantine speech عَم تِشْتِي means “it is raining”: winter is the rainy season."
+    ]
+   }
+  },
+  {
+   "id": "ar:usbu",
+   "lemma": "أُسْبُوع",
+   "pos": "NOUN",
+   "senses": [
+    "time.week"
+   ],
+   "features": {
+    "root": "س ب ع",
+    "pattern": "أُفْعُول",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسَابِيع",
+      "kind": "broken",
+      "pattern": "أَفَاعِيل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "أُسْبُوعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "register",
+     "value": "the standard word"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʾusbūʿ",
+   "forms": {
+    "N;NOM;SG;INDF": "أُسْبُوعٌ",
+    "N;NOM;PL;INDF": "أَسَابِيعُ",
+    "N;NOM;DU;INDF": "أُسْبُوعَانِ",
+    "N;NOM;SG;DEF": "الْأُسْبُوعُ",
+    "N;NOM;PL;DEF": "الْأَسَابِيعُ",
+    "N;NOM;DU;DEF": "الْأُسْبُوعَانِ",
+    "N;ACC;SG;INDF": "أُسْبُوعًا",
+    "N;ACC;PL;INDF": "أَسَابِيعَ",
+    "N;ACC;DU;INDF": "أُسْبُوعَيْنِ",
+    "N;ACC;SG;DEF": "الْأُسْبُوعَ",
+    "N;ACC;PL;DEF": "الْأَسَابِيعَ",
+    "N;ACC;DU;DEF": "الْأُسْبُوعَيْنِ",
+    "N;GEN;SG;INDF": "أُسْبُوعٍ",
+    "N;GEN;PL;INDF": "أَسَابِيعَ",
+    "N;GEN;DU;INDF": "أُسْبُوعَيْنِ",
+    "N;GEN;SG;DEF": "الْأُسْبُوعِ",
+    "N;GEN;PL;DEF": "الْأَسَابِيعِ",
+    "N;GEN;DU;DEF": "الْأُسْبُوعَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seven days: plans, timetables, weekends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.week"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْأُسْبُوعِ سَبْعَةُ أَيَّامٍ.",
+      "tr": "There are seven days in a week.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أَزُورُ جَدِّي مَرَّةً فِي الْأُسْبُوعِ.",
+      "tr": "I visit my grandfather once a week.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ بَعْدَ أُسْبُوعٍ.",
+      "tr": "I’m travelling in a week.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْأُسْبُوعَ الْقَادِمَ",
+      "tr": "next week"
+     },
+     {
+      "text": "الْأُسْبُوعَ الْمَاضِيَ",
+      "tr": "last week"
+     },
+     {
+      "text": "مَرَّةً فِي الْأُسْبُوعِ",
+      "tr": "once a week"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جُمُعَة",
+      "register": "dated",
+      "nuance": "also “week” (Wiktionary), the word that today means Friday"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: compare Hebrew שָׁבוּעַ (šavúaʿ, “week”) and Classical Syriac šaḇoʿā; from the root of سَبْعَة (seven).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From “seven”, like Hebrew שָׁבוּעַ (shavua) from שֶׁבַע (seven) and Greek εβδομάδα from επτά."
+    ],
+    "pitfalls": [
+     "The plural أَسَابِيعُ is diptote: بَعْدَ أَسَابِيعَ (after some weeks)."
+    ],
+    "subtleties": [
+     "“Next week” and “last week” are accusatives of time: الْأُسْبُوعَ الْقَادِمَ, الْأُسْبُوعَ الْمَاضِيَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:shahr",
+   "lemma": "شَهْر",
+   "pos": "NOUN",
+   "senses": [
+    "time.month",
+    "nature.newmoon"
+   ],
+   "features": {
+    "root": "ش ه ر",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَشْهُر",
+      "kind": "broken",
+      "pattern": "أَفْعُل",
+      "declension": "triptote",
+      "note": "after the numbers 3–10: ثَلَاثَةُ أَشْهُرٍ",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "شُهُور",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "months in general",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شَهْرَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "šahr",
+   "forms": {
+    "N;NOM;SG;INDF": "شَهْرٌ",
+    "N;NOM;PL;INDF": "أَشْهُرٌ",
+    "N;NOM;DU;INDF": "شَهْرَانِ",
+    "N;NOM;SG;DEF": "الشَّهْرُ",
+    "N;NOM;PL;DEF": "الْأَشْهُرُ",
+    "N;NOM;DU;DEF": "الشَّهْرَانِ",
+    "N;ACC;SG;INDF": "شَهْرًا",
+    "N;ACC;PL;INDF": "أَشْهُرًا",
+    "N;ACC;DU;INDF": "شَهْرَيْنِ",
+    "N;ACC;SG;DEF": "الشَّهْرَ",
+    "N;ACC;PL;DEF": "الْأَشْهُرَ",
+    "N;ACC;DU;DEF": "الشَّهْرَيْنِ",
+    "N;GEN;SG;INDF": "شَهْرٍ",
+    "N;GEN;PL;INDF": "أَشْهُرٍ",
+    "N;GEN;DU;INDF": "شَهْرَيْنِ",
+    "N;GEN;SG;DEF": "الشَّهْرِ",
+    "N;GEN;PL;DEF": "الْأَشْهُرِ",
+    "N;GEN;DU;DEF": "الشَّهْرَيْنِ"
+   },
+   "formsAlt": {
+    "N;NOM;PL;INDF": [
+     "شُهُورٌ"
+    ],
+    "N;NOM;PL;DEF": [
+     "الشُّهُورُ"
+    ],
+    "N;ACC;PL;INDF": [
+     "شُهُورًا"
+    ],
+    "N;ACC;PL;DEF": [
+     "الشُّهُورَ"
+    ],
+    "N;GEN;PL;INDF": [
+     "شُهُورٍ"
+    ],
+    "N;GEN;PL;DEF": [
+     "الشُّهُورِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The moon’s cycle; rent, salary, holidays.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "month",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.month"
+     },
+     {
+      "id": "s2",
+      "def": "new moon (Wiktionary)",
+      "register": [
+       "literary"
+      ],
+      "concept": "nature.newmoon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي السَّنَةِ اثْنَا عَشَرَ شَهْرًا.",
+      "tr": "There are twelve months in a year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ الشَّهْرَ الْقَادِمَ.",
+      "tr": "I’m travelling next month.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "شَهْرُ رَمَضَانَ",
+      "tr": "the month of Ramadan",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s1"
+     },
+     {
+      "text": "الشَّهْرُ فِي الْأَصْلِ هُوَ الْهِلَالُ، وَمِنْهُ سُمِّيَ الشَّهْرُ.",
+      "tr": "Originally šahr is the new moon, and the month was named after it.",
+      "register": "literary",
+      "context": "etymology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الشَّهْرَ الْقَادِمَ",
+      "tr": "next month"
+     },
+     {
+      "text": "شَهْرُ الْعَسَلِ",
+      "tr": "the honeymoon (lit. the month of honey)"
+     },
+     {
+      "text": "كُلَّ شَهْرٍ",
+      "tr": "every month"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for the month.",
+    "etymology": {
+     "text": "Wiktionary: inherited from Proto-Semitic *śahr-. Plurals أَشْهُر and شُهُور.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "شَهْر also meant the new moon (Wiktionary): months began with the crescent.",
+     "شَهْرُ الْعَسَلِ, “the month of honey”, is the honeymoon."
+    ],
+    "pitfalls": [
+     "Two plurals: أَشْهُر, mostly after 3–10 (ثَلَاثَةُ أَشْهُرٍ), and شُهُور (general)."
+    ],
+    "subtleties": [
+     "A month name can follow شَهْر: شَهْرُ يَنَايِرَ, فِي شَهْرِ آذَارَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:sana",
+   "lemma": "سَنَة",
+   "pos": "NOUN",
+   "senses": [
+    "time.year"
+   ],
+   "features": {
+    "root": "س ن و",
+    "pattern": "فَعَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَنَوَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "سِنُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "literary (accusative / genitive سِنِينَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَنَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.year",
+     "axis": "register and use",
+     "value": "year (the most common)"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "sana",
+   "forms": {
+    "N;NOM;SG;INDF": "سَنَةٌ",
+    "N;NOM;PL;INDF": "سَنَوَاتٌ",
+    "N;NOM;DU;INDF": "سَنَتَانِ",
+    "N;NOM;SG;DEF": "السَّنَةُ",
+    "N;NOM;PL;DEF": "السَّنَوَاتُ",
+    "N;NOM;DU;DEF": "السَّنَتَانِ",
+    "N;ACC;SG;INDF": "سَنَةً",
+    "N;ACC;PL;INDF": "سَنَوَاتٍ",
+    "N;ACC;DU;INDF": "سَنَتَيْنِ",
+    "N;ACC;SG;DEF": "السَّنَةَ",
+    "N;ACC;PL;DEF": "السَّنَوَاتِ",
+    "N;ACC;DU;DEF": "السَّنَتَيْنِ",
+    "N;GEN;SG;INDF": "سَنَةٍ",
+    "N;GEN;PL;INDF": "سَنَوَاتٍ",
+    "N;GEN;DU;INDF": "سَنَتَيْنِ",
+    "N;GEN;SG;DEF": "السَّنَةِ",
+    "N;GEN;PL;DEF": "السَّنَوَاتِ",
+    "N;GEN;DU;DEF": "السَّنَتَيْنِ"
+   },
+   "formsAlt": {
+    "N;NOM;PL;INDF": [
+     "سِنُونَ"
+    ],
+    "N;NOM;PL;DEF": [
+     "السِّنُونَ"
+    ],
+    "N;ACC;PL;INDF": [
+     "سِنِينَ"
+    ],
+    "N;ACC;PL;DEF": [
+     "السِّنِينَ"
+    ],
+    "N;GEN;PL;INDF": [
+     "سِنِينَ"
+    ],
+    "N;GEN;PL;DEF": [
+     "السِّنِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Birthdays, ages, the turning of the year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.year"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كُلَّ سَنَةٍ وَأَنْتَ بِخَيْرٍ!",
+      "tr": "Many happy returns! (lit. every year, and may you be well)",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرِي عِشْرُونَ سَنَةً.",
+      "tr": "I’m twenty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي السَّنَةِ أَرْبَعَةُ فُصُولٍ.",
+      "tr": "There are four seasons in a year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "السَّنَةَ الْقَادِمَةَ",
+      "tr": "next year"
+     },
+     {
+      "text": "رَأْسُ السَّنَةِ",
+      "tr": "New Year (lit. the head of the year)"
+     },
+     {
+      "text": "كُلَّ سَنَةٍ",
+      "tr": "every year"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَام",
+      "register": "formal",
+      "nuance": "year — preferred in formal writing and the news"
+     },
+     {
+      "word": "حَوْل",
+      "register": "literary",
+      "nuance": "a full year"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: inherited from Proto-Semitic *šanat-; cognate to Hebrew שָׁנָה and Ugaritic šnt.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שָׁנָה (shana) is the same word: רֹאשׁ הַשָּׁנָה and رَأْسُ السَّنَةِ both mean “the head of the year”."
+    ],
+    "pitfalls": [
+     "Feminine: سَنَةٌ جَدِيدَةٌ. Plural سَنَوَات (also سِنُونَ / سِنِينَ, formal).",
+     "After 11–99 the singular accusative: عِشْرُونَ سَنَةً."
+    ],
+    "subtleties": [
+     "سَنَة and عَام are interchangeable in most uses; عَام is masculine."
+    ]
+   }
+  },
+  {
+   "id": "ar:am_year",
+   "lemma": "عَام",
+   "pos": "NOUN",
+   "senses": [
+    "time.year"
+   ],
+   "features": {
+    "root": "ع و م",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَعْوَام",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عَامَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.year",
+     "axis": "register and use",
+     "value": "year (formal; in dates and “this year”: الْعَامَ)"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ʿām",
+   "forms": {
+    "N;NOM;SG;INDF": "عَامٌ",
+    "N;NOM;PL;INDF": "أَعْوَامٌ",
+    "N;NOM;DU;INDF": "عَامَانِ",
+    "N;NOM;SG;DEF": "الْعَامُ",
+    "N;NOM;PL;DEF": "الْأَعْوَامُ",
+    "N;NOM;DU;DEF": "الْعَامَانِ",
+    "N;ACC;SG;INDF": "عَامًا",
+    "N;ACC;PL;INDF": "أَعْوَامًا",
+    "N;ACC;DU;INDF": "عَامَيْنِ",
+    "N;ACC;SG;DEF": "الْعَامَ",
+    "N;ACC;PL;DEF": "الْأَعْوَامَ",
+    "N;ACC;DU;DEF": "الْعَامَيْنِ",
+    "N;GEN;SG;INDF": "عَامٍ",
+    "N;GEN;PL;INDF": "أَعْوَامٍ",
+    "N;GEN;DU;INDF": "عَامَيْنِ",
+    "N;GEN;SG;DEF": "الْعَامِ",
+    "N;GEN;PL;DEF": "الْأَعْوَامِ",
+    "N;GEN;DU;DEF": "الْعَامَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Official, solemn: the new year, the school year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.year"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عَامٌ سَعِيدٌ!",
+      "tr": "Happy New Year!",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s1"
+     },
+     {
+      "text": "يَعْمَلُ هُنَا مُنْذُ عَامٍ.",
+      "tr": "He has been working here for a year.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "زُرْتُ مِصْرَ الْعَامَ الْمَاضِيَ.",
+      "tr": "I visited Egypt last year.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْعَامُ الْجَدِيدُ",
+      "tr": "the new year"
+     },
+     {
+      "text": "الْعَامَ الْمَاضِيَ",
+      "tr": "last year"
+     },
+     {
+      "text": "الْعَامُ الدِّرَاسِيُّ",
+      "tr": "the school year"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَنَة",
+      "register": "neutral",
+      "nuance": "year — the everyday word"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: since it competes with سَنَة, عَام is suggested to be a loan from Old South Arabian ʿm (*ʿām, “year”); compare Geʿez ዓም (ʿam).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "عَام (year) and عَامّ (public, general) differ only in the doubled m."
+    ],
+    "pitfalls": [
+     "Masculine, unlike سَنَة: عَامٌ جَدِيدٌ but سَنَةٌ جَدِيدَةٌ."
+    ],
+    "subtleties": [
+     "Formal style prefers عَام: الْعَامُ الدِّرَاسِيُّ, عَامُ ٢٠٢٦."
+    ]
+   }
+  },
+  {
+   "id": "ar:saa",
+   "lemma": "سَاعَة",
+   "pos": "NOUN",
+   "senses": [
+    "time.hour",
+    "obj.clock",
+    "time.oclock",
+    "relig.judgementday"
+   ],
+   "features": {
+    "root": "س و ع",
+    "pattern": "فَعَلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَاعَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "سَاعَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "relig.judgementday",
+     "axis": "expression",
+     "value": "alone: السَّاعَةُ, the Hour (Qurʾān)"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "sāʿa",
+   "forms": {
+    "N;NOM;SG;INDF": "سَاعَةٌ",
+    "N;NOM;PL;INDF": "سَاعَاتٌ",
+    "N;NOM;DU;INDF": "سَاعَتَانِ",
+    "N;NOM;SG;DEF": "السَّاعَةُ",
+    "N;NOM;PL;DEF": "السَّاعَاتُ",
+    "N;NOM;DU;DEF": "السَّاعَتَانِ",
+    "N;ACC;SG;INDF": "سَاعَةً",
+    "N;ACC;PL;INDF": "سَاعَاتٍ",
+    "N;ACC;DU;INDF": "سَاعَتَيْنِ",
+    "N;ACC;SG;DEF": "السَّاعَةَ",
+    "N;ACC;PL;DEF": "السَّاعَاتِ",
+    "N;ACC;DU;DEF": "السَّاعَتَيْنِ",
+    "N;GEN;SG;INDF": "سَاعَةٍ",
+    "N;GEN;PL;INDF": "سَاعَاتٍ",
+    "N;GEN;DU;INDF": "سَاعَتَيْنِ",
+    "N;GEN;SG;DEF": "السَّاعَةِ",
+    "N;GEN;PL;DEF": "السَّاعَاتِ",
+    "N;GEN;DU;DEF": "السَّاعَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clocks, watches, timetables.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hour",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.hour"
+     },
+     {
+      "id": "s2",
+      "def": "clock, watch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.clock"
+     },
+     {
+      "id": "s3",
+      "def": "the time (on the clock): كَمِ السَّاعَةُ؟",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.oclock"
+     },
+     {
+      "id": "s4",
+      "def": "the Hour (the Day of Judgement)",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.judgementday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتَظِرُ مُنْذُ سَاعَةٍ.",
+      "tr": "I’ve been waiting for an hour.",
+      "register": "neutral",
+      "context": "waiting",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْيَوْمِ أَرْبَعٌ وَعِشْرُونَ سَاعَةً.",
+      "tr": "A day has twenty-four hours.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ سَاعَةُ أَبِي.",
+      "tr": "This is my father’s watch.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "كَمِ السَّاعَةُ؟",
+      "tr": "What time is it?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     },
+     {
+      "text": "السَّاعَةُ الْآنَ الثَّالِثَةُ وَالنِّصْفُ.",
+      "tr": "It is now half past three.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s3"
+     },
+     {
+      "text": "يَسْأَلُونَكَ عَنِ السَّاعَةِ أَيَّانَ مُرْسَاهَا.",
+      "tr": "They ask you about the Hour: when will it come? (Qurʾān 7:187)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَمِ السَّاعَةُ؟",
+      "tr": "what time is it?"
+     },
+     {
+      "text": "نِصْفُ سَاعَةٍ",
+      "tr": "half an hour"
+     },
+     {
+      "text": "سَاعَةُ يَدٍ",
+      "tr": "a wristwatch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for the hour; وَقْت is time in general.",
+    "etymology": {
+     "text": "Wiktionary: according to Nöldeke borrowed from Aramaic šāʿəṯā (as is Geʿez säʿat); compare Hebrew שָׁעָה (šāʿā).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Telling the time uses it with an ordinal: السَّاعَةُ الثَّالِثَةُ = three o’clock (lit. the third hour).",
+     "Hebrew שָׁעָה (sha’a) is the same word."
+    ],
+    "pitfalls": [
+     "كَمِ السَّاعَةُ؟ — كَمْ takes a helping kasra before al-.",
+     "With numbers: سَاعَتَانِ (two hours), ثَلَاثُ سَاعَاتٍ (a feminine noun takes the number without ة)."
+    ],
+    "subtleties": [
+     "One word for hour, clock and watch — the context decides."
+    ]
+   }
+  },
+  {
+   "id": "ar:daqiqa",
+   "lemma": "دَقِيقَة",
+   "pos": "NOUN",
+   "senses": [
+    "time.minute",
+    "abstract.detail"
+   ],
+   "features": {
+    "root": "د ق ق",
+    "pattern": "فَعِيلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "دَقَائِق",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "دَقِيقَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "daqīqa",
+   "forms": {
+    "N;NOM;SG;INDF": "دَقِيقَةٌ",
+    "N;NOM;PL;INDF": "دَقَائِقُ",
+    "N;NOM;DU;INDF": "دَقِيقَتَانِ",
+    "N;NOM;SG;DEF": "الدَّقِيقَةُ",
+    "N;NOM;PL;DEF": "الدَّقَائِقُ",
+    "N;NOM;DU;DEF": "الدَّقِيقَتَانِ",
+    "N;ACC;SG;INDF": "دَقِيقَةً",
+    "N;ACC;PL;INDF": "دَقَائِقَ",
+    "N;ACC;DU;INDF": "دَقِيقَتَيْنِ",
+    "N;ACC;SG;DEF": "الدَّقِيقَةَ",
+    "N;ACC;PL;DEF": "الدَّقَائِقَ",
+    "N;ACC;DU;DEF": "الدَّقِيقَتَيْنِ",
+    "N;GEN;SG;INDF": "دَقِيقَةٍ",
+    "N;GEN;PL;INDF": "دَقَائِقَ",
+    "N;GEN;DU;INDF": "دَقِيقَتَيْنِ",
+    "N;GEN;SG;DEF": "الدَّقِيقَةِ",
+    "N;GEN;PL;DEF": "الدَّقَائِقِ",
+    "N;GEN;DU;DEF": "الدَّقِيقَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Short waits and exact times.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "minute",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.minute"
+     },
+     {
+      "id": "s2",
+      "def": "detail, subtlety (plural دَقَائِق)",
+      "register": [
+       "formal"
+      ],
+      "concept": "abstract.detail"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِنْتَظِرْ دَقِيقَةً!",
+      "tr": "Wait a minute!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي السَّاعَةِ سِتُّونَ دَقِيقَةً.",
+      "tr": "An hour has sixty minutes.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَحَطَّةُ عَلَى بُعْدِ عَشْرِ دَقَائِقَ.",
+      "tr": "The station is ten minutes away.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "يَعْرِفُ دَقَائِقَ اللُّغَةِ الْعَرَبِيَّةِ.",
+      "tr": "He knows the subtleties of the Arabic language.",
+      "register": "formal",
+      "context": "language",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "دَقِيقَةً وَاحِدَةً",
+      "tr": "just a minute"
+     },
+     {
+      "text": "بَعْدَ خَمْسِ دَقَائِقَ",
+      "tr": "in five minutes"
+     },
+     {
+      "text": "كُلَّ دَقِيقَةٍ",
+      "tr": "every minute"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for the minute; لَحْظَة is a moment.",
+    "etymology": {
+     "text": "Wiktionary: from the feminine of دَقِيق (“fine, thin, exact”); cognate with Mehri دقيقت and Hebrew דַּקָּה (daká).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the fine (small) one”; دَقِيق is also flour — finely ground.",
+     "Hebrew דַּקָּה (daka) is the same word."
+    ],
+    "pitfalls": [
+     "The plural دَقَائِقُ is diptote: بَعْدَ خَمْسِ دَقَائِقَ."
+    ],
+    "subtleties": [
+     "دَقِيق as an adjective means “exact”: سَاعَةٌ دَقِيقَةٌ = an accurate watch."
+    ]
+   }
+  },
+  {
+   "id": "ar:tarikh",
+   "lemma": "تَارِيخ",
+   "pos": "NOUN",
+   "senses": [
+    "time.date",
+    "abstract.history"
+   ],
+   "features": {
+    "root": "ء ر خ",
+    "pattern": "تَفْعِيل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "تَوَارِيخ",
+      "kind": "broken",
+      "pattern": "تَفَاعِيل",
+      "declension": "diptote",
+      "note": "dates; chronicles (history itself is singular)",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "تَارِيخَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "tārīḫ",
+   "forms": {
+    "N;NOM;SG;INDF": "تَارِيخٌ",
+    "N;NOM;PL;INDF": "تَوَارِيخُ",
+    "N;NOM;DU;INDF": "تَارِيخَانِ",
+    "N;NOM;SG;DEF": "التَّارِيخُ",
+    "N;NOM;PL;DEF": "التَّوَارِيخُ",
+    "N;NOM;DU;DEF": "التَّارِيخَانِ",
+    "N;ACC;SG;INDF": "تَارِيخًا",
+    "N;ACC;PL;INDF": "تَوَارِيخَ",
+    "N;ACC;DU;INDF": "تَارِيخَيْنِ",
+    "N;ACC;SG;DEF": "التَّارِيخَ",
+    "N;ACC;PL;DEF": "التَّوَارِيخَ",
+    "N;ACC;DU;DEF": "التَّارِيخَيْنِ",
+    "N;GEN;SG;INDF": "تَارِيخٍ",
+    "N;GEN;PL;INDF": "تَوَارِيخَ",
+    "N;GEN;DU;INDF": "تَارِيخَيْنِ",
+    "N;GEN;SG;DEF": "التَّارِيخِ",
+    "N;GEN;PL;DEF": "التَّوَارِيخِ",
+    "N;GEN;DU;DEF": "التَّارِيخَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Forms, calendars — and the long story of the past.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "date (day of the month)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.date"
+     },
+     {
+      "id": "s2",
+      "def": "history",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.history"
+     },
+     {
+      "id": "s3",
+      "def": "chronicle, annals",
+      "register": [
+       "formal"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَا تَارِيخُ الْيَوْمِ؟",
+      "tr": "What’s the date today?",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "اُكْتُبِ التَّارِيخَ هُنَا.",
+      "tr": "Write the date here.",
+      "register": "neutral",
+      "context": "forms",
+      "sense": "s1"
+     },
+     {
+      "text": "تَارِيخُ مِصْرَ قَدِيمٌ.",
+      "tr": "The history of Egypt is ancient.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "تَارِيخُ الْيَوْمِ",
+      "tr": "today’s date"
+     },
+     {
+      "text": "تَارِيخُ الْمِيلَادِ",
+      "tr": "the date of birth"
+     },
+     {
+      "text": "كِتَابُ تَارِيخٍ",
+      "tr": "a history book"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for the date; a date with someone is مَوْعِد.",
+    "etymology": {
+     "text": "Wiktionary: likely a borrowing from Old South Arabian *warḫ (“month; date”), from Proto-Semitic *warḫ- (“moon; month”); the rarer أَرَّخَ (to date) and تَأْرِيخ were formed from it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same word means “history”: تَارِيخِيّ = historic; Hebrew יָרֵחַ (moon) and יֶרַח (month) go back to the same Semitic *warḫ-."
+    ],
+    "pitfalls": [
+     "A date with someone (an appointment) is مَوْعِد, not تَارِيخ."
+    ],
+    "subtleties": [
+     "A date is said with an ordinal: الْخَامِسُ مِنْ مَايُو (the fifth of May)."
+    ]
+   }
+  },
+  {
+   "id": "ar:id_milad",
+   "lemma": "عِيد مِيلَاد",
+   "pos": "NOUN",
+   "senses": [
+    "time.birthday",
+    "relig.christmas"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: عِيد (ع و د) + مِيلَاد (و ل د)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَعْيَاد مِيلَاد",
+      "kind": "broken",
+      "declension": "triptote",
+      "note": "the head noun takes the plural: أَعْيَادُ مِيلَادٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عِيدَا مِيلَادٍ",
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "عِيدُ الْمِيلَادِ",
+      "what": "only with the article: Christmas",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "gender": "MASC",
+   "translit": "ʿīd mīlād",
+   "forms": {
+    "N;NOM;SG;INDF": "عِيدُ مِيلَادٍ",
+    "N;NOM;SG;DEF": "عِيدُ الْمِيلَادِ",
+    "N;NOM;PL;INDF": "أَعْيَادُ مِيلَادٍ",
+    "N;NOM;PL;DEF": "أَعْيَادُ الْمِيلَادِ",
+    "N;ACC;SG;INDF": "عِيدَ مِيلَادٍ",
+    "N;ACC;SG;DEF": "عِيدَ الْمِيلَادِ",
+    "N;ACC;PL;INDF": "أَعْيَادَ مِيلَادٍ",
+    "N;ACC;PL;DEF": "أَعْيَادَ الْمِيلَادِ",
+    "N;GEN;SG;INDF": "عِيدِ مِيلَادٍ",
+    "N;GEN;SG;DEF": "عِيدِ الْمِيلَادِ",
+    "N;GEN;PL;INDF": "أَعْيَادِ مِيلَادٍ",
+    "N;GEN;PL;DEF": "أَعْيَادِ الْمِيلَادِ",
+    "N;NOM;SG;POSS;PSS1S": "عِيدُ مِيلَادِي",
+    "N;NOM;SG;POSS;PSS2SM": "عِيدُ مِيلَادِكَ",
+    "N;NOM;SG;POSS;PSS2SF": "عِيدُ مِيلَادِكِ",
+    "N;NOM;SG;POSS;PSS3SM": "عِيدُ مِيلَادِهِ",
+    "N;NOM;SG;POSS;PSS3SF": "عِيدُ مِيلَادِهَا",
+    "N;NOM;SG;POSS;PSS1P": "عِيدُ مِيلَادِنَا",
+    "N;NOM;SG;POSS;PSS2PM": "عِيدُ مِيلَادِكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "عِيدُ مِيلَادِهِمْ",
+    "N;GEN;SG;POSS;PSS1S": "عِيدِ مِيلَادِي",
+    "N;GEN;SG;POSS;PSS2SM": "عِيدِ مِيلَادِكَ",
+    "N;GEN;SG;POSS;PSS2SF": "عِيدِ مِيلَادِكِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS2SM": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS2SF": "possessed form (owner ending on the second word of the construct), built by the regular rule; Wiktionary’s table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cake, candles and wishes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "birthday (lit. “feast of birth”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.birthday"
+     },
+     {
+      "id": "s2",
+      "def": "عِيدُ الْمِيلَادِ (with the article) — Christmas",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.christmas"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِيدُ مِيلَادٍ سَعِيدٌ!",
+      "tr": "Happy birthday!",
+      "register": "neutral",
+      "context": "celebrations",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى عِيدُ مِيلَادِكِ؟",
+      "tr": "When is your birthday? (to a woman)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدُ مِيلَادِي فِي أَبْرِيلَ.",
+      "tr": "My birthday is in April.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْتَفِلُ بِعِيدِ الْمِيلَادِ فِي كَانُونَ الْأَوَّلِ.",
+      "tr": "We celebrate Christmas in December.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِيدُ مِيلَادٍ سَعِيدٌ",
+      "tr": "happy birthday"
+     },
+     {
+      "text": "حَفْلَةُ عِيدِ مِيلَادٍ",
+      "tr": "a birthday party"
+     },
+     {
+      "text": "هَدِيَّةُ عِيدِ مِيلَادٍ",
+      "tr": "a birthday present"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مِيلَاد",
+      "register": "neutral",
+      "nuance": "birth, time of birth; also “birthday” (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: عِيد (feast, holiday) + مِيلَاد (birth, time of birth; root و ل د).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "With the article, عِيدُ الْمِيلَادِ is usually Christmas — Wiktionary lists “a Christmas” as a sense.",
+     "The usual birthday wish is كُلَّ سَنَةٍ وَأَنْتَ بِخَيْرٍ."
+    ],
+    "pitfalls": [
+     "My birthday = عِيدُ مِيلَادِي: the owner ending goes on the second word, the case on the first (عِيدِ مِيلَادِي after a preposition)."
+    ],
+    "subtleties": [
+     "A construct of two words: plural أَعْيَادُ مِيلَادٍ; “the birthday” is said with an owner (عِيدُ مِيلَادِهِ), since عِيدُ الْمِيلَادِ suggests Christmas."
+    ]
+   }
+  },
+  {
+   "id": "ar:utla",
+   "lemma": "عُطْلَة",
+   "pos": "NOUN",
+   "senses": [
+    "time.holiday"
+   ],
+   "features": {
+    "root": "ع ط ل",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "عُطْلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "عُطَل",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "note": "also used",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عُطْلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ʿuṭla",
+   "forms": {
+    "N;NOM;SG;INDF": "عُطْلَةٌ",
+    "N;NOM;PL;INDF": "عُطْلَاتٌ",
+    "N;NOM;DU;INDF": "عُطْلَتَانِ",
+    "N;NOM;SG;DEF": "الْعُطْلَةُ",
+    "N;NOM;PL;DEF": "الْعُطْلَاتُ",
+    "N;NOM;DU;DEF": "الْعُطْلَتَانِ",
+    "N;ACC;SG;INDF": "عُطْلَةً",
+    "N;ACC;PL;INDF": "عُطْلَاتٍ",
+    "N;ACC;DU;INDF": "عُطْلَتَيْنِ",
+    "N;ACC;SG;DEF": "الْعُطْلَةَ",
+    "N;ACC;PL;DEF": "الْعُطْلَاتِ",
+    "N;ACC;DU;DEF": "الْعُطْلَتَيْنِ",
+    "N;GEN;SG;INDF": "عُطْلَةٍ",
+    "N;GEN;PL;INDF": "عُطْلَاتٍ",
+    "N;GEN;DU;INDF": "عُطْلَتَيْنِ",
+    "N;GEN;SG;DEF": "الْعُطْلَةِ",
+    "N;GEN;PL;DEF": "الْعُطْلَاتِ",
+    "N;GEN;DU;DEF": "الْعُطْلَتَيْنِ"
+   },
+   "formsAlt": {
+    "N;NOM;PL;INDF": [
+     "عُطَلٌ"
+    ],
+    "N;NOM;PL;DEF": [
+     "الْعُطَلُ"
+    ],
+    "N;ACC;PL;INDF": [
+     "عُطَلًا"
+    ],
+    "N;ACC;PL;DEF": [
+     "الْعُطَلَ"
+    ],
+    "N;GEN;PL;INDF": [
+     "عُطَلٍ"
+    ],
+    "N;GEN;PL;DEF": [
+     "الْعُطَلِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "No school, no work: rest and travel.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "holiday, vacation; a day off",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.holiday"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُطْلَةٌ سَعِيدَةٌ!",
+      "tr": "Have a nice holiday!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجُمُعَةُ يَوْمُ عُطْلَةٍ.",
+      "tr": "Friday is a day off.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "نُسَافِرُ فِي الْعُطْلَةِ.",
+      "tr": "We travel during the holidays.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عُطْلَةُ الصَّيْفِ",
+      "tr": "the summer holiday"
+     },
+     {
+      "text": "عُطْلَةٌ رَسْمِيَّةٌ",
+      "tr": "a public holiday"
+     },
+     {
+      "text": "عُطْلَةُ نِهَايَةِ الْأُسْبُوعِ",
+      "tr": "the weekend"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِجَازَة",
+      "register": "neutral",
+      "nuance": "holiday, leave from work — the usual word in Egypt and the Gulf; also “permission, licence”"
+     },
+     {
+      "word": "عِيد",
+      "register": "neutral",
+      "nuance": "a feast: a religious or national holiday"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ع ط ل, “to be idle, to be out of work”; Wiktionary: vacation, holiday (plurals عُطْلَات, عُطَل).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as مُعَطَّل, “out of order”: on a holiday work stands still."
+    ],
+    "pitfalls": [
+     "Two plurals: عُطْلَات and عُطَل."
+    ],
+    "subtleties": [
+     "عُطْلَة is time off; a feast with its rites is عِيد (عِيدُ الْفِطْرِ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qabla",
+   "lemma": "قَبْلَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.before",
+    "adv.ago"
+   ],
+   "features": {
+    "root": "ق ب ل",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "qabla",
+   "forms": {
+    "ADP": "قَبْلَ",
+    "ADP;1;SG": "قَبْلِي",
+    "ADP;2;SG;MASC": "قَبْلَكَ",
+    "ADP;2;SG;FEM": "قَبْلَكِ",
+    "ADP;3;SG;MASC": "قَبْلَهُ",
+    "ADP;3;SG;FEM": "قَبْلَهَا",
+    "ADP;1;PL": "قَبْلَنَا",
+    "ADP;2;PL;MASC": "قَبْلَكُمْ",
+    "ADP;2;PL;FEM": "قَبْلَكُنَّ",
+    "ADP;3;PL;MASC": "قَبْلَهُمْ",
+    "ADP;3;PL;FEM": "قَبْلَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The time before something happens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "before (in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.before"
+     },
+     {
+      "id": "s2",
+      "def": "ago: قَبْلَ سَنَةٍ (a year ago)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.ago"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ قَبْلَ الْفَطُورِ.",
+      "tr": "I drink coffee before breakfast.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "اِغْسِلْ يَدَيْكَ قَبْلَ الْأَكْلِ.",
+      "tr": "Wash your hands before eating.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "وَصَلْتُ قَبْلَ سَاعَةٍ.",
+      "tr": "I arrived an hour ago.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَبْلَ الظُّهْرِ",
+      "tr": "before noon, a.m."
+     },
+     {
+      "text": "قَبْلَ قَلِيلٍ",
+      "tr": "a short while ago"
+     },
+     {
+      "text": "قَبْلَكَ",
+      "tr": "before you"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The only “before” in time; “in front of” (place) is أَمَامَ.",
+    "etymology": {
+     "text": "From the root ق ب ل (front; to face, to receive); Wiktionary: before, prior to; ago.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives قِبْلَة, the direction faced in prayer, and مُسْتَقْبَل, the future."
+    ],
+    "pitfalls": [
+     "قَبْلَ is time; in front of a place is أَمَامَ (lesson 12).",
+     "The noun after it is genitive: قَبْلَ الظُّهْرِ; pronouns are endings: قَبْلِي, قَبْلَكَ."
+    ],
+    "subtleties": [
+     "قَبْلَ + a span of time = ago: قَبْلَ يَوْمَيْنِ (two days ago)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:bada",
+   "lemma": "بَعْدَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.after",
+    "prep.infromnow",
+    "adv.yet"
+   ],
+   "features": {
+    "root": "ب ع د",
+    "kind": "zarf",
+    "meaningForms": [
+     {
+      "form": "بَعْدُ",
+      "what": "with -u, after a negation: yet (لَمْ يَصِلْ بَعْدُ)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ]
+   },
+   "translit": "baʿda",
+   "forms": {
+    "ADP": "بَعْدَ",
+    "ADP;1;SG": "بَعْدِي",
+    "ADP;2;SG;MASC": "بَعْدَكَ",
+    "ADP;2;SG;FEM": "بَعْدَكِ",
+    "ADP;3;SG;MASC": "بَعْدَهُ",
+    "ADP;3;SG;FEM": "بَعْدَهَا",
+    "ADP;1;PL": "بَعْدَنَا",
+    "ADP;2;PL;MASC": "بَعْدَكُمْ",
+    "ADP;2;PL;FEM": "بَعْدَكُنَّ",
+    "ADP;3;PL;MASC": "بَعْدَهُمْ",
+    "ADP;3;PL;FEM": "بَعْدَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "What comes next.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "after (in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.after"
+     },
+     {
+      "id": "s2",
+      "def": "in (a time from now): بَعْدَ أُسْبُوعٍ (in a week)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.infromnow"
+     },
+     {
+      "id": "s3",
+      "def": "yet — بَعْدُ (with -u) after a negation: لَمْ يَصِلْ بَعْدُ (he has not arrived yet)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.yet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَشْرَبُ الشَّايَ بَعْدَ الْغَدَاءِ.",
+      "tr": "We drink tea after lunch.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "أُسَافِرُ بَعْدَ أُسْبُوعٍ.",
+      "tr": "I’m travelling in a week.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "بَعْدَكَ!",
+      "tr": "After you!",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s1"
+     },
+     {
+      "text": "لَمْ يَصِلِ الْقِطَارُ بَعْدُ، سَيَصِلُ بَعْدَ عَشْرِ دَقَائِقَ.",
+      "tr": "The train hasn’t arrived yet; it will arrive in ten minutes.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَعْدَ الظُّهْرِ",
+      "tr": "in the afternoon"
+     },
+     {
+      "text": "بَعْدَ غَدٍ",
+      "tr": "the day after tomorrow"
+     },
+     {
+      "text": "بَعْدَ قَلِيلٍ",
+      "tr": "in a little while"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَقِبَ",
+      "register": "formal",
+      "nuance": "right after, immediately following"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "قَبْلَ",
+      "note": "before"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the preposition بَعْدَ, “after”; from the root ب ع د (to be far).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as بَعِيد (far, lesson 12) — a handy memory link: after = further on."
+    ],
+    "pitfalls": [
+     "بَعْدَ الظُّهْرِ is a fixed word for the afternoon (lesson 14).",
+     "بَعْدُ with -u, alone, means “yet”: لَمْ يَصِلْ بَعْدُ (he hasn’t arrived yet)."
+    ],
+    "subtleties": [
+     "بَعْدَ + a span of time = in (from now): بَعْدَ سَاعَةٍ (in an hour)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:hatta",
+   "lemma": "حَتَّى",
+   "pos": "ADP",
+   "class": "bare",
+   "senses": [
+    "prep.until",
+    "adv.even",
+    "conj.inorderto"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.even",
+     "axis": "construction",
+     "value": "even — in any sentence (حَتَّى الْأَطْفَالُ)"
+    },
+    {
+     "concept": "prep.until",
+     "axis": "pairing and range",
+     "value": "until, as far as; also “even”"
+    },
+    {
+     "concept": "conj.inorderto",
+     "axis": "form",
+     "value": "حَتَّى + subjunctive: so that, until"
+    }
+   ],
+   "translit": "ḥattā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A limit in time: up to that point.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "until, till; as far as",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.until"
+     },
+     {
+      "id": "s2",
+      "def": "even (an adverb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.even"
+     },
+     {
+      "id": "s3",
+      "def": "so that, in order to (a conjunction)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.inorderto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَعْمَلُ حَتَّى الْمَسَاءِ.",
+      "tr": "I work until the evening.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَظِرْ حَتَّى الْغَدِ.",
+      "tr": "Wait until tomorrow.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "حَتَّى الْأَطْفَالُ يَعْرِفُونَ ذٰلِكَ.",
+      "tr": "Even the children know that.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَتَّى الْآنَ",
+      "tr": "until now, so far"
+     },
+     {
+      "text": "مِنَ … حَتَّى …",
+      "tr": "from … until …"
+     },
+     {
+      "text": "حَتَّى الْمَسَاءِ",
+      "tr": "until the evening"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِلَى",
+      "register": "neutral",
+      "nuance": "to, until — especially in مِنْ … إِلَى … (from … to …)"
+     },
+     {
+      "word": "لِغَايَةِ",
+      "register": "formal",
+      "nuance": "up to, until"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: grammarians link it to the root ح ت ت (to end something), an irregular derivation; some classical dialects have عَتَّى, closer to Ugaritic ʿd, Hebrew עַד and Aramaic ʿad.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary connects it with Hebrew עַד (ad, until)."
+    ],
+    "pitfalls": [
+     "The noun after it is genitive: حَتَّى الْمَسَاءِ; in modern style it takes no pronoun endings."
+    ],
+    "subtleties": [
+     "It can also mean “even”: حَتَّى أَنَا (even I)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:mundhu",
+   "lemma": "مُنْذُ",
+   "pos": "ADP",
+   "class": "bare",
+   "senses": [
+    "prep.since",
+    "prep.for.time"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "munḏu",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "From a point in the past up to now.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "since (a point in time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.since"
+     },
+     {
+      "id": "s2",
+      "def": "for (a period up to now); ago (with a past verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for.time"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتَظِرُ مُنْذُ الصَّبَاحِ.",
+      "tr": "I’ve been waiting since the morning.",
+      "register": "neutral",
+      "context": "waiting",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+      "tr": "I’ve been living here for a year.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "مُنْذُ مَتَى تَدْرُسُ الْعَرَبِيَّةَ؟",
+      "tr": "How long have you been studying Arabic?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُنْذُ الصَّبَاحِ",
+      "tr": "since the morning"
+     },
+     {
+      "text": "مُنْذُ مَتَى؟",
+      "tr": "since when?, for how long?"
+     },
+     {
+      "text": "مُنْذُ زَمَنٍ",
+      "tr": "for a long time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُذْ",
+      "register": "literary",
+      "nuance": "since — a shorter form (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the preposition مُنْذُ, marking the time at which something started or the length of time up to now; alternative form مُذْ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like German seit and Greek εδώ και, it goes with the present tense: أَعِيشُ هُنَا مُنْذُ سَنَةٍ = Ich wohne seit einem Jahr hier — not a perfect as in English."
+    ],
+    "pitfalls": [
+     "For something still going on use the present tense: أَعْمَلُ هُنَا مُنْذُ سَنَتَيْنِ.",
+     "The noun after it is genitive: مُنْذُ الصَّبَاحِ."
+    ],
+    "subtleties": [
+     "With a past verb it means “ago”: وَصَلَ مُنْذُ سَاعَةٍ (he arrived an hour ago)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:khilala",
+   "lemma": "خِلَالَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.during",
+    "prep.within",
+    "prep.through"
+   ],
+   "features": {
+    "root": "خ ل ل",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.during",
+     "axis": "span or simultaneity",
+     "value": "during, within a period; مِنْ خِلَالِ “through”"
+    }
+   ],
+   "translit": "ḫilāla",
+   "forms": {
+    "ADP": "خِلَالَ",
+    "ADP;1;SG": "خِلَالِي",
+    "ADP;2;SG;MASC": "خِلَالَكَ",
+    "ADP;2;SG;FEM": "خِلَالَكِ",
+    "ADP;3;SG;MASC": "خِلَالَهُ",
+    "ADP;3;SG;FEM": "خِلَالَهَا",
+    "ADP;1;PL": "خِلَالَنَا",
+    "ADP;2;PL;MASC": "خِلَالَكُمْ",
+    "ADP;2;PL;FEM": "خِلَالَكُنَّ",
+    "ADP;3;PL;MASC": "خِلَالَهُمْ",
+    "ADP;3;PL;FEM": "خِلَالَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A span of time and what fills it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "during, in the course of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.during"
+     },
+     {
+      "id": "s2",
+      "def": "within (a period)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.within"
+     },
+     {
+      "id": "s3",
+      "def": "مِنْ خِلَالِ … — through, by way of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.through"
+     }
+    ],
+    "examples": [
+     {
+      "text": "خِلَالَ الْعُطْلَةِ نُسَافِرُ.",
+      "tr": "During the holidays we travel.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "أَصِلُ خِلَالَ سَاعَةٍ.",
+      "tr": "I’ll arrive within an hour.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "خِلَالَ الْأُسْبُوعِ أَعْمَلُ كَثِيرًا.",
+      "tr": "During the week I work a lot.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "خِلَالَ الْأُسْبُوعِ",
+      "tr": "during the week"
+     },
+     {
+      "text": "خِلَالَ سَاعَةٍ",
+      "tr": "within an hour"
+     },
+     {
+      "text": "مِنْ خِلَالِ",
+      "tr": "through, by way of"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَثْنَاءَ",
+      "register": "neutral",
+      "nuance": "during — while something else happens"
+     },
+     {
+      "word": "طَوَالَ",
+      "register": "neutral",
+      "nuance": "throughout, all through"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the adverbial accusative of the plural of خَلَل (“gap”), i.e. “between the gaps of”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “in the gaps of” — time seen as a space you move through."
+    ],
+    "pitfalls": [
+     "مِنْ خِلَالِ means “through, by means of”, not “during”."
+    ],
+    "subtleties": [
+     "خِلَالَ looks at the whole span (within a week); أَثْنَاءَ at what happens at the same time (during the meal)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:athnaa",
+   "lemma": "أَثْنَاءَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.during"
+   ],
+   "features": {
+    "root": "ث ن ي",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.during",
+     "axis": "span or simultaneity",
+     "value": "while something happens"
+    }
+   ],
+   "translit": "ʾaṯnāʾa",
+   "forms": {
+    "ADP": "أَثْنَاءَ",
+    "ADP;1;SG": "أَثْنَائِي",
+    "ADP;2;SG;MASC": "أَثْنَاءَكَ",
+    "ADP;2;SG;FEM": "أَثْنَاءَكِ",
+    "ADP;3;SG;MASC": "أَثْنَاءَهُ",
+    "ADP;3;SG;FEM": "أَثْنَاءَهَا",
+    "ADP;1;PL": "أَثْنَاءَنَا",
+    "ADP;2;PL;MASC": "أَثْنَاءَكُمْ",
+    "ADP;2;PL;FEM": "أَثْنَاءَكُنَّ",
+    "ADP;3;PL;MASC": "أَثْنَاءَهُمْ",
+    "ADP;3;PL;FEM": "أَثْنَاءَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "At the same time as something else.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "during, while (something happens)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.during"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا أَتَكَلَّمُ أَثْنَاءَ الْأَكْلِ.",
+      "tr": "I don’t talk while eating.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "نَامَ الطِّفْلُ أَثْنَاءَ الرِّحْلَةِ.",
+      "tr": "The child slept during the trip.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "قَرَأْتُ كِتَابًا أَثْنَاءَ السَّفَرِ.",
+      "tr": "I read a book during the journey.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَثْنَاءَ الْعَمَلِ",
+      "tr": "during work, while working"
+     },
+     {
+      "text": "فِي أَثْنَاءِ ذٰلِكَ",
+      "tr": "meanwhile"
+     },
+     {
+      "text": "أَثْنَاءَ الْعُطْلَةِ",
+      "tr": "during the holidays"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "خِلَالَ",
+      "register": "neutral",
+      "nuance": "during, within — the whole span"
+     },
+     {
+      "word": "فِي أَثْنَاءِ",
+      "register": "formal",
+      "nuance": "during, in the course of"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the adverbial accusative of أَثْنَاء, the plural of ثِنْي (“a fold; a single repetition; time”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as اِثْنَانِ (two): ثِنْي is a fold, a doubling."
+    ],
+    "pitfalls": [
+     "The hamza is on the line: أَثْنَاءَ; with pronouns أَثْنَاءَهُ, أَثْنَائِي."
+    ],
+    "subtleties": [
+     "Very common with a verbal noun: أَثْنَاءَ الْعَمَلِ (while working), أَثْنَاءَ الْأَكْلِ (while eating)."
+    ]
+   },
+   "prefix": false
+  }
+ ],
+ "absent": [
+  {
+   "concept": "time.oclock",
+   "reason": "Arabic has no word for “o’clock”.",
+   "use": "The hour is said with السَّاعَةُ (the hour) + an ordinal number in the feminine: السَّاعَةُ الْخَامِسَةُ = five o’clock (lit. “the fifth hour”); one o’clock is السَّاعَةُ الْوَاحِدَةُ. “At five” = فِي السَّاعَةِ الْخَامِسَةِ (or عِنْدَ …). In everyday speech the cardinal number is common: السَّاعَة خَمْسَة. The ordinals come later in the course; see the table in “Time: before, after …” (lesson 15)."
+  }
+ ]
+}

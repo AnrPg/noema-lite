@@ -1,0 +1,4598 @@
+{
+ "lexemes": [
+  {
+   "id": "he:be",
+   "lemma": "בְּ",
+   "pos": "ADP",
+   "senses": [
+    "prep.in",
+    "prep.at",
+    "prep.attime",
+    "prep.onday",
+    "prep.inmonth",
+    "prep.with.tool",
+    "prep.by",
+    "prep.for"
+   ],
+   "prefix": true,
+   "translit": "be-",
+   "alts": [
+    "בַּ",
+    "בָּ",
+    "בֶּ",
+    "בִּ"
+   ],
+   "features": {
+    "spelling": "ב",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "בִּי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "בְּךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "בָּךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "בּוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "בָּהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "בָּנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "בָּכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "בָּכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "בָּהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "בָּהֶן"
+     }
+    ]
+   },
+   "note": "Written attached to the next word. With the article it fuses: בְּ + הַבַּיִת → בַּבַּיִת (the ה falls away and its vowel moves to the ב: בַּ / בָּ / בֶּ). Its own vowel also changes: בִּ before a shva (בִּשְׂדֵה), בַּ before a hataf patah (בַּחֲנוּת).",
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "place or person",
+     "value": "at a place (בַּבַּיִת, בָּעֲבוֹדָה)"
+    },
+    {
+     "concept": "prep.for",
+     "axis": "kind of “for”",
+     "value": "a price (בְּעֶשְׂרִים שֶׁקֶל)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Where something is: in the house, at school, at work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in, inside (a place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.in"
+     },
+     {
+      "id": "s2",
+      "def": "at (a place: at school, at work, at the bank)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.at"
+     },
+     {
+      "id": "s3",
+      "def": "with, by means of (a tool): בְּעֵט “with a pen”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.with.tool"
+     },
+     {
+      "id": "s4",
+      "def": "at (a time of day): בְּשָׁעָה חָמֵשׁ “at five o’clock”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.attime"
+     },
+     {
+      "id": "s5",
+      "def": "on (a day): בְּיוֹם שֵׁנִי “on Monday”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.onday"
+     },
+     {
+      "id": "s6",
+      "def": "in (a month, a season, a year; a part of the day): בְּמַאי, בַּקַּיִץ, בַּבֹּקֶר",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.inmonth"
+     },
+     {
+      "id": "s7",
+      "def": "by (means of transport: בָּאוֹטוֹבּוּס “by bus”, בַּמְּכוֹנִית “by car”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.by"
+     },
+     {
+      "id": "s8",
+      "def": "for (a price: בְּכַמָּה? “for how much?”, בְּעֶשְׂרִים שֶׁקֶל “for twenty shekels”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא גָּרָה בְּתֵל אָבִיב.",
+      "tr": "She lives in Tel Aviv.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ בְּבֵית קָפֶה.",
+      "tr": "We are in a café.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים בְּבֵית הַסֵּפֶר.",
+      "tr": "The children are at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "הִיא בְּבֵית הַמִּרְקַחַת.",
+      "tr": "She is at the pharmacy.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא כּוֹתֵב בְּעֵט.",
+      "tr": "He writes with a pen.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s3"
+     },
+     {
+      "text": "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ.",
+      "tr": "The train leaves at five o’clock.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s4"
+     },
+     {
+      "text": "נִתְרָאֶה בְּיוֹם רִאשׁוֹן!",
+      "tr": "See you on Sunday!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s5"
+     },
+     {
+      "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי בְּמַאי.",
+      "tr": "My birthday is in May.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s6"
+     },
+     {
+      "text": "בְּיָנוּאָר יֵשׁ שֶׁלֶג בַּחֶרְמוֹן.",
+      "tr": "In January there is snow on Mount Hermon.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s6"
+     },
+     {
+      "text": "הִיא נוֹסַעַת הַבַּיְתָה בְּמוֹנִית.",
+      "tr": "She goes home by taxi.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s7"
+     },
+     {
+      "text": "קָנִיתִי אֶת הַסֵּפֶר בְּעֶשְׂרִים שֶׁקֶל.",
+      "tr": "I bought the book for twenty shekels.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s8"
+     },
+     {
+      "text": "בְּכַמָּה הַתַּפּוּחִים?",
+      "tr": "How much are the apples? (literally “for how much?”)",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s8"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּבַּיִת",
+      "tr": "at home"
+     },
+     {
+      "text": "בְּבֵית הַסֵּפֶר",
+      "tr": "at school"
+     },
+     {
+      "text": "בַּבֹּקֶר",
+      "tr": "in the morning"
+     },
+     {
+      "text": "בְּשָׁעָה …",
+      "tr": "at … o’clock"
+     },
+     {
+      "text": "בְּיוֹם …",
+      "tr": "on … (a day)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּתוֹךְ",
+      "register": "formal",
+      "nuance": "“inside, within” — stresses that something is really inside: בְּתוֹךְ הָאָרוֹן"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *bV- “with, in, at, among”, possibly from Proto-Afroasiatic *bǔ “place” (Wiktionary). Arabic بِ (bi-) is the same prefix.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek σε covers “in, at, to” at once — בְּ covers “in” and “at” (and “to” is לְ).",
+     "Arabic keeps the article after the same prefix (بِالْبَيْتِ bi-l-bayti); Hebrew swallows it (בַּבַּיִת).",
+     "English needs three words for time — at five, on Monday, in May; Hebrew uses בְּ for all three (German um, am, im)."
+    ],
+    "pitfalls": [
+     "With the article it fuses: בַּבַּיִת “in the house”, never *בְּהַבַּיִת.",
+     "Its vowel changes: בִּ before a shva (בִּשְׂדֵה תְּעוּפָה), בַּ before a hataf patah (בַּחֲנוּת).",
+     "It covers both “in” and “at”: בְּבֵית הַסֵּפֶר is “in the school” and “at school”.",
+     "Months take בְּ without the article (בְּמַאי), seasons and parts of the day with it (בַּקַּיִץ, בַּבֹּקֶר)."
+    ],
+    "subtleties": [
+     "Unvowelled בבית is both בְּבַיִת “in a house” and בַּבַּיִת “in the house, at home” — only the vowel shows the article.",
+     "A tool takes בְּ, not עִם: כּוֹתֵב בְּעֵט “writes with a pen”."
+    ]
+   }
+  },
+  {
+   "id": "he:etsel",
+   "lemma": "אֵצֶל",
+   "pos": "ADP",
+   "senses": [
+    "prep.at",
+    "prep.nextto"
+   ],
+   "prefix": false,
+   "translit": "etsel",
+   "features": {
+    "spelling": "אצל",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אֶצְלִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אֶצְלְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אֶצְלֵךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אֶצְלוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אֶצְלָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אֶצְלֵנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אֶצְלְכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אֶצְלְכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אֶצְלָם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אֶצְלָן"
+     }
+    ]
+   },
+   "note": "At someone’s place: אֵצֶל סָבְתָא “at Grandma’s”, אֵצֶל הָרוֹפֵא “at the doctor’s”. With pronouns: אֶצְלִי, אֶצְלְךָ, אֶצְלָהּ …",
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "place or person",
+     "value": "at someone’s (place): אֵצֶל סָבְתָא"
+    },
+    {
+     "concept": "prep.nextto",
+     "axis": "register",
+     "value": "old, literary"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "At Grandma’s, at the doctor’s, at a friend’s — the “at” of people (German bei, French chez).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "at (the home or office of a person): at someone’s",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.at"
+     },
+     {
+      "id": "s2",
+      "def": "with, in the possession of (הַמַּפְתֵּחַ אֵצֶל אִמָּא “Mum has the key”)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "next to, beside (old use)",
+      "register": [
+       "literary"
+      ],
+      "concept": "prep.nextto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים אֵצֶל סָבְתָא.",
+      "tr": "The children are at Grandma’s.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אֵצֶל הָרוֹפֵא.",
+      "tr": "I am at the doctor’s.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמַּפְתֵּחַ אֵצֶל אִמָּא.",
+      "tr": "Mum has the key.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֵצֶל הָרוֹפֵא",
+      "tr": "at the doctor’s"
+     },
+     {
+      "text": "אֵצֶל חֲבֵרִים",
+      "tr": "at friends’"
+     },
+     {
+      "text": "אֶצְלִי",
+      "tr": "at my place; with me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּבֵית …",
+      "register": "neutral",
+      "nuance": "“in the house of …” — only for a home: בְּבֵית סָבְתָא"
+     }
+    ],
+    "etymology": {
+     "text": "Biblical Hebrew, where it meant “beside, next to” (a meaning Wiktionary still lists); Wiktionary gives no etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German bei is the closest: bei Oma = אֵצֶל סָבְתָא, beim Arzt = אֵצֶל הָרוֹפֵא; French chez does the same job."
+    ],
+    "pitfalls": [
+     "Only for people (and their homes or offices): “at school” is בְּבֵית הַסֵּפֶר, not *אֵצֶל בֵּית הַסֵּפֶר.",
+     "With pronouns the vowels change: אֶצְלִי, אֶצְלְךָ, אֶצְלֵךְ, אֶצְלוֹ, אֶצְלָהּ (Wiktionary)."
+    ],
+    "subtleties": [
+     "אֶצְלִי also means “in my case, with me”: אֶצְלִי זֶה אַחֶרֶת “with me it’s different”."
+    ]
+   }
+  },
+  {
+   "id": "he:el",
+   "lemma": "אֶל",
+   "pos": "ADP",
+   "senses": [
+    "prep.to"
+   ],
+   "prefix": false,
+   "translit": "el",
+   "role": "“to, towards” — formal and written, mostly towards a person or a thing (אֶל הַחַלּוֹן “to the window”). The everyday “to” is the prefix לְ (known from יֵשׁ לִי): לַבַּיִת, לְאִמָּא.",
+   "features": {
+    "spelling": "אל",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אֵלַי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אֵלֶיךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אֵלַיִךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אֵלָיו"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אֵלֶיהָ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אֵלֵינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אֲלֵיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אֲלֵיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אֲלֵיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אֲלֵיהֶן"
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "prep.to",
+     "axis": "register",
+     "value": "formal or literary: the separate word אֶל"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "The “to” of letters, the Bible and careful speech.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to, towards (a person or a thing)",
+      "register": [
+       "formal"
+      ],
+      "concept": "prep.to"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא הוֹלֵךְ אֶל הַחַלּוֹן.",
+      "tr": "He walks to the window.",
+      "register": "formal",
+      "context": "literature",
+      "sense": "s1"
+     },
+     {
+      "text": "מִכְתָּב אֶל הַמּוֹרָה",
+      "tr": "a letter to the teacher",
+      "register": "formal",
+      "context": "letters",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֶל הַחַלּוֹן",
+      "tr": "to the window"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לְ",
+      "register": "neutral",
+      "nuance": "the everyday “to”, a prefix: לַבַּיִת, לְאִמָּא"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʾila “towards, nigh”, cognate with Akkadian ana and Arabic إِلَى (ʔilā) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic إِلَى (ʔilā) “to” is the same word."
+    ],
+    "pitfalls": [
+     "In everyday speech use לְ: אֲנִי הוֹלֵךְ לַבַּיִת, not אֶל הַבַּיִת.",
+     "With pronouns: אֵלַי “to me”, אֵלֶיךָ, אֵלָיו (Wiktionary)."
+    ],
+    "subtleties": [
+     "Unvowelled אל is also אַל “don’t!” and אֵל “god”."
+    ]
+   }
+  },
+  {
+   "id": "he:min",
+   "lemma": "מִ",
+   "pos": "ADP",
+   "senses": [
+    "prep.from",
+    "prep.since",
+    "conj.than",
+    "prep.of"
+   ],
+   "prefix": true,
+   "translit": "mi-",
+   "alts": [
+    "מֵ",
+    "מִן"
+   ],
+   "features": {
+    "spelling": "מ",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "מִמֶּנִּי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "מִמְּךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "מִמֵּךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "מִמֶּנּוּ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "מִמֶּנָּה"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "מִמֶּנּוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "מִכֶּם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "מִכֶּן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "מֵהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "מֵהֶן"
+     }
+    ]
+   },
+   "note": "Written attached to the next word; the נ of the old form מִן doubles the next letter (מִתֵּל אָבִיב), and before a guttural, ר or the article it is מֵ (מֵחֵיפָה, מֵהַבַּיִת). The article does not fuse: מֵהַבַּיִת. The full word מִן stands before the article in careful style (מִן הַבַּיִת). In comparisons it is “than”: גָּדוֹל יוֹתֵר מֵהַדִּירָה (lesson 17).",
+   "contrasts": [
+    {
+     "concept": "prep.since",
+     "axis": "word or prefix",
+     "value": "the prefix מִ / מֵ “from”, also of time (מֵהַבֹּקֶר)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Where people and things come from.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (a place, a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.from"
+     },
+     {
+      "id": "s2",
+      "def": "than (in comparisons): גָּדוֹל יוֹתֵר מִ… “bigger than …”; before a clause or a phrase מֵאֲשֶׁר",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.than"
+     },
+     {
+      "id": "s3",
+      "def": "of, out of (some of a group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.of"
+     },
+     {
+      "id": "s4",
+      "def": "from, since (a point in time): מֵהַבֹּקֶר “since the morning”, מִשְּׁמוֹנֶה “from eight”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.since"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מִתֵּל אָבִיב.",
+      "tr": "I am from Tel Aviv.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה רָחוֹק מִכָּאן.",
+      "tr": "It is far from here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא גָּבֹהַּ מִמֶּנִּי.",
+      "tr": "He is taller than me.",
+      "register": "neutral",
+      "context": "comparison",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא פֹּה מִיּוֹם רִאשׁוֹן.",
+      "tr": "He has been here since Sunday.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s4"
+     },
+     {
+      "text": "אֲנִי בָּעֲבוֹדָה מִשְּׁמוֹנֶה עַד חָמֵשׁ.",
+      "tr": "I am at work from eight to five.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s4"
+     },
+     {
+      "text": "יְרוּשָׁלַיִם גְּדוֹלָה יוֹתֵר מִתֵּל אָבִיב.",
+      "tr": "Jerusalem is bigger than Tel Aviv.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֵאֵיפֹה?",
+      "tr": "from where?"
+     },
+     {
+      "text": "מֵהַבַּיִת",
+      "tr": "from home"
+     },
+     {
+      "text": "מִכָּאן",
+      "tr": "from here"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מֵאֵת",
+      "register": "formal",
+      "nuance": "“from (a person)” in formal letters: מִכְתָּב מֵאֵת הַמְּנַהֵל"
+     },
+     {
+      "word": "מֵאָז",
+      "register": "neutral",
+      "nuance": "“since” — only for time, also alone (“since then”): מֵאָז יָנוּאָר"
+     }
+    ],
+    "etymology": {
+     "text": "From מִן (min), by assimilation of the n to the following consonant (Wiktionary). Cognate with Arabic مِنْ (min) “from”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic مِنْ (min) is the same word — and Arabic keeps the n: مِنَ الْبَيْتِ.",
+     "In comparisons it means “than”: גָּדוֹל מִ… “bigger than …” (lesson 17) — like Arabic أَكْبَر مِنْ.",
+     "Greek από and Arabic مِنْ do the same double job: “from” and “than” (μεγαλύτερος από, أَكْبَرُ مِنْ)."
+    ],
+    "pitfalls": [
+     "The נ of מִן doubles the next letter: מִתֵּל אָבִיב (dagesh). Before ע, ח, א, ר and before the article it is מֵ: מֵחֵיפָה, מֵהַבַּיִת.",
+     "With the article it does not fuse: מֵהַבַּיִת (the ה stays) — unlike בַּבַּיִת and לַבַּיִת."
+    ],
+    "subtleties": [
+     "The full word מִן is used before the article in careful style: מִן הַבַּיִת. Everyday speech says מֵהַבַּיִת.",
+     "As “than”, מִ takes endings with pronouns (מִמֶּנִּי “than me”, מִמְּךָ, מִמֶּנּוּ, מִמֶּנָּה, מֵהֶם), and before a clause, an adverb or a phrase with a preposition the full word מֵאֲשֶׁר is used: יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”."
+    ]
+   }
+  },
+  {
+   "id": "he:im",
+   "lemma": "עִם",
+   "pos": "ADP",
+   "senses": [
+    "prep.with"
+   ],
+   "prefix": false,
+   "translit": "im",
+   "features": {
+    "spelling": "עם",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אִתִּי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אִתְּךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אִתָּךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אִתּוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אִתָּהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אִתָּנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אִתְּכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אִתְּכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אִתָּם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אִתָּן"
+     }
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Together: coffee with milk, dinner with friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "with (together with; with milk)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.with"
+     },
+     {
+      "id": "s2",
+      "def": "with (having): חֶדֶר עִם חַלּוֹן “a room with a window”",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתֶה קָפֶה עִם חָלָב.",
+      "tr": "I (m.) drink coffee with milk.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא בַּסּוּפֶּר עִם אִמָּא שֶׁלָּהּ.",
+      "tr": "She is at the supermarket with her mother.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "חֶדֶר עִם חַלּוֹן גָּדוֹל",
+      "tr": "a room with a big window",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עִם חָלָב",
+      "tr": "with milk"
+     },
+     {
+      "text": "עִם חֲבֵרִים",
+      "tr": "with friends"
+     },
+     {
+      "text": "אִתִּי",
+      "tr": "with me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יַחַד עִם",
+      "register": "formal",
+      "nuance": "“together with” — emphatic or formal"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Ugaritic ʿm and, by metathesis, with Arabic مَعَ (maʕa) and Ugaritic mʿ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The name עִמָּנוּאֵל (Immanuel) means “God is with us”: עִמָּנוּ + אֵל.",
+     "Arabic مَعَ (maʕa) has the same consonants in the other order (Wiktionary)."
+    ],
+    "pitfalls": [
+     "With a pronoun it takes another stem: אִתִּי, אִתְּךָ, אִתָּךְ (written איתי, איתך …); עִמִּי is literary.",
+     "A tool takes בְּ, not עִם: כּוֹתֵב בְּעֵט “writes with a pen”."
+    ],
+    "subtleties": [
+     "Unvowelled עם is also עַם “a people, a nation” (עַם יִשְׂרָאֵל)."
+    ]
+   }
+  },
+  {
+   "id": "he:bli",
+   "lemma": "בְּלִי",
+   "pos": "ADP",
+   "senses": [
+    "prep.without"
+   ],
+   "prefix": false,
+   "translit": "bli",
+   "features": {
+    "spelling": "בלי",
+    "pronForms": {
+     "none": "takes no personal endings: “without me” is בִּלְעָדַי (from בִּלְעֲדֵי)"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee without sugar, a day without work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "without",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.without"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתָה תֵּה בְּלִי סֻכָּר.",
+      "tr": "I (f.) drink tea without sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "קָפֶה בְּלִי חָלָב, בְּבַקָּשָׁה.",
+      "tr": "Coffee without milk, please.",
+      "register": "neutral",
+      "context": "ordering",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּלִי סָפֵק!",
+      "tr": "Without a doubt!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בְּלִי סֻכָּר",
+      "tr": "without sugar"
+     },
+     {
+      "text": "בְּלִי סָפֵק",
+      "tr": "without a doubt"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בְּלִי עַיִן הָרָע",
+      "tr": "without the evil eye",
+      "kind": "idiom",
+      "meaning": "said after good news so that it lasts — like “touch wood”",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לְלֹא",
+      "register": "formal",
+      "nuance": "“without” in writing and on signs: לְלֹא תַּשְׁלוּם “free of charge”"
+     },
+     {
+      "word": "בִּלְעֲדֵי",
+      "register": "literary",
+      "nuance": "“without” (literary), mostly with a pronoun: בִּלְעָדַיִךְ “without you (f.)”"
+     }
+    ],
+    "etymology": {
+     "text": "Biblical Hebrew; Wiktionary gives no etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Yiddish speakers say keyn ayin hore for the same wish as בְּלִי עַיִן הָרָע."
+    ],
+    "pitfalls": [
+     "It is one word, not בְּ + לִי “in me”.",
+     "No fusion with the article: בְּלִי הַתִּיק “without the bag”."
+    ],
+    "subtleties": [
+     "בְּלִי + infinitive is “without doing”: בְּלִי לֶאֱכֹל “without eating”."
+    ]
+   }
+  },
+  {
+   "id": "he:bishvil",
+   "lemma": "בִּשְׁבִיל",
+   "pos": "ADP",
+   "senses": [
+    "prep.for",
+    "conj.inorderto"
+   ],
+   "prefix": false,
+   "translit": "bishvil",
+   "features": {
+    "spelling": "בשביל",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "בִּשְׁבִילִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "בִּשְׁבִילְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "בִּשְׁבִילֵךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "בִּשְׁבִילוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "בִּשְׁבִילָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "בִּשְׁבִילֵנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "בִּשְׁבִילְכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "בִּשְׁבִילְכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "בִּשְׁבִילָם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "בִּשְׁבִילָן"
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "prep.for",
+     "axis": "kind of “for”",
+     "value": "a person or a purpose"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A present for Mum, soup for the children.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "for (a person, a purpose)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for"
+     },
+     {
+      "id": "s2",
+      "def": "in order to (בִּשְׁבִיל לְ…)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "conj.inorderto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסֵּפֶר הַזֶּה בִּשְׁבִיל אִמָּא.",
+      "tr": "This book is for Mum.",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s1"
+     },
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת מָרָק בִּשְׁבִיל הַיְּלָדִים.",
+      "tr": "Mum is cooking soup for the children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בִּשְׁבִיל מָה?",
+      "tr": "What for?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי עוֹבֵד בִּשְׁבִיל לִחְיוֹת.",
+      "tr": "I (m.) work in order to live.",
+      "register": "colloquial",
+      "context": "philosophy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בִּשְׁבִיל מָה?",
+      "tr": "what for?"
+     },
+     {
+      "text": "בִּשְׁבִילְךָ",
+      "tr": "for you (m.)"
+     },
+     {
+      "text": "בִּשְׁבִיל הַכֵּיף",
+      "tr": "for fun"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עֲבוּר",
+      "register": "formal",
+      "nuance": "“for” in formal and written style"
+     },
+     {
+      "word": "לְ",
+      "register": "neutral",
+      "nuance": "the short prefix “for, to”: זֶה לְךָ “this is for you”"
+     }
+    ],
+    "etymology": {
+     "text": "From בְּ “in” + שְׁבִיל “path, trail (of)”: literally “in the trail of” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "שְׁבִיל is a path: “for you” is literally “in your path”."
+    ],
+    "pitfalls": [
+     "Not “for” of time: “for two hours” is just שְׁעָתַיִם or בְּמֶשֶׁךְ שְׁעָתַיִם.",
+     "With pronouns: בִּשְׁבִילִי, בִּשְׁבִילְךָ, בִּשְׁבִילָהּ … (Wiktionary)."
+    ],
+    "subtleties": [
+     "בִּשְׁבִיל לְ… “in order to” is everyday speech; formal style says כְּדֵי לְ…"
+    ]
+   }
+  },
+  {
+   "id": "he:al",
+   "lemma": "עַל",
+   "pos": "ADP",
+   "senses": [
+    "prep.about",
+    "prep.on"
+   ],
+   "prefix": false,
+   "translit": "al",
+   "features": {
+    "spelling": "על",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "עָלַי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "עָלֶיךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "עָלַיִךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "עָלָיו"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "עָלֶיהָ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "עָלֵינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "עֲלֵיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "עֲלֵיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "עֲלֵיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "עֲלֵיהֶן"
+     }
+    ]
+   },
+   "note": "“about” (a topic, lesson 11) and “on” (on top of, lesson 12) — one word. With pronouns: עָלַי, עָלֶיךָ, עָלָיו …",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A book about Jerusalem; the cup on the table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "about (a topic)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.about"
+     },
+     {
+      "id": "s2",
+      "def": "on, on top of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.on"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה סֵפֶר עַל יְרוּשָׁלַיִם.",
+      "tr": "This is a book about Jerusalem.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם מְדַבְּרִים עַל הָעֲבוֹדָה.",
+      "tr": "They are talking about work.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֵּפֶר עַל הַשֻּׁלְחָן.",
+      "tr": "The book is on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "הַכּוֹס עַל הַמַּדָּף.",
+      "tr": "The glass is on the shelf.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְדַבֵּר עַל",
+      "tr": "to talk about"
+     },
+     {
+      "text": "עַל הַשֻּׁלְחָן",
+      "tr": "on the table"
+     },
+     {
+      "text": "עַל יַד",
+      "tr": "next to (formal)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עַל אוֹדוֹת",
+      "register": "formal",
+      "nuance": "“about, concerning” — formal"
+     },
+     {
+      "word": "עַל גַּבֵּי",
+      "register": "formal",
+      "nuance": "“on top of” — formal"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʕalay- (Wiktionary); cognate with Arabic عَلَى (ʕalā) “on”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic عَلَى (ʕalā) is the same word: عَلَى الطَّاوِلَةِ “on the table”.",
+     "German über does both jobs too: ein Buch über Jerusalem, das Bild über dem Sofa."
+    ],
+    "pitfalls": [
+     "With pronouns it adds י: עָלַי “on me”, עָלֶיךָ, עָלָיו (Wiktionary).",
+     "It is a separate word: עַל הַשֻּׁלְחָן (no fusion with the article)."
+    ],
+    "subtleties": [
+     "עַל + a pronoun can mean “it is up to you, you must” (formal): עָלֶיךָ לְהַחְלִיט “you must decide”."
+    ]
+   }
+  },
+  {
+   "id": "he:beit-sefer",
+   "lemma": "בֵּית סֵפֶר",
+   "pos": "NOUN",
+   "senses": [
+    "place.school"
+   ],
+   "gender": "MASC",
+   "translit": "beit sefer",
+   "features": {
+    "spelling": "בית ספר",
+    "root": {
+     "none": "a compound of two words (בַּיִת + סֵפֶר): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בָּתֵּי סֵפֶר",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בֵּית סֵפֶר",
+    "N;SG;DEF": "בֵּית הַסֵּפֶר",
+    "N;PL;INDF": "בָּתֵּי סֵפֶר",
+    "N;PL;DEF": "בָּתֵּי הַסֵּפֶר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "School bags, the bell, the break in the yard.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "school",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.school"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בֵּית הַסֵּפֶר שֶׁל הַיְּלָדִים גָּדוֹל.",
+      "tr": "The children’s school is big.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בֵּית הַסֵּפֶר קָרוֹב לַבַּיִת.",
+      "tr": "The school is close to the house.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה שְׁנֵי בָּתֵּי סֵפֶר.",
+      "tr": "There are two schools here.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּית סֵפֶר יְסוֹדִי",
+      "tr": "a primary school"
+     },
+     {
+      "text": "בֵּית סֵפֶר תִּיכוֹן",
+      "tr": "a secondary (high) school"
+     },
+     {
+      "text": "בְּבֵית הַסֵּפֶר",
+      "tr": "at school"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תִּיכוֹן",
+      "register": "neutral",
+      "nuance": "a high school — short for בֵּית סֵפֶר תִּיכוֹן"
+     }
+    ],
+    "etymology": {
+     "text": "From בַּיִת “house” + סֵפֶר “book” (Wiktionary); compare Akkadian bīt ṭuppim “house of the tablet”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “house of book” — and Akkadian said bīt ṭuppim, “house of the tablet” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: בֵּית הַסֵּפֶר “the school”; “at school” = בְּבֵית הַסֵּפֶר.",
+     "The plural changes the first word: בָּתֵּי סֵפֶר."
+    ],
+    "subtleties": [
+     "A university is not a בֵּית סֵפֶר: it is an אוּנִיבֶרְסִיטָה."
+    ]
+   }
+  },
+  {
+   "id": "he:universita",
+   "lemma": "אוּנִיבֶרְסִיטָה",
+   "pos": "NOUN",
+   "senses": [
+    "place.university"
+   ],
+   "gender": "FEM",
+   "translit": "universita",
+   "features": {
+    "spelling": "אוניברסיטה",
+    "root": {
+     "none": "a loanword (an internationalism, from Latin universitas): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אוּנִיבֶרְסִיטָאוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אוּנִיבֶרְסִיטַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אוּנִיבֶרְסִיטָאוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אוּנִיבֶרְסִיטָה",
+    "N;SG;DEF": "הָאוּנִיבֶרְסִיטָה",
+    "N;PL;INDF": "אוּנִיבֶרְסִיטָאוֹת",
+    "N;PL;DEF": "הָאוּנִיבֶרְסִיטָאוֹת",
+    "N;SG;DEF;PFX": "אוּנִיבֶרְסִיטָה",
+    "N;SG;CONST": "אוּנִיבֶרְסִיטַת",
+    "N;PL;CONST": "אוּנִיבֶרְסִיטָאוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הָאוּנִיבֶרְסִיטָה → (בַּ / לַ)אוּנִיבֶרְסִיטָה; Wiktionary lists only the full definite form הָאוּנִיבֶרְסִיטָה.",
+     "N;PL;CONST": "the construct of the plural אוּנִיבֶרְסִיטָאוֹת is the same form; Wiktionary’s אוּנִיבֶרְסִיטוֹת־ belongs to the shorter variant plural אוניברסיטות."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Lecture halls, campus lawns and exams in the summer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "university",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.university"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסְּטוּדֶנְטִים בָּאוּנִיבֶרְסִיטָה.",
+      "tr": "The students are at the university.",
+      "register": "neutral",
+      "context": "campus",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא לוֹמֶדֶת בָּאוּנִיבֶרְסִיטָה הָעִבְרִית.",
+      "tr": "She studies at the Hebrew University.",
+      "register": "neutral",
+      "context": "studies",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בָּעִיר שְׁתֵּי אוּנִיבֶרְסִיטָאוֹת.",
+      "tr": "There are two universities in the city.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הָאוּנִיבֶרְסִיטָה הָעִבְרִית",
+      "tr": "the Hebrew University (of Jerusalem)"
+     },
+     {
+      "text": "לִלְמֹד בָּאוּנִיבֶרְסִיטָה",
+      "tr": "to study at university"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מִכְלָלָה",
+      "register": "neutral",
+      "nuance": "a college — usually smaller, teaching first degrees"
+     }
+    ],
+    "etymology": {
+     "text": "An internationalism, borrowed from Western European languages; ultimately from Latin universitas (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Hebrew University of Jerusalem opened in 1925; Albert Einstein was one of its founders and left it his archive."
+    ],
+    "pitfalls": [
+     "The plural keeps the א: אוּנִיבֶרְסִיטָאוֹת.",
+     "With the article: הָאוּנִיבֶרְסִיטָה; “at the university” = בָּאוּנִיבֶרְסִיטָה."
+    ],
+    "subtleties": [
+     "Israelis study “in” the university: לוֹמְדִים בָּאוּנִיבֶרְסִיטָה."
+    ]
+   }
+  },
+  {
+   "id": "he:avoda",
+   "lemma": "עֲבוֹדָה",
+   "pos": "NOUN",
+   "senses": [
+    "place.work",
+    "work.job",
+    "relig.worship"
+   ],
+   "gender": "FEM",
+   "translit": "avoda",
+   "features": {
+    "spelling": "עבודה",
+    "root": "ע ב ד",
+    "pattern": "קְטוֹלָה",
+    "plurals": [
+     {
+      "form": "עֲבוֹדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עֲבוֹדַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עֲבוֹדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עֲבוֹדָה",
+    "N;SG;DEF": "הָעֲבוֹדָה",
+    "N;PL;INDF": "עֲבוֹדוֹת",
+    "N;PL;DEF": "הָעֲבוֹדוֹת",
+    "N;SG;DEF;PFX": "עֲבוֹדָה",
+    "N;SG;CONST": "עֲבוֹדַת",
+    "N;PL;CONST": "עֲבוֹדוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הָעֲבוֹדָה → (בַּ / לַ)עֲבוֹדָה; Wiktionary lists only the full definite form הָעֲבוֹדָה."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Work — the place you go to every morning, and the job itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "work, the workplace (at work)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.work"
+     },
+     {
+      "id": "s2",
+      "def": "work, a job, labour",
+      "register": [
+       "neutral"
+      ],
+      "concept": "work.job"
+     },
+     {
+      "id": "s3",
+      "def": "worship, service (of God)",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.worship"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא בָּעֲבוֹדָה.",
+      "tr": "Mum is at work.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי בָּעֲבוֹדָה עַד חָמֵשׁ.",
+      "tr": "I am at work until five.",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי עֲבוֹדָה חֲדָשָׁה.",
+      "tr": "I have a new job.",
+      "register": "neutral",
+      "context": "career",
+      "sense": "s2"
+     },
+     {
+      "text": "עֲבוֹדָה זָרָה",
+      "tr": "idolatry (“foreign worship”)",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בָּעֲבוֹדָה",
+      "tr": "at work"
+     },
+     {
+      "text": "עֲבוֹדָה קָשָׁה",
+      "tr": "hard work"
+     },
+     {
+      "text": "מְקוֹם עֲבוֹדָה",
+      "tr": "a workplace"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "עֲבוֹדָה זָרָה",
+      "tr": "foreign worship",
+      "kind": "idiom",
+      "meaning": "idolatry; (humorously) a blind cult of something",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מִשְׂרָה",
+      "register": "formal",
+      "nuance": "a position, a post — a job seen as a position"
+     },
+     {
+      "word": "מְלָאכָה",
+      "register": "literary",
+      "nuance": "work, craft, a task (also the work forbidden on Shabbat)"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic عِبَادَة (ʕibāda) “worship” (Wiktionary); from the root ע־ב־ד “to work; to serve”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic عِبَادَة means “worship” — the old sense of עֲבוֹדָה, the service in the Temple.",
+     "The Israeli Labor Party is called הָעֲבוֹדָה, “the Work” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "“At work” takes the article: בָּעֲבוֹדָה (literally “in the work”).",
+     "Before another noun it becomes עֲבוֹדַת: עֲבוֹדַת בַּיִת “homework”."
+    ],
+    "subtleties": [
+     "The root ע־ב־ד also gives עֶבֶד “slave” and עוֹבֵד “employee”: work and service were one idea."
+    ]
+   }
+  },
+  {
+   "id": "he:misrad",
+   "lemma": "מִשְׂרָד",
+   "pos": "NOUN",
+   "senses": [
+    "place.office",
+    "pol.ministry"
+   ],
+   "gender": "MASC",
+   "translit": "misrad",
+   "features": {
+    "spelling": "משרד",
+    "root": "שׂ ר ד",
+    "pattern": "מִקְטָל",
+    "plurals": [
+     {
+      "form": "מִשְׂרָדִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִשְׂרַד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִשְׂרְדֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מִשְׂרָד",
+    "N;SG;DEF": "הַמִּשְׂרָד",
+    "N;PL;INDF": "מִשְׂרָדִים",
+    "N;PL;DEF": "הַמִּשְׂרָדִים",
+    "N;SG;DEF;PFX": "מִּשְׂרָד",
+    "N;SG;CONST": "מִשְׂרַד",
+    "N;PL;CONST": "מִשְׂרְדֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַמִּשְׂרָד → (בַּ / לַ)מִּשְׂרָד; Wiktionary lists only the full definite form הַמִּשְׂרָד."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Desks, computers, meetings — and the ministries of the government.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "office (a workplace)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.office"
+     },
+     {
+      "id": "s2",
+      "def": "ministry, government office",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.ministry"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא בַּמִּשְׂרָד.",
+      "tr": "He is at the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּשְׂרָד שֶׁלִּי קָטָן.",
+      "tr": "My office is small.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא עוֹבֶדֶת בְּמִשְׂרָד מֶמְשַׁלְתִּי.",
+      "tr": "She works in a government office.",
+      "register": "neutral",
+      "context": "government",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִשְׂרַד הַחוּץ",
+      "tr": "the Foreign Ministry"
+     },
+     {
+      "text": "שְׁעוֹת מִשְׂרָד",
+      "tr": "office hours"
+     },
+     {
+      "text": "עֲבוֹדָה מִשְׂרָדִית",
+      "tr": "office work"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; a study or work room at home is a חֲדַר עֲבוֹדָה.",
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it has the noun pattern מִקְטָל (Wiktionary) of many places, like מִטְבָּח “kitchen”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Prime Minister’s Office is מִשְׂרַד רֹאשׁ הַמֶּמְשָׁלָה."
+    ],
+    "pitfalls": [
+     "Before another noun the vowel shortens: מִשְׂרַד הַחוּץ.",
+     "The ש is a שׂ (s): mis-RAD."
+    ],
+    "subtleties": [
+     "A ministry is also a מִשְׂרָד: מִשְׂרַד הַבְּרִיאוּת “the Ministry of Health”."
+    ]
+   }
+  },
+  {
+   "id": "he:chanut",
+   "lemma": "חֲנוּת",
+   "pos": "NOUN",
+   "senses": [
+    "place.shop",
+    "place.cell"
+   ],
+   "gender": "FEM",
+   "translit": "chanut",
+   "features": {
+    "spelling": "חנות",
+    "root": "ח נ ה",
+    "pattern": {
+     "none": "borrowed from Aramaic (חָנוּתָא): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "חֲנֻיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲנוּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חֲנֻיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חֲנוּת",
+    "N;SG;DEF": "הַחֲנוּת",
+    "N;PL;INDF": "חֲנֻיּוֹת",
+    "N;PL;DEF": "הַחֲנֻיּוֹת",
+    "N;SG;DEF;PFX": "חֲנוּת",
+    "N;SG;CONST": "חֲנוּת",
+    "N;PL;CONST": "חֲנֻיּוֹת"
+   },
+   "plene": {
+    "N;PL;INDF": "חנויות",
+    "N;PL;DEF": "החנויות",
+    "N;PL;CONST": "חנויות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shop windows in the high street; the corner shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop, store",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.shop"
+     },
+     {
+      "id": "s2",
+      "def": "a vaulted chamber, a cell (old)",
+      "register": [
+       "archaic"
+      ],
+      "concept": "place.cell"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא בַּחֲנוּת.",
+      "tr": "She is in the shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה חֲנֻיּוֹת.",
+      "tr": "There are many shops here.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲנוּת סְגוּרָה.",
+      "tr": "The shop is closed.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּסֵפֶר יִרְמְיָהוּ הַחֲנֻיּוֹת הֵן תָּאִים בְּבֵית הַסֹּהַר.",
+      "tr": "In the Book of Jeremiah the “ḥanuyot” are cells in the prison.",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲנוּת בְּגָדִים",
+      "tr": "a clothes shop"
+     },
+     {
+      "text": "חֲנוּת סְפָרִים",
+      "tr": "a bookshop"
+     },
+     {
+      "text": "חֲנוּת מַכֹּלֶת",
+      "tr": "a grocery"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מַכֹּלֶת",
+      "register": "neutral",
+      "nuance": "a small grocery shop round the corner"
+     },
+     {
+      "word": "קַנְיוֹן",
+      "register": "neutral",
+      "nuance": "a shopping mall — many shops under one roof"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Aramaic חָנוּתָא (ḥānūṯā) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic حَانُوت (ḥānūt) “shop” comes from the same Aramaic word."
+    ],
+    "pitfalls": [
+     "Feminine, although it does not end in ־ָה: חֲנוּת קְטַנָּה.",
+     "Plural חֲנֻיּוֹת (written חנויות)."
+    ],
+    "subtleties": [
+     "“In a shop” and “in the shop” are both written בַּחֲנוּת: בְּ before a hataf patah becomes בַּ anyway."
+    ]
+   }
+  },
+  {
+   "id": "he:super",
+   "lemma": "סוּפֶּר",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "place.supermarket"
+   ],
+   "gender": "MASC",
+   "translit": "super",
+   "features": {
+    "spelling": "סופר",
+    "root": {
+     "none": "a loanword (short for סוּפֶּרְמַרְקֶט, from English): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "no plural in everyday use (סוּפֶּרְמַרְקֶטִים)"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סוּפֶּר"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סוּפֶּר",
+    "N;SG;DEF": "הַסּוּפֶּר",
+    "N;SG;DEF;PFX": "סּוּפֶּר",
+    "N;SG;CONST": "סוּפֶּר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "Trolleys, queues at the till before Shabbat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "supermarket",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "place.supermarket"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹנֶה לֶחֶם בַּסּוּפֶּר.",
+      "tr": "I (m.) buy bread at the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסּוּפֶּר סָגוּר בְּשַׁבָּת.",
+      "tr": "The supermarket is closed on Shabbat.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ סוּפֶּר קָרוֹב?",
+      "tr": "Is there a supermarket nearby?",
+      "register": "colloquial",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לָלֶכֶת לַסּוּפֶּר",
+      "tr": "to go to the supermarket"
+     },
+     {
+      "text": "עֶגְלַת סוּפֶּר",
+      "tr": "a shopping trolley"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סוּפֶּרְמַרְקֶט",
+      "register": "neutral",
+      "nuance": "the full word — on signs and in writing; its plural is סוּפֶּרְמַרְקֶטִים"
+     },
+     {
+      "word": "מַכֹּלֶת",
+      "register": "neutral",
+      "nuance": "a small corner grocery"
+     }
+    ],
+    "etymology": {
+     "text": "From English super (Wiktionary), short for “supermarket”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Supermarkt, Greek σουπερμάρκετ, Russian супермаркет — Israelis simply cut the internationalism to סוּפֶּר."
+    ],
+    "pitfalls": [
+     "Unvowelled סופר is also סוֹפֵר “writer” and “counting”.",
+     "Everyday speech uses no plural of סוּפֶּר; for several, say סוּפֶּרְמַרְקֶטִים."
+    ],
+    "subtleties": [
+     "As slang סוּפֶּר also means “super, very”: סוּפֶּר טָעִים “super tasty” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:shuk",
+   "lemma": "שׁוּק",
+   "pos": "NOUN",
+   "senses": [
+    "place.market"
+   ],
+   "gender": "MASC",
+   "translit": "shuk",
+   "features": {
+    "spelling": "שוק",
+    "root": "שׁ ו ק",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (probably from Akkadian sūqum)"
+    },
+    "plurals": [
+     {
+      "form": "שְׁוָקִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שׁוּק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שְׁוָקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שׁוּק",
+    "N;SG;DEF": "הַשּׁוּק",
+    "N;PL;INDF": "שְׁוָקִים",
+    "N;PL;DEF": "הַשְּׁוָקִים",
+    "N;SG;DEF;PFX": "שּׁוּק",
+    "N;SG;CONST": "שׁוּק",
+    "N;PL;CONST": "שְׁוָקֵי"
+   },
+   "plene": {
+    "N;PL;INDF": "שווקים",
+    "N;PL;DEF": "השווקים",
+    "N;PL;CONST": "שווקי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Shouting sellers, piles of fruit, spices and noise.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "market, street market (souk)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.market"
+     },
+     {
+      "id": "s2",
+      "def": "market (in economics)",
+      "register": [
+       "technical"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ קוֹנִים פֵּרוֹת בַּשּׁוּק.",
+      "tr": "We buy fruit at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשּׁוּק פָּתוּחַ הַיּוֹם.",
+      "tr": "The market is open today.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "שׁוּק הָעֲבוֹדָה קָשֶׁה.",
+      "tr": "The labour market is tough.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שׁוּק הַכַּרְמֶל",
+      "tr": "the Carmel Market (Tel Aviv)"
+     },
+     {
+      "text": "שׁוּק פִּשְׁפְּשִׁים",
+      "tr": "a flea market"
+     },
+     {
+      "text": "שׁוּק הָעֲבוֹדָה",
+      "tr": "the labour market"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יָרִיד",
+      "register": "neutral",
+      "nuance": "a fair — a market held now and then"
+     }
+    ],
+    "etymology": {
+     "text": "Probably from Akkadian sūqum “street”; compare Arabic سُوق (sūq) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic سُوق — the souk — is the same word."
+    ],
+    "pitfalls": [
+     "Plural שְׁוָקִים (written שווקים).",
+     "Unvowelled שוק is also שׁוֹק “shin” and “shock”."
+    ],
+    "subtleties": [
+     "In the Bible it is a street: בַּשְּׁוָקִים וּבָרְחֹבוֹת “in the streets and the squares” (Song of Songs 3:2)."
+    ]
+   }
+  },
+  {
+   "id": "he:misada",
+   "lemma": "מִסְעָדָה",
+   "pos": "NOUN",
+   "senses": [
+    "place.restaurant"
+   ],
+   "gender": "FEM",
+   "translit": "mis'ada",
+   "features": {
+    "spelling": "מסעדה",
+    "root": "ס ע ד",
+    "pattern": "מִקְטָלָה",
+    "plurals": [
+     {
+      "form": "מִסְעָדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִסְעֶדֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִסְעֲדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מִסְעָדָה",
+    "N;SG;DEF": "הַמִּסְעָדָה",
+    "N;PL;INDF": "מִסְעָדוֹת",
+    "N;PL;DEF": "הַמִּסְעָדוֹת",
+    "N;SG;DEF;PFX": "מִּסְעָדָה",
+    "N;SG;CONST": "מִסְעֶדֶת",
+    "N;PL;CONST": "מִסְעֲדוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Eating out with friends — hummus places, grills, fish by the sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "restaurant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.restaurant"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ אוֹכְלִים בַּמִּסְעָדָה.",
+      "tr": "We are eating at the restaurant.",
+      "register": "neutral",
+      "context": "eating out",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת מִסְעָדָה טוֹבָה.",
+      "tr": "This is a good restaurant.",
+      "register": "neutral",
+      "context": "recommendation",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה מִסְעָדוֹת.",
+      "tr": "There are many restaurants here.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִסְעֶדֶת דָּגִים",
+      "tr": "a fish restaurant"
+     },
+     {
+      "text": "מִסְעָדָה כְּשֵׁרָה",
+      "tr": "a kosher restaurant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בֵּית אֹכֶל",
+      "register": "dated",
+      "nuance": "an eating house, a simple diner"
+     }
+    ],
+    "etymology": {
+     "text": "Coined by Eliezer Ben-Yehuda from the root ס־ע־ד and the pattern מִקְטָלָה (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Eliezer Ben-Yehuda, the reviver of spoken Hebrew, coined the word (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Before another noun it becomes מִסְעֶדֶת (Wiktionary): מִסְעֶדֶת דָּגִים.",
+     "“At the restaurant” = בַּמִּסְעָדָה (the מ doubles)."
+    ],
+    "subtleties": [
+     "The root ס־ע־ד means “to dine; to support”: סְעוּדָה is a festive meal."
+    ]
+   }
+  },
+  {
+   "id": "he:beit-kafe",
+   "lemma": "בֵּית קָפֶה",
+   "pos": "NOUN",
+   "senses": [
+    "place.cafe"
+   ],
+   "gender": "MASC",
+   "translit": "beit kafe",
+   "features": {
+    "spelling": "בית קפה",
+    "root": {
+     "none": "a compound of two words (בַּיִת + קָפֶה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בָּתֵּי קָפֶה",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בֵּית קָפֶה",
+    "N;SG;DEF": "בֵּית הַקָּפֶה",
+    "N;PL;INDF": "בָּתֵּי קָפֶה",
+    "N;PL;DEF": "בָּתֵּי הַקָּפֶה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;INDF": "Wiktionary writes the compound with a maqaf (בָּתֵּי־קָפֶה); the course writes the two words with a space, like its other compound nouns (בֵּית סֵפֶר, בֵּית חוֹלִים)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Tel Aviv’s café life: a cappuccino on the pavement.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "café, coffee house",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.cafe"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה בֵּית קָפֶה טוֹב.",
+      "tr": "This is a good café.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "בֵּית הַקָּפֶה פָּתוּחַ.",
+      "tr": "The café is open.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ הַרְבֵּה בָּתֵּי קָפֶה בְּתֵל אָבִיב.",
+      "tr": "There are many cafés in Tel Aviv.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לָשֶׁבֶת בְּבֵית קָפֶה",
+      "tr": "to sit in a café"
+     },
+     {
+      "text": "בֵּית קָפֶה שְׁכוּנָתִי",
+      "tr": "a neighbourhood café"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קָפֶה",
+      "register": "colloquial",
+      "nuance": "in speech often just קָפֶה: נִפָּגֵשׁ בַּקָּפֶה “let’s meet at the café”"
+     }
+    ],
+    "etymology": {
+     "text": "From בֵּית “house of” + קָפֶה “coffee”: literally “house of coffee” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Kaffeehaus and Turkish kahvehane are built the same way: “coffee house”."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: בֵּית הַקָּפֶה; plural בָּתֵּי קָפֶה."
+    ],
+    "subtleties": [
+     "Wiktionary writes it with a hyphen (maqaf): בֵּית־קָפֶה; with a space it is the same word."
+    ]
+   }
+  },
+  {
+   "id": "he:beit-cholim",
+   "lemma": "בֵּית חוֹלִים",
+   "pos": "NOUN",
+   "senses": [
+    "place.hospital"
+   ],
+   "gender": "MASC",
+   "translit": "beit cholim",
+   "features": {
+    "spelling": "בית חולים",
+    "root": {
+     "none": "a compound of two words (בַּיִת + חוֹלִים): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בָּתֵּי חוֹלִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בֵּית חוֹלִים",
+    "N;SG;DEF": "בֵּית הַחוֹלִים",
+    "N;PL;INDF": "בָּתֵּי חוֹלִים",
+    "N;PL;DEF": "בָּתֵּי הַחוֹלִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "White corridors, doctors and worried visitors.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hospital",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hospital"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בֵּית הַחוֹלִים גָּדוֹל מְאוֹד.",
+      "tr": "The hospital is very big.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בֵּית חוֹלִים בָּעִיר.",
+      "tr": "There is a hospital in the city.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "בֵּית הַחוֹלִים קָרוֹב.",
+      "tr": "The hospital is close.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִשְׁכַּב בְּבֵית חוֹלִים",
+      "tr": "to be in hospital (“to lie in hospital”)"
+     },
+     {
+      "text": "בֵּית חוֹלִים גָּדוֹל",
+      "tr": "a big hospital"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מֶרְכָּז רְפוּאִי",
+      "register": "formal",
+      "nuance": "a medical centre — the official name of many big hospitals"
+     }
+    ],
+    "etymology": {
+     "text": "From בֵּית “house” + חוֹלִים “sick people, patients” (Wiktionary); it was common enough by 1778 to enter an Italian edition of Calepinus’s dictionary. Compare German Krankenhaus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Krankenhaus is built the same way: “house of the sick” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The second word is a plural (“the sick”), and the article goes on it: בֵּית הַחוֹלִים.",
+     "Plural: בָּתֵּי חוֹלִים."
+    ],
+    "subtleties": [
+     "Without the article, בְּבֵית חוֹלִים is “in hospital” (as a patient)."
+    ]
+   }
+  },
+  {
+   "id": "he:beit-mirkachat",
+   "lemma": "בֵּית מִרְקַחַת",
+   "pos": "NOUN",
+   "senses": [
+    "place.pharmacy"
+   ],
+   "gender": "MASC",
+   "translit": "beit mirkachat",
+   "features": {
+    "spelling": "בית מרקחת",
+    "root": {
+     "none": "a compound of two words (בַּיִת + מִרְקַחַת): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בָּתֵּי מִרְקַחַת",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בֵּית מִרְקַחַת",
+    "N;SG;DEF": "בֵּית הַמִּרְקַחַת",
+    "N;PL;INDF": "בָּתֵּי מִרְקַחַת",
+    "N;PL;DEF": "בָּתֵּי הַמִּרְקַחַת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;INDF": "Wiktionary writes the compound with a maqaf (בָּתֵּי־מִרְקַחַת); the course writes the two words with a space, like its other compound nouns."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Prescriptions, plasters and the on-duty pharmacy at night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pharmacy, chemist’s",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.pharmacy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בֵּית הַמִּרְקַחַת פָּתוּחַ עַד עֶשֶׂר.",
+      "tr": "The pharmacy is open until ten.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בֵּית מִרְקַחַת לְיַד הַבַּיִת.",
+      "tr": "There is a pharmacy next to the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "בֵּית הַמִּרְקַחַת סָגוּר בַּלַּיְלָה.",
+      "tr": "The pharmacy is closed at night.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּית מִרְקַחַת תּוֹרָן",
+      "tr": "an on-duty pharmacy"
+     },
+     {
+      "text": "רוֹקֵחַ בְּבֵית מִרְקַחַת",
+      "tr": "a pharmacist in a pharmacy"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; the pharmacist is a רוֹקֵחַ (f. רוֹקַחַת).",
+    "etymology": {
+     "text": "From בֵּית “house of” + מִרְקַחַת (Wiktionary), the Biblical word for a mixed, perfumed ointment (Exodus 30:25).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Biblical perfumer who mixed the מִרְקַחַת was a רֹקֵחַ (Exodus 30:25) — the pharmacist is still called רוֹקֵחַ."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: בֵּית הַמִּרְקַחַת."
+    ],
+    "subtleties": [
+     "מִרְקַחַת alone today means “jam”: מִרְקַחַת תּוּתִים “strawberry jam”."
+    ]
+   }
+  },
+  {
+   "id": "he:bank",
+   "lemma": "בַּנְק",
+   "pos": "NOUN",
+   "senses": [
+    "place.bank"
+   ],
+   "gender": "MASC",
+   "translit": "bank",
+   "features": {
+    "spelling": "בנק",
+    "root": {
+     "none": "a loanword (Italian banca): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "בַּנְקִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בַּנְק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בַּנְקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בַּנְק",
+    "N;SG;DEF": "הַבַּנְק",
+    "N;PL;INDF": "בַּנְקִים",
+    "N;PL;DEF": "הַבַּנְקִים",
+    "N;SG;DEF;PFX": "בַּנְק",
+    "N;SG;CONST": "בַּנְק",
+    "N;PL;CONST": "בַּנְקֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Accounts, cash machines, queues on Sunday morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bank (money)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.bank"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַבָּא בַּבַּנְק.",
+      "tr": "Dad is at the bank.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּנְק סָגוּר הַיּוֹם.",
+      "tr": "The bank is closed today.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בַּנְק בַּכִּכָּר.",
+      "tr": "There is a bank in the square.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֶשְׁבּוֹן בַּנְק",
+      "tr": "a bank account"
+     },
+     {
+      "text": "בַּנְק דָּם",
+      "tr": "a blood bank"
+     },
+     {
+      "text": "בַּנְק הַפּוֹעֲלִים",
+      "tr": "Bank Hapoalim (“the Workers’ Bank”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Ultimately from Old Italian banca “counter, money-changer’s bench”, from Lombardic bank “bench”, from Proto-Germanic *bankiz (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek τράπεζα (“table”) and Italian banca (“bench”) both name the money-changer’s table."
+    ],
+    "pitfalls": [
+     "Only the money bank: a river bank is גָּדָה, a bench סַפְסָל.",
+     "“At the bank” = בַּבַּנְק."
+    ],
+    "subtleties": [
+     "In Israel banks are open on Sunday — the first working day of the week."
+    ]
+   }
+  },
+  {
+   "id": "he:doar",
+   "lemma": "דֹּאַר",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "place.postoffice",
+    "comm.mail"
+   ],
+   "gender": "MASC",
+   "translit": "do'ar",
+   "features": {
+    "spelling": "דואר",
+    "root": {
+     "none": "not derived from a verb root (the mail words דַּוָּר “postman” were built on it)"
+    },
+    "pattern": "קֹטֶל",
+    "plurals": {
+     "none": "no plural in use"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דֹּאַר"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "דֹּאַר",
+    "N;SG;DEF": "הַדֹּאַר",
+    "N;SG;DEF;PFX": "דֹּאַר",
+    "N;SG;CONST": "דֹּאַר"
+   },
+   "plene": {
+    "N;SG;INDF": "דואר",
+    "N;SG;DEF": "הדואר",
+    "N;SG;DEF;PFX": "דואר"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Parcels, stamps and a numbered queue ticket.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "post office",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.postoffice"
+     },
+     {
+      "id": "s2",
+      "def": "post, mail",
+      "register": [
+       "neutral"
+      ],
+      "concept": "comm.mail"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא בַּדֹּאַר.",
+      "tr": "She is at the post office.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדֹּאַר סָגוּר.",
+      "tr": "The post office is closed.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לְךָ דֹּאַר.",
+      "tr": "You (m.) have mail.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְנִיף דֹּאַר",
+      "tr": "a post office (branch)"
+     },
+     {
+      "text": "תֵּבַת דֹּאַר",
+      "tr": "a mailbox"
+     },
+     {
+      "text": "דֹּאַר אֶלֶקְטְרוֹנִי",
+      "tr": "e-mail"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סְנִיף הַדֹּאַר",
+      "register": "neutral",
+      "nuance": "the post-office branch — more precise than the bare הַדֹּאַר"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology for דֹּאַר “post”. The postman is a דַּוָּר and a stamp a בּוּל.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "E-mail is דֹּאַר אֶלֶקְטְרוֹנִי, shortened to דוא״ל."
+    ],
+    "pitfalls": [
+     "The א is silent and the patah is said: DO-ar.",
+     "No plural in use for the post office; several are סְנִיפֵי דֹּאַר."
+    ],
+    "subtleties": [
+     "One word for the service, the building and the letters: לָלֶכֶת לַדֹּאַר “to go to the post office”."
+    ]
+   }
+  },
+  {
+   "id": "he:tachana",
+   "lemma": "תַּחֲנָה",
+   "pos": "NOUN",
+   "senses": [
+    "place.station",
+    "abstract.stage"
+   ],
+   "gender": "FEM",
+   "translit": "tachana",
+   "features": {
+    "spelling": "תחנה",
+    "root": "ח נ ה",
+    "pattern": "תַּקְטָלָה",
+    "plurals": [
+     {
+      "form": "תַּחֲנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּחֲנַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּחֲנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תַּחֲנָה",
+    "N;SG;DEF": "הַתַּחֲנָה",
+    "N;PL;INDF": "תַּחֲנוֹת",
+    "N;PL;DEF": "הַתַּחֲנוֹת",
+    "N;SG;DEF;PFX": "תַּחֲנָה",
+    "N;SG;CONST": "תַּחֲנַת",
+    "N;PL;CONST": "תַּחֲנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַתַּחֲנָה → (בַּ / לַ)תַּחֲנָה; Wiktionary lists only the full definite form הַתַּחֲנָה."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Waiting for the bus at the stop; the busy central station.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "station; (bus) stop",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.station"
+     },
+     {
+      "id": "s2",
+      "def": "a stage, a phase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.stage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵם בַּתַּחֲנָה.",
+      "tr": "They are at the station.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ תַּחֲנָה לְיַד הַבַּיִת.",
+      "tr": "There is a stop next to the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת תַּחֲנָה חֲשׁוּבָה בַּחַיִּים.",
+      "tr": "This is an important stage in life.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּחֲנַת אוֹטוֹבּוּס",
+      "tr": "a bus stop"
+     },
+     {
+      "text": "תַּחֲנַת רַכֶּבֶת",
+      "tr": "a train station"
+     },
+     {
+      "text": "הַתַּחֲנָה הַמֶּרְכָּזִית",
+      "tr": "the central bus station"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use.",
+    "etymology": {
+     "text": "Revived from a reading of the Biblical hapax תַּחֲנֹתִי (2 Kings 6:8) as “camping place, stopping place”, from the root ח־נ־ה (compare חָנָה “to camp; to park”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word was revived from a single Biblical verse (Wiktionary); a rival coinage, תַּחֲנוּת, did not catch on."
+    ],
+    "pitfalls": [
+     "One word for a big station and a small stop.",
+     "Before another noun it becomes תַּחֲנַת: תַּחֲנַת רַכֶּבֶת."
+    ],
+    "subtleties": [
+     "The root ח־נ־ה also gives חֲנָיָה “parking” and מַחֲנֶה “camp”."
+    ]
+   }
+  },
+  {
+   "id": "he:sde-teufa",
+   "lemma": "שְׂדֵה תְּעוּפָה",
+   "pos": "NOUN",
+   "senses": [
+    "place.airport"
+   ],
+   "gender": "MASC",
+   "translit": "sde te'ufa",
+   "features": {
+    "spelling": "שדה תעופה",
+    "root": {
+     "none": "a compound of two words (שָׂדֶה + תְּעוּפָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "שְׂדוֹת תְּעוּפָה",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שְׂדֵה תְּעוּפָה",
+    "N;SG;DEF": "שְׂדֵה הַתְּעוּפָה",
+    "N;PL;INDF": "שְׂדוֹת תְּעוּפָה",
+    "N;PL;DEF": "שְׂדוֹת הַתְּעוּפָה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Departures, security checks and long hugs at Arrivals.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "airport, airfield",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.airport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ בִּשְׂדֵה הַתְּעוּפָה.",
+      "tr": "We are at the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "שְׂדֵה הַתְּעוּפָה רָחוֹק מִכָּאן.",
+      "tr": "The airport is far from here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בָּאָרֶץ כַּמָּה שְׂדוֹת תְּעוּפָה.",
+      "tr": "There are several airports in the country.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִנְסֹעַ לִשְׂדֵה הַתְּעוּפָה",
+      "tr": "to go to the airport"
+     },
+     {
+      "text": "שְׂדֵה תְּעוּפָה בֵּינְלְאֻמִּי",
+      "tr": "an international airport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נְמַל תְּעוּפָה",
+      "register": "formal",
+      "nuance": "“flight harbour” — the official term: נְמַל הַתְּעוּפָה בֶּן גּוּרְיוֹן"
+     },
+     {
+      "word": "נתב״ג",
+      "register": "colloquial",
+      "nuance": "the abbreviation of נְמַל הַתְּעוּפָה בֶּן גּוּרְיוֹן, Israel’s main airport"
+     }
+    ],
+    "etymology": {
+     "text": "Literally “flight field”: שְׂדֵה, the construct form of שָׂדֶה “field”, + תְּעוּפָה “flight” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Flughafen is a “flight harbour”, like the official נְמַל תְּעוּפָה; English airfield is a “flight field”, like שְׂדֵה תְּעוּפָה."
+    ],
+    "pitfalls": [
+     "The article goes on the second word: שְׂדֵה הַתְּעוּפָה; “at the airport” = בִּשְׂדֵה הַתְּעוּפָה (בְּ before a shva becomes בִּ)."
+    ],
+    "subtleties": [
+     "The ש of שָׂדֶה is a שׂ (s)."
+    ]
+   }
+  },
+  {
+   "id": "he:rechov",
+   "lemma": "רְחוֹב",
+   "pos": "NOUN",
+   "senses": [
+    "place.street",
+    "place.square"
+   ],
+   "gender": "MASC",
+   "translit": "rechov",
+   "features": {
+    "spelling": "רחוב",
+    "root": "ר ח ב",
+    "pattern": "קְטוֹל",
+    "plurals": [
+     {
+      "form": "רְחוֹבוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רְחוֹב"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רְחוֹבוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "רְחוֹב",
+    "N;SG;DEF": "הָרְחוֹב",
+    "N;PL;INDF": "רְחוֹבוֹת",
+    "N;PL;DEF": "הָרְחוֹבוֹת",
+    "N;SG;DEF;PFX": "רְחוֹב",
+    "N;SG;CONST": "רְחוֹב",
+    "N;PL;CONST": "רְחוֹבוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "place.square",
+     "axis": "period",
+     "value": "Biblical: an open square in a town"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הָרְחוֹב → (בַּ / לַ)רְחוֹב; Wiktionary lists only the full definite form הָרְחוֹב."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Addresses, traffic and children playing in the street.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "street",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.street"
+     },
+     {
+      "id": "s2",
+      "def": "an open square (in old towns, Biblical)",
+      "register": [
+       "archaic"
+      ],
+      "concept": "place.square"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים בָּרְחוֹב.",
+      "tr": "The children are in the street.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיזֶה רְחוֹב זֶה?",
+      "tr": "Which street is this?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּיִת שֶׁלִּי בִּרְחוֹב הֶרְצְל.",
+      "tr": "My house is on Herzl Street.",
+      "register": "neutral",
+      "context": "address",
+      "sense": "s1"
+     },
+     {
+      "text": "כִּי בָרְחוֹב נָלִין.",
+      "tr": "For we will spend the night in the square. (Genesis 19:2)",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s2"
+     },
+     {
+      "text": "וַיֵּאָסְפוּ כָל הָעָם כְּאִישׁ אֶחָד אֶל הָרְחוֹב אֲשֶׁר לִפְנֵי שַׁעַר הַמָּיִם.",
+      "tr": "And all the people gathered as one man into the square before the Water Gate. (Nehemiah 8:1)",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רְחוֹב רָאשִׁי",
+      "tr": "a main street"
+     },
+     {
+      "text": "שֵׁם רְחוֹב",
+      "tr": "a street name"
+     },
+     {
+      "text": "בִּרְחוֹב …",
+      "tr": "on … Street"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שְׂדֵרָה",
+      "register": "neutral",
+      "nuance": "an avenue, a boulevard (שְׂדֵרוֹת רוֹטְשִׁילְד)"
+     },
+     {
+      "word": "סִמְטָה",
+      "register": "neutral",
+      "nuance": "an alley, a lane"
+     }
+    ],
+    "etymology": {
+     "text": "From the root of רָחַב “to be wide”, since it stood out in a town by being open and wide; Modern Hebrew shifted the meaning to “street” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The town of Rehovot (רְחוֹבוֹת) takes its name from the “wide places” of Genesis 26:22."
+    ],
+    "pitfalls": [
+     "With the article the ר takes a qamats: הָרְחוֹב; “in the street” = בָּרְחוֹב.",
+     "Addresses: בִּרְחוֹב יָפוֹ “on Jaffa Street”."
+    ],
+    "subtleties": [
+     "In the Bible a רְחוֹב was an open square where markets and trials were held (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "he:kikar",
+   "lemma": "כִּכָּר",
+   "pos": "NOUN",
+   "senses": [
+    "place.square",
+    "tr.roundabout",
+    "food.loaf"
+   ],
+   "gender": "FEM",
+   "translit": "kikar",
+   "features": {
+    "spelling": "כיכר",
+    "root": "כ כ ר",
+    "pattern": "קִטָּל",
+    "plurals": [
+     {
+      "form": "כִּכָּרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "כִּכְּרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s3"
+      ],
+      "note": "loaves: כִּכְּרוֹת לֶחֶם"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כִּכַּר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כִּכְּרוֹת"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "כִּכַּר",
+      "senses": [
+       "s3"
+      ],
+      "note": "almost always in the construct: כִּכַּר לֶחֶם “a loaf of bread”"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "כִּכָּר",
+    "N;SG;DEF": "הַכִּכָּר",
+    "N;PL;INDF": "כִּכָּרוֹת",
+    "N;PL;DEF": "הַכִּכָּרוֹת",
+    "N;SG;DEF;PFX": "כִּכָּר",
+    "N;SG;CONST": "כִּכַּר",
+    "N;PL;CONST": "כִּכְּרוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "כיכר",
+    "N;SG;DEF": "הכיכר",
+    "N;PL;INDF": "כיכרות",
+    "N;PL;DEF": "הכיכרות",
+    "N;SG;DEF;PFX": "כיכר",
+    "N;SG;CONST": "כיכר",
+    "N;PL;CONST": "כיכרות"
+   },
+   "contrasts": [
+    {
+     "concept": "place.square",
+     "axis": "period",
+     "value": "modern: a square, a plaza"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַכִּכָּר → (בַּ / לַ)כִּכָּר; Wiktionary lists only the full definite form הַכִּכָּר."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fountains, demonstrations, cafés — and roundabouts on every road.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "square, plaza",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.square"
+     },
+     {
+      "id": "s2",
+      "def": "roundabout, traffic circle",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.roundabout"
+     },
+     {
+      "id": "s3",
+      "def": "a loaf (כִּכַּר לֶחֶם); a talent (an old weight)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.loaf"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ הַרְבֵּה אֲנָשִׁים בַּכִּכָּר.",
+      "tr": "There are many people in the square.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּנְק בַּכִּכָּר.",
+      "tr": "The bank is in the square.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּכִּכָּר הַשְּׁנִיָּה, יָמִינָה.",
+      "tr": "At the second roundabout, (turn) right.",
+      "register": "neutral",
+      "context": "driving",
+      "sense": "s2"
+     },
+     {
+      "text": "קָנִיתִי כִּכַּר לֶחֶם.",
+      "tr": "I bought a loaf of bread.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כִּכַּר הָעִיר",
+      "tr": "the town square"
+     },
+     {
+      "text": "כִּכַּר רַבִּין",
+      "tr": "Rabin Square (Tel Aviv)"
+     },
+     {
+      "text": "כִּכַּר לֶחֶם",
+      "tr": "a loaf of bread"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "רַחֲבָה",
+      "register": "neutral",
+      "nuance": "an open plaza, a forecourt (רַחֲבַת הַכֹּתֶל)"
+     }
+    ],
+    "etymology": {
+     "text": "Compare כִּרְכָּר and Aramaic כַּכַּר (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Bible כִּכָּר is also a “talent” of silver or gold, a weight of 30–60 kg (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Feminine: כִּכָּר גְּדוֹלָה.",
+     "Written כיכר in full spelling."
+    ],
+    "subtleties": [
+     "When you drive, כִּכָּר is a roundabout."
+    ]
+   }
+  },
+  {
+   "id": "he:park",
+   "lemma": "פַּארְק",
+   "pos": "NOUN",
+   "senses": [
+    "place.park"
+   ],
+   "gender": "MASC",
+   "translit": "park",
+   "features": {
+    "spelling": "פארק",
+    "root": {
+     "none": "a loanword (English park): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "פַּארְקִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פַּארְק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פַּארְקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "פַּארְק",
+    "N;SG;DEF": "הַפַּארְק",
+    "N;PL;INDF": "פַּארְקִים",
+    "N;PL;DEF": "הַפַּארְקִים",
+    "N;SG;DEF;PFX": "פַּארְק",
+    "N;SG;CONST": "פַּארְק",
+    "N;PL;CONST": "פַּארְקֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Lawns, picnics and bicycles on a Saturday.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "park",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.park"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים בַּפַּארְק.",
+      "tr": "The children are in the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "פַּארְק הַיַּרְקוֹן גָּדוֹל מְאוֹד.",
+      "tr": "Yarkon Park is very big.",
+      "register": "neutral",
+      "context": "Tel Aviv",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ פַּארְק לְיַד הַבַּיִת.",
+      "tr": "There is a park next to the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פַּארְק לְאֻמִּי",
+      "tr": "a national park"
+     },
+     {
+      "text": "פַּארְק שַׁעֲשׁוּעִים",
+      "tr": "an amusement park"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גַּן צִבּוּרִי",
+      "register": "neutral",
+      "nuance": "a public garden — the older Hebrew term"
+     },
+     {
+      "word": "גִּנָּה",
+      "register": "neutral",
+      "nuance": "a small neighbourhood park or garden"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from English park (Wiktionary has no Hebrew entry for it).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Park, Greek πάρκο, Russian парк, Turkish park — the same word in every language you know."
+    ],
+    "pitfalls": [
+     "The א only marks the a: PARK, one syllable.",
+     "Plural פַּארְקִים."
+    ],
+    "subtleties": [
+     "A small park in the neighbourhood, with swings, is a גִּנָּה or גִּנַּת שַׁעֲשׁוּעִים."
+    ]
+   }
+  },
+  {
+   "id": "he:ir",
+   "lemma": "עִיר",
+   "pos": "NOUN",
+   "senses": [
+    "place.city"
+   ],
+   "gender": "FEM",
+   "translit": "ir",
+   "features": {
+    "spelling": "עיר",
+    "root": {
+     "none": "a primary noun with no verb root; the plural עָרִים comes from an old form עָר"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "עָרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עִיר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עָרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עִיר",
+    "N;SG;DEF": "הָעִיר",
+    "N;PL;INDF": "עָרִים",
+    "N;PL;DEF": "הֶעָרִים",
+    "N;SG;DEF;PFX": "עִיר",
+    "N;SG;CONST": "עִיר",
+    "N;PL;CONST": "עָרֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הָעִיר → (בַּ / לַ)עִיר; Wiktionary lists only the full definite form הָעִיר.",
+     "N;PL;DEF": "Before an unstressed עָ the article is הֶ: הֶעָרִים (so in the Bible, e.g. Numbers 35:13); Wiktionary’s generated table gives הָעָרִים."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Busy streets, buses and lights — the city.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "city, town",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.city"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבַּיִת שֶׁלָּנוּ בָּעִיר.",
+      "tr": "Our house is in the city.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "יְרוּשָׁלַיִם עִיר עַתִּיקָה.",
+      "tr": "Jerusalem is an ancient city.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ בָּאָרֶץ הַרְבֵּה עָרִים.",
+      "tr": "There are many cities in the country.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֶרְכַּז הָעִיר",
+      "tr": "the city centre"
+     },
+     {
+      "text": "הָעִיר הָעַתִּיקָה",
+      "tr": "the Old City"
+     },
+     {
+      "text": "עִיר הַבִּירָה",
+      "tr": "the capital city"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כְּרַךְ",
+      "register": "literary",
+      "nuance": "a big city, a metropolis"
+     },
+     {
+      "word": "עֲיָרָה",
+      "register": "neutral",
+      "nuance": "a small town; the shtetl"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Ugaritic ʿr “city” and perhaps Sumerian iri, uru “city”; the plural comes from an old word עָר of the same meaning (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The plural עָרִים comes from a different, old word, עָר (Wiktionary) — as if English “town” had the plural “cities”."
+    ],
+    "pitfalls": [
+     "Feminine without a feminine ending: עִיר גְּדוֹלָה.",
+     "Irregular plural עָרִים; with the article הֶעָרִים."
+    ],
+    "subtleties": [
+     "With the article: הָעִיר; “in the city” = בָּעִיר."
+    ]
+   }
+  },
+  {
+   "id": "he:kfar",
+   "lemma": "כְּפָר",
+   "pos": "NOUN",
+   "senses": [
+    "place.village"
+   ],
+   "gender": "MASC",
+   "translit": "kfar",
+   "features": {
+    "spelling": "כפר",
+    "root": "כ פ ר",
+    "pattern": "קְטָל",
+    "plurals": [
+     {
+      "form": "כְּפָרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כְּפַר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כְּפָרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כְּפָר",
+    "N;SG;DEF": "הַכְּפָר",
+    "N;PL;INDF": "כְּפָרִים",
+    "N;PL;DEF": "הַכְּפָרִים",
+    "N;SG;DEF;PFX": "כְּפָר",
+    "N;SG;CONST": "כְּפַר",
+    "N;PL;CONST": "כְּפָרֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַכְּפָר → (בַּ / לַ)כְּפָר; Wiktionary lists only the full definite form הַכְּפָר."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Quiet hills, orchards and a small grocery.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "village",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.village"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סָבְתָא בַּכְּפָר.",
+      "tr": "Grandma is in the village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכְּפָר קָטָן וְיָפֶה.",
+      "tr": "The village is small and pretty.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ הַרְבֵּה כְּפָרִים בַּגָּלִיל.",
+      "tr": "There are many villages in the Galilee.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּפַר נֹעַר",
+      "tr": "a youth village (boarding school)"
+     },
+     {
+      "text": "כְּפָר עֲרָבִי",
+      "tr": "an Arab village"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מוֹשָׁב",
+      "register": "neutral",
+      "nuance": "a farming village of family farms"
+     },
+     {
+      "word": "קִבּוּץ",
+      "register": "neutral",
+      "nuance": "a collective settlement"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic כַּפְרָא (kap̄rā) “village, open town”, from Akkadian kapru “farm, village”; compare Arabic كَفْر (kafr) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Capernaum is כְּפַר נַחוּם, “Nahum’s village”; Arabic place names with Kafr (كَفْر) use the same word."
+    ],
+    "pitfalls": [
+     "After בְּ the כ loses its dot: בִּכְפָר (bichfar) “in a village”.",
+     "Before another noun: כְּפַר (כְּפַר סָבָא)."
+    ],
+    "subtleties": [
+     "Many place names begin with כְּפַר: כְּפַר סָבָא, כְּפַר תָּבוֹר."
+    ]
+   }
+  },
+  {
+   "id": "he:erets",
+   "lemma": "אֶרֶץ",
+   "pos": "NOUN",
+   "senses": [
+    "place.country",
+    "nature.ground"
+   ],
+   "gender": "FEM",
+   "translit": "erets",
+   "features": {
+    "spelling": "ארץ",
+    "root": "א ר ץ",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "אֲרָצוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ],
+      "note": "הָאָרֶץ “Israel” and “the ground” have no plural"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֶרֶץ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַרְצוֹת"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "הָאָרֶץ",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: the Land (Israel)"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "אֶרֶץ",
+    "N;SG;DEF": "הָאָרֶץ",
+    "N;PL;INDF": "אֲרָצוֹת",
+    "N;PL;DEF": "הָאֲרָצוֹת",
+    "N;SG;DEF;PFX": "אָרֶץ",
+    "N;SG;CONST": "אֶרֶץ",
+    "N;PL;CONST": "אַרְצוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "place.country",
+     "axis": "land or state",
+     "value": "a land, a country (הָאָרֶץ = Israel)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הָאָרֶץ → (בַּ / לַ)אָרֶץ; Wiktionary lists only the full definite form הָאָרֶץ."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A land, a country — and, with the article, Israel itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "country, land",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.country"
+     },
+     {
+      "id": "s2",
+      "def": "הָאָרֶץ: Israel (the Land)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "earth, the ground",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.ground"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיזוֹ אֶרֶץ יָפָה!",
+      "tr": "What a beautiful country!",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "יָוָן אֶרֶץ יָפָה.",
+      "tr": "Greece is a beautiful country.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא גָּר בָּאָרֶץ.",
+      "tr": "He lives in Israel.",
+      "register": "neutral",
+      "context": "Israel",
+      "sense": "s2"
+     },
+     {
+      "text": "הַסֵּפֶר נָפַל לָאָרֶץ.",
+      "tr": "The book fell to the ground.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֶרֶץ יִשְׂרָאֵל",
+      "tr": "the Land of Israel"
+     },
+     {
+      "text": "בָּאָרֶץ",
+      "tr": "in Israel (“in the Land”)"
+     },
+     {
+      "text": "חוּץ לָאָרֶץ",
+      "tr": "abroad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְדִינָה",
+      "register": "neutral",
+      "nuance": "a state — a country as a political unit"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔarṣ́- (Wiktionary); cognate with Arabic أَرْض (ʔarḍ) “earth, land”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Abroad is חוּ״ל = חוּץ לָאָרֶץ, “outside the Land”.",
+     "Arabic أَرْض (ʔarḍ) is the same word.",
+     "הָאָרֶץ (“the Land”) is the name of one of Israel’s oldest daily newspapers."
+    ],
+    "pitfalls": [
+     "Feminine: אֶרֶץ יָפָה.",
+     "With the article the vowels change: הָאָרֶץ (ha-A-rets); “in the Land” = בָּאָרֶץ."
+    ],
+    "subtleties": [
+     "הָאָרֶץ alone usually means Israel: בָּאָרֶץ “in Israel”, חוּץ לָאָרֶץ “abroad”."
+    ]
+   }
+  },
+  {
+   "id": "he:medina",
+   "lemma": "מְדִינָה",
+   "pos": "NOUN",
+   "senses": [
+    "place.country",
+    "pol.federalstate"
+   ],
+   "gender": "FEM",
+   "translit": "medina",
+   "features": {
+    "spelling": "מדינה",
+    "root": "ד י ן",
+    "pattern": {
+     "none": "borrowed from Aramaic (מְדִינְתָּא): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "מְדִינוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְדִינַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְדִינוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מְדִינָה",
+    "N;SG;DEF": "הַמְּדִינָה",
+    "N;PL;INDF": "מְדִינוֹת",
+    "N;PL;DEF": "הַמְּדִינוֹת",
+    "N;SG;CONST": "מְדִינַת",
+    "N;PL;CONST": "מְדִינוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "place.country",
+     "axis": "land or state",
+     "value": "a state, the political unit"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flags, borders, passports — the state.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "state, country (a sovereign state)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.country"
+     },
+     {
+      "id": "s2",
+      "def": "a state of a federation",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.federalstate"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מֵאֵיזוֹ מְדִינָה אַתָּה?",
+      "tr": "Which country are you (m.) from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "יִשְׂרָאֵל מְדִינָה קְטַנָּה.",
+      "tr": "Israel is a small country.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "קָלִיפוֹרְנְיָה הִיא מְדִינָה בְּאַרְצוֹת הַבְּרִית.",
+      "tr": "California is a state in the United States.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְדִינַת יִשְׂרָאֵל",
+      "tr": "the State of Israel"
+     },
+     {
+      "text": "רֹאשׁ מְדִינָה",
+      "tr": "a head of state"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֶרֶץ",
+      "register": "neutral",
+      "nuance": "a land, a country (also: the earth); הָאָרֶץ is Israel"
+     }
+    ],
+    "etymology": {
+     "text": "Likely borrowed from Aramaic מְדִינְתָּא (məḏīntā), from the root of דין “to judge” — the place where judgement is given; cognate with Arabic مَدِينَة (madīna) “city” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Medina in Arabia (الْمَدِينَة, “the city”) carries the same word (Wiktionary: cognate)."
+    ],
+    "pitfalls": [
+     "A false friend across the course: Arabic مَدِينَة (madīna) is a “city”, Hebrew מְדִינָה a “state”.",
+     "Before another noun it becomes מְדִינַת: מְדִינַת יִשְׂרָאֵל."
+    ],
+    "subtleties": [
+     "מְדִינָה is the political state; אֶרֶץ is the land."
+    ]
+   }
+  },
+  {
+   "id": "he:habayta",
+   "lemma": "הַבַּיְתָה",
+   "pos": "ADV",
+   "senses": [
+    "place.home"
+   ],
+   "translit": "habayta",
+   "role": "“home(wards), to the house” — one word, with no לְ: הוֹלֵךְ הַבַּיְתָה “goes home”, חוֹזֵר הַבַּיְתָה. (At home = בַּבַּיִת.)",
+   "features": {
+    "spelling": "הביתה",
+    "derivedFrom": "בַּיִת “house” + the direction ending ־ָה (with the article)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.home",
+     "axis": "place or direction",
+     "value": "the direction: (to) home (הַבַּיְתָה)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The end of the day: going home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "home, homewards, to (one’s) home",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.home"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי הוֹלֵךְ הַבַּיְתָה.",
+      "tr": "I (m.) am going home.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "בּוֹאוּ הַבַּיְתָה!",
+      "tr": "Come home! (to several people)",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתָּה חוֹזֵר הַבַּיְתָה?",
+      "tr": "When are you (m.) coming home?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הוֹלֵךְ הַבַּיְתָה",
+      "tr": "goes home"
+     },
+     {
+      "text": "חוֹזֵר הַבַּיְתָה",
+      "tr": "comes back home"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לַבַּיִת",
+      "register": "neutral",
+      "nuance": "“to the house” — the same with the preposition; הַבַּיְתָה is the usual word for going home"
+     }
+    ],
+    "etymology": {
+     "text": "הַבַּיִת “the house” + the old ending ־ָה “towards” (Wiktionary). The same ending is in שְׂמֹאלָה “to the left”, יָמִינָה “to the right” and הַחוּצָה “outside”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ending ־ָה “towards” is a fossil of an old case ending, still alive in a few words: צָפוֹנָה “northwards”, יָמִינָה, הַבַּיְתָה."
+    ],
+    "pitfalls": [
+     "No לְ before it: הוֹלֵךְ הַבַּיְתָה (not *לְהַבַּיְתָה). Being at home is בַּבַּיִת."
+    ],
+    "subtleties": [
+     "The ending ־ָה is unstressed: habáyta."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

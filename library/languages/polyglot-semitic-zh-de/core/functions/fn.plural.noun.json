@@ -1,0 +1,12 @@
+{
+ "id": "fn.plural.noun",
+ "title": "More than one: plural of nouns",
+ "category": "morphology",
+ "level": "A1",
+ "after": [
+  "fn.definite"
+ ],
+ "tags": [
+  "Number"
+ ]
+}

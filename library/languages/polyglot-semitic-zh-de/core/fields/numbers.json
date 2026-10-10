@@ -1,0 +1,376 @@
+{
+ "field": "numbers",
+ "title": "Numbers",
+ "subgroups": [
+  {
+   "id": "num",
+   "title": "Numbers"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "Cardinal numbers — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "num.0",
+   "gloss": "zero",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "num.1",
+   "gloss": "one",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "num.2",
+   "gloss": "two",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "num.3",
+   "gloss": "three",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "num.4",
+   "gloss": "four",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "num.5",
+   "gloss": "five",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "num.6",
+   "gloss": "six",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "num.7",
+   "gloss": "seven",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "num.8",
+   "gloss": "eight",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "num.9",
+   "gloss": "nine",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "num.10",
+   "gloss": "ten",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "num.11",
+   "gloss": "eleven",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "num.12",
+   "gloss": "twelve",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "num.13",
+   "gloss": "thirteen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "num.14",
+   "gloss": "fourteen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "num.15",
+   "gloss": "fifteen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "num.16",
+   "gloss": "sixteen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "num.17",
+   "gloss": "seventeen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "num.18",
+   "gloss": "eighteen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "num.19",
+   "gloss": "nineteen",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "num.20",
+   "gloss": "twenty",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "num.30",
+   "gloss": "thirty",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "num.40",
+   "gloss": "forty",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "num.50",
+   "gloss": "fifty",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "num.60",
+   "gloss": "sixty",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "num.70",
+   "gloss": "seventy",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "num.80",
+   "gloss": "eighty",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "num.90",
+   "gloss": "ninety",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 28
+  },
+  {
+   "id": "num.100",
+   "gloss": "a hundred",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 29
+  },
+  {
+   "id": "num.1000",
+   "gloss": "a thousand",
+   "subgroup": "num",
+   "tier": 1,
+   "rank": 30
+  },
+  {
+   "id": "num.ord.1",
+   "gloss": "first",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.2",
+   "gloss": "second",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.3",
+   "gloss": "third",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.4",
+   "gloss": "fourth",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.5",
+   "gloss": "fifth",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.6",
+   "gloss": "sixth",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.7",
+   "gloss": "seventh",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.8",
+   "gloss": "eighth",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.9",
+   "gloss": "ninth",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.10",
+   "gloss": "tenth",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.ord.last",
+   "gloss": "last",
+   "tier": 1,
+   "rank": 41,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.half",
+   "gloss": "half",
+   "tier": 1,
+   "rank": 42,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.quarter",
+   "gloss": "quarter",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.200",
+   "gloss": "two hundred",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.500",
+   "gloss": "five hundred",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.10000",
+   "gloss": "ten thousand",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.100000",
+   "gloss": "a hundred thousand",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.1000000",
+   "gloss": "a million",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.third",
+   "gloss": "a third",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.percent",
+   "gloss": "percent",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "num.half.adj",
+   "gloss": "half (a half kilo)",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
+  }
+ ]
+}

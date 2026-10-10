@@ -1,0 +1,1164 @@
+{
+ "lexemes": [
+  {
+   "id": "he:aval",
+   "lemma": "אֲבָל",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.but",
+    "adv.truly"
+   ],
+   "prefix": false,
+   "translit": "aval",
+   "features": {
+    "spelling": "אבל"
+   },
+   "note": "Joins two clauses without changing their word order; a comma usually stands before it, as before German aber.",
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "period",
+     "value": "Biblical: “truly, alas”"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “but”: small, but beautiful.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "but",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.but"
+     },
+     {
+      "id": "s2",
+      "def": "truly, alas (Biblical)",
+      "register": [
+       "archaic"
+      ],
+      "concept": "adv.truly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבַּיִת קָטָן, אֲבָל הוּא יָפֶה.",
+      "tr": "The house is small, but it is beautiful.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי רוֹצֶה לָבוֹא, אֲבָל אֲנִי עָיֵף.",
+      "tr": "I want to come, but I’m tired.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲבָל לָמָּה?",
+      "tr": "But why?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲבָל אֲשֵׁמִים אֲנַחְנוּ עַל אָחִינוּ",
+      "tr": "we are truly guilty concerning our brother",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֲבָל לָמָּה?",
+      "tr": "but why?"
+     },
+     {
+      "text": "כֵּן, אֲבָל …",
+      "tr": "yes, but …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַךְ",
+      "register": "literary",
+      "nuance": "“but, yet”"
+     },
+     {
+      "word": "אוּלָם",
+      "register": "formal",
+      "nuance": "“however”"
+     },
+     {
+      "word": "אֶלָּא",
+      "register": "neutral",
+      "nuance": "“but rather” — after a negative: לֹא קָפֶה אֶלָּא תֵּה"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it files the word under the root א־ב־ל, the letters of אֵבֶל “mourning”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Genesis 42:21 אֲבָל still means “truly” (“we are truly guilty”); today it simply means “but”."
+    ],
+    "pitfalls": [
+     "After a negative, “not X but (rather) Y” is אֶלָּא, not אֲבָל: לֹא קָפֶה אֶלָּא תֵּה “not coffee but tea”."
+    ],
+    "subtleties": [
+     "It can open a sentence: אֲבָל לָמָּה? “But why?”"
+    ]
+   }
+  },
+  {
+   "id": "he:ki",
+   "lemma": "כִּי",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.because",
+    "conj.that",
+    "conj.when"
+   ],
+   "prefix": false,
+   "translit": "ki",
+   "features": {
+    "spelling": "כי"
+   },
+   "note": "“Because” + a clause (כִּי קַר “because it is cold”); before a noun use בִּגְלַל “because of” (בִּגְלַל הַקֹּר). In formal style כִּי also means “that”.",
+   "contrasts": [
+    {
+     "concept": "conj.that",
+     "axis": "register",
+     "value": "formal, after verbs of saying and knowing"
+    },
+    {
+     "concept": "conj.when",
+     "axis": "period",
+     "value": "Biblical"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday answer to לָמָּה? — כִּי …",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "because",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.because"
+     },
+     {
+      "id": "s2",
+      "def": "that (formal, after verbs of saying and knowing)",
+      "register": [
+       "formal"
+      ],
+      "concept": "conj.that"
+     },
+     {
+      "id": "s3",
+      "def": "when (Biblical)",
+      "register": [
+       "archaic"
+      ],
+      "concept": "conj.when"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתֶה מַיִם כִּי אֲנִי צָמֵא.",
+      "tr": "I drink water because I’m thirsty.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "לָמָּה אַתְּ לֹא בָּאָה? כִּי אֲנִי עֲיֵפָה.",
+      "tr": "Why aren’t you coming? Because I’m tired.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא אָמַר כִּי הוּא יָבוֹא מָחָר.",
+      "tr": "He said that he would come tomorrow.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s2"
+     },
+     {
+      "text": "וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב",
+      "tr": "and God saw the light, that it was good",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כִּי אֲנִי …",
+      "tr": "because I …"
+     },
+     {
+      "text": "רַק כִּי",
+      "tr": "just because"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב",
+      "tr": "and God saw the light, that it was good",
+      "kind": "quote",
+      "meaning": "כִּי in its sense “that”",
+      "register": "literary",
+      "source": "Genesis 1:4"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מִשּׁוּם שֶׁ…",
+      "register": "neutral",
+      "nuance": "“because” — a little more careful"
+     },
+     {
+      "word": "כֵּיוָן שֶׁ…",
+      "register": "formal",
+      "nuance": "“since, as”"
+     },
+     {
+      "word": "בִּגְלַל שֶׁ…",
+      "register": "colloquial",
+      "nuance": "“because” — very common in speech; purists prefer מִשּׁוּם שֶׁ"
+     },
+     {
+      "word": "מִפְּנֵי שֶׁ…",
+      "register": "formal",
+      "nuance": "“because”"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *kiyā (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Bible כִּי means “because”, “that”, “when” and “but rather” — one of the busiest words of Hebrew."
+    ],
+    "pitfalls": [
+     "כִּי + a clause, בִּגְלַל + a noun: כִּי קַר “because it’s cold”, בִּגְלַל הַקֹּר “because of the cold”.",
+     "Do not confuse it with the prefix כְּ “like, as”."
+    ],
+    "subtleties": [
+     "Writers often prefer מִשּׁוּם שֶׁ or כֵּיוָן שֶׁ, especially at the start of a sentence."
+    ]
+   }
+  },
+  {
+   "id": "he:lachen",
+   "lemma": "לָכֵן",
+   "pos": "ADV",
+   "senses": [
+    "conj.so"
+   ],
+   "translit": "lachen",
+   "features": {
+    "spelling": "לכן",
+    "derivedFrom": "לָ + כֵן “so”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "note": "“Therefore, so”: opens the result clause after a comma (X, לָכֵן Y); the word order after it does not change.",
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register",
+     "value": "neutral to formal: “therefore”"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The careful “so”: tired, therefore staying home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "so, therefore",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי עָיֵף, לָכֵן אֲנִי נִשְׁאָר בַּבַּיִת.",
+      "tr": "I’m tired, so I’m staying at home.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹנִית יְקָרָה, לָכֵן אֲנַחְנוּ נוֹסְעִים בְּאוֹטוֹבּוּס.",
+      "tr": "The taxi is expensive, so we go by bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "יָרַד גֶּשֶׁם, וְלָכֵן הַמִּשְׂחָק בֻּטַּל.",
+      "tr": "It rained, and therefore the game was cancelled.",
+      "register": "formal",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "וְלָכֵן",
+      "tr": "and therefore"
+     },
+     {
+      "text": "לָכֵן כְּדַאי …",
+      "tr": "so it is worth …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אָז",
+      "register": "colloquial",
+      "nuance": "“so” — the everyday word"
+     },
+     {
+      "word": "לְפִיכָךְ",
+      "register": "formal",
+      "nuance": "“consequently”"
+     },
+     {
+      "word": "עַל כֵּן",
+      "register": "literary",
+      "nuance": "“therefore”"
+     },
+     {
+      "word": "בִּגְלַל זֶה",
+      "register": "colloquial",
+      "nuance": "“because of that”"
+     }
+    ],
+    "etymology": {
+     "text": "Made of לְ (“to, for”) + כֵּן (“so, thus”); Wiktionary gives no etymology for the compound.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The prophets announce God’s judgment with לָכֵן: “לָכֵן כֹּה אָמַר ה׳” — “therefore thus says the LORD”."
+    ],
+    "pitfalls": [
+     "The cause comes first and לָכֵן opens the result: X, לָכֵן Y — the opposite order of כִּי (Y כִּי X).",
+     "Unlike German deshalb it does not move the verb: לָכֵן אֲנִי נִשְׁאָר (deshalb bleibe ich)."
+    ],
+    "subtleties": [
+     "In speech אָז is more usual; לָכֵן sounds more careful."
+    ]
+   }
+  },
+  {
+   "id": "he:az",
+   "lemma": "אָז",
+   "pos": "ADV",
+   "senses": [
+    "adv.then",
+    "conj.so",
+    "part.so"
+   ],
+   "translit": "az",
+   "features": {
+    "spelling": "אז",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "note": "“Then” (next in a story: וְאָז “and then”; at that time: אָז הָיִיתִי יֶלֶד) and, in speech, “so” (אֲנִי רָעֵב, אָז אֲנִי אוֹכֵל).",
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "use",
+     "value": "next in a story (וְאָז), or “at that time”"
+    },
+    {
+     "concept": "conj.so",
+     "axis": "register",
+     "value": "colloquial: “so”"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Telling a story — “and then …” — and the spoken “so”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "then: next, after that; at that time",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.then"
+     },
+     {
+      "id": "s2",
+      "def": "so, therefore (colloquial)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "conj.so"
+     },
+     {
+      "id": "s3",
+      "def": "so, well (opening a question or a topic)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "part.so"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אָכַלְנוּ, וְאָז הָלַכְנוּ לַיָּם.",
+      "tr": "We ate, and then we went to the beach.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "אָז הָיִיתִי יֶלֶד.",
+      "tr": "Back then I was a child.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי רָעֵב, אָז אֲנִי אוֹכֵל.",
+      "tr": "I’m hungry, so I’m eating.",
+      "register": "colloquial",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "קַר בַּחוּץ, אָז הַיְּלָדִים בַּבַּיִת.",
+      "tr": "It’s cold outside, so the children are at home.",
+      "register": "colloquial",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "אָז מָה עוֹשִׂים?",
+      "tr": "So what do we do?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "וְאָז",
+      "tr": "and then"
+     },
+     {
+      "text": "עַד אָז",
+      "tr": "until then"
+     },
+     {
+      "text": "מֵאָז",
+      "tr": "since then, since (lesson 15)"
+     },
+     {
+      "text": "אָז מָה?",
+      "tr": "so what?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אָז מָה?",
+      "tr": "so what?",
+      "kind": "colloquial",
+      "meaning": "so what? (it doesn’t matter)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אַחַר כָּךְ",
+      "register": "neutral",
+      "nuance": "“afterwards” — the next step in a sequence"
+     },
+     {
+      "word": "לָכֵן",
+      "register": "neutral",
+      "nuance": "“therefore” — more careful than אָז"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Aramaic אֱדַיִן (ʾĕḏáyin, “then, at that time”) and Arabic إِذ (ʔiḏ), إِذَا (ʔiḏā), إِذًا (ʔiḏan) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic إِذًا (iḏan) “so, therefore” is its cousin — and מֵאָז “since” (lesson 15) is just מִ + אָז, “from then”."
+    ],
+    "pitfalls": [
+     "In a story “then (next)” is usually וְאָז; “then = at that time” is אָז alone.",
+     "As “so” it belongs to speech; in writing use לָכֵן."
+    ],
+    "subtleties": [
+     "אָז opens questions in speech: אָז מָה? “so what?”."
+    ]
+   }
+  },
+  {
+   "id": "he:kshe",
+   "lemma": "כְּשֶׁ",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.when"
+   ],
+   "prefix": true,
+   "translit": "kshe-",
+   "features": {
+    "spelling": "כש"
+   },
+   "note": "Written onto the first word of its clause (כְּשֶׁאֲנִי, כְּשֶׁהוּא); like שֶׁ it doubles the next letter when it can (כְּשֶׁזֶּה), but not before א, ה, ח, ע, ר. The formal word is כַּאֲשֶׁר.",
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "period",
+     "value": "modern: the prefix כְּשֶׁ"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "When I’m tired, when it’s hot, when I was a child.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when (joining two clauses)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.when"
+     }
+    ],
+    "examples": [
+     {
+      "text": "כְּשֶׁאֲנִי עָיֵף, אֲנִי שׁוֹתֶה קָפֶה.",
+      "tr": "When I’m tired, I drink coffee.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "כְּשֶׁהָיִיתִי יֶלֶד, גַּרְנוּ בְּחֵיפָה.",
+      "tr": "When I was a child, we lived in Haifa.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "תִּתְקַשֵּׁר כְּשֶׁאַתָּה מַגִּיעַ.",
+      "tr": "Call when you arrive.",
+      "register": "colloquial",
+      "context": "phone",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּשֶׁאֲנִי …",
+      "tr": "when I …"
+     },
+     {
+      "text": "רַק כְּשֶׁ…",
+      "tr": "only when …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כַּאֲשֶׁר",
+      "register": "formal",
+      "nuance": "“when” — a separate word, in writing"
+     }
+    ],
+    "etymology": {
+     "text": "From כְּ־ (“like, as”) + שֶׁ־ (“that, which”); compare כַּאֲשֶׁר (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German needs two words, wenn and als (wenn ich müde bin, als ich ein Kind war); Hebrew has one, כְּשֶׁ."
+    ],
+    "pitfalls": [
+     "“When?” as a question is מָתַי; כְּשֶׁ only joins two clauses: כְּשֶׁהוּא בָּא “when he comes”.",
+     "It is written onto the next word: כְּשֶׁאֲנִי, never *כְּשֶׁ אֲנִי."
+    ],
+    "subtleties": [
+     "For a future event Hebrew uses the future after כְּשֶׁ: כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up” — unlike English and German."
+    ]
+   }
+  },
+  {
+   "id": "he:im-if",
+   "lemma": "אִם",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.if",
+    "conj.whether"
+   ],
+   "prefix": false,
+   "translit": "im",
+   "features": {
+    "spelling": "אם"
+   },
+   "note": "“If” + a clause; for a future event Hebrew puts the future after it (אִם יֵרֵד גֶּשֶׁם). Also “whether” in reported questions.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "If you’re thirsty, there’s water in the fridge.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "if",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.if"
+     },
+     {
+      "id": "s2",
+      "def": "whether (in a reported question)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.whether"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִם אַתָּה צָמֵא, יֵשׁ מַיִם בַּמְּקָרֵר.",
+      "tr": "If you’re thirsty, there’s water in the fridge.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אִם יֵרֵד גֶּשֶׁם, נִשָּׁאֵר בַּבַּיִת.",
+      "tr": "If it rains, we’ll stay at home.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא יוֹדֵעַ אִם הוּא בָּא.",
+      "tr": "I don’t know whether he is coming.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אִם כֵּן",
+      "tr": "if so"
+     },
+     {
+      "text": "גַּם אִם",
+      "tr": "even if"
+     },
+     {
+      "text": "רַק אִם",
+      "tr": "only if"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אִם אֵין אֲנִי לִי, מִי לִי?",
+      "tr": "if I am not for myself, who is for me?",
+      "kind": "quote",
+      "meaning": "Hillel’s question: take responsibility for yourself",
+      "register": "literary",
+      "source": "Pirkei Avot 1:14"
+     },
+     {
+      "text": "אִם כֵּן",
+      "tr": "if so",
+      "kind": "fixed expression",
+      "meaning": "if so, in that case",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בְּמִקְרֶה שֶׁ…",
+      "register": "formal",
+      "nuance": "“in case”"
+     },
+     {
+      "word": "לוּ / אִלּוּ",
+      "register": "literary",
+      "nuance": "“if” for an unreal condition (if I were …)"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hillel’s “אִם אֵין אֲנִי לִי, מִי לִי?” (Pirkei Avot 1:14) is one of the best-known Hebrew sentences."
+    ],
+    "pitfalls": [
+     "אִם “if”, עִם “with” and אֵם “mother”: the first two sound exactly the same (im)!",
+     "For a future event use the future after אִם: אִם יֵרֵד גֶּשֶׁם, not the present."
+    ],
+    "subtleties": [
+     "Like German ob, it also introduces a reported yes/no question: אֲנִי לֹא יוֹדֵעַ אִם … “I don’t know whether …”."
+    ]
+   }
+  },
+  {
+   "id": "he:she",
+   "lemma": "שֶׁ",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.that",
+    "pron.which"
+   ],
+   "prefix": true,
+   "translit": "she-",
+   "features": {
+    "spelling": "ש"
+   },
+   "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out, unlike English “that”. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
+   "contrasts": [
+    {
+     "concept": "conj.that",
+     "axis": "register",
+     "value": "everyday: the prefix שֶׁ"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The little letter that joins clauses: I’m glad that you’re here.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that (introducing a clause)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.that"
+     },
+     {
+      "id": "s2",
+      "def": "who, which, that (relative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.which"
+     },
+     {
+      "id": "s3",
+      "def": "after a preposition it makes a conjunction: לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה.",
+      "tr": "I’m glad that you’re here.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "טוֹב שֶׁאַתְּ בַּבַּיִת.",
+      "tr": "It’s good that you’re at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֵּפֶר שֶׁאֲנִי קוֹרֵא טוֹב מְאוֹד.",
+      "tr": "The book that I’m reading is very good.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s2"
+     },
+     {
+      "text": "לִפְנֵי שֶׁאַתָּה יוֹצֵא, תִּסְגֹּר אֶת הַחַלּוֹן.",
+      "tr": "Before you go out, close the window.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שָׂמֵחַ שֶׁ…",
+      "tr": "glad that …"
+     },
+     {
+      "text": "טוֹב שֶׁ…",
+      "tr": "it is good that …"
+     },
+     {
+      "text": "בָּרוּר שֶׁ…",
+      "tr": "it is clear that …, of course …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כִּי",
+      "register": "formal",
+      "nuance": "“that” after verbs of saying and knowing"
+     },
+     {
+      "word": "אֲשֶׁר",
+      "register": "literary",
+      "nuance": "“which, that, who”"
+     }
+    ],
+    "etymology": {
+     "text": "Likely a reduced form of the relativizer אֲשֶׁר (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One letter does the work of English that / which / who and of German dass and der, die, das."
+    ],
+    "pitfalls": [
+     "It doubles the next letter when it can: שֶׁזֶּה, שֶׁלֹּא — but not before א, ה, ח, ע, ר: שֶׁאֲנִי, שֶׁהוּא.",
+     "It is never left out: “I’m glad you’re here” = אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה."
+    ],
+    "subtleties": [
+     "After a preposition it makes a conjunction: לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, לַמְרוֹת שֶׁ “although”, מִשּׁוּם שֶׁ “because”."
+    ]
+   }
+  },
+  {
+   "id": "he:lamrot",
+   "lemma": "לַמְרוֹת",
+   "pos": "ADP",
+   "senses": [
+    "conj.although",
+    "prep.despite"
+   ],
+   "prefix": false,
+   "translit": "lamrot",
+   "features": {
+    "spelling": "למרות",
+    "pronForms": {
+     "none": "not used with personal endings (לַמְרוֹת זֹאת “despite this”)"
+    }
+   },
+   "note": "“Despite” + a noun (לַמְרוֹת הַגֶּשֶׁם); “although” + a clause with שֶׁ: לַמְרוֹת שֶׁהוּא עָיֵף. In the sentence bank the שֶׁ is a separate word part, written onto the first word of the clause.",
+   "contrasts": [
+    {
+     "concept": "conj.although",
+     "axis": "register",
+     "value": "neutral (לַמְרוֹת שֶׁ…)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses לַמְרוֹת “despite, in spite of, notwithstanding, even though”; with שֶׁ before a clause (לַמְרוֹת שֶׁ…) it is the everyday Modern Hebrew “although” — “even though” in Wiktionary’s own glosses."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Going to work although tired; going out despite the rain.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "although (לַמְרוֹת שֶׁ + a clause)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.although"
+     },
+     {
+      "id": "s2",
+      "def": "despite, in spite of (+ a noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.despite"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא הוֹלֵךְ לָעֲבוֹדָה לַמְרוֹת שֶׁהוּא עָיֵף.",
+      "tr": "He goes to work although he is tired.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "לַמְרוֹת שֶׁהַבַּיִת יָשָׁן, הוּא יָפֶה.",
+      "tr": "Although the house is old, it is beautiful.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "לַמְרוֹת הַגֶּשֶׁם, יָצָאנוּ לְטַיֵּל.",
+      "tr": "Despite the rain, we went out for a walk.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לַמְרוֹת שֶׁ…",
+      "tr": "although …"
+     },
+     {
+      "text": "לַמְרוֹת זֹאת",
+      "tr": "nevertheless"
+     },
+     {
+      "text": "לַמְרוֹת הַכֹּל",
+      "tr": "despite everything"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לַמְרוֹת הַכֹּל",
+      "tr": "despite everything",
+      "kind": "fixed expression",
+      "meaning": "in spite of everything",
+      "register": "neutral"
+     },
+     {
+      "text": "לַמְרוֹת זֹאת",
+      "tr": "despite this",
+      "kind": "fixed expression",
+      "meaning": "nevertheless, still",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אַף עַל פִּי שֶׁ…",
+      "register": "formal",
+      "nuance": "“although” — more formal"
+     },
+     {
+      "word": "אַף שֶׁ…",
+      "register": "formal",
+      "nuance": "“although” — written style"
+     }
+    ],
+    "etymology": {
+     "text": "Contraction of לְהַמְרוֹת (l’hamrót), the infinitive of the hif‘il of מרה (“to rebel”) (Wiktionary) — literally “to defy”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “to defy” — compare German trotz, from Trotz “defiance”."
+    ],
+    "pitfalls": [
+     "Before a clause the שֶׁ is required: לַמְרוֹת שֶׁהוּא עָיֵף; before a noun there is none: לַמְרוֹת הַגֶּשֶׁם."
+    ],
+    "subtleties": [
+     "The clause with לַמְרוֹת שֶׁ can come first or second; when it comes first, a comma follows it."
+    ]
+   }
+  },
+  {
+   "id": "he:af-al-pi",
+   "lemma": "אַף עַל פִּי",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.although"
+   ],
+   "prefix": false,
+   "translit": "af al pi",
+   "features": {
+    "spelling": "אף על פי"
+   },
+   "note": "“Although” — with שֶׁ written onto the first word of the clause: אַף עַל פִּי שֶׁהוּא רָעֵב. More formal than לַמְרוֹת שֶׁ; often abbreviated אע״פ.",
+   "contrasts": [
+    {
+     "concept": "conj.although",
+     "axis": "register",
+     "value": "more formal (אַף עַל פִּי שֶׁ…)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The formal “although” — in books, news and careful speech.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "although (אַף עַל פִּי שֶׁ + a clause)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.although"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַף עַל פִּי שֶׁהוּא רָעֵב, הוּא לֹא אוֹכֵל.",
+      "tr": "Although he is hungry, he does not eat.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "אַף עַל פִּי שֶׁקָּשֶׁה, אֲנַחְנוּ מַמְשִׁיכִים.",
+      "tr": "Although it is hard, we carry on.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַף עַל פִּי שֶׁ…",
+      "tr": "although …"
+     },
+     {
+      "text": "אַף עַל פִּי כֵן",
+      "tr": "nevertheless"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אַף עַל פִּי כֵן",
+      "tr": "even so",
+      "kind": "fixed expression",
+      "meaning": "nevertheless, even so",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לַמְרוֹת שֶׁ…",
+      "register": "neutral",
+      "nuance": "“although” — the everyday word"
+     },
+     {
+      "word": "אַף שֶׁ…",
+      "register": "formal",
+      "nuance": "“although” — short, written"
+     },
+     {
+      "word": "אַף כִּי",
+      "register": "literary",
+      "nuance": "“although”"
+     }
+    ],
+    "etymology": {
+     "text": "From אַף (“even, also”) + עַל פִּי (“according to”); Wiktionary lists the phrase (“although, albeit”) without an etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In writing it is often shortened to אע״פ — Hebrew loves abbreviations with ״."
+    ],
+    "pitfalls": [
+     "Three words, and the שֶׁ goes onto the next word: אַף עַל פִּי שֶׁהוּא … — never *אַף עַל פִּי הוּא."
+    ],
+    "subtleties": [
+     "It sounds more formal than לַמְרוֹת שֶׁ."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

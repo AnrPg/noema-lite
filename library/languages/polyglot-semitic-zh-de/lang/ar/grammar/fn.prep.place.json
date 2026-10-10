@@ -1,0 +1,499 @@
+{
+ "function": "fn.prep.place",
+ "status": "realized",
+ "summary": "Where things are: عَلَى (on), تَحْتَ (under), بِجَانِبِ (next to), أَمَامَ (in front of), خَلْفَ / وَرَاءَ (behind), بَيْنَ … وَ… (between … and …), دَاخِلَ / خَارِجَ (inside / outside), all followed by the genitive; قَرِيبٌ مِنْ (near) and بَعِيدٌ عَنْ (far from) are adjectives that agree with the subject; عَلَى الْيَمِينِ / عَلَى الْيَسَارِ = on the right / on the left. The sentence needs no verb: الْكِتَابُ عَلَى الطَّاوِلَةِ (the book is on the table). For “there is a …” the place comes first and the indefinite noun after it: عَلَى الطَّاوِلَةِ كِتَابٌ. Most of these words are old nouns in the accusative (تَحْتَ “the place below”, أَمَامَ “the front”): that is why they end in -a, take a genitive, and take the pronoun endings — تَحْتَهُ, أَمَامَكَ, خَلْفِي. Unlike German, Arabic does not change the case for “where to?”.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "word",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "عَلَى",
+     "on",
+     "الْكِتَابُ عَلَى الطَّاوِلَةِ."
+    ],
+    [
+     "تَحْتَ",
+     "under",
+     "الْحَقِيبَةُ تَحْتَ السَّرِيرِ."
+    ],
+    [
+     "بِجَانِبِ",
+     "next to",
+     "الْمِصْبَاحُ بِجَانِبِ السَّرِيرِ."
+    ],
+    [
+     "أَمَامَ",
+     "in front of",
+     "الْمَدْرَسَةُ أَمَامَ الْبَيْتِ."
+    ],
+    [
+     "خَلْفَ / وَرَاءَ",
+     "behind",
+     "الْحَدِيقَةُ خَلْفَ الْبَيْتِ."
+    ],
+    [
+     "بَيْنَ … وَ…",
+     "between … and …",
+     "الْحَمَّامُ بَيْنَ غُرْفَةِ النَّوْمِ وَالْمَطْبَخِ."
+    ],
+    [
+     "دَاخِلَ / فِي الدَّاخِلِ",
+     "inside",
+     "الْمِفْتَاحُ دَاخِلَ الْحَقِيبَةِ. — الْأَطْفَالُ فِي الدَّاخِلِ."
+    ],
+    [
+     "خَارِجَ / فِي الْخَارِجِ",
+     "outside",
+     "أَبِي خَارِجَ الْبَيْتِ. — الْأَطْفَالُ فِي الْخَارِجِ."
+    ],
+    [
+     "قَرِيبٌ مِنْ",
+     "near",
+     "الْمَدْرَسَةُ قَرِيبَةٌ مِنَ الْبَيْتِ."
+    ],
+    [
+     "بَعِيدٌ عَنْ",
+     "far from",
+     "الْمَطَارُ بَعِيدٌ عَنِ الْمَدِينَةِ."
+    ],
+    [
+     "عَلَى الْيَمِينِ / عَلَى الْيَسَارِ",
+     "on the right / on the left",
+     "الْحَمَّامُ عَلَى الْيَمِينِ."
+    ]
+   ],
+   "caption": "A place word + a genitive noun; no verb “to be” is needed.",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "the … is on …",
+     "points": [
+      "الْكِتَابُ عَلَى الطَّاوِلَةِ.",
+      "the known thing first (definite)"
+     ]
+    },
+    {
+     "title": "there is a … on …",
+     "points": [
+      "عَلَى الطَّاوِلَةِ كِتَابٌ.",
+      "the place first, then the new thing (indefinite, nominative)",
+      "هَلْ عَلَى الطَّاوِلَةِ كِتَابٌ؟ — is there a book on the table?"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "me",
+    "you (m.)",
+    "you (f.)",
+    "him / it",
+    "her / it",
+    "us"
+   ],
+   "rows": [
+    [
+     "عَلَى",
+     "عَلَيَّ",
+     "عَلَيْكَ",
+     "عَلَيْكِ",
+     "عَلَيْهِ",
+     "عَلَيْهَا",
+     "عَلَيْنَا"
+    ],
+    [
+     "تَحْتَ",
+     "تَحْتِي",
+     "تَحْتَكَ",
+     "تَحْتَكِ",
+     "تَحْتَهُ",
+     "تَحْتَهَا",
+     "تَحْتَنَا"
+    ],
+    [
+     "أَمَامَ",
+     "أَمَامِي",
+     "أَمَامَكَ",
+     "أَمَامَكِ",
+     "أَمَامَهُ",
+     "أَمَامَهَا",
+     "أَمَامَنَا"
+    ],
+    [
+     "خَلْفَ",
+     "خَلْفِي",
+     "خَلْفَكَ",
+     "خَلْفَكِ",
+     "خَلْفَهُ",
+     "خَلْفَهَا",
+     "خَلْفَنَا"
+    ],
+    [
+     "وَرَاءَ",
+     "وَرَائِي",
+     "وَرَاءَكَ",
+     "وَرَاءَكِ",
+     "وَرَاءَهُ",
+     "وَرَاءَهَا",
+     "وَرَاءَنَا"
+    ],
+    [
+     "بِجَانِبِ",
+     "بِجَانِبِي",
+     "بِجَانِبِكَ",
+     "بِجَانِبِكِ",
+     "بِجَانِبِهِ",
+     "بِجَانِبِهَا",
+     "بِجَانِبِنَا"
+    ],
+    [
+     "بَيْنَ",
+     "بَيْنِي",
+     "بَيْنَكَ",
+     "بَيْنَكِ",
+     "بَيْنَهُ",
+     "بَيْنَهَا",
+     "بَيْنَنَا"
+    ]
+   ],
+   "caption": "The same endings as on nouns and on فِي, مِنْ … : عَلَى → عَلَيْ- (like إِلَى), وَرَاءَ → وَرَائِي (the hamza moves onto a yāʾ seat before -ī)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Near and far agree.",
+   "text": "قَرِيب and بَعِيد are adjectives: الْبَنْكُ قَرِيبٌ, but الْمَدْرَسَةُ قَرِيبَةٌ, الْقَرْيَةُ بَعِيدَةٌ. They take a preposition: قَرِيبٌ مِنْ …, بَعِيدٌ عَنْ … (or مِنْ)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "بَيْنَ with pronouns is repeated.",
+   "text": "بَيْنَ الْبَيْتِ وَالْمَدْرَسَةِ — but بَيْنِي وَبَيْنَكَ (between you and me): before a pronoun ending بَيْنَ is said again."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Inside / outside.",
+   "text": "With a noun: دَاخِلَ الْبَيْتِ, خَارِجَ الْبَيْتِ (+ genitive). Without a noun: فِي الدَّاخِلِ (inside, indoors), فِي الْخَارِجِ (outside — and also “abroad”)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Rooms are constructs.",
+   "text": "غُرْفَةُ النَّوْمِ (bedroom), غُرْفَةُ الْجُلُوسِ (living room): the case ending is on the first word — فِي غُرْفَةِ النَّوْمِ, بَيْنَ غُرْفَةِ النَّوْمِ وَالْمَطْبَخِ. German makes one word (Schlafzimmer), Arabic two.",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "No Wechselpräpositionen: German says auf dem Tisch (where?) but auf den Tisch (where to?); Arabic keeps عَلَى الطَّاوِلَةِ in both, always with the genitive."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which relation do I need: on, under, next to, in front, behind, between, inside, outside, near, far?",
+   "Is the thing known (the …)? → thing first: الْكِتَابُ عَلَى الطَّاوِلَةِ. New (a …, there is)? → place first: عَلَى الطَّاوِلَةِ كِتَابٌ.",
+   "Is the noun after the place word in the genitive (-i / -in)?",
+   "Near / far: does قَرِيب / بَعِيد agree with the subject, and did I add مِنْ / عَنْ?",
+   "Between: بَيْنَ X وَ Y — with pronouns repeat بَيْنَ.",
+   "A pronoun after the place word? → the ending: عَلَيْهِ, تَحْتَهَا, أَمَامَكَ."
+  ]
+ },
+ "traps": [
+  "*عَلَى الطَّاوِلَةُ → عَلَى الطَّاوِلَةِ (genitive).",
+  "*كِتَابٌ عَلَى الطَّاوِلَةِ for “there is a book on the table” — say عَلَى الطَّاوِلَةِ كِتَابٌ.",
+  "*الْمَدْرَسَةُ قَرِيبٌ → الْمَدْرَسَةُ قَرِيبَةٌ (agreement).",
+  "“Near the house” is قَرِيبٌ مِنَ الْبَيْتِ, not *قَرِيبٌ الْبَيْتَ.",
+  "تَحْتَ, أَمَامَ, خَلْفَ end in -a; بِجَانِبِ ends in -i (it contains بِـ).",
+  "*بَيْنَ أَنَا وَأَنْتَ → بَيْنِي وَبَيْنَكَ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:ala",
+   "ar:tahta",
+   "ar:bijanibi",
+   "ar:amama",
+   "ar:khalfa",
+   "ar:waraa",
+   "ar:bayna",
+   "ar:qarib",
+   "ar:baid",
+   "ar:dakhil",
+   "ar:kharij",
+   "ar:yasar",
+   "ar:yamin",
+   "ar:fi"
+  ]
+ },
+ "paradigmCells": [
+  "ADP;1;SG",
+  "ADP;2;SG;MASC",
+  "ADP;3;SG;MASC",
+  "ADP;3;SG;FEM",
+  "ADP;1;PL"
+ ],
+ "needs": {
+  "ADP": 3,
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.place"
+    ]
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "ADP",
+   "lemmas": [
+    "ar:ala",
+    "ar:tahta",
+    "ar:bijanibi",
+    "ar:amama",
+    "ar:khalfa",
+    "ar:waraa",
+    "ar:bayna"
+   ],
+   "cells": [
+    "ADP;1;SG",
+    "ADP;2;SG;MASC",
+    "ADP;2;SG;FEM",
+    "ADP;3;SG;MASC",
+    "ADP;3;SG;FEM",
+    "ADP;1;PL"
+   ],
+   "count": 10
+  },
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "lemmas": [
+    "ar:qarib",
+    "ar:baid"
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;INDF",
+    "ADJ;NOM;SG;FEM;INDF"
+   ],
+   "count": 4
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“The book is on the table.”",
+   "options": [
+    "الْكِتَابُ عَلَى الطَّاوِلَةِ.",
+    "الْكِتَابُ عَلَى الطَّاوِلَةُ.",
+    "الْكِتَابَ عَلَى الطَّاوِلَةِ."
+   ],
+   "answer": "الْكِتَابُ عَلَى الطَّاوِلَةِ.",
+   "why": "Subject nominative (-u), the noun after عَلَى genitive (-i); no verb."
+  },
+  {
+   "q": "“There is a bag under the bed.”",
+   "options": [
+    "تَحْتَ السَّرِيرِ حَقِيبَةٌ.",
+    "حَقِيبَةٌ تَحْتَ السَّرِيرِ.",
+    "الْحَقِيبَةُ تَحْتَ السَّرِيرُ."
+   ],
+   "answer": "تَحْتَ السَّرِيرِ حَقِيبَةٌ.",
+   "why": "An indefinite subject comes after the place: تَحْتَ السَّرِيرِ حَقِيبَةٌ."
+  },
+  {
+   "q": "“The school is near the house.”",
+   "options": [
+    "الْمَدْرَسَةُ قَرِيبَةٌ مِنَ الْبَيْتِ.",
+    "الْمَدْرَسَةُ قَرِيبٌ مِنَ الْبَيْتِ.",
+    "الْمَدْرَسَةُ قَرِيبَةٌ الْبَيْتَ."
+   ],
+   "answer": "الْمَدْرَسَةُ قَرِيبَةٌ مِنَ الْبَيْتِ.",
+   "why": "قَرِيب agrees with the feminine subject and takes مِنْ."
+  },
+  {
+   "q": "“between you and me”",
+   "options": [
+    "بَيْنِي وَبَيْنَكَ",
+    "بَيْنَ أَنَا وَأَنْتَ",
+    "بَيْنِي وَأَنْتَ"
+   ],
+   "answer": "بَيْنِي وَبَيْنَكَ",
+   "why": "With pronoun endings بَيْنَ is repeated."
+  },
+  {
+   "q": "“The bathroom is on the right.”",
+   "options": [
+    "الْحَمَّامُ عَلَى الْيَمِينِ.",
+    "الْحَمَّامُ فِي الْيَمِينُ.",
+    "الْحَمَّامُ يَمِينٌ."
+   ],
+   "answer": "الْحَمَّامُ عَلَى الْيَمِينِ.",
+   "why": "“On the right / left” is عَلَى الْيَمِينِ / عَلَى الْيَسَارِ."
+  },
+  {
+   "q": "“The key is inside the bag.”",
+   "options": [
+    "الْمِفْتَاحُ دَاخِلَ الْحَقِيبَةِ.",
+    "الْمِفْتَاحُ فِي الدَّاخِلِ الْحَقِيبَةِ.",
+    "الْمِفْتَاحُ دَاخِلُ الْحَقِيبَةُ."
+   ],
+   "answer": "الْمِفْتَاحُ دَاخِلَ الْحَقِيبَةِ.",
+   "why": "With a noun: دَاخِلَ (-a) + genitive; فِي الدَّاخِلِ stands alone."
+  },
+  {
+   "q": "German: auf dem Tisch (where?) / auf den Tisch (where to?). Arabic?",
+   "options": [
+    "عَلَى الطَّاوِلَةِ in both cases",
+    "عَلَى الطَّاوِلَةِ / عَلَى الطَّاوِلَةَ",
+    "عَلَى الطَّاوِلَةُ / عَلَى الطَّاوِلَةِ"
+   ],
+   "answer": "عَلَى الطَّاوِلَةِ in both cases",
+   "why": "Arabic has no “two-way” prepositions: the noun after عَلَى is always genitive."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.prep.place",
+   "note": "The Hebrew words are often the same Semitic words: עַל = عَلَى, תַּחַת = تَحْتَ, בֵּין = بَيْنَ; Hebrew לְיַד (“by the hand of”) is “next to” where Arabic says بِجَانِبِ (“at the side of”)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.place",
+   "note": "German two-way prepositions take the dative for “where?” (auf dem Tisch) and the accusative for “where to?” (auf den Tisch); Arabic always has the genitive: عَلَى الطَّاوِلَةِ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.place",
+   "note": "Chinese puts the place word after the noun — 桌子上 (table-on), 床下 (bed-under), 在桌子上; Arabic puts it before: عَلَى الطَّاوِلَةِ, تَحْتَ السَّرِيرِ."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.case",
+   "note": "Every place word is followed by the genitive (lesson 11)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "syn.copula",
+   "value": "absent-in-present"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek builds most place words from an adverb + preposition (πάνω σε, κάτω από, δίπλα σε, μπροστά από, πίσω από); Arabic uses one word + the genitive: عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian chooses the case after the place word (на столе / на стол, под столом); Arabic always uses the genitive: عَلَى الطَّاوِلَةِ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish encima de, debajo de, al lado de, delante de, detrás de are built like Arabic place words: a word + “of” — in Arabic the genitive: تَحْتَ الطَّاوِلَةِ."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English on, under, next to, in front of, behind match عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; for “there is a book on the table” Arabic starts with the place: عَلَى الطَّاوِلَةِ كِتَابٌ."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French sur, sous, à côté de, devant, derrière ↔ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; il y a un livre sur la table = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi place words follow the noun (मेज़ पर, मेज़ के नीचे); Arabic ones come first (عَلَى الطَّاوِلَةِ, تَحْتَ الطَّاوِلَةِ)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian place words are nouns linked to the next noun — رویِ میز, زیرِ میز, کنارِ میز (with the ezafe) —, just as Arabic تَحْتَ, أَمَامَ take a genitive."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi place words follow the noun (टेबलावर, on the table); Arabic ones come before it."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish says masanın üstünde (“at the table’s top”), with the place word after the noun; Arabic puts it first: عَلَى الطَّاوِلَةِ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese says 机の上に (“at the desk’s top”), after the noun; Arabic puts the place word first."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses postpositions with the genitive (pöydän alla, under the table) or cases (pöydällä, on the table); Arabic puts the place word first, with the genitive after it."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian postpositions follow the noun (az asztal alatt); Arabic place words come first (تَحْتَ الطَّاوِلَةِ)."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili juu ya, chini ya, mbele ya, nyuma ya (“top of, bottom of, front of, back of”) are built like Arabic place words: a noun of place + “of”, before the noun."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese trên, dưới, trước, sau come before the noun (trên bàn, on the table), like عَلَى الطَّاوِلَةِ — but the noun never changes."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut shows position with a noun of place and a case ending; Arabic puts a place word before the noun and the noun in the genitive."
+  }
+ ]
+}

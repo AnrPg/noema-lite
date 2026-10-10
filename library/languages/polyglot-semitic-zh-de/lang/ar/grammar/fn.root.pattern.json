@@ -1,0 +1,429 @@
+{
+ "function": "fn.root.pattern",
+ "status": "realized",
+ "summary": "Most Arabic words are built from a root of three consonants that carries a field of meaning — ط ب خ cooking, ش ر ب drinking, أ ك ل eating, ك ت ب writing — poured into a pattern of vowels and extra letters that gives the kind of word. Patterns are named with the model root ف ع ل (f-ʿ-l): faʿala / yafʿalu is a simple verb (طَبَخَ / يَطْبُخُ), fāʿil the one who does it (طَالِب “student”, from “to seek”), mafʿal a place (مَطْبَخ “kitchen”, مَخْبَز “bakery”, مَكْتَب “office”), mifʿāl a tool (مِفْتَاح “key”, from “to open”). Find the root by removing the article, the prefixes and endings and the long vowels of the pattern; with a root you can guess and remember whole families of words. Weak letters (و، ي) and hamza are root letters too, but they change shape; loanwords (شَاي، بِيرَة، سَلَطَة) stand outside the system.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "root",
+    "idea",
+    "words you know",
+    "more from the root"
+   ],
+   "rows": [
+    [
+     "ء ك ل",
+     "eating",
+     "أَكَلَ، يَأْكُلُ",
+     "أَكْل food; مَأْكُولَات foods"
+    ],
+    [
+     "ش ر ب",
+     "drinking",
+     "شَرِبَ، يَشْرَبُ",
+     "شَرَاب a drink, syrup; مَشْرُوب a beverage"
+    ],
+    [
+     "ط ب خ",
+     "cooking",
+     "طَبَخَ، يَطْبُخُ",
+     "مَطْبَخ kitchen; طَبَّاخ cook"
+    ],
+    [
+     "خ ب ز",
+     "bread",
+     "خُبْز",
+     "خَبَزَ to bake; مَخْبَز bakery; خَبَّاز baker"
+    ],
+    [
+     "ح ب ب",
+     "love",
+     "أَحَبَّ، يُحِبُّ",
+     "حُبّ love; حَبِيب darling"
+    ],
+    [
+     "ع ص ر",
+     "squeezing",
+     "عَصِير",
+     "عَصَرَ to squeeze; مِعْصَرَة a press"
+    ],
+    [
+     "م ل ح",
+     "salt",
+     "مِلْح",
+     "مَالِح salty; مَلَّاح sailor"
+    ],
+    [
+     "ك ت ب",
+     "writing",
+     "كِتَاب",
+     "كَتَبَ he wrote; كَاتِب writer; مَكْتَب office, desk"
+    ],
+    [
+     "ف ت ح",
+     "opening",
+     "مِفْتَاح",
+     "فَتَحَ he opened"
+    ],
+    [
+     "ع ل م",
+     "knowing",
+     "مُعَلِّم",
+     "عِلْم knowledge"
+    ],
+    [
+     "ص ب ح",
+     "morning light",
+     "صَبَاحُ الْخَيْرِ، مِصْبَاح",
+     "صَبَاح morning; مِصْبَاح lamp"
+    ]
+   ],
+   "caption": "Roots of the words of lessons 1–7. The root is written as separate letters: ط ب خ.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "what it makes",
+    "examples"
+   ],
+   "rows": [
+    [
+     "فَعَلَ / يَفْعَلُ، يَفْعُلُ",
+     "simple verb (form I): he did / he does",
+     "شَرِبَ يَشْرَبُ، طَبَخَ يَطْبُخُ، أَكَلَ يَأْكُلُ"
+    ],
+    [
+     "أَفْعَلَ / يُفْعِلُ",
+     "form IV verb (often “to make do”)",
+     "أَرَادَ يُرِيدُ (ر و د)، أَحَبَّ يُحِبُّ (ح ب ب)"
+    ],
+    [
+     "اِفْتَعَلَ / يَفْتَعِلُ",
+     "form VIII verb (a ت after the first root letter)",
+     "اِشْتَرَى يَشْتَرِي (ش ر ي)"
+    ],
+    [
+     "فَاعِل",
+     "the one who does it",
+     "طَالِب student (ط ل ب “to seek”), كَاتِب writer, هَاتِف phone (“the caller”)"
+    ],
+    [
+     "مُفَعِّل",
+     "the one who does it (form II)",
+     "مُعَلِّم teacher (“the one who makes know”)"
+    ],
+    [
+     "مَفْعَل، مَفْعِل",
+     "place of the action",
+     "مَطْبَخ kitchen, مَخْبَز bakery, مَكْتَب office"
+    ],
+    [
+     "مِفْعَال، مِفْعَلَة",
+     "tool",
+     "مِفْتَاح key, مِصْبَاح lamp, مِعْصَرَة press"
+    ],
+    [
+     "فَعَّال",
+     "trade, profession",
+     "طَبَّاخ cook, خَبَّاز baker"
+    ],
+    [
+     "فُعُول، أَفْعَال، فِعَال",
+     "broken plurals",
+     "لُحُوم meats, أَسْمَاك fish, أَوْلَاد boys"
+    ]
+   ],
+   "caption": "ف ع ل stands for any root: put ط ب خ into مَفْعَل and you get مَطْبَخ.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "take the word: الْمَطْبَخُ",
+    "remove al- and the case ending: مَطْبَخ",
+    "remove the pattern letters (مَـ): طْبَخ",
+    "the root: ط ب خ",
+    "meaning field: cooking"
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "How to find the root.",
+   "text": "Remove the article الْ, the person prefixes of verbs (أَ تَ يَ نَ), the pattern letters مَـ / مُـ, the endings (ة، ـونَ، ـِينَ، ـَاتٌ) and the long vowels ا و ي that the pattern adds. What is left — usually three consonants — is the root."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Weak letters hide.",
+   "text": "و and ي can be root letters that turn into long vowels or vanish: أَرَادَ / يُرِيدُ has the root ر و د; اِشْتَرَى / يَشْتَرِي has ش ر ي — the ت is the form VIII pattern, not the root. A doubled root hides under the šadda: أَحَبَّ = ح ب ب."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Hamza is a consonant.",
+   "text": "أَكَلَ has the root ء ك ل: the hamza is the first root letter. In آكُلُ (“I eat”) it melts with the prefix into آ."
+  },
+  {
+   "t": "p",
+   "text": "Not every word has a root you can use: loanwords like شَاي, بِيرَة, سَلَطَة and أَرُزّ stand outside the system."
+  },
+  {
+   "t": "p",
+   "text": "Hebrew works the same way — often with the same roots: Arabic ك ت ب / Hebrew כ־ת־ב (to write), Arabic ل ح م “meat” / Hebrew לֶחֶם “bread”, Arabic ط ب خ “cook” / Hebrew ט־ב־ח “slaughter”."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which letters are left when I remove al-, the prefixes, the endings and the pattern letters (مَـ، مُـ، the long vowels)?",
+   "Are ا و ي part of the pattern or of the root? (كَاتِب: the ا is the pattern; يُرِيدُ: the ي stands for the root letter و.)",
+   "Is there a šadda? It may hide a doubled root letter (أَحَبَّ = ح ب ب) or belong to the pattern (مُعَلِّم, form II; طَبَّاخ, faʿʿāl).",
+   "Does the word start with a hamza? It can be a root letter (أَكَلَ) or a pattern letter (أَرَادَ, form IV).",
+   "Do I know another word with the same three letters? Then the meanings are related.",
+   "Is it a loanword (شَاي، بِيرَة، سَلَطَة)? Then there is no root to look for."
+  ]
+ },
+ "traps": [
+  "The ت of اِشْتَرَى is the pattern of form VIII, not a root letter: the root is ش ر ي.",
+  "The م of مَطْبَخ, مَكْتَب and مِفْتَاح belongs to the pattern (place, tool), not to the root.",
+  "The long vowels of a pattern are not root letters: طَالِب = ط ل ب, not *ط ا ل ب.",
+  "The same letters in another order are another root: مِلْح (م ل ح, salt) and لَحْم (ل ح م, meat) are not related.",
+  "Not everything with three consonants is a root word: شَاي and بِيرَة are borrowings."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:akala",
+   "ar:shariba",
+   "ar:tabakha",
+   "ar:tabbakh",
+   "ar:matbakh",
+   "ar:khubz",
+   "ar:ahabba",
+   "ar:arada",
+   "ar:ishtara",
+   "ar:asir",
+   "ar:milh",
+   "ar:kitab",
+   "ar:maktab",
+   "ar:miftah",
+   "ar:misbah",
+   "ar:muallim",
+   "ar:talib",
+   "ar:hatif"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 2,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the root of مَطْبَخ (kitchen)?",
+   "options": [
+    "ط ب خ",
+    "م ط ب",
+    "ط خ م"
+   ],
+   "answer": "ط ب خ",
+   "why": "مَـ … is the place pattern mafʿal; the root is ط ب خ, as in طَبَخَ (to cook)."
+  },
+  {
+   "q": "Which word shares a root with شَرِبَ (to drink)?",
+   "options": [
+    "شَرَاب (a drink)",
+    "شَاي (tea)",
+    "سَمَك (fish)"
+   ],
+   "answer": "شَرَاب (a drink)",
+   "why": "ش ر ب in both. شَاي is a loanword with no Arabic root."
+  },
+  {
+   "q": "What does the pattern مَفْعَل usually make?",
+   "options": [
+    "a place",
+    "a tool",
+    "a person who does it"
+   ],
+   "answer": "a place",
+   "why": "مَطْبَخ kitchen, مَخْبَز bakery, مَكْتَب office. Tools are mifʿāl (مِفْتَاح), persons fāʿil (كَاتِب)."
+  },
+  {
+   "q": "What is the root of يُرِيدُ (he wants)?",
+   "options": [
+    "ر و د",
+    "ي ر د",
+    "ر د ي"
+   ],
+   "answer": "ر و د",
+   "why": "يُـ is the prefix; the ī stands for the weak root letter و (form IV أَرَادَ, verbal noun إِرَادَة)."
+  },
+  {
+   "q": "What is the root of اِشْتَرَى (to buy)?",
+   "options": [
+    "ش ر ي",
+    "ش ت ر",
+    "ت ر ي"
+   ],
+   "answer": "ش ر ي",
+   "why": "The ت is the infix of form VIII (iftaʿala); the final ā stands for the root letter ي."
+  },
+  {
+   "q": "Which word shares a root with مِلْح (salt)?",
+   "options": [
+    "مَالِح (salty)",
+    "مَاء (water)",
+    "لَحْم (meat)"
+   ],
+   "answer": "مَالِح (salty)",
+   "why": "م ل ح in both; مَالِح is the fāʿil pattern. لَحْم has ل ح م — the same letters in another order make another root."
+  },
+  {
+   "q": "Which word shares a root with كِتَاب (book)?",
+   "options": [
+    "مَكْتَب (office, desk)",
+    "كَأْس (glass)",
+    "بَيْت (house)"
+   ],
+   "answer": "مَكْتَب (office, desk)",
+   "why": "مَـ + ك ت ب: the place where you write."
+  },
+  {
+   "q": "مُعَلِّم (teacher) — which root?",
+   "options": [
+    "ع ل م",
+    "م ع ل",
+    "م ل م"
+   ],
+   "answer": "ع ل م",
+   "why": "مُـ … ـِّـ is the participle of form II (mufaʿʿil); عِلْم = knowledge: a teacher “makes know”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.root.pattern",
+   "note": "Hebrew builds words the same way (שֹׁרֶשׁ + מִשְׁקָל / בִּנְיָן) and shares many roots with Arabic: כ־ת־ב / ك ت ب “write”, ל־ח־ם / ل ح م (bread / meat)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.present",
+   "note": "German has a faint echo in its strong verbs: the vowel inside the root changes (trinken – trank – getrunken), as Arabic patterns change the vowels around ش ر ب."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.word.order",
+   "note": "Chinese words never change inside; new words are made by putting characters side by side (茶 tea + 杯 cup = 茶杯) instead of patterns."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "morph.rootPattern",
+   "value": "present"
+  },
+  {
+   "feature": "morph.stemChange",
+   "value": "pervasive"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed through Aramaic — a loan with no usable root."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian builds families with prefixes and suffixes on a stem (писать, писатель, письмо); Arabic changes the vowels and adds letters around a root of consonants (كَتَبَ, كَاتِب, كِتَاب)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English keeps traces of the idea in sing / sang / song; in Arabic it is the main way to make words: ك ت ب → كَتَبَ, كَاتِب, كِتَاب, مَكْتَب."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish builds words with suffixes (cocinar, cocina, cocinero); Arabic with patterns around a root: طَبَخَ (cook), مَطْبَخ (kitchen), طَبَّاخ (a cook)."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French cuisine, cuisinier add suffixes to a stem; Arabic puts the root ط ب خ into patterns: مَطْبَخ (kitchen), طَبَّاخ (cook)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi borrowed whole Arabic word families through Persian — इल्म (knowledge), आलिम (scholar), मालूम (known) all come from ع ل م; in Arabic the patterns behind them are living rules."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian is full of Arabic words, so many patterns look familiar: کتاب, کاتب, مکتب (ک ت ب); علم, عالم, معلم (ع ل م). شَاي came into Arabic from Persian چای — a loan with no Arabic root."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi builds words with prefixes and suffixes on a stem; Arabic weaves a consonant root into patterns: ك ت ب → كِتَاب, كَاتِب, مَكْتَب."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish already has whole Arabic root families: kitap, kâtip (clerk), mektup (letter), mektep (school) all come from ك ت ب; ilim, âlim, muallim, malumat from ع ل م. In Arabic you learn the patterns behind them."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese makes new words by combining kanji and adding endings; Arabic changes the vowels inside a consonant root."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish adds suffixes to an unchanging stem (kirja, kirjasto, kirjailija); Arabic keeps three consonants and changes everything around them (كِتَاب, مَكْتَبَة, كَاتِب)."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian adds suffixes to an unchanging stem; Arabic changes the vowels inside the root."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili borrowed Arabic word families too: kitabu (book), katibu (secretary), maktaba (library) — all ك ت ب. In Arabic the pattern is a living rule."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda builds words with class prefixes and verb extensions; Arabic changes the vowel pattern around a consonant root."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese words never change inside; new words are made by combining syllables. Arabic makes them by pouring a root into patterns."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut builds long words by adding suffix after suffix to a stem; Arabic keeps words short and changes the vowels and added letters around a root of three consonants."
+  }
+ ]
+}

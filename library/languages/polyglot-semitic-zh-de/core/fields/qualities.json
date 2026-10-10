@@ -1,0 +1,1090 @@
+{
+ "field": "qualities",
+ "title": "Describing",
+ "subgroups": [
+  {
+   "id": "adj",
+   "title": "Adjectives"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "The first adjectives, in pairs of opposites — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "adj.big",
+   "gloss": "big",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "adj.small",
+   "gloss": "small",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "adj.long",
+   "gloss": "long",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "adj.short",
+   "gloss": "short (length)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "adj.tall",
+   "gloss": "tall (person, building)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "adj.good",
+   "gloss": "good",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "adj.bad",
+   "gloss": "bad",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "adj.new",
+   "gloss": "new",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "adj.old.thing",
+   "gloss": "old (of things)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "adj.young",
+   "gloss": "young",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "adj.old.person",
+   "gloss": "old (of people)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "adj.hot",
+   "gloss": "hot",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "adj.cold",
+   "gloss": "cold",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "adj.warm",
+   "gloss": "warm",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "adj.beautiful",
+   "gloss": "beautiful",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "adj.ugly",
+   "gloss": "ugly",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "adj.easy",
+   "gloss": "easy",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "adj.difficult",
+   "gloss": "difficult",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "adj.cheap",
+   "gloss": "cheap",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "adj.expensive",
+   "gloss": "expensive",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "adj.happy",
+   "gloss": "happy, glad",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "adj.sad",
+   "gloss": "sad",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "adj.tired",
+   "gloss": "tired",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "adj.hungry",
+   "gloss": "hungry",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "adj.thirsty",
+   "gloss": "thirsty",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "adj.fast",
+   "gloss": "fast",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "adj.slow",
+   "gloss": "slow",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "adj.adult",
+   "gloss": "grown-up, adult; older (a big brother)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.aged",
+   "gloss": "aged, … years old (he is six)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.arrogant",
+   "gloss": "rude, haughty, arrogant (in 傲慢)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.awesome",
+   "gloss": "great, awesome (excellent: you’re great!)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.bright",
+   "gloss": "bright, clear (a day, the sky)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.broken",
+   "gloss": "broken, out of order; (of food) gone off",
+   "tier": 1,
+   "rank": 66,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.clear",
+   "gloss": "clear, obvious, evident",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.clever",
+   "gloss": "bright, clever",
+   "tier": 1,
+   "rank": 60,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.close",
+   "gloss": "close (a relationship: a close friend)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.closed",
+   "gloss": "closed, shut",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.convenient",
+   "gloss": "convenient, expedient (literary)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.correct",
+   "gloss": "right, correct",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.dark.nolight",
+   "gloss": "dark (without light)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.dear",
+   "gloss": "dear, precious (to someone)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.decent",
+   "gloss": "decent, a good sort (of a person)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.deep",
+   "gloss": "deep (water, feelings, meaning)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.dreary",
+   "gloss": "dull, dreary, grey",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.drunk",
+   "gloss": "drunk",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.dull",
+   "gloss": "dull, unfunny (a joke, a person)",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.early",
+   "gloss": "early, preliminary (adjective)",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.embarrassed",
+   "gloss": "embarrassed, shy, ill at ease",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.fair",
+   "gloss": "fair, proper (recht und billig)",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.favourable",
+   "gloss": "favourable, convenient",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.feverish",
+   "gloss": "feverish",
+   "tier": 2,
+   "rank": 24,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.former",
+   "gloss": "former; long-standing (an old friend)",
+   "tier": 2,
+   "rank": 25,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.fragmentary",
+   "gloss": "odd, fragmentary, in small bits (零钱 small change)",
+   "tier": 2,
+   "rank": 26,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.great",
+   "gloss": "great, important, senior",
+   "tier": 2,
+   "rank": 27,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.hard",
+   "gloss": "hard (not soft)",
+   "tier": 2,
+   "rank": 28,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.heartfelt",
+   "gloss": "warm, heartfelt (a welcome)",
+   "tier": 2,
+   "rank": 29,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.heavy",
+   "gloss": "heavy",
+   "tier": 2,
+   "rank": 30,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.high",
+   "gloss": "high (a level, a price, a fever, a voice)",
+   "tier": 2,
+   "rank": 31,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.honest",
+   "gloss": "honest, sincere",
+   "tier": 1,
+   "rank": 58,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.illegal",
+   "gloss": "illegal, shady, black-market (黑车 unlicensed taxi, 黑市 black market)",
+   "tier": 2,
+   "rank": 33,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.impolite",
+   "gloss": "impolite, rude, blunt",
+   "tier": 2,
+   "rank": 34,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.intense",
+   "gloss": "heavy, strong, loud (rain, wind, a voice: 大雨, 大声)",
+   "tier": 2,
+   "rank": 35,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.interesting",
+   "gloss": "interesting, worth watching or reading (films, books)",
+   "tier": 2,
+   "rank": 36,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.kind",
+   "gloss": "kind, good-hearted",
+   "tier": 1,
+   "rank": 57,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.late",
+   "gloss": "late, belated (adjective)",
+   "tier": 2,
+   "rank": 38,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.light.weight",
+   "gloss": "light (not heavy)",
+   "tier": 2,
+   "rank": 39,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.likely",
+   "gloss": "likely to, apt to (容易感冒 catch cold easily)",
+   "tier": 2,
+   "rank": 40,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.lucky",
+   "gloss": "lucky, fortunate",
+   "tier": 2,
+   "rank": 41,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.nasty",
+   "gloss": "nasty, mean (behaviour, words)",
+   "tier": 2,
+   "rank": 42,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.natural",
+   "gloss": "natural; naturally",
+   "tier": 2,
+   "rank": 43,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.next",
+   "gloss": "next (下个月 next month)",
+   "tier": 2,
+   "rank": 44,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.nice",
+   "gloss": "nice, pleasant, lovely (a nice day)",
+   "tier": 2,
+   "rank": 45,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.older",
+   "gloss": "older, big (brother/sister); grown-up",
+   "tier": 2,
+   "rank": 46,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.open",
+   "gloss": "open (the door is open)",
+   "tier": 2,
+   "rank": 47,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.other",
+   "gloss": "other, another",
+   "tier": 2,
+   "rank": 48,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.over",
+   "gloss": "over, finished (school is over)",
+   "tier": 2,
+   "rank": 49,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.pale",
+   "gloss": "pale (a face)",
+   "tier": 2,
+   "rank": 50,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.plain",
+   "gloss": "clear; plain (明白 to understand, 白开水 plain boiled water)",
+   "tier": 2,
+   "rank": 51,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.popular",
+   "gloss": "popular, in demand (热门)",
+   "tier": 2,
+   "rank": 52,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.pornographic",
+   "gloss": "pornographic, obscene (English says ‘blue’)",
+   "tier": 2,
+   "rank": 53,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.possible",
+   "gloss": "possible",
+   "tier": 1,
+   "rank": 30,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.precious",
+   "gloss": "precious, valuable; noble (宝贵, 贵族)",
+   "tier": 2,
+   "rank": 55,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.pregnant",
+   "gloss": "pregnant (有了, euphemistic)",
+   "tier": 2,
+   "rank": 56,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.previous",
+   "gloss": "last, previous (上个月 last month)",
+   "tier": 2,
+   "rank": 57,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.recent",
+   "gloss": "recent, near (in time: 最近, 近年)",
+   "tier": 2,
+   "rank": 58,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.same",
+   "gloss": "the same, alike",
+   "tier": 2,
+   "rank": 59,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.serious",
+   "gloss": "serious, severe (an illness, a mistake)",
+   "tier": 2,
+   "rank": 60,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.shallow",
+   "gloss": "shallow (water)",
+   "tier": 2,
+   "rank": 61,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.short.person",
+   "gloss": "short (of a person, not tall)",
+   "tier": 1,
+   "rank": 54,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.sick",
+   "gloss": "sick, unwell, nauseous (I feel sick)",
+   "tier": 2,
+   "rank": 63,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.silly",
+   "gloss": "daft, silly (northern colloquial)",
+   "tier": 2,
+   "rank": 64,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.simple",
+   "gloss": "simple, plain, modest",
+   "tier": 2,
+   "rank": 65,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.skilled",
+   "gloss": "skilled, expert (literary)",
+   "tier": 2,
+   "rank": 66,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.smug",
+   "gloss": "pleased with oneself, smug",
+   "tier": 2,
+   "rank": 67,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.spicy",
+   "gloss": "spicy, hot (food)",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.tanned",
+   "gloss": "tanned",
+   "tier": 2,
+   "rank": 69,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.true",
+   "gloss": "true, real, genuine",
+   "tier": 2,
+   "rank": 70,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.unlikely",
+   "gloss": "unlikely, improbable",
+   "tier": 2,
+   "rank": 71,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.unpopular",
+   "gloss": "unpopular, little-known; corny (冷门, 冷笑话)",
+   "tier": 2,
+   "rank": 72,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.unripe",
+   "gloss": "unripe",
+   "tier": 2,
+   "rank": 73,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.unwell",
+   "gloss": "unwell, uncomfortable (身体难过)",
+   "tier": 2,
+   "rank": 74,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.usedup",
+   "gloss": "used up, all gone (the milk is all gone)",
+   "tier": 2,
+   "rank": 75,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.vague",
+   "gloss": "vague, faint (a dim memory)",
+   "tier": 2,
+   "rank": 76,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.whole",
+   "gloss": "whole, all over (一屋子人, 一身汗)",
+   "tier": 2,
+   "rank": 77,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.wide",
+   "gloss": "wide, broad",
+   "tier": 2,
+   "rank": 78,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.willing",
+   "gloss": "willing, to feel like (doing)",
+   "tier": 2,
+   "rank": 79,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.younger",
+   "gloss": "younger, little (brother/sister); the little ones",
+   "tier": 2,
+   "rank": 80,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adj.allowed",
+   "gloss": "allowed",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.forbidden",
+   "gloss": "forbidden",
+   "tier": 1,
+   "rank": 29,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.impossible",
+   "gloss": "impossible",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.necessary",
+   "gloss": "necessary",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.ill",
+   "gloss": "ill, sick",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.healthy",
+   "gloss": "healthy",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.vegetarian",
+   "gloss": "vegetarian",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.sweet",
+   "gloss": "sweet",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.sour",
+   "gloss": "sour",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.bitter",
+   "gloss": "bitter",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.salty",
+   "gloss": "salty",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.sunny",
+   "gloss": "sunny",
+   "tier": 1,
+   "rank": 41,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.cloudy",
+   "gloss": "cloudy",
+   "tier": 1,
+   "rank": 42,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.wet",
+   "gloss": "wet",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.dry",
+   "gloss": "dry",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.angry",
+   "gloss": "angry",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.afraid",
+   "gloss": "afraid, scared",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.surprised",
+   "gloss": "surprised",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.bored",
+   "gloss": "bored",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.worried",
+   "gloss": "worried",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.proud",
+   "gloss": "proud",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.jealous",
+   "gloss": "jealous",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.nervous",
+   "gloss": "nervous",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.calm",
+   "gloss": "calm",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.fat",
+   "gloss": "fat",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.thin",
+   "gloss": "thin, slim",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.lazy",
+   "gloss": "lazy",
+   "tier": 1,
+   "rank": 59,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.shy",
+   "gloss": "shy",
+   "tier": 1,
+   "rank": 61,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.funny",
+   "gloss": "funny",
+   "tier": 1,
+   "rank": 62,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.polite",
+   "gloss": "polite",
+   "tier": 1,
+   "rank": 63,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.busy",
+   "gloss": "busy",
+   "tier": 1,
+   "rank": 64,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.lost",
+   "gloss": "lost (I am lost)",
+   "tier": 1,
+   "rank": 65,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.ancient",
+   "gloss": "ancient",
+   "tier": 1,
+   "rank": 67,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.formal",
+   "gloss": "formal",
+   "tier": 1,
+   "rank": 68,
+   "subgroup": "core"
+  },
+  {
+   "id": "adj.informal",
+   "gloss": "informal",
+   "tier": 1,
+   "rank": 69,
+   "subgroup": "core"
+  }
+ ]
+}

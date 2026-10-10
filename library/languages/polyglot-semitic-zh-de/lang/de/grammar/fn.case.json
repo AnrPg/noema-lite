@@ -1,0 +1,578 @@
+{
+ "function": "fn.case",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "four"
+  },
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "nom.caseSyncretism",
+   "value": "core-and-noncore"
+  }
+ ],
+ "summary": "After a preposition German puts the noun phrase in a fixed case, and you see it mostly on the article. Six common prepositions always take the dative: aus, bei, mit, nach, von, zu (and seit, gegenüber – later). A few always take the accusative: für, ohne, um, durch (and gegen, bis). Nine prepositions of place take either case (the two-way prepositions: in, an, auf, über, unter, vor, hinter, neben, zwischen): Wo? – where something is – dative: Ich bin in der Küche. Wohin? – where it goes – accusative: Ich will in die Küche. (Fully at S12 and S13.) The dative forms to learn now: der → dem, die → der, das → dem, plural die → den with -n on the noun (mit den Kindern); ein → einem / einer; mein → meinem / meiner, plural meinen; pronouns mir, dir, ihm, ihr, ihm, uns, euch, ihnen, Ihnen – and wem. Weak nouns add -(e)n outside the nominative: mit dem Jungen, beim Polizisten, für den Bauern. Plurals in -s take no extra -n: in den Cafés, in den Büros. über in the sense “about” always takes the accusative: ein Buch über die Stadt.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "case",
+    "prepositions",
+    "example"
+   ],
+   "rows": [
+    [
+     "dative",
+     "aus, bei, mit, nach, von, zu (seit)",
+     "mit meinem Bruder · zur Schule · aus dem Haus"
+    ],
+    [
+     "accusative",
+     "für, ohne, um, durch (gegen, bis)",
+     "für meinen Vater · ohne Zucker"
+    ],
+    [
+     "dative or accusative",
+     "in, an, auf, über, unter, vor, hinter, neben, zwischen",
+     "Wo? in der Küche · Wohin? in die Küche"
+    ]
+   ],
+   "caption": "Which case after which preposition",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "the (nom.)",
+     "der",
+     "die",
+     "das",
+     "die"
+    ],
+    [
+     "the (dat.)",
+     "dem",
+     "der",
+     "dem",
+     "den + -n"
+    ],
+    [
+     "a (dat.)",
+     "einem",
+     "einer",
+     "einem",
+     "– (+ -n)"
+    ],
+    [
+     "my (dat.)",
+     "meinem",
+     "meiner",
+     "meinem",
+     "meinen + -n"
+    ],
+    [
+     "no (dat.)",
+     "keinem",
+     "keiner",
+     "keinem",
+     "keinen + -n"
+    ],
+    [
+     "the (acc.)",
+     "den",
+     "die",
+     "das",
+     "die"
+    ]
+   ],
+   "caption": "The article in the dative (and the accusative for für / ohne)",
+   "typology": [
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "core-and-noncore"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "nominative",
+    "accusative",
+    "dative"
+   ],
+   "rows": [
+    [
+     "ich",
+     "mich",
+     "mir"
+    ],
+    [
+     "du",
+     "dich",
+     "dir"
+    ],
+    [
+     "er",
+     "ihn",
+     "ihm"
+    ],
+    [
+     "sie",
+     "sie",
+     "ihr"
+    ],
+    [
+     "es",
+     "es",
+     "ihm"
+    ],
+    [
+     "wir",
+     "uns",
+     "uns"
+    ],
+    [
+     "ihr",
+     "euch",
+     "euch"
+    ],
+    [
+     "sie",
+     "sie",
+     "ihnen"
+    ],
+    [
+     "Sie",
+     "Sie",
+     "Ihnen"
+    ],
+    [
+     "wer",
+     "wen",
+     "wem"
+    ]
+   ],
+   "caption": "Pronouns: mit mir, für dich, bei ihm, ohne uns, mit wem?"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Wo? (dative)",
+    "Wohin? (accusative)"
+   ],
+   "rows": [
+    [
+     "Ich bin im Park.",
+     "Ich will in den Park."
+    ],
+    [
+     "Sie ist in der Küche.",
+     "Sie will in die Küche."
+    ],
+    [
+     "Wir sind im Café.",
+     "Wir wollen ins Café."
+    ],
+    [
+     "Das Bild ist an der Wand.",
+     "Ich hänge das Bild an die Wand."
+    ]
+   ],
+   "caption": "The two-way prepositions – a preview"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Only the masculine shows the accusative",
+   "text": "für den Vater – but für die Mutter, für das Kind, für die Kinder: in the accusative only der → den changes."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Dative plural -n",
+   "text": "mit den Kindern, mit meinen Brüdern, mit unseren Freunden – the noun adds -n in the dative plural (unless it already ends in -n or -s: mit den Frauen, in den Cafés)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "A memory aid",
+   "text": "Dative: aus – bei – mit – nach – von – zu (many learners sing it). Accusative: durch – für – ohne – um (and gegen)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Prepositions of time have cases too (S15)",
+   "text": "seit, vor, nach + dative (seit einer Woche, nach der Arbeit) · bis, um + accusative (bis Montag, um acht Uhr) · während + genitive (während der Woche)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which preposition is it? aus, bei, mit, nach, von, zu → always dative. für, ohne → always accusative.",
+   "Is it a two-way preposition (in, an, auf, über, unter, vor, hinter, neben, zwischen)? Ask: Wo? (staying) → dative; Wohin? (moving to) → accusative.",
+   "über meaning “about”? → accusative.",
+   "Gender and number of the noun? → dem / der / dem / den (dative); den / die / das / die (accusative).",
+   "Dative plural? → den … + -n on the noun (not after -n or -s).",
+   "A pronoun? → mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen (dative) – mich, dich, ihn … (accusative).",
+   "A weak noun (der Junge, der Polizist, der Bauer, der Student)? → -(e)n: mit dem Jungen.",
+   "Can preposition and article merge (im, am, zum, zur, beim, vom, ins, ans)?"
+  ],
+  "steps": [
+   "Find the preposition.",
+   "Decide its case (fixed, or Wo?/Wohin?).",
+   "Put the article (and pronoun, and plural noun) in that case."
+  ]
+ },
+ "traps": [
+  "mit always takes the dative: mit meinem Bruder (not *mit meinen Bruder).",
+  "für and ohne take the accusative: für meinen Vater, ohne meinen Bruder.",
+  "Dative feminine is der: in der Schule, bei der Arbeit – the same word as the masculine nominative.",
+  "Dative plural: den + noun with -n: mit den Kindern.",
+  "Weak nouns: beim Polizisten, mit dem Jungen, für den Bauern.",
+  "Two-way prepositions: Wo bist du? – Im Park. / Wohin willst du? – In den Park.",
+  "nach and zu take the dative even for movement: zum Arzt, nach Hause."
+ ],
+ "evidence": {
+  "tags": [
+   "DAT"
+  ],
+  "lemmas": [
+   "de:in",
+   "de:an",
+   "de:auf",
+   "de:unter",
+   "de:über",
+   "de:vor",
+   "de:hinter",
+   "de:neben",
+   "de:zwischen",
+   "de:für",
+   "de:ohne",
+   "de:ins",
+   "de:ans",
+   "de:um",
+   "de:bis",
+   "de:seit",
+   "de:während"
+  ]
+ },
+ "paradigmCells": [
+  "DET;DAT;SG;MASC",
+  "DET;DAT;SG;FEM",
+  "DET;DAT;SG;NEUT",
+  "DET;DAT;PL",
+  "PRON;DAT",
+  "N;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 8,
+  "DET": 3,
+  "PRON": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:der",
+    "de:ein",
+    "de:mein",
+    "de:dein",
+    "de:unser",
+    "de:kein"
+   ],
+   "cells": [
+    "DET;DAT;SG;MASC",
+    "DET;DAT;SG;FEM",
+    "DET;DAT;SG;NEUT",
+    "DET;DAT;PL"
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "PRON",
+   "lemmas": [
+    "de:ich",
+    "de:du",
+    "de:er",
+    "de:sie",
+    "de:wir",
+    "de:ihr",
+    "de:sie.pl",
+    "de:Sie",
+    "de:wer"
+   ],
+   "cells": [
+    "PRON;DAT"
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "lemmas": [
+    "de:Junge",
+    "de:Student",
+    "de:Neffe",
+    "de:Polizist"
+   ],
+   "cells": [
+    "N;DAT;SG",
+    "N;ACC;SG"
+   ]
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.case"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.case"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.case"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Ich trinke Kaffee mit ___ Bruder.",
+   "options": [
+    "meinem",
+    "meinen",
+    "mein"
+   ],
+   "answer": "meinem",
+   "why": "mit + dative; der Bruder → meinem."
+  },
+  {
+   "q": "Der Tee ist für ___ Vater.",
+   "options": [
+    "meinen",
+    "meinem",
+    "mein"
+   ],
+   "answer": "meinen",
+   "why": "für + accusative; masculine → meinen."
+  },
+  {
+   "q": "Die Kinder sind in ___ Schule. (where)",
+   "options": [
+    "der",
+    "die",
+    "den"
+   ],
+   "answer": "der",
+   "why": "Wo? → dative; die Schule → in der Schule."
+  },
+  {
+   "q": "Die Kinder wollen in ___ Park. (where to)",
+   "options": [
+    "den",
+    "dem",
+    "der"
+   ],
+   "answer": "den",
+   "why": "Wohin? → accusative; der Park → in den Park."
+  },
+  {
+   "q": "Ich wohne bei ___ . (them)",
+   "options": [
+    "ihnen",
+    "sie",
+    "ihr"
+   ],
+   "answer": "ihnen",
+   "why": "bei + dative; sie (they) → ihnen."
+  },
+  {
+   "q": "Wir sind mit den ___ hier.",
+   "options": [
+    "Kindern",
+    "Kinder",
+    "Kinds"
+   ],
+   "answer": "Kindern",
+   "why": "Dative plural adds -n."
+  },
+  {
+   "q": "Which preposition always takes the dative?",
+   "options": [
+    "mit",
+    "für",
+    "ohne"
+   ],
+   "answer": "mit",
+   "why": "aus, bei, mit, nach, von, zu → dative."
+  },
+  {
+   "q": "Mein Opa ist bei ___ Arzt.",
+   "options": [
+    "dem",
+    "den",
+    "der"
+   ],
+   "answer": "dem",
+   "why": "bei + dative masculine: bei dem → beim Arzt."
+  },
+  {
+   "q": "Frag doch den ___! (der Polizist)",
+   "options": [
+    "Polizisten",
+    "Polizist",
+    "Polizists"
+   ],
+   "answer": "Polizisten",
+   "why": "A weak noun adds -en outside the nominative."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.case",
+   "note": "In Arabic every noun after a preposition is in the genitive (majrūr): fī l-bayti, maʿa ṣadīqī – one case for all prepositions."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.case",
+   "note": "Hebrew nouns have no cases; prepositions take personal endings instead: iti (with me), lo (to him), mimeni (from me)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.core",
+   "note": "Chinese has no cases at all: 在家 (at home), 跟朋友 (with a friend) – the noun never changes."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.place",
+   "note": "The two-way prepositions in full: Wo? + dative (S12), Wohin? + accusative (S13)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek prepositions take the accusative (με τον αδερφό μου, από τον γιατρό, στο σχολείο); German mostly the dative: mit meinem Bruder, vom Arzt, in der Schule."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Each Russian preposition also fixes a case, and в школе (where) / в школу (where to) is exactly in der Schule / in die Schule. German has only dative and accusative after its everyday prepositions."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish nouns do not change after a preposition (only pronouns: para mí); German changes the article: für den Vater, mit dem Vater."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English changes only pronouns after a preposition (with him); German changes the article too, and the preposition decides the case: mit dem Vater, für den Vater."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French nouns stay the same after a preposition; German articles change with the preposition’s case: mit der Mutter, für die Mutter."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Every Hindi postposition takes the same oblique form (laṛke ke sāth, laṛke ko); German prepositions take different cases (mit dem Jungen, für den Jungen)."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian nouns do not change after a preposition; German articles change: mit dem Bruder, für den Bruder."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi postpositions all take the oblique form of the noun; German prepositions choose between dative and accusative."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Every Arabic preposition takes the genitive (fī l-bayti, maʿa l-walad); German prepositions take the dative or the accusative, and some take either (in der Küche / in die Küche)."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew nouns do not change after a preposition, and pronouns join it (iti, with me); German keeps the pronoun separate and in its case: mit mir, für dich."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish postpositions also govern a case (yemekten önce, ablative); German prepositions come before the noun and govern dative or accusative: vor dem Essen."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese particles mark the relation directly (gakkō de, gakkō e); German needs a preposition and a case on the article."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean particles do the work alone (hakgyo-eseo, hakgyo-e); German needs a preposition plus the right case."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish postpositions take the genitive (talon edessä); German prepositions come first and take dative or accusative: vor dem Haus."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian postpositions leave the noun as it is (a ház előtt); German prepositions change the article: vor dem Haus."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili has no cases (na, kwa change nothing); German prepositions put the article in the dative or accusative."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns never change after 在, 跟 or 给; German articles change after every preposition: mit dem Bus, für den Vater."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Nothing changes after a Vietnamese preposition; in German the article takes the preposition’s case."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses these relations with case endings and has no prepositions; German combines a preposition with a case on the article: mit dem Bus, in der Küche."
+  }
+ ]
+}

@@ -1,0 +1,1419 @@
+{
+ "field": "food.vegetables",
+ "title": "Vegetables",
+ "subgroups": [
+  {
+   "id": "root",
+   "title": "Roots and tubers"
+  },
+  {
+   "id": "bulb",
+   "title": "Onions and their kin (bulbs)"
+  },
+  {
+   "id": "stem",
+   "title": "Stems, stalks and shoots"
+  },
+  {
+   "id": "leafy",
+   "title": "Leafy greens and salads"
+  },
+  {
+   "id": "brassica",
+   "title": "The cabbage family"
+  },
+  {
+   "id": "fruitveg",
+   "title": "Fruit vegetables"
+  },
+  {
+   "id": "cucurbit",
+   "title": "Squashes, gourds and cucumbers"
+  },
+  {
+   "id": "legume",
+   "title": "Pods, beans and peas"
+  },
+  {
+   "id": "flower",
+   "title": "Flowers and buds"
+  },
+  {
+   "id": "sea",
+   "title": "Sea vegetables"
+  }
+ ],
+ "sources": [
+  "Wikipedia, “List of vegetables” (retrieved 2026-10-08)",
+  "Wikidata: item ids; the number of Wikipedia editions per item as the measure of how widely known a vegetable is (tiers and ranks)",
+  "Added for the course languages and cuisines: wild garlic (Bärlauch), stinging nettle, root parsley, molokhia, garlic chives, Savoy and pointed cabbage, rhubarb",
+  "Left out: herbs, mushrooms, pulses and fruits (their own fields), plants with a common name in fewer than two of the course languages"
+ ],
+ "concepts": [
+  {
+   "id": "veg.tomato",
+   "gloss": "tomato",
+   "subgroup": "fruitveg",
+   "tier": 1,
+   "rank": 1,
+   "wikidata": "Q23501",
+   "media": "veg-tomato"
+  },
+  {
+   "id": "veg.onion",
+   "gloss": "onion",
+   "subgroup": "bulb",
+   "tier": 1,
+   "rank": 2,
+   "wikidata": "Q23485",
+   "media": "veg-onion"
+  },
+  {
+   "id": "veg.potato",
+   "gloss": "potato",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 3,
+   "wikidata": "Q10998",
+   "media": "veg-potato"
+  },
+  {
+   "id": "veg.garlic",
+   "gloss": "garlic",
+   "subgroup": "bulb",
+   "tier": 1,
+   "rank": 4,
+   "wikidata": "Q23400",
+   "media": "veg-garlic"
+  },
+  {
+   "id": "veg.cucumber",
+   "gloss": "cucumber",
+   "subgroup": "cucurbit",
+   "tier": 1,
+   "rank": 5,
+   "wikidata": "Q23425",
+   "media": "veg-cucumber"
+  },
+  {
+   "id": "veg.eggplant",
+   "gloss": "eggplant, aubergine",
+   "subgroup": "fruitveg",
+   "tier": 1,
+   "rank": 6,
+   "wikidata": "Q7540"
+  },
+  {
+   "id": "veg.carrot",
+   "gloss": "carrot",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 7,
+   "wikidata": "Q81"
+  },
+  {
+   "id": "veg.sweetpotato",
+   "gloss": "sweet potato",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 8,
+   "wikidata": "Q37937"
+  },
+  {
+   "id": "veg.pea",
+   "gloss": "pea",
+   "subgroup": "legume",
+   "tier": 1,
+   "rank": 9,
+   "wikidata": "Q25237"
+  },
+  {
+   "id": "veg.spinach",
+   "gloss": "spinach",
+   "subgroup": "leafy",
+   "tier": 1,
+   "rank": 10,
+   "wikidata": "Q81464"
+  },
+  {
+   "id": "veg.radish",
+   "gloss": "radish",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 11,
+   "wikidata": "Q7224565"
+  },
+  {
+   "id": "veg.pumpkin",
+   "gloss": "pumpkin",
+   "subgroup": "cucurbit",
+   "tier": 1,
+   "rank": 12,
+   "wikidata": "Q165308"
+  },
+  {
+   "id": "veg.lettuce",
+   "gloss": "lettuce",
+   "subgroup": "leafy",
+   "tier": 1,
+   "rank": 13,
+   "wikidata": "Q83193"
+  },
+  {
+   "id": "veg.chili",
+   "gloss": "chili pepper",
+   "subgroup": "fruitveg",
+   "tier": 1,
+   "rank": 14,
+   "wikidata": "Q165199"
+  },
+  {
+   "id": "veg.cabbage",
+   "gloss": "cabbage",
+   "subgroup": "brassica",
+   "tier": 1,
+   "rank": 15,
+   "wikidata": "Q35051"
+  },
+  {
+   "id": "veg.cauliflower",
+   "gloss": "cauliflower",
+   "subgroup": "brassica",
+   "tier": 1,
+   "rank": 16,
+   "wikidata": "Q7537"
+  },
+  {
+   "id": "veg.broccoli",
+   "gloss": "broccoli",
+   "subgroup": "brassica",
+   "tier": 1,
+   "rank": 17,
+   "wikidata": "Q47722"
+  },
+  {
+   "id": "veg.leek",
+   "gloss": "leek",
+   "subgroup": "bulb",
+   "tier": 1,
+   "rank": 18,
+   "wikidata": "Q1807269"
+  },
+  {
+   "id": "veg.bellpepper",
+   "gloss": "bell pepper, sweet pepper",
+   "subgroup": "fruitveg",
+   "tier": 1,
+   "rank": 19,
+   "wikidata": "Q1548030"
+  },
+  {
+   "id": "veg.beetroot",
+   "gloss": "beetroot, beet",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 20,
+   "wikidata": "Q165437"
+  },
+  {
+   "id": "veg.zucchini",
+   "gloss": "zucchini, courgette",
+   "subgroup": "cucurbit",
+   "tier": 1,
+   "rank": 21,
+   "wikidata": "Q7533"
+  },
+  {
+   "id": "veg.greenbean",
+   "gloss": "green bean",
+   "subgroup": "legume",
+   "tier": 1,
+   "rank": 22,
+   "wikidata": "Q2987371"
+  },
+  {
+   "id": "veg.springonion",
+   "gloss": "spring onion, scallion",
+   "subgroup": "bulb",
+   "tier": 1,
+   "rank": 23,
+   "wikidata": "Q774278"
+  },
+  {
+   "id": "veg.celery",
+   "gloss": "celery",
+   "subgroup": "stem",
+   "tier": 1,
+   "rank": 24,
+   "wikidata": "Q23012379"
+  },
+  {
+   "id": "veg.corn",
+   "gloss": "sweet corn, maize",
+   "subgroup": "fruitveg",
+   "tier": 1,
+   "rank": 25,
+   "wikidata": "Q18966"
+  },
+  {
+   "id": "veg.ginger",
+   "gloss": "ginger",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 1,
+   "wikidata": "Q35625"
+  },
+  {
+   "id": "veg.fennel",
+   "gloss": "fennel (bulb)",
+   "subgroup": "stem",
+   "tier": 2,
+   "rank": 2,
+   "wikidata": "Q43511"
+  },
+  {
+   "id": "veg.cassava",
+   "gloss": "cassava, manioc",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 3,
+   "wikidata": "Q83124"
+  },
+  {
+   "id": "veg.okra",
+   "gloss": "okra",
+   "subgroup": "fruitveg",
+   "tier": 2,
+   "rank": 4,
+   "wikidata": "Q80531"
+  },
+  {
+   "id": "veg.asparagus",
+   "gloss": "asparagus",
+   "subgroup": "stem",
+   "tier": 2,
+   "rank": 5,
+   "wikidata": "Q28367"
+  },
+  {
+   "id": "veg.taro",
+   "gloss": "taro",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 6,
+   "wikidata": "Q227997"
+  },
+  {
+   "id": "veg.broadbean",
+   "gloss": "broad bean, fava bean",
+   "subgroup": "legume",
+   "tier": 2,
+   "rank": 7,
+   "wikidata": "Q131342",
+   "aka": "Vicia faba"
+  },
+  {
+   "id": "veg.lotusroot",
+   "gloss": "lotus root",
+   "subgroup": "stem",
+   "tier": 2,
+   "rank": 8,
+   "wikidata": "Q16528",
+   "aka": "Nelumbo nucifera"
+  },
+  {
+   "id": "veg.dandelion",
+   "gloss": "dandelion greens",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 9,
+   "wikidata": "Q131219",
+   "aka": "Taraxacum officinale"
+  },
+  {
+   "id": "veg.turnip",
+   "gloss": "turnip",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 10,
+   "wikidata": "Q3916957"
+  },
+  {
+   "id": "veg.bittermelon",
+   "gloss": "bitter melon, bitter gourd",
+   "subgroup": "cucurbit",
+   "tier": 2,
+   "rank": 11,
+   "wikidata": "Q428750",
+   "aka": "Momordica charantia"
+  },
+  {
+   "id": "veg.chicory",
+   "gloss": "chicory, Belgian endive",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 12,
+   "wikidata": "Q2544599"
+  },
+  {
+   "id": "veg.bottlegourd",
+   "gloss": "bottle gourd, calabash",
+   "subgroup": "cucurbit",
+   "tier": 2,
+   "rank": 13,
+   "wikidata": "Q1277255"
+  },
+  {
+   "id": "veg.purslane",
+   "gloss": "purslane",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 14,
+   "wikidata": "Q158015",
+   "aka": "Portulaca oleracea"
+  },
+  {
+   "id": "veg.jerusalemartichoke",
+   "gloss": "Jerusalem artichoke, sunchoke",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 15,
+   "wikidata": "Q146190"
+  },
+  {
+   "id": "veg.nettle",
+   "gloss": "stinging nettle (greens)",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 16,
+   "wikidata": "Q155909",
+   "aka": "Urtica dioica"
+  },
+  {
+   "id": "veg.wildgarlic",
+   "gloss": "wild garlic, ramsons",
+   "subgroup": "bulb",
+   "tier": 2,
+   "rank": 17,
+   "wikidata": "Q130882",
+   "aka": "Allium ursinum"
+  },
+  {
+   "id": "veg.parsnip",
+   "gloss": "parsnip",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 18,
+   "wikidata": "Q188614"
+  },
+  {
+   "id": "veg.sorrel",
+   "gloss": "sorrel",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 19,
+   "wikidata": "Q26297"
+  },
+  {
+   "id": "veg.artichoke",
+   "gloss": "artichoke",
+   "subgroup": "flower",
+   "tier": 2,
+   "rank": 20,
+   "wikidata": "Q23041430"
+  },
+  {
+   "id": "veg.kohlrabi",
+   "gloss": "kohlrabi",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 21,
+   "wikidata": "Q147202"
+  },
+  {
+   "id": "veg.horseradish",
+   "gloss": "horseradish",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 22,
+   "wikidata": "Q26545"
+  },
+  {
+   "id": "veg.rutabaga",
+   "gloss": "rutabaga, swede",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 23,
+   "wikidata": "Q158464"
+  },
+  {
+   "id": "veg.watercress",
+   "gloss": "watercress",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 24,
+   "wikidata": "Q150452"
+  },
+  {
+   "id": "veg.cress",
+   "gloss": "garden cress",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 25,
+   "wikidata": "Q27033"
+  },
+  {
+   "id": "veg.brusselssprout",
+   "gloss": "Brussels sprout",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 26,
+   "wikidata": "Q150463"
+  },
+  {
+   "id": "veg.waterspinach",
+   "gloss": "water spinach, morning glory greens",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 27,
+   "wikidata": "Q272754",
+   "aka": "Ipomoea aquatica"
+  },
+  {
+   "id": "veg.chayote",
+   "gloss": "chayote",
+   "subgroup": "cucurbit",
+   "tier": 2,
+   "rank": 28,
+   "wikidata": "Q38646266"
+  },
+  {
+   "id": "veg.shallot",
+   "gloss": "shallot",
+   "subgroup": "bulb",
+   "tier": 2,
+   "rank": 29,
+   "wikidata": "Q193498"
+  },
+  {
+   "id": "veg.yam",
+   "gloss": "yam",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 30,
+   "wikidata": "Q8047551",
+   "aka": "Yam (vegetable)"
+  },
+  {
+   "id": "veg.wintermelon",
+   "gloss": "winter melon, ash gourd",
+   "subgroup": "cucurbit",
+   "tier": 2,
+   "rank": 31,
+   "wikidata": "Q652206",
+   "aka": "Wax gourd"
+  },
+  {
+   "id": "veg.mustardgreens",
+   "gloss": "mustard greens",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 32,
+   "wikidata": "Q504781",
+   "aka": "Brassica juncea"
+  },
+  {
+   "id": "veg.chard",
+   "gloss": "Swiss chard, chard",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 33,
+   "wikidata": "Q157954"
+  },
+  {
+   "id": "veg.luffa",
+   "gloss": "luffa, sponge gourd",
+   "subgroup": "cucurbit",
+   "tier": 2,
+   "rank": 34,
+   "wikidata": "Q232909"
+  },
+  {
+   "id": "veg.bambooshoot",
+   "gloss": "bamboo shoot",
+   "subgroup": "stem",
+   "tier": 2,
+   "rank": 35,
+   "wikidata": "Q2157176"
+  },
+  {
+   "id": "veg.arugula",
+   "gloss": "arugula, rocket",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 36,
+   "wikidata": "Q156884",
+   "aka": "Eruca sativa"
+  },
+  {
+   "id": "veg.kale",
+   "gloss": "kale",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 37,
+   "wikidata": "Q45989"
+  },
+  {
+   "id": "veg.lambslettuce",
+   "gloss": "lamb's lettuce, corn salad",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 38,
+   "wikidata": "Q158954"
+  },
+  {
+   "id": "veg.bokchoy",
+   "gloss": "bok choy, pak choi",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 39,
+   "wikidata": "Q165178"
+  },
+  {
+   "id": "veg.napacabbage",
+   "gloss": "Napa cabbage, Chinese cabbage",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 40,
+   "wikidata": "Q13360268"
+  },
+  {
+   "id": "veg.jalapeno",
+   "gloss": "jalapeño",
+   "subgroup": "fruitveg",
+   "tier": 2,
+   "rank": 41,
+   "wikidata": "Q504133"
+  },
+  {
+   "id": "veg.redcabbage",
+   "gloss": "red cabbage",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 42,
+   "wikidata": "Q263203"
+  },
+  {
+   "id": "veg.garlicchives",
+   "gloss": "garlic chives, Chinese chives",
+   "subgroup": "bulb",
+   "tier": 2,
+   "rank": 43,
+   "wikidata": "Q42285",
+   "aka": "Allium tuberosum"
+  },
+  {
+   "id": "veg.runnerbean",
+   "gloss": "runner bean",
+   "subgroup": "legume",
+   "tier": 2,
+   "rank": 44,
+   "wikidata": "Q159753",
+   "aka": "Phaseolus coccineus"
+  },
+  {
+   "id": "veg.blacksalsify",
+   "gloss": "black salsify, scorzonera",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 45,
+   "wikidata": "Q385259",
+   "aka": "Scorzonera hispanica"
+  },
+  {
+   "id": "veg.daikon",
+   "gloss": "daikon, white radish",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 46,
+   "wikidata": "Q7224757"
+  },
+  {
+   "id": "veg.molokhia",
+   "gloss": "jute mallow, molokhia",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 47,
+   "wikidata": "Q165343",
+   "aka": "Corchorus olitorius"
+  },
+  {
+   "id": "veg.collards",
+   "gloss": "collard greens",
+   "subgroup": "brassica",
+   "tier": 2,
+   "rank": 48,
+   "wikidata": "Q14879985",
+   "aka": "Collard (plant)"
+  },
+  {
+   "id": "veg.cherrytomato",
+   "gloss": "cherry tomato",
+   "subgroup": "fruitveg",
+   "tier": 2,
+   "rank": 49,
+   "wikidata": "Q6540634"
+  },
+  {
+   "id": "veg.celeriac",
+   "gloss": "celeriac, celery root",
+   "subgroup": "root",
+   "tier": 2,
+   "rank": 50,
+   "wikidata": "Q575174"
+  },
+  {
+   "id": "veg.beansprout",
+   "gloss": "bean sprouts",
+   "subgroup": "legume",
+   "tier": 2,
+   "rank": 51,
+   "wikidata": "Q7635866",
+   "aka": "Mung bean sprout"
+  },
+  {
+   "id": "veg.romaine",
+   "gloss": "romaine lettuce, cos",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 52,
+   "wikidata": "Q1762893"
+  },
+  {
+   "id": "veg.radicchio",
+   "gloss": "radicchio",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 53,
+   "wikidata": "Q767765"
+  },
+  {
+   "id": "veg.redonion",
+   "gloss": "red onion",
+   "subgroup": "bulb",
+   "tier": 2,
+   "rank": 54,
+   "wikidata": "Q622350"
+  },
+  {
+   "id": "veg.butternut",
+   "gloss": "butternut squash",
+   "subgroup": "cucurbit",
+   "tier": 2,
+   "rank": 55,
+   "wikidata": "Q4169287"
+  },
+  {
+   "id": "veg.snowpea",
+   "gloss": "snow pea, mangetout",
+   "subgroup": "legume",
+   "tier": 2,
+   "rank": 56,
+   "wikidata": "Q1422840"
+  },
+  {
+   "id": "veg.icebergl",
+   "gloss": "iceberg lettuce",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 57,
+   "wikidata": "Q1310886"
+  },
+  {
+   "id": "veg.endive",
+   "gloss": "endive",
+   "subgroup": "leafy",
+   "tier": 2,
+   "rank": 58,
+   "wikidata": "Q28604477"
+  },
+  {
+   "id": "veg.turmeric",
+   "gloss": "turmeric (fresh root)",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 1,
+   "wikidata": "Q42562"
+  },
+  {
+   "id": "veg.drumstick",
+   "gloss": "drumstick (moringa pod)",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 2,
+   "wikidata": "Q234193",
+   "aka": "Moringa oleifera"
+  },
+  {
+   "id": "veg.borage",
+   "gloss": "borage",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 3,
+   "wikidata": "Q147075"
+  },
+  {
+   "id": "veg.capers",
+   "gloss": "caper",
+   "subgroup": "flower",
+   "tier": 3,
+   "rank": 4,
+   "wikidata": "Q156251"
+  },
+  {
+   "id": "veg.fathen",
+   "gloss": "fat hen, lamb's quarters",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 5,
+   "wikidata": "Q158610",
+   "aka": "Chenopodium album"
+  },
+  {
+   "id": "veg.burdock",
+   "gloss": "burdock root, gobo",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 6,
+   "wikidata": "Q26932",
+   "aka": "Arctium lappa"
+  },
+  {
+   "id": "veg.wasabi",
+   "gloss": "wasabi",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 7,
+   "wikidata": "Q49855"
+  },
+  {
+   "id": "veg.welshonion",
+   "gloss": "Welsh onion, bunching onion",
+   "subgroup": "bulb",
+   "tier": 3,
+   "rank": 8,
+   "wikidata": "Q27938",
+   "aka": "Allium fistulosum"
+  },
+  {
+   "id": "veg.rhubarb",
+   "gloss": "rhubarb",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 9,
+   "wikidata": "Q7535"
+  },
+  {
+   "id": "veg.waterchestnut",
+   "gloss": "water chestnut",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 10,
+   "wikidata": "Q932664",
+   "aka": "Eleocharis dulcis"
+  },
+  {
+   "id": "veg.watercaltrop",
+   "gloss": "water caltrop",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 11,
+   "wikidata": "Q161110"
+  },
+  {
+   "id": "veg.purpleyam",
+   "gloss": "purple yam, ube",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 12,
+   "wikidata": "Q1932852",
+   "aka": "Dioscorea alata"
+  },
+  {
+   "id": "veg.kiwano",
+   "gloss": "kiwano, horned melon",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 13,
+   "wikidata": "Q41318",
+   "aka": "Cucumis metuliferus"
+  },
+  {
+   "id": "veg.jicama",
+   "gloss": "jícama",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 14,
+   "wikidata": "Q517283",
+   "aka": "Pachyrhizus erosus"
+  },
+  {
+   "id": "veg.ivygourd",
+   "gloss": "ivy gourd, tindora",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 15,
+   "wikidata": "Q727330",
+   "aka": "Coccinia grandis"
+  },
+  {
+   "id": "veg.limabean",
+   "gloss": "lima bean",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 16,
+   "wikidata": "Q1166136"
+  },
+  {
+   "id": "veg.cardoon",
+   "gloss": "cardoon",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 17,
+   "wikidata": "Q7186137"
+  },
+  {
+   "id": "veg.tigernut",
+   "gloss": "tiger nut",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 18,
+   "wikidata": "Q1165724",
+   "aka": "Cyperus esculentus"
+  },
+  {
+   "id": "veg.malabarspinach",
+   "gloss": "Malabar spinach",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 19,
+   "wikidata": "Q1130368",
+   "aka": "Basella alba"
+  },
+  {
+   "id": "veg.galangal",
+   "gloss": "galangal",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 20,
+   "wikidata": "Q402971",
+   "aka": "Alpinia galanga"
+  },
+  {
+   "id": "veg.elephantyam",
+   "gloss": "elephant foot yam",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 21,
+   "wikidata": "Q151527",
+   "aka": "Amorphophallus paeoniifolius"
+  },
+  {
+   "id": "veg.savoy",
+   "gloss": "Savoy cabbage",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 22,
+   "wikidata": "Q154013"
+  },
+  {
+   "id": "veg.orache",
+   "gloss": "orache",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 23,
+   "wikidata": "Q158505",
+   "aka": "Atriplex hortensis"
+  },
+  {
+   "id": "veg.goodkinghenry",
+   "gloss": "Good King Henry",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 24,
+   "wikidata": "Q163805",
+   "aka": "Blitum bonus-henricus"
+  },
+  {
+   "id": "veg.kurrat",
+   "gloss": "kurrat, Egyptian leek",
+   "subgroup": "bulb",
+   "tier": 3,
+   "rank": 25,
+   "wikidata": "Q148995",
+   "aka": "Allium ampeloprasum"
+  },
+  {
+   "id": "veg.guar",
+   "gloss": "guar bean, cluster bean",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 26,
+   "wikidata": "Q264770"
+  },
+  {
+   "id": "veg.nori",
+   "gloss": "nori",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 27,
+   "wikidata": "Q201565"
+  },
+  {
+   "id": "veg.konjac",
+   "gloss": "konjac",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 28,
+   "wikidata": "Q674443",
+   "aka": "Amorphophallus konjac"
+  },
+  {
+   "id": "veg.samphire",
+   "gloss": "samphire, sea fennel",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 29,
+   "wikidata": "Q1136311",
+   "aka": "Crithmum"
+  },
+  {
+   "id": "veg.ridgedgourd",
+   "gloss": "ridged gourd",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 30,
+   "wikidata": "Q1948703",
+   "aka": "Luffa acutangula"
+  },
+  {
+   "id": "veg.wingedbean",
+   "gloss": "winged bean",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 31,
+   "wikidata": "Q1468260"
+  },
+  {
+   "id": "veg.tomatillo",
+   "gloss": "tomatillo",
+   "subgroup": "fruitveg",
+   "tier": 3,
+   "rank": 32,
+   "wikidata": "Q622525"
+  },
+  {
+   "id": "veg.glasswort",
+   "gloss": "glasswort, sea asparagus",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 33,
+   "wikidata": "Q159525",
+   "aka": "Salicornia"
+  },
+  {
+   "id": "veg.yardlongbean",
+   "gloss": "yardlong bean",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 34,
+   "wikidata": "Q1323455",
+   "aka": "Asparagus bean"
+  },
+  {
+   "id": "veg.romanesco",
+   "gloss": "Romanesco broccoli",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 35,
+   "wikidata": "Q1775431"
+  },
+  {
+   "id": "veg.cayenne",
+   "gloss": "cayenne pepper",
+   "subgroup": "fruitveg",
+   "tier": 3,
+   "rank": 36,
+   "wikidata": "Q6598"
+  },
+  {
+   "id": "veg.seakale",
+   "gloss": "sea kale",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 37,
+   "wikidata": "Q165299",
+   "aka": "Crambe maritima"
+  },
+  {
+   "id": "veg.oca",
+   "gloss": "oca",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 38,
+   "wikidata": "Q1355893",
+   "aka": "Oxalis tuberosa"
+  },
+  {
+   "id": "veg.nzspinach",
+   "gloss": "New Zealand spinach",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 39,
+   "wikidata": "Q278283",
+   "aka": "Tetragonia tetragonioides"
+  },
+  {
+   "id": "veg.habanero",
+   "gloss": "habanero",
+   "subgroup": "fruitveg",
+   "tier": 3,
+   "rank": 40,
+   "wikidata": "Q764375"
+  },
+  {
+   "id": "veg.wakame",
+   "gloss": "wakame",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 41,
+   "wikidata": "Q864682"
+  },
+  {
+   "id": "veg.yacon",
+   "gloss": "yacón",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 42,
+   "wikidata": "Q1075177"
+  },
+  {
+   "id": "veg.snakegourd",
+   "gloss": "snake gourd",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 43,
+   "wikidata": "Q1323731",
+   "aka": "Trichosanthes cucumerina"
+  },
+  {
+   "id": "veg.kombu",
+   "gloss": "kombu",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 44,
+   "wikidata": "Q11261547"
+  },
+  {
+   "id": "veg.sealettuce",
+   "gloss": "sea lettuce",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 45,
+   "wikidata": "Q1109330"
+  },
+  {
+   "id": "veg.dulse",
+   "gloss": "dulse",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 46,
+   "wikidata": "Q864648",
+   "aka": "Palmaria palmata"
+  },
+  {
+   "id": "veg.mashua",
+   "gloss": "mashua",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 47,
+   "wikidata": "Q766182",
+   "aka": "Tropaeolum tuberosum"
+  },
+  {
+   "id": "veg.kailan",
+   "gloss": "Chinese broccoli, kai-lan",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 48,
+   "wikidata": "Q1677369",
+   "aka": "Gai lan"
+  },
+  {
+   "id": "veg.heartofpalm",
+   "gloss": "heart of palm",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 49,
+   "wikidata": "Q743144"
+  },
+  {
+   "id": "veg.edamame",
+   "gloss": "edamame",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 50,
+   "wikidata": "Q1377879"
+  },
+  {
+   "id": "veg.salsify",
+   "gloss": "salsify",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 51,
+   "wikidata": "Q941639",
+   "aka": "Tragopogon porrifolius"
+  },
+  {
+   "id": "veg.skirret",
+   "gloss": "skirret",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 52,
+   "wikidata": "Q228122",
+   "aka": "Sium sisarum"
+  },
+  {
+   "id": "veg.pattypan",
+   "gloss": "pattypan squash",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 53,
+   "wikidata": "Q876892"
+  },
+  {
+   "id": "veg.armeniancucumber",
+   "gloss": "Armenian cucumber",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 54,
+   "wikidata": "Q2139088"
+  },
+  {
+   "id": "veg.hijiki",
+   "gloss": "hijiki",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 55,
+   "wikidata": "Q1204264"
+  },
+  {
+   "id": "veg.rapini",
+   "gloss": "rapini, broccoli rabe",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 56,
+   "wikidata": "Q702282"
+  },
+  {
+   "id": "veg.arracacha",
+   "gloss": "arracacha",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 57,
+   "wikidata": "Q625399",
+   "aka": "Arracacia xanthorrhiza"
+  },
+  {
+   "id": "veg.chineseartichoke",
+   "gloss": "Chinese artichoke, crosne",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 58,
+   "wikidata": "Q1758702",
+   "aka": "Stachys affinis"
+  },
+  {
+   "id": "veg.amaranth",
+   "gloss": "amaranth greens",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 59,
+   "wikidata": "Q3238412",
+   "aka": "Amaranthus dubius"
+  },
+  {
+   "id": "veg.landcress",
+   "gloss": "land cress",
+   "subgroup": "leafy",
+   "tier": 3,
+   "rank": 60,
+   "wikidata": "Q164056",
+   "aka": "Barbarea verna"
+  },
+  {
+   "id": "veg.seagrapes",
+   "gloss": "sea grapes",
+   "subgroup": "sea",
+   "tier": 3,
+   "rank": 61,
+   "wikidata": "Q1936864",
+   "aka": "Caulerpa lentillifera"
+  },
+  {
+   "id": "veg.treeonion",
+   "gloss": "tree onion, walking onion",
+   "subgroup": "bulb",
+   "tier": 3,
+   "rank": 62,
+   "wikidata": "Q41794154"
+  },
+  {
+   "id": "veg.cucamelon",
+   "gloss": "cucamelon, mouse melon",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 63,
+   "wikidata": "Q929967",
+   "aka": "Melothria scabra"
+  },
+  {
+   "id": "veg.celtuce",
+   "gloss": "celtuce, stem lettuce",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 64,
+   "wikidata": "Q574172"
+  },
+  {
+   "id": "veg.spaghettisquash",
+   "gloss": "spaghetti squash",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 65,
+   "wikidata": "Q2142043"
+  },
+  {
+   "id": "veg.fiddlehead",
+   "gloss": "fiddlehead fern",
+   "subgroup": "stem",
+   "tier": 3,
+   "rank": 66,
+   "wikidata": "Q3546960"
+  },
+  {
+   "id": "veg.pointedgourd",
+   "gloss": "pointed gourd, parwal",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 67,
+   "wikidata": "Q2724295",
+   "aka": "Trichosanthes dioica"
+  },
+  {
+   "id": "veg.komatsuna",
+   "gloss": "komatsuna",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 68,
+   "wikidata": "Q4383692"
+  },
+  {
+   "id": "veg.ramps",
+   "gloss": "ramps, wild leek",
+   "subgroup": "bulb",
+   "tier": 3,
+   "rank": 69,
+   "wikidata": "Q2714893",
+   "aka": "Allium tricoccum"
+  },
+  {
+   "id": "veg.mizuna",
+   "gloss": "mizuna",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 70,
+   "wikidata": "Q50912348"
+  },
+  {
+   "id": "veg.padron",
+   "gloss": "Padrón pepper",
+   "subgroup": "fruitveg",
+   "tier": 3,
+   "rank": 71,
+   "wikidata": "Q1466464"
+  },
+  {
+   "id": "veg.tatsoi",
+   "gloss": "tatsoi",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 72,
+   "wikidata": "Q7688261"
+  },
+  {
+   "id": "veg.pearlonion",
+   "gloss": "pearl onion",
+   "subgroup": "bulb",
+   "tier": 3,
+   "rank": 73,
+   "wikidata": "Q508630"
+  },
+  {
+   "id": "veg.zucchiniflower",
+   "gloss": "zucchini flower",
+   "subgroup": "flower",
+   "tier": 3,
+   "rank": 74,
+   "wikidata": "Q42293042",
+   "aka": "Squash blossom"
+  },
+  {
+   "id": "veg.pointedcabbage",
+   "gloss": "pointed cabbage",
+   "subgroup": "brassica",
+   "tier": 3,
+   "rank": 75,
+   "wikidata": "Q7225623"
+  },
+  {
+   "id": "veg.babycorn",
+   "gloss": "baby corn",
+   "subgroup": "fruitveg",
+   "tier": 3,
+   "rank": 76,
+   "wikidata": "Q4838440"
+  },
+  {
+   "id": "veg.elephantgarlic",
+   "gloss": "elephant garlic",
+   "subgroup": "bulb",
+   "tier": 3,
+   "rank": 77,
+   "wikidata": "Q4392799"
+  },
+  {
+   "id": "veg.acorns",
+   "gloss": "acorn squash",
+   "subgroup": "cucurbit",
+   "tier": 3,
+   "rank": 78,
+   "wikidata": "Q2975815"
+  },
+  {
+   "id": "veg.sugarsnap",
+   "gloss": "sugar snap pea",
+   "subgroup": "legume",
+   "tier": 3,
+   "rank": 79,
+   "wikidata": "Q12097128"
+  },
+  {
+   "id": "veg.rootparsley",
+   "gloss": "root parsley, Hamburg parsley",
+   "subgroup": "root",
+   "tier": 3,
+   "rank": 80
+  }
+ ]
+}

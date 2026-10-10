@@ -1,0 +1,521 @@
+{
+ "function": "fn.ordinals",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "num.agreement",
+   "value": "some"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number-case"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-to-next"
+  }
+ ],
+ "summary": "Ordinal numbers add -te to the number up to 19 (zwei → zweite, vier → vierte, zehn → zehnte, neunzehn → neunzehnte) and -ste from 20 on (zwanzigste, hundertste). Four are irregular: erste (1st), dritte (3rd), siebte (7th, also siebente) and achte (8th, only one t). They are declined like adjectives: the ending depends on the article, the gender, the number and the case – der erste Tag, die erste Woche, das erste Jahr, ein erster Tag, am ersten Tag, die ersten Tage. letzte (last) works the same way. In writing an ordinal is a figure with a dot: der 3. Mai = der dritte Mai. Dates use the ordinal: Heute ist der dritte Mai (nominative), Mein Geburtstag ist am dritten Mai (am = an dem + dative). Centuries too: im zehnten Jahrhundert. The clock: acht Uhr (8:00), Viertel nach acht (8:15), halb neun (8:30 – halb counts towards the next hour), Viertel vor neun (8:45); official times use 24 hours: 20:30 = zwanzig Uhr dreißig. Half is die Hälfte as a noun (die Hälfte der Kinder) and halb before the next hour or an adjective (halb acht, halb voll); a quarter is das Viertel.",
+ "blocks": [
+  {
+   "t": "table",
+   "caption": "The ordinals: number + -te (up to 19), + -ste (from 20); four irregular ones",
+   "head": [
+    "",
+    "der … (weak)",
+    "am … (on the …)"
+   ],
+   "rows": [
+    [
+     "1.",
+     "der erste",
+     "am ersten"
+    ],
+    [
+     "2.",
+     "der zweite",
+     "am zweiten"
+    ],
+    [
+     "3.",
+     "der dritte",
+     "am dritten"
+    ],
+    [
+     "4.",
+     "der vierte",
+     "am vierten"
+    ],
+    [
+     "5.",
+     "der fünfte",
+     "am fünften"
+    ],
+    [
+     "6.",
+     "der sechste",
+     "am sechsten"
+    ],
+    [
+     "7.",
+     "der siebte",
+     "am siebten"
+    ],
+    [
+     "8.",
+     "der achte",
+     "am achten"
+    ],
+    [
+     "9.",
+     "der neunte",
+     "am neunten"
+    ],
+    [
+     "10.",
+     "der zehnte",
+     "am zehnten"
+    ],
+    [
+     "20.",
+     "der zwanzigste",
+     "am zwanzigsten"
+    ],
+    [
+     "last",
+     "der letzte",
+     "am letzten"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "some"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Declined like an adjective: the article decides the ending",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "der / die / das (nominative)",
+     "der erste Tag",
+     "die erste Woche",
+     "das erste Jahr",
+     "die ersten Tage"
+    ],
+    [
+     "ein / mein (nominative)",
+     "ein erster Tag",
+     "eine erste Woche",
+     "ein erstes Jahr",
+     "meine ersten Tage"
+    ],
+    [
+     "accusative",
+     "den ersten Tag",
+     "die erste Woche",
+     "das erste Jahr",
+     "die ersten Tage"
+    ],
+    [
+     "dative",
+     "am ersten Tag",
+     "in der ersten Woche",
+     "im ersten Jahr",
+     "an den ersten Tagen"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The dot makes it an ordinal",
+   "text": "der 3. Mai = der dritte Mai; am 3. Mai = am dritten Mai; im 19. Jahrhundert = im neunzehnten Jahrhundert. Written dates go day.month.year: 08.10.2026 = der achte Oktober zweitausendsechsundzwanzig. Years: 1990 = neunzehnhundertneunzig; say 1990 or im Jahr 1990 – not *in 1990."
+  },
+  {
+   "t": "table",
+   "caption": "The clock (spoken)",
+   "head": [
+    "time",
+    "German"
+   ],
+   "rows": [
+    [
+     "8:00",
+     "acht Uhr"
+    ],
+    [
+     "8:05",
+     "fünf nach acht"
+    ],
+    [
+     "8:15",
+     "Viertel nach acht"
+    ],
+    [
+     "8:20",
+     "zwanzig nach acht"
+    ],
+    [
+     "8:30",
+     "halb neun"
+    ],
+    [
+     "8:40",
+     "zwanzig vor neun"
+    ],
+    [
+     "8:45",
+     "Viertel vor neun"
+    ],
+    [
+     "20:30 (official)",
+     "zwanzig Uhr dreißig"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-to-next"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "halb neun = 8:30",
+   "text": "halb counts towards the next hour: halb neun is half an hour before nine. In parts of the east and south people also say viertel neun (8:15) and dreiviertel neun (8:45), counted the same way.",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-to-next"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking the date and the time",
+   "text": "Der Wievielte ist heute? / Welches Datum ist heute? – Heute ist der achte Oktober. Wann hast du Geburtstag? – Am zehnten Juni. Wie spät ist es? / Wie viel Uhr ist es? – Es ist halb acht. Um wie viel Uhr? – Um Viertel nach sechs."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Hälfte or halb?",
+   "text": "die Hälfte is a noun: die Hälfte der Kinder, die Hälfte vom Kuchen. halb comes before the next hour or before an adjective (halb acht, halb voll) and, declined, before a noun: eine halbe Stunde. ein Viertel (a quarter), ein Drittel (a third)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the number below 20 (→ -te) or 20 and above (→ -ste)? Is it one of erste, dritte, siebte, achte?",
+   "Which article stands before it (der / ein / none)? Which gender, number and case? → the adjective ending.",
+   "A date: nominative (Heute ist der dritte Mai) or “on” (am dritten Mai)?",
+   "A written figure with a dot? Read it as an ordinal: der 3. = der dritte.",
+   "The clock: halb + the NEXT hour; Viertel nach / Viertel vor."
+  ],
+  "steps": [
+   "Form the ordinal stem (zweit-, dritt-, zwanzigst-).",
+   "Add the adjective ending for the article, gender, number and case.",
+   "For dates use am + dative; for the clock count halb towards the next hour."
+  ]
+ },
+ "traps": [
+  "der erste, der dritte, der siebte (also siebente), der achte – not *der einte, *der dreite, *der achtte.",
+  "der zwanzigste – -ste from 20 on, not *der zwanzigte.",
+  "am dritten Mai – the dative after am needs -en.",
+  "halb neun = 8:30, not 9:30.",
+  "die Hälfte (noun) vs halb (adverb / adjective).",
+  "ein erstes Auto, das erste Auto – the ending changes with the article."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:erste",
+   "de:zweite",
+   "de:dritte",
+   "de:vierte",
+   "de:fünfte",
+   "de:sechste",
+   "de:siebte",
+   "de:achte",
+   "de:neunte",
+   "de:zehnte",
+   "de:letzte",
+   "de:halb",
+   "de:Viertel",
+   "de:Hälfte"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;NOM;SG;MASC;WEAK",
+  "ADJ;DAT;SG;MASC;WEAK",
+  "ADJ;NOM;SG;MASC;MIX",
+  "ADJ;NOM;SG;NEUT;MIX",
+  "ADJ;NOM;PL;WEAK"
+ ],
+ "needs": {
+  "ADJ": 5
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "lemmas": [
+    "de:erste",
+    "de:zweite",
+    "de:dritte",
+    "de:vierte",
+    "de:fünfte",
+    "de:sechste",
+    "de:siebte",
+    "de:achte",
+    "de:neunte",
+    "de:zehnte",
+    "de:letzte"
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;WEAK",
+    "ADJ;DAT;SG;MASC;WEAK",
+    "ADJ;NOM;SG;MASC;MIX",
+    "ADJ;NOM;SG;NEUT;MIX",
+    "ADJ;DAT;SG;FEM;STRG"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Es ist 8:30.",
+   "options": [
+    "Es ist halb neun.",
+    "Es ist halb acht.",
+    "Es ist acht halb."
+   ],
+   "answer": "Es ist halb neun.",
+   "why": "halb counts towards the next hour: halb neun = 8:30."
+  },
+  {
+   "q": "Es ist 6:15.",
+   "options": [
+    "Es ist Viertel nach sechs.",
+    "Es ist Viertel vor sechs.",
+    "Es ist halb sieben."
+   ],
+   "answer": "Es ist Viertel nach sechs.",
+   "why": "Viertel nach = a quarter past."
+  },
+  {
+   "q": "Mein Geburtstag ist am ___ Mai. (3.)",
+   "options": [
+    "dritten",
+    "dritte",
+    "dreiten",
+    "drei"
+   ],
+   "answer": "dritten",
+   "why": "am = an dem: dative after the article → -en; drei → dritte (irregular)."
+  },
+  {
+   "q": "Heute ist der ___ Oktober. (8.)",
+   "options": [
+    "achte",
+    "achtte",
+    "achten",
+    "acht"
+   ],
+   "answer": "achte",
+   "why": "acht + -e: only one t; nominative after der → -e."
+  },
+  {
+   "q": "Das ist mein ___ Auto. (1.)",
+   "options": [
+    "erstes",
+    "erste",
+    "einte",
+    "ersten"
+   ],
+   "answer": "erstes",
+   "why": "After mein (no ending for neuter nominative) the ordinal shows the gender: erstes."
+  },
+  {
+   "q": "the 20th",
+   "options": [
+    "der zwanzigste",
+    "der zwanzigte",
+    "der zweite"
+   ],
+   "answer": "der zwanzigste",
+   "why": "From 20 the ending is -ste."
+  },
+  {
+   "q": "“Half of the children …”",
+   "options": [
+    "Die Hälfte der Kinder …",
+    "Die halb der Kinder …",
+    "Halb Kinder …"
+   ],
+   "answer": "Die Hälfte der Kinder …",
+   "why": "The noun die Hälfte + genitive (or von + dative)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.ordinals",
+   "note": "Arabic ordinals follow the pattern fāʿil and agree in gender: ثَالِث / ثَالِثَة (third); the first is أَوَّل / أُولَى."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.ordinals",
+   "note": "Hebrew has ordinals up to ten (רִאשׁוֹן, שֵׁנִי, שְׁלִישִׁי …), agreeing in gender; dates use the cardinal numbers."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.ordinals",
+   "note": "Chinese puts 第 before the number (第三, the third) and writes dates from big to small: 2026年10月8日."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.time",
+   "note": "um acht Uhr, am Montag, im Mai – the time prepositions are used with the dates and the clock."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek ordinals also agree in gender, number and case (πρώτος, πρώτη, πρώτο), but Greek dates use the cardinal after the first (στις τρεις Μαΐου), while German always uses the ordinal: am dritten Mai. And οκτώ και μισή (8:30) is halb neun in German."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian ordinals decline like adjectives (первый, первая …) and половина девятого (8:30) counts to the next hour – exactly like halb neun. Dates: третьего мая = am dritten Mai."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Spanish dates use cardinals (el tres de mayo); German uses the ordinal: der dritte Mai. Las ocho y media is halb neun – not halb acht."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "halb neun is 8:30, not 9:30. Ordinals decline: der erste, am ersten, ein erstes; written with a dot: der 3. Mai."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "French dates use the cardinal (le trois mai, but le premier); German always the ordinal: der dritte Mai. Huit heures et demie = halb neun."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi ordinals (पहला, दूसरा, तीसरा, चौथा, then -वाँ: पाँचवाँ) agree in gender; the clock says साढ़े आठ for 8:30, counted from the hour before – German: halb neun."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian ordinals add -om (dovvom, sevvom) and do not agree; 8:30 is hašt o nim (eight and a half) – German counts to the next hour: halb neun."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi says साडेआठ (sāḍeāṭh) for 8:30, counted from the hour before; German says halb neun, counted towards nine."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic ordinals are built on the pattern fāʿil (ثَالِث, رَابِع); German adds -te / -ste. 8:30 is the eighth (hour) and a half in Arabic – halb neun in German."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew has ordinals only up to ten and uses cardinals for dates (בִּשְׁלוֹשָׁה בְּמַאי); German has an ordinal for every number and uses it for dates: am dritten Mai."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish ordinals add -(i)nci with vowel harmony (birinci, üçüncü) and never agree; German ordinals decline like adjectives. Sekiz buçuk (8:30) = halb neun."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese makes ordinals with 第 or -番目 and has no agreement; hachi-ji han (8:30) is halb neun in German, counted towards nine."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean ordinals use -째 (첫째, 둘째) or 제-; 여덟 시 반 (8:30) is halb neun in German."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish puoli yhdeksän (8:30) counts to the next hour exactly like halb neun, and Finnish ordinals decline too (ensimmäinen, toinen, kolmas)."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian fél kilenc (8:30), negyed kilenc (8:15) and háromnegyed kilenc (8:45) work like halb neun and the regional viertel neun / dreiviertel neun."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili ordinals follow the noun with an agreement prefix (siku ya tatu, the third day), and the clock counts from about 6 in the morning (saa mbili = 8:00); German counts from midnight and puts the ordinal before the noun."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese puts 第 before the number and never changes it; German ordinals take adjective endings (der dritte, am dritten). 八点半 (8:30) is halb neun."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese uses thứ + number (thứ nhất, thứ hai) without agreement; German ordinals decline. Tám giờ rưỡi (8:30) is halb neun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "In languages that pack much into one word an ordinal can be a suffix on a number or a noun; German keeps it a separate word that agrees like an adjective: der dritte Tag, am dritten Tag."
+  }
+ ]
+}

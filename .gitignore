@@ -5,6 +5,7 @@ config.local.js
 dist/
 data/*.db
 data/*.db-*
+data/refcache/
 *.tmp
 __pycache__/
 .DS_Store

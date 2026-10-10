@@ -1,0 +1,492 @@
+{
+ "function": "fn.prep.core",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "mixed"
+  },
+  {
+   "feature": "syn.obliquePosition",
+   "value": "XVO"
+  },
+  {
+   "feature": "nom.cases",
+   "value": "none"
+  }
+ ],
+ "summary": "Chinese ‘prepositions’ are coverbs — words that are (or were) verbs. With their noun they stand BEFORE the main verb, never after it: 我在家吃饭 ‘I eat at home’ (literally ‘I be-at home eat’). The order is fixed: subject – (time) – coverb + noun – verb – object. 在 does ‘in’ and ‘at’: 在学校, 在超市, 在银行工作. ‘To’ is the movement verb itself — 去学校 ‘go to school’ (S13) — or 到 + place + verb ‘go to … to do …’: 到超市买牛奶. 从 is ‘from’, 跟 / 和 + person + 一起 is ‘with’, 给 + person is ‘for’ (formal 为), 关于 + topic + 的 + noun is ‘about’. ‘Without’ has no word: 没有 + noun or 不 + verb. Place nouns need nothing more (在学校); ordinary nouns take a place word after them (在冰箱里, S12). There are no cases: the noun never changes.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "subject",
+    "coverb + noun",
+    "verb",
+    "object"
+   ],
+   "caption": "我 · 在银行 · 工作 / 我 · 给妈妈 · 买 · 水果",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Chinese order"
+   ],
+   "rows": [
+    [
+     "I eat at home.",
+     "我在家吃饭。"
+    ],
+    [
+     "My father works at a bank.",
+     "我爸爸在银行工作。"
+    ],
+    [
+     "I eat with friends.",
+     "我跟朋友一起吃饭。"
+    ],
+    [
+     "I’m buying fruit for Mum.",
+     "我给妈妈买水果。"
+    ],
+    [
+     "We go to the supermarket to buy milk.",
+     "我们到超市买牛奶。"
+    ],
+    [
+     "These apples are from the market.",
+     "这些苹果是从市场买的。"
+    ],
+    [
+     "a book about the family",
+     "一本关于家庭的书"
+    ]
+   ],
+   "caption": "The prepositional phrase moves in front of the verb",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Chinese",
+    "Example"
+   ],
+   "rows": [
+    [
+     "in / at — where you are",
+     "在 + place",
+     "我在家。 我在学校。"
+    ],
+    [
+     "to — where you go",
+     "去 + place (verb, S13); 到 + place (+ verb)",
+     "我去学校。 我们到超市买牛奶。"
+    ],
+    [
+     "from",
+     "从 + place",
+     "这些苹果是从市场买的。"
+    ],
+    [
+     "from — distance",
+     "离 (S12)",
+     "超市离我家很近。"
+    ],
+    [
+     "with — a person",
+     "跟 / 和 + person + 一起",
+     "我跟朋友一起吃饭。"
+    ],
+    [
+     "with — a thing, a tool",
+     "加 ‘add’, 用 ‘use’ — not 跟",
+     "加牛奶的咖啡; 用筷子吃饭"
+    ],
+    [
+     "for — a person",
+     "给 (everyday), 为 (formal)",
+     "这是给你的。 妈妈为我们做饭。"
+    ],
+    [
+     "without",
+     "没有 + noun; 不 + verb",
+     "没有糖的咖啡; 我喝咖啡不要糖。"
+    ],
+    [
+     "about — a topic",
+     "关于 … 的 + noun",
+     "一本关于家庭的书"
+    ]
+   ],
+   "caption": "In, at, to, from, with, for, about, without — in Chinese",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    },
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    }
+   ],
+   "notes": [
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "Greek σε covers ‘at’ and ‘to’ (στο σπίτι, πάω στο σχολείο); Chinese splits it into 在 and 去 / 到. από is 从 for a place you leave and 离 for a distance; με is 跟 … 一起 with a person but 加 / 用 with a thing; για is 给 / 为 for a person, 关于 for a topic; χωρίς is 没有 + noun or 不 + verb."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "Spanish en ~ 在 (estoy en casa), but a ‘to’ has no word: ir a la escuela ~ 去学校. con is 跟 … 一起 for people and 用 / 加 for things; para ~ 给 / 为; sin ~ 没有 / 不."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "French à covers ‘at’ and ‘to’ (à la maison, je vais à l’école); Chinese splits it into 在 and 去. avec is 跟 … 一起 for people and 用 / 加 for things; pour ~ 给; sans ~ 没有 / 不."
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Being somewhere and going somewhere are two different words",
+   "text": "在 is for being or doing something somewhere (我在学校, 我在学校吃饭); going there is a verb of movement with the place as its object (我去学校 — no word for ‘to’ at all)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Not at the end",
+   "text": "*我吃饭在家, *我工作在银行 put the phrase after the verb — wrong in Chinese. The coverb phrase goes before the verb: 我在家吃饭, 我在银行工作."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "在 + place — where it is / happens",
+     "points": [
+      "他在医院。 He is at the hospital.",
+      "他在医院工作。 He works at the hospital."
+     ]
+    },
+    {
+     "title": "到 + place — where you get to",
+     "points": [
+      "我们到超市买牛奶。 We go to the supermarket to buy milk.",
+      "从我家到学校很近。 From my home to the school it is close."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Places need no ‘in / at’ word — things need a place word",
+   "text": "在学校, 在超市, 在银行, 在家 — these nouns are places already. A thing becomes a place with 里 / 上 after it: 在冰箱里, 在桌子上 (S12)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Measure words for places (S11)",
+   "text": "家 for businesses: 一家超市, 这家饭馆, 两家银行 · 所 for schools and hospitals: 一所学校, 这所大学 · 条 for streets: 一条街 · 个 for most others: 一个公园, 一个国家."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "跟 is ‘with’ a person only",
+   "text": "我跟朋友一起吃饭 ‘I eat with friends’ — but ‘coffee with milk’ is 加牛奶的咖啡 and ‘eat with chopsticks’ 用筷子吃饭."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking with the coverbs",
+   "text": "The question word takes the noun’s place: 你在哪里工作？ 你跟谁一起吃饭？ 这是给谁的？ 这些苹果是从哪里买的？"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Where is it, or where does it happen? → 在 + place, before the verb.",
+   "Where to? → 去 + place (go), or 到 + place + verb (go there to do it).",
+   "From where? → 从 + place, before the verb. A distance (near, far)? → 离 (S12).",
+   "With whom? → 跟 / 和 + person + 一起 + verb.",
+   "With a thing (milk, chopsticks)? → not 跟: 加, 用.",
+   "For whom? → 给 + person + verb (formal 为); ‘this is for you’ = 这是给你的.",
+   "About what? → 关于 + topic + 的 + noun, or 关于… at the start.",
+   "Without? → 没有 + noun, or 不 + verb.",
+   "Is the noun a real place (school, bank, home) or a thing (fridge, table)? → a thing needs 里 / 上 after it.",
+   "Did I put the phrase at the end, after the verb? → move it before the verb."
+  ],
+  "steps": [
+   "Subject first.",
+   "Then (time and) the coverb with its noun.",
+   "Then the verb and its object."
+  ]
+ },
+ "traps": [
+  "*我吃饭在家 → 我在家吃饭.",
+  "*我去到学校 for ‘I go to school’ → 我去学校 (去 already means ‘go to’).",
+  "*我喝咖啡跟牛奶 for ‘coffee with milk’ → 我喝加牛奶的咖啡.",
+  "*一本书关于家庭 → 一本关于家庭的书 (the 关于 phrase before the noun, with 的).",
+  "*这是给你 → 这是给你的 (‘this is for you’ needs 的).",
+  "*我从家很远 for ‘I live far from home’ → distance takes 离: 我家离这里很远.",
+  "*在冰箱 for ‘in the fridge’ → 在冰箱里 (a thing needs a place word)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:zai",
+   "zh:dao",
+   "zh:cong.from",
+   "zh:gen.with",
+   "zh:he",
+   "zh:gei",
+   "zh:wei.for",
+   "zh:guanyu"
+  ]
+ },
+ "needs": {
+  "NOUN": 8,
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.core"
+    ]
+   }
+  },
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘I work at a bank.’",
+   "options": [
+    "我在银行工作。",
+    "我工作在银行。",
+    "我银行在工作。"
+   ],
+   "answer": "我在银行工作。",
+   "why": "The coverb phrase 在银行 comes before the verb."
+  },
+  {
+   "q": "‘I go to school’ is …",
+   "options": [
+    "我去学校。",
+    "我在学校去。",
+    "我去在学校。"
+   ],
+   "answer": "我去学校。",
+   "why": "For ‘to’ the verb of movement takes the place directly; 在 is only for where you are."
+  },
+  {
+   "q": "‘I eat with friends.’",
+   "options": [
+    "我跟朋友一起吃饭。",
+    "我吃饭跟朋友。",
+    "我一起吃饭朋友。"
+   ],
+   "answer": "我跟朋友一起吃饭。",
+   "why": "跟 + person + 一起 + verb."
+  },
+  {
+   "q": "‘This is for you.’",
+   "options": [
+    "这是给你的。",
+    "这是为你。",
+    "这给你是。"
+   ],
+   "answer": "这是给你的。",
+   "why": "给 + person + 的: ‘the one for you’."
+  },
+  {
+   "q": "‘a book about the family’",
+   "options": [
+    "一本关于家庭的书",
+    "一本书关于家庭",
+    "关于一本家庭书"
+   ],
+   "answer": "一本关于家庭的书",
+   "why": "The 关于 phrase stands before the noun, joined with 的."
+  },
+  {
+   "q": "Which word is ‘from’ for a starting point?",
+   "options": [
+    "从",
+    "离",
+    "到"
+   ],
+   "answer": "从",
+   "why": "从 = from (a place, a time); 离 is for distance, 到 for ‘to’."
+  },
+  {
+   "q": "‘Coffee without sugar’",
+   "options": [
+    "没有糖的咖啡",
+    "咖啡跟糖",
+    "咖啡关于糖"
+   ],
+   "answer": "没有糖的咖啡",
+   "why": "Chinese has no ‘without’: 没有 + noun."
+  },
+  {
+   "q": "一 __ 超市",
+   "options": [
+    "家",
+    "本",
+    "张",
+    "把"
+   ],
+   "answer": "家",
+   "why": "Shops and businesses are counted with 家."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek prepositional phrases follow the verb (τρώω στο σπίτι, δουλεύω σε τράπεζα); Chinese coverb phrases go before it: 我在家吃饭, 我在银行工作."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian prepositions govern cases (в доме, в дом, из дома, с другом) and usually follow the verb; Chinese coverbs take an unchanged noun and stand before the verb: 我在家吃饭, 我跟朋友一起吃饭."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Spanish puts the phrase after the verb (como en casa, trabajo en un banco); Chinese before it: 我在家吃饭, 我在银行工作."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English puts the prepositional phrase after the verb (I eat at home, I work at a bank); Chinese puts it before: 我在家吃饭, 我在银行工作. ‘with’ is 跟 … 一起 for people but 用 / 加 for things."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "French phrases follow the verb (je mange à la maison); Chinese ones precede it: 我在家吃饭."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German prepositions govern case and tell location from direction (im Haus / ins Haus); Chinese has no case — 在 is location, and a movement verb gives the direction (去学校)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi postposition phrases (घर में ‘at home’, दोस्त के साथ ‘with a friend’) stand before the verb, as Chinese coverb phrases do (我在家吃饭); but Hindi puts the marker after the noun, Chinese before it (在 + 家)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian prepositional phrases (dar khāne, bā dust) come before the verb — the Chinese position: man dar khāne ghazā mikhoram ~ 我在家吃饭."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi marks place and company after the noun (घरी ‘at home’, मित्राबरोबर ‘with a friend’) and puts them before the verb — the Chinese position, though Chinese puts its coverb before the noun: 在家, 跟朋友."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic prepositions follow the verb (ākulu fī l-bayt) and put the noun in the genitive; Chinese coverbs come before the verb and the noun never changes: 我在家吃饭."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew prepositions follow the verb and often fuse with the article (ba-bayit ‘at home’); Chinese 在家 stands before the verb: 我在家吃饭."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish case endings and postpositions (evde, arkadaşımla) come before the verb — the Chinese position — but after the noun; Chinese coverbs stand before the noun: 在家, 跟朋友."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese particles (家で, 友達と) follow the noun and stand before the verb; Chinese coverbs precede the noun, but the phrase also goes before the verb: 在家吃饭 ~ 家で食べる."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean particles (집에서, 친구하고) follow the noun and stand before the verb; Chinese coverbs precede the noun, and the phrase also stands before the verb: 在家吃饭 ~ 집에서 밥을 먹어요."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses case endings for in / from / into (talossa, talosta, taloon) and usually puts them after the verb; Chinese has no case: 在 + place before the verb, and the direction comes from the verb (去, 从 … 来)."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian uses case endings (házban, házba, házból) and postpositions; Chinese has no case — 在 + place before the verb, 去 and 从 for direction."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili marks place with -ni (nyumbani ‘at home’) and company with na, after the verb; Chinese puts 在家 and 跟朋友 before the verb."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda puts place phrases (mu nnyumba ‘in the house’) after the verb; Chinese puts 在 + place before it."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese also has verb-like prepositions (ở ‘be at’, cho ‘give, for’) — the same idea as 在 and 给 — but usually puts the phrase after the verb (tôi làm việc ở ngân hàng); Chinese puts it before: 我在银行工作."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks place, goal and source with case endings on the noun (-mi ‘at’, -mut ‘to’, -mit ‘from’); Chinese has no endings and uses separate coverbs before the verb: 在家, 从家."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.prep.core",
+   "note": "German splits σε into in / an / zu / nach and needs a case after every preposition; Chinese has no cases — 在 for ‘where’, a verb of movement for ‘where to’, and the phrase before the verb."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "Wo? (dative) vs Wohin? (accusative) is a case contrast in German; Chinese says the same with two different words, 在 vs 去 / 到."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.core",
+   "note": "Arabic fī, ilā, min, maʿa, li- and ʿan put the noun in the genitive and follow the verb; Chinese coverbs come before the verb and change nothing."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.prep.core",
+   "note": "Hebrew writes בְּ, לְ, מִ as prefixes on the noun (בַּבַּיִת ‘at home’); Chinese uses separate coverbs (在家)."
+  }
+ ]
+}

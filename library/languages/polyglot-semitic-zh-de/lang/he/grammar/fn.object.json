@@ -1,0 +1,376 @@
+{
+ "function": "fn.object",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "verb.objectMarking",
+   "value": "none"
+  },
+  {
+   "feature": "nom.cases",
+   "value": "none"
+  },
+  {
+   "feature": "syn.wordOrder",
+   "value": "SVO"
+  }
+ ],
+ "summary": "The direct object — what is eaten, drunk, bought, liked or cooked — comes after the verb. Hebrew nouns have no case endings, but a **definite** direct object gets the small word אֶת (et) in front of it: הוּא אוֹכֵל תַּפּוּחַ “he eats an apple” — הוּא אוֹכֵל אֶת הַתַּפּוּחַ “he eats the apple”. Definite means: a noun with הַ, a two-word noun whose second word has הַ (אֶת אֲרוּחַת הַבֹּקֶר), a noun with הַ + שֶׁלִּי … or הַזֶּה (אֶת הַקָּפֶה שֶׁלּוֹ), a name, or a pronoun. An indefinite object has no marker at all. אֶת is not translated; it does the job of an accusative, but only for a definite object, and the noun after it never changes. With a pronoun אֶת takes endings: אוֹתִי “me”, אוֹתוֹ “him, it”, אוֹתָהּ “her, it” … In standard Hebrew the thing after יֵשׁ / אֵין is a subject, so it has no אֶת. Objects with prepositions (to, for, with) and the indirect object come later (S11–S13, C03).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "indefinite — no marker",
+    "definite — אֶת"
+   ],
+   "rows": [
+    [
+     "הוּא אוֹכֵל תַּפּוּחַ. “He eats an apple.”",
+     "הוּא אוֹכֵל אֶת הַתַּפּוּחַ. “He eats the apple.”"
+    ],
+    [
+     "הִיא שׁוֹתָה מִיץ. “She drinks juice.”",
+     "הִיא שׁוֹתָה אֶת הַמִּיץ. “She drinks the juice.”"
+    ],
+    [
+     "הוּא קוֹנֶה גְּבִינָה. “He buys cheese.”",
+     "הוּא קוֹנֶה אֶת הַגְּבִינָה. “He buys the cheese.”"
+    ],
+    [
+     "אַבָּא מְבַשֵּׁל אֲרוּחַת עֶרֶב. “Dad cooks dinner.”",
+     "אַבָּא מְבַשֵּׁל אֶת אֲרוּחַת הָעֶרֶב. “Dad cooks the dinner.”"
+    ]
+   ],
+   "caption": "Only the definite object is marked; the noun itself never changes.",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    },
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "the object",
+    "example"
+   ],
+   "rows": [
+    [
+     "a noun with הַ",
+     "אֶת הַלֶּחֶם"
+    ],
+    [
+     "a two-word noun with הַ on its second word",
+     "אֶת אֲרוּחַת הַבֹּקֶר"
+    ],
+    [
+     "a noun with הַ + שֶׁלִּי, שֶׁלּוֹ …",
+     "אֶת הַקָּפֶה שֶׁלּוֹ"
+    ],
+    [
+     "a noun with הַ + הַזֶּה / הַזֹּאת",
+     "אֶת הַמִּיץ הַזֶּה"
+    ],
+    [
+     "a name",
+     "אֶת דָּוִד"
+    ],
+    [
+     "a pronoun",
+     "אוֹתוֹ, אוֹתָהּ …"
+    ]
+   ],
+   "caption": "These are definite — they take אֶת."
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "as an object"
+   ],
+   "rows": [
+    [
+     "me",
+     "אוֹתִי"
+    ],
+    [
+     "you (to a man)",
+     "אוֹתְךָ"
+    ],
+    [
+     "you (to a woman)",
+     "אוֹתָךְ"
+    ],
+    [
+     "him, it (m.)",
+     "אוֹתוֹ"
+    ],
+    [
+     "her, it (f.)",
+     "אוֹתָהּ"
+    ],
+    [
+     "us",
+     "אוֹתָנוּ"
+    ],
+    [
+     "you (pl.)",
+     "אֶתְכֶם / אֶתְכֶן"
+    ],
+    [
+     "them",
+     "אוֹתָם / אוֹתָן"
+    ]
+   ],
+   "caption": "אֶת with personal endings — a preview: אֲנִי אוֹהֵב אוֹתוֹ “I like it (m.)”.",
+   "typology": [
+    {
+     "feature": "verb.objectMarking",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "אֶת = “the following object is definite”",
+   "text": "Hebrew marks the direct object only when it is definite: הוּא אוֹכֵל תַּפּוּחַ “he eats an apple” / הוּא אוֹכֵל אֶת הַתַּפּוּחַ “he eats the apple”. The noun itself is the same in both."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No אֶת before an indefinite object",
+   "text": "*הוּא אוֹכֵל אֶת תַּפּוּחַ is wrong: without הַ there is no אֶת — הוּא אוֹכֵל תַּפּוּחַ."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "אֶת or אַתְּ?",
+   "text": "Without vowel marks both are written את: אֶת (et) marks the object, אַתְּ (at) is “you” to a woman. The sentence tells you which: אַתְּ אוֹכֶלֶת אֶת הַלֶּחֶם “you (f.) eat the bread”."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "תַּפּוּחַ → אֶת הַתַּפּוּחַ",
+      "only the definite object is marked",
+      "the noun itself never changes"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "einen Apfel / den Apfel",
+      "every direct object is accusative, definite or not"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "the verb",
+    "is the object definite?",
+    "yes → אֶת + the object",
+    "no → the object alone"
+   ],
+   "caption": "Marking the direct object"
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "What is eaten, drunk, bought, liked?",
+    "Does it have הַ, a name, a pronoun?",
+    "Then: אֶת in front."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Does the verb have a direct object (what is eaten, drunk, bought, liked, cooked)?",
+   "Is the object definite — with הַ, a definite second word, a name, a pronoun? → אֶת before it.",
+   "Is it indefinite (no article)? → nothing before it.",
+   "Is it a pronoun? → אֶת with an ending: אוֹתוֹ, אוֹתָהּ …",
+   "Is it after יֵשׁ / אֵין? → standard Hebrew puts no אֶת there.",
+   "Is there a preposition (to, with, for)? → that is not a direct object (S11)."
+  ],
+  "steps": [
+   "The verb, then the object.",
+   "Definite object: אֶת + the definite noun.",
+   "Indefinite object: the noun alone."
+  ]
+ },
+ "traps": [
+  "*הוּא אוֹכֵל אֶת תַּפּוּחַ — אֶת only before a definite object.",
+  "*אֲנִי אוֹהֵב הַסָּלָט — a definite object needs אֶת: אֲנִי אוֹהֵב אֶת הַסָּלָט.",
+  "In a two-word noun הַ goes on the second word, but אֶת stands before the whole: אֶת אֲרוּחַת הָעֶרֶב.",
+  "*אֲנִי אוֹהֵב אֶת הוּא — the object pronoun is one word: אוֹתוֹ.",
+  "אֶת “(object)” and אַתְּ “you (f.)” look the same without vowels: את.",
+  "The subject never takes אֶת: הַיֶּלֶד אוֹכֵל אֶת הַתַּפּוּחַ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:et"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 2,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.object",
+   "note": "Arabic marks every direct object with the accusative ending -a / -an (أَكَلَ التُّفَّاحَةَ, أَكَلَ تُفَّاحَةً), definite or not; Hebrew marks only the definite one, and with a separate word, אֶת."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "German puts every direct object in the accusative, seen mostly on the article (einen Apfel / den Apfel); Hebrew adds אֶת only before a definite object."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.object",
+   "note": "Chinese has no object marker here: word order alone (我吃苹果) shows the object."
+  }
+ ],
+ "notes": [
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "It works like the Turkish accusative: only a definite (specific) object is marked — elma yiyorum / elmayı yiyorum ~ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ. But אֶת is a separate word before the noun, not a suffix."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek marks every direct object with the accusative (έναν / τον), definite or not; Hebrew marks only a definite one, with אֶת: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian changes the ending of every object (книгу), definite or not; Hebrew changes nothing in the noun and puts אֶת only before a definite object."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish a marks a personal object (veo a Juan); Hebrew אֶת marks a definite object, person or thing (אֲנִי אוֹהֵב אֶת הַסָּלָט) — and never an indefinite one."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English has no object marker for nouns; Hebrew puts אֶת before a definite object (אוֹכֵל אֶת הַתַּפּוּחַ “eats the apple”). It is not translated."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French has no object marker; Hebrew adds אֶת before a definite object, as if to say “the following object is definite”."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German marks every direct object with the accusative (einen / den Apfel); Hebrew marks only the definite one, with אֶת, and the noun never changes."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi को marks a definite or human object (लड़के को देखा), much as אֶת marks a definite one; but को follows the noun, and אֶת comes before it."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian را after a definite object (سیب را می‌خورم) is the mirror image of אֶת before it (אוֹכֵל אֶת הַתַּפּוּחַ)."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic marks every object with the accusative ending (أَكَلَ تُفَّاحَةً / التُّفَّاحَةَ); Hebrew lost the endings and marks only a definite object, with אֶת."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese を marks every direct object, after it (りんごを食べる); Hebrew אֶת marks only a definite object, and stands before it."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean 을 / 를 marks any object, after it; Hebrew אֶת marks only a definite object, before it."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish chooses between the partitive and the total object by completeness (syön omenaa / syön omenan); Hebrew chooses by definiteness: אֶת or nothing."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian marks every object with -t but changes the verb when the object is definite (eszek egy almát / eszem az almát); Hebrew marks the definite object with אֶת and leaves the verb alone."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili can repeat a known object as a marker inside the verb; Hebrew never puts the object in the verb — it uses אֶת, or אוֹתוֹ for a pronoun."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda puts object pronouns inside the verb (amulaba “he sees him”); Hebrew uses a separate word: אוֹתוֹ “him” = אֶת + an ending."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese marks no object (把 can move a definite one before the verb); Hebrew keeps the object after the verb and adds אֶת when it is definite."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese marks no object; Hebrew adds אֶת before a definite one."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut also separates definite objects: they go with a transitive verb ending, while an indefinite object takes the ending -mik with an intransitive verb; Hebrew marks the definite object with אֶת and leaves the verb alone."
+  }
+ ]
+}

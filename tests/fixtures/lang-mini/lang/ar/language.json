@@ -1,0 +1,358 @@
+{
+ "code": "ar",
+ "typology": "fusional",
+ "name": "Arabic",
+ "nativeName": "العربية",
+ "script": "Arab",
+ "dir": "rtl",
+ "tokenJoin": "space",
+ "capitalizeFirst": false,
+ "vowelMarks": true,
+ "romanization": "din31635",
+ "citationCells": {
+  "VERB": "V;PST;3;SG;MASC",
+  "PRON": "PRON;NOM"
+ },
+ "paradigmCells": {
+  "NOUN.collective": [
+   "N;NOM;COLL;INDF",
+   "N;NOM;COLL;DEF",
+   "N;ACC;COLL;DEF",
+   "N;NOM;SG;INDF",
+   "N;ACC;SG;INDF",
+   "N;NOM;SG;DEF",
+   "N;ACC;SG;DEF",
+   "N;NOM;PL;INDF",
+   "N;NOM;PL;DEF",
+   "N;ACC;PL;DEF"
+  ],
+  "VERB": [
+   "V;PST;3;SG;MASC",
+   "V;PRS;IND;1;SG",
+   "V;PRS;IND;2;SG;MASC",
+   "V;PRS;IND;2;SG;FEM",
+   "V;PRS;IND;3;SG;MASC",
+   "V;PRS;IND;3;SG;FEM",
+   "V;PRS;IND;1;PL",
+   "V;PRS;IND;2;PL;MASC",
+   "V;PRS;IND;2;PL;FEM",
+   "V;PRS;IND;3;PL;MASC",
+   "V;PRS;IND;3;PL;FEM"
+  ],
+  "PRON": [
+   "PRON;NOM"
+  ]
+ },
+ "wordFeatures": {
+  "CCONJ": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   },
+   {
+    "id": "prefix",
+    "title": "written attached",
+    "at": "top",
+    "type": "bool",
+    "phenomenon": "ar.morph.prefix_clitics",
+    "why": "وَ and فَ are written together with the next word."
+   },
+   {
+    "id": "governs",
+    "title": "what follows",
+    "type": "enum",
+    "values": [
+     "ACC+suffix",
+     "clause",
+     "words or clauses"
+    ],
+    "phenomenon": "ar.syn.inna_sisters",
+    "why": "لٰكِنَّ takes a noun in the accusative or a pronoun suffix; the others join words or whole clauses."
+   }
+  ],
+  "INTJ": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the formula."
+   },
+   {
+    "id": "addressee",
+    "title": "said to",
+    "type": "enum",
+    "values": [
+     "MASC",
+     "FEM",
+     "PL",
+     "any"
+    ],
+    "phenomenon": "ar.prag.addressee_gender",
+    "why": "Many formulas change with the person addressed: a man, a woman, a group (كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ)."
+   },
+   {
+    "id": "response",
+    "title": "fixed answer",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.prag.greeting_pairs",
+    "why": "The answer this formula gets (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ); “none” when there is no fixed answer."
+   }
+  ],
+  "NOUN": [
+   {
+    "id": "gender",
+    "title": "gender",
+    "at": "top",
+    "type": "enum",
+    "values": [
+     "MASC",
+     "FEM"
+    ],
+    "phenomenon": "ar.morph.gender",
+    "why": "Drives the agreement of adjectives, verbs and pronouns and the polarity of the numbers 3–10."
+   },
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels and the sounds until the script is read fluently: the pausal form, without case or tanwīn ending (kitāb, muḥāmī, maqhā)."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the word to its family and to the dictionary; “none” for loanwords and for phrases (their parts have their own roots)."
+   },
+   {
+    "id": "pattern",
+    "title": "pattern (wazn)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.pattern",
+    "why": "The measure in ف ع ل letters (mafʿal = place, mifʿāl = tool, fāʿil = doer …) lets the learner guess new words; “none” for loanwords, phrases and words that fit no measure."
+   },
+   {
+    "id": "sunLetter",
+    "title": "sun letter (al- assimilates)",
+    "type": "bool",
+    "phenomenon": "ar.orth.sun_letters",
+    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar."
+   },
+   {
+    "id": "human",
+    "title": "human (agreement class)",
+    "type": "bool",
+    "phenomenon": "ar.syn.nonhuman_plural",
+    "why": "Plurals of people agree in the plural; all other plurals agree as feminine singular (الْكُتُبُ جَدِيدَةٌ)."
+   },
+   {
+    "id": "plurals",
+    "title": "plurals",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "kind": "enum:broken|soundMasc|soundFem",
+     "pattern": "string?",
+     "declension": "enum:triptote|diptote|defective|invariable|sound",
+     "note": "string?",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.morph.plural.broken",
+    "why": "The plural is learned with the noun: its kind (broken, sound masculine -ūna, sound feminine -āt), its pattern and declension, and the meanings it belongs to (بُيُوت houses / أَبْيَات verses). “none” for mass nouns, names and words used only in the singular."
+   },
+   {
+    "id": "dual",
+    "title": "dual",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.number.dual",
+    "why": "Mostly regular (-āni), but ة becomes ت (سَنَتَانِ) and some duals are irregular (أَبَوَانِ); “none” for mass nouns, names and plural-only words."
+   },
+   {
+    "id": "declension",
+    "title": "declension (of the singular; of the head noun in a phrase)",
+    "type": "enum",
+    "values": [
+     "triptote",
+     "diptote",
+     "defective",
+     "invariable",
+     "dual"
+    ],
+    "phenomenon": "ar.morph.diptote",
+    "why": "Triptotes take tanwīn and -i in the genitive; diptotes (names, أَفْعَل, -ān, many broken plurals) take no tanwīn and -a; defective nouns end in -in (مُحَامٍ); invariable nouns never change (مَقْهًى، كُوسَا)."
+   },
+   {
+    "id": "unit",
+    "title": "unit noun",
+    "type": "string",
+    "classes": [
+     "NOUN.collective"
+    ],
+    "phenomenon": "ar.morph.collective_unit",
+    "why": "One piece of a collective (تُفَّاحَة from تُفَّاح); needed for counting."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ],
+  "PRON": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   },
+   {
+    "id": "person",
+    "title": "person, number, gender",
+    "type": "string",
+    "classes": [
+     "PRON"
+    ],
+    "phenomenon": "ar.morph.pron.gender2",
+    "why": "Gender in the 2nd and 3rd person (أَنْتَ / أَنْتِ، هُمْ / هُنَّ)."
+   },
+   {
+    "id": "suffix",
+    "title": "attached form",
+    "type": "string",
+    "classes": [
+     "PRON"
+    ],
+    "phenomenon": "ar.morph.suffix_pronouns",
+    "why": "The pronoun as an ending on nouns, verbs and prepositions (كِتَابُكَ، يَرَاهُ، لَهَا)."
+   }
+  ],
+  "VERB": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the 3rd person singular past (the citation form)."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "phenomenon": "ar.morph.root",
+    "why": "The verb is the centre of its word family."
+   },
+   {
+    "id": "rootClass",
+    "title": "root class",
+    "type": "strings",
+    "values": [
+     "sound",
+     "hollow",
+     "defective",
+     "assimilated",
+     "doubled",
+     "hamzated"
+    ],
+    "phenomenon": "ar.morph.root.weak",
+    "why": "Weak radicals (و ي), a doubled radical or hamza change the conjugation: hollow قَالَ، defective مَشَى، assimilated وَصَلَ، doubled أَحَبَّ، hamzated أَكَلَ."
+   },
+   {
+    "id": "verbForm",
+    "title": "verb form",
+    "type": "enum",
+    "values": [
+     "I",
+     "II",
+     "III",
+     "IV",
+     "V",
+     "VI",
+     "VII",
+     "VIII",
+     "IX",
+     "X"
+    ],
+    "phenomenon": "ar.morph.verb.forms",
+    "why": "Form I … X gives the present, participle and maṣdar patterns and a typical meaning."
+   },
+   {
+    "id": "present",
+    "title": "present (imperfect) 3rd person singular",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.verb.stem_vowel",
+    "why": "The second principal part: the stem vowel of form I (يَكْتُبُ / يَشْرَبُ / يَجْلِسُ) cannot be predicted. “none” for a verb that has no present."
+   },
+   {
+    "id": "masdar",
+    "title": "verbal noun (maṣdar)",
+    "type": "strings",
+    "none": true,
+    "phenomenon": "ar.morph.masdar",
+    "why": "Arabic’s “infinitive” (to eat = أَكْل); unpredictable for form I. “none” for a verb that has none."
+   },
+   {
+    "id": "participles",
+    "title": "active / passive participle",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "kind": "enum:active|passive"
+    },
+    "phenomenon": "ar.morph.participles",
+    "why": "Very frequent as nouns and adjectives (كَاتِب writer, مَكْتُوب written); the passive participle only for verbs with an object."
+   },
+   {
+    "id": "governs",
+    "title": "object and preposition",
+    "type": "list",
+    "none": true,
+    "item": {
+     "case": "enum:ACC|GEN?",
+     "prep": "string?",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.syn.verb_government",
+    "why": "What the verb takes: a direct object (accusative) or a preposition (ذَهَبَ إِلَى، خَرَجَ مِنْ، اِنْتَظَرَ + acc.), per meaning. “none” for a verb used without an object."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ]
+ }
+}

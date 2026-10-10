@@ -1,0 +1,4444 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:fi",
+   "lemma": "فِي",
+   "pos": "ADP",
+   "senses": [
+    "prep.in",
+    "prep.at",
+    "prep.attime",
+    "prep.onday",
+    "prep.inmonth",
+    "prep.about",
+    "sci.times"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "a person’s place or a location",
+     "value": "at / in a place (فِي الْمَدْرَسَةِ)"
+    },
+    {
+     "concept": "prep.attime",
+     "axis": "the kind of time",
+     "value": "a clock time (فِي السَّاعَةِ الْخَامِسَةِ)"
+    },
+    {
+     "concept": "prep.in",
+     "axis": "register",
+     "value": "neutral: in, inside"
+    },
+    {
+     "concept": "prep.about",
+     "axis": "construction",
+     "value": "after some verbs: فَكَّرَ فِي (to think about)"
+    }
+   ],
+   "translit": "fī",
+   "forms": {
+    "ADP": "فِي",
+    "ADP;1;SG": "فِيَّ",
+    "ADP;2;SG;MASC": "فِيكَ",
+    "ADP;2;SG;FEM": "فِيكِ",
+    "ADP;3;SG;MASC": "فِيهِ",
+    "ADP;3;SG;FEM": "فِيهَا",
+    "ADP;1;PL": "فِينَا",
+    "ADP;2;PL;MASC": "فِيكُمْ",
+    "ADP;2;PL;FEM": "فِيكُنَّ",
+    "ADP;3;PL;MASC": "فِيهِمْ",
+    "ADP;3;PL;FEM": "فِيهِنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses فِي as “in, within” — the concept “in (inside a place)”; the check looks for the words “inside” / “place”, which its wording lacks."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Being inside or at a place — the everyday “in” and “at”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in, inside (a place, a container)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.in"
+     },
+     {
+      "id": "s2",
+      "def": "at (a place: at home, at school, at work)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.at"
+     },
+     {
+      "id": "s3",
+      "def": "in (a month, a season, a year; a part of the day): فِي يَنَايِرَ, فِي الصَّيْفِ, فِي الصَّبَاحِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.inmonth"
+     },
+     {
+      "id": "s6",
+      "def": "at (a time of the clock): فِي السَّاعَةِ الْخَامِسَةِ (at five o’clock)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.attime"
+     },
+     {
+      "id": "s7",
+      "def": "on (a day): فِي يَوْمِ الْجُمُعَةِ — or with no preposition: يَوْمَ الْجُمُعَةِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.onday"
+     },
+     {
+      "id": "s4",
+      "def": "about, concerning (after some verbs: فَكَّرَ فِي, to think about)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.about"
+     },
+     {
+      "id": "s5",
+      "def": "times, multiplied by: ثَلَاثَةٌ فِي أَرْبَعَةٍ (3 × 4)",
+      "register": [
+       "technical"
+      ],
+      "concept": "sci.times"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْكِتَابُ فِي الْحَقِيبَةِ.",
+      "tr": "The book is in the bag.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعِيشُ فِي قَرْيَةٍ صَغِيرَةٍ.",
+      "tr": "I live in a small village.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s1"
+     },
+     {
+      "text": "أَبِي فِي الْعَمَلِ.",
+      "tr": "My father is at work.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "نَحْنُ فِي الْبَيْتِ.",
+      "tr": "We are at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ فِي الصَّبَاحِ.",
+      "tr": "I drink coffee in the morning.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s3"
+     },
+     {
+      "text": "نُسَافِرُ فِي الصَّيْفِ.",
+      "tr": "We travel in the summer.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s3"
+     },
+     {
+      "text": "يَبْدَأُ الدَّرْسُ فِي السَّاعَةِ الثَّامِنَةِ.",
+      "tr": "The lesson starts at eight o’clock.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s6"
+     },
+     {
+      "text": "يَصِلُ الْقِطَارُ فِي السَّاعَةِ الْخَامِسَةِ.",
+      "tr": "The train arrives at five o’clock.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s6"
+     },
+     {
+      "text": "لَا نَعْمَلُ فِي يَوْمِ الْجُمُعَةِ.",
+      "tr": "We don’t work on Friday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s7"
+     },
+     {
+      "text": "يَزُورُنَا جَدِّي فِي يَوْمِ السَّبْتِ.",
+      "tr": "My grandfather visits us on Saturday.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s7"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْبَيْتِ",
+      "tr": "at home"
+     },
+     {
+      "text": "فِي الصَّبَاحِ",
+      "tr": "in the morning"
+     },
+     {
+      "text": "فِيهِ / فِيهَا",
+      "tr": "in it (m. / f.); there is … in it"
+     },
+     {
+      "text": "فِي السَّاعَةِ …",
+      "tr": "at … o’clock"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِـ",
+      "register": "literary",
+      "nuance": "in, at — بِالْبَيْتِ is literary or regional; the standard “in” is فِي"
+     },
+     {
+      "word": "دَاخِلَ",
+      "register": "neutral",
+      "nuance": "inside — stresses the interior: دَاخِلَ الْبَيْتِ"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: possibly related to Proto-Semitic *pay- (“mouth, opening, entrance”) and *piʔat- (“side, front”); it took over functions of the old preposition *bV- (Arabic بِـ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek σε covers in, at and to; Arabic splits it: فِي for “in, at” (where?), إِلَى for “to” (where to?).",
+     "فِي also multiplies: ثَلَاثَةٌ فِي أَرْبَعَةٍ = three times four (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Before al- the ī is shortened in speech (fi l-bayt), but the spelling stays فِي الْبَيْتِ.",
+     "With pronoun endings: فِيهِ, فِيهَا, فِيهِمْ (-hi, -him after ī) and فِيَّ (in me)."
+    ],
+    "subtleties": [
+     "Arabic does not distinguish “in” and “at” for places: فِي الْمَدْرَسَةِ = in school / at school. “At someone’s place” is عِنْدَ: عِنْدَ الطَّبِيبِ.",
+     "The noun after فِي is genitive: فِي بَيْتٍ (-in), فِي الْبَيْتِ (-i).",
+     "Time: one فِي for English at / on / in and German um / am / im — فِي السَّاعَةِ الْخَامِسَةِ (at five), فِي يَوْمِ الْأَحَدِ (on Sunday), فِي يَنَايِرَ, فِي الصَّيْفِ (in January, in summer)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:ila",
+   "lemma": "إِلَى",
+   "pos": "ADP",
+   "senses": [
+    "prep.to",
+    "prep.until"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.until",
+     "axis": "pairing and range",
+     "value": "until, in مِنْ … إِلَى …"
+    }
+   ],
+   "translit": "ʾilā",
+   "forms": {
+    "ADP": "إِلَى",
+    "ADP;1;SG": "إِلَيَّ",
+    "ADP;2;SG;MASC": "إِلَيْكَ",
+    "ADP;2;SG;FEM": "إِلَيْكِ",
+    "ADP;3;SG;MASC": "إِلَيْهِ",
+    "ADP;3;SG;FEM": "إِلَيْهَا",
+    "ADP;1;PL": "إِلَيْنَا",
+    "ADP;2;PL;MASC": "إِلَيْكُمْ",
+    "ADP;2;PL;FEM": "إِلَيْكُنَّ",
+    "ADP;3;PL;MASC": "إِلَيْهِمْ",
+    "ADP;3;PL;FEM": "إِلَيْهِنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Movement towards: where to?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to, towards (a place, a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.to"
+     },
+     {
+      "id": "s3",
+      "def": "until, to (in time): مِنَ الصَّبَاحِ إِلَى الْمَسَاءِ (from morning till evening)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.until"
+     }
+    ],
+    "examples": [
+     {
+      "text": "إِلَى أَيْنَ؟ إِلَى الْبَيْتِ.",
+      "tr": "Where to? — Home.",
+      "register": "neutral",
+      "context": "taxi",
+      "sense": "s1"
+     },
+     {
+      "text": "أَذْهَبُ إِلَى الْمَدْرَسَةِ كُلَّ يَوْمٍ.",
+      "tr": "I go to school every day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْمَلُ مِنَ الصَّبَاحِ إِلَى الْمَسَاءِ.",
+      "tr": "I work from morning till evening.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
+     },
+     {
+      "text": "الْمَحَلُّ مَفْتُوحٌ مِنَ السَّاعَةِ التَّاسِعَةِ إِلَى السَّاعَةِ الْخَامِسَةِ.",
+      "tr": "The shop is open from nine to five.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِنْ … إِلَى …",
+      "tr": "from … to …"
+     },
+     {
+      "text": "إِلَى اللِّقَاءِ",
+      "tr": "goodbye (until the meeting)"
+     },
+     {
+      "text": "إِلَيْكَ",
+      "tr": "here you are (lit. to you)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لِـ",
+      "register": "neutral",
+      "nuance": "to, for — with persons and purposes; with places mostly in set phrases"
+     },
+     {
+      "word": "نَحْوَ",
+      "register": "formal",
+      "nuance": "towards — direction only, without arriving"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʾila (“towards, nigh”); Wiktionary compares عَلَى and the Semitic *la / *li of Arabic لِ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "إِلَى اللِّقَاءِ (goodbye) is literally “until the meeting” — like German auf Wiedersehen and Greek εις το επανιδείν."
+    ],
+    "pitfalls": [
+     "Written with ى but read -ā: ʾilā. With a pronoun the ى becomes يْ: إِلَيْكَ, إِلَيْهِ, إِلَيَّ (to me).",
+     "Not إِلَّا (ʾillā, “except”): إِلَى has a single l."
+    ],
+    "subtleties": [
+     "إِلَى answers “where to?” (إِلَى أَيْنَ؟), فِي answers “where?” — but the noun is genitive after both: Arabic shows the direction with the preposition, not with the case (German: in die Schule / in der Schule).",
+     "In time, مِنْ … إِلَى … is “from … to / until …”; alone, “until” is usually حَتَّى (lesson 15)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:min",
+   "lemma": "مِنْ",
+   "pos": "ADP",
+   "senses": [
+    "prep.from",
+    "conj.than",
+    "prep.of"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "min",
+   "forms": {
+    "ADP": "مِنْ",
+    "ADP;1;SG": "مِنِّي",
+    "ADP;2;SG;MASC": "مِنْكَ",
+    "ADP;2;SG;FEM": "مِنْكِ",
+    "ADP;3;SG;MASC": "مِنْهُ",
+    "ADP;3;SG;FEM": "مِنْهَا",
+    "ADP;1;PL": "مِنَّا",
+    "ADP;2;PL;MASC": "مِنْكُمْ",
+    "ADP;2;PL;FEM": "مِنْكُنَّ",
+    "ADP;3;PL;MASC": "مِنْهُمْ",
+    "ADP;3;PL;FEM": "مِنْهُنَّ",
+    "ADP;ALT": "مِنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Origins and starting points: from.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (a place, a person, a time)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.from"
+     },
+     {
+      "id": "s2",
+      "def": "of, some of (a part of a whole): وَاحِدٌ مِنْهُمْ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.of"
+     },
+     {
+      "id": "s3",
+      "def": "than (after an elative: أَكْبَرُ مِنْ …, bigger than …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.than"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مِنْ أَيْنَ أَنْتَ؟ أَنَا مِنْ مِصْرَ.",
+      "tr": "Where are you from? — I’m from Egypt.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْخُبْزُ مِنَ السُّوقِ.",
+      "tr": "This bread is from the market.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "وَاحِدٌ مِنْ أَصْدِقَائِي طَبِيبٌ.",
+      "tr": "One of my friends is a doctor.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s2"
+     },
+     {
+      "text": "أَخِي أَكْبَرُ مِنِّي.",
+      "tr": "My brother is older than me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     },
+     {
+      "text": "الْقِطَارُ أَسْرَعُ مِنَ الْحَافِلَةِ.",
+      "tr": "The train is faster than the bus.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     },
+     {
+      "text": "أُحِبُّ الشَّايَ أَكْثَرَ مِنَ الْقَهْوَةِ.",
+      "tr": "I like tea more than coffee.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِنْ فَضْلِكَ",
+      "tr": "please (lit. from your kindness)"
+     },
+     {
+      "text": "مِنْ أَيْنَ؟",
+      "tr": "from where?"
+     },
+     {
+      "text": "مِنَ الْبَيْتِ",
+      "tr": "from home"
+     },
+     {
+      "text": "أَكْبَرُ مِنْ …",
+      "tr": "bigger / older than …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَنْ",
+      "register": "neutral",
+      "nuance": "away from, off — distance and separation: بَعِيدٌ عَنِ الْبَيْتِ"
+     },
+     {
+      "word": "مِنْ عِنْدِ",
+      "register": "neutral",
+      "nuance": "from someone’s place: مِنْ عِنْدِ الطَّبِيبِ"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-West Semitic *min; cognate with Hebrew מִן (min) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מִן (min) is the same word — and Hebrew shortens it to the prefix מִ־ (mi-): מִתֵּל אָבִיב, “from Tel Aviv”."
+    ],
+    "pitfalls": [
+     "Before al- it is مِنَ (min-a): مِنَ الْبَيْتِ, not *مِنْ الْبَيْتِ.",
+     "Without vowels مِنْ (min, from) and مَنْ (man, who) look the same: من.",
+     "With pronoun endings the n doubles: مِنِّي (from me), مِنَّا (from us)."
+    ],
+    "subtleties": [
+     "مِنْ also marks “than” (أَكْبَرُ مِنِّي) and “part of” (بَعْضٌ مِنَ الْخُبْزِ).",
+     "For “than” Arabic uses the same مِنْ as “from”: أَكْبَرُ مِنِّي, “bigger from me” — exactly like Hebrew גָּדוֹל מִמֶּנִּי."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:maa_with",
+   "lemma": "مَعَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.with",
+    "prep.despite"
+   ],
+   "features": {
+    "root": {
+     "none": "an old adverbial word (ẓarf) with no root in use"
+    },
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.with",
+     "axis": "accompaniment or instrument",
+     "value": "together with a person or a thing"
+    }
+   ],
+   "translit": "maʿa",
+   "forms": {
+    "ADP": "مَعَ",
+    "ADP;1;SG": "مَعِي",
+    "ADP;2;SG;MASC": "مَعَكَ",
+    "ADP;2;SG;FEM": "مَعَكِ",
+    "ADP;3;SG;MASC": "مَعَهُ",
+    "ADP;3;SG;FEM": "مَعَهَا",
+    "ADP;1;PL": "مَعَنَا",
+    "ADP;2;PL;MASC": "مَعَكُمْ",
+    "ADP;2;PL;FEM": "مَعَكُنَّ",
+    "ADP;3;PL;MASC": "مَعَهُمْ",
+    "ADP;3;PL;FEM": "مَعَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Company and togetherness: with.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "with, together with (a person; something that goes along)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.with"
+     },
+     {
+      "id": "s2",
+      "def": "in spite of: مَعَ ذٰلِكَ (nevertheless)",
+      "register": [
+       "formal"
+      ],
+      "concept": "prep.despite"
+     },
+     {
+      "id": "s3",
+      "def": "having on oneself: مَعِي (I have with me)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا مَعَ صَدِيقِي فِي الْمَقْهَى.",
+      "tr": "I’m with my friend at the café.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ الشَّايَ مَعَ الْحَلِيبِ.",
+      "tr": "I drink tea with milk.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ مَعَكَ قَلَمٌ؟",
+      "tr": "Do you have a pen on you?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s3"
+     },
+     {
+      "text": "وَمَعَ ذٰلِكَ نُحِبُّهُ.",
+      "tr": "And yet we love him.",
+      "register": "formal",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَعَ السَّلَامَةِ",
+      "tr": "goodbye (lit. with safety)"
+     },
+     {
+      "text": "مَعَ ذٰلِكَ",
+      "tr": "nevertheless"
+     },
+     {
+      "text": "مَعًا",
+      "tr": "together"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِـ",
+      "register": "neutral",
+      "nuance": "with — an instrument or an ingredient: قَهْوَةٌ بِالْحَلِيبِ, أَكْتُبُ بِالْقَلَمِ"
+     },
+     {
+      "word": "بِرِفْقَةِ",
+      "register": "formal",
+      "nuance": "in the company of"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Ugaritic mʿ and, with the consonants swapped, Hebrew עִם (ʿim) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew עִם (im) is the same word with its letters swapped (metathesis): مَعَ is m-ʿ, עִם is ʿ-m."
+    ],
+    "pitfalls": [
+     "A tool is بِـ, not مَعَ: أَكْتُبُ بِالْقَلَمِ (I write with a pen). مَعَ is company: مَعَ صَدِيقِي.",
+     "مَعَ always ends in -a; before al- it is read maʿa l-…: مَعَ الْحَلِيبِ."
+    ],
+    "subtleties": [
+     "مَعِي، مَعَكَ … = “I have on me, you have on you”: هَلْ مَعَكَ مَاءٌ؟ — what you carry now, unlike عِنْدِي (what you own)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:bi",
+   "lemma": "بِ",
+   "pos": "ADP",
+   "senses": [
+    "prep.with",
+    "prep.in",
+    "prep.by",
+    "prep.for"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.in",
+     "axis": "register",
+     "value": "literary: in, at (بِالْمَدِينَةِ)"
+    },
+    {
+     "concept": "prep.with",
+     "axis": "accompaniment or instrument",
+     "value": "with a tool or an ingredient; by (transport)"
+    },
+    {
+     "concept": "prep.for",
+     "axis": "what it marks",
+     "value": "a price (بِكَمْ؟)"
+    }
+   ],
+   "prefix": true,
+   "translit": "bi-",
+   "forms": {
+    "ADP": "بِ",
+    "ADP;1;SG": "بِي",
+    "ADP;2;SG;MASC": "بِكَ",
+    "ADP;2;SG;FEM": "بِكِ",
+    "ADP;3;SG;MASC": "بِهِ",
+    "ADP;3;SG;FEM": "بِهَا",
+    "ADP;1;PL": "بِنَا",
+    "ADP;2;PL;MASC": "بِكُمْ",
+    "ADP;2;PL;FEM": "بِكُنَّ",
+    "ADP;3;PL;MASC": "بِهِمْ",
+    "ADP;3;PL;FEM": "بِهِنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A tiny prefix with many jobs: with, by, in, for.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "with (an ingredient, a tool, a manner): قَهْوَةٌ بِالْحَلِيبِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.with"
+     },
+     {
+      "id": "s2",
+      "def": "in, at (a place) — literary",
+      "register": [
+       "literary"
+      ],
+      "concept": "prep.in"
+     },
+     {
+      "id": "s3",
+      "def": "by (means of transport): بِالسَّيَّارَةِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.by"
+     },
+     {
+      "id": "s4",
+      "def": "for (a price): بِكَمْ؟",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ بِالْحَلِيبِ.",
+      "tr": "I drink coffee with milk.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أَكْتُبُ بِالْقَلَمِ.",
+      "tr": "I write with a pen.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "بِكَمْ هٰذَا؟",
+      "tr": "How much is this?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s4"
+     },
+     {
+      "text": "نُسَافِرُ بِالْقِطَارِ.",
+      "tr": "We travel by train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِالْحَلِيبِ",
+      "tr": "with milk"
+     },
+     {
+      "text": "بِكَمْ؟",
+      "tr": "how much (does it cost)?"
+     },
+     {
+      "text": "بِخَيْرٍ",
+      "tr": "fine, well (lit. in good)"
+     },
+     {
+      "text": "بِسْمِ اللّٰهِ",
+      "tr": "in the name of God"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَعَ",
+      "register": "neutral",
+      "nuance": "with = together with (company)"
+     },
+     {
+      "word": "بِوَاسِطَةِ",
+      "register": "formal",
+      "nuance": "by means of"
+     }
+    ],
+    "etymology": {
+     "text": "Ultimately from Proto-Semitic *bV- (“with, in, at, among”); cognates Aramaic ב־, Classical Syriac ܒ-, Hebrew בְּ־ (bə-) and Geʿez በ (bä) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew בְּ־ (be-) is the same prefix — but in Hebrew it is the everyday “in” (בַּבַּיִת, at home), where Arabic uses فِي.",
+     "بِسْمِ اللّٰهِ, the opening words of the Qurʾān, start with this بِ."
+    ],
+    "pitfalls": [
+     "بِ is always written together with the next word: بِالْحَلِيبِ, بِكَ — never alone.",
+     "With pronoun endings: بِهِ, بِهَا, بِهِمْ (-hi, -him after i)."
+    ],
+    "subtleties": [
+     "Dishes are named with بِ: أَرُزٌّ بِالدَّجَاجِ (rice with chicken), شَايٌ بِالنَّعْنَاعِ (mint tea)."
+    ]
+   }
+  },
+  {
+   "id": "ar:biduni",
+   "lemma": "بِدُونِ",
+   "pos": "ADP",
+   "senses": [
+    "prep.without"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: بِ + دُون (د و ن)"
+    },
+    "kind": "phrase",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "bi-dūni",
+   "forms": {
+    "ADP": "بِدُونِ",
+    "ADP;1;SG": "بِدُونِي",
+    "ADP;2;SG;MASC": "بِدُونِكَ",
+    "ADP;2;SG;FEM": "بِدُونِكِ",
+    "ADP;3;SG;MASC": "بِدُونِهِ",
+    "ADP;3;SG;FEM": "بِدُونِهَا",
+    "ADP;1;PL": "بِدُونِنَا",
+    "ADP;2;PL;MASC": "بِدُونِكُمْ",
+    "ADP;2;PL;FEM": "بِدُونِكُنَّ",
+    "ADP;3;PL;MASC": "بِدُونِهِمْ",
+    "ADP;3;PL;FEM": "بِدُونِهِنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Leaving something out: without.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "without",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.without"
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَهْوَةٌ بِدُونِ سُكَّرٍ، مِنْ فَضْلِكَ.",
+      "tr": "A coffee without sugar, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا أَخْرُجُ بِدُونِ هَاتِفِي.",
+      "tr": "I don’t go out without my phone.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَيَاةُ بِدُونِكِ صَعْبَةٌ.",
+      "tr": "Life without you is hard.",
+      "register": "neutral",
+      "context": "love song",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِدُونِ سُكَّرٍ",
+      "tr": "without sugar"
+     },
+     {
+      "text": "بِدُونِ شَكٍّ",
+      "tr": "without doubt"
+     },
+     {
+      "text": "بِدُونِ مُقَابِلٍ",
+      "tr": "free of charge"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دُونَ",
+      "register": "formal",
+      "nuance": "without — shorter and more formal (also “below, less than”)"
+     },
+     {
+      "word": "مِنْ دُونِ",
+      "register": "neutral",
+      "nuance": "without — the same meaning"
+     },
+     {
+      "word": "بِلَا",
+      "register": "neutral",
+      "nuance": "without — before a bare noun: بِلَا سُكَّرٍ"
+     },
+     {
+      "word": "مِنْ غَيْرِ",
+      "register": "neutral",
+      "nuance": "without, other than"
+     }
+    ],
+    "etymology": {
+     "text": "Compounded from the preposition بِ (bi-, “with”) + the preposition دُونَ (dūna, “below, short of, without”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old preposition دُونَ meant “below, short of” — so “without” is literally “at short of”."
+    ],
+    "pitfalls": [
+     "The noun after it is genitive: بِدُونِ سُكَّرٍ (-in), بِدُونِ الْحَلِيبِ (-i).",
+     "Written as one word: بِدُونِ."
+    ],
+    "subtleties": [
+     "With pronoun endings: بِدُونِي (without me), بِدُونِكَ (without you)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:li",
+   "lemma": "لِ",
+   "pos": "ADP",
+   "senses": [
+    "prep.for",
+    "poss.belongto",
+    "prep.to.person",
+    "conj.inorderto"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.for",
+     "axis": "what it marks",
+     "value": "a person or a purpose (هٰذَا لَكَ)"
+    },
+    {
+     "concept": "conj.inorderto",
+     "axis": "form",
+     "value": "لِـ + subjunctive, written attached (لِيَتَعَلَّمَ)"
+    }
+   ],
+   "prefix": true,
+   "translit": "li-",
+   "forms": {
+    "ADP": "لِ",
+    "ADP;1;SG": "لِي",
+    "ADP;2;SG;MASC": "لَكَ",
+    "ADP;2;SG;FEM": "لَكِ",
+    "ADP;3;SG;MASC": "لَهُ",
+    "ADP;3;SG;FEM": "لَهَا",
+    "ADP;1;PL": "لَنَا",
+    "ADP;2;PL;MASC": "لَكُمْ",
+    "ADP;2;PL;FEM": "لَكُنَّ",
+    "ADP;3;PL;MASC": "لَهُمْ",
+    "ADP;3;PL;FEM": "لَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "For whom, whose, to whom — the little lām.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "for (a person, a purpose)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.for"
+     },
+     {
+      "id": "s2",
+      "def": "belonging to — هٰذَا لِي (this is mine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.belongto"
+     },
+     {
+      "id": "s3",
+      "def": "to (a person: thanks, giving, saying)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.to.person"
+     },
+     {
+      "id": "s4",
+      "def": "in order to (+ a verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.inorderto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذِهِ الْقَهْوَةُ لَكَ.",
+      "tr": "This coffee is for you.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ الْحَقِيبَةُ لِأُمِّي.",
+      "tr": "This bag is for my mother.",
+      "register": "neutral",
+      "context": "gifts",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْكِتَابُ لِي.",
+      "tr": "This book is mine.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "شُكْرًا لَكِ.",
+      "tr": "Thank you (to a woman).",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِي",
+      "tr": "mine; for me"
+     },
+     {
+      "text": "شُكْرًا لَكَ",
+      "tr": "thank you"
+     },
+     {
+      "text": "الْحَمْدُ لِلّٰهِ",
+      "tr": "praise be to God"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مِنْ أَجْلِ",
+      "register": "neutral",
+      "nuance": "for the sake of, for (a purpose)"
+     },
+     {
+      "word": "لِأَجْلِ",
+      "register": "formal",
+      "nuance": "for the sake of"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *lV- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לְ־ (le-) is the same prefix: יֵשׁ לִי (yesh li, “I have”) matches Arabic لِي, and לָכֶם (lakhem) matches لَكُمْ."
+    ],
+    "pitfalls": [
+     "Its vowel changes with pronoun endings: لِي, but لَكَ, لَكِ, لَهُ, لَهَا, لَنَا (la-).",
+     "Before al- the alif of the article drops: لِلْبَيْتِ (li-l-bayti), not *لِالْبَيْتِ."
+    ],
+    "subtleties": [
+     "Ownership: هٰذَا لِي = this is mine; لِي أَخٌ = I have a brother (relations, rights) — beside عِنْدِي.",
+     "Always written together with the next word: لِأُمِّي, لَكَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:an",
+   "lemma": "عَنْ",
+   "pos": "ADP",
+   "senses": [
+    "prep.about",
+    "prep.awayfrom",
+    "prep.accordingto"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.accordingto",
+     "axis": "whose word",
+     "value": "on the authority of a report passed on (عَنْ أَبِي هُرَيْرَةَ)"
+    },
+    {
+     "concept": "prep.about",
+     "axis": "construction",
+     "value": "about a topic: تَكَلَّمَ عَنْ، كِتَابٌ عَنْ"
+    }
+   ],
+   "translit": "ʿan",
+   "forms": {
+    "ADP": "عَنْ",
+    "ADP;1;SG": "عَنِّي",
+    "ADP;2;SG;MASC": "عَنْكَ",
+    "ADP;2;SG;FEM": "عَنْكِ",
+    "ADP;3;SG;MASC": "عَنْهُ",
+    "ADP;3;SG;FEM": "عَنْهَا",
+    "ADP;1;PL": "عَنَّا",
+    "ADP;2;PL;MASC": "عَنْكُمْ",
+    "ADP;2;PL;FEM": "عَنْكُنَّ",
+    "ADP;3;PL;MASC": "عَنْهُمْ",
+    "ADP;3;PL;FEM": "عَنْهُنَّ",
+    "ADP;ALT": "عَنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Topics and distance: about, away from.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "about, on (a topic)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.about"
+     },
+     {
+      "id": "s2",
+      "def": "away from, off (distance, separation): بَعِيدٌ عَنْ …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.awayfrom"
+     },
+     {
+      "id": "s3",
+      "def": "on the authority of, according to (reports)",
+      "register": [
+       "formal"
+      ],
+      "concept": "prep.accordingto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَتَكَلَّمُ عَنِ الْعَمَلِ.",
+      "tr": "We’re talking about work.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا كِتَابٌ عَنِ الْمَطْبَخِ الْعَرَبِيِّ.",
+      "tr": "This is a book about Arab cooking.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا عَنْكَ؟",
+      "tr": "What about you?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَطَارُ بَعِيدٌ عَنِ الْمَدِينَةِ.",
+      "tr": "The airport is far from the city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَاذَا عَنْ …؟",
+      "tr": "what about …?"
+     },
+     {
+      "text": "بَعِيدٌ عَنْ",
+      "tr": "far from"
+     },
+     {
+      "text": "سَأَلَ عَنْ",
+      "tr": "to ask about"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَوْلَ",
+      "register": "formal",
+      "nuance": "about, around — a topic: كِتَابٌ حَوْلَ …"
+     },
+     {
+      "word": "بِخُصُوصِ",
+      "register": "formal",
+      "nuance": "regarding, concerning"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from the root ع ن ن (ʕ n n), “appearing in view in the distance”, related to ع ي ن, the root of the eye and vision.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "عَنْ + مَا merge into عَمَّا: عَمَّا تَتَكَلَّمُ؟ (what are you talking about?) (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Before al- it takes the helping vowel i: عَنِ الْعَمَلِ.",
+     "With pronoun endings the n doubles in the first person: عَنِّي (about me), عَنَّا (about us)."
+    ],
+    "subtleties": [
+     "“Far from” is بَعِيدٌ عَنْ (or مِنْ), but “near” is قَرِيبٌ مِنْ."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:madrasa",
+   "lemma": "مَدْرَسَة",
+   "pos": "NOUN",
+   "senses": [
+    "place.school"
+   ],
+   "features": {
+    "root": "د ر س",
+    "pattern": "مَفْعَلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَدَارِس",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَدْرَسَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "madrasa",
+   "forms": {
+    "N;NOM;SG;INDF": "مَدْرَسَةٌ",
+    "N;NOM;PL;INDF": "مَدَارِسُ",
+    "N;NOM;DU;INDF": "مَدْرَسَتَانِ",
+    "N;NOM;SG;DEF": "الْمَدْرَسَةُ",
+    "N;NOM;PL;DEF": "الْمَدَارِسُ",
+    "N;NOM;DU;DEF": "الْمَدْرَسَتَانِ",
+    "N;ACC;SG;INDF": "مَدْرَسَةً",
+    "N;ACC;PL;INDF": "مَدَارِسَ",
+    "N;ACC;DU;INDF": "مَدْرَسَتَيْنِ",
+    "N;ACC;SG;DEF": "الْمَدْرَسَةَ",
+    "N;ACC;PL;DEF": "الْمَدَارِسَ",
+    "N;ACC;DU;DEF": "الْمَدْرَسَتَيْنِ",
+    "N;GEN;SG;INDF": "مَدْرَسَةٍ",
+    "N;GEN;PL;INDF": "مَدَارِسَ",
+    "N;GEN;DU;INDF": "مَدْرَسَتَيْنِ",
+    "N;GEN;SG;DEF": "الْمَدْرَسَةِ",
+    "N;GEN;PL;DEF": "الْمَدَارِسِ",
+    "N;GEN;DU;DEF": "الْمَدْرَسَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Classrooms, school bags and the bell.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "school",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.school"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَذْهَبُ إِلَى الْمَدْرَسَةِ كُلَّ صَبَاحٍ.",
+      "tr": "I go to school every morning.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَطْفَالُ فِي الْمَدْرَسَةِ الْآنَ.",
+      "tr": "The children are at school now.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْقَرْيَةِ مَدْرَسَةٌ وَاحِدَةٌ فَقَطْ.",
+      "tr": "There is only one school in the village.",
+      "register": "neutral",
+      "context": "village life",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَدْرَسَةٌ اِبْتِدَائِيَّةٌ",
+      "tr": "primary school"
+     },
+     {
+      "text": "مُدِيرُ الْمَدْرَسَةِ",
+      "tr": "head teacher"
+     },
+     {
+      "text": "حَقِيبَةُ الْمَدْرَسَةِ",
+      "tr": "school bag"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَعْهَد",
+      "register": "neutral",
+      "nuance": "institute: a language school, a college"
+     },
+     {
+      "word": "كُتَّاب",
+      "register": "dated",
+      "nuance": "a traditional Qurʾān school for small children"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place from the verb دَرَسَ (darasa, “to study”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English madrasa and Turkish medrese are this word: “the place of studying”."
+    ],
+    "pitfalls": [
+     "مَدْرَسَة (madrasa, school) vs مُدَرِّسَة (mudarrisa, a female teacher): the same letters, other vowels.",
+     "The plural مَدَارِسُ is a diptote: فِي مَدَارِسَ (genitive -a without the article)."
+    ],
+    "subtleties": [
+     "mafʿala / mafʿal = “the place where …”: مَدْرَسَة (studying), مَكْتَب (writing → office), مَطْبَخ (cooking → kitchen)."
+    ]
+   }
+  },
+  {
+   "id": "ar:jamia",
+   "lemma": "جَامِعَة",
+   "pos": "NOUN",
+   "senses": [
+    "place.university",
+    "pol.league"
+   ],
+   "features": {
+    "root": "ج م ع",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَامِعَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "جَامِعَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "jāmiʿa",
+   "forms": {
+    "N;NOM;SG;INDF": "جَامِعَةٌ",
+    "N;NOM;PL;INDF": "جَامِعَاتٌ",
+    "N;NOM;DU;INDF": "جَامِعَتَانِ",
+    "N;NOM;SG;DEF": "الْجَامِعَةُ",
+    "N;NOM;PL;DEF": "الْجَامِعَاتُ",
+    "N;NOM;DU;DEF": "الْجَامِعَتَانِ",
+    "N;ACC;SG;INDF": "جَامِعَةً",
+    "N;ACC;PL;INDF": "جَامِعَاتٍ",
+    "N;ACC;DU;INDF": "جَامِعَتَيْنِ",
+    "N;ACC;SG;DEF": "الْجَامِعَةَ",
+    "N;ACC;PL;DEF": "الْجَامِعَاتِ",
+    "N;ACC;DU;DEF": "الْجَامِعَتَيْنِ",
+    "N;GEN;SG;INDF": "جَامِعَةٍ",
+    "N;GEN;PL;INDF": "جَامِعَاتٍ",
+    "N;GEN;DU;INDF": "جَامِعَتَيْنِ",
+    "N;GEN;SG;DEF": "الْجَامِعَةِ",
+    "N;GEN;PL;DEF": "الْجَامِعَاتِ",
+    "N;GEN;DU;DEF": "الْجَامِعَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lecture halls, campus life and diplomas.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "university",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.university"
+     },
+     {
+      "id": "s2",
+      "def": "league, union (of states)",
+      "register": [
+       "formal"
+      ],
+      "concept": "pol.league"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُخْتِي طَالِبَةٌ فِي الْجَامِعَةِ.",
+      "tr": "My sister is a student at the university.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَامِعَةُ قَرِيبَةٌ مِنْ بَيْتِنَا.",
+      "tr": "The university is near our house.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "أَدْرُسُ فِي جَامِعَةِ الْقَاهِرَةِ.",
+      "tr": "I study at Cairo University.",
+      "register": "neutral",
+      "context": "studies",
+      "sense": "s1"
+     },
+     {
+      "text": "جَامِعَةُ الدُّوَلِ الْعَرَبِيَّةِ",
+      "tr": "the League of Arab States",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَالِبٌ فِي الْجَامِعَةِ",
+      "tr": "a university student"
+     },
+     {
+      "text": "جَامِعَةُ الْقَاهِرَةِ",
+      "tr": "Cairo University"
+     },
+     {
+      "text": "الْحَرَمُ الْجَامِعِيُّ",
+      "tr": "the campus"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كُلِّيَّة",
+      "register": "neutral",
+      "nuance": "college, faculty — a part of a university"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of جَامِع (“gathering”), the active participle of جَمَعَ (jamaʿa, “to gather”), root ج م ع; Wiktionary gives no further etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives جَامِع (the great mosque where people gather on Friday), يَوْمُ الْجُمُعَةِ (Friday, “the day of gathering”) and جَمَاعَة (group)."
+    ],
+    "pitfalls": [
+     "جَامِعَة (university) vs جَامِع (a large mosque)."
+    ],
+    "subtleties": [
+     "Also “league, union”: جَامِعَةُ الدُّوَلِ الْعَرَبِيَّةِ, the Arab League."
+    ]
+   }
+  },
+  {
+   "id": "ar:amal",
+   "lemma": "عَمَل",
+   "pos": "NOUN",
+   "senses": [
+    "place.work",
+    "abstract.deed",
+    "work.business"
+   ],
+   "features": {
+    "root": "ع م ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَعْمَال",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "عَمَلَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ʿamal",
+   "forms": {
+    "N;NOM;SG;INDF": "عَمَلٌ",
+    "N;NOM;PL;INDF": "أَعْمَالٌ",
+    "N;NOM;DU;INDF": "عَمَلَانِ",
+    "N;NOM;SG;DEF": "الْعَمَلُ",
+    "N;NOM;PL;DEF": "الْأَعْمَالُ",
+    "N;NOM;DU;DEF": "الْعَمَلَانِ",
+    "N;ACC;SG;INDF": "عَمَلًا",
+    "N;ACC;PL;INDF": "أَعْمَالًا",
+    "N;ACC;DU;INDF": "عَمَلَيْنِ",
+    "N;ACC;SG;DEF": "الْعَمَلَ",
+    "N;ACC;PL;DEF": "الْأَعْمَالَ",
+    "N;ACC;DU;DEF": "الْعَمَلَيْنِ",
+    "N;GEN;SG;INDF": "عَمَلٍ",
+    "N;GEN;PL;INDF": "أَعْمَالٍ",
+    "N;GEN;DU;INDF": "عَمَلَيْنِ",
+    "N;GEN;SG;DEF": "الْعَمَلِ",
+    "N;GEN;PL;DEF": "الْأَعْمَالِ",
+    "N;GEN;DU;DEF": "الْعَمَلَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Jobs, offices and the daily commute.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "work — the workplace, the job: فِي الْعَمَلِ (at work)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.work"
+     },
+     {
+      "id": "s2",
+      "def": "work, action, deed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.deed"
+     },
+     {
+      "id": "s3",
+      "def": "business (plural أَعْمَال: رَجُلُ أَعْمَالٍ, businessman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "work.business"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَبِي فِي الْعَمَلِ الْآنَ.",
+      "tr": "My father is at work now.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَذْهَبُ إِلَى الْعَمَلِ بِالْحَافِلَةِ.",
+      "tr": "I go to work by bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا عَمَلٌ جَيِّدٌ.",
+      "tr": "This is good work.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "هُوَ رَجُلُ أَعْمَالٍ.",
+      "tr": "He is a businessman.",
+      "register": "neutral",
+      "context": "business",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْعَمَلِ",
+      "tr": "at work"
+     },
+     {
+      "text": "بَعْدَ الْعَمَلِ",
+      "tr": "after work"
+     },
+     {
+      "text": "رَجُلُ أَعْمَالٍ",
+      "tr": "businessman"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شُغْل",
+      "register": "colloquial",
+      "nuance": "work, job — the everyday spoken word"
+     },
+     {
+      "word": "وَظِيفَة",
+      "register": "neutral",
+      "nuance": "job, position (employment)"
+     }
+    ],
+    "etymology": {
+     "text": "Verbal noun of عَمِلَ (ʕamila, “to do, to work”), root ع م ل (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew עָמָל (amal) means “toil, hard work” — the same Semitic word; Turkish amel (deed) is the Arabic one."
+    ],
+    "pitfalls": [
+     "“At work” is فِي الْعَمَلِ — with the article, like فِي الْبَيْتِ.",
+     "The plural أَعْمَال means “deeds” or “business”, not “jobs” (jobs = وَظَائِف)."
+    ],
+    "subtleties": [
+     "مَا عَمَلُكَ؟ = What do you do for a living?"
+    ]
+   }
+  },
+  {
+   "id": "ar:maktab",
+   "lemma": "مَكْتَب",
+   "pos": "NOUN",
+   "senses": [
+    "place.office",
+    "home.desk",
+    "work.agency"
+   ],
+   "features": {
+    "root": "ك ت ب",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَكَاتِب",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "مَكْتَبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maktab",
+   "forms": {
+    "N;NOM;SG;INDF": "مَكْتَبٌ",
+    "N;NOM;PL;INDF": "مَكَاتِبُ",
+    "N;NOM;DU;INDF": "مَكْتَبَانِ",
+    "N;NOM;SG;DEF": "الْمَكْتَبُ",
+    "N;NOM;PL;DEF": "الْمَكَاتِبُ",
+    "N;NOM;DU;DEF": "الْمَكْتَبَانِ",
+    "N;ACC;SG;INDF": "مَكْتَبًا",
+    "N;ACC;PL;INDF": "مَكَاتِبَ",
+    "N;ACC;DU;INDF": "مَكْتَبَيْنِ",
+    "N;ACC;SG;DEF": "الْمَكْتَبَ",
+    "N;ACC;PL;DEF": "الْمَكَاتِبَ",
+    "N;ACC;DU;DEF": "الْمَكْتَبَيْنِ",
+    "N;GEN;SG;INDF": "مَكْتَبٍ",
+    "N;GEN;PL;INDF": "مَكَاتِبَ",
+    "N;GEN;DU;INDF": "مَكْتَبَيْنِ",
+    "N;GEN;SG;DEF": "الْمَكْتَبِ",
+    "N;GEN;PL;DEF": "الْمَكَاتِبِ",
+    "N;GEN;DU;DEF": "الْمَكْتَبَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;PL;INDF": "Wiktionary’s table writes the plural مَكاتِب without the fatḥa on the kāf; the pattern mafāʿil is مَكَاتِب (fully vocalized)",
+     "N;NOM;PL;DEF": "Wiktionary’s table writes the plural مَكاتِب without the fatḥa on the kāf; the pattern mafāʿil is مَكَاتِب (fully vocalized)",
+     "N;ACC;PL;INDF": "Wiktionary’s table writes the plural مَكاتِب without the fatḥa on the kāf; the pattern mafāʿil is مَكَاتِب (fully vocalized)",
+     "N;ACC;PL;DEF": "Wiktionary’s table writes the plural مَكاتِب without the fatḥa on the kāf; the pattern mafāʿil is مَكَاتِب (fully vocalized)",
+     "N;GEN;PL;INDF": "Wiktionary’s table writes the plural مَكاتِب without the fatḥa on the kāf; the pattern mafāʿil is مَكَاتِب (fully vocalized)",
+     "N;GEN;PL;DEF": "Wiktionary’s table writes the plural مَكاتِب without the fatḥa on the kāf; the pattern mafāʿil is مَكَاتِب (fully vocalized)"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Desks, meetings and office hours.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "office",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.office"
+     },
+     {
+      "id": "s2",
+      "def": "desk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.desk"
+     },
+     {
+      "id": "s3",
+      "def": "bureau, agency: مَكْتَبُ سِيَاحَةٍ (travel agency)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "work.agency"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي فِي الْمَكْتَبِ.",
+      "tr": "My mother is at the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "مَكْتَبُ الْمُدِيرِ هُنَاكَ.",
+      "tr": "The manager’s office is over there.",
+      "register": "neutral",
+      "context": "company",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكُتُبُ عَلَى الْمَكْتَبِ.",
+      "tr": "The books are on the desk.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s2"
+     },
+     {
+      "text": "حَجَزْنَا الرِّحْلَةَ فِي مَكْتَبِ سِيَاحَةٍ.",
+      "tr": "We booked the trip at a travel agency.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَكْتَبُ الْبَرِيدِ",
+      "tr": "the post office"
+     },
+     {
+      "text": "مَكْتَبُ سِيَاحَةٍ",
+      "tr": "travel agency"
+     },
+     {
+      "text": "عَلَى الْمَكْتَبِ",
+      "tr": "on the desk"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِدَارَة",
+      "register": "formal",
+      "nuance": "administration, department — the institution rather than the room"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place from the root ك ت ب (k t b, “writing”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“The place of writing”: كَتَبَ (to write) → كِتَاب (book) → مَكْتَب (office, desk) → مَكْتَبَة (library, bookshop). Turkish mektep (school) and mektup (letter) come from the same root."
+    ],
+    "pitfalls": [
+     "مَكْتَب (office, desk) vs مَكْتَبَة (library, bookshop): the tāʾ marbūṭa makes another word.",
+     "The plural مَكَاتِبُ is a diptote."
+    ],
+    "subtleties": [
+     "مَكْتَب is also “agency, bureau” in names: مَكْتَبُ سِيَاحَةٍ, مَكْتَبُ مُحَامَاةٍ (law firm)."
+    ]
+   }
+  },
+  {
+   "id": "ar:mahall",
+   "lemma": "مَحَلّ",
+   "pos": "NOUN",
+   "senses": [
+    "place.shop",
+    "place.place"
+   ],
+   "features": {
+    "root": "ح ل ل",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَحَلَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "مَحَالّ",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "note": "formal: الْمَحَالُّ التِّجَارِيَّةُ (shops)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مَحَلَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maḥall",
+   "forms": {
+    "N;NOM;SG;INDF": "مَحَلٌّ",
+    "N;NOM;PL;INDF": "مَحَلَّاتٌ",
+    "N;NOM;DU;INDF": "مَحَلَّانِ",
+    "N;NOM;SG;DEF": "الْمَحَلُّ",
+    "N;NOM;PL;DEF": "الْمَحَلَّاتُ",
+    "N;NOM;DU;DEF": "الْمَحَلَّانِ",
+    "N;ACC;SG;INDF": "مَحَلًّا",
+    "N;ACC;PL;INDF": "مَحَلَّاتٍ",
+    "N;ACC;DU;INDF": "مَحَلَّيْنِ",
+    "N;ACC;SG;DEF": "الْمَحَلَّ",
+    "N;ACC;PL;DEF": "الْمَحَلَّاتِ",
+    "N;ACC;DU;DEF": "الْمَحَلَّيْنِ",
+    "N;GEN;SG;INDF": "مَحَلٍّ",
+    "N;GEN;PL;INDF": "مَحَلَّاتٍ",
+    "N;GEN;DU;INDF": "مَحَلَّيْنِ",
+    "N;GEN;SG;DEF": "الْمَحَلِّ",
+    "N;GEN;PL;DEF": "الْمَحَلَّاتِ",
+    "N;GEN;DU;DEF": "الْمَحَلَّيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shop windows and the corner shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop, store",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.shop"
+     },
+     {
+      "id": "s2",
+      "def": "place, location — فِي مَحَلِّهِ (in its place, apt)",
+      "register": [
+       "formal"
+      ],
+      "concept": "place.place"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْتَرِي الْخُبْزَ مِنَ الْمَحَلِّ.",
+      "tr": "I buy bread at the shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْمَحَلُّ لِأَبِي.",
+      "tr": "This shop belongs to my father.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا لَيْسَ الْمَحَلَّ الْمُنَاسِبَ لِلسُّؤَالِ.",
+      "tr": "This is not the right place for that question.",
+      "register": "formal",
+      "context": "discussion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَحَلُّ مَلَابِسَ",
+      "tr": "clothes shop"
+     },
+     {
+      "text": "صَاحِبُ الْمَحَلِّ",
+      "tr": "shop owner"
+     },
+     {
+      "text": "مَحَلٌّ تِجَارِيٌّ",
+      "tr": "shop, store"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَتْجَر",
+      "register": "formal",
+      "nuance": "store — also online: مَتْجَرٌ إِلِكْتُرُونِيٌّ"
+     },
+     {
+      "word": "دُكَّان",
+      "register": "neutral",
+      "nuance": "a small shop, a traditional corner shop"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place from حَلَّ (ḥalla, “to settle, to stop at a place”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its sister مَحَلَّة (quarter) became Turkish mahalle and Greek μαχαλάς, “neighbourhood”."
+    ],
+    "pitfalls": [
+     "The l is doubled: مَحَلّ (maḥall); الْمَحَلُّ, فِي الْمَحَلِّ.",
+     "Two plurals: مَحَلَّات (everyday) and مَحَالّ (formal)."
+    ],
+    "subtleties": [
+     "مَحَلِّيّ (local) is built on it: الْوَقْتُ الْمَحَلِّيُّ = local time."
+    ]
+   }
+  },
+  {
+   "id": "ar:supermarket",
+   "lemma": "سُوبَرْمَارْكِت",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "place.supermarket"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (English): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a recent loanword with no settled plural"
+    },
+    "dual": {
+     "none": "a recent loanword: the dual is not in use"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "sūbarmārkit",
+   "forms": {
+    "N;NOM;SG;INDF": "سُوبَرْمَارْكِتٌ",
+    "N;ACC;SG;INDF": "سُوبَرْمَارْكِتًا",
+    "N;GEN;SG;INDF": "سُوبَرْمَارْكِتٍ",
+    "N;NOM;SG;DEF": "السُّوبَرْمَارْكِتُ",
+    "N;ACC;SG;DEF": "السُّوبَرْمَارْكِتَ",
+    "N;GEN;SG;DEF": "السُّوبَرْمَارْكِتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Trolleys, long aisles and modern city life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "supermarket",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.supermarket"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْتَرِي الْحَلِيبَ مِنَ السُّوبَرْمَارْكِتِ.",
+      "tr": "I buy milk at the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "السُّوبَرْمَارْكِتُ قَرِيبٌ مِنْ بَيْتِي.",
+      "tr": "The supermarket is near my house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ فِي الْقَرْيَةِ سُوبَرْمَارْكِتٌ؟",
+      "tr": "Is there a supermarket in the village?",
+      "register": "neutral",
+      "context": "village",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَرَبَةُ التَّسَوُّقِ",
+      "tr": "shopping trolley"
+     },
+     {
+      "text": "التَّسَوُّقُ فِي السُّوبَرْمَارْكِتِ",
+      "tr": "shopping at the supermarket"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَتْجَرٌ كَبِيرٌ",
+      "register": "neutral",
+      "nuance": "a big store — a description rather than a name"
+     },
+     {
+      "word": "أَسْوَاقٌ مَرْكَزِيَّةٌ",
+      "register": "regional",
+      "nuance": "supermarket, hypermarket (lit. “central markets”) in the Gulf",
+      "region": "Gulf"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from English supermarket (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One international word: Greek σουπερμάρκετ, German Supermarkt, Turkish süpermarket, Russian супермаркет."
+    ],
+    "pitfalls": [
+     "A loanword: careful MSA declines it like a native noun (فِي السُّوبَرْمَارْكِتِ), but in speech the ending is never heard.",
+     "Spellings vary: سُوبَرْمَارْكِت, سوبر ماركت (two words); this course gives no plural for it."
+    ],
+    "subtleties": [
+     "For small daily purchases people still go to the grocer’s, الْبَقَّالَة, or the corner shop, الدُّكَّان."
+    ]
+   }
+  },
+  {
+   "id": "ar:suq",
+   "lemma": "سُوق",
+   "pos": "NOUN",
+   "senses": [
+    "place.market"
+   ],
+   "features": {
+    "root": "س و ق",
+    "pattern": "فُعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسْوَاق",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "سُوقَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "sūq",
+   "forms": {
+    "N;NOM;SG;INDF": "سُوقٌ",
+    "N;NOM;PL;INDF": "أَسْوَاقٌ",
+    "N;NOM;DU;INDF": "سُوقَانِ",
+    "N;NOM;SG;DEF": "السُّوقُ",
+    "N;NOM;PL;DEF": "الْأَسْوَاقُ",
+    "N;NOM;DU;DEF": "السُّوقَانِ",
+    "N;ACC;SG;INDF": "سُوقًا",
+    "N;ACC;PL;INDF": "أَسْوَاقًا",
+    "N;ACC;DU;INDF": "سُوقَيْنِ",
+    "N;ACC;SG;DEF": "السُّوقَ",
+    "N;ACC;PL;DEF": "الْأَسْوَاقَ",
+    "N;ACC;DU;DEF": "السُّوقَيْنِ",
+    "N;GEN;SG;INDF": "سُوقٍ",
+    "N;GEN;PL;INDF": "أَسْوَاقٍ",
+    "N;GEN;DU;INDF": "سُوقَيْنِ",
+    "N;GEN;SG;DEF": "السُّوقِ",
+    "N;GEN;PL;DEF": "الْأَسْوَاقِ",
+    "N;GEN;DU;DEF": "السُّوقَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Noise, colours and bargaining: the souk.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "market, souk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.market"
+     },
+     {
+      "id": "s2",
+      "def": "the market (economics): اِقْتِصَادُ السُّوقِ",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَشْتَرِي الْخُضَارَ مِنَ السُّوقِ.",
+      "tr": "We buy vegetables at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "السُّوقُ مُزْدَحِمَةٌ يَوْمَ الْجُمُعَةِ.",
+      "tr": "The market is crowded on Fridays.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "أَسْعَارُ السُّوقِ مُرْتَفِعَةٌ.",
+      "tr": "Market prices are high.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سُوقُ السَّمَكِ",
+      "tr": "the fish market"
+     },
+     {
+      "text": "سُوقٌ شَعْبِيَّةٌ",
+      "tr": "a traditional market"
+     },
+     {
+      "text": "السُّوقُ السَّوْدَاءُ",
+      "tr": "the black market"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَازَار",
+      "register": "neutral",
+      "nuance": "bazaar (from Persian) — a covered market or a charity sale"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic שׁוּקָא (šūqā, “street, market”), from Akkadian sūqum (“street”), from siāqum (“to become narrow”); cognate with Hebrew שׁוּק (šuk) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שׁוּק (shuk) is the same word, and English took souk from Arabic; its oldest ancestor, Akkadian sūqum, meant “street”."
+    ],
+    "pitfalls": [
+     "سُوق is traditionally feminine, though masculine is also accepted (Wiktionary: f or m): السُّوقُ مُزْدَحِمَةٌ / مُزْدَحِمٌ.",
+     "Not سَوْق (sawq, driving)."
+    ],
+    "subtleties": [
+     "The plural أَسْوَاق also means “markets” in economics; in the Gulf الْأَسْوَاقُ الْمَرْكَزِيَّةُ are supermarkets."
+    ]
+   }
+  },
+  {
+   "id": "ar:matam",
+   "lemma": "مَطْعَم",
+   "pos": "NOUN",
+   "senses": [
+    "place.restaurant",
+    "food.food"
+   ],
+   "features": {
+    "root": "ط ع م",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَطَاعِم",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَطْعَمَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maṭʿam",
+   "forms": {
+    "N;NOM;SG;INDF": "مَطْعَمٌ",
+    "N;NOM;PL;INDF": "مَطَاعِمُ",
+    "N;NOM;DU;INDF": "مَطْعَمَانِ",
+    "N;NOM;SG;DEF": "الْمَطْعَمُ",
+    "N;NOM;PL;DEF": "الْمَطَاعِمُ",
+    "N;NOM;DU;DEF": "الْمَطْعَمَانِ",
+    "N;ACC;SG;INDF": "مَطْعَمًا",
+    "N;ACC;PL;INDF": "مَطَاعِمَ",
+    "N;ACC;DU;INDF": "مَطْعَمَيْنِ",
+    "N;ACC;SG;DEF": "الْمَطْعَمَ",
+    "N;ACC;PL;DEF": "الْمَطَاعِمَ",
+    "N;ACC;DU;DEF": "الْمَطْعَمَيْنِ",
+    "N;GEN;SG;INDF": "مَطْعَمٍ",
+    "N;GEN;PL;INDF": "مَطَاعِمَ",
+    "N;GEN;DU;INDF": "مَطْعَمَيْنِ",
+    "N;GEN;SG;DEF": "الْمَطْعَمِ",
+    "N;GEN;PL;DEF": "الْمَطَاعِمِ",
+    "N;GEN;DU;DEF": "الْمَطْعَمَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eating out with friends and family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "restaurant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.restaurant"
+     },
+     {
+      "id": "s2",
+      "def": "food (old sense)",
+      "register": [
+       "literary"
+      ],
+      "concept": "food.food"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَأْكُلُ فِي مَطْعَمٍ لُبْنَانِيٍّ.",
+      "tr": "We’re eating at a Lebanese restaurant.",
+      "register": "neutral",
+      "context": "going out",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْمَطْعَمُ غَالٍ.",
+      "tr": "This restaurant is expensive.",
+      "register": "neutral",
+      "context": "prices",
+      "sense": "s1"
+     },
+     {
+      "text": "يَعْمَلُ أَخِي فِي مَطْعَمٍ.",
+      "tr": "My brother works in a restaurant.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "يَا سَعْدُ، أَطِبْ مَطْعَمَكَ تَكُنْ مُسْتَجَابَ الدَّعْوَةِ.",
+      "tr": "O Saʿd, keep your food lawful and your prayers will be answered (hadith).",
+      "register": "literary",
+      "context": "hadith",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَطْعَمٌ شَعْبِيٌّ",
+      "tr": "a cheap local restaurant"
+     },
+     {
+      "text": "قَائِمَةُ الطَّعَامِ",
+      "tr": "the menu"
+     },
+     {
+      "text": "مَطْعَمُ الْجَامِعَةِ",
+      "tr": "the university canteen"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَقْصَف",
+      "register": "neutral",
+      "nuance": "canteen, snack bar"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place (mafʿal) from the root ط ع م (“food, to eat”); Wiktionary relates it to طَعَام (food) and طَعْم (taste).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“The eating place” — compare Greek εστιατόριο, from εστιάω, “to entertain at a feast”."
+    ],
+    "pitfalls": [
+     "ط and ع side by side: maṭʿam — not *matam.",
+     "The plural مَطَاعِمُ is a diptote."
+    ],
+    "subtleties": [
+     "A fast-food place is مَطْعَمُ وَجَبَاتٍ سَرِيعَةٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:maqha",
+   "lemma": "مَقْهًى",
+   "pos": "NOUN",
+   "senses": [
+    "place.cafe"
+   ],
+   "features": {
+    "root": "ق ه و",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَقَاهٍ",
+      "kind": "broken",
+      "pattern": "مَفَاعٍ",
+      "declension": "defective",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَقْهَيَانِ",
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.cafe",
+     "axis": "register",
+     "value": "standard: مَقْهًى"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "maqhā",
+   "forms": {
+    "N;NOM;SG;INDF": "مَقْهًى",
+    "N;NOM;PL;INDF": "مَقَاهٍ",
+    "N;NOM;DU;INDF": "مَقْهَيَانِ",
+    "N;NOM;SG;DEF": "الْمَقْهَى",
+    "N;NOM;PL;DEF": "الْمَقَاهِي",
+    "N;NOM;DU;DEF": "الْمَقْهَيَانِ",
+    "N;ACC;SG;INDF": "مَقْهًى",
+    "N;ACC;PL;INDF": "مَقَاهِيَ",
+    "N;ACC;DU;INDF": "مَقْهَيَيْنِ",
+    "N;ACC;SG;DEF": "الْمَقْهَى",
+    "N;ACC;PL;DEF": "الْمَقَاهِيَ",
+    "N;ACC;DU;DEF": "الْمَقْهَيَيْنِ",
+    "N;GEN;SG;INDF": "مَقْهًى",
+    "N;GEN;PL;INDF": "مَقَاهٍ",
+    "N;GEN;DU;INDF": "مَقْهَيَيْنِ",
+    "N;GEN;SG;DEF": "الْمَقْهَى",
+    "N;GEN;PL;DEF": "الْمَقَاهِي",
+    "N;GEN;DU;DEF": "الْمَقْهَيَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tea, coffee, backgammon and long conversations.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "café, coffeehouse",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.cafe"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَشْرَبُ الشَّايَ فِي الْمَقْهَى.",
+      "tr": "We drink tea at the café.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "جَدِّي فِي الْمَقْهَى كُلَّ مَسَاءٍ.",
+      "tr": "My grandfather is at the café every evening.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي هٰذَا الشَّارِعِ مَقَاهٍ كَثِيرَةٌ.",
+      "tr": "There are many cafés in this street.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَقْهًى شَعْبِيٌّ",
+      "tr": "a traditional café"
+     },
+     {
+      "text": "صَاحِبُ الْمَقْهَى",
+      "tr": "the café owner"
+     },
+     {
+      "text": "مَقْهَى الْإِنْتَرْنِتِ",
+      "tr": "internet café"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كافيه",
+      "register": "colloquial",
+      "nuance": "a modern café (from French café)"
+     },
+     {
+      "word": "قهوة",
+      "register": "regional",
+      "nuance": "in Egypt the café itself is called qahwa",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place, denominal of قَهْوَة (qahwa, “coffee”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“The place of coffee”: قَهْوَة gave Turkish kahve and Greek καφές, and through Italian caffè the German Kaffee and English coffee."
+    ],
+    "pitfalls": [
+     "A defective noun: مَقْهًى (maqhan) without the article, الْمَقْهَى (al-maqhā) with it — the ending does not change for case.",
+     "The plural مَقَاهٍ (maqāhin) is defective too: with the article الْمَقَاهِي."
+    ],
+    "subtleties": [
+     "The traditional مَقْهًى شَعْبِيٌّ is a meeting place for men: tea, coffee, backgammon and the water pipe."
+    ]
+   }
+  },
+  {
+   "id": "ar:mustashfa",
+   "lemma": "مُسْتَشْفًى",
+   "pos": "NOUN",
+   "senses": [
+    "place.hospital"
+   ],
+   "features": {
+    "root": "ش ف ي",
+    "pattern": "مُسْتَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مُسْتَشْفَيَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُسْتَشْفَيَانِ",
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "mustašfā",
+   "forms": {
+    "N;NOM;SG;INDF": "مُسْتَشْفًى",
+    "N;NOM;PL;INDF": "مُسْتَشْفَيَاتٌ",
+    "N;NOM;DU;INDF": "مُسْتَشْفَيَانِ",
+    "N;NOM;SG;DEF": "الْمُسْتَشْفَى",
+    "N;NOM;PL;DEF": "الْمُسْتَشْفَيَاتُ",
+    "N;NOM;DU;DEF": "الْمُسْتَشْفَيَانِ",
+    "N;ACC;SG;INDF": "مُسْتَشْفًى",
+    "N;ACC;PL;INDF": "مُسْتَشْفَيَاتٍ",
+    "N;ACC;DU;INDF": "مُسْتَشْفَيَيْنِ",
+    "N;ACC;SG;DEF": "الْمُسْتَشْفَى",
+    "N;ACC;PL;DEF": "الْمُسْتَشْفَيَاتِ",
+    "N;ACC;DU;DEF": "الْمُسْتَشْفَيَيْنِ",
+    "N;GEN;SG;INDF": "مُسْتَشْفًى",
+    "N;GEN;PL;INDF": "مُسْتَشْفَيَاتٍ",
+    "N;GEN;DU;INDF": "مُسْتَشْفَيَيْنِ",
+    "N;GEN;SG;DEF": "الْمُسْتَشْفَى",
+    "N;GEN;PL;DEF": "الْمُسْتَشْفَيَاتِ",
+    "N;GEN;DU;DEF": "الْمُسْتَشْفَيَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Doctors, nurses and visiting hours.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hospital",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hospital"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي طَبِيبَةٌ فِي الْمُسْتَشْفَى.",
+      "tr": "My mother is a doctor at the hospital.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُسْتَشْفَى قَرِيبٌ مِنْ هُنَا.",
+      "tr": "The hospital is near here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمَدِينَةِ مُسْتَشْفَيَاتٌ كَثِيرَةٌ.",
+      "tr": "There are many hospitals in the city.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُسْتَشْفًى حُكُومِيٌّ",
+      "tr": "a public hospital"
+     },
+     {
+      "text": "فِي الْمُسْتَشْفَى",
+      "tr": "in hospital"
+     },
+     {
+      "text": "سَيَّارَةُ إِسْعَافٍ",
+      "tr": "ambulance"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُسْتَوْصَف",
+      "register": "neutral",
+      "nuance": "clinic, dispensary (smaller)"
+     },
+     {
+      "word": "عِيَادَة",
+      "register": "neutral",
+      "nuance": "a doctor’s practice, an outpatient clinic"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place of اِسْتَشْفَى (istašfā, “to seek a cure”), root ش ف ي: “the place for seeking a cure”. It arose at the end of the 19th century and displaced the medieval مَارِسْتَان (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old word مَارِسْتَان (from Persian) survives mainly as “mental asylum” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Defective like مَقْهًى: مُسْتَشْفًى / الْمُسْتَشْفَى, with no visible case ending.",
+     "Masculine despite the final -ā: الْمُسْتَشْفَى قَرِيبٌ."
+    ],
+    "subtleties": [
+     "Its plural is sound feminine: مُسْتَشْفَيَات (the ى becomes يَ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:saydaliyya",
+   "lemma": "صَيْدَلِيَّة",
+   "pos": "NOUN",
+   "senses": [
+    "place.pharmacy"
+   ],
+   "features": {
+    "root": {
+     "none": "built on صَيْدَلَة (pharmacy), a word of foreign origin: no triliteral root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "صَيْدَلِيَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "صَيْدَلِيَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ṣaydaliyya",
+   "forms": {
+    "N;NOM;SG;INDF": "صَيْدَلِيَّةٌ",
+    "N;NOM;PL;INDF": "صَيْدَلِيَّاتٌ",
+    "N;NOM;DU;INDF": "صَيْدَلِيَّتَانِ",
+    "N;NOM;SG;DEF": "الصَّيْدَلِيَّةُ",
+    "N;NOM;PL;DEF": "الصَّيْدَلِيَّاتُ",
+    "N;NOM;DU;DEF": "الصَّيْدَلِيَّتَانِ",
+    "N;ACC;SG;INDF": "صَيْدَلِيَّةً",
+    "N;ACC;PL;INDF": "صَيْدَلِيَّاتٍ",
+    "N;ACC;DU;INDF": "صَيْدَلِيَّتَيْنِ",
+    "N;ACC;SG;DEF": "الصَّيْدَلِيَّةَ",
+    "N;ACC;PL;DEF": "الصَّيْدَلِيَّاتِ",
+    "N;ACC;DU;DEF": "الصَّيْدَلِيَّتَيْنِ",
+    "N;GEN;SG;INDF": "صَيْدَلِيَّةٍ",
+    "N;GEN;PL;INDF": "صَيْدَلِيَّاتٍ",
+    "N;GEN;DU;INDF": "صَيْدَلِيَّتَيْنِ",
+    "N;GEN;SG;DEF": "الصَّيْدَلِيَّةِ",
+    "N;GEN;PL;DEF": "الصَّيْدَلِيَّاتِ",
+    "N;GEN;DU;DEF": "الصَّيْدَلِيَّتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The green cross on the corner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pharmacy, chemist’s",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.pharmacy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيْنَ أَقْرَبُ صَيْدَلِيَّةٍ؟",
+      "tr": "Where is the nearest pharmacy?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْتَرِي الدَّوَاءَ مِنَ الصَّيْدَلِيَّةِ.",
+      "tr": "I buy medicine at the pharmacy.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "الصَّيْدَلِيَّةُ مَفْتُوحَةٌ لَيْلًا.",
+      "tr": "The pharmacy is open at night.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صَيْدَلِيَّةٌ مُنَاوِبَةٌ",
+      "tr": "on-duty (night) pharmacy"
+     },
+     {
+      "text": "صَيْدَلِيَّةُ الْمُسْتَشْفَى",
+      "tr": "the hospital pharmacy"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أجزخانة",
+      "register": "dated",
+      "nuance": "the old Egyptian word (from Turkish eczane, “drug house”)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From صَيْدَلَة (ṣaydala, “pharmacy, pharmacology”) + ـِيَّة (-iyya) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pharmacist is صَيْدَلِيّ or صَيْدَلَانِيّ."
+    ],
+    "pitfalls": [
+     "The yāʾ is doubled: ṣaydaliyya, صَيْدَلِيَّة; plural صَيْدَلِيَّات."
+    ],
+    "subtleties": [
+     "-iyya often names a place or an institution: صَيْدَلِيَّة (pharmacy), بَلَدِيَّة (town hall)."
+    ]
+   }
+  },
+  {
+   "id": "ar:bank",
+   "lemma": "بَنْك",
+   "pos": "NOUN",
+   "senses": [
+    "place.bank"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian banco / French banque): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بُنُوك",
+      "kind": "broken",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَنْكَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "bank",
+   "forms": {
+    "N;NOM;SG;INDF": "بَنْكٌ",
+    "N;NOM;PL;INDF": "بُنُوكٌ",
+    "N;NOM;DU;INDF": "بَنْكَانِ",
+    "N;NOM;SG;DEF": "الْبَنْكُ",
+    "N;NOM;PL;DEF": "الْبُنُوكُ",
+    "N;NOM;DU;DEF": "الْبَنْكَانِ",
+    "N;ACC;SG;INDF": "بَنْكًا",
+    "N;ACC;PL;INDF": "بُنُوكًا",
+    "N;ACC;DU;INDF": "بَنْكَيْنِ",
+    "N;ACC;SG;DEF": "الْبَنْكَ",
+    "N;ACC;PL;DEF": "الْبُنُوكَ",
+    "N;ACC;DU;DEF": "الْبَنْكَيْنِ",
+    "N;GEN;SG;INDF": "بَنْكٍ",
+    "N;GEN;PL;INDF": "بُنُوكٍ",
+    "N;GEN;DU;INDF": "بَنْكَيْنِ",
+    "N;GEN;SG;DEF": "الْبَنْكِ",
+    "N;GEN;PL;DEF": "الْبُنُوكِ",
+    "N;GEN;DU;DEF": "الْبَنْكَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Accounts, cash machines and queues.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bank (money)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.bank"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَعْمَلُ فِي بَنْكٍ.",
+      "tr": "I work in a bank.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَنْكُ مُغْلَقٌ يَوْمَ الْجُمُعَةِ.",
+      "tr": "The bank is closed on Friday.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ الْبَنْكُ؟",
+      "tr": "Where is the bank?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حِسَابٌ فِي الْبَنْكِ",
+      "tr": "a bank account"
+     },
+     {
+      "text": "الْبَنْكُ الْمَرْكَزِيُّ",
+      "tr": "the central bank"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَصْرِف",
+      "register": "formal",
+      "nuance": "bank — the native word, in official names (مَصْرِفُ لُبْنَانَ, the Banque du Liban)"
+     }
+    ],
+    "etymology": {
+     "text": "From Italian banco and banca, at first in the Egyptian colloquial forms بَنْكُو and بَنْكَة, later from French banque (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Italian banco is the moneychanger’s bench — and Greek τράπεζα (bank) is literally “table”: the same counter, two pictures."
+    ],
+    "pitfalls": [
+     "A sukūn on n: bank, not *banak; the plural is broken: بُنُوك."
+    ],
+    "subtleties": [
+     "Islamic banks and official names often prefer مَصْرِف."
+    ]
+   }
+  },
+  {
+   "id": "ar:maktab_barid",
+   "lemma": "مَكْتَب بَرِيد",
+   "pos": "NOUN",
+   "senses": [
+    "place.postoffice"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: مَكْتَب (ك ت ب) + بَرِيد (ب ر د)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَكَاتِب بَرِيد",
+      "kind": "broken",
+      "declension": "diptote",
+      "note": "the head noun takes the plural: مَكَاتِبُ بَرِيدٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَكْتَبَا بَرِيدٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maktab barīd",
+   "forms": {
+    "N;NOM;SG;INDF": "مَكْتَبُ بَرِيدٍ",
+    "N;NOM;PL;INDF": "مَكَاتِبُ بَرِيدٍ",
+    "N;NOM;SG;DEF": "مَكْتَبُ الْبَرِيدِ",
+    "N;NOM;PL;DEF": "مَكَاتِبُ الْبَرِيدِ",
+    "N;ACC;SG;INDF": "مَكْتَبَ بَرِيدٍ",
+    "N;ACC;PL;INDF": "مَكَاتِبَ بَرِيدٍ",
+    "N;ACC;SG;DEF": "مَكْتَبَ الْبَرِيدِ",
+    "N;ACC;PL;DEF": "مَكَاتِبَ الْبَرِيدِ",
+    "N;GEN;SG;INDF": "مَكْتَبِ بَرِيدٍ",
+    "N;GEN;PL;INDF": "مَكَاتِبِ بَرِيدٍ",
+    "N;GEN;SG;DEF": "مَكْتَبِ الْبَرِيدِ",
+    "N;GEN;PL;DEF": "مَكَاتِبِ الْبَرِيدِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Stamps, parcels and queues at the counter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "post office — مَكْتَبُ الْبَرِيدِ (the post office), مَكْتَبُ بَرِيدٍ (a post office)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.postoffice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَكْتَبُ الْبَرِيدِ بِجَانِبِ الْبَنْكِ.",
+      "tr": "The post office is next to the bank.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَذْهَبُ إِلَى مَكْتَبِ الْبَرِيدِ.",
+      "tr": "I’m going to the post office.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ فِي الْقَرْيَةِ مَكْتَبُ بَرِيدٍ؟",
+      "tr": "Is there a post office in the village?",
+      "register": "neutral",
+      "context": "village",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صُنْدُوقُ بَرِيدٍ",
+      "tr": "letterbox; P.O. box"
+     },
+     {
+      "text": "طَابِعُ بَرِيدٍ",
+      "tr": "postage stamp"
+     },
+     {
+      "text": "مُوَظَّفُ الْبَرِيدِ",
+      "tr": "the post office clerk"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "الْبَرِيد",
+      "register": "neutral",
+      "nuance": "the post — also the post office itself: أَذْهَبُ إِلَى الْبَرِيدِ"
+     },
+     {
+      "word": "البوسطة",
+      "register": "colloquial",
+      "nuance": "the post office (from Italian posta), in the Levant and Egypt",
+      "region": "Levant, Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "مَكْتَب (office) + بَرِيد (post, mail). Wiktionary: بَرِيد is borrowed from Byzantine Greek βέρηδος (bérēdos, a post-horse), from Latin verēdus, from Gaulish *werēdos.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Arabic “post” is a Greek word: βέρηδος, the horse of the Byzantine couriers, from Latin verēdus — the Celtic word that, as paraverēdus, also became German Pferd (“horse”)."
+    ],
+    "pitfalls": [
+     "A construct (iḍāfa): only the second word takes the article — مَكْتَبُ الْبَرِيدِ, never *الْمَكْتَبُ الْبَرِيدِ.",
+     "The case ending goes on the first word: فِي مَكْتَبِ الْبَرِيدِ, إِلَى مَكْتَبِ الْبَرِيدِ."
+    ],
+    "subtleties": [
+     "“A post office” has no article at all: مَكْتَبُ بَرِيدٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:mahatta",
+   "lemma": "مَحَطَّة",
+   "pos": "NOUN",
+   "senses": [
+    "place.station"
+   ],
+   "features": {
+    "root": "ح ط ط",
+    "pattern": "مَفْعَلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَحَطَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَحَطَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "maḥaṭṭa",
+   "forms": {
+    "N;NOM;SG;INDF": "مَحَطَّةٌ",
+    "N;NOM;PL;INDF": "مَحَطَّاتٌ",
+    "N;NOM;DU;INDF": "مَحَطَّتَانِ",
+    "N;NOM;SG;DEF": "الْمَحَطَّةُ",
+    "N;NOM;PL;DEF": "الْمَحَطَّاتُ",
+    "N;NOM;DU;DEF": "الْمَحَطَّتَانِ",
+    "N;ACC;SG;INDF": "مَحَطَّةً",
+    "N;ACC;PL;INDF": "مَحَطَّاتٍ",
+    "N;ACC;DU;INDF": "مَحَطَّتَيْنِ",
+    "N;ACC;SG;DEF": "الْمَحَطَّةَ",
+    "N;ACC;PL;DEF": "الْمَحَطَّاتِ",
+    "N;ACC;DU;DEF": "الْمَحَطَّتَيْنِ",
+    "N;GEN;SG;INDF": "مَحَطَّةٍ",
+    "N;GEN;PL;INDF": "مَحَطَّاتٍ",
+    "N;GEN;DU;INDF": "مَحَطَّتَيْنِ",
+    "N;GEN;SG;DEF": "الْمَحَطَّةِ",
+    "N;GEN;PL;DEF": "الْمَحَطَّاتِ",
+    "N;GEN;DU;DEF": "الْمَحَطَّتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Platforms, timetables and departures.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "station (train, bus); also radio or petrol station",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.station"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيْنَ مَحَطَّةُ الْقِطَارِ؟",
+      "tr": "Where is the train station?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنْتَظِرُكَ فِي الْمَحَطَّةِ.",
+      "tr": "I’ll wait for you at the station.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "مَحَطَّةُ الْوَقُودِ قَرِيبَةٌ.",
+      "tr": "The petrol station is close.",
+      "register": "neutral",
+      "context": "driving",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَحَطَّةُ الْقِطَارِ",
+      "tr": "train station"
+     },
+     {
+      "text": "مَحَطَّةُ الْحَافِلَاتِ",
+      "tr": "bus station"
+     },
+     {
+      "text": "مَحَطَّةُ إِذَاعَةٍ",
+      "tr": "radio station"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَوْقِف",
+      "register": "neutral",
+      "nuance": "stop, stand: مَوْقِفُ الْحَافِلَةِ (bus stop); also a car park"
+     }
+    ],
+    "etymology": {
+     "text": "Noun of place from the verb حَطَّ (ḥaṭṭa, “to put down, to place”), root ح ط ط (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Literally “the place where one puts down (a load)” — a halt."
+    ],
+    "pitfalls": [
+     "The ṭ is doubled: maḥaṭṭa, مَحَطَّة."
+    ],
+    "subtleties": [
+     "مَحَطَّة is any station: trains, buses, radio, petrol (مَحَطَّةُ وَقُودٍ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:matar",
+   "lemma": "مَطَار",
+   "pos": "NOUN",
+   "senses": [
+    "place.airport"
+   ],
+   "features": {
+    "root": "ط ي ر",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَطَارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَطَارَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maṭār",
+   "forms": {
+    "N;NOM;SG;INDF": "مَطَارٌ",
+    "N;NOM;PL;INDF": "مَطَارَاتٌ",
+    "N;NOM;DU;INDF": "مَطَارَانِ",
+    "N;NOM;SG;DEF": "الْمَطَارُ",
+    "N;NOM;PL;DEF": "الْمَطَارَاتُ",
+    "N;NOM;DU;DEF": "الْمَطَارَانِ",
+    "N;ACC;SG;INDF": "مَطَارًا",
+    "N;ACC;PL;INDF": "مَطَارَاتٍ",
+    "N;ACC;DU;INDF": "مَطَارَيْنِ",
+    "N;ACC;SG;DEF": "الْمَطَارَ",
+    "N;ACC;PL;DEF": "الْمَطَارَاتِ",
+    "N;ACC;DU;DEF": "الْمَطَارَيْنِ",
+    "N;GEN;SG;INDF": "مَطَارٍ",
+    "N;GEN;PL;INDF": "مَطَارَاتٍ",
+    "N;GEN;DU;INDF": "مَطَارَيْنِ",
+    "N;GEN;SG;DEF": "الْمَطَارِ",
+    "N;GEN;PL;DEF": "الْمَطَارَاتِ",
+    "N;GEN;DU;DEF": "الْمَطَارَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Departures, arrivals and long goodbyes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "airport",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.airport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَطَارُ بَعِيدٌ عَنِ الْمَدِينَةِ.",
+      "tr": "The airport is far from the city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا فِي الْمَطَارِ الْآنَ.",
+      "tr": "I’m at the airport now.",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "نَذْهَبُ إِلَى الْمَطَارِ بِالتَّاكْسِي.",
+      "tr": "We’re going to the airport by taxi.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَطَارٌ دُوَلِيٌّ",
+      "tr": "international airport"
+     },
+     {
+      "text": "فِي الْمَطَارِ",
+      "tr": "at the airport"
+     },
+     {
+      "text": "مَطَارُ الْقَاهِرَةِ",
+      "tr": "Cairo airport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: مَطَار is the word everywhere; a small landing strip is مَهْبَط.",
+    "etymology": {
+     "text": "Noun of place from the verb طَارَ (ṭāra, “to fly”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“The place of flying”: طَارَ (to fly) also gives طَائِرَة (aeroplane) and طَيْر (birds)."
+    ],
+    "pitfalls": [
+     "مَطَار (maṭār, airport) vs مَطَر (maṭar, rain): one long vowel."
+    ],
+    "subtleties": [
+     "Like مَكَان (place), it is the mafʿal pattern of a “hollow” root (ط ي ر)."
+    ]
+   }
+  },
+  {
+   "id": "ar:shari",
+   "lemma": "شَارِع",
+   "pos": "NOUN",
+   "senses": [
+    "place.street"
+   ],
+   "features": {
+    "root": "ش ر ع",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "شَوَارِع",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شَارِعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "šāriʿ",
+   "forms": {
+    "N;NOM;SG;INDF": "شَارِعٌ",
+    "N;NOM;PL;INDF": "شَوَارِعُ",
+    "N;NOM;DU;INDF": "شَارِعَانِ",
+    "N;NOM;SG;DEF": "الشَّارِعُ",
+    "N;NOM;PL;DEF": "الشَّوَارِعُ",
+    "N;NOM;DU;DEF": "الشَّارِعَانِ",
+    "N;ACC;SG;INDF": "شَارِعًا",
+    "N;ACC;PL;INDF": "شَوَارِعَ",
+    "N;ACC;DU;INDF": "شَارِعَيْنِ",
+    "N;ACC;SG;DEF": "الشَّارِعَ",
+    "N;ACC;PL;DEF": "الشَّوَارِعَ",
+    "N;ACC;DU;DEF": "الشَّارِعَيْنِ",
+    "N;GEN;SG;INDF": "شَارِعٍ",
+    "N;GEN;PL;INDF": "شَوَارِعَ",
+    "N;GEN;DU;INDF": "شَارِعَيْنِ",
+    "N;GEN;SG;DEF": "الشَّارِعِ",
+    "N;GEN;PL;DEF": "الشَّوَارِعِ",
+    "N;GEN;DU;DEF": "الشَّارِعَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Traffic, shops and city life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "street",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.street"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَسْكُنُ فِي هٰذَا الشَّارِعِ.",
+      "tr": "I live in this street.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الشَّارِعُ مُزْدَحِمٌ.",
+      "tr": "The street is crowded.",
+      "register": "neutral",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الشَّارِعِ أَطْفَالٌ كَثِيرُونَ.",
+      "tr": "There are many children in the street.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الشَّارِعُ الرَّئِيسِيُّ",
+      "tr": "the main street"
+     },
+     {
+      "text": "اِسْمُ الشَّارِعِ",
+      "tr": "the street name"
+     },
+     {
+      "text": "أَطْفَالُ الشَّوَارِعِ",
+      "tr": "street children"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "طَرِيق",
+      "register": "neutral",
+      "nuance": "road, way — also the way to somewhere"
+     },
+     {
+      "word": "زُقَاق",
+      "register": "neutral",
+      "nuance": "alley, lane"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ش ر ع (š r ʕ); it has the form of an active participle, but Wiktionary suggests that the verb شَرَعَ (“to open onto the street”) comes from the noun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives شَرِيعَة (law), traditionally explained as “the path (to the water)”."
+    ],
+    "pitfalls": [
+     "The plural شَوَارِعُ is a diptote: فِي شَوَارِعَ (genitive -a without the article)."
+    ],
+    "subtleties": [
+     "Addresses use فِي: فِي شَارِعِ الْحَمْرَاءِ (on Hamra Street)."
+    ]
+   }
+  },
+  {
+   "id": "ar:maydan",
+   "lemma": "مَيْدَان",
+   "pos": "NOUN",
+   "senses": [
+    "place.square",
+    "abstract.field",
+    "pol.battlefield"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَيَادِين",
+      "kind": "broken",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "مَيْدَانَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maydān",
+   "forms": {
+    "N;NOM;SG;INDF": "مَيْدَانٌ",
+    "N;NOM;PL;INDF": "مَيَادِينُ",
+    "N;NOM;DU;INDF": "مَيْدَانَانِ",
+    "N;NOM;SG;DEF": "الْمَيْدَانُ",
+    "N;NOM;PL;DEF": "الْمَيَادِينُ",
+    "N;NOM;DU;DEF": "الْمَيْدَانَانِ",
+    "N;ACC;SG;INDF": "مَيْدَانًا",
+    "N;ACC;PL;INDF": "مَيَادِينَ",
+    "N;ACC;DU;INDF": "مَيْدَانَيْنِ",
+    "N;ACC;SG;DEF": "الْمَيْدَانَ",
+    "N;ACC;PL;DEF": "الْمَيَادِينَ",
+    "N;ACC;DU;DEF": "الْمَيْدَانَيْنِ",
+    "N;GEN;SG;INDF": "مَيْدَانٍ",
+    "N;GEN;PL;INDF": "مَيَادِينَ",
+    "N;GEN;DU;INDF": "مَيْدَانَيْنِ",
+    "N;GEN;SG;DEF": "الْمَيْدَانِ",
+    "N;GEN;PL;DEF": "الْمَيَادِينِ",
+    "N;GEN;DU;DEF": "الْمَيْدَانَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Big squares, demonstrations and roundabouts.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "square (open space in a city)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.square"
+     },
+     {
+      "id": "s2",
+      "def": "field, sphere (of work or study)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.field"
+     },
+     {
+      "id": "s3",
+      "def": "battlefield",
+      "register": [
+       "literary"
+      ],
+      "concept": "pol.battlefield"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَطْعَمُ فِي الْمَيْدَانِ.",
+      "tr": "The restaurant is on the square.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "مَيْدَانُ التَّحْرِيرِ فِي الْقَاهِرَةِ.",
+      "tr": "Tahrir Square is in Cairo.",
+      "register": "neutral",
+      "context": "places",
+      "sense": "s1"
+     },
+     {
+      "text": "نَلْتَقِي فِي الْمَيْدَانِ.",
+      "tr": "Let’s meet on the square.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "يَعْمَلُ فِي مَيْدَانِ الطِّبِّ.",
+      "tr": "He works in the field of medicine.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "سَقَطَ كَثِيرٌ مِنَ الْجُنُودِ فِي مَيْدَانِ الْمَعْرَكَةِ.",
+      "tr": "Many soldiers fell on the battlefield.",
+      "register": "literary",
+      "context": "history",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَيْدَانُ التَّحْرِيرِ",
+      "tr": "Tahrir Square"
+     },
+     {
+      "text": "وَسَطُ الْمَيْدَانِ",
+      "tr": "the middle of the square"
+     },
+     {
+      "text": "مَيْدَانُ الْمَعْرَكَةِ",
+      "tr": "the battlefield"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَاحَة",
+      "register": "neutral",
+      "nuance": "square, open space, courtyard — usual in the Levant: سَاحَةُ الشُّهَدَاءِ (Martyrs’ Square, Beirut)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from an Iranian language, from Proto-Iranian *mádyanah (“middle”), from *mádyah (“middle”); compare Persian میان (miyân, “middle, between”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Indo-European root of *mádyah also gives Greek μέσος, German Mitte and English middle: a square is “the middle” of the town."
+    ],
+    "pitfalls": [
+     "“On the square” is فِي الْمَيْدَانِ (in), not عَلَى.",
+     "The plural مَيَادِينُ is a diptote."
+    ],
+    "subtleties": [
+     "Egypt says مَيْدَان (مَيْدَانُ التَّحْرِيرِ), the Levant mostly سَاحَة."
+    ]
+   }
+  },
+  {
+   "id": "ar:hadiqa",
+   "lemma": "حَدِيقَة",
+   "pos": "NOUN",
+   "senses": [
+    "place.park",
+    "home.garden"
+   ],
+   "features": {
+    "root": "ح د ق",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَدَائِق",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَدِيقَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ḥadīqa",
+   "forms": {
+    "N;NOM;SG;INDF": "حَدِيقَةٌ",
+    "N;NOM;PL;INDF": "حَدَائِقُ",
+    "N;NOM;DU;INDF": "حَدِيقَتَانِ",
+    "N;NOM;SG;DEF": "الْحَدِيقَةُ",
+    "N;NOM;PL;DEF": "الْحَدَائِقُ",
+    "N;NOM;DU;DEF": "الْحَدِيقَتَانِ",
+    "N;ACC;SG;INDF": "حَدِيقَةً",
+    "N;ACC;PL;INDF": "حَدَائِقَ",
+    "N;ACC;DU;INDF": "حَدِيقَتَيْنِ",
+    "N;ACC;SG;DEF": "الْحَدِيقَةَ",
+    "N;ACC;PL;DEF": "الْحَدَائِقَ",
+    "N;ACC;DU;DEF": "الْحَدِيقَتَيْنِ",
+    "N;GEN;SG;INDF": "حَدِيقَةٍ",
+    "N;GEN;PL;INDF": "حَدَائِقَ",
+    "N;GEN;DU;INDF": "حَدِيقَتَيْنِ",
+    "N;GEN;SG;DEF": "الْحَدِيقَةِ",
+    "N;GEN;PL;DEF": "الْحَدَائِقِ",
+    "N;GEN;DU;DEF": "الْحَدِيقَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Green and shade: the public park and the garden of a house.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "park, public garden",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.park"
+     },
+     {
+      "id": "s2",
+      "def": "garden (of a house)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.garden"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَلْعَبُ فِي الْحَدِيقَةِ الْعَامَّةِ.",
+      "tr": "We play in the public park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَدِيقَةُ بَعِيدَةٌ عَنِ الْبَيْتِ.",
+      "tr": "The park is far from the house.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "أُمِّي فِي الْحَدِيقَةِ.",
+      "tr": "My mother is in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "فِي حَدِيقَةِ بَيْتِنَا شَجَرَةُ لَيْمُونٍ.",
+      "tr": "There is a lemon tree in the garden of our house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَدِيقَةٌ عَامَّةٌ",
+      "tr": "a public park"
+     },
+     {
+      "text": "حَدِيقَةُ الْحَيَوَانَاتِ",
+      "tr": "the zoo"
+     },
+     {
+      "text": "حَدِيقَةُ الْبَيْتِ",
+      "tr": "the garden of the house"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بُسْتَان",
+      "register": "neutral",
+      "nuance": "orchard, fruit garden"
+     },
+     {
+      "word": "مُنْتَزَه",
+      "register": "neutral",
+      "nuance": "park, a place for outings"
+     },
+     {
+      "word": "جنينة",
+      "register": "colloquial",
+      "nuance": "garden (Egypt, Levant; a diminutive of جَنَّة, paradise)",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary relates it to حدق (“to surround, to enclose”): an enclosed garden.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "An enclosed garden — the same picture as Greek παράδεισος (paradise), from an Iranian word for a walled park."
+    ],
+    "pitfalls": [
+     "One Arabic word for two English ones: حَدِيقَة = park and garden; the context decides.",
+     "The plural حَدَائِقُ is a diptote."
+    ],
+    "subtleties": [
+     "حَدِيقَةُ الْحَيَوَانَاتِ, “the garden of the animals”, is the zoo."
+    ]
+   }
+  },
+  {
+   "id": "ar:madina",
+   "lemma": "مَدِينَة",
+   "pos": "NOUN",
+   "senses": [
+    "place.city"
+   ],
+   "features": {
+    "root": "م د ن",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مُدُن",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "مَدَائِن",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "note": "literary: old cities (مَدَائِنُ صَالِحٍ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَدِينَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.city",
+     "axis": "range",
+     "value": "city, town (the standard word)"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "madīna",
+   "forms": {
+    "N;NOM;SG;INDF": "مَدِينَةٌ",
+    "N;NOM;PL;INDF": "مُدُنٌ",
+    "N;NOM;DU;INDF": "مَدِينَتَانِ",
+    "N;NOM;SG;DEF": "الْمَدِينَةُ",
+    "N;NOM;PL;DEF": "الْمُدُنُ",
+    "N;NOM;DU;DEF": "الْمَدِينَتَانِ",
+    "N;ACC;SG;INDF": "مَدِينَةً",
+    "N;ACC;PL;INDF": "مُدُنًا",
+    "N;ACC;DU;INDF": "مَدِينَتَيْنِ",
+    "N;ACC;SG;DEF": "الْمَدِينَةَ",
+    "N;ACC;PL;DEF": "الْمُدُنَ",
+    "N;ACC;DU;DEF": "الْمَدِينَتَيْنِ",
+    "N;GEN;SG;INDF": "مَدِينَةٍ",
+    "N;GEN;PL;INDF": "مُدُنٍ",
+    "N;GEN;DU;INDF": "مَدِينَتَيْنِ",
+    "N;GEN;SG;DEF": "الْمَدِينَةِ",
+    "N;GEN;PL;DEF": "الْمُدُنِ",
+    "N;GEN;DU;DEF": "الْمَدِينَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crowds, lights and old quarters.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "city, town",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.city"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَسْكُنُ فِي مَدِينَةٍ كَبِيرَةٍ.",
+      "tr": "I live in a big city.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقَاهِرَةُ مَدِينَةٌ قَدِيمَةٌ.",
+      "tr": "Cairo is an old city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَطْعَمُ فِي وَسَطِ الْمَدِينَةِ.",
+      "tr": "The restaurant is in the city centre.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَسَطُ الْمَدِينَةِ",
+      "tr": "the city centre"
+     },
+     {
+      "text": "الْمَدِينَةُ الْقَدِيمَةُ",
+      "tr": "the old town"
+     },
+     {
+      "text": "مَدِينَةٌ كَبِيرَةٌ",
+      "tr": "a big city"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَلْدَة",
+      "register": "neutral",
+      "nuance": "a small town"
+     },
+     {
+      "word": "عَاصِمَة",
+      "register": "neutral",
+      "nuance": "capital city"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Aramaic מְדִינְתָּא (məḏīntā); cognate with Hebrew מְדִינָה (məḏînâ, “state”); the Arabic root م د ن was made from the noun (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מְדִינָה (medina) means “state”, Arabic مَدِينَة “city” — the Aramaic source meant a jurisdiction, a province.",
+     "الْمَدِينَة, “the City”, is the city of the Prophet; the old quarter of North African towns is called the medina."
+    ],
+    "pitfalls": [
+     "The usual plural is broken: مُدُن (mudun) — not *مَدِينَات."
+    ],
+    "subtleties": [
+     "مَدَنِيّ (civil, civilian) and تَمَدُّن (urbanisation) are built on it."
+    ]
+   }
+  },
+  {
+   "id": "ar:qarya",
+   "lemma": "قَرْيَة",
+   "pos": "NOUN",
+   "senses": [
+    "place.village"
+   ],
+   "features": {
+    "root": "ق ر ي",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قُرًى",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "invariable",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قَرْيَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "qarya",
+   "forms": {
+    "N;NOM;SG;INDF": "قَرْيَةٌ",
+    "N;NOM;PL;INDF": "قُرًى",
+    "N;NOM;DU;INDF": "قَرْيَتَانِ",
+    "N;NOM;SG;DEF": "الْقَرْيَةُ",
+    "N;NOM;PL;DEF": "الْقُرَى",
+    "N;NOM;DU;DEF": "الْقَرْيَتَانِ",
+    "N;ACC;SG;INDF": "قَرْيَةً",
+    "N;ACC;PL;INDF": "قُرًى",
+    "N;ACC;DU;INDF": "قَرْيَتَيْنِ",
+    "N;ACC;SG;DEF": "الْقَرْيَةَ",
+    "N;ACC;PL;DEF": "الْقُرَى",
+    "N;ACC;DU;DEF": "الْقَرْيَتَيْنِ",
+    "N;GEN;SG;INDF": "قَرْيَةٍ",
+    "N;GEN;PL;INDF": "قُرًى",
+    "N;GEN;DU;INDF": "قَرْيَتَيْنِ",
+    "N;GEN;SG;DEF": "الْقَرْيَةِ",
+    "N;GEN;PL;DEF": "الْقُرَى",
+    "N;GEN;DU;DEF": "الْقَرْيَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fields, quiet streets and grandparents.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "village",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.village"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَدَّتِي تَسْكُنُ فِي قَرْيَةٍ.",
+      "tr": "My grandmother lives in a village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقَرْيَةُ قَرِيبَةٌ مِنَ الْبَحْرِ.",
+      "tr": "The village is near the sea.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَيَاةُ فِي الْقُرَى هَادِئَةٌ.",
+      "tr": "Life in the villages is quiet.",
+      "register": "neutral",
+      "context": "countryside",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَهْلُ الْقَرْيَةِ",
+      "tr": "the villagers"
+     },
+     {
+      "text": "قَرْيَةٌ صَغِيرَةٌ",
+      "tr": "a small village"
+     },
+     {
+      "text": "قَرْيَةٌ سِيَاحِيَّةٌ",
+      "tr": "a holiday resort"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ضيعة",
+      "register": "regional",
+      "nuance": "village (Lebanon, Syria)",
+      "region": "Levant"
+     },
+     {
+      "word": "كَفْر",
+      "register": "regional",
+      "nuance": "village — in Egyptian place names (كَفْرُ الشَّيْخِ)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-West Semitic, possibly from a root of meeting and gathering; cognate with Biblical Hebrew קִרְיָה (qiryāh, “town, city”), Classical Syriac qərīṯā (“town, village”) and Phoenician qrt (“city”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Carthage was Phoenician Qart-ḥadašt, “new town” — the same word as قَرْيَة.",
+     "أُمُّ الْقُرَى, “the mother of villages”, is an old name of Mecca."
+    ],
+    "pitfalls": [
+     "The plural قُرًى (quran) is defective: with the article الْقُرَى, the same in every case.",
+     "قَرْيَة (qarya, village) vs قَرِيبَة (qarība, near, f.)."
+    ],
+    "subtleties": [
+     "Wiktionary notes that in older Arabic قَرْيَة could be any town; today it is a village."
+    ]
+   }
+  },
+  {
+   "id": "ar:balad",
+   "lemma": "بَلَد",
+   "pos": "NOUN",
+   "senses": [
+    "place.country",
+    "place.city"
+   ],
+   "features": {
+    "root": "ب ل د",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بُلْدَان",
+      "kind": "broken",
+      "pattern": "فُعْلَان",
+      "declension": "triptote",
+      "note": "countries; towns",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "بِلَاد",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "lands; often one country (بِلَادُ الشَّامِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَلَدَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.city",
+     "axis": "range",
+     "value": "town, home town (regional); usually “country”"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "balad",
+   "forms": {
+    "N;NOM;SG;INDF": "بَلَدٌ",
+    "N;NOM;PL;INDF": "بُلْدَانٌ",
+    "N;NOM;DU;INDF": "بَلَدَانِ",
+    "N;NOM;SG;DEF": "الْبَلَدُ",
+    "N;NOM;PL;DEF": "الْبُلْدَانُ",
+    "N;NOM;DU;DEF": "الْبَلَدَانِ",
+    "N;ACC;SG;INDF": "بَلَدًا",
+    "N;ACC;PL;INDF": "بُلْدَانًا",
+    "N;ACC;DU;INDF": "بَلَدَيْنِ",
+    "N;ACC;SG;DEF": "الْبَلَدَ",
+    "N;ACC;PL;DEF": "الْبُلْدَانَ",
+    "N;ACC;DU;DEF": "الْبَلَدَيْنِ",
+    "N;GEN;SG;INDF": "بَلَدٍ",
+    "N;GEN;PL;INDF": "بُلْدَانٍ",
+    "N;GEN;DU;INDF": "بَلَدَيْنِ",
+    "N;GEN;SG;DEF": "الْبَلَدِ",
+    "N;GEN;PL;DEF": "الْبُلْدَانِ",
+    "N;GEN;DU;DEF": "الْبَلَدَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Homeland, borders and belonging.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "country",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.country"
+     },
+     {
+      "id": "s2",
+      "def": "town, home town (in some regions)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.city"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مِنْ أَيِّ بَلَدٍ أَنْتَ؟",
+      "tr": "Which country are you from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "مِصْرُ بَلَدٌ كَبِيرٌ.",
+      "tr": "Egypt is a big country.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ بَلَدِي.",
+      "tr": "I love my country.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "رَجَعْتُ إِلَى بَلَدِي فِي الصَّيْفِ لِأَرَى أَهْلِي.",
+      "tr": "In summer I went back to my home town to see my family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "سَكَنَّا فِي بَلَدٍ صَغِيرٍ قُرْبَ الْبَحْرِ.",
+      "tr": "We lived in a small town near the sea.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَلَدٌ عَرَبِيٌّ",
+      "tr": "an Arab country"
+     },
+     {
+      "text": "أَهْلُ الْبَلَدِ",
+      "tr": "the locals"
+     },
+     {
+      "text": "الْبُلْدَانُ الْعَرَبِيَّةُ",
+      "tr": "the Arab countries"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دَوْلَة",
+      "register": "formal",
+      "nuance": "state — the political unit"
+     },
+     {
+      "word": "بِلَاد",
+      "register": "neutral",
+      "nuance": "country, land; الْبِلَادُ = the country, the homeland"
+     },
+     {
+      "word": "وَطَن",
+      "register": "neutral",
+      "nuance": "homeland, fatherland — emotional"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Ugaritic bld.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish belde (town) and belediye (municipality) come from this root (Arabic بَلْدَة, بَلَدِيَّة)."
+    ],
+    "pitfalls": [
+     "Two plurals: بُلْدَان (countries) and بِلَاد, which often means “the land, the country” itself.",
+     "Wiktionary also gives “town, city”: in Egypt بَلَد is one’s home town."
+    ],
+    "subtleties": [
+     "“My country” is بَلَدِي; “abroad” is خَارِجَ الْبَلَدِ or فِي الْخَارِجِ."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

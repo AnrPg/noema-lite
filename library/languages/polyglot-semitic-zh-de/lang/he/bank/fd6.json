@@ -1,0 +1,7502 @@
+{
+ "sentences": [
+  {
+   "id": "he.f6.001",
+   "frame": "fr.adj.pred",
+   "text": "הַבַּיִת גָּדוֹל.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The house is big.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.002",
+   "frame": "fr.adj.pred",
+   "text": "הַבָּתִּים גְּדוֹלִים.",
+   "tokens": [
+    {
+     "t": "הַבָּתִּים",
+     "l": "he:bayit",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "גְּדוֹלִים",
+     "l": "he:gadol",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The houses are big.",
+   "variantOf": "he.f6.001",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.003",
+   "frame": "fr.adj.pred",
+   "text": "הַבַּיִת לֹא גָּדוֹל.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "גָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "The house is not big.",
+   "variantOf": "he.f6.001",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.004",
+   "frame": "fr.adj.pred",
+   "text": "הַדִּירָה קְטַנָּה.",
+   "tokens": [
+    {
+     "t": "הַדִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "קְטַנָּה",
+     "l": "he:katan",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The flat is small.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.005",
+   "frame": "fr.adj.pred",
+   "text": "הַדִּירוֹת קְטַנּוֹת.",
+   "tokens": [
+    {
+     "t": "הַדִּירוֹת",
+     "l": "he:dira",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "קְטַנּוֹת",
+     "l": "he:katan",
+     "f": "ADJ;PL;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The flats are small.",
+   "variantOf": "he.f6.004",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.006",
+   "frame": "fr.adj.pred",
+   "text": "הַדִּירָה קְטַנָּה?",
+   "tokens": [
+    {
+     "t": "הַדִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "קְטַנָּה",
+     "l": "he:katan",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the flat small?",
+   "variantOf": "he.f6.004",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.007",
+   "frame": "fr.adj.pred",
+   "text": "הַשֻּׁלְחָן אָרֹךְ.",
+   "tokens": [
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אָרֹךְ",
+     "l": "he:arokh",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The table is long.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.008",
+   "frame": "fr.adj.pred",
+   "text": "הָרְחוֹב הַזֶּה קָצָר.",
+   "tokens": [
+    {
+     "t": "הָרְחוֹב",
+     "l": "he:rechov",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "קָצָר",
+     "l": "he:katsar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This street is short.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.009",
+   "frame": "fr.adj.pred",
+   "text": "הָרְחוֹבוֹת פֹּה קְצָרִים.",
+   "tokens": [
+    {
+     "t": "הָרְחוֹבוֹת",
+     "l": "he:rechov",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "קְצָרִים",
+     "l": "he:katsar",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative",
+    "fn.plural.noun"
+   ],
+   "gloss": "The streets here are short.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.010",
+   "frame": "fr.adj.pred",
+   "text": "הַמּוֹרֶה גָּבֹהַּ.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גָּבֹהַּ",
+     "l": "he:gavoha",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The teacher (m.) is tall.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.011",
+   "frame": "fr.adj.pred",
+   "text": "הַמּוֹרָה גְּבֹהָה.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גְּבֹהָה",
+     "l": "he:gavoha",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The teacher (f.) is tall.",
+   "variantOf": "he.f6.010",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.012",
+   "frame": "fr.adj.pred",
+   "text": "הַמָּרָק טוֹב.",
+   "tokens": [
+    {
+     "t": "הַמָּרָק",
+     "l": "he:marak",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The soup is good.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.013",
+   "frame": "fr.adj.pred",
+   "text": "הַמָּרָק טוֹב?",
+   "tokens": [
+    {
+     "t": "הַמָּרָק",
+     "l": "he:marak",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the soup good?",
+   "variantOf": "he.f6.012",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.014",
+   "frame": "fr.adj.pred",
+   "text": "הַקָּפֶה פֹּה רַע.",
+   "tokens": [
+    {
+     "t": "הַקָּפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "רַע",
+     "l": "he:ra",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "The coffee here is bad.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.015",
+   "frame": "fr.adj.pred",
+   "text": "הַטֶּלֶפוֹן שֶׁלִּי חָדָשׁ.",
+   "tokens": [
+    {
+     "t": "הַטֶּלֶפוֹן",
+     "l": "he:telefon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "חָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive"
+   ],
+   "gloss": "My phone is new.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.016",
+   "frame": "fr.adj.pred",
+   "text": "הַטֶּלֶפוֹן שֶׁלִּי לֹא חָדָשׁ.",
+   "tokens": [
+    {
+     "t": "הַטֶּלֶפוֹן",
+     "l": "he:telefon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "חָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive",
+    "fn.negation"
+   ],
+   "gloss": "My phone is not new.",
+   "variantOf": "he.f6.015",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.017",
+   "frame": "fr.adj.pred",
+   "text": "הַסְּפָרִים הָאֵלֶּה יְשָׁנִים.",
+   "tokens": [
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָאֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL;DEF"
+    },
+    {
+     "t": "יְשָׁנִים",
+     "l": "he:yashan",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative",
+    "fn.plural.noun"
+   ],
+   "gloss": "These books are old.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.018",
+   "frame": "fr.adj.pred",
+   "text": "הַמּוֹרָה צְעִירָה.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "צְעִירָה",
+     "l": "he:tsair",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The teacher (f.) is young.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.019",
+   "frame": "fr.adj.pred",
+   "text": "הַמּוֹרוֹת צְעִירוֹת.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרוֹת",
+     "l": "he:mora",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "צְעִירוֹת",
+     "l": "he:tsair",
+     "f": "ADJ;PL;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The teachers (f.) are young.",
+   "variantOf": "he.f6.018",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.020",
+   "frame": "fr.adj.pred",
+   "text": "סַבָּא שֶׁלִּי זָקֵן.",
+   "tokens": [
+    {
+     "t": "סַבָּא",
+     "l": "he:saba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "זָקֵן",
+     "l": "he:zaken",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.possessive"
+   ],
+   "gloss": "My grandpa is old.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.021",
+   "frame": "fr.adj.pred",
+   "text": "הַסָּבִים שֶׁלִּי מְבֻגָּרִים.",
+   "tokens": [
+    {
+     "t": "הַסָּבִים",
+     "l": "he:sabim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "מְבֻגָּרִים",
+     "l": "he:mevugar",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive",
+    "fn.plural.noun"
+   ],
+   "gloss": "My grandparents are elderly.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.022",
+   "frame": "fr.adj.pred",
+   "text": "הַתֵּה חַם.",
+   "tokens": [
+    {
+     "t": "הַתֵּה",
+     "l": "he:te",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "חַם",
+     "l": "he:cham",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The tea is hot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.023",
+   "frame": "fr.adj.pred",
+   "text": "הַתֵּה חַם?",
+   "tokens": [
+    {
+     "t": "הַתֵּה",
+     "l": "he:te",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "חַם",
+     "l": "he:cham",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the tea hot?",
+   "variantOf": "he.f6.022",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.024",
+   "frame": "fr.adj.pred",
+   "text": "הַמַּיִם קָרִים.",
+   "tokens": [
+    {
+     "t": "הַמַּיִם",
+     "l": "he:mayim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "קָרִים",
+     "l": "he:kar",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The water is cold.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.025",
+   "frame": "fr.adj.pred",
+   "text": "הַחֶדֶר חָמִים.",
+   "tokens": [
+    {
+     "t": "הַחֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "חָמִים",
+     "l": "he:chamim",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The room is warm.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.026",
+   "frame": "fr.adj.pred",
+   "text": "הָעִיר יָפָה.",
+   "tokens": [
+    {
+     "t": "הָעִיר",
+     "l": "he:ir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָפָה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The city is beautiful.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.027",
+   "frame": "fr.adj.pred",
+   "text": "הֶעָרִים יָפוֹת.",
+   "tokens": [
+    {
+     "t": "הֶעָרִים",
+     "l": "he:ir",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "יָפוֹת",
+     "l": "he:yafe",
+     "f": "ADJ;PL;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The cities are beautiful.",
+   "variantOf": "he.f6.026",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.028",
+   "frame": "fr.adj.pred",
+   "text": "הַכִּסֵּא הַזֶּה מְכֹעָר.",
+   "tokens": [
+    {
+     "t": "הַכִּסֵּא",
+     "l": "he:kise",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "מְכֹעָר",
+     "l": "he:mechoar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This chair is ugly.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.029",
+   "frame": "fr.adj.pred",
+   "text": "הָעֲבוֹדָה קַלָּה.",
+   "tokens": [
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "קַלָּה",
+     "l": "he:kal",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The work is easy.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.030",
+   "frame": "fr.adj.pred",
+   "text": "הָעֲבוֹדָה לֹא קַלָּה.",
+   "tokens": [
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "קַלָּה",
+     "l": "he:kal",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "The work is not easy.",
+   "variantOf": "he.f6.029",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.031",
+   "frame": "fr.adj.pred",
+   "text": "הָעֲבוֹדָה הַזֹּאת קָשָׁה.",
+   "tokens": [
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "קָשָׁה",
+     "l": "he:kashe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This work is hard.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.032",
+   "frame": "fr.adj.pred",
+   "text": "הַלֶּחֶם בַּשּׁוּק זוֹל.",
+   "tokens": [
+    {
+     "t": "הַלֶּחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "בַּשּׁוּק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שּׁוּק",
+       "l": "he:shuk",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "זוֹל",
+     "l": "he:zol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.core"
+   ],
+   "gloss": "The bread at the market is cheap.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.033",
+   "frame": "fr.adj.pred",
+   "text": "הַיַּיִן יָקָר.",
+   "tokens": [
+    {
+     "t": "הַיַּיִן",
+     "l": "he:yayin",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָקָר",
+     "l": "he:yakar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The wine is expensive.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.034",
+   "frame": "fr.adj.pred",
+   "text": "הַיַּיִן יָקָר?",
+   "tokens": [
+    {
+     "t": "הַיַּיִן",
+     "l": "he:yayin",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָקָר",
+     "l": "he:yakar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the wine expensive?",
+   "variantOf": "he.f6.033",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.035",
+   "frame": "fr.adj.pred",
+   "text": "הַיְּלָדִים שְׂמֵחִים.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שְׂמֵחִים",
+     "l": "he:sameach",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children are happy.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.036",
+   "frame": "fr.adj.pred",
+   "text": "הַיֶּלֶד שָׂמֵחַ.",
+   "tokens": [
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׂמֵחַ",
+     "l": "he:sameach",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The boy is happy.",
+   "variantOf": "he.f6.035",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.037",
+   "frame": "fr.adj.pred",
+   "text": "הַיַּלְדָּה עֲצוּבָה.",
+   "tokens": [
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "עֲצוּבָה",
+     "l": "he:atsuv",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The girl is sad.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.038",
+   "frame": "fr.adj.pred",
+   "text": "הַיֶּלֶד עָצוּב.",
+   "tokens": [
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "עָצוּב",
+     "l": "he:atsuv",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The boy is sad.",
+   "variantOf": "he.f6.037",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.039",
+   "frame": "fr.adj.pred",
+   "text": "לָמָּה הַיֶּלֶד עָצוּב?",
+   "tokens": [
+    {
+     "t": "לָמָּה",
+     "l": "he:lama"
+    },
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "עָצוּב",
+     "l": "he:atsuv",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.wh"
+   ],
+   "gloss": "Why is the boy sad?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.040",
+   "frame": "fr.adj.pred",
+   "text": "אֲנִי עָיֵף.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "I (m.) am tired.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.041",
+   "frame": "fr.adj.pred",
+   "text": "אֲנִי עֲיֵפָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "עֲיֵפָה",
+     "l": "he:ayef",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "I (f.) am tired.",
+   "variantOf": "he.f6.040",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.042",
+   "frame": "fr.adj.pred",
+   "text": "אֲנִי לֹא עָיֵף.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.negation"
+   ],
+   "gloss": "I (m.) am not tired.",
+   "variantOf": "he.f6.040",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.043",
+   "frame": "fr.adj.pred",
+   "text": "אַתָּה רָעֵב?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you (m.) hungry?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.044",
+   "frame": "fr.adj.pred",
+   "text": "אַתְּ רְעֵבָה?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רְעֵבָה",
+     "l": "he:raev",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you (f.) hungry?",
+   "variantOf": "he.f6.043",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.045",
+   "frame": "fr.adj.pred",
+   "text": "אַתֶּם רְעֵבִים?",
+   "tokens": [
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "רְעֵבִים",
+     "l": "he:raev",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you (pl.) hungry?",
+   "variantOf": "he.f6.043",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.046",
+   "frame": "fr.adj.pred",
+   "text": "מִי רָעֵב?",
+   "tokens": [
+    {
+     "t": "מִי",
+     "l": "he:mi"
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.question.wh"
+   ],
+   "gloss": "Who is hungry?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.047",
+   "frame": "fr.adj.pred",
+   "text": "אֲנַחְנוּ צְמֵאִים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "צְמֵאִים",
+     "l": "he:tsame",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "We (m.) are thirsty.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.048",
+   "frame": "fr.adj.pred",
+   "text": "אֲנַחְנוּ צְמֵאוֹת.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "צְמֵאוֹת",
+     "l": "he:tsame",
+     "f": "ADJ;PL;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "We (f.) are thirsty.",
+   "variantOf": "he.f6.047",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.049",
+   "frame": "fr.adj.pred",
+   "text": "הָרַכֶּבֶת מְהִירָה.",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מְהִירָה",
+     "l": "he:mahir",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The train is fast.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.050",
+   "frame": "fr.adj.pred",
+   "text": "הָרַכֶּבֶת לֹא מְהִירָה.",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "מְהִירָה",
+     "l": "he:mahir",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "The train is not fast.",
+   "variantOf": "he.f6.049",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.051",
+   "frame": "fr.adj.pred",
+   "text": "הָאוֹטוֹבּוּס אִטִּי.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אִטִּי",
+     "l": "he:iti",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The bus is slow.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.052",
+   "frame": "fr.adj.pred",
+   "text": "הָאוֹטוֹבּוּסִים בָּעִיר אִטִּיִּים.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּסִים",
+     "l": "he:otobus",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "בָּעִיר",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עִיר",
+       "l": "he:ir",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אִטִּיִּים",
+     "l": "he:iti",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.prep.core"
+   ],
+   "gloss": "The buses in the city are slow.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.053",
+   "frame": "fr.adj.attr",
+   "text": "זֶה בַּיִת גָּדוֹל.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "בַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "גָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a big house.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.054",
+   "frame": "fr.adj.attr",
+   "text": "זֶה הַבַּיִת הַגָּדוֹל.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַגָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.definite"
+   ],
+   "gloss": "This is the big house.",
+   "variantOf": "he.f6.053",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.055",
+   "frame": "fr.adj.attr",
+   "text": "זֶה סֵפֶר חָדָשׁ.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "סֵפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a new book.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.056",
+   "frame": "fr.adj.attr",
+   "text": "זֶה הַסֵּפֶר הֶחָדָשׁ.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הֶחָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.definite"
+   ],
+   "gloss": "This is the new book.",
+   "variantOf": "he.f6.055",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.057",
+   "frame": "fr.adj.attr",
+   "text": "זֹאת דִּירָה יָפָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "דִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "יָפָה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a beautiful flat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.058",
+   "frame": "fr.adj.attr",
+   "text": "זֹאת הַדִּירָה הַיָּפָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הַדִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַיָּפָה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.definite"
+   ],
+   "gloss": "This is the beautiful flat.",
+   "variantOf": "he.f6.057",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.059",
+   "frame": "fr.adj.attr",
+   "text": "זֹאת עִיר יָפָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "עִיר",
+     "l": "he:ir",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "יָפָה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a beautiful city.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.060",
+   "frame": "fr.adj.attr",
+   "text": "יֵשׁ לִי מְכוֹנִית חֲדָשָׁה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "מְכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חֲדָשָׁה",
+     "l": "he:chadash",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have"
+   ],
+   "gloss": "I have a new car.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.061",
+   "frame": "fr.adj.attr",
+   "text": "אֵין לִי מְכוֹנִית חֲדָשָׁה.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "מְכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חֲדָשָׁה",
+     "l": "he:chadash",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.negation"
+   ],
+   "gloss": "I don’t have a new car.",
+   "variantOf": "he.f6.060",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.062",
+   "frame": "fr.adj.attr",
+   "text": "הַבַּיִת הַיָּשָׁן רָחוֹק.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַיָּשָׁן",
+     "l": "he:yashan",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "רָחוֹק",
+     "l": "he:rachok",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.place"
+   ],
+   "gloss": "The old house is far away.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.063",
+   "frame": "fr.adj.attr",
+   "text": "אֲנִי שׁוֹתֶה קָפֶה חַם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חַם",
+     "l": "he:cham",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) drink hot coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.064",
+   "frame": "fr.adj.attr",
+   "text": "אֲנִי שׁוֹתָה קָפֶה חַם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חַם",
+     "l": "he:cham",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (f.) drink hot coffee.",
+   "variantOf": "he.f6.063",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.065",
+   "frame": "fr.adj.attr",
+   "text": "הוּא שׁוֹתֶה מַיִם קָרִים.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "קָרִים",
+     "l": "he:kar",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "He drinks cold water.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.066",
+   "frame": "fr.adj.attr",
+   "text": "הִיא קוֹנָה תִּיק יָקָר.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תִּיק",
+     "l": "he:tik",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "יָקָר",
+     "l": "he:yakar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "She buys an expensive bag.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.067",
+   "frame": "fr.adj.attr",
+   "text": "הַגֶּבֶר הַזָּקֵן בַּפַּארְק.",
+   "tokens": [
+    {
+     "t": "הַגֶּבֶר",
+     "l": "he:gever",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזָּקֵן",
+     "l": "he:zaken",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "בַּפַּארְק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.core"
+   ],
+   "gloss": "The old man is in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.068",
+   "frame": "fr.adj.attr",
+   "text": "יֵשׁ פֹּה מִסְעָדָה טוֹבָה?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "מִסְעָדָה",
+     "l": "he:misada",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "טוֹבָה",
+     "l": "he:tov",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.question.yesno",
+    "fn.demonstrative"
+   ],
+   "gloss": "Is there a good restaurant here?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.069",
+   "frame": "fr.adj.attr",
+   "text": "הַמּוֹרָה הַצְּעִירָה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַצְּעִירָה",
+     "l": "he:tsair",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "The young teacher is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.070",
+   "frame": "fr.adj.attr",
+   "text": "אֲנִי אוֹהֵב לֶחֶם חַם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חַם",
+     "l": "he:cham",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) like hot bread.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.071",
+   "frame": "fr.adj.attr",
+   "text": "הַיְּלָדִים הַקְּטַנִּים בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הַקְּטַנִּים",
+     "l": "he:katan",
+     "f": "ADJ;PL;MASC;DEF"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.prep.core"
+   ],
+   "gloss": "The little children are at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.072",
+   "frame": "fr.adj.attr",
+   "text": "יֵשׁ לָנוּ דִּירָה קְטַנָּה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "דִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "קְטַנָּה",
+     "l": "he:katan",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have"
+   ],
+   "gloss": "We have a small flat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.073",
+   "frame": "fr.adj.attr",
+   "text": "הוּא נוֹסֵעַ בְּרַכֶּבֶת מְהִירָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "נוֹסֵעַ",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בְּרַכֶּבֶת",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "רַכֶּבֶת",
+       "l": "he:rakevet",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "מְהִירָה",
+     "l": "he:mahir",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He travels by fast train.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.074",
+   "frame": "fr.adj.attr",
+   "text": "זֶה הָיָה יוֹם אָרֹךְ.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אָרֹךְ",
+     "l": "he:arokh",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "gloss": "It was a long day.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.075",
+   "frame": "fr.greet",
+   "text": "שָׁנָה טוֹבָה!",
+   "tokens": [
+    {
+     "t": "שָׁנָה",
+     "l": "he:shana",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "טוֹבָה",
+     "l": "he:tov",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "Happy New Year! (a good year)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.076",
+   "frame": "fr.want",
+   "text": "אֲנִי רוֹצֶה כּוֹס מַיִם קָרִים.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "כּוֹס",
+     "l": "he:kos",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "קָרִים",
+     "l": "he:kar",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) want a glass of cold water.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.077",
+   "frame": "fr.adj.attr",
+   "text": "הַיַּלְדָּה הַקְּטַנָּה רְעֵבָה.",
+   "tokens": [
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַקְּטַנָּה",
+     "l": "he:katan",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": "רְעֵבָה",
+     "l": "he:raev",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The little girl is hungry.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.078",
+   "frame": "fr.adj.attr",
+   "text": "הַסֵּפֶר הֶחָדָשׁ עַל הַשֻּׁלְחָן.",
+   "tokens": [
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הֶחָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "עַל",
+     "l": "he:al"
+    },
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.place"
+   ],
+   "gloss": "The new book is on the table.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.079",
+   "frame": "fr.adj.attr",
+   "text": "הַסְּפָרִים הַחֲדָשִׁים עַל הַשֻּׁלְחָן.",
+   "tokens": [
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הַחֲדָשִׁים",
+     "l": "he:chadash",
+     "f": "ADJ;PL;MASC;DEF"
+    },
+    {
+     "t": "עַל",
+     "l": "he:al"
+    },
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.place",
+    "fn.plural.noun"
+   ],
+   "gloss": "The new books are on the table.",
+   "variantOf": "he.f6.078",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.080",
+   "frame": "fr.adj.attr",
+   "text": "הַמִּטָּה הַיְּשָׁנָה בַּחֶדֶר.",
+   "tokens": [
+    {
+     "t": "הַמִּטָּה",
+     "l": "he:mita",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַיְּשָׁנָה",
+     "l": "he:yashan",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": "בַּחֶדֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֶדֶר",
+       "l": "he:cheder",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.core"
+   ],
+   "gloss": "The old bed is in the room.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.081",
+   "frame": "fr.adj.attr",
+   "text": "הַחַלּוֹנוֹת הַגְּדוֹלִים יָפִים.",
+   "tokens": [
+    {
+     "t": "הַחַלּוֹנוֹת",
+     "l": "he:chalon",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הַגְּדוֹלִים",
+     "l": "he:gadol",
+     "f": "ADJ;PL;MASC;DEF"
+    },
+    {
+     "t": "יָפִים",
+     "l": "he:yafe",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The big windows are beautiful.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.082",
+   "frame": "fr.adj.attr",
+   "text": "אֵיזֶה תִּיק יָפֶה!",
+   "tokens": [
+    {
+     "t": "אֵיזֶה",
+     "l": "he:eize",
+     "f": "DET;SG;MASC"
+    },
+    {
+     "t": "תִּיק",
+     "l": "he:tik",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "יָפֶה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "What a beautiful bag!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.083",
+   "frame": "fr.adj.attr",
+   "text": "אֵיפֹה הַסּוּפֶּר הַקָּרוֹב?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הַסּוּפֶּר",
+     "l": "he:super",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַקָּרוֹב",
+     "l": "he:karov",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.wh"
+   ],
+   "gloss": "Where is the nearest supermarket?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.084",
+   "frame": "fr.adj.attr",
+   "text": "יֵשׁ לָהּ חֲבֵרִים טוֹבִים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "חֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "טוֹבִים",
+     "l": "he:tov",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "She has good friends.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.085",
+   "frame": "fr.adj.attr",
+   "text": "הַנָּשִׁים הַצְּעִירוֹת בַּפַּארְק.",
+   "tokens": [
+    {
+     "t": "הַנָּשִׁים",
+     "l": "he:isha",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הַצְּעִירוֹת",
+     "l": "he:tsair",
+     "f": "ADJ;PL;FEM;DEF"
+    },
+    {
+     "t": "בַּפַּארְק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.prep.core"
+   ],
+   "gloss": "The young women are in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.086",
+   "frame": "fr.adj.attr",
+   "text": "הַכּוֹסוֹת הַקְּטַנּוֹת בָּאָרוֹן.",
+   "tokens": [
+    {
+     "t": "הַכּוֹסוֹת",
+     "l": "he:kos",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הַקְּטַנּוֹת",
+     "l": "he:katan",
+     "f": "ADJ;PL;FEM;DEF"
+    },
+    {
+     "t": "בָּאָרוֹן",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אָרוֹן",
+       "l": "he:aron",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.prep.core"
+   ],
+   "gloss": "The small glasses are in the cupboard.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.087",
+   "frame": "fr.adj.attr",
+   "text": "הוּא מוֹרֶה טוֹב.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "He is a good teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.088",
+   "frame": "fr.adj.attr",
+   "text": "הִיא מוֹרָה טוֹבָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "טוֹבָה",
+     "l": "he:tov",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective"
+   ],
+   "gloss": "She is a good teacher.",
+   "variantOf": "he.f6.087",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.089",
+   "frame": "fr.adj.pred",
+   "text": "הַחֲנוּת הַזֹּאת זוֹלָה.",
+   "tokens": [
+    {
+     "t": "הַחֲנוּת",
+     "l": "he:chanut",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "זוֹלָה",
+     "l": "he:zol",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This shop is cheap.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.090",
+   "frame": "fr.adj.pred",
+   "text": "הַחֲנוּת הַזֹּאת זוֹלָה?",
+   "tokens": [
+    {
+     "t": "הַחֲנוּת",
+     "l": "he:chanut",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "זוֹלָה",
+     "l": "he:zol",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this shop cheap?",
+   "variantOf": "he.f6.089",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.091",
+   "frame": "fr.colour",
+   "text": "הַבַּיִת לָבָן.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "לָבָן",
+     "l": "he:lavan",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The house is white.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.092",
+   "frame": "fr.colour",
+   "text": "הַבָּתִּים לְבָנִים.",
+   "tokens": [
+    {
+     "t": "הַבָּתִּים",
+     "l": "he:bayit",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "לְבָנִים",
+     "l": "he:lavan",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The houses are white.",
+   "variantOf": "he.f6.091",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.093",
+   "frame": "fr.colour",
+   "text": "הַמְּכוֹנִית שֶׁלּוֹ שְׁחֹרָה.",
+   "tokens": [
+    {
+     "t": "הַמְּכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": "שְׁחֹרָה",
+     "l": "he:shachor",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive"
+   ],
+   "gloss": "His car is black.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.094",
+   "frame": "fr.colour",
+   "text": "הַמְּכוֹנִית שֶׁלּוֹ שְׁחֹרָה?",
+   "tokens": [
+    {
+     "t": "הַמְּכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלּוֹ",
+     "l": "he:shelo"
+    },
+    {
+     "t": "שְׁחֹרָה",
+     "l": "he:shachor",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is his car black?",
+   "variantOf": "he.f6.093",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.095",
+   "frame": "fr.colour",
+   "text": "זֶה תִּיק אָדֹם.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "תִּיק",
+     "l": "he:tik",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אָדֹם",
+     "l": "he:adom",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a red bag.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.096",
+   "frame": "fr.colour",
+   "text": "זֶה הַתִּיק הָאָדֹם.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַתִּיק",
+     "l": "he:tik",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָאָדֹם",
+     "l": "he:adom",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.demonstrative",
+    "fn.definite"
+   ],
+   "gloss": "This is the red bag.",
+   "variantOf": "he.f6.095",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.097",
+   "frame": "fr.colour",
+   "text": "הַדֶּלֶת כְּחֻלָּה.",
+   "tokens": [
+    {
+     "t": "הַדֶּלֶת",
+     "l": "he:delet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "כְּחֻלָּה",
+     "l": "he:kachol",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The door is blue.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.098",
+   "frame": "fr.colour",
+   "text": "הַגִּנָּה יְרֻקָּה.",
+   "tokens": [
+    {
+     "t": "הַגִּנָּה",
+     "l": "he:gina",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יְרֻקָּה",
+     "l": "he:yarok",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The garden is green.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.099",
+   "frame": "fr.colour",
+   "text": "אֲנִי קוֹנֶה גְּבִינָה צְהֻבָּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "גְּבִינָה",
+     "l": "he:gvina",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "צְהֻבָּה",
+     "l": "he:tsahov",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) buy yellow cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.100",
+   "frame": "fr.colour",
+   "text": "אֲנִי קוֹנָה גְּבִינָה צְהֻבָּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "גְּבִינָה",
+     "l": "he:gvina",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "צְהֻבָּה",
+     "l": "he:tsahov",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (f.) buy yellow cheese.",
+   "variantOf": "he.f6.099",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.101",
+   "frame": "fr.colour",
+   "text": "הַשֻּׁלְחָן הַחוּם בַּסָּלוֹן.",
+   "tokens": [
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַחוּם",
+     "l": "he:chum",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "בַּסָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סָּלוֹן",
+       "l": "he:salon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.core"
+   ],
+   "gloss": "The brown table is in the living room.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.102",
+   "frame": "fr.colour",
+   "text": "הַקִּירוֹת אֲפֹרִים.",
+   "tokens": [
+    {
+     "t": "הַקִּירוֹת",
+     "l": "he:kir",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "אֲפֹרִים",
+     "l": "he:afor",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The walls are grey.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.103",
+   "frame": "fr.colour",
+   "text": "הַקִּיר אָפֹר.",
+   "tokens": [
+    {
+     "t": "הַקִּיר",
+     "l": "he:kir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אָפֹר",
+     "l": "he:afor",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The wall is grey.",
+   "variantOf": "he.f6.102",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.104",
+   "frame": "fr.colour",
+   "text": "הַסַּפָּה כְּתֻמָּה.",
+   "tokens": [
+    {
+     "t": "הַסַּפָּה",
+     "l": "he:sapa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "כְּתֻמָּה",
+     "l": "he:katom",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The sofa is orange.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.105",
+   "frame": "fr.colour",
+   "text": "הַמִּטָּה שֶׁל הַיַּלְדָּה וְרֻדָּה.",
+   "tokens": [
+    {
+     "t": "הַמִּטָּה",
+     "l": "he:mita",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁל",
+     "l": "he:shel"
+    },
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְרֻדָּה",
+     "l": "he:varod",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive"
+   ],
+   "gloss": "The girl’s bed is pink.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.106",
+   "frame": "fr.colour",
+   "text": "אֵיפֹה הַסֵּפֶר הַסָּגֹל?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַסָּגֹל",
+     "l": "he:sagol",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.wh"
+   ],
+   "gloss": "Where is the purple book?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.107",
+   "frame": "fr.colour",
+   "text": "אֲנִי רוֹצֶה תִּיק כָּחֹל בָּהִיר.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תִּיק",
+     "l": "he:tik",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "כָּחֹל",
+     "l": "he:kachol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "בָּהִיר",
+     "l": "he:bahir",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) want a light blue bag.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.108",
+   "frame": "fr.colour",
+   "text": "הַמְּכוֹנִית שֶׁלִּי יְרֻקָּה כֵּהָה.",
+   "tokens": [
+    {
+     "t": "הַמְּכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "יְרֻקָּה",
+     "l": "he:yarok",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "כֵּהָה",
+     "l": "he:kehe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.possessive"
+   ],
+   "gloss": "My car is dark green.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.109",
+   "frame": "fr.colour",
+   "text": "הוּא שׁוֹתֶה יַיִן אָדֹם.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אָדֹם",
+     "l": "he:adom",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "He drinks red wine.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.110",
+   "frame": "fr.colour",
+   "text": "הוּא לֹא שׁוֹתֶה יַיִן אָדֹם.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אָדֹם",
+     "l": "he:adom",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present",
+    "fn.negation"
+   ],
+   "gloss": "He doesn’t drink red wine.",
+   "variantOf": "he.f6.109",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.111",
+   "frame": "fr.alt.q",
+   "text": "אַתָּה רוֹצֶה יַיִן לָבָן אוֹ אָדֹם?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "יַיִן",
+     "l": "he:yayin",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לָבָן",
+     "l": "he:lavan",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "אָדֹם",
+     "l": "he:adom",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "Do you (m.) want white or red wine?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.112",
+   "frame": "fr.colour",
+   "text": "אֲנִי שׁוֹתֶה קָפֶה שָׁחֹר.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "שָׁחֹר",
+     "l": "he:shachor",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) drink black coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.113",
+   "frame": "fr.colour",
+   "text": "הַתַּפּוּחַ יָרֹק.",
+   "tokens": [
+    {
+     "t": "הַתַּפּוּחַ",
+     "l": "he:tapuach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָרֹק",
+     "l": "he:yarok",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The apple is green.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.114",
+   "frame": "fr.colour",
+   "text": "אֲנִי לֹא אוֹכֵל לֶחֶם לָבָן.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לָבָן",
+     "l": "he:lavan",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present",
+    "fn.negation"
+   ],
+   "gloss": "I (m.) don’t eat white bread.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.115",
+   "frame": "fr.colour",
+   "text": "הַמְּנוֹרָה הַצְּהֻבָּה עַל הַשֻּׁלְחָן.",
+   "tokens": [
+    {
+     "t": "הַמְּנוֹרָה",
+     "l": "he:menora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַצְּהֻבָּה",
+     "l": "he:tsahov",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": "עַל",
+     "l": "he:al"
+    },
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.place"
+   ],
+   "gloss": "The yellow lamp is on the table.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.116",
+   "frame": "fr.colour",
+   "text": "יֵשׁ לוֹ אוֹפַנַּיִם אֲדֻמִּים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לוֹ",
+     "l": "he:le",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "אוֹפַנַּיִם",
+     "l": "he:ofanayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "אֲדֻמִּים",
+     "l": "he:adom",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.have"
+   ],
+   "gloss": "He has a red bicycle.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.117",
+   "frame": "fr.colour",
+   "text": "הַכּוֹסוֹת הַכְּחֻלּוֹת בַּמִּטְבָּח.",
+   "tokens": [
+    {
+     "t": "הַכּוֹסוֹת",
+     "l": "he:kos",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הַכְּחֻלּוֹת",
+     "l": "he:kachol",
+     "f": "ADJ;PL;FEM;DEF"
+    },
+    {
+     "t": "בַּמִּטְבָּח",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מִּטְבָּח",
+       "l": "he:mitbach",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.prep.core"
+   ],
+   "gloss": "The blue glasses are in the kitchen.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.118",
+   "frame": "fr.compare",
+   "text": "הַבַּיִת גָּדוֹל יוֹתֵר מֵהַדִּירָה.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהַדִּירָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַדִּירָה",
+       "l": "he:dira",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The house is bigger than the flat.",
+   "alts": [
+    "הַבַּיִת יוֹתֵר גָּדוֹל מֵהַדִּירָה."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.119",
+   "frame": "fr.compare",
+   "text": "הַבָּתִּים גְּדוֹלִים יוֹתֵר מֵהַדִּירוֹת.",
+   "tokens": [
+    {
+     "t": "הַבָּתִּים",
+     "l": "he:bayit",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "גְּדוֹלִים",
+     "l": "he:gadol",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהַדִּירוֹת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַדִּירוֹת",
+       "l": "he:dira",
+       "f": "N;PL;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The houses are bigger than the flats.",
+   "variantOf": "he.f6.118",
+   "variant": {
+    "Number": "PL"
+   },
+   "alts": [
+    "הַבָּתִּים יוֹתֵר גְּדוֹלִים מֵהַדִּירוֹת."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.120",
+   "frame": "fr.compare",
+   "text": "הָרַכֶּבֶת מְהִירָה יוֹתֵר מֵהָאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מְהִירָה",
+     "l": "he:mahir",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהָאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הָאוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The train is faster than the bus.",
+   "alts": [
+    "הָרַכֶּבֶת יוֹתֵר מְהִירָה מֵהָאוֹטוֹבּוּס."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.121",
+   "frame": "fr.compare",
+   "text": "הָרַכֶּבֶת מְהִירָה יוֹתֵר מֵהָאוֹטוֹבּוּס?",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מְהִירָה",
+     "l": "he:mahir",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהָאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הָאוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the train faster than the bus?",
+   "variantOf": "he.f6.120",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הָרַכֶּבֶת יוֹתֵר מְהִירָה מֵהָאוֹטוֹבּוּס?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.122",
+   "frame": "fr.compare",
+   "text": "הַמָּטוֹס הֲכִי מָהִיר.",
+   "tokens": [
+    {
+     "t": "הַמָּטוֹס",
+     "l": "he:matos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הֲכִי",
+     "l": "he:hachi"
+    },
+    {
+     "t": "מָהִיר",
+     "l": "he:mahir",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The plane is the fastest.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.123",
+   "frame": "fr.compare",
+   "text": "הַבֵּן גָּבֹהַּ יוֹתֵר מֵאַבָּא.",
+   "tokens": [
+    {
+     "t": "הַבֵּן",
+     "l": "he:ben",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גָּבֹהַּ",
+     "l": "he:gavoha",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵאַבָּא",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אַבָּא",
+       "l": "he:aba",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The son is taller than Dad.",
+   "alts": [
+    "הַבֵּן יוֹתֵר גָּבֹהַּ מֵאַבָּא."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.124",
+   "frame": "fr.compare",
+   "text": "הַבַּת גְּבֹהָה יוֹתֵר מֵאַבָּא.",
+   "tokens": [
+    {
+     "t": "הַבַּת",
+     "l": "he:bat",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גְּבֹהָה",
+     "l": "he:gavoha",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵאַבָּא",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אַבָּא",
+       "l": "he:aba",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The daughter is taller than Dad.",
+   "variantOf": "he.f6.123",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "alts": [
+    "הַבַּת יוֹתֵר גְּבֹהָה מֵאַבָּא."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.125",
+   "frame": "fr.compare",
+   "text": "הַקָּפֶה פֹּה זוֹל יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הַקָּפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "זוֹל",
+     "l": "he:zol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "The coffee here is cheaper.",
+   "alts": [
+    "הַקָּפֶה פֹּה יוֹתֵר זוֹל."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.126",
+   "frame": "fr.compare",
+   "text": "הַקָּפֶה פֹּה זוֹל יוֹתֵר?",
+   "tokens": [
+    {
+     "t": "הַקָּפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "זוֹל",
+     "l": "he:zol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the coffee here cheaper?",
+   "variantOf": "he.f6.125",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הַקָּפֶה פֹּה יוֹתֵר זוֹל?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.127",
+   "frame": "fr.compare",
+   "text": "הַיַּיִן הַזֶּה יָקָר יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הַיַּיִן",
+     "l": "he:yayin",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "יָקָר",
+     "l": "he:yakar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This wine is more expensive.",
+   "alts": [
+    "הַיַּיִן הַזֶּה יוֹתֵר יָקָר."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.128",
+   "frame": "fr.compare",
+   "text": "אַתְּ הֲכִי טוֹבָה!",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "הֲכִי",
+     "l": "he:hachi"
+    },
+    {
+     "t": "טוֹבָה",
+     "l": "he:tov",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "You (f.) are the best!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.129",
+   "frame": "fr.compare",
+   "text": "אַתָּה הֲכִי טוֹב!",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "הֲכִי",
+     "l": "he:hachi"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "You (m.) are the best!",
+   "variantOf": "he.f6.128",
+   "variant": {
+    "Addressee": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.130",
+   "frame": "fr.compare",
+   "text": "זֶה הַסֵּפֶר הֲכִי טוֹב.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הֲכִי",
+     "l": "he:hachi"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is the best book.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.131",
+   "frame": "fr.compare",
+   "text": "הַחֹרֶף פֹּה קַר יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הַחֹרֶף",
+     "l": "he:choref",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "קַר",
+     "l": "he:kar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "The winter here is colder.",
+   "alts": [
+    "הַחֹרֶף פֹּה יוֹתֵר קַר."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.132",
+   "frame": "fr.compare",
+   "text": "הָעִיר יָפָה יוֹתֵר מֵהַכְּפָר.",
+   "tokens": [
+    {
+     "t": "הָעִיר",
+     "l": "he:ir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָפָה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהַכְּפָר",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַכְּפָר",
+       "l": "he:kfar",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The city is more beautiful than the village.",
+   "alts": [
+    "הָעִיר יוֹתֵר יָפָה מֵהַכְּפָר."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.133",
+   "frame": "fr.compare",
+   "text": "הָעִיר יָפָה יוֹתֵר מֵהַכְּפָר?",
+   "tokens": [
+    {
+     "t": "הָעִיר",
+     "l": "he:ir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָפָה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהַכְּפָר",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַכְּפָר",
+       "l": "he:kfar",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the city more beautiful than the village?",
+   "variantOf": "he.f6.132",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הָעִיר יוֹתֵר יָפָה מֵהַכְּפָר?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.134",
+   "frame": "fr.compare",
+   "text": "אֲנִי עָיֵף יוֹתֵר מֵאֶתְמוֹל.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵאֶתְמוֹל",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אֶתְמוֹל",
+       "l": "he:etmol"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "I (m.) am more tired than yesterday.",
+   "alts": [
+    "אֲנִי יוֹתֵר עָיֵף מֵאֶתְמוֹל."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.135",
+   "frame": "fr.compare",
+   "text": "אֲנִי עֲיֵפָה יוֹתֵר מֵאֶתְמוֹל.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "עֲיֵפָה",
+     "l": "he:ayef",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵאֶתְמוֹל",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אֶתְמוֹל",
+       "l": "he:etmol"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "I (f.) am more tired than yesterday.",
+   "variantOf": "he.f6.134",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "alts": [
+    "אֲנִי יוֹתֵר עֲיֵפָה מֵאֶתְמוֹל."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.136",
+   "frame": "fr.compare",
+   "text": "הַיּוֹם חַם יוֹתֵר מֵאֶתְמוֹל.",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "חַם",
+     "l": "he:cham",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵאֶתְמוֹל",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אֶתְמוֹל",
+       "l": "he:etmol"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "Today it is hotter than yesterday.",
+   "alts": [
+    "הַיּוֹם יוֹתֵר חַם מֵאֶתְמוֹל."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.137",
+   "frame": "fr.compare",
+   "text": "הוּא הֲכִי צָעִיר בַּמִּשְׁפָּחָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הֲכִי",
+     "l": "he:hachi"
+    },
+    {
+     "t": "צָעִיר",
+     "l": "he:tsair",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "בַּמִּשְׁפָּחָה",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מִּשְׁפָּחָה",
+       "l": "he:mishpacha",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.prep.core"
+   ],
+   "gloss": "He is the youngest in the family.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.138",
+   "frame": "fr.compare",
+   "text": "סָבְתָא הֲכִי מְבֻגֶּרֶת בַּמִּשְׁפָּחָה.",
+   "tokens": [
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הֲכִי",
+     "l": "he:hachi"
+    },
+    {
+     "t": "מְבֻגֶּרֶת",
+     "l": "he:mevugar",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "בַּמִּשְׁפָּחָה",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מִּשְׁפָּחָה",
+       "l": "he:mishpacha",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.prep.core"
+   ],
+   "gloss": "Grandma is the oldest in the family.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.139",
+   "frame": "fr.compare",
+   "text": "יֵשׁ לִי יוֹתֵר סְפָרִים מֵהַמּוֹרֶה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "מֵהַמּוֹרֶה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַמּוֹרֶה",
+       "l": "he:more",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.have",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "I have more books than the teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.140",
+   "frame": "fr.compare",
+   "text": "הוּא אוֹכֵל יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.present"
+   ],
+   "gloss": "He eats more.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.141",
+   "frame": "fr.compare",
+   "text": "הִיא אוֹכֶלֶת יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.present"
+   ],
+   "gloss": "She eats more.",
+   "variantOf": "he.f6.140",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.142",
+   "frame": "fr.compare",
+   "text": "הַשֻּׁלְחָן הֶחָדָשׁ אָרֹךְ יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הֶחָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "אָרֹךְ",
+     "l": "he:arokh",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The new table is longer.",
+   "alts": [
+    "הַשֻּׁלְחָן הֶחָדָשׁ יוֹתֵר אָרֹךְ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.143",
+   "frame": "fr.compare",
+   "text": "הַתִּיק הַשָּׁחֹר זוֹל יוֹתֵר מֵהָאָדֹם.",
+   "tokens": [
+    {
+     "t": "הַתִּיק",
+     "l": "he:tik",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשָּׁחֹר",
+     "l": "he:shachor",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "זוֹל",
+     "l": "he:zol",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהָאָדֹם",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הָאָדֹם",
+       "l": "he:adom",
+       "f": "ADJ;SG;MASC;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The black bag is cheaper than the red one.",
+   "alts": [
+    "הַתִּיק הַשָּׁחֹר יוֹתֵר זוֹל מֵהָאָדֹם."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.144",
+   "frame": "fr.compare",
+   "text": "זֶה הַבַּיִת הַגָּדוֹל בְּיוֹתֵר.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַגָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "בְּיוֹתֵר",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוֹתֵר",
+       "l": "he:yoter"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This is the biggest house.",
+   "alts": [
+    "זֶה הַבַּיִת הֲכִי גָּדוֹל."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.145",
+   "frame": "fr.compare",
+   "text": "הַכּוֹס הַזֹּאת קְטַנָּה יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הַכּוֹס",
+     "l": "he:kos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "קְטַנָּה",
+     "l": "he:katan",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This glass is smaller.",
+   "alts": [
+    "הַכּוֹס הַזֹּאת יוֹתֵר קְטַנָּה."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.146",
+   "frame": "fr.compare",
+   "text": "הַמִּטְבָּח בָּהִיר יוֹתֵר מֵהַסָּלוֹן.",
+   "tokens": [
+    {
+     "t": "הַמִּטְבָּח",
+     "l": "he:mitbach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "בָּהִיר",
+     "l": "he:bahir",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "מֵהַסָּלוֹן",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַסָּלוֹן",
+       "l": "he:salon",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The kitchen is brighter than the living room.",
+   "alts": [
+    "הַמִּטְבָּח יוֹתֵר בָּהִיר מֵהַסָּלוֹן."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.147",
+   "frame": "fr.compare",
+   "text": "הַקִּיר הַזֶּה כֵּהֶה יוֹתֵר.",
+   "tokens": [
+    {
+     "t": "הַקִּיר",
+     "l": "he:kir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "כֵּהֶה",
+     "l": "he:kehe",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.definite",
+    "fn.demonstrative"
+   ],
+   "gloss": "This wall is darker.",
+   "alts": [
+    "הַקִּיר הַזֶּה יוֹתֵר כֵּהֶה."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.148",
+   "frame": "fr.compare",
+   "text": "מָה יוֹתֵר טוֹב, תֵּה אוֹ קָפֶה?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "יוֹתֵר",
+     "l": "he:yoter"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.question.wh"
+   ],
+   "gloss": "What is better, tea or coffee?",
+   "alts": [
+    "מָה טוֹב יוֹתֵר, תֵּה אוֹ קָפֶה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.149",
+   "frame": "fr.link",
+   "text": "הַבַּיִת קָטָן, אֲבָל הוּא יָפֶה.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "קָטָן",
+     "l": "he:katan",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲבָל",
+     "l": "he:aval"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יָפֶה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The house is small, but it is beautiful.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.150",
+   "frame": "fr.link",
+   "text": "הַבָּתִּים קְטַנִּים, אֲבָל הֵם יָפִים.",
+   "tokens": [
+    {
+     "t": "הַבָּתִּים",
+     "l": "he:bayit",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "קְטַנִּים",
+     "l": "he:katan",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲבָל",
+     "l": "he:aval"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "יָפִים",
+     "l": "he:yafe",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The houses are small, but they are beautiful.",
+   "variantOf": "he.f6.149",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.151",
+   "frame": "fr.link",
+   "text": "אֲנִי רָעֵב, אֲבָל אֵין לֶחֶם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲבָל",
+     "l": "he:aval"
+    },
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.negation"
+   ],
+   "gloss": "I (m.) am hungry, but there is no bread.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.152",
+   "frame": "fr.link",
+   "text": "הַבַּיִת יָפֶה אֲבָל יָקָר.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָפֶה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "אֲבָל",
+     "l": "he:aval"
+    },
+    {
+     "t": "יָקָר",
+     "l": "he:yakar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "The house is beautiful but expensive.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.153",
+   "frame": "fr.link",
+   "text": "הוּא אוֹהֵב קָפֶה, אֲבָל הִיא אוֹהֶבֶת תֵּה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲבָל",
+     "l": "he:aval"
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.present"
+   ],
+   "gloss": "He likes coffee, but she likes tea.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.154",
+   "frame": "fr.link",
+   "text": "אֲנִי שׁוֹתֶה מַיִם כִּי אֲנִי צָמֵא.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "כִּי",
+     "l": "he:ki"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "צָמֵא",
+     "l": "he:tsame",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) drink water because I am thirsty.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.155",
+   "frame": "fr.link",
+   "text": "אֲנִי שׁוֹתָה מַיִם כִּי אֲנִי צְמֵאָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "כִּי",
+     "l": "he:ki"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "צְמֵאָה",
+     "l": "he:tsame",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (f.) drink water because I am thirsty.",
+   "variantOf": "he.f6.154",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.156",
+   "frame": "fr.link",
+   "text": "הוּא לֹא בָּא כִּי הוּא עָיֵף.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "כִּי",
+     "l": "he:ki"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.negation"
+   ],
+   "gloss": "He isn’t coming because he is tired.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.157",
+   "frame": "fr.link",
+   "text": "לָמָּה אַתָּה לֹא אוֹכֵל? כִּי אֲנִי לֹא רָעֵב.",
+   "tokens": [
+    {
+     "t": "לָמָּה",
+     "l": "he:lama"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "כִּי",
+     "l": "he:ki"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.negation",
+    "fn.question.wh"
+   ],
+   "gloss": "Why aren’t you (m.) eating? Because I’m not hungry.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.158",
+   "frame": "fr.link",
+   "text": "אֲנִי לֹא הוֹלֵךְ לַפַּארְק כִּי קַר.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַפַּארְק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "כִּי",
+     "l": "he:ki"
+    },
+    {
+     "t": "קַר",
+     "l": "he:kar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) am not going to the park because it is cold.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.159",
+   "frame": "fr.link",
+   "text": "אֲנִי עָיֵף, לָכֵן אֲנִי נִשְׁאָר בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "לָכֵן",
+     "l": "he:lachen"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאָר",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) am tired, so I am staying at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.160",
+   "frame": "fr.link",
+   "text": "אֲנִי עֲיֵפָה, לָכֵן אֲנִי נִשְׁאֶרֶת בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "עֲיֵפָה",
+     "l": "he:ayef",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "לָכֵן",
+     "l": "he:lachen"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאֶרֶת",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (f.) am tired, so I am staying at home.",
+   "variantOf": "he.f6.159",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.161",
+   "frame": "fr.link",
+   "text": "הַמּוֹנִית יְקָרָה, לָכֵן אֲנַחְנוּ נוֹסְעִים בְּאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "הַמּוֹנִית",
+     "l": "he:monit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יְקָרָה",
+     "l": "he:yakar",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "לָכֵן",
+     "l": "he:lachen"
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בְּאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.definite",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "The taxi is expensive, so we go by bus.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.162",
+   "frame": "fr.link",
+   "text": "אֲנִי רָעֵב, אָז אֲנִי אוֹכֵל.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אָז",
+     "l": "he:az"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) am hungry, so I am eating.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.163",
+   "frame": "fr.link",
+   "text": "אֲנִי רְעֵבָה, אָז אֲנִי אוֹכֶלֶת.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "רְעֵבָה",
+     "l": "he:raev",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אָז",
+     "l": "he:az"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (f.) am hungry, so I am eating.",
+   "variantOf": "he.f6.162",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.164",
+   "frame": "fr.link",
+   "text": "קַר בַּחוּץ, אָז הַיְּלָדִים בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "קַר",
+     "l": "he:kar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "בַּחוּץ",
+     "l": "he:bachuts"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אָז",
+     "l": "he:az"
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.definite",
+    "fn.prep.core",
+    "fn.prep.place"
+   ],
+   "gloss": "It is cold outside, so the children are at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.165",
+   "frame": "fr.link",
+   "text": "אֲנִי אוֹכֵל אֲרוּחַת בֹּקֶר, וְאָז אֲנִי הוֹלֵךְ לָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֲרוּחַת בֹּקֶר",
+     "l": "he:aruchat-boker",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "וְאָז",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אָז",
+       "l": "he:az"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) eat breakfast, and then I go to work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.166",
+   "frame": "fr.link",
+   "text": "הוּא קוֹנֶה לֶחֶם, וְאַחַר כָּךְ הוּא חוֹזֵר הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "וְאַחַר כָּךְ",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אַחַר כָּךְ",
+       "l": "he:achar-kach"
+      }
+     ]
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.present"
+   ],
+   "gloss": "He buys bread, and then he goes back home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.167",
+   "frame": "fr.link",
+   "text": "כְּשֶׁאֲנִי עָיֵף, אֲנִי שׁוֹתֶה קָפֶה.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁאֲנִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אֲנִי",
+       "l": "he:ani"
+      }
+     ]
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "When I (m.) am tired, I drink coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.168",
+   "frame": "fr.link",
+   "text": "כְּשֶׁאֲנִי עֲיֵפָה, אֲנִי שׁוֹתָה קָפֶה.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁאֲנִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אֲנִי",
+       "l": "he:ani"
+      }
+     ]
+    },
+    {
+     "t": "עֲיֵפָה",
+     "l": "he:ayef",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "When I (f.) am tired, I drink coffee.",
+   "variantOf": "he.f6.167",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.169",
+   "frame": "fr.link",
+   "text": "כְּשֶׁהוּא רָעֵב, הוּא אוֹכֵל לֶחֶם עִם גְּבִינָה.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהוּא",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הוּא",
+       "l": "he:hu"
+      }
+     ]
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "עִם",
+     "l": "he:im"
+    },
+    {
+     "t": "גְּבִינָה",
+     "l": "he:gvina",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "When he is hungry, he eats bread with cheese.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.170",
+   "frame": "fr.link",
+   "text": "כְּשֶׁחַם בַּחוּץ, אֲנַחְנוּ הוֹלְכִים לַפַּארְק.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁחַם",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "חַם",
+       "l": "he:cham",
+       "f": "ADJ;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "בַּחוּץ",
+     "l": "he:bachuts"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "הוֹלְכִים",
+     "l": "he:halach",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לַפַּארְק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "When it is hot outside, we go to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.171",
+   "frame": "fr.link",
+   "text": "אֲנִי חוֹזֵר הַבַּיְתָה כְּשֶׁאֲנִי עָיֵף.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "כְּשֶׁאֲנִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אֲנִי",
+       "l": "he:ani"
+      }
+     ]
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "I (m.) go home when I am tired.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.172",
+   "frame": "fr.link",
+   "text": "כְּשֶׁהַמּוֹרָה בָּאָה, הַתַּלְמִידִים שְׂמֵחִים.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהַמּוֹרָה",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הַמּוֹרָה",
+       "l": "he:mora",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "בָּאָה",
+     "l": "he:ba",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הַתַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שְׂמֵחִים",
+     "l": "he:sameach",
+     "f": "ADJ;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "When the teacher comes, the students are happy.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.173",
+   "frame": "fr.link",
+   "text": "אִם אַתָּה צָמֵא, יֵשׁ מַיִם בַּמְּקָרֵר.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "צָמֵא",
+     "l": "he:tsame",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "בַּמְּקָרֵר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מְּקָרֵר",
+       "l": "he:mekarer",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.prep.core"
+   ],
+   "gloss": "If you (m.) are thirsty, there is water in the fridge.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.174",
+   "frame": "fr.link",
+   "text": "אִם אַתְּ צְמֵאָה, יֵשׁ מַיִם בַּמְּקָרֵר.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "צְמֵאָה",
+     "l": "he:tsame",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "בַּמְּקָרֵר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מְּקָרֵר",
+       "l": "he:mekarer",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.prep.core"
+   ],
+   "gloss": "If you (f.) are thirsty, there is water in the fridge.",
+   "variantOf": "he.f6.173",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.175",
+   "frame": "fr.link",
+   "text": "אִם קַר לְךָ, אַל תֵּצֵא.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "קַר",
+     "l": "he:kar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "לְךָ",
+     "l": "he:le",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תֵּצֵא",
+     "l": "he:yatsa",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.imperative"
+   ],
+   "gloss": "If you (m.) are cold, don’t go out.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.176",
+   "frame": "fr.link",
+   "text": "אִם קַר לָךְ, אַל תֵּצְאִי.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "קַר",
+     "l": "he:kar",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "לָךְ",
+     "l": "he:le",
+     "f": "ADP;2;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תֵּצְאִי",
+     "l": "he:yatsa",
+     "f": "V;FUT;2;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.imperative"
+   ],
+   "gloss": "If you (f.) are cold, don’t go out.",
+   "variantOf": "he.f6.175",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.177",
+   "frame": "fr.link",
+   "text": "אִם הַמּוֹנִית יְקָרָה, אֲנִי הוֹלֵךְ בָּרֶגֶל.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "הַמּוֹנִית",
+     "l": "he:monit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יְקָרָה",
+     "l": "he:yakar",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בָּרֶגֶל",
+     "l": "he:baregel"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "If the taxi is expensive, I (m.) walk.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.178",
+   "frame": "fr.link",
+   "text": "אִם אַתָּה רוֹצֶה, אֲנִי מְבַשֵּׁל מָרָק.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מָרָק",
+     "l": "he:marak",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.present"
+   ],
+   "gloss": "If you (m.) want, I’ll cook soup.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.179",
+   "frame": "fr.link",
+   "text": "אִם אֵין לֶחֶם, אֲנִי הוֹלֵךְ לַסּוּפֶּר.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַסּוּפֶּר",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "סּוּפֶּר",
+       "l": "he:super",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.negation",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "If there is no bread, I (m.) go to the supermarket.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.180",
+   "frame": "fr.link",
+   "text": "אִם תָּבוֹא מָחָר, אֲנִי בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "אִם",
+     "l": "he:im-if"
+    },
+    {
+     "t": "תָּבוֹא",
+     "l": "he:ba",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.prep.core"
+   ],
+   "gloss": "If you (m.) come tomorrow, I am at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.181",
+   "frame": "fr.link",
+   "text": "אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שָׂמֵחַ",
+     "l": "he:sameach",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "שֶׁאַתָּה",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "אַתָּה",
+       "l": "he:ata"
+      }
+     ]
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "I (m.) am glad that you (m.) are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.182",
+   "frame": "fr.link",
+   "text": "אֲנִי שְׂמֵחָה שֶׁאַתָּה פֹּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שְׂמֵחָה",
+     "l": "he:sameach",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": "שֶׁאַתָּה",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "אַתָּה",
+       "l": "he:ata"
+      }
+     ]
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.demonstrative"
+   ],
+   "gloss": "I (f.) am glad that you (m.) are here.",
+   "variantOf": "he.f6.181",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.183",
+   "frame": "fr.link",
+   "text": "טוֹב שֶׁאַתְּ בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "שֶׁאַתְּ",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "אַתְּ",
+       "l": "he:at"
+      }
+     ]
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.prep.core"
+   ],
+   "gloss": "It’s good that you (f.) are at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.184",
+   "frame": "fr.link",
+   "text": "בָּרוּר שֶׁהוּא בָּא.",
+   "tokens": [
+    {
+     "t": "בָּרוּר",
+     "l": "he:barur",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": "שֶׁהוּא",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הוּא",
+       "l": "he:hu"
+      }
+     ]
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present"
+   ],
+   "gloss": "Of course he is coming (it is clear that he is coming).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.185",
+   "frame": "fr.link",
+   "text": "אִמָּא רוֹצָה שֶׁתֹּאכַל.",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "שֶׁתֹּאכַל",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "תֹּאכַל",
+       "l": "he:akhal",
+       "f": "V;FUT;2;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.present"
+   ],
+   "gloss": "Mum wants you (m.) to eat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.186",
+   "frame": "fr.link",
+   "text": "הוּא הוֹלֵךְ לָעֲבוֹדָה לַמְרוֹת שֶׁהוּא עָיֵף.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "לַמְרוֹת",
+     "l": "he:lamrot"
+    },
+    {
+     "t": "שֶׁהוּא",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הוּא",
+       "l": "he:hu"
+      }
+     ]
+    },
+    {
+     "t": "עָיֵף",
+     "l": "he:ayef",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He goes to work although he is tired.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.187",
+   "frame": "fr.link",
+   "text": "הִיא הוֹלֶכֶת לָעֲבוֹדָה לַמְרוֹת שֶׁהִיא עֲיֵפָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "הוֹלֶכֶת",
+     "l": "he:halach",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "לַמְרוֹת",
+     "l": "he:lamrot"
+    },
+    {
+     "t": "שֶׁהִיא",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הִיא",
+       "l": "he:hi"
+      }
+     ]
+    },
+    {
+     "t": "עֲיֵפָה",
+     "l": "he:ayef",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She goes to work although she is tired.",
+   "variantOf": "he.f6.186",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.188",
+   "frame": "fr.link",
+   "text": "לַמְרוֹת שֶׁהַבַּיִת יָשָׁן, הוּא יָפֶה.",
+   "tokens": [
+    {
+     "t": "לַמְרוֹת",
+     "l": "he:lamrot"
+    },
+    {
+     "t": "שֶׁהַבַּיִת",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "יָשָׁן",
+     "l": "he:yashan",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יָפֶה",
+     "l": "he:yafe",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.definite"
+   ],
+   "gloss": "Although the house is old, it is beautiful.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f6.189",
+   "frame": "fr.link",
+   "text": "אַף עַל פִּי שֶׁהוּא רָעֵב, הוּא לֹא אוֹכֵל.",
+   "tokens": [
+    {
+     "t": "אַף עַל פִּי",
+     "l": "he:af-al-pi"
+    },
+    {
+     "t": "שֶׁהוּא",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הוּא",
+       "l": "he:hu"
+      }
+     ]
+    },
+    {
+     "t": "רָעֵב",
+     "l": "he:raev",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.present",
+    "fn.negation"
+   ],
+   "gloss": "Although he is hungry, he doesn’t eat.",
+   "alts": [
+    "לַמְרוֹת שֶׁהוּא רָעֵב, הוּא לֹא אוֹכֵל."
+   ],
+   "level": "A1"
+  }
+ ]
+}

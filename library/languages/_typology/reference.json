@@ -1,0 +1,5 @@
+{
+ "format": "noema.langtypology/v1",
+ "about": "The reference set of D18: every grammar page has comparison notes for at least 8 of these languages, covering all four types. Chosen by the user (2026-10-09).",
+ "languages": ["el", "ru", "es", "en", "fr", "de", "hi", "fa", "mr", "ar", "he", "tr", "ja", "ko", "fi", "hu", "sw", "lg", "zh", "vi", "iu"]
+}

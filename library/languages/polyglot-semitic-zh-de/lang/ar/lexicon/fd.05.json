@@ -1,0 +1,3157 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:sifr",
+   "lemma": "صِفْر",
+   "pos": "NUM",
+   "senses": [
+    "num.0"
+   ],
+   "features": {
+    "root": "ص ف ر",
+    "polarity": false,
+    "countedNoun": {
+     "none": "zero takes no counted noun: “no books” is لَا كُتُبَ"
+    },
+    "ordinal": {
+     "none": "zero has no ordinal"
+    }
+   },
+   "class": "noun",
+   "translit": "ṣifr",
+   "forms": {
+    "NUM;NOM;SG;INDF": "صِفْرٌ",
+    "NUM;ACC;SG;INDF": "صِفْرًا",
+    "NUM;GEN;SG;INDF": "صِفْرٍ",
+    "NUM;NOM;SG;CONST": "صِفْرُ",
+    "NUM;ACC;SG;CONST": "صِفْرَ",
+    "NUM;GEN;SG;CONST": "صِفْرِ",
+    "NUM;NOM;DU;INDF": "صِفْرَانِ",
+    "NUM;ACC;DU;INDF": "صِفْرَيْنِ",
+    "NUM;GEN;DU;INDF": "صِفْرَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Zero — the Arabic word behind English zero and cipher.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "zero (the number and the digit ٠)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.0"
+     },
+     {
+      "id": "s2",
+      "def": "nothing, nil (a score, a result)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "وَاحِدٌ نَاقِصُ وَاحِدٍ يُسَاوِي صِفْرًا.",
+      "tr": "One minus one equals zero.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     },
+     {
+      "text": "رَقْمُ هَاتِفِي يَبْدَأُ بِصِفْرٍ.",
+      "tr": "My phone number starts with a zero.",
+      "register": "neutral",
+      "context": "phone numbers",
+      "sense": "s1"
+     },
+     {
+      "text": "النَّتِيجَةُ صِفْرٌ.",
+      "tr": "The result is zero (nothing).",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s2"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "A semantic loan from Sanskrit शून्य (śūnyá, “zero”, literally “empty”) — Arabic صِفْر, “empty”, translated the Indian idea (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English zero and cipher, German Ziffer, Russian цифра and Turkish sıfır all go back to صِفْر (via Medieval Latin zephirum and cifra).",
+     "The digit zero in the Arabic digits used in the Middle East (٠١٢٣٤٥٦٧٨٩) is a dot: ٠."
+    ],
+    "pitfalls": [
+     "In Eastern Arabic digits ٠ (a dot) is 0 and ٥ (a small circle) is 5 — do not read ٥ as zero."
+    ]
+   }
+  },
+  {
+   "id": "ar:wahid",
+   "lemma": "وَاحِد",
+   "pos": "NUM",
+   "senses": [
+    "num.1"
+   ],
+   "features": {
+    "root": "و ح د",
+    "polarity": false,
+    "countedNoun": "agrees (after the noun)",
+    "ordinal": "أَوَّل"
+   },
+   "class": "one",
+   "translit": "wāḥid",
+   "forms": {
+    "NUM;NOM;SG;MASC;INDF": "وَاحِدٌ",
+    "NUM;ACC;SG;MASC;INDF": "وَاحِدًا",
+    "NUM;GEN;SG;MASC;INDF": "وَاحِدٍ",
+    "NUM;NOM;SG;FEM;INDF": "وَاحِدَةٌ",
+    "NUM;ACC;SG;FEM;INDF": "وَاحِدَةً",
+    "NUM;GEN;SG;FEM;INDF": "وَاحِدَةٍ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "One — and with a noun, “only one, a single”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "one (counting; after a noun it stresses “one single”: كِتَابٌ وَاحِدٌ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "وَاحِدٌ، اِثْنَانِ، ثَلَاثَةٌ!",
+      "tr": "One, two, three!",
+      "register": "neutral",
+      "context": "counting",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي سُؤَالٌ وَاحِدٌ فَقَطْ.",
+      "tr": "I have only one question.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ غُرْفَةٌ وَاحِدَةٌ.",
+      "tr": "This is one (single) room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔaḥad- ~ *waḥad- (“one”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אֶחָד (eḥad) matches the other Arabic “one”, أَحَد (in 11: أَحَدَ عَشَرَ, and “one of”: أَحَدُ الطُّلَّابِ).",
+     "Turkish tevhit (belief in one God) is Arabic تَوْحِيد, from the root و ح د of وَاحِد."
+    ],
+    "pitfalls": [
+     "“A book” or “one book” is normally just كِتَابٌ; وَاحِدٌ after the noun adds “only one”.",
+     "1 and 2 agree with the noun (masculine وَاحِدٌ, feminine وَاحِدَةٌ) and come after it, like an adjective."
+    ],
+    "subtleties": [
+     "The other “one”, أَحَد (feminine إِحْدَى), is used in 11 and in “one of”: إِحْدَى الطَّالِبَاتِ (one of the female students)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ithnan",
+   "lemma": "اِثْنَان",
+   "pos": "NUM",
+   "senses": [
+    "num.2"
+   ],
+   "features": {
+    "root": "ث ن ي",
+    "polarity": false,
+    "countedNoun": "dual alone",
+    "ordinal": "ثَانٍ"
+   },
+   "class": "two",
+   "translit": "iṯnān",
+   "forms": {
+    "NUM;NOM;DU;MASC;INDF": "اِثْنَانِ",
+    "NUM;ACC;DU;MASC;INDF": "اِثْنَيْنِ",
+    "NUM;GEN;DU;MASC;INDF": "اِثْنَيْنِ",
+    "NUM;NOM;DU;FEM;INDF": "اِثْنَتَانِ",
+    "NUM;ACC;DU;FEM;INDF": "اِثْنَتَيْنِ",
+    "NUM;GEN;DU;FEM;INDF": "اِثْنَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Two — mostly hidden in the noun itself: the dual.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "two (with a noun the dual alone says “two”: كِتَابَانِ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِثْنَانِ وَاثْنَانِ أَرْبَعَةٌ.",
+      "tr": "Two and two are four.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     },
+     {
+      "text": "اِثْنَانِ، ثَلَاثَةٌ، أَرْبَعَةٌ…",
+      "tr": "Two, three, four…",
+      "register": "neutral",
+      "context": "counting",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ṯin- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שְׁנַיִם / שְׁתַּיִם (shnáyim / shtáyim) is the same word, also dual in form.",
+     "Monday is يَوْمُ الِاثْنَيْنِ, “day two”: the Arabic week starts on Sunday."
+    ],
+    "pitfalls": [
+     "“Two keys” is مِفْتَاحَانِ (the dual); *اِثْنَانِ مِفْتَاحٌ is wrong. اِثْنَانِ after the dual only adds emphasis.",
+     "It is itself a dual: اِثْنَانِ (nom.) / اِثْنَيْنِ (acc., gen.); feminine اِثْنَتَانِ / اِثْنَتَيْنِ.",
+     "The i- is a hamzat al-waṣl: after a vowel it is not pronounced (وَاثْنَانِ, wa-ṯnāni)."
+    ]
+   }
+  },
+  {
+   "id": "ar:thalatha",
+   "lemma": "ثَلَاثَة",
+   "pos": "NUM",
+   "senses": [
+    "num.3"
+   ],
+   "features": {
+    "root": "ث ل ث",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "ثَالِث"
+   },
+   "class": "unit",
+   "translit": "ṯalāṯa",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "ثَلَاثَةٌ",
+    "NUM;NOM;MASC;CONST": "ثَلَاثَةُ",
+    "NUM;NOM;FEM;INDF": "ثَلَاثٌ",
+    "NUM;NOM;FEM;CONST": "ثَلَاثُ",
+    "NUM;ACC;MASC;INDF": "ثَلَاثَةً",
+    "NUM;ACC;MASC;CONST": "ثَلَاثَةَ",
+    "NUM;ACC;FEM;INDF": "ثَلَاثًا",
+    "NUM;ACC;FEM;CONST": "ثَلَاثَ",
+    "NUM;GEN;MASC;INDF": "ثَلَاثَةٍ",
+    "NUM;GEN;MASC;CONST": "ثَلَاثَةِ",
+    "NUM;GEN;FEM;INDF": "ثَلَاثٍ",
+    "NUM;GEN;FEM;CONST": "ثَلَاثِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Three — the first number with the reversed gender.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "three",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.3"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي ثَلَاثَةُ إِخْوَةٍ.",
+      "tr": "I have three brothers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْبَيْتِ ثَلَاثُ غُرَفٍ.",
+      "tr": "The house has three rooms.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ṯalāṯatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שָׁלוֹשׁ (shalósh) is the same Semitic word.",
+     "Tuesday is الثُّلَاثَاءُ, “the third (day)”, from the same root ث ل ث."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:arbaa",
+   "lemma": "أَرْبَعَة",
+   "pos": "NUM",
+   "senses": [
+    "num.4"
+   ],
+   "features": {
+    "root": "ر ب ع",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "رَابِع"
+   },
+   "class": "unit",
+   "translit": "ʾarbaʿa",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "أَرْبَعَةٌ",
+    "NUM;NOM;MASC;CONST": "أَرْبَعَةُ",
+    "NUM;NOM;FEM;INDF": "أَرْبَعٌ",
+    "NUM;NOM;FEM;CONST": "أَرْبَعُ",
+    "NUM;ACC;MASC;INDF": "أَرْبَعَةً",
+    "NUM;ACC;MASC;CONST": "أَرْبَعَةَ",
+    "NUM;ACC;FEM;INDF": "أَرْبَعًا",
+    "NUM;ACC;FEM;CONST": "أَرْبَعَ",
+    "NUM;GEN;MASC;INDF": "أَرْبَعَةٍ",
+    "NUM;GEN;MASC;CONST": "أَرْبَعَةِ",
+    "NUM;GEN;FEM;INDF": "أَرْبَعٍ",
+    "NUM;GEN;FEM;CONST": "أَرْبَعِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Four.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "four",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.4"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لِلسَّنَةِ أَرْبَعَةُ فُصُولٍ.",
+      "tr": "The year has four seasons.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "لِلْكُرْسِيِّ أَرْبَعُ أَرْجُلٍ.",
+      "tr": "A chair has four legs.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔarbaʕatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אַרְבַּע (arbá) is the same word.",
+     "Wednesday is الْأَرْبِعَاءُ, “the fourth (day)”."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun.",
+     "رِجْل (leg) is feminine, so: أَرْبَعُ أَرْجُلٍ; فَصْل (season) is masculine, so: أَرْبَعَةُ فُصُولٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:khamsa",
+   "lemma": "خَمْسَة",
+   "pos": "NUM",
+   "senses": [
+    "num.5"
+   ],
+   "features": {
+    "root": "خ م س",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "خَامِس"
+   },
+   "class": "unit",
+   "translit": "ḫamsa",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "خَمْسَةٌ",
+    "NUM;NOM;MASC;CONST": "خَمْسَةُ",
+    "NUM;NOM;FEM;INDF": "خَمْسٌ",
+    "NUM;NOM;FEM;CONST": "خَمْسُ",
+    "NUM;ACC;MASC;INDF": "خَمْسَةً",
+    "NUM;ACC;MASC;CONST": "خَمْسَةَ",
+    "NUM;ACC;FEM;INDF": "خَمْسًا",
+    "NUM;ACC;FEM;CONST": "خَمْسَ",
+    "NUM;GEN;MASC;INDF": "خَمْسَةٍ",
+    "NUM;GEN;MASC;CONST": "خَمْسَةِ",
+    "NUM;GEN;FEM;INDF": "خَمْسٍ",
+    "NUM;GEN;FEM;CONST": "خَمْسِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Five — the hand.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "five",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.5"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدَنَا خَمْسَةُ أَوْلَادٍ.",
+      "tr": "We have five children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَظِرْ خَمْسَ دَقَائِقَ، مِنْ فَضْلِكَ.",
+      "tr": "Wait five minutes, please.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ḫamšatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The hamsa hand amulet takes its name from خَمْسَة, “five”.",
+     "Hebrew חָמֵשׁ (khamésh) is the same word; Thursday is الْخَمِيسُ, “the fifth (day)”."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:sitta",
+   "lemma": "سِتَّة",
+   "pos": "NUM",
+   "senses": [
+    "num.6"
+   ],
+   "features": {
+    "root": "س د س",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "سَادِس"
+   },
+   "class": "unit",
+   "translit": "sitta",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "سِتَّةٌ",
+    "NUM;NOM;MASC;CONST": "سِتَّةُ",
+    "NUM;NOM;FEM;INDF": "سِتٌّ",
+    "NUM;NOM;FEM;CONST": "سِتُّ",
+    "NUM;ACC;MASC;INDF": "سِتَّةً",
+    "NUM;ACC;MASC;CONST": "سِتَّةَ",
+    "NUM;ACC;FEM;INDF": "سِتًّا",
+    "NUM;ACC;FEM;CONST": "سِتَّ",
+    "NUM;GEN;MASC;INDF": "سِتَّةٍ",
+    "NUM;GEN;MASC;CONST": "سِتَّةِ",
+    "NUM;GEN;FEM;INDF": "سِتٍّ",
+    "NUM;GEN;FEM;CONST": "سِتِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Six.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "six",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.6"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَعْمَلُ سِتَّةَ أَيَّامٍ.",
+      "tr": "He works six days.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "نَامَ الطِّفْلُ سِتَّ سَاعَاتٍ.",
+      "tr": "The child slept six hours.",
+      "register": "neutral",
+      "context": "sleep",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šidṯatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שֵׁשׁ (shesh) is the same word."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun.",
+     "The šadda stays in every form: سِتَّةٌ, سِتٌّ, سِتُّونَ (60)."
+    ]
+   }
+  },
+  {
+   "id": "ar:saba",
+   "lemma": "سَبْعَة",
+   "pos": "NUM",
+   "senses": [
+    "num.7"
+   ],
+   "features": {
+    "root": "س ب ع",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "سَابِع"
+   },
+   "class": "unit",
+   "translit": "sabʿa",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "سَبْعَةٌ",
+    "NUM;NOM;MASC;CONST": "سَبْعَةُ",
+    "NUM;NOM;FEM;INDF": "سَبْعٌ",
+    "NUM;NOM;FEM;CONST": "سَبْعُ",
+    "NUM;ACC;MASC;INDF": "سَبْعَةً",
+    "NUM;ACC;MASC;CONST": "سَبْعَةَ",
+    "NUM;ACC;FEM;INDF": "سَبْعًا",
+    "NUM;ACC;FEM;CONST": "سَبْعَ",
+    "NUM;GEN;MASC;INDF": "سَبْعَةٍ",
+    "NUM;GEN;MASC;CONST": "سَبْعَةِ",
+    "NUM;GEN;FEM;INDF": "سَبْعٍ",
+    "NUM;GEN;FEM;CONST": "سَبْعِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seven — the week.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seven",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.7"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْأُسْبُوعِ سَبْعَةُ أَيَّامٍ.",
+      "tr": "There are seven days in the week.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "عَاشَ هُنَا سَبْعَ سَنَوَاتٍ.",
+      "tr": "He lived here for seven years.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šabʕatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أُسْبُوع (week) comes from the same root: a set of seven days — like Hebrew שָׁבוּעַ (week) next to שֶׁבַע (seven)."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:thamaniya",
+   "lemma": "ثَمَانِيَة",
+   "pos": "NUM",
+   "senses": [
+    "num.8"
+   ],
+   "features": {
+    "root": "ث م ن",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "ثَامِن"
+   },
+   "class": "unit",
+   "translit": "ṯamāniya",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "ثَمَانِيَةٌ",
+    "NUM;NOM;MASC;CONST": "ثَمَانِيَةُ",
+    "NUM;ACC;MASC;INDF": "ثَمَانِيَةً",
+    "NUM;ACC;MASC;CONST": "ثَمَانِيَةَ",
+    "NUM;GEN;MASC;INDF": "ثَمَانِيَةٍ",
+    "NUM;GEN;MASC;CONST": "ثَمَانِيَةِ",
+    "NUM;NOM;FEM;INDF": "ثَمَانٍ",
+    "NUM;ACC;FEM;INDF": "ثَمَانِيًا",
+    "NUM;GEN;FEM;INDF": "ثَمَانٍ",
+    "NUM;NOM;FEM;CONST": "ثَمَانِي",
+    "NUM;ACC;FEM;CONST": "ثَمَانِيَ",
+    "NUM;GEN;FEM;CONST": "ثَمَانِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eight — the number with the odd feminine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eight",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.8"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي ثَمَانِيَةُ أَقْلَامٍ.",
+      "tr": "I have eight pens.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْمَلُ ثَمَانِيَ سَاعَاتٍ.",
+      "tr": "I work eight hours.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ṯamāniyatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שְׁמוֹנֶה (shmóne) is the same word."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun.",
+     "The form for feminine nouns ends in a weak -ī: ثَمَانٍ (alone), ثَمَانِي غُرَفٍ (nom., gen.), ثَمَانِيَ غُرَفٍ (acc.)."
+    ]
+   }
+  },
+  {
+   "id": "ar:tisa",
+   "lemma": "تِسْعَة",
+   "pos": "NUM",
+   "senses": [
+    "num.9"
+   ],
+   "features": {
+    "root": "ت س ع",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "تَاسِع"
+   },
+   "class": "unit",
+   "translit": "tisʿa",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "تِسْعَةٌ",
+    "NUM;NOM;MASC;CONST": "تِسْعَةُ",
+    "NUM;NOM;FEM;INDF": "تِسْعٌ",
+    "NUM;NOM;FEM;CONST": "تِسْعُ",
+    "NUM;ACC;MASC;INDF": "تِسْعَةً",
+    "NUM;ACC;MASC;CONST": "تِسْعَةَ",
+    "NUM;ACC;FEM;INDF": "تِسْعًا",
+    "NUM;ACC;FEM;CONST": "تِسْعَ",
+    "NUM;GEN;MASC;INDF": "تِسْعَةٍ",
+    "NUM;GEN;MASC;CONST": "تِسْعَةِ",
+    "NUM;GEN;FEM;INDF": "تِسْعٍ",
+    "NUM;GEN;FEM;CONST": "تِسْعِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Nine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nine",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.9"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُنَا تِسْعَةُ رِجَالٍ.",
+      "tr": "Nine men are here.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْفَصْلِ تِسْعُ طَالِبَاتٍ.",
+      "tr": "There are nine female students in the class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *tišʕatum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew תֵּשַׁע (tésha) is the same word."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:ashara",
+   "lemma": "عَشَرَة",
+   "pos": "NUM",
+   "senses": [
+    "num.10"
+   ],
+   "features": {
+    "root": "ع ش ر",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "عَاشِر"
+   },
+   "class": "unit",
+   "translit": "ʿašara",
+   "forms": {
+    "NUM;NOM;MASC;INDF": "عَشَرَةٌ",
+    "NUM;NOM;MASC;CONST": "عَشَرَةُ",
+    "NUM;NOM;FEM;INDF": "عَشْرٌ",
+    "NUM;NOM;FEM;CONST": "عَشْرُ",
+    "NUM;ACC;MASC;INDF": "عَشَرَةً",
+    "NUM;ACC;MASC;CONST": "عَشَرَةَ",
+    "NUM;ACC;FEM;INDF": "عَشْرًا",
+    "NUM;ACC;FEM;CONST": "عَشْرَ",
+    "NUM;GEN;MASC;INDF": "عَشَرَةٍ",
+    "NUM;GEN;MASC;CONST": "عَشَرَةِ",
+    "NUM;GEN;FEM;INDF": "عَشْرٍ",
+    "NUM;GEN;FEM;CONST": "عَشْرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ten — and its plural عَشَرَات, “dozens of”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ten",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.10"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْفَصْلِ عَشَرَةُ طُلَّابٍ.",
+      "tr": "There are ten students in the class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَظَرْتُ عَشْرَ دَقَائِقَ.",
+      "tr": "I waited ten minutes.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʕaśaratum (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew עֶשֶׂר / עֲשָׂרָה (éser / asará) is the same word.",
+     "عَشَرَات (tens) means “dozens of, many”: عَشَرَاتُ النَّاسِ."
+    ],
+    "pitfalls": [
+     "3–10 take the opposite gender: the form with ة goes with masculine nouns (ثَلَاثَةُ كُتُبٍ), the form without ة with feminine nouns (ثَلَاثُ غُرَفٍ) — decide by the singular of the noun.",
+     "Not only the ة changes: with masculine nouns عَشَرَةُ (ʿašaratu, three short a's), with feminine nouns عَشْرُ (ʿašru)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ahada_ashar",
+   "lemma": "أَحَدَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.11"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "حَادِيَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "ʾaḥada ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "أَحَدَ عَشَرَ",
+    "NUM;ACC;MASC": "أَحَدَ عَشَرَ",
+    "NUM;GEN;MASC": "أَحَدَ عَشَرَ",
+    "NUM;NOM;FEM": "إِحْدَى عَشْرَةَ",
+    "NUM;ACC;FEM": "إِحْدَى عَشْرَةَ",
+    "NUM;GEN;FEM": "إِحْدَى عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eleven — “one-ten”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eleven",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.11"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْفَرِيقِ أَحَدَ عَشَرَ لَاعِبًا.",
+      "tr": "A team has eleven players.",
+      "register": "neutral",
+      "context": "football",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهَا إِحْدَى عَشْرَةَ سَنَةً.",
+      "tr": "She is eleven years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "أَحَد (one) + عَشَرَ (ten) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew builds the teens the same way, unit + ten: שְׁלוֹשָׁה עָשָׂר / שְׁלוֹשׁ עֶשְׂרֵה."
+    ],
+    "pitfalls": [
+     "11 and 12 agree with the noun (no reversal): أَحَدَ عَشَرَ كِتَابًا, إِحْدَى عَشْرَةَ غُرْفَةً; the noun is singular and accusative.",
+     "Masculine عَشَرَ (ʿašara) but feminine عَشْرَةَ (ʿašrata) — the ten changes too."
+    ]
+   }
+  },
+  {
+   "id": "ar:ithna_ashar",
+   "lemma": "اِثْنَا عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.12"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "ثَانِيَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "iṯnā ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "اِثْنَا عَشَرَ",
+    "NUM;ACC;MASC": "اِثْنَيْ عَشَرَ",
+    "NUM;GEN;MASC": "اِثْنَيْ عَشَرَ",
+    "NUM;NOM;FEM": "اِثْنَتَا عَشْرَةَ",
+    "NUM;ACC;FEM": "اِثْنَتَيْ عَشْرَةَ",
+    "NUM;GEN;FEM": "اِثْنَتَيْ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Twelve — the months of the year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "twelve",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.12"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِثْنَا عَشَرَ شَهْرًا فِي السَّنَةِ.",
+      "tr": "Twelve months in a year.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "اِثْنَتَا عَشْرَةَ طَالِبَةً هُنَا.",
+      "tr": "Twelve female students are here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "اِثْنَانِ (two) + عَشَرَ (ten) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew builds the teens the same way, unit + ten: שְׁלוֹשָׁה עָשָׂר / שְׁלוֹשׁ עֶשְׂרֵה."
+    ],
+    "pitfalls": [
+     "12 is the only teen with cases: اِثْنَا عَشَرَ (nom.), اِثْنَيْ عَشَرَ (acc., gen.); feminine اِثْنَتَا / اِثْنَتَيْ عَشْرَةَ.",
+     "It agrees with the noun, like 2: اِثْنَا عَشَرَ رَجُلًا, اِثْنَتَا عَشْرَةَ بِنْتًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:thalathata_ashar",
+   "lemma": "ثَلَاثَةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.13"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "ثَالِثَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "ṯalāṯata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "ثَلَاثَةَ عَشَرَ",
+    "NUM;ACC;MASC": "ثَلَاثَةَ عَشَرَ",
+    "NUM;GEN;MASC": "ثَلَاثَةَ عَشَرَ",
+    "NUM;NOM;FEM": "ثَلَاثَ عَشْرَةَ",
+    "NUM;ACC;FEM": "ثَلَاثَ عَشْرَةَ",
+    "NUM;GEN;FEM": "ثَلَاثَ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Thirteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thirteen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.13"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْفَصْلِ ثَلَاثَةَ عَشَرَ طَالِبًا.",
+      "tr": "There are thirteen students in the class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهُ ثَلَاثَ عَشْرَةَ سَنَةً.",
+      "tr": "He is thirteen years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew builds the teens the same way, unit + ten: שְׁלוֹשָׁה עָשָׂר / שְׁלוֹשׁ עֶשְׂרֵה."
+    ],
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:arbaata_ashar",
+   "lemma": "أَرْبَعَةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.14"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "رَابِعَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "ʾarbaʿata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "أَرْبَعَةَ عَشَرَ",
+    "NUM;ACC;MASC": "أَرْبَعَةَ عَشَرَ",
+    "NUM;GEN;MASC": "أَرْبَعَةَ عَشَرَ",
+    "NUM;NOM;FEM": "أَرْبَعَ عَشْرَةَ",
+    "NUM;ACC;FEM": "أَرْبَعَ عَشْرَةَ",
+    "NUM;GEN;FEM": "أَرْبَعَ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fourteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fourteen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.14"
+     }
+    ],
+    "examples": [
+     {
+      "text": "بَقِيتُ هُنَاكَ أَرْبَعَةَ عَشَرَ يَوْمًا.",
+      "tr": "I stayed there fourteen days.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهَا أَرْبَعَ عَشْرَةَ سَنَةً.",
+      "tr": "She is fourteen years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:khamsata_ashar",
+   "lemma": "خَمْسَةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.15"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "خَامِسَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "ḫamsata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "خَمْسَةَ عَشَرَ",
+    "NUM;ACC;MASC": "خَمْسَةَ عَشَرَ",
+    "NUM;GEN;MASC": "خَمْسَةَ عَشَرَ",
+    "NUM;NOM;FEM": "خَمْسَ عَشْرَةَ",
+    "NUM;ACC;FEM": "خَمْسَ عَشْرَةَ",
+    "NUM;GEN;FEM": "خَمْسَ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fifteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifteen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.15"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْحَافِلَةِ خَمْسَةَ عَشَرَ رَجُلًا.",
+      "tr": "There are fifteen men on the bus.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَظَرْنَا خَمْسَ عَشْرَةَ دَقِيقَةً.",
+      "tr": "We waited fifteen minutes.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:sittata_ashar",
+   "lemma": "سِتَّةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.16"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "سَادِسَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "sittata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "سِتَّةَ عَشَرَ",
+    "NUM;ACC;MASC": "سِتَّةَ عَشَرَ",
+    "NUM;GEN;MASC": "سِتَّةَ عَشَرَ",
+    "NUM;NOM;FEM": "سِتَّ عَشْرَةَ",
+    "NUM;ACC;FEM": "سِتَّ عَشْرَةَ",
+    "NUM;GEN;FEM": "سِتَّ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sixteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixteen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.16"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْقَاعَةِ سِتَّةَ عَشَرَ كُرْسِيًّا.",
+      "tr": "There are sixteen chairs in the hall.",
+      "register": "neutral",
+      "context": "rooms",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمَبْنَى سِتَّ عَشْرَةَ شَقَّةً.",
+      "tr": "There are sixteen flats in the building.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:sabata_ashar",
+   "lemma": "سَبْعَةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.17"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "سَابِعَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "sabʿata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "سَبْعَةَ عَشَرَ",
+    "NUM;ACC;MASC": "سَبْعَةَ عَشَرَ",
+    "NUM;GEN;MASC": "سَبْعَةَ عَشَرَ",
+    "NUM;NOM;FEM": "سَبْعَ عَشْرَةَ",
+    "NUM;ACC;FEM": "سَبْعَ عَشْرَةَ",
+    "NUM;GEN;FEM": "سَبْعَ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seventeen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventeen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.17"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْمَدْرَسَةِ سَبْعَةَ عَشَرَ مُعَلِّمًا.",
+      "tr": "There are seventeen teachers at the school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهَا سَبْعَ عَشْرَةَ سَنَةً.",
+      "tr": "She is seventeen years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:thamaniyata_ashar",
+   "lemma": "ثَمَانِيَةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.18"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "ثَامِنَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "ṯamāniyata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "ثَمَانِيَةَ عَشَرَ",
+    "NUM;ACC;MASC": "ثَمَانِيَةَ عَشَرَ",
+    "NUM;GEN;MASC": "ثَمَانِيَةَ عَشَرَ",
+    "NUM;NOM;FEM": "ثَمَانِيَ عَشْرَةَ",
+    "NUM;ACC;FEM": "ثَمَانِيَ عَشْرَةَ",
+    "NUM;GEN;FEM": "ثَمَانِيَ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eighteen — coming of age.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighteen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.18"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَانَ هُنَا ثَمَانِيَةَ عَشَرَ شَخْصًا.",
+      "tr": "Eighteen people were here.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهُ ثَمَانِيَ عَشْرَةَ سَنَةً.",
+      "tr": "He is eighteen years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:tisata_ashar",
+   "lemma": "تِسْعَةَ عَشَرَ",
+   "pos": "NUM",
+   "senses": [
+    "num.19"
+   ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "تَاسِعَ عَشَرَ"
+   },
+   "class": "teen",
+   "translit": "tisʿata ʿašara",
+   "forms": {
+    "NUM;NOM;MASC": "تِسْعَةَ عَشَرَ",
+    "NUM;ACC;MASC": "تِسْعَةَ عَشَرَ",
+    "NUM;GEN;MASC": "تِسْعَةَ عَشَرَ",
+    "NUM;NOM;FEM": "تِسْعَ عَشْرَةَ",
+    "NUM;ACC;FEM": "تِسْعَ عَشْرَةَ",
+    "NUM;GEN;FEM": "تِسْعَ عَشْرَةَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Nineteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nineteen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.19"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْحَقِيبَةِ تِسْعَةَ عَشَرَ قَلَمًا.",
+      "tr": "There are nineteen pens in the bag.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهَا تِسْعَ عَشْرَةَ سَنَةً.",
+      "tr": "She is nineteen years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From the unit and عَشَرَة (ten), joined without “and” (Wiktionary: ثَلَاثَةَ عَشَرَ = ثَلَاثَة + عَشَرَة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "In 13–19 the unit takes the opposite gender and the ten agrees: ثَلَاثَةَ عَشَرَ طَالِبًا, ثَلَاثَ عَشْرَةَ طَالِبَةً; the counted noun is singular and accusative."
+    ]
+   }
+  },
+  {
+   "id": "ar:ishrun",
+   "lemma": "عِشْرُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.20"
+   ],
+   "features": {
+    "root": "ع ش ر",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الْعِشْرُونَ"
+   },
+   "class": "ten",
+   "translit": "ʿišrūna",
+   "forms": {
+    "NUM;NOM;INDF": "عِشْرُونَ",
+    "NUM;ACC;INDF": "عِشْرِينَ",
+    "NUM;GEN;INDF": "عِشْرِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Twenty — a “plural” of ten.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "twenty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.20"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُهَا عِشْرُونَ سَنَةً.",
+      "tr": "She is twenty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْفَصْلِ عِشْرُونَ طَالِبًا.",
+      "tr": "There are twenty students in the class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʿiśrū-; compare Hebrew עֶשְׂרִים (esrím) and Aramaic עֶסְרִין (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Arabic and Hebrew alike, “twenty” looks like a plural of “ten”: عِشْرُونَ, עֶשְׂרִים."
+    ],
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:thalathun",
+   "lemma": "ثَلَاثُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.30"
+   ],
+   "features": {
+    "root": "ث ل ث",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الثَّلَاثُونَ"
+   },
+   "class": "ten",
+   "translit": "ṯalāṯūna",
+   "forms": {
+    "NUM;NOM;INDF": "ثَلَاثُونَ",
+    "NUM;ACC;INDF": "ثَلَاثِينَ",
+    "NUM;GEN;INDF": "ثَلَاثِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Thirty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thirty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.30"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُهُ ثَلَاثُونَ سَنَةً.",
+      "tr": "He is thirty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الشَّهْرِ ثَلَاثُونَ يَوْمًا.",
+      "tr": "There are thirty days in the month.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From ثَلَاث (three) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שְׁלוֹשִׁים (shloshím) is built the same way: three + the plural ending."
+    ],
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:arbaun",
+   "lemma": "أَرْبَعُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.40"
+   ],
+   "features": {
+    "root": "ر ب ع",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الْأَرْبَعُونَ"
+   },
+   "class": "ten",
+   "translit": "ʾarbaʿūna",
+   "forms": {
+    "NUM;NOM;INDF": "أَرْبَعُونَ",
+    "NUM;ACC;INDF": "أَرْبَعِينَ",
+    "NUM;GEN;INDF": "أَرْبَعِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Forty — a number of trials and of mourning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "forty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.40"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُهَا أَرْبَعُونَ سَنَةً.",
+      "tr": "She is forty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "عَلِي بَابَا وَالْأَرْبَعُونَ لِصًّا",
+      "tr": "Ali Baba and the Forty Thieves",
+      "register": "neutral",
+      "context": "stories",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From أَرْبَع (four) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish erbain, the forty coldest days of winter, is Arabic أَرْبَعِين."
+    ],
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:khamsun",
+   "lemma": "خَمْسُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.50"
+   ],
+   "features": {
+    "root": "خ م س",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الْخَمْسُونَ"
+   },
+   "class": "ten",
+   "translit": "ḫamsūna",
+   "forms": {
+    "NUM;NOM;INDF": "خَمْسُونَ",
+    "NUM;ACC;INDF": "خَمْسِينَ",
+    "NUM;GEN;INDF": "خَمْسِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fifty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.50"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُهُ خَمْسُونَ سَنَةً.",
+      "tr": "He is fifty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْقَاعَةِ خَمْسُونَ كُرْسِيًّا.",
+      "tr": "There are fifty chairs in the hall.",
+      "register": "neutral",
+      "context": "rooms",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From خَمْس (five) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The khamsin, the hot sand wind of Egypt, is named after خَمْسِين, “fifty” (the days it may blow)."
+    ],
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:sittun",
+   "lemma": "سِتُّونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.60"
+   ],
+   "features": {
+    "root": "س د س",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "السِّتُّونَ"
+   },
+   "class": "ten",
+   "translit": "sittūna",
+   "forms": {
+    "NUM;NOM;INDF": "سِتُّونَ",
+    "NUM;ACC;INDF": "سِتِّينَ",
+    "NUM;GEN;INDF": "سِتِّينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sixty — the minute and the hour.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.60"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي السَّاعَةِ سِتُّونَ دَقِيقَةً.",
+      "tr": "There are sixty minutes in an hour.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "عُمْرُهَا سِتُّونَ سَنَةً.",
+      "tr": "She is sixty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From سِتّ (six) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:sabun",
+   "lemma": "سَبْعُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.70"
+   ],
+   "features": {
+    "root": "س ب ع",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "السَّبْعُونَ"
+   },
+   "class": "ten",
+   "translit": "sabʿūna",
+   "forms": {
+    "NUM;NOM;INDF": "سَبْعُونَ",
+    "NUM;ACC;INDF": "سَبْعِينَ",
+    "NUM;GEN;INDF": "سَبْعِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Seventy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.70"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُ جَدِّي سَبْعُونَ سَنَةً.",
+      "tr": "My grandfather is seventy years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَ هُنَا سَبْعُونَ شَخْصًا.",
+      "tr": "Seventy people were here.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From سَبْع (seven) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:thamanun",
+   "lemma": "ثَمَانُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.80"
+   ],
+   "features": {
+    "root": "ث م ن",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الثَّمَانُونَ"
+   },
+   "class": "ten",
+   "translit": "ṯamānūna",
+   "forms": {
+    "NUM;NOM;INDF": "ثَمَانُونَ",
+    "NUM;ACC;INDF": "ثَمَانِينَ",
+    "NUM;GEN;INDF": "ثَمَانِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eighty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.80"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُ جَدَّتِي ثَمَانُونَ سَنَةً.",
+      "tr": "My grandmother is eighty years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْقَرْيَةِ ثَمَانُونَ بَيْتًا.",
+      "tr": "There are eighty houses in the village.",
+      "register": "neutral",
+      "context": "village",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From ثَمَانٍ (eight) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:tisun",
+   "lemma": "تِسْعُونَ",
+   "pos": "NUM",
+   "senses": [
+    "num.90"
+   ],
+   "features": {
+    "root": "ت س ع",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "التِّسْعُونَ"
+   },
+   "class": "ten",
+   "translit": "tisʿūna",
+   "forms": {
+    "NUM;NOM;INDF": "تِسْعُونَ",
+    "NUM;ACC;INDF": "تِسْعِينَ",
+    "NUM;GEN;INDF": "تِسْعِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ninety.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ninety",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.90"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُمْرُهُ تِسْعُونَ سَنَةً.",
+      "tr": "He is ninety years old.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْكِتَابِ تِسْعُونَ صَفْحَةً.",
+      "tr": "The book has ninety pages.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From تِسْع (nine) + -ūn (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
+     "The tens have no gender and take an accusative singular: عِشْرُونَ طَالِبًا, عِشْرُونَ طَالِبَةً."
+    ],
+    "subtleties": [
+     "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ]
+   }
+  },
+  {
+   "id": "ar:mia",
+   "lemma": "مِائَة",
+   "pos": "NUM",
+   "senses": [
+    "num.100"
+   ],
+   "features": {
+    "root": "م ء ي",
+    "polarity": false,
+    "countedNoun": "GEN;SG",
+    "ordinal": "الْمِائَة"
+   },
+   "class": "noun",
+   "translit": "miʾa",
+   "forms": {
+    "NUM;NOM;SG;INDF": "مِائَةٌ",
+    "NUM;ACC;SG;INDF": "مِائَةً",
+    "NUM;GEN;SG;INDF": "مِائَةٍ",
+    "NUM;NOM;SG;CONST": "مِائَةُ",
+    "NUM;ACC;SG;CONST": "مِائَةَ",
+    "NUM;GEN;SG;CONST": "مِائَةِ",
+    "NUM;NOM;DU;INDF": "مِائَتَانِ",
+    "NUM;ACC;DU;INDF": "مِائَتَيْنِ",
+    "NUM;GEN;DU;INDF": "مِائَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A hundred — the round number of percentages and prizes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a hundred (followed by a genitive singular: مِائَةُ كِتَابٍ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.100"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْمَكْتَبَةِ مِائَةُ كِتَابٍ.",
+      "tr": "There are a hundred books in the library.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا مُتَأَكِّدٌ مِائَةً فِي الْمِائَةِ.",
+      "tr": "I'm a hundred percent sure.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهُ مِائَتَانِ.",
+      "tr": "He has two hundred.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Proto-Semitic *miʔat-. The frequent spelling مائة has a silent alif, added to keep the word apart from مِنْهُ in the old undotted script (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מֵאָה (meá) is the same word.",
+     "Two hundred is the dual: مِائَتَانِ."
+    ],
+    "pitfalls": [
+     "Write مائة, read miʾa: the alif is silent. The spelling مِئَة (the same word) is also common.",
+     "After 100 and 1000 the noun is genitive singular: مِائَةُ طَالِبٍ, not *مِائَةُ طُلَّابٍ."
+    ],
+    "subtleties": [
+     "300–900 are written as one word: ثَلَاثُمِائَةٍ (three hundred), with the singular مِائَة."
+    ]
+   }
+  },
+  {
+   "id": "ar:alf",
+   "lemma": "أَلْف",
+   "pos": "NUM",
+   "senses": [
+    "num.1000"
+   ],
+   "features": {
+    "root": "ء ل ف",
+    "polarity": false,
+    "countedNoun": "GEN;SG",
+    "ordinal": "الْأَلْف"
+   },
+   "class": "noun",
+   "translit": "ʾalf",
+   "forms": {
+    "NUM;NOM;SG;INDF": "أَلْفٌ",
+    "NUM;ACC;SG;INDF": "أَلْفًا",
+    "NUM;GEN;SG;INDF": "أَلْفٍ",
+    "NUM;NOM;SG;CONST": "أَلْفُ",
+    "NUM;ACC;SG;CONST": "أَلْفَ",
+    "NUM;GEN;SG;CONST": "أَلْفِ",
+    "NUM;NOM;DU;INDF": "أَلْفَانِ",
+    "NUM;ACC;DU;INDF": "أَلْفَيْنِ",
+    "NUM;GEN;DU;INDF": "أَلْفَيْنِ",
+    "NUM;NOM;PL;INDF": "آلَافٌ",
+    "NUM;ACC;PL;INDF": "آلَافًا",
+    "NUM;GEN;PL;INDF": "آلَافٍ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A thousand — the number of the Nights.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a thousand (followed by a genitive singular: أَلْفُ كِتَابٍ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1000"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَلْفُ لَيْلَةٍ وَلَيْلَةٍ",
+      "tr": "A Thousand and One Nights",
+      "register": "neutral",
+      "context": "literature",
+      "sense": "s1"
+     },
+     {
+      "text": "أَلْفُ شُكْرٍ!",
+      "tr": "A thousand thanks!",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمَدِينَةِ عِشْرُونَ أَلْفًا.",
+      "tr": "There are twenty thousand (people) in the town.",
+      "register": "neutral",
+      "context": "population",
+      "sense": "s1"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔalp- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אֶלֶף (élef) is the same word.",
+     "The letter أَلِف (ʾalif) is a different word: only the vowel tells أَلْف (thousand) from أَلِف (the letter)."
+    ],
+    "pitfalls": [
+     "Its plural آلَاف is used after 3–10: ثَلَاثَةُ آلَافٍ (3000); two thousand is the dual أَلْفَانِ.",
+     "After أَلْف the noun is genitive singular: أَلْفُ شَخْصٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:kathir",
+   "lemma": "كَثِير",
+   "pos": "ADJ",
+   "senses": [
+    "quant.many",
+    "adv.alot"
+   ],
+   "features": {
+    "root": "ك ث ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "كَثِيرَة",
+    "plurals": [
+     {
+      "form": "كَثِيرُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "many (people): كَثِيرُونَ يَظُنُّونَ ذٰلِكَ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَكْثَر",
+    "meaningForms": [
+     {
+      "form": "كَثِيرًا",
+      "what": "the accusative as an adverb: a lot",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "adv.alot",
+     "axis": "word class (the same form كَثِيرًا)",
+     "value": "the accusative of the adjective كَثِير, after a verb or شُكْرًا"
+    }
+   ],
+   "class": "quant",
+   "translit": "kaṯīr",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "كَثِيرٌ",
+    "ADJ;ACC;SG;MASC;INDF": "كَثِيرًا",
+    "ADJ;GEN;SG;MASC;INDF": "كَثِيرٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْكَثِيرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْكَثِيرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْكَثِيرِ",
+    "ADJ;NOM;SG;FEM;INDF": "كَثِيرَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "كَثِيرَةً",
+    "ADJ;GEN;SG;FEM;INDF": "كَثِيرَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْكَثِيرَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْكَثِيرَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْكَثِيرَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "كَثِيرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "كَثِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "كَثِيرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْكَثِيرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْكَثِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْكَثِيرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "كَثِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "كَثِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "كَثِيرَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْكَثِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْكَثِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْكَثِيرَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "كَثِيرُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "كَثِيرِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "كَثِيرِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْكَثِيرُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْكَثِيرِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْكَثِيرِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "كَثِيرَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "كَثِيرَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "كَثِيرَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْكَثِيرَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْكَثِيرَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْكَثِيرَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "intensity": 4,
+    "feeling": "Abundance — many, much, a lot; as كَثِيرًا, the everyday “a lot, very much”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "many, much, a lot of (after the noun, agreeing with it: كُتُبٌ كَثِيرَةٌ, أَصْدِقَاءُ كَثِيرُونَ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.many"
+     },
+     {
+      "id": "s2",
+      "def": "a lot, very much (the accusative كَثِيرًا as an adverb: شُكْرًا كَثِيرًا)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.alot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُنَا كُتُبٌ كَثِيرَةٌ.",
+      "tr": "There are many books here.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "لِي أَصْدِقَاءُ كَثِيرُونَ فِي مِصْرَ.",
+      "tr": "I have many friends in Egypt.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "شُكْرًا كَثِيرًا!",
+      "tr": "Thanks a lot!",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَثِيرٌ مِنَ النَّاسِ",
+      "tr": "many people (lit. many of the people)"
+     },
+     {
+      "text": "فِي كَثِيرٍ مِنَ الْأَحْيَانِ",
+      "tr": "often (lit. in many of the times)"
+     },
+     {
+      "text": "شُكْرًا كَثِيرًا",
+      "tr": "thanks a lot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْكَثْرَةُ تَغْلِبُ الشَّجَاعَةَ",
+      "tr": "great numbers overcome courage",
+      "kind": "proverb",
+      "meaning": "the many beat the brave; numbers win",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "عَدِيد",
+      "register": "formal",
+      "nuance": "numerous — mostly in writing: الْعَدِيدُ مِنَ الْكُتُبِ (many books)"
+     },
+     {
+      "word": "وَافِر",
+      "register": "formal",
+      "nuance": "abundant, plentiful (a supply, a share)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "قَلِيل",
+      "note": "few, little"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ك ث ر (“to be many”); Wiktionary gives no older origin. Wiktionary lists its elative أَكْثَر (more, most).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish ekseriyet (majority) and ekseriya (mostly) come from أَكْثَر, the comparative of this word."
+    ],
+    "pitfalls": [
+     "People take the plural كَثِيرُونَ (أَصْدِقَاءُ كَثِيرُونَ); things take the feminine singular كَثِيرَةٌ (كُتُبٌ كَثِيرَةٌ) — the rule for non-human plurals.",
+     "As the adverb “a lot” it does not agree: شُكْرًا كَثِيرًا, never *شُكْرًا كَثِيرَةً."
+    ],
+    "subtleties": [
+     "Two ways to say “many books”: كُتُبٌ كَثِيرَةٌ (adjective after the noun) and كَثِيرٌ مِنَ الْكُتُبِ (“much of the books”, with مِنْ, lesson 11) — the second is very common in writing."
+    ]
+   }
+  },
+  {
+   "id": "ar:qalil",
+   "lemma": "قَلِيل",
+   "pos": "ADJ",
+   "senses": [
+    "quant.few"
+   ],
+   "features": {
+    "root": "ق ل ل",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَلِيلَة",
+    "plurals": [
+     {
+      "form": "قَلِيلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "few (people)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقَلّ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "class": "quant",
+   "translit": "qalīl",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "قَلِيلٌ",
+    "ADJ;ACC;SG;MASC;INDF": "قَلِيلًا",
+    "ADJ;GEN;SG;MASC;INDF": "قَلِيلٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْقَلِيلُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْقَلِيلَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْقَلِيلِ",
+    "ADJ;NOM;SG;FEM;INDF": "قَلِيلَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "قَلِيلَةً",
+    "ADJ;GEN;SG;FEM;INDF": "قَلِيلَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْقَلِيلَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْقَلِيلَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْقَلِيلَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "قَلِيلَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "قَلِيلَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "قَلِيلَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْقَلِيلَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْقَلِيلَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْقَلِيلَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "قَلِيلَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "قَلِيلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "قَلِيلَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْقَلِيلَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْقَلِيلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْقَلِيلَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "قَلِيلُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "قَلِيلِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "قَلِيلِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْقَلِيلُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْقَلِيلِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْقَلِيلِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "قَلِيلَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "قَلِيلَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "قَلِيلَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْقَلِيلَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْقَلِيلَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْقَلِيلَاتِ",
+    "ADJ;CMPR;NOM": "أَقَلُّ",
+    "ADJ;CMPR;ACC": "أَقَلَّ",
+    "ADJ;CMPR;GEN": "أَقَلَّ",
+    "ADJ;SPRL;NOM;DEF": "الْأَقَلُّ",
+    "ADJ;SPRL;ACC;DEF": "الْأَقَلَّ",
+    "ADJ;SPRL;GEN;DEF": "الْأَقَلِّ",
+    "ADJ;SPRL;NOM;CONST": "أَقَلُّ",
+    "ADJ;SPRL;ACC;CONST": "أَقَلَّ",
+    "ADJ;SPRL;GEN;CONST": "أَقَلِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "intensity": 2,
+    "feeling": "Not much, not many — scarcity, modesty, brevity.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "few, little (after the noun, agreeing with it: كُتُبٌ قَلِيلَةٌ, أَصْدِقَاءُ قَلِيلُونَ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.few"
+     },
+     {
+      "id": "s2",
+      "def": "scarce, rare",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْكُتُبُ هُنَا قَلِيلَةٌ.",
+      "tr": "There are few books here.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهُ أَصْدِقَاءُ قَلِيلُونَ.",
+      "tr": "He has few friends.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَاءُ قَلِيلٌ فِي الصَّحْرَاءِ.",
+      "tr": "Water is scarce in the desert.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَدَدٌ قَلِيلٌ",
+      "tr": "a small number"
+     },
+     {
+      "text": "بَعْدَ قَلِيلٍ",
+      "tr": "in a little while"
+     },
+     {
+      "text": "قَلِيلٌ مِنَ الْوَقْتِ",
+      "tr": "a little time"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "خَيْرُ الْكَلَامِ مَا قَلَّ وَدَلَّ",
+      "tr": "the best speech is what is short and to the point",
+      "kind": "proverb",
+      "meaning": "say it briefly and clearly",
+      "register": "neutral"
+     },
+     {
+      "text": "قَلِيلٌ دَائِمٌ خَيْرٌ مِنْ كَثِيرٍ مُنْقَطِعٍ",
+      "tr": "a little that lasts is better than a lot that stops",
+      "kind": "saying",
+      "meaning": "steady small efforts beat big bursts",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "نَادِر",
+      "register": "neutral",
+      "nuance": "rare — seldom found or seen"
+     },
+     {
+      "word": "ضَئِيل",
+      "register": "formal",
+      "nuance": "slight, meagre (an amount, a chance)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كَثِير",
+      "note": "many, much"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ق ل ل (q l l); related to Aramaic קלל (Wiktionary). Its elative is أَقَلّ (less, least).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew קַל (kal, light, easy) belongs to the cognate root ק ל ל."
+    ],
+    "pitfalls": [
+     "Arabic does not split “few” and “a few” as English does: قَلِيل covers both, and the context gives the tone.",
+     "Things in the plural take the feminine singular (كُتُبٌ قَلِيلَةٌ), people the plural (قَلِيلُونَ)."
+    ],
+    "subtleties": [
+     "The same root gives أَقَلّ (less, the least) and قَلَّمَا (rarely)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qalilan",
+   "lemma": "قَلِيلًا",
+   "pos": "ADV",
+   "senses": [
+    "quant.alittle"
+   ],
+   "features": {
+    "root": "ق ل ل",
+    "derivedFrom": "قَلِيل (little), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "qalīlan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "intensity": 2,
+    "feeling": "A little, a bit — modest and polite.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a little, a bit (how much: with verbs and adjectives); “a little of X” = قَلِيلًا مِنْ X",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.alittle"
+     },
+     {
+      "id": "s2",
+      "def": "for a little while, a moment",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَتَكَلَّمُ الْعَرَبِيَّةَ قَلِيلًا.",
+      "tr": "I speak Arabic a little.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا مُتْعَبٌ قَلِيلًا.",
+      "tr": "I'm a little tired.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَظِرْ قَلِيلًا، مِنْ فَضْلِكَ.",
+      "tr": "Wait a moment, please.",
+      "register": "neutral",
+      "context": "requests",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَلِيلًا قَلِيلًا",
+      "tr": "little by little"
+     },
+     {
+      "text": "قَلِيلًا مِنَ الْمَاءِ",
+      "tr": "a little water"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَعْضَ الشَّيْءِ",
+      "register": "formal",
+      "nuance": "somewhat, to some extent — more formal"
+     },
+     {
+      "word": "شْوَيَّة",
+      "register": "colloquial",
+      "nuance": "a bit — the everyday word in many dialects (Egypt, the Levant, the Gulf), not MSA"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كَثِيرًا",
+      "note": "a lot"
+     }
+    ],
+    "etymology": {
+     "text": "The adverbial accusative of قَلِيل (“little, few”), from the root ق ل ل (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like German ein bisschen and Greek λίγο, it answers both “how much?” and “how long?” (wait a little)."
+    ],
+    "pitfalls": [
+     "The final -an is part of the word: qalīlan, said qalīlā at a pause; written with tanwīn and an alif: قَلِيلًا.",
+     "For “a little of something” add مِنْ (lesson 11): قَلِيلًا مِنَ الْمَاءِ, or قَلِيلٌ مِنَ الْمَاءِ when it is the subject."
+    ],
+    "subtleties": [
+     "The accusative -an turns adjectives into adverbs: كَثِيرًا (a lot), قَلِيلًا (a little), جِدًّا (very)."
+    ]
+   }
+  },
+  {
+   "id": "ar:kull",
+   "lemma": "كُلّ",
+   "pos": "NOUN",
+   "senses": [
+    "quant.all",
+    "quant.every"
+   ],
+   "features": {
+    "root": "ك ل ل",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a quantifier: it has no plural"
+    },
+    "dual": {
+     "none": "a quantifier"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "class": "quant",
+   "gender": "MASC",
+   "translit": "kull",
+   "forms": {
+    "N;NOM;SG;INDF": "كُلٌّ",
+    "N;ACC;SG;INDF": "كُلًّا",
+    "N;GEN;SG;INDF": "كُلٍّ",
+    "N;NOM;SG;CONST": "كُلُّ",
+    "N;ACC;SG;CONST": "كُلَّ",
+    "N;GEN;SG;CONST": "كُلِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Totality — all, the whole, every single one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "all, the whole (with a definite noun after it: كُلُّ الطُّلَّابِ, all the students)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.all"
+     },
+     {
+      "id": "s2",
+      "def": "every, each (with an indefinite singular after it: كُلَّ يَوْمٍ, every day)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.every"
+     },
+     {
+      "id": "s3",
+      "def": "everyone, each one (alone: كُلٌّ)",
+      "register": [
+       "formal"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كُلُّ الطُّلَّابِ هُنَا.",
+      "tr": "All the students are here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "كُلُّ النَّاسِ يَعْرِفُونَ ذٰلِكَ.",
+      "tr": "Everybody knows that.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ كُلَّ يَوْمٍ.",
+      "tr": "I drink coffee every day.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كُلَّ يَوْمٍ",
+      "tr": "every day"
+     },
+     {
+      "text": "كُلُّ شَيْءٍ",
+      "tr": "everything"
+     },
+     {
+      "text": "كُلُّ وَاحِدٍ",
+      "tr": "everyone, each one"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "لِكُلِّ مَقَامٍ مَقَالٌ",
+      "tr": "every situation has its words",
+      "kind": "proverb",
+      "meaning": "say what fits the occasion",
+      "register": "neutral"
+     },
+     {
+      "text": "كُلُّ عَامٍ وَأَنْتُمْ بِخَيْرٍ",
+      "tr": "may you be well every year",
+      "kind": "fixed expression",
+      "meaning": "the greeting for holidays and birthdays",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "جَمِيع",
+      "register": "formal",
+      "nuance": "all, the whole of a group (جَمِيعُ الطُّلَّابِ) — never “every”"
+     },
+     {
+      "word": "كَافَّة",
+      "register": "formal",
+      "nuance": "all without exception — official, written style (كَافَّةُ الْمُوَاطِنِينَ)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَعْض",
+      "note": "some"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *kull-; compare Akkadian kalûm and Classical Syriac ܟܾܠ (kul) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew כָּל / כֹּל (kol, all) is the same word.",
+     "Turkish külliye (a complex of mosque and schools) is Arabic كُلِّيَّة (in Arabic today: a faculty, a college), from this word."
+    ],
+    "pitfalls": [
+     "كُلّ is a noun: the noun after it is genitive (كُلُّ الْبُيُوتِ), and كُلّ itself takes the case of its place in the sentence (subject: كُلُّ).",
+     "Definite after it = “all the …” (كُلُّ الْكُتُبِ); an indefinite singular = “every” (كُلُّ كِتَابٍ)."
+    ],
+    "subtleties": [
+     "It can also come after the noun with a pronoun: الطُّلَّابُ كُلُّهُمْ (the students, all of them)."
+    ]
+   }
+  },
+  {
+   "id": "ar:bad",
+   "lemma": "بَعْض",
+   "pos": "NOUN",
+   "senses": [
+    "quant.some",
+    "pron.eachother"
+   ],
+   "features": {
+    "root": "ب ع ض",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a quantifier: it has no plural"
+    },
+    "dual": {
+     "none": "a quantifier"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "بَعْضُهُمْ بَعْضًا",
+      "what": "repeated: each other",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "class": "quant",
+   "gender": "MASC",
+   "translit": "baʿḍ",
+   "forms": {
+    "N;NOM;SG;INDF": "بَعْضٌ",
+    "N;ACC;SG;INDF": "بَعْضًا",
+    "N;GEN;SG;INDF": "بَعْضٍ",
+    "N;NOM;SG;CONST": "بَعْضُ",
+    "N;ACC;SG;CONST": "بَعْضَ",
+    "N;GEN;SG;CONST": "بَعْضِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A part, not the whole — some of them.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "some, a part of (with a definite plural or mass noun after it: بَعْضُ الطُّلَّابِ, some of the students)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     },
+     {
+      "id": "s2",
+      "def": "each other (repeated: بَعْضُهُمْ بَعْضًا)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.eachother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "بَعْضُ الطُّلَّابِ هُنَا.",
+      "tr": "Some of the students are here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "بَعْضُ النَّاسِ لَا يُحِبُّونَ الْقَهْوَةَ.",
+      "tr": "Some people don't like coffee.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "يُسَاعِدُ بَعْضُهُمْ بَعْضًا.",
+      "tr": "They help each other.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَعْضُ الْوَقْتِ",
+      "tr": "some time"
+     },
+     {
+      "text": "فِي بَعْضِ الْأَحْيَانِ",
+      "tr": "sometimes"
+     },
+     {
+      "text": "بَعْضَ الشَّيْءِ",
+      "tr": "somewhat, a little"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عِدَّة",
+      "register": "neutral",
+      "nuance": "several — a few countable things: عِدَّةُ كُتُبٍ"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كُلّ",
+      "note": "all"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ب ع ض; Wiktionary gives no older origin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish bazı (some) and bazen (sometimes) come from بَعْض and بَعْضًا."
+    ],
+    "pitfalls": [
+     "بَعْض is a noun: the word after it is genitive and usually definite — بَعْضُ الْكُتُبِ (some of the books), not *بَعْضُ كُتُبٌ.",
+     "Do not mix it up with بَعْدَ (after): ض and د."
+    ],
+    "subtleties": [
+     "بَعْضَ الشَّيْءِ (somewhat) is the formal “a little”."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

@@ -1,0 +1,353 @@
+{
+ "function": "fn.have",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.have",
+   "value": "topic"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "none"
+  }
+ ],
+ "summary": "‘To have’ is the verb 有 yǒu: 我有一个哥哥 ‘I have an elder brother’. 有 never changes — the same for every person and every time — and with a place first it means ‘there is / there are’: 这里有很多人 ‘there are many people here’. Its negation is irregular, 没有 (S08), never *不有.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Chinese",
+    "Meaning",
+    "German"
+   ],
+   "rows": [
+    [
+     "我有",
+     "I have",
+     "ich habe"
+    ],
+    [
+     "你有 / 您有",
+     "you have",
+     "du hast / Sie haben"
+    ],
+    [
+     "他有 / 她有",
+     "he / she has",
+     "er / sie hat"
+    ],
+    [
+     "我们有",
+     "we have",
+     "wir haben"
+    ],
+    [
+     "你们有",
+     "you have",
+     "ihr habt"
+    ],
+    [
+     "他们有",
+     "they have",
+     "sie haben"
+    ]
+   ],
+   "caption": "One form for everybody",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "owner",
+    "有",
+    "number + measure word",
+    "thing / person"
+   ],
+   "caption": "我 + 有 + 两个 + 弟弟"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "有 — having (owner first)",
+     "points": [
+      "我有三本书 ‘I have three books’",
+      "她有一个女儿 ‘she has a daughter’"
+     ]
+    },
+    {
+     "title": "有 — there is (place first)",
+     "points": [
+      "这里有很多人 ‘there are many people here’",
+      "我家有四口人 ‘my family has four people’"
+     ]
+    },
+    {
+     "title": "在 — is at (the known thing first)",
+     "points": [
+      "书在这里 ‘the book is here’",
+      "我妈妈在那里 ‘my mother is over there’"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "topic"
+    },
+    {
+     "feature": "syn.beSplit",
+     "value": "different"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One verb for ‘have’ and ‘there is’",
+   "text": "有 means ‘have’ when an owner comes first (我有两个弟弟) and ‘there is’ when a place comes first (这里有很多人) — one verb, read from what stands before it.",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "topic"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Counting a family",
+   "text": "我家有四口人 ‘there are four of us in my family’ — family members are counted with the measure word 口 ‘mouth’."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No 不 with 有",
+   "text": "有 is the one verb that is negated only with 没: 我没有哥哥 (S08), never *我不有."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who has it? → owner first, then 有.",
+   "One thing or a number of things? → number + measure word + noun after 有: 我有两个弟弟.",
+   "Is it what exists at a place? → place first: 这里有… ‘there is … here’.",
+   "Is it where a known thing is? → thing + 在 + place (书在这里), not 有.",
+   "Do I need ‘not have’? → 没有 (S08), never 不有."
+  ],
+  "steps": [
+   "Owner (or place)",
+   "有",
+   "what is had — with number and measure word if counted"
+  ]
+ },
+ "traps": [
+  "*我是有一个哥哥 → 我有一个哥哥 (no 是).",
+  "*我不有 → 我没有.",
+  "*这里是很多人 → 这里有很多人 (existence uses 有).",
+  "*书有这里 → 书在这里."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:you"
+  ]
+ },
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.have"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘I have two younger brothers.’",
+   "options": [
+    "我有两个弟弟。",
+    "我是两个弟弟。",
+    "我有二个弟弟。"
+   ],
+   "answer": "我有两个弟弟。",
+   "why": "有 for ‘have’; 两 before a measure word."
+  },
+  {
+   "q": "‘There are many books here.’",
+   "options": [
+    "这里有很多书。",
+    "这里在很多书。",
+    "很多书有这里。"
+   ],
+   "answer": "这里有很多书。",
+   "why": "Place first + 有 = ‘there is / are’."
+  },
+  {
+   "q": "‘The book is here.’ (a book we know)",
+   "options": [
+    "书在这里。",
+    "书有这里。",
+    "这里是书有。"
+   ],
+   "answer": "书在这里。",
+   "why": "A known thing + 在 + place."
+  },
+  {
+   "q": "The form of 有 after 他们?",
+   "options": [
+    "有",
+    "有们",
+    "有了"
+   ],
+   "answer": "有",
+   "why": "有 never changes for the person."
+  },
+  {
+   "q": "我家有四 __ 人",
+   "options": [
+    "口",
+    "本",
+    "张"
+   ],
+   "answer": "口",
+   "why": "Family members are counted with 口."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek έχω ‘have’ conjugates (έχω, έχεις, έχει), and ‘there is’ is υπάρχει (in speech also έχει: έχει ψωμί;). Chinese 有 does both and never changes: 我有面包, 这里有面包. Negation: δεν έχω ~ 没有, never *不有."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian у меня есть ‘at me there is’ uses one word, есть, for ‘have’ and ‘there is’ (Здесь есть кафе) — so does Chinese 有. нет (у меня нет …) ~ 没有: both negate ‘have’ and ‘there is’ with a special form."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has tener ‘have’ and hay ‘there is’; Chinese uses 有 for both: tengo dos hermanos ~ 我有两个哥哥, hay mucha gente ~ 这里有很多人."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English has two constructions, ‘I have’ and ‘there is’; Chinese has one verb, 有, with the owner or the place first: 我有书 / 桌子上有书. ‘There is’ never uses 是: *这里是很多人."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French il y a ‘there is’ already uses avoir ‘have’; Chinese goes all the way: 有 is ‘have’ and ‘there is’ (j’ai un frère ~ 我有一个哥哥, il y a beaucoup de monde ~ 这里有很多人)."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German haben and es gibt are two constructions; Chinese 有 covers both: ich habe ein Buch ~ 我有一本书, hier gibt es viele Leute ~ 这里有很多人."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi says ‘near me is a car’ (मेरे पास कार है) and ‘my two brothers are’ (मेरे दो भाई हैं); Chinese uses one verb with the owner as subject: 我有一辆车, 我有两个哥哥."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian dāshtan ‘have’ (dāram, dāri) ~ 有, but conjugated; ‘there is’ is hast. Chinese uses 有 for both and never changes it."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi says ‘with me is a book’ (माझ्याकडे पुस्तक आहे) and ‘to me is a brother’ (मला एक भाऊ आहे); Chinese makes the owner the subject of 有: 我有一本书, 我有一个哥哥."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic has no verb ‘have’: ʿindī kitāb ‘at me (is) a book’, and hunāka for ‘there is’. Chinese uses the verb 有 for both, with the owner as subject: 我有一本书."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew yesh li ‘there is to me’ uses yesh for ‘have’ and ‘there is’ and ein for both negatives — just like 有 / 没有. The difference: Chinese makes the owner the subject (我有), Hebrew puts him after le- (li)."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish var / yok cover ‘there is’ and ‘have’ (kardeşim var ‘I have a brother’, burada çay var ‘there is tea here’) — Chinese 有 / 没有 work the same way, but the owner is a plain subject: 我有一个哥哥."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese ある / いる mean ‘there is’ and also ‘have’ (車がある ‘I have a car’), split by animacy (いる for people and animals). Chinese 有 serves for everything, living or not."
+  },
+  {
+   "for": "ko",
+   "rel": "trap",
+   "text": "Korean 있다 is ‘there is’, ‘have’ and also ‘be at’ (학교에 있어요 ‘is at school’); Chinese splits it: 有 for ‘have / there is’, 在 for ‘be at’ (他在学校)."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish says ‘at me is a car’ (minulla on auto); Chinese says ‘I have a car’, with the owner as subject: 我有一辆车."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian says ‘to me is my car’ (nekem van autóm) and has a special negative, nincs; Chinese has a plain verb ‘have’, 有, and a special negative, 没有."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili ‘have’ is ‘be with’: nina gari ‘I have a car’, sina ‘I don’t have’; ‘there is’ is kuna. Chinese uses one verb for both, 有, and one negative, 没有."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda ‘have’ is ‘be with’ (nnina ‘I have’), with the person prefix; Chinese has one unchanging verb, 有."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese có is ‘have’ and ‘there is’, exactly like 有: tôi có hai anh trai ~ 我有两个哥哥, ở đây có nhiều người ~ 这里有很多人."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses ‘have’ with a suffix on the noun, inside one verb word (‘brother-have-I’). Chinese keeps separate words: 我 + 有 + 一个哥哥."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.have",
+   "note": "German haben is conjugated (ich habe, du hast, er hat) and takes the accusative; Chinese 有 never changes."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.have",
+   "note": "Arabic has no verb ‘to have’: عِنْدِي ‘at me’ or لِي ‘to me’ + the thing; Chinese 有 is a real verb, but it also means ‘there is’."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.have",
+   "note": "Hebrew says יֵשׁ לִי ‘there is to me’ — like Chinese 有, one word serves for ‘there is’ and ‘have’."
+  }
+ ]
+}

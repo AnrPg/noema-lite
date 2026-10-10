@@ -1,0 +1,576 @@
+{
+ "function": "fn.ordinals",
+ "status": "realized",
+ "summary": "Ordinal numbers are adjectives. From three to ten they are built on the root of the number with the pattern فَاعِل: ثَلَاثَة → ثَالِث “third”, أَرْبَعَة → رَابِع, خَمْسَة → خَامِس … عَشَرَة → عَاشِر. “Second” is ثَانٍ (definite الثَّانِي), and “first” is a word of its own, أَوَّل, feminine أُولَى. Unlike the cardinals 3–10 they have no gender polarity: they follow the noun and agree with it in gender, case and definiteness like any adjective — الْيَوْمُ الثَّالِثُ “the third day”, السَّاعَةُ الثَّالِثَةُ “the third hour = three o’clock”. “Last” is الْأَخِير after the noun (or آخِر before it, in a construct). Dates: الْيَوْمُ هُوَ الْخَامِسُ مِنْ مَايُو “today is the fifth of May” — the masculine ordinal (for الْيَوْم) + مِنْ + the month; “on” is فِي + genitive: فِي الْخَامِسِ مِنْ مَايُو. The clock: السَّاعَةُ + the feminine ordinal, with وَالنِّصْفُ “half past”, وَالرُّبْعُ “a quarter past” and إِلَّا رُبْعًا “a quarter to”; one o’clock is السَّاعَةُ الْوَاحِدَةُ. Centuries take ordinals too: الْقَرْنُ الْعَاشِرُ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "cardinal",
+    "ordinal (m.)",
+    "ordinal (f.)",
+    "say (m.)"
+   ],
+   "rows": [
+    [
+     "1",
+     "وَاحِد",
+     "أَوَّل",
+     "أُولَى",
+     "ʾawwal"
+    ],
+    [
+     "2",
+     "اِثْنَان",
+     "ثَانٍ",
+     "ثَانِيَة",
+     "ṯānī"
+    ],
+    [
+     "3",
+     "ثَلَاثَة",
+     "ثَالِث",
+     "ثَالِثَة",
+     "ṯāliṯ"
+    ],
+    [
+     "4",
+     "أَرْبَعَة",
+     "رَابِع",
+     "رَابِعَة",
+     "rābiʿ"
+    ],
+    [
+     "5",
+     "خَمْسَة",
+     "خَامِس",
+     "خَامِسَة",
+     "ḫāmis"
+    ],
+    [
+     "6",
+     "سِتَّة",
+     "سَادِس",
+     "سَادِسَة",
+     "sādis"
+    ],
+    [
+     "7",
+     "سَبْعَة",
+     "سَابِع",
+     "سَابِعَة",
+     "sābiʿ"
+    ],
+    [
+     "8",
+     "ثَمَانِيَة",
+     "ثَامِن",
+     "ثَامِنَة",
+     "ṯāmin"
+    ],
+    [
+     "9",
+     "تِسْعَة",
+     "تَاسِع",
+     "تَاسِعَة",
+     "tāsiʿ"
+    ],
+    [
+     "10",
+     "عَشَرَة",
+     "عَاشِر",
+     "عَاشِرَة",
+     "ʿāšir"
+    ]
+   ],
+   "caption": "From three on the ordinal is the root of the number on the pattern فَاعِل; “first” and “second” are special (أَوَّل; ثَانٍ from the root of اِثْنَان).",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Ordinals agree, cardinals reverse.",
+   "text": "ثَلَاثَةُ أَيَّامٍ “three days” (the number looks feminine with a masculine noun) — but الْيَوْمُ الثَّالِثُ “the third day” (masculine with masculine), السَّاعَةُ الثَّالِثَةُ “the third hour” (feminine with feminine). The ordinal is an ordinary adjective after its noun."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "ثَانٍ is defective.",
+   "text": "Indefinite ثَانٍ (nominative and genitive), ثَانِيًا (accusative); definite الثَّانِي (nominative and genitive), الثَّانِيَ (accusative): فِي الطَّابِقِ الثَّانِي “on the second floor”. The feminine ثَانِيَة / الثَّانِيَة is regular."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "After the noun (adjective)",
+     "points": [
+      "الْيَوْمُ الْأَوَّلُ / الْمَرَّةُ الْأُولَى",
+      "الْيَوْمُ الْأَخِيرُ / الْمَحَطَّةُ الْأَخِيرَةُ"
+     ]
+    },
+    {
+     "title": "Before the noun (construct)",
+     "points": [
+      "أَوَّلُ يَوْمٍ / أَوَّلُ مَرَّةٍ",
+      "آخِرُ يَوْمٍ / آخِرُ مَحَطَّةٍ"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "noun-adj"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "time",
+    "Arabic"
+   ],
+   "rows": [
+    [
+     "1:00",
+     "السَّاعَةُ الْوَاحِدَةُ"
+    ],
+    [
+     "2:00",
+     "السَّاعَةُ الثَّانِيَةُ"
+    ],
+    [
+     "3:15",
+     "السَّاعَةُ الثَّالِثَةُ وَالرُّبْعُ"
+    ],
+    [
+     "4:30",
+     "السَّاعَةُ الرَّابِعَةُ وَالنِّصْفُ"
+    ],
+    [
+     "5:45",
+     "السَّاعَةُ السَّادِسَةُ إِلَّا رُبْعًا"
+    ],
+    [
+     "8:20",
+     "السَّاعَةُ الثَّامِنَةُ وَعِشْرُونَ دَقِيقَةً"
+    ],
+    [
+     "11:00",
+     "السَّاعَةُ الْحَادِيَةَ عَشْرَةَ"
+    ],
+    [
+     "12:00",
+     "السَّاعَةُ الثَّانِيَةَ عَشْرَةَ"
+    ]
+   ],
+   "caption": "The clock: السَّاعَةُ + the feminine ordinal (the hour is feminine). One o’clock uses the cardinal الْوَاحِدَةُ; eleven and twelve are compound ordinals. Minutes are added with وَ: وَعِشْرُونَ دَقِيقَةً.",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Half past, quarter past, quarter to.",
+   "text": "وَالنِّصْفُ “and the half”: الثَّالِثَةُ وَالنِّصْفُ = 3:30 (half past the hour just gone); وَالرُّبْعُ “and the quarter” = a quarter past; إِلَّا رُبْعًا “less a quarter” = a quarter to: الرَّابِعَةُ إِلَّا رُبْعًا = 3:45."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "“At what time?”",
+   "text": "“At” is فِي (or عِنْدَ) + the genitive: فِي السَّاعَةِ السَّادِسَةِ “at six o’clock”. Asking: فِي أَيِّ سَاعَةٍ؟ “at what time?” or simply مَتَى؟ — and “what time is it?” is كَمِ السَّاعَةُ؟"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Arabic",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "الْيَوْمُ هُوَ الْخَامِسُ مِنْ مَايُو.",
+     "Today is the fifth of May."
+    ],
+    [
+     "عِيدُ مِيلَادِي فِي الْأَوَّلِ مِنْ يَنَايِرَ.",
+     "My birthday is on the first of January."
+    ],
+    [
+     "وَصَلْنَا فِي الثَّانِي مِنْ مَايُو.",
+     "We arrived on the second of May."
+    ],
+    [
+     "سَنُسَافِرُ فِي الْعَاشِرِ مِنْ أَغُسْطُسَ.",
+     "We will travel on the tenth of August."
+    ]
+   ],
+   "caption": "Dates: the masculine ordinal (agreeing with an understood الْيَوْم “the day”) + مِنْ + the month; with فِي the ordinal is genitive."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Above ten.",
+   "text": "11th الْحَادِيَ عَشَرَ (f. الْحَادِيَةَ عَشْرَةَ), 12th الثَّانِيَ عَشَرَ (f. الثَّانِيَةَ عَشْرَةَ), 13th الثَّالِثَ عَشَرَ …; from 20 on the ordinal is the cardinal with the article: الْعِشْرُونَ “the twentieth”, الْحَادِي وَالْعِشْرُونَ “the twenty-first”: الْقَرْنُ الْحَادِي وَالْعِشْرُونَ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Fractions are nouns.",
+   "text": "نِصْف “half”, ثُلُث “a third”, رُبْع “a quarter” (from the same roots as the numbers) stand before what they divide, in a construct: نِصْفُ سَاعَةٍ “half an hour”, رُبْعُ سَاعَةٍ “a quarter of an hour”, نِصْفُ الْعَصِيرِ “half the juice”."
+  },
+  {
+   "t": "p",
+   "text": "Written dates usually have digits (5/5/2026); read aloud, formal Arabic says the ordinal (الْخَامِسُ مِنْ مَايُو), while everyday speech often says the cardinal. The month names have two series (مَايُو / أَيَّار, lesson 15); the Hijri calendar has its own months."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a rank (first, second …) or a count (one, two …)? A rank → the ordinal, an adjective after the noun.",
+   "Is the noun masculine or feminine? The ordinal agrees (no polarity): الْيَوْمُ الثَّالِثُ / السَّاعَةُ الثَّالِثَةُ.",
+   "Does the noun have the article? Then the ordinal has it too: الْبَيْتُ الثَّالِثُ (but بَيْتٌ ثَالِثٌ “a third house”).",
+   "Is it “first” or “second”? → أَوَّل / أُولَى; ثَانٍ / الثَّانِي / الثَّانِيَة (defective in the masculine).",
+   "A clock time? → السَّاعَةُ + feminine ordinal (+ وَالنِّصْفُ / وَالرُّبْعُ / إِلَّا رُبْعًا); one o’clock is الْوَاحِدَةُ.",
+   "A date? → masculine ordinal + مِنْ + month; “on” = فِي + genitive."
+  ]
+ },
+ "traps": [
+  "No polarity with ordinals: الْيَوْمُ الثَّالِثُ (not *الثَّالِثَةُ) — only the cardinals 3–10 take the “opposite” form.",
+  "One o’clock is السَّاعَةُ الْوَاحِدَةُ, not *الْأُولَى.",
+  "ثَانٍ is defective: الثَّانِي in the nominative and genitive, الثَّانِيَ in the accusative.",
+  "أَوَّلُ + an indefinite noun is “the first …”: أَوَّلُ يَوْمٍ; أَوَّلُ الْيَوْمِ (with the article) is “the beginning of the day”.",
+  "“Half past three” counts from the hour that has passed: الثَّالِثَةُ وَالنِّصْفُ = 3:30.",
+  "آخِر “last” and آخَر “other” differ in one vowel: آخِرُ يَوْمٍ “the last day” / يَوْمٌ آخَرُ “another day”."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:awwal",
+   "ar:thani",
+   "ar:thalith",
+   "ar:rabi_ord",
+   "ar:khamis_ord",
+   "ar:sadis",
+   "ar:sabi",
+   "ar:thamin",
+   "ar:tasi",
+   "ar:ashir",
+   "ar:akhir",
+   "ar:nisf",
+   "ar:rub"
+  ]
+ },
+ "paradigmCells": [
+  "ADJ;NOM;SG;MASC;DEF",
+  "ADJ;ACC;SG;MASC;DEF",
+  "ADJ;GEN;SG;MASC;DEF",
+  "ADJ;NOM;SG;FEM;DEF",
+  "ADJ;ACC;SG;FEM;DEF",
+  "ADJ;GEN;SG;FEM;DEF",
+  "ADJ;NOM;SG;MASC;INDF",
+  "ADJ;NOM;SG;FEM;INDF"
+ ],
+ "needs": {
+  "ADJ": 5
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "ADJ",
+   "lemmas": [
+    "ar:awwal",
+    "ar:thani",
+    "ar:thalith",
+    "ar:rabi_ord",
+    "ar:khamis_ord",
+    "ar:sadis",
+    "ar:sabi",
+    "ar:thamin",
+    "ar:tasi",
+    "ar:ashir",
+    "ar:akhir"
+   ],
+   "cells": [
+    "ADJ;NOM;SG;MASC;DEF",
+    "ADJ;ACC;SG;MASC;DEF",
+    "ADJ;GEN;SG;MASC;DEF",
+    "ADJ;NOM;SG;FEM;DEF",
+    "ADJ;ACC;SG;FEM;DEF",
+    "ADJ;GEN;SG;FEM;DEF",
+    "ADJ;NOM;SG;MASC;INDF",
+    "ADJ;NOM;SG;FEM;INDF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“the third day” — which is correct?",
+   "options": [
+    "الْيَوْمُ الثَّالِثُ",
+    "الْيَوْمُ الثَّالِثَةُ",
+    "ثَلَاثَةُ الْيَوْمِ",
+    "الْيَوْمُ ثَلَاثَةٌ"
+   ],
+   "answer": "الْيَوْمُ الثَّالِثُ",
+   "why": "The ordinal agrees like an adjective: masculine with الْيَوْم; no polarity."
+  },
+  {
+   "q": "“It is one o’clock.”",
+   "options": [
+    "السَّاعَةُ الْوَاحِدَةُ.",
+    "السَّاعَةُ الْأُولَى.",
+    "السَّاعَةُ الْأَوَّلُ.",
+    "السَّاعَةُ وَاحِدٌ."
+   ],
+   "answer": "السَّاعَةُ الْوَاحِدَةُ.",
+   "why": "For one o’clock Arabic uses the feminine cardinal, not the ordinal."
+  },
+  {
+   "q": "السَّاعَةُ الرَّابِعَةُ إِلَّا رُبْعًا is …",
+   "options": [
+    "3:45",
+    "4:15",
+    "4:45",
+    "4:30"
+   ],
+   "answer": "3:45",
+   "why": "إِلَّا رُبْعًا “less a quarter”: four less a quarter."
+  },
+  {
+   "q": "“on the second floor” — which form?",
+   "options": [
+    "فِي الطَّابِقِ الثَّانِي",
+    "فِي الطَّابِقِ الثَّانِيِ",
+    "فِي الطَّابِقِ الثَّانِيَ",
+    "فِي الطَّابِقِ الثَّانٍ"
+   ],
+   "answer": "فِي الطَّابِقِ الثَّانِي",
+   "why": "ثَانٍ is defective: the definite genitive is الثَّانِي, with no vowel on the ي."
+  },
+  {
+   "q": "“the first time” — which is NOT correct?",
+   "options": [
+    "الْمَرَّةُ الْأَوَّلُ",
+    "الْمَرَّةُ الْأُولَى",
+    "أَوَّلُ مَرَّةٍ"
+   ],
+   "answer": "الْمَرَّةُ الْأَوَّلُ",
+   "why": "After a feminine noun “first” is أُولَى; before the noun the construct أَوَّلُ مَرَّةٍ is also right."
+  },
+  {
+   "q": "Today is the fifth of May:",
+   "options": [
+    "الْيَوْمُ هُوَ الْخَامِسُ مِنْ مَايُو.",
+    "الْيَوْمُ هُوَ خَمْسَةُ مَايُو.",
+    "الْيَوْمُ هُوَ الْخَامِسَةُ مِنْ مَايُو."
+   ],
+   "answer": "الْيَوْمُ هُوَ الْخَامِسُ مِنْ مَايُو.",
+   "why": "Formal Arabic uses the masculine ordinal (for الْيَوْم) + مِنْ + the month."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.ordinals",
+   "note": "Hebrew ordinals 1–10 are adjectives on a pattern with -i (שְׁלִישִׁי “third”, feminine שְׁלִישִׁית); above ten Hebrew uses cardinals, Arabic keeps ordinals (الْحَادِيَ عَشَرَ)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.ordinals",
+   "note": "German ordinals also agree (der dritte Tag, die dritte Stunde) and dates use them (der fünfte Mai); but the clock uses cardinals (um drei Uhr), and halb vier is 3:30, where Arabic says الثَّالِثَةُ وَالنِّصْفُ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.ordinals",
+   "note": "Chinese makes ordinals with 第 (第三天) and writes dates from big to small (五月五日); Arabic puts the day first: الْخَامِسُ مِنْ مَايُو."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "The cardinals 3–10 take the opposite gender (ثَلَاثَةُ أَيَّامٍ); the ordinals simply agree (الْيَوْمُ الثَّالِثُ)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "num.agreement",
+   "value": "extensive"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-past"
+  },
+  {
+   "feature": "syn.adjectiveNoun",
+   "value": "noun-adj"
+  },
+  {
+   "feature": "num.base",
+   "value": "decimal"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek ordinals are adjectives that agree too (τρίτος, τρίτη); the Greek clock uses cardinals (στις τρεις), while Arabic uses the feminine ordinal: فِي السَّاعَةِ الثَّالِثَةِ."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian ordinals agree like adjectives (третий день, третья неделя), as in Arabic; Russian names the hour in progress with an ordinal (пятый час = after four), while Arabic’s الْخَامِسَةُ is five o’clock exactly."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish ordinals agree (primero, primera), but dates use cardinals (el cinco de mayo); formal Arabic uses the ordinal: الْخَامِسُ مِنْ مَايُو."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English adds -th to the number; Arabic builds 3rd–10th from the root on one pattern (ثَالِث، رَابِع، خَامِس) and makes them agree in gender: الْيَوْمُ الثَّالِثُ / السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French dates use cardinals except the first (le premier mai, le cinq mai); Arabic uses ordinals for every day (الْأَوَّلُ مِنْ مَايُو، الْخَامِسُ مِنْ مَايُو)."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German ordinals agree (der dritte Tag, die dritte Stunde) and dates use them (der fünfte Mai), as in Arabic; the clock differs: um drei Uhr, and halb vier = 3:30, whereas Arabic says الثَّالِثَةُ وَالنِّصْفُ."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has special words for the first ordinals (पहला, दूसरा, तीसरा, चौथा, छठा) and -वाँ for the rest (पाँचवाँ); Arabic forms 3rd–10th regularly on فَاعِل and has special words only for 1st and 2nd."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adds -om to the cardinal (سوم “third”, پنجم “fifth”); Arabic changes the word itself on the pattern فَاعِل (ثَالِث، خَامِس)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi has special words for the first ordinals (पहिला, दुसरा, तिसरा, चौथा) and -वा after (पाचवा); in Arabic only “first” and “second” are irregular."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew ordinals 1–10 are adjectives too, with -i (שְׁלִישִׁי “third”, רְבִיעִי “fourth”), and agree in gender; above ten Hebrew uses cardinals, while Arabic keeps ordinals (الْحَادِيَ عَشَرَ)."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds -(I)ncI to the cardinal (üçüncü “third”), and the clock and dates use cardinals (saat üç, beş mayıs); Arabic uses ordinals for both."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese makes ordinals with 第 or -番目 (三番目) and says the hour with a cardinal + 時 (三時); Arabic uses the feminine ordinal: السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean uses 째 / 번째 for ordinals (셋째, 세 번째) and native cardinals for the hour (세 시); Arabic uses the feminine ordinal for the hour."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish ordinals agree in case and number (kolmas, kolmannen) and dates use them (viides toukokuuta); the clock uses cardinals (kello kolme), while Arabic uses the ordinal."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adds -dik (harmadik, ötödik) and says dates with a day form (május ötödike); Arabic uses the ordinal adjective after the noun (الْيَوْمُ الْخَامِسُ)."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili forms ordinals with -a + the number (siku ya tatu “the third day”) and counts the hours from sunrise (saa moja = seven o’clock); Arabic has a special ordinal form that agrees in gender, and its clock starts at midnight and noon."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda, like Swahili, counts clock hours from sunrise (essaawa emu = seven o’clock); Arabic counts from midnight and noon: السَّاعَةُ السَّابِعَةُ = seven o’clock."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese makes ordinals with 第 (第三天) and writes dates from big to small (五月五日); Arabic puts the day first: الْخَامِسُ مِنْ مَايُو."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese puts thứ before the number (thứ ba “third” — also Tuesday) and dates go day–month (ngày 5 tháng 5); Arabic uses an ordinal adjective after the noun."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut “first” is sivulliq, “the one in front”, a word of its own; Arabic “first”, أَوَّل, is also not built from “one”, while 3rd–10th follow one pattern (ثَالِث … عَاشِر)."
+  }
+ ]
+}

@@ -1,0 +1,9282 @@
+{
+ "sentences": [
+  {
+   "id": "he.f5.001",
+   "frame": "fr.go.to",
+   "text": "אֲנִי הוֹלֵךְ לַשּׁוּק.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַשּׁוּק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "שּׁוּק",
+       "l": "he:shuk",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) am going to the market.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.002",
+   "frame": "fr.go.to",
+   "text": "אֲנִי הוֹלֶכֶת לַשּׁוּק.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֶכֶת",
+     "l": "he:halach",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לַשּׁוּק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "שּׁוּק",
+       "l": "he:shuk",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (f.) am going to the market.",
+   "variantOf": "he.f5.001",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.003",
+   "frame": "fr.go.to",
+   "text": "אֲנִי לֹא הוֹלֵךְ לַשּׁוּק.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַשּׁוּק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "שּׁוּק",
+       "l": "he:shuk",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "I (m.) am not going to the market.",
+   "variantOf": "he.f5.001",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.004",
+   "frame": "fr.go.to",
+   "text": "הוּא הוֹלֵךְ הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "He is going home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.005",
+   "frame": "fr.go.to",
+   "text": "הוּא הוֹלֵךְ הַבַּיְתָה?",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is he going home?",
+   "variantOf": "he.f5.004",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.006",
+   "frame": "fr.go.to",
+   "text": "הֵם הוֹלְכִים הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "הוֹלְכִים",
+     "l": "he:halach",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "They are going home.",
+   "variantOf": "he.f5.004",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.007",
+   "frame": "fr.go.to",
+   "text": "הַיְּלָדִים הוֹלְכִים לַפַּארְק.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הוֹלְכִים",
+     "l": "he:halach",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לַפַּארְק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "The children are going to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.008",
+   "frame": "fr.go.to",
+   "text": "אַתָּה הוֹלֵךְ לָעֲבוֹדָה בָּרֶגֶל.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בָּרֶגֶל",
+     "l": "he:baregel"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "You (m.) walk to work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.009",
+   "frame": "fr.go.to",
+   "text": "אַתָּה הוֹלֵךְ לָעֲבוֹדָה בָּרֶגֶל?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בָּרֶגֶל",
+     "l": "he:baregel"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m.) walk to work?",
+   "variantOf": "he.f5.008",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.010",
+   "frame": "fr.go.to",
+   "text": "אַתְּ הוֹלֶכֶת לָעֲבוֹדָה בָּרֶגֶל?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "הוֹלֶכֶת",
+     "l": "he:halach",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בָּרֶגֶל",
+     "l": "he:baregel"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f.) walk to work?",
+   "variantOf": "he.f5.009",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.011",
+   "frame": "fr.go.to",
+   "text": "לְאָן אַתָּה הוֹלֵךְ?",
+   "tokens": [
+    {
+     "t": "לְאָן",
+     "l": "he:lean"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "gloss": "Where are you (m.) going?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.012",
+   "frame": "fr.go.to",
+   "text": "לְאָן אַתְּ הוֹלֶכֶת?",
+   "tokens": [
+    {
+     "t": "לְאָן",
+     "l": "he:lean"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "הוֹלֶכֶת",
+     "l": "he:halach",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "gloss": "Where are you (f.) going?",
+   "variantOf": "he.f5.011",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.013",
+   "frame": "fr.go.to",
+   "text": "לְאָן הָאוֹטוֹבּוּס נוֹסֵעַ?",
+   "tokens": [
+    {
+     "t": "לְאָן",
+     "l": "he:lean"
+    },
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "נוֹסֵעַ",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "Where does the bus go?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.014",
+   "frame": "fr.from",
+   "text": "אִמָּא בָּאָה מֵהָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בָּאָה",
+     "l": "he:ba",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֵהָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הָעֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Mum is coming from work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.015",
+   "frame": "fr.from",
+   "text": "אִמָּא בָּאָה מֵהָעֲבוֹדָה?",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בָּאָה",
+     "l": "he:ba",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֵהָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הָעֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is Mum coming from work?",
+   "variantOf": "he.f5.014",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.016",
+   "frame": "fr.from",
+   "text": "מֵאֵיפֹה אַתָּה בָּא?",
+   "tokens": [
+    {
+     "t": "מֵאֵיפֹה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אֵיפֹה",
+       "l": "he:eifo"
+      }
+     ]
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Where are you (m.) coming from?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.017",
+   "frame": "fr.from",
+   "text": "מֵאֵיפֹה אַתְּ בָּאָה?",
+   "tokens": [
+    {
+     "t": "מֵאֵיפֹה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אֵיפֹה",
+       "l": "he:eifo"
+      }
+     ]
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "בָּאָה",
+     "l": "he:ba",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.question.wh",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Where are you (f.) coming from?",
+   "variantOf": "he.f5.016",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.018",
+   "frame": "fr.from",
+   "text": "הֵם חוֹזְרִים מֵהַשּׁוּק.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "חוֹזְרִים",
+     "l": "he:chazar",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "מֵהַשּׁוּק",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַשּׁוּק",
+       "l": "he:shuk",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "They are coming back from the market.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.019",
+   "frame": "fr.go.to",
+   "text": "אֲנַחְנוּ נוֹסְעִים לְחֵיפָה בְּאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": "בְּאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "We are going to Haifa by bus.",
+   "alts": [
+    "אֲנַחְנוּ נוֹסְעִים לְחֵיפָה בָּאוֹטוֹבּוּס."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.020",
+   "frame": "fr.go.to",
+   "text": "אֲנַחְנוּ לֹא נוֹסְעִים לְחֵיפָה בְּאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": "בְּאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "We are not going to Haifa by bus.",
+   "variantOf": "he.f5.019",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.021",
+   "frame": "fr.go.to",
+   "text": "הִיא נוֹסַעַת לָעֲבוֹדָה בָּרַכֶּבֶת.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "נוֹסַעַת",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בָּרַכֶּבֶת",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "רַכֶּבֶת",
+       "l": "he:rakevet",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She goes to work by train.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.022",
+   "frame": "fr.go.to",
+   "text": "הוּא נוֹסֵעַ לָעֲבוֹדָה בָּרַכֶּבֶת.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "נוֹסֵעַ",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בָּרַכֶּבֶת",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "רַכֶּבֶת",
+       "l": "he:rakevet",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He goes to work by train.",
+   "variantOf": "he.f5.021",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.023",
+   "frame": "fr.go.to",
+   "text": "הִיא נוֹסַעַת בְּמוֹנִית לִשְׂדֵה הַתְּעוּפָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "נוֹסַעַת",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בְּמוֹנִית",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מוֹנִית",
+       "l": "he:monit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "לִשְׂדֵה הַתְּעוּפָה",
+     "parts": [
+      {
+       "t": "לִ",
+       "l": "he:le",
+       "f": "ADP;ALT"
+      },
+      {
+       "t": "שְׂדֵה הַתְּעוּפָה",
+       "l": "he:sde-teufa",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She is going to the airport by taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.024",
+   "frame": "fr.go.to",
+   "text": "הַמָּטוֹס מַגִּיעַ לְאֵילַת.",
+   "tokens": [
+    {
+     "t": "הַמָּטוֹס",
+     "l": "he:matos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לְאֵילַת",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "אֵילַת",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The plane arrives in Eilat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.025",
+   "frame": "fr.from",
+   "text": "הַמָּטוֹס מַגִּיעַ מֵאַתּוּנָה.",
+   "tokens": [
+    {
+     "t": "הַמָּטוֹס",
+     "l": "he:matos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מֵאַתּוּנָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אַתּוּנָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The plane is arriving from Athens.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.026",
+   "frame": "fr.go.to",
+   "text": "אַבָּא נוֹהֵג בַּמְּכוֹנִית.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "נוֹהֵג",
+     "l": "he:nahag",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּמְּכוֹנִית",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מְּכוֹנִית",
+       "l": "he:mechonit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Dad is driving the car.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.027",
+   "frame": "fr.go.to",
+   "text": "אַבָּא לֹא נוֹהֵג בַּמְּכוֹנִית.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "נוֹהֵג",
+     "l": "he:nahag",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּמְּכוֹנִית",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מְּכוֹנִית",
+       "l": "he:mechonit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "Dad isn’t driving the car.",
+   "variantOf": "he.f5.026",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.028",
+   "frame": "fr.go.to",
+   "text": "אִמָּא נוֹהֶגֶת לָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "נוֹהֶגֶת",
+     "l": "he:nahag",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Mum drives to work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.029",
+   "frame": "fr.go.to",
+   "text": "הַיֶּלֶד רָץ לַתַּחֲנָה.",
+   "tokens": [
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "רָץ",
+     "l": "he:rats",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The boy runs to the stop.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.030",
+   "frame": "fr.go.to",
+   "text": "הַיְּלָדִים רָצִים לַתַּחֲנָה.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "רָצִים",
+     "l": "he:rats",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children run to the stop.",
+   "variantOf": "he.f5.029",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.031",
+   "frame": "fr.go.to",
+   "text": "הָאוֹטוֹבּוּס מַגִּיעַ לַתַּחֲנָה.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The bus is arriving at the stop.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.032",
+   "frame": "fr.go.to",
+   "text": "הָאוֹטוֹבּוּס מַגִּיעַ לַתַּחֲנָה?",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the bus arriving at the stop?",
+   "variantOf": "he.f5.031",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.033",
+   "frame": "fr.go.to",
+   "text": "הָרַכֶּבֶת מַגִּיעָה לְחֵיפָה.",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעָה",
+     "l": "he:higia",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The train arrives in Haifa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.034",
+   "frame": "fr.go.to",
+   "text": "הוּא חוֹזֵר הַבַּיְתָה בְּאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "בְּאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He comes home by bus.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.035",
+   "frame": "fr.go.to",
+   "text": "הִיא חוֹזֶרֶת הַבַּיְתָה בְּאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "חוֹזֶרֶת",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "בְּאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She comes home by bus.",
+   "variantOf": "he.f5.034",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.036",
+   "frame": "fr.go.to",
+   "text": "הַמּוֹרָה נִכְנֶסֶת לַחֶדֶר.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "נִכְנֶסֶת",
+     "l": "he:nichnas",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לַחֶדֶר",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "חֶדֶר",
+       "l": "he:cheder",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The teacher (f.) comes into the room.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.037",
+   "frame": "fr.go.to",
+   "text": "הַמּוֹרוֹת נִכְנָסוֹת לַחֶדֶר.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרוֹת",
+     "l": "he:mora",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "נִכְנָסוֹת",
+     "l": "he:nichnas",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "לַחֶדֶר",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "חֶדֶר",
+       "l": "he:cheder",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The teachers (f.) come into the room.",
+   "variantOf": "he.f5.036",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.038",
+   "frame": "fr.from",
+   "text": "הִיא יוֹצֵאת מֵהַבַּיִת.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "יוֹצֵאת",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֵהַבַּיִת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She leaves the house.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.039",
+   "frame": "fr.from",
+   "text": "הוּא יוֹצֵא מֵהַבַּיִת.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יוֹצֵא",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מֵהַבַּיִת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He leaves the house.",
+   "variantOf": "he.f5.038",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.040",
+   "frame": "fr.from",
+   "text": "הָרַכֶּבֶת יוֹצֵאת מֵהַתַּחֲנָה.",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יוֹצֵאת",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֵהַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַתַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The train is leaving the station.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.041",
+   "frame": "fr.from",
+   "text": "הַסְּפִינָה יוֹצֵאת מֵחֵיפָה.",
+   "tokens": [
+    {
+     "t": "הַסְּפִינָה",
+     "l": "he:sfina",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יוֹצֵאת",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֵחֵיפָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The ship leaves from Haifa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.042",
+   "frame": "fr.from",
+   "text": "הֵם עוֹזְבִים אֶת הָעִיר.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "עוֹזְבִים",
+     "l": "he:azav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעִיר",
+     "l": "he:ir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.definite",
+    "fn.object"
+   ],
+   "gloss": "They are leaving the city.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.043",
+   "frame": "fr.from",
+   "text": "הוּא עוֹזֵב אֶת הָעִיר.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "עוֹזֵב",
+     "l": "he:azav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעִיר",
+     "l": "he:ir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.definite",
+    "fn.object"
+   ],
+   "gloss": "He is leaving the city.",
+   "variantOf": "he.f5.042",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.044",
+   "frame": "fr.at.place",
+   "text": "אֲנִי נִשְׁאָר בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאָר",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) am staying at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.045",
+   "frame": "fr.at.place",
+   "text": "אֲנִי נִשְׁאֶרֶת בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאֶרֶת",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (f.) am staying at home.",
+   "variantOf": "he.f5.044",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.046",
+   "frame": "fr.go.to",
+   "text": "אֲנַחְנוּ מְחַכִּים לָאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "מְחַכִּים",
+     "l": "he:chika",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לָאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "We are waiting for the bus.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.047",
+   "frame": "fr.go.to",
+   "text": "אֲנִי מְחַכֶּה לָאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "מְחַכֶּה",
+     "l": "he:chika",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) am waiting for the bus.",
+   "variantOf": "he.f5.046",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.048",
+   "frame": "fr.go.to",
+   "text": "הִיא מְחַכָּה לְמוֹנִית.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "מְחַכָּה",
+     "l": "he:chika",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לְמוֹנִית",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "מוֹנִית",
+       "l": "he:monit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She is waiting for a taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.049",
+   "frame": "fr.have",
+   "text": "יֵשׁ לְךָ כַּרְטִיס?",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לְךָ",
+     "l": "he:le",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "כַּרְטִיס",
+     "l": "he:kartis",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m.) have a ticket?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.050",
+   "frame": "fr.have",
+   "text": "יֵשׁ לִי כַּרְטִיס.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "כַּרְטִיס",
+     "l": "he:kartis",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "I have a ticket.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.051",
+   "frame": "fr.have",
+   "text": "אֵין לִי כַּרְטִיס.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "כַּרְטִיס",
+     "l": "he:kartis",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.negation"
+   ],
+   "gloss": "I don’t have a ticket.",
+   "variantOf": "he.f5.050",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.052",
+   "frame": "fr.count",
+   "text": "יֵשׁ לִי שְׁנֵי כַּרְטִיסִים לָרַכֶּבֶת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "שְׁנֵי",
+     "l": "he:shnayim",
+     "f": "NUM;MASC;CONST"
+    },
+    {
+     "t": "כַּרְטִיסִים",
+     "l": "he:kartis",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "לָרַכֶּבֶת",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "רַכֶּבֶת",
+       "l": "he:rakevet",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.prep.core"
+   ],
+   "gloss": "I have two train tickets.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.053",
+   "frame": "fr.thing.here",
+   "text": "הַכַּרְטִיס בַּתִּיק.",
+   "tokens": [
+    {
+     "t": "הַכַּרְטִיס",
+     "l": "he:kartis",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "בַּתִּיק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "תִּיק",
+       "l": "he:tik",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.definite"
+   ],
+   "gloss": "The ticket is in the bag.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.054",
+   "frame": "fr.this.is",
+   "text": "זֶה הָאוֹטוֹבּוּס לְחֵיפָה?",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.demonstrative",
+    "fn.direction",
+    "fn.definite"
+   ],
+   "gloss": "Is this the bus to Haifa?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.055",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ מְכוֹנִית.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מְכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have"
+   ],
+   "gloss": "We have a car.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.056",
+   "frame": "fr.have",
+   "text": "אֵין לָנוּ מְכוֹנִית.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מְכוֹנִית",
+     "l": "he:mechonit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.negation"
+   ],
+   "gloss": "We don’t have a car.",
+   "variantOf": "he.f5.055",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.057",
+   "frame": "fr.thing.here",
+   "text": "הָאוֹפַנַּיִם שֶׁלִּי בַּחוּץ.",
+   "tokens": [
+    {
+     "t": "הָאוֹפַנַּיִם",
+     "l": "he:ofanayim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "בַּחוּץ",
+     "l": "he:bachuts"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.prep.place"
+   ],
+   "gloss": "My bike is outside.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.058",
+   "frame": "fr.thing.here",
+   "text": "הַסִּירָה שָׁם.",
+   "tokens": [
+    {
+     "t": "הַסִּירָה",
+     "l": "he:sira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The boat is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.059",
+   "frame": "fr.thing.here",
+   "text": "הַסִּירוֹת פֹּה.",
+   "tokens": [
+    {
+     "t": "הַסִּירוֹת",
+     "l": "he:sira",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The boats are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.060",
+   "frame": "fr.go.to",
+   "text": "אַתָּה הוֹלֵךְ הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "You (m.) are going home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.061",
+   "frame": "fr.go.to",
+   "text": "לֵךְ הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "לֵךְ",
+     "l": "he:halach",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Go home! (to a man)",
+   "variantOf": "he.f5.060",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.062",
+   "frame": "fr.go.to",
+   "text": "לְכִי הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "לְכִי",
+     "l": "he:halach",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Go home! (to a woman)",
+   "variantOf": "he.f5.061",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.063",
+   "frame": "fr.go.to",
+   "text": "לְכוּ הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "לְכוּ",
+     "l": "he:halach",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Go home! (to several people)",
+   "variantOf": "he.f5.061",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.064",
+   "frame": "fr.go.to",
+   "text": "אַל תֵּלֵךְ הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תֵּלֵךְ",
+     "l": "he:halach",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Don’t go home! (to a man)",
+   "variantOf": "he.f5.061",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.065",
+   "frame": "fr.go.to",
+   "text": "אַתְּ נוֹסַעַת בְּמוֹנִית.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "נוֹסַעַת",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בְּמוֹנִית",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מוֹנִית",
+       "l": "he:monit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "You (f.) are going by taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.066",
+   "frame": "fr.go.to",
+   "text": "סְעִי בְּמוֹנִית!",
+   "tokens": [
+    {
+     "t": "סְעִי",
+     "l": "he:nasa",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "בְּמוֹנִית",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מוֹנִית",
+       "l": "he:monit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Take a taxi! (to a woman)",
+   "variantOf": "he.f5.065",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.067",
+   "frame": "fr.go.to",
+   "text": "סַע בְּמוֹנִית!",
+   "tokens": [
+    {
+     "t": "סַע",
+     "l": "he:nasa",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "בְּמוֹנִית",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מוֹנִית",
+       "l": "he:monit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Take a taxi! (to a man)",
+   "variantOf": "he.f5.066",
+   "variant": {
+    "Addressee": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.068",
+   "frame": "fr.go.to",
+   "text": "אַתֶּם נִכְנָסִים לַבַּיִת.",
+   "tokens": [
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "נִכְנָסִים",
+     "l": "he:nichnas",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לַבַּיִת",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "You (pl.) are going into the house.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.069",
+   "frame": "fr.go.to",
+   "text": "הִכָּנְסוּ לַבַּיִת!",
+   "tokens": [
+    {
+     "t": "הִכָּנְסוּ",
+     "l": "he:nichnas",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "לַבַּיִת",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Go into the house! (to several people)",
+   "variantOf": "he.f5.068",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.070",
+   "frame": "fr.at.place",
+   "text": "אַתָּה נִשְׁאָר בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "נִשְׁאָר",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "You (m.) are staying at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.071",
+   "frame": "fr.at.place",
+   "text": "הִשָּׁאֵר בַּבַּיִת!",
+   "tokens": [
+    {
+     "t": "הִשָּׁאֵר",
+     "l": "he:nishar",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Stay at home! (to a man)",
+   "variantOf": "he.f5.070",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.072",
+   "frame": "fr.at.place",
+   "text": "הִשָּׁאֲרִי בַּבַּיִת!",
+   "tokens": [
+    {
+     "t": "הִשָּׁאֲרִי",
+     "l": "he:nishar",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Stay at home! (to a woman)",
+   "variantOf": "he.f5.071",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.073",
+   "frame": "fr.at.place",
+   "text": "אַל תִּשָּׁאֵר בַּבַּיִת!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תִּשָּׁאֵר",
+     "l": "he:nishar",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Don’t stay at home! (to a man)",
+   "variantOf": "he.f5.071",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.074",
+   "frame": "fr.at.place",
+   "text": "תִּשָּׁאֵר בַּבַּיִת!",
+   "tokens": [
+    {
+     "t": "תִּשָּׁאֵר",
+     "l": "he:nishar",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Stay at home! (to a man, colloquial)",
+   "variantOf": "he.f5.071",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.075",
+   "frame": "fr.at.place",
+   "text": "אַתְּ מְחַכָּה פֹּה.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "מְחַכָּה",
+     "l": "he:chika",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "You (f.) are waiting here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.076",
+   "frame": "fr.at.place",
+   "text": "חַכִּי פֹּה!",
+   "tokens": [
+    {
+     "t": "חַכִּי",
+     "l": "he:chika",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Wait here! (to a woman)",
+   "variantOf": "he.f5.075",
+   "variant": {
+    "Mood": "IMP"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.077",
+   "frame": "fr.at.place",
+   "text": "חַכֵּה פֹּה!",
+   "tokens": [
+    {
+     "t": "חַכֵּה",
+     "l": "he:chika",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Wait here! (to a man)",
+   "variantOf": "he.f5.076",
+   "variant": {
+    "Addressee": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.078",
+   "frame": "fr.at.place",
+   "text": "חַכּוּ פֹּה!",
+   "tokens": [
+    {
+     "t": "חַכּוּ",
+     "l": "he:chika",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Wait here! (to several people)",
+   "variantOf": "he.f5.076",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.079",
+   "frame": "fr.at.place",
+   "text": "תְּחַכִּי פֹּה!",
+   "tokens": [
+    {
+     "t": "תְּחַכִּי",
+     "l": "he:chika",
+     "f": "V;FUT;2;SG;FEM"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.imperative"
+   ],
+   "gloss": "Wait here! (to a woman, colloquial)",
+   "variantOf": "he.f5.076",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.080",
+   "frame": "fr.command",
+   "text": "בּוֹא הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "בּוֹא",
+     "l": "he:ba",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come home! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.081",
+   "frame": "fr.command",
+   "text": "בּוֹאִי הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "בּוֹאִי",
+     "l": "he:ba",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come home! (to a woman)",
+   "variantOf": "he.f5.080",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.082",
+   "frame": "fr.command",
+   "text": "בּוֹאוּ הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "בּוֹאוּ",
+     "l": "he:ba",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come home! (to several people)",
+   "variantOf": "he.f5.080",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.083",
+   "frame": "fr.command",
+   "text": "תָּבוֹא הַבַּיְתָה!",
+   "tokens": [
+    {
+     "t": "תָּבוֹא",
+     "l": "he:ba",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come home! (to a man, colloquial)",
+   "variantOf": "he.f5.080",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.084",
+   "frame": "fr.command",
+   "text": "בּוֹאִי לַמִּטְבָּח!",
+   "tokens": [
+    {
+     "t": "בּוֹאִי",
+     "l": "he:ba",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "לַמִּטְבָּח",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "מִּטְבָּח",
+       "l": "he:mitbach",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Come to the kitchen! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.085",
+   "frame": "fr.command",
+   "text": "בּוֹאוּ לַמִּטְבָּח!",
+   "tokens": [
+    {
+     "t": "בּוֹאוּ",
+     "l": "he:ba",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "לַמִּטְבָּח",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "מִּטְבָּח",
+       "l": "he:mitbach",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Come to the kitchen! (to several people)",
+   "variantOf": "he.f5.084",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.086",
+   "frame": "fr.command",
+   "text": "הִכָּנֵס, בְּבַקָּשָׁה!",
+   "tokens": [
+    {
+     "t": "הִכָּנֵס",
+     "l": "he:nichnas",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come in, please! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.087",
+   "frame": "fr.command",
+   "text": "הִכָּנְסִי, בְּבַקָּשָׁה!",
+   "tokens": [
+    {
+     "t": "הִכָּנְסִי",
+     "l": "he:nichnas",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come in, please! (to a woman)",
+   "variantOf": "he.f5.086",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.088",
+   "frame": "fr.command",
+   "text": "הִכָּנְסוּ, בְּבַקָּשָׁה!",
+   "tokens": [
+    {
+     "t": "הִכָּנְסוּ",
+     "l": "he:nichnas",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come in, please! (to several people)",
+   "variantOf": "he.f5.086",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.089",
+   "frame": "fr.command",
+   "text": "תִּכָּנֵס, בְּבַקָּשָׁה!",
+   "tokens": [
+    {
+     "t": "תִּכָּנֵס",
+     "l": "he:nichnas",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction"
+   ],
+   "gloss": "Come in, please! (to a man, colloquial)",
+   "variantOf": "he.f5.086",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.090",
+   "frame": "fr.command",
+   "text": "צֵא מֵהַמִּטְבָּח!",
+   "tokens": [
+    {
+     "t": "צֵא",
+     "l": "he:yatsa",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "מֵהַמִּטְבָּח",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַמִּטְבָּח",
+       "l": "he:mitbach",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Get out of the kitchen! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.091",
+   "frame": "fr.command",
+   "text": "צְאִי מֵהַמִּטְבָּח!",
+   "tokens": [
+    {
+     "t": "צְאִי",
+     "l": "he:yatsa",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "מֵהַמִּטְבָּח",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַמִּטְבָּח",
+       "l": "he:mitbach",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Get out of the kitchen! (to a woman)",
+   "variantOf": "he.f5.090",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.092",
+   "frame": "fr.command",
+   "text": "צְאוּ מֵהַמִּטְבָּח!",
+   "tokens": [
+    {
+     "t": "צְאוּ",
+     "l": "he:yatsa",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "מֵהַמִּטְבָּח",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַמִּטְבָּח",
+       "l": "he:mitbach",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Get out of the kitchen! (to several people)",
+   "variantOf": "he.f5.090",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.093",
+   "frame": "fr.command",
+   "text": "רוּצִי לַתַּחֲנָה!",
+   "tokens": [
+    {
+     "t": "רוּצִי",
+     "l": "he:rats",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Run to the stop! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.094",
+   "frame": "fr.command",
+   "text": "רוּץ לַתַּחֲנָה!",
+   "tokens": [
+    {
+     "t": "רוּץ",
+     "l": "he:rats",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Run to the stop! (to a man)",
+   "variantOf": "he.f5.093",
+   "variant": {
+    "Addressee": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.095",
+   "frame": "fr.command",
+   "text": "אַל תָּרוּצִי לַתַּחֲנָה!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תָּרוּצִי",
+     "l": "he:rats",
+     "f": "V;FUT;2;SG;FEM"
+    },
+    {
+     "t": "לַתַּחֲנָה",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "תַּחֲנָה",
+       "l": "he:tachana",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Don’t run to the stop! (to a woman)",
+   "variantOf": "he.f5.093",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.096",
+   "frame": "fr.command",
+   "text": "חֲזֹר לָעֲבוֹדָה!",
+   "tokens": [
+    {
+     "t": "חֲזֹר",
+     "l": "he:chazar",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Go back to work! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.097",
+   "frame": "fr.command",
+   "text": "חִזְרִי לָעֲבוֹדָה!",
+   "tokens": [
+    {
+     "t": "חִזְרִי",
+     "l": "he:chazar",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core"
+   ],
+   "gloss": "Go back to work! (to a woman)",
+   "variantOf": "he.f5.096",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.098",
+   "frame": "fr.command",
+   "text": "אַל תִּנְהַג בַּמְּכוֹנִית הַזֹּאת!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תִּנְהַג",
+     "l": "he:nahag",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "בַּמְּכוֹנִית",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מְּכוֹנִית",
+       "l": "he:mechonit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.demonstrative"
+   ],
+   "gloss": "Don’t drive this car! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.099",
+   "frame": "fr.command",
+   "text": "אַל תַּעֲזֹב אֶת הָעֲבוֹדָה!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תַּעֲזֹב",
+     "l": "he:azav",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.object"
+   ],
+   "gloss": "Don’t quit the job! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.100",
+   "frame": "fr.command",
+   "text": "אֱכֹל אֶת הַמָּרָק!",
+   "tokens": [
+    {
+     "t": "אֱכֹל",
+     "l": "he:akhal",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמָּרָק",
+     "l": "he:marak",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Eat the soup! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.101",
+   "frame": "fr.command",
+   "text": "אִכְלִי אֶת הַמָּרָק!",
+   "tokens": [
+    {
+     "t": "אִכְלִי",
+     "l": "he:akhal",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמָּרָק",
+     "l": "he:marak",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Eat the soup! (to a woman)",
+   "variantOf": "he.f5.100",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.102",
+   "frame": "fr.command",
+   "text": "אַל תֹּאכַל אֶת הַמָּרָק!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תֹּאכַל",
+     "l": "he:akhal",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמָּרָק",
+     "l": "he:marak",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "Don’t eat the soup! (to a man)",
+   "variantOf": "he.f5.100",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.103",
+   "frame": "fr.command",
+   "text": "שְׁתֵה מַיִם!",
+   "tokens": [
+    {
+     "t": "שְׁתֵה",
+     "l": "he:shata",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Drink water! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.104",
+   "frame": "fr.command",
+   "text": "שְׁתוּ מַיִם!",
+   "tokens": [
+    {
+     "t": "שְׁתוּ",
+     "l": "he:shata",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "מַיִם",
+     "l": "he:mayim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Drink water! (to several people)",
+   "variantOf": "he.f5.103",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.105",
+   "frame": "fr.command",
+   "text": "קְנִי לֶחֶם, בְּבַקָּשָׁה!",
+   "tokens": [
+    {
+     "t": "קְנִי",
+     "l": "he:kana",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Buy bread, please! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.106",
+   "frame": "fr.command",
+   "text": "קְנֵה לֶחֶם, בְּבַקָּשָׁה!",
+   "tokens": [
+    {
+     "t": "קְנֵה",
+     "l": "he:kana",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "לֶחֶם",
+     "l": "he:lechem",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Buy bread, please! (to a man)",
+   "variantOf": "he.f5.105",
+   "variant": {
+    "Addressee": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.107",
+   "frame": "fr.day",
+   "text": "הַיּוֹם יוֹם רִאשׁוֹן.",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "יוֹם רִאשׁוֹן",
+     "l": "he:yom-rishon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Today is Sunday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.108",
+   "frame": "fr.day",
+   "text": "הַיּוֹם יוֹם רִאשׁוֹן?",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "יוֹם רִאשׁוֹן",
+     "l": "he:yom-rishon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is today Sunday?",
+   "variantOf": "he.f5.107",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.109",
+   "frame": "fr.day",
+   "text": "הַיּוֹם לֹא יוֹם רִאשׁוֹן.",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "יוֹם רִאשׁוֹן",
+     "l": "he:yom-rishon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.negation"
+   ],
+   "gloss": "Today isn’t Sunday.",
+   "variantOf": "he.f5.107",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.110",
+   "frame": "fr.day",
+   "text": "מָחָר יוֹם שֵׁנִי.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "יוֹם שֵׁנִי",
+     "l": "he:yom-sheni",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Tomorrow is Monday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.111",
+   "frame": "fr.day",
+   "text": "אֶתְמוֹל הָיָה יוֹם שְׁלִישִׁי.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "יוֹם שְׁלִישִׁי",
+     "l": "he:yom-shlishi",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula"
+   ],
+   "gloss": "Yesterday was Tuesday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.112",
+   "frame": "fr.day",
+   "text": "אֶתְמוֹל הָיְתָה שַׁבָּת.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "שַׁבָּת",
+     "l": "he:shabat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula"
+   ],
+   "gloss": "Yesterday was Saturday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.113",
+   "frame": "fr.day",
+   "text": "הַיּוֹם שַׁבָּת.",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "שַׁבָּת",
+     "l": "he:shabat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Today is Saturday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.114",
+   "frame": "fr.day",
+   "text": "מָחָר יִהְיֶה יוֹם חֲמִישִׁי.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "יִהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "יוֹם חֲמִישִׁי",
+     "l": "he:yom-chamishi",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.copula"
+   ],
+   "gloss": "Tomorrow will be Thursday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.115",
+   "frame": "fr.wh",
+   "text": "אֵיזֶה יוֹם הַיּוֹם?",
+   "tokens": [
+    {
+     "t": "אֵיזֶה",
+     "l": "he:eize",
+     "f": "DET;SG;MASC"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "What day is it today?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.116",
+   "frame": "fr.wh",
+   "text": "אֵיזֶה יוֹם הַיּוֹם? הַיּוֹם יוֹם רְבִיעִי.",
+   "tokens": [
+    {
+     "t": "אֵיזֶה",
+     "l": "he:eize",
+     "f": "DET;SG;MASC"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "יוֹם רְבִיעִי",
+     "l": "he:yom-revii",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "What day is it today? — Today is Wednesday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.117",
+   "frame": "fr.day",
+   "text": "בְּיוֹם רְבִיעִי אֲנִי בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "בְּיוֹם רְבִיעִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוֹם רְבִיעִי",
+       "l": "he:yom-revii",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core"
+   ],
+   "gloss": "On Wednesday I am at work.",
+   "alts": [
+    "אֲנִי בָּעֲבוֹדָה בְּיוֹם רְבִיעִי."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.118",
+   "frame": "fr.day",
+   "text": "בְּיוֹם רְבִיעִי אֲנִי לֹא בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "בְּיוֹם רְבִיעִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוֹם רְבִיעִי",
+       "l": "he:yom-revii",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "On Wednesday I am not at work.",
+   "variantOf": "he.f5.117",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "alts": [
+    "אֲנִי לֹא בָּעֲבוֹדָה בְּיוֹם רְבִיעִי."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.119",
+   "frame": "fr.day",
+   "text": "בְּיוֹם חֲמִישִׁי הִיא נוֹסַעַת לְחֵיפָה.",
+   "tokens": [
+    {
+     "t": "בְּיוֹם חֲמִישִׁי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוֹם חֲמִישִׁי",
+       "l": "he:yom-chamishi",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "נוֹסַעַת",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "On Thursday she is travelling to Haifa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.120",
+   "frame": "fr.day",
+   "text": "בְּיוֹם שִׁשִּׁי אֲנַחְנוּ אוֹכְלִים אֵצֶל סָבְתָא.",
+   "tokens": [
+    {
+     "t": "בְּיוֹם שִׁשִּׁי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוֹם שִׁשִּׁי",
+       "l": "he:yom-shishi",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֵצֶל",
+     "l": "he:etsel"
+    },
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "On Friday we eat at Grandma’s.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.121",
+   "frame": "fr.day",
+   "text": "בְּשַׁבָּת אֵין אוֹטוֹבּוּסִים.",
+   "tokens": [
+    {
+     "t": "בְּשַׁבָּת",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שַׁבָּת",
+       "l": "he:shabat",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "אוֹטוֹבּוּסִים",
+     "l": "he:otobus",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.negation",
+    "fn.plural.noun",
+    "fn.prep.core"
+   ],
+   "gloss": "On Saturday there are no buses.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.122",
+   "frame": "fr.day",
+   "text": "בְּשַׁבָּת אֲנַחְנוּ אֵצֶל סַבָּא וְסָבְתָא.",
+   "tokens": [
+    {
+     "t": "בְּשַׁבָּת",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שַׁבָּת",
+       "l": "he:shabat",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אֵצֶל",
+     "l": "he:etsel"
+    },
+    {
+     "t": "סַבָּא",
+     "l": "he:saba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְסָבְתָא",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "סָבְתָא",
+       "l": "he:savta",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core"
+   ],
+   "gloss": "On Saturday we are at Grandpa and Grandma’s.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.123",
+   "frame": "fr.day",
+   "text": "בְּסוֹף הַשָּׁבוּעַ אֲנַחְנוּ בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "בְּסוֹף הַשָּׁבוּעַ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סוֹף הַשָּׁבוּעַ",
+       "l": "he:sof-shavua",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core"
+   ],
+   "gloss": "At the weekend we are at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.124",
+   "frame": "fr.day",
+   "text": "בְּסוֹף הַשָּׁבוּעַ הֵם נוֹסְעִים לַכְּפָר.",
+   "tokens": [
+    {
+     "t": "בְּסוֹף הַשָּׁבוּעַ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סוֹף הַשָּׁבוּעַ",
+       "l": "he:sof-shavua",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לַכְּפָר",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "כְּפָר",
+       "l": "he:kfar",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "At the weekend they go to the village.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.125",
+   "frame": "fr.day",
+   "text": "בַּבֹּקֶר אֲנִי שׁוֹתֶה קָפֶה.",
+   "tokens": [
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In the morning I (m.) drink coffee.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.126",
+   "frame": "fr.day",
+   "text": "בַּבֹּקֶר אֲנִי שׁוֹתָה קָפֶה.",
+   "tokens": [
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In the morning I (f.) drink coffee.",
+   "variantOf": "he.f5.125",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.127",
+   "frame": "fr.day",
+   "text": "בַּבֹּקֶר אֲנִי לֹא שׁוֹתֶה קָפֶה.",
+   "tokens": [
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "In the morning I (m.) don’t drink coffee.",
+   "variantOf": "he.f5.125",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.128",
+   "frame": "fr.day",
+   "text": "כָּל בֹּקֶר הִיא רָצָה בַּפַּארְק.",
+   "tokens": [
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "בֹּקֶר",
+     "l": "he:boker",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "רָצָה",
+     "l": "he:rats",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בַּפַּארְק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Every morning she runs in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.129",
+   "frame": "fr.day",
+   "text": "בַּצָּהֳרַיִם אֲנַחְנוּ אוֹכְלִים אֲרוּחַת צָהֳרַיִם בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "בַּצָּהֳרַיִם",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "צָּהֳרַיִם",
+       "l": "he:tsohorayim",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֲרוּחַת צָהֳרַיִם",
+     "l": "he:aruchat-tsohorayim",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "At noon we eat lunch at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.130",
+   "frame": "fr.day",
+   "text": "אַחַר הַצָּהֳרַיִם הַיְּלָדִים בַּפַּארְק.",
+   "tokens": [
+    {
+     "t": "אַחַר הַצָּהֳרַיִם",
+     "l": "he:achar-hatsohorayim"
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "בַּפַּארְק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "In the afternoon the children are in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.131",
+   "frame": "fr.day",
+   "text": "בָּעֶרֶב אַבָּא חוֹזֵר הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "בָּעֶרֶב",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶרֶב",
+       "l": "he:erev",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In the evening Dad comes home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.132",
+   "frame": "fr.day",
+   "text": "בָּעֶרֶב אַבָּא חוֹזֵר הַבַּיְתָה?",
+   "tokens": [
+    {
+     "t": "בָּעֶרֶב",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶרֶב",
+       "l": "he:erev",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.question.yesno"
+   ],
+   "gloss": "Does Dad come home in the evening?",
+   "variantOf": "he.f5.131",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.133",
+   "frame": "fr.day",
+   "text": "בַּלַּיְלָה הַיְּלָדִים בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "בַּלַּיְלָה",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "לַּיְלָה",
+       "l": "he:laila",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "At night the children are at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.134",
+   "frame": "fr.day",
+   "text": "הַלַּיְלָה אֲנַחְנוּ נִשְׁאָרִים בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "הַלַּיְלָה",
+     "l": "he:laila",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נִשְׁאָרִים",
+     "l": "he:nishar",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Tonight we are staying at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.135",
+   "frame": "fr.day",
+   "text": "הָעֶרֶב אֲנִי נִשְׁאָר בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "הָעֶרֶב",
+     "l": "he:erev",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאָר",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "This evening I (m.) am staying at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.136",
+   "frame": "fr.day",
+   "text": "הָעֶרֶב אֲנִי נִשְׁאֶרֶת בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "הָעֶרֶב",
+     "l": "he:erev",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאֶרֶת",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "This evening I (f.) am staying at home.",
+   "variantOf": "he.f5.135",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.137",
+   "frame": "fr.day",
+   "text": "הַבֹּקֶר אֲנִי נוֹסֵעַ לָעֲבוֹדָה בְּמוֹנִית.",
+   "tokens": [
+    {
+     "t": "הַבֹּקֶר",
+     "l": "he:boker",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נוֹסֵעַ",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בְּמוֹנִית",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מוֹנִית",
+       "l": "he:monit",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "This morning I (m.) am going to work by taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.138",
+   "frame": "fr.day",
+   "text": "אֲנִי בָּא עַכְשָׁו.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַכְשָׁו",
+     "l": "he:achshav"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "I (m.) am coming now.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.139",
+   "frame": "fr.day",
+   "text": "אֲנִי בָּאָה עַכְשָׁו.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בָּאָה",
+     "l": "he:ba",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "עַכְשָׁו",
+     "l": "he:achshav"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "I (f.) am coming now.",
+   "variantOf": "he.f5.138",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.140",
+   "frame": "fr.day",
+   "text": "הוּא בָּא עַכְשָׁו.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַכְשָׁו",
+     "l": "he:achshav"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "He is coming now.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.141",
+   "frame": "fr.day",
+   "text": "הוּא בָּא עַכְשָׁו?",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַכְשָׁו",
+     "l": "he:achshav"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is he coming now?",
+   "variantOf": "he.f5.140",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.142",
+   "frame": "fr.day",
+   "text": "הוּא מַגִּיעַ אַחַר כָּךְ.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אַחַר כָּךְ",
+     "l": "he:achar-kach"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "He’ll arrive later.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.143",
+   "frame": "fr.day",
+   "text": "הָאוֹטוֹבּוּס מַגִּיעַ בְּקָרוֹב.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בְּקָרוֹב",
+     "l": "he:bekarov"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.definite"
+   ],
+   "gloss": "The bus is arriving soon.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.144",
+   "frame": "fr.day",
+   "text": "הִיא יוֹצֵאת מֻקְדָּם מֵהַבַּיִת.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "יוֹצֵאת",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": "מֵהַבַּיִת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She leaves the house early.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.145",
+   "frame": "fr.day",
+   "text": "הוּא יוֹצֵא מֻקְדָּם מֵהַבַּיִת.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יוֹצֵא",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": "מֵהַבַּיִת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He leaves the house early.",
+   "variantOf": "he.f5.144",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.146",
+   "frame": "fr.day",
+   "text": "הוּא חוֹזֵר מְאֻחָר מֵהָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מְאֻחָר",
+     "l": "he:meuchar"
+    },
+    {
+     "t": "מֵהָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הָעֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "He comes back late from work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.147",
+   "frame": "fr.day",
+   "text": "אֲנִי תָּמִיד שׁוֹתֶה תֵּה בָּעֶרֶב.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "תָּמִיד",
+     "l": "he:tamid"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בָּעֶרֶב",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶרֶב",
+       "l": "he:erev",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) always drink tea in the evening.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.148",
+   "frame": "fr.day",
+   "text": "לְעִתִּים קְרוֹבוֹת אֲנַחְנוּ נוֹסְעִים לְחֵיפָה.",
+   "tokens": [
+    {
+     "t": "לְעִתִּים קְרוֹבוֹת",
+     "l": "he:leitim-krovot"
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "We often travel to Haifa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.149",
+   "frame": "fr.day",
+   "text": "לִפְעָמִים אֲנִי הוֹלֵךְ לָעֲבוֹדָה בָּרֶגֶל.",
+   "tokens": [
+    {
+     "t": "לִפְעָמִים",
+     "l": "he:lifamim"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בָּרֶגֶל",
+     "l": "he:baregel"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Sometimes I (m.) walk to work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.150",
+   "frame": "fr.day",
+   "text": "הוּא אַף פַּעַם לֹא מַגִּיעַ מֻקְדָּם.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אַף פַּעַם",
+     "l": "he:af-paam"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.negation",
+    "fn.present"
+   ],
+   "gloss": "He never arrives early.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.151",
+   "frame": "fr.day",
+   "text": "כָּל יוֹם אֲנִי הוֹלֵךְ לָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Every day I (m.) go to work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.152",
+   "frame": "fr.wh",
+   "text": "מָתַי אַתָּה חוֹזֵר? מָחָר.",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "gloss": "When are you (m.) coming back? — Tomorrow.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.153",
+   "frame": "fr.day",
+   "text": "אַתְּ בָּאָה מָחָר?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "בָּאָה",
+     "l": "he:ba",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you (f.) coming tomorrow?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.154",
+   "frame": "fr.day",
+   "text": "אַתָּה בָּא מָחָר?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you (m.) coming tomorrow?",
+   "variantOf": "he.f5.153",
+   "variant": {
+    "Addressee": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.155",
+   "frame": "fr.greet",
+   "text": "נִתְרָאֶה מָחָר!",
+   "tokens": [
+    {
+     "t": "נִתְרָאֶה",
+     "l": "he:nitrae"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.greetings"
+   ],
+   "gloss": "See you tomorrow!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.156",
+   "frame": "fr.greet",
+   "text": "נִתְרָאֶה בְּיוֹם רִאשׁוֹן!",
+   "tokens": [
+    {
+     "t": "נִתְרָאֶה",
+     "l": "he:nitrae"
+    },
+    {
+     "t": "בְּיוֹם רִאשׁוֹן",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוֹם רִאשׁוֹן",
+       "l": "he:yom-rishon",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.greetings",
+    "fn.prep.core"
+   ],
+   "gloss": "See you on Sunday!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.157",
+   "frame": "fr.greet",
+   "text": "נִתְרָאֶה אַחַר הַצָּהֳרַיִם!",
+   "tokens": [
+    {
+     "t": "נִתְרָאֶה",
+     "l": "he:nitrae"
+    },
+    {
+     "t": "אַחַר הַצָּהֳרַיִם",
+     "l": "he:achar-hatsohorayim"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.greetings"
+   ],
+   "gloss": "See you in the afternoon!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.158",
+   "frame": "fr.command",
+   "text": "חֲזֹר מָחָר!",
+   "tokens": [
+    {
+     "t": "חֲזֹר",
+     "l": "he:chazar",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "gloss": "Come back tomorrow! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.159",
+   "frame": "fr.command",
+   "text": "חִזְרִי מָחָר!",
+   "tokens": [
+    {
+     "t": "חִזְרִי",
+     "l": "he:chazar",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "gloss": "Come back tomorrow! (to a woman)",
+   "variantOf": "he.f5.158",
+   "variant": {
+    "Addressee": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.160",
+   "frame": "fr.command",
+   "text": "תַּגִּיעַ מֻקְדָּם!",
+   "tokens": [
+    {
+     "t": "תַּגִּיעַ",
+     "l": "he:higia",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "gloss": "Come early! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.161",
+   "frame": "fr.command",
+   "text": "תַּגִּיעוּ מֻקְדָּם!",
+   "tokens": [
+    {
+     "t": "תַּגִּיעוּ",
+     "l": "he:higia",
+     "f": "V;FUT;2;PL;MASC"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "gloss": "Come early! (to several people)",
+   "variantOf": "he.f5.160",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.162",
+   "frame": "fr.command",
+   "text": "אַל תַּחְזְרִי מְאֻחָר!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תַּחְזְרִי",
+     "l": "he:chazar",
+     "f": "V;FUT;2;SG;FEM"
+    },
+    {
+     "t": "מְאֻחָר",
+     "l": "he:meuchar"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "gloss": "Don’t come back late! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.163",
+   "frame": "fr.command",
+   "text": "בּוֹאוּ עַכְשָׁו!",
+   "tokens": [
+    {
+     "t": "בּוֹאוּ",
+     "l": "he:ba",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "עַכְשָׁו",
+     "l": "he:achshav"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day"
+   ],
+   "gloss": "Come now! (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.164",
+   "frame": "fr.command",
+   "text": "אַל תִּשְׁתֶּה קָפֶה בָּעֶרֶב!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תִּשְׁתֶּה",
+     "l": "he:shata",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "קָפֶה",
+     "l": "he:kafe",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בָּעֶרֶב",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶרֶב",
+       "l": "he:erev",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.time.day",
+    "fn.prep.core"
+   ],
+   "gloss": "Don’t drink coffee in the evening! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.165",
+   "frame": "fr.time",
+   "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי בְּמַאי.",
+   "tokens": [
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "בְּמַאי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מַאי",
+       "l": "he:mai",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.prep.core"
+   ],
+   "gloss": "My birthday is in May.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.166",
+   "frame": "fr.time",
+   "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי לֹא בְּמַאי.",
+   "tokens": [
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "בְּמַאי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מַאי",
+       "l": "he:mai",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "My birthday isn’t in May.",
+   "variantOf": "he.f5.165",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.167",
+   "frame": "fr.time",
+   "text": "יוֹם הַהֻלֶּדֶת שֶׁלְּךָ בְּמַאי?",
+   "tokens": [
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלְּךָ",
+     "l": "he:shelcha"
+    },
+    {
+     "t": "בְּמַאי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מַאי",
+       "l": "he:mai",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is your (m.) birthday in May?",
+   "variantOf": "he.f5.165",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.168",
+   "frame": "fr.wh",
+   "text": "מָתַי יוֹם הַהֻלֶּדֶת שֶׁלְּךָ?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלְּךָ",
+     "l": "he:shelcha"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.possessive"
+   ],
+   "gloss": "When is your (m.) birthday?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.169",
+   "frame": "fr.time",
+   "text": "יוֹם הַהֻלֶּדֶת שֶׁלָּהּ בְּעֶשְׂרִים בְּיָנוּאָר.",
+   "tokens": [
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": "בְּעֶשְׂרִים",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶשְׂרִים",
+       "l": "he:esrim"
+      }
+     ]
+    },
+    {
+     "t": "בְּיָנוּאָר",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יָנוּאָר",
+       "l": "he:yanuar",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.numerals"
+   ],
+   "gloss": "Her birthday is on the twentieth of January.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.170",
+   "frame": "fr.time",
+   "text": "בְּפֶבְּרוּאָר יֵשׁ עֶשְׂרִים וּשְׁמוֹנָה יָמִים.",
+   "tokens": [
+    {
+     "t": "בְּפֶבְּרוּאָר",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "פֶבְּרוּאָר",
+       "l": "he:februar",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "עֶשְׂרִים",
+     "l": "he:esrim"
+    },
+    {
+     "t": "וּשְׁמוֹנָה",
+     "parts": [
+      {
+       "t": "וּ",
+       "l": "he:ve"
+      },
+      {
+       "t": "שְׁמוֹנָה",
+       "l": "he:shmona",
+       "f": "NUM;MASC"
+      }
+     ]
+    },
+    {
+     "t": "יָמִים",
+     "l": "he:yom",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.prep.core"
+   ],
+   "gloss": "February has twenty-eight days.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.171",
+   "frame": "fr.time",
+   "text": "בְּמֶרְץ אֲנַחְנוּ נוֹסְעִים לְאֵילַת.",
+   "tokens": [
+    {
+     "t": "בְּמֶרְץ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מֶרְץ",
+       "l": "he:merts",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְאֵילַת",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "אֵילַת",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In March we are travelling to Eilat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.172",
+   "frame": "fr.time",
+   "text": "בְּאַפְּרִיל הִיא חוֹזֶרֶת לְחֵיפָה.",
+   "tokens": [
+    {
+     "t": "בְּאַפְּרִיל",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אַפְּרִיל",
+       "l": "he:april",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "חוֹזֶרֶת",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לְחֵיפָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In April she is going back to Haifa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.173",
+   "frame": "fr.time",
+   "text": "הַחֻפְשָׁה שֶׁלָּנוּ בְּאוֹגוּסְט.",
+   "tokens": [
+    {
+     "t": "הַחֻפְשָׁה",
+     "l": "he:chufsha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": "בְּאוֹגוּסְט",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹגוּסְט",
+       "l": "he:ogust",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.prep.core"
+   ],
+   "gloss": "Our holiday is in August.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.174",
+   "frame": "fr.time",
+   "text": "הַחֻפְשָׁה שֶׁלָּנוּ לֹא בְּאוֹגוּסְט.",
+   "tokens": [
+    {
+     "t": "הַחֻפְשָׁה",
+     "l": "he:chufsha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "בְּאוֹגוּסְט",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹגוּסְט",
+       "l": "he:ogust",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.negation"
+   ],
+   "gloss": "Our holiday isn’t in August.",
+   "variantOf": "he.f5.173",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.175",
+   "frame": "fr.alt.q",
+   "text": "הַחֻפְשָׁה בְּיוּלִי אוֹ בְּאוֹגוּסְט?",
+   "tokens": [
+    {
+     "t": "הַחֻפְשָׁה",
+     "l": "he:chufsha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "בְּיוּלִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוּלִי",
+       "l": "he:yuli",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אוֹ",
+     "l": "he:o"
+    },
+    {
+     "t": "בְּאוֹגוּסְט",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹגוּסְט",
+       "l": "he:ogust",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core"
+   ],
+   "gloss": "Is the holiday in July or in August?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.176",
+   "frame": "fr.time",
+   "text": "בְּיוּנִי הַסְּטוּדֶנְטִים נוֹסְעִים הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "בְּיוּנִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוּנִי",
+       "l": "he:yuni",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "הַסְּטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.plural.noun"
+   ],
+   "gloss": "In June the students go home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.177",
+   "frame": "fr.time",
+   "text": "בְּאוֹקְטוֹבֶּר הַסְּטוּדֶנְטִים חוֹזְרִים לָאוּנִיבֶרְסִיטָה.",
+   "tokens": [
+    {
+     "t": "בְּאוֹקְטוֹבֶּר",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹקְטוֹבֶּר",
+       "l": "he:oktober",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "הַסְּטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "חוֹזְרִים",
+     "l": "he:chazar",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לָאוּנִיבֶרְסִיטָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "אוּנִיבֶרְסִיטָה",
+       "l": "he:universita",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.plural.noun"
+   ],
+   "gloss": "In October the students go back to university.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.178",
+   "frame": "fr.time",
+   "text": "בְּסֶפְּטֶמְבֶּר אֲנִי נוֹסֵעַ לְאַתּוּנָה.",
+   "tokens": [
+    {
+     "t": "בְּסֶפְּטֶמְבֶּר",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סֶפְּטֶמְבֶּר",
+       "l": "he:september",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נוֹסֵעַ",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לְאַתּוּנָה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "אַתּוּנָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In September I (m.) am travelling to Athens.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.179",
+   "frame": "fr.time",
+   "text": "בְּנוֹבֶמְבֶּר הוּא חוֹזֵר מֵאַתּוּנָה.",
+   "tokens": [
+    {
+     "t": "בְּנוֹבֶמְבֶּר",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "נוֹבֶמְבֶּר",
+       "l": "he:november",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מֵאַתּוּנָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "אַתּוּנָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In November he is coming back from Athens.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.180",
+   "frame": "fr.time",
+   "text": "מִיָּנוּאָר עַד מֶרְץ הוּא בְּחֵיפָה.",
+   "tokens": [
+    {
+     "t": "מִיָּנוּאָר",
+     "parts": [
+      {
+       "t": "מִ",
+       "l": "he:min"
+      },
+      {
+       "t": "יָּנוּאָר",
+       "l": "he:yanuar",
+       "f": "N;SG;INDF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "עַד",
+     "l": "he:ad"
+    },
+    {
+     "t": "מֶרְץ",
+     "l": "he:merts",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "בְּחֵיפָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core"
+   ],
+   "gloss": "From January to March he is in Haifa.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.181",
+   "frame": "fr.time",
+   "text": "אֲנַחְנוּ בְּחֵיפָה עַד דֵּצֶמְבֶּר.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "בְּחֵיפָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֵיפָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": "עַד",
+     "l": "he:ad"
+    },
+    {
+     "t": "דֵּצֶמְבֶּר",
+     "l": "he:detsember",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core"
+   ],
+   "gloss": "We are in Haifa until December.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.182",
+   "frame": "fr.time",
+   "text": "הוּא פֹּה מֵאָז יָנוּאָר.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "מֵאָז",
+     "l": "he:meaz"
+    },
+    {
+     "t": "יָנוּאָר",
+     "l": "he:yanuar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time"
+   ],
+   "gloss": "He has been here since January.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.183",
+   "frame": "fr.time",
+   "text": "הוּא לֹא פֹּה מֵאָז יָנוּאָר.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "מֵאָז",
+     "l": "he:meaz"
+    },
+    {
+     "t": "יָנוּאָר",
+     "l": "he:yanuar",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.negation"
+   ],
+   "gloss": "He hasn’t been here since January.",
+   "variantOf": "he.f5.182",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.184",
+   "frame": "fr.time",
+   "text": "מֵאָז הַבֹּקֶר אֲנִי מְחַכֶּה לָאוֹטוֹבּוּס.",
+   "tokens": [
+    {
+     "t": "מֵאָז",
+     "l": "he:meaz"
+    },
+    {
+     "t": "הַבֹּקֶר",
+     "l": "he:boker",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "מְחַכֶּה",
+     "l": "he:chika",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָאוֹטוֹבּוּס",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "אוֹטוֹבּוּס",
+       "l": "he:otobus",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "I (m.) have been waiting for the bus since the morning.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.185",
+   "frame": "fr.time",
+   "text": "בְּמֶשֶׁךְ הַקַּיִץ הַיְּלָדִים אֵצֶל סָבְתָא.",
+   "tokens": [
+    {
+     "t": "בְּמֶשֶׁךְ",
+     "l": "he:bemeshech"
+    },
+    {
+     "t": "הַקַּיִץ",
+     "l": "he:kayits",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "אֵצֶל",
+     "l": "he:etsel"
+    },
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "gloss": "During the summer the children are at Grandma’s.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.186",
+   "frame": "fr.time",
+   "text": "בַּקַּיִץ אֲנַחְנוּ נוֹסְעִים לְאֵילַת.",
+   "tokens": [
+    {
+     "t": "בַּקַּיִץ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "קַּיִץ",
+       "l": "he:kayits",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְאֵילַת",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "אֵילַת",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In summer we travel to Eilat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.187",
+   "frame": "fr.time",
+   "text": "בַּחֹרֶף אֲנִי נִשְׁאָר בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "בַּחֹרֶף",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹרֶף",
+       "l": "he:choref",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאָר",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In winter I (m.) stay at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.188",
+   "frame": "fr.time",
+   "text": "בַּחֹרֶף אֲנִי נִשְׁאֶרֶת בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "בַּחֹרֶף",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹרֶף",
+       "l": "he:choref",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "נִשְׁאֶרֶת",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In winter I (f.) stay at home.",
+   "variantOf": "he.f5.187",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.189",
+   "frame": "fr.time",
+   "text": "בָּאָבִיב אֲנַחְנוּ הוֹלְכִים בַּפַּארְק.",
+   "tokens": [
+    {
+     "t": "בָּאָבִיב",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אָבִיב",
+       "l": "he:aviv",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "הוֹלְכִים",
+     "l": "he:halach",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בַּפַּארְק",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "In spring we walk in the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.190",
+   "frame": "fr.time",
+   "text": "בַּסְּתָו הַסְּטוּדֶנְטִים חוֹזְרִים לָעִיר.",
+   "tokens": [
+    {
+     "t": "בַּסְּתָו",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סְּתָו",
+       "l": "he:stav",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הַסְּטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "חוֹזְרִים",
+     "l": "he:chazar",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לָעִיר",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עִיר",
+       "l": "he:ir",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.plural.noun"
+   ],
+   "gloss": "In autumn the students come back to the city.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.191",
+   "frame": "fr.time",
+   "text": "הַשָּׁעָה שָׁלוֹשׁ.",
+   "tokens": [
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.numerals"
+   ],
+   "gloss": "It is three o’clock.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.192",
+   "frame": "fr.time",
+   "text": "הַשָּׁעָה שָׁלוֹשׁ?",
+   "tokens": [
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is it three o’clock?",
+   "variantOf": "he.f5.191",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.193",
+   "frame": "fr.wh",
+   "text": "מָה הַשָּׁעָה?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.question.wh"
+   ],
+   "gloss": "What time is it?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.194",
+   "frame": "fr.wh",
+   "text": "מָה הַשָּׁעָה? הַשָּׁעָה עֶשֶׂר.",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "עֶשֶׂר",
+     "l": "he:asara",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.question.wh",
+    "fn.numerals"
+   ],
+   "gloss": "What time is it? — It is ten o’clock.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.195",
+   "frame": "fr.time",
+   "text": "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ.",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יוֹצֵאת",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בְּשָׁעָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁעָה",
+       "l": "he:shaa",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "חָמֵשׁ",
+     "l": "he:chamisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.numerals"
+   ],
+   "gloss": "The train leaves at five o’clock.",
+   "alts": [
+    "הָרַכֶּבֶת יוֹצֵאת בְּחָמֵשׁ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.196",
+   "frame": "fr.time",
+   "text": "הָרַכֶּבֶת יוֹצֵאת בְּשָׁעָה חָמֵשׁ?",
+   "tokens": [
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יוֹצֵאת",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בְּשָׁעָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁעָה",
+       "l": "he:shaa",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "חָמֵשׁ",
+     "l": "he:chamisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.numerals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Does the train leave at five o’clock?",
+   "variantOf": "he.f5.195",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הָרַכֶּבֶת יוֹצֵאת בְּחָמֵשׁ?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.197",
+   "frame": "fr.time",
+   "text": "הָאוֹטוֹבּוּס מַגִּיעַ בְּשָׁעָה שְׁמוֹנֶה.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בְּשָׁעָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁעָה",
+       "l": "he:shaa",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "שְׁמוֹנֶה",
+     "l": "he:shmona",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core",
+    "fn.numerals"
+   ],
+   "gloss": "The bus arrives at eight o’clock.",
+   "alts": [
+    "הָאוֹטוֹבּוּס מַגִּיעַ בִּשְׁמוֹנֶה."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.198",
+   "frame": "fr.time",
+   "text": "הָאוֹטוֹבּוּסִים מַגִּיעִים בְּשָׁעָה שְׁמוֹנֶה.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּסִים",
+     "l": "he:otobus",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "מַגִּיעִים",
+     "l": "he:higia",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בְּשָׁעָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁעָה",
+       "l": "he:shaa",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "שְׁמוֹנֶה",
+     "l": "he:shmona",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "gloss": "The buses arrive at eight o’clock.",
+   "variantOf": "he.f5.197",
+   "variant": {
+    "Number": "PL"
+   },
+   "alts": [
+    "הָאוֹטוֹבּוּסִים מַגִּיעִים בִּשְׁמוֹנֶה."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.199",
+   "frame": "fr.time",
+   "text": "הַמָּטוֹס מַגִּיעַ בְּשָׁעָה אַחַת.",
+   "tokens": [
+    {
+     "t": "הַמָּטוֹס",
+     "l": "he:matos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בְּשָׁעָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁעָה",
+       "l": "he:shaa",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "אַחַת",
+     "l": "he:echad",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core",
+    "fn.numerals"
+   ],
+   "gloss": "The plane arrives at one o’clock.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.200",
+   "frame": "fr.time",
+   "text": "אֲנִי בָּעֲבוֹדָה מִשְּׁמוֹנֶה עַד חָמֵשׁ.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "מִשְּׁמוֹנֶה",
+     "parts": [
+      {
+       "t": "מִ",
+       "l": "he:min"
+      },
+      {
+       "t": "שְּׁמוֹנֶה",
+       "l": "he:shmona",
+       "f": "NUM;FEM;PFX"
+      }
+     ]
+    },
+    {
+     "t": "עַד",
+     "l": "he:ad"
+    },
+    {
+     "t": "חָמֵשׁ",
+     "l": "he:chamisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core",
+    "fn.numerals"
+   ],
+   "gloss": "I am at work from eight to five.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.201",
+   "frame": "fr.time",
+   "text": "מִיּוֹם רִאשׁוֹן עַד יוֹם חֲמִישִׁי אֲנִי בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "מִיּוֹם רִאשׁוֹן",
+     "parts": [
+      {
+       "t": "מִ",
+       "l": "he:min"
+      },
+      {
+       "t": "יּוֹם רִאשׁוֹן",
+       "l": "he:yom-rishon",
+       "f": "N;SG;INDF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "עַד",
+     "l": "he:ad"
+    },
+    {
+     "t": "יוֹם חֲמִישִׁי",
+     "l": "he:yom-chamishi",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core"
+   ],
+   "gloss": "From Sunday to Thursday I am at work.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.202",
+   "frame": "fr.time",
+   "text": "הוּא נִשְׁאָר עַד יוֹם שִׁשִּׁי.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "נִשְׁאָר",
+     "l": "he:nishar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַד",
+     "l": "he:ad"
+    },
+    {
+     "t": "יוֹם שִׁשִּׁי",
+     "l": "he:yom-shishi",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present"
+   ],
+   "gloss": "He is staying until Friday.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.203",
+   "frame": "fr.command",
+   "text": "חַכֵּה חָמֵשׁ דַּקּוֹת!",
+   "tokens": [
+    {
+     "t": "חַכֵּה",
+     "l": "he:chika",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "חָמֵשׁ",
+     "l": "he:chamisha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "דַּקּוֹת",
+     "l": "he:daka",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.time",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "gloss": "Wait five minutes! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.204",
+   "frame": "fr.time",
+   "text": "זֶה עֶשֶׂר דַּקּוֹת בָּרֶגֶל.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "עֶשֶׂר",
+     "l": "he:asara",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "דַּקּוֹת",
+     "l": "he:daka",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "בָּרֶגֶל",
+     "l": "he:baregel"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "gloss": "It’s ten minutes on foot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.205",
+   "frame": "fr.count",
+   "text": "יֵשׁ שִׁשִּׁים דַּקּוֹת בְּשָׁעָה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "שִׁשִּׁים",
+     "l": "he:shishim"
+    },
+    {
+     "t": "דַּקּוֹת",
+     "l": "he:daka",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "בְּשָׁעָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁעָה",
+       "l": "he:shaa",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.prep.core"
+   ],
+   "gloss": "There are sixty minutes in an hour.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.206",
+   "frame": "fr.count",
+   "text": "יֵשׁ שִׁבְעָה יָמִים בְּשָׁבוּעַ.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "שִׁבְעָה",
+     "l": "he:shiva",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "יָמִים",
+     "l": "he:yom",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "בְּשָׁבוּעַ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁבוּעַ",
+       "l": "he:shavua",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.prep.core"
+   ],
+   "gloss": "There are seven days in a week.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.207",
+   "frame": "fr.count",
+   "text": "יֵשׁ שְׁנֵים עָשָׂר חֳדָשִׁים בְּשָׁנָה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "שְׁנֵים עָשָׂר",
+     "l": "he:shneim-asar",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "חֳדָשִׁים",
+     "l": "he:chodesh",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "בְּשָׁנָה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שָׁנָה",
+       "l": "he:shana",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.prep.core"
+   ],
+   "gloss": "There are twelve months in a year.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.208",
+   "frame": "fr.wh",
+   "text": "מָה הַתַּאֲרִיךְ הַיּוֹם?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הַתַּאֲרִיךְ",
+     "l": "he:taarich",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.question.wh",
+    "fn.definite"
+   ],
+   "gloss": "What is the date today?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.209",
+   "frame": "fr.time",
+   "text": "הַיּוֹם עֶשְׂרִים בְּמַאי.",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "עֶשְׂרִים",
+     "l": "he:esrim"
+    },
+    {
+     "t": "בְּמַאי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מַאי",
+       "l": "he:mai",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.prep.core"
+   ],
+   "gloss": "Today is the twentieth of May.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.210",
+   "frame": "fr.time",
+   "text": "הוּא חוֹזֵר הַבַּיְתָה שָׁעָה לִפְנֵי אֲרוּחַת הָעֶרֶב.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חוֹזֵר",
+     "l": "he:chazar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": "שָׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לִפְנֵי",
+     "l": "he:lifnei"
+    },
+    {
+     "t": "אֲרוּחַת הָעֶרֶב",
+     "l": "he:aruchat-erev",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "He comes home an hour before dinner.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.211",
+   "frame": "fr.time",
+   "text": "אַחֲרֵי הָעֲבוֹדָה אֲנִי הוֹלֵךְ לַפַּארְק.",
+   "tokens": [
+    {
+     "t": "אַחֲרֵי",
+     "l": "he:acharei"
+    },
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֵךְ",
+     "l": "he:halach",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לַפַּארְק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "After work I (m.) go to the park.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.212",
+   "frame": "fr.time",
+   "text": "אַחֲרֵי הָעֲבוֹדָה אֲנִי הוֹלֶכֶת לַפַּארְק.",
+   "tokens": [
+    {
+     "t": "אַחֲרֵי",
+     "l": "he:acharei"
+    },
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הוֹלֶכֶת",
+     "l": "he:halach",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לַפַּארְק",
+     "parts": [
+      {
+       "t": "לַ",
+       "l": "he:le",
+       "f": "ADP;DEF"
+      },
+      {
+       "t": "פַּארְק",
+       "l": "he:park",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "After work I (f.) go to the park.",
+   "variantOf": "he.f5.211",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.213",
+   "frame": "fr.time",
+   "text": "אַחֲרֵי אֲרוּחַת הָעֶרֶב אֲנַחְנוּ שׁוֹתִים תֵּה.",
+   "tokens": [
+    {
+     "t": "אַחֲרֵי",
+     "l": "he:acharei"
+    },
+    {
+     "t": "אֲרוּחַת הָעֶרֶב",
+     "l": "he:aruchat-erev",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "תֵּה",
+     "l": "he:te",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present"
+   ],
+   "gloss": "After dinner we drink tea.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.214",
+   "frame": "fr.time",
+   "text": "הוּא חָזַר לִפְנֵי שָׁבוּעַ.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חָזַר",
+     "l": "he:chazar",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "לִפְנֵי",
+     "l": "he:lifnei"
+    },
+    {
+     "t": "שָׁבוּעַ",
+     "l": "he:shavua",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time"
+   ],
+   "gloss": "He came back a week ago.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.215",
+   "frame": "fr.time",
+   "text": "הַחֻפְשָׁה שֶׁלִּי שְׁבוּעַיִם.",
+   "tokens": [
+    {
+     "t": "הַחֻפְשָׁה",
+     "l": "he:chufsha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "שְׁבוּעַיִם",
+     "l": "he:shavua",
+     "f": "N;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.possessive"
+   ],
+   "gloss": "My holiday is two weeks.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.216",
+   "frame": "fr.time",
+   "text": "אֲנִי מְחַכֶּה שְׁעָתַיִם.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "מְחַכֶּה",
+     "l": "he:chika",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "שְׁעָתַיִם",
+     "l": "he:shaa",
+     "f": "N;DU;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present"
+   ],
+   "gloss": "I (m.) have been waiting for two hours.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.217",
+   "frame": "fr.time",
+   "text": "הִיא נוֹסַעַת לְחֻפְשָׁה בְּיוּלִי.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "נוֹסַעַת",
+     "l": "he:nasa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לְחֻפְשָׁה",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "חֻפְשָׁה",
+       "l": "he:chufsha",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "בְּיוּלִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוּלִי",
+       "l": "he:yuli",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "She is going on holiday in July.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.218",
+   "frame": "fr.have",
+   "text": "יֵשׁ לָנוּ חֻפְשָׁה בְּאוֹגוּסְט.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "חֻפְשָׁה",
+     "l": "he:chufsha",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בְּאוֹגוּסְט",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אוֹגוּסְט",
+       "l": "he:ogust",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.have",
+    "fn.prep.core"
+   ],
+   "gloss": "We have a holiday in August.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.219",
+   "frame": "fr.time",
+   "text": "כָּל שָׁנָה אֲנַחְנוּ נוֹסְעִים לְאֵילַת.",
+   "tokens": [
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "שָׁנָה",
+     "l": "he:shana",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְאֵילַת",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "אֵילַת",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "Every year we travel to Eilat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.220",
+   "frame": "fr.time",
+   "text": "הַשָּׁנָה אֲנַחְנוּ נוֹסְעִים לְיָוָן.",
+   "tokens": [
+    {
+     "t": "הַשָּׁנָה",
+     "l": "he:shana",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְיָוָן",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "יָוָן",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "This year we are travelling to Greece.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.221",
+   "frame": "fr.time",
+   "text": "הַחֹדֶשׁ אֲנִי בַּבַּיִת.",
+   "tokens": [
+    {
+     "t": "הַחֹדֶשׁ",
+     "l": "he:chodesh",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בַּבַּיִת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core"
+   ],
+   "gloss": "This month I am at home.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f5.222",
+   "frame": "fr.time",
+   "text": "בְּמֶשֶׁךְ הַשָּׁבוּעַ אֲנִי בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "בְּמֶשֶׁךְ",
+     "l": "he:bemeshech"
+    },
+    {
+     "t": "הַשָּׁבוּעַ",
+     "l": "he:shavua",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core"
+   ],
+   "gloss": "During the week I am at work.",
+   "level": "A1"
+  }
+ ]
+}

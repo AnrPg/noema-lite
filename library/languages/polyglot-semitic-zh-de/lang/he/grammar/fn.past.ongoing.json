@@ -1,0 +1,356 @@
+{
+ "function": "fn.past.ongoing",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "none"
+  }
+ ],
+ "summary": "Hebrew has no imperfective or progressive past form. What was going on, or what used to happen again and again, is said with the past of הָיָה “to be” followed by the present form (the participle) of the verb: הָיִיתִי מְשַׂחֵק “I used to play / I was playing”. Both words agree with the subject — הָיָה in person, gender and number (הָיִיתִי, הָיְתָה, הָיִינוּ, הָיוּ), the present form in gender and number (מְשַׂחֵק, מְשַׂחֶקֶת, מְשַׂחֲקִים, מְשַׂחֲקוֹת): כְּשֶׁהָיִיתִי יַלְדָּה, הָיִיתִי מְשַׂחֶקֶת בַּחוּץ. Above all it is the habitual past of memories — childhood, holidays, “every day”, “every Saturday”. A single action in progress “when something happened” can be said the same way (כְּשֶׁאַבָּא חָזַר, הַיְּלָדִים הָיוּ יְשֵׁנִים), but the plain past with a time clause is just as common, and often there is no special form at all: כְּשֶׁהָיִיתִי יֶלֶד, שִׂחַקְתִּי בַּחוּץ כָּל יוֹם is also correct. In formal style the verb נָהַג “to be in the habit of” + infinitive says “used to” (הוּא נָהַג לָשֶׁבֶת כָּאן).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "who",
+    "הָיָה (past)",
+    "+ present",
+    "“used to play”"
+   ],
+   "rows": [
+    [
+     "אֲנִי (m. / f.)",
+     "הָיִיתִי",
+     "מְשַׂחֵק / מְשַׂחֶקֶת",
+     "I used to play"
+    ],
+    [
+     "אַתָּה / אַתְּ",
+     "הָיִיתָ / הָיִית",
+     "מְשַׂחֵק / מְשַׂחֶקֶת",
+     "you used to play"
+    ],
+    [
+     "הוּא / הִיא",
+     "הָיָה / הָיְתָה",
+     "מְשַׂחֵק / מְשַׂחֶקֶת",
+     "he / she used to play"
+    ],
+    [
+     "אֲנַחְנוּ",
+     "הָיִינוּ",
+     "מְשַׂחֲקִים / מְשַׂחֲקוֹת",
+     "we used to play"
+    ],
+    [
+     "אַתֶּם / אַתֶּן",
+     "הֱיִיתֶם / הֱיִיתֶן",
+     "מְשַׂחֲקִים / מְשַׂחֲקוֹת",
+     "you (pl.) used to play"
+    ],
+    [
+     "הֵם / הֵן",
+     "הָיוּ",
+     "מְשַׂחֲקִים / מְשַׂחֲקוֹת",
+     "they used to play"
+    ]
+   ],
+   "caption": "Two agreeing words: הָיָה shows the person and the past, the present form shows gender and number."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Habit in the past = הָיָה + present",
+   "text": "בַּיַּלְדוּת שֶׁלִּי הָיִינוּ נוֹסְעִים לְסַבָּא כָּל שַׁבָּת “in my childhood we used to go to Grandpa every Saturday”. Words like כָּל יוֹם, כָּל שַׁבָּת, תָּמִיד and בַּיַּלְדוּת שֶׁלִּי go with it.",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "plain past (one event, or a summary)",
+    "הָיָה + present (habit, background)"
+   ],
+   "rows": [
+    [
+     "שִׂחַקְתִּי בַּחוּץ. “I played outside.”",
+     "הָיִיתִי מְשַׂחֵק בַּחוּץ. “I used to play outside.”"
+    ],
+    [
+     "סָבְתָא בִּשְּׁלָה מָרָק. “Grandma cooked soup.”",
+     "סָבְתָא הָיְתָה מְבַשֶּׁלֶת מָרָק. “Grandma used to cook soup.”"
+    ],
+    [
+     "הוּא קָם מְאֻחָר. “He got up late.”",
+     "הוּא הָיָה קָם מְאֻחָר. “He used to get up late.”"
+    ]
+   ],
+   "caption": "The construction is a choice, not an obligation: the plain past is never wrong, the construction adds “regularly, back then”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "“Was doing … when …”",
+   "text": "For the background of an event the construction works too: כְּשֶׁהוּא הִגִּיעַ, הִיא הָיְתָה מִתְקַלַּחַת “when he arrived, she was showering”. The event itself is in the plain past (הִגִּיעַ).",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Which form after הָיָה?",
+   "text": "The present form, never the past or the infinitive: הָיִיתִי מְשַׂחֵק, not *הָיִיתִי שִׂחַקְתִּי or *הָיִיתִי לְשַׂחֵק. And both words agree: a woman says הָיִיתִי מְשַׂחֶקֶת, a group הָיִינוּ מְשַׂחֲקִים."
+  },
+  {
+   "t": "table",
+   "head": [
+    "formal",
+    "everyday"
+   ],
+   "rows": [
+    [
+     "הוּא נָהַג לָשֶׁבֶת כָּאן.",
+     "הוּא הָיָה יוֹשֵׁב כָּאן."
+    ]
+   ],
+   "caption": "נָהַג + infinitive “was in the habit of” (lesson 13) is the written alternative."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "A habit or a background in the past?",
+    "הָיָה in the right person",
+    "+ the present form in gender and number",
+    "+ a word of frequency or a time clause"
+   ],
+   "caption": "Building the habitual past"
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Did it happen once, or again and again?",
+    "Who? → הָיִיתִי / הָיָה / הָיְתָה / הָיִינוּ / הָיוּ …",
+    "Man or woman, one or more? → מְשַׂחֵק / מְשַׂחֶקֶת / מְשַׂחֲקִים / מְשַׂחֲקוֹת"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Was it a habit (every day, as a child) or the background of another event? → הָיָה + present; one finished event → the plain past.",
+   "Who? Put הָיָה in the past for that person: הָיִיתִי, הָיִיתָ, הָיִית, הָיָה, הָיְתָה, הָיִינוּ, הֱיִיתֶם, הָיוּ.",
+   "Then the present form for gender and number: מְשַׂחֵק, מְשַׂחֶקֶת, מְשַׂחֲקִים, מְשַׂחֲקוֹת.",
+   "Negative? לֹא before הָיָה: הֵם לֹא הָיוּ מְשַׂחֲקִים.",
+   "Formal text? נָהַג + infinitive is an alternative: נָהַג לָשֶׁבֶת."
+  ],
+  "steps": [
+   "Decide: habit / background, or a single event.",
+   "Put הָיָה in the past (person).",
+   "Add the present form (gender, number)."
+  ]
+ },
+ "traps": [
+  "*הָיִיתִי שִׂחַקְתִּי — after הָיָה comes the present form: הָיִיתִי מְשַׂחֵק.",
+  "*הִיא הָיְתָה מְשַׂחֵק — both words agree: הִיא הָיְתָה מְשַׂחֶקֶת.",
+  "*הָיִינוּ מְשַׂחֵק — “we” takes the plural: הָיִינוּ מְשַׂחֲקִים.",
+  "The construction is optional: כְּשֶׁהָיִיתִי יֶלֶד, שִׂחַקְתִּי בַּחוּץ is also correct.",
+  "The negation normally goes before הָיָה: לֹא הָיִינוּ מְשַׂחֲקִים “we didn’t use to play”.",
+  "There is no special word for “used to”: the meaning is in הָיָה + present (or in נָהַג + infinitive)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:haya"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;1;SG",
+  "V;PST;3;SG;MASC",
+  "V;PST;3;SG;FEM",
+  "V;PST;1;PL",
+  "V;PST;3;PL",
+  "V;PRS;SG;MASC",
+  "V;PRS;SG;FEM",
+  "V;PRS;PL;MASC",
+  "V;PRS;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "he:haya"
+   ],
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;2;SG;MASC",
+    "V;PST;2;SG;FEM",
+    "V;PST;3;SG;MASC",
+    "V;PST;3;SG;FEM",
+    "V;PST;1;PL",
+    "V;PST;3;PL"
+   ]
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Aspect"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past.ongoing"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.past.ongoing",
+   "note": "Arabic says it with the same verb “to be”: كَانَ يَلْعَبُ “he used to play” — كَانَ + the imperfect, where Hebrew has הָיָה + the present form (participle): הָיָה מְשַׂחֵק."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.past.ongoing",
+   "note": "German has no special form either: früher / immer + Präteritum or Perfekt (früher spielte ich draußen); Hebrew has a construction for it, הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.past.ongoing",
+   "note": "Chinese uses time words (小时候, 以前) with 常常, and 在 for an ongoing action; Hebrew uses הָיָה + the present form."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek uses its imperfect for habits (έπαιζα έξω “I used to play outside”); Hebrew has no such form and builds it: הָיִיתִי מְשַׂחֵק — הָיָה + present."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian expresses habits with the imperfective past (играл); Hebrew has no aspect pairs and uses הָיָה + present: הָיִיתִי מְשַׂחֵק — or simply the past, שִׂחַקְתִּי."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "הָיִיתִי מְשַׂחֵק corresponds to the imperfecto (jugaba): habits and backgrounds in the past — but in Hebrew it is a two-word construction, and the plain past is never wrong."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "הָיִיתִי מְשַׂחֵק is close to “I used to play / I would play”, and also “I was playing” as a background; but there is no “used to” word — the meaning is in הָיָה + present."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Where French uses the imparfait (je jouais dehors), Hebrew uses הָיָה + present: הָיִיתִי מְשַׂחֵק בַּחוּץ — and may simply use the past."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has no habitual form (früher spielte ich …, ich pflegte zu …); Hebrew has one: הָיִיתִי מְשַׂחֵק, and its formal counterpart נָהַג לְשַׂחֵק ≈ “pflegte zu spielen”."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi builds the habitual past the same way — participle + “was”: मैं खेलता था. Hebrew reverses the order: “was” + participle, הָיִיתִי מְשַׂחֵק, and both words agree."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian marks the habitual and ongoing past with می‌ on the past verb (بازی می‌کردم); Hebrew adds the past of הָיָה to the present form: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi has a habitual past form (मी खेळायचो “I used to play”); Hebrew uses two words: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The same construction as Arabic كَانَ + imperfect (كُنْتُ أَلْعَبُ): Hebrew הָיִיתִי + the present form (participle), מְשַׂחֵק."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has suffixes for it — -(A)rdI for habits (oynardım) and -(I)yordu for ongoing (oynuyordum); Hebrew uses הָיָה + present for both: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese uses ～ていた for an ongoing past and ～たものだ for nostalgic habits; Hebrew has one construction for both, הָיָה + present."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean has -고 있었다 (was doing) and -곤 했다 (used to); Hebrew uses one construction, הָיָה + present, for both."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has no special habitual form (ennen leikin ulkona); Hebrew can use the plain past too, or the construction הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian says a past habit with szokott + infinitive (szoktam játszani) or with the past and an adverb; Hebrew uses הָיָה + present — and the formal נָהַג + infinitive is close to szokott."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili builds the ongoing past with -likuwa + a verb with -ki- (nilikuwa nikicheza); Hebrew uses הָיָה + the present form: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has no tense: 小时候我常常在外面玩; Hebrew needs the past of הָיָה with the present form: הָיִיתִי מְשַׂחֵק בַּחוּץ."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses hay / thường (habit) and đang (ongoing) with a time word; Hebrew turns the time into הָיָה: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Polysynthetic languages tend to put habit and duration into suffixes inside one verb word; Hebrew uses two words — the past of הָיָה and the present form: הָיִיתִי מְשַׂחֵק."
+  }
+ ]
+}

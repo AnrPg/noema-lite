@@ -1,0 +1,117 @@
+{
+ "field": "measures",
+ "title": "Measures and amounts",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "measure.clf.subject",
+   "gloss": "(classifier for school subjects, courses, languages: 一门课)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "measure.clf.sum",
+   "gloss": "(classifier for sums of money and deals: 一笔钱 a sum of money)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "measure.grain",
+   "gloss": "a grain, a granule (a grain of rice, of sand)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "measure.li",
+   "gloss": "li, a Chinese mile (500 m)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "measure.morgen",
+   "gloss": "morgen (old land measure)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "measure.pair",
+   "gloss": "pair, couple; one of a pair",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "measure.size",
+   "gloss": "size (of clothes, shoes: 大号 large)",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "measure.tael",
+   "gloss": "tael (a unit of weight, 50 g)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "measure.bottle",
+   "gloss": "bottle",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "measure.can",
+   "gloss": "can, tin",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "measure.box",
+   "gloss": "box",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "measure.packet",
+   "gloss": "packet",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "measure.kilo",
+   "gloss": "kilo(gram)",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "measure.gram",
+   "gloss": "gram",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "measure.litre",
+   "gloss": "litre",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "measure.piece",
+   "gloss": "piece",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "measure.slice",
+   "gloss": "slice",
+   "tier": 1,
+   "rank": 11
+  }
+ ]
+}

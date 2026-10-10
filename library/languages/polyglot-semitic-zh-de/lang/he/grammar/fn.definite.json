@@ -1,0 +1,301 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.definiteArticle",
+   "value": "prefix"
+  }
+ ],
+ "summary": "Hebrew marks a definite noun with the prefix ha- (הַ), written onto the noun: בַּיִת “a house” → הַבַּיִת “the house”. There is no indefinite article: a bare noun is indefinite (זֶה סֵפֶר “this is a book”; זֶה הַסֵּפֶר “this is the book”). The article usually doubles the next consonant with a dagesh (הַסֵּפֶר, הַשֻּׁלְחָן, הַמְּנוֹרָה); before the gutturals, which cannot be doubled, its vowel changes: הָ before א, ע, ר (הָאָרוֹן, הָעֵט, הָאִשָּׁה), הַ with no doubling before ה and ח (הַחֶדֶר, הַחַלּוֹן), and הֶ before חָ (הֶחָבֵר). Words that agree with a definite noun after it take the article too (הַסֵּפֶר הַזֶּה; later הַסֵּפֶר הַחָדָשׁ). From lesson 7 a definite direct object is also introduced by אֶת (הוּא קוֹרֵא אֶת הַסֵּפֶר).",
+ "procedure": {
+  "askYourself": [
+   "Is the thing specific — already known to the listener, or the only one? → add הַ; if not, use the bare noun (there is no “a”).",
+   "What is the first letter of the noun? א / ע / ר → הָ; ה / ח → הַ without a dagesh; חָ → הֶ; any other letter → הַ + a dagesh in that letter.",
+   "Is there a demonstrative (or later an adjective) after the noun? It takes the article too: הַסֵּפֶר הַזֶּה.",
+   "Is it a name or a noun with a possessive suffix? → it is already definite: no הַ.",
+   "Is the definite noun the direct object of a verb (from lesson 7)? → put אֶת before it.",
+   "Is it a construct phrase (two nouns, like תַּפּוּחַ אֲדָמָה)? → the article goes on the last noun: תַּפּוּחַ הָאֲדָמָה."
+  ],
+  "steps": [
+   "Decide definite or not.",
+   "Choose the form of the article from the first letter.",
+   "Repeat the article on a demonstrative or adjective after the noun.",
+   "Add אֶת if it is a definite direct object."
+  ]
+ },
+ "traps": [
+  "No indefinite article: “a book” is just סֵפֶר — never *אֶחָד סֵפֶר as an article.",
+  "The article changes before gutturals: הָאָרוֹן, הָעֵט, הֶחָבֵר — but הַחֶדֶר, הַחֲבֵרִים.",
+  "Article on both words: הַבַּיִת הַזֶּה, not *בַּיִת הַזֶּה or *הַבַּיִת זֶה.",
+  "זֶה הַבַּיִת (“this is the house”) and הַבַּיִת הַזֶּה (“this house”) are different: the first is a sentence.",
+  "אֶת only before a definite object (lesson 7): הוּא קוֹרֵא סֵפֶר (no אֶת), but הוּא קוֹרֵא אֶת הַסֵּפֶר.",
+  "Names and nouns with a possessive suffix are already definite and take no הַ."
+ ],
+ "evidence": {
+  "tags": [
+   "DEF"
+  ]
+ },
+ "paradigmCells": [
+  "N;SG;INDF",
+  "N;SG;DEF",
+  "N;PL;INDF",
+  "N;PL;DEF"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;SG;DEF",
+    "N;PL;DEF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "first letter of the noun",
+    "article",
+    "examples"
+   ],
+   "rows": [
+    [
+     "most letters",
+     "הַ + dagesh in the letter",
+     "הַבַּיִת, הַסֵּפֶר, הַשֻּׁלְחָן, הַמְּנוֹרָה, הַטֶּלֶפוֹן, הַמַּפְתֵּחַ"
+    ],
+    [
+     "א, ע, ר",
+     "הָ",
+     "הָאָרוֹן, הָעֵט, הָאִשָּׁה"
+    ],
+    [
+     "ה, ח (with a vowel other than qamats)",
+     "הַ, no dagesh",
+     "הַחֶדֶר, הַחַלּוֹן, הַחֲבֵרִים"
+    ],
+    [
+     "חָ (with qamats)",
+     "הֶ",
+     "הֶחָבֵר"
+    ],
+    [
+     "plural, same rules",
+     "",
+     "הַבָּתִּים, הַסְּפָרִים, הָאֲרוֹנוֹת, הַחֲדָרִים"
+    ]
+   ],
+   "caption": "The forms of the article (the stored DEF cells of every noun).",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Indefinite — no article",
+     "points": [
+      "זֶה בַּיִת — this is a house",
+      "זֹאת דִּירָה — this is a flat",
+      "סֵפֶר is “a book” or “book”"
+     ]
+    },
+    {
+     "title": "Definite — הַ",
+     "points": [
+      "זֶה הַבַּיִת — this is the house",
+      "הַדִּירָה פֹּה — the flat is here",
+      "הַסֵּפֶר הַזֶּה — this book"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No word for “a”",
+   "text": "Do not translate “a” with אֶחָד / אַחַת (“one”) — that means “one”. “A key” is simply מַפְתֵּחַ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The article repeats",
+   "text": "A demonstrative after a definite noun takes the article too: הַבַּיִת הַזֶּה, הָאִשָּׁה הַהִיא. Adjectives will do the same (lesson 16).",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    },
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "noun-dem"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Already definite",
+   "text": "Names (דָּוִד, שָׂרָה) and nouns with a possessive suffix (שְׁמִי “my name”) are definite without הַ."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is the thing specific — known to the listener, or the only one?",
+    "What is the first letter of the noun?",
+    "Is there a demonstrative after it?"
+   ]
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.definite",
+   "note": "Arabic الـ is the same idea, a prefix; both languages double the next consonant — Arabic for the “sun letters” (الشَّمْس aš-šams), Hebrew for almost every letter (הַשֻּׁלְחָן). Arabic marks the indefinite with -un (tanwīn); Hebrew leaves it bare."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.definite",
+   "note": "German has both articles, der / die / das and ein / eine, and they show gender and case; Hebrew הַ shows neither."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.definite",
+   "note": "Chinese has no articles: definiteness comes from context, word order or 这 / 那."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has a definite article too (ο / η / το), but Hebrew הַ never changes for gender, number or case, and it is written onto the word. There is no ένας / μία: סֵפֶר is “a book”."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian has no articles; Hebrew marks “the” with הַ: סֵפֶר “a book, book” — הַסֵּפֶר “the book”. Use it whenever the listener knows which one."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Like el / la / los / las, but one form for all, written onto the noun: הַבַּיִת, הַדִּירָה, הַבָּתִּים. There is no un / una: a bare noun is indefinite."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "הַ works much like “the” and never changes; but there is no “a”: סֵפֶר is “a book”. And the article is repeated on a demonstrative (later on an adjective) after the noun: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Like le / la / les, but invariable and attached: הַבַּיִת. There is no un / une and no partitive du / des: אֲנִי אוֹכֵל לֶחֶם “I eat (some) bread”."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "One article for der / die / das in every case: הַ. There is no ein / eine — a bare noun is indefinite — and the gender shows only in the words that agree."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi has no articles; Hebrew marks a thing the listener knows with הַ, written onto the noun."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian has no definite article; it marks a definite object with را and an indefinite noun with -ی. Hebrew marks definiteness on the noun itself with הַ (and later puts אֶת before a definite object)."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi has no articles; Hebrew marks a known noun with the prefix הַ."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The same idea as الْـ: a prefix, one form for all, and a doubled first letter after it (الشَّمْس ~ the dagesh in הַשֶּׁמֶשׁ). But Hebrew has no indefinite ending: كِتَابٌ (with tanwīn) is just סֵפֶר."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has no “the”; it uses bir for “a” and marks a definite object with -(y)ı. Hebrew has the opposite tool: a “the” (הַ) and no “a”."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese has no articles; Hebrew adds הַ to every noun the listener can identify, and leaves it off otherwise."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish has no articles; Hebrew marks “the” with הַ — whenever the listener knows which one."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian has a / az “the” and egy “a”; Hebrew has only “the”, written onto the word (הַבַּיִת), and no “a”."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili has no articles; Hebrew marks a definite noun with הַ."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese has no articles (这 / 那 or the context show what is known); Hebrew uses הַ for every definite noun, and a bare noun means “a …”."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese has no articles; Hebrew puts הַ on every definite noun."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no articles; Hebrew marks a definite noun with the prefix הַ."
+  }
+ ]
+}

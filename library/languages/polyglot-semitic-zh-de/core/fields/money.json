@@ -1,0 +1,66 @@
+{
+ "field": "money",
+ "title": "Money",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "money.banknote",
+   "gloss": "banknote, paper money",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "money.cent",
+   "gloss": "fen, a cent (1/100 yuan)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "money.gambling",
+   "gloss": "gambling, especially online (slang euphemism, from 博彩)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "money.price",
+   "gloss": "price",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "money.money",
+   "gloss": "money",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "money.change",
+   "gloss": "change (money given back)",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "money.receipt",
+   "gloss": "receipt",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "money.bill",
+   "gloss": "bill, check (at a restaurant)",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "money.tip",
+   "gloss": "tip (money for service)",
+   "tier": 1,
+   "rank": 6
+  }
+ ]
+}

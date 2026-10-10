@@ -1,0 +1,404 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.plural",
+   "value": "obligatory"
+  },
+  {
+   "feature": "nom.dual",
+   "value": "none"
+  },
+  {
+   "feature": "nom.singulative",
+   "value": "none"
+  },
+  {
+   "feature": "morph.stemChange",
+   "value": "some"
+  }
+ ],
+ "summary": "German has no single plural ending: there are five patterns, and the vowel often takes an umlaut (a → ä, o → ö, u → ü). -e: der Tisch – die Tische, der Stuhl – die Stühle. -er (with umlaut where possible): das Kind – die Kinder, das Buch – die Bücher. -(e)n: die Frau – die Frauen, die Lampe – die Lampen, die Lehrerin – die Lehrerinnen. -s (mostly loanwords and words ending in a vowel): das Handy – die Handys, das Baby – die Babys. No ending (often nouns in -er, -el, -chen): das Zimmer – die Zimmer, der Lehrer – die Lehrer, and with umlaut only: die Mutter – die Mütter, der Bruder – die Brüder. Learn every noun with its article and plural, as a dictionary gives it (der Stuhl, -e). The plural article is always die (dieser → diese, mein → meine), the indefinite article has no plural (ein Buch → Bücher), and in the dative plural the noun adds -n unless it already ends in -n or -s: den Kindern, but den Frauen, den Handys.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "pattern",
+    "nouns taught so far",
+    "typical for"
+   ],
+   "rows": [
+    [
+     "-e",
+     "der Tisch – die Tische · der Stift – die Stifte · der Freund – die Freunde · das Telefon – die Telefone",
+     "masculine and neuter"
+    ],
+    [
+     "¨-e",
+     "der Stuhl – die Stühle · der Schrank – die Schränke · die Wand – die Wände · der Sohn – die Söhne",
+     "masculine (and some feminine) one-syllable nouns"
+    ],
+    [
+     "-er / ¨-er",
+     "das Kind – die Kinder · das Buch – die Bücher · das Haus – die Häuser · das Glas – die Gläser · der Mann – die Männer",
+     "neuter one-syllable nouns"
+    ],
+    [
+     "-n / -en",
+     "die Frau – die Frauen · die Tür – die Türen · die Lampe – die Lampen · die Tasse – die Tassen · die Wohnung – die Wohnungen · das Bett – die Betten · die Schwester – die Schwestern · die Tante – die Tanten",
+     "most feminine nouns"
+    ],
+    [
+     "-nen (after -in)",
+     "die Lehrerin – die Lehrerinnen · die Freundin – die Freundinnen · die Enkelin – die Enkelinnen",
+     "female nouns in -in"
+    ],
+    [
+     "-n (weak masculines)",
+     "der Junge – die Jungen · der Student – die Studenten · der Neffe – die Neffen",
+     "masculine nouns that end in -n in every case but one"
+    ],
+    [
+     "-s",
+     "das Handy – die Handys · das Baby – die Babys · der Opa – die Opas · die Oma – die Omas · der Cousin – die Cousins",
+     "loanwords, nouns ending in a vowel"
+    ],
+    [
+     "– (no ending)",
+     "das Zimmer – die Zimmer · das Fenster – die Fenster · der Lehrer – die Lehrer · der Schlüssel – die Schlüssel · der Teller – die Teller · das Mädchen – die Mädchen · der Onkel – die Onkel · der Enkel – die Enkel",
+     "masculine and neuter nouns in -er, -el, -en, -chen"
+    ],
+    [
+     "¨ only",
+     "die Mutter – die Mütter · der Vater – die Väter · der Bruder – die Brüder · die Tochter – die Töchter",
+     "a few nouns in -er"
+    ]
+   ],
+   "caption": "The plural patterns with the nouns of S01, S04 and S06 (¨ = umlaut)",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    },
+    {
+     "feature": "morph.stemChange",
+     "value": "some"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "the",
+     "der / die / das Stuhl, Lampe, Buch",
+     "die Stühle, Lampen, Bücher"
+    ],
+    [
+     "a / –",
+     "ein Stuhl, eine Lampe, ein Buch",
+     "Stühle, Lampen, Bücher (no article)"
+    ],
+    [
+     "this",
+     "dieser / diese / dieses",
+     "diese"
+    ],
+    [
+     "my",
+     "mein / meine / mein",
+     "meine"
+    ],
+    [
+     "dative plural",
+     "",
+     "den Stühlen, den Lampen, den Büchern"
+    ]
+   ],
+   "caption": "One plural article for all genders: die"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The dative plural adds -n",
+   "text": "die Kinder → mit den Kindern, die Männer → den Männern, die Brüder → den Brüdern. No extra -n when the plural already ends in -n or -s: den Frauen, den Lampen, den Handys, den Omas."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Rules of thumb (not laws)",
+   "text": "Feminine → usually -(e)n (and -in → -innen). Nouns in -chen, -lein, and masculine/neuter nouns in -er, -el, -en → no ending. Loanwords (das Handy, das Baby, der Cousin) and nouns ending in a vowel other than -e → -s. One-syllable masculines → often -e, often with umlaut. One-syllable neuters → often -er with umlaut."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Plural only",
+   "text": "die Leute (people), die Eltern (parents), die Großeltern (grandparents) have no singular: one person = eine Person, one parent = ein Elternteil."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which plural did I learn with this noun (der Stuhl, -e → die Stühle)?",
+   "Is it feminine? Then -(e)n is very likely; a female noun in -in takes -innen.",
+   "Does it end in -er, -el, -en or -chen (masculine or neuter)? Then no ending – maybe an umlaut (Mütter, Väter, Brüder).",
+   "Is it a loanword or does it end in a vowel (Handy, Baby, Opa)? Then often -s.",
+   "Is it a one-syllable neuter (Kind, Buch, Haus)? Then often -er with umlaut.",
+   "Is it plural-only (Leute, Eltern, Großeltern)?",
+   "Is it dative plural? Add -n unless the plural already ends in -n or -s."
+  ],
+  "steps": [
+   "Recall the plural form.",
+   "Use die (nominative/accusative), den (dative) or der (genitive); no article for “some”.",
+   "Check the dative -n."
+  ]
+ },
+ "traps": [
+  "Umlaut only: die Mutter – die Mütter, der Vater – die Väter, der Bruder – die Brüder, die Tochter – die Töchter (die Muttern are nuts for bolts!).",
+  "Same form in the singular and plural: das Zimmer – die Zimmer, der Lehrer – die Lehrer, das Mädchen – die Mädchen, der Enkel – die Enkel.",
+  "Dative plural adds -n: den Kindern, den Männern – but not after -n or -s: den Frauen, den Handys.",
+  "Loanwords: das Baby – die Babys (not *Babies), der Cousin – die Cousins.",
+  "Weak masculines take -n everywhere: der Junge – die Jungen, der Neffe – die Neffen.",
+  "ein has no plural: ein Buch – Bücher (no article).",
+  "Leute, Eltern and Großeltern have no singular."
+ ],
+ "evidence": {
+  "tags": [
+   "N",
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;PL",
+  "N;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;PL"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;DAT;PL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "principal_parts",
+   "pos": "NOUN",
+   "count": 10
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "das Buch → die ___",
+   "options": [
+    "Bücher",
+    "Buchs",
+    "Buchen"
+   ],
+   "answer": "Bücher",
+   "why": "One-syllable neuter: -er with umlaut."
+  },
+  {
+   "q": "die Lampe → die ___",
+   "options": [
+    "Lampen",
+    "Lampe",
+    "Lämpe"
+   ],
+   "answer": "Lampen",
+   "why": "Feminine in -e: add -n."
+  },
+  {
+   "q": "das Handy → die ___",
+   "options": [
+    "Handys",
+    "Handies",
+    "Handyen"
+   ],
+   "answer": "Handys",
+   "why": "Loanword ending in a vowel: -s."
+  },
+  {
+   "q": "der Lehrer → die ___",
+   "options": [
+    "Lehrer",
+    "Lehrern",
+    "Lehrers"
+   ],
+   "answer": "Lehrer",
+   "why": "Masculine in -er: no ending (Lehrern is the dative plural)."
+  },
+  {
+   "q": "die Mutter → die ___",
+   "options": [
+    "Mütter",
+    "Muttern",
+    "Mutters"
+   ],
+   "answer": "Mütter",
+   "why": "Umlaut only; Muttern are nuts for bolts."
+  },
+  {
+   "q": "Which article goes with every plural noun?",
+   "options": [
+    "die",
+    "der",
+    "das"
+   ],
+   "answer": "die",
+   "why": "die Stühle, die Lampen, die Bücher – one plural article for all three genders."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.plural.noun",
+   "note": "Arabic has a dual (two) and “broken” plurals made inside the word (kitāb → kutub) – a bigger version of German Buch → Bücher."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.plural.noun",
+   "note": "Hebrew plurals end mostly in -im (masculine) and -ot (feminine), with exceptions; the vowels inside the word often change too."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.plural.noun",
+   "note": "Chinese nouns do not change; numbers and measure words show the amount, 们 is added only for people."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.numerals",
+   "note": "After zwei and above the noun is plural: zwei Stühle, zehn Kinder."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also has several plural endings by gender and declension (-οι, -ες, -α), but never changes the vowel inside the word; German often does: Buch → Bücher, Stuhl → Stühle."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Several endings (-ы, -и, -а) are familiar, but German adds umlaut (Buch → Bücher) and has no special forms after numbers: zwei Bücher, fünf Bücher."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish adds -s / -es; German has five patterns, often with umlaut, so the plural is learned with each noun: der Stuhl, die Stühle."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English -s is one German pattern (Handys, Babys), and man – men, foot – feet show the same old vowel change as Mann – Männer; in German that change is everywhere: Buch – Bücher, Haus – Häuser."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "In French the plural is mostly heard on the article (le / les); German shows it on the article (die) and usually on the noun too: der Tisch – die Tische."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi plurals depend on gender and ending (laṛkā → laṛke, kitāb → kitābẽ), as German ones depend on gender and ending; German adds umlaut and five patterns."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian has one main plural, -hā (ketābhā), and keeps the noun singular after numbers; German has five patterns and always uses the plural after zwei."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi plurals also depend on the noun’s gender and ending; German adds the vowel change (umlaut): Buch – Bücher."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic broken plurals change the vowels inside the word (kitāb → kutub); German umlaut does something similar on a small scale (Buch → Bücher). German has no dual (kitābāni = zwei Bücher) and no singulative: “a tree” is ein Baum, not a form derived from the collective."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew plural -im / -ot is regular, and pairs and some time words take a dual (yomayim); German has five patterns and no dual: zwei Tage."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "One plural suffix in Turkish (-ler / -lar); German has five patterns – learn the plural with each noun – and needs the plural after numbers too (zwei Bücher, iki kitap)."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese usually leaves number unmarked (hon = book or books); in German a plural noun must change: Buch – Bücher, Tisch – Tische."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Korean -deul is optional; the German plural is obligatory and has five patterns."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has one regular plural (-t, -i-: talot, taloissa); German has five patterns and the umlaut, learned with each noun."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian has one plural, -k with a linking vowel (házak), and uses the singular after numbers; German has five patterns and uses the plural after zwei."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili makes the plural by changing the class prefix (kitabu → vitabu, mtu → watu); German changes the end of the word, often the vowel too (Buch → Bücher), and the article becomes die."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "The plural is a different class prefix (omuntu → abantu, ekitabo → ebitabo); German changes the ending and often the vowel (Buch → Bücher) and uses die for every plural."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns do not change for number (们 only for people); every German plural noun changes, and must be learned: Tisch – Tische, Buch – Bücher."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese marks plural with những / các before the noun if at all; German changes the noun itself (Buch – Bücher) and the article (die)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has singular, dual and plural endings (inuk, inuuk, inuit); German has no dual – two people are zwei Menschen, with the ordinary plural."
+  }
+ ]
+}

@@ -1,0 +1,343 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Hebrew is a Semitic language, written from right to left in an alphabet of 22 consonant letters, mostly without its vowels. For many centuries it lived mainly in writing, prayer and study; from the late 19th century it was revived as an everyday mother tongue, and Modern (Israeli) Hebrew is now the main language of Israel. Its words grow from roots of (mostly) three consonants put into patterns, its nouns and verbs carry gender, and in the present tense it has no verb “to be”.",
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Afro-Asiatic › Semitic › Northwest Semitic › Canaanite (with Phoenician). Its closest living relative in this course is Arabic; Aramaic is a close older neighbour."
+  },
+  {
+   "label": "Script and direction",
+   "value": "The Hebrew alphabet (the “square” script): 22 letters, all consonants, 5 of them with a final form (ך ם ן ף ץ). Written right to left; numbers run left to right. Vowels are optional dots and dashes (niqqud) used in teaching texts, poetry, children’s books and the Bible; everyday texts use the full spelling (ktiv male) with ו and י as vowel helpers."
+  },
+  {
+   "label": "Where spoken, standard",
+   "value": "Israel, where it is the official and main language; Jewish communities worldwide; the language of Jewish prayer and study. The standard is Modern Israeli Hebrew; the Academy of the Hebrew Language sets its norms."
+  },
+  {
+   "label": "Speakers",
+   "value": "About 9 million people speak it; roughly 5 million of them as their first language (conservative estimates)."
+  },
+  {
+   "label": "History",
+   "value": "Biblical Hebrew (the Hebrew Bible) → Mishnaic Hebrew (rabbinic literature) → centuries mainly as a written and sacred language → revival as a spoken mother tongue from the 1880s (Eliezer Ben-Yehuda and the new Jewish settlements) → Modern Hebrew."
+  },
+  {
+   "label": "Sounds",
+   "value": "Five vowels (a, e, i, o, u). Stress is mostly on the last syllable. ח and כ are a throaty [χ] as in German Bach; ר is a uvular r like the German or French r. Three letters have a hard and a soft sound: ב bet / vet, כ kaf / khaf, פ pe / fe — a dot inside the letter (dagesh) marks the hard one."
+  }
+ ],
+ "typology": {
+  "type": "fusional",
+  "why": "Hebrew is fusional in the Semitic way: a word is a root of consonants woven into a pattern of vowels and affixes, and one pattern or ending carries several meanings at once. In אוֹכֶלֶת (“[she] eats, is eating”) the root א־כ־ל means “eat”, and the shape וֹ־ֶ־ֶת says present tense + feminine + singular in one piece; in -וֹת one ending says feminine + plural. The forms are learned as tables: gender and number of nouns, agreement, the verb in its patterns (binyanim).",
+  "alsoShows": "Agglutinating touches: small words are glued to the front of the next word — הַ “the”, וְ “and”, בְּ “in”, לְ “to”, מִ “from”, שֶׁ “that” — and possessive pronouns are suffixes (שְׁמִי “my name”). There are no case endings, so word order and prepositions do much of the work."
+ },
+ "peculiarities": [
+  {
+   "title": "No “to be” in the present",
+   "text": "אֲנִי סְטוּדֶנְט = “I (am) a student”, הַסֵּפֶר פֹּה = “the book (is) here”. The verb הָיָה appears only in the past and future: הוּא הָיָה מוֹרֶה “he was a teacher”.",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
+  },
+  {
+   "title": "Roots of three consonants",
+   "text": "Most words share a root with their relatives: ס־פ־ר gives סֵפֶר “book”, סִפֵּר “told”, סָפַר “counted”; י־ל־ד gives יֶלֶד “child” and יָלַד “gave birth”. Learning the root of a word lets you guess others.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ]
+  },
+  {
+   "title": "The vowels are not written",
+   "text": "Everyday Hebrew is written with consonants and a few vowel letters (ו, י): מורה can be מוֹרֶה “teacher (m.)” or מוֹרָה “teacher (f.)”. This course shows the full vowel points and also the everyday spelling, so you learn to read both.",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    },
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
+   ]
+  },
+  {
+   "title": "Gender everywhere — even in “you”",
+   "text": "Every noun is masculine or feminine (no neuter, no “it”): הַסֵּפֶר? הוּא פֹּה “the book? it (he) is here”. You say אַתָּה to a man and אַתְּ to a woman, and present-tense verbs change for gender and number, not for person: אֲנִי / אַתָּה / הוּא אוֹכֵל (a man), אֲנִי / אַתְּ / הִיא אוֹכֶלֶת (a woman).",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    },
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
+   ]
+  },
+  {
+   "title": "Little words stick to the next word",
+   "text": "“the”, “and”, “in”, “to”, “from” are single letters written onto the following word: הַבַּיִת “the house”, וְהַבַּיִת “and the house”, בַּבַּיִת “in the house”. A dictionary entry is often hidden behind one or two such letters.",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    },
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ]
+  },
+  {
+   "title": "“The” but no “a”",
+   "text": "The article הַ marks a definite noun; there is no indefinite article: זֶה סֵפֶר “this is a book”, זֶה הַסֵּפֶר “this is the book”. From lesson 7 a definite direct object also gets the small word אֶת.",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ]
+  },
+  {
+   "title": "No polite “you”",
+   "text": "Hebrew has no polite or familiar form of “you”: everyone — a friend, a teacher, a minister — is אַתָּה or אַתְּ, often with the first name. Politeness comes from words such as בְּבַקָּשָׁה, תּוֹדָה, סְלִיחָה.",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    }
+   ]
+  }
+ ],
+ "pathNote": "Hebrew walks the fusional path. The steps are the same as in every language; its own grammar lands at these points: S00 the overview — a Semitic language, right to left, consonants with optional vowel points. S01 subject pronouns with gender in “you” (אַתָּה / אַתְּ) and the verbless present (fn.copula: הָיָה only in the past and future). S02 greetings without a polite “you” but with gender (מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ). S03 demonstratives that agree (זֶה / זֹאת / אֵלֶּה) and follow a definite noun (הַיֶּלֶד הַזֶּה). S04 the gender of every noun and the article הַ, plus the fusional extras: agreement (fn.agreement) and what a case is (fn.case.basic — Hebrew has none, the page says what does the job). S05 numbers with a masculine and a feminine set (שָׁלוֹשׁ / שְׁלוֹשָׁה) and plurals in -ִים / -וֹת. S06 “to have” as יֵשׁ לִי / אֵין לִי and possession with שֶׁלִּי and endings. S07 the present tense by gender and number, אֶת before a definite object, and Hebrew’s own extra, roots and patterns (fn.root.pattern). S08 negation with לֹא and אֵין; S09 yes/no questions by intonation or הַאִם; S10 wh-questions and jobs in masculine/feminine pairs. S11 the prefixed prepositions בְּ, לְ, מִ, fused with the article (בַּבַּיִת) — the fusional extra fn.case again explains that endings are not needed. S12 prepositions of place; S13 movement with לְ / מִ and הַבַּיְתָה, הָלַךְ vs נָסַע, and the imperative (with אַל + the future for “don’t”). S14 the days (יוֹם רִאשׁוֹן …) and time words; S15 the Gregorian months beside the Hebrew calendar, one בְּ for at / on / in, the dual of units of time and the clock with feminine numbers. S16 adjectives after the noun, agreeing in gender, number and definiteness (הַבַּיִת הַגָּדוֹל “the big house” vs הַבַּיִת גָּדוֹל “the house is big”). S17 the colour pattern קָטֹל (אָדֹם / אֲדֻמָּה) and comparison with words, not endings: יוֹתֵר … מִ, הֲכִי. S18 linking words and subordinate clauses: the prefix שֶׁ and its family (כְּשֶׁ, לַמְרוֹת שֶׁ), with no change of word order. Isolating languages (Chinese) spend these steps on tones, measure words and word order instead; agglutinating ones on suffix chains and vowel harmony.",
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is Hebrew mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "Roots woven into patterns, and endings that carry gender and number at once (אוֹכֶלֶת: present + feminine + singular)."
+  },
+  {
+   "q": "How do you say “I am a student” (a man speaking)?",
+   "options": [
+    "אֲנִי סְטוּדֶנְט",
+    "אֲנִי הוּא סְטוּדֶנְט",
+    "אֲנִי הָיָה סְטוּדֶנְט"
+   ],
+   "answer": "אֲנִי סְטוּדֶנְט",
+   "why": "No verb “to be” in the present: the subject and the noun simply stand side by side. הָיָה is the past (“was”)."
+  },
+  {
+   "q": "In which direction is Hebrew written?",
+   "options": [
+    "right to left",
+    "left to right",
+    "top to bottom"
+   ],
+   "answer": "right to left",
+   "why": "Like Arabic, Hebrew runs from right to left; only numbers run left to right."
+  },
+  {
+   "q": "What does the everyday spelling usually leave out?",
+   "options": [
+    "most vowels",
+    "most consonants",
+    "the final letters"
+   ],
+   "answer": "most vowels",
+   "why": "The vowel points (niqqud) are optional; ו and י help as vowel letters (ktiv male). מורה is מוֹרֶה or מוֹרָה."
+  },
+  {
+   "q": "You speak to a woman. Which “you”?",
+   "options": [
+    "אַתְּ",
+    "אַתָּה",
+    "אַתֶּם"
+   ],
+   "answer": "אַתְּ",
+   "why": "אַתָּה is to a man, אַתְּ to a woman, אַתֶּם to a group. There is no polite “you”."
+  },
+  {
+   "q": "How is “the” written?",
+   "options": [
+    "as the prefix הַ on the next word",
+    "as a separate word after the noun",
+    "it does not exist"
+   ],
+   "answer": "as the prefix הַ on the next word",
+   "why": "הַבַּיִת = the house. There is no word for “a”: בַּיִת = a house."
+  },
+  {
+   "q": "Which language of this course is Hebrew’s closest relative?",
+   "options": [
+    "Arabic",
+    "German",
+    "Chinese"
+   ],
+   "answer": "Arabic",
+   "why": "Both are Semitic: שָׁלוֹם ~ سَلَام, בַּיִת ~ بَيْت, יֶלֶד ~ وَلَد."
+  },
+  {
+   "q": "What changes in a present-tense verb?",
+   "options": [
+    "gender and number",
+    "person only",
+    "nothing"
+   ],
+   "answer": "gender and number",
+   "why": "אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת — the same form for I, you and he; that is why the pronoun is needed in the present."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.overview",
+   "note": "Arabic is Hebrew’s Semitic sister: the same root-and-pattern system, an abjad written right to left, no present “to be”, but also cases and a dual."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.overview",
+   "note": "German is the other fusional language of the course: endings that carry several meanings, but with three genders and four cases."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.overview",
+   "note": "Chinese is the isolating opposite: no endings, no gender, no article — meaning is carried by word order, particles and tones."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Easy: masculine and feminine nouns and agreement will feel natural, and the alphabet is a relative of yours — alpha, beta, gamma, delta come from the same Phoenician letters as א ב ג ד (aleph, bet, gimel, dalet). Different: no neuter (το βιβλίο is masculine סֵפֶר), only a definite article, and no polite plural “you” (no εσείς of respect). Greek drops subject pronouns everywhere; Hebrew drops them in the past and future but keeps them in the present (אֲנִי סְטוּדֶנְט). Sounds: Hebrew has no θ / δ — ת and ד are plain t and d."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "Easy: the word order is subject – verb – object, nouns have no case endings, and “the” is one invariable word (הַ). Hard: gender — in nouns, in “you” (אַתָּה / אַתְּ) and in the verb — the right-to-left script and reading without vowels. International words (טֶלֶפוֹן, סְטוּדֶנְט) are good first anchors. Sounds: no “th” — ת is t — and p, t, k are not aspirated."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "Easy for a German speaker: ח and כ sound like the ch in Bach, the r is the back r of German, and you are used to learning every noun with its gender. Different: two genders, not three, and the article הַ does not show the gender — it shows in the words that agree (זֶה / זֹאת, הוּא / הִיא); German neuters land on either side (das Buch → סֵפֶר m, das Bett → מִטָּה f). There are no cases and no du / Sie. A final consonant keeps its voice (יֶלֶד ends in a real d, not t), and there is no ü or ö. Some Hebrew is calqued on German or Yiddish: בְּסֵדֶר = in Ordnung."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Your best head start: like Russian, Hebrew says “I student” with no verb in the present (אֲנִי סְטוּדֶנְט = я студент), and its past “to be” agrees in gender and number (הָיָה / הָיְתָה / הָיוּ like был / была / были). Different: Hebrew has an article (הַ, “the”) and no cases, and no polite вы. Sounds: there are no soft (palatalised) consonants, and final consonants are not devoiced (יֶלֶד ends in d). Israel has a large Russian-speaking community, so you will hear Russian too."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish took many Arabic words, and many share their roots with Hebrew: selam ~ שָׁלוֹם, insan ~ אֲנָשִׁים “people”, kitap ~ the root כ־ת־ב “to write”. Different: Turkish has no gender — in Hebrew it is everywhere — and Turkish adds endings to say “I am” (öğretmenim), while Hebrew says nothing in the present (אֲנִי מוֹרֶה). Hebrew puts the verb before the object (SVO) and has an article. There is no vowel harmony (every ending has one form) and no ü or ö, and no evidential or surprise ending like -mış: הוּא אָכַל is “he ate”, whether you saw it or were told."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Two genders, as in Spanish, and adjectives that follow the noun and agree (casa grande ~ בַּיִת גָּדוֹל). New: no present “to be” at all — neither ser nor estar (אֲנִי סְטוּדֶנְט, הַסֵּפֶר פֹּה); the right-to-left consonant script; and no usted. Sounds: no θ (Castilian z) and no soft d: ד is always d."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Two genders, as in French, and the back r (ר) is close to the French r. Different: the article הַ is a prefix and does not show gender (le / la → הַ), there is no un / une and no partitive, no vous of politeness, and no present “to be”. Sounds: no nasal vowels and no front rounded u or eu — just a, e, i, o, u."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Familiar: two genders and a verb that shows the gender of the subject — also for “I” (मैं जाता हूँ / मैं जाती हूँ), so אֲנִי הוֹלֵךְ / אֲנִי הוֹלֶכֶת will feel natural. Different: Hebrew is SVO with prepositions, not SOV with postpositions; it has no present “to be” (Hindi हूँ / है); and no आप / तुम politeness. Sounds: no retroflex consonants and no aspirated stops — p, t, k differ from b, d, g by voice alone."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Familiar: a right-to-left script that leaves out short vowels, and many Arabic loans whose roots Hebrew shares (کتاب ~ כ־ת־ב). New: grammatical gender, which Persian lacks, a definite article (הַ), and no present “to be”; Hebrew also has no polite شما."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Familiar: grammatical gender and verbs that change with the speaker’s gender (मी जातो / मी जाते “I go”) — the Hebrew present does the same (אֲנִי הוֹלֵךְ / אֲנִי הוֹלֶכֶת). New: a right-to-left consonant script, prepositions instead of endings and postpositions, no neuter, and no copula in the present (Marathi आहे). Sounds: no retroflex and no aspirated consonants."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Your closest relative: the same root-and-pattern system (כ־ת־ב ~ ك ت ب, שׁ־ל־ם ~ س ل م), a right-to-left abjad, a verbless present and an article prefix (הַ ~ الْـ). Simpler in Hebrew: no case endings, only a few duals, and plural things take plural agreement. Sounds: in Modern Hebrew ח is [χ] and ע is weak or silent — not pharyngeal — and ט, צ, ק are plain t, ts, k, not emphatic."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Almost everything is new: two genders, an article, prepositions before the noun and the order subject – verb – object instead of particles after the noun and the verb at the end. Hebrew has no speech levels — politeness is in words like בְּבַקָּשָׁה — and no pitch accent: stress, mostly on the last syllable, is what matters. The dagesh never makes a consonant long, so there are no double consonants like っ."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "New: gender everywhere, an article, prepositions and SVO order; no honorific speech levels — Hebrew politeness is in words, not in verb endings. Sounds: no three-way contrast like ㄱ / ㅋ / ㄲ — Hebrew separates p, t, k from b, d, g by voice."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "New: grammatical gender (hän is both he and she; Hebrew splits even “you”), an article, and no cases — prepositions do what Finnish endings do (-ssa, -lle, -sta). Familiar: “have” is said “to me is” (יֵשׁ לִי ~ minulla on). Sounds: no vowel harmony, no ä / ö / y, no long vowels or double consonants, and no consonant gradation."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Familiar: a definite article (a / az ~ הַ) and “have” as “to me is” (nekem van ~ יֵשׁ לִי). New: grammatical gender (ő is both he and she), prepositions instead of case suffixes, and no present “to be” in any person. Sounds: no vowel harmony and no ö / ü, no long vowels."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili noun classes prepare you for agreement: every Hebrew noun is masculine or feminine, and adjectives, demonstratives and verbs agree with it, as they agree with a class in Swahili. Different: only two classes, decided by sex or by the ending, and marked with endings (-ָה, -ִים, -וֹת) instead of prefixes; Swahili also has Arabic loans that share Hebrew roots (kitabu ~ כ־ת־ב)."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda noun classes and agreement are good preparation: Hebrew agreement works the same way, with only two genders and with endings rather than prefixes. New: no tones — Hebrew pitch is only intonation — and a right-to-left consonant script."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Almost all the grammar is new: endings for gender and number, agreement, an article, and verbs that change. Familiar: subject – verb – object order and no verb “to be” before an adjective (הוּא גָּבֹהַּ ~ 他很高). Sounds: no tones — pitch is only intonation. Hebrew needs no measure words, no serial verbs (“go to buy” is הוֹלֵךְ לִקְנוֹת, with an infinitive) and no dummy objects like 吃饭: אֲנִי אוֹכֵל is enough."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Familiar: subject – verb – object and adjectives after the noun (nhà lớn ~ בַּיִת גָּדוֹל). New: inflection for gender and number, an article, and words that change shape inside (roots in patterns). Sounds: no tones — pitch never changes the meaning of a word. Verbs are not strung together: “go to buy” is הוֹלֵךְ לִקְנוֹת, with an infinitive."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Hebrew builds words inside the word too (roots in patterns, prefixes such as בְּ, לְ, הַ), but far less: a Hebrew sentence is several separate words where Inuktitut may use one, and an object is never built into the verb (אֲנִי אוֹכֵל לֶחֶם). New: two genders, an article, prepositions instead of case endings, and accusative rather than ergative alignment."
+  },
+  {
+   "for": "zu",
+   "rel": "new",
+   "text": "Hebrew has no click consonants; its sounds are all ordinary pulmonic consonants and five vowels, and there is no tone."
+  },
+  {
+   "for": "am",
+   "rel": "different",
+   "text": "Amharic’s ejectives (ጥ, ቅ …) have no Hebrew counterpart: ט and ק were once special consonants, but today they are plain t and k. Like Amharic, Hebrew is Semitic, with roots and patterns and two genders."
+  },
+  {
+   "for": "cy",
+   "rel": "different",
+   "text": "Hebrew ב, כ, פ switch between b / v, k / kh, p / f (בַּיִת “house” — בְּבַיִת “in a house”, said bevayit), but this follows the position of the sound in the word, not grammar — it is not a mutation like the Welsh ones."
+  }
+ ]
+}

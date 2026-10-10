@@ -1,0 +1,3078 @@
+{
+ "lexemes": [
+  {
+   "id": "he:bayit",
+   "lemma": "בַּיִת",
+   "pos": "NOUN",
+   "senses": [
+    "home.house",
+    "place.home",
+    "lit.stanza"
+   ],
+   "gender": "MASC",
+   "translit": "bayit",
+   "features": {
+    "spelling": "בית",
+    "root": "ב י ת",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "בָּתִּים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בֵּית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בָּתֵּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בַּיִת",
+    "N;SG;DEF": "הַבַּיִת",
+    "N;PL;INDF": "בָּתִּים",
+    "N;PL;DEF": "הַבָּתִּים",
+    "N;SG;DEF;PFX": "בַּיִת",
+    "N;SG;CONST": "בֵּית",
+    "N;PL;CONST": "בָּתֵּי"
+   },
+   "contrasts": [
+    {
+     "concept": "place.home",
+     "axis": "place or direction",
+     "value": "the place: at home (בַּבַּיִת)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַבַּיִת → (בַּ / לַ)בַּיִת; Wiktionary lists only the full definite form הַבַּיִת."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Home, family, shelter — the most basic place word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "house",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.house"
+     },
+     {
+      "id": "s2",
+      "def": "home (בַּבַּיִת “at home”, הַבַּיְתָה “home(wards)”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.home"
+     },
+     {
+      "id": "s3",
+      "def": "stanza, verse (of a poem or song)",
+      "register": [
+       "technical"
+      ],
+      "concept": "lit.stanza"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה בַּיִת גָּדוֹל.",
+      "tr": "This is a big house.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם גָּרִים בַּבַּיִת הַזֶּה.",
+      "tr": "They live in this house.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי בַּבַּיִת.",
+      "tr": "I’m at home.",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s2"
+     },
+     {
+      "text": "הַיְּלָדִים בַּבַּיִת עִם סָבְתָא.",
+      "tr": "The children are at home with Grandma.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "הַבַּיִת הָרִאשׁוֹן שֶׁל הַשִּׁיר יָפֶה.",
+      "tr": "The first verse of the song is beautiful.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּיִת פְּרָטִי",
+      "tr": "a private (detached) house"
+     },
+     {
+      "text": "בַּבַּיִת",
+      "tr": "at home"
+     },
+     {
+      "text": "בֵּית סֵפֶר",
+      "tr": "school (literally “house of book”)"
+     },
+     {
+      "text": "בֵּית קָפֶה",
+      "tr": "café"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "דִּירָה",
+      "register": "neutral",
+      "nuance": "a flat, an apartment — what most Israelis live in"
+     },
+     {
+      "word": "מָעוֹן",
+      "register": "literary",
+      "nuance": "a dwelling, an abode (also: a dormitory, a day-care centre)"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *bayt- (“house”). Cognate with Akkadian bītum, Arabic بَيْت (bayt) and Amharic ቤት (bet).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The letter ב (bet) is named after this word, and Greek beta comes from the same Phoenician letter name.",
+     "Arabic بَيْت (bayt) also means a line of verse — Turkish beyit “couplet” comes from it — and Hebrew בַּיִת is a stanza too.",
+     "Bethlehem is בֵּית לֶחֶם, “house of bread”."
+    ],
+    "pitfalls": [
+     "The plural is irregular: בַּיִת → בָּתִּים.",
+     "In compounds the first word changes to בֵּית־: בֵּית סֵפֶר “school”, בֵּית חוֹלִים “hospital”."
+    ],
+    "subtleties": [
+     "בַּבַּיִת is “at home”; “(to) home” with motion is הַבַּיְתָה: אֲנִי הוֹלֵךְ הַבַּיְתָה."
+    ]
+   }
+  },
+  {
+   "id": "he:dira",
+   "lemma": "דִּירָה",
+   "pos": "NOUN",
+   "senses": [
+    "home.flat"
+   ],
+   "gender": "FEM",
+   "translit": "dira",
+   "features": {
+    "spelling": "דירה",
+    "root": "ד ו ר",
+    "pattern": "קִילָה",
+    "plurals": [
+     {
+      "form": "דִּירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דִּירַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דִּירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "דִּירָה",
+    "N;SG;DEF": "הַדִּירָה",
+    "N;PL;INDF": "דִּירוֹת",
+    "N;PL;DEF": "הַדִּירוֹת",
+    "N;SG;CONST": "דִּירַת",
+    "N;PL;CONST": "דִּירוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "City life, rent, a home of your own.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "flat, apartment",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.flat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַדִּירָה שֶׁלָּנוּ קְטַנָּה.",
+      "tr": "Our flat is small.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדִּירָה בַּקּוֹמָה הַשְּׁלִישִׁית.",
+      "tr": "The flat is on the third floor.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם מְחַפְּשִׂים דִּירָה בְּתֵל אָבִיב.",
+      "tr": "They are looking for a flat in Tel Aviv.",
+      "register": "neutral",
+      "context": "renting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דִּירָה שְׂכוּרָה",
+      "tr": "a rented flat"
+     },
+     {
+      "text": "דִּירַת שְׁלוֹשָׁה חֲדָרִים",
+      "tr": "a three-room flat"
+     },
+     {
+      "text": "שְׂכַר דִּירָה",
+      "tr": "rent"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בַּיִת",
+      "register": "neutral",
+      "nuance": "a house; also “home” in general (הַבַּיִת שֶׁלִּי can be a flat)"
+     },
+     {
+      "word": "יְחִידַת דִּיּוּר",
+      "register": "formal",
+      "nuance": "a housing unit — official and estate-agent language"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Arabic دَار (dār, “house”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic دَار (dār) “house” is a relative — as in Dar es Salaam, “house of peace”, whose salaam is Hebrew שָׁלוֹם."
+    ],
+    "pitfalls": [
+     "Israeli flats are counted by rooms, the living room included: דִּירַת שְׁלוֹשָׁה חֲדָרִים has a living room and two bedrooms.",
+     "The construct form is דִּירַת־ (with ת): דִּירַת סְטוּדֶנְטִים “a student flat”."
+    ],
+    "subtleties": [
+     "Most Israelis live in flats; a house of one’s own is בַּיִת פְּרָטִי."
+    ]
+   }
+  },
+  {
+   "id": "he:cheder",
+   "lemma": "חֶדֶר",
+   "pos": "NOUN",
+   "senses": [
+    "home.room",
+    "edu.cheder"
+   ],
+   "gender": "MASC",
+   "translit": "cheder",
+   "features": {
+    "spelling": "חדר",
+    "root": "ח ד ר",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "חֲדָרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲדַר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַדְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חֶדֶר",
+    "N;SG;DEF": "הַחֶדֶר",
+    "N;PL;INDF": "חֲדָרִים",
+    "N;PL;DEF": "הַחֲדָרִים",
+    "N;SG;DEF;PFX": "חֶדֶר",
+    "N;SG;CONST": "חֲדַר",
+    "N;PL;CONST": "חַדְרֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ / לָ (בְּ / לְ + the article), which drop the ה of the article: הַחֶדֶר → (בַּ / לַ)חֶדֶר; Wiktionary lists only the full definite form הַחֶדֶר."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Your own space — the door you can close.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "room",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.room"
+     },
+     {
+      "id": "s2",
+      "def": "cheder (a traditional Jewish elementary school)",
+      "register": [
+       "religious"
+      ],
+      "concept": "edu.cheder"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּדִּירָה יֵשׁ שְׁלוֹשָׁה חֲדָרִים.",
+      "tr": "There are three rooms in the flat.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים בַּחֶדֶר שֶׁלָּהֶם.",
+      "tr": "The children are in their room.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הַחֶדֶר שֶׁלִּי?",
+      "tr": "Where is my room?",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֶדֶר הַיְּלָדִים לוֹמְדִים לִקְרֹא בַּתּוֹרָה.",
+      "tr": "In the cheder the children learn to read the Torah.",
+      "register": "religious",
+      "context": "religious education",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲדַר שֵׁנָה",
+      "tr": "bedroom"
+     },
+     {
+      "text": "חֲדַר אֹכֶל",
+      "tr": "dining room"
+     },
+     {
+      "text": "חֲדַר אַמְבַּטְיָה",
+      "tr": "bathroom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סָלוֹן",
+      "register": "neutral",
+      "nuance": "the living room"
+     },
+     {
+      "word": "חֲדַר מְגוּרִים",
+      "register": "formal",
+      "nuance": "“living room” in formal and architectural language"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Arabic خِدْر (ḵidr, “a curtained-off inner chamber”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The cheder of Eastern European Jewish life — the little Torah school — is this word."
+    ],
+    "pitfalls": [
+     "The plural is חֲדָרִים (with a hataf patah): חֶדֶר → חֲדָרִים.",
+     "In compounds it is חֲדַר־: חֲדַר שֵׁנָה “bedroom”."
+    ],
+    "subtleties": [
+     "The article stays הַ before ח with a full vowel: הַחֶדֶר, הַחֲדָרִים (no dagesh can go into ח)."
+    ]
+   }
+  },
+  {
+   "id": "he:delet",
+   "lemma": "דֶּלֶת",
+   "pos": "NOUN",
+   "senses": [
+    "home.door"
+   ],
+   "gender": "FEM",
+   "translit": "delet",
+   "features": {
+    "spelling": "דלת",
+    "root": "ד ל ת",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "דְּלָתוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "דְּלָתַיִם"
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דֶּלֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דַּלְתוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "דֶּלֶת",
+    "N;SG;DEF": "הַדֶּלֶת",
+    "N;PL;INDF": "דְּלָתוֹת",
+    "N;PL;DEF": "הַדְּלָתוֹת",
+    "N;SG;CONST": "דֶּלֶת",
+    "N;PL;CONST": "דַּלְתוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coming and going, knocking, privacy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "door",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.door"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַדֶּלֶת פְּתוּחָה.",
+      "tr": "The door is open.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "מִישֶׁהוּ דּוֹפֵק בַּדֶּלֶת.",
+      "tr": "Someone is knocking at the door.",
+      "register": "neutral",
+      "context": "visit",
+      "sense": "s1"
+     },
+     {
+      "text": "לַבִּנְיָן יֵשׁ דֶּלֶת חֲדָשָׁה.",
+      "tr": "The building has a new door.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִפְתֹּחַ אֶת הַדֶּלֶת",
+      "tr": "to open the door"
+     },
+     {
+      "text": "לִסְגֹּר אֶת הַדֶּלֶת",
+      "tr": "to close the door"
+     },
+     {
+      "text": "דֶּלֶת כְּנִיסָה",
+      "tr": "front door, entrance door"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שַׁעַר",
+      "register": "neutral",
+      "nuance": "a gate (of a yard, a city)"
+     },
+     {
+      "word": "פֶּתַח",
+      "register": "neutral",
+      "nuance": "an opening, a doorway"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *dalt- (“door”), cognate with Akkadian daltum, Ugaritic dlt and Aramaic דַּלְתָּא. The -t, once the feminine ending, was reinterpreted as part of the root; the noun took the segolate shape. Doublet of the letter name דָּלֶ״ת.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The letter ד (dalet) is named after the door, and Greek delta Δ comes from the same Phoenician letter."
+    ],
+    "pitfalls": [
+     "דֶּלֶת is feminine although it does not end in -ָה: הַדֶּלֶת הַזֹּאת, הַדֶּלֶת פְּתוּחָה.",
+     "Plural דְּלָתוֹת; the dual דְּלָתַיִם is “a double door”."
+    ],
+    "subtleties": [
+     "The -et ending is an old feminine -t (Wiktionary) — the reason the word is feminine."
+    ]
+   }
+  },
+  {
+   "id": "he:chalon",
+   "lemma": "חַלּוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "home.window",
+    "edu.freeperiod"
+   ],
+   "gender": "MASC",
+   "translit": "chalon",
+   "features": {
+    "spelling": "חלון",
+    "root": {
+     "none": "no agreed root: traditionally linked to ח־ל־ל “to bore, hollow”, but the Ugaritic cognate ḥln points to a primary noun"
+    },
+    "pattern": {
+     "none": "a primary noun: no agreed pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַלּוֹנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חַלּוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַלּוֹנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חַלּוֹן",
+    "N;SG;DEF": "הַחַלּוֹן",
+    "N;PL;INDF": "חַלּוֹנוֹת",
+    "N;PL;DEF": "הַחַלּוֹנוֹת",
+    "N;SG;DEF;PFX": "חַלּוֹן",
+    "N;SG;CONST": "חַלּוֹן",
+    "N;PL;CONST": "חַלּוֹנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light, air and the view outside.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "window",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.window"
+     },
+     {
+      "id": "s2",
+      "def": "a free period (a gap in a timetable)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "edu.freeperiod"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַחַלּוֹן פָּתוּחַ.",
+      "tr": "The window is open.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "מֵהַחַלּוֹן רוֹאִים אֶת הַיָּם.",
+      "tr": "From the window you can see the sea.",
+      "register": "neutral",
+      "context": "view",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לִי חַלּוֹן בֵּין הַשִּׁעוּרִים.",
+      "tr": "I have a free period between the lessons.",
+      "register": "colloquial",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִפְתֹּחַ אֶת הַחַלּוֹן",
+      "tr": "to open the window"
+     },
+     {
+      "text": "לְיַד הַחַלּוֹן",
+      "tr": "by the window"
+     },
+     {
+      "text": "חַלּוֹן רַאֲוָה",
+      "tr": "a shop window"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֶשְׁנָב",
+      "register": "neutral",
+      "nuance": "a small window, a hatch, a ticket window"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Ugaritic ḥln (“window”); the Ugaritic form makes the traditional link with חָלַל “to pierce” unlikely.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Fenster and Greek παράθυρο are neuter, Hebrew has no neuter: חַלּוֹן is masculine."
+    ],
+    "pitfalls": [
+     "Masculine, but the plural ends in -וֹת: חַלּוֹנוֹת — and stays masculine: הַחַלּוֹנוֹת הָאֵלֶּה, הַחַלּוֹנוֹת הָהֵם (not *הָהֵן).",
+     "Wiktionary also records feminine use (in Biblical Hebrew); in Modern Hebrew it is masculine: הַחַלּוֹן פָּתוּחַ."
+    ],
+    "subtleties": [
+     "In school slang a חַלּוֹן is a free period — a “window” in the timetable."
+    ]
+   }
+  },
+  {
+   "id": "he:kir",
+   "lemma": "קִיר",
+   "pos": "NOUN",
+   "senses": [
+    "home.wall"
+   ],
+   "gender": "MASC",
+   "translit": "kir",
+   "features": {
+    "spelling": "קיר",
+    "root": {
+     "none": "a primary one-syllable noun: no root in use"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "קִירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קִיר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "קִירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "קִיר",
+    "N;SG;DEF": "הַקִּיר",
+    "N;PL;INDF": "קִירוֹת",
+    "N;PL;DEF": "הַקִּירוֹת",
+    "N;SG;CONST": "קִיר",
+    "N;PL;CONST": "קִירוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rooms, pictures, solid ground.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wall (of a room or a building)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.wall"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַתְּמוּנָה עַל הַקִּיר.",
+      "tr": "The picture is on the wall.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקִּירוֹת בַּחֶדֶר לְבָנִים.",
+      "tr": "The walls in the room are white.",
+      "register": "neutral",
+      "context": "decorating",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹרָה תָּלְתָה מַפָּה עַל הַקִּיר.",
+      "tr": "The teacher hung a map on the wall.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַל הַקִּיר",
+      "tr": "on the wall"
+     },
+     {
+      "text": "שְׁעוֹן קִיר",
+      "tr": "a wall clock"
+     },
+     {
+      "text": "לִצְבֹּעַ אֶת הַקִּירוֹת",
+      "tr": "to paint the walls"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "חוֹמָה",
+      "register": "neutral",
+      "nuance": "a city wall, a fortification wall"
+     },
+     {
+      "word": "כֹּתֶל",
+      "register": "formal",
+      "nuance": "a (stone) wall; הַכֹּתֶל is the Western Wall in Jerusalem"
+     },
+     {
+      "word": "גָּדֵר",
+      "register": "neutral",
+      "nuance": "a fence"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology. It is an old Biblical word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German splits the same way: Wand (a room’s wall) vs Mauer (a free-standing wall) — Hebrew קִיר vs חוֹמָה."
+    ],
+    "pitfalls": [
+     "Masculine with a plural in -וֹת: קִירוֹת — the walls are הַקִּירוֹת הָאֵלֶּה, הֵם.",
+     "The Western Wall is הַכֹּתֶל, not *הַקִּיר."
+    ],
+    "subtleties": [
+     "קִיר is the wall of a room or a house; a wall around a city is חוֹמָה, a garden wall or fence is גָּדֵר."
+    ]
+   }
+  },
+  {
+   "id": "he:shulchan",
+   "lemma": "שֻׁלְחָן",
+   "pos": "NOUN",
+   "senses": [
+    "home.table"
+   ],
+   "gender": "MASC",
+   "translit": "shulchan",
+   "features": {
+    "spelling": "שולחן",
+    "root": "שׁ ל ח",
+    "pattern": "קֻטְלָן",
+    "plurals": [
+     {
+      "form": "שֻׁלְחָנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שֻׁלְחַן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שֻׁלְחֲנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שֻׁלְחָן",
+    "N;SG;DEF": "הַשֻּׁלְחָן",
+    "N;PL;INDF": "שֻׁלְחָנוֹת",
+    "N;PL;DEF": "הַשֻּׁלְחָנוֹת",
+    "N;SG;DEF;PFX": "שֻּׁלְחָן",
+    "N;SG;CONST": "שֻׁלְחַן",
+    "N;PL;CONST": "שֻׁלְחֲנוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "שולחן",
+    "N;SG;DEF": "השולחן",
+    "N;PL;INDF": "שולחנות",
+    "N;PL;DEF": "השולחנות",
+    "N;SG;DEF;PFX": "שולחן",
+    "N;SG;CONST": "שולחן",
+    "N;PL;CONST": "שולחנות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַשֻּׁלְחָן → (בַּ / לַ)שֻּׁלְחָן; Wiktionary lists only the full definite form הַשֻּׁלְחָן.",
+     "N;PL;CONST": "the qamats before the stress shortens in the construct plural (as in קׇרְבָּנוֹת → קׇרְבְּנוֹת), under the guttural ח to a ḥataf: שֻׁלְחֲנוֹת־; Wiktionary’s table repeats the absolute form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Meals, homework, family around the table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "table; desk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.table"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הָאֹכֶל עַל הַשֻּׁלְחָן.",
+      "tr": "The food is on the table.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּפָרִים עַל הַשֻּׁלְחָן שֶׁלִּי.",
+      "tr": "The books are on my desk.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶפְשָׁר שֻׁלְחָן לִשְׁנַיִם?",
+      "tr": "Can we have a table for two?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לַעֲרֹךְ אֶת הַשֻּׁלְחָן",
+      "tr": "to set the table"
+     },
+     {
+      "text": "שֻׁלְחַן כְּתִיבָה",
+      "tr": "a desk (writing table)"
+     },
+     {
+      "text": "שֻׁלְחַן אֹכֶל",
+      "tr": "a dining table"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שֻׁלְחַן כְּתִיבָה",
+      "register": "neutral",
+      "nuance": "a writing desk"
+     },
+     {
+      "word": "דֶּלְפֵּק",
+      "register": "neutral",
+      "nuance": "a counter (in a shop, a bank)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Ugaritic ṯlḥn (“table”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The great code of Jewish law is the שֻׁלְחָן עָרוּךְ, “the set table”."
+    ],
+    "pitfalls": [
+     "Masculine with a plural in -וֹת: שֻׁלְחָנוֹת.",
+     "Everyday spelling is שולחן (with ו); the pointed form uses a qubuts: שֻׁלְחָן."
+    ],
+    "subtleties": [
+     "In compounds it becomes שֻׁלְחַן־: שֻׁלְחַן כְּתִיבָה."
+    ]
+   }
+  },
+  {
+   "id": "he:kise",
+   "lemma": "כִּסֵּא",
+   "pos": "NOUN",
+   "senses": [
+    "home.chair",
+    "pol.throne"
+   ],
+   "gender": "MASC",
+   "translit": "kise",
+   "features": {
+    "spelling": "כיסא",
+    "root": "כ ס א",
+    "pattern": "קִטֵּל",
+    "plurals": [
+     {
+      "form": "כִּסְּאוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כִּסֵּא"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כִּסְּאוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כִּסֵּא",
+    "N;SG;DEF": "הַכִּסֵּא",
+    "N;PL;INDF": "כִּסְּאוֹת",
+    "N;PL;DEF": "הַכִּסְּאוֹת",
+    "N;SG;CONST": "כִּסֵּא",
+    "N;PL;CONST": "כִּסְּאוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "כיסא",
+    "N;SG;DEF": "הכיסא",
+    "N;PL;INDF": "כיסאות",
+    "N;PL;DEF": "הכיסאות",
+    "N;SG;CONST": "כיסא",
+    "N;PL;CONST": "כיסאות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sitting down, a seat at the table — and once, a throne.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chair",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.chair"
+     },
+     {
+      "id": "s2",
+      "def": "throne, seat (of power)",
+      "register": [
+       "literary"
+      ],
+      "concept": "pol.throne"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שֵׁב עַל הַכִּסֵּא, בְּבַקָּשָׁה.",
+      "tr": "Sit on the chair, please. (to a man)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּכִּתָּה יֵשׁ עֶשְׂרִים כִּסְּאוֹת.",
+      "tr": "There are twenty chairs in the classroom.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמֶּלֶךְ יָשַׁב עַל הַכִּסֵּא.",
+      "tr": "The king sat on the throne.",
+      "register": "literary",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כִּסֵּא נוֹחַ",
+      "tr": "an armchair, a comfortable chair"
+     },
+     {
+      "text": "כִּסֵּא גַּלְגַּלִּים",
+      "tr": "a wheelchair"
+     },
+     {
+      "text": "לָשֶׁבֶת עַל כִּסֵּא",
+      "tr": "to sit on a chair"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כֻּרְסָה",
+      "register": "neutral",
+      "nuance": "an armchair"
+     },
+     {
+      "word": "שְׁרַפְרַף",
+      "register": "neutral",
+      "nuance": "a stool"
+     },
+     {
+      "word": "סַפְסָל",
+      "register": "neutral",
+      "nuance": "a bench"
+     }
+    ],
+    "etymology": {
+     "text": "From Akkadian kussûm.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic كُرْسِيّ (kursī, “chair”) — and through it Turkish kürsü “lectern” — comes from the same old word via Aramaic."
+    ],
+    "pitfalls": [
+     "Masculine with a plural in -וֹת: כִּסְּאוֹת (everyday spelling כיסאות).",
+     "Everyday spelling is כיסא (with י)."
+    ],
+    "subtleties": [
+     "In the Bible כִּסֵּא is the royal throne (כִּסֵּא דָוִד “the throne of David”); the everyday meaning is just “chair”."
+    ]
+   }
+  },
+  {
+   "id": "he:mita",
+   "lemma": "מִטָּה",
+   "pos": "NOUN",
+   "senses": [
+    "home.bed"
+   ],
+   "gender": "FEM",
+   "translit": "mita",
+   "features": {
+    "spelling": "מיטה",
+    "root": "נ ט ה",
+    "pattern": "מִקְטָלָה",
+    "plurals": [
+     {
+      "form": "מִטּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִטַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִטּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מִטָּה",
+    "N;SG;DEF": "הַמִּטָּה",
+    "N;PL;INDF": "מִטּוֹת",
+    "N;PL;DEF": "הַמִּטּוֹת",
+    "N;SG;DEF;PFX": "מִּטָּה",
+    "N;SG;CONST": "מִטַּת",
+    "N;PL;CONST": "מִטּוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "מיטה",
+    "N;SG;DEF": "המיטה",
+    "N;PL;INDF": "מיטות",
+    "N;PL;DEF": "המיטות",
+    "N;SG;DEF;PFX": "מיטה",
+    "N;SG;CONST": "מיטת",
+    "N;PL;CONST": "מיטות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sleep, rest, the end of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bed"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמִּטָּה שֶׁל הַיֶּלֶד קְטַנָּה.",
+      "tr": "The child’s bed is small.",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֶדֶר יֵשׁ מִטָּה וְאָרוֹן.",
+      "tr": "There is a bed and a wardrobe in the room.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם קָנוּ מִטָּה חֲדָשָׁה.",
+      "tr": "They bought a new bed.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִטָּה זוּגִית",
+      "tr": "a double bed"
+     },
+     {
+      "text": "לָלֶכֶת לַמִּטָּה",
+      "tr": "to go to bed"
+     },
+     {
+      "text": "לְסַדֵּר אֶת הַמִּטָּה",
+      "tr": "to make the bed"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עֶרֶשׂ",
+      "register": "literary",
+      "nuance": "a cradle; a bed (poetic)"
+     },
+     {
+      "word": "מִזְרָן",
+      "register": "neutral",
+      "nuance": "a mattress"
+     }
+    ],
+    "etymology": {
+     "text": "Of Central Semitic origin, from the same root as מַטָּה (“below”). Latin matta (“mat”) is thought to be borrowed from a Phoenician relative of the Hebrew word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "If the Latin link is right, English “mat” is a distant relative of מִטָּה.",
+     "German Bett and Greek κρεβάτι are neuter; Hebrew מִטָּה is feminine."
+    ],
+    "pitfalls": [
+     "Everyday spelling is מיטה (with י). Without vowels and י, מטה could be read מַטָּה “below” or מַטֶּה “staff, headquarters”.",
+     "Feminine: הַמִּטָּה הַזֹּאת, הִיא."
+    ],
+    "subtleties": [
+     "“In bed” is בַּמִּטָּה; “to bed” is לַמִּטָּה (with motion)."
+    ]
+   }
+  },
+  {
+   "id": "he:aron",
+   "lemma": "אָרוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "home.cupboard",
+    "obj.coffin",
+    "relig.ark"
+   ],
+   "gender": "MASC",
+   "translit": "aron",
+   "features": {
+    "spelling": "ארון",
+    "root": "א ר ן",
+    "pattern": "קָטוֹל",
+    "plurals": [
+     {
+      "form": "אֲרוֹנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֲרוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אֲרוֹנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אָרוֹן",
+    "N;SG;DEF": "הָאָרוֹן",
+    "N;PL;INDF": "אֲרוֹנוֹת",
+    "N;PL;DEF": "הָאֲרוֹנוֹת",
+    "N;SG;DEF;PFX": "אָרוֹן",
+    "N;SG;CONST": "אֲרוֹן",
+    "N;PL;CONST": "אֲרוֹנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Storage, order — and old, solemn boxes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cupboard, wardrobe, cabinet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.cupboard"
+     },
+     {
+      "id": "s2",
+      "def": "coffin",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.coffin"
+     },
+     {
+      "id": "s3",
+      "def": "the Ark (of the covenant, of the Torah)",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.ark"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַבְּגָדִים בָּאָרוֹן.",
+      "tr": "The clothes are in the wardrobe.",
+      "register": "neutral",
+      "context": "bedroom",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצַּלָּחוֹת בָּאָרוֹן שֶׁל הַמִּטְבָּח.",
+      "tr": "The plates are in the kitchen cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּבֵית הַכְּנֶסֶת יֵשׁ אָרוֹן לְסִפְרֵי הַתּוֹרָה.",
+      "tr": "In the synagogue there is an ark for the Torah scrolls.",
+      "register": "religious",
+      "context": "synagogue",
+      "sense": "s3"
+     },
+     {
+      "text": "הָאָרוֹן כֻּסָּה בַּדֶּגֶל.",
+      "tr": "The coffin was covered with the flag.",
+      "register": "neutral",
+      "context": "funeral",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֲרוֹן בְּגָדִים",
+      "tr": "a wardrobe (clothes cupboard)"
+     },
+     {
+      "text": "אֲרוֹן מִטְבָּח",
+      "tr": "a kitchen cupboard"
+     },
+     {
+      "text": "אֲרוֹן הַקֹּדֶשׁ",
+      "tr": "the Torah ark"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מִזְנוֹן",
+      "register": "neutral",
+      "nuance": "a sideboard, a cabinet in the living room"
+     },
+     {
+      "word": "אַרְגָּז",
+      "register": "neutral",
+      "nuance": "a box, a crate"
+     },
+     {
+      "word": "מְגֵרָה",
+      "register": "neutral",
+      "nuance": "a drawer"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʾarān- or *ʾirān-. Cognate with Phoenician ʾrn. The sense “closet” of a secret identity is a semantic loan from English.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Ark of the Covenant is אֲרוֹן הַבְּרִית — the same word as the kitchen cupboard.",
+     "Like English “in the closet”, Hebrew says לָצֵאת מֵהָאָרוֹן “to come out of the closet” (Wiktionary: a semantic loan)."
+    ],
+    "pitfalls": [
+     "Masculine with a plural in -וֹת: אֲרוֹנוֹת.",
+     "The article is הָ before א: הָאָרוֹן; “in the cupboard” is בָּאָרוֹן."
+    ],
+    "subtleties": [
+     "Context decides between a wardrobe, a coffin and the holy Ark — all are boxes that keep something."
+    ]
+   }
+  },
+  {
+   "id": "he:menora",
+   "lemma": "מְנוֹרָה",
+   "pos": "NOUN",
+   "senses": [
+    "home.lamp",
+    "relig.menorah"
+   ],
+   "gender": "FEM",
+   "translit": "menora",
+   "features": {
+    "spelling": "מנורה",
+    "root": "נ י ר",
+    "pattern": {
+     "none": "a noun of the weak root נ־י־ר with the prefix מְ־; no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "מְנוֹרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְנוֹרַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְנוֹרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מְנוֹרָה",
+    "N;SG;DEF": "הַמְּנוֹרָה",
+    "N;PL;INDF": "מְנוֹרוֹת",
+    "N;PL;DEF": "הַמְּנוֹרוֹת",
+    "N;SG;CONST": "מְנוֹרַת",
+    "N;PL;CONST": "מְנוֹרוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light in the room — and an old symbol of light.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lamp, light",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.lamp"
+     },
+     {
+      "id": "s2",
+      "def": "menorah, candelabrum (the seven-branched lamp of the Temple; the emblem of Israel)",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.menorah"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמְּנוֹרָה עַל הַשֻּׁלְחָן.",
+      "tr": "The lamp is on the table.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     },
+     {
+      "text": "תַּדְלִיק אֶת הַמְּנוֹרָה, בְּבַקָּשָׁה.",
+      "tr": "Turn on the lamp, please. (to a man)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמְּנוֹרָה הִיא סֵמֶל מְדִינַת יִשְׂרָאֵל.",
+      "tr": "The menorah is the emblem of the State of Israel.",
+      "register": "formal",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְהַדְלִיק אֶת הַמְּנוֹרָה",
+      "tr": "to turn on the lamp"
+     },
+     {
+      "text": "לְכַבּוֹת אֶת הַמְּנוֹרָה",
+      "tr": "to turn off the lamp"
+     },
+     {
+      "text": "מְנוֹרַת לַיְלָה",
+      "tr": "a night light"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אוֹר",
+      "register": "neutral",
+      "nuance": "“light” — also used for the lamp: תַּדְלִיק אֶת הָאוֹר “turn on the light”"
+     },
+     {
+      "word": "נוּרָה",
+      "register": "neutral",
+      "nuance": "a light bulb"
+     },
+     {
+      "word": "חֲנֻכִּיָּה",
+      "register": "religious",
+      "nuance": "the eight-branched Hanukkah lamp"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Aramaic מְנָרְתָא (mənārəṯā) and Arabic مَنَارَة (manāra).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic مَنَارَة (manāra) “lighthouse, minaret” is a cousin: English minaret comes through Turkish minare from the Arabic."
+    ],
+    "pitfalls": [
+     "The article doubles the מ: הַמְּנוֹרָה.",
+     "The Hanukkah lamp is properly a חֲנֻכִּיָּה; the seven-branched one is the מְנוֹרָה."
+    ],
+    "subtleties": [
+     "In the construct state the old feminine ת returns: מְנוֹרַת לַיְלָה."
+    ]
+   }
+  },
+  {
+   "id": "he:sefer",
+   "lemma": "סֵפֶר",
+   "pos": "NOUN",
+   "senses": [
+    "obj.book"
+   ],
+   "gender": "MASC",
+   "translit": "sefer",
+   "features": {
+    "spelling": "ספר",
+    "root": "ס פ ר",
+    "pattern": "קֵטֶל",
+    "plurals": [
+     {
+      "form": "סְפָרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סֵפֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִפְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סֵפֶר",
+    "N;SG;DEF": "הַסֵּפֶר",
+    "N;PL;INDF": "סְפָרִים",
+    "N;PL;DEF": "הַסְּפָרִים",
+    "N;SG;CONST": "סֵפֶר",
+    "N;PL;CONST": "סִפְרֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Reading, learning, a whole tradition of books.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "book",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.book"
+     },
+     {
+      "id": "s2",
+      "def": "a writing, a scroll (older sense)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹרֵא סֵפֶר טוֹב.",
+      "tr": "I’m reading a good book.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּפָרִים עַל הַמַּדָּף.",
+      "tr": "The books are on the shelf.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הַסֵּפֶר שֶׁל עִבְרִית?",
+      "tr": "Where is the Hebrew book?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֵּית סֵפֶר",
+      "tr": "school (literally “house of book”)"
+     },
+     {
+      "text": "סֵפֶר תּוֹרָה",
+      "tr": "a Torah scroll"
+     },
+     {
+      "text": "חֲנוּת סְפָרִים",
+      "tr": "a bookshop"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סִפְרוֹן",
+      "register": "neutral",
+      "nuance": "a booklet, a small book"
+     },
+     {
+      "word": "סֵפֶר לִימוּד",
+      "register": "neutral",
+      "nuance": "a textbook"
+     },
+     {
+      "word": "כֶּרֶךְ",
+      "register": "formal",
+      "nuance": "a volume"
+     }
+    ],
+    "etymology": {
+     "text": "Likely borrowed from Akkadian šiprum (“message, report”). Compare Aramaic סִפְרָא (sip̄rā, “book”) and Arabic سِفْر (sifr, “book”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic سِفْر (sifr) is the same word; in Arabic it now means a book of scripture.",
+     "The Jews are called עַם הַסֵּפֶר, “the People of the Book”."
+    ],
+    "pitfalls": [
+     "The plural shortens the vowels: סֵפֶר → סְפָרִים; with the article הַסְּפָרִים.",
+     "בֵּית סֵפֶר is “school”, not “bookshop” (that is חֲנוּת סְפָרִים)."
+    ],
+    "subtleties": [
+     "The same letters ספר spell סָפַר “to count”, סִפֵּר “to tell” and סַפָּר “barber” (Wiktionary lists them all)."
+    ]
+   }
+  },
+  {
+   "id": "he:et-pen",
+   "lemma": "עֵט",
+   "pos": "NOUN",
+   "senses": [
+    "obj.pen"
+   ],
+   "gender": "MASC",
+   "translit": "et",
+   "features": {
+    "spelling": "עט",
+    "root": {
+     "none": "of unknown origin (compare Aramaic עֵיטָא): no root in use"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (plural עֵטִים)"
+    },
+    "plurals": [
+     {
+      "form": "עֵטִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עֵט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עֵטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עֵט",
+    "N;SG;DEF": "הָעֵט",
+    "N;PL;INDF": "עֵטִים",
+    "N;PL;DEF": "הָעֵטִים",
+    "N;SG;CONST": "עֵט",
+    "N;PL;CONST": "עֵטֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;CONST": "Wiktionary’s עֵטִי־ is a slip: the construct plural of עֵטִים ends in ־ֵי (עֵטֵי־, like סְפָרִים → סִפְרֵי)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Writing, signing, notes in the margin.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.pen"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לְךָ עֵט?",
+      "tr": "Do you (m.) have a pen?",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעֵט לֹא כּוֹתֵב.",
+      "tr": "The pen doesn’t write.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא חָתַם בְּעֵט כָּחֹל.",
+      "tr": "He signed with a blue pen.",
+      "register": "neutral",
+      "context": "bank",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֵט כַּדּוּרִי",
+      "tr": "a ballpoint pen"
+     },
+     {
+      "text": "עֵט נוֹבֵעַ",
+      "tr": "a fountain pen"
+     },
+     {
+      "text": "לִכְתֹּב בְּעֵט",
+      "tr": "to write in pen"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לְשׁוֹנִי עֵט סוֹפֵר מָהִיר",
+      "tr": "my tongue is the pen of a ready writer",
+      "kind": "quote",
+      "meaning": "I speak as fluently as a skilled scribe writes",
+      "register": "literary",
+      "source": "Psalms 45:2"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "עִפָּרוֹן",
+      "register": "neutral",
+      "nuance": "a pencil"
+     },
+     {
+      "word": "טוּשׁ",
+      "register": "colloquial",
+      "nuance": "a felt-tip pen, a marker"
+     }
+    ],
+    "etymology": {
+     "text": "Of unknown origin (Wiktionary); related to Aramaic עֵיטָא.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Psalm 45:2 calls the poet’s tongue עֵט סוֹפֵר מָהִיר, “the pen of a ready writer”."
+    ],
+    "pitfalls": [
+     "The article is הָ before ע: הָעֵט.",
+     "Unvocalized עט is also the verb עָט “to pounce” (Wiktionary)."
+    ],
+    "subtleties": [
+     "A pen is עֵט; a pencil is עִפָּרוֹן — learners often mix them up."
+    ]
+   }
+  },
+  {
+   "id": "he:neyar",
+   "lemma": "נְיָר",
+   "pos": "NOUN",
+   "senses": [
+    "obj.paper",
+    "comm.document"
+   ],
+   "gender": "MASC",
+   "translit": "neyar",
+   "features": {
+    "spelling": "נייר",
+    "root": {
+     "none": "an old (Mishnaic) noun, not derived from a verb root"
+    },
+    "pattern": {
+     "none": "an old (Mishnaic) noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "נְיָרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s2"
+      ],
+      "note": "the material נְיָר has no plural; נְיָרוֹת are papers, documents"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נְיַר",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נְיָרוֹת",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "נְיָר",
+    "N;SG;DEF": "הַנְּיָר",
+    "N;PL;INDF": "נְיָרוֹת",
+    "N;PL;DEF": "הַנְּיָרוֹת",
+    "N;SG;CONST": "נְיַר",
+    "N;PL;CONST": "נְיָרוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "נייר",
+    "N;SG;DEF": "הנייר",
+    "N;PL;INDF": "ניירות",
+    "N;PL;DEF": "הניירות",
+    "N;SG;CONST": "נייר",
+    "N;PL;CONST": "ניירות"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Notes, forms, documents — and offices full of them.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "paper (the material; a sheet of paper)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.paper"
+     },
+     {
+      "id": "s2",
+      "def": "papers, documents (plural נְיָרוֹת)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "comm.document"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לְךָ דַּף נְיָר?",
+      "tr": "Do you (m.) have a sheet of paper?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנְּיָר עַל הַשֻּׁלְחָן.",
+      "tr": "The paper is on the table.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "כָּל הַנְּיָרוֹת בַּתִּיק.",
+      "tr": "All the papers are in the bag.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דַּף נְיָר",
+      "tr": "a sheet of paper"
+     },
+     {
+      "text": "נְיַר טוּאָלֶט",
+      "tr": "toilet paper"
+     },
+     {
+      "text": "נְיַר עֵרֶךְ",
+      "tr": "a security (finance; literally “value paper”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "דַּף",
+      "register": "neutral",
+      "nuance": "a sheet, a page"
+     },
+     {
+      "word": "מִסְמָךְ",
+      "register": "formal",
+      "nuance": "a document"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology. The word is not Biblical; it belongs to post-Biblical (rabbinic) Hebrew.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "נְיַר עֵרֶךְ “value paper” (construct נְיַר־) is a word-for-word twin of German Wertpapier."
+    ],
+    "pitfalls": [
+     "Everyday spelling is נייר (two יs).",
+     "The plural נְיָרוֹת means “papers, documents”, not “kinds of paper”."
+    ],
+    "subtleties": [
+     "As a material it is a mass noun: הַרְבֵּה נְיָר “a lot of paper”."
+    ]
+   }
+  },
+  {
+   "id": "he:telefon",
+   "lemma": "טֶלֶפוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "obj.phone",
+    "comm.phonecall"
+   ],
+   "gender": "MASC",
+   "translit": "telefon",
+   "features": {
+    "spelling": "טלפון",
+    "root": {
+     "none": "a loanword (an internationalism, from English telephone): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "טֶלֶפוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "טֶלֶפוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "טֶלֶפוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "טֶלֶפוֹן",
+    "N;SG;DEF": "הַטֶּלֶפוֹן",
+    "N;PL;INDF": "טֶלֶפוֹנִים",
+    "N;PL;DEF": "הַטֶּלֶפוֹנִים",
+    "N;SG;CONST": "טֶלֶפוֹן",
+    "N;PL;CONST": "טֶלֶפוֹנֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Calls, messages — always within reach.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "telephone, phone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.phone"
+     },
+     {
+      "id": "s2",
+      "def": "a phone call (לְדַבֵּר בַּטֶּלֶפוֹן “to talk on the phone”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "comm.phonecall"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַטֶּלֶפוֹן שֶׁלִּי עַל הַשֻּׁלְחָן.",
+      "tr": "My phone is on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הַטֶּלֶפוֹן?",
+      "tr": "Where is the phone?",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "יוֹסִי, יֵשׁ לְךָ טֶלֶפוֹן!",
+      "tr": "Yossi, there’s a phone call for you!",
+      "register": "informal",
+      "context": "calls",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִסְפַּר טֶלֶפוֹן",
+      "tr": "a phone number"
+     },
+     {
+      "text": "לְדַבֵּר בַּטֶּלֶפוֹן",
+      "tr": "to talk on the phone"
+     },
+     {
+      "text": "טֶלֶפוֹן נַיָּד",
+      "tr": "a mobile phone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פֶּלֶאפוֹן",
+      "register": "colloquial",
+      "nuance": "a mobile phone — from the name of Israel’s first mobile operator"
+     },
+     {
+      "word": "נַיָּד",
+      "register": "neutral",
+      "nuance": "“mobile” — short for טֶלֶפוֹן נַיָּד"
+     },
+     {
+      "word": "סֶלּוּלָרִי",
+      "register": "neutral",
+      "nuance": "a cellphone (adjective used as a noun)"
+     }
+    ],
+    "etymology": {
+     "text": "Internationalism, from English telephone and its cognates in other languages.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From Greek τῆλε “far” + φωνή “voice” — the same word as German Telefon, Russian телефон, Greek τηλέφωνο and Turkish telefon."
+    ],
+    "pitfalls": [
+     "Masculine: הַטֶּלֶפוֹן הַזֶּה, הוּא.",
+     "Stress is on the last syllable: te-le-FON."
+    ],
+    "subtleties": [
+     "Israelis often say פֶּלֶאפוֹן for any mobile phone — a brand name that became a word."
+    ]
+   }
+  },
+  {
+   "id": "he:mafteach",
+   "lemma": "מַפְתֵּחַ",
+   "pos": "NOUN",
+   "senses": [
+    "obj.key",
+    "art.clef"
+   ],
+   "gender": "MASC",
+   "translit": "mafteach",
+   "features": {
+    "spelling": "מפתח",
+    "root": "פ ת ח",
+    "pattern": "מַקְטֵל",
+    "plurals": [
+     {
+      "form": "מַפְתְּחוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַפְתֵּחַ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מַפְתְּחוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מַפְתֵּחַ",
+    "N;SG;DEF": "הַמַּפְתֵּחַ",
+    "N;PL;INDF": "מַפְתְּחוֹת",
+    "N;PL;DEF": "הַמַּפְתְּחוֹת",
+    "N;SG;CONST": "מַפְתֵּחַ",
+    "N;PL;CONST": "מַפְתְּחוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Locks and doors — and the key to a puzzle.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "key (of a lock)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.key"
+     },
+     {
+      "id": "s2",
+      "def": "key (to a code, a map); index",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "clef (music)",
+      "register": [
+       "technical"
+      ],
+      "concept": "art.clef"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיפֹה הַמַּפְתֵּחַ שֶׁל הַבַּיִת?",
+      "tr": "Where is the house key?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁכַחְתִּי אֶת הַמַּפְתְּחוֹת בָּאוֹטוֹ.",
+      "tr": "I forgot the keys in the car.",
+      "register": "neutral",
+      "context": "car",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמַּפְתֵּחַ לְהַצְלָחָה הוּא עֲבוֹדָה קָשָׁה.",
+      "tr": "The key to success is hard work.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s2"
+     },
+     {
+      "text": "הַתָּוִים כְּתוּבִים בְּמַפְתֵּחַ סוֹל.",
+      "tr": "The notes are written in the treble (G) clef.",
+      "register": "technical",
+      "context": "music",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַפְתֵּחַ שֶׁל הַבַּיִת",
+      "tr": "the house key"
+     },
+     {
+      "text": "צְרוֹר מַפְתְּחוֹת",
+      "tr": "a bunch of keys"
+     },
+     {
+      "text": "מַחֲזִיק מַפְתְּחוֹת",
+      "tr": "a key ring"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קוֹד",
+      "register": "neutral",
+      "nuance": "a (door) code — what replaces the key at many building entrances"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic مِفْتَاح (miftāḥ). The music sense is a semantic loan from a European language. Root פ־ת־ח “to open”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic مِفْتَاح (miftāḥ) is the same word from the same root “to open” (فَتَحَ), which also gave Turkish fetih “conquest” and Fatih “the Conqueror”."
+    ],
+    "pitfalls": [
+     "Masculine with a plural in -וֹת: מַפְתְּחוֹת — הַמַּפְתְּחוֹת הָאֵלֶּה, הֵם.",
+     "The final ח carries a “furtive” patah: mafte-ach."
+    ],
+    "subtleties": [
+     "The pattern מַקְטֵל (maqtel) often makes tool nouns: מַפְתֵּחַ is “the opener”, like מַזְלֵג “fork”."
+    ]
+   }
+  },
+  {
+   "id": "he:tik",
+   "lemma": "תִּיק",
+   "pos": "NOUN",
+   "senses": [
+    "obj.bag",
+    "obj.file",
+    "pol.portfolio"
+   ],
+   "gender": "MASC",
+   "translit": "tik",
+   "features": {
+    "spelling": "תיק",
+    "root": "ת י ק",
+    "pattern": {
+     "none": "a Mishnaic loanword (Greek θήκη): no pattern; the root ת־י־ק was formed from it"
+    },
+    "plurals": [
+     {
+      "form": "תִּיקִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תִּיק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תִּיקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תִּיק",
+    "N;SG;DEF": "הַתִּיק",
+    "N;PL;INDF": "תִּיקִים",
+    "N;PL;DEF": "הַתִּיקִים",
+    "N;SG;DEF;PFX": "תִּיק",
+    "N;SG;CONST": "תִּיק",
+    "N;PL;CONST": "תִּיקֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everything you carry — books, papers, files.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bag (handbag, school bag, briefcase)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.bag"
+     },
+     {
+      "id": "s2",
+      "def": "file, case (a folder; a police or legal file)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.file"
+     },
+     {
+      "id": "s3",
+      "def": "portfolio (of a government minister)",
+      "register": [
+       "formal"
+      ],
+      "concept": "pol.portfolio"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַסְּפָרִים בַּתִּיק.",
+      "tr": "The books are in the bag.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא קָנְתָה תִּיק חָדָשׁ.",
+      "tr": "She bought a new bag.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "לַמִּשְׁטָרָה יֵשׁ תִּיק עָלָיו.",
+      "tr": "The police have a file on him.",
+      "register": "neutral",
+      "context": "police",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא קִבֵּל אֶת תִּיק הַחוּץ.",
+      "tr": "He got the foreign-affairs portfolio.",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תִּיק גַּב",
+      "tr": "a backpack"
+     },
+     {
+      "text": "תִּיק יָד",
+      "tr": "a handbag"
+     },
+     {
+      "text": "תִּיק בֵּית סֵפֶר",
+      "tr": "a school bag"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שַׂקִּית",
+      "register": "neutral",
+      "nuance": "a (plastic or paper) bag"
+     },
+     {
+      "word": "מִזְוָדָה",
+      "register": "neutral",
+      "nuance": "a suitcase"
+     },
+     {
+      "word": "אַרְנָק",
+      "register": "neutral",
+      "nuance": "a wallet, a purse"
+     }
+    ],
+    "etymology": {
+     "text": "A Mishnaic borrowing from Ancient Greek θήκη (thḗkē, “box, case, sheath”), which formed the new root ת־י־ק.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From Greek θήκη “case” — the -θήκη of βιβλιοθήκη “library” and αποθήκη “store”, and of German Bibliothek and Apotheke."
+    ],
+    "pitfalls": [
+     "A plastic shopping bag is a שַׂקִּית, not a תִּיק.",
+     "Masculine: הַתִּיק הַזֶּה, הוּא."
+    ],
+    "subtleties": [
+     "A minister’s תִּיק is his portfolio: שַׂר בְּלִי תִּיק “a minister without portfolio”."
+    ]
+   }
+  },
+  {
+   "id": "he:sefel",
+   "lemma": "סֵפֶל",
+   "pos": "NOUN",
+   "senses": [
+    "obj.cup",
+    "obj.bowl"
+   ],
+   "gender": "MASC",
+   "translit": "sefel",
+   "features": {
+    "spelling": "ספל",
+    "root": "ס פ ל",
+    "pattern": "קֵטֶל",
+    "plurals": [
+     {
+      "form": "סְפָלִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סֵפֶל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִפְלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סֵפֶל",
+    "N;SG;DEF": "הַסֵּפֶל",
+    "N;PL;INDF": "סְפָלִים",
+    "N;PL;DEF": "הַסְּפָלִים",
+    "N;SG;CONST": "סֵפֶל",
+    "N;PL;CONST": "סִפְלֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "obj.cup",
+     "axis": "kind of vessel",
+     "value": "a mug or cup with a handle, for hot drinks"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Morning coffee, a warm mug in your hands.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cup, mug (with a handle, for hot drinks)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.cup"
+     },
+     {
+      "id": "s2",
+      "def": "bowl (Biblical)",
+      "register": [
+       "literary"
+      ],
+      "concept": "obj.bowl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא שׁוֹתֶה קָפֶה בְּסֵפֶל גָּדוֹל.",
+      "tr": "He drinks coffee from a big mug.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּפָלִים בָּאָרוֹן.",
+      "tr": "The cups are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "קִבַּלְתִּי סֵפֶל לְיוֹם הַהֻלֶּדֶת.",
+      "tr": "I got a mug for my birthday.",
+      "register": "neutral",
+      "context": "presents",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּסֵפֶל אַדִּירִים הִקְרִיבָה חֶמְאָה.",
+      "tr": "She brought forth curds in a lordly bowl. (Judges 5:25)",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סֵפֶל קָפֶה",
+      "tr": "a coffee cup, a mug of coffee"
+     },
+     {
+      "text": "סֵפֶל תֵּה",
+      "tr": "a cup of tea"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "כּוֹס",
+      "register": "neutral",
+      "nuance": "a glass — and in everyday speech also a cup (כּוֹס קָפֶה); the general word"
+     },
+     {
+      "word": "סִפְלוֹן",
+      "register": "neutral",
+      "nuance": "a small cup (espresso)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it lists the senses “mug” and (Biblical) “bowl”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Song of Deborah, Jael serves Sisera milk בְּסֵפֶל אַדִּירִים, “in a lordly bowl” (Judges 5:25)."
+    ],
+    "pitfalls": [
+     "Israelis often say כּוֹס קָפֶה “a cup of coffee” — סֵפֶל is the mug itself.",
+     "The plural shortens the vowels: סֵפֶל → סְפָלִים."
+    ],
+    "subtleties": [
+     "סֵפֶל is the cup with a handle; a glass, or a cup in general, is כּוֹס."
+    ]
+   }
+  },
+  {
+   "id": "he:kos",
+   "lemma": "כּוֹס",
+   "pos": "NOUN",
+   "senses": [
+    "obj.glass",
+    "obj.cup"
+   ],
+   "gender": "FEM",
+   "translit": "kos",
+   "features": {
+    "spelling": "כוס",
+    "root": "כ א ס",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *kaʔs-, Arabic كَأْس)"
+    },
+    "plurals": [
+     {
+      "form": "כּוֹסוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כּוֹס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כּוֹסוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כּוֹס",
+    "N;SG;DEF": "הַכּוֹס",
+    "N;PL;INDF": "כּוֹסוֹת",
+    "N;PL;DEF": "הַכּוֹסוֹת",
+    "N;SG;CONST": "כּוֹס",
+    "N;PL;CONST": "כּוֹסוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "obj.cup",
+     "axis": "kind of vessel",
+     "value": "a glass; “a cup of” coffee or tea as an amount (כּוֹס קָפֶה)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Drinks, toasts, a glass on the table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "glass (for drinking)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.glass"
+     },
+     {
+      "id": "s2",
+      "def": "cup (of coffee, tea)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.cup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֶפְשָׁר כּוֹס מַיִם?",
+      "tr": "Can I have a glass of water?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכּוֹסוֹת עַל הַשֻּׁלְחָן.",
+      "tr": "The glasses are on the table.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה רוֹצֶה כּוֹס קָפֶה?",
+      "tr": "Would you (m.) like a cup of coffee?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "הִיא שׁוֹתָה כּוֹס תֵּה כָּל בֹּקֶר.",
+      "tr": "She drinks a cup of tea every morning.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כּוֹס מַיִם",
+      "tr": "a glass of water"
+     },
+     {
+      "text": "כּוֹס יַיִן",
+      "tr": "a glass of wine"
+     },
+     {
+      "text": "כּוֹס קָפֶה",
+      "tr": "a cup of coffee"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סֵפֶל",
+      "register": "neutral",
+      "nuance": "a mug, a cup with a handle"
+     },
+     {
+      "word": "גָּבִיעַ",
+      "register": "formal",
+      "nuance": "a goblet, a cup (also a trophy cup)"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *kaʔs- (“cup”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic كَأْس (kaʾs) “glass, cup” is the same old Semitic word.",
+     "The “cup of salvation” of Psalm 116 is כּוֹס יְשׁוּעוֹת."
+    ],
+    "pitfalls": [
+     "Standard Hebrew treats כּוֹס as feminine without a feminine ending: כּוֹס אַחַת, הַכּוֹס הַזֹּאת, הִיא. Wiktionary also records masculine use, common in speech.",
+     "Write it with its vowel or in a clear context: unvocalized כוס can also be read as a vulgar slang word (Wiktionary lists it)."
+    ],
+    "subtleties": [
+     "כּוֹס is both “glass” and “cup”: כּוֹס מַיִם “a glass of water”, כּוֹס קָפֶה “a cup of coffee”."
+    ]
+   }
+  },
+  {
+   "id": "he:tsalachat",
+   "lemma": "צַלַּחַת",
+   "pos": "NOUN",
+   "senses": [
+    "obj.plate"
+   ],
+   "gender": "FEM",
+   "translit": "tsalachat",
+   "features": {
+    "spelling": "צלחת",
+    "root": "צ ל ח",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "צַלָּחוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "צַלַּחַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "צַלְּחוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "צַלַּחַת",
+    "N;SG;DEF": "הַצַּלַּחַת",
+    "N;PL;INDF": "צַלָּחוֹת",
+    "N;PL;DEF": "הַצַּלָּחוֹת",
+    "N;SG;CONST": "צַלַּחַת",
+    "N;PL;CONST": "צַלְּחוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Meals at the table — and the washing-up after.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plate",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.plate"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַצַּלַּחַת רֵיקָה.",
+      "tr": "The plate is empty.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצַּלָּחוֹת בָּאָרוֹן.",
+      "tr": "The plates are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי שׁוֹטֵף אֶת הַצַּלָּחוֹת.",
+      "tr": "I’m washing the plates.",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "צַלַּחַת מָרָק",
+      "tr": "a soup plate"
+     },
+     {
+      "text": "צַלַּחַת שְׁטוּחָה",
+      "tr": "a flat plate"
+     },
+     {
+      "text": "לִשְׁטֹף צַלָּחוֹת",
+      "tr": "to wash the dishes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קְעָרָה",
+      "register": "neutral",
+      "nuance": "a bowl"
+     },
+     {
+      "word": "מַגָּשׁ",
+      "register": "neutral",
+      "nuance": "a tray"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic, akin to Arabic صَحْن (ṣaḥn, “bowl, plate”) and Ge’ez ṣaḥl (“bowl, jar, pan”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic صَحْن (ṣaḥn) is a relative; Turkish sahan, the little pan of sahanda yumurta, comes from the Arabic."
+    ],
+    "pitfalls": [
+     "Feminine (the -ַת ending): הַצַּלַּחַת הַזֹּאת, הִיא.",
+     "The plural is צַלָּחוֹת (the second vowel changes to qamats)."
+    ],
+    "subtleties": [
+     "A “flying saucer” is a צַלַּחַת מְעוֹפֶפֶת — literally a flying plate."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

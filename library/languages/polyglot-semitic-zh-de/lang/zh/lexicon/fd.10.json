@@ -1,0 +1,2935 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:shenme",
+   "lemma": "什么",
+   "trad": "什麼",
+   "pinyin": "shén me",
+   "pos": "PRON",
+   "senses": [
+    "q.what",
+    "pron.anything"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity — or, with the right tone, surprise and protest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (question word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "something; anything (in questions and negations)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.anything"
+     },
+     {
+      "id": "s3",
+      "def": "what?! (surprise or anger)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你喝什么？",
+      "tr": "What will you drink?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1",
+      "py": "Nǐ hē shénme?"
+     },
+     {
+      "text": "这是什么？",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Zhè shì shénme?"
+     },
+     {
+      "text": "你想吃点儿什么吗？",
+      "tr": "Would you like something to eat?",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s2",
+      "py": "Nǐ xiǎng chī diǎnr shénme ma?"
+     },
+     {
+      "text": "什么？他走了？",
+      "tr": "What? He left?",
+      "register": "colloquial",
+      "context": "surprise",
+      "sense": "s3",
+      "py": "Shénme? Tā zǒu le?"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "为什么",
+      "tr": "why"
+     },
+     {
+      "text": "什么时候",
+      "tr": "when"
+     },
+     {
+      "text": "什么样",
+      "tr": "what kind of"
+     },
+     {
+      "text": "没什么",
+      "tr": "it's nothing"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "什么风把你吹来了？",
+      "tr": "what wind blew you here?",
+      "kind": "saying",
+      "meaning": "what brings you here? (to an unexpected visitor)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "啥",
+      "register": "colloquial",
+      "nuance": "shá: northern colloquial ‘what’",
+      "region": "northern China"
+     },
+     {
+      "word": "何",
+      "register": "literary",
+      "nuance": "written ‘what’: 何时 (when), 为何 (why)"
+     }
+    ],
+    "etymology": {
+     "text": "A corruption of medieval 是物 (‘what’) or 什物 (‘miscellaneous items’), perhaps influenced by 何物 (‘what’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Taiwan usually writes 什麼 or 甚麼; both are traditional forms of 什么."
+    ],
+    "pitfalls": [
+     "No 吗 with a 什么 question: 你喝什么？ — with 吗, 什么 means ‘anything’: 你喝什么吗？ ‘Will you drink anything?’",
+     "Word order does not change: put 什么 where the answer goes (你喝什么？— 我喝茶)."
+    ],
+    "subtleties": [
+     "Before a noun, 什么 asks ‘what kind / which’: 什么菜？ ‘what dish?’.",
+     "In fast speech it is often shéme."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 什麼 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:nali",
+   "lemma": "哪里",
+   "trad": "哪裡",
+   "pinyin": "nǎ li",
+   "pos": "PRON",
+   "senses": [
+    "q.where",
+    "adv.anywhere",
+    "intj.notatall"
+   ],
+   "variants": [
+    {
+     "lemma": "哪儿",
+     "trad": "哪兒",
+     "pinyin": "nǎr",
+     "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "contrasts": [
+    {
+     "concept": "q.where",
+     "axis": "form",
+     "value": "where? — the question word"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pinyin": "pinyin: Mainland dictionaries (Xiandai Hanyu Cidian) give nǎ·li with a toneless li; Wiktionary’s own entry lists this toneless variant ‘nǎli’, which the kaikki extraction garbles into “nálǐ] → nǎli (toneless final syllable variant)”, so the tool cannot match it. Everything else checked clean before this override was added."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking for a place; and the classic modest reply to praise.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "wherever; anywhere",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.anywhere"
+     },
+     {
+      "id": "s3",
+      "def": "(哪里哪里) not at all — a modest reply to a compliment",
+      "register": [
+       "formal"
+      ],
+      "concept": "intj.notatall"
+     }
+    ],
+    "examples": [
+     {
+      "text": "土豆在哪里？",
+      "tr": "Where are the potatoes?",
+      "register": "neutral",
+      "context": "supermarket",
+      "sense": "s1",
+      "py": "Tǔdòu zài nǎli?"
+     },
+     {
+      "text": "你在哪里工作？",
+      "tr": "Where do you work?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Nǐ zài nǎli gōngzuò?"
+     },
+     {
+      "text": "你是哪里人？",
+      "tr": "Where are you from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Nǐ shì nǎli rén?"
+     },
+     {
+      "text": "哪里哪里，我的中文还不好。",
+      "tr": "Not at all, my Chinese is still not good.",
+      "register": "formal",
+      "context": "compliments",
+      "sense": "s3",
+      "py": "Nǎli nǎli, wǒ de Zhōngwén hái bù hǎo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在哪里",
+      "tr": "where (is it)?"
+     },
+     {
+      "text": "去哪里",
+      "tr": "go where?"
+     },
+     {
+      "text": "哪里人",
+      "tr": "from where (which place)?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "哪儿",
+      "register": "colloquial",
+      "nuance": "nǎr: the erhua form — everyday in Beijing and the north",
+      "region": "northern China"
+     },
+     {
+      "word": "什么地方",
+      "register": "neutral",
+      "nuance": "‘what place’ — a little more explicit"
+     },
+     {
+      "word": "何处",
+      "register": "literary",
+      "nuance": "written ‘where’"
+     }
+    ],
+    "etymology": {
+     "text": "哪 (‘which’) + 里 (‘place; inside’): ‘which place’.",
+     "src": "morphemes: 哪 + 里"
+    },
+    "funFacts": [
+     "Answering a compliment with 哪里哪里 literally asks ‘where? where?’ — as if the praised quality cannot be found."
+    ],
+    "pitfalls": [
+     "No 吗 with 哪里: 土豆在哪里？ (not *…吗？).",
+     "哪里 nǎli (where?) vs 那里 nàli (there): only the 口 radical and the tone differ.",
+     "Say 在哪里 for ‘where is’ — the verb 在 is needed: *土豆哪里？"
+    ],
+    "subtleties": [
+     "Both 哪里 and 哪儿 are standard: -儿 forms (哪儿, 这儿, 那儿) are typical of Beijing and the north, -里 forms of the south, Taiwan and writing.",
+     "Spoken: the 3rd tone of 哪 before 里 is usually heard as náli."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 哪裡 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:shei",
+   "lemma": "谁",
+   "trad": "誰",
+   "pinyin": "shéi",
+   "pos": "PRON",
+   "senses": [
+    "q.who",
+    "pron.anyone"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking about a person — at the door, on the phone, in a crowd.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "who? whom?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.who"
+     },
+     {
+      "id": "s2",
+      "def": "(with 都 / 也) anyone, everyone; (with a negation) nobody",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.anyone"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他是谁？",
+      "py": "Tā shì shéi?",
+      "tr": "Who is he?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "谁要咖啡？",
+      "py": "Shéi yào kāfēi?",
+      "tr": "Who wants coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "你跟谁一起吃饭？",
+      "py": "Nǐ gēn shéi yìqǐ chīfàn?",
+      "tr": "Who are you eating with?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "谁都不知道。",
+      "py": "Shéi dōu bù zhīdào.",
+      "tr": "Nobody knows.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "是谁？",
+      "tr": "who is it?"
+     },
+     {
+      "text": "谁的",
+      "tr": "whose"
+     },
+     {
+      "text": "谁都",
+      "tr": "everybody"
+     },
+     {
+      "text": "谁都不",
+      "tr": "nobody"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "鹿死谁手",
+      "tr": "lù sǐ shéi shǒu — at whose hand will the deer die?",
+      "kind": "idiom",
+      "meaning": "who will win in the end?",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "哪位",
+      "register": "formal",
+      "nuance": "nǎ wèi: ‘which person’ — the polite ‘who?’: 您是哪位？ ‘who is speaking, please?’"
+     },
+     {
+      "word": "什么人",
+      "register": "colloquial",
+      "nuance": "shénme rén: ‘what person, what kind of person’ — can sound suspicious"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 言 ‘speak’ + phonetic 隹. Cognate with the classical 孰 ‘which one; who’ (Schuessler).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "To ask a stranger who they are, 您是哪位？ is polite; 你是谁？ can sound blunt.",
+     "Like Russian кто-то / никто, Chinese makes ‘everybody / nobody’ from ‘who’: 谁都 ‘everybody’, 谁都不 ‘nobody’."
+    ],
+    "pitfalls": [
+     "No 吗 with 谁: 他是谁？ — 他是谁吗？ is wrong.",
+     "谁 stays where the person would stand in the answer: 谁要咖啡？— 我要咖啡; 你找谁？— 我找老师. Nothing moves to the front."
+    ],
+    "subtleties": [
+     "Two readings: shéi (everyday) and shuí (careful or formal speech); both are correct.",
+     "With 都 it means ‘everyone’: 谁都喜欢他 ‘everyone likes him’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all senses: shéi in speech; shuí is a less common alternative pronunciation of the same word"
+    },
+    "tradPerSense": {
+     "none": "traditional 誰 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:sheide",
+   "lemma": "谁的",
+   "trad": "誰的",
+   "pinyin": "shéi de",
+   "pos": "PRON",
+   "senses": [
+    "q.whose"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A key on the table, a phone ringing — whose is it?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "whose?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.whose"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是谁的书？",
+      "py": "Zhè shì shéi de shū?",
+      "tr": "Whose book is this?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "这些钥匙是谁的？",
+      "py": "Zhèxiē yàoshi shì shéi de?",
+      "tr": "Whose keys are these?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "谁的手机响了？",
+      "py": "Shéi de shǒujī xiǎng le?",
+      "tr": "Whose phone is ringing?",
+      "register": "colloquial",
+      "context": "office",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "谁的 + noun",
+      "tr": "whose …?"
+     },
+     {
+      "text": "是谁的？",
+      "tr": "whose is it?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "There is no other everyday word: ‘whose’ is always 谁 + 的, just as ‘my’ is 我 + 的.",
+    "etymology": {
+     "text": "谁 ‘who’ + 的, the particle of ownership (S06): ‘who’s’.",
+     "src": "morphemes: 谁 + 的"
+    },
+    "funFacts": [
+     "Chinese makes ‘whose’ the way it makes ‘my’: 我的 ‘my’, 你的 ‘your’ — 谁的 ‘whose’."
+    ],
+    "pitfalls": [
+     "谁的 comes before the noun: 谁的书？ — never *书谁的？",
+     "No 吗: 这是谁的？ is already a question."
+    ],
+    "subtleties": [
+     "谁的 can stand alone at the end: 这是谁的？ ‘whose is this?’ — answer 是我的 ‘it’s mine’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 誰的 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:shenmeshihou",
+   "lemma": "什么时候",
+   "trad": "什麼時候",
+   "pinyin": "shén me shí hou",
+   "pos": "ADV",
+   "senses": [
+    "q.when"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plans and appointments: when do we eat, when are you coming?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when? at what time?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.when"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你什么时候吃早饭？",
+      "py": "Nǐ shénme shíhou chī zǎofàn?",
+      "tr": "When do you have breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "我们什么时候走？",
+      "py": "Wǒmen shénme shíhou zǒu?",
+      "tr": "When are we leaving?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "你什么时候有空？",
+      "py": "Nǐ shénme shíhou yǒu kòng?",
+      "tr": "When are you free?",
+      "register": "colloquial",
+      "context": "invitations",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "什么时候来",
+      "tr": "when are you coming?"
+     },
+     {
+      "text": "到什么时候",
+      "tr": "until when?"
+     },
+     {
+      "text": "从什么时候",
+      "tr": "since when?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "几点",
+      "register": "neutral",
+      "nuance": "jǐ diǎn: ‘what time (by the clock)?’ — 你几点吃早饭？"
+     },
+     {
+      "word": "哪天",
+      "register": "colloquial",
+      "nuance": "nǎ tiān: ‘which day?’"
+     },
+     {
+      "word": "何时",
+      "register": "literary",
+      "nuance": "héshí: written ‘when’"
+     }
+    ],
+    "etymology": {
+     "text": "什么 ‘what’ + 时候 ‘time’: literally ‘what time’.",
+     "src": "morphemes: 什么 + 时候"
+    },
+    "funFacts": [
+     "Chinese ‘when?’ is literally ‘what time?’ — English keeps ‘what time?’ for the clock, Chinese uses it for every ‘when’."
+    ],
+    "pitfalls": [
+     "什么时候 stands before the verb, not at the end: 你什么时候来？ — not *你来什么时候？",
+     "It only asks. ‘When I come …’ in a statement is …的时候 (S18), not 什么时候."
+    ],
+    "subtleties": [
+     "For the clock time Chinese asks 几点: 你几点吃早饭？; 什么时候 can be a day, a year or a time."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 什麼時候 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal",
+     "sentenceInitial"
+    ]
+   }
+  },
+  {
+   "id": "zh:zenme",
+   "lemma": "怎么",
+   "trad": "怎麼",
+   "pinyin": "zěn me",
+   "pos": "ADV",
+   "senses": [
+    "q.how",
+    "q.why"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.how",
+     "axis": "what is asked",
+     "value": "in what way? (before a verb: 怎么走?)"
+    },
+    {
+     "concept": "q.why",
+     "axis": "attitude",
+     "value": "how come? — surprise or reproach"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking for the way to do something — or, with surprise, ‘how come?!’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how? in what way? (before a verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.how"
+     },
+     {
+      "id": "s2",
+      "def": "how come? why on earth? (surprise)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "q.why"
+     },
+     {
+      "id": "s3",
+      "def": "(怎么了) what’s wrong? what happened?",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个怎么吃？",
+      "py": "Zhège zěnme chī?",
+      "tr": "How do you eat this?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "你怎么去学校？",
+      "py": "Nǐ zěnme qù xuéxiào?",
+      "tr": "How do you get to school?",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "你怎么不吃？",
+      "py": "Nǐ zěnme bù chī?",
+      "tr": "How come you’re not eating?",
+      "register": "colloquial",
+      "context": "meals",
+      "sense": "s2"
+     },
+     {
+      "text": "你怎么了？",
+      "py": "Nǐ zěnme le?",
+      "tr": "What’s the matter with you?",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s3"
+     },
+     {
+      "text": "你怎么才来？",
+      "py": "Nǐ zěnme cái lái?",
+      "tr": "How come you’re only getting here now?",
+      "register": "colloquial",
+      "context": "meetings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "怎么办",
+      "tr": "what shall we do?"
+     },
+     {
+      "text": "怎么说",
+      "tr": "how do you say it?"
+     },
+     {
+      "text": "怎么了",
+      "tr": "what’s wrong?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "怎么办？",
+      "tr": "zěnme bàn — how to handle it?",
+      "kind": "fixed expression",
+      "meaning": "what shall we do now?",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "怎样",
+      "register": "neutral",
+      "nuance": "zěnyàng: ‘how, in what way’ — a little more written"
+     },
+     {
+      "word": "如何",
+      "register": "formal",
+      "nuance": "rúhé: written ‘how’: 如何学习中文"
+     },
+     {
+      "word": "咋",
+      "register": "colloquial",
+      "nuance": "zǎ: northern colloquial ‘how, why’",
+      "region": "northern China"
+     }
+    ],
+    "etymology": {
+     "text": "怎 ‘how’ + the suffix 么, as in 什么 and 这么.",
+     "src": "morphemes: 怎 + 么"
+    },
+    "funFacts": [
+     "怎么 + 不 turns ‘how’ into ‘how come’: 你怎么不吃？ is surprise, not a request for a method."
+    ],
+    "pitfalls": [
+     "怎么 + verb asks for the way: 怎么去？ ‘how do I get there?’; 怎么 + 不 / 没 asks ‘how come’: 你怎么没来？",
+     "‘How are you?’ is not *你怎么？ — say 你好吗？ or 你怎么样？"
+    ],
+    "subtleties": [
+     "怎么 vs 为什么: 怎么 shows surprise or disapproval (‘how come?!’), 为什么 asks neutrally for the reason.",
+     "In fast speech it is often zěm."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 怎麼 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:zenmeyang",
+   "lemma": "怎么样",
+   "trad": "怎麼樣",
+   "pinyin": "zěn me yàng",
+   "pos": "PRON",
+   "senses": [
+    "q.how"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.how",
+     "axis": "what is asked",
+     "value": "how is it? what is it like? (as the predicate)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking for an opinion or a state: how is it, what is it like — and ‘how about …?’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how? how is …? what is … like?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.how"
+     },
+     {
+      "id": "s2",
+      "def": "(after a suggestion) how about it?",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "(不怎么样) not up to much",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你妈妈怎么样？",
+      "py": "Nǐ māma zěnmeyàng?",
+      "tr": "How is your mother?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这家饭馆怎么样？",
+      "py": "Zhè jiā fànguǎn zěnmeyàng?",
+      "tr": "What’s this restaurant like?",
+      "register": "neutral",
+      "context": "eating out",
+      "sense": "s1"
+     },
+     {
+      "text": "我们喝茶，怎么样？",
+      "py": "Wǒmen hē chá, zěnmeyàng?",
+      "tr": "Let’s have tea — how about it?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "这个电影不怎么样。",
+      "py": "Zhège diànyǐng bù zěnmeyàng.",
+      "tr": "This film isn’t up to much.",
+      "register": "colloquial",
+      "context": "cinema",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "最近怎么样？",
+      "tr": "how have you been lately?"
+     },
+     {
+      "text": "不怎么样",
+      "tr": "not great"
+     },
+     {
+      "text": "…，怎么样？",
+      "tr": "how about …?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "如何",
+      "register": "formal",
+      "nuance": "rúhé: written ‘how (is it)’ — 你觉得如何？"
+     },
+     {
+      "word": "咋样",
+      "register": "colloquial",
+      "nuance": "zǎyàng: northern colloquial ‘how’s it?’",
+      "region": "northern China"
+     }
+    ],
+    "etymology": {
+     "text": "怎么 ‘how’ + 样 ‘manner, appearance’: ‘in what manner’.",
+     "src": "morphemes: 怎么 + 样"
+    },
+    "funFacts": [
+     "最近怎么样？ ‘how are things lately?’ is the friendly greeting among people who know each other — 你好吗？ is more textbook."
+    ],
+    "pitfalls": [
+     "怎么样 is the predicate itself: 这个怎么样？ ‘how is this?’ — it does not go before a verb; for the way of doing something use 怎么 + verb."
+    ],
+    "subtleties": [
+     "After a suggestion it asks for agreement: 我们走，怎么样？ ‘let’s go, OK?’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 怎麼樣 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:weishenme",
+   "lemma": "为什么",
+   "trad": "為什麼",
+   "pinyin": "wèi shén me",
+   "pos": "ADV",
+   "senses": [
+    "q.why"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.why",
+     "axis": "attitude",
+     "value": "why? — asks for a reason (neutral)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity about reasons — the favourite word of every three-year-old.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "why? for what reason?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.why"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你为什么不吃肉？",
+      "py": "Nǐ wèishénme bù chī ròu?",
+      "tr": "Why don’t you eat meat?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "他为什么不来？",
+      "py": "Tā wèishénme bù lái?",
+      "tr": "Why isn’t he coming?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "为什么？",
+      "py": "Wèishénme?",
+      "tr": "Why?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "为什么不",
+      "tr": "why not"
+     },
+     {
+      "text": "不知道为什么",
+      "tr": "for some reason, somehow"
+     },
+     {
+      "text": "为什么呢？",
+      "tr": "why is that, then?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "怎么",
+      "register": "colloquial",
+      "nuance": "zěnme: ‘how come?!’ — surprise or reproach"
+     },
+     {
+      "word": "干吗",
+      "register": "colloquial",
+      "nuance": "gànmá: ‘what for? why on earth?’"
+     },
+     {
+      "word": "为何",
+      "register": "literary",
+      "nuance": "wèihé: written ‘why’"
+     }
+    ],
+    "etymology": {
+     "text": "为 wèi ‘for’ + 什么 ‘what’: ‘for what’.",
+     "src": "morphemes: 为 + 什么"
+    },
+    "funFacts": [
+     "为什么 is ‘for what’ — built like Greek γιατί (για + τι ‘for what’) and English ‘what for’; Turkish neden is ‘from what’ (ne + -den)."
+    ],
+    "pitfalls": [
+     "为什么 stands before the verb or opens the sentence: 你为什么不吃？ / 为什么你不吃？ — not at the end.",
+     "The answer starts with 因为 ‘because’ (S18)."
+    ],
+    "subtleties": [
+     "为 is read wèi (4th tone) here, not wéi."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 為什麼 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal",
+     "sentenceInitial"
+    ]
+   }
+  },
+  {
+   "id": "zh:duoshao",
+   "lemma": "多少",
+   "trad": "多少",
+   "pinyin": "duō shao",
+   "pos": "PRON",
+   "senses": [
+    "q.howmany",
+    "adv.moreorless"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.howmany",
+     "axis": "expected size",
+     "value": "any number; the measure word may be left out"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Chinese grammars (现代汉语词典) class interrogative 多少 as a pronoun (代词), like 几 and 什么; Wiktionary files the same interrogative sense under “adj” (‘(interrogative) how many; how much’)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shopping and counting — any number, big or small.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how many? how much? (any number)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.howmany"
+     },
+     {
+      "id": "s2",
+      "def": "(duōshǎo, adverb) more or less, somewhat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.moreorless"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这里有多少人？",
+      "py": "Zhèli yǒu duōshao rén?",
+      "tr": "How many people are here?",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "这个多少钱？",
+      "py": "Zhège duōshao qián?",
+      "tr": "How much is this?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "你们学校有多少学生？",
+      "py": "Nǐmen xuéxiào yǒu duōshao xuésheng?",
+      "tr": "How many students does your school have?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我多少知道一点。",
+      "py": "Wǒ duōshǎo zhīdào yìdiǎn.",
+      "tr": "I know a little about it.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "多少钱？",
+      "tr": "how much (money)?"
+     },
+     {
+      "text": "多少人",
+      "tr": "how many people"
+     },
+     {
+      "text": "有多少",
+      "tr": "how many are there?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "几",
+      "register": "neutral",
+      "nuance": "jǐ: ‘how many’ when a small number (under about ten) is expected; it needs a measure word"
+     }
+    ],
+    "etymology": {
+     "text": "多 ‘many, much’ + 少 ‘few, little’: ‘(is it) much or little?’.",
+     "src": "morphemes: 多 + 少"
+    },
+    "funFacts": [
+     "‘How many’ is literally ‘many-few’: the question names both ends of the scale.",
+     "多少钱？ ‘how much money?’ is the first sentence most visitors learn in a Chinese market."
+    ],
+    "pitfalls": [
+     "After 多少 the measure word may be left out (多少人, 多少书); after 几 it may not (几个人).",
+     "No 吗: 这里有多少人？"
+    ],
+    "subtleties": [
+     "As a question word the second syllable is toneless (duōshao); in the sense ‘more or less’ it is duōshǎo."
+    ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "duō shao",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "duō shǎo",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:ji",
+   "lemma": "几",
+   "trad": "幾",
+   "pinyin": "jǐ",
+   "pos": "NUM",
+   "senses": [
+    "q.howmany",
+    "quant.afew"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.afew",
+     "axis": "construction",
+     "value": "几 + measure in statements: a few, several (几个人)"
+    },
+    {
+     "concept": "q.howmany",
+     "axis": "expected size",
+     "value": "a small number is expected; with a measure word"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A small number expected: a child’s age, the people in a family, the time on the clock.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how many? (a small number is expected; with a measure word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.howmany"
+     },
+     {
+      "id": "s2",
+      "def": "a few, several (in statements)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.afew"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你有几个孩子？",
+      "py": "Nǐ yǒu jǐ ge háizi?",
+      "tr": "How many children do you have?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "你几岁？",
+      "py": "Nǐ jǐ suì?",
+      "tr": "How old are you? (to a child)",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s1"
+     },
+     {
+      "text": "你家有几口人？",
+      "py": "Nǐ jiā yǒu jǐ kǒu rén?",
+      "tr": "How many people are there in your family?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我买了几个苹果。",
+      "py": "Wǒ mǎi le jǐ ge píngguǒ.",
+      "tr": "I bought a few apples.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "几个",
+      "tr": "how many / a few"
+     },
+     {
+      "text": "几岁",
+      "tr": "how old (a child)"
+     },
+     {
+      "text": "几点",
+      "tr": "what time"
+     },
+     {
+      "text": "星期几",
+      "tr": "which day of the week"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "多少",
+      "register": "neutral",
+      "nuance": "duōshao: any number, also large ones; the measure word is optional"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 幾: an ideogrammic compound of 𢆶 ‘silk threads; little things’ + 戍 ‘to guard’ — watching over fine details. The simplified 几 is also an old character of its own, ‘small table’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The simplified 几 is also an old character of its own, ‘small table’ — still heard in 茶几 chájī ‘coffee table’."
+    ],
+    "pitfalls": [
+     "In everyday speech 几 takes a measure word: 几个人, 几本书 — not *几书.",
+     "Ask a child 你几岁？, but an adult 你多大？ (or politely 您多大年纪？) — 几岁 to an adult sounds as if you think they are small."
+    ],
+    "subtleties": [
+     "In statements 几 means ‘a few’: 我有几本书 ‘I have a few books’.",
+     "Time and dates use 几: 几点 ‘what time’, 几号 ‘what date’, 星期几 ‘what weekday’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 幾 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:na.which",
+   "lemma": "哪",
+   "trad": "哪",
+   "pinyin": "nǎ",
+   "pos": "DET",
+   "senses": [
+    "q.which",
+    "q.where"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.where",
+     "axis": "form",
+     "value": "only inside 哪里 / 哪儿; alone 哪 is ‘which’"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Choosing among things you can see or name: which one?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "which? (+ measure word + noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.which"
+     },
+     {
+      "id": "s2",
+      "def": "(哪里 / 哪儿) where",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你要哪个？",
+      "py": "Nǐ yào nǎge?",
+      "tr": "Which one do you want?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "你喜欢哪本书？",
+      "py": "Nǐ xǐhuan nǎ běn shū?",
+      "tr": "Which book do you like?",
+      "register": "neutral",
+      "context": "bookshop",
+      "sense": "s1"
+     },
+     {
+      "text": "您是哪位？",
+      "py": "Nín shì nǎ wèi?",
+      "tr": "Who is speaking, please?",
+      "register": "formal",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "你是哪国人？",
+      "py": "Nǐ shì nǎ guó rén?",
+      "tr": "Which country are you from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "哪个",
+      "tr": "which (one)"
+     },
+     {
+      "text": "哪位",
+      "tr": "which person (polite)"
+     },
+     {
+      "text": "哪些",
+      "tr": "which ones"
+     },
+     {
+      "text": "哪国人",
+      "tr": "of which nationality"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "什么",
+      "register": "neutral",
+      "nuance": "shénme + noun asks ‘what (kind of)’; 哪 + measure word asks ‘which one’ of a set"
+     }
+    ],
+    "etymology": {
+     "text": "Written 那 before the 20th century. Generally considered a fusion of 奈何 ‘how’ (Wang 1990; Sun 1992).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Until the 20th century ‘which’ was written 那, like ‘that’; the modern 哪 adds 口, the radical of many spoken little words (吗, 呢, 吧)."
+    ],
+    "pitfalls": [
+     "哪 nǎ ‘which’ vs 那 nà ‘that’: the tone and the 口 radical make the difference.",
+     "Before a noun 哪 needs a measure word: 哪本书 — never *哪书."
+    ],
+    "subtleties": [
+     "In speech 哪 + measure word is often něi: 哪个 něige.",
+     "No 吗 with 哪: 你要哪个？"
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:ming",
+   "lemma": "名",
+   "trad": "名",
+   "pinyin": "míng",
+   "pos": "CLF",
+   "senses": [],
+   "role": "the formal measure word for people with a role or profession — in news, reports and official numbers: 一名医生, 三名工人, 二十名学生; not for close family, and never for yourself in a polite introduction (我是医生)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:yisheng",
+   "lemma": "医生",
+   "trad": "醫生",
+   "pinyin": "yī shēng",
+   "pos": "NOUN",
+   "senses": [
+    "job.doctor"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 醫生 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "个",
+     "名"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A white coat in a busy Chinese hospital — a respected, trusted profession.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "doctor, physician",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.doctor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爸爸是医生。",
+      "py": "Wǒ bàba shì yīshēng.",
+      "tr": "My father is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "你应该去看医生。",
+      "py": "Nǐ yīnggāi qù kàn yīshēng.",
+      "tr": "You should see a doctor.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "这位医生在医院工作。",
+      "py": "Zhè wèi yīshēng zài yīyuàn gōngzuò.",
+      "tr": "This doctor works at the hospital.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "看医生",
+      "tr": "to see a doctor"
+     },
+     {
+      "text": "当医生",
+      "tr": "to be / become a doctor"
+     },
+     {
+      "text": "女医生",
+      "tr": "a woman doctor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "大夫",
+      "register": "colloquial",
+      "nuance": "dàifu: ‘doctor’, especially in the north and as a form of address: 王大夫"
+     },
+     {
+      "word": "医师",
+      "register": "technical",
+      "nuance": "yīshī: ‘physician’ — the professional title on documents"
+     }
+    ],
+    "etymology": {
+     "text": "医 ‘medicine; to heal’ (traditional 醫: phonetic 殹 + semantic 酉 ‘liquor’) + 生 ‘person (of a calling)’, as in 学生.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "China has two kinds: 西医 ‘Western-medicine doctor’ and 中医 ‘doctor of traditional Chinese medicine’."
+    ],
+    "pitfalls": [
+     "Do not use 位 for yourself: 我是医生 ‘I am a doctor’ — not *我是一位医生.",
+     "看医生 ‘look at the doctor’ means to see a doctor as a patient."
+    ],
+    "subtleties": [
+     "A doctor is addressed as 医生 or 大夫, or surname + 医生 / 大夫: 李医生."
+    ]
+   }
+  },
+  {
+   "id": "zh:hushi",
+   "lemma": "护士",
+   "trad": "護士",
+   "pinyin": "hù shi",
+   "pos": "NOUN",
+   "senses": [
+    "job.nurse"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 護士 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "measure": "measure: 位 (polite), 个 (everyday) and 名 (formal, official counts) are all standard Mandarin measure words for people in a profession; Wiktionary lists only 名 for 护士, but 位 is just as standard (一位护士), and it must not be drilled as wrong."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Care and patience on the hospital ward.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nurse",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.nurse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我妈妈是护士。",
+      "py": "Wǒ māma shì hùshi.",
+      "tr": "My mother is a nurse.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "她是一名护士。",
+      "py": "Tā shì yì míng hùshi.",
+      "tr": "She is a nurse.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "护士，我想喝水。",
+      "py": "Hùshi, wǒ xiǎng hē shuǐ.",
+      "tr": "Nurse, I’d like some water.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "男护士",
+      "tr": "a male nurse"
+     },
+     {
+      "text": "护士长",
+      "tr": "the head nurse"
+     },
+     {
+      "text": "当护士",
+      "tr": "to be a nurse"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "白衣天使",
+      "register": "literary",
+      "nuance": "báiyī tiānshǐ: ‘angel in white’ — praise for nurses and medical staff"
+     },
+     {
+      "word": "护工",
+      "register": "neutral",
+      "nuance": "hùgōng: a care assistant, not a trained nurse"
+     }
+    ],
+    "etymology": {
+     "text": "护 ‘to protect, to look after’ (traditional 護: semantic 言 + phonetic 蒦) + 士 ‘person (of a skill)’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew calls a nurse אָחוֹת ‘sister’, German Krankenschwester ‘sick-sister’; Chinese 护士 is ‘the one who looks after’ — no sister at all."
+    ],
+    "pitfalls": [
+     "The second syllable is toneless: hùshi."
+    ],
+    "subtleties": [
+     "护士 is used for men too; to stress it, 男护士 ‘male nurse’."
+    ]
+   }
+  },
+  {
+   "id": "zh:gongchengshi",
+   "lemma": "工程师",
+   "trad": "工程師",
+   "pinyin": "gōng chéng shī",
+   "pos": "NOUN",
+   "senses": [
+    "job.engineer"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 工程師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Bridges, machines, software — the people who build modern China.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "engineer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.engineer"
+     },
+     {
+      "id": "s2",
+      "def": "(computing) software developer",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我哥哥是工程师。",
+      "py": "Wǒ gēge shì gōngchéngshī.",
+      "tr": "My older brother is an engineer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这位工程师在这里工作。",
+      "py": "Zhè wèi gōngchéngshī zài zhèli gōngzuò.",
+      "tr": "This engineer works here.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "他是一名软件工程师。",
+      "py": "Tā shì yì míng ruǎnjiàn gōngchéngshī.",
+      "tr": "He is a software engineer.",
+      "register": "neutral",
+      "context": "IT",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "软件工程师",
+      "tr": "software engineer"
+     },
+     {
+      "text": "总工程师",
+      "tr": "chief engineer"
+     },
+     {
+      "text": "高级工程师",
+      "tr": "senior engineer (official title)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "技术员",
+      "register": "neutral",
+      "nuance": "jìshùyuán: technician — a lower qualification"
+     },
+     {
+      "word": "程序员",
+      "register": "neutral",
+      "nuance": "chéngxùyuán: programmer"
+     }
+    ],
+    "etymology": {
+     "text": "工程 ‘engineering; a project’ (工 ‘work’ + 程 ‘measure, procedure’) + 师 ‘master, expert’.",
+     "src": "morphemes: 工程 + 师"
+    },
+    "funFacts": [
+     "师 ‘master’ marks skilled professions: 老师 teacher, 厨师 cook, 律师 lawyer, 工程师 engineer."
+    ],
+    "pitfalls": [
+     "工程 alone means ‘a project, construction work’ — the person is 工程师."
+    ],
+    "subtleties": [
+     "高级工程师 ‘senior engineer’ is an official professional title in China."
+    ]
+   }
+  },
+  {
+   "id": "zh:siji",
+   "lemma": "司机",
+   "trad": "司機",
+   "pinyin": "sī jī",
+   "pos": "NOUN",
+   "senses": [
+    "job.driver",
+    "person.oldhand"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 司機 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Taxis, buses and lorries — someone at the wheel.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "driver (as a job), chauffeur",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.driver"
+     },
+     {
+      "id": "s2",
+      "def": "(slang, 老司机) an old hand, an experienced person",
+      "register": [
+       "slang"
+      ],
+      "concept": "person.oldhand"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爸爸是出租车司机。",
+      "py": "Wǒ bàba shì chūzūchē sījī.",
+      "tr": "My father is a taxi driver.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他是公共汽车司机。",
+      "py": "Tā shì gōnggòng qìchē sījī.",
+      "tr": "He is a bus driver.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "他是老司机，什么都知道。",
+      "py": "Tā shì lǎo sījī, shénme dōu zhīdào.",
+      "tr": "He’s an old hand — he knows everything.",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "出租车司机",
+      "tr": "taxi driver"
+     },
+     {
+      "text": "公交车司机",
+      "tr": "bus driver"
+     },
+     {
+      "text": "老司机",
+      "tr": "an experienced hand (slang)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "老司机",
+      "tr": "an old driver",
+      "kind": "slang",
+      "meaning": "an experienced person, an old hand (online also with a risqué undertone)",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "驾驶员",
+      "register": "formal",
+      "nuance": "jiàshǐyuán: driver, pilot — the official word"
+     },
+     {
+      "word": "师傅",
+      "register": "colloquial",
+      "nuance": "shīfu: ‘master’ — how drivers and craftsmen are addressed: 师傅，去机场。"
+     }
+    ],
+    "etymology": {
+     "text": "司 ‘to be in charge of, to operate’ + 机 ‘machine’: ‘the one who operates the machine’.",
+     "src": "morphemes: 司 + 机"
+    },
+    "funFacts": [
+     "In a taxi you say 师傅 ‘master’ to the driver, not 司机."
+    ],
+    "pitfalls": [
+     "‘I drive (a car)’ is 我开车 (S13), not *我是司机 — 司机 names the driver of a vehicle, usually as a job.",
+     "Address a driver as 师傅, not 司机."
+    ],
+    "subtleties": [
+     "老司机 began as ‘experienced driver’ and became internet slang for ‘old hand’."
+    ]
+   }
+  },
+  {
+   "id": "zh:chushi",
+   "lemma": "厨师",
+   "trad": "廚師",
+   "pinyin": "chú shī",
+   "pos": "NOUN",
+   "senses": [
+    "job.cook"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 廚師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Flames and woks in a restaurant kitchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cook, chef (the job)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他是饭馆的厨师。",
+      "py": "Tā shì fànguǎn de chúshī.",
+      "tr": "He is a cook at the restaurant.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "我想当厨师。",
+      "py": "Wǒ xiǎng dāng chúshī.",
+      "tr": "I want to be a chef.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这位厨师做的菜很好吃。",
+      "py": "Zhè wèi chúshī zuò de cài hěn hǎochī.",
+      "tr": "The dishes this chef makes are delicious.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "当厨师",
+      "tr": "to be / become a cook"
+     },
+     {
+      "text": "厨师长",
+      "tr": "head chef"
+     },
+     {
+      "text": "大厨师",
+      "tr": "a great chef"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "大厨",
+      "register": "colloquial",
+      "nuance": "dàchú: ‘chef, big cook’ — admiring"
+     },
+     {
+      "word": "厨子",
+      "register": "colloquial",
+      "nuance": "chúzi: ‘cook’ — homely, a little rough"
+     },
+     {
+      "word": "炊事员",
+      "register": "formal",
+      "nuance": "chuīshìyuán: cook in an army unit or canteen"
+     }
+    ],
+    "etymology": {
+     "text": "厨 ‘kitchen’ (traditional 廚: semantic 广 + phonetic 尌) + 师 ‘master’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same 厨 is in 厨房 ‘kitchen’ (S12)."
+    ],
+    "pitfalls": [
+     "厨师 is the person; ‘to cook’ is 做饭 (S07): 我妈妈做饭 — she is not a 厨师 unless it is her job."
+    ],
+    "subtleties": [
+     "A famous chef is praised as 大厨."
+    ]
+   }
+  },
+  {
+   "id": "zh:shouhuoyuan",
+   "lemma": "售货员",
+   "trad": "售貨員",
+   "pinyin": "shòu huò yuán",
+   "pos": "NOUN",
+   "senses": [
+    "job.seller"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 售貨員 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Behind the counter of a shop or department store.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shop assistant, salesclerk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.seller"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她是商店的售货员。",
+      "py": "Tā shì shāngdiàn de shòuhuòyuán.",
+      "tr": "She is a shop assistant.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "我姐姐在超市当售货员。",
+      "py": "Wǒ jiějie zài chāoshì dāng shòuhuòyuán.",
+      "tr": "My sister works as a shop assistant at the supermarket.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "售货员说这个很好。",
+      "py": "Shòuhuòyuán shuō zhège hěn hǎo.",
+      "tr": "The shop assistant says this one is good.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "女售货员",
+      "tr": "a saleswoman"
+     },
+     {
+      "text": "当售货员",
+      "tr": "to work as a shop assistant"
+     },
+     {
+      "text": "超市售货员",
+      "tr": "supermarket assistant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "店员",
+      "register": "neutral",
+      "nuance": "diànyuán: shop employee — the modern everyday word"
+     },
+     {
+      "word": "营业员",
+      "register": "neutral",
+      "nuance": "yíngyèyuán: counter staff (shops, banks, phone companies)"
+     },
+     {
+      "word": "销售",
+      "register": "neutral",
+      "nuance": "xiāoshòu: salesperson; sales (as a department)"
+     }
+    ],
+    "etymology": {
+     "text": "售 ‘to sell’ + 货 ‘goods’ (traditional 貨: phonetic 化 + semantic 貝 ‘shell, money’) + 员 ‘staff member’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "-员 makes staff words: 服务员 waiter, 售货员 shop assistant, 演员 actor."
+    ],
+    "pitfalls": [
+     "售货员 is the job title; in a small shop you call out 你好 or 老板 ‘boss’, not 售货员."
+    ],
+    "subtleties": [
+     "售货员 is the standard job title; in everyday talk people also say 店员, or 销售 for sales staff."
+    ]
+   }
+  },
+  {
+   "id": "zh:gongren",
+   "lemma": "工人",
+   "trad": "工人",
+   "pinyin": "gōng rén",
+   "pos": "NOUN",
+   "senses": [
+    "job.worker",
+    "job.housekeeper"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "名",
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "job.housekeeper",
+     "axis": "region",
+     "value": "Hong Kong, Singapore: the domestic helper"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Factories, building sites — work with the hands.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "worker, labourer (manual or factory work)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.worker"
+     },
+     {
+      "id": "s2",
+      "def": "(Hong Kong, Singapore) domestic helper",
+      "register": [
+       "regional"
+      ],
+      "concept": "job.housekeeper"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爷爷是工人。",
+      "py": "Wǒ yéye shì gōngrén.",
+      "tr": "My grandfather is a worker.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这个工厂有五百名工人。",
+      "py": "Zhège gōngchǎng yǒu wǔbǎi míng gōngrén.",
+      "tr": "This factory has five hundred workers.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "工人们在工作。",
+      "py": "Gōngrénmen zài gōngzuò.",
+      "tr": "The workers are working.",
+      "register": "neutral",
+      "context": "building site",
+      "sense": "s1"
+     },
+     {
+      "text": "她家请了一个工人照顾老人。",
+      "py": "Tā jiā qǐng le yí ge gōngrén zhàogù lǎorén.",
+      "tr": "Her family hired a domestic helper to look after the old folks.",
+      "register": "regional",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "建筑工人",
+      "tr": "construction worker"
+     },
+     {
+      "text": "工人阶级",
+      "tr": "the working class"
+     },
+     {
+      "text": "农民工",
+      "tr": "migrant worker from the countryside"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "员工",
+      "register": "neutral",
+      "nuance": "yuángōng: employee, staff (any kind of work)"
+     },
+     {
+      "word": "劳动者",
+      "register": "formal",
+      "nuance": "láodòngzhě: labourer, working person"
+     },
+     {
+      "word": "打工的",
+      "register": "colloquial",
+      "nuance": "dǎgōng de: someone working a (temporary) job"
+     }
+    ],
+    "etymology": {
+     "text": "工 ‘work’ (a pictogram of a tool) + 人 ‘person’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "工人 and 农民 ‘workers and peasants’ appear together in Chinese political language: 工农."
+    ],
+    "pitfalls": [
+     "工人 is a manual or factory worker; an office employee is 员工 or 职员."
+    ],
+    "subtleties": [
+     "In Hong Kong and Singapore 工人 also means a live-in domestic helper."
+    ]
+   }
+  },
+  {
+   "id": "zh:nongmin",
+   "lemma": "农民",
+   "trad": "農民",
+   "pinyin": "nóng mín",
+   "pos": "NOUN",
+   "senses": [
+    "job.farmer"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 農民 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "名",
+     "位"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Rice fields, villages, the work of the seasons.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "farmer, peasant",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.farmer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爷爷是农民。",
+      "py": "Wǒ yéye shì nóngmín.",
+      "tr": "My grandfather is a farmer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "这个村子的农民种水稻。",
+      "py": "Zhège cūnzi de nóngmín zhòng shuǐdào.",
+      "tr": "The farmers of this village grow rice.",
+      "register": "neutral",
+      "context": "countryside",
+      "sense": "s1"
+     },
+     {
+      "text": "很多农民去城市打工。",
+      "py": "Hěn duō nóngmín qù chéngshì dǎgōng.",
+      "tr": "Many farmers go to the cities to work.",
+      "register": "neutral",
+      "context": "society",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "农民工",
+      "tr": "migrant worker"
+     },
+     {
+      "text": "老农民",
+      "tr": "an old farmer"
+     },
+     {
+      "text": "农民伯伯",
+      "tr": "‘uncle farmer’ (children’s respectful word)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "农夫",
+      "register": "literary",
+      "nuance": "nóngfū: farmer, peasant — in stories"
+     },
+     {
+      "word": "农场主",
+      "register": "neutral",
+      "nuance": "nóngchǎngzhǔ: farm owner (a large farm)"
+     }
+    ],
+    "etymology": {
+     "text": "农 ‘agriculture’ (traditional 農: originally 林 ‘vegetation’ + 辰 ‘hoe’ — clearing weeds) + 民 ‘people’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "农民工 ‘peasant-workers’ are the hundreds of millions of rural people who work in Chinese cities."
+    ],
+    "pitfalls": [
+     "农民 is the rural farming population — a social group (‘peasant’); a Western-style farm owner is 农场主."
+    ],
+    "subtleties": [
+     "农 is in 农村 ‘the countryside’ and 农业 ‘agriculture’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jingcha",
+   "lemma": "警察",
+   "trad": "警察",
+   "pinyin": "jǐng chá",
+   "pos": "NOUN",
+   "senses": [
+    "job.police",
+    "pol.police"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "名",
+     "位"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Order on the street; the number to call is 110.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "police officer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.police"
+     },
+     {
+      "id": "s2",
+      "def": "the police (the force)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.police"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他是警察。",
+      "py": "Tā shì jǐngchá.",
+      "tr": "He is a police officer.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "那位警察在那里。",
+      "py": "Nà wèi jǐngchá zài nàli.",
+      "tr": "That police officer is over there.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "快叫警察！",
+      "py": "Kuài jiào jǐngchá!",
+      "tr": "Call the police, quick!",
+      "register": "neutral",
+      "context": "emergency",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "交通警察",
+      "tr": "traffic police (short: 交警)"
+     },
+     {
+      "text": "叫警察",
+      "tr": "to call the police"
+     },
+     {
+      "text": "警察局",
+      "tr": "police station"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "警官",
+      "register": "formal",
+      "nuance": "jǐngguān: police officer — also a respectful form of address"
+     },
+     {
+      "word": "民警",
+      "register": "neutral",
+      "nuance": "mínjǐng: ‘people’s police’ — the ordinary mainland police officer"
+     },
+     {
+      "word": "条子",
+      "register": "slang",
+      "nuance": "tiáozi: ‘cop’ — rude"
+     }
+    ],
+    "etymology": {
+     "text": "A modern word borrowed in writing from Japanese 警察 keisatsu; 警 ‘to warn, be alert’ + 察 ‘to examine’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "警察 came into Chinese from Japanese (keisatsu), like many modern words written with Chinese characters — 经济 ‘economy’, 社会 ‘society’."
+    ],
+    "pitfalls": [
+     "警察 is both the person and the force: 他是警察 ‘he is a policeman’, 叫警察 ‘call the police’."
+    ],
+    "subtleties": [
+     "The police emergency number in mainland China is 110."
+    ]
+   }
+  },
+  {
+   "id": "zh:lvshi",
+   "lemma": "律师",
+   "trad": "律師",
+   "pinyin": "lǜ shī",
+   "pos": "NOUN",
+   "senses": [
+    "job.lawyer",
+    "relig.vinayamaster"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 律師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Contracts, courts, careful words.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lawyer, attorney",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.lawyer"
+     },
+     {
+      "id": "s2",
+      "def": "(Buddhism) a master of monastic discipline",
+      "register": [
+       "religious"
+      ],
+      "concept": "relig.vinayamaster"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我姐姐是律师。",
+      "py": "Wǒ jiějie shì lǜshī.",
+      "tr": "My older sister is a lawyer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "你需要一位律师。",
+      "py": "Nǐ xūyào yí wèi lǜshī.",
+      "tr": "You need a lawyer.",
+      "register": "neutral",
+      "context": "law",
+      "sense": "s1"
+     },
+     {
+      "text": "他请了一个律师。",
+      "py": "Tā qǐng le yí ge lǜshī.",
+      "tr": "He hired a lawyer.",
+      "register": "neutral",
+      "context": "court",
+      "sense": "s1"
+     },
+     {
+      "text": "道宣律师是唐代有名的高僧。",
+      "py": "Dàoxuān lǜshī shì Tángdài yǒumíng de gāosēng.",
+      "tr": "The Vinaya master Daoxuan was a famous monk of the Tang dynasty.",
+      "register": "religious",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "请律师",
+      "tr": "to hire a lawyer"
+     },
+     {
+      "text": "律师事务所",
+      "tr": "law firm"
+     },
+     {
+      "text": "辩护律师",
+      "tr": "defence lawyer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "法律顾问",
+      "register": "formal",
+      "nuance": "fǎlǜ gùwèn: legal adviser (of a company)"
+     },
+     {
+      "word": "大律师",
+      "register": "regional",
+      "nuance": "dàlǜshī: barrister (Hong Kong)",
+      "region": "Hong Kong"
+     }
+    ],
+    "etymology": {
+     "text": "律 ‘law, rule’ (semantic 彳 + phonetic 聿) + 师 ‘master, expert’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Buddhism 律师 once meant a master of the monastic rules (the vinaya) — long before it meant ‘lawyer’."
+    ],
+    "pitfalls": [
+     "Pinyin lǜ keeps the two dots: l + ü (lü), different from lù."
+    ],
+    "subtleties": [
+     "律 also means ‘rule, regularity’: 规律 ‘a law (of nature)’."
+    ]
+   }
+  },
+  {
+   "id": "zh:yishujia",
+   "lemma": "艺术家",
+   "trad": "藝術家",
+   "pinyin": "yì shù jiā",
+   "pos": "NOUN",
+   "senses": [
+    "job.artist"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 藝術家 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Studios, galleries, creative freedom.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artist",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.artist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她是一位艺术家。",
+      "py": "Tā shì yí wèi yìshùjiā.",
+      "tr": "She is an artist.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "这位艺术家很有名。",
+      "py": "Zhè wèi yìshùjiā hěn yǒumíng.",
+      "tr": "This artist is very famous.",
+      "register": "neutral",
+      "context": "gallery",
+      "sense": "s1"
+     },
+     {
+      "text": "我想当艺术家。",
+      "py": "Wǒ xiǎng dāng yìshùjiā.",
+      "tr": "I want to be an artist.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "当代艺术家",
+      "tr": "contemporary artist"
+     },
+     {
+      "text": "年轻艺术家",
+      "tr": "young artist"
+     },
+     {
+      "text": "当艺术家",
+      "tr": "to become an artist"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "画家",
+      "register": "neutral",
+      "nuance": "huàjiā: painter"
+     },
+     {
+      "word": "音乐家",
+      "register": "neutral",
+      "nuance": "yīnyuèjiā: musician"
+     },
+     {
+      "word": "搞艺术的",
+      "register": "colloquial",
+      "nuance": "gǎo yìshù de: ‘someone who does art’ — casual, sometimes ironic"
+     }
+    ],
+    "etymology": {
+     "text": "艺术 ‘art’ (艺 ‘skill’ + 术 ‘technique’) + 家 ‘specialist, -ist’.",
+     "src": "morphemes: 艺术 + 家"
+    },
+    "funFacts": [
+     "家 ‘home’ also makes experts: 画家 painter, 作家 writer, 科学家 scientist, 艺术家 artist."
+    ],
+    "pitfalls": [
+     "艺术家 is a big word for an established artist; for a hobby say 他喜欢画画 ‘he likes painting’."
+    ],
+    "subtleties": [
+     "Polite measure words suit it best: 一位艺术家, 一名艺术家."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

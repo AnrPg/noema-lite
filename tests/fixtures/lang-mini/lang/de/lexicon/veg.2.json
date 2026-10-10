@@ -1,0 +1,244 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Aubergine",
+   "lemma": "Aubergine",
+   "pos": "NOUN",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Auberginen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Aubergine",
+    "N;ACC;SG": "Aubergine",
+    "N;DAT;SG": "Aubergine",
+    "N;GEN;SG": "Aubergine",
+    "N;NOM;PL": "Auberginen",
+    "N;ACC;PL": "Auberginen",
+    "N;DAT;PL": "Auberginen",
+    "N;GEN;PL": "Auberginen"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mediterranean holidays and cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aubergine, eggplant",
+      "concept": "veg.eggplant",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Aubergine in Scheiben schneiden und salzen.",
+      "tr": "Slice the aubergine and salt it.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf dem Markt gab es heute schöne Auberginen.",
+      "tr": "There were nice aubergines at the market today.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Moussaka macht man mit Auberginen.",
+      "tr": "Moussaka is made with aubergines.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gegrillte Aubergine",
+      "tr": "grilled aubergine"
+     },
+     {
+      "text": "gefüllte Auberginen",
+      "tr": "stuffed aubergines"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Melanzani",
+      "register": "regional",
+      "nuance": "the usual word in Austria (from Italian melanzane)",
+      "region": "AT"
+     },
+     {
+      "word": "Eierfrucht",
+      "register": "dated",
+      "nuance": "‘egg fruit’ — old-fashioned, rare today"
+     }
+    ],
+    "etymology": {
+     "text": "Unadapted borrowing from French aubergine (from Catalan albergínia, from Arabic al-bāḏinjān). Doublet of Melanzani.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English eggplant and old German Eierfrucht both come from early white, egg-shaped varieties."
+    ],
+    "pitfalls": [
+     "French spelling and sound: -gine is said like French [ʒiːnə]; plural Auberginen."
+    ],
+    "subtleties": [
+     "The same vegetable has an Arabic name behind it in almost every European language: aubergine, berenjena, albergínia."
+    ]
+   }
+  },
+  {
+   "id": "de:Kürbis",
+   "lemma": "Kürbis",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Kürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Kürbis",
+    "N;ACC;SG": "Kürbis",
+    "N;DAT;SG": "Kürbis",
+    "N;GEN;SG": "Kürbisses",
+    "N;NOM;PL": "Kürbisse",
+    "N;ACC;PL": "Kürbisse",
+    "N;DAT;PL": "Kürbissen",
+    "N;GEN;PL": "Kürbisse"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Autumn, harvest and cosy soups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pumpkin, squash, gourd (any plant of the genus Cucurbita or its fruit)",
+      "concept": "veg.pumpkin",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Aus dem Kürbis kochen wir eine Suppe.",
+      "tr": "We're making a soup from the pumpkin.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder schnitzen Gesichter in die Kürbisse.",
+      "tr": "The children carve faces into the pumpkins.",
+      "register": "neutral",
+      "context": "Halloween",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Garten wachsen dieses Jahr riesige Kürbisse.",
+      "tr": "Huge pumpkins are growing in the garden this year.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Kürbissuppe",
+      "tr": "pumpkin soup"
+     },
+     {
+      "text": "die Kürbiskerne",
+      "tr": "pumpkin seeds"
+     },
+     {
+      "text": "einen Kürbis aushöhlen",
+      "tr": "to hollow out a pumpkin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; varieties have their own names (Hokkaido, Butternut).",
+    "etymology": {
+     "text": "From Middle High German kürbiȥ, Old High German kurbiȥ, from Proto-West Germanic *kurbit; cognate with Yiddish קירבעס (kirbes).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kürbiskernöl, the dark green pumpkin-seed oil, is a speciality of Styria in Austria."
+    ],
+    "pitfalls": [
+     "-is doubles the s before an ending: des Kürbisses, die Kürbisse."
+    ],
+    "subtleties": [
+     "German uses one word, Kürbis, where English has pumpkin, squash and gourd."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

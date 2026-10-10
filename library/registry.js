@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-08T12:13:05+00:00",
+ "builtAt": "2026-10-10T13:50:08+00:00",
  "groups": [
   {
    "id": "data-cloud",
@@ -197,6 +197,35 @@ window.NOEMA_REGISTRY = {
    "emoji": "🦉",
    "learner": "The learner (ANR) is an adult with ADHD who learns best when challenged, tested and given tightly structured, co-located information.",
    "subjects": "*"
+  }
+ ],
+ "languages": [
+  {
+   "id": "polyglot-semitic-zh-de",
+   "title": "Arabic · Hebrew · Chinese · German",
+   "emoji": "🌍",
+   "languages": [
+    "ar",
+    "he",
+    "zh",
+    "de"
+   ],
+   "explainLang": "en",
+   "path": "library/languages/polyglot-semitic-zh-de/course.pack.js",
+   "profiles": "library/languages/polyglot-semitic-zh-de/course.profiles.js",
+   "media": [
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-cucumber.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-garlic.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-onion.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-potato.webp",
+    "library/languages/polyglot-semitic-zh-de/core/media/veg-tomato.webp"
+   ],
+   "words": {
+    "ar": 516,
+    "he": 526,
+    "zh": 692,
+    "de": 635
+   }
   }
  ]
 };

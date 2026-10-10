@@ -1,0 +1,5283 @@
+{
+ "sentences": [
+  {
+   "id": "he.c01_04.001",
+   "frame": "fr.past.action",
+   "text": "אֶתְמוֹל קַמְתִּי בְּשֶׁבַע.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "קַמְתִּי",
+     "l": "he:kam",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "Yesterday I got up at seven.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.002",
+   "frame": "fr.past.action",
+   "text": "אֶתְמוֹל הִיא קָמָה בְּשֶׁבַע.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "קָמָה",
+     "l": "he:kam",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "Yesterday she got up at seven.",
+   "variantOf": "he.c01_04.001",
+   "variant": {
+    "Person": "3"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.003",
+   "frame": "fr.past.action",
+   "text": "אֶתְמוֹל לֹא קַמְתִּי בְּשֶׁבַע.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "קַמְתִּי",
+     "l": "he:kam",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "gloss": "Yesterday I didn’t get up at seven.",
+   "variantOf": "he.c01_04.001",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.004",
+   "frame": "fr.past.action",
+   "text": "אֶתְמוֹל קַמְנוּ בְּשֶׁבַע.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "קַמְנוּ",
+     "l": "he:kam",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "Yesterday we got up at seven.",
+   "variantOf": "he.c01_04.001",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.005",
+   "frame": "fr.past.action",
+   "text": "הִתְעוֹרַרְתִּי בְּשֵׁשׁ בַּבֹּקֶר.",
+   "tokens": [
+    {
+     "t": "הִתְעוֹרַרְתִּי",
+     "l": "he:hitorer",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "בְּשֵׁשׁ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֵׁשׁ",
+       "l": "he:shisha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "I woke up at six in the morning.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.006",
+   "frame": "fr.past.action",
+   "text": "הִתְעוֹרַרְנוּ בְּשֵׁשׁ בַּבֹּקֶר.",
+   "tokens": [
+    {
+     "t": "הִתְעוֹרַרְנוּ",
+     "l": "he:hitorer",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "בְּשֵׁשׁ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֵׁשׁ",
+       "l": "he:shisha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "We woke up at six in the morning.",
+   "variantOf": "he.c01_04.005",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.007",
+   "frame": "fr.past.action",
+   "text": "הִיא הִתְקַלְּחָה וְהִתְלַבְּשָׁה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "הִתְקַלְּחָה",
+     "l": "he:hitkaleach",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "וְהִתְלַבְּשָׁה",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הִתְלַבְּשָׁה",
+       "l": "he:hitlabesh",
+       "f": "V;PST;3;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "She showered and got dressed.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.008",
+   "frame": "fr.past.action",
+   "text": "הוּא הִתְקַלֵּחַ וְהִתְלַבֵּשׁ.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הִתְקַלֵּחַ",
+     "l": "he:hitkaleach",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "וְהִתְלַבֵּשׁ",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הִתְלַבֵּשׁ",
+       "l": "he:hitlabesh",
+       "f": "V;PST;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "He showered and got dressed.",
+   "variantOf": "he.c01_04.007",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.009",
+   "frame": "fr.past.action",
+   "text": "הֵם הִתְקַלְּחוּ וְהִתְלַבְּשׁוּ.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "הִתְקַלְּחוּ",
+     "l": "he:hitkaleach",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "וְהִתְלַבְּשׁוּ",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הִתְלַבְּשׁוּ",
+       "l": "he:hitlabesh",
+       "f": "V;PST;3;PL"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "They showered and got dressed.",
+   "variantOf": "he.c01_04.007",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.010",
+   "frame": "fr.past.action",
+   "text": "אַבָּא רָחַץ אֶת הַיְּלָדִים וְהָלַךְ לָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "רָחַץ",
+     "l": "he:rachats",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "וְהָלַךְ",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הָלַךְ",
+       "l": "he:halach",
+       "f": "V;PST;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "לָעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "לָ",
+       "l": "he:le",
+       "f": "ADP;DEF;ALT"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "gloss": "Dad washed the children and went to work.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.011",
+   "frame": "fr.past.action",
+   "text": "אַבָּא אָכַל אֲרוּחַת בֹּקֶר וְיָצָא מֵהַבַּיִת.",
+   "tokens": [
+    {
+     "t": "אַבָּא",
+     "l": "he:aba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "אָכַל",
+     "l": "he:akhal",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "אֲרוּחַת בֹּקֶר",
+     "l": "he:aruchat-boker",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְיָצָא",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "יָצָא",
+       "l": "he:yatsa",
+       "f": "V;PST;3;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "מֵהַבַּיִת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "Dad had breakfast and left home.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.012",
+   "frame": "fr.past.action",
+   "text": "הָעֲבוֹדָה הִתְחִילָה בִּשְׁמוֹנֶה.",
+   "tokens": [
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הִתְחִילָה",
+     "l": "he:hitchil",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "בִּשְׁמוֹנֶה",
+     "parts": [
+      {
+       "t": "בִּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שְׁמוֹנֶה",
+       "l": "he:shmona",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "Work started at eight.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.013",
+   "frame": "fr.past.action",
+   "text": "הָעֲבוֹדָה מַתְחִילָה בִּשְׁמוֹנֶה.",
+   "tokens": [
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מַתְחִילָה",
+     "l": "he:hitchil",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בִּשְׁמוֹנֶה",
+     "parts": [
+      {
+       "t": "בִּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שְׁמוֹנֶה",
+       "l": "he:shmona",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "Work starts at eight.",
+   "variantOf": "he.c01_04.012",
+   "variant": {
+    "Tense": "PRS"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.014",
+   "frame": "fr.past.action",
+   "text": "סִיַּמְנוּ אֶת הָעֲבוֹדָה בְּחָמֵשׁ.",
+   "tokens": [
+    {
+     "t": "סִיַּמְנוּ",
+     "l": "he:siyem",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "בְּחָמֵשׁ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חָמֵשׁ",
+       "l": "he:chamisha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.object"
+   ],
+   "gloss": "We finished the work at five.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.015",
+   "frame": "fr.past.action",
+   "text": "אַחַר כָּךְ הוּא חָזַר הַבַּיְתָה.",
+   "tokens": [
+    {
+     "t": "אַחַר כָּךְ",
+     "l": "he:achar-kach"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חָזַר",
+     "l": "he:chazar",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "After that he came back home.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.016",
+   "frame": "fr.past.action",
+   "text": "בָּעֶרֶב הוּא הָלַךְ לִישֹׁן מֻקְדָּם.",
+   "tokens": [
+    {
+     "t": "בָּעֶרֶב",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶרֶב",
+       "l": "he:erev",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הָלַךְ",
+     "l": "he:halach",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "לִישֹׁן",
+     "l": "he:yashan-v",
+     "f": "V;NFIN"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "In the evening he went to bed early.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.017",
+   "frame": "fr.past.action",
+   "text": "אֶתְמוֹל נִרְדַּמְתִּי מְאֻחָר.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "נִרְדַּמְתִּי",
+     "l": "he:nirdam",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "מְאֻחָר",
+     "l": "he:meuchar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "Yesterday I fell asleep late.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.018",
+   "frame": "fr.past.action",
+   "text": "אֶתְמוֹל לֹא נִרְדַּמְתִּי מְאֻחָר.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "נִרְדַּמְתִּי",
+     "l": "he:nirdam",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "מְאֻחָר",
+     "l": "he:meuchar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "gloss": "Yesterday I didn’t fall asleep late.",
+   "variantOf": "he.c01_04.017",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.019",
+   "frame": "fr.past.action",
+   "text": "הַתִּינוֹק יָשַׁן כָּל הַלַּיְלָה.",
+   "tokens": [
+    {
+     "t": "הַתִּינוֹק",
+     "l": "he:tinok",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָשַׁן",
+     "l": "he:yashan-v",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "הַלַּיְלָה",
+     "l": "he:laila",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "The baby slept all night.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.020",
+   "frame": "fr.past.action",
+   "text": "הַתִּינֹקֶת יָשְׁנָה כָּל הַלַּיְלָה.",
+   "tokens": [
+    {
+     "t": "הַתִּינֹקֶת",
+     "l": "he:tinoket",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָשְׁנָה",
+     "l": "he:yashan-v",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "הַלַּיְלָה",
+     "l": "he:laila",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "The baby girl slept all night.",
+   "variantOf": "he.c01_04.019",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.021",
+   "frame": "fr.past.neg",
+   "text": "לֹא יָשַׁנְתִּי טוֹב.",
+   "tokens": [
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "יָשַׁנְתִּי",
+     "l": "he:yashan-v",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "gloss": "I didn’t sleep well.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.022",
+   "frame": "fr.past.neg",
+   "text": "הוּא לֹא יָשַׁן טוֹב.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "יָשַׁן",
+     "l": "he:yashan-v",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "טוֹב",
+     "l": "he:tov",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "gloss": "He didn’t sleep well.",
+   "variantOf": "he.c01_04.021",
+   "variant": {
+    "Person": "3"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.023",
+   "frame": "fr.past.neg",
+   "text": "הֵם לֹא הִתְעוֹרְרוּ מֻקְדָּם.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "הִתְעוֹרְרוּ",
+     "l": "he:hitorer",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "gloss": "They didn’t wake up early.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.024",
+   "frame": "fr.past.neg",
+   "text": "לֹא סִיַּמְתִּי אֶת הַסֵּפֶר.",
+   "tokens": [
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "סִיַּמְתִּי",
+     "l": "he:siyem",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation",
+    "fn.object"
+   ],
+   "gloss": "I didn’t finish the book.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.025",
+   "frame": "fr.past.neg",
+   "text": "סִיַּמְתִּי אֶת הַסֵּפֶר.",
+   "tokens": [
+    {
+     "t": "סִיַּמְתִּי",
+     "l": "he:siyem",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.object"
+   ],
+   "gloss": "I finished the book.",
+   "variantOf": "he.c01_04.024",
+   "variant": {
+    "Polarity": "POS"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.026",
+   "frame": "fr.past.neg",
+   "text": "הוּא לֹא אָכַל אֲרוּחַת בֹּקֶר.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אָכַל",
+     "l": "he:akhal",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "אֲרוּחַת בֹּקֶר",
+     "l": "he:aruchat-boker",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.negation"
+   ],
+   "gloss": "He didn’t have breakfast.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.027",
+   "frame": "fr.past.q",
+   "text": "מָתַי קַמְתָּ?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "קַמְתָּ",
+     "l": "he:kam",
+     "f": "V;PST;2;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "When did you (m.) get up?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.028",
+   "frame": "fr.past.q",
+   "text": "מָתַי קַמְתְּ?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "קַמְתְּ",
+     "l": "he:kam",
+     "f": "V;PST;2;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "When did you (f.) get up?",
+   "variantOf": "he.c01_04.027",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.029",
+   "frame": "fr.past.q",
+   "text": "מָתַי קַמְתֶּם?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "קַמְתֶּם",
+     "l": "he:kam",
+     "f": "V;PST;2;PL;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "When did you (pl.) get up?",
+   "variantOf": "he.c01_04.027",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.030",
+   "frame": "fr.past.q",
+   "text": "הִתְקַלַּחְתָּ?",
+   "tokens": [
+    {
+     "t": "הִתְקַלַּחְתָּ",
+     "l": "he:hitkaleach",
+     "f": "V;PST;2;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.yesno"
+   ],
+   "gloss": "Did you (m.) take a shower?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.031",
+   "frame": "fr.past.q",
+   "text": "מָתַי הַתִּינוֹק נִרְדַּם?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "הַתִּינוֹק",
+     "l": "he:tinok",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "נִרְדַּם",
+     "l": "he:nirdam",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "When did the baby fall asleep?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.032",
+   "frame": "fr.past.q",
+   "text": "אֵיךְ יְשַׁנְתֶּם?",
+   "tokens": [
+    {
+     "t": "אֵיךְ",
+     "l": "he:eich"
+    },
+    {
+     "t": "יְשַׁנְתֶּם",
+     "l": "he:yashan-v",
+     "f": "V;PST;2;PL;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "How did you (pl.) sleep?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.033",
+   "frame": "fr.used.to",
+   "text": "כְּשֶׁהָיִיתִי יֶלֶד, שִׂחַקְתִּי בַּחוּץ כָּל יוֹם.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהָיִיתִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הָיִיתִי",
+       "l": "he:haya",
+       "f": "V;PST;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "יֶלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שִׂחַקְתִּי",
+     "l": "he:sichek",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "בַּחוּץ",
+     "l": "he:bachuts"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "When I was a child, I played outside every day.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.034",
+   "frame": "fr.used.to",
+   "text": "כְּשֶׁהָיִיתִי יֶלֶד, הָיִיתִי מְשַׂחֵק בַּחוּץ כָּל יוֹם.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהָיִיתִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הָיִיתִי",
+       "l": "he:haya",
+       "f": "V;PST;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "יֶלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הָיִיתִי",
+     "l": "he:haya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "מְשַׂחֵק",
+     "l": "he:sichek",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בַּחוּץ",
+     "l": "he:bachuts"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "When I was a child, I used to play outside every day.",
+   "variantOf": "he.c01_04.033",
+   "variant": {
+    "Aspect": "HAB"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.035",
+   "frame": "fr.used.to",
+   "text": "כְּשֶׁהָיִיתִי יַלְדָּה, הָיִיתִי מְשַׂחֶקֶת בַּחוּץ כָּל יוֹם.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהָיִיתִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הָיִיתִי",
+       "l": "he:haya",
+       "f": "V;PST;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "יַלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הָיִיתִי",
+     "l": "he:haya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "מְשַׂחֶקֶת",
+     "l": "he:sichek",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בַּחוּץ",
+     "l": "he:bachuts"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "יוֹם",
+     "l": "he:yom",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "When I was a girl, I used to play outside every day.",
+   "variantOf": "he.c01_04.034",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.036",
+   "frame": "fr.used.to",
+   "text": "בַּיַּלְדוּת שֶׁלִּי הָיִינוּ נוֹסְעִים לְסַבָּא כָּל שַׁבָּת.",
+   "tokens": [
+    {
+     "t": "בַּיַּלְדוּת",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יַּלְדוּת",
+       "l": "he:yaldut",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "הָיִינוּ",
+     "l": "he:haya",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "נוֹסְעִים",
+     "l": "he:nasa",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "לְסַבָּא",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "סַבָּא",
+       "l": "he:saba",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "שַׁבָּת",
+     "l": "he:shabat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.possessive"
+   ],
+   "gloss": "In my childhood we used to go to Grandpa every Saturday.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.037",
+   "frame": "fr.used.to",
+   "text": "הַשְּׁכֵנִים הָיוּ בָּאִים כָּל עֶרֶב.",
+   "tokens": [
+    {
+     "t": "הַשְּׁכֵנִים",
+     "l": "he:shachen",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "בָּאִים",
+     "l": "he:ba",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "עֶרֶב",
+     "l": "he:erev",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "The neighbours used to come over every evening.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.038",
+   "frame": "fr.used.to",
+   "text": "הַשָּׁכֵן הָיָה בָּא כָּל עֶרֶב.",
+   "tokens": [
+    {
+     "t": "הַשָּׁכֵן",
+     "l": "he:shachen",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "בָּא",
+     "l": "he:ba",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "עֶרֶב",
+     "l": "he:erev",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "The neighbour used to come over every evening.",
+   "variantOf": "he.c01_04.037",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.039",
+   "frame": "fr.used.to",
+   "text": "בַּחֹפֶשׁ הַגָּדוֹל הָיִינוּ מְשַׂחֲקִים כָּל הַיּוֹם.",
+   "tokens": [
+    {
+     "t": "בַּחֹפֶשׁ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹפֶשׁ",
+       "l": "he:chofesh",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הַגָּדוֹל",
+     "l": "he:gadol",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "הָיִינוּ",
+     "l": "he:haya",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "מְשַׂחֲקִים",
+     "l": "he:sichek",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "כָּל",
+     "l": "he:kol"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:yom",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.adjective"
+   ],
+   "gloss": "In the summer holidays we used to play all day.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.040",
+   "frame": "fr.used.to",
+   "text": "סָבְתָא הָיְתָה מְבַשֶּׁלֶת לָנוּ מָרָק.",
+   "tokens": [
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "מְבַשֶּׁלֶת",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מָרָק",
+     "l": "he:marak",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "Grandma used to cook soup for us.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.041",
+   "frame": "fr.used.to",
+   "text": "סַבָּא הָיָה מְבַשֵּׁל לָנוּ מָרָק.",
+   "tokens": [
+    {
+     "t": "סַבָּא",
+     "l": "he:saba",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "מְבַשֵּׁל",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "מָרָק",
+     "l": "he:marak",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "Grandpa used to cook soup for us.",
+   "variantOf": "he.c01_04.040",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.042",
+   "frame": "fr.used.to",
+   "text": "בְּגַן הַיְלָדִים הָיִינוּ מְשַׂחֲקִים בְּצַעֲצוּעִים.",
+   "tokens": [
+    {
+     "t": "בְּגַן הַיְלָדִים",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "גַן הַיְלָדִים",
+       "l": "he:gan-yeladim",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הָיִינוּ",
+     "l": "he:haya",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "מְשַׂחֲקִים",
+     "l": "he:sichek",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בְּצַעֲצוּעִים",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "צַעֲצוּעִים",
+       "l": "he:tsaatsua",
+       "f": "N;PL;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "In kindergarten we used to play with toys.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.043",
+   "frame": "fr.used.to",
+   "text": "אֲנִי זוֹכֵר אֶת הַמִּשְׂחָקִים שֶׁהָיִינוּ מְשַׂחֲקִים בַּגִּנָּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "זוֹכֵר",
+     "l": "he:zachar",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמִּשְׂחָקִים",
+     "l": "he:mischak",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁהָיִינוּ",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הָיִינוּ",
+       "l": "he:haya",
+       "f": "V;PST;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "מְשַׂחֲקִים",
+     "l": "he:sichek",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בַּגִּנָּה",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "גִּנָּה",
+       "l": "he:gina",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I (m.) remember the games we used to play in the garden.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.044",
+   "frame": "fr.used.to",
+   "text": "אֲנִי זוֹכֶרֶת אֶת הַמִּשְׂחָקִים שֶׁהָיִינוּ מְשַׂחֲקִים בַּגִּנָּה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "זוֹכֶרֶת",
+     "l": "he:zachar",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמִּשְׂחָקִים",
+     "l": "he:mischak",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שֶׁהָיִינוּ",
+     "parts": [
+      {
+       "t": "שֶׁ",
+       "l": "he:she"
+      },
+      {
+       "t": "הָיִינוּ",
+       "l": "he:haya",
+       "f": "V;PST;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "מְשַׂחֲקִים",
+     "l": "he:sichek",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בַּגִּנָּה",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "גִּנָּה",
+       "l": "he:gina",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I (f.) remember the games we used to play in the garden.",
+   "variantOf": "he.c01_04.043",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.045",
+   "frame": "fr.used.to",
+   "text": "כְּשֶׁהָיִיתִי בַּחֹפֶשׁ, הָיִיתִי קָם מְאֻחָר.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהָיִיתִי",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הָיִיתִי",
+       "l": "he:haya",
+       "f": "V;PST;1;SG"
+      }
+     ]
+    },
+    {
+     "t": "בַּחֹפֶשׁ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹפֶשׁ",
+       "l": "he:chofesh",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הָיִיתִי",
+     "l": "he:haya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "קָם",
+     "l": "he:kam",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מְאֻחָר",
+     "l": "he:meuchar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.connectors"
+   ],
+   "gloss": "When I was on holiday, I used to get up late.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.046",
+   "frame": "fr.was.doing",
+   "text": "כְּשֶׁאַבָּא חָזַר הַבַּיְתָה, הַיְּלָדִים הָיוּ יְשֵׁנִים.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁאַבָּא",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אַבָּא",
+       "l": "he:aba",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "חָזַר",
+     "l": "he:chazar",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "יְשֵׁנִים",
+     "l": "he:yashan-v",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "When Dad came home, the children were asleep.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.047",
+   "frame": "fr.was.doing",
+   "text": "כְּשֶׁאַבָּא חָזַר הַבַּיְתָה, הַיֶּלֶד הָיָה יָשֵׁן.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁאַבָּא",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אַבָּא",
+       "l": "he:aba",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "חָזַר",
+     "l": "he:chazar",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "הַבַּיְתָה",
+     "l": "he:habayta"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "יָשֵׁן",
+     "l": "he:yashan-v",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "When Dad came home, the boy was asleep.",
+   "variantOf": "he.c01_04.046",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.048",
+   "frame": "fr.was.doing",
+   "text": "כְּשֶׁהוּא הִגִּיעַ, הִיא הָיְתָה מִתְקַלַּחַת.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהוּא",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הוּא",
+       "l": "he:hu"
+      }
+     ]
+    },
+    {
+     "t": "הִגִּיעַ",
+     "l": "he:higia",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "מִתְקַלַּחַת",
+     "l": "he:hitkaleach",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "When he arrived, she was in the shower.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.049",
+   "frame": "fr.was.doing",
+   "text": "אֶתְמוֹל בְּשֶׁבַע הָיִיתִי יָשֵׁן.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "הָיִיתִי",
+     "l": "he:haya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "יָשֵׁן",
+     "l": "he:yashan-v",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing"
+   ],
+   "gloss": "Yesterday at seven I (m.) was asleep.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.050",
+   "frame": "fr.was.doing",
+   "text": "כְּשֶׁהַשָּׁכֵן נִכְנַס, אִמָּא הָיְתָה מְבַשֶּׁלֶת.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁהַשָּׁכֵן",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "הַשָּׁכֵן",
+       "l": "he:shachen",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "נִכְנַס",
+     "l": "he:nichnas",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אִמָּא",
+     "l": "he:ima",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "מְבַשֶּׁלֶת",
+     "l": "he:bishel",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "When the neighbour came in, Mum was cooking.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.051",
+   "frame": "fr.was.doing",
+   "text": "כְּשֶׁאִמָּא קָמָה, הַיְּלָדִים הָיוּ מְשַׂחֲקִים בַּסָּלוֹן.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁאִמָּא",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אִמָּא",
+       "l": "he:ima",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "קָמָה",
+     "l": "he:kam",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "מְשַׂחֲקִים",
+     "l": "he:sichek",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בַּסָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סָּלוֹן",
+       "l": "he:salon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.connectors"
+   ],
+   "gloss": "When Mum got up, the children were playing in the living room.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.052",
+   "frame": "fr.was.doing",
+   "text": "כְּשֶׁאִמָּא קָמָה, הַיְּלָדִים לֹא הָיוּ מְשַׂחֲקִים בַּסָּלוֹן.",
+   "tokens": [
+    {
+     "t": "כְּשֶׁאִמָּא",
+     "parts": [
+      {
+       "t": "כְּשֶׁ",
+       "l": "he:kshe"
+      },
+      {
+       "t": "אִמָּא",
+       "l": "he:ima",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "קָמָה",
+     "l": "he:kam",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "מְשַׂחֲקִים",
+     "l": "he:sichek",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בַּסָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "סָּלוֹן",
+       "l": "he:salon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past.ongoing",
+    "fn.past",
+    "fn.connectors",
+    "fn.negation"
+   ],
+   "gloss": "When Mum got up, the children weren’t playing in the living room.",
+   "variantOf": "he.c01_04.051",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.053",
+   "frame": "fr.past.action",
+   "text": "גָּדַלְתִּי בָּעִיר.",
+   "tokens": [
+    {
+     "t": "גָּדַלְתִּי",
+     "l": "he:gadal",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "בָּעִיר",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עִיר",
+       "l": "he:ir",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "I grew up in the city.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.054",
+   "frame": "fr.past.action",
+   "text": "גָּדַלְנוּ בָּעִיר.",
+   "tokens": [
+    {
+     "t": "גָּדַלְנוּ",
+     "l": "he:gadal",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "בָּעִיר",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עִיר",
+       "l": "he:ir",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "We grew up in the city.",
+   "variantOf": "he.c01_04.053",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.055",
+   "frame": "fr.past.action",
+   "text": "הַיֶּלֶד שָׁכַח אֶת הַצַּעֲצוּעַ בַּגִּנָּה.",
+   "tokens": [
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁכַח",
+     "l": "he:shachach",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַצַּעֲצוּעַ",
+     "l": "he:tsaatsua",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "בַּגִּנָּה",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "גִּנָּה",
+       "l": "he:gina",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.object"
+   ],
+   "gloss": "The boy forgot the toy in the garden.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.056",
+   "frame": "fr.past.action",
+   "text": "זָכַרְתִּי אֶת הַשְּׁכֵנָה מֵהַיַּלְדוּת.",
+   "tokens": [
+    {
+     "t": "זָכַרְתִּי",
+     "l": "he:zachar",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַשְּׁכֵנָה",
+     "l": "he:shchena",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "מֵהַיַּלְדוּת",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַיַּלְדוּת",
+       "l": "he:yaldut",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.object"
+   ],
+   "gloss": "I remembered the neighbour (f.) from my childhood.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.057",
+   "frame": "fr.past.action",
+   "text": "בַּחֹפֶשׁ הַיְּלָדִים שִׂחֲקוּ מִשְׂחָק חָדָשׁ.",
+   "tokens": [
+    {
+     "t": "בַּחֹפֶשׁ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹפֶשׁ",
+       "l": "he:chofesh",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שִׂחֲקוּ",
+     "l": "he:sichek",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "מִשְׂחָק",
+     "l": "he:mischak",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "חָדָשׁ",
+     "l": "he:chadash",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.adjective"
+   ],
+   "gloss": "In the holidays the children played a new game.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.058",
+   "frame": "fr.future.plan",
+   "text": "מָחָר אַזְמִין חֶדֶר בְּמָלוֹן.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "אַזְמִין",
+     "l": "he:hizmin",
+     "f": "V;FUT;1;SG"
+    },
+    {
+     "t": "חֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בְּמָלוֹן",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "Tomorrow I’ll book a room in a hotel.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.059",
+   "frame": "fr.future.plan",
+   "text": "אֶתְמוֹל הִזְמַנְתִּי חֶדֶר בְּמָלוֹן.",
+   "tokens": [
+    {
+     "t": "אֶתְמוֹל",
+     "l": "he:etmol"
+    },
+    {
+     "t": "הִזְמַנְתִּי",
+     "l": "he:hizmin",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "חֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בְּמָלוֹן",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past"
+   ],
+   "gloss": "Yesterday I booked a room in a hotel.",
+   "variantOf": "he.c01_04.058",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.060",
+   "frame": "fr.future.plan",
+   "text": "מָחָר לֹא אַזְמִין חֶדֶר בְּמָלוֹן.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אַזְמִין",
+     "l": "he:hizmin",
+     "f": "V;FUT;1;SG"
+    },
+    {
+     "t": "חֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "בְּמָלוֹן",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.negation"
+   ],
+   "gloss": "Tomorrow I won’t book a room in a hotel.",
+   "variantOf": "he.c01_04.058",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.061",
+   "frame": "fr.future.plan",
+   "text": "בַּשָּׁבוּעַ הַבָּא נְבַקֵּר בְּאֵילַת.",
+   "tokens": [
+    {
+     "t": "בַּשָּׁבוּעַ הַבָּא",
+     "l": "he:bashavua-haba"
+    },
+    {
+     "t": "נְבַקֵּר",
+     "l": "he:biker",
+     "f": "V;FUT;1;PL"
+    },
+    {
+     "t": "בְּאֵילַת",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אֵילַת",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "Next week we’ll visit Eilat.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.062",
+   "frame": "fr.future.plan",
+   "text": "בַּשָּׁבוּעַ הַבָּא הֵם יְבַקְּרוּ בְּאֵילַת.",
+   "tokens": [
+    {
+     "t": "בַּשָּׁבוּעַ הַבָּא",
+     "l": "he:bashavua-haba"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "יְבַקְּרוּ",
+     "l": "he:biker",
+     "f": "V;FUT;3;PL;MASC"
+    },
+    {
+     "t": "בְּאֵילַת",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אֵילַת",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "Next week they’ll visit Eilat.",
+   "variantOf": "he.c01_04.061",
+   "variant": {
+    "Person": "3"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.063",
+   "frame": "fr.future.plan",
+   "text": "בַּשָּׁנָה הַבָּאָה הֵם יִהְיוּ בְּחוּץ לָאָרֶץ.",
+   "tokens": [
+    {
+     "t": "בַּשָּׁנָה הַבָּאָה",
+     "l": "he:bashana-habaa"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "יִהְיוּ",
+     "l": "he:haya",
+     "f": "V;FUT;3;PL;MASC"
+    },
+    {
+     "t": "בְּחוּץ לָאָרֶץ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חוּץ לָאָרֶץ",
+       "l": "he:chuts-laarets",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "Next year they’ll be abroad.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.064",
+   "frame": "fr.future.plan",
+   "text": "הַטִּיּוּל יַתְחִיל בְּשֶׁבַע בַּבֹּקֶר.",
+   "tokens": [
+    {
+     "t": "הַטִּיּוּל",
+     "l": "he:tiyul",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יַתְחִיל",
+     "l": "he:hitchil",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.time.day"
+   ],
+   "gloss": "The trip will start at seven in the morning.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.065",
+   "frame": "fr.future.plan",
+   "text": "הַטִּיּוּל הִתְחִיל בְּשֶׁבַע בַּבֹּקֶר.",
+   "tokens": [
+    {
+     "t": "הַטִּיּוּל",
+     "l": "he:tiyul",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הִתְחִיל",
+     "l": "he:hitchil",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "בְּשֶׁבַע",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֶׁבַע",
+       "l": "he:shiva",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "בַּבֹּקֶר",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "בֹּקֶר",
+       "l": "he:boker",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.time.day"
+   ],
+   "gloss": "The trip started at seven in the morning.",
+   "variantOf": "he.c01_04.064",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.066",
+   "frame": "fr.future.plan",
+   "text": "הַמַּדְרִיךְ יִהְיֶה בַּמָּלוֹן בִּשְׁמוֹנֶה.",
+   "tokens": [
+    {
+     "t": "הַמַּדְרִיךְ",
+     "l": "he:madrich",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יִהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "בַּמָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָּלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בִּשְׁמוֹנֶה",
+     "parts": [
+      {
+       "t": "בִּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שְׁמוֹנֶה",
+       "l": "he:shmona",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The guide will be at the hotel at eight.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.067",
+   "frame": "fr.future.plan",
+   "text": "הַמַּדְרִיכָה תִּהְיֶה בַּמָּלוֹן בִּשְׁמוֹנֶה.",
+   "tokens": [
+    {
+     "t": "הַמַּדְרִיכָה",
+     "l": "he:madricha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "תִּהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;FEM"
+    },
+    {
+     "t": "בַּמָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָּלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "בִּשְׁמוֹנֶה",
+     "parts": [
+      {
+       "t": "בִּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שְׁמוֹנֶה",
+       "l": "he:shmona",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The guide (f.) will be at the hotel at eight.",
+   "variantOf": "he.c01_04.066",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.068",
+   "frame": "fr.future.plan",
+   "text": "אֲנִי אֶזְכֹּר אֶת הַדַּרְכּוֹן.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אֶזְכֹּר",
+     "l": "he:zachar",
+     "f": "V;FUT;1;SG"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַדַּרְכּוֹן",
+     "l": "he:darkon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.object"
+   ],
+   "gloss": "I’ll remember the passport.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.069",
+   "frame": "fr.command",
+   "text": "אַל תִּשְׁכַּח אֶת הַמִּזְוָדָה!",
+   "tokens": [
+    {
+     "t": "אַל",
+     "l": "he:al-imp"
+    },
+    {
+     "t": "תִּשְׁכַּח",
+     "l": "he:shachach",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמִּזְוָדָה",
+     "l": "he:mizvada",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Don’t forget the suitcase!",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.070",
+   "frame": "fr.future.plan",
+   "text": "הַתַּיָּרִים יָקוּמוּ מֻקְדָּם מָחָר.",
+   "tokens": [
+    {
+     "t": "הַתַּיָּרִים",
+     "l": "he:tayar",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "יָקוּמוּ",
+     "l": "he:kam",
+     "f": "V;FUT;3;PL;MASC"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The tourists will get up early tomorrow.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.071",
+   "frame": "fr.future.plan",
+   "text": "הַתַּיָּר יָקוּם מֻקְדָּם מָחָר.",
+   "tokens": [
+    {
+     "t": "הַתַּיָּר",
+     "l": "he:tayar",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יָקוּם",
+     "l": "he:kam",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "מֻקְדָּם",
+     "l": "he:mukdam"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The tourist will get up early tomorrow.",
+   "variantOf": "he.c01_04.070",
+   "variant": {
+    "Number": "SG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.072",
+   "frame": "fr.future.plan",
+   "text": "מָחָר אֶתְעוֹרֵר בְּשֵׁשׁ.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "אֶתְעוֹרֵר",
+     "l": "he:hitorer",
+     "f": "V;FUT;1;SG"
+    },
+    {
+     "t": "בְּשֵׁשׁ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֵׁשׁ",
+       "l": "he:shisha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "Tomorrow I’ll wake up at six.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.073",
+   "frame": "fr.future.plan",
+   "text": "מָחָר לֹא אֶתְעוֹרֵר בְּשֵׁשׁ.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אֶתְעוֹרֵר",
+     "l": "he:hitorer",
+     "f": "V;FUT;1;SG"
+    },
+    {
+     "t": "בְּשֵׁשׁ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "שֵׁשׁ",
+       "l": "he:shisha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.negation"
+   ],
+   "gloss": "Tomorrow I won’t wake up at six.",
+   "variantOf": "he.c01_04.072",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.074",
+   "frame": "fr.future.plan",
+   "text": "בַּשָּׁבוּעַ הַבָּא הוּא יְסַיֵּם אֶת הָעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "בַּשָּׁבוּעַ הַבָּא",
+     "l": "he:bashavua-haba"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יְסַיֵּם",
+     "l": "he:siyem",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעֲבוֹדָה",
+     "l": "he:avoda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.object"
+   ],
+   "gloss": "Next week he’ll finish the work.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.075",
+   "frame": "fr.future.plan",
+   "text": "יֵשׁ לִי תׇּכְנִית: מָחָר נְבַקֵּר אֶת סָבְתָא.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "תׇּכְנִית",
+     "l": "he:tochnit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ":",
+     "p": true
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "נְבַקֵּר",
+     "l": "he:biker",
+     "f": "V;FUT;1;PL"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "סָבְתָא",
+     "l": "he:savta",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.have",
+    "fn.object"
+   ],
+   "gloss": "I have a plan: tomorrow we’ll visit Grandma.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.076",
+   "frame": "fr.future.plan",
+   "text": "הַתַּיֶּרֶת תִּישַׁן בַּמָּלוֹן.",
+   "tokens": [
+    {
+     "t": "הַתַּיֶּרֶת",
+     "l": "he:tayeret",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "תִּישַׁן",
+     "l": "he:yashan-v",
+     "f": "V;FUT;3;SG;FEM"
+    },
+    {
+     "t": "בַּמָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָּלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future"
+   ],
+   "gloss": "The tourist (f.) will sleep at the hotel.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.077",
+   "frame": "fr.future.q",
+   "text": "לְאָן תִּסַּע בַּחֹפֶשׁ?",
+   "tokens": [
+    {
+     "t": "לְאָן",
+     "l": "he:lean"
+    },
+    {
+     "t": "תִּסַּע",
+     "l": "he:nasa",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "בַּחֹפֶשׁ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹפֶשׁ",
+       "l": "he:chofesh",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "Where will you (m.) go in the holidays?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.078",
+   "frame": "fr.future.q",
+   "text": "לְאָן תִּסְּעִי בַּחֹפֶשׁ?",
+   "tokens": [
+    {
+     "t": "לְאָן",
+     "l": "he:lean"
+    },
+    {
+     "t": "תִּסְּעִי",
+     "l": "he:nasa",
+     "f": "V;FUT;2;SG;FEM"
+    },
+    {
+     "t": "בַּחֹפֶשׁ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹפֶשׁ",
+       "l": "he:chofesh",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "Where will you (f.) go in the holidays?",
+   "variantOf": "he.c01_04.077",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.079",
+   "frame": "fr.future.q",
+   "text": "לְאָן תִּסְּעוּ בַּחֹפֶשׁ?",
+   "tokens": [
+    {
+     "t": "לְאָן",
+     "l": "he:lean"
+    },
+    {
+     "t": "תִּסְּעוּ",
+     "l": "he:nasa",
+     "f": "V;FUT;2;PL;MASC"
+    },
+    {
+     "t": "בַּחֹפֶשׁ",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "חֹפֶשׁ",
+       "l": "he:chofesh",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "Where will you (pl.) go in the holidays?",
+   "variantOf": "he.c01_04.077",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.080",
+   "frame": "fr.future.q",
+   "text": "מָתַי תָּקוּם מָחָר?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "תָּקוּם",
+     "l": "he:kam",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "When will you (m.) get up tomorrow?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.081",
+   "frame": "fr.future.q",
+   "text": "בְּאֵיזֶה מָלוֹן תַּזְמִין חֶדֶר?",
+   "tokens": [
+    {
+     "t": "בְּאֵיזֶה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אֵיזֶה",
+       "l": "he:eize",
+       "f": "DET;SG;MASC"
+      }
+     ]
+    },
+    {
+     "t": "מָלוֹן",
+     "l": "he:malon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "תַּזְמִין",
+     "l": "he:hizmin",
+     "f": "V;FUT;2;SG;MASC"
+    },
+    {
+     "t": "חֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "Which hotel will you (m.) book a room in?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.082",
+   "frame": "fr.future.q",
+   "text": "מָתַי הַטִּיּוּל יַתְחִיל?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "הַטִּיּוּל",
+     "l": "he:tiyul",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "יַתְחִיל",
+     "l": "he:hitchil",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.wh"
+   ],
+   "gloss": "When will the trip start?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.083",
+   "frame": "fr.future.q",
+   "text": "מָתַי הַטִּיּוּל הִתְחִיל?",
+   "tokens": [
+    {
+     "t": "מָתַי",
+     "l": "he:matay"
+    },
+    {
+     "t": "הַטִּיּוּל",
+     "l": "he:tiyul",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הִתְחִיל",
+     "l": "he:hitchil",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.past",
+    "fn.question.wh"
+   ],
+   "gloss": "When did the trip start?",
+   "variantOf": "he.c01_04.082",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.084",
+   "frame": "fr.future.q",
+   "text": "הַאִם תִּישְׁנִי בַּמָּלוֹן?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "תִּישְׁנִי",
+     "l": "he:yashan-v",
+     "f": "V;FUT;2;SG;FEM"
+    },
+    {
+     "t": "בַּמָּלוֹן",
+     "parts": [
+      {
+       "t": "בַּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מָּלוֹן",
+       "l": "he:malon",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.future",
+    "fn.question.yesno"
+   ],
+   "gloss": "Will you (f.) sleep at the hotel?",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.085",
+   "frame": "fr.ordinal",
+   "text": "זֶה הַיּוֹם הָרִאשׁוֹן שֶׁלִּי בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:yom",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָרִאשׁוֹן",
+     "l": "he:rishon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "It’s my first day at work.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.086",
+   "frame": "fr.ordinal",
+   "text": "אֵלֶּה הַיָּמִים הָרִאשׁוֹנִים שֶׁלִּי בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "הַיָּמִים",
+     "l": "he:yom",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָרִאשׁוֹנִים",
+     "l": "he:rishon",
+     "f": "ADJ;PL;MASC;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "These are my first days at work.",
+   "variantOf": "he.c01_04.085",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.087",
+   "frame": "fr.ordinal",
+   "text": "זֶה לֹא הַיּוֹם הָרִאשׁוֹן שֶׁלִּי בָּעֲבוֹדָה.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:yom",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָרִאשׁוֹן",
+     "l": "he:rishon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "בָּעֲבוֹדָה",
+     "parts": [
+      {
+       "t": "בָּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֲבוֹדָה",
+       "l": "he:avoda",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive",
+    "fn.negation"
+   ],
+   "gloss": "It isn’t my first day at work.",
+   "variantOf": "he.c01_04.085",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.088",
+   "frame": "fr.ordinal",
+   "text": "הַבַּיִת הַשֵּׁנִי מִשְּׂמֹאל הוּא הַבַּיִת שֶׁלָּנוּ.",
+   "tokens": [
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשֵּׁנִי",
+     "l": "he:sheni",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "מִשְּׂמֹאל",
+     "parts": [
+      {
+       "t": "מִ",
+       "l": "he:min"
+      },
+      {
+       "t": "שְּׂמֹאל",
+       "l": "he:smol",
+       "f": "N;SG;INDF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "The second house on the left is our house.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.089",
+   "frame": "fr.ordinal",
+   "text": "הַבֵּן הַשְּׁלִישִׁי שֶׁלָּהֶם קָטָן.",
+   "tokens": [
+    {
+     "t": "הַבֵּן",
+     "l": "he:ben",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשְּׁלִישִׁי",
+     "l": "he:shlishi",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁלָּהֶם",
+     "l": "he:shelahem"
+    },
+    {
+     "t": "קָטָן",
+     "l": "he:katan",
+     "f": "ADJ;SG;MASC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.adjective"
+   ],
+   "gloss": "Their third son is little.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.090",
+   "frame": "fr.ordinal",
+   "text": "הַבַּת הַשְּׁלִישִׁית שֶׁלָּהֶם קְטַנָּה.",
+   "tokens": [
+    {
+     "t": "הַבַּת",
+     "l": "he:bat",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשְּׁלִישִׁית",
+     "l": "he:shlishi",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": "שֶׁלָּהֶם",
+     "l": "he:shelahem"
+    },
+    {
+     "t": "קְטַנָּה",
+     "l": "he:katan",
+     "f": "ADJ;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.adjective"
+   ],
+   "gloss": "Their third daughter is little.",
+   "variantOf": "he.c01_04.089",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.091",
+   "frame": "fr.ordinal",
+   "text": "הַמִּשְׂרָד שֶׁלָּהּ הוּא הַחֶדֶר הָרְבִיעִי מִיָּמִין.",
+   "tokens": [
+    {
+     "t": "הַמִּשְׂרָד",
+     "l": "he:misrad",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלָּהּ",
+     "l": "he:shela"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַחֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָרְבִיעִי",
+     "l": "he:revii",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "מִיָּמִין",
+     "parts": [
+      {
+       "t": "מִ",
+       "l": "he:min"
+      },
+      {
+       "t": "יָּמִין",
+       "l": "he:yamin",
+       "f": "N;SG;INDF;PFX"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "Her office is the fourth room on the right.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.092",
+   "frame": "fr.ordinal",
+   "text": "יוֹם חֲמִישִׁי הוּא הַיּוֹם הַחֲמִישִׁי שֶׁל הַשָּׁבוּעַ.",
+   "tokens": [
+    {
+     "t": "יוֹם חֲמִישִׁי",
+     "l": "he:yom-chamishi",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:yom",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַחֲמִישִׁי",
+     "l": "he:chamishi",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁל",
+     "l": "he:shel"
+    },
+    {
+     "t": "הַשָּׁבוּעַ",
+     "l": "he:shavua",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.time.day"
+   ],
+   "gloss": "Thursday is the fifth day of the week.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.093",
+   "frame": "fr.ordinal",
+   "text": "שַׁבָּת הִיא הַיּוֹם הַשְּׁבִיעִי.",
+   "tokens": [
+    {
+     "t": "שַׁבָּת",
+     "l": "he:shabat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:yom",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשְּׁבִיעִי",
+     "l": "he:shvii",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.time.day"
+   ],
+   "gloss": "The Sabbath is the seventh day.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.094",
+   "frame": "fr.ordinal",
+   "text": "יוּנִי הוּא הַחֹדֶשׁ הַשִּׁשִּׁי שֶׁל הַשָּׁנָה.",
+   "tokens": [
+    {
+     "t": "יוּנִי",
+     "l": "he:yuni",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַחֹדֶשׁ",
+     "l": "he:chodesh",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשִּׁשִּׁי",
+     "l": "he:shishi",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁל",
+     "l": "he:shel"
+    },
+    {
+     "t": "הַשָּׁנָה",
+     "l": "he:shana",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "June is the sixth month of the year.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.095",
+   "frame": "fr.ordinal",
+   "text": "אוֹגוּסְט הוּא הַחֹדֶשׁ הַשְּׁמִינִי.",
+   "tokens": [
+    {
+     "t": "אוֹגוּסְט",
+     "l": "he:ogust",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַחֹדֶשׁ",
+     "l": "he:chodesh",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַשְּׁמִינִי",
+     "l": "he:shmini",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "August is the eighth month.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.096",
+   "frame": "fr.ordinal",
+   "text": "סֶפְּטֶמְבֶּר הוּא הַחֹדֶשׁ הַתְּשִׁיעִי.",
+   "tokens": [
+    {
+     "t": "סֶפְּטֶמְבֶּר",
+     "l": "he:september",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַחֹדֶשׁ",
+     "l": "he:chodesh",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַתְּשִׁיעִי",
+     "l": "he:tshii",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "September is the ninth month.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.097",
+   "frame": "fr.ordinal",
+   "text": "אוֹקְטוֹבֶּר הוּא הַחֹדֶשׁ הָעֲשִׂירִי.",
+   "tokens": [
+    {
+     "t": "אוֹקְטוֹבֶּר",
+     "l": "he:oktober",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הַחֹדֶשׁ",
+     "l": "he:chodesh",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָעֲשִׂירִי",
+     "l": "he:asiri",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "October is the tenth month.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.098",
+   "frame": "fr.ordinal",
+   "text": "הַחֹדֶשׁ הָאַחֲרוֹן שֶׁל הַשָּׁנָה הוּא דֵּצֶמְבֶּר.",
+   "tokens": [
+    {
+     "t": "הַחֹדֶשׁ",
+     "l": "he:chodesh",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָאַחֲרוֹן",
+     "l": "he:acharon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁל",
+     "l": "he:shel"
+    },
+    {
+     "t": "הַשָּׁנָה",
+     "l": "he:shana",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "דֵּצֶמְבֶּר",
+     "l": "he:detsember",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "The last month of the year is December.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.099",
+   "frame": "fr.ordinal",
+   "text": "זֶה הָאוֹטוֹבּוּס הָאַחֲרוֹן.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָאַחֲרוֹן",
+     "l": "he:acharon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "This is the last bus.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.100",
+   "frame": "fr.ordinal",
+   "text": "זֹאת הָרַכֶּבֶת הָאַחֲרוֹנָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הָרַכֶּבֶת",
+     "l": "he:rakevet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָאַחֲרוֹנָה",
+     "l": "he:acharon",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals"
+   ],
+   "gloss": "This is the last train.",
+   "variantOf": "he.c01_04.099",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.101",
+   "frame": "fr.ordinal",
+   "text": "זֶה הָאוֹטוֹבּוּס הָאַחֲרוֹן?",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָאַחֲרוֹן",
+     "l": "he:acharon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this the last bus?",
+   "variantOf": "he.c01_04.099",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.102",
+   "frame": "fr.ordinal",
+   "text": "הַסֵּפֶר הַזֶּה מֵהַמֵּאָה הָעֲשִׂירִית.",
+   "tokens": [
+    {
+     "t": "הַסֵּפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "מֵהַמֵּאָה",
+     "parts": [
+      {
+       "t": "מֵ",
+       "l": "he:min"
+      },
+      {
+       "t": "הַמֵּאָה",
+       "l": "he:mea-century",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "הָעֲשִׂירִית",
+     "l": "he:asiri",
+     "f": "ADJ;SG;FEM;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.demonstrative"
+   ],
+   "gloss": "This book is from the tenth century.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.103",
+   "frame": "fr.ordinal",
+   "text": "בֶּעָשׂוֹר הָאַחֲרוֹן הָעִיר גָּדְלָה.",
+   "tokens": [
+    {
+     "t": "בֶּעָשׂוֹר",
+     "parts": [
+      {
+       "t": "בֶּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עָשׂוֹר",
+       "l": "he:asor",
+       "f": "N;SG;DEF;PFX"
+      }
+     ]
+    },
+    {
+     "t": "הָאַחֲרוֹן",
+     "l": "he:acharon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "הָעִיר",
+     "l": "he:ir",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "גָּדְלָה",
+     "l": "he:gadal",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "In the last decade the city has grown.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.104",
+   "frame": "fr.date",
+   "text": "מָחָר יוֹם הַשָּׁנָה הָעֲשִׂירִי שֶׁלָּנוּ.",
+   "tokens": [
+    {
+     "t": "מָחָר",
+     "l": "he:machar"
+    },
+    {
+     "t": "יוֹם הַשָּׁנָה",
+     "l": "he:yom-hashana",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָעֲשִׂירִי",
+     "l": "he:asiri",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "שֶׁלָּנוּ",
+     "l": "he:shelanu"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.possessive"
+   ],
+   "gloss": "Tomorrow is our tenth anniversary.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.105",
+   "frame": "fr.date",
+   "text": "הַיּוֹם אַרְבָּעָה בְּיוּלִי.",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "אַרְבָּעָה",
+     "l": "he:arbaa",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "בְּיוּלִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוּלִי",
+       "l": "he:yuli",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals"
+   ],
+   "gloss": "Today is the fourth of July.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.106",
+   "frame": "fr.date",
+   "text": "הַיּוֹם אַרְבָּעָה בְּיוּלִי?",
+   "tokens": [
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "אַרְבָּעָה",
+     "l": "he:arbaa",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "בְּיוּלִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוּלִי",
+       "l": "he:yuli",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is today the fourth of July?",
+   "variantOf": "he.c01_04.105",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.107",
+   "frame": "fr.date",
+   "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי בְּעֶשְׂרִים בְּמַאי.",
+   "tokens": [
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "בְּעֶשְׂרִים",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶשְׂרִים",
+       "l": "he:esrim"
+      }
+     ]
+    },
+    {
+     "t": "בְּמַאי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מַאי",
+       "l": "he:mai",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "gloss": "My birthday is on the twentieth of May.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.108",
+   "frame": "fr.date",
+   "text": "יוֹם הַהֻלֶּדֶת שֶׁלִּי לֹא בְּעֶשְׂרִים בְּמַאי.",
+   "tokens": [
+    {
+     "t": "יוֹם הַהֻלֶּדֶת",
+     "l": "he:yom-huledet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שֶׁלִּי",
+     "l": "he:sheli"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "בְּעֶשְׂרִים",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "עֶשְׂרִים",
+       "l": "he:esrim"
+      }
+     ]
+    },
+    {
+     "t": "בְּמַאי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "מַאי",
+       "l": "he:mai",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals",
+    "fn.possessive",
+    "fn.negation"
+   ],
+   "gloss": "My birthday isn’t on the twentieth of May.",
+   "variantOf": "he.c01_04.107",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.109",
+   "frame": "fr.date",
+   "text": "מָה הַתַּאֲרִיךְ הַיּוֹם? הַיּוֹם שְׁנַיִם בְּיוּנִי.",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הַתַּאֲרִיךְ",
+     "l": "he:taarich",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הַיּוֹם",
+     "l": "he:hayom"
+    },
+    {
+     "t": "שְׁנַיִם",
+     "l": "he:shnayim",
+     "f": "NUM;MASC"
+    },
+    {
+     "t": "בְּיוּנִי",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "יוּנִי",
+       "l": "he:yuni",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals",
+    "fn.question.wh"
+   ],
+   "gloss": "What’s the date today? Today is the second of June.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.110",
+   "frame": "fr.clock",
+   "text": "הַשָּׁעָה רֶבַע לְשָׁלוֹשׁ.",
+   "tokens": [
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "רֶבַע",
+     "l": "he:reva",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לְשָׁלוֹשׁ",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "שָׁלוֹשׁ",
+       "l": "he:shlosha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals"
+   ],
+   "gloss": "It’s a quarter to three.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.111",
+   "frame": "fr.clock",
+   "text": "הַשָּׁעָה רֶבַע לְשָׁלוֹשׁ?",
+   "tokens": [
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "רֶבַע",
+     "l": "he:reva",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "לְשָׁלוֹשׁ",
+     "parts": [
+      {
+       "t": "לְ",
+       "l": "he:le",
+       "f": "ADP"
+      },
+      {
+       "t": "שָׁלוֹשׁ",
+       "l": "he:shlosha",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is it a quarter to three?",
+   "variantOf": "he.c01_04.110",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.112",
+   "frame": "fr.clock",
+   "text": "הַשָּׁעָה שָׁלוֹשׁ וְעֶשְׂרִים.",
+   "tokens": [
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "וְעֶשְׂרִים",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "עֶשְׂרִים",
+       "l": "he:esrim"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals"
+   ],
+   "gloss": "It’s twenty past three.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.113",
+   "frame": "fr.clock",
+   "text": "הַשָּׁעָה שָׁלוֹשׁ וְעֶשְׂרִים?",
+   "tokens": [
+    {
+     "t": "הַשָּׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁלוֹשׁ",
+     "l": "he:shlosha",
+     "f": "NUM;FEM"
+    },
+    {
+     "t": "וְעֶשְׂרִים",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "עֶשְׂרִים",
+       "l": "he:esrim"
+      }
+     ]
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.numerals",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is it twenty past three?",
+   "variantOf": "he.c01_04.112",
+   "variant": {
+    "Mood": "INT"
+   },
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.114",
+   "frame": "fr.time",
+   "text": "הוּא חִכָּה חֲצִי שָׁעָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "חִכָּה",
+     "l": "he:chika",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "חֲצִי",
+     "l": "he:chatsi",
+     "f": "N;SG;CONST"
+    },
+    {
+     "t": "שָׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past"
+   ],
+   "gloss": "He waited half an hour.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.115",
+   "frame": "fr.time",
+   "text": "הַטִּיּוּל הִתְחִיל לִפְנֵי רֶבַע שָׁעָה.",
+   "tokens": [
+    {
+     "t": "הַטִּיּוּל",
+     "l": "he:tiyul",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הִתְחִיל",
+     "l": "he:hitchil",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "לִפְנֵי",
+     "l": "he:lifnei"
+    },
+    {
+     "t": "רֶבַע",
+     "l": "he:reva",
+     "f": "N;SG;CONST"
+    },
+    {
+     "t": "שָׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.past",
+    "fn.prep.time"
+   ],
+   "gloss": "The trip started a quarter of an hour ago.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.116",
+   "frame": "fr.time",
+   "text": "הָאוֹטוֹבּוּס הָאַחֲרוֹן יוֹצֵא בְּאַחַת עֶשְׂרֵה.",
+   "tokens": [
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָאַחֲרוֹן",
+     "l": "he:acharon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "יוֹצֵא",
+     "l": "he:yatsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בְּאַחַת עֶשְׂרֵה",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אַחַת עֶשְׂרֵה",
+       "l": "he:achad-asar",
+       "f": "NUM;FEM"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.present"
+   ],
+   "gloss": "The last bus leaves at eleven.",
+   "level": "A2"
+  },
+  {
+   "id": "he.c01_04.117",
+   "frame": "fr.wh",
+   "text": "בְּאֵיזוֹ שָׁעָה הָאוֹטוֹבּוּס הָרִאשׁוֹן?",
+   "tokens": [
+    {
+     "t": "בְּאֵיזוֹ",
+     "parts": [
+      {
+       "t": "בְּ",
+       "l": "he:be"
+      },
+      {
+       "t": "אֵיזוֹ",
+       "l": "he:eize",
+       "f": "DET;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "שָׁעָה",
+     "l": "he:shaa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הָאוֹטוֹבּוּס",
+     "l": "he:otobus",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָרִאשׁוֹן",
+     "l": "he:rishon",
+     "f": "ADJ;SG;MASC;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.ordinals",
+    "fn.question.wh"
+   ],
+   "gloss": "At what time is the first bus?",
+   "level": "A2"
+  }
+ ]
+}

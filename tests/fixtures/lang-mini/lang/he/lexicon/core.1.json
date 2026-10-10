@@ -1,0 +1,280 @@
+{
+ "lexemes": [
+  {
+   "id": "he:hu",
+   "lemma": "הוּא",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "features": {
+    "spelling": "הוא",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "hu",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:hi",
+   "lemma": "הִיא",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "features": {
+    "spelling": "היא",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "hi",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:akhal",
+   "lemma": "אָכַל",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat",
+    "verb.corrode"
+   ],
+   "features": {
+    "spelling": "אכל",
+    "root": "א כ ל",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-alef"
+    ],
+    "future": "יֹאכַל",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "אֲכִילָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "root": "א כ ל",
+   "binyan": "paal",
+   "translit": "akhal",
+   "forms": {
+    "V;PST;3;SG;MASC": "אָכַל",
+    "V;PRS;SG;MASC": "אוֹכֵל",
+    "V;PRS;SG;FEM": "אוֹכֶלֶת",
+    "V;PRS;PL;MASC": "אוֹכְלִים",
+    "V;PRS;PL;FEM": "אוֹכְלוֹת"
+   },
+   "ref": {
+    "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday; in figurative use, being consumed by something.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to consume, eat up (figuratively: worry, jealousy)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.corrode"
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה אַתָּה אוֹכֵל לַאֲרוּחַת בֹּקֶר?",
+      "tr": "What do you eat for breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אוֹכֶלֶת הַרְבֵּה יְרָקוֹת.",
+      "tr": "She eats a lot of vegetables.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקִּנְאָה אוֹכֶלֶת אוֹתוֹ.",
+      "tr": "Jealousy is eating him up.",
+      "register": "neutral",
+      "context": "figurative",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֶאֱכֹל אֲרוּחַת עֶרֶב",
+      "tr": "to eat dinner"
+     },
+     {
+      "text": "לֶאֱכֹל בַּחוּץ",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אָכַל אֶת עַצְמוֹ",
+      "tr": "he ate himself",
+      "kind": "idiom",
+      "meaning": "he was eaten up by regret or worry",
+      "register": "colloquial"
+     },
+     {
+      "text": "אָכַלְתִּי אוֹתָהּ",
+      "tr": "I ate it (f.)",
+      "kind": "slang",
+      "meaning": "I got into trouble, I paid for it",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "סָעַד",
+      "register": "formal",
+      "nuance": "to dine — elevated, literary"
+     },
+     {
+      "word": "זָלַל",
+      "register": "colloquial",
+      "nuance": "to gobble, eat greedily (mocking)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "צָם",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔakal-; compare Aramaic אֲכַל (ʾăḵal), Arabic أَكَلَ (ʔakala).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "אֹכֶל (okhel, food) and מַאֲכָל (ma'akhal, dish) come from the same root א־כ־ל."
+    ],
+    "pitfalls": [
+     "The present tense agrees in gender: a man says אֲנִי אוֹכֵל, a woman אֲנִי אוֹכֶלֶת.",
+     "Future יֹאכַל: the א is silent (yokhal)."
+    ],
+    "subtleties": [
+     "Slang אָכַלְתִּי אוֹתָהּ has nothing to do with food: ‘I got burned’."
+    ]
+   }
+  },
+  {
+   "id": "he:ve",
+   "lemma": "וְ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "features": {
+    "spelling": "ו"
+   },
+   "prefix": true,
+   "translit": "ve",
+   "note": "וּ (u-) before ב, מ, פ and before a shva",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:et",
+   "lemma": "אֶת",
+   "pos": "ADP",
+   "senses": [],
+   "features": {
+    "spelling": "את",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אוֹתִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אוֹתְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אוֹתָךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אוֹתוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אוֹתָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אוֹתָנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אֶתְכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אֶתְכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אוֹתָם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אוֹתָן"
+     }
+    ]
+   },
+   "role": "marks a definite direct object (no English equivalent)",
+   "translit": "et",
+   "ref": {
+    "src": "fixture"
+   },
+   "prefix": false
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "No separate word: the definite article ha- (הַ) is part of the noun forms (DEF cells).",
+   "use": "הַ + noun"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "Hebrew has no indefinite article: the bare noun is indefinite.",
+   "use": "bare noun"
+  }
+ ]
+}

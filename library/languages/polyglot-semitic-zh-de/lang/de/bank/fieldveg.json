@@ -1,0 +1,4182 @@
+{
+ "sentences": [
+  {
+   "id": "de.fv.001",
+   "frame": "fr.be.person",
+   "text": "Mein Vater ist Bauer und er hat viele Kartoffeln.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Bauer",
+     "l": "de:Bauer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.copula",
+    "fn.pronoun.subject",
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.object",
+    "fn.present",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "My father is a farmer and he has a lot of potatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.002",
+   "frame": "fr.adj.pred",
+   "text": "Der Kürbis ist groß, die Gurke ist klein und das Radieschen ist rot.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "groß",
+     "l": "de:groß",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Gurke",
+     "l": "de:Gurke",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "klein",
+     "l": "de:klein",
+     "f": "ADJ"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Radieschen",
+     "l": "de:Radieschen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.copula",
+    "fn.adjective",
+    "fn.present",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "The pumpkin is big, the cucumber is small and the radish is red.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.003",
+   "frame": "fr.eat",
+   "text": "Wir kochen heute eine Suppe mit Kartoffeln und Lauch.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Lauch",
+     "l": "de:Lauch",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.time.day",
+    "fn.object",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Today we are cooking a soup with potatoes and leek.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.004",
+   "frame": "fr.eat.def",
+   "text": "Ihr esst den Spinat nicht.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esst",
+     "l": "de:essen",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spinat",
+     "l": "de:Spinat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "You (all) aren’t eating the spinach.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.005",
+   "frame": "fr.alt.q",
+   "text": "Möchten Sie Tomaten oder Gurken?",
+   "tokens": [
+    {
+     "t": "Möchten",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "oder",
+     "l": "de:oder"
+    },
+    {
+     "t": "Gurken",
+     "l": "de:Gurke",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.question.yesno",
+    "fn.plural.noun",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Would you like tomatoes or cucumbers? (polite)",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.006",
+   "frame": "fr.adj.pred",
+   "text": "Die Zwiebeln sind teuer, aber die Kartoffeln sind billig.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "billig",
+     "l": "de:billig",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.adjective",
+    "fn.connectors",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "The onions are expensive, but the potatoes are cheap.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.007",
+   "frame": "fr.greet",
+   "text": "Guten Morgen! Ich möchte zwei Gurken, bitte.",
+   "tokens": [
+    {
+     "t": "Guten Morgen",
+     "l": "de:guten_Morgen"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "möchte",
+     "l": "de:mögen",
+     "f": "V;SBJV;PST;1;SG"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Gurken",
+     "l": "de:Gurke",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Good morning! I’d like two cucumbers, please.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.008",
+   "frame": "fr.greet",
+   "text": "Danke für die Tomaten!",
+   "tokens": [
+    {
+     "t": "Danke",
+     "l": "de:danke"
+    },
+    {
+     "t": "für",
+     "l": "de:für"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Thanks for the tomatoes!",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.009",
+   "frame": "fr.where.def",
+   "text": "Entschuldigung, wo ist der Knoblauch?",
+   "tokens": [
+    {
+     "t": "Entschuldigung",
+     "l": "de:Entschuldigung"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Knoblauch",
+     "l": "de:Knoblauch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.question.wh",
+    "fn.copula",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Excuse me, where is the garlic?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.010",
+   "frame": "fr.greet",
+   "text": "Hallo! Hast du heute Spargel?",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "Spargel",
+     "l": "de:Spargel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.have",
+    "fn.question.yesno",
+    "fn.pronoun.subject",
+    "fn.time.day",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Hello! Do you have asparagus today?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.011",
+   "frame": "fr.adj.pred",
+   "text": "Diese Tomaten sind rot.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.adjective",
+    "fn.agreement"
+   ],
+   "variantOf": null,
+   "gloss": "These tomatoes are red.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.012",
+   "frame": "fr.this.is",
+   "text": "Das ist kein Kürbis, das ist eine Zucchini.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Zucchini",
+     "l": "de:Zucchini",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.negation",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "That isn’t a pumpkin, it’s a zucchini.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.013",
+   "frame": "fr.adj.pred",
+   "text": "Dieser Spargel ist teuer, aber er ist gut.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Spargel",
+     "l": "de:Spargel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "teuer",
+     "l": "de:teuer",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.noun.gender",
+    "fn.case.basic",
+    "fn.copula",
+    "fn.adjective",
+    "fn.connectors",
+    "fn.pronoun.subject"
+   ],
+   "variantOf": null,
+   "gloss": "This asparagus is expensive, but it is good.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.014",
+   "frame": "fr.thing.here",
+   "text": "Die Kartoffeln sind hier und die Zwiebeln sind dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The potatoes are here and the onions are over there.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.015",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Radieschen und das ist eine Karotte.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Radieschen",
+     "l": "de:Radieschen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Karotte",
+     "l": "de:Karotte",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a radish and that is a carrot.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.016",
+   "frame": "fr.adj.attr",
+   "text": "Das ist ein großer Kürbis.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "großer",
+     "l": "de:groß",
+     "f": "ADJ;NOM;SG;MASC;MIX"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.agreement",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.adjective",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "That is a big pumpkin.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.017",
+   "frame": "fr.eat",
+   "text": "Ich kaufe drei Zwiebeln und zwei Paprika.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Paprika",
+     "l": "de:Paprika",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "I’m buying three onions and two peppers.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.018",
+   "frame": "fr.count",
+   "text": "Wir haben zwölf Kartoffeln und vier Gurken.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "zwölf",
+     "l": "de:zwölf"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "vier",
+     "l": "de:vier"
+    },
+    {
+     "t": "Gurken",
+     "l": "de:Gurke",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.have",
+    "fn.pronoun.subject",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We have twelve potatoes and four cucumbers.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.019",
+   "frame": "fr.be.where",
+   "text": "In der Suppe ist viel Knoblauch.",
+   "tokens": [
+    {
+     "t": "In",
+     "l": "de:in"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "viel",
+     "l": "de:viel",
+     "f": "DET;SG"
+    },
+    {
+     "t": "Knoblauch",
+     "l": "de:Knoblauch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.prep.place",
+    "fn.case",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "There is a lot of garlic in the soup.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.020",
+   "frame": "fr.have",
+   "text": "Hast du Kartoffeln? Nein, ich habe keine Kartoffeln.",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Do you have potatoes? No, I don’t have any potatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.021",
+   "frame": "fr.have",
+   "text": "Meine Oma hat einen Garten mit Tomaten und Bohnen.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Bohnen",
+     "l": "de:Bohne",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.object",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma has a garden with tomatoes and beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.022",
+   "frame": "fr.be.where",
+   "text": "In unserem Garten sind viele Kürbisse.",
+   "tokens": [
+    {
+     "t": "In",
+     "l": "de:in"
+    },
+    {
+     "t": "unserem",
+     "l": "de:unser",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kürbisse",
+     "l": "de:Kürbis",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.prep.place",
+    "fn.case",
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "There are a lot of pumpkins in our garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.023",
+   "frame": "fr.notlike.generic",
+   "text": "Mein Bruder isst keinen Brokkoli.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Brokkoli",
+     "l": "de:Brokkoli",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.negation",
+    "fn.object",
+    "fn.present",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "My brother doesn’t eat broccoli.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.024",
+   "frame": "fr.command",
+   "text": "Iss deinen Spinat!",
+   "tokens": [
+    {
+     "t": "Iss",
+     "l": "de:essen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "deinen",
+     "l": "de:dein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spinat",
+     "l": "de:Spinat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.possessive",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Eat your spinach!",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.025",
+   "frame": "fr.eat",
+   "text": "Meine Schwester kocht Reis mit Erbsen.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "Erbsen",
+     "l": "de:Erbse",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.possessive",
+    "fn.object",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "My sister is cooking rice with peas.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.026",
+   "frame": "fr.eat.def",
+   "text": "Er isst den Mais und sie isst die Bohnen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Mais",
+     "l": "de:Mais",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Bohnen",
+     "l": "de:Bohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.pronoun.subject",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.noun.gender",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "He is eating the corn and she is eating the beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.027",
+   "frame": "fr.eat",
+   "text": "Den Knoblauch kaufe ich auf dem Markt.",
+   "tokens": [
+    {
+     "t": "Den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Knoblauch",
+     "l": "de:Knoblauch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.object",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.place",
+    "fn.case"
+   ],
+   "variantOf": null,
+   "gloss": "I buy the garlic at the market.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.028",
+   "frame": "fr.like.generic",
+   "text": "Magst du den Rosenkohl? Nein, ich mag ihn nicht.",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Rosenkohl",
+     "l": "de:Rosenkohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ihn",
+     "l": "de:er",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.object",
+    "fn.negation",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Do you like the Brussels sprouts? No, I don’t like them.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.029",
+   "frame": "fr.adj.pred",
+   "text": "Die Tomaten sind nicht rot, sie sind grün.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "grün",
+     "l": "de:grün",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.copula",
+    "fn.adjective",
+    "fn.plural.noun",
+    "fn.pronoun.subject",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The tomatoes aren’t red, they’re green.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.030",
+   "frame": "fr.notlike.generic",
+   "text": "Wir essen nie Kohl.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "nie",
+     "l": "de:nie"
+    },
+    {
+     "t": "Kohl",
+     "l": "de:Kohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "We never eat cabbage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.031",
+   "frame": "fr.eat.def",
+   "text": "Kochst du heute die Kartoffeln?",
+   "tokens": [
+    {
+     "t": "Kochst",
+     "l": "de:kochen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.time.day",
+    "fn.object",
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Are you cooking the potatoes today?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.032",
+   "frame": "fr.like.generic",
+   "text": "Magst du keine Zwiebeln? Doch!",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Doch",
+     "l": "de:doch"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.negation",
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Don’t you like onions? Yes, I do!",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.033",
+   "frame": "fr.wh",
+   "text": "Wie viele Kartoffeln kaufst du?",
+   "tokens": [
+    {
+     "t": "Wie viele",
+     "l": "de:wie_viele",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.plural.noun",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "How many potatoes are you buying?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.034",
+   "frame": "fr.wh",
+   "text": "Was kochst du mit dem Kürbis?",
+   "tokens": [
+    {
+     "t": "Was",
+     "l": "de:was",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "kochst",
+     "l": "de:kochen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.definite",
+    "fn.noun.gender"
+   ],
+   "variantOf": null,
+   "gloss": "What are you cooking with the pumpkin?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.035",
+   "frame": "fr.wh",
+   "text": "Warum isst du keine Erbsen?",
+   "tokens": [
+    {
+     "t": "Warum",
+     "l": "de:warum"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Erbsen",
+     "l": "de:Erbse",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.negation",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.plural.noun",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Why don’t you eat peas?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.036",
+   "frame": "fr.from",
+   "text": "Woher kommen die Tomaten?",
+   "tokens": [
+    {
+     "t": "Woher",
+     "l": "de:woher"
+    },
+    {
+     "t": "kommen",
+     "l": "de:kommen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.direction",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.present"
+   ],
+   "variantOf": null,
+   "gloss": "Where do the tomatoes come from?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.037",
+   "frame": "fr.at.place",
+   "text": "Die Karotten sind für meine Mutter.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Karotten",
+     "l": "de:Karotte",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "für",
+     "l": "de:für"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.case",
+    "fn.possessive",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The carrots are for my mother.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.038",
+   "frame": "fr.eat.def",
+   "text": "Ich esse die Suppe ohne Knoblauch.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "ohne",
+     "l": "de:ohne"
+    },
+    {
+     "t": "Knoblauch",
+     "l": "de:Knoblauch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.case",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I eat the soup without garlic.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.039",
+   "frame": "fr.eat",
+   "text": "Wir kaufen die Zucchini im Supermarkt.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Zucchini",
+     "l": "de:Zucchini",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Supermarkt",
+     "l": "de:Supermarkt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.case",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We buy the zucchini at the supermarket.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.040",
+   "frame": "fr.at.place",
+   "text": "Der Salat mit Gurken ist für die Kinder.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Salat",
+     "l": "de:Salat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "Gurken",
+     "l": "de:Gurke",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "für",
+     "l": "de:für"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.case",
+    "fn.prep.core",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The salad with cucumbers is for the children.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.041",
+   "frame": "fr.eat",
+   "text": "Mein Opa kocht Kartoffeln mit den Bohnen aus dem Garten.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "Bohnen",
+     "l": "de:Bohne",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "aus",
+     "l": "de:aus"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Garten",
+     "l": "de:Garten",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.case",
+    "fn.prep.core",
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa cooks potatoes with the beans from the garden.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.042",
+   "frame": "fr.be.where",
+   "text": "Die Zwiebeln sind im Kühlschrank.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Kühlschrank",
+     "l": "de:Kühlschrank",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.case",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The onions are in the fridge.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.043",
+   "frame": "fr.place.on",
+   "text": "Der Kürbis ist unter dem Tisch.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "unter",
+     "l": "de:unter"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.case",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The pumpkin is under the table.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.044",
+   "frame": "fr.place.on",
+   "text": "Der Knoblauch ist neben den Zwiebeln.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Knoblauch",
+     "l": "de:Knoblauch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "neben",
+     "l": "de:neben"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.case",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The garlic is next to the onions.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.045",
+   "frame": "fr.place.on",
+   "text": "Der Spinat ist links, die Paprika sind rechts.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Spinat",
+     "l": "de:Spinat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "links",
+     "l": "de:links"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Paprika",
+     "l": "de:Paprika",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "rechts",
+     "l": "de:rechts"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.copula",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The spinach is on the left, the peppers are on the right.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.046",
+   "frame": "fr.wh",
+   "text": "Wo sind die Kartoffeln? Sie sind in der Küche.",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "in",
+     "l": "de:in"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;DAT;SG;FEM"
+    },
+    {
+     "t": "Küche",
+     "l": "de:Küche",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.prep.place",
+    "fn.case",
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Where are the potatoes? They’re in the kitchen.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.047",
+   "frame": "fr.go.to",
+   "text": "Ich gehe zum Markt und kaufe Tomaten.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehe",
+     "l": "de:gehen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "I go to the market and buy tomatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.048",
+   "frame": "fr.go.to",
+   "text": "Mein Opa fährt mit dem Fahrrad zum Markt und kauft Kartoffeln.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "fährt",
+     "l": "de:fahren",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;NEUT"
+    },
+    {
+     "t": "Fahrrad",
+     "l": "de:Fahrrad",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zum",
+     "l": "de:zum"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case",
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa rides his bike to the market and buys potatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.049",
+   "frame": "fr.go.to",
+   "text": "Die Bäuerin kommt morgen mit dem Spargel zurück.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Bäuerin",
+     "l": "de:Bäuerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "kommt",
+     "l": "de:zurückkommen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "morgen",
+     "l": "de:morgen"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Spargel",
+     "l": "de:Spargel",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "zurück",
+     "l": "de:zurückkommen",
+     "f": "V;SEP"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.case",
+    "fn.present",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The farmer is coming back tomorrow with the asparagus.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.050",
+   "frame": "fr.go.to",
+   "text": "Wir gehen mit den Kartoffeln nach Hause.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "gehen",
+     "l": "de:gehen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;DAT;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": "nach Hause",
+     "l": "de:nach_Hause"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.plural.noun",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We’re going home with the potatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.051",
+   "frame": "fr.command",
+   "text": "Kauf bitte drei Zwiebeln!",
+   "tokens": [
+    {
+     "t": "Kauf",
+     "l": "de:kaufen",
+     "f": "V;IMP;2;SG"
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Zwiebeln",
+     "l": "de:Zwiebel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.object",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Please buy three onions!",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.052",
+   "frame": "fr.command",
+   "text": "Kauft die Kartoffeln auf dem Markt!",
+   "tokens": [
+    {
+     "t": "Kauft",
+     "l": "de:kaufen",
+     "f": "V;IMP;2;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.prep.place",
+    "fn.case"
+   ],
+   "variantOf": null,
+   "gloss": "Buy the potatoes at the market! (to several people)",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.053",
+   "frame": "fr.command",
+   "text": "Kommen Sie am Samstag, dann haben wir Spargel!",
+   "tokens": [
+    {
+     "t": "Kommen",
+     "l": "de:kommen",
+     "f": "V;IMP;FORM"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "am",
+     "l": "de:am"
+    },
+    {
+     "t": "Samstag",
+     "l": "de:Samstag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "dann",
+     "l": "de:dann"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Spargel",
+     "l": "de:Spargel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.pronoun.subject",
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.case",
+    "fn.connectors",
+    "fn.have",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Come on Saturday, then we’ll have asparagus! (polite)",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.054",
+   "frame": "fr.day",
+   "text": "Am Samstag kaufen wir Kartoffeln auf dem Markt.",
+   "tokens": [
+    {
+     "t": "Am",
+     "l": "de:am"
+    },
+    {
+     "t": "Samstag",
+     "l": "de:Samstag",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "auf",
+     "l": "de:auf"
+    },
+    {
+     "t": "dem",
+     "l": "de:der",
+     "f": "DET;DAT;SG;MASC"
+    },
+    {
+     "t": "Markt",
+     "l": "de:Markt",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.time",
+    "fn.case",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun",
+    "fn.prep.place"
+   ],
+   "variantOf": null,
+   "gloss": "On Saturday we buy potatoes at the market.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.055",
+   "frame": "fr.day",
+   "text": "Heute kocht meine Mutter Kohl.",
+   "tokens": [
+    {
+     "t": "Heute",
+     "l": "de:heute"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "Kohl",
+     "l": "de:Kohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.possessive",
+    "fn.object",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Today my mother is cooking cabbage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.056",
+   "frame": "fr.day",
+   "text": "Abends essen wir oft Salat mit Tomaten.",
+   "tokens": [
+    {
+     "t": "Abends",
+     "l": "de:abends"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "Salat",
+     "l": "de:Salat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "mit",
+     "l": "de:mit"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "In the evenings we often eat salad with tomatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.057",
+   "frame": "fr.time",
+   "text": "Im Sommer essen wir viele Tomaten.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Sommer",
+     "l": "de:Sommer",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case",
+    "fn.present",
+    "fn.pronoun.subject",
+    "fn.numerals",
+    "fn.object",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "In summer we eat a lot of tomatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.058",
+   "frame": "fr.time",
+   "text": "Die Kartoffeln kochen seit zwanzig Minuten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "kochen",
+     "l": "de:kochen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "seit",
+     "l": "de:seit"
+    },
+    {
+     "t": "zwanzig",
+     "l": "de:zwanzig"
+    },
+    {
+     "t": "Minuten",
+     "l": "de:Minute",
+     "f": "N;DAT;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case",
+    "fn.present",
+    "fn.numerals",
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The potatoes have been boiling for twenty minutes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.059",
+   "frame": "fr.time",
+   "text": "Um zwölf Uhr essen wir Spargel.",
+   "tokens": [
+    {
+     "t": "Um",
+     "l": "de:um"
+    },
+    {
+     "t": "zwölf",
+     "l": "de:zwölf"
+    },
+    {
+     "t": "Uhr",
+     "l": "de:Uhr",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Spargel",
+     "l": "de:Spargel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.case",
+    "fn.present",
+    "fn.pronoun.subject",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "At twelve o’clock we eat asparagus.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.060",
+   "frame": "fr.adj.attr",
+   "text": "Ich kaufe eine große Zucchini und kleine Tomaten.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "große",
+     "l": "de:groß",
+     "f": "ADJ;ACC;SG;FEM;MIX"
+    },
+    {
+     "t": "Zucchini",
+     "l": "de:Zucchini",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "kleine",
+     "l": "de:klein",
+     "f": "ADJ;ACC;PL;STRG"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.plural.noun",
+    "fn.noun.gender"
+   ],
+   "variantOf": null,
+   "gloss": "I’m buying a big zucchini and small tomatoes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.061",
+   "frame": "fr.colour",
+   "text": "Die grünen Bohnen sind im Kühlschrank.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "grünen",
+     "l": "de:grün",
+     "f": "ADJ;NOM;PL;WEAK"
+    },
+    {
+     "t": "Bohnen",
+     "l": "de:Bohne",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "im",
+     "l": "de:im"
+    },
+    {
+     "t": "Kühlschrank",
+     "l": "de:Kühlschrank",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.agreement",
+    "fn.prep.place",
+    "fn.case",
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The green beans are in the fridge.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.062",
+   "frame": "fr.compare",
+   "text": "Der Kürbis ist größer als die Gurke.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "größer",
+     "l": "de:groß",
+     "f": "ADJ;CMPR"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Gurke",
+     "l": "de:Gurke",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The pumpkin is bigger than the cucumber.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.063",
+   "frame": "fr.compare",
+   "text": "Wir essen mehr Kartoffeln als Reis.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "mehr",
+     "l": "de:mehr"
+    },
+    {
+     "t": "Kartoffeln",
+     "l": "de:Kartoffel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "als",
+     "l": "de:als"
+    },
+    {
+     "t": "Reis",
+     "l": "de:Reis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We eat more potatoes than rice.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.064",
+   "frame": "fr.compare",
+   "text": "Im Herbst sind die Kürbisse am billigsten.",
+   "tokens": [
+    {
+     "t": "Im",
+     "l": "de:im"
+    },
+    {
+     "t": "Herbst",
+     "l": "de:Herbst",
+     "f": "N;DAT;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kürbisse",
+     "l": "de:Kürbis",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "am billigsten",
+     "l": "de:billig",
+     "f": "ADJ;SPRL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.prep.time",
+    "fn.case",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.case.basic",
+    "fn.adjective"
+   ],
+   "variantOf": null,
+   "gloss": "In autumn the pumpkins are cheapest.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.065",
+   "frame": "fr.link",
+   "text": "Ich koche Suppe, weil ich viele Karotten habe.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "koche",
+     "l": "de:kochen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Suppe",
+     "l": "de:Suppe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "weil",
+     "l": "de:weil"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Karotten",
+     "l": "de:Karotte",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.have",
+    "fn.numerals",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I’m making soup because I have a lot of carrots.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.066",
+   "frame": "fr.link",
+   "text": "Ich habe Hunger, deshalb esse ich eine Karotte.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Hunger",
+     "l": "de:Hunger",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "deshalb",
+     "l": "de:deshalb"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Karotte",
+     "l": "de:Karotte",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.have",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I’m hungry, so I’m eating a carrot.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.067",
+   "frame": "fr.link",
+   "text": "Wenn die Tomaten rot sind, essen wir sie.",
+   "tokens": [
+    {
+     "t": "Wenn",
+     "l": "de:wenn"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tomaten",
+     "l": "de:Tomate",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "rot",
+     "l": "de:rot",
+     "f": "ADJ"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie.pl",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "When the tomatoes are red, we eat them.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.068",
+   "frame": "fr.link",
+   "text": "Er isst den Spinat, obwohl er ihn nicht mag.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spinat",
+     "l": "de:Spinat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "obwohl",
+     "l": "de:obwohl"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ihn",
+     "l": "de:er",
+     "f": "PRON;ACC"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "He eats the spinach although he doesn’t like it.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.069",
+   "frame": "fr.link",
+   "text": "Die Kinder mögen Erbsen, aber sie essen keine Bohnen.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Erbsen",
+     "l": "de:Erbse",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "aber",
+     "l": "de:aber"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Bohnen",
+     "l": "de:Bohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The children like peas, but they don’t eat beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.070",
+   "frame": "fr.adj.pred",
+   "text": "Der Kohl ist alt, er ist nicht gut.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kohl",
+     "l": "de:Kohl",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "alt",
+     "l": "de:alt",
+     "f": "ADJ"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.copula",
+    "fn.adjective",
+    "fn.negation",
+    "fn.case.basic",
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The cabbage is old, it isn’t good.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.071",
+   "frame": "fr.eat",
+   "text": "Wir kaufen diesen Kürbis.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "diesen",
+     "l": "de:dieser",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.object",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.noun.gender"
+   ],
+   "variantOf": null,
+   "gloss": "We’re buying this pumpkin.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.072",
+   "frame": "fr.be.person",
+   "text": "Mein Onkel ist Koch und er kocht oft Spargel.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Onkel",
+     "l": "de:Onkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Koch",
+     "l": "de:Koch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kocht",
+     "l": "de:kochen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "oft",
+     "l": "de:oft"
+    },
+    {
+     "t": "Spargel",
+     "l": "de:Spargel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.time.day",
+    "fn.case.basic",
+    "fn.connectors"
+   ],
+   "variantOf": null,
+   "gloss": "My uncle is a cook and he often cooks asparagus.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.fv.073",
+   "frame": "fr.greet",
+   "text": "Guten Tag! Haben Sie Brokkoli?",
+   "tokens": [
+    {
+     "t": "Guten Tag",
+     "l": "de:guten_Tag"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "Haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Brokkoli",
+     "l": "de:Brokkoli",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.have",
+    "fn.question.yesno",
+    "fn.pronoun.subject",
+    "fn.object"
+   ],
+   "variantOf": null,
+   "gloss": "Hello! Do you have broccoli? (polite)",
+   "alts": [],
+   "level": "A2"
+  }
+ ],
+ "fieldExemptions": []
+}

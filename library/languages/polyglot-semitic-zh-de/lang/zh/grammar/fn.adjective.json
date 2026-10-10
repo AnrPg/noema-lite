@@ -1,0 +1,517 @@
+{
+ "function": "fn.adjective",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "adj.predicative",
+   "value": "verbal"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "none"
+  },
+  {
+   "feature": "syn.adjectiveNoun",
+   "value": "adj-noun"
+  }
+ ],
+ "summary": "Chinese adjectives are stative verbs: they ARE the predicate, with no 是 — 这个房子很大 ‘this house is big’. In a plain statement the adjective takes 很 as an unstressed link (a bare adjective sounds like a contrast: 这个大，那个小 ‘this one is big, that one small’); it is negated with 不 (不大), asked with 吗 or A-not-A (大吗？ / 大不大？), and takes 了 when the state has come about (我饿了 ‘I’m hungry now’). Before a noun a one-syllable adjective attaches directly (大房子, 新书, 好朋友); a two-syllable adjective, or any adjective with 很, needs 的 (漂亮的房间, 很大的房子). Nothing ever agrees: 大 is the same for a big house, big houses and a big woman, and adjective + 的 stands for a noun: 大的 ‘the big one’.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Pattern",
+    "Example",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "subject + 很 + adjective",
+     "这个房子很大。",
+     "The house is big."
+    ],
+    [
+     "subject + 不 + adjective",
+     "这个房子不大。",
+     "The house isn’t big."
+    ],
+    [
+     "subject + adjective + 吗？",
+     "这个房子大吗？",
+     "Is the house big?"
+    ],
+    [
+     "subject + adj 不 adj？",
+     "这个房子大不大？",
+     "Is the house big (or not)?"
+    ],
+    [
+     "subject + adjective + 了",
+     "我饿了。",
+     "I’m hungry (now)."
+    ],
+    [
+     "bare adjectives in contrast",
+     "这个大，那个小。",
+     "This one is big, that one is small."
+    ]
+   ],
+   "caption": "The adjective as the predicate",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "这个房子",
+    "很",
+    "大"
+   ],
+   "caption": "No 是: subject + 很 + adjective",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Adjective",
+    "Pattern",
+    "Examples"
+   ],
+   "rows": [
+    [
+     "one syllable",
+     "adjective + noun",
+     "大房子 · 新书 · 好朋友 · 热茶"
+    ],
+    [
+     "two syllables",
+     "adjective + 的 + noun",
+     "漂亮的房间 · 便宜的饭馆 · 年轻的老师"
+    ],
+    [
+     "with 很 (any adjective)",
+     "很 + adjective + 的 + noun",
+     "很大的房子 · 很好的朋友"
+    ],
+    [
+     "with a number or 这 / 那",
+     "number / 这 + measure word + adjective + noun",
+     "一个大包 · 这本新书 · 一家便宜的饭馆"
+    ]
+   ],
+   "caption": "The adjective before a noun",
+   "typology": [
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "adj-noun"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No 是 before an adjective",
+   "text": "*他是高 → 他很高 ‘he is tall’. 是 links nouns (他是老师, S01); an adjective is itself the predicate, like a verb.",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "很 is often just the link",
+   "text": "In 他很高 the 很 is unstressed and means little more than ‘is’. Other degree words can take its place: 非常 ‘extremely’, 太…了 ‘too, so’ (太贵了！), 真 ‘really’ (真漂亮！), 不太 ‘not very’ (不太贵)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Negation: 不, and 很 goes",
+   "text": "这个不贵 ‘this isn’t expensive’ — 不 replaces 很. 很不 + adjective is ‘really un-’ (很不好 ‘really bad’); ‘not very’ is 不太 (不太贵). A change that has not happened takes 没: 天还没黑 ‘it isn’t dark yet’."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Adjective + 的 = ‘the … one’",
+   "text": "我要大的，不要小的 ‘I want the big one, not the small one’. With 是 it classifies: 我的手机是新的 ‘my phone is a new one’."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Feelings and 了",
+   "text": "我饿了, 我累了, 我渴了: 了 (S14) says the state has come about — ‘I’ve got hungry’ = ‘I’m hungry now’."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Chinese",
+     "points": [
+      "这个房子很大。 — no verb, no ending",
+      "一个大房子 · 两个大房子 — 大 never changes"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "Das Haus ist groß. — sein + the bare adjective",
+      "ein großes Haus · zwei große Häuser — the ending agrees"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Describing an action (later)",
+   "text": "HOW someone does something takes 得 after the verb: 他跑得很快 ‘he runs fast’ — not *他跑很快. It comes with the core grammar after the foundations."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Old, young, new",
+   "text": "老 for people (老人) and long-standing things (老朋友); 旧 for worn things (旧书); 新 ‘new’ for things; 年轻 ‘young’ for people. For age, 大 / 小 mean older / younger: 他比我大."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the adjective the predicate (X is big)? → X + 很 + adjective — no 是.",
+   "Am I contrasting two things? → bare adjectives are fine: 这个大，那个小.",
+   "Is it negative? → 不 + adjective (drop 很); ‘not very’ = 不太.",
+   "Has the state come about (hungry, tired, dark)? → adjective + 了.",
+   "Before a noun: one syllable, no 很? → straight before the noun (大房子). Two syllables, or with 很? → 的 (漂亮的房间, 很大的房子).",
+   "With a number or 这 / 那? → number / 这 + measure word + adjective + noun (一个大包).",
+   "Do I mean ‘the … one’? → adjective + 的 (大的)."
+  ],
+  "steps": [
+   "Find the thing described.",
+   "Predicate: subject + 很 / 不 + adjective; attribute: adjective (+ 的) + noun.",
+   "Never 是, never an ending."
+  ]
+ },
+ "traps": [
+  "*他是高 → 他很高 (no 是 before an adjective).",
+  "*很大房子 → 很大的房子 (with 很 the adjective needs 的).",
+  "*他不很高 → 他不高 / 他不太高.",
+  "*他跑很快 → 他跑得很快 (an action needs 得).",
+  "*旧人 → 老人 (旧 is for things); *年轻的手机 → 新手机 (年轻 is for people).",
+  "*生日高兴 → 生日快乐 (wishes use 快乐).",
+  "Tall people are 高, not 长; a short person is 矮, not 短.",
+  "很好 is one ready-made word (‘fine, very good’): 我很好 ‘I’m fine’."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:da",
+   "zh:xiao",
+   "zh:chang",
+   "zh:duan",
+   "zh:gao",
+   "zh:hao.good",
+   "zh:huai",
+   "zh:xin",
+   "zh:jiu.old",
+   "zh:nianqing",
+   "zh:lao",
+   "zh:re",
+   "zh:leng",
+   "zh:nuanhuo",
+   "zh:piaoliang",
+   "zh:haokan",
+   "zh:mei.beautiful",
+   "zh:nankan",
+   "zh:chou",
+   "zh:rongyi",
+   "zh:nan",
+   "zh:pianyi",
+   "zh:gui",
+   "zh:gaoxing",
+   "zh:kaixin",
+   "zh:nanguo",
+   "zh:shangxin",
+   "zh:lei",
+   "zh:e",
+   "zh:ke.thirsty",
+   "zh:kuai.fast",
+   "zh:man",
+   "zh:bai",
+   "zh:baise",
+   "zh:hei",
+   "zh:heise",
+   "zh:hong",
+   "zh:hongse",
+   "zh:lan",
+   "zh:lanse",
+   "zh:lv",
+   "zh:lvse",
+   "zh:huang",
+   "zh:huangse",
+   "zh:zongse",
+   "zh:kafeise",
+   "zh:huise",
+   "zh:chengse",
+   "zh:juhuangse",
+   "zh:fenhongse",
+   "zh:fense",
+   "zh:zise",
+   "zh:qian",
+   "zh:shen",
+   "zh:jin",
+   "zh:yuan"
+  ]
+ },
+ "needs": {
+  "ADJ": 8
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.adjective"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘The house is big.’",
+   "options": [
+    "这个房子很大。",
+    "这个房子是大。",
+    "这个房子大是。"
+   ],
+   "answer": "这个房子很大。",
+   "why": "An adjective is the predicate itself: 很 + adjective, no 是."
+  },
+  {
+   "q": "‘a very big house’",
+   "options": [
+    "一个很大的房子",
+    "一个很大房子",
+    "一个大很房子"
+   ],
+   "answer": "一个很大的房子",
+   "why": "With 很 the adjective needs 的 before the noun."
+  },
+  {
+   "q": "‘This isn’t expensive.’",
+   "options": [
+    "这个不贵。",
+    "这个很不贵。",
+    "这个不是贵。"
+   ],
+   "answer": "这个不贵。",
+   "why": "不 replaces 很; 是 is never used with an adjective."
+  },
+  {
+   "q": "‘I’m hungry (now).’",
+   "options": [
+    "我饿了。",
+    "我是饿。",
+    "我饿是了。"
+   ],
+   "answer": "我饿了。",
+   "why": "了 shows the new state; no 是."
+  },
+  {
+   "q": "Which word is ‘old’ for a person?",
+   "options": [
+    "老",
+    "旧",
+    "长"
+   ],
+   "answer": "老",
+   "why": "老 is for people and long-standing things; 旧 for worn things; 长 is ‘long’."
+  },
+  {
+   "q": "‘a pretty room’",
+   "options": [
+    "漂亮的房间",
+    "漂亮房间的",
+    "房间漂亮的"
+   ],
+   "answer": "漂亮的房间",
+   "why": "A two-syllable adjective + 的 comes before the noun."
+  },
+  {
+   "q": "‘I want the big one.’",
+   "options": [
+    "我要大的。",
+    "我要大。",
+    "我要的大。"
+   ],
+   "answer": "我要大的。",
+   "why": "Adjective + 的 stands for the noun: 大的 ‘the big one’."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek adjectives need είμαι and agree in gender, number and case (το σπίτι είναι μεγάλο, μεγάλα σπίτια); Chinese 大 needs no verb and never changes: 房子很大, 大房子."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian drops ‘to be’ before adjectives in the present (дом большой), as Chinese does (房子很大); but Russian adjectives agree and have short forms, while Chinese 大 never changes."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish uses es / está + an agreeing adjective (la casa es grande, las casas son grandes) and usually puts the adjective after the noun; Chinese: 房子很大, 大房子 — no verb, no agreement, adjective first."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English says ‘is big’ with ‘be’; Chinese 很大 has no 是 — *他是高 is the classic mistake. Before a noun the order matches (big house ~ 大房子), but two-syllable adjectives need 的 (漂亮的房间)."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French adjectives agree and mostly follow the noun (une maison blanche); Chinese ones never change and always come first (白房子). être + adjective ~ 很 + adjective, with no verb."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German puts the bare adjective after sein (das Haus ist groß) but adds endings before a noun (ein großes Haus); Chinese 大 never changes, and the predicate needs no verb: 房子很大."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi adjectives need है, and many agree (बड़ा घर, बड़ी गाड़ी); Chinese 大 needs no verb and never changes."
+  },
+  {
+   "for": "fa",
+   "rel": "trap",
+   "text": "Persian puts the adjective after the noun with the ezafe (khāne-ye bozorg ‘big house’); Chinese puts it before: 大房子. As a predicate Persian needs ast (khāne bozorg ast); Chinese does not: 房子很大."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi adjectives come before the noun, as Chinese ones do, but many agree (मोठा मुलगा, मोठी मुलगी) and the predicate needs आहे; Chinese 大 never changes and needs no verb."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic adjectives follow the noun and agree in gender, number and definiteness (bayt kabīr, al-bayt al-kabīr); Chinese ones precede it and never change (大房子). As a predicate, Arabic too has no verb in the present (al-baytu kabīr) — like 房子很大."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew adjectives follow the noun and agree (bayit gadol, ha-bayit ha-gadol); Chinese ones precede it (大房子). As a predicate Hebrew, like Chinese, uses no verb in the present (ha-bayit gadol ~ 房子很大)."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish adjectives precede the noun and never agree (büyük ev ~ 大房子). As a predicate Turkish needs nothing in the 3rd person (ev büyük), close to 房子很大."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese i-adjectives are predicates by themselves (家は大きい) and precede the noun unchanged (大きい家) — the Chinese pattern: 房子很大, 大房子."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean descriptive verbs work as Chinese adjectives do: 집이 커요 ‘the house is big’ needs no copula; before a noun they take -ㄴ (큰 집), as two-syllable Chinese adjectives take 的."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adjectives agree in case and number with the noun (isossa talossa ‘in the big house’) and need olla as a predicate; Chinese 大 never changes and needs no verb."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian adjectives before a noun never change (nagy házban ‘in a big house’) — like 大房子 — but as predicates they agree in number (a házak nagyok); Chinese ones never do."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili adjectives follow the noun and agree with its class (kitabu kizuri ‘a good book’, vitabu vizuri ‘good books’); Chinese adjectives precede it unchanged: 好书."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda adjectives follow the noun and agree with its class (omuntu omulungi ‘a good person’, ekitabo ekirungi ‘a good book’); Chinese ones precede the noun and never change: 好人, 好书."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese adjectives are predicates without a copula, as in Chinese (nhà này rất to ‘this house is very big’ ~ 这个房子很大), but they follow the noun (nhà to ‘a big house’), while Chinese ones precede it: 大房子."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut expresses qualities as verbs (‘be big’ is a verb word with a person ending) — like Chinese adjectives, which need no 是 — but builds them with suffixes; Chinese 大 is a bare word."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.adjective",
+   "note": "German needs sein (Das Haus ist groß) and, before a noun, endings that agree (ein großes Haus, die großen Häuser); Chinese uses neither a verb nor an ending: 房子很大, 大房子."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.adjective",
+   "note": "Arabic also has no verb here (الْبَيْتُ كَبِيرٌ ‘the house is big’), but its adjective follows the noun and agrees in gender, number, case and definiteness (بَيْتٌ كَبِيرٌ ‘a big house’); the Chinese adjective comes first and never changes."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.adjective",
+   "note": "Hebrew also says ‘the house big’ with no verb (הַבַּיִת גָּדוֹל), puts the adjective after the noun and repeats the article for ‘the big house’ (הַבַּיִת הַגָּדוֹל); Chinese puts it before the noun, with 的 when needed."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.copula",
+   "note": "是 links nouns only (S01): 他是老师, but 他很高."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.possessive",
+   "note": "The same 的 links an owner (我的书, S06) and a description (漂亮的房间)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.comparison",
+   "note": "S17 builds on the bare adjective: 他比我高, 他最高."
+  }
+ ]
+}

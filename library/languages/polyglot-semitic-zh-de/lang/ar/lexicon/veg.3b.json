@@ -1,0 +1,588 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:kabar",
+   "lemma": "كَبَر",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.capers"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Greek kápparis): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "kabar",
+   "forms": {
+    "N;NOM;SG;INDF": "كَبَرٌ",
+    "N;ACC;SG;INDF": "كَبَرًا",
+    "N;GEN;SG;INDF": "كَبَرٍ",
+    "N;NOM;SG;DEF": "الْكَبَرُ",
+    "N;ACC;SG;DEF": "الْكَبَرَ",
+    "N;GEN;SG;DEF": "الْكَبَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Little salty-sour buds from a thorny bush that hangs from old walls — pickled, they wake up a sauce.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "caper — the bush (Capparis spinosa) and its pickled flower buds (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.capers"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَضِفِ الْكَبَرَ إِلَى صَلْصَةِ الطَّمَاطِمِ.",
+      "tr": "Add the capers to the tomato sauce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "يَنْمُو الْكَبَرُ بَيْنَ حِجَارَةِ الْجُدْرَانِ الْقَدِيمَةِ.",
+      "tr": "The caper bush grows between the stones of old walls.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ مَرْطَبَانَ كَبَرٍ مُخَلَّلٍ.",
+      "tr": "I bought a jar of pickled capers.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَبَرٌ مُخَلَّلٌ",
+      "tr": "pickled capers"
+     },
+     {
+      "text": "بَرَاعِمُ الْكَبَرِ",
+      "tr": "caper buds"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَبَّار",
+      "register": "neutral",
+      "nuance": "alternative form with the Syriac q and a long ā; also قُبَّار (Wiktionary)"
+     },
+     {
+      "word": "كَبَّار",
+      "register": "neutral",
+      "nuance": "alternative form with a long ā (Wiktionary)"
+     },
+     {
+      "word": "لَصَف",
+      "register": "literary",
+      "nuance": "old name of the caper, listed in Wiktionary’s translation table"
+     }
+    ],
+    "etymology": {
+     "text": "From Classical Syriac ܩܦܪ (qappar, “caper bush”) or ܟܦܪ (kappar), considered to come from Ancient Greek κάππαρις (kápparis), of uncertain, probably Asian origin (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek κάππαρη, Turkish kapari, German Kaper, Russian каперсы and English caper all go back to Greek κάππαρις, like Arabic كَبَر."
+    ],
+    "pitfalls": [
+     "Only the vowels separate كَبَر (kabar, capers) from كِبَر (kibar, old age), كِبْر (kibr, pride) and the verb كَبُرَ (kabura, to grow up) (Wiktionary)."
+    ],
+    "subtleties": [
+     "A mass noun: one bud = حَبَّةُ كَبَرٍ.",
+     "The word names both the bush and the buds; the context (a jar, a sauce, a wall) decides."
+    ]
+   }
+  },
+  {
+   "id": "ar:qiththa",
+   "lemma": "قِثَّاء",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.armeniancucumber"
+   ],
+   "features": {
+    "root": "ق ث ء",
+    "pattern": "فِعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قِثَّاءَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted (plural of قِثَّاءَة)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قِثَّاءَتَانِ",
+    "declension": "triptote",
+    "unit": "قِثَّاءَة",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "qiṯṯāʾ",
+   "forms": {
+    "N;NOM;COLL;INDF": "قِثَّاءٌ",
+    "N;ACC;COLL;INDF": "قِثَّاءً",
+    "N;GEN;COLL;INDF": "قِثَّاءٍ",
+    "N;NOM;COLL;DEF": "الْقِثَّاءُ",
+    "N;ACC;COLL;DEF": "الْقِثَّاءَ",
+    "N;GEN;COLL;DEF": "الْقِثَّاءِ",
+    "N;NOM;SG;INDF": "قِثَّاءَةٌ",
+    "N;ACC;SG;INDF": "قِثَّاءَةً",
+    "N;GEN;SG;INDF": "قِثَّاءَةٍ",
+    "N;NOM;SG;DEF": "الْقِثَّاءَةُ",
+    "N;ACC;SG;DEF": "الْقِثَّاءَةَ",
+    "N;GEN;SG;DEF": "الْقِثَّاءَةِ",
+    "N;NOM;PL;INDF": "قِثَّاءَاتٌ",
+    "N;ACC;PL;INDF": "قِثَّاءَاتٍ",
+    "N;GEN;PL;INDF": "قِثَّاءَاتٍ",
+    "N;NOM;PL;DEF": "الْقِثَّاءَاتُ",
+    "N;ACC;PL;DEF": "الْقِثَّاءَاتِ",
+    "N;GEN;PL;DEF": "الْقِثَّاءَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A long, pale, ribbed “cucumber” that is really a melon — crisp summer food, and a word straight out of the Qurʾān.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Armenian cucumber, snake melon (Cucumis melo var. flexuosus); collective — one fruit = قِثَّاءَة",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.armeniancucumber"
+     },
+     {
+      "id": "s2",
+      "def": "cucumbers and melons in general, the genus Cucumis (Wiktionary)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْقِثَّاءُ أَطْوَلُ مِنَ الْخِيَارِ وَأَفْتَحُ لَوْنًا.",
+      "tr": "Armenian cucumbers are longer than cucumbers and lighter in colour.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ قِثَّاءَةً طَوِيلَةً.",
+      "tr": "I bought a long Armenian cucumber.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ الْقِثَّاءَ نِيئًا مَعَ الْمِلْحِ.",
+      "tr": "We eat Armenian cucumber raw with salt.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "رَأَيْتُ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَأْكُلُ الرُّطَبَ بِالْقِثَّاءِ.",
+      "tr": "I saw the Messenger of God eat fresh dates with snake melon.",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الرُّطَبُ بِالْقِثَّاءِ",
+      "tr": "fresh dates with snake melon"
+     },
+     {
+      "text": "قِثَّاءٌ طَازَجٌ",
+      "tr": "fresh Armenian cucumber"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مِنْ بَقْلِهَا وَقِثَّائِهَا وَفُومِهَا وَعَدَسِهَا وَبَصَلِهَا",
+      "tr": "of its herbs and its cucumbers, its garlic, its lentils and its onions",
+      "kind": "quote",
+      "source": "Qurʾān 2:61 (al-Baqara)",
+      "meaning": "The Children of Israel ask Moses for the vegetables of Egypt instead of manna — قِثَّاء is among them.",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "فَقُّوس",
+      "register": "regional",
+      "nuance": "the everyday name in Egypt and the Levant (Wiktionary: Armenian cucumber; one fruit فَقُّوسَة)",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Proto-Semitic according to Kogan and Aro: cognate with Akkadian qiššû and Ge’ez ቍሳይ (“cucumber”), Hebrew קשוא (“Armenian cucumber”) and Syriac qaṭṭūtā; a wanderword also seen in Sumerian ukuš, Greek σίκυος and Latin cucumis. Doublet of كُوسَا (“zucchini”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Israelites’ longing for Egypt’s food is told twice: Numbers 11:5 lists הַקִּשֻּׁאִים, Qurʾān 2:61 lists قِثَّاء — the same word.",
+     "Modern Hebrew קִשּׁוּא (kishu) now means zucchini, and Arabic كُوسَا (zucchini, node veg.1) is a doublet of قِثَّاء (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Botanically a melon (Cucumis melo), not a cucumber (Cucumis sativus = خِيَار).",
+     "Two vocalizations are correct: قِثَّاء and قُثَّاء (Wiktionary)."
+    ],
+    "subtleties": [
+     "Collective: الْقِثَّاءُ (the vegetable), قِثَّاءَة (one fruit), قِثَّاءَات (counted fruits).",
+     "The final hamza is part of the root, so the word is triptote: قِثَّاءٌ, قِثَّاءً — unlike diptotes such as هِنْدِبَاءُ."
+    ]
+   }
+  },
+  {
+   "id": "ar:malfuf_makhruti",
+   "lemma": "مَلْفُوف مَخْرُوطِيّ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.pointedcabbage"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: مَلْفُوف (ل ف ف) + مَخْرُوطِيّ (خ ر ط)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "malfūf maḫrūṭī",
+   "forms": {
+    "N;NOM;SG;INDF": "مَلْفُوفٌ مَخْرُوطِيٌّ",
+    "N;ACC;SG;INDF": "مَلْفُوفًا مَخْرُوطِيًّا",
+    "N;GEN;SG;INDF": "مَلْفُوفٍ مَخْرُوطِيٍّ",
+    "N;NOM;SG;DEF": "الْمَلْفُوفُ الْمَخْرُوطِيُّ",
+    "N;ACC;SG;DEF": "الْمَلْفُوفَ الْمَخْرُوطِيَّ",
+    "N;GEN;SG;DEF": "الْمَلْفُوفِ الْمَخْرُوطِيِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): translation table of English pointed cabbage; ملفوف, مخروطي",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A cone-shaped, tender, sweet spring cabbage.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pointed (sweetheart) cabbage — literally “conical cabbage” (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pointedcabbage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَلْفُوفُ الْمَخْرُوطِيُّ أَطْرَى مِنَ الْمَلْفُوفِ الْعَادِيِّ.",
+      "tr": "Pointed cabbage is more tender than ordinary cabbage.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "قَطَّعْتُ الْمَلْفُوفَ الْمَخْرُوطِيَّ لِلسَّلَطَةِ.",
+      "tr": "I shredded the pointed cabbage for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ رَأْسَ مَلْفُوفٍ مَخْرُوطِيٍّ.",
+      "tr": "I bought a head of pointed cabbage.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَأْسُ مَلْفُوفٍ مَخْرُوطِيٍّ",
+      "tr": "a head of pointed cabbage"
+     },
+     {
+      "text": "سَلَطَةُ الْمَلْفُوفِ الْمَخْرُوطِيِّ",
+      "tr": "pointed-cabbage salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name; Wiktionary gives only مَلْفُوف مَخْرُوطِيّ, a description.",
+    "etymology": {
+     "text": "مَلْفُوف “cabbage”, from the passive participle of لَفَّ (“to wrap”), + مَخْرُوطِيّ “conical”, from مَخْرُوط (“cone”) + ـِيّ; Wiktionary gives the phrase as the translation of pointed cabbage.",
+     "src": "Wiktionary (kaikki.org): ملفوف, مخروطي and the translation table of English pointed cabbage"
+    },
+    "funFacts": [
+     "German Spitzkohl (“pointed cabbage”) draws the same picture; Wiktionary compares مَخْرُوط (cone) with Hebrew חָרוּט (kharut, “cone”)."
+    ],
+    "pitfalls": [
+     "The adjective agrees in case and definiteness: الْمَلْفُوفُ الْمَخْرُوطِيُّ, مَلْفُوفًا مَخْرُوطِيًّا — not *الْمَلْفُوفُ مَخْرُوطِيٌّ, which would be a sentence (“the cabbage is conical”)."
+    ],
+    "subtleties": [
+     "مَخْرُوطِيّ is the ordinary geometry word: شَكْلٌ مَخْرُوطِيٌّ, “a conical shape” — the name is a plain description, not a fixed brand of cabbage."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.drumstick",
+   "reason": "Moringa pods are not eaten in Arab cuisines; there is no name for the vegetable.",
+   "use": "a description: قرون المورينغا (“moringa pods”); classical Arabic calls the moringa tree بَان (Wiktionary), famous in poetry for its slender branches"
+  },
+  {
+   "concept": "veg.kiwano",
+   "reason": "An African fruit vegetable sold rarely and under its trade name.",
+   "use": "the trade name kiwano, transliterated, or a description (“horned cucumber”)"
+  },
+  {
+   "concept": "veg.ivygourd",
+   "reason": "An Indian vegetable with no Arabic name.",
+   "use": "the Indian name (tindora) or a description"
+  },
+  {
+   "concept": "veg.limabean",
+   "reason": "Lima beans are not distinguished by name from other dried beans.",
+   "use": "فَاصُولِيَا (beans) with a description, or a translation of “Lima beans”"
+  },
+  {
+   "concept": "veg.savoy",
+   "reason": "No established name for this cabbage variety.",
+   "use": "a description (crinkled cabbage) with مَلْفُوف, or the European name"
+  },
+  {
+   "concept": "veg.guar",
+   "reason": "Guar is a vegetable of India and Pakistan, not of Arab cuisines; Wiktionary’s translation غَار is ambiguous (it otherwise means laurel).",
+   "use": "the name guar, mostly in the industrial term “guar gum”"
+  },
+  {
+   "concept": "veg.nori",
+   "reason": "No Arabic word: the Japanese loan نُورِي (Wiktionary’s translation table) appears only in sushi recipes, normally inside a phrase, and is a homograph of the name Nouri and of نُورِيّ “luminous”.",
+   "use": "ورق النوري or أعشاب النوري البحرية (“nori seaweed”)"
+  },
+  {
+   "concept": "veg.ridgedgourd",
+   "reason": "The ridged gourd is a kind of luffa and is not named separately.",
+   "use": "لُوف (luffa, node veg.2b) with a description (ribbed luffa)"
+  },
+  {
+   "concept": "veg.wingedbean",
+   "reason": "A tropical Asian legume with no Arabic name.",
+   "use": "a literal translation of the English name"
+  },
+  {
+   "concept": "veg.tomatillo",
+   "reason": "A Mexican fruit vegetable unknown in Arab cuisines.",
+   "use": "the Spanish name or a description (“Mexican husk tomato”)"
+  },
+  {
+   "concept": "veg.yardlongbean",
+   "reason": "Not named separately: it is a long-podded form of the cowpea.",
+   "use": "a description with لُوبْيَاء (cowpea; in the Levant the word also means green beans)"
+  },
+  {
+   "concept": "veg.romanesco",
+   "reason": "An Italian variety with no fixed Arabic name.",
+   "use": "a description as a kind of قَرْنَبِيط (cauliflower, node veg.1) or the Italian name"
+  },
+  {
+   "concept": "veg.cayenne",
+   "reason": "No separate word for this chili variety.",
+   "use": "فِلْفِل حَارّ (chili, node veg.1); the spice is sold as “cayenne pepper”, transliterated"
+  },
+  {
+   "concept": "veg.seakale",
+   "reason": "A European coastal plant with no Arabic name.",
+   "use": "a literal translation of “sea kale”"
+  },
+  {
+   "concept": "veg.habanero",
+   "reason": "A Mexican chili with no Arabic name; the Spanish name is borrowed in recipes.",
+   "use": "the Spanish name (هابانيرو), usually with فِلْفِل"
+  },
+  {
+   "concept": "veg.wakame",
+   "reason": "Japanese seaweeds have no Arabic names.",
+   "use": "أعشاب بحرية (“seaweed”) with the Japanese name"
+  },
+  {
+   "concept": "veg.snakegourd",
+   "reason": "An Indian gourd with no Arabic name.",
+   "use": "a literal translation of the English name"
+  },
+  {
+   "concept": "veg.kombu",
+   "reason": "Japanese seaweeds have no Arabic names.",
+   "use": "أعشاب بحرية (“seaweed”) with the Japanese name"
+  },
+  {
+   "concept": "veg.sealettuce",
+   "reason": "Sea lettuce is not eaten in Arab cuisines; no established name.",
+   "use": "a literal translation (“sea lettuce”) or the Latin genus Ulva"
+  },
+  {
+   "concept": "veg.dulse",
+   "reason": "An Atlantic seaweed with no Arabic name.",
+   "use": "أعشاب بحرية (“seaweed”) with a description"
+  },
+  {
+   "concept": "veg.kailan",
+   "reason": "A Chinese brassica with no Arabic name.",
+   "use": "a description as a kind of Chinese broccoli or cabbage"
+  },
+  {
+   "concept": "veg.edamame",
+   "reason": "No established word; edamame are a recent import.",
+   "use": "the Japanese loan, transliterated, or a description (“green soybeans”)"
+  },
+  {
+   "concept": "veg.pattypan",
+   "reason": "No name for this squash variety.",
+   "use": "a description as a kind of قَرْع (squash, node veg.1) or كُوسَا"
+  },
+  {
+   "concept": "veg.hijiki",
+   "reason": "Japanese seaweeds have no Arabic names.",
+   "use": "أعشاب بحرية (“seaweed”) with the Japanese name"
+  },
+  {
+   "concept": "veg.rapini",
+   "reason": "Rapini is not grown in Arab countries and has no name.",
+   "use": "a description as a kind of لِفْت (turnip, node veg.2a), to which it is closely related, or the Italian name"
+  },
+  {
+   "concept": "veg.seagrapes",
+   "reason": "An Asian seaweed with no Arabic name.",
+   "use": "a literal translation (“sea grapes”)"
+  },
+  {
+   "concept": "veg.cucamelon",
+   "reason": "A Central American miniature cucurbit with no Arabic name.",
+   "use": "a description (a tiny cucumber that looks like a watermelon)"
+  },
+  {
+   "concept": "veg.spaghettisquash",
+   "reason": "No name for this squash variety.",
+   "use": "a description as a kind of قَرْع (squash, node veg.1), often a translation of the English name"
+  },
+  {
+   "concept": "veg.pointedgourd",
+   "reason": "An Indian gourd with no Arabic name.",
+   "use": "the Indian name (parwal) or a description"
+  },
+  {
+   "concept": "veg.komatsuna",
+   "reason": "A Japanese leaf brassica with no Arabic name.",
+   "use": "the Japanese name or a description"
+  },
+  {
+   "concept": "veg.mizuna",
+   "reason": "A Japanese leaf brassica with no Arabic name.",
+   "use": "the Japanese name or a description"
+  },
+  {
+   "concept": "veg.padron",
+   "reason": "A Spanish pepper variety with no Arabic name.",
+   "use": "a description with فِلْفِل (small green peppers) or the Spanish name"
+  },
+  {
+   "concept": "veg.tatsoi",
+   "reason": "A Chinese leaf brassica with no Arabic name.",
+   "use": "the Chinese name or a description"
+  },
+  {
+   "concept": "veg.zucchiniflower",
+   "reason": "No single word: the flowers are named by a construct phrase.",
+   "use": "زهر الكوسا or أزهار الكوسا (“zucchini flowers”), with كُوسَا (node veg.1)"
+  },
+  {
+   "concept": "veg.babycorn",
+   "reason": "No fixed term for the young cobs.",
+   "use": "a description: ذرة صغيرة (“small corn”), with ذُرَة (node veg.1)"
+  },
+  {
+   "concept": "veg.acorns",
+   "reason": "No name for this squash variety.",
+   "use": "a description as a kind of قَرْع (squash, node veg.1)"
+  },
+  {
+   "concept": "veg.sugarsnap",
+   "reason": "No established word for peas eaten in the pod.",
+   "use": "a description with بَازِلَّاء (pea, node veg.1)"
+  }
+ ]
+}

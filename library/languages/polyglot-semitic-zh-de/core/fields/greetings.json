@@ -1,0 +1,124 @@
+{
+ "field": "greetings",
+ "title": "Greetings and polite words",
+ "subgroups": [
+  {
+   "id": "greet",
+   "title": "Greetings"
+  },
+  {
+   "id": "polite",
+   "title": "Polite words"
+  }
+ ],
+ "sources": [
+  "The formulas of everyday contact — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "greet.hello",
+   "gloss": "hello",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "greet.goodmorning",
+   "gloss": "good morning",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "greet.goodevening",
+   "gloss": "good evening",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "greet.goodnight",
+   "gloss": "good night",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "greet.goodbye",
+   "gloss": "goodbye",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "greet.seeyou",
+   "gloss": "see you (later)",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "greet.howareyou",
+   "gloss": "how are you?",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "greet.fine",
+   "gloss": "fine, well (I am fine)",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "greet.myname",
+   "gloss": "my name is …",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "greet.nicetomeet",
+   "gloss": "nice to meet you",
+   "subgroup": "greet",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "greet.thanks",
+   "gloss": "thank you",
+   "subgroup": "polite",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "greet.welcome",
+   "gloss": "you’re welcome",
+   "subgroup": "polite",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "greet.please",
+   "gloss": "please",
+   "subgroup": "polite",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "greet.sorry",
+   "gloss": "sorry (apology)",
+   "subgroup": "polite",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "greet.excuseme",
+   "gloss": "excuse me (to get attention or pass)",
+   "subgroup": "polite",
+   "tier": 1,
+   "rank": 15
+  }
+ ]
+}

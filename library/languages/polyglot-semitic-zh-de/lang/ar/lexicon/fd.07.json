@@ -1,0 +1,4075 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:akala",
+   "lemma": "أَكَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat",
+    "verb.corrode"
+   ],
+   "features": {
+    "root": "ء ك ل",
+    "rootClass": [
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَأْكُلُ",
+    "masdar": [
+     "أَكْل"
+    ],
+    "participles": [
+     {
+      "form": "آكِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَأْكُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the food (أَكَلَ الْخُبْزَ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʾakala",
+   "forms": {
+    "V;PST;1;SG": "أَكَلْتُ",
+    "V;PST;2;SG;MASC": "أَكَلْتَ",
+    "V;PST;3;SG;MASC": "أَكَلَ",
+    "V;PST;1;PL": "أَكَلْنَا",
+    "V;PST;2;PL;MASC": "أَكَلْتُمْ",
+    "V;PST;3;PL;MASC": "أَكَلُوا",
+    "V;PST;2;SG;FEM": "أَكَلْتِ",
+    "V;PST;3;SG;FEM": "أَكَلَتْ",
+    "V;PST;2;PL;FEM": "أَكَلْتُنَّ",
+    "V;PST;3;PL;FEM": "أَكَلْنَ",
+    "V;PRS;IND;1;SG": "آكُلُ",
+    "V;PRS;IND;2;SG;MASC": "تَأْكُلُ",
+    "V;PRS;IND;3;SG;MASC": "يَأْكُلُ",
+    "V;PRS;IND;1;PL": "نَأْكُلُ",
+    "V;PRS;IND;2;PL;MASC": "تَأْكُلُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَأْكُلُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَأْكُلِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَأْكُلُ",
+    "V;PRS;IND;2;PL;FEM": "تَأْكُلْنَ",
+    "V;PRS;IND;3;PL;FEM": "يَأْكُلْنَ",
+    "V;IMP;2;SG;MASC": "كُلْ",
+    "V;IMP;2;SG;FEM": "كُلِي",
+    "V;IMP;2;PL;MASC": "كُلُوا",
+    "V;IMP;2;PL;FEM": "كُلْنَ",
+    "V;SBJV;1;SG": "آكُلَ",
+    "V;SBJV;2;SG;MASC": "تَأْكُلَ",
+    "V;SBJV;3;SG;MASC": "يَأْكُلَ",
+    "V;SBJV;1;PL": "نَأْكُلَ",
+    "V;SBJV;2;PL;MASC": "تَأْكُلُوا",
+    "V;SBJV;3;PL;MASC": "يَأْكُلُوا",
+    "V;SBJV;2;SG;FEM": "تَأْكُلِي",
+    "V;SBJV;3;SG;FEM": "تَأْكُلَ",
+    "V;SBJV;2;PL;FEM": "تَأْكُلْنَ",
+    "V;SBJV;3;PL;FEM": "يَأْكُلْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Basic and everyday; in figurative use, something that slowly destroys.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.eat"
+     },
+     {
+      "id": "s2",
+      "def": "to eat away, corrode, consume (rust, fire, time)",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.corrode"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تَأْكُلُ عَلَى الْفَطُورِ؟",
+      "tr": "What do you eat for breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ مَعًا كُلَّ يَوْمٍ.",
+      "tr": "We eat together every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "يَأْكُلُ الصَّدَأُ الْحَدِيدَ.",
+      "tr": "Rust eats away at iron.",
+      "register": "literary",
+      "context": "figurative",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَكَلَ بِشَهِيَّةٍ",
+      "tr": "to eat with appetite"
+     },
+     {
+      "text": "أَكَلَ بِسُرْعَةٍ",
+      "tr": "to eat quickly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "أَكَلَ عَلَيْهِ الدَّهْرُ وَشَرِبَ",
+      "tr": "time has eaten and drunk on it",
+      "kind": "idiom",
+      "meaning": "it is very old, worn out or outdated",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "تَنَاوَلَ",
+      "register": "formal",
+      "nuance": "to have, take (a meal, medicine) — news, menus and polite speech"
+     },
+     {
+      "word": "اِلْتَهَمَ",
+      "register": "literary",
+      "nuance": "to devour, gobble up"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَامَ",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔakal-; cognate with Hebrew אָכַל (akhal) and Aramaic ʾăḵal.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The imperative is just كُلْ (kul, ‘eat!’): like خُذْ (‘take!’) and مُرْ (‘order!’) it drops its first radical, the hamza."
+    ],
+    "pitfalls": [
+     "I eat = آكُلُ (ʾākulu): hamza + long ā is written with madda, آ.",
+     "The vowel of the 2nd radical changes: a in the past (أَكَلَ), u in the present (يَأْكُلُ)."
+    ],
+    "subtleties": [
+     "In formal Arabic, especially for meals, تَنَاوَلَ is preferred: تَنَاوَلْنَا الْغَدَاءَ (we had lunch)."
+    ]
+   }
+  },
+  {
+   "id": "ar:shariba",
+   "lemma": "شَرِبَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.drink",
+    "verb.smoke"
+   ],
+   "features": {
+    "root": "ش ر ب",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَشْرَبُ",
+    "masdar": [
+     "شُرْب"
+    ],
+    "participles": [
+     {
+      "form": "شَارِب",
+      "kind": "active"
+     },
+     {
+      "form": "مَشْرُوب",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the drink; a cigarette, a shisha (شَرِبَ سِيجَارَةً)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "šariba",
+   "forms": {
+    "V;PST;1;SG": "شَرِبْتُ",
+    "V;PST;2;SG;MASC": "شَرِبْتَ",
+    "V;PST;3;SG;MASC": "شَرِبَ",
+    "V;PST;1;PL": "شَرِبْنَا",
+    "V;PST;2;PL;MASC": "شَرِبْتُمْ",
+    "V;PST;3;PL;MASC": "شَرِبُوا",
+    "V;PST;2;SG;FEM": "شَرِبْتِ",
+    "V;PST;3;SG;FEM": "شَرِبَتْ",
+    "V;PST;2;PL;FEM": "شَرِبْتُنَّ",
+    "V;PST;3;PL;FEM": "شَرِبْنَ",
+    "V;PRS;IND;1;SG": "أَشْرَبُ",
+    "V;PRS;IND;2;SG;MASC": "تَشْرَبُ",
+    "V;PRS;IND;3;SG;MASC": "يَشْرَبُ",
+    "V;PRS;IND;1;PL": "نَشْرَبُ",
+    "V;PRS;IND;2;PL;MASC": "تَشْرَبُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَشْرَبُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَشْرَبِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَشْرَبُ",
+    "V;PRS;IND;2;PL;FEM": "تَشْرَبْنَ",
+    "V;PRS;IND;3;PL;FEM": "يَشْرَبْنَ",
+    "V;IMP;2;SG;MASC": "اِشْرَبْ",
+    "V;IMP;2;SG;FEM": "اِشْرَبِي",
+    "V;IMP;2;PL;MASC": "اِشْرَبُوا",
+    "V;IMP;2;PL;FEM": "اِشْرَبْنَ",
+    "V;SBJV;1;SG": "أَشْرَبَ",
+    "V;SBJV;2;SG;MASC": "تَشْرَبَ",
+    "V;SBJV;3;SG;MASC": "يَشْرَبَ",
+    "V;SBJV;1;PL": "نَشْرَبَ",
+    "V;SBJV;2;PL;MASC": "تَشْرَبُوا",
+    "V;SBJV;3;PL;MASC": "يَشْرَبُوا",
+    "V;SBJV;2;SG;FEM": "تَشْرَبِي",
+    "V;SBJV;3;SG;FEM": "تَشْرَبَ",
+    "V;SBJV;2;PL;FEM": "تَشْرَبْنَ",
+    "V;SBJV;3;PL;FEM": "يَشْرَبْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and social: tea, coffee, hospitality.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drink",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drink"
+     },
+     {
+      "id": "s2",
+      "def": "to smoke (cigarettes, shisha) — lit. “drink” smoke",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.smoke"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ كُلَّ صَبَاحٍ.",
+      "tr": "I drink coffee every morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تَشْرَبِينَ؟",
+      "tr": "What will you (f) have to drink?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "شَرِبَ الْمَرِيضُ الدَّوَاءَ.",
+      "tr": "The patient took (drank) the medicine.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "يَشْرَبُ جَدِّي الشِّيشَةَ فِي الْمَقْهَى.",
+      "tr": "My grandfather smokes shisha at the café.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شَرِبَ الشَّايَ",
+      "tr": "to drink tea"
+     },
+     {
+      "text": "شَرِبَ نَخْبَ …",
+      "tr": "to drink a toast to …"
+     },
+     {
+      "text": "مَاءُ الشُّرْبِ",
+      "tr": "drinking water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "اِشْرَبْ مِنَ الْبَحْرِ",
+      "tr": "go drink from the sea",
+      "kind": "colloquial",
+      "meaning": "do what you like, I don’t care (a rude dismissal)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "تَنَاوَلَ",
+      "register": "formal",
+      "nuance": "to have, take (food, drink, medicine) — polite and written style"
+     },
+     {
+      "word": "اِحْتَسَى",
+      "register": "literary",
+      "nuance": "to sip, drink slowly (a hot drink)"
+     }
+    ],
+    "etymology": {
+     "text": "Root ش ر ب; compare Akkadian sarāpum (“to suck”) and Geʿez ሠረበ (śäräbä).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English syrup and sherbet, Turkish şerbet and Greek σιρόπι all come from this root: شَرَاب / شَرْبَة, “a drink”."
+    ],
+    "pitfalls": [
+     "The vowel changes: šariba (past, i) → yašrabu (present, a). Not *yašribu.",
+     "شَرَّبَ with šadda is a different verb: “to make drink, to soak” (form II)."
+    ],
+    "subtleties": [
+     "In formal or polite language تَنَاوَلَ is preferred for meals and medicine: تَنَاوَلَ الدَّوَاءَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:tabakha",
+   "lemma": "طَبَخَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.cook"
+   ],
+   "features": {
+    "root": "ط ب خ",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَطْبُخُ",
+    "masdar": [
+     "طَبْخ"
+    ],
+    "participles": [
+     {
+      "form": "طَابِخ",
+      "kind": "active"
+     },
+     {
+      "form": "مَطْبُوخ",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the food, the dish (طَبَخَ الْأَرُزَّ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ṭabaḫa",
+   "forms": {
+    "V;PST;1;SG": "طَبَخْتُ",
+    "V;PST;2;SG;MASC": "طَبَخْتَ",
+    "V;PST;2;SG;FEM": "طَبَخْتِ",
+    "V;PST;3;SG;MASC": "طَبَخَ",
+    "V;PST;3;SG;FEM": "طَبَخَتْ",
+    "V;PST;1;PL": "طَبَخْنَا",
+    "V;PST;2;PL;MASC": "طَبَخْتُمْ",
+    "V;PST;2;PL;FEM": "طَبَخْتُنَّ",
+    "V;PST;3;PL;MASC": "طَبَخُوا",
+    "V;PST;3;PL;FEM": "طَبَخْنَ",
+    "V;PRS;IND;1;SG": "أَطْبُخُ",
+    "V;PRS;IND;2;SG;MASC": "تَطْبُخُ",
+    "V;PRS;IND;2;SG;FEM": "تَطْبُخِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَطْبُخُ",
+    "V;PRS;IND;3;SG;FEM": "تَطْبُخُ",
+    "V;PRS;IND;1;PL": "نَطْبُخُ",
+    "V;PRS;IND;2;PL;MASC": "تَطْبُخُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَطْبُخْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَطْبُخُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَطْبُخْنَ",
+    "V;IMP;2;SG;MASC": "اُطْبُخْ",
+    "V;IMP;2;SG;FEM": "اُطْبُخِي",
+    "V;IMP;2;PL;MASC": "اُطْبُخُوا",
+    "V;IMP;2;PL;FEM": "اُطْبُخْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Home, family kitchens and the smell of a pot on the stove.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to cook (food, a meal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.cook"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي تَطْبُخُ الْأَرُزَّ كُلَّ يَوْمٍ.",
+      "tr": "My mother cooks rice every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تَطْبُخُ بِنَفْسِكَ؟",
+      "tr": "Do you cook for yourself?",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "طَبَخْنَا الْعَشَاءَ مَعًا.",
+      "tr": "We cooked dinner together.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَبَخَ الطَّعَامَ",
+      "tr": "to cook (the) food"
+     },
+     {
+      "text": "طَبَخَ عَلَى نَارٍ هَادِئَةٍ",
+      "tr": "to cook on a low heat"
+     },
+     {
+      "text": "طَبَخَ الْغَدَاءَ",
+      "tr": "to cook lunch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "طَهَا",
+      "register": "formal",
+      "nuance": "to cook — formal and written style; the cook / chef is طَاهٍ"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ط ب خ (ṭ b ḫ). Cognate with Hebrew טבח (tavákh, “to slaughter, to butcher”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root gives مَطْبَخ (kitchen, the place pattern mafʿal) and طَبَّاخ (cook, the trade pattern faʿʿāl); Turkish mutfak, “kitchen”, is the Arabic مَطْبَخ.",
+     "In Hebrew the same root means “to slaughter”, but Modern Hebrew טַבָּח (tabach) is “a cook” — the butcher and the cook meet in one word."
+    ],
+    "pitfalls": [
+     "The present has u: يَطْبُخُ (yaṭbuḫu), أَطْبُخُ — not *yaṭbaḫu.",
+     "خ (ḫ, the ch of German Bach) is not ح (ḥ): ṭabaḫa."
+    ],
+    "subtleties": [
+     "The dish is a direct object, no preposition: أَطْبُخُ السَّمَكَ (I cook fish).",
+     "Menus and recipes also use the formal طَهَا / طَهْو; at home people say طَبَخَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:arada",
+   "lemma": "أَرَادَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.want",
+    "verb.beaboutto"
+   ],
+   "features": {
+    "root": "ر و د",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "IV",
+    "present": "يُرِيدُ",
+    "masdar": [
+     "إِرَادَة"
+    ],
+    "participles": [
+     {
+      "form": "مُرِيد",
+      "kind": "active"
+     },
+     {
+      "form": "مُرَاد",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "a thing (أُرِيدُ قَهْوَةً)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "أَنْ + a verb in the subjunctive (أُرِيدُ أَنْ أَنَامَ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʾarāda",
+   "forms": {
+    "V;PST;1;SG": "أَرَدْتُ",
+    "V;PST;2;SG;MASC": "أَرَدْتَ",
+    "V;PST;3;SG;MASC": "أَرَادَ",
+    "V;PST;1;PL": "أَرَدْنَا",
+    "V;PST;2;PL;MASC": "أَرَدْتُمْ",
+    "V;PST;3;PL;MASC": "أَرَادُوا",
+    "V;PST;2;SG;FEM": "أَرَدْتِ",
+    "V;PST;3;SG;FEM": "أَرَادَتْ",
+    "V;PST;2;PL;FEM": "أَرَدْتُنَّ",
+    "V;PST;3;PL;FEM": "أَرَدْنَ",
+    "V;PRS;IND;1;SG": "أُرِيدُ",
+    "V;PRS;IND;2;SG;MASC": "تُرِيدُ",
+    "V;PRS;IND;3;SG;MASC": "يُرِيدُ",
+    "V;PRS;IND;1;PL": "نُرِيدُ",
+    "V;PRS;IND;2;PL;MASC": "تُرِيدُونَ",
+    "V;PRS;IND;3;PL;MASC": "يُرِيدُونَ",
+    "V;PRS;IND;2;SG;FEM": "تُرِيدِينَ",
+    "V;PRS;IND;3;SG;FEM": "تُرِيدُ",
+    "V;PRS;IND;2;PL;FEM": "تُرِدْنَ",
+    "V;PRS;IND;3;PL;FEM": "يُرِدْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wishes and intentions; direct, so softened with مِنْ فَضْلِكَ.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to want, to wish",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s2",
+      "def": "to be about to (of things)",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.beaboutto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ كُوبًا مِنَ الْمَاءِ، مِنْ فَضْلِكَ.",
+      "tr": "I would like a glass of water, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تُرِيدِينَ أَنْ تَأْكُلِي؟",
+      "tr": "What do you (f) want to eat?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "يُرِيدُونَ أَنْ يُسَافِرُوا إِلَى الْمَغْرِبِ.",
+      "tr": "They want to travel to Morocco.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "فَوَجَدَا فِيهَا جِدَارًا يُرِيدُ أَنْ يَنْقَضَّ",
+      "tr": "and they found in it a wall about to collapse (Qurʾān 18:77)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أُرِيدُ أَنْ …",
+      "tr": "I want to …"
+     },
+     {
+      "text": "إِنْ أَرَدْتَ",
+      "tr": "if you want"
+     },
+     {
+      "text": "بِإِرَادَتِهِ",
+      "tr": "of his own free will"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "إِذَا أَرَدْتَ أَنْ تُطَاعَ فَأْمُرْ بِمَا يُسْتَطَاعُ",
+      "tr": "if you want to be obeyed, order what can be done",
+      "kind": "proverb",
+      "meaning": "make demands that people are able to meet",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "وَدَّ",
+      "register": "formal",
+      "nuance": "to wish, would like — very polite: أَوَدُّ أَنْ أَشْكُرَكُمْ (I would like to thank you)"
+     },
+     {
+      "word": "رَغِبَ فِي",
+      "register": "formal",
+      "nuance": "to desire, wish for — written and official style"
+     }
+    ],
+    "etymology": {
+     "text": "Form IV of the root ر و د; verbal noun إِرَادَة, “will, intention” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish irade (will, decree) and mürit (disciple) come from Arabic إِرَادَة and مُرِيد, “one who wants”, from this root."
+    ],
+    "pitfalls": [
+     "Hollow verb: the long ī/ā shortens before consonant endings — تُرِيدُ but تُرِدْنَ (you, women, want); أَرَادَ but أَرَدْتُ (I wanted).",
+     "Form IV: present with u-prefix — أُرِيدُ, يُرِيدُ (not *أَرِيدُ)."
+    ],
+    "subtleties": [
+     "Followed by a noun (أُرِيدُ خُبْزًا) or by أَنْ + subjunctive (أُرِيدُ أَنْ آكُلَ). In a shop, أُرِيدُ + مِنْ فَضْلِكَ is fine; أَوَدُّ is more formal."
+    ]
+   }
+  },
+  {
+   "id": "ar:ahabba",
+   "lemma": "أَحَبَّ",
+   "pos": "VERB",
+   "senses": [
+    "verb.like"
+   ],
+   "features": {
+    "root": "ح ب ب",
+    "rootClass": [
+     "doubled"
+    ],
+    "verbForm": "IV",
+    "present": "يُحِبُّ",
+    "masdar": [
+     "حُبّ",
+     "مَحَبَّة"
+    ],
+    "participles": [
+     {
+      "form": "مُحِبّ",
+      "kind": "active"
+     },
+     {
+      "form": "مَحْبُوب",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "a person or a thing (أُحِبُّ الشَّايَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "أَنْ + a verb in the subjunctive (أُحِبُّ أَنْ أَقْرَأَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ʾaḥabba",
+   "forms": {
+    "V;PST;1;SG": "أَحْبَبْتُ",
+    "V;PST;2;SG;MASC": "أَحْبَبْتَ",
+    "V;PST;3;SG;MASC": "أَحَبَّ",
+    "V;PST;1;PL": "أَحْبَبْنَا",
+    "V;PST;2;PL;MASC": "أَحْبَبْتُمْ",
+    "V;PST;3;PL;MASC": "أَحَبُّوا",
+    "V;PST;2;SG;FEM": "أَحْبَبْتِ",
+    "V;PST;3;SG;FEM": "أَحَبَّتْ",
+    "V;PST;2;PL;FEM": "أَحْبَبْتُنَّ",
+    "V;PST;3;PL;FEM": "أَحْبَبْنَ",
+    "V;PRS;IND;1;SG": "أُحِبُّ",
+    "V;PRS;IND;2;SG;MASC": "تُحِبُّ",
+    "V;PRS;IND;3;SG;MASC": "يُحِبُّ",
+    "V;PRS;IND;1;PL": "نُحِبُّ",
+    "V;PRS;IND;2;PL;MASC": "تُحِبُّونَ",
+    "V;PRS;IND;3;PL;MASC": "يُحِبُّونَ",
+    "V;PRS;IND;2;SG;FEM": "تُحِبِّينَ",
+    "V;PRS;IND;3;SG;FEM": "تُحِبُّ",
+    "V;PRS;IND;2;PL;FEM": "تُحْبِبْنَ",
+    "V;PRS;IND;3;PL;FEM": "يُحْبِبْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm; from “I like onions” to “I love you”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to like, to love",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.like"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ الْقِرَاءَةَ.",
+      "tr": "I like reading.",
+      "register": "neutral",
+      "context": "hobbies",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تُحِبُّ الشَّايَ بِالنَّعْنَاعِ؟",
+      "tr": "Do you like tea with mint?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "تُحِبُّ الْأُمُّ أَطْفَالَهَا.",
+      "tr": "The mother loves her children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّكَ.",
+      "tr": "I love you. (to a man)",
+      "register": "neutral",
+      "context": "romance",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أُحِبُّ أَنْ …",
+      "tr": "I would like to …"
+     },
+     {
+      "text": "أَحَبَّ مِنْ كُلِّ قَلْبِهِ",
+      "tr": "to love with all one’s heart"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مَنْ أَحَبَّ شَيْئًا أَكْثَرَ مِنْ ذِكْرِهِ",
+      "tr": "whoever loves a thing mentions it often",
+      "kind": "saying",
+      "meaning": "people keep talking about what they love",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "عَشِقَ",
+      "register": "literary",
+      "nuance": "to love passionately, be infatuated"
+     },
+     {
+      "word": "هَوِيَ",
+      "register": "poetic",
+      "nuance": "to love, be fond of — classical and poetic"
+     },
+     {
+      "word": "أَعْجَبَ",
+      "register": "neutral",
+      "nuance": "“to please”: أَعْجَبَنِي الْفِيلْمُ = I liked the film — the thing liked is the subject"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كَرِهَ",
+      "note": "to hate, dislike"
+     }
+    ],
+    "etymology": {
+     "text": "Form IV of the root ح ب ب; the verbal nouns are حُبّ (love) and مَحَبَّة (affection) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish muhabbet (friendly chat, affection) comes from Arabic مَحَبَّة, from the same root; Hebrew חִבָּה (ḥiba, fondness) is a Semitic cousin."
+    ],
+    "pitfalls": [
+     "Form IV: the present has u-prefixes — أُحِبُّ (ʾuḥibbu), يُحِبُّ — not *أَحِبُّ.",
+     "Doubled root: before a consonant ending the two b’s come apart — أَحْبَبْتُ (I loved), يُحْبِبْنَ (they, women, love)."
+    ],
+    "subtleties": [
+     "أُحِبُّ means both “I like” and “I love”; the object decides: أُحِبُّ الْبَصَلَ (I like onions) vs أُحِبُّكِ (I love you).",
+     "To like doing: أُحِبُّ + verbal noun (أُحِبُّ السِّبَاحَةَ) or أَنْ + subjunctive (أُحِبُّ أَنْ أَسْبَحَ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ishtara",
+   "lemma": "اِشْتَرَى",
+   "pos": "VERB",
+   "senses": [
+    "verb.buy"
+   ],
+   "features": {
+    "root": "ش ر ي",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "VIII",
+    "present": "يَشْتَرِي",
+    "masdar": [
+     "اِشْتِرَاء"
+    ],
+    "participles": [
+     {
+      "form": "مُشْتَرٍ",
+      "kind": "active"
+     },
+     {
+      "form": "مُشْتَرًى",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the thing bought",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "مِنْ",
+      "what": "the seller or the place (اِشْتَرَيْتُهُ مِنَ السُّوقِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ištarā",
+   "forms": {
+    "V;PST;1;SG": "اِشْتَرَيْتُ",
+    "V;PST;2;SG;MASC": "اِشْتَرَيْتَ",
+    "V;PST;3;SG;MASC": "اِشْتَرَى",
+    "V;PST;1;PL": "اِشْتَرَيْنَا",
+    "V;PST;2;PL;MASC": "اِشْتَرَيْتُمْ",
+    "V;PST;3;PL;MASC": "اِشْتَرَوْا",
+    "V;PST;2;SG;FEM": "اِشْتَرَيْتِ",
+    "V;PST;3;SG;FEM": "اِشْتَرَتْ",
+    "V;PST;2;PL;FEM": "اِشْتَرَيْتُنَّ",
+    "V;PST;3;PL;FEM": "اِشْتَرَيْنَ",
+    "V;PRS;IND;1;SG": "أَشْتَرِي",
+    "V;PRS;IND;2;SG;MASC": "تَشْتَرِي",
+    "V;PRS;IND;3;SG;MASC": "يَشْتَرِي",
+    "V;PRS;IND;1;PL": "نَشْتَرِي",
+    "V;PRS;IND;2;PL;MASC": "تَشْتَرُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَشْتَرُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَشْتَرِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَشْتَرِي",
+    "V;PRS;IND;2;PL;FEM": "تَشْتَرِينَ",
+    "V;PRS;IND;3;PL;FEM": "يَشْتَرِينَ",
+    "V;IMP;2;SG;MASC": "اِشْتَرِ",
+    "V;IMP;2;SG;FEM": "اِشْتَرِي",
+    "V;IMP;2;PL;MASC": "اِشْتَرُوا",
+    "V;IMP;2;PL;FEM": "اِشْتَرِينَ",
+    "V;SBJV;1;SG": "أَشْتَرِيَ",
+    "V;SBJV;2;SG;MASC": "تَشْتَرِيَ",
+    "V;SBJV;3;SG;MASC": "يَشْتَرِيَ",
+    "V;SBJV;1;PL": "نَشْتَرِيَ",
+    "V;SBJV;2;PL;MASC": "تَشْتَرُوا",
+    "V;SBJV;3;PL;MASC": "يَشْتَرُوا",
+    "V;SBJV;2;SG;FEM": "تَشْتَرِي",
+    "V;SBJV;3;SG;FEM": "تَشْتَرِيَ",
+    "V;SBJV;2;PL;FEM": "تَشْتَرِينَ",
+    "V;SBJV;3;PL;FEM": "يَشْتَرِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Markets, shopping, bargaining.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to buy, to purchase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.buy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِشْتَرَيْتُ خُبْزًا مِنَ الْمَخْبَزِ.",
+      "tr": "I bought bread at the bakery.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تَشْتَرِي لِلْعَشَاءِ؟",
+      "tr": "What are you buying for dinner?",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "نَشْتَرِي الْخُضَارَ مِنَ السُّوقِ كُلَّ أُسْبُوعٍ.",
+      "tr": "We buy vegetables at the market every week.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَتْ أُخْتِي فُسْتَانًا جَدِيدًا.",
+      "tr": "My sister bought a new dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِشْتَرَى بِالتَّقْسِيطِ",
+      "tr": "to buy in instalments"
+     },
+     {
+      "text": "اِشْتَرَى نَقْدًا",
+      "tr": "to buy for cash"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "اِبْتَاعَ",
+      "register": "formal",
+      "nuance": "to buy, purchase — written and formal style"
+     },
+     {
+      "word": "شَرَى",
+      "register": "literary",
+      "nuance": "classical form I: can mean “to buy” but also “to sell” (Wiktionary)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَاعَ",
+      "note": "to sell"
+     }
+    ],
+    "etymology": {
+     "text": "Form VIII (pattern اِفْتَعَلَ) of the root ش ر ي, whose form I شَرَى can mean both “to sell” and “to buy” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مُشْتَرٍ means “buyer” — and الْمُشْتَرِي is also the planet Jupiter."
+    ],
+    "pitfalls": [
+     "Weak final radical: the y appears as -ā, -ī or -ay — اِشْتَرَى (he bought), يَشْتَرِي (he buys), اِشْتَرَيْتُ (I bought), اِشْتَرَوْا (they bought).",
+     "تَشْتَرِينَ is both “you (one woman) buy” and “you (women) buy”."
+    ],
+    "subtleties": [
+     "The initial alif is a connecting hamza (hamzat al-waṣl): after a vowel it is silent — وَاشْتَرَى (wa-štarā)."
+    ]
+   }
+  },
+  {
+   "id": "ar:khubz",
+   "lemma": "خُبْز",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "food.bread"
+   ],
+   "features": {
+    "root": "خ ب ز",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḫubz",
+   "forms": {
+    "N;NOM;SG;INDF": "خُبْزٌ",
+    "N;ACC;SG;INDF": "خُبْزًا",
+    "N;GEN;SG;INDF": "خُبْزٍ",
+    "N;NOM;SG;DEF": "الْخُبْزُ",
+    "N;ACC;SG;DEF": "الْخُبْزَ",
+    "N;GEN;SG;DEF": "الْخُبْزِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The staple of every Arab table: flat bread, warm from the bakery.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bread",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.bread"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَأْكُلُ الْخُبْزَ مَعَ كُلِّ وَجْبَةٍ.",
+      "tr": "We eat bread with every meal.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ خُبْزًا طَازَجًا مِنَ الْمَخْبَزِ.",
+      "tr": "I bought fresh bread at the bakery.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ رَغِيفَ خُبْزٍ، مِنْ فَضْلِكَ.",
+      "tr": "A loaf of bread, please.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَغِيفُ خُبْزٍ",
+      "tr": "a loaf of (flat) bread"
+     },
+     {
+      "text": "خُبْزٌ عَرَبِيٌّ",
+      "tr": "Arabic (flat, pita) bread"
+     },
+     {
+      "text": "خُبْزٌ طَازَجٌ",
+      "tr": "fresh bread"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "بَيْنَنَا خُبْزٌ وَمِلْحٌ",
+      "tr": "there is bread and salt between us",
+      "kind": "saying",
+      "meaning": "we have eaten together — a bond of loyalty that must not be betrayed",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "عَيْش",
+      "register": "regional",
+      "nuance": "bread in Egyptian Arabic — literally “life”"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: often suspected to be a loan (an Aksumite or Old South Arabian forerunner of Geʿez ḫəbəst), the root خ ب ز being derived secondarily from خُبْزَة “a loaf”; or, both via Old Aramaic, from Old Georgian ჴუეზაჲ (quezay, “loaf of bread”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives خَبَزَ (to bake), مَخْبَز (bakery, the place pattern mafʿal) and خَبَّاز (baker)."
+    ],
+    "pitfalls": [
+     "A mass noun: “a loaf” is رَغِيفُ خُبْزٍ (or خُبْزَة), not *خُبْزٌ وَاحِدٌ."
+    ],
+    "subtleties": [
+     "Bread in general takes the article: أُحِبُّ الْخُبْزَ = I like bread; خُبْزًا (indefinite) = some bread: أَشْتَرِي خُبْزًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:jubn",
+   "lemma": "جُبْن",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "food.cheese",
+    "abstract.cowardice"
+   ],
+   "features": {
+    "root": "ج ب ن",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "jubn",
+   "forms": {
+    "N;NOM;SG;INDF": "جُبْنٌ",
+    "N;ACC;SG;INDF": "جُبْنًا",
+    "N;GEN;SG;INDF": "جُبْنٍ",
+    "N;NOM;SG;DEF": "الْجُبْنُ",
+    "N;ACC;SG;DEF": "الْجُبْنَ",
+    "N;GEN;SG;DEF": "الْجُبْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Breakfast tables: white cheese, olives and bread.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cheese",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.cheese"
+     },
+     {
+      "id": "s2",
+      "def": "cowardice (the same written form جُبْن; adjective جَبَان, coward)",
+      "register": [
+       "formal"
+      ],
+      "concept": "abstract.cowardice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "آكُلُ الْجُبْنَ عَلَى الْفَطُورِ.",
+      "tr": "I eat cheese for breakfast.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْجُبْنُ مَالِحٌ جِدًّا.",
+      "tr": "This cheese is very salty.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَتْ جُبْنًا أَبْيَضَ.",
+      "tr": "She bought white cheese.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "الْخَوْفُ طَبِيعِيٌّ، أَمَّا الْجُبْنُ فَعَيْبٌ.",
+      "tr": "Fear is natural, but cowardice is a flaw.",
+      "register": "formal",
+      "context": "character",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جُبْنٌ أَبْيَضُ",
+      "tr": "white cheese"
+     },
+     {
+      "text": "شَطِيرَةُ جُبْنٍ",
+      "tr": "a cheese sandwich"
+     },
+     {
+      "text": "خُبْزٌ وَجُبْنٌ",
+      "tr": "bread and cheese"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جُبْنَة",
+      "register": "neutral",
+      "nuance": "a cheese, a piece of cheese; in Levantine and Egyptian speech the usual word for cheese"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ج ب ن (j b n). Compare Hebrew גְּבִינָה (g’viná, “cheese”) and Classical Syriac ܓܒܬܐ (gḇettā, “cheese, curd”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew גְּבִינָה (gvina) is the same Semitic word."
+    ],
+    "pitfalls": [
+     "Same letters and vowels as جُبْن “cowardice” (from جَبُنَ, “to be cowardly”; جَبَان = coward) — only the context tells them apart."
+    ],
+    "subtleties": [
+     "A mass noun: cheese as food is جُبْن; one cheese or a piece is جُبْنَة."
+    ]
+   }
+  },
+  {
+   "id": "ar:bayd",
+   "lemma": "بَيْض",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "food.egg"
+   ],
+   "features": {
+    "root": "ب ي ض",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَيْضَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَيْضَتَانِ",
+    "declension": "triptote",
+    "unit": "بَيْضَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "bayḍ",
+   "forms": {
+    "N;NOM;COLL;INDF": "بَيْضٌ",
+    "N;ACC;COLL;INDF": "بَيْضًا",
+    "N;GEN;COLL;INDF": "بَيْضٍ",
+    "N;NOM;COLL;DEF": "الْبَيْضُ",
+    "N;ACC;COLL;DEF": "الْبَيْضَ",
+    "N;GEN;COLL;DEF": "الْبَيْضِ",
+    "N;NOM;SG;INDF": "بَيْضَةٌ",
+    "N;ACC;SG;INDF": "بَيْضَةً",
+    "N;GEN;SG;INDF": "بَيْضَةٍ",
+    "N;NOM;SG;DEF": "الْبَيْضَةُ",
+    "N;ACC;SG;DEF": "الْبَيْضَةَ",
+    "N;GEN;SG;DEF": "الْبَيْضَةِ",
+    "N;NOM;PL;INDF": "بَيْضَاتٌ",
+    "N;ACC;PL;INDF": "بَيْضَاتٍ",
+    "N;GEN;PL;INDF": "بَيْضَاتٍ",
+    "N;NOM;PL;DEF": "الْبَيْضَاتُ",
+    "N;ACC;PL;DEF": "الْبَيْضَاتِ",
+    "N;GEN;PL;DEF": "الْبَيْضَاتِ",
+    "N;NOM;DU;INDF": "بَيْضَتَانِ",
+    "N;ACC;DU;INDF": "بَيْضَتَيْنِ",
+    "N;GEN;DU;INDF": "بَيْضَتَيْنِ",
+    "N;NOM;DU;DEF": "الْبَيْضَتَانِ",
+    "N;ACC;DU;DEF": "الْبَيْضَتَيْنِ",
+    "N;GEN;DU;DEF": "الْبَيْضَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Breakfast: boiled or fried eggs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eggs (collective); بَيْضَة = one egg",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.egg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "آكُلُ بَيْضَتَيْنِ كُلَّ صَبَاحٍ.",
+      "tr": "I eat two eggs every morning.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْنَا بَيْضًا وَحَلِيبًا.",
+      "tr": "We bought eggs and milk.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَيْضُ الْمَسْلُوقُ صِحِّيٌّ.",
+      "tr": "Boiled eggs are healthy.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَيْضٌ مَسْلُوقٌ",
+      "tr": "boiled eggs"
+     },
+     {
+      "text": "بَيْضٌ مَقْلِيٌّ",
+      "tr": "fried eggs"
+     },
+     {
+      "text": "بَيَاضُ الْبَيْضِ",
+      "tr": "egg white"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "لَا تَضَعْ كُلَّ الْبَيْضِ فِي سَلَّةٍ وَاحِدَةٍ",
+      "tr": "don’t put all the eggs in one basket",
+      "kind": "saying",
+      "meaning": "don’t risk everything on one thing",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: بَيْض is the word in Standard Arabic and in the dialects.",
+    "etymology": {
+     "text": "Cognate with Hebrew בֵּיצָה (bēṣā) and Classical Syriac ܒܝܥܬܐ (bēʿṯā) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root ب ي ض also gives أَبْيَض, “white”.",
+     "Hebrew בֵּיצָה (beytsa), “egg”, is the same word."
+    ],
+    "pitfalls": [
+     "بَيْض = eggs (as food, in general), بَيْضَة = one egg, بَيْضَتَانِ = two eggs, ثَلَاثُ بَيْضَاتٍ = three eggs."
+    ],
+    "subtleties": [
+     "A collective is masculine singular for agreement: الْبَيْضُ طَازَجٌ (the eggs are fresh)."
+    ]
+   }
+  },
+  {
+   "id": "ar:lahm",
+   "lemma": "لَحْم",
+   "pos": "NOUN",
+   "senses": [
+    "food.meat"
+   ],
+   "features": {
+    "root": "ل ح م",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "لُحُوم",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "kinds of meat",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a substance (meat): not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "laḥm",
+   "forms": {
+    "N;NOM;SG;INDF": "لَحْمٌ",
+    "N;ACC;SG;INDF": "لَحْمًا",
+    "N;GEN;SG;INDF": "لَحْمٍ",
+    "N;NOM;SG;DEF": "اللَّحْمُ",
+    "N;ACC;SG;DEF": "اللَّحْمَ",
+    "N;GEN;SG;DEF": "اللَّحْمِ",
+    "N;NOM;PL;INDF": "لُحُومٌ",
+    "N;ACC;PL;INDF": "لُحُومًا",
+    "N;GEN;PL;INDF": "لُحُومٍ",
+    "N;NOM;PL;DEF": "اللُّحُومُ",
+    "N;ACC;PL;DEF": "اللُّحُومَ",
+    "N;GEN;PL;DEF": "اللُّحُومِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Feasts and grills; for some families an everyday food, for others a treat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "meat; flesh",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.meat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا آكُلُ اللَّحْمَ.",
+      "tr": "I don’t eat meat.",
+      "register": "neutral",
+      "context": "diet",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَى أَبِي لَحْمًا لِلْعَشَاءِ.",
+      "tr": "My father bought meat for dinner.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "اللُّحُومُ الْحَمْرَاءُ غَالِيَةٌ.",
+      "tr": "Red meats are expensive.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَحْمُ بَقَرٍ",
+      "tr": "beef"
+     },
+     {
+      "text": "لَحْمُ غَنَمٍ",
+      "tr": "mutton, lamb"
+     },
+     {
+      "text": "لَحْمٌ مَفْرُومٌ",
+      "tr": "minced meat"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "اللَّحْمُ لَكَ وَالْعَظْمُ لَنَا",
+      "tr": "the flesh is yours and the bones are ours",
+      "kind": "saying",
+      "meaning": "old words of parents handing a child to a teacher: be strict with him, only bring him back whole",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No neutral synonym; kinds of meat are named لَحْمُ + the animal (لَحْمُ بَقَرٍ, beef).",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *laḥm- (“food, eatables; meat, bread”); cognate with Aramaic laḥmā, Hebrew לֶחֶם (léḥem), Ugaritic lḥm, Geʿez lahm, all meaning “food” or “bread” — the senses split with the different diets of Arabia and the Fertile Crescent (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One Semitic word, two foods: Arabic لَحْم is “meat”, Hebrew לֶחֶם is “bread”. Bethlehem is Hebrew “house of bread” — and in Arabic بَيْتُ لَحْمٍ, “house of meat”."
+    ],
+    "pitfalls": [
+     "ل is a sun letter: the article is written with šadda — اللَّحْمُ (al-laḥmu)."
+    ],
+    "subtleties": [
+     "Meat in general takes the article (أُحِبُّ اللَّحْمَ); the plural لُحُوم means kinds of meat (in shops and on menus)."
+    ]
+   }
+  },
+  {
+   "id": "ar:samak",
+   "lemma": "سَمَك",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "food.fish",
+    "animal.fish"
+   ],
+   "features": {
+    "root": "س م ك",
+    "pattern": "فَعَل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسْمَاك",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "fish (many, or several kinds)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "سَمَكَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: ثَلَاثُ سَمَكَاتٍ (plural of سَمَكَة)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "سَمَكَتَانِ",
+    "declension": "triptote",
+    "unit": "سَمَكَة",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "samak",
+   "forms": {
+    "N;NOM;COLL;INDF": "سَمَكٌ",
+    "N;ACC;COLL;INDF": "سَمَكًا",
+    "N;GEN;COLL;INDF": "سَمَكٍ",
+    "N;NOM;COLL;DEF": "السَّمَكُ",
+    "N;ACC;COLL;DEF": "السَّمَكَ",
+    "N;GEN;COLL;DEF": "السَّمَكِ",
+    "N;NOM;SG;INDF": "سَمَكَةٌ",
+    "N;ACC;SG;INDF": "سَمَكَةً",
+    "N;GEN;SG;INDF": "سَمَكَةٍ",
+    "N;NOM;SG;DEF": "السَّمَكَةُ",
+    "N;ACC;SG;DEF": "السَّمَكَةَ",
+    "N;GEN;SG;DEF": "السَّمَكَةِ",
+    "N;NOM;PL;INDF": "أَسْمَاكٌ",
+    "N;ACC;PL;INDF": "أَسْمَاكًا",
+    "N;GEN;PL;INDF": "أَسْمَاكٍ",
+    "N;NOM;PL;DEF": "الْأَسْمَاكُ",
+    "N;ACC;PL;DEF": "الْأَسْمَاكَ",
+    "N;GEN;PL;DEF": "الْأَسْمَاكِ",
+    "N;NOM;DU;INDF": "سَمَكَتَانِ",
+    "N;ACC;DU;INDF": "سَمَكَتَيْنِ",
+    "N;GEN;DU;INDF": "سَمَكَتَيْنِ",
+    "N;NOM;DU;DEF": "السَّمَكَتَانِ",
+    "N;ACC;DU;DEF": "السَّمَكَتَيْنِ",
+    "N;GEN;DU;DEF": "السَّمَكَتَيْنِ"
+   },
+   "formsAlt": {
+    "N;NOM;PL;INDF": [
+     "سَمَكَاتٌ"
+    ],
+    "N;ACC;PL;INDF": [
+     "سَمَكَاتٍ"
+    ],
+    "N;GEN;PL;INDF": [
+     "سَمَكَاتٍ"
+    ],
+    "N;NOM;PL;DEF": [
+     "السَّمَكَاتُ"
+    ],
+    "N;ACC;PL;DEF": [
+     "السَّمَكَاتِ"
+    ],
+    "N;GEN;PL;DEF": [
+     "السَّمَكَاتِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The coast and the market: grilled fish by the sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fish (as food); سَمَكَة = one fish",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fish"
+     },
+     {
+      "id": "s2",
+      "def": "fish (the animal); one fish = سَمَكَة, plural أَسْمَاك",
+      "register": [
+       "neutral"
+      ],
+      "concept": "animal.fish"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَأْكُلُ السَّمَكَ يَوْمَ الْجُمُعَةِ.",
+      "tr": "We eat fish on Fridays.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ سَمَكَةً كَبِيرَةً.",
+      "tr": "I bought a big fish.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْبَحْرِ أَسْمَاكٌ كَثِيرَةٌ.",
+      "tr": "There are many fish in the sea.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     },
+     {
+      "text": "السَّمَكُ يَعِيشُ فِي الْمَاءِ.",
+      "tr": "Fish live in water.",
+      "register": "neutral",
+      "context": "biology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَمَكٌ مَشْوِيٌّ",
+      "tr": "grilled fish"
+     },
+     {
+      "text": "سُوقُ السَّمَكِ",
+      "tr": "the fish market"
+     },
+     {
+      "text": "صَيْدُ السَّمَكِ",
+      "tr": "fishing"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حُوت",
+      "register": "literary",
+      "nuance": "in the Qurʾān a (big) fish — Jonah’s; in Modern Standard Arabic “whale”"
+     }
+    ],
+    "etymology": {
+     "text": "From the root س م ك (s m k), “to be elevated, to be held up, to sustain” — hence “a source of sustenance, a staple food”; cognate with Hebrew סָמַךְ (samakh, “to lean, support”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "If Wiktionary’s etymology is right, fish was named as “what sustains you” — the Hebrew relative סָמַךְ means “to support”."
+    ],
+    "pitfalls": [
+     "سَمَك = fish as food or fish in general; one fish = سَمَكَة; أَسْمَاك = (many / kinds of) fish. The counting plural سَمَكَات (ثَلَاثُ سَمَكَاتٍ) is also used.",
+     "أَسْمَاك is a non-human plural: feminine singular agreement — أَسْمَاكٌ كَثِيرَةٌ."
+    ],
+    "subtleties": [
+     "Two fish: سَمَكَتَانِ (the dual of the unit noun)."
+    ]
+   }
+  },
+  {
+   "id": "ar:dajaj",
+   "lemma": "دَجَاج",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "food.chicken",
+    "animal.chicken"
+   ],
+   "features": {
+    "root": "د ج ج",
+    "pattern": "فَعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "دَجَاجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "hens (plural of دَجَاجَة)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "دَجَاجَتَانِ",
+    "declension": "triptote",
+    "unit": "دَجَاجَة",
+    "meaningForms": [
+     {
+      "form": "دَجَاجَة",
+      "what": "the unit noun: one hen",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "gender": "MASC",
+   "translit": "dajāj",
+   "forms": {
+    "N;NOM;COLL;INDF": "دَجَاجٌ",
+    "N;ACC;COLL;INDF": "دَجَاجًا",
+    "N;GEN;COLL;INDF": "دَجَاجٍ",
+    "N;NOM;COLL;DEF": "الدَّجَاجُ",
+    "N;ACC;COLL;DEF": "الدَّجَاجَ",
+    "N;GEN;COLL;DEF": "الدَّجَاجِ",
+    "N;NOM;SG;INDF": "دَجَاجَةٌ",
+    "N;ACC;SG;INDF": "دَجَاجَةً",
+    "N;GEN;SG;INDF": "دَجَاجَةٍ",
+    "N;NOM;SG;DEF": "الدَّجَاجَةُ",
+    "N;ACC;SG;DEF": "الدَّجَاجَةَ",
+    "N;GEN;SG;DEF": "الدَّجَاجَةِ",
+    "N;NOM;PL;INDF": "دَجَاجَاتٌ",
+    "N;ACC;PL;INDF": "دَجَاجَاتٍ",
+    "N;GEN;PL;INDF": "دَجَاجَاتٍ",
+    "N;NOM;PL;DEF": "الدَّجَاجَاتُ",
+    "N;ACC;PL;DEF": "الدَّجَاجَاتِ",
+    "N;GEN;PL;DEF": "الدَّجَاجَاتِ",
+    "N;NOM;DU;INDF": "دَجَاجَتَانِ",
+    "N;ACC;DU;INDF": "دَجَاجَتَيْنِ",
+    "N;GEN;DU;INDF": "دَجَاجَتَيْنِ",
+    "N;NOM;DU;DEF": "الدَّجَاجَتَانِ",
+    "N;ACC;DU;DEF": "الدَّجَاجَتَيْنِ",
+    "N;GEN;DU;DEF": "الدَّجَاجَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grilled chicken with rice — the everyday feast.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chicken (as food); chickens, poultry",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.chicken"
+     },
+     {
+      "id": "s2",
+      "def": "دَجَاجَة: a hen, one chicken",
+      "register": [
+       "neutral"
+      ],
+      "concept": "animal.chicken"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَطْبُخُ الدَّجَاجَ مَعَ الْأَرُزِّ.",
+      "tr": "We cook the chicken with rice.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الدَّجَاجَ الْمَشْوِيَّ.",
+      "tr": "I like grilled chicken.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ الدَّجَاجَةُ تَبِيضُ كُلَّ يَوْمٍ.",
+      "tr": "This hen lays an egg every day.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "دَجَاجٌ مَشْوِيٌّ",
+      "tr": "grilled chicken"
+     },
+     {
+      "text": "حَسَاءُ الدَّجَاجِ",
+      "tr": "chicken soup"
+     },
+     {
+      "text": "صَدْرُ دَجَاجٍ",
+      "tr": "chicken breast"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "أَيُّهُمَا أَسْبَقُ: الدَّجَاجَةُ أَمِ الْبَيْضَةُ؟",
+      "tr": "which came first: the chicken or the egg?",
+      "kind": "saying",
+      "meaning": "a question with no clear answer",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "فَرُّوج",
+      "register": "regional",
+      "nuance": "a (young) chicken, especially grilled — Levantine and Iraqi usage"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: unknown, probably onomatopoeic — compare دِجْ دِجْ (dij dij), the call for chickens, and دَجْدَجَ, “to call a chicken”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A rooster is a different word: دِيك."
+    ],
+    "pitfalls": [
+     "Food: الدَّجَاجُ (collective); one bird: دَجَاجَةٌ (a hen, a chicken); two: دَجَاجَتَانِ."
+    ],
+    "subtleties": [
+     "Wiktionary also gives the pronunciation dijāj (دِجَاج)."
+    ]
+   }
+  },
+  {
+   "id": "ar:aruzz",
+   "lemma": "أَرُزّ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "food.rice"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Greek/Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ʾaruzz",
+   "forms": {
+    "N;NOM;SG;INDF": "أَرُزٌّ",
+    "N;ACC;SG;INDF": "أَرُزًّا",
+    "N;GEN;SG;INDF": "أَرُزٍّ",
+    "N;NOM;SG;DEF": "الْأَرُزُّ",
+    "N;ACC;SG;DEF": "الْأَرُزَّ",
+    "N;GEN;SG;DEF": "الْأَرُزِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses أَرُزّ as “alternative form of رُزّ (ruzz)”, and رُزّ means “rice”; أَرُزّ is the Standard Arabic form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The base of many dishes: rice with chicken, rice with vegetables.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rice (the grain and the cooked food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.rice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي تَطْبُخُ الْأَرُزَّ بِالْخُضَارِ.",
+      "tr": "My mother cooks rice with vegetables.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ صَحْنَ أَرُزٍّ، مِنْ فَضْلِكَ.",
+      "tr": "I’d like a plate of rice, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "يُزْرَعُ الْأَرُزُّ فِي مِصْرَ.",
+      "tr": "Rice is grown in Egypt.",
+      "register": "neutral",
+      "context": "agriculture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَرُزٌّ أَبْيَضُ",
+      "tr": "white rice"
+     },
+     {
+      "text": "أَرُزٌّ بِالدَّجَاجِ",
+      "tr": "rice with chicken"
+     },
+     {
+      "text": "حَبَّةُ أَرُزٍّ",
+      "tr": "a grain of rice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رُزّ",
+      "register": "neutral",
+      "nuance": "the other common form (ruzz) — Wiktionary’s main entry; usual in many dialects"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: an alternative form of رُزّ (ruzz), borrowed from Aramaic ʔăruzzā / ʔuruzzā; the etymology tree goes back through Ancient Greek ὄρυζα (óruza) to an Iranian word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Greek word in Arabic: ὄρυζα → Aramaic → Arabic الرُّزّ, which gave Spanish and Portuguese arroz."
+    ],
+    "pitfalls": [
+     "Not أَرْز (ʾarz): that is the cedar, the tree on Lebanon’s flag."
+    ],
+    "subtleties": [
+     "A mass noun: one grain is حَبَّةُ أَرُزٍّ; dishes are named by what is in them: أَرُزٌّ بِالدَّجَاجِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:hasa",
+   "lemma": "حَسَاء",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "food.soup"
+   ],
+   "features": {
+    "root": "ح س و",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḥasāʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "حَسَاءٌ",
+    "N;ACC;SG;INDF": "حَسَاءً",
+    "N;GEN;SG;INDF": "حَسَاءٍ",
+    "N;NOM;SG;DEF": "الْحَسَاءُ",
+    "N;ACC;SG;DEF": "الْحَسَاءَ",
+    "N;GEN;SG;DEF": "الْحَسَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Winter evenings and Ramadan tables: a bowl of lentil soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soup",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.soup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَسَاءُ سَاخِنٌ جِدًّا.",
+      "tr": "The soup is very hot.",
+      "register": "neutral",
+      "context": "table",
+      "sense": "s1"
+     },
+     {
+      "text": "تَطْبُخُ أُمِّي حَسَاءَ الْعَدَسِ فِي الشِّتَاءِ.",
+      "tr": "My mother cooks lentil soup in winter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ الْحَسَاءَ عِنْدَمَا أَمْرَضُ.",
+      "tr": "I have soup when I’m ill.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَسَاءُ الْعَدَسِ",
+      "tr": "lentil soup"
+     },
+     {
+      "text": "حَسَاءُ الدَّجَاجِ",
+      "tr": "chicken soup"
+     },
+     {
+      "text": "طَبَقُ حَسَاءٍ",
+      "tr": "a bowl of soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شُورْبَة",
+      "register": "neutral",
+      "nuance": "the everyday word for soup in most Arab countries and on menus — the same word as Turkish çorba (from Persian)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no etymology section; the word belongs to the root ح س و of حَسَا, “to sip”: soup is “what is sipped”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Soup is drunk, not eaten, in Arabic: نَشْرَبُ الْحَسَاءَ."
+    ],
+    "pitfalls": [
+     "It ends in hamza after ā: the indefinite accusative is حَسَاءً, with no extra alif."
+    ],
+    "subtleties": [
+     "In speech and on most menus you will read شُورْبَة; حَسَاء is the Standard Arabic word of books and the news."
+    ]
+   }
+  },
+  {
+   "id": "ar:salata",
+   "lemma": "سَلَطَة",
+   "pos": "NOUN",
+   "senses": [
+    "food.salad"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian insalata): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَلَطَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَلَطَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "salaṭa",
+   "forms": {
+    "N;NOM;SG;INDF": "سَلَطَةٌ",
+    "N;ACC;SG;INDF": "سَلَطَةً",
+    "N;GEN;SG;INDF": "سَلَطَةٍ",
+    "N;NOM;SG;DEF": "السَّلَطَةُ",
+    "N;ACC;SG;DEF": "السَّلَطَةَ",
+    "N;GEN;SG;DEF": "السَّلَطَةِ",
+    "N;NOM;PL;INDF": "سَلَطَاتٌ",
+    "N;ACC;PL;INDF": "سَلَطَاتٍ",
+    "N;GEN;PL;INDF": "سَلَطَاتٍ",
+    "N;NOM;PL;DEF": "السَّلَطَاتُ",
+    "N;ACC;PL;DEF": "السَّلَطَاتِ",
+    "N;GEN;PL;DEF": "السَّلَطَاتِ",
+    "N;NOM;DU;INDF": "سَلَطَتَانِ",
+    "N;ACC;DU;INDF": "سَلَطَتَيْنِ",
+    "N;GEN;DU;INDF": "سَلَطَتَيْنِ",
+    "N;NOM;DU;DEF": "السَّلَطَتَانِ",
+    "N;ACC;DU;DEF": "السَّلَطَتَيْنِ",
+    "N;GEN;DU;DEF": "السَّلَطَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh and colourful: the salad that comes with every meal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salad (the dish)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ السَّلَطَةَ مَعَ السَّمَكِ.",
+      "tr": "I like salad with fish.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تُرِيدُ سَلَطَةً؟",
+      "tr": "Would you like a salad?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "يُقَدِّمُ الْمَطْعَمُ سَلَطَاتٍ كَثِيرَةً.",
+      "tr": "The restaurant serves many salads.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَلَطَةُ خُضَارٍ",
+      "tr": "vegetable salad"
+     },
+     {
+      "text": "سَلَطَةُ فَوَاكِهَ",
+      "tr": "fruit salad"
+     },
+     {
+      "text": "سَلَطَةٌ خَضْرَاءُ",
+      "tr": "green salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The only common word; kinds of salad are named after what is in them (سَلَطَةُ خُضَارٍ).",
+    "etymology": {
+     "text": "Wiktionary gives no etymology; it is a European loanword, the Italian (in)salata (“salted”) that Greek σαλάτα and Turkish salata also borrowed.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One dish, one word around the Mediterranean: Arabic سَلَطَة, Greek σαλάτα, Turkish salata, Italian insalata."
+    ],
+    "pitfalls": [
+     "Unvocalized سلطة is also سُلْطَة (sulṭa), “power, authority” (plural سُلُطَات) — read the vowels."
+    ],
+    "subtleties": [
+     "س is a sun letter: السَّلَطَةُ (as-salaṭa)."
+    ]
+   }
+  },
+  {
+   "id": "ar:fakiha",
+   "lemma": "فَاكِهَة",
+   "pos": "NOUN",
+   "senses": [
+    "food.fruit"
+   ],
+   "features": {
+    "root": "ف ك ه",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "فَوَاكِه",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فَاكِهَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "fākiha",
+   "forms": {
+    "N;NOM;SG;INDF": "فَاكِهَةٌ",
+    "N;ACC;SG;INDF": "فَاكِهَةً",
+    "N;GEN;SG;INDF": "فَاكِهَةٍ",
+    "N;NOM;SG;DEF": "الْفَاكِهَةُ",
+    "N;ACC;SG;DEF": "الْفَاكِهَةَ",
+    "N;GEN;SG;DEF": "الْفَاكِهَةِ",
+    "N;NOM;PL;INDF": "فَوَاكِهُ",
+    "N;ACC;PL;INDF": "فَوَاكِهَ",
+    "N;GEN;PL;INDF": "فَوَاكِهَ",
+    "N;NOM;PL;DEF": "الْفَوَاكِهُ",
+    "N;ACC;PL;DEF": "الْفَوَاكِهَ",
+    "N;GEN;PL;DEF": "الْفَوَاكِهِ",
+    "N;NOM;DU;INDF": "فَاكِهَتَانِ",
+    "N;ACC;DU;INDF": "فَاكِهَتَيْنِ",
+    "N;GEN;DU;INDF": "فَاكِهَتَيْنِ",
+    "N;NOM;DU;DEF": "الْفَاكِهَتَانِ",
+    "N;ACC;DU;DEF": "الْفَاكِهَتَيْنِ",
+    "N;GEN;DU;DEF": "الْفَاكِهَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Markets full of colour: oranges, grapes, figs and dates.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fruit (a fruit; fruit in general)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fruit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "آكُلُ الْفَاكِهَةَ بَعْدَ الْغَدَاءِ.",
+      "tr": "I eat fruit after lunch.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَوْزُ فَاكِهَةٌ لَذِيذَةٌ.",
+      "tr": "The banana is a tasty fruit.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي السُّوقِ فَوَاكِهُ كَثِيرَةٌ.",
+      "tr": "There are lots of fruits at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَصِيرُ فَوَاكِهَ",
+      "tr": "fruit juice"
+     },
+     {
+      "text": "سَلَطَةُ فَوَاكِهَ",
+      "tr": "fruit salad"
+     },
+     {
+      "text": "فَاكِهَةُ الْمَوْسِمِ",
+      "tr": "fruit of the season"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ثَمَرَة",
+      "register": "neutral",
+      "nuance": "the fruit of any plant, also figurative “result”; فَاكِهَة is fruit as food"
+     }
+    ],
+    "etymology": {
+     "text": "A word of the root ف ك ه (Wiktionary); Wiktionary’s entry has no etymology section.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Fruit and fun share a root: فُكَاهَة means “humour, a joke” and فَكِه “cheerful”."
+    ],
+    "pitfalls": [
+     "The plural فَوَاكِهُ is a diptote: no tanwīn — فَوَاكِهُ, and فَوَاكِهَ for both accusative and genitive."
+    ],
+    "subtleties": [
+     "The singular also means fruit in general: أُحِبُّ الْفَاكِهَةَ (I like fruit); فَوَاكِه stresses several kinds."
+    ]
+   }
+  },
+  {
+   "id": "ar:tuffah",
+   "lemma": "تُفَّاح",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "food.apple"
+   ],
+   "features": {
+    "root": "ت ف ح",
+    "pattern": "فُعَّال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "تُفَّاحَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "تُفَّاحَتَانِ",
+    "declension": "triptote",
+    "unit": "تُفَّاحَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "tuffāḥ",
+   "forms": {
+    "N;NOM;COLL;INDF": "تُفَّاحٌ",
+    "N;ACC;COLL;INDF": "تُفَّاحًا",
+    "N;GEN;COLL;INDF": "تُفَّاحٍ",
+    "N;NOM;COLL;DEF": "التُّفَّاحُ",
+    "N;ACC;COLL;DEF": "التُّفَّاحَ",
+    "N;GEN;COLL;DEF": "التُّفَّاحِ",
+    "N;NOM;SG;INDF": "تُفَّاحَةٌ",
+    "N;ACC;SG;INDF": "تُفَّاحَةً",
+    "N;GEN;SG;INDF": "تُفَّاحَةٍ",
+    "N;NOM;SG;DEF": "التُّفَّاحَةُ",
+    "N;ACC;SG;DEF": "التُّفَّاحَةَ",
+    "N;GEN;SG;DEF": "التُّفَّاحَةِ",
+    "N;NOM;PL;INDF": "تُفَّاحَاتٌ",
+    "N;ACC;PL;INDF": "تُفَّاحَاتٍ",
+    "N;GEN;PL;INDF": "تُفَّاحَاتٍ",
+    "N;NOM;PL;DEF": "التُّفَّاحَاتُ",
+    "N;ACC;PL;DEF": "التُّفَّاحَاتِ",
+    "N;GEN;PL;DEF": "التُّفَّاحَاتِ",
+    "N;NOM;DU;INDF": "تُفَّاحَتَانِ",
+    "N;ACC;DU;INDF": "تُفَّاحَتَيْنِ",
+    "N;GEN;DU;INDF": "تُفَّاحَتَيْنِ",
+    "N;NOM;DU;DEF": "التُّفَّاحَتَانِ",
+    "N;ACC;DU;DEF": "التُّفَّاحَتَيْنِ",
+    "N;GEN;DU;DEF": "التُّفَّاحَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy and everyday; red, green and yellow at the greengrocer’s.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "apples (collective); تُفَّاحَة = one apple",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.apple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "آكُلُ تُفَّاحَةً كُلَّ يَوْمٍ.",
+      "tr": "I eat an apple every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تُحِبُّ التُّفَّاحَ الْأَحْمَرَ؟",
+      "tr": "Do you like red apples?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَتْ ثَلَاثَ تُفَّاحَاتٍ.",
+      "tr": "She bought three apples.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَصِيرُ تُفَّاحٍ",
+      "tr": "apple juice"
+     },
+     {
+      "text": "تُفَّاحٌ أَخْضَرُ",
+      "tr": "green apples"
+     },
+     {
+      "text": "شَجَرَةُ تُفَّاحٍ",
+      "tr": "an apple tree"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in common use.",
+    "etymology": {
+     "text": "Wiktionary: according to Fraenkel a borrowing from Aramaic (the etymon is not clearly attested there); compare Hebrew תַּפּוּחַ (tappūaḥ), Ugaritic tpḥ and Punic *tappūḥ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew תַּפּוּחַ (tapuach) is the same word — and Hebrew “potato” is תַּפּוּחַ אֲדָמָה, “apple of the earth”, like French pomme de terre."
+    ],
+    "pitfalls": [
+     "التُّفَّاحُ = apples (in general), تُفَّاحَةٌ = one apple, ثَلَاثُ تُفَّاحَاتٍ = three apples."
+    ],
+    "subtleties": [
+     "ت is a sun letter: التُّفَّاحُ (at-tuffāḥ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:sukkar",
+   "lemma": "سُكَّر",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "food.sugar",
+    "health.diabetes"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Sanskrit): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "مَرَضُ السُّكَّرِ",
+      "what": "in full (diabetes); informally سُكَّر",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "gender": "MASC",
+   "translit": "sukkar",
+   "forms": {
+    "N;NOM;SG;INDF": "سُكَّرٌ",
+    "N;ACC;SG;INDF": "سُكَّرًا",
+    "N;GEN;SG;INDF": "سُكَّرٍ",
+    "N;NOM;SG;DEF": "السُّكَّرُ",
+    "N;ACC;SG;DEF": "السُّكَّرَ",
+    "N;GEN;SG;DEF": "السُّكَّرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet tea and sweet coffee: “how much sugar?” is a real question.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sugar",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.sugar"
+     },
+     {
+      "id": "s2",
+      "def": "diabetes (مَرَضُ السُّكَّرِ, informally سُكَّر)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "health.diabetes"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الشَّايَ بِدُونِ سُكَّرٍ.",
+      "tr": "I drink tea without sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تُرِيدُ سُكَّرًا فِي الْقَهْوَةِ؟",
+      "tr": "Do you want sugar in your coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَ جَدِّي مَرَضُ السُّكَّرِ.",
+      "tr": "My grandfather has diabetes.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِلْعَقَةُ سُكَّرٍ",
+      "tr": "a spoonful of sugar"
+     },
+     {
+      "text": "بِدُونِ سُكَّرٍ",
+      "tr": "without sugar"
+     },
+     {
+      "text": "سُكَّرٌ قَلِيلٌ",
+      "tr": "a little sugar"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in common use.",
+    "etymology": {
+     "text": "Borrowed from Middle Persian šakar, from Gandhari śakara, from Sanskrit शर्करा (śárkarā), from Proto-Indo-European *ḱorkeh₂ (“gravel”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English sugar, German Zucker and Spanish azúcar came to Europe through Arabic سُكَّر; Greek ζάχαρη and Russian сахар are cousins from the same Sanskrit word."
+    ],
+    "pitfalls": [
+     "Double k (šadda): سُكَّر (sukkar). سُكْر (sukr) is “drunkenness” and سَكَر (sakar) “an intoxicant” (Wiktionary)."
+    ],
+    "subtleties": [
+     "In everyday talk سُكَّر also means diabetes; the medical word is السُّكَّرِيّ."
+    ]
+   }
+  },
+  {
+   "id": "ar:milh",
+   "lemma": "مِلْح",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "food.salt"
+   ],
+   "features": {
+    "root": "م ل ح",
+    "pattern": "فِعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "milḥ",
+   "forms": {
+    "N;NOM;SG;INDF": "مِلْحٌ",
+    "N;ACC;SG;INDF": "مِلْحًا",
+    "N;GEN;SG;INDF": "مِلْحٍ",
+    "N;NOM;SG;DEF": "الْمِلْحُ",
+    "N;ACC;SG;DEF": "الْمِلْحَ",
+    "N;GEN;SG;DEF": "الْمِلْحِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Salt on the table — and the old bond of “bread and salt”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salt",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَسَاءُ يَحْتَاجُ إِلَى مِلْحٍ.",
+      "tr": "The soup needs salt.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا تَضَعْ مِلْحًا كَثِيرًا.",
+      "tr": "Don’t put in too much salt.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْطِنِي الْمِلْحَ، مِنْ فَضْلِكَ.",
+      "tr": "Pass me the salt, please.",
+      "register": "neutral",
+      "context": "table",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِلْحُ الطَّعَامِ",
+      "tr": "table salt"
+     },
+     {
+      "text": "رَشَّةُ مِلْحٍ",
+      "tr": "a pinch of salt"
+     },
+     {
+      "text": "قَلِيلٌ مِنَ الْمِلْحِ",
+      "tr": "a little salt"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "بَيْنَنَا خُبْزٌ وَمِلْحٌ",
+      "tr": "there is bread and salt between us",
+      "kind": "saying",
+      "meaning": "we have eaten together — a bond of loyalty that must not be betrayed",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in common use.",
+    "etymology": {
+     "text": "Inherited from Proto-West Semitic *milḥ- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root: مَالِح (salty) and مَلَّاح (sailor). Hebrew מֶלַח (melach) is the same word — the Dead Sea is יָם הַמֶּלַח, “the Sea of Salt”."
+    ],
+    "pitfalls": [
+     "ح (ḥ), not خ or ه: milḥ — and the vowel is i: مِلْح, not *مَلْح."
+    ],
+    "subtleties": [
+     "A mass noun: “a pinch of salt” = رَشَّةُ مِلْحٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:maa",
+   "lemma": "مَاء",
+   "pos": "NOUN",
+   "senses": [
+    "drink.water"
+   ],
+   "features": {
+    "root": "م و ه",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مِيَاه",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "waters (seas, springs; also the water supply: الْمِيَاهُ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a substance (water): not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "māʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "مَاءٌ",
+    "N;ACC;SG;INDF": "مَاءً",
+    "N;GEN;SG;INDF": "مَاءٍ",
+    "N;NOM;SG;DEF": "الْمَاءُ",
+    "N;ACC;SG;DEF": "الْمَاءَ",
+    "N;GEN;SG;DEF": "الْمَاءِ",
+    "N;NOM;PL;INDF": "مِيَاهٌ",
+    "N;ACC;PL;INDF": "مِيَاهًا",
+    "N;GEN;PL;INDF": "مِيَاهٍ",
+    "N;NOM;PL;DEF": "الْمِيَاهُ",
+    "N;ACC;PL;DEF": "الْمِيَاهَ",
+    "N;GEN;PL;DEF": "الْمِيَاهِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Life itself in a hot climate; the first thing offered to a guest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "water",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.water"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ كَأْسَ مَاءٍ، مِنْ فَضْلِكَ.",
+      "tr": "A glass of water, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْرَبْ مَاءً كَثِيرًا فِي الصَّيْفِ.",
+      "tr": "Drink lots of water in summer.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمِيَاهُ الْمَعْدِنِيَّةُ غَالِيَةٌ هُنَا.",
+      "tr": "Mineral water is expensive here.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَاءٌ بَارِدٌ",
+      "tr": "cold water"
+     },
+     {
+      "text": "مِيَاهٌ مَعْدِنِيَّةٌ",
+      "tr": "mineral water"
+     },
+     {
+      "text": "كَأْسُ مَاءٍ",
+      "tr": "a glass of water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ",
+      "tr": "and We made every living thing from water",
+      "kind": "quote",
+      "meaning": "water as the origin of life",
+      "register": "religious",
+      "source": "Qurʾān 21:30"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in prose; poetic and dialect forms (مَيّ, mayya) exist.",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *māy-, from Proto-Afroasiatic *maʔ-; the plural was reanalyzed as if from a root م و ه. Cognate with Hebrew מַיִם (máyim) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מַיִם (mayim) is the same word; in many dialects “water” is mayya."
+    ],
+    "pitfalls": [
+     "Accusative indefinite مَاءً — no extra alif after the hamza.",
+     "The plural مِيَاه means waters: mineral water, sea water, the water supply."
+    ],
+    "subtleties": [
+     "Water is not counted: one glass is كَأْسُ مَاءٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:shay",
+   "lemma": "شَاي",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "drink.tea"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Chinese): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "šāy",
+   "forms": {
+    "N;NOM;SG;INDF": "شَايٌ",
+    "N;ACC;SG;INDF": "شَايًا",
+    "N;GEN;SG;INDF": "شَايٍ",
+    "N;NOM;SG;DEF": "الشَّايُ",
+    "N;ACC;SG;DEF": "الشَّايَ",
+    "N;GEN;SG;DEF": "الشَّايِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hospitality in a small glass: sweet tea, often with mint.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tea (the drink and the plant)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.tea"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَشْرَبُ الشَّايَ بَعْدَ الْغَدَاءِ.",
+      "tr": "We drink tea after lunch.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "شَايٌ بِالنَّعْنَاعِ، مِنْ فَضْلِكَ.",
+      "tr": "Mint tea, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تُحِبُّ الشَّايَ الْأَخْضَرَ؟",
+      "tr": "Do you like green tea?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَأْسُ شَايٍ",
+      "tr": "a glass of tea"
+     },
+     {
+      "text": "شَايٌ بِالْحَلِيبِ",
+      "tr": "tea with milk"
+     },
+     {
+      "text": "شَايٌ أَخْضَرُ",
+      "tr": "green tea"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in common use.",
+    "etymology": {
+     "text": "Borrowed from Persian چای (čây, “tea”), possibly from Chinese 茶葉 (“tea leaves”); ultimately from Chinese 茶 (chá, “tea”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word across your languages: Arabic شَاي, Turkish çay, Russian чай and Greek τσάι all go back to Chinese 茶 (chá)."
+    ],
+    "pitfalls": [
+     "In many Arab countries tea comes in a small glass: كَأْسُ شَايٍ, not فِنْجَانُ شَايٍ."
+    ],
+    "subtleties": [
+     "The final ي is a consonant here: شَايٌ (šāyun), شَايًا, شَايٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:qahwa",
+   "lemma": "قَهْوَة",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "drink.coffee",
+    "place.cafe"
+   ],
+   "features": {
+    "root": "ق ه و",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قَهَاوٍ",
+      "kind": "broken",
+      "pattern": "فَعَالٍ",
+      "declension": "defective",
+      "note": "cafés (colloquial; in MSA مَقَاهٍ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.cafe",
+     "axis": "register",
+     "value": "colloquial (Egypt and other dialects): الْقَهْوَة"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "qahwa",
+   "forms": {
+    "N;NOM;SG;INDF": "قَهْوَةٌ",
+    "N;ACC;SG;INDF": "قَهْوَةً",
+    "N;GEN;SG;INDF": "قَهْوَةٍ",
+    "N;NOM;SG;DEF": "الْقَهْوَةُ",
+    "N;ACC;SG;DEF": "الْقَهْوَةَ",
+    "N;GEN;SG;DEF": "الْقَهْوَةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Strong, small and social: cardamom coffee for guests.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "coffee (the drink)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.coffee"
+     },
+     {
+      "id": "s2",
+      "def": "café, coffee house (Egyptian and other dialects; Standard مَقْهًى)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "place.cafe"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ فِنْجَانَ قَهْوَةٍ كُلَّ صَبَاحٍ.",
+      "tr": "I drink a cup of coffee every morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقَهْوَةُ الْعَرَبِيَّةُ رَمْزٌ لِلضِّيَافَةِ.",
+      "tr": "Arabic coffee is a symbol of hospitality.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "يَجْلِسُ جَدِّي فِي الْقَهْوَةِ مَعَ أَصْدِقَائِهِ.",
+      "tr": "My grandfather sits in the café with his friends.",
+      "register": "colloquial",
+      "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "نَلْتَقِي فِي الْقَهْوَةِ بَعْدَ الْعَمَلِ.",
+      "tr": "We meet at the café after work.",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِنْجَانُ قَهْوَةٍ",
+      "tr": "a cup of coffee"
+     },
+     {
+      "text": "قَهْوَةٌ بِالْحَلِيبِ",
+      "tr": "coffee with milk"
+     },
+     {
+      "text": "قَهْوَةٌ سَادَةٌ",
+      "tr": "black coffee without sugar"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بُنّ",
+      "register": "neutral",
+      "nuance": "coffee beans, ground coffee — not the drink"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: medieval philologists derived it from the root ق ه ي (relating to satiety) with the meaning “wine”; the word for a brew, first mulled wine, later passed to coffee. The ultimate origin is disputed.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Coffee, German Kaffee, Turkish kahve, Greek καφές and Russian кофе all go back to Arabic قَهْوَة (through Ottoman Turkish kahve)."
+    ],
+    "pitfalls": [
+     "Feminine: الْقَهْوَةُ سَاخِنَةٌ (the coffee is hot), not *سَاخِنٌ."
+    ],
+    "subtleties": [
+     "In Egypt قَهْوَة is also the café; Standard Arabic says مَقْهًى (the place pattern mafʿal)."
+    ]
+   }
+  },
+  {
+   "id": "ar:halib",
+   "lemma": "حَلِيب",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "drink.milk"
+   ],
+   "features": {
+    "root": "ح ل ب",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḥalīb",
+   "forms": {
+    "N;NOM;SG;INDF": "حَلِيبٌ",
+    "N;ACC;SG;INDF": "حَلِيبًا",
+    "N;GEN;SG;INDF": "حَلِيبٍ",
+    "N;NOM;SG;DEF": "الْحَلِيبُ",
+    "N;ACC;SG;DEF": "الْحَلِيبَ",
+    "N;GEN;SG;DEF": "الْحَلِيبِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Children’s breakfasts and milky tea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "milk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.milk"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَشْرَبُ الطِّفْلُ الْحَلِيبَ قَبْلَ النَّوْمِ.",
+      "tr": "The child drinks milk before bed.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ بِالْحَلِيبِ.",
+      "tr": "I drink my coffee with milk.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْنَا لِتْرًا مِنَ الْحَلِيبِ.",
+      "tr": "We bought a litre of milk.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَأْسُ حَلِيبٍ",
+      "tr": "a glass of milk"
+     },
+     {
+      "text": "حَلِيبٌ طَازَجٌ",
+      "tr": "fresh milk"
+     },
+     {
+      "text": "حَلِيبُ الْبَقَرِ",
+      "tr": "cow’s milk"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَبَن",
+      "register": "regional",
+      "nuance": "milk in Classical Arabic and in Egypt; in the Levant and the Gulf it means yogurt or buttermilk"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ḥalīb- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew חָלָב (chalav), “milk”, is the same word; the Arabic verb حَلَبَ means “to milk”."
+    ],
+    "pitfalls": [
+     "ح (ḥ), not خ: ḥalīb."
+    ],
+    "subtleties": [
+     "Which word for milk you hear depends on the country: حَلِيب is understood everywhere and is the Standard word."
+    ]
+   }
+  },
+  {
+   "id": "ar:asir",
+   "lemma": "عَصِير",
+   "pos": "NOUN",
+   "senses": [
+    "drink.juice"
+   ],
+   "features": {
+    "root": "ع ص ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "عَصَائِر",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "note": "juices, kinds of juice",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a drink: two juices = كَأْسَا عَصِيرٍ"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ʿaṣīr",
+   "forms": {
+    "N;NOM;SG;INDF": "عَصِيرٌ",
+    "N;ACC;SG;INDF": "عَصِيرًا",
+    "N;GEN;SG;INDF": "عَصِيرٍ",
+    "N;NOM;SG;DEF": "الْعَصِيرُ",
+    "N;ACC;SG;DEF": "الْعَصِيرَ",
+    "N;GEN;SG;DEF": "الْعَصِيرِ",
+    "N;NOM;PL;INDF": "عَصَائِرُ",
+    "N;ACC;PL;INDF": "عَصَائِرَ",
+    "N;GEN;PL;INDF": "عَصَائِرَ",
+    "N;NOM;PL;DEF": "الْعَصَائِرُ",
+    "N;ACC;PL;DEF": "الْعَصَائِرَ",
+    "N;GEN;PL;DEF": "الْعَصَائِرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Juice bars and fresh orange juice on a hot day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "juice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.juice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ عَصِيرَ بُرْتُقَالٍ، مِنْ فَضْلِكَ.",
+      "tr": "An orange juice, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "يَشْرَبُ الْأَطْفَالُ الْعَصِيرَ.",
+      "tr": "The children drink juice.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمَحَلِّ عَصَائِرُ طَازَجَةٌ.",
+      "tr": "The shop has fresh juices.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَصِيرُ تُفَّاحٍ",
+      "tr": "apple juice"
+     },
+     {
+      "text": "عَصِيرُ لَيْمُونٍ",
+      "tr": "lemon juice, lemonade"
+     },
+     {
+      "text": "عَصِيرٌ طَازَجٌ",
+      "tr": "fresh juice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شَرَاب",
+      "register": "neutral",
+      "nuance": "a drink, also syrup; عَصِير is pressed from fruit"
+     }
+    ],
+    "etymology": {
+     "text": "Nominalized adjective from the root ع ص ر (ʕ ṣ r); compare عَصَرَ (ʕaṣara, “to press, to squeeze”), Classical Syriac ʿəṣārā (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verb عَصَرَ is “to squeeze”, and مِعْصَرَة (the tool pattern mifʿala) is a press — an olive press, for example."
+    ],
+    "pitfalls": [
+     "The plural عَصَائِرُ is a diptote (no tanwīn).",
+     "Do not confuse it with عَصْر (ʿaṣr), “afternoon; era”."
+    ],
+    "subtleties": [
+     "“Juice of X” = عَصِيرُ + X in the genitive: عَصِيرُ تُفَّاحٍ (apple juice)."
+    ]
+   }
+  },
+  {
+   "id": "ar:nabidh",
+   "lemma": "نَبِيذ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "drink.wine"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword from Middle Persian (nabīd), although it looks like نَبَذَ “to throw away”"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "nabīḏ",
+   "forms": {
+    "N;NOM;SG;INDF": "نَبِيذٌ",
+    "N;ACC;SG;INDF": "نَبِيذًا",
+    "N;GEN;SG;INDF": "نَبِيذٍ",
+    "N;NOM;SG;DEF": "النَّبِيذُ",
+    "N;ACC;SG;DEF": "النَّبِيذَ",
+    "N;GEN;SG;DEF": "النَّبِيذِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Restaurant menus and travel; a drink many Muslims do not take.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wine",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.wine"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُوَ لَا يَشْرَبُ النَّبِيذَ.",
+      "tr": "He doesn’t drink wine.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "تَشْتَهِرُ فَرَنْسَا بِالنَّبِيذِ.",
+      "tr": "France is famous for its wine.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "نَبِيذٌ أَحْمَرُ أَمْ أَبْيَضُ؟",
+      "tr": "Red or white wine?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَبِيذٌ أَحْمَرُ",
+      "tr": "red wine"
+     },
+     {
+      "text": "نَبِيذٌ أَبْيَضُ",
+      "tr": "white wine"
+     },
+     {
+      "text": "كَأْسُ نَبِيذٍ",
+      "tr": "a glass of wine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "خَمْر",
+      "register": "literary",
+      "nuance": "wine, any intoxicating drink — the Qurʾānic and classical word (feminine)"
+     }
+    ],
+    "etymology": {
+     "text": "From the Middle Persian ancestor of Classical Persian نبید (nabīd) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In early Islamic times نَبِيذ was a drink of dates or raisins steeped in water — fermented only if it was left standing."
+    ],
+    "pitfalls": [
+     "Islam forbids alcohol and many people do not drink it: offer juice or tea unless you know your guest."
+    ],
+    "subtleties": [
+     "ن is a sun letter: النَّبِيذُ (an-nabīḏ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:bira",
+   "lemma": "بِيرَة",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "drink.beer"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian birra): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "bīra",
+   "forms": {
+    "N;NOM;SG;INDF": "بِيرَةٌ",
+    "N;ACC;SG;INDF": "بِيرَةً",
+    "N;GEN;SG;INDF": "بِيرَةٍ",
+    "N;NOM;SG;DEF": "الْبِيرَةُ",
+    "N;ACC;SG;DEF": "الْبِيرَةَ",
+    "N;GEN;SG;DEF": "الْبِيرَةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A modern loanword: bars, hotels — and alcohol-free beer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.beer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هَلْ عِنْدَكُمْ بِيرَةٌ بَارِدَةٌ؟",
+      "tr": "Do you have cold beer?",
+      "register": "neutral",
+      "context": "bar",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا أَشْرَبُ الْبِيرَةَ.",
+      "tr": "I don’t drink beer.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "تَشْرَبُ بِيرَةً بِدُونِ كُحُولٍ.",
+      "tr": "She drinks alcohol-free beer.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "زُجَاجَةُ بِيرَةٍ",
+      "tr": "a bottle of beer"
+     },
+     {
+      "text": "بِيرَةٌ بَارِدَةٌ",
+      "tr": "cold beer"
+     },
+     {
+      "text": "بِيرَةٌ بِدُونِ كُحُولٍ",
+      "tr": "alcohol-free beer"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جِعَة",
+      "register": "formal",
+      "nuance": "the Standard Arabic word of dictionaries and official texts; people say بِيرَة"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Italian birra, possibly through Greek μπίρα (bíra) or Ottoman Turkish bira; ultimately from German Bier (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A word that crossed your languages: German Bier → Italian birra → (Greek μπίρα or Turkish bira) → Arabic بِيرَة."
+    ],
+    "pitfalls": [
+     "Feminine (ة): بِيرَةٌ بَارِدَةٌ, not *بَارِدٌ."
+    ],
+    "subtleties": [
+     "A mass noun; “a beer” is زُجَاجَةُ بِيرَةٍ (a bottle) or كَأْسُ بِيرَةٍ (a glass). Wiktionary also notes the spelling بِيرَا."
+    ]
+   }
+  },
+  {
+   "id": "ar:fatur",
+   "lemma": "فَطُور",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "meal.breakfast"
+   ],
+   "features": {
+    "root": "ف ط ر",
+    "pattern": "فَعُول",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "faṭūr",
+   "forms": {
+    "N;NOM;SG;INDF": "فَطُورٌ",
+    "N;ACC;SG;INDF": "فَطُورًا",
+    "N;GEN;SG;INDF": "فَطُورٍ",
+    "N;NOM;SG;DEF": "الْفَطُورُ",
+    "N;ACC;SG;DEF": "الْفَطُورَ",
+    "N;GEN;SG;DEF": "الْفَطُورِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bread, cheese, olives, eggs and tea — the morning table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "breakfast",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.breakfast"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْفَطُورُ جَاهِزٌ!",
+      "tr": "Breakfast is ready!",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "آكُلُ الْخُبْزَ وَالْجُبْنَ عَلَى الْفَطُورِ.",
+      "tr": "I have bread and cheese for breakfast.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "الْفَطُورُ أَهَمُّ وَجْبَةٍ فِي الْيَوْمِ.",
+      "tr": "Breakfast is the most important meal of the day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَلَى الْفَطُورِ",
+      "tr": "at / for breakfast"
+     },
+     {
+      "text": "تَنَاوَلَ الْفَطُورَ",
+      "tr": "to have breakfast"
+     },
+     {
+      "text": "فَطُورٌ خَفِيفٌ",
+      "tr": "a light breakfast"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِفْطَار",
+      "register": "formal",
+      "nuance": "breakfast in formal use (hotels); above all the meal that breaks the fast at sunset in Ramadan"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ف ط ر, “to break (a fast)”: Wiktionary lists فَطُور (faṭūr) “breakfast” beside فُطُور (fuṭūr), the verbal noun of فَطَرَ, and إِفْطَار, the verbal noun of أَفْطَرَ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Exactly like English break-fast: the meal that breaks the night’s fast."
+    ],
+    "pitfalls": [
+     "faṭūr (فَطُور) is the meal; fuṭūr (فُطُور) is the act of breaking a fast — but in speech you will also hear fuṭūr for breakfast."
+    ],
+    "subtleties": [
+     "With meals Arabic says عَلَى: عَلَى الْفَطُورِ (at breakfast); prepositions come in lesson 11."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghada",
+   "lemma": "غَدَاء",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "meal.lunch"
+   ],
+   "features": {
+    "root": "غ د و",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ġadāʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "غَدَاءٌ",
+    "N;ACC;SG;INDF": "غَدَاءً",
+    "N;GEN;SG;INDF": "غَدَاءٍ",
+    "N;NOM;SG;DEF": "الْغَدَاءُ",
+    "N;ACC;SG;DEF": "الْغَدَاءَ",
+    "N;GEN;SG;DEF": "الْغَدَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The main family meal in many Arab homes, in the early afternoon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lunch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.lunch"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْغَدَاءُ جَاهِزٌ.",
+      "tr": "Lunch is ready.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ الْغَدَاءَ فِي السَّاعَةِ الثَّانِيَةِ.",
+      "tr": "We eat lunch at two o’clock.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "دَعَانِي صَدِيقِي إِلَى الْغَدَاءِ.",
+      "tr": "My friend invited me to lunch.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَجْبَةُ الْغَدَاءِ",
+      "tr": "lunch (the meal)"
+     },
+     {
+      "text": "اِسْتِرَاحَةُ الْغَدَاءِ",
+      "tr": "lunch break"
+     },
+     {
+      "text": "تَنَاوَلَ الْغَدَاءَ",
+      "tr": "to have lunch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other Standard Arabic word for lunch.",
+    "etymology": {
+     "text": "Wiktionary compares غَدًا (ġadan, “tomorrow”) and غَدَاة (ġadāh, “morning”); it also records the older sense “breakfast”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word once meant the morning meal (Wiktionary still lists “breakfast”) and moved to midday; the same root gives غَدًا, “tomorrow”."
+    ],
+    "pitfalls": [
+     "غَدَاء (lunch, with د) ≠ غِذَاء (food, nourishment, with ذ)."
+    ],
+    "subtleties": [
+     "Ends in hamza after ā: accusative indefinite غَدَاءً, no extra alif."
+    ]
+   }
+  },
+  {
+   "id": "ar:asha",
+   "lemma": "عَشَاء",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "meal.dinner"
+   ],
+   "features": {
+    "root": "ع ش و",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ʿašāʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "عَشَاءٌ",
+    "N;ACC;SG;INDF": "عَشَاءً",
+    "N;GEN;SG;INDF": "عَشَاءٍ",
+    "N;NOM;SG;DEF": "الْعَشَاءُ",
+    "N;ACC;SG;DEF": "الْعَشَاءَ",
+    "N;GEN;SG;DEF": "الْعَشَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The evening meal: often light at home, festive when guests come.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dinner, supper",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.dinner"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَطْبُخُ الْعَشَاءَ مَعًا.",
+      "tr": "We cook dinner together.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْعَشَاءُ فِي السَّاعَةِ الثَّامِنَةِ.",
+      "tr": "Dinner is at eight.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "دَعَوْنَا أَصْدِقَاءَنَا إِلَى الْعَشَاءِ.",
+      "tr": "We invited our friends to dinner.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَفْلَةُ عَشَاءٍ",
+      "tr": "a dinner party"
+     },
+     {
+      "text": "عَشَاءُ عَمَلٍ",
+      "tr": "a business dinner"
+     },
+     {
+      "text": "تَنَاوَلَ الْعَشَاءَ",
+      "tr": "to have dinner"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other Standard Arabic word for the evening meal.",
+    "etymology": {
+     "text": "Wiktionary: the verbal noun of عَشَا (form I), root ع ش و; compare عِشَاء, “dusk, nightfall”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic-speaking Christians call the Last Supper الْعَشَاءُ الْأَخِيرُ."
+    ],
+    "pitfalls": [
+     "عَشَاء (ʿašāʾ, dinner) ≠ عِشَاء (ʿišāʾ, nightfall; the night prayer صَلَاةُ الْعِشَاءِ). Unvocalized both are عشاء."
+    ],
+    "subtleties": [
+     "Accusative indefinite عَشَاءً — no extra alif after the hamza."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

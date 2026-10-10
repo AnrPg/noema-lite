@@ -1,0 +1,299 @@
+{
+ "function": "fn.noun.gender",
+ "status": "realized",
+ "summary": "Every Arabic noun is masculine or feminine. Most feminine nouns end in tāʾ marbūṭa ـة (غُرْفَة، شَقَّة، طَاوِلَة); nouns for women are feminine whatever their ending (بِنْت، أُمّ); and some nouns are feminine with no ة at all — كَأْس (glass), دَار (house), شَمْس (sun), أَرْض (earth), and body parts that come in pairs (يَد، عَيْن، رِجْل). Everything else is masculine. Gender decides “this” (هٰذَا / هٰذِهِ), “it” (هُوَ / هِيَ), and later adjectives and verbs. Nouns for people come in pairs: طَالِب / طَالِبَة, مُعَلِّم / مُعَلِّمَة.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "sign",
+    "gender",
+    "examples"
+   ],
+   "rows": [
+    [
+     "ends in ـة (tāʾ marbūṭa)",
+     "feminine",
+     "غُرْفَة، شَقَّة، نَافِذَة، طَاوِلَة، خِزَانَة، حَقِيبَة"
+    ],
+    [
+     "names a woman or a girl",
+     "feminine",
+     "اِمْرَأَة، بِنْت (ends in ت, not ة), طَالِبَة، مُعَلِّمَة"
+    ],
+    [
+     "no ة, but feminine by tradition",
+     "feminine",
+     "كَأْس (glass), دَار (house), شَمْس (sun), أَرْض (earth), نَار (fire)"
+    ],
+    [
+     "body parts that come in pairs",
+     "feminine",
+     "يَد (hand), عَيْن (eye), رِجْل (leg), أُذُن (ear)"
+    ],
+    [
+     "the feminine ending -āʾ / -ā",
+     "feminine",
+     "صَحْرَاء (desert), كُبْرَى (biggest, f.)"
+    ],
+    [
+     "everything else",
+     "masculine",
+     "بَيْت، بَاب، جِدَار، كُرْسِيّ، سَرِير، مِصْبَاح، كِتَاب، قَلَم، هَاتِف، مِفْتَاح، فِنْجَان، صَحْن"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "People: a masculine and a feminine.",
+   "text": "طَالِب → طَالِبَة, مُعَلِّم → مُعَلِّمَة, صَدِيق → صَدِيقَة: add ة. Plurals: طُلَّاب / طَالِبَات, مُعَلِّمُونَ / مُعَلِّمَات, أَصْدِقَاء / صَدِيقَات. A mixed group takes the masculine plural."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Masculine with ة.",
+   "text": "A few masculine nouns end in ة: خَلِيفَة (caliph), and men’s names such as حَمْزَة and أُسَامَة. The meaning (a man) wins."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Test with “this” and “it”.",
+   "text": "Not sure? Use the noun with هٰذَا / هٰذِهِ or answer with هُوَ / هِيَ: هٰذِهِ كَأْسٌ — الْكَأْسُ؟ هِيَ هُنَا."
+  },
+  {
+   "t": "p",
+   "text": "A collective noun (وَرَق paper, بَصَل onions) is masculine; its unit noun in ة is feminine: وَرَق → وَرَقَة (a sheet of paper).",
+   "typology": [
+    {
+     "feature": "nom.singulative",
+     "value": "productive"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "مَاء (water) ends in -āʾ but is masculine: its hamza belongs to the root, it is not the feminine ending."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Does it end in ـة? → feminine (unless it names a man: خَلِيفَة).",
+   "Does it name a woman or a girl? → feminine.",
+   "Is it one of the feminines without ة (كَأْس، دَار، شَمْس، أَرْض، نَار) or a paired body part? → feminine.",
+   "Does it end in the feminine -āʾ / -ā (صَحْرَاء، كُبْرَى)? → feminine — but مَاء is masculine.",
+   "Otherwise → masculine."
+  ]
+ },
+ "traps": [
+  "كَأْس is feminine: هٰذِهِ كَأْسٌ, not *هٰذَا كَأْسٌ.",
+  "بِنْت ends in ت, not ة — and is feminine.",
+  "Plurals of things agree as feminine singular whatever the gender of the singular: كِتَاب (m.) → هٰذِهِ الْكُتُبُ.",
+  "Gender belongs to the word, not to the thing: بَيْت is masculine and شَمْس feminine — even where another language gives them another gender."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:hadha",
+   "ar:dhalika",
+   "ar:huwa",
+   "ar:hiya"
+  ],
+  "tags": [
+   "FEM"
+  ]
+ },
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "gender_article",
+   "pos": "NOUN"
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "class": "person",
+   "cells": [
+    "N;NOM;SG;FEM;INDF",
+    "N;NOM;PL;MASC;INDF",
+    "N;NOM;PL;FEM;INDF"
+   ]
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "The gender of كَأْس (glass):",
+   "options": [
+    "feminine",
+    "masculine"
+   ],
+   "answer": "feminine",
+   "why": "One of the feminines without ة: هٰذِهِ كَأْسٌ."
+  },
+  {
+   "q": "The gender of بَاب (door):",
+   "options": [
+    "masculine",
+    "feminine"
+   ],
+   "answer": "masculine",
+   "why": "No ة, not a woman, not on the list of exceptions → masculine."
+  },
+  {
+   "q": "“A (female) student”:",
+   "options": [
+    "طَالِبَةٌ",
+    "طَالِبٌ",
+    "طُلَّابٌ"
+   ],
+   "answer": "طَالِبَةٌ",
+   "why": "Add ة to the masculine."
+  },
+  {
+   "q": "Which noun is masculine?",
+   "options": [
+    "كُرْسِيّ",
+    "غُرْفَة",
+    "حَقِيبَة",
+    "بِنْت"
+   ],
+   "answer": "كُرْسِيّ",
+   "why": "The others are feminine: two end in ة, and بِنْت is a girl."
+  },
+  {
+   "q": "“This is a glass”:",
+   "options": [
+    "هٰذِهِ كَأْسٌ",
+    "هٰذَا كَأْسٌ",
+    "هٰذِهِ الْكَأْسُ"
+   ],
+   "answer": "هٰذِهِ كَأْسٌ",
+   "why": "كَأْس is feminine; no article → a sentence."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.noun.gender",
+   "note": "Hebrew has the same two genders and the same main sign (feminine -ָה / -ֶת), with feminines that lack it (אֶרֶץ, earth) — and כּוֹס (glass) is feminine there too."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "German has three genders that the form rarely shows — learn der / die / das with every noun; Arabic gender is mostly visible (ة)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.noun.gender",
+   "note": "Chinese nouns have no gender; he / she / it differ only in the writing (他 / 她 / 它)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.genderCount",
+   "value": "two"
+  },
+  {
+   "feature": "nom.genderBasis",
+   "value": "sex-based"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has three genders and the ending often shows them (-ος, -η / -α, -ο); Arabic has two, with ة as the main feminine sign. The genders often differ: ο ήλιος is masculine but شَمْس feminine; το σπίτι is neuter, بَيْت masculine."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian has three genders, shown by the ending; Arabic has two, with ة as the main feminine sign — and no neuter: a Russian neuter such as окно becomes feminine نَافِذَة."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish also has two genders with a typical feminine ending (-a ≈ ة: mesa ≈ طَاوِلَة). There are exceptions on both sides: la mano is feminine like يَد, el día masculine."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English nouns have no grammatical gender; every Arabic noun is masculine or feminine, and “this”, “it”, adjectives and verbs follow it."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French also has two genders, but the noun rarely shows it; Arabic gender is mostly visible: ة means feminine (غُرْفَة), with a short list of exceptions."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi also has two genders and a typical feminine ending (-ī: लड़की); the Arabic sign is ة. Loanwords can switch gender: किताब is feminine in Hindi, كِتَاب masculine in Arabic."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian nouns have no gender; in Arabic every noun is masculine or feminine — learn it with the word (ة is the main sign)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi has three genders, Arabic two, so Marathi neuters become masculine or feminine (घर is neuter, بَيْت masculine)."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish has no gender; in Arabic you must know whether each noun is masculine or feminine — ة is the main sign."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese nouns have no gender; Arabic nouns are masculine or feminine, and the words that point to them agree."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish nouns have no gender (hän is he and she); Arabic nouns are masculine or feminine, and the pronoun shows it: الْغُرْفَةُ؟ هِيَ هُنَا."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian nouns have no gender; in Arabic each noun is masculine or feminine."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili sorts nouns into classes by prefix (m- / wa-, ki- / vi- …); Arabic has two classes only, masculine and feminine, marked mostly by an ending (ة), not a prefix."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda noun classes are marked by prefixes (omu-, eki- …); Arabic’s two genders are marked mostly by the ending ة and are tied to sex for people."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese nouns have no gender — classifiers group them instead; Arabic nouns are masculine or feminine, and everything that refers to them agrees."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut nouns have no gender; Arabic splits every noun into masculine and feminine."
+  }
+ ]
+}

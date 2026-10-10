@@ -1,0 +1,385 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "summary": "A yes/no question is the statement with هَلْ in front and the Arabic question mark ؟ at the end; the word order does not change and there is no helper verb: تُحِبُّ الشَّايَ → هَلْ تُحِبُّ الشَّايَ؟ (Do you like tea?). Before al- هَلْ takes a helping vowel: هَلِ الطِّفْلُ يَشْرَبُ الْحَلِيبَ؟. The prefix أَ, written together with the first word, is the formal alternative (أَتَشْرَبُ الْقَهْوَةَ؟) and the only one before a negation (أَلَا تُحِبُّ …؟، أَلَيْسَ …؟). “Or” in a choice question (which one?) is أَمْ: أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟; أَوْ asks “any of them?” (هَلْ تُرِيدُ سُكَّرًا أَوْ حَلِيبًا؟ — answer yes / no). Answers: نَعَمْ (yes), لَا (no), and بَلَى “yes, it is so” against a negative question — the Arabic doch. Short answers: رُبَّمَا (maybe), طَبْعًا (of course), حَقًّا؟ (really?); add أَيْضًا (too) or فَقَطْ (only) after the word they belong to.",
+ "procedure": {
+  "askYourself": [
+   "Is it a yes/no question (not who / what / where)? → هَلْ + the unchanged statement + ؟",
+   "Does the next word start with al-? → هَلِ with a helping vowel: هَلِ الطِّفْلُ …؟",
+   "Is the question negative (don’t you …? isn’t it …?) → أَ, not هَلْ: أَلَا …؟ أَلَيْسَ …؟",
+   "Am I offering a choice (this one or that one)? → أَمْ (أَ … أَمْ …؟). Asking “any of them?” → أَوْ.",
+   "Answering a negative question with “yes, it is / I do”? → بَلَى, not نَعَمْ.",
+   "Did I write the Arabic question mark ؟ ?"
+  ]
+ },
+ "traps": [
+  "No inversion and no “do”: هَلْ تُرِيدُ قَهْوَةً؟ = do you want a coffee?",
+  "Do not combine هَلْ with a question word: *هَلْ أَيْنَ …؟",
+  "Not *هَلْ لَا …: a negative question takes أَ — أَلَا تُحِبُّ …؟",
+  "أَ is written together with the next word: أَتُرِيدُ, not *أَ تُرِيدُ.",
+  "To a negative question, “yes, I do” is بَلَى, not نَعَمْ.",
+  "أَمْ (or) is not أُمّ (mother): ʾam / ʾumm.",
+  "Before al-: هَلِ، أَوِ، أَمِ (helping vowel i)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:hal",
+   "ar:a"
+  ],
+  "punct": [
+   "؟"
+  ],
+  "exclude": [
+   "ar:madha",
+   "ar:ma",
+   "ar:ayna",
+   "ar:man",
+   "ar:mata",
+   "ar:kayfa",
+   "ar:limadha",
+   "ar:kam",
+   "ar:ayy",
+   "ar:liman"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 2
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.question.yesno",
+   "note": "Hebrew marks a yes/no question with הַאִם in writing or only with intonation in speech — the same idea as هَلْ; its old prefix הֲ־ is the cousin of Arabic أَ."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "German moves the verb to the front (Trinkst du Tee?) and answers a negative question with doch — Arabic never changes the order, adds هَلْ, and says بَلَى for doch."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.yesno",
+   "note": "Chinese adds 吗 at the end where Arabic puts هَلْ at the start; Chinese 还是 is Arabic أَمْ (a choice), 或者 is أَوْ."
+  }
+ ],
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "statement",
+    "question"
+   ],
+   "rows": [
+    [
+     "with هَلْ",
+     "تُرِيدُ شَايًا.",
+     "هَلْ تُرِيدُ شَايًا؟"
+    ],
+    [
+     "before al-",
+     "الطِّفْلُ يَشْرَبُ الْحَلِيبَ.",
+     "هَلِ الطِّفْلُ يَشْرَبُ الْحَلِيبَ؟"
+    ],
+    [
+     "no verb",
+     "هٰذَا شَايٌ.",
+     "هَلْ هٰذَا شَايٌ؟"
+    ],
+    [
+     "to have",
+     "عِنْدَكَ سُكَّرٌ.",
+     "هَلْ عِنْدَكَ سُكَّرٌ؟"
+    ],
+    [
+     "with أَ (formal)",
+     "تَشْرَبُ الْقَهْوَةَ.",
+     "أَتَشْرَبُ الْقَهْوَةَ؟"
+    ],
+    [
+     "negative (only أَ)",
+     "لَا تُحِبُّ الشَّايَ.",
+     "أَلَا تُحِبُّ الشَّايَ؟"
+    ],
+    [
+     "negative, no verb",
+     "هٰذَا لَيْسَ شَايًا.",
+     "أَلَيْسَ هٰذَا شَايًا؟"
+    ]
+   ],
+   "caption": "The order of the words does not change — you only add هَلْ (or أَ) and ؟.",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "initial"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "أَمْ — which one?",
+     "points": [
+      "أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟",
+      "answer: شَايًا / قَهْوَةً",
+      "careful style: أَ … أَمْ; modern writing also هَلْ … أَمْ"
+     ]
+    },
+    {
+     "title": "أَوْ — any of them?",
+     "points": [
+      "هَلْ تُرِيدُ سُكَّرًا أَوْ حَلِيبًا؟",
+      "answer: نَعَمْ / لَا",
+      "also the “or” of statements: آكُلُ السَّمَكَ أَوِ الدَّجَاجَ"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "answer",
+    "means",
+    "when"
+   ],
+   "rows": [
+    [
+     "نَعَمْ",
+     "yes",
+     "agrees with the question as asked"
+    ],
+    [
+     "لَا",
+     "no",
+     "denies it; followed by a pause: لَا، شُكْرًا"
+    ],
+    [
+     "بَلَى",
+     "yes (it is!)",
+     "contradicts a negative question: أَلَا تُحِبُّ الشَّايَ؟ بَلَى! — German doch"
+    ],
+    [
+     "رُبَّمَا",
+     "maybe",
+     "هَلْ يَطْبُخُ أَخُوكَ؟ رُبَّمَا."
+    ],
+    [
+     "طَبْعًا",
+     "of course",
+     "هَلْ تُحِبِّينَ الْفَاكِهَةَ؟ طَبْعًا!"
+    ],
+    [
+     "حَقًّا؟",
+     "really?",
+     "surprise: عِنْدِي أَحَدَ عَشَرَ أَخًا. حَقًّا؟"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Yes to a negative question.",
+   "text": "أَلَا تُحِبُّ الشَّايَ؟ — نَعَمْ means “right, I don’t”; بَلَى means “yes I do”. Just like German Magst du keinen Tee? — Doch!"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Too and only come after.",
+   "text": "أَنَا أَيْضًا أُحِبُّ السَّمَكَ (I like fish too) — أَيْضًا follows the word it adds to. أَشْرَبُ الْمَاءَ فَقَطْ (I only drink water) — فَقَطْ follows the word it limits."
+  },
+  {
+   "t": "p",
+   "text": "In speech many people drop هَلْ and ask with the voice alone (تُرِيدُ شَايًا؟ ↗); in writing هَلْ or أَ is expected. Wh-questions (what, where …) never take هَلْ: that is lesson 10."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“Do you want tea?”",
+   "options": [
+    "هَلْ تُرِيدُ شَايًا؟",
+    "تُرِيدُ هَلْ شَايًا؟",
+    "هَلْ أَنْتَ تُرِيدُ شَايٌ؟"
+   ],
+   "answer": "هَلْ تُرِيدُ شَايًا؟",
+   "why": "هَلْ in front, the statement unchanged, ؟ at the end."
+  },
+  {
+   "q": "“Do you want tea or coffee?” (which one?)",
+   "options": [
+    "أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟",
+    "أَتُرِيدُ شَايًا وَقَهْوَةً؟",
+    "أَتُرِيدُ شَايًا وَلَا قَهْوَةً؟"
+   ],
+   "answer": "أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟",
+   "why": "A choice question takes أَمْ."
+  },
+  {
+   "q": "“Don’t you like tea?”",
+   "options": [
+    "أَلَا تُحِبُّ الشَّايَ؟",
+    "هَلْ لَا تُحِبُّ الشَّايَ؟",
+    "لَا هَلْ تُحِبُّ الشَّايَ؟"
+   ],
+   "answer": "أَلَا تُحِبُّ الشَّايَ؟",
+   "why": "Before a negation only أَ is used."
+  },
+  {
+   "q": "“Isn’t this tea?” — “Yes, it is!”",
+   "options": [
+    "بَلَى",
+    "نَعَمْ",
+    "لَا"
+   ],
+   "answer": "بَلَى",
+   "why": "بَلَى contradicts the negative question, like German doch; نَعَمْ would confirm “it isn’t”."
+  },
+  {
+   "q": "Before الْ, هَلْ becomes …",
+   "options": [
+    "هَلِ",
+    "هَلَا",
+    "هَلْ (no change)"
+   ],
+   "answer": "هَلِ",
+   "why": "A helping vowel i: هَلِ الطِّفْلُ يَشْرَبُ الْحَلِيبَ؟"
+  },
+  {
+   "q": "“I like fish too.”",
+   "options": [
+    "أَنَا أَيْضًا أُحِبُّ السَّمَكَ",
+    "أَنَا فَقَطْ أُحِبُّ السَّمَكَ",
+    "أَنَا لَا أُحِبُّ السَّمَكَ"
+   ],
+   "answer": "أَنَا أَيْضًا أُحِبُّ السَّمَكَ",
+   "why": "أَيْضًا (too) follows the word it adds to (أَنَا); فَقَطْ would mean “only I”."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.polarQuestion",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.questionParticlePosition",
+   "value": "initial"
+  }
+ ],
+ "notes": [
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi क्या at the start of a yes/no question (क्या तुम चाय पीते हो?) is exactly Arabic هَلْ: the statement stays as it is."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian آیا at the start (آیا چای می‌خواهی؟) works like هَلْ; both are often dropped in speech, leaving only the voice."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili Je, … ? at the start of a question (Je, unapenda chai?) works like هَلْ."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek asks with the voice alone (θέλεις τσάι;); Arabic adds هَلْ in front, and its question mark is ؟."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian asks with the voice, or with ли after the word in question (хочешь ли ты чаю?); Arabic puts هَلْ in front."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish uses intonation and ¿…?; Arabic adds هَلْ at the start and writes ؟ only at the end."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English inverts or adds do (Do you like tea?); Arabic keeps the statement and adds هَلْ: هَلْ تُحِبُّ الشَّايَ؟ For “yes, I do” after a negative question it has a word of its own, بَلَى."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French est-ce que before an unchanged statement (est-ce que tu aimes le thé ?) is the idea of هَلْ; and French si — “yes, I do” after a negative question — is Arabic بَلَى."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts mi after the word in question (çay istiyor musun?); Arabic puts هَلْ at the start of the sentence."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese adds か at the end (お茶が好きですか); Arabic puts هَلْ at the start. Japanese はい after a negative question agrees with it, as Arabic نَعَمْ does; “yes, I do” is بَلَى."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean asks with the verb ending and the voice (좋아해요?); Arabic adds the separate word هَلْ."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish -ko / -kö goes on the first word (Juotko teetä?); Arabic also marks the start of the sentence — with هَلْ, or the formal prefix أَ on the first word (أَتَشْرَبُ؟)."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian asks with intonation alone (Iszol teát?); Arabic adds هَلْ in front."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda asks yes/no questions with intonation; Arabic adds هَلْ."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese wraps the verb in có … không? (bạn có uống trà không?); Arabic puts هَلْ in front and changes nothing else."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has a question mood inside the verb; Arabic adds the word هَلْ and leaves the verb as it is."
+  }
+ ]
+}

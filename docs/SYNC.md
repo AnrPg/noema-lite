@@ -18,6 +18,8 @@ The code lives in `engine/cloud.js`, the "in use" card in `engine/loader.js`, an
      The streak comes from the copy that studied more recently.
    * curricula (`a:curriculum:*`): the newer copy wins, and the chapter plans of both are kept (`NoemaCurriculum.mergePlans`).
      Plans are also merged on every pull and push, because an older app version or the connector can write a stale copy whole.
+     A plan the other copy made for a subject attached to a step never comes back over a copy that has taken that subject off
+     since (`assignedAt` is later): the step keeps the plan it has now (the group's, in a shared Roadmap).
    * settings and other records: every field from both copies; where both set the same field, the newer one wins.
    * anything else: the newer copy wins.
    Before combining can drop something this device had, a **restore point** is saved on the device (at most one every 10 minutes).
@@ -59,3 +61,10 @@ Every `Noema.kv` key of a cloud account syncs this way automatically. If a new k
 add a rule for it in `mergeValue` (`engine/cloud.js`). If a page keeps that data in memory, listen for
 `noema:remote` (`detail.keys` = full localStorage keys that another device changed) and fold the stored copy into it,
 the way `engine/src/10_core.js` does for `S`.
+
+## Language courses
+
+The keys `s:lang:<course>:…` (docs/LANGUAGES.md §5.6) have their own rule in `mergeValue` (`mergeLang`): per word and track the
+later review wins, the earliest first-seen day is kept, a lesson check keeps the best score and the most tries, and a grammar
+function's log keeps every day. The open course listens for `noema:remote` and folds the stored copies into what it holds
+(`foldRemote` in `engine/lang/00_base.js`). Tested by `tests/lang_sync.js` (two browsers, the Supabase emulator).

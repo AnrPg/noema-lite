@@ -1,0 +1,290 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:ta.he",
+   "lemma": "他",
+   "trad": "他",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:ta.she",
+   "lemma": "她",
+   "trad": "她",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:chi",
+   "lemma": "吃",
+   "trad": "吃",
+   "pinyin": "chī",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat",
+    "verb.take.medicine",
+    "verb.suffer"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   },
+   "ref": {
+    "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Central to social life: food is how people show care.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to take (medicine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.take.medicine"
+     },
+     {
+      "id": "s3",
+      "def": "to suffer, endure (吃苦, 吃亏)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.suffer"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们一起吃饭吧。",
+      "tr": "Let's eat together.",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1",
+      "py": "Wǒmen yìqǐ chīfàn ba."
+     },
+     {
+      "text": "我不吃肉。",
+      "tr": "I don't eat meat.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1",
+      "py": "Wǒ bù chī ròu."
+     },
+     {
+      "text": "你吃药了吗？",
+      "tr": "Have you taken your medicine?",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2",
+      "py": "Nǐ chī yào le ma?"
+     },
+     {
+      "text": "他从小吃了很多苦。",
+      "tr": "He has suffered a lot since childhood.",
+      "register": "neutral",
+      "context": "figurative",
+      "sense": "s3",
+      "py": "Tā cóngxiǎo chīle hěn duō kǔ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃饭",
+      "tr": "to eat, have a meal"
+     },
+     {
+      "text": "吃药",
+      "tr": "to take medicine"
+     },
+     {
+      "text": "吃亏",
+      "tr": "to suffer a loss"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "吃醋",
+      "tr": "to eat vinegar",
+      "kind": "idiom",
+      "meaning": "to be jealous (in love)",
+      "register": "colloquial"
+     },
+     {
+      "text": "吃不了兜着走",
+      "tr": "what you can't eat you'll carry away",
+      "kind": "idiom",
+      "meaning": "you'll have to face the consequences",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "食",
+      "register": "literary",
+      "nuance": "classical word for eat; lives on in compounds (食物 food, 饮食 diet)"
+     },
+     {
+      "word": "用",
+      "register": "formal",
+      "nuance": "polite, said to guests: 请慢用 = enjoy your meal"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 口 (‘mouth’) + phonetic 乞.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "吃了吗？(‘Have you eaten?’) is a greeting, like ‘How are you?’ — not an invitation to a meal."
+    ],
+    "pitfalls": [
+     "Drinks take 喝, not 吃: 喝水, 喝茶 — and soup is drunk: 喝汤.",
+     "吃 is used where English says ‘take’: 吃药 (take medicine)."
+    ],
+    "subtleties": [
+     "吃 + an experience = to undergo it: 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
+    ]
+   }
+  },
+  {
+   "id": "zh:he",
+   "lemma": "和",
+   "trad": "和",
+   "pinyin": "hé",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:yi",
+   "lemma": "一",
+   "trad": "一",
+   "pinyin": "yī",
+   "pos": "NUM",
+   "senses": [],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yí before a 4th tone (一个 yí ge), yì before the 1st–3rd tones (一本 yì běn); yī alone, in counting, in dates and ordinals"
+   },
+   "role": "the number one; with a measure word it plays the role of “a”",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:ge",
+   "lemma": "个",
+   "trad": "個",
+   "pinyin": "gè",
+   "pos": "CLF",
+   "senses": [],
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 個 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "general"
+    ]
+   },
+   "role": "the general measure word",
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "Chinese has no articles; definiteness comes from context, word order or 这/那 (this/that).",
+   "use": "bare noun"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "No indefinite article; when needed, 一 + a measure word (一个 …).",
+   "use": "一 + measure word + noun"
+  }
+ ]
+}

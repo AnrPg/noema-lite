@@ -1,0 +1,280 @@
+{
+ "_": "Shared test vectors: tools/langlib.py and engine/langcore.js must give the same results (docs/LANGUAGES.md §11).",
+ "canon": [
+  [
+   "V;PRS;IND;3;SG;FEM",
+   "V;3;FEM;IND;PRS;SG"
+  ],
+  [
+   "N;NOM;SG",
+   "N;NOM;SG"
+  ],
+  [
+   "N;SG;NOM",
+   "N;NOM;SG"
+  ],
+  [
+   "DET;ACC;PL",
+   "DET;ACC;PL"
+  ]
+ ],
+ "strip": [
+  [
+   "ar",
+   "الْجَزَرَةَ",
+   "الجزرة"
+  ],
+  [
+   "ar",
+   "ٱلْكِتَابُ",
+   "الكتاب"
+  ],
+  [
+   "ar",
+   "مُعَلِّمٌ",
+   "معلم"
+  ],
+  [
+   "ar",
+   "آكُلُ",
+   "آكل"
+  ],
+  [
+   "he",
+   "הַגְּזָרִים",
+   "הגזרים"
+  ],
+  [
+   "he",
+   "שָׁלוֹם",
+   "שלום"
+  ],
+  [
+   "he",
+   "בֵּית־סֵפֶר",
+   "בית־ספר"
+  ],
+  [
+   "de",
+   "Kürbis",
+   "Kürbis"
+  ]
+ ],
+ "pinyinValid": [
+  [
+   "hú",
+   true
+  ],
+  [
+   "luó",
+   true
+  ],
+  [
+   "bo",
+   true
+  ],
+  [
+   "huáng",
+   true
+  ],
+  [
+   "gūa",
+   false
+  ],
+  [
+   "jü",
+   false
+  ],
+  [
+   "ju",
+   true
+  ],
+  [
+   "nǚ",
+   true
+  ],
+  [
+   "lüè",
+   true
+  ],
+  [
+   "gi",
+   false
+  ],
+  [
+   "zhī",
+   true
+  ],
+  [
+   "er",
+   true
+  ],
+  [
+   "ér",
+   true
+  ],
+  [
+   "ài",
+   true
+  ],
+  [
+   "ong",
+   false
+  ],
+  [
+   "yuàn",
+   true
+  ],
+  [
+   "xiǎng",
+   true
+  ],
+  [
+   "qióng",
+   true
+  ],
+  [
+   "liù",
+   true
+  ],
+  [
+   "guǐ",
+   true
+  ],
+  [
+   "shéi",
+   true
+  ],
+  [
+   "āá",
+   false
+  ],
+  [
+   "hello",
+   false
+  ],
+  [
+   "xa",
+   false
+  ]
+ ],
+ "pinyinNumbers": [
+  [
+   "hu2 luo2 bo5",
+   "hú luó bo",
+   "hu2 luo2 bo5"
+  ],
+  [
+   "lv4",
+   "lǜ",
+   "lü4"
+  ],
+  [
+   "nu:3",
+   "nǚ",
+   "nü3"
+  ],
+  [
+   "hao3",
+   "hǎo",
+   "hao3"
+  ],
+  [
+   "liu4",
+   "liù",
+   "liu4"
+  ],
+  [
+   "gui3",
+   "guǐ",
+   "gui3"
+  ],
+  [
+   "dou1",
+   "dōu",
+   "dou1"
+  ],
+  [
+   "er2",
+   "ér",
+   "er2"
+  ]
+ ],
+ "join": [
+  [
+   [
+    {
+     "t": "Er"
+    },
+    {
+     "t": "isst"
+    },
+    {
+     "t": "Brot"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "space",
+   "Er isst Brot."
+  ],
+  [
+   [
+    {
+     "t": "«",
+     "p": "open"
+    },
+    {
+     "t": "Ja"
+    },
+    {
+     "t": "»",
+     "p": true
+    }
+   ],
+   "space",
+   "«Ja»"
+  ],
+  [
+   [
+    {
+     "t": "Sie"
+    },
+    {
+     "t": "sagt"
+    },
+    {
+     "t": "«",
+     "p": "open"
+    },
+    {
+     "t": "Ja"
+    },
+    {
+     "t": "»",
+     "p": true
+    }
+   ],
+   "space",
+   "Sie sagt «Ja»"
+  ],
+  [
+   [
+    {
+     "t": "她"
+    },
+    {
+     "t": "吃"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "none",
+   "她吃。"
+  ]
+ ]
+}

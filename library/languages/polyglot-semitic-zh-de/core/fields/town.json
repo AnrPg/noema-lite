@@ -1,0 +1,360 @@
+{
+ "field": "town",
+ "title": "In town",
+ "subgroups": [
+  {
+   "id": "place",
+   "title": "Places"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "Places in a town — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "place.home",
+   "gloss": "home (at home, go home)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "place.school",
+   "gloss": "school",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "place.university",
+   "gloss": "university",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "place.work",
+   "gloss": "work (the workplace: at work)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "place.office",
+   "gloss": "office",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "place.shop",
+   "gloss": "shop",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "place.supermarket",
+   "gloss": "supermarket",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "place.market",
+   "gloss": "market",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "place.restaurant",
+   "gloss": "restaurant",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "place.cafe",
+   "gloss": "café",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "place.hospital",
+   "gloss": "hospital",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "place.pharmacy",
+   "gloss": "pharmacy",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "place.bank",
+   "gloss": "bank (money)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "place.postoffice",
+   "gloss": "post office",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "place.station",
+   "gloss": "station (train or bus)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "place.airport",
+   "gloss": "airport",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "place.street",
+   "gloss": "street",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "place.square",
+   "gloss": "square (in a town)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "place.park",
+   "gloss": "park",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "place.city",
+   "gloss": "city, town",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "place.village",
+   "gloss": "village",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "place.country",
+   "gloss": "country (a state)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "place.abroad",
+   "gloss": "abroad",
+   "tier": 1,
+   "rank": 25,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.bathhouse",
+   "gloss": "bathhouse, hammam; bath",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.capital",
+   "gloss": "capital city (首都)",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.cell",
+   "gloss": "a vaulted chamber, a cell",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.centre",
+   "gloss": "town centre, city centre",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.mall",
+   "gloss": "shopping centre, mall (in names: 万达广场)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.north",
+   "gloss": "north (Biblical)",
+   "tier": 1,
+   "rank": 30,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.place",
+   "gloss": "place, location",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.pool",
+   "gloss": "swimming pool, baths",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.south",
+   "gloss": "south (Biblical)",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.spa",
+   "gloss": "spa (town)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.usa",
+   "gloss": "America, the USA (美国, 美元)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.kindergarten",
+   "gloss": "kindergarten",
+   "tier": 1,
+   "rank": 23,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.hotel",
+   "gloss": "hotel",
+   "tier": 1,
+   "rank": 24,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.corner",
+   "gloss": "corner",
+   "tier": 1,
+   "rank": 26,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.crossroads",
+   "gloss": "crossroads, junction",
+   "tier": 1,
+   "rank": 27,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.trafficlight",
+   "gloss": "traffic light",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.bridge",
+   "gloss": "bridge",
+   "tier": 1,
+   "rank": 29,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.east",
+   "gloss": "east",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.west",
+   "gloss": "west",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.continent",
+   "gloss": "continent",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.border",
+   "gloss": "border",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.coast",
+   "gloss": "coast",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.world",
+   "gloss": "the world",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "place.townhall",
+   "gloss": "town hall",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  }
+ ]
+}

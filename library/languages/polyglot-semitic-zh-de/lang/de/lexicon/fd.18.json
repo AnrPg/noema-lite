@@ -1,0 +1,1444 @@
+{
+ "lexemes": [
+  {
+   "id": "de:aber",
+   "lemma": "aber",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.but",
+    "adv.truly"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "kind of word",
+     "value": "a particle of surprise (Das ist aber nett!)"
+    },
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "the everyday word"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "But – the everyday contrast word; it leaves the word order alone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "but, however",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.but"
+     },
+     {
+      "id": "s2",
+      "def": "really, indeed (particle of surprise: Das ist aber nett!)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.truly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Auto ist schön, aber es ist teuer.",
+      "tr": "The car is nice, but it’s expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin müde, aber ich gehe zur Arbeit.",
+      "tr": "I’m tired, but I’m going to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist kalt. Wir gehen aber trotzdem spazieren.",
+      "tr": "It’s cold. But we’re going for a walk anyway.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist aber nett von dir!",
+      "tr": "That’s really kind of you!",
+      "register": "colloquial",
+      "context": "thanking",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "aber trotzdem",
+      "tr": "but still"
+     },
+     {
+      "text": "Aber sicher!",
+      "tr": "But of course!"
+     },
+     {
+      "text": "aber auch",
+      "tr": "but also"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "ohne Wenn und Aber",
+      "tr": "without if and but",
+      "kind": "idiom",
+      "meaning": "without ifs and buts, unconditionally",
+      "register": "neutral"
+     },
+     {
+      "text": "Kein Aber!",
+      "tr": "no but!",
+      "kind": "colloquial",
+      "meaning": "no buts!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "doch",
+      "register": "neutral",
+      "nuance": "but, yet – takes the first place, verb follows (…, doch ist es teuer)"
+     },
+     {
+      "word": "jedoch",
+      "register": "formal",
+      "nuance": "however – written style, can stand inside the clause"
+     },
+     {
+      "word": "sondern",
+      "register": "neutral",
+      "nuance": "but rather – only after a negation (nicht heute, sondern morgen)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German aber, aver, from Old High German aber, ābar, abur, avur, afur, from Proto-Germanic *aferą (“behind”). Compare Luxembourgish awer (“but”), Low German aver.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "aber once meant “again” – it survives in abermals (once again)."
+    ],
+    "pitfalls": [
+     "aber does not change the word order: …, aber es ist teuer (subject, then verb) – it stands before the clause, at “position 0”.",
+     "After a negation, “but (rather)” is sondern: Nicht der Bus, sondern der Zug."
+    ],
+    "subtleties": [
+     "aber can also stand inside the clause: Es ist aber teuer. (= But it is expensive.)",
+     "A comma comes before aber."
+    ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
+   }
+  },
+  {
+   "id": "de:weil",
+   "lemma": "weil",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.because"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.because",
+     "axis": "word order and use",
+     "value": "verb at the end; the answer to warum?"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Because – the everyday reason word; it sends the verb to the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "because",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.because"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke Wasser, weil ich Durst habe.",
+      "tr": "I’m drinking water because I’m thirsty.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Er bleibt zu Hause, weil er müde ist.",
+      "tr": "He’s staying at home because he’s tired.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "Warum kommst du nicht? – Weil ich arbeiten muss.",
+      "tr": "Why aren’t you coming? – Because I have to work.",
+      "register": "neutral",
+      "context": "answers",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nur weil",
+      "tr": "just because"
+     },
+     {
+      "text": "gerade weil",
+      "tr": "precisely because"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "denn",
+      "register": "neutral",
+      "nuance": "because, for – main-clause order, a little more written"
+     },
+     {
+      "word": "da",
+      "register": "formal",
+      "nuance": "since, as – often at the start: Da es regnet, …"
+     },
+     {
+      "word": "nämlich",
+      "register": "neutral",
+      "nuance": "you see – an adverb inside the second clause (Ich bleibe hier, ich bin nämlich müde)"
+     }
+    ],
+    "etymology": {
+     "text": "From the accusative of Middle High German wīle (modern Weile), from Old High German wīla, from Proto-West Germanic *hwīlu, from Proto-Germanic *hwīlō.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "weil is the old word for “while” (die Weile – a while), like English while."
+    ],
+    "pitfalls": [
+     "The finite verb goes to the END of the clause: …, weil ich Durst habe (not *weil ich habe Durst – heard in fast speech, but wrong in writing).",
+     "A comma always comes before weil."
+    ],
+    "subtleties": [
+     "A weil-clause can come first; then the main clause starts with its verb: Weil ich müde bin, gehe ich nach Hause.",
+     "The answer to Warum? is a weil-clause on its own: Weil ich müde bin."
+    ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
+   }
+  },
+  {
+   "id": "de:denn",
+   "lemma": "denn",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.because",
+    "part.then",
+    "conj.than"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.because",
+     "axis": "word order and use",
+     "value": "normal word order; never at the start"
+    },
+    {
+     "concept": "conj.than",
+     "axis": "register",
+     "value": "literary, or to avoid als als (mehr denn je)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Because, for – a reason in main-clause order; in questions a softening particle.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "because, for (main-clause order)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.because"
+     },
+     {
+      "id": "s2",
+      "def": "then, so – particle in questions (Was ist denn los?)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "part.then"
+     },
+     {
+      "id": "s3",
+      "def": "than (old style: mehr denn je)",
+      "register": [
+       "literary"
+      ],
+      "concept": "conj.than"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke Wasser, denn ich habe Durst.",
+      "tr": "I’m drinking water, for I’m thirsty.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir bleiben zu Hause, denn es ist kalt.",
+      "tr": "We’re staying at home because it’s cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo bist du denn?",
+      "tr": "Where are you, then?",
+      "register": "colloquial",
+      "context": "phone calls",
+      "sense": "s2"
+     },
+     {
+      "text": "Heute ist das wichtiger denn je.",
+      "tr": "Today that is more important than ever.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s3"
+     },
+     {
+      "text": "Er ist als Lehrer bekannter denn als Maler.",
+      "tr": "He is better known as a teacher than as a painter.",
+      "register": "literary",
+      "context": "biography",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Was ist denn los?",
+      "tr": "What’s the matter?"
+     },
+     {
+      "text": "mehr denn je",
+      "tr": "more than ever"
+     },
+     {
+      "text": "es sei denn",
+      "tr": "unless"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "es sei denn",
+      "tr": "it be then",
+      "kind": "fixed expression",
+      "meaning": "unless",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "weil",
+      "register": "neutral",
+      "nuance": "because – verb at the end; more common in speech"
+     },
+     {
+      "word": "da",
+      "register": "formal",
+      "nuance": "since, as"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German denne, tenne, from Old High German denna, a variant of danne, from Proto-West Germanic *þan. Doublet of dann. The functional split between denn and dann was prescribed only by the grammarians of the 18th century. Cognate with English then and than.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "denn and dann were one word until 18th-century grammarians split their jobs – both are cousins of English then and than."
+    ],
+    "pitfalls": [
+     "denn keeps main-clause order: …, denn ich habe Durst (verb second) – compare weil ich Durst habe.",
+     "denn never starts an answer: Warum? – Weil ich müde bin (not *Denn ich bin müde)."
+    ],
+    "subtleties": [
+     "In questions denn is a softening particle, not “because”: Was machst du denn?"
+    ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
+   }
+  },
+  {
+   "id": "de:deshalb",
+   "lemma": "deshalb",
+   "pos": "ADV",
+   "senses": [
+    "conj.so"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register and use",
+     "value": "therefore (neutral)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "That’s why, so – it points back to the reason, and the verb follows at once.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "therefore, that’s why, so",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich habe Hunger, deshalb esse ich ein Brot.",
+      "tr": "I’m hungry, so I’m eating a sandwich.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist kalt, deshalb bleiben wir zu Hause.",
+      "tr": "It’s cold, so we’re staying at home.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Familie wohnt in Wien. Deshalb lerne ich Deutsch.",
+      "tr": "My family lives in Vienna. That’s why I’m learning German.",
+      "register": "neutral",
+      "context": "learning languages",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gerade deshalb",
+      "tr": "precisely for that reason"
+     },
+     {
+      "text": "und deshalb",
+      "tr": "and that’s why"
+     },
+     {
+      "text": "Deshalb!",
+      "tr": "That’s why!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "deswegen",
+      "register": "neutral",
+      "nuance": "that’s why – the same, a little more spoken"
+     },
+     {
+      "word": "daher",
+      "register": "formal",
+      "nuance": "therefore, hence"
+     },
+     {
+      "word": "darum",
+      "register": "neutral",
+      "nuance": "that’s why – also the childish answer Darum! (“Because!”)"
+     },
+     {
+      "word": "also",
+      "register": "neutral",
+      "nuance": "so – a conclusion rather than a reason"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German deshalp, from Middle High German des, dez (“from that, therefore, thereon”) + halp (“half”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "des is the old genitive “of that”: deshalb, deswegen and Greek γι’ αυτό (“for this”) all point back to the reason just given."
+    ],
+    "pitfalls": [
+     "deshalb is an adverb, not a conjunction: it takes the first place and the verb follows at once – deshalb esse ich (not *deshalb ich esse)."
+    ],
+    "subtleties": [
+     "It can also stand after the verb: Ich esse deshalb ein Brot.",
+     "A comma (or a full stop) comes before it."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:deswegen",
+   "lemma": "deswegen",
+   "pos": "ADV",
+   "senses": [
+    "conj.so"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register and use",
+     "value": "therefore (more colloquial)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "That’s why, because of that – the spoken twin of deshalb.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "therefore, because of that, so",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es ist kalt, deswegen bleiben wir zu Hause.",
+      "tr": "It’s cold, so we’re staying at home.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin krank, deswegen komme ich heute nicht.",
+      "tr": "I’m ill, so I’m not coming today.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Deswegen bin ich hier.",
+      "tr": "That’s why I’m here.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gerade deswegen",
+      "tr": "precisely because of that"
+     },
+     {
+      "text": "nur deswegen",
+      "tr": "only for that reason"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "deshalb",
+      "register": "neutral",
+      "nuance": "the same – a little more neutral in writing"
+     },
+     {
+      "word": "darum",
+      "register": "neutral",
+      "nuance": "that’s why"
+     },
+     {
+      "word": "daher",
+      "register": "formal",
+      "nuance": "hence"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of des (“the, that”) + wegen (“because of”), using postpositive wegen.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Speakers use deshalb and deswegen interchangeably; deswegen sounds slightly more colloquial."
+    ],
+    "pitfalls": [
+     "Like deshalb it takes the first place and the verb follows: deswegen bleiben wir (not *deswegen wir bleiben)."
+    ],
+    "subtleties": [
+     "deswegen = des + wegen (“because of that”); wegen alone is the preposition “because of” (wegen des Wetters)."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:also",
+   "lemma": "also",
+   "pos": "ADV",
+   "senses": [
+    "conj.so",
+    "intj.well"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register and use",
+     "value": "so, then: drawing a conclusion"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary’s adverb sense “then, thus, so, hence” is this concept (hence = therefore); it lists the same sense under its conjunction entry (“so, therefore”). German grammars class also as an adverb, because it takes the first place and the verb follows (also fahre ich)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "So, therefore – a conclusion; and the “well, so …” that starts a new thought. Not English “also”!",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "so, therefore (a conclusion)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     },
+     {
+      "id": "s2",
+      "def": "well, so (starting or resuming: Also, …)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "intj.well"
+     },
+     {
+      "id": "s3",
+      "def": "so? then? (in questions: Kommst du also?)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Bus ist langsam, also fahre ich mit dem Fahrrad.",
+      "tr": "The bus is slow, so I’ll go by bike.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich denke, also bin ich.",
+      "tr": "I think, therefore I am.",
+      "register": "neutral",
+      "context": "philosophy",
+      "sense": "s1"
+     },
+     {
+      "text": "Also, was machen wir heute?",
+      "tr": "So, what are we doing today?",
+      "register": "colloquial",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "Du kommst also morgen?",
+      "tr": "So you’re coming tomorrow?",
+      "register": "colloquial",
+      "context": "checking",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "also gut",
+      "tr": "all right then"
+     },
+     {
+      "text": "na also!",
+      "tr": "there you go!"
+     },
+     {
+      "text": "Also los!",
+      "tr": "Let’s go, then!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Ich denke, also bin ich.",
+      "tr": "I think, therefore I am.",
+      "kind": "quote",
+      "meaning": "the first certainty of philosophy",
+      "register": "neutral",
+      "source": "René Descartes, “cogito, ergo sum” (German translation)"
+     },
+     {
+      "text": "Na also!",
+      "tr": "well so!",
+      "kind": "colloquial",
+      "meaning": "There you go! – told you so",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "deshalb",
+      "register": "neutral",
+      "nuance": "that’s why – points back to the reason"
+     },
+     {
+      "word": "folglich",
+      "register": "formal",
+      "nuance": "consequently"
+     },
+     {
+      "word": "daher",
+      "register": "formal",
+      "nuance": "hence, therefore"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German alles, from Old High German also, alsō (“as, like”); equivalent to all + so. Cognate with English also, as.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "also and English also come from the same all + so – the meanings went separate ways."
+    ],
+    "pitfalls": [
+     "False friend: German also = “so, therefore”; English “also” is auch (S09).",
+     "In writing the verb follows at once: also fahre ich (speech sometimes says also ich fahre, after a short pause)."
+    ],
+    "subtleties": [
+     "Also! alone, at the start: “Well …” / “Right, …”."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:dann",
+   "lemma": "dann",
+   "pos": "ADV",
+   "senses": [
+    "adv.then",
+    "adv.inthatcase"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "which “then”",
+     "value": "after that, next (the order of events)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Then – the next step; and “in that case”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "then, after that",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.then"
+     },
+     {
+      "id": "s2",
+      "def": "then, in that case (Wenn …, dann …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.inthatcase"
+     },
+     {
+      "id": "s3",
+      "def": "then (in Bis dann! = see you then)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir essen, dann gehen wir in den Park.",
+      "tr": "We eat, then we go to the park.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Zuerst trinke ich Kaffee, dann gehe ich zur Arbeit.",
+      "tr": "First I drink coffee, then I go to work.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Wenn du Hunger hast, dann iss etwas!",
+      "tr": "If you’re hungry, then eat something!",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s2"
+     },
+     {
+      "text": "Bis dann!",
+      "tr": "See you then!",
+      "register": "colloquial",
+      "context": "goodbyes",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "und dann",
+      "tr": "and then"
+     },
+     {
+      "text": "bis dann",
+      "tr": "see you then"
+     },
+     {
+      "text": "erst …, dann …",
+      "tr": "first …, then …"
+     },
+     {
+      "text": "na dann",
+      "tr": "well then"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Na dann, prost!",
+      "tr": "well then, cheers!",
+      "kind": "colloquial",
+      "meaning": "ironic: well, good luck with that!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "danach",
+      "register": "neutral",
+      "nuance": "after that – stresses the order"
+     },
+     {
+      "word": "anschließend",
+      "register": "formal",
+      "nuance": "afterwards, subsequently"
+     },
+     {
+      "word": "später",
+      "register": "neutral",
+      "nuance": "later"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "vorher",
+      "note": "before (that)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German dann, from Old High German danne, from Proto-West Germanic *þan. Cognate with English then.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "dann is the twin of denn (because) – one word until the 18th century."
+    ],
+    "pitfalls": [
+     "dann takes the first place and the verb follows: dann gehen wir (not *dann wir gehen).",
+     "“Then” = “at that time (in the past)” is damals, not dann: Damals war ich jung."
+    ],
+    "subtleties": [
+     "In Wenn …, dann … the dann is optional: Wenn du Hunger hast, (dann) iss etwas."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:wenn",
+   "lemma": "wenn",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.when",
+    "conj.if",
+    "conj.ifonly"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "time and repetition",
+     "value": "present, future or repeated (whenever)"
+    },
+    {
+     "concept": "conj.if",
+     "axis": "condition or question",
+     "value": "a condition (if it rains)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "When and if – for the present, the future and every repeated time; the verb goes to the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "when, whenever (present, future, repeated)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.when"
+     },
+     {
+      "id": "s2",
+      "def": "if (a condition)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.if"
+     },
+     {
+      "id": "s3",
+      "def": "if only (a wish: Wenn ich doch …!)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.ifonly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ruf mich an, wenn du ankommst.",
+      "tr": "Call me when you arrive.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Immer wenn ich nach Berlin fahre, besuche ich meine Tante.",
+      "tr": "Whenever I go to Berlin, I visit my aunt.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wenn ich Hunger habe, esse ich ein Brot.",
+      "tr": "If I’m hungry, I eat a sandwich.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "Wenn es regnet, bleiben wir zu Hause.",
+      "tr": "If it rains, we stay at home.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "Wenn ich doch nur Zeit hätte!",
+      "tr": "If only I had time!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "immer wenn",
+      "tr": "whenever"
+     },
+     {
+      "text": "wenn ja",
+      "tr": "if so"
+     },
+     {
+      "text": "auch wenn",
+      "tr": "even if"
+     },
+     {
+      "text": "wenn …, dann …",
+      "tr": "if …, then …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "ohne Wenn und Aber",
+      "tr": "without if and but",
+      "kind": "idiom",
+      "meaning": "without ifs and buts",
+      "register": "neutral"
+     },
+     {
+      "text": "Wenn das Wörtchen „wenn“ nicht wär, wär mein Vater Millionär.",
+      "tr": "If the little word “if” weren’t there, my father would be a millionaire.",
+      "kind": "saying",
+      "meaning": "wishful thinking changes nothing",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "falls",
+      "register": "neutral",
+      "nuance": "in case, if – only for conditions"
+     },
+     {
+      "word": "sobald",
+      "register": "neutral",
+      "nuance": "as soon as"
+     },
+     {
+      "word": "als",
+      "register": "neutral",
+      "nuance": "when – only for one event or period in the past"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wanne, wenne, from Old High German hwanne, hwenne, from Proto-West Germanic *hwan, similar to the adverb wann.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "wenn, wann and English when are the same old word in different jobs."
+    ],
+    "pitfalls": [
+     "wenn ≠ wann: wann is the question word (Wann kommst du?), wenn joins clauses (Wenn du kommst, …).",
+     "One event in the past is als, not wenn: Als ich jung war, … (wenn in the past only for “every time”).",
+     "“If” = “whether” after wissen, fragen is ob: Ich weiß nicht, ob er kommt (not *wenn).",
+     "The finite verb goes to the END of the clause: …, wenn ich Hunger habe."
+    ],
+    "subtleties": [
+     "English if and when are both wenn in the present and future; context decides.",
+     "If the wenn-clause comes first, the main clause starts with its verb: Wenn es kalt ist, trinken wir Tee."
+    ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
+   }
+  },
+  {
+   "id": "de:ob",
+   "lemma": "ob",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.if",
+    "conj.asif"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.asif",
+     "axis": "how it forms “as if”",
+     "value": "only after als: als ob …"
+    },
+    {
+     "concept": "conj.if",
+     "axis": "condition or question",
+     "value": "whether: an indirect yes/no question"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "If, whether – for an indirect yes/no question; the verb goes to the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "if, whether (indirect question)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.if"
+     },
+     {
+      "id": "s2",
+      "def": "as if (als ob)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.asif"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich weiß nicht, ob er heute kommt.",
+      "tr": "I don’t know if he’s coming today.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Kannst du fragen, ob das Café offen ist?",
+      "tr": "Can you ask if the café is open?",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Ob das wohl stimmt?",
+      "tr": "I wonder if that’s true.",
+      "register": "neutral",
+      "context": "doubt",
+      "sense": "s1"
+     },
+     {
+      "text": "Er sieht aus, als ob er müde wäre.",
+      "tr": "He looks as if he were tired.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ob … oder nicht",
+      "tr": "whether … or not"
+     },
+     {
+      "text": "als ob",
+      "tr": "as if"
+     },
+     {
+      "text": "Und ob!",
+      "tr": "You bet!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Und ob!",
+      "tr": "and whether!",
+      "kind": "colloquial",
+      "meaning": "You bet! – and how!",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No other word introduces an indirect yes/no question; wenn (if) is only for conditions.",
+    "etymology": {
+     "text": "From Middle High German obe, ob, from Proto-Germanic *jabai (“when, if”). Compare English if.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ob and English if go back to the same Proto-Germanic word *jabai."
+    ],
+    "pitfalls": [
+     "“if” = “whether” is ob: Ich weiß nicht, ob er kommt; “if” = a condition is wenn: Wenn er kommt, essen wir.",
+     "The finite verb goes to the END of the clause: …, ob er heute kommt."
+    ],
+    "subtleties": [
+     "Ob …? alone is a wondering question: Ob er heute kommt? (I wonder if he’s coming today.)"
+    ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
+   }
+  },
+  {
+   "id": "de:dass",
+   "lemma": "dass",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.that",
+    "conj.inorderto"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.inorderto",
+     "axis": "construction",
+     "value": "dass + clause, colloquial for damit (another subject)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "That – the conjunction that turns a sentence into a part of another: Ich bin froh, dass du hier bist.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that (introducing a clause)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.that"
+     },
+     {
+      "id": "s2",
+      "def": "so that (colloquial for damit)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "conj.inorderto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin froh, dass du hier bist.",
+      "tr": "I’m glad that you’re here.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich weiß, dass das teuer ist.",
+      "tr": "I know that it’s expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist schön, dass ihr kommt.",
+      "tr": "It’s nice that you’re coming.",
+      "register": "neutral",
+      "context": "invitations",
+      "sense": "s1"
+     },
+     {
+      "text": "Sprich lauter, dass ich dich verstehe!",
+      "tr": "Speak louder so that I can understand you!",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Schön, dass du da bist!",
+      "tr": "Nice that you’re here!"
+     },
+     {
+      "text": "so dass / sodass",
+      "tr": "so that"
+     },
+     {
+      "text": "ohne dass",
+      "tr": "without (+ clause)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: dass is the only “that” conjunction; the clause can be left without it (Ich glaube, er kommt).",
+    "etymology": {
+     "text": "From Middle High German daȥ, from Old High German daȥ, from Proto-Germanic *þat. Compare Dutch dat, Low German dat, English that. Doublet of das. The distinction from das is purely an orthographical convention.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "dass and das are the same word – the spelling split is only a convention; before 1996 dass was written daß."
+    ],
+    "pitfalls": [
+     "dass (conjunction, ss) vs das (article or pronoun, s): if you can replace it with dieses or welches, write das.",
+     "The finite verb goes to the END of the clause: …, dass du hier bist."
+    ],
+    "subtleties": [
+     "Speech often drops dass and keeps main-clause order: Ich glaube, er kommt = Ich glaube, dass er kommt."
+    ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
+   }
+  },
+  {
+   "id": "de:obwohl",
+   "lemma": "obwohl",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.although"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Although – a contrast, with the verb at the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "although, though",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.although"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir gehen in den Park, obwohl es kalt ist.",
+      "tr": "We’re going to the park although it’s cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Obwohl sie müde ist, geht sie zur Arbeit.",
+      "tr": "Although she’s tired, she goes to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich esse noch ein Stück, obwohl ich satt bin.",
+      "tr": "I’ll have another piece, although I’m full.",
+      "register": "colloquial",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "obwohl es spät ist",
+      "tr": "although it’s late"
+     },
+     {
+      "text": "obwohl ich müde bin",
+      "tr": "although I’m tired"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "obgleich",
+      "register": "formal",
+      "nuance": "although"
+     },
+     {
+      "word": "trotzdem",
+      "register": "neutral",
+      "nuance": "nevertheless – an adverb, verb follows (Es ist kalt, trotzdem gehen wir)"
+     },
+     {
+      "word": "auch wenn",
+      "register": "neutral",
+      "nuance": "even if, even though"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of ob + wohl, from the older use of ob as a conditional and concessive conjunction, reinforced with an adverb. Compare obgleich, obschon.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "obwohl = ob + wohl: the old “if” word plus wohl (well)."
+    ],
+    "pitfalls": [
+     "The finite verb goes to the END of the clause: …, obwohl es kalt ist.",
+     "obwohl joins (…, obwohl es kalt ist); trotzdem is an adverb with the verb next (Es ist kalt, trotzdem gehen wir)."
+    ],
+    "subtleties": [
+     "Speech sometimes uses obwohl as a correction with main-clause order: Ich komme mit – obwohl, nein, ich bin zu müde."
+    ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
+   }
+  }
+ ]
+}

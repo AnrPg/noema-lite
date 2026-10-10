@@ -1,0 +1,1023 @@
+{
+ "lexemes": [
+  {
+   "id": "he:kurkum",
+   "lemma": "כֻּרְכּוּם",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.turmeric"
+   ],
+   "gender": "MASC",
+   "translit": "kurkum",
+   "features": {
+    "spelling": "כורכום",
+    "root": {
+     "none": "a loanword (ultimately Sanskrit kuṅkuma, through Arabic كُرْكُم): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כֻּרְכּוּם"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כֻּרְכּוּם",
+    "N;SG;DEF": "הַכֻּרְכּוּם",
+    "N;SG;CONST": "כֻּרְכּוּם"
+   },
+   "plene": {
+    "N;SG;INDF": "כורכום",
+    "N;SG;DEF": "הכורכום",
+    "N;SG;CONST": "כורכום"
+   },
+   "note": "Used as a mass noun. Wiktionary vowels it with qubuts in the first syllable (כֻּרְכּוּם); everyday spelling כורכום.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bright yellow powder: curry, rice, Yemeni spice mixes and “golden” tea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "turmeric — the rhizome of Curcuma longa, fresh or (usually) dried and ground, a spice and yellow colouring",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.turmeric"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַכֻּרְכּוּם צוֹבֵעַ אֶת הָאֹרֶז בְּצָהֹב.",
+      "tr": "Turmeric colours the rice yellow.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק קָנִיתִי שֹׁרֶשׁ כֻּרְכּוּם טָרִי.",
+      "tr": "At the market I bought a fresh turmeric root.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא שׁוֹתָה תֵּה עִם כֻּרְכּוּם וְזַנְגְּבִיל.",
+      "tr": "She drinks tea with turmeric and ginger.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כֻּרְכּוּם טָחוּן",
+      "tr": "ground turmeric"
+     },
+     {
+      "text": "שֹׁרֶשׁ כֻּרְכּוּם",
+      "tr": "a turmeric root (the fresh rhizome)"
+     },
+     {
+      "text": "כַּפִּית כֻּרְכּוּם",
+      "tr": "a teaspoon of turmeric"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Hebrew; the English name turmeric is not used.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology on the Hebrew page. Its Arabic entry كُرْكُم (kurkum, “turmeric”) lists Aramaic כּוּרְכְּמָא (kurkmā) and Hebrew כַּרְכֹּם (karkom) as Semitic cognates, and says the word most likely came via India from Sanskrit कुङ्कुम (kuṅkuma).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Kurkuma, Russian куркума and Greek κουρκουμάς are the same international word as Hebrew כֻּרְכּוּם; Chinese says 姜黄 jiānghuáng, “ginger-yellow” — turmeric is a relative of ginger (זַנְגְּבִיל).",
+     "Wiktionary links it to Hebrew כַּרְכֹּם (karkom), the crocus, whose stigmas are saffron: both are “yellow spices”."
+    ],
+    "pitfalls": [
+     "Do not confuse it with כַּרְכֹּם (karkom), the crocus or saffron, as in the Song of Songs (4:14): נֵרְדְּ וְכַרְכֹּם “nard and saffron”.",
+     "The first u is written with qubuts in vowelled text (כֻּרְכּוּם) but with ו in everyday spelling (כורכום)."
+    ],
+    "subtleties": [
+     "A mass noun without plural: for one fresh root say שֹׁרֶשׁ כֻּרְכּוּם, for several שָׁרְשֵׁי כֻּרְכּוּם.",
+     "Israelis meet it mostly as the yellow powder; the fresh root is sold in health-food shops and markets."
+    ]
+   }
+  },
+  {
+   "id": "he:ribas",
+   "lemma": "רִיבָּס",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.rhubarb"
+   ],
+   "gender": "MASC",
+   "translit": "ribas",
+   "features": {
+    "spelling": "ריבס",
+    "root": {
+     "none": "a loanword (Arabic/Persian rībās): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רִיבָּס"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "רִיבָּס",
+    "N;SG;DEF": "הָרִיבָּס",
+    "N;SG;CONST": "רִיבָּס"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sour pink stalks cooked into jams and cakes — a European taste, rare in Israeli shops.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rhubarb (Rheum; the sour leaf stalks, cooked like fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.rhubarb"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבְתָּא מְבַשֶּׁלֶת רִבַּת רִיבָּס.",
+      "tr": "Grandma cooks rhubarb jam.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת הֶעָלִים שֶׁל הָרִיבָּס לֹא אוֹכְלִים, כִּי הֵם רְעִילִים.",
+      "tr": "Rhubarb leaves are not eaten, because they are poisonous.",
+      "register": "neutral",
+      "context": "food safety",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּגֶרְמַנְיָה אוֹהֲבִים עוּגַת רִיבָּס.",
+      "tr": "In Germany people love rhubarb cake.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עוּגַת רִיבָּס",
+      "tr": "rhubarb cake"
+     },
+     {
+      "text": "גִּבְעוֹלֵי רִיבָּס",
+      "tr": "rhubarb stalks"
+     },
+     {
+      "text": "רִבַּת רִיבָּס",
+      "tr": "rhubarb jam"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Hebrew.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. Compare Arabic رِيبَاس (rībās, “Syrian rhubarb, Rheum ribes”), which Wiktionary derives from Persian ریواس (rivâs), ریباس (ribâs).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English rhubarb and German Rhabarber go back, Wiktionary says, to Koine Greek ῥῆον βαρβαρικόν, “foreign rhubarb”; Hebrew רִיבָּס instead matches the Arabic and Persian name.",
+     "Botanically a vegetable — you eat the leaf stalk — but it is cooked like a fruit, in jams, compotes and cakes."
+    ],
+    "pitfalls": [
+     "Only the stalks are eaten: the leaves contain oxalic acid and are poisonous.",
+     "Masculine and used without a plural: רִיבָּס טָרִי; for single stalks say גִּבְעוֹלֵי רִיבָּס."
+    ],
+    "subtleties": [
+     "After the article the vowel is qamats, as before every ר: הָרִיבָּס.",
+     "רִבָּה “jam” sounds similar but is unrelated: רִבַּת רִיבָּס is a pleasant tongue-twister."
+    ]
+   }
+  },
+  {
+   "id": "he:vasabi",
+   "lemma": "וָאסָאבִּי",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.wasabi"
+   ],
+   "gender": "MASC",
+   "translit": "vasabi",
+   "features": {
+    "spelling": "ואסאבי",
+    "root": {
+     "none": "a loanword (Japanese wasabi): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "וָאסָאבִּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "וָאסָאבִּי",
+    "N;SG;DEF": "הַוָּאסָאבִּי",
+    "N;SG;CONST": "וָאסָאבִּי"
+   },
+   "plene": {
+    "N;SG;DEF": "הוואסאבי"
+   },
+   "note": "A loanword used as a mass noun, spelled as in Wiktionary’s English entry wasabi (Hebrew translation ואסאבי, vasabi); other spellings are common. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The green fire next to the sushi — a sharp jolt up the nose.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wasabi — the Japanese root (Wasabia japonica) and the green paste made from it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wasabi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אוֹכֵל סוּשִׁי עִם קְצָת וָאסָאבִּי.",
+      "tr": "I (m.) eat sushi with a little wasabi.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "הַוָּאסָאבִּי הַזֶּה חָרִיף מְאוֹד!",
+      "tr": "This wasabi is very hot!",
+      "register": "informal",
+      "context": "tasting",
+      "sense": "s1"
+     },
+     {
+      "text": "רֹב הַוָּאסָאבִּי בַּמִּסְעָדוֹת הוּא בְּעֶצֶם חֲזֶרֶת צְבוּעָה.",
+      "tr": "Most of the wasabi in restaurants is really dyed horseradish.",
+      "register": "neutral",
+      "context": "food facts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִמְרַח וָאסָאבִּי",
+      "tr": "wasabi paste"
+     },
+     {
+      "text": "אֲפוּנַת וָאסָאבִּי",
+      "tr": "wasabi peas (a snack)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the Japanese name is the only one.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From Japanese 山葵 (wasabi), like English wasabi (Wiktionary: “Borrowed from Japanese 山葵 (wasabi)”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese writes it with the same characters as Japanese, 山葵 shānkuí; German and Russian simply borrowed the Japanese name (Wasabi, васаби).",
+     "Real wasabi is a relative of cabbage and horseradish, grown in cold mountain streams; it is grated fresh just before eating."
+    ],
+    "pitfalls": [
+     "The spelling is not settled: ואסאבי, וסאבי and וואסבי all occur — the pronunciation is always vasabi, with v.",
+     "What is sold as wasabi is usually horseradish (חֲזֶרֶת) coloured green; “real wasabi” needs saying."
+    ],
+    "subtleties": [
+     "After the article the ו is doubled in vowelled text: הַוָּאסָאבִּי.",
+     "The alephs only mark the a vowels (וָאסָאבִּי); they are not pronounced."
+    ]
+   }
+  },
+  {
+   "id": "he:maluach",
+   "lemma": "מַלּוּחַ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.orache"
+   ],
+   "gender": "MASC",
+   "translit": "maluach",
+   "features": {
+    "spelling": "מלוח",
+    "root": "מ ל ח",
+    "pattern": "קַטּוּל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַלּוּחַ"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מַלּוּחַ",
+    "N;SG;DEF": "הַמַּלּוּחַ",
+    "N;SG;CONST": "מַלּוּחַ"
+   },
+   "note": "The genus Atriplex (saltbush, orache); used as a mass noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A grey, salty desert shrub — and the famine food of the Book of Job.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "saltbush, orache — plants of the genus Atriplex with edible, spinach-like leaves (garden orache: Atriplex hortensis)",
+      "register": [
+       "neutral",
+       "technical"
+      ],
+      "concept": "veg.orache"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֶת הֶעָלִים שֶׁל הַמַּלּוּחַ אֶפְשָׁר לְבַשֵּׁל כְּמוֹ תֶּרֶד.",
+      "tr": "The leaves of orache can be cooked like spinach.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּמִּדְבָּר גְּדֵלִים שִׂיחֵי מַלּוּחַ.",
+      "tr": "Saltbush shrubs grow in the desert.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקֹּטְפִים מַלּוּחַ עֲלֵי־שִׂיחַ",
+      "tr": "who pick saltbush among the shrubs (Job 30:4)",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שִׂיחֵי מַלּוּחַ",
+      "tr": "saltbush shrubs"
+     },
+     {
+      "text": "עֲלֵי מַלּוּחַ",
+      "tr": "orache leaves"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הַקֹּטְפִים מַלּוּחַ עֲלֵי־שִׂיחַ",
+      "tr": "who pick saltbush among the shrubs",
+      "kind": "quote",
+      "source": "Job 30:4",
+      "meaning": "said of starving outcasts who live on wild plants",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: the plant is not a market vegetable, and the botanical genus name is the only word.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org): compare Arabic مُلَّاح (mullāḥ, “seepweed”). The word belongs to the root מ־ל־ח of מֶלַח “salt”, like the adjective מָלוּחַ “salty”: saltbushes grow on salty soils and taste salty.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German calls garden orache Gartenmelde and Russian лебеда; in Russian history лебеда was famine food — exactly as מַלּוּחַ is in the Book of Job.",
+     "The Mediterranean saltbush, Atriplex halimus, grows wild on Israel’s coast and in its deserts; its leaves really do taste salty."
+    ],
+    "pitfalls": [
+     "מַלּוּחַ (the plant, with a doubled ל) and מָלוּחַ (“salty”) are both spelled מלוח and both pronounced malúakh — only the vowel marks and the context tell them apart."
+    ],
+    "subtleties": [
+     "Garden orache is barely known in Israel; to most speakers מַלּוּחַ is the wild desert saltbush.",
+     "In the Bible (Job 30:4) the outcasts “pick saltbush among the shrubs” — a picture of hunger."
+    ]
+   }
+  },
+  {
+   "id": "he:lev-dekel",
+   "lemma": "לֵב דֶּקֶל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.heartofpalm"
+   ],
+   "gender": "MASC",
+   "translit": "lev dekel",
+   "features": {
+    "spelling": "לב דקל",
+    "root": {
+     "none": "a compound of two words (לֵב + דֶּקֶל): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "לִבְבוֹת דֶּקֶל",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "לֵב דֶּקֶל",
+    "N;SG;DEF": "לֵב הַדֶּקֶל",
+    "N;PL;INDF": "לִבְבוֹת דֶּקֶל",
+    "N;PL;DEF": "לִבְבוֹת הַדֶּקֶל"
+   },
+   "note": "A two-word lexeme (construct phrase: the article goes on the second word, the plural on the first). Tokenized as one word (the engine matches multi-word lexemes first). Cans are sold as לִבְבוֹת דֶּקֶל.",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries לֵב (plural לְבָבוֹת) and דֶּקֶל; Wiktionary’s English entry heart of palm gives לב דקל (lev dékel, masculine)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pale, tender cylinders from a can — a salad treat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "heart of palm — the tender inner core of certain palms, eaten as a vegetable",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.heartofpalm"
+     }
+    ],
+    "examples": [
+     {
+      "text": "פָּתַחְתִּי קֻפְסַת לִבְבוֹת דֶּקֶל לַסָּלָט.",
+      "tr": "I opened a can of hearts of palm for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא חוֹתֶכֶת אֶת לִבְבוֹת הַדֶּקֶל לְעִגּוּלִים.",
+      "tr": "She cuts the hearts of palm into rounds.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "לֵב דֶּקֶל טָרִי הוּא מַעֲדָן נָדִיר.",
+      "tr": "A fresh heart of palm is a rare delicacy.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט לִבְבוֹת דֶּקֶל",
+      "tr": "heart of palm salad"
+     },
+     {
+      "text": "קֻפְסַת לִבְבוֹת דֶּקֶל",
+      "tr": "a can of hearts of palm"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "לֵב “heart” (Wiktionary: from Proto-Semitic *libb-; also “heart, core, center”) + דֶּקֶל “palm tree” (Wiktionary: first attested in Mishnaic Hebrew, of uncertain origin; cognate with Aramaic דִּקְלָא) — like English heart of palm and German Palmherz.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לֵב is cognate with Arabic لُبّ (lubb, “core, kernel”) and Aramaic לִבָּא (Wiktionary) — the “heart” of a palm is its core in every sense.",
+     "Cutting the heart used to kill the palm; today much of it comes from multi-stemmed palms such as the peach palm, which grow new shoots."
+    ],
+    "pitfalls": [
+     "The plural of לֵב is לְבָבוֹת, in a construct לִבְבוֹת: לִבְבוֹת דֶּקֶל, not *לֵבִים.",
+     "The article goes on the second word: לֵב הַדֶּקֶל, לִבְבוֹת הַדֶּקֶל."
+    ],
+    "subtleties": [
+     "דֶּקֶל alone is a palm tree (and in Wiktionary also its date); the vegetable needs the whole phrase.",
+     "In everyday talk the plural is the normal form, as on the can: לִבְבוֹת דֶּקֶל."
+    ]
+   }
+  },
+  {
+   "id": "he:yarbuz",
+   "lemma": "יַרְבּוּז",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.amaranth"
+   ],
+   "gender": "MASC",
+   "translit": "yarbuz",
+   "features": {
+    "spelling": "ירבוז",
+    "root": {
+     "none": "an old plant name with no root in use"
+    },
+    "pattern": {
+     "none": "an old plant name: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יַרְבּוּז"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יַרְבּוּז",
+    "N;SG;DEF": "הַיַּרְבּוּז",
+    "N;SG;CONST": "יַרְבּוּז"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry; its English entry amaranth gives ירבוז (yarbúz, masculine).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A summer weed of fields and roadsides — and a leafy green in Indian, Greek and Arab kitchens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "amaranth — plants of the genus Amaranthus; their leaves eaten as greens",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.amaranth"
+     },
+     {
+      "id": "s2",
+      "def": "amaranth seed, eaten like a grain",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיַּרְבּוּז צוֹמֵחַ בַּשָּׂדוֹת בַּקַּיִץ.",
+      "tr": "Amaranth grows in the fields in summer.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּמִּטְבָּח הַהֹדִּי מְבַשְּׁלִים עֲלֵי יַרְבּוּז.",
+      "tr": "In Indian cooking amaranth leaves are cooked.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת זַרְעֵי הַיַּרְבּוּז אוֹכְלִים כְּמוֹ דָּגָן.",
+      "tr": "Amaranth seeds are eaten like a grain.",
+      "register": "neutral",
+      "context": "nutrition",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי יַרְבּוּז",
+      "tr": "amaranth leaves"
+     },
+     {
+      "text": "זַרְעֵי יַרְבּוּז",
+      "tr": "amaranth seeds"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday Hebrew.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry and no etymology. English amaranth comes (via French and Latin) from Ancient Greek ἀμάραντος (amárantos, “unfading”), with the ending influenced by ἄνθος “flower” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Greece the boiled greens are βλίτα, a classic summer salad with olive oil and lemon; Chinese 苋菜 xiàncài is the same leafy vegetable.",
+     "The Greek name ἀμάραντος, “unfading”, comes from the flowers, which keep their colour when dried."
+    ],
+    "pitfalls": [
+     "To most Israelis יַרְבּוּז is a weed, not food; when you mean the vegetable say עֲלֵי יַרְבּוּז."
+    ],
+    "subtleties": [
+     "Masculine: יַרְבּוּז טָרִי.",
+     "After the article the י is doubled: הַיַּרְבּוּז."
+    ]
+   }
+  },
+  {
+   "id": "he:shoresh-petrozilya",
+   "lemma": "שֹׁרֶשׁ פֶּטְרוֹזִילְיָה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.rootparsley"
+   ],
+   "gender": "MASC",
+   "translit": "shoresh petrozilya",
+   "features": {
+    "spelling": "שורש פטרוזיליה",
+    "root": {
+     "none": "a compound of two words (שֹׁרֶשׁ + פֶּטְרוֹזִילְיָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "שָׁרְשֵׁי פֶּטְרוֹזִילְיָה",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "שֹׁרֶשׁ פֶּטְרוֹזִילְיָה",
+    "N;SG;DEF": "שֹׁרֶשׁ הַפֶּטְרוֹזִילְיָה",
+    "N;PL;INDF": "שָׁרְשֵׁי פֶּטְרוֹזִילְיָה",
+    "N;PL;DEF": "שָׁרְשֵׁי הַפֶּטְרוֹזִילְיָה"
+   },
+   "plene": {
+    "N;SG;INDF": "שורש פטרוזיליה",
+    "N;SG;DEF": "שורש הפטרוזיליה",
+    "N;PL;INDF": "שורשי פטרוזיליה",
+    "N;PL;DEF": "שורשי הפטרוזיליה"
+   },
+   "note": "A two-word lexeme (construct phrase: the article and the plural are marked as in שֹׁרֶשׁ סֶלֶרִי). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries שֹׁרֶשׁ and פֶּטְרוֹזִילְיָה (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A pale root in the bunch of soup vegetables — the smell of Friday chicken soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "root parsley, Hamburg parsley (the root of Petroselinum crispum var. tuberosum)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.rootparsley"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סַבְתָּא שָׂמָה שֹׁרֶשׁ פֶּטְרוֹזִילְיָה בִּמְרַק הָעוֹף.",
+      "tr": "Grandma puts a parsley root in the chicken soup.",
+      "register": "neutral",
+      "context": "family cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק מוֹכְרִים שָׁרְשֵׁי פֶּטְרוֹזִילְיָה לְיַד הַגְּזָרִים.",
+      "tr": "At the market they sell parsley roots next to the carrots.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "שֹׁרֶשׁ הַפֶּטְרוֹזִילְיָה דּוֹמֶה לְגֶזֶר לָבָן.",
+      "tr": "The parsley root looks like a parsnip.",
+      "register": "neutral",
+      "context": "comparison",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֹׁרֶשׁ פֶּטְרוֹזִילְיָה לַמָּרָק",
+      "tr": "parsley root for the soup"
+     },
+     {
+      "text": "שָׁרְשֵׁי פֶּטְרוֹזִילְיָה וְסֶלֶרִי",
+      "tr": "parsley and celery roots"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; פֶּטְרוֹזִילְיָה alone means the leaves.",
+    "etymology": {
+     "text": "שֹׁרֶשׁ “root” (from Proto-Semitic *šurš-) + פֶּטְרוֹזִילְיָה “parsley” (Wiktionary: from European languages, from Latin petroselinum, itself from Greek πετροσέλινον, “rock celery”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Petersilienwurzel is the same “parsley root”; Russian петрушка and German Petersilie come from the same Greek πετροσέλινον, while Modern Greek and Turkish say μαϊντανός / maydanoz.",
+     "Root parsley and leaf parsley are one species: one variety is bred for its root, the other for its leaves."
+    ],
+    "pitfalls": [
+     "פֶּטְרוֹזִילְיָה alone is the leafy herb; the root vegetable needs שֹׁרֶשׁ.",
+     "The plural changes the first word: שָׁרְשֵׁי פֶּטְרוֹזִילְיָה (said shorshei, spelled שורשי)."
+    ],
+    "subtleties": [
+     "It is easily taken for a parsnip (גֶּזֶר לָבָן); the parsley root is slimmer and tastes of parsley.",
+     "In שָׁרְשֵׁי the first vowel is a qamats katan, pronounced o."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.borage",
+   "reason": "Not grown or eaten in Israel; no everyday Hebrew name.",
+   "use": "The European name borage in Hebrew letters, or a botanical description."
+  },
+  {
+   "concept": "veg.fathen",
+   "reason": "A field weed, not a market vegetable; no everyday food word.",
+   "use": "Botanists use the name of the genus, כַּף אֲוָז (goosefoot); otherwise a description."
+  },
+  {
+   "concept": "veg.burdock",
+   "reason": "Burdock root is known only from Japanese cooking; no Hebrew food word.",
+   "use": "The Japanese name gobo in Hebrew letters, or “burdock root” translated descriptively."
+  },
+  {
+   "concept": "veg.welshonion",
+   "reason": "Not distinguished from other green onions in everyday Hebrew.",
+   "use": "בָּצָל יָרֹק (veg.springonion)."
+  },
+  {
+   "concept": "veg.waterchestnut",
+   "reason": "Known only from Chinese cooking (canned); no established Hebrew word.",
+   "use": "A literal translation of “water chestnut” built on עַרְמוֹן (chestnut), or the English name."
+  },
+  {
+   "concept": "veg.watercaltrop",
+   "reason": "Not eaten in Israel; no everyday word.",
+   "use": "A botanical or descriptive name; often confused with the water chestnut."
+  },
+  {
+   "concept": "veg.purpleyam",
+   "reason": "Purple yam (ube) is almost unknown in Israel; no Hebrew name.",
+   "use": "The Filipino name ube or “purple yam” in Hebrew letters."
+  },
+  {
+   "concept": "veg.jicama",
+   "reason": "Not sold in Israel; no Hebrew word.",
+   "use": "The Spanish name jícama in Hebrew letters."
+  },
+  {
+   "concept": "veg.cardoon",
+   "reason": "The cultivated cardoon is hardly known; no everyday word.",
+   "use": "Described as a kind of artichoke (אַרְטִישׁוֹק); the wild relatives are called קִנְרָס, which Wiktionary glosses “artichoke”."
+  },
+  {
+   "concept": "veg.tigernut",
+   "reason": "Not a known food in Israel; no established word.",
+   "use": "The English or Spanish name (chufa) in Hebrew letters."
+  },
+  {
+   "concept": "veg.malabarspinach",
+   "reason": "Known only from Asian and Indian cooking; no Hebrew name.",
+   "use": "A literal translation of “Malabar spinach” built on תֶּרֶד (spinach)."
+  },
+  {
+   "concept": "veg.galangal",
+   "reason": "Known only from Thai recipes; no Hebrew word of its own.",
+   "use": "The English name galangal in Hebrew letters, often explained as a relative of זַנְגְּבִיל (ginger)."
+  },
+  {
+   "concept": "veg.elephantyam",
+   "reason": "Not sold in Israel; no Hebrew name.",
+   "use": "The English name or an Indian name in Hebrew letters."
+  },
+  {
+   "concept": "veg.goodkinghenry",
+   "reason": "An old European pot-herb, unknown in Israel; no Hebrew name.",
+   "use": "A botanical description (a kind of goosefoot)."
+  },
+  {
+   "concept": "veg.kurrat",
+   "reason": "Not distinguished from the leek in everyday Hebrew.",
+   "use": "כְּרֵשָׁה (veg.leek), or a description such as “Egyptian leek”."
+  },
+  {
+   "concept": "veg.konjac",
+   "reason": "Known only as a product (shirataki noodles, jelly); no Hebrew word for the plant.",
+   "use": "The Japanese name konnyaku or the English konjac in Hebrew letters."
+  },
+  {
+   "concept": "veg.samphire",
+   "reason": "Rock samphire (sea fennel) is not eaten in Israel; no everyday word.",
+   "use": "A botanical or descriptive name."
+  },
+  {
+   "concept": "veg.glasswort",
+   "reason": "Glasswort appears only on some restaurant menus, under foreign or descriptive names; no established food word.",
+   "use": "The Latin name salicornia in Hebrew letters, or a description such as “sea asparagus”."
+  },
+  {
+   "concept": "veg.oca",
+   "reason": "An Andean tuber unknown in Israel; no Hebrew name.",
+   "use": "The Spanish/Quechua name oca in Hebrew letters."
+  },
+  {
+   "concept": "veg.nzspinach",
+   "reason": "Not grown or sold in Israel as a vegetable; no everyday name.",
+   "use": "A literal translation of “New Zealand spinach” built on תֶּרֶד (spinach)."
+  },
+  {
+   "concept": "veg.yacon",
+   "reason": "An Andean root unknown in Israeli shops; no Hebrew name.",
+   "use": "The Spanish name yacón in Hebrew letters (mostly for the syrup)."
+  },
+  {
+   "concept": "veg.mashua",
+   "reason": "An Andean tuber unknown in Israel; no Hebrew name.",
+   "use": "The Quechua name mashua in Hebrew letters."
+  },
+  {
+   "concept": "veg.salsify",
+   "reason": "Not grown or sold in Israel; no everyday name.",
+   "use": "The European name in Hebrew letters, or a botanical description."
+  },
+  {
+   "concept": "veg.skirret",
+   "reason": "An old European root vegetable unknown in Israel; no Hebrew name.",
+   "use": "A botanical description."
+  },
+  {
+   "concept": "veg.arracacha",
+   "reason": "An Andean root unknown in Israel; no Hebrew name.",
+   "use": "The Spanish name arracacha in Hebrew letters."
+  },
+  {
+   "concept": "veg.chineseartichoke",
+   "reason": "Not sold in Israel; no Hebrew name.",
+   "use": "The French name crosne or the English name in Hebrew letters."
+  },
+  {
+   "concept": "veg.landcress",
+   "reason": "Not a common vegetable in Israel; no everyday name.",
+   "use": "Described as a kind of cress, or with the English name."
+  },
+  {
+   "concept": "veg.treeonion",
+   "reason": "A garden curiosity; no Hebrew name.",
+   "use": "A description built on בָּצָל (onion)."
+  },
+  {
+   "concept": "veg.celtuce",
+   "reason": "Known only from Chinese cooking; no Hebrew word.",
+   "use": "A description such as “stem lettuce”, built on חַסָּה (lettuce)."
+  },
+  {
+   "concept": "veg.fiddlehead",
+   "reason": "Fern shoots are not eaten in Israel; no Hebrew food word.",
+   "use": "A description: the young shoots of a fern (שָׁרָךְ)."
+  },
+  {
+   "concept": "veg.ramps",
+   "reason": "A North American wild leek, unknown in Israel; no Hebrew word.",
+   "use": "The English name, or a description as a kind of wild garlic or leek."
+  },
+  {
+   "concept": "veg.pearlonion",
+   "reason": "No separate everyday word.",
+   "use": "Described as small onions (בְּצָלִים קְטַנִּים), or with the English name."
+  },
+  {
+   "concept": "veg.elephantgarlic",
+   "reason": "Rarely sold; no established name.",
+   "use": "A literal translation of “elephant garlic” built on שׁוּם (garlic)."
+  }
+ ]
+}

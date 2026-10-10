@@ -1,0 +1,2129 @@
+{
+ "sentences": [
+  {
+   "id": "ar.s3.001",
+   "frame": "fr.eat.def",
+   "text": "هُوَ يَأْكُلُ الْجُمَّارَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْجُمَّارَ",
+     "l": "ar:jummar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the heart of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.002",
+   "frame": "fr.eat.def",
+   "text": "هُوَ يَأْكُلُ الْجُمَّارَاتِ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْجُمَّارَاتِ",
+     "l": "ar:jummar",
+     "f": "N;ACC;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": "ar.s3.001",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "He eats the hearts of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.003",
+   "frame": "fr.eat.def",
+   "text": "نَحْنُ نَأْكُلُ الْقِثَّاءَةَ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْقِثَّاءَةَ",
+     "l": "ar:qiththa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "We eat the Armenian cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.004",
+   "frame": "fr.eat.def",
+   "text": "نَحْنُ نَأْكُلُ الْقِثَّاءَاتِ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْقِثَّاءَاتِ",
+     "l": "ar:qiththa",
+     "f": "N;ACC;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": "ar.s3.003",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "We eat the Armenian cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.005",
+   "frame": "fr.eat.def",
+   "text": "أَنْتِ تَأْكُلِينَ الْمَلْفُوفَ الْمَخْرُوطِيَّ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلِينَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الْمَلْفُوفَ الْمَخْرُوطِيَّ",
+     "l": "ar:malfuf_makhruti",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "You (f) eat the pointed cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.006",
+   "frame": "fr.eat.def",
+   "text": "هُمْ يَأْكُلُونَ الْجَرْبُوزَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَأْكُلُونَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْجَرْبُوزَ",
+     "l": "ar:jarbuz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "They eat the amaranth greens.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.007",
+   "frame": "fr.eat.def",
+   "text": "أَنَا آكُلُ الْكَبَرَ وَالْجُمَّارَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "آكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْكَبَرَ",
+     "l": "ar:kabar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "وَالْجُمَّارَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "الْجُمَّارَ",
+       "l": "ar:jummar",
+       "f": "N;ACC;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "I eat the capers and the heart of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.008",
+   "frame": "fr.buy.indef",
+   "text": "أَنَا أَشْتَرِي كُرْكُمًا.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "كُرْكُمًا",
+     "l": "ar:kurkum",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I buy (some) turmeric.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.009",
+   "frame": "fr.buy.indef",
+   "text": "هِيَ تَشْتَرِي قِثَّاءَةً.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "قِثَّاءَةً",
+     "l": "ar:qiththa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys an Armenian cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.010",
+   "frame": "fr.buy.indef",
+   "text": "هِيَ تَشْتَرِي قِثَّاءَاتٍ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "قِثَّاءَاتٍ",
+     "l": "ar:qiththa",
+     "f": "N;ACC;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": "ar.s3.009",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "She buys (some) Armenian cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.011",
+   "frame": "fr.buy.indef",
+   "text": "نَحْنُ نَشْتَرِي رَاوَنْدًا.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "رَاوَنْدًا",
+     "l": "ar:rawand",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy (some) rhubarb.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.012",
+   "frame": "fr.buy.indef",
+   "text": "هُوَ يَشْتَرِي خَوْلَنْجَانًا.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "خَوْلَنْجَانًا",
+     "l": "ar:khawlanjan",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys (some) galangal.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.013",
+   "frame": "fr.buy.indef",
+   "text": "هُمْ يَشْتَرُونَ جُمَّارًا.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرُونَ",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "جُمَّارًا",
+     "l": "ar:jummar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They buy a heart of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.014",
+   "frame": "fr.buy.indef",
+   "text": "أَنْتَ تَشْتَرِي وَاسَابِي.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "وَاسَابِي",
+     "l": "ar:wasabi",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "You (m) buy (some) wasabi.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.015",
+   "frame": "fr.buy.indef",
+   "text": "هُنَّ يَشْتَرِينَ كَبَرًا.",
+   "tokens": [
+    {
+     "t": "هُنَّ",
+     "l": "ar:hunna",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يَشْتَرِينَ",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;3;PL;FEM"
+    },
+    {
+     "t": "كَبَرًا",
+     "l": "ar:kabar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They (women) buy (some) capers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.016",
+   "frame": "fr.like.generic",
+   "text": "أَنَا أُحِبُّ الْقِثَّاءَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقِثَّاءَ",
+     "l": "ar:qiththa",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "I like Armenian cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.017",
+   "frame": "fr.like.generic",
+   "text": "هِيَ تُحِبُّ الرَّاوَنْدَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الرَّاوَنْدَ",
+     "l": "ar:rawand",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She likes rhubarb.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.018",
+   "frame": "fr.like.generic",
+   "text": "نَحْنُ نُحِبُّ الْكُرْكُمَ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْكُرْكُمَ",
+     "l": "ar:kurkum",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "We like turmeric.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.019",
+   "frame": "fr.like.generic",
+   "text": "هُوَ يُحِبُّ الْوَاسَابِي.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْوَاسَابِي",
+     "l": "ar:wasabi",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He likes wasabi.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.020",
+   "frame": "fr.like.generic",
+   "text": "أَنْتَ تُحِبُّ الْجُمَّارَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْجُمَّارَ",
+     "l": "ar:jummar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "You (m) like heart of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.021",
+   "frame": "fr.like.generic",
+   "text": "هَلْ تُحِبُّ الْجُمَّارَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْجُمَّارَ",
+     "l": "ar:jummar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "variantOf": "ar.s3.020",
+   "variant": {
+    "Mood": "INT"
+   },
+   "gloss": "Do you (m) like heart of palm?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.022",
+   "frame": "fr.like.generic",
+   "text": "هُمْ يُحِبُّونَ الْكَبَرَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "يُحِبُّونَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْكَبَرَ",
+     "l": "ar:kabar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "They like capers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.023",
+   "frame": "fr.like.generic",
+   "text": "أَنْتِ تُحِبِّينَ الْخَوْلَنْجَانَ.",
+   "tokens": [
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الْخَوْلَنْجَانَ",
+     "l": "ar:khawlanjan",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "You (f) like galangal.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.024",
+   "frame": "fr.notlike.generic",
+   "text": "أَنَا لَا أُحِبُّ الْوَاسَابِي.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْوَاسَابِي",
+     "l": "ar:wasabi",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "I don’t like wasabi.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.025",
+   "frame": "fr.notlike.generic",
+   "text": "هُوَ لَا يُحِبُّ الرَّاوَنْدَ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الرَّاوَنْدَ",
+     "l": "ar:rawand",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "He doesn’t like rhubarb.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.026",
+   "frame": "fr.notlike.generic",
+   "text": "هِيَ لَا تُحِبُّ الْكَبَرَ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْكَبَرَ",
+     "l": "ar:kabar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "She doesn’t like capers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.027",
+   "frame": "fr.notlike.generic",
+   "text": "نَحْنُ لَا نُحِبُّ السَّرْمَقَ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "نُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "السَّرْمَقَ",
+     "l": "ar:sarmaq",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "We don’t like fat hen.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.028",
+   "frame": "fr.notlike.generic",
+   "text": "هُمْ لَا يُحِبُّونَ الْحِمْحِمَ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "يُحِبُّونَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;PL;MASC"
+    },
+    {
+     "t": "الْحِمْحِمَ",
+     "l": "ar:himhim",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "They don’t like borage.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.029",
+   "frame": "fr.notlike.generic",
+   "text": "أَنْتَ لَا تُحِبُّ الْقَطَفَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَ",
+     "l": "ar:anta",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "الْقَطَفَ",
+     "l": "ar:qataf",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "You (m) don’t like orache.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.030",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ قِثَّاءَةً؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "قِثَّاءَةً",
+     "l": "ar:qiththa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want an Armenian cucumber?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.031",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ قِثَّاءَاتٍ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "قِثَّاءَاتٍ",
+     "l": "ar:qiththa",
+     "f": "N;ACC;PL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": "ar.s3.030",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "Do you (m) want (some) Armenian cucumbers?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.032",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدِينَ كُرْكُمًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "كُرْكُمًا",
+     "l": "ar:kurkum",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f) want (some) turmeric?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.033",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ وَاسَابِي؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "وَاسَابِي",
+     "l": "ar:wasabi",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want (some) wasabi?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.034",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدِينَ مَلْفُوفًا مَخْرُوطِيًّا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدِينَ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "مَلْفُوفًا مَخْرُوطِيًّا",
+     "l": "ar:malfuf_makhruti",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f) want (some) pointed cabbage?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.035",
+   "frame": "fr.want.q",
+   "text": "هَلْ تُرِيدُ جَرْبُوزًا؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "جَرْبُوزًا",
+     "l": "ar:jarbuz",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m) want (some) amaranth greens?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.036",
+   "frame": "fr.this.is",
+   "text": "هٰذَا كُرْكُمٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "كُرْكُمٌ",
+     "l": "ar:kurkum",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is turmeric.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.037",
+   "frame": "fr.this.is",
+   "text": "هٰذَا لَيْسَ كُرْكُمًا.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "كُرْكُمًا",
+     "l": "ar:kurkum",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": "ar.s3.036",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "This is not turmeric.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.038",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ قِثَّاءَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قِثَّاءَةٌ",
+     "l": "ar:qiththa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is an Armenian cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.039",
+   "frame": "fr.this.is",
+   "text": "هٰذِهِ قِثَّاءَاتٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "قِثَّاءَاتٌ",
+     "l": "ar:qiththa",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": "ar.s3.038",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "These are Armenian cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.040",
+   "frame": "fr.this.is",
+   "text": "هٰذَا جُمَّارٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "جُمَّارٌ",
+     "l": "ar:jummar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is (a) heart of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.041",
+   "frame": "fr.this.is",
+   "text": "هَلْ هٰذَا جُمَّارٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "جُمَّارٌ",
+     "l": "ar:jummar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": "ar.s3.040",
+   "variant": {
+    "Mood": "INT"
+   },
+   "gloss": "Is this (a) heart of palm?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.042",
+   "frame": "fr.this.is",
+   "text": "هٰذَا حِمْحِمٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "حِمْحِمٌ",
+     "l": "ar:himhim",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is borage.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.043",
+   "frame": "fr.this.is",
+   "text": "هٰذَا قَطَفٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "قَطَفٌ",
+     "l": "ar:qataf",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is orache.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.044",
+   "frame": "fr.this.is",
+   "text": "هٰذَا سَرْمَقٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "سَرْمَقٌ",
+     "l": "ar:sarmaq",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is fat hen.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.045",
+   "frame": "fr.this.is",
+   "text": "هٰذَا أُشْنَانٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "أُشْنَانٌ",
+     "l": "ar:ushnan",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is glasswort.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.046",
+   "frame": "fr.this.is",
+   "text": "هٰذَا خَوْلَنْجَانٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "خَوْلَنْجَانٌ",
+     "l": "ar:khawlanjan",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is galangal.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.047",
+   "frame": "fr.this.is",
+   "text": "هٰذَا مَلْفُوفٌ مَخْرُوطِيٌّ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "مَلْفُوفٌ مَخْرُوطِيٌّ",
+     "l": "ar:malfuf_makhruti",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is pointed cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.048",
+   "frame": "fr.this.is",
+   "text": "هٰذَا جَرْبُوزٌ.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "جَرْبُوزٌ",
+     "l": "ar:jarbuz",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is amaranth.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.049",
+   "frame": "fr.this.is",
+   "text": "هٰذَا وَاسَابِي.",
+   "tokens": [
+    {
+     "t": "هٰذَا",
+     "l": "ar:hadha",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "وَاسَابِي",
+     "l": "ar:wasabi",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is wasabi.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.050",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْكُرْكُمُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْكُرْكُمُ",
+     "l": "ar:kurkum",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the turmeric?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.051",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْكَبَرُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْكَبَرُ",
+     "l": "ar:kabar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where are the capers?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.052",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْجُمَّارُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْجُمَّارُ",
+     "l": "ar:jummar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the heart of palm?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.053",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْجُمَّارَاتُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْجُمَّارَاتُ",
+     "l": "ar:jummar",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": "ar.s3.052",
+   "variant": {
+    "Number": "PL"
+   },
+   "gloss": "Where are the hearts of palm?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.054",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْوَاسَابِي؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْوَاسَابِي",
+     "l": "ar:wasabi",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the wasabi?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.055",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْقِثَّاءُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْقِثَّاءُ",
+     "l": "ar:qiththa",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where are the Armenian cucumbers?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.056",
+   "frame": "fr.have.indef",
+   "text": "عِنْدِي رَاوَنْدٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "رَاوَنْدٌ",
+     "l": "ar:rawand",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have (some) rhubarb.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.057",
+   "frame": "fr.have.indef",
+   "text": "لَيْسَ عِنْدِي رَاوَنْدٌ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "رَاوَنْدٌ",
+     "l": "ar:rawand",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": "ar.s3.056",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "I don’t have (any) rhubarb.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.058",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهَا قِثَّاءَةٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهَا",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "قِثَّاءَةٌ",
+     "l": "ar:qiththa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has an Armenian cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.059",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَنَا كُرْكُمٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "كُرْكُمٌ",
+     "l": "ar:kurkum",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have (some) turmeric.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.060",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَكَ كَبَرٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "كَبَرٌ",
+     "l": "ar:kabar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "You (m) have (some) capers.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.061",
+   "frame": "fr.have.indef",
+   "text": "هَلْ عِنْدَكَ كَبَرٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "كَبَرٌ",
+     "l": "ar:kabar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": "ar.s3.060",
+   "variant": {
+    "Mood": "INT"
+   },
+   "gloss": "Do you (m) have (any) capers?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.062",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهُ أُشْنَانٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُ",
+     "l": "ar:inda",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "أُشْنَانٌ",
+     "l": "ar:ushnan",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He has (some) glasswort.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.063",
+   "frame": "fr.have.indef",
+   "text": "عِنْدَهُمْ جُمَّارَاتٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَهُمْ",
+     "l": "ar:inda",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "جُمَّارَاتٌ",
+     "l": "ar:jummar",
+     "f": "N;NOM;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "They have (some) hearts of palm.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.064",
+   "frame": "fr.here.def",
+   "text": "الْقِثَّاءُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقِثَّاءُ",
+     "l": "ar:qiththa",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The Armenian cucumbers are here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.065",
+   "frame": "fr.here.def",
+   "text": "الْقِثَّاءُ لَيْسَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقِثَّاءُ",
+     "l": "ar:qiththa",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "variantOf": "ar.s3.064",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "gloss": "The Armenian cucumbers are not here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.066",
+   "frame": "fr.here.def",
+   "text": "الْخَوْلَنْجَانُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْخَوْلَنْجَانُ",
+     "l": "ar:khawlanjan",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The galangal is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.067",
+   "frame": "fr.here.def",
+   "text": "الرَّاوَنْدُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الرَّاوَنْدُ",
+     "l": "ar:rawand",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The rhubarb is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.068",
+   "frame": "fr.here.def",
+   "text": "الْحِمْحِمُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْحِمْحِمُ",
+     "l": "ar:himhim",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The borage is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.069",
+   "frame": "fr.here.def",
+   "text": "الْمَلْفُوفُ الْمَخْرُوطِيُّ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْمَلْفُوفُ الْمَخْرُوطِيُّ",
+     "l": "ar:malfuf_makhruti",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The pointed cabbage is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.070",
+   "frame": "fr.here.def",
+   "text": "الْقَطَفُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْقَطَفُ",
+     "l": "ar:qataf",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The orache is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.071",
+   "frame": "fr.here.def",
+   "text": "السَّرْمَقُ هُنَا.",
+   "tokens": [
+    {
+     "t": "السَّرْمَقُ",
+     "l": "ar:sarmaq",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The fat hen is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.072",
+   "frame": "fr.here.def",
+   "text": "الْجَرْبُوزُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْجَرْبُوزُ",
+     "l": "ar:jarbuz",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The amaranth is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.s3.073",
+   "frame": "fr.here.def",
+   "text": "الْأُشْنَانُ هُنَا.",
+   "tokens": [
+    {
+     "t": "الْأُشْنَانُ",
+     "l": "ar:ushnan",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The glasswort is here.",
+   "level": "A1"
+  }
+ ]
+}

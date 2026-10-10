@@ -1,0 +1,186 @@
+{
+ "field": "animals",
+ "title": "Animals",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "animal.bird",
+   "gloss": "bird, fowl",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "animal.chicken",
+   "gloss": "chicken, hen (the bird)",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "animal.fish",
+   "gloss": "fish (the animal)",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "animal.rooster",
+   "gloss": "rooster, cock",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "animal.shoal",
+   "gloss": "shoal, school (of fish)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "animal.workerbee",
+   "gloss": "worker bee",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "animal.dog",
+   "gloss": "dog",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "animal.cat",
+   "gloss": "cat",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "animal.horse",
+   "gloss": "horse",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "animal.cow",
+   "gloss": "cow",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "animal.sheep",
+   "gloss": "sheep",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "animal.goat",
+   "gloss": "goat",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "animal.pig",
+   "gloss": "pig",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "animal.duck",
+   "gloss": "duck",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "animal.mouse",
+   "gloss": "mouse",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "animal.rabbit",
+   "gloss": "rabbit",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "animal.lion",
+   "gloss": "lion",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "animal.tiger",
+   "gloss": "tiger",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "animal.bear",
+   "gloss": "bear",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "animal.wolf",
+   "gloss": "wolf",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "animal.fox",
+   "gloss": "fox",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "animal.elephant",
+   "gloss": "elephant",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "animal.monkey",
+   "gloss": "monkey",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "animal.snake",
+   "gloss": "snake",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "animal.insect",
+   "gloss": "insect",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "animal.bee",
+   "gloss": "bee",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "animal.fly",
+   "gloss": "fly (the insect)",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "animal.butterfly",
+   "gloss": "butterfly",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "animal.animal",
+   "gloss": "animal",
+   "tier": 1,
+   "rank": 26
+  }
+ ]
+}

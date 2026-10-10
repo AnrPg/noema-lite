@@ -1,0 +1,2731 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:zanjabil",
+   "lemma": "زَنْجَبِيل",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.ginger"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Indian languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "zanjabīl",
+   "forms": {
+    "N;NOM;SG;INDF": "زَنْجَبِيلٌ",
+    "N;ACC;SG;INDF": "زَنْجَبِيلًا",
+    "N;GEN;SG;INDF": "زَنْجَبِيلٍ",
+    "N;NOM;SG;DEF": "الزَّنْجَبِيلُ",
+    "N;ACC;SG;DEF": "الزَّنْجَبِيلَ",
+    "N;GEN;SG;DEF": "الزَّنْجَبِيلِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm, sharp and medicinal: ginger tea for a cold — and a word with Qurʾānic resonance.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ginger — the rhizome, fresh or dried and ground (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.ginger"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ شَايًا بِالزَّنْجَبِيلِ فِي الشِّتَاءِ.",
+      "tr": "I drink tea with ginger in winter.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "قَشِّرْ قِطْعَةً مِنَ الزَّنْجَبِيلِ الطَّازَجِ وَقَطِّعْهَا.",
+      "tr": "Peel a piece of fresh ginger and chop it.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "يُسَاعِدُ الزَّنْجَبِيلُ عَلَى تَخْفِيفِ الْغَثَيَانِ.",
+      "tr": "Ginger helps to relieve nausea.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شَايُ الزَّنْجَبِيلِ",
+      "tr": "ginger tea"
+     },
+     {
+      "text": "زَنْجَبِيلٌ مَطْحُونٌ",
+      "tr": "ground ginger"
+     },
+     {
+      "text": "جِذْرُ الزَّنْجَبِيلِ",
+      "tr": "ginger root"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "وَيُسْقَوْنَ فِيهَا كَأْسًا كَانَ مِزَاجُهَا زَنْجَبِيلًا",
+      "tr": "And they will be given to drink there a cup whose mixture is ginger.",
+      "kind": "quote",
+      "source": "Qurʾān 76:17 (al-Insān)",
+      "meaning": "Ginger as a flavour of the drinks of Paradise — the word is in the Qurʾān.",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "جنزبيل",
+      "register": "regional",
+      "nuance": "Egyptian Arabic pronunciation ganzabīl, with the consonants swapped (Wiktionary)",
+      "region": "Egypt"
+     },
+     {
+      "word": "سكنجبير",
+      "register": "regional",
+      "nuance": "Moroccan Arabic form skanjbīr (Wiktionary)",
+      "region": "Morocco"
+     }
+    ],
+    "etymology": {
+     "text": "From Classical Syriac ܙܢܓܒܝܠ (zangabīl), from Sauraseni Prakrit siṃgivera, from Old Tamil iñcivēr (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic زَنْجَبِيل, Hebrew זַנְגְּבִיל (zangvil), Turkish zencefil, Ancient Greek ζιγγίβερις and Latin zingiber (→ English ginger, German Ingwer) all go back to the same South Indian word."
+    ],
+    "pitfalls": [
+     "In Egypt the consonants are often swapped: جنزبيل (ganzabīl, Wiktionary) — write زَنْجَبِيل.",
+     "Masculine: زَنْجَبِيلٌ طَازَجٌ (fresh ginger), not *طَازَجَةٌ."
+    ],
+    "subtleties": [
+     "A mass noun: a piece is قِطْعَةُ زَنْجَبِيلٍ, the root جِذْرُ الزَّنْجَبِيلِ; there is no unit noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:shamar",
+   "lemma": "شَمَر",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.fennel",
+    "nature.dill"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "šamar",
+   "forms": {
+    "N;NOM;SG;INDF": "شَمَرٌ",
+    "N;ACC;SG;INDF": "شَمَرًا",
+    "N;GEN;SG;INDF": "شَمَرٍ",
+    "N;NOM;SG;DEF": "الشَّمَرُ",
+    "N;ACC;SG;DEF": "الشَّمَرَ",
+    "N;GEN;SG;DEF": "الشَّمَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Aniseed aroma: crisp Mediterranean salads and digestive teas.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fennel — the plant, its bulb and stalks eaten as a vegetable, and its seeds as a spice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.fennel"
+     },
+     {
+      "id": "s2",
+      "def": "dill (in older texts; Wiktionary)",
+      "register": [
+       "dated"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "nature.dill"
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَطَّعْتُ الشَّمَرَ شَرَائِحَ رَفِيعَةً لِلسَّلَطَةِ.",
+      "tr": "I cut the fennel into thin slices for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "شَايُ بُذُورِ الشَّمَرِ يُرِيحُ الْمَعِدَةَ.",
+      "tr": "Fennel-seed tea soothes the stomach.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "يَنْمُو الشَّمَرُ الْبَرِّيُّ عَلَى جَوَانِبِ الطُّرُقِ.",
+      "tr": "Wild fennel grows along the roadsides.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي بَعْضِ الْكُتُبِ الْقَدِيمَةِ يَعْنِي الشَّمَرُ نَبَاتَ الشِّبِتِّ.",
+      "tr": "In some old books šamar means dill.",
+      "register": "dated",
+      "context": "old books",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بُذُورُ الشَّمَرِ",
+      "tr": "fennel seeds"
+     },
+     {
+      "text": "شَمَرٌ مَشْوِيٌّ",
+      "tr": "roasted fennel"
+     },
+     {
+      "text": "الشَّمَرُ الْبَرِّيُّ",
+      "tr": "wild fennel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَازِيَانَج",
+      "register": "literary",
+      "nuance": "the classical and old-medical word, from Middle Persian; Wiktionary also gives it for dill"
+     },
+     {
+      "word": "بَسْبَاس",
+      "register": "regional",
+      "nuance": "the word in North Africa (Wiktionary: Moroccan Arabic, and fennel in al-Andalus); in the Najd it names other plants",
+      "region": "Maghreb"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic (Classical Syriac šammārā, šummārā, “fennel”), ultimately from Akkadian šimru; also found in Hebrew שֻׁמָּר (šummār, “fennel”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שׁוּמָר (shumar, fennel) is the same Akkadian-Aramaic word.",
+     "The Greek town of Marathon is named after fennel (μάραθο): the battlefield was a “fennel field”."
+    ],
+    "pitfalls": [
+     "Without vowels شمر is also the verb شَمَّرَ (to tuck up): شَمَّرَ عَنْ سَاعِدَيْهِ = he rolled up his sleeves (got down to work).",
+     "Wiktionary tags شَمَر “rare” in its classical senses; it is the everyday word in Egypt (Wiktionary’s Egyptian Arabic translation)."
+    ],
+    "subtleties": [
+     "One word for the vegetable and the spice: the seeds are بُذُورُ الشَّمَرِ; context tells which is meant."
+    ]
+   }
+  },
+  {
+   "id": "ar:hilyawn",
+   "lemma": "هِلْيَوْن",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.asparagus"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "hilyawn",
+   "forms": {
+    "N;NOM;SG;INDF": "هِلْيَوْنٌ",
+    "N;ACC;SG;INDF": "هِلْيَوْنًا",
+    "N;GEN;SG;INDF": "هِلْيَوْنٍ",
+    "N;NOM;SG;DEF": "الْهِلْيَوْنُ",
+    "N;ACC;SG;DEF": "الْهِلْيَوْنَ",
+    "N;GEN;SG;DEF": "الْهِلْيَوْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An elegant, rather expensive spring vegetable — restaurant food more than home cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "asparagus — the plant and its edible spears (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.asparagus"
+     }
+    ],
+    "examples": [
+     {
+      "text": "شَوَيْتُ الْهِلْيَوْنَ مَعَ قَلِيلٍ مِنْ زَيْتِ الزَّيْتُونِ.",
+      "tr": "I grilled the asparagus with a little olive oil.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "الْهِلْيَوْنُ غَالٍ فِي هٰذَا الْمَوْسِمِ.",
+      "tr": "Asparagus is expensive this season.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "طَلَبْتُ حَسَاءَ الْهِلْيَوْنِ فِي الْمَطْعَمِ.",
+      "tr": "I ordered asparagus soup at the restaurant.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حُزْمَةُ هِلْيَوْنٍ",
+      "tr": "a bunch of asparagus"
+     },
+     {
+      "text": "هِلْيَوْنٌ أَخْضَرُ",
+      "tr": "green asparagus"
+     },
+     {
+      "text": "هِلْيَوْنٌ أَبْيَضُ",
+      "tr": "white asparagus"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هِلْيُون",
+      "register": "neutral",
+      "nuance": "the same word pronounced hilyūn (Wiktionary lists both)"
+     },
+     {
+      "word": "اسبراجوس",
+      "register": "regional",
+      "nuance": "Egyptian Arabic loan from European asparagus (Wiktionary)",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From Classical Syriac helyōn, from Ancient Greek ἕλειον (héleion, “asparagus”), the neuter of ἕλειος (“of the marshland”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Greek word in Arabic dress: هِلْيَوْن is ἕλειον, “the marsh plant”.",
+     "In Egypt people also use the European loan اسبراجوس (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Three vocalizations are in use — هِلْيَوْن, هِلْيُون, هَلْيُون (Wiktionary); this course uses هِلْيَوْن, and you will often hear hilyūn.",
+     "أَخْضَر and أَبْيَض are diptotes: هِلْيَوْنٌ أَخْضَرُ (green asparagus), with no tanwīn on the adjective."
+    ],
+    "subtleties": [
+     "A masculine mass noun: الْهِلْيَوْنُ الطَّازَجُ (fresh asparagus)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qulqas",
+   "lemma": "قُلْقَاس",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.taro",
+    "veg.cardoon"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قُلْقَاسَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted (plural of قُلْقَاسَة)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قُلْقَاسَتَانِ",
+    "declension": "triptote",
+    "unit": "قُلْقَاسَة",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "gender": "MASC",
+   "translit": "qulqās",
+   "forms": {
+    "N;NOM;COLL;INDF": "قُلْقَاسٌ",
+    "N;ACC;COLL;INDF": "قُلْقَاسًا",
+    "N;GEN;COLL;INDF": "قُلْقَاسٍ",
+    "N;NOM;COLL;DEF": "الْقُلْقَاسُ",
+    "N;ACC;COLL;DEF": "الْقُلْقَاسَ",
+    "N;GEN;COLL;DEF": "الْقُلْقَاسِ",
+    "N;NOM;SG;INDF": "قُلْقَاسَةٌ",
+    "N;ACC;SG;INDF": "قُلْقَاسَةً",
+    "N;GEN;SG;INDF": "قُلْقَاسَةٍ",
+    "N;NOM;SG;DEF": "الْقُلْقَاسَةُ",
+    "N;ACC;SG;DEF": "الْقُلْقَاسَةَ",
+    "N;GEN;SG;DEF": "الْقُلْقَاسَةِ",
+    "N;NOM;PL;INDF": "قُلْقَاسَاتٌ",
+    "N;ACC;PL;INDF": "قُلْقَاسَاتٍ",
+    "N;GEN;PL;INDF": "قُلْقَاسَاتٍ",
+    "N;NOM;PL;DEF": "الْقُلْقَاسَاتُ",
+    "N;ACC;PL;DEF": "الْقُلْقَاسَاتِ",
+    "N;GEN;PL;DEF": "الْقُلْقَاسَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Egyptian winter comfort food: taro cooked in a green sauce of chard and coriander — and the dish of the Coptic Epiphany.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "taro (collective; one corm = قُلْقَاسَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.taro"
+     },
+     {
+      "id": "s2",
+      "def": "cardoon or artichoke (obsolete, Wiktionary)",
+      "register": [
+       "obsolete"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "veg.cardoon"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَطْبُخُ الْمِصْرِيُّونَ الْقُلْقَاسَ مَعَ السِّلْقِ وَالْكُزْبَرَةِ.",
+      "tr": "Egyptians cook taro with chard and coriander.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "قَشِّرِ الْقُلْقَاسَ وَقَطِّعْهُ مُكَعَّبَاتٍ.",
+      "tr": "Peel the taro and cut it into cubes.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "يَأْكُلُ الْأَقْبَاطُ الْقُلْقَاسَ فِي عِيدِ الْغِطَاسِ.",
+      "tr": "Copts eat taro at the feast of the Epiphany.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ قُلْقَاسَةً كَبِيرَةً.",
+      "tr": "I bought a big taro.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي كُتُبِ النَّبَاتِ الْقَدِيمَةِ قَدْ يَعْنِي الْقُلْقَاسُ الْخُرْشُوفَ.",
+      "tr": "In old botanical books qulqās can mean the artichoke.",
+      "register": "obsolete",
+      "context": "old books",
+      "sense": "s2"
+     },
+     {
+      "text": "لَا يُسْتَعْمَلُ الْقُلْقَاسُ الْيَوْمَ بِمَعْنَى الْخُرْشُوفِ.",
+      "tr": "Today qulqās is no longer used in the sense of artichoke.",
+      "register": "neutral",
+      "context": "word history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قُلْقَاسٌ بِالسِّلْقِ",
+      "tr": "taro with chard"
+     },
+     {
+      "text": "حَسَاءُ الْقُلْقَاسِ",
+      "tr": "taro soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بطاطا قصبية",
+      "register": "regional",
+      "nuance": "Moroccan Arabic name, literally “reed potato” (Wiktionary)",
+      "region": "Morocco"
+     }
+    ],
+    "etymology": {
+     "text": "From Classical Syriac qōlqās, qalqā (“taro”), said to be from Egyptian; Ancient Greek κολοκασία (kolokasía) first meant the sacred lotus and only later taro (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic قُلْقَاس and Greek κολοκάσι (taro in Cyprus) are one word that travelled between Egypt, Aramaic and Greek."
+    ],
+    "pitfalls": [
+     "Raw taro irritates mouth and skin; it is always cooked, and many cooks wear gloves to peel it.",
+     "In Cairo the q is a glottal stop: ʔulʔās. Wiktionary also lists the spellings قُلْقَاص and قُرْقَاص."
+    ],
+    "subtleties": [
+     "Collective: الْقُلْقَاسُ (taro as food), قُلْقَاسَة (one corm), قُلْقَاسَات (corms counted)."
+    ]
+   }
+  },
+  {
+   "id": "ar:tarakhshaqun",
+   "lemma": "طَرْخَشْقُون",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.dandelion",
+    "veg.chicory"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Middle Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.dandelion",
+     "axis": "frequency",
+     "value": "the botanical / medical name (formal)"
+    },
+    {
+     "concept": "veg.chicory",
+     "axis": "frequency",
+     "value": "old and medical texts"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "ṭarḫašqūn",
+   "forms": {
+    "N;NOM;SG;INDF": "طَرْخَشْقُونٌ",
+    "N;ACC;SG;INDF": "طَرْخَشْقُونًا",
+    "N;GEN;SG;INDF": "طَرْخَشْقُونٍ",
+    "N;NOM;SG;DEF": "الطَّرْخَشْقُونُ",
+    "N;ACC;SG;DEF": "الطَّرْخَشْقُونَ",
+    "N;GEN;SG;DEF": "الطَّرْخَشْقُونِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bitter spring greens and herbal remedies; yellow flowers in the fields.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dandelion (Taraxacum) — the plant and its leaves eaten as bitter greens",
+      "register": [
+       "formal"
+      ],
+      "concept": "veg.dandelion"
+     },
+     {
+      "id": "s2",
+      "def": "common chicory, Belgian endive (Wiktionary)",
+      "register": [
+       "formal"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "veg.chicory"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يُسْتَعْمَلُ الطَّرْخَشْقُونُ فِي الطِّبِّ الشَّعْبِيِّ.",
+      "tr": "Dandelion is used in folk medicine.",
+      "register": "formal",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "أَوْرَاقُ الطَّرْخَشْقُونِ الصَّغِيرَةُ لَذِيذَةٌ فِي السَّلَطَةِ.",
+      "tr": "Young dandelion leaves are tasty in salad.",
+      "register": "formal",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "تَظْهَرُ أَزْهَارُ الطَّرْخَشْقُونِ الصَّفْرَاءُ فِي الرَّبِيعِ.",
+      "tr": "The yellow dandelion flowers appear in spring.",
+      "register": "formal",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ الطَّرْخَشْقُونُ أَيْضًا عَلَى الْهِنْدِبَاءِ الْبَرِّيَّةِ.",
+      "tr": "ṭaraḫšaqūn is also used for wild chicory.",
+      "register": "formal",
+      "context": "botany",
+      "sense": "s2"
+     },
+     {
+      "text": "فِي الطِّبِّ الْقَدِيمِ كَانَ الطَّرْخَشْقُونُ اسْمًا لِلْهِنْدِبَاءِ أَيْضًا.",
+      "tr": "In old medicine ṭaraḫšaqūn was also a name for chicory.",
+      "register": "formal",
+      "context": "history of medicine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ الطَّرْخَشْقُونِ",
+      "tr": "dandelion leaves"
+     },
+     {
+      "text": "جُذُورُ الطَّرْخَشْقُونِ",
+      "tr": "dandelion roots"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هِنْدِبَاء",
+      "register": "neutral",
+      "nuance": "the general word for chicory-like greens; Wiktionary also gives it for dandelion"
+     },
+     {
+      "word": "مُرّ",
+      "register": "obsolete",
+      "nuance": "old name, literally “bitter” (Wiktionary marks it obsolete)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle Persian *tarrag-ī škōhān, literally “herb of the poor”, so called because it was rarely eaten except in times of famine (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English and German name the leaf after a lion’s tooth (dent-de-lion, Löwenzahn); the Persian name inside Arabic speaks of poverty — “the poor man’s herb”.",
+     "The botanists’ Latin Taraxacum is usually traced to this Arabic-Persian word."
+    ],
+    "pitfalls": [
+     "Wiktionary lists many spellings: طَرْخَشْقُون, طَرَخْشَقُون, طَرَخَشْقُون, and forms with طَلْـ such as طَلْخَشْقُون.",
+     "In everyday speech many people simply say هِنْدِبَاء for both dandelion and chicory."
+    ],
+    "subtleties": [
+     "A learned word: in markets the bitter wild greens are sold under the name هِنْدِبَاء (Levantine هندبة), not طَرْخَشْقُون."
+    ]
+   }
+  },
+  {
+   "id": "ar:lift",
+   "lemma": "لِفْت",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.turnip"
+   ],
+   "features": {
+    "root": "ل ف ت",
+    "pattern": "فِعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "lift",
+   "forms": {
+    "N;NOM;SG;INDF": "لِفْتٌ",
+    "N;ACC;SG;INDF": "لِفْتًا",
+    "N;GEN;SG;INDF": "لِفْتٍ",
+    "N;NOM;SG;DEF": "اللِّفْتُ",
+    "N;ACC;SG;DEF": "اللِّفْتَ",
+    "N;GEN;SG;DEF": "اللِّفْتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pink pickled turnips next to falafel and shawarma.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "turnip (Brassica rapa; mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.turnip"
+     },
+     {
+      "id": "s2",
+      "def": "similar brassicas: kale, rape, rutabaga (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ اللِّفْتَ الْمُخَلَّلَ مَعَ الْفَلَافِلِ.",
+      "tr": "I like pickled turnips with falafel.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "يُلَوِّنُونَ مُخَلَّلَ اللِّفْتِ بِالشَّمَنْدَرِ.",
+      "tr": "They colour the turnip pickle with beetroot.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "زَرَعَ الْفَلَّاحُ اللِّفْتَ فِي الْخَرِيفِ.",
+      "tr": "The farmer planted turnips in autumn.",
+      "register": "neutral",
+      "context": "farming",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِفْتٌ مُخَلَّلٌ",
+      "tr": "pickled turnip"
+     },
+     {
+      "text": "مُخَلَّلُ اللِّفْتِ",
+      "tr": "turnip pickle"
+     },
+     {
+      "text": "حَبَّةُ لِفْتٍ",
+      "tr": "one turnip"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شَلْجَم",
+      "register": "literary",
+      "nuance": "Persian loan for turnip (also rutabaga; and “parabola” in mathematics) (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ل ف ت (“to twist, to pull out of the ground”); ultimately from Proto-Semitic *lapt-, compare Hebrew לֶפֶת (lefet), Classical Syriac laftā and Akkadian laptu (“turnip”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לֶפֶת and Arabic لِفْت are the same Semitic word — Akkadian farmers already said laptu.",
+     "Its synonym شَلْجَم comes from Persian šalġam, ultimately from Greek σικελικόν “the Sicilian one” — the same source as سِلْق (chard) (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Same letters as the verb لَفَتَ (lafata, to turn, to attract): لَفَتَ انْتِبَاهِي = it caught my attention.",
+     "Vowel: lift with i in MSA; Moroccan Arabic says laft (Wiktionary)."
+    ],
+    "subtleties": [
+     "A mass noun in Wiktionary: one turnip is حَبَّةُ لِفْتٍ.",
+     "The Levantine pink pickle owes its colour to a slice of beetroot in the jar."
+    ]
+   }
+  },
+  {
+   "id": "ar:hindiba",
+   "lemma": "هِنْدِبَاء",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.chicory",
+    "veg.endive",
+    "veg.dandelion"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.dandelion",
+     "axis": "frequency",
+     "value": "the everyday name (also chicory)"
+    },
+    {
+     "concept": "veg.chicory",
+     "axis": "frequency",
+     "value": "the usual name"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "hindibāʾ",
+   "forms": {
+    "N;NOM;SG;INDF": "هِنْدِبَاءُ",
+    "N;ACC;SG;INDF": "هِنْدِبَاءَ",
+    "N;GEN;SG;INDF": "هِنْدِبَاءَ",
+    "N;NOM;SG;DEF": "الْهِنْدِبَاءُ",
+    "N;ACC;SG;DEF": "الْهِنْدِبَاءَ",
+    "N;GEN;SG;DEF": "الْهِنْدِبَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bitter, “cleansing” greens: Levantine hindbeh fried with onions, and chicory “coffee”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chicory (Cichorium intybus), including the pale Belgian endive (witloof) and the wild leaves cooked as greens",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chicory"
+     },
+     {
+      "id": "s2",
+      "def": "endive (Cichorium endivia): curly endive, frisée, escarole",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.endive"
+     },
+     {
+      "id": "s3",
+      "def": "dandelion (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "veg.dandelion"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْهِنْدِبَاءُ الْمَطْبُوخَةُ بِالزَّيْتِ وَالْبَصَلِ طَبَقٌ لُبْنَانِيٌّ مَعْرُوفٌ.",
+      "tr": "Chicory greens cooked with oil and onion are a well-known Lebanese dish.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "يُحَمَّصُ جِذْرُ الْهِنْدِبَاءِ وَيُشْرَبُ بَدَلَ الْقَهْوَةِ.",
+      "tr": "Chicory root is roasted and drunk instead of coffee.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "طَعْمُ الْهِنْدِبَاءِ مُرٌّ قَلِيلًا.",
+      "tr": "Chicory tastes a little bitter.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "أَضَفْتُ أَوْرَاقَ الْهِنْدِبَاءِ الْمُجَعَّدَةَ إِلَى السَّلَطَةِ.",
+      "tr": "I added curly endive leaves to the salad.",
+      "register": "neutral",
+      "context": "salad",
+      "sense": "s2"
+     },
+     {
+      "text": "اِشْتَرَيْتُ هِنْدِبَاءَ لِلسَّلَطَةِ.",
+      "tr": "I bought (some) endive for the salad.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     },
+     {
+      "text": "تَنْبُتُ الْهِنْدِبَاءُ الْبَرِّيَّةُ ذَاتُ الزَّهْرِ الْأَصْفَرِ فِي الْحُقُولِ.",
+      "tr": "Wild hindibāʾ with yellow flowers — the dandelion — grows in the fields.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s3"
+     },
+     {
+      "text": "يُسَمِّي بَعْضُ النَّاسِ الطَّرْخَشْقُونَ هِنْدِبَاءَ.",
+      "tr": "Some people call the dandelion hindibāʾ.",
+      "register": "neutral",
+      "context": "names of plants",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جِذْرُ الْهِنْدِبَاءِ",
+      "tr": "chicory root"
+     },
+     {
+      "text": "قَهْوَةُ الْهِنْدِبَاءِ",
+      "tr": "chicory coffee"
+     },
+     {
+      "text": "هِنْدِبَاءُ بِالزَّيْتِ",
+      "tr": "chicory greens with olive oil"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هندبة",
+      "register": "regional",
+      "nuance": "Levantine everyday form (hindbe) for the cooked bitter greens",
+      "region": "Levant"
+     },
+     {
+      "word": "شكورية",
+      "register": "regional",
+      "nuance": "Moroccan Arabic word for endive, from European chicorée (Wiktionary)",
+      "region": "Morocco"
+     },
+     {
+      "word": "هِنْدِبَا",
+      "register": "neutral",
+      "nuance": "spelling without the final hamza (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic hendǝḇā, cognate with Arabic هَدَب (“twisted leaves or sprigs”). From Semitic also Byzantine Greek ἔντυβον, whence Late Latin intibus and English endive (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English endive (and its cousins in the European languages) goes back, through Greek and Latin, to this Semitic word."
+    ],
+    "pitfalls": [
+     "Diptote: no tanwīn — هِنْدِبَاءُ, accusative and genitive هِنْدِبَاءَ (Wiktionary).",
+     "One word for chicory, endive and (loosely) dandelion: Arabic does not split them — add a description if you need precision."
+    ],
+    "subtleties": [
+     "Feminine: الْهِنْدِبَاءُ الْمُرَّةُ (the bitter chicory); Wiktionary treats it as a collective without a unit noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:rijla",
+   "lemma": "رِجْلَة",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.purslane"
+   ],
+   "features": {
+    "root": "ر ج ل",
+    "pattern": "فِعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "rijla",
+   "forms": {
+    "N;NOM;SG;INDF": "رِجْلَةٌ",
+    "N;ACC;SG;INDF": "رِجْلَةً",
+    "N;GEN;SG;INDF": "رِجْلَةٍ",
+    "N;NOM;SG;DEF": "الرِّجْلَةُ",
+    "N;ACC;SG;DEF": "الرِّجْلَةَ",
+    "N;GEN;SG;DEF": "الرِّجْلَةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Juicy, lemony summer weed: raw in salads, cooked with tomato and rice.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "purslane (Portulaca oleracea), eaten raw or cooked (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.purslane"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَطْبُخُ أُمِّي الرِّجْلَةَ مَعَ الْأَرُزِّ وَالطَّمَاطِمِ.",
+      "tr": "My mother cooks purslane with rice and tomatoes.",
+      "register": "neutral",
+      "context": "family cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "تَنْبُتُ الرِّجْلَةُ وَحْدَهَا فِي الْحُقُولِ فِي الصَّيْفِ.",
+      "tr": "Purslane comes up by itself in the fields in summer.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ رِجْلَةً طَازَجَةً لِلسَّلَطَةِ.",
+      "tr": "I bought fresh purslane for the salad.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَلَطَةُ الرِّجْلَةِ",
+      "tr": "purslane salad"
+     },
+     {
+      "text": "حُزْمَةُ رِجْلَةٍ",
+      "tr": "a bunch of purslane"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "أَحْمَقُ مِنْ رِجْلَةٍ",
+      "tr": "more foolish than purslane",
+      "kind": "proverb",
+      "meaning": "utterly foolish — purslane grows where the flood will sweep it away",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "بَقْلَة",
+      "register": "regional",
+      "nuance": "the everyday Levantine name (properly “a herb, a green”); it is the purslane in fattoush",
+      "region": "Levant"
+     },
+     {
+      "word": "فَرْفَحِين",
+      "register": "literary",
+      "nuance": "from Aramaic parpəḥīnā; Wiktionary’s main entry for purslane"
+     },
+     {
+      "word": "الْبَقْلَةُ الْحَمْقَاءُ",
+      "register": "literary",
+      "nuance": "the classical name, “the foolish herb”"
+     }
+    ],
+    "etymology": {
+     "text": "Alternative form of رِجْل (rijl, “purslane”), which Wiktionary files under the same Proto-Semitic *rigl- as رِجْل “foot, leg”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The classical name is الْبَقْلَةُ الْحَمْقَاءُ, “the foolish herb” — it grows in the beds of seasonal streams, where floods wash it away.",
+     "Greeks eat the same weed in salads as γλιστρίδα."
+    ],
+    "pitfalls": [
+     "Without vowels رجلة can also be رُجْلَة (rujla, manhood) — Wiktionary lists both.",
+     "The name changes by region: رِجْلَة (e.g. Egypt), بَقْلَة (Levant); in literature also فَرْفَحِين and الْبَقْلَةُ الْحَمْقَاءُ."
+    ],
+    "subtleties": [
+     "Feminine and uncounted: الرِّجْلَةُ طَازَجَةٌ (the purslane is fresh)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qurras",
+   "lemma": "قُرَّاص",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.nettle"
+   ],
+   "features": {
+    "root": "ق ر ص",
+    "pattern": "فُعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "qurrāṣ",
+   "forms": {
+    "N;NOM;SG;INDF": "قُرَّاصٌ",
+    "N;ACC;SG;INDF": "قُرَّاصًا",
+    "N;GEN;SG;INDF": "قُرَّاصٍ",
+    "N;NOM;SG;DEF": "الْقُرَّاصُ",
+    "N;ACC;SG;DEF": "الْقُرَّاصَ",
+    "N;GEN;SG;DEF": "الْقُرَّاصِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A sting on the hand, a healthy green soup — the wild plant you pick with gloves.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "stinging nettle (Urtica); the young leaves are cooked as greens",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.nettle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَسَعَنِي الْقُرَّاصُ فِي الْحَدِيقَةِ.",
+      "tr": "The nettles stung me in the garden.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "يُطْبَخُ الْقُرَّاصُ مِثْلَ السَّبَانِخِ.",
+      "tr": "Nettles are cooked like spinach.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "اِلْبَسِ الْقُفَّازَاتِ قَبْلَ قَطْفِ الْقُرَّاصِ.",
+      "tr": "Put on gloves before picking nettles.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَسَاءُ الْقُرَّاصِ",
+      "tr": "nettle soup"
+     },
+     {
+      "text": "أَوْرَاقُ الْقُرَّاصِ",
+      "tr": "nettle leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَنْجَرَة",
+      "register": "literary",
+      "nuance": "another dictionary name, feminine (Wiktionary)"
+     },
+     {
+      "word": "قُرَّيْص",
+      "register": "neutral",
+      "nuance": "alternative form listed by Wiktionary"
+     },
+     {
+      "word": "حُرَّيْق",
+      "register": "literary",
+      "nuance": "“the little burner”, given in Wiktionary’s translation tables"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ق ر ص, whose verb قَرَصَ means “to pinch; to bite, to sting” (Wiktionary) — “the stinging one”, on the plant-name pattern fuʿʿāl.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Brennnessel is the “burning” nettle; Arabic قُرَّاص is the “pinching” one — both languages name the sting."
+    ],
+    "pitfalls": [
+     "قُرْص (qurṣ), with one r, is a disc or a tablet: قُرْصُ دَوَاءٍ (a pill) — same letters without vowels."
+    ],
+    "subtleties": [
+     "A masculine mass noun: الْقُرَّاصُ يَلْسَعُ (nettles sting)."
+    ]
+   }
+  },
+  {
+   "id": "ar:thum_barri",
+   "lemma": "ثُوم بَرِّيّ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.wildgarlic"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: ثُوم (ث و م) + بَرِّيّ (ب ر ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ṯūm barrī",
+   "forms": {
+    "N;NOM;SG;INDF": "ثُومٌ بَرِّيٌّ",
+    "N;ACC;SG;INDF": "ثُومًا بَرِّيًّا",
+    "N;GEN;SG;INDF": "ثُومٍ بَرِّيٍّ",
+    "N;NOM;SG;DEF": "الثُّومُ الْبَرِّيُّ",
+    "N;ACC;SG;DEF": "الثُّومَ الْبَرِّيَّ",
+    "N;GEN;SG;DEF": "الثُّومِ الْبَرِّيِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): ثوم; the phrase has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Garlicky green leaves of European spring woods; in Arabic simply “wild garlic”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wild garlic, ramsons (Allium ursinum) — literally “wild garlic”; also any garlic gathered wild",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wildgarlic"
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَطَفْنَا الثُّومَ الْبَرِّيَّ فِي الْغَابَةِ.",
+      "tr": "We picked wild garlic in the forest.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "أَوْرَاقُ الثُّومِ الْبَرِّيِّ تُؤْكَلُ نَيِّئَةً أَوْ مَطْبُوخَةً.",
+      "tr": "Wild garlic leaves are eaten raw or cooked.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "صَنَعَتْ صَلْصَةً خَضْرَاءَ مِنَ الثُّومِ الْبَرِّيِّ.",
+      "tr": "She made a green sauce from wild garlic.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ الثُّومِ الْبَرِّيِّ",
+      "tr": "wild garlic leaves"
+     },
+     {
+      "text": "صَلْصَةُ الثُّومِ الْبَرِّيِّ",
+      "tr": "wild garlic sauce (pesto)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No established single word: ramsons is not part of traditional Arab cooking, so it is described as “wild garlic”.",
+    "etymology": {
+     "text": "ثُوم “garlic”, inherited from Proto-Semitic *ṯūm- (cognate with Hebrew שׁוּם shum) + بَرِّيّ “wild”, the nisba of بَرّ “land, open country” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org): ثوم; the phrase has no entry"
+    },
+    "funFacts": [
+     "German Bärlauch and Latin Allium ursinum say “bear’s garlic”; Arabic, like English, just says “wild garlic”."
+    ],
+    "pitfalls": [
+     "بَرِّيّ (barrī, wild) and بَرِيء (barīʾ, innocent) sound alike — listen for the doubled r and the final hamza."
+    ],
+    "subtleties": [
+     "Two words, one noun: the adjective follows the noun in case and definiteness — الثُّومُ الْبَرِّيُّ, الثُّومَ الْبَرِّيَّ, الثُّومِ الْبَرِّيِّ."
+    ]
+   }
+  },
+  {
+   "id": "ar:jazar_abyad",
+   "lemma": "جَزَر أَبْيَض",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.parsnip"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: جَزَر (a loanword) + أَبْيَض (ب ي ض)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَزَرَات بَيْضَاء",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: جَزَرَاتٌ بَيْضَاءُ (plural of the unit)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَزَرَتَانِ بَيْضَاوَانِ",
+    "declension": "triptote",
+    "unit": "جَزَرَة بَيْضَاء",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "jazar ʾabyaḍ",
+   "forms": {
+    "N;NOM;COLL;INDF": "جَزَرٌ أَبْيَضُ",
+    "N;ACC;COLL;INDF": "جَزَرًا أَبْيَضَ",
+    "N;GEN;COLL;INDF": "جَزَرٍ أَبْيَضَ",
+    "N;NOM;COLL;DEF": "الْجَزَرُ الْأَبْيَضُ",
+    "N;ACC;COLL;DEF": "الْجَزَرَ الْأَبْيَضَ",
+    "N;GEN;COLL;DEF": "الْجَزَرِ الْأَبْيَضِ",
+    "N;NOM;SG;INDF": "جَزَرَةٌ بَيْضَاءُ",
+    "N;ACC;SG;INDF": "جَزَرَةً بَيْضَاءَ",
+    "N;GEN;SG;INDF": "جَزَرَةٍ بَيْضَاءَ",
+    "N;NOM;SG;DEF": "الْجَزَرَةُ الْبَيْضَاءُ",
+    "N;ACC;SG;DEF": "الْجَزَرَةَ الْبَيْضَاءَ",
+    "N;GEN;SG;DEF": "الْجَزَرَةِ الْبَيْضَاءِ",
+    "N;NOM;PL;INDF": "جَزَرَاتٌ بَيْضَاءُ",
+    "N;ACC;PL;INDF": "جَزَرَاتٍ بَيْضَاءَ",
+    "N;GEN;PL;INDF": "جَزَرَاتٍ بَيْضَاءَ",
+    "N;NOM;PL;DEF": "الْجَزَرَاتُ الْبَيْضَاءُ",
+    "N;ACC;PL;DEF": "الْجَزَرَاتِ الْبَيْضَاءَ",
+    "N;GEN;PL;DEF": "الْجَزَرَاتِ الْبَيْضَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): translation table of English parsnip; جزر",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A pale, sweet winter root — at home in European kitchens, a newcomer in Arab ones.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "parsnip — literally “white carrot” (collective; one parsnip = جَزَرَةٌ بَيْضَاءُ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.parsnip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "شَوَيْتُ الْجَزَرَ الْأَبْيَضَ فِي الْفُرْنِ.",
+      "tr": "I roasted the parsnips in the oven.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "طَعْمُ الْجَزَرِ الْأَبْيَضِ حُلْوٌ.",
+      "tr": "Parsnips taste sweet.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ جَزَرَةً بَيْضَاءَ وَاحِدَةً.",
+      "tr": "I bought one parsnip.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَسَاءُ الْجَزَرِ الْأَبْيَضِ",
+      "tr": "parsnip soup"
+     },
+     {
+      "text": "جَزَرٌ أَبْيَضُ مَشْوِيٌّ",
+      "tr": "roasted parsnips"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other name in common use; Wiktionary gives only جَزَر أَبْيَض.",
+    "etymology": {
+     "text": "جَزَر “carrot”, from Persian گزر (gazar) + أَبْيَض “white”; Wiktionary gives جَزَر أَبْيَض as the translation of parsnip.",
+     "src": "Wiktionary (kaikki.org): جزر and the translation table of English parsnip"
+    },
+    "funFacts": [
+     "Botanically the description fits: parsnip and carrot belong to the same family, the Apiaceae."
+    ],
+    "pitfalls": [
+     "Genuinely white carrots also exist, and جَزَرٌ أَبْيَضُ can mean them too — a picture or the context decides.",
+     "Agreement changes with the unit noun: جَزَرٌ أَبْيَضُ (parsnips), but جَزَرَةٌ بَيْضَاءُ (one parsnip); both adjectives are diptotes."
+    ],
+    "subtleties": [
+     "Counted parsnips: جَزَرَاتٌ بَيْضَاءُ — a non-human plural takes a feminine singular adjective."
+    ]
+   }
+  },
+  {
+   "id": "ar:hummad",
+   "lemma": "حُمَّاض",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.sorrel",
+    "health.acidosis"
+   ],
+   "features": {
+    "root": "ح م ض",
+    "pattern": "فُعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḥummāḍ",
+   "forms": {
+    "N;NOM;SG;INDF": "حُمَّاضٌ",
+    "N;ACC;SG;INDF": "حُمَّاضًا",
+    "N;GEN;SG;INDF": "حُمَّاضٍ",
+    "N;NOM;SG;DEF": "الْحُمَّاضُ",
+    "N;ACC;SG;DEF": "الْحُمَّاضَ",
+    "N;GEN;SG;DEF": "الْحُمَّاضِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sour, lemony leaves — a wild spring green.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorrel (Rumex), whose leaves are eaten for their sour taste",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.sorrel"
+     },
+     {
+      "id": "s2",
+      "def": "acidosis (medicine; Wiktionary)",
+      "register": [
+       "technical"
+      ],
+      "domains": [
+       "medicine"
+      ],
+      "concept": "health.acidosis"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لِأَوْرَاقِ الْحُمَّاضِ طَعْمٌ حَامِضٌ.",
+      "tr": "Sorrel leaves have a sour taste.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "جَمَعْنَا الْحُمَّاضَ الْبَرِّيَّ فِي الرَّبِيعِ.",
+      "tr": "We gathered wild sorrel in spring.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "أُضِيفُ قَلِيلًا مِنَ الْحُمَّاضِ إِلَى الْحَسَاءِ.",
+      "tr": "I add a little sorrel to the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "أُصِيبَ الْمَرِيضُ بِالْحُمَّاضِ الْكِيتُونِيِّ.",
+      "tr": "The patient developed ketoacidosis.",
+      "register": "technical",
+      "context": "medicine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ الْحُمَّاضِ",
+      "tr": "sorrel leaves"
+     },
+     {
+      "text": "حُمَّاضٌ بُسْتَانِيٌّ",
+      "tr": "garden sorrel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حُمَّاضٌ بُسْتَانِيٌّ",
+      "register": "technical",
+      "nuance": "“garden sorrel”, the cultivated plant (Wiktionary’s translation of sorrel)"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ح م ض (“sour”), like حَامِض (“sour”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root ḥ-m-ḍ “sour” matches Hebrew ח-מ-ץ: חָמוּץ (ḥamuts, sour) and חָמֵץ (ḥamets, leavened food)."
+    ],
+    "pitfalls": [
+     "In medicine حُمَّاض means acidosis (Wiktionary) — context decides.",
+     "حُمَّاض (sorrel) and حَامِض (sour) share the root but are different words."
+    ],
+    "subtleties": [
+     "The pattern fuʿʿāl often names plants by a quality: حُمَّاض “the sour one”, قُرَّاص “the stinging one”."
+    ]
+   }
+  },
+  {
+   "id": "ar:fujl_harr",
+   "lemma": "فُجْل حَارّ",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.horseradish"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: فُجْل (ف ج ل) + حَارّ (ح ر ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "fujl ḥārr",
+   "forms": {
+    "N;NOM;SG;INDF": "فُجْلٌ حَارٌّ",
+    "N;ACC;SG;INDF": "فُجْلًا حَارًّا",
+    "N;GEN;SG;INDF": "فُجْلٍ حَارٍّ",
+    "N;NOM;SG;DEF": "الْفُجْلُ الْحَارُّ",
+    "N;ACC;SG;DEF": "الْفُجْلَ الْحَارَّ",
+    "N;GEN;SG;DEF": "الْفُجْلِ الْحَارِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): translation table of English horseradish; فجل",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eye-watering sauce with roast meat — a taste of Central Europe.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "horseradish — the root and the condiment (literally “hot radish”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.horseradish"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يُؤْكَلُ الْفُجْلُ الْحَارُّ مَعَ اللَّحْمِ فِي أَلْمَانِيَا.",
+      "tr": "Horseradish is eaten with meat in Germany.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "صَلْصَةُ الْفُجْلِ الْحَارِّ قَوِيَّةٌ جِدًّا.",
+      "tr": "Horseradish sauce is very strong.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "قَطَّعْتُ جِذْرَ الْفُجْلِ الْحَارِّ قِطَعًا صَغِيرَةً.",
+      "tr": "I cut the horseradish root into small pieces.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صَلْصَةُ الْفُجْلِ الْحَارِّ",
+      "tr": "horseradish sauce"
+     },
+     {
+      "text": "جِذْرُ الْفُجْلِ الْحَارِّ",
+      "tr": "horseradish root"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other established name; Wiktionary gives only this phrase.",
+    "etymology": {
+     "text": "فُجْل “radish”, from Aramaic puḡlā, from Akkadian puglu + حَارّ “hot, pungent”; Wiktionary gives فُجْل حَارّ as the translation of horseradish.",
+     "src": "Wiktionary (kaikki.org): فجل and the translation table of English horseradish"
+    },
+    "funFacts": [
+     "Japanese wasabi is a close relative, and cheap “wasabi” paste is often coloured horseradish."
+    ],
+    "pitfalls": [
+     "In a salad, فُجْلٌ حَارٌّ can simply mean a sharp-tasting radish — context decides.",
+     "Both words take the article: الْفُجْلُ الْحَارُّ, not *الْفُجْلُ حَارٌّ (that would be a sentence: “the radish is hot”)."
+    ],
+    "subtleties": [
+     "حَارّ means both “hot” in temperature and “hot, spicy”; here it is the sting of mustard oil."
+    ]
+   }
+  },
+  {
+   "id": "ar:qurra",
+   "lemma": "قُرَّة",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.watercress",
+    "health.eyeremedy"
+   ],
+   "features": {
+    "root": "ق ر ر",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.watercress",
+     "axis": "name",
+     "value": "the specific name"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "qurra",
+   "forms": {
+    "N;NOM;SG;INDF": "قُرَّةٌ",
+    "N;ACC;SG;INDF": "قُرَّةً",
+    "N;GEN;SG;INDF": "قُرَّةٍ",
+    "N;NOM;SG;DEF": "الْقُرَّةُ",
+    "N;ACC;SG;DEF": "الْقُرَّةَ",
+    "N;GEN;SG;DEF": "الْقُرَّةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A peppery herb of springs and brooks, with old medical lore.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "watercress (Nasturtium officinale)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.watercress"
+     },
+     {
+      "id": "s2",
+      "def": "a remedy that soothes inflamed eyes (old sense; Wiktionary)",
+      "register": [
+       "archaic"
+      ],
+      "domains": [
+       "medicine"
+      ],
+      "concept": "health.eyeremedy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَنْمُو الْقُرَّةُ فِي الْمَاءِ الْجَارِي.",
+      "tr": "Watercress grows in running water.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "أَضَفْتُ الْقُرَّةَ إِلَى سَلَطَةِ الْخِيَارِ.",
+      "tr": "I added watercress to the cucumber salad.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "لِلْقُرَّةِ طَعْمٌ لَاذِعٌ يُشْبِهُ الْخَرْدَلَ.",
+      "tr": "Watercress has a pungent taste, like mustard.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَتِ الْقُرَّةُ عِنْدَ الْقُدَمَاءِ دَوَاءً يُهَدِّئُ الْتِهَابَ الْعَيْنِ.",
+      "tr": "For the ancients, qurra was a remedy that soothed an inflamed eye.",
+      "register": "archaic",
+      "context": "history of medicine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَلَطَةُ الْقُرَّةِ",
+      "tr": "watercress salad"
+     },
+     {
+      "text": "حُزْمَةُ قُرَّةٍ",
+      "tr": "a bunch of watercress"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "قُرَّةُ عَيْنٍ",
+      "tr": "coolness of the eye",
+      "kind": "idiom",
+      "meaning": "a delight, a source of joy (often a beloved child)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "حُرْف",
+      "register": "literary",
+      "nuance": "cress in general — garden cress, bitter-cress and watercress (Wiktionary)"
+     },
+     {
+      "word": "جِرْجِير",
+      "register": "neutral",
+      "nuance": "properly rocket (arugula); Wiktionary lists watercress as its second sense"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives قُرَّة the senses “any means to soothe inflamed eyes”, “watercress” and “water-parsnip”; the word belongs to the root ق ر ر (“to be cool, to settle”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same word is in the idiom قُرَّةُ عَيْنٍ, “coolness of the eye” = a delight: Pharaoh’s wife calls the baby Moses قُرَّتُ عَيْنٍ لِي وَلَكَ (Qurʾān 28:9)."
+    ],
+    "pitfalls": [
+     "Without vowels قرة can also be قِرَّة (qirra, coldness) — Wiktionary lists both.",
+     "Watercress and rocket (جِرْجِير) are easily confused in markets and translations; Wiktionary even lists “watercress” as a second sense of جِرْجِير."
+    ],
+    "subtleties": [
+     "Feminine mass noun: الْقُرَّةُ طَازَجَةٌ (the watercress is fresh)."
+    ]
+   }
+  },
+  {
+   "id": "ar:rashad",
+   "lemma": "رَشَاد",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.cress",
+    "abstract.guidance"
+   ],
+   "features": {
+    "root": "ر ش د",
+    "pattern": "فَعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "rašād",
+   "forms": {
+    "N;NOM;SG;INDF": "رَشَادٌ",
+    "N;ACC;SG;INDF": "رَشَادًا",
+    "N;GEN;SG;INDF": "رَشَادٍ",
+    "N;NOM;SG;DEF": "الرَّشَادُ",
+    "N;ACC;SG;DEF": "الرَّشَادَ",
+    "N;GEN;SG;DEF": "الرَّشَادِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Peppery little leaves — and the famous seeds, حَبُّ الرَّشَادِ, of the herbalist’s shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garden cress (Lepidium sativum)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cress"
+     },
+     {
+      "id": "s2",
+      "def": "right guidance, the right way of acting (verbal noun of رَشِدَ)",
+      "register": [
+       "formal"
+      ],
+      "concept": "abstract.guidance"
+     }
+    ],
+    "examples": [
+     {
+      "text": "زَرَعْنَا الرَّشَادَ فِي أَصِيصٍ صَغِيرٍ.",
+      "tr": "We grew cress in a small pot.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "يُسْتَعْمَلُ حَبُّ الرَّشَادِ فِي الطِّبِّ الشَّعْبِيِّ.",
+      "tr": "Cress seeds are used in folk medicine.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "أَضَفْتُ أَوْرَاقَ الرَّشَادِ إِلَى الشَّطِيرَةِ.",
+      "tr": "I added cress leaves to the sandwich.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "نَسْأَلُ اللَّهَ الْهِدَايَةَ وَالرَّشَادَ.",
+      "tr": "We ask God for guidance and right conduct.",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَبُّ الرَّشَادِ",
+      "tr": "cress seeds"
+     },
+     {
+      "text": "أَوْرَاقُ الرَّشَادِ",
+      "tr": "cress leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حُرْف",
+      "register": "literary",
+      "nuance": "classical name of cress (Lepidium sativum and other cresses) (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Verbal noun of رَشِدَ (rašida, “to be rightly guided”); the plant name has the same form (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as رُشْد (maturity, sound mind): سِنُّ الرُّشْدِ = the age of majority."
+    ],
+    "pitfalls": [
+     "رَشَاد the plant, رَشَاد “right guidance” and the man’s name رَشَاد (Rashad) are one word — context decides."
+    ],
+    "subtleties": [
+     "Most people know the seeds, حَبُّ الرَّشَادِ, sold by the herbalist (عَطَّار), better than the leaves."
+    ]
+   }
+  },
+  {
+   "id": "ar:silq",
+   "lemma": "سِلْق",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.chard"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "silq",
+   "forms": {
+    "N;NOM;SG;INDF": "سِلْقٌ",
+    "N;ACC;SG;INDF": "سِلْقًا",
+    "N;GEN;SG;INDF": "سِلْقٍ",
+    "N;NOM;SG;DEF": "السِّلْقُ",
+    "N;ACC;SG;DEF": "السِّلْقَ",
+    "N;GEN;SG;DEF": "السِّلْقِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Big green leaves for stuffing and for lentil soup with lemon.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Swiss chard, chard (mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chard"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَحْشُو أَوْرَاقَ السِّلْقِ بِالْأَرُزِّ.",
+      "tr": "We stuff chard leaves with rice.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "طَبَخَتْ جَدَّتِي الْعَدَسَ مَعَ السِّلْقِ وَاللَّيْمُونِ.",
+      "tr": "My grandmother cooked lentils with chard and lemon.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ حُزْمَةَ سِلْقٍ مِنَ السُّوقِ.",
+      "tr": "I bought a bunch of chard at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَوْرَاقُ السِّلْقِ",
+      "tr": "chard leaves"
+     },
+     {
+      "text": "حُزْمَةُ سِلْقٍ",
+      "tr": "a bunch of chard"
+     },
+     {
+      "text": "سِلْقٌ مَحْشِيٌّ",
+      "tr": "stuffed chard leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word in MSA; Moroccan Arabic uses the same word (Wiktionary).",
+    "etymology": {
+     "text": "From Classical Syriac silqā, from Aramaic, ultimately from Ancient Greek σικελικόν (sikelikón, “the Sicilian one”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chard is “the Sicilian vegetable”: Greek σικελικόν gave Arabic سِلْق — and, through Persian, شَلْجَم (turnip).",
+     "Hebrew סֶלֶק (selek) is the same Aramaic word — but in Hebrew it means beetroot."
+    ],
+    "pitfalls": [
+     "Same letters as سَلْق (salq, boiling) and the verb سَلَقَ (to boil): بَيْضٌ مَسْلُوقٌ = boiled eggs.",
+     "Not شَمَنْدَر (beetroot), although both are the same species."
+    ],
+    "subtleties": [
+     "Botanically chard and beetroot are one species (Beta vulgaris): سِلْق is grown for its leaves, شَمَنْدَر for its root."
+    ]
+   }
+  },
+  {
+   "id": "ar:jirjir",
+   "lemma": "جِرْجِير",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.arugula",
+    "veg.watercress"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.watercress",
+     "axis": "name",
+     "value": "“rocket”: جِرْجِيرُ الْمَاءِ = watercress"
+    }
+   ],
+   "gender": "MASC",
+   "translit": "jirjīr",
+   "forms": {
+    "N;NOM;SG;INDF": "جِرْجِيرٌ",
+    "N;ACC;SG;INDF": "جِرْجِيرًا",
+    "N;GEN;SG;INDF": "جِرْجِيرٍ",
+    "N;NOM;SG;DEF": "الْجِرْجِيرُ",
+    "N;ACC;SG;DEF": "الْجِرْجِيرَ",
+    "N;GEN;SG;DEF": "الْجِرْجِيرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Peppery bunches sold next to radishes and spring onions — the green side to fish and ful in Egypt.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rocket, arugula (Eruca)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.arugula"
+     },
+     {
+      "id": "s2",
+      "def": "watercress (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "veg.watercress"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَأْكُلُ الْجِرْجِيرَ مَعَ السَّمَكِ الْمَقْلِيِّ.",
+      "tr": "We eat rocket with fried fish.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "اِغْسِلِ الْجِرْجِيرَ جَيِّدًا قَبْلَ الْأَكْلِ.",
+      "tr": "Wash the rocket well before eating.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ حُزْمَةَ جِرْجِيرٍ.",
+      "tr": "I bought a bunch of rocket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "يَنْمُو جِرْجِيرُ الْمَاءِ عَلَى ضِفَافِ الْجَدَاوِلِ.",
+      "tr": "Watercress (“water rocket”) grows on the banks of streams.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     },
+     {
+      "text": "تُسَمَّى الْقُرَّةُ أَيْضًا جِرْجِيرَ الْمَاءِ.",
+      "tr": "Watercress (qurra) is also called jirjīr al-māʾ.",
+      "register": "neutral",
+      "context": "names of plants",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَلَطَةُ الْجِرْجِيرِ",
+      "tr": "rocket salad"
+     },
+     {
+      "text": "حُزْمَةُ جِرْجِيرٍ",
+      "tr": "a bunch of rocket"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word in MSA; regional differences are only of pronunciation (jirjīr, jarjīr, Egyptian gargīr).",
+    "etymology": {
+     "text": "Borrowed from Aramaic gargīrā (“rocket”), from Akkadian girgirû (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Modern Hebrew גַּרְגִּיר (gargir) is the same plant and the same Aramaic word.",
+     "With Egyptian g, gargīr sounds almost exactly like the Aramaic original."
+    ],
+    "pitfalls": [
+     "Vocalized جِرْجِير (jirjīr) in Wiktionary’s entry and جَرْجِير (jarjīr) in its translation tables; Egyptians say gargīr.",
+     "Not قُرَّة (watercress), although Wiktionary lists watercress as a second sense of جِرْجِير."
+    ],
+    "subtleties": [
+     "A masculine mass noun: الْجِرْجِيرُ طَازَجٌ (the rocket is fresh)."
+    ]
+   }
+  },
+  {
+   "id": "ar:mulukhiyya",
+   "lemma": "مُلُوخِيَّة",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.molokhia",
+    "veg.okra"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Greek molókhion): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.okra",
+     "axis": "region",
+     "value": "Morocco (elsewhere: jute mallow)"
+    }
+   ],
+   "gender": "FEM",
+   "translit": "mulūḫiyya",
+   "forms": {
+    "N;NOM;SG;INDF": "مُلُوخِيَّةٌ",
+    "N;ACC;SG;INDF": "مُلُوخِيَّةً",
+    "N;GEN;SG;INDF": "مُلُوخِيَّةٍ",
+    "N;NOM;SG;DEF": "الْمُلُوخِيَّةُ",
+    "N;ACC;SG;DEF": "الْمُلُوخِيَّةَ",
+    "N;GEN;SG;DEF": "الْمُلُوخِيَّةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Green, slippery and garlicky — the soul food of Egypt, eaten with rice or bread and chicken or rabbit.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "jute mallow, molokhia — the leaves of Corchorus olitorius and the dish made of them",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.molokhia"
+     },
+     {
+      "id": "s2",
+      "def": "okra (Moroccan Arabic; Wiktionary)",
+      "register": [
+       "regional"
+      ],
+      "concept": "veg.okra"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَأْكُلُ الْمُلُوخِيَّةَ بِالْأَرُزِّ وَالدَّجَاجِ.",
+      "tr": "We eat molokhia with rice and chicken.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "أَضِيفِي الثُّومَ الْمَقْلِيَّ إِلَى الْمُلُوخِيَّةِ فِي النِّهَايَةِ.",
+      "tr": "Add (f.) the fried garlic to the molokhia at the end.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي تُونِسَ تُطْبَخُ الْمُلُوخِيَّةُ مِنْ أَوْرَاقٍ مُجَفَّفَةٍ مَطْحُونَةٍ.",
+      "tr": "In Tunisia molokhia is cooked from dried, ground leaves.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمَغْرِبِ تَعْنِي الْمُلُوخِيَّةُ الْبَامِيَةَ.",
+      "tr": "In Morocco, “mulūḫiyya” means okra.",
+      "register": "regional",
+      "context": "regional usage",
+      "sense": "s2"
+     },
+     {
+      "text": "طَلَبْتُ مُلُوخِيَّةً فِي مَطْعَمٍ بِفَاسَ فَجَاءَتْنِي بَامِيَةٌ.",
+      "tr": "I ordered mulūḫiyya in a restaurant in Fez and was brought okra.",
+      "register": "regional",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُلُوخِيَّةٌ بِالْأَرَانِبِ",
+      "tr": "molokhia with rabbit"
+     },
+     {
+      "text": "مُلُوخِيَّةٌ بِالدَّجَاجِ",
+      "tr": "molokhia with chicken"
+     },
+     {
+      "text": "أَوْرَاقُ الْمُلُوخِيَّةِ",
+      "tr": "molokhia leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُلُوخِيَّا",
+      "register": "neutral",
+      "nuance": "spelling variant with final alif (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Ancient Greek μολόχιον (molókhion, “mallow”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Fatimid caliph al-Ḥākim bi-Amr Allāh banned mulūḫiyya in Egypt in the early 11th century.",
+     "Egyptian cooks traditionally gasp (شَهْقَة) as they pour the sizzling garlic into the pot — kitchen lore for a good result.",
+     "Greek μολόχα (molócha, mallow) is its cousin: the name came into Arabic from Greek."
+    ],
+    "pitfalls": [
+     "In Morocco مْلُوخِيَّة means okra, not jute mallow (Wiktionary).",
+     "Spelled with šadda: ـيَّة (mulūḫiyya); Wiktionary also lists مُلُوخِيَّا, مُلُوكِيَّة and مُلُوكِيَّا."
+    ],
+    "subtleties": [
+     "One word for the plant and the dish. In Egypt the leaves are minced into a slippery soup; in the Levant they are often cooked whole.",
+     "Popular etymology links the name to مُلُوك “kings” (a “royal” dish); Wiktionary derives it from Greek."
+    ]
+   }
+  },
+  {
+   "id": "ar:basal_ahmar",
+   "lemma": "بَصَل أَحْمَر",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.redonion"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: بَصَل (ب ص ل) + أَحْمَر (ح م ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَصَلَات حَمْرَاء",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: بَصَلَاتٌ حَمْرَاءُ (plural of the unit)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَصَلَتَانِ حَمْرَاوَانِ",
+    "declension": "triptote",
+    "unit": "بَصَلَة حَمْرَاء",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "baṣal ʾaḥmar",
+   "forms": {
+    "N;NOM;COLL;INDF": "بَصَلٌ أَحْمَرُ",
+    "N;ACC;COLL;INDF": "بَصَلًا أَحْمَرَ",
+    "N;GEN;COLL;INDF": "بَصَلٍ أَحْمَرَ",
+    "N;NOM;COLL;DEF": "الْبَصَلُ الْأَحْمَرُ",
+    "N;ACC;COLL;DEF": "الْبَصَلَ الْأَحْمَرَ",
+    "N;GEN;COLL;DEF": "الْبَصَلِ الْأَحْمَرِ",
+    "N;NOM;SG;INDF": "بَصَلَةٌ حَمْرَاءُ",
+    "N;ACC;SG;INDF": "بَصَلَةً حَمْرَاءَ",
+    "N;GEN;SG;INDF": "بَصَلَةٍ حَمْرَاءَ",
+    "N;NOM;SG;DEF": "الْبَصَلَةُ الْحَمْرَاءُ",
+    "N;ACC;SG;DEF": "الْبَصَلَةَ الْحَمْرَاءَ",
+    "N;GEN;SG;DEF": "الْبَصَلَةِ الْحَمْرَاءِ",
+    "N;NOM;PL;INDF": "بَصَلَاتٌ حَمْرَاءُ",
+    "N;ACC;PL;INDF": "بَصَلَاتٍ حَمْرَاءَ",
+    "N;GEN;PL;INDF": "بَصَلَاتٍ حَمْرَاءَ",
+    "N;NOM;PL;DEF": "الْبَصَلَاتُ الْحَمْرَاءُ",
+    "N;ACC;PL;DEF": "الْبَصَلَاتِ الْحَمْرَاءَ",
+    "N;GEN;PL;DEF": "الْبَصَلَاتِ الْحَمْرَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org): translation table of English red onion; بصل",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet purple rings on salads and grilled meat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red onions (collective; one red onion = بَصَلَةٌ حَمْرَاءُ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.redonion"
+     }
+    ],
+    "examples": [
+     {
+      "text": "قَطَّعْتُ الْبَصَلَ الْأَحْمَرَ حَلَقَاتٍ لِلسَّلَطَةِ.",
+      "tr": "I cut the red onion into rings for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَصَلُ الْأَحْمَرُ أَحْلَى مِنَ الْأَبْيَضِ.",
+      "tr": "Red onion is sweeter than white.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ بَصَلَةً حَمْرَاءَ كَبِيرَةً.",
+      "tr": "I bought a big red onion.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَصَلٌ أَحْمَرُ مُخَلَّلٌ",
+      "tr": "pickled red onion"
+     },
+     {
+      "text": "حَلَقَاتُ الْبَصَلِ الْأَحْمَرِ",
+      "tr": "red onion rings"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَصَلٌ أَرْجُوَانِيٌّ",
+      "register": "neutral",
+      "nuance": "“purple onion”, a rarer description (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "بَصَل “onion”, a common Semitic word (compare Hebrew בָּצָל) + أَحْمَر “red”; Wiktionary gives بَصَل أَحْمَر as the translation of red onion.",
+     "src": "Wiktionary (kaikki.org): بصل and the translation table of English red onion"
+    },
+    "funFacts": [
+     "Arabic, English and German (rote Zwiebel) all call it “red”, though the colour is really purple."
+    ],
+    "pitfalls": [
+     "أَحْمَر is a diptote with the feminine حَمْرَاء: بَصَلٌ أَحْمَرُ, but بَصَلَةٌ حَمْرَاءُ (one red onion) — never *بَصَلَةٌ أَحْمَرُ."
+    ],
+    "subtleties": [
+     "Counted red onions: بَصَلَاتٌ حَمْرَاءُ — a non-human plural takes a feminine singular adjective."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.cassava",
+   "reason": "Cassava is not grown or eaten in most Arab countries and has no established Arabic name; writers use competing loans.",
+   "use": "the loan الكسافا (kasāfā), or the Latin genus name, in encyclopedic and news texts"
+  },
+  {
+   "concept": "veg.lotusroot",
+   "reason": "Lotus root is not part of Arab cuisines; there is no name for the vegetable.",
+   "use": "descriptive جُذُورُ اللُّوتَسِ (“lotus roots”); the plant itself is لُوتَس or نَيْلُوفَر (Wiktionary)"
+  },
+  {
+   "concept": "veg.jerusalemartichoke",
+   "reason": "No common standard word; the tuber is little known in Arab cooking.",
+   "use": "a translation of the European name, or regional names that vary from country to country"
+  },
+  {
+   "concept": "veg.rutabaga",
+   "reason": "No separate everyday word: Wiktionary lists rutabaga among the senses of لِفْت (turnip) and of شَلْجَم.",
+   "use": "لِفْت (turnip), with a description when the difference matters"
+  },
+  {
+   "concept": "veg.waterspinach",
+   "reason": "Water spinach is not part of Arab cuisines and has no Arabic name.",
+   "use": "the Asian name, or a literal translation of the English name"
+  },
+  {
+   "concept": "veg.shallot",
+   "reason": "No single established word for the shallot.",
+   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes; English shallot itself comes from the city of Ascalon (عَسْقَلَان)"
+  },
+  {
+   "concept": "veg.yam",
+   "reason": "True yams (Dioscorea) are not grown in most Arab countries; no established word.",
+   "use": "the English loan يَام (Wiktionary’s translation table); note that American “yam” often means sweet potato = بَطَاطَا حُلْوَة"
+  },
+  {
+   "concept": "veg.mustardgreens",
+   "reason": "No name for the leaf vegetable: mustard is known as a seed and a condiment, خَرْدَل.",
+   "use": "أَوْرَاقُ الْخَرْدَلِ (“mustard leaves”)"
+  },
+  {
+   "concept": "veg.bambooshoot",
+   "reason": "Bamboo shoots are not part of Arab cuisines; there is no single word.",
+   "use": "descriptive بَرَاعِمُ الْخَيْزُرَانِ (“bamboo shoots”; خَيْزُرَان = bamboo, Wiktionary)"
+  },
+  {
+   "concept": "veg.lambslettuce",
+   "reason": "No established name: Wiktionary lists three competing calques.",
+   "use": "خَسُّ النَّعْجَةِ, خَسُّ الضَّأْنِ or خَسُّ الْخَرُوفِ (all “sheep’s lettuce”, Wiktionary)"
+  },
+  {
+   "concept": "veg.garlicchives",
+   "reason": "Garlic chives are not used in Arab cooking and have no Arabic name.",
+   "use": "a translation of the English or Chinese name; nothing is fixed"
+  },
+  {
+   "concept": "veg.blacksalsify",
+   "reason": "Black salsify is unknown in Arab cuisines; no Arabic name.",
+   "use": "the European name (scorzonera) or a description"
+  },
+  {
+   "concept": "veg.daikon",
+   "reason": "No separate word: any radish is فُجْل.",
+   "use": "فُجْلٌ أَبْيَضُ (“white radish”) or the loan دَايْكُون (Wiktionary’s translation table gives فِجْل and دَايْكُون)"
+  },
+  {
+   "concept": "veg.celeriac",
+   "reason": "No established single word for the celery root.",
+   "use": "descriptive جَذْرُ الْكَرَفْسِ (“celery root”)"
+  },
+  {
+   "concept": "veg.romaine",
+   "reason": "No separate word: the long-leaved cos type is the ordinary lettuce, خَسّ, in much of the Arab world.",
+   "use": "خَسّ; on menus also خَسٌّ رُومَانِيٌّ (“Roman lettuce”)"
+  },
+  {
+   "concept": "veg.radicchio",
+   "reason": "An Italian vegetable with no Arabic name.",
+   "use": "the Italian loan (راديكيو) or descriptive هِنْدِبَاءُ حَمْرَاءُ (“red chicory”)"
+  },
+  {
+   "concept": "veg.icebergl",
+   "reason": "No established name for this lettuce variety.",
+   "use": "a borrowing of the English name (خس آيسبرغ) or simply خَسّ"
+  }
+ ]
+}

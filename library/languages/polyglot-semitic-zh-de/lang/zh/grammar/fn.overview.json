@@ -1,0 +1,324 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Mandarin Chinese (普通话 Pǔtōnghuà, ‘the common speech’) is the standard language of China and Taiwan and has more native speakers than any other language. It is the clearest isolating language of this course: a word never changes its form — no endings for tense, person, number, case or gender. Grammar lives in word order and in small separate words (measure words, particles such as 吗 and 了). Every syllable carries a tone that tells words apart, and the language is written in characters — one character per syllable — with pinyin as the Latin spelling for learners.",
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Sino-Tibetan › Sinitic (the Chinese languages). Mandarin is the largest Sinitic language; Cantonese, Wu (Shanghainese), Min (Hokkien) and Hakka are sister languages that a Mandarin speaker does not understand without learning them."
+  },
+  {
+   "label": "Script and direction",
+   "value": "Chinese characters (汉字 hànzì), one per syllable, written left to right in horizontal lines (older and some Taiwanese and Hong Kong texts run in columns, top to bottom, right to left). Simplified characters in mainland China and Singapore, traditional characters in Taiwan, Hong Kong and Macau."
+  },
+  {
+   "label": "Romanization",
+   "value": "Hanyu Pinyin (adopted in 1958): Latin letters with tone marks — mā, má, mǎ, mà. It is how you look words up and type characters."
+  },
+  {
+   "label": "Standard variety",
+   "value": "Standard Mandarin — 普通话 in the PRC, 國語 Guóyǔ in Taiwan, 华语 Huáyǔ in Singapore — based on the pronunciation of Beijing and the grammar of northern Mandarin and modern written Chinese."
+  },
+  {
+   "label": "Speakers",
+   "value": "Roughly 900 million native speakers and over a billion in all (conservative estimates). Official in China, Taiwan and Singapore; one of the six official languages of the United Nations."
+  }
+ ],
+ "typology": {
+  "type": "isolating",
+  "why": "No word has endings: 我是学生 ‘I am a student’ and 他们是学生 ‘they are students’ — 是 and 学生 never change. Plural, tense, person and case are not marked on words; meaning comes from word order (subject – verb – object), from separate grammar words (们 for groups of people, 了 for completed actions, 吗 for questions) and from context.",
+  "alsoShows": "Most words are compounds of one-syllable morphemes, much as in German: 电 ‘electricity’ + 话 ‘speech’ = 电话 ‘telephone’, 手 ‘hand’ + 机 ‘machine’ = 手机 ‘mobile phone’. A few suffixes behave a little like agglutination (们 for groups of people, the noun suffixes 子 and 儿), and Chinese is topic-prominent: what you talk about comes first, then what you say about it (这本书我看过 ‘this book, I have read it’)."
+ },
+ "peculiarities": [
+  {
+   "title": "Tones",
+   "text": "Every syllable has one of four tones or a neutral tone, and the tone is part of the word: 妈 mā ‘mother’, 麻 má ‘hemp’, 马 mǎ ‘horse’, 骂 mà ‘to scold’. Some tones change in combination (你好 is said ní hǎo). Lesson S00 teaches them."
+  },
+  {
+   "title": "Characters, not letters",
+   "text": "A character stands for a syllable with a meaning, not for a sound. About 3,500 common characters cover more than 99 % of everyday texts; you learn them through the words that contain them, and pinyin tells you how to say them."
+  },
+  {
+   "title": "Words never change",
+   "text": "No conjugation, no plural ending, no cases, no gender: 我 is both ‘I’ and ‘me’, 书 is ‘book’ and ‘books’, 是 is ‘am, is, are, was, were’. What you learn instead is word order and a set of small grammar words."
+  },
+  {
+   "title": "Measure words",
+   "text": "Between a number or 这 / 那 and a noun comes a measure word chosen by the kind of thing: 一本书 ‘a book’, 这张桌子 ‘this table’, 三个人 ‘three people’. Every noun is learned with its measure word, as a German noun is learned with its article."
+  },
+  {
+   "title": "是 links only nouns",
+   "text": "是 ‘to be’ joins two nouns (我是老师). Adjectives need no ‘to be’ at all — they work like verbs: 我很好 ‘I am fine’, never *我是好. Being somewhere is 在: 老师在这里 ‘the teacher is here’."
+  },
+  {
+   "title": "No articles, one tā",
+   "text": "There is no ‘the’ or ‘a’: the place in the sentence and 这 / 那 / 一 + measure word do that work. And ‘he’, ‘she’ and ‘it’ are all tā in speech — 他, 她, 它 differ only in writing."
+  },
+  {
+   "title": "Questions keep the statement order",
+   "text": "Add 吗 to a statement and it becomes a yes/no question (你是学生吗？); a question word stays where the answer will be (你叫什么名字？). Nothing moves, nothing is inverted."
+  },
+  {
+   "title": "The modifier comes first",
+   "text": "Everything that describes a noun stands before it, even long phrases: 我的书 ‘my book’; and time and place stand before the verb: 我明天在家吃饭 ‘I eat at home tomorrow’."
+  }
+ ],
+ "pathNote": "Chinese walks the same 19 steps as Arabic, Hebrew and German, but as an isolating language it never learns endings or tables — at each step it learns word order and small grammar words instead. S00 the tones (with the overview). S01 是 links nouns only; 在 is ‘to be somewhere’. S02 你 / 您 — no forms ‘to a man / to a woman’. S03 measure words after 这 / 那 (这本书). S04 no gender and no articles: Chinese shows what it does instead. S05 numbers with measure words, 两 / 二, and no plural (们 only for people). S06 有 for ‘have’ and 的 for ‘my, your’ (dropped with close family: 我妈妈), with the paternal and maternal family words. S07 verbs that never change and the fixed order subject – verb – object. S08 the two negations 不 / 没. S09 questions with 吗, A-not-A and 还是. S10 question words that stay in place. S11 coverbs before the verb (在, 从, 跟, 给) instead of cases. S12 place words after the noun (桌子上). S13 去 / 来, 从…到, travel with 坐 / 骑 before the verb, and commands with 请, 吧 and 别. S14 time before the verb and the aspect particles 了 / 过 (在 for ‘in progress’). S15 no word for ‘at / on / in’ a time; 以前 / 以后 / 的时候 after the clause; dates from big to small. S16 adjectives used like verbs — 很 instead of 是, 的 before a noun. S17 comparison with 比, 更, 最, 没有 and 一样 — the adjective never changes. S18 paired linking words (因为…所以, 虽然…但是, 如果…就), …的时候 after its clause, and no word for ‘that’. Where the fusional languages learn conjugation and declension tables, Chinese learns word order and small grammar words.",
+ "blocks": [
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The one-sentence model",
+   "text": "Chinese = fixed word order + small grammar words + tones; the words themselves never change.",
+   "typology": [
+    {
+     "feature": "morph.type",
+     "value": "isolating"
+    },
+    {
+     "feature": "tone.lexical",
+     "value": "complex"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Language",
+    "I am a student",
+    "What changes"
+   ],
+   "rows": [
+    [
+     "Chinese",
+     "我是学生。 Wǒ shì xuésheng.",
+     "nothing — 是 is the same for every person"
+    ],
+    [
+     "German",
+     "Ich bin Student.",
+     "the verb: bin, bist, ist, sind"
+    ],
+    [
+     "Arabic",
+     "ana ṭālib(un).",
+     "no ‘to be’ in the present"
+    ],
+    [
+     "Hebrew",
+     "ani talmid.",
+     "no ‘to be’ in the present"
+    ]
+   ],
+   "caption": "One sentence in the four course languages",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "obligatory"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "none"
+    }
+   ]
+  }
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which morphological type is Mandarin Chinese?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "isolating",
+   "why": "Words never change their form; grammar is word order and separate small words."
+  },
+  {
+   "q": "What tells 妈 mā ‘mother’ from 马 mǎ ‘horse’?",
+   "options": [
+    "the tone",
+    "a gender ending",
+    "the article",
+    "the word order"
+   ],
+   "answer": "the tone",
+   "why": "Same syllable ma, different tone: 1st (high level) vs 3rd (low dipping)."
+  },
+  {
+   "q": "How do you say ‘I am fine’?",
+   "options": [
+    "我很好",
+    "我是好",
+    "我是很好"
+   ],
+   "answer": "我很好",
+   "why": "Adjectives take no 是; 很 links them to the subject."
+  },
+  {
+   "q": "What stands between a number and a noun?",
+   "options": [
+    "a measure word",
+    "a plural ending",
+    "nothing"
+   ],
+   "answer": "a measure word",
+   "why": "一本书 ‘a book’, 三个人 ‘three people’."
+  },
+  {
+   "q": "Which characters are used in mainland China?",
+   "options": [
+    "simplified",
+    "traditional",
+    "both equally"
+   ],
+   "answer": "simplified",
+   "why": "Mainland China and Singapore use simplified characters; Taiwan, Hong Kong and Macau traditional ones."
+  },
+  {
+   "q": "How many ways are there to say ‘he’, ‘she’ and ‘it’ in speech?",
+   "options": [
+    "one: tā",
+    "three",
+    "two"
+   ],
+   "answer": "one: tā",
+   "why": "他, 她 and 它 are all pronounced tā; they differ only in writing."
+  },
+  {
+   "q": "How do you turn 你是学生 into a yes/no question?",
+   "options": [
+    "add 吗 at the end",
+    "put 是 first",
+    "add a question word"
+   ],
+   "answer": "add 吗 at the end",
+   "why": "你是学生吗？ — the statement order stays."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Almost everything Greek inflects disappears: no genders, no cases, no verb endings, no articles. The new things are tones (the Greek accent is stress, not a pitch that changes the word) and measure words. A gift from Greek: Chinese b, d, g are unaspirated like Greek π, τ, κ, while p, t, k carry a strong puff of air, and Chinese h is close to Greek χ in χαρά. Chinese has no θ or δ, characters have no capital letters and no final forms like ς, and the speaker’s sex never shows (κουρασμένος / κουρασμένη — both 我累了)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "The order subject – verb – object matches English (我是学生 ‘I am a student’), and English is already fairly analytic, so grammar without endings feels natural. Watch out for pinyin letters with values unlike English (q, x, zh, c, ü), for the missing ‘th’ sounds, and for English intonation: in Chinese the pitch belongs to each word, so a question is made with 吗, not by raising the voice. Characters have no capital letters; names are capitalised only in pinyin."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "Your German compounds help a lot: Chinese builds words the same way (手机 ‘hand machine’ — the German Handy; 电话 ‘electric speech’). German ü is pinyin ü (女 nǚ), the ach-Laut is close to Chinese h, the ich-Laut close to x. Measure words have small German cousins — ein Blatt Papier, eine Tasse Kaffee, zwei Stück Kuchen — but in Chinese every counted noun needs one. Forget V2: the Chinese verb never moves to second place (明天我去 or 我明天去, never *明天去我). Syllables end only in a vowel, -n, -ng or -r, so there is nothing to devoice, and nouns are not capitalised — characters have no case."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Like Russian, Chinese has no articles. Russian drops ‘to be’ in the present (Я студент); Chinese needs 是 between two nouns (我是学生) but, like Russian, uses none before adjectives (她很高 ~ Она высокая). Russian ш is close to Chinese sh, щ to x, and your feel for verbal aspect (perfective / imperfective) will help with 了 and 过. New: no hard / soft consonant pairs, no cases, no word stress, no capital letters, syllables that end only in a vowel, -n, -ng or -r (nothing to devoice), and the speaker’s sex never shows (я устал / устала — both 我累了)."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish is the opposite technique — long words built from suffixes — yet many habits carry over: no gender (o = he / she / it, just like spoken tā), no ‘the’ (bir works like 一 + measure word), no plural after a number (iki kitap ~ 两本书), modifiers before the noun, and a question particle (mı ~ 吗). Unlike Turkish suffixes, Chinese particles never follow vowel harmony: 吗 is always 吗. What remains different is the order — Chinese puts the verb before the object (SVO) — and Chinese has no evidential like -miş: ‘I hear that …’ is said with words. Characters have no capital letters, there are no double consonants, and syllables end only in a vowel, -n, -ng or -r."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish ser / estar prepare you for 是 / 在, and the SVO order matches. Everything else that changes in Spanish — gender, plural, verb endings, the subjunctive — is absent: a Chinese verb stays the same after ‘I want …’ or ‘so that …’. New are tones and measure words; characters have no capital letters, and Chinese has no θ."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French is SVO like Chinese and has no strong word stress, which suits the even beat of Chinese syllables; but gender, articles, conjugation and the subjunctive all disappear. French nasal vowels have no Chinese counterpart: in an / ang the n and ng are real consonants. Pinyin ü is French u (女 nǚ), and Chinese r is not the French r from the back of the throat. Characters have no capital letters."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi’s aspirated / unaspirated pairs (प / फ, क / ख) are exactly Chinese b / p and g / k, and its retroflex consonants give a feel for the curled tongue of zh, ch, sh. But Chinese has no gender, no verb endings and no subject–object–verb order: the object follows the verb (我吃饭). Nasal vowels and double consonants do not exist, and the speaker’s sex never shows in the verb (मैं थका / थकी हूँ — both 我累了)."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian has no gender either, and u is ‘he’ and ‘she’, as tā is in speech; Persian tā even works as an optional classifier (do tā ketāb ~ 两本书). New: tones; characters that never join or change shape; the object after the verb; and modifiers before the noun — the reverse of the ezafe (ketāb-e man ~ 我的书). Chinese has no uvular q and no double consonants: pinyin q is an aspirated, ‘ch’-like sound."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi’s aspirated / unaspirated pairs match Chinese b / p, d / t, g / k, and its आपण / आम्ही split is Chinese 咱们 / 我们. Like Marathi, Chinese puts modifiers before the noun and has a question particle (का ~ 吗). New: tones, no gender, no endings, the object after the verb, no double consonants — and the speaker’s sex never shows in the verb."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic builds words from roots and patterns; Chinese builds them by compounding whole syllables (电 + 话 = 电话) and never changes a word inside. Characters do not join or change shape by position, and there is no dual, no gender and no case; Chinese needs 是 between two nouns where Arabic needs nothing. Pharyngeal and emphatic consonants, double consonants and long vowels play no role — tones do. Pinyin q is not Arabic q but an aspirated, ‘ch’-like sound, and there are no θ / ð sounds."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew roots (k-t-v) have no Chinese counterpart: words are compounds of syllables (电 + 话 = 电话) and never change inside. Like Hebrew, Chinese puts no verb before adjectives (房子很大 ~ ha-bayit gadol), but it needs 是 between two nouns. Characters have no final forms (unlike ך ם ן ף ץ), and gender disappears even from ‘you’ (ata / at — 你)."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese gives you a head start: kanji are Chinese characters (学生, 电话 ~ 電話), counters work like measure words, the topic comes first, and the question particle か matches 吗. New: tones instead of pitch accent, simplified character forms (话 for 話), and SVO order — the object follows the verb (我吃饭). Some kanji mislead: Japanese 手紙 is ‘letter’, Chinese 手纸 is toilet paper. Long vowels and double consonants (おばあさん, きって) play no role in Chinese."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Many Korean words are Sino-Korean and close to their Chinese source (학생 haksaeng ~ 学生 xuésheng, 전화 jeonhwa ~ 电话 diànhuà), and counters, topic-first order and verb-like adjectives are familiar. New: tones, characters instead of Hangul, SVO order (the object after the verb), and no speech levels — politeness is 您, 请 and titles, not verb endings."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has no gender (hän ~ spoken tā) and no articles, but its fifteen cases, vowel harmony, consonant gradation and long vowels and consonants all disappear: a Chinese word never changes, and length means nothing. What is new is pitch — tones tell words apart. Characters have no capital letters."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian puts the family name first (Kovács János ~ 王小明), writes dates big to small (2026. május 1. ~ 2026年五月一号), has no gender (ő ~ tā), keeps the noun singular after numbers (két könyv ~ 两本书) and even has two words for ‘two’ (két / kettő ~ 两 / 二). Cases, vowel harmony, long vowels and double consonants disappear, and characters have no capital letters; tones are new."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili is SVO, so the basic order is familiar, but Chinese tones are new. Noun classes and their agreement disappear — Chinese has measure words instead, which also sort nouns by kind. Chinese counts the hours from midnight, not from 6 a.m.; it has no ‘th’ sounds (as in thelathini), and characters have no capital letters."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda is a tone language too, so pitch that tells words apart is familiar; Chinese tones are contours on every syllable. Noun classes, agreement and verb prefixes disappear — Chinese words never change, and measure words sort nouns by kind. The SVO order matches, but Chinese puts adjectives, numbers and possessors before the noun, Luganda after it. Characters have no capital letters."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese is the closest type of all: isolating, tonal, SVO, with classifiers, verb-like adjectives and many Sino-Vietnamese words (học sinh ~ 学生, điện thoại ~ 电话). Two differences matter: Chinese puts modifiers before the noun (我的书, 大房子), Vietnamese after it (sách của tôi, nhà to); and Chinese is written in characters, with pinyin only as a learner’s aid; characters have no capital letters."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut is the opposite extreme: one long word can be a whole sentence, built from a stem and many suffixes. Chinese words are short and never change; every meaning is a separate word in a fixed order. Verb–object words such as 吃饭 ‘eat-meal’ look like incorporation but are two words that can be split (吃了饭). Pinyin q is not the Inuktitut uvular q but an aspirated, ‘ch’-like sound."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.overview",
+   "note": "German is fusional: gender, four cases and conjugation tables — everything Chinese does without."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.overview",
+   "note": "Arabic builds words from three-consonant roots and has no ‘to be’ in the present; Chinese builds words by compounding and needs 是 between nouns."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.overview",
+   "note": "Hebrew shares the Semitic roots and the verbless present with Arabic; like Chinese it puts no ‘to be’ before adjectives."
+  }
+ ]
+}

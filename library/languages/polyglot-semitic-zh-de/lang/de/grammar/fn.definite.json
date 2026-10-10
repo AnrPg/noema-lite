@@ -1,0 +1,296 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.definiteArticle",
+   "value": "word-before"
+  },
+  {
+   "feature": "nom.indefiniteArticle",
+   "value": "one"
+  }
+ ],
+ "summary": "German marks definiteness with articles: der/die/das (the) for something known or specific, ein/eine (a, an) for something new or any one of its kind. The article also carries the gender, number and case of the noun, so it changes with the noun’s role in the sentence. There is no plural of ein: a plural noun without an article is indefinite (Stühle = chairs). At this step the forms needed are the nominative (der, die, das; ein, eine, ein; plural die); the accusative den / einen follows at S07.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "the (definite)",
+     "der Tisch",
+     "die Lampe",
+     "das Bett",
+     "die Tische"
+    ],
+    [
+     "a (indefinite)",
+     "ein Tisch",
+     "eine Lampe",
+     "ein Bett",
+     "Tische (no article)"
+    ]
+   ],
+   "caption": "Nominative – the forms of this step",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "word-before"
+    },
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "one"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "case",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "der / ein",
+     "die / eine",
+     "das / ein",
+     "die / –"
+    ],
+    [
+     "accusative",
+     "den / einen",
+     "die / eine",
+     "das / ein",
+     "die / –"
+    ],
+    [
+     "dative",
+     "dem / einem",
+     "der / einer",
+     "dem / einem",
+     "den / –"
+    ],
+    [
+     "genitive",
+     "des / eines",
+     "der / einer",
+     "des / eines",
+     "der / –"
+    ]
+   ],
+   "caption": "The whole table (for reference – the other cases come step by step)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "ein hides the gender",
+   "text": "ein Tisch (der) and ein Bett (das) look the same; only eine shows feminine. So learn nouns with der/die/das, not with ein."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "New → known",
+   "text": "Hier ist ein Schlüssel. (a key – new) → Der Schlüssel ist für die Tür. (the key – now known)"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the thing known to the listener or a specific one (→ der/die/das) or new, any one (→ ein/eine)?",
+   "What is the gender of the noun (der Tisch, die Lampe, das Bett)?",
+   "Singular or plural? Plural definite is always die (dative den); plural indefinite has no article.",
+   "Which case does the noun’s role need: subject (nominative), direct object (accusative), indirect object (dative)?",
+   "Is it a job after sein? Then no article at all: Er ist Lehrer."
+  ],
+  "steps": [
+   "Find the noun and its gender.",
+   "Decide definite or indefinite.",
+   "Decide the case from the verb or preposition.",
+   "Take the matching cell: e.g. masculine accusative → den / einen."
+  ]
+ },
+ "traps": [
+  "Only the masculine changes from nominative to accusative: der Tisch → den Tisch, ein Stuhl → einen Stuhl; die and das stay the same.",
+  "die is feminine singular AND every plural: die Lampe, die Lampen, die Tische.",
+  "There is no plural of ein: Das sind Stühle (these are chairs), not *eine Stühle.",
+  "In Das ist eine Lampe the word das is a pointing pronoun, not the article – it does not change with the noun.",
+  "Jobs after sein take no article: Sie ist Lehrerin."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:der",
+   "de:ein"
+  ]
+ },
+ "paradigmCells": [
+  "DET;NOM;SG;MASC",
+  "DET;NOM;SG;FEM",
+  "DET;NOM;SG;NEUT",
+  "DET;NOM;PL",
+  "DET;ACC;SG;MASC",
+  "DET;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:der",
+    "de:ein"
+   ],
+   "cells": [
+    "DET;NOM;SG;FEM",
+    "DET;NOM;SG;NEUT",
+    "DET;NOM;PL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.definite",
+   "note": "Arabic marks “the” with the prefix al- (al-bayt, the house) and has no word for “a”; indefinite nouns end in -un (baytun)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.definite",
+   "note": "Hebrew marks “the” with the prefix ha- (ha-bayit) and has no indefinite article."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.definite",
+   "note": "Chinese has no articles: context, 这 / 那 or 一个 do the job."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "The article is where the gender shows."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "ο / η / το and ένας / μία / ένα change for gender and case as der / ein do. Greek also puts the article before names and with possessives (ο Γιάννης, το σπίτι μου); standard German does not (Anna, mein Haus)."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian has no articles; German makes you choose der or ein for every singular noun – known or specific (der), new or any (ein)."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "el / la and un / una are familiar, but German articles change for case too, and there is no plural of ein (Spanish unos): Das sind Stühle."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "the / a work the same way, but the German article also shows gender, number and case: der, die, das, den, dem, des."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "le / la / les, un / une are familiar, but German has no plural indefinite (French des) and no partitive: Ich esse Brot (je mange du pain), Das sind Stühle (ce sont des chaises)."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi has no articles (ek is sometimes used for “a”); German needs der or ein before almost every singular noun."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian marks “a” with -i or yek and a definite object with rā; German uses a separate article before the noun: ein Buch, das Buch."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi has no articles; German has der / die / das and ein / eine, which also show the gender and case."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "The Arabic article al- is a prefix that never changes, and an indefinite noun takes -un (kitābun); German uses separate words that change with gender and case: das Buch, ein Buch, den Tisch."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew ha- is a prefix for every gender and number, and “a” has no word (sefer = a book); German needs der / die / das and ein / eine."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has bir for “a” but no definite article; definiteness of an object shows in the accusative (elmayı – the apple, elma – an apple). German uses der / ein in every case."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese has no articles; German needs der or ein, and the choice tells the listener whether the thing is already known."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Korean has no articles; German needs der or ein before a singular noun."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish has no articles; German needs der or ein before nearly every singular noun."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "a / az and egy are articles like der and ein, but they never change; German articles change for gender, number and case."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili has no articles; German makes you choose der or ein, which also carries gender and case."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese has no articles (这 / 那 or 一个 when needed); German needs der or ein before nearly every singular noun."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese has no articles; German needs der / ein before nearly every singular noun."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no articles; German needs der or ein, chosen by whether the thing is known."
+  }
+ ]
+}

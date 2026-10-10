@@ -1,0 +1,505 @@
+{
+ "function": "fn.measure.word",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.classifiers",
+   "value": "obligatory"
+  },
+  {
+   "feature": "syn.numeralNoun",
+   "value": "num-noun"
+  }
+ ],
+ "summary": "A Chinese noun cannot follow a number or 这 / 那 directly: a measure word (classifier) comes in between — 一本书 ‘a book’, 这张桌子 ‘this table’, 那位老师 ‘that teacher’. The measure word is chosen by the kind or shape of the thing: 本 for bound books, 张 for flat things, 把 for things with a handle. 个 is the general one, used for people and for many things without a special measure word. Learn every noun with its measure word.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "一 / 这 / 那",
+    "measure word",
+    "noun"
+   ],
+   "caption": "The pattern",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Measure word",
+    "For",
+    "Examples"
+   ],
+   "rows": [
+    [
+     "个 gè (ge)",
+     "people and many things — the general one",
+     "一个人, 这个房间, 一个杯子, 一个包"
+    ],
+    [
+     "位 wèi",
+     "people, politely",
+     "一位老师, 这位朋友"
+    ],
+    [
+     "本 běn",
+     "bound volumes",
+     "一本书"
+    ],
+    [
+     "张 zhāng",
+     "flat things, things with a flat top",
+     "一张桌子, 一张床, 一张纸"
+    ],
+    [
+     "把 bǎ",
+     "things held by a handle",
+     "一把椅子, 一把钥匙"
+    ],
+    [
+     "支 zhī",
+     "long thin things",
+     "一支笔"
+    ],
+    [
+     "扇 shàn",
+     "doors and windows (panels that swing)",
+     "一扇门, 一扇窗户"
+    ],
+    [
+     "面 miàn",
+     "flat surfaces you face",
+     "一面墙"
+    ],
+    [
+     "间 jiān",
+     "rooms",
+     "一间房子"
+    ],
+    [
+     "栋 dòng",
+     "buildings, houses",
+     "一栋房子"
+    ],
+    [
+     "盏 zhǎn",
+     "lamps",
+     "一盏灯"
+    ],
+    [
+     "部 bù",
+     "machines and works",
+     "一部手机, 一部电话"
+    ],
+    [
+     "杯 bēi",
+     "‘a cup of, a glass of’ — a container as a measure (S07)",
+     "一杯茶, 一杯水; but the cup itself: 一个杯子"
+    ],
+    [
+     "碗 wǎn",
+     "‘a bowl of’ (S07)",
+     "一碗米饭, 一碗汤"
+    ],
+    [
+     "瓶 píng",
+     "‘a bottle of’ (S07)",
+     "一瓶水, 一瓶啤酒"
+    ],
+    [
+     "块 kuài",
+     "pieces and chunks (S07)",
+     "一块肉, 一块面包, 一块奶酪"
+    ],
+    [
+     "份 fèn",
+     "portions, servings (S07)",
+     "一份沙拉"
+    ],
+    [
+     "口 kǒu",
+     "members of a family (S06)",
+     "我家有四口人"
+    ],
+    [
+     "岁 suì",
+     "years of age (S05)",
+     "我二十岁, 两岁"
+    ],
+    [
+     "名 míng",
+     "people with a role or job — formal, official counts (S10)",
+     "一名医生, 三名工人"
+    ],
+    [
+     "家 jiā",
+     "businesses and institutions: shops, restaurants, banks, hospitals (S11)",
+     "一家超市, 这家饭馆, 两家银行"
+    ],
+    [
+     "所 suǒ",
+     "schools, universities, hospitals (S11)",
+     "一所学校, 这所大学"
+    ],
+    [
+     "条 tiáo",
+     "long, narrow things: streets, roads, fish (S11)",
+     "一条街, 一条鱼"
+    ]
+   ],
+   "caption": "The measure words of S03–S11"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "With numbers (S05)",
+   "text": "Every number takes the measure word too: 两个人, 三本书, 十二把椅子 — and ‘two’ before a measure word is 两, not 二."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Like a German article",
+   "text": "Learn 书 as ‘本 书’ just as you learn ‘das Buch’: the measure word is part of knowing the noun."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No measure word after 这些 / 那些, and none when 这 is alone",
+   "text": "这些书, 那些人 — and 这是书 ‘this is a book’."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "个 when in doubt",
+   "text": "In speech 个 is heard with almost anything and is always understood; the specific measure word is what educated speech and writing expect."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "杯子 bēizi — the cup (a noun)",
+     "points": [
+      "一个杯子 a cup",
+      "这个杯子 this cup"
+     ]
+    },
+    {
+     "title": "杯 bēi — a cup of (a measure)",
+     "points": [
+      "一杯水 a glass of water",
+      "一杯茶 a cup of tea"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Vehicles (S13)",
+   "text": "辆 for everything on wheels (一辆车, 一辆公共汽车, 一辆自行车) · 架 for planes (一架飞机) · 列 or 趟 for trains (一列火车) · 条, 只 or 艘 for boats and ships (一条船, 一艘船) · 张 for tickets (两张票)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there a number, 这 / 那 or 哪 before the noun? → it needs a measure word.",
+   "Is it a person? → 个, politely 位.",
+   "Is it a book? → 本. Flat (table, bed, paper)? → 张. Held by a handle (chair, key)? → 把. Long and thin (pen)? → 支.",
+   "A door or window? → 扇. A wall? → 面. A room? → 间. A building? → 栋. A lamp? → 盏. A phone? → 部.",
+   "Do I mean ‘a cup OF something’? → 杯; the cup itself → 一个杯子.",
+   "A person with a job, in a formal count? → 名. A shop, restaurant, bank? → 家. A school or university? → 所. A street? → 条.",
+   "Is it 这些 / 那些, or 这 / 那 alone as the subject? → no measure word."
+  ],
+  "steps": [
+   "Find the noun and recall its measure word.",
+   "Number / 这 / 那 + measure word + noun.",
+   "When you do not know it, 个 is understood — then learn the right one."
+  ]
+ },
+ "traps": [
+  "*一书 / *这书 → 一本书, 这本书.",
+  "*这些本书 → 这些书.",
+  "一个老师 and 一位老师 are both fine, but *一位人 is not: 位 goes with titles and respected people, not with 人 itself.",
+  "杯 vs 杯子: 一杯 is ‘a cup of’, 一个杯子 is ‘a cup’.",
+  "一 changes tone: yí ge, yí shàn, but yì běn, yì zhāng, yì bǎ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:ge",
+   "zh:wei",
+   "zh:dong",
+   "zh:jian",
+   "zh:shan",
+   "zh:mian",
+   "zh:zhang",
+   "zh:ba",
+   "zh:ben",
+   "zh:zhi.clf",
+   "zh:bu.clf",
+   "zh:zhan",
+   "zh:bei",
+   "zh:gen",
+   "zh:ke.round",
+   "zh:ke.plant",
+   "zh:tiao",
+   "zh:tou",
+   "zh:kou",
+   "zh:sui",
+   "zh:wan",
+   "zh:kuai",
+   "zh:ping",
+   "zh:fen",
+   "zh:ming",
+   "zh:jia.clf",
+   "zh:suo",
+   "zh:liang.clf",
+   "zh:jia.frame",
+   "zh:lie",
+   "zh:sou"
+  ]
+ },
+ "needs": {
+  "NOUN": 6,
+  "CLF": 3
+ },
+ "generators": [
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "一 __ 书",
+   "options": [
+    "本",
+    "张",
+    "把",
+    "支"
+   ],
+   "answer": "本",
+   "why": "Bound volumes take 本."
+  },
+  {
+   "q": "这 __ 桌子",
+   "options": [
+    "张",
+    "本",
+    "支",
+    "扇"
+   ],
+   "answer": "张",
+   "why": "Things with a flat top take 张."
+  },
+  {
+   "q": "一 __ 钥匙",
+   "options": [
+    "把",
+    "张",
+    "本",
+    "面"
+   ],
+   "answer": "把",
+   "why": "Things held by a handle take 把."
+  },
+  {
+   "q": "那 __ 老师 (polite)",
+   "options": [
+    "位",
+    "张",
+    "把",
+    "本"
+   ],
+   "answer": "位",
+   "why": "位 is the polite measure word for people."
+  },
+  {
+   "q": "‘these books’",
+   "options": [
+    "这些书",
+    "这些本书",
+    "这本些书"
+   ],
+   "answer": "这些书",
+   "why": "No measure word after 这些."
+  },
+  {
+   "q": "‘a cup’ (the object)",
+   "options": [
+    "一个杯子",
+    "一杯",
+    "一杯杯子"
+   ],
+   "answer": "一个杯子",
+   "why": "杯 alone means ‘a cup of’."
+  },
+  {
+   "q": "一 __ 门",
+   "options": [
+    "扇",
+    "本",
+    "支",
+    "盏"
+   ],
+   "answer": "扇",
+   "why": "Doors and windows take 扇."
+  },
+  {
+   "q": "一 __ 银行",
+   "options": [
+    "家",
+    "本",
+    "张",
+    "支"
+   ],
+   "answer": "家",
+   "why": "Businesses and institutions such as banks take 家."
+  },
+  {
+   "q": "一 __ 学校",
+   "options": [
+    "所",
+    "张",
+    "把",
+    "盏"
+   ],
+   "answer": "所",
+   "why": "Schools and universities take 所 (一个学校 is also heard)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek counts nouns directly (τρία βιβλία ‘three books’); measure words appear only with masses (ένα φλιτζάνι καφέ ~ 一杯咖啡). In Chinese every counted noun needs one: 三本书."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian counts directly and changes the noun after the number (две книги, пять книг); Chinese never changes the noun but puts a measure word in between: 两本书, 五本书. Colloquial штука (три штуки) is the nearest cousin of 个."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish counts directly (tres libros) and uses measure words only for masses (una taza de café ~ 一杯咖啡, un trozo de pan ~ 一块面包). In Chinese the slot is obligatory for every noun."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English needs measure words only for mass nouns (a cup of tea, a piece of bread, a head of lettuce); Chinese needs one for every noun, even countable ones: 一本书 ‘a book’, 一个人 ‘a person’."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French counts directly (trois livres) and uses une tasse de, un morceau de only for masses; Chinese needs a measure word for every counted noun, chosen by its shape or kind."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German has measure nouns for masses (eine Tasse Kaffee, ein Stück Kuchen, ein Blatt Papier) and Stück even for countables in shops (drei Stück); Chinese makes this obligatory for every noun, with the choice by shape (本, 张, 把)."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi counts directly (तीन किताबें ‘three books’) and uses measure words only for masses (एक कप चाय ~ 一杯茶). Chinese drops the plural ending but requires the measure word: 三本书."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian already has an optional classifier: do tā ketāb ‘two books’ (tā ~ 个), nafar for people (se nafar ~ 三个人). Chinese makes the classifier obligatory and has many more, chosen by shape and kind."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi counts directly and marks the plural on the noun (तीन पुस्तके ‘three books’); Chinese marks no plural but needs a measure word: 三本书."
+  },
+  {
+   "for": "ar",
+   "rel": "new",
+   "text": "Arabic numerals have intricate rules (gender polarity, plural after 3–10, singular after 11 and up) but no classifiers; Chinese has no agreement at all — only number + measure word + noun."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Hebrew numbers agree in gender with the noun, which is plural; Chinese numbers never change, the noun never changes, and a measure word stands between them."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish tane is an optional classifier (iki tane kitap ‘two books’) — Chinese 个 in all but obligation. Turkish keeps the noun singular after numbers, as Chinese always does."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese counters work the same way (枚 mai for flat things, 冊 satsu for books, 匹 hiki for small animals), but the same character can mislead: Japanese 本 hon counts long, thin things, Chinese 本 counts books — long things take 根 or 支. Japanese can put the counter after the noun (本を三冊); Chinese always says 三本书."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean counters are close relatives: 개 (個) ~ 个, 장 (張) for paper and tickets ~ 张, 명 (名) for people ~ 名, 병 ~ 瓶. Korean puts them after the noun (사과 세 개), Chinese before it (三个苹果). Trap: Korean 잔 (盞) counts cups, Chinese 盏 counts lamps — cups are 杯."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish counts directly, with the noun in the partitive singular (kolme kirjaa); Chinese never changes the noun but inserts a measure word: 三本书."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian keeps the noun singular after numbers (három könyv) and has optional classifiers such as darab ‘piece’ (három darab); Chinese makes the classifier obligatory and chooses it by shape."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili counts with numerals that follow the noun and agree with its class (vitabu vitatu ‘three books’). Noun classes sort things by kind, a little like Chinese measure words — but in Chinese the measure word is a separate word before the noun: 三本书."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda numerals follow the noun and agree with its class (ebitabo bisatu ‘three books’). Chinese numerals never agree; the class-like information goes into the measure word before the noun: 三本书."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese classifiers work just like Chinese ones: hai quyển sách ‘two books’ (quyển ~ 本), một cái bàn ‘a table’. Only the demonstrative differs: quyển sách này, but 这本书."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no classifiers: numbers stand with the noun, which itself shows singular, dual or plural (inuk, inuuk, inuit). Chinese never marks number on the noun, but always puts a measure word after the number."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.measure.word",
+   "note": "German counts mass nouns with measure nouns — ein Blatt Papier (一张纸), eine Tasse Kaffee (一杯咖啡), zwei Stück Kuchen; Chinese needs one with every counted noun."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "Arabic has no measure words; the difficulty is elsewhere — the number agrees with the noun (gender polarity for 3–10)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.numerals",
+   "note": "Hebrew has no measure words; numbers have masculine and feminine forms chosen by the noun’s gender."
+  }
+ ]
+}

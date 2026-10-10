@@ -1,0 +1,414 @@
+{
+ "function": "fn.future",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "verb.future",
+   "value": "none"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "optional"
+  }
+ ],
+ "summary": "Chinese has no future tense. A time word is often enough: 我明天去北京 ‘I’m going to Beijing tomorrow’. Before the verb, a few words add the kind of future: 要 — it is decided or near (我下星期要出国; 快要 / 就要 … 了 ‘about to’); 会 — a prediction, ‘will (probably)’ (明天会很冷); 打算 / 计划 — an intention, a plan (我打算明年出国); 想 — a wish, ‘would like to’ (S07). The verb itself never changes. The negative is 不: 不会 ‘won’t’, 不打算 ‘don’t intend to’, 不去 ‘won’t go’; 不要 is ‘don’t!’ or ‘I don’t want to’, not a neutral ‘won’t’. Time words for the future — 明天, 下星期 / 下周, 下个月, 明年, 以后 — stand before the verb, and a plan takes no 了.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Word",
+    "Says",
+    "Example"
+   ],
+   "rows": [
+    [
+     "(a time word only)",
+     "a plan, a fixed event",
+     "我明天去北京。 I’m going to Beijing tomorrow."
+    ],
+    [
+     "要 + verb",
+     "decided, or about to happen",
+     "我下星期要出国。 I’m going abroad next week."
+    ],
+    [
+     "会 + verb",
+     "a prediction: will (probably)",
+     "明天会很冷。 It will be cold tomorrow."
+    ],
+    [
+     "打算 / 计划 + verb",
+     "an intention, a plan",
+     "我们打算在国外待两个星期。 We plan to stay abroad for two weeks."
+    ],
+    [
+     "想 + verb (S07)",
+     "a wish: would like to",
+     "我想去国外旅行。 I’d like to travel abroad."
+    ]
+   ],
+   "caption": "No future tense — a time word, plus 要, 会, 打算",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "要 — decided, near",
+     "points": [
+      "我明年要出国。 I’m going abroad next year (it’s settled).",
+      "火车快要开了！ The train is about to leave!"
+     ]
+    },
+    {
+     "title": "会 — predicted",
+     "points": [
+      "明天会很冷。 It will be cold tomorrow.",
+      "你会喜欢北京的。 You’ll like Beijing."
+     ]
+    },
+    {
+     "title": "打算 — intended",
+     "points": [
+      "我打算明年出国。 I intend to go abroad next year.",
+      "你暑假打算去哪里？ Where are you planning to go in the summer?"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The time word does most of the work",
+   "text": "As with the past, the verb does not change: 我明天去, 我昨天去了, 我每天去. When the time is clear, nothing else is needed; 要, 会 and 打算 add how sure or how planned it is.",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Saying ‘won’t’",
+   "text": "不会 ‘won’t (I don’t expect it)’: 他不会来. 不打算 ‘don’t intend to’. 不去 ‘won’t go (I’ve decided)’. But 不要 + verb is a command to someone (不要走！ ‘don’t go!’) or a strong ‘I don’t want to’ — not a neutral ‘won’t’."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "会 has two jobs",
+   "text": "会 + verb is ‘will (probably)’ here; it is also ‘can, know how to’ (会说中文, C05). 他不会来 ‘he won’t come’ but 他不会开车 ‘he can’t drive’ — the verb and the situation decide."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "About to happen",
+   "text": "快要 … 了 / 快 … 了 and 就要 … 了 mean ‘be about to’: 我们快要到了 ‘we’re nearly there’, 明天就要放假了 ‘the holidays start tomorrow’. With a time word use 就要, not 快要: *明天快要放假了."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Time word",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "明天",
+     "tomorrow"
+    ],
+    [
+     "后天",
+     "the day after tomorrow"
+    ],
+    [
+     "下星期 / 下周 / 下个星期",
+     "next week"
+    ],
+    [
+     "下个月",
+     "next month"
+    ],
+    [
+     "明年",
+     "next year"
+    ],
+    [
+     "以后",
+     "later, in the future"
+    ]
+   ],
+   "caption": "Time words for the future — before the verb; next year is 明年, not *下年"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No 了 for plans",
+   "text": "A plan has not happened: 我明天要预订酒店 (no 了). In the future, 了 only marks one step done before the next: 明天我预订了酒店就给你打电话 ‘tomorrow, once I’ve booked the hotel, I’ll call you’."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking about plans",
+   "text": "你明年打算做什么？ · 你什么时候出国？ · 你会来吗？ · 你下个星期要去哪里？ — the question word stands where the answer goes (S10)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the time already clear from a time word? → the plain verb may be enough (我明天去).",
+   "Is it decided, or about to happen? → 要 (快要 / 就要 … 了).",
+   "Is it a prediction or a guess? → 会.",
+   "Is it an intention or a plan? → 打算 / 计划.",
+   "Is it only a wish? → 想.",
+   "Negative? → 不会 / 不打算 / 不 + verb — 不要 is a command.",
+   "Is there a time word with ‘about to’? → 就要 … 了, not 快要."
+  ],
+  "steps": [
+   "Put the time word before the verb.",
+   "Add the kind of future: 要, 会, 打算.",
+   "Negate with 不 (不会, 不打算)."
+  ]
+ },
+ "traps": [
+  "*我去北京明天 → 我明天去北京 (time before the verb).",
+  "*明天快要放假了 → 明天就要放假了.",
+  "*我明天要预订了酒店 → 我明天要预订酒店 (no 了 for a plan).",
+  "他不会来 (won’t come) ≠ 他不会开车 (can’t drive).",
+  "*我打算到出国 → 我打算出国 (no word for ‘to’).",
+  "下星期, 下个月 — but 明年, not *下年."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:hui.will",
+   "zh:yao",
+   "zh:dasuan.plan",
+   "zh:jihua",
+   "zh:mingtian",
+   "zh:mingnian",
+   "zh:xiaxingqi",
+   "zh:xiazhou"
+  ]
+ },
+ "needs": {
+  "VERB": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.future"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘It will be cold tomorrow.’",
+   "options": [
+    "明天会很冷。",
+    "明天很冷了。",
+    "很冷明天会。"
+   ],
+   "answer": "明天会很冷。",
+   "why": "会 predicts: ‘will (probably)’; the time word comes first."
+  },
+  {
+   "q": "‘I intend to go abroad next year.’",
+   "options": [
+    "我打算明年出国。",
+    "我打算出国明年。",
+    "我明年打算到出国。"
+   ],
+   "answer": "我打算明年出国。",
+   "why": "The time word stands before the verb, and 打算 needs no word for ‘to’."
+  },
+  {
+   "q": "‘The holidays start tomorrow’ (about to):",
+   "options": [
+    "明天就要放假了。",
+    "明天快要放假了。",
+    "明天要放假过。"
+   ],
+   "answer": "明天就要放假了。",
+   "why": "With a time word, 就要 … 了; 快要 takes no time word."
+  },
+  {
+   "q": "‘He won’t come.’",
+   "options": [
+    "他不会来。",
+    "他不要来。",
+    "他没会来。"
+   ],
+   "answer": "他不会来。",
+   "why": "不会 = won’t (a prediction); 不要来 is ‘don’t come!’ or ‘doesn’t want to come’."
+  },
+  {
+   "q": "‘next year’",
+   "options": [
+    "明年",
+    "下年",
+    "下个年"
+   ],
+   "answer": "明年",
+   "why": "Next year is 明年; next week and next month take 下 (下星期, 下个月)."
+  },
+  {
+   "q": "‘Where are you planning to go in the summer holidays?’",
+   "options": [
+    "你暑假打算去哪里？",
+    "你暑假打算去哪里吗？",
+    "你打算去哪里暑假？"
+   ],
+   "answer": "你暑假打算去哪里？",
+   "why": "The question word stays in place, no 吗 after it, and the time word comes first."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek θα + verb (θα πάω ‘I’ll go’) is a particle before the verb, like 会 / 要; but Greek also changes the verb (θα πηγαίνω ‘I’ll be going’) — Chinese never does."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian uses the perfective present as its future (поеду ‘I’ll go’) or буду + infinitive (буду читать); Chinese uses time words and 会 / 要 before an unchanged verb."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Iré (future tense) ~ 我会去; voy a ir ‘I’m going to go’ ~ 我要去 / 我打算去. Like Spanish mañana voy, Chinese often uses the plain verb with a time word: 我明天去."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "‘Will’ ~ 会 (a prediction), ‘be going to’ ~ 要 / 打算, ‘I’m leaving tomorrow’ ~ 我明天走 with no extra word. ‘Won’t’ is 不会, not 不要."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Futur simple (j’irai) ~ 我会去; futur proche (je vais partir) ~ 我要走; demain je pars ~ 我明天走."
+  },
+  {
+   "for": "de",
+   "rel": "same",
+   "text": "German usually says the future with the present and a time word — morgen fahre ich nach Berlin — exactly like 我明天去北京; werden + infinitive (es wird kalt sein) is close to 会 (明天会很冷)."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has a future form with endings for person and gender (जाऊँगा / जाऊँगी ‘I’ll go’); Chinese adds 会 / 要 to a verb that never changes."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian xāham raft ‘I will go’ uses xāstan ‘to want’, as Chinese uses 要 ‘want’ for a decided future; in speech both prefer the present + a time word (fardā miravam ~ 我明天去)."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic marks the future with سَ / سَوْفَ before the conjugated imperfect (سَأُسَافِرُ ‘I will travel’); Chinese has no conjugation: 我会去, 我要去."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew has a future conjugation with prefixes and suffixes (אֶסַּע ‘I will travel’, נִסַּע ‘we will travel’); Chinese uses one bare verb with 要, 会 or a time word."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish -ecek / -acak is a future suffix with person endings (gideceğim ‘I will go’); Chinese 我会去 / 我要去 uses separate words."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese has no future tense either: 明日行きます is ‘I go / I’ll go tomorrow’, like 我明天去; つもり ‘intention’ ~ 打算."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean -ㄹ 거예요 (갈 거예요 ‘I’ll go’) is a future-like ending; Chinese puts 会 / 要 before the verb instead."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish has no future tense: menen huomenna ‘I go tomorrow’ ~ 我明天去."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian mostly uses the present for the future (holnap megyek ‘I’ll go tomorrow’), like 我明天去; fog + infinitive (menni fogok) is close to 会 / 要."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili -ta- is a future prefix in the verb (nitaenda ‘I will go’); Chinese puts 会 or 要 before a bare verb."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese sẽ ~ 会 / 要 (tôi sẽ đi ‘I will go’), sắp ~ 快要 (sắp đi ‘about to go’), and often just a time word (mai tôi đi ~ 我明天去)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Polysynthetic languages usually mark the future with a suffix inside the verb word; Chinese adds 会 or 要 as separate words before an unchanged verb."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.future",
+   "note": "werden + infinitive (ich werde fahren) exists, but German mostly uses the present with a time word (morgen fahre ich) — just like 我明天去."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.future",
+   "note": "Arabic سَ- / سَوْفَ + the imperfect (سَأُسَافِرُ ‘I will travel’); Chinese 我会去 / 我要去 with an unchanged verb."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.future",
+   "note": "Hebrew has a future conjugation (אֶסַּע ‘I will travel’); Chinese marks the future with time words and 要 / 会 / 打算."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.time.day",
+   "note": "The time words before the verb (S14) are the main way to place an action in the future."
+  }
+ ]
+}

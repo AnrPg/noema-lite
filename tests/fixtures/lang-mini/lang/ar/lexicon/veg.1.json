@@ -1,0 +1,407 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:jazar",
+   "lemma": "جَزَر",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.carrot"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian gazar): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَزَرَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَزَرَتَانِ",
+    "declension": "triptote",
+    "unit": "جَزَرَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "root": "ج ز ر",
+   "unit": "جَزَرَة",
+   "translit": "jazar",
+   "forms": {
+    "N;NOM;COLL;INDF": "جَزَرٌ",
+    "N;NOM;COLL;DEF": "الْجَزَرُ",
+    "N;ACC;COLL;DEF": "الْجَزَرَ",
+    "N;NOM;SG;INDF": "جَزَرَةٌ",
+    "N;ACC;SG;INDF": "جَزَرَةً",
+    "N;NOM;SG;DEF": "الْجَزَرَةُ",
+    "N;ACC;SG;DEF": "الْجَزَرَةَ",
+    "N;NOM;PL;INDF": "جَزَرَاتٌ",
+    "N;NOM;PL;DEF": "الْجَزَرَاتُ",
+    "N;ACC;PL;DEF": "الْجَزَرَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Healthy, everyday food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "carrots (collective); one carrot = جَزَرَة",
+      "concept": "veg.carrot",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ عَصِيرَ الْجَزَرِ.",
+      "tr": "I love carrot juice.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ كِيلُو جَزَرٍ مِنَ السُّوقِ.",
+      "tr": "I bought a kilo of carrots at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "قَطَّعَتْ أُمِّي جَزَرَةً صَغِيرَةً.",
+      "tr": "My mother cut up a small carrot.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَصِيرُ جَزَرٍ",
+      "tr": "carrot juice"
+     },
+     {
+      "text": "جَزَرٌ مَبْشُورٌ",
+      "tr": "grated carrot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "سِيَاسَةُ الْعَصَا وَالْجَزَرَةِ",
+      "tr": "the policy of the stick and the carrot",
+      "kind": "idiom",
+      "meaning": "a carrot-and-stick approach",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym in Modern Standard Arabic.",
+    "etymology": {
+     "text": "From Persian گزر (gazar).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew גֶּזֶר (gezer) comes from the same Persian word."
+    ],
+    "pitfalls": [
+     "جَزْر (jazr, with sukūn) is the ebb of the sea — الْمَدُّ وَالْجَزْرُ, high and low tide. Without vowel marks both are written جزر.",
+     "Collective: الْجَزَرُ = carrots (as food); one carrot = جَزَرَة; counted carrots = جَزَرَات."
+    ],
+    "subtleties": [
+     "A collective takes masculine singular agreement: الْجَزَرُ مُفِيدٌ (carrots are healthy)."
+    ]
+   }
+  },
+  {
+   "id": "ar:basal",
+   "lemma": "بَصَل",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.onion",
+    "nature.bulb"
+   ],
+   "features": {
+    "root": "ب ص ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَصَلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "بَصَلَتَانِ",
+    "declension": "triptote",
+    "unit": "بَصَلَة",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "root": "ب ص ل",
+   "unit": "بَصَلَة",
+   "translit": "baṣal",
+   "forms": {
+    "N;NOM;COLL;INDF": "بَصَلٌ",
+    "N;NOM;COLL;DEF": "الْبَصَلُ",
+    "N;ACC;COLL;DEF": "الْبَصَلَ",
+    "N;NOM;SG;INDF": "بَصَلَةٌ",
+    "N;ACC;SG;INDF": "بَصَلَةً",
+    "N;NOM;SG;DEF": "الْبَصَلَةُ",
+    "N;ACC;SG;DEF": "الْبَصَلَةَ",
+    "N;NOM;PL;INDF": "بَصَلَاتٌ",
+    "N;NOM;PL;DEF": "الْبَصَلَاتُ",
+    "N;ACC;PL;DEF": "الْبَصَلَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Strong smell, kitchen tears.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "onions (collective); one onion = بَصَلَة",
+      "concept": "veg.onion",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "bulb (of a plant)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "botany"
+      ],
+      "concept": "nature.bulb"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَضِفِ الْبَصَلَ الْمَفْرُومَ إِلَى الزَّيْتِ.",
+      "tr": "Add the chopped onion to the oil.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "رَائِحَةُ الْبَصَلِ قَوِيَّةٌ.",
+      "tr": "The smell of onion is strong.",
+      "register": "neutral",
+      "context": "senses",
+      "sense": "s1"
+     },
+     {
+      "text": "أَبْكَانِي تَقْطِيعُ الْبَصَلِ.",
+      "tr": "Cutting the onions made me cry.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "يُزْرَعُ التُّولِيبُ مِنْ بَصَلٍ فِي الْخَرِيفِ.",
+      "tr": "Tulips are planted from bulbs in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَصَلٌ أَخْضَرُ",
+      "tr": "spring onion"
+     },
+     {
+      "text": "حَسَاءُ الْبَصَلِ",
+      "tr": "onion soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Modern Standard Arabic.",
+    "etymology": {
+     "text": "Common Semitic word: akin to Hebrew בָּצָל (batsal), Aramaic būṣlā and Old South Arabian bṣl.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic بَصَل and Hebrew בָּצָל are the same Semitic word — learn them together."
+    ],
+    "pitfalls": [
+     "Collective: الْبَصَلُ = onions (as food); one onion = بَصَلَة."
+    ],
+    "subtleties": [
+     "As a collective it takes masculine singular agreement: الْبَصَلُ رَخِيصٌ الْيَوْمَ (onions are cheap today)."
+    ]
+   }
+  },
+  {
+   "id": "ar:khiyar",
+   "lemma": "خِيَار",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword from Persian (xiyār); خِيَار “choice” (خ ي ر) is another word"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خِيَارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "خِيَارَتَانِ",
+    "declension": "triptote",
+    "unit": "خِيَارَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "root": "خ ي ر",
+   "unit": "خِيَارَة",
+   "translit": "ḫiyār",
+   "forms": {
+    "N;NOM;COLL;INDF": "خِيَارٌ",
+    "N;NOM;COLL;DEF": "الْخِيَارُ",
+    "N;ACC;COLL;DEF": "الْخِيَارَ",
+    "N;NOM;SG;INDF": "خِيَارَةٌ",
+    "N;ACC;SG;INDF": "خِيَارَةً",
+    "N;NOM;SG;DEF": "الْخِيَارَةُ",
+    "N;ACC;SG;DEF": "الْخِيَارَةَ",
+    "N;NOM;PL;INDF": "خِيَارَاتٌ",
+    "N;NOM;PL;DEF": "الْخِيَارَاتُ",
+    "N;ACC;PL;DEF": "الْخِيَارَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh, summery.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cucumbers (collective); one cucumber = خِيَارَة",
+      "concept": "veg.cucumber",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "سَلَطَةُ الْخِيَارِ بِاللَّبَنِ لَذِيذَةٌ.",
+      "tr": "Cucumber salad with yogurt is delicious.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ كِيلُو خِيَارٍ.",
+      "tr": "I bought a kilo of cucumbers.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "قَشِّرِ الْخِيَارَةَ وَقَطِّعْهَا.",
+      "tr": "Peel the cucumber and slice it.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "خِيَارٌ مُخَلَّلٌ",
+      "tr": "pickled cucumber"
+     },
+     {
+      "text": "سَلَطَةُ خِيَارٍ",
+      "tr": "cucumber salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قِثَّاء",
+      "register": "literary",
+      "nuance": "classical (Qurʾānic) word for cucumber-like gourds; not the everyday cucumber today"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Classical Persian خیار (xiyār).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish hıyar (cucumber) is the same Persian word."
+    ],
+    "pitfalls": [
+     "خِيَار also means ‘choice, option’ — same spelling, same vowels: لَيْسَ لَدَيَّ خِيَارٌ = I have no choice."
+    ],
+    "subtleties": [
+     "One cucumber is خِيَارَة; the collective خِيَار is cucumbers as food."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

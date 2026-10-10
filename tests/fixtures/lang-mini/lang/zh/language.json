@@ -1,0 +1,419 @@
+{
+ "code": "zh",
+ "typology": "isolating",
+ "name": "Chinese (Mandarin)",
+ "nativeName": "中文",
+ "script": "Hani",
+ "dir": "ltr",
+ "tokenJoin": "none",
+ "capitalizeFirst": false,
+ "vowelMarks": false,
+ "romanization": "pinyin",
+ "variants": [
+  "simplified",
+  "traditional"
+ ],
+ "paradigmCells": {},
+ "wordFeatures": {
+  "CCONJ": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   }
+  ],
+  "CLF": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "kind",
+    "title": "kind of measure word",
+    "phenomenon": "zh.syntax.measure.kinds",
+    "type": "strings",
+    "values": [
+     "general",
+     "sortal",
+     "container",
+     "partitive",
+     "unit",
+     "collective",
+     "verbal"
+    ],
+    "why": "个 is general; 本, 张, 条 sort nouns by kind or shape (sortal); 杯, 碗, 瓶 measure by a container; 块, 份 take a piece or a portion (partitive); 岁 is a unit; most usual use first."
+   }
+  ],
+  "INTJ": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   }
+  ],
+  "NOUN": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "measure",
+    "title": "measure word(s), most usual first",
+    "phenomenon": "zh.syntax.measure",
+    "type": "strings",
+    "none": true,
+    "why": "A noun cannot be counted or pointed at (一个, 这本) without its measure word; none for nouns that count by themselves (天, 年), mass nouns, time and place words and pair words, with the reason."
+   }
+  ],
+  "NUM": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   }
+  ],
+  "PRON": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   }
+  ],
+  "VERB": [
+   {
+    "id": "pinyin",
+    "title": "pinyin (dictionary tones)",
+    "phenomenon": "zh.phon.tones",
+    "type": "string",
+    "at": "top",
+    "why": "The reading cannot be seen in the characters and the tones are part of the word. Dictionary (citation) tones, syllables separated by spaces; toneless syllables carry no mark; the spoken tones of 一 and 不 are in toneSandhi."
+   },
+   {
+    "id": "trad",
+    "title": "traditional characters",
+    "phenomenon": "zh.script.simptrad",
+    "type": "string",
+    "at": "top",
+    "why": "Taiwan, Hong Kong and Macau write traditional characters; the learner meets both. The traditional form of the main meaning; other meanings in tradPerSense."
+   },
+   {
+    "id": "readings",
+    "title": "reading per meaning (多音字)",
+    "phenomenon": "zh.script.polyphones",
+    "type": "list",
+    "none": true,
+    "item": {
+     "pinyin": "string",
+     "senses": "senses"
+    },
+    "why": "长 cháng ‘long’ / zhǎng ‘to grow’, 都 dōu ‘all’ / dū ‘capital’: the reading depends on the meaning. Every reading with the senses it serves; none when all senses are read alike."
+   },
+   {
+    "id": "tradPerSense",
+    "title": "traditional characters per meaning",
+    "phenomenon": "zh.orth.trad.manytoone",
+    "type": "list",
+    "none": true,
+    "item": {
+     "trad": "string",
+     "senses": "senses"
+    },
+    "why": "One simplified character can stand for several traditional ones: 里 is 裡 ‘inside’ but 里 ‘li (500 m)’, 周 is 週 ‘week’ but 周 ‘circuit, the Zhou dynasty’. None when every sense has the same traditional form."
+   },
+   {
+    "id": "toneSandhi",
+    "title": "spoken tone of 一 / 不",
+    "phenomenon": "zh.phon.sandhi.yibu",
+    "type": "string",
+    "none": true,
+    "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "separable",
+    "title": "splits into verb + object (离合词)",
+    "phenomenon": "zh.morph.separable",
+    "type": "list",
+    "none": true,
+    "item": {
+     "verb": "string",
+     "object": "string",
+     "example": "string?"
+    },
+    "why": "Verb-object words open up: 了, a number or a measure go between the parts (放了三天假, 做了一顿饭). None for verbs that do not split."
+   },
+   {
+    "id": "neg",
+    "title": "negated with 不, 没 or both",
+    "phenomenon": "zh.syntax.negation",
+    "type": "enum",
+    "none": true,
+    "values": [
+     "bu+mei",
+     "bu",
+     "mei"
+    ],
+    "why": "不 negates habits, wishes and the present / future, 没 past events and 有; 是 takes only 不, 有 only 没."
+   }
+  ]
+ }
+}

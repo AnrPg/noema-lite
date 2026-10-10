@@ -1,0 +1,1704 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:istayqaza",
+   "lemma": "اِسْتَيْقَظَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.wakeup"
+   ],
+   "features": {
+    "root": "ي ق ظ",
+    "rootClass": [
+     "assimilated"
+    ],
+    "verbForm": "X",
+    "present": "يَسْتَيْقِظُ",
+    "masdar": [
+     "اِسْتِيقَاظ"
+    ],
+    "participles": [
+     {
+      "form": "مُسْتَيْقِظ",
+      "kind": "active"
+     }
+    ],
+    "governs": {
+     "none": "used without an object in this meaning: one wakes up (to wake someone else up is أَيْقَظَ + accusative)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "istayqaẓa",
+   "forms": {
+    "V;PST;1;SG": "اِسْتَيْقَظْتُ",
+    "V;PST;2;SG;MASC": "اِسْتَيْقَظْتَ",
+    "V;PST;2;SG;FEM": "اِسْتَيْقَظْتِ",
+    "V;PST;3;SG;MASC": "اِسْتَيْقَظَ",
+    "V;PST;3;SG;FEM": "اِسْتَيْقَظَتْ",
+    "V;PST;1;PL": "اِسْتَيْقَظْنَا",
+    "V;PST;2;PL;MASC": "اِسْتَيْقَظْتُمْ",
+    "V;PST;2;PL;FEM": "اِسْتَيْقَظْتُنَّ",
+    "V;PST;3;PL;MASC": "اِسْتَيْقَظُوا",
+    "V;PST;3;PL;FEM": "اِسْتَيْقَظْنَ",
+    "V;PRS;IND;1;SG": "أَسْتَيْقِظُ",
+    "V;PRS;IND;2;SG;MASC": "تَسْتَيْقِظُ",
+    "V;PRS;IND;2;SG;FEM": "تَسْتَيْقِظِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَسْتَيْقِظُ",
+    "V;PRS;IND;3;SG;FEM": "تَسْتَيْقِظُ",
+    "V;PRS;IND;1;PL": "نَسْتَيْقِظُ",
+    "V;PRS;IND;2;PL;MASC": "تَسْتَيْقِظُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَسْتَيْقِظْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَسْتَيْقِظُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَسْتَيْقِظْنَ",
+    "V;SBJV;1;SG": "أَسْتَيْقِظَ",
+    "V;SBJV;2;SG;MASC": "تَسْتَيْقِظَ",
+    "V;SBJV;3;SG;MASC": "يَسْتَيْقِظَ",
+    "V;SBJV;1;PL": "نَسْتَيْقِظَ",
+    "V;SBJV;2;PL;MASC": "تَسْتَيْقِظُوا",
+    "V;SBJV;3;PL;MASC": "يَسْتَيْقِظُوا",
+    "V;SBJV;2;SG;FEM": "تَسْتَيْقِظِي",
+    "V;SBJV;3;SG;FEM": "تَسْتَيْقِظَ",
+    "V;SBJV;2;PL;FEM": "تَسْتَيْقِظْنَ",
+    "V;SBJV;3;PL;FEM": "يَسْتَيْقِظْنَ",
+    "V;JUS;1;SG": "أَسْتَيْقِظْ",
+    "V;JUS;2;SG;MASC": "تَسْتَيْقِظْ",
+    "V;JUS;3;SG;MASC": "يَسْتَيْقِظْ",
+    "V;JUS;1;PL": "نَسْتَيْقِظْ",
+    "V;JUS;2;PL;MASC": "تَسْتَيْقِظُوا",
+    "V;JUS;3;PL;MASC": "يَسْتَيْقِظُوا",
+    "V;JUS;2;SG;FEM": "تَسْتَيْقِظِي",
+    "V;JUS;3;SG;FEM": "تَسْتَيْقِظْ",
+    "V;JUS;2;PL;FEM": "تَسْتَيْقِظْنَ",
+    "V;JUS;3;PL;FEM": "يَسْتَيْقِظْنَ",
+    "V;IMP;2;SG;MASC": "اِسْتَيْقِظْ",
+    "V;IMP;2;PL;MASC": "اِسْتَيْقِظُوا",
+    "V;IMP;2;SG;FEM": "اِسْتَيْقِظِي",
+    "V;IMP;2;PL;FEM": "اِسْتَيْقِظْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The alarm clock, the first light, the first coffee.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wake up (from sleep)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wakeup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِسْتَيْقَظْتُ فِي السَّاعَةِ السَّادِسَةِ.",
+      "tr": "I woke up at six.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى تَسْتَيْقِظِينَ عَادَةً؟",
+      "tr": "When do you (a woman) usually wake up?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "اِسْتَيْقَظَ الطِّفْلُ فِي اللَّيْلِ.",
+      "tr": "The child woke up in the night.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِسْتَيْقَظَ مُبَكِّرًا",
+      "tr": "to wake up early"
+     },
+     {
+      "text": "اِسْتَيْقَظَ مِنَ النَّوْمِ",
+      "tr": "to wake up from sleep"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "صَحَا",
+      "register": "neutral",
+      "nuance": "to wake up, to come to — shorter; the dialects use it every day (صِحِي)"
+     },
+     {
+      "word": "قَامَ مِنَ النَّوْمِ",
+      "register": "colloquial",
+      "nuance": "to get up from sleep — waking and getting up in one"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "نَامَ",
+      "note": "to sleep, to fall asleep"
+     }
+    ],
+    "etymology": {
+     "text": "Form X (اِسْتَفْعَلَ) of the root ي ق ظ “to be awake”; Wiktionary: to wake up (intransitive), to wake someone up (transitive), to pay attention, to become aware of. The same root gives يَقِظ “alert, awake”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root ي ق ظ is about being alert: يَقَظَة is wakefulness or vigilance, and يَقِظ an alert, watchful person."
+    ],
+    "pitfalls": [
+     "Form X: the past starts with اِسْتَـ (اِسْتَيْقَظْتُ), the present with يَسْتَـ and has i before the last root letter: يَسْتَيْقِظُ. The first alif is a connecting hamza: silent inside a sentence.",
+     "To wake someone else up is أَيْقَظَ (form IV): أَيْقَظَتْنِي أُمِّي “my mother woke me up”."
+    ],
+    "subtleties": [
+     "Waking up and getting up are two verbs: اِسْتَيْقَظْتُ ثُمَّ نَهَضْتُ “I woke up, then I got up”."
+    ]
+   }
+  },
+  {
+   "id": "ar:nahada",
+   "lemma": "نَهَضَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.getup"
+   ],
+   "features": {
+    "root": "ن ه ض",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَنْهَضُ",
+    "masdar": [
+     "نُهُوض",
+     "نَهْض"
+    ],
+    "participles": [
+     {
+      "form": "نَاهِض",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "what one rises from (نَهَضَ مِنَ السَّرِيرِ، مِنَ الْكُرْسِيِّ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "nahaḍa",
+   "forms": {
+    "V;PST;1;SG": "نَهَضْتُ",
+    "V;PST;2;SG;MASC": "نَهَضْتَ",
+    "V;PST;2;SG;FEM": "نَهَضْتِ",
+    "V;PST;3;SG;MASC": "نَهَضَ",
+    "V;PST;3;SG;FEM": "نَهَضَتْ",
+    "V;PST;1;PL": "نَهَضْنَا",
+    "V;PST;2;PL;MASC": "نَهَضْتُمْ",
+    "V;PST;2;PL;FEM": "نَهَضْتُنَّ",
+    "V;PST;3;PL;MASC": "نَهَضُوا",
+    "V;PST;3;PL;FEM": "نَهَضْنَ",
+    "V;PRS;IND;1;SG": "أَنْهَضُ",
+    "V;PRS;IND;2;SG;MASC": "تَنْهَضُ",
+    "V;PRS;IND;2;SG;FEM": "تَنْهَضِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَنْهَضُ",
+    "V;PRS;IND;3;SG;FEM": "تَنْهَضُ",
+    "V;PRS;IND;1;PL": "نَنْهَضُ",
+    "V;PRS;IND;2;PL;MASC": "تَنْهَضُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَنْهَضْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَنْهَضُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَنْهَضْنَ",
+    "V;SBJV;1;SG": "أَنْهَضَ",
+    "V;SBJV;2;SG;MASC": "تَنْهَضَ",
+    "V;SBJV;3;SG;MASC": "يَنْهَضَ",
+    "V;SBJV;1;PL": "نَنْهَضَ",
+    "V;SBJV;2;PL;MASC": "تَنْهَضُوا",
+    "V;SBJV;3;PL;MASC": "يَنْهَضُوا",
+    "V;SBJV;2;SG;FEM": "تَنْهَضِي",
+    "V;SBJV;3;SG;FEM": "تَنْهَضَ",
+    "V;SBJV;2;PL;FEM": "تَنْهَضْنَ",
+    "V;SBJV;3;PL;FEM": "يَنْهَضْنَ",
+    "V;JUS;1;SG": "أَنْهَضْ",
+    "V;JUS;2;SG;MASC": "تَنْهَضْ",
+    "V;JUS;3;SG;MASC": "يَنْهَضْ",
+    "V;JUS;1;PL": "نَنْهَضْ",
+    "V;JUS;2;PL;MASC": "تَنْهَضُوا",
+    "V;JUS;3;PL;MASC": "يَنْهَضُوا",
+    "V;JUS;2;SG;FEM": "تَنْهَضِي",
+    "V;JUS;3;SG;FEM": "تَنْهَضْ",
+    "V;JUS;2;PL;FEM": "تَنْهَضْنَ",
+    "V;JUS;3;PL;FEM": "يَنْهَضْنَ",
+    "V;IMP;2;SG;MASC": "اِنْهَضْ",
+    "V;IMP;2;PL;MASC": "اِنْهَضُوا",
+    "V;IMP;2;SG;FEM": "اِنْهَضِي",
+    "V;IMP;2;PL;FEM": "اِنْهَضْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Throwing off the blanket and standing up.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get up, to rise (out of bed, from a seat)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَهَضْتُ مِنَ السَّرِيرِ بِسُرْعَةٍ.",
+      "tr": "I got out of bed quickly.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "يَنْهَضُ جَدِّي مُبَكِّرًا كُلَّ يَوْمٍ.",
+      "tr": "My grandfather gets up early every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَهَضَ الْمُعَلِّمُ وَفَتَحَ النَّافِذَةَ.",
+      "tr": "The teacher stood up and opened the window.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَهَضَ مِنَ النَّوْمِ",
+      "tr": "to get up (after sleeping)"
+     },
+     {
+      "text": "نَهَضَ مِنَ الْكُرْسِيِّ",
+      "tr": "to get up from the chair"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قَامَ",
+      "register": "neutral",
+      "nuance": "to stand up, to get up — the everyday verb (قُمْتُ مِنَ النَّوْمِ)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "جَلَسَ",
+      "note": "to sit down"
+     }
+    ],
+    "etymology": {
+     "text": "Root ن ه ض; Wiktionary: to rise, to get up; to take on, to bear; to advance on. Verbal nouns نَهْض and نُهُوض.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "النَّهْضَة, “the rising”, is the name of the Arab cultural revival of the 19th century."
+    ],
+    "pitfalls": [
+     "The present has a: يَنْهَضُ (not *يَنْهُضُ).",
+     "نَهَضَ is getting up from lying or sitting; waking up is اِسْتَيْقَظَ."
+    ],
+    "subtleties": [
+     "In speech قَامَ is more common; نَهَضَ is the usual written word for getting out of bed."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghasala",
+   "lemma": "غَسَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.wash"
+   ],
+   "features": {
+    "root": "غ س ل",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَغْسِلُ",
+    "masdar": [
+     "غَسْل",
+     "غَسِيل"
+    ],
+    "participles": [
+     {
+      "form": "غَاسِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَغْسُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "what is washed (غَسَلَ وَجْهَهُ، غَسَلَ الْمَلَابِسَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ġasala",
+   "forms": {
+    "V;PST;1;SG": "غَسَلْتُ",
+    "V;PST;2;SG;MASC": "غَسَلْتَ",
+    "V;PST;2;SG;FEM": "غَسَلْتِ",
+    "V;PST;3;SG;MASC": "غَسَلَ",
+    "V;PST;3;SG;FEM": "غَسَلَتْ",
+    "V;PST;1;PL": "غَسَلْنَا",
+    "V;PST;2;PL;MASC": "غَسَلْتُمْ",
+    "V;PST;2;PL;FEM": "غَسَلْتُنَّ",
+    "V;PST;3;PL;MASC": "غَسَلُوا",
+    "V;PST;3;PL;FEM": "غَسَلْنَ",
+    "V;PRS;IND;1;SG": "أَغْسِلُ",
+    "V;PRS;IND;2;SG;MASC": "تَغْسِلُ",
+    "V;PRS;IND;2;SG;FEM": "تَغْسِلِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَغْسِلُ",
+    "V;PRS;IND;3;SG;FEM": "تَغْسِلُ",
+    "V;PRS;IND;1;PL": "نَغْسِلُ",
+    "V;PRS;IND;2;PL;MASC": "تَغْسِلُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَغْسِلْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَغْسِلُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَغْسِلْنَ",
+    "V;SBJV;1;SG": "أَغْسِلَ",
+    "V;SBJV;2;SG;MASC": "تَغْسِلَ",
+    "V;SBJV;3;SG;MASC": "يَغْسِلَ",
+    "V;SBJV;1;PL": "نَغْسِلَ",
+    "V;SBJV;2;PL;MASC": "تَغْسِلُوا",
+    "V;SBJV;3;PL;MASC": "يَغْسِلُوا",
+    "V;SBJV;2;SG;FEM": "تَغْسِلِي",
+    "V;SBJV;3;SG;FEM": "تَغْسِلَ",
+    "V;SBJV;2;PL;FEM": "تَغْسِلْنَ",
+    "V;SBJV;3;PL;FEM": "يَغْسِلْنَ",
+    "V;JUS;1;SG": "أَغْسِلْ",
+    "V;JUS;2;SG;MASC": "تَغْسِلْ",
+    "V;JUS;3;SG;MASC": "يَغْسِلْ",
+    "V;JUS;1;PL": "نَغْسِلْ",
+    "V;JUS;2;PL;MASC": "تَغْسِلُوا",
+    "V;JUS;3;PL;MASC": "يَغْسِلُوا",
+    "V;JUS;2;SG;FEM": "تَغْسِلِي",
+    "V;JUS;3;SG;FEM": "تَغْسِلْ",
+    "V;JUS;2;PL;FEM": "تَغْسِلْنَ",
+    "V;JUS;3;PL;FEM": "يَغْسِلْنَ",
+    "V;IMP;2;SG;MASC": "اِغْسِلْ",
+    "V;IMP;2;PL;MASC": "اِغْسِلُوا",
+    "V;IMP;2;SG;FEM": "اِغْسِلِي",
+    "V;IMP;2;PL;FEM": "اِغْسِلْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold water on the face, soap on the hands.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wash (something: the face, the hands, clothes, dishes)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wash"
+     }
+    ],
+    "examples": [
+     {
+      "text": "غَسَلْتُ وَجْهِي بِالْمَاءِ الْبَارِدِ.",
+      "tr": "I washed my face with cold water.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "اِغْسِلْ يَدَيْكَ قَبْلَ الْأَكْلِ!",
+      "tr": "Wash your hands before eating!",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "تَغْسِلُ أُمِّي الْمَلَابِسَ يَوْمَ السَّبْتِ.",
+      "tr": "My mother washes the clothes on Saturday.",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "غَسَلَ يَدَيْهِ",
+      "tr": "to wash one’s hands"
+     },
+     {
+      "text": "غَسَلَ وَجْهَهُ",
+      "tr": "to wash one’s face"
+     },
+     {
+      "text": "غَسَلَ الصُّحُونَ",
+      "tr": "to wash the dishes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نَظَّفَ",
+      "register": "neutral",
+      "nuance": "to clean — with anything, not only with water"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "وَسَّخَ",
+      "note": "to make dirty"
+     }
+    ],
+    "etymology": {
+     "text": "Root غ س ل; Wiktionary: to clean by washing, to wash; to wash off. Its verbal nouns are غَسْل and غَسِيل (also “the washing, the laundry”); غُسْل is the full ritual washing.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "غَسَّالَة, a washing machine, is built on the same root with the pattern فَعَّالَة, used for machines."
+    ],
+    "pitfalls": [
+     "The present has i: يَغْسِلُ (not *يَغْسُلُ).",
+     "With parts of the body Arabic adds the possessive: غَسَلْتُ وَجْهِي “I washed my face” (lit. “my face”)."
+    ],
+    "subtleties": [
+     "غَسَلَ needs an object; washing oneself all over is اِغْتَسَلَ (form VIII of the same root)."
+    ]
+   }
+  },
+  {
+   "id": "ar:istahamma",
+   "lemma": "اِسْتَحَمَّ",
+   "pos": "VERB",
+   "senses": [
+    "verb.shower"
+   ],
+   "features": {
+    "root": "ح م م",
+    "rootClass": [
+     "doubled"
+    ],
+    "verbForm": "X",
+    "present": "يَسْتَحِمُّ",
+    "masdar": [
+     "اِسْتِحْمَام"
+    ],
+    "participles": [
+     {
+      "form": "مُسْتَحِمّ",
+      "kind": "active"
+     }
+    ],
+    "governs": {
+     "none": "intransitive: one showers or bathes (the water follows with بِـ: اِسْتَحَمَّ بِالْمَاءِ الْبَارِدِ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "istaḥamma",
+   "forms": {
+    "V;PST;1;SG": "اِسْتَحْمَمْتُ",
+    "V;PST;2;SG;MASC": "اِسْتَحْمَمْتَ",
+    "V;PST;2;SG;FEM": "اِسْتَحْمَمْتِ",
+    "V;PST;3;SG;MASC": "اِسْتَحَمَّ",
+    "V;PST;3;SG;FEM": "اِسْتَحَمَّتْ",
+    "V;PST;1;PL": "اِسْتَحْمَمْنَا",
+    "V;PST;2;PL;MASC": "اِسْتَحْمَمْتُمْ",
+    "V;PST;2;PL;FEM": "اِسْتَحْمَمْتُنَّ",
+    "V;PST;3;PL;MASC": "اِسْتَحَمُّوا",
+    "V;PST;3;PL;FEM": "اِسْتَحْمَمْنَ",
+    "V;PRS;IND;1;SG": "أَسْتَحِمُّ",
+    "V;PRS;IND;2;SG;MASC": "تَسْتَحِمُّ",
+    "V;PRS;IND;2;SG;FEM": "تَسْتَحِمِّينَ",
+    "V;PRS;IND;3;SG;MASC": "يَسْتَحِمُّ",
+    "V;PRS;IND;3;SG;FEM": "تَسْتَحِمُّ",
+    "V;PRS;IND;1;PL": "نَسْتَحِمُّ",
+    "V;PRS;IND;2;PL;MASC": "تَسْتَحِمُّونَ",
+    "V;PRS;IND;2;PL;FEM": "تَسْتَحْمِمْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَسْتَحِمُّونَ",
+    "V;PRS;IND;3;PL;FEM": "يَسْتَحْمِمْنَ",
+    "V;SBJV;1;SG": "أَسْتَحِمَّ",
+    "V;SBJV;2;SG;MASC": "تَسْتَحِمَّ",
+    "V;SBJV;3;SG;MASC": "يَسْتَحِمَّ",
+    "V;SBJV;1;PL": "نَسْتَحِمَّ",
+    "V;SBJV;2;PL;MASC": "تَسْتَحِمُّوا",
+    "V;SBJV;3;PL;MASC": "يَسْتَحِمُّوا",
+    "V;SBJV;2;SG;FEM": "تَسْتَحِمِّي",
+    "V;SBJV;3;SG;FEM": "تَسْتَحِمَّ",
+    "V;SBJV;2;PL;FEM": "تَسْتَحْمِمْنَ",
+    "V;SBJV;3;PL;FEM": "يَسْتَحْمِمْنَ",
+    "V;JUS;1;SG": "أَسْتَحِمَّ",
+    "V;JUS;2;SG;MASC": "تَسْتَحِمَّ",
+    "V;JUS;3;SG;MASC": "يَسْتَحِمَّ",
+    "V;JUS;1;PL": "نَسْتَحِمَّ",
+    "V;JUS;2;PL;MASC": "تَسْتَحِمُّوا",
+    "V;JUS;3;PL;MASC": "يَسْتَحِمُّوا",
+    "V;JUS;2;SG;FEM": "تَسْتَحِمِّي",
+    "V;JUS;3;SG;FEM": "تَسْتَحِمَّ",
+    "V;JUS;2;PL;FEM": "تَسْتَحْمِمْنَ",
+    "V;JUS;3;PL;FEM": "يَسْتَحْمِمْنَ",
+    "V;IMP;2;SG;MASC": "اِسْتَحِمَّ",
+    "V;IMP;2;PL;MASC": "اِسْتَحِمُّوا",
+    "V;IMP;2;SG;FEM": "اِسْتَحِمِّي",
+    "V;IMP;2;PL;FEM": "اِسْتَحْمِمْنَ"
+   },
+   "formsAlt": {
+    "V;JUS;1;SG": [
+     "أَسْتَحِمِّ",
+     "أَسْتَحْمِمْ"
+    ],
+    "V;JUS;2;SG;MASC": [
+     "تَسْتَحِمِّ",
+     "تَسْتَحْمِمْ"
+    ],
+    "V;JUS;3;SG;MASC": [
+     "يَسْتَحِمِّ",
+     "يَسْتَحْمِمْ"
+    ],
+    "V;JUS;1;PL": [
+     "نَسْتَحِمِّ",
+     "نَسْتَحْمِمْ"
+    ],
+    "V;JUS;3;SG;FEM": [
+     "تَسْتَحِمِّ",
+     "تَسْتَحْمِمْ"
+    ],
+    "V;IMP;2;SG;MASC": [
+     "اِسْتَحِمِّ",
+     "اِسْتَحْمِمْ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hot water, steam on the mirror.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to take a shower, to have a bath",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.shower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَسْتَحِمُّ كُلَّ صَبَاحٍ.",
+      "tr": "I shower every morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "اِسْتَحَمَّ بَعْدَ الرِّيَاضَةِ.",
+      "tr": "He showered after sport.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "اِسْتَحَمَّ الْأَطْفَالُ وَنَامُوا.",
+      "tr": "The children had a bath and went to sleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِسْتَحَمَّ بِالْمَاءِ السَّاخِنِ",
+      "tr": "to shower with hot water"
+     },
+     {
+      "text": "اِسْتَحَمَّ فِي الْبَحْرِ",
+      "tr": "to bathe in the sea"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَخَذَ دُشًّا",
+      "register": "colloquial",
+      "nuance": "to take a shower (دُشّ from French douche) — everyday speech"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Form X of the root ح م م (heat; hot water); Wiktionary: to bathe, to shower; to sweat. حَمَّام “bath, bathroom” and حُمَّى “fever” belong to the same root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The hammam, the steam bath, is Arabic حَمَّام from the same root “to be hot”."
+    ],
+    "pitfalls": [
+     "A doubled root: the two م merge when a vowel follows (اِسْتَحَمَّ، يَسْتَحِمُّ) and split before a consonant ending: اِسْتَحْمَمْتُ “I showered”, يَسْتَحْمِمْنَ “they (f.) shower”.",
+     "After لَمْ the merged form takes -a: لَمْ أَسْتَحِمَّ “I didn’t shower” (also لَمْ أَسْتَحْمِمْ)."
+    ],
+    "subtleties": [
+     "One verb for shower and bath; both happen in the حَمَّام."
+    ]
+   }
+  },
+  {
+   "id": "ar:labisa",
+   "lemma": "لَبِسَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.getdressed",
+    "verb.puton",
+    "verb.wear"
+   ],
+   "features": {
+    "root": "ل ب س",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَلْبَسُ",
+    "masdar": [
+     "لُبْس"
+    ],
+    "participles": [
+     {
+      "form": "لَابِس",
+      "kind": "active"
+     },
+     {
+      "form": "مَلْبُوس",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "what": "used alone or with ثِيَابَهُ / مَلَابِسَهُ “his clothes”: to get dressed",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "case": "ACC",
+      "what": "the garment (لَبِسَ قَمِيصًا)",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "labisa",
+   "forms": {
+    "V;PST;1;SG": "لَبِسْتُ",
+    "V;PST;2;SG;MASC": "لَبِسْتَ",
+    "V;PST;2;SG;FEM": "لَبِسْتِ",
+    "V;PST;3;SG;MASC": "لَبِسَ",
+    "V;PST;3;SG;FEM": "لَبِسَتْ",
+    "V;PST;1;PL": "لَبِسْنَا",
+    "V;PST;2;PL;MASC": "لَبِسْتُمْ",
+    "V;PST;2;PL;FEM": "لَبِسْتُنَّ",
+    "V;PST;3;PL;MASC": "لَبِسُوا",
+    "V;PST;3;PL;FEM": "لَبِسْنَ",
+    "V;PRS;IND;1;SG": "أَلْبَسُ",
+    "V;PRS;IND;2;SG;MASC": "تَلْبَسُ",
+    "V;PRS;IND;2;SG;FEM": "تَلْبَسِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَلْبَسُ",
+    "V;PRS;IND;3;SG;FEM": "تَلْبَسُ",
+    "V;PRS;IND;1;PL": "نَلْبَسُ",
+    "V;PRS;IND;2;PL;MASC": "تَلْبَسُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَلْبَسْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَلْبَسُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَلْبَسْنَ",
+    "V;SBJV;1;SG": "أَلْبَسَ",
+    "V;SBJV;2;SG;MASC": "تَلْبَسَ",
+    "V;SBJV;3;SG;MASC": "يَلْبَسَ",
+    "V;SBJV;1;PL": "نَلْبَسَ",
+    "V;SBJV;2;PL;MASC": "تَلْبَسُوا",
+    "V;SBJV;3;PL;MASC": "يَلْبَسُوا",
+    "V;SBJV;2;SG;FEM": "تَلْبَسِي",
+    "V;SBJV;3;SG;FEM": "تَلْبَسَ",
+    "V;SBJV;2;PL;FEM": "تَلْبَسْنَ",
+    "V;SBJV;3;PL;FEM": "يَلْبَسْنَ",
+    "V;JUS;1;SG": "أَلْبَسْ",
+    "V;JUS;2;SG;MASC": "تَلْبَسْ",
+    "V;JUS;3;SG;MASC": "يَلْبَسْ",
+    "V;JUS;1;PL": "نَلْبَسْ",
+    "V;JUS;2;PL;MASC": "تَلْبَسُوا",
+    "V;JUS;3;PL;MASC": "يَلْبَسُوا",
+    "V;JUS;2;SG;FEM": "تَلْبَسِي",
+    "V;JUS;3;SG;FEM": "تَلْبَسْ",
+    "V;JUS;2;PL;FEM": "تَلْبَسْنَ",
+    "V;JUS;3;PL;FEM": "يَلْبَسْنَ",
+    "V;IMP;2;SG;MASC": "اِلْبَسْ",
+    "V;IMP;2;PL;MASC": "اِلْبَسُوا",
+    "V;IMP;2;SG;FEM": "اِلْبَسِي",
+    "V;IMP;2;PL;FEM": "اِلْبَسْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clothes on the chair, a quick look in the mirror.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get dressed (alone, or with ثِيَابَهُ “his clothes”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getdressed"
+     },
+     {
+      "id": "s2",
+      "def": "to put on (a garment)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.puton"
+     },
+     {
+      "id": "s3",
+      "def": "to wear, to have on",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wear"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَبِسْتُ بِسُرْعَةٍ وَخَرَجْتُ.",
+      "tr": "I got dressed quickly and went out.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "اِلْبَسِي مَلَابِسَكِ، الْحَافِلَةُ قَادِمَةٌ!",
+      "tr": "Get dressed (to a girl), the bus is coming!",
+      "register": "neutral",
+      "context": "school morning",
+      "sense": "s1"
+     },
+     {
+      "text": "لَبِسَ مِعْطَفَهُ وَخَرَجَ.",
+      "tr": "He put on his coat and went out.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "تَلْبَسُ أُخْتِي فُسْتَانًا أَحْمَرَ الْيَوْمَ.",
+      "tr": "My sister is wearing a red dress today.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَبِسَ ثِيَابَهُ",
+      "tr": "to get dressed"
+     },
+     {
+      "text": "لَبِسَ النَّظَّارَةَ",
+      "tr": "to put on / wear glasses"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "اِرْتَدَى",
+      "register": "formal",
+      "nuance": "to put on, to wear — written and news style (اِرْتَدَى بَدْلَةً)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "خَلَعَ",
+      "note": "to take off (clothes)"
+     }
+    ],
+    "etymology": {
+     "text": "Root ل ب س; Wiktionary: to wear; to put on (clothing); to clothe oneself, to get dressed. مَلَابِس and لِبَاس “clothes” share the root; Hebrew לָבַשׁ “to wear” is its cognate.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לָבַשׁ (lavash, “to wear”) is the same Semitic verb."
+    ],
+    "pitfalls": [
+     "Past with i, present with a: لَبِسَ / يَلْبَسُ. لَبَسَ (with a in the past) is another verb, “to confuse, to mix up”.",
+     "Arabic names what is put on as a plain object: لَبِسَ قَمِيصَهُ “he put on his shirt” — no word for “on”."
+    ],
+    "subtleties": [
+     "One verb for the moment and the state: لَبِسَتْ فُسْتَانًا is “she put on a dress”; “she was wearing a dress” is كَانَتْ تَلْبَسُ فُسْتَانًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:aftara",
+   "lemma": "أَفْطَرَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.havebreakfast"
+   ],
+   "features": {
+    "root": "ف ط ر",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "IV",
+    "present": "يُفْطِرُ",
+    "masdar": [
+     "إِفْطَار"
+    ],
+    "participles": [
+     {
+      "form": "مُفْطِر",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "what one breaks the fast with (أَفْطَرَ عَلَى تَمْرٍ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "إِفْطَار",
+      "what": "the maṣdar is also the name of the evening meal that breaks the fast in Ramadan (iftar)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "translit": "ʾafṭara",
+   "forms": {
+    "V;PST;1;SG": "أَفْطَرْتُ",
+    "V;PST;2;SG;MASC": "أَفْطَرْتَ",
+    "V;PST;2;SG;FEM": "أَفْطَرْتِ",
+    "V;PST;3;SG;MASC": "أَفْطَرَ",
+    "V;PST;3;SG;FEM": "أَفْطَرَتْ",
+    "V;PST;1;PL": "أَفْطَرْنَا",
+    "V;PST;2;PL;MASC": "أَفْطَرْتُمْ",
+    "V;PST;2;PL;FEM": "أَفْطَرْتُنَّ",
+    "V;PST;3;PL;MASC": "أَفْطَرُوا",
+    "V;PST;3;PL;FEM": "أَفْطَرْنَ",
+    "V;PRS;IND;1;SG": "أُفْطِرُ",
+    "V;PRS;IND;2;SG;MASC": "تُفْطِرُ",
+    "V;PRS;IND;2;SG;FEM": "تُفْطِرِينَ",
+    "V;PRS;IND;3;SG;MASC": "يُفْطِرُ",
+    "V;PRS;IND;3;SG;FEM": "تُفْطِرُ",
+    "V;PRS;IND;1;PL": "نُفْطِرُ",
+    "V;PRS;IND;2;PL;MASC": "تُفْطِرُونَ",
+    "V;PRS;IND;2;PL;FEM": "تُفْطِرْنَ",
+    "V;PRS;IND;3;PL;MASC": "يُفْطِرُونَ",
+    "V;PRS;IND;3;PL;FEM": "يُفْطِرْنَ",
+    "V;SBJV;1;SG": "أُفْطِرَ",
+    "V;SBJV;2;SG;MASC": "تُفْطِرَ",
+    "V;SBJV;3;SG;MASC": "يُفْطِرَ",
+    "V;SBJV;1;PL": "نُفْطِرَ",
+    "V;SBJV;2;PL;MASC": "تُفْطِرُوا",
+    "V;SBJV;3;PL;MASC": "يُفْطِرُوا",
+    "V;SBJV;2;SG;FEM": "تُفْطِرِي",
+    "V;SBJV;3;SG;FEM": "تُفْطِرَ",
+    "V;SBJV;2;PL;FEM": "تُفْطِرْنَ",
+    "V;SBJV;3;PL;FEM": "يُفْطِرْنَ",
+    "V;JUS;1;SG": "أُفْطِرْ",
+    "V;JUS;2;SG;MASC": "تُفْطِرْ",
+    "V;JUS;3;SG;MASC": "يُفْطِرْ",
+    "V;JUS;1;PL": "نُفْطِرْ",
+    "V;JUS;2;PL;MASC": "تُفْطِرُوا",
+    "V;JUS;3;PL;MASC": "يُفْطِرُوا",
+    "V;JUS;2;SG;FEM": "تُفْطِرِي",
+    "V;JUS;3;SG;FEM": "تُفْطِرْ",
+    "V;JUS;2;PL;FEM": "تُفْطِرْنَ",
+    "V;JUS;3;PL;FEM": "يُفْطِرْنَ",
+    "V;IMP;2;SG;MASC": "أَفْطِرْ",
+    "V;IMP;2;PL;MASC": "أَفْطِرُوا",
+    "V;IMP;2;SG;FEM": "أَفْطِرِي",
+    "V;IMP;2;PL;FEM": "أَفْطِرْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bread, cheese, olives and tea at the kitchen table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have breakfast",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.havebreakfast"
+     },
+     {
+      "id": "s2",
+      "def": "to break one’s fast (at sunset in Ramadan) — the first meal after not eating, like breakfast after the night",
+      "register": [
+       "neutral",
+       "religious"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَفْطَرْنَا فِي الْمَطْبَخِ.",
+      "tr": "We had breakfast in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ أَفْطَرْتَ؟ لَا، لَمْ أُفْطِرْ بَعْدُ.",
+      "tr": "Have you had breakfast? No, not yet.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "يُفْطِرُ الصَّائِمُونَ عِنْدَ الْمَغْرِبِ.",
+      "tr": "Those who fast break their fast at sunset.",
+      "register": "religious",
+      "context": "Ramadan",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَفْطَرَ مَعَ الْعَائِلَةِ",
+      "tr": "to have breakfast with the family"
+     },
+     {
+      "text": "أَفْطَرَ فِي الْبَيْتِ",
+      "tr": "to have breakfast at home"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَنَاوَلَ الْفَطُورَ",
+      "register": "formal",
+      "nuance": "to have (take) breakfast — the explicit phrase"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَامَ",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "Form IV of the root ف ط ر “to split, to break”; Wiktionary: to breakfast, to have breakfast; to break the fast. فَطُور “breakfast” and إِفْطَار “iftar” share the root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "عِيدُ الْفِطْرِ, the feast at the end of Ramadan, is “the feast of breaking the fast” — the same root."
+    ],
+    "pitfalls": [
+     "Form IV: u in the present prefix: أُفْطِرُ، يُفْطِرُ (not *أَفْطُرُ).",
+     "Breakfast (the meal) is فَطُور; the verb is أَفْطَرَ — not *فَطَرْتُ."
+    ],
+    "subtleties": [
+     "During Ramadan هَلْ أَفْطَرْتَ؟ asks whether someone has broken the fast at sunset."
+    ]
+   }
+  },
+  {
+   "id": "ar:badaa",
+   "lemma": "بَدَأَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.start"
+   ],
+   "features": {
+    "root": "ب د أ",
+    "rootClass": [
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَبْدَأُ",
+    "masdar": [
+     "بَدْء"
+    ],
+    "participles": [
+     {
+      "form": "بَادِئ",
+      "kind": "active"
+     },
+     {
+      "form": "مَبْدُوء",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "what one starts (بَدَأَ الْعَمَلَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "بِـ",
+      "what": "what one starts with (بَدَأَ بِالدَّرْسِ الْأَوَّلِ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "a present verb: began to do (بَدَأَ يَعْمَلُ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "badaʾa",
+   "forms": {
+    "V;PST;1;SG": "بَدَأْتُ",
+    "V;PST;2;SG;MASC": "بَدَأْتَ",
+    "V;PST;2;SG;FEM": "بَدَأْتِ",
+    "V;PST;3;SG;MASC": "بَدَأَ",
+    "V;PST;3;SG;FEM": "بَدَأَتْ",
+    "V;PST;1;PL": "بَدَأْنَا",
+    "V;PST;2;PL;MASC": "بَدَأْتُمْ",
+    "V;PST;2;PL;FEM": "بَدَأْتُنَّ",
+    "V;PST;3;PL;MASC": "بَدَؤُوا",
+    "V;PST;3;PL;FEM": "بَدَأْنَ",
+    "V;PRS;IND;1;SG": "أَبْدَأُ",
+    "V;PRS;IND;2;SG;MASC": "تَبْدَأُ",
+    "V;PRS;IND;2;SG;FEM": "تَبْدَئِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَبْدَأُ",
+    "V;PRS;IND;3;SG;FEM": "تَبْدَأُ",
+    "V;PRS;IND;1;PL": "نَبْدَأُ",
+    "V;PRS;IND;2;PL;MASC": "تَبْدَؤُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَبْدَأْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَبْدَؤُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَبْدَأْنَ",
+    "V;SBJV;1;SG": "أَبْدَأَ",
+    "V;SBJV;2;SG;MASC": "تَبْدَأَ",
+    "V;SBJV;3;SG;MASC": "يَبْدَأَ",
+    "V;SBJV;1;PL": "نَبْدَأَ",
+    "V;SBJV;2;PL;MASC": "تَبْدَؤُوا",
+    "V;SBJV;3;PL;MASC": "يَبْدَؤُوا",
+    "V;SBJV;2;SG;FEM": "تَبْدَئِي",
+    "V;SBJV;3;SG;FEM": "تَبْدَأَ",
+    "V;SBJV;2;PL;FEM": "تَبْدَأْنَ",
+    "V;SBJV;3;PL;FEM": "يَبْدَأْنَ",
+    "V;JUS;1;SG": "أَبْدَأْ",
+    "V;JUS;2;SG;MASC": "تَبْدَأْ",
+    "V;JUS;3;SG;MASC": "يَبْدَأْ",
+    "V;JUS;1;PL": "نَبْدَأْ",
+    "V;JUS;2;PL;MASC": "تَبْدَؤُوا",
+    "V;JUS;3;PL;MASC": "يَبْدَؤُوا",
+    "V;JUS;2;SG;FEM": "تَبْدَئِي",
+    "V;JUS;3;SG;FEM": "تَبْدَأْ",
+    "V;JUS;2;PL;FEM": "تَبْدَأْنَ",
+    "V;JUS;3;PL;FEM": "يَبْدَأْنَ",
+    "V;IMP;2;SG;MASC": "اِبْدَأْ",
+    "V;IMP;2;PL;MASC": "اِبْدَؤُوا",
+    "V;IMP;2;SG;FEM": "اِبْدَئِي",
+    "V;IMP;2;PL;FEM": "اِبْدَأْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses بَدَأَ “to begin” (= to start); the concept’s gloss also lists uses of Chinese 开 (to open, to hold a shop or a meeting) that are not meanings of this word."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first step, the bell that opens the lesson.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to begin, to start (something; or intransitive: the lesson starts)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.start"
+     }
+    ],
+    "examples": [
+     {
+      "text": "يَبْدَأُ الدَّرْسُ فِي السَّاعَةِ الثَّامِنَةِ.",
+      "tr": "The lesson starts at eight.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "بَدَأْتُ الْعَمَلَ فِي الْبَنْكِ أَمْسِ.",
+      "tr": "I started work at the bank yesterday.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى بَدَأْتَ تَتَعَلَّمُ الْعَرَبِيَّةَ؟",
+      "tr": "When did you start learning Arabic?",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَدَأَ الْعَمَلَ",
+      "tr": "to start work"
+     },
+     {
+      "text": "بَدَأَ الدَّرْسُ",
+      "tr": "the lesson began"
+     },
+     {
+      "text": "بَدَأَ مِنْ جَدِيدٍ",
+      "tr": "to start again"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "اِبْتَدَأَ",
+      "register": "formal",
+      "nuance": "to begin — form VIII of the same root, more formal"
+     },
+     {
+      "word": "شَرَعَ فِي",
+      "register": "formal",
+      "nuance": "to set about, to embark on"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "اِنْتَهَى",
+      "note": "to end, to finish"
+     }
+    ],
+    "etymology": {
+     "text": "Root ب د أ; Wiktionary: to begin; cognate with Biblical Hebrew בדא (badā, “to invent”). مَبْدَأ “principle, starting point” and بِدَايَة “beginning” belong to the same root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَبْدَأ, a principle, is literally “a place of beginning”."
+    ],
+    "pitfalls": [
+     "The hamza changes its seat: بَدَأْتُ (I began), بَدَؤُوا (they began), تَبْدَئِينَ (you f. begin).",
+     "بَدَأَ + a verb: the second verb is in the present: بَدَأَ يَعْمَلُ “he began to work”."
+    ],
+    "subtleties": [
+     "The same verb with and without an object: بَدَأَ الْعَمَلَ “he started the work” / بَدَأَ الْعَمَلُ “the work started” — only the case ending shows who does what."
+    ]
+   }
+  },
+  {
+   "id": "ar:intaha",
+   "lemma": "اِنْتَهَى",
+   "pos": "VERB",
+   "senses": [
+    "verb.finish"
+   ],
+   "features": {
+    "root": "ن ه ي",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "VIII",
+    "present": "يَنْتَهِي",
+    "masdar": [
+     "اِنْتِهَاء"
+    ],
+    "participles": [
+     {
+      "form": "مُنْتَهٍ",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "what one finishes (اِنْتَهَيْتُ مِنَ الْعَمَلِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "intahā",
+   "forms": {
+    "V;PST;1;SG": "اِنْتَهَيْتُ",
+    "V;PST;2;SG;MASC": "اِنْتَهَيْتَ",
+    "V;PST;2;SG;FEM": "اِنْتَهَيْتِ",
+    "V;PST;3;SG;MASC": "اِنْتَهَى",
+    "V;PST;3;SG;FEM": "اِنْتَهَتْ",
+    "V;PST;1;PL": "اِنْتَهَيْنَا",
+    "V;PST;2;PL;MASC": "اِنْتَهَيْتُمْ",
+    "V;PST;2;PL;FEM": "اِنْتَهَيْتُنَّ",
+    "V;PST;3;PL;MASC": "اِنْتَهَوْا",
+    "V;PST;3;PL;FEM": "اِنْتَهَيْنَ",
+    "V;PRS;IND;1;SG": "أَنْتَهِي",
+    "V;PRS;IND;2;SG;MASC": "تَنْتَهِي",
+    "V;PRS;IND;2;SG;FEM": "تَنْتَهِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَنْتَهِي",
+    "V;PRS;IND;3;SG;FEM": "تَنْتَهِي",
+    "V;PRS;IND;1;PL": "نَنْتَهِي",
+    "V;PRS;IND;2;PL;MASC": "تَنْتَهُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَنْتَهِينَ",
+    "V;PRS;IND;3;PL;MASC": "يَنْتَهُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَنْتَهِينَ",
+    "V;SBJV;1;SG": "أَنْتَهِيَ",
+    "V;SBJV;2;SG;MASC": "تَنْتَهِيَ",
+    "V;SBJV;3;SG;MASC": "يَنْتَهِيَ",
+    "V;SBJV;1;PL": "نَنْتَهِيَ",
+    "V;SBJV;2;PL;MASC": "تَنْتَهُوا",
+    "V;SBJV;3;PL;MASC": "يَنْتَهُوا",
+    "V;SBJV;2;SG;FEM": "تَنْتَهِي",
+    "V;SBJV;3;SG;FEM": "تَنْتَهِيَ",
+    "V;SBJV;2;PL;FEM": "تَنْتَهِينَ",
+    "V;SBJV;3;PL;FEM": "يَنْتَهِينَ",
+    "V;JUS;1;SG": "أَنْتَهِ",
+    "V;JUS;2;SG;MASC": "تَنْتَهِ",
+    "V;JUS;3;SG;MASC": "يَنْتَهِ",
+    "V;JUS;1;PL": "نَنْتَهِ",
+    "V;JUS;2;PL;MASC": "تَنْتَهُوا",
+    "V;JUS;3;PL;MASC": "يَنْتَهُوا",
+    "V;JUS;2;SG;FEM": "تَنْتَهِي",
+    "V;JUS;3;SG;FEM": "تَنْتَهِ",
+    "V;JUS;2;PL;FEM": "تَنْتَهِينَ",
+    "V;JUS;3;PL;FEM": "يَنْتَهِينَ",
+    "V;IMP;2;SG;MASC": "اِنْتَهِ",
+    "V;IMP;2;PL;MASC": "اِنْتَهُوا",
+    "V;IMP;2;SG;FEM": "اِنْتَهِي",
+    "V;IMP;2;PL;FEM": "اِنْتَهِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last page, the bell at the end of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to finish (with مِنْ: to finish doing something); to end, to be over",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.finish"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِنْتَهَيْتُ مِنَ الْعَمَلِ فِي السَّاعَةِ الْخَامِسَةِ.",
+      "tr": "I finished work at five.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "اِنْتَهَى الدَّرْسُ، شُكْرًا!",
+      "tr": "The lesson is over, thank you!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "مَتَى تَنْتَهِي الْعُطْلَةُ؟",
+      "tr": "When does the holiday end?",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِنْتَهَى مِنَ الْعَمَلِ",
+      "tr": "to finish work"
+     },
+     {
+      "text": "اِنْتَهَى الْوَقْتُ",
+      "tr": "time is up"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَنْهَى",
+      "register": "neutral",
+      "nuance": "to finish something, to bring it to an end — form IV, with a direct object: أَنْهَيْتُ عَمَلِي"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَدَأَ",
+      "note": "to begin"
+     }
+    ],
+    "etymology": {
+     "text": "Form VIII of the root ن ه ي (end, limit); Wiktionary: to end; to finish (مِنْ something); to give up, to desist (عَنْ). نِهَايَة “end” (نِهَايَةُ الْأُسْبُوعِ “the weekend”) shares the root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Old Arabic books close a quotation with اِنْتَهَى “it has ended”, abbreviated اهـ."
+    ],
+    "pitfalls": [
+     "A defective verb: اِنْتَهَيْتُ (I finished) but اِنْتَهَى (he / it finished), اِنْتَهَوْا (they finished); present يَنْتَهِي, تَنْتَهِينَ (you f.).",
+     "“I finished the work” needs مِنْ: اِنْتَهَيْتُ مِنَ الْعَمَلِ (not *اِنْتَهَيْتُ الْعَمَلَ)."
+    ],
+    "subtleties": [
+     "After لَمْ the final ي drops: لَمْ أَنْتَهِ بَعْدُ “I haven’t finished yet”."
+    ]
+   }
+  },
+  {
+   "id": "ar:nama",
+   "lemma": "نَامَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.sleep",
+    "verb.fallasleep",
+    "verb.gotobed"
+   ],
+   "features": {
+    "root": "ن و م",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": "يَنَامُ",
+    "masdar": [
+     "نَوْم"
+    ],
+    "participles": [
+     {
+      "form": "نَائِم",
+      "kind": "active"
+     }
+    ],
+    "governs": {
+     "none": "intransitive"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "nāma",
+   "forms": {
+    "V;PST;1;SG": "نِمْتُ",
+    "V;PST;2;SG;MASC": "نِمْتَ",
+    "V;PST;2;SG;FEM": "نِمْتِ",
+    "V;PST;3;SG;MASC": "نَامَ",
+    "V;PST;3;SG;FEM": "نَامَتْ",
+    "V;PST;1;PL": "نِمْنَا",
+    "V;PST;2;PL;MASC": "نِمْتُمْ",
+    "V;PST;2;PL;FEM": "نِمْتُنَّ",
+    "V;PST;3;PL;MASC": "نَامُوا",
+    "V;PST;3;PL;FEM": "نِمْنَ",
+    "V;PRS;IND;1;SG": "أَنَامُ",
+    "V;PRS;IND;2;SG;MASC": "تَنَامُ",
+    "V;PRS;IND;2;SG;FEM": "تَنَامِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَنَامُ",
+    "V;PRS;IND;3;SG;FEM": "تَنَامُ",
+    "V;PRS;IND;1;PL": "نَنَامُ",
+    "V;PRS;IND;2;PL;MASC": "تَنَامُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَنَمْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَنَامُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَنَمْنَ",
+    "V;SBJV;1;SG": "أَنَامَ",
+    "V;SBJV;2;SG;MASC": "تَنَامَ",
+    "V;SBJV;3;SG;MASC": "يَنَامَ",
+    "V;SBJV;1;PL": "نَنَامَ",
+    "V;SBJV;2;PL;MASC": "تَنَامُوا",
+    "V;SBJV;3;PL;MASC": "يَنَامُوا",
+    "V;SBJV;2;SG;FEM": "تَنَامِي",
+    "V;SBJV;3;SG;FEM": "تَنَامَ",
+    "V;SBJV;2;PL;FEM": "تَنَمْنَ",
+    "V;SBJV;3;PL;FEM": "يَنَمْنَ",
+    "V;JUS;1;SG": "أَنَمْ",
+    "V;JUS;2;SG;MASC": "تَنَمْ",
+    "V;JUS;3;SG;MASC": "يَنَمْ",
+    "V;JUS;1;PL": "نَنَمْ",
+    "V;JUS;2;PL;MASC": "تَنَامُوا",
+    "V;JUS;3;PL;MASC": "يَنَامُوا",
+    "V;JUS;2;SG;FEM": "تَنَامِي",
+    "V;JUS;3;SG;FEM": "تَنَمْ",
+    "V;JUS;2;PL;FEM": "تَنَمْنَ",
+    "V;JUS;3;PL;FEM": "يَنَمْنَ",
+    "V;IMP;2;SG;MASC": "نَمْ",
+    "V;IMP;2;PL;MASC": "نَامُوا",
+    "V;IMP;2;SG;FEM": "نَامِي",
+    "V;IMP;2;PL;FEM": "نَمْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dark room, heavy eyelids, a long night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to sleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.sleep"
+     },
+     {
+      "id": "s2",
+      "def": "to fall asleep, to go to sleep (often the past: نَامَ الطِّفْلُ “the child fell asleep”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.fallasleep"
+     },
+     {
+      "id": "s3",
+      "def": "to go to bed (أَنَامُ فِي الْحَادِيَةَ عَشْرَةَ “I go to bed at eleven”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.gotobed"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نِمْتُ ثَمَانِيَ سَاعَاتٍ.",
+      "tr": "I slept eight hours.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "يَنَامُ الطِّفْلُ فِي غُرْفَتِهِ.",
+      "tr": "The child sleeps in his room.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَامَ الطِّفْلُ بِسُرْعَةٍ.",
+      "tr": "The child fell asleep quickly.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "لَمْ أَنَمْ إِلَّا فِي السَّاعَةِ الثَّانِيَةِ.",
+      "tr": "I didn’t fall asleep until two.",
+      "register": "neutral",
+      "context": "a bad night",
+      "sense": "s2"
+     },
+     {
+      "text": "أَنَامُ فِي السَّاعَةِ الْحَادِيَةَ عَشْرَةَ.",
+      "tr": "I go to bed at eleven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s3"
+     },
+     {
+      "text": "مَتَى تَنَامُونَ؟",
+      "tr": "When do you (all) go to bed?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَامَ مُبَكِّرًا",
+      "tr": "to go to bed early"
+     },
+     {
+      "text": "نَامَ نَوْمًا عَمِيقًا",
+      "tr": "to sleep deeply"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "النَّوْمُ سُلْطَانٌ",
+      "tr": "sleep is a sultan",
+      "kind": "saying",
+      "meaning": "sleep overpowers everyone in the end",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "رَقَدَ",
+      "register": "literary",
+      "nuance": "to lie down, to sleep; also to lie ill"
+     },
+     {
+      "word": "غَفَا",
+      "register": "neutral",
+      "nuance": "to doze off, to nap for a short while"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "اِسْتَيْقَظَ",
+      "note": "to wake up"
+     }
+    ],
+    "etymology": {
+     "text": "Root ن و م; Wiktionary: to sleep; to go to bed; to go to sleep; (of a storm) to abate; cognate with Hebrew נָם (nam). نَوْم “sleep” is the verbal noun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "غُرْفَةُ النَّوْمِ, the bedroom, is “the room of sleep” — the verbal noun of نَامَ."
+    ],
+    "pitfalls": [
+     "A hollow verb with i in the short stem: نِمْتُ “I slept” (not *نُمْتُ, which is the pattern of قُلْتُ); present يَنَامُ with ā.",
+     "The long ā shortens before a consonant ending and in the jussive: نِمْنَا (we slept), لَمْ يَنَمْ (he didn’t sleep), نَمْ! (sleep!)."
+    ],
+    "subtleties": [
+     "One verb covers “sleep”, “fall asleep” and “go to bed”; to stress the moment of falling asleep Arabic also says غَلَبَهُ النَّوْمُ “sleep overcame him”."
+    ]
+   }
+  },
+  {
+   "id": "ar:lam",
+   "lemma": "لَمْ",
+   "pos": "PART",
+   "senses": [],
+   "translit": "lam",
+   "prefix": false,
+   "role": "Negates the past: لَمْ + the jussive (the present stem without its final -u): لَمْ أَذْهَبْ “I did not go”, لَمْ تَنَمْ “you did not sleep”. The standard negation of the past in Modern Standard Arabic; the verb after it is never in the past form.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   }
+  },
+  {
+   "id": "ar:qad",
+   "lemma": "قَدْ",
+   "pos": "PART",
+   "senses": [],
+   "translit": "qad",
+   "prefix": false,
+   "role": "Before a past verb: the action is completed, often “has (already) …”: قَدْ وَصَلَ الْقِطَارُ “the train has arrived”. (Before a present verb it means “may, sometimes” — a later point.) Often with لَـ or فَـ: لَقَدْ، فَقَدْ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "verb.leavehome",
+   "reason": "No verb of its own: Arabic says “to go out of the house” with خَرَجَ (to go out, lesson 13) or, more formally, غَادَرَ (to leave).",
+   "use": "خَرَجْتُ مِنَ الْبَيْتِ فِي السَّاعَةِ الثَّامِنَةِ “I left home at eight”; غَادَرَ الْبَيْتَ مُبَكِّرًا “he left home early” (غَادَرَ takes a direct object). The words are خَرَجَ and غَادَرَ (lesson 13) with الْبَيْت."
+  },
+  {
+   "concept": "verb.comehome",
+   "reason": "No verb of its own: Arabic says “to return to the house” with عَادَ or رَجَعَ + إِلَى الْبَيْتِ.",
+   "use": "عُدْتُ إِلَى الْبَيْتِ مُتَأَخِّرًا “I came home late”; مَتَى تَعُودُ إِلَى الْبَيْتِ؟ “when do you come home?” — عَادَ (lesson 13) covers both “go back” and “come back” home."
+  }
+ ]
+}

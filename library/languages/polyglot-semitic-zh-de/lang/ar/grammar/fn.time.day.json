@@ -1,0 +1,432 @@
+{
+ "function": "fn.time.day",
+ "status": "realized",
+ "summary": "Arabic often says “when” with no preposition at all: the time word goes into the accusative, the “adverbial accusative” — يَوْمَ الْجُمُعَةِ (on Friday), صَبَاحًا (in the morning), ظُهْرًا (at noon), مَسَاءً (in the evening), لَيْلًا (at night), اللَّيْلَةَ (tonight). The time adverbs are such accusatives too: الْيَوْمَ (today, “the day”), غَدًا (tomorrow), الْآنَ (now), لَاحِقًا (later), قَرِيبًا (soon), مُبَكِّرًا (early), مُتَأَخِّرًا (late), and the frequency words دَائِمًا (always), غَالِبًا (usually), كَثِيرًا (often), أَحْيَانًا (sometimes) — the same -an as in شُكْرًا and مَرْحَبًا. أَمْسِ (yesterday) is the exception: it ends in -i and never changes. Instead of the accusative you may use فِي + genitive (فِي الصَّبَاحِ, فِي يَوْمِ الْجُمُعَةِ) or عِنْدَ for a moment (عِنْدَ الظُّهْرِ). The days are mostly numbers with the article — الْأَحَد “the one”, الِاثْنَيْن “the two”, الثُّلَاثَاء, الْأَرْبِعَاء, الْخَمِيس (three, four, five) — then الْجُمُعَة (the gathering) and السَّبْت (the Sabbath); a day is “day + name”: يَوْمُ الْأَحَدِ. “Today is Sunday” is a verbless sentence: الْيَوْمُ الْأَحَدُ. Time words stand at the start or at the end of the sentence.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "day",
+    "Arabic",
+    "literally"
+   ],
+   "rows": [
+    [
+     "Sunday",
+     "الْأَحَدُ",
+     "the one"
+    ],
+    [
+     "Monday",
+     "الِاثْنَيْنِ",
+     "the two"
+    ],
+    [
+     "Tuesday",
+     "الثُّلَاثَاءُ",
+     "the three"
+    ],
+    [
+     "Wednesday",
+     "الْأَرْبِعَاءُ",
+     "the four"
+    ],
+    [
+     "Thursday",
+     "الْخَمِيسُ",
+     "the five"
+    ],
+    [
+     "Friday",
+     "الْجُمُعَةُ",
+     "the gathering"
+    ],
+    [
+     "Saturday",
+     "السَّبْتُ",
+     "the Sabbath"
+    ]
+   ],
+   "caption": "Always with the article; on a day = يَوْمَ + the name in the genitive: يَوْمَ الْجُمُعَةِ.",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ],
+   "notes": [
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "Greek also numbers the days from Sunday: Δευτέρα (second), Τρίτη, Τετάρτη, Πέμπτη — Arabic الِاثْنَيْن, الثُّلَاثَاء, الْأَرْبِعَاء, الْخَمِيس; and Σάββατο is السَّبْت."
+    },
+    {
+     "for": "vi",
+     "rel": "same",
+     "text": "Vietnamese numbers the days the same way: thứ hai (Monday, “second”), thứ ba, thứ tư, thứ năm — like الِاثْنَيْن, الثُّلَاثَاء, الْأَرْبِعَاء, الْخَمِيس."
+    },
+    {
+     "for": "fa",
+     "rel": "same",
+     "text": "Persian also counts from Saturday (شنبه): یکشنبه (Sunday, “one”) like الْأَحَد, then دوشنبه, سه‌شنبه, چهارشنبه, پنجشنبه; Friday is جمعه — the Arabic الْجُمُعَة."
+    },
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Russian вторник (“second”) is Tuesday, but Arabic الِاثْنَيْن (“the two”) is Monday: Arabic counts from Sunday."
+    },
+    {
+     "for": "sw",
+     "rel": "trap",
+     "text": "Swahili counts from Saturday: Jumatatu (“day three”) is Monday, while Arabic الثُّلَاثَاء (“the three”) is Tuesday. Alhamisi and Ijumaa are the Arabic الْخَمِيس and الْجُمُعَة."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish Cuma is الْجُمُعَة and Cumartesi (Saturday) is “after Friday”; Çarşamba and Perşembe are Persian numbers (fourth, fifth)."
+    },
+    {
+     "for": "zh",
+     "rel": "trap",
+     "text": "Chinese 星期一 (“week-one”) is Monday, but Arabic الْأَحَد (“the one”) is Sunday: Arabic counts from Sunday."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "part of the day",
+    "adverb (accusative)",
+    "with a preposition"
+   ],
+   "rows": [
+    [
+     "صَبَاح (morning)",
+     "صَبَاحًا",
+     "فِي الصَّبَاحِ"
+    ],
+    [
+     "ظُهْر (noon)",
+     "ظُهْرًا",
+     "عِنْدَ الظُّهْرِ"
+    ],
+    [
+     "afternoon",
+     "بَعْدَ الظُّهْرِ",
+     "—"
+    ],
+    [
+     "مَسَاء (evening)",
+     "مَسَاءً",
+     "فِي الْمَسَاءِ"
+    ],
+    [
+     "لَيْل (night)",
+     "لَيْلًا",
+     "فِي اللَّيْلِ"
+    ],
+    [
+     "لَيْلَة (a night)",
+     "اللَّيْلَةَ (tonight)",
+     "—"
+    ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "three"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "yesterday",
+    "today",
+    "tomorrow",
+    "now",
+    "later",
+    "soon"
+   ],
+   "rows": [
+    [
+     "أَمْسِ",
+     "الْيَوْمَ",
+     "غَدًا",
+     "الْآنَ",
+     "لَاحِقًا",
+     "قَرِيبًا"
+    ]
+   ],
+   "caption": "No preposition with these."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "دَائِمًا (always)",
+    "غَالِبًا (usually)",
+    "كَثِيرًا (often)",
+    "أَحْيَانًا (sometimes)",
+    "لَا … أَبَدًا (never)"
+   ],
+   "caption": "How often — from always to never."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "on Friday",
+     "points": [
+      "يَوْمَ الْجُمُعَةِ (accusative, no preposition)",
+      "فِي يَوْمِ الْجُمُعَةِ (فِي + genitive)"
+     ]
+    },
+    {
+     "title": "in the morning",
+     "points": [
+      "صَبَاحًا",
+      "فِي الصَّبَاحِ"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The adverbial accusative.",
+   "text": "An accusative noun can say when: يَوْمَ, صَبَاحًا, مَسَاءً, لَيْلًا — the -an you already know from شُكْرًا, أَهْلًا and مَرْحَبًا. German does it too: eines Tages, jeden Morgen (accusative / genitive of time)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "الْيَوْمُ or الْيَوْمَ?",
+   "text": "With -a it is the adverb “today”: الْيَوْمَ أَعْمَلُ. With -u it is the subject “the day”: الْيَوْمُ الْأَحَدُ (today is Sunday), الْيَوْمُ يَوْمُ عُطْلَةٍ (today is a holiday)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Today is Monday.",
+   "text": "With Monday say الْيَوْمُ يَوْمُ الِاثْنَيْنِ: الِاثْنَيْنِ is an old dual, and after يَوْمُ it keeps the form everyone uses."
+  },
+  {
+   "t": "p",
+   "text": "Yesterday asks for the past: كُنْتُ فِي الْبَيْتِ أَمْسِ (I was at home yesterday) — the past tense comes in lesson C01; كَانَ (lesson 1) is enough for now."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "A day of the week? → يَوْمَ + the name (يَوْمَ السَّبْتِ), or فِي يَوْمِ السَّبْتِ; the name always has al-.",
+   "A part of the day? → the accusative (صَبَاحًا, مَسَاءً, لَيْلًا, ظُهْرًا) or فِي + al- (فِي الصَّبَاحِ); the afternoon is بَعْدَ الظُّهْرِ.",
+   "Today, tomorrow, yesterday, now? → الْيَوْمَ, غَدًا, أَمْسِ, الْآنَ — no preposition.",
+   "Saying what day it is? → a verbless sentence: الْيَوْمُ الْأَحَدُ.",
+   "How often? → دَائِمًا, غَالِبًا, كَثِيرًا, أَحْيَانًا; never = لَا + verb + أَبَدًا.",
+   "Early or late? → مُبَكِّرًا / مُتَأَخِّرًا; later (afterwards) → لَاحِقًا."
+  ]
+ },
+ "traps": [
+  "*فِي الْيَوْمَ → الْيَوْمَ: “today” needs no preposition.",
+  "*يَوْمُ الْأَحَدِ أَذْهَبُ … → يَوْمَ الْأَحَدِ أَذْهَبُ …: “on” is the accusative -a.",
+  "*أَحَدٌ for Sunday → الْأَحَدُ: the day names always have the article.",
+  "لَاحِقًا is “later”; “late” is مُتَأَخِّرًا.",
+  "مَسَاءً has no alif after the tanwīn (it ends in a hamza); صَبَاحًا and لَيْلًا have one.",
+  "أَمْسِ never changes: not *أَمْسًا."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:ahad",
+   "ar:ithnayn",
+   "ar:thulathaa",
+   "ar:arbiaa",
+   "ar:khamis",
+   "ar:jumua",
+   "ar:sabt",
+   "ar:nihayat_usbu",
+   "ar:yawm",
+   "ar:layl",
+   "ar:layla",
+   "ar:sabah",
+   "ar:zuhr",
+   "ar:bada_zuhr",
+   "ar:masa",
+   "ar:alyawma",
+   "ar:ghadan",
+   "ar:amsi",
+   "ar:alana",
+   "ar:lahiqan",
+   "ar:qariban",
+   "ar:mubakkiran",
+   "ar:mutaakhkhiran",
+   "ar:daiman",
+   "ar:kathiran",
+   "ar:ghaliban",
+   "ar:ahyanan"
+  ]
+ },
+ "needs": {
+  "NOUN": 6,
+  "ADV": 4
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.time.day"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“On Friday we don’t work.”",
+   "options": [
+    "يَوْمَ الْجُمُعَةِ لَا نَعْمَلُ.",
+    "يَوْمُ الْجُمُعَةُ لَا نَعْمَلُ.",
+    "فِي الْجُمُعَةُ لَا نَعْمَلُ."
+   ],
+   "answer": "يَوْمَ الْجُمُعَةِ لَا نَعْمَلُ.",
+   "why": "“On” a day: يَوْمَ (accusative) + the day in the genitive."
+  },
+  {
+   "q": "What does الْخَمِيس literally mean?",
+   "options": [
+    "the fifth",
+    "the gathering",
+    "the rest",
+    "the first"
+   ],
+   "answer": "the fifth",
+   "why": "From خَمْسَة (five)."
+  },
+  {
+   "q": "“I go to work in the morning.”",
+   "options": [
+    "أَذْهَبُ إِلَى الْعَمَلِ صَبَاحًا.",
+    "أَذْهَبُ إِلَى الْعَمَلِ صَبَاحٌ.",
+    "أَذْهَبُ إِلَى الْعَمَلِ بِالصَّبَاحِ."
+   ],
+   "answer": "أَذْهَبُ إِلَى الْعَمَلِ صَبَاحًا.",
+   "why": "The accusative صَبَاحًا is the adverb “in the morning”."
+  },
+  {
+   "q": "“Today is Sunday.”",
+   "options": [
+    "الْيَوْمُ الْأَحَدُ.",
+    "الْيَوْمَ الْأَحَدِ.",
+    "فِي الْيَوْمِ الْأَحَدُ."
+   ],
+   "answer": "الْيَوْمُ الْأَحَدُ.",
+   "why": "A verbless sentence: subject and predicate in the nominative."
+  },
+  {
+   "q": "Which word means “sometimes”?",
+   "options": [
+    "أَحْيَانًا",
+    "دَائِمًا",
+    "غَالِبًا",
+    "لَاحِقًا"
+   ],
+   "answer": "أَحْيَانًا",
+   "why": "أَحْيَانًا = at times; دَائِمًا always, غَالِبًا usually, لَاحِقًا later."
+  },
+  {
+   "q": "“The train arrived late.”",
+   "options": [
+    "وَصَلَ الْقِطَارُ مُتَأَخِّرًا.",
+    "وَصَلَ الْقِطَارُ لَاحِقًا.",
+    "وَصَلَ الْقِطَارُ مُبَكِّرًا."
+   ],
+   "answer": "وَصَلَ الْقِطَارُ مُتَأَخِّرًا.",
+   "why": "Late = مُتَأَخِّرًا; لَاحِقًا is “later”, مُبَكِّرًا “early”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.time.day",
+   "note": "Hebrew numbers the days the same way: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי … (first, second …), then שַׁבָּת = السَّبْت; “in the morning” is בַּבֹּקֶר with בְּ, where Arabic can use the accusative صَبَاحًا."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.time.day",
+   "note": "German: am Montag, am Morgen, heute / morgen / gestern; Arabic: يَوْمَ الِاثْنَيْنِ, صَبَاحًا — an accusative instead of “am”. German also has accusatives of time: jeden Tag = كُلَّ يَوْمٍ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.time.day",
+   "note": "Chinese numbers the days too: 星期一 … 星期六 (week + one … six), 星期天; time words stand before the verb: 我明天去. Arabic is freer: غَدًا أَذْهَبُ / أَذْهَبُ غَدًا."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.prep.time",
+   "note": "Lesson 15: before, after, until, since — and the clock."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "time.dayNames",
+   "value": "numbered"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "Greek also says “when” with a bare accusative: τη Δευτέρα (on Monday), το πρωί (in the morning) — like يَوْمَ الِاثْنَيْنِ, صَبَاحًا."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian uses the instrumental for parts of the day (утром, вечером, ночью) where Arabic uses the accusative (صَبَاحًا, مَسَاءً, لَيْلًا) — a bare case form in both, with no preposition."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English names the days after gods and planets (Sunday, Monday …); Arabic mostly numbers them, starting from Sunday: الْأَحَد, “the one”. “On Monday” needs no preposition: يَوْمَ الِاثْنَيْنِ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish lunes, martes … come from planets, but el lunes (“on Monday”) needs no preposition — like Arabic يَوْمَ الِاثْنَيْنِ."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi names the days after planets (सोमवार, मंगलवार …); Arabic numbers them from Sunday."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi सोमवार, मंगळवार … are planet names; Arabic numbers the days from Sunday."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese 月曜日, 火曜日 … are named after the moon and the planets; Arabic numbers the days."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish maanantai, tiistai … are borrowed Germanic names (keskiviikko is “mid-week”); Arabic numbers the days."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian hétfő (“week’s head”) and vasárnap (“market day”) describe the days; Arabic numbers them."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut says “when” with a case ending on the time word — ullumi, today (“on the day”, locative -mi); Arabic uses the bare accusative: الْيَوْمَ, صَبَاحًا."
+  }
+ ]
+}

@@ -109,7 +109,7 @@ window.NoemaShell = (() => {
     F.railMe = h('button', { class: 'ns-railme', onclick: () => go('#/me') }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', {}, L('me')));
     F.main = document.querySelector('main') || h('main');
     F.main.id = 'ns-main';
-    F.fab = h('button', { class: 'ns-fab full', id: 'ns-fab', onclick: () => ENGINE ? ENGINE.openTutor?.() : Promise.resolve(N().ensureEngine?.()).then(ok => ok ? ENGINE?.openTutor?.() : toast(L('needSubject'), 4000)) }, h('span', { class: 'ns-fabface breathe' }), h('span', { class: 'nm' }));
+    F.fab = h('button', { class: 'ns-fab full', id: 'ns-fab', onclick: () => chromeNow.tutor ? chromeNow.tutor() : ENGINE ? ENGINE.openTutor?.() : Promise.resolve(N().ensureEngine?.()).then(ok => ok ? ENGINE?.openTutor?.() : toast(L('needSubject'), 4000)) }, h('span', { class: 'ns-fabface breathe' }), h('span', { class: 'nm' }));
     F.fx = h('div', { class: 'ns-fx', id: 'ns-fx' });
     F.layer = h('div', { class: 'ns-layer', id: 'ns-layer' });
     document.body.prepend(F.land, F.pv, F.brand, F.top, F.share, F.tabs, F.railMe);
@@ -146,7 +146,8 @@ window.NoemaShell = (() => {
     F.tabs.replaceChildren(...tabsList().map(([k, href, i, l]) => h('button', { class: 'ns-tab', 'data-tab': k, onclick: () => go(href) }, h('span', { class: 'i2' }, i), h('span', { class: 'lb' }, l))));
     F.tabs.style.setProperty('--n', F.tabs.children.length);
   }
-  /** The top bar and tab of the page now showing. crumbs: [[label, href?], …] · back: href · menu: [{label, sub?, icon?, run, danger?}] */
+  /** The top bar and tab of the page now showing. crumbs: [[label, href?], …] · back: href · menu: [{label, sub?, icon?, run, danger?}]
+      · tutor: what the character button opens on this page (a language course: its own tutor) */
   function chrome(c = {}) {
     chromeNow = c;
     F.crumbs.replaceChildren(...(c.crumbs || []).flatMap(([l, href], i) => [i ? h('span', { class: 'sep', 'aria-hidden': 'true' }, '›') : null, href ? h('button', { onclick: () => go(href) }, l) : h('b', {}, l)]).filter(Boolean));
@@ -270,7 +271,9 @@ window.NoemaShell = (() => {
       return;
     }
     docLang(lang());
-    if (k === 'lang' && TH()?.world() === 'know') { location.replace('#/'); return; }
+    if (k === 'lang' && TH()?.world() === 'know') {   // a link to a course (#/lang/<course>…) shows the Languages tab too; the tab alone goes home
+      if (p[1] && WORLDS.lang?.route) { TH().putSettings({ world: 'both' }); drawTabs(); } else { location.replace('#/'); return; }
+    }
     if (k === 'learn' && TH()?.world() === 'lang') { location.replace('#/lang'); return; }
     if (F.main.dataset.page !== k) { F.main.replaceChildren(); }
     F.main.dataset.page = k;
@@ -325,8 +328,12 @@ window.NoemaShell = (() => {
         h('span', { class: 'meta' }, r0.chNum ? pill(L('chOf', { n: r0.chNum, of: r0.chOf }), 2) : null, r0.secNum ? pill(L('secOf', { n: r0.secNum, of: r0.secOf }), 4) : !r0.sid ? pill(L('start'), 1) : null),
         rm && r0.node ? h('span', { class: 'step wide' }, L('stepIs', { step: rm.nodes?.[r0.node]?.title || r0.node })) : null,
         h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')));
-    } else if (!(w === 'lang' && WORLDS.lang?.today)) box.append(firstSteps());
-    if (w !== 'know' && WORLDS.lang?.today) WORLDS.lang.today(box, { h, L, open, go });   // the language courses' own "continue" (docs/NEW_FRAME_AND_LANGUAGES.md)
+    }
+    // the language courses' own "continue" (docs/NEW_FRAME_AND_LANGUAGES.md); with nothing else to continue, the course you were in leads (lead: it draws only that, and says so)
+    const langToday = w !== 'know' && WORLDS.lang?.today, n0 = box.children.length;
+    const led = !r0 && langToday ? WORLDS.lang.today(box, { h, L, open, go, lead: true }) : false, langLed = led === true || (led === undefined && box.children.length > n0);
+    if (!r0 && !langLed && !(w === 'lang' && langToday)) box.append(firstSteps());
+    if (langToday && !langLed) WORLDS.lang.today(box, { h, L, open, go });
     // continue elsewhere
     const more = rec.slice(1, 4);
     if (more.length) box.append(h('div', {}, h('span', { class: 'ns-label' }, L('continueElsewhere')), h('div', { class: 'ns-list' }, ...more.map(r => { const s = byId[r.subj] || {};

@@ -1,0 +1,611 @@
+{
+ "field": "home",
+ "title": "At home",
+ "subgroups": [
+  {
+   "id": "house",
+   "title": "The house"
+  },
+  {
+   "id": "furniture",
+   "title": "Furniture"
+  },
+  {
+   "id": "things",
+   "title": "Everyday things"
+  },
+  {
+   "id": "rooms",
+   "title": "Rooms and parts of the home"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "The home, its rooms, furniture and everyday things — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "home.house",
+   "gloss": "house",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "home.flat",
+   "gloss": "flat, apartment",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "home.room",
+   "gloss": "room",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "home.door",
+   "gloss": "door",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "home.window",
+   "gloss": "window",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "home.wall",
+   "gloss": "wall",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "home.table",
+   "gloss": "table",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "home.chair",
+   "gloss": "chair",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "home.bed",
+   "gloss": "bed",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "home.cupboard",
+   "gloss": "cupboard, wardrobe",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "home.lamp",
+   "gloss": "lamp",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "obj.book",
+   "gloss": "book",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "obj.pen",
+   "gloss": "pen",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "obj.paper",
+   "gloss": "paper",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "obj.phone",
+   "gloss": "phone",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "obj.key",
+   "gloss": "key",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "obj.bag",
+   "gloss": "bag",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "obj.cup",
+   "gloss": "cup",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "obj.glass",
+   "gloss": "glass (for drinking)",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "obj.plate",
+   "gloss": "plate",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "home.kitchen",
+   "gloss": "kitchen",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "home.bathroom",
+   "gloss": "bathroom",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "home.bedroom",
+   "gloss": "bedroom",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "home.livingroom",
+   "gloss": "living room",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "home.garden",
+   "gloss": "garden",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "home.floor",
+   "gloss": "floor (of a room)",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "home.stairs",
+   "gloss": "stairs",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "home.shelf",
+   "gloss": "shelf",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 28
+  },
+  {
+   "id": "home.sofa",
+   "gloss": "sofa",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 29
+  },
+  {
+   "id": "home.fridge",
+   "gloss": "fridge",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 30
+  },
+  {
+   "id": "home.apartmentbuilding",
+   "gloss": "apartment building, block of flats",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.attic",
+   "gloss": "attic, loft",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.bath",
+   "gloss": "bath (taking a bath)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.bench",
+   "gloss": "bench (seat)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.courtyard",
+   "gloss": "courtyard",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.desk",
+   "gloss": "desk",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.shutter",
+   "gloss": "shutter (of a window)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.suite",
+   "gloss": "living-room suite (sofa and armchairs)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.bowl",
+   "gloss": "bowl",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.card",
+   "gloss": "card (a bank card, a greeting card, a playing card)",
+   "tier": 1,
+   "rank": 42,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.clock",
+   "gloss": "clock, watch",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.coffin",
+   "gloss": "coffin",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.compartment",
+   "gloss": "compartment",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.file",
+   "gloss": "file, dossier (a folder; a police or legal case file)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.glass.material",
+   "gloss": "glass (the material)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.jar",
+   "gloss": "jar",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.junk",
+   "gloss": "old banger, piece of junk (a poor car or device)",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.kite",
+   "gloss": "kite (the toy)",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.lightbulb",
+   "gloss": "light bulb",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.parcel",
+   "gloss": "parcel, package",
+   "tier": 1,
+   "rank": 41,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.peg",
+   "gloss": "pin, peg (short rod)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.safe",
+   "gloss": "safe, strongbox, vault",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.seat",
+   "gloss": "seat, place (to sit)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.sponge",
+   "gloss": "bath sponge, loofah",
+   "tier": 2,
+   "rank": 25,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.tray",
+   "gloss": "tray",
+   "tier": 2,
+   "rank": 26,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.toy",
+   "gloss": "toy",
+   "tier": 1,
+   "rank": 31,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.passport",
+   "gloss": "passport",
+   "tier": 1,
+   "rank": 32,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.suitcase",
+   "gloss": "suitcase",
+   "tier": 1,
+   "rank": 33,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.sign",
+   "gloss": "sign (a notice)",
+   "tier": 1,
+   "rank": 34,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.towel",
+   "gloss": "towel",
+   "tier": 1,
+   "rank": 35,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.soap",
+   "gloss": "soap",
+   "tier": 1,
+   "rank": 36,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.toothbrush",
+   "gloss": "toothbrush",
+   "tier": 1,
+   "rank": 37,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.mirror",
+   "gloss": "mirror",
+   "tier": 1,
+   "rank": 38,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.shampoo",
+   "gloss": "shampoo",
+   "tier": 1,
+   "rank": 39,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.present",
+   "gloss": "present, gift",
+   "tier": 1,
+   "rank": 40,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.glasses",
+   "gloss": "glasses, spectacles",
+   "tier": 1,
+   "rank": 43,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.armchair",
+   "gloss": "armchair",
+   "tier": 1,
+   "rank": 44,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.carpet",
+   "gloss": "carpet, rug",
+   "tier": 1,
+   "rank": 45,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.curtain",
+   "gloss": "curtain",
+   "tier": 1,
+   "rank": 46,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.washingmachine",
+   "gloss": "washing machine",
+   "tier": 1,
+   "rank": 47,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.oven",
+   "gloss": "oven",
+   "tier": 1,
+   "rank": 48,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.sink",
+   "gloss": "sink",
+   "tier": 1,
+   "rank": 49,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.rubbish",
+   "gloss": "rubbish, garbage",
+   "tier": 1,
+   "rank": 50,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.lock",
+   "gloss": "lock",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.roof",
+   "gloss": "roof",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.map",
+   "gloss": "map",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "obj.spoon",
+   "gloss": "spoon",
+   "tier": 1,
+   "rank": 54,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.pan",
+   "gloss": "pan (frying pan)",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "home.pot",
+   "gloss": "pot, saucepan",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "core"
+  }
+ ]
+}

@@ -1,0 +1,4312 @@
+{
+ "lexemes": [
+  {
+   "id": "de:ich",
+   "lemma": "ich",
+   "pos": "PRON",
+   "senses": [
+    "pron.i",
+    "mind.ego"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": [
+     {
+      "form": "das Ich, die Ichs",
+      "senses": [
+       "s2"
+      ],
+      "note": "a neuter noun"
+     }
+    ]
+   },
+   "forms": {
+    "PRON;NOM": "ich",
+    "PRON;ACC": "mich",
+    "PRON;DAT": "mir"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The speaker; small and unstressed, never capitalized except at the start of a sentence.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "I (the speaker); mich = me (accusative), mir = (to) me (dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.i"
+     },
+     {
+      "id": "s2",
+      "def": "das Ich: the self, the ego (used as a noun)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "psychology",
+       "philosophy"
+      ],
+      "concept": "mind.ego"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse gern Gemüse.",
+      "tr": "I like eating vegetables.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Kannst du mich morgen anrufen?",
+      "tr": "Can you call me tomorrow?",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "Gib mir bitte das Salz.",
+      "tr": "Please pass me the salt.",
+      "register": "informal",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Wer ist da? – Ich bin's.",
+      "tr": "Who's there? – It's me.",
+      "register": "colloquial",
+      "context": "at the door",
+      "sense": "s1"
+     },
+     {
+      "text": "Freud unterscheidet das Ich, das Es und das Über-Ich.",
+      "tr": "Freud distinguishes the ego, the id and the superego.",
+      "register": "neutral",
+      "context": "psychology",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ich auch",
+      "tr": "me too"
+     },
+     {
+      "text": "ich nicht",
+      "tr": "not me"
+     },
+     {
+      "text": "ich selbst",
+      "tr": "I myself"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Ich bin's.",
+      "tr": "It's me.",
+      "kind": "fixed expression",
+      "meaning": "the usual answer when someone asks who is there",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A personal pronoun has no synonyms; only its case forms change (ich, mich, mir, meiner).",
+    "etymology": {
+     "text": "From Middle High German ich, from Old High German ih, from Proto-West Germanic *ik, from Proto-Germanic *ek, *ik, from Proto-Indo-European *eǵh₂óm.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Freud's “Ego” is das Ich in the German original: Das Ich und das Es (“The Ego and the Id”, 1923)."
+    ],
+    "pitfalls": [
+     "ich is written lower-case inside a sentence – unlike English “I”.",
+     "Pick the case: ich (subject), mich (direct object: Er sieht mich), mir (indirect object or after a dative preposition: mit mir)."
+    ],
+    "subtleties": [
+     "“It's me” is Ich bin's / Ich bin es – the verb agrees with ich, not with es."
+    ]
+   }
+  },
+  {
+   "id": "de:du",
+   "lemma": "du",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "social distance",
+     "value": "informal: family, friends, children"
+    }
+   ],
+   "features": {
+    "address": "informal",
+    "reference": "persons",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "du",
+    "PRON;ACC": "dich",
+    "PRON;DAT": "dir"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "informal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Closeness and equality: family, friends, children, young people, many workplaces and the internet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (one person you know well – informal address); dich = you (accusative), dir = (to) you (dative)",
+      "register": [
+       "informal"
+      ],
+      "concept": "pron.you.sg"
+     },
+     {
+      "id": "s2",
+      "def": "you (generic, “one”) in casual speech: Da weißt du nie, was passiert.",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was trinkst du?",
+      "tr": "What are you drinking?",
+      "register": "informal",
+      "context": "café with a friend",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich rufe dich heute Abend an.",
+      "tr": "I'll call you tonight.",
+      "register": "informal",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "Mama, ich habe dir Blumen gekauft.",
+      "tr": "Mum, I bought you flowers.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "In dem Job weißt du nie, was am nächsten Tag passiert.",
+      "tr": "In that job you never know what will happen the next day.",
+      "register": "colloquial",
+      "context": "talking about work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemanden duzen",
+      "tr": "to address someone with du"
+     },
+     {
+      "text": "per du sein",
+      "tr": "to be on du terms"
+     },
+     {
+      "text": "das Du anbieten",
+      "tr": "to offer someone the du"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wollen wir uns duzen?",
+      "tr": "Shall we say du to each other?",
+      "kind": "fixed expression",
+      "meaning": "the polite question that ends Sie-address between adults",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Sie",
+      "register": "formal",
+      "nuance": "the polite “you” for adults you do not know well, at work, in shops and offices; takes the verb forms of the 3rd person plural"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German du, duo, dū, from Old High German dū (akin to Old Saxon thū and English thou), from Proto-West Germanic *þū, from Proto-Germanic *þū, from Proto-Indo-European *túh₂.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German has verbs for it: duzen (to say du) and siezen (to say Sie).",
+     "Traditionally, switching from Sie to du was sealed with a drink: Brüderschaft trinken."
+    ],
+    "pitfalls": [
+     "Using du with a stranger, a shop assistant or an official can sound rude; the older or higher-ranking person usually offers the du.",
+     "Verb ending -st: du isst, du trinkst, du bist, du hast."
+    ],
+    "subtleties": [
+     "In letters and e-mails du/dich/dir may be capitalized (Du, Dich, Dir) as a sign of respect; both spellings are correct.",
+     "Many companies, start-ups and online services address everyone with du; IKEA in Germany famously does."
+    ]
+   }
+  },
+  {
+   "id": "de:Sie",
+   "lemma": "Sie",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg",
+    "pron.you.pl"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "social distance",
+     "value": "formal: adults one does not know well"
+    },
+    {
+     "concept": "pron.you.pl",
+     "axis": "social distance",
+     "value": "formal: one person or several"
+    }
+   ],
+   "features": {
+    "address": "formal",
+    "reference": "persons",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "Sie",
+    "PRON;ACC": "Sie",
+    "PRON;DAT": "Ihnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Respectful distance: strangers, customers, officials, teachers, older people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (polite address to one person) – always capitalized; Ihnen = (to) you (dative)",
+      "register": [
+       "formal"
+      ],
+      "concept": "pron.you.sg"
+     },
+     {
+      "id": "s2",
+      "def": "you (polite address to several people) – the polite plural of ihr; Ihnen = (to) you",
+      "register": [
+       "formal"
+      ],
+      "concept": "pron.you.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was trinken Sie?",
+      "tr": "What would you like to drink? (lit. What are you drinking?)",
+      "register": "formal",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Kann ich Ihnen helfen?",
+      "tr": "Can I help you?",
+      "register": "formal",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "Frau Müller, haben Sie einen Moment Zeit?",
+      "tr": "Ms Müller, do you have a moment?",
+      "register": "formal",
+      "context": "at work",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Damen und Herren, ich danke Ihnen für Ihre Aufmerksamkeit.",
+      "tr": "Ladies and gentlemen, thank you for your attention.",
+      "register": "formal",
+      "context": "speech",
+      "sense": "s2"
+     },
+     {
+      "text": "Herr und Frau Weber, möchten Sie einen Kaffee?",
+      "tr": "Mr and Mrs Weber, would you like a coffee?",
+      "register": "formal",
+      "context": "guests",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemanden siezen",
+      "tr": "to address someone with Sie"
+     },
+     {
+      "text": "per Sie sein",
+      "tr": "to be on Sie terms"
+     },
+     {
+      "text": "Kann ich Ihnen helfen?",
+      "tr": "Can I help you?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wie geht es Ihnen?",
+      "tr": "How are you? (formal)",
+      "kind": "fixed expression",
+      "meaning": "the formal greeting question; informal: Wie geht's dir?",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "du",
+      "register": "informal",
+      "nuance": "the familiar “you” for one person: family, friends, children, peers"
+     }
+    ],
+    "etymology": {
+     "text": "The same word as sie “they”: because the polite form uses the 3rd person plural, the pronoun began to be capitalized in the 17th century to distinguish the form of address from “they”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Polite Sie is grammatically “they”: Sie essen means both “you eat” (polite) and “they eat” – only the capital letter tells them apart in writing."
+    ],
+    "pitfalls": [
+     "Always capitalize Sie, Ihnen (and Ihr = your) when they mean polite “you”; sie with a small s means “she” or “they”.",
+     "The verb takes the 3rd person plural form: Sie sind, Sie haben, Sie essen – never *Sie bist."
+    ],
+    "subtleties": [
+     "Sie is used for one person and for several people alike."
+    ]
+   }
+  },
+  {
+   "id": "de:er",
+   "lemma": "er",
+   "pos": "PRON",
+   "senses": [
+    "pron.he",
+    "pron.it"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a der-noun (der Tisch → er)"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "er",
+    "PRON;ACC": "ihn",
+    "PRON;DAT": "ihm"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A man or boy – and any thing whose noun is masculine (der Kürbis → er).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "he (a male person); ihn = him (accusative), ihm = (to) him (dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.he"
+     },
+     {
+      "id": "s2",
+      "def": "it – for any noun with the article der (der Kohl → er)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er kauft einen Kürbis.",
+      "tr": "He is buying a pumpkin.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kenne ihn seit der Schule.",
+      "tr": "I've known him since school.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo ist der Knoblauch? – Er liegt im Schrank.",
+      "tr": "Where's the garlic? – It's in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     },
+     {
+      "text": "Kannst du ihm bitte helfen?",
+      "tr": "Can you help him, please?",
+      "register": "neutral",
+      "context": "everyday request",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo ist der Schlüssel? – Er liegt auf dem Tisch.",
+      "tr": "Where is the key? – It’s on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "er selbst",
+      "tr": "he himself"
+     },
+     {
+      "text": "mit ihm",
+      "tr": "with him"
+     },
+     {
+      "text": "ohne ihn",
+      "tr": "without him"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der",
+      "register": "colloquial",
+      "nuance": "stressed demonstrative used for people in casual speech (Der kommt nicht.); can sound dismissive"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ër, from Old High German ër, from Proto-West Germanic *iʀ, from Proto-Germanic *iz. The spelling ih- in ihm, ihn was introduced in early modern German to keep them apart from im, in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The h in ihn and ihm is not pronounced; it was added in writing only to distinguish them from in and im."
+    ],
+    "pitfalls": [
+     "Things are er when their noun is masculine: Der Salat ist frisch – er ist frisch (not *es).",
+     "Accusative ihn vs dative ihm: Ich sehe ihn. / Ich helfe ihm."
+    ],
+    "subtleties": [
+     "In casual speech Germans often say der instead of er for people (Der ist nett.) – neutral among friends, but it can sound disrespectful about someone present."
+    ]
+   }
+  },
+  {
+   "id": "de:sie",
+   "lemma": "sie",
+   "pos": "PRON",
+   "senses": [
+    "pron.she",
+    "pron.it"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a die-noun (die Lampe → sie)"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "sie",
+    "PRON;ACC": "sie",
+    "PRON;DAT": "ihr"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman or girl – and any thing whose noun is feminine (die Tomate → sie).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "she (a female person); sie = her (accusative), ihr = (to) her (dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.she"
+     },
+     {
+      "id": "s2",
+      "def": "it – for any noun with the article die (die Gurke → sie)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie isst eine Tomate.",
+      "tr": "She is eating a tomato.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich schreibe ihr eine Nachricht.",
+      "tr": "I'm writing her a message.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo ist die Gurke? – Sie ist im Kühlschrank.",
+      "tr": "Where's the cucumber? – It's in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     },
+     {
+      "text": "Kennst du sie schon lange?",
+      "tr": "Have you known her long?",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Lampe ist neu. Sie war sehr teuer.",
+      "tr": "The lamp is new. It was very expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sie selbst",
+      "tr": "she herself"
+     },
+     {
+      "text": "mit ihr",
+      "tr": "with her"
+     },
+     {
+      "text": "für sie",
+      "tr": "for her"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "die",
+      "register": "colloquial",
+      "nuance": "stressed demonstrative used for people in casual speech (Die kommt gleich.); can sound dismissive"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German siu, si, from Old High German siu, si, from Proto-West Germanic *si(j)u, *sī, from Proto-Germanic *sī. Cognate with Gothic 𐍃𐌹 (si).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "sie has three meanings in German: she, they – and, capitalized, the polite you (Sie)."
+    ],
+    "pitfalls": [
+     "sie (she) and sie (they) look the same; the verb tells them apart: sie isst (she) / sie essen (they).",
+     "Dative is ihr, not *sie: Ich helfe ihr."
+    ],
+    "subtleties": [
+     "Feminine things are sie too: die Kartoffel → sie. A girl (das Mädchen) is grammatically neuter (es), but in everyday speech people often refer to her with sie."
+    ]
+   }
+  },
+  {
+   "id": "de:wir",
+   "lemma": "wir",
+   "pos": "PRON",
+   "senses": [
+    "pron.we"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "wir",
+    "PRON;ACC": "uns",
+    "PRON;DAT": "uns"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Togetherness: the family, the team, the group – and sometimes the whole country.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "we; uns = us (accusative and dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.we"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir kaufen Gemüse auf dem Markt.",
+      "tr": "We buy vegetables at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Besuchst du uns am Wochenende?",
+      "tr": "Will you visit us at the weekend?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sind ein Team.",
+      "tr": "We are a team.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "wir alle",
+      "tr": "all of us"
+     },
+     {
+      "text": "wir beide",
+      "tr": "the two of us"
+     },
+     {
+      "text": "bei uns",
+      "tr": "at our place; where we live"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wir sind Papst!",
+      "tr": "We are Pope!",
+      "kind": "saying",
+      "meaning": "a famous headline of the Bild newspaper (2005) when the German Joseph Ratzinger became pope; now a joking pattern for national pride",
+      "register": "humorous"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym; in colloquial speech man can replace wir (Man geht jetzt. = We're going now).",
+    "etymology": {
+     "text": "From Middle High German wir, from Old High German wir, from Proto-West Germanic *wiʀ, from Proto-Germanic *wīz, from Proto-Indo-European *wéy. Compare Dutch wij, English we, Danish vi.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verb form after wir is the same as the infinitive for almost every verb: wir essen, wir kaufen, wir trinken – the exception is sein: wir sind."
+    ],
+    "pitfalls": [
+     "uns is both accusative and dative: Er sieht uns. / Er hilft uns."
+    ],
+    "subtleties": [
+     "bei uns means “at our home” or “in our country/region”, depending on context."
+    ]
+   }
+  },
+  {
+   "id": "de:sie.pl",
+   "lemma": "sie",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "sie",
+    "PRON;ACC": "sie",
+    "PRON;DAT": "ihnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Other people – or several things of any gender.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they; sie = them (accusative), ihnen = (to) them (dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     },
+     {
+      "id": "s2",
+      "def": "they/them for things – any plural noun, whatever its gender (die Kartoffeln → sie)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie essen keine Zwiebeln.",
+      "tr": "They don't eat onions.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe ihnen geschrieben.",
+      "tr": "I wrote to them.",
+      "register": "neutral",
+      "context": "messages",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tomaten sind reif, wir können sie pflücken.",
+      "tr": "The tomatoes are ripe; we can pick them.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "sie alle",
+      "tr": "all of them"
+     },
+     {
+      "text": "mit ihnen",
+      "tr": "with them"
+     },
+     {
+      "text": "sie beide",
+      "tr": "both of them"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; in casual speech the demonstrative die is often used for people (Die kommen später.).",
+    "etymology": {
+     "text": "From Middle High German sie, si, from Old High German sie (masculine plural), sio (feminine plural), siu (neuter plural).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Capitalize it and it becomes the polite “you”: sie essen (they eat) – Sie essen (you eat)."
+    ],
+    "pitfalls": [
+     "ihnen (to them) vs Ihnen (to you, polite): only the capital letter differs.",
+     "The verb is plural: sie essen (they), but sie isst (she)."
+    ],
+    "subtleties": [
+     "One plural pronoun for everything: German makes no gender difference in the plural."
+    ]
+   }
+  },
+  {
+   "id": "de:sein",
+   "lemma": "sein",
+   "pos": "VERB",
+   "senses": [
+    "verb.be",
+    "verb.aux.perfect",
+    "verb.exist"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.aux.perfect",
+     "axis": "which verbs take it",
+     "value": "verbs of movement and change, and sein, bleiben (ist gegangen)"
+    }
+   ],
+   "features": {
+    "principalParts": [
+     "sein",
+     "ist",
+     "war",
+     "gewesen"
+    ],
+    "conjugation": "irregular",
+    "presentChange": "irregular",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "NOM",
+      "senses": [
+       "s1"
+      ],
+      "note": "predicative: Das ist eine Tomate."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": [
+     {
+      "form": "ist … gegangen",
+      "senses": [
+       "s2"
+      ],
+      "note": "the auxiliary with a past participle"
+     }
+    ]
+   },
+   "forms": {
+    "V;NFIN": "sein",
+    "V;PRS;1;SG": "bin",
+    "V;PRS;2;SG": "bist",
+    "V;PRS;3;SG": "ist",
+    "V;PRS;1;PL": "sind",
+    "V;PRS;2;PL": "seid",
+    "V;PRS;3;PL": "sind",
+    "V;PST;3;SG": "war",
+    "V;PTCP;PST": "gewesen",
+    "V;IMP;2;SG": "sei",
+    "V;IMP;2;PL": "seid",
+    "V;IMP;FORM": "seien"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most basic verb: who and what something is, where it is, how it is.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be (identity, quality, place): Das ist eine Tomate. Der Salat ist frisch. Wo ist die Gurke?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s2",
+      "def": "auxiliary of the perfect for verbs of motion and change: Ich bin gegangen.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.aux.perfect"
+     },
+     {
+      "id": "s3",
+      "def": "to exist, to be alive",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.exist"
+     },
+     {
+      "id": "s4",
+      "def": "to be someone's turn (in a game, in a queue)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist eine Paprika.",
+      "tr": "This is a bell pepper.",
+      "register": "neutral",
+      "context": "naming things",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kartoffeln sind noch zu hart.",
+      "tr": "The potatoes are still too hard.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo bist du? Ich bin schon im Restaurant.",
+      "tr": "Where are you? I'm already at the restaurant.",
+      "register": "informal",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sind gestern nach Berlin gefahren.",
+      "tr": "We drove to Berlin yesterday.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "Wer ist jetzt dran? – Du bist dran!",
+      "tr": "Whose turn is it? – It's your turn!",
+      "register": "colloquial",
+      "context": "board game",
+      "sense": "s4"
+     },
+     {
+      "text": "Ich denke, also bin ich.",
+      "tr": "I think, therefore I am.",
+      "register": "literary",
+      "context": "philosophy",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "müde sein",
+      "tr": "to be tired"
+     },
+     {
+      "text": "zu Hause sein",
+      "tr": "to be at home"
+     },
+     {
+      "text": "an der Reihe sein",
+      "tr": "to be someone's turn"
+     },
+     {
+      "text": "da sein",
+      "tr": "to be there, to be present"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Sein oder Nichtsein, das ist hier die Frage.",
+      "tr": "To be or not to be, that is the question.",
+      "kind": "quote",
+      "meaning": "Hamlet's famous line in the classic German translation",
+      "register": "literary",
+      "source": "Shakespeare, Hamlet III.1, German translation by August Wilhelm Schlegel (1798), public domain"
+     },
+     {
+      "text": "Mir ist kalt.",
+      "tr": "I'm cold. (lit. To me it is cold.)",
+      "kind": "fixed expression",
+      "meaning": "how you feel: the person goes in the dative; Ich bin kalt means “I am a cold person”",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "da sein",
+      "tr": "to be present (written as two words)"
+     },
+     {
+      "text": "weg sein",
+      "tr": "to be gone, away"
+     },
+     {
+      "text": "zurück sein",
+      "tr": "to be back"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sich befinden",
+      "register": "formal",
+      "nuance": "to be located – official or written style (Das Büro befindet sich im 2. Stock.)"
+     },
+     {
+      "word": "existieren",
+      "register": "formal",
+      "nuance": "to exist – philosophical or technical, not for location or qualities"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Inherited from Middle High German sīn, from Old High German sīn, from Proto-West Germanic *sīn, an analogical infinitive within the suppletive paradigm of “to be” built on Proto-Indo-European *h₁es- (“to be, exist”); it replaced the older infinitive wesan (*wesaną “to be, remain”), and forms from *beuną (“to be, exist, become”) also enter the paradigm. Cognate with Dutch zijn.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The paradigm mixes old roots: ist/sind (like Latin est, sunt), bin/bist (like English be), war/gewesen (from old wesan, like English was)."
+    ],
+    "pitfalls": [
+     "Feelings of cold, heat or sickness use the dative: Mir ist kalt / Mir ist schlecht. Ich bin kalt means “I am cold-hearted”.",
+     "Perfect with sein, not haben, for motion and change of state: Ich bin gefahren / Er ist gewesen.",
+     "Imperative: Sei ruhig! (du) – Seid leise! (ihr) – Seien Sie bitte pünktlich! (polite) – seien is the only Sie-imperative that is not the infinitive."
+    ],
+    "subtleties": [
+     "sein is also the possessive “his”/“its” (sein Buch) – a different word with the same spelling."
+    ]
+   }
+  },
+  {
+   "id": "de:und",
+   "lemma": "und",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and",
+    "intj.sowhat"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The glue of every list and story.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "and (joins words, phrases and sentences)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.and"
+     },
+     {
+      "id": "s2",
+      "def": "Und? / Na und? – so? so what? (colloquial question)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "intj.sowhat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe Tomaten und Gurken.",
+      "tr": "I'm buying tomatoes and cucumbers.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kocht, und sie deckt den Tisch.",
+      "tr": "He cooks and she sets the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe keine Zeit. – Na und?",
+      "tr": "I have no time. – So what?",
+      "register": "colloquial",
+      "context": "argument",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "und so weiter (usw.)",
+      "tr": "and so on, etc."
+     },
+     {
+      "text": "und zwar",
+      "tr": "namely, that is"
+     },
+     {
+      "text": "hin und wieder",
+      "tr": "now and then"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Na und?",
+      "tr": "So what?",
+      "kind": "colloquial",
+      "meaning": "I don't care / why does that matter?",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "sowie",
+      "register": "formal",
+      "nuance": "as well as – written, often in lists"
+     },
+     {
+      "word": "plus",
+      "register": "colloquial",
+      "nuance": "plus, and also"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German unde, from Old High German unti, from Proto-Germanic *andi, *anþi, from Proto-Indo-European *h₂énti. Compare Dutch en, English and.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The sign & is called das Kaufmanns-Und (“merchant's and”) in German."
+    ],
+    "pitfalls": [
+     "und does not change the word order: … und sie deckt den Tisch (verb still second)."
+    ],
+    "subtleties": [
+     "No comma before und in a simple list (Tomaten, Gurken und Zwiebeln); between two full main clauses the comma is optional."
+    ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
+   }
+  },
+  {
+   "id": "de:es",
+   "lemma": "es",
+   "pos": "PRON",
+   "senses": [
+    "pron.it"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a das-noun (das Buch → es)"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "PRON;NOM": "es",
+    "PRON;ACC": "es",
+    "PRON;DAT": "ihm"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A thing (or a child, a girl) whose noun is neuter – and the empty “it” of the weather and of es gibt.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "it – for any noun with the article das (das Buch → es, das Kind → es); ihm = (to) it (dative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
+     },
+     {
+      "id": "s2",
+      "def": "it – an empty subject or placeholder: Es regnet. Es gibt … (there is/are). Es tut mir leid.",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "he, she – for a person named by a neuter noun (das Mädchen → es)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wo ist das Buch? – Es liegt auf dem Tisch.",
+      "tr": "Where is the book? – It is on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Fenster ist kaputt, es geht nicht zu.",
+      "tr": "The window is broken – it won’t close.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Es regnet schon wieder.",
+      "tr": "It is raining again.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "Gibt es hier ein Café?",
+      "tr": "Is there a café here?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s2"
+     },
+     {
+      "text": "Das Mädchen ist neu in der Klasse. Es heißt Lina.",
+      "tr": "The girl is new in the class. Her name is Lina.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "es gibt …",
+      "tr": "there is / there are …"
+     },
+     {
+      "text": "Ich bin es. / Ich bin’s.",
+      "tr": "It’s me."
+     },
+     {
+      "text": "Es geht.",
+      "tr": "It’s okay / so-so."
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Es war einmal …",
+      "tr": "Once upon a time there was …",
+      "kind": "fixed expression",
+      "meaning": "the opening of fairy tales",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A personal pronoun has no synonym; only its case forms change (es, es, ihm).",
+    "etymology": {
+     "text": "From Middle High German ëȥ, from Old High German iȥ, from Proto-Germanic *it (“it”). Compare English it, which instead descends from Proto-Germanic *hit (“it”). Cognate with Yiddish עס (es).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Freud’s “id” is das Es in German: Das Ich und das Es (“The Ego and the Id”, 1923).",
+     "German fairy tales open with Es war einmal … (“Once upon a time there was …”)."
+    ],
+    "pitfalls": [
+     "A thing is es only when its noun is neuter: das Fenster → es, but der Tisch → er and die Lampe → sie.",
+     "The dative is ihm – the same form as for er: Ich gebe dem Kind Wasser → Ich gebe ihm Wasser."
+    ],
+    "subtleties": [
+     "In speech es often shrinks to ’s: Wie geht’s?, Gibt’s Kaffee?",
+     "For a girl (das Mädchen) grammar says es, but in everyday speech people often switch to sie once the girl is known by name."
+    ]
+   }
+  },
+  {
+   "id": "de:ihr",
+   "lemma": "ihr",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.pl",
+    "pron.you.sg"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "social distance",
+     "value": "the old polite Ihr (fairy tales, historical films)"
+    },
+    {
+     "concept": "pron.you.pl",
+     "axis": "social distance",
+     "value": "informal: several people one says du to"
+    }
+   ],
+   "features": {
+    "address": "informal",
+    "reference": "persons",
+    "senseForms": [
+     {
+      "form": "Ihr",
+      "senses": [
+       "s2"
+      ],
+      "note": "written with a capital, the verb in the 2nd person plural: Habt Ihr …?"
+     }
+    ]
+   },
+   "forms": {
+    "PRON;NOM": "ihr",
+    "PRON;ACC": "euch",
+    "PRON;DAT": "euch"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A group of friends, family or children – people you would each call du.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (several people you each say du to: friends, family, children); euch = you (accusative and dative)",
+      "register": [
+       "informal"
+      ],
+      "concept": "pron.you.pl"
+     },
+     {
+      "id": "s2",
+      "def": "Ihr – the old polite “you” to one person (before Sie), still heard in fairy tales and historical films",
+      "register": [
+       "archaic"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was macht ihr heute Abend?",
+      "tr": "What are you (guys) doing tonight?",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Kinder, seid ihr fertig?",
+      "tr": "Children, are you ready?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich besuche euch am Sonntag.",
+      "tr": "I’ll visit you (all) on Sunday.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Habt Ihr gut geschlafen, Majestät?",
+      "tr": "Did you sleep well, Your Majesty?",
+      "register": "archaic",
+      "context": "fairy tale",
+      "sense": "s2"
+     },
+     {
+      "text": "Was wünscht Ihr, Herr Ritter?",
+      "tr": "What is your wish, Sir Knight?",
+      "register": "archaic",
+      "context": "fairy tales",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ihr beide",
+      "tr": "you two"
+     },
+     {
+      "text": "ihr alle",
+      "tr": "all of you"
+     },
+     {
+      "text": "bei euch",
+      "tr": "at your place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Sie",
+      "register": "formal",
+      "nuance": "the polite “you” for several people (and for one): Was trinken Sie?"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ir, from Old High German ir, from Proto-West Germanic *jiʀ, from Proto-Germanic *jīz. Cognate with Low German ji, jie, Yiddish איר (ir), Dutch jij, gij, je, Middle Dutch ir, English ye, Gothic 𐌾𐌿𐍃 (jūs).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ihr is related to English ye (as in “O ye of little faith”).",
+     "Bavarian and Austrian dialects say es and enk for ihr and euch – forms that go back to an old dual (“you two”)."
+    ],
+    "pitfalls": [
+     "Verb ending -t: ihr seid, ihr habt, ihr esst – never *ihr sind.",
+     "ihr has three meanings: you (plural), (to) her (Ich helfe ihr) and her/their (ihr Buch). The verb and the context tell them apart."
+    ],
+    "subtleties": [
+     "ihr is only for people you would each address with du. A group of adults you say Sie to is addressed with Sie: Wie geht es Ihnen?"
+    ]
+   }
+  },
+  {
+   "id": "de:Mann",
+   "lemma": "Mann",
+   "pos": "NOUN",
+   "senses": [
+    "person.man",
+    "family.husband",
+    "intj.man"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.husband",
+     "axis": "register",
+     "value": "everyday: mein Mann"
+    },
+    {
+     "concept": "intj.man",
+     "axis": "feeling",
+     "value": "surprise or annoyance (Mann, oh Mann!)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Männer",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Mann",
+    "N;ACC;SG": "Mann",
+    "N;DAT;SG": "Mann",
+    "N;GEN;SG": "Mannes",
+    "N;NOM;PL": "Männer",
+    "N;ACC;PL": "Männer",
+    "N;DAT;PL": "Männern",
+    "N;GEN;PL": "Männer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An adult male – and, with mein / ihr, a husband.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "man (adult male person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.man"
+     },
+     {
+      "id": "s2",
+      "def": "husband (mein Mann = my husband)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.husband"
+     },
+     {
+      "id": "s3",
+      "def": "Mann! / Mann, oh Mann! – exclamation of surprise or annoyance",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "intj.man"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Mann dort ist mein Lehrer.",
+      "tr": "The man over there is my teacher.",
+      "register": "neutral",
+      "context": "pointing out people",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Mann und eine Frau warten an der Tür.",
+      "tr": "A man and a woman are waiting at the door.",
+      "register": "neutral",
+      "context": "describing a scene",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Mann kocht heute.",
+      "tr": "My husband is cooking today.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Sie und ihr Mann wohnen in Hamburg.",
+      "tr": "She and her husband live in Hamburg.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Mann, ist das heiß heute!",
+      "tr": "Man, it’s hot today!",
+      "register": "colloquial",
+      "context": "exclamation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein junger Mann",
+      "tr": "a young man"
+     },
+     {
+      "text": "ein alter Mann",
+      "tr": "an old man"
+     },
+     {
+      "text": "Mann und Frau",
+      "tr": "man and woman; husband and wife"
+     },
+     {
+      "text": "mein Mann",
+      "tr": "my husband"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Ein Mann, ein Wort.",
+      "tr": "One man, one word.",
+      "kind": "saying",
+      "meaning": "a promise is a promise",
+      "register": "neutral"
+     },
+     {
+      "text": "Mann über Bord!",
+      "tr": "Man overboard!",
+      "kind": "fixed expression",
+      "meaning": "the alarm call when someone falls from a ship",
+      "register": "neutral"
+     },
+     {
+      "text": "seinen Mann stehen",
+      "tr": "to stand one’s man",
+      "kind": "idiom",
+      "meaning": "to prove oneself, to hold one’s own (said of men and women)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Herr",
+      "register": "formal",
+      "nuance": "gentleman; also the title Mr (Herr Weber) – the polite word"
+     },
+     {
+      "word": "Kerl",
+      "register": "colloquial",
+      "nuance": "guy, fellow – friendly or rough depending on tone"
+     },
+     {
+      "word": "Typ",
+      "register": "colloquial",
+      "nuance": "guy, bloke – very common among young people"
+     },
+     {
+      "word": "Ehemann",
+      "register": "formal",
+      "nuance": "husband – the official word on forms"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Frau",
+      "note": "woman; wife"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German man, from Old High German man, from Proto-West Germanic *mann, from Proto-Germanic *mann-, from Proto-Indo-European *mon-. Doublet of man.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pronoun man (“one, people”) is the same old word as Mann – Wiktionary calls Mann and man doublets.",
+     "Mann builds many everyday words: die Mannschaft (team), der Schneemann (snowman), der Kaufmann (merchant)."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: der Mann – die Männer (dative den Männern).",
+     "Do not address a man as Mann: politely he is Herr (Guten Tag, Herr Weber!).",
+     "Mann (noun, capital, double n) ≠ man (pronoun “one”: Man sagt … = people say …)."
+    ],
+    "subtleties": [
+     "mein Mann / ihr Mann means husband: German has no everyday separate word (Ehemann is formal).",
+     "Genitive des Mannes or des Manns – both are correct; Mannes is more common in writing."
+    ]
+   }
+  },
+  {
+   "id": "de:Frau",
+   "lemma": "Frau",
+   "pos": "NOUN",
+   "senses": [
+    "person.woman",
+    "family.wife",
+    "person.mrs"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "everyday: meine Frau"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frauen",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "Frau",
+      "senses": [
+       "s3"
+      ],
+      "note": "as a title before a surname, without an article, never plural: Frau Weber, mit Frau Weber"
+     }
+    ]
+   },
+   "forms": {
+    "N;NOM;SG": "Frau",
+    "N;ACC;SG": "Frau",
+    "N;DAT;SG": "Frau",
+    "N;GEN;SG": "Frau",
+    "N;NOM;PL": "Frauen",
+    "N;ACC;PL": "Frauen",
+    "N;DAT;PL": "Frauen",
+    "N;GEN;PL": "Frauen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An adult woman – a wife (meine Frau) – and the polite title before her name (Frau Weber).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "woman (adult female person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.woman"
+     },
+     {
+      "id": "s2",
+      "def": "wife (meine Frau = my wife)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.wife"
+     },
+     {
+      "id": "s3",
+      "def": "Mrs, Ms – title before a woman’s surname (Frau Weber), whatever her marital status",
+      "register": [
+       "formal"
+      ],
+      "concept": "person.mrs"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Frau dort ist Ärztin.",
+      "tr": "The woman over there is a doctor.",
+      "register": "neutral",
+      "context": "pointing out people",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Firma arbeiten mehr Frauen als Männer.",
+      "tr": "More women than men work in the company.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Frau und ich wohnen in Athen.",
+      "tr": "My wife and I live in Athens.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Er ruft seine Frau an.",
+      "tr": "He is calling his wife.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Guten Tag, Frau Weber!",
+      "tr": "Good afternoon, Mrs Weber!",
+      "register": "formal",
+      "context": "greeting",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine junge Frau",
+      "tr": "a young woman"
+     },
+     {
+      "text": "meine Frau",
+      "tr": "my wife"
+     },
+     {
+      "text": "Frau Weber",
+      "tr": "Mrs/Ms Weber"
+     },
+     {
+      "text": "Mann und Frau",
+      "tr": "man and woman; husband and wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Dame",
+      "register": "formal",
+      "nuance": "lady – polite (Meine Damen und Herren …)"
+     },
+     {
+      "word": "Ehefrau",
+      "register": "formal",
+      "nuance": "wife – the official word on forms"
+     },
+     {
+      "word": "Weib",
+      "register": "pejorative",
+      "nuance": "old word for woman; today rude or jokingly old-fashioned"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Mann",
+      "note": "man; husband"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vrouwe, from Old High German frouwa (“mistress”), from Proto-West Germanic *frauwjā, from Proto-Germanic *frawjǭ, a feminine form of *frawjô (“lord”). Cognate with Old Saxon frūa, Old Norse freyja and frú (hence Icelandic frú and Norwegian frue).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Frau is the feminine of an old Germanic word for “lord” – the Norse goddess Freyja (“the Lady”) carries the same name."
+    ],
+    "pitfalls": [
+     "Fräulein (“Miss”) is outdated and can offend; every adult woman is Frau, married or not.",
+     "Plural die Frauen; the singular does not change in any case (der Frau, die Frau)."
+    ],
+    "subtleties": [
+     "meine Frau / seine Frau means wife: Ehefrau is the formal word.",
+     "In the Middle Ages frouwe meant “lady” (a woman of rank) and wîp was the plain word for woman; today’s Weib is old-fashioned or insulting."
+    ]
+   }
+  },
+  {
+   "id": "de:Junge",
+   "lemma": "Junge",
+   "pos": "NOUN",
+   "senses": [
+    "person.boy",
+    "intj.man",
+    "sport.jack"
+   ],
+   "contrasts": [
+    {
+     "concept": "intj.man",
+     "axis": "feeling",
+     "value": "amazement (Junge, Junge!)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jungen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Junge: a young animal (die Jungen of a cat)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Junge",
+    "N;ACC;SG": "Jungen",
+    "N;DAT;SG": "Jungen",
+    "N;GEN;SG": "Jungen",
+    "N;NOM;PL": "Jungen",
+    "N;ACC;PL": "Jungen",
+    "N;DAT;PL": "Jungen",
+    "N;GEN;PL": "Jungen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Bub",
+     "region": "AT"
+    },
+    {
+     "lemma": "Bub",
+     "region": "CH"
+    }
+   ],
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A boy – playing, at school, someone’s son; in the north also a friendly “lad”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "boy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.boy"
+     },
+     {
+      "id": "s2",
+      "def": "Junge, Junge! – exclamation of surprise (“boy oh boy”)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "intj.man"
+     },
+     {
+      "id": "s3",
+      "def": "jack (playing card), also called Bube",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "games"
+      ],
+      "concept": "sport.jack"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Junge spielt im Garten Fußball.",
+      "tr": "The boy is playing football in the garden.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben zwei Kinder, einen Jungen und ein Mädchen.",
+      "tr": "We have two children, a boy and a girl.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Jungen aus meiner Klasse sind nett.",
+      "tr": "The boys in my class are nice.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Junge, Junge, das war knapp!",
+      "tr": "Boy oh boy, that was close!",
+      "register": "colloquial",
+      "context": "exclamation",
+      "sense": "s2"
+     },
+     {
+      "text": "Beim Skat sind die vier Jungen die höchsten Trümpfe.",
+      "tr": "In skat the four jacks are the highest trumps.",
+      "register": "neutral",
+      "context": "card games",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein kleiner Junge",
+      "tr": "a little boy"
+     },
+     {
+      "text": "Junge oder Mädchen?",
+      "tr": "boy or girl? (about a baby)"
+     },
+     {
+      "text": "die Jungs",
+      "tr": "the boys, the lads (colloquial plural)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Junge, Junge!",
+      "tr": "Boy, boy!",
+      "kind": "colloquial",
+      "meaning": "boy oh boy! – surprise or admiration",
+      "register": "colloquial"
+     },
+     {
+      "text": "alter Junge",
+      "tr": "old boy",
+      "kind": "colloquial",
+      "meaning": "friendly address among men (“old chap”)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Bub",
+      "register": "regional",
+      "nuance": "the usual word in Austria, Switzerland and southern Germany",
+      "region": "AT"
+     },
+     {
+      "word": "Knabe",
+      "register": "dated",
+      "nuance": "boy – old-fashioned or official (Knabenchor = boys’ choir)"
+     },
+     {
+      "word": "Kerlchen",
+      "register": "colloquial",
+      "nuance": "little fellow – affectionate"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Mädchen",
+      "note": "girl"
+     }
+    ],
+    "etymology": {
+     "text": "Fixed nominalisation of Middle High German jung (“young”), from Old High German jung (“young”). Its recognition as the normal standard word for “boy” is based on Central and Low German usage and fully asserted itself only in the 20th century (compare Knabe). The common plural Jungs (Jungens) is also from Low German. Cognate with English young.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Junge is simply the adjective jung (“young”) used as a noun – “the young one”; English young is the same word."
+    ],
+    "pitfalls": [
+     "Weak noun: every form except the nominative singular ends in -n: den Jungen, dem Jungen, des Jungen, die Jungen.",
+     "das Junge (neuter) is something else: the young of an animal (Die Katze hat drei Junge)."
+    ],
+    "subtleties": [
+     "Standard plural die Jungen; in speech die Jungs is the usual plural.",
+     "In Austria, Switzerland and southern Germany the everyday word is der Bub."
+    ]
+   }
+  },
+  {
+   "id": "de:Mädchen",
+   "lemma": "Mädchen",
+   "pos": "NOUN",
+   "senses": [
+    "person.girl",
+    "job.maid"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mädchen",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Magd + -chen (a diminutive, hence neuter)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Mädchen",
+    "N;ACC;SG": "Mädchen",
+    "N;DAT;SG": "Mädchen",
+    "N;GEN;SG": "Mädchens",
+    "N;NOM;PL": "Mädchen",
+    "N;ACC;PL": "Mädchen",
+    "N;DAT;PL": "Mädchen",
+    "N;GEN;PL": "Mädchen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A girl – and the most famous neuter noun in German.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "girl",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.girl"
+     },
+     {
+      "id": "s2",
+      "def": "maid, female servant (old-fashioned)",
+      "register": [
+       "dated"
+      ],
+      "concept": "job.maid"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Mädchen liest ein Buch.",
+      "tr": "The girl is reading a book.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "In meiner Klasse sind zwölf Mädchen und zehn Jungen.",
+      "tr": "There are twelve girls and ten boys in my class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Unsere Tochter ist ein fröhliches Mädchen.",
+      "tr": "Our daughter is a cheerful girl.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie ist in dem Büro das Mädchen für alles.",
+      "tr": "In that office she is the girl Friday (does every job).",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "Früher hatte die reiche Familie ein Mädchen für die Küche.",
+      "tr": "In the old days the rich family had a maid for the kitchen.",
+      "register": "dated",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein kleines Mädchen",
+      "tr": "a little girl"
+     },
+     {
+      "text": "Mädchen und Jungen",
+      "tr": "girls and boys"
+     },
+     {
+      "text": "die Mädchenschule",
+      "tr": "girls’ school"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Mädchen für alles",
+      "tr": "girl for everything",
+      "kind": "idiom",
+      "meaning": "a person who does all the small jobs (a dogsbody, a girl/man Friday) – said of men too",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mädel",
+      "register": "colloquial",
+      "nuance": "girl, lass – southern and regional, affectionate"
+     },
+     {
+      "word": "Maid",
+      "register": "poetic",
+      "nuance": "maiden – old poetic word"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Junge",
+      "note": "boy"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German magedichīn, meidichīn, from Old High German *magadihhīn or calqued from Middle Low German mēgedeken, megedekīn, both from Proto-West Germanic *magaþukīn. Equivalent to Magd + -chen.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Mädchen = Magd (maid) + -chen (little): literally “little maid” – related to English maiden.",
+     "Mark Twain mocked it in “The Awful German Language” (1880): “In German, a young lady has no sex, while a turnip has.”"
+    ],
+    "pitfalls": [
+     "Neuter: das Mädchen, ein Mädchen – because every noun in -chen is neuter, whatever it means.",
+     "Same form in the plural: das Mädchen, die Mädchen (no -s, no -n: den Mädchen)."
+    ],
+    "subtleties": [
+     "Grammar asks for es (Das Mädchen … es …), but once the girl is known by name people usually say sie.",
+     "The genitive adds -s (des Mädchens); all other singular and plural forms are Mädchen."
+    ]
+   }
+  },
+  {
+   "id": "de:Kind",
+   "lemma": "Kind",
+   "pos": "NOUN",
+   "senses": [
+    "person.child",
+    "family.child"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kinder",
+      "pattern": "-er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kind",
+    "N;ACC;SG": "Kind",
+    "N;DAT;SG": "Kind",
+    "N;GEN;SG": "Kindes",
+    "N;NOM;PL": "Kinder",
+    "N;ACC;PL": "Kinder",
+    "N;DAT;PL": "Kindern",
+    "N;GEN;PL": "Kinder"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A child – small, playing, at school – and someone’s child at any age.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "child, kid (young person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.child"
+     },
+     {
+      "id": "s2",
+      "def": "child, offspring (son or daughter of any age)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.child"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Kind schläft schon.",
+      "tr": "The child is already asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder spielen im Park.",
+      "tr": "The children are playing in the park.",
+      "register": "neutral",
+      "context": "outdoors",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Kind habe ich in Thessaloniki gewohnt.",
+      "tr": "As a child I lived in Thessaloniki.",
+      "register": "neutral",
+      "context": "telling one’s life",
+      "sense": "s1"
+     },
+     {
+      "text": "Unsere Kinder sind schon erwachsen.",
+      "tr": "Our children are already grown up.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein kleines Kind",
+      "tr": "a small child"
+     },
+     {
+      "text": "Kinder bekommen",
+      "tr": "to have children (give birth)"
+     },
+     {
+      "text": "der Kindergarten",
+      "tr": "nursery school, kindergarten"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "das Kind beim Namen nennen",
+      "tr": "to call the child by its name",
+      "kind": "idiom",
+      "meaning": "to call a spade a spade",
+      "register": "neutral"
+     },
+     {
+      "text": "das Kind mit dem Bade ausschütten",
+      "tr": "to pour the child out with the bath water",
+      "kind": "idiom",
+      "meaning": "to throw the baby out with the bathwater",
+      "register": "neutral"
+     },
+     {
+      "text": "mit Kind und Kegel",
+      "tr": "with child and Kegel",
+      "kind": "idiom",
+      "meaning": "with the whole family",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kleinkind",
+      "register": "neutral",
+      "nuance": "toddler, small child (about 1–3)"
+     },
+     {
+      "word": "Kid",
+      "register": "colloquial",
+      "nuance": "kid – from English, used by young people"
+     },
+     {
+      "word": "Nachwuchs",
+      "register": "humorous",
+      "nuance": "offspring – the children of a family (also new talent)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Erwachsene",
+      "note": "adult (der/die Erwachsene)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German kint, from Old High German kind, from Proto-West Germanic *kind, from Proto-Germanic *kindą, *kinþą, from Proto-Indo-European *ǵenh₁- (“to give birth”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English took kindergarten (“children’s garden”) from German – Friedrich Fröbel opened the first one in 1840.",
+     "Kind goes back to the root *ǵenh₁- “to give birth”, the same root as Greek γένος (genos) and Latin genus."
+    ],
+    "pitfalls": [
+     "Neuter: das Kind, ein Kind, es.",
+     "Plural Kinder, dative plural Kindern: mit den Kindern."
+    ],
+    "subtleties": [
+     "Kind is “child” at any age when you mean someone’s son or daughter: Meine Kinder sind 30 und 32.",
+     "Genitive des Kindes or des Kinds; the old dative dem Kinde survives in set phrases."
+    ]
+   }
+  },
+  {
+   "id": "de:Person",
+   "lemma": "Person",
+   "pos": "NOUN",
+   "senses": [
+    "person.person"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Personen",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Person",
+    "N;ACC;SG": "Person",
+    "N;DAT;SG": "Person",
+    "N;GEN;SG": "Person",
+    "N;NOM;PL": "Personen",
+    "N;ACC;PL": "Personen",
+    "N;DAT;PL": "Personen",
+    "N;GEN;PL": "Personen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A person counted or described – a little official: tables, tickets, forms.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "person, individual",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.person"
+     },
+     {
+      "id": "s2",
+      "def": "a person (dismissive: a woman or someone one disapproves of)",
+      "register": [
+       "pejorative"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Einen Tisch für vier Personen, bitte.",
+      "tr": "A table for four (people), please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Eintritt kostet zehn Euro pro Person.",
+      "tr": "Admission is ten euros per person.",
+      "register": "formal",
+      "context": "tickets",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie ist eine sehr nette Person.",
+      "tr": "She is a very nice person.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s1"
+     },
+     {
+      "text": "Was will diese Person hier?",
+      "tr": "What does that person want here?",
+      "register": "pejorative",
+      "context": "complaining",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "pro Person",
+      "tr": "per person"
+     },
+     {
+      "text": "eine Person",
+      "tr": "one person"
+     },
+     {
+      "text": "für zwei Personen",
+      "tr": "for two people"
+     },
+     {
+      "text": "ich für meine Person",
+      "tr": "as for me, personally"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Mensch",
+      "register": "neutral",
+      "nuance": "human being – warmer, stresses humanity (ein netter Mensch)"
+     },
+     {
+      "word": "Individuum",
+      "register": "formal",
+      "nuance": "individual – technical, or dismissive in speech"
+     },
+     {
+      "word": "Leute",
+      "register": "neutral",
+      "nuance": "people – plural only, everyday"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German persōn, persōne (ultimately from Latin persōna).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin persona first meant the mask of an actor – hence also English person and personality.",
+     "Russian персона (persona) exists too, but is formal or ironic – the everyday Russian word is человек."
+    ],
+    "pitfalls": [
+     "Always feminine, even for a man: Er ist eine nette Person – sie (the person) …",
+     "Plural Personen; for “people” in general German prefers Leute or Menschen."
+    ],
+    "subtleties": [
+     "Person counts heads (Tisch für vier Personen); Mensch stresses the human being (Er ist ein guter Mensch); Leute is plural only."
+    ]
+   }
+  },
+  {
+   "id": "de:Leute",
+   "lemma": "Leute",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "person.people"
+   ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Leute)"
+    },
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;PL": "Leute",
+    "N;ACC;PL": "Leute",
+    "N;DAT;PL": "Leuten",
+    "N;GEN;PL": "Leute"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "People in a group or in general – everyday and friendly (Hallo, Leute!).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "people (several persons; people in general)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.people"
+     },
+     {
+      "id": "s2",
+      "def": "guys, folks – addressing a group (Hallo, Leute!)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Auf dem Markt sind viele Leute.",
+      "tr": "There are a lot of people at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Was sagen denn die Leute?",
+      "tr": "What will people say?",
+      "register": "neutral",
+      "context": "public opinion",
+      "sense": "s1"
+     },
+     {
+      "text": "Hallo, Leute, wie geht’s?",
+      "tr": "Hi guys, how are you?",
+      "register": "colloquial",
+      "context": "greeting friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "viele Leute",
+      "tr": "many people"
+     },
+     {
+      "text": "junge Leute",
+      "tr": "young people"
+     },
+     {
+      "text": "die Leute",
+      "tr": "people (in general)"
+     },
+     {
+      "text": "Leute kennenlernen",
+      "tr": "to meet people"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Kleider machen Leute.",
+      "tr": "Clothes make people.",
+      "kind": "proverb",
+      "meaning": "appearance shapes how others see you – also the title of a novella by Gottfried Keller (1874)",
+      "register": "neutral"
+     },
+     {
+      "text": "unter die Leute kommen",
+      "tr": "to come among the people",
+      "kind": "idiom",
+      "meaning": "to get out and meet people; (news) to spread",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Menschen",
+      "register": "neutral",
+      "nuance": "human beings – more serious, also for humanity"
+     },
+     {
+      "word": "Personen",
+      "register": "formal",
+      "nuance": "persons – countable, official (für vier Personen)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German liute, from Old High German liuti, also liudi, from Proto-West Germanic *liud(i), from Proto-Germanic *liudīz (“people”), from Proto-Indo-European *h₁lewdʰ- (“man, people”). Compare Dutch lieden, Old English lēode (“people”), Polish ludzie, Russian люди (ljudi).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Leute and Russian люди are cognates; the same root gave Greek ελεύθερος (eléftheros, “free” – “belonging to the people”, not a slave)."
+    ],
+    "pitfalls": [
+     "Plural only: there is no singular *Leut. One person = eine Person or ein Mensch.",
+     "Dative Leuten: mit den Leuten."
+    ],
+    "subtleties": [
+     "die Leute often means “people in general”, “they”: Die Leute reden viel.",
+     "With a number, Leute is everyday speech (drei Leute); official texts say Personen."
+    ]
+   }
+  },
+  {
+   "id": "de:Freund",
+   "lemma": "Freund",
+   "pos": "NOUN",
+   "senses": [
+    "person.friend",
+    "person.boyfriend"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Freunde",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Freund",
+    "N;ACC;SG": "Freund",
+    "N;DAT;SG": "Freund",
+    "N;GEN;SG": "Freundes",
+    "N;NOM;PL": "Freunde",
+    "N;ACC;PL": "Freunde",
+    "N;DAT;PL": "Freunden",
+    "N;GEN;PL": "Freunde"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Closeness and trust – a friend, and with mein, a boyfriend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "friend (male, or of unspecified sex)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.friend"
+     },
+     {
+      "id": "s2",
+      "def": "boyfriend (mein Freund)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.boyfriend"
+     },
+     {
+      "id": "s3",
+      "def": "friend, supporter of a thing (ein Freund der Musik)",
+      "register": [
+       "formal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist mein bester Freund.",
+      "tr": "He is my best friend.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Wochenende treffe ich Freunde.",
+      "tr": "At the weekend I’m meeting friends.",
+      "register": "neutral",
+      "context": "free time",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du einen Freund?",
+      "tr": "Do you have a boyfriend?",
+      "register": "informal",
+      "context": "relationships",
+      "sense": "s2"
+     },
+     {
+      "text": "Er ist kein Freund von langen Reden.",
+      "tr": "He is no friend of long speeches.",
+      "register": "formal",
+      "context": "describing someone",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein guter Freund",
+      "tr": "a good friend"
+     },
+     {
+      "text": "mein bester Freund",
+      "tr": "my best friend"
+     },
+     {
+      "text": "Freunde treffen",
+      "tr": "to meet friends"
+     },
+     {
+      "text": "unter Freunden",
+      "tr": "among friends"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Freund und Feind",
+      "tr": "friend and foe",
+      "kind": "fixed expression",
+      "meaning": "everybody, on both sides (Freund und Feind loben ihn)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kumpel",
+      "register": "colloquial",
+      "nuance": "mate, buddy – relaxed, often among men"
+     },
+     {
+      "word": "Bekannter",
+      "register": "neutral",
+      "nuance": "acquaintance – someone you know, not a close friend"
+     },
+     {
+      "word": "Partner",
+      "register": "neutral",
+      "nuance": "partner in a relationship – neutral about marriage"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Feind",
+      "note": "enemy"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German vriunt, from Old High German friunt, from Proto-West Germanic *friund, from Proto-Germanic *frijōndz (“lit., the loving one; lover, loved one, friend”), from a derivative of Proto-Indo-European *preyH-. Cognate with Dutch vriend, English friend, Yiddish פֿרײַנד (fraynd), Gothic 𐍆𐍂𐌹𐌾𐍉𐌽𐌳𐍃 (frijōnds).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Freund literally means “the loving one”: it is an old present participle of a verb “to love”, like English friend and Yiddish fraynd."
+    ],
+    "pitfalls": [
+     "mein Freund / meine Freundin usually means boyfriend / girlfriend; for “a friend” say ein Freund von mir / eine Freundin von mir.",
+     "Feminine: die Freundin (plural Freundinnen); a mixed group is die Freunde."
+    ],
+    "subtleties": [
+     "German separates Freund (a real friend) from Bekannter (an acquaintance) more strictly than English “friend”."
+    ]
+   }
+  },
+  {
+   "id": "de:Freundin",
+   "lemma": "Freundin",
+   "pos": "NOUN",
+   "senses": [
+    "person.friend",
+    "person.girlfriend"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Freundinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Freund + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Freundin",
+    "N;ACC;SG": "Freundin",
+    "N;DAT;SG": "Freundin",
+    "N;GEN;SG": "Freundin",
+    "N;NOM;PL": "Freundinnen",
+    "N;ACC;PL": "Freundinnen",
+    "N;DAT;PL": "Freundinnen",
+    "N;GEN;PL": "Freundinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses it only as “female equivalent of Freund” (= friend); the meaning is friend (female), girlfriend."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A female friend – and, with mein, a girlfriend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "friend (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.friend"
+     },
+     {
+      "id": "s2",
+      "def": "girlfriend (meine Freundin)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.girlfriend"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist meine beste Freundin.",
+      "tr": "She is my best friend.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich gehe mit einer Freundin ins Kino.",
+      "tr": "I’m going to the cinema with a (girl)friend.",
+      "register": "neutral",
+      "context": "free time",
+      "sense": "s1"
+     },
+     {
+      "text": "Er stellt uns seine Freundin vor.",
+      "tr": "He introduces his girlfriend to us.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "meine beste Freundin",
+      "tr": "my best friend (female)"
+     },
+     {
+      "text": "eine gute Freundin",
+      "tr": "a good friend"
+     },
+     {
+      "text": "eine Freundin von mir",
+      "tr": "a friend of mine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kumpelin",
+      "register": "colloquial",
+      "nuance": "female mate, buddy – rare"
+     },
+     {
+      "word": "Bekannte",
+      "register": "neutral",
+      "nuance": "acquaintance (female)"
+     },
+     {
+      "word": "Partnerin",
+      "register": "neutral",
+      "nuance": "partner (female) in a relationship"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vriundinne, from Old High German friuntinna. Analyzable as Freund + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The suffix -in is old: Old High German friuntinna already had it."
+    ],
+    "pitfalls": [
+     "mein Freund / meine Freundin usually means boyfriend / girlfriend; for “a friend” say ein Freund von mir / eine Freundin von mir.",
+     "Plural with double n: die Freundinnen."
+    ],
+    "subtleties": [
+     "-in makes the female form of nouns for people: Freund → Freundin, Lehrer → Lehrerin, Student → Studentin. The female form is always feminine (die) and its plural is -innen."
+    ]
+   }
+  },
+  {
+   "id": "de:Student",
+   "lemma": "Student",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at a university: a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Studenten",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Student",
+    "N;ACC;SG": "Studenten",
+    "N;DAT;SG": "Studenten",
+    "N;GEN;SG": "Studenten",
+    "N;NOM;PL": "Studenten",
+    "N;ACC;PL": "Studenten",
+    "N;DAT;PL": "Studenten",
+    "N;GEN;PL": "Studenten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "University life: lectures, exams, a shared flat, little money.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "student at a university or college (male or unspecified) – NOT a school pupil",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student",
+      "domains": [
+       "education"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist Student in München.",
+      "tr": "He is a student in Munich.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "Viele Studenten wohnen in einer WG.",
+      "tr": "Many students live in a shared flat.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Studenten schreiben morgen eine Prüfung.",
+      "tr": "The students are taking an exam tomorrow.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Student sein",
+      "tr": "to be a student"
+     },
+     {
+      "text": "ein Student der Medizin",
+      "tr": "a medical student"
+     },
+     {
+      "text": "der Austauschstudent",
+      "tr": "exchange student"
+     },
+     {
+      "text": "Studenten und Studentinnen",
+      "tr": "male and female students"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Studierender / Studierende",
+      "register": "formal",
+      "nuance": "gender-neutral participle used by universities"
+     },
+     {
+      "word": "Kommilitone",
+      "register": "formal",
+      "nuance": "fellow student – academic word"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German studente, from Medieval Latin studēns.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From Latin studens, “the one who strives, is eager” (studēre); Russian студент has the same source."
+    ],
+    "pitfalls": [
+     "Student is only for university or college. A pupil at school is a Schüler – a classic mistake for speakers of English and Greek.",
+     "Weak noun: den/dem/des Studenten, plural die Studenten.",
+     "No article for what someone is: Ich bin Student (not *ein Student)."
+    ],
+    "subtleties": [
+     "Gender-neutral official German often says die Studierenden (“those who study”)."
+    ]
+   }
+  },
+  {
+   "id": "de:Studentin",
+   "lemma": "Studentin",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at a university: a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Studentinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Student + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Studentin",
+    "N;ACC;SG": "Studentin",
+    "N;DAT;SG": "Studentin",
+    "N;GEN;SG": "Studentin",
+    "N;NOM;PL": "Studentinnen",
+    "N;ACC;PL": "Studentinnen",
+    "N;DAT;PL": "Studentinnen",
+    "N;GEN;PL": "Studentinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman at university.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "student (female) at a university or college",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student",
+      "domains": [
+       "education"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist Studentin in Berlin.",
+      "tr": "She is a student in Berlin.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Studentinnen lernen in der Bibliothek.",
+      "tr": "The (female) students are studying in the library.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "Meine Schwester ist Studentin der Chemie.",
+      "tr": "My sister is a chemistry student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Studentin sein",
+      "tr": "to be a student"
+     },
+     {
+      "text": "eine Studentin der Medizin",
+      "tr": "a medical student (female)"
+     },
+     {
+      "text": "die Austauschstudentin",
+      "tr": "exchange student (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Studierende",
+      "register": "formal",
+      "nuance": "gender-neutral word (die Studierende)"
+     },
+     {
+      "word": "Kommilitonin",
+      "register": "formal",
+      "nuance": "fellow student (female)"
+     }
+    ],
+    "etymology": {
+     "text": "Student + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Female students were admitted to German universities only from 1900 (Baden) onwards."
+    ],
+    "pitfalls": [
+     "Unlike Student, Studentin is not a weak noun: der Studentin in the dative, plural die Studentinnen.",
+     "For school, the word is Schülerin."
+    ],
+    "subtleties": [
+     "The plural Studenten traditionally covers mixed groups; many people now write Studentinnen und Studenten or Studierende."
+    ]
+   }
+  },
+  {
+   "id": "de:Schüler",
+   "lemma": "Schüler",
+   "pos": "NOUN",
+   "senses": [
+    "person.student",
+    "person.disciple"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at school: a boy (or unspecified)"
+    },
+    {
+     "concept": "person.disciple",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schüler",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Schule + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Schüler",
+    "N;ACC;SG": "Schüler",
+    "N;DAT;SG": "Schüler",
+    "N;GEN;SG": "Schülers",
+    "N;NOM;PL": "Schüler",
+    "N;ACC;PL": "Schüler",
+    "N;DAT;PL": "Schülern",
+    "N;GEN;PL": "Schüler"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "School: classrooms, homework, the bell – a pupil of any age up to the final exam.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pupil, schoolboy, student at a school (male or unspecified)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student",
+      "domains": [
+       "education"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "disciple, follower of a master (ein Schüler Freuds)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.disciple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin Schüler und gehe in die neunte Klasse.",
+      "tr": "I’m a pupil, in year nine.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Schüler schreiben heute einen Test.",
+      "tr": "The pupils are taking a test today.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Er war ein Schüler von Beethoven.",
+      "tr": "He was a pupil of Beethoven.",
+      "register": "formal",
+      "context": "music history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein guter Schüler",
+      "tr": "a good pupil"
+     },
+     {
+      "text": "Lehrer und Schüler",
+      "tr": "teachers and pupils"
+     },
+     {
+      "text": "der Austauschschüler",
+      "tr": "exchange pupil"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Schulkind",
+      "register": "neutral",
+      "nuance": "schoolchild – mostly for younger children"
+     },
+     {
+      "word": "Lernender",
+      "register": "formal",
+      "nuance": "learner – official, gender-neutral in the plural (die Lernenden)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German schuolære, from Old High German scuolāri, from Medieval Latin scholaris; analyzable as Schule + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Schule comes through Latin schola from Greek σχολή (scholí), which first meant “leisure” – time free for learning."
+    ],
+    "pitfalls": [
+     "Schüler = pupil at school; Student = university student. Greek μαθητής and English “student” cover both – German does not.",
+     "Plural Schüler (no change), dative Schülern."
+    ],
+    "subtleties": [
+     "A Schüler stays a Schüler until the Abitur (final exam), even at 19."
+    ]
+   }
+  },
+  {
+   "id": "de:Schülerin",
+   "lemma": "Schülerin",
+   "pos": "NOUN",
+   "senses": [
+    "person.student",
+    "person.disciple"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at school: a girl"
+    },
+    {
+     "concept": "person.disciple",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schülerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Schüler + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Schülerin",
+    "N;ACC;SG": "Schülerin",
+    "N;DAT;SG": "Schülerin",
+    "N;GEN;SG": "Schülerin",
+    "N;NOM;PL": "Schülerinnen",
+    "N;ACC;PL": "Schülerinnen",
+    "N;DAT;PL": "Schülerinnen",
+    "N;GEN;PL": "Schülerinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A girl at school.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pupil, schoolgirl (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student",
+      "domains": [
+       "education"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "disciple, follower (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.disciple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Tochter ist Schülerin am Gymnasium.",
+      "tr": "My daughter is a pupil at the grammar school.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Schülerinnen spielen Volleyball.",
+      "tr": "The schoolgirls are playing volleyball.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie war eine Schülerin von Maria Montessori.",
+      "tr": "She was a pupil of Maria Montessori.",
+      "register": "formal",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine gute Schülerin",
+      "tr": "a good pupil (female)"
+     },
+     {
+      "text": "Schülerinnen und Schüler",
+      "tr": "pupils (girls and boys)"
+     },
+     {
+      "text": "die Austauschschülerin",
+      "tr": "exchange pupil (female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Schulkind",
+      "register": "neutral",
+      "nuance": "schoolchild (das Schulkind, for boys and girls)"
+     }
+    ],
+    "etymology": {
+     "text": "From Schüler + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like every female form in -in, Schülerin is feminine and keeps the same form in all four cases of the singular."
+    ],
+    "pitfalls": [
+     "Plural with double n: die Schülerinnen.",
+     "For university the word is Studentin."
+    ],
+    "subtleties": [
+     "Schools address letters to Liebe Schülerinnen und Schüler – both forms, girls first."
+    ]
+   }
+  },
+  {
+   "id": "de:Lehrer",
+   "lemma": "Lehrer",
+   "pos": "NOUN",
+   "senses": [
+    "person.teacher"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Lehrer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: lehren + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Lehrer",
+    "N;ACC;SG": "Lehrer",
+    "N;DAT;SG": "Lehrer",
+    "N;GEN;SG": "Lehrers",
+    "N;NOM;PL": "Lehrer",
+    "N;ACC;PL": "Lehrer",
+    "N;DAT;PL": "Lehrern",
+    "N;GEN;PL": "Lehrer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The person at the front of the class – respected, sometimes feared.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "teacher (male or unspecified), especially a school teacher; also an instructor",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.teacher",
+      "domains": [
+       "education"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Vater ist Lehrer.",
+      "tr": "My father is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Lehrer erklärt die Aufgabe.",
+      "tr": "The teacher explains the exercise.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie sucht einen Lehrer für Klavier.",
+      "tr": "She is looking for a piano teacher.",
+      "register": "neutral",
+      "context": "hobbies",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Deutschlehrer",
+      "tr": "German teacher"
+     },
+     {
+      "text": "Lehrer werden",
+      "tr": "to become a teacher"
+     },
+     {
+      "text": "Lehrer und Schüler",
+      "tr": "teachers and pupils"
+     },
+     {
+      "text": "der Fahrlehrer",
+      "tr": "driving instructor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Lehrkraft",
+      "register": "formal",
+      "nuance": "teacher – official and gender-neutral (die Lehrkraft)"
+     },
+     {
+      "word": "Pädagoge",
+      "register": "formal",
+      "nuance": "educator – stresses the profession and its theory"
+     },
+     {
+      "word": "Dozent",
+      "register": "neutral",
+      "nuance": "lecturer at a university or adult school"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "Schüler",
+      "note": "pupil"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German lērer, lērære, from Old High German lērāri; equivalent to lehren + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "lehren (to teach) and lernen (to learn) are from the same root; English lore is related."
+    ],
+    "pitfalls": [
+     "No article for a job: Ich bin Lehrer (not *ein Lehrer) – unless you add an adjective (ein guter Lehrer).",
+     "Plural Lehrer, dative Lehrern."
+    ],
+    "subtleties": [
+     "At university a teacher is a Dozent or Professor, not a Lehrer."
+    ]
+   }
+  },
+  {
+   "id": "de:Lehrerin",
+   "lemma": "Lehrerin",
+   "pos": "NOUN",
+   "senses": [
+    "person.teacher"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Lehrerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Lehrer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Lehrerin",
+    "N;ACC;SG": "Lehrerin",
+    "N;DAT;SG": "Lehrerin",
+    "N;GEN;SG": "Lehrerin",
+    "N;NOM;PL": "Lehrerinnen",
+    "N;ACC;PL": "Lehrerinnen",
+    "N;DAT;PL": "Lehrerinnen",
+    "N;GEN;PL": "Lehrerinnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman who teaches – the majority of teachers in German schools.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "teacher (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.teacher",
+      "domains": [
+       "education"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin Lehrerin für Griechisch.",
+      "tr": "I am a Greek teacher (female).",
+      "register": "neutral",
+      "context": "introducing oneself",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Lehrerin ist heute krank.",
+      "tr": "The teacher is ill today.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Unsere Lehrerinnen sind sehr nett.",
+      "tr": "Our (female) teachers are very nice.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Deutschlehrerin",
+      "tr": "German teacher (female)"
+     },
+     {
+      "text": "Lehrerin werden",
+      "tr": "to become a teacher"
+     },
+     {
+      "text": "Lehrerinnen und Lehrer",
+      "tr": "teachers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Lehrkraft",
+      "register": "formal",
+      "nuance": "teacher – official, gender-neutral"
+     },
+     {
+      "word": "Dozentin",
+      "register": "neutral",
+      "nuance": "lecturer (female) at a university or adult school"
+     }
+    ],
+    "etymology": {
+     "text": "From Lehrer + -in.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "About seven in ten school teachers in Germany are women."
+    ],
+    "pitfalls": [
+     "No article for a job: Ich bin Lehrerin.",
+     "Plural die Lehrerinnen (double n)."
+    ],
+    "subtleties": [
+     "A woman says Ich bin Lehrerin, not Ich bin Lehrer – German marks the sex of the person in the job title."
+    ]
+   }
+  },
+  {
+   "id": "de:der",
+   "lemma": "der",
+   "pos": "DET",
+   "class": "def",
+   "senses": [
+    "det.def",
+    "pron.which"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.which",
+     "axis": "register",
+     "value": "everyday (der Mann, der dort steht)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "DET;NOM;SG;MASC": "der",
+    "DET;NOM;SG;FEM": "die",
+    "DET;NOM;SG;NEUT": "das",
+    "DET;ACC;SG;MASC": "den",
+    "DET;ACC;SG;FEM": "die",
+    "DET;ACC;SG;NEUT": "das",
+    "DET;DAT;SG;MASC": "dem",
+    "DET;DAT;SG;FEM": "der",
+    "DET;DAT;SG;NEUT": "dem",
+    "DET;GEN;SG;MASC": "des",
+    "DET;GEN;SG;FEM": "der",
+    "DET;GEN;SG;NEUT": "des",
+    "DET;NOM;PL": "die",
+    "DET;ACC;PL": "die",
+    "DET;DAT;PL": "den",
+    "DET;GEN;PL": "der"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most frequent word of German: it carries gender, number and case of the noun.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "the (definite article): der (masc.), die (fem. and plural), das (neut.), with case forms den, dem, des, der",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.def"
+     },
+     {
+      "id": "s2",
+      "def": "before names in colloquial southern German: der Peter, die Anna",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "der, die, das as a relative pronoun: who, which, that (der Mann, der dort steht)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.which"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Kürbis ist sehr groß.",
+      "tr": "The pumpkin is very big.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich esse die Tomate.",
+      "tr": "I'm eating the tomato.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Gib dem Kind das Radieschen.",
+      "tr": "Give the radish to the child.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ist der Peter schon da?",
+      "tr": "Is Peter here yet?",
+      "register": "colloquial",
+      "context": "southern speech",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Mann, der dort steht, ist mein Lehrer.",
+      "tr": "The man who is standing over there is my teacher.",
+      "register": "neutral",
+      "context": "pointing out people",
+      "sense": "s3"
+     },
+     {
+      "text": "Das ist das Buch, das ich gerade lese.",
+      "tr": "That is the book (that) I am reading at the moment.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der, die, das",
+      "tr": "the three genders"
+     },
+     {
+      "text": "im, am, zum (= in dem, an dem, zu dem)",
+      "tr": "the article merges with prepositions"
+     },
+     {
+      "text": "zur (= zu der)",
+      "tr": "to the (feminine)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the demonstratives dieser and the stressed der/die/das point more strongly.",
+    "etymology": {
+     "text": "From Middle High German dër, from Old High German dër, replacing the original masculine and feminine nominative forms from Proto-Germanic *sa by analogy with the adjective inflection. Cognate with Yiddish דער (der).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The German Sesame Street theme song begins with the three articles: “Der, die, das …”."
+    ],
+    "pitfalls": [
+     "Learn every noun with its article: the gender is often not predictable (der Kohl, die Gurke, das Radieschen).",
+     "die is feminine singular AND every plural; der is masculine nominative AND feminine dative/genitive AND genitive plural."
+    ],
+    "subtleties": [
+     "Compounds take the article of their last part: der Kohl → der Blumenkohl; die Zwiebel → die Frühlingszwiebel."
+    ]
+   }
+  },
+  {
+   "id": "de:ein",
+   "lemma": "ein",
+   "pos": "DET",
+   "class": "indef",
+   "senses": [
+    "det.indef",
+    "num.1"
+   ],
+   "contrasts": [
+    {
+     "concept": "num.1",
+     "axis": "before a noun or alone",
+     "value": "before a noun (ein Kaffee, nicht zwei)"
+    }
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "senseForms": [
+     {
+      "form": "einer, eine, eins",
+      "senses": [
+       "s2"
+      ],
+      "note": "standing alone: Ich habe nur eins."
+     }
+    ]
+   },
+   "forms": {
+    "DET;NOM;SG;MASC": "ein",
+    "DET;NOM;SG;FEM": "eine",
+    "DET;NOM;SG;NEUT": "ein",
+    "DET;ACC;SG;MASC": "einen",
+    "DET;ACC;SG;FEM": "eine",
+    "DET;ACC;SG;NEUT": "ein",
+    "DET;DAT;SG;MASC": "einem",
+    "DET;DAT;SG;FEM": "einer",
+    "DET;DAT;SG;NEUT": "einem",
+    "DET;GEN;SG;MASC": "eines",
+    "DET;GEN;SG;FEM": "einer",
+    "DET;GEN;SG;NEUT": "eines"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Something new to the conversation, or just one of many.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a, an (indefinite article)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.indef"
+     },
+     {
+      "id": "s2",
+      "def": "one (the numeral; stressed in speech)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe eine Gurke.",
+      "tr": "I'm buying a cucumber.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist ein Kürbis.",
+      "tr": "That's a pumpkin.",
+      "register": "neutral",
+      "context": "naming things",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich nehme nur einen Kaffee, nicht zwei.",
+      "tr": "I'll just have one coffee, not two.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir bleiben eine Woche, nicht zwei.",
+      "tr": "We are staying one week, not two.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein bisschen",
+      "tr": "a little"
+     },
+     {
+      "text": "ein paar",
+      "tr": "a few"
+     },
+     {
+      "text": "eines Tages",
+      "tr": "one day"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Ein Mann, ein Wort.",
+      "tr": "One man, one word.",
+      "kind": "saying",
+      "meaning": "a promise is a promise",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym; colloquially ein is shortened to 'n (Hast du 'n Stift?).",
+    "etymology": {
+     "text": "From Middle High German ein, from Old High German ein. Compare Dutch een, English one, Danish en.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English a/an and one are the same word historically – just like German ein."
+    ],
+    "pitfalls": [
+     "ein has no plural: a tomato = eine Tomate, tomatoes = Tomaten (no article).",
+     "Masculine accusative adds -en: Ich kaufe einen Kürbis."
+    ],
+    "subtleties": [
+     "Its negative is kein: eine Tomate → keine Tomate."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

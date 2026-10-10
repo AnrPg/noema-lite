@@ -1,0 +1,621 @@
+{
+ "function": "fn.numerals",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "num.base",
+   "value": "decimal"
+  },
+  {
+   "feature": "num.order",
+   "value": "tens-first"
+  },
+  {
+   "feature": "num.agreement",
+   "value": "none"
+  },
+  {
+   "feature": "nom.pluralAfterNumeral",
+   "value": "unmarked"
+  },
+  {
+   "feature": "nom.classifiers",
+   "value": "obligatory"
+  }
+ ],
+ "summary": "Chinese numbers are perfectly regular: learn 零 and 一 to 十, then 百 and 千, and every number is built like a sum — 十一 ‘ten-one’ = 11, 二十 ‘two-ten’ = 20, 二十一 = 21, 九十九 = 99. A number never stands right before a noun: number + measure word + noun (三本书 ‘three books’, 两个人 ‘two people’), and for ‘two’ before a measure word you say 两, not 二. The noun itself never changes, so quantity words do the work of a plural: 很多 ‘many’, 一些 ‘some’, 都 ‘all’.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+   ],
+   "rows": [
+    [
+     "零",
+     "一",
+     "二 / 两",
+     "三",
+     "四",
+     "五",
+     "六",
+     "七",
+     "八",
+     "九",
+     "十"
+    ],
+    [
+     "líng",
+     "yī",
+     "èr / liǎng",
+     "sān",
+     "sì",
+     "wǔ",
+     "liù",
+     "qī",
+     "bā",
+     "jiǔ",
+     "shí"
+    ]
+   ],
+   "caption": "The digits",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Number",
+    "Chinese",
+    "Built as"
+   ],
+   "rows": [
+    [
+     "11",
+     "十一 shíyī",
+     "10 + 1"
+    ],
+    [
+     "12",
+     "十二 shí’èr",
+     "10 + 2"
+    ],
+    [
+     "19",
+     "十九 shíjiǔ",
+     "10 + 9"
+    ],
+    [
+     "20",
+     "二十 èrshí",
+     "2 × 10"
+    ],
+    [
+     "21",
+     "二十一 èrshíyī",
+     "2 × 10 + 1"
+    ],
+    [
+     "45",
+     "四十五 sìshíwǔ",
+     "4 × 10 + 5"
+    ],
+    [
+     "99",
+     "九十九 jiǔshíjiǔ",
+     "9 × 10 + 9"
+    ],
+    [
+     "100",
+     "一百 yìbǎi",
+     "1 × 100 — the 一 is needed"
+    ],
+    [
+     "101",
+     "一百零一",
+     "零 marks the empty tens"
+    ],
+    [
+     "110",
+     "一百一十",
+     "100 + 1 × 10 — here 一十"
+    ],
+    [
+     "200",
+     "两百 / 二百",
+     "both are said"
+    ],
+    [
+     "1000",
+     "一千 yìqiān",
+     "1 × 1000"
+    ],
+    [
+     "2000",
+     "两千",
+     "两 is usual"
+    ]
+   ],
+   "caption": "Building numbers: the order you say them is the order you write them",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "num.order",
+     "value": "tens-first"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "number",
+    "measure word",
+    "noun"
+   ],
+   "caption": "三 + 本 + 书 = three books; 两 + 个 + 人 = two people",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "二 èr — the number ‘two’",
+     "points": [
+      "counting: 一、二、三",
+      "inside numbers: 十二, 二十, 二十二",
+      "ordinals: 第二 ‘second’",
+      "digits, phone numbers, dates: 二月 ‘February’"
+     ]
+    },
+    {
+     "title": "两 liǎng — ‘two of something’",
+     "points": [
+      "before a measure word: 两个人, 两本书, 两把椅子",
+      "age: 两岁 ‘two years old’",
+      "often for 200, 2000: 两百, 两千"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "一 is said …",
+    "when",
+    "examples"
+   ],
+   "rows": [
+    [
+     "yī (1st tone)",
+     "alone, when counting, at the end, in ordinals and inside numbers",
+     "一、二、三; 十一; 第一"
+    ],
+    [
+     "yí (2nd tone)",
+     "before a 4th tone (also before 个 gè, even when it is said toneless)",
+     "一个 yí ge, 一位 yí wèi"
+    ],
+    [
+     "yì (4th tone)",
+     "before tones 1, 2 and 3",
+     "一千 yìqiān, 一百 yìbǎi, 一本 yì běn, 一点 yìdiǎn"
+    ]
+   ],
+   "caption": "The tone of 一 changes (it is still written yī in dictionaries)"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Chinese",
+    "Example"
+   ],
+   "rows": [
+    [
+     "many, a lot of",
+     "很多 (before the noun or as predicate)",
+     "很多人; 这里人很多"
+    ],
+    [
+     "many / few (as predicate)",
+     "多 / 少",
+     "这里人多，那里人少"
+    ],
+    [
+     "not many",
+     "不多",
+     "学生很多，老师不多"
+    ],
+    [
+     "very few",
+     "很少 (很 + 少)",
+     "这里人很少"
+    ],
+    [
+     "some",
+     "一些; 有些 (some of them, at the start)",
+     "一些书; 有些人在这里，有些人在那里"
+    ],
+    [
+     "a little",
+     "一点 (after an adjective: a bit more / less)",
+     "少一点，谢谢！"
+    ],
+    [
+     "all",
+     "所有 + noun … 都 + verb; 都 alone",
+     "所有人都在这里; 我们都是学生"
+    ],
+    [
+     "over (a round number)",
+     "number + 多 + measure word",
+     "一千多个人"
+    ]
+   ],
+   "caption": "How many? — the quantity words of S05"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Age needs no verb",
+   "text": "我二十岁 ‘I am twenty’, 这个孩子两岁 ‘this child is two’ — number + 岁, no 是 and no 有."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Tens before units",
+   "text": "Chinese says a number in the order of its digits, tens before units: 二十一 ‘two-ten-one’ = 21. German says the units first (einundzwanzig ‘one-and-twenty’); Chinese never does.",
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "tens-first"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Never number + noun",
+   "text": "*三书, *两人 are wrong: 三本书, 两个人. The measure word is as obligatory as the German article."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No plural after a number",
+   "text": "The noun never takes a plural — not after a number and not anywhere else: 两本书, 十个人, 很多书.",
+   "typology": [
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "unmarked"
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there a noun after the number? → put its measure word in between: 三本书, 两个人.",
+   "Is it ‘two’ right before a measure word? → 两 (两个, 两岁). Counting, inside numbers, ordinals, digits → 二 (十二, 二十, 第二).",
+   "Is it 11–19? → 十 + digit (十五). A round ten? → digit + 十 (五十). In between? → digit + 十 + digit (五十五).",
+   "Is a place empty inside a bigger number (101, 1005)? → say 零 once: 一百零一, 一千零五.",
+   "Is it an age? → number + 岁, with no 是: 他十八岁.",
+   "How is 一 said here? Alone, counting, at the end → yī; before a 4th tone → yí; before tones 1–3 → yì.",
+   "Do I mean ‘many / few’? → 很多 before the noun; 多, 少, 不多, 很少 after it as the predicate (人很多, 人很少).",
+   "Do I mean ‘all’? → 都 right before the verb, often with 所有 / 这些 / 我们 before it."
+  ],
+  "steps": [
+   "Say the number in written order (二十一 = 2-10-1).",
+   "Add the noun’s measure word.",
+   "Add the noun — unchanged."
+  ]
+ },
+ "traps": [
+  "*两十 → 二十; and inside numbers it is always 二: 十二个, 二十二个 (not *十两个).",
+  "10 is 十, never *一十 — but 110 is 一百一十.",
+  "*三书 → 三本书: the measure word cannot be left out.",
+  "*少人 / *多人 → 人很少 / 很多人: 多 and 少 alone do not stand before a noun.",
+  "*他是十八岁 in a plain statement → 他十八岁.",
+  "*都我们是学生 → 我们都是学生: 都 stands before the verb."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:yi",
+   "zh:ling",
+   "zh:er",
+   "zh:liang",
+   "zh:san",
+   "zh:si",
+   "zh:wu",
+   "zh:liu",
+   "zh:qi",
+   "zh:ba.num",
+   "zh:jiu",
+   "zh:shi.num",
+   "zh:shiyi",
+   "zh:shier",
+   "zh:shisan",
+   "zh:shisi",
+   "zh:shiwu",
+   "zh:shiliu",
+   "zh:shiqi",
+   "zh:shiba",
+   "zh:shijiu",
+   "zh:ershi",
+   "zh:sanshi",
+   "zh:sishi",
+   "zh:wushi",
+   "zh:liushi",
+   "zh:qishi",
+   "zh:bashi",
+   "zh:jiushi",
+   "zh:yibai",
+   "zh:yiqian",
+   "zh:henduo",
+   "zh:duo",
+   "zh:shao",
+   "zh:buduo",
+   "zh:yidian",
+   "zh:suoyou",
+   "zh:dou",
+   "zh:yixie",
+   "zh:youxie"
+  ]
+ },
+ "needs": {
+  "NUM": 10,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.numerals"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "21 in Chinese?",
+   "options": [
+    "二十一",
+    "十二一",
+    "一二十",
+    "两十一"
+   ],
+   "answer": "二十一",
+   "why": "Tens first: 二十 ‘two-ten’ + 一."
+  },
+  {
+   "q": "‘two books’",
+   "options": [
+    "两本书",
+    "二本书",
+    "两书",
+    "二书"
+   ],
+   "answer": "两本书",
+   "why": "Before a measure word ‘two’ is 两, and the measure word 本 is needed."
+  },
+  {
+   "q": "12 in Chinese?",
+   "options": [
+    "十二",
+    "十两",
+    "二十",
+    "两十"
+   ],
+   "answer": "十二",
+   "why": "Inside numbers 2 is always 二; 二十 is 20."
+  },
+  {
+   "q": "101 in Chinese?",
+   "options": [
+    "一百零一",
+    "一百一",
+    "一零一",
+    "百一"
+   ],
+   "answer": "一百零一",
+   "why": "零 fills the empty tens; 一百一 would be heard as 110."
+  },
+  {
+   "q": "‘He is eighteen.’",
+   "options": [
+    "他十八岁。",
+    "他十八个岁。",
+    "他岁十八。"
+   ],
+   "answer": "他十八岁。",
+   "why": "Age: number + 岁, no verb and no 个."
+  },
+  {
+   "q": "How is 一 said in 一个?",
+   "options": [
+    "yí",
+    "yì",
+    "yī"
+   ],
+   "answer": "yí",
+   "why": "Before a 4th tone (个 was gè) 一 becomes yí."
+  },
+  {
+   "q": "‘There are a lot of people here.’",
+   "options": [
+    "这里人很多。",
+    "这里多人。",
+    "这里是人很多。"
+   ],
+   "answer": "这里人很多。",
+   "why": "The amount comes last as the predicate: 人很多."
+  },
+  {
+   "q": "‘We are all students.’",
+   "options": [
+    "我们都是学生。",
+    "都我们是学生。",
+    "我们是都学生。"
+   ],
+   "answer": "我们都是学生。",
+   "why": "都 stands right before the verb."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek numbers are also tens first (είκοσι ένα ~ 二十一), but 1, 3 and 4 agree in gender (ένας / μία / ένα, τρεις / τρία) and the noun is plural. Chinese numbers never change, the noun never changes, and a measure word goes in between."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian один / одна and два / две agree, and the noun changes its case after numbers (два стола, пять столов). Chinese has nothing to agree: 两张桌子, 五张桌子 — only the measure word."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish veintiuno is tens first, like 二十一, and uno / una agree with the noun while 一 never changes. Spanish has one word for two; Chinese has 二 for counting and 两 before a measure word."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English twenty-one has the order of 二十一, but eleven to nineteen are irregular; in Chinese even 11–19 are regular: 十一 ‘ten-one’. And the noun takes no -s: 三本书."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "French counts partly in twenties (soixante-dix ‘sixty-ten’ = 70, quatre-vingts ‘four-twenties’ = 80); Chinese is purely decimal: 七十 ‘seven-ten’, 八十 ‘eight-ten’."
+  },
+  {
+   "for": "de",
+   "rel": "trap",
+   "text": "German einundzwanzig puts the units first; Chinese 二十一 follows the written order. Where German counts directly (drei Bücher), Chinese adds a measure word: 三本书."
+  },
+  {
+   "for": "hi",
+   "rel": "trap",
+   "text": "Hindi numbers from 11 to 99 are each a separate word, units first (इक्कीस 21, बयालीस 42); Chinese builds every number from ten digits, tens first: 二十一, 四十二. Large numbers: Hindi groups by lakh and crore, Chinese by ten thousand (万, later)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian numbers are tens first, joined by o (bist-o-yek ‘twenty-and-one’); Chinese simply strings them: 二十一. Persian also keeps the noun singular after a number (se ketāb) and may add tā — Chinese must add a measure word."
+  },
+  {
+   "for": "mr",
+   "rel": "trap",
+   "text": "Marathi has a separate, irregular word for each number up to 100, units first (एकवीस 21); Chinese builds all of them regularly, tens first: 二十一."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic says units before tens (wāḥid wa-ʿishrūn ‘one and twenty’), and the numerals 3–10 take the opposite gender of the noun; Chinese says tens first (二十一) and never agrees. Arabic has a dual (kitābān ‘two books’); Chinese says 两本书."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew numbers agree in gender with the noun, which is plural; Chinese numbers never change and the noun stays bare: 三本书."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish also keeps the noun singular after numbers (iki kitap) and says tens first (yirmi bir ~ 二十一); Chinese goes further — the noun never has a plural — and adds a measure word: 两本书."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Sino-Japanese numbers are built exactly like Chinese ones (二十一 nijūichi), and Japanese also needs counters. 万 man ‘ten thousand’ will be Chinese 万 wàn too."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Sino-Korean numbers (일, 이, 삼 …, 이십일 ‘21’) follow the Chinese pattern exactly, and Korean also needs counters. Korean’s second, native set (하나, 둘, 셋) has no Chinese counterpart; the Chinese split is 二 / 两."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish kaksikymmentäyksi ‘two-ten-one’ has the Chinese order; but Finnish puts the noun in the partitive after numbers (kolme kirjaa), while Chinese adds a measure word (三本书)."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian has two forms of ‘two’ — kettő alone, két before a noun — much like Chinese 二 / 两 (两 before a measure word). Hungarian also keeps the noun singular after numbers (két könyv ~ 两本书)."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili numerals follow the noun, and some agree with its class (vitabu viwili ‘two books’); Chinese numerals come first and never change: 两本书. Swahili ishirini na moja ‘twenty and one’ is tens first, like 二十一."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda numerals follow the noun and agree with its class (abantu babiri ‘two people’, ebitabo bibiri ‘two books’); Chinese numerals come first and never agree: 两个人, 两本书."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese numbers are built the same way (hai mươi mốt ‘two-ten-one’ ~ 二十一) and also need a classifier (hai quyển sách ~ 两本书)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut’s traditional numbers are not decimal, and larger numbers are often borrowed today; the noun itself shows singular, dual or plural (inuk, inuuk, inuit). Chinese builds every number from ten digits and never marks number on the noun: 两个人."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.numerals",
+   "note": "German puts the units first (einundzwanzig, ‘one-and-twenty’) and has a plural after numbers (drei Bücher); Chinese says 二十一 in written order and the noun never changes."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "Arabic numbers 3–10 take the opposite gender of the noun and decide its case and number; Chinese numbers never change — the measure word does the classifying."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.numerals",
+   "note": "Hebrew has a masculine and a feminine set of numbers chosen by the noun’s gender; Chinese has one set, and a measure word between number and noun."
+  }
+ ]
+}

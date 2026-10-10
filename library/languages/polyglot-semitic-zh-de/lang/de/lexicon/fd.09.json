@@ -1,0 +1,928 @@
+{
+ "lexemes": [
+  {
+   "id": "de:oder",
+   "lemma": "oder",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.or",
+    "part.tag"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.tag",
+     "axis": "register",
+     "value": "oder? – everyday, everywhere"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A choice between two – and, at the end of a sentence, a friendly “right?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "or",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.or"
+     },
+     {
+      "id": "s2",
+      "def": "right?, isn’t it? (tag at the end of a sentence)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "part.tag"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Willst du Tee oder Kaffee?",
+      "tr": "Do you want tea or coffee?",
+      "register": "informal",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kommen heute oder morgen.",
+      "tr": "We’re coming today or tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Essen ist gut, oder?",
+      "tr": "The food is good, isn’t it?",
+      "register": "colloquial",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "entweder … oder",
+      "tr": "either … or"
+     },
+     {
+      "text": "oder so",
+      "tr": "or something like that (colloquial)"
+     },
+     {
+      "text": "… oder?",
+      "tr": "…, right?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Sein oder Nichtsein, das ist hier die Frage.",
+      "tr": "To be or not to be, that is the question here.",
+      "kind": "quote",
+      "meaning": "Hamlet’s question",
+      "register": "literary",
+      "source": "Shakespeare, Hamlet, translated by A. W. Schlegel (1798), public domain"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "beziehungsweise (bzw.)",
+      "register": "formal",
+      "nuance": "or rather, respectively – written and official language"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German oder, from Old High German odar, an alteration of odo by analogy with wedar (whence modern weder). The origin of odo is uncertain; compare Old English eþþa, oþþe and Gothic 𐌰𐌹𐌸𐌸𐌰𐌿 (aiþþau).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "oder got its -r from weder (neither) – the two words influenced each other in Old High German."
+    ],
+    "pitfalls": [
+     "oder does not change the word order: Willst du Tee oder Kaffee?",
+     "A question with oder is answered with the choice, not with ja or nein: Tee, bitte."
+    ],
+    "subtleties": [
+     "…, oder? at the end asks for agreement, like English right? or Turkish değil mi? – very frequent in the south and in Switzerland."
+    ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
+   }
+  },
+  {
+   "id": "de:vielleicht",
+   "lemma": "vielleicht",
+   "pos": "ADV",
+   "senses": [
+    "adv.maybe",
+    "adv.truly"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "kind of word",
+     "value": "a particle of amazement, often ironic (Du bist vielleicht lustig!)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Open, undecided, polite – a soft “maybe”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "maybe, perhaps",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.maybe"
+     },
+     {
+      "id": "s2",
+      "def": "softener in polite requests (Können Sie mir vielleicht helfen?)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "expresses amazement, often ironic (Du bist vielleicht lustig!)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.truly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Vielleicht kommt er morgen.",
+      "tr": "Maybe he’ll come tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Kommst du mit? – Vielleicht.",
+      "tr": "Are you coming along? – Maybe.",
+      "register": "informal",
+      "context": "invitation",
+      "sense": "s1"
+     },
+     {
+      "text": "Können Sie mir vielleicht helfen?",
+      "tr": "Could you perhaps help me?",
+      "register": "formal",
+      "context": "asking for help",
+      "sense": "s2"
+     },
+     {
+      "text": "Das war vielleicht ein Tag!",
+      "tr": "What a day that was!",
+      "register": "colloquial",
+      "context": "complaining",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "vielleicht später",
+      "tr": "maybe later"
+     },
+     {
+      "text": "ja, vielleicht",
+      "tr": "yes, maybe"
+     },
+     {
+      "text": "vielleicht auch",
+      "tr": "or maybe, perhaps also"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "möglicherweise",
+      "register": "formal",
+      "nuance": "possibly – reports, careful statements"
+     },
+     {
+      "word": "eventuell",
+      "register": "neutral",
+      "nuance": "possibly, if need be – a false friend: not “eventually”"
+     },
+     {
+      "word": "womöglich",
+      "register": "neutral",
+      "nuance": "possibly – often fearing it"
+     },
+     {
+      "word": "kann sein",
+      "register": "colloquial",
+      "nuance": "could be – a spoken answer"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "bestimmt",
+      "note": "certainly"
+     },
+     {
+      "word": "sicher",
+      "note": "surely"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vil līchte (“very easily”), thus: “what could easily happen”. Compare Dutch wellicht.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "vielleicht is viel + leicht, “very easily”: what may easily happen. Greek ίσως, Russian может быть (“it may be”) and Turkish belki express the same idea differently."
+    ],
+    "pitfalls": [
+     "When vielleicht starts the sentence, the verb comes second: Vielleicht trinke ich Tee (not *Vielleicht ich trinke Tee).",
+     "eventuell means “maybe”, not “eventually” (= schließlich, endlich)."
+    ],
+    "subtleties": [
+     "In a request vielleicht makes it more polite: Hast du vielleicht ein bisschen Zeit?"
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:wirklich",
+   "lemma": "wirklich",
+   "pos": "ADV",
+   "senses": [
+    "adv.really",
+    "adv.truly",
+    "adj.true"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "kind of word",
+     "value": "an adverb: really, truly (Das ist wirklich schön)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Surprise and interest (“Really?”) – or sincere emphasis.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "really? – a reaction of surprise or interest",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.really"
+     },
+     {
+      "id": "s2",
+      "def": "really, truly (intensifier)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.truly"
+     },
+     {
+      "id": "s3",
+      "def": "real, actual (as an adjective: die wirkliche Welt)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.true"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wirklich? Das wusste ich nicht!",
+      "tr": "Really? I didn’t know that!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Isst du wirklich kein Fleisch?",
+      "tr": "Do you really not eat meat?",
+      "register": "informal",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Brot ist wirklich gut.",
+      "tr": "The bread is really good.",
+      "register": "neutral",
+      "context": "praise",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich mag dich wirklich.",
+      "tr": "I really like you.",
+      "register": "informal",
+      "context": "feelings",
+      "sense": "s2"
+     },
+     {
+      "text": "Im Film ist alles einfach, in der wirklichen Welt nicht.",
+      "tr": "In films everything is easy, in the real world it is not.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "wirklich gut",
+      "tr": "really good"
+     },
+     {
+      "text": "nicht wirklich",
+      "tr": "not really"
+     },
+     {
+      "text": "Wirklich?",
+      "tr": "Really?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "echt",
+      "register": "colloquial",
+      "nuance": "really – the casual reaction, very common among young people: Echt?"
+     },
+     {
+      "word": "tatsächlich",
+      "register": "neutral",
+      "nuance": "actually, indeed; as a reaction: Tatsächlich? (Is that so?)"
+     },
+     {
+      "word": "ehrlich",
+      "register": "colloquial",
+      "nuance": "honestly – Ehrlich? (Are you serious?)"
+     }
+    ],
+    "etymology": {
+     "text": "From wirk(en) + -lich. Cognate with Bavarian wirkli and Dutch werkelijk.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "wirklich comes from wirken (to work, to have an effect): what is real is what works – die Wirklichkeit is reality.",
+     "The reaction “Really?” is Wirklich? in German, Αλήθεια; in Greek, Правда? in Russian and Gerçekten mi? in Turkish."
+    ],
+    "pitfalls": [
+     "As an adverb wirklich never changes; as an adjective (real) it takes endings: ein wirkliches Problem.",
+     "Wirklich? alone is a reaction; inside the sentence it emphasises: Das ist wirklich gut."
+    ],
+    "subtleties": [
+     "nicht wirklich (not really) works much like English and softens a no."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:natürlich",
+   "lemma": "natürlich",
+   "pos": "ADV",
+   "senses": [
+    "adv.ofcourse",
+    "adj.natural"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Self-evident, friendly agreement – sometimes a little impatient.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "of course",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.ofcourse"
+     },
+     {
+      "id": "s2",
+      "def": "naturally, in a natural way (also the adjective: natural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.natural"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Natürlich helfe ich dir!",
+      "tr": "Of course I’ll help you!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Kommst du mit? – Natürlich!",
+      "tr": "Are you coming along? – Of course!",
+      "register": "informal",
+      "context": "invitation",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie lacht ganz natürlich.",
+      "tr": "She laughs quite naturally.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "aber natürlich",
+      "tr": "but of course"
+     },
+     {
+      "text": "natürlich nicht",
+      "tr": "of course not"
+     },
+     {
+      "text": "ganz natürlich",
+      "tr": "quite naturally"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "klar / na klar",
+      "register": "colloquial",
+      "nuance": "sure, of course – the casual answer"
+     },
+     {
+      "word": "selbstverständlich",
+      "register": "formal",
+      "nuance": "it goes without saying – service language"
+     },
+     {
+      "word": "sicher",
+      "register": "neutral",
+      "nuance": "sure, certainly"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German natiurlich, from Old High German natūrlīh. Equivalent to Natur + -lich. Compare Dutch natuurlijk, English naturally.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "natürlich = “by nature”: Greek φυσικά (from φύση, nature) means both “naturally” and “of course” – exactly like German; English naturally does too."
+    ],
+    "pitfalls": [
+     "At the start of a sentence it takes the first place and the verb comes second: Natürlich trinke ich Kaffee.",
+     "Said with a sharp tone it can sound like “obviously!” – softer: ja, gern."
+    ],
+    "subtleties": [
+     "Natürlich nicht! = Of course not!"
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:auch",
+   "lemma": "auch",
+   "pos": "ADV",
+   "senses": [
+    "adv.also",
+    "adv.even",
+    "part.sure"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Adding and agreeing – “me too”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "also, too, as well",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.also"
+     },
+     {
+      "id": "s2",
+      "def": "even; -ever (was auch, wer auch)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.even"
+     },
+     {
+      "id": "s3",
+      "def": "modal particle: really, in fact (Hast du auch alles?)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "part.sure"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke auch Tee.",
+      "tr": "I drink tea too.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Bruder ist auch Lehrer.",
+      "tr": "My brother is a teacher too.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich mag Käse. – Ich auch!",
+      "tr": "I like cheese. – Me too!",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du auch alles?",
+      "tr": "Are you sure you have everything?",
+      "register": "colloquial",
+      "context": "leaving the house",
+      "sense": "s3"
+     },
+     {
+      "text": "Auch ein Kind versteht das.",
+      "tr": "Even a child understands that.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ich auch",
+      "tr": "me too"
+     },
+     {
+      "text": "ich auch nicht",
+      "tr": "me neither"
+     },
+     {
+      "text": "nicht nur … sondern auch",
+      "tr": "not only … but also"
+     },
+     {
+      "text": "sowohl … als auch",
+      "tr": "both … and"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ebenfalls",
+      "register": "formal",
+      "nuance": "likewise, also – and the polite reply “(the) same to you”"
+     },
+     {
+      "word": "zudem",
+      "register": "formal",
+      "nuance": "moreover – written"
+     },
+     {
+      "word": "gleichfalls",
+      "register": "formal",
+      "nuance": "likewise – as a reply: Guten Appetit! – Danke, gleichfalls!"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ouch, from Old High German ouh, from Proto-Germanic *auk. Cognate with Dutch ook (“also”), Swedish och (“and”), Danish og (“and”) and archaic English eke (“also”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "auch is a cousin of archaic English eke (“also”) and of Swedish och and Danish og, which mean “and”."
+    ],
+    "pitfalls": [
+     "auch stands before the word it adds: Ich trinke auch Tee (tea as well) – Auch ich trinke Tee (I too).",
+     "Me neither = Ich auch nicht (not *Ich auch kein)."
+    ],
+    "subtleties": [
+     "Unstressed, auch is a particle that checks: Hast du auch alles? (Are you sure you’ve got everything?)"
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:nur",
+   "lemma": "nur",
+   "pos": "ADV",
+   "senses": [
+    "adv.only"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Limiting – just this, nothing more.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "only, just, merely",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.only"
+     },
+     {
+      "id": "s2",
+      "def": "in wishes and urging: if only, just (Wenn ich nur Zeit hätte!)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke nur Wasser.",
+      "tr": "I only drink water.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben nur zwei Kinder.",
+      "tr": "We have only two children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Nur ein bisschen, bitte!",
+      "tr": "Just a little, please!",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Wenn ich nur mehr Zeit hätte!",
+      "tr": "If only I had more time!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nur noch",
+      "tr": "only … left, just"
+     },
+     {
+      "text": "nur ein bisschen",
+      "tr": "just a little"
+     },
+     {
+      "text": "nicht nur … sondern auch",
+      "tr": "not only … but also"
+     },
+     {
+      "text": "Nur so.",
+      "tr": "Just because."
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "bloß",
+      "register": "colloquial",
+      "nuance": "only, merely – spoken"
+     },
+     {
+      "word": "lediglich",
+      "register": "formal",
+      "nuance": "merely – written"
+     },
+     {
+      "word": "erst",
+      "register": "neutral",
+      "nuance": "only (so far) – with time and numbers when more is expected: Er ist erst drei."
+     }
+    ],
+    "etymology": {
+     "text": "From late Middle High German nuor, contracted from older niwer, newære, from Old High German niwāri, ni wāri (“were it not”). Cognate with Yiddish נאָר (nor), Dutch maar.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "nur grew out of ni wāri, “were it not” – the same origin as Dutch maar (“but”)."
+    ],
+    "pitfalls": [
+     "nur vs erst: Es ist erst acht Uhr (only eight – it will get later); Ich habe nur zehn Euro (only ten – that’s all).",
+     "nur stands before what it limits: Nur ich trinke Tee / Ich trinke nur Tee."
+    ],
+    "subtleties": [
+     "Nur so! = Just because / for no special reason."
+    ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
+   }
+  },
+  {
+   "id": "de:doch",
+   "lemma": "doch",
+   "pos": "PART",
+   "senses": [
+    "part.yes.contra",
+    "conj.but",
+    "part.urge"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "more formal or literary (…, doch er kam nicht)"
+    }
+   ],
+   "role": "yes – the answer that contradicts a negative question or statement (Isst du kein Fleisch? – Doch!)",
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A confident contradiction: “Oh yes I do!”",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes (contradicting a negative question or statement)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes.contra"
+     },
+     {
+      "id": "s2",
+      "def": "but, yet, however (conjunction)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.but"
+     },
+     {
+      "id": "s3",
+      "def": "modal particle: after all, do (Komm doch mit!)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "part.urge"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Isst du kein Fleisch? – Doch!",
+      "tr": "Don’t you eat meat? – Yes, I do!",
+      "register": "informal",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Du magst keinen Käse. – Doch, ich mag Käse!",
+      "tr": "You don’t like cheese. – Oh yes, I do like cheese!",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Komm doch mit!",
+      "tr": "Do come along!",
+      "register": "colloquial",
+      "context": "invitation",
+      "sense": "s3"
+     },
+     {
+      "text": "Er wollte kommen, doch er hatte keine Zeit.",
+      "tr": "He wanted to come, but he had no time.",
+      "register": "neutral",
+      "context": "excuses",
+      "sense": "s2"
+     },
+     {
+      "text": "Das Essen war teuer, doch sehr gut.",
+      "tr": "The meal was expensive, but very good.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Doch!",
+      "tr": "Yes (I do / it is)!"
+     },
+     {
+      "text": "ja doch",
+      "tr": "yes, of course (impatient)"
+     },
+     {
+      "text": "doch noch",
+      "tr": "after all, in the end"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ja",
+      "register": "neutral",
+      "nuance": "yes – after a negative question ja is unclear; doch makes the contradiction plain"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German doch, from Old High German doh, from Proto-West Germanic *þauh, from Proto-Germanic *þauh. Cognate to Old English þēah (English though).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "doch is a cousin of English though."
+    ],
+    "pitfalls": [
+     "doch answers only a negative question or statement; to a positive question the answer is ja: Isst du Fleisch? – Ja.",
+     "Answering a negative question with nein agrees with it: Isst du kein Fleisch? – Nein (= No, I don’t)."
+    ],
+    "subtleties": [
+     "French si and Arabic بَلَى (balā) do the same job as doch; English needs a whole sentence (“Yes, I do!”)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

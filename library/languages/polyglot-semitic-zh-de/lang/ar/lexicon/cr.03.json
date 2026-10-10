@@ -1,0 +1,1714 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:khutta",
+   "lemma": "خُطَّة",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.plan"
+   ],
+   "features": {
+    "root": "خ ط ط",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خُطَط",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "خُطَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ḫuṭṭa",
+   "forms": {
+    "N;NOM;SG;INDF": "خُطَّةٌ",
+    "N;NOM;SG;DEF": "الْخُطَّةُ",
+    "N;ACC;SG;INDF": "خُطَّةً",
+    "N;ACC;SG;DEF": "الْخُطَّةَ",
+    "N;GEN;SG;INDF": "خُطَّةٍ",
+    "N;GEN;SG;DEF": "الْخُطَّةِ",
+    "N;NOM;PL;INDF": "خُطَطٌ",
+    "N;NOM;PL;DEF": "الْخُطَطُ",
+    "N;ACC;PL;INDF": "خُطَطًا",
+    "N;ACC;PL;DEF": "الْخُطَطَ",
+    "N;GEN;PL;INDF": "خُطَطٍ",
+    "N;GEN;PL;DEF": "الْخُطَطِ",
+    "N;NOM;DU;INDF": "خُطَّتَانِ",
+    "N;NOM;DU;DEF": "الْخُطَّتَانِ",
+    "N;ACC;DU;INDF": "خُطَّتَيْنِ",
+    "N;ACC;DU;DEF": "الْخُطَّتَيْنِ",
+    "N;GEN;DU;INDF": "خُطَّتَيْنِ",
+    "N;GEN;DU;DEF": "الْخُطَّتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A map on the table, dates in a notebook.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plan",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.plan"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي خُطَّةٌ لِلْعُطْلَةِ.",
+      "tr": "I have a plan for the holiday.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ خُطَّةٌ جَيِّدَةٌ!",
+      "tr": "This is a good plan!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "غَيَّرْنَا الْخُطَّةَ بِسَبَبِ الْمَطَرِ.",
+      "tr": "We changed the plan because of the rain.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَضَعَ خُطَّةً",
+      "tr": "to make (draw up) a plan"
+     },
+     {
+      "text": "خُطَّةُ عَمَلٍ",
+      "tr": "an action plan, a work plan"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَرْنَامَج",
+      "register": "neutral",
+      "nuance": "programme, schedule — a plan of activities"
+     },
+     {
+      "word": "مَشْرُوع",
+      "register": "neutral",
+      "nuance": "project, a planned undertaking"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Root خ ط ط “to draw a line”; Wiktionary: project, projected course, plan; plural خُطَط. خَطّ “line, handwriting” shares the root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "خَطّ, a line (also handwriting and a bus line), is the same root: a plan is a line drawn ahead."
+    ],
+    "pitfalls": [
+     "خِطَّة (ḫiṭṭa, with i) is a plot of land, a district — another word with the same letters."
+    ],
+    "subtleties": [
+     "“To plan” is خَطَّطَ (form II) with لِـ: خَطَّطْنَا لِلرِّحْلَةِ “we planned the trip”."
+    ]
+   }
+  },
+  {
+   "id": "ar:rihla",
+   "lemma": "رِحْلَة",
+   "pos": "NOUN",
+   "senses": [
+    "abstract.trip"
+   ],
+   "features": {
+    "root": "ر ح ل",
+    "pattern": "فِعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "رِحْلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "رِحْلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "riḥla",
+   "forms": {
+    "N;NOM;SG;INDF": "رِحْلَةٌ",
+    "N;NOM;SG;DEF": "الرِّحْلَةُ",
+    "N;ACC;SG;INDF": "رِحْلَةً",
+    "N;ACC;SG;DEF": "الرِّحْلَةَ",
+    "N;GEN;SG;INDF": "رِحْلَةٍ",
+    "N;GEN;SG;DEF": "الرِّحْلَةِ",
+    "N;NOM;PL;INDF": "رِحْلَاتٌ",
+    "N;NOM;PL;DEF": "الرِّحْلَاتُ",
+    "N;ACC;PL;INDF": "رِحْلَاتٍ",
+    "N;ACC;PL;DEF": "الرِّحْلَاتِ",
+    "N;GEN;PL;INDF": "رِحْلَاتٍ",
+    "N;GEN;PL;DEF": "الرِّحْلَاتِ",
+    "N;NOM;DU;INDF": "رِحْلَتَانِ",
+    "N;NOM;DU;DEF": "الرِّحْلَتَانِ",
+    "N;ACC;DU;INDF": "رِحْلَتَيْنِ",
+    "N;ACC;DU;DEF": "الرِّحْلَتَيْنِ",
+    "N;GEN;DU;INDF": "رِحْلَتَيْنِ",
+    "N;GEN;DU;DEF": "الرِّحْلَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A packed car, a long road, photos at the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "trip, journey; also a flight (رِحْلَةٌ جَوِّيَّةٌ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.trip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَانَتِ الرِّحْلَةُ طَوِيلَةً.",
+      "tr": "The trip was long.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "رِحْلَةً سَعِيدَةً!",
+      "tr": "Have a good trip!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s1"
+     },
+     {
+      "text": "ذَهَبْنَا فِي رِحْلَةٍ إِلَى الْجَبَلِ.",
+      "tr": "We went on a trip to the mountains.",
+      "register": "neutral",
+      "context": "excursion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رِحْلَةٌ مَدْرَسِيَّةٌ",
+      "tr": "a school trip"
+     },
+     {
+      "text": "قَامَ بِرِحْلَةٍ",
+      "tr": "to make a trip"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "رِحْلَةً سَعِيدَةً!",
+      "tr": "a happy trip!",
+      "kind": "fixed expression",
+      "meaning": "have a good trip, bon voyage",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "سَفَر",
+      "register": "neutral",
+      "nuance": "travel, travelling — the activity"
+     },
+     {
+      "word": "جَوْلَة",
+      "register": "neutral",
+      "nuance": "a tour, a round (جَوْلَةٌ فِي الْمَدِينَةِ “a tour of the city”)"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Root ر ح ل “to set out, to depart”; Wiktionary: trip, voyage, tour; travel, journey; travelogue; compare رَحَلَ “to depart”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In classical literature a رِحْلَة is also a book of travels — Ibn Baṭṭūṭa’s is simply called “the Riḥla”."
+    ],
+    "pitfalls": [
+     "A sound feminine plural: رِحْلَات, accusative رِحْلَاتٍ with -in (not *رِحْلَاتًا)."
+    ],
+    "subtleties": [
+     "A plane’s flight is a رِحْلَة too: رَقْمُ الرِّحْلَةِ “the flight number”."
+    ]
+   }
+  },
+  {
+   "id": "ar:funduq",
+   "lemma": "فُنْدُق",
+   "pos": "NOUN",
+   "senses": [
+    "place.hotel"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (from Greek); its four letters ف ن د ق behave like a four-letter root in the plural فَنَادِق"
+    },
+    "pattern": "فُعْلُل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "فَنَادِق",
+      "kind": "broken",
+      "pattern": "فَعَالِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فُنْدُقَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "funduq",
+   "forms": {
+    "N;NOM;SG;INDF": "فُنْدُقٌ",
+    "N;NOM;SG;DEF": "الْفُنْدُقُ",
+    "N;ACC;SG;INDF": "فُنْدُقًا",
+    "N;ACC;SG;DEF": "الْفُنْدُقَ",
+    "N;GEN;SG;INDF": "فُنْدُقٍ",
+    "N;GEN;SG;DEF": "الْفُنْدُقِ",
+    "N;NOM;PL;INDF": "فَنَادِقُ",
+    "N;NOM;PL;DEF": "الْفَنَادِقُ",
+    "N;ACC;PL;INDF": "فَنَادِقَ",
+    "N;ACC;PL;DEF": "الْفَنَادِقَ",
+    "N;GEN;PL;INDF": "فَنَادِقَ",
+    "N;GEN;PL;DEF": "الْفَنَادِقِ",
+    "N;NOM;DU;INDF": "فُنْدُقَانِ",
+    "N;NOM;DU;DEF": "الْفُنْدُقَانِ",
+    "N;ACC;DU;INDF": "فُنْدُقَيْنِ",
+    "N;ACC;DU;DEF": "الْفُنْدُقَيْنِ",
+    "N;GEN;DU;INDF": "فُنْدُقَيْنِ",
+    "N;GEN;DU;DEF": "الْفُنْدُقَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A reception desk, a key card, a view from the balcony.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hotel",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.hotel"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَجَزْنَا غُرْفَةً فِي فُنْدُقٍ قَرِيبٍ مِنَ الْبَحْرِ.",
+      "tr": "We booked a room in a hotel near the sea.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "الْفُنْدُقُ غَالٍ جِدًّا.",
+      "tr": "The hotel is very expensive.",
+      "register": "neutral",
+      "context": "prices",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ الْفُنْدُقُ؟",
+      "tr": "Where is the hotel?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فُنْدُقٌ فَخْمٌ",
+      "tr": "a luxury hotel"
+     },
+     {
+      "text": "غُرْفَةٌ فِي الْفُنْدُقِ",
+      "tr": "a room in the hotel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نُزُل",
+      "register": "formal",
+      "nuance": "inn, guesthouse, lodging"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Borrowed from Ancient Greek πανδοκεῖον (pandokeîon, “inn”, lit. “receiving all”) (Wiktionary: inn, hotel).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Italian fondaco (a merchants’ warehouse) and Spanish fonda (an inn) came from this Arabic word."
+    ],
+    "pitfalls": [
+     "The plural فَنَادِقُ is a diptote: no tanwīn and -a in the genitive: فِي فَنَادِقَ كَثِيرَةٍ."
+    ],
+    "subtleties": [
+     "In older North African usage a فُنْدُق was a caravanserai, an inn with a courtyard for merchants and their animals."
+    ]
+   }
+  },
+  {
+   "id": "ar:hajaza",
+   "lemma": "حَجَزَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.book"
+   ],
+   "features": {
+    "root": "ح ج ز",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَحْجِزُ",
+    "masdar": [
+     "حَجْز"
+    ],
+    "participles": [
+     {
+      "form": "حَاجِز",
+      "kind": "active"
+     },
+     {
+      "form": "مَحْجُوز",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "what is booked (حَجَزَ غُرْفَةً، حَجَزَ تَذْكِرَةً)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ḥajaza",
+   "forms": {
+    "V;PST;1;SG": "حَجَزْتُ",
+    "V;PST;2;SG;MASC": "حَجَزْتَ",
+    "V;PST;2;SG;FEM": "حَجَزْتِ",
+    "V;PST;3;SG;MASC": "حَجَزَ",
+    "V;PST;3;SG;FEM": "حَجَزَتْ",
+    "V;PST;1;PL": "حَجَزْنَا",
+    "V;PST;2;PL;MASC": "حَجَزْتُمْ",
+    "V;PST;2;PL;FEM": "حَجَزْتُنَّ",
+    "V;PST;3;PL;MASC": "حَجَزُوا",
+    "V;PST;3;PL;FEM": "حَجَزْنَ",
+    "V;PRS;IND;1;SG": "أَحْجِزُ",
+    "V;PRS;IND;2;SG;MASC": "تَحْجِزُ",
+    "V;PRS;IND;2;SG;FEM": "تَحْجِزِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَحْجِزُ",
+    "V;PRS;IND;3;SG;FEM": "تَحْجِزُ",
+    "V;PRS;IND;1;PL": "نَحْجِزُ",
+    "V;PRS;IND;2;PL;MASC": "تَحْجِزُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَحْجِزْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَحْجِزُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَحْجِزْنَ",
+    "V;SBJV;1;SG": "أَحْجِزَ",
+    "V;SBJV;2;SG;MASC": "تَحْجِزَ",
+    "V;SBJV;3;SG;MASC": "يَحْجِزَ",
+    "V;SBJV;1;PL": "نَحْجِزَ",
+    "V;SBJV;2;PL;MASC": "تَحْجِزُوا",
+    "V;SBJV;3;PL;MASC": "يَحْجِزُوا",
+    "V;SBJV;2;SG;FEM": "تَحْجِزِي",
+    "V;SBJV;3;SG;FEM": "تَحْجِزَ",
+    "V;SBJV;2;PL;FEM": "تَحْجِزْنَ",
+    "V;SBJV;3;PL;FEM": "يَحْجِزْنَ",
+    "V;JUS;1;SG": "أَحْجِزْ",
+    "V;JUS;2;SG;MASC": "تَحْجِزْ",
+    "V;JUS;3;SG;MASC": "يَحْجِزْ",
+    "V;JUS;1;PL": "نَحْجِزْ",
+    "V;JUS;2;PL;MASC": "تَحْجِزُوا",
+    "V;JUS;3;PL;MASC": "يَحْجِزُوا",
+    "V;JUS;2;SG;FEM": "تَحْجِزِي",
+    "V;JUS;3;SG;FEM": "تَحْجِزْ",
+    "V;JUS;2;PL;FEM": "تَحْجِزْنَ",
+    "V;JUS;3;PL;FEM": "يَحْجِزْنَ",
+    "V;IMP;2;SG;MASC": "اِحْجِزْ",
+    "V;IMP;2;PL;MASC": "اِحْجِزُوا",
+    "V;IMP;2;SG;FEM": "اِحْجِزِي",
+    "V;IMP;2;PL;FEM": "اِحْجِزْنَ"
+   },
+   "formsAlt": {
+    "V;PRS;IND;1;SG": [
+     "أَحْجُزُ"
+    ],
+    "V;PRS;IND;2;SG;MASC": [
+     "تَحْجُزُ"
+    ],
+    "V;PRS;IND;3;SG;MASC": [
+     "يَحْجُزُ"
+    ],
+    "V;PRS;IND;1;PL": [
+     "نَحْجُزُ"
+    ],
+    "V;PRS;IND;2;PL;MASC": [
+     "تَحْجُزُونَ"
+    ],
+    "V;PRS;IND;3;PL;MASC": [
+     "يَحْجُزُونَ"
+    ],
+    "V;PRS;IND;2;SG;FEM": [
+     "تَحْجُزِينَ"
+    ],
+    "V;PRS;IND;3;SG;FEM": [
+     "تَحْجُزُ"
+    ],
+    "V;PRS;IND;2;PL;FEM": [
+     "تَحْجُزْنَ"
+    ],
+    "V;PRS;IND;3;PL;FEM": [
+     "يَحْجُزْنَ"
+    ],
+    "V;SBJV;1;SG": [
+     "أَحْجُزَ"
+    ],
+    "V;SBJV;2;SG;MASC": [
+     "تَحْجُزَ"
+    ],
+    "V;SBJV;3;SG;MASC": [
+     "يَحْجُزَ"
+    ],
+    "V;SBJV;1;PL": [
+     "نَحْجُزَ"
+    ],
+    "V;SBJV;2;PL;MASC": [
+     "تَحْجُزُوا"
+    ],
+    "V;SBJV;3;PL;MASC": [
+     "يَحْجُزُوا"
+    ],
+    "V;SBJV;2;SG;FEM": [
+     "تَحْجُزِي"
+    ],
+    "V;SBJV;3;SG;FEM": [
+     "تَحْجُزَ"
+    ],
+    "V;SBJV;2;PL;FEM": [
+     "تَحْجُزْنَ"
+    ],
+    "V;SBJV;3;PL;FEM": [
+     "يَحْجُزْنَ"
+    ],
+    "V;JUS;1;SG": [
+     "أَحْجُزْ"
+    ],
+    "V;JUS;2;SG;MASC": [
+     "تَحْجُزْ"
+    ],
+    "V;JUS;3;SG;MASC": [
+     "يَحْجُزْ"
+    ],
+    "V;JUS;1;PL": [
+     "نَحْجُزْ"
+    ],
+    "V;JUS;2;PL;MASC": [
+     "تَحْجُزُوا"
+    ],
+    "V;JUS;3;PL;MASC": [
+     "يَحْجُزُوا"
+    ],
+    "V;JUS;2;SG;FEM": [
+     "تَحْجُزِي"
+    ],
+    "V;JUS;3;SG;FEM": [
+     "تَحْجُزْ"
+    ],
+    "V;JUS;2;PL;FEM": [
+     "تَحْجُزْنَ"
+    ],
+    "V;JUS;3;PL;FEM": [
+     "يَحْجُزْنَ"
+    ],
+    "V;IMP;2;SG;MASC": [
+     "اُحْجُزْ"
+    ],
+    "V;IMP;2;PL;MASC": [
+     "اُحْجُزُوا"
+    ],
+    "V;IMP;2;SG;FEM": [
+     "اُحْجُزِي"
+    ],
+    "V;IMP;2;PL;FEM": [
+     "اُحْجُزْنَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A confirmation e-mail, a room waiting with your name on it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to book, to reserve (a room, a ticket, a table)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.book"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَجَزْتُ غُرْفَةً لِشَخْصَيْنِ.",
+      "tr": "I booked a room for two people.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "سَأَحْجِزُ تَذْكِرَتَيْنِ لِلْقِطَارِ.",
+      "tr": "I’ll book two tickets for the train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ حَجَزْتُمْ طَاوِلَةً فِي الْمَطْعَمِ؟",
+      "tr": "Have you booked a table at the restaurant?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَجَزَ غُرْفَةً",
+      "tr": "to book a room"
+     },
+     {
+      "text": "حَجَزَ تَذْكِرَةً",
+      "tr": "to book a ticket"
+     },
+     {
+      "text": "حَجَزَ مَقْعَدًا",
+      "tr": "to reserve a seat"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym for booking; اِحْتَجَزَ (form VIII of the same root) means to detain, to hold back.",
+    "antonyms": [
+     {
+      "word": "أَلْغَى",
+      "note": "to cancel (أَلْغَى الْحَجْزَ “he cancelled the booking”)"
+     }
+    ],
+    "etymology": {
+     "text": "Root ح ج ز “to hold back”; Wiktionary: to hold back, to restrain; to block; to detain; to seize; to book, to reserve. Booking is holding something back for someone. Present يَحْجُزُ or يَحْجِزُ, verbal noun حَجْز (also “a booking”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَحْجُوز, the passive participle, is the “Reserved” sign on a table or a seat."
+    ],
+    "pitfalls": [
+     "The same verb means to detain or to seize (حَجَزَتِ الشُّرْطَةُ السَّيَّارَةَ “the police impounded the car”): the object shows which.",
+     "Two present forms are correct: يَحْجِزُ (used in this course) and يَحْجُزُ."
+    ],
+    "subtleties": [
+     "The booking itself is الْحَجْز: عِنْدِي حَجْزٌ بِاسْمِ … “I have a booking under the name …”."
+    ]
+   }
+  },
+  {
+   "id": "ar:jawaz_safar",
+   "lemma": "جَوَاز سَفَر",
+   "pos": "NOUN",
+   "senses": [
+    "obj.passport"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: جَوَاز (ج و ز) + سَفَر (س ف ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure (فَعَال + فَعَل)"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَوَازَات سَفَر",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "the head noun takes the plural: جَوَازَاتُ سَفَرٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَوَازَا سَفَرٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "jawāz safar",
+   "forms": {
+    "N;NOM;SG;INDF": "جَوَازُ سَفَرٍ",
+    "N;NOM;SG;DEF": "جَوَازُ السَّفَرِ",
+    "N;ACC;SG;INDF": "جَوَازَ سَفَرٍ",
+    "N;ACC;SG;DEF": "جَوَازَ السَّفَرِ",
+    "N;GEN;SG;INDF": "جَوَازِ سَفَرٍ",
+    "N;GEN;SG;DEF": "جَوَازِ السَّفَرِ",
+    "N;NOM;PL;INDF": "جَوَازَاتُ سَفَرٍ",
+    "N;NOM;PL;DEF": "جَوَازَاتُ السَّفَرِ",
+    "N;ACC;PL;INDF": "جَوَازَاتِ سَفَرٍ",
+    "N;ACC;PL;DEF": "جَوَازَاتِ السَّفَرِ",
+    "N;GEN;PL;INDF": "جَوَازَاتِ سَفَرٍ",
+    "N;GEN;PL;DEF": "جَوَازَاتِ السَّفَرِ",
+    "N;NOM;DU;INDF": "جَوَازَا سَفَرٍ",
+    "N;NOM;DU;DEF": "جَوَازَا السَّفَرِ",
+    "N;ACC;DU;INDF": "جَوَازَيْ سَفَرٍ",
+    "N;ACC;DU;DEF": "جَوَازَيْ السَّفَرِ",
+    "N;GEN;DU;INDF": "جَوَازَيْ سَفَرٍ",
+    "N;GEN;DU;DEF": "جَوَازَيْ السَّفَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "N;NOM;SG;INDF": "Wiktionary writes the head word جَواز without the fatha on و (jawāz needs it: جَوَاز, as in its own plural جَوَازَات); the letters and the other vowels are the same",
+     "N;NOM;SG;DEF": "Wiktionary writes the head word جَواز without the fatha on و (jawāz needs it: جَوَاز, as in its own plural جَوَازَات); the letters and the other vowels are the same",
+     "N;ACC;SG;INDF": "Wiktionary writes the head word جَواز without the fatha on و (jawāz needs it: جَوَاز, as in its own plural جَوَازَات); the letters and the other vowels are the same",
+     "N;ACC;SG;DEF": "Wiktionary writes the head word جَواز without the fatha on و (jawāz needs it: جَوَاز, as in its own plural جَوَازَات); the letters and the other vowels are the same",
+     "N;GEN;SG;INDF": "Wiktionary writes the head word جَواز without the fatha on و (jawāz needs it: جَوَاز, as in its own plural جَوَازَات); the letters and the other vowels are the same",
+     "N;GEN;SG;DEF": "Wiktionary writes the head word جَواز without the fatha on و (jawāz needs it: جَوَاز, as in its own plural جَوَازَات); the letters and the other vowels are the same"
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A stamp at the border, a photo you do not like.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "passport (lit. “permit of travel”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.passport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَا تَنْسَ جَوَازَ السَّفَرِ!",
+      "tr": "Don’t forget the passport!",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "جَوَازُ السَّفَرِ فِي الْحَقِيبَةِ.",
+      "tr": "The passport is in the bag.",
+      "register": "neutral",
+      "context": "packing",
+      "sense": "s1"
+     },
+     {
+      "text": "طَلَبَ الْمُوَظَّفُ جَوَازَ السَّفَرِ فِي الْمَطَارِ.",
+      "tr": "The officer asked for the passport at the airport.",
+      "register": "neutral",
+      "context": "airport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جَوَازُ سَفَرٍ جَدِيدٌ",
+      "tr": "a new passport"
+     },
+     {
+      "text": "جَدَّدَ جَوَازَ السَّفَرِ",
+      "tr": "to renew the passport"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جَوَاز",
+      "register": "neutral",
+      "nuance": "passport — the short form in speech: أَيْنَ جَوَازُكَ؟ “where is your passport?”"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From جَوَاز (permission, licence; passage, transit) + سَفَر (journey, travel) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "جَوَاز on its own is “passage” and, in law, “permissibility”: the passport is the permission to pass."
+    ],
+    "pitfalls": [
+     "A construct: the article goes on the second word only: جَوَازُ السَّفَرِ, never *الْجَوَازُ السَّفَرِ.",
+     "“My passport” puts the suffix on سَفَر: جَوَازُ سَفَرِي — or, shorter, جَوَازِي."
+    ],
+    "subtleties": [
+     "In the plural only the first word changes: جَوَازَاتُ السَّفَرِ “the passports”."
+    ]
+   }
+  },
+  {
+   "id": "ar:haqibat_safar",
+   "lemma": "حَقِيبَة سَفَر",
+   "pos": "NOUN",
+   "senses": [
+    "obj.suitcase"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: حَقِيبَة (ح ق ب) + سَفَر (س ف ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure (فَعِيلَة + فَعَل)"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَقَائِب سَفَر",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "note": "the head noun takes the plural: حَقَائِبُ سَفَرٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "حَقِيبَتَا سَفَرٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ḥaqībat safar",
+   "forms": {
+    "N;NOM;SG;INDF": "حَقِيبَةُ سَفَرٍ",
+    "N;NOM;SG;DEF": "حَقِيبَةُ السَّفَرِ",
+    "N;ACC;SG;INDF": "حَقِيبَةَ سَفَرٍ",
+    "N;ACC;SG;DEF": "حَقِيبَةَ السَّفَرِ",
+    "N;GEN;SG;INDF": "حَقِيبَةِ سَفَرٍ",
+    "N;GEN;SG;DEF": "حَقِيبَةِ السَّفَرِ",
+    "N;NOM;PL;INDF": "حَقَائِبُ سَفَرٍ",
+    "N;NOM;PL;DEF": "حَقَائِبُ السَّفَرِ",
+    "N;ACC;PL;INDF": "حَقَائِبَ سَفَرٍ",
+    "N;ACC;PL;DEF": "حَقَائِبَ السَّفَرِ",
+    "N;GEN;PL;INDF": "حَقَائِبِ سَفَرٍ",
+    "N;GEN;PL;DEF": "حَقَائِبِ السَّفَرِ",
+    "N;NOM;DU;INDF": "حَقِيبَتَا سَفَرٍ",
+    "N;NOM;DU;DEF": "حَقِيبَتَا السَّفَرِ",
+    "N;ACC;DU;INDF": "حَقِيبَتَيْ سَفَرٍ",
+    "N;ACC;DU;DEF": "حَقِيبَتَيْ السَّفَرِ",
+    "N;GEN;DU;INDF": "حَقِيبَتَيْ سَفَرٍ",
+    "N;GEN;DU;DEF": "حَقِيبَتَيْ السَّفَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wheels on the pavement, a zip that will not close.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "suitcase (lit. “bag of travel”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.suitcase"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَقِيبَةُ السَّفَرِ ثَقِيلَةٌ جِدًّا.",
+      "tr": "The suitcase is very heavy.",
+      "register": "neutral",
+      "context": "packing",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ حَقِيبَةَ سَفَرٍ جَدِيدَةً.",
+      "tr": "I bought a new suitcase.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "وَضَعْنَا حَقَائِبَ السَّفَرِ فِي السَّيَّارَةِ.",
+      "tr": "We put the suitcases in the car.",
+      "register": "neutral",
+      "context": "departure",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَزَمَ حَقِيبَةَ السَّفَرِ",
+      "tr": "to pack the suitcase"
+     },
+     {
+      "text": "حَقِيبَةُ سَفَرٍ كَبِيرَةٌ",
+      "tr": "a big suitcase"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَقِيبَة",
+      "register": "neutral",
+      "nuance": "bag — on its own also a suitcase when the talk is of travel"
+     },
+     {
+      "word": "شَنْطَة",
+      "register": "colloquial",
+      "nuance": "bag, suitcase (from Turkish çanta) — everyday speech"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "حَقِيبَة “bag” + سَفَر “travel”; Wiktionary: portmanteau, suitcase, travel bag; plural حَقَائِب سَفَر.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "حَقِيبَة is also a minister’s portfolio: وَزِيرٌ بِلَا حَقِيبَةٍ “a minister without portfolio”."
+    ],
+    "pitfalls": [
+     "A construct: حَقِيبَةُ السَّفَرِ “the suitcase” — the article goes on the second word; the ة of the first word is read t: ḥaqībatu s-safar."
+    ],
+    "subtleties": [
+     "An adjective agrees with the first word and comes after the whole phrase: حَقِيبَةُ سَفَرٍ كَبِيرَةٌ “a big suitcase”."
+    ]
+   }
+  },
+  {
+   "id": "ar:zara",
+   "lemma": "زَارَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.visit"
+   ],
+   "features": {
+    "root": "ز و ر",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": "يَزُورُ",
+    "masdar": [
+     "زِيَارَة"
+    ],
+    "participles": [
+     {
+      "form": "زَائِر",
+      "kind": "active"
+     },
+     {
+      "form": "مَزُور",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the person or the place visited (زَارَ صَدِيقَهُ، زَارَ الْمَتْحَفَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.visit",
+     "axis": "who or what is visited",
+     "value": "anyone and any place: friends, family, a city, a museum"
+    }
+   ],
+   "translit": "zāra",
+   "forms": {
+    "V;PST;1;SG": "زُرْتُ",
+    "V;PST;2;SG;MASC": "زُرْتَ",
+    "V;PST;2;SG;FEM": "زُرْتِ",
+    "V;PST;3;SG;MASC": "زَارَ",
+    "V;PST;3;SG;FEM": "زَارَتْ",
+    "V;PST;1;PL": "زُرْنَا",
+    "V;PST;2;PL;MASC": "زُرْتُمْ",
+    "V;PST;2;PL;FEM": "زُرْتُنَّ",
+    "V;PST;3;PL;MASC": "زَارُوا",
+    "V;PST;3;PL;FEM": "زُرْنَ",
+    "V;PRS;IND;1;SG": "أَزُورُ",
+    "V;PRS;IND;2;SG;MASC": "تَزُورُ",
+    "V;PRS;IND;2;SG;FEM": "تَزُورِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَزُورُ",
+    "V;PRS;IND;3;SG;FEM": "تَزُورُ",
+    "V;PRS;IND;1;PL": "نَزُورُ",
+    "V;PRS;IND;2;PL;MASC": "تَزُورُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَزُرْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَزُورُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَزُرْنَ",
+    "V;SBJV;1;SG": "أَزُورَ",
+    "V;SBJV;2;SG;MASC": "تَزُورَ",
+    "V;SBJV;3;SG;MASC": "يَزُورَ",
+    "V;SBJV;1;PL": "نَزُورَ",
+    "V;SBJV;2;PL;MASC": "تَزُورُوا",
+    "V;SBJV;3;PL;MASC": "يَزُورُوا",
+    "V;SBJV;2;SG;FEM": "تَزُورِي",
+    "V;SBJV;3;SG;FEM": "تَزُورَ",
+    "V;SBJV;2;PL;FEM": "تَزُرْنَ",
+    "V;SBJV;3;PL;FEM": "يَزُرْنَ",
+    "V;JUS;1;SG": "أَزُرْ",
+    "V;JUS;2;SG;MASC": "تَزُرْ",
+    "V;JUS;3;SG;MASC": "يَزُرْ",
+    "V;JUS;1;PL": "نَزُرْ",
+    "V;JUS;2;PL;MASC": "تَزُورُوا",
+    "V;JUS;3;PL;MASC": "يَزُورُوا",
+    "V;JUS;2;SG;FEM": "تَزُورِي",
+    "V;JUS;3;SG;FEM": "تَزُرْ",
+    "V;JUS;2;PL;FEM": "تَزُرْنَ",
+    "V;JUS;3;PL;FEM": "يَزُرْنَ",
+    "V;IMP;2;SG;MASC": "زُرْ",
+    "V;IMP;2;PL;MASC": "زُورُوا",
+    "V;IMP;2;SG;FEM": "زُورِي",
+    "V;IMP;2;PL;FEM": "زُرْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Coffee and sweets at a friend’s house; a museum on a rainy day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to visit (a person, a place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.visit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "زُرْتُ جَدَّتِي فِي الْقَرْيَةِ.",
+      "tr": "I visited my grandmother in the village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "سَنَزُورُ الْمَتْحَفَ غَدًا.",
+      "tr": "We will visit the museum tomorrow.",
+      "register": "neutral",
+      "context": "sightseeing",
+      "sense": "s1"
+     },
+     {
+      "text": "يَزُورُ السُّيَّاحُ الْأَهْرَامَ كُلَّ يَوْمٍ.",
+      "tr": "Tourists visit the pyramids every day.",
+      "register": "neutral",
+      "context": "tourism",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "زَارَ صَدِيقًا",
+      "tr": "to visit a friend"
+     },
+     {
+      "text": "زَارَ مَدِينَةً",
+      "tr": "to visit a city"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "زُرْ غِبًّا تَزْدَدْ حُبًّا",
+      "tr": "visit now and then and you will be loved more",
+      "kind": "saying",
+      "meaning": "do not visit too often",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "عَادَ",
+      "register": "formal",
+      "nuance": "to visit a sick person (عَادَ الْمَرِيضَ)"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "Root ز و ر; Wiktionary: to incline towards, to repair to; to visit. زِيَارَة “visit” and زَائِر “visitor” share the root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A زِيَارَة is also a pilgrimage to a holy place or a shrine."
+    ],
+    "pitfalls": [
+     "A hollow verb: زُرْتُ (I visited) with u, زَارَ (he visited), present يَزُورُ.",
+     "No preposition: زُرْتُ صَدِيقِي “I visited my friend” (not *زُرْتُ إِلَى …)."
+    ],
+    "subtleties": [
+     "زَائِر is a visitor; a guest who is received and stays is ضَيْف."
+    ]
+   }
+  },
+  {
+   "id": "ar:saih",
+   "lemma": "سَائِح",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "person.tourist"
+   ],
+   "features": {
+    "root": "س ي ح",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "سُيَّاح",
+      "kind": "broken",
+      "pattern": "فُعَّال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "سَائِحُون",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَائِحَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "sāʾiḥ",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "سَائِحٌ",
+    "N;NOM;SG;MASC;DEF": "السَّائِحُ",
+    "N;NOM;SG;FEM;INDF": "سَائِحَةٌ",
+    "N;NOM;SG;FEM;DEF": "السَّائِحَةُ",
+    "N;NOM;PL;MASC;INDF": "سُيَّاحٌ",
+    "N;NOM;PL;MASC;DEF": "السُّيَّاحُ",
+    "N;NOM;PL;FEM;INDF": "سَائِحَاتٌ",
+    "N;NOM;PL;FEM;DEF": "السَّائِحَاتُ",
+    "N;ACC;SG;MASC;INDF": "سَائِحًا",
+    "N;ACC;SG;MASC;DEF": "السَّائِحَ",
+    "N;ACC;SG;FEM;INDF": "سَائِحَةً",
+    "N;ACC;SG;FEM;DEF": "السَّائِحَةَ",
+    "N;ACC;PL;MASC;INDF": "سُيَّاحًا",
+    "N;ACC;PL;MASC;DEF": "السُّيَّاحَ",
+    "N;ACC;PL;FEM;INDF": "سَائِحَاتٍ",
+    "N;ACC;PL;FEM;DEF": "السَّائِحَاتِ",
+    "N;GEN;SG;MASC;INDF": "سَائِحٍ",
+    "N;GEN;SG;MASC;DEF": "السَّائِحِ",
+    "N;GEN;SG;FEM;INDF": "سَائِحَةٍ",
+    "N;GEN;SG;FEM;DEF": "السَّائِحَةِ",
+    "N;GEN;PL;MASC;INDF": "سُيَّاحٍ",
+    "N;GEN;PL;MASC;DEF": "السُّيَّاحِ",
+    "N;GEN;PL;FEM;INDF": "سَائِحَاتٍ",
+    "N;GEN;PL;FEM;DEF": "السَّائِحَاتِ",
+    "N;NOM;DU;MASC;INDF": "سَائِحَانِ",
+    "N;NOM;DU;MASC;DEF": "السَّائِحَانِ",
+    "N;NOM;DU;FEM;INDF": "سَائِحَتَانِ",
+    "N;NOM;DU;FEM;DEF": "السَّائِحَتَانِ",
+    "N;ACC;DU;MASC;INDF": "سَائِحَيْنِ",
+    "N;ACC;DU;MASC;DEF": "السَّائِحَيْنِ",
+    "N;ACC;DU;FEM;INDF": "سَائِحَتَيْنِ",
+    "N;ACC;DU;FEM;DEF": "السَّائِحَتَيْنِ",
+    "N;GEN;DU;MASC;INDF": "سَائِحَيْنِ",
+    "N;GEN;DU;MASC;DEF": "السَّائِحَيْنِ",
+    "N;GEN;DU;FEM;INDF": "سَائِحَتَيْنِ",
+    "N;GEN;DU;FEM;DEF": "السَّائِحَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A camera, a map, comfortable shoes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tourist (feminine سَائِحَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.tourist"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الصَّيْفِ يَزُورُ السُّيَّاحُ الْمَدِينَةَ.",
+      "tr": "In summer tourists visit the city.",
+      "register": "neutral",
+      "context": "tourism",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا سَائِحٌ، لَا أَعْرِفُ الْمَدِينَةَ.",
+      "tr": "I’m a tourist, I don’t know the city.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "سَأَلَتْ سَائِحَةٌ عَنِ الْمَتْحَفِ.",
+      "tr": "A (female) tourist asked about the museum.",
+      "register": "neutral",
+      "context": "sightseeing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَائِحٌ أَجْنَبِيٌّ",
+      "tr": "a foreign tourist"
+     },
+     {
+      "text": "مَجْمُوعَةٌ مِنَ السُّيَّاحِ",
+      "tr": "a group of tourists"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَائِر",
+      "register": "neutral",
+      "nuance": "visitor — anyone who visits"
+     },
+     {
+      "word": "مُسَافِر",
+      "register": "neutral",
+      "nuance": "traveller, passenger"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "The active participle of سَاحَ (sāḥa, “to travel, to wander”), root س ي ح; Wiktionary: tourist; traveller, wanderer; visitor; hermit; wandering dervish.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Before modern tourism a سَائِح was a wandering ascetic: Wiktionary still lists “hermit” and “wandering dervish”."
+    ],
+    "pitfalls": [
+     "Two plurals: سُيَّاح (the more common) and سَائِحُونَ.",
+     "The hamza sits on a yāʾ seat: سَائِح (sāʾiḥ)."
+    ],
+    "subtleties": [
+     "The activity is سِيَاحَة “tourism”: وِزَارَةُ السِّيَاحَةِ “the ministry of tourism”."
+    ]
+   }
+  },
+  {
+   "id": "ar:murshid",
+   "lemma": "مُرْشِد",
+   "pos": "NOUN",
+   "class": "person",
+   "senses": [
+    "person.guide"
+   ],
+   "features": {
+    "root": "ر ش د",
+    "pattern": "مُفْعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُرْشِدُون",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُرْشِدَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "muršid",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "مُرْشِدٌ",
+    "N;NOM;SG;MASC;DEF": "الْمُرْشِدُ",
+    "N;NOM;SG;FEM;INDF": "مُرْشِدَةٌ",
+    "N;NOM;SG;FEM;DEF": "الْمُرْشِدَةُ",
+    "N;NOM;PL;MASC;INDF": "مُرْشِدُونَ",
+    "N;NOM;PL;MASC;DEF": "الْمُرْشِدُونَ",
+    "N;NOM;PL;FEM;INDF": "مُرْشِدَاتٌ",
+    "N;NOM;PL;FEM;DEF": "الْمُرْشِدَاتُ",
+    "N;ACC;SG;MASC;INDF": "مُرْشِدًا",
+    "N;ACC;SG;MASC;DEF": "الْمُرْشِدَ",
+    "N;ACC;SG;FEM;INDF": "مُرْشِدَةً",
+    "N;ACC;SG;FEM;DEF": "الْمُرْشِدَةَ",
+    "N;ACC;PL;MASC;INDF": "مُرْشِدِينَ",
+    "N;ACC;PL;MASC;DEF": "الْمُرْشِدِينَ",
+    "N;ACC;PL;FEM;INDF": "مُرْشِدَاتٍ",
+    "N;ACC;PL;FEM;DEF": "الْمُرْشِدَاتِ",
+    "N;GEN;SG;MASC;INDF": "مُرْشِدٍ",
+    "N;GEN;SG;MASC;DEF": "الْمُرْشِدِ",
+    "N;GEN;SG;FEM;INDF": "مُرْشِدَةٍ",
+    "N;GEN;SG;FEM;DEF": "الْمُرْشِدَةِ",
+    "N;GEN;PL;MASC;INDF": "مُرْشِدِينَ",
+    "N;GEN;PL;MASC;DEF": "الْمُرْشِدِينَ",
+    "N;GEN;PL;FEM;INDF": "مُرْشِدَاتٍ",
+    "N;GEN;PL;FEM;DEF": "الْمُرْشِدَاتِ",
+    "N;NOM;DU;MASC;INDF": "مُرْشِدَانِ",
+    "N;NOM;DU;MASC;DEF": "الْمُرْشِدَانِ",
+    "N;NOM;DU;FEM;INDF": "مُرْشِدَتَانِ",
+    "N;NOM;DU;FEM;DEF": "الْمُرْشِدَتَانِ",
+    "N;ACC;DU;MASC;INDF": "مُرْشِدَيْنِ",
+    "N;ACC;DU;MASC;DEF": "الْمُرْشِدَيْنِ",
+    "N;ACC;DU;FEM;INDF": "مُرْشِدَتَيْنِ",
+    "N;ACC;DU;FEM;DEF": "الْمُرْشِدَتَيْنِ",
+    "N;GEN;DU;MASC;INDF": "مُرْشِدَيْنِ",
+    "N;GEN;DU;MASC;DEF": "الْمُرْشِدَيْنِ",
+    "N;GEN;DU;FEM;INDF": "مُرْشِدَتَيْنِ",
+    "N;GEN;DU;FEM;DEF": "الْمُرْشِدَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A raised umbrella in a crowd, stories about old stones.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "guide (a person who guides; a tour guide is مُرْشِدٌ سِيَاحِيٌّ; feminine مُرْشِدَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.guide"
+     }
+    ],
+    "examples": [
+     {
+      "text": "شَرَحَ لَنَا الْمُرْشِدُ تَارِيخَ الْمَدِينَةِ.",
+      "tr": "The guide explained the history of the city to us.",
+      "register": "neutral",
+      "context": "sightseeing",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَتِ الْمُرْشِدَةُ لَطِيفَةً جِدًّا.",
+      "tr": "The (female) guide was very kind.",
+      "register": "neutral",
+      "context": "tour",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْتَاجُ إِلَى مُرْشِدٍ فِي الصَّحْرَاءِ.",
+      "tr": "We need a guide in the desert.",
+      "register": "neutral",
+      "context": "desert trip",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُرْشِدٌ سِيَاحِيٌّ",
+      "tr": "a tour guide"
+     },
+     {
+      "text": "مُرْشِدُ الرِّحْلَةِ",
+      "tr": "the guide of the trip"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دَلِيل",
+      "register": "neutral",
+      "nuance": "guide — a person who shows the way, and also a guidebook"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "The active participle of أَرْشَدَ (ʾaršada, “to guide”), root ر ش د “right guidance”; Wiktionary: guide (someone who guides).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives رُشْد “maturity, right guidance” and the name رَشِيد (Rashid), as in Hārūn ar-Rašīd."
+    ],
+    "pitfalls": [
+     "A sound plural: مُرْشِدُونَ, accusative and genitive مُرْشِدِينَ."
+    ],
+    "subtleties": [
+     "In schools and religion a مُرْشِد is also an adviser or a spiritual guide (مُرْشِدٌ نَفْسِيٌّ “a counsellor”)."
+    ]
+   }
+  },
+  {
+   "id": "ar:alusbua_alqadim",
+   "lemma": "الْأُسْبُوعَ الْقَادِمَ",
+   "pos": "ADV",
+   "senses": [
+    "time.nextweek"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: أُسْبُوع (س ب ع) + قَادِم (ق د م)"
+    },
+    "derivedFrom": "الْأُسْبُوع (the week) + الْقَادِم (coming, next), in the accusative of time",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "al-ʾusbūʿa l-qādima",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A page of the diary still empty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next week",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextweek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُسَافِرُ الْأُسْبُوعَ الْقَادِمَ.",
+      "tr": "I’m travelling next week.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "سَنَزُورُ جَدَّتِي الْأُسْبُوعَ الْقَادِمَ.",
+      "tr": "We will visit my grandmother next week.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "يَبْدَأُ الدَّرْسُ الْجَدِيدُ الْأُسْبُوعَ الْقَادِمَ.",
+      "tr": "The new lesson starts next week.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْأُسْبُوعِ الْقَادِمِ",
+      "tr": "in the coming week (with فِي: genitive)"
+     },
+     {
+      "text": "حَتَّى الْأُسْبُوعِ الْقَادِمِ",
+      "tr": "until next week"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "الْأُسْبُوعَ الْمُقْبِلَ",
+      "register": "formal",
+      "nuance": "next week — news and formal style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "الْأُسْبُوعَ الْمَاضِيَ",
+      "note": "last week"
+     }
+    ],
+    "etymology": {
+     "text": "A phrase: أُسْبُوع “week” (root س ب ع “seven”) + قَادِم “coming”, the active participle of قَدِمَ “to arrive”; Wiktionary gives قَادِم the sense “next (year, month, etc.)”. The accusative ending -a makes the phrase an adverb of time.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أُسْبُوع comes from the root of سَبْعَة “seven”: a “seven” of days."
+    ],
+    "pitfalls": [
+     "The adjective follows and agrees: الْأُسْبُوعَ الْقَادِمَ (week is masculine) but السَّنَةَ الْقَادِمَةَ (year is feminine).",
+     "Without فِي both words end in -a; with فِي both end in -i: فِي الْأُسْبُوعِ الْقَادِمِ."
+    ],
+    "subtleties": [
+     "The verb need not be future: أُسَافِرُ الْأُسْبُوعَ الْقَادِمَ “I’m travelling next week” — the present covers plans."
+    ]
+   }
+  },
+  {
+   "id": "ar:assana_alqadima",
+   "lemma": "السَّنَةَ الْقَادِمَةَ",
+   "pos": "ADV",
+   "senses": [
+    "time.nextyear"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: سَنَة (س ن و / س ن ه) + قَادِم (ق د م)"
+    },
+    "derivedFrom": "السَّنَة (the year) + الْقَادِمَة (coming, next; feminine), in the accusative of time",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "as-sanata l-qādimata",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "New plans, a new calendar.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next year",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.nextyear"
+     }
+    ],
+    "examples": [
+     {
+      "text": "سَأَدْرُسُ فِي الْجَامِعَةِ السَّنَةَ الْقَادِمَةَ.",
+      "tr": "I will study at university next year.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "تَبْدَأُ أُخْتِي الْمَدْرَسَةَ السَّنَةَ الْقَادِمَةَ.",
+      "tr": "My sister starts school next year.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّنَةَ الْقَادِمَةَ نُسَافِرُ إِلَى الْمَغْرِبِ.",
+      "tr": "Next year we are travelling to Morocco.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي السَّنَةِ الْقَادِمَةِ",
+      "tr": "in the coming year (with فِي: genitive)"
+     },
+     {
+      "text": "حَتَّى السَّنَةِ الْقَادِمَةِ",
+      "tr": "until next year"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "الْعَامَ الْقَادِمَ",
+      "register": "neutral",
+      "nuance": "next year — with عَام “year”"
+     },
+     {
+      "word": "الْعَامَ الْمُقْبِلَ",
+      "register": "formal",
+      "nuance": "next year — news and formal style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "السَّنَةَ الْمَاضِيَةَ",
+      "note": "last year"
+     }
+    ],
+    "etymology": {
+     "text": "A phrase: سَنَة “year” + قَادِمَة, the feminine of قَادِم “coming, next (year, month, etc.)” (Wiktionary), in the accusative of time.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic has two everyday words for “year”, سَنَة and عَام; both make “next year”: السَّنَةَ الْقَادِمَةَ, الْعَامَ الْقَادِمَ."
+    ],
+    "pitfalls": [
+     "سَنَة is feminine, so the adjective is feminine too: السَّنَةَ الْقَادِمَةَ (with عَام it is masculine: الْعَامَ الْقَادِمَ)."
+    ],
+    "subtleties": [
+     "With فِي both words take -i: فِي السَّنَةِ الْقَادِمَةِ; without it, the accusative alone means “next year”."
+    ]
+   }
+  },
+  {
+   "id": "ar:sa",
+   "lemma": "سَ",
+   "pos": "PART",
+   "senses": [],
+   "translit": "sa-",
+   "prefix": true,
+   "role": "Future prefix: written joined to a present verb, it makes it future: سَأَذْهَبُ “I will go”, سَيُسَافِرُ “he will travel”, سَنَزُورُ “we will visit”. The short form of سَوْفَ; never before a past verb or a negation.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   }
+  },
+  {
+   "id": "ar:sawfa",
+   "lemma": "سَوْفَ",
+   "pos": "PART",
+   "senses": [],
+   "translit": "sawfa",
+   "prefix": false,
+   "role": "Future particle: a separate word before a present verb: سَوْفَ أَذْهَبُ “I will go”. Same meaning as the prefix سَـ; it often sounds more distant in time or more emphatic. Negated with لَنْ, not with سَوْفَ لَا in neutral style.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   }
+  },
+  {
+   "id": "ar:lan",
+   "lemma": "لَنْ",
+   "pos": "PART",
+   "senses": [],
+   "translit": "lan",
+   "prefix": false,
+   "role": "Negates the future: لَنْ + the subjunctive (the present with -a): لَنْ أَذْهَبَ “I will not go”, لَنْ نَنْسَى “we will not forget”. It replaces سَـ / سَوْفَ: never *لَا سَأَذْهَبُ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "pos": "Wiktionary files لَنْ as an adverb; it is the negative particle of the future (UD: PART), like لَمْ, which Wiktionary files as a particle."
+    }
+   }
+  }
+ ]
+}

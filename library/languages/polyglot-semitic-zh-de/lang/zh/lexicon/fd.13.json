@@ -1,0 +1,5115 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:qu",
+   "lemma": "去",
+   "trad": "去",
+   "pinyin": "qù",
+   "pos": "VERB",
+   "senses": [
+    "verb.go",
+    "adj.previous",
+    "verb.remove"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.previous",
+     "axis": "construction",
+     "value": "only in 去年 ‘last year’"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Away from here, towards a goal — the verb of every trip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go (to a place): 去学校",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.go"
+     },
+     {
+      "id": "s2",
+      "def": "to go and do (before or after another verb): 去买 / 买…去",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "(after a verb) away from the speaker: 进去 ‘go in’, 出去 ‘go out’, 回去 ‘go back’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s4",
+      "def": "(literary) to leave, to remove; past, last (去年 ‘last year’)",
+      "register": [
+       "literary"
+      ],
+      "concept": "adj.previous"
+     },
+     {
+      "id": "s5",
+      "def": "to remove, to get rid of (去皮 to peel, 去掉 to take out)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.remove"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我去学校。",
+      "py": "Wǒ qù xuéxiào.",
+      "tr": "I’m going to school.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "你去哪里？",
+      "py": "Nǐ qù nǎli?",
+      "tr": "Where are you going?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "我们去超市买水果吧。",
+      "py": "Wǒmen qù chāoshì mǎi shuǐguǒ ba.",
+      "tr": "Let’s go to the supermarket to buy fruit.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     },
+     {
+      "text": "外面很冷，别出去。",
+      "py": "Wàimian hěn lěng, bié chūqu.",
+      "tr": "It’s cold outside — don’t go out.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s3"
+     },
+     {
+      "text": "去年我在北京。",
+      "py": "Qùnián wǒ zài Běijīng.",
+      "tr": "Last year I was in Beijing.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s4"
+     },
+     {
+      "text": "土豆要先去皮。",
+      "py": "Tǔdòu yào xiān qù pí.",
+      "tr": "The potatoes have to be peeled first.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s5"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去学校",
+      "tr": "to go to school"
+     },
+     {
+      "text": "去哪里",
+      "tr": "where to?"
+     },
+     {
+      "text": "去买东西",
+      "tr": "to go shopping"
+     },
+     {
+      "text": "回去",
+      "tr": "to go back"
+     },
+     {
+      "text": "出去",
+      "tr": "to go out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "何去何从",
+      "tr": "where to go, what to follow",
+      "kind": "idiom",
+      "meaning": "which way to choose (at a crossroads in life)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "走",
+      "register": "neutral",
+      "nuance": "zǒu: to leave, to set off (我们走吧 ‘let’s go’) — leaving here, not heading for a goal"
+     },
+     {
+      "word": "到…去",
+      "register": "neutral",
+      "nuance": "dào … qù: the same as 去 + place, a little more emphatic: 到北京去"
+     },
+     {
+      "word": "前往",
+      "register": "formal",
+      "nuance": "qiánwǎng: to proceed to (announcements, news): 前往北京的旅客"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 大 ‘man’ + 口 ‘mouth, opening’ (interpretations differ). Its oldest meaning is ‘to leave, to depart from’; ‘to go to’ developed from it.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "去年 ‘the year that has gone’ is ‘last year’: 去 keeps its old meaning ‘to leave’ there.",
+     "去声 ‘the departing tone’ is the traditional name of the 4th tone — and 去 qù itself is said in the 4th tone."
+    ],
+    "pitfalls": [
+     "去 takes the place directly: 去学校 ‘go to school’ — no word for ‘to’ (*去到学校 is not needed, *去在学校 is wrong).",
+     "去 is movement away from where you (or the listener) are; towards the speaker it is 来: 你来我家吧 ‘come to my place’."
+    ],
+    "subtleties": [
+     "‘Go and do’ has two orders: 去超市买牛奶 and 买牛奶去 — the first is the everyday one.",
+     "After another verb 去 shows the direction away: 进去 ‘go in (there)’, 出去 ‘go out’, 回去 ‘go back’ — the 去 is then often toneless."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:lai",
+   "lemma": "来",
+   "trad": "來",
+   "pinyin": "lái",
+   "pos": "VERB",
+   "senses": [
+    "verb.come",
+    "verb.do",
+    "prep.for.time"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Towards me, towards here — guests arriving, the bus coming round the corner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come (towards the speaker or the listener)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.come"
+     },
+     {
+      "id": "s2",
+      "def": "(after a verb) towards the speaker: 进来 ‘come in’, 回来 ‘come back’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "(colloquial) to do, to have, to take — a stand-in verb: 来一杯咖啡 ‘a coffee, please’",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.do"
+     },
+     {
+      "id": "s4",
+      "def": "(after a time) since, for the past …: 三年来 ‘for three years now’",
+      "register": [
+       "formal"
+      ],
+      "concept": "prep.for.time"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你来我家吧！",
+      "py": "Nǐ lái wǒ jiā ba!",
+      "tr": "Come to my place!",
+      "register": "neutral",
+      "context": "invitation",
+      "sense": "s1"
+     },
+     {
+      "text": "他从北京来。",
+      "py": "Tā cóng Běijīng lái.",
+      "tr": "He comes from Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "请进来！",
+      "py": "Qǐng jìnlai!",
+      "tr": "Please come in!",
+      "register": "neutral",
+      "context": "at the door",
+      "sense": "s2"
+     },
+     {
+      "text": "来一杯咖啡！",
+      "py": "Lái yì bēi kāfēi!",
+      "tr": "A coffee, please!",
+      "register": "colloquial",
+      "context": "café",
+      "sense": "s3"
+     },
+     {
+      "text": "三年来，他一直在北京工作。",
+      "py": "Sān nián lái, tā yìzhí zài Běijīng gōngzuò.",
+      "tr": "For the past three years he has been working in Beijing.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "来我家",
+      "tr": "to come to my place"
+     },
+     {
+      "text": "从…来",
+      "tr": "to come from …"
+     },
+     {
+      "text": "进来",
+      "tr": "to come in"
+     },
+     {
+      "text": "回来",
+      "tr": "to come back"
+     },
+     {
+      "text": "来一杯",
+      "tr": "a glass / cup of … please"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "来日方长",
+      "tr": "the coming days are long",
+      "kind": "idiom",
+      "meaning": "there will be plenty of time (no hurry; we will meet again)",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "到",
+      "register": "neutral",
+      "nuance": "dào: to arrive — the end of the trip: 他到了 ‘he’s here’"
+     },
+     {
+      "word": "过来",
+      "register": "colloquial",
+      "nuance": "guòlai: to come over (here): 你过来！"
+     },
+     {
+      "word": "前来",
+      "register": "formal",
+      "nuance": "qiánlái: to come (to an event) — written"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of wheat (the original of 麦 ‘wheat’): ear, leaves and roots. The character was borrowed for the word ‘to come’ already in the oracle bones.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "来 was first a drawing of wheat; ‘wheat’ later got its own character 麦, and 来 kept ‘come’ — a sound loan more than 3000 years old."
+    ],
+    "pitfalls": [
+     "来 is movement towards the speaker — or towards the listener: answering someone who calls you, ‘coming!’ is 来了！; going somewhere neither of you is, it is 去.",
+     "从来 is not ‘from … come’: it is the adverb ‘ever / never’ (S08). In 他从北京来 the place stands between 从 and 来."
+    ],
+    "subtleties": [
+     "After a verb 来 says the movement comes this way: 进来 ‘come in (here)’ vs 进去 ‘go in (there)’ — the speaker’s position decides.",
+     "In requests 来 stands for almost any verb: 来一碗米饭 ‘a bowl of rice, please’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 來 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:zou",
+   "lemma": "走",
+   "trad": "走",
+   "pinyin": "zǒu",
+   "pos": "VERB",
+   "senses": [
+    "verb.walk",
+    "verb.leave",
+    "verb.run",
+    "verb.function"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.function",
+     "axis": "what works",
+     "value": "a clock or a watch (表不走了)"
+    },
+    {
+     "concept": "verb.leave",
+     "axis": "construction and sense",
+     "value": "go away, set off (no object: 我走了)"
+    },
+    {
+     "concept": "verb.walk",
+     "axis": "activity or means",
+     "value": "walk; also ‘go, leave’"
+    },
+    {
+     "concept": "verb.run",
+     "axis": "register",
+     "value": "run — Classical Chinese only (走马观花)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Walking — and leaving: two feet on the road, or the door closing behind you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to walk, to go on foot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.walk"
+     },
+     {
+      "id": "s2",
+      "def": "to leave, to go away: 我走了 ‘I’m off’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s3",
+      "def": "(Classical) to run (走马观花)",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.run"
+     },
+     {
+      "id": "s4",
+      "def": "(of a clock, a machine) to run, to work",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.function"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们出去走走吧。",
+      "py": "Wǒmen chūqu zǒuzou ba.",
+      "tr": "Let’s go out for a little walk.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "从这里往前走。",
+      "py": "Cóng zhèli wǎng qián zǒu.",
+      "tr": "From here, go straight ahead.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "我走了，明天见！",
+      "py": "Wǒ zǒu le, míngtiān jiàn!",
+      "tr": "I’m off — see you tomorrow!",
+      "register": "colloquial",
+      "context": "farewell",
+      "sense": "s2"
+     },
+     {
+      "text": "这个钟不走了。",
+      "py": "Zhège zhōng bù zǒu le.",
+      "tr": "This clock has stopped.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s4"
+     },
+     {
+      "text": "火车已经走了。",
+      "py": "Huǒchē yǐjīng zǒu le.",
+      "tr": "The train has already left.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "我们只是走马观花地看了看。",
+      "py": "Wǒmen zhǐshì zǒu mǎ guān huā de kàn le kàn.",
+      "tr": "We only had a hurried look (literally: viewing flowers from a galloping horse).",
+      "register": "literary",
+      "context": "travel",
+      "sense": "s3"
+     },
+     {
+      "text": "外面刮大风，飞沙走石。",
+      "py": "Wàimian guā dà fēng, fēi shā zǒu shí.",
+      "tr": "A gale is blowing outside — sand flying, stones running.",
+      "register": "literary",
+      "context": "weather",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "往前走",
+      "tr": "to go straight on"
+     },
+     {
+      "text": "走走",
+      "tr": "to take a little walk"
+     },
+     {
+      "text": "走了",
+      "tr": "gone, left"
+     },
+     {
+      "text": "走路",
+      "tr": "to walk, on foot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "走马观花",
+      "tr": "look at flowers while galloping past on a horse",
+      "kind": "idiom",
+      "meaning": "to take only a superficial look",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "走路",
+      "register": "neutral",
+      "nuance": "zǒulù: to walk, on foot — the form that stands alone before the main verb (走路去)"
+     },
+     {
+      "word": "步行",
+      "register": "formal",
+      "nuance": "bùxíng: to go on foot (signs, news): 步行十分钟"
+     },
+     {
+      "word": "散步",
+      "register": "neutral",
+      "nuance": "sànbù: to take a stroll, for pleasure"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a running man; 止 ‘foot’ was added below later. In Classical Chinese 走 meant ‘to run’ (as it still does in Cantonese), while 行 was ‘to walk’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Japanese still reads 走る (hashiru) as ‘to run’ — the Classical meaning of 走; modern Mandarin slowed it down to ‘walk’."
+    ],
+    "pitfalls": [
+     "我走了 does not mean ‘I walked’ but ‘I’m leaving’ — 走 is also the everyday ‘to leave’.",
+     "走 is walking, not every ‘go’: by bus you 坐公共汽车去, never *走公共汽车."
+    ],
+    "subtleties": [
+     "Directions are given with 走: 往前走 ‘go straight on’, 往左走 ‘go left’.",
+     "Doubled, 走走 / 走一走 is a relaxed ‘take a little walk’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:pao",
+   "lemma": "跑",
+   "trad": "跑",
+   "pinyin": "pǎo",
+   "pos": "VERB",
+   "senses": [
+    "verb.run",
+    "verb.escape"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.run",
+     "axis": "register",
+     "value": "run — the everyday word"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Running feet — children in the park, a late passenger racing for the bus.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to run",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.run"
+     },
+     {
+      "id": "s2",
+      "def": "to run away, to escape",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.escape"
+     },
+     {
+      "id": "s3",
+      "def": "(colloquial) to rush about, to go (somewhere) on an errand",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子们在公园里跑。",
+      "py": "Háizimen zài gōngyuán li pǎo.",
+      "tr": "The children are running in the park.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s1"
+     },
+     {
+      "text": "他每天早上跑步。",
+      "py": "Tā měitiān zǎoshang pǎobù.",
+      "tr": "He goes running every morning.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "鱼跑了！",
+      "py": "Yú pǎo le!",
+      "tr": "The fish got away!",
+      "register": "colloquial",
+      "context": "fishing",
+      "sense": "s2"
+     },
+     {
+      "text": "我今天跑了三家银行。",
+      "py": "Wǒ jīntiān pǎo le sān jiā yínháng.",
+      "tr": "Today I ran around to three banks.",
+      "register": "colloquial",
+      "context": "errands",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "跑步",
+      "tr": "to jog, to go running"
+     },
+     {
+      "text": "跑过去",
+      "tr": "to run over (there)"
+     },
+     {
+      "text": "跑来跑去",
+      "tr": "to run back and forth"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "跑龙套",
+      "tr": "to run in the dragon costume",
+      "kind": "idiom",
+      "meaning": "to play a bit part (from the extras of Chinese opera)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "跑步",
+      "register": "neutral",
+      "nuance": "pǎobù: to jog, to run as exercise (verb + object, stands alone)"
+     },
+     {
+      "word": "奔跑",
+      "register": "literary",
+      "nuance": "bēnpǎo: to run fast, to dash"
+     },
+     {
+      "word": "逃",
+      "register": "neutral",
+      "nuance": "táo: to flee, to escape"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 足 ‘foot’ + phonetic 包. The computing sense ‘to run (a program)’ is a meaning loan from English run.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like English run, 跑 now also runs programs: 程序在跑 ‘the program is running’ — a meaning borrowed from English."
+    ],
+    "pitfalls": [
+     "Running as a sport is 跑步 (verb + object): 我每天跑步 — a bare *我每天跑 sounds unfinished.",
+     "In northern speech 跑 can mean simply ‘to go (with some effort)’: 你跑哪儿去了？ ‘where did you go off to?’ — nobody need be running."
+    ],
+    "subtleties": [
+     "跑了 often means ‘got away’: 小偷跑了 ‘the thief got away’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:kaiche",
+   "lemma": "开车",
+   "trad": "開車",
+   "pinyin": "kāi chē",
+   "pos": "VERB",
+   "senses": [
+    "verb.drive",
+    "verb.depart",
+    "verb.talkdirty"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.drive",
+     "axis": "with or without an object",
+     "value": "drive (no object: 我开车)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hands on the wheel — the daily drive to work, a road trip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drive (a car)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drive"
+     },
+     {
+      "id": "s2",
+      "def": "(of a train or bus) to depart, to set off",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.depart"
+     },
+     {
+      "id": "s3",
+      "def": "(internet slang) to tell dirty jokes, to post adult content",
+      "register": [
+       "slang"
+      ],
+      "concept": "verb.talkdirty"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我爸爸每天开车去工作。",
+      "py": "Wǒ bàba měitiān kāichē qù gōngzuò.",
+      "tr": "My father drives to work every day.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "你会开车吗？",
+      "py": "Nǐ huì kāichē ma?",
+      "tr": "Can you drive?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "火车几点开车？",
+      "py": "Huǒchē jǐ diǎn kāichē?",
+      "tr": "What time does the train leave?",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s2"
+     },
+     {
+      "text": "别在群里开车了！",
+      "py": "Bié zài qún li kāichē le!",
+      "tr": "Stop posting dirty jokes in the group chat!",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开车去",
+      "tr": "to drive (there)"
+     },
+     {
+      "text": "会开车",
+      "tr": "can drive"
+     },
+     {
+      "text": "开快车",
+      "tr": "to drive fast"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "开夜车",
+      "tr": "to drive the night car",
+      "kind": "idiom",
+      "meaning": "to work or study late into the night (burn the midnight oil)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "驾驶",
+      "register": "formal",
+      "nuance": "jiàshǐ: to drive, to pilot — licences, road rules: 驾驶证 ‘driving licence’"
+     },
+     {
+      "word": "开",
+      "register": "neutral",
+      "nuance": "kāi: + the vehicle: 开出租车 ‘drive a taxi’, 开飞机 ‘fly a plane’"
+     }
+    ],
+    "etymology": {
+     "text": "开 ‘to open; to start, to operate’ + 车 ‘vehicle’: ‘to start the vehicle’, hence ‘to drive’ and, of a train, ‘to set off’.",
+     "src": "morphemes: 开 + 车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "开夜车 ‘to drive the night car’ is what students do before exams: study through the night."
+    ],
+    "pitfalls": [
+     "开车 already contains its object 车: ‘drive a taxi’ is 开出租车, not *开车出租车.",
+     "Online, 开车 is also slang for telling dirty jokes or posting adult content — context makes it clear."
+    ],
+    "subtleties": [
+     "开车 is driving; 坐车 is riding as a passenger: 我开车 ‘I drive’, 我坐车 ‘I go by car / bus’.",
+     "火车开车了 ‘the train is leaving’: the vehicle starts, nobody is driving a car."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 開車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": [
+     {
+      "verb": "开",
+      "object": "车",
+      "example": "开了两个小时车"
+     }
+    ],
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:kai",
+   "lemma": "开",
+   "trad": "開",
+   "pinyin": "kāi",
+   "pos": "VERB",
+   "senses": [
+    "verb.drive",
+    "verb.open",
+    "verb.switchon",
+    "verb.start",
+    "verb.bloom"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.drive",
+     "axis": "with or without an object",
+     "value": "drive, operate + the vehicle (开出租车)"
+    },
+    {
+     "concept": "verb.start",
+     "axis": "general or in set words",
+     "value": "only in set verb–object words: 开会 hold a meeting, 开学 school starts, 开店 open a shop"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Opening and starting — a door, a light, an engine, a car on the road.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to open (a door, a window)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.open"
+     },
+     {
+      "id": "s2",
+      "def": "to drive, to operate (a vehicle): 开出租车",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drive"
+     },
+     {
+      "id": "s3",
+      "def": "to switch on (a light, a machine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.switchon"
+     },
+     {
+      "id": "s4",
+      "def": "to start, to open (a shop, a meeting)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.start"
+     },
+     {
+      "id": "s5",
+      "def": "(of flowers) to bloom",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.bloom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他开出租车。",
+      "py": "Tā kāi chūzūchē.",
+      "tr": "He drives a taxi.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s2"
+     },
+     {
+      "text": "你会开飞机吗？",
+      "py": "Nǐ huì kāi fēijī ma?",
+      "tr": "Can you fly a plane?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "请开门！",
+      "py": "Qǐng kāi mén!",
+      "tr": "Please open the door!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "开灯吧。",
+      "py": "Kāi dēng ba.",
+      "tr": "Switch on the light.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "我们明天开会。",
+      "py": "Wǒmen míngtiān kāihuì.",
+      "tr": "We have a meeting tomorrow.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s4"
+     },
+     {
+      "text": "春天到了，花都开了。",
+      "py": "Chūntiān dào le, huā dōu kāi le.",
+      "tr": "Spring is here and the flowers have all come out.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s5"
+     },
+     {
+      "text": "学校九月一号开学。",
+      "py": "Xuéxiào jiǔyuè yī hào kāixué.",
+      "tr": "School starts on 1 September.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开门",
+      "tr": "to open the door"
+     },
+     {
+      "text": "开车",
+      "tr": "to drive"
+     },
+     {
+      "text": "开灯",
+      "tr": "to switch on the light"
+     },
+     {
+      "text": "开出租车",
+      "tr": "to drive a taxi"
+     },
+     {
+      "text": "开会",
+      "tr": "to have a meeting"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "开门见山",
+      "tr": "open the door and see the mountain",
+      "kind": "idiom",
+      "meaning": "to come straight to the point",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "打开",
+      "register": "neutral",
+      "nuance": "dǎkāi: to open, to switch on (打开窗户, 打开手机)"
+     },
+     {
+      "word": "驾驶",
+      "register": "formal",
+      "nuance": "jiàshǐ: to drive, to pilot (rules, licences)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "关",
+      "note": "guān: to close, to switch off"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 門 ‘door’ + 一 ‘latch’ + 廾 ‘a pair of hands’ — two hands opening a latched door. The simplified 开 keeps only the latch and the hands.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The traditional 開 still shows the door (門); the simplified 开 is the bar and the two hands, with the door gone."
+    ],
+    "pitfalls": [
+     "开 + vehicle is ‘drive’ (开车, 开出租车) — but a bicycle or a horse is 骑, and riding as a passenger is 坐.",
+     "English ‘open’ and ‘switch on’ are both 开; ‘close’ and ‘switch off’ are both 关."
+    ],
+    "subtleties": [
+     "With a plane 开 is ‘to fly (as the pilot)’: 开飞机; 开船 is a boat setting off, or steering it."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 開 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:lvxing",
+   "lemma": "旅行",
+   "trad": "旅行",
+   "pinyin": "lǚ xíng",
+   "pos": "VERB",
+   "senses": [
+    "verb.travel",
+    "abstract.trip"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.travel",
+     "axis": "purpose",
+     "value": "travel, make a journey"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Suitcases, train windows, new cities — the journey itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to travel, to go on a trip",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.travel"
+     },
+     {
+      "id": "s2",
+      "def": "(noun) a trip, a journey: 这次旅行",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.trip"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们夏天去中国旅行。",
+      "py": "Wǒmen xiàtiān qù Zhōngguó lǚxíng.",
+      "tr": "In summer we’re travelling to China.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "她喜欢一个人旅行。",
+      "py": "Tā xǐhuan yí ge rén lǚxíng.",
+      "tr": "She likes travelling alone.",
+      "register": "neutral",
+      "context": "hobbies",
+      "sense": "s1"
+     },
+     {
+      "text": "这次旅行怎么样？",
+      "py": "Zhè cì lǚxíng zěnmeyàng?",
+      "tr": "How was the trip?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "祝你旅行愉快！",
+      "py": "Zhù nǐ lǚxíng yúkuài!",
+      "tr": "Have a good trip!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去…旅行",
+      "tr": "to travel to …"
+     },
+     {
+      "text": "一个人旅行",
+      "tr": "to travel alone"
+     },
+     {
+      "text": "旅行社",
+      "tr": "travel agency"
+     },
+     {
+      "text": "旅行箱",
+      "tr": "suitcase"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "读万卷书，行万里路",
+      "tr": "read ten thousand books, travel ten thousand li",
+      "kind": "saying",
+      "meaning": "knowledge comes from books and from travel alike",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "旅游",
+      "register": "neutral",
+      "nuance": "lǚyóu: travel for pleasure, sightseeing — the tourist’s word"
+     },
+     {
+      "word": "出差",
+      "register": "neutral",
+      "nuance": "chūchāi: to travel on business"
+     },
+     {
+      "word": "出门",
+      "register": "colloquial",
+      "nuance": "chūmén: to go out; to be away from home (on a trip)"
+     }
+    ],
+    "etymology": {
+     "text": "旅 ‘journey; to stay away from home’ + 行 ‘to go, to walk’.",
+     "src": "morphemes: 旅 + 行 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "旅 is also the army’s ‘brigade’ (旅长 ‘brigade commander’)."
+    ],
+    "pitfalls": [
+     "旅行 takes no object: ‘travel to China’ is 去中国旅行 (or 到中国旅行), not *旅行中国."
+    ],
+    "subtleties": [
+     "旅行 is the journey, moving from place to place; 旅游 is the tourist trip (sights, holidays): 旅游业 ‘the tourism industry’, but 旅行箱 ‘travel case’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "not a verb-object word: it does not split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:lvyou",
+   "lemma": "旅游",
+   "trad": "旅遊",
+   "pinyin": "lǚ yóu",
+   "pos": "VERB",
+   "senses": [
+    "verb.travel"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.travel",
+     "axis": "purpose",
+     "value": "travel for pleasure, go sightseeing"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Holidays, sights, photos — travelling for pleasure.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to travel (for pleasure), to tour",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.travel"
+     },
+     {
+      "id": "s2",
+      "def": "(noun) tourism",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们去北京旅游。",
+      "py": "Wǒmen qù Běijīng lǚyóu.",
+      "tr": "We are going to Beijing as tourists.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "明年我想去希腊旅游。",
+      "py": "Míngnián wǒ xiǎng qù Xīlà lǚyóu.",
+      "tr": "Next year I want to go to Greece on holiday.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这个城市靠旅游生活。",
+      "py": "Zhège chéngshì kào lǚyóu shēnghuó.",
+      "tr": "This city lives from tourism.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "去…旅游",
+      "tr": "to go to … on holiday"
+     },
+     {
+      "text": "旅游团",
+      "tr": "tour group"
+     },
+     {
+      "text": "旅游景点",
+      "tr": "tourist sight"
+     },
+     {
+      "text": "旅游业",
+      "tr": "the tourism industry"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "旅行",
+      "register": "neutral",
+      "nuance": "lǚxíng: travel, a journey in general"
+     },
+     {
+      "word": "观光",
+      "register": "formal",
+      "nuance": "guānguāng: sightseeing"
+     },
+     {
+      "word": "度假",
+      "register": "neutral",
+      "nuance": "dùjià: to spend a holiday (at the sea, in the mountains)"
+     }
+    ],
+    "etymology": {
+     "text": "旅 ‘journey’ + 游 ‘to roam, to wander (also: to swim)’.",
+     "src": "morphemes: 旅 + 游 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "游 is also ‘to swim’ (游泳); a tourist is a 游客, a ‘roaming guest’."
+    ],
+    "pitfalls": [
+     "Like 旅行, 旅游 takes no object: 去希腊旅游, not *旅游希腊."
+    ],
+    "subtleties": [
+     "On a business trip you 出差 — 旅游 is always for pleasure."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 旅遊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "not a verb-object word: it does not split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:hui",
+   "lemma": "回",
+   "trad": "回",
+   "pinyin": "huí",
+   "pos": "VERB",
+   "senses": [
+    "verb.return",
+    "verb.reply",
+    "abstract.occasion"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.return",
+     "axis": "direction",
+     "value": "go back (+ place: 回家)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Going back where you belong — home, your country, your seat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to return, to go back (to a place): 回家",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.return"
+     },
+     {
+      "id": "s2",
+      "def": "(after a verb) back: 拿回 ‘take back’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to reply: 回电话 ‘to call back’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.reply"
+     },
+     {
+      "id": "s4",
+      "def": "(measure word) times, occasions: 去过两回",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "abstract.occasion"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们回家吧。",
+      "py": "Wǒmen huí jiā ba.",
+      "tr": "Let’s go home.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "他明天回中国。",
+      "py": "Tā míngtiān huí Zhōngguó.",
+      "tr": "He goes back to China tomorrow.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我晚上回你电话。",
+      "py": "Wǒ wǎnshang huí nǐ diànhuà.",
+      "tr": "I’ll call you back this evening.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s3"
+     },
+     {
+      "text": "我去过两回。",
+      "py": "Wǒ qùguo liǎng huí.",
+      "tr": "I’ve been there twice.",
+      "register": "colloquial",
+      "context": "travel",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "回家",
+      "tr": "to go home"
+     },
+     {
+      "text": "回国",
+      "tr": "to return to one’s country"
+     },
+     {
+      "text": "回电话",
+      "tr": "to call back"
+     },
+     {
+      "text": "回来 / 回去",
+      "tr": "to come / go back"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "一回生，二回熟",
+      "tr": "the first time strangers, the second time old friends",
+      "kind": "saying",
+      "meaning": "things (and people) become familiar quickly",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "回来",
+      "register": "neutral",
+      "nuance": "huílai: to come back (here)"
+     },
+     {
+      "word": "回去",
+      "register": "neutral",
+      "nuance": "huíqu: to go back (there)"
+     },
+     {
+      "word": "返回",
+      "register": "formal",
+      "nuance": "fǎnhuí: to return (announcements, written)"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram: a spiral, ‘to turn round’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "回 looks like a box in a box; it was once a spiral — ‘turning back’."
+    ],
+    "pitfalls": [
+     "Going home is 回家, never *去家: you return to your own home. (To someone else’s home: 去我朋友家.)",
+     "回 + place, no ‘to’: 回中国 ‘go back to China’."
+    ],
+    "subtleties": [
+     "Without a place, use 回来 ‘come back’ or 回去 ‘go back’: 他回来了 ‘he’s back’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:huilai",
+   "lemma": "回来",
+   "trad": "回來",
+   "pinyin": "huí lái",
+   "pos": "VERB",
+   "senses": [
+    "verb.return"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.return",
+     "axis": "direction",
+     "value": "come back, towards the speaker"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Coming home — the door opens, someone calls out 我回来了！",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to come back, to be back",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.return"
+     },
+     {
+      "id": "s2",
+      "def": "(after a verb) back towards the speaker: 拿回来 ‘bring back’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "妈妈什么时候回来？",
+      "py": "Māma shénme shíhou huílai?",
+      "tr": "When is Mum coming back?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我回来了！",
+      "py": "Wǒ huílai le!",
+      "tr": "I’m back! / I’m home!",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "你把书拿回来吧。",
+      "py": "Nǐ bǎ shū ná huílai ba.",
+      "tr": "Bring the book back.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "回来了",
+      "tr": "I’m back; he’s back"
+     },
+     {
+      "text": "早点回来",
+      "tr": "come back early"
+     },
+     {
+      "text": "拿回来",
+      "tr": "to bring back"
+     },
+     {
+      "text": "回来吃饭",
+      "tr": "to come back for a meal"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "回",
+      "register": "neutral",
+      "nuance": "huí: + place: 回家, 回国"
+     },
+     {
+      "word": "回去",
+      "register": "neutral",
+      "nuance": "huíqu: to go back (there) — the opposite direction"
+     },
+     {
+      "word": "返回",
+      "register": "formal",
+      "nuance": "fǎnhuí: to return (written)"
+     }
+    ],
+    "etymology": {
+     "text": "回 ‘to return’ + 来 ‘to come (towards the speaker)’.",
+     "src": "morphemes: 回 + 来 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "我回来了！ is what Chinese families call out on coming home — like German Ich bin wieder da!"
+    ],
+    "pitfalls": [
+     "回来 points at the speaker: at home you ask 你什么时候回来？ ‘when are you coming back?’; about going back to China it is 你什么时候回去？",
+     "A place goes between 回 and 来, or 来 is dropped: 回家来 or simply 回家 — never *回来家."
+    ],
+    "subtleties": [
+     "In 回来 the 来 is often toneless: huílai."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 回來 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "not a verb-object word: it does not split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:jin.enter",
+   "lemma": "进",
+   "trad": "進",
+   "pinyin": "jìn",
+   "pos": "VERB",
+   "senses": [
+    "verb.enter",
+    "verb.advance"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Through the door and inside — 请进！ at the threshold.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to enter, to go / come in",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.enter"
+     },
+     {
+      "id": "s2",
+      "def": "to advance, to move forward",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.advance"
+     },
+     {
+      "id": "s3",
+      "def": "(after a verb) into: 走进 ‘walk into’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请进！",
+      "py": "Qǐng jìn!",
+      "tr": "Come in, please!",
+      "register": "neutral",
+      "context": "at the door",
+      "sense": "s1"
+     },
+     {
+      "text": "他进了房间。",
+      "py": "Tā jìn le fángjiān.",
+      "tr": "He went into the room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "我们进去吧。",
+      "py": "Wǒmen jìnqu ba.",
+      "tr": "Let’s go in.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     },
+     {
+      "text": "你的中文进步很大。",
+      "py": "Nǐ de Zhōngwén jìnbù hěn dà.",
+      "tr": "Your Chinese has improved a lot.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "进来",
+      "tr": "to come in"
+     },
+     {
+      "text": "进去",
+      "tr": "to go in"
+     },
+     {
+      "text": "进门",
+      "tr": "to come through the door"
+     },
+     {
+      "text": "进城",
+      "tr": "to go into town"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "学如逆水行舟，不进则退",
+      "tr": "learning is like rowing upstream: not to advance is to drop back",
+      "kind": "proverb",
+      "meaning": "if you stop learning you fall behind",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "进入",
+      "register": "formal",
+      "nuance": "jìnrù: to enter (a field, a stage, a building — written)"
+     },
+     {
+      "word": "进来 / 进去",
+      "register": "neutral",
+      "nuance": "jìnlai / jìnqu: come in / go in — the everyday full forms"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 進: 辵 ‘walk’ + 隹 ‘short-tailed bird’ — a bird walks only forwards, hence ‘advance’. The simplified 进 (1956) uses 井 as its sound part.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "進 has a bird in it: birds cannot walk backwards, so ‘bird + walk’ means ‘go forward’."
+    ],
+    "pitfalls": [
+     "进 takes the place directly: 进房间 ‘go into the room’ — no word for ‘into’ (*进在房间).",
+     "请进 ‘come in’ is said at the door to a visitor; 进去 is ‘go in (there)’."
+    ],
+    "subtleties": [
+     "Alone, 进 is short and a little formal (请进); in speech 进来 / 进去 are more usual."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 進 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:chu",
+   "lemma": "出",
+   "trad": "出",
+   "pinyin": "chū",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave",
+    "verb.produce"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "construction and sense",
+     "value": "go out (of): 出门, 出去"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Out of the door, out into the street — the foot leaving the cave.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go out, to exit, to leave",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "to come out, to appear",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to produce, to put out (出书 ‘publish a book’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.produce"
+     },
+     {
+      "id": "s4",
+      "def": "(after a verb) out: 走出 ‘walk out’",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他出门了。",
+      "py": "Tā chūmén le.",
+      "tr": "He’s gone out.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "我们从这个门出去。",
+      "py": "Wǒmen cóng zhège mén chūqu.",
+      "tr": "We go out through this door.",
+      "register": "neutral",
+      "context": "buildings",
+      "sense": "s1"
+     },
+     {
+      "text": "太阳出来了。",
+      "py": "Tàiyáng chūlai le.",
+      "tr": "The sun has come out.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "他去年出了一本新书。",
+      "py": "Tā qùnián chū le yì běn xīn shū.",
+      "tr": "He brought out a new book last year.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "出去",
+      "tr": "to go out"
+     },
+     {
+      "text": "出来",
+      "tr": "to come out"
+     },
+     {
+      "text": "出门",
+      "tr": "to leave the house"
+     },
+     {
+      "text": "出国",
+      "tr": "to go abroad"
+     },
+     {
+      "text": "出口",
+      "tr": "exit"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "出门在外",
+      "tr": "out of the door and away",
+      "kind": "fixed expression",
+      "meaning": "away from home (travelling, working elsewhere)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "离开",
+      "register": "neutral",
+      "nuance": "líkāi: to leave (a place, a person) — with the place as object"
+     },
+     {
+      "word": "出去",
+      "register": "neutral",
+      "nuance": "chūqu: to go out (the everyday full form)"
+     },
+     {
+      "word": "外出",
+      "register": "formal",
+      "nuance": "wàichū: to go out, to be out (of the office)"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 止 ‘foot’ + 凵 ‘cave, pit’ — a foot stepping out of a cave.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "出口 ‘exit-mouth’ is the EXIT sign — and also ‘export’; the entrance is 入口."
+    ],
+    "pitfalls": [
+     "出 alone takes only a few objects (出门, 出国); to leave a place where you have been, or a person, use 离开: 离开北京."
+    ],
+    "subtleties": [
+     "出 + 去 / 来: 出去 ‘go out (away from me)’, 出来 ‘come out (towards me)’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:likai",
+   "lemma": "离开",
+   "trad": "離開",
+   "pinyin": "lí kāi",
+   "pos": "VERB",
+   "senses": [
+    "verb.leave"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "construction and sense",
+     "value": "leave a place or a person (transitive: 离开北京)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Leaving a place behind — the train pulling out, a last look back.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to leave, to depart from (a place, a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     },
+     {
+      "id": "s2",
+      "def": "(离不开) to be unable to do without",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他离开了北京。",
+      "py": "Tā líkāi le Běijīng.",
+      "tr": "He left Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我们几点离开？",
+      "py": "Wǒmen jǐ diǎn líkāi?",
+      "tr": "What time are we leaving?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "他十八岁离开了家。",
+      "py": "Tā shíbā suì líkāi le jiā.",
+      "tr": "He left home at eighteen.",
+      "register": "neutral",
+      "context": "life story",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "离开家",
+      "tr": "to leave home"
+     },
+     {
+      "text": "离开北京",
+      "tr": "to leave Beijing"
+     },
+     {
+      "text": "离不开",
+      "tr": "cannot do without"
+     },
+     {
+      "text": "离开一下",
+      "tr": "to step away for a moment"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "走",
+      "register": "colloquial",
+      "nuance": "zǒu: to leave — without an object: 我走了 ‘I’m off’"
+     },
+     {
+      "word": "出发",
+      "register": "neutral",
+      "nuance": "chūfā: to set out, to start a journey"
+     },
+     {
+      "word": "离去",
+      "register": "literary",
+      "nuance": "líqù: to depart, to go away"
+     }
+    ],
+    "etymology": {
+     "text": "离 ‘to be apart from’ (the 离 of distance, S12) + 开 ‘open, away’.",
+     "src": "morphemes: 离 + 开 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "离 is the same word as in 我家离学校很近 (S12, ‘apart from’) — 离开 is ‘to get apart from’."
+    ],
+    "pitfalls": [
+     "The place is the object of 离开: 离开北京 ‘leave Beijing’ — no 从 is needed."
+    ],
+    "subtleties": [
+     "Without an object, ‘to leave’ is simply 走: 我们走吧 ‘let’s go’ — 我们离开吧 sounds bookish."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 離開 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "not a verb-object word: it does not split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:liu.stay",
+   "lemma": "留",
+   "trad": "留",
+   "pinyin": "liú",
+   "pos": "VERB",
+   "senses": [
+    "verb.stay",
+    "verb.keep",
+    "verb.studyabroad"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.stay",
+     "axis": "register and sense",
+     "value": "stay, remain; also keep"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Staying on when others go — and keeping something back.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to stay, to remain",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.stay"
+     },
+     {
+      "id": "s2",
+      "def": "to ask someone to stay",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "to keep, to save, to leave (behind): 留言 ‘leave a message’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.keep"
+     },
+     {
+      "id": "s4",
+      "def": "short for 留学 ‘to study abroad’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.studyabroad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我今天留在家里。",
+      "py": "Wǒ jīntiān liú zài jiā li.",
+      "tr": "I’m staying at home today.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "他留在北京工作。",
+      "py": "Tā liú zài Běijīng gōngzuò.",
+      "tr": "He stayed in Beijing to work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "给我留一个苹果！",
+      "py": "Gěi wǒ liú yí ge píngguǒ!",
+      "tr": "Save me an apple!",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "请留下您的电话。",
+      "py": "Qǐng liúxia nín de diànhuà.",
+      "tr": "Please leave your phone number.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s3"
+     },
+     {
+      "text": "他是一位留德的工程师。",
+      "py": "Tā shì yí wèi liú Dé de gōngchéngshī.",
+      "tr": "He is an engineer who studied in Germany.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "留在",
+      "tr": "to stay at / in"
+     },
+     {
+      "text": "留下",
+      "tr": "to stay on; to leave behind"
+     },
+     {
+      "text": "留言",
+      "tr": "to leave a message"
+     },
+     {
+      "text": "留学",
+      "tr": "to study abroad"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "留得青山在，不怕没柴烧",
+      "tr": "as long as the green hills remain, there is no fear of running out of firewood",
+      "kind": "proverb",
+      "meaning": "keep the essentials safe and you can always start again",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "待",
+      "register": "colloquial",
+      "nuance": "dāi: to stay (somewhere, for a while): 在家待着"
+     },
+     {
+      "word": "住",
+      "register": "neutral",
+      "nuance": "zhù: to stay overnight, to live: 住酒店 ‘stay at a hotel’"
+     },
+     {
+      "word": "停留",
+      "register": "formal",
+      "nuance": "tíngliú: to stay, to stop over"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 卯 + semantic 田 ‘field’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A 留学生 ‘stay-study student’ is a foreign student — someone who stays abroad to study."
+    ],
+    "pitfalls": [
+     "‘Stay at home’ is 留在家里: with 留 (and 住, 待) the 在 + place comes AFTER the verb — the reverse of 在家吃饭."
+    ],
+    "subtleties": [
+     "留 is staying on when you could leave (or when others leave); 待 is simply spending time somewhere."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:dai",
+   "lemma": "待",
+   "trad": "待",
+   "pinyin": "dāi",
+   "pos": "VERB",
+   "senses": [
+    "verb.stay",
+    "verb.treat",
+    "verb.wait"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.stay",
+     "axis": "register and sense",
+     "value": "dāi: stay somewhere for a while (colloquial)"
+    },
+    {
+     "concept": "verb.wait",
+     "axis": "register and use",
+     "value": "dài: await — formal, in 等待, 期待"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hanging around, staying put — a lazy day at home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(dāi, colloquial) to stay (somewhere for a while)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.stay"
+     },
+     {
+      "id": "s2",
+      "def": "(dài) to treat, to receive (people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.treat"
+     },
+     {
+      "id": "s3",
+      "def": "(dài, formal) to wait for, to await",
+      "register": [
+       "formal"
+      ],
+      "concept": "verb.wait"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你在北京待几天？",
+      "py": "Nǐ zài Běijīng dāi jǐ tiān?",
+      "tr": "How many days are you staying in Beijing?",
+      "register": "colloquial",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "我今天在家待着。",
+      "py": "Wǒ jīntiān zài jiā dāizhe.",
+      "tr": "I’m staying in today.",
+      "register": "colloquial",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "他待人很好。",
+      "py": "Tā dài rén hěn hǎo.",
+      "tr": "He treats people well.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s2"
+     },
+     {
+      "text": "我们在机场等待飞机起飞。",
+      "py": "Wǒmen zài jīchǎng děngdài fēijī qǐfēi.",
+      "tr": "We are waiting at the airport for the plane to take off.",
+      "register": "formal",
+      "context": "travel",
+      "sense": "s3"
+     },
+     {
+      "text": "我很期待你的来信。",
+      "py": "Wǒ hěn qīdài nǐ de láixìn.",
+      "tr": "I look forward to your letter.",
+      "register": "formal",
+      "context": "letters",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "待在家里",
+      "tr": "to stay at home"
+     },
+     {
+      "text": "待几天",
+      "tr": "to stay a few days"
+     },
+     {
+      "text": "待一会儿",
+      "tr": "to stay a while"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "呆",
+      "register": "colloquial",
+      "nuance": "dāi: the same spoken word, another spelling: 呆在家里"
+     },
+     {
+      "word": "留",
+      "register": "neutral",
+      "nuance": "liú: to stay on, to remain"
+     },
+     {
+      "word": "住",
+      "register": "neutral",
+      "nuance": "zhù: to stay overnight, to live"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 彳 ‘step’ + phonetic 寺; probably related to 等 ‘to wait’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "待 and 等 ‘to wait’ are probably one family of words — staying and waiting are close."
+    ],
+    "pitfalls": [
+     "待 has two readings: dāi ‘to stay’ (speech) and dài ‘to treat; to await’ (待人, 期待). The meaning tells you which."
+    ],
+    "subtleties": [
+     "Many people write the spoken dāi as 呆: 呆在家里 = 待在家里.",
+     "Like 留, 待 can take 在 + place after it: 待在家里 — or before it: 在家待着."
+    ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "dāi",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "dài",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:deng.wait",
+   "lemma": "等",
+   "trad": "等",
+   "pinyin": "děng",
+   "pos": "VERB",
+   "senses": [
+    "verb.wait",
+    "conj.when",
+    "adv.etc",
+    "abstract.rank"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.wait",
+     "axis": "register and use",
+     "value": "wait (for) — the everyday word"
+    },
+    {
+     "concept": "conj.when",
+     "axis": "construction",
+     "value": "等 + clause before the main clause: once (… has happened)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Waiting — at the bus stop, for a friend, for the water to boil.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wait (for)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wait"
+     },
+     {
+      "id": "s2",
+      "def": "when, once (… has happened): 等我回来",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.when"
+     },
+     {
+      "id": "s3",
+      "def": "and so on, etc. (after a list)",
+      "register": [
+       "formal"
+      ],
+      "concept": "adv.etc"
+     },
+     {
+      "id": "s4",
+      "def": "class, grade: 一等 ‘first class’",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.rank"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请等我！",
+      "py": "Qǐng děng wǒ!",
+      "tr": "Please wait for me!",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "我在车站等你。",
+      "py": "Wǒ zài chēzhàn děng nǐ.",
+      "tr": "I’ll wait for you at the station.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "等我回来再说。",
+      "py": "Děng wǒ huílai zài shuō.",
+      "tr": "Let’s talk about it when I’m back.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "北京、上海等城市",
+      "py": "Běijīng, Shànghǎi děng chéngshì",
+      "tr": "cities such as Beijing and Shanghai",
+      "register": "formal",
+      "context": "writing",
+      "sense": "s3"
+     },
+     {
+      "text": "等你到了，给我打个电话。",
+      "py": "Děng nǐ dào le, gěi wǒ dǎ ge diànhuà.",
+      "tr": "Give me a call once you’ve arrived.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s2"
+     },
+     {
+      "text": "我们买的是一等座。",
+      "py": "Wǒmen mǎi de shì yī děng zuò.",
+      "tr": "We bought first-class seats.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "等人",
+      "tr": "to wait for someone"
+     },
+     {
+      "text": "等车",
+      "tr": "to wait for the bus / train"
+     },
+     {
+      "text": "等一下",
+      "tr": "wait a moment; later"
+     },
+     {
+      "text": "等不及",
+      "tr": "cannot wait"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "等着瞧",
+      "tr": "just wait and see",
+      "kind": "colloquial",
+      "meaning": "you’ll see (often a threat or a dare)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "等待",
+      "register": "formal",
+      "nuance": "děngdài: to wait, to await (written)"
+     },
+     {
+      "word": "等候",
+      "register": "formal",
+      "nuance": "děnghòu: to wait (signs: 请在此等候 ‘please wait here’)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 竹 ‘bamboo (writing slips)’ + phonetic 寺 — first ‘to sort slips, to grade’. ‘To wait’ is a medieval word, probably related to 待.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same 等 is also ‘etc.’ (苹果、鸡蛋等) and ‘class’ (一等座 ‘first-class seat’) — three common words, one character."
+    ],
+    "pitfalls": [
+     "等 takes the person directly: 等你 ‘wait for you’ — no word for ‘for’ (*等给你)."
+    ],
+    "subtleties": [
+     "等 + clause means ‘once …’: 等他来了我们吃饭 ‘we’ll eat once he’s here’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:zuo",
+   "lemma": "坐",
+   "trad": "坐",
+   "pinyin": "zuò",
+   "pos": "VERB",
+   "senses": [
+    "verb.sit",
+    "verb.take.transport"
+   ],
+   "role": "to sit; to go by (a vehicle you ride in as a passenger): 坐公共汽车 ‘by bus’ (S13)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sitting — on a chair, or in a bus, a train, a plane.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to sit, to take a seat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.sit"
+     },
+     {
+      "id": "s2",
+      "def": "to go by, to travel by (bus, train, plane, taxi, boat — as a passenger)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.take.transport"
+     }
+    ],
+    "examples": [
+     {
+      "text": "请坐！",
+      "py": "Qǐng zuò!",
+      "tr": "Please sit down!",
+      "register": "neutral",
+      "context": "visiting",
+      "sense": "s1"
+     },
+     {
+      "text": "我坐公共汽车去学校。",
+      "py": "Wǒ zuò gōnggòng qìchē qù xuéxiào.",
+      "tr": "I go to school by bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s2"
+     },
+     {
+      "text": "我们坐飞机去北京。",
+      "py": "Wǒmen zuò fēijī qù Běijīng.",
+      "tr": "We are flying to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐公共汽车",
+      "tr": "to go by bus"
+     },
+     {
+      "text": "坐飞机",
+      "tr": "to fly"
+     },
+     {
+      "text": "坐出租车",
+      "tr": "to take a taxi"
+     },
+     {
+      "text": "请坐",
+      "tr": "please sit down"
+     },
+     {
+      "text": "坐下",
+      "tr": "to sit down"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "坐井观天",
+      "tr": "to sit in a well and look at the sky",
+      "kind": "idiom",
+      "meaning": "to have a very narrow view of the world",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "乘",
+      "register": "formal",
+      "nuance": "chéng: to ride, to take (a vehicle): 乘飞机"
+     },
+     {
+      "word": "搭",
+      "register": "colloquial",
+      "nuance": "dā: to take (a bus, a ride): 搭车"
+     },
+     {
+      "word": "坐下",
+      "register": "neutral",
+      "nuance": "zuòxia: to sit down (the movement)"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 留 + 土 ‘ground’ — staying on the ground. Sino-Tibetan; cognate with Tangut and Japhug words for ‘to sit’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the modern character you can see two people (人 人) sitting on the ground (土) — an easy way to remember it, though the old form was 留 + 土."
+    ],
+    "pitfalls": [
+     "You 坐 a vehicle you ride inside as a passenger (bus, train, plane, taxi, boat), you 骑 what you sit astride (bicycle, horse, motorbike), and you 开 what you drive.",
+     "坐 + vehicle comes before the main verb: 我坐火车去北京 ‘I go to Beijing by train’ — 我去北京坐火车 means ‘I go to Beijing to take a train’."
+    ],
+    "subtleties": [
+     "The vehicle phrase answers 怎么去？ ‘how do you get there?’: 坐公共汽车 / 坐地铁 / 走路."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:qi.ride",
+   "lemma": "骑",
+   "trad": "騎",
+   "pinyin": "qí",
+   "pos": "VERB",
+   "senses": [
+    "verb.ride"
+   ],
+   "role": "to ride (astride): 骑自行车 ‘by bicycle’ (S13)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Astride — a bicycle, a horse, a motorbike.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to ride (a bicycle, a horse, a motorbike)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.ride"
+     },
+     {
+      "id": "s2",
+      "def": "to sit astride",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我骑自行车去公园。",
+      "py": "Wǒ qí zìxíngchē qù gōngyuán.",
+      "tr": "I ride my bike to the park.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "你会骑马吗？",
+      "py": "Nǐ huì qí mǎ ma?",
+      "tr": "Can you ride a horse?",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "他骑摩托车去工作。",
+      "py": "Tā qí mótuōchē qù gōngzuò.",
+      "tr": "He rides a motorbike to work.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "骑自行车",
+      "tr": "to ride a bicycle"
+     },
+     {
+      "text": "骑马",
+      "tr": "to ride a horse"
+     },
+     {
+      "text": "骑摩托车",
+      "tr": "to ride a motorbike"
+     },
+     {
+      "text": "骑车",
+      "tr": "to cycle"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "骑虎难下",
+      "tr": "riding a tiger, it is hard to get off",
+      "kind": "idiom",
+      "meaning": "stuck in something you cannot safely stop",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "骑车",
+      "register": "colloquial",
+      "nuance": "qíchē: to cycle (车 = the bike)"
+     },
+     {
+      "word": "坐",
+      "register": "neutral",
+      "nuance": "zuò: for vehicles you ride inside, not astride"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 馬 ‘horse’ + phonetic 奇 — ‘to ride horseback’. A wandering word of East and Southeast Asia, found also outside Sino-Tibetan.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "骑 has 马 ‘horse’ in it — the first thing people rode; bicycles and motorbikes inherited the verb."
+    ],
+    "pitfalls": [
+     "‘Ride a bike’ is 骑自行车 — not *坐自行车 (that would be riding on the back as a passenger) and not *开自行车."
+    ],
+    "subtleties": [
+     "In 骑车 the 车 is a bicycle (or an e-bike), not a car."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 騎 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:gonggongqiche",
+   "lemma": "公共汽车",
+   "trad": "公共汽車",
+   "pinyin": "gōng gòng qì chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bus"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 公共汽車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "辆"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "tr.bus",
+     "axis": "kind of bus and register",
+     "value": "city bus — the full, standard word"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The city bus — crowded at eight, empty at midnight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bus (city bus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bus"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我坐公共汽车去学校。",
+      "py": "Wǒ zuò gōnggòng qìchē qù xuéxiào.",
+      "tr": "I go to school by bus.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "公共汽车来了！",
+      "py": "Gōnggòng qìchē lái le!",
+      "tr": "The bus is coming!",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "这辆公共汽车去火车站吗？",
+      "py": "Zhè liàng gōnggòng qìchē qù huǒchēzhàn ma?",
+      "tr": "Does this bus go to the railway station?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐公共汽车",
+      "tr": "to take the bus"
+     },
+     {
+      "text": "等公共汽车",
+      "tr": "to wait for the bus"
+     },
+     {
+      "text": "公共汽车站",
+      "tr": "bus stop"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "公交车",
+      "register": "neutral",
+      "nuance": "gōngjiāochē: the same, the usual word in the mainland today"
+     },
+     {
+      "word": "巴士",
+      "register": "regional",
+      "nuance": "bāshì: Hong Kong / southern word, the English ‘bus’ in Cantonese spelling"
+     },
+     {
+      "word": "公车",
+      "register": "regional",
+      "nuance": "gōngchē: Taiwan’s word for the bus"
+     }
+    ],
+    "etymology": {
+     "text": "公共 ‘public’ + 汽车 ‘motor vehicle’ (汽 ‘steam’ + 车 ‘vehicle’).",
+     "src": "morphemes: 公共 + 汽车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "巴士 bāshì, the Hong Kong word, is simply the English word ‘bus’ in Cantonese spelling."
+    ],
+    "pitfalls": [
+     "‘Bus’ is 公共汽车, not 汽车 alone: 汽车 is any motor car.",
+     "Count with 辆: 一辆公共汽车; a bus line is 路: 三路公共汽车 ‘the No. 3 bus’."
+    ],
+    "subtleties": [
+     "公共汽车 is the full, slightly old-fashioned word; in mainland speech 公交车 or just 公交 is more common."
+    ]
+   }
+  },
+  {
+   "id": "zh:gongjiaoche",
+   "lemma": "公交车",
+   "trad": "公交車",
+   "pinyin": "gōng jiāo chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bus"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 公交車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "辆"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "tr.bus",
+     "axis": "kind of bus and register",
+     "value": "city bus — the everyday modern word"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday bus of mainland cities, with its card reader beeping.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bus (public transport)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bus"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我每天坐公交车去工作。",
+      "py": "Wǒ měitiān zuò gōngjiāochē qù gōngzuò.",
+      "tr": "I take the bus to work every day.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "公交车上人很多。",
+      "py": "Gōngjiāochē shang rén hěn duō.",
+      "tr": "There are lots of people on the bus.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "你在哪里等公交车？",
+      "py": "Nǐ zài nǎli děng gōngjiāochē?",
+      "tr": "Where do you wait for the bus?",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐公交车",
+      "tr": "to take the bus"
+     },
+     {
+      "text": "公交车站",
+      "tr": "bus stop"
+     },
+     {
+      "text": "公交卡",
+      "tr": "bus card"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "公共汽车",
+      "register": "neutral",
+      "nuance": "gōnggòng qìchē: the full, older word"
+     },
+     {
+      "word": "公交",
+      "register": "colloquial",
+      "nuance": "gōngjiāo: short for 公交车"
+     },
+     {
+      "word": "大巴",
+      "register": "neutral",
+      "nuance": "dàbā: coach, long-distance bus"
+     }
+    ],
+    "etymology": {
+     "text": "公交 (short for 公共交通 ‘public transport’) + 车 ‘vehicle’.",
+     "src": "morphemes: 公交 + 车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "公交 is a shortening of 公共交通 ‘public transport’ — Chinese loves such two-syllable shortenings."
+    ],
+    "pitfalls": [
+     "People are ‘on’ the bus: 公交车上 (上 ‘on’) — 车里 ‘in the car’ is said of cars."
+    ],
+    "subtleties": [
+     "公交车 is mainland usage; Taiwan says 公车."
+    ]
+   }
+  },
+  {
+   "id": "zh:huoche",
+   "lemma": "火车",
+   "trad": "火車",
+   "pinyin": "huǒ chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.train"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 火車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "列",
+     "趟"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The long train across the country — sunflower seeds, tea, sleepers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "train",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.train"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们坐火车去北京。",
+      "py": "Wǒmen zuò huǒchē qù Běijīng.",
+      "tr": "We are going to Beijing by train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "火车几点开？",
+      "py": "Huǒchē jǐ diǎn kāi?",
+      "tr": "What time does the train leave?",
+      "register": "neutral",
+      "context": "timetable",
+      "sense": "s1"
+     },
+     {
+      "text": "火车上人不多。",
+      "py": "Huǒchē shang rén bù duō.",
+      "tr": "There aren’t many people on the train.",
+      "register": "neutral",
+      "context": "journey",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐火车",
+      "tr": "to go by train"
+     },
+     {
+      "text": "火车站",
+      "tr": "railway station"
+     },
+     {
+      "text": "火车票",
+      "tr": "train ticket"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "列车",
+      "register": "formal",
+      "nuance": "lièchē: train (announcements: 列车员 ‘conductor’)"
+     },
+     {
+      "word": "高铁",
+      "register": "neutral",
+      "nuance": "gāotiě: high-speed train"
+     },
+     {
+      "word": "动车",
+      "register": "neutral",
+      "nuance": "dòngchē: fast multiple-unit train (D-trains)"
+     }
+    ],
+    "etymology": {
+     "text": "火 ‘fire’ + 车 ‘vehicle’: the steam locomotive.",
+     "src": "morphemes: 火 + 车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The ‘fire vehicle’ is named after the steam engine; today’s 高铁 ‘high iron’ trains run at up to 350 km/h."
+    ],
+    "pitfalls": [
+     "Count trains with 列 (formal) or 趟 (one train service): 一列火车, 一趟火车; a carriage is 一节车厢.",
+     "火车站 is the railway station; 车站 alone is any station or stop."
+    ],
+    "subtleties": [
+     "For long trips people now often just say 坐高铁 ‘take the high-speed train’."
+    ]
+   }
+  },
+  {
+   "id": "zh:feiji",
+   "lemma": "飞机",
+   "trad": "飛機",
+   "pinyin": "fēi jī",
+   "pos": "NOUN",
+   "senses": [
+    "tr.plane",
+    "tr.flight"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 飛機 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "架"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A plane — the airport, the window seat, clouds below.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plane, aircraft",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.plane"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial) a flight",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "tr.flight"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们坐飞机去北京。",
+      "py": "Wǒmen zuò fēijī qù Běijīng.",
+      "tr": "We are flying to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "天上有一架飞机。",
+      "py": "Tiān shang yǒu yí jià fēijī.",
+      "tr": "There’s a plane in the sky.",
+      "register": "neutral",
+      "context": "outdoors",
+      "sense": "s1"
+     },
+     {
+      "text": "我的飞机几点到？",
+      "py": "Wǒ de fēijī jǐ diǎn dào?",
+      "tr": "What time does my flight land?",
+      "register": "colloquial",
+      "context": "airport",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐飞机",
+      "tr": "to fly (as a passenger)"
+     },
+     {
+      "text": "飞机票",
+      "tr": "plane ticket"
+     },
+     {
+      "text": "开飞机",
+      "tr": "to fly a plane (as pilot)"
+     },
+     {
+      "text": "下飞机",
+      "tr": "to get off the plane"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "航班",
+      "register": "formal",
+      "nuance": "hángbān: a (scheduled) flight"
+     },
+     {
+      "word": "客机",
+      "register": "technical",
+      "nuance": "kèjī: passenger aircraft"
+     }
+    ],
+    "etymology": {
+     "text": "飞 ‘to fly’ + 机 ‘machine’: ‘flying machine’.",
+     "src": "morphemes: 飞 + 机 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "German Flugzeug ‘fly-thing’ and Chinese 飞机 ‘fly-machine’ are built the same way; Russian самолёт is a ‘self-flyer’."
+    ],
+    "pitfalls": [
+     "‘To fly (somewhere)’ as a passenger is 坐飞机; 飞 alone is what birds and planes do.",
+     "Count with 架: 一架飞机."
+    ],
+    "subtleties": [
+     "机 ‘machine’ is in many modern words: 手机 ‘phone’, 司机 ‘driver’, 机场 ‘airport’."
+    ]
+   }
+  },
+  {
+   "id": "zh:chuzuche",
+   "lemma": "出租车",
+   "trad": "出租車",
+   "pinyin": "chū zū chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.taxi"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 出租車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "辆"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A taxi — a raised hand at the kerb, or a tap on the phone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "taxi",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.taxi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们坐出租车去机场吧。",
+      "py": "Wǒmen zuò chūzūchē qù jīchǎng ba.",
+      "tr": "Let’s take a taxi to the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他开出租车。",
+      "py": "Tā kāi chūzūchē.",
+      "tr": "He drives a taxi.",
+      "register": "neutral",
+      "context": "jobs",
+      "sense": "s1"
+     },
+     {
+      "text": "出租车！",
+      "py": "Chūzūchē!",
+      "tr": "Taxi!",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐出租车",
+      "tr": "to take a taxi"
+     },
+     {
+      "text": "出租车司机",
+      "tr": "taxi driver"
+     },
+     {
+      "text": "叫出租车",
+      "tr": "to call a taxi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "的士",
+      "register": "regional",
+      "nuance": "díshì: Hong Kong / southern word, from English taxi via Cantonese"
+     },
+     {
+      "word": "计程车",
+      "register": "regional",
+      "nuance": "jìchéngchē: Taiwan’s ‘meter car’"
+     },
+     {
+      "word": "打车",
+      "register": "colloquial",
+      "nuance": "dǎchē: (verb) to take a taxi, to get a ride"
+     }
+    ],
+    "etymology": {
+     "text": "出租 ‘to rent out, to hire out’ + 车 ‘vehicle’.",
+     "src": "morphemes: 出租 + 车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "打的 dǎdī ‘to take a taxi’ comes from 的士, the Cantonese spelling of English taxi."
+    ],
+    "pitfalls": [
+     "‘Take a taxi’ is 坐出租车 or 打车 — 出租车 alone is only the car."
+    ],
+    "subtleties": [
+     "With ride-hailing apps, 打车 ‘to get a car’ became the everyday verb."
+    ]
+   }
+  },
+  {
+   "id": "zh:qiche",
+   "lemma": "汽车",
+   "trad": "汽車",
+   "pinyin": "qì chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.car",
+    "tr.bus"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 汽車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "辆"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "tr.bus",
+     "axis": "kind of bus and register",
+     "value": "coach, long-distance bus (汽车站, 长途汽车)"
+    },
+    {
+     "concept": "tr.car",
+     "axis": "specificity",
+     "value": "car, motor vehicle"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A car, a motor vehicle — traffic, roads, the family car.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "car, motor vehicle",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.car"
+     },
+     {
+      "id": "s2",
+      "def": "bus, coach (in 汽车站 ‘coach station’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bus"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他有一辆汽车。",
+      "py": "Tā yǒu yí liàng qìchē.",
+      "tr": "He has a car.",
+      "register": "neutral",
+      "context": "possessions",
+      "sense": "s1"
+     },
+     {
+      "text": "街上汽车很多。",
+      "py": "Jiē shang qìchē hěn duō.",
+      "tr": "There are lots of cars in the street.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在汽车站坐车。",
+      "py": "Wǒmen zài qìchēzhàn zuò chē.",
+      "tr": "We take the coach at the bus station.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "我们坐长途汽车去上海。",
+      "py": "Wǒmen zuò chángtú qìchē qù Shànghǎi.",
+      "tr": "We’re taking a long-distance coach to Shanghai.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一辆汽车",
+      "tr": "a car"
+     },
+     {
+      "text": "开汽车",
+      "tr": "to drive a car"
+     },
+     {
+      "text": "汽车站",
+      "tr": "coach / bus station"
+     },
+     {
+      "text": "汽车厂",
+      "tr": "car factory"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "车",
+      "register": "colloquial",
+      "nuance": "chē: car (any vehicle) — the short everyday word"
+     },
+     {
+      "word": "小汽车",
+      "register": "neutral",
+      "nuance": "xiǎoqìchē: (passenger) car, as opposed to buses and lorries"
+     },
+     {
+      "word": "轿车",
+      "register": "neutral",
+      "nuance": "jiàochē: saloon car, sedan"
+     }
+    ],
+    "etymology": {
+     "text": "汽 ‘steam, vapour’ + 车 ‘vehicle’ — first a steam-driven vehicle; in Japanese 汽車 still means a (steam) train.",
+     "src": "morphemes: 汽 + 车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "In Japanese the same characters 汽車 (kisha) mean a train, an older meaning that Mandarin has dropped."
+    ],
+    "pitfalls": [
+     "汽 is ‘steam, vapour’ (汽水 ‘soda’), not 气 ‘air’ — a common miswriting.",
+     "汽车站 is a coach station; a local bus stop is 公交车站."
+    ],
+    "subtleties": [
+     "In speech 车 alone usually does: 你有车吗？ ‘do you have a car?’."
+    ]
+   }
+  },
+  {
+   "id": "zh:che",
+   "lemma": "车",
+   "trad": "車",
+   "pinyin": "chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.car",
+    "sport.chariot"
+   ],
+   "features": {
+    "readings": [
+     {
+      "pinyin": "chē",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "jū",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "traditional 車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "辆",
+     "部"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "tr.car",
+     "axis": "specificity",
+     "value": "any vehicle, by context"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Any vehicle — the car, the bus, the bike; wheels on the road.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "car; vehicle (car, bus, bike — by context)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.car"
+     },
+     {
+      "id": "s2",
+      "def": "the chariot in Chinese chess (read jū)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "sport.chariot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你有车吗？",
+      "py": "Nǐ yǒu chē ma?",
+      "tr": "Do you have a car?",
+      "register": "neutral",
+      "context": "possessions",
+      "sense": "s1"
+     },
+     {
+      "text": "车来了！",
+      "py": "Chē lái le!",
+      "tr": "The bus is here! / The car is coming!",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "我们在这里下车。",
+      "py": "Wǒmen zài zhèli xià chē.",
+      "tr": "We get off here.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "下象棋的时候，车可以直着走很远。",
+      "py": "Xià xiàngqí de shíhou, jū kěyǐ zhí zhe zǒu hěn yuǎn.",
+      "tr": "In Chinese chess the chariot can move a long way in a straight line.",
+      "register": "neutral",
+      "context": "games",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开车",
+      "tr": "to drive"
+     },
+     {
+      "text": "坐车",
+      "tr": "to ride (in a vehicle)"
+     },
+     {
+      "text": "上车 / 下车",
+      "tr": "to get on / off"
+     },
+     {
+      "text": "车票",
+      "tr": "ticket"
+     },
+     {
+      "text": "堵车",
+      "tr": "traffic jam"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "车到山前必有路",
+      "tr": "when the cart reaches the mountain there will be a road",
+      "kind": "proverb",
+      "meaning": "don’t worry too early — a way will be found",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "汽车",
+      "register": "neutral",
+      "nuance": "qìchē: car, motor vehicle — the full word"
+     },
+     {
+      "word": "车辆",
+      "register": "formal",
+      "nuance": "chēliàng: vehicles (signs, news)"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a carriage seen from above, with its two wheels. Perhaps an early loan from an Indo-European language with the horse and chariot (compare Tocharian kukäl ‘wagon’, a cousin of Greek κύκλος and English wheel).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "If the Tocharian theory is right, 车 is a distant cousin of Greek κύκλος ‘wheel, circle’ and English wheel."
+    ],
+    "pitfalls": [
+     "车 is any vehicle: 坐车 can be the bus, a taxi or a car — the context tells.",
+     "In Chinese chess 车 is read jū (the chariot, moving like the rook)."
+    ],
+    "subtleties": [
+     "In compounds 车 names the vehicles: 火车, 汽车, 自行车, 出租车, 公交车."
+    ]
+   }
+  },
+  {
+   "id": "zh:zixingche",
+   "lemma": "自行车",
+   "trad": "自行車",
+   "pinyin": "zì xíng chē",
+   "pos": "NOUN",
+   "senses": [
+    "tr.bicycle"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 自行車 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "辆"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bicycle — once the symbol of Chinese cities, now shared bikes on every corner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bicycle, bike",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.bicycle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我骑自行车去学校。",
+      "py": "Wǒ qí zìxíngchē qù xuéxiào.",
+      "tr": "I cycle to school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我有一辆自行车。",
+      "py": "Wǒ yǒu yí liàng zìxíngchē.",
+      "tr": "I have a bicycle.",
+      "register": "neutral",
+      "context": "possessions",
+      "sense": "s1"
+     },
+     {
+      "text": "自行车在门口。",
+      "py": "Zìxíngchē zài ménkǒu.",
+      "tr": "The bike is at the door.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "骑自行车",
+      "tr": "to ride a bicycle"
+     },
+     {
+      "text": "一辆自行车",
+      "tr": "a bicycle"
+     },
+     {
+      "text": "共享单车",
+      "tr": "shared bike"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "单车",
+      "register": "regional",
+      "nuance": "dānchē: bike (south, Hong Kong; also 共享单车 ‘shared bike’)"
+     },
+     {
+      "word": "脚踏车",
+      "register": "regional",
+      "nuance": "jiǎotàchē: ‘foot-pedal vehicle’, Taiwan"
+     },
+     {
+      "word": "车",
+      "register": "colloquial",
+      "nuance": "chē: the bike (骑车)"
+     }
+    ],
+    "etymology": {
+     "text": "自行 ‘by itself, self-’ + 车 ‘vehicle’: ‘self-moving vehicle’.",
+     "src": "morphemes: 自行 + 车 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "China was called the ‘kingdom of bicycles’ (自行车王国); today shared bikes (共享单车) fill the pavements."
+    ],
+    "pitfalls": [
+     "‘Ride a bicycle’ is 骑自行车; with 坐 it would mean riding on the back as a passenger."
+    ],
+    "subtleties": [
+     "Taiwan says 脚踏车 and the south 单车; 自行车 is the standard word."
+    ]
+   }
+  },
+  {
+   "id": "zh:chuan",
+   "lemma": "船",
+   "trad": "船",
+   "pinyin": "chuán",
+   "pos": "NOUN",
+   "senses": [
+    "tr.boat"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "条",
+     "艘",
+     "只"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Boats and ships — ferries, river boats, a harbour full of masts.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "boat, ship",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.boat"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们坐船去。",
+      "py": "Wǒmen zuò chuán qù.",
+      "tr": "We’re going by boat.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "河上有很多船。",
+      "py": "Hé shang yǒu hěn duō chuán.",
+      "tr": "There are many boats on the river.",
+      "register": "neutral",
+      "context": "river",
+      "sense": "s1"
+     },
+     {
+      "text": "这艘船很大。",
+      "py": "Zhè sōu chuán hěn dà.",
+      "tr": "This ship is big.",
+      "register": "neutral",
+      "context": "harbour",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "坐船",
+      "tr": "to go by boat"
+     },
+     {
+      "text": "一条船",
+      "tr": "a boat"
+     },
+     {
+      "text": "上船",
+      "tr": "to board (a boat)"
+     },
+     {
+      "text": "船票",
+      "tr": "boat ticket"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "船到桥头自然直",
+      "tr": "when the boat reaches the bridge, it straightens out by itself",
+      "kind": "saying",
+      "meaning": "things will sort themselves out in the end",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "舟",
+      "register": "literary",
+      "nuance": "zhōu: boat — Classical, in idioms"
+     },
+     {
+      "word": "轮船",
+      "register": "neutral",
+      "nuance": "lúnchuán: steamship, ship"
+     },
+     {
+      "word": "小船",
+      "register": "neutral",
+      "nuance": "xiǎochuán: small boat"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 舟 ‘boat’ + phonetic 㕣. From Proto-Sino-Tibetan *m-lawŋ ‘boat’; by Han times it had replaced the older 舟.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "船 replaced the older word 舟 some 2000 years ago; 舟 lives on in idioms like 同舟共济 ‘to cross the river in the same boat’ (to pull together)."
+    ],
+    "pitfalls": [
+     "Count small boats with 条 or 只, ships with 艘 (more formal): 一条船, 一艘船."
+    ],
+    "subtleties": [
+     "坐船 is going by boat as a passenger; 开船 is the boat setting off (or steering it)."
+    ]
+   }
+  },
+  {
+   "id": "zh:zoulu",
+   "lemma": "走路",
+   "trad": "走路",
+   "pinyin": "zǒu lù",
+   "pos": "VERB",
+   "senses": [
+    "tr.onfoot",
+    "verb.walk",
+    "verb.leave"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "construction and sense",
+     "value": "clear off, be sacked (colloquial)"
+    },
+    {
+     "concept": "verb.walk",
+     "axis": "activity or means",
+     "value": "walk, go on foot — as the means (走路去)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On your own two feet — ten minutes’ walk, the way to school.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on foot, to walk (somewhere): 走路去",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.onfoot"
+     },
+     {
+      "id": "s2",
+      "def": "to walk (the activity)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.walk"
+     },
+     {
+      "id": "s3",
+      "def": "(colloquial) to leave; to get the sack",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "verb.leave"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我走路去学校。",
+      "py": "Wǒ zǒulù qù xuéxiào.",
+      "tr": "I walk to school.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "走路十分钟。",
+      "py": "Zǒulù shí fēnzhōng.",
+      "tr": "It’s ten minutes on foot.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子一岁就会走路了。",
+      "py": "Háizi yí suì jiù huì zǒulù le.",
+      "tr": "The child could walk at one.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "他每天走路一个小时。",
+      "py": "Tā měitiān zǒulù yí ge xiǎoshí.",
+      "tr": "He walks for an hour every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     },
+     {
+      "text": "老板让他走路了。",
+      "py": "Lǎobǎn ràng tā zǒulù le.",
+      "tr": "The boss gave him the sack.",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s3"
+     },
+     {
+      "text": "你再不好好干，就走路吧！",
+      "py": "Nǐ zài bù hǎohǎo gàn, jiù zǒulù ba!",
+      "tr": "If you don’t start working properly, you can leave!",
+      "register": "colloquial",
+      "context": "work",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "走路去",
+      "tr": "to walk there, to go on foot"
+     },
+     {
+      "text": "走路回家",
+      "tr": "to walk home"
+     },
+     {
+      "text": "会走路",
+      "tr": "can walk"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "步行",
+      "register": "formal",
+      "nuance": "bùxíng: on foot (signs, news): 步行五分钟"
+     },
+     {
+      "word": "走",
+      "register": "neutral",
+      "nuance": "zǒu: to walk — with a direction: 往前走"
+     },
+     {
+      "word": "散步",
+      "register": "neutral",
+      "nuance": "sànbù: to take a stroll"
+     }
+    ],
+    "etymology": {
+     "text": "走 ‘to walk’ + 路 ‘road, way’: ‘to walk the road’.",
+     "src": "morphemes: 走 + 路 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "German zu Fuß, Greek με τα πόδια and Turkish yürüyerek all name the foot or the walking; Chinese simply puts the verb 走路 before the main verb: 走路去."
+    ],
+    "pitfalls": [
+     "‘On foot’ is not a phrase with 脚 ‘foot’ — it is 走路 + 去 / 来: 我走路去."
+    ],
+    "subtleties": [
+     "With a duration: 走路十分钟 ‘ten minutes’ walk’; with a place: 走路去公园."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": [
+     {
+      "verb": "走",
+      "object": "路",
+      "example": "走了很多路"
+     }
+    ],
+    "neg": "bu+mei"
+   }
+  },
+  {
+   "id": "zh:piao",
+   "lemma": "票",
+   "trad": "票",
+   "pinyin": "piào",
+   "pos": "NOUN",
+   "senses": [
+    "tr.ticket",
+    "pol.vote",
+    "money.banknote"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A ticket — for the train, the cinema, the museum; also a vote.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ticket",
+      "register": [
+       "neutral"
+      ],
+      "concept": "tr.ticket"
+     },
+     {
+      "id": "s2",
+      "def": "vote, ballot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.vote"
+     },
+     {
+      "id": "s3",
+      "def": "banknote (钞票)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "money.banknote"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我买两张票。",
+      "py": "Wǒ mǎi liǎng zhāng piào.",
+      "tr": "I’ll buy two tickets.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "你有票吗？",
+      "py": "Nǐ yǒu piào ma?",
+      "tr": "Do you have a ticket?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "他得了很多票。",
+      "py": "Tā dé le hěn duō piào.",
+      "tr": "He got a lot of votes.",
+      "register": "neutral",
+      "context": "elections",
+      "sense": "s2"
+     },
+     {
+      "text": "他的钱包里有很多钞票。",
+      "py": "Tā de qiánbāo li yǒu hěn duō chāopiào.",
+      "tr": "There are lots of banknotes in his wallet.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "买票",
+      "tr": "to buy a ticket"
+     },
+     {
+      "text": "火车票",
+      "tr": "train ticket"
+     },
+     {
+      "text": "门票",
+      "tr": "admission ticket"
+     },
+     {
+      "text": "投票",
+      "tr": "to vote"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "门票",
+      "register": "neutral",
+      "nuance": "ménpiào: admission ticket (museum, park)"
+     },
+     {
+      "word": "车票",
+      "register": "neutral",
+      "nuance": "chēpiào: bus / train ticket"
+     },
+     {
+      "word": "机票",
+      "register": "neutral",
+      "nuance": "jīpiào: plane ticket"
+     }
+    ],
+    "etymology": {
+     "text": "Originally sparks rising from a fire (火 + hands raising something); by extension ‘token, label’, then ‘ticket’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same 票 is a ticket and a vote: 投票 ‘to throw a ticket’ is ‘to vote’."
+    ],
+    "pitfalls": [
+     "Count with 张: 一张票.",
+     "A return ticket is 往返票, a single 单程票."
+    ],
+    "subtleties": [
+     "票 alone needs context; usually you say what for: 火车票, 电影票, 门票."
+    ]
+   }
+  },
+  {
+   "id": "zh:liang.clf",
+   "lemma": "辆",
+   "trad": "輛",
+   "pinyin": "liàng",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for vehicles with wheels: 一辆车, 两辆自行车",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 輛 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:jia.frame",
+   "lemma": "架",
+   "trad": "架",
+   "pinyin": "jià",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for planes (also pianos, cameras): 一架飞机",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:lie",
+   "lemma": "列",
+   "trad": "列",
+   "pinyin": "liè",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for trains (formal): 一列火车",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:sou",
+   "lemma": "艘",
+   "trad": "艘",
+   "pinyin": "sōu",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for ships and larger boats: 一艘船",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
+   }
+  },
+  {
+   "id": "zh:ba.part",
+   "lemma": "吧",
+   "trad": "吧",
+   "pinyin": "ba",
+   "pos": "PART",
+   "senses": [
+    "part.lets",
+    "part.tag"
+   ],
+   "role": "sentence-final particle of suggestion and soft command: 我们走吧 ‘let’s go’, 你来吧 ‘do come’",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A soft push — ‘let’s’, ‘go on’, ‘why don’t you’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "let’s …; why don’t you … (a suggestion or a soft command)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.lets"
+     },
+     {
+      "id": "s2",
+      "def": "… I suppose; … right? (a guess)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.tag"
+     },
+     {
+      "id": "s3",
+      "def": "all right then (agreeing)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们走吧！",
+      "py": "Wǒmen zǒu ba!",
+      "tr": "Let’s go!",
+      "register": "neutral",
+      "context": "leaving",
+      "sense": "s1"
+     },
+     {
+      "text": "你来吧！",
+      "py": "Nǐ lái ba!",
+      "tr": "Come on, do come!",
+      "register": "neutral",
+      "context": "invitation",
+      "sense": "s1"
+     },
+     {
+      "text": "你是安娜吧？",
+      "py": "Nǐ shì Ānnà ba?",
+      "tr": "You’re Anna, aren’t you?",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s2"
+     },
+     {
+      "text": "好吧。",
+      "py": "Hǎo ba.",
+      "tr": "All right then.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "走吧",
+      "tr": "let’s go"
+     },
+     {
+      "text": "好吧",
+      "tr": "all right then"
+     },
+     {
+      "text": "…吧？",
+      "tr": "…, right?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "吗",
+      "register": "neutral",
+      "nuance": "ma: the neutral yes/no question — 吧 expects a ‘yes’"
+     },
+     {
+      "word": "啊",
+      "register": "colloquial",
+      "nuance": "a: softens a sentence (warmth, surprise)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 口 ‘mouth’ + phonetic 巴; the particle goes back to 罷 / 罢 ‘to stop, to finish’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "吧 is also the ‘bar’: 酒吧 ‘bar’, 网吧 ‘internet café’ — a loan from English bar."
+    ],
+    "pitfalls": [
+     "吧 turns a statement into a suggestion, not a question of fact: 你来吧 ‘do come’, but 你来吗？ ‘are you coming?’."
+    ],
+    "subtleties": [
+     "With ‘we’ it is ‘let’s’: 我们走吧; with ‘you’ a friendly push: 你吃吧 ‘go ahead, eat’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "sentenceFinal"
+    ]
+   }
+  },
+  {
+   "id": "zh:bie",
+   "lemma": "别",
+   "trad": "別",
+   "pinyin": "bié",
+   "pos": "ADV",
+   "senses": [
+    "part.dont",
+    "adj.other",
+    "verb.partfrom"
+   ],
+   "role": "don’t! — the negative command before a verb: 别走 ‘don’t go’ (S13)",
+   "contrasts": [
+    {
+     "concept": "adj.other",
+     "axis": "register and construction",
+     "value": "everyday: 别的 + noun (别的书)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Don’t! — a hand raised, a warning, a kind ‘don’t worry’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "don’t (negative command, before a verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.dont"
+     },
+     {
+      "id": "s2",
+      "def": "other, another (别的 ‘other’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.other"
+     },
+     {
+      "id": "s3",
+      "def": "(literary) to part, to leave (告别 ‘to say goodbye’)",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.partfrom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "别走！",
+      "py": "Bié zǒu!",
+      "tr": "Don’t go!",
+      "register": "neutral",
+      "context": "emotions",
+      "sense": "s1"
+     },
+     {
+      "text": "别等我。",
+      "py": "Bié děng wǒ.",
+      "tr": "Don’t wait for me.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "你别开车，坐出租车吧。",
+      "py": "Nǐ bié kāichē, zuò chūzūchē ba.",
+      "tr": "Don’t drive — take a taxi.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s1"
+     },
+     {
+      "text": "你要别的吗？",
+      "py": "Nǐ yào biéde ma?",
+      "tr": "Do you want anything else?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     },
+     {
+      "text": "我们在车站告别了。",
+      "py": "Wǒmen zài chēzhàn gàobié le.",
+      "tr": "We said goodbye at the station.",
+      "register": "literary",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "别走",
+      "tr": "don’t go"
+     },
+     {
+      "text": "别客气",
+      "tr": "you’re welcome; make yourself at home"
+     },
+     {
+      "text": "别担心",
+      "tr": "don’t worry"
+     },
+     {
+      "text": "别的",
+      "tr": "other"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "别客气",
+      "tr": "don’t be polite",
+      "kind": "fixed expression",
+      "meaning": "you’re welcome; please, no ceremony",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "不要",
+      "register": "neutral",
+      "nuance": "búyào: don’t — the same, slightly stronger, also in writing (不要走)"
+     },
+     {
+      "word": "请勿",
+      "register": "formal",
+      "nuance": "qǐngwù: please do not (signs: 请勿吸烟 ‘no smoking’)"
+     },
+     {
+      "word": "甭",
+      "register": "regional",
+      "nuance": "béng: Beijing speech, ‘no need to, don’t’ (甭客气)"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 冎 ‘bone’ + 刂 ‘knife’ — cutting apart, hence ‘to separate, other’. Some linguists explain the sense ‘don’t’ as a contraction of 不要.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Some linguists think 别 ‘don’t’ is 不要 bú yào said fast — bu-yao → bié."
+    ],
+    "pitfalls": [
+     "别 is only for commands and requests; a plain ‘not’ is 不: 他不走 ‘he isn’t going’, but 别走！ ‘don’t go!’.",
+     "别 + verb + 了 means ‘stop …-ing’: 别等了 ‘stop waiting’ (了, S14)."
+    ],
+    "subtleties": [
+     "别 is more colloquial than 不要; both stand right before the verb, after the subject if there is one: 你别走."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 別 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:dengyixia",
+   "lemma": "等一下",
+   "trad": "等一下",
+   "pinyin": "děng yī xià",
+   "pos": "VERB",
+   "senses": [
+    "verb.wait",
+    "adv.later"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.later",
+     "axis": "how much later",
+     "value": "in a moment (spoken)"
+    },
+    {
+     "concept": "verb.wait",
+     "axis": "register and use",
+     "value": "wait a moment! — a request"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In a bit — after this, later today.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "later, in a little while",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.later"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) wait a moment!",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wait"
+     }
+    ],
+    "examples": [
+     {
+      "text": "等一下我给你打电话。",
+      "py": "Děng yíxià wǒ gěi nǐ dǎ diànhuà.",
+      "tr": "I’ll call you later.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "我们等一下去超市。",
+      "py": "Wǒmen děng yíxià qù chāoshì.",
+      "tr": "We’ll go to the supermarket in a bit.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "等一下！",
+      "py": "Děng yíxià!",
+      "tr": "Wait a moment!",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s2"
+     },
+     {
+      "text": "请等一下，我马上来。",
+      "py": "Qǐng děng yíxià, wǒ mǎshàng lái.",
+      "tr": "Please wait a moment — I’m coming right away.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "等一下见",
+      "tr": "see you in a bit"
+     },
+     {
+      "text": "请等一下",
+      "tr": "please wait a moment"
+     },
+     {
+      "text": "等一下再说",
+      "tr": "let’s talk about it in a bit"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一会儿",
+      "register": "neutral",
+      "nuance": "yíhuìr: in a little while, soon"
+     },
+     {
+      "word": "待会儿",
+      "register": "colloquial",
+      "nuance": "dāihuìr: in a bit — northern speech"
+     },
+     {
+      "word": "回头",
+      "register": "colloquial",
+      "nuance": "huítóu: later (回头见 ‘see you later’)"
+     }
+    ],
+    "etymology": {
+     "text": "等 ‘to wait’ + 一下 ‘a moment, once’: ‘wait a moment’ → ‘in a moment, later’.",
+     "src": "morphemes: 等 + 一下 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "等一下 shows how Chinese turns verbs into time words: ‘wait a little’ becomes ‘later’."
+    ],
+    "pitfalls": [
+     "Said děng yíxià: 一 changes to yí before the 4th tone of 下 (dictionaries write yī)."
+    ],
+    "subtleties": [
+     "等一下 is ‘later today, in a little while’; for a far future use 以后."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "děng yí xià",
+    "separable": {
+     "none": "not a verb-object word: it does not split"
+    },
+    "neg": {
+     "none": "a fixed request (‘wait a moment’), not negated — ‘don’t wait’ is 别等了"
+    }
+   }
+  }
+ ],
+ "absent": []
+}

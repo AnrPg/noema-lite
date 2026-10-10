@@ -1,0 +1,1583 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:xing",
+   "lemma": "醒",
+   "trad": "醒",
+   "pinyin": "xǐng",
+   "pos": "VERB",
+   "senses": [
+    "verb.wakeup"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eyes open, the first light — the moment sleep ends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wake up, to awaken",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wakeup"
+     },
+     {
+      "id": "s2",
+      "def": "to be awake (醒着)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我今天早上六点就醒了。",
+      "py": "Wǒ jīntiān zǎoshang liù diǎn jiù xǐng le.",
+      "tr": "I was awake by six this morning.",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子醒了吗？",
+      "py": "Háizi xǐng le ma?",
+      "tr": "Is the child awake (yet)?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "他还醒着。",
+      "py": "Tā hái xǐngzhe.",
+      "tr": "He is still awake.",
+      "register": "neutral",
+      "context": "night",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "醒来",
+      "tr": "to wake up, to come round"
+     },
+     {
+      "text": "叫醒",
+      "tr": "to wake someone up"
+     },
+     {
+      "text": "醒着",
+      "tr": "to be awake"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "醒来",
+      "register": "neutral",
+      "nuance": "xǐnglái: wake up, come to — often in narration: 他醒来的时候…"
+     },
+     {
+      "word": "起床",
+      "register": "neutral",
+      "nuance": "qǐchuáng: get up, get out of bed — 醒 is only opening your eyes"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 酉 ‘alcohol’ + phonetic 星; Wiktionary lists ‘to sober up; to regain consciousness’ and ‘to wake up’ among its senses, and relates it to 清 ‘clear’ (Schuessler 2007).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "醒 is also ‘to sober up’ (醒酒) — which is why its left part is 酉, the ‘wine jar’ component."
+    ],
+    "pitfalls": [
+     "醒 is only waking up; getting out of bed is 起床: 我六点醒了，七点才起床 ‘I woke at six but didn’t get up till seven’.",
+     "To wake SOMEONE ELSE is 叫醒 ‘call awake’: 妈妈七点叫醒我 — not *妈妈醒我."
+    ],
+    "subtleties": [
+     "醒了 = has woken, is awake now (the 了 of a new situation); 醒着 = is (lying) awake, a lasting state (C02)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "a single verb, nothing goes inside"
+    }
+   }
+  },
+  {
+   "id": "zh:qichuang",
+   "lemma": "起床",
+   "trad": "起床",
+   "pinyin": "qǐ chuáng",
+   "pos": "VERB",
+   "senses": [
+    "verb.getup"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The alarm rings, the blanket is thrown back — the start of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get up, to get out of bed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我每天七点起床。",
+      "py": "Wǒ měitiān qī diǎn qǐchuáng.",
+      "tr": "I get up at seven every day.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "快起床！要迟到了！",
+      "py": "Kuài qǐchuáng! Yào chídào le!",
+      "tr": "Get up, quick! We’re going to be late!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "星期天我很晚才起床。",
+      "py": "Xīngqītiān wǒ hěn wǎn cái qǐchuáng.",
+      "tr": "On Sundays I don’t get up till late.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "早上起床",
+      "tr": "to get up in the morning"
+     },
+     {
+      "text": "起床以后",
+      "tr": "after getting up"
+     },
+     {
+      "text": "该起床了",
+      "tr": "it’s time to get up"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "早睡早起身体好",
+      "tr": "early to bed, early to rise — good for the body",
+      "kind": "saying",
+      "meaning": "go to bed early and get up early to stay healthy",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "起来",
+      "register": "colloquial",
+      "nuance": "qǐlái: get up (from bed or from a seat) — 快起来！"
+     },
+     {
+      "word": "起",
+      "register": "neutral",
+      "nuance": "qǐ: get up — short, in set phrases: 早睡早起"
+     },
+     {
+      "word": "起身",
+      "register": "formal",
+      "nuance": "qǐshēn: rise, get up"
+     }
+    ],
+    "etymology": {
+     "text": "起 ‘to rise’ + 床 ‘bed’: a verb–object word, ‘rise from the bed’; Wiktionary writes it 起⫽床 (separable).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "The saying 早睡早起身体好 ‘early to bed, early to rise keeps you healthy’ uses the short 起 for 起床."
+    ],
+    "pitfalls": [
+     "起床 already has its object (床): nothing else can follow it; 了 may go inside it in narration (起了床就走)."
+    ],
+    "subtleties": [
+     "起床 is getting out of bed, 醒 is waking up: you can 醒 at six and 起床 at seven."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": [
+     {
+      "verb": "起",
+      "object": "床",
+      "example": "起了床"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zh:xi",
+   "lemma": "洗",
+   "trad": "洗",
+   "pinyin": "xǐ",
+   "pos": "VERB",
+   "senses": [
+    "verb.wash"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Water, soap and clean hands — washing anything at all.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wash (oneself, a part of the body, clothes, dishes)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wash"
+     }
+    ],
+    "examples": [
+     {
+      "text": "吃饭以前要洗手。",
+      "py": "Chīfàn yǐqián yào xǐ shǒu.",
+      "tr": "Wash your hands before eating.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "早上我用冷水洗脸。",
+      "py": "Zǎoshang wǒ yòng lěngshuǐ xǐ liǎn.",
+      "tr": "In the morning I wash my face in cold water.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈在洗衣服。",
+      "py": "Māma zài xǐ yīfu.",
+      "tr": "Mum is doing the washing.",
+      "register": "neutral",
+      "context": "housework",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "洗手",
+      "tr": "to wash one’s hands"
+     },
+     {
+      "text": "洗脸",
+      "tr": "to wash one’s face"
+     },
+     {
+      "text": "洗衣服",
+      "tr": "to do the washing (clothes)"
+     },
+     {
+      "text": "洗碗",
+      "tr": "to wash the dishes"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "洗耳恭听",
+      "tr": "wash one’s ears and listen respectfully",
+      "kind": "idiom",
+      "meaning": "to listen attentively (polite, often humorous)",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "冲",
+      "register": "neutral",
+      "nuance": "chōng: rinse (under running water)"
+     },
+     {
+      "word": "刷",
+      "register": "neutral",
+      "nuance": "shuā: brush, scrub — 刷牙 ‘brush one’s teeth’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 水 ‘water’ + phonetic 先. From Proto-Sino-Tibetan *sjərl ‘to wash; to bathe’; cognate with Tibetan བསིལ (bsil) ‘to wash’ (Schuessler 2007, STEDT).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "洗手间 ‘wash-hands room’ is the polite word for the toilet (S12)."
+    ],
+    "pitfalls": [
+     "Teeth are brushed, not washed: 刷牙; 洗牙 is a cleaning at the dentist’s.",
+     "洗 also develops photos (洗照片), shuffles cards (洗牌) and launders money (洗钱) — the object decides."
+    ],
+    "subtleties": [
+     "洗 needs what is washed: 洗手, 洗脸, 洗衣服; washing all over is 洗澡."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "a single verb that takes an object (洗手, 洗衣服)"
+    }
+   }
+  },
+  {
+   "id": "zh:xizao",
+   "lemma": "洗澡",
+   "trad": "洗澡",
+   "pinyin": "xǐ zǎo",
+   "pos": "VERB",
+   "senses": [
+    "verb.shower"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hot water after a long day — shower or bath, it is all 洗澡.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to take a shower or a bath, to wash oneself",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.shower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我每天晚上洗澡。",
+      "py": "Wǒ měitiān wǎnshang xǐzǎo.",
+      "tr": "I shower every evening.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "他正在洗澡，不能接电话。",
+      "py": "Tā zhèngzài xǐzǎo, bù néng jiē diànhuà.",
+      "tr": "He’s in the shower and can’t take the call.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1"
+     },
+     {
+      "text": "我起床以后先洗澡。",
+      "py": "Wǒ qǐchuáng yǐhòu xiān xǐzǎo.",
+      "tr": "After getting up I shower first.",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "洗个澡",
+      "tr": "to have a quick wash, a shower"
+     },
+     {
+      "text": "洗热水澡",
+      "tr": "to have a hot shower or bath"
+     },
+     {
+      "text": "洗完澡",
+      "tr": "after the shower"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "冲澡",
+      "register": "neutral",
+      "nuance": "chōngzǎo: take a shower (rinsing under running water)"
+     },
+     {
+      "word": "泡澡",
+      "register": "colloquial",
+      "nuance": "pàozǎo: soak in a bath"
+     },
+     {
+      "word": "沐浴",
+      "register": "formal",
+      "nuance": "mùyù: bathe"
+     }
+    ],
+    "etymology": {
+     "text": "洗 ‘to wash’ + 澡 ‘to wash the body’ (澡 is no longer used alone): a verb–object word, Wiktionary 洗⫽澡.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Chinese makes no difference between a shower and a bath: both are 洗澡. The shower itself is 淋浴 (línyù), the bathtub 浴缸 (yùgǎng)."
+    ],
+    "pitfalls": [
+     "洗澡 already has its object: *洗澡身体 is wrong. 了 and 个 go inside: 洗了个澡."
+    ],
+    "subtleties": [
+     "洗了个澡 with 个 sounds light and quick — ‘had a quick wash’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": [
+     {
+      "verb": "洗",
+      "object": "澡",
+      "example": "洗了个澡"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zh:chuanyi",
+   "lemma": "穿衣",
+   "trad": "穿衣",
+   "pinyin": "chuān yī",
+   "pos": "VERB",
+   "senses": [
+    "verb.getdressed"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses 穿衣 ‘to put on clothes; to dress; to wear clothes’ — the same meaning as the concept ‘to get dressed’, in other words."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shirt, trousers, socks — getting ready to face the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get dressed, to put on one’s clothes",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getdressed"
+     }
+    ],
+    "examples": [
+     {
+      "text": "孩子已经会自己穿衣了。",
+      "py": "Háizi yǐjīng huì zìjǐ chuānyī le.",
+      "tr": "The child can already dress himself.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "我起床、洗脸、穿衣，然后吃早饭。",
+      "py": "Wǒ qǐchuáng, xǐ liǎn, chuānyī, ránhòu chī zǎofàn.",
+      "tr": "I get up, wash my face, get dressed and then have breakfast.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "天冷了，要多穿衣。",
+      "py": "Tiān lěng le, yào duō chuānyī.",
+      "tr": "It’s getting cold — wrap up warm.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "起床穿衣",
+      "tr": "to get up and dress"
+     },
+     {
+      "text": "多穿衣",
+      "tr": "to dress warmly"
+     },
+     {
+      "text": "穿衣服",
+      "tr": "to put on clothes (the full spoken form)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "穿衣服",
+      "register": "neutral",
+      "nuance": "chuān yīfu: the usual spoken form, with the full noun 衣服 ‘clothes’ (C08)"
+     },
+     {
+      "word": "穿上",
+      "register": "neutral",
+      "nuance": "chuānshang: put on + the garment (穿上外套)"
+     },
+     {
+      "word": "打扮",
+      "register": "neutral",
+      "nuance": "dǎban: dress up, make oneself look nice"
+     }
+    ],
+    "etymology": {
+     "text": "穿 ‘to pass through; to put on, to wear’ + 衣 ‘clothes’: ‘put on clothes’. Wiktionary writes it 穿⫽衣 (separable) and glosses it ‘to put on clothes; to dress’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "穿 first meant ‘to bore through, to pierce’ — you pass through a sleeve or a shoe: 穿衣, 穿鞋."
+    ],
+    "pitfalls": [
+     "In speech ‘get dressed’ is usually 穿衣服, with the full noun 衣服; 穿衣 is the short form of lists and advice (起床穿衣, 多穿衣).",
+     "Hats, glasses and watches are not 穿 but 戴 (C08)."
+    ],
+    "subtleties": [
+     "穿 covers both putting on and wearing (C08): 他在穿衣 ‘he is getting dressed’, 他穿着红衣服 ‘he is wearing red’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": [
+     {
+      "verb": "穿",
+      "object": "衣"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zh:chumen",
+   "lemma": "出门",
+   "trad": "出門",
+   "pinyin": "chū mén",
+   "pos": "VERB",
+   "senses": [
+    "verb.leavehome"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Keys, phone, door shut behind you — out into the street.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go out, to leave the house",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leavehome"
+     },
+     {
+      "id": "s2",
+      "def": "to be away from home, to set off on a journey",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我八点出门去上班。",
+      "py": "Wǒ bā diǎn chūmén qù shàngbān.",
+      "tr": "I leave home at eight to go to work.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "外面下雨，别出门了。",
+      "py": "Wàimiàn xià yǔ, bié chūmén le.",
+      "tr": "It’s raining outside — don’t go out.",
+      "register": "informal",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "他出门旅行去了。",
+      "py": "Tā chūmén lǚxíng qù le.",
+      "tr": "He has gone away travelling.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "出门在外",
+      "tr": "away from home"
+     },
+     {
+      "text": "一出门",
+      "tr": "as soon as one steps out"
+     },
+     {
+      "text": "出远门",
+      "tr": "to go on a long journey"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "在家千日好，出门一时难",
+      "tr": "at home a thousand days are fine, away from home one hour is hard",
+      "kind": "proverb",
+      "meaning": "travelling is hard; nothing beats home",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "出去",
+      "register": "neutral",
+      "nuance": "chūqù: go out (away from here) — the direction, not leaving home"
+     },
+     {
+      "word": "离开家",
+      "register": "neutral",
+      "nuance": "líkāi jiā: leave home — also for good"
+     }
+    ],
+    "etymology": {
+     "text": "出 ‘to go out’ + 门 ‘door, gate’: ‘go out of the door’; Wiktionary writes it 出⫽門 (separable).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "Wiktionary also records older senses: a woman marrying out of her family, and a funeral procession leaving the house."
+    ],
+    "pitfalls": [
+     "出门 is going out, not leaving for good: 他出门了 ‘he has gone out’; moving out of home is 离开家 / 搬出去."
+    ],
+    "subtleties": [
+     "一出门就… ‘as soon as I stepped out …’: 我一出门就下雨了."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 出門 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": [
+     {
+      "verb": "出",
+      "object": "门",
+      "example": "出了门"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zh:kaishi",
+   "lemma": "开始",
+   "trad": "開始",
+   "pinyin": "kāi shǐ",
+   "pos": "VERB",
+   "senses": [
+    "verb.start"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.start",
+     "axis": "general or in set words",
+     "value": "the general verb: begin (+ verb or noun) — 开始工作, 电影开始了"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The whistle blows, the lights go down — something gets going.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to start, to begin (+ verb or noun); to start (of an event)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.start"
+     },
+     {
+      "id": "s2",
+      "def": "(noun) the beginning: 开始的时候, 一开始",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们九点开始工作。",
+      "py": "Wǒmen jiǔ diǎn kāishǐ gōngzuò.",
+      "tr": "We start work at nine.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "电影开始了！",
+      "py": "Diànyǐng kāishǐ le!",
+      "tr": "The film has started!",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s1"
+     },
+     {
+      "text": "开始的时候，我觉得中文很难。",
+      "py": "Kāishǐ de shíhou, wǒ juéde Zhōngwén hěn nán.",
+      "tr": "At the beginning I found Chinese hard.",
+      "register": "neutral",
+      "context": "learning",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "开始工作",
+      "tr": "to start work"
+     },
+     {
+      "text": "从……开始",
+      "tr": "starting from …"
+     },
+     {
+      "text": "一开始",
+      "tr": "at first"
+     },
+     {
+      "text": "重新开始",
+      "tr": "to start again"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "开",
+      "register": "neutral",
+      "nuance": "kāi: start — only in set words: 开会, 开学"
+     },
+     {
+      "word": "开头",
+      "register": "colloquial",
+      "nuance": "kāitóu: begin; the beginning"
+     },
+     {
+      "word": "起",
+      "register": "formal",
+      "nuance": "qǐ: 从…起 ‘starting from …’"
+     }
+    ],
+    "etymology": {
+     "text": "开 ‘to open’ + 始 ‘beginning’ (as in 始终 ‘from beginning to end’).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "从今天开始 ‘starting today’: 从 … 开始 frames a starting point, as 从 … 到 … frames a stretch (S15)."
+    ],
+    "pitfalls": [
+     "开始 + verb needs no word for ‘to’: 开始学中文 ‘start learning Chinese’."
+    ],
+    "subtleties": [
+     "开始了 = has begun, is under way now; 开始的时候 / 一开始 = at the beginning, at first."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 開始 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word: nothing goes inside"
+    }
+   }
+  },
+  {
+   "id": "zh:jieshu",
+   "lemma": "结束",
+   "trad": "結束",
+   "pinyin": "jié shù",
+   "pos": "VERB",
+   "senses": [
+    "verb.finish"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.finish",
+     "axis": "use",
+     "value": "an event or an activity ends, or someone ends it (会议结束了, 结束工作)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last bell, the closing credits — it is over.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to end, to finish, to come to an end; to bring to an end",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.finish"
+     }
+    ],
+    "examples": [
+     {
+      "text": "会议几点结束？",
+      "py": "Huìyì jǐ diǎn jiéshù?",
+      "tr": "What time does the meeting end?",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "假期结束了，我们回家吧。",
+      "py": "Jiàqī jiéshù le, wǒmen huí jiā ba.",
+      "tr": "The holiday is over — let’s go home.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "他七点结束工作，然后回家。",
+      "py": "Tā qī diǎn jiéshù gōngzuò, ránhòu huí jiā.",
+      "tr": "He finishes work at seven and then goes home.",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "结束工作",
+      "tr": "to finish work"
+     },
+     {
+      "text": "会议结束",
+      "tr": "the meeting ends"
+     },
+     {
+      "text": "结束了",
+      "tr": "it’s over"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "完",
+      "register": "neutral",
+      "nuance": "wán: finish, be over — after a verb (吃完 ‘eat up’) or alone (电影完了)"
+     },
+     {
+      "word": "完成",
+      "register": "formal",
+      "nuance": "wánchéng: complete, accomplish (a task)"
+     },
+     {
+      "word": "停止",
+      "register": "formal",
+      "nuance": "tíngzhǐ: stop (something still going)"
+     }
+    ],
+    "etymology": {
+     "text": "结 ‘to tie, to knot’ + 束 ‘to bind’. Wiktionary also records the archaic senses ‘to dress up’ and ‘to pack up for a journey’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The opposite pair 开始 / 结束 frames every event: 会议九点开始，十点结束."
+    ],
+    "pitfalls": [
+     "结束 is ‘come to an end’, not ‘use up’: *咖啡结束了 → 咖啡喝完了 / 没有了."
+    ],
+    "subtleties": [
+     "结束 ends things that go on (a meeting, a war, a holiday); finishing a piece of work is usually verb + 完: 做完, 吃完 (C33)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 結束 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "not a verb–object word: nothing goes inside"
+    }
+   }
+  },
+  {
+   "id": "zh:shuijiao",
+   "lemma": "睡觉",
+   "trad": "睡覺",
+   "pinyin": "shuì jiào",
+   "pos": "VERB",
+   "senses": [
+    "verb.gotobed",
+    "verb.sleep"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.sleep",
+     "axis": "construction",
+     "value": "the plain activity, often alone (我要睡觉了)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lights out, pillow, blanket — bedtime and the night’s sleep.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to go to bed (bedtime)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.gotobed"
+     },
+     {
+      "id": "s2",
+      "def": "to sleep, to be asleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.sleep"
+     },
+     {
+      "id": "s3",
+      "def": "(跟…睡觉) to sleep with someone",
+      "register": [
+       "euphemistic"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你几点睡觉？",
+      "py": "Nǐ jǐ diǎn shuìjiào?",
+      "tr": "What time do you go to bed?",
+      "register": "neutral",
+      "context": "routine",
+      "sense": "s1"
+     },
+     {
+      "text": "十一点了，该睡觉了。",
+      "py": "Shíyī diǎn le, gāi shuìjiào le.",
+      "tr": "It’s eleven — time for bed.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子在睡觉，别说话。",
+      "py": "Háizi zài shuìjiào, bié shuōhuà.",
+      "tr": "The child is asleep — don’t talk.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "昨天晚上我没睡觉。",
+      "py": "Zuótiān wǎnshang wǒ méi shuìjiào.",
+      "tr": "I didn’t sleep last night.",
+      "register": "neutral",
+      "context": "night",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "睡个好觉",
+      "tr": "to have a good sleep"
+     },
+     {
+      "text": "睡午觉",
+      "tr": "to take an afternoon nap"
+     },
+     {
+      "text": "上床睡觉",
+      "tr": "to go to bed"
+     },
+     {
+      "text": "该睡觉了",
+      "tr": "it’s bedtime"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "睡",
+      "register": "neutral",
+      "nuance": "shuì: sleep — with a length or a result after it (睡八个小时, 睡着)"
+     },
+     {
+      "word": "休息",
+      "register": "neutral",
+      "nuance": "xiūxi: rest — also a polite ‘go to bed’ (你早点休息吧)"
+     },
+     {
+      "word": "就寝",
+      "register": "formal",
+      "nuance": "jiùqǐn: retire for the night"
+     }
+    ],
+    "etymology": {
+     "text": "睡 ‘to sleep’ + 觉 jiào ‘a sleep’: a verb–object word, Wiktionary 睡⫽覺.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "觉 has two readings: jiào ‘a sleep’ (睡觉, 午觉) and jué ‘to feel, to become aware’ (觉得). Wiktionary even records an old 睡觉 read shuìjué ‘to wake up’."
+    ],
+    "pitfalls": [
+     "睡觉 already has its object, so a length goes with 睡: 睡了八个小时 (or split: 睡了八个小时的觉), not *睡觉了八个小时.",
+     "跟…睡觉 can mean ‘to sleep with someone’ — context decides."
+    ],
+    "subtleties": [
+     "睡觉 is both ‘go to bed’ and ‘sleep’: 我十一点睡觉 ‘I go to bed at eleven’, 他在睡觉 ‘he is asleep’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading in every sense: shuìjiào (觉 is jiào in this word)"
+    },
+    "tradPerSense": {
+     "none": "traditional 睡覺 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": [
+     {
+      "verb": "睡",
+      "object": "觉",
+      "example": "睡了一觉"
+     }
+    ]
+   }
+  },
+  {
+   "id": "zh:shui.sleep",
+   "lemma": "睡",
+   "trad": "睡",
+   "pinyin": "shuì",
+   "pos": "VERB",
+   "senses": [
+    "verb.sleep"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.sleep",
+     "axis": "construction",
+     "value": "with what follows: a length, a result, a place (睡八个小时, 睡着, 睡在床上)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Deep, light, long or short — sleep itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to sleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.sleep"
+     },
+     {
+      "id": "s2",
+      "def": "to sleep with (someone)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我昨天睡了八个小时。",
+      "py": "Wǒ zuótiān shuìle bā ge xiǎoshí.",
+      "tr": "I slept eight hours last night.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "你睡得好吗？",
+      "py": "Nǐ shuì de hǎo ma?",
+      "tr": "Did you sleep well?",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "他睡在沙发上。",
+      "py": "Tā shuì zài shāfā shang.",
+      "tr": "He sleeps on the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "睡着",
+      "tr": "to fall asleep"
+     },
+     {
+      "text": "睡得好",
+      "tr": "to sleep well"
+     },
+     {
+      "text": "睡懒觉",
+      "tr": "to sleep in, to have a lie-in"
+     },
+     {
+      "text": "早睡早起",
+      "tr": "early to bed, early to rise"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "睡觉",
+      "register": "neutral",
+      "nuance": "shuìjiào: the activity — go to bed, sleep"
+     },
+     {
+      "word": "睡眠",
+      "register": "technical",
+      "nuance": "shuìmián: sleep (the noun: 睡眠不好 ‘poor sleep’)"
+     },
+     {
+      "word": "眠",
+      "register": "literary",
+      "nuance": "mián: sleep (in compounds: 失眠 ‘insomnia’)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 目 ‘eye’ + phonetic 垂; Wiktionary (after STEDT) suggests a link with 垂 ‘to hang down’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A memory aid: the eye 目 next to 垂 ‘hanging down’ — drooping eyelids."
+    ],
+    "pitfalls": [
+     "The length comes after 睡: 睡了八个小时; 睡觉 cannot take it (*睡觉八个小时)."
+    ],
+    "subtleties": [
+     "睡 is the verb that takes complements: 睡着 ‘fall asleep’, 睡不着 ‘can’t sleep’, 睡得好 ‘sleep well’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "bu+mei",
+    "separable": {
+     "none": "a single verb; results and lengths follow it (睡着, 睡八个小时)"
+    }
+   }
+  },
+  {
+   "id": "zh:shuizhao",
+   "lemma": "睡着",
+   "trad": "睡著",
+   "pinyin": "shuì zháo",
+   "pos": "VERB",
+   "senses": [
+    "verb.fallasleep"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Drifting off — the moment you are finally gone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to fall asleep, to get to sleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.fallasleep"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我十二点才睡着。",
+      "py": "Wǒ shí’èr diǎn cái shuìzháo.",
+      "tr": "I didn’t fall asleep until twelve.",
+      "register": "neutral",
+      "context": "night",
+      "sense": "s1"
+     },
+     {
+      "text": "昨天晚上我没睡着。",
+      "py": "Zuótiān wǎnshang wǒ méi shuìzháo.",
+      "tr": "I couldn’t get to sleep last night.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子睡着了。",
+      "py": "Háizi shuìzháo le.",
+      "tr": "The child has fallen asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "睡不着",
+      "tr": "cannot fall asleep"
+     },
+     {
+      "text": "睡着了",
+      "tr": "has fallen asleep"
+     },
+     {
+      "text": "很快就睡着了",
+      "tr": "fell asleep very quickly"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "入睡",
+      "register": "formal",
+      "nuance": "rùshuì: fall asleep (in writing, medicine)"
+     },
+     {
+      "word": "成眠",
+      "register": "literary",
+      "nuance": "chéngmián: fall asleep — mostly in 难以成眠 ‘unable to sleep’"
+     }
+    ],
+    "etymology": {
+     "text": "睡 ‘to sleep’ + 着 zháo ‘to reach, to succeed’: a verb with its result, ‘sleep and get there’ (Wiktionary: verb-complement 睡⫽著).",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "着 here is zháo, as in 找着 ‘search and find’ — the result reached — not the toneless zhe of a lasting state (C02)."
+    ],
+    "pitfalls": [
+     "睡着 shuìzháo ‘fall asleep’ and 睡着 shuìzhe ‘sleeping (in a lasting state)’ are written alike; 睡着了 with 了 is nearly always zháo."
+    ],
+    "subtleties": [
+     "Not falling asleep is 没睡着 (didn’t manage) or 睡不着 (can’t) — never *不睡着."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading: shuìzháo (着 is zháo in this word)"
+    },
+    "tradPerSense": {
+     "none": "traditional 睡著 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "neg": "mei",
+    "separable": {
+     "none": "a verb with its result (睡 + 着): 得 / 不 can go between (睡得着, 睡不着), but no object"
+    }
+   }
+  },
+  {
+   "id": "zh:yijing",
+   "lemma": "已经",
+   "trad": "已經",
+   "pinyin": "yǐ jīng",
+   "pos": "ADV",
+   "senses": [
+    "adv.already"
+   ],
+   "role": "already — 已经 … 了 with a completed action or a point reached (他已经起床了, 已经十点了) (C01); ‘already’ in depth comes with aspect (C40)",
+   "contrasts": [
+    {
+     "concept": "adv.already",
+     "axis": "construction",
+     "value": "已经 + verb (+ 了): already — the plain everyday word (他已经走了)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Done before you asked — the matter is already behind us.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "already (with 了: an action done, a point reached)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.already"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他已经起床了。",
+      "py": "Tā yǐjīng qǐchuáng le.",
+      "tr": "He’s already up.",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "我已经吃过早饭了。",
+      "py": "Wǒ yǐjīng chīguo zǎofàn le.",
+      "tr": "I’ve already had breakfast.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "已经十点了，快走吧！",
+      "py": "Yǐjīng shí diǎn le, kuài zǒu ba!",
+      "tr": "It’s already ten — let’s go!",
+      "register": "informal",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "已经……了",
+      "tr": "already …"
+     },
+     {
+      "text": "已经很晚了",
+      "tr": "it’s already late"
+     },
+     {
+      "text": "已经到了",
+      "tr": "has already arrived"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "早就",
+      "register": "neutral",
+      "nuance": "zǎojiù: long ago, long since (我早就知道了)"
+     },
+     {
+      "word": "已",
+      "register": "formal",
+      "nuance": "yǐ: already — in writing (已到 ‘has arrived’)"
+     },
+     {
+      "word": "都",
+      "register": "colloquial",
+      "nuance": "dōu: 都…了 ‘already!’, with surprise (都十点了)"
+     }
+    ],
+    "etymology": {
+     "text": "已 ‘to stop; already’ + 经 ‘to pass through’ (as in 经过): ‘already passed’.",
+     "src": "morphemes (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "已 yǐ ‘already’, 己 jǐ ‘self’ and 巳 sì (an Earthly Branch) differ only in how far one stroke closes."
+    ],
+    "pitfalls": [
+     "已经 almost always goes with 了: 他已经走了 — *他已经走 sounds unfinished.",
+     "Its negative is not *已经没 but 还没 (hái méi) ‘not yet’: 他还没起床."
+    ],
+    "subtleties": [
+     "已经 + a time or a number + 了 needs no verb: 已经十点了 ‘it’s already ten’, 他已经二十岁了 ‘he’s already twenty’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 已經 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "verb.havebreakfast",
+   "reason": "No verb for having breakfast: Chinese says ‘eat breakfast’ with the verb 吃 (S07) and the noun 早饭 (S07).",
+   "use": "吃早饭 (written also 吃早餐): 我七点吃早饭 ‘I have breakfast at seven’; 你吃早饭了吗？ ‘have you had breakfast?’; done: 我吃了早饭就出门 / 我已经吃早饭了."
+  },
+  {
+   "concept": "verb.comehome",
+   "reason": "No word of its own in the course: ‘come home’ is 回 ‘to return’ (S13) + 家 ‘home’ (S06), said as one unit (huí jiā). Dictionaries list 回家 as a word; the course keeps the two words it has taught, as in every earlier sentence.",
+   "use": "回家: 我六点回家 ‘I come home at six’; 他回家了 ‘he has gone / come home’; 回到家 ‘to get home’; towards the speaker 回家来 / 回来."
+  }
+ ]
+}

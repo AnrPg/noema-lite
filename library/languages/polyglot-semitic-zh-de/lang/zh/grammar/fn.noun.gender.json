@@ -1,0 +1,278 @@
+{
+ "function": "fn.noun.gender",
+ "status": "absent",
+ "typology": [
+  {
+   "feature": "nom.genderCount",
+   "value": "none"
+  },
+  {
+   "feature": "nom.genderBasis",
+   "value": "none"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "none"
+  },
+  {
+   "feature": "pron.gender",
+   "value": "written-only"
+  }
+ ],
+ "summary": "Chinese nouns have no grammatical gender, and nothing agrees with a noun: 这本书, 这张桌子, 这个女孩 — 这 never changes. The sex of people is said with different words (男人 / 女人, 男孩 / 女孩) or with 男 / 女 before a noun (男老师 ‘male teacher’, 女学生 ‘female student’); ‘he’ and ‘she’ differ only in writing (他 / 她, both tā). What every noun has instead is its measure word — learn 一本书, 一张桌子 the way you learn der Tisch, das Buch.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "German",
+    "Arabic / Hebrew",
+    "Chinese"
+   ],
+   "rows": [
+    [
+     "genders",
+     "3 — der, die, das",
+     "2 — masculine, feminine",
+     "none"
+    ],
+    [
+     "what you learn with the noun",
+     "the article and plural",
+     "gender, plural (often irregular)",
+     "the measure word"
+    ],
+    [
+     "‘this table’",
+     "dieser Tisch",
+     "hādhihi ṭ-ṭāwila / ha-shulḥan ha-ze",
+     "这张桌子"
+    ],
+    [
+     "‘this book’",
+     "dieses Buch",
+     "hādhā l-kitāb / ha-sefer ha-ze",
+     "这本书"
+    ]
+   ],
+   "caption": "Gender in the course languages",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The measure word is the ‘gender’ of Chinese",
+   "text": "Not grammatically, but in practice: it is the extra thing you must know about every noun, and it groups nouns by shape and kind (张: flat; 把: with a handle; 本: bound).",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Male or female people",
+   "text": "男 / 女 before a noun: 男老师, 女老师, 男学生, 女学生; and pairs of words: 男人 / 女人, 男孩 / 女孩.",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Don’t carry gender over",
+   "text": "There is no ‘feminine’ form of 老师 or 学生 to look for: 她是老师 is complete."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Do I need a gender or an agreeing ending? → never in Chinese.",
+   "Is it a person whose sex matters? → a separate word (男孩 / 女孩) or 男 / 女 before the noun.",
+   "Writing ‘he / she / it’? → 他 / 她 / 它 — all tā.",
+   "What does this noun need instead? → its measure word (一本书, 一张桌子)."
+  ]
+ },
+ "traps": [
+  "Looking for a feminine ending: there is none — a female teacher is 女老师.",
+  "Thinking 这 changes for gender or number: 这个男孩, 这个女孩 — the same 这个."
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "measure_word"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "How many grammatical genders do Chinese nouns have?",
+   "options": [
+    "none",
+    "two",
+    "three"
+   ],
+   "answer": "none",
+   "why": "Chinese has no gender; nothing agrees with the noun."
+  },
+  {
+   "q": "‘a female teacher’",
+   "options": [
+    "女老师",
+    "老师她",
+    "老师女"
+   ],
+   "answer": "女老师",
+   "why": "女 before the noun."
+  },
+  {
+   "q": "What do you learn with every Chinese noun instead of a gender?",
+   "options": [
+    "its measure word",
+    "its article",
+    "its plural ending"
+   ],
+   "answer": "its measure word",
+   "why": "一本书, 一张桌子, 一把椅子."
+  },
+  {
+   "q": "这个男孩 / 这个女孩 — does 这个 change?",
+   "options": [
+    "no",
+    "yes: 这个 / 这些",
+    "yes: 这个 / 那个"
+   ],
+   "answer": "no",
+   "why": "Demonstratives never agree in gender."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek nouns have three genders shown by the article (ο, η, το), and articles and adjectives agree. Chinese has none of this: no gender to learn, and a measure word per noun instead (ένα τραπέζι ~ 一张桌子)."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian has three genders and agreement everywhere (новый стол, новая книга); Chinese 新 never changes. Feminine forms like учительница have no Chinese match: 老师, or 女老师 when it matters."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish has two genders (el libro, la mesa) and many paired forms (profesor / profesora); Chinese has no gender and marks sex only when needed, with 男 / 女: 男老师, 女老师."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English nouns have no grammatical gender either; only he / she / it show sex — and in Chinese even these sound the same (tā). Pairs like waiter / waitress correspond to 男 / 女 + noun, used only when it matters."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French has two genders and agreement (un grand livre, une grande table); Chinese 大 never changes. Le professeur / la professeure: Chinese says 老师 for both."
+  },
+  {
+   "for": "de",
+   "rel": "new",
+   "text": "German der / die / das is a gender to learn with every noun; Chinese has none, but its measure word (一本书, 一张桌子) is the one extra thing to learn per noun."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi has two genders, and adjectives and verbs agree (अच्छा लड़का / अच्छी लड़की); Chinese 好 never changes: 好男孩, 好女孩."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian has no grammatical gender either, and u is ‘he’ and ‘she’ alike — Chinese spoken tā is the same idea."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi has three genders (masculine, feminine, neuter) with agreement in adjectives and verbs; Chinese has none."
+  },
+  {
+   "for": "ar",
+   "rel": "new",
+   "text": "Arabic has two genders with agreement in verbs, adjectives, pronouns and numbers; Chinese marks none of it."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Hebrew has two genders with agreement in adjectives, verbs and even ‘you’; Chinese marks none of it — only the written 他 / 她."
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish has no grammatical gender, and o is he / she / it; Chinese works the same way in speech and adds the measure word as the new thing to learn."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese has no grammatical gender either; and like Japanese counters, Chinese measure words sort nouns by shape and kind."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean has no grammatical gender; Chinese neither — only the written 他 / 她 differ."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish has no grammatical gender (hän = he / she); Chinese neither, and its tā has gender only in writing."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian has no grammatical gender (ő = he / she); Chinese neither — spoken tā is the same idea."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili has noun classes (m- / wa- for people, ki- / vi- for many things …) with agreement in every word; Chinese has no classes and no agreement, but its measure words also sort nouns by kind (个, 本, 张)."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda has about ten pairs of noun classes (omu- / aba-, eki- / ebi- …) with agreement through the sentence; Chinese has neither, but measure words do sort nouns by kind."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese has no gender either, and its classifiers play the same role as Chinese measure words."
+  },
+  {
+   "for": "iu",
+   "rel": "same",
+   "text": "Inuktitut has no grammatical gender; neither has Chinese."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "German has three genders shown by the article (der Tisch, die Tür, das Buch); Chinese has none — but a measure word per noun."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.noun.gender",
+   "note": "Arabic has two genders, mostly visible in the ending -a (ة); adjectives and verbs agree — nothing agrees in Chinese."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.noun.gender",
+   "note": "Hebrew has two genders (feminine often -a / -et); verbs and adjectives agree — Chinese marks no gender at all."
+  }
+ ]
+}

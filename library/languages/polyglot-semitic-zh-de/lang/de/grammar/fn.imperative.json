@@ -1,0 +1,424 @@
+{
+ "function": "fn.imperative",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "binary"
+  }
+ ],
+ "summary": "German has three imperative forms, one for each way of saying “you”. To one person you say du to: the stem, often without an ending – Geh! Komm! Warte! (Gehe! with -e is correct but formal or old-fashioned; after -t / -d the -e is needed: Warte!). To several people you say ihr to: the ihr form of the present without ihr – Geht! Kommt! Wartet! To one or more people you say Sie to: the infinitive form + Sie, verb first – Gehen Sie! Kommen Sie! Warten Sie! (the pronoun is never left out). The verb stands first and the sentence ends with an exclamation mark. Verbs that change e to i / ie in the present keep it and drop the -e: essen → Iss! (du isst), nehmen → Nimm!, lesen → Lies!; verbs that change a to ä do NOT keep the umlaut: fahren → Fahr! (du fährst), laufen → Lauf! (du läufst). A separable particle goes to the end: Komm herein! Geh weg! Kommen Sie bitte zurück! sein is irregular: Sei …! Seid …! Seien Sie …! bitte (please), mal and doch make a command softer: Komm doch mal her! – and nicht makes it negative: Geh nicht weg! “Let’s …” is the wir form with the verb first: Gehen wir! Signs and recipes often use the bare infinitive: Bitte nicht rauchen! Langsam fahren!",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "infinitive",
+    "du",
+    "ihr",
+    "Sie"
+   ],
+   "rows": [
+    [
+     "gehen",
+     "Geh!",
+     "Geht!",
+     "Gehen Sie!"
+    ],
+    [
+     "kommen",
+     "Komm!",
+     "Kommt!",
+     "Kommen Sie!"
+    ],
+    [
+     "warten",
+     "Warte!",
+     "Wartet!",
+     "Warten Sie!"
+    ],
+    [
+     "bleiben",
+     "Bleib!",
+     "Bleibt!",
+     "Bleiben Sie!"
+    ],
+    [
+     "fahren (du fährst)",
+     "Fahr!",
+     "Fahrt!",
+     "Fahren Sie!"
+    ],
+    [
+     "laufen (du läufst)",
+     "Lauf!",
+     "Lauft!",
+     "Laufen Sie!"
+    ],
+    [
+     "essen (du isst)",
+     "Iss!",
+     "Esst!",
+     "Essen Sie!"
+    ],
+    [
+     "trinken",
+     "Trink!",
+     "Trinkt!",
+     "Trinken Sie!"
+    ],
+    [
+     "sein",
+     "Sei …!",
+     "Seid …!",
+     "Seien Sie …!"
+    ],
+    [
+     "hereinkommen",
+     "Komm herein!",
+     "Kommt herein!",
+     "Kommen Sie herein!"
+    ]
+   ],
+   "caption": "The three imperatives",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "du kommst",
+    "– du, – st",
+    "Komm!"
+   ],
+   "caption": "The du form: the present without du and without -st (du isst → Iss!, but du fährst → Fahr!)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Who are you talking to?",
+   "text": "One friend → Komm! · several friends → Kommt! · anyone you call Sie (one or many) → Kommen Sie!",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No umlaut, but keep the i",
+   "text": "Fahr! Lauf! (not *Fähr!, *Läuf!) – but Iss! Nimm! Lies! (the i stays)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Never drop Sie",
+   "text": "Kommen Sie! – Kommen! alone is not a polite command (a bare infinitive sounds like a sign or a drill instruction)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Softeners",
+   "text": "bitte (please), mal, doch: Warte bitte! · Komm mal her! · Bleib doch hier! – without them a German command can sound sharp."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Separable verbs",
+   "text": "The particle closes the command: Komm herein! Geh weg! Kommen Sie bitte zurück!"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who am I talking to: one person I say du to, several people I say ihr to, or someone I say Sie to?",
+   "du: take the du form of the present, drop du and -st: du kommst → Komm!",
+   "Does the verb change e → i / ie (essen, nehmen, lesen)? Keep the i: Iss! – Does it change a → ä (fahren, laufen)? Drop the umlaut: Fahr!",
+   "Does the stem end in -t or -d (warten, finden)? Add -e: Warte!",
+   "ihr: the ihr form of the present, without ihr: Kommt!",
+   "Sie: the infinitive form + Sie, verb first: Kommen Sie!",
+   "Separable verb? Put the particle at the end: Komm herein!",
+   "Is it sein? Sei! – Seid! – Seien Sie!",
+   "Do I want to sound friendly? Add bitte, mal or doch; to forbid, add nicht."
+  ],
+  "steps": [
+   "Choose du / ihr / Sie.",
+   "Form the verb.",
+   "Verb first, the rest after, a separable particle last.",
+   "End with !"
+  ]
+ },
+ "traps": [
+  "Fahr! and Lauf! have no umlaut (du fährst, du läufst).",
+  "Iss! Nimm! Lies! keep the i of du isst, du nimmst, du liest – and take no -e.",
+  "The Sie form keeps Sie: Warten Sie bitte! – not *Warten bitte!",
+  "Warte! needs the -e (stem in -t); Geh! / Gehe! both work.",
+  "sein: Sei ruhig! (du), Seid ruhig! (ihr), Seien Sie ruhig! (Sie) – not *Bist ruhig!",
+  "The particle goes last: Komm herein! – not *Hereinkomm!",
+  "Negative: nicht after the verb (and its object): Geh nicht! Iss das nicht!"
+ ],
+ "evidence": {
+  "tags": [
+   "IMP"
+  ]
+ },
+ "paradigmCells": [
+  "V;IMP;2;SG",
+  "V;IMP;2;PL",
+  "V;IMP;FORM"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;IMP;2;SG",
+    "V;IMP;2;PL",
+    "V;IMP;FORM"
+   ],
+   "exclude": [
+    "de:zurückkommen",
+    "de:hereinkommen",
+    "de:hineingehen",
+    "de:weggehen",
+    "de:ankommen"
+   ],
+   "count": 12
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Formality"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "fahren – du-imperative:",
+   "options": [
+    "Fahr!",
+    "Fähr!",
+    "Fahrst!"
+   ],
+   "answer": "Fahr!",
+   "why": "a → ä verbs lose the umlaut in the imperative: du fährst → Fahr!"
+  },
+  {
+   "q": "essen – du-imperative:",
+   "options": [
+    "Iss!",
+    "Esse!",
+    "Isst!"
+   ],
+   "answer": "Iss!",
+   "why": "e → i verbs keep the i and drop the ending: du isst → Iss!"
+  },
+  {
+   "q": "Polite: “Please wait here!”",
+   "options": [
+    "Warten Sie bitte hier!",
+    "Warten bitte hier!",
+    "Wartet Sie bitte hier!"
+   ],
+   "answer": "Warten Sie bitte hier!",
+   "why": "Sie form = infinitive form + Sie, verb first."
+  },
+  {
+   "q": "To two friends: “Come in!”",
+   "options": [
+    "Kommt herein!",
+    "Komm herein!",
+    "Kommen herein!"
+   ],
+   "answer": "Kommt herein!",
+   "why": "ihr form = ihr kommt without ihr; the particle herein goes last."
+  },
+  {
+   "q": "sein – Sie form: “Please be on time!”",
+   "options": [
+    "Seien Sie bitte pünktlich!",
+    "Sind Sie bitte pünktlich!",
+    "Sein Sie bitte pünktlich!"
+   ],
+   "answer": "Seien Sie bitte pünktlich!",
+   "why": "sein: Sei! – Seid! – Seien Sie!"
+  },
+  {
+   "q": "“Go away!” (to one friend)",
+   "options": [
+    "Geh weg!",
+    "Weggeh!",
+    "Gehst weg!"
+   ],
+   "answer": "Geh weg!",
+   "why": "weggehen is separable: Geh … weg!"
+  },
+  {
+   "q": "warten – du-imperative:",
+   "options": [
+    "Warte!",
+    "Wart!",
+    "Wartest!"
+   ],
+   "answer": "Warte!",
+   "why": "Stem in -t: the -e is needed in standard German (Wart! is only colloquial)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.imperative",
+   "note": "Arabic changes the imperative for a man, a woman and a group (اُكْتُبْ / اُكْتُبِي / اُكْتُبُوا); a negative command is لَا + the jussive (لَا تَكْتُبْ) – German changes it for du / ihr / Sie."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.imperative",
+   "note": "Hebrew לֵךְ / לְכִי / לְכוּ (to a man / a woman / several); everyday speech often uses the future as a softer command, and “don’t” is אַל + future."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.imperative",
+   "note": "Chinese verbs do not change: 来！ 走！; 请 + verb is polite, 别 / 不要 + verb is “don’t”, and 吧 softens – German needs a different verb form for du, ihr and Sie."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.present",
+   "note": "The du and ihr imperatives are built from the present forms (du kommst → Komm!, ihr kommt → Kommt!)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.greetings",
+   "note": "du / ihr / Sie: the same choice of address decides the imperative."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has two forms (πήγαινε / πηγαίνετε), and the polite one is the plural; German has a third, separate polite form with its pronoun: Gehen Sie!"
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "иди / идите – the polite form is the plural; German has Geh! / Geht! and a separate Gehen Sie! with the pronoun."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has ve / id and vaya / vayan for usted / ustedes, and changes the form in the negative (no vayas); German adds only nicht: Geh nicht!"
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English has one form (Go!) for everyone; German has three: Geh! Geht! Gehen Sie! “Let’s go” is Gehen wir!"
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "va / allez / allons match Geh / Geht – Gehen Sie / Gehen wir; but German Sie keeps its pronoun: Gehen Sie!"
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Three forms by politeness – jā (tū), jāo (tum), jāiye (āp) – like Geh! / Geht! / Gehen Sie!"
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "boro (to) / beravid (šomā) match Geh! / Gehen Sie!; German has a further plural Geht! for ihr."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic imperatives change for gender and number, the dual included (idhhab, idhhabī, idhhabā, idhhabū); German changes only for du, ihr and Sie."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "lech / lechi / lechu change for gender and number (speech often uses the future: telech); German changes only for du / ihr / Sie."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "git (one friend), gidin (several or polite), gidiniz (more formal) – German: Geh! – Geht! – Gehen Sie!"
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "A polite request is -te kudasai (itte kudasai); the plain imperative (ike) sounds rough. German Gehen Sie! is a neutral polite form, softened with bitte."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean shows politeness in the ending (gaseyo); German switches to the Sie form: Gehen Sie!"
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "mene (sinä) / menkää (te, also polite): like Geh! / Geht!, but German has its own polite form, Gehen Sie!"
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "menj (te), menjetek (ti), menjen (ön): the polite form is 3rd person, as German Gehen Sie! uses the form of “they”."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "nenda (one), nendeni (several); politeness comes with tafadhali (bitte). German adds a polite form, Gehen Sie!"
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has no imperative form: the verb alone, 请 (请进 = Kommen Sie herein!) or 吧 (走吧 = Gehen wir!). German changes the verb for du, ihr and Sie."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses the verb with đi or hãy (ăn đi!) and mời for polite invitations; German changes the verb form: Iss! Esst! Essen Sie!"
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut has imperative endings for one, two and several people; German has no dual, but it adds a polite form: Geh! Geht! Gehen Sie!"
+  }
+ ]
+}

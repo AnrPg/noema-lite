@@ -1,0 +1,4269 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Kurkuma",
+   "lemma": "Kurkuma",
+   "pos": "NOUN",
+   "senses": [
+    "veg.turmeric"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kurkumen",
+      "pattern": "foreign",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kurkuma",
+    "N;ACC;SG": "Kurkuma",
+    "N;DAT;SG": "Kurkuma",
+    "N;GEN;SG": "Kurkuma",
+    "N;NOM;PL": "Kurkumen",
+    "N;ACC;PL": "Kurkumen",
+    "N;DAT;PL": "Kurkumen",
+    "N;GEN;PL": "Kurkumen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Golden-yellow curry colour, “golden milk” and stained fingers; fresh roots look like small orange ginger.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "turmeric (Curcuma longa): the plant, its fresh orange rhizome and the yellow spice made from it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.turmeric",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Frische Kurkuma färbt die Finger gelb.",
+      "tr": "Fresh turmeric stains your fingers yellow.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ohne Kurkuma wäre Currypulver nicht so gelb.",
+      "tr": "Without turmeric, curry powder would not be so yellow.",
+      "register": "neutral",
+      "context": "spices",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Bioladen gibt es jetzt auch frische Kurkumawurzeln.",
+      "tr": "The organic shop now also has fresh turmeric roots.",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Kurkuma enthält den Farbstoff Curcumin.",
+      "tr": "Turmeric contains the pigment curcumin.",
+      "register": "technical",
+      "context": "science",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frische Kurkuma",
+      "tr": "fresh turmeric"
+     },
+     {
+      "text": "die Kurkumawurzel",
+      "tr": "turmeric root"
+     },
+     {
+      "text": "gemahlene Kurkuma",
+      "tr": "ground turmeric"
+     },
+     {
+      "text": "die Kurkuma-Latte",
+      "tr": "turmeric latte"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Gelbwurz",
+      "register": "neutral",
+      "nuance": "older German name (“yellow root”), also Gelbwurzel"
+     },
+     {
+      "word": "Curcuma",
+      "register": "technical",
+      "nuance": "botanical spelling, also on spice jars"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Italian curcuma (Wiktionary); the Italian and Spanish word goes back to Arabic كُرْكُم (kurkum, “saffron, turmeric”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic كُرْكُم (kurkum) and Hebrew כּוּרְכּוּם (kurkum) are the same word as German Kurkuma; Chinese says 姜黄 (jiānghuáng, “ginger-yellow”).",
+     "Turmeric belongs to the ginger family: the fresh rhizomes look like ginger with bright orange flesh."
+    ],
+    "pitfalls": [
+     "Gender varies: Wiktionary and Duden give die Kurkuma, but das Kurkuma is also heard, especially for the spice.",
+     "Plural Kurkumen is rare; people say Kurkumawurzeln for several roots."
+    ],
+    "subtleties": [
+     "Kurkuma alone usually means the dried yellow spice; for the fresh root say frische Kurkuma or Kurkumawurzel."
+    ]
+   }
+  },
+  {
+   "id": "de:Borretsch",
+   "lemma": "Borretsch",
+   "pos": "NOUN",
+   "senses": [
+    "veg.borage"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Borretsch",
+    "N;ACC;SG": "Borretsch",
+    "N;DAT;SG": "Borretsch",
+    "N;GEN;SG": "Borretsches"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hairy leaves that taste of cucumber and sky-blue star flowers in a summer herb garden.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "borage (Borago officinalis), a herb whose leaves and blue flowers are eaten",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.borage",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Borretsch schmeckt frisch wie Gurke.",
+      "tr": "Borage tastes fresh, like cucumber.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Die blauen Blüten vom Borretsch sehen im Salat schön aus.",
+      "tr": "The blue borage flowers look pretty in a salad.",
+      "register": "informal",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Borretsch gehört zu den sieben Kräutern der Frankfurter Grünen Soße.",
+      "tr": "Borage is one of the seven herbs of Frankfurt green sauce.",
+      "register": "neutral",
+      "context": "regional cuisine",
+      "sense": "s1"
+     },
+     {
+      "text": "Borretsch sät sich im Garten oft von selbst aus.",
+      "tr": "Borage often self-seeds in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "junger Borretsch",
+      "tr": "young borage"
+     },
+     {
+      "text": "die Borretschblüte",
+      "tr": "the borage flower"
+     },
+     {
+      "text": "Borretsch hacken",
+      "tr": "to chop borage"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Gurkenkraut",
+      "register": "neutral",
+      "nuance": "folk name, from the cucumber taste of the leaves"
+     },
+     {
+      "word": "Boretsch",
+      "register": "neutral",
+      "nuance": "spelling variant with one r"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German boretsch, buretsch, reflecting a Romance pronunciation of Medieval Latin borāgō. Compare French bourrache.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Borage is one of the seven herbs of the Frankfurter Grüne Soße, together with parsley, chives, chervil, cress, sorrel and salad burnet.",
+     "English borage, French bourrache and German Borretsch all come from Medieval Latin borago."
+    ],
+    "pitfalls": [
+     "No plural in normal use: say Borretschblätter (leaves) or Borretschpflanzen (plants)."
+    ],
+    "subtleties": [
+     "Only young leaves are used: older ones are very hairy. The flowers are a garnish and turn pink when they fade."
+    ]
+   }
+  },
+  {
+   "id": "de:Gänsefuß",
+   "lemma": "Gänsefuß",
+   "pos": "NOUN",
+   "senses": [
+    "veg.fathen"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gänsefüße",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Gans",
+      "role": "modifier",
+      "linker": "-¨e- (Gänse-)"
+     },
+     {
+      "part": "Fuß",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Gänsefuß",
+    "N;ACC;SG": "Gänsefuß",
+    "N;DAT;SG": "Gänsefuß",
+    "N;GEN;SG": "Gänsefußes",
+    "N;NOM;PL": "Gänsefüße",
+    "N;ACC;PL": "Gänsefüße",
+    "N;DAT;PL": "Gänsefüßen",
+    "N;GEN;PL": "Gänsefüße"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A weed of fields and gardens with mealy grey-green leaves; for foragers a wild spinach.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goosefoot, especially white goosefoot or fat hen (Chenopodium album), whose leaves are eaten like spinach",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.fathen",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Junger Gänsefuß schmeckt gekocht wie Spinat.",
+      "tr": "Young fat hen tastes like spinach when cooked.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Gemüsebeet wächst überall Gänsefuß.",
+      "tr": "Fat hen is growing everywhere in the vegetable bed.",
+      "register": "informal",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "In Indien kocht man Gänsefuß als Bathua.",
+      "tr": "In India fat hen is cooked as bathua.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Weiße Gänsefuß",
+      "tr": "white goosefoot, fat hen"
+     },
+     {
+      "text": "Gänsefuß sammeln",
+      "tr": "to gather fat hen"
+     },
+     {
+      "text": "junge Gänsefußblätter",
+      "tr": "young fat hen leaves"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Weißer Gänsefuß",
+      "register": "technical",
+      "nuance": "the exact name of the species Chenopodium album"
+     },
+     {
+      "word": "Weiße Melde",
+      "register": "regional",
+      "nuance": "folk name; botanically Melde is the related genus Atriplex"
+     }
+    ],
+    "etymology": {
+     "text": "Middle High German gansfuoz, equivalent to Gans (“goose”) + Fuß (“foot”), after the shape of the leaves.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Latin genus name Chenopodium means the same as Gänsefuß: Greek χήν (goose) + πούς (foot).",
+     "Quinoa is a close relative: Chenopodium quinoa."
+    ],
+    "pitfalls": [
+     "Gänsefüßchen (diminutive, plural) means “quotation marks” in colloquial German – not little plants."
+    ],
+    "subtleties": [
+     "Botanically Gänsefuß is the whole genus; the edible weed is the Weiße Gänsefuß. Like spinach it contains oxalic acid, so it is usually cooked."
+    ]
+   }
+  },
+  {
+   "id": "de:Klettenwurzel",
+   "lemma": "Klettenwurzel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.burdock"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Klettenwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Klette",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Klettenwurzel",
+    "N;ACC;SG": "Klettenwurzel",
+    "N;DAT;SG": "Klettenwurzel",
+    "N;GEN;SG": "Klettenwurzel",
+    "N;NOM;PL": "Klettenwurzeln",
+    "N;ACC;PL": "Klettenwurzeln",
+    "N;DAT;PL": "Klettenwurzeln",
+    "N;GEN;PL": "Klettenwurzeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A long, thin, earthy brown root from Japanese cooking and herbal medicine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "burdock root (Arctium lappa), eaten as a vegetable (Japanese gobō)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.burdock",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Klettenwurzel wird geschält und in feine Streifen geschnitten.",
+      "tr": "The burdock root is peeled and cut into fine strips.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In Japan isst man Klettenwurzel unter dem Namen Gobo.",
+      "tr": "In Japan people eat burdock root under the name gobō.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Klettenwurzelöl soll gut für die Haare sein.",
+      "tr": "Burdock root oil is said to be good for the hair.",
+      "register": "informal",
+      "context": "cosmetics",
+      "sense": "s1"
+     },
+     {
+      "text": "Klettenwurzeln sind bis zu einem Meter lang.",
+      "tr": "Burdock roots are up to a metre long.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Klettenwurzel schälen",
+      "tr": "to peel the burdock root"
+     },
+     {
+      "text": "das Klettenwurzelöl",
+      "tr": "burdock root oil"
+     },
+     {
+      "text": "Klettenwurzel in Streifen",
+      "tr": "burdock root in strips"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "an jemandem hängen wie eine Klette",
+      "tr": "to hang on someone like a burr",
+      "kind": "idiom",
+      "meaning": "to cling to someone, not leave them alone",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Gobo",
+      "register": "neutral",
+      "nuance": "the Japanese name, used in Asian shops and recipes"
+     },
+     {
+      "word": "Klette",
+      "register": "neutral",
+      "nuance": "the plant (and its burrs) rather than the root as food"
+     }
+    ],
+    "etymology": {
+     "text": "Klette (“burdock”, from Middle High German klette, Old High German kletta, related to klettern “to climb”) + Wurzel (“root”, from Old High German wurzala).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The hooked burrs of the burdock inspired the hook-and-loop fastener – in German it is still called Klettverschluss."
+    ],
+    "pitfalls": [
+     "Klette alone means the plant or its burrs, and figuratively a clingy person; for the vegetable say Klettenwurzel."
+    ],
+    "subtleties": [
+     "The cut root browns quickly; Japanese recipes soak it in water or vinegar water."
+    ]
+   }
+  },
+  {
+   "id": "de:Wasabi",
+   "lemma": "Wasabi",
+   "pos": "NOUN",
+   "senses": [
+    "veg.wasabi"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wasabi",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wasabi",
+    "N;ACC;SG": "Wasabi",
+    "N;DAT;SG": "Wasabi",
+    "N;GEN;SG": "Wasabi",
+    "N;NOM;PL": "Wasabi",
+    "N;ACC;PL": "Wasabi",
+    "N;DAT;PL": "Wasabi",
+    "N;GEN;PL": "Wasabi"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A green, sharp paste with sushi that shoots straight up the nose.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wasabi (Eutrema japonicum): the Japanese plant, its rhizome and the hot green paste made from it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wasabi",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zum Sushi gibt es Sojasoße und Wasabi.",
+      "tr": "Sushi comes with soy sauce and wasabi.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Echter Wasabi wird frisch auf einer Reibe gerieben.",
+      "tr": "Real wasabi is grated fresh on a grater.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Oh, der Wasabi brennt in der Nase!",
+      "tr": "Oh, the wasabi burns in my nose!",
+      "register": "colloquial",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Wasabi-Nüsse sind ein beliebter Snack.",
+      "tr": "Wasabi nuts are a popular snack.",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "echter Wasabi",
+      "tr": "real wasabi"
+     },
+     {
+      "text": "die Wasabipaste",
+      "tr": "wasabi paste"
+     },
+     {
+      "text": "Wasabi reiben",
+      "tr": "to grate wasabi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Japanischer Meerrettich",
+      "register": "neutral",
+      "nuance": "descriptive name; also used for cheap imitations made with horseradish"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Japanese 山葵 (wasabi) (Wiktionary has no further etymology for the German word).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Most “wasabi” paste outside Japan is horseradish with mustard and green colouring; real wasabi is expensive.",
+     "Chinese writes 山葵 (shānkuí) with the same characters as Japanese, but usually calls the paste 芥末 (jièmo)."
+    ],
+    "pitfalls": [
+     "Gender: der Wasabi (Wiktionary); the plural is identical and hardly used."
+    ],
+    "subtleties": [
+     "The burning comes from volatile mustard oils: it rises into the nose and fades quickly, unlike the heat of chili."
+    ]
+   }
+  },
+  {
+   "id": "de:Winterzwiebel",
+   "lemma": "Winterzwiebel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.welshonion"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Winterzwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Winter",
+      "role": "modifier"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Winterzwiebel",
+    "N;ACC;SG": "Winterzwiebel",
+    "N;DAT;SG": "Winterzwiebel",
+    "N;GEN;SG": "Winterzwiebel",
+    "N;NOM;PL": "Winterzwiebeln",
+    "N;ACC;PL": "Winterzwiebeln",
+    "N;DAT;PL": "Winterzwiebeln",
+    "N;GEN;PL": "Winterzwiebeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hollow green leaves that survive frost; the onion of Chinese and Japanese kitchens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Welsh onion, bunching onion (Allium fistulosum)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.welshonion",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Winterzwiebel bildet keine dicke Zwiebel, sondern hohle Blätter.",
+      "tr": "The Welsh onion forms no thick bulb, but hollow leaves.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Winterzwiebeln kann man auch im Winter ernten.",
+      "tr": "Welsh onions can be harvested even in winter.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "In der japanischen Küche heißt die Winterzwiebel Negi.",
+      "tr": "In Japanese cooking the Welsh onion is called negi.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Winterzwiebeln pflanzen",
+      "tr": "to plant Welsh onions"
+     },
+     {
+      "text": "die Winterzwiebel schneiden",
+      "tr": "to cut the Welsh onion"
+     },
+     {
+      "text": "winterharte Winterzwiebeln",
+      "tr": "frost-hardy Welsh onions"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Winterheckenzwiebel",
+      "register": "neutral",
+      "nuance": "longer gardening name (redirect on German Wikipedia)"
+     },
+     {
+      "word": "Lauchzwiebel",
+      "register": "neutral",
+      "nuance": "in shops loosely used for any onion sold with its green leaves, also for this one"
+     },
+     {
+      "word": "Frühlingszwiebel",
+      "register": "neutral",
+      "nuance": "everyday word for green onions; in the kitchen often not distinguished"
+     }
+    ],
+    "etymology": {
+     "text": "Winter (“winter”, from Old High German wintar) + Zwiebel (“onion”, from Old High German zwibollo, from Late Latin cēpulla).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 葱 (cōng) and Japanese negi (ねぎ) are mostly this species, not the European onion."
+    ],
+    "pitfalls": [
+     "It is not an onion for winter storage: the name refers to its frost hardiness."
+    ],
+    "subtleties": [
+     "In shops Frühlingszwiebel covers both young common onions and Welsh onions; gardeners keep the names apart."
+    ]
+   }
+  },
+  {
+   "id": "de:Rhabarber",
+   "lemma": "Rhabarber",
+   "pos": "NOUN",
+   "senses": [
+    "veg.rhubarb"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Rhabarber",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Rhabarber",
+    "N;ACC;SG": "Rhabarber",
+    "N;DAT;SG": "Rhabarber",
+    "N;GEN;SG": "Rhabarbers",
+    "N;NOM;PL": "Rhabarber",
+    "N;ACC;PL": "Rhabarber",
+    "N;DAT;PL": "Rhabarbern",
+    "N;GEN;PL": "Rhabarber"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sour red stalks in spring: crumble, compote and Grandma’s cake with meringue.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rhubarb (Rheum rhabarbarum), whose sour leafstalks are cooked like fruit",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.rhubarb",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Rhabarber ist sehr sauer und wird mit Zucker gekocht.",
+      "tr": "Rhubarb is very sour and is cooked with sugar.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Oma backt im Mai Rhabarberkuchen mit Baiser.",
+      "tr": "In May Grandma bakes rhubarb cake with meringue.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Blätter vom Rhabarber isst man nicht.",
+      "tr": "You don’t eat the leaves of rhubarb.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Rhabarber erntet man traditionell nur bis Ende Juni.",
+      "tr": "Traditionally rhubarb is harvested only until the end of June.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Rhabarberkuchen",
+      "tr": "rhubarb cake"
+     },
+     {
+      "text": "das Rhabarberkompott",
+      "tr": "rhubarb compote"
+     },
+     {
+      "text": "Rhabarber schälen",
+      "tr": "to peel rhubarb"
+     },
+     {
+      "text": "die Rhabarberschorle",
+      "tr": "rhubarb spritzer"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Rhabarber, Rhabarber",
+      "tr": "rhubarb, rhubarb",
+      "kind": "fixed expression",
+      "meaning": "what extras murmur on stage or in film to imitate background chatter",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "etymology": {
+     "text": "From Italian rabarbaro, from Latin rhabarbarum, reubarbarum, from Ancient Greek ῥῆον βαρβαρικόν (rhêon barbarikón, “foreign rhubarb”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The name says “foreign (barbarian) rheum”: the root came to the Greeks from beyond their world. Greek ραβέντι, Turkish ravent and Russian ревень are related names.",
+     "Medicinal rhubarb root is Chinese 大黄 (dàhuáng, “big yellow”)."
+    ],
+    "pitfalls": [
+     "The leaves contain a lot of oxalic acid and are not eaten.",
+     "The plural is the same as the singular: die Rhabarber (rarely needed)."
+    ],
+    "subtleties": [
+     "Botanically a vegetable (a leafstalk), but in the kitchen treated like fruit; the traditional harvest ends on Johanni, 24 June."
+    ],
+    "synonymsNone": "No other standard word; Swiss and Austrian German also say Rhabarber."
+   }
+  },
+  {
+   "id": "de:Wasserkastanie",
+   "lemma": "Wasserkastanie",
+   "pos": "NOUN",
+   "senses": [
+    "veg.waterchestnut"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wasserkastanien",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Wasser",
+      "role": "modifier"
+     },
+     {
+      "part": "Kastanie",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wasserkastanie",
+    "N;ACC;SG": "Wasserkastanie",
+    "N;DAT;SG": "Wasserkastanie",
+    "N;GEN;SG": "Wasserkastanie",
+    "N;NOM;PL": "Wasserkastanien",
+    "N;ACC;PL": "Wasserkastanien",
+    "N;DAT;PL": "Wasserkastanien",
+    "N;GEN;PL": "Wasserkastanien"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy white slices in stir-fries and spring rolls, usually from a tin.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Chinese water chestnut (Eleocharis dulcis), the crisp corm of a sedge",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.waterchestnut",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wasserkastanien bleiben auch nach dem Kochen knackig.",
+      "tr": "Water chestnuts stay crunchy even after cooking.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Asialaden kaufe ich Wasserkastanien in der Dose.",
+      "tr": "At the Asian shop I buy tinned water chestnuts.",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wasserkastanie wächst im Wasser wie eine Binse.",
+      "tr": "The water chestnut grows in water like a rush.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wasserkastanien aus der Dose",
+      "tr": "tinned water chestnuts"
+     },
+     {
+      "text": "frische Wasserkastanien schälen",
+      "tr": "to peel fresh water chestnuts"
+     },
+     {
+      "text": "in Scheiben geschnittene Wasserkastanien",
+      "tr": "sliced water chestnuts"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Chinesische Wasserkastanie",
+      "register": "technical",
+      "nuance": "full name, to keep it apart from the water caltrop (Wassernuss)"
+     }
+    ],
+    "etymology": {
+     "text": "Wasser (“water”, from Old High German waȥȥar) + Kastanie (“chestnut”, from Middle High German kastānie, ultimately from Latin castanea).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 荸荠 (bíqí). It is not related to the chestnut at all: it is the corm of a sedge."
+    ],
+    "pitfalls": [
+     "Some books also call the water caltrop (Trapa) Wasserkastanie; the usual German name for that one is Wassernuss."
+    ],
+    "subtleties": [
+     "The crunch survives cooking because the cell walls are stabilised by special compounds (ferulic acid)."
+    ]
+   }
+  },
+  {
+   "id": "de:Wassernuss",
+   "lemma": "Wassernuss",
+   "pos": "NOUN",
+   "senses": [
+    "veg.watercaltrop"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wassernüsse",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Wasser",
+      "role": "modifier"
+     },
+     {
+      "part": "Nuss",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wassernuss",
+    "N;ACC;SG": "Wassernuss",
+    "N;DAT;SG": "Wassernuss",
+    "N;GEN;SG": "Wassernuss",
+    "N;NOM;PL": "Wassernüsse",
+    "N;ACC;PL": "Wassernüsse",
+    "N;DAT;PL": "Wassernüssen",
+    "N;GEN;PL": "Wassernüsse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A horned black nut from ponds, shaped like a bull’s head or a bat; rare and protected in Germany.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "water caltrop (Trapa natans, Trapa bicornis) and its starchy horned fruit",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.watercaltrop",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Wassernuss hat eine harte Schale mit spitzen Hörnern.",
+      "tr": "The water caltrop has a hard shell with sharp horns.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "In China isst man gekochte Wassernüsse im Herbst.",
+      "tr": "In China people eat boiled water caltrops in autumn.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wassernuss steht in Deutschland unter Naturschutz.",
+      "tr": "The water caltrop is protected in Germany.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gekochte Wassernüsse",
+      "tr": "boiled water caltrops"
+     },
+     {
+      "text": "die Schale der Wassernuss",
+      "tr": "the shell of the water caltrop"
+     },
+     {
+      "text": "die Wassernuss knacken",
+      "tr": "to crack the water caltrop"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wasserkastanie",
+      "register": "neutral",
+      "nuance": "sometimes used for it too, but usually the Chinese water chestnut (Eleocharis)"
+     }
+    ],
+    "etymology": {
+     "text": "Wasser (“water”, from Old High German waȥȥar) + Nuss (“nut”, from Old High German nuȥ, cognate with English nut).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 菱角 (língjiao). People in Europe gathered water caltrops as food since prehistoric times."
+    ],
+    "pitfalls": [
+     "Do not mix up Wassernuss (Trapa) and Wasserkastanie (Eleocharis) – English “water chestnut” can mean both."
+    ],
+    "subtleties": [
+     "The raw nut is not eaten; it is boiled or roasted, and the starchy kernel tastes like chestnut."
+    ]
+   }
+  },
+  {
+   "id": "de:Yambohne",
+   "lemma": "Yambohne",
+   "pos": "NOUN",
+   "senses": [
+    "veg.jicama"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Yambohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Yam",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Yambohne",
+    "N;ACC;SG": "Yambohne",
+    "N;DAT;SG": "Yambohne",
+    "N;GEN;SG": "Yambohne",
+    "N;NOM;PL": "Yambohnen",
+    "N;ACC;PL": "Yambohnen",
+    "N;DAT;PL": "Yambohnen",
+    "N;GEN;PL": "Yambohnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A crunchy, juicy, slightly sweet tuber from Mexico, eaten raw with lime and chili.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "jícama, yam bean (Pachyrhizus erosus), a legume grown for its crisp edible root",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.jicama",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Yambohne isst man in Mexiko roh mit Limette und Chili.",
+      "tr": "In Mexico jícama is eaten raw with lime and chili.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Geschälte Yambohnen schmecken knackig wie Apfel.",
+      "tr": "Peeled jícamas taste crunchy like apple.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Nur die Knolle der Yambohne ist essbar.",
+      "tr": "Only the tuber of the yam bean is edible.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Knolle der Yambohne",
+      "tr": "the tuber of the yam bean"
+     },
+     {
+      "text": "Yambohne in Stiften",
+      "tr": "jícama in sticks"
+     },
+     {
+      "text": "rohe Yambohne",
+      "tr": "raw jícama"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Jicama",
+      "register": "neutral",
+      "nuance": "the Mexican name (also Jícama), used in shops and recipes"
+     },
+     {
+      "word": "Mexikanische Yamswurzel",
+      "register": "neutral",
+      "nuance": "trade name; botanically wrong, it is not a yam"
+     }
+    ],
+    "etymology": {
+     "text": "Yams (“yam”) + Bohne (“bean”, from Old High German bōna, cognate with English bean): a bean plant with a yam-like root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Mexican name jícama comes from Nahuatl. Chinese calls it 豆薯 (dòushǔ, “bean potato”)."
+    ],
+    "pitfalls": [
+     "The seeds, pods and leaves contain rotenone and are poisonous – only the root is eaten.",
+     "Despite the name it is no yam: it is a legume."
+    ],
+    "subtleties": [
+     "In Germany it is a niche product; recipes usually write Jicama, while Yambohne is the dictionary and botany name."
+    ]
+   }
+  },
+  {
+   "id": "de:Kardone",
+   "lemma": "Kardone",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cardoon"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kardonen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kardone",
+    "N;ACC;SG": "Kardone",
+    "N;DAT;SG": "Kardone",
+    "N;GEN;SG": "Kardone",
+    "N;NOM;PL": "Kardonen",
+    "N;ACC;PL": "Kardonen",
+    "N;DAT;PL": "Kardonen",
+    "N;GEN;PL": "Kardonen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A silvery giant thistle whose bitter stalks are blanched and stewed, an old Mediterranean winter vegetable.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cardoon (Cynara cardunculus, cardoon group), grown for its fleshy leaf stalks",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cardoon",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kardone ist eine Verwandte der Artischocke.",
+      "tr": "The cardoon is a relative of the artichoke.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Von der Kardone isst man die Blattstiele, nicht die Blüte.",
+      "tr": "Of the cardoon you eat the leaf stalks, not the flower.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In Genf gibt es Kardonen als Gratin zu Weihnachten.",
+      "tr": "In Geneva there are cardoons as a gratin at Christmas.",
+      "register": "neutral",
+      "context": "regional cuisine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kardonen blanchieren",
+      "tr": "to blanch cardoons"
+     },
+     {
+      "text": "Kardonen schälen",
+      "tr": "to peel cardoons"
+     },
+     {
+      "text": "der Kardonengratin",
+      "tr": "cardoon gratin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Cardy",
+      "register": "neutral",
+      "nuance": "the name of the German Wikipedia article, also Kardy"
+     },
+     {
+      "word": "Gemüseartischocke",
+      "register": "neutral",
+      "nuance": "descriptive name"
+     },
+     {
+      "word": "Spanische Artischocke",
+      "register": "neutral",
+      "nuance": "another trade name"
+     }
+    ],
+    "etymology": {
+     "text": "Via Italian from Latin (Duden: Latin – Late Latin – Italian); Italian cardo (“thistle, cardoon”) is from Latin carduus (“thistle”). Wiktionary has no entry for German Kardone.",
+     "src": "Duden online; Wiktionary (kaikki.org) for Italian cardo"
+    },
+    "funFacts": [
+     "The cardoon is the wild-type form of the same species as the artichoke; the artichoke was bred from it for its flower heads."
+    ],
+    "pitfalls": [
+     "The stalks are bitter and stringy: they are peeled and blanched before cooking.",
+     "Do not confuse with Karde, a different thistle-like plant (teasel)."
+    ],
+    "subtleties": [
+     "In Germany Kardone is a restaurant and cookbook word; in French-speaking Switzerland the Cardon genevois is a protected regional speciality."
+    ]
+   }
+  },
+  {
+   "id": "de:Erdmandel",
+   "lemma": "Erdmandel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.tigernut"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Erdmandeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Erde",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Mandel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Erdmandel",
+    "N;ACC;SG": "Erdmandel",
+    "N;DAT;SG": "Erdmandel",
+    "N;GEN;SG": "Erdmandel",
+    "N;NOM;PL": "Erdmandeln",
+    "N;ACC;PL": "Erdmandeln",
+    "N;DAT;PL": "Erdmandeln",
+    "N;GEN;PL": "Erdmandeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small wrinkled tubers that taste of almond: Spanish horchata and gluten-free flour.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tiger nut, chufa (Cyperus esculentus), the small tuber of a sedge",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.tigernut",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Aus Erdmandeln macht man in Valencia Horchata.",
+      "tr": "In Valencia people make horchata from tiger nuts.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Erdmandeln schmecken süß und ein bisschen nach Mandeln.",
+      "tr": "Tiger nuts taste sweet and a bit like almonds.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Erdmandelmehl ist glutenfrei.",
+      "tr": "Tiger nut flour is gluten-free.",
+      "register": "neutral",
+      "context": "nutrition",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Erdmandel ist auf Feldern ein gefürchtetes Unkraut.",
+      "tr": "On fields the tiger nut is a dreaded weed.",
+      "register": "technical",
+      "context": "agriculture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Erdmandeln einweichen",
+      "tr": "to soak tiger nuts"
+     },
+     {
+      "text": "das Erdmandelmehl",
+      "tr": "tiger nut flour"
+     },
+     {
+      "text": "geschälte Erdmandeln",
+      "tr": "peeled tiger nuts"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Tigernuss",
+      "register": "neutral",
+      "nuance": "loan translation of English tiger nut, used in health-food shops"
+     },
+     {
+      "word": "Chufa",
+      "register": "neutral",
+      "nuance": "the Spanish name, mostly in connection with horchata"
+     }
+    ],
+    "etymology": {
+     "text": "Erde (“earth”, from Old High German ërda) + Mandel (“almond”, from Old High German mandala).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish yer bademi means the same as Erdmandel: “earth almond”. In Egypt tiger nuts are called حَبّ العَزِيز (ḥabb al-ʿazīz).",
+     "Tiger nuts were found as grave goods in ancient Egyptian tombs."
+    ],
+    "pitfalls": [
+     "It is not a nut and not an almond but a tuber; Wiktionary also lists Erdmandel for the peanut and the earthnut pea, but today it normally means the tiger nut."
+    ],
+    "subtleties": [
+     "Dried tiger nuts are hard and are soaked before eating or making milk."
+    ]
+   }
+  },
+  {
+   "id": "de:Malabarspinat",
+   "lemma": "Malabarspinat",
+   "pos": "NOUN",
+   "senses": [
+    "veg.malabarspinach"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Malabar",
+      "role": "modifier"
+     },
+     {
+      "part": "Spinat",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Malabarspinat",
+    "N;ACC;SG": "Malabarspinat",
+    "N;DAT;SG": "Malabarspinat",
+    "N;GEN;SG": "Malabarspinats"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Glossy, thick leaves on a climbing vine from the tropics; slimy like okra when cooked.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Malabar spinach (Basella alba), a tropical climbing plant whose leaves are cooked",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.malabarspinach",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Malabarspinat ist eine Kletterpflanze aus den Tropen.",
+      "tr": "Malabar spinach is a climbing plant from the tropics.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Gekochter Malabarspinat wird etwas schleimig.",
+      "tr": "Cooked Malabar spinach becomes a little slimy.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Sommer wächst Malabarspinat auch auf dem Balkon.",
+      "tr": "In summer Malabar spinach also grows on the balcony.",
+      "register": "informal",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "roter Malabarspinat",
+      "tr": "red Malabar spinach"
+     },
+     {
+      "text": "Malabarspinat dünsten",
+      "tr": "to steam Malabar spinach"
+     },
+     {
+      "text": "die Blätter des Malabarspinats",
+      "tr": "the leaves of Malabar spinach"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Indischer Spinat",
+      "register": "neutral",
+      "nuance": "title of the German Wikipedia article"
+     },
+     {
+      "word": "Ceylonspinat",
+      "register": "neutral",
+      "nuance": "another name after Sri Lanka"
+     }
+    ],
+    "etymology": {
+     "text": "Malabar (the south-west coast of India) + Spinat (“spinach”, borrowed from Italian spinace).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese calls it 木耳菜 (mù’ěrcài, “wood-ear vegetable”) because the cooked leaves feel slippery like wood-ear mushrooms."
+    ],
+    "pitfalls": [
+     "It is not related to spinach; only the use of the leaves is similar."
+    ],
+    "subtleties": [
+     "The mucilage thickens soups and stews, as okra does."
+    ]
+   }
+  },
+  {
+   "id": "de:Galgant",
+   "lemma": "Galgant",
+   "pos": "NOUN",
+   "senses": [
+    "veg.galangal"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Galgante",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Galgant",
+    "N;ACC;SG": "Galgant",
+    "N;DAT;SG": "Galgant",
+    "N;GEN;SG": "Galgants",
+    "N;NOM;PL": "Galgante",
+    "N;ACC;PL": "Galgante",
+    "N;DAT;PL": "Galganten",
+    "N;GEN;PL": "Galgante"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A hard, pale pink rhizome with a peppery, piney scent: Thai soup and medieval medicine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "galangal (Alpinia galanga, Alpinia officinarum), a ginger-like rhizome used as spice",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.galangal",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Für Tom Kha Gai braucht man frischen Galgant.",
+      "tr": "For tom kha gai you need fresh galangal.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Galgant ist härter als Ingwer und lässt sich schwer schneiden.",
+      "tr": "Galangal is harder than ginger and difficult to cut.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Hildegard von Bingen empfahl Galgant als Heilmittel.",
+      "tr": "Hildegard of Bingen recommended galangal as a remedy.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frischer Galgant",
+      "tr": "fresh galangal"
+     },
+     {
+      "text": "die Galgantwurzel",
+      "tr": "galangal root"
+     },
+     {
+      "text": "Galgant in Scheiben",
+      "tr": "galangal in slices"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Galgantwurzel",
+      "register": "neutral",
+      "nuance": "the root as a product, used in herbal shops"
+     },
+     {
+      "word": "Thai-Ingwer",
+      "register": "informal",
+      "nuance": "loose shop name; botanically wrong"
+     }
+    ],
+    "etymology": {
+     "text": "From earlier Galgan with intrusive /t/, from Middle High German galgan, from Medieval Latin galganum, galanga.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The kha in the Thai soup tom kha is galangal.",
+     "Medieval Latin galanga goes back through Arabic and Persian to Chinese 高良姜 (gāoliángjiāng)."
+    ],
+    "pitfalls": [
+     "Do not use it 1:1 instead of ginger: the taste is different (citrus, pine, pepper)."
+    ],
+    "subtleties": [
+     "German Galgant can mean several related plants; in Thai cooking it is the greater galangal (Alpinia galanga)."
+    ]
+   }
+  },
+  {
+   "id": "de:Gartenmelde",
+   "lemma": "Gartenmelde",
+   "pos": "NOUN",
+   "senses": [
+    "veg.orache"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gartenmelden",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Garten",
+      "role": "modifier"
+     },
+     {
+      "part": "Melde",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Gartenmelde",
+    "N;ACC;SG": "Gartenmelde",
+    "N;DAT;SG": "Gartenmelde",
+    "N;GEN;SG": "Gartenmelde",
+    "N;NOM;PL": "Gartenmelden",
+    "N;ACC;PL": "Gartenmelden",
+    "N;DAT;PL": "Gartenmelden",
+    "N;GEN;PL": "Gartenmelden"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An old-fashioned cottage-garden spinach, often with beautiful red leaves.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garden orache (Atriplex hortensis), cooked like spinach",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.orache",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Gartenmelde wurde früher wie Spinat gegessen.",
+      "tr": "Garden orache used to be eaten like spinach.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Rote Gartenmelde sieht im Beet sehr dekorativ aus.",
+      "tr": "Red garden orache looks very decorative in the bed.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "Junge Blätter der Gartenmelde passen in den Salat.",
+      "tr": "Young leaves of garden orache go well in salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "rote Gartenmelde",
+      "tr": "red garden orache"
+     },
+     {
+      "text": "Gartenmelde ernten",
+      "tr": "to harvest garden orache"
+     },
+     {
+      "text": "Gartenmelde wie Spinat zubereiten",
+      "tr": "to prepare garden orache like spinach"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Melde",
+      "register": "neutral",
+      "nuance": "the genus name, used for short in cooking and gardening"
+     },
+     {
+      "word": "Spanischer Spinat",
+      "register": "dated",
+      "nuance": "old name listed by German Wikipedia"
+     }
+    ],
+    "etymology": {
+     "text": "Garten (“garden”) + Melde (“orache”, from Middle High German melde, Old High German melda).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Wikipedia counts garden orache among the oldest cultivated plants; spinach pushed it out of European gardens."
+    ],
+    "pitfalls": [
+     "Do not confuse Melde (orache) with the homonym Melde, a rare noun from melden (“to report”)."
+    ],
+    "subtleties": [
+     "Like spinach and fat hen it contains oxalic acid and is usually eaten cooked; red varieties lose their colour in the pot."
+    ]
+   }
+  },
+  {
+   "id": "de:Guter_Heinrich",
+   "lemma": "Guter Heinrich",
+   "pos": "NOUN",
+   "senses": [
+    "veg.goodkinghenry"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "two words: an adjective + a name"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Guter Heinrich",
+    "N;ACC;SG": "Guten Heinrich",
+    "N;DAT;SG": "Guten Heinrich",
+    "N;GEN;SG": "Guten Heinrichs",
+    "N;NOM;SG;DEF": "Gute Heinrich",
+    "N;DAT;SG;INDF": "Gutem Heinrich"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A forgotten wild spinach from old farm and monastery gardens, with a funny human name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Good King Henry (Blitum bonus-henricus), a perennial wild spinach",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.goodkinghenry",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Gute Heinrich ist ein altes Wildgemüse.",
+      "tr": "Good King Henry is an old wild vegetable.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Guter Heinrich wächst gern in der Nähe von Ställen.",
+      "tr": "Good King Henry likes to grow near stables.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Die jungen Triebe vom Guten Heinrich isst man wie Spargel.",
+      "tr": "The young shoots of Good King Henry are eaten like asparagus.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Gute Heinrich",
+      "tr": "Good King Henry (with the article)"
+     },
+     {
+      "text": "Blätter vom Guten Heinrich",
+      "tr": "leaves of Good King Henry"
+     },
+     {
+      "text": "Guten Heinrich sammeln",
+      "tr": "to gather Good King Henry"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wilder Spinat",
+      "register": "neutral",
+      "nuance": "descriptive folk name"
+     },
+     {
+      "word": "Grüner Heinrich",
+      "register": "regional",
+      "nuance": "folk name listed by German Wikipedia"
+     }
+    ],
+    "etymology": {
+     "text": "From gut (“good”) + Heinrich (“Henry”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English Good King Henry, German Guter Heinrich: the plant has a man’s name in both languages."
+    ],
+    "pitfalls": [
+     "Gut is declined like an adjective: der Gute Heinrich, des Guten Heinrichs, but Guter Heinrich without an article. Write both parts with a capital letter."
+    ],
+    "subtleties": [
+     "Botanists moved it from the goosefoot genus Chenopodium to Blitum, but cooks still treat it like fat hen and spinach."
+    ]
+   }
+  },
+  {
+   "id": "de:Konjakwurzel",
+   "lemma": "Konjakwurzel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.konjac"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Konjakwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Konjak",
+      "role": "modifier"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Konjakwurzel",
+    "N;ACC;SG": "Konjakwurzel",
+    "N;DAT;SG": "Konjakwurzel",
+    "N;GEN;SG": "Konjakwurzel",
+    "N;NOM;PL": "Konjakwurzeln",
+    "N;ACC;PL": "Konjakwurzeln",
+    "N;DAT;PL": "Konjakwurzeln",
+    "N;GEN;PL": "Konjakwurzeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Almost calorie-free noodles and grey jelly blocks from a strange, huge-flowered plant.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "konjac (Amorphophallus konjac), its starchy corm and the products made from it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.konjac",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Aus der Konjakwurzel macht man Shirataki-Nudeln.",
+      "tr": "Shirataki noodles are made from konjac root.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Nudeln aus Konjakwurzel haben fast keine Kalorien.",
+      "tr": "Noodles made from konjac root have almost no calories.",
+      "register": "informal",
+      "context": "nutrition",
+      "sense": "s1"
+     },
+     {
+      "text": "Die rohe Konjakwurzel ist nicht essbar.",
+      "tr": "The raw konjac corm is not edible.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Nudeln aus Konjakwurzel",
+      "tr": "noodles made from konjac"
+     },
+     {
+      "text": "das Konjakwurzelmehl",
+      "tr": "konjac flour"
+     },
+     {
+      "text": "Gelee aus Konjakwurzel",
+      "tr": "konjac jelly"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Konjak",
+      "register": "neutral",
+      "nuance": "the short form, mostly in compounds such as Konjaknudeln, Konjakmehl"
+     },
+     {
+      "word": "Teufelszunge",
+      "register": "technical",
+      "nuance": "the botanical German name of the plant (German Wikipedia)"
+     }
+    ],
+    "etymology": {
+     "text": "Konjak (from Japanese konnyaku 蒟蒻) + Wurzel (“root”, from Old High German wurzala). Wiktionary has no entry for the German compound.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 魔芋 (móyù, “devil taro”) – and German Teufelszunge (“devil’s tongue”) is about the same plant.",
+     "The EU banned konjac in mini jelly cups because they caused choking."
+    ],
+    "pitfalls": [
+     "The thickener glucomannan (E 425) comes from konjac; products are labelled Konjak, not Konjakwurzel."
+    ],
+    "subtleties": [
+     "The corm is a tuber-like stem, not a botanical root; the word Wurzel is used loosely, as in Ingwerwurzel."
+    ]
+   }
+  },
+  {
+   "id": "de:Meerfenchel",
+   "lemma": "Meerfenchel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.samphire"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Meerfenchel",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Meer",
+      "role": "modifier"
+     },
+     {
+      "part": "Fenchel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Meerfenchel",
+    "N;ACC;SG": "Meerfenchel",
+    "N;DAT;SG": "Meerfenchel",
+    "N;GEN;SG": "Meerfenchels",
+    "N;NOM;PL": "Meerfenchel",
+    "N;ACC;PL": "Meerfenchel",
+    "N;DAT;PL": "Meerfencheln",
+    "N;GEN;PL": "Meerfenchel"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A salty, aromatic plant on sea cliffs, pickled in Greece and France.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rock samphire, sea fennel (Crithmum maritimum)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.samphire",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meerfenchel wächst an Felsen direkt am Meer.",
+      "tr": "Sea fennel grows on rocks right by the sea.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "In Griechenland legt man Meerfenchel in Essig ein.",
+      "tr": "In Greece sea fennel is pickled in vinegar.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Meerfenchel schmeckt salzig und würzig.",
+      "tr": "Sea fennel tastes salty and spicy.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eingelegter Meerfenchel",
+      "tr": "pickled sea fennel"
+     },
+     {
+      "text": "Meerfenchel sammeln",
+      "tr": "to gather sea fennel"
+     },
+     {
+      "text": "die Blätter des Meerfenchels",
+      "tr": "the leaves of sea fennel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "etymology": {
+     "text": "Meer (“sea”, from Old High German meri, cognate with Latin mare) + Fenchel (“fennel”, ultimately from Latin fēnuculum).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek κρίταμο (krítamo) is the same plant, a classic Greek pickle.",
+     "Shakespeare’s King Lear mentions a samphire gatherer on the cliffs of Dover: “dreadful trade!”"
+    ],
+    "pitfalls": [
+     "English “samphire” is also used for glasswort (Queller); in German these are two different words."
+    ],
+    "subtleties": [
+     "It is not related to fennel; the name comes from the fennel-like smell and feathery leaves."
+    ],
+    "synonymsNone": "No common German synonym: the plant is rare in German-speaking countries, and cooks sometimes use the French name criste marine instead."
+   }
+  },
+  {
+   "id": "de:Queller",
+   "lemma": "Queller",
+   "pos": "NOUN",
+   "senses": [
+    "veg.glasswort"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Queller",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: quellen + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Queller",
+    "N;ACC;SG": "Queller",
+    "N;DAT;SG": "Queller",
+    "N;GEN;SG": "Quellers",
+    "N;NOM;PL": "Queller",
+    "N;ACC;PL": "Queller",
+    "N;DAT;PL": "Quellern",
+    "N;GEN;PL": "Queller"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Juicy green salty sticks from the mudflats; crunchy with fish.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "glasswort, sea asparagus, marsh samphire (Salicornia)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.glasswort",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Queller wächst im Wattenmeer auf salzigem Boden.",
+      "tr": "Glasswort grows on salty ground in the Wadden Sea.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Handel heißt Queller oft Meeresspargel.",
+      "tr": "In shops glasswort is often called sea asparagus.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Kurz blanchierter Queller passt gut zu Fisch.",
+      "tr": "Briefly blanched glasswort goes well with fish.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Queller blanchieren",
+      "tr": "to blanch glasswort"
+     },
+     {
+      "text": "frischer Queller",
+      "tr": "fresh glasswort"
+     },
+     {
+      "text": "Queller zu Fisch",
+      "tr": "glasswort with fish"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Meeresspargel",
+      "register": "neutral",
+      "nuance": "the usual shop name"
+     },
+     {
+      "word": "Seespargel",
+      "register": "neutral",
+      "nuance": "shop name given by German Wikipedia"
+     },
+     {
+      "word": "Salicorne",
+      "register": "neutral",
+      "nuance": "French name used by gourmet cooks"
+     }
+    ],
+    "etymology": {
+     "text": "From Low German Queller, from Middle Low German queller, quelder, cognate with Dutch kwelder (“salt marsh”); probably from quellen (“to soak, swell with water”) + -er.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ash of glasswort was once used to make glass and soap – hence the English name."
+    ],
+    "pitfalls": [
+     "Usually used without plural as a mass noun; the plural is the same form: die Queller."
+    ],
+    "subtleties": [
+     "The plants store salt, so they need no extra salt; rinse them and cook only briefly."
+    ]
+   }
+  },
+  {
+   "id": "de:Neuseeländer_Spinat",
+   "lemma": "Neuseeländer Spinat",
+   "pos": "NOUN",
+   "senses": [
+    "veg.nzspinach"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "two words: a place adjective (Neuseeländer) + a noun"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Neuseeländer Spinat",
+    "N;ACC;SG": "Neuseeländer Spinat",
+    "N;DAT;SG": "Neuseeländer Spinat",
+    "N;GEN;SG": "Neuseeländer Spinats"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A heat-loving summer spinach with thick triangular leaves, brought to Europe from Captain Cook’s voyages.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "New Zealand spinach (Tetragonia tetragonioides)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.nzspinach",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Neuseeländer Spinat schießt im Sommer nicht wie normaler Spinat.",
+      "tr": "New Zealand spinach does not bolt in summer like normal spinach.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Blätter vom Neuseeländer Spinat sind dick und fleischig.",
+      "tr": "The leaves of New Zealand spinach are thick and fleshy.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Neuseeländer Spinat wird gekocht wie Spinat.",
+      "tr": "New Zealand spinach is cooked like spinach.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Neuseeländer Spinat aussäen",
+      "tr": "to sow New Zealand spinach"
+     },
+     {
+      "text": "die Triebspitzen des Neuseeländer Spinats",
+      "tr": "the shoot tips of New Zealand spinach"
+     },
+     {
+      "text": "Neuseeländer Spinat blanchieren",
+      "tr": "to blanch New Zealand spinach"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Neuseeländischer Spinat",
+      "register": "neutral",
+      "nuance": "variant with the declined adjective"
+     },
+     {
+      "word": "Neuseelandspinat",
+      "register": "neutral",
+      "nuance": "one-word variant in seed catalogues"
+     }
+    ],
+    "etymology": {
+     "text": "Neuseeländer (“New Zealand”, attributive, from Neuseeland + -er) + Spinat (“spinach”, borrowed from Italian spinace).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Joseph Banks, the botanist of Captain Cook’s first voyage, brought it to Europe; the sailors ate it against scurvy."
+    ],
+    "pitfalls": [
+     "Neuseeländer is never declined: der Neuseeländer Spinat, des Neuseeländer Spinats, mit Neuseeländer Spinat."
+    ],
+    "subtleties": [
+     "It is not related to spinach (it belongs to the ice-plant family); it likes heat, while true spinach bolts."
+    ]
+   }
+  },
+  {
+   "id": "de:Palmherz",
+   "lemma": "Palmherz",
+   "pos": "NOUN",
+   "senses": [
+    "veg.heartofpalm"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Palmherzen",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Palme",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Herz",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Palmherz",
+    "N;ACC;SG": "Palmherz",
+    "N;DAT;SG": "Palmherz",
+    "N;GEN;SG": "Palmherzes",
+    "N;NOM;PL": "Palmherzen",
+    "N;ACC;PL": "Palmherzen",
+    "N;DAT;PL": "Palmherzen",
+    "N;GEN;PL": "Palmherzen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pale, tender, mild cylinders from a tin or jar – Brazilian salads and vegan “calamari”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "heart of palm, palmito: the edible core at the top of a palm stem",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.heartofpalm",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Palmherzen gibt es meistens im Glas oder in der Dose.",
+      "tr": "Hearts of palm usually come in a jar or a tin.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Palmherz schmeckt mild, ein bisschen wie Spargel.",
+      "tr": "Heart of palm tastes mild, a little like asparagus.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "In Brasilien isst man Palmherzen im Salat.",
+      "tr": "In Brazil people eat hearts of palm in salads.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Palmherzen aus der Dose",
+      "tr": "tinned hearts of palm"
+     },
+     {
+      "text": "Salat mit Palmherzen",
+      "tr": "salad with hearts of palm"
+     },
+     {
+      "text": "Palmherzen in Scheiben",
+      "tr": "sliced hearts of palm"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Palmenherz",
+      "register": "neutral",
+      "nuance": "variant with Palmen-"
+     },
+     {
+      "word": "Palmito",
+      "register": "neutral",
+      "nuance": "the Spanish/Portuguese name, used in Latin American recipes"
+     }
+    ],
+    "etymology": {
+     "text": "Palme (“palm”, from Latin palma) + Herz (“heart”, from Old High German hërza, cognate with English heart).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "For many wild palms, harvesting the heart kills the tree; today most palm hearts come from farmed multi-stemmed palms such as the peach palm."
+    ],
+    "pitfalls": [
+     "Herz is irregular, and so is Palmherz in some forms: genitive des Palmherzes or des Palmherzens, dative dem Palmherz or Palmherzen."
+    ],
+    "subtleties": [
+     "Usually used in the plural for the product (Palmherzen); one piece is ein Palmherz or eine Stange Palmherz."
+    ]
+   }
+  },
+  {
+   "id": "de:Haferwurzel",
+   "lemma": "Haferwurzel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.salsify"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Haferwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Hafer",
+      "role": "modifier"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Haferwurzel",
+    "N;ACC;SG": "Haferwurzel",
+    "N;DAT;SG": "Haferwurzel",
+    "N;GEN;SG": "Haferwurzel",
+    "N;NOM;PL": "Haferwurzeln",
+    "N;ACC;PL": "Haferwurzeln",
+    "N;DAT;PL": "Haferwurzeln",
+    "N;GEN;PL": "Haferwurzeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A thin, pale winter root with a mild taste that some find reminiscent of oysters.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salsify, oyster plant (Tragopogon porrifolius)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.salsify",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Haferwurzel ist eine Verwandte der Schwarzwurzel.",
+      "tr": "Salsify is a relative of black salsify.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Haferwurzeln schält man am besten unter Wasser.",
+      "tr": "It is best to peel salsify roots under water.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute findet man die Haferwurzel fast nur noch auf dem Wochenmarkt.",
+      "tr": "Today you find salsify almost only at the farmers’ market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Haferwurzeln schälen",
+      "tr": "to peel salsify"
+     },
+     {
+      "text": "gedünstete Haferwurzeln",
+      "tr": "steamed salsify"
+     },
+     {
+      "text": "die Haferwurzel in Butter",
+      "tr": "salsify in butter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Austernpflanze",
+      "register": "neutral",
+      "nuance": "name from the taste, listed by German Wikipedia"
+     },
+     {
+      "word": "Purpur-Bocksbart",
+      "register": "technical",
+      "nuance": "botanical name, after the purple flowers"
+     },
+     {
+      "word": "Habermark",
+      "register": "regional",
+      "nuance": "old regional name"
+     }
+    ],
+    "etymology": {
+     "text": "Hafer (“oats”, from Old High German habaro) + Wurzel (“root”, from Old High German wurzala); the leaves look like grass or oat leaves.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Haber is the old southern form of Hafer – the folk name Habermark keeps it."
+    ],
+    "pitfalls": [
+     "Do not confuse Haferwurzel (white salsify, Tragopogon) and Schwarzwurzel (black salsify, Scorzonera)."
+    ],
+    "subtleties": [
+     "Like black salsify it exudes a sticky milky sap; gloves or a little vinegar in the water help."
+    ]
+   }
+  },
+  {
+   "id": "de:Zuckerwurzel",
+   "lemma": "Zuckerwurzel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.skirret"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zuckerwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Zucker",
+      "role": "modifier"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Zuckerwurzel",
+    "N;ACC;SG": "Zuckerwurzel",
+    "N;DAT;SG": "Zuckerwurzel",
+    "N;GEN;SG": "Zuckerwurzel",
+    "N;NOM;PL": "Zuckerwurzeln",
+    "N;ACC;PL": "Zuckerwurzeln",
+    "N;DAT;PL": "Zuckerwurzeln",
+    "N;GEN;PL": "Zuckerwurzeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bundle of sweet white finger-roots from medieval gardens, now a rarity for collectors.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "skirret (Sium sisarum), a sweet root vegetable of the carrot family",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.skirret",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Zuckerwurzel war im Mittelalter ein beliebtes Gemüse.",
+      "tr": "Skirret was a popular vegetable in the Middle Ages.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "Zuckerwurzeln schmecken süßlich und nussig.",
+      "tr": "Skirret roots taste sweetish and nutty.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Zuckerwurzel bildet viele dünne Wurzeln.",
+      "tr": "Skirret forms many thin roots.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Zuckerwurzeln anbauen",
+      "tr": "to grow skirret"
+     },
+     {
+      "text": "gebratene Zuckerwurzeln",
+      "tr": "fried skirret"
+     },
+     {
+      "text": "die alte Gemüsesorte Zuckerwurzel",
+      "tr": "the old vegetable skirret"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Zuckerwurz",
+      "register": "neutral",
+      "nuance": "short variant"
+     },
+     {
+      "word": "Gierlen",
+      "register": "regional",
+      "nuance": "old regional name listed by German Wikipedia"
+     }
+    ],
+    "etymology": {
+     "text": "Zucker (“sugar”, from Old High German zuckar, via Italian and Arabic سُكَّر sukkar from Sanskrit śarkarā) + Wurzel (“root”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Pliny wrote that the emperor Tiberius demanded skirret (siser) from Germania every year."
+    ],
+    "pitfalls": [
+     "Not the same as Zuckerrübe (sugar beet)."
+    ],
+    "subtleties": [
+     "The roots grow in a cluster and can have a hard core, which is removed – one reason why the carrot and parsnip replaced it."
+    ]
+   }
+  },
+  {
+   "id": "de:Knollenziest",
+   "lemma": "Knollenziest",
+   "pos": "NOUN",
+   "senses": [
+    "veg.chineseartichoke"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Knolle",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Ziest",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Knollenziest",
+    "N;ACC;SG": "Knollenziest",
+    "N;DAT;SG": "Knollenziest",
+    "N;GEN;SG": "Knollenziestes"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tiny, pearly, ringed tubers that look like little caterpillars; a delicacy of French cuisine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Chinese artichoke, crosne (Stachys affinis), a mint-family plant with small edible tubers",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chineseartichoke",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Knollen vom Knollenziest sehen aus wie kleine Raupen.",
+      "tr": "The tubers of the Chinese artichoke look like little caterpillars.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Knollenziest muss man nicht schälen.",
+      "tr": "Chinese artichokes do not need peeling.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf dem Markt heißt Knollenziest manchmal Crosne.",
+      "tr": "At the market Chinese artichoke is sometimes called crosne.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Knollenziest in Butter",
+      "tr": "Chinese artichokes in butter"
+     },
+     {
+      "text": "Knollenziest ernten",
+      "tr": "to harvest Chinese artichoke"
+     },
+     {
+      "text": "die Knollen des Knollenziestes",
+      "tr": "the tubers of Chinese artichoke"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Japanknolle",
+      "register": "neutral",
+      "nuance": "folk name listed by German Wikipedia"
+     },
+     {
+      "word": "Chinesische Artischocke",
+      "register": "neutral",
+      "nuance": "loan translation, though it is no artichoke"
+     },
+     {
+      "word": "Crosne",
+      "register": "neutral",
+      "nuance": "French name used by cooks"
+     }
+    ],
+    "etymology": {
+     "text": "Knolle (“tuber”, from Middle High German knolle) + Ziest (“woundwort, Stachys”, 18th century, from Sorbian cysć / čist, from Proto-Slavic *čistъ “pure”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The French name crosne comes from the village of Crosne near Paris, where it was first grown in France in the 1880s."
+    ],
+    "pitfalls": [
+     "German Wikipedia writes Knollen-Ziest with a hyphen, the botanical style; cooks write Knollenziest."
+    ],
+    "subtleties": [
+     "Used as a mass noun; for single tubers say die Knollen or die Knöllchen."
+    ]
+   }
+  },
+  {
+   "id": "de:Amarant",
+   "lemma": "Amarant",
+   "pos": "NOUN",
+   "senses": [
+    "veg.amaranth"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Amarante",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Amarant: the colour amaranth"
+     }
+    ],
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Amarant",
+    "N;ACC;SG": "Amarant",
+    "N;DAT;SG": "Amarant",
+    "N;GEN;SG": "Amarants",
+    "N;NOM;PL": "Amarante",
+    "N;ACC;PL": "Amarante",
+    "N;DAT;PL": "Amaranten",
+    "N;GEN;PL": "Amarante"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Known in Germany mostly as a tiny gluten-free grain; in Greece and Asia the leaves are a summer green.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "amaranth (Amaranthus), especially its leaves eaten as greens",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.amaranth",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "In Griechenland isst man junge Blätter vom Amarant gekocht mit Olivenöl.",
+      "tr": "In Greece young amaranth leaves are eaten boiled with olive oil.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Amarant gibt es im Bioladen meistens als Körner oder gepufft.",
+      "tr": "In the organic shop amaranth is mostly sold as grains or puffed.",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Roter Amarant färbt das Kochwasser rot.",
+      "tr": "Red amaranth turns the cooking water red.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gepuffter Amarant",
+      "tr": "puffed amaranth"
+     },
+     {
+      "text": "die Amarantblätter",
+      "tr": "amaranth leaves"
+     },
+     {
+      "text": "roter Amarant",
+      "tr": "red amaranth"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Fuchsschwanz",
+      "register": "neutral",
+      "nuance": "German folk name of the genus, after the long flower spikes"
+     },
+     {
+      "word": "Amaranth",
+      "register": "neutral",
+      "nuance": "spelling variant, as in English"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Latin amarantus, from Ancient Greek ἀμάραντος (amárantos, “unfading”); the spelling Amaranth is influenced by ἄνθος (ánthos, “flower”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek βλίτα (vlíta), boiled amaranth greens with lemon and oil, is a classic summer dish; Chinese 苋菜 (xiàncài) is amaranth greens too.",
+     "Amaranth was a staple grain of the Aztecs."
+    ],
+    "pitfalls": [
+     "Gender: Wiktionary gives der Amarant (also das); the colour amaranth is das Amarant.",
+     "In German Amarant usually means the grain; for the vegetable say Amarantblätter."
+    ],
+    "subtleties": [
+     "The same plants give grain (the seeds) and greens (the leaves); some species are common garden weeds."
+    ]
+   }
+  },
+  {
+   "id": "de:Winterkresse",
+   "lemma": "Winterkresse",
+   "pos": "NOUN",
+   "senses": [
+    "veg.landcress"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Winterkressen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Winter",
+      "role": "modifier"
+     },
+     {
+      "part": "Kresse",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Winterkresse",
+    "N;ACC;SG": "Winterkresse",
+    "N;DAT;SG": "Winterkresse",
+    "N;GEN;SG": "Winterkresse",
+    "N;NOM;PL": "Winterkressen",
+    "N;ACC;PL": "Winterkressen",
+    "N;DAT;PL": "Winterkressen",
+    "N;GEN;PL": "Winterkressen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A peppery green you can pick in winter, when little else grows.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winter cress, land cress (Barbarea vulgaris, Barbarea verna), eaten like watercress",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.landcress",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Winterkresse schmeckt scharf wie Brunnenkresse.",
+      "tr": "Land cress tastes peppery like watercress.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Winterkresse kann man auch im Dezember ernten.",
+      "tr": "You can harvest land cress even in December.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein paar Blätter Winterkresse machen den Salat würziger.",
+      "tr": "A few leaves of land cress make the salad spicier.",
+      "register": "informal",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Winterkresse säen",
+      "tr": "to sow land cress"
+     },
+     {
+      "text": "Salat mit Winterkresse",
+      "tr": "salad with land cress"
+     },
+     {
+      "text": "junge Winterkresse",
+      "tr": "young land cress"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Barbarakraut",
+      "register": "neutral",
+      "nuance": "name after Saint Barbara (feast day 4 December)"
+     },
+     {
+      "word": "Amerikanische Winterkresse",
+      "register": "technical",
+      "nuance": "the species usually grown as land cress, Barbarea verna"
+     }
+    ],
+    "etymology": {
+     "text": "From Winter (“winter”) + Kresse (“cress”, from Old High German kressa, cognate with English cress).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Barbarakraut is named after Saint Barbara, whose feast day falls in early winter, when the plant can still be picked."
+    ],
+    "pitfalls": [
+     "Strictly, Winterkresse is Barbarea vulgaris; the land cress of seed catalogues is the related Barbarea verna. Both are eaten the same way."
+    ],
+    "subtleties": [
+     "Older leaves become bitter; pick young ones or the winter rosettes."
+    ]
+   }
+  },
+  {
+   "id": "de:Etagenzwiebel",
+   "lemma": "Etagenzwiebel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.treeonion"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Etagenzwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Etage",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Etagenzwiebel",
+    "N;ACC;SG": "Etagenzwiebel",
+    "N;DAT;SG": "Etagenzwiebel",
+    "N;GEN;SG": "Etagenzwiebel",
+    "N;NOM;PL": "Etagenzwiebeln",
+    "N;ACC;PL": "Etagenzwiebeln",
+    "N;DAT;PL": "Etagenzwiebeln",
+    "N;GEN;PL": "Etagenzwiebeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A curious onion that grows little onions on top of its stalk, storey above storey.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tree onion, walking onion, Egyptian onion (Allium × proliferum)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.treeonion",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Etagenzwiebel bildet oben am Stängel kleine Zwiebeln.",
+      "tr": "The tree onion forms small onions at the top of the stalk.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Die kleinen Etagenzwiebeln kann man einlegen.",
+      "tr": "The small tree onions can be pickled.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Etagenzwiebeln sind ganz einfach zu vermehren.",
+      "tr": "Tree onions are very easy to propagate.",
+      "register": "informal",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Etagenzwiebeln pflanzen",
+      "tr": "to plant tree onions"
+     },
+     {
+      "text": "die Brutzwiebeln der Etagenzwiebel",
+      "tr": "the bulblets of the tree onion"
+     },
+     {
+      "text": "eingelegte Etagenzwiebeln",
+      "tr": "pickled tree onions"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Luftzwiebel",
+      "register": "neutral",
+      "nuance": "name after the bulblets in the air"
+     },
+     {
+      "word": "Ägyptische Zwiebel",
+      "register": "neutral",
+      "nuance": "loan translation of English Egyptian onion"
+     }
+    ],
+    "etymology": {
+     "text": "Etage (“storey, floor”, borrowed from French étage) + Zwiebel (“onion”, from Old High German zwibollo, from Late Latin cēpulla).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English calls it walking onion: the heavy stalks bend, the bulblets touch the ground and root, so the plant “walks” across the bed."
+    ],
+    "pitfalls": [
+     "Etage is pronounced the French way: [eˈtaːʒə]."
+    ],
+    "subtleties": [
+     "You can eat the green leaves like spring onions and the bulblets like small onions or shallots."
+    ]
+   }
+  },
+  {
+   "id": "de:Spargelsalat",
+   "lemma": "Spargelsalat",
+   "pos": "NOUN",
+   "senses": [
+    "veg.celtuce",
+    "food.asparagussalad"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spargelsalate",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Spargel",
+      "role": "modifier"
+     },
+     {
+      "part": "Salat",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Spargelsalat",
+    "N;ACC;SG": "Spargelsalat",
+    "N;DAT;SG": "Spargelsalat",
+    "N;GEN;SG": "Spargelsalats",
+    "N;NOM;PL": "Spargelsalate",
+    "N;ACC;PL": "Spargelsalate",
+    "N;DAT;PL": "Spargelsalaten",
+    "N;GEN;PL": "Spargelsalate"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A lettuce grown for its thick, crunchy stem, a favourite in China, almost unknown in Germany.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "celtuce, stem lettuce: a form of lettuce (Lactuca sativa) grown for its thick stem",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.celtuce",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "asparagus salad (a dish)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ],
+      "concept": "food.asparagussalad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Beim Spargelsalat isst man vor allem den dicken Stängel.",
+      "tr": "With celtuce you mainly eat the thick stem.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Spargelsalat ist in China ein beliebtes Gemüse.",
+      "tr": "Celtuce is a popular vegetable in China.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Samen für Spargelsalat bekommt man im Gartenversand.",
+      "tr": "You can get celtuce seeds from garden mail-order shops.",
+      "register": "informal",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Schnitzel gibt es heute Spargelsalat mit Erdbeeren.",
+      "tr": "Today the schnitzel comes with asparagus salad with strawberries.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "den Spargelsalat schälen",
+      "tr": "to peel the celtuce"
+     },
+     {
+      "text": "Spargelsalat anbauen",
+      "tr": "to grow celtuce"
+     },
+     {
+      "text": "der Stängel des Spargelsalats",
+      "tr": "the stem of the celtuce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Celtuce",
+      "register": "neutral",
+      "nuance": "the English name, used in seed catalogues"
+     },
+     {
+      "word": "Stängelsalat",
+      "register": "neutral",
+      "nuance": "descriptive name, also Stiel-Salat"
+     }
+    ],
+    "etymology": {
+     "text": "Spargel (“asparagus”, from Medieval Latin sparagus) + Salat (“lettuce, salad”, from earlier Italian salata).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 莴笋 (wōsǔn): the peeled stem is sliced and stir-fried or eaten cold with sesame oil."
+    ],
+    "pitfalls": [
+     "Spargelsalat also means a salad made of asparagus – context decides."
+    ],
+    "subtleties": [
+     "The stem is peeled because the skin is bitter; the leaves are edible but less valued."
+    ]
+   }
+  },
+  {
+   "id": "de:Perlzwiebel",
+   "lemma": "Perlzwiebel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pearlonion"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Perlzwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Perle",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Perlzwiebel",
+    "N;ACC;SG": "Perlzwiebel",
+    "N;DAT;SG": "Perlzwiebel",
+    "N;GEN;SG": "Perlzwiebel",
+    "N;NOM;PL": "Perlzwiebeln",
+    "N;ACC;PL": "Perlzwiebeln",
+    "N;DAT;PL": "Perlzwiebeln",
+    "N;GEN;PL": "Perlzwiebeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tiny white onions in a jar of mixed pickles or on a cocktail stick.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pearl onion, a very small mild onion, usually pickled",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pearlonion",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Glas mit Mixed Pickles sind auch Perlzwiebeln.",
+      "tr": "There are pearl onions in the jar of mixed pickles too.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Raclette gibt es Perlzwiebeln und Gewürzgurken.",
+      "tr": "With raclette there are pearl onions and pickled gherkins.",
+      "register": "informal",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Perlzwiebeln lassen sich nach kurzem Blanchieren leicht schälen.",
+      "tr": "Pearl onions are easy to peel after brief blanching.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eingelegte Perlzwiebeln",
+      "tr": "pickled pearl onions"
+     },
+     {
+      "text": "ein Glas Perlzwiebeln",
+      "tr": "a jar of pearl onions"
+     },
+     {
+      "text": "Perlzwiebeln schälen",
+      "tr": "to peel pearl onions"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Silberzwiebel",
+      "register": "neutral",
+      "nuance": "trade name for small white pickling onions; often used for the same product"
+     }
+    ],
+    "etymology": {
+     "text": "Perle (“pearl”, from Old High German perala, from Vulgar Latin *perla) + Zwiebel (“onion”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A cocktail called the Gibson is a martini garnished with a pearl onion instead of an olive."
+    ],
+    "pitfalls": [
+     "Botanically German Wikipedia treats the Perlzwiebel as a form of Allium ampeloprasum (the leek species); in shops any tiny white onion is sold as Perlzwiebel or Silberzwiebel."
+    ],
+    "subtleties": [
+     "Almost always used in the plural: one onion alone is rarely mentioned."
+    ]
+   }
+  },
+  {
+   "id": "de:Elefantenknoblauch",
+   "lemma": "Elefantenknoblauch",
+   "pos": "NOUN",
+   "senses": [
+    "veg.elephantgarlic"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Elefant",
+      "role": "modifier",
+      "linker": "-en-"
+     },
+     {
+      "part": "Knoblauch",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Elefantenknoblauch",
+    "N;ACC;SG": "Elefantenknoblauch",
+    "N;DAT;SG": "Elefantenknoblauch",
+    "N;GEN;SG": "Elefantenknoblauchs"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Garlic heads as big as a fist, but mild – a show-off at the market.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "elephant garlic (Allium ampeloprasum), a large, mild garlic-like bulb",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.elephantgarlic",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Elefantenknoblauch hat riesige Zehen.",
+      "tr": "Elephant garlic has huge cloves.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     },
+     {
+      "text": "Elefantenknoblauch schmeckt viel milder als normaler Knoblauch.",
+      "tr": "Elephant garlic tastes much milder than normal garlic.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "Gerösteter Elefantenknoblauch wird weich und süß.",
+      "tr": "Roasted elephant garlic becomes soft and sweet.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Knolle Elefantenknoblauch",
+      "tr": "a bulb of elephant garlic"
+     },
+     {
+      "text": "gerösteter Elefantenknoblauch",
+      "tr": "roasted elephant garlic"
+     },
+     {
+      "text": "eine Zehe Elefantenknoblauch",
+      "tr": "a clove of elephant garlic"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Riesenknoblauch",
+      "register": "informal",
+      "nuance": "descriptive shop name"
+     },
+     {
+      "word": "Ackerlauch",
+      "register": "technical",
+      "nuance": "the wild species Allium ampeloprasum (German Wikipedia), of which elephant garlic is a form"
+     }
+    ],
+    "etymology": {
+     "text": "Elefant (“elephant”, from Middle High German elefant, Old High German helfant) + Knoblauch (“garlic”, from Old High German chlobalouh, “clove-leek”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Despite the name it is closer to leek than to garlic: it is a form of the same species as the leek."
+    ],
+    "pitfalls": [
+     "Like Knoblauch it has no plural in normal use: say Knollen (bulbs) or Zehen (cloves)."
+    ],
+    "subtleties": [
+     "Because it is mild, it is often roasted whole or sliced raw, where normal garlic would be too strong."
+    ]
+   }
+  },
+  {
+   "id": "de:Petersilienwurzel",
+   "lemma": "Petersilienwurzel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.rootparsley"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Petersilienwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Petersilie",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Petersilienwurzel",
+    "N;ACC;SG": "Petersilienwurzel",
+    "N;DAT;SG": "Petersilienwurzel",
+    "N;GEN;SG": "Petersilienwurzel",
+    "N;NOM;PL": "Petersilienwurzeln",
+    "N;ACC;PL": "Petersilienwurzeln",
+    "N;DAT;PL": "Petersilienwurzeln",
+    "N;GEN;PL": "Petersilienwurzeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A pale, slim winter root that smells of parsley: soups and Sunday stews.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "root parsley, Hamburg parsley (Petroselinum crispum var. tuberosum) and its root",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.rootparsley",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Petersilienwurzeln geben der Suppe ein feines Aroma.",
+      "tr": "Root parsley gives the soup a delicate flavour.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Petersilienwurzel sieht aus wie eine kleine Pastinake.",
+      "tr": "Root parsley looks like a small parsnip.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "In Österreich gehört die Petersilienwurzel ins Wurzelgemüse für die Rindsuppe.",
+      "tr": "In Austria root parsley belongs in the root vegetables for beef soup.",
+      "register": "regional",
+      "context": "regional cuisine",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Petersilienwurzeln schälen",
+      "tr": "to peel root parsley"
+     },
+     {
+      "text": "das Petersilienwurzelpüree",
+      "tr": "root parsley purée"
+     },
+     {
+      "text": "Suppe mit Petersilienwurzel",
+      "tr": "soup with root parsley"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wurzelpetersilie",
+      "register": "neutral",
+      "nuance": "the plant variety (Wiktionary: root parsley); Petersilienwurzel is the usual market name for the root"
+     }
+    ],
+    "etymology": {
+     "text": "Petersilie (“parsley”, from Old High German petarsilia) + -n- + Wurzel (“root”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is the same species as leaf parsley, bred for the root – its leaves can be used like parsley too."
+    ],
+    "pitfalls": [
+     "Easy to confuse with Pastinake (parsnip): the parsnip is bigger, sweeter, and has a sunken leaf base; root parsley smells of parsley."
+    ],
+    "subtleties": [
+     "Wiktionary also lists Petersilienwurzel for the root of ordinary leaf parsley; at the market it means the special root variety."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.purpleyam",
+   "reason": "No German word in use: the purple yam (Dioscorea alata) is known only from Filipino and Asian food, and Wiktionary and German Wikipedia have no German name for it.",
+   "use": "The Filipino name Ube (Ube-Eis, Ube-Kuchen) or a description: lila Yamswurzel; botanically Dioscorea alata."
+  },
+  {
+   "concept": "veg.elephantyam",
+   "reason": "No established German word: the elephant foot yam (Amorphophallus paeoniifolius) is sold only in Indian and Asian shops, and there is no German Wiktionary or Wikipedia name.",
+   "use": "The Indian names Suran or Jimikand, or a description like Elefantenfuß-Yams; botanically Amorphophallus paeoniifolius."
+  },
+  {
+   "concept": "veg.kurrat",
+   "reason": "No German word in use: kurrat (Egyptian leek) is grown only in Egypt and the Levant; German Wikipedia mentions the name Kurrat only as a form of Ackerlauch.",
+   "use": "Kurrat or Ägyptischer Lauch (botany), otherwise just a description: eine Art Lauch aus Ägypten."
+  },
+  {
+   "concept": "veg.oca",
+   "reason": "No German word in common use: oca (Oxalis tuberosa) is an Andean tuber grown only by a few gardeners; Wiktionary has no German entry.",
+   "use": "Oca or Knolliger Sauerklee (botany); in seed catalogues also Yam or Neuseeland-Yam (from its New Zealand trade name)."
+  },
+  {
+   "concept": "veg.yacon",
+   "reason": "No settled German word: the Andean name Yacón is used (German Wikipedia title), but without an established gender or inflection, mostly as the first part of compounds.",
+   "use": "Yacón in compounds: Yaconwurzel, Yaconsirup; botanically Smallanthus sonchifolius."
+  },
+  {
+   "concept": "veg.mashua",
+   "reason": "No German word in common use: mashua is an Andean tuber; German Wikipedia files it under the botanical name.",
+   "use": "Knollige Kapuzinerkresse or Peruanische Knollenkresse (botany), or the Quechua name Mashua."
+  },
+  {
+   "concept": "veg.arracacha",
+   "reason": "No German word: arracacha (Arracacia xanthorrhiza) is practically unknown in German-speaking countries; neither Wiktionary nor German Wikipedia has a German name.",
+   "use": "The Spanish name Arracacha, or a description: eine Wurzel aus den Anden, ähnlich wie Pastinake und Sellerie."
+  },
+  {
+   "concept": "veg.fiddlehead",
+   "reason": "No established German word: fern shoots are hardly eaten in German-speaking countries, and Wiktionary has no German term for them.",
+   "use": "A description: junge Farntriebe, Farnspitzen or Triebe des Straußenfarns; in recipes also the English word Fiddleheads."
+  },
+  {
+   "concept": "veg.ramps",
+   "reason": "No German word in use: ramps (Allium tricoccum) grow only in North America; German Wikipedia uses the scientific name with the trivial name Nordamerikanischer Ramp-Lauch.",
+   "use": "Ramps, or a comparison with the native plant: amerikanischer Bärlauch, wilder Lauch."
+  }
+ ]
+}

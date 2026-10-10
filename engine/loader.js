@@ -465,7 +465,8 @@
         Notes.on(all => { const pending = all.filter(x => !x.kind); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
         // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
-          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
+          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))),
+          (REG.languages || []).length || langAccount(acc).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 Languages', el('small', {}, 'several at once')) : null);
         const curs = el('div', { class: 'pick-curs' });
         const drawCurs = () => {
           curs.innerHTML = ''; const list = CU?.list(acc) || [];
@@ -487,6 +488,174 @@
         drawCurs(); S.draw(subs); if (shelfBox.open && subs.length > 8) setTimeout(() => q.focus(), 300);
         const offC = CU?.onChange?.(() => { if (box.isConnected) drawCurs(); else offC?.(); });
       }, { closable });
+    });
+  }
+  /* ---------------- language courses (docs/LANGUAGES.md): their own runtime and UI, loaded instead of the subject engine ---------------- */
+  /** The account's own language courses, made through Claude (docs/LANGUAGES.md §10.1): records a:langcourse:<id>. */
+  const langAccount = acc => ls.keys(`${P}${acc}:a:langcourse:`).map(k => jget(k, null)).filter(r => r && r.origin === 'account' && r.id);
+  const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); if (m) return { ...m, id: 'lang:' + m.id, courseId: m.id, kind: 'language' };
+    const r = KV.acc && langAccount(KV.acc).find(x => 'lang:' + x.id === id); return r ? { id: 'lang:' + r.id, courseId: r.id, title: r.title, languages: r.languages, kind: 'language', account: true } : null; };
+  let langCSS = null;
+  const loadLangUI = async () => { const base = window.NOEMA_ENGINE_BASE || 'engine/'; await (langCSS || (langCSS = loadCSS(base + 'langui.css'))); if (!window.NoemaLang) await loadScript(base + 'langcore.js'); if (!window.NoemaLangUI) await loadScript(base + 'langui.js'); };
+  /** A course's content: an account course from the device / the cloud; a library course with the learner's private refills (docs/LANGUAGES.md §10.1). */
+  async function langData(acc, meta) {
+    await loadLangUI();
+    if (!meta.account && !(window.NOEMA_LANGPACKS || {})[meta.courseId]) await loadScript(meta.path);
+    return meta.account ? NoemaLangUI.claude.loadCourse(acc, meta.courseId) : NoemaLangUI.claude.withPatch(acc, meta.courseId, window.NOEMA_LANGPACKS[meta.courseId]);
+  }
+  /** The depth of every word (word profiles), loaded after the course is open; again after the course is opened again. */
+  function langProfiles(meta) {
+    const have = () => (window.NOEMA_LANGPROFILES || {})[meta.courseId];
+    if (have()) { NoemaLangUI.addProfiles(have()); return; }
+    if (meta.profiles) loadScript(meta.profiles).then(() => { if (NoemaLangUI.UI.id === meta.courseId) NoemaLangUI.addProfiles(have()); }).catch(e => console.warn('[noema] word profiles', e));
+  }
+  const LANG_FLAGS = { ar: '🇸🇦', he: '🇮🇱', zh: '🇨🇳', de: '🇩🇪', el: '🇬🇷', en: '🇬🇧', ru: '🇷🇺', tr: '🇹🇷', hi: '🇮🇳', fr: '🇫🇷', es: '🇪🇸', it: '🇮🇹', ja: '🇯🇵' };
+  function pickLanguage(acc, onPick) {
+    overlay((box, close) => {
+      box.append(brandHead('🌍 Language courses', 'Several languages learned side by side: the same idea in each of them'),
+        el('div', { class: 'noema-chips' }, ...[...(REG.languages || []), ...langAccount(acc).map(r => ({ ...r, mine: true }))].map(m => el('button', { class: 'noema-chip', 'data-course': m.id, onclick: () => { close(); onPick(langMeta('lang:' + m.id)); } },
+          el('span', { class: 'e' }, m.languages.map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title), m.mine ? el('span', { class: 'o', title: 'your own course, written through Claude' }, '🔒') : null))),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: async () => { try { await loadLangUI(); NoemaLangUI.newCourse(acc, { onCreated: r => { close(); onPick(langMeta('lang:' + r.id)); } }); } catch (e) { toastL('⚠️ ' + e.message, 4000); } } }, '✨ New language course'), el('button', { class: 'btn small', onclick: close }, 'Close')));
+    }, { closable: true });
+  }
+  async function startLanguage(acc, meta) {
+    KV.subj = meta.id; Noema.setCurrent(acc.id, meta.id);
+    Noema.subject = { id: meta.id, title: meta.title, kind: 'language', tutor: {}, hero: {}, features: {} };
+    const data = await langData(acc.id, meta).catch(e => e);
+    document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
+    if (data instanceof Error) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, data.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
+    NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data }); NoemaLangUI.claude.startPolling(acc.id);
+    langProfiles(meta);
+    AutoBackup.start(acc.id).catch(() => { });
+  }
+  /* ---------------- language courses inside the frame (docs/NEW_FRAME_AND_LANGUAGES.md, docs/LANGUAGES.md §8) ----------------
+     The Languages tab (#/lang) lists the learner's courses; #/lang/<course>/… draws a course inside the frame (NoemaLangUI.start
+     with a host: the frame's top bar and tabs stay; the course's own addresses #/c/…, #/fn/… live under it); Today gets a
+     "continue" card; the ⋮ holds the course's settings, its Claude task queue and the other courses. With shell: false none of
+     this runs: startLanguage takes the whole page, as before. */
+  const LANG_LAST = acc => `${P}${acc}:meta:lastLang`;   // device-local: the course you were in (Today's card, the tab's ⋮)
+  const langSum = acc => jget(`${P}${acc}:meta:langsum`, {}) || {};   // device-local: the next lesson the open course last showed (langui)
+  const langCourses = acc => [...(REG.languages || []).map(m => m.id), ...langAccount(acc).map(r => r.id)].filter((x, i, a) => a.indexOf(x) === i).map(id => langMeta('lang:' + id)).filter(Boolean);
+  const langDay = () => { const d = new Date(); return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 864e5); };   // = NoemaLang.dayNumber
+  const langHash = id => '#/lang/' + encodeURIComponent(id);
+  const langFlags = m => (m.languages || []).map(c => LANG_FLAGS[c] || c.toUpperCase()).join(' ');
+  const langNames = (codes, acc, loc = null) => { let dn = null; try { dn = new Intl.DisplayNames([loc || (window.NoemaI18n && NoemaI18n.lang(uiPref(acc))) || 'en', 'en'], { type: 'language' }); } catch (e) { } return codes.map(c => { try { return dn?.of(c) || c; } catch (e) { return c; } }).join(' · '); };
+  /** Progress without loading the course (7 MB): from the stored learner state (docs/LANGUAGES.md §5.6) — per language the words met
+      and the reviews due today; the next lesson as the course last showed it. */
+  function langProgress(acc, meta) {
+    const pre = `${P}${acc}:s:lang:${meta.courseId}:`, day = langDay(), set = jget(pre + 'settings', {}) || {};
+    const langs = (set.languages || meta.languages || []).filter(c => (meta.languages || []).includes(c));
+    const per = Object.fromEntries(langs.map(c => [c, { words: 0, due: 0, total: (meta.words || {})[c] || 0 }]));
+    let started = false;
+    for (const k of ls.keys(pre + 'lang:')) {
+      const m = k.slice(pre.length).match(/^lang:([^:]+):(node:.+|script)$/); if (!m || !per[m[1]]) continue;
+      for (const it of Object.values((jget(k, null) || {}).items || {})) {
+        if (!it || typeof it !== 'object') continue; started = true;
+        if (m[2] !== 'script') per[m[1]].words++;
+        for (const t of ['r', 'p']) if (it[t] && typeof it[t].due === 'number' && it[t].due <= day) per[m[1]].due++;
+      }
+    }
+    const sumOf = f => Object.values(per).reduce((a, x) => a + x[f], 0), words = sumOf('words'), total = sumOf('total');
+    return { langs, per, due: sumOf('due'), words, total, pct: total ? Math.min(1, words / total) : 0, started, sum: langSum(acc)[meta.courseId] || null };
+  }
+  /** The learner opens a course in the frame (Languages tab, Today, a link, ?subject=lang:<id>). */
+  const langOpen = id => window.NoemaShell?.go(langHash(id));
+  function langCreate() {
+    const acc = KV.acc;
+    loadLangUI().then(() => NoemaLangUI.newCourse(acc, { onCreated: r => langOpen(r.id) })).catch(e => toastL('⚠️ ' + e.message, 4000));
+  }
+  /** Choose another course: a sheet with every course. */
+  function langChooser() {
+    const S = window.NoemaShell; if (!S) return;
+    S.sheet(S.L('langOther'), (body, close) => body.append(langList(KV.acc, S, { onPick: id => { close(); langOpen(id); } })));
+  }
+  /** One row per course: flags, title, languages, words met, what is due today, the next lesson; a bar for the words met. */
+  function langList(acc, S, { onPick = langOpen, menus = false } = {}) {
+    const { h, L } = S, cur = jget(LANG_LAST(acc), null);
+    const list = langCourses(acc);
+    return h('div', { class: 'ns-list ns-langlist' }, ...list.map((m, i) => {
+      const pr = langProgress(acc, m), next = pr.sum?.next;
+      const names = langNames(pr.langs.length ? pr.langs : m.languages || [], acc), named = (m.languages || []).every(c => String(m.title).includes(langNames([c], acc, 'en')));
+      const sub = [named ? null : names, pr.started ? L('langWords', { n: pr.words }) : null, m.account ? L('langOwn') : null].filter(Boolean).join(' · ');
+      const line2 = pr.due ? L('langDue', { n: pr.due }) : next ? L('langNext', { lesson: `${next.step ? next.step + ' ' : ''}${next.title}` }) : pr.started ? L('langNothingDue') : null;
+      const row = h('button', { class: 'ns-item ns-langitem', 'data-course': m.courseId, style: { animationDelay: i * 30 + 'ms' }, onclick: () => onPick(m.courseId) },
+        S.icoTxt(h('span', { class: 'ns-langflags', style: { fontSize: (m.languages || []).length > 2 ? '.8rem' : '1.1rem', lineHeight: '1.1', whiteSpace: 'normal', textAlign: 'center' } }, langFlags(m)), (i % 4) + 1, 'emo'),
+        h('span', { class: 't' }, h('b', {}, m.title, m.courseId === cur ? h('span', { class: 'ns-muted', style: { fontWeight: 400 } }, ' · ' + L('langContinue').toLowerCase()) : null), h('small', {}, sub), line2 ? h('small', { class: 'ns-langdue' }, line2) : null, pr.total ? S.bar(pr.pct) : null),
+        pr.due ? S.pill(pr.due, 4) : S.h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'));
+      if (!menus) return row;
+      return h('div', { class: 'ns-itemwrap noema-chipwrap' }, row, S.menuButton([
+        { label: m.courseId === cur ? L('langContinue') : L('langStart'), icon: 'play', run: () => onPick(m.courseId) },
+        { label: L('langSettings'), sub: L('langSettingsSub'), icon: 'gear', href: langHash(m.courseId) + '/settings' },
+        { label: L('langClaude'), sub: L('langClaudeSub'), icon: 'spark', href: langHash(m.courseId) + '/claude' }], { label: L('moreFor', { title: m.title }) }));
+    }));
+  }
+  /** The ⋮ of the Languages tab and of a course: the course's settings and Claude queue, another course, a new one. */
+  function langMenu(id) {
+    const L = window.NoemaShell.L, m = id && langMeta('lang:' + id);
+    return [m ? { label: L('langSettings'), sub: L('langSettingsSub'), icon: 'gear', href: langHash(id) + '/settings' } : null,
+      m ? { label: L('langClaude'), sub: L('langClaudeSub'), icon: 'spark', href: langHash(id) + '/claude' } : null,
+      m ? '-' : null,
+      langCourses(KV.acc).length > 1 || !m ? { label: L('langOther'), icon: 'book', run: langChooser } : null,
+      { label: L('langNew'), sub: L('newLanguageSub'), icon: 'plus', run: langCreate },
+      { label: L('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() }];
+  }
+  /** #/lang/<course>/… : the course inside the frame. The course is started once and re-drawn on every address of it. */
+  let langOpening = null;
+  async function langRoute(parts, ctx) {
+    const S = window.NoemaShell, { h, L } = ctx, acc = KV.acc, id = parts[0], meta = langMeta('lang:' + id), base = langHash(id);
+    if (!meta) { document.body.classList.remove('lx-frame'); ctx.page({ crumbs: [[L('languages'), '#/lang'], [id]], menu: langMenu(null) }, h('div', { class: 'ns-panel ns-empty' }, S.faceEl(undefined, 'breathe'), h('p', {}, L('langMissing')), h('button', { class: 'btn primary', onclick: () => S.go('#/lang') }, L('languages')))); return; }
+    jset(LANG_LAST(acc), id); Noema.setCurrent(acc, meta.id);   // a reload comes back here; Today's card continues it
+    const UI = window.NoemaLangUI?.UI, host = ctx.main.querySelector('.lx-host');
+    if (host && host.dataset.course === id && UI?.id === id && NoemaLangUI.FR.host === host) { document.body.classList.add('lx', 'lx-frame'); NoemaLangUI.render(); return; }
+    const top = { crumbs: [[L('languages'), '#/lang'], [meta.title]], back: '#/lang', menu: () => langMenu(id) };
+    const nhost = h('div', { class: 'lx-host', 'data-course': id }, h('div', { class: 'ns-wait' }, S.faceEl(undefined, 'breathe')));
+    ctx.page(top, nhost);
+    const mine = langOpening = {};
+    let data = UI?.id === id && UI.C ? UI.C.data : null;   // the course was open a moment ago (the learner went to another tab): what it holds now
+    if (!data) data = await langData(acc, meta).catch(e => e);
+    if (langOpening !== mine || !nhost.isConnected) return;   // the learner went elsewhere meanwhile
+    if (data instanceof Error) { nhost.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, data.message), h('button', { class: 'btn', onclick: () => S.go('#/lang') }, L('languages')))); return; }
+    document.body.classList.add('lx-frame');
+    NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => [...(r.acts || []), r.acts?.length ? '-' : null, ...langMenu(id)], menuLabel: L('langMore'), reading: ['lesson', 'node', 'c', 'w', 'fn', 'read', 'peculiar', 'field', 'cmp'].includes(r.view), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
+    if (!langRoute.polling) { langRoute.polling = true; NoemaLangUI.claude.startPolling(acc); }
+    langProfiles(meta);
+  }
+  /** Today: continue the course you were in (reviews due, the next lesson), else start the first one. lead: only the course you
+      were in (it then stands for the big "continue" when no subject waits); returns whether a card was drawn. */
+  function langToday(box, { h, L, lead = false }) {
+    const S = window.NoemaShell, acc = KV.acc, all = langCourses(acc); if (!all.length) return false;
+    const last = jget(LANG_LAST(acc), null), cur = jget(P + 'current', {}).subj;
+    const m = all.find(x => x.courseId === last) || all.find(x => x.id === cur) || (lead ? null : all[0]);
+    if (!m) return false;
+    const pr = langProgress(acc, m), next = pr.sum?.next;
+    box.append(h('button', { class: 'ns-go ns-langgo', 'data-course': m.courseId, onclick: () => langOpen(m.courseId) },
+      h('span', { class: 'rm' }, h('span', { class: 'ns-tx' }, '文A'), ' ', m.title),
+      h('h2', {}, pr.due ? L('langSession') : next ? `${next.step ? next.step + ' · ' : ''}${next.title}` : pr.started ? L('langSession') : m.title),
+      h('span', { class: 'meta' }, S.pill(langFlags(m), 1), pr.due ? S.pill(L('langDue', { n: pr.due }), 4) : pr.started ? S.pill(L('langNothingDue'), 2) : S.pill(L('langStart'), 1), pr.due && next ? S.pill(L('langNext', { lesson: next.step || next.title }), 2) : null),
+      h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')));
+    return true;
+  }
+  /** The Languages tab: every course, + New language. */
+  function langPage(v, { h, L }) {
+    const S = window.NoemaShell, acc = KV.acc;
+    if (!langCourses(acc).length) { v.append(h('div', { class: 'ns-panel ns-empty' }, S.faceEl(undefined, 'breathe'), h('p', {}, L('noLanguages')), h('button', { class: 'btn primary', onclick: langCreate }, '+ ' + L('newLanguage')))); return; }
+    v.append(langList(acc, S, { menus: true }));
+  }
+  /** Boot in the frame with a course (?subject=lang:<id>, or the course the learner was in): open it at #/lang/<id>. */
+  function langBoot(acc, meta, asked) {
+    const h0 = location.hash, want = langHash(meta.courseId);
+    if (h0.startsWith(want + '/') || h0 === want) return;
+    if (!h0 || h0 === '#' || (asked && h0 === '#/')) history.replaceState(null, '', location.pathname + location.search + want);
+    if (window.NoemaThemes?.world(acc.id) === 'know' && location.hash.startsWith('#/lang/')) NoemaThemes.putSettings({ world: 'both' }, acc.id);   // a course is open: the Languages tab shows
+  }
+  if (SHELL()) {
+    NoemaShell.registerWorld('lang', { page: langPage, route: langRoute, create: langCreate, today: langToday,
+      menu: () => langMenu(jget(LANG_LAST(KV.acc), null)) });
+    addEventListener('hashchange', () => {   // leaving a course: the frame's own pages again; a subject's page: that subject is the one a reload reopens
+      const hs = location.hash || '#/', inCourse = /^#\/lang\/[^/]+/.test(hs);
+      if (!inCourse) { document.body.classList.remove('lx-frame'); window.NoemaLangUI?.prod?.closeLangTutor?.(); document.querySelector('.lx-pop')?.remove(); if (window.NoemaLangUI?.FR?.on) document.title = CFG.appName || 'noema-lite'; }
+      const k = hs.replace(/^#\/?/, '').split('/')[0];
+      if (NoemaShell.ENGINE_ROUTES?.has(k) && NoemaShell.engine && Noema.subject?.id && Noema.subject.kind !== 'language' && KV.acc) Noema.setCurrent(KV.acc, Noema.subject.id);
     });
   }
   /** 📥 Import: a package (<id>.noema.zip = pack + its source files) or a plain pack (.json). */
@@ -1245,7 +1414,7 @@
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
     switchTo(acc, subj, hash) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname + (hash || '')); return; } location.hash = hash || ''; location.reload(); },   // a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …)
-    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },
+    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s?.kind === 'language' && SHELL() && NoemaShell.mounted) return NoemaShell.go('#/lang/' + encodeURIComponent(s.courseId)); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },
     async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
 
@@ -1299,13 +1468,18 @@
     Notes.start(acc.id);
     try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
     const subs = await subjectsFor(acc.id);
-    let meta = subs.find(s => s.id === (url.get('subject') || (cur.acc === acc.id ? cur.subj : null)));
+    const wanted = url.get('subject') || (cur.acc === acc.id ? cur.subj : null);
+    let meta = subs.find(s => s.id === wanted) || (String(wanted || '').startsWith('lang:') ? langMeta(wanted) : null);
     const settings = jget(KV.accountKey('settings'), {});
     const ask = settings.askSubjectOnStart ?? CFG.askSubjectOnStart;
     // the new frame opens on Today and needs no subject; the picker at start stays for whoever asked for it (Me › Profile)
     if ((!meta && !SHELL()) || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
-    if (SHELL()) { try { NoemaShell.mount({ engine: !!meta }); document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); } catch (e) { console.error('[shell]', e); } }
-    if (!meta) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(() => { }); } return; }
+    // a language course (docs/LANGUAGES.md §8): with shell: false it takes the whole page; in the frame it opens at #/lang/<course>
+    if (meta?.kind === 'language' && !SHELL()) return startLanguage(acc, meta);
+    const course = meta?.kind === 'language' ? meta : null;
+    if (course && SHELL()) langBoot(acc, course, url.get('subject') === course.id);
+    if (SHELL()) { try { NoemaShell.mount({ engine: !!meta && !course }); document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); } catch (e) { console.error('[shell]', e); } }
+    if (!meta || course) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(() => { }); } return; }
     return openEngine(acc, subs, meta);
   }
   /** Boot the engine on a subject. background: the frame needs the engine's account pages (Me › Profile, AI, Help…) or the

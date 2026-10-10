@@ -1,0 +1,6166 @@
+{
+ "sentences": [
+  {
+   "id": "de.f2.001",
+   "frame": "fr.count",
+   "text": "Hier sind zwei Stühle.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Stühle",
+     "l": "de:Stuhl",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are two chairs here.",
+   "alts": [
+    "Zwei Stühle sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.002",
+   "frame": "fr.count",
+   "text": "Drei Bücher sind dort.",
+   "tokens": [
+    {
+     "t": "Drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Bücher",
+     "l": "de:Buch",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Three books are over there.",
+   "alts": [
+    "Dort sind drei Bücher."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.003",
+   "frame": "fr.count",
+   "text": "Das sind vier Tassen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "vier",
+     "l": "de:vier"
+    },
+    {
+     "t": "Tassen",
+     "l": "de:Tasse",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "These are four cups.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.004",
+   "frame": "fr.count",
+   "text": "Dort sind fünf Fenster.",
+   "tokens": [
+    {
+     "t": "Dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "fünf",
+     "l": "de:fünf"
+    },
+    {
+     "t": "Fenster",
+     "l": "de:Fenster",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are five windows over there.",
+   "alts": [
+    "Fünf Fenster sind dort."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.005",
+   "frame": "fr.count",
+   "text": "Hier sind sechs Teller.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Teller",
+     "l": "de:Teller",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are six plates here.",
+   "alts": [
+    "Sechs Teller sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.006",
+   "frame": "fr.count",
+   "text": "Das sind sieben Gläser.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "sieben",
+     "l": "de:sieben"
+    },
+    {
+     "t": "Gläser",
+     "l": "de:Glas",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "These are seven glasses.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.007",
+   "frame": "fr.count",
+   "text": "Wir sind acht Personen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": "Personen",
+     "l": "de:Person",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are eight of us. (lit. We are eight people.)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.008",
+   "frame": "fr.count",
+   "text": "Hier sind neun Lampen.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": "Lampen",
+     "l": "de:Lampe",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are nine lamps here.",
+   "alts": [
+    "Neun Lampen sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.009",
+   "frame": "fr.count",
+   "text": "Zehn Kinder sind hier.",
+   "tokens": [
+    {
+     "t": "Zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Ten children are here.",
+   "alts": [
+    "Hier sind zehn Kinder."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.010",
+   "frame": "fr.count",
+   "text": "Elf Schüler sind da.",
+   "tokens": [
+    {
+     "t": "Elf",
+     "l": "de:elf"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Eleven pupils are here.",
+   "alts": [
+    "Da sind elf Schüler."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.011",
+   "frame": "fr.count",
+   "text": "Das sind zwölf Schlüssel.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "zwölf",
+     "l": "de:zwölf"
+    },
+    {
+     "t": "Schlüssel",
+     "l": "de:Schlüssel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "These are twelve keys.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.012",
+   "frame": "fr.count",
+   "text": "Dreizehn Studenten und vierzehn Studentinnen sind hier.",
+   "tokens": [
+    {
+     "t": "Dreizehn",
+     "l": "de:dreizehn"
+    },
+    {
+     "t": "Studenten",
+     "l": "de:Student",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "vierzehn",
+     "l": "de:vierzehn"
+    },
+    {
+     "t": "Studentinnen",
+     "l": "de:Studentin",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Thirteen male and fourteen female students are here.",
+   "alts": [
+    "Hier sind dreizehn Studenten und vierzehn Studentinnen."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.013",
+   "frame": "fr.count",
+   "text": "Ich bin fünfzehn.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "fünfzehn",
+     "l": "de:fünfzehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "I am fifteen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.014",
+   "frame": "fr.count",
+   "text": "Er ist sechzehn und sie ist siebzehn.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sechzehn",
+     "l": "de:sechzehn"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "siebzehn",
+     "l": "de:siebzehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "He is sixteen and she is seventeen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.015",
+   "frame": "fr.count",
+   "text": "Wir sind achtzehn.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "achtzehn",
+     "l": "de:achtzehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "We are eighteen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.016",
+   "frame": "fr.count",
+   "text": "Sie ist neunzehn.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "neunzehn",
+     "l": "de:neunzehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "She is nineteen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.017",
+   "frame": "fr.count",
+   "text": "Die Lehrerin ist dreißig.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dreißig",
+     "l": "de:dreißig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The teacher is thirty. (a woman)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.018",
+   "frame": "fr.count",
+   "text": "Der Lehrer ist vierzig.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "vierzig",
+     "l": "de:vierzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The teacher is forty. (a man)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.019",
+   "frame": "fr.count",
+   "text": "Der Mann dort ist fünfzig.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "fünfzig",
+     "l": "de:fünfzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The man over there is fifty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.020",
+   "frame": "fr.count",
+   "text": "Die Frau hier ist sechzig.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sechzig",
+     "l": "de:sechzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The woman here is sixty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.021",
+   "frame": "fr.count",
+   "text": "Dieser Mann ist siebzig und diese Frau ist achtzig.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "siebzig",
+     "l": "de:siebzig"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "achtzig",
+     "l": "de:achtzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "This man is seventy and this woman is eighty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.022",
+   "frame": "fr.count",
+   "text": "Er ist neunzig.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "neunzig",
+     "l": "de:neunzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "He is ninety.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.023",
+   "frame": "fr.count",
+   "text": "Hier sind hundert Bücher.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hundert",
+     "l": "de:hundert"
+    },
+    {
+     "t": "Bücher",
+     "l": "de:Buch",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are a hundred books here.",
+   "alts": [
+    "Hundert Bücher sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.024",
+   "frame": "fr.count",
+   "text": "Das sind tausend Bücher!",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "tausend",
+     "l": "de:tausend"
+    },
+    {
+     "t": "Bücher",
+     "l": "de:Buch",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "That is a thousand books!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.025",
+   "frame": "fr.count",
+   "text": "Eins und eins ist zwei.",
+   "tokens": [
+    {
+     "t": "Eins",
+     "l": "de:eins"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "eins",
+     "l": "de:eins"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "One and one is two.",
+   "alts": [
+    "Eins und eins sind zwei."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.026",
+   "frame": "fr.count",
+   "text": "Fünf und null ist fünf.",
+   "tokens": [
+    {
+     "t": "Fünf",
+     "l": "de:fünf"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "null",
+     "l": "de:null"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "fünf",
+     "l": "de:fünf"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Five and zero is five.",
+   "alts": [
+    "Fünf und null sind fünf."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.027",
+   "frame": "fr.count",
+   "text": "Zehn und zehn ist zwanzig.",
+   "tokens": [
+    {
+     "t": "Zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zwanzig",
+     "l": "de:zwanzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Ten and ten is twenty.",
+   "alts": [
+    "Zehn und zehn sind zwanzig."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.028",
+   "frame": "fr.count",
+   "text": "Hier sind viele Leute.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are a lot of people here.",
+   "alts": [
+    "Viele Leute sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.029",
+   "frame": "fr.count",
+   "text": "Viele Kinder sind da.",
+   "tokens": [
+    {
+     "t": "Viele",
+     "l": "de:viel",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Many children are here.",
+   "alts": [
+    "Da sind viele Kinder."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.030",
+   "frame": "fr.count",
+   "text": "Hier ist viel Papier.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "viel",
+     "l": "de:viel",
+     "f": "DET;SG"
+    },
+    {
+     "t": "Papier",
+     "l": "de:Papier",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There is a lot of paper here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.031",
+   "frame": "fr.count",
+   "text": "Hier sind wenige Leute.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "wenige",
+     "l": "de:wenig",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There are few people here.",
+   "alts": [
+    "Wenige Leute sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.032",
+   "frame": "fr.count",
+   "text": "Dort ist wenig Papier.",
+   "tokens": [
+    {
+     "t": "Dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "wenig",
+     "l": "de:wenig",
+     "f": "DET;SG"
+    },
+    {
+     "t": "Papier",
+     "l": "de:Papier",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There is little paper over there.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.033",
+   "frame": "fr.count",
+   "text": "Alle Kinder sind hier.",
+   "tokens": [
+    {
+     "t": "Alle",
+     "l": "de:alle",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "All the children are here.",
+   "alts": [
+    "Hier sind alle Kinder."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.034",
+   "frame": "fr.count",
+   "text": "Alle Lehrer sind da.",
+   "tokens": [
+    {
+     "t": "Alle",
+     "l": "de:alle",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "All the teachers are here.",
+   "alts": [
+    "Da sind alle Lehrer."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.035",
+   "frame": "fr.count",
+   "text": "Einige Studenten sind dort.",
+   "tokens": [
+    {
+     "t": "Einige",
+     "l": "de:einige",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Studenten",
+     "l": "de:Student",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Some students are over there.",
+   "alts": [
+    "Dort sind einige Studenten."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.036",
+   "frame": "fr.adj.pred",
+   "text": "Manche Bücher sind gut.",
+   "tokens": [
+    {
+     "t": "Manche",
+     "l": "de:manche",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Bücher",
+     "l": "de:Buch",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut",
+     "f": "ADJ"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Some books are good (but not all).",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.037",
+   "frame": "fr.count",
+   "text": "Hier ist ein bisschen Papier.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein bisschen",
+     "l": "de:ein_bisschen"
+    },
+    {
+     "t": "Papier",
+     "l": "de:Papier",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Here is a bit of paper.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.038",
+   "frame": "fr.count",
+   "text": "Dort ist ein wenig Papier.",
+   "tokens": [
+    {
+     "t": "Dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein wenig",
+     "l": "de:ein_wenig"
+    },
+    {
+     "t": "Papier",
+     "l": "de:Papier",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "There is a little paper over there.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.039",
+   "frame": "fr.count",
+   "text": "Wir sind alle hier.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "alle",
+     "l": "de:alle",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "We are all here.",
+   "alts": [
+    "Wir alle sind hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.040",
+   "frame": "fr.be.person",
+   "text": "Manche Leute sind Lehrer.",
+   "tokens": [
+    {
+     "t": "Manche",
+     "l": "de:manche",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Some people are teachers.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.041",
+   "frame": "fr.count",
+   "text": "Das Kind ist sechs.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The child is six.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.042",
+   "frame": "fr.count",
+   "text": "Die Kinder sind sechs.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": "de.f2.041",
+   "gloss": "The children are six.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.043",
+   "frame": "fr.count",
+   "text": "Der Junge ist dreizehn.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dreizehn",
+     "l": "de:dreizehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The boy is thirteen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.044",
+   "frame": "fr.count",
+   "text": "Die Jungen sind dreizehn.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Jungen",
+     "l": "de:Junge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dreizehn",
+     "l": "de:dreizehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": "de.f2.043",
+   "gloss": "The boys are thirteen.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.045",
+   "frame": "fr.count",
+   "text": "Das Mädchen ist neun.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The girl is nine.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.046",
+   "frame": "fr.count",
+   "text": "Die Mädchen sind neun.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "neun",
+     "l": "de:neun"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": "de.f2.045",
+   "gloss": "The girls are nine.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.047",
+   "frame": "fr.count",
+   "text": "Der Student ist achtzehn.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Student",
+     "l": "de:Student",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "achtzehn",
+     "l": "de:achtzehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The (university) student is eighteen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.048",
+   "frame": "fr.count",
+   "text": "Die Studenten sind achtzehn.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Studenten",
+     "l": "de:Student",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "achtzehn",
+     "l": "de:achtzehn"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": "de.f2.047",
+   "gloss": "The (university) students are eighteen.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.049",
+   "frame": "fr.count",
+   "text": "Die Schülerin ist elf.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schülerin",
+     "l": "de:Schülerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "elf",
+     "l": "de:elf"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "The pupil is eleven. (a girl)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.050",
+   "frame": "fr.count",
+   "text": "Die Schülerinnen sind elf.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Schülerinnen",
+     "l": "de:Schülerin",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "elf",
+     "l": "de:elf"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals"
+   ],
+   "variantOf": "de.f2.049",
+   "gloss": "The pupils are eleven. (girls)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.051",
+   "frame": "fr.count",
+   "text": "Ich bin dreißig.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "dreißig",
+     "l": "de:dreißig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "I am thirty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.052",
+   "frame": "fr.count",
+   "text": "Einige Leute sind hier.",
+   "tokens": [
+    {
+     "t": "Einige",
+     "l": "de:einige",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "Some people are here.",
+   "alts": [
+    "Hier sind einige Leute."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.053",
+   "frame": "fr.this.is",
+   "text": "Das ist ein bisschen Papier.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein bisschen",
+     "l": "de:ein_bisschen"
+    },
+    {
+     "t": "Papier",
+     "l": "de:Papier",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.numerals"
+   ],
+   "variantOf": null,
+   "gloss": "That is a bit of paper.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.054",
+   "frame": "fr.thing.here",
+   "text": "Die Tische sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tische",
+     "l": "de:Tisch",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.119",
+   "gloss": "The tables are here.",
+   "alts": [
+    "Hier sind die Tische."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.055",
+   "frame": "fr.thing.here",
+   "text": "Die Schränke sind dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Schränke",
+     "l": "de:Schrank",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.130",
+   "gloss": "The cupboards are over there.",
+   "alts": [
+    "Dort sind die Schränke."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.056",
+   "frame": "fr.thing.here",
+   "text": "Das Glas ist da.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Glas",
+     "l": "de:Glas",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The glass is here.",
+   "alts": [
+    "Da ist das Glas."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.057",
+   "frame": "fr.thing.here",
+   "text": "Die Gläser sind da.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Gläser",
+     "l": "de:Glas",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f2.056",
+   "gloss": "The glasses are here.",
+   "alts": [
+    "Da sind die Gläser."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.058",
+   "frame": "fr.thing.here",
+   "text": "Die Lampe ist hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Lampe",
+     "l": "de:Lampe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The lamp is here.",
+   "alts": [
+    "Hier ist die Lampe."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.059",
+   "frame": "fr.thing.here",
+   "text": "Die Lampen sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Lampen",
+     "l": "de:Lampe",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f2.058",
+   "gloss": "The lamps are here.",
+   "alts": [
+    "Hier sind die Lampen."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.060",
+   "frame": "fr.thing.here",
+   "text": "Die Tür ist dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tür",
+     "l": "de:Tür",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The door is over there.",
+   "alts": [
+    "Dort ist die Tür."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.061",
+   "frame": "fr.thing.here",
+   "text": "Die Türen sind dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Türen",
+     "l": "de:Tür",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f2.060",
+   "gloss": "The doors are over there.",
+   "alts": [
+    "Dort sind die Türen."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.062",
+   "frame": "fr.thing.here",
+   "text": "Das Handy ist hier.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Handy",
+     "l": "de:Handy",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The mobile phone is here.",
+   "alts": [
+    "Hier ist das Handy."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.063",
+   "frame": "fr.thing.here",
+   "text": "Die Handys sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Handys",
+     "l": "de:Handy",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f2.062",
+   "gloss": "The mobile phones are here.",
+   "alts": [
+    "Hier sind die Handys."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.064",
+   "frame": "fr.thing.here",
+   "text": "Das Zimmer ist dort.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The room is over there.",
+   "alts": [
+    "Dort ist das Zimmer."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.065",
+   "frame": "fr.thing.here",
+   "text": "Die Zimmer sind dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f2.064",
+   "gloss": "The rooms are over there.",
+   "alts": [
+    "Dort sind die Zimmer."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.066",
+   "frame": "fr.this.is",
+   "text": "Das sind Betten.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Betten",
+     "l": "de:Bett",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.102",
+   "gloss": "These are beds.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.067",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Wohnung.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a flat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.068",
+   "frame": "fr.this.is",
+   "text": "Das sind Wohnungen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Wohnungen",
+     "l": "de:Wohnung",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f2.067",
+   "gloss": "These are flats.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.069",
+   "frame": "fr.have",
+   "text": "Ich habe einen Bruder und eine Schwester.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "I have a brother and a sister.",
+   "alts": [
+    "Ich habe eine Schwester und einen Bruder."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.070",
+   "frame": "fr.have",
+   "text": "Wir haben zwei Kinder.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "We have two children.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.071",
+   "frame": "fr.have",
+   "text": "Er hat eine Tochter und zwei Söhne.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Söhne",
+     "l": "de:Sohn",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "He has a daughter and two sons.",
+   "alts": [
+    "Er hat zwei Söhne und eine Tochter."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.072",
+   "frame": "fr.have",
+   "text": "Meine Eltern haben ein Haus.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My parents have a house.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.073",
+   "frame": "fr.have",
+   "text": "Mein Onkel hat viele Bücher.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Onkel",
+     "l": "de:Onkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Bücher",
+     "l": "de:Buch",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My uncle has a lot of books.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.074",
+   "frame": "fr.have",
+   "text": "Unsere Großeltern haben sechs Enkel.",
+   "tokens": [
+    {
+     "t": "Unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Großeltern",
+     "l": "de:Großeltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "sechs",
+     "l": "de:sechs"
+    },
+    {
+     "t": "Enkel",
+     "l": "de:Enkel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Our grandparents have six grandchildren.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.075",
+   "frame": "fr.have",
+   "text": "Meine Tante hat drei Töchter.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tante",
+     "l": "de:Tante",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Töchter",
+     "l": "de:Tochter",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My aunt has three daughters.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.076",
+   "frame": "fr.have",
+   "text": "Du hast viele Cousins und Cousinen.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Cousins",
+     "l": "de:Cousin",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Cousinen",
+     "l": "de:Cousine",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "You have a lot of cousins (male and female).",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.077",
+   "frame": "fr.have",
+   "text": "Wir haben viele Verwandte.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "viele",
+     "l": "de:viel",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Verwandte",
+     "l": "de:Verwandter",
+     "f": "N;ACC;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "We have a lot of relatives.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.078",
+   "frame": "fr.have",
+   "text": "Ihr habt ein Baby!",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habt",
+     "l": "de:haben",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "You (all) have a baby!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.079",
+   "frame": "fr.have",
+   "text": "Sie hat einen Mann und ein Baby.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "She has a husband and a baby.",
+   "alts": [
+    "Sie hat ein Baby und einen Mann."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.080",
+   "frame": "fr.have",
+   "text": "Er hat eine Frau und drei Kinder.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "He has a wife and three children.",
+   "alts": [
+    "Er hat drei Kinder und eine Frau."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.081",
+   "frame": "fr.have",
+   "text": "Die Großmutter hat vier Enkelinnen.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Großmutter",
+     "l": "de:Großmutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "vier",
+     "l": "de:vier"
+    },
+    {
+     "t": "Enkelinnen",
+     "l": "de:Enkelin",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "The grandmother has four granddaughters.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.082",
+   "frame": "fr.have",
+   "text": "Mein Opa hat zehn Enkel.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zehn",
+     "l": "de:zehn"
+    },
+    {
+     "t": "Enkel",
+     "l": "de:Enkel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandpa has ten grandchildren.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.083",
+   "frame": "fr.have",
+   "text": "Ich habe zwei Omas und zwei Opas.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Omas",
+     "l": "de:Oma",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Opas",
+     "l": "de:Opa",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "I have two grandmas and two grandpas.",
+   "alts": [
+    "Ich habe zwei Opas und zwei Omas."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.084",
+   "frame": "fr.have",
+   "text": "Ich habe einen Neffen und zwei Nichten.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Neffen",
+     "l": "de:Neffe",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Nichten",
+     "l": "de:Nichte",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "I have a nephew and two nieces.",
+   "alts": [
+    "Ich habe zwei Nichten und einen Neffen."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.085",
+   "frame": "fr.have",
+   "text": "Du hast zwei Brüder.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Brüder",
+     "l": "de:Bruder",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "You have two brothers.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.086",
+   "frame": "fr.have",
+   "text": "Sie haben zwei Brüder.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Brüder",
+     "l": "de:Bruder",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have"
+   ],
+   "variantOf": "de.f2.085",
+   "gloss": "You have two brothers. (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f2.087",
+   "frame": "fr.have",
+   "text": "Ihr habt eine Tochter.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habt",
+     "l": "de:haben",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "You (all) have a daughter.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.088",
+   "frame": "fr.have",
+   "text": "Sie haben eine Tochter.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": "de.f2.087",
+   "gloss": "You have a daughter. (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f2.089",
+   "frame": "fr.have",
+   "text": "Du hast ein Baby.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": null,
+   "gloss": "You have a baby.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.090",
+   "frame": "fr.have",
+   "text": "Sie haben ein Baby.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have"
+   ],
+   "variantOf": "de.f2.089",
+   "gloss": "You have a baby. (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f2.091",
+   "frame": "fr.have",
+   "text": "Meine Schwester hat ein Baby.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My sister has a baby.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.092",
+   "frame": "fr.have",
+   "text": "Mein Vater hat einen Bruder.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My father has a brother.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.093",
+   "frame": "fr.poss",
+   "text": "Das ist meine Mutter.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is my mother.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.094",
+   "frame": "fr.poss",
+   "text": "Das ist mein Vater.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is my father.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.095",
+   "frame": "fr.poss",
+   "text": "Das sind meine Eltern.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "These are my parents.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.096",
+   "frame": "fr.poss",
+   "text": "Das ist mein Bruder.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is my brother.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.097",
+   "frame": "fr.poss",
+   "text": "Das sind meine Brüder.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Brüder",
+     "l": "de:Bruder",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": "de.f2.096",
+   "gloss": "These are my brothers.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.098",
+   "frame": "fr.poss",
+   "text": "Das ist meine Schwester.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schwester",
+     "l": "de:Schwester",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is my sister.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.099",
+   "frame": "fr.poss",
+   "text": "Das sind meine Schwestern.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Schwestern",
+     "l": "de:Schwester",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": "de.f2.098",
+   "gloss": "These are my sisters.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.100",
+   "frame": "fr.poss",
+   "text": "Mein Sohn ist hier.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Sohn",
+     "l": "de:Sohn",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My son is here.",
+   "alts": [
+    "Hier ist mein Sohn."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.101",
+   "frame": "fr.poss",
+   "text": "Meine Söhne sind hier.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Söhne",
+     "l": "de:Sohn",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": "de.f2.100",
+   "gloss": "My sons are here.",
+   "alts": [
+    "Hier sind meine Söhne."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.102",
+   "frame": "fr.poss",
+   "text": "Unser Kind ist da.",
+   "tokens": [
+    {
+     "t": "Unser",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Our child is here.",
+   "alts": [
+    "Da ist unser Kind."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.103",
+   "frame": "fr.poss",
+   "text": "Unsere Kinder sind da.",
+   "tokens": [
+    {
+     "t": "Unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": "de.f2.102",
+   "gloss": "Our children are here.",
+   "alts": [
+    "Da sind unsere Kinder."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f2.104",
+   "frame": "fr.poss",
+   "text": "Das ist dein Vater.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dein",
+     "l": "de:dein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is your father.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.105",
+   "frame": "fr.poss",
+   "text": "Das ist Ihr Vater.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Ihr",
+     "l": "de:Ihr.poss",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": "de.f2.104",
+   "gloss": "This is your father. (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f2.106",
+   "frame": "fr.poss",
+   "text": "Hier ist deine Tochter.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "deine",
+     "l": "de:dein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Here is your daughter.",
+   "alts": [
+    "Deine Tochter ist hier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.107",
+   "frame": "fr.poss",
+   "text": "Hier ist Ihre Tochter.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Ihre",
+     "l": "de:Ihr.poss",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": "de.f2.106",
+   "gloss": "Here is your daughter. (polite)",
+   "alts": [
+    "Ihre Tochter ist hier."
+   ],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f2.108",
+   "frame": "fr.poss",
+   "text": "Das ist euer Onkel.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "euer",
+     "l": "de:euer",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Onkel",
+     "l": "de:Onkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is your uncle. (to two or more people)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.109",
+   "frame": "fr.poss",
+   "text": "Das ist seine Frau.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "seine",
+     "l": "de:sein.poss",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is his wife.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.110",
+   "frame": "fr.poss",
+   "text": "Sie und ihr Mann sind hier.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr.poss",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "She and her husband are here.",
+   "alts": [
+    "Hier sind sie und ihr Mann."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.111",
+   "frame": "fr.poss",
+   "text": "Die Kinder sind hier und ihre Eltern sind dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "ihre",
+     "l": "de:ihr.poss",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "The children are here and their parents are over there.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.112",
+   "frame": "fr.poss",
+   "text": "Meine Cousine heißt Anna.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Cousine",
+     "l": "de:Cousine",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "heißt",
+     "l": "de:heißen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Anna",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My cousin is called Anna.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.113",
+   "frame": "fr.poss",
+   "text": "Mein Cousin heißt Max.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Cousin",
+     "l": "de:Cousin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "heißt",
+     "l": "de:heißen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Max",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My cousin is called Max.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.114",
+   "frame": "fr.poss",
+   "text": "Mein Neffe ist ein Baby.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Neffe",
+     "l": "de:Neffe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My nephew is a baby.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.115",
+   "frame": "fr.poss",
+   "text": "Unsere Nichte ist Studentin.",
+   "tokens": [
+    {
+     "t": "Unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Nichte",
+     "l": "de:Nichte",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Studentin",
+     "l": "de:Studentin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Our niece is a (university) student.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.116",
+   "frame": "fr.poss",
+   "text": "Dein Großvater ist Lehrer.",
+   "tokens": [
+    {
+     "t": "Dein",
+     "l": "de:dein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Großvater",
+     "l": "de:Großvater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Your grandfather is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.117",
+   "frame": "fr.poss",
+   "text": "Meine Großmutter ist achtzig.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Großmutter",
+     "l": "de:Großmutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "achtzig",
+     "l": "de:achtzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandmother is eighty.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.118",
+   "frame": "fr.poss",
+   "text": "Mein Enkel ist zwölf.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Enkel",
+     "l": "de:Enkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "zwölf",
+     "l": "de:zwölf"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandson is twelve.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.119",
+   "frame": "fr.poss",
+   "text": "Meine Enkelin ist acht.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Enkelin",
+     "l": "de:Enkelin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "acht",
+     "l": "de:acht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My granddaughter is eight.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.120",
+   "frame": "fr.poss",
+   "text": "Max ist mein Ehemann.",
+   "tokens": [
+    {
+     "t": "Max",
+     "name": true
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Ehemann",
+     "l": "de:Ehemann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Max is my husband.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.121",
+   "frame": "fr.poss",
+   "text": "Anna ist meine Ehefrau.",
+   "tokens": [
+    {
+     "t": "Anna",
+     "name": true
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Ehefrau",
+     "l": "de:Ehefrau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Anna is my wife.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.122",
+   "frame": "fr.poss",
+   "text": "Unsere Familie ist hier.",
+   "tokens": [
+    {
+     "t": "Unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Familie",
+     "l": "de:Familie",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Our family is here.",
+   "alts": [
+    "Hier ist unsere Familie."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.123",
+   "frame": "fr.be.person",
+   "text": "Er ist ein Verwandter.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Verwandter",
+     "l": "de:Verwandter",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "He is a relative.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.124",
+   "frame": "fr.poss",
+   "text": "Das sind meine Verwandten.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Verwandten",
+     "l": "de:Verwandter",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "These are my relatives.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.125",
+   "frame": "fr.poss",
+   "text": "Meine Oma und mein Opa sind da.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Oma",
+     "l": "de:Oma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandma and my grandpa are here.",
+   "alts": [
+    "Mein Opa und meine Oma sind da."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.126",
+   "frame": "fr.poss",
+   "text": "Meine Großeltern sind hier.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Großeltern",
+     "l": "de:Großeltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandparents are here.",
+   "alts": [
+    "Hier sind meine Großeltern."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.127",
+   "frame": "fr.poss",
+   "text": "Das ist ihr Onkel.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr.poss",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Onkel",
+     "l": "de:Onkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "That is her (or their) uncle.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.128",
+   "frame": "fr.poss",
+   "text": "Das ist seine Tante.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "seine",
+     "l": "de:sein.poss",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tante",
+     "l": "de:Tante",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "That is his aunt.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.129",
+   "frame": "fr.poss",
+   "text": "Unser Vater ist Lehrer und unsere Mutter ist Lehrerin.",
+   "tokens": [
+    {
+     "t": "Unser",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Vater",
+     "l": "de:Vater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "unsere",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Mutter",
+     "l": "de:Mutter",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Our father is a teacher and our mother is a teacher too.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.130",
+   "frame": "fr.poss",
+   "text": "Das ist meine Familie.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Familie",
+     "l": "de:Familie",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is my family.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.131",
+   "frame": "fr.poss",
+   "text": "Mein Ehemann ist Lehrer.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Ehemann",
+     "l": "de:Ehemann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My husband is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.132",
+   "frame": "fr.poss",
+   "text": "Das ist seine Ehefrau.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "seine",
+     "l": "de:sein.poss",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Ehefrau",
+     "l": "de:Ehefrau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "This is his wife.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.133",
+   "frame": "fr.have",
+   "text": "Mein Großvater hat drei Enkel.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Großvater",
+     "l": "de:Großvater",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "drei",
+     "l": "de:drei"
+    },
+    {
+     "t": "Enkel",
+     "l": "de:Enkel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandfather has three grandchildren.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.134",
+   "frame": "fr.poss",
+   "text": "Euer Baby ist da.",
+   "tokens": [
+    {
+     "t": "Euer",
+     "l": "de:euer",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Baby",
+     "l": "de:Baby",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Your baby is here. (to two or more people)",
+   "alts": [
+    "Da ist euer Baby."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.135",
+   "frame": "fr.poss",
+   "text": "Das sind meine Neffen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Neffen",
+     "l": "de:Neffe",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "These are my nephews.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.136",
+   "frame": "fr.have",
+   "text": "Meine Nichte hat eine Tochter.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Nichte",
+     "l": "de:Nichte",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My niece has a daughter.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.137",
+   "frame": "fr.have",
+   "text": "Mein Bruder hat einen Sohn und eine Tochter.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Bruder",
+     "l": "de:Bruder",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Sohn",
+     "l": "de:Sohn",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Tochter",
+     "l": "de:Tochter",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My brother has a son and a daughter.",
+   "alts": [
+    "Mein Bruder hat eine Tochter und einen Sohn."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.138",
+   "frame": "fr.have",
+   "text": "Meine Tante und mein Onkel haben zwei Kinder.",
+   "tokens": [
+    {
+     "t": "Meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tante",
+     "l": "de:Tante",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Onkel",
+     "l": "de:Onkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "zwei",
+     "l": "de:zwei"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.numerals",
+    "fn.have",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My aunt and my uncle have two children.",
+   "alts": [
+    "Mein Onkel und meine Tante haben zwei Kinder."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.139",
+   "frame": "fr.poss",
+   "text": "Seine Eltern sind hier.",
+   "tokens": [
+    {
+     "t": "Seine",
+     "l": "de:sein.poss",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Eltern",
+     "l": "de:Eltern",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "His parents are here.",
+   "alts": [
+    "Hier sind seine Eltern."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.140",
+   "frame": "fr.poss",
+   "text": "Das ist ihre Cousine.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ihre",
+     "l": "de:ihr.poss",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Cousine",
+     "l": "de:Cousine",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "That is her (or their) cousin.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.141",
+   "frame": "fr.poss",
+   "text": "Unser Opa ist neunzig.",
+   "tokens": [
+    {
+     "t": "Unser",
+     "l": "de:unser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Opa",
+     "l": "de:Opa",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "neunzig",
+     "l": "de:neunzig"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.numerals",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "Our grandpa is ninety.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f2.142",
+   "frame": "fr.poss",
+   "text": "Mein Enkel und meine Enkelin sind hier.",
+   "tokens": [
+    {
+     "t": "Mein",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Enkel",
+     "l": "de:Enkel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "meine",
+     "l": "de:mein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Enkelin",
+     "l": "de:Enkelin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive"
+   ],
+   "variantOf": null,
+   "gloss": "My grandson and my granddaughter are here.",
+   "alts": [
+    "Meine Enkelin und mein Enkel sind hier."
+   ],
+   "level": "A1"
+  }
+ ]
+}

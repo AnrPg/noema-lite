@@ -1,0 +1,295 @@
+{
+ "function": "fn.copula",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.copula",
+   "value": "obligatory"
+  },
+  {
+   "feature": "syn.beSplit",
+   "value": "same"
+  },
+  {
+   "feature": "adj.predicative",
+   "value": "nonverbal"
+  }
+ ],
+ "summary": "German links a subject to what it is with the verb sein (to be), and it can never be left out: Ich bin Lehrer. Er ist hier. sein is the most irregular verb of the language – bin, bist, ist, sind, seid, sind – and the first table to know by heart. With a job, a role or a nationality German uses no article: Ich bin Lehrerin (not *eine Lehrerin), Er ist Student. After das the verb agrees with what follows: Das ist ein Tisch, but Das sind Kinder and Das bin ich.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "person",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "1st",
+     "ich bin",
+     "wir sind"
+    ],
+    [
+     "2nd (informal)",
+     "du bist",
+     "ihr seid"
+    ],
+    [
+     "3rd",
+     "er / sie / es ist",
+     "sie sind"
+    ],
+    [
+     "polite",
+     "Sie sind",
+     "Sie sind"
+    ]
+   ],
+   "caption": "sein in the present",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "obligatory"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No article with jobs",
+   "text": "Ich bin Lehrer. Sie ist Studentin. Wir sind Schüler. An article comes only with an adjective or a specific person: Er ist ein guter Lehrer. Das ist der Lehrer."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Man or woman?",
+   "text": "The job word follows the person: Er ist Lehrer – Sie ist Lehrerin; Ich bin Student (a man) – Ich bin Studentin (a woman)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Das ist / Das sind / Das bin ich",
+   "text": "In pointing sentences the verb agrees with the noun or pronoun after it: Das ist ein Kind. Das sind Kinder. Das bin ich. Das sind wir."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German",
+     "points": [
+      "Ich bin Student.",
+      "sein is always there",
+      "no article with jobs"
+     ]
+    },
+    {
+     "title": "Arabic, Hebrew",
+     "points": [
+      "ana ṭālib · ani student",
+      "no “to be” in the present",
+      "the two nouns simply stand side by side"
+     ]
+    },
+    {
+     "title": "Chinese",
+     "points": [
+      "我是学生 (wǒ shì xuésheng)",
+      "是 links two nouns",
+      "but not adjectives: 我很好"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who or what is the subject? → ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind.",
+   "Is the complement a job, role or nationality without an adjective? → no article (Ich bin Lehrer).",
+   "Is the subject a woman or a girl? → the feminine job word (Lehrerin, Studentin, Schülerin).",
+   "Does the sentence start with Das and a plural or a pronoun follows? → Das sind Kinder / Das bin ich.",
+   "Is it a yes/no question? → sein comes first: Bist du Student?"
+  ],
+  "steps": [
+   "Find the subject.",
+   "Pick the form of sein.",
+   "Add the complement (job without article, place, or a noun with its article)."
+  ]
+ },
+ "traps": [
+  "*Ich bin ein Lehrer – with a job German uses no article (unless an adjective comes in: ein guter Lehrer).",
+  "ihr seid (you are) vs seit (since): same sound, different spelling.",
+  "Das sind Freunde, not *Das ist Freunde.",
+  "wir sind, sie sind and Sie sind are the same form – the pronoun decides the meaning.",
+  "Feeling cold or bad uses the dative, not “I am”: Mir ist kalt (Ich bin kalt = I am a cold person)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:sein"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;1;SG",
+  "V;PRS;2;SG",
+  "V;PRS;3;SG",
+  "V;PRS;1;PL",
+  "V;PRS;2;PL",
+  "V;PRS;3;PL"
+ ],
+ "needs": {
+  "VERB": 1,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:sein"
+   ],
+   "cells": [
+    "V;PRS;1;SG",
+    "V;PRS;2;SG",
+    "V;PRS;3;SG",
+    "V;PRS;1;PL",
+    "V;PRS;2;PL",
+    "V;PRS;3;PL"
+   ],
+   "count": 12
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.copula"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.copula",
+   "note": "Arabic has no “to be” in the present: huwa ṭālib (he student); kāna appears in the past and future."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.copula",
+   "note": "Hebrew has no present “to be” either: hu student (he student); haya / hayta in the past."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.copula",
+   "note": "Chinese 是 links two nouns (我是老师), but an adjective needs no 是 (他很高)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.pronoun.subject",
+   "note": "The form of sein depends on the subject pronoun."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "είμαι is never left out, and a job takes no article: Είμαι δάσκαλος – Ich bin Lehrer."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian has no present-tense “to be” (я студент); German always needs it: Ich bin Student. The job without an article is the same."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "One verb, sein, covers ser and estar: Ich bin Lehrer, Ich bin müde, Ich bin hier. As in Spanish, a job takes no article (Soy profesor – Ich bin Lehrer)."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English needs “a” with a job (I am a teacher); German has none: Ich bin Lehrer. Ich bin ein Lehrer sounds wrong unless an adjective comes in (ein guter Lehrer)."
+  },
+  {
+   "for": "fr",
+   "rel": "same",
+   "text": "Like être, sein is never left out, and a job takes no article: Je suis professeur – Ich bin Lehrer."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "The copula is always there and agrees with the person (maĩ śikṣak hū̃, vah śikṣak hai), as sein does (ich bin, er ist); but German puts it second, not at the end. The speaker’s sex never shows: ich bin müde for everyone, where Hindi says maĩ thakā hū̃ / maĩ thakī hū̃."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also needs “to be” (man dānešju hastam / dānešju-am); German uses a separate, very irregular verb (bin, bist, ist) and puts it second, not at the end."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "āhe is always there (mī śikṣak āhe), as sein is; German puts it second and changes it for the person: ich bin, du bist, er ist."
+  },
+  {
+   "for": "ar",
+   "rel": "trap",
+   "text": "In the present Arabic simply puts the two nouns side by side (ana ṭālib); German never does: Ich bin Student."
+  },
+  {
+   "for": "he",
+   "rel": "trap",
+   "text": "Hebrew has no present-tense “to be” (ani student; ha-bayit gadol); German always needs sein: Ich bin Student. Das Haus ist groß. Nothing shows the speaker’s sex: ich bin müde for ani ayef and ani ayefa alike."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds a personal suffix (öğretmenim) and often nothing in the 3rd person (O öğretmen); German needs a separate verb in every person: Ich bin Lehrer, Er ist Lehrer."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "desu / da links nouns (gakusei desu), but adjectives inflect on their own (takai); German uses sein for both: Ich bin Student. Das ist teuer."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "The copula -ida is attached to the noun (haksaeng-ida), and adjectives are verbs (keuda); German has the separate verb sein for both: Ich bin Student. Das Haus ist groß."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "olla is always there and a job takes no article: Olen opettaja – Ich bin Lehrer."
+  },
+  {
+   "for": "hu",
+   "rel": "trap",
+   "text": "The 3rd person drops the copula (Anna tanár), the others keep it (tanár vagyok). German never drops it: Anna ist Lehrerin."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "ni links two nouns (Mimi ni mwalimu), but it never changes; German sein changes for every person: ich bin, du bist, er ist."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "是 links two nouns (我是学生), but an adjective follows without it (我很好). German uses sein in both: Ich bin Student. Mir geht es gut / Das ist gut."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "là links nouns (tôi là giáo viên), but adjectives need no copula (tôi mệt); German says Ich bin müde."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and adds the person ending, all in one word. German uses the separate verb sein and a noun after it: Ich bin Lehrer."
+  }
+ ]
+}

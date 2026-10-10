@@ -1,0 +1,59 @@
+{
+ "field": "food.vegetables",
+ "title": "Vegetables",
+ "subgroups": [
+  {
+   "id": "root",
+   "title": "Root vegetables and bulbs"
+  },
+  {
+   "id": "fruit",
+   "title": "Fruit vegetables"
+  }
+ ],
+ "sources": [
+  "Mini fixture: a hand-picked subset (the real field is exhaustive)"
+ ],
+ "concepts": [
+  {
+   "id": "veg.carrot",
+   "gloss": "carrot",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 1,
+   "wikidata": "Q81"
+  },
+  {
+   "id": "veg.onion",
+   "gloss": "onion",
+   "subgroup": "root",
+   "tier": 1,
+   "rank": 2,
+   "wikidata": "Q23485"
+  },
+  {
+   "id": "veg.cucumber",
+   "gloss": "cucumber",
+   "subgroup": "fruit",
+   "tier": 1,
+   "rank": 3,
+   "wikidata": "Q2735883"
+  },
+  {
+   "id": "veg.eggplant",
+   "gloss": "eggplant, aubergine",
+   "subgroup": "fruit",
+   "tier": 2,
+   "rank": 1,
+   "wikidata": "Q7540"
+  },
+  {
+   "id": "veg.pumpkin",
+   "gloss": "pumpkin",
+   "subgroup": "fruit",
+   "tier": 2,
+   "rank": 2,
+   "wikidata": "Q165308"
+  }
+ ]
+}

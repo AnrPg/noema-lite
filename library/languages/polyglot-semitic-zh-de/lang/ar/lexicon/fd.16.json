@@ -1,0 +1,5444 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:kabir",
+   "lemma": "كَبِير",
+   "pos": "ADJ",
+   "senses": [
+    "adj.big",
+    "adj.old.person",
+    "adj.great"
+   ],
+   "features": {
+    "root": "ك ب ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "كَبِيرَة",
+    "plurals": [
+     {
+      "form": "كِبَار",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "big; grown-up, old (people)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "كُبَرَاء",
+      "kind": "broken",
+      "pattern": "فُعَلَاء",
+      "declension": "diptote",
+      "note": "great men, dignitaries",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَكْبَر",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.old.person",
+     "axis": "register",
+     "value": "everyday: “big” = grown-up, old (كَبِيرٌ فِي السِّنِّ)"
+    }
+   ],
+   "translit": "kabīr",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "كَبِيرٌ",
+    "ADJ;ACC;SG;MASC;INDF": "كَبِيرًا",
+    "ADJ;GEN;SG;MASC;INDF": "كَبِيرٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْكَبِيرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْكَبِيرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْكَبِيرِ",
+    "ADJ;NOM;SG;FEM;INDF": "كَبِيرَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "كَبِيرَةً",
+    "ADJ;GEN;SG;FEM;INDF": "كَبِيرَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْكَبِيرَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْكَبِيرَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْكَبِيرَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "كَبِيرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "كَبِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "كَبِيرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْكَبِيرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْكَبِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْكَبِيرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "كَبِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "كَبِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "كَبِيرَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْكَبِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْكَبِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْكَبِيرَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "كِبَارٌ",
+    "ADJ;ACC;PL;MASC;INDF": "كِبَارًا",
+    "ADJ;GEN;PL;MASC;INDF": "كِبَارٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْكِبَارُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْكِبَارَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْكِبَارِ",
+    "ADJ;NOM;PL;FEM;INDF": "كَبِيرَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "كَبِيرَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "كَبِيرَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْكَبِيرَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْكَبِيرَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْكَبِيرَاتِ",
+    "ADJ;CMPR;NOM": "أَكْبَرُ",
+    "ADJ;CMPR;ACC": "أَكْبَرَ",
+    "ADJ;CMPR;GEN": "أَكْبَرَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَكْبَرُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَكْبَرَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَكْبَرِ",
+    "ADJ;SPRL;NOM;CONST": "أَكْبَرُ",
+    "ADJ;SPRL;ACC;CONST": "أَكْبَرَ",
+    "ADJ;SPRL;GEN;CONST": "أَكْبَرِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Size and importance: a big house, a big city — and, for people, being older.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "big, large",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.big"
+     },
+     {
+      "id": "s2",
+      "def": "old, grown-up (of a person; often كَبِيرٌ فِي السِّنِّ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.old.person"
+     },
+     {
+      "id": "s3",
+      "def": "great, important, senior",
+      "register": [
+       "formal"
+      ],
+      "concept": "adj.great"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا بَيْتٌ كَبِيرٌ.",
+      "tr": "This is a big house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَدِينَةُ كَبِيرَةٌ جِدًّا.",
+      "tr": "The city is very big.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "جَدِّي كَبِيرٌ فِي السِّنِّ.",
+      "tr": "My grandfather is old (advanced in years).",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "أَخِي أَكْبَرُ مِنِّي.",
+      "tr": "My brother is older than me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "عِنْدَنَا مُشْكِلَةٌ كَبِيرَةٌ.",
+      "tr": "We have a big problem.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُتَنَبِّي شَاعِرٌ كَبِيرٌ.",
+      "tr": "al-Mutanabbī is a great poet.",
+      "register": "formal",
+      "context": "literature",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَيْتٌ كَبِيرٌ",
+      "tr": "a big house"
+     },
+     {
+      "text": "كَبِيرٌ فِي السِّنِّ",
+      "tr": "old, elderly (polite: “big in age”)"
+     },
+     {
+      "text": "مُشْكِلَةٌ كَبِيرَةٌ",
+      "tr": "a big problem"
+     },
+     {
+      "text": "الْأَخُ الْأَكْبَرُ",
+      "tr": "the eldest brother"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "اللّٰهُ أَكْبَرُ",
+      "tr": "God is greatest",
+      "kind": "fixed expression",
+      "meaning": "the takbīr — said in the call to prayer and in moments of awe or joy",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "ضَخْم",
+      "register": "neutral",
+      "nuance": "huge, massive — physical bulk"
+     },
+     {
+      "word": "عَظِيم",
+      "register": "formal",
+      "nuance": "great, mighty — greatness and importance rather than size"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَغِير",
+      "note": "small"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the pattern فَعِيل (faʿīl) of the root ك ب ر (k b r), whose verb كَبُرَ means “to be or become big, to grow up” — inherited from Proto-Semitic *kabar-, with Hebrew כָּבַר (“to be great”); elative أَكْبَر (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its elative أَكْبَر is in the call to prayer: اللّٰهُ أَكْبَرُ, “God is greatest”.",
+     "Greek μεγάλος and German groß do the same double job: a big house, and an older person (ο μεγάλος μου αδελφός, mein großer Bruder = أَخِي الْأَكْبَرُ)."
+    ],
+    "pitfalls": [
+     "Plural for people: the broken plural كِبَار (الْأَوْلَادُ كِبَارٌ); plural for things: the feminine singular (الْبُيُوتُ كَبِيرَةٌ).",
+     "For age, كَبِيرٌ alone can be unclear: say كَبِيرٌ فِي السِّنِّ, or use مُسِنّ."
+    ],
+    "subtleties": [
+     "أَكْبَرُ مِنِّي is both “bigger than me” and “older than me” — the context decides."
+    ]
+   }
+  },
+  {
+   "id": "ar:saghir",
+   "lemma": "صَغِير",
+   "pos": "ADJ",
+   "senses": [
+    "adj.small",
+    "adj.young"
+   ],
+   "features": {
+    "root": "ص غ ر",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "صَغِيرَة",
+    "plurals": [
+     {
+      "form": "صِغَار",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَصْغَر",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "age",
+     "value": "young, little (a child); younger"
+    }
+   ],
+   "translit": "ṣaġīr",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "صَغِيرٌ",
+    "ADJ;ACC;SG;MASC;INDF": "صَغِيرًا",
+    "ADJ;GEN;SG;MASC;INDF": "صَغِيرٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الصَّغِيرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الصَّغِيرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الصَّغِيرِ",
+    "ADJ;NOM;SG;FEM;INDF": "صَغِيرَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "صَغِيرَةً",
+    "ADJ;GEN;SG;FEM;INDF": "صَغِيرَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الصَّغِيرَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الصَّغِيرَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الصَّغِيرَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "صَغِيرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "صَغِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "صَغِيرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الصَّغِيرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الصَّغِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الصَّغِيرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "صَغِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "صَغِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "صَغِيرَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الصَّغِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الصَّغِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الصَّغِيرَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "صِغَارٌ",
+    "ADJ;ACC;PL;MASC;INDF": "صِغَارًا",
+    "ADJ;GEN;PL;MASC;INDF": "صِغَارٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الصِّغَارُ",
+    "ADJ;ACC;PL;MASC;DEF": "الصِّغَارَ",
+    "ADJ;GEN;PL;MASC;DEF": "الصِّغَارِ",
+    "ADJ;NOM;PL;FEM;INDF": "صِغَارٌ",
+    "ADJ;ACC;PL;FEM;INDF": "صِغَارًا",
+    "ADJ;GEN;PL;FEM;INDF": "صِغَارٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الصِّغَارُ",
+    "ADJ;ACC;PL;FEM;DEF": "الصِّغَارَ",
+    "ADJ;GEN;PL;FEM;DEF": "الصِّغَارِ",
+    "ADJ;CMPR;NOM": "أَصْغَرُ",
+    "ADJ;CMPR;ACC": "أَصْغَرَ",
+    "ADJ;CMPR;GEN": "أَصْغَرَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَصْغَرُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَصْغَرَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَصْغَرِ",
+    "ADJ;SPRL;NOM;CONST": "أَصْغَرُ",
+    "ADJ;SPRL;ACC;CONST": "أَصْغَرَ",
+    "ADJ;SPRL;GEN;CONST": "أَصْغَرِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;FEM;INDF": [
+     "صَغِيرَاتٌ"
+    ],
+    "ADJ;ACC;PL;FEM;INDF": [
+     "صَغِيرَاتٍ"
+    ],
+    "ADJ;GEN;PL;FEM;INDF": [
+     "صَغِيرَاتٍ"
+    ],
+    "ADJ;NOM;PL;FEM;DEF": [
+     "الصَّغِيرَاتُ"
+    ],
+    "ADJ;ACC;PL;FEM;DEF": [
+     "الصَّغِيرَاتِ"
+    ],
+    "ADJ;GEN;PL;FEM;DEF": [
+     "الصَّغِيرَاتِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Little things and little children.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "small, little",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.small"
+     },
+     {
+      "id": "s2",
+      "def": "young, little (of a child; also “younger”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.young"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذِهِ غُرْفَةٌ صَغِيرَةٌ.",
+      "tr": "This is a small room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَيْتُ صَغِيرٌ لٰكِنَّهُ جَمِيلٌ.",
+      "tr": "The house is small but beautiful.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي أَخٌ صَغِيرٌ.",
+      "tr": "I have a little brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "الْأَطْفَالُ الصِّغَارُ فِي الْحَدِيقَةِ.",
+      "tr": "The little children are in the park.",
+      "register": "neutral",
+      "context": "children",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "غُرْفَةٌ صَغِيرَةٌ",
+      "tr": "a small room"
+     },
+     {
+      "text": "الْأَخُ الْأَصْغَرُ",
+      "tr": "the youngest brother"
+     },
+     {
+      "text": "صَغِيرٌ فِي السِّنِّ",
+      "tr": "young (“small in age”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ضَئِيل",
+      "register": "formal",
+      "nuance": "tiny, slight — amounts, chances, a small role"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كَبِير",
+      "note": "big"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from Proto-Semitic *ṣaɣir- (“to be small, young”); cognate with Akkadian ṣeḫrum (“small, young”) and Biblical Hebrew צָעִיר (ṣɔʿir).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew צָעִיר (tsa’ir), “young”, is its cousin (Wiktionary).",
+     "Like كَبِير for “older”, صَغِير doubles as “younger”: أُخْتِي الصُّغْرَى = my youngest sister."
+    ],
+    "pitfalls": [
+     "Plural for people: صِغَار (الْأَطْفَالُ صِغَارٌ); for things the feminine singular (الْغُرَفُ صَغِيرَةٌ).",
+     "صَغِير is “young” for children only; a young adult is شَابّ."
+    ],
+    "subtleties": [
+     "أَصْغَرُ مِنِّي = smaller or younger than me; with family words it is almost always “younger”."
+    ]
+   }
+  },
+  {
+   "id": "ar:tawil",
+   "lemma": "طَوِيل",
+   "pos": "ADJ",
+   "senses": [
+    "adj.long",
+    "adj.tall"
+   ],
+   "features": {
+    "root": "ط و ل",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "طَوِيلَة",
+    "plurals": [
+     {
+      "form": "طِوَال",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَطْوَل",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ṭawīl",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "طَوِيلٌ",
+    "ADJ;ACC;SG;MASC;INDF": "طَوِيلًا",
+    "ADJ;GEN;SG;MASC;INDF": "طَوِيلٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الطَّوِيلُ",
+    "ADJ;ACC;SG;MASC;DEF": "الطَّوِيلَ",
+    "ADJ;GEN;SG;MASC;DEF": "الطَّوِيلِ",
+    "ADJ;NOM;SG;FEM;INDF": "طَوِيلَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "طَوِيلَةً",
+    "ADJ;GEN;SG;FEM;INDF": "طَوِيلَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الطَّوِيلَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الطَّوِيلَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الطَّوِيلَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "طَوِيلَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "طَوِيلَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "طَوِيلَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الطَّوِيلَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الطَّوِيلَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الطَّوِيلَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "طَوِيلَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "طَوِيلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "طَوِيلَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الطَّوِيلَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الطَّوِيلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الطَّوِيلَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "طِوَالٌ",
+    "ADJ;ACC;PL;MASC;INDF": "طِوَالًا",
+    "ADJ;GEN;PL;MASC;INDF": "طِوَالٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الطِّوَالُ",
+    "ADJ;ACC;PL;MASC;DEF": "الطِّوَالَ",
+    "ADJ;GEN;PL;MASC;DEF": "الطِّوَالِ",
+    "ADJ;NOM;PL;FEM;INDF": "طَوِيلَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "طَوِيلَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "طَوِيلَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الطَّوِيلَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الطَّوِيلَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الطَّوِيلَاتِ",
+    "ADJ;CMPR;NOM": "أَطْوَلُ",
+    "ADJ;CMPR;ACC": "أَطْوَلَ",
+    "ADJ;CMPR;GEN": "أَطْوَلَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَطْوَلُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَطْوَلَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَطْوَلِ",
+    "ADJ;SPRL;NOM;CONST": "أَطْوَلُ",
+    "ADJ;SPRL;ACC;CONST": "أَطْوَلَ",
+    "ADJ;SPRL;GEN;CONST": "أَطْوَلِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "طَوِيلُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "طَوِيلِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "طَوِيلِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الطَّوِيلُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الطَّوِيلِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الطَّوِيلِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Length in space and in time — a long street, a long wait — and a tall person.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "long (length; a road, hair, a text)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.long"
+     },
+     {
+      "id": "s2",
+      "def": "tall (of a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.tall"
+     },
+     {
+      "id": "s3",
+      "def": "long (time): وَقْتٌ طَوِيلٌ",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الشَّارِعُ طَوِيلٌ.",
+      "tr": "The street is long.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ رِحْلَةٌ طَوِيلَةٌ.",
+      "tr": "This is a long journey.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَبِي رَجُلٌ طَوِيلٌ.",
+      "tr": "My father is a tall man.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "أُخْتِي طَوِيلَةٌ.",
+      "tr": "My sister is tall.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "اِنْتَظَرْنَا وَقْتًا طَوِيلًا.",
+      "tr": "We waited a long time.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَجُلٌ طَوِيلٌ",
+      "tr": "a tall man"
+     },
+     {
+      "text": "وَقْتٌ طَوِيلٌ",
+      "tr": "a long time"
+     },
+     {
+      "text": "طَوِيلُ الْقَامَةِ",
+      "tr": "tall of stature"
+     },
+     {
+      "text": "شَعْرٌ طَوِيلٌ",
+      "tr": "long hair"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَدِيد",
+      "register": "literary",
+      "nuance": "long, extended — mostly of time: عُمْرٌ مَدِيدٌ, a long life (in good wishes)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "قَصِير",
+      "note": "short"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: a late adjective of the type CaCīC from the root ط و ل (ṭ w l) — an ancient word would have become *طَيِّل, like جَيِّد; ultimately from Proto-Afroasiatic *ṭVwl- (“long, far”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word for long and tall, like Turkish uzun (uzun yol, uzun boylu); Greek, German and Russian split them (μακρύς / ψηλός, lang / groß, длинный / высокий).",
+     "طَاوِلَة (table) comes from Italian tavola; Wiktionary suggests it was reshaped to sound like a word of the root ط و ل — a table is “a long thing”."
+    ],
+    "pitfalls": [
+     "Plural for people طِوَال (also طَوِيلُون); for things the feminine singular: الشَّوَارِعُ طَوِيلَةٌ.",
+     "For buildings and mountains Arabic prefers عَالٍ (high): بِنَايَةٌ عَالِيَةٌ; طَوِيل is above all for people and lengths."
+    ],
+    "subtleties": [
+     "The question “how tall are you?” is about length: كَمْ طُولُكَ؟ — طُول (length, height) is the noun of the same root."
+    ]
+   }
+  },
+  {
+   "id": "ar:qasir",
+   "lemma": "قَصِير",
+   "pos": "ADJ",
+   "senses": [
+    "adj.short",
+    "adj.short.person"
+   ],
+   "features": {
+    "root": "ق ص ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَصِيرَة",
+    "plurals": [
+     {
+      "form": "قِصَار",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْصَر",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "qaṣīr",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "قَصِيرٌ",
+    "ADJ;ACC;SG;MASC;INDF": "قَصِيرًا",
+    "ADJ;GEN;SG;MASC;INDF": "قَصِيرٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْقَصِيرُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْقَصِيرَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْقَصِيرِ",
+    "ADJ;NOM;SG;FEM;INDF": "قَصِيرَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "قَصِيرَةً",
+    "ADJ;GEN;SG;FEM;INDF": "قَصِيرَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْقَصِيرَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْقَصِيرَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْقَصِيرَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "قَصِيرَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "قَصِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "قَصِيرَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْقَصِيرَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْقَصِيرَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْقَصِيرَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "قَصِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "قَصِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "قَصِيرَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْقَصِيرَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْقَصِيرَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْقَصِيرَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "قِصَارٌ",
+    "ADJ;ACC;PL;MASC;INDF": "قِصَارًا",
+    "ADJ;GEN;PL;MASC;INDF": "قِصَارٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْقِصَارُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْقِصَارَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْقِصَارِ",
+    "ADJ;NOM;PL;FEM;INDF": "قَصِيرَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "قَصِيرَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "قَصِيرَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْقَصِيرَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْقَصِيرَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْقَصِيرَاتِ",
+    "ADJ;CMPR;NOM": "أَقْصَرُ",
+    "ADJ;CMPR;ACC": "أَقْصَرَ",
+    "ADJ;CMPR;GEN": "أَقْصَرَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَقْصَرُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَقْصَرَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَقْصَرِ",
+    "ADJ;SPRL;NOM;CONST": "أَقْصَرُ",
+    "ADJ;SPRL;ACC;CONST": "أَقْصَرَ",
+    "ADJ;SPRL;GEN;CONST": "أَقْصَرِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "قَصِيرُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "قَصِيرِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "قَصِيرِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْقَصِيرُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْقَصِيرِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْقَصِيرِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Short things, short people, a short visit.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "short (length)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.short"
+     },
+     {
+      "id": "s2",
+      "def": "short (of a person)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.short.person"
+     },
+     {
+      "id": "s3",
+      "def": "short, brief (time)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا الشَّارِعُ قَصِيرٌ.",
+      "tr": "This street is short.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "قَرَأْتُ قِصَّةً قَصِيرَةً.",
+      "tr": "I read a short story.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "أَخِي قَصِيرٌ وَأَنَا طَوِيلٌ.",
+      "tr": "My brother is short and I am tall.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "كَانَتِ الزِّيَارَةُ قَصِيرَةً.",
+      "tr": "The visit was short.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قِصَّةٌ قَصِيرَةٌ",
+      "tr": "a short story"
+     },
+     {
+      "text": "رِسَالَةٌ قَصِيرَةٌ",
+      "tr": "a short message, a text"
+     },
+     {
+      "text": "مُدَّةٌ قَصِيرَةٌ",
+      "tr": "a short time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "وَجِيز",
+      "register": "formal",
+      "nuance": "brief, concise — texts and periods: بَعْدَ وَقْتٍ وَجِيزٍ, shortly after"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "طَوِيل",
+      "note": "long, tall"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ق ص ر (q ṣ r); Wiktionary: cognate with Hebrew קצר (katsár, “short”) and Amharic አጭር (ač̣ər, “short”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew קָצָר (katsar) is the same Semitic word."
+    ],
+    "pitfalls": [
+     "Plural for people قِصَار (also قَصِيرُون); for things the feminine singular.",
+     "قِصَّة (story) only looks similar: its root is ق ص ص."
+    ],
+    "subtleties": [
+     "“Short of …, lacking” is not قَصِير but نَاقِص."
+    ]
+   }
+  },
+  {
+   "id": "ar:jayyid",
+   "lemma": "جَيِّد",
+   "pos": "ADJ",
+   "senses": [
+    "adj.good",
+    "adv.well"
+   ],
+   "features": {
+    "root": "ج و د",
+    "pattern": "فَيْعِل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "جَيِّدَة",
+    "plurals": [
+     {
+      "form": "جَيِّدُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَجْوَد",
+    "meaningForms": [
+     {
+      "form": "جَيِّدًا",
+      "what": "the accusative as an adverb: well",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "translit": "jayyid",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "جَيِّدٌ",
+    "ADJ;ACC;SG;MASC;INDF": "جَيِّدًا",
+    "ADJ;GEN;SG;MASC;INDF": "جَيِّدٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْجَيِّدُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْجَيِّدَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْجَيِّدِ",
+    "ADJ;NOM;SG;FEM;INDF": "جَيِّدَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "جَيِّدَةً",
+    "ADJ;GEN;SG;FEM;INDF": "جَيِّدَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْجَيِّدَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْجَيِّدَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْجَيِّدَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "جَيِّدَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "جَيِّدَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "جَيِّدَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْجَيِّدَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْجَيِّدَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْجَيِّدَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "جَيِّدَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "جَيِّدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "جَيِّدَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْجَيِّدَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْجَيِّدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْجَيِّدَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "جَيِّدُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "جَيِّدِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "جَيِّدِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْجَيِّدُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْجَيِّدِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْجَيِّدِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "جَيِّدَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "جَيِّدَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "جَيِّدَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْجَيِّدَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْجَيِّدَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْجَيِّدَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Quality you can count on: a good book, good food, good work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good (of good quality)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.good"
+     },
+     {
+      "id": "s2",
+      "def": "جَيِّدًا: well (adverb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.well"
+     },
+     {
+      "id": "s3",
+      "def": "“good” as a school mark (between مَقْبُول and مُمْتَاز)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا كِتَابٌ جَيِّدٌ.",
+      "tr": "This is a good book.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "الطَّعَامُ هُنَا جَيِّدٌ.",
+      "tr": "The food here is good.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "تَتَكَلَّمُ الْعَرَبِيَّةَ جَيِّدًا.",
+      "tr": "You speak Arabic well.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِكْرَةٌ جَيِّدَةٌ",
+      "tr": "a good idea"
+     },
+     {
+      "text": "بِشَكْلٍ جَيِّدٍ",
+      "tr": "well, in a good way"
+     },
+     {
+      "text": "جَيِّدٌ جِدًّا",
+      "tr": "very good (also a school mark)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَسَن",
+      "register": "neutral",
+      "nuance": "good, fine, nice — also of conduct; حَسَنًا = all right, OK"
+     },
+     {
+      "word": "طَيِّب",
+      "register": "neutral",
+      "nuance": "good, kind; tasty — warmer, for people and food"
+     },
+     {
+      "word": "مُمْتَاز",
+      "register": "neutral",
+      "nuance": "excellent"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "سَيِّئ",
+      "note": "bad"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: an adjective of the type CaCīC of the root ج و د (j w d), from *جَوِيد (*jawīd) through *جَيِيد to جَيِّد; the w shows in the elative أَجْوَد.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arab school reports grade in words: مَقْبُول (pass), جَيِّد (good), جَيِّد جِدًّا (very good), مُمْتَاز (excellent).",
+     "Its root ج و د also gives جَوْدَة, quality."
+    ],
+    "pitfalls": [
+     "“Better” is not formed from it in everyday Arabic: say أَفْضَلُ (or أَحْسَنُ) — هٰذَا أَفْضَلُ مِنْ ذٰلِكَ.",
+     "“I’m fine” is أَنَا بِخَيْرٍ (lesson 2), not أَنَا جَيِّدٌ."
+    ],
+    "subtleties": [
+     "جَيِّد is good in quality; for a good person طَيِّب or حَسَن sound warmer."
+    ]
+   }
+  },
+  {
+   "id": "ar:sayyi",
+   "lemma": "سَيِّئ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.bad"
+   ],
+   "features": {
+    "root": "س و ء",
+    "pattern": "فَيْعِل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "سَيِّئَة",
+    "plurals": [
+     {
+      "form": "سَيِّئُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْوَأ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "sayyiʾ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "سَيِّئٌ",
+    "ADJ;ACC;SG;MASC;INDF": "سَيِّئًا",
+    "ADJ;GEN;SG;MASC;INDF": "سَيِّئٍ",
+    "ADJ;NOM;SG;MASC;DEF": "السَّيِّئُ",
+    "ADJ;ACC;SG;MASC;DEF": "السَّيِّئَ",
+    "ADJ;GEN;SG;MASC;DEF": "السَّيِّئِ",
+    "ADJ;NOM;SG;FEM;INDF": "سَيِّئَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "سَيِّئَةً",
+    "ADJ;GEN;SG;FEM;INDF": "سَيِّئَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "السَّيِّئَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "السَّيِّئَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "السَّيِّئَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "سَيِّئَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "سَيِّئَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "سَيِّئَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "السَّيِّئَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "السَّيِّئَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "السَّيِّئَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "سَيِّئَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "سَيِّئَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "سَيِّئَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "السَّيِّئَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "السَّيِّئَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "السَّيِّئَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "سَيِّئُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "سَيِّئِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "سَيِّئِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "السَّيِّئُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "السَّيِّئِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "السَّيِّئِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "سَيِّئَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "سَيِّئَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "سَيِّئَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "السَّيِّئَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "السَّيِّئَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "السَّيِّئَاتِ",
+    "ADJ;CMPR;NOM": "أَسْوَأُ",
+    "ADJ;CMPR;ACC": "أَسْوَأَ",
+    "ADJ;CMPR;GEN": "أَسْوَأَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَسْوَأُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَسْوَأَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَسْوَأِ",
+    "ADJ;SPRL;NOM;CONST": "أَسْوَأُ",
+    "ADJ;SPRL;ACC;CONST": "أَسْوَأَ",
+    "ADJ;SPRL;GEN;CONST": "أَسْوَأِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Disappointment: bad food, bad news, bad luck.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bad (quality, situation)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.bad"
+     },
+     {
+      "id": "s2",
+      "def": "bad, evil (morally)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا مَطْعَمٌ سَيِّئٌ.",
+      "tr": "This is a bad restaurant.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "الطَّقْسُ سَيِّئٌ الْيَوْمَ.",
+      "tr": "The weather is bad today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي خَبَرٌ سَيِّئٌ.",
+      "tr": "I have bad news.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ لَيْسَ رَجُلًا سَيِّئًا.",
+      "tr": "He is not a bad man.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَظٌّ سَيِّئٌ",
+      "tr": "bad luck"
+     },
+     {
+      "text": "خَبَرٌ سَيِّئٌ",
+      "tr": "bad news"
+     },
+     {
+      "text": "وَضْعٌ سَيِّئٌ",
+      "tr": "a bad situation"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "رَدِيء",
+      "register": "neutral",
+      "nuance": "poor, bad in quality — goods, food, work"
+     },
+     {
+      "word": "شِرِّير",
+      "register": "neutral",
+      "nuance": "wicked, evil — people"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "جَيِّد",
+      "note": "good"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root س و ء (s w ʾ), “to be bad”; the w of the root comes back in the elative أَسْوَأ, worse (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "As a noun, سَيِّئَة is a bad deed — the opposite of حَسَنَة, a good deed."
+    ],
+    "pitfalls": [
+     "The hamza sits on a yāʾ: سَيِّئ, سَيِّئَة, سَيِّئًا (also printed سيء).",
+     "“Worse” is أَسْوَأُ, with the w of the root: الطَّقْسُ الْيَوْمَ أَسْوَأُ."
+    ],
+    "subtleties": [
+     "For food that has gone off, Arabic says فَاسِد (spoilt), not سَيِّئ."
+    ]
+   }
+  },
+  {
+   "id": "ar:jadid",
+   "lemma": "جَدِيد",
+   "pos": "ADJ",
+   "senses": [
+    "adj.new",
+    "adv.again"
+   ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "جَدِيدَة",
+    "plurals": [
+     {
+      "form": "جُدُد",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَجَدّ",
+    "meaningForms": [
+     {
+      "form": "مِنْ جَدِيدٍ",
+      "what": "only in this phrase: anew, again",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "translit": "jadīd",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "جَدِيدٌ",
+    "ADJ;ACC;SG;MASC;INDF": "جَدِيدًا",
+    "ADJ;GEN;SG;MASC;INDF": "جَدِيدٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْجَدِيدُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْجَدِيدَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْجَدِيدِ",
+    "ADJ;NOM;SG;FEM;INDF": "جَدِيدَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "جَدِيدَةً",
+    "ADJ;GEN;SG;FEM;INDF": "جَدِيدَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْجَدِيدَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْجَدِيدَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْجَدِيدَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "جَدِيدَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "جَدِيدَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "جَدِيدَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْجَدِيدَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْجَدِيدَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْجَدِيدَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "جَدِيدَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "جَدِيدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "جَدِيدَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْجَدِيدَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْجَدِيدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْجَدِيدَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "جُدُدٌ",
+    "ADJ;ACC;PL;MASC;INDF": "جُدُدًا",
+    "ADJ;GEN;PL;MASC;INDF": "جُدُدٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْجُدُدُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْجُدُدَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْجُدُدِ",
+    "ADJ;NOM;PL;FEM;INDF": "جُدُدٌ",
+    "ADJ;ACC;PL;FEM;INDF": "جُدُدًا",
+    "ADJ;GEN;PL;FEM;INDF": "جُدُدٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْجُدُدُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْجُدُدَ",
+    "ADJ;GEN;PL;FEM;DEF": "الْجُدُدِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;FEM;INDF": [
+     "جَدِيدَاتٌ"
+    ],
+    "ADJ;ACC;PL;FEM;INDF": [
+     "جَدِيدَاتٍ"
+    ],
+    "ADJ;GEN;PL;FEM;INDF": [
+     "جَدِيدَاتٍ"
+    ],
+    "ADJ;NOM;PL;FEM;DEF": [
+     "الْجَدِيدَاتُ"
+    ],
+    "ADJ;ACC;PL;FEM;DEF": [
+     "الْجَدِيدَاتِ"
+    ],
+    "ADJ;GEN;PL;FEM;DEF": [
+     "الْجَدِيدَاتِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The pleasure of something new: a new car, a new phone, new students.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "new",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.new"
+     },
+     {
+      "id": "s2",
+      "def": "مِنْ جَدِيدٍ: anew, again",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.again"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي سَيَّارَةٌ جَدِيدَةٌ.",
+      "tr": "I have a new car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا هَاتِفٌ جَدِيدٌ.",
+      "tr": "This is a new phone.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "هُمْ طُلَّابٌ جُدُدٌ.",
+      "tr": "They are new students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "نَبْدَأُ مِنْ جَدِيدٍ.",
+      "tr": "We start again (from scratch).",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَيَّارَةٌ جَدِيدَةٌ",
+      "tr": "a new car"
+     },
+     {
+      "text": "مِنْ جَدِيدٍ",
+      "tr": "anew, again"
+     },
+     {
+      "text": "الْعَامُ الْجَدِيدُ",
+      "tr": "the new year"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَدِيث",
+      "register": "neutral",
+      "nuance": "modern, recent — حَدِيث is new in time, up to date"
+     },
+     {
+      "word": "طَازَج",
+      "register": "neutral",
+      "nuance": "fresh — bread, fish, fruit"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "قَدِيم",
+      "note": "old (of things)"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ج د د (j d d), with the verb جَدَّ, “to be new” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same letters ج د د spell جَدّ, grandfather — a different word of the same written root."
+    ],
+    "pitfalls": [
+     "Plural for people جُدُد (طُلَّابٌ جُدُدٌ); for things the feminine singular: الْكُتُبُ جَدِيدَةٌ.",
+     "“Newer, newest” is usually أَحْدَثُ (from حَدِيث), not the rare أَجَدُّ."
+    ],
+    "subtleties": [
+     "مِنْ جَدِيدٍ (anew) is a fixed phrase: the adjective is used as a noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:qadim",
+   "lemma": "قَدِيم",
+   "pos": "ADJ",
+   "senses": [
+    "adj.old.thing",
+    "adj.former"
+   ],
+   "features": {
+    "root": "ق د م",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَدِيمَة",
+    "plurals": [
+     {
+      "form": "قُدَامَى",
+      "kind": "broken",
+      "pattern": "فُعَالَى",
+      "declension": "invariable",
+      "note": "former members, veterans (قُدَامَى الْمُحَارِبِينَ)",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "form": "قُدَمَاء",
+      "kind": "broken",
+      "pattern": "فُعَلَاء",
+      "declension": "diptote",
+      "note": "the ancients (الْمِصْرِيُّونَ الْقُدَمَاءُ)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْدَم",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "translit": "qadīm",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "قَدِيمٌ",
+    "ADJ;ACC;SG;MASC;INDF": "قَدِيمًا",
+    "ADJ;GEN;SG;MASC;INDF": "قَدِيمٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْقَدِيمُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْقَدِيمَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْقَدِيمِ",
+    "ADJ;NOM;SG;FEM;INDF": "قَدِيمَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "قَدِيمَةً",
+    "ADJ;GEN;SG;FEM;INDF": "قَدِيمَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْقَدِيمَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْقَدِيمَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْقَدِيمَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "قَدِيمَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "قَدِيمَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "قَدِيمَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْقَدِيمَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْقَدِيمَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْقَدِيمَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "قَدِيمَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "قَدِيمَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "قَدِيمَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْقَدِيمَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْقَدِيمَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْقَدِيمَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "قُدَامَى",
+    "ADJ;ACC;PL;MASC;INDF": "قُدَامَى",
+    "ADJ;GEN;PL;MASC;INDF": "قُدَامَى",
+    "ADJ;NOM;PL;MASC;DEF": "الْقُدَامَى",
+    "ADJ;ACC;PL;MASC;DEF": "الْقُدَامَى",
+    "ADJ;GEN;PL;MASC;DEF": "الْقُدَامَى",
+    "ADJ;NOM;PL;FEM;INDF": "قَدِيمَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "قَدِيمَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "قَدِيمَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْقَدِيمَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْقَدِيمَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْقَدِيمَاتِ",
+    "ADJ;CMPR;NOM": "أَقْدَمُ",
+    "ADJ;CMPR;ACC": "أَقْدَمَ",
+    "ADJ;CMPR;GEN": "أَقْدَمَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَقْدَمُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَقْدَمَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَقْدَمِ",
+    "ADJ;SPRL;NOM;CONST": "أَقْدَمُ",
+    "ADJ;SPRL;ACC;CONST": "أَقْدَمَ",
+    "ADJ;SPRL;GEN;CONST": "أَقْدَمِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "قُدَمَاءُ",
+     "قَدِيمُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "قُدَمَاءَ",
+     "قَدِيمِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "قُدَمَاءَ",
+     "قَدِيمِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْقُدَمَاءُ",
+     "الْقَدِيمُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْقُدَمَاءَ",
+     "الْقَدِيمِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْقُدَمَاءِ",
+     "الْقَدِيمِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Things with a past: an old house, the old town, an old friend.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "old (of things), ancient",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.old.thing"
+     },
+     {
+      "id": "s2",
+      "def": "old, long-standing (a friend); former",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.former"
+     },
+     {
+      "id": "s3",
+      "def": "ancient (of times and peoples)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا بَيْتٌ قَدِيمٌ.",
+      "tr": "This is an old house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَدِينَةُ الْقَدِيمَةُ جَمِيلَةٌ.",
+      "tr": "The old town is beautiful.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ سَيَّارَةٌ قَدِيمَةٌ لٰكِنَّهَا جَيِّدَةٌ.",
+      "tr": "This is an old car, but it is good.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ صَدِيقٌ قَدِيمٌ.",
+      "tr": "He is an old friend.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْمَدِينَةُ الْقَدِيمَةُ",
+      "tr": "the old town"
+     },
+     {
+      "text": "صَدِيقٌ قَدِيمٌ",
+      "tr": "an old friend"
+     },
+     {
+      "text": "مُنْذُ زَمَنٍ قَدِيمٍ",
+      "tr": "since long ago"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَتِيق",
+      "register": "neutral",
+      "nuance": "old, aged, antique — often with respect: an old house, a vintage piece"
+     },
+     {
+      "word": "أَثَرِيّ",
+      "register": "technical",
+      "nuance": "ancient, archaeological — monuments, sites"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "جَدِيد",
+      "note": "new"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ق د م (q d m), whose verb قَدُمَ means “to be old, to be ancient”; elative أَقْدَم (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root ق د م also gives قَدَم (foot) and تَقَدَّمَ (to advance) — the idea of what goes before.",
+     "Many Arab cities have a الْمَدِينَةُ الْقَدِيمَةُ, the old walled town: Damascus, Jerusalem, Fez."
+    ],
+    "pitfalls": [
+     "Not for the age of people: an old man is رَجُلٌ مُسِنٌّ (or كَبِيرٌ فِي السِّنِّ); رَجُلٌ قَدِيمٌ sounds odd.",
+     "Plural for people قُدَامَى (former, old: أَصْدِقَاءُ قُدَامَى) or قُدَمَاء (the ancients); for things the feminine singular."
+    ],
+    "subtleties": [
+     "أَقْدَمُ = older (of things), the oldest: أَقْدَمُ جَامِعَةٍ فِي الْعَالَمِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:shabb",
+   "lemma": "شَابّ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.young",
+    "person.youngman"
+   ],
+   "features": {
+    "root": "ش ب ب",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "شَابَّة",
+    "plurals": [
+     {
+      "form": "شُبَّان",
+      "kind": "broken",
+      "pattern": "فُعْلَان",
+      "declension": "triptote",
+      "note": "young men",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "no elative in use: younger is أَصْغَرُ سِنًّا"
+    },
+    "meaningForms": [
+     {
+      "form": "الشَّبَاب",
+      "what": "collective: young people, youth",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "age",
+     "value": "young (from the teens to about thirty)"
+    }
+   ],
+   "translit": "šābb",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "شَابٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "شَابًّا",
+    "ADJ;GEN;SG;MASC;INDF": "شَابٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الشَّابُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الشَّابَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الشَّابِّ",
+    "ADJ;NOM;SG;FEM;INDF": "شَابَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "شَابَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "شَابَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الشَّابَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الشَّابَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الشَّابَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "شَابَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "شَابَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "شَابَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الشَّابَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الشَّابَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الشَّابَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "شَابَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "شَابَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "شَابَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الشَّابَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الشَّابَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الشَّابَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "شُبَّانٌ",
+    "ADJ;ACC;PL;MASC;INDF": "شُبَّانًا",
+    "ADJ;GEN;PL;MASC;INDF": "شُبَّانٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الشُّبَّانُ",
+    "ADJ;ACC;PL;MASC;DEF": "الشُّبَّانَ",
+    "ADJ;GEN;PL;MASC;DEF": "الشُّبَّانِ",
+    "ADJ;NOM;PL;FEM;INDF": "شَابَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "شَابَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "شَابَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الشَّابَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الشَّابَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الشَّابَّاتِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "شَبَابٌ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "شَبَابًا"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "شَبَابٍ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الشَّبَابُ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الشَّبَابَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الشَّبَابِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files شَابّ only as a noun (“young man, youth”); it is also the everyday adjective “young” (رَجُلٌ شَابٌّ, امْرَأَةٌ شَابَّةٌ), and its masculine forms here are those of Wiktionary’s noun table."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Youth and energy: a young teacher, young people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "young (of a person, from the teens to about thirty)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.young"
+     },
+     {
+      "id": "s2",
+      "def": "a young man (as a noun); الشَّبَاب = young people, youth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.youngman"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمُعَلِّمُ شَابٌّ.",
+      "tr": "The teacher is young.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَنَا مُعَلِّمَةٌ شَابَّةٌ.",
+      "tr": "We have a young (woman) teacher.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ شَابٌّ طَوِيلٌ.",
+      "tr": "He is a tall young man.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَجُلٌ شَابٌّ",
+      "tr": "a young man"
+     },
+     {
+      "text": "امْرَأَةٌ شَابَّةٌ",
+      "tr": "a young woman"
+     },
+     {
+      "text": "الشَّبَابُ الْعَرَبِيُّ",
+      "tr": "Arab youth"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "صَغِيرٌ فِي السِّنِّ",
+      "register": "neutral",
+      "nuance": "young in years — also for children"
+     },
+     {
+      "word": "فَتِيّ",
+      "register": "literary",
+      "nuance": "youthful, young and vigorous"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "مُسِنّ",
+      "note": "elderly"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of شَبَّ (šabba, “to become a young man, to grow up”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "يَا شَبَاب! (“young people!”) is the everyday “guys!” of many dialects."
+    ],
+    "pitfalls": [
+     "Not for small children: a young child is طِفْلٌ صَغِيرٌ.",
+     "The double b stays in every form: شَابٌّ, شَابَّةٌ, الشَّابُّ."
+    ],
+    "subtleties": [
+     "Plural for people: شُبَّان (young men) or شَبَاب, which usually means “youth, young people” as a group."
+    ]
+   }
+  },
+  {
+   "id": "ar:musinn",
+   "lemma": "مُسِنّ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.old.person"
+   ],
+   "features": {
+    "root": "س ن ن",
+    "pattern": "مُفْعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of أَسَنَّ (to grow old), form IV",
+    "feminine": "مُسِنَّة",
+    "plurals": [
+     {
+      "form": "مُسِنُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a participle (form IV): older is أَكْبَرُ سِنًّا (also أَسَنُّ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.old.person",
+     "axis": "register",
+     "value": "polite, standard: elderly"
+    }
+   ],
+   "translit": "musinn",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "مُسِنٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "مُسِنًّا",
+    "ADJ;GEN;SG;MASC;INDF": "مُسِنٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الْمُسِنُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الْمُسِنَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الْمُسِنِّ",
+    "ADJ;NOM;SG;FEM;INDF": "مُسِنَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "مُسِنَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "مُسِنَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْمُسِنَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْمُسِنَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْمُسِنَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "مُسِنَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "مُسِنَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "مُسِنَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْمُسِنَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْمُسِنَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْمُسِنَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "مُسِنَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "مُسِنَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "مُسِنَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْمُسِنَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْمُسِنَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْمُسِنَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "مُسِنُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "مُسِنِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "مُسِنِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْمُسِنُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْمُسِنِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْمُسِنِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "مُسِنَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "مُسِنَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "مُسِنَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْمُسِنَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْمُسِنَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْمُسِنَّاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Respect for age: the polite word for elderly people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "old, elderly, aged (of people) — the polite standard word",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.old.person"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَدِّي رَجُلٌ مُسِنٌّ.",
+      "tr": "My grandfather is an elderly man.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "جَدَّتِي مُسِنَّةٌ لٰكِنَّهَا نَشِيطَةٌ.",
+      "tr": "My grandmother is old, but she is active.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تَعْمَلُ أُمِّي فِي دَارٍ لِلْمُسِنِّينَ.",
+      "tr": "My mother works in an old people’s home.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَجُلٌ مُسِنٌّ",
+      "tr": "an elderly man"
+     },
+     {
+      "text": "دَارُ الْمُسِنِّينَ",
+      "tr": "an old people’s home"
+     },
+     {
+      "text": "كِبَارُ السِّنِّ",
+      "tr": "the elderly (“the big in age”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كَبِيرٌ فِي السِّنِّ",
+      "register": "neutral",
+      "nuance": "old, “big in age” — the most common polite phrase"
+     },
+     {
+      "word": "عَجُوز",
+      "register": "neutral",
+      "nuance": "an old man, an old woman — mostly a noun, and blunt; it can sound disrespectful"
+     },
+     {
+      "word": "شَيْخ",
+      "register": "honorific",
+      "nuance": "an old man, an elder — respectful; also a title (sheikh)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "شَابّ",
+      "note": "young"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of أَسَنَّ (ʾasanna, “to age”); compare سِنّ (sinn, “tooth, age”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "سِنّ means both “tooth” and “age”: كَبِيرٌ فِي السِّنِّ is “big in age”, and مَا سِنُّكَ؟ asks “how old are you?”."
+    ],
+    "pitfalls": [
+     "Politeness: about people say مُسِنّ or كَبِيرٌ فِي السِّنِّ; عَجُوز can be rude; never قَدِيم, which is for things.",
+     "The double n: مُسِنٌّ, مُسِنَّةٌ, مُسِنُّونَ."
+    ],
+    "subtleties": [
+     "Everyday speech prefers كَبِيرٌ فِي السِّنِّ or simply كَبِيرٌ; مُسِنّ is the neutral word of news and institutions."
+    ]
+   }
+  },
+  {
+   "id": "ar:harr",
+   "lemma": "حَارّ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.hot",
+    "adj.spicy",
+    "adj.heartfelt"
+   ],
+   "features": {
+    "root": "ح ر ر",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of حَرَّ (to be hot)",
+    "feminine": "حَارَّة",
+    "plurals": [
+     {
+      "form": "حَارُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَحَرّ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.hot",
+     "axis": "weather / spice or temperature to the touch",
+     "value": "hot weather, climate; spicy food"
+    },
+    {
+     "concept": "adj.heartfelt",
+     "axis": "strength",
+     "value": "warm and heartfelt (تَرْحِيبٌ حَارٌّ)"
+    }
+   ],
+   "translit": "ḥārr",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "حَارٌّ",
+    "ADJ;ACC;SG;MASC;INDF": "حَارًّا",
+    "ADJ;GEN;SG;MASC;INDF": "حَارٍّ",
+    "ADJ;NOM;SG;MASC;DEF": "الْحَارُّ",
+    "ADJ;ACC;SG;MASC;DEF": "الْحَارَّ",
+    "ADJ;GEN;SG;MASC;DEF": "الْحَارِّ",
+    "ADJ;NOM;SG;FEM;INDF": "حَارَّةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "حَارَّةً",
+    "ADJ;GEN;SG;FEM;INDF": "حَارَّةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْحَارَّةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْحَارَّةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْحَارَّةِ",
+    "ADJ;NOM;DU;MASC;INDF": "حَارَّانِ",
+    "ADJ;ACC;DU;MASC;INDF": "حَارَّيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "حَارَّيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْحَارَّانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْحَارَّيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْحَارَّيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "حَارَّتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "حَارَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "حَارَّتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْحَارَّتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْحَارَّتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْحَارَّتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "حَارُّونَ",
+    "ADJ;ACC;PL;MASC;INDF": "حَارِّينَ",
+    "ADJ;GEN;PL;MASC;INDF": "حَارِّينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْحَارُّونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْحَارِّينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْحَارِّينَ",
+    "ADJ;NOM;PL;FEM;INDF": "حَارَّاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "حَارَّاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "حَارَّاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْحَارَّاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْحَارَّاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْحَارَّاتِ",
+    "ADJ;CMPR;NOM": "أَحَرُّ",
+    "ADJ;CMPR;ACC": "أَحَرَّ",
+    "ADJ;CMPR;GEN": "أَحَرَّ",
+    "ADJ;SPRL;NOM;DEF": "الْأَحَرُّ",
+    "ADJ;SPRL;ACC;DEF": "الْأَحَرَّ",
+    "ADJ;SPRL;GEN;DEF": "الْأَحَرِّ",
+    "ADJ;SPRL;NOM;CONST": "أَحَرُّ",
+    "ADJ;SPRL;ACC;CONST": "أَحَرَّ",
+    "ADJ;SPRL;GEN;CONST": "أَحَرِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heat in the air — and on the tongue.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hot (weather, climate, places)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.hot"
+     },
+     {
+      "id": "s2",
+      "def": "spicy, hot (food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.spicy"
+     },
+     {
+      "id": "s3",
+      "def": "warm, heartfelt (a welcome)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.heartfelt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الصَّيْفُ حَارٌّ فِي مِصْرَ.",
+      "tr": "Summer is hot in Egypt.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَوُّ حَارٌّ الْيَوْمَ.",
+      "tr": "It is hot today.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الطَّعَامَ الْحَارَّ.",
+      "tr": "I like spicy food.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "كَانَ اسْتِقْبَالًا حَارًّا.",
+      "tr": "It was a warm welcome.",
+      "register": "neutral",
+      "context": "visits",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَقْسٌ حَارٌّ",
+      "tr": "hot weather"
+     },
+     {
+      "text": "فُلْفُلٌ حَارٌّ",
+      "tr": "hot pepper"
+     },
+     {
+      "text": "اسْتِقْبَالٌ حَارٌّ",
+      "tr": "a warm welcome"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَاخِن",
+      "register": "neutral",
+      "nuance": "hot to the touch — drinks, food, water"
+     },
+     {
+      "word": "دَافِئ",
+      "register": "neutral",
+      "nuance": "warm — pleasant, not hot"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَارِد",
+      "note": "cold"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of حَرَّ (ḥarra, “to be hot”); compare Hebrew חָרִיף (kharif, “sharp, spicy”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its noun حَرَارَة (heat, temperature) went into Turkish as hararet (heat, fever, thirst)."
+    ],
+    "pitfalls": [
+     "Hot tea, coffee or soup is normally سَاخِن; with food حَارّ usually means SPICY: طَعَامٌ حَارٌّ.",
+     "The double r: حَارٌّ, حَارَّةٌ; the elative is أَحَرُّ (hotter)."
+    ],
+    "subtleties": [
+     "“It is hot” has no “it is”: الْجَوُّ حَارٌّ — the weather (is) hot."
+    ]
+   }
+  },
+  {
+   "id": "ar:sakhin",
+   "lemma": "سَاخِن",
+   "pos": "ADJ",
+   "senses": [
+    "adj.hot",
+    "adj.feverish"
+   ],
+   "features": {
+    "root": "س خ ن",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "derivedFrom": "the active participle of سَخُنَ / سَخِنَ (to become hot)",
+    "feminine": "سَاخِنَة",
+    "plurals": [
+     {
+      "form": "سَاخِنُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْخَن",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.hot",
+     "axis": "weather / spice or temperature to the touch",
+     "value": "hot to the touch: drinks, water, objects"
+    }
+   ],
+   "translit": "sāḫin",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "سَاخِنٌ",
+    "ADJ;ACC;SG;MASC;INDF": "سَاخِنًا",
+    "ADJ;GEN;SG;MASC;INDF": "سَاخِنٍ",
+    "ADJ;NOM;SG;MASC;DEF": "السَّاخِنُ",
+    "ADJ;ACC;SG;MASC;DEF": "السَّاخِنَ",
+    "ADJ;GEN;SG;MASC;DEF": "السَّاخِنِ",
+    "ADJ;NOM;SG;FEM;INDF": "سَاخِنَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "سَاخِنَةً",
+    "ADJ;GEN;SG;FEM;INDF": "سَاخِنَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "السَّاخِنَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "السَّاخِنَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "السَّاخِنَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "سَاخِنَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "سَاخِنَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "سَاخِنَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "السَّاخِنَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "السَّاخِنَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "السَّاخِنَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "سَاخِنَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "سَاخِنَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "سَاخِنَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "السَّاخِنَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "السَّاخِنَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "السَّاخِنَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "سَاخِنُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "سَاخِنِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "سَاخِنِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "السَّاخِنُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "السَّاخِنِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "السَّاخِنِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "سَاخِنَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "سَاخِنَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "سَاخِنَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "السَّاخِنَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "السَّاخِنَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "السَّاخِنَاتِ",
+    "ADJ;CMPR;NOM": "أَسْخَنُ",
+    "ADJ;CMPR;ACC": "أَسْخَنَ",
+    "ADJ;CMPR;GEN": "أَسْخَنَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَسْخَنُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَسْخَنَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَسْخَنِ",
+    "ADJ;SPRL;NOM;CONST": "أَسْخَنُ",
+    "ADJ;SPRL;ACC;CONST": "أَسْخَنَ",
+    "ADJ;SPRL;GEN;CONST": "أَسْخَنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A steaming cup, hot soup, hot water.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hot (to the touch: drinks, food, water, objects)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.hot"
+     },
+     {
+      "id": "s2",
+      "def": "feverish",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.feverish"
+     },
+     {
+      "id": "s3",
+      "def": "hot, tense (news, places): مَنَاطِقُ سَاخِنَةٌ, hot spots",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْقَهْوَةُ سَاخِنَةٌ.",
+      "tr": "The coffee is hot.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ مَاءً سَاخِنًا.",
+      "tr": "I want hot water.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَسَاءُ سَاخِنٌ جِدًّا.",
+      "tr": "The soup is very hot.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "الطِّفْلُ سَاخِنٌ الْيَوْمَ.",
+      "tr": "The child has a temperature today.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَاءٌ سَاخِنٌ",
+      "tr": "hot water"
+     },
+     {
+      "text": "شَايٌ سَاخِنٌ",
+      "tr": "hot tea"
+     },
+     {
+      "text": "خُبْزٌ سَاخِنٌ",
+      "tr": "warm, freshly baked bread"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَارّ",
+      "register": "neutral",
+      "nuance": "hot — weather and climate; spicy food"
+     },
+     {
+      "word": "دَافِئ",
+      "register": "neutral",
+      "nuance": "warm, not hot"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَارِد",
+      "note": "cold"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of سَخَنَ / سَخِنَ / سَخُنَ (“to be or become hot”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Egyptian and Levantine Arabic سُخْن (sukhn) is the everyday word for hot."
+    ],
+    "pitfalls": [
+     "سَاخِن is for things you touch, eat or drink; for the weather say حَارّ: الْجَوُّ حَارٌّ."
+    ],
+    "subtleties": [
+     "Drinks: شَايٌ سَاخِنٌ (hot tea) / عَصِيرٌ بَارِدٌ (a cold juice) — the classic café pair."
+    ]
+   }
+  },
+  {
+   "id": "ar:barid",
+   "lemma": "بَارِد",
+   "pos": "ADJ",
+   "senses": [
+    "adj.cold",
+    "adj.dull"
+   ],
+   "features": {
+    "root": "ب ر د",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of بَرَدَ (to be cold)",
+    "feminine": "بَارِدَة",
+    "plurals": [
+     {
+      "form": "بَارِدُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَبْرَد",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "bārid",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "بَارِدٌ",
+    "ADJ;ACC;SG;MASC;INDF": "بَارِدًا",
+    "ADJ;GEN;SG;MASC;INDF": "بَارِدٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْبَارِدُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْبَارِدَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْبَارِدِ",
+    "ADJ;NOM;SG;FEM;INDF": "بَارِدَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "بَارِدَةً",
+    "ADJ;GEN;SG;FEM;INDF": "بَارِدَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبَارِدَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبَارِدَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبَارِدَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "بَارِدَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "بَارِدَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "بَارِدَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْبَارِدَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْبَارِدَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْبَارِدَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بَارِدَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بَارِدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بَارِدَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبَارِدَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبَارِدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبَارِدَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بَارِدُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "بَارِدِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "بَارِدِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبَارِدُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبَارِدِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبَارِدِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "بَارِدَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بَارِدَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "بَارِدَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبَارِدَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبَارِدَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبَارِدَاتِ",
+    "ADJ;CMPR;NOM": "أَبْرَدُ",
+    "ADJ;CMPR;ACC": "أَبْرَدَ",
+    "ADJ;CMPR;GEN": "أَبْرَدَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَبْرَدُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَبْرَدَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَبْرَدِ",
+    "ADJ;SPRL;NOM;CONST": "أَبْرَدُ",
+    "ADJ;SPRL;ACC;CONST": "أَبْرَدَ",
+    "ADJ;SPRL;GEN;CONST": "أَبْرَدِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold water, cold winters, cold drinks in the heat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cold",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.cold"
+     },
+     {
+      "id": "s2",
+      "def": "dull, flat, unfunny (a joke, a person)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.dull"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَاءُ بَارِدٌ.",
+      "tr": "The water is cold.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "الشِّتَاءُ بَارِدٌ هُنَا.",
+      "tr": "Winter is cold here.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ عَصِيرًا بَارِدًا.",
+      "tr": "I want a cold juice.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ نُكْتَةٌ بَارِدَةٌ!",
+      "tr": "That is a lame joke!",
+      "register": "colloquial",
+      "context": "humour",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَاءٌ بَارِدٌ",
+      "tr": "cold water"
+     },
+     {
+      "text": "طَقْسٌ بَارِدٌ",
+      "tr": "cold weather"
+     },
+     {
+      "text": "الْحَرْبُ الْبَارِدَةُ",
+      "tr": "the Cold War"
+     },
+     {
+      "text": "مَشْرُوبَاتٌ بَارِدَةٌ",
+      "tr": "cold drinks"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَرْدَان",
+      "register": "colloquial",
+      "nuance": "feeling cold (of a person): أَنَا بَرْدَانُ, I’m cold"
+     },
+     {
+      "word": "مُثَلَّج",
+      "register": "neutral",
+      "nuance": "iced, chilled"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "حَارّ",
+      "note": "hot (weather)"
+     },
+     {
+      "word": "سَاخِن",
+      "note": "hot (to the touch)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of بَرَدَ (barada, “to be cold, to freeze”); cognate with Amharic ብርድ (bɨrd, cold).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Qurʾān the fire is told to be بَرْدًا وَسَلَامًا, “coolness and peace”, for Abraham (21:69) — in hot lands coolness is a blessing."
+    ],
+    "pitfalls": [
+     "“I’m cold” is not أَنَا بَارِدٌ (that sounds like “I’m a cold, dull person”): say أَشْعُرُ بِالْبَرْدِ (I feel cold), colloquially أَنَا بَرْدَانُ."
+    ],
+    "subtleties": [
+     "Weather: الْجَوُّ بَارِدٌ (it is cold) — a sentence with no verb."
+    ]
+   }
+  },
+  {
+   "id": "ar:dafi",
+   "lemma": "دَافِئ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.warm",
+    "adj.heartfelt"
+   ],
+   "features": {
+    "root": "د ف ء",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "derivedFrom": "the active participle of دَفِئَ (to be warm)",
+    "feminine": "دَافِئَة",
+    "plurals": [
+     {
+      "form": "دَافِئُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَدْفَأ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.heartfelt",
+     "axis": "strength",
+     "value": "warm and gentle, friendly (a voice, an atmosphere)"
+    }
+   ],
+   "translit": "dāfiʾ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "دَافِئٌ",
+    "ADJ;ACC;SG;MASC;INDF": "دَافِئًا",
+    "ADJ;GEN;SG;MASC;INDF": "دَافِئٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الدَّافِئُ",
+    "ADJ;ACC;SG;MASC;DEF": "الدَّافِئَ",
+    "ADJ;GEN;SG;MASC;DEF": "الدَّافِئِ",
+    "ADJ;NOM;SG;FEM;INDF": "دَافِئَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "دَافِئَةً",
+    "ADJ;GEN;SG;FEM;INDF": "دَافِئَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الدَّافِئَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الدَّافِئَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الدَّافِئَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "دَافِئَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "دَافِئَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "دَافِئَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الدَّافِئَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الدَّافِئَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الدَّافِئَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "دَافِئَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "دَافِئَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "دَافِئَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الدَّافِئَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الدَّافِئَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الدَّافِئَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "دَافِئُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "دَافِئِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "دَافِئِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الدَّافِئُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الدَّافِئِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الدَّافِئِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "دَافِئَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "دَافِئَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "دَافِئَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الدَّافِئَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الدَّافِئَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الدَّافِئَاتِ",
+    "ADJ;CMPR;NOM": "أَدْفَأُ",
+    "ADJ;CMPR;ACC": "أَدْفَأَ",
+    "ADJ;CMPR;GEN": "أَدْفَأَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَدْفَأُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَدْفَأَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَدْفَأِ",
+    "ADJ;SPRL;NOM;CONST": "أَدْفَأُ",
+    "ADJ;SPRL;ACC;CONST": "أَدْفَأَ",
+    "ADJ;SPRL;GEN;CONST": "أَدْفَأِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Comfort: a warm room, warm milk, a warm spring day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "warm",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.warm"
+     },
+     {
+      "id": "s2",
+      "def": "warm, friendly (a meeting, a voice)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.heartfelt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْغُرْفَةُ دَافِئَةٌ.",
+      "tr": "The room is warm.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الرَّبِيعُ دَافِئٌ.",
+      "tr": "Spring is warm.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "أَشْرَبُ حَلِيبًا دَافِئًا قَبْلَ النَّوْمِ.",
+      "tr": "I drink warm milk before sleeping.",
+      "register": "neutral",
+      "context": "evening",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَ لِقَاءً دَافِئًا.",
+      "tr": "It was a warm meeting.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَاءٌ دَافِئٌ",
+      "tr": "warm water"
+     },
+     {
+      "text": "جَوٌّ دَافِئٌ",
+      "tr": "warm weather"
+     },
+     {
+      "text": "مَلَابِسُ دَافِئَةٌ",
+      "tr": "warm clothes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فَاتِر",
+      "register": "neutral",
+      "nuance": "lukewarm, tepid — also half-hearted"
+     },
+     {
+      "word": "حَارّ",
+      "register": "neutral",
+      "nuance": "hot"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَارِد",
+      "note": "cold"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of دَفِئَ / دَفُؤَ (“to be warm”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its root gives دِفْء (warmth) and مِدْفَأَة (a heater, a stove)."
+    ],
+    "pitfalls": [
+     "The hamza sits on a yāʾ in every form: دَافِئٌ, دَافِئَةٌ, دَافِئًا.",
+     "“I feel warm” is أَشْعُرُ بِالدِّفْءِ, not أَنَا دَافِئٌ."
+    ],
+    "subtleties": [
+     "Things in the plural agree in the feminine singular: مَلَابِسُ دَافِئَةٌ (warm clothes)."
+    ]
+   }
+  },
+  {
+   "id": "ar:jamil",
+   "lemma": "جَمِيل",
+   "pos": "ADJ",
+   "senses": [
+    "adj.beautiful"
+   ],
+   "features": {
+    "root": "ج م ل",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "جَمِيلَة",
+    "plurals": [
+     {
+      "form": "جَمِيلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَجْمَل",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "jamīl",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "جَمِيلٌ",
+    "ADJ;ACC;SG;MASC;INDF": "جَمِيلًا",
+    "ADJ;GEN;SG;MASC;INDF": "جَمِيلٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْجَمِيلُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْجَمِيلَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْجَمِيلِ",
+    "ADJ;NOM;SG;FEM;INDF": "جَمِيلَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "جَمِيلَةً",
+    "ADJ;GEN;SG;FEM;INDF": "جَمِيلَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْجَمِيلَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْجَمِيلَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْجَمِيلَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "جَمِيلَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "جَمِيلَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "جَمِيلَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْجَمِيلَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْجَمِيلَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْجَمِيلَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "جَمِيلَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "جَمِيلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "جَمِيلَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْجَمِيلَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْجَمِيلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْجَمِيلَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "جَمِيلُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "جَمِيلِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "جَمِيلِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْجَمِيلُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْجَمِيلِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْجَمِيلِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "جَمِيلَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "جَمِيلَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "جَمِيلَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْجَمِيلَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْجَمِيلَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْجَمِيلَاتِ",
+    "ADJ;CMPR;NOM": "أَجْمَلُ",
+    "ADJ;CMPR;ACC": "أَجْمَلَ",
+    "ADJ;CMPR;GEN": "أَجْمَلَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَجْمَلُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَجْمَلَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَجْمَلِ",
+    "ADJ;SPRL;NOM;CONST": "أَجْمَلُ",
+    "ADJ;SPRL;ACC;CONST": "أَجْمَلَ",
+    "ADJ;SPRL;GEN;CONST": "أَجْمَلِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "جُمَلَاءُ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "جُمَلَاءَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "جُمَلَاءَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْجُمَلَاءُ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْجُمَلَاءَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْجُمَلَاءِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Beauty everywhere: a beautiful garden, a lovely day, a nice idea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beautiful, pretty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.beautiful"
+     },
+     {
+      "id": "s2",
+      "def": "nice, lovely (things, ideas, days)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَدِيقَةُ جَمِيلَةٌ.",
+      "tr": "The garden is beautiful.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ مَدِينَةٌ جَمِيلَةٌ.",
+      "tr": "This is a beautiful city.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "يَوْمٌ جَمِيلٌ!",
+      "tr": "A lovely day!",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s2"
+     },
+     {
+      "text": "مَا أَجْمَلَ الْبَحْرَ!",
+      "tr": "How beautiful the sea is!",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَنْظَرٌ جَمِيلٌ",
+      "tr": "a beautiful view"
+     },
+     {
+      "text": "صَوْتٌ جَمِيلٌ",
+      "tr": "a beautiful voice"
+     },
+     {
+      "text": "شَيْءٌ جَمِيلٌ",
+      "tr": "something nice"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "رَدُّ الْجَمِيلِ",
+      "tr": "returning the kindness",
+      "kind": "fixed expression",
+      "meaning": "repaying a favour (الْجَمِيل here is a noun: a good deed)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "حِلْو",
+      "register": "colloquial",
+      "nuance": "sweet, pretty, nice — the everyday word in many dialects"
+     },
+     {
+      "word": "وَسِيم",
+      "register": "neutral",
+      "nuance": "handsome — of men"
+     },
+     {
+      "word": "رَائِع",
+      "register": "neutral",
+      "nuance": "wonderful, splendid"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "قَبِيح",
+      "note": "ugly"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ج م ل (j m l), whose noun جَمَال is “beauty”; elative أَجْمَل (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَا أَجْمَلَ …! is the Arabic exclamation “how beautiful …!” — the elative with -a after مَا.",
+     "The camel, جَمَل, is written with the same root letters ج م ل; Greek κάμηλος and English camel come from the Semitic word."
+    ],
+    "pitfalls": [
+     "For a man, وَسِيم (handsome) is the usual compliment; جَمِيل is said of women, things and places."
+    ],
+    "subtleties": [
+     "As a noun, الْجَمِيل is a favour, a good deed: لَنْ أَنْسَى جَمِيلَكَ, I won’t forget your kindness."
+    ]
+   }
+  },
+  {
+   "id": "ar:qabih",
+   "lemma": "قَبِيح",
+   "pos": "ADJ",
+   "senses": [
+    "adj.ugly"
+   ],
+   "features": {
+    "root": "ق ب ح",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَبِيحَة",
+    "plurals": [
+     {
+      "form": "قِبَاح",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْبَح",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "qabīḥ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "قَبِيحٌ",
+    "ADJ;ACC;SG;MASC;INDF": "قَبِيحًا",
+    "ADJ;GEN;SG;MASC;INDF": "قَبِيحٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْقَبِيحُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْقَبِيحَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْقَبِيحِ",
+    "ADJ;NOM;SG;FEM;INDF": "قَبِيحَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "قَبِيحَةً",
+    "ADJ;GEN;SG;FEM;INDF": "قَبِيحَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْقَبِيحَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْقَبِيحَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْقَبِيحَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "قَبِيحَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "قَبِيحَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "قَبِيحَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْقَبِيحَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْقَبِيحَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْقَبِيحَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "قَبِيحَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "قَبِيحَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "قَبِيحَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْقَبِيحَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْقَبِيحَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْقَبِيحَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "قِبَاحٌ",
+    "ADJ;ACC;PL;MASC;INDF": "قِبَاحًا",
+    "ADJ;GEN;PL;MASC;INDF": "قِبَاحٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْقِبَاحُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْقِبَاحَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْقِبَاحِ",
+    "ADJ;NOM;PL;FEM;INDF": "قَبِيحَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "قَبِيحَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "قَبِيحَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْقَبِيحَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْقَبِيحَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْقَبِيحَاتِ",
+    "ADJ;CMPR;NOM": "أَقْبَحُ",
+    "ADJ;CMPR;ACC": "أَقْبَحَ",
+    "ADJ;CMPR;GEN": "أَقْبَحَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَقْبَحُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَقْبَحَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَقْبَحِ",
+    "ADJ;SPRL;NOM;CONST": "أَقْبَحُ",
+    "ADJ;SPRL;ACC;CONST": "أَقْبَحَ",
+    "ADJ;SPRL;GEN;CONST": "أَقْبَحِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "قَبِيحُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "قَبِيحِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "قَبِيحِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْقَبِيحُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْقَبِيحِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْقَبِيحِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "A strong word: ugly to look at, or shameful.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ugly",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.ugly"
+     },
+     {
+      "id": "s2",
+      "def": "vile, shameful, bad (deeds, words)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا الْمِصْبَاحُ قَبِيحٌ.",
+      "tr": "This lamp is ugly.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبِنَايَةُ الْجَدِيدَةُ قَبِيحَةٌ.",
+      "tr": "The new building is ugly.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا كَلَامٌ قَبِيحٌ!",
+      "tr": "Those are ugly (shameful) words!",
+      "register": "neutral",
+      "context": "behaviour",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَجْهٌ قَبِيحٌ",
+      "tr": "an ugly face"
+     },
+     {
+      "text": "عَمَلٌ قَبِيحٌ",
+      "tr": "a shameful act"
+     },
+     {
+      "text": "كَلَامٌ قَبِيحٌ",
+      "tr": "foul language"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَشِع",
+      "register": "neutral",
+      "nuance": "hideous, horrible — stronger"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "جَمِيل",
+      "note": "beautiful"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ق ب ح (q b ḥ), whose noun قُبْح is “ugliness”; elative أَقْبَح (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Islamic theology debated الْحُسْن وَالْقُبْح, “the beautiful and the ugly” — whether good and evil can be known by reason."
+    ],
+    "pitfalls": [
+     "About a person’s looks it is rude; speakers soften it: لَيْسَ جَمِيلًا (not beautiful)."
+    ],
+    "subtleties": [
+     "Often moral rather than visual: فِعْلٌ قَبِيحٌ, a shameful deed."
+    ]
+   }
+  },
+  {
+   "id": "ar:sahl",
+   "lemma": "سَهْل",
+   "pos": "ADJ",
+   "senses": [
+    "adj.easy",
+    "nature.plain"
+   ],
+   "features": {
+    "root": "س ه ل",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "سَهْلَة",
+    "plurals": [
+     {
+      "form": "سَهْلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "easy-going (people)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "سُهُول",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "as a noun: plains",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْهَل",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "translit": "sahl",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "سَهْلٌ",
+    "ADJ;ACC;SG;MASC;INDF": "سَهْلًا",
+    "ADJ;GEN;SG;MASC;INDF": "سَهْلٍ",
+    "ADJ;NOM;SG;MASC;DEF": "السَّهْلُ",
+    "ADJ;ACC;SG;MASC;DEF": "السَّهْلَ",
+    "ADJ;GEN;SG;MASC;DEF": "السَّهْلِ",
+    "ADJ;NOM;SG;FEM;INDF": "سَهْلَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "سَهْلَةً",
+    "ADJ;GEN;SG;FEM;INDF": "سَهْلَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "السَّهْلَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "السَّهْلَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "السَّهْلَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "سَهْلَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "سَهْلَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "سَهْلَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "السَّهْلَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "السَّهْلَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "السَّهْلَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "سَهْلَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "سَهْلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "سَهْلَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "السَّهْلَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "السَّهْلَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "السَّهْلَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "سَهْلُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "سَهْلِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "سَهْلِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "السَّهْلُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "السَّهْلِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "السَّهْلِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "سَهْلَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "سَهْلَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "سَهْلَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "السَّهْلَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "السَّهْلَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "السَّهْلَاتِ",
+    "ADJ;CMPR;NOM": "أَسْهَلُ",
+    "ADJ;CMPR;ACC": "أَسْهَلَ",
+    "ADJ;CMPR;GEN": "أَسْهَلَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَسْهَلُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَسْهَلَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَسْهَلِ",
+    "ADJ;SPRL;NOM;CONST": "أَسْهَلُ",
+    "ADJ;SPRL;ACC;CONST": "أَسْهَلَ",
+    "ADJ;SPRL;GEN;CONST": "أَسْهَلِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Relief: an easy question, an easy way.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "easy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.easy"
+     },
+     {
+      "id": "s2",
+      "def": "flat, level (land); as a noun: a plain",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.plain"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا السُّؤَالُ سَهْلٌ.",
+      "tr": "This question is easy.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "الْعَرَبِيَّةُ لَيْسَتْ سَهْلَةً.",
+      "tr": "Arabic is not easy.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا كِتَابٌ سَهْلٌ.",
+      "tr": "This is an easy book.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "زَرَعَ الْفَلَّاحُونَ الْقَمْحَ فِي أَرْضٍ سَهْلَةٍ.",
+      "tr": "The farmers grew wheat on flat land.",
+      "register": "neutral",
+      "context": "farming",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سُؤَالٌ سَهْلٌ",
+      "tr": "an easy question"
+     },
+     {
+      "text": "سَهْلٌ جِدًّا",
+      "tr": "very easy"
+     },
+     {
+      "text": "مِنَ السَّهْلِ أَنْ …",
+      "tr": "it is easy to …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "أَهْلًا وَسَهْلًا",
+      "tr": "family and level ground",
+      "kind": "fixed expression",
+      "meaning": "Welcome! — you have come to your people and to easy, level land",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "يَسِير",
+      "register": "formal",
+      "nuance": "easy, simple; also small, slight"
+     },
+     {
+      "word": "بَسِيط",
+      "register": "neutral",
+      "nuance": "simple, plain"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَعْب",
+      "note": "difficult"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root س ه ل (s h l), with the verb سَهُلَ, “to be easy”; elative أَسْهَل (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أَهْلًا وَسَهْلًا, the great Arabic welcome, contains it: “(you have come to) family and level ground”."
+    ],
+    "pitfalls": [
+     "“Easily” is بِسُهُولَةٍ, not سَهْلًا.",
+     "Things in the plural: الْأَسْئِلَةُ سَهْلَةٌ (feminine singular)."
+    ],
+    "subtleties": [
+     "“It is easy to …” = مِنَ السَّهْلِ أَنْ … — the adjective is used as a noun."
+    ]
+   }
+  },
+  {
+   "id": "ar:sab",
+   "lemma": "صَعْب",
+   "pos": "ADJ",
+   "senses": [
+    "adj.difficult"
+   ],
+   "features": {
+    "root": "ص ع ب",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "صَعْبَة",
+    "plurals": [
+     {
+      "form": "صِعَاب",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَصْعَب",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ṣaʿb",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "صَعْبٌ",
+    "ADJ;ACC;SG;MASC;INDF": "صَعْبًا",
+    "ADJ;GEN;SG;MASC;INDF": "صَعْبٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الصَّعْبُ",
+    "ADJ;ACC;SG;MASC;DEF": "الصَّعْبَ",
+    "ADJ;GEN;SG;MASC;DEF": "الصَّعْبِ",
+    "ADJ;NOM;SG;FEM;INDF": "صَعْبَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "صَعْبَةً",
+    "ADJ;GEN;SG;FEM;INDF": "صَعْبَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الصَّعْبَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الصَّعْبَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الصَّعْبَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "صَعْبَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "صَعْبَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "صَعْبَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الصَّعْبَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الصَّعْبَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الصَّعْبَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "صَعْبَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "صَعْبَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "صَعْبَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الصَّعْبَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الصَّعْبَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الصَّعْبَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "صِعَابٌ",
+    "ADJ;ACC;PL;MASC;INDF": "صِعَابًا",
+    "ADJ;GEN;PL;MASC;INDF": "صِعَابٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الصِّعَابُ",
+    "ADJ;ACC;PL;MASC;DEF": "الصِّعَابَ",
+    "ADJ;GEN;PL;MASC;DEF": "الصِّعَابِ",
+    "ADJ;NOM;PL;FEM;INDF": "صَعْبَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "صَعْبَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "صَعْبَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الصَّعْبَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الصَّعْبَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الصَّعْبَاتِ",
+    "ADJ;CMPR;NOM": "أَصْعَبُ",
+    "ADJ;CMPR;ACC": "أَصْعَبَ",
+    "ADJ;CMPR;GEN": "أَصْعَبَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَصْعَبُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَصْعَبَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَصْعَبِ",
+    "ADJ;SPRL;NOM;CONST": "أَصْعَبُ",
+    "ADJ;SPRL;ACC;CONST": "أَصْعَبَ",
+    "ADJ;SPRL;GEN;CONST": "أَصْعَبِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Effort: hard work, hard questions, hard times.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "difficult, hard",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.difficult"
+     },
+     {
+      "id": "s2",
+      "def": "hard to handle (a person)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْعَمَلُ صَعْبٌ.",
+      "tr": "The work is hard.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "الْعَرَبِيَّةُ صَعْبَةٌ لٰكِنَّهَا جَمِيلَةٌ.",
+      "tr": "Arabic is hard, but it is beautiful.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا سُؤَالٌ صَعْبٌ.",
+      "tr": "This is a difficult question.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سُؤَالٌ صَعْبٌ",
+      "tr": "a difficult question"
+     },
+     {
+      "text": "وَقْتٌ صَعْبٌ",
+      "tr": "a hard time"
+     },
+     {
+      "text": "مِنَ الصَّعْبِ أَنْ …",
+      "tr": "it is hard to …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "صَعْبُ الْمِرَاسِ",
+      "tr": "hard to handle",
+      "kind": "fixed expression",
+      "meaning": "difficult to deal with, stubborn (of a person)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "شَاقّ",
+      "register": "neutral",
+      "nuance": "arduous, exhausting — work, a journey"
+     },
+     {
+      "word": "عَسِير",
+      "register": "formal",
+      "nuance": "hard, difficult — literary"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "سَهْل",
+      "note": "easy"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ص ع ب (ṣ ʿ b), with the verb صَعُبَ, “to be hard, difficult” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its plural صِعَاب is mostly used as a noun, “difficulties”: تَغَلَّبَ عَلَى الصِّعَابِ, he overcame the difficulties."
+    ],
+    "pitfalls": [
+     "Things in the plural: الْأَسْئِلَةُ صَعْبَةٌ (feminine singular)."
+    ],
+    "subtleties": [
+     "“It is hard for me” = هٰذَا صَعْبٌ عَلَيَّ — with عَلَى."
+    ]
+   }
+  },
+  {
+   "id": "ar:rakhis",
+   "lemma": "رَخِيص",
+   "pos": "ADJ",
+   "senses": [
+    "adj.cheap"
+   ],
+   "features": {
+    "root": "ر خ ص",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": "faʿīl of رَخُصَ (to be cheap)",
+    "feminine": "رَخِيصَة",
+    "plurals": [
+     {
+      "form": "رَخِيصُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَرْخَص",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "raḫīṣ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "رَخِيصٌ",
+    "ADJ;ACC;SG;MASC;INDF": "رَخِيصًا",
+    "ADJ;GEN;SG;MASC;INDF": "رَخِيصٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الرَّخِيصُ",
+    "ADJ;ACC;SG;MASC;DEF": "الرَّخِيصَ",
+    "ADJ;GEN;SG;MASC;DEF": "الرَّخِيصِ",
+    "ADJ;NOM;SG;FEM;INDF": "رَخِيصَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "رَخِيصَةً",
+    "ADJ;GEN;SG;FEM;INDF": "رَخِيصَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الرَّخِيصَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الرَّخِيصَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الرَّخِيصَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "رَخِيصَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "رَخِيصَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "رَخِيصَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الرَّخِيصَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الرَّخِيصَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الرَّخِيصَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "رَخِيصَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "رَخِيصَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "رَخِيصَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الرَّخِيصَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الرَّخِيصَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الرَّخِيصَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "رَخِيصُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "رَخِيصِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "رَخِيصِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الرَّخِيصُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الرَّخِيصِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الرَّخِيصِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "رَخِيصَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "رَخِيصَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "رَخِيصَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الرَّخِيصَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الرَّخِيصَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الرَّخِيصَاتِ",
+    "ADJ;CMPR;NOM": "أَرْخَصُ",
+    "ADJ;CMPR;ACC": "أَرْخَصَ",
+    "ADJ;CMPR;GEN": "أَرْخَصَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَرْخَصُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَرْخَصَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَرْخَصِ",
+    "ADJ;SPRL;NOM;CONST": "أَرْخَصُ",
+    "ADJ;SPRL;ACC;CONST": "أَرْخَصَ",
+    "ADJ;SPRL;GEN;CONST": "أَرْخَصِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bargain at the market.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cheap, low in price",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.cheap"
+     },
+     {
+      "id": "s2",
+      "def": "cheap, worthless, base (pejorative)",
+      "register": [
+       "pejorative"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْخُبْزُ رَخِيصٌ.",
+      "tr": "Bread is cheap.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْمَطْعَمُ رَخِيصٌ وَجَيِّدٌ.",
+      "tr": "This restaurant is cheap and good.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "الْخُضَارُ رَخِيصَةٌ فِي السُّوقِ.",
+      "tr": "Vegetables are cheap at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِسِعْرٍ رَخِيصٍ",
+      "tr": "at a low price"
+     },
+     {
+      "text": "رَخِيصٌ جِدًّا",
+      "tr": "very cheap"
+     },
+     {
+      "text": "أَرْخَصُ مِنْ …",
+      "tr": "cheaper than …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَهِيد",
+      "register": "formal",
+      "nuance": "low, modest — prices and sums: بِمَبْلَغٍ زَهِيدٍ"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "غَالٍ",
+      "note": "expensive"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: an adjective of the pattern فَعِيل from the verb رَخُصَ (“to be cheap”); cognate with Amharic ርካሽ (rɨkaš, “cheap”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Amharic ርካሽ (rɨkaš) is the same Semitic word (Wiktionary)."
+    ],
+    "pitfalls": [
+     "About a person or behaviour it is an insult (cheap, base) — use it for prices."
+    ],
+    "subtleties": [
+     "At the market: هَلْ عِنْدَكَ شَيْءٌ أَرْخَصُ؟ — do you have something cheaper?"
+    ]
+   }
+  },
+  {
+   "id": "ar:ghali",
+   "lemma": "غَالٍ",
+   "pos": "ADJ",
+   "senses": [
+    "adj.expensive",
+    "adj.dear"
+   ],
+   "features": {
+    "root": "غ ل و",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of غَلَا (to be expensive)",
+    "feminine": "غَالِيَة",
+    "plurals": [
+     {
+      "form": "غَالُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "defective",
+    "elative": "أَغْلَى",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ġālī",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "غَالٍ",
+    "ADJ;ACC;SG;MASC;INDF": "غَالِيًا",
+    "ADJ;GEN;SG;MASC;INDF": "غَالٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْغَالِي",
+    "ADJ;ACC;SG;MASC;DEF": "الْغَالِيَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْغَالِي",
+    "ADJ;NOM;SG;FEM;INDF": "غَالِيَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "غَالِيَةً",
+    "ADJ;GEN;SG;FEM;INDF": "غَالِيَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْغَالِيَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْغَالِيَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْغَالِيَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "غَالِيَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "غَالِيَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "غَالِيَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْغَالِيَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْغَالِيَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْغَالِيَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "غَالِيَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "غَالِيَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "غَالِيَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْغَالِيَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْغَالِيَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْغَالِيَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "غَالُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "غَالِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "غَالِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْغَالُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْغَالِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْغَالِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "غَالِيَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "غَالِيَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "غَالِيَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْغَالِيَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْغَالِيَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْغَالِيَاتِ",
+    "ADJ;CMPR;NOM": "أَغْلَى",
+    "ADJ;CMPR;ACC": "أَغْلَى",
+    "ADJ;CMPR;GEN": "أَغْلَى",
+    "ADJ;SPRL;NOM;DEF": "الْأَغْلَى",
+    "ADJ;SPRL;ACC;DEF": "الْأَغْلَى",
+    "ADJ;SPRL;GEN;DEF": "الْأَغْلَى",
+    "ADJ;SPRL;NOM;CONST": "أَغْلَى",
+    "ADJ;SPRL;ACC;CONST": "أَغْلَى",
+    "ADJ;SPRL;GEN;CONST": "أَغْلَى"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "High prices — and people who are dear to us.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "expensive, dear, costly",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.expensive"
+     },
+     {
+      "id": "s2",
+      "def": "dear, precious (to someone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.dear"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْهَاتِفُ غَالٍ.",
+      "tr": "The phone is expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ السَّيَّارَةُ غَالِيَةٌ جِدًّا.",
+      "tr": "This car is very expensive.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا آكُلُ فِي الْمَطَاعِمِ الْغَالِيَةِ.",
+      "tr": "I don’t eat in expensive restaurants.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنْتَ غَالٍ عَلَيَّ.",
+      "tr": "You are dear to me.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ثَمَنٌ غَالٍ",
+      "tr": "a high price (also figurative)"
+     },
+     {
+      "text": "غَالٍ جِدًّا",
+      "tr": "very expensive"
+     },
+     {
+      "text": "أَغْلَى مِنْ …",
+      "tr": "more expensive than …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ثَمِين",
+      "register": "neutral",
+      "nuance": "precious, valuable — worth a lot, not just pricey"
+     },
+     {
+      "word": "مُكْلِف",
+      "register": "neutral",
+      "nuance": "costly — of an activity: السَّفَرُ مُكْلِفٌ"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "رَخِيص",
+      "note": "cheap"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of غَلَا (ġalā, “to be excessive, to be or become expensive”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary also gives it the sense “boiling” (the verb غَلَى is “to boil”): prices that boil over.",
+     "Its elative أَغْلَى never changes its ending: هٰذَا أَغْلَى مِنْ ذٰلِكَ."
+    ],
+    "pitfalls": [
+     "A defective adjective: غَالٍ (nominative and genitive without al-), غَالِيًا (accusative), الْغَالِي (with al-); the feminine غَالِيَةٌ is regular.",
+     "In speech you hear غَالِي everywhere; in careful writing it is غَالٍ."
+    ],
+    "subtleties": [
+     "يَا غَالِي (my dear) is a warm way to address a friend in many dialects."
+    ]
+   }
+  },
+  {
+   "id": "ar:said",
+   "lemma": "سَعِيد",
+   "pos": "ADJ",
+   "senses": [
+    "adj.happy",
+    "adj.lucky"
+   ],
+   "features": {
+    "root": "س ع د",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": "faʿīl of سَعِدَ (to be happy)",
+    "feminine": "سَعِيدَة",
+    "plurals": [
+     {
+      "form": "سُعَدَاء",
+      "kind": "broken",
+      "pattern": "فُعَلَاء",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْعَد",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "saʿīd",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "سَعِيدٌ",
+    "ADJ;ACC;SG;MASC;INDF": "سَعِيدًا",
+    "ADJ;GEN;SG;MASC;INDF": "سَعِيدٍ",
+    "ADJ;NOM;SG;MASC;DEF": "السَّعِيدُ",
+    "ADJ;ACC;SG;MASC;DEF": "السَّعِيدَ",
+    "ADJ;GEN;SG;MASC;DEF": "السَّعِيدِ",
+    "ADJ;NOM;SG;FEM;INDF": "سَعِيدَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "سَعِيدَةً",
+    "ADJ;GEN;SG;FEM;INDF": "سَعِيدَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "السَّعِيدَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "السَّعِيدَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "السَّعِيدَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "سَعِيدَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "سَعِيدَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "سَعِيدَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "السَّعِيدَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "السَّعِيدَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "السَّعِيدَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "سَعِيدَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "سَعِيدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "سَعِيدَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "السَّعِيدَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "السَّعِيدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "السَّعِيدَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "سُعَدَاءُ",
+    "ADJ;ACC;PL;MASC;INDF": "سُعَدَاءَ",
+    "ADJ;GEN;PL;MASC;INDF": "سُعَدَاءَ",
+    "ADJ;NOM;PL;MASC;DEF": "السُّعَدَاءُ",
+    "ADJ;ACC;PL;MASC;DEF": "السُّعَدَاءَ",
+    "ADJ;GEN;PL;MASC;DEF": "السُّعَدَاءِ",
+    "ADJ;NOM;PL;FEM;INDF": "سَعِيدَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "سَعِيدَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "سَعِيدَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "السَّعِيدَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "السَّعِيدَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "السَّعِيدَاتِ",
+    "ADJ;CMPR;NOM": "أَسْعَدُ",
+    "ADJ;CMPR;ACC": "أَسْعَدَ",
+    "ADJ;CMPR;GEN": "أَسْعَدَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَسْعَدُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَسْعَدَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَسْعَدِ",
+    "ADJ;SPRL;NOM;CONST": "أَسْعَدُ",
+    "ADJ;SPRL;ACC;CONST": "أَسْعَدَ",
+    "ADJ;SPRL;GEN;CONST": "أَسْعَدِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "سَعِيدُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "سَعِيدِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "سَعِيدِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "السَّعِيدُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "السَّعِيدِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "السَّعِيدِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Joy and good luck: a happy holiday, happy people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "happy, glad",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.happy"
+     },
+     {
+      "id": "s2",
+      "def": "lucky, fortunate, blessed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.lucky"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا سَعِيدٌ.",
+      "tr": "I am happy. (a man speaking)",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْنُ سُعَدَاءُ هُنَا.",
+      "tr": "We are happy here.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "عِيدٌ سَعِيدٌ!",
+      "tr": "Happy holiday!",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     },
+     {
+      "text": "أَنَا سَعِيدَةٌ بِلِقَائِكَ.",
+      "tr": "I’m happy to meet you. (a woman speaking)",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِيدٌ سَعِيدٌ",
+      "tr": "happy holiday (Eid)"
+     },
+     {
+      "text": "سَعِيدٌ بِـ …",
+      "tr": "happy about / with …"
+     },
+     {
+      "text": "حَظٌّ سَعِيدٌ",
+      "tr": "good luck!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "فُرْصَةٌ سَعِيدَةٌ",
+      "tr": "a happy opportunity",
+      "kind": "fixed expression",
+      "meaning": "nice to meet you (lesson 2)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "فَرْحَان",
+      "register": "colloquial",
+      "nuance": "glad, delighted — the joy of the moment"
+     },
+     {
+      "word": "مَسْرُور",
+      "register": "formal",
+      "nuance": "pleased, glad"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "حَزِين",
+      "note": "sad"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: an adjective of the pattern فَعِيل from the verb سَعِدَ (saʿida, “to become happy”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Romans called Yemen Arabia Felix, “happy Arabia” — in Arabic الْيَمَنُ السَّعِيدُ.",
+     "سَعِيد (Saeed) and سَعِيدَة are common names."
+    ],
+    "pitfalls": [
+     "Plural for people سُعَدَاءُ — a diptote, no tanwīn: نَحْنُ سُعَدَاءُ."
+    ],
+    "subtleties": [
+     "سَعِيد is lasting happiness and luck; فَرْحَان is joy at a moment."
+    ]
+   }
+  },
+  {
+   "id": "ar:hazin",
+   "lemma": "حَزِين",
+   "pos": "ADJ",
+   "senses": [
+    "adj.sad"
+   ],
+   "features": {
+    "root": "ح ز ن",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "حَزِينَة",
+    "plurals": [
+     {
+      "form": "حَزِينُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَحْزَن",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "ḥazīn",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "حَزِينٌ",
+    "ADJ;ACC;SG;MASC;INDF": "حَزِينًا",
+    "ADJ;GEN;SG;MASC;INDF": "حَزِينٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْحَزِينُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْحَزِينَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْحَزِينِ",
+    "ADJ;NOM;SG;FEM;INDF": "حَزِينَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "حَزِينَةً",
+    "ADJ;GEN;SG;FEM;INDF": "حَزِينَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْحَزِينَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْحَزِينَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْحَزِينَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "حَزِينَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "حَزِينَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "حَزِينَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْحَزِينَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْحَزِينَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْحَزِينَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "حَزِينَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "حَزِينَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "حَزِينَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْحَزِينَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْحَزِينَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْحَزِينَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "حَزِينُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "حَزِينِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "حَزِينِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْحَزِينُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْحَزِينِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْحَزِينِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "حَزِينَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "حَزِينَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "حَزِينَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْحَزِينَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْحَزِينَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْحَزِينَاتِ",
+    "ADJ;CMPR;NOM": "أَحْزَنُ",
+    "ADJ;CMPR;ACC": "أَحْزَنَ",
+    "ADJ;CMPR;GEN": "أَحْزَنَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَحْزَنُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَحْزَنَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَحْزَنِ",
+    "ADJ;SPRL;NOM;CONST": "أَحْزَنُ",
+    "ADJ;SPRL;ACC;CONST": "أَحْزَنَ",
+    "ADJ;SPRL;GEN;CONST": "أَحْزَنِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "حُزَنَاءُ",
+     "حَزَانَى"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "حُزَنَاءَ",
+     "حَزَانَى"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "حُزَنَاءَ",
+     "حَزَانَى"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْحُزَنَاءُ",
+     "الْحَزَانَى"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْحُزَنَاءَ",
+     "الْحَزَانَى"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْحُزَنَاءِ",
+     "الْحَزَانَى"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "Sadness: a sad face, a sad song, a sad story.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sad, sorrowful",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.sad"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هِيَ حَزِينَةٌ الْيَوْمَ.",
+      "tr": "She is sad today.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَاذَا أَنْتَ حَزِينٌ؟",
+      "tr": "Why are you sad?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الْأَغَانِيَ الْحَزِينَةَ.",
+      "tr": "I like sad songs.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قِصَّةٌ حَزِينَةٌ",
+      "tr": "a sad story"
+     },
+     {
+      "text": "خَبَرٌ حَزِينٌ",
+      "tr": "sad news"
+     },
+     {
+      "text": "حَزِينٌ عَلَى …",
+      "tr": "sad about …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "زَعْلَان",
+      "register": "colloquial",
+      "nuance": "upset, sad — also annoyed (Levant, Egypt)"
+     },
+     {
+      "word": "مَحْزُون",
+      "register": "literary",
+      "nuance": "grieved, sorrowful"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "سَعِيد",
+      "note": "happy"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ح ز ن (ḥ z n); Wiktionary: the verb حَزِنَ, “to be or become sad, to grieve”, and the noun حُزْن, “sadness”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "عَامُ الْحُزْنِ, “the Year of Sorrow”, is the year the Prophet Muḥammad lost his wife Khadīja and his uncle Abū Ṭālib."
+    ],
+    "pitfalls": [
+     "Several plurals exist for people (حَزِينُونَ, حُزَنَاءُ, حَزَانَى); حَزِينُونَ is the safest.",
+     "Things in the plural: الْأَغَانِي حَزِينَةٌ (feminine singular)."
+    ],
+    "subtleties": [
+     "“Sad about” = حَزِينٌ عَلَى …; “it makes me sad” = يُحْزِنُنِي."
+    ]
+   }
+  },
+  {
+   "id": "ar:mutab",
+   "lemma": "مُتْعَب",
+   "pos": "ADJ",
+   "senses": [
+    "adj.tired"
+   ],
+   "features": {
+    "root": "ت ع ب",
+    "pattern": "مُفْعَل",
+    "sunLetter": false,
+    "derivedFrom": "the passive participle of أَتْعَبَ (to tire someone), form IV",
+    "feminine": "مُتْعَبَة",
+    "plurals": [
+     {
+      "form": "مُتْعَبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a participle: more tired is أَكْثَرُ تَعَبًا"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "mutʿab",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "مُتْعَبٌ",
+    "ADJ;ACC;SG;MASC;INDF": "مُتْعَبًا",
+    "ADJ;GEN;SG;MASC;INDF": "مُتْعَبٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْمُتْعَبُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْمُتْعَبَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْمُتْعَبِ",
+    "ADJ;NOM;SG;FEM;INDF": "مُتْعَبَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "مُتْعَبَةً",
+    "ADJ;GEN;SG;FEM;INDF": "مُتْعَبَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْمُتْعَبَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْمُتْعَبَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْمُتْعَبَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "مُتْعَبَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "مُتْعَبَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "مُتْعَبَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْمُتْعَبَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْمُتْعَبَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْمُتْعَبَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "مُتْعَبَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "مُتْعَبَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "مُتْعَبَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْمُتْعَبَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْمُتْعَبَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْمُتْعَبَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "مُتْعَبُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "مُتْعَبِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "مُتْعَبِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْمُتْعَبُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْمُتْعَبِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْمُتْعَبِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "مُتْعَبَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "مُتْعَبَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "مُتْعَبَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْمُتْعَبَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْمُتْعَبَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْمُتْعَبَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of a long day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tired",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.tired"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا مُتْعَبٌ جِدًّا.",
+      "tr": "I am very tired.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ مُتْعَبَةٌ بَعْدَ الْعَمَلِ.",
+      "tr": "She is tired after work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْنُ مُتْعَبُونَ، نُرِيدُ أَنْ نَنَامَ.",
+      "tr": "We are tired; we want to sleep.",
+      "register": "neutral",
+      "context": "evening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُتْعَبٌ جِدًّا",
+      "tr": "very tired"
+     },
+     {
+      "text": "مُتْعَبٌ مِنَ الْعَمَلِ",
+      "tr": "tired from work"
+     },
+     {
+      "text": "مُتْعَبٌ قَلِيلًا",
+      "tr": "a little tired"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَعْبَان",
+      "register": "colloquial",
+      "nuance": "tired — the everyday word in speech (also heard in standard Arabic)"
+     },
+     {
+      "word": "مُرْهَق",
+      "register": "formal",
+      "nuance": "exhausted, worn out"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "مُرْتَاح",
+      "note": "rested, relaxed"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the passive participle of أَتْعَبَ (ʾatʿaba, “to tire”), the form IV causative of تَعِبَ (taʿiba, “to be tired”) — literally “made tired”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek has the same pair: κουρασμένος (tired) / κουραστικός (tiring); Arabic changes one vowel: مُتْعَب / مُتْعِب."
+    ],
+    "pitfalls": [
+     "مُتْعَب (mutʿab) = tired, مُتْعِب (mutʿib) = tiring: أَنَا مُتْعَبٌ لِأَنَّ الْعَمَلَ مُتْعِبٌ."
+    ],
+    "subtleties": [
+     "In speech تَعْبَان is far more common; مُتْعَب is the standard written word."
+    ]
+   }
+  },
+  {
+   "id": "ar:jai",
+   "lemma": "جَائِع",
+   "pos": "ADJ",
+   "senses": [
+    "adj.hungry"
+   ],
+   "features": {
+    "root": "ج و ع",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of جَاعَ (to be hungry)",
+    "feminine": "جَائِعَة",
+    "plurals": [
+     {
+      "form": "جِيَاع",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "usually أَشَدُّ جُوعًا (hungrier); أَجْوَعُ is rare"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "jāʾiʿ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "جَائِعٌ",
+    "ADJ;ACC;SG;MASC;INDF": "جَائِعًا",
+    "ADJ;GEN;SG;MASC;INDF": "جَائِعٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْجَائِعُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْجَائِعَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْجَائِعِ",
+    "ADJ;NOM;SG;FEM;INDF": "جَائِعَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "جَائِعَةً",
+    "ADJ;GEN;SG;FEM;INDF": "جَائِعَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْجَائِعَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْجَائِعَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْجَائِعَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "جَائِعَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "جَائِعَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "جَائِعَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْجَائِعَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْجَائِعَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْجَائِعَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "جَائِعَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "جَائِعَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "جَائِعَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْجَائِعَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْجَائِعَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْجَائِعَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "جِيَاعٌ",
+    "ADJ;ACC;PL;MASC;INDF": "جِيَاعًا",
+    "ADJ;GEN;PL;MASC;INDF": "جِيَاعٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْجِيَاعُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْجِيَاعَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْجِيَاعِ",
+    "ADJ;NOM;PL;FEM;INDF": "جَائِعَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "جَائِعَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "جَائِعَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْجَائِعَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْجَائِعَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْجَائِعَاتِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "جَائِعُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "جَائِعِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "جَائِعِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْجَائِعُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْجَائِعِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْجَائِعِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An empty stomach before dinner.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hungry",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.hungry"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا جَائِعٌ.",
+      "tr": "I am hungry. (a man speaking)",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ أَنْتِ جَائِعَةٌ؟",
+      "tr": "Are you hungry? (to a woman)",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَطْفَالُ جِيَاعٌ.",
+      "tr": "The children are hungry.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جَائِعٌ جِدًّا",
+      "tr": "very hungry"
+     },
+     {
+      "text": "جَائِعٌ وَعَطْشَانُ",
+      "tr": "hungry and thirsty"
+     },
+     {
+      "text": "أَطْفَالٌ جِيَاعٌ",
+      "tr": "hungry children"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جَوْعَان",
+      "register": "colloquial",
+      "nuance": "hungry — the everyday form in speech (pattern فَعْلَان, like عَطْشَان)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "شَبْعَان",
+      "note": "full, no longer hungry"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: derived from the active participle of جَاعَ (jāʿa, “to become hungry”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A common saying: الْجُوعُ كَافِرٌ — “hunger is an unbeliever”: a hungry person respects no rules."
+    ],
+    "pitfalls": [
+     "The hamza on a yāʾ: جَائِعٌ, جَائِعَةٌ.",
+     "Plural for people: جِيَاع (or جَائِعُونَ)."
+    ],
+    "subtleties": [
+     "“I am hungry” needs no verb: أَنَا جَائِعٌ — and a woman says أَنَا جَائِعَةٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:atshan",
+   "lemma": "عَطْشَان",
+   "pos": "ADJ",
+   "senses": [
+    "adj.thirsty"
+   ],
+   "features": {
+    "root": "ع ط ش",
+    "pattern": "فَعْلَان",
+    "sunLetter": false,
+    "derivedFrom": "عَطِشَ (to be thirsty) + -ān (faʿlān)",
+    "feminine": "عَطْشَى",
+    "plurals": [
+     {
+      "form": "عِطَاش",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "faʿlān: thirstier is أَشَدُّ عَطَشًا"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʿaṭšān",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "عَطْشَانُ",
+    "ADJ;ACC;SG;MASC;INDF": "عَطْشَانَ",
+    "ADJ;GEN;SG;MASC;INDF": "عَطْشَانَ",
+    "ADJ;NOM;SG;MASC;DEF": "الْعَطْشَانُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْعَطْشَانَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْعَطْشَانِ",
+    "ADJ;NOM;SG;FEM;INDF": "عَطْشَى",
+    "ADJ;ACC;SG;FEM;INDF": "عَطْشَى",
+    "ADJ;GEN;SG;FEM;INDF": "عَطْشَى",
+    "ADJ;NOM;SG;FEM;DEF": "الْعَطْشَى",
+    "ADJ;ACC;SG;FEM;DEF": "الْعَطْشَى",
+    "ADJ;GEN;SG;FEM;DEF": "الْعَطْشَى",
+    "ADJ;NOM;DU;MASC;INDF": "عَطْشَانَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "عَطْشَانَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "عَطْشَانَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْعَطْشَانَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْعَطْشَانَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْعَطْشَانَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "عَطْشَيَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "عَطْشَيَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "عَطْشَيَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْعَطْشَيَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْعَطْشَيَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْعَطْشَيَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "عِطَاشٌ",
+    "ADJ;ACC;PL;MASC;INDF": "عِطَاشًا",
+    "ADJ;GEN;PL;MASC;INDF": "عِطَاشٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْعِطَاشُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْعِطَاشَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْعِطَاشِ",
+    "ADJ;NOM;PL;FEM;INDF": "عِطَاشٌ",
+    "ADJ;ACC;PL;FEM;INDF": "عِطَاشًا",
+    "ADJ;GEN;PL;FEM;INDF": "عِطَاشٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْعِطَاشُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْعِطَاشَ",
+    "ADJ;GEN;PL;FEM;DEF": "الْعِطَاشِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;SG;FEM;INDF": [
+     "عَطْشَانَةٌ"
+    ],
+    "ADJ;ACC;SG;FEM;INDF": [
+     "عَطْشَانَةً"
+    ],
+    "ADJ;GEN;SG;FEM;INDF": [
+     "عَطْشَانَةٍ"
+    ],
+    "ADJ;NOM;SG;FEM;DEF": [
+     "الْعَطْشَانَةُ"
+    ],
+    "ADJ;ACC;SG;FEM;DEF": [
+     "الْعَطْشَانَةَ"
+    ],
+    "ADJ;GEN;SG;FEM;DEF": [
+     "الْعَطْشَانَةِ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A dry throat on a hot day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thirsty",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.thirsty"
+     },
+     {
+      "id": "s2",
+      "def": "thirsty for, longing for (figurative)",
+      "register": [
+       "literary"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا عَطْشَانُ.",
+      "tr": "I am thirsty. (a man speaking)",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ عَطْشَى.",
+      "tr": "She is thirsty.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَطْفَالُ عِطَاشٌ.",
+      "tr": "The children are thirsty.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَطْشَانُ جِدًّا",
+      "tr": "very thirsty"
+     },
+     {
+      "text": "جَائِعٌ وَعَطْشَانُ",
+      "tr": "hungry and thirsty"
+     },
+     {
+      "text": "أَرْضٌ عَطْشَى",
+      "tr": "a parched land"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ظَمْآن",
+      "register": "literary",
+      "nuance": "thirsty — poetic"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "رَيَّان",
+      "note": "watered, no longer thirsty (literary)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: from عَطِشَ (ʿaṭiša, “to thirst”) + ـَان (-ān), of the root ع ط ش.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pattern فَعْلَان is the “state” pattern: جَوْعَان (hungry), عَطْشَان (thirsty), شَبْعَان (full), تَعْبَان (tired), زَعْلَان (upset)."
+    ],
+    "pitfalls": [
+     "A diptote: no tanwīn — أَنَا عَطْشَانُ, not عَطْشَانٌ.",
+     "The feminine is عَطْشَى in careful Arabic; عَطْشَانَة is everyday speech and common in modern writing."
+    ],
+    "subtleties": [
+     "Plural for people: عِطَاش, for men and women alike."
+    ]
+   }
+  },
+  {
+   "id": "ar:sari",
+   "lemma": "سَرِيع",
+   "pos": "ADJ",
+   "senses": [
+    "adj.fast"
+   ],
+   "features": {
+    "root": "س ر ع",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "سَرِيعَة",
+    "plurals": [
+     {
+      "form": "سِرَاع",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْرَع",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "sarīʿ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "سَرِيعٌ",
+    "ADJ;ACC;SG;MASC;INDF": "سَرِيعًا",
+    "ADJ;GEN;SG;MASC;INDF": "سَرِيعٍ",
+    "ADJ;NOM;SG;MASC;DEF": "السَّرِيعُ",
+    "ADJ;ACC;SG;MASC;DEF": "السَّرِيعَ",
+    "ADJ;GEN;SG;MASC;DEF": "السَّرِيعِ",
+    "ADJ;NOM;SG;FEM;INDF": "سَرِيعَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "سَرِيعَةً",
+    "ADJ;GEN;SG;FEM;INDF": "سَرِيعَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "السَّرِيعَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "السَّرِيعَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "السَّرِيعَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "سَرِيعَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "سَرِيعَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "سَرِيعَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "السَّرِيعَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "السَّرِيعَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "السَّرِيعَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "سَرِيعَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "سَرِيعَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "سَرِيعَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "السَّرِيعَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "السَّرِيعَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "السَّرِيعَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "سِرَاعٌ",
+    "ADJ;ACC;PL;MASC;INDF": "سِرَاعًا",
+    "ADJ;GEN;PL;MASC;INDF": "سِرَاعٍ",
+    "ADJ;NOM;PL;MASC;DEF": "السِّرَاعُ",
+    "ADJ;ACC;PL;MASC;DEF": "السِّرَاعَ",
+    "ADJ;GEN;PL;MASC;DEF": "السِّرَاعِ",
+    "ADJ;NOM;PL;FEM;INDF": "سَرِيعَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "سَرِيعَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "سَرِيعَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "السَّرِيعَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "السَّرِيعَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "السَّرِيعَاتِ",
+    "ADJ;CMPR;NOM": "أَسْرَعُ",
+    "ADJ;CMPR;ACC": "أَسْرَعَ",
+    "ADJ;CMPR;GEN": "أَسْرَعَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَسْرَعُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَسْرَعَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَسْرَعِ",
+    "ADJ;SPRL;NOM;CONST": "أَسْرَعُ",
+    "ADJ;SPRL;ACC;CONST": "أَسْرَعَ",
+    "ADJ;SPRL;GEN;CONST": "أَسْرَعِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "سَرِيعُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "سَرِيعِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "سَرِيعِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "السَّرِيعُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "السَّرِيعِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "السَّرِيعِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Speed: fast trains, fast food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fast, quick",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.fast"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْقِطَارُ سَرِيعٌ.",
+      "tr": "The train is fast.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ سَيَّارَةٌ سَرِيعَةٌ.",
+      "tr": "This is a fast car.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s1"
+     },
+     {
+      "text": "أَكَلْنَا فِي مَطْعَمٍ لِلْوَجَبَاتِ السَّرِيعَةِ.",
+      "tr": "We ate at a fast-food restaurant.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْوَجَبَاتُ السَّرِيعَةُ",
+      "tr": "fast food"
+     },
+     {
+      "text": "قِطَارٌ سَرِيعٌ",
+      "tr": "a fast train"
+     },
+     {
+      "text": "بِشَكْلٍ سَرِيعٍ",
+      "tr": "quickly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "سَرِيعُ الْغَضَبِ",
+      "tr": "quick of anger",
+      "kind": "fixed expression",
+      "meaning": "quick-tempered",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "عَاجِل",
+      "register": "neutral",
+      "nuance": "urgent, prompt — news, a reply"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَطِيء",
+      "note": "slow"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root س ر ع (s r ʿ), with the verb سَرُعَ, “to be quick, to hurry” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its noun سُرْعَة is “speed”: بِسُرْعَةٍ! = quickly! hurry up!"
+    ],
+    "pitfalls": [
+     "“Quickly” is بِسُرْعَةٍ (or سَرِيعًا)."
+    ],
+    "subtleties": [
+     "Faster = أَسْرَعُ: الْقِطَارُ أَسْرَعُ مِنَ الْحَافِلَةِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:bati",
+   "lemma": "بَطِيء",
+   "pos": "ADJ",
+   "senses": [
+    "adj.slow"
+   ],
+   "features": {
+    "root": "ب ط ء",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "بَطِيئَة",
+    "plurals": [
+     {
+      "form": "بِطَاء",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَبْطَأ",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "baṭīʾ",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "بَطِيءٌ",
+    "ADJ;ACC;SG;MASC;INDF": "بَطِيئًا",
+    "ADJ;GEN;SG;MASC;INDF": "بَطِيءٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْبَطِيءُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْبَطِيءَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْبَطِيءِ",
+    "ADJ;NOM;SG;FEM;INDF": "بَطِيئَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "بَطِيئَةً",
+    "ADJ;GEN;SG;FEM;INDF": "بَطِيئَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبَطِيئَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبَطِيئَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبَطِيئَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "بَطِيئَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "بَطِيئَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "بَطِيئَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْبَطِيئَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْبَطِيئَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْبَطِيئَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بَطِيئَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بَطِيئَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بَطِيئَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبَطِيئَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبَطِيئَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبَطِيئَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بِطَاءٌ",
+    "ADJ;ACC;PL;MASC;INDF": "بِطَاءً",
+    "ADJ;GEN;PL;MASC;INDF": "بِطَاءٍ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبِطَاءُ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبِطَاءَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبِطَاءِ",
+    "ADJ;NOM;PL;FEM;INDF": "بَطِيئَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بَطِيئَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "بَطِيئَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبَطِيئَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبَطِيئَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبَطِيئَاتِ",
+    "ADJ;CMPR;NOM": "أَبْطَأُ",
+    "ADJ;CMPR;ACC": "أَبْطَأَ",
+    "ADJ;CMPR;GEN": "أَبْطَأَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَبْطَأُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَبْطَأَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَبْطَأِ",
+    "ADJ;SPRL;NOM;CONST": "أَبْطَأُ",
+    "ADJ;SPRL;ACC;CONST": "أَبْطَأَ",
+    "ADJ;SPRL;GEN;CONST": "أَبْطَأِ"
+   },
+   "formsAlt": {
+    "ADJ;NOM;PL;MASC;INDF": [
+     "بَطِيئُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;INDF": [
+     "بَطِيئِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;INDF": [
+     "بَطِيئِينَ"
+    ],
+    "ADJ;NOM;PL;MASC;DEF": [
+     "الْبَطِيئُونَ"
+    ],
+    "ADJ;ACC;PL;MASC;DEF": [
+     "الْبَطِيئِينَ"
+    ],
+    "ADJ;GEN;PL;MASC;DEF": [
+     "الْبَطِيئِينَ"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Slowness: a slow bus, a slow walk.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "slow",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.slow"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَافِلَةُ بَطِيئَةٌ.",
+      "tr": "The bus is slow.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْقِطَارُ بَطِيءٌ جِدًّا.",
+      "tr": "This train is very slow.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "السُّلَحْفَاةُ حَيَوَانٌ بَطِيءٌ.",
+      "tr": "The tortoise is a slow animal.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَطِيءٌ جِدًّا",
+      "tr": "very slow"
+     },
+     {
+      "text": "قِطَارٌ بَطِيءٌ",
+      "tr": "a slow train"
+     },
+     {
+      "text": "بِبُطْءٍ",
+      "tr": "slowly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "فِي التَّأَنِّي السَّلَامَةُ وَفِي الْعَجَلَةِ النَّدَامَةُ",
+      "tr": "in slowness is safety, in haste is regret",
+      "kind": "proverb",
+      "meaning": "more haste, less speed",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "مُتَمَهِّل",
+      "register": "neutral",
+      "nuance": "unhurried, taking one’s time — positive"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "سَرِيع",
+      "note": "fast"
+     }
+    ],
+    "etymology": {
+     "text": "Adjective of the root ب ط ء (b ṭ ʾ); Wiktionary: the verb بَطُؤَ, “to be or become slow, late”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "اِمْشِ بِبُطْءٍ! (walk slowly!) uses its noun بُطْء."
+    ],
+    "pitfalls": [
+     "The hamza changes its seat: بَطِيءٌ, but بَطِيئَةٌ and بَطِيئًا (on a yāʾ)."
+    ],
+    "subtleties": [
+     "Slower = أَبْطَأُ: الْحَافِلَةُ أَبْطَأُ مِنَ الْقِطَارِ."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

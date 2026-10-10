@@ -1,0 +1,233 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:huwa",
+   "lemma": "هُوَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "features": {
+    "person": "3rd person singular, masculine",
+    "suffix": "ـهُ"
+   },
+   "translit": "huwa",
+   "forms": {
+    "PRON;NOM": "هُوَ"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "ar:hiya",
+   "lemma": "هِيَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "features": {
+    "person": "3rd person singular, feminine",
+    "suffix": "ـهَا"
+   },
+   "translit": "hiya",
+   "forms": {
+    "PRON;NOM": "هِيَ"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "ar:akala",
+   "lemma": "أَكَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat",
+    "verb.corrode"
+   ],
+   "features": {
+    "root": "ء ك ل",
+    "rootClass": [
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَأْكُلُ",
+    "masdar": [
+     "أَكْل"
+    ],
+    "participles": [
+     {
+      "form": "آكِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَأْكُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the food (أَكَلَ الْخُبْزَ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "root": "ء ك ل",
+   "verbForm": "I",
+   "translit": "akala",
+   "forms": {
+    "V;PST;3;SG;MASC": "أَكَلَ",
+    "V;PRS;IND;1;SG": "آكُلُ",
+    "V;PRS;IND;2;SG;MASC": "تَأْكُلُ",
+    "V;PRS;IND;2;SG;FEM": "تَأْكُلِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَأْكُلُ",
+    "V;PRS;IND;3;SG;FEM": "تَأْكُلُ",
+    "V;PRS;IND;1;PL": "نَأْكُلُ",
+    "V;PRS;IND;2;PL;MASC": "تَأْكُلُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَأْكُلْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَأْكُلُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَأْكُلْنَ"
+   },
+   "ref": {
+    "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Basic and everyday; in figurative use, something that slowly destroys.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to eat away, corrode, consume (rust, fire, time)",
+      "register": [
+       "literary"
+      ],
+      "concept": "verb.corrode"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تَأْكُلُ عَلَى الْفُطُورِ؟",
+      "tr": "What do you eat for breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ مَعًا كُلَّ يَوْمٍ.",
+      "tr": "We eat together every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "يَأْكُلُ الصَّدَأُ الْحَدِيدَ.",
+      "tr": "Rust eats away at iron.",
+      "register": "literary",
+      "context": "figurative",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَكَلَ بِشَهِيَّةٍ",
+      "tr": "to eat with appetite"
+     },
+     {
+      "text": "أَكَلَ بِسُرْعَةٍ",
+      "tr": "to eat quickly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "أَكَلَ عَلَيْهِ الدَّهْرُ وَشَرِبَ",
+      "tr": "time has eaten and drunk on it",
+      "kind": "idiom",
+      "meaning": "it is very old, worn out or outdated",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "تَنَاوَلَ",
+      "register": "formal",
+      "nuance": "to have, take (a meal, medicine) — news, menus and polite speech"
+     },
+     {
+      "word": "اِلْتَهَمَ",
+      "register": "literary",
+      "nuance": "to devour, gobble up"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَامَ",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔakal-; cognate with Hebrew אָכַל (akhal) and Aramaic ʾăḵal.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The imperative is just كُلْ (kul, ‘eat!’): like خُذْ (‘take!’) and مُرْ (‘order!’) it drops its first radical, the hamza."
+    ],
+    "pitfalls": [
+     "I eat = آكُلُ (ʾākulu): hamza + long ā is written with madda, آ.",
+     "The vowel of the 2nd radical changes: a in the past (أَكَلَ), u in the present (يَأْكُلُ)."
+    ],
+    "subtleties": [
+     "In formal Arabic, especially for meals, تَنَاوَلَ is preferred: تَنَاوَلْنَا الْغَدَاءَ (we had lunch)."
+    ]
+   }
+  },
+  {
+   "id": "ar:wa",
+   "lemma": "وَ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "features": {
+    "governs": "words or clauses"
+   },
+   "prefix": true,
+   "translit": "wa",
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "No separate word: the definite article al- (ال) is part of the noun forms (DEF cells).",
+   "use": "الْ + noun"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "No indefinite article: an indefinite noun takes nunation (tanwīn, -un/-an/-in).",
+   "use": "noun with tanwīn"
+  }
+ ]
+}

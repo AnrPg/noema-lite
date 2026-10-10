@@ -132,6 +132,32 @@ A noema-lite **curriculum** is a map of steps; every step becomes a subject pack
 Without the connector the learner gives you a step bundle (`TASK.md` + `files/` + this toolkit): follow TASK.md and hand
 back `<subject_id>.noema.zip`.
 
+## Language courses (🌍 Languages)
+Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
+task on a language course** (the short form of decisions D1–D19; with the connector: `noema_authoring_guide` part
+"languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
+`tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
+1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
+   special, uncommon or notable feature of the language — script, sounds, the morphology of every part of speech, syntax,
+   one concept with several words, one word with several meanings, register, politeness, culture, numbers — with how the
+   app records and teaches it and what is missing. The language's `wordFeatures` and its course content come from it.
+2. **Every word states its language's whole facade** (`features` per `wordFeatures`, §4.5.1): a value for every parameter
+   of its part of speech, or `{"none": "<why>"}` — e.g. Arabic nouns: root, pattern, every plural with the meanings it
+   belongs to, dual, human or not; Chinese: measure words, readings and traditional forms per meaning.
+3. **Several words for one concept** (还是 / 或者, gehen / fahren) each say what separates them (`contrasts`, §4.5.2).
+4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
+5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
+6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
+8. **Comparison notes, not inline comparisons** (D16, D18): general texts name no outside language; every grammar page gets `notes` for at least 8 languages of the reference set (`_typology/reference.json`), covering all four types.
+9. **Vocabulary is its own track** (D19): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
+7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
+
+**Tasks of a language course** (the learner's ✨ new course, ✨ more sentences — connector: `noema_lang_courses` →
+`noema_lang_task` → `noema_lang_submit`): follow **`LANGUAGES.md`** in this skill — what each task kind (`lang.core`,
+`lang.node`, `lang.function`, `lang.compare`, `lang.refill`) writes, and the checks to run first:
+`scripts/lang_course.py` (course file ↔ folder, answer from the folder), `scripts/validate_lang.py`,
+`scripts/lang_refcheck.py` (the schema: `schemas/noema.lang.v1.schema.json`).
+
 ## Updating an existing subject (additive only)
 Get the current pack (`noema_get_pack_url`, or the package / file the user gives you), then
 `python3 scripts/unpack.py PACK.noema.zip|PACK.json work` (a package gives back its source files too; from a .json

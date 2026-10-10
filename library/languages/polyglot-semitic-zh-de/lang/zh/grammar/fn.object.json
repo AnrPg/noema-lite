@@ -1,0 +1,355 @@
+{
+ "function": "fn.object",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "none"
+  },
+  {
+   "feature": "syn.wordOrder",
+   "value": "SVO"
+  },
+  {
+   "feature": "verb.objectMarking",
+   "value": "none"
+  }
+ ],
+ "summary": "The direct object — what is eaten, drunk, bought or liked — simply follows the verb: 我吃面包 ‘I eat bread’, 妈妈买鱼 ‘Mum buys fish’. Chinese has no cases: a noun looks the same as subject (面包在这里 ‘the bread is here’) and as object (我吃面包), and only its place after the verb makes it the object. So the order cannot change: 妈妈喜欢孩子 ‘the mother likes the child’, 孩子喜欢妈妈 ‘the child likes the mother’. A counted object keeps number + measure word: 我要一杯咖啡. Indirect objects (‘give him tea’) and objects with a preposition (‘with a friend’) come with the coverbs 给, 跟 in S11–S13 and in C03; other ways to place the object — as a topic (茶我不喝) or with 把 (我把茶喝了) — come much later.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "subject",
+    "verb",
+    "object"
+   ],
+   "caption": "我 + 吃 + 面包",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Subject",
+    "Verb",
+    "Object",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "我",
+     "喝",
+     "茶",
+     "I drink tea."
+    ],
+    [
+     "妈妈",
+     "买",
+     "鱼",
+     "Mum buys fish."
+    ],
+    [
+     "孩子们",
+     "喜欢",
+     "水果",
+     "The children like fruit."
+    ],
+    [
+     "他",
+     "要",
+     "一杯咖啡",
+     "He wants a cup of coffee."
+    ],
+    [
+     "我们",
+     "想吃",
+     "米饭",
+     "We’d like to eat rice."
+    ]
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "The same noun as subject …",
+     "points": [
+      "面包在这里。 The bread is here.",
+      "茶是我的。 The tea is mine."
+     ]
+    },
+    {
+     "title": "… and as object",
+     "points": [
+      "我吃面包。 I eat bread.",
+      "我喝茶。 I drink tea."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The position is the case",
+   "text": "妈妈喜欢孩子 ‘the mother likes the child’ — 孩子喜欢妈妈 ‘the child likes the mother’. Swap the nouns and you swap the roles. German can say Den Kaffee trinkt er because den shows the accusative; Chinese cannot move the object that way.",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    },
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Verb + verb + object",
+   "text": "喜欢, 想 and 要 can take a second verb: 我喜欢喝茶 ‘I like drinking tea’, 我想吃鱼 ‘I’d like to eat fish’ — the object follows the last verb."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No preposition, no marker",
+   "text": "喜欢 takes its object directly: 我喜欢茶 (no ‘of’, no ‘von’). And 的 is not an object marker: ‘I eat bread’ is 我吃面包, not *我吃的面包."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "What comes later",
+   "text": "The indirect object (‘give the child milk’ — 给孩子牛奶) and objects with a preposition (跟, 给, 从 — ‘with’, ‘for’, ‘from’) come in S11–S13 and C03; the 把 construction (我把茶喝了 ‘I drank the tea up’) and the object as a topic (茶我不喝 ‘tea, I don’t drink’) much later."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who acts, and what is acted on? → the doer before the verb, the thing after it.",
+   "Is the object counted? → number + measure word before it: 我要两杯茶.",
+   "Is there a second verb (喜欢, 想, 要 + verb)? → the object follows the last verb: 我想喝水.",
+   "Did I mark the object somehow? → don’t: no ending, no particle, no 的."
+  ],
+  "steps": [
+   "Subject",
+   "verb",
+   "object (with number + measure word if counted)"
+  ]
+ },
+ "traps": [
+  "*我面包吃 → 我吃面包 (the object follows the verb).",
+  "*我吃的面包 for ‘I eat bread’ → 我吃面包.",
+  "German Den Tee trinke ich cannot be copied word for word: *茶喝我 would mean ‘the tea drinks me’.",
+  "*我要咖啡一杯 → 我要一杯咖啡 (number + measure word before the noun)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:chi",
+   "zh:he.drink",
+   "zh:mai",
+   "zh:yao",
+   "zh:xiang",
+   "zh:xihuan",
+   "zh:you"
+  ]
+ },
+ "needs": {
+  "VERB": 3,
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.object"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘Mum buys fish.’",
+   "options": [
+    "妈妈买鱼。",
+    "鱼买妈妈。",
+    "妈妈鱼买。"
+   ],
+   "answer": "妈妈买鱼。",
+   "why": "Subject – verb – object."
+  },
+  {
+   "q": "孩子喜欢妈妈。 means …",
+   "options": [
+    "The child likes the mother.",
+    "The mother likes the child.",
+    "The mother and the child like each other."
+   ],
+   "answer": "The child likes the mother.",
+   "why": "The noun after the verb is the object."
+  },
+  {
+   "q": "‘I’d like a cup of coffee.’",
+   "options": [
+    "我要一杯咖啡。",
+    "我要咖啡一杯。",
+    "我一杯咖啡要。"
+   ],
+   "answer": "我要一杯咖啡。",
+   "why": "Number + measure word + noun, after the verb."
+  },
+  {
+   "q": "How does Chinese mark the direct object?",
+   "options": [
+    "by its place after the verb",
+    "with an ending, like German den / einen",
+    "with the particle 的"
+   ],
+   "answer": "by its place after the verb",
+   "why": "There are no cases in Chinese."
+  },
+  {
+   "q": "‘I like drinking tea.’",
+   "options": [
+    "我喜欢喝茶。",
+    "我喜欢茶喝。",
+    "我喝茶喜欢。"
+   ],
+   "answer": "我喜欢喝茶。",
+   "why": "Verb + verb + object."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek marks the object by case (βλέπω τον φίλο, τρώω το ψωμί) and can move it; Chinese has no case — only the place after the verb makes 面包 the object (我吃面包)."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian case lets the object move freely (Маму любит ребёнок ‘the child loves Mum’); Chinese cannot do this — 妈妈喜欢孩子 and 孩子喜欢妈妈 mean opposite things."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish marks a human object with a (veo a María) and nothing else; Chinese marks no object at all: 我喜欢安娜, 我吃面包."
+  },
+  {
+   "for": "en",
+   "rel": "same",
+   "text": "English also shows the object by position (the dog bites the man / the man bites the dog), and so does Chinese: 妈妈喜欢孩子 / 孩子喜欢妈妈. Unlike me / him, Chinese pronouns do not change: 他喜欢我."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French relies on order for nouns (le chat mange la souris), as Chinese does, but its object pronouns move before the verb (je le mange); Chinese ones stay after it (他喜欢我) or are left out."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German den Kaffee shows the accusative, so the object can open the sentence; Chinese has no case — fronting 茶 makes it a topic (茶我不喝), not a marked object."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi puts the object before the verb (मैं रोटी खाता हूँ) and marks a known one with को; Chinese puts it after the verb and marks nothing: 我吃面包."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian puts the object before the verb and marks a known one with rā (nān rā khordam ‘I ate the bread’); Chinese puts it after the verb, unmarked: 我吃了面包."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi puts the object before the verb (मी पोळी खातो ‘I eat chapati’) and marks known human objects with ला; Chinese puts every object after the verb, unmarked."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic marks the object with -a (akala l-waladu l-khubza) and can vary the order; Chinese has no case: subject before the verb, object after it."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew marks a definite object with et (ani ohev et ha-lekhem ‘I like the bread’); Chinese never marks the object: 我喜欢面包."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts the object before the verb and marks a definite one with -ı (ekmeği yiyorum ‘I eat the bread’); Chinese puts it after the verb, unmarked: 我吃面包."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks the object with を and puts it before the verb (パンを食べる); Chinese puts it after and marks nothing: 我吃面包."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks the object with 을 / 를 before the verb (빵을 먹어요); Chinese: verb first, unmarked object — 我吃面包."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish marks the object by case — partitive or accusative, which even tells ongoing from completed (luin kirjaa / luin kirjan); Chinese marks nothing and shows completion with 了."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks the object with -t, and the verb shows whether it is definite (látok egy házat / látom a házat); Chinese marks neither."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also has subject – verb – object with no case on nouns (ninakula mkate ‘I eat bread’), but the verb can carry an object prefix (ninakupenda ‘I love you’); Chinese verbs carry nothing: 我喜欢你."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda is subject – verb – object with no case on nouns, but object prefixes can go into the verb; Chinese leaves the verb bare and the object after it."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese works exactly like Chinese here: tôi ăn bánh mì ‘I eat bread’ — subject, verb, unmarked object."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut shows subject and object in the verb ending and marks nouns by case in an ergative pattern; Chinese has no endings at all — only the position after the verb."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.object",
+   "note": "German marks the object with the accusative (den Kaffee, einen Apfel) and can move it to the front; Chinese marks it only by its place after the verb."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.object",
+   "note": "Arabic gives the object the ending -a / -an (أَكَلَ الْوَلَدُ تُفَّاحَةً ‘the boy ate an apple’); Chinese has no endings at all."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.object",
+   "note": "Hebrew puts אֶת before a definite object (אֲנִי אוֹכֵל אֶת הַלֶּחֶם); Chinese has no object marker — 我吃面包."
+  }
+ ]
+}

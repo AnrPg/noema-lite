@@ -1,0 +1,508 @@
+{
+ "function": "fn.imperative",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "none"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  }
+ ],
+ "summary": "The Hebrew imperative has three everyday forms — to a man, to a woman, to several people: לֵךְ! / לְכִי! / לְכוּ! “go!”, בּוֹא! / בּוֹאִי! / בּוֹאוּ! “come!”, חַכֵּה! / חַכִּי! / חַכּוּ! “wait!”. It is the future form without its prefix ת־: תֵּלֵךְ → לֵךְ, תָּבוֹא → בּוֹא, תִּסַּע → סַע, תְּחַכֶּה → חַכֵּה; nif‘al verbs put a הִ in front instead (תִּכָּנֵס → הִכָּנֵס “come in!”), hif‘il verbs change the vowel (תַּגִּיעַ → הַגַּע). In everyday speech many people simply use the future itself as the command — תָּבוֹא!, תְּחַכֶּה רֶגַע, תִּכָּנְסִי — which sounds more natural and often softer; the short imperative is a little more direct (and with some verbs formal). A prohibition is never made with the imperative: “don’t” is אַל + the future, אַל תֵּלֵךְ! “don’t go!”, אַל תְּחַכִּי “don’t wait (f.)”. Signs and general instructions use the infinitive: לֹא לְהִכָּנֵס “no entry”. Politeness comes from בְּבַקָּשָׁה “please”, not from a special verb form — there is no polite imperative. There is also a feminine plural imperative (לֵכְנָה), but it is literary; in speech the masculine plural is used for any group.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "verb",
+    "to a man",
+    "to a woman",
+    "to several",
+    "in speech (future)",
+    "don’t …"
+   ],
+   "rows": [
+    [
+     "הָלַךְ go",
+     "לֵךְ",
+     "לְכִי",
+     "לְכוּ",
+     "תֵּלֵךְ · תֵּלְכִי",
+     "אַל תֵּלֵךְ"
+    ],
+    [
+     "בָּא come",
+     "בּוֹא",
+     "בּוֹאִי",
+     "בּוֹאוּ",
+     "תָּבוֹא · תָּבוֹאִי",
+     "אַל תָּבוֹא"
+    ],
+    [
+     "רָץ run",
+     "רוּץ",
+     "רוּצִי",
+     "רוּצוּ",
+     "תָּרוּץ · תָּרוּצִי",
+     "אַל תָּרוּץ"
+    ],
+    [
+     "נָסַע go (by vehicle)",
+     "סַע",
+     "סְעִי",
+     "סְעוּ",
+     "תִּסַּע · תִּסְּעִי",
+     "אַל תִּסַּע"
+    ],
+    [
+     "נָהַג drive",
+     "נְהַג",
+     "נַהֲגִי",
+     "נַהֲגוּ",
+     "תִּנְהַג · תִּנְהֲגִי",
+     "אַל תִּנְהַג"
+    ],
+    [
+     "חָזַר come back",
+     "חֲזֹר",
+     "חִזְרִי",
+     "חִזְרוּ",
+     "תַּחְזֹר · תַּחְזְרִי",
+     "אַל תַּחְזֹר"
+    ],
+    [
+     "נִכְנַס come in",
+     "הִכָּנֵס",
+     "הִכָּנְסִי",
+     "הִכָּנְסוּ",
+     "תִּכָּנֵס · תִּכָּנְסִי",
+     "אַל תִּכָּנֵס"
+    ],
+    [
+     "יָצָא go out",
+     "צֵא",
+     "צְאִי",
+     "צְאוּ",
+     "תֵּצֵא · תֵּצְאִי",
+     "אַל תֵּצֵא"
+    ],
+    [
+     "עָזַב leave",
+     "עֲזֹב",
+     "עִזְבִי",
+     "עִזְבוּ",
+     "תַּעֲזֹב · תַּעַזְבִי",
+     "אַל תַּעֲזֹב"
+    ],
+    [
+     "הִגִּיעַ arrive",
+     "הַגַּע",
+     "הַגִּיעִי",
+     "הַגִּיעוּ",
+     "תַּגִּיעַ · תַּגִּיעִי",
+     "אַל תַּגִּיעַ"
+    ],
+    [
+     "נִשְׁאַר stay",
+     "הִשָּׁאֵר",
+     "הִשָּׁאֲרִי",
+     "הִשָּׁאֲרוּ",
+     "תִּשָּׁאֵר · תִּשָּׁאֲרִי",
+     "אַל תִּשָּׁאֵר"
+    ],
+    [
+     "חִכָּה wait",
+     "חַכֵּה",
+     "חַכִּי",
+     "חַכּוּ",
+     "תְּחַכֶּה · תְּחַכִּי",
+     "אַל תְּחַכֶּה"
+    ],
+    [
+     "אָכַל eat",
+     "אֱכֹל",
+     "אִכְלִי",
+     "אִכְלוּ",
+     "תֹּאכַל · תֹּאכְלִי",
+     "אַל תֹּאכַל"
+    ],
+    [
+     "שָׁתָה drink",
+     "שְׁתֵה",
+     "שְׁתִי",
+     "שְׁתוּ",
+     "תִּשְׁתֶּה · תִּשְׁתִּי",
+     "אַל תִּשְׁתֶּה"
+    ],
+    [
+     "קָנָה buy",
+     "קְנֵה",
+     "קְנִי",
+     "קְנוּ",
+     "תִּקְנֶה · תִּקְנִי",
+     "אַל תִּקְנֶה"
+    ]
+   ],
+   "caption": "The commands of the verbs you know. Several people: the future is תֵּלְכוּ, תָּבוֹאוּ … (“don’t” to several: אַל תֵּלְכוּ).",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
+  },
+  {
+   "t": "flow",
+   "items": [
+    "future: תֵּלֵךְ",
+    "drop ת־",
+    "לֵךְ!"
+   ],
+   "caption": "The imperative is the future without its prefix (nif‘al: הִ instead — תִּכָּנֵס → הִכָּנֵס)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Don’t = אַל + future",
+   "text": "אַל תֵּלֵךְ! “don’t go!”, אַל תְּחַכִּי! “don’t wait! (f.)”, אַל תִּשָּׁאֲרוּ “don’t stay (pl.)”. Never *אַל לֵךְ and never *לֹא לֵךְ. (לֹא + future is a lasting rule: לֹא תִּגְנֹב “thou shalt not steal”.)",
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.negationPosition",
+     "value": "before-verb"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Speech prefers the future",
+   "text": "Israelis often give a command with the plain future: תָּבוֹא מָחָר, תְּחַכֶּה רֶגַע, תִּכָּנְסִי. The short imperative (בּוֹא, חַכֵּה) is just as correct; it sounds more direct — and הִכָּנֵס, הַגַּע sound formal."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Three addressees",
+   "text": "You must choose: to a man לֵךְ, to a woman לְכִי, to a group לְכוּ. The ending ־ִי is feminine, ־וּ plural — the same endings as in the future (תֵּלְכִי, תֵּלְכוּ).",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "Signs and instructions",
+   "text": "A general instruction uses the infinitive: לֹא לְהִכָּנֵס “no entry”, נָא לְהַמְתִּין כָּאן “please wait here” (on a sign). Polite requests add בְּבַקָּשָׁה: הִכָּנֵס, בְּבַקָּשָׁה."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you give an order",
+   "questions": [
+    "Am I telling a man, a woman or several people?",
+    "Is it a prohibition? → אַל + future.",
+    "Do I want it direct (לֵךְ) or everyday-soft (תֵּלֵךְ)?",
+    "Is it a sign or a general rule? → the infinitive."
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is addressed: a man, a woman, several people?",
+   "Is it “do” or “don’t”? “Don’t” → אַל + the future (אַל תֵּלֵךְ / תֵּלְכִי / תֵּלְכוּ).",
+   "For “do”: take the future (תֵּלֵךְ) and drop the ת־ → לֵךְ; nif‘al: הִ + the rest (הִכָּנֵס).",
+   "Add the ending: ־ִי for a woman (לְכִי), ־וּ for several (לְכוּ).",
+   "Should it sound softer or more everyday? → use the future itself (תֵּלֵךְ, תָּבוֹאִי) and/or בְּבַקָּשָׁה.",
+   "Is it a sign, a recipe, a rule for everyone? → the infinitive (לֹא לְהִכָּנֵס)."
+  ],
+  "steps": [
+   "Decide who is addressed.",
+   "Positive: the imperative (or the future); negative: אַל + future.",
+   "Add the place, the object, and בְּבַקָּשָׁה if you want to be polite."
+  ]
+ },
+ "traps": [
+  "*אַל לֵךְ → אַל תֵּלֵךְ (“don’t” always takes the future).",
+  "*לֹא לֵךְ! → אַל תֵּלֵךְ!",
+  "*בָּא! as a command → בּוֹא! (the imperative of בָּא has a holam).",
+  "*נִכְנַס! → הִכָּנֵס! (nif‘al imperatives start with הִ).",
+  "לְכִי is to a woman, לְכוּ to several — do not use לֵךְ for everyone.",
+  "The feminine plural לֵכְנָה exists only in literary style; say לְכוּ to any group."
+ ],
+ "evidence": {
+  "tags": [
+   "IMP"
+  ],
+  "lemmas": [
+   "he:al-imp"
+  ],
+  "punct": [
+   "!"
+  ]
+ },
+ "paradigmCells": [
+  "V;IMP;2;SG;MASC",
+  "V;IMP;2;SG;FEM",
+  "V;IMP;2;PL;MASC",
+  "V;FUT;2;SG;MASC",
+  "V;FUT;2;SG;FEM",
+  "V;FUT;2;PL;MASC"
+ ],
+ "needs": {
+  "VERB": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;IMP;2;SG;MASC",
+    "V;IMP;2;SG;FEM",
+    "V;IMP;2;PL;MASC"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "cells": [
+    "V;FUT;2;SG;MASC",
+    "V;FUT;2;SG;FEM",
+    "V;FUT;2;PL;MASC"
+   ],
+   "count": 6
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.imperative"
+    ],
+    "variant": "Formality"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“Come! (to a woman)”:",
+   "options": [
+    "בּוֹאִי!",
+    "בּוֹא!",
+    "בּוֹאוּ!"
+   ],
+   "answer": "בּוֹאִי!",
+   "why": "־ִי is the ending for a woman; בּוֹא is to a man, בּוֹאוּ to several."
+  },
+  {
+   "q": "“Don’t go! (to a man)”:",
+   "options": [
+    "אַל תֵּלֵךְ!",
+    "אַל לֵךְ!",
+    "לֹא לֵךְ!"
+   ],
+   "answer": "אַל תֵּלֵךְ!",
+   "why": "“Don’t” is אַל + the future, never with the imperative."
+  },
+  {
+   "q": "The imperative of תִּכָּנֵס (“you will come in”) is:",
+   "options": [
+    "הִכָּנֵס",
+    "כָּנֵס",
+    "נִכְנַס"
+   ],
+   "answer": "הִכָּנֵס",
+   "why": "A nif‘al verb puts הִ where the future has ת: תִּכָּנֵס → הִכָּנֵס."
+  },
+  {
+   "q": "“Wait here! (to several people)”:",
+   "options": [
+    "חַכּוּ פֹּה!",
+    "חַכֵּה פֹּה!",
+    "חַכִּי פֹּה!"
+   ],
+   "answer": "חַכּוּ פֹּה!",
+   "why": "־וּ is the plural ending: חַכּוּ."
+  },
+  {
+   "q": "A sign at a door, “No entry”, says:",
+   "options": [
+    "לֹא לְהִכָּנֵס",
+    "אַל הִכָּנֵס",
+    "לֹא נִכְנָס"
+   ],
+   "answer": "לֹא לְהִכָּנֵס",
+   "why": "General instructions and signs use the infinitive: לֹא + לְהִכָּנֵס."
+  },
+  {
+   "q": "Which command sounds the most everyday, as Israelis say it?",
+   "options": [
+    "תְּחַכֶּה רֶגַע",
+    "חַכֵּה נָא רֶגַע",
+    "לְחַכּוֹת רֶגַע"
+   ],
+   "answer": "תְּחַכֶּה רֶגַע",
+   "why": "In speech the future is the usual command; נָא is old-fashioned and the infinitive is for signs."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.imperative",
+   "note": "Arabic also builds the imperative from the prefix tense (تَذْهَبُ → اِذْهَبْ) and forbids with لَا + jussive (لَا تَذْهَبْ) — the same pattern as Hebrew אַל + future."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.imperative",
+   "note": "German geh! / geht! / gehen Sie! has a polite form and no gender; Hebrew has gender (לֵךְ / לְכִי) and no polite form — politeness is בְּבַקָּשָׁה."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.imperative",
+   "note": "Chinese verbs do not change: a command is the bare verb (来！), softened with 请 or 吧, and “don’t” is 别 / 不要 — like Hebrew אַל, a word of its own for prohibitions."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also has a singular and a plural imperative (πήγαινε / πηγαίνετε); Hebrew adds the feminine (לֵךְ / לְכִי / לְכוּ). Greek μην + subjunctive (μην πας) is close to אַל + future (אַל תֵּלֵךְ)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Like иди / идите, Hebrew has a singular and a plural — and a feminine too: לֵךְ / לְכִי / לְכוּ. There is no polite plural for one person; politeness is בְּבַקָּשָׁה."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish says “don’t” with another form, not the imperative (no vayas); Hebrew does the same: אַל + future (אַל תֵּלֵךְ). There is no usted command (vaya)."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English has one imperative for everyone (“Go!”); Hebrew chooses by the listener: לֵךְ (a man), לְכִי (a woman), לְכוּ (a group). “Don’t” is אַל + the future."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "va / allez ~ לֵךְ / לְכוּ, plus a feminine, לְכִי; “ne va pas” is not built on the imperative in Hebrew: אַל תֵּלֵךְ."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has one form per addressee too (geh! geht! gehen Sie!), but Hebrew has no polite Sie-form: politeness is בְּבַקָּשָׁה or the softer future."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi grades the imperative by respect (जा / जाओ / जाइए); Hebrew grades it by gender and number (לֵךְ / לְכִי / לְכוּ), and “don’t” is אַל + future (मत जाओ ~ אַל תֵּלֵךְ)."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian says “don’t” with a prefix on the imperative (نرو); Hebrew uses אַל + the future: אַל תֵּלֵךְ."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "Arabic also has gendered imperatives (اِذْهَبْ / اِذْهَبِي / اِذْهَبُوا ~ לֵךְ / לְכִי / לְכוּ) and forbids with لَا + jussive (لَا تَذْهَبْ ~ אַל תֵּלֵךְ)."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish git! / gidin! has no gender; Hebrew adds a feminine (לֵךְ / לְכִי / לְכוּ). Turkish negates inside the verb (gitme!); Hebrew uses אַל + the future."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese softens requests with verb forms (行ってください); Hebrew uses the future (תֵּלֵךְ) or בְּבַקָּשָׁה, and changes the form for a man, a woman or a group."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean imperatives change with the speech level (가 / 가세요 / 가십시오); Hebrew ones change with the listener’s gender and number."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish has a singular and a plural imperative (mene! / menkää!) and a separate “don’t” form (älä mene!), as Hebrew has אַל תֵּלֵךְ; Hebrew adds a feminine: לְכִי."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili has a singular and a plural imperative (nenda! / nendeni!); Hebrew adds a feminine: לֵךְ / לְכִי / לְכוּ."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda uses the bare verb stem for one person (genda! “go!”) and another form for several; Hebrew has these two and a feminine as well."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has no imperative form (走!, 别走!); Hebrew changes the verb for the listener (לֵךְ / לְכִי / לְכוּ), and 别 ~ אַל + future: אַל תֵּלֵךְ."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses the plain verb with particles (đi đi!, đừng đi!); Hebrew changes the verb for the listener, and đừng ~ אַל + future."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has imperative endings for one, two or several people; Hebrew has forms for a man, a woman and a group — no dual."
+  }
+ ]
+}

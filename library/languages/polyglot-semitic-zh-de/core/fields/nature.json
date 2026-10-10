@@ -1,0 +1,371 @@
+{
+ "field": "nature",
+ "title": "Nature",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "nature.airpotato",
+   "gloss": "air potato (Dioscorea bulbifera) (archaic)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "nature.arum",
+   "gloss": "arum (a wild plant)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "nature.bugloss",
+   "gloss": "bugloss, viper’s bugloss",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "nature.bulb",
+   "gloss": "bulb (of a plant)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "nature.countryside",
+   "gloss": "the countryside",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "nature.dill",
+   "gloss": "dill",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "nature.draught",
+   "gloss": "draught (of air)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "nature.ears",
+   "gloss": "fresh ears of grain (barley)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "nature.fog",
+   "gloss": "(thick) fog",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "nature.grapevine",
+   "gloss": "grapevine",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "nature.ground",
+   "gloss": "ground, earth, soil",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "nature.indigo",
+   "gloss": "indigo plant (the dye)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true
+  },
+  {
+   "id": "nature.land",
+   "gloss": "land (as opposed to the sea)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true
+  },
+  {
+   "id": "nature.leaf",
+   "gloss": "leaf, leaves (of a plant)",
+   "tier": 1,
+   "rank": 29
+  },
+  {
+   "id": "nature.moon",
+   "gloss": "moon",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "nature.newmoon",
+   "gloss": "new moon",
+   "tier": 2,
+   "rank": 16,
+   "pending": true
+  },
+  {
+   "id": "nature.pasture",
+   "gloss": "spring grass, pasture",
+   "tier": 2,
+   "rank": 17,
+   "pending": true
+  },
+  {
+   "id": "nature.pisces",
+   "gloss": "Pisces (sign of the zodiac)",
+   "tier": 2,
+   "rank": 18,
+   "pending": true
+  },
+  {
+   "id": "nature.plain",
+   "gloss": "plain, flat land",
+   "tier": 2,
+   "rank": 19,
+   "pending": true
+  },
+  {
+   "id": "nature.rapeseedflower",
+   "gloss": "brassica flowers, especially rapeseed blossoms (油菜花)",
+   "tier": 2,
+   "rank": 20,
+   "pending": true
+  },
+  {
+   "id": "nature.reedshoot",
+   "gloss": "reed shoot (the young shoot of the common reed)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true
+  },
+  {
+   "id": "nature.rice",
+   "gloss": "rice (the plant; the raw grain)",
+   "tier": 2,
+   "rank": 22,
+   "pending": true
+  },
+  {
+   "id": "nature.riverbed",
+   "gloss": "bed (of a river or sea)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true
+  },
+  {
+   "id": "nature.rockface",
+   "gloss": "rock face, wall (of a mountain)",
+   "tier": 2,
+   "rank": 24,
+   "pending": true
+  },
+  {
+   "id": "nature.sap",
+   "gloss": "sap (of plants); meat juices",
+   "tier": 2,
+   "rank": 25,
+   "pending": true
+  },
+  {
+   "id": "nature.seagrape",
+   "gloss": "sea grape (Coccoloba uvifera, a seaside tree)",
+   "tier": 2,
+   "rank": 26,
+   "pending": true
+  },
+  {
+   "id": "nature.sky",
+   "gloss": "sky, heaven",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "nature.sorghum",
+   "gloss": "sorghum, durra",
+   "tier": 2,
+   "rank": 28,
+   "pending": true
+  },
+  {
+   "id": "nature.sprout",
+   "gloss": "sprout, shoot (of any seed)",
+   "tier": 2,
+   "rank": 29,
+   "pending": true
+  },
+  {
+   "id": "nature.strait",
+   "gloss": "strait (sea passage)",
+   "tier": 2,
+   "rank": 30,
+   "pending": true
+  },
+  {
+   "id": "nature.water",
+   "gloss": "water (the element; a body of water)",
+   "tier": 2,
+   "rank": 32,
+   "pending": true
+  },
+  {
+   "id": "nature.weather",
+   "gloss": "weather (天很冷)",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "nature.sun",
+   "gloss": "sun",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "nature.star",
+   "gloss": "star",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "nature.cloud",
+   "gloss": "cloud",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "nature.rain",
+   "gloss": "rain",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "nature.snow",
+   "gloss": "snow",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "nature.wind",
+   "gloss": "wind",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "nature.storm",
+   "gloss": "storm",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "nature.ice",
+   "gloss": "ice",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "nature.sea",
+   "gloss": "sea",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "nature.river",
+   "gloss": "river",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "nature.lake",
+   "gloss": "lake",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "nature.mountain",
+   "gloss": "mountain",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "nature.hill",
+   "gloss": "hill",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "nature.forest",
+   "gloss": "forest, woods",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "nature.field",
+   "gloss": "field (farmland)",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "nature.desert",
+   "gloss": "desert",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "nature.island",
+   "gloss": "island",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "nature.beach",
+   "gloss": "beach",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "nature.valley",
+   "gloss": "valley",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "nature.stone",
+   "gloss": "stone, rock",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "nature.tree",
+   "gloss": "tree",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "nature.flower",
+   "gloss": "flower",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "nature.grass",
+   "gloss": "grass",
+   "tier": 1,
+   "rank": 28
+  },
+  {
+   "id": "nature.climate",
+   "gloss": "climate",
+   "tier": 1,
+   "rank": 30
+  }
+ ]
+}

@@ -1,0 +1,1519 @@
+{
+ "lexemes": [
+  {
+   "id": "he:hitorer",
+   "lemma": "הִתְעוֹרֵר",
+   "pos": "VERB",
+   "senses": [
+    "verb.wakeup"
+   ],
+   "translit": "hit'orer",
+   "features": {
+    "spelling": "התעורר",
+    "root": "ע ו ר",
+    "binyan": "hitpael",
+    "rootClass": [
+     "ayin-vav",
+     "pe-guttural"
+    ],
+    "future": "יִתְעוֹרֵר",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "הִתְעוֹרְרוּת",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "הִתְעוֹרַרְתִּי",
+    "V;PST;2;SG;MASC": "הִתְעוֹרַרְתָּ",
+    "V;PST;2;SG;FEM": "הִתְעוֹרַרְתְּ",
+    "V;PST;3;SG;MASC": "הִתְעוֹרֵר",
+    "V;PST;3;SG;FEM": "הִתְעוֹרְרָה",
+    "V;PST;1;PL": "הִתְעוֹרַרְנוּ",
+    "V;PST;2;PL;MASC": "הִתְעוֹרַרְתֶּם",
+    "V;PST;2;PL;FEM": "הִתְעוֹרַרְתֶּן",
+    "V;PST;3;PL": "הִתְעוֹרְרוּ",
+    "V;PRS;SG;MASC": "מִתְעוֹרֵר",
+    "V;PRS;SG;FEM": "מִתְעוֹרֶרֶת",
+    "V;PRS;PL;MASC": "מִתְעוֹרְרִים",
+    "V;PRS;PL;FEM": "מִתְעוֹרְרוֹת",
+    "V;FUT;1;SG": "אֶתְעוֹרֵר",
+    "V;FUT;2;SG;MASC": "תִּתְעוֹרֵר",
+    "V;FUT;2;SG;FEM": "תִּתְעוֹרְרִי",
+    "V;FUT;3;SG;MASC": "יִתְעוֹרֵר",
+    "V;FUT;3;SG;FEM": "תִּתְעוֹרֵר",
+    "V;FUT;1;PL": "נִתְעוֹרֵר",
+    "V;FUT;2;PL;MASC": "תִּתְעוֹרְרוּ",
+    "V;FUT;3;PL;MASC": "יִתְעוֹרְרוּ",
+    "V;IMP;2;SG;MASC": "הִתְעוֹרֵר",
+    "V;IMP;2;SG;FEM": "הִתְעוֹרְרִי",
+    "V;IMP;2;PL;MASC": "הִתְעוֹרְרוּ",
+    "V;NFIN": "לְהִתְעוֹרֵר"
+   },
+   "note": "To wake up (by oneself). Hitpa‘el: past הִתְעוֹרַרְתִּי, present מִתְעוֹרֵר, future יִתְעוֹרֵר, infinitive לְהִתְעוֹרֵר. Waking someone else is הֵעִיר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first moment of the day: the alarm rings, the eyes open.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wake up (from sleep, by oneself)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wakeup"
+     },
+     {
+      "id": "s2",
+      "def": "to come to life, stir (a city, nature, interest)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִתְעוֹרַרְתִּי בְּשֵׁשׁ בַּבֹּקֶר.",
+      "tr": "I woke up at six in the morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּינוֹק הִתְעוֹרֵר בַּלַּיְלָה.",
+      "tr": "The baby woke up in the night.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתָּה מִתְעוֹרֵר בְּדֶרֶךְ כְּלָל?",
+      "tr": "When do you (m.) usually wake up?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעִיר מִתְעוֹרֶרֶת לְאַט לְאַט.",
+      "tr": "The city slowly comes to life.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הִתְעוֹרֵר מֻקְדָּם",
+      "tr": "woke up early"
+     },
+     {
+      "text": "הִתְעוֹרֵר מְאֻחָר",
+      "tr": "woke up late"
+     },
+     {
+      "text": "שָׁעוֹן מְעוֹרֵר",
+      "tr": "alarm clock (“a waking clock”, the same root in pi‘el)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קָם",
+      "register": "neutral",
+      "nuance": "“to get up” — out of bed; הִתְעוֹרֵר is only opening one’s eyes"
+     },
+     {
+      "word": "הֵקִיץ",
+      "register": "literary",
+      "nuance": "“to awake” — written and biblical style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "נִרְדַּם",
+      "note": "to fall asleep"
+     }
+    ],
+    "etymology": {
+     "text": "Hitpa‘el of the root ע־ו־ר “awake” (Wiktionary gives no further etymology). From the same root: עֵר “awake” and the causative הֵעִיר “to wake (someone)”, which Wiktionary lists for “to awaken (someone else)”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "An alarm clock is a שָׁעוֹן מְעוֹרֵר, literally “a waking clock” — the same root."
+    ],
+    "pitfalls": [
+     "הִתְעוֹרֵר is waking up yourself. Waking someone else is הֵעִיר: הִיא הֵעִירָה אוֹתִי “she woke me up”.",
+     "The ר is written twice where an ending follows: הִתְעוֹרְרָה, מִתְעוֹרְרִים, הִתְעוֹרַרְתִּי."
+    ],
+    "subtleties": [
+     "Past and present differ in the first letter only: הִתְעוֹרֵר “he woke up” — מִתְעוֹרֵר “he wakes up”.",
+     "No object and no reflexive pronoun: the hitpa‘el form already says that it happens to the subject."
+    ]
+   }
+  },
+  {
+   "id": "he:kam",
+   "lemma": "קָם",
+   "pos": "VERB",
+   "senses": [
+    "verb.getup"
+   ],
+   "translit": "kam",
+   "features": {
+    "spelling": "קם",
+    "root": "ק ו ם",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-vav"
+    ],
+    "future": "יָקוּם",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "קִימָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "קַמְתִּי",
+    "V;PST;2;SG;MASC": "קַמְתָּ",
+    "V;PST;2;SG;FEM": "קַמְתְּ",
+    "V;PST;3;SG;MASC": "קָם",
+    "V;PST;3;SG;FEM": "קָמָה",
+    "V;PST;1;PL": "קַמְנוּ",
+    "V;PST;2;PL;MASC": "קַמְתֶּם",
+    "V;PST;2;PL;FEM": "קַמְתֶּן",
+    "V;PST;3;PL": "קָמוּ",
+    "V;PRS;SG;MASC": "קָם",
+    "V;PRS;SG;FEM": "קָמָה",
+    "V;PRS;PL;MASC": "קָמִים",
+    "V;PRS;PL;FEM": "קָמוֹת",
+    "V;FUT;1;SG": "אָקוּם",
+    "V;FUT;2;SG;MASC": "תָּקוּם",
+    "V;FUT;2;SG;FEM": "תָּקוּמִי",
+    "V;FUT;3;SG;MASC": "יָקוּם",
+    "V;FUT;3;SG;FEM": "תָּקוּם",
+    "V;FUT;1;PL": "נָקוּם",
+    "V;FUT;2;PL;MASC": "תָּקוּמוּ",
+    "V;FUT;3;PL;MASC": "יָקוּמוּ",
+    "V;IMP;2;SG;MASC": "קוּם",
+    "V;IMP;2;SG;FEM": "קוּמִי",
+    "V;IMP;2;PL;MASC": "קוּמוּ",
+    "V;NFIN": "לָקוּם"
+   },
+   "note": "To get up, rise. A hollow root (ק־ו־ם): past קַמְתִּי, present קָם / קָמָה, future יָקוּם, imperative קוּם!, infinitive לָקוּם.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "meaning": "Wiktionary glosses קָם as “to rise, stand up”, without the words of the course gloss “to get up”; rising from bed is its everyday use (קַמְתִּי בְּשֶׁבַע)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Feet on the floor: getting out of bed, standing up from a chair.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get up (out of bed), rise",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getup"
+     },
+     {
+      "id": "s2",
+      "def": "to stand up (from a seat), with מִ “from”",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "קַמְתִּי בְּשֶׁבַע וְהָלַכְתִּי לָעֲבוֹדָה.",
+      "tr": "I got up at seven and went to work.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּשַׁבָּת אֲנִי קָם מְאֻחָר.",
+      "tr": "On Saturday I (m.) get up late.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     },
+     {
+      "text": "קוּם! כְּבָר שְׁמוֹנֶה!",
+      "tr": "Get up! It’s already eight!",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "כֻּלָּם קָמוּ כְּשֶׁהַמּוֹרָה נִכְנְסָה.",
+      "tr": "Everyone stood up when the teacher came in.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קָם מֻקְדָּם",
+      "tr": "gets up early"
+     },
+     {
+      "text": "קָם מֵהַמִּטָּה",
+      "tr": "gets out of bed"
+     },
+     {
+      "text": "קָם מֵהַכִּסֵּא",
+      "tr": "stands up from the chair"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קָם עַל צַד שְׂמֹאל",
+      "tr": "got up on the left side",
+      "kind": "idiom",
+      "meaning": "got out of bed on the wrong side; is in a bad mood",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "הִתְעוֹרֵר",
+      "register": "neutral",
+      "nuance": "“to wake up” — the eyes open; קָם is getting out of bed"
+     },
+     {
+      "word": "הִשְׁכִּים",
+      "register": "literary",
+      "nuance": "“to get up early” — written style (הִשְׁכִּים קוּם)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "שָׁכַב",
+      "note": "to lie down"
+     }
+    ],
+    "etymology": {
+     "text": "Common Semitic; compare Arabic قَامَ (qāma) and Ge’ez ቆመ (ḳomä) (Wiktionary). From the same root: קִימָה “getting up” and מָקוֹם “place”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מָקוֹם “place” comes from the same root: the place where one stands."
+    ],
+    "pitfalls": [
+     "In the masculine singular the past and the present are the same word: קָם “got up” and “gets up”. The feminine קָמָה too — the past is stressed on the first syllable (KA-ma), the present on the last (ka-MA).",
+     "A hollow root: only two letters show in the past and present (קַמְתִּי, קָמִים); the ו comes back in the future, the imperative and the infinitive: יָקוּם, קוּם!, לָקוּם."
+    ],
+    "subtleties": [
+     "In formal style קָם also means “came into being, was founded”: קָמָה מְדִינָה “a state was founded”.",
+     "The pronoun can be dropped in the 1st and 2nd person of the past: קַמְתִּי “I got up” — the ending says who."
+    ]
+   }
+  },
+  {
+   "id": "he:rachats",
+   "lemma": "רָחַץ",
+   "pos": "VERB",
+   "senses": [
+    "verb.wash"
+   ],
+   "translit": "rachats",
+   "features": {
+    "spelling": "רחץ",
+    "root": "ר ח ץ",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יִרְחַץ",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "רְחִיצָה",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "רָחַצְתִּי",
+    "V;PST;2;SG;MASC": "רָחַצְתָּ",
+    "V;PST;2;SG;FEM": "רָחַצְתְּ",
+    "V;PST;3;SG;MASC": "רָחַץ",
+    "V;PST;3;SG;FEM": "רָחֲצָה",
+    "V;PST;1;PL": "רָחַצְנוּ",
+    "V;PST;2;PL;MASC": "רְחַצְתֶּם",
+    "V;PST;2;PL;FEM": "רְחַצְתֶּן",
+    "V;PST;3;PL": "רָחֲצוּ",
+    "V;PRS;SG;MASC": "רוֹחֵץ",
+    "V;PRS;SG;FEM": "רוֹחֶצֶת",
+    "V;PRS;PL;MASC": "רוֹחֲצִים",
+    "V;PRS;PL;FEM": "רוֹחֲצוֹת",
+    "V;FUT;1;SG": "אֶרְחַץ",
+    "V;FUT;2;SG;MASC": "תִּרְחַץ",
+    "V;FUT;2;SG;FEM": "תִּרְחֲצִי",
+    "V;FUT;3;SG;MASC": "יִרְחַץ",
+    "V;FUT;3;SG;FEM": "תִּרְחַץ",
+    "V;FUT;1;PL": "נִרְחַץ",
+    "V;FUT;2;PL;MASC": "תִּרְחֲצוּ",
+    "V;FUT;3;PL;MASC": "יִרְחֲצוּ",
+    "V;IMP;2;SG;MASC": "רְחַץ",
+    "V;IMP;2;SG;FEM": "רַחֲצִי",
+    "V;IMP;2;PL;MASC": "רַחֲצוּ",
+    "V;NFIN": "לִרְחֹץ"
+   },
+   "plene": {
+    "V;NFIN": "לרחוץ"
+   },
+   "note": "To wash (the body, hands, face; someone). Pa‘al; the future has a (יִרְחַץ) because of the ח; infinitive לִרְחֹץ (full spelling לרחוץ). Clothes: כִּבֵּס; dishes: usually שָׁטַף.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Water and soap: a face in the morning, hands before a meal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to wash (the body, the face, the hands; someone; also things, in careful speech)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wash"
+     }
+    ],
+    "examples": [
+     {
+      "text": "רָחַצְתִּי פָּנִים וְצִחְצַחְתִּי שִׁנַּיִם.",
+      "tr": "I washed my face and brushed my teeth.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "תִּרְחַץ יָדַיִם לִפְנֵי הָאֹכֶל!",
+      "tr": "Wash your hands before the meal!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא רוֹחֶצֶת אֶת הַתִּינוֹק.",
+      "tr": "She is bathing the baby.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רָחַץ יָדַיִם",
+      "tr": "washed (his) hands"
+     },
+     {
+      "text": "רָחַץ פָּנִים",
+      "tr": "washed (his) face"
+     },
+     {
+      "text": "חוֹף רַחְצָה",
+      "tr": "a bathing beach (the noun of the same root)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שָׁטַף",
+      "register": "neutral",
+      "nuance": "“to rinse, wash with running water” — dishes, the floor, a car (שָׁטַף כֵּלִים)"
+     },
+     {
+      "word": "כִּבֵּס",
+      "register": "neutral",
+      "nuance": "“to wash clothes, do the laundry” (Wiktionary lists it as a synonym)"
+     },
+     {
+      "word": "הִתְרַחֵץ",
+      "register": "neutral",
+      "nuance": "“to wash oneself, bathe” — the reflexive, with no object"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ר־ח־ץ (Wiktionary gives no etymology). From the same root: רְחִיצָה “washing” (the verbal noun, Wiktionary) and רַחְצָה “bathing”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A beach with lifeguards is a חוֹף רַחְצָה, a “bathing beach” — the same root."
+    ],
+    "pitfalls": [
+     "Body parts are a bare object, often without the article and without “my”: רָחַצְתִּי יָדַיִם “I washed my hands”.",
+     "Clothes are not רָחַץ but כִּבֵּס: כִּבַּסְתִּי בְּגָדִים “I did the laundry”.",
+     "The ח takes a hataf vowel before an ending: רָחֲצָה, רוֹחֲצִים; and the future has a: יִרְחַץ."
+    ],
+    "subtleties": [
+     "In everyday speech dishes and floors are more often שָׁטַף; רָחַץ is above all washing the body."
+    ]
+   }
+  },
+  {
+   "id": "he:hitkaleach",
+   "lemma": "הִתְקַלֵּחַ",
+   "pos": "VERB",
+   "senses": [
+    "verb.shower"
+   ],
+   "translit": "hitkaleach",
+   "features": {
+    "spelling": "התקלח",
+    "root": "ק ל ח",
+    "binyan": "hitpael",
+    "rootClass": [
+     "lamed-guttural"
+    ],
+    "future": "יִתְקַלֵּחַ",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "הִתְקַלְּחוּת",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "הִתְקַלַּחְתִּי",
+    "V;PST;2;SG;MASC": "הִתְקַלַּחְתָּ",
+    "V;PST;2;SG;FEM": "הִתְקַלַּחְתְּ",
+    "V;PST;3;SG;MASC": "הִתְקַלֵּחַ",
+    "V;PST;3;SG;FEM": "הִתְקַלְּחָה",
+    "V;PST;1;PL": "הִתְקַלַּחְנוּ",
+    "V;PST;2;PL;MASC": "הִתְקַלַּחְתֶּם",
+    "V;PST;2;PL;FEM": "הִתְקַלַּחְתֶּן",
+    "V;PST;3;PL": "הִתְקַלְּחוּ",
+    "V;PRS;SG;MASC": "מִתְקַלֵּחַ",
+    "V;PRS;SG;FEM": "מִתְקַלַּחַת",
+    "V;PRS;PL;MASC": "מִתְקַלְּחִים",
+    "V;PRS;PL;FEM": "מִתְקַלְּחוֹת",
+    "V;FUT;1;SG": "אֶתְקַלֵּחַ",
+    "V;FUT;2;SG;MASC": "תִּתְקַלֵּחַ",
+    "V;FUT;2;SG;FEM": "תִּתְקַלְּחִי",
+    "V;FUT;3;SG;MASC": "יִתְקַלֵּחַ",
+    "V;FUT;3;SG;FEM": "תִּתְקַלֵּחַ",
+    "V;FUT;1;PL": "נִתְקַלֵּחַ",
+    "V;FUT;2;PL;MASC": "תִּתְקַלְּחוּ",
+    "V;FUT;3;PL;MASC": "יִתְקַלְּחוּ",
+    "V;IMP;2;SG;MASC": "הִתְקַלֵּחַ",
+    "V;IMP;2;SG;FEM": "הִתְקַלְּחִי",
+    "V;IMP;2;PL;MASC": "הִתְקַלְּחוּ",
+    "V;NFIN": "לְהִתְקַלֵּחַ"
+   },
+   "note": "To take a shower. Hitpa‘el with a final ח: past הִתְקַלַּחְתִּי, present מִתְקַלֵּחַ / מִתְקַלַּחַת, infinitive לְהִתְקַלֵּחַ.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hot water after a long day, or a quick cold one in the summer heat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to take a shower, shower",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.shower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִתְקַלַּחְתִּי וְהִתְלַבַּשְׁתִּי.",
+      "tr": "I showered and got dressed.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מִתְקַלֵּחַ כָּל עֶרֶב.",
+      "tr": "I (m.) shower every evening.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מִתְקַלַּחַת אַחֲרֵי הָרִיצָה.",
+      "tr": "She showers after her run.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הִתְקַלֵּחַ בְּמַיִם חַמִּים",
+      "tr": "showered with hot water"
+     },
+     {
+      "text": "מִקְלַחַת קָרָה",
+      "tr": "a cold shower (the noun of the same root)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עָשָׂה מִקְלַחַת",
+      "register": "colloquial",
+      "nuance": "“had (did) a shower” — with the noun מִקְלַחַת"
+     },
+     {
+      "word": "הִתְרַחֵץ",
+      "register": "neutral",
+      "nuance": "“to wash oneself, bathe” — in a bath, in the sea; not specifically a shower"
+     }
+    ],
+    "etymology": {
+     "text": "Hitpa‘el of the root ק־ל־ח (Wiktionary gives no further etymology); the noun מִקְלַחַת “shower” is from the same root.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מִקְלַחַת is both the act (“a shower”) and the place (“the shower”): אֲנִי בַּמִּקְלַחַת “I’m in the shower”."
+    ],
+    "pitfalls": [
+     "The final ח takes a furtive patach: הִתְקַלֵּחַ is said hitkaléach; before the feminine ending the vowels change: מִתְקַלַּחַת.",
+     "Hitpa‘el, but it takes no object and no “oneself”: just הִתְקַלַּחְתִּי “I showered”."
+    ],
+    "subtleties": [
+     "The future keeps the e and the furtive patach (Wiktionary): יִתְקַלֵּחַ, תִּתְקַלֵּחַ."
+    ]
+   }
+  },
+  {
+   "id": "he:hitlabesh",
+   "lemma": "הִתְלַבֵּשׁ",
+   "pos": "VERB",
+   "senses": [
+    "verb.getdressed"
+   ],
+   "translit": "hitlabesh",
+   "features": {
+    "spelling": "התלבש",
+    "root": "ל ב שׁ",
+    "binyan": "hitpael",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יִתְלַבֵּשׁ",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "הִתְלַבְּשׁוּת",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "הִתְלַבַּשְׁתִּי",
+    "V;PST;2;SG;MASC": "הִתְלַבַּשְׁתָּ",
+    "V;PST;2;SG;FEM": "הִתְלַבַּשְׁתְּ",
+    "V;PST;3;SG;MASC": "הִתְלַבֵּשׁ",
+    "V;PST;3;SG;FEM": "הִתְלַבְּשָׁה",
+    "V;PST;1;PL": "הִתְלַבַּשְׁנוּ",
+    "V;PST;2;PL;MASC": "הִתְלַבַּשְׁתֶּם",
+    "V;PST;2;PL;FEM": "הִתְלַבַּשְׁתֶּן",
+    "V;PST;3;PL": "הִתְלַבְּשׁוּ",
+    "V;PRS;SG;MASC": "מִתְלַבֵּשׁ",
+    "V;PRS;SG;FEM": "מִתְלַבֶּשֶׁת",
+    "V;PRS;PL;MASC": "מִתְלַבְּשִׁים",
+    "V;PRS;PL;FEM": "מִתְלַבְּשׁוֹת",
+    "V;FUT;1;SG": "אֶתְלַבֵּשׁ",
+    "V;FUT;2;SG;MASC": "תִּתְלַבֵּשׁ",
+    "V;FUT;2;SG;FEM": "תִּתְלַבְּשִׁי",
+    "V;FUT;3;SG;MASC": "יִתְלַבֵּשׁ",
+    "V;FUT;3;SG;FEM": "תִּתְלַבֵּשׁ",
+    "V;FUT;1;PL": "נִתְלַבֵּשׁ",
+    "V;FUT;2;PL;MASC": "תִּתְלַבְּשׁוּ",
+    "V;FUT;3;PL;MASC": "יִתְלַבְּשׁוּ",
+    "V;IMP;2;SG;MASC": "הִתְלַבֵּשׁ",
+    "V;IMP;2;SG;FEM": "הִתְלַבְּשִׁי",
+    "V;IMP;2;PL;MASC": "הִתְלַבְּשׁוּ",
+    "V;NFIN": "לְהִתְלַבֵּשׁ"
+   },
+   "note": "To get dressed. Hitpa‘el of ל־ב־שׁ; putting on one garment is לָבַשׁ + the garment.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Choosing clothes in the morning, children struggling with their sleeves.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to get dressed, dress (oneself)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.getdressed"
+     },
+     {
+      "id": "s2",
+      "def": "to dress (in a certain way): הִתְלַבֵּשׁ יָפֶה “dress nicely”",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִתְלַבַּשְׁתִּי מַהֵר וְיָצָאתִי.",
+      "tr": "I got dressed quickly and went out.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים מִתְלַבְּשִׁים לְבַד.",
+      "tr": "The children get dressed by themselves.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא תָּמִיד מִתְלַבֶּשֶׁת יָפֶה.",
+      "tr": "She always dresses nicely.",
+      "register": "neutral",
+      "context": "fashion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הִתְלַבֵּשׁ חַם",
+      "tr": "dressed warmly"
+     },
+     {
+      "text": "הִתְלַבֵּשׁ יָפֶה",
+      "tr": "dressed nicely"
+     },
+     {
+      "text": "הִתְלַבֵּשׁ מַהֵר",
+      "tr": "got dressed quickly"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לָבַשׁ",
+      "register": "neutral",
+      "nuance": "“to put on, wear (a garment)” — with an object: לָבַשׁ מְעִיל; הִתְלַבֵּשׁ has none"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הִתְפַּשֵּׁט",
+      "note": "to get undressed"
+     }
+    ],
+    "etymology": {
+     "text": "Reflexive (hitpa‘el) of לָבַשׁ “to dress, put on” (Wiktionary). From the same root: לְבוּשׁ “clothing”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The whole family of clothes words: לָבַשׁ “put on”, הִתְלַבֵּשׁ “get dressed”, הִלְבִּישׁ “dress (someone)”, לְבוּשׁ “clothing”."
+    ],
+    "pitfalls": [
+     "No object: “I put on a coat” is לָבַשְׁתִּי מְעִיל, not הִתְלַבַּשְׁתִּי מְעִיל.",
+     "Dressing a child is the causative הִלְבִּישׁ: הִיא הִלְבִּישָׁה אֶת הַיֶּלֶד."
+    ],
+    "subtleties": [
+     "In slang הִתְלַבֵּשׁ עַל means “to latch onto, go after (someone or something)”."
+    ]
+   }
+  },
+  {
+   "id": "he:hitchil",
+   "lemma": "הִתְחִיל",
+   "pos": "VERB",
+   "senses": [
+    "verb.start"
+   ],
+   "translit": "hitchil",
+   "features": {
+    "spelling": "התחיל",
+    "root": "ת ח ל",
+    "binyan": "hifil",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יַתְחִיל",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "et",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "הַתְחָלָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "הִתְחַלְתִּי",
+    "V;PST;2;SG;MASC": "הִתְחַלְתָּ",
+    "V;PST;2;SG;FEM": "הִתְחַלְתְּ",
+    "V;PST;3;SG;MASC": "הִתְחִיל",
+    "V;PST;3;SG;FEM": "הִתְחִילָה",
+    "V;PST;1;PL": "הִתְחַלְנוּ",
+    "V;PST;2;PL;MASC": "הִתְחַלְתֶּם",
+    "V;PST;2;PL;FEM": "הִתְחַלְתֶּן",
+    "V;PST;3;PL": "הִתְחִילוּ",
+    "V;PRS;SG;MASC": "מַתְחִיל",
+    "V;PRS;SG;FEM": "מַתְחִילָה",
+    "V;PRS;PL;MASC": "מַתְחִילִים",
+    "V;PRS;PL;FEM": "מַתְחִילוֹת",
+    "V;FUT;1;SG": "אַתְחִיל",
+    "V;FUT;2;SG;MASC": "תַּתְחִיל",
+    "V;FUT;2;SG;FEM": "תַּתְחִילִי",
+    "V;FUT;3;SG;MASC": "יַתְחִיל",
+    "V;FUT;3;SG;FEM": "תַּתְחִיל",
+    "V;FUT;1;PL": "נַתְחִיל",
+    "V;FUT;2;PL;MASC": "תַּתְחִילוּ",
+    "V;FUT;3;PL;MASC": "יַתְחִילוּ",
+    "V;IMP;2;SG;MASC": "הַתְחֵל",
+    "V;IMP;2;SG;FEM": "הַתְחִילִי",
+    "V;IMP;2;PL;MASC": "הַתְחִילוּ",
+    "V;NFIN": "לְהַתְחִיל"
+   },
+   "note": "To start, begin. Hif‘il: past הִתְחִיל / הִתְחַלְתִּי, present מַתְחִיל, future יַתְחִיל, infinitive לְהַתְחִיל. + infinitive for “start doing”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bell rings, the film begins, a new job on Sunday morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to start, begin (something; to do something: + infinitive)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.start"
+     },
+     {
+      "id": "s2",
+      "def": "to begin, start (without an object: the lesson starts)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִתְחַלְתִּי לִלְמֹד עִבְרִית לִפְנֵי שָׁנָה.",
+      "tr": "I started learning Hebrew a year ago.",
+      "register": "neutral",
+      "context": "study",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא הִתְחִיל אֶת הַיּוֹם עִם קָפֶה.",
+      "tr": "He started the day with a coffee.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעֲבוֹדָה מַתְחִילָה בְּתֵשַׁע.",
+      "tr": "Work starts at nine.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "מָתַי הַשִּׁעוּר מַתְחִיל?",
+      "tr": "When does the lesson start?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הִתְחִיל לַעֲבֹד",
+      "tr": "started working"
+     },
+     {
+      "text": "מִן הַהַתְחָלָה",
+      "tr": "from the beginning"
+     },
+     {
+      "text": "הִתְחִיל מֵחָדָשׁ",
+      "tr": "started again, from scratch"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פָּתַח",
+      "register": "neutral",
+      "nuance": "“to open, start” — a meeting, a speech, a season (פָּתַח אֶת הַיְּשִׁיבָה)"
+     },
+     {
+      "word": "הֵחֵל",
+      "register": "formal",
+      "nuance": "“to begin, commence” — written and official style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "סִיֵּם",
+      "note": "to finish"
+     }
+    ],
+    "etymology": {
+     "text": "Hif‘il of the root ת־ח־ל (Wiktionary gives no etymology); the verbal noun is הַתְחָלָה “beginning” (Wiktionary), and the same root gives the formal תְּחִלָּה “beginning”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“In the beginning” of the Bible is בְּרֵאשִׁית, another root — today a beginning is a הַתְחָלָה."
+    ],
+    "pitfalls": [
+     "The present starts with מַ־ (hif‘il): מַתְחִיל, מַתְחִילָה — not מִתְחִיל.",
+     "To start doing something: הִתְחִיל + infinitive (הִתְחַלְתִּי לִלְמֹד); a definite object takes אֶת (הִתְחִיל אֶת הָעֲבוֹדָה).",
+     "In the past the i becomes a before an ending of the 1st or 2nd person: הִתְחִיל but הִתְחַלְתִּי, הִתְחַלְנוּ."
+    ],
+    "subtleties": [
+     "Colloquially הִתְחִיל עִם means “to hit on, make a move on (someone)” (Wiktionary).",
+     "Without an object it is “to begin” of events: הַסֶּרֶט מַתְחִיל “the film is starting”."
+    ]
+   }
+  },
+  {
+   "id": "he:siyem",
+   "lemma": "סִיֵּם",
+   "pos": "VERB",
+   "senses": [
+    "verb.finish"
+   ],
+   "translit": "siyem",
+   "features": {
+    "spelling": "סיים",
+    "root": "ס י ם",
+    "binyan": "piel",
+    "rootClass": [
+     "ayin-yod"
+    ],
+    "future": "יְסַיֵּם",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "סִיּוּם",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "סִיַּמְתִּי",
+    "V;PST;2;SG;MASC": "סִיַּמְתָּ",
+    "V;PST;2;SG;FEM": "סִיַּמְתְּ",
+    "V;PST;3;SG;MASC": "סִיֵּם",
+    "V;PST;3;SG;FEM": "סִיְּמָה",
+    "V;PST;1;PL": "סִיַּמְנוּ",
+    "V;PST;2;PL;MASC": "סִיַּמְתֶּם",
+    "V;PST;2;PL;FEM": "סִיַּמְתֶּן",
+    "V;PST;3;PL": "סִיְּמוּ",
+    "V;PRS;SG;MASC": "מְסַיֵּם",
+    "V;PRS;SG;FEM": "מְסַיֶּמֶת",
+    "V;PRS;PL;MASC": "מְסַיְּמִים",
+    "V;PRS;PL;FEM": "מְסַיְּמוֹת",
+    "V;FUT;1;SG": "אֲסַיֵּם",
+    "V;FUT;2;SG;MASC": "תְּסַיֵּם",
+    "V;FUT;2;SG;FEM": "תְּסַיְּמִי",
+    "V;FUT;3;SG;MASC": "יְסַיֵּם",
+    "V;FUT;3;SG;FEM": "תְּסַיֵּם",
+    "V;FUT;1;PL": "נְסַיֵּם",
+    "V;FUT;2;PL;MASC": "תְּסַיְּמוּ",
+    "V;FUT;3;PL;MASC": "יְסַיְּמוּ",
+    "V;IMP;2;SG;MASC": "סַיֵּם",
+    "V;IMP;2;SG;FEM": "סַיְּמִי",
+    "V;IMP;2;PL;MASC": "סַיְּמוּ",
+    "V;NFIN": "לְסַיֵּם"
+   },
+   "plene": {
+    "V;PST;1;SG": "סיימתי",
+    "V;PST;2;SG;MASC": "סיימת",
+    "V;PST;2;SG;FEM": "סיימת",
+    "V;PST;3;SG;MASC": "סיים",
+    "V;PST;3;SG;FEM": "סיימה",
+    "V;PST;1;PL": "סיימנו",
+    "V;PST;2;PL;MASC": "סיימתם",
+    "V;PST;2;PL;FEM": "סיימתן",
+    "V;PST;3;PL": "סיימו",
+    "V;PRS;SG;MASC": "מסיים",
+    "V;PRS;SG;FEM": "מסיימת",
+    "V;PRS;PL;MASC": "מסיימים",
+    "V;PRS;PL;FEM": "מסיימות",
+    "V;FUT;1;SG": "אסיים",
+    "V;FUT;2;SG;MASC": "תסיים",
+    "V;FUT;2;SG;FEM": "תסיימי",
+    "V;FUT;3;SG;MASC": "יסיים",
+    "V;FUT;3;SG;FEM": "תסיים",
+    "V;FUT;1;PL": "נסיים",
+    "V;FUT;2;PL;MASC": "תסיימו",
+    "V;FUT;3;PL;MASC": "יסיימו",
+    "V;IMP;2;SG;MASC": "סיים",
+    "V;IMP;2;SG;FEM": "סיימי",
+    "V;IMP;2;PL;MASC": "סיימו",
+    "V;NFIN": "לסיים"
+   },
+   "note": "To finish. Pi‘el of ס־י־ם with a consonantal י (written double: סיים): past סִיַּמְתִּי, present מְסַיֵּם, future יְסַיֵּם, infinitive לְסַיֵּם. Colloquial synonym: גָּמַר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The end of the working day, the last page of a book, a diploma.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to finish, complete (something; doing something: + infinitive)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.finish"
+     },
+     {
+      "id": "s2",
+      "def": "to finish (school, studies), graduate",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "סִיַּמְתִּי לַעֲבֹד בְּחָמֵשׁ.",
+      "tr": "I finished work at five.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "מָתַי אַתָּה מְסַיֵּם הַיּוֹם?",
+      "tr": "When do you (m.) finish today?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא סִיְּמָה אֶת הַסֵּפֶר בְּלַיְלָה אֶחָד.",
+      "tr": "She finished the book in one night.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא סִיֵּם אֶת הַלִּמּוּדִים לִפְנֵי שְׁנָתַיִם.",
+      "tr": "He finished his studies two years ago.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סִיֵּם אֶת הָעֲבוֹדָה",
+      "tr": "finished the work"
+     },
+     {
+      "text": "סִיֵּם לֶאֱכֹל",
+      "tr": "finished eating"
+     },
+     {
+      "text": "סִיֵּם אֶת הַלִּמּוּדִים",
+      "tr": "finished his studies, graduated"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גָּמַר",
+      "register": "colloquial",
+      "nuance": "“to finish” — the everyday word in speech (גָּמַרְתִּי!), but it also has a vulgar sense (Wiktionary)"
+     },
+     {
+      "word": "הִשְׁלִים",
+      "register": "formal",
+      "nuance": "“to complete” — a task, a project, a gap"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הִתְחִיל",
+      "note": "to start"
+     }
+    ],
+    "etymology": {
+     "text": "Pi‘el of the root ס־י־ם (Wiktionary gives no etymology); the verbal noun is סִיּוּם “end, completion” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A סִיּוּם is also the festive meal for finishing the study of a tractate of the Talmud."
+    ],
+    "pitfalls": [
+     "The י is a consonant and is doubled: סִיַּמְתִּי, מְסַיֵּם — in everyday spelling with two yods: סיימתי, מסיים.",
+     "גָּמַר is just as common in speech, but it is also a vulgar word (Wiktionary): סִיֵּם is the safe choice in writing and with strangers.",
+     "Finishing doing something takes the infinitive: סִיַּמְתִּי לֶאֱכֹל “I finished eating”."
+    ],
+    "subtleties": [
+     "As in all pi‘el verbs the present starts with מְ־: מְסַיֵּם, מְסַיֶּמֶת."
+    ]
+   }
+  },
+  {
+   "id": "he:nirdam",
+   "lemma": "נִרְדַּם",
+   "pos": "VERB",
+   "senses": [
+    "verb.fallasleep"
+   ],
+   "translit": "nirdam",
+   "features": {
+    "spelling": "נרדם",
+    "root": "ר ד ם",
+    "binyan": "nifal",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יֵרָדֵם",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "הֵרָדְמוּת",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "נִרְדַּמְתִּי",
+    "V;PST;2;SG;MASC": "נִרְדַּמְתָּ",
+    "V;PST;2;SG;FEM": "נִרְדַּמְתְּ",
+    "V;PST;3;SG;MASC": "נִרְדַּם",
+    "V;PST;3;SG;FEM": "נִרְדְּמָה",
+    "V;PST;1;PL": "נִרְדַּמְנוּ",
+    "V;PST;2;PL;MASC": "נִרְדַּמְתֶּם",
+    "V;PST;2;PL;FEM": "נִרְדַּמְתֶּן",
+    "V;PST;3;PL": "נִרְדְּמוּ",
+    "V;PRS;SG;MASC": "נִרְדָּם",
+    "V;PRS;SG;FEM": "נִרְדֶּמֶת",
+    "V;PRS;PL;MASC": "נִרְדָּמִים",
+    "V;PRS;PL;FEM": "נִרְדָּמוֹת",
+    "V;FUT;2;SG;MASC": "תֵּרָדֵם",
+    "V;FUT;2;SG;FEM": "תֵּרָדְמִי",
+    "V;FUT;3;SG;MASC": "יֵרָדֵם",
+    "V;FUT;3;SG;FEM": "תֵּרָדֵם",
+    "V;FUT;1;PL": "נֵרָדֵם",
+    "V;FUT;2;PL;MASC": "תֵּרָדְמוּ",
+    "V;FUT;3;PL;MASC": "יֵרָדְמוּ",
+    "V;IMP;2;SG;MASC": "הֵרָדֵם",
+    "V;IMP;2;SG;FEM": "הֵרָדְמִי",
+    "V;IMP;2;PL;MASC": "הֵרָדְמוּ",
+    "V;NFIN": "לְהֵרָדֵם"
+   },
+   "plene": {
+    "V;FUT;2;SG;MASC": "תירדם",
+    "V;FUT;2;SG;FEM": "תירדמי",
+    "V;FUT;3;SG;MASC": "יירדם",
+    "V;FUT;3;SG;FEM": "תירדם",
+    "V;FUT;1;PL": "נירדם",
+    "V;FUT;2;PL;MASC": "תירדמו",
+    "V;FUT;3;PL;MASC": "יירדמו",
+    "V;IMP;2;SG;MASC": "הירדם",
+    "V;IMP;2;SG;FEM": "הירדמי",
+    "V;IMP;2;PL;MASC": "הירדמו",
+    "V;NFIN": "להירדם"
+   },
+   "note": "To fall asleep. Nif‘al: past נִרְדַּמְתִּי, present נִרְדָּם, future יֵרָדֵם, infinitive לְהֵרָדֵם (full spelling להירדם). Being asleep: יָשֵׁן.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Eyes closing in front of the television; a baby finally quiet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to fall asleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.fallasleep"
+     }
+    ],
+    "examples": [
+     {
+      "text": "נִרְדַּמְתִּי מוּל הַטֶּלֶוִיזְיָה.",
+      "tr": "I fell asleep in front of the TV.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּינוֹק נִרְדַּם סוֹף סוֹף.",
+      "tr": "The baby finally fell asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "קָשֶׁה לִי לְהֵרָדֵם בַּלַּיְלָה.",
+      "tr": "It’s hard for me to fall asleep at night.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נִרְדַּם מַהֵר",
+      "tr": "fell asleep quickly"
+     },
+     {
+      "text": "לֹא מַצְלִיחַ לְהֵרָדֵם",
+      "tr": "can’t manage to fall asleep"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נִמְנֵם",
+      "register": "colloquial",
+      "nuance": "“to doze, nod off” — a short light sleep"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הִתְעוֹרֵר",
+      "note": "to wake up"
+     }
+    ],
+    "etymology": {
+     "text": "Nif‘al of the root ר־ד־ם (Wiktionary); the first sense in Wiktionary is “to sleep deeply”. From the same root: תַּרְדֵּמָה “deep sleep” — the sleep that falls on Adam in Genesis 2:21.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Anaesthesia is הַרְדָּמָה, “putting into deep sleep” — the same root."
+    ],
+    "pitfalls": [
+     "Falling asleep is נִרְדַּם; being asleep is יָשֵׁן: הוּא נִרְדַּם בְּעֶשֶׂר וְיָשַׁן עַד שֶׁבַע.",
+     "The ר takes no dagesh, so the future and the infinitive have e under the prefix: תֵּרָדֵם, לְהֵרָדֵם (everyday spelling תירדם, להירדם)."
+    ],
+    "subtleties": [
+     "Of a limb, נִרְדַּם is “went numb, fell asleep”: הָרֶגֶל שֶׁלִּי נִרְדְּמָה “my leg has gone to sleep”."
+    ]
+   }
+  },
+  {
+   "id": "he:yashan-v",
+   "lemma": "יָשַׁן",
+   "pos": "VERB",
+   "senses": [
+    "verb.sleep"
+   ],
+   "translit": "yashan",
+   "features": {
+    "spelling": "ישן",
+    "root": "י שׁ ן",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-yod"
+    ],
+    "future": "יִישַׁן",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "verbalNoun": "שֵׁנָה",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "V;PST;1;SG": "יָשַׁנְתִּי",
+    "V;PST;2;SG;MASC": "יָשַׁנְתָּ",
+    "V;PST;2;SG;FEM": "יָשַׁנְתְּ",
+    "V;PST;3;SG;MASC": "יָשַׁן",
+    "V;PST;3;SG;FEM": "יָשְׁנָה",
+    "V;PST;1;PL": "יָשַׁנּוּ",
+    "V;PST;2;PL;MASC": "יְשַׁנְתֶּם",
+    "V;PST;2;PL;FEM": "יְשַׁנְתֶּן",
+    "V;PST;3;PL": "יָשְׁנוּ",
+    "V;PRS;SG;MASC": "יָשֵׁן",
+    "V;PRS;SG;FEM": "יְשֵׁנָה",
+    "V;PRS;PL;MASC": "יְשֵׁנִים",
+    "V;PRS;PL;FEM": "יְשֵׁנוֹת",
+    "V;FUT;1;SG": "אִישַׁן",
+    "V;FUT;2;SG;MASC": "תִּישַׁן",
+    "V;FUT;2;SG;FEM": "תִּישְׁנִי",
+    "V;FUT;3;SG;MASC": "יִישַׁן",
+    "V;FUT;3;SG;FEM": "תִּישַׁן",
+    "V;FUT;1;PL": "נִישַׁן",
+    "V;FUT;2;PL;MASC": "תִּישְׁנוּ",
+    "V;FUT;3;PL;MASC": "יִישְׁנוּ",
+    "V;IMP;2;SG;MASC": "יְשַׁן",
+    "V;IMP;2;SG;FEM": "יִשְׁנִי",
+    "V;IMP;2;PL;MASC": "יִשְׁנוּ",
+    "V;NFIN": "לִישֹׁן"
+   },
+   "plene": {
+    "V;NFIN": "לישון"
+   },
+   "note": "To sleep, be asleep. Pa‘al with a first י and a stative present: יָשֵׁן / יְשֵׁנָה; past יָשַׁנְתִּי, future יִישַׁן, infinitive לִישֹׁן (full spelling לישון). Do not confuse with the adjective יָשָׁן “old”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Night, a dark room, a quiet house; “sleep well!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to sleep, be asleep",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.sleep"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יָשַׁנְתִּי שְׁמוֹנֶה שָׁעוֹת.",
+      "tr": "I slept eight hours.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים יְשֵׁנִים.",
+      "tr": "The children are asleep.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "לַיְלָה טוֹב, תִּישַׁן טוֹב!",
+      "tr": "Good night, sleep well!",
+      "register": "informal",
+      "context": "greetings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הָלַךְ לִישֹׁן",
+      "tr": "went to bed (“went to sleep”)"
+     },
+     {
+      "text": "יָשַׁן טוֹב",
+      "tr": "slept well"
+     },
+     {
+      "text": "שַׂק שֵׁנָה",
+      "tr": "sleeping bag (with the noun שֵׁנָה)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נָם",
+      "register": "literary",
+      "nuance": "“to slumber” (Wiktionary lists it as a synonym)"
+     },
+     {
+      "word": "נִמְנֵם",
+      "register": "colloquial",
+      "nuance": "“to doze” — briefly and lightly"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "הָיָה עֵר",
+      "note": "was awake"
+     }
+    ],
+    "etymology": {
+     "text": "From the root י־שׁ־ן (Wiktionary gives no etymology); its verbal noun is שֵׁנָה “sleep” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Going to bed” has no verb of its own: it is הָלַךְ לִישֹׁן, “went to sleep”."
+    ],
+    "pitfalls": [
+     "Three words, one spelling: unvocalized ישן is יָשַׁן “slept”, יָשֵׁן “sleeps, is asleep” and the adjective יָשָׁן “old” (lesson 16).",
+     "In the 1st person plural the נ of the root and of the ending merge: יָשַׁנּוּ “we slept”.",
+     "The infinitive is לִישֹׁן (full spelling לישון), and the future keeps the י as a vowel letter: יִישַׁן, תִּישַׁן."
+    ],
+    "subtleties": [
+     "The present יָשֵׁן, יְשֵׁנָה is also a state: הוּא יָשֵׁן “he is asleep”."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "verb.havebreakfast",
+   "reason": "Hebrew has no verb “to breakfast” in everyday use: the meal is eaten with the ordinary verb “to eat”.",
+   "use": "אָכַל אֲרוּחַת בֹּקֶר “ate breakfast” (אָכַלְתִּי אֲרוּחַת בֹּקֶר, both words from lesson 7); formal סָעַד אֲרוּחַת בֹּקֶר."
+  },
+  {
+   "concept": "verb.leavehome",
+   "reason": "No single verb: leaving home is the verb “to go out” with “from the house”.",
+   "use": "יָצָא מֵהַבַּיִת (lesson 13: יָצָאתִי מֵהַבַּיִת בִּשְׁמוֹנֶה “I left home at eight”)."
+  },
+  {
+   "concept": "verb.comehome",
+   "reason": "No single verb: coming home is “to return” or “to arrive” with the direction word הַבַּיְתָה “home(wards)”.",
+   "use": "חָזַר הַבַּיְתָה “came back home”, הִגִּיעַ הַבַּיְתָה “got home” (lessons 11 and 13)."
+  },
+  {
+   "concept": "verb.gotobed",
+   "reason": "No single verb: going to bed is “going to sleep”.",
+   "use": "הָלַךְ לִישֹׁן (הָלַךְ + the infinitive of יָשַׁן): הָלַכְתִּי לִישֹׁן בְּאַחַת עֶשְׂרֵה “I went to bed at eleven”; also נִכְנַס לַמִּטָּה “got into bed”."
+  }
+ ]
+}

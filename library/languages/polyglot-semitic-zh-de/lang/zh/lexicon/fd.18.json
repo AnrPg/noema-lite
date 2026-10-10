@@ -1,0 +1,989 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:danshi",
+   "lemma": "但是",
+   "trad": "但是",
+   "pinyin": "dàn shì",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.but"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "neutral, also written"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The turn in a sentence: yes, but…",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "but, however",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.but"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我很累，但是我很高兴。",
+      "py": "Wǒ hěn lèi, dànshì wǒ hěn gāoxìng.",
+      "tr": "I’m tired, but I’m happy.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "这个包很漂亮，但是太贵了。",
+      "py": "Zhège bāo hěn piàoliang, dànshì tài guì le.",
+      "tr": "This bag is pretty, but it’s too expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "虽然下雨了，但是我们还是去了。",
+      "py": "Suīrán xià yǔ le, dànshì wǒmen háishi qù le.",
+      "tr": "Although it rained, we still went.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "虽然…但是…",
+      "tr": "although …, (still) …"
+     },
+     {
+      "text": "但是我…",
+      "tr": "but I …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "可是",
+      "register": "informal",
+      "nuance": "kěshì: but — softer, more spoken"
+     },
+     {
+      "word": "不过",
+      "register": "informal",
+      "nuance": "búguò: but, though — milder, adds a reservation"
+     },
+     {
+      "word": "但",
+      "register": "formal",
+      "nuance": "dàn: but — written and formal speech"
+     },
+     {
+      "word": "然而",
+      "register": "literary",
+      "nuance": "rán’ér: however (written)"
+     }
+    ],
+    "etymology": {
+     "text": "但 ‘only; but’ + 是 ‘to be’.",
+     "src": "morphemes: 但 + 是 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "但 alone is the written ‘but’: 我想去，但没有时间."
+    ],
+    "pitfalls": [
+     "It opens its clause, before the subject: …，但是我… — never at the end.",
+     "After 虽然 ‘although’ Chinese expects 但是 in the second clause — where English and German forbid ‘although … but’."
+    ],
+    "subtleties": [
+     "但是 often comes with 还是 or 也 later in the clause: 但是我还是去了 ‘but I went anyway’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:keshi",
+   "lemma": "可是",
+   "trad": "可是",
+   "pinyin": "kě shì",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.but",
+    "adv.truly"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "spoken"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A spoken ‘but’ — often with a little sigh.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "but, however",
+      "register": [
+       "informal"
+      ],
+      "concept": "conj.but"
+     },
+     {
+      "id": "s2",
+      "def": "(adverb) really, indeed — stresses what follows",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.truly"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我想去，可是我没有时间。",
+      "py": "Wǒ xiǎng qù, kěshì wǒ méiyǒu shíjiān.",
+      "tr": "I’d like to go, but I don’t have time.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "这家饭馆很好，可是很贵。",
+      "py": "Zhè jiā fànguǎn hěn hǎo, kěshì hěn guì.",
+      "tr": "This restaurant is good, but it’s expensive.",
+      "register": "informal",
+      "context": "restaurants",
+      "sense": "s1"
+     },
+     {
+      "text": "这可是好东西！",
+      "py": "Zhè kěshì hǎo dōngxi!",
+      "tr": "This is really good stuff!",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "虽然…可是…",
+      "tr": "although …, (still) …"
+     },
+     {
+      "text": "可是我…",
+      "tr": "but I …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "但是",
+      "register": "neutral",
+      "nuance": "dànshì: but — the neutral, also written word"
+     },
+     {
+      "word": "不过",
+      "register": "informal",
+      "nuance": "búguò: but, though — milder"
+     }
+    ],
+    "etymology": {
+     "text": "可 ‘can; indeed’ + 是 ‘to be’.",
+     "src": "morphemes: 可 + 是 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "可 alone is a strong spoken intensifier: 这可不行 ‘that really won’t do’."
+    ],
+    "pitfalls": [
+     "It opens its clause, before the subject: …，但是我… — never at the end.",
+     "可是 ‘but’ vs 可能 ‘maybe’ (S09) and 可以 ‘may, can’: three words with 可."
+    ],
+    "subtleties": [
+     "可是 sounds more spoken and often a little regretful; 但是 is neutral."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:yinwei",
+   "lemma": "因为",
+   "trad": "因為",
+   "pinyin": "yīn wèi",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.because",
+    "prep.becauseof"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.becauseof",
+     "axis": "register",
+     "value": "因为 + noun — neutral (因为下雨)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The reason — usually told first in Chinese.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "because, since",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.because"
+     },
+     {
+      "id": "s2",
+      "def": "(+ noun) because of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.becauseof"
+     }
+    ],
+    "examples": [
+     {
+      "text": "因为今天很冷，所以我不出去。",
+      "py": "Yīnwèi jīntiān hěn lěng, suǒyǐ wǒ bù chūqu.",
+      "tr": "Because it’s cold today, I’m not going out.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "我不去，因为我很累。",
+      "py": "Wǒ bú qù, yīnwèi wǒ hěn lèi.",
+      "tr": "I’m not going, because I’m tired.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "因为下雨，比赛取消了。",
+      "py": "Yīnwèi xià yǔ, bǐsài qǔxiāo le.",
+      "tr": "Because of the rain, the match was cancelled.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "因为…所以…",
+      "tr": "because …, (so) …"
+     },
+     {
+      "text": "就是因为",
+      "tr": "precisely because"
+     },
+     {
+      "text": "因为这个",
+      "tr": "because of this"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "由于",
+      "register": "formal",
+      "nuance": "yóuyú: because, due to (written, news)"
+     },
+     {
+      "word": "因",
+      "register": "literary",
+      "nuance": "yīn: because (in set phrases: 因病 ‘owing to illness’)"
+     }
+    ],
+    "etymology": {
+     "text": "因 ‘cause, reason’ + 为 wèi ‘for’.",
+     "src": "morphemes: 因 + 为 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "A Chinese reason-and-result sentence can mark both halves: 因为…所以… ‘because…, therefore…’ — natural in Chinese, clumsy in English."
+    ],
+    "pitfalls": [
+     "The usual order is reason first: 因为…，所以…. 因为 after the main clause (我不去，因为…) is common in speech, but then 所以 disappears.",
+     "Pinyin: yīnwèi (mainland; often yīnwei in speech), yīnwéi in Taiwan."
+    ],
+    "subtleties": [
+     "The word order inside the 因为-clause does not change (unlike German weil, which sends the verb to the end)."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 因為 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "pair": "所以"
+   }
+  },
+  {
+   "id": "zh:suoyi",
+   "lemma": "所以",
+   "trad": "所以",
+   "pinyin": "suǒ yǐ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.so",
+    "abstract.reason"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The result: and so, therefore.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "so, therefore",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.so"
+     },
+     {
+      "id": "s2",
+      "def": "(literary) the reason why; the means by which",
+      "register": [
+       "literary"
+      ],
+      "concept": "abstract.reason"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我饿了，所以我想吃饭。",
+      "py": "Wǒ è le, suǒyǐ wǒ xiǎng chī fàn.",
+      "tr": "I’m hungry, so I want to eat.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "因为火车很快，所以我们坐火车。",
+      "py": "Yīnwèi huǒchē hěn kuài, suǒyǐ wǒmen zuò huǒchē.",
+      "tr": "Because the train is fast, we take the train.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "所以呢？",
+      "py": "Suǒyǐ ne?",
+      "tr": "So what?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "他之所以没来，是因为他病了。",
+      "py": "Tā zhīsuǒyǐ méi lái, shì yīnwèi tā bìng le.",
+      "tr": "The reason he didn’t come is that he was ill.",
+      "register": "formal",
+      "context": "explanations",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "因为…所以…",
+      "tr": "because …, so …"
+     },
+     {
+      "text": "所以说",
+      "tr": "so, that’s why (summing up)"
+     },
+     {
+      "text": "之所以…是因为…",
+      "tr": "the reason why … is that …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "因此",
+      "register": "formal",
+      "nuance": "yīncǐ: therefore (written)"
+     },
+     {
+      "word": "那",
+      "register": "informal",
+      "nuance": "nà: then, so (那我们走吧 ‘so let’s go’)"
+     }
+    ],
+    "etymology": {
+     "text": "所 ‘that which’ + 以 ‘by means of’: in Classical Chinese 所以 meant ‘that by which, the reason why’; ‘therefore’ grew out of it.",
+     "src": "morphemes: 所 + 以 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "所以呢？ ‘so?’ is the Chinese ‘so what?’"
+    ],
+    "pitfalls": [
+     "所以 opens its clause, before the subject: …，所以我… — not *我所以."
+    ],
+    "subtleties": [
+     "所以 can stand alone without 因为; 因为 alone at the start is also fine — the pair is the clearest."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:ranhou",
+   "lemma": "然后",
+   "trad": "然後",
+   "pinyin": "rán hòu",
+   "pos": "CCONJ",
+   "senses": [
+    "adv.then"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "sequence or time after",
+     "value": "then, next (sequence)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Step by step: and then, after that.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "then, after that, afterwards",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.then"
+     },
+     {
+      "id": "s2",
+      "def": "(spoken filler) and, and then",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们先吃饭，然后去公园。",
+      "py": "Wǒmen xiān chī fàn, ránhòu qù gōngyuán.",
+      "tr": "We’ll eat first, then go to the park.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "我去超市，然后回家。",
+      "py": "Wǒ qù chāoshì, ránhòu huí jiā.",
+      "tr": "I’m going to the supermarket and then home.",
+      "register": "neutral",
+      "context": "errands",
+      "sense": "s1"
+     },
+     {
+      "text": "然后呢？",
+      "py": "Ránhòu ne?",
+      "tr": "And then?",
+      "register": "informal",
+      "context": "stories",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "先…然后…",
+      "tr": "first …, then …"
+     },
+     {
+      "text": "然后呢",
+      "tr": "and then?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "以后",
+      "register": "neutral",
+      "nuance": "yǐhòu: after (after a clause: 吃饭以后 ‘after eating’)"
+     },
+     {
+      "word": "接着",
+      "register": "neutral",
+      "nuance": "jiēzhe: next, then (straight on)"
+     },
+     {
+      "word": "后来",
+      "register": "neutral",
+      "nuance": "hòulái: later, afterwards — only about the past, and it stands alone (后来他走了)"
+     }
+    ],
+    "etymology": {
+     "text": "然 ‘so, thus’ + 后 ‘after’.",
+     "src": "morphemes: 然 + 后 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "In casual speech 然后 is a filler, like English ‘and then… and then…’ or ‘so…’."
+    ],
+    "pitfalls": [
+     "然后 ≠ 后来: 然后 joins steps (plans, instructions, stories); 后来 ‘later on’ is only for past events and cannot follow 先."
+    ],
+    "subtleties": [
+     "先 ‘first’ often prepares 然后: 先…然后… ‘first …, then …’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 然後 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   }
+  },
+  {
+   "id": "zh:ruguo",
+   "lemma": "如果",
+   "trad": "如果",
+   "pinyin": "rú guǒ",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.if"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.if",
+     "axis": "position",
+     "value": "opens the clause"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A condition: if this, then that.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "if",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.if"
+     }
+    ],
+    "examples": [
+     {
+      "text": "如果明天冷，我们就不去公园。",
+      "py": "Rúguǒ míngtiān lěng, wǒmen jiù bú qù gōngyuán.",
+      "tr": "If it’s cold tomorrow, we won’t go to the park.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "如果你饿了，就吃面包吧。",
+      "py": "Rúguǒ nǐ è le, jiù chī miànbāo ba.",
+      "tr": "If you’re hungry, have some bread.",
+      "register": "informal",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "如果可以的话，请明天来。",
+      "py": "Rúguǒ kěyǐ dehuà, qǐng míngtiān lái.",
+      "tr": "If possible, please come tomorrow.",
+      "register": "formal",
+      "context": "requests",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "如果…就…",
+      "tr": "if …, then …"
+     },
+     {
+      "text": "如果…的话",
+      "tr": "if …"
+     },
+     {
+      "text": "如果是我",
+      "tr": "if it were me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "要是",
+      "register": "informal",
+      "nuance": "yàoshi: if — spoken"
+     },
+     {
+      "word": "假如",
+      "register": "formal",
+      "nuance": "jiǎrú: supposing, if (written)"
+     },
+     {
+      "word": "的话",
+      "register": "informal",
+      "nuance": "dehuà: (at the end of the condition) if"
+     }
+    ],
+    "etymology": {
+     "text": "如 ‘as, if’ + 果 ‘really, indeed’.",
+     "src": "morphemes: 如 + 果 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "A Chinese ‘if’ can be said twice: 如果…的话 — at the start and at the end of the condition."
+    ],
+    "pitfalls": [
+     "The condition comes first; the result clause follows, often with 就 after its subject: 如果你饿了，我们就吃饭.",
+     "No special verb form: Chinese uses the same 如果 for real and unreal conditions (if I were you …)."
+    ],
+    "subtleties": [
+     "如果 can stand after the subject: 你如果饿了，就吃吧."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "pair": "就"
+   }
+  },
+  {
+   "id": "zh:dehua",
+   "lemma": "的话",
+   "trad": "的話",
+   "pinyin": "de huà",
+   "pos": "PART",
+   "senses": [
+    "conj.if"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.if",
+     "axis": "position",
+     "value": "closes the clause (may combine with 如果)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The ‘if’ that comes at the end.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(at the end of a condition) if, in case",
+      "register": [
+       "informal"
+      ],
+      "concept": "conj.if"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你累的话，就回家吧。",
+      "py": "Nǐ lèi dehuà, jiù huí jiā ba.",
+      "tr": "If you’re tired, go home.",
+      "register": "informal",
+      "context": "care",
+      "sense": "s1"
+     },
+     {
+      "text": "明天冷的话，我们在家。",
+      "py": "Míngtiān lěng dehuà, wǒmen zài jiā.",
+      "tr": "If it’s cold tomorrow, we’ll stay at home.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "如果可以的话，我想早点走。",
+      "py": "Rúguǒ kěyǐ dehuà, wǒ xiǎng zǎo diǎn zǒu.",
+      "tr": "If possible, I’d like to leave a bit early.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "…的话，就…",
+      "tr": "if …, then …"
+     },
+     {
+      "text": "如果…的话",
+      "tr": "if …"
+     },
+     {
+      "text": "可以的话",
+      "tr": "if possible"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "如果",
+      "register": "neutral",
+      "nuance": "rúguǒ: if — at the start of the condition"
+     }
+    ],
+    "etymology": {
+     "text": "的 + 话 ‘words, talk’; a particle that closes a conditional clause.",
+     "src": "morphemes: 的 + 话 (Wiktionary (kaikki.org) character entries)"
+    },
+    "funFacts": [
+     "In speech 的话 alone is enough for ‘if’: 你累的话 ‘if you’re tired’ — no 如果 needed."
+    ],
+    "pitfalls": [
+     "的话 goes at the END of the condition. 他的话 ‘his words’ (的 + the noun 话) is something else."
+    ],
+    "subtleties": [
+     "Pronounced dehuà: a toneless de and a 4th-tone huà."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 的話 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "clauseFinal"
+    ]
+   }
+  },
+  {
+   "id": "zh:suiran",
+   "lemma": "虽然",
+   "trad": "雖然",
+   "pinyin": "suī rán",
+   "pos": "SCONJ",
+   "senses": [
+    "conj.although"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A concession: even so.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "although, even though",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.although"
+     }
+    ],
+    "examples": [
+     {
+      "text": "虽然这个房子很小，但是很漂亮。",
+      "py": "Suīrán zhège fángzi hěn xiǎo, dànshì hěn piàoliang.",
+      "tr": "Although this house is small, it is pretty.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "他虽然很累，可是很高兴。",
+      "py": "Tā suīrán hěn lèi, kěshì hěn gāoxìng.",
+      "tr": "Although he is tired, he is happy.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     },
+     {
+      "text": "虽然冬天很冷，我还是喜欢北京。",
+      "py": "Suīrán dōngtiān hěn lěng, wǒ háishi xǐhuan Běijīng.",
+      "tr": "Although winter is cold, I still like Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "虽然…但是…",
+      "tr": "although …, (still) …"
+     },
+     {
+      "text": "虽然…可是…",
+      "tr": "although …, (still) …"
+     },
+     {
+      "text": "虽然如此",
+      "tr": "even so"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "尽管",
+      "register": "formal",
+      "nuance": "jǐnguǎn: even though, despite"
+     },
+     {
+      "word": "虽",
+      "register": "literary",
+      "nuance": "suī: although (written)"
+     }
+    ],
+    "etymology": {
+     "text": "虽 ‘although’ + 然 ‘so, thus’; in Classical Chinese 虽然 also meant ‘although it is so’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese marks a concession at both ends: 虽然…但是… — English ‘although … but’ is a mistake, Chinese without the second word sounds unfinished."
+    ],
+    "pitfalls": [
+     "Greek, English and German speakers drop the 但是 / 可是 by habit — keep it: 虽然很贵，但是很好."
+    ],
+    "subtleties": [
+     "When both clauses share the subject, 虽然 often stands after it: 他虽然很累，可是很高兴."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 雖然 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "pair": "但是 / 可是"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "conj.that",
+   "reason": "Chinese has no word for ‘that’ before a clause: the clause simply follows the verb of saying, thinking or knowing, with its normal word order.",
+   "use": "我知道他是老师 ‘I know (that) he is a teacher’; 我觉得这个很贵 ‘I think (that) this is expensive’; 他说他明天来 ‘he says (that) he is coming tomorrow’ — no ‘that’, no comma, no change in word order. (The relative ‘that’ — the book that … — is 的, in C06.)"
+  }
+ ]
+}

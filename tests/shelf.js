@@ -85,7 +85,7 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const box = () => p.locator('.noema-ovbox').last();
 
   console.log('— A. the picker: 🧭 Curricula first, 📚 the Shelf for the rest');
-  ok(await p.locator('.cm-mode').count() === 1 && /Roadmaps/.test(await p.locator('.cm-mode').innerText()), 'one way in: 🧭 Curricula (no 📚 Subjects tab)');
+  ok(await p.locator('.cm-mode').count() === 1 + (await p.evaluate(() => (window.NOEMA_REGISTRY.languages || []).length ? 1 : 0)) && /Roadmaps/.test(await p.locator('.cm-mode').first().innerText()), 'one way in: 🧭 Curricula (no 📚 Subjects tab; 🌍 Languages beside it when there are language courses)');
   ok(await p.locator('details.pick-shelf[open]').count() === 1, 'no curriculum yet: the 📚 Shelf is open');
   ok(/Shelf — 2 subject/.test(await p.locator('.pick-shelf > summary').innerText()) && await p.locator('.pick-shelf .noema-chip:has-text("Demo Physics")').isVisible(), 'the Shelf holds the library subjects (2), studyable as before');
   ok(await p.locator('.pick-nocur button:has-text("New Roadmap")').isVisible(), 'no map yet: ➕ New curriculum right there');

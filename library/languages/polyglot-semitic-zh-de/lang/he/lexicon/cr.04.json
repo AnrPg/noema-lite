@@ -1,0 +1,1915 @@
+{
+ "lexemes": [
+  {
+   "id": "he:rishon",
+   "lemma": "רִאשׁוֹן",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.1"
+   ],
+   "translit": "rishon",
+   "features": {
+    "spelling": "ראשון",
+    "root": "ר א שׁ",
+    "pattern": "קִטְלוֹן",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "רִאשׁוֹן",
+    "ADJ;SG;FEM": "רִאשׁוֹנָה",
+    "ADJ;PL;MASC": "רִאשׁוֹנִים",
+    "ADJ;PL;FEM": "רִאשׁוֹנוֹת",
+    "ADJ;SG;MASC;DEF": "הָרִאשׁוֹן",
+    "ADJ;SG;FEM;DEF": "הָרִאשׁוֹנָה",
+    "ADJ;PL;MASC;DEF": "הָרִאשׁוֹנִים",
+    "ADJ;PL;FEM;DEF": "הָרִאשׁוֹנוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A first day at school, a first visit, the winner of a race.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "first",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה הַיּוֹם הָרִאשׁוֹן שֶׁלִּי בָּעֲבוֹדָה.",
+      "tr": "It’s my first day at work.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת הַפַּעַם הָרִאשׁוֹנָה שֶׁלִּי בְּיִשְׂרָאֵל.",
+      "tr": "It’s my first time in Israel.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא הִגִּיעָה רִאשׁוֹנָה.",
+      "tr": "She arrived first.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּפַּעַם הָרִאשׁוֹנָה",
+      "tr": "for the first time"
+     },
+     {
+      "text": "עֶזְרָה רִאשׁוֹנָה",
+      "tr": "first aid"
+     },
+     {
+      "text": "מָקוֹם רִאשׁוֹן",
+      "tr": "first place"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֲנִי רִאשׁוֹן וַאֲנִי אַחֲרוֹן",
+      "tr": "I am the first and I am the last",
+      "kind": "quote",
+      "meaning": "the eternal one, before and after everything",
+      "register": "religious",
+      "source": "Isaiah 44:6"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal; the adverb “first, at first” is another word (קֹדֶם, בְּהַתְחָלָה).",
+    "antonyms": [
+     {
+      "word": "אַחֲרוֹן",
+      "note": "last"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ר־א־שׁ of רֹאשׁ “head”, in the pattern קִטְלוֹן (Wiktionary): “the one at the head”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sunday is יוֹם רִאשׁוֹן, “the first day” of the week."
+    ],
+    "pitfalls": [
+     "The א is silent: rishón.",
+     "It agrees like any adjective: הַפַּעַם הָרִאשׁוֹנָה, הַיָּמִים הָרִאשׁוֹנִים — and the article is הָ before ר."
+    ],
+    "subtleties": [
+     "After a verb it says who came first and agrees with the subject: הִיא הִגִּיעָה רִאשׁוֹנָה, הֵם הִגִּיעוּ רִאשׁוֹנִים."
+    ]
+   }
+  },
+  {
+   "id": "he:sheni",
+   "lemma": "שֵׁנִי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.2"
+   ],
+   "translit": "sheni",
+   "features": {
+    "spelling": "שני",
+    "root": {
+     "none": "built on the number שְׁנַיִם “two” (Proto-Semitic *ṯin-, Wiktionary) with the ending ־ִי; dictionaries differ on its root"
+    },
+    "pattern": {
+     "none": "the number’s stem + the ending ־ִי, not the ordinal pattern קְטִילִי"
+    },
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "שֵׁנִי",
+    "ADJ;SG;FEM": "שְׁנִיָּה",
+    "ADJ;PL;MASC": "שְׁנִיִּים",
+    "ADJ;PL;FEM": "שְׁנִיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַשֵּׁנִי",
+    "ADJ;SG;FEM;DEF": "הַשְּׁנִיָּה",
+    "ADJ;PL;MASC;DEF": "הַשְּׁנִיִּים",
+    "ADJ;PL;FEM;DEF": "הַשְּׁנִיּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;FEM": "שנייה",
+    "ADJ;SG;FEM;DEF": "השנייה"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Second place, a second chance, a second-hand car.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "second",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ גָּרִים בַּבַּיִת הַשֵּׁנִי מִשְּׂמֹאל.",
+      "tr": "We live in the second house on the left.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת הַפַּעַם הַשְּׁנִיָּה שֶׁאֲנִי פֹּה.",
+      "tr": "This is the second time I’m here.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִינוּ מְכוֹנִית יַד שְׁנִיָּה.",
+      "tr": "We bought a second-hand car.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יַד שְׁנִיָּה",
+      "tr": "second-hand (“second hand”)"
+     },
+     {
+      "text": "מִלְחֶמֶת הָעוֹלָם הַשְּׁנִיָּה",
+      "tr": "the Second World War"
+     },
+     {
+      "text": "הַחֲצִי הַשֵּׁנִי",
+      "tr": "the second half"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal; the adverb “secondly, again” is שֵׁנִית.",
+    "etymology": {
+     "text": "From the number שְׁנַיִם “two” (Proto-Semitic *ṯin-, Wiktionary) with the ending ־ִי.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Monday is יוֹם שֵׁנִי, “the second day”."
+    ],
+    "pitfalls": [
+     "שְׁנִיָּה is also a noun, “a second” (of time): חַכֵּה שְׁנִיָּה! “wait a second!”.",
+     "שֵׁנִי “second” ≠ שְׁנֵי “two (of)”: שְׁנֵי בָּתִּים “two houses”, הַבַּיִת הַשֵּׁנִי “the second house”.",
+     "The feminine doubles the י: שְׁנִיָּה (full spelling שנייה)."
+    ],
+    "subtleties": [
+     "Wiktionary also gives the feminine שֵׁנִית; today שֵׁנִית is mainly the adverb “again, secondly”."
+    ]
+   }
+  },
+  {
+   "id": "he:shlishi",
+   "lemma": "שְׁלִישִׁי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.3"
+   ],
+   "translit": "shlishi",
+   "features": {
+    "spelling": "שלישי",
+    "root": "שׁ ל שׁ",
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "שְׁלִישִׁי",
+    "ADJ;SG;FEM": "שְׁלִישִׁית",
+    "ADJ;PL;MASC": "שְׁלִישִׁיִּים",
+    "ADJ;PL;FEM": "שְׁלִישִׁיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַשְּׁלִישִׁי",
+    "ADJ;SG;FEM;DEF": "הַשְּׁלִישִׁית",
+    "ADJ;PL;MASC;DEF": "הַשְּׁלִישִׁיִּים",
+    "ADJ;PL;FEM;DEF": "הַשְּׁלִישִׁיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The third floor without a lift; a third child.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "third",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.3"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵם גָּרִים בַּקּוֹמָה הַשְּׁלִישִׁית.",
+      "tr": "They live on the third floor.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה הַיֶּלֶד הַשְּׁלִישִׁי שֶׁלָּהֶם.",
+      "tr": "This is their third child.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא סִיְּמָה בַּמָּקוֹם הַשְּׁלִישִׁי.",
+      "tr": "She finished in third place.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַקּוֹמָה הַשְּׁלִישִׁית",
+      "tr": "the third floor"
+     },
+     {
+      "text": "גּוּף שְׁלִישִׁי",
+      "tr": "third person (grammar)"
+     },
+     {
+      "text": "הָעוֹלָם הַשְּׁלִישִׁי",
+      "tr": "the third world"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From שָׁלוֹשׁ “three” (root שׁ־ל־שׁ) in the ordinal pattern קְטִילִי, like רְבִיעִי, חֲמִישִׁי, שְׁבִיעִי (Wiktionary gives no etymology).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tuesday, יוֹם שְׁלִישִׁי, is a favourite day for weddings: in Genesis “it was good” is said twice on the third day."
+    ],
+    "pitfalls": [
+     "A third (⅓) is the noun שְׁלִישׁ, plural שְׁלִישִׁים — and Wiktionary also lists שְׁלִישִׁים as a plural of the ordinal; the usual plural of “third” is שְׁלִישִׁיִּים."
+    ],
+    "subtleties": [
+     "The ordinal pattern קְטִילִי: שְׁלִישִׁי, רְבִיעִי, חֲמִישִׁי, שְׁבִיעִי, שְׁמִינִי, תְּשִׁיעִי, עֲשִׂירִי — first, second and sixth are irregular."
+    ]
+   }
+  },
+  {
+   "id": "he:revii",
+   "lemma": "רְבִיעִי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.4"
+   ],
+   "translit": "revi'i",
+   "features": {
+    "spelling": "רביעי",
+    "root": "ר ב ע",
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "רְבִיעִי",
+    "ADJ;SG;FEM": "רְבִיעִית",
+    "ADJ;PL;MASC": "רְבִיעִיִּים",
+    "ADJ;PL;FEM": "רְבִיעִיּוֹת",
+    "ADJ;SG;MASC;DEF": "הָרְבִיעִי",
+    "ADJ;SG;FEM;DEF": "הָרְבִיעִית",
+    "ADJ;PL;MASC;DEF": "הָרְבִיעִיִּים",
+    "ADJ;PL;FEM;DEF": "הָרְבִיעִיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Just off the podium: the fourth place.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fourth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.4"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה הַטִּיּוּל הָרְבִיעִי שֶׁלָּנוּ הַשָּׁנָה.",
+      "tr": "This is our fourth trip this year.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא גָּרָה בַּקּוֹמָה הָרְבִיעִית.",
+      "tr": "She lives on the fourth floor.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא סִיֵּם רְבִיעִי.",
+      "tr": "He finished fourth.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַקּוֹמָה הָרְבִיעִית",
+      "tr": "the fourth floor"
+     },
+     {
+      "text": "הַמָּקוֹם הָרְבִיעִי",
+      "tr": "fourth place"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From אַרְבַּע “four” (root ר־ב־ע) in the ordinal pattern קְטִילִי (Wiktionary gives no etymology).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wednesday is יוֹם רְבִיעִי, “the fourth day”."
+    ],
+    "pitfalls": [
+     "The article before ר is הָ: הָרְבִיעִי, הָרְבִיעִית.",
+     "A quarter is רֶבַע (lesson C04), not רְבִיעִי; a quartet is a רְבִיעִיָּה."
+    ],
+    "subtleties": [
+     "The א of אַרְבַּע is not part of the root: four is ר־ב־ע, as in רֶבַע and רְבִיעִי."
+    ]
+   }
+  },
+  {
+   "id": "he:chamishi",
+   "lemma": "חֲמִישִׁי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.5"
+   ],
+   "translit": "chamishi",
+   "features": {
+    "spelling": "חמישי",
+    "root": "ח מ שׁ",
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "חֲמִישִׁי",
+    "ADJ;SG;FEM": "חֲמִישִׁית",
+    "ADJ;PL;MASC": "חֲמִישִׁיִּים",
+    "ADJ;PL;FEM": "חֲמִישִׁיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַחֲמִישִׁי",
+    "ADJ;SG;FEM;DEF": "הַחֲמִישִׁית",
+    "ADJ;PL;MASC;DEF": "הַחֲמִישִׁיִּים",
+    "ADJ;PL;FEM;DEF": "הַחֲמִישִׁיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Thursday evening, the fifth lesson of a long school day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.5"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשִּׁעוּר הַחֲמִישִׁי מַתְחִיל בְּאַחַת.",
+      "tr": "The fifth lesson starts at one.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ גָּרִים בַּבַּיִת הַחֲמִישִׁי בָּרְחוֹב.",
+      "tr": "We live in the fifth house in the street.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּת הַחֲמִישִׁית שֶׁלָּהֶם נוֹלְדָה בְּמַאי.",
+      "tr": "Their fifth daughter was born in May.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַשִּׁעוּר הַחֲמִישִׁי",
+      "tr": "the fifth lesson"
+     },
+     {
+      "text": "הַקּוֹמָה הַחֲמִישִׁית",
+      "tr": "the fifth floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From חָמֵשׁ “five” (Wiktionary), in the ordinal pattern קְטִילִי.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Thursday is יוֹם חֲמִישִׁי, “the fifth day”."
+    ],
+    "pitfalls": [
+     "Wiktionary also lists the short plural חֲמִישִׁים — in everyday spelling the same letters as חֲמִשִּׁים “fifty” (חמישים); the plural in use is חֲמִישִׁיִּים.",
+     "The article before ח is הַ without a dagesh: הַחֲמִישִׁי."
+    ],
+    "subtleties": [
+     "The fifth of something (⅕) is חֲמִישִׁית, the same as the feminine ordinal."
+    ]
+   }
+  },
+  {
+   "id": "he:shishi",
+   "lemma": "שִׁשִּׁי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.6"
+   ],
+   "translit": "shishi",
+   "features": {
+    "spelling": "שישי",
+    "root": "שׁ שׁ שׁ",
+    "pattern": {
+     "none": "irregular: the doubled שׁ (שִׁשִּׁי) does not follow the ordinal pattern קְטִילִי"
+    },
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "שִׁשִּׁי",
+    "ADJ;SG;FEM": "שִׁשִּׁית",
+    "ADJ;PL;MASC": "שִׁשִּׁיִּים",
+    "ADJ;PL;FEM": "שִׁשִּׁיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַשִּׁשִּׁי",
+    "ADJ;SG;FEM;DEF": "הַשִּׁשִּׁית",
+    "ADJ;PL;MASC;DEF": "הַשִּׁשִּׁיִּים",
+    "ADJ;PL;FEM;DEF": "הַשִּׁשִּׁיּוֹת"
+   },
+   "plene": {
+    "ADJ;SG;MASC": "שישי",
+    "ADJ;SG;FEM": "שישית",
+    "ADJ;PL;MASC": "שישיים",
+    "ADJ;PL;FEM": "שישיות",
+    "ADJ;SG;MASC;DEF": "השישי",
+    "ADJ;SG;FEM;DEF": "השישית",
+    "ADJ;PL;MASC;DEF": "השישיים",
+    "ADJ;PL;FEM;DEF": "השישיות"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Friday — and a sixth sense.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.6"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהּ חוּשׁ שִׁשִּׁי.",
+      "tr": "She has a sixth sense.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּשְׂרָד בַּקּוֹמָה הַשִּׁשִּׁית.",
+      "tr": "The office is on the sixth floor.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה הַסֵּפֶר הַשִּׁשִּׁי שֶׁלּוֹ.",
+      "tr": "This is his sixth book.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חוּשׁ שִׁשִּׁי",
+      "tr": "a sixth sense"
+     },
+     {
+      "text": "הַקּוֹמָה הַשִּׁשִּׁית",
+      "tr": "the sixth floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From שֵׁשׁ “six”; Wiktionary gives no etymology. Unlike the other ordinals from three to ten it has a doubled שׁ, not the pattern קְטִילִי.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Friday is יוֹם שִׁשִּׁי — Israelis often just say שִׁשִּׁי."
+    ],
+    "pitfalls": [
+     "Full spelling שישי (Wiktionary marks ששי as defective).",
+     "Wiktionary lists two masculine plurals; שִׁשִּׁים is also “sixty” — the plural of the ordinal in use is שִׁשִּׁיִּים."
+    ],
+    "subtleties": [
+     "The feminine שִׁשִּׁית is also “a sixth” (⅙)."
+    ]
+   }
+  },
+  {
+   "id": "he:shvii",
+   "lemma": "שְׁבִיעִי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.7"
+   ],
+   "translit": "shvi'i",
+   "features": {
+    "spelling": "שביעי",
+    "root": "שׁ ב ע",
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "שְׁבִיעִי",
+    "ADJ;SG;FEM": "שְׁבִיעִית",
+    "ADJ;PL;MASC": "שְׁבִיעִיִּים",
+    "ADJ;PL;FEM": "שְׁבִיעִיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַשְּׁבִיעִי",
+    "ADJ;SG;FEM;DEF": "הַשְּׁבִיעִית",
+    "ADJ;PL;MASC;DEF": "הַשְּׁבִיעִיִּים",
+    "ADJ;PL;FEM;DEF": "הַשְּׁבִיעִיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The day of rest; seventh heaven.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventh",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.7"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שַׁבָּת הִיא הַיּוֹם הַשְּׁבִיעִי.",
+      "tr": "The Sabbath is the seventh day.",
+      "register": "neutral",
+      "context": "culture",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֹדֶשׁ הַשְּׁבִיעִי שֶׁל הַשָּׁנָה הוּא יוּלִי.",
+      "tr": "The seventh month of the year is July.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא הָיָה בָּרָקִיעַ הַשְּׁבִיעִי.",
+      "tr": "He was in seventh heaven.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַיּוֹם הַשְּׁבִיעִי",
+      "tr": "the seventh day"
+     },
+     {
+      "text": "הַקּוֹמָה הַשְּׁבִיעִית",
+      "tr": "the seventh floor"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "בָּרָקִיעַ הַשְּׁבִיעִי",
+      "tr": "in the seventh firmament",
+      "kind": "idiom",
+      "meaning": "in seventh heaven, overjoyed",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From שֶׁבַע “seven” (root שׁ־ב־ע) in the ordinal pattern קְטִילִי (Wiktionary gives no etymology).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The week, שָׁבוּעַ, has the same root: a unit of seven days."
+    ],
+    "pitfalls": [
+     "Wiktionary also lists the short plural שְׁבִיעִים — in everyday spelling close to שִׁבְעִים “seventy” (שבעים); the plural in use is שְׁבִיעִיִּים."
+    ],
+    "subtleties": [
+     "In Hebrew the seventh day of the week is Saturday, the Sabbath — the week starts on Sunday."
+    ]
+   }
+  },
+  {
+   "id": "he:shmini",
+   "lemma": "שְׁמִינִי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.8"
+   ],
+   "translit": "shmini",
+   "features": {
+    "spelling": "שמיני",
+    "root": {
+     "none": "built on שְׁמוֹנֶה “eight” (Proto-Semitic *ṯamāniy-, Wiktionary); dictionaries differ on how to write its root"
+    },
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "שְׁמִינִי",
+    "ADJ;SG;FEM": "שְׁמִינִית",
+    "ADJ;PL;MASC": "שְׁמִינִיִּים",
+    "ADJ;PL;FEM": "שְׁמִינִיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַשְּׁמִינִי",
+    "ADJ;SG;FEM;DEF": "הַשְּׁמִינִית",
+    "ADJ;PL;MASC;DEF": "הַשְּׁמִינִיִּים",
+    "ADJ;PL;FEM;DEF": "הַשְּׁמִינִיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A high floor, an old ritual on the eighth day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.8"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא גָּר בַּקּוֹמָה הַשְּׁמִינִית.",
+      "tr": "He lives on the eighth floor.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּרִית הַמִּילָה בַּיּוֹם הַשְּׁמִינִי.",
+      "tr": "The circumcision is on the eighth day.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה הַפֶּרֶק הַשְּׁמִינִי בַּסֵּפֶר.",
+      "tr": "This is the eighth chapter of the book.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַיּוֹם הַשְּׁמִינִי",
+      "tr": "the eighth day"
+     },
+     {
+      "text": "הַקּוֹמָה הַשְּׁמִינִית",
+      "tr": "the eighth floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From שְׁמוֹנֶה “eight” (Proto-Semitic *ṯamāniy-, Wiktionary) in the ordinal pattern קְטִילִי.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The festival after Sukkot is שְׁמִינִי עֲצֶרֶת, “the eighth (day) of assembly”."
+    ],
+    "pitfalls": [
+     "Not שְׁמוֹנִים “eighty”: the plural of the ordinal is שְׁמִינִיִּים."
+    ],
+    "subtleties": [
+     "The feminine שְׁמִינִית is also “an eighth” (⅛)."
+    ]
+   }
+  },
+  {
+   "id": "he:tshii",
+   "lemma": "תְּשִׁיעִי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.9"
+   ],
+   "translit": "tshi'i",
+   "features": {
+    "spelling": "תשיעי",
+    "root": "ת שׁ ע",
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "תְּשִׁיעִי",
+    "ADJ;SG;FEM": "תְּשִׁיעִית",
+    "ADJ;PL;MASC": "תְּשִׁיעִיִּים",
+    "ADJ;PL;FEM": "תְּשִׁיעִיּוֹת",
+    "ADJ;SG;MASC;DEF": "הַתְּשִׁיעִי",
+    "ADJ;SG;FEM;DEF": "הַתְּשִׁיעִית",
+    "ADJ;PL;MASC;DEF": "הַתְּשִׁיעִיִּים",
+    "ADJ;PL;FEM;DEF": "הַתְּשִׁיעִיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "September, the ninth month; the last year of middle school.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ninth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.9"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַחֹדֶשׁ הַתְּשִׁיעִי הוּא סֶפְּטֶמְבֶּר.",
+      "tr": "The ninth month is September.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לוֹמֵד בַּכִּתָּה הַתְּשִׁיעִית.",
+      "tr": "He is in ninth grade.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת הַשָּׁנָה הַתְּשִׁיעִית שֶׁלָּהּ בַּחֶבְרָה.",
+      "tr": "It’s her ninth year in the company.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַחֹדֶשׁ הַתְּשִׁיעִי",
+      "tr": "the ninth month"
+     },
+     {
+      "text": "הַכִּתָּה הַתְּשִׁיעִית",
+      "tr": "ninth grade"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From תֵּשַׁע “nine” (root ת־שׁ־ע) in the ordinal pattern קְטִילִי (Wiktionary gives no etymology).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "School grades are written with letters: ninth grade is כִּתָּה ט׳ (ט = 9)."
+    ],
+    "pitfalls": [
+     "Not תִּשְׁעִים “ninety”: the plural of the ordinal is תְּשִׁיעִיִּים."
+    ],
+    "subtleties": [
+     "The feminine תְּשִׁיעִית is also “a ninth” (1⁄9)."
+    ]
+   }
+  },
+  {
+   "id": "he:asiri",
+   "lemma": "עֲשִׂירִי",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.10"
+   ],
+   "translit": "asiri",
+   "features": {
+    "spelling": "עשירי",
+    "root": "ע שׂ ר",
+    "pattern": "קְטִילִי",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "עֲשִׂירִי",
+    "ADJ;SG;FEM": "עֲשִׂירִית",
+    "ADJ;PL;MASC": "עֲשִׂירִיִּים",
+    "ADJ;PL;FEM": "עֲשִׂירִיּוֹת",
+    "ADJ;SG;MASC;DEF": "הָעֲשִׂירִי",
+    "ADJ;SG;FEM;DEF": "הָעֲשִׂירִית",
+    "ADJ;PL;MASC;DEF": "הָעֲשִׂירִיִּים",
+    "ADJ;PL;FEM;DEF": "הָעֲשִׂירִיּוֹת"
+   },
+   "note": "An ordinal: an adjective after its noun, agreeing in gender, number and definiteness (הַבַּיִת הַ… / הַקּוֹמָה הַ…). Ordinals exist only from 1 to 10; from 11 on the cardinal with the article follows the noun.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last ordinal — after ten Hebrew counts with ordinary numbers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tenth",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.10"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה הַיּוֹם הָעֲשִׂירִי שֶׁל הַטִּיּוּל.",
+      "tr": "It’s the tenth day of the trip.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹמֵר לְךָ אֶת זֶה בַּפַּעַם הָעֲשִׂירִית!",
+      "tr": "I’m telling you this for the tenth time!",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמִּשְׂרָד שֶׁלָּהּ בַּקּוֹמָה הָעֲשִׂירִית.",
+      "tr": "Her office is on the tenth floor.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּפַּעַם הָעֲשִׂירִית",
+      "tr": "for the tenth time"
+     },
+     {
+      "text": "הַקּוֹמָה הָעֲשִׂירִית",
+      "tr": "the tenth floor"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the ordinal.",
+    "etymology": {
+     "text": "From עֶשֶׂר “ten” (root ע־שׂ־ר) in the ordinal pattern קְטִילִי (Wiktionary gives no etymology).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The tithe, מַעֲשֵׂר, “the tenth part”, has the same root."
+    ],
+    "pitfalls": [
+     "The last ordinal: from 11 on the cardinal with the article follows the noun — הַיּוֹם הָאַחַד עָשָׂר “the eleventh day”, הַקּוֹמָה הָעֶשְׂרִים “the twentieth floor”.",
+     "The article before ע is הָ: הָעֲשִׂירִי."
+    ],
+    "subtleties": [
+     "The feminine עֲשִׂירִית is also “a tenth” (0.1)."
+    ]
+   }
+  },
+  {
+   "id": "he:acharon",
+   "lemma": "אַחֲרוֹן",
+   "pos": "ADJ",
+   "senses": [
+    "num.ord.last"
+   ],
+   "translit": "acharon",
+   "features": {
+    "spelling": "אחרון",
+    "root": "א ח ר",
+    "pattern": "קִטְלוֹן",
+    "governs": {
+     "none": "takes no complement of its own"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "אַחֲרוֹן",
+    "ADJ;SG;FEM": "אַחֲרוֹנָה",
+    "ADJ;PL;MASC": "אַחֲרוֹנִים",
+    "ADJ;PL;FEM": "אַחֲרוֹנוֹת",
+    "ADJ;SG;MASC;DEF": "הָאַחֲרוֹן",
+    "ADJ;SG;FEM;DEF": "הָאַחֲרוֹנָה",
+    "ADJ;PL;MASC;DEF": "הָאַחֲרוֹנִים",
+    "ADJ;PL;FEM;DEF": "הָאַחֲרוֹנוֹת"
+   },
+   "note": "Last (and latest). An adjective like the ordinals: הָאוֹטוֹבּוּס הָאַחֲרוֹן, הַפַּעַם הָאַחֲרוֹנָה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The last bus of the night, the last page, the latest news.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "last, final",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.ord.last"
+     },
+     {
+      "id": "s2",
+      "def": "latest, most recent (בַּזְּמַן הָאַחֲרוֹן “lately”)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "זֶה הָאוֹטוֹבּוּס הָאַחֲרוֹן הַלַּיְלָה.",
+      "tr": "This is the last bus tonight.",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּפַּעַם הָאַחֲרוֹנָה שֶׁרָאִיתִי אוֹתוֹ, הוּא הָיָה יֶלֶד.",
+      "tr": "The last time I saw him, he was a child.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא הִגִּיעַ אַחֲרוֹן.",
+      "tr": "He arrived last.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁמַעְתָּ אֶת הַחֲדָשׁוֹת הָאַחֲרוֹנוֹת?",
+      "tr": "Have you heard the latest news?",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּפַּעַם הָאַחֲרוֹנָה",
+      "tr": "for the last time"
+     },
+     {
+      "text": "בַּזְּמַן הָאַחֲרוֹן",
+      "tr": "lately, recently"
+     },
+     {
+      "text": "הַמִּלָּה הָאַחֲרוֹנָה",
+      "tr": "the last word"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סוֹפִי",
+      "register": "neutral",
+      "nuance": "“final” — a result, a decision, an answer"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "רִאשׁוֹן",
+      "note": "first"
+     }
+    ],
+    "etymology": {
+     "text": "From the root א־ח־ר “after, behind” (as in אַחֲרֵי) in the pattern קִטְלוֹן (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Isaiah 44:6: אֲנִי רִאשׁוֹן וַאֲנִי אַחֲרוֹן “I am the first and I am the last”."
+    ],
+    "pitfalls": [
+     "“Last week” is בַּשָּׁבוּעַ שֶׁעָבַר; הַשָּׁבוּעַ הָאַחֲרוֹן is “the past seven days” or “the final week”.",
+     "The article before א is הָ: הָאַחֲרוֹן, הָאַחֲרוֹנָה."
+    ],
+    "subtleties": [
+     "With news and time it means “latest”: הַחֲדָשׁוֹת הָאַחֲרוֹנוֹת, בַּזְּמַן הָאַחֲרוֹן."
+    ]
+   }
+  },
+  {
+   "id": "he:chatsi",
+   "lemma": "חֲצִי",
+   "pos": "NOUN",
+   "senses": [
+    "num.half",
+    "num.half.adj"
+   ],
+   "gender": "MASC",
+   "translit": "chatsi",
+   "features": {
+    "spelling": "חצי",
+    "root": "ח צ ה",
+    "pattern": "קֵטֶל",
+    "plurals": [
+     {
+      "form": "חֲצָאִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲצִי"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חֲצָאֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "חֲצִי",
+      "senses": [
+       "s2"
+      ],
+      "note": "only the construct before a measure: חֲצִי קִילוֹ, חֲצִי שָׁעָה"
+     },
+     {
+      "form": "וָחֵצִי",
+      "senses": [
+       "s1"
+      ],
+      "note": "after a number, with the older absolute form חֵצִי: שָׁלוֹשׁ וָחֵצִי “three and a half; half past three”"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "חֲצִי",
+    "N;SG;DEF": "הַחֲצִי",
+    "N;PL;INDF": "חֲצָאִים",
+    "N;PL;DEF": "הַחֲצָאִים",
+    "N;SG;CONST": "חֲצִי",
+    "N;PL;CONST": "חֲצָאֵי"
+   },
+   "note": "Half. Before a noun it is the construct חֲצִי (חֲצִי שָׁעָה); after a number וָחֵצִי (שָׁלוֹשׁ וָחֵצִי).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Half a sandwich, half an hour of waiting, half price in the sales.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "half (a part of something: חֲצִי מֵהָעוּגָה)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.half"
+     },
+     {
+      "id": "s2",
+      "def": "half a … (before a measure: חֲצִי קִילוֹ, חֲצִי שָׁעָה)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.half.adj"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אָכַלְתִּי רַק חֲצִי.",
+      "tr": "I ate only half.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "חֲצִי מֵהַתַּלְמִידִים לֹא בָּאוּ.",
+      "tr": "Half of the pupils didn’t come.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "חִכִּיתִי חֲצִי שָׁעָה.",
+      "tr": "I waited half an hour.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s2"
+     },
+     {
+      "text": "קָנִיתִי חֲצִי קִילוֹ עַגְבָנִיּוֹת.",
+      "tr": "I bought half a kilo of tomatoes.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲצִי שָׁעָה",
+      "tr": "half an hour"
+     },
+     {
+      "text": "חֲצִי מְחִיר",
+      "tr": "half price"
+     },
+     {
+      "text": "חֲצִי חֲצִי",
+      "tr": "half and half, fifty-fifty"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מַחֲצִית",
+      "register": "formal",
+      "nuance": "“half” in writing and statistics: מַחֲצִית הַשָּׁנָה (Wiktionary lists it as a synonym)"
+     },
+     {
+      "word": "מֶחֱצָה",
+      "register": "literary",
+      "nuance": "“half” in set phrases: עַל מֶחֱצָה “by half” (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ח־צ־ה “to split in two” (as in חָצָה “to cross; to halve”), pattern קֵטֶל (Wiktionary). Wiktionary gives both forms, חֲצִי and the older absolute חֵצִי.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives חֲצוֹת “midnight” — the night cut in half."
+    ],
+    "pitfalls": [
+     "No word for “a / an”: חֲצִי שָׁעָה “half an hour”, חֲצִי קִילוֹ “half a kilo”.",
+     "After a number the form is חֵצִי with וָ: שָׁלוֹשׁ וָחֵצִי “three and a half”, also on the clock “half past three”."
+    ],
+    "subtleties": [
+     "Wiktionary gives the gender as masculine or feminine; in use it is mostly masculine: הַחֲצִי הַשֵּׁנִי “the second half”."
+    ]
+   }
+  },
+  {
+   "id": "he:reva",
+   "lemma": "רֶבַע",
+   "pos": "NOUN",
+   "senses": [
+    "num.quarter"
+   ],
+   "gender": "MASC",
+   "translit": "reva",
+   "features": {
+    "spelling": "רבע",
+    "root": "ר ב ע",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "רְבָעִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רֶבַע"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רִבְעֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "רֶבַע",
+    "N;SG;DEF": "הָרֶבַע",
+    "N;PL;INDF": "רְבָעִים",
+    "N;PL;DEF": "הָרְבָעִים",
+    "N;SG;CONST": "רֶבַע",
+    "N;PL;CONST": "רִבְעֵי"
+   },
+   "note": "A quarter. רֶבַע שָׁעָה “a quarter of an hour”; on the clock רֶבַע לְ… / … וָרֶבַע.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09",
+    "override": {
+     "N;PL;INDF": "Wiktionary’s head line vowels the plural רְבַעִים (patach); a segolate like רֶבַע has qamats in the plural, as רֶגַע → רְגָעִים and זֶרַע → זְרָעִים: רְבָעִים."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The clock face divided in four; a quarter of a cake.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a quarter, one fourth (also of an hour)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.quarter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַשָּׁעָה רֶבַע לְשָׁלוֹשׁ.",
+      "tr": "It’s a quarter to three.",
+      "register": "neutral",
+      "context": "clock",
+      "sense": "s1"
+     },
+     {
+      "text": "חִכִּינוּ רֶבַע שָׁעָה.",
+      "tr": "We waited a quarter of an hour.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "נִפָּגֵשׁ בְּשָׁלוֹשׁ וָרֶבַע.",
+      "tr": "Let’s meet at a quarter past three.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא אָכַל רֶבַע מֵהָעוּגָה.",
+      "tr": "He ate a quarter of the cake.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רֶבַע שָׁעָה",
+      "tr": "a quarter of an hour"
+     },
+     {
+      "text": "רֶבַע לְ…",
+      "tr": "a quarter to …"
+     },
+     {
+      "text": "… וָרֶבַע",
+      "tr": "a quarter past …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; a quarter of a town is another word, רֹבַע (Wiktionary).",
+    "etymology": {
+     "text": "From the root ר־ב־ע “four” (as in אַרְבַּע, רְבִיעִי) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The four quarters of the Old City of Jerusalem are each a רֹבַע — with o, a different word."
+    ],
+    "pitfalls": [
+     "רֶבַע “a quarter” ≠ רֹבַע “a quarter (district) of a town” ≠ רְבִיעִי “fourth”.",
+     "On the clock: … וָרֶבַע “a quarter past …”, רֶבַע לְ… “a quarter to …”, with the feminine numbers of the hours: רֶבַע לְאַרְבַּע."
+    ],
+    "subtleties": [
+     "Three quarters: שְׁלוֹשָׁה רְבָעִים — רֶבַע is masculine."
+    ]
+   }
+  },
+  {
+   "id": "he:mea-century",
+   "lemma": "מֵאָה",
+   "pos": "NOUN",
+   "senses": [
+    "time.century"
+   ],
+   "gender": "FEM",
+   "translit": "me'a",
+   "features": {
+    "spelling": "מאה",
+    "root": {
+     "none": "a primary word (Proto-Semitic *miʾat-, Wiktionary)"
+    },
+    "pattern": {
+     "none": "a primary word, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "מֵאוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְאַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְאוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מֵאָה",
+    "N;SG;DEF": "הַמֵּאָה",
+    "N;PL;INDF": "מֵאוֹת",
+    "N;PL;DEF": "הַמֵּאוֹת",
+    "N;SG;DEF;PFX": "מֵּאָה",
+    "N;SG;CONST": "מְאַת",
+    "N;PL;CONST": "מְאוֹת"
+   },
+   "note": "A century — the noun of the number מֵאָה (lesson 5). Feminine: הַמֵּאָה הָעֶשְׂרִים וְאַחַת.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "History lessons, old buildings, “the last century”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a century",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.century"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ חַיִּים בַּמֵּאָה הָעֶשְׂרִים וְאַחַת.",
+      "tr": "We live in the twenty-first century.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבַּיִת נִבְנָה בַּמֵּאָה הַקּוֹדֶמֶת.",
+      "tr": "The house was built in the last century.",
+      "register": "neutral",
+      "context": "architecture",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה קָרָה בַּמֵּאָה הָרִאשׁוֹנָה לַסְּפִירָה.",
+      "tr": "It happened in the first century AD.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַמֵּאָה הָעֶשְׂרִים",
+      "tr": "the twentieth century"
+     },
+     {
+      "text": "בַּמֵּאָה הַקּוֹדֶמֶת",
+      "tr": "in the last century"
+     },
+     {
+      "text": "סוֹף הַמֵּאָה",
+      "tr": "the end of the century"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word for a century.",
+    "etymology": {
+     "text": "From Proto-Semitic *miʾat- (Wiktionary) — the same word as the number מֵאָה “a hundred”: a hundred years.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew counts centuries with the hundred itself: “the twentieth hundred” = the twentieth century."
+    ],
+    "pitfalls": [
+     "The same word is the number 100: מֵאָה שָׁנִים “a hundred years” — but הַמֵּאָה הָעֶשְׂרִים “the twentieth century”. The article and the number after it show the century.",
+     "Feminine, so the number after it is feminine: הַמֵּאָה הָעֶשְׂרִים וְאַחַת, הַמֵּאָה הַשְּׁמוֹנֶה עֶשְׂרֵה; centuries 1–10 take the feminine ordinal: הַמֵּאָה הָרִאשׁוֹנָה."
+    ],
+    "subtleties": [
+     "Years and centuries are often counted לַסְּפִירָה “of the (common) era” and לִפְנֵי הַסְּפִירָה “before the era”."
+    ]
+   }
+  },
+  {
+   "id": "he:asor",
+   "lemma": "עָשׂוֹר",
+   "pos": "NOUN",
+   "senses": [
+    "time.decade"
+   ],
+   "gender": "MASC",
+   "translit": "asor",
+   "features": {
+    "spelling": "עשור",
+    "root": "ע שׂ ר",
+    "pattern": "קָטוֹל",
+    "plurals": [
+     {
+      "form": "עֲשׂוֹרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עֲשׂוֹר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עֲשׂוֹרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עָשׂוֹר",
+    "N;SG;DEF": "הֶעָשׂוֹר",
+    "N;PL;INDF": "עֲשׂוֹרִים",
+    "N;PL;DEF": "הָעֲשׂוֹרִים",
+    "N;SG;DEF;PFX": "עָשׂוֹר",
+    "N;SG;CONST": "עֲשׂוֹר",
+    "N;PL;CONST": "עֲשׂוֹרֵי"
+   },
+   "note": "A decade. Article הֶעָשׂוֹר, with בְּ: בֶּעָשׂוֹר.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Ten years gone: anniversaries, reunions, the news looking back.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a decade, ten years",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.decade"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בֶּעָשׂוֹר הָאַחֲרוֹן הָעִיר גָּדְלָה מְאוֹד.",
+      "tr": "In the last decade the city has grown a lot.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "עָבַר עָשׂוֹר מֵאָז.",
+      "tr": "A decade has passed since then.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם נְשׂוּאִים כְּבָר עָשׂוֹר.",
+      "tr": "They have been married for a decade.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֶּעָשׂוֹר הָאַחֲרוֹן",
+      "tr": "in the last decade"
+     },
+     {
+      "text": "לִפְנֵי עָשׂוֹר",
+      "tr": "a decade ago"
+     },
+     {
+      "text": "עָשׂוֹר שָׁלֵם",
+      "tr": "a whole decade"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עֶשֶׂר שָׁנִים",
+      "register": "neutral",
+      "nuance": "“ten years” — the everyday way to say it"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ע־שׂ־ר “ten”, pattern קָטוֹל (Wiktionary, whose senses are “a period of ten days” and “a decade, a period of ten years”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Bible עָשׂוֹר is the tenth day of a month: Yom Kippur falls בֶּעָשׂוֹר לַחֹדֶשׁ, “on the tenth of the month” (Leviticus 16:29)."
+    ],
+    "pitfalls": [
+     "The article before the unstressed עָ is הֶ: הֶעָשׂוֹר, and with בְּ: בֶּעָשׂוֹר.",
+     "In speech עֶשֶׂר שָׁנִים is more common; עָשׂוֹר sounds a little formal."
+    ],
+    "subtleties": [
+     "Wiktionary’s first sense is the older “ten days” — the modern meaning is a decade."
+    ]
+   }
+  },
+  {
+   "id": "he:yom-hashana",
+   "lemma": "יוֹם הַשָּׁנָה",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "time.anniversary"
+   ],
+   "gender": "MASC",
+   "translit": "yom hashana",
+   "features": {
+    "spelling": "יום השנה",
+    "root": {
+     "none": "a compound of two words (יוֹם + הַשָּׁנָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "no plural in use (יְמֵי הַשָּׁנָה means “the days of the year”)"
+    },
+    "dual": {
+     "none": "no dual"
+    },
+    "construct": {
+     "none": "a compound that already contains the article: it is not put into the construct (“the anniversary of …” is יוֹם הַשָּׁנָה לְ…)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יוֹם הַשָּׁנָה",
+    "N;SG;DEF": "יוֹם הַשָּׁנָה"
+   },
+   "note": "An anniversary. A compound with the article inside: יוֹם הַשָּׁנָה לְ… “the anniversary of …”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-09"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flowers on a wedding anniversary; a memorial ceremony on the same date each year.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "an anniversary (of an event, a death, a wedding)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "time.anniversary"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיּוֹם יוֹם הַשָּׁנָה שֶׁלָּנוּ.",
+      "tr": "Today is our anniversary.",
+      "register": "neutral",
+      "context": "couple",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּיוֹם הַשָּׁנָה לַחֲתֻנָּה הוּא קָנָה לָהּ פְּרָחִים.",
+      "tr": "On their wedding anniversary he bought her flowers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַטֶּקֶס לְיוֹם הַשָּׁנָה יִהְיֶה מָחָר.",
+      "tr": "The anniversary ceremony will be tomorrow.",
+      "register": "neutral",
+      "context": "memorial",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יוֹם הַשָּׁנָה לַחֲתֻנָּה",
+      "tr": "the wedding anniversary"
+     },
+     {
+      "text": "יוֹם הַשָּׁנָה לְמוֹתוֹ",
+      "tr": "the anniversary of his death"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יוֹם נִשּׂוּאִין",
+      "register": "neutral",
+      "nuance": "“a wedding anniversary” — only of a marriage"
+     },
+     {
+      "word": "יוֹבֵל",
+      "register": "formal",
+      "nuance": "“a jubilee” — a fiftieth (or a big round) anniversary (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "יוֹם “day” + הַשָּׁנָה “the year”: “the day of the year”. Wiktionary has no entry for the compound; its parts are checked under יוֹם and שָׁנָה.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "For a death the yearly memorial is the same expression; the ceremony at the grave is an אַזְכָּרָה."
+    ],
+    "pitfalls": [
+     "The article is already inside: “our anniversary” = יוֹם הַשָּׁנָה שֶׁלָּנוּ; “the anniversary of …” = יוֹם הַשָּׁנָה לְ… (with לְ, not שֶׁל)."
+    ],
+    "subtleties": [
+     "A couple’s anniversary is just as often יוֹם הַנִּשּׂוּאִין שֶׁלָּנוּ."
+    ]
+   }
+  }
+ ]
+}

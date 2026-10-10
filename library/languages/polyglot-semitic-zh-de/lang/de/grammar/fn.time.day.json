@@ -1,0 +1,521 @@
+{
+ "function": "fn.time.day",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "time.dayNames",
+   "value": "planetary"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "v2-and-final"
+  }
+ ],
+ "summary": "All days of the week are masculine (der Montag … der Sonntag; der Mittwoch too), and so are the parts of the day except die Nacht. On a day, a part of the day or the weekend German uses am (an + dem): am Montag, am Morgen, am Mittag, am Nachmittag, am Abend, am Wochenende – but in der Nacht. A habit – every Monday, every morning – is an adverb with -s, written small: montags, morgens, mittags, abends, nachts. With heute, morgen and gestern the part of the day follows: heute Abend, gestern Morgen – but tomorrow morning is morgen früh. Do not confuse morgen (tomorrow, small m) and der Morgen (the morning, capital M). You say the day with sein: Heute ist Montag. Gestern war Sonntag (war = was). Welcher Tag ist heute? A time word very often opens the sentence; then the verb comes second and the subject follows it: Am Montag gehe ich zur Arbeit. Morgen fahren wir nach Berlin. Inside the sentence, time comes before manner and place: Ich fahre morgen mit dem Bus nach Berlin. German uses the present tense for the future when a time word is there: Morgen komme ich zurück. How often: immer (always), oft (often), manchmal (sometimes), nie (never) – after the verb: Wir essen oft Fisch. jetzt (now), später (later), bald (soon), früh (early), spät (late): Ich gehe jetzt. Wir essen später. Er kommt immer spät nach Hause.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "German",
+    "short",
+    "the name means"
+   ],
+   "rows": [
+    [
+     "der Montag",
+     "Mo",
+     "moon day"
+    ],
+    [
+     "der Dienstag",
+     "Di",
+     "day of Thingsus / the assembly"
+    ],
+    [
+     "der Mittwoch",
+     "Mi",
+     "mid-week"
+    ],
+    [
+     "der Donnerstag",
+     "Do",
+     "day of Donar (thunder)"
+    ],
+    [
+     "der Freitag",
+     "Fr",
+     "day of Frija"
+    ],
+    [
+     "der Samstag / Sonnabend",
+     "Sa",
+     "Sabbath / Sunday eve"
+    ],
+    [
+     "der Sonntag",
+     "So",
+     "sun day"
+    ]
+   ],
+   "caption": "The week starts on Monday",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "planetary"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "part of the day",
+    "once (am …)",
+    "every time (habit)",
+    "today"
+   ],
+   "rows": [
+    [
+     "der Morgen (morning)",
+     "am Morgen",
+     "morgens",
+     "heute Morgen"
+    ],
+    [
+     "der Vormittag (late morning)",
+     "am Vormittag",
+     "vormittags",
+     "heute Vormittag"
+    ],
+    [
+     "der Mittag (midday)",
+     "am Mittag",
+     "mittags",
+     "heute Mittag"
+    ],
+    [
+     "der Nachmittag (afternoon)",
+     "am Nachmittag",
+     "nachmittags",
+     "heute Nachmittag"
+    ],
+    [
+     "der Abend (evening)",
+     "am Abend",
+     "abends",
+     "heute Abend"
+    ],
+    [
+     "die Nacht (night)",
+     "in der Nacht",
+     "nachts",
+     "heute Nacht"
+    ],
+    [
+     "der Montag",
+     "am Montag",
+     "montags",
+     "—"
+    ]
+   ],
+   "caption": "am – -s – heute"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "German"
+   ],
+   "rows": [
+    [
+     "the day before yesterday",
+     "vorgestern"
+    ],
+    [
+     "yesterday",
+     "gestern"
+    ],
+    [
+     "today",
+     "heute"
+    ],
+    [
+     "tomorrow",
+     "morgen"
+    ],
+    [
+     "the day after tomorrow",
+     "übermorgen"
+    ],
+    [
+     "tomorrow morning",
+     "morgen früh"
+    ]
+   ],
+   "caption": "Around today"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "immer",
+    "oft",
+    "manchmal",
+    "selten",
+    "nie"
+   ],
+   "caption": "How often – from always to never"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "Am Montag",
+    "gehe (verb, 2nd)",
+    "ich",
+    "zur Arbeit"
+   ],
+   "caption": "A time word first: the verb stays second, the subject moves behind it",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "morgen – der Morgen",
+   "text": "morgen = tomorrow; der Morgen = the morning; morgens = in the mornings. Tomorrow morning = morgen früh (not *morgen Morgen)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Not *Am Montag ich gehe",
+   "text": "German keeps the verb in second place: Am Montag gehe ich … · Heute ist … · Manchmal fahre ich …",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Tonight",
+   "text": "heute Abend = this evening / tonight (going out); heute Nacht = tonight in bed – or last night."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German",
+     "points": [
+      "names after the moon, gods and the sun: Montag (moon day), Donnerstag (Donar’s day), Sonntag (sun day)",
+      "Mittwoch = mid-week; the week starts on Monday"
+     ]
+    },
+    {
+     "title": "Arabic, Hebrew, Chinese",
+     "points": [
+      "numbered days: Hebrew יוֹם שֵׁנִי (second day), Arabic الاثْنَيْن (from “two”), Chinese 星期一 (week-one) – all three are Monday",
+      "Arabic and Hebrew count from Sunday, Chinese from Monday"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "A day, a part of the day or the weekend? → am (am Montag, am Abend, am Wochenende).",
+   "The night? → in der Nacht (or nachts).",
+   "Every week, every morning – a habit? → montags, morgens, abends (small letter, -s).",
+   "today / yesterday / tomorrow + part of the day? → heute Abend, gestern Morgen; tomorrow morning = morgen früh.",
+   "Is it morgen (tomorrow) or der Morgen (the morning)?",
+   "Does the time word open the sentence? → the verb comes next, the subject after it.",
+   "Several pieces in the middle? → time – manner – place: morgen – mit dem Bus – nach Berlin.",
+   "Future meaning? → present tense + a time word.",
+   "How often? → immer, oft, manchmal, nie – after the verb."
+  ],
+  "steps": [
+   "Find the time word.",
+   "Choose am / in der / -s / heute …",
+   "Put it first or after the verb – the verb stays second."
+  ]
+ },
+ "traps": [
+  "am Montag, not *in Montag / *an Montag.",
+  "in der Nacht, not *am Nacht.",
+  "montags, morgens, abends are written small; Montag, Morgen, Abend capital.",
+  "morgen früh, not *morgen Morgen.",
+  "Am Montag gehe ich … – not *Am Montag ich gehe …",
+  "Days and parts of the day are masculine: der Montag, der Abend, der Mittwoch (die Woche, but der Mittwoch).",
+  "gestern needs the past: Gestern war Sonntag (war = was, the past of ist)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:Montag",
+   "de:Dienstag",
+   "de:Mittwoch",
+   "de:Donnerstag",
+   "de:Freitag",
+   "de:Samstag",
+   "de:Sonntag",
+   "de:Wochenende",
+   "de:Tag",
+   "de:Nacht",
+   "de:Morgen",
+   "de:Mittag",
+   "de:Nachmittag",
+   "de:Abend",
+   "de:heute",
+   "de:morgen",
+   "de:gestern",
+   "de:jetzt",
+   "de:später",
+   "de:bald",
+   "de:früh",
+   "de:spät",
+   "de:immer",
+   "de:oft",
+   "de:manchmal",
+   "de:morgens",
+   "de:abends"
+  ]
+ },
+ "needs": {
+  "NOUN": 6,
+  "ADV": 4
+ },
+ "generators": [
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.time.day"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.time.day"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.time.day"
+    ]
+   }
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "concepts": [
+    "time."
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "On Monday I go to work.",
+   "options": [
+    "Am Montag gehe ich zur Arbeit.",
+    "Am Montag ich gehe zur Arbeit.",
+    "In Montag gehe ich zur Arbeit."
+   ],
+   "answer": "Am Montag gehe ich zur Arbeit.",
+   "why": "am + day; the verb stays in second place."
+  },
+  {
+   "q": "at night",
+   "options": [
+    "in der Nacht",
+    "am Nacht",
+    "an der Nacht"
+   ],
+   "answer": "in der Nacht",
+   "why": "The night is the exception: in der Nacht."
+  },
+  {
+   "q": "tomorrow morning",
+   "options": [
+    "morgen früh",
+    "morgen Morgen",
+    "am Morgen morgen"
+   ],
+   "answer": "morgen früh",
+   "why": "German says morgen früh."
+  },
+  {
+   "q": "every evening (a habit)",
+   "options": [
+    "abends",
+    "Abends am",
+    "am abends"
+   ],
+   "answer": "abends",
+   "why": "Habit = adverb with -s, written small."
+  },
+  {
+   "q": "Which article? ___ Mittwoch",
+   "options": [
+    "der",
+    "die",
+    "das"
+   ],
+   "answer": "der",
+   "why": "All weekdays are masculine – Mittwoch too."
+  },
+  {
+   "q": "this evening",
+   "options": [
+    "heute Abend",
+    "heute abends",
+    "diesen Abend heute"
+   ],
+   "answer": "heute Abend",
+   "why": "heute + part of the day with a capital: heute Abend."
+  },
+  {
+   "q": "We often eat fish.",
+   "options": [
+    "Wir essen oft Fisch.",
+    "Wir oft essen Fisch.",
+    "Oft wir essen Fisch."
+   ],
+   "answer": "Wir essen oft Fisch.",
+   "why": "The frequency adverb follows the verb."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.time.day",
+   "note": "Arabic numbers most days: الأَحَد (“one”, Sunday), الاثْنَيْن (“two”, Monday) … الخَمِيس (“five”, Thursday); الجُمُعَة is “the gathering”, السَّبْت “the Sabbath”; “on Monday” is يَوْمَ الاثْنَيْنِ."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.time.day",
+   "note": "Hebrew numbers the days too: יוֹם רִאשׁוֹן (Sunday, “first day”) … יוֹם שִׁשִּׁי, then שַׁבָּת; “on Monday” = בְּיוֹם שֵׁנִי."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.time.day",
+   "note": "Chinese numbers the weekdays (星期一 … 星期六, 星期天) and puts the time word before the verb (我星期一去上班) – no preposition, no verb-second rule."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.aspect",
+   "note": "Chinese marks finished actions with 了 / 过; German uses the past tense (war) – the full past comes after the foundations."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.prep.time",
+   "note": "am Montag, im Mai, um acht Uhr: the prepositions of time follow in the next step."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek uses no preposition (τη Δευτέρα, το πρωί, το βράδυ); German needs am: am Montag, am Morgen, am Abend – but in der Nacht. Greek numbers the days (Δευτέρα = second, Τρίτη = third), German names them (Montag = moon day)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "в понедельник is am Montag; среда and Mittwoch both mean “middle”, while вторник, четверг, пятница are numbered. A time word first pulls the German verb before the subject: Am Montag gehe ich …, not *Am Montag ich gehe."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "lunes (moon) is Montag, and el lunes / los lunes match am Montag / montags; German adds verb-second: Am Montag arbeite ich."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "Monday, Thursday, Friday, Sunday share their origin with Montag, Donnerstag, Freitag, Sonntag. on Monday – am Montag; on Mondays – montags. After a time word German puts the verb before the subject: Heute koche ich."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "lundi (moon) is Montag; le lundi (every Monday) is montags. After a time word German puts the verb before the subject: Am Montag gehe ich …"
+  },
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "somvār (moon day) and ravivār (sun day) follow the same planetary week as Montag and Sonntag."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian counts from Saturday (šanbe, yekšanbe, došanbe = Monday); German names the days after the moon, gods and the sun."
+  },
+  {
+   "for": "mr",
+   "rel": "same",
+   "text": "somvār (moon day) and ravivār (sun day): the same planetary week as Montag and Sonntag."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic numbers the days from Sunday (al-aḥad, al-ithnayn …), and Friday is al-jumuʿa (the gathering); German names them after the moon, gods and the sun, and the week starts on Monday."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew numbers the days from Sunday (yom rishon, yom sheni …) up to Shabbat; German names them, and the week starts on Monday."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish uses günü or nothing for a day (pazartesi günü) and -leri for a habit (pazartesileri); German says am Montag and montags, and puts the verb second after the time word."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "getsuyōbi (moon day) and nichiyōbi (sun day) match Montag and Sonntag; German adds am and verb-second: Am Montag arbeite ich."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "woryoil (moon day) and iryoil (sun day) match Montag and Sonntag; German adds am and verb-second."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "keskiviikko (“mid-week”) is Mittwoch, and the essive -na marks the day (maanantaina = am Montag); German uses a preposition and puts the verb second after it."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks the day with a suffix (hétfőn = am Montag) and names Monday “week-head” (hétfő); German uses am and names the days after the moon, gods and the sun."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili counts from Saturday (Jumamosi, Jumapili, Jumatatu = Monday); German names the days and starts the week on Monday."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese numbers the days (星期一, Monday) and needs no preposition (星期一我去上班); German says am Montag and puts the verb before the subject: Am Montag gehe ich zur Arbeit."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese numbers the days (thứ hai = Monday, chủ nhật = Sunday); German names them, and a time word first pulls the verb before the subject."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "German has a strict word-order rule that a time word triggers: whatever comes first, the conjugated verb is second (Heute koche ich). Inuktitut verbs usually come at the end, and word order is freer."
+  }
+ ]
+}

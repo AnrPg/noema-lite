@@ -1,0 +1,2906 @@
+{
+ "lexemes": [
+  {
+   "id": "de:null",
+   "lemma": "null",
+   "pos": "NUM",
+   "senses": [
+    "num.0",
+    "det.none"
+   ],
+   "contrasts": [
+    {
+     "concept": "det.none",
+     "axis": "register",
+     "value": "colloquial and emphatic: zero (null Ahnung)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number zero.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "zero (0)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.0"
+     },
+     {
+      "id": "s2",
+      "def": "no, none at all (null Ahnung = no idea)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "det.none"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es steht zwei zu null.",
+      "tr": "The score is two–nil.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "Draußen sind null Grad.",
+      "tr": "It is zero degrees outside.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe null Ahnung.",
+      "tr": "I have absolutely no idea.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "Heute habe ich null Lust zu kochen.",
+      "tr": "Today I have zero desire to cook.",
+      "register": "colloquial",
+      "context": "at home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From the noun Null (“the number zero”), from Italian nulla, from Latin nulla, feminine singular of nullus (“no, none”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German says null where Greek says μηδέν and English zero: the word came from Latin nullus (“none”) through Italian.",
+     "die Stunde null (“hour zero”) is the German name for the new start in May 1945."
+    ],
+    "pitfalls": [
+     "The digit as a thing is a noun with a capital: die Null, eine Null (also, colloquially, “a nobody”)."
+    ],
+    "subtleties": [
+     "Colloquially null means “no … at all”: Ich habe null Ahnung (I have no idea)."
+    ]
+   },
+   "features": {
+    "ordinal": "nullte"
+   }
+  },
+  {
+   "id": "de:eins",
+   "lemma": "eins",
+   "pos": "NUM",
+   "senses": [
+    "num.1"
+   ],
+   "contrasts": [
+    {
+     "concept": "num.1",
+     "axis": "before a noun or alone",
+     "value": "counting or standing alone (eins, zwei, drei)"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "one (1), when counting or standing alone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Eins, zwei, drei – los!",
+      "tr": "One, two, three – go!",
+      "register": "neutral",
+      "context": "counting",
+      "sense": "s1"
+     },
+     {
+      "text": "Eins und eins ist zwei.",
+      "tr": "One and one is two.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat in Mathe eine Eins.",
+      "tr": "She has a 1 (the top grade) in maths.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "Contraction of eines (nominative/accusative neuter of ein), from Middle High German einez, ultimately from Proto-Germanic *ainatō, form of *ainaz (“one”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In German schools the grades run from 1 (sehr gut, the best) to 6 (ungenügend): eine Eins is the dream mark."
+    ],
+    "pitfalls": [
+     "Before a noun it is not eins but the article ein / eine / ein with endings: ein Buch, eine Tasse, einen Stuhl.",
+     "In compound numbers: einundzwanzig (no s), but hunderteins (with s) at the end."
+    ],
+    "subtleties": [
+     "Telling the time it can stand alone: Es ist eins (it is one o’clock) – but Es ist ein Uhr."
+    ]
+   },
+   "features": {
+    "ordinal": "erste"
+   }
+  },
+  {
+   "id": "de:zwei",
+   "lemma": "zwei",
+   "pos": "NUM",
+   "senses": [
+    "num.2"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number two.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "two (2)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich habe zwei Brüder.",
+      "tr": "I have two brothers.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Zwei Kaffee, bitte!",
+      "tr": "Two coffees, please!",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German zwei, from Old High German zwei (neuter of zwēne). Compare Dutch twee, English two, twain. Zwei was originally the neuter form, now used for all genders; the Old High German masculine zwēne survives in early modern zween, the feminine zwō in the variant zwo.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Old German had three words for “two”: zween (masculine), zwo (feminine), zwei (neuter). Only zwei survived – and zwo is back as a spoken variant.",
+     "zwei is the same old word as Greek δύο, Russian два and English two."
+    ],
+    "pitfalls": [
+     "On the phone, on the radio and in the army people say zwo instead of zwei, so that it is not confused with drei."
+    ],
+    "subtleties": [
+     "In a café the drink stays singular after the number: Zwei Kaffee, bitte (two coffees)."
+    ]
+   },
+   "features": {
+    "ordinal": "zweite"
+   }
+  },
+  {
+   "id": "de:drei",
+   "lemma": "drei",
+   "pos": "NUM",
+   "senses": [
+    "num.3"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number three.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "three (3)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.3"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir sind drei Freunde.",
+      "tr": "We are three friends.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "Aller guten Dinge sind drei.",
+      "tr": "All good things come in threes.",
+      "register": "neutral",
+      "context": "saying",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [
+     {
+      "text": "Aller guten Dinge sind drei.",
+      "tr": "Of all good things there are three.",
+      "kind": "proverb",
+      "meaning": "third time lucky – try once more",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German drī, from Old High German dri, from Proto-West Germanic *þrīʀ, from Proto-Germanic *þrīz, from Proto-Indo-European *tréyes. Compare Dutch drie, English three, Danish tre.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "drei, Greek τρία, Russian три, Latin trēs and English three all go back to Proto-Indo-European *tréyes."
+    ],
+    "pitfalls": [
+     "drei and zwei sound alike on a bad line – hence zwo for two."
+    ]
+   },
+   "features": {
+    "ordinal": "dritte"
+   }
+  },
+  {
+   "id": "de:vier",
+   "lemma": "vier",
+   "pos": "NUM",
+   "senses": [
+    "num.4"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number four.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "four (4)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.4"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Zimmer hat vier Fenster.",
+      "tr": "The room has four windows.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Können wir unter vier Augen sprechen?",
+      "tr": "Can we talk in private?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [
+     {
+      "text": "unter vier Augen",
+      "tr": "under four eyes",
+      "kind": "idiom",
+      "meaning": "in private, just the two of us",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German vier, from Old High German fior, from Proto-West Germanic *feuwar, from Proto-Germanic *fedwōr, from Proto-Indo-European *kʷetwṓr. Compare Dutch vier, English four, Danish fire, Swedish fyra.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "unter vier Augen – “under four eyes” – means a talk between two people only."
+    ]
+   },
+   "features": {
+    "ordinal": "vierte"
+   }
+  },
+  {
+   "id": "de:fünf",
+   "lemma": "fünf",
+   "pos": "NUM",
+   "senses": [
+    "num.5"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number five.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "five (5)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.5"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir sind fünf Personen.",
+      "tr": "There are five of us.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Lass mal fünf gerade sein!",
+      "tr": "Don’t be so strict this time!",
+      "register": "colloquial",
+      "context": "idiom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [
+     {
+      "text": "fünf gerade sein lassen",
+      "tr": "to let five be even",
+      "kind": "idiom",
+      "meaning": "to turn a blind eye, not to be too strict",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "Inherited from Middle High German vünf, from Old High German fimf, from Proto-West Germanic *fimf, from Proto-Germanic *fimf, from Proto-Indo-European *pénkʷe. Formal cognates include Dutch vijf, English five, Yiddish פֿינף (finf), Gothic fimf and Icelandic fimm.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "fünf and Greek πέντε (pénte) are the same Indo-European word *pénkʷe – think of the pentagon (five corners)."
+    ],
+    "pitfalls": [
+     "Write ü: fünf, fünfzehn, fünfzig (fuffzehn, fuffzig are Berlin speech)."
+    ]
+   },
+   "features": {
+    "ordinal": "fünfte"
+   }
+  },
+  {
+   "id": "de:sechs",
+   "lemma": "sechs",
+   "pos": "NUM",
+   "senses": [
+    "num.6"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number six.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "six (6)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.6"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Kind ist sechs.",
+      "tr": "The child is six.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Eine Sechs ist die schlechteste Note.",
+      "tr": "A 6 is the worst mark.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German sehs, segs, ses, from Old High German sehs, from Proto-West Germanic *sehs, from Proto-Germanic *sehs, from Proto-Indo-European *swéḱs.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "sechs is the same old word as Greek έξι, Latin sex and Russian шесть."
+    ],
+    "pitfalls": [
+     "The s disappears in sechzehn (16) and sechzig (60) – not *sechszehn, *sechszig."
+    ]
+   },
+   "features": {
+    "ordinal": "sechste"
+   }
+  },
+  {
+   "id": "de:sieben",
+   "lemma": "sieben",
+   "pos": "NUM",
+   "senses": [
+    "num.7"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number seven.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seven (7)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.7"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Woche hat sieben Tage.",
+      "tr": "The week has seven days.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist für mich ein Buch mit sieben Siegeln.",
+      "tr": "That is a closed book to me.",
+      "register": "neutral",
+      "context": "idiom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [
+     {
+      "text": "ein Buch mit sieben Siegeln",
+      "tr": "a book with seven seals",
+      "kind": "idiom",
+      "meaning": "something impossible to understand (from the Book of Revelation)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German siben, from Old High German sibun, from Proto-West Germanic *sebun, from Proto-Germanic *sebun, from earlier Proto-Germanic *sebunt, from Proto-Indo-European *septḿ̥. Compare Dutch zeven, English seven.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "sieben, Greek επτά, Latin septem and Russian семь all come from Indo-European *septḿ̥.",
+     "sieben is also a verb: Mehl sieben = to sift flour."
+    ],
+    "pitfalls": [
+     "The -en disappears in siebzehn (17) and siebzig (70)."
+    ]
+   },
+   "features": {
+    "ordinal": "siebte"
+   }
+  },
+  {
+   "id": "de:acht",
+   "lemma": "acht",
+   "pos": "NUM",
+   "senses": [
+    "num.8"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number eight.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eight (8)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.8"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Unterricht beginnt um acht.",
+      "tr": "The lesson starts at eight.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sind acht Personen.",
+      "tr": "There are eight of us.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German ahte, from Old High German ahto, from Proto-West Germanic *ahtō, from Proto-Germanic *ahtōu, from Proto-Indo-European *oḱtṓw. Compare Dutch acht, English eight, Danish otte, Swedish åtta, Greek οκτώ (októ), Latin octō.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "acht and Greek οκτώ are the same word: the k of októ became ch in German (an octopus has acht Arme)."
+    ],
+    "pitfalls": [
+     "Do not mix it up with die Acht in Acht geben / sich in Acht nehmen (to watch out) – an unrelated word."
+    ]
+   },
+   "features": {
+    "ordinal": "achte"
+   }
+  },
+  {
+   "id": "de:neun",
+   "lemma": "neun",
+   "pos": "NUM",
+   "senses": [
+    "num.9"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number nine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nine (9)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.9"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Mädchen ist neun.",
+      "tr": "The girl is nine.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Bank öffnet um neun.",
+      "tr": "The bank opens at nine.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Old High German niun, from Proto-Germanic *newun, from Proto-Indo-European *h₁néwn̥. Cognate with Low German negen, Dutch negen, English nine, West Frisian njoggen, Danish ni, Gothic niun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "neun belongs with English nine and Greek εννέα (ennéa) – all from Indo-European *h₁néwn̥."
+    ],
+    "pitfalls": [
+     "eu sounds like oi: neun [nɔɪ̯n]."
+    ]
+   },
+   "features": {
+    "ordinal": "neunte"
+   }
+  },
+  {
+   "id": "de:zehn",
+   "lemma": "zehn",
+   "pos": "NUM",
+   "senses": [
+    "num.10"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number ten.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ten (10)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.10"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zehn Kinder sind hier.",
+      "tr": "Ten children are here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Zehn Gebote",
+      "tr": "The Ten Commandments",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German zehen, from Old High German zehan, from Proto-West Germanic and Proto-Germanic *tehun (“ten”), from Proto-Indo-European *déḱm̥ (“ten”). Compare Dutch tien, Low German teihn, English ten, Gothic taihun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "zehn, Greek δέκα and Latin decem share the root *déḱm̥ – German z comes from an old t (compare English ten)."
+    ],
+    "pitfalls": [
+     "The teens end in -zehn (dreizehn), the tens in -zig (dreißig) – do not mix them."
+    ]
+   },
+   "features": {
+    "ordinal": "zehnte"
+   }
+  },
+  {
+   "id": "de:elf",
+   "lemma": "elf",
+   "pos": "NUM",
+   "senses": [
+    "num.11"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number eleven.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eleven (11)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.11"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Eine Fußballmannschaft hat elf Spieler.",
+      "tr": "A football team has eleven players.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist elf Uhr.",
+      "tr": "It is eleven o’clock.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German eilf, eilef, einlif, from Old High German einlif, from Proto-Germanic *ainalif, a compound of *ainaz and *-lif. Until the 19th century usually written eilf. Compare Dutch elf, English eleven, Danish elleve.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "elf (like English eleven) is “one left over” after counting to ten; zwölf is “two left over”.",
+     "die Elf is also the football team (eleven players): die deutsche Elf."
+    ],
+    "pitfalls": [
+     "False friend: German elf is the number 11; the fairy creature is der Elf / die Elfe."
+    ]
+   },
+   "features": {
+    "ordinal": "elfte"
+   }
+  },
+  {
+   "id": "de:zwölf",
+   "lemma": "zwölf",
+   "pos": "NUM",
+   "senses": [
+    "num.12"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number twelve.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "twelve (12)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.12"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ein Jahr hat zwölf Monate.",
+      "tr": "A year has twelve months.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     },
+     {
+      "text": "Es ist fünf vor zwölf!",
+      "tr": "It is five to twelve – high time to act!",
+      "register": "neutral",
+      "context": "idiom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [
+     {
+      "text": "fünf vor zwölf",
+      "tr": "five to twelve",
+      "kind": "idiom",
+      "meaning": "at the last moment; high time to do something",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "ein Dutzend",
+      "register": "neutral",
+      "nuance": "a dozen – a group of twelve, used for things (ein Dutzend Eier)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German zwölf, zwolf, zwelf, zwelif, from Old High German zwelif, from an original *twelif, from Proto-Germanic *twalif. Compare Dutch twaalf, English twelve, Norwegian and Danish tolv.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "zwölf is the last number with a name of its own; from 13 on German builds the numbers from units + zehn."
+    ],
+    "pitfalls": [
+     "Write ö: zwölf, not *zwolf."
+    ]
+   },
+   "features": {
+    "ordinal": "zwölfte"
+   }
+  },
+  {
+   "id": "de:dreizehn",
+   "lemma": "dreizehn",
+   "pos": "NUM",
+   "senses": [
+    "num.13"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number thirteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thirteen (13)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.13"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hier sind dreizehn Studenten.",
+      "tr": "There are thirteen students here.",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und drei ist dreizehn.",
+      "tr": "Ten and drei is dreizehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German dreizehen, from Old High German drīzehan, akin to Old Saxon thriutein. Ultimately from Proto-Germanic *þritehun. Equivalent to drei + zehn. Compare Dutch dertien, English thirteen, Danish tretten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Freitag, der Dreizehnte – Friday the 13th – is an unlucky day for superstitious Germans too."
+    ],
+    "pitfalls": [
+     "Built like English: the unit first, then -zehn (drei + zehn = dreizehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "dreizehnte"
+   }
+  },
+  {
+   "id": "de:vierzehn",
+   "lemma": "vierzehn",
+   "pos": "NUM",
+   "senses": [
+    "num.14"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number fourteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fourteen (14)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.14"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin vierzehn Tage in Berlin.",
+      "tr": "I am in Berlin for two weeks.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und vier ist vierzehn.",
+      "tr": "Ten and vier is vierzehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German vierzehen, from Old High German fiorzehan, from Proto-Germanic *fedurtehun. Equivalent to vier + zehn. Compare Dutch veertien, English fourteen, Danish fjorten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "vierzehn Tage (fourteen days) is the everyday German for “two weeks, a fortnight”."
+    ],
+    "pitfalls": [
+     "Built like English: the unit first, then -zehn (vier + zehn = vierzehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "vierzehnte"
+   }
+  },
+  {
+   "id": "de:fünfzehn",
+   "lemma": "fünfzehn",
+   "pos": "NUM",
+   "senses": [
+    "num.15"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number fifteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifteen (15)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.15"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich bin fünfzehn.",
+      "tr": "I am fifteen.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und fünf ist fünfzehn.",
+      "tr": "Ten and fünf is fünfzehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German vünfzehen, from Old High German fimfzehan, from Proto-Germanic *fimftehun. Equivalent to fünf + zehn. Compare Dutch vijftien, English fifteen, Danish femten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Berlin you hear fuffzehn; Wiktionary also lists fuchzehn."
+    ],
+    "pitfalls": [
+     "Built like English: the unit first, then -zehn (fünf + zehn = fünfzehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "fünfzehnte"
+   }
+  },
+  {
+   "id": "de:sechzehn",
+   "lemma": "sechzehn",
+   "pos": "NUM",
+   "senses": [
+    "num.16"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number sixteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixteen (16)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.16"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist sechzehn.",
+      "tr": "He is sixteen.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und sechs ist sechzehn.",
+      "tr": "Ten and sechs is sechzehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German seh(s)zehen, from Old High German seh(s)zehan, from Proto-Germanic *sehstehun. Equivalent to sechs + zehn. Compare Dutch zestien, English sixteen, Danish seksten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "sechzehn drops the s of sechs: sech-zehn. The spelling sechszehn is obsolete."
+    ],
+    "pitfalls": [
+     "Not *sechszehn: the s of sechs is dropped.",
+     "Built like English: the unit first, then -zehn (sechs + zehn = sechzehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "sechzehnte"
+   }
+  },
+  {
+   "id": "de:siebzehn",
+   "lemma": "siebzehn",
+   "pos": "NUM",
+   "senses": [
+    "num.17"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number seventeen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventeen (17)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.17"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist siebzehn.",
+      "tr": "She is seventeen.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und sieben ist siebzehn.",
+      "tr": "Ten and sieben is siebzehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German sibenzehen, from Old High German sibunzehan, from Proto-Germanic *sebuntehun. Equivalent to sieben + zehn. Compare Dutch zeventien, English seventeen, Danish sytten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "siebzehn drops the -en of sieben; siebenzehn is archaic."
+    ],
+    "pitfalls": [
+     "Not *siebenzehn: the -en of sieben is dropped.",
+     "Built like English: the unit first, then -zehn (sieben + zehn = siebzehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "siebzehnte"
+   }
+  },
+  {
+   "id": "de:achtzehn",
+   "lemma": "achtzehn",
+   "pos": "NUM",
+   "senses": [
+    "num.18"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number eighteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighteen (18)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.18"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mit achtzehn darf man wählen.",
+      "tr": "At eighteen you may vote.",
+      "register": "neutral",
+      "context": "law",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und acht ist achtzehn.",
+      "tr": "Ten and acht is achtzehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German ahzehen, from Old High German ahtozehan, from Proto-Germanic *ahtōutehun. Equivalent to acht + zehn. Compare Dutch achttien, English eighteen, Danish atten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Germany you come of age mit achtzehn – at eighteen."
+    ],
+    "pitfalls": [
+     "Built like English: the unit first, then -zehn (acht + zehn = achtzehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "achtzehnte"
+   }
+  },
+  {
+   "id": "de:neunzehn",
+   "lemma": "neunzehn",
+   "pos": "NUM",
+   "senses": [
+    "num.19"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number nineteen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nineteen (19)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.19"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Sie ist neunzehn.",
+      "tr": "She is nineteen.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Zehn und neun ist neunzehn.",
+      "tr": "Ten and neun is neunzehn.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German niunzëhen, from Old High German niunzehan, from Proto-Germanic *newuntehun. Equivalent to neun + zehn. Compare Dutch negentien, English nineteen, Danish nitten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like English nineteen: the unit first, then -zehn."
+    ],
+    "pitfalls": [
+     "Built like English: the unit first, then -zehn (neun + zehn = neunzehn)."
+    ]
+   },
+   "features": {
+    "ordinal": "neunzehnte"
+   }
+  },
+  {
+   "id": "de:zwanzig",
+   "lemma": "zwanzig",
+   "pos": "NUM",
+   "senses": [
+    "num.20"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number twenty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "twenty (20)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.20"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zehn und zehn ist zwanzig.",
+      "tr": "Ten and ten is twenty.",
+      "register": "neutral",
+      "context": "arithmetic",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Goldenen Zwanziger",
+      "tr": "The Golden Twenties (the 1920s)",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German zweinzec, from Old High German zweinzug, from Proto-Germanic *twaintigaz, *twai tigiwiz. Cognate with Dutch twintig, English twenty, Danish tyve. The form zwanzig goes back to dialects that had early on lowered Middle High German -ei- to [aɪ̯]; elsewhere the contraction yielded zwenzig, which waned around 1700.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "21 is einundzwanzig – “one-and-twenty”: German says the units first, like Arabic and old English (four-and-twenty blackbirds)."
+    ],
+    "pitfalls": [
+     "Not *zweizig: twenty is zwanzig.",
+     "From 21 on, the unit comes first: einundzwanzig, zweiundzwanzig … neunundzwanzig – written as one word."
+    ]
+   },
+   "features": {
+    "ordinal": "zwanzigste"
+   }
+  },
+  {
+   "id": "de:dreißig",
+   "lemma": "dreißig",
+   "pos": "NUM",
+   "senses": [
+    "num.30"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number thirty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thirty (30)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.30"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Lehrerin ist dreißig.",
+      "tr": "The teacher is thirty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet dreißig Euro.",
+      "tr": "That costs thirty euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German drīzic, from Old High German drīzzug, from Proto-Germanic *þrīz tigiwiz. Equivalent to drei + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "The only ten with -ßig instead of -zig: dreißig (Swiss spelling dreissig).",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einunddreißig = 31."
+    ]
+   },
+   "features": {
+    "ordinal": "dreißigste"
+   }
+  },
+  {
+   "id": "de:vierzig",
+   "lemma": "vierzig",
+   "pos": "NUM",
+   "senses": [
+    "num.40"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number forty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "forty (40)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.40"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Lehrer ist vierzig.",
+      "tr": "The teacher is forty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet vierzig Euro.",
+      "tr": "That costs forty euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German vierzic, from Old High German fiorzug, from Proto-Germanic *fedwōr tigiwiz, equivalent to vier + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "-zig is the old Germanic word for “ten(s)”, the same element as English -ty (forty, fifty)."
+    ],
+    "pitfalls": [
+     "vier + zig: vierzig; 44 = vierundvierzig.",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundvierzig = 41."
+    ]
+   },
+   "features": {
+    "ordinal": "vierzigste"
+   }
+  },
+  {
+   "id": "de:fünfzig",
+   "lemma": "fünfzig",
+   "pos": "NUM",
+   "senses": [
+    "num.50"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number fifty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fifty (50)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.50"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Mann dort ist fünfzig.",
+      "tr": "The man over there is fifty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet fünfzig Euro.",
+      "tr": "That costs fifty euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German vünfzic, from Old High German fimfzug, from Proto-Germanic *fimf tigiwiz. Equivalent to fünf + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "Colloquially fuffzig or fuchzig (Wiktionary lists both).",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundfünfzig = 51."
+    ]
+   },
+   "features": {
+    "ordinal": "fünfzigste"
+   }
+  },
+  {
+   "id": "de:sechzig",
+   "lemma": "sechzig",
+   "pos": "NUM",
+   "senses": [
+    "num.60"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number sixty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sixty (60)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.60"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Frau hier ist sechzig.",
+      "tr": "The woman here is sixty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet sechzig Euro.",
+      "tr": "That costs sixty euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German seh(s)zec, from Old High German sehszug, from Proto-Germanic *sehs tigiwiz. Equivalent to sechs + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "Not *sechszig: the s of sechs is dropped, as in sechzehn.",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundsechzig = 61."
+    ]
+   },
+   "features": {
+    "ordinal": "sechzigste"
+   }
+  },
+  {
+   "id": "de:siebzig",
+   "lemma": "siebzig",
+   "pos": "NUM",
+   "senses": [
+    "num.70"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number seventy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "seventy (70)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.70"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Großvater ist siebzig.",
+      "tr": "My grandfather is seventy.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet siebzig Euro.",
+      "tr": "That costs seventy euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German sibenzec, from Old High German sibunzug, from Proto-Germanic *sebuntēhundą. Equivalent to sieben + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "Not *siebenzig: the -en of sieben is dropped, as in siebzehn.",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundsiebzig = 71."
+    ]
+   },
+   "features": {
+    "ordinal": "siebzigste"
+   }
+  },
+  {
+   "id": "de:achtzig",
+   "lemma": "achtzig",
+   "pos": "NUM",
+   "senses": [
+    "num.80"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number eighty.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eighty (80)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.80"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Großmutter ist achtzig.",
+      "tr": "My grandmother is eighty.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet achtzig Euro.",
+      "tr": "That costs eighty euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German ahzec, from Old High German ahtozug, from Proto-Germanic *ahtōutēhundą. Equivalent to acht + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "acht + zig, with one t: achtzig.",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundachtzig = 81."
+    ]
+   },
+   "features": {
+    "ordinal": "achtzigste"
+   }
+  },
+  {
+   "id": "de:neunzig",
+   "lemma": "neunzig",
+   "pos": "NUM",
+   "senses": [
+    "num.90"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number ninety.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ninety (90)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.90"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Er ist neunzig.",
+      "tr": "He is ninety.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "Das kostet neunzig Euro.",
+      "tr": "That costs ninety euros.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German niunzec, from Old High German niunzug, from Proto-West Germanic *neun tigiwi. Equivalent to neun + -zig.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "neun + zig: neunzig; 99 is neunundneunzig.",
+     "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundneunzig = 91."
+    ]
+   },
+   "features": {
+    "ordinal": "neunzigste"
+   }
+  },
+  {
+   "id": "de:hundert",
+   "lemma": "hundert",
+   "pos": "NUM",
+   "senses": [
+    "num.100"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number a hundred, one hundred.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a hundred, one hundred (100)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.100"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hier sind hundert Bücher.",
+      "tr": "There are a hundred books here.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin mir hundert Prozent sicher.",
+      "tr": "I am a hundred percent sure.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [
+     {
+      "text": "vom Hundertsten ins Tausendste kommen",
+      "tr": "to come from the hundredth to the thousandth",
+      "kind": "idiom",
+      "meaning": "to digress, to go off on one tangent after another",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German hundert, ultimately from Proto-Germanic *hundaradą, from *hundą (< Proto-Indo-European *ḱm̥tóm) + *radą (“count”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The hund- of hundert is Indo-European *ḱm̥tóm, the same root as Latin centum, Greek εκατό and Russian сто."
+    ],
+    "pitfalls": [
+     "No ein needed: hundert = 100; einhundert is used for clarity (cheques, 101 = hunderteins)."
+    ],
+    "subtleties": [
+     "101 = hunderteins, 121 = hunderteinundzwanzig: one word, the hundreds first, then units-and-tens."
+    ]
+   },
+   "features": {
+    "ordinal": "hundertste"
+   }
+  },
+  {
+   "id": "de:tausend",
+   "lemma": "tausend",
+   "pos": "NUM",
+   "senses": [
+    "num.1000"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The number a thousand, one thousand.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a thousand, one thousand (1000)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1000"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Tausend Dank!",
+      "tr": "A thousand thanks!",
+      "register": "colloquial",
+      "context": "thanking",
+      "sense": "s1"
+     },
+     {
+      "text": "Das sind tausend Bücher!",
+      "tr": "That is a thousand books!",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A number has no synonym; only the figure itself.",
+    "etymology": {
+     "text": "From Middle High German tūsunt, from Old High German dūsunt, from Proto-West Germanic *þūsundi, from Proto-Germanic *þūsundī. Compare Old Saxon thūsund, Dutch duizend, English thousand, Danish tusind.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "tausend and Russian тысяча (tysjača) are related: this word for “thousand” is shared by the Germanic and the Balto-Slavic languages."
+    ],
+    "pitfalls": [
+     "German writes thousands with a point and decimals with a comma: 1.000 = one thousand, 1,5 = one and a half."
+    ],
+    "subtleties": [
+     "tausendmal = a thousand times; Tausende von Leuten = thousands of people (noun, capital T)."
+    ]
+   },
+   "features": {
+    "ordinal": "tausendste"
+   }
+  },
+  {
+   "id": "de:viel",
+   "lemma": "viel",
+   "pos": "DET",
+   "class": "quant",
+   "senses": [
+    "quant.many",
+    "adv.alot"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.alot",
+     "axis": "what it strengthens",
+     "value": "verbs and comparatives (Er arbeitet viel; viel besser)"
+    }
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "DET;SG": "viel",
+    "DET;NOM;PL": "viele",
+    "DET;ACC;PL": "viele",
+    "DET;DAT;PL": "vielen",
+    "DET;GEN;PL": "vieler"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A large amount or number – viel for “much”, viele for “many”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "many (viele, with a plural noun); much, a lot of (viel, with a singular uncountable noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.many"
+     },
+     {
+      "id": "s2",
+      "def": "much, a lot (as an adverb: Er arbeitet viel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.alot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Auf dem Markt sind viele Leute.",
+      "tr": "There are a lot of people at the market.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe heute viel Zeit.",
+      "tr": "I have a lot of time today.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Vielen Dank!",
+      "tr": "Many thanks!",
+      "register": "neutral",
+      "context": "thanking",
+      "sense": "s1"
+     },
+     {
+      "text": "Du arbeitest zu viel.",
+      "tr": "You work too much.",
+      "register": "informal",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "viele Leute",
+      "tr": "many people"
+     },
+     {
+      "text": "viel Zeit",
+      "tr": "a lot of time"
+     },
+     {
+      "text": "sehr viel",
+      "tr": "very much, a great deal"
+     },
+     {
+      "text": "zu viel",
+      "tr": "too much"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Viele Köche verderben den Brei.",
+      "tr": "Many cooks spoil the porridge.",
+      "kind": "proverb",
+      "meaning": "too many cooks spoil the broth",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "eine Menge",
+      "register": "colloquial",
+      "nuance": "a lot of, loads of (eine Menge Leute)"
+     },
+     {
+      "word": "jede Menge",
+      "register": "colloquial",
+      "nuance": "loads of, plenty"
+     },
+     {
+      "word": "zahlreich",
+      "register": "formal",
+      "nuance": "numerous – an adjective of written style (zahlreiche Gäste)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "wenig",
+      "note": "little, few"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vil, vile, from Old High German filu (“many”), from Proto-West Germanic *felu, from Proto-Germanic *felu, from Proto-Indo-European *pleh₁-.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "viel and Greek πολύ (polý, “much”) are related through Indo-European – poly- in English words is the Greek twin of viel."
+    ],
+    "pitfalls": [
+     "viel + a singular uncountable noun (viel Papier, viel Zeit), viele + a plural (viele Bücher).",
+     "The comparative is mehr, which never takes an ending: mehr Bücher, mehr Zeit."
+    ],
+    "subtleties": [
+     "Vielen Dank is a set phrase (Dank is masculine: accusative vielen Dank).",
+     "After an article it takes adjective endings: die vielen Leute (all those people)."
+    ]
+   }
+  },
+  {
+   "id": "de:wenig",
+   "lemma": "wenig",
+   "pos": "DET",
+   "class": "quant",
+   "senses": [
+    "quant.few",
+    "adv.little"
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "DET;SG": "wenig",
+    "DET;NOM;PL": "wenige",
+    "DET;ACC;PL": "wenige",
+    "DET;DAT;PL": "wenigen",
+    "DET;GEN;PL": "weniger"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files wenig only as an adjective; like viel (which Wiktionary files as a determiner) it is used here as a quantifier before a noun – wenig Zeit, wenige Leute (Duden: Indefinitpronomen)"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Not much, not many – often with a note of “too little”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "few (wenige, with a plural noun); little, not much (wenig, with a singular uncountable noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.few"
+     },
+     {
+      "id": "s2",
+      "def": "little, not much (as an adverb: Er isst wenig)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.little"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute sind nur wenige Leute hier.",
+      "tr": "Only a few people are here today.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe leider wenig Zeit.",
+      "tr": "Unfortunately I have little time.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Baby schläft sehr wenig.",
+      "tr": "The baby sleeps very little.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "wenig Zeit",
+      "tr": "little time"
+     },
+     {
+      "text": "wenige Leute",
+      "tr": "few people"
+     },
+     {
+      "text": "sehr wenig",
+      "tr": "very little"
+     },
+     {
+      "text": "zu wenig",
+      "tr": "too little"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "kaum",
+      "register": "neutral",
+      "nuance": "hardly any (kaum Zeit) – stronger"
+     },
+     {
+      "word": "nicht viel / nicht viele",
+      "register": "neutral",
+      "nuance": "not much / not many – the everyday way to say it"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "viel",
+      "note": "much, many"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German weinec, wēnec (“marginal”), from Old High German *weinag, wēnag (“miserable”), from Proto-Germanic *wainagaz. Cognate with Dutch weinig, Yiddish ווייניק (veynik).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "wenig once meant “miserable, pitiable” (Old High German wēnag); its ē came from a blend with Old High German wē (“woe”) – the same word as English woe."
+    ],
+    "pitfalls": [
+     "wenig (little) ≠ ein wenig (a little): Ich habe wenig Zeit (hardly any) – Ich habe ein wenig Zeit (some).",
+     "wenig + singular uncountable, wenige + plural: wenig Papier, wenige Stühle."
+    ],
+    "subtleties": [
+     "In everyday speech nicht viel / nicht viele is more common than wenig / wenige.",
+     "weniger is both the comparative (weniger Leute = fewer people) and the genitive plural form – the context tells them apart."
+    ]
+   }
+  },
+  {
+   "id": "de:ein_bisschen",
+   "lemma": "ein bisschen",
+   "pos": "DET",
+   "senses": [
+    "quant.alittle",
+    "adv.alittle"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.alittle",
+     "axis": "register",
+     "value": "everyday"
+    },
+    {
+     "concept": "adv.alittle",
+     "axis": "what it goes with",
+     "value": "anything: ein bisschen müde, ein bisschen warten"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral",
+     "informal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and friendly: “a bit”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a little, a bit (of something): ein bisschen Papier, ein bisschen Zeit",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.alittle"
+     },
+     {
+      "id": "s2",
+      "def": "a bit, somewhat (before an adjective or verb: ein bisschen müde)",
+      "register": [
+       "informal"
+      ],
+      "concept": "adv.alittle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hier ist ein bisschen Papier.",
+      "tr": "Here is a bit of paper.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich spreche ein bisschen Deutsch.",
+      "tr": "I speak a little German.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin ein bisschen müde.",
+      "tr": "I’m a bit tired.",
+      "register": "informal",
+      "context": "feelings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein bisschen Zeit",
+      "tr": "a bit of time"
+     },
+     {
+      "text": "ein bisschen Deutsch",
+      "tr": "a little German"
+     },
+     {
+      "text": "kein bisschen",
+      "tr": "not a bit, not at all"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "ein wenig",
+      "register": "formal",
+      "nuance": "a little – the same, more careful or written"
+     },
+     {
+      "word": "etwas",
+      "register": "neutral",
+      "nuance": "some, a little (etwas Brot)"
+     },
+     {
+      "word": "ein bissel / ein bissl",
+      "register": "regional",
+      "nuance": "southern German and Austrian speech"
+     }
+    ],
+    "etymology": {
+     "text": "bisschen: adverbialized noun Bisschen, from Bissen (“a bit, bite”) + -chen (diminutive suffix).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ein bisschen is literally “a little bite” – Bissen (bite) + -chen, just like English a bit comes from bite."
+    ],
+    "pitfalls": [
+     "Write -ss-: bisschen (the old spelling bißchen was replaced in the 1996 reform).",
+     "bisschen does not decline: mit ein bisschen Glück."
+    ],
+    "subtleties": [
+     "ein bisschen softens a request or criticism: Das ist ein bisschen teuer (that’s a bit expensive)."
+    ]
+   },
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   }
+  },
+  {
+   "id": "de:ein_wenig",
+   "lemma": "ein wenig",
+   "pos": "DET",
+   "senses": [
+    "quant.alittle"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.alittle",
+     "axis": "register",
+     "value": "more formal"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A little – a shade more careful or written than ein bisschen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a little (of something): ein wenig Papier, ein wenig Zeit",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.alittle"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Dort ist ein wenig Papier.",
+      "tr": "There is a little paper over there.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "Haben Sie ein wenig Zeit für mich?",
+      "tr": "Do you have a little time for me?",
+      "register": "formal",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein wenig Zeit",
+      "tr": "a little time"
+     },
+     {
+      "text": "ein wenig Geduld",
+      "tr": "a little patience"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "ein bisschen",
+      "register": "informal",
+      "nuance": "a bit – the everyday word"
+     },
+     {
+      "word": "etwas",
+      "register": "neutral",
+      "nuance": "some, a little"
+     }
+    ],
+    "etymology": {
+     "text": "ein + wenig; wenig from Middle High German weinec, wēnec, from Old High German *weinag, wēnag (“miserable”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "pitfalls": [
+     "ein wenig (a little, some) is positive; wenig alone (little) is negative."
+    ],
+    "subtleties": [
+     "In speech ein bisschen is far more common; ein wenig sounds polite or bookish."
+    ]
+   },
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   }
+  },
+  {
+   "id": "de:alle",
+   "lemma": "alle",
+   "pos": "DET",
+   "class": "quantpl",
+   "senses": [
+    "quant.all",
+    "adj.usedup"
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": [
+     {
+      "form": "alle",
+      "senses": [
+       "s2"
+      ],
+      "note": "never inflected, only after sein: Die Milch ist alle."
+     }
+    ]
+   },
+   "forms": {
+    "DET;NOM;PL": "alle",
+    "DET;ACC;PL": "alle",
+    "DET;DAT;PL": "allen",
+    "DET;GEN;PL": "aller"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everybody, every one of them – the whole group.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "all (with a plural noun: alle Kinder); everybody (alone: Alle sind da)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.all"
+     },
+     {
+      "id": "s2",
+      "def": "used up, gone (only after sein: Die Milch ist alle)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.usedup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Alle Kinder sind hier.",
+      "tr": "All the children are here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Hallo, alle zusammen!",
+      "tr": "Hello, everyone!",
+      "register": "informal",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Milch ist alle.",
+      "tr": "The milk is all gone.",
+      "register": "colloquial",
+      "context": "kitchen",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "alle Leute",
+      "tr": "everybody, all people"
+     },
+     {
+      "text": "alle zusammen",
+      "tr": "all together, everyone"
+     },
+     {
+      "text": "wir alle",
+      "tr": "all of us"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Alle für einen, einer für alle.",
+      "tr": "All for one, one for all.",
+      "kind": "saying",
+      "meaning": "the motto of solidarity (the Three Musketeers)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "jeder",
+      "register": "neutral",
+      "nuance": "every, each – singular and one by one (jedes Kind)"
+     },
+     {
+      "word": "sämtliche",
+      "register": "formal",
+      "nuance": "all, the whole set – official style"
+     }
+    ],
+    "etymology": {
+     "text": "Inflected form of all, from Middle High German al, from Old High German al, from Proto-West Germanic *all, from Proto-Germanic *allaz.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "all and English all are the same Germanic word *allaz."
+    ],
+    "pitfalls": [
+     "alle is plural: alle Kinder sind …; “everything” is alles (singular): Alles ist gut.",
+     "Dative plural allen: mit allen Freunden."
+    ],
+    "subtleties": [
+     "It can stand after the verb: Wir sind alle hier (we are all here).",
+     "Before the article: alle die Kinder is rare; say alle Kinder or all die Kinder."
+    ]
+   }
+  },
+  {
+   "id": "de:einige",
+   "lemma": "einige",
+   "pos": "DET",
+   "class": "quantpl",
+   "senses": [
+    "quant.some"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.some",
+     "axis": "which kind of “some”",
+     "value": "a few, several (a number)"
+    }
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "DET;NOM;PL": "einige",
+    "DET;ACC;PL": "einige",
+    "DET;DAT;PL": "einigen",
+    "DET;GEN;PL": "einiger"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary files einige as an inflection of einig, whose determiner sense is “some, a few”; the plural einige is the form used before nouns"
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Some, a few – a small but real number.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "some, a few, several (with a plural noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Einige Studenten sind dort.",
+      "tr": "Some students are over there.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich habe einige Fragen.",
+      "tr": "I have a few questions.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Das dauert einige Tage.",
+      "tr": "That takes a few days.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "einige Leute",
+      "tr": "some people"
+     },
+     {
+      "text": "einige Tage",
+      "tr": "a few days"
+     },
+     {
+      "text": "einige Fragen",
+      "tr": "some questions"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "ein paar",
+      "register": "informal",
+      "nuance": "a couple of, a few – the everyday word (ein paar Leute)"
+     },
+     {
+      "word": "mehrere",
+      "register": "neutral",
+      "nuance": "several – more than two, stressing the number"
+     },
+     {
+      "word": "manche",
+      "register": "neutral",
+      "nuance": "some (but not others)"
+     }
+    ],
+    "etymology": {
+     "text": "Plural of einig, from Middle High German einec, from Old High German einag, einīg, from Proto-West Germanic *ainag. More at English any.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "einig- is the German twin of English any (Proto-West Germanic *ainag, from ein, “one”)."
+    ],
+    "pitfalls": [
+     "einige is plural: einige Bücher. With an uncountable noun German says etwas: etwas Papier (some paper)."
+    ],
+    "subtleties": [
+     "Singular einiges means “quite a lot (of things)”: Ich weiß einiges darüber."
+    ]
+   }
+  },
+  {
+   "id": "de:manche",
+   "lemma": "manche",
+   "pos": "DET",
+   "class": "quantpl",
+   "senses": [
+    "quant.some"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.some",
+     "axis": "which kind of “some”",
+     "value": "some but not others (a selection)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "DET;NOM;PL": "manche",
+    "DET;ACC;PL": "manche",
+    "DET;DAT;PL": "manchen",
+    "DET;GEN;PL": "mancher"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary files manche as an inflection of manch (“many a; many; some”); the plural manche is the form used before nouns"
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Some – but not all: it contrasts with the others.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "some (of a group, as opposed to the others), quite a few",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.some"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Manche Bücher sind gut.",
+      "tr": "Some books are good.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "Manche Leute mögen keinen Kaffee.",
+      "tr": "Some people don’t like coffee.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Manche Kinder sind schon hier.",
+      "tr": "Some children are already here.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "manche Leute",
+      "tr": "some people"
+     },
+     {
+      "text": "manche Menschen",
+      "tr": "some people"
+     },
+     {
+      "text": "in manchen Fällen",
+      "tr": "in some cases"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "einige",
+      "register": "neutral",
+      "nuance": "some, a few – just a small number, no contrast"
+     },
+     {
+      "word": "viele",
+      "register": "neutral",
+      "nuance": "many – a larger number"
+     }
+    ],
+    "etymology": {
+     "text": "Plural of manch, from Middle High German manec, from Old High German manag. Cognate with Dutch menig, English many, Polish mnogi.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "manch is English many: Old High German manag. The original g survives in mannigfaltig (manifold)."
+    ],
+    "pitfalls": [
+     "manche means “some, but not all” – it is not “many” even though it is the same word as English many."
+    ],
+    "subtleties": [
+     "Singular manch- is literary: mancher Mann (many a man), manches Mal (many a time)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

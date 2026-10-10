@@ -1,0 +1,3154 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:ala",
+   "lemma": "عَلَى",
+   "pos": "ADP",
+   "senses": [
+    "prep.on",
+    "verb.must"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʿalā",
+   "forms": {
+    "ADP": "عَلَى",
+    "ADP;1;SG": "عَلَيَّ",
+    "ADP;2;SG;MASC": "عَلَيْكَ",
+    "ADP;2;SG;FEM": "عَلَيْكِ",
+    "ADP;3;SG;MASC": "عَلَيْهِ",
+    "ADP;3;SG;FEM": "عَلَيْهَا",
+    "ADP;1;PL": "عَلَيْنَا",
+    "ADP;2;PL;MASC": "عَلَيْكُمْ",
+    "ADP;2;PL;FEM": "عَلَيْكُنَّ",
+    "ADP;3;PL;MASC": "عَلَيْهِمْ",
+    "ADP;3;PL;FEM": "عَلَيْهِنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses عَلَى as “on, over” — the concept “on (on top of)”; only the word “top” is missing from its wording."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "On top of things — and the greeting of peace.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "on, on top of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.on"
+     },
+     {
+      "id": "s2",
+      "def": "duty: عَلَيْكَ أَنْ … (you have to …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.must"
+     },
+     {
+      "id": "s3",
+      "def": "on (a side): عَلَى الْيَمِينِ (on the right)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْكِتَابُ عَلَى الطَّاوِلَةِ.",
+      "tr": "The book is on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمِفْتَاحُ عَلَى الْبَابِ.",
+      "tr": "The key is in the door (lit. on the door).",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّلَامُ عَلَيْكُمْ.",
+      "tr": "Peace be upon you.",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "عَلَيْكَ أَنْ تَدْرُسَ.",
+      "tr": "You have to study.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَلَى الطَّاوِلَةِ",
+      "tr": "on the table"
+     },
+     {
+      "text": "عَلَى الْيَمِينِ / عَلَى الْيَسَارِ",
+      "tr": "on the right / on the left"
+     },
+     {
+      "text": "عَلَى الْأَرْضِ",
+      "tr": "on the floor, on the ground"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فَوْقَ",
+      "register": "neutral",
+      "nuance": "above, over — not necessarily touching: فَوْقَ الطَّاوِلَةِ مِصْبَاحٌ"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʕalay-; cognate with Akkadian eli, Hebrew עַל (ʿal) and Aramaic עַל (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew עַל (al) is the same word: עַל הַשֻּׁלְחָן = عَلَى الطَّاوِلَةِ, “on the table”."
+    ],
+    "pitfalls": [
+     "Written with ى, read -ā: ʿalā. With pronoun endings the ى becomes يْ: عَلَيْهِ, عَلَيْكَ, and عَلَيَّ (on me).",
+     "Not عَلِيّ (the name ʿAlī)."
+    ],
+    "subtleties": [
+     "عَلَى also expresses duty and debt: عَلَيَّ أَنْ أَعْمَلَ (I have to work), عَلَيْهِ دَيْنٌ (he owes money)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:tahta",
+   "lemma": "تَحْتَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.under"
+   ],
+   "features": {
+    "root": "ت ح ت",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "taḥta",
+   "forms": {
+    "ADP": "تَحْتَ",
+    "ADP;1;SG": "تَحْتِي",
+    "ADP;2;SG;MASC": "تَحْتَكَ",
+    "ADP;2;SG;FEM": "تَحْتَكِ",
+    "ADP;3;SG;MASC": "تَحْتَهُ",
+    "ADP;3;SG;FEM": "تَحْتَهَا",
+    "ADP;1;PL": "تَحْتَنَا",
+    "ADP;2;PL;MASC": "تَحْتَكُمْ",
+    "ADP;2;PL;FEM": "تَحْتَكُنَّ",
+    "ADP;3;PL;MASC": "تَحْتَهُمْ",
+    "ADP;3;PL;FEM": "تَحْتَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Below and beneath: under the bed, under the rain.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "under, below",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.under"
+     },
+     {
+      "id": "s2",
+      "def": "under (figurative): تَحْتَ الطَّلَبِ (on request)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْقِطَّةُ تَحْتَ السَّرِيرِ.",
+      "tr": "The cat is under the bed.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَقِيبَةُ تَحْتَ الطَّاوِلَةِ.",
+      "tr": "The bag is under the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "نَمْشِي تَحْتَ الْمَطَرِ.",
+      "tr": "We are walking in (lit. under) the rain.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "تَحْتَ السَّرِيرِ",
+      "tr": "under the bed"
+     },
+     {
+      "text": "تَحْتَ الصِّفْرِ",
+      "tr": "below zero"
+     },
+     {
+      "text": "مِنْ تَحْتُ",
+      "tr": "from below"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَسْفَلَ",
+      "register": "formal",
+      "nuance": "below, beneath — the lower part"
+     },
+     {
+      "word": "دُونَ",
+      "register": "literary",
+      "nuance": "below, beneath"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of تَحْت (taḥt, “the place below”); related to Hebrew תַּחַת (táḥat) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew תַּחַת (tachat) is the same word — and in Hebrew it can also mean “instead of”."
+    ],
+    "pitfalls": [
+     "تَحْتَ ends in -a (an old accusative) and the noun after it is genitive: تَحْتَ الطَّاوِلَةِ.",
+     "Alone, as an adverb, it is تَحْتُ (taḥtu): مِنْ تَحْتُ (from below)."
+    ],
+    "subtleties": [
+     "Figurative uses: تَحْتَ الْمُرَاقَبَةِ (under observation), تَحْتَ الطَّلَبِ (on request)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:bijanibi",
+   "lemma": "بِجَانِبِ",
+   "pos": "ADP",
+   "senses": [
+    "prep.nextto",
+    "prep.besides"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: بِ + جَانِب (ج ن ب)"
+    },
+    "kind": "phrase",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "bi-jānibi",
+   "forms": {
+    "ADP": "بِجَانِبِ",
+    "ADP;1;SG": "بِجَانِبِي",
+    "ADP;2;SG;MASC": "بِجَانِبِكَ",
+    "ADP;2;SG;FEM": "بِجَانِبِكِ",
+    "ADP;3;SG;MASC": "بِجَانِبِهِ",
+    "ADP;3;SG;FEM": "بِجَانِبِهَا",
+    "ADP;1;PL": "بِجَانِبِنَا",
+    "ADP;2;PL;MASC": "بِجَانِبِكُمْ",
+    "ADP;2;PL;FEM": "بِجَانِبِكُنَّ",
+    "ADP;3;PL;MASC": "بِجَانِبِهِمْ",
+    "ADP;3;PL;FEM": "بِجَانِبِهِنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses بِجَانِبِ as “along, side by side with” (from جَانِب, “side”), i.e. next to, beside."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Side by side: next to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "next to, beside",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.nextto"
+     },
+     {
+      "id": "s2",
+      "def": "in addition to, apart from (usually إِلَى جَانِبِ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.besides"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمِصْبَاحُ بِجَانِبِ السَّرِيرِ.",
+      "tr": "The lamp is next to the bed.",
+      "register": "neutral",
+      "context": "bedroom",
+      "sense": "s1"
+     },
+     {
+      "text": "الصَّيْدَلِيَّةُ بِجَانِبِ الْبَنْكِ.",
+      "tr": "The pharmacy is next to the bank.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "اِجْلِسْ بِجَانِبِي.",
+      "tr": "Sit next to me.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِجَانِبِ الْبَابِ",
+      "tr": "next to the door"
+     },
+     {
+      "text": "بِجَانِبِي",
+      "tr": "next to me"
+     },
+     {
+      "text": "إِلَى جَانِبِ",
+      "tr": "beside; in addition to"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جَانِبَ",
+      "register": "neutral",
+      "nuance": "beside — the same word without بِ"
+     },
+     {
+      "word": "قُرْبَ",
+      "register": "neutral",
+      "nuance": "near, close to"
+     },
+     {
+      "word": "جنب",
+      "register": "colloquial",
+      "nuance": "next to (spoken janb)"
+     }
+    ],
+    "etymology": {
+     "text": "From بِـ (bi-, “at, on”) + جَانِب (jānib, “side”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "جَانِب (side) belongs to the root ج ن ب, which also gives أَجْنَبِيّ, “foreigner” — someone from the side, an outsider."
+    ],
+    "pitfalls": [
+     "One written word with بِ: بِجَانِبِ — and it ends in -i (the genitive after بِ), not *bi-jāniba.",
+     "The noun after it is genitive too: بِجَانِبِ الْبَابِ."
+    ],
+    "subtleties": [
+     "إِلَى جَانِبِ also means “in addition to”: إِلَى جَانِبِ عَمَلِهِ يَدْرُسُ (besides his work, he studies)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:amama",
+   "lemma": "أَمَامَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.infront"
+   ],
+   "features": {
+    "root": "ء م م",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ʾamāma",
+   "forms": {
+    "ADP": "أَمَامَ",
+    "ADP;1;SG": "أَمَامِي",
+    "ADP;2;SG;MASC": "أَمَامَكَ",
+    "ADP;2;SG;FEM": "أَمَامَكِ",
+    "ADP;3;SG;MASC": "أَمَامَهُ",
+    "ADP;3;SG;FEM": "أَمَامَهَا",
+    "ADP;1;PL": "أَمَامَنَا",
+    "ADP;2;PL;MASC": "أَمَامَكُمْ",
+    "ADP;2;PL;FEM": "أَمَامَكُنَّ",
+    "ADP;3;PL;MASC": "أَمَامَهُمْ",
+    "ADP;3;PL;FEM": "أَمَامَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Facing it: in front of, ahead.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "in front of, before",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.infront"
+     },
+     {
+      "id": "s2",
+      "def": "in the presence of; in the face of",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّيَّارَةُ أَمَامَ الْبَيْتِ.",
+      "tr": "The car is in front of the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنْتَظِرُكَ أَمَامَ الْمَدْرَسَةِ.",
+      "tr": "I’ll wait for you in front of the school.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "أَمَامَنَا يَوْمٌ طَوِيلٌ.",
+      "tr": "A long day lies ahead of us.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَمَامَ الْبَيْتِ",
+      "tr": "in front of the house"
+     },
+     {
+      "text": "مِنْ أَمَامِ",
+      "tr": "from in front of"
+     },
+     {
+      "text": "إِلَى الْأَمَامِ",
+      "tr": "forward"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قدام",
+      "register": "colloquial",
+      "nuance": "in front of (spoken ʾuddām / ʾiddām in Egypt and the Levant)",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "etymology": {
+     "text": "The accusative of the noun أَمَام (“front, the place before something”) used as a preposition (Wiktionary gives both).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "إِمَام (imam, “the one in front”, who leads the prayer) and أُمَّة (nation) share its root ء م م."
+    ],
+    "pitfalls": [
+     "أَمَامَ (ʾamāma, in front of) vs إِمَام (ʾimām, prayer leader): watch the first vowel."
+    ],
+    "subtleties": [
+     "It works for time too: أَمَامَنَا يَوْمٌ طَوِيلٌ (a long day lies ahead of us)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:khalfa",
+   "lemma": "خَلْفَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.behind"
+   ],
+   "features": {
+    "root": "خ ل ف",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.behind",
+     "axis": "physical or extended",
+     "value": "behind (physically)"
+    }
+   ],
+   "translit": "ḫalfa",
+   "forms": {
+    "ADP": "خَلْفَ",
+    "ADP;1;SG": "خَلْفِي",
+    "ADP;2;SG;MASC": "خَلْفَكَ",
+    "ADP;2;SG;FEM": "خَلْفَكِ",
+    "ADP;3;SG;MASC": "خَلْفَهُ",
+    "ADP;3;SG;FEM": "خَلْفَهَا",
+    "ADP;1;PL": "خَلْفَنَا",
+    "ADP;2;PL;MASC": "خَلْفَكُمْ",
+    "ADP;2;PL;FEM": "خَلْفَكُنَّ",
+    "ADP;3;PL;MASC": "خَلْفَهُمْ",
+    "ADP;3;PL;FEM": "خَلْفَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "At the back: behind.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "behind (physically)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.behind"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَدِيقَةُ خَلْفَ الْبَيْتِ.",
+      "tr": "The garden is behind the house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "مَنْ خَلْفَ الْبَابِ؟",
+      "tr": "Who is behind the door?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "اُنْظُرْ خَلْفَكَ!",
+      "tr": "Look behind you!",
+      "register": "neutral",
+      "context": "warning",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "خَلْفَ الْبَيْتِ",
+      "tr": "behind the house"
+     },
+     {
+      "text": "مِنْ خَلْفِ",
+      "tr": "from behind"
+     },
+     {
+      "text": "إِلَى الْخَلْفِ",
+      "tr": "backwards"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "وَرَاءَ",
+      "register": "neutral",
+      "nuance": "behind — also figurative: the reason behind, beyond"
+     }
+    ],
+    "etymology": {
+     "text": "The accusative of the noun خَلْف (“the place behind; the back; successor”), root خ ل ف, used as a preposition (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "خَلِيفَة (caliph) is “the one who comes after = the successor”, from the same root."
+    ],
+    "pitfalls": [
+     "خ (ḫ, the ch of German Bach), not ح: ḫalfa."
+    ],
+    "subtleties": [
+     "خَلْفَ is concrete (physically behind); وَرَاءَ can also be figurative: مَا وَرَاءَ الْخَبَرِ (what is behind the news)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:waraa",
+   "lemma": "وَرَاءَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.behind"
+   ],
+   "features": {
+    "root": "و ر ي",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.behind",
+     "axis": "physical or extended",
+     "value": "behind; beyond; the reason behind"
+    }
+   ],
+   "translit": "warāʾa",
+   "forms": {
+    "ADP": "وَرَاءَ",
+    "ADP;1;SG": "وَرَائِي",
+    "ADP;2;SG;MASC": "وَرَاءَكَ",
+    "ADP;2;SG;FEM": "وَرَاءَكِ",
+    "ADP;3;SG;MASC": "وَرَاءَهُ",
+    "ADP;3;SG;FEM": "وَرَاءَهَا",
+    "ADP;1;PL": "وَرَاءَنَا",
+    "ADP;2;PL;MASC": "وَرَاءَكُمْ",
+    "ADP;2;PL;FEM": "وَرَاءَكُنَّ",
+    "ADP;3;PL;MASC": "وَرَاءَهُمْ",
+    "ADP;3;PL;FEM": "وَرَاءَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Behind and beyond — what is hidden.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "behind",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.behind"
+     },
+     {
+      "id": "s2",
+      "def": "beyond; the reason behind (figurative)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَطْبَخُ وَرَاءَ هٰذَا الْبَابِ.",
+      "tr": "The kitchen is behind this door.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الشَّمْسُ وَرَاءَ الْجَبَلِ.",
+      "tr": "The sun is behind the mountain.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا السِّرُّ وَرَاءَ نَجَاحِهِ؟",
+      "tr": "What is the secret behind his success?",
+      "register": "neutral",
+      "context": "business",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَرَاءَ الْبَيْتِ",
+      "tr": "behind the house"
+     },
+     {
+      "text": "مَا وَرَاءَ الطَّبِيعَةِ",
+      "tr": "metaphysics (what is beyond nature)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "وَرَاءَ كُلِّ رَجُلٍ عَظِيمٍ اِمْرَأَةٌ",
+      "tr": "behind every great man there is a woman",
+      "kind": "saying",
+      "meaning": "a man’s success often owes much to a woman’s support",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "خَلْفَ",
+      "register": "neutral",
+      "nuance": "behind — the plainer, physical word"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary, after Lane’s Lexicon: from the root و ر ء or و ر ي, “to push back behind something, to cover over”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مَا وَرَاءَ الطَّبِيعَةِ, “what is beyond nature”, is the Arabic for metaphysics — exactly Greek μετὰ τὰ φυσικά."
+    ],
+    "pitfalls": [
+     "With pronoun endings the hamza changes its seat: وَرَائِي (behind me), but وَرَاءَكَ, وَرَاءَهُ.",
+     "It starts with و, but it is not the prefix “and”: وَرَاءَ is one word."
+    ],
+    "subtleties": [
+     "وَرَاءَ often sounds a little more literary than خَلْفَ."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:bayna",
+   "lemma": "بَيْنَ",
+   "pos": "ADP",
+   "senses": [
+    "prep.between"
+   ],
+   "features": {
+    "root": "ب ي ن",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "translit": "bayna",
+   "forms": {
+    "ADP": "بَيْنَ",
+    "ADP;1;SG": "بَيْنِي",
+    "ADP;2;SG;MASC": "بَيْنَكَ",
+    "ADP;2;SG;FEM": "بَيْنَكِ",
+    "ADP;3;SG;MASC": "بَيْنَهُ",
+    "ADP;3;SG;FEM": "بَيْنَهَا",
+    "ADP;1;PL": "بَيْنَنَا",
+    "ADP;2;PL;MASC": "بَيْنَكُمْ",
+    "ADP;2;PL;FEM": "بَيْنَكُنَّ",
+    "ADP;3;PL;MASC": "بَيْنَهُمْ",
+    "ADP;3;PL;FEM": "بَيْنَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "In the middle of two: between.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "between; among",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.between"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَنْكُ بَيْنَ الْمَطْعَمِ وَالصَّيْدَلِيَّةِ.",
+      "tr": "The bank is between the restaurant and the pharmacy.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "بَيْنَ الْبَيْتِ وَالْمَدْرَسَةِ شَارِعٌ.",
+      "tr": "There is a street between the house and the school.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا سِرٌّ بَيْنِي وَبَيْنَكَ.",
+      "tr": "This is a secret between you and me.",
+      "register": "neutral",
+      "context": "secrets",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَيْنَ … وَ…",
+      "tr": "between … and …"
+     },
+     {
+      "text": "مِنْ بَيْنِ",
+      "tr": "from among"
+     },
+     {
+      "text": "بَيْنَنَا",
+      "tr": "between us"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "بَيْنِي وَبَيْنَكَ",
+      "tr": "between me and you",
+      "kind": "idiom",
+      "meaning": "confidentially, just between us",
+      "register": "neutral"
+     },
+     {
+      "text": "بَيْنَ بَيْنَ",
+      "tr": "between between",
+      "kind": "idiom",
+      "meaning": "so-so, neither good nor bad",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "وَسْطَ",
+      "register": "neutral",
+      "nuance": "in the middle of, among"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Hebrew בֵּין (bein), Aramaic byn, Ugaritic bn, Geʿez bäynä and Old South Arabian byn; synchronically an adverbial accusative of بَيْن (“interval”), root ب ي ن.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew בֵּין (bein) is the same word, and both languages repeat it with pronouns: بَيْنِي وَبَيْنَكَ — בֵּינִי לְבֵינְךָ."
+    ],
+    "pitfalls": [
+     "With pronoun endings بَيْنَ is repeated: بَيْنِي وَبَيْنَكَ (between me and you); with two nouns once is enough: بَيْنَ الْبَيْتِ وَالْمَدْرَسَةِ.",
+     "بَيْنَ (between) ends in n — not بَيْت (house)."
+    ],
+    "subtleties": [
+     "بَيْنَمَا (while) is built on it (Wiktionary)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:qarib",
+   "lemma": "قَرِيب",
+   "pos": "ADJ",
+   "senses": [
+    "adv.near",
+    "adj.close"
+   ],
+   "features": {
+    "root": "ق ر ب",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": "faʿīl of قَرُبَ (to be near)",
+    "feminine": "قَرِيبَة",
+    "plurals": [
+     {
+      "form": "قَرِيبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "near (people); relatives are أَقَارِب (the noun قَرِيب)",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْرَب",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "word class (the same form قَرِيب)",
+     "value": "the adjective: قَرِيبٌ مِنْ …"
+    }
+   ],
+   "translit": "qarīb",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "قَرِيبٌ",
+    "ADJ;ACC;SG;MASC;INDF": "قَرِيبًا",
+    "ADJ;GEN;SG;MASC;INDF": "قَرِيبٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْقَرِيبُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْقَرِيبَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْقَرِيبِ",
+    "ADJ;NOM;SG;FEM;INDF": "قَرِيبَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "قَرِيبَةً",
+    "ADJ;GEN;SG;FEM;INDF": "قَرِيبَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْقَرِيبَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْقَرِيبَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْقَرِيبَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "قَرِيبَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "قَرِيبَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "قَرِيبَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْقَرِيبَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْقَرِيبَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْقَرِيبَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "قَرِيبَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "قَرِيبَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "قَرِيبَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْقَرِيبَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْقَرِيبَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْقَرِيبَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "قَرِيبُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "قَرِيبِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "قَرِيبِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْقَرِيبُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْقَرِيبِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْقَرِيبِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "قَرِيبَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "قَرِيبَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "قَرِيبَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْقَرِيبَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْقَرِيبَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْقَرِيبَاتِ",
+    "ADJ;CMPR;NOM": "أَقْرَبُ",
+    "ADJ;CMPR;ACC": "أَقْرَبَ",
+    "ADJ;CMPR;GEN": "أَقْرَبَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَقْرَبُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَقْرَبَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَقْرَبِ",
+    "ADJ;SPRL;NOM;CONST": "أَقْرَبُ",
+    "ADJ;SPRL;ACC;CONST": "أَقْرَبَ",
+    "ADJ;SPRL;GEN;CONST": "أَقْرَبِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Close by, within reach — also close to the heart.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "near, close (to): قَرِيبٌ مِنْ …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     },
+     {
+      "id": "s2",
+      "def": "close (a relationship): صَدِيقٌ قَرِيبٌ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.close"
+     },
+     {
+      "id": "s3",
+      "def": "simple, easily understood (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَنْكُ قَرِيبٌ مِنْ هُنَا.",
+      "tr": "The bank is near here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَدْرَسَةُ قَرِيبَةٌ مِنَ الْبَيْتِ.",
+      "tr": "The school is close to home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلِ الْمَطَارُ قَرِيبٌ؟",
+      "tr": "Is the airport close?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ صَدِيقٌ قَرِيبٌ.",
+      "tr": "He is a close friend.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s2"
+     },
+     {
+      "text": "يَسْكُنُ قَرِيبًا مِنَ الْمَدْرَسَةِ.",
+      "tr": "He lives near the school.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "تَسْكُنُ أُخْتِي قَرِيبًا مِنِّي.",
+      "tr": "My sister lives near me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَرِيبٌ مِنْ",
+      "tr": "near (to)"
+     },
+     {
+      "text": "قَرِيبٌ جِدًّا",
+      "tr": "very close"
+     },
+     {
+      "text": "فِي الْقَرِيبِ الْعَاجِلِ",
+      "tr": "very soon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِالْقُرْبِ مِنْ",
+      "register": "neutral",
+      "nuance": "near, in the vicinity of — a place phrase"
+     },
+     {
+      "word": "مُجَاوِر",
+      "register": "formal",
+      "nuance": "neighbouring, adjacent"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَعِيد",
+      "note": "far"
+     }
+    ],
+    "etymology": {
+     "text": "A faʿīl-type stative adjective from قَرُبَ (qaruba, “to be near”); cognate with Hebrew קָרוֹב (karóv, “close, near”) and Amharic ቅርብ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew קָרוֹב (karov) is “near” and “a relative” too — exactly like Arabic قَرِيب (near; a relative, lesson 6)."
+    ],
+    "pitfalls": [
+     "It agrees like an adjective: الْبَنْكُ قَرِيبٌ, but الْمَدْرَسَةُ قَرِيبَةٌ.",
+     "“Near something” takes مِنْ: قَرِيبٌ مِنَ الْبَيْتِ."
+    ],
+    "subtleties": [
+     "The same word is the noun “relative” (lesson 6), with the plurals أَقَارِبُ / أَقْرِبَاءُ; as “near” its plural is قَرِيبُونَ.",
+     "Wiktionary: the feminine can also be قَرِيب, as in the Qurʾān: إِنَّ رَحْمَتَ اللّٰهِ قَرِيبٌ (7:56)."
+    ]
+   }
+  },
+  {
+   "id": "ar:baid",
+   "lemma": "بَعِيد",
+   "pos": "ADJ",
+   "senses": [
+    "adv.far",
+    "adj.unlikely"
+   ],
+   "features": {
+    "root": "ب ع د",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": "faʿīl of بَعُدَ (to be far)",
+    "feminine": "بَعِيدَة",
+    "plurals": [
+     {
+      "form": "بَعِيدُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَبْعَد",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "baʿīd",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "بَعِيدٌ",
+    "ADJ;ACC;SG;MASC;INDF": "بَعِيدًا",
+    "ADJ;GEN;SG;MASC;INDF": "بَعِيدٍ",
+    "ADJ;NOM;SG;MASC;DEF": "الْبَعِيدُ",
+    "ADJ;ACC;SG;MASC;DEF": "الْبَعِيدَ",
+    "ADJ;GEN;SG;MASC;DEF": "الْبَعِيدِ",
+    "ADJ;NOM;SG;FEM;INDF": "بَعِيدَةٌ",
+    "ADJ;ACC;SG;FEM;INDF": "بَعِيدَةً",
+    "ADJ;GEN;SG;FEM;INDF": "بَعِيدَةٍ",
+    "ADJ;NOM;SG;FEM;DEF": "الْبَعِيدَةُ",
+    "ADJ;ACC;SG;FEM;DEF": "الْبَعِيدَةَ",
+    "ADJ;GEN;SG;FEM;DEF": "الْبَعِيدَةِ",
+    "ADJ;NOM;DU;MASC;INDF": "بَعِيدَانِ",
+    "ADJ;ACC;DU;MASC;INDF": "بَعِيدَيْنِ",
+    "ADJ;GEN;DU;MASC;INDF": "بَعِيدَيْنِ",
+    "ADJ;NOM;DU;MASC;DEF": "الْبَعِيدَانِ",
+    "ADJ;ACC;DU;MASC;DEF": "الْبَعِيدَيْنِ",
+    "ADJ;GEN;DU;MASC;DEF": "الْبَعِيدَيْنِ",
+    "ADJ;NOM;DU;FEM;INDF": "بَعِيدَتَانِ",
+    "ADJ;ACC;DU;FEM;INDF": "بَعِيدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;INDF": "بَعِيدَتَيْنِ",
+    "ADJ;NOM;DU;FEM;DEF": "الْبَعِيدَتَانِ",
+    "ADJ;ACC;DU;FEM;DEF": "الْبَعِيدَتَيْنِ",
+    "ADJ;GEN;DU;FEM;DEF": "الْبَعِيدَتَيْنِ",
+    "ADJ;NOM;PL;MASC;INDF": "بَعِيدُونَ",
+    "ADJ;ACC;PL;MASC;INDF": "بَعِيدِينَ",
+    "ADJ;GEN;PL;MASC;INDF": "بَعِيدِينَ",
+    "ADJ;NOM;PL;MASC;DEF": "الْبَعِيدُونَ",
+    "ADJ;ACC;PL;MASC;DEF": "الْبَعِيدِينَ",
+    "ADJ;GEN;PL;MASC;DEF": "الْبَعِيدِينَ",
+    "ADJ;NOM;PL;FEM;INDF": "بَعِيدَاتٌ",
+    "ADJ;ACC;PL;FEM;INDF": "بَعِيدَاتٍ",
+    "ADJ;GEN;PL;FEM;INDF": "بَعِيدَاتٍ",
+    "ADJ;NOM;PL;FEM;DEF": "الْبَعِيدَاتُ",
+    "ADJ;ACC;PL;FEM;DEF": "الْبَعِيدَاتِ",
+    "ADJ;GEN;PL;FEM;DEF": "الْبَعِيدَاتِ",
+    "ADJ;CMPR;NOM": "أَبْعَدُ",
+    "ADJ;CMPR;ACC": "أَبْعَدَ",
+    "ADJ;CMPR;GEN": "أَبْعَدَ",
+    "ADJ;SPRL;NOM;DEF": "الْأَبْعَدُ",
+    "ADJ;SPRL;ACC;DEF": "الْأَبْعَدَ",
+    "ADJ;SPRL;GEN;DEF": "الْأَبْعَدِ",
+    "ADJ;SPRL;NOM;CONST": "أَبْعَدُ",
+    "ADJ;SPRL;ACC;CONST": "أَبْعَدَ",
+    "ADJ;SPRL;GEN;CONST": "أَبْعَدِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Distance — and unlikeliness.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "far, distant (from): بَعِيدٌ عَنْ …",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.far"
+     },
+     {
+      "id": "s2",
+      "def": "improbable, unlikely (Wiktionary)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.unlikely"
+     }
+    ],
+    "examples": [
+     {
+      "text": "بَيْتِي بَعِيدٌ عَنِ الْعَمَلِ.",
+      "tr": "My house is far from work.",
+      "register": "neutral",
+      "context": "commuting",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقَرْيَةُ بَعِيدَةٌ جِدًّا.",
+      "tr": "The village is very far.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا بَعِيدٌ.",
+      "tr": "That is unlikely.",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَعِيدٌ عَنْ",
+      "tr": "far from"
+     },
+     {
+      "text": "مِنْ بَعِيدٍ",
+      "tr": "from afar"
+     },
+     {
+      "text": "بَعِيدُ النَّظَرِ",
+      "tr": "far-sighted"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "نَاءٍ",
+      "register": "literary",
+      "nuance": "remote, far away (nāʾin)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "قَرِيب",
+      "note": "near"
+     }
+    ],
+    "etymology": {
+     "text": "A faʿīl-type stative adjective from بَعُدَ (baʕuda, “to be far”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "بَعْدَ (after) and بُعْد (distance) belong to the same root ب ع د."
+    ],
+    "pitfalls": [
+     "“Far from” is بَعِيدٌ عَنْ — or بَعِيدٌ مِنْ; عَنْ is more common.",
+     "It agrees: الْقَرْيَةُ بَعِيدَةٌ (f.)."
+    ],
+    "subtleties": [
+     "لَيْسَ بَعِيدًا = it is not far; مِنْ بَعِيدٍ = from afar."
+    ]
+   }
+  },
+  {
+   "id": "ar:dakhil",
+   "lemma": "دَاخِل",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "adv.inside"
+   ],
+   "features": {
+    "root": "د خ ل",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "“the inside”: used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "dāḫil",
+   "forms": {
+    "N;NOM;SG;INDF": "دَاخِلٌ",
+    "N;ACC;SG;INDF": "دَاخِلًا",
+    "N;GEN;SG;INDF": "دَاخِلٍ",
+    "N;NOM;SG;DEF": "الدَّاخِلُ",
+    "N;ACC;SG;DEF": "الدَّاخِلَ",
+    "N;GEN;SG;DEF": "الدَّاخِلِ",
+    "N;ACC;SG;CONST": "دَاخِلَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Indoors, within — the inside of things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "inside — دَاخِلَ + a noun (inside the house), فِي الدَّاخِلِ (inside, indoors)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.inside"
+     },
+     {
+      "id": "s2",
+      "def": "the inside, the interior; (of a country) the interior, home",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْأَطْفَالُ فِي الدَّاخِلِ.",
+      "tr": "The children are inside.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمِفْتَاحُ دَاخِلَ الْحَقِيبَةِ.",
+      "tr": "The key is inside the bag.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "نَجْلِسُ دَاخِلَ الْمَطْعَمِ أَمْ خَارِجَهُ؟",
+      "tr": "Shall we sit inside the restaurant or outside?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "دَاخِلُ الْبَيْتِ جَمِيلٌ.",
+      "tr": "The inside of the house is beautiful.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الدَّاخِلِ",
+      "tr": "inside, indoors"
+     },
+     {
+      "text": "مِنَ الدَّاخِلِ",
+      "tr": "from the inside"
+     },
+     {
+      "text": "دَاخِلَ الْبَيْتِ",
+      "tr": "inside the house"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِي",
+      "register": "neutral",
+      "nuance": "in — usually enough: فِي الْبَيْتِ"
+     },
+     {
+      "word": "جوا",
+      "register": "colloquial",
+      "nuance": "inside (spoken juwwa, Egypt and the Levant)",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "خَارِج",
+      "note": "outside"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of دَخَلَ (daḫala, “to enter, to go in”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Signs say دُخُول (entrance) and خُرُوج (exit) — the verbal nouns of دَخَلَ and خَرَجَ, the verbs behind دَاخِل and خَارِج."
+    ],
+    "pitfalls": [
+     "دَاخِلَ (with -a, + genitive) = inside something: دَاخِلَ الْبَيْتِ. Without an object say فِي الدَّاخِلِ.",
+     "It is a noun: the case shows on it — دَاخِلُ الْبَيْتِ (the inside of the house) is a subject."
+    ],
+    "subtleties": [
+     "دَاخِلِيّ = internal, domestic: وَزَارَةُ الدَّاخِلِيَّةِ (the Ministry of the Interior)."
+    ]
+   }
+  },
+  {
+   "id": "ar:kharij",
+   "lemma": "خَارِج",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "adv.outside",
+    "place.abroad",
+    "sci.quotient"
+   ],
+   "features": {
+    "root": "خ ر ج",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "“the outside, abroad”: used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḫārij",
+   "forms": {
+    "N;NOM;SG;INDF": "خَارِجٌ",
+    "N;ACC;SG;INDF": "خَارِجًا",
+    "N;GEN;SG;INDF": "خَارِجٍ",
+    "N;NOM;SG;DEF": "الْخَارِجُ",
+    "N;ACC;SG;DEF": "الْخَارِجَ",
+    "N;GEN;SG;DEF": "الْخَارِجِ",
+    "N;ACC;SG;CONST": "خَارِجَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Out of doors — and abroad.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "outside — خَارِجَ + a noun (outside the house), فِي الْخَارِجِ (outside, out of doors)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.outside"
+     },
+     {
+      "id": "s2",
+      "def": "abroad: فِي الْخَارِجِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.abroad"
+     },
+     {
+      "id": "s3",
+      "def": "quotient (mathematics)",
+      "register": [
+       "technical"
+      ],
+      "concept": "sci.quotient"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْأَطْفَالُ يَلْعَبُونَ فِي الْخَارِجِ.",
+      "tr": "The children are playing outside.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّيَّارَةُ خَارِجَ الْبَيْتِ.",
+      "tr": "The car is outside the house.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "أَخِي يَعْمَلُ فِي الْخَارِجِ.",
+      "tr": "My brother works abroad.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "سَافَرَ أَخِي إِلَى الْخَارِجِ لِلدِّرَاسَةِ.",
+      "tr": "My brother went abroad to study.",
+      "register": "neutral",
+      "context": "studies",
+      "sense": "s2"
+     },
+     {
+      "text": "خَارِجُ قِسْمَةِ عَشَرَةٍ عَلَى اثْنَيْنِ خَمْسَةٌ.",
+      "tr": "The quotient of ten divided by two is five.",
+      "register": "technical",
+      "context": "mathematics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْخَارِجِ",
+      "tr": "outside; abroad"
+     },
+     {
+      "text": "خَارِجَ الْمَدِينَةِ",
+      "tr": "outside the city"
+     },
+     {
+      "text": "وَزَارَةُ الْخَارِجِيَّةِ",
+      "tr": "Ministry of Foreign Affairs"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "برا",
+      "register": "colloquial",
+      "nuance": "outside (spoken barra)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "دَاخِل",
+      "note": "inside"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of the verb خَرَجَ (ḫaraja, “to go out”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verbal noun خُرُوج is the “Exit” sign; the Kharijites (الْخَوَارِجُ), “those who went out”, are named after the same verb."
+    ],
+    "pitfalls": [
+     "فِي الْخَارِجِ is “outside” or “abroad” — the context decides.",
+     "خَارِجَ + genitive: خَارِجَ الْبَيْتِ."
+    ],
+    "subtleties": [
+     "خَارِجِيّ = external, foreign: وَزِيرُ الْخَارِجِيَّةِ (foreign minister)."
+    ]
+   }
+  },
+  {
+   "id": "ar:yasar",
+   "lemma": "يَسَار",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "adv.left",
+    "pol.left"
+   ],
+   "features": {
+    "root": "ي س ر",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a side (the left): used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "yasār",
+   "forms": {
+    "N;NOM;SG;INDF": "يَسَارٌ",
+    "N;ACC;SG;INDF": "يَسَارًا",
+    "N;GEN;SG;INDF": "يَسَارٍ",
+    "N;NOM;SG;DEF": "الْيَسَارُ",
+    "N;ACC;SG;DEF": "الْيَسَارَ",
+    "N;GEN;SG;DEF": "الْيَسَارِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Directions in the street: turn left.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "left (side): عَلَى الْيَسَارِ (on the left), إِلَى الْيَسَارِ (to the left)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.left"
+     },
+     {
+      "id": "s2",
+      "def": "the left (in politics)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.left"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبَنْكُ عَلَى الْيَسَارِ.",
+      "tr": "The bank is on the left.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "اُنْظُرْ إِلَى الْيَسَارِ.",
+      "tr": "Look to the left.",
+      "register": "neutral",
+      "context": "traffic",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمَطْبَخُ عَلَى يَسَارِ الْبَابِ.",
+      "tr": "The kitchen is to the left of the door.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَحْزَابُ الْيَسَارِ",
+      "tr": "left-wing parties",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَلَى الْيَسَارِ",
+      "tr": "on the left"
+     },
+     {
+      "text": "إِلَى الْيَسَارِ",
+      "tr": "to the left"
+     },
+     {
+      "text": "مِنَ الْيَمِينِ إِلَى الْيَسَارِ",
+      "tr": "from right to left"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شمال",
+      "register": "regional",
+      "nuance": "left — the spoken word in Egypt and the Levant (šmāl); in Standard Arabic شِمَال is “north”",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "يَمِين",
+      "note": "right"
+     }
+    ],
+    "etymology": {
+     "text": "Root ي س ر (y s r, “ease”); Wiktionary relates it to أَيْسَر (“left; easier”) and gives no further etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic is written مِنَ الْيَمِينِ إِلَى الْيَسَارِ — from right to left."
+    ],
+    "pitfalls": [
+     "In the Levant and Egypt “left” is شْمَال — the Standard word for “north”: do not get lost!",
+     "For a hand or a side Arabic often uses the adjective: الْيَدُ الْيُسْرَى (the left hand)."
+    ],
+    "subtleties": [
+     "With a noun or pronoun: عَلَى يَسَارِ الْبَابِ (to the left of the door), عَلَى يَسَارِكَ (on your left)."
+    ]
+   }
+  },
+  {
+   "id": "ar:yamin",
+   "lemma": "يَمِين",
+   "pos": "NOUN",
+   "class": "sg",
+   "senses": [
+    "adv.right",
+    "body.righthand",
+    "law.oath",
+    "pol.right"
+   ],
+   "features": {
+    "root": "ي م ن",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَيْمَان",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "oaths; also right hands (مَا مَلَكَتْ أَيْمَانُكُمْ)",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "used in the singular only (two oaths: يَمِينَانِ, rare)"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "يَمِينٌ غَلِيظَةٌ",
+      "what": "feminine in this meaning (a solemn oath)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ]
+   },
+   "gender": "MASC",
+   "translit": "yamīn",
+   "forms": {
+    "N;NOM;SG;INDF": "يَمِينٌ",
+    "N;ACC;SG;INDF": "يَمِينًا",
+    "N;GEN;SG;INDF": "يَمِينٍ",
+    "N;NOM;SG;DEF": "الْيَمِينُ",
+    "N;ACC;SG;DEF": "الْيَمِينَ",
+    "N;GEN;SG;DEF": "الْيَمِينِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Directions — and the right hand of oaths.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "right (side): عَلَى الْيَمِينِ (on the right), إِلَى الْيَمِينِ (to the right)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.right"
+     },
+     {
+      "id": "s2",
+      "def": "the right hand",
+      "register": [
+       "neutral"
+      ],
+      "concept": "body.righthand"
+     },
+     {
+      "id": "s3",
+      "def": "oath (feminine; plural أَيْمَان)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "law.oath"
+     },
+     {
+      "id": "s4",
+      "def": "the right (in politics)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pol.right"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الصَّيْدَلِيَّةُ عَلَى الْيَمِينِ.",
+      "tr": "The pharmacy is on the right.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "اِذْهَبْ إِلَى الْيَمِينِ.",
+      "tr": "Go right.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "حَلَفَ الْيَمِينَ أَمَامَ الْقَاضِي.",
+      "tr": "He took the oath before the judge.",
+      "register": "neutral",
+      "context": "law",
+      "sense": "s3"
+     },
+     {
+      "text": "كُلْ بِيَمِينِكَ.",
+      "tr": "Eat with your right hand.",
+      "register": "neutral",
+      "context": "manners",
+      "sense": "s2"
+     },
+     {
+      "text": "فَازَ الْيَمِينُ فِي الِانْتِخَابَاتِ.",
+      "tr": "The right won the elections.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَلَى الْيَمِينِ",
+      "tr": "on the right"
+     },
+     {
+      "text": "إِلَى الْيَمِينِ",
+      "tr": "to the right"
+     },
+     {
+      "text": "حَلَفَ الْيَمِينَ",
+      "tr": "to take an oath"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym for the side; for a hand or a side Arabic uses the adjective: الْيَدُ الْيُمْنَى (the right hand), الْجَانِبُ الْأَيْمَنُ (the right side).",
+    "antonyms": [
+     {
+      "word": "يَسَار",
+      "note": "left"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *yamīn- (“right”), from Proto-Afroasiatic *yamin- (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew יָמִין (yamin) is the same word, and Benjamin, בִּנְיָמִין, is “son of the right hand”."
+    ],
+    "pitfalls": [
+     "يَمِين is also “oath” (feminine, plural أَيْمَان): حَلَفَ الْيَمِينَ = he took the oath.",
+     "Wiktionary gives it as masculine or feminine; as a direction you will rarely need its gender."
+    ],
+    "subtleties": [
+     "On your right: عَلَى يَمِينِكَ; the right side: الْجِهَةُ الْيُمْنَى."
+    ]
+   }
+  },
+  {
+   "id": "ar:matbakh",
+   "lemma": "مَطْبَخ",
+   "pos": "NOUN",
+   "senses": [
+    "home.kitchen",
+    "food.cuisine"
+   ],
+   "features": {
+    "root": "ط ب خ",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَطَابِخ",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مَطْبَخَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "maṭbaḫ",
+   "forms": {
+    "N;NOM;SG;INDF": "مَطْبَخٌ",
+    "N;NOM;PL;INDF": "مَطَابِخُ",
+    "N;NOM;DU;INDF": "مَطْبَخَانِ",
+    "N;NOM;SG;DEF": "الْمَطْبَخُ",
+    "N;NOM;PL;DEF": "الْمَطَابِخُ",
+    "N;NOM;DU;DEF": "الْمَطْبَخَانِ",
+    "N;ACC;SG;INDF": "مَطْبَخًا",
+    "N;ACC;PL;INDF": "مَطَابِخَ",
+    "N;ACC;DU;INDF": "مَطْبَخَيْنِ",
+    "N;ACC;SG;DEF": "الْمَطْبَخَ",
+    "N;ACC;PL;DEF": "الْمَطَابِخَ",
+    "N;ACC;DU;DEF": "الْمَطْبَخَيْنِ",
+    "N;GEN;SG;INDF": "مَطْبَخٍ",
+    "N;GEN;PL;INDF": "مَطَابِخَ",
+    "N;GEN;DU;INDF": "مَطْبَخَيْنِ",
+    "N;GEN;SG;DEF": "الْمَطْبَخِ",
+    "N;GEN;PL;DEF": "الْمَطَابِخِ",
+    "N;GEN;DU;DEF": "الْمَطْبَخَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Smells of cooking: the heart of the home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kitchen",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.kitchen"
+     },
+     {
+      "id": "s2",
+      "def": "cuisine, style of cooking",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.cuisine"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي فِي الْمَطْبَخِ.",
+      "tr": "My mother is in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الثَّلَّاجَةُ فِي الْمَطْبَخِ.",
+      "tr": "The fridge is in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّ الْمَطْبَخَ اللُّبْنَانِيَّ.",
+      "tr": "I love Lebanese cooking.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَدَوَاتُ الْمَطْبَخِ",
+      "tr": "kitchen utensils"
+     },
+     {
+      "text": "الْمَطْبَخُ الْعَرَبِيُّ",
+      "tr": "Arab cuisine"
+     },
+     {
+      "text": "طَاوِلَةُ الْمَطْبَخِ",
+      "tr": "the kitchen table"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: مَطْبَخ is the kitchen everywhere in the Arab world.",
+    "etymology": {
+     "text": "Noun of place from the verb طَبَخَ (ṭabaḫa, “to cook”), root ط ب خ; compare Hebrew מִטְבָּח (mitbaḥ) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish mutfak and Hebrew מִטְבָּח (mitbach) are the same word: “the place of cooking”."
+    ],
+    "pitfalls": [
+     "ط and خ: maṭbaḫ — two sounds that Greek and German do not have.",
+     "The plural مَطَابِخُ is a diptote."
+    ],
+    "subtleties": [
+     "Like English “kitchen” and German Küche, مَطْبَخ is also a cuisine: الْمَطْبَخُ الْمَغْرِبِيُّ (Moroccan cooking)."
+    ]
+   }
+  },
+  {
+   "id": "ar:hammam",
+   "lemma": "حَمَّام",
+   "pos": "NOUN",
+   "senses": [
+    "home.bathroom",
+    "place.bathhouse"
+   ],
+   "features": {
+    "root": "ح م م",
+    "pattern": "فَعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَمَّامَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَمَّامَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "ḥammām",
+   "forms": {
+    "N;NOM;SG;INDF": "حَمَّامٌ",
+    "N;NOM;PL;INDF": "حَمَّامَاتٌ",
+    "N;NOM;DU;INDF": "حَمَّامَانِ",
+    "N;NOM;SG;DEF": "الْحَمَّامُ",
+    "N;NOM;PL;DEF": "الْحَمَّامَاتُ",
+    "N;NOM;DU;DEF": "الْحَمَّامَانِ",
+    "N;ACC;SG;INDF": "حَمَّامًا",
+    "N;ACC;PL;INDF": "حَمَّامَاتٍ",
+    "N;ACC;DU;INDF": "حَمَّامَيْنِ",
+    "N;ACC;SG;DEF": "الْحَمَّامَ",
+    "N;ACC;PL;DEF": "الْحَمَّامَاتِ",
+    "N;ACC;DU;DEF": "الْحَمَّامَيْنِ",
+    "N;GEN;SG;INDF": "حَمَّامٍ",
+    "N;GEN;PL;INDF": "حَمَّامَاتٍ",
+    "N;GEN;DU;INDF": "حَمَّامَيْنِ",
+    "N;GEN;SG;DEF": "الْحَمَّامِ",
+    "N;GEN;PL;DEF": "الْحَمَّامَاتِ",
+    "N;GEN;DU;DEF": "الْحَمَّامَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bathroom, toilet — and the steam of the hammam.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bathroom; toilet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bathroom"
+     },
+     {
+      "id": "s2",
+      "def": "bath, bathtub; bathhouse (hammam)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "place.bathhouse"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَمَّامُ عَلَى الْيَمِينِ.",
+      "tr": "The bathroom is on the right.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ الْحَمَّامُ، مِنْ فَضْلِكَ؟",
+      "tr": "Where is the toilet, please?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "ذَهَبْنَا إِلَى الْحَمَّامِ التُّرْكِيِّ.",
+      "tr": "We went to the Turkish bath.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَمَّامُ سِبَاحَةٍ",
+      "tr": "swimming pool"
+     },
+     {
+      "text": "الْحَمَّامُ التُّرْكِيُّ",
+      "tr": "the Turkish bath"
+     },
+     {
+      "text": "فِي الْحَمَّامِ",
+      "tr": "in the bathroom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دَوْرَةُ مِيَاهٍ",
+      "register": "formal",
+      "nuance": "toilet, WC — on signs"
+     },
+     {
+      "word": "تواليت",
+      "register": "colloquial",
+      "nuance": "toilet (from French toilette)"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ح م م (ḥ m m), related to heating (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English hammam and Turkish hamam are this word: “the heating place”, the steam bath."
+    ],
+    "pitfalls": [
+     "حَمَّام (ḥammām, bathroom) has a doubled m; حَمَام (ḥamām) is “pigeons”."
+    ],
+    "subtleties": [
+     "“Where is the toilet?” is simply أَيْنَ الْحَمَّامُ؟ — حَمَّام covers bathroom and WC."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghurfat_nawm",
+   "lemma": "غُرْفَة نَوْم",
+   "pos": "NOUN",
+   "senses": [
+    "home.bedroom"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: غُرْفَة (غ ر ف) + نَوْم (ن و م)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "غُرَف نَوْم",
+      "kind": "broken",
+      "declension": "triptote",
+      "note": "the head noun takes the plural: غُرَفُ نَوْمٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "غُرْفَتَا نَوْمٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ġurfat nawm",
+   "forms": {
+    "N;NOM;SG;INDF": "غُرْفَةُ نَوْمٍ",
+    "N;NOM;PL;INDF": "غُرَفُ نَوْمٍ",
+    "N;NOM;SG;DEF": "غُرْفَةُ النَّوْمِ",
+    "N;NOM;PL;DEF": "غُرَفُ النَّوْمِ",
+    "N;ACC;SG;INDF": "غُرْفَةَ نَوْمٍ",
+    "N;ACC;PL;INDF": "غُرَفَ نَوْمٍ",
+    "N;ACC;SG;DEF": "غُرْفَةَ النَّوْمِ",
+    "N;ACC;PL;DEF": "غُرَفَ النَّوْمِ",
+    "N;GEN;SG;INDF": "غُرْفَةِ نَوْمٍ",
+    "N;GEN;PL;INDF": "غُرَفِ نَوْمٍ",
+    "N;GEN;SG;DEF": "غُرْفَةِ النَّوْمِ",
+    "N;GEN;PL;DEF": "غُرَفِ النَّوْمِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sleep, rest and privacy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bedroom — غُرْفَةُ النَّوْمِ (the bedroom), غُرْفَةُ نَوْمٍ (a bedroom)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bedroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "غُرْفَةُ النَّوْمِ كَبِيرَةٌ.",
+      "tr": "The bedroom is big.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا فِي غُرْفَةِ النَّوْمِ.",
+      "tr": "I’m in the bedroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الشَّقَّةِ غُرْفَةُ نَوْمٍ وَاحِدَةٌ.",
+      "tr": "The flat has one bedroom.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَثَاثُ غُرْفَةِ النَّوْمِ",
+      "tr": "bedroom furniture"
+     },
+     {
+      "text": "غُرْفَةُ نَوْمِ الْأَطْفَالِ",
+      "tr": "the children’s bedroom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "غُرْفَة",
+      "register": "neutral",
+      "nuance": "room — at home often simply غُرْفَتِي, my room"
+     },
+     {
+      "word": "مَخْدَع",
+      "register": "literary",
+      "nuance": "bedchamber"
+     }
+    ],
+    "etymology": {
+     "text": "غُرْفَة (room) + نَوْم (sleep, the verbal noun of نَامَ, “to sleep”): “a room of sleep”. Wiktionary lists the compound.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic builds such words with a construct, where German writes one word: غُرْفَةُ نَوْمٍ = Schlafzimmer, غُرْفَةُ جُلُوسٍ = Wohnzimmer."
+    ],
+    "pitfalls": [
+     "Only the second word takes the article: غُرْفَةُ النَّوْمِ (the bedroom); the case ending is on the first: فِي غُرْفَةِ النَّوْمِ.",
+     "In the plural only the first word changes: غُرَفُ نَوْمٍ."
+    ],
+    "subtleties": [
+     "The tāʾ marbūṭa is pronounced -t in the construct: ġurfat an-nawm."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghurfat_julus",
+   "lemma": "غُرْفَة جُلُوس",
+   "pos": "NOUN",
+   "senses": [
+    "home.livingroom"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: غُرْفَة (غ ر ف) + جُلُوس (ج ل س)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "غُرَف جُلُوس",
+      "kind": "broken",
+      "declension": "triptote",
+      "note": "the head noun takes the plural: غُرَفُ جُلُوسٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "غُرْفَتَا جُلُوسٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ġurfat julūs",
+   "forms": {
+    "N;NOM;SG;INDF": "غُرْفَةُ جُلُوسٍ",
+    "N;NOM;PL;INDF": "غُرَفُ جُلُوسٍ",
+    "N;NOM;SG;DEF": "غُرْفَةُ الْجُلُوسِ",
+    "N;NOM;PL;DEF": "غُرَفُ الْجُلُوسِ",
+    "N;ACC;SG;INDF": "غُرْفَةَ جُلُوسٍ",
+    "N;ACC;PL;INDF": "غُرَفَ جُلُوسٍ",
+    "N;ACC;SG;DEF": "غُرْفَةَ الْجُلُوسِ",
+    "N;ACC;PL;DEF": "غُرَفَ الْجُلُوسِ",
+    "N;GEN;SG;INDF": "غُرْفَةِ جُلُوسٍ",
+    "N;GEN;PL;INDF": "غُرَفِ جُلُوسٍ",
+    "N;GEN;SG;DEF": "غُرْفَةِ الْجُلُوسِ",
+    "N;GEN;PL;DEF": "غُرَفِ الْجُلُوسِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tea with guests, television and the family sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "living room, sitting room — غُرْفَةُ الْجُلُوسِ (the living room)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.livingroom"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَشْرَبُ الشَّايَ فِي غُرْفَةِ الْجُلُوسِ.",
+      "tr": "We drink tea in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكَنَبَةُ فِي غُرْفَةِ الْجُلُوسِ.",
+      "tr": "The sofa is in the living room.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "غُرْفَةُ الْجُلُوسِ وَاسِعَةٌ.",
+      "tr": "The living room is spacious.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَثَاثُ غُرْفَةِ الْجُلُوسِ",
+      "tr": "living-room furniture"
+     },
+     {
+      "text": "فِي غُرْفَةِ الْجُلُوسِ",
+      "tr": "in the living room"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "صَالَة",
+      "register": "neutral",
+      "nuance": "living room, hall — common in the Levant and the Gulf; also a hall: صَالَةُ الرِّيَاضَةِ (gym)"
+     },
+     {
+      "word": "صَالُون",
+      "register": "neutral",
+      "nuance": "salon, reception room for guests (from French salon)"
+     },
+     {
+      "word": "غُرْفَةُ الْمَعِيشَةِ",
+      "register": "neutral",
+      "nuance": "living room — a calque of English “living room”"
+     }
+    ],
+    "etymology": {
+     "text": "غُرْفَة (room) + جُلُوس (sitting, the verbal noun of جَلَسَ, “to sit”): “the sitting room”. Wiktionary has no entry for the compound; its synonym صَالَة is from Italian sala.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "صَالَة comes from Italian sala (Wiktionary), the same Germanic word as German Saal."
+    ],
+    "pitfalls": [
+     "Like غُرْفَةُ نَوْمٍ: the article goes on the second word only — غُرْفَةُ الْجُلُوسِ."
+    ],
+    "subtleties": [
+     "Many homes have both: a صَالُون for guests and a غُرْفَةُ جُلُوسٍ or صَالَة for the family."
+    ]
+   }
+  },
+  {
+   "id": "ar:ardiyya",
+   "lemma": "أَرْضِيَّة",
+   "pos": "NOUN",
+   "senses": [
+    "home.floor"
+   ],
+   "features": {
+    "root": "ء ر ض",
+    "pattern": "فَعْلِيَّة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَرْضِيَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أَرْضِيَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ʾarḍiyya",
+   "forms": {
+    "N;NOM;SG;INDF": "أَرْضِيَّةٌ",
+    "N;NOM;PL;INDF": "أَرْضِيَّاتٌ",
+    "N;NOM;DU;INDF": "أَرْضِيَّتَانِ",
+    "N;NOM;SG;DEF": "الْأَرْضِيَّةُ",
+    "N;NOM;PL;DEF": "الْأَرْضِيَّاتُ",
+    "N;NOM;DU;DEF": "الْأَرْضِيَّتَانِ",
+    "N;ACC;SG;INDF": "أَرْضِيَّةً",
+    "N;ACC;PL;INDF": "أَرْضِيَّاتٍ",
+    "N;ACC;DU;INDF": "أَرْضِيَّتَيْنِ",
+    "N;ACC;SG;DEF": "الْأَرْضِيَّةَ",
+    "N;ACC;PL;DEF": "الْأَرْضِيَّاتِ",
+    "N;ACC;DU;DEF": "الْأَرْضِيَّتَيْنِ",
+    "N;GEN;SG;INDF": "أَرْضِيَّةٍ",
+    "N;GEN;PL;INDF": "أَرْضِيَّاتٍ",
+    "N;GEN;DU;INDF": "أَرْضِيَّتَيْنِ",
+    "N;GEN;SG;DEF": "الْأَرْضِيَّةِ",
+    "N;GEN;PL;DEF": "الْأَرْضِيَّاتِ",
+    "N;GEN;DU;DEF": "الْأَرْضِيَّتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tiles, wood and the surface under your feet.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "floor (of a room), flooring",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.floor"
+     },
+     {
+      "id": "s2",
+      "def": "ground, basis (figurative): أَرْضِيَّةٌ مُشْتَرَكَةٌ (common ground)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْأَرْضِيَّةُ نَظِيفَةٌ.",
+      "tr": "The floor is clean.",
+      "register": "neutral",
+      "context": "cleaning",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكُتُبُ عَلَى الْأَرْضِيَّةِ.",
+      "tr": "The books are on the floor.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي غُرْفَتِي أَرْضِيَّةٌ خَشَبِيَّةٌ.",
+      "tr": "My room has a wooden floor.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَرْضِيَّةُ الْغُرْفَةِ",
+      "tr": "the floor of the room"
+     },
+     {
+      "text": "أَرْضِيَّةٌ خَشَبِيَّةٌ",
+      "tr": "a wooden floor"
+     },
+     {
+      "text": "أَرْضِيَّةٌ مُشْتَرَكَةٌ",
+      "tr": "common ground"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَرْض",
+      "register": "neutral",
+      "nuance": "ground, earth — “on the floor” is usually عَلَى الْأَرْضِ"
+     },
+     {
+      "word": "بَلَاط",
+      "register": "neutral",
+      "nuance": "tiles, a tiled floor"
+     }
+    ],
+    "etymology": {
+     "text": "From أَرْض (ʔarḍ, “earth, ground”) + ـِيَّة (-iyya) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أَرْض (earth) is Hebrew אֶרֶץ (erets): the same Semitic word."
+    ],
+    "pitfalls": [
+     "A floor = storey of a building is طَابِق, not أَرْضِيَّة."
+    ],
+    "subtleties": [
+     "عَلَى الْأَرْضِ (on the ground / floor) is the everyday phrase; أَرْضِيَّة names the surface itself (tiles, wood, cleaning)."
+    ]
+   }
+  },
+  {
+   "id": "ar:daraj",
+   "lemma": "دَرَج",
+   "pos": "NOUN",
+   "senses": [
+    "home.stairs"
+   ],
+   "features": {
+    "root": "د ر ج",
+    "pattern": "فَعَل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَدْرَاج",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "دَرَجَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "daraj",
+   "forms": {
+    "N;NOM;SG;INDF": "دَرَجٌ",
+    "N;NOM;PL;INDF": "أَدْرَاجٌ",
+    "N;NOM;DU;INDF": "دَرَجَانِ",
+    "N;NOM;SG;DEF": "الدَّرَجُ",
+    "N;NOM;PL;DEF": "الْأَدْرَاجُ",
+    "N;NOM;DU;DEF": "الدَّرَجَانِ",
+    "N;ACC;SG;INDF": "دَرَجًا",
+    "N;ACC;PL;INDF": "أَدْرَاجًا",
+    "N;ACC;DU;INDF": "دَرَجَيْنِ",
+    "N;ACC;SG;DEF": "الدَّرَجَ",
+    "N;ACC;PL;DEF": "الْأَدْرَاجَ",
+    "N;ACC;DU;DEF": "الدَّرَجَيْنِ",
+    "N;GEN;SG;INDF": "دَرَجٍ",
+    "N;GEN;PL;INDF": "أَدْرَاجٍ",
+    "N;GEN;DU;INDF": "دَرَجَيْنِ",
+    "N;GEN;SG;DEF": "الدَّرَجِ",
+    "N;GEN;PL;DEF": "الْأَدْرَاجِ",
+    "N;GEN;DU;DEF": "الدَّرَجَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses دَرَج as “staircase, ladder” — the stairs of the concept; the check does not find “stairs” inside “staircase”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Up and down: the staircase.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "stairs, staircase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.stairs"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الدَّرَجُ أَمَامَ الْبَابِ.",
+      "tr": "The stairs are in front of the door.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "أَصْعَدُ الدَّرَجَ إِلَى غُرْفَتِي.",
+      "tr": "I go up the stairs to my room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا تَجْلِسْ عَلَى الدَّرَجِ.",
+      "tr": "Don’t sit on the stairs.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صَعِدَ الدَّرَجَ",
+      "tr": "to go up the stairs"
+     },
+     {
+      "text": "نَزَلَ الدَّرَجَ",
+      "tr": "to go down the stairs"
+     },
+     {
+      "text": "دَرَجٌ كَهْرَبَائِيٌّ",
+      "tr": "escalator"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سُلَّم",
+      "register": "neutral",
+      "nuance": "stairs; ladder (plural سَلَالِمُ)"
+     },
+     {
+      "word": "دَرَجَات",
+      "register": "neutral",
+      "nuance": "steps — the plural of دَرَجَة, one step"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Geʿez dərgät, Hebrew דֶּרֶג (dereg), Classical Syriac and Aramaic dargā.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "دَرَجَة (one step) also means “degree” and “class”: دَرَجَةٌ أُولَى (first class), عِشْرُونَ دَرَجَةً (twenty degrees)."
+    ],
+    "pitfalls": [
+     "دَرَج (daraj, stairs) vs دُرْج (durj, drawer): only the vowels differ.",
+     "“The stairs” is a singular in Arabic: الدَّرَجُ طَوِيلٌ (the stairs are long)."
+    ],
+    "subtleties": [
+     "Wiktionary gives the plurals أَدْرَاج and دِرَاج; in practice one says الدَّرَجُ for one staircase and counts the steps (دَرَجَات)."
+    ]
+   }
+  },
+  {
+   "id": "ar:raff",
+   "lemma": "رَفّ",
+   "pos": "NOUN",
+   "senses": [
+    "home.shelf"
+   ],
+   "features": {
+    "root": "ر ف ف",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "رُفُوف",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "رَفَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "MASC",
+   "translit": "raff",
+   "forms": {
+    "N;NOM;SG;INDF": "رَفٌّ",
+    "N;NOM;PL;INDF": "رُفُوفٌ",
+    "N;NOM;DU;INDF": "رَفَّانِ",
+    "N;NOM;SG;DEF": "الرَّفُّ",
+    "N;NOM;PL;DEF": "الرُّفُوفُ",
+    "N;NOM;DU;DEF": "الرَّفَّانِ",
+    "N;ACC;SG;INDF": "رَفًّا",
+    "N;ACC;PL;INDF": "رُفُوفًا",
+    "N;ACC;DU;INDF": "رَفَّيْنِ",
+    "N;ACC;SG;DEF": "الرَّفَّ",
+    "N;ACC;PL;DEF": "الرُّفُوفَ",
+    "N;ACC;DU;DEF": "الرَّفَّيْنِ",
+    "N;GEN;SG;INDF": "رَفٍّ",
+    "N;GEN;PL;INDF": "رُفُوفٍ",
+    "N;GEN;DU;INDF": "رَفَّيْنِ",
+    "N;GEN;SG;DEF": "الرَّفِّ",
+    "N;GEN;PL;DEF": "الرُّفُوفِ",
+    "N;GEN;DU;DEF": "الرَّفَّيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Books, jars and things put away.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "shelf",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.shelf"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْكُتُبُ عَلَى الرَّفِّ.",
+      "tr": "The books are on the shelf.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "ضَعِ الْفِنْجَانَ عَلَى الرَّفِّ.",
+      "tr": "Put the cup on the shelf.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمَكْتَبَةِ رُفُوفٌ كَثِيرَةٌ.",
+      "tr": "The library has many shelves.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَفُّ الْكُتُبِ",
+      "tr": "bookshelf"
+     },
+     {
+      "text": "عَلَى الرَّفِّ",
+      "tr": "on the shelf"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "وَضَعَهُ عَلَى الرَّفِّ",
+      "tr": "he put it on the shelf",
+      "kind": "idiom",
+      "meaning": "he shelved it, set it aside",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; a whole bookcase is مَكْتَبَة or خِزَانَةُ كُتُبٍ.",
+    "etymology": {
+     "text": "Disputed (Wiktionary): native, from the root ر ف ف (an outstretched wing, a cover), or from Aramaic rap (“level, storey”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary records several theories — one sees in it a cloth stretched over a window like a wing."
+    ],
+    "pitfalls": [
+     "The f is doubled: رَفّ (raff); الرَّفُّ, عَلَى الرَّفِّ. Plural رُفُوف (also أَرْفُف)."
+    ],
+    "subtleties": [
+     "عَلَى الرَّفِّ can mean “shelved, put aside” — a project or a law."
+    ]
+   }
+  },
+  {
+   "id": "ar:kanaba",
+   "lemma": "كَنَبَة",
+   "pos": "NOUN",
+   "senses": [
+    "home.sofa"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Turkish kanape, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "كَنَبَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "كَنَبَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "kanaba",
+   "forms": {
+    "N;NOM;SG;INDF": "كَنَبَةٌ",
+    "N;ACC;SG;INDF": "كَنَبَةً",
+    "N;GEN;SG;INDF": "كَنَبَةٍ",
+    "N;NOM;SG;DEF": "الْكَنَبَةُ",
+    "N;ACC;SG;DEF": "الْكَنَبَةَ",
+    "N;GEN;SG;DEF": "الْكَنَبَةِ",
+    "N;NOM;PL;INDF": "كَنَبَاتٌ",
+    "N;ACC;PL;INDF": "كَنَبَاتٍ",
+    "N;GEN;PL;INDF": "كَنَبَاتٍ",
+    "N;NOM;PL;DEF": "الْكَنَبَاتُ",
+    "N;ACC;PL;DEF": "الْكَنَبَاتِ",
+    "N;GEN;PL;DEF": "الْكَنَبَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Comfort at home: the family sofa.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sofa, couch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.sofa"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْكَنَبَةُ فِي غُرْفَةِ الْجُلُوسِ.",
+      "tr": "The sofa is in the living room.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقِطَّةُ نَائِمَةٌ عَلَى الْكَنَبَةِ.",
+      "tr": "The cat is asleep on the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْنَا كَنَبَةً جَدِيدَةً.",
+      "tr": "We bought a new sofa.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَنَبَةٌ مُرِيحَةٌ",
+      "tr": "a comfortable sofa"
+     },
+     {
+      "text": "عَلَى الْكَنَبَةِ",
+      "tr": "on the sofa"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَرِيكَة",
+      "register": "formal",
+      "nuance": "sofa, couch — the classical word (also “throne” in the Qurʾān)"
+     },
+     {
+      "word": "صوفا",
+      "register": "colloquial",
+      "nuance": "sofa (from English / French)"
+     }
+    ],
+    "etymology": {
+     "text": "Not an entry in Wiktionary’s Arabic data; it matches Turkish kanepe, which Wiktionary derives from French canapé — itself, through Latin cōnōpēum, from Ancient Greek κωνωπεῖον (“a couch with a mosquito net”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The chain begins in Greek: κωνωπεῖον was a couch with a net against mosquitoes (κώνωψ, “mosquito”); Modern Greek καναπές and κουνούπι are its descendants (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Not a classical word: in formal writing you will also see أَرِيكَة."
+    ],
+    "subtleties": [
+     "Feminine in ة: الْكَنَبَةُ مُرِيحَةٌ; plural كَنَبَات."
+    ]
+   }
+  },
+  {
+   "id": "ar:thallaja",
+   "lemma": "ثَلَّاجَة",
+   "pos": "NOUN",
+   "senses": [
+    "home.fridge"
+   ],
+   "features": {
+    "root": "ث ل ج",
+    "pattern": "فَعَّالَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "ثَلَّاجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "ثَلَّاجَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "gender": "FEM",
+   "translit": "ṯallāja",
+   "forms": {
+    "N;NOM;SG;INDF": "ثَلَّاجَةٌ",
+    "N;NOM;PL;INDF": "ثَلَّاجَاتٌ",
+    "N;NOM;DU;INDF": "ثَلَّاجَتَانِ",
+    "N;NOM;SG;DEF": "الثَّلَّاجَةُ",
+    "N;NOM;PL;DEF": "الثَّلَّاجَاتُ",
+    "N;NOM;DU;DEF": "الثَّلَّاجَتَانِ",
+    "N;ACC;SG;INDF": "ثَلَّاجَةً",
+    "N;ACC;PL;INDF": "ثَلَّاجَاتٍ",
+    "N;ACC;DU;INDF": "ثَلَّاجَتَيْنِ",
+    "N;ACC;SG;DEF": "الثَّلَّاجَةَ",
+    "N;ACC;PL;DEF": "الثَّلَّاجَاتِ",
+    "N;ACC;DU;DEF": "الثَّلَّاجَتَيْنِ",
+    "N;GEN;SG;INDF": "ثَلَّاجَةٍ",
+    "N;GEN;PL;INDF": "ثَلَّاجَاتٍ",
+    "N;GEN;DU;INDF": "ثَلَّاجَتَيْنِ",
+    "N;GEN;SG;DEF": "الثَّلَّاجَةِ",
+    "N;GEN;PL;DEF": "الثَّلَّاجَاتِ",
+    "N;GEN;DU;DEF": "الثَّلَّاجَتَيْنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses ثَلَّاجَة as “refrigerator”, i.e. the fridge."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cold drinks on a hot day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fridge, refrigerator",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.fridge"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَلِيبُ فِي الثَّلَّاجَةِ.",
+      "tr": "The milk is in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "الثَّلَّاجَةُ فَارِغَةٌ!",
+      "tr": "The fridge is empty!",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "ضَعِ الْجُبْنَ فِي الثَّلَّاجَةِ.",
+      "tr": "Put the cheese in the fridge.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الثَّلَّاجَةِ",
+      "tr": "in the fridge"
+     },
+     {
+      "text": "بَابُ الثَّلَّاجَةِ",
+      "tr": "the fridge door"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "براد",
+      "register": "regional",
+      "nuance": "fridge (Levant: barrād)",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Tool noun from the root ث ل ج (ṯ l j, “snow, ice”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ثَلْج is snow and ice; Hebrew שֶׁלֶג (sheleg, snow) is its cousin."
+    ],
+    "pitfalls": [
+     "ث is the th of English “think”, and the l is doubled: ṯallāja."
+    ],
+    "subtleties": [
+     "faʿʿāla is a pattern for machines: ثَلَّاجَة (fridge), غَسَّالَة (washing machine), سَيَّارَة (car)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

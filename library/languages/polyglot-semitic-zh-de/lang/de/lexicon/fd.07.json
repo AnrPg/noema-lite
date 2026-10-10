@@ -1,0 +1,5004 @@
+{
+ "lexemes": [
+  {
+   "id": "de:essen",
+   "lemma": "essen",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "features": {
+    "principalParts": [
+     "essen",
+     "isst",
+     "aß",
+     "gegessen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "e>i",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "the object may be left out: Wir essen um sieben."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "essen",
+    "V;PRS;1;SG": "esse",
+    "V;PRS;2;SG": "isst",
+    "V;PRS;3;SG": "isst",
+    "V;PRS;1;PL": "essen",
+    "V;PRS;2;PL": "esst",
+    "V;PRS;3;PL": "essen",
+    "V;PST;3;SG": "aß",
+    "V;PTCP;PST": "gegessen",
+    "V;IMP;2;SG": "iss",
+    "V;IMP;2;PL": "esst",
+    "V;IMP;FORM": "essen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and warm: shared meals (zusammen essen) are a social ritual.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat (of people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.eat"
+     },
+     {
+      "id": "s2",
+      "def": "to have a meal, to dine (essen gehen = to eat out)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Isst du Fleisch?",
+      "tr": "Do you eat meat?",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Er isst jeden Tag einen Apfel.",
+      "tr": "He eats an apple every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Frühstück esse ich Brot mit Käse.",
+      "tr": "For breakfast I eat bread and cheese.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen um sieben Uhr zu Abend.",
+      "tr": "We have dinner at seven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "Am Wochenende gehen wir essen.",
+      "tr": "At the weekend we go out to eat.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Mittag essen",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "zu Abend essen",
+      "tr": "to have dinner"
+     },
+     {
+      "text": "essen gehen",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das Auge isst mit.",
+      "tr": "The eye eats too.",
+      "kind": "saying",
+      "meaning": "How food looks matters.",
+      "register": "neutral"
+     },
+     {
+      "text": "Es wird nichts so heiß gegessen, wie es gekocht wird.",
+      "tr": "Nothing is eaten as hot as it is cooked.",
+      "kind": "proverb",
+      "meaning": "Things are rarely as bad as they first seem.",
+      "register": "neutral"
+     },
+     {
+      "text": "So jemand nicht will arbeiten, der soll auch nicht essen.",
+      "tr": "If anyone will not work, neither shall he eat.",
+      "kind": "quote",
+      "meaning": "Who does not work should not eat.",
+      "register": "literary",
+      "source": "Bible, 2 Thessalonians 3:10 (Luther translation, public domain)"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "aufessen",
+      "tr": "to eat up, finish one's food"
+     },
+     {
+      "text": "mitessen",
+      "tr": "to eat with others, join in"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "speisen",
+      "register": "formal",
+      "nuance": "elevated “to dine”: restaurants, menus, ceremonies"
+     },
+     {
+      "word": "zu sich nehmen",
+      "register": "formal",
+      "nuance": "to ingest, take (food) – medical or official language"
+     },
+     {
+      "word": "futtern",
+      "register": "colloquial",
+      "nuance": "to tuck in, eat heartily – playful"
+     },
+     {
+      "word": "fressen",
+      "register": "pejorative",
+      "nuance": "neutral for animals; said of people it means eating greedily, like an animal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "fasten",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ëȥȥen, from Old High German ëȥȥan, from Proto-West Germanic *etan, from Proto-Germanic *etaną, from Proto-Indo-European *h₁ed-. Cognate with Dutch eten, English eat, Swedish äta; non-Germanic cognates include Latin edō and Russian есть (jestʹ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Animals do not “essen” in German, they “fressen” – using fressen for a person is rude or jokey.",
+     "The past participle is gegessen, with an extra -ge-; the old form gessen is obsolete.",
+     "Greek τρώω, Russian есть / кушать, Turkish yemek: Russian есть is a cousin of essen and English eat (Indo-European *h₁ed-)."
+    ],
+    "pitfalls": [
+     "Stem vowel e → i: du isst, er isst (not *esst); du isst and er isst are spelled the same.",
+     "Past tense with ß: ich aß, wir aßen.",
+     "du isst and er isst look the same: the s of the ending melts into the ss of the stem (not *du issst).",
+     "Imperative: Iss! (du – the i stays, no -e) – Esst! (ihr) – Essen Sie! (polite)."
+    ],
+    "subtleties": [
+     "Soup is eaten in German (Suppe essen), not drunk."
+    ]
+   }
+  },
+  {
+   "id": "de:trinken",
+   "lemma": "trinken",
+   "pos": "VERB",
+   "senses": [
+    "verb.drink"
+   ],
+   "features": {
+    "principalParts": [
+     "trinken",
+     "trinkt",
+     "trank",
+     "getrunken"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "case": "ACC",
+      "prep": "auf",
+      "senses": [
+       "s3"
+      ],
+      "note": "auf deine Gesundheit trinken"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "trinken",
+    "V;PRS;1;SG": "trinke",
+    "V;PRS;2;SG": "trinkst",
+    "V;PRS;3;SG": "trinkt",
+    "V;PRS;1;PL": "trinken",
+    "V;PRS;2;PL": "trinkt",
+    "V;PRS;3;PL": "trinken",
+    "V;PST;3;SG": "trank",
+    "V;PTCP;PST": "getrunken",
+    "V;IMP;2;SG": "trink",
+    "V;IMP;2;PL": "trinkt",
+    "V;IMP;FORM": "trinken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee breaks, beer gardens, toasts – and, without an object, the drinking of alcohol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drink (a liquid)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drink"
+     },
+     {
+      "id": "s2",
+      "def": "to drink alcohol (habitually) – used without an object: Er trinkt.",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "auf jemanden/etwas trinken: to drink to, to toast",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was trinkst du? – Ein Wasser, bitte.",
+      "tr": "What are you drinking? – A water, please.",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Morgens trinke ich immer Tee.",
+      "tr": "In the morning I always drink tea.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Sein Vater trinkt seit Jahren nicht mehr.",
+      "tr": "His father hasn't drunk alcohol for years.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir trinken auf das Brautpaar!",
+      "tr": "Let's drink to the bride and groom!",
+      "register": "neutral",
+      "context": "wedding",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kaffee trinken",
+      "tr": "to drink coffee (also: to have a coffee break)"
+     },
+     {
+      "text": "einen trinken gehen",
+      "tr": "to go for a drink"
+     },
+     {
+      "text": "ein Glas Wasser trinken",
+      "tr": "to drink a glass of water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wir trinken auf dich!",
+      "tr": "We drink to you!",
+      "kind": "fixed expression",
+      "meaning": "a toast",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "austrinken",
+      "tr": "to drink up, finish (a glass)"
+     },
+     {
+      "text": "mittrinken",
+      "tr": "to drink along with others"
+     },
+     {
+      "text": "zutrinken",
+      "tr": "to raise one's glass to someone"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "schlürfen",
+      "register": "neutral",
+      "nuance": "to slurp, sip noisily"
+     },
+     {
+      "word": "nippen",
+      "register": "neutral",
+      "nuance": "to take a tiny sip"
+     },
+     {
+      "word": "saufen",
+      "register": "vulgar",
+      "nuance": "neutral for animals; for people: to drink a lot, especially alcohol – crude"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From Middle High German trinken, from Old High German trinkan (attested since the 8th century), from Proto-West Germanic *drinkan. Cognates include Dutch drinken, English drink, Swedish dricka and Gothic 𐌳𐍂𐌹𐌲𐌺𐌰𐌽 (drigkan).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kaffee und Kuchen: in Germany “Kaffee trinken” in the afternoon is a small meal with cake, not just a drink.",
+     "das Trinkgeld (“drink money”) is the German word for a tip in a restaurant or a taxi.",
+     "trinken and English drink are the same Germanic verb (Dutch drinken, Swedish dricka)."
+    ],
+    "pitfalls": [
+     "Without an object, Er trinkt usually means “he drinks (too much alcohol)”.",
+     "Strong verb: trinken – trank – getrunken (not *getrinkt).",
+     "Regular in the present: ich trinke, du trinkst, er trinkt – the vowel changes only in the past (trank, getrunken).",
+     "Imperative: Trink! (or Trinke!) – Trinkt! – Trinken Sie!"
+    ],
+    "subtleties": [
+     "Wollen wir einen Kaffee trinken gehen? is an invitation to meet and talk, not only to drink coffee."
+    ]
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "trinke"
+    ]
+   }
+  },
+  {
+   "id": "de:kaufen",
+   "lemma": "kaufen",
+   "pos": "VERB",
+   "senses": [
+    "verb.buy"
+   ],
+   "features": {
+    "principalParts": [
+     "kaufen",
+     "kauft",
+     "kaufte",
+     "gekauft"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "case": "DAT",
+      "senses": [
+       "s2"
+      ],
+      "note": "the person it is for: Ich kaufe meiner Mutter Blumen."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "kaufen",
+    "V;PRS;1;SG": "kaufe",
+    "V;PRS;2;SG": "kaufst",
+    "V;PRS;3;SG": "kauft",
+    "V;PRS;1;PL": "kaufen",
+    "V;PRS;2;PL": "kauft",
+    "V;PRS;3;PL": "kaufen",
+    "V;PST;3;SG": "kaufte",
+    "V;PTCP;PST": "gekauft",
+    "V;IMP;2;SG": "kauf",
+    "V;IMP;2;PL": "kauft",
+    "V;IMP;FORM": "kaufen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shops, markets, the Saturday shopping list.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to buy, to purchase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.buy"
+     },
+     {
+      "id": "s2",
+      "def": "to buy (something) for someone: jemandem etwas kaufen",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe Gemüse immer auf dem Markt.",
+      "tr": "I always buy vegetables at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kaufe jeden Morgen Brot beim Bäcker.",
+      "tr": "Every morning I buy bread at the baker’s.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo hast du die Schuhe gekauft?",
+      "tr": "Where did you buy the shoes?",
+      "register": "informal",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen unserer Tochter ein Fahrrad.",
+      "tr": "We're buying our daughter a bicycle.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Supermarkt kaufen",
+      "tr": "to buy at the supermarket"
+     },
+     {
+      "text": "online kaufen",
+      "tr": "to buy online"
+     },
+     {
+      "text": "günstig kaufen",
+      "tr": "to buy cheaply"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Katze im Sack kaufen",
+      "tr": "to buy the cat in the sack",
+      "kind": "idiom",
+      "meaning": "to buy something without having seen it (English: to buy a pig in a poke)",
+      "register": "neutral"
+     },
+     {
+      "text": "Das kaufe ich dir nicht ab.",
+      "tr": "I'm not buying that from you.",
+      "kind": "idiom",
+      "meaning": "I don't believe you",
+      "register": "colloquial"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "einkaufen",
+      "tr": "to shop, to go shopping"
+     },
+     {
+      "text": "abkaufen",
+      "tr": "to buy from someone; (colloquial) to believe"
+     },
+     {
+      "text": "aufkaufen",
+      "tr": "to buy up"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "erwerben",
+      "register": "formal",
+      "nuance": "to acquire – contracts, official texts"
+     },
+     {
+      "word": "besorgen",
+      "register": "neutral",
+      "nuance": "to get, fetch – focus on obtaining, not on paying"
+     },
+     {
+      "word": "shoppen",
+      "register": "colloquial",
+      "nuance": "to go shopping (for fun) – an anglicism"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "verkaufen",
+      "note": "to sell"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German koufen, from Old High German koufōn, from Proto-West Germanic *kaupōn, an early borrowing of Latin caupō (“innkeeper, petty trader”). Related to English cheap and Swedish köpa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Danish cognate is in Copenhagen: København = “merchants' harbour”."
+    ],
+    "pitfalls": [
+     "einkaufen is “to go shopping” in general; kaufen needs an object: Ich kaufe Brot. / Ich gehe einkaufen.",
+     "Regular verb: ich kaufe, du kaufst, er kauft, wir kaufen, ihr kauft, sie kaufen – no vowel change.",
+     "Imperative: Kauf! (or Kaufe!) – Kauft! – Kaufen Sie!"
+    ],
+    "subtleties": [
+     "Kauf mir was! – with a dative, kaufen means buying for someone."
+    ]
+   },
+   "formsAlt": {
+    "V;IMP;2;SG": [
+     "kaufe"
+    ]
+   }
+  },
+  {
+   "id": "de:mögen",
+   "lemma": "mögen",
+   "pos": "VERB",
+   "senses": [
+    "verb.like",
+    "verb.wouldlike",
+    "verb.may"
+   ],
+   "features": {
+    "principalParts": [
+     "mögen",
+     "mag",
+     "mochte",
+     "gemocht"
+    ],
+    "conjugation": "modal",
+    "presentChange": "irregular",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "or an infinitive: Ich möchte schlafen."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": [
+     {
+      "form": "möchte, möchtest, möchte, möchten, möchtet, möchten",
+      "senses": [
+       "s2"
+      ],
+      "note": "Konjunktiv II, used as a present: Ich möchte einen Kaffee."
+     }
+    ]
+   },
+   "forms": {
+    "V;NFIN": "mögen",
+    "V;PRS;1;SG": "mag",
+    "V;PRS;2;SG": "magst",
+    "V;PRS;3;SG": "mag",
+    "V;PRS;1;PL": "mögen",
+    "V;PRS;2;PL": "mögt",
+    "V;PRS;3;PL": "mögen",
+    "V;PST;3;SG": "mochte",
+    "V;PTCP;PST": "gemocht",
+    "V;SBJV;PST;1;SG": "möchte",
+    "V;SBJV;PST;2;SG": "möchtest",
+    "V;SBJV;PST;3;SG": "möchte",
+    "V;SBJV;PST;1;PL": "möchten",
+    "V;SBJV;PST;2;PL": "möchtet",
+    "V;SBJV;PST;3;PL": "möchten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Liking food, music, people – friendly, not passionate.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to like (something or someone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.like"
+     },
+     {
+      "id": "s2",
+      "def": "would like (the forms möchte, möchtest, möchten, möchtet – Konjunktiv II, used like a present)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.wouldlike"
+     },
+     {
+      "id": "s3",
+      "def": "may (concession or possibility): Das mag sein.",
+      "register": [
+       "formal"
+      ],
+      "concept": "verb.may"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich mag Tomaten, aber keine Gurken.",
+      "tr": "I like tomatoes, but not cucumbers.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Magst du Jazz?",
+      "tr": "Do you like jazz?",
+      "register": "informal",
+      "context": "music",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich möchte einen Kaffee, bitte.",
+      "tr": "I'd like a coffee, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "Das mag sein, aber ich glaube es nicht.",
+      "tr": "That may be, but I don't believe it.",
+      "register": "formal",
+      "context": "discussion",
+      "sense": "s3"
+     },
+     {
+      "text": "Möchten Sie Tee oder Kaffee?",
+      "tr": "Would you like tea or coffee?",
+      "register": "formal",
+      "context": "hotel breakfast",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemanden sehr mögen",
+      "tr": "to like someone a lot"
+     },
+     {
+      "text": "etwas gar nicht mögen",
+      "tr": "not to like something at all"
+     },
+     {
+      "text": "Ich möchte …",
+      "tr": "I would like …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das mag sein.",
+      "tr": "That may be.",
+      "kind": "fixed expression",
+      "meaning": "a concession: that may well be true (but …)",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [],
+    "synonyms": [
+     {
+      "word": "gernhaben",
+      "register": "neutral",
+      "nuance": "to be fond of (a person) – warmer than mögen"
+     },
+     {
+      "word": "lieben",
+      "register": "neutral",
+      "nuance": "to love – much stronger for people; for things it is emphatic (Ich liebe Pizza!)"
+     },
+     {
+      "word": "leiden können",
+      "register": "colloquial",
+      "nuance": "mostly negated: Ich kann ihn nicht leiden = I can't stand him"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "hassen",
+      "note": "to hate"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German mugen, from Old High German mugan, from Proto-West Germanic *magan, from Proto-Germanic *maganą, from Proto-Indo-European *megʰ-. Compare Dutch mogen, English may. The sense “to like” developed in the 16th century from negated nicht mögen (“not to be able to” → “not to like doing”); the old sense “to be able to” fell out of use in the 17th century.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "mögen is a cousin of English may and might: it once meant “to be able”.",
+     "Greek θα ήθελα, Russian я хотел бы, English I would like: German packs the polite “would like” into one word, möchte."
+    ],
+    "pitfalls": [
+     "For activities German prefers gern + verb: Ich schwimme gern (I like swimming), rather than Ich mag schwimmen.",
+     "No ending in ich mag / er mag; vowel change ö → a in the singular.",
+     "möchte is a form of mögen used as “would like”: ich möchte, du möchtest, er/sie möchte, wir möchten, ihr möchtet, sie/Sie möchten – the er-form has no -t (er möchte, not *er möchtet).",
+     "Ich mag Kaffee = I like coffee (in general); Ich möchte einen Kaffee = I would like a coffee (now)."
+    ],
+    "subtleties": [
+     "Ich mag dich (I like you) – Ich hab dich lieb (I'm fond of you, family and friends) – Ich liebe dich (I love you).",
+     "möchte (would like) is the polite way to ask for something; Ich will … can sound demanding."
+    ]
+   }
+  },
+  {
+   "id": "de:wollen",
+   "lemma": "wollen",
+   "pos": "VERB",
+   "senses": [
+    "verb.want",
+    "verb.claim",
+    "verb.beaboutto"
+   ],
+   "features": {
+    "principalParts": [
+     "wollen",
+     "will",
+     "wollte",
+     "gewollt"
+    ],
+    "conjugation": "modal",
+    "presentChange": "irregular",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "or an infinitive: Ich will schlafen."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "wollen",
+    "V;PRS;1;SG": "will",
+    "V;PRS;2;SG": "willst",
+    "V;PRS;3;SG": "will",
+    "V;PRS;1;PL": "wollen",
+    "V;PRS;2;PL": "wollt",
+    "V;PRS;3;PL": "wollen",
+    "V;PST;3;SG": "wollte",
+    "V;PTCP;PST": "gewollt"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Direct will and intention – honest, but can sound blunt in a shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to want (something or to do something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s2",
+      "def": "to claim (Er will es nicht gewusst haben = he claims not to have known)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.claim"
+     },
+     {
+      "id": "s3",
+      "def": "to be about to, to intend",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.beaboutto"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Willst du eine Tomate?",
+      "tr": "Do you want a tomato?",
+      "register": "informal",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder wollen heute Pizza essen.",
+      "tr": "The children want to eat pizza today.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er will nichts davon gewusst haben.",
+      "tr": "He claims to have known nothing about it.",
+      "register": "neutral",
+      "context": "news, gossip",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich wollte gerade gehen, als du angerufen hast.",
+      "tr": "I was just about to leave when you called.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "unbedingt wollen",
+      "tr": "to really want"
+     },
+     {
+      "text": "nach Hause wollen",
+      "tr": "to want to go home"
+     },
+     {
+      "text": "Was willst du?",
+      "tr": "What do you want?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wer nicht will, der hat schon.",
+      "tr": "Who doesn't want, already has.",
+      "kind": "saying",
+      "meaning": "if you turn down an offer, that's your loss",
+      "register": "colloquial"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "mitwollen",
+      "tr": "to want to come along (colloquial: Willst du mit?)"
+     },
+     {
+      "text": "wegwollen",
+      "tr": "to want to leave"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "möchten",
+      "register": "neutral",
+      "nuance": "would like – the polite choice when asking for something"
+     },
+     {
+      "word": "wünschen",
+      "register": "formal",
+      "nuance": "to wish, desire – service language: Was wünschen Sie?"
+     },
+     {
+      "word": "Lust haben",
+      "register": "informal",
+      "nuance": "to feel like (doing) something"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From Middle High German wollen, wöllen, wellen, from Old High German wollen, wellen, from a blend of Proto-West Germanic *willjan and *walljan, from Proto-Germanic *wiljaną and *waljaną, ultimately from Proto-Indo-European *welh₁-. Compare Dutch willen, English will.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “will” was once “to want”, too – that sense survives in “if you will” and in “willing”.",
+     "Greek θέλω να πιω τσάι, Russian хочу пить чай and Turkish çay içmek istiyorum keep the two verbs side by side; German splits them around the object: Ich will Tee trinken."
+    ],
+    "pitfalls": [
+     "False friend: German Ich will = I want, not “I will”. The future is werden: Ich werde kommen.",
+     "Ich will einen Kaffee can sound rude when ordering – say Ich möchte … or Ich hätte gern …",
+     "ich will and er will have no ending – like all modal verbs (ich kann, ich muss, ich mag).",
+     "A second verb goes to the very end as an infinitive: Ich will Tee trinken. (not *Ich will trinken Tee)"
+    ],
+    "subtleties": [
+     "Like other modal verbs, wollen often drops a verb of motion: Ich will nach Hause. Willst du mit?"
+    ]
+   }
+  },
+  {
+   "id": "de:kochen",
+   "lemma": "kochen",
+   "pos": "VERB",
+   "senses": [
+    "verb.cook",
+    "verb.boil"
+   ],
+   "features": {
+    "principalParts": [
+     "kochen",
+     "kocht",
+     "kochte",
+     "gekocht"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "also without an object: Das Wasser kocht."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "V;NFIN": "kochen",
+    "V;PRS;1;SG": "koche",
+    "V;PRS;2;SG": "kochst",
+    "V;PRS;3;SG": "kocht",
+    "V;PRS;1;PL": "kochen",
+    "V;PRS;2;PL": "kocht",
+    "V;PRS;3;PL": "kochen",
+    "V;PST;3;SG": "kochte",
+    "V;PTCP;PST": "gekocht"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The stove, the smell of soup, a family cooking together – kochen is everyday warm food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to cook, to prepare (hot) food",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.cook"
+     },
+     {
+      "id": "s2",
+      "def": "to boil (water boils; to boil eggs, potatoes); to make (coffee, tea)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.boil"
+     },
+     {
+      "id": "s3",
+      "def": "to seethe, to boil with anger (figurative)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s2"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich koche heute eine Suppe.",
+      "tr": "I’m cooking a soup today.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Vater kocht sehr gut.",
+      "tr": "My father cooks very well.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wer kocht heute das Abendessen?",
+      "tr": "Who is cooking dinner today?",
+      "register": "informal",
+      "context": "household",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Wasser kocht schon.",
+      "tr": "The water is already boiling.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s2"
+     },
+     {
+      "text": "Er kocht vor Wut.",
+      "tr": "He is boiling with rage.",
+      "register": "colloquial",
+      "context": "emotions",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Essen kochen",
+      "tr": "to cook food, make a meal"
+     },
+     {
+      "text": "Kaffee kochen",
+      "tr": "to make coffee"
+     },
+     {
+      "text": "Eier kochen",
+      "tr": "to boil eggs"
+     },
+     {
+      "text": "gern kochen",
+      "tr": "to like cooking"
+     },
+     {
+      "text": "das Kochbuch",
+      "tr": "cookbook"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Viele Köche verderben den Brei.",
+      "tr": "Many cooks spoil the porridge.",
+      "kind": "proverb",
+      "meaning": "too many cooks spoil the broth",
+      "register": "neutral"
+     },
+     {
+      "text": "Hier wird auch nur mit Wasser gekocht.",
+      "tr": "Here, too, they only cook with water.",
+      "kind": "saying",
+      "meaning": "they are no better than anyone else",
+      "register": "colloquial"
+     },
+     {
+      "text": "Es wird nichts so heiß gegessen, wie es gekocht wird.",
+      "tr": "Nothing is eaten as hot as it is cooked.",
+      "kind": "proverb",
+      "meaning": "things are rarely as bad as they first seem",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "aufkochen",
+      "tr": "to bring to the boil"
+     },
+     {
+      "text": "einkochen",
+      "tr": "to preserve, to boil down"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "zubereiten",
+      "register": "formal",
+      "nuance": "to prepare (a dish) – recipes, menus"
+     },
+     {
+      "word": "braten",
+      "register": "neutral",
+      "nuance": "to fry or roast – one way of cooking, in fat or in the oven"
+     },
+     {
+      "word": "backen",
+      "register": "neutral",
+      "nuance": "to bake – bread and cake, in the oven; not a synonym of kochen but its neighbour"
+     },
+     {
+      "word": "brutzeln",
+      "register": "colloquial",
+      "nuance": "to sizzle, to fry something up – playful"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German kochen, from Old High German kohhōn, from Proto-West Germanic *kokōn (“to cook”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "der Koch (the cook) and die Küche (the kitchen) – like English cook and kitchen – come from Latin coquus and coquīna.",
+     "kochen means both “to cook” and “to boil” (Das Wasser kocht); Greek separates μαγειρεύω (to cook) and βράζω (to boil), as English separates cook and boil."
+    ],
+    "pitfalls": [
+     "Regular verb: ich koche, du kochst, er kocht – no vowel change.",
+     "kochen is cooking on the stove; in the oven bread and cake are gebacken (backen), meat is gebraten (braten)."
+    ],
+    "subtleties": [
+     "Kaffee kochen and Tee kochen mean “to make coffee / tea”, even with a machine.",
+     "Used alone, Ich koche means “I’m cooking (a meal)”: Heute koche ich!"
+    ]
+   }
+  },
+  {
+   "id": "de:Brot",
+   "lemma": "Brot",
+   "pos": "NOUN",
+   "senses": [
+    "food.bread",
+    "work.livelihood"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Brote",
+      "pattern": "-e",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Brot",
+    "N;ACC;SG": "Brot",
+    "N;DAT;SG": "Brot",
+    "N;GEN;SG": "Brotes",
+    "N;NOM;PL": "Brote",
+    "N;ACC;PL": "Brote",
+    "N;DAT;PL": "Broten",
+    "N;GEN;PL": "Brote"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Brots"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The heart of the German table: dark, crusty, many kinds – the evening meal Abendbrot is named after it.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bread (uncountable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.bread"
+     },
+     {
+      "id": "s2",
+      "def": "a loaf of bread; a slice of bread with something on it (countable)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "livelihood, a living (figurative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "work.livelihood"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe jeden Morgen frisches Brot.",
+      "tr": "I buy fresh bread every morning.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Abend essen wir Brot mit Käse.",
+      "tr": "In the evening we eat bread and cheese.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Kannst du zwei Brote vom Bäcker mitbringen?",
+      "tr": "Can you bring two loaves from the baker’s?",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s2"
+     },
+     {
+      "text": "Er verdient sein Brot als Taxifahrer.",
+      "tr": "He earns his living as a taxi driver.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frisches Brot",
+      "tr": "fresh bread"
+     },
+     {
+      "text": "eine Scheibe Brot",
+      "tr": "a slice of bread"
+     },
+     {
+      "text": "Brot backen",
+      "tr": "to bake bread"
+     },
+     {
+      "text": "das Butterbrot",
+      "tr": "slice of bread and butter, sandwich"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Der Mensch lebt nicht vom Brot allein.",
+      "tr": "Man does not live by bread alone.",
+      "kind": "saying",
+      "meaning": "people need more than food (Matthew 4:4)",
+      "register": "neutral"
+     },
+     {
+      "text": "Wes Brot ich ess, des Lied ich sing.",
+      "tr": "Whose bread I eat, his song I sing.",
+      "kind": "proverb",
+      "meaning": "you are loyal to whoever pays you",
+      "register": "neutral"
+     },
+     {
+      "text": "sein Brot verdienen",
+      "tr": "to earn one’s bread",
+      "kind": "fixed expression",
+      "meaning": "to earn one’s living",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Laib",
+      "register": "neutral",
+      "nuance": "a whole loaf (ein Laib Brot) – only the shape, not the food"
+     },
+     {
+      "word": "Stulle",
+      "register": "regional",
+      "nuance": "a slice of bread with a topping – Berlin and the north"
+     },
+     {
+      "word": "Bemme",
+      "register": "regional",
+      "nuance": "the same in Saxony and Thuringia"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German brōt, from Old High German brōt, from Proto-West Germanic *braud, from Proto-Germanic *braudą, from Proto-Indo-European *bʰrew- (“to seethe, to boil”). Originally “what has been fermented, leaven”. It replaced the older Laib (“loaf”), the more common term in Old High German.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian хлеб comes from the old Germanic word for bread (*hlaibaz) – the word that lives on in German Laib and English loaf.",
+     "German bread culture (Deutsche Brotkultur) is on Germany’s national list of intangible cultural heritage, with thousands of registered kinds of bread."
+    ],
+    "pitfalls": [
+     "Uncountable for the food (Ich esse Brot), countable for a loaf (ein Brot, zwei Brote).",
+     "das Brot is neuter; a bread roll is das Brötchen (regionally Semmel, Schrippe), not *kleines Brot."
+    ],
+    "subtleties": [
+     "Abendbrot (“evening bread”) is the evening meal in the north and east – traditionally cold, with bread, cheese and cold meat."
+    ]
+   }
+  },
+  {
+   "id": "de:Käse",
+   "lemma": "Käse",
+   "pos": "NOUN",
+   "senses": [
+    "food.cheese",
+    "abstract.nonsense"
+   ],
+   "contrasts": [
+    {
+     "concept": "abstract.nonsense",
+     "axis": "how it is used",
+     "value": "about a statement: Das ist doch Käse!"
+    }
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Käse",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Käse",
+    "N;ACC;SG": "Käse",
+    "N;DAT;SG": "Käse",
+    "N;GEN;SG": "Käses",
+    "N;NOM;PL": "Käse",
+    "N;ACC;PL": "Käse",
+    "N;DAT;PL": "Käsen",
+    "N;GEN;PL": "Käse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Breakfast rolls, fondue, the cheese board – and, colloquially, nonsense.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cheese",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.cheese"
+     },
+     {
+      "id": "s2",
+      "def": "nonsense, rubbish (Das ist doch Käse!)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "abstract.nonsense"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse gern Käse zum Frühstück.",
+      "tr": "I like eating cheese for breakfast.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Supermarkt kaufe ich Käse und Milch.",
+      "tr": "At the supermarket I buy cheese and milk.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Ach, das ist doch Käse!",
+      "tr": "Oh, that’s nonsense!",
+      "register": "colloquial",
+      "context": "argument",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Stück Käse",
+      "tr": "a piece of cheese"
+     },
+     {
+      "text": "geriebener Käse",
+      "tr": "grated cheese"
+     },
+     {
+      "text": "Brot mit Käse",
+      "tr": "bread and cheese"
+     },
+     {
+      "text": "die Käseplatte",
+      "tr": "cheese board"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das ist doch Käse!",
+      "tr": "That’s cheese!",
+      "kind": "colloquial",
+      "meaning": "that is nonsense",
+      "register": "colloquial"
+     },
+     {
+      "text": "Käse schließt den Magen.",
+      "tr": "Cheese closes the stomach.",
+      "kind": "saying",
+      "meaning": "cheese ends a meal",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: Käse is the only general word; single cheeses have their own names (Gouda, Emmentaler, Quark – fresh curd cheese).",
+    "etymology": {
+     "text": "Inherited from Middle High German kæse, from Old High German kāsi, from Proto-West Germanic *kāsī (“cheese”), borrowed from Latin cāseus.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Käse, English cheese and Spanish queso all come from Latin cāseus; Greek τυρί, Russian сыр and Turkish peynir have other origins."
+    ],
+    "pitfalls": [
+     "der Käse is masculine (Greek το τυρί is neuter, Russian сыр masculine).",
+     "Plural Käse (kinds of cheese), dative plural Käsen; genitive des Käses."
+    ],
+    "subtleties": [
+     "Uncountable for the food: Ich mag Käse. ein Käse is a whole cheese or a kind of cheese."
+    ]
+   }
+  },
+  {
+   "id": "de:Ei",
+   "lemma": "Ei",
+   "pos": "NOUN",
+   "senses": [
+    "food.egg",
+    "body.testicles"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Eier",
+      "pattern": "-er",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "testicles: only the plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Ei",
+    "N;ACC;SG": "Ei",
+    "N;DAT;SG": "Ei",
+    "N;GEN;SG": "Eies",
+    "N;NOM;PL": "Eier",
+    "N;ACC;PL": "Eier",
+    "N;DAT;PL": "Eiern",
+    "N;GEN;PL": "Eier"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Eis"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Boiled eggs at Sunday breakfast, painted eggs at Easter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "egg (food; also of birds and other animals)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.egg"
+     },
+     {
+      "id": "s2",
+      "def": "Eier (plural): testicles; courage (“balls”)",
+      "register": [
+       "vulgar"
+      ],
+      "concept": "body.testicles"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zum Frühstück esse ich ein Ei.",
+      "tr": "For breakfast I eat an egg.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "Kaufst du bitte zehn Eier?",
+      "tr": "Will you buy ten eggs, please?",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Für den Kuchen brauchen wir drei Eier.",
+      "tr": "We need three eggs for the cake.",
+      "register": "neutral",
+      "context": "baking",
+      "sense": "s1"
+     },
+     {
+      "text": "Er hat keine Eier in der Hose.",
+      "tr": "He has no balls (no guts).",
+      "register": "vulgar",
+      "context": "slang",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein gekochtes Ei",
+      "tr": "a boiled egg"
+     },
+     {
+      "text": "ein weiches / hartes Ei",
+      "tr": "a soft-boiled / hard-boiled egg"
+     },
+     {
+      "text": "das Spiegelei",
+      "tr": "fried egg"
+     },
+     {
+      "text": "das Rührei",
+      "tr": "scrambled eggs"
+     },
+     {
+      "text": "Eier kochen",
+      "tr": "to boil eggs"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "wie aus dem Ei gepellt",
+      "tr": "as if peeled out of the egg",
+      "kind": "idiom",
+      "meaning": "immaculately dressed",
+      "register": "neutral"
+     },
+     {
+      "text": "das Ei des Kolumbus",
+      "tr": "the egg of Columbus",
+      "kind": "idiom",
+      "meaning": "a surprisingly simple solution",
+      "register": "neutral"
+     },
+     {
+      "text": "sich gleichen wie ein Ei dem anderen",
+      "tr": "to be like one egg to the other",
+      "kind": "idiom",
+      "meaning": "to be as alike as two peas in a pod",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Ei is the only word for egg.",
+    "etymology": {
+     "text": "Inherited from Middle High German ei and Old High German ei, from Proto-West Germanic *aij, from Proto-Germanic *ajją, from Proto-Indo-European *h₂ōwyóm. Cognate with Yiddish איי (ey), Dutch ei, English ey and egg, Danish æg.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English once had its own word ey (plural eyren), the twin of German Ei; egg came from Old Norse. In 1490 the printer William Caxton told of a merchant who asked a woman for “eggys” and was told she spoke no French – she only knew “eyren”.",
+     "Ei, Latin ovum, Ancient Greek ᾠόν (modern αυγό) and Russian яйцо all go back to one Indo-European word for egg."
+    ],
+    "pitfalls": [
+     "Plural Eier (dative Eiern): ein Ei, zwei Eier.",
+     "In slang Eier means testicles – Eier haben = to have guts. Harmless in the kitchen, but jokes are everywhere."
+    ],
+    "subtleties": [
+     "das Ei is neuter, like Greek το αυγό; Russian яйцо is neuter too.",
+     "Ostereier (Easter eggs) are painted or made of chocolate; der Osterhase (Easter bunny) brings them."
+    ]
+   }
+  },
+  {
+   "id": "de:Fleisch",
+   "lemma": "Fleisch",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "food.meat",
+    "body.flesh"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Fleisch",
+    "N;ACC;SG": "Fleisch",
+    "N;DAT;SG": "Fleisch",
+    "N;GEN;SG": "Fleisches"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Fleischs"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sunday roast and the butcher’s counter – and a daily question for vegetarians.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "meat (as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.meat"
+     },
+     {
+      "id": "s2",
+      "def": "flesh (of a body); the soft inside of a fruit (Fruchtfleisch)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "body.flesh"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Bruder isst kein Fleisch.",
+      "tr": "My brother doesn’t eat meat.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen das Fleisch beim Metzger.",
+      "tr": "We buy the meat at the butcher’s.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute gibt es Fleisch mit Kartoffeln.",
+      "tr": "Today there’s meat with potatoes.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Dorn geht tief ins Fleisch.",
+      "tr": "The thorn goes deep into the flesh.",
+      "register": "neutral",
+      "context": "body",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Fleisch essen",
+      "tr": "to eat meat"
+     },
+     {
+      "text": "Fleisch braten",
+      "tr": "to fry / roast meat"
+     },
+     {
+      "text": "mageres Fleisch",
+      "tr": "lean meat"
+     },
+     {
+      "text": "das Rindfleisch, das Schweinefleisch",
+      "tr": "beef, pork"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "weder Fisch noch Fleisch",
+      "tr": "neither fish nor meat",
+      "kind": "idiom",
+      "meaning": "neither one thing nor the other",
+      "register": "neutral"
+     },
+     {
+      "text": "sein eigen Fleisch und Blut",
+      "tr": "his own flesh and blood",
+      "kind": "idiom",
+      "meaning": "one’s own children",
+      "register": "literary"
+     },
+     {
+      "text": "in Fleisch und Blut übergehen",
+      "tr": "to pass into flesh and blood",
+      "kind": "idiom",
+      "meaning": "to become second nature",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No general synonym: the kinds are compounds (Rindfleisch, Schweinefleisch, Hähnchenfleisch); Wurst is sausage, Braten a roast.",
+    "etymology": {
+     "text": "From Middle High German fleisch, vleisch, from Old High German fleisk, from Proto-West Germanic *flaiski.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English splits meat and flesh and took beef, pork and mutton from Norman French; German keeps one word and builds compounds: Rindfleisch (cow meat = beef), Schweinefleisch (pig meat = pork).",
+     "Fleisch and English flesh are the same Germanic word."
+    ],
+    "pitfalls": [
+     "No plural: kinds of meat are Fleischsorten.",
+     "das Fleisch is neuter; the butcher is der Metzger (south and west), der Fleischer (east) or der Schlachter (north)."
+    ],
+    "subtleties": [
+     "Many Germans do not count fish as Fleisch: Ich esse kein Fleisch, nur Fisch."
+    ]
+   }
+  },
+  {
+   "id": "de:Fisch",
+   "lemma": "Fisch",
+   "pos": "NOUN",
+   "senses": [
+    "food.fish",
+    "animal.fish",
+    "nature.pisces"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fische",
+      "pattern": "-e",
+      "senses": [
+       "s2",
+       "s3"
+      ],
+      "note": "the zodiac sign is always plural: Ich bin Fische"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Fisch",
+    "N;ACC;SG": "Fisch",
+    "N;DAT;SG": "Fisch",
+    "N;GEN;SG": "Fisches",
+    "N;NOM;PL": "Fische",
+    "N;ACC;PL": "Fische",
+    "N;DAT;PL": "Fischen",
+    "N;GEN;PL": "Fische"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Fischs"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fish on Fridays, fish rolls at the North Sea, trout from a mountain stream.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fish (as food, uncountable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fish"
+     },
+     {
+      "id": "s2",
+      "def": "fish (the animal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "animal.fish"
+     },
+     {
+      "id": "s3",
+      "def": "Fische (plural): Pisces, the sign of the zodiac",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.pisces"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Am Freitag essen wir oft Fisch.",
+      "tr": "On Fridays we often eat fish.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich koche heute Fisch mit Reis.",
+      "tr": "Today I’m cooking fish with rice.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im See schwimmen viele Fische.",
+      "tr": "Lots of fish swim in the lake.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     },
+     {
+      "text": "Mein Sternzeichen ist Fische.",
+      "tr": "My star sign is Pisces.",
+      "register": "neutral",
+      "context": "astrology",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frischer Fisch",
+      "tr": "fresh fish"
+     },
+     {
+      "text": "Fisch braten",
+      "tr": "to fry fish"
+     },
+     {
+      "text": "das Fischbrötchen",
+      "tr": "fish roll"
+     },
+     {
+      "text": "Fische fangen",
+      "tr": "to catch fish"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "weder Fisch noch Fleisch",
+      "tr": "neither fish nor meat",
+      "kind": "idiom",
+      "meaning": "neither one thing nor the other",
+      "register": "neutral"
+     },
+     {
+      "text": "Das sind kleine Fische.",
+      "tr": "Those are small fish.",
+      "kind": "idiom",
+      "meaning": "trifles, small fry",
+      "register": "colloquial"
+     },
+     {
+      "text": "sich wie ein Fisch im Wasser fühlen",
+      "tr": "to feel like a fish in water",
+      "kind": "idiom",
+      "meaning": "to be completely in one’s element",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use; kinds of fish have their own names (Lachs, Forelle, Thunfisch).",
+    "etymology": {
+     "text": "From Middle High German visch, from Old High German fisk, fisc, from Proto-West Germanic *fisk.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Fisch and Latin piscis are the same Indo-European word: Germanic turned p into f, as in Vater – pater, Fuß – pes."
+    ],
+    "pitfalls": [
+     "For the food, no article and no plural: Ich esse gern Fisch. einen Fisch is a whole fish.",
+     "der Fisch is masculine; plural Fische, dative plural Fischen."
+    ],
+    "subtleties": [
+     "In German Fisch is usually not Fleisch: a person who eats fish but no meat says Ich esse kein Fleisch."
+    ]
+   }
+  },
+  {
+   "id": "de:Hähnchen",
+   "lemma": "Hähnchen",
+   "pos": "NOUN",
+   "senses": [
+    "food.chicken",
+    "animal.rooster"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Hähnchen",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Hahn + -chen (a diminutive, hence neuter)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Hähnchen",
+    "N;ACC;SG": "Hähnchen",
+    "N;DAT;SG": "Hähnchen",
+    "N;GEN;SG": "Hähnchens",
+    "N;NOM;PL": "Hähnchen",
+    "N;ACC;PL": "Hähnchen",
+    "N;DAT;PL": "Hähnchen",
+    "N;GEN;PL": "Hähnchen"
+   },
+   "variants": [
+    {
+     "lemma": "Hendl",
+     "region": "AT, Bavaria"
+    },
+    {
+     "lemma": "Poulet",
+     "region": "CH"
+    }
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Roast chicken from the grill van, chicken with rice – plain, popular food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chicken (as food: a whole roast or grilled chicken, or chicken meat)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.chicken"
+     },
+     {
+      "id": "s2",
+      "def": "little rooster (diminutive of Hahn; rare)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "animal.rooster"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Heute gibt es Hähnchen mit Reis.",
+      "tr": "Today we’re having chicken with rice.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Imbiss kaufen wir ein halbes Hähnchen.",
+      "tr": "At the snack bar we buy half a chicken.",
+      "register": "neutral",
+      "context": "street food",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich koche ein Hähnchen für die ganze Familie.",
+      "tr": "I’m cooking a chicken for the whole family.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf dem Hof kräht ein junges Hähnchen.",
+      "tr": "On the farm a young cockerel is crowing.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein halbes Hähnchen",
+      "tr": "half a chicken"
+     },
+     {
+      "text": "gegrilltes Hähnchen",
+      "tr": "grilled chicken"
+     },
+     {
+      "text": "das Hähnchenbrustfilet",
+      "tr": "chicken breast fillet"
+     },
+     {
+      "text": "Hähnchen mit Pommes",
+      "tr": "chicken and chips"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "mit jemandem ein Hühnchen zu rupfen haben",
+      "tr": "to have a little chicken to pluck with someone",
+      "kind": "idiom",
+      "meaning": "to have a bone to pick with someone",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Huhn",
+      "register": "neutral",
+      "nuance": "the live bird, a hen; as food in Hühnersuppe or Huhn mit Reis"
+     },
+     {
+      "word": "Hühnchen",
+      "register": "neutral",
+      "nuance": "little chicken – a bit homelier, same food"
+     },
+     {
+      "word": "Hendl",
+      "register": "regional",
+      "nuance": "Bavaria and Austria: roast chicken (Brathendl)"
+     },
+     {
+      "word": "Broiler",
+      "register": "regional",
+      "nuance": "eastern Germany, from GDR times"
+     },
+     {
+      "word": "Poulet",
+      "register": "regional",
+      "nuance": "Switzerland"
+     }
+    ],
+    "etymology": {
+     "text": "From Hahn (“rooster”) + -chen (diminutive).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hähnchen is literally “little rooster”, yet it names any chicken for the table. Greek κοτόπουλο (from κότα, hen) and Russian курица (hen) name the food after the hen instead."
+    ],
+    "pitfalls": [
+     "Huhn is the live animal (a hen); for food Germans in Germany usually say Hähnchen: Ich esse Hähnchen.",
+     "The plural is the same as the singular: ein Hähnchen, zwei Hähnchen."
+    ],
+    "subtleties": [
+     "Every noun in -chen is neuter: das Hähnchen, das Brötchen, das Mädchen – even though der Hahn is masculine."
+    ]
+   }
+  },
+  {
+   "id": "de:Reis",
+   "lemma": "Reis",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "food.rice",
+    "nature.rice"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Reis: a shoot, a twig (literary)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Reis",
+    "N;ACC;SG": "Reis",
+    "N;DAT;SG": "Reis",
+    "N;GEN;SG": "Reises"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A side dish, rice pudding for children, and the staple of half the world.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "rice (the food, usually cooked)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.rice"
+     },
+     {
+      "id": "s2",
+      "def": "rice (the plant and its grain)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.rice"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wir essen heute Reis mit Gemüse.",
+      "tr": "Today we’re eating rice with vegetables.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich koche den Reis zwanzig Minuten.",
+      "tr": "I cook the rice for twenty minutes.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "In Asien wird viel Reis angebaut.",
+      "tr": "A lot of rice is grown in Asia.",
+      "register": "neutral",
+      "context": "agriculture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Reis kochen",
+      "tr": "to cook rice"
+     },
+     {
+      "text": "eine Schüssel Reis",
+      "tr": "a bowl of rice"
+     },
+     {
+      "text": "der Milchreis",
+      "tr": "rice pudding"
+     },
+     {
+      "text": "der Vollkornreis",
+      "tr": "brown rice"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Da fällt in China ein Sack Reis um.",
+      "tr": "A sack of rice falls over in China.",
+      "kind": "saying",
+      "meaning": "that is completely unimportant",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym; kinds have their own names (Basmatireis, Milchreis, Risottoreis).",
+    "etymology": {
+     "text": "From Middle High German rīs, borrowed from Late Latin rīsum or rīsus, from Latin orȳza, borrowed from Ancient Greek ὄρῡζα (órūza).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Reis came via Latin from Ancient Greek ὄρυζα – the word behind modern Greek ρύζι and English rice.",
+     "Chinese separates the plant 稻, the raw grain 米 and cooked rice 饭; German says Reis for all three."
+    ],
+    "pitfalls": [
+     "der Reis (rice) – die Reise (journey) – reisen (to travel): three different words.",
+     "No plural in everyday use; kinds are Reissorten."
+    ],
+    "subtleties": [
+     "Milchreis (rice cooked in milk with sugar and cinnamon) is eaten as a sweet main meal, not only as dessert."
+    ]
+   }
+  },
+  {
+   "id": "de:Suppe",
+   "lemma": "Suppe",
+   "pos": "NOUN",
+   "senses": [
+    "food.soup",
+    "nature.fog"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Suppen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Suppe",
+    "N;ACC;SG": "Suppe",
+    "N;DAT;SG": "Suppe",
+    "N;GEN;SG": "Suppe",
+    "N;NOM;PL": "Suppen",
+    "N;ACC;PL": "Suppen",
+    "N;DAT;PL": "Suppen",
+    "N;GEN;PL": "Suppen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Grandmother’s chicken soup, a warm bowl in winter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "soup",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.soup"
+     },
+     {
+      "id": "s2",
+      "def": "thick fog, a pea-souper (die Suppe draußen)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "nature.fog"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Winter koche ich oft Suppe.",
+      "tr": "In winter I often cook soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Suppe ist sehr heiß.",
+      "tr": "The soup is very hot.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Vorspeise nehmen wir eine Tomatensuppe.",
+      "tr": "As a starter we’ll have a tomato soup.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Draußen ist eine richtige Suppe, man sieht kaum die Straße.",
+      "tr": "It is a real pea-souper out there; you can hardly see the street.",
+      "register": "colloquial",
+      "context": "weather",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Suppe kochen",
+      "tr": "to make a soup"
+     },
+     {
+      "text": "Suppe essen",
+      "tr": "to eat soup"
+     },
+     {
+      "text": "die Hühnersuppe",
+      "tr": "chicken soup"
+     },
+     {
+      "text": "ein Teller Suppe",
+      "tr": "a bowl of soup"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Suppe auslöffeln, die man sich eingebrockt hat",
+      "tr": "to spoon up the soup one has crumbled bread into",
+      "kind": "idiom",
+      "meaning": "to face the consequences of one’s own actions",
+      "register": "neutral"
+     },
+     {
+      "text": "jemandem die Suppe versalzen",
+      "tr": "to oversalt someone’s soup",
+      "kind": "idiom",
+      "meaning": "to spoil someone’s plans",
+      "register": "neutral"
+     },
+     {
+      "text": "ein Haar in der Suppe finden",
+      "tr": "to find a hair in the soup",
+      "kind": "idiom",
+      "meaning": "to find fault, to nitpick",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Brühe",
+      "register": "neutral",
+      "nuance": "broth, clear soup"
+     },
+     {
+      "word": "Eintopf",
+      "register": "neutral",
+      "nuance": "a thick one-pot soup-stew, a full meal"
+     },
+     {
+      "word": "Süppchen",
+      "register": "colloquial",
+      "nuance": "a little soup – homely; also in sein eigenes Süppchen kochen (to pursue one’s own agenda)"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Middle Low German suppe, soppe, sope, which spread under the reinforcing influence of French soupe. Both from Proto-Germanic *supô, *suppô (“broth, sop”), related to German saufen (“to drink”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English supper comes from French souper, “to have soup” – the evening meal was soup.",
+     "Russian суп (from French soupe) and Greek σούπα belong to the same family of words."
+    ],
+    "pitfalls": [
+     "Soup is eaten in German: Suppe essen, not *Suppe trinken.",
+     "die Suppe is feminine; plural Suppen."
+    ],
+    "subtleties": [
+     "A Suppe in Germany is often a starter; an Eintopf is a whole meal in one pot."
+    ]
+   }
+  },
+  {
+   "id": "de:Salat",
+   "lemma": "Salat",
+   "pos": "NOUN",
+   "senses": [
+    "food.salad",
+    "veg.lettuce"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Salate",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "FEM",
+      "meaning": "die Salat (also das): the Islamic ritual prayer"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Salat",
+    "N;ACC;SG": "Salat",
+    "N;DAT;SG": "Salat",
+    "N;GEN;SG": "Salats",
+    "N;NOM;PL": "Salate",
+    "N;ACC;PL": "Salate",
+    "N;DAT;PL": "Salaten",
+    "N;GEN;PL": "Salate"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh and light – the salad on the plate and the leafy plant it is made from.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salad (a mixed, usually cold dish)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ],
+      "concept": "food.salad"
+     },
+     {
+      "id": "s2",
+      "def": "lettuce and related leaf vegetables (the plant)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.lettuce",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Als Vorspeise nehme ich einen gemischten Salat.",
+      "tr": "As a starter I’ll have a mixed salad.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich mache einen Salat mit Tomaten und Gurken.",
+      "tr": "I’m making a salad with tomatoes and cucumbers.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kaufe einen Kopf Salat.",
+      "tr": "I'm buying a head of lettuce.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
+     },
+     {
+      "text": "Der Salat im Garten schießt schon.",
+      "tr": "The lettuce in the garden is already bolting.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s2"
+     },
+     {
+      "text": "Zum Grillen mache ich einen Kartoffelsalat.",
+      "tr": "I'm making a potato salad for the barbecue.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Kopf Salat",
+      "tr": "a head of lettuce"
+     },
+     {
+      "text": "grüner Salat",
+      "tr": "green salad, lettuce"
+     },
+     {
+      "text": "den Salat waschen",
+      "tr": "to wash the lettuce"
+     },
+     {
+      "text": "gemischter Salat",
+      "tr": "mixed salad"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Da haben wir den Salat!",
+      "tr": "There we have the salad!",
+      "kind": "idiom",
+      "meaning": "Now we're in a mess! (when something predicted goes wrong)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kopfsalat",
+      "register": "neutral",
+      "nuance": "specifically round head lettuce (butterhead)"
+     },
+     {
+      "word": "Häuptelsalat",
+      "register": "regional",
+      "nuance": "Austrian and southern German word for head lettuce",
+      "region": "AT, south"
+     },
+     {
+      "word": "Blattsalat",
+      "register": "neutral",
+      "nuance": "leaf salads in general"
+     }
+    ],
+    "etymology": {
+     "text": "15th century, from earlier Italian salata, a variant of insalata (“salted [dish]”), likely reinforced by Middle French salade.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Salat goes back to salt (Latin sal): the first salads were salted greens.",
+     "Greek σαλάτα, Russian салат, Turkish salata and English salad are the same Romance word – of these, only German and Russian also use it for the lettuce plant."
+    ],
+    "pitfalls": [
+     "Salat means both “lettuce” and “salad” – Kartoffelsalat has no lettuce at all.",
+     "Plural Salate; dative plural Salaten."
+    ],
+    "subtleties": [
+     "For the plant it is often used without an article, like a mass noun: Salat waschen, Salat pflanzen."
+    ]
+   }
+  },
+  {
+   "id": "de:Obst",
+   "lemma": "Obst",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "food.fruit"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": {
+     "none": "a collective noun: no plural (one fruit: eine Frucht, ein Stück Obst)"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Obst",
+    "N;ACC;SG": "Obst",
+    "N;DAT;SG": "Obst",
+    "N;GEN;SG": "Obstes"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Obsts"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Apples and pears from the market stall – healthy, everyday fruit.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fruit (as food; a collective noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.fruit"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse jeden Tag Obst.",
+      "tr": "I eat fruit every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf dem Markt kaufen wir Obst und Gemüse.",
+      "tr": "At the market we buy fruit and vegetables.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Nachtisch gibt es Obst.",
+      "tr": "There’s fruit for dessert.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Obst und Gemüse",
+      "tr": "fruit and vegetables"
+     },
+     {
+      "text": "frisches Obst",
+      "tr": "fresh fruit"
+     },
+     {
+      "text": "der Obstsalat",
+      "tr": "fruit salad"
+     },
+     {
+      "text": "der Obstkuchen",
+      "tr": "fruit flan"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Früchte",
+      "register": "neutral",
+      "nuance": "fruits (plural of Frucht) – wider and more formal, also exotic fruit: Südfrüchte"
+     },
+     {
+      "word": "Frucht",
+      "register": "neutral",
+      "nuance": "a single fruit in botany; also figurative: die Früchte der Arbeit"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German obez, from Old High German obaz, from Proto-West Germanic *obaet.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English fruit, Greek φρούτο and Russian фрукты come from Latin frūctus – in German that word is Frucht, while the fruit in the bowl is Obst."
+    ],
+    "pitfalls": [
+     "Obst has no plural and no ein: say Obst (some fruit), ein Stück Obst (a piece of fruit) or name the fruit (ein Apfel).",
+     "das Obst is neuter."
+    ],
+    "subtleties": [
+     "Obst means the sweet fruit of trees and bushes that you eat raw; tomatoes and cucumbers are botanically fruits but Gemüse in the kitchen."
+    ]
+   }
+  },
+  {
+   "id": "de:Apfel",
+   "lemma": "Apfel",
+   "pos": "NOUN",
+   "senses": [
+    "food.apple"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Äpfel",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Apfel",
+    "N;ACC;SG": "Apfel",
+    "N;DAT;SG": "Apfel",
+    "N;GEN;SG": "Apfels",
+    "N;NOM;PL": "Äpfel",
+    "N;ACC;PL": "Äpfel",
+    "N;DAT;PL": "Äpfeln",
+    "N;GEN;PL": "Äpfel"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most German fruit: apple strudel, apple juice, the apple tree in the garden.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "apple (the fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.apple"
+     },
+     {
+      "id": "s2",
+      "def": "apple tree (rare; usually Apfelbaum)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse jeden Tag einen Apfel.",
+      "tr": "I eat an apple every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen ein Kilo Äpfel.",
+      "tr": "We’re buying a kilo of apples.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Apfel ist rot und süß.",
+      "tr": "The apple is red and sweet.",
+      "register": "neutral",
+      "context": "describing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "einen Apfel essen",
+      "tr": "to eat an apple"
+     },
+     {
+      "text": "ein grüner Apfel",
+      "tr": "a green apple"
+     },
+     {
+      "text": "der Apfelsaft",
+      "tr": "apple juice"
+     },
+     {
+      "text": "der Apfelkuchen",
+      "tr": "apple cake"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Der Apfel fällt nicht weit vom Stamm.",
+      "tr": "The apple does not fall far from the trunk.",
+      "kind": "proverb",
+      "meaning": "children are like their parents",
+      "register": "neutral"
+     },
+     {
+      "text": "in den sauren Apfel beißen",
+      "tr": "to bite into the sour apple",
+      "kind": "idiom",
+      "meaning": "to do something unpleasant that cannot be avoided",
+      "register": "neutral"
+     },
+     {
+      "text": "Äpfel mit Birnen vergleichen",
+      "tr": "to compare apples with pears",
+      "kind": "idiom",
+      "meaning": "to compare things that cannot be compared",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym; varieties have names (Boskop, Elstar, Gala).",
+    "etymology": {
+     "text": "From Middle High German apfel, from Old High German apful, from Proto-West Germanic *applu, from Proto-Germanic *apluz (compare Dutch appel, English apple), from Proto-Indo-European *h₂ébōl.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Apfel, English apple and Russian яблоко go back to the same Indo-European word; Greek μήλο and Turkish elma are unrelated."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: der Apfel – die Äpfel (dative den Äpfeln).",
+     "der Apfel is masculine (Greek το μήλο neuter, Russian яблоко neuter)."
+    ],
+    "subtleties": [
+     "In compounds it is Apfel-: Apfelsaft, Apfelkuchen, Apfelschorle (apple juice with sparkling water)."
+    ]
+   }
+  },
+  {
+   "id": "de:Zucker",
+   "lemma": "Zucker",
+   "pos": "NOUN",
+   "senses": [
+    "food.sugar",
+    "health.diabetes"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zucker",
+      "pattern": "no ending",
+      "senses": [
+       "s3"
+      ],
+      "note": "kinds of sugar (chemistry); table sugar has no plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Zucker",
+    "N;ACC;SG": "Zucker",
+    "N;DAT;SG": "Zucker",
+    "N;GEN;SG": "Zuckers",
+    "N;NOM;PL": "Zucker",
+    "N;ACC;PL": "Zucker",
+    "N;DAT;PL": "Zuckern",
+    "N;GEN;PL": "Zucker"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweetness – in coffee, in cake; colloquially also diabetes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sugar",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.sugar"
+     },
+     {
+      "id": "s2",
+      "def": "diabetes (Zucker haben)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "health.diabetes"
+     },
+     {
+      "id": "s3",
+      "def": "sugars (chemistry; plural Zucker)",
+      "register": [
+       "technical"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Trinkst du den Kaffee mit Zucker?",
+      "tr": "Do you take your coffee with sugar?",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Für den Kuchen brauche ich Zucker und Eier.",
+      "tr": "For the cake I need sugar and eggs.",
+      "register": "neutral",
+      "context": "baking",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Opa hat Zucker.",
+      "tr": "My grandpa has diabetes.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Löffel Zucker",
+      "tr": "a spoonful of sugar"
+     },
+     {
+      "text": "ein Stück Zucker",
+      "tr": "a sugar cube"
+     },
+     {
+      "text": "brauner Zucker",
+      "tr": "brown sugar"
+     },
+     {
+      "text": "der Puderzucker",
+      "tr": "icing sugar"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Zuckerbrot und Peitsche",
+      "tr": "sugar bread and whip",
+      "kind": "idiom",
+      "meaning": "carrot and stick",
+      "register": "neutral"
+     },
+     {
+      "text": "Das ist kein Zuckerschlecken.",
+      "tr": "That is no licking of sugar.",
+      "kind": "idiom",
+      "meaning": "it is no picnic, it is hard",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No general synonym: Zucker is the only everyday word (Süßstoff is a different thing).",
+    "etymology": {
+     "text": "From Middle High German zucker, from Old High German zuckar, from early Italian zucchero, from Arabic سُكَّر (sukkar), from Persian شکر (šakar), from Sanskrit शर्करा (śárkarā, “grit, gravel; ground or candied sugar”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A travelling word: Sanskrit śarkarā → Persian šakar → Arabic سُكَّر (sukkar) → Italian zucchero → German Zucker. Greek ζάχαρη, Russian сахар, Turkish şeker, Hebrew סוּכָּר and English sugar come from the same source."
+    ],
+    "pitfalls": [
+     "der Zucker is masculine; uncountable in the kitchen (Ich nehme keinen Zucker).",
+     "Zucker haben (colloquial) means having diabetes, not owning sugar – the context tells."
+    ],
+    "subtleties": [
+     "Süßstoff is sweetener, not sugar; zuckerfrei = sugar-free."
+    ]
+   }
+  },
+  {
+   "id": "de:Salz",
+   "lemma": "Salz",
+   "pos": "NOUN",
+   "senses": [
+    "food.salt"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Salze",
+      "pattern": "-e",
+      "senses": [
+       "s2"
+      ],
+      "note": "chemistry; table salt has no plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Salz",
+    "N;ACC;SG": "Salz",
+    "N;DAT;SG": "Salz",
+    "N;GEN;SG": "Salzes",
+    "N;NOM;PL": "Salze",
+    "N;ACC;PL": "Salze",
+    "N;DAT;PL": "Salzen",
+    "N;GEN;PL": "Salze"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Salt and pepper on the table – and an old symbol of value.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "salt (table salt)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.salt"
+     },
+     {
+      "id": "s2",
+      "def": "a salt (chemistry; plural Salze)",
+      "register": [
+       "technical"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Suppe braucht noch Salz.",
+      "tr": "The soup still needs salt.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Kannst du mir bitte das Salz geben?",
+      "tr": "Can you pass me the salt, please?",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Viele Salze lösen sich gut in Wasser.",
+      "tr": "Many salts dissolve well in water.",
+      "register": "technical",
+      "context": "chemistry",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Salz und Pfeffer",
+      "tr": "salt and pepper"
+     },
+     {
+      "text": "eine Prise Salz",
+      "tr": "a pinch of salt"
+     },
+     {
+      "text": "Salz streuen",
+      "tr": "to sprinkle salt"
+     },
+     {
+      "text": "das Meersalz",
+      "tr": "sea salt"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Salz in die Wunde streuen",
+      "tr": "to sprinkle salt into the wound",
+      "kind": "idiom",
+      "meaning": "to make a painful situation worse",
+      "register": "neutral"
+     },
+     {
+      "text": "das Salz in der Suppe",
+      "tr": "the salt in the soup",
+      "kind": "idiom",
+      "meaning": "what makes something interesting",
+      "register": "neutral"
+     },
+     {
+      "text": "jemandem nicht das Salz in der Suppe gönnen",
+      "tr": "not to grant someone the salt in his soup",
+      "kind": "idiom",
+      "meaning": "to begrudge someone everything",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kochsalz",
+      "register": "neutral",
+      "nuance": "cooking salt, sodium chloride – textbooks and labels"
+     },
+     {
+      "word": "Speisesalz",
+      "register": "neutral",
+      "nuance": "table salt – the word on the packet"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German salz, from Old High German salz, from Proto-West Germanic *salt, from Proto-Germanic *saltą, from Proto-Indo-European *séh₂l-. Compare Dutch zout, English salt, Danish salt.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Salz, Latin sal, Ancient Greek ἅλς (modern αλάτι) and Russian соль all come from one Indo-European word; Latin salārium – the root of English salary – is linked to salt."
+    ],
+    "pitfalls": [
+     "das Salz is neuter, like Greek το αλάτι; Russian соль is feminine.",
+     "Plural Salze only in chemistry (Mineralsalze) and for kinds of salt."
+    ],
+    "subtleties": [
+     "salzig = salty; versalzen = too salty: Die Suppe ist versalzen."
+    ]
+   }
+  },
+  {
+   "id": "de:Wasser",
+   "lemma": "Wasser",
+   "pos": "NOUN",
+   "senses": [
+    "drink.water",
+    "nature.water"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wasser",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "Wässer",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ],
+      "note": "kinds of water: Mineralwässer"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wasser",
+    "N;ACC;SG": "Wasser",
+    "N;DAT;SG": "Wasser",
+    "N;GEN;SG": "Wassers",
+    "N;NOM;PL": "Wasser",
+    "N;ACC;PL": "Wasser",
+    "N;DAT;PL": "Wassern",
+    "N;GEN;PL": "Wasser"
+   },
+   "formsAlt": {
+    "N;NOM;PL": [
+     "Wässer"
+    ],
+    "N;ACC;PL": [
+     "Wässer"
+    ],
+    "N;DAT;PL": [
+     "Wässern"
+    ],
+    "N;GEN;PL": [
+     "Wässer"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clear and plain – and in a German restaurant usually a bottle of sparkling mineral water.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "water (to drink)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.water"
+     },
+     {
+      "id": "s2",
+      "def": "water as an element; a body of water (sea, lake, river)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.water"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke jeden Tag zwei Liter Wasser.",
+      "tr": "I drink two litres of water every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Wasser, bitte!",
+      "tr": "A (bottle of) water, please!",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder springen ins Wasser.",
+      "tr": "The children jump into the water.",
+      "register": "neutral",
+      "context": "swimming",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Glas Wasser",
+      "tr": "a glass of water"
+     },
+     {
+      "text": "Wasser mit Kohlensäure / stilles Wasser",
+      "tr": "sparkling / still water"
+     },
+     {
+      "text": "Wasser kochen",
+      "tr": "to boil water"
+     },
+     {
+      "text": "das Leitungswasser",
+      "tr": "tap water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Stille Wasser sind tief.",
+      "tr": "Still waters are deep.",
+      "kind": "proverb",
+      "meaning": "quiet people often have hidden depths",
+      "register": "neutral"
+     },
+     {
+      "text": "ins Wasser fallen",
+      "tr": "to fall into the water",
+      "kind": "idiom",
+      "meaning": "to be cancelled, to fall through",
+      "register": "neutral"
+     },
+     {
+      "text": "jemandem das Wasser nicht reichen können",
+      "tr": "not to be able to hand someone the water",
+      "kind": "idiom",
+      "meaning": "to be no match for someone",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mineralwasser",
+      "register": "neutral",
+      "nuance": "bottled mineral water – what you get when you order ein Wasser"
+     },
+     {
+      "word": "Sprudel",
+      "register": "regional",
+      "nuance": "sparkling mineral water – south-west Germany"
+     },
+     {
+      "word": "Leitungswasser",
+      "register": "neutral",
+      "nuance": "tap water – ask for it by this name"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German waȥȥer, from Old High German waȥȥar, from Proto-West Germanic *watar, from Proto-Germanic *watōr, from Proto-Indo-European *wédōr, collective of *wódr̥. Compare Dutch water, English water, Danish vand.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wasser, English water, Russian вода and Ancient Greek ὕδωρ (as in hydro-) share one Indo-European root; Russian водка is literally “little water”."
+    ],
+    "pitfalls": [
+     "Ordering ein Wasser brings bottled mineral water, often sparkling: ask for stilles Wasser or Leitungswasser if you want still or tap water.",
+     "das Wasser is neuter (Greek το νερό neuter; Russian вода feminine)."
+    ],
+    "subtleties": [
+     "Plural Wasser (servings, kinds: zwei Wasser, bitte) or Wässer (mineral waters, fruit brandies – rarer)."
+    ]
+   }
+  },
+  {
+   "id": "de:Tee",
+   "lemma": "Tee",
+   "pos": "NOUN",
+   "senses": [
+    "drink.tea"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tees",
+      "pattern": "-s",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Tee: a tee (golf)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Tee",
+    "N;ACC;SG": "Tee",
+    "N;DAT;SG": "Tee",
+    "N;GEN;SG": "Tees",
+    "N;NOM;PL": "Tees",
+    "N;ACC;PL": "Tees",
+    "N;DAT;PL": "Tees",
+    "N;GEN;PL": "Tees"
+   },
+   "formsAlt": {
+    "N;NOM;PL": [
+     "Tee"
+    ],
+    "N;ACC;PL": [
+     "Tee"
+    ],
+    "N;DAT;PL": [
+     "Tee"
+    ],
+    "N;GEN;PL": [
+     "Tee"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A warm cup in the afternoon, herbal tea when you are ill, the tea ceremony of East Frisia.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tea (the drink)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.tea"
+     },
+     {
+      "id": "s2",
+      "def": "herbal tea, infusion (Pfefferminztee, Kamillentee)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke morgens schwarzen Tee.",
+      "tr": "In the morning I drink black tea.",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "Möchtest du einen Tee?",
+      "tr": "Would you like a tea?",
+      "register": "informal",
+      "context": "visit",
+      "sense": "s1"
+     },
+     {
+      "text": "Bei Erkältung trinke ich Kamillentee.",
+      "tr": "When I have a cold I drink camomile tea.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Tee kochen / Tee machen",
+      "tr": "to make tea"
+     },
+     {
+      "text": "eine Tasse Tee",
+      "tr": "a cup of tea"
+     },
+     {
+      "text": "grüner Tee",
+      "tr": "green tea"
+     },
+     {
+      "text": "der Kräutertee",
+      "tr": "herbal tea"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Abwarten und Tee trinken.",
+      "tr": "Wait and drink tea.",
+      "kind": "saying",
+      "meaning": "be patient, wait and see",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Tee is used for real tea and for herbal infusions alike (Aufguss, “infusion”, is technical).",
+    "etymology": {
+     "text": "Ultimately from Hokkien 茶 (tê), probably through Dutch thee. Attested since the 17th century.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tea reached Europe by two roads: by sea from Hokkien tê (German Tee, English tea, Hebrew תֵּה), by land from chá (Russian чай, Turkish çay, Greek τσάι, Arabic شَاي). Mandarin says 茶 chá."
+    ],
+    "pitfalls": [
+     "der Tee is masculine – like der Kaffee, der Saft, der Wein; but das Wasser, das Bier, die Milch.",
+     "Plural Tees (kinds of tea) or Tee (servings)."
+    ],
+    "subtleties": [
+     "Tee covers herbal infusions too: Pfefferminztee, Kamillentee, Früchtetee.",
+     "In East Frisia strong black tea is a ritual, with rock sugar (Kluntje) and cream."
+    ]
+   }
+  },
+  {
+   "id": "de:Kaffee",
+   "lemma": "Kaffee",
+   "pos": "NOUN",
+   "senses": [
+    "drink.coffee",
+    "meal.coffeeandcake"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kaffees",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Kaffee",
+    "N;ACC;SG": "Kaffee",
+    "N;DAT;SG": "Kaffee",
+    "N;GEN;SG": "Kaffees",
+    "N;NOM;PL": "Kaffees",
+    "N;ACC;PL": "Kaffees",
+    "N;DAT;PL": "Kaffees",
+    "N;GEN;PL": "Kaffees"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The morning cup and the afternoon ritual of Kaffee und Kuchen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "coffee (the drink; also the beans)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.coffee"
+     },
+     {
+      "id": "s2",
+      "def": "afternoon coffee and cake (a small meal, especially on Sundays)",
+      "register": [
+       "regional"
+      ],
+      "concept": "meal.coffeeandcake"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich trinke morgens zwei Tassen Kaffee.",
+      "tr": "In the morning I drink two cups of coffee.",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s1"
+     },
+     {
+      "text": "Einen Kaffee, bitte!",
+      "tr": "A coffee, please!",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Kommt ihr am Sonntag zum Kaffee?",
+      "tr": "Are you coming for coffee and cake on Sunday?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kaffee kochen",
+      "tr": "to make coffee"
+     },
+     {
+      "text": "eine Tasse Kaffee",
+      "tr": "a cup of coffee"
+     },
+     {
+      "text": "schwarzer Kaffee",
+      "tr": "black coffee"
+     },
+     {
+      "text": "Kaffee und Kuchen",
+      "tr": "coffee and cake"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das ist kalter Kaffee.",
+      "tr": "That is cold coffee.",
+      "kind": "idiom",
+      "meaning": "that is old news",
+      "register": "colloquial"
+     },
+     {
+      "text": "der Kaffeeklatsch",
+      "tr": "coffee gossip",
+      "kind": "fixed expression",
+      "meaning": "an afternoon get-together with coffee, cake and chat",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Käffchen",
+      "register": "colloquial",
+      "nuance": "a nice little coffee – cosy"
+     },
+     {
+      "word": "Muckefuck",
+      "register": "colloquial",
+      "nuance": "weak coffee or coffee substitute – jokey"
+     },
+     {
+      "word": "Bohnenkaffee",
+      "register": "dated",
+      "nuance": "real coffee from beans, as opposed to substitutes"
+     }
+    ],
+    "etymology": {
+     "text": "From French café, from Italian caffè, from Ottoman Turkish قهوه (kahve), from Arabic قَهْوة (qahwa). First attested in the 17th century. Doublet of Café.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kaffee travelled from Arabic قَهْوَة (qahwa) through Ottoman Turkish kahve, Italian caffè and French café; Turkish kahve, Greek καφές, Russian кофе and Hebrew קָפֶה belong to the same chain."
+    ],
+    "pitfalls": [
+     "der Kaffee (the drink, in Germany usually stressed on the first syllable: KAF-fee) – das Café (a coffee house, stressed on the second: Ca-FÉ).",
+     "der Kaffee is masculine; plural Kaffees."
+    ],
+    "subtleties": [
+     "Kaffee kochen is the everyday way to say “make coffee”, even with a machine.",
+     "Austria stresses Kaf-FEE and has its own coffee words: Melange, Brauner, Verlängerter."
+    ]
+   }
+  },
+  {
+   "id": "de:Milch",
+   "lemma": "Milch",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "drink.milk"
+   ],
+   "gender": "FEM",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Milch",
+    "N;ACC;SG": "Milch",
+    "N;DAT;SG": "Milch",
+    "N;GEN;SG": "Milch"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A glass of milk for children, milk in coffee – everyday and wholesome.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "milk",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.milk"
+     },
+     {
+      "id": "s2",
+      "def": "milky liquid (of plants; a lotion: Reinigungsmilch)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder trinken jeden Morgen Milch.",
+      "tr": "The children drink milk every morning.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich trinke Kaffee mit Milch und ohne Zucker.",
+      "tr": "I drink coffee with milk and no sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben keine Milch mehr.",
+      "tr": "We’ve run out of milk.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frische Milch",
+      "tr": "fresh milk"
+     },
+     {
+      "text": "ein Glas Milch",
+      "tr": "a glass of milk"
+     },
+     {
+      "text": "die Kuhmilch / Hafermilch",
+      "tr": "cow’s milk / oat milk"
+     },
+     {
+      "text": "der Milchkaffee",
+      "tr": "milky coffee"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "das Land, wo Milch und Honig fließen",
+      "tr": "the land where milk and honey flow",
+      "kind": "idiom",
+      "meaning": "a land of plenty (from the Bible)",
+      "register": "neutral"
+     },
+     {
+      "text": "die Milchmädchenrechnung",
+      "tr": "the milkmaid’s calculation",
+      "kind": "colloquial",
+      "meaning": "a naive calculation that ignores the facts",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Milch is the only word.",
+    "etymology": {
+     "text": "From Middle High German milch, from Old High German miluh, from Proto-West Germanic *meluk, from Proto-Germanic *meluks, from Proto-Indo-European *h₂melǵ-.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "die Milchstraße is the Milky Way: Greek γαλαξίας, from γάλα (milk), gave English galaxy – the same picture of milk spilled across the sky."
+    ],
+    "pitfalls": [
+     "die Milch is feminine (Greek το γάλα and Russian молоко are neuter).",
+     "No plural in normal use."
+    ],
+    "subtleties": [
+     "In the EU the name Milch is reserved for animal milk, so oat milk is sold as Haferdrink – though people say Hafermilch."
+    ]
+   }
+  },
+  {
+   "id": "de:Saft",
+   "lemma": "Saft",
+   "pos": "NOUN",
+   "senses": [
+    "drink.juice",
+    "nature.sap",
+    "tech.electricity"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Säfte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Saft",
+    "N;ACC;SG": "Saft",
+    "N;DAT;SG": "Saft",
+    "N;GEN;SG": "Saftes",
+    "N;NOM;PL": "Säfte",
+    "N;ACC;PL": "Säfte",
+    "N;DAT;PL": "Säften",
+    "N;GEN;PL": "Säfte"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Safts"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Apple juice for the children, orange juice at breakfast – and colloquially “power”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "juice (the drink)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.juice"
+     },
+     {
+      "id": "s2",
+      "def": "sap of plants; meat juices, gravy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.sap"
+     },
+     {
+      "id": "s3",
+      "def": "power, electricity, battery charge",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "tech.electricity"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Kinder trinken gern Apfelsaft.",
+      "tr": "The children like drinking apple juice.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kaufe zwei Flaschen Saft.",
+      "tr": "I’m buying two bottles of juice.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Handy hat keinen Saft mehr.",
+      "tr": "My phone’s battery is dead.",
+      "register": "colloquial",
+      "context": "phone",
+      "sense": "s3"
+     },
+     {
+      "text": "Im Frühling steigt der Saft in die Bäume.",
+      "tr": "In spring the sap rises in the trees.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frisch gepresster Saft",
+      "tr": "freshly squeezed juice"
+     },
+     {
+      "text": "der Orangensaft",
+      "tr": "orange juice"
+     },
+     {
+      "text": "ein Glas Saft",
+      "tr": "a glass of juice"
+     },
+     {
+      "text": "die Saftschorle",
+      "tr": "juice with sparkling water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "ohne Saft und Kraft",
+      "tr": "without juice and strength",
+      "kind": "idiom",
+      "meaning": "feeble, insipid",
+      "register": "colloquial"
+     },
+     {
+      "text": "im eigenen Saft schmoren",
+      "tr": "to stew in one’s own juice",
+      "kind": "idiom",
+      "meaning": "to be left alone with one’s problems",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Nektar",
+      "register": "technical",
+      "nuance": "nectar – a juice drink with added water and sugar, legally less fruit than Saft"
+     },
+     {
+      "word": "Schorle",
+      "register": "neutral",
+      "nuance": "juice (or wine) mixed with sparkling water – very popular in Germany"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German saf, saft, from Old High German saf, from Proto-West Germanic *sap (“juice, sap”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Saft and English sap are the same Germanic word."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: der Saft – die Säfte.",
+     "der Saft is masculine."
+    ],
+    "subtleties": [
+     "Colloquially Saft is power: Der Akku hat keinen Saft mehr (the battery is flat)."
+    ]
+   }
+  },
+  {
+   "id": "de:Wein",
+   "lemma": "Wein",
+   "pos": "NOUN",
+   "senses": [
+    "drink.wine",
+    "nature.grapevine"
+   ],
+   "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Weine",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Wein",
+    "N;ACC;SG": "Wein",
+    "N;DAT;SG": "Wein",
+    "N;GEN;SG": "Weines",
+    "N;NOM;PL": "Weine",
+    "N;ACC;PL": "Weine",
+    "N;DAT;PL": "Weinen",
+    "N;GEN;PL": "Weine"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Weins"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Riesling from the Rhine and Moselle, a glass with dinner, wine festivals in autumn.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wine",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.wine"
+     },
+     {
+      "id": "s2",
+      "def": "grapevine; grapes (Wein anbauen, wilder Wein)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.grapevine"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zum Abendessen trinken wir ein Glas Wein.",
+      "tr": "With dinner we drink a glass of wine.",
+      "register": "neutral",
+      "context": "dinner",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich kaufe eine Flasche Rotwein.",
+      "tr": "I’m buying a bottle of red wine.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Rhein wächst viel Wein.",
+      "tr": "A lot of wine grows along the Rhine.",
+      "register": "neutral",
+      "context": "agriculture",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Glas Wein",
+      "tr": "a glass of wine"
+     },
+     {
+      "text": "Rotwein / Weißwein",
+      "tr": "red / white wine"
+     },
+     {
+      "text": "trockener Wein",
+      "tr": "dry wine"
+     },
+     {
+      "text": "die Weinprobe",
+      "tr": "wine tasting"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "jemandem reinen Wein einschenken",
+      "tr": "to pour someone pure wine",
+      "kind": "idiom",
+      "meaning": "to tell someone the plain truth",
+      "register": "neutral"
+     },
+     {
+      "text": "Wasser predigen und Wein trinken",
+      "tr": "to preach water and drink wine",
+      "kind": "saying",
+      "meaning": "to be a hypocrite (after Heinrich Heine)",
+      "register": "neutral"
+     },
+     {
+      "text": "Im Wein liegt Wahrheit.",
+      "tr": "In wine there is truth.",
+      "kind": "proverb",
+      "meaning": "people speak the truth when drunk (Latin in vino veritas)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Rebensaft",
+      "register": "humorous",
+      "nuance": "“juice of the vine” – jokey or poetic"
+     },
+     {
+      "word": "Tropfen",
+      "register": "colloquial",
+      "nuance": "ein guter Tropfen – a good wine (lit. a good drop)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wīn, from Old High German wīn, from Proto-West Germanic *wīn, borrowed from Latin vīnum.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wein, English wine and Russian вино come from Latin vīnum, a cousin of Ancient Greek οἶνος (as in oenology); modern Greek says κρασί."
+    ],
+    "pitfalls": [
+     "der Wein (wine) – weinen (to cry): Ich weine = I am crying.",
+     "der Wein is masculine; plural Weine."
+    ],
+    "subtleties": [
+     "Wein also means the vine itself; the grape is die Weintraube."
+    ]
+   }
+  },
+  {
+   "id": "de:Bier",
+   "lemma": "Bier",
+   "pos": "NOUN",
+   "senses": [
+    "drink.beer",
+    "abstract.concern"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Biere",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Bier",
+    "N;ACC;SG": "Bier",
+    "N;DAT;SG": "Bier",
+    "N;GEN;SG": "Bieres",
+    "N;NOM;PL": "Biere",
+    "N;ACC;PL": "Biere",
+    "N;DAT;PL": "Bieren",
+    "N;GEN;PL": "Biere"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Biers"
+    ],
+    "N;NOM;PL": [
+     "Bier"
+    ],
+    "N;ACC;PL": [
+     "Bier"
+    ],
+    "N;GEN;PL": [
+     "Bier"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Beer gardens, the Oktoberfest, a cool beer after work – part of German culture.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beer; a glass of beer",
+      "register": [
+       "neutral"
+      ],
+      "concept": "drink.beer"
+     },
+     {
+      "id": "s2",
+      "def": "business, concern (Das ist nicht mein Bier.)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "abstract.concern"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Biergarten trinken wir ein Bier.",
+      "tr": "In the beer garden we drink a beer.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1"
+     },
+     {
+      "text": "Er kauft Bier für die Party.",
+      "tr": "He’s buying beer for the party.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist nicht dein Bier!",
+      "tr": "That’s none of your business!",
+      "register": "colloquial",
+      "context": "argument",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Glas Bier",
+      "tr": "a glass of beer"
+     },
+     {
+      "text": "ein kühles Bier",
+      "tr": "a cold beer"
+     },
+     {
+      "text": "alkoholfreies Bier",
+      "tr": "alcohol-free beer"
+     },
+     {
+      "text": "Bier vom Fass",
+      "tr": "draught beer"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das ist nicht mein Bier.",
+      "tr": "That is not my beer.",
+      "kind": "idiom",
+      "meaning": "that is not my business",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Pils",
+      "register": "neutral",
+      "nuance": "pilsner – the most common kind; ein Pils = a beer"
+     },
+     {
+      "word": "Halbe",
+      "register": "regional",
+      "nuance": "Bavaria: half a litre of beer (eine Halbe)"
+     },
+     {
+      "word": "Bierchen",
+      "register": "colloquial",
+      "nuance": "a (nice little) beer – cosy"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German bier, from Old High German bior, from Proto-West Germanic *beuʀ, from Proto-Germanic *beuzą (“beer”). Akin to Dutch bier, English beer, Icelandic bjór.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Bavarian Reinheitsgebot of 1516 allowed only water, barley and hops in beer – yeast was not yet understood.",
+     "Italian birra, Greek μπίρα and Turkish bira all go back to German Bier."
+    ],
+    "pitfalls": [
+     "das Bier is neuter (Greek η μπίρα feminine, Russian пиво neuter).",
+     "Ordering: zwei Bier (two glasses); zwei Biere means two kinds or two bottles."
+    ],
+    "subtleties": [
+     "Beer is jokingly called flüssiges Brot (liquid bread), especially in Bavaria."
+    ]
+   }
+  },
+  {
+   "id": "de:Frühstück",
+   "lemma": "Frühstück",
+   "pos": "NOUN",
+   "senses": [
+    "meal.breakfast"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frühstücke",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "früh",
+      "role": "modifier"
+     },
+     {
+      "part": "Stück",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Frühstück",
+    "N;ACC;SG": "Frühstück",
+    "N;DAT;SG": "Frühstück",
+    "N;GEN;SG": "Frühstücks",
+    "N;NOM;PL": "Frühstücke",
+    "N;ACC;PL": "Frühstücke",
+    "N;DAT;PL": "Frühstücken",
+    "N;GEN;PL": "Frühstücke"
+   },
+   "formsAlt": {
+    "N;GEN;SG": [
+     "Frühstückes"
+    ]
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh rolls, jam, cheese and a boiled egg on a Sunday morning.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "breakfast",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.breakfast"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Frühstück ist um acht Uhr.",
+      "tr": "Breakfast is at eight o’clock.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Frühstück esse ich Brot mit Käse.",
+      "tr": "For breakfast I eat bread and cheese.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Sonntag machen wir ein großes Frühstück.",
+      "tr": "On Sunday we have a big breakfast.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zum Frühstück",
+      "tr": "for breakfast"
+     },
+     {
+      "text": "das Frühstück machen",
+      "tr": "to make breakfast"
+     },
+     {
+      "text": "Frühstück im Bett",
+      "tr": "breakfast in bed"
+     },
+     {
+      "text": "frühstücken",
+      "tr": "to have breakfast (verb)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Frühstücke wie ein Kaiser, iss zu Mittag wie ein König und zu Abend wie ein Bettelmann.",
+      "tr": "Breakfast like an emperor, lunch like a king and dine like a beggar.",
+      "kind": "proverb",
+      "meaning": "eat most in the morning, least in the evening",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Zmorge",
+      "register": "regional",
+      "nuance": "Switzerland, colloquial"
+     },
+     {
+      "word": "Brunch",
+      "register": "neutral",
+      "nuance": "a late, long breakfast and lunch in one – an anglicism"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German vrüestücke (14th c.). Equivalent to früh (“early”) + Stück (“piece”, here in the sense of “bite”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Frühstück is an “early piece” (of bread); English breakfast breaks the night’s fast; Turkish kahvaltı comes from kahve altı, “under (before) the coffee”."
+    ],
+    "pitfalls": [
+     "To “have breakfast” Germans usually use the verb frühstücken: Wir frühstücken um acht.",
+     "das Frühstück is neuter (das Stück)."
+    ],
+    "subtleties": [
+     "In hotels: Übernachtung mit Frühstück = bed and breakfast."
+    ]
+   }
+  },
+  {
+   "id": "de:Mittagessen",
+   "lemma": "Mittagessen",
+   "pos": "NOUN",
+   "senses": [
+    "meal.lunch"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mittagessen",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Mittag",
+      "role": "modifier"
+     },
+     {
+      "part": "Essen",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Mittagessen",
+    "N;ACC;SG": "Mittagessen",
+    "N;DAT;SG": "Mittagessen",
+    "N;GEN;SG": "Mittagessens",
+    "N;NOM;PL": "Mittagessen",
+    "N;ACC;PL": "Mittagessen",
+    "N;DAT;PL": "Mittagessen",
+    "N;GEN;PL": "Mittagessen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The hot midday meal – in many families and schools the main meal of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lunch, the midday meal",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.lunch"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Mittagessen ist fertig!",
+      "tr": "Lunch is ready!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Was gibt es heute zum Mittagessen?",
+      "tr": "What’s for lunch today?",
+      "register": "neutral",
+      "context": "canteen",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich koche das Mittagessen für die Kinder.",
+      "tr": "I’m cooking lunch for the children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Mittag essen",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "das Mittagessen kochen",
+      "tr": "to cook lunch"
+     },
+     {
+      "text": "beim Mittagessen",
+      "tr": "at lunch"
+     },
+     {
+      "text": "die Mittagspause",
+      "tr": "lunch break"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Mahlzeit!",
+      "tr": "Mealtime!",
+      "kind": "fixed expression",
+      "meaning": "a lunchtime greeting among colleagues (also “enjoy your meal”)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mittag",
+      "register": "colloquial",
+      "nuance": "Was gibt’s zu Mittag? – the meal named by the time"
+     },
+     {
+      "word": "Lunch",
+      "register": "colloquial",
+      "nuance": "an anglicism, business and city life"
+     },
+     {
+      "word": "Mittagstisch",
+      "register": "neutral",
+      "nuance": "a restaurant’s set lunch menu"
+     }
+    ],
+    "etymology": {
+     "text": "From Mittag (“midday”) + Essen (“meal”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek μεσημεριανό (from μεσημέρι, midday) and Turkish öğle yemeği (noon meal) name lunch by the time of day, just like Mittagessen."
+    ],
+    "pitfalls": [
+     "das Mittagessen is neuter, like das Essen (the meal); plural Mittagessen.",
+     "Mittag = noon, Mittagessen = the meal, Nachmittag = afternoon."
+    ],
+    "subtleties": [
+     "At lunchtime colleagues greet each other with Mahlzeit! (“mealtime!”)."
+    ]
+   }
+  },
+  {
+   "id": "de:Abendessen",
+   "lemma": "Abendessen",
+   "pos": "NOUN",
+   "senses": [
+    "meal.dinner"
+   ],
+   "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Abendessen",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Abend",
+      "role": "modifier"
+     },
+     {
+      "part": "Essen",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;NOM;SG": "Abendessen",
+    "N;ACC;SG": "Abendessen",
+    "N;DAT;SG": "Abendessen",
+    "N;GEN;SG": "Abendessens",
+    "N;NOM;PL": "Abendessen",
+    "N;ACC;PL": "Abendessen",
+    "N;DAT;PL": "Abendessen",
+    "N;GEN;PL": "Abendessen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The evening meal with the family – warm or, in the old style, bread and cold cuts.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "dinner, supper, the evening meal",
+      "register": [
+       "neutral"
+      ],
+      "concept": "meal.dinner"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Abendessen ist um sieben.",
+      "tr": "Dinner is at seven.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir laden Freunde zum Abendessen ein.",
+      "tr": "We’re inviting friends to dinner.",
+      "register": "neutral",
+      "context": "social life",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Abendessen gibt es Suppe und Brot.",
+      "tr": "For dinner there’s soup and bread.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Abend essen",
+      "tr": "to have dinner"
+     },
+     {
+      "text": "das Abendessen kochen",
+      "tr": "to cook dinner"
+     },
+     {
+      "text": "beim Abendessen",
+      "tr": "at dinner"
+     },
+     {
+      "text": "ein romantisches Abendessen",
+      "tr": "a romantic dinner"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Abendbrot",
+      "register": "regional",
+      "nuance": "north and east: a simple, mostly cold evening meal of bread and toppings"
+     },
+     {
+      "word": "Nachtmahl",
+      "register": "regional",
+      "nuance": "Austria"
+     },
+     {
+      "word": "Znacht",
+      "register": "regional",
+      "nuance": "Switzerland, colloquial"
+     },
+     {
+      "word": "Dinner",
+      "register": "formal",
+      "nuance": "a festive or business dinner – an anglicism"
+     }
+    ],
+    "etymology": {
+     "text": "From Abend (“evening”) + Essen (“meal”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German names its meals by the time of day – Frühstück (early), Mittagessen (midday), Abendessen (evening) – and Greek does the same: πρωινό, μεσημεριανό, βραδινό."
+    ],
+    "pitfalls": [
+     "das Abendessen is neuter; plural Abendessen.",
+     "Abend (evening) is masculine, but the compound takes the gender of its last part: das Essen → das Abendessen."
+    ],
+    "subtleties": [
+     "Guten Appetit! is said before any meal; Abendbrot hints at a simple cold supper."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

@@ -1,0 +1,109 @@
+{
+ "field": "interjections",
+ "title": "Interjections and reactions",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "intj.cheese",
+   "gloss": "‘cheese!’ (said when taking a photo)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "intj.hello.phone",
+   "gloss": "hello? (answering the phone; calling for attention)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "intj.hereyouare",
+   "gloss": "here you are (handing something over)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "intj.man",
+   "gloss": "man!, boy oh boy! (exclamation of surprise or annoyance)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "intj.notatall",
+   "gloss": "not at all! (a modest reply to a compliment: 哪里哪里)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "intj.ok",
+   "gloss": "OK, all right (agreement)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "intj.pardon",
+   "gloss": "pardon? sorry? (asking someone to repeat)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "intj.sowhat",
+   "gloss": "so? so what? (Und? / Na und?)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "intj.thankgod",
+   "gloss": "praise be to God, thank God",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "intj.well",
+   "gloss": "well …, so … (starting or resuming)",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "intj.yes.triumph",
+   "gloss": "Yes! (a cry of triumph, like a fist pump)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  },
+  {
+   "id": "intj.really",
+   "gloss": "really? (surprise)",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "intj.exactly",
+   "gloss": "exactly!",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "intj.noway",
+   "gloss": "no way!",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "intj.isee",
+   "gloss": "I see",
+   "tier": 1,
+   "rank": 4
+  }
+ ]
+}

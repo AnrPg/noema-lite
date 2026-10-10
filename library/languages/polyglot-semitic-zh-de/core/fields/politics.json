@@ -1,0 +1,207 @@
+{
+ "field": "politics",
+ "title": "Politics and society",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "pol.assembly",
+   "gloss": "assembly, diet (parliament: Bundestag, Landtag)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "pol.authorities",
+   "gloss": "the higher-ups, the authorities",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "pol.battlefield",
+   "gloss": "battlefield",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "pol.chamber",
+   "gloss": "chamber (an institution: chamber of commerce, of parliament)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "pol.conqueror",
+   "gloss": "conqueror; opener",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "pol.council",
+   "gloss": "town council, city authorities",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "pol.dynasty",
+   "gloss": "dynasty, ruling house",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "pol.farright",
+   "gloss": "Nazi, far-right",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "pol.federalstate",
+   "gloss": "state (of a federation: a US state)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "pol.green",
+   "gloss": "green, ecological; of the Green party",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "pol.league",
+   "gloss": "league, union (of states)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  },
+  {
+   "id": "pol.left",
+   "gloss": "the left (in politics)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true
+  },
+  {
+   "id": "pol.ministry",
+   "gloss": "ministry, government department",
+   "tier": 2,
+   "rank": 13,
+   "pending": true
+  },
+  {
+   "id": "pol.peace",
+   "gloss": "peace (as opposed to war); well-being",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "pol.police",
+   "gloss": "the police (the force)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true
+  },
+  {
+   "id": "pol.portfolio",
+   "gloss": "portfolio (of a minister)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true
+  },
+  {
+   "id": "pol.right",
+   "gloss": "the right (in politics)",
+   "tier": 2,
+   "rank": 17,
+   "pending": true
+  },
+  {
+   "id": "pol.throne",
+   "gloss": "throne",
+   "tier": 2,
+   "rank": 18,
+   "pending": true
+  },
+  {
+   "id": "pol.vote",
+   "gloss": "vote, ballot",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "pol.zhoudynasty",
+   "gloss": "the Zhou dynasty",
+   "tier": 2,
+   "rank": 20,
+   "pending": true
+  },
+  {
+   "id": "pol.government",
+   "gloss": "government",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "pol.citizen",
+   "gloss": "citizen",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "pol.election",
+   "gloss": "election",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "pol.party",
+   "gloss": "party (political)",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "pol.empire",
+   "gloss": "empire",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "pol.king",
+   "gloss": "king",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "pol.queen",
+   "gloss": "queen",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "pol.war",
+   "gloss": "war",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "pol.revolution",
+   "gloss": "revolution",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "pol.independence",
+   "gloss": "independence",
+   "tier": 1,
+   "rank": 12
+  }
+ ]
+}

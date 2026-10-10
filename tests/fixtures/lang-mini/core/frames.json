@@ -1,0 +1,28 @@
+{
+ "frames": [
+  {
+   "id": "fr.eat.def",
+   "meaning": "PERSON eats the VEGETABLE (one, definite)"
+  },
+  {
+   "id": "fr.eat.indef",
+   "meaning": "PERSON eats a VEGETABLE (one, indefinite)"
+  },
+  {
+   "id": "fr.eat.generic",
+   "meaning": "PERSON eats VEGETABLES (in general)"
+  },
+  {
+   "id": "fr.eat.and",
+   "meaning": "PERSON eats the VEGETABLE and the VEGETABLE"
+  },
+  {
+   "id": "fr.eat.def.pl",
+   "meaning": "PERSON eats the VEGETABLES (several, definite)"
+  },
+  {
+   "id": "fr.eat.def2",
+   "meaning": "PERSON eats the VEGETABLE (one, definite) — second tier"
+  }
+ ]
+}

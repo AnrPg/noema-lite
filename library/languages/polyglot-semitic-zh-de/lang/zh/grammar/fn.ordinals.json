@@ -1,0 +1,588 @@
+{
+ "function": "fn.ordinals",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "num.base",
+   "value": "decimal"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-past"
+  },
+  {
+   "feature": "time.monthNames",
+   "value": "numbered"
+  },
+  {
+   "feature": "time.dayNames",
+   "value": "numbered"
+  },
+  {
+   "feature": "time.calendar",
+   "value": "gregorian-plus-traditional"
+  }
+ ],
+ "summary": "Ordinals put 第 dì before the number: 第一 ‘first’, 第二 ‘second’ … 第十 ‘tenth’, 第十一, 第一百 — no number is irregular, and 一 keeps its first tone (dì-yī). Before a noun the measure word follows: 第三个孩子 ‘the third child’, 第二本书 ‘the second book’; nouns that count themselves take none: 第一天 ‘the first day’, 第二年 ‘the following year’. ‘Which one (in order)?’ is 第几: 他是第几个？. Many numbered things use the bare number as their ordinal, without 第: months (三月 ‘March’), weekdays (星期三 ‘Wednesday’), dates (五月一号 ‘1 May’), floors (三楼), centuries (二十一世纪) and decades (八十年代 ‘the eighties’). ‘Last’ is 最后 (最后一天 ‘the last day’); ‘half’ is 一半 on its own (我吃了一半) and 半 before a measure word or after the hour (半个小时, 三点半); a quarter of an hour is 一刻: 三点一刻 3:15, 三点三刻 3:45. Dates and times run from big to small: 2026年十月九号星期五上午十点一刻.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Ordinal",
+    "Pinyin",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "第一",
+     "dì-yī",
+     "first"
+    ],
+    [
+     "第二",
+     "dì-èr",
+     "second"
+    ],
+    [
+     "第三",
+     "dì-sān",
+     "third"
+    ],
+    [
+     "第四",
+     "dì-sì",
+     "fourth"
+    ],
+    [
+     "第五",
+     "dì-wǔ",
+     "fifth"
+    ],
+    [
+     "第六",
+     "dì-liù",
+     "sixth"
+    ],
+    [
+     "第七",
+     "dì-qī",
+     "seventh"
+    ],
+    [
+     "第八",
+     "dì-bā",
+     "eighth"
+    ],
+    [
+     "第九",
+     "dì-jiǔ",
+     "ninth"
+    ],
+    [
+     "第十",
+     "dì-shí",
+     "tenth"
+    ],
+    [
+     "第十一",
+     "dì-shíyī",
+     "eleventh"
+    ],
+    [
+     "第二十",
+     "dì-èrshí",
+     "twentieth"
+    ],
+    [
+     "第一百",
+     "dì-yìbǎi",
+     "hundredth"
+    ],
+    [
+     "第几？",
+     "dì-jǐ?",
+     "which (in order)?"
+    ]
+   ],
+   "caption": "Ordinals: 第 + any number",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The measure word comes after",
+   "text": "第 + number + measure word + noun: 第三个孩子, 第二本书. Nouns that count themselves need none: 第一天, 第二年, 第五课 ‘lesson five’."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Thing",
+    "Chinese",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "month",
+     "三月",
+     "March"
+    ],
+    [
+     "weekday",
+     "星期三",
+     "Wednesday"
+    ],
+    [
+     "date",
+     "五月一号",
+     "1 May"
+    ],
+    [
+     "floor",
+     "三楼",
+     "the third floor"
+    ],
+    [
+     "century",
+     "二十一世纪",
+     "the 21st century"
+    ],
+    [
+     "decade",
+     "八十年代",
+     "the eighties"
+    ],
+    [
+     "anniversary",
+     "十周年",
+     "the 10th anniversary"
+    ]
+   ],
+   "caption": "No 第: bare numbers read as ordinals",
+   "typology": [
+    {
+     "feature": "time.monthNames",
+     "value": "numbered"
+    },
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "三月 — March (a name)",
+     "points": [
+      "我三月去北京。 I’m going to Beijing in March."
+     ]
+    },
+    {
+     "title": "第三个月 — the third month (of a count)",
+     "points": [
+      "这是我在北京的第三个月。 This is my third month in Beijing."
+     ]
+    },
+    {
+     "title": "三个月 — three months (a length)",
+     "points": [
+      "我在北京待了三个月。 I stayed in Beijing for three months."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Time",
+    "Chinese",
+    "Pinyin"
+   ],
+   "rows": [
+    [
+     "3:00",
+     "三点",
+     "sān diǎn"
+    ],
+    [
+     "3:05",
+     "三点零五分",
+     "sān diǎn líng wǔ fēn"
+    ],
+    [
+     "3:15",
+     "三点一刻 / 三点十五分",
+     "sān diǎn yí kè / shíwǔ fēn"
+    ],
+    [
+     "3:30",
+     "三点半",
+     "sān diǎn bàn"
+    ],
+    [
+     "3:45",
+     "三点三刻 / 三点四十五分",
+     "sān diǎn sān kè / sìshíwǔ fēn"
+    ],
+    [
+     "2:55",
+     "差五分三点",
+     "chà wǔ fēn sān diǎn (‘five short of three’)"
+    ],
+    [
+     "2:00",
+     "两点",
+     "liǎng diǎn (not 二点)"
+    ]
+   ],
+   "caption": "The clock in full: 点 o’clock · 分 minutes · 刻 quarter · 半 half",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Half and quarter",
+   "text": "半 is half PAST the hour: 三点半 = 3:30. There is no *两刻: half an hour is 半个小时. 一刻 and 三刻 are the only quarters; 一刻钟 is a quarter of an hour as a length (我等了一刻钟)."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "2026年",
+    "十月",
+    "九号",
+    "星期五",
+    "上午",
+    "十点一刻"
+   ],
+   "caption": "Big to small: year, month, day, weekday, part of the day, time",
+   "typology": [
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Years are read digit by digit",
+   "text": "一九九五年 yī jiǔ jiǔ wǔ nián, 二〇二六年 èr líng èr liù nián — not ‘nineteen ninety-five’. In writing years are mostly digits: 1995年."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "半 — bound",
+     "points": [
+      "半个小时 half an hour",
+      "三点半 half past three"
+     ]
+    },
+    {
+     "title": "一半 — free",
+     "points": [
+      "我吃了一半。 I ate half.",
+      "一半的学生是女孩。 Half of the students are girls."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "一 keeps its tone",
+   "text": "In ordinals, dates and numbers read digit by digit, 一 stays yī: 第一 dì-yī, 一月 yīyuè, 一号 yī hào, 一九九五年 yī jiǔ jiǔ wǔ nián. Before a measure word or 百 / 千 it changes as usual: 一个 yí ge, 一天 yì tiān, 第一百 dì-yìbǎi."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "最后 — the last",
+   "text": "最后 + number + measure word: 最后一个 ‘the last one’, 最后一天 ‘the last day’. ‘Last’ meaning ‘previous’ is 上: 上个星期 ‘last week’. As an adverb 最后 is ‘finally, in the end’ (C19)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking",
+   "text": "他是第几个？ ‘what number is he (in the line)?’ · 今天几月几号？ ‘what’s the date today?’ · 现在几点？ ‘what time is it?’ · 你的生日是几月几号？"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a rank or a place in a series (the third child, the first day)? → 第 + number (+ measure word).",
+   "Does the noun count itself (天, 年, 课)? → no measure word: 第一天.",
+   "Is it a month, a weekday, a date, a floor, a century or a decade? → the bare number, no 第.",
+   "Is it ‘last’? → 最后 (final) or 上 (previous).",
+   "Is it half? → 半 before a measure word or after the hour; 一半 on its own.",
+   "Is it a quarter of an hour? → 一刻 (15), 三刻 (45) — never *两刻.",
+   "Is it a date or a time? → big to small: year, month, day, weekday, time."
+  ],
+  "steps": [
+   "Choose: 第 + number, or the bare number.",
+   "Add the measure word if the noun needs one.",
+   "Order dates and times from big to small."
+  ]
+ },
+ "traps": [
+  "*第两 → 第二 (ordinals always use 二).",
+  "*第三月 for ‘March’ → 三月; 第三个月 is ‘the third month (of a stay)’.",
+  "三楼 is ‘the third floor’; ‘three storeys’ is 三层.",
+  "*两刻 → 半 (三点半, 半个小时).",
+  "*第二十一世纪 → 二十一世纪.",
+  "第一 is dì-yī, never *dì-yí.",
+  "*最后个月 for ‘last month’ → 上个月."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:di",
+   "zh:diyi",
+   "zh:dier",
+   "zh:disan",
+   "zh:disi",
+   "zh:diwu",
+   "zh:diliu",
+   "zh:diqi",
+   "zh:diba",
+   "zh:dijiu",
+   "zh:dishi",
+   "zh:zuihou",
+   "zh:yiban",
+   "zh:ban",
+   "zh:ke",
+   "zh:shiji",
+   "zh:niandai",
+   "zh:zhounian",
+   "zh:hao",
+   "zh:dian"
+  ]
+ },
+ "needs": {
+  "NUM": 10
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.ordinals"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘the second book’",
+   "options": [
+    "第二本书",
+    "第两本书",
+    "二本书"
+   ],
+   "answer": "第二本书",
+   "why": "Ordinals use 二, and the measure word follows the ordinal."
+  },
+  {
+   "q": "‘March’",
+   "options": [
+    "三月",
+    "第三月",
+    "三个月"
+   ],
+   "answer": "三月",
+   "why": "Months are named with the bare number; 三个月 is ‘three months’."
+  },
+  {
+   "q": "3:15",
+   "options": [
+    "三点一刻",
+    "三点一半",
+    "一刻三点"
+   ],
+   "answer": "三点一刻",
+   "why": "一刻 is a quarter of an hour; the hour comes first."
+  },
+  {
+   "q": "3:30",
+   "options": [
+    "三点半",
+    "三点两刻",
+    "半三点"
+   ],
+   "answer": "三点半",
+   "why": "半 is half past; there is no 两刻."
+  },
+  {
+   "q": "‘the 21st century’",
+   "options": [
+    "二十一世纪",
+    "第二十一世纪",
+    "二十一个世纪"
+   ],
+   "answer": "二十一世纪",
+   "why": "Centuries take the bare number; 二十一个世纪 would be ‘twenty-one centuries’."
+  },
+  {
+   "q": "‘the last day’",
+   "options": [
+    "最后一天",
+    "上一天",
+    "天最后"
+   ],
+   "answer": "最后一天",
+   "why": "最后 + number + noun; 上 means ‘previous’."
+  },
+  {
+   "q": "How is 第一 said?",
+   "options": [
+    "dì-yī",
+    "dì-yí",
+    "dì-yì"
+   ],
+   "answer": "dì-yī",
+   "why": "In ordinals 一 keeps its first tone."
+  },
+  {
+   "q": "‘Today is the 9th of October.’",
+   "options": [
+    "今天是十月九号。",
+    "今天是九号十月。",
+    "今天是第九十月。"
+   ],
+   "answer": "今天是十月九号。",
+   "why": "Big to small: the month, then the day."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek ordinals are adjectives that agree (πρώτος, πρώτη, πρώτο), and dates use cardinals except the first (πρώτη Μαΐου but δύο Μαΐου); Chinese ordinals never agree, and dates use plain numbers throughout: 五月一号, 五月二号."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian ordinals agree like adjectives (первый, первая), and dates use the ordinal (первое мая); Chinese dates use the plain number (五月一号) and 第 never changes."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish ordinals agree (primero / primera) and dates use cardinals except, often, the first (el uno / primero de mayo); Chinese 第 + number never changes."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English has irregular ordinals (first, second, third) and writes dates small-to-big or month-first; Chinese ordinals are all regular (第 + number) and dates go big → small: 2026年十月九号."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French says le premier but then cardinals for dates (le deux mai) — like Chinese 五月二号 with a plain number; French ordinals -ième are regular after premier, Chinese ones all regular with 第."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German ordinals take adjective endings (der erste, am dritten Tag) and dates use them (am ersten Mai); German writes the date small → big (1. Mai 2026), Chinese big → small (2026年五月一号), with plain numbers."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has irregular first ordinals (पहला, दूसरा, तीसरा, चौथा), then -वाँ (पाँचवाँ), agreeing in gender; Chinese has 第 + number for all."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian adds -om to the number (dovvom ‘second’, sevvom ‘third’) — one suffix for all, close to Chinese 第 + number; ‘first’ is avval or yekom."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic ordinals are adjectives of the pattern فَاعِل that agree in gender (الثَّالِثُ / الثَّالِثَةُ ‘the third’), with أَوَّل ‘first’; Chinese 第三 never changes."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew ordinals agree in gender (רִאשׁוֹן / רִאשׁוֹנָה) and exist only up to ten; above ten the cardinal is used. Chinese builds every ordinal with 第."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish has one ordinal suffix -(i)nci with vowel harmony (birinci, ikinci, üçüncü) — one rule for all numbers, as Chinese has one prefix 第."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese uses the same 第 (第一 だいいち) as well as 〜番目 (二番目 ‘the second’); dates and years also go big → small: 2026年10月9日."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean uses Sino-Korean 제 (제일 ‘first’, from 第一) and native 첫째, 둘째, 셋째; dates go big → small, like Chinese."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish ordinals are words of their own (ensimmäinen, toinen, kolmas …) and take case endings; Chinese ordinals are 第 + the unchanged number."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian adds -dik (harmadik ‘third’, negyedik ‘fourth’) after első, második; like Chinese, dates run big → small (2026. október 9.)."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili forms ordinals with -a + number (kitabu cha tatu ‘the third book’), with kwanza ‘first’ and pili ‘second’; Chinese uses 第 + number + measure word: 第三本书."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese thứ + number (thứ ba ‘third’, thứ nhất ‘first’) works like 第; its weekdays are numbered too (thứ hai ‘Monday’), as 星期一 is."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Words in polysynthetic languages are built from many suffixes; Chinese ordinals are the opposite extreme — one separate prefix, 第, before an unchanged number, the same for every number."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.ordinals",
+   "note": "der erste, zweite, dritte … -te / -ste with adjective endings; dates with ordinals (am ersten Mai), written small → big (1. Mai 2026); Chinese: 第 + number, dates big → small with plain numbers (2026年五月一号)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.ordinals",
+   "note": "Arabic ordinals are adjectives that agree in gender (الْيَوْمُ الثَّالِثُ / السَّنَةُ الثَّالِثَةُ); Chinese 第三天, 第三年 — 第 never changes."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.ordinals",
+   "note": "Hebrew ordinals agree in gender (רִאשׁוֹן / רִאשׁוֹנָה) up to ten, then cardinals; Chinese builds every ordinal with 第."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.time",
+   "note": "The clock (点, 分, 半) and the date (年, 月, 号) were introduced in S15; here they are completed with 刻 and the ordinals."
+  }
+ ]
+}

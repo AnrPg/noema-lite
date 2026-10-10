@@ -1,0 +1,566 @@
+{
+ "function": "fn.numerals",
+ "status": "realized",
+ "summary": "Arabic numbers follow four rules by size. 1 and 2: the noun alone says it (كِتَابٌ a book, كِتَابَانِ two books — the dual); وَاحِد / اِثْنَانِ after the noun only stress the number, and they agree with it. 3–10: the number takes the OPPOSITE gender of the noun (gender polarity) and the noun follows in the genitive plural: ثَلَاثَةُ كُتُبٍ (كِتَاب is masculine → the number with ة), ثَلَاثُ غُرَفٍ (غُرْفَة is feminine → without ة). 11–99: the noun is accusative SINGULAR: أَحَدَ عَشَرَ كِتَابًا, عِشْرُونَ طَالِبًا. 100 and 1000: the noun is genitive singular: مِائَةُ كِتَابٍ, أَلْفُ شَخْصٍ. The number phrase itself takes the case of its place in the sentence (as the subject: عِشْرُونَ; after a preposition: عِشْرِينَ). As in German, 21–99 say the unit first: خَمْسَةٌ وَعِشْرُونَ = fünfundzwanzig.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "how many",
+    "with a masculine noun (كِتَاب)",
+    "with a feminine noun (غُرْفَة)",
+    "the counted noun"
+   ],
+   "rows": [
+    [
+     "1",
+     "كِتَابٌ (وَاحِدٌ)",
+     "غُرْفَةٌ (وَاحِدَةٌ)",
+     "singular; وَاحِد agrees and follows"
+    ],
+    [
+     "2",
+     "كِتَابَانِ (اِثْنَانِ)",
+     "غُرْفَتَانِ (اِثْنَتَانِ)",
+     "dual: -āni / -ayni"
+    ],
+    [
+     "3–10",
+     "ثَلَاثَةُ كُتُبٍ",
+     "ثَلَاثُ غُرَفٍ",
+     "genitive plural — the number REVERSES gender"
+    ],
+    [
+     "11, 12",
+     "أَحَدَ عَشَرَ / اِثْنَا عَشَرَ كِتَابًا",
+     "إِحْدَى عَشْرَةَ / اِثْنَتَا عَشْرَةَ غُرْفَةً",
+     "accusative singular — both parts agree"
+    ],
+    [
+     "13–19",
+     "ثَلَاثَةَ عَشَرَ كِتَابًا",
+     "ثَلَاثَ عَشْرَةَ غُرْفَةً",
+     "accusative singular — the unit reverses, the ten agrees"
+    ],
+    [
+     "20–90",
+     "عِشْرُونَ كِتَابًا",
+     "عِشْرُونَ غُرْفَةً",
+     "accusative singular — the tens have no gender"
+    ],
+    [
+     "100, 1000",
+     "مِائَةُ كِتَابٍ / أَلْفُ كِتَابٍ",
+     "مِائَةُ غُرْفَةٍ / أَلْفُ غُرْفَةٍ",
+     "genitive singular"
+    ]
+   ],
+   "caption": "The gender that counts is the gender of the SINGULAR noun: بِنْت is feminine → ثَلَاثُ بَنَاتٍ; رَجُل is masculine → ثَلَاثَةُ رِجَالٍ."
+  },
+  {
+   "t": "table",
+   "head": [
+    "digit",
+    "number",
+    "said"
+   ],
+   "rows": [
+    [
+     "٠ 0",
+     "صِفْر",
+     "ṣifr"
+    ],
+    [
+     "١ 1",
+     "وَاحِد",
+     "wāḥid"
+    ],
+    [
+     "٢ 2",
+     "اِثْنَانِ",
+     "iṯnāni"
+    ],
+    [
+     "٣ 3",
+     "ثَلَاثَة",
+     "ṯalāṯa"
+    ],
+    [
+     "٤ 4",
+     "أَرْبَعَة",
+     "ʾarbaʿa"
+    ],
+    [
+     "٥ 5",
+     "خَمْسَة",
+     "ḫamsa"
+    ],
+    [
+     "٦ 6",
+     "سِتَّة",
+     "sitta"
+    ],
+    [
+     "٧ 7",
+     "سَبْعَة",
+     "sabʿa"
+    ],
+    [
+     "٨ 8",
+     "ثَمَانِيَة",
+     "ṯamāniya"
+    ],
+    [
+     "٩ 9",
+     "تِسْعَة",
+     "tisʿa"
+    ],
+    [
+     "١٠ 10",
+     "عَشَرَة",
+     "ʿašara"
+    ],
+    [
+     "٢٠ 20",
+     "عِشْرُونَ",
+     "ʿišrūna"
+    ],
+    [
+     "٣٠ 30",
+     "ثَلَاثُونَ",
+     "ṯalāṯūna"
+    ],
+    [
+     "٤٠ 40",
+     "أَرْبَعُونَ",
+     "ʾarbaʿūna"
+    ],
+    [
+     "٥٠ 50",
+     "خَمْسُونَ",
+     "ḫamsūna"
+    ],
+    [
+     "٦٠ 60",
+     "سِتُّونَ",
+     "sittūna"
+    ],
+    [
+     "٧٠ 70",
+     "سَبْعُونَ",
+     "sabʿūna"
+    ],
+    [
+     "٨٠ 80",
+     "ثَمَانُونَ",
+     "ṯamānūna"
+    ],
+    [
+     "٩٠ 90",
+     "تِسْعُونَ",
+     "tisʿūna"
+    ],
+    [
+     "١٠٠ 100",
+     "مِائَة",
+     "miʾa"
+    ],
+    [
+     "١٠٠٠ 1000",
+     "أَلْف",
+     "ʾalf"
+    ]
+   ],
+   "caption": "Counting aloud uses the forms with ة (ثَلَاثَة، أَرْبَعَة …). Digits are written left to right even inside Arabic text: ٢٠٢٦ = 2026. North Africa writes 0–9.",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "3–10: the gender flips.",
+   "text": "Masculine noun → the number WITH ة: ثَلَاثَةُ رِجَالٍ, خَمْسَةُ كُتُبٍ. Feminine noun → the number WITHOUT ة: ثَلَاثُ نِسَاءٍ, خَمْسُ غُرَفٍ. In this course's tables MASC / FEM on a number means the gender of the noun it counts.",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "After 11 the noun is singular again.",
+   "text": "عِشْرُونَ طَالِبًا (twenty students — literally “twenty as to student”), not *عِشْرُونَ طُلَّابًا. The accusative -an is the sign: كِتَابًا, غُرْفَةً, كُرْسِيًّا.",
+   "typology": [
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "special"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Numbers that change for case.",
+   "text": "The tens: عِشْرُونَ (subject) / عِشْرِينَ (object, after a preposition). Twelve: اِثْنَا عَشَرَ / اِثْنَيْ عَشَرَ. Two: اِثْنَانِ / اِثْنَيْنِ. Eight with feminine nouns: ثَمَانِي غُرَفٍ (nom., gen.), ثَمَانِيَ غُرَفٍ (acc.). The other teens never change: ثَلَاثَةَ عَشَرَ."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "how many?",
+    "1–2: the noun alone (singular / dual)",
+    "3–10: flip the gender + genitive plural",
+    "11–99: accusative singular",
+    "100 / 1000: genitive singular",
+    "the case of the whole phrase"
+   ]
+  },
+  {
+   "t": "p",
+   "text": "21–99 are built unit + وَ + ten, like German: وَاحِدٌ وَعِشْرُونَ (21, einundzwanzig), خَمْسَةٌ وَثَلَاثُونَ (35). The unit follows the 3–10 rule for gender; the counted noun is accusative singular: خَمْسَةٌ وَعِشْرُونَ طَالِبًا.",
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "units-first"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "In everyday speech the case endings disappear (ʿišrīn instead of ʿišrūna), but the shape of the rules — plural after 3–10, singular after 11 — is the same in the dialects."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you count",
+   "questions": [
+    "How many — 1–2, 3–10, 11–99, 100+?",
+    "What is the gender of the noun in the SINGULAR?",
+    "Genitive plural, accusative singular, or genitive singular after it?",
+    "Is the number phrase the subject (nominative) or not?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "How many: 1–2, 3–10, 11–99, or 100 / 1000?",
+   "1 or 2? → the noun alone, singular or dual (كِتَابٌ, كِتَابَانِ); وَاحِد / اِثْنَانِ after it only for emphasis, agreeing.",
+   "3–10? → what is the gender of the SINGULAR noun? Masculine → the number with ة; feminine → without. Then the noun in the genitive plural.",
+   "11–99? → the noun in the accusative singular (-an). 11 and 12 agree; in 13–19 the unit flips and the ten agrees; the tens have no gender.",
+   "100 or 1000? → the noun in the genitive singular.",
+   "What is the case of the whole number phrase in the sentence (subject → nominative: عِشْرُونَ, اِثْنَا عَشَرَ)?"
+  ]
+ },
+ "traps": [
+  "*ثَلَاثُ كُتُبٍ is wrong: كِتَاب is masculine → ثَلَاثَةُ كُتُبٍ.",
+  "The gender comes from the singular, not from how the plural looks: بِنْت (f.) → ثَلَاثُ بَنَاتٍ; رَجُل (m.) → ثَلَاثَةُ رِجَالٍ.",
+  "After 11–99 the noun is singular: عِشْرُونَ طَالِبًا, not *عِشْرُونَ طُلَّابًا.",
+  "“Two books” is the dual كِتَابَانِ, not *اِثْنَانِ كِتَابٌ.",
+  "The tens have no gender: عِشْرُونَ بِنْتًا, عِشْرُونَ وَلَدًا.",
+  "100 and 1000 take the singular: مِائَةُ طَالِبٍ, not *مِائَةُ طُلَّابٍ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:sifr",
+   "ar:wahid",
+   "ar:ithnan",
+   "ar:thalatha",
+   "ar:arbaa",
+   "ar:khamsa",
+   "ar:sitta",
+   "ar:saba",
+   "ar:thamaniya",
+   "ar:tisa",
+   "ar:ashara",
+   "ar:ahada_ashar",
+   "ar:ithna_ashar",
+   "ar:thalathata_ashar",
+   "ar:arbaata_ashar",
+   "ar:khamsata_ashar",
+   "ar:sittata_ashar",
+   "ar:sabata_ashar",
+   "ar:thamaniyata_ashar",
+   "ar:tisata_ashar",
+   "ar:ishrun",
+   "ar:thalathun",
+   "ar:arbaun",
+   "ar:khamsun",
+   "ar:sittun",
+   "ar:sabun",
+   "ar:thamanun",
+   "ar:tisun",
+   "ar:mia",
+   "ar:alf"
+  ],
+  "tags": [
+   "DU"
+  ]
+ },
+ "paradigmCells": [
+  "NUM;NOM;MASC;CONST",
+  "NUM;NOM;FEM;CONST",
+  "NUM;NOM;MASC;INDF",
+  "NUM;NOM;FEM;INDF",
+  "N;NOM;DU;INDF"
+ ],
+ "needs": {
+  "NUM": 10,
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NUM",
+   "class": "unit",
+   "cells": [
+    "NUM;NOM;MASC;CONST",
+    "NUM;NOM;FEM;CONST"
+   ],
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;DU;INDF",
+    "N;ACC;DU;INDF"
+   ],
+   "count": 10
+  },
+  {
+   "type": "inflect",
+   "pos": "NUM",
+   "class": "ten",
+   "cells": [
+    "NUM;NOM;INDF",
+    "NUM;ACC;INDF"
+   ],
+   "count": 6
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.numerals"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“three books” (كِتَاب is masculine):",
+   "options": [
+    "ثَلَاثَةُ كُتُبٍ",
+    "ثَلَاثُ كُتُبٍ",
+    "ثَلَاثَةُ كِتَابٍ"
+   ],
+   "answer": "ثَلَاثَةُ كُتُبٍ",
+   "why": "3–10 flip the gender: a masculine noun takes the number with ة, and the noun is genitive plural."
+  },
+  {
+   "q": "“three girls” (بِنْت is feminine):",
+   "options": [
+    "ثَلَاثُ بَنَاتٍ",
+    "ثَلَاثَةُ بَنَاتٍ",
+    "ثَلَاثُ بِنْتٍ"
+   ],
+   "answer": "ثَلَاثُ بَنَاتٍ",
+   "why": "Feminine noun → the number without ة; genitive plural بَنَاتٍ."
+  },
+  {
+   "q": "“twenty students”:",
+   "options": [
+    "عِشْرُونَ طَالِبًا",
+    "عِشْرُونَ طُلَّابٍ",
+    "عِشْرُونَ طَالِبٌ"
+   ],
+   "answer": "عِشْرُونَ طَالِبًا",
+   "why": "11–99: the noun is singular and accusative (-an)."
+  },
+  {
+   "q": "“Two keys are here.”",
+   "options": [
+    "مِفْتَاحَانِ هُنَا",
+    "اِثْنَانِ مِفْتَاحٌ هُنَا",
+    "مَفَاتِيحُ اثْنَانِ هُنَا"
+   ],
+   "answer": "مِفْتَاحَانِ هُنَا",
+   "why": "Two of something is the dual of the noun itself."
+  },
+  {
+   "q": "“a hundred books”:",
+   "options": [
+    "مِائَةُ كِتَابٍ",
+    "مِائَةُ كُتُبٍ",
+    "مِائَةُ كِتَابًا"
+   ],
+   "answer": "مِائَةُ كِتَابٍ",
+   "why": "After 100 and 1000 the noun is genitive singular."
+  },
+  {
+   "q": "How does Arabic say 25?",
+   "options": [
+    "خَمْسَةٌ وَعِشْرُونَ",
+    "عِشْرُونَ وَخَمْسَةٌ",
+    "عِشْرُونَ خَمْسَةٌ"
+   ],
+   "answer": "خَمْسَةٌ وَعِشْرُونَ",
+   "why": "The unit first, then “and” and the ten — like German fünfundzwanzig."
+  },
+  {
+   "q": "“fifteen rooms” (غُرْفَة is feminine):",
+   "options": [
+    "خَمْسَ عَشْرَةَ غُرْفَةً",
+    "خَمْسَةَ عَشَرَ غُرْفَةً",
+    "خَمْسَ عَشْرَةَ غُرَفٍ"
+   ],
+   "answer": "خَمْسَ عَشْرَةَ غُرْفَةً",
+   "why": "13–19: the unit flips (خَمْسَ for a feminine noun), the ten agrees (عَشْرَةَ), the noun is accusative singular."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.numerals",
+   "note": "Hebrew has the same reversed gender for 3–10 (שְׁלוֹשָׁה סְפָרִים / שָׁלוֹשׁ בָּנוֹת), but no cases, and the noun stays plural after 11 and above."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.numerals",
+   "note": "German numbers hardly change (only ein / eine), but 21–99 put the unit first as in Arabic: einundzwanzig = وَاحِدٌ وَعِشْرُونَ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.measure.word",
+   "note": "Chinese puts a measure word between the number and the noun (三本书) and has two words for “two” (二 / 两); Arabic changes the noun's number and case instead."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.plural.noun",
+   "note": "The counted noun after 3–10 is the plural you learn with each noun — often a broken plural."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "num.agreement",
+   "value": "extensive"
+  },
+  {
+   "feature": "nom.pluralAfterNumeral",
+   "value": "special"
+  },
+  {
+   "feature": "nom.dual",
+   "value": "productive"
+  },
+  {
+   "feature": "num.order",
+   "value": "units-first"
+  },
+  {
+   "feature": "nom.classifiers",
+   "value": "none"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek changes only 1, 3, 4 (and the hundreds) for gender, and after 2 the noun is always plural (τρία βιβλία); Arabic reverses the gender of 3–10, uses the dual for 2 and a singular after 10. Greek says the tens first (είκοσι ένα), Arabic the unit first (وَاحِدٌ وَعِشْرُونَ)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also changes the noun with the number — два стола, пять столов; Arabic has its own steps: the dual for 2, the genitive plural for 3–10, the accusative singular for 11–99, the genitive singular for 100. Russian says the tens first (двадцать один)."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish numbers barely change (uno / una, doscientos / doscientas) and the noun is plural after 2; Arabic reverses the gender of 3–10 and uses the singular after 10. Spanish says the tens first (veintiuno)."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "In English only the noun’s -s changes; Arabic has a dual for 2, reversed gender for 3–10, the singular after 11–99 (عِشْرُونَ طَالِبًا, “twenty student”), and the unit before the ten in 21–99, as in old “four-and-twenty”."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French counts 70 and 80 in twenties (soixante-dix, quatre-vingts) and says the tens first (vingt et un); Arabic is decimal throughout and says the unit first (وَاحِدٌ وَعِشْرُونَ)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi 21–99 are fused words with the unit first, to be learned one by one (पच्चीस, 25); Arabic builds them in the same order but regularly: unit + وَ + ten (خَمْسَةٌ وَعِشْرُونَ)."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian keeps the noun singular after every number (سه کتاب, “three book”); Arabic uses the plural after 3–10 and the singular from 11. Persian says the tens first (بیست و یک)."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi 21–99 are, like Hindi ones, single words with the unit first (पंचवीस, 25); Arabic builds them as unit + وَ + ten."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish keeps the noun singular after any number (üç kitap); Arabic uses a genitive plural after 3–10 (ثَلَاثَةُ كُتُبٍ) and an accusative singular after 11–99. Turkish says the tens first (yirmi bir)."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese needs a counter between number and noun (三冊の本); Arabic needs none, but the number itself changes gender (ثَلَاثَةُ كُتُبٍ, ثَلَاثُ غُرَفٍ)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean needs a counter (책 세 권) and has two sets of numbers; Arabic has one set, no counters, and reversed gender for 3–10."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish puts a singular noun in the partitive after numbers (kolme kirjaa); Arabic does something similar only from 11 (أَحَدَ عَشَرَ كِتَابًا) and uses the plural for 3–10."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian keeps the noun singular after numbers (három könyv); Arabic uses the dual for 2 and the plural for 3–10."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili puts the number after the noun and makes it agree by class (vitabu vitatu); Arabic puts 3–10 before the noun and gives them the opposite gender (ثَلَاثَةُ كُتُبٍ)."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda numbers follow the noun and agree by class (ebitabo bisatu, three books); Arabic 3–10 come first and take the opposite gender of the noun."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese needs a classifier (ba quyển sách) and leaves the noun unchanged; Arabic has no classifier but changes the noun’s number and case after each number."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut nouns have a dual too, so “two” can be said by the noun alone — as Arabic كِتَابَانِ is “two books”."
+  }
+ ]
+}

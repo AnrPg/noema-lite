@@ -1,0 +1,1640 @@
+{
+ "lexemes": [
+  {
+   "id": "he:bamya",
+   "lemma": "בַּמְיָה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.okra"
+   ],
+   "gender": "FEM",
+   "translit": "bamya",
+   "features": {
+    "spelling": "במיה",
+    "root": {
+     "none": "a loanword (Arabic بَامْيَة): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a loanword ending in ־ָה: not used as the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "בַּמְיָה",
+    "N;SG;DEF": "הַבַּמְיָה"
+   },
+   "note": "Used as a mass noun. Wiktionary’s English entry okra gives במיה (bamia, f.); there is no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Okra in tomato sauce — a favourite of Jews from Iraq, Syria and Egypt; loved or found slimy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "okra",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.okra"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת בַּמְיָה בְּרֹטֶב עַגְבָנִיּוֹת.",
+      "tr": "Mom cooks okra in tomato sauce.",
+      "register": "neutral",
+      "context": "family cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא אוֹהֵב בַּמְיָה, הִיא רִירִית מִדַּי.",
+      "tr": "I (m.) don’t like okra, it’s too slimy.",
+      "register": "informal",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי בַּמְיָה קְפוּאָה.",
+      "tr": "I bought frozen okra.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בַּמְיָה בְּרֹטֶב עַגְבָנִיּוֹת",
+      "tr": "okra in tomato sauce"
+     },
+     {
+      "text": "בַּמְיָה קְפוּאָה",
+      "tr": "frozen okra"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday Hebrew.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From Arabic بَامِيَة (bāmiya, “okra”), whose own origin is unknown (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word is shared around the region: Arabic بَامِيَة, Turkish bamya, Greek μπάμια; English okra comes from a West African language, probably Igbo (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Feminine: בַּמְיָה טְרִיָּה.",
+     "A mass noun: “okra pods” is simply בַּמְיָה."
+    ],
+    "subtleties": [
+     "To keep it less slimy, cooks add lemon or vinegar, or fry the okra before stewing it."
+    ]
+   }
+  },
+  {
+   "id": "he:pol",
+   "lemma": "פּוֹל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.broadbean"
+   ],
+   "gender": "MASC",
+   "translit": "pol",
+   "features": {
+    "spelling": "פול",
+    "root": {
+     "none": "an old loan (Aramaic פּוֹלָא, Arabic فُول): no verb root"
+    },
+    "pattern": "קוֹל",
+    "plurals": [
+     {
+      "form": "פּוֹלִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פּוֹל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פּוֹלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "פּוֹל",
+    "N;SG;DEF": "הַפּוֹל",
+    "N;PL;INDF": "פּוֹלִים",
+    "N;PL;DEF": "הַפּוֹלִים",
+    "N;SG;CONST": "פּוֹל",
+    "N;PL;CONST": "פּוֹלֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh green fava beans in spring; ful for breakfast.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "broad bean, fava bean",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.broadbean"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בָּאָבִיב אֲנַחְנוּ מְקַלְּפִים פּוֹל טָרִי.",
+      "tr": "In spring we shell fresh fava beans.",
+      "register": "neutral",
+      "context": "seasonal cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי קוֹנָה שַׂקִּית פּוֹלִים יְבֵשִׁים.",
+      "tr": "I (f.) buy a bag of dried fava beans.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַפּוֹל הַיָּרֹק מָתוֹק כְּשֶׁהוּא צָעִיר.",
+      "tr": "Green fava beans are sweet when they are young.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פּוֹל יָרֹק",
+      "tr": "green (fresh) fava beans"
+     },
+     {
+      "text": "פּוֹלִים יְבֵשִׁים",
+      "tr": "dried fava beans"
+     },
+     {
+      "text": "תַּרְמִילֵי פּוֹל",
+      "tr": "fava pods"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פוּל",
+      "register": "colloquial",
+      "nuance": "the Arabic pronunciation ful, especially for the cooked dish (Wiktionary: alternative form, from Arabic فُول)"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Aramaic פֹּולא (pōlā, “bean”) and Arabic فُول (fūl, “fava beans”). Ultimately perchance from Proto-Semitic *pūl- (“bean, corn, seed, grains, little pieces”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic فُول (fūl) is the same word (Wiktionary); Egyptian ful medames is eaten all over the region.",
+     "People with G6PD deficiency (favism) — common in some Middle Eastern communities — must not eat fava beans."
+    ],
+    "pitfalls": [
+     "Spelled like the name Paul (פּוֹל) and the slang פוּל “full, totally” — the context decides."
+    ],
+    "subtleties": [
+     "Two pronunciations: pol (standard Hebrew) and ful (from Arabic, Wiktionary’s alternative form פוּל), which is the usual name of the cooked dish."
+    ]
+   }
+  },
+  {
+   "id": "he:artishok",
+   "lemma": "אַרְטִישׁוֹק",
+   "pos": "NOUN",
+   "senses": [
+    "veg.artichoke"
+   ],
+   "gender": "MASC",
+   "translit": "artishok",
+   "features": {
+    "spelling": "ארטישוק",
+    "root": {
+     "none": "a loanword (Italian articiocco): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אַרְטִישׁוֹקִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אַרְטִישׁוֹק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַרְטִישׁוֹקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אַרְטִישׁוֹק",
+    "N;SG;DEF": "הָאַרְטִישׁוֹק",
+    "N;PL;INDF": "אַרְטִישׁוֹקִים",
+    "N;PL;DEF": "הָאַרְטִישׁוֹקִים",
+    "N;SG;CONST": "אַרְטִישׁוֹק",
+    "N;PL;CONST": "אַרְטִישׁוֹקֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A thistle eaten leaf by leaf; spring at the market.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "artichoke (Cynara scolymus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.artichoke"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא מְמַלֵּאת תַּחְתִּיּוֹת אַרְטִישׁוֹק בְּבָשָׂר.",
+      "tr": "She stuffs artichoke bottoms with meat.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיךְ אוֹכְלִים אַרְטִישׁוֹק? עָלֶה אַחֲרֵי עָלֶה.",
+      "tr": "How do you eat an artichoke? Leaf by leaf.",
+      "register": "informal",
+      "context": "table manners",
+      "sense": "s1"
+     },
+     {
+      "text": "בָּאָבִיב יֵשׁ אַרְטִישׁוֹקִים בַּשּׁוּק.",
+      "tr": "In spring there are artichokes at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּחְתִּיּוֹת אַרְטִישׁוֹק",
+      "tr": "artichoke bottoms"
+     },
+     {
+      "text": "אַרְטִישׁוֹק מְמֻלָּא",
+      "tr": "stuffed artichoke"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קִנְרָס",
+      "register": "technical",
+      "nuance": "the old name (via Babylonian Aramaic from Greek κινάρα), used in botany and learned style"
+     },
+     {
+      "word": "חֻרְשָׁף",
+      "register": "literary",
+      "nuance": "a rarer synonym, close to Arabic خُرْشُوف (Wiktionary)"
+     }
+    ],
+    "etymology": {
+     "text": "Ultimately from Italian articiocco, itself from Occitan artichaut, from Old Spanish alcarchofa, from Andalusian Arabic الْخَرْشُوف (al-ḵaršūf), from Arabic الْخُرْشُوف (al-ḵuršūf). Probably entered Hebrew through Russian артишок (artišok) and Yiddish אַרטישאָק (artishok).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The European word comes from Arabic: الْخُرْشُوف → Spanish alcarchofa → Italian articiocco → English artichoke, Russian артишок — and Hebrew got it back through Russian and Yiddish (Wiktionary).",
+     "Greek αγκινάρα and the Hebrew synonym קִנְרָס both go back to Ancient Greek κινάρα (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The article takes qamats before א: הָאַרְטִישׁוֹק, הָאַרְטִישׁוֹקִים.",
+     "Not the same as אַרְטִישׁוֹק יְרוּשַׁלְמִי (Jerusalem artichoke), a sunflower tuber."
+    ],
+    "subtleties": [
+     "We eat the flower bud of a thistle: the fleshy base of its scales and the bottom (תַּחְתִּית)."
+    ]
+   }
+  },
+  {
+   "id": "he:kolrabi",
+   "lemma": "קוֹלְרַבִּי",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.kohlrabi"
+   ],
+   "gender": "MASC",
+   "translit": "kolrabi",
+   "features": {
+    "spelling": "קולרבי",
+    "root": {
+     "none": "a loanword (German Kohlrabi): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קוֹלְרַבִּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "קוֹלְרַבִּי",
+    "N;SG;DEF": "הַקּוֹלְרַבִּי",
+    "N;SG;CONST": "קוֹלְרַבִּי"
+   },
+   "note": "A loanword used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy and sweet, peeled and eaten raw as a snack.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kohlrabi",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kohlrabi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים אוֹכְלִים קוֹלְרַבִּי חַי עִם מֶלַח.",
+      "tr": "The children eat raw kohlrabi with salt.",
+      "register": "neutral",
+      "context": "snack",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מְכִינָה סְלַט קוֹלְרַבִּי.",
+      "tr": "I (f.) make a kohlrabi salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקּוֹלְרַבִּי הַזֶּה גָּדוֹל וְקָשֶׁה.",
+      "tr": "This kohlrabi is big and hard.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט קוֹלְרַבִּי",
+      "tr": "kohlrabi salad"
+     },
+     {
+      "text": "קוֹלְרַבִּי סָגֹל",
+      "tr": "purple kohlrabi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; the German name is used.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From German Kohlrabi, from Italian cavoli rape, plural of cavolo rapa (“cabbage-turnip”) (Wiktionary, German Kohlrabi).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The name means “cabbage-turnip” (Italian cavolo rapa → German Kohlrabi), and that is what it is: a cabbage with a turnip-like stem."
+    ],
+    "pitfalls": [
+     "It is not a root: the ball grows above the ground — it is a swollen stem.",
+     "Masculine: קוֹלְרַבִּי טָרִי."
+    ],
+    "subtleties": [
+     "In Israel it is eaten mostly raw, peeled and sliced; in Central Europe it is more often cooked."
+    ]
+   }
+  },
+  {
+   "id": "he:kruv-nitsanim",
+   "lemma": "כְּרוּב נִצָּנִים",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.brusselssprout"
+   ],
+   "gender": "MASC",
+   "translit": "kruv nitsanim",
+   "features": {
+    "spelling": "כרוב ניצנים",
+    "root": {
+     "none": "a compound of two words (כְּרוּב + נִצָּנִים): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כְּרוּב נִצָּנִים",
+    "N;SG;DEF": "כְּרוּב הַנִּצָּנִים"
+   },
+   "plene": {
+    "N;SG;INDF": "כרוב ניצנים",
+    "N;SG;DEF": "כרוב הניצנים"
+   },
+   "note": "A two-word lexeme (construct phrase: the article goes on the second word). Tokenized as one word (the engine matches multi-word lexemes first). Used as a mass noun.",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entry כְּרוּב and the English entry Brussels sprout (Hebrew translation כרוב ניצנים); no Hebrew entry for the phrase",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mini cabbages — loved roasted, hated boiled.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Brussels sprouts",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.brusselssprout"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי צוֹלָה כְּרוּב נִצָּנִים בַּתַּנּוּר עִם שֶׁמֶן זַיִת.",
+      "tr": "I (f.) roast Brussels sprouts in the oven with olive oil.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים לֹא אוֹהֲבִים כְּרוּב נִצָּנִים.",
+      "tr": "The children don’t like Brussels sprouts.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת כְּרוּב הַנִּצָּנִים צָרִיךְ לַחְתֹּךְ לִשְׁנַיִם.",
+      "tr": "The Brussels sprouts have to be cut in half.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּרוּב נִצָּנִים צָלוּי",
+      "tr": "roasted Brussels sprouts"
+     },
+     {
+      "text": "כְּרוּב נִצָּנִים קָפוּא",
+      "tr": "frozen Brussels sprouts"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "כְּרוּב “cabbage” (from Ancient Greek κράμβη) + נִצָּנִים, plural of נִצָּן “bud”: “bud cabbage”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Each sprout is a bud growing along a tall stem — hence “bud cabbage”; English names it after Brussels and German calls it Rosenkohl, “rose cabbage”."
+    ],
+    "pitfalls": [
+     "A mass noun in Hebrew: כְּרוּב נִצָּנִים is “Brussels sprouts” (plural in English).",
+     "The article goes on the second word: כְּרוּב הַנִּצָּנִים. Everyday spelling with י: כרוב ניצנים."
+    ],
+    "subtleties": [
+     "נִצָּנִים are buds or blossoms, as in the Song of Songs (2:12): הַנִּצָּנִים נִרְאוּ בָאָרֶץ, “the blossoms appear on the earth”."
+    ]
+   }
+  },
+  {
+   "id": "he:lufa",
+   "lemma": "לוּפָה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.luffa",
+    "obj.sponge"
+   ],
+   "gender": "FEM",
+   "translit": "lufa",
+   "features": {
+    "spelling": "לופה",
+    "root": {
+     "none": "a loanword (Arabic لُوف): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "לוּפוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a loanword ending in ־ָה: not used as the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "לוּפָה",
+    "N;SG;DEF": "הַלּוּפָה",
+    "N;PL;INDF": "לוּפוֹת",
+    "N;PL;DEF": "הַלּוּפוֹת"
+   },
+   "note": "Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mostly the bath sponge; as a vegetable only in Asian cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "luffa, sponge gourd (the plant; its young fruit is eaten as a vegetable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.luffa"
+     },
+     {
+      "id": "s2",
+      "def": "loofah — the dried fibrous fruit used as a bath sponge",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.sponge"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא מְגַדֵּל לוּפוֹת בַּגִּנָּה.",
+      "tr": "He grows luffas in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת הַלּוּפָה אוֹכְלִים כְּשֶׁהִיא צְעִירָה וְרַכָּה.",
+      "tr": "The luffa is eaten when it is young and soft.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּמִּקְלַחַת יֵשׁ לִי לוּפָה.",
+      "tr": "I have a loofah in the shower.",
+      "register": "neutral",
+      "context": "bathroom",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְפוֹג לוּפָה",
+      "tr": "loofah sponge"
+     },
+     {
+      "text": "לוּפָה צְעִירָה",
+      "tr": "young luffa"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. Like English loofah, which Wiktionary gives as “borrowed from Arabic لُوفَة (lūfa)”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The bath sponge is the dried fruit of this gourd — the same fruit you can eat while it is young."
+    ],
+    "pitfalls": [
+     "To most Israelis לוּפָה is the bath sponge; say which one you mean."
+    ],
+    "subtleties": [
+     "The plural is regular: לוּפוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:keyl",
+   "lemma": "קֵייל",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.kale"
+   ],
+   "gender": "MASC",
+   "translit": "keil",
+   "features": {
+    "spelling": "קייל",
+    "root": {
+     "none": "a loanword (English kale): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קֵייל"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "קֵייל",
+    "N;SG;DEF": "הַקֵּייל",
+    "N;SG;CONST": "קֵייל"
+   },
+   "note": "A recent loanword, used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A trendy superfood of the 2010s: crisp baked leaves and green smoothies.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kale",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kale"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא אוֹפָה עֲלֵי קֵייל בַּתַּנּוּר עַד שֶׁהֵם פְּרִיכִים.",
+      "tr": "She bakes kale leaves in the oven until they are crisp.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מוֹסִיף קֵייל לַסָּלָט.",
+      "tr": "I (m.) add kale to the salad.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקֵּייל נֶחְשָׁב לְמָזוֹן בָּרִיא מְאוֹד.",
+      "tr": "Kale is considered a very healthy food.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי קֵייל",
+      "tr": "kale leaves"
+     },
+     {
+      "text": "סְלַט קֵייל",
+      "tr": "kale salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No established Hebrew synonym; the English name came with the trend.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From English kale (from Old English cāl, from Latin caulis “stalk, cabbage”; Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English kale and German Kohl go back to Latin caulis; Wiktionary even lists English gobi (from Hindi gobhī “cabbage, cauliflower”) among its doublets."
+    ],
+    "pitfalls": [
+     "Pronounced keil, as in English; masculine: קֵייל טָרִי.",
+     "A young word: older dictionaries do not have it."
+    ],
+    "subtleties": [
+     "Raw kale is often massaged with oil and lemon to soften it."
+    ]
+   }
+  },
+  {
+   "id": "he:kruv-sini",
+   "lemma": "כְּרוּב סִינִי",
+   "pos": "NOUN",
+   "senses": [
+    "veg.napacabbage"
+   ],
+   "gender": "MASC",
+   "translit": "kruv sini",
+   "features": {
+    "spelling": "כרוב סיני",
+    "root": {
+     "none": "a compound of two words (כְּרוּב + סִינִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "כְּרוּבִים סִינִיִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כְּרוּב סִינִי",
+    "N;SG;DEF": "הַכְּרוּב הַסִּינִי",
+    "N;PL;INDF": "כְּרוּבִים סִינִיִּים",
+    "N;PL;DEF": "הַכְּרוּבִים הַסִּינִיִּים"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries כְּרוּב and סִינִי (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pale, crinkly, mild leaves for stir-fries and kimchi.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Napa cabbage, Chinese cabbage",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.napacabbage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא קוֹצֵץ כְּרוּב סִינִי לַסָּלָט.",
+      "tr": "He chops Chinese cabbage for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּסּוּפֶּר יֵשׁ כְּרוּבִים סִינִיִּים גְּדוֹלִים.",
+      "tr": "There are big Chinese cabbages at the supermarket.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכְּרוּב הַסִּינִי רַךְ וּמָתוֹק יוֹתֵר מֵהַכְּרוּב הָרָגִיל.",
+      "tr": "Chinese cabbage is softer and sweeter than ordinary cabbage.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּרוּב סִינִי מֻקְפָּץ",
+      "tr": "stir-fried Chinese cabbage"
+     },
+     {
+      "text": "סְלַט כְּרוּב סִינִי",
+      "tr": "Chinese cabbage salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym.",
+    "etymology": {
+     "text": "כְּרוּב “cabbage” (from Ancient Greek κράμβη) + סִינִי “Chinese” (סין “China” + ־י).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Korean kimchi is usually made from this cabbage.",
+     "German calls it Chinakohl and Russian пекинская капуста, “Peking cabbage”."
+    ],
+    "pitfalls": [
+     "Plural agreement: כְּרוּבִים סִינִיִּים; Wiktionary also lists the shorter סִינִים, the usual word for Chinese people.",
+     "In English “Chinese cabbage” can also mean bok choy; in Israeli shops כְּרוּב סִינִי is the elongated Napa cabbage."
+    ],
+    "subtleties": [
+     "Both words take the article: הַכְּרוּב הַסִּינִי."
+    ]
+   }
+  },
+  {
+   "id": "he:kruv-adom",
+   "lemma": "כְּרוּב אָדֹם",
+   "pos": "NOUN",
+   "senses": [
+    "veg.redcabbage"
+   ],
+   "gender": "MASC",
+   "translit": "kruv adom",
+   "features": {
+    "spelling": "כרוב אדום",
+    "root": {
+     "none": "a compound of two words (כְּרוּב + אָדֹם): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "כְּרוּבִים אֲדֻמִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "כְּרוּב אָדֹם",
+    "N;SG;DEF": "הַכְּרוּב הָאָדֹם",
+    "N;PL;INDF": "כְּרוּבִים אֲדֻמִּים",
+    "N;PL;DEF": "הַכְּרוּבִים הָאֲדֻמִּים"
+   },
+   "plene": {
+    "N;SG;INDF": "כרוב אדום",
+    "N;SG;DEF": "הכרוב האדום",
+    "N;PL;INDF": "כרובים אדומים",
+    "N;PL;DEF": "הכרובים האדומים"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries כְּרוּב and אָדֹם (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Purple crunch in salads; it changes colour with vinegar.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "red cabbage",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.redcabbage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְכִינָה סְלַט כְּרוּב אָדֹם עִם לִימוֹן.",
+      "tr": "I (f.) make red cabbage salad with lemon.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַכְּרוּב הָאָדֹם מְשַׁנֶּה צֶבַע עִם חֹמֶץ.",
+      "tr": "Red cabbage changes colour with vinegar.",
+      "register": "neutral",
+      "context": "kitchen science",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִינוּ שְׁנֵי כְּרוּבִים אֲדֻמִּים.",
+      "tr": "We bought two red cabbages.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט כְּרוּב אָדֹם",
+      "tr": "red cabbage salad"
+     },
+     {
+      "text": "כְּרוּב אָדֹם כָּבוּשׁ",
+      "tr": "pickled red cabbage"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in standard use.",
+    "etymology": {
+     "text": "כְּרוּב “cabbage” (from Ancient Greek κράμβη) + אָדֹם “red” (compare Classical Syriac ܐܕܘܡ, Arabic ادوم).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its juice is a natural pH indicator: red with acid, blue-green with soap or baking soda — a classic school experiment.",
+     "In southern Germany and Austria it is Blaukraut, “blue cabbage”; elsewhere Rotkohl, “red cabbage”."
+    ],
+    "pitfalls": [
+     "Agreement and article on both words: הַכְּרוּב הָאָדֹם, כְּרוּבִים אֲדֻמִּים.",
+     "Everyday spelling with ו: כרוב אדום, כרובים אדומים."
+    ],
+    "subtleties": [
+     "The article takes qamats before א: הָאָדֹם, הָאֲדֻמִּים."
+    ]
+   }
+  },
+  {
+   "id": "he:agvaniyat-sheri",
+   "lemma": "עַגְבָנִיַּת שֶׁרִי",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cherrytomato"
+   ],
+   "gender": "FEM",
+   "translit": "agvaniyat sheri",
+   "features": {
+    "spelling": "עגבניית שרי",
+    "root": {
+     "none": "a compound of two words (עַגְבָנִיָּה + שֶׁרִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "עַגְבָנִיּוֹת שֶׁרִי",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "עַגְבָנִיַּת שֶׁרִי",
+    "N;SG;DEF": "עַגְבָנִיַּת הַשֶּׁרִי",
+    "N;PL;INDF": "עַגְבָנִיּוֹת שֶׁרִי",
+    "N;PL;DEF": "עַגְבָנִיּוֹת הַשֶּׁרִי"
+   },
+   "plene": {
+    "N;SG;INDF": "עגבניית שרי",
+    "N;SG;DEF": "עגבניית השרי"
+   },
+   "note": "A two-word lexeme (construct phrase: the plural is marked on the first word, the article on the second). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries עַגְבָנִיָּה and שֶׁרִי (“only used in עַגְבָנִיַּת שֶׁרִי”); Wiktionary’s English entry cherry tomato gives עַגְבָנִיַּת שֶׁרִי",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet bite-size tomatoes in every lunch box and salad.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cherry tomato",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cherrytomato"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַיְּלָדִים אוֹהֲבִים עַגְבָנִיּוֹת שֶׁרִי.",
+      "tr": "The children love cherry tomatoes.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת עַגְבָנִיּוֹת הַשֶּׁרִי חוֹתְכִים לַחֲצָאִים.",
+      "tr": "The cherry tomatoes are cut in halves.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי קֻפְסָה שֶׁל עַגְבָנִיּוֹת שֶׁרִי.",
+      "tr": "I bought a box of cherry tomatoes.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עַגְבָנִיּוֹת שֶׁרִי צְהֻבּוֹת",
+      "tr": "yellow cherry tomatoes"
+     },
+     {
+      "text": "עַגְבָנִיּוֹת שֶׁרִי קְלוּיוֹת",
+      "tr": "roasted cherry tomatoes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שֶׁרִי",
+      "register": "colloquial",
+      "nuance": "short for the whole phrase in casual speech (סָלָט עִם שֶׁרִי); Wiktionary records שֶׁרִי only inside עַגְבָנִיַּת שֶׁרִי"
+     }
+    ],
+    "etymology": {
+     "text": "עַגְבָנִיָּה “tomato” + שֶׁרִי, borrowed from English cherry, with original צֶ׳רִי (chéri) undergoing dissimilation or reanalysis due to the preceding ת (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew says sheri, not cheri: after the t of עַגְבָנִיַּת the English ch was simplified (Wiktionary).",
+     "Cherry tomatoes are not an Israeli invention, as is often claimed; Israeli breeders developed long-lasting varieties that helped make them a supermarket staple."
+    ],
+    "pitfalls": [
+     "In the plural the first word changes and שֶׁרִי stays: עַגְבָנִיּוֹת שֶׁרִי; the article goes on שֶׁרִי: עַגְבָנִיּוֹת הַשֶּׁרִי.",
+     "Pronounced sheri, not cheri."
+    ],
+    "subtleties": [
+     "Everyday spelling of the construct form with double י: עגבניית שרי."
+    ]
+   }
+  },
+  {
+   "id": "he:nevet",
+   "lemma": "נֶבֶט",
+   "pos": "NOUN",
+   "senses": [
+    "veg.beansprout",
+    "nature.sprout"
+   ],
+   "gender": "MASC",
+   "translit": "nevet",
+   "features": {
+    "spelling": "נבט",
+    "root": "נ ב ט",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "נְבָטִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נֶבֶט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נִבְטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "נֶבֶט",
+    "N;SG;DEF": "הַנֶּבֶט",
+    "N;PL;INDF": "נְבָטִים",
+    "N;PL;DEF": "הַנְּבָטִים",
+    "N;SG;CONST": "נֶבֶט",
+    "N;PL;CONST": "נִבְטֵי"
+   },
+   "note": "As food, mostly in the plural נְבָטִים “(bean) sprouts”. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy white sprouts in stir-fries and spring rolls.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sprout; as food (mostly plural נְבָטִים): bean sprouts",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.beansprout"
+     },
+     {
+      "id": "s2",
+      "def": "a sprout, a shoot coming out of any seed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "nature.sprout"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא מוֹסִיף נְבָטִים לַמֻּקְפָּץ.",
+      "tr": "He adds bean sprouts to the stir-fry.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנְּבָטִים הָאֵלֶּה טְרִיִּים וּפְרִיכִים.",
+      "tr": "These sprouts are fresh and crunchy.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים מְגַדְּלִים נְבָטִים שֶׁל שְׁעוּעִית בַּגַּן.",
+      "tr": "The children grow bean sprouts at kindergarten.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s1"
+     },
+     {
+      "text": "מִן הַזֶּרַע יָצָא נֶבֶט קָטָן.",
+      "tr": "A small sprout came out of the seed.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נִבְטֵי מָשׁ",
+      "tr": "mung-bean sprouts"
+     },
+     {
+      "text": "נִבְטֵי סוֹיָה",
+      "tr": "soy sprouts"
+     },
+     {
+      "text": "נִבְטֵי אַלְפַּלְפָא",
+      "tr": "alfalfa sprouts"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the kind is added in a construct phrase: נִבְטֵי מָשׁ, נִבְטֵי סוֹיָה.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. It belongs to the root נ־ב־ט “to sprout” (נָבַט “sprouted”, נְבִיטָה “germination”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 豆芽 (dòuyá) literally means “bean sprout”, like נִבְטֵי שְׁעוּעִית.",
+     "The same root gives נְבִיטָה “germination” and הֵנְבִּיט “to make sprout”."
+    ],
+    "pitfalls": [
+     "As food it is used in the plural: נְבָטִים; the singular נֶבֶט is one sprout."
+    ],
+    "subtleties": [
+     "A segolate noun: the vowels change in the plural, נֶבֶט → נְבָטִים, like גֶּזֶר → גְּזָרִים."
+    ]
+   }
+  },
+  {
+   "id": "he:dalorit",
+   "lemma": "דָּלוֹרִית",
+   "pos": "NOUN",
+   "senses": [
+    "veg.butternut"
+   ],
+   "gender": "FEM",
+   "translit": "dalorit",
+   "features": {
+    "spelling": "דלורית",
+    "root": {
+     "none": "a modern name for the butternut squash: no verb root"
+    },
+    "pattern": {
+     "none": "a modern coinage with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "דָּלוֹרִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דָּלוֹרִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דָּלוֹרִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "דָּלוֹרִית",
+    "N;SG;DEF": "הַדָּלוֹרִית",
+    "N;PL;INDF": "דָּלוֹרִיּוֹת",
+    "N;PL;DEF": "הַדָּלוֹרִיּוֹת",
+    "N;SG;CONST": "דָּלוֹרִית",
+    "N;PL;CONST": "דָּלוֹרִיּוֹת"
+   },
+   "note": "Wiktionary has no Hebrew entry; its English entry butternut squash gives דָּלוֹרִית (dalorít, f.).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet orange flesh for velvety soups and roasting; an autumn favourite.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "butternut squash",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.butternut"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְבַשֶּׁלֶת מְרַק דָּלוֹרִית.",
+      "tr": "I (f.) cook butternut squash soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא צוֹלֶה קֻבִּיּוֹת דָּלוֹרִית בַּתַּנּוּר.",
+      "tr": "He roasts butternut cubes in the oven.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּסְּתָו הַדָּלוֹרִיּוֹת זוֹלוֹת בַּשּׁוּק.",
+      "tr": "In autumn butternut squashes are cheap at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק דָּלוֹרִית",
+      "tr": "butternut squash soup"
+     },
+     {
+      "text": "דָּלוֹרִית צְלוּיָה",
+      "tr": "roasted butternut squash"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; other squashes are called דְּלַעַת.",
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry and gives no etymology; its English entry butternut squash (“Cucurbita moschata cultivar”) lists דָּלוֹרִית (dalorít) as the Hebrew word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English names it after butter and nuts; Hebrew gave this one squash variety a one-word name of its own."
+    ],
+    "pitfalls": [
+     "Feminine: דָּלוֹרִית מְתוּקָה; plural דָּלוֹרִיּוֹת.",
+     "Not every orange squash is a דָּלוֹרִית: the general word is דְּלַעַת."
+    ],
+    "subtleties": [
+     "The plural doubles the י, as with כְּרוּבִית → כְּרוּבִיּוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:afuna-sinit",
+   "lemma": "אֲפוּנָה סִינִית",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.snowpea"
+   ],
+   "gender": "FEM",
+   "translit": "afuna sinit",
+   "features": {
+    "spelling": "אפונה סינית",
+    "root": {
+     "none": "a compound of two words (אֲפוּנָה + סִינִית): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אֲפוּנָה סִינִית",
+    "N;SG;DEF": "הָאֲפוּנָה הַסִּינִית"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first). Used as a mass noun.",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries אֲפוּנָה and סִינִי (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Flat green pods, crisp in Asian stir-fries.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "snow peas, mangetout",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.snowpea"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא מַקְפִּיץ אֲפוּנָה סִינִית עִם שׁוּם.",
+      "tr": "He stir-fries snow peas with garlic.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אוֹכְלִים אֶת הָאֲפוּנָה הַסִּינִית עִם הַתַּרְמִיל.",
+      "tr": "Snow peas are eaten pod and all.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי אֲפוּנָה סִינִית בַּשּׁוּק.",
+      "tr": "I bought snow peas at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֲפוּנָה סִינִית מֻקְפֶּצֶת",
+      "tr": "stir-fried snow peas"
+     },
+     {
+      "text": "תַּרְמִילֵי אֲפוּנָה סִינִית",
+      "tr": "snow pea pods"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym.",
+    "etymology": {
+     "text": "אֲפוּנָה “pea(s)” (Wiktionary gives no etymology) + סִינִית “Chinese”, feminine of סִינִי (סין “China” + ־י).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "French mangetout means “eat-all” — you eat the whole pod, as the Hebrew example says."
+    ],
+    "pitfalls": [
+     "The adjective is feminine like אֲפוּנָה: אֲפוּנָה סִינִית, הָאֲפוּנָה הַסִּינִית.",
+     "A mass noun: “snow peas” is singular in Hebrew."
+    ],
+    "subtleties": [
+     "On its own סִינִית means “Chinese (language)” or “a Chinese woman”; here it is only an adjective."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.bittermelon",
+   "reason": "Known only from Asian and Indian cooking; no established Hebrew name.",
+   "use": "The English or Indian name (karela) in Hebrew letters."
+  },
+  {
+   "concept": "veg.bottlegourd",
+   "reason": "Not an everyday vegetable in Israel; no common name.",
+   "use": "Described as a kind of דְּלַעַת (gourd, squash)."
+  },
+  {
+   "concept": "veg.chayote",
+   "reason": "Hardly known in Israel; no Hebrew name in use.",
+   "use": "The Spanish name chayote in Hebrew letters."
+  },
+  {
+   "concept": "veg.wintermelon",
+   "reason": "Known only from Chinese cooking; no Hebrew name in use.",
+   "use": "Described as a kind of דְּלַעַת, or the English name."
+  },
+  {
+   "concept": "veg.bokchoy",
+   "reason": "No Hebrew word: shops use the Chinese names in Hebrew letters, with varying spellings.",
+   "use": "פאק צ׳וי / בוק צ׳וי; loosely כְּרוּב סִינִי (which properly is Napa cabbage)."
+  },
+  {
+   "concept": "veg.jalapeno",
+   "reason": "No Hebrew word: the Spanish name is used, with unstable spelling.",
+   "use": "חלפיניו (also spelled in other ways), or simply פִּלְפֵּל חָרִיף (veg.chili)."
+  },
+  {
+   "concept": "veg.runnerbean",
+   "reason": "Not a distinct everyday vegetable in Israel; no common name.",
+   "use": "שְׁעוּעִית (beans), or שְׁעוּעִית יְרֻקָּה for the green pods."
+  },
+  {
+   "concept": "veg.collards",
+   "reason": "Not grown or eaten in Israel; no Hebrew name.",
+   "use": "The English name, or a description as a kind of כְּרוּב (cabbage) or קֵייל (kale)."
+  }
+ ]
+}

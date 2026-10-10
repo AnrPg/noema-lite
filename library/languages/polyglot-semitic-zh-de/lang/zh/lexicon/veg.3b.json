@@ -1,0 +1,3207 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:cishangan",
+   "lemma": "刺山柑",
+   "trad": "刺山柑",
+   "pinyin": "cì shān gān",
+   "pos": "NOUN",
+   "senses": [
+    "veg.capers"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 刺山柑 (title for Capparis spinosa, Wikidata Q156251); Wiktionary has no entry (its 酸豆 lists “pickled caper”)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Salty-sour little buds of Mediterranean cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "caper (Capparis spinosa): the shrub and its flower buds, eaten pickled",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.capers"
+     }
+    ],
+    "examples": [
+     {
+      "text": "刺山柑的花蕾腌过以后，就是西餐里的酸豆。",
+      "tr": "Pickled caper buds are the “capers” of Western cooking.",
+      "register": "neutral",
+      "context": "Western cooking",
+      "sense": "s1",
+      "py": "Cìshāngān de huālěi yān guo yǐhòu, jiù shì xīcān li de suāndòu."
+     },
+     {
+      "text": "烟熏三文鱼上放几颗刺山柑。",
+      "tr": "Put a few capers on the smoked salmon.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Yānxūn sānwényú shang fàng jǐ kē cìshāngān."
+     },
+     {
+      "text": "新疆的戈壁上也长着野生的刺山柑。",
+      "tr": "Wild capers grow in the gravel deserts of Xinjiang too.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1",
+      "py": "Xīnjiāng de gēbì shang yě zhǎngzhe yěshēng de cìshāngān."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "刺山柑花蕾",
+      "tr": "caper buds"
+     },
+     {
+      "text": "腌刺山柑",
+      "tr": "pickled capers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "酸豆",
+      "register": "neutral",
+      "nuance": "‘sour bean’: the cooking name for pickled capers, common in Taiwan and in Western recipes — but 酸豆 also means tamarind"
+     }
+    ],
+    "etymology": {
+     "text": "刺 (‘thorn’) + 山柑 (the caper genus Capparis): the ‘thorny Capparis’.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Arabic كَبَر (kabar), Greek κάππαρις (kápparis), German Kaper and English caper are all the same word."
+    ],
+    "pitfalls": [
+     "酸豆 alone often means tamarind (also 酸角) on the Mainland — say 刺山柑 to be clear."
+    ],
+    "subtleties": [
+     "Caper berries (the fruit) are bigger than capers (the buds); the smallest buds are the most prized."
+    ]
+   }
+  },
+  {
+   "id": "zh:huoshenguo",
+   "lemma": "火参果",
+   "trad": "火參果",
+   "pinyin": "huǒ shēn guǒ",
+   "pos": "NOUN",
+   "senses": [
+    "veg.kiwano"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 火參果 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "market name (not in Wiktionary or CC-CEDICT); zh.wikipedia files the plant as 刺角瓜 (Wikidata Q41318)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A spiky orange curiosity with green jelly inside.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kiwano, horned melon (Cucumis metuliferus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kiwano"
+     }
+    ],
+    "examples": [
+     {
+      "text": "火参果外面是橙黄色的，长满了刺。",
+      "tr": "A kiwano is orange-yellow outside and covered in spikes.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Huǒshēnguǒ wàimian shì chénghuángsè de, zhǎngmǎn le cì."
+     },
+     {
+      "text": "火参果里面是绿色的果冻一样的果肉。",
+      "tr": "Inside, a kiwano has green, jelly-like flesh.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1",
+      "py": "Huǒshēnguǒ lǐmian shì lǜsè de guǒdòng yíyàng de guǒròu."
+     },
+     {
+      "text": "火参果原产非洲，现在超市里也能买到。",
+      "tr": "Kiwano comes from Africa; now you can buy it in supermarkets too.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Huǒshēnguǒ yuánchǎn Fēizhōu, xiànzài chāoshì li yě néng mǎidào."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个火参果",
+      "tr": "a kiwano"
+     },
+     {
+      "text": "火参果果肉",
+      "tr": "kiwano pulp"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "刺角瓜",
+      "register": "technical",
+      "nuance": "‘thorny horned melon’: the botanical name used by Chinese Wikipedia"
+     }
+    ],
+    "etymology": {
+     "text": "A modern market name: 火 (‘fire’) + 参 (shēn, as in 人参果, another exotic fruit) + 果 (‘fruit’).",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "It is a cucumber relative (Cucumis): the jelly tastes like cucumber with a hint of banana and lime.",
+     "In the Kalahari the wild plant is a source of water."
+    ],
+    "pitfalls": [
+     "火参果 is not 人参果, which is the pepino melon (a nightshade).",
+     "参 is shēn here, as in 人参."
+    ],
+    "subtleties": [
+     "Sold in China as an exotic fruit, although the plant is a cucumber relative."
+    ]
+   }
+  },
+  {
+   "id": "zh:miandou",
+   "lemma": "棉豆",
+   "trad": "棉豆",
+   "pinyin": "mián dòu",
+   "pos": "NOUN",
+   "senses": [
+    "veg.limabean"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Creamy flat beans; Taiwan’s “emperor beans”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lima bean, butter bean (Phaseolus lunatus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.limabean"
+     }
+    ],
+    "examples": [
+     {
+      "text": "棉豆又大又扁，煮熟以后又软又糯。",
+      "tr": "Lima beans are big and flat, soft and creamy once cooked.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1",
+      "py": "Miándòu yòu dà yòu biǎn, zhǔshú yǐhòu yòu ruǎn yòu nuò."
+     },
+     {
+      "text": "生棉豆不能吃，一定要煮透。",
+      "tr": "Raw lima beans are not edible; always cook them through.",
+      "register": "neutral",
+      "context": "safety",
+      "sense": "s1",
+      "py": "Shēng miándòu bù néng chī, yídìng yào zhǔtòu."
+     },
+     {
+      "text": "在台湾，棉豆叫皇帝豆。",
+      "tr": "In Taiwan lima beans are called “emperor beans”.",
+      "register": "neutral",
+      "context": "regions",
+      "sense": "s1",
+      "py": "Zài Táiwān, miándòu jiào huángdìdòu."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "煮棉豆",
+      "tr": "boiled lima beans"
+     },
+     {
+      "text": "棉豆汤",
+      "tr": "lima bean soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "皇帝豆",
+      "register": "regional",
+      "nuance": "‘emperor bean’: the Taiwanese name (also Hokkien, Hakka)",
+      "region": "Taiwan"
+     },
+     {
+      "word": "利马豆",
+      "register": "neutral",
+      "nuance": "a sound loan of ‘Lima’, used on packaging of frozen beans"
+     }
+    ],
+    "etymology": {
+     "text": "棉 (‘cotton’) + 豆 (‘bean’). The English name comes from Lima, Peru.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Named after Lima in Peru, from where the beans were shipped; they were domesticated in South America thousands of years ago."
+    ],
+    "pitfalls": [
+     "Raw lima beans contain cyanogenic glycosides — always cook them well.",
+     "棉 mián (cotton) is not 绵 mián (soft, continuous)."
+    ],
+    "subtleties": [
+     "In Britain the dried white ones are called butter beans."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhouyeganlan",
+   "lemma": "皱叶甘蓝",
+   "trad": "皺葉甘藍",
+   "pinyin": "zhòu yè gān lán",
+   "pos": "NOUN",
+   "senses": [
+    "veg.savoy"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 皺葉甘藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "棵"
+    ]
+   },
+   "ref": {
+    "src": "descriptive standard name (not in Wiktionary or CC-CEDICT)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crinkly green winter cabbage of Central Europe.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Savoy cabbage (Brassica oleracea var. sabauda)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.savoy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "皱叶甘蓝的叶子皱皱的，比普通卷心菜软。",
+      "tr": "Savoy cabbage has crinkly leaves, softer than ordinary cabbage.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Zhòuyè gānlán de yèzi zhòuzhòu de, bǐ pǔtōng juǎnxīncài ruǎn."
+     },
+     {
+      "text": "德国人冬天用皱叶甘蓝做菜卷。",
+      "tr": "In winter Germans make cabbage rolls with Savoy cabbage.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s1",
+      "py": "Déguó rén dōngtiān yòng zhòuyè gānlán zuò cài juǎn."
+     },
+     {
+      "text": "我买一个皱叶甘蓝。",
+      "tr": "I’ll buy a Savoy cabbage.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Wǒ mǎi yí ge zhòuyè gānlán."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "皱叶甘蓝卷",
+      "tr": "Savoy cabbage rolls"
+     },
+     {
+      "text": "皱叶甘蓝汤",
+      "tr": "Savoy cabbage soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other established name: 皱叶甘蓝 (‘wrinkled-leaf cabbage’) is the descriptive standard term; in everyday talk people may just say 卷心菜 or 包菜.",
+    "etymology": {
+     "text": "皱叶 (‘wrinkled leaves’) + 甘蓝 (‘cabbage, Brassica oleracea’): a descriptive name.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "English Savoy comes from the Savoy region in the Alps; German Wirsing comes from Italian (Lombard) verza."
+    ],
+    "pitfalls": [
+     "In 甘蓝, 蓝 is an old plant word (as in the indigo plant), not the colour blue."
+    ],
+    "subtleties": [
+     "Its looser, crinkled leaves cook faster than a smooth white cabbage."
+    ]
+   }
+  },
+  {
+   "id": "zh:guaerdou",
+   "lemma": "瓜尔豆",
+   "trad": "瓜爾豆",
+   "pinyin": "guā ěr dòu",
+   "pos": "NOUN",
+   "senses": [
+    "veg.guar"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 瓜爾豆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Indian cluster-bean curries; a thickener in ice cream.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "guar, cluster bean (Cyamopsis tetragonoloba): the pods, eaten as a vegetable in India, and the seeds that give guar gum",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.guar"
+     }
+    ],
+    "examples": [
+     {
+      "text": "瓜尔豆在印度是一种常见的蔬菜。",
+      "tr": "In India guar is a common vegetable.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s1",
+      "py": "Guā'ěrdòu zài Yìndù shì yì zhǒng chángjiàn de shūcài."
+     },
+     {
+      "text": "冰淇淋里的瓜尔胶是从瓜尔豆的种子里提取的。",
+      "tr": "The guar gum in ice cream is extracted from guar seeds.",
+      "register": "neutral",
+      "context": "food industry",
+      "sense": "s1",
+      "py": "Bīngqílín li de guā'ěrjiāo shì cóng guā'ěrdòu de zhǒngzi li tíqǔ de."
+     },
+     {
+      "text": "瓜尔豆的豆荚一簇一簇地长在一起。",
+      "tr": "Guar pods grow together in clusters.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1",
+      "py": "Guā'ěrdòu de dòujiá yí cù yí cù de zhǎng zài yìqǐ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "瓜尔胶",
+      "tr": "guar gum"
+     },
+     {
+      "text": "瓜尔豆荚",
+      "tr": "guar pods"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "关华豆",
+      "register": "regional",
+      "nuance": "the Taiwanese name",
+      "region": "Taiwan"
+     }
+    ],
+    "etymology": {
+     "text": "瓜尔 is a sound loan of ‘guar’ (from Hindi ग्वार gvār) + 豆 (‘bean’).",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Most of the world’s guar is grown in India and Pakistan, much of it for guar gum, used in food and in oil drilling."
+    ],
+    "pitfalls": [
+     "瓜尔 is only a sound here; it has nothing to do with 瓜 ‘melon’."
+    ],
+    "subtleties": [
+     "A Mainland name (Wiktionary); in Taiwan the bean is 关华豆."
+    ]
+   }
+  },
+  {
+   "id": "zh:zicai",
+   "lemma": "紫菜",
+   "trad": "紫菜",
+   "pinyin": "zǐ cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.nori"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张",
+     "片"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Comfort soups, sushi rolls, crispy snacks.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "laver, nori (Porphyra/Pyropia seaweeds), usually dried in sheets",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.nori"
+     }
+    ],
+    "examples": [
+     {
+      "text": "紫菜蛋花汤又简单又好喝。",
+      "tr": "Laver and egg-drop soup is simple and tasty.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1",
+      "py": "Zǐcài dànhuā tāng yòu jiǎndān yòu hǎohē."
+     },
+     {
+      "text": "做寿司要用一张紫菜把米饭卷起来。",
+      "tr": "To make sushi you roll the rice up in a sheet of nori.",
+      "register": "neutral",
+      "context": "Japanese food",
+      "sense": "s1",
+      "py": "Zuò shòusī yào yòng yì zhāng zǐcài bǎ mǐfàn juǎn qilai."
+     },
+     {
+      "text": "福建的紫菜很有名。",
+      "tr": "Fujian laver is famous.",
+      "register": "neutral",
+      "context": "regions",
+      "sense": "s1",
+      "py": "Fújiàn de zǐcài hěn yǒumíng."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "紫菜蛋花汤",
+      "tr": "laver and egg-drop soup"
+     },
+     {
+      "text": "紫菜包饭",
+      "tr": "gimbap, Korean rice rolls"
+     },
+     {
+      "text": "一张紫菜",
+      "tr": "a sheet of nori"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "海苔",
+      "register": "neutral",
+      "nuance": "roasted, often seasoned nori sheets and snacks; an orthographic borrowing from Japanese"
+     }
+    ],
+    "etymology": {
+     "text": "紫 (‘purple’) + 菜 (‘vegetable’): fresh laver is purplish-red, turning dark green-black when dried and roasted.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Welsh laverbread is made from the same kind of seaweed.",
+     "The British phycologist Kathleen Drew-Baker worked out the laver life cycle (1949), which saved Japan’s nori farming; she is honoured there as the “Mother of the Sea”."
+    ],
+    "pitfalls": [
+     "In Eastern Min (Fuzhou), 紫菜 can mean eggplant (Wiktionary)."
+    ],
+    "subtleties": [
+     "紫菜 is the seaweed in general, as in soups; 海苔 suggests the crisp roasted sheets or snacks."
+    ]
+   }
+  },
+  {
+   "id": "zh:lengjiaosigua",
+   "lemma": "棱角丝瓜",
+   "trad": "稜角絲瓜",
+   "pinyin": "léng jiǎo sī guā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.ridgedgourd"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 稜角絲瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "条"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Angular green gourds of Cantonese home cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "ridged gourd, angled luffa, ‘Chinese okra’ (Luffa acutangula)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.ridgedgourd"
+     }
+    ],
+    "examples": [
+     {
+      "text": "棱角丝瓜有十条棱，炒之前要把棱刨掉。",
+      "tr": "A ridged gourd has ten ridges; shave them off before stir-frying.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Léngjiǎo sīguā yǒu shí tiáo léng, chǎo zhīqián yào bǎ léng páodiào."
+     },
+     {
+      "text": "广东人把棱角丝瓜叫作胜瓜。",
+      "tr": "Cantonese people call the ridged gourd shenggua.",
+      "register": "neutral",
+      "context": "regions",
+      "sense": "s1",
+      "py": "Guǎngdōng rén bǎ léngjiǎo sīguā jiàozuò shèngguā."
+     },
+     {
+      "text": "棱角丝瓜炒鸡蛋是一道家常菜。",
+      "tr": "Ridged gourd with scrambled eggs is a home dish.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1",
+      "py": "Léngjiǎo sīguā chǎo jīdàn shì yí dào jiāchángcài."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "棱角丝瓜炒蛋",
+      "tr": "ridged gourd with egg"
+     },
+     {
+      "text": "棱角丝瓜汤",
+      "tr": "ridged gourd soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "胜瓜",
+      "register": "regional",
+      "nuance": "‘victory gourd’: the Cantonese euphemism, because 丝 sounds like 输 ‘to lose’ in Cantonese",
+      "region": "Guangdong, Hong Kong"
+     },
+     {
+      "word": "八棱瓜",
+      "register": "regional",
+      "nuance": "‘eight-ridged gourd’",
+      "region": "Liuzhou (Guangxi)"
+     },
+     {
+      "word": "澎湖丝瓜",
+      "register": "regional",
+      "nuance": "‘Penghu luffa’",
+      "region": "Taiwan"
+     }
+    ],
+    "etymology": {
+     "text": "棱角 (‘edges, ridges’) + 丝瓜 (‘luffa’): ‘the ridged luffa’.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Cantonese 胜瓜 replaces 丝 because it sounds like 输 ‘lose’ — the same taboo that turned 猪舌 ‘pig’s tongue’ into 猪脷."
+    ],
+    "pitfalls": [
+     "English ‘Chinese okra’ (Wiktionary’s gloss) means this gourd — not okra (秋葵)."
+    ],
+    "subtleties": [
+     "Old dried fruits turn fibrous, but the bath sponge is usually made from the smooth luffa (丝瓜)."
+    ]
+   }
+  },
+  {
+   "id": "zh:silengdou",
+   "lemma": "四棱豆",
+   "trad": "四稜豆",
+   "pinyin": "sì léng dòu",
+   "pos": "NOUN",
+   "senses": [
+    "veg.wingedbean"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 四稜豆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Frilly, star-shaped pods of the tropics.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "winged bean (Psophocarpus tetragonolobus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wingedbean"
+     }
+    ],
+    "examples": [
+     {
+      "text": "四棱豆切开以后，横截面像一颗星星。",
+      "tr": "Cut across, a winged bean looks like a star.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Sìléngdòu qiēkāi yǐhòu, héngjiémiàn xiàng yì kē xīngxing."
+     },
+     {
+      "text": "四棱豆全身都能吃：豆荚、叶子、花和块根。",
+      "tr": "Every part of the winged bean is edible: pods, leaves, flowers and roots.",
+      "register": "neutral",
+      "context": "nutrition",
+      "sense": "s1",
+      "py": "Sìléngdòu quánshēn dōu néng chī: dòujiá, yèzi, huā hé kuàigēn."
+     },
+     {
+      "text": "海南的菜市场里有四棱豆卖。",
+      "tr": "Winged beans are sold at markets in Hainan.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Hǎinán de càishìchǎng li yǒu sìléngdòu mài."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "清炒四棱豆",
+      "tr": "plain stir-fried winged beans"
+     },
+     {
+      "text": "凉拌四棱豆",
+      "tr": "winged bean salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "四角豆",
+      "register": "regional",
+      "nuance": "‘four-cornered bean’: the Hokkien name",
+      "region": "Fujian, Taiwan, Southeast Asia"
+     }
+    ],
+    "etymology": {
+     "text": "四 (‘four’) + 棱 (‘ridge, edge’) + 豆 (‘bean’): the pods have four frilly wings.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Nicknamed a ‘one-species supermarket’, because nearly every part of the plant can be eaten."
+    ],
+    "pitfalls": [
+     "Don’t mix up 四棱豆 (winged bean) and 四季豆 (green bean)."
+    ],
+    "subtleties": [
+     "Its ripe seeds are about as rich in protein as soybeans."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiangdou",
+   "lemma": "豇豆",
+   "trad": "豇豆",
+   "pinyin": "jiāng dòu",
+   "pos": "NOUN",
+   "senses": [
+    "veg.yardlongbean",
+    "food.blackeyedpea"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 豇豆 as “cowpea; black-eyed pea” (the species). The long green 豇豆 of Chinese markets is the yardlong bean, Vigna unguiculata subsp. sesquipedalis, a cowpea subspecies (zh.wikipedia 長豇豆, Wikidata Q1323455)."
+    }
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Long green strings in summer gardens; sour pickled beans.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yardlong bean, long bean: the long green pods sold as 豇豆 in China",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.yardlongbean"
+     },
+     {
+      "id": "s2",
+      "def": "cowpea, black-eyed pea (Vigna unguiculata) and its dry beans",
+      "register": [
+       "neutral"
+      ],
+      "concept": "food.blackeyedpea"
+     }
+    ],
+    "examples": [
+     {
+      "text": "酸豇豆炒肉末很下饭。",
+      "tr": "Sour pickled long beans fried with minced pork go great with rice.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1",
+      "py": "Suān jiāngdòu chǎo ròumò hěn xiàfàn."
+     },
+     {
+      "text": "豇豆一定要炒熟，生的会中毒。",
+      "tr": "Long beans must be cooked through — raw ones can make you ill.",
+      "register": "neutral",
+      "context": "safety",
+      "sense": "s1",
+      "py": "Jiāngdòu yídìng yào chǎoshú, shēng de huì zhòngdú."
+     },
+     {
+      "text": "菜园里的豇豆长得比筷子还长。",
+      "tr": "The long beans in the vegetable garden grow longer than chopsticks.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1",
+      "py": "Càiyuán li de jiāngdòu zhǎng de bǐ kuàizi hái cháng."
+     },
+     {
+      "text": "美国南方人新年要吃黑眼豆，它也是一种豇豆。",
+      "tr": "In the American South people eat black-eyed peas at New Year — they are a kind of cowpea too.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s2",
+      "py": "Měiguó nánfāng rén xīnnián yào chī hēiyǎndòu, tā yě shì yì zhǒng jiāngdòu."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "酸豇豆",
+      "tr": "sour pickled long beans"
+     },
+     {
+      "text": "干煸豇豆",
+      "tr": "dry-fried long beans"
+     },
+     {
+      "text": "长豇豆",
+      "tr": "yardlong bean (the precise name)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "豆角",
+      "register": "colloquial",
+      "nuance": "the everyday word for bean pods; in the south often the long bean, in the north usually the green bean"
+     },
+     {
+      "word": "长豇豆",
+      "register": "technical",
+      "nuance": "the precise name of the yardlong bean"
+     }
+    ],
+    "etymology": {
+     "text": "豇 (a character used only in this word: 豆 ‘bean’ + phonetic 工) + 豆 (‘bean’).",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The pods can grow half a metre long — English ‘yardlong’ exaggerates a little."
+    ],
+    "pitfalls": [
+     "Wiktionary’s gloss is ‘cowpea; black-eyed pea’ — the long green 豇豆 at a Chinese market is the yardlong bean, a cowpea subspecies.",
+     "豇 is jiāng (1st tone), like 江 ‘river’."
+    ],
+    "subtleties": [
+     "What 豆角 means depends on the region: green beans (四季豆) in much of the north, long beans in many southern places."
+    ]
+   }
+  },
+  {
+   "id": "zh:baotahuacai",
+   "lemma": "宝塔花菜",
+   "trad": "寶塔花菜",
+   "pinyin": "bǎo tǎ huā cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.romanesco"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 寶塔花菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "棵"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 宝塔花菜 (title for Wikidata Q1775431, “又称罗马花椰菜”); Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fractal green pagodas — a vegetable for mathematicians.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Romanesco broccoli: a cauliflower cultivar with spiral, cone-shaped florets",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.romanesco"
+     }
+    ],
+    "examples": [
+     {
+      "text": "宝塔花菜的样子像绿色的小宝塔。",
+      "tr": "Romanesco looks like little green pagodas.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Bǎotǎ huācài de yàngzi xiàng lǜsè de xiǎo bǎotǎ."
+     },
+     {
+      "text": "数学老师用宝塔花菜讲分形。",
+      "tr": "The maths teacher uses Romanesco to explain fractals.",
+      "register": "neutral",
+      "context": "maths",
+      "sense": "s1",
+      "py": "Shùxué lǎoshī yòng bǎotǎ huācài jiǎng fēnxíng."
+     },
+     {
+      "text": "宝塔花菜可以像西兰花一样焯水凉拌。",
+      "tr": "Romanesco can be blanched and dressed cold like broccoli.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Bǎotǎ huācài kěyǐ xiàng xīlánhuā yíyàng chāoshuǐ liángbàn."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "清炒宝塔花菜",
+      "tr": "plain stir-fried Romanesco"
+     },
+     {
+      "text": "一个宝塔花菜",
+      "tr": "a head of Romanesco"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "罗马花椰菜",
+      "register": "neutral",
+      "nuance": "‘Roman cauliflower’: a translation of the Italian name"
+     }
+    ],
+    "etymology": {
+     "text": "宝塔 (‘pagoda’) + 花菜 (‘cauliflower’): ‘pagoda cauliflower’, after the spiral cones.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "The number of spirals on a Romanesco is usually a Fibonacci number.",
+     "Italian romanesco means ‘Roman’."
+    ],
+    "pitfalls": [
+     "宝塔菜 (without 花) is the Chinese artichoke 甘露子, a tuber."
+    ],
+    "subtleties": [
+     "Botanically a cauliflower cultivar, it tastes somewhere between cauliflower and broccoli."
+    ]
+   }
+  },
+  {
+   "id": "zh:kayanlajiao",
+   "lemma": "卡宴辣椒",
+   "trad": "卡宴辣椒",
+   "pinyin": "kǎ yàn là jiāo",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cayenne"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Red-hot Louisiana and Cajun cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cayenne pepper: a slim, hot red chili, and the powder made from it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cayenne"
+     }
+    ],
+    "examples": [
+     {
+      "text": "卡宴辣椒粉在西餐里很常用。",
+      "tr": "Cayenne powder is widely used in Western cooking.",
+      "register": "neutral",
+      "context": "Western cooking",
+      "sense": "s1",
+      "py": "Kǎyàn làjiāo fěn zài xīcān li hěn chángyòng."
+     },
+     {
+      "text": "卡宴辣椒又细又长，红红的。",
+      "tr": "Cayenne peppers are slim, long and bright red.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Kǎyàn làjiāo yòu xì yòu cháng, hónghóng de."
+     },
+     {
+      "text": "美国路易斯安那的菜离不开卡宴辣椒。",
+      "tr": "Louisiana cooking can’t do without cayenne.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s1",
+      "py": "Měiguó Lùyìsī'ānnà de cài lí bu kāi kǎyàn làjiāo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "卡宴辣椒粉",
+      "tr": "cayenne powder"
+     },
+     {
+      "text": "一根卡宴辣椒",
+      "tr": "a cayenne pepper"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No native name: Chinese uses this loan (卡宴 renders ‘Cayenne’); for the powder people may simply say 辣椒粉 ‘chili powder’.",
+    "etymology": {
+     "text": "卡宴 (Kǎyàn) renders ‘Cayenne’ (as in Cayenne, French Guiana) + 辣椒 (‘chili’).",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "卡宴 is also how Chinese writes the Porsche Cayenne."
+    ],
+    "pitfalls": [
+     "宴 (banquet) is only a sound here."
+    ],
+    "subtleties": [
+     "Around 30,000–50,000 Scoville units: hotter than a jalapeño (墨西哥辣椒), milder than a habanero (哈瓦那辣椒)."
+    ]
+   }
+  },
+  {
+   "id": "zh:hawanalajiao",
+   "lemma": "哈瓦那辣椒",
+   "trad": "哈瓦那辣椒",
+   "pinyin": "hā wǎ nà là jiāo",
+   "pos": "NOUN",
+   "senses": [
+    "veg.habanero"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 哈瓦那辣椒 (title for Wikidata Q764375); Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fruity, fiery little lanterns.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "habanero (Capsicum chinense): a small, lantern-shaped, very hot chili",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.habanero"
+     }
+    ],
+    "examples": [
+     {
+      "text": "哈瓦那辣椒非常辣，切的时候最好戴手套。",
+      "tr": "Habaneros are extremely hot — best wear gloves when you cut them.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1",
+      "py": "Hāwǎnà làjiāo fēicháng là, qiē de shíhou zuìhǎo dài shǒutào."
+     },
+     {
+      "text": "哈瓦那辣椒小小的，像个灯笼。",
+      "tr": "A habanero is small and shaped like a lantern.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Hāwǎnà làjiāo xiǎoxiǎo de, xiàng ge dēnglong."
+     },
+     {
+      "text": "墨西哥尤卡坦的辣酱常用哈瓦那辣椒。",
+      "tr": "Hot sauces from Yucatán in Mexico often use habaneros.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s1",
+      "py": "Mòxīgē Yóukǎtǎn de làjiàng cháng yòng hāwǎnà làjiāo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "哈瓦那辣椒酱",
+      "tr": "habanero sauce"
+     },
+     {
+      "text": "一个哈瓦那辣椒",
+      "tr": "a habanero"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "Chinese uses only this transcribed name. The Hainan 黄灯笼辣椒 (‘yellow lantern chili’) is the same species, Capsicum chinense, but a different variety, not a synonym.",
+    "etymology": {
+     "text": "哈瓦那 (Havana, Spanish La Habana) + 辣椒 (‘chili’): like Spanish habanero, ‘from Havana’.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Its species name, Capsicum chinense, means ‘Chinese pepper’ — a European botanist’s mistake; it comes from the Americas."
+    ],
+    "pitfalls": [
+     "The name says Havana, but the pepper is grown mainly in Mexico’s Yucatán — not specially Cuban."
+    ],
+    "subtleties": [
+     "About 100,000–350,000 Scoville units, with a fruity aroma behind the heat."
+    ]
+   }
+  },
+  {
+   "id": "zh:qundaicai",
+   "lemma": "裙带菜",
+   "trad": "裙帶菜",
+   "pinyin": "qún dài cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.wakame"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 裙帶菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "片"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Silky green seaweed of miso soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wakame (Undaria pinnatifida)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.wakame"
+     }
+    ],
+    "examples": [
+     {
+      "text": "味噌汤里的绿色海藻就是裙带菜。",
+      "tr": "The green seaweed in miso soup is wakame.",
+      "register": "neutral",
+      "context": "Japanese food",
+      "sense": "s1",
+      "py": "Wèicēng tāng li de lǜsè hǎizǎo jiù shì qúndàicài."
+     },
+     {
+      "text": "凉拌裙带菜酸酸甜甜的，很开胃。",
+      "tr": "Wakame salad is sweet and sour and whets the appetite.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Liángbàn qúndàicài suānsuāntiántián de, hěn kāiwèi."
+     },
+     {
+      "text": "大连沿海养殖了很多裙带菜。",
+      "tr": "A lot of wakame is farmed along the coast of Dalian.",
+      "register": "neutral",
+      "context": "farming",
+      "sense": "s1",
+      "py": "Dàlián yánhǎi yǎngzhí le hěn duō qúndàicài."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "凉拌裙带菜",
+      "tr": "wakame salad"
+     },
+     {
+      "text": "干裙带菜",
+      "tr": "dried wakame"
+     },
+     {
+      "text": "裙带菜汤",
+      "tr": "wakame soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "海带芽",
+      "register": "regional",
+      "nuance": "‘kelp sprouts’: the usual name in Taiwan",
+      "region": "Taiwan"
+     }
+    ],
+    "etymology": {
+     "text": "裙带 (‘skirt band, skirt ties’) + 菜 (‘vegetable’): the long, wavy fronds look like ribbons.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "裙带 is the same word as in 裙带关系 ‘connections through one’s wife’s family; nepotism’.",
+     "Wakame has spread as an invasive species to Europe, New Zealand and California."
+    ],
+    "pitfalls": [
+     "裙带菜 (wakame) is not 海带 (kombu): wakame is thin and silky, kombu thick and leathery."
+    ],
+    "subtleties": [
+     "Korean seaweed soup (miyeok-guk), eaten on birthdays and after giving birth, is made with it."
+    ]
+   }
+  },
+  {
+   "id": "zh:shegua",
+   "lemma": "蛇瓜",
+   "trad": "蛇瓜",
+   "pinyin": "shé guā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.snakegourd"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "条"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A gourd that looks like a green snake.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "snake gourd (Trichosanthes cucumerina subsp. anguina)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.snakegourd"
+     }
+    ],
+    "examples": [
+     {
+      "text": "蛇瓜又细又长，弯弯曲曲的，像一条蛇。",
+      "tr": "Snake gourds are long, thin and twisting, like a snake.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Shéguā yòu xì yòu cháng, wānwānqūqū de, xiàng yì tiáo shé."
+     },
+     {
+      "text": "蛇瓜嫩的时候可以炒着吃，老了就不好吃了。",
+      "tr": "Young snake gourds can be stir-fried; old ones aren’t good to eat.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Shéguā nèn de shíhou kěyǐ chǎozhe chī, lǎo le jiù bù hǎochī le."
+     },
+     {
+      "text": "有人在蛇瓜下面挂一块石头，让它长得更直。",
+      "tr": "Some growers hang a stone from a snake gourd to make it grow straighter.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1",
+      "py": "Yǒu rén zài shéguā xiàmian guà yí kuài shítou, ràng tā zhǎng de gèng zhí."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一根蛇瓜",
+      "tr": "a snake gourd"
+     },
+     {
+      "text": "清炒蛇瓜",
+      "tr": "plain stir-fried snake gourd"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "瓜叶栝楼",
+      "register": "technical",
+      "nuance": "the botanical species name (Trichosanthes cucumerina), used by Chinese Wikipedia"
+     }
+    ],
+    "etymology": {
+     "text": "蛇 (‘snake’) + 瓜 (‘gourd’): after the long, twisting fruit.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It belongs to the genus Trichosanthes (栝楼属), like the 栝楼 used in Chinese medicine."
+    ],
+    "pitfalls": [
+     "Ripe snake gourds turn red and soft; only young green ones are eaten as a vegetable."
+    ],
+    "subtleties": [
+     "The fruit can grow well over a metre long."
+    ]
+   }
+  },
+  {
+   "id": "zh:haidai",
+   "lemma": "海带",
+   "trad": "海帶",
+   "pinyin": "hǎi dài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.kombu",
+    "person.unemployedreturnee"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 海帶 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "片",
+     "条"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses 海帶 as “kelp; seaweed (Saccharina japonica)” without the word “kombu”; kombu is made from Saccharina japonica (Wikidata Q11261547, zh.wikipedia 海带 (食材))."
+    }
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Long dark ribbons in pork-rib soup; the taste of umami.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "kelp, kombu (Saccharina japonica), fresh or dried",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kombu"
+     },
+     {
+      "id": "s2",
+      "def": "(neologism, humorous) a returnee from study abroad who cannot find a job (a pun on 海待)",
+      "register": [
+       "humorous"
+      ],
+      "concept": "person.unemployedreturnee"
+     }
+    ],
+    "examples": [
+     {
+      "text": "海带排骨汤是很多家庭的家常汤。",
+      "tr": "Kelp and pork-rib soup is a home soup in many families.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1",
+      "py": "Hǎidài páigǔ tāng shì hěn duō jiātíng de jiācháng tāng."
+     },
+     {
+      "text": "日本的高汤常常用海带和木鱼花来熬。",
+      "tr": "Japanese stock is often simmered from kombu and bonito flakes.",
+      "register": "neutral",
+      "context": "Japanese food",
+      "sense": "s1",
+      "py": "Rìběn de gāotāng chángcháng yòng hǎidài hé mùyúhuā lái áo."
+     },
+     {
+      "text": "海带含有很多碘。",
+      "tr": "Kelp contains a lot of iodine.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1",
+      "py": "Hǎidài hányǒu hěn duō diǎn."
+     },
+     {
+      "text": "他留学回来一年了，还没找到工作，成了“海带”。",
+      "tr": "He came back from studying abroad a year ago and still hasn’t found a job — he’s become a “kelp”.",
+      "register": "humorous",
+      "context": "slang",
+      "sense": "s2",
+      "py": "Tā liúxué huílai yì nián le, hái méi zhǎodào gōngzuò, chéngle “hǎidài”."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "海带丝",
+      "tr": "shredded kelp"
+     },
+     {
+      "text": "海带结",
+      "tr": "kelp knots"
+     },
+     {
+      "text": "凉拌海带",
+      "tr": "kelp salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "昆布",
+      "register": "technical",
+      "nuance": "the written name in Chinese medicine and on Japanese-style menus (kombu)"
+     }
+    ],
+    "etymology": {
+     "text": "海 (‘sea’) + 带 (‘belt, ribbon’): after the long, belt-like fronds.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Glutamate — the taste behind ‘umami’ and MSG — was discovered in kombu broth by Kikunae Ikeda in 1908.",
+     "China is by far the world’s largest kelp grower."
+    ],
+    "pitfalls": [
+     "海带 (kombu) is not 裙带菜 (wakame)."
+    ],
+    "subtleties": [
+     "The white powder on dried kombu is mannitol, a flavour carrier, not mould — wipe it lightly, don’t wash it off."
+    ]
+   }
+  },
+  {
+   "id": "zh:shichun",
+   "lemma": "石莼",
+   "trad": "石蓴",
+   "pinyin": "shí chún",
+   "pos": "NOUN",
+   "senses": [
+    "veg.sealettuce"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 石蓴 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "片"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 石莼属 (Ulva, Wikidata Q1109330), species 石莼 (Ulva lactuca); Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bright green seaweed on the rocks at low tide.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sea lettuce (Ulva lactuca and related green seaweeds)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.sealettuce"
+     }
+    ],
+    "examples": [
+     {
+      "text": "石莼是一种绿色的海藻，样子像生菜叶。",
+      "tr": "Sea lettuce is a green seaweed that looks like lettuce leaves.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Shíchún shì yì zhǒng lǜsè de hǎizǎo, yàngzi xiàng shēngcài yè."
+     },
+     {
+      "text": "海边的人把石莼晒干，用来煮汤。",
+      "tr": "People on the coast dry sea lettuce and use it in soup.",
+      "register": "neutral",
+      "context": "coast",
+      "sense": "s1",
+      "py": "Hǎibiān de rén bǎ shíchún shàigān, yònglái zhǔ tāng."
+     },
+     {
+      "text": "石莼长得太多，会引起绿潮。",
+      "tr": "When sea lettuce grows too much it causes a green tide.",
+      "register": "neutral",
+      "context": "environment",
+      "sense": "s1",
+      "py": "Shíchún zhǎng de tài duō, huì yǐnqǐ lǜcháo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "干石莼",
+      "tr": "dried sea lettuce"
+     },
+     {
+      "text": "石莼汤",
+      "tr": "sea lettuce soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "海菜",
+      "register": "colloquial",
+      "nuance": "‘sea vegetable’: the general word for edible seaweed, used loosely for it on the coast"
+     }
+    ],
+    "etymology": {
+     "text": "石 (‘stone’) + 莼 (chún, the water shield, an aquatic vegetable): the ‘stone 莼’, growing on rocks between the tides.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "The idiom 莼鲈之思 (‘longing for water-shield soup and perch’, i.e. homesickness) is about the freshwater 莼菜, not this seaweed."
+    ],
+    "pitfalls": [
+     "The green tides of the Yellow Sea are mostly 浒苔 (Ulva prolifera), a close relative — not the same word."
+    ],
+    "subtleties": [
+     "A sheet of sea lettuce is only two cells thick."
+    ]
+   }
+  },
+  {
+   "id": "zh:jielan",
+   "lemma": "芥蓝",
+   "trad": "芥藍",
+   "pinyin": "jiè lán",
+   "pos": "NOUN",
+   "senses": [
+    "veg.kailan"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 芥藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "根"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Glossy green stalks with oyster sauce in Cantonese restaurants.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Chinese broccoli, kai-lan, Chinese kale (Brassica oleracea, Alboglabra group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.kailan"
+     }
+    ],
+    "examples": [
+     {
+      "text": "蚝油芥蓝是粤菜馆里的常见菜。",
+      "tr": "Kai-lan with oyster sauce is a standard dish in Cantonese restaurants.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1",
+      "py": "Háoyóu jièlán shì yuècài guǎn li de chángjiàn cài."
+     },
+     {
+      "text": "芥蓝的茎吃起来脆脆的，有一点儿苦。",
+      "tr": "Kai-lan stems are crunchy and slightly bitter.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1",
+      "py": "Jièlán de jīng chī qilai cuìcuì de, yǒu yìdiǎnr kǔ."
+     },
+     {
+      "text": "芥蓝炒牛肉很下饭。",
+      "tr": "Kai-lan stir-fried with beef goes great with rice.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1",
+      "py": "Jièlán chǎo niúròu hěn xiàfàn."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "蚝油芥蓝",
+      "tr": "kai-lan with oyster sauce"
+     },
+     {
+      "text": "白灼芥蓝",
+      "tr": "blanched kai-lan"
+     },
+     {
+      "text": "芥蓝炒牛肉",
+      "tr": "kai-lan with beef"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "芥兰",
+      "register": "neutral",
+      "nuance": "a very common alternative spelling (from Cantonese 芥蘭)"
+     },
+     {
+      "word": "芥蓝菜",
+      "register": "formal",
+      "nuance": "the fuller written name; also usual in Taiwan"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Persian کلم (kalam, ‘cabbage’). The word is attested from the 11th century, e.g. in Su Shi’s poem “Walking in the Vegetable Garden after the Rain”, written in Guangdong.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English gai lan is the Cantonese pronunciation.",
+     "Su Shi (苏轼) wrote about 芥蓝 during his exile in Guangdong in the 1090s."
+    ],
+    "pitfalls": [
+     "In some Mandarin dialects 芥蓝 means kohlrabi (Wiktionary); in the standard language kohlrabi is 苤蓝."
+    ],
+    "subtleties": [
+     "芥蓝 is the same species as broccoli and cabbage (甘蓝), Brassica oleracea."
+    ]
+   }
+  },
+  {
+   "id": "zh:maodou",
+   "lemma": "毛豆",
+   "trad": "毛豆",
+   "pinyin": "máo dòu",
+   "pos": "NOUN",
+   "senses": [
+    "veg.edamame"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Summer evenings, cold beer and salted pods.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "edamame: young green soybeans, in or out of the pod",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.edamame"
+     }
+    ],
+    "examples": [
+     {
+      "text": "夏天晚上，盐水毛豆配啤酒最舒服。",
+      "tr": "On summer evenings, salted edamame with beer is the best.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s1",
+      "py": "Xiàtiān wǎnshang, yánshuǐ máodòu pèi píjiǔ zuì shūfu."
+     },
+     {
+      "text": "毛豆就是还没成熟的黄豆。",
+      "tr": "Edamame are just soybeans that aren’t ripe yet.",
+      "register": "neutral",
+      "context": "food knowledge",
+      "sense": "s1",
+      "py": "Máodòu jiù shì hái méi chéngshú de huángdòu."
+     },
+     {
+      "text": "毛豆剥出来可以炒雪菜。",
+      "tr": "Shelled edamame can be stir-fried with pickled mustard greens.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Máodòu bāo chulai kěyǐ chǎo xuěcài."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "盐水毛豆",
+      "tr": "edamame boiled in salted water"
+     },
+     {
+      "text": "剥毛豆",
+      "tr": "shell edamame"
+     },
+     {
+      "text": "毛豆炒雪菜",
+      "tr": "edamame with pickled mustard greens"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "毛豆角",
+      "register": "regional",
+      "nuance": "the pods with the beans inside",
+      "region": "Jin-speaking areas (Shanxi)"
+     }
+    ],
+    "etymology": {
+     "text": "毛 (‘hair, fuzz’) + 豆 (‘bean’): the pods are covered in fine hairs.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Japanese edamame (枝豆) means ‘branch beans’ — they were sold still on the stem."
+    ],
+    "pitfalls": [
+     "毛豆 and 黄豆 are the same plant (soybean, 大豆) picked at different ages."
+    ],
+    "subtleties": [
+     "In Chinese home cooking 毛豆 are usually shelled and stir-fried; the salted pods are a bar snack."
+    ]
+   }
+  },
+  {
+   "id": "zh:feidiegua",
+   "lemma": "飞碟瓜",
+   "trad": "飛碟瓜",
+   "pinyin": "fēi dié guā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pattypan"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 飛碟瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "market and seed-catalogue name (not in Wiktionary, CC-CEDICT or zh.wikipedia)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Little scalloped UFOs from the vegetable garden.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pattypan squash, scallop squash (a summer squash, Cucurbita pepo)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pattypan"
+     }
+    ],
+    "examples": [
+     {
+      "text": "飞碟瓜的样子像个飞碟，边上是波浪形的。",
+      "tr": "A pattypan squash looks like a flying saucer with a wavy rim.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Fēidiéguā de yàngzi xiàng ge fēidié, biān shang shì bōlàngxíng de."
+     },
+     {
+      "text": "小飞碟瓜可以整个蒸，也可以切片炒。",
+      "tr": "Small pattypans can be steamed whole or sliced and stir-fried.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Xiǎo fēidiéguā kěyǐ zhěnggè zhēng, yě kěyǐ qiēpiàn chǎo."
+     },
+     {
+      "text": "飞碟瓜是西葫芦的一个品种。",
+      "tr": "Pattypan is a variety of the same squash as zucchini.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1",
+      "py": "Fēidiéguā shì xīhúlu de yí ge pǐnzhǒng."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个飞碟瓜",
+      "tr": "a pattypan squash"
+     },
+     {
+      "text": "清炒飞碟瓜",
+      "tr": "plain stir-fried pattypan"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "A modern name for an imported summer squash; there are no older or regional names.",
+    "etymology": {
+     "text": "飞碟 (‘flying saucer, UFO’) + 瓜 (‘gourd, squash’) — like the English trade name ‘UFO squash’.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "French calls it pâtisson; English pattypan refers to a small pan for baking patties."
+    ],
+    "pitfalls": [
+     "Not a storage pumpkin (南瓜): eat it young and tender, like zucchini."
+    ],
+    "subtleties": [
+     "It comes in white, yellow and green."
+    ]
+   }
+  },
+  {
+   "id": "zh:yangqicai",
+   "lemma": "羊栖菜",
+   "trad": "羊棲菜",
+   "pinyin": "yáng qī cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.hijiki"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 羊棲菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 羊栖菜 (title for Wikidata Q1204264); Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Black seaweed twigs in Japanese side dishes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hijiki (Sargassum fusiforme): a brown seaweed sold dried as black twigs",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.hijiki"
+     }
+    ],
+    "examples": [
+     {
+      "text": "羊栖菜晒干以后是黑色的。",
+      "tr": "Hijiki is black once dried.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Yángqīcài shàigān yǐhòu shì hēisè de."
+     },
+     {
+      "text": "日本人常把羊栖菜和胡萝卜、油豆腐一起炖。",
+      "tr": "The Japanese often simmer hijiki with carrot and fried tofu.",
+      "register": "neutral",
+      "context": "Japanese food",
+      "sense": "s1",
+      "py": "Rìběn rén cháng bǎ yángqīcài hé húluóbo, yóudòufu yìqǐ dùn."
+     },
+     {
+      "text": "羊栖菜含有无机砷，不宜多吃。",
+      "tr": "Hijiki contains inorganic arsenic and shouldn’t be eaten too often.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1",
+      "py": "Yángqīcài hányǒu wújī shēn, bùyí duō chī."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "干羊栖菜",
+      "tr": "dried hijiki"
+     },
+     {
+      "text": "凉拌羊栖菜",
+      "tr": "hijiki salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "鹿尾菜",
+      "register": "regional",
+      "nuance": "‘deer-tail vegetable’: an older local name"
+     }
+    ],
+    "etymology": {
+     "text": "羊 (‘sheep’) + 栖 (‘to perch, dwell’) + 菜 (‘vegetable’); why the seaweed got this name is unclear.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Dried hijiki swells to several times its size when soaked."
+    ],
+    "pitfalls": [
+     "Several food agencies (e.g. in the UK and Canada) advise against eating hijiki because of its inorganic arsenic; soaking and boiling reduce it."
+    ],
+    "subtleties": [
+     "栖 is qī (1st tone), as in 栖息 ‘to dwell’."
+    ]
+   }
+  },
+  {
+   "id": "zh:haiputao",
+   "lemma": "海葡萄",
+   "trad": "海葡萄",
+   "pinyin": "hǎi pú táo",
+   "pos": "NOUN",
+   "senses": [
+    "veg.seagrapes",
+    "nature.seagrape"
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "串",
+     "颗"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Popping green beads with a salty sea taste.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sea grapes, ‘green caviar’ (Caulerpa lentillifera): a seaweed with grape-like beads",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.seagrapes"
+     },
+     {
+      "id": "s2",
+      "def": "sea grape (Coccoloba uvifera): a seaside tree of the Caribbean",
+      "register": [
+       "technical"
+      ],
+      "concept": "nature.seagrape"
+     }
+    ],
+    "examples": [
+     {
+      "text": "海葡萄一颗一颗的，像绿色的鱼子酱。",
+      "tr": "Sea grapes come in little beads, like green caviar.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Hǎipútáo yì kē yì kē de, xiàng lǜsè de yúzǐjiàng."
+     },
+     {
+      "text": "冲绳的海葡萄蘸醋吃，咬起来会爆开。",
+      "tr": "In Okinawa sea grapes are dipped in vinegar; they pop when you bite them.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s1",
+      "py": "Chōngshéng de hǎipútáo zhàn cù chī, yǎo qilai huì bàokāi."
+     },
+     {
+      "text": "海葡萄不能放进冰箱，不然会变软。",
+      "tr": "Sea grapes shouldn’t go in the fridge, or they go limp.",
+      "register": "neutral",
+      "context": "storage",
+      "sense": "s1",
+      "py": "Hǎipútáo bù néng fàngjìn bīngxiāng, bùrán huì biàn ruǎn."
+     },
+     {
+      "text": "加勒比海边有一种树也叫海葡萄。",
+      "tr": "On Caribbean shores there is a tree that is also called sea grape.",
+      "register": "technical",
+      "context": "botany",
+      "sense": "s2",
+      "py": "Jiālèbǐ hǎi biān yǒu yì zhǒng shù yě jiào hǎipútáo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一串海葡萄",
+      "tr": "a sprig of sea grapes"
+     },
+     {
+      "text": "海葡萄沙拉",
+      "tr": "sea grape salad"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "长茎葡萄蕨藻",
+      "register": "technical",
+      "nuance": "the botanical name of the seaweed (Caulerpa lentillifera)"
+     }
+    ],
+    "etymology": {
+     "text": "海 (‘sea’) + 葡萄 (‘grapes’), as in English ‘sea grapes’. 葡萄 itself was borrowed in the Han dynasty from an Iranian language (Bactrian *bādāwa ‘wine’, Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Okinawa it is umi-budō, ‘sea grapes’, eaten fresh with vinegar."
+    ],
+    "pitfalls": [
+     "Wiktionary’s 海葡萄 is the seaside tree Coccoloba uvifera; in food shops the word means the seaweed."
+    ],
+    "subtleties": [
+     "葡萄 is pútáo; in quick speech often pútao."
+    ]
+   }
+  },
+  {
+   "id": "zh:jinsigua",
+   "lemma": "金丝瓜",
+   "trad": "金絲瓜",
+   "pinyin": "jīn sī guā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.spaghettisquash"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 金絲瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 金絲瓜 (title for Wikidata Q2142043); Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Golden threads from a melon — a kitchen magic trick.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spaghetti squash: a summer squash whose cooked flesh separates into strands",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.spaghettisquash"
+     }
+    ],
+    "examples": [
+     {
+      "text": "金丝瓜蒸熟以后，用筷子一搅就成了细丝。",
+      "tr": "Once steamed, spaghetti squash turns into fine strands with a stir of the chopsticks.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Jīnsīguā zhēngshú yǐhòu, yòng kuàizi yì jiǎo jiù chéngle xì sī."
+     },
+     {
+      "text": "上海崇明岛的金丝瓜很有名。",
+      "tr": "The spaghetti squash of Chongming Island, Shanghai, is famous.",
+      "register": "neutral",
+      "context": "regions",
+      "sense": "s1",
+      "py": "Shànghǎi Chóngmíng Dǎo de jīnsīguā hěn yǒumíng."
+     },
+     {
+      "text": "凉拌金丝瓜清爽可口。",
+      "tr": "Spaghetti squash dressed cold is light and tasty.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1",
+      "py": "Liángbàn jīnsīguā qīngshuǎng kěkǒu."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "凉拌金丝瓜",
+      "tr": "cold-dressed spaghetti squash"
+     },
+     {
+      "text": "蒸金丝瓜",
+      "tr": "steamed spaghetti squash"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "搅丝瓜",
+      "register": "colloquial",
+      "nuance": "‘stir-into-threads gourd’, after the way it is prepared"
+     },
+     {
+      "word": "金瓜",
+      "register": "regional",
+      "nuance": "the Chongming (Shanghai) name — but in many places 金瓜 means pumpkin",
+      "region": "Shanghai (Chongming)"
+     }
+    ],
+    "etymology": {
+     "text": "金 (‘gold’) + 丝 (‘thread’) + 瓜 (‘gourd’): the cooked flesh falls apart into golden threads.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "In the West it is used as a low-carb ‘spaghetti’; in China it is mostly eaten cold-dressed with vinegar and garlic."
+    ],
+    "pitfalls": [
+     "Not related to the luffa (丝瓜) despite the 丝: it is an American squash, Cucurbita pepo."
+    ],
+    "subtleties": [
+     "金瓜 elsewhere usually means pumpkin; only around Chongming does it mean this squash."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiaosongcai",
+   "lemma": "小松菜",
+   "trad": "小松菜",
+   "pinyin": "xiǎo sōng cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.komatsuna"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
+   "ref": {
+    "src": "CC-CEDICT (MDBG): 小松菜 xiao3 song1 cai4 ‘komatsuna’; zh.wikipedia (Wikidata Q4383692); Wiktionary has no Chinese entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tender Japanese greens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "komatsuna, Japanese mustard spinach (Brassica rapa var. perviridis)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.komatsuna"
+     }
+    ],
+    "examples": [
+     {
+      "text": "小松菜是日本东京一带的传统蔬菜。",
+      "tr": "Komatsuna is a traditional vegetable of the Tokyo area.",
+      "register": "neutral",
+      "context": "origin",
+      "sense": "s1",
+      "py": "Xiǎosōngcài shì Rìběn Dōngjīng yídài de chuántǒng shūcài."
+     },
+     {
+      "text": "小松菜可以像小白菜一样清炒。",
+      "tr": "Komatsuna can be stir-fried plain, like bok choy.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Xiǎosōngcài kěyǐ xiàng xiǎobáicài yíyàng qīngchǎo."
+     },
+     {
+      "text": "小松菜含钙比菠菜还多。",
+      "tr": "Komatsuna contains even more calcium than spinach.",
+      "register": "neutral",
+      "context": "nutrition",
+      "sense": "s1",
+      "py": "Xiǎosōngcài hán gài bǐ bōcài hái duō."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "清炒小松菜",
+      "tr": "plain stir-fried komatsuna"
+     },
+     {
+      "text": "小松菜汤",
+      "tr": "komatsuna soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "The Japanese name is used as it is (read the Chinese way); there is no older Chinese name for this Japanese variety.",
+    "etymology": {
+     "text": "From Japanese 小松菜 (komatsuna), named after Komatsugawa (小松川) in Edo, today’s Tokyo; read in Chinese as xiǎosōngcài.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Legend says the shogun Tokugawa Yoshimune named it after the village of Komatsugawa."
+    ],
+    "pitfalls": [
+     "It is a Brassica rapa like 小白菜 — not spinach, despite the English ‘mustard spinach’."
+    ],
+    "subtleties": [
+     "Written with Japanese kanji but pronounced the Chinese way: xiǎo sōng cài, not komatsuna."
+    ]
+   }
+  },
+  {
+   "id": "zh:jingshuicai",
+   "lemma": "京水菜",
+   "trad": "京水菜",
+   "pinyin": "jīng shuǐ cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.mizuna"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
+   "ref": {
+    "src": "zh.wikipedia: 水菜 (title for Wikidata Q50912348), “也称京菜、京水、京水菜、京都水菜”; Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Feathery Japanese salad greens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mizuna (Brassica rapa var. nipposinica)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.mizuna"
+     }
+    ],
+    "examples": [
+     {
+      "text": "京水菜的叶子像锯齿一样，适合做沙拉。",
+      "tr": "Mizuna leaves are jagged like a saw and good in salads.",
+      "register": "neutral",
+      "context": "salad",
+      "sense": "s1",
+      "py": "Jīngshuǐcài de yèzi xiàng jùchǐ yíyàng, shìhé zuò shālā."
+     },
+     {
+      "text": "日本火锅里常放京水菜。",
+      "tr": "Mizuna often goes into Japanese hot pot.",
+      "register": "neutral",
+      "context": "hot pot",
+      "sense": "s1",
+      "py": "Rìběn huǒguō li cháng fàng jīngshuǐcài."
+     },
+     {
+      "text": "京水菜原产日本京都。",
+      "tr": "Mizuna comes from Kyoto in Japan.",
+      "register": "neutral",
+      "context": "origin",
+      "sense": "s1",
+      "py": "Jīngshuǐcài yuánchǎn Rìběn Jīngdū."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "京水菜沙拉",
+      "tr": "mizuna salad"
+     },
+     {
+      "text": "凉拌京水菜",
+      "tr": "cold-dressed mizuna"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "水菜",
+      "register": "neutral",
+      "nuance": "the Japanese name 水菜 (mizuna), used too; but in Chinese 水菜 also means any vegetable grown in water"
+     }
+    ],
+    "etymology": {
+     "text": "京 (‘Kyoto’, 京都) + 水菜 (Japanese 水菜 mizuna, ‘water vegetable’): ‘Kyoto mizuna’.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "In Japan it is also called kyōna (京菜), ‘Kyoto greens’."
+    ],
+    "pitfalls": [
+     "水菜 alone usually means ‘aquatic vegetable’ in Chinese (Wiktionary); 京水菜 makes clear you mean mizuna."
+    ],
+    "subtleties": [
+     "Mildly peppery; eaten raw in salads or added at the last moment to hot pot."
+    ]
+   }
+  },
+  {
+   "id": "zh:takecai",
+   "lemma": "塌棵菜",
+   "trad": "塌棵菜",
+   "pinyin": "tā kē cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.tatsoi"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Dark green rosettes in frosty Jiangnan winters.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tatsoi, rosette bok choy (Brassica rapa subsp. narinosa)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.tatsoi"
+     }
+    ],
+    "examples": [
+     {
+      "text": "塌棵菜的叶子贴着地面长，像一朵绿色的花。",
+      "tr": "Tatsoi leaves grow flat against the ground, like a green flower.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Tākēcài de yèzi tiēzhe dìmiàn zhǎng, xiàng yì duǒ lǜsè de huā."
+     },
+     {
+      "text": "塌棵菜经过霜打以后更甜。",
+      "tr": "Tatsoi gets sweeter after a frost.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1",
+      "py": "Tākēcài jīngguò shuāng dǎ yǐhòu gèng tián."
+     },
+     {
+      "text": "上海人冬天爱吃塌棵菜炒冬笋。",
+      "tr": "In winter Shanghai people love tatsoi stir-fried with winter bamboo shoots.",
+      "register": "neutral",
+      "context": "regional cuisine",
+      "sense": "s1",
+      "py": "Shànghǎi rén dōngtiān ài chī tākēcài chǎo dōngsǔn."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "塌棵菜炒冬笋",
+      "tr": "tatsoi with winter bamboo shoots"
+     },
+     {
+      "text": "一棵塌棵菜",
+      "tr": "a head of tatsoi"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "塌菜",
+      "register": "neutral",
+      "nuance": "the short form (Wiktionary)"
+     },
+     {
+      "word": "乌塌菜",
+      "register": "regional",
+      "nuance": "‘black tatsoi’, after the very dark leaves",
+      "region": "Jiangsu"
+     },
+     {
+      "word": "瓢儿菜",
+      "register": "regional",
+      "nuance": "‘ladle vegetable’, after the spoon-shaped leaves"
+     }
+    ],
+    "etymology": {
+     "text": "塌 (‘to collapse, lie flat’) + 棵 (the measure word for plants) + 菜 (‘vegetable’): the plant that lies flat — its rosette hugs the ground.",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese Wikipedia notes it is nicknamed a ‘vitamin vegetable’ (维他命菜) for its vitamin C."
+    ],
+    "pitfalls": [
+     "The name already contains the measure word 棵, so ‘a tatsoi’ is 一棵塌棵菜 — 棵 twice."
+    ],
+    "subtleties": [
+     "A Yangtze-delta winter green, best after frost."
+    ]
+   }
+  },
+  {
+   "id": "zh:nanguahua",
+   "lemma": "南瓜花",
+   "trad": "南瓜花",
+   "pinyin": "nán guā huā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.zucchiniflower"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "朵"
+    ]
+   },
+   "ref": {
+    "src": "transparent compound 南瓜 + 花 (not in Wiktionary or CC-CEDICT); the usual Chinese name for squash blossoms as food",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Golden blossoms of the summer garden.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "squash blossom: the flower of pumpkins, zucchini and other squashes, eaten as a vegetable",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.zucchiniflower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "意大利人喜欢炸南瓜花，里面塞奶酪。",
+      "tr": "Italians like fried squash blossoms stuffed with cheese.",
+      "register": "neutral",
+      "context": "world food",
+      "sense": "s1",
+      "py": "Yìdàlì rén xǐhuan zhá nánguāhuā, lǐmian sāi nǎilào."
+     },
+     {
+      "text": "云南人用南瓜花煮汤。",
+      "tr": "People in Yunnan make soup with squash blossoms.",
+      "register": "neutral",
+      "context": "regions",
+      "sense": "s1",
+      "py": "Yúnnán rén yòng nánguāhuā zhǔ tāng."
+     },
+     {
+      "text": "摘南瓜花要摘雄花，雌花留着结瓜。",
+      "tr": "Pick the male flowers; leave the female ones to set fruit.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1",
+      "py": "Zhāi nánguāhuā yào zhāi xióng huā, cí huā liúzhe jiē guā."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "炸南瓜花",
+      "tr": "fried squash blossoms"
+     },
+     {
+      "text": "南瓜花汤",
+      "tr": "squash blossom soup"
+     },
+     {
+      "text": "一朵南瓜花",
+      "tr": "a squash blossom"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "西葫芦花",
+      "register": "neutral",
+      "nuance": "specifically the zucchini’s flower, the one in Italian recipes"
+     }
+    ],
+    "etymology": {
+     "text": "南瓜 (‘pumpkin, squash’) + 花 (‘flower’).",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Italian fiori di zucca and Mexican flor de calabaza are the same delicacy."
+    ],
+    "pitfalls": [
+     "南瓜花 covers the blossoms of any squash; for zucchini flowers specifically you can say 西葫芦花."
+    ],
+    "subtleties": [
+     "The flowers wilt within hours: pick them in the morning and cook them the same day."
+    ]
+   }
+  },
+  {
+   "id": "zh:niuxincai",
+   "lemma": "牛心菜",
+   "trad": "牛心菜",
+   "pinyin": "niú xīn cài",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pointedcabbage"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet, tender, cone-shaped cabbage.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pointed cabbage, sweetheart cabbage (a cone-shaped white cabbage)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pointedcabbage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "牛心菜是尖头的，样子像一颗牛心。",
+      "tr": "Pointed cabbage has a pointed head, shaped like an ox heart.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1",
+      "py": "Niúxīncài shì jiāntóu de, yàngzi xiàng yì kē niúxīn."
+     },
+     {
+      "text": "牛心菜比普通的卷心菜嫩，炒着吃很甜。",
+      "tr": "Pointed cabbage is more tender than ordinary cabbage and sweet when stir-fried.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Niúxīncài bǐ pǔtōng de juǎnxīncài nèn, chǎozhe chī hěn tián."
+     },
+     {
+      "text": "我买一个牛心菜。",
+      "tr": "I’ll buy a pointed cabbage.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Wǒ mǎi yí ge niúxīncài."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "清炒牛心菜",
+      "tr": "plain stir-fried pointed cabbage"
+     },
+     {
+      "text": "一个牛心菜",
+      "tr": "a pointed cabbage"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "牛心甘蓝",
+      "register": "technical",
+      "nuance": "‘ox-heart cabbage’: the agricultural name"
+     }
+    ],
+    "etymology": {
+     "text": "牛心 (‘ox heart’) + 菜 (‘vegetable’): after its pointed, heart-like shape (compare English ‘oxheart cabbage’).",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German calls it Spitzkohl (‘pointed cabbage’); in Britain it is sold as sweetheart or hispi cabbage."
+    ],
+    "pitfalls": [
+     "In Northern Wu and Xuzhou Mandarin 牛心菜 can simply mean ordinary cabbage (Wiktionary)."
+    ],
+    "subtleties": [
+     "Same species as round cabbage (Brassica oleracea), only a pointed type."
+    ]
+   }
+  },
+  {
+   "id": "zh:yumisun",
+   "lemma": "玉米笋",
+   "trad": "玉米筍",
+   "pinyin": "yù mǐ sǔn",
+   "pos": "NOUN",
+   "senses": [
+    "veg.babycorn"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 玉米筍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "CC-CEDICT (MDBG): 玉米筍|玉米笋 yu4 mi3 sun3 ‘baby corn’; zh.wikipedia (Wikidata Q4838440); Wiktionary has no entry",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tiny crunchy cobs in stir-fries.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "baby corn: very young ears of maize, eaten whole",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.babycorn"
+     }
+    ],
+    "examples": [
+     {
+      "text": "玉米笋就是还没长大的玉米棒。",
+      "tr": "Baby corn is just corn cobs that haven’t grown up yet.",
+      "register": "neutral",
+      "context": "food knowledge",
+      "sense": "s1",
+      "py": "Yùmǐsǔn jiù shì hái méi zhǎngdà de yùmǐbàng."
+     },
+     {
+      "text": "玉米笋可以连芯一起吃。",
+      "tr": "Baby corn is eaten cob and all.",
+      "register": "neutral",
+      "context": "eating",
+      "sense": "s1",
+      "py": "Yùmǐsǔn kěyǐ lián xīn yìqǐ chī."
+     },
+     {
+      "text": "什锦炒菜里常有玉米笋、胡萝卜和荷兰豆。",
+      "tr": "Mixed stir-fries often have baby corn, carrot and snow peas.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Shíjǐn chǎocài li cháng yǒu yùmǐsǔn, húluóbo hé hélándòu."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "罐头玉米笋",
+      "tr": "canned baby corn"
+     },
+     {
+      "text": "一根玉米笋",
+      "tr": "a baby corn"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No common alternative: 玉米笋 is the standard name (CC-CEDICT ‘baby corn’).",
+    "etymology": {
+     "text": "玉米 (‘maize’) + 笋 (‘shoot’): the tiny cob looks like a bamboo shoot.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Baby corn is picked by hand just as the silks appear; Thailand is a leading producer."
+    ],
+    "pitfalls": [
+     "Not a separate plant: it is ordinary maize (玉米) harvested very young."
+    ],
+    "subtleties": [
+     "笋 here is figurative — the ‘shoot’ is a young ear."
+    ]
+   }
+  },
+  {
+   "id": "zh:tiandou",
+   "lemma": "甜豆",
+   "trad": "甜豆",
+   "pinyin": "tián dòu",
+   "pos": "NOUN",
+   "senses": [
+    "veg.sugarsnap"
+   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Plump, sweet, snapping-crisp pods.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sugar snap pea, snap pea: a pea with thick, edible pods",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.sugarsnap"
+     }
+    ],
+    "examples": [
+     {
+      "text": "甜豆的豆荚比荷兰豆厚，里面的豆子也更饱满。",
+      "tr": "Sugar snaps have thicker pods than snow peas, and plumper peas inside.",
+      "register": "neutral",
+      "context": "comparison",
+      "sense": "s1",
+      "py": "Tiándòu de dòujiá bǐ hélándòu hòu, lǐmian de dòuzi yě gèng bǎomǎn."
+     },
+     {
+      "text": "甜豆连荚一起吃，又甜又脆。",
+      "tr": "Sugar snaps are eaten pod and all — sweet and crisp.",
+      "register": "neutral",
+      "context": "eating",
+      "sense": "s1",
+      "py": "Tiándòu lián jiá yìqǐ chī, yòu tián yòu cuì."
+     },
+     {
+      "text": "甜豆焯一下水就可以凉拌。",
+      "tr": "Blanch sugar snaps briefly and they’re ready for a cold dish.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Tiándòu chāo yíxià shuǐ jiù kěyǐ liángbàn."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "清炒甜豆",
+      "tr": "plain stir-fried sugar snaps"
+     },
+     {
+      "text": "甜豆炒虾仁",
+      "tr": "sugar snaps with shrimp"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "甜脆豆",
+      "register": "neutral",
+      "nuance": "‘sweet crisp bean’: the fuller name, used on labels and by Chinese Wikipedia"
+     }
+    ],
+    "etymology": {
+     "text": "甜 (‘sweet’) + 豆 (‘bean, pea’).",
+     "src": "character composition; Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sugar snap peas were bred in the United States in the 1970s by crossing snow peas with garden peas."
+    ],
+    "pitfalls": [
+     "甜豆 is not 荷兰豆 (snow pea, flat) or 豌豆 (shelling pea) — though all three are peas."
+    ],
+    "subtleties": [
+     "Pull off the string along the seam before cooking."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.drumstick",
+   "reason": "Moringa pods are not a common vegetable in China and have no word of their own; Wiktionary has none.",
+   "use": "The tree is 辣木 (moringa), known in China for its seeds (辣木籽) and leaf powder; the pods are described as 辣木的豆荚 ‘moringa pods’."
+  },
+  {
+   "concept": "veg.ivygourd",
+   "reason": "Ivy gourd is not a market vegetable in China; Wiktionary has no Chinese word for it (its 紅瓜 means other things in Min dialects).",
+   "use": "Botanical name 红瓜 (Coccinia grandis); otherwise the Indian name tindora."
+  },
+  {
+   "concept": "veg.tomatillo",
+   "reason": "Tomatillos are barely known in China; Wiktionary has no Chinese word.",
+   "use": "Botanical name 黏果酸浆 (‘sticky-fruited Physalis’) — a relative of the Chinese lantern 酸浆; otherwise described as 墨西哥的一种绿色果子 ‘a green Mexican fruit’."
+  },
+  {
+   "concept": "veg.seakale",
+   "reason": "Sea kale is a European coastal plant unknown in China; Wiktionary has no Chinese word.",
+   "use": "Described as 海甘蓝 ‘sea cabbage’ (a translation, the Wikidata label); botanically Crambe maritima."
+  },
+  {
+   "concept": "veg.dulse",
+   "reason": "Dulse is a North Atlantic red seaweed not eaten in China; neither Wiktionary nor Chinese Wikipedia has a Chinese name.",
+   "use": "Described as 一种红藻 ‘a red seaweed’ from Ireland and Iceland, or by its Latin name Palmaria palmata."
+  },
+  {
+   "concept": "veg.armeniancucumber",
+   "reason": "Armenian cucumber is unknown in Chinese markets; there is no established word.",
+   "use": "Translated as 亚美尼亚黄瓜 ‘Armenian cucumber’ — though botanically it is a melon (甜瓜)."
+  },
+  {
+   "concept": "veg.rapini",
+   "reason": "Rapini (broccoli rabe) is hardly sold in China; there is no established everyday word and Wiktionary has none.",
+   "use": "Chinese Wikipedia files it as 西洋菜薹 (‘Western flowering-stem vegetable’); it is compared with its close relative 菜心 (choy sum)."
+  },
+  {
+   "concept": "veg.cucamelon",
+   "reason": "Cucamelons are a novelty in China with no established name; Wiktionary has none.",
+   "use": "Sold online under descriptive names such as 拇指西瓜 ‘thumb watermelon’ — it looks like a tiny watermelon but tastes like cucumber."
+  },
+  {
+   "concept": "veg.pointedgourd",
+   "reason": "Pointed gourd (parwal) is an Indian vegetable unknown in China; Wiktionary has no Chinese word.",
+   "use": "Described as 印度的一种瓜 ‘an Indian gourd’ of the Trichosanthes genus (栝楼属), or by its Hindi name parwal (परवल)."
+  },
+  {
+   "concept": "veg.padron",
+   "reason": "Padrón peppers are a Spanish speciality with no Chinese name.",
+   "use": "Described as 西班牙的一种小青椒 ‘a small Spanish green pepper’."
+  },
+  {
+   "concept": "veg.acorns",
+   "reason": "Acorn squash is rare in China and has no established word; Wiktionary has none.",
+   "use": "Translated as 橡子南瓜 ‘acorn pumpkin’ (the Wikidata label), or just 一种小南瓜 ‘a small squash’."
+  }
+ ]
+}

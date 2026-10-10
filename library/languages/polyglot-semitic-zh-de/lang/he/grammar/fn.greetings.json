@@ -1,0 +1,404 @@
+{
+ "function": "fn.greetings",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "none"
+  },
+  {
+   "feature": "prag.speechLevels",
+   "value": "none"
+  },
+  {
+   "feature": "verb.optative",
+   "value": "none"
+  }
+ ],
+ "summary": "Hebrew greetings are few and flexible. שָׁלוֹם (“peace”) says both hello and goodbye; the time of day gives בֹּקֶר טוֹב (answered בֹּקֶר אוֹר), עֶרֶב טוֹב and, when leaving at night, לַיְלָה טוֹב; goodbye is לְהִתְרָאוֹת, “see you” נִתְרָאֶה. There is no formal or informal “you”: Israelis use first names and אַתָּה / אַתְּ with everyone. What changes is gender: מַה שְּׁלוֹמְךָ? to a man, מַה שְּׁלוֹמֵךְ? to a woman — or the casual, gender-free מַה נִּשְׁמַע? Politeness lives in תּוֹדָה, בְּבַקָּשָׁה (please, you’re welcome, here you are) and סְלִיחָה (sorry, excuse me). To introduce yourself say קוֹרְאִים לִי … (everyday) or שְׁמִי … (formal), and answer נָעִים מְאוֹד.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "formula",
+    "meaning",
+    "when, to whom"
+   ],
+   "rows": [
+    [
+     "שָׁלוֹם",
+     "hello; goodbye",
+     "any time, anyone"
+    ],
+    [
+     "בֹּקֶר טוֹב — בֹּקֶר אוֹר",
+     "good morning — (reply) good morning",
+     "until about noon"
+    ],
+    [
+     "עֶרֶב טוֹב",
+     "good evening",
+     "arriving in the evening"
+    ],
+    [
+     "לַיְלָה טוֹב",
+     "good night",
+     "leaving at night, going to bed"
+    ],
+    [
+     "לְהִתְרָאוֹת · נִתְרָאֶה",
+     "goodbye · see you",
+     "leaving"
+    ],
+    [
+     "מַה שְּׁלוֹמְךָ? · מַה שְּׁלוֹמֵךְ?",
+     "how are you?",
+     "to a man · to a woman"
+    ],
+    [
+     "מַה נִּשְׁמַע?",
+     "how’s it going?",
+     "casual, anyone"
+    ],
+    [
+     "בְּסֵדֶר, תּוֹדָה",
+     "fine, thanks",
+     "the usual answer"
+    ],
+    [
+     "קוֹרְאִים לִי … · שְׁמִי …",
+     "my name is …",
+     "everyday · formal"
+    ],
+    [
+     "נָעִים מְאוֹד",
+     "nice to meet you",
+     "after an introduction"
+    ],
+    [
+     "תּוֹדָה (רַבָּה)",
+     "thank you (very much)",
+     "anyone"
+    ],
+    [
+     "בְּבַקָּשָׁה · עַל לֹא דָּבָר",
+     "please / you’re welcome · don’t mention it",
+     "asking; answering thanks"
+    ],
+    [
+     "סְלִיחָה",
+     "sorry; excuse me",
+     "apologizing; getting attention"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Formality without a polite “you”",
+   "text": "Hebrew has no polite pronoun and no polite verb forms: the same אַתָּה / אַתְּ goes to a friend and to a stranger. A formal tone comes from the formula itself (שְׁמִי instead of קוֹרְאִים לִי, עַל לֹא דָּבָר instead of בְּבַקָּשָׁה) and from titles (אֲדוֹנִי “sir”, גְּבִרְתִּי “madam”).",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    },
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "To a man",
+     "points": [
+      "מַה שְּׁלוֹמְךָ? (ma shlomkha)",
+      "אַתָּה בְּסֵדֶר?",
+      "סְלִיחָה, אַתָּה מוֹרֶה?"
+     ]
+    },
+    {
+     "title": "To a woman",
+     "points": [
+      "מַה שְּׁלוֹמֵךְ? (ma shlomekh)",
+      "אַתְּ בְּסֵדֶר?",
+      "סְלִיחָה, אַתְּ מוֹרָה?"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "One word, several jobs",
+   "text": "שָׁלוֹם = hello and goodbye; בְּבַקָּשָׁה = please, you’re welcome and here you are; סְלִיחָה = sorry, excuse me and pardon? — the situation decides."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Wishes are plain phrases",
+   "text": "The greetings are ordinary words, not special verb forms: בֹּקֶר טוֹב is “a good morning”, לַיְלָה טוֹב “a good night”, and לְהִתְרָאוֹת is the infinitive “to see each other”. בֹּקֶר טוֹב — בֹּקֶר אוֹר copies Arabic صَبَاحُ الْخَيْرِ — صَبَاحُ النُّورِ.",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you greet",
+   "questions": [
+    "What time of day is it?",
+    "Am I arriving or leaving?",
+    "Am I speaking to a man, a woman or a group?",
+    "Casual or formal?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I arriving or leaving? (Arriving: שָׁלוֹם, בֹּקֶר טוֹב, עֶרֶב טוֹב. Leaving: שָׁלוֹם, לְהִתְרָאוֹת, נִתְרָאֶה, at night לַיְלָה טוֹב.)",
+   "What time is it? Morning → בֹּקֶר טוֹב; evening → עֶרֶב טוֹב; going to bed → לַיְלָה טוֹב.",
+   "Is the person a man, a woman or a group? → מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ / מַה שְּׁלוֹמְכֶם — or the gender-free מַה נִּשְׁמַע.",
+   "Casual or formal? → קוֹרְאִים לִי vs שְׁמִי; בְּבַקָּשָׁה vs עַל לֹא דָּבָר.",
+   "Am I asking, thanking or answering thanks? → בְּבַקָּשָׁה / תּוֹדָה / בְּבַקָּשָׁה or עַל לֹא דָּבָר.",
+   "Do I need someone’s attention or am I apologizing? → סְלִיחָה."
+  ],
+  "steps": [
+   "Greet (שָׁלוֹם / time of day).",
+   "Ask how they are, in the right gender.",
+   "Answer with בְּסֵדֶר, תּוֹדָה.",
+   "Introduce yourself and answer נָעִים מְאוֹד.",
+   "Leave with לְהִתְרָאוֹת."
+  ]
+ },
+ "traps": [
+  "מַה שְּׁלוֹמְךָ is only for a man; to a woman it is מַה שְּׁלוֹמֵךְ.",
+  "There is no polite “you” — using אַתָּה / אַתְּ with a stranger or a boss is normal.",
+  "לַיְלָה טוֹב is a goodbye, not a greeting when you arrive in the evening (that is עֶרֶב טוֹב).",
+  "בֹּקֶר אוֹר only answers בֹּקֶר טוֹב; you never open with it.",
+  "עַל לֹא דָּבָר answers thanks; it never means “please”.",
+  "קוֹרְאִים לִי does not change for gender; the question is אֵיךְ קוֹרְאִים לְךָ / לָךְ? with “how”, not “what”."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:shalom",
+   "he:boker-tov",
+   "he:boker-or",
+   "he:erev-tov",
+   "he:laila-tov",
+   "he:lehitraot",
+   "he:nitrae",
+   "he:ma-shlomcha",
+   "he:ma-shlomech",
+   "he:ma-nishma",
+   "he:beseder",
+   "he:korim-li",
+   "he:shmi",
+   "he:naim-meod",
+   "he:toda",
+   "he:bevakasha",
+   "he:al-lo-davar",
+   "he:slicha"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "INTJ": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.greetings"
+    ],
+    "variant": "Gender"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "You meet a female friend. How do you ask how she is?",
+   "options": [
+    "מַה שְּׁלוֹמֵךְ?",
+    "מַה שְּׁלוֹמְךָ?",
+    "בֹּקֶר אוֹר?"
+   ],
+   "answer": "מַה שְּׁלוֹמֵךְ?",
+   "why": "שְׁלוֹמֵךְ with ־ֵךְ is “your” for a woman; שְׁלוֹמְךָ is for a man; בֹּקֶר אוֹר is only the reply to בֹּקֶר טוֹב."
+  },
+  {
+   "q": "Someone says תּוֹדָה רַבָּה. What do you answer?",
+   "options": [
+    "בְּבַקָּשָׁה",
+    "סְלִיחָה",
+    "לַיְלָה טוֹב"
+   ],
+   "answer": "בְּבַקָּשָׁה",
+   "why": "בְּבַקָּשָׁה is both “please” and “you’re welcome” (also עַל לֹא דָּבָר)."
+  },
+  {
+   "q": "It is 8 in the morning and a colleague says בֹּקֶר טוֹב. The traditional reply?",
+   "options": [
+    "בֹּקֶר אוֹר",
+    "לַיְלָה טוֹב",
+    "עֶרֶב טוֹב"
+   ],
+   "answer": "בֹּקֶר אוֹר",
+   "why": "“Morning of light”, modelled on Arabic صَبَاحُ النُّورِ. Repeating בֹּקֶר טוֹב is also fine."
+  },
+  {
+   "q": "You want to pass someone on a crowded bus. What do you say?",
+   "options": [
+    "סְלִיחָה",
+    "תּוֹדָה",
+    "נָעִים מְאוֹד"
+   ],
+   "answer": "סְלִיחָה",
+   "why": "סְלִיחָה is both “sorry” and “excuse me”."
+  },
+  {
+   "q": "How do you address a minister you meet for the first time?",
+   "options": [
+    "with אַתָּה / אַתְּ, like anyone",
+    "with אַתֶּם as a polite plural",
+    "with הוּא / הִיא in the third person"
+   ],
+   "answer": "with אַתָּה / אַתְּ, like anyone",
+   "why": "Hebrew has no polite “you”; politeness comes from words (בְּבַקָּשָׁה, סְלִיחָה) and titles."
+  },
+  {
+   "q": "Which greeting does NOT change for gender?",
+   "options": [
+    "מַה נִּשְׁמַע?",
+    "מַה שְּׁלוֹמְךָ?",
+    "מַה שְּׁלוֹמֵךְ?"
+   ],
+   "answer": "מַה נִּשְׁמַע?",
+   "why": "מַה נִּשְׁמַע (“what is heard?”) is the same for everyone; the שְׁלוֹם־ forms carry the gender of “your”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.greetings",
+   "note": "Arabic shares the root of peace: السَّلَامُ عَلَيْكُمْ ~ שָׁלוֹם עֲלֵיכֶם; صَبَاحُ الْخَيْرِ — صَبَاحُ النُّورِ is the model of בֹּקֶר טוֹב — בֹּקֶר אוֹר, and Arabic also changes “you” for a man or a woman."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.greetings",
+   "note": "German chooses du or Sie — a choice Hebrew does not have; bitte matches בְּבַקָּשָׁה in all three uses."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.greetings",
+   "note": "Chinese has a polite 您 beside 你 (您好), and 再见 “again see” matches לְהִתְרָאוֹת; but it splits “please” (请) from “you’re welcome” (不客气)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "בְּבַקָּשָׁה works like παρακαλώ — please, you’re welcome, here you are. Unlike Greek, Hebrew has no polite εσείς: a stranger is אַתָּה or אַתְּ."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "בְּבַקָּשָׁה is used like пожалуйста (please, you’re welcome, here you are) and לְהִתְרָאוֹת like до свидания. There is no ты / вы choice — only the gender of “you” changes: מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "There is no tú / usted choice: everyone is אַתָּה / אַתְּ. The time of day works as in Spanish (בֹּקֶר טוֹב ~ buenos días, עֶרֶב טוֹב ~ buenas tardes / noches), but the question “how are you?” changes with the gender of the listener."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English has no gender in greetings; Hebrew asks a man מַה שְּׁלוֹמְךָ? and a woman מַה שְּׁלוֹמֵךְ? — or uses the gender-free מַה נִּשְׁמַע?. One word, בְּבַקָּשָׁה, covers please, you’re welcome and here you are."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "There is no tu / vous choice: everyone is אַתָּה / אַתְּ. שָׁלוֹם is both bonjour and au revoir."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "בְּבַקָּשָׁה matches bitte in all three uses, and לְהִתְרָאוֹת matches auf Wiedersehen (“to see each other”). The du / Sie choice does not exist: everyone is אַתָּה / אַתְּ."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi नमस्ते is hello and goodbye, like שָׁלוֹם; but Hindi grades respect with आप / तुम / तू, and Hebrew does not — it changes only the gender of “your”: שְׁלוֹמְךָ / שְׁלוֹמֵךְ."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian سلام shares its root with שָׁלוֹם (through Arabic), and صبح بخیر is built like בֹּקֶר טוֹב. Persian polite شما has no Hebrew counterpart."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "Arabic shares the root of peace (السَّلَامُ عَلَيْكُمْ ~ שָׁלוֹם עֲלֵיכֶם), the reply pattern (صَبَاحُ الْخَيْرِ — صَبَاحُ النُّورِ ~ בֹּקֶר טוֹב — בֹּקֶר אוֹר) and the gendered “you” in كَيْفَ حَالُكَ / حَالُكِ ~ מַה שְּׁלוֹמְךָ / שְׁלוֹמֵךְ."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish selam comes, through Arabic, from the same root as שָׁלוֹם. Turkish also says “good morning / evening / night” by the time of day; but it has the polite siz, which Hebrew lacks."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese greetings change with the level of politeness (おはよう / おはようございます); Hebrew greetings do not — politeness is in תּוֹדָה, בְּבַקָּשָׁה, סְלִיחָה and titles. What changes instead is the gender of the listener."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean greetings change with the speech level (안녕 / 안녕하세요); Hebrew has no speech levels — the same שָׁלוֹם and מַה נִּשְׁמַע go to anyone."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish hei / moi are hello, as שָׁלוֹם is; Finnish polite te is rare today, and Hebrew has none at all. Hebrew adds what Finnish lacks: the gender of the listener (מַה שְּׁלוֹמְךָ / שְׁלוֹמֵךְ)."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili greetings are a sequence of questions and answers (Habari? — Nzuri!), much like מַה נִּשְׁמַע? — בְּסֵדֶר; but Hebrew changes the question with the listener’s gender, and Swahili does not."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has a polite 您 beside 你 (您好), which Hebrew lacks. 再见 “again see” matches לְהִתְרָאוֹת, but Chinese splits “please” (请) from “you’re welcome” (不客气), where Hebrew uses בְּבַקָּשָׁה for both."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese greetings carry kinship pronouns chosen by age (chào anh, chào chị); Hebrew greetings carry no age or rank — only the listener’s gender, in מַה שְּׁלוֹמְךָ / שְׁלוֹמֵךְ."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut asks “how are you?” with a single verb word ending in “you” (Qanuippit?); Hebrew uses a phrase, and the “your” in it changes for a man or a woman (שְׁלוֹמְךָ / שְׁלוֹמֵךְ)."
+  }
+ ]
+}

@@ -1,0 +1,508 @@
+{
+ "function": "fn.prep.core",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  }
+ ],
+ "summary": "German chooses its preposition by what kind of place it is and by whether you are there, going there or coming from there. WHERE (Wo?): in for inside a building, room, town or country (in der Schule, im Büro, in Berlin); an for an edge or a side (am Bahnhof, am Fenster, an der Uni); bei for a person, a doctor, a firm (bei meiner Oma, beim Arzt, bei der Arbeit); zu Hause = at home. WHERE TO (Wohin?): zu for a person or a place you go to for its purpose (zum Arzt, zur Schule, zur Post); nach for cities and countries without an article and for home (nach Athen, nach Griechenland, nach Hause); in + accusative for going inside (ins Café, in die Stadt). FROM (Woher?): aus = out of, origin (aus Griechenland, aus dem Haus); von = from a person or a starting point, and “of” (von meiner Mutter, von der Arbeit, vom Markt). WITH: mit (Tee mit Milch, mit meinem Bruder). WITHOUT: ohne. FOR: für. ABOUT: über (ein Buch über die Stadt). Preposition and article often merge into one word: im, ins, am, ans, zum, zur, beim, vom – the merged form is the normal one (im Park, not *in dem Park). Every preposition also fixes the case of the noun after it (fn.case): aus, bei, mit, nach, von, zu + dative; für, ohne + accusative; in and an + dative for “where”, accusative for “where to”.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "meaning",
+    "German",
+    "example"
+   ],
+   "rows": [
+    [
+     "in / at – where",
+     "in + dat. · an + dat. · bei + dat. · zu Hause",
+     "in der Schule · am Bahnhof · beim Arzt · zu Hause"
+    ],
+    [
+     "to – where to",
+     "zu + dat. · nach · in + acc.",
+     "zur Schule · nach Athen · nach Hause · ins Café"
+    ],
+    [
+     "from – origin, out of",
+     "aus + dat.",
+     "Ich bin aus Griechenland. · aus dem Haus"
+    ],
+    [
+     "from – a starting point, a person",
+     "von + dat.",
+     "von der Arbeit · vom Arzt · von meiner Mutter"
+    ],
+    [
+     "with",
+     "mit + dat.",
+     "Tee mit Milch · mit meinem Bruder"
+    ],
+    [
+     "without",
+     "ohne + acc.",
+     "Kaffee ohne Zucker"
+    ],
+    [
+     "for",
+     "für + acc.",
+     "Das ist für dich."
+    ],
+    [
+     "about",
+     "über + acc.",
+     "ein Buch über die Stadt"
+    ]
+   ],
+   "caption": "One idea, several prepositions: “in / at”, “to” and “from” each split by the kind of place",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "place",
+    "Wo? (where)",
+    "Wohin? (where to)",
+    "Woher? (where from)"
+   ],
+   "rows": [
+    [
+     "home",
+     "zu Hause",
+     "nach Hause",
+     "von zu Hause"
+    ],
+    [
+     "a person, the doctor",
+     "bei meiner Oma · beim Arzt",
+     "zu meiner Oma · zum Arzt",
+     "von meiner Oma · vom Arzt"
+    ],
+    [
+     "work",
+     "bei der Arbeit",
+     "zur Arbeit",
+     "von der Arbeit"
+    ],
+    [
+     "a building, a room",
+     "in der Schule · im Café",
+     "in die Schule / zur Schule · ins Café",
+     "aus der Schule · aus dem Café"
+    ],
+    [
+     "the station, the university",
+     "am Bahnhof · an der Uni",
+     "zum Bahnhof · zur Uni",
+     "vom Bahnhof · von der Uni"
+    ],
+    [
+     "a city, a country (no article)",
+     "in Athen · in Griechenland",
+     "nach Athen · nach Griechenland",
+     "aus Athen · aus Griechenland"
+    ],
+    [
+     "a country with article",
+     "in der Türkei · in der Schweiz",
+     "in die Türkei · in die Schweiz",
+     "aus der Türkei · aus der Schweiz"
+    ]
+   ],
+   "caption": "Where, where to, where from"
+  },
+  {
+   "t": "table",
+   "head": [
+    "preposition + article",
+    "merged",
+    "example"
+   ],
+   "rows": [
+    [
+     "in dem",
+     "im",
+     "im Park, im Büro"
+    ],
+    [
+     "in das",
+     "ins",
+     "ins Café"
+    ],
+    [
+     "an dem",
+     "am",
+     "am Bahnhof"
+    ],
+    [
+     "an das",
+     "ans",
+     "ans Fenster"
+    ],
+    [
+     "zu dem",
+     "zum",
+     "zum Arzt"
+    ],
+    [
+     "zu der",
+     "zur",
+     "zur Post"
+    ],
+    [
+     "bei dem",
+     "beim",
+     "beim Arzt"
+    ],
+    [
+     "von dem",
+     "vom",
+     "vom Markt"
+    ]
+   ],
+   "caption": "Merged forms – the normal way to say it",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "bei is never “to”",
+   "text": "Ich bin bei meiner Mutter (I am at my mother’s). Going there: Ich gehe zu meiner Mutter – not *bei meiner Mutter gehen."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "aus or von?",
+   "text": "Where you are from is aus: Ich bin aus Griechenland. von is a starting point or a person: Ich komme von der Arbeit. Das Buch ist von Anna."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "zu Hause / nach Hause",
+   "text": "zu Hause = at home (where), nach Hause = home (where to)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Open places take auf",
+   "text": "A market, a square or the street is not “in”: auf dem Markt, auf dem Platz, auf der Straße (S12)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I somewhere (Wo?), going somewhere (Wohin?) or coming from somewhere (Woher?)?",
+   "Where: is it inside (in), at an edge or a point like a station or a university (an), at a person’s or a firm’s place (bei) – or at home (zu Hause)?",
+   "Where to: a person or a place I visit for its purpose (zu), a city or country without article or home (nach), or into a building or room (in + accusative)?",
+   "From: origin or out of (aus), or a starting point / a person (von)?",
+   "Can the article merge (im, ins, am, ans, zum, zur, beim, vom)? Then use the merged form.",
+   "Which case does the preposition need? (aus, bei, mit, nach, von, zu → dative; für, ohne → accusative)."
+  ],
+  "steps": [
+   "Decide where / where to / where from.",
+   "Choose the preposition for the kind of place.",
+   "Give the article the case the preposition needs; merge it if possible."
+  ]
+ },
+ "traps": [
+  "One idea, several words: in der Schule (where), zur Schule (where to), am Bahnhof, beim Arzt, zu Hause.",
+  "Not *bei Hause / *in Hause: zu Hause (where), nach Hause (where to).",
+  "Cities and countries without article take nach for “to” (nach Berlin), countries with article take in + accusative (in die Türkei).",
+  "Origin is aus, not von: Ich bin aus Athen.",
+  "bei is only for “at”, never for movement.",
+  "Use the merged form: im Park, zum Arzt, zur Post – in dem Park sounds like “in that park”.",
+  "über meaning “about” takes the accusative: über die Stadt (not *über der Stadt)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:in",
+   "de:an",
+   "de:bei",
+   "de:zu",
+   "de:nach",
+   "de:aus",
+   "de:von",
+   "de:mit",
+   "de:ohne",
+   "de:für",
+   "de:über",
+   "de:im",
+   "de:ins",
+   "de:am",
+   "de:ans",
+   "de:zum",
+   "de:zur",
+   "de:beim",
+   "de:vom",
+   "de:zu_Hause",
+   "de:nach_Hause"
+  ]
+ },
+ "needs": {
+  "NOUN": 8,
+  "ADP": 6
+ },
+ "generators": [
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.prep.core"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.prep.core"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.prep.core"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Ich bin ___ (at home).",
+   "options": [
+    "zu Hause",
+    "nach Hause",
+    "bei Hause"
+   ],
+   "answer": "zu Hause",
+   "why": "Where → zu Hause; where to → nach Hause."
+  },
+  {
+   "q": "Ich will ___ (home).",
+   "options": [
+    "nach Hause",
+    "zu Hause",
+    "in Hause"
+   ],
+   "answer": "nach Hause",
+   "why": "Going home = nach Hause."
+  },
+  {
+   "q": "Mein Opa ist ___ Arzt. (at the doctor’s)",
+   "options": [
+    "beim",
+    "zum",
+    "im"
+   ],
+   "answer": "beim",
+   "why": "At a person’s / doctor’s place = bei (bei dem → beim)."
+  },
+  {
+   "q": "Er will ___ Bahnhof. (to the station)",
+   "options": [
+    "zum",
+    "beim",
+    "nach"
+   ],
+   "answer": "zum",
+   "why": "Going to a place you visit = zu (zu dem → zum)."
+  },
+  {
+   "q": "Wir wollen ___ Athen.",
+   "options": [
+    "nach",
+    "zu",
+    "in"
+   ],
+   "answer": "nach",
+   "why": "A city without article → nach."
+  },
+  {
+   "q": "Ich bin ___ Griechenland. (I’m from Greece.)",
+   "options": [
+    "aus",
+    "von",
+    "nach"
+   ],
+   "answer": "aus",
+   "why": "Origin = aus."
+  },
+  {
+   "q": "Ich trinke Tee ___ Milch. (with)",
+   "options": [
+    "mit",
+    "ohne",
+    "für"
+   ],
+   "answer": "mit",
+   "why": "with = mit."
+  },
+  {
+   "q": "Das ist ein Buch ___ die Stadt. (about)",
+   "options": [
+    "über",
+    "für",
+    "von"
+   ],
+   "answer": "über",
+   "why": "about a topic = über + accusative."
+  },
+  {
+   "q": "Die Kinder sind ___ Schule. (at school)",
+   "options": [
+    "in der",
+    "zur",
+    "bei der"
+   ],
+   "answer": "in der",
+   "why": "Where: in der Schule; where to: zur Schule."
+  },
+  {
+   "q": "Greek σε covers …",
+   "options": [
+    "in, at and to",
+    "only in",
+    "only to"
+   ],
+   "answer": "in, at and to",
+   "why": "German needs in / an / bei (where) and zu / nach / in (where to)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.prep.core",
+   "note": "Arabic fī (in), ilā (to), min (from), maʿa (with), bidūn (without), li- (for), ʿan (about) – every noun after them is in the genitive."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.prep.core",
+   "note": "Hebrew be- (in, at), le- (to), mi- (from) are written joined to the noun; im (with), bli (without), bishvil (for), al (about) are separate words."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.prep.core",
+   "note": "Chinese uses verbs as prepositions (coverbs): 在 (at), 从 (from), 跟 (with), 给 (for) – no cases and no merged forms."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.case",
+   "note": "Each preposition fixes the case: dative after aus, bei, mit, nach, von, zu; accusative after für, ohne."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "σε alone covers in, at and to: στο σχολείο is in der Schule (where) and zur Schule (where to); German also needs am Bahnhof, beim Arzt, zu Hause. από covers both aus (origin: aus Griechenland) and von (a starting point: von der Arbeit). With με German needs the dative: mit meinem Bruder."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "в / на + case for “where” and “where to” work like in / an + case, and дома / домой split exactly as zu Hause / nach Hause. из / от match aus / von."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "en covers in, at and on (en la escuela, en la mesa) and a covers “to”; German splits by place and direction: in der Schule, zur Schule, am Bahnhof, nach Madrid."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "at my mother’s is bei meiner Mutter, to my mother is zu meiner Mutter; at home – zu Hause, home – nach Hause. German merges preposition and article: im, am, zum, zur."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "chez ma mère is both bei meiner Mutter (where) and zu meiner Mutter (where to); German splits them. à Paris is in Paris or nach Paris."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi postpositions follow the noun (ghar mẽ, ghar se, ghar ko); German prepositions precede it and fix its case: im Haus, aus dem Haus."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian prepositions come first as in German (dar xāne, be xāne, az xāne); but be covers every “to”, where German chooses nach, zu or in."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi puts the place relation at the end of the noun (gharāt – in the house, gharī – at home / home, gharūn – from the house); German puts a preposition before it."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "fī, ilā, min, maʿa all take the genitive; German prepositions each fix their own case (mit + dative, für + accusative). ʿinda (at someone’s) is bei."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "be-, le-, mi- are prefixes on the noun; German has separate words, which merge with the article (im, zum, vom). etsel (at someone’s place) is bei: bei meiner Mutter."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish uses case suffixes: evde (zu Hause), eve (nach Hause), evden (von zu Hause), okulda (in der Schule), okula (zur Schule). German puts a preposition before the noun and changes the article."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese particles follow the noun (gakkō ni / de / e / kara); German prepositions precede it, and the choice depends on the kind of place too."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean particles follow the noun (hakgyo-e, hakgyo-eseo); German prepositions come first and choose by place and direction."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish local cases split where / where to / where from just as German does (talossa – taloon – talosta: im Haus – ins Haus – aus dem Haus); German uses prepositions instead of endings."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian suffixes split where / where to / where from (házban – házba – házból), the same three questions as Wo? / Wohin? / Woher?; German uses prepositions."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili -ni makes a place (nyumbani – at home and home; shuleni – at school and to school); German splits the two: zu Hause / nach Hause, in der Schule / zur Schule."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "在 + place for “where”, 去 + place for “where to”, 从 for “from”; in German the preposition and the case of the article change with the direction: in der Schule, in die Schule."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "ở (at), đến (to), từ (from) never change the noun; German prepositions change the article’s case."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut case endings split where / where to / where from (iglumi – iglumut – iglumit), the same three questions as Wo? / Wohin? / Woher?; German uses prepositions instead."
+  }
+ ]
+}

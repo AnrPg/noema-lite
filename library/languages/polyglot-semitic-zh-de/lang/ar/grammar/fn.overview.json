@@ -1,0 +1,315 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Arabic is a Semitic language of the Afro-Asiatic family, the closest relative of Hebrew in this course. You learn Modern Standard Arabic (الْفُصْحَى), the written and formal language shared by the whole Arab world; at home people speak regional dialects. It is written from right to left with 28 letters for consonants and long vowels — the short vowels are small optional marks — and most words are built from roots of three consonants.",
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Afro-Asiatic › Semitic › Central Semitic — with Hebrew and Aramaic as close relatives"
+  },
+  {
+   "label": "Script and direction",
+   "value": "Arabic script, right to left; 28 letters that join and change shape; short vowels are marks above or below the letters and are usually left out; numbers run left to right"
+  },
+  {
+   "label": "Standard variety",
+   "value": "Modern Standard Arabic (الْفُصْحَى) for writing, news and formal speech; everyday speech in dialects (Egyptian, Levantine, Gulf, Iraqi, Maghrebi …) — two layers side by side, called diglossia"
+  },
+  {
+   "label": "Where",
+   "value": "official language of more than 20 countries from Morocco to Iraq and Oman; one of the six official languages of the United Nations; the language of the Qurʾān"
+  },
+  {
+   "label": "Speakers",
+   "value": "more than 300 million native speakers of Arabic dialects; Standard Arabic is learned at school"
+  },
+  {
+   "label": "Name",
+   "value": "الْعَرَبِيَّةُ (al-ʿarabiyya)"
+  }
+ ],
+ "typology": {
+  "type": "fusional",
+  "why": "Arabic weaves a root of consonants into a pattern of vowels inside the word (k-t-b “writing” → كَتَبَ kataba “he wrote”, كِتَاب kitāb “book”, كَاتِب kātib “writer”), and one ending carries several meanings at once: the -at of كَتَبَتْ says 3rd person + singular + feminine + past together.",
+  "alsoShows": "Agglutinating touches: small words are attached in front — وَ “and”, الْ “the”, بِـ “with” — and pronoun endings behind (كِتَابِي “my book”), each piece with one meaning."
+ },
+ "peculiarities": [
+  {
+   "title": "Right to left, letters joined",
+   "text": "Words run from right to left and the letters connect, taking up to four shapes; six letters (ا د ذ ر ز و) never join the letter after them.",
+   "typology": [
+    {
+     "feature": "script.direction",
+     "value": "rtl"
+    },
+    {
+     "feature": "script.positionalForms",
+     "value": "joining"
+    }
+   ]
+  },
+  {
+   "title": "Short vowels are not written",
+   "text": "Normal texts show only consonants and long vowels: كتب can be كَتَبَ (he wrote), كُتُبٌ (books) or كُتِبَ (it was written). This course shows every vowel mark until you can read without them.",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
+   ]
+  },
+  {
+   "title": "Roots and patterns",
+   "text": "Three consonants carry a meaning and patterns make words of it: ك ت ب → كِتَاب book, مَكْتَب desk, office, كَاتِب writer, مَكْتَبَة library. Learn the patterns and you can guess new words.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ]
+  },
+  {
+   "title": "No “to be” in the present",
+   "text": "أَنَا طَالِبٌ = “I (am) a student”: subject and predicate simply stand side by side. The verb كَانَ appears only in the past and future: كُنْتُ طَالِبًا, I was a student.",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
+  },
+  {
+   "title": "Two genders — even for “you”",
+   "text": "Every noun is masculine or feminine (most feminines end in ة). “You” is أَنْتَ to a man and أَنْتِ to a woman, and greetings change with it: كَيْفَ حَالُكَ / كَيْفَ حَالُكِ.",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    },
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
+   ]
+  },
+  {
+   "title": "Singular, dual, plural — and broken plurals",
+   "text": "Two of anything have their own form, the dual. Many plurals change the inside of the word: كِتَاب → كُتُب, رَجُل → رِجَال. Learn every noun with its plural.",
+   "typology": [
+    {
+     "feature": "nom.dual",
+     "value": "productive"
+    },
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
+   ]
+  },
+  {
+   "title": "“The” is a prefix, “a” is an ending",
+   "text": "بَيْتٌ (baytun) = a house, الْبَيْتُ (al-baytu) = the house. Before “sun letters” the l of al- is not heard: الشَّقَّةُ = aš-šaqqa.",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    },
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "suffix"
+    }
+   ]
+  },
+  {
+   "title": "Things in the plural are “she”",
+   "text": "Plurals of things take feminine singular agreement: هٰذِهِ الْكُتُبُ (these books), الْكُتُبُ؟ هِيَ هُنَا (the books? they are here).",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    }
+   ]
+  }
+ ],
+ "pathNote": "Arabic walks the fusional path: the same 19 steps and the same words as Hebrew, Chinese and German, with the grammar of a fusional, root-and-pattern language at each step. S00 the overview: an abjad written right to left, roots and patterns, Modern Standard Arabic and the dialects. S01 subject pronouns with gender (أَنْتَ / أَنْتِ, هُمْ / هُنَّ) and the verbless present “to be” (أَنَا طَالِبٌ), with كَانَ for the past. S02 greetings with fixed answers that change with the listener (كَيْفَ حَالُكَ / حَالُكِ). S03 demonstratives that agree (هٰذَا / هٰذِهِ / هٰؤُلَاءِ, ذٰلِكَ / تِلْكَ / أُولٰئِكَ). S04 gender, al- and tanwīn, agreement (things in the plural are feminine singular) and the cases, starting with the nominative. S05 numbers with the dual, broken plurals and the reversed gender of 3–10. S06 “to have” with عِنْدَ and the possessive endings (كِتَابِي). S07 the present conjugation (prefixes and endings), the accusative object, and roots and patterns. S08 a negator chosen by the kind of sentence and the tense (لَا، لَيْسَ، لَمْ، لَنْ). S09 yes/no questions with هَلْ and أَ, and بَلَى. S10 question words at the front (مَاذَا / مَا, مَنْ, أَيْنَ …). S11 prepositions with the genitive, and the attached بِـ and لِـ. S12 place words that are old accusative nouns (أَمَامَ, خَلْفَ) and the adjectives قَرِيبٌ مِنْ / بَعِيدٌ عَنْ. S13 verbs of movement — hollow and weak verbs — and the imperative with four forms (اِذْهَبْ، اِذْهَبِي، اِذْهَبُوا، اِذْهَبْنَ). S14 the adverbial accusative of time (يَوْمَ الْجُمُعَةِ, صَبَاحًا). S15 the time prepositions, the hour with feminine ordinals, and two sets of month names. S16 adjectives after the noun, agreeing in gender, number, case and definiteness, with broken plurals for people. S17 the elative أَفْعَل (أَكْبَرُ مِنْ, الْأَكْبَرُ) and the colours أَفْعَل / فَعْلَاء / فُعْل. S18 linking words: لِأَنَّ / أَنَّ / لٰكِنَّ / مَعَ أَنَّ with an accusative or a pronoun ending, أَنْ with the subjunctive, إِذَا with the past and فَـ. The isolating path (Chinese) spends these steps on tones, measure words, word order and aspect particles; the agglutinating path on suffix chains and vowel harmony.",
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is Arabic mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "Roots are woven into vowel patterns inside the word, and one ending carries several meanings at once."
+  },
+  {
+   "q": "How do you say “I am a student” (a man speaking)?",
+   "options": [
+    "أَنَا طَالِبٌ",
+    "أَنَا أَكُونُ طَالِبٌ",
+    "أَنَا هُوَ طَالِبٌ"
+   ],
+   "answer": "أَنَا طَالِبٌ",
+   "why": "The present of “to be” is not said: subject + predicate."
+  },
+  {
+   "q": "In which direction is Arabic written?",
+   "options": [
+    "right to left",
+    "left to right",
+    "top to bottom"
+   ],
+   "answer": "right to left",
+   "why": "Words run right to left; only numbers run left to right."
+  },
+  {
+   "q": "What do كِتَاب, كَاتِب and مَكْتَب have in common?",
+   "options": [
+    "the root k-t-b “writing”",
+    "the same ending",
+    "the article"
+   ],
+   "answer": "the root k-t-b “writing”",
+   "why": "Book, writer, office: one root, different patterns."
+  },
+  {
+   "q": "“You” to a woman is …",
+   "options": [
+    "أَنْتَ",
+    "أَنْتِ",
+    "أَنْتُمْ"
+   ],
+   "answer": "أَنْتِ",
+   "why": "أَنْتَ (-ta) to a man, أَنْتِ (-ti) to a woman, أَنْتُمْ to several people."
+  },
+  {
+   "q": "بَيْتٌ (baytun) means …",
+   "options": [
+    "a house",
+    "the house",
+    "houses"
+   ],
+   "answer": "a house",
+   "why": "The ending -un (tanwīn) marks an indefinite noun; “the house” is الْبَيْتُ."
+  },
+  {
+   "q": "Which variety does this course teach?",
+   "options": [
+    "Modern Standard Arabic (الْفُصْحَى)",
+    "Egyptian Arabic",
+    "only Classical Arabic"
+   ],
+   "answer": "Modern Standard Arabic (الْفُصْحَى)",
+   "why": "MSA is the shared written and formal language; dialects differ by region."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Familiar: grammatical gender, agreement, case endings (Arabic has three: -u, -a, -i, roughly your nominative, accusative and genitive) and an article for things in general: أُحِبُّ الْقَهْوَةَ = μου αρέσει ο καφές. Arabic ث and ذ are your θ and δ, and the old letter order أ ب ج د matches α β γ δ; قَلَم (pen) goes back to κάλαμος. New: no neuter, no word for “a”, no capital letters, only three vowel qualities (a, i, u — short and long), sounds such as ع، ح، ق, and one past form for έφαγα and έχω φάει."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "Easy: one definite article (الْ) and many shared words — algebra, alcohol, sugar, coffee, cotton came into English from or through Arabic. Hard: a new script with no capital letters, two genders that also mark “you”, person endings on every verb, three cases, the dual, and short vowels that are not written. Arabic does not reduce unstressed vowels (كِتَابٌ is ki-tā-bun), has no phrasal verbs (خَرَجَ = go out), and one past form covers “I ate” and “I have eaten”."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "You already learn nouns with their gender and plural and verbs with person endings — the same habits work here. Like German, Arabic needs no article with a job: Ich bin Lehrer = أَنَا مُعَلِّمٌ. The ach-Laut is Arabic خ, and the glottal stop before a vowel (be-achten) is the hamza ء. Different: no “is” in the present, two genders, no capital letters, no ü or ö (three vowel qualities only), no final devoicing (the d of وَلَد stays d), no separable prefixes, one past form for ich aß and ich habe gegessen, and no verb-second rule: the verb may come first (VSO) and never moves in a subordinate clause."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian has no present “to be” either: Я студент = أَنَا طَالِبٌ, word for word; the past shows the gender, as был / была = كَانَ / كَانَتْ; and “I have” is “at me (is)”: у меня есть ≈ عِنْدِي. Russian х is Arabic خ. Different: Arabic has a definite article (الْ), three cases instead of six, no capital letters, no hard / soft consonant pairs, no vowel reduction (every vowel keeps its sound), no final devoicing and no aspect prefixes on verbs."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Thousands of Turkish words are Arabic — kitap (كِتَاب), kalem (قَلَم), merhaba (مَرْحَبًا), selam (سَلَام), sabah (صَبَاح), insan (إِنْسَان), muallim (مُعَلِّم), saat (سَاعَة): your best bridge, and Ottoman Turkish was written in this script until 1928. Like Turkish, Arabic puts possessive endings on nouns (كِتَابِي ≈ kitabım) and needs no separate “to be” in the present. Hard: gender everywhere, even on “you”; changes inside the word instead of a chain of suffixes; no vowel harmony (endings keep their vowels) and no ü or ö; no final devoicing (kitap, but كِتَاب with b); no capital letters; few compounds like yardım etmek — “to help” is one verb, سَاعَدَ; no evidential or surprise -miş; and no -ip / -ince converbs — clauses are joined with words like وَ and عِنْدَمَا."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Hundreds of Spanish words come from Arabic, many with the article al- fused in: aceite (الزَّيْت), azúcar (السُّكَّر), arroz (الْأَرُزّ), alcachofa (الْخُرْشُوف), berenjena (بَاذِنْجَان), and ojalá (لَوْ شَاءَ اللّٰهُ). Familiar: two genders, agreement, adjectives after the noun (casa grande = بَيْتٌ كَبِيرٌ). New: three cases, the dual, “you” by gender, no capital letters, no verb “to be” in the present (so no ser / estar choice), three vowel qualities instead of five, and one past form for comí and he comido."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Familiar: two genders and no neuter, the article for things in general (j’aime le café = أُحِبُّ الْقَهْوَةَ), adjectives mostly after the noun, and chez, which is Arabic عِنْدَ (chez le médecin = عِنْدَ الطَّبِيبِ). French took words from Arabic too: sucre, café, coton, épinard, aubergine, artichaut. New: three cases, the dual, “you” by gender, no “to be” in the present, no capital letters, and no nasal vowels or ü / eu — Arabic has three vowel qualities, short and long."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi took many Arabic words through Persian: किताब kitāb (كِتَاب — feminine in Hindi, masculine in Arabic), दुनिया (دُنْيَا), हाल (حَال, as in كَيْفَ حَالُكَ), लेकिन (لٰكِنْ). Familiar: two genders, “I have” as “near me is” (मेरे पास … है ≈ عِنْدِي) and a question word at the start (क्या ≈ هَلْ). New: prepositions instead of postpositions, three cases on the noun itself, the verb first, and a script read right to left. Arabic has no retroflex or aspirated consonants and no nasal vowels — its ṭ ḍ ṣ ẓ are emphatic (said with the back of the tongue raised), not retroflex —, and few करना-type compounds: “to work” is one verb, عَمِلَ."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian is written in the same script (Persian adds پ چ ژ گ) and is full of Arabic words — کتاب, وقت, حال, صبح — so reading will come fast. But Persian says several Arabic letters alike (ث س ص all s; ذ ز ض ظ all z; ح ه both h; ع like a glottal stop), and Arabic keeps them all apart. New: two genders, three cases, the dual, the article الْ, verbs that show the subject’s gender, and few compounds with کردن: Arabic uses single verbs (عَمِلَ, “to work”)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi is written left to right in an abugida; Arabic is an abjad written right to left, with short vowels mostly unwritten. Familiar: grammatical gender (two, not three — no neuter), agreeing adjectives, and possession as “at me” (माझ्याकडे … आहे ≈ عِنْدِي). New: prepositions before the noun instead of postpositions, the verb first, no retroflex and no aspirated consonants, and only one “we”: نَحْنُ covers both आम्ही and आपण."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew is the closest relative: the same roots (כ־ת־ב / ك ت ب), the same two genders, the article as a prefix (הַ / الْ), no word for “a”, no “to be” in the present, and “I have” with a preposition and a pronoun (יֵשׁ לִי ≈ لِي, عِنْدِي). New in Arabic: three cases, the dual for every noun, broken plurals, plurals of things agreeing as feminine singular, and the sounds ع ح ق ط ص ض ظ, which keep their old, distinct values."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Almost everything is new: letters joined right to left instead of kana and kanji, prepositions before the noun instead of particles after it, the verb first, gender on nouns, verbs and “you”, and plurals that must be marked. Familiar: long and short vowels and double consonants change the meaning (كَتَبَ / كَتَّبَ), as in Japanese. Arabic has three vowel qualities (a, i, u), no pitch accent, no counters (ثَلَاثَةُ كُتُبٍ, three books), few する-type verbs (“to study” is one verb, دَرَسَ), no -te forms, no hearsay forms like 〜そうだ, and no honorific verbs or speech levels: politeness lies in words such as مِنْ فَضْلِكَ and in titles."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "New: an alphabet joined right to left, gender, the verb first, prepositions instead of particles, and plurals that must be marked. Familiar: like 아니다, Arabic has a separate word for “is not” (لَيْسَ). Arabic has no aspirated series (ㅋ ㅌ ㅍ), no counters (세 권 → ثَلَاثَةُ كُتُبٍ), few 하다-type verbs (“to study” is one verb, دَرَسَ), no -고 / -서 clause chains, no endings for hearsay or surprise (-대, -네), and no honorific verbs or speech levels: politeness comes from words and titles."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Familiar: possessive endings (kirjani ≈ كِتَابِي), “I have” as “at me” (minulla on ≈ عِنْدِي), and long vowels and double consonants that change the meaning. New: gender, even on “you”; prepositions instead of case endings; changes inside the word, but no consonant gradation; no vowel harmony (endings keep their vowels); no ä, ö, y — three vowel qualities only —; and no capital letters."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Familiar: a definite article before the noun even after “this” — ez a ház = هٰذَا الْبَيْتُ, “this the house” —, possessive endings (házam ≈ بَيْتِي), an object that is always marked (házat ≈ الْبَيْتَ), and long vowels. New: gender, prepositions instead of case endings, the verb first, no vowel harmony, no ü / ö, no preverbs like meg- or el-, and no capital letters."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili took many words from Arabic: kitabu (كِتَاب), saa (سَاعَة), wakati (وَقْت), mwalimu (مُعَلِّم), habari (خَبَر), lakini (لٰكِنْ), and the day names Alhamisi (الْخَمِيس) and Ijumaa (الْجُمُعَة); it was long written in Arabic script. Familiar: the adjective after the noun (kitabu kikubwa ≈ كِتَابٌ كَبِيرٌ), agreement everywhere, and a question word at the start (Je …? ≈ هَلْ). New: two sex-based genders instead of noun classes, endings and inner changes instead of prefixes, no applicative verbs (-ia, -ea), no capital letters, and three vowel qualities instead of five."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Familiar: agreement that runs through the sentence, and long vowels and double consonants that change the meaning (Luganda writes them double; Arabic marks a double consonant with ـّ). New: two sex-based genders instead of noun classes — هُوَ he and هِيَ she where Luganda has ye for both —, changes inside the word and endings instead of prefixes, no applicative verbs, no capital letters, and no tones: pitch never changes the meaning of a word."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Almost everything is new: letters for sounds, words that change inside, gender, cases, plurals and agreement. Easier: no tones — pitch does not change a word —, no measure words (numbers stand right before the noun), no separable verb–object words like 吃饭, and no serial verbs. Arabic has one “we” (نَحْنُ) for both 我们 and 咱们, distinguishes voiced and voiceless (د d / ت t) rather than aspirated and plain, and has no retroflex sounds and no ü: ص and ط are emphatic, not zh / ch."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "New: letters joined right to left, words that change inside, gender, cases, plurals and agreement. Familiar: the adjective after the noun (nhà lớn ≈ بَيْتٌ كَبِيرٌ), the owner after the thing (sách của tôi ≈ كِتَابِي) and no “is” before an adjective. Arabic has no tones, no classifiers, no implosive ɓ / ɗ, no aspirated th set against t, no serial verbs, no polite particles, no capital letters, and one “we” (نَحْنُ) for both chúng ta and chúng tôi."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Familiar: the dual (two of anything has its own form), possessive endings on nouns, person endings that make pronouns unnecessary, and the uvular q (Arabic ق). New: short separate words instead of one long word — no noun incorporation, no antipassive, no applicatives —, prepositions, gender, subjects marked the same way with every verb (no ergative), no evidential endings such as -guuq (“reportedly”), sentences joined with conjunctions instead of verb moods, and a script read right to left."
+  }
+ ]
+}

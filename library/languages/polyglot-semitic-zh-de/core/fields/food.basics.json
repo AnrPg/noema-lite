@@ -1,0 +1,411 @@
+{
+ "field": "food.basics",
+ "title": "Food and drink",
+ "subgroups": [
+  {
+   "id": "food",
+   "title": "Food"
+  },
+  {
+   "id": "drink",
+   "title": "Drinks"
+  },
+  {
+   "id": "meal",
+   "title": "Meals"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "Everyday food, drinks and meals (vegetables, fruit and the rest have their own fields) — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "food.bread",
+   "gloss": "bread",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "food.cheese",
+   "gloss": "cheese",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "food.egg",
+   "gloss": "egg",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "food.meat",
+   "gloss": "meat",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "food.fish",
+   "gloss": "fish (as food)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "food.chicken",
+   "gloss": "chicken (as food)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "food.rice",
+   "gloss": "rice (cooked, as food)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "food.soup",
+   "gloss": "soup",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "food.salad",
+   "gloss": "salad (the dish)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "food.fruit",
+   "gloss": "fruit",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "food.apple",
+   "gloss": "apple",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "food.sugar",
+   "gloss": "sugar",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "food.salt",
+   "gloss": "salt",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "drink.water",
+   "gloss": "water",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "drink.tea",
+   "gloss": "tea",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "drink.coffee",
+   "gloss": "coffee",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "drink.milk",
+   "gloss": "milk",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "drink.juice",
+   "gloss": "juice",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "drink.wine",
+   "gloss": "wine",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "drink.beer",
+   "gloss": "beer",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "meal.breakfast",
+   "gloss": "breakfast",
+   "subgroup": "meal",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "meal.lunch",
+   "gloss": "lunch",
+   "subgroup": "meal",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "meal.dinner",
+   "gloss": "dinner, supper",
+   "subgroup": "meal",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "drink.hotwater",
+   "gloss": "hot or boiling water (literary: 赴汤蹈火)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.asparagussalad",
+   "gloss": "asparagus salad (a dish)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.blackeyedpea",
+   "gloss": "black-eyed peas (dried cowpea seeds)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.bun",
+   "gloss": "steamed bun (baozi)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.chiliconcarne",
+   "gloss": "chili con carne (the dish)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.chilipowder",
+   "gloss": "chili powder",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.coffeebean",
+   "gloss": "(coffee or cocoa) bean",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.cuisine",
+   "gloss": "cuisine, style of cooking",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.food",
+   "gloss": "food",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.fulmedames",
+   "gloss": "ful medames (stewed fava beans)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.gherkin",
+   "gloss": "pickled gherkin",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.kalestew",
+   "gloss": "kale stew (northern German dish)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.loaf",
+   "gloss": "loaf (of bread)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.meal",
+   "gloss": "meal",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.milkpudding",
+   "gloss": "milk pudding, panna cotta (Taiwan)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.paprika",
+   "gloss": "paprika (the spice)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.peanut",
+   "gloss": "peanut (Taiwan)",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.pepper",
+   "gloss": "pepper (the spice)",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.pork",
+   "gloss": "pork",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.rawvegetables",
+   "gloss": "raw vegetables (eaten raw)",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.staranise",
+   "gloss": "star anise (the spice; short for 八角茴香)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.sweets",
+   "gloss": "sweets, candy",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "meal.coffeeandcake",
+   "gloss": "afternoon coffee and cake (a light meal)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.menu",
+   "gloss": "menu",
+   "tier": 1,
+   "rank": 24,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.dish",
+   "gloss": "dish (food), course",
+   "tier": 1,
+   "rank": 25,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.starter",
+   "gloss": "starter",
+   "tier": 1,
+   "rank": 26,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.dessert",
+   "gloss": "dessert",
+   "tier": 1,
+   "rank": 27,
+   "subgroup": "core"
+  },
+  {
+   "id": "food.recipe",
+   "gloss": "recipe",
+   "tier": 1,
+   "rank": 28,
+   "subgroup": "core"
+  }
+ ]
+}

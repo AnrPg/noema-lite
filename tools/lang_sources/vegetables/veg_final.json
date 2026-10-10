@@ -1,0 +1,3574 @@
+[
+ {
+  "id": "veg.carrot",
+  "gloss": "carrot",
+  "subgroup": "root",
+  "tier": 1,
+  "enwiki": "Carrot",
+  "qid": "Q81",
+  "links": 151,
+  "desc": "taproot of the domesticated carrot plant",
+  "labels": {
+   "de": "Karotte",
+   "ar": "جَزَر",
+   "he": "גזר",
+   "zh": "胡萝卜"
+  },
+  "wiki": {
+   "de": "Karotte",
+   "ar": "جزر",
+   "he": "גזר",
+   "zh": "胡萝卜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.potato",
+  "gloss": "potato",
+  "subgroup": "root",
+  "tier": 1,
+  "enwiki": "Potato",
+  "qid": "Q10998",
+  "links": 198,
+  "desc": "species of plant (for the food, use Q16587531)",
+  "labels": {
+   "de": "Kartoffel",
+   "ar": "بطاطا",
+   "he": "תפוח אדמה",
+   "zh": "马铃薯"
+  },
+  "wiki": {
+   "de": "Kartoffel",
+   "ar": "بطاطا",
+   "he": "תפוח אדמה",
+   "zh": "马铃薯"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.onion",
+  "gloss": "onion",
+  "subgroup": "bulb",
+  "tier": 1,
+  "enwiki": "Onion",
+  "qid": "Q23485",
+  "links": 199,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Zwiebel",
+   "ar": "بصل",
+   "he": "בצל הגינה",
+   "zh": "洋蔥"
+  },
+  "wiki": {
+   "de": "Zwiebel",
+   "ar": "بصل",
+   "he": "בצל הגינה",
+   "zh": "洋蔥"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.garlic",
+  "gloss": "garlic",
+  "subgroup": "bulb",
+  "tier": 1,
+  "enwiki": "Garlic",
+  "qid": "Q23400",
+  "links": 188,
+  "desc": "species of plant (for the food, use Q21546392)",
+  "labels": {
+   "de": "Knoblauch",
+   "ar": "ثوم",
+   "he": "שום",
+   "zh": "蒜"
+  },
+  "wiki": {
+   "de": "Knoblauch",
+   "ar": "ثوم",
+   "he": "שום",
+   "zh": "蒜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.tomato",
+  "gloss": "tomato",
+  "subgroup": "fruitveg",
+  "tier": 1,
+  "enwiki": "Tomato",
+  "qid": "Q23501",
+  "links": 208,
+  "desc": "type of plant species with edible, often red, berry fruit",
+  "labels": {
+   "de": "Tomate",
+   "ar": "طماطم",
+   "he": "עגבנייה",
+   "zh": "番茄"
+  },
+  "wiki": {
+   "de": "Tomate",
+   "ar": "طماطم",
+   "he": "עגבנייה",
+   "zh": "番茄"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.cucumber",
+  "gloss": "cucumber",
+  "subgroup": "cucurbit",
+  "tier": 1,
+  "enwiki": "Cucumber",
+  "qid": "Q23425",
+  "links": 181,
+  "desc": "species of plant in the Cucurbitaceae family",
+  "labels": {
+   "de": "Gurke",
+   "ar": "خيار",
+   "he": "מלפפון",
+   "zh": "黄瓜"
+  },
+  "wiki": {
+   "de": "Gurke",
+   "ar": "خيار",
+   "he": "מלפפון",
+   "zh": "黄瓜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.lettuce",
+  "gloss": "lettuce",
+  "subgroup": "leafy",
+  "tier": 1,
+  "enwiki": "Lettuce",
+  "qid": "Q83193",
+  "links": 127,
+  "desc": "plant series",
+  "labels": {
+   "de": "Gartensalat",
+   "ar": "خس",
+   "he": "חסה",
+   "zh": "萵苣"
+  },
+  "wiki": {
+   "de": "Gartensalat",
+   "ar": "خس",
+   "he": "חסה תרבותית",
+   "zh": "莴苣"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.cabbage",
+  "gloss": "cabbage",
+  "subgroup": "brassica",
+  "tier": 1,
+  "enwiki": "Cabbage",
+  "qid": "Q35051",
+  "links": 120,
+  "desc": "variety of plants",
+  "labels": {
+   "de": "Kopfkohl",
+   "ar": "ملفوف",
+   "he": "כרוב",
+   "zh": "结球甘蓝"
+  },
+  "wiki": {
+   "de": "Kopfkohl",
+   "ar": "ملفوف",
+   "he": "כרוב הגינה",
+   "zh": "結球甘藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.bellpepper",
+  "gloss": "bell pepper, sweet pepper",
+  "subgroup": "fruitveg",
+  "tier": 1,
+  "enwiki": "Bell pepper",
+  "qid": "Q1548030",
+  "links": 68,
+  "desc": "group of fruits of Capsicum annuum",
+  "labels": {
+   "de": "Gemüsepaprika",
+   "ar": "فلفل حلو",
+   "he": "פלפל",
+   "zh": "菜椒"
+  },
+  "wiki": {
+   "de": "Gemüsepaprika",
+   "ar": "فلفل حلو",
+   "zh": "菜椒"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.eggplant",
+  "gloss": "eggplant, aubergine",
+  "subgroup": "fruitveg",
+  "tier": 1,
+  "enwiki": "Eggplant",
+  "qid": "Q7540",
+  "links": 171,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Aubergine",
+   "ar": "باذنجان",
+   "he": "חציל",
+   "zh": "茄"
+  },
+  "wiki": {
+   "de": "Aubergine",
+   "ar": "باذنجان",
+   "he": "חציל",
+   "zh": "茄"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.zucchini",
+  "gloss": "zucchini, courgette",
+  "subgroup": "cucurbit",
+  "tier": 1,
+  "enwiki": "Zucchini",
+  "qid": "Q7533",
+  "links": 60,
+  "desc": "edible summer squash, typically green in colour, vegetable",
+  "labels": {
+   "de": "Zucchini",
+   "ar": "كوسى",
+   "he": "קישוא",
+   "zh": "西葫芦"
+  },
+  "wiki": {
+   "de": "Zucchini",
+   "ar": "كوسى",
+   "he": "קישוא",
+   "zh": "西葫芦"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.pumpkin",
+  "gloss": "pumpkin",
+  "subgroup": "cucurbit",
+  "tier": 1,
+  "enwiki": "Pumpkin",
+  "qid": "Q165308",
+  "links": 128,
+  "desc": "orange (yellow, green) winter squash native to North America",
+  "labels": {
+   "de": "Kürbis",
+   "ar": "يقطين",
+   "he": "דלעת",
+   "zh": "南瓜"
+  },
+  "wiki": {
+   "ar": "يقطين",
+   "he": "דלעת (מאכל)",
+   "zh": "南瓜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.spinach",
+  "gloss": "spinach",
+  "subgroup": "leafy",
+  "tier": 1,
+  "enwiki": "Spinach",
+  "qid": "Q81464",
+  "links": 139,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Spinat",
+   "ar": "سبانخ",
+   "he": "תרד",
+   "zh": "菠菜"
+  },
+  "wiki": {
+   "de": "Spinat",
+   "ar": "سبانخ",
+   "he": "תרד",
+   "zh": "菠菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.broccoli",
+  "gloss": "broccoli",
+  "subgroup": "brassica",
+  "tier": 1,
+  "enwiki": "Broccoli",
+  "qid": "Q47722",
+  "links": 111,
+  "desc": "edible green plant in the cabbage family",
+  "labels": {
+   "de": "Brokkoli",
+   "ar": "قنبيط أخضر",
+   "he": "ברוקולי",
+   "zh": "西蘭花"
+  },
+  "wiki": {
+   "de": "Brokkoli",
+   "ar": "قرنبيط أسود",
+   "he": "ברוקולי",
+   "zh": "西蘭花"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.cauliflower",
+  "gloss": "cauliflower",
+  "subgroup": "brassica",
+  "tier": 1,
+  "enwiki": "Cauliflower",
+  "qid": "Q7537",
+  "links": 112,
+  "desc": "vegetable in the species Brassica oleracea commonly called cauliflower",
+  "labels": {
+   "de": "Blumenkohl",
+   "ar": "قرنبيط",
+   "he": "כרובית",
+   "zh": "花椰菜"
+  },
+  "wiki": {
+   "de": "Blumenkohl",
+   "ar": "قرنبيط",
+   "he": "כרובית",
+   "zh": "花椰菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.pea",
+  "gloss": "pea",
+  "subgroup": "legume",
+  "tier": 1,
+  "enwiki": "Pea",
+  "qid": "Q25237",
+  "links": 145,
+  "desc": "species of plant with edible seeds",
+  "labels": {
+   "de": "Erbse",
+   "ar": "بازلاء",
+   "he": "אפונה",
+   "zh": "豌豆"
+  },
+  "wiki": {
+   "de": "Erbse",
+   "ar": "بازلاء",
+   "he": "אפונה",
+   "zh": "豌豆"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.greenbean",
+  "gloss": "green bean",
+  "subgroup": "legume",
+  "tier": 1,
+  "enwiki": "Green bean",
+  "qid": "Q2987371",
+  "links": 47,
+  "desc": "vegetable",
+  "labels": {
+   "de": "grüne Bohne",
+   "ar": "الفاصوليا الخضراء",
+   "he": "שעועית ירוקה",
+   "zh": "豆角"
+  },
+  "wiki": {
+   "ar": "فاصوليا خضراء",
+   "he": "שעועית ירוקה",
+   "zh": "豆角"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.corn",
+  "gloss": "sweet corn, maize",
+  "subgroup": "fruitveg",
+  "tier": 1,
+  "enwiki": "Sweet corn",
+  "qid": "Q18966",
+  "links": 25,
+  "desc": "variety of corn",
+  "labels": {
+   "de": "Zuckermais",
+   "ar": "ذرة شامية حلوة",
+   "he": "תירס המתוק",
+   "zh": "甜玉米"
+  },
+  "wiki": {
+   "de": "Zuckermais",
+   "ar": "ذرة شامية حلوة"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.celery",
+  "gloss": "celery",
+  "subgroup": "stem",
+  "tier": 1,
+  "enwiki": "Celery",
+  "qid": "Q23012379",
+  "links": 42,
+  "desc": "common edible part of the celery plant",
+  "labels": {
+   "de": "Sellerieknolle",
+   "ar": "كرفس",
+   "he": "סלרי",
+   "zh": "芹菜"
+  },
+  "wiki": {
+   "ar": "كرفس"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.leek",
+  "gloss": "leek",
+  "subgroup": "bulb",
+  "tier": 1,
+  "enwiki": "Leek",
+  "qid": "Q1807269",
+  "links": 97,
+  "desc": "vegetable in the onion family",
+  "labels": {
+   "de": "Lauch",
+   "ar": "كراث",
+   "he": "כרישה",
+   "zh": "韭葱"
+  },
+  "wiki": {
+   "de": "Lauch",
+   "ar": "كراث",
+   "he": "כרישה",
+   "zh": "韭葱"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.radish",
+  "gloss": "radish",
+  "subgroup": "root",
+  "tier": 1,
+  "enwiki": "Radish",
+  "qid": "Q7224565",
+  "links": 134,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Garten-Rettich",
+   "ar": "فجل",
+   "he": "צנון",
+   "zh": "萝卜"
+  },
+  "wiki": {
+   "de": "Garten-Rettich",
+   "ar": "فجل",
+   "he": "צנון",
+   "zh": "萝卜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.beetroot",
+  "gloss": "beetroot, beet",
+  "subgroup": "root",
+  "tier": 1,
+  "enwiki": "Beetroot",
+  "qid": "Q165437",
+  "links": 67,
+  "desc": "cultivar group of the beet plant (no colour indication)",
+  "labels": {
+   "de": "Rote Bete",
+   "ar": "شمندر",
+   "he": "סלק",
+   "zh": "甜菜頭"
+  },
+  "wiki": {
+   "de": "Rote Bete",
+   "ar": "بنجر المائدة",
+   "he": "סלק",
+   "zh": "甜菜頭"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.sweetpotato",
+  "gloss": "sweet potato",
+  "subgroup": "root",
+  "tier": 1,
+  "enwiki": "Sweet potato",
+  "qid": "Q37937",
+  "links": 151,
+  "desc": "species of plant and food",
+  "labels": {
+   "de": "Süßkartoffel",
+   "ar": "بطاطا حلوة",
+   "he": "בטטה",
+   "zh": "番薯"
+  },
+  "wiki": {
+   "de": "Süßkartoffel",
+   "ar": "بطاطا حلوة",
+   "he": "בטטה",
+   "zh": "番薯"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.chili",
+  "gloss": "chili pepper",
+  "subgroup": "fruitveg",
+  "tier": 1,
+  "enwiki": "Chili pepper",
+  "qid": "Q165199",
+  "links": 125,
+  "desc": "fruit of plants from the genus Capsicum, members of the nightshade family, Solanaceae",
+  "labels": {
+   "de": "Chilipfeffer",
+   "ar": "فلفل حار",
+   "he": "פלפלת צ'ילי",
+   "zh": "辣椒"
+  },
+  "wiki": {
+   "de": "Chilipfeffer",
+   "ar": "فلفل حار",
+   "he": "פלפל חריף",
+   "zh": "辣椒"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.springonion",
+  "gloss": "spring onion, scallion",
+  "subgroup": "bulb",
+  "tier": 1,
+  "enwiki": "Scallion",
+  "qid": "Q774278",
+  "links": 43,
+  "desc": "one of various Allium species",
+  "labels": {
+   "de": "Frühlingszwiebeln",
+   "ar": "البصل الاخضر",
+   "he": "בצל ירוק",
+   "zh": "青蔥"
+  },
+  "wiki": {
+   "ar": "بصل أخضر",
+   "he": "בצל ירוק",
+   "zh": "青蔥"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.artichoke",
+  "gloss": "artichoke",
+  "subgroup": "flower",
+  "tier": 2,
+  "enwiki": "Artichoke",
+  "qid": "Q23041430",
+  "links": 84,
+  "desc": "vegetable, a variety of a species of thistle cultivated as food",
+  "labels": {
+   "de": "Artischocke",
+   "ar": "خرشوف",
+   "he": "ארטישוק",
+   "zh": "朝鲜蓟"
+  },
+  "wiki": {
+   "de": "Artischocke",
+   "ar": "خرشوف",
+   "he": "ארטישוק",
+   "zh": "菜薊"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.asparagus",
+  "gloss": "asparagus",
+  "subgroup": "stem",
+  "tier": 2,
+  "enwiki": "Asparagus",
+  "qid": "Q28367",
+  "links": 114,
+  "desc": "species of edible plant",
+  "labels": {
+   "de": "Gemüsespargel",
+   "ar": "هليون",
+   "he": "אספרג רפואי",
+   "zh": "芦笋"
+  },
+  "wiki": {
+   "de": "Gemüsespargel",
+   "ar": "هليون",
+   "he": "אספרג רפואי",
+   "zh": "芦笋"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.okra",
+  "gloss": "okra",
+  "subgroup": "fruitveg",
+  "tier": 2,
+  "enwiki": "Okra",
+  "qid": "Q80531",
+  "links": 115,
+  "desc": "species of edible plant",
+  "labels": {
+   "de": "Okra",
+   "ar": "بامية",
+   "he": "במיה",
+   "zh": "秋葵"
+  },
+  "wiki": {
+   "de": "Okra",
+   "ar": "بامية",
+   "he": "במיה",
+   "zh": "秋葵"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.kale",
+  "gloss": "kale",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Kale",
+  "qid": "Q45989",
+  "links": 53,
+  "desc": "form of cabbage with green or purple leaves",
+  "labels": {
+   "de": "Grünkohl",
+   "ar": "كرنب أجعد",
+   "he": "כרוב עלים",
+   "zh": "羽衣甘藍"
+  },
+  "wiki": {
+   "de": "Grünkohl",
+   "ar": "كرنب أجعد",
+   "he": "כרוב עלים",
+   "zh": "羽衣甘藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.brusselssprout",
+  "gloss": "Brussels sprout",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Brussels sprout",
+  "qid": "Q150463",
+  "links": 75,
+  "desc": "plant in the genus Brassica grown for use as a vegetable",
+  "labels": {
+   "de": "Rosenkohl",
+   "ar": "كرنب بروكسل",
+   "he": "כרוב ניצנים",
+   "zh": "抱子甘藍"
+  },
+  "wiki": {
+   "de": "Rosenkohl",
+   "ar": "كرنب بروكسل",
+   "he": "כרוב ניצנים",
+   "zh": "抱子甘藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.redcabbage",
+  "gloss": "red cabbage",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Red cabbage",
+  "qid": "Q263203",
+  "links": 43,
+  "desc": "vegetable",
+  "labels": {
+   "de": "Rotkohl",
+   "ar": "ملفوف أحمر",
+   "he": "כרוב אדום",
+   "zh": "紫甘藍"
+  },
+  "wiki": {
+   "de": "Rotkohl",
+   "ar": "ملفوف أحمر",
+   "zh": "紫甘藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.napacabbage",
+  "gloss": "Napa cabbage, Chinese cabbage",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Napa cabbage",
+  "qid": "Q13360268",
+  "links": 47,
+  "desc": "subspecies of plant in the genus Brassica",
+  "labels": {
+   "de": "Chinakohl",
+   "ar": "برند (ملفوف)",
+   "zh": "大白菜"
+  },
+  "wiki": {
+   "de": "Chinakohl",
+   "ar": "برند (ملفوف)",
+   "zh": "大白菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.bokchoy",
+  "gloss": "bok choy, pak choi",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Bok choy",
+  "qid": "Q165178",
+  "links": 49,
+  "desc": "subspecies of plant",
+  "labels": {
+   "de": "Pak Choi",
+   "ar": "ملفوف صيني",
+   "he": "בוק צ'וי",
+   "zh": "青菜"
+  },
+  "wiki": {
+   "de": "Pak Choi",
+   "ar": "ملفوف صيني",
+   "zh": "小白菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.kohlrabi",
+  "gloss": "kohlrabi",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Kohlrabi",
+  "qid": "Q147202",
+  "links": 81,
+  "desc": "biennial cultivar of wild cabbage",
+  "labels": {
+   "de": "Kohlrabi",
+   "ar": "كرنب ساقي",
+   "he": "כרוב הקלח",
+   "zh": "苤藍"
+  },
+  "wiki": {
+   "de": "Kohlrabi",
+   "ar": "كرنب ساقي",
+   "he": "כרוב הקלח",
+   "zh": "苤藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.fennel",
+  "gloss": "fennel (bulb)",
+  "subgroup": "stem",
+  "tier": 2,
+  "enwiki": "Fennel",
+  "qid": "Q43511",
+  "links": 124,
+  "desc": "species of plant, fennel (for the herb use Q104005460)",
+  "labels": {
+   "de": "Fenchel",
+   "ar": "شمرة شائعة",
+   "he": "שומר פשוט",
+   "zh": "茴香"
+  },
+  "wiki": {
+   "de": "Fenchel",
+   "ar": "شمرة شائعة",
+   "he": "שומר פשוט",
+   "zh": "茴香"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.turnip",
+  "gloss": "turnip",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Turnip",
+  "qid": "Q3916957",
+  "links": 97,
+  "desc": "root vegetable",
+  "labels": {
+   "de": "Speiserübe",
+   "ar": "لفت",
+   "he": "לפת",
+   "zh": "芜菁"
+  },
+  "wiki": {
+   "de": "Speiserübe",
+   "ar": "لفت",
+   "he": "לפת",
+   "zh": "芜菁"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.parsnip",
+  "gloss": "parsnip",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Parsnip",
+  "qid": "Q188614",
+  "links": 85,
+  "desc": "species of plant, source of parsnip root vegetable",
+  "labels": {
+   "de": "Pastinak",
+   "ar": "جزر أبيض",
+   "he": "גזר לבן",
+   "zh": "欧防风"
+  },
+  "wiki": {
+   "de": "Pastinak",
+   "ar": "جزر أبيض",
+   "he": "גזר לבן",
+   "zh": "欧防风"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.celeriac",
+  "gloss": "celeriac, celery root",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Celeriac",
+  "qid": "Q575174",
+  "links": 29,
+  "desc": "variety of plant",
+  "labels": {
+   "de": "Knollensellerie",
+   "ar": "الكرفس اللفتي",
+   "he": "שורש סלרי",
+   "zh": "根芹"
+  },
+  "wiki": {
+   "de": "Knollensellerie",
+   "ar": "كرفس لفتي",
+   "he": "שורש סלרי",
+   "zh": "根芹"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.horseradish",
+  "gloss": "horseradish",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Horseradish",
+  "qid": "Q26545",
+  "links": 81,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Meerrettich",
+   "ar": "فجل الخيل الريفي",
+   "he": "חזרת הגינה",
+   "zh": "辣根"
+  },
+  "wiki": {
+   "de": "Meerrettich",
+   "ar": "فجل الخيل الريفي",
+   "he": "חזרת הגינה",
+   "zh": "辣根"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.ginger",
+  "gloss": "ginger",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Ginger",
+  "qid": "Q35625",
+  "links": 166,
+  "desc": "plant species",
+  "labels": {
+   "de": "Ingwer",
+   "ar": "زنجبيل",
+   "he": "זנגביל",
+   "zh": "薑"
+  },
+  "wiki": {
+   "de": "Ingwer",
+   "ar": "زنجبيل",
+   "he": "זנגביל",
+   "zh": "薑"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.shallot",
+  "gloss": "shallot",
+  "subgroup": "bulb",
+  "tier": 2,
+  "enwiki": "Shallot",
+  "qid": "Q193498",
+  "links": 73,
+  "desc": "botanical variety of the onion species Allium cepa",
+  "labels": {
+   "de": "Schalotte",
+   "ar": "ثوم عسقلاني",
+   "he": "בצלצל",
+   "zh": "火葱"
+  },
+  "wiki": {
+   "de": "Schalotte",
+   "ar": "ثوم عسقلاني",
+   "he": "בצלצל",
+   "zh": "火葱"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.redonion",
+  "gloss": "red onion",
+  "subgroup": "bulb",
+  "tier": 2,
+  "enwiki": "Red onion",
+  "qid": "Q622350",
+  "links": 18,
+  "desc": "cultivar of the onion with purplish-red skin and white flesh tinged with red",
+  "labels": {
+   "de": "rote Zwiebel",
+   "ar": "بصل أحمر",
+   "he": "בצל סגול",
+   "zh": "紅洋蔥"
+  },
+  "wiki": {
+   "ar": "بصل أحمر",
+   "he": "בצל סגול"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.arugula",
+  "gloss": "arugula, rocket",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Eruca sativa",
+  "qid": "Q156884",
+  "links": 54,
+  "desc": "edible annual plant Eruca vesicaria subsp. sativa",
+  "labels": {
+   "de": "Garten-Senfrauke",
+   "ar": "جرجير",
+   "he": "בן-חרדל מצוי",
+   "zh": "芝麻菜"
+  },
+  "wiki": {
+   "de": "Garten-Senfrauke",
+   "ar": "جرجير",
+   "he": "בן-חרדל מצוי",
+   "zh": "芝麻菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.watercress",
+  "gloss": "watercress",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Watercress",
+  "qid": "Q150452",
+  "links": 78,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Echte Brunnenkresse",
+   "ar": "جرجير الماء",
+   "he": "גרגיר הנחלים",
+   "zh": "西洋菜"
+  },
+  "wiki": {
+   "de": "Echte Brunnenkresse",
+   "ar": "جرجير الماء",
+   "he": "גרגיר הנחלים",
+   "zh": "西洋菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.chard",
+  "gloss": "Swiss chard, chard",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Chard",
+  "qid": "Q157954",
+  "links": 61,
+  "desc": "cultivar group of plant",
+  "labels": {
+   "de": "Mangold",
+   "ar": "سلق",
+   "he": "סלק עלים",
+   "zh": "莙薘菜"
+  },
+  "wiki": {
+   "de": "Mangold",
+   "ar": "سلق",
+   "he": "סלק עלים",
+   "zh": "莙薘菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.endive",
+  "gloss": "endive",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Endive",
+  "qid": "Q28604477",
+  "links": 9,
+  "desc": "leafy vegetable plant",
+  "labels": {
+   "de": "Endiviensalat",
+   "ar": "هندباء خسية",
+   "he": "אנדיב"
+  },
+  "wiki": {
+   "de": "Endivie",
+   "ar": "هندباء (خضار)"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.chicory",
+  "gloss": "chicory, Belgian endive",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Chicory",
+  "qid": "Q2544599",
+  "links": 95,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Gemeine Wegwarte",
+   "ar": "هندباء برية",
+   "he": "עולש",
+   "zh": "菊苣"
+  },
+  "wiki": {
+   "de": "Gemeine Wegwarte",
+   "ar": "هندباء برية",
+   "zh": "菊苣"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.radicchio",
+  "gloss": "radicchio",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Radicchio",
+  "qid": "Q767765",
+  "links": 23,
+  "desc": "variety of chicory (Cichorium intybus), a leaf vegetable",
+  "labels": {
+   "de": "Radicchio",
+   "ar": "الهندباء"
+  },
+  "wiki": {
+   "de": "Radicchio",
+   "ar": "الهندباء"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.lambslettuce",
+  "gloss": "lamb's lettuce, corn salad",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": null,
+  "qid": "Q158954",
+  "links": 50,
+  "desc": "species of plant (corn salad)",
+  "labels": {},
+  "wiki": {
+   "de": "Gewöhnlicher Feldsalat",
+   "ar": "خس النعجة",
+   "zh": "萵苣纈草"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.cress",
+  "gloss": "garden cress",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Garden cress",
+  "qid": "Q27033",
+  "links": 78,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Gartenkresse",
+   "ar": "رشاد مزروع",
+   "he": "שחליים תרבותיים",
+   "zh": "水芹"
+  },
+  "wiki": {
+   "de": "Gartenkresse",
+   "ar": "رشاد مزروع",
+   "he": "שחליים תרבותיים",
+   "zh": "家独行菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.icebergl",
+  "gloss": "iceberg lettuce",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Iceberg lettuce",
+  "qid": "Q1310886",
+  "links": 13,
+  "desc": "variety of lettuce",
+  "labels": {
+   "de": "Eisbergsalat",
+   "he": "חסה אייסברג",
+   "zh": "皺葉萵苣"
+  },
+  "wiki": {
+   "de": "Eisbergsalat",
+   "he": "חסה אייסברג"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.romaine",
+  "gloss": "romaine lettuce, cos",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Romaine lettuce",
+  "qid": "Q1762893",
+  "links": 27,
+  "desc": "variety of lettuce",
+  "labels": {
+   "de": "Römersalat",
+   "ar": "خس روماني",
+   "he": "חסה עלים",
+   "zh": "蘿蔓萵苣"
+  },
+  "wiki": {
+   "de": "Römersalat",
+   "ar": "خس روماني",
+   "zh": "蘿蔓萵苣"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.broadbean",
+  "gloss": "broad bean, fava bean",
+  "subgroup": "legume",
+  "tier": 2,
+  "enwiki": "Vicia faba",
+  "qid": "Q131342",
+  "links": 105,
+  "desc": "species of plant, vegetable",
+  "labels": {
+   "de": "Ackerbohne",
+   "ar": "فول",
+   "he": "פול",
+   "zh": "蚕豆"
+  },
+  "wiki": {
+   "de": "Ackerbohne",
+   "ar": "فول",
+   "he": "פול",
+   "zh": "蚕豆"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.snowpea",
+  "gloss": "snow pea, mangetout",
+  "subgroup": "legume",
+  "tier": 2,
+  "enwiki": "Snow pea",
+  "qid": "Q1422840",
+  "links": 16,
+  "desc": "type of edible-pod pea",
+  "labels": {
+   "de": "Kefe",
+   "he": "אפונת שלג",
+   "zh": "荷蘭豆"
+  },
+  "wiki": {
+   "de": "Zuckererbse",
+   "he": "אפונת שלג",
+   "zh": "荷蘭豆"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.runnerbean",
+  "gloss": "runner bean",
+  "subgroup": "legume",
+  "tier": 2,
+  "enwiki": "Phaseolus coccineus",
+  "qid": "Q159753",
+  "links": 41,
+  "desc": "species of flowering plant",
+  "labels": {
+   "de": "Feuerbohne",
+   "he": "שעועית הרץ",
+   "zh": "荷包豆"
+  },
+  "wiki": {
+   "de": "Feuerbohne",
+   "zh": "荷包豆"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.beansprout",
+  "gloss": "bean sprouts",
+  "subgroup": "legume",
+  "tier": 2,
+  "enwiki": "Mung bean sprout",
+  "qid": "Q7635866",
+  "links": 29,
+  "desc": "sprout of the mung bean",
+  "labels": {
+   "de": "Mungobohnensprossen",
+   "ar": "براعم بقلة الماش",
+   "zh": "綠豆芽"
+  },
+  "wiki": {
+   "de": "Mungbohnensprossen",
+   "ar": "براعم بقلة الماش",
+   "zh": "豆芽"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.cherrytomato",
+  "gloss": "cherry tomato",
+  "subgroup": "fruitveg",
+  "tier": 2,
+  "enwiki": "Cherry tomato",
+  "qid": "Q6540634",
+  "links": 31,
+  "desc": "a type of small tomato",
+  "labels": {
+   "de": "Solanum lycopersicum var. cerasiforme",
+   "ar": "بندورة كرزية",
+   "he": "עגבניית שרי",
+   "zh": "圣女果"
+  },
+  "wiki": {
+   "ar": "بندورة كرزية",
+   "he": "עגבניית שרי",
+   "zh": "圣女果"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.jalapeno",
+  "gloss": "jalapeño",
+  "subgroup": "fruitveg",
+  "tier": 2,
+  "enwiki": "Jalapeño",
+  "qid": "Q504133",
+  "links": 47,
+  "desc": "hot pepper",
+  "labels": {
+   "de": "Jalapeño",
+   "ar": "هالبينو",
+   "he": "חלפניו",
+   "zh": "墨西哥辣椒"
+  },
+  "wiki": {
+   "de": "Jalapeño",
+   "ar": "هالبينو",
+   "he": "חלפניו",
+   "zh": "墨西哥辣椒"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.butternut",
+  "gloss": "butternut squash",
+  "subgroup": "cucurbit",
+  "tier": 2,
+  "enwiki": "Butternut squash",
+  "qid": "Q4169287",
+  "links": 17,
+  "desc": "cultivar of winter squash",
+  "labels": {
+   "de": "Butternutkürbis",
+   "ar": "القرع العسلي",
+   "zh": "冬南瓜"
+  },
+  "wiki": {
+   "ar": "القرع العسلي",
+   "zh": "灰胡桃南瓜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.chayote",
+  "gloss": "chayote",
+  "subgroup": "cucurbit",
+  "tier": 2,
+  "enwiki": "Chayote",
+  "qid": "Q38646266",
+  "links": 74,
+  "desc": "edible fruiting vine of the gourd family",
+  "labels": {
+   "de": "Sicyos edulis",
+   "ar": "شايوت",
+   "he": "צ'יוטה",
+   "zh": "佛手瓜"
+  },
+  "wiki": {
+   "de": "Chayote",
+   "ar": "شايوت",
+   "he": "צ'יוטה",
+   "zh": "佛手瓜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.bittermelon",
+  "gloss": "bitter melon, bitter gourd",
+  "subgroup": "cucurbit",
+  "tier": 2,
+  "enwiki": "Momordica charantia",
+  "qid": "Q428750",
+  "links": 96,
+  "desc": "species of plant in the family Cucurbitaceae",
+  "labels": {
+   "de": "Bittermelone",
+   "ar": "معضوضة كرمية الأوراق",
+   "he": "מלון מר",
+   "zh": "苦瓜"
+  },
+  "wiki": {
+   "de": "Bittermelone",
+   "ar": "معضوضة كرمية الأوراق",
+   "he": "מלון מר",
+   "zh": "苦瓜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.wintermelon",
+  "gloss": "winter melon, ash gourd",
+  "subgroup": "cucurbit",
+  "tier": 2,
+  "enwiki": "Wax gourd",
+  "qid": "Q652206",
+  "links": 66,
+  "desc": "species of plant, winter melon",
+  "labels": {
+   "de": "Wachskürbis",
+   "ar": "قرع شمعي",
+   "zh": "冬瓜"
+  },
+  "wiki": {
+   "de": "Wachskürbis",
+   "ar": "قرع شمعي",
+   "zh": "冬瓜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.luffa",
+  "gloss": "luffa, sponge gourd",
+  "subgroup": "cucurbit",
+  "tier": 2,
+  "enwiki": "Luffa",
+  "qid": "Q232909",
+  "links": 60,
+  "desc": "genus of vines",
+  "labels": {
+   "de": "Luffa",
+   "ar": "ليف",
+   "he": "לופה",
+   "zh": "丝瓜属"
+  },
+  "wiki": {
+   "de": "Luffa",
+   "ar": "ليف (نبات)",
+   "he": "לופה",
+   "zh": "丝瓜属"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.bottlegourd",
+  "gloss": "bottle gourd, calabash",
+  "subgroup": "cucurbit",
+  "tier": 2,
+  "enwiki": "Calabash",
+  "qid": "Q1277255",
+  "links": 94,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Flaschenkürbis",
+   "ar": "كالاباش خياري",
+   "he": "קלבאש",
+   "zh": "葫蘆"
+  },
+  "wiki": {
+   "de": "Flaschenkürbis",
+   "ar": "دباء",
+   "zh": "葫芦"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.cassava",
+  "gloss": "cassava, manioc",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Cassava",
+  "qid": "Q83124",
+  "links": 119,
+  "desc": "species of plant native to South America cultivated for industrial and food uses",
+  "labels": {
+   "de": "Maniok",
+   "ar": "بفرة",
+   "he": "מניהוט מצוי",
+   "zh": "木薯"
+  },
+  "wiki": {
+   "de": "Maniok",
+   "ar": "بفرة",
+   "he": "מניהוט מצוי",
+   "zh": "木薯"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.taro",
+  "gloss": "taro",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Taro",
+  "qid": "Q227997",
+  "links": 111,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Taro",
+   "ar": "قلقاس مأكول",
+   "he": "קולקס",
+   "zh": "芋"
+  },
+  "wiki": {
+   "de": "Taro",
+   "ar": "قلقاس مأكول",
+   "he": "טארו",
+   "zh": "芋"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.yam",
+  "gloss": "yam",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Yam (vegetable)",
+  "qid": "Q8047551",
+  "links": 73,
+  "desc": "edible tuber",
+  "labels": {
+   "de": "Yams",
+   "ar": "يام",
+   "he": "יאם",
+   "zh": "薯"
+  },
+  "wiki": {
+   "ar": "يام (نبات)",
+   "he": "יאם",
+   "zh": "山藥"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.jerusalemartichoke",
+  "gloss": "Jerusalem artichoke, sunchoke",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Jerusalem artichoke",
+  "qid": "Q146190",
+  "links": 92,
+  "desc": "species of sunflower native to eastern North America (for the root vegetable use Q55706475)",
+  "labels": {
+   "de": "Topinambur",
+   "ar": "دوار الشمس الدرني",
+   "he": "ארטישוק ירושלמי",
+   "zh": "洋姜"
+  },
+  "wiki": {
+   "de": "Topinambur",
+   "ar": "دوار الشمس الدرني",
+   "he": "ארטישוק ירושלמי",
+   "zh": "菊芋"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.rutabaga",
+  "gloss": "rutabaga, swede",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Rutabaga",
+  "qid": "Q158464",
+  "links": 79,
+  "desc": "subspecies of plant",
+  "labels": {
+   "de": "Steckrübe",
+   "ar": "لفت سويدي",
+   "he": "לפת",
+   "zh": "蕪菁甘藍"
+  },
+  "wiki": {
+   "de": "Steckrübe",
+   "ar": "لفت سويدي",
+   "he": "רוטבגה",
+   "zh": "蕪菁甘藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.daikon",
+  "gloss": "daikon, white radish",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Daikon",
+  "qid": "Q7224757",
+  "links": 36,
+  "desc": "subspecies of plant",
+  "labels": {
+   "de": "Winterrettich",
+   "ar": "فجل أبيض",
+   "he": "דאיקון",
+   "zh": "白萝卜"
+  },
+  "wiki": {
+   "de": "Winterrettich",
+   "ar": "فجل أبيض",
+   "he": "דאיקון",
+   "zh": "白蘿蔔"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.lotusroot",
+  "gloss": "lotus root",
+  "subgroup": "stem",
+  "tier": 2,
+  "enwiki": "Nelumbo nucifera",
+  "qid": "Q16528",
+  "links": 105,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Indische Lotosblume",
+   "ar": "نيلم جوزي",
+   "he": "נלומבו נאכל",
+   "zh": "莲"
+  },
+  "wiki": {
+   "de": "Indische Lotosblume",
+   "ar": "نيلم جوزي",
+   "zh": "莲"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.bambooshoot",
+  "gloss": "bamboo shoot",
+  "subgroup": "stem",
+  "tier": 2,
+  "enwiki": "Bamboo shoot",
+  "qid": "Q2157176",
+  "links": 55,
+  "desc": "edible shoots of many bamboo species",
+  "labels": {
+   "de": "Bambussprossen",
+   "ar": "بتيلة خيزران",
+   "zh": "筍"
+  },
+  "wiki": {
+   "ar": "بتيلة خيزران",
+   "zh": "筍"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.waterspinach",
+  "gloss": "water spinach, morning glory greens",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Ipomoea aquatica",
+  "qid": "Q272754",
+  "links": 75,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Wasserspinat",
+   "ar": "إيبومويا أكواتيكا",
+   "he": "תרד מים",
+   "zh": "蕹菜"
+  },
+  "wiki": {
+   "de": "Wasserspinat",
+   "ar": "إيبومويا أكواتيكا",
+   "zh": "蕹菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.purslane",
+  "gloss": "purslane",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Portulaca oleracea",
+  "qid": "Q158015",
+  "links": 94,
+  "desc": "species of flowering plant",
+  "labels": {
+   "de": "Portulak",
+   "ar": "رجلة",
+   "he": "רגלת הגינה",
+   "zh": "马齿苋"
+  },
+  "wiki": {
+   "de": "Portulak",
+   "ar": "بقلة حمقاء",
+   "he": "רגלת הגינה",
+   "zh": "马齿苋"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.mustardgreens",
+  "gloss": "mustard greens",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Brassica juncea",
+  "qid": "Q504781",
+  "links": 62,
+  "desc": "species of mustard plant",
+  "labels": {
+   "de": "Brauner Senf",
+   "ar": "خردل هندي",
+   "he": "חרדל חום",
+   "zh": "芥菜"
+  },
+  "wiki": {
+   "de": "Brauner Senf",
+   "ar": "خردل هندي",
+   "zh": "芥菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.collards",
+  "gloss": "collard greens",
+  "subgroup": "brassica",
+  "tier": 2,
+  "enwiki": "Collard (plant)",
+  "qid": "Q14879985",
+  "links": 32,
+  "desc": "variety of plant",
+  "labels": {
+   "de": "Brassica oleracea var. viridis",
+   "ar": "كرنب الخيل",
+   "he": "קולרד",
+   "zh": "宽叶羽衣甘蓝"
+  },
+  "wiki": {
+   "de": "Blattkohl",
+   "ar": "كرنب الخيل",
+   "he": "קולרד",
+   "zh": "宽叶羽衣甘蓝"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.molokhia",
+  "gloss": "jute mallow, molokhia",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Corchorus olitorius",
+  "qid": "Q165343",
+  "links": 36,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Langkapselige Jute",
+   "ar": "ملوخية",
+   "he": "מלוכיה נאכלת",
+   "zh": "长蒴黄麻"
+  },
+  "wiki": {
+   "de": "Langkapselige Jute",
+   "ar": "ملوخية",
+   "he": "מלוכיה נאכלת",
+   "zh": "长蒴黄麻"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.garlicchives",
+  "gloss": "garlic chives, Chinese chives",
+  "subgroup": "bulb",
+  "tier": 2,
+  "enwiki": "Allium tuberosum",
+  "qid": "Q42285",
+  "links": 42,
+  "desc": "species of plant, Garlic chives",
+  "labels": {
+   "de": "Allium tuberosum",
+   "ar": "إليوم توبروسيوم",
+   "zh": "韭菜"
+  },
+  "wiki": {
+   "de": "Knoblauch-Schnittlauch",
+   "ar": "إليوم توبروسيوم",
+   "zh": "韭菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.wildgarlic",
+  "gloss": "wild garlic, ramsons",
+  "subgroup": "bulb",
+  "tier": 2,
+  "enwiki": "Allium ursinum",
+  "qid": "Q130882",
+  "links": 87,
+  "desc": "species of plant, herb",
+  "labels": {
+   "de": "Bärlauch",
+   "ar": "ثوم الدببة",
+   "he": "שום בר",
+   "zh": "熊葱"
+  },
+  "wiki": {
+   "de": "Bärlauch",
+   "ar": "ثوم الدببة",
+   "zh": "熊葱"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.nettle",
+  "gloss": "stinging nettle (greens)",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Urtica dioica",
+  "qid": "Q155909",
+  "links": 90,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Große Brennnessel",
+   "ar": "قراص كبير",
+   "he": "סרפד מצוי",
+   "zh": "异株荨麻"
+  },
+  "wiki": {
+   "de": "Große Brennnessel",
+   "ar": "قراص كبير",
+   "he": "סרפד דו-ביתי",
+   "zh": "异株荨麻"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.dandelion",
+  "gloss": "dandelion greens",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Taraxacum officinale",
+  "qid": "Q131219",
+  "links": 99,
+  "desc": "plant species",
+  "labels": {
+   "de": "Gewöhnlicher Löwenzahn",
+   "ar": "طرخشقون مخزني",
+   "he": "שינן רפואי",
+   "zh": "药用蒲公英"
+  },
+  "wiki": {
+   "de": "Gewöhnlicher Löwenzahn",
+   "ar": "طرخشقون مخزني",
+   "he": "שינן רפואי",
+   "zh": "西洋蒲公英"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.sorrel",
+  "gloss": "sorrel",
+  "subgroup": "leafy",
+  "tier": 2,
+  "enwiki": "Sorrel",
+  "qid": "Q26297",
+  "links": 85,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Wiesen-Sauerampfer",
+   "ar": "حماض بستاني",
+   "he": "חומעה מצויה",
+   "zh": "酸模"
+  },
+  "wiki": {
+   "de": "Wiesen-Sauerampfer",
+   "ar": "حماض بستاني",
+   "he": "חומעה מצויה",
+   "zh": "酸模"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.blacksalsify",
+  "gloss": "black salsify, scorzonera",
+  "subgroup": "root",
+  "tier": 2,
+  "enwiki": "Scorzonera hispanica",
+  "qid": "Q385259",
+  "links": 40,
+  "desc": "species of plant historically used medicinally, now grown as a vegetable",
+  "labels": {
+   "de": "Garten-Schwarzwurzel",
+   "ar": "سلسفي هسباني",
+   "zh": "黑婆罗门参"
+  },
+  "wiki": {
+   "de": "Garten-Schwarzwurzel",
+   "ar": "سلسفي هسباني",
+   "zh": "黑婆罗门参"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.salsify",
+  "gloss": "salsify",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Tragopogon porrifolius",
+  "qid": "Q941639",
+  "links": 28,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Haferwurzel",
+   "ar": "لحية التيس كراتي الورق",
+   "zh": "蒜叶婆罗门参"
+  },
+  "wiki": {
+   "de": "Haferwurzel",
+   "ar": "لحية التيس كراتي الورق",
+   "zh": "蒜叶婆罗门参"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.rootparsley",
+  "gloss": "root parsley, Hamburg parsley",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": null,
+  "cov": 0
+ },
+ {
+  "id": "veg.skirret",
+  "gloss": "skirret",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Sium sisarum",
+  "qid": "Q228122",
+  "links": 27,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Zuckerwurzel",
+   "ar": "سيسارون",
+   "zh": "參芹"
+  },
+  "wiki": {
+   "de": "Zuckerwurzel",
+   "ar": "سيسارون"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.burdock",
+  "gloss": "burdock root, gobo",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Arctium lappa",
+  "qid": "Q26932",
+  "links": 73,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Große Klette",
+   "ar": "قرطب أكبر",
+   "zh": "牛蒡"
+  },
+  "wiki": {
+   "de": "Große Klette",
+   "ar": "قرطب أكبر",
+   "zh": "牛蒡"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.wasabi",
+  "gloss": "wasabi",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Wasabi",
+  "qid": "Q49855",
+  "links": 66,
+  "desc": "species of edible plant",
+  "labels": {
+   "de": "Wasabi",
+   "ar": "وسابي",
+   "he": "ואסאבי",
+   "zh": "山葵"
+  },
+  "wiki": {
+   "de": "Wasabi",
+   "ar": "وسابي",
+   "he": "ואסאבי",
+   "zh": "山葵"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.galangal",
+  "gloss": "galangal",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Alpinia galanga",
+  "qid": "Q402971",
+  "links": 44,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Thai-Ingwer",
+   "ar": "خولنجان كبير",
+   "he": "גלנגל",
+   "zh": "大高良薑"
+  },
+  "wiki": {
+   "de": "Thai-Ingwer",
+   "ar": "خولنجان كبير",
+   "zh": "大高良薑"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.turmeric",
+  "gloss": "turmeric (fresh root)",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Turmeric",
+  "qid": "Q42562",
+  "links": 127,
+  "desc": "plant used as spice",
+  "labels": {
+   "de": "Kurkuma",
+   "ar": "كركم",
+   "he": "כורכום",
+   "zh": "薑黃"
+  },
+  "wiki": {
+   "de": "Kurkuma",
+   "ar": "كركم",
+   "he": "כורכום",
+   "zh": "薑黃"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.jicama",
+  "gloss": "jícama",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Pachyrhizus erosus",
+  "qid": "Q517283",
+  "links": 48,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Yambohne",
+   "ar": "هيكاما",
+   "zh": "凉薯"
+  },
+  "wiki": {
+   "de": "Yambohne",
+   "ar": "هيكاما",
+   "zh": "凉薯"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.yacon",
+  "gloss": "yacón",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Yacón",
+  "qid": "Q1075177",
+  "links": 32,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Yacón",
+   "ar": "إجاص الأرض",
+   "zh": "菊薯"
+  },
+  "wiki": {
+   "de": "Yacón",
+   "ar": "إجاص الأرض",
+   "zh": "菊薯"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.oca",
+  "gloss": "oca",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Oxalis tuberosa",
+  "qid": "Q1355893",
+  "links": 33,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Knolliger Sauerklee",
+   "ar": "أقصليس درني",
+   "zh": "酢漿薯"
+  },
+  "wiki": {
+   "de": "Knolliger Sauerklee",
+   "ar": "أقصليس درني",
+   "zh": "酢漿薯"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.mashua",
+  "gloss": "mashua",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Tropaeolum tuberosum",
+  "qid": "Q766182",
+  "links": 29,
+  "desc": "food crop plant species",
+  "labels": {
+   "de": "Knollige Kapuzinerkresse",
+   "ar": "كبوسين درني",
+   "zh": "塊莖金蓮花"
+  },
+  "wiki": {
+   "de": "Knollige Kapuzinerkresse",
+   "ar": "كبوسين درني",
+   "zh": "塊莖金蓮花"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.arracacha",
+  "gloss": "arracacha",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Arracacia xanthorrhiza",
+  "qid": "Q625399",
+  "links": 23,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Arakacha",
+   "ar": "أراكاشة صفراء الجذور",
+   "zh": "秘鲁胡萝卜"
+  },
+  "wiki": {
+   "de": "Arakacha",
+   "ar": "أراكاشة صفراء الجذور"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.tigernut",
+  "gloss": "tiger nut",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Cyperus esculentus",
+  "qid": "Q1165724",
+  "links": 46,
+  "desc": "species of plant in the sedge family Cyperaceae",
+  "labels": {
+   "de": "Erdmandel",
+   "ar": "سعد لذيذ",
+   "he": "גומא נאכל",
+   "zh": "油莎草"
+  },
+  "wiki": {
+   "de": "Erdmandel",
+   "ar": "سعد لذيذ",
+   "he": "גומא נאכל",
+   "zh": "油莎草"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.waterchestnut",
+  "gloss": "water chestnut",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Eleocharis dulcis",
+  "qid": "Q932664",
+  "links": 53,
+  "desc": "grass-like sedge grown for its edible corms",
+  "labels": {
+   "de": "Wasserkastanie",
+   "ar": "إيليوكاريس حلو",
+   "zh": "荸荠"
+  },
+  "wiki": {
+   "de": "Wasserkastanie",
+   "ar": "إيليوكاريس حلو",
+   "zh": "荸荠"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.watercaltrop",
+  "gloss": "water caltrop",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Water caltrop",
+  "qid": "Q161110",
+  "links": 50,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Wassernuss",
+   "ar": "عكر أبو قرون",
+   "zh": "菱角"
+  },
+  "wiki": {
+   "de": "Wassernuss",
+   "ar": "عكر أبو قرون",
+   "zh": "菱角"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.purpleyam",
+  "gloss": "purple yam, ube",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Dioscorea alata",
+  "qid": "Q1932852",
+  "links": 49,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Dioscorea alata",
+   "ar": "ديسقوريا جناحية",
+   "he": "יאם סגול",
+   "zh": "参薯"
+  },
+  "wiki": {
+   "ar": "ديسقوريا جناحية",
+   "he": "יאם סגול",
+   "zh": "参薯"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.chineseartichoke",
+  "gloss": "Chinese artichoke, crosne",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Stachys affinis",
+  "qid": "Q1758702",
+  "links": 23,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Knollen-Ziest",
+   "zh": "甘露子"
+  },
+  "wiki": {
+   "de": "Knollen-Ziest",
+   "zh": "甘露子"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.elephantyam",
+  "gloss": "elephant foot yam",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Amorphophallus paeoniifolius",
+  "qid": "Q151527",
+  "links": 44,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Amorphophallus paeoniifolius",
+   "zh": "疣柄魔芋"
+  },
+  "wiki": {
+   "zh": "疣柄魔芋"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.konjac",
+  "gloss": "konjac",
+  "subgroup": "root",
+  "tier": 3,
+  "enwiki": "Amorphophallus konjac",
+  "qid": "Q674443",
+  "links": 41,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Teufelszunge",
+   "ar": "كونجاك",
+   "he": "קונג'אק",
+   "zh": "蒟蒻"
+  },
+  "wiki": {
+   "de": "Teufelszunge",
+   "ar": "كونجاك",
+   "he": "קונג'אק",
+   "zh": "蒟蒻"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.malabarspinach",
+  "gloss": "Malabar spinach",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Basella alba",
+  "qid": "Q1130368",
+  "links": 46,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Indischer Spinat",
+   "ar": "بازيلاء بيضاء",
+   "zh": "落葵"
+  },
+  "wiki": {
+   "de": "Indischer Spinat",
+   "ar": "بازيلاء بيضاء",
+   "zh": "落葵"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.nzspinach",
+  "gloss": "New Zealand spinach",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Tetragonia tetragonioides",
+  "qid": "Q278283",
+  "links": 33,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Neuseeländer Spinat",
+   "ar": "ترغون",
+   "he": "רבועה שרועה",
+   "zh": "番杏"
+  },
+  "wiki": {
+   "de": "Neuseeländer Spinat",
+   "ar": "ترغون",
+   "zh": "番杏"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.amaranth",
+  "gloss": "amaranth greens",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Amaranthus dubius",
+  "qid": "Q3238412",
+  "links": 23,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Amaranthus dubius",
+   "zh": "假刺莧"
+  },
+  "wiki": {
+   "zh": "假刺莧"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.orache",
+  "gloss": "orache",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Atriplex hortensis",
+  "qid": "Q158505",
+  "links": 43,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Gartenmelde",
+   "ar": "رغل بستاني",
+   "zh": "榆钱菠菜"
+  },
+  "wiki": {
+   "de": "Gartenmelde",
+   "ar": "رغل بستاني",
+   "zh": "榆钱菠菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.fathen",
+  "gloss": "fat hen, lamb's quarters",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Chenopodium album",
+  "qid": "Q158610",
+  "links": 76,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Weißer Gänsefuß",
+   "ar": "سرمق أبيض",
+   "he": "כף אווז לבנה",
+   "zh": "藜"
+  },
+  "wiki": {
+   "de": "Weißer Gänsefuß",
+   "ar": "سرمق أبيض",
+   "he": "כף אווז לבנה",
+   "zh": "藜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.goodkinghenry",
+  "gloss": "Good King Henry",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Blitum bonus-henricus",
+  "qid": "Q163805",
+  "links": 43,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Guter Heinrich",
+   "ar": "إسبانخ بري",
+   "zh": "菜藜"
+  },
+  "wiki": {
+   "de": "Guter Heinrich",
+   "ar": "إسبانخ بري"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.borage",
+  "gloss": "borage",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Borage",
+  "qid": "Q147075",
+  "links": 81,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Borretsch",
+   "ar": "حمحم مخزني",
+   "zh": "琉璃苣"
+  },
+  "wiki": {
+   "de": "Borretsch",
+   "ar": "حمحم مخزني",
+   "zh": "琉璃苣"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.minerslettuce",
+  "gloss": "miner's lettuce, winter purslane",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Claytonia perfoliata",
+  "qid": "Q1376670",
+  "links": 21,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Gewöhnliches Tellerkraut"
+  },
+  "wiki": {
+   "de": "Gewöhnliches Tellerkraut"
+  },
+  "cov": 1
+ },
+ {
+  "id": "veg.landcress",
+  "gloss": "land cress",
+  "subgroup": "leafy",
+  "tier": 3,
+  "enwiki": "Barbarea verna",
+  "qid": "Q164056",
+  "links": 23,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Barbarea verna",
+   "ar": "جرجير أرضي"
+  },
+  "wiki": {},
+  "cov": 2
+ },
+ {
+  "id": "veg.mizuna",
+  "gloss": "mizuna",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Mizuna",
+  "qid": "Q50912348",
+  "links": 17,
+  "desc": "subspecies of plant",
+  "labels": {
+   "de": "Brassica rapa subsp. nipposinica",
+   "ar": "ميزونا",
+   "he": "מיזונה",
+   "zh": "水菜"
+  },
+  "wiki": {
+   "ar": "ميزونا",
+   "zh": "水菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.komatsuna",
+  "gloss": "komatsuna",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Komatsuna",
+  "qid": "Q4383692",
+  "links": 18,
+  "desc": "leaf vegetable",
+  "labels": {
+   "de": "Komatsuna",
+   "ar": "كوماتسونا",
+   "zh": "小松菜"
+  },
+  "wiki": {
+   "de": "Komatsuna",
+   "ar": "كوماتسونا",
+   "zh": "小松菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.tatsoi",
+  "gloss": "tatsoi",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Tatsoi",
+  "qid": "Q7688261",
+  "links": 14,
+  "desc": "species of plant, Tatsoi",
+  "labels": {
+   "de": "Brassica narinosa",
+   "ar": "تاتسوي",
+   "zh": "塌棵菜"
+  },
+  "wiki": {
+   "de": "Tatsoi",
+   "ar": "تاتسوي",
+   "zh": "塌棵菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.kailan",
+  "gloss": "Chinese broccoli, kai-lan",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Gai lan",
+  "qid": "Q1677369",
+  "links": 29,
+  "desc": "type of plant in the Brassica family, source of a leaf vegetable",
+  "labels": {
+   "de": "Kai-lan",
+   "ar": "بروكلي صيني",
+   "he": "ברוקולי סיני",
+   "zh": "芥蘭"
+  },
+  "wiki": {
+   "de": "Kai-lan",
+   "ar": "غاي لان",
+   "he": "ברוקולי סיני",
+   "zh": "芥藍"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.rapini",
+  "gloss": "rapini, broccoli rabe",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Rapini",
+  "qid": "Q702282",
+  "links": 24,
+  "desc": "subspecies of plant",
+  "labels": {
+   "de": "Stängelkohl",
+   "ar": "رابيني",
+   "zh": "西洋菜薹"
+  },
+  "wiki": {
+   "de": "Rübstiel",
+   "ar": "رابيني",
+   "zh": "西洋菜薹"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.romanesco",
+  "gloss": "Romanesco broccoli",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Romanesco broccoli",
+  "qid": "Q1775431",
+  "links": 35,
+  "desc": "vegetable, an edible flower bud of the species Brassica oleracea",
+  "labels": {
+   "de": "Romanesco",
+   "ar": "بروكلي رومانسكي",
+   "he": "כרובית אלמוגים",
+   "zh": "宝塔花菜"
+  },
+  "wiki": {
+   "ar": "بروكلي رومانسكي",
+   "he": "כרובית אלמוגים",
+   "zh": "宝塔花菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.seakale",
+  "gloss": "sea kale",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Crambe maritima",
+  "qid": "Q165299",
+  "links": 34,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Echter Meerkohl",
+   "ar": "كرنب بحري",
+   "zh": "海甘蓝"
+  },
+  "wiki": {
+   "de": "Echter Meerkohl",
+   "ar": "كرنب بحري"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.savoy",
+  "gloss": "Savoy cabbage",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Savoy cabbage",
+  "qid": "Q154013",
+  "links": 44,
+  "desc": "variety of cabbage plant",
+  "labels": {
+   "de": "Wirsing",
+   "ar": "كرنب سافوي",
+   "zh": "野甘蓝"
+  },
+  "wiki": {
+   "de": "Wirsing",
+   "ar": "كرنب سافوي",
+   "zh": "野甘蓝"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.pointedcabbage",
+  "gloss": "pointed cabbage",
+  "subgroup": "brassica",
+  "tier": 3,
+  "enwiki": "Pointed cabbage",
+  "qid": "Q7225623",
+  "links": 11,
+  "desc": "cabbage cultivar",
+  "labels": {
+   "de": "Spitzkohl",
+   "ar": "ملفوف مخروطي"
+  },
+  "wiki": {
+   "de": "Spitzkohl",
+   "ar": "ملفوف مخروطي"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.celtuce",
+  "gloss": "celtuce, stem lettuce",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Celtuce",
+  "qid": "Q574172",
+  "links": 21,
+  "desc": "variety of plants",
+  "labels": {
+   "de": "Lactuca sativa var. angustana",
+   "ar": "خس الكرفس",
+   "he": "חסת הגבעול",
+   "zh": "莴笋"
+  },
+  "wiki": {
+   "ar": "خس الكرفس",
+   "he": "חסת הקלח",
+   "zh": "莴笋"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.cardoon",
+  "gloss": "cardoon",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Cardoon",
+  "qid": "Q7186137",
+  "links": 47,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Wilde Artischocke",
+   "ar": "حرشف مبذول بري",
+   "he": "גדילן",
+   "zh": "大叶菜蓟"
+  },
+  "wiki": {
+   "de": "Cynara cardunculus",
+   "ar": "حرشف بري",
+   "zh": "刺苞菜蓟"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.heartofpalm",
+  "gloss": "heart of palm",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Heart of palm",
+  "qid": "Q743144",
+  "links": 29,
+  "desc": "vegetable harvested from the inner core of certain palm trees",
+  "labels": {
+   "de": "Palmherz",
+   "ar": "جمار",
+   "he": "לבבות דקל",
+   "zh": "棕榈心"
+  },
+  "wiki": {
+   "de": "Palmherz",
+   "ar": "جمار",
+   "he": "לבבות דקל",
+   "zh": "棕榈心"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.nopal",
+  "gloss": "nopal, prickly-pear pad",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Nopal",
+  "qid": "Q3367716",
+  "links": 13,
+  "desc": "cactus pad",
+  "labels": {
+   "zh": "仙人掌茎片"
+  },
+  "wiki": {
+   "zh": "仙人掌茎片"
+  },
+  "cov": 1
+ },
+ {
+  "id": "veg.fiddlehead",
+  "gloss": "fiddlehead fern",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Fiddlehead",
+  "qid": "Q3546960",
+  "links": 20,
+  "desc": "young fern frond, often harvested as vegetable",
+  "labels": {
+   "de": "Farnspitze",
+   "ar": "رؤوس السرخس",
+   "zh": "蕨菜"
+  },
+  "wiki": {
+   "ar": "رؤوس السرخس",
+   "zh": "蕨菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.samphire",
+  "gloss": "samphire, sea fennel",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Crithmum",
+  "qid": "Q1136311",
+  "links": 41,
+  "desc": "species of the family Apiaceae",
+  "labels": {
+   "de": "Meerfenchel",
+   "ar": "شمرة بحرية",
+   "he": "קריתמון ימי",
+   "zh": "海茴香"
+  },
+  "wiki": {
+   "de": "Meerfenchel",
+   "ar": "شمرة بحرية",
+   "he": "קריתמון ימי",
+   "zh": "海茴香"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.glasswort",
+  "gloss": "glasswort, sea asparagus",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Salicornia",
+  "qid": "Q159525",
+  "links": 37,
+  "desc": "genus of edible plants living in marsh water",
+  "labels": {
+   "de": "Queller",
+   "ar": "خريزة",
+   "he": "סליקורניה",
+   "zh": "海蓬子"
+  },
+  "wiki": {
+   "de": "Queller",
+   "ar": "خريزة",
+   "he": "סליקורניה",
+   "zh": "海蓬子"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.rhubarb",
+  "gloss": "rhubarb",
+  "subgroup": "stem",
+  "tier": 3,
+  "enwiki": "Rhubarb",
+  "qid": "Q7535",
+  "links": 54,
+  "desc": "fleshy, edible stalks of plants from the genus Rheum",
+  "labels": {
+   "de": "Gemeiner Rhabarber",
+   "ar": "راوند الحدائق",
+   "he": "ריבס",
+   "zh": "波叶大黄"
+  },
+  "wiki": {
+   "de": "Gemeiner Rhabarber",
+   "ar": "راوند الحدائق",
+   "zh": "食用大黄"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.elephantgarlic",
+  "gloss": "elephant garlic",
+  "subgroup": "bulb",
+  "tier": 3,
+  "enwiki": "Elephant garlic",
+  "qid": "Q4392799",
+  "links": 9,
+  "desc": "variety of plants",
+  "labels": {
+   "de": "Allium ampeloprasum var. ampeloprasum",
+   "he": "שום הפיל",
+   "zh": "象大蒜"
+  },
+  "wiki": {
+   "he": "שום הפיל",
+   "zh": "象大蒜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.pearlonion",
+  "gloss": "pearl onion",
+  "subgroup": "bulb",
+  "tier": 3,
+  "enwiki": "Pearl onion",
+  "qid": "Q508630",
+  "links": 13,
+  "desc": "small variety of onions, close relative of leek",
+  "labels": {
+   "de": "Perlzwiebel",
+   "ar": "بصل اللؤلؤ",
+   "zh": "珍珠洋蔥"
+  },
+  "wiki": {
+   "de": "Perlzwiebel",
+   "ar": "بصل اللؤلؤ"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.kurrat",
+  "gloss": "kurrat, Egyptian leek",
+  "subgroup": "bulb",
+  "tier": 3,
+  "enwiki": "Allium ampeloprasum",
+  "qid": "Q148995",
+  "links": 43,
+  "desc": "Species of plant in family Amaryllidaceae",
+  "labels": {
+   "de": "Ackerlauch",
+   "ar": "كراث نبطي",
+   "he": "שום גבוה",
+   "zh": "象大蒜"
+  },
+  "wiki": {
+   "de": "Ackerlauch",
+   "ar": "كراث نبطي",
+   "he": "שום גבוה"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.ramps",
+  "gloss": "ramps, wild leek",
+  "subgroup": "bulb",
+  "tier": 3,
+  "enwiki": "Allium tricoccum",
+  "qid": "Q2714893",
+  "links": 18,
+  "desc": "species of Allium used as a vegetable",
+  "labels": {
+   "de": "Allium tricoccum",
+   "ar": "كراث بري",
+   "zh": "北美野韭"
+  },
+  "wiki": {
+   "de": "Allium tricoccum",
+   "ar": "كراث بري"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.treeonion",
+  "gloss": "tree onion, walking onion",
+  "subgroup": "bulb",
+  "tier": 3,
+  "enwiki": "Tree onion",
+  "qid": "Q41794154",
+  "links": 22,
+  "desc": "nothospecies of plant",
+  "labels": {
+   "de": "Allium ×proliferum",
+   "ar": "بصل شجري",
+   "zh": "黃蔥"
+  },
+  "wiki": {
+   "ar": "بصل شجري",
+   "zh": "黃蔥"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.welshonion",
+  "gloss": "Welsh onion, bunching onion",
+  "subgroup": "bulb",
+  "tier": 3,
+  "enwiki": "Allium fistulosum",
+  "qid": "Q27938",
+  "links": 65,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Winterzwiebel",
+   "ar": "ثوم قصبي",
+   "he": "בצל ולשי",
+   "zh": "葱"
+  },
+  "wiki": {
+   "de": "Winterzwiebel",
+   "ar": "ثوم قصبي",
+   "he": "בצל ולשי",
+   "zh": "葱"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.kabocha",
+  "gloss": "kabocha",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Kabocha",
+  "qid": "Q3191670",
+  "links": 13,
+  "desc": "Asian variety of winter squash of the species Cucurbita maxima",
+  "labels": {
+   "ar": "كابوتشا (قرع)"
+  },
+  "wiki": {
+   "ar": "كابوتشا (قرع)"
+  },
+  "cov": 1
+ },
+ {
+  "id": "veg.spaghettisquash",
+  "gloss": "spaghetti squash",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Spaghetti squash",
+  "qid": "Q2142043",
+  "links": 21,
+  "desc": "group of cultivars of squash",
+  "labels": {
+   "de": "Spaghettikürbis",
+   "ar": "قرع المعكرونة",
+   "he": "דלעת הספגטי",
+   "zh": "金絲瓜"
+  },
+  "wiki": {
+   "de": "Spaghettikürbis",
+   "ar": "قرع المعكرونة",
+   "he": "דלעת הספגטי",
+   "zh": "金絲瓜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.pattypan",
+  "gloss": "pattypan squash",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Pattypan squash",
+  "qid": "Q876892",
+  "links": 27,
+  "desc": "vegetable",
+  "labels": {
+   "de": "Patisson",
+   "he": "קישוא פטיסון"
+  },
+  "wiki": {
+   "de": "Patisson",
+   "he": "קישוא פטיסון"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.acorns",
+  "gloss": "acorn squash",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Acorn squash",
+  "qid": "Q2975815",
+  "links": 7,
+  "desc": "type of squash",
+  "labels": {
+   "he": "דלעת ערמונים",
+   "zh": "橡子南瓜"
+  },
+  "wiki": {
+   "he": "דלעת ערמונים"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.snakegourd",
+  "gloss": "snake gourd",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Trichosanthes cucumerina",
+  "qid": "Q1323731",
+  "links": 32,
+  "desc": "species of tropical vine native to South Asia",
+  "labels": {
+   "de": "Schlangenhaargurke",
+   "ar": "بدوال",
+   "zh": "瓜叶栝楼"
+  },
+  "wiki": {
+   "de": "Schlangenhaargurke",
+   "ar": "بدوال",
+   "zh": "瓜叶栝楼"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.ridgedgourd",
+  "gloss": "ridged gourd",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Luffa acutangula",
+  "qid": "Q1948703",
+  "links": 40,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Luffa acutangula",
+   "zh": "稜角絲瓜"
+  },
+  "wiki": {
+   "de": "Flügelgurke",
+   "zh": "稜角絲瓜"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.ivygourd",
+  "gloss": "ivy gourd, tindora",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Coccinia grandis",
+  "qid": "Q727330",
+  "links": 48,
+  "desc": "Species of plant",
+  "labels": {
+   "de": "Coccinia grandis",
+   "zh": "红瓜"
+  },
+  "wiki": {
+   "de": "Tindola",
+   "zh": "红瓜"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.pointedgourd",
+  "gloss": "pointed gourd, parwal",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Trichosanthes dioica",
+  "qid": "Q2724295",
+  "links": 19,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Trichosanthes dioica",
+   "ar": "بروال"
+  },
+  "wiki": {
+   "ar": "بروال"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.armeniancucumber",
+  "gloss": "Armenian cucumber",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Armenian cucumber",
+  "qid": "Q2139088",
+  "links": 26,
+  "desc": "variety of plants",
+  "labels": {
+   "de": "Cucumis melo var. flexuosus",
+   "ar": "قثاء",
+   "he": "פקוס",
+   "zh": "亚美尼亚黄瓜"
+  },
+  "wiki": {
+   "ar": "قثاء",
+   "he": "פקוס"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.cucamelon",
+  "gloss": "cucamelon, mouse melon",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Melothria scabra",
+  "qid": "Q929967",
+  "links": 22,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Melothria scabra",
+   "ar": "بويطيخ خشن"
+  },
+  "wiki": {
+   "ar": "بويطيخ خشن"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.kiwano",
+  "gloss": "kiwano, horned melon",
+  "subgroup": "cucurbit",
+  "tier": 3,
+  "enwiki": "Cucumis metuliferus",
+  "qid": "Q41318",
+  "links": 49,
+  "desc": "annual vine in the cucumber and melon family",
+  "labels": {
+   "de": "Horngurke",
+   "ar": "كيوانو",
+   "zh": "刺角瓜"
+  },
+  "wiki": {
+   "de": "Horngurke",
+   "ar": "كيوانو",
+   "zh": "刺角瓜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.tomatillo",
+  "gloss": "tomatillo",
+  "subgroup": "fruitveg",
+  "tier": 3,
+  "enwiki": "Tomatillo",
+  "qid": "Q622525",
+  "links": 38,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Tomatillo",
+   "ar": "حبوة المكسيك",
+   "he": "טומטילו",
+   "zh": "黏果酸漿"
+  },
+  "wiki": {
+   "de": "Tomatillo",
+   "ar": "حبوة المكسيك",
+   "zh": "黏果酸漿"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.habanero",
+  "gloss": "habanero",
+  "subgroup": "fruitveg",
+  "tier": 3,
+  "enwiki": "Habanero",
+  "qid": "Q764375",
+  "links": 33,
+  "desc": "strain of pepper (Capsicum)",
+  "labels": {
+   "de": "Habanero",
+   "zh": "哈瓦那辣椒"
+  },
+  "wiki": {
+   "de": "Habanero",
+   "zh": "哈瓦那辣椒"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.cayenne",
+  "gloss": "cayenne pepper",
+  "subgroup": "fruitveg",
+  "tier": 3,
+  "enwiki": "Cayenne pepper",
+  "qid": "Q6598",
+  "links": 35,
+  "desc": "hot chili pepper used to flavor dishes",
+  "labels": {
+   "de": "Cayennepfeffer",
+   "ar": "فليفلة حريفة",
+   "he": "פלפל קאיין",
+   "zh": "牛角椒"
+  },
+  "wiki": {
+   "de": "Cayenne (Pflanze)",
+   "ar": "فليفلة حريفة",
+   "he": "פלפל קאיין",
+   "zh": "卡宴辣椒"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.padron",
+  "gloss": "Padrón pepper",
+  "subgroup": "fruitveg",
+  "tier": 3,
+  "enwiki": "Padrón pepper",
+  "qid": "Q1466464",
+  "links": 16,
+  "desc": "variety of chili pepper",
+  "labels": {
+   "de": "Pimientos de Padrón",
+   "he": "פלפל פדרון"
+  },
+  "wiki": {
+   "de": "Pimientos de Padrón",
+   "he": "פלפל פדרון"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.babycorn",
+  "gloss": "baby corn",
+  "subgroup": "fruitveg",
+  "tier": 3,
+  "enwiki": "Baby corn",
+  "qid": "Q4838440",
+  "links": 10,
+  "desc": "cereal grain taken from maize harvested early",
+  "labels": {
+   "de": "Baby Maiskolben",
+   "he": "תירס ננסי",
+   "zh": "玉米筍"
+  },
+  "wiki": {
+   "he": "תירס ננסי",
+   "zh": "玉米筍"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.yardlongbean",
+  "gloss": "yardlong bean",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Asparagus bean",
+  "qid": "Q1323455",
+  "links": 36,
+  "desc": "subspecies of cowpea plant",
+  "labels": {
+   "de": "Spargelbohne",
+   "he": "שעועית ארוכה",
+   "zh": "長豇豆"
+  },
+  "wiki": {
+   "de": "Spargelbohne",
+   "zh": "長豇豆"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.wingedbean",
+  "gloss": "winged bean",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Winged bean",
+  "qid": "Q1468260",
+  "links": 39,
+  "desc": "species of plant, Winged bean",
+  "labels": {
+   "de": "Goabohne",
+   "ar": "فاصولياء مجنحة",
+   "zh": "四棱豆"
+  },
+  "wiki": {
+   "de": "Goabohne",
+   "ar": "فاصولياء مجنحة",
+   "zh": "四棱豆"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.limabean",
+  "gloss": "lima bean",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Lima bean",
+  "qid": "Q1166136",
+  "links": 48,
+  "desc": "species of plant",
+  "labels": {
+   "de": "Limabohne",
+   "he": "שעועית לימה",
+   "zh": "棉豆"
+  },
+  "wiki": {
+   "de": "Limabohne",
+   "zh": "棉豆"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.edamame",
+  "gloss": "edamame",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Edamame",
+  "qid": "Q1377879",
+  "links": 29,
+  "desc": "preparation of soybeans eaten in East Asian cuisines",
+  "labels": {
+   "de": "Edamame",
+   "ar": "إداماميه",
+   "he": "אדממה",
+   "zh": "毛豆"
+  },
+  "wiki": {
+   "de": "Edamame",
+   "ar": "إداماميه",
+   "he": "אדממה",
+   "zh": "毛豆"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.sugarsnap",
+  "gloss": "sugar snap pea",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Snap pea",
+  "qid": "Q12097128",
+  "links": 7,
+  "desc": "Group of plants",
+  "labels": {
+   "de": "Pisum sativum Macrocarpon Group",
+   "he": "אפונת סוכר",
+   "zh": "甜脆豆"
+  },
+  "wiki": {
+   "zh": "甜脆豆"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.guar",
+  "gloss": "guar bean, cluster bean",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Guar",
+  "qid": "Q264770",
+  "links": 43,
+  "desc": "legum",
+  "labels": {
+   "de": "Guarbohne",
+   "ar": "قوار رباعي",
+   "he": "גואר",
+   "zh": "瓜尔"
+  },
+  "wiki": {
+   "de": "Guarbohne",
+   "ar": "قوار رباعي",
+   "zh": "瓜尔"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.drumstick",
+  "gloss": "drumstick (moringa pod)",
+  "subgroup": "legume",
+  "tier": 3,
+  "enwiki": "Moringa oleifera",
+  "qid": "Q234193",
+  "links": 86,
+  "desc": "species of a fast-growing, drought-resistant tree and listed as an invasive species in several countries",
+  "labels": {
+   "de": "Meerrettichbaum",
+   "ar": "بان زيتي",
+   "he": "מורינגה מכונפת",
+   "zh": "辣木"
+  },
+  "wiki": {
+   "de": "Meerrettichbaum",
+   "ar": "بان زيتي",
+   "he": "מורינגה מכונפת",
+   "zh": "辣木"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.capers",
+  "gloss": "caper",
+  "subgroup": "flower",
+  "tier": 3,
+  "enwiki": "Caper",
+  "qid": "Q156251",
+  "links": 79,
+  "desc": "species of plant, caper",
+  "labels": {
+   "de": "Echter Kapernstrauch",
+   "ar": "قبار",
+   "he": "צלף",
+   "zh": "刺山柑"
+  },
+  "wiki": {
+   "de": "Echter Kapernstrauch",
+   "ar": "قبار",
+   "zh": "刺山柑"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.bananaflower",
+  "gloss": "banana flower",
+  "subgroup": "flower",
+  "tier": 3,
+  "enwiki": "Banana flower",
+  "qid": "Q31830399",
+  "links": 7,
+  "desc": "a flower from the banana plant, widely used in South Indian cooking and medicine, and in perfumery",
+  "labels": {},
+  "wiki": {},
+  "cov": 0
+ },
+ {
+  "id": "veg.zucchiniflower",
+  "gloss": "zucchini flower",
+  "subgroup": "flower",
+  "tier": 3,
+  "enwiki": "Squash blossom",
+  "qid": "Q42293042",
+  "links": 12,
+  "desc": "the edible flowers of Cucurbita species",
+  "labels": {
+   "de": "Zucchiniblüte",
+   "ar": "أزهار القرع"
+  },
+  "wiki": {
+   "de": "Zucchiniblüte",
+   "ar": "أزهار القرع"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.nori",
+  "gloss": "nori",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Nori",
+  "qid": "Q201565",
+  "links": 43,
+  "desc": "edible seaweed species of the red algae genus Pyropia",
+  "labels": {
+   "de": "Nori",
+   "ar": "نوري",
+   "he": "נורי",
+   "zh": "海苔"
+  },
+  "wiki": {
+   "de": "Nori",
+   "ar": "نوري (طحلب)",
+   "he": "נורי"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.wakame",
+  "gloss": "wakame",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Wakame",
+  "qid": "Q864682",
+  "links": 33,
+  "desc": "edible seaweed",
+  "labels": {
+   "de": "Wakame",
+   "ar": "واكامي",
+   "he": "ואקאמה",
+   "zh": "海帶芽"
+  },
+  "wiki": {
+   "de": "Wakame",
+   "ar": "واكامي",
+   "he": "ואקאמה",
+   "zh": "裙带菜"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.kombu",
+  "gloss": "kombu",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Kombu",
+  "qid": "Q11261547",
+  "links": 32,
+  "desc": "edible kelp",
+  "labels": {
+   "de": "Kombu",
+   "ar": "كومبو",
+   "he": "אצת קומבו",
+   "zh": "海帶"
+  },
+  "wiki": {
+   "de": "Kombu",
+   "he": "אצת קומבו",
+   "zh": "海带 (食材)"
+  },
+  "cov": 4
+ },
+ {
+  "id": "veg.hijiki",
+  "gloss": "hijiki",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Hijiki",
+  "qid": "Q1204264",
+  "links": 25,
+  "desc": "sea vegetable",
+  "labels": {
+   "de": "Hijiki",
+   "ar": "هيجيكي",
+   "zh": "羊栖菜"
+  },
+  "wiki": {
+   "de": "Hijiki",
+   "ar": "هيجيكي",
+   "zh": "羊栖菜"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.dulse",
+  "gloss": "dulse",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Palmaria palmata",
+  "qid": "Q864648",
+  "links": 31,
+  "desc": "species of edible alga",
+  "labels": {
+   "de": "Lappentang",
+   "ar": "الدلسي"
+  },
+  "wiki": {
+   "de": "Lappentang",
+   "ar": "راحية خوصية"
+  },
+  "cov": 2
+ },
+ {
+  "id": "veg.sealettuce",
+  "gloss": "sea lettuce",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Sea lettuce",
+  "qid": "Q1109330",
+  "links": 32,
+  "desc": "genus of algae",
+  "labels": {
+   "de": "Ulva",
+   "ar": "خس البحر",
+   "zh": "石莼属"
+  },
+  "wiki": {
+   "de": "Ulva (Gattung)",
+   "ar": "خس البحر",
+   "zh": "石莼属"
+  },
+  "cov": 3
+ },
+ {
+  "id": "veg.seagrapes",
+  "gloss": "sea grapes",
+  "subgroup": "sea",
+  "tier": 3,
+  "enwiki": "Caulerpa lentillifera",
+  "qid": "Q1936864",
+  "links": 23,
+  "desc": "species of alga",
+  "labels": {
+   "de": "Caulerpa lentillifera",
+   "ar": "زوحيفان عدسي",
+   "zh": "長莖葡萄蕨藻"
+  },
+  "wiki": {
+   "de": "Caulerpa lentillifera",
+   "ar": "زوحيفان عدسي",
+   "zh": "長莖葡萄蕨藻"
+  },
+  "cov": 3
+ }
+]

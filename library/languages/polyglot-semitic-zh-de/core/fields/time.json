@@ -1,0 +1,545 @@
+{
+ "field": "time",
+ "title": "Time",
+ "subgroups": [
+  {
+   "id": "days",
+   "title": "The days of the week"
+  },
+  {
+   "id": "day",
+   "title": "The day"
+  },
+  {
+   "id": "when",
+   "title": "When and how often"
+  },
+  {
+   "id": "months",
+   "title": "The months"
+  },
+  {
+   "id": "seasons",
+   "title": "The seasons"
+  },
+  {
+   "id": "units",
+   "title": "Units of time"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
+  },
+  {
+   "id": "core",
+   "title": "From the core lessons"
+  }
+ ],
+ "sources": [
+  "Days, months, seasons and the words of time — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "time.monday",
+   "gloss": "Monday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "time.tuesday",
+   "gloss": "Tuesday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "time.wednesday",
+   "gloss": "Wednesday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "time.thursday",
+   "gloss": "Thursday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "time.friday",
+   "gloss": "Friday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "time.saturday",
+   "gloss": "Saturday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "time.sunday",
+   "gloss": "Sunday",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "time.weekend",
+   "gloss": "weekend",
+   "subgroup": "days",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "time.day",
+   "gloss": "day",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "time.night",
+   "gloss": "night",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "time.morning",
+   "gloss": "morning",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "time.noon",
+   "gloss": "noon, midday",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "time.afternoon",
+   "gloss": "afternoon",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "time.evening",
+   "gloss": "evening",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "time.today",
+   "gloss": "today",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "time.tomorrow",
+   "gloss": "tomorrow",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "time.yesterday",
+   "gloss": "yesterday",
+   "subgroup": "day",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "adv.now",
+   "gloss": "now",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "adv.later",
+   "gloss": "later",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "adv.soon",
+   "gloss": "soon",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "adv.early",
+   "gloss": "early",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "adv.late",
+   "gloss": "late",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "adv.always",
+   "gloss": "always",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "adv.often",
+   "gloss": "often",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "adv.sometimes",
+   "gloss": "sometimes",
+   "subgroup": "when",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "time.january",
+   "gloss": "January",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "time.february",
+   "gloss": "February",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "time.march",
+   "gloss": "March",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 28
+  },
+  {
+   "id": "time.april",
+   "gloss": "April",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 29
+  },
+  {
+   "id": "time.may",
+   "gloss": "May",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 30
+  },
+  {
+   "id": "time.june",
+   "gloss": "June",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 31
+  },
+  {
+   "id": "time.july",
+   "gloss": "July",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 32
+  },
+  {
+   "id": "time.august",
+   "gloss": "August",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 33
+  },
+  {
+   "id": "time.september",
+   "gloss": "September",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 34
+  },
+  {
+   "id": "time.october",
+   "gloss": "October",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 35
+  },
+  {
+   "id": "time.november",
+   "gloss": "November",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 36
+  },
+  {
+   "id": "time.december",
+   "gloss": "December",
+   "subgroup": "months",
+   "tier": 1,
+   "rank": 37
+  },
+  {
+   "id": "time.spring",
+   "gloss": "spring (the season)",
+   "subgroup": "seasons",
+   "tier": 1,
+   "rank": 38
+  },
+  {
+   "id": "time.summer",
+   "gloss": "summer",
+   "subgroup": "seasons",
+   "tier": 1,
+   "rank": 39
+  },
+  {
+   "id": "time.autumn",
+   "gloss": "autumn, fall",
+   "subgroup": "seasons",
+   "tier": 1,
+   "rank": 40
+  },
+  {
+   "id": "time.winter",
+   "gloss": "winter",
+   "subgroup": "seasons",
+   "tier": 1,
+   "rank": 41
+  },
+  {
+   "id": "time.week",
+   "gloss": "week",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 42
+  },
+  {
+   "id": "time.month",
+   "gloss": "month",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 43
+  },
+  {
+   "id": "time.year",
+   "gloss": "year",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 44
+  },
+  {
+   "id": "time.hour",
+   "gloss": "hour",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 45
+  },
+  {
+   "id": "time.minute",
+   "gloss": "minute",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 46
+  },
+  {
+   "id": "time.oclock",
+   "gloss": "o’clock (telling the time)",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 47
+  },
+  {
+   "id": "time.date",
+   "gloss": "date (day of the month)",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 48
+  },
+  {
+   "id": "time.birthday",
+   "gloss": "birthday",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 49
+  },
+  {
+   "id": "time.holiday",
+   "gloss": "holiday, vacation",
+   "subgroup": "units",
+   "tier": 1,
+   "rank": 50
+  },
+  {
+   "id": "time.am",
+   "gloss": "a.m., in the morning (with a clock time)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.childhood",
+   "gloss": "childhood (小时候)",
+   "tier": 1,
+   "rank": 51,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.daytime",
+   "gloss": "daytime, day (as opposed to night)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.endofweek",
+   "gloss": "the end of the week",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.eve",
+   "gloss": "eve, the day before (a holiday: Christmas Eve)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.future",
+   "gloss": "the future, tomorrow (as a noun)",
+   "tier": 1,
+   "rank": 58,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.moment",
+   "gloss": "a time, a moment",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.newyear",
+   "gloss": "(Chinese) New Year (过年)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.period",
+   "gloss": "period, time (a stretch of time)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.pm",
+   "gloss": "p.m., in the evening (with a clock time)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.thismorning",
+   "gloss": "this morning",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.tonight",
+   "gloss": "tonight",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.weekday",
+   "gloss": "day of the week (星期三 Wednesday; 星期几 which day?)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.while",
+   "gloss": "a little while, a moment (as a length of time)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.holidays",
+   "gloss": "the (school) holidays",
+   "tier": 1,
+   "rank": 52,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.nextweek",
+   "gloss": "next week",
+   "tier": 1,
+   "rank": 53,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.nextyear",
+   "gloss": "next year",
+   "tier": 1,
+   "rank": 54,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.century",
+   "gloss": "century",
+   "tier": 1,
+   "rank": 55,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.decade",
+   "gloss": "decade",
+   "tier": 1,
+   "rank": 56,
+   "subgroup": "core"
+  },
+  {
+   "id": "time.anniversary",
+   "gloss": "anniversary",
+   "tier": 1,
+   "rank": 57,
+   "subgroup": "core"
+  }
+ ]
+}

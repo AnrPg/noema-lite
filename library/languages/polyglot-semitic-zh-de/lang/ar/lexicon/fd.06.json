@@ -1,0 +1,4128 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:inda",
+   "lemma": "عِنْدَ",
+   "pos": "ADP",
+   "senses": [
+    "poss.have",
+    "prep.at",
+    "prep.attime",
+    "prep.accordingto"
+   ],
+   "features": {
+    "root": "ع ن د",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "a person’s place or a location",
+     "value": "at someone’s (عِنْدَ الطَّبِيبِ), at a point (عِنْدَ الْبَابِ)"
+    },
+    {
+     "concept": "prep.attime",
+     "axis": "the kind of time",
+     "value": "a moment or an event (عِنْدَ الظُّهْرِ، عِنْدَ الْفَجْرِ)"
+    },
+    {
+     "concept": "prep.accordingto",
+     "axis": "whose word",
+     "value": "in someone’s opinion (عِنْدَ سِيبَوَيْهِ)"
+    }
+   ],
+   "translit": "ʿinda",
+   "forms": {
+    "ADP": "عِنْدَ",
+    "ADP;1;SG": "عِنْدِي",
+    "ADP;2;SG;MASC": "عِنْدَكَ",
+    "ADP;2;SG;FEM": "عِنْدَكِ",
+    "ADP;3;SG;MASC": "عِنْدَهُ",
+    "ADP;3;SG;FEM": "عِنْدَهَا",
+    "ADP;1;PL": "عِنْدَنَا",
+    "ADP;2;PL;MASC": "عِنْدَكُمْ",
+    "ADP;2;PL;FEM": "عِنْدَكُنَّ",
+    "ADP;3;PL;MASC": "عِنْدَهُمْ",
+    "ADP;3;PL;FEM": "عِنْدَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “have”: literally “at me, at you” — possession as location.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have — عِنْدَ + pronoun suffix: عِنْدِي “at me” = I have",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.have"
+     },
+     {
+      "id": "s2",
+      "def": "at (someone’s place), near, with: عِنْدَ الطَّبِيبِ (at the doctor’s), عِنْدَ الْبَابِ (at the door)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.at"
+     },
+     {
+      "id": "s4",
+      "def": "in the opinion of",
+      "register": [
+       "formal"
+      ],
+      "concept": "prep.accordingto"
+     },
+     {
+      "id": "s5",
+      "def": "at (a moment, a time of day): عِنْدَ الظُّهْرِ (at noon), عِنْدَ السَّاعَةِ الْخَامِسَةِ (at five)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.attime"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي سُؤَالٌ.",
+      "tr": "I have a question.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ عِنْدَكَ وَقْتٌ؟",
+      "tr": "Do you have time?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهَا أَخٌ وَأُخْتَانِ.",
+      "tr": "She has a brother and two sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَلْتَقِي عِنْدَ الْبَابِ.",
+      "tr": "We’ll meet at the door.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s2"
+     },
+     {
+      "text": "أَنَا عِنْدَ الطَّبِيبِ.",
+      "tr": "I’m at the doctor’s.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     },
+     {
+      "text": "أَسْتَيْقِظُ عِنْدَ الْفَجْرِ.",
+      "tr": "I wake up at dawn.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s5"
+     },
+     {
+      "text": "نَأْكُلُ الْغَدَاءَ عِنْدَ الظُّهْرِ.",
+      "tr": "We have lunch at noon.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s5"
+     },
+     {
+      "text": "أَصِلُ عِنْدَ السَّاعَةِ السَّادِسَةِ.",
+      "tr": "I arrive at six o’clock.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s5"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِنْدَ الْحَاجَةِ",
+      "tr": "when needed"
+     },
+     {
+      "text": "مِنْ عِنْدِ …",
+      "tr": "from (someone’s place)"
+     },
+     {
+      "text": "كَانَ عِنْدِي",
+      "tr": "I had"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَدَى",
+      "register": "formal",
+      "nuance": "at, with; لَدَيَّ = I have — the written, formal counterpart of عِنْدِي"
+     },
+     {
+      "word": "لِـ",
+      "register": "neutral",
+      "nuance": "for, belonging to: لِي أَخٌ = I have a brother — for relatives, rights and lasting relations"
+     },
+     {
+      "word": "مَعَ",
+      "register": "neutral",
+      "nuance": "with: مَعِي قَلَمٌ = I have a pen (on me, right now)"
+     }
+    ],
+    "etymology": {
+     "text": "A contraction of ع ن ن or ع ي ن (in the sense of viewing) and يَدَا (“hand”), i.e. “at hand, before one’s eyes”; compare لَدَى and لَدُنْ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "عِنْدَمَا (“when”) is simply عِنْدَ + مَا.",
+     "Russian у меня есть and Turkish bende var say it the same way: “at me (there is)” — Greek, German and English use a verb.",
+     "Hebrew says יֵשׁ לִי (yesh li, “there is to me”), with the preposition “to” — the twin of Arabic لِي أَخٌ."
+    ],
+    "pitfalls": [
+     "عِنْدَ is a preposition, not a verb: it does not change for tense. “I had” = كَانَ عِنْدِي; “I don’t have” = لَيْسَ عِنْدِي.",
+     "The thing you have is the grammatical subject, so it is nominative and usually indefinite: عِنْدِي جَزَرَةٌ (not جَزَرَةً).",
+     "Unvocalized عند can also be the verb عَنَدَ, “to be stubborn” (root of عِنَاد, stubbornness — Turkish inat)."
+    ],
+    "subtleties": [
+     "عِنْدِي is for what you own or keep at your place, لِي for relations and rights, مَعِي for what you carry right now.",
+     "“At” a place is فِي (فِي الْبَيْتِ, at home); “at” a person or a landmark is عِنْدَ (عِنْدَ صَدِيقِي, at my friend’s; عِنْدَ الْبَابِ, at the door).",
+     "For a moment in time عِنْدَ is as common as فِي: عِنْدَ الظُّهْرِ, عِنْدَ الْفَجْرِ (at dawn)."
+    ]
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:usra",
+   "lemma": "أُسْرَة",
+   "pos": "NOUN",
+   "senses": [
+    "family.family",
+    "pol.dynasty"
+   ],
+   "features": {
+    "root": "ء س ر",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أُسَر",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أُسْرَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "nuclear or extended",
+     "value": "the household: parents and children"
+    }
+   ],
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ʾusra",
+   "forms": {
+    "N;NOM;SG;INDF": "أُسْرَةٌ",
+    "N;NOM;PL;INDF": "أُسَرٌ",
+    "N;NOM;DU;INDF": "أُسْرَتَانِ",
+    "N;NOM;SG;DEF": "الْأُسْرَةُ",
+    "N;NOM;PL;DEF": "الْأُسَرُ",
+    "N;NOM;DU;DEF": "الْأُسْرَتَانِ",
+    "N;ACC;SG;INDF": "أُسْرَةً",
+    "N;ACC;PL;INDF": "أُسَرًا",
+    "N;ACC;DU;INDF": "أُسْرَتَيْنِ",
+    "N;ACC;SG;DEF": "الْأُسْرَةَ",
+    "N;ACC;PL;DEF": "الْأُسَرَ",
+    "N;ACC;DU;DEF": "الْأُسْرَتَيْنِ",
+    "N;GEN;SG;INDF": "أُسْرَةٍ",
+    "N;GEN;PL;INDF": "أُسَرٍ",
+    "N;GEN;DU;INDF": "أُسْرَتَيْنِ",
+    "N;GEN;SG;DEF": "الْأُسْرَةِ",
+    "N;GEN;PL;DEF": "الْأُسَرِ",
+    "N;GEN;DU;DEF": "الْأُسْرَتَيْنِ",
+    "N;NOM;SG;CONST": "أُسْرَةُ",
+    "N;NOM;SG;POSS;PSS1S": "أُسْرَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "أُسْرَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "أُسْرَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "أُسْرَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "أُسْرَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "أُسْرَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "أُسْرَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "أُسْرَتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "أُسْرَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The household family — parents and children; the word of forms, schools and the news.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family (the household: parents and children)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     },
+     {
+      "id": "s2",
+      "def": "a dynasty, a ruling house (الْأُسْرَةُ الْحَاكِمَةُ)",
+      "register": [
+       "formal"
+      ],
+      "concept": "pol.dynasty"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُسْرَتِي صَغِيرَةٌ.",
+      "tr": "My family is small.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تَعِيشُ الْأُسْرَةُ فِي شَقَّةٍ.",
+      "tr": "The family lives in a flat.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ مِنَ الْأُسْرَةِ الْحَاكِمَةِ.",
+      "tr": "He is from the ruling family.",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَبُّ الْأُسْرَةِ",
+      "tr": "the head of the family"
+     },
+     {
+      "text": "أُسْرَةٌ كَبِيرَةٌ",
+      "tr": "a big family"
+     },
+     {
+      "text": "الْأُسْرَةُ الْمَالِكَةُ",
+      "tr": "the royal family"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَائِلَة",
+      "register": "neutral",
+      "nuance": "family — warmer, often the wider family with relatives; the common word in speech"
+     },
+     {
+      "word": "أَهْل",
+      "register": "neutral",
+      "nuance": "one's people, kin: أَهْلِي (my family, my folks)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary files it under the root ء س ر, the root of أَسَرَ (to take captive) and أَسِير (captive); it gives no further origin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish esir (prisoner of war) is Arabic أَسِير, from the same root."
+    ],
+    "pitfalls": [
+     "Unvocalized أسرة is also أَسِرَّة (beds, the plural of سَرِير) — the vowels and the šadda decide.",
+     "With a possessive the ة becomes ت: أُسْرَتِي, أُسْرَتُكَ."
+    ],
+    "subtleties": [
+     "أُسْرَة is the family as a unit (sociology, forms: الْأُسْرَةُ النَّوَوِيَّةُ, the nuclear family); عَائِلَة is often the wider family."
+    ]
+   }
+  },
+  {
+   "id": "ar:aila",
+   "lemma": "عَائِلَة",
+   "pos": "NOUN",
+   "senses": [
+    "family.family"
+   ],
+   "features": {
+    "root": "ع و ل",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "عَائِلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "عَوَائِل",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "note": "also used",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "عَائِلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "nuclear or extended",
+     "value": "the family in general, often the wider family"
+    }
+   ],
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ʿāʾila",
+   "forms": {
+    "N;NOM;SG;INDF": "عَائِلَةٌ",
+    "N;NOM;PL;INDF": "عَائِلَاتٌ",
+    "N;NOM;DU;INDF": "عَائِلَتَانِ",
+    "N;NOM;SG;DEF": "الْعَائِلَةُ",
+    "N;NOM;PL;DEF": "الْعَائِلَاتُ",
+    "N;NOM;DU;DEF": "الْعَائِلَتَانِ",
+    "N;ACC;SG;INDF": "عَائِلَةً",
+    "N;ACC;PL;INDF": "عَائِلَاتٍ",
+    "N;ACC;DU;INDF": "عَائِلَتَيْنِ",
+    "N;ACC;SG;DEF": "الْعَائِلَةَ",
+    "N;ACC;PL;DEF": "الْعَائِلَاتِ",
+    "N;ACC;DU;DEF": "الْعَائِلَتَيْنِ",
+    "N;GEN;SG;INDF": "عَائِلَةٍ",
+    "N;GEN;PL;INDF": "عَائِلَاتٍ",
+    "N;GEN;DU;INDF": "عَائِلَتَيْنِ",
+    "N;GEN;SG;DEF": "الْعَائِلَةِ",
+    "N;GEN;PL;DEF": "الْعَائِلَاتِ",
+    "N;GEN;DU;DEF": "الْعَائِلَتَيْنِ",
+    "N;NOM;SG;CONST": "عَائِلَةُ",
+    "N;NOM;SG;POSS;PSS1S": "عَائِلَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "عَائِلَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "عَائِلَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "عَائِلَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "عَائِلَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "عَائِلَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "عَائِلَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "عَائِلَتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "عَائِلَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Family warmth, the big family, the family name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "family (in general, often with the wider family)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.family"
+     },
+     {
+      "id": "s2",
+      "def": "family name: اِسْمُ الْعَائِلَةِ (surname)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عَائِلَتِي كَبِيرَةٌ.",
+      "tr": "My family is big.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَزُورُ الْعَائِلَةَ فِي الْعِيدِ.",
+      "tr": "We visit the family at the Eid.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا اسْمُ الْعَائِلَةِ؟",
+      "tr": "What is the family name?",
+      "register": "neutral",
+      "context": "forms",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِسْمُ الْعَائِلَةِ",
+      "tr": "family name, surname"
+     },
+     {
+      "text": "عَائِلَةٌ كَبِيرَةٌ",
+      "tr": "a big family"
+     },
+     {
+      "text": "لَمُّ شَمْلِ الْعَائِلَةِ",
+      "tr": "family reunion"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أُسْرَة",
+      "register": "formal",
+      "nuance": "the household family as a unit — forms, statistics, the news"
+     },
+     {
+      "word": "أَهْل",
+      "register": "neutral",
+      "nuance": "one's people, family: أَهْلِي"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary puts it under the root ع و ل, the root of عَالَ (to provide for, to support a family) and عِيَال (dependants, children); no older origin is given.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish aile (family) is this Arabic word."
+    ],
+    "pitfalls": [
+     "The hamza sits on a yāʾ seat: عَائِلَة (ʿāʾila); the spelling عايلة is colloquial.",
+     "Possessive: عَائِلَتِي (ة → ت)."
+    ],
+    "subtleties": [
+     "In many dialects عَائِلَة (or عِيلَة) is the everyday word, and أُسْرَة sounds formal."
+    ]
+   }
+  },
+  {
+   "id": "ar:walidan",
+   "lemma": "وَالِدَان",
+   "pos": "NOUN",
+   "senses": [
+    "family.parents"
+   ],
+   "features": {
+    "root": "و ل د",
+    "pattern": "فَاعِلَان",
+    "sunLetter": false,
+    "human": true,
+    "plurals": {
+     "none": "a dual (the two parents)"
+    },
+    "dual": {
+     "none": "itself a dual"
+    },
+    "declension": "dual",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "class": "du",
+   "gender": "MASC",
+   "translit": "wālidān",
+   "forms": {
+    "N;NOM;DU;INDF": "وَالِدَانِ",
+    "N;NOM;DU;DEF": "الْوَالِدَانِ",
+    "N;ACC;DU;INDF": "وَالِدَيْنِ",
+    "N;ACC;DU;DEF": "الْوَالِدَيْنِ",
+    "N;GEN;DU;INDF": "وَالِدَيْنِ",
+    "N;GEN;DU;DEF": "الْوَالِدَيْنِ",
+    "N;NOM;DU;POSS;PSS2SM": "وَالِدَاكَ",
+    "N;NOM;DU;POSS;PSS2SF": "وَالِدَاكِ",
+    "N;NOM;DU;POSS;PSS3SM": "وَالِدَاهُ",
+    "N;NOM;DU;POSS;PSS3SF": "وَالِدَاهَا",
+    "N;NOM;DU;POSS;PSS1P": "وَالِدَانَا",
+    "N;NOM;DU;POSS;PSS2PM": "وَالِدَاكُمْ",
+    "N;NOM;DU;POSS;PSS3PM": "وَالِدَاهُمْ",
+    "N;NOM;DU;POSS;PSS1S": "وَالِدَايَ",
+    "N;GEN;DU;POSS;PSS1S": "وَالِدَيَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral",
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Respectful and warm: “the two who gave birth” — father and mother together.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "parents (father and mother) — a dual",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.parents"
+     }
+    ],
+    "examples": [
+     {
+      "text": "وَالِدَايَ فِي الْبَيْتِ.",
+      "tr": "My parents are at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "وَالِدَاهُ مُعَلِّمَانِ.",
+      "tr": "His parents are teachers.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "بِرُّ الْوَالِدَيْنِ وَاجِبٌ.",
+      "tr": "Being good to one's parents is a duty.",
+      "register": "formal",
+      "context": "ethics",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِرُّ الْوَالِدَيْنِ",
+      "tr": "honouring one's parents"
+     },
+     {
+      "text": "رِضَا الْوَالِدَيْنِ",
+      "tr": "the parents' approval, their blessing"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَبَوَانِ",
+      "register": "neutral",
+      "nuance": "the dual of أَب, also “parents” (father and mother)"
+     },
+     {
+      "word": "الْأَهْل",
+      "register": "colloquial",
+      "nuance": "family, folks — in many dialects “my parents” is أَهْلِي"
+     }
+    ],
+    "etymology": {
+     "text": "The dual of وَالِد (father; parent), which Wiktionary derives from the active participle of وَلَدَ (to give birth) — root و ل د.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish ebeveyn (parents) is the other Arabic word, أَبَوَيْن; Turkish valide (mother, as in Valide Sultan) is وَالِدَة.",
+     "The masculine dual covers a man and a woman — Arabic lets the masculine stand for both."
+    ],
+    "pitfalls": [
+     "It is a dual: وَالِدَانِ (nom.), وَالِدَيْنِ (acc., gen.). With a possessive the -ni drops: وَالِدَايَ (my parents), وَالِدَاكَ (your parents).",
+     "What agrees with it is dual too: وَالِدَايَ مُعَلِّمَانِ (two teachers)."
+    ],
+    "subtleties": [
+     "وَالِد / وَالِدَة alone are the respectful “father / mother”: وَالِدِي، وَالِدَتِي."
+    ]
+   }
+  },
+  {
+   "id": "ar:umm",
+   "lemma": "أُمّ",
+   "pos": "NOUN",
+   "senses": [
+    "family.mother"
+   ],
+   "features": {
+    "root": "ء م م",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أُمَّهَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "أُمَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ʾumm",
+   "forms": {
+    "N;NOM;SG;INDF": "أُمٌّ",
+    "N;NOM;PL;INDF": "أُمَّهَاتٌ",
+    "N;NOM;DU;INDF": "أُمَّانِ",
+    "N;NOM;SG;DEF": "الْأُمُّ",
+    "N;NOM;PL;DEF": "الْأُمَّهَاتُ",
+    "N;NOM;DU;DEF": "الْأُمَّانِ",
+    "N;ACC;SG;INDF": "أُمًّا",
+    "N;ACC;PL;INDF": "أُمَّهَاتٍ",
+    "N;ACC;DU;INDF": "أُمَّيْنِ",
+    "N;ACC;SG;DEF": "الْأُمَّ",
+    "N;ACC;PL;DEF": "الْأُمَّهَاتِ",
+    "N;ACC;DU;DEF": "الْأُمَّيْنِ",
+    "N;GEN;SG;INDF": "أُمٍّ",
+    "N;GEN;PL;INDF": "أُمَّهَاتٍ",
+    "N;GEN;DU;INDF": "أُمَّيْنِ",
+    "N;GEN;SG;DEF": "الْأُمِّ",
+    "N;GEN;PL;DEF": "الْأُمَّهَاتِ",
+    "N;GEN;DU;DEF": "الْأُمَّيْنِ",
+    "N;NOM;SG;CONST": "أُمُّ",
+    "N;NOM;SG;POSS;PSS1S": "أُمِّي",
+    "N;NOM;SG;POSS;PSS2SM": "أُمُّكَ",
+    "N;NOM;SG;POSS;PSS2SF": "أُمُّكِ",
+    "N;NOM;SG;POSS;PSS3SM": "أُمُّهُ",
+    "N;NOM;SG;POSS;PSS3SF": "أُمُّهَا",
+    "N;NOM;SG;POSS;PSS1P": "أُمُّنَا",
+    "N;NOM;SG;POSS;PSS2PM": "أُمُّكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "أُمُّهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "أُمِّي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The mother: tenderness, sacrifice — and the origin of things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.mother"
+     },
+     {
+      "id": "s2",
+      "def": "origin, source; the main one (أُمُّ الْقُرَى, “mother of towns” = Mecca)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "mother of (a woman called after her child: أُمُّ أَحْمَدَ)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي مُعَلِّمَةٌ.",
+      "tr": "My mother is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأُمُّ مَدْرَسَةٌ.",
+      "tr": "A mother is a school.",
+      "register": "literary",
+      "context": "literature",
+      "sense": "s1"
+     },
+     {
+      "text": "أُمُّ كُلْثُومٍ مُطْرِبَةٌ مَشْهُورَةٌ.",
+      "tr": "Umm Kulthum is a famous singer.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِيدُ الْأُمِّ",
+      "tr": "Mother's Day"
+     },
+     {
+      "text": "اللُّغَةُ الْأُمُّ",
+      "tr": "mother tongue"
+     },
+     {
+      "text": "الْأُمُّ وَالطِّفْلُ",
+      "tr": "mother and child"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْأُمُّ مَدْرَسَةٌ إِذَا أَعْدَدْتَهَا أَعْدَدْتَ شَعْبًا طَيِّبَ الْأَعْرَاقِ",
+      "tr": "A mother is a school: if you prepare her, you prepare a people of good stock.",
+      "kind": "quote",
+      "meaning": "educating mothers educates a nation",
+      "register": "literary",
+      "source": "Ḥāfiẓ Ibrāhīm (1872–1932)"
+     },
+     {
+      "text": "الْجَنَّةُ تَحْتَ أَقْدَامِ الْأُمَّهَاتِ",
+      "tr": "Paradise lies under the feet of mothers.",
+      "kind": "saying",
+      "meaning": "honour your mother above all (a popular saying attributed to the Prophet)",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "وَالِدَة",
+      "register": "formal",
+      "nuance": "mother — respectful: وَالِدَتِي"
+     },
+     {
+      "word": "مَامَا",
+      "register": "colloquial",
+      "nuance": "mum — children's and family speech"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔimm-, from Proto-Afroasiatic *ʔim-; cognate with Hebrew אֵם (em) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أُمَّة (nation, community — Turkish ümmet) is from the same root ء م م.",
+     "Hebrew אֵם (em) is the same word."
+    ],
+    "pitfalls": [
+     "The šadda matters: أُمّ (umm, mother) — أَمْ (am) is “or” in questions.",
+     "Plural أُمَّهَات, with an extra -h-."
+    ],
+    "subtleties": [
+     "A woman is often called after her eldest son, أُمُّ أَحْمَدَ — a warm, respectful way to address her."
+    ]
+   }
+  },
+  {
+   "id": "ar:ab",
+   "lemma": "أَب",
+   "pos": "NOUN",
+   "senses": [
+    "family.father",
+    "family.ancestor"
+   ],
+   "features": {
+    "root": "ء ب و",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "آبَاء",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "أَبَوَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.ancestor",
+     "axis": "how the ancestors are named",
+     "value": "“the fathers” (آبَاؤُنَا): the generations before us"
+    }
+   ],
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "ʾab",
+   "forms": {
+    "N;NOM;SG;INDF": "أَبٌ",
+    "N;NOM;PL;INDF": "آبَاءٌ",
+    "N;NOM;DU;INDF": "أَبَوَانِ",
+    "N;NOM;SG;DEF": "الْأَبُ",
+    "N;NOM;PL;DEF": "الْآبَاءُ",
+    "N;NOM;DU;DEF": "الْأَبَوَانِ",
+    "N;ACC;SG;INDF": "أَبًا",
+    "N;ACC;PL;INDF": "آبَاءً",
+    "N;ACC;DU;INDF": "أَبَوَيْنِ",
+    "N;ACC;SG;DEF": "الْأَبَ",
+    "N;ACC;PL;DEF": "الْآبَاءَ",
+    "N;ACC;DU;DEF": "الْأَبَوَيْنِ",
+    "N;GEN;SG;INDF": "أَبٍ",
+    "N;GEN;PL;INDF": "آبَاءٍ",
+    "N;GEN;DU;INDF": "أَبَوَيْنِ",
+    "N;GEN;SG;DEF": "الْأَبِ",
+    "N;GEN;PL;DEF": "الْآبَاءِ",
+    "N;GEN;DU;DEF": "الْأَبَوَيْنِ",
+    "N;NOM;SG;CONST": "أَبُو",
+    "N;NOM;SG;POSS;PSS1S": "أَبِي",
+    "N;NOM;SG;POSS;PSS2SM": "أَبُوكَ",
+    "N;NOM;SG;POSS;PSS2SF": "أَبُوكِ",
+    "N;NOM;SG;POSS;PSS3SM": "أَبُوهُ",
+    "N;NOM;SG;POSS;PSS3SF": "أَبُوهَا",
+    "N;NOM;SG;POSS;PSS1P": "أَبُونَا",
+    "N;NOM;SG;POSS;PSS2PM": "أَبُوكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "أَبُوهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "أَبِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The father — protection, authority; and “father of” in names.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "father",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.father"
+     },
+     {
+      "id": "s2",
+      "def": "ancestor, forefather (plural آبَاء)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.ancestor"
+     },
+     {
+      "id": "s3",
+      "def": "father of (a man called after his child: أَبُو أَحْمَدَ)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَبِي طَبِيبٌ.",
+      "tr": "My father is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا أَبُوكَ؟",
+      "tr": "Is this your father?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَبُو أَحْمَدَ صَدِيقُ أَبِي.",
+      "tr": "Abu Ahmad is my father's friend.",
+      "register": "neutral",
+      "context": "names",
+      "sense": "s3"
+     },
+     {
+      "text": "نَحْتَرِمُ تَقَالِيدَ الْآبَاءِ وَالْأَجْدَادِ.",
+      "tr": "We respect the traditions of our forefathers.",
+      "register": "neutral",
+      "context": "tradition",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْأَبُ وَالْأُمُّ",
+      "tr": "father and mother"
+     },
+     {
+      "text": "عِيدُ الْأَبِ",
+      "tr": "Father's Day"
+     },
+     {
+      "text": "الْآبَاءُ وَالْأَبْنَاءُ",
+      "tr": "fathers and sons, parents and children"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مَنْ شَابَهَ أَبَاهُ فَمَا ظَلَمَ",
+      "tr": "whoever resembles his father has done no wrong",
+      "kind": "proverb",
+      "meaning": "like father, like son",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "وَالِد",
+      "register": "formal",
+      "nuance": "father — respectful: وَالِدِي"
+     },
+     {
+      "word": "بَابَا",
+      "register": "colloquial",
+      "nuance": "dad — children's and family speech"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔabw-; cognate with Hebrew אָב (av) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English abbot comes from Aramaic אַבָּא (abba, father) through Greek and Latin — the same Semitic word.",
+     "Turkish ebeveyn (parents) is Arabic أَبَوَيْن, “the two fathers” = father and mother."
+    ],
+    "pitfalls": [
+     "One of the “five nouns”: with a possessive it lengthens — أَبُوكَ (nom.), أَبَاكَ (acc.), أَبِيكَ (gen.); but “my father” is أَبِي in every case.",
+     "آبَاء means “fathers, forefathers”; “parents” is وَالِدَانِ or أَبَوَانِ."
+    ],
+    "subtleties": [
+     "أَبُو in names and places: أَبُو بَكْرٍ, أَبُو ظَبْيٍ (Abu Dhabi)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ibn",
+   "lemma": "اِبْن",
+   "pos": "NOUN",
+   "senses": [
+    "family.son"
+   ],
+   "features": {
+    "root": "ب ن ي",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَبْنَاء",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     },
+     {
+      "form": "بَنُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "literary; بَنُو in the names of tribes (بَنُو هَاشِمٍ)",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "اِبْنَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.son",
+     "axis": "register and range",
+     "value": "the standard word: son (also “son of” in names)"
+    }
+   ],
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "ibn",
+   "forms": {
+    "N;NOM;SG;INDF": "اِبْنٌ",
+    "N;NOM;PL;INDF": "أَبْنَاءٌ",
+    "N;NOM;DU;INDF": "اِبْنَانِ",
+    "N;NOM;SG;DEF": "الِابْنُ",
+    "N;NOM;PL;DEF": "الْأَبْنَاءُ",
+    "N;NOM;DU;DEF": "الِابْنَانِ",
+    "N;ACC;SG;INDF": "اِبْنًا",
+    "N;ACC;PL;INDF": "أَبْنَاءً",
+    "N;ACC;DU;INDF": "اِبْنَيْنِ",
+    "N;ACC;SG;DEF": "الِابْنَ",
+    "N;ACC;PL;DEF": "الْأَبْنَاءَ",
+    "N;ACC;DU;DEF": "الِابْنَيْنِ",
+    "N;GEN;SG;INDF": "اِبْنٍ",
+    "N;GEN;PL;INDF": "أَبْنَاءٍ",
+    "N;GEN;DU;INDF": "اِبْنَيْنِ",
+    "N;GEN;SG;DEF": "الِابْنِ",
+    "N;GEN;PL;DEF": "الْأَبْنَاءِ",
+    "N;GEN;DU;DEF": "الِابْنَيْنِ",
+    "N;NOM;SG;CONST": "اِبْنُ",
+    "N;NOM;SG;POSS;PSS1S": "اِبْنِي",
+    "N;NOM;SG;POSS;PSS2SM": "اِبْنُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "اِبْنُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "اِبْنُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "اِبْنُهَا",
+    "N;NOM;SG;POSS;PSS1P": "اِبْنُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "اِبْنُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "اِبْنُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "اِبْنِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Son — lineage and pride; in names, “son of”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "son",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.son"
+     },
+     {
+      "id": "s2",
+      "def": "son of (in names: مُحَمَّدُ بْنُ عَبْدِ اللّٰهِ)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "a child of (a place or a group): اِبْنُ الْبَلَدِ, a local",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِبْنِي طَالِبٌ.",
+      "tr": "My son is a student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الِابْنُ الْأَكْبَرُ مُهَنْدِسٌ.",
+      "tr": "The eldest son is an engineer.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "اِبْنُ الْبَلَدِ يَعْرِفُ كُلَّ شَيْءٍ.",
+      "tr": "A local knows everything.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الِابْنُ الْأَكْبَرُ",
+      "tr": "the eldest son"
+     },
+     {
+      "text": "اِبْنُ عَمٍّ",
+      "tr": "a cousin (son of a paternal uncle)"
+     },
+     {
+      "text": "اِبْنُ الْبَلَدِ",
+      "tr": "a local, a son of the country"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "اِبْنُ السَّبِيلِ",
+      "tr": "the son of the road",
+      "kind": "idiom",
+      "meaning": "a traveller, a wayfarer in need",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "وَلَد",
+      "register": "neutral",
+      "nuance": "child; son — the everyday word"
+     },
+     {
+      "word": "نَجْل",
+      "register": "formal",
+      "nuance": "son — in official and news style: نَجْلُ الرَّئِيسِ"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *bin- (Wiktionary); cognate with Hebrew בֵּן (ben).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew בֵּן (ben), as in Benjamin, is the same word.",
+     "Avicenna is Ibn Sīnā (اِبْنُ سِينَا): Latin kept only the name."
+    ],
+    "pitfalls": [
+     "The first alif is a hamzat al-waṣl: after a vowel it is silent (عِنْدَهُمُ ابْنٌ), and between two names the word is written بْن: مُحَمَّدُ بْنُ سَلْمَانَ.",
+     "Plural أَبْنَاء (sons, children)."
+    ],
+    "subtleties": [
+     "Family words joined make new relatives: اِبْنُ عَمٍّ (cousin), اِبْنُ أَخٍ (nephew)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ibna",
+   "lemma": "اِبْنَة",
+   "pos": "NOUN",
+   "senses": [
+    "family.daughter"
+   ],
+   "features": {
+    "root": "ب ن ي",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "بَنَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "اِبْنَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.daughter",
+     "axis": "register",
+     "value": "formal, written"
+    }
+   ],
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ibna",
+   "forms": {
+    "N;NOM;SG;INDF": "اِبْنَةٌ",
+    "N;NOM;PL;INDF": "بَنَاتٌ",
+    "N;NOM;DU;INDF": "اِبْنَتَانِ",
+    "N;NOM;SG;DEF": "الِابْنَةُ",
+    "N;NOM;PL;DEF": "الْبَنَاتُ",
+    "N;NOM;DU;DEF": "الِابْنَتَانِ",
+    "N;ACC;SG;INDF": "اِبْنَةً",
+    "N;ACC;PL;INDF": "بَنَاتٍ",
+    "N;ACC;DU;INDF": "اِبْنَتَيْنِ",
+    "N;ACC;SG;DEF": "الِابْنَةَ",
+    "N;ACC;PL;DEF": "الْبَنَاتِ",
+    "N;ACC;DU;DEF": "الِابْنَتَيْنِ",
+    "N;GEN;SG;INDF": "اِبْنَةٍ",
+    "N;GEN;PL;INDF": "بَنَاتٍ",
+    "N;GEN;DU;INDF": "اِبْنَتَيْنِ",
+    "N;GEN;SG;DEF": "الِابْنَةِ",
+    "N;GEN;PL;DEF": "الْبَنَاتِ",
+    "N;GEN;DU;DEF": "الِابْنَتَيْنِ",
+    "N;NOM;SG;CONST": "اِبْنَةُ",
+    "N;NOM;SG;POSS;PSS1S": "اِبْنَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "اِبْنَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "اِبْنَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "اِبْنَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "اِبْنَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "اِبْنَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "اِبْنَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "اِبْنَتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "اِبْنَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Daughter — the formal word; in speech you hear بِنْت.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "daughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.daughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِبْنَتِي طَبِيبَةٌ.",
+      "tr": "My daughter is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الِابْنَةُ الصُّغْرَى فِي الْمَدْرَسَةِ.",
+      "tr": "The youngest daughter is at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "اِبْنَةُ عَمِّي مُعَلِّمَةٌ.",
+      "tr": "My cousin (my uncle's daughter) is a teacher.",
+      "register": "neutral",
+      "context": "cousins",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِبْنَةُ الْعَمِّ",
+      "tr": "a cousin (paternal uncle's daughter)"
+     },
+     {
+      "text": "الِابْنَةُ الْكُبْرَى",
+      "tr": "the eldest daughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِنْت",
+      "register": "neutral",
+      "nuance": "girl; daughter — the everyday word"
+     },
+     {
+      "word": "كَرِيمَة",
+      "register": "honorific",
+      "nuance": "daughter — very polite (invitations, formal speech): كَرِيمَتُهُ"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of اِبْن (son), with the ending -a (ة); Wiktionary gives بَنَات as its plural and بِنْت as the other feminine.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic has two words for “daughter”, اِبْنَة and بِنْت; Hebrew has only בַּת (bat), the cognate of بِنْت."
+    ],
+    "pitfalls": [
+     "Plural بَنَات, the plural of بِنْت too — there is no *اِبْنَات.",
+     "Hamzat al-waṣl, as in اِبْن: الِابْنَةُ, and the i- is silent after a vowel."
+    ],
+    "subtleties": [
+     "اِبْنَة sounds formal and written; بِنْتِي is what parents say."
+    ]
+   }
+  },
+  {
+   "id": "ar:akh",
+   "lemma": "أَخ",
+   "pos": "NOUN",
+   "senses": [
+    "family.brother"
+   ],
+   "features": {
+    "root": "ء خ و",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "إِخْوَة",
+      "kind": "broken",
+      "pattern": "فِعْلَة",
+      "declension": "triptote",
+      "note": "brothers by blood",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "إِخْوَان",
+      "kind": "broken",
+      "pattern": "فِعْلَان",
+      "declension": "triptote",
+      "note": "brethren, fellows",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أَخَوَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "ʾaḫ",
+   "forms": {
+    "N;NOM;SG;INDF": "أَخٌ",
+    "N;NOM;PL;INDF": "إِخْوَةٌ",
+    "N;NOM;DU;INDF": "أَخَوَانِ",
+    "N;NOM;SG;DEF": "الْأَخُ",
+    "N;NOM;PL;DEF": "الْإِخْوَةُ",
+    "N;NOM;DU;DEF": "الْأَخَوَانِ",
+    "N;ACC;SG;INDF": "أَخًا",
+    "N;ACC;PL;INDF": "إِخْوَةً",
+    "N;ACC;DU;INDF": "أَخَوَيْنِ",
+    "N;ACC;SG;DEF": "الْأَخَ",
+    "N;ACC;PL;DEF": "الْإِخْوَةَ",
+    "N;ACC;DU;DEF": "الْأَخَوَيْنِ",
+    "N;GEN;SG;INDF": "أَخٍ",
+    "N;GEN;PL;INDF": "إِخْوَةٍ",
+    "N;GEN;DU;INDF": "أَخَوَيْنِ",
+    "N;GEN;SG;DEF": "الْأَخِ",
+    "N;GEN;PL;DEF": "الْإِخْوَةِ",
+    "N;GEN;DU;DEF": "الْأَخَوَيْنِ",
+    "N;NOM;SG;CONST": "أَخُو",
+    "N;NOM;SG;POSS;PSS1S": "أَخِي",
+    "N;NOM;SG;POSS;PSS2SM": "أَخُوكَ",
+    "N;NOM;SG;POSS;PSS2SF": "أَخُوكِ",
+    "N;NOM;SG;POSS;PSS3SM": "أَخُوهُ",
+    "N;NOM;SG;POSS;PSS3SF": "أَخُوهَا",
+    "N;NOM;SG;POSS;PSS1P": "أَخُونَا",
+    "N;NOM;SG;POSS;PSS2PM": "أَخُوكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "أَخُوهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "أَخِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Brother — blood, solidarity, and the friendly “brother!”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "brother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.brother"
+     },
+     {
+      "id": "s2",
+      "def": "brother, fellow (friendly address: يَا أَخِي)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَخِي طَالِبٌ.",
+      "tr": "My brother is a student.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَكَ إِخْوَةٌ؟",
+      "tr": "Do you have brothers and sisters?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "يَا أَخِي، اسْمَعْنِي!",
+      "tr": "Listen to me, brother!",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْأَخُ الْأَكْبَرُ",
+      "tr": "the elder brother"
+     },
+     {
+      "text": "أَخٌ شَقِيقٌ",
+      "tr": "a full brother"
+     },
+     {
+      "text": "الْإِخْوَةُ وَالْأَخَوَاتُ",
+      "tr": "brothers and sisters"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "رُبَّ أَخٍ لَكَ لَمْ تَلِدْهُ أُمُّكَ",
+      "tr": "many a brother of yours was not born of your mother",
+      "kind": "proverb",
+      "meaning": "a true friend can be a brother",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "شَقِيق",
+      "register": "formal",
+      "nuance": "full brother (same father and mother); also “brotherly” for countries"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔaḫw- (Wiktionary); cognate with Hebrew אָח (akh).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אָח (akh) is the same word.",
+     "The plural إِخْوَان (brethren) is the “Brotherhood” in الْإِخْوَانُ الْمُسْلِمُونَ."
+    ],
+    "pitfalls": [
+     "One of the five nouns: أَخُوكَ (nom.), أَخَاكَ (acc.), أَخِيكَ (gen.) — but “my brother” is always أَخِي.",
+     "Plural إِخْوَة (brothers; siblings); إِخْوَان is “brethren, brothers in faith”."
+    ],
+    "subtleties": [
+     "إِخْوَة for a mixed group means brothers and sisters: عِنْدِي ثَلَاثَةُ إِخْوَةٍ can include a sister."
+    ]
+   }
+  },
+  {
+   "id": "ar:ukht",
+   "lemma": "أُخْت",
+   "pos": "NOUN",
+   "senses": [
+    "family.sister"
+   ],
+   "features": {
+    "root": "ء خ و",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَخَوَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أُخْتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ʾuḫt",
+   "forms": {
+    "N;NOM;SG;INDF": "أُخْتٌ",
+    "N;NOM;PL;INDF": "أَخَوَاتٌ",
+    "N;NOM;DU;INDF": "أُخْتَانِ",
+    "N;NOM;SG;DEF": "الْأُخْتُ",
+    "N;NOM;PL;DEF": "الْأَخَوَاتُ",
+    "N;NOM;DU;DEF": "الْأُخْتَانِ",
+    "N;ACC;SG;INDF": "أُخْتًا",
+    "N;ACC;PL;INDF": "أَخَوَاتٍ",
+    "N;ACC;DU;INDF": "أُخْتَيْنِ",
+    "N;ACC;SG;DEF": "الْأُخْتَ",
+    "N;ACC;PL;DEF": "الْأَخَوَاتِ",
+    "N;ACC;DU;DEF": "الْأُخْتَيْنِ",
+    "N;GEN;SG;INDF": "أُخْتٍ",
+    "N;GEN;PL;INDF": "أَخَوَاتٍ",
+    "N;GEN;DU;INDF": "أُخْتَيْنِ",
+    "N;GEN;SG;DEF": "الْأُخْتِ",
+    "N;GEN;PL;DEF": "الْأَخَوَاتِ",
+    "N;GEN;DU;DEF": "الْأُخْتَيْنِ",
+    "N;NOM;SG;CONST": "أُخْتُ",
+    "N;NOM;SG;POSS;PSS1S": "أُخْتِي",
+    "N;NOM;SG;POSS;PSS2SM": "أُخْتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "أُخْتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "أُخْتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "أُخْتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "أُخْتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "أُخْتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "أُخْتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "أُخْتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sister — and the polite “sister” for a woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sister",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.sister"
+     },
+     {
+      "id": "s2",
+      "def": "sister (polite address to a woman: يَا أُخْتِي)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُخْتِي مُعَلِّمَةٌ.",
+      "tr": "My sister is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي أُخْتَانِ.",
+      "tr": "I have two sisters.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "يَا أُخْتِي، مِنْ فَضْلِكِ!",
+      "tr": "Excuse me, sister, please!",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْأُخْتُ الْكُبْرَى",
+      "tr": "the elder sister"
+     },
+     {
+      "text": "أُخْتٌ شَقِيقَةٌ",
+      "tr": "a full sister"
+     },
+     {
+      "text": "أَخٌ وَأُخْتٌ",
+      "tr": "a brother and a sister"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "كَانَ وَأَخَوَاتُهَا",
+      "tr": "kāna and her sisters",
+      "kind": "fixed expression",
+      "meaning": "the grammarians' name for the verbs that work like كَانَ",
+      "register": "technical"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "شَقِيقَة",
+      "register": "formal",
+      "nuance": "full sister; also “sister” for countries and cities"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔaḫwat- (Wiktionary); cognate with Hebrew אָחוֹת (akhót).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The -t is the old feminine ending, as in بِنْت; Hebrew אָחוֹת (akhót) keeps it too."
+    ],
+    "pitfalls": [
+     "Plural أَخَوَات (with a w that the singular hides).",
+     "Unlike أَخ it is regular: أُخْتُكَ, أُخْتَكَ, أُخْتِكَ."
+    ],
+    "subtleties": [
+     "أُخْت ends in ت, not ة, but it is feminine — like بِنْت."
+    ]
+   }
+  },
+  {
+   "id": "ar:zawj",
+   "lemma": "زَوْج",
+   "pos": "NOUN",
+   "senses": [
+    "family.husband",
+    "measure.pair"
+   ],
+   "features": {
+    "root": "ز و ج",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَزْوَاج",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "زَوْجَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "zawj",
+   "forms": {
+    "N;NOM;SG;INDF": "زَوْجٌ",
+    "N;NOM;PL;INDF": "أَزْوَاجٌ",
+    "N;NOM;DU;INDF": "زَوْجَانِ",
+    "N;NOM;SG;DEF": "الزَّوْجُ",
+    "N;NOM;PL;DEF": "الْأَزْوَاجُ",
+    "N;NOM;DU;DEF": "الزَّوْجَانِ",
+    "N;ACC;SG;INDF": "زَوْجًا",
+    "N;ACC;PL;INDF": "أَزْوَاجًا",
+    "N;ACC;DU;INDF": "زَوْجَيْنِ",
+    "N;ACC;SG;DEF": "الزَّوْجَ",
+    "N;ACC;PL;DEF": "الْأَزْوَاجَ",
+    "N;ACC;DU;DEF": "الزَّوْجَيْنِ",
+    "N;GEN;SG;INDF": "زَوْجٍ",
+    "N;GEN;PL;INDF": "أَزْوَاجٍ",
+    "N;GEN;DU;INDF": "زَوْجَيْنِ",
+    "N;GEN;SG;DEF": "الزَّوْجِ",
+    "N;GEN;PL;DEF": "الْأَزْوَاجِ",
+    "N;GEN;DU;DEF": "الزَّوْجَيْنِ",
+    "N;NOM;SG;CONST": "زَوْجُ",
+    "N;NOM;SG;POSS;PSS1S": "زَوْجِي",
+    "N;NOM;SG;POSS;PSS2SM": "زَوْجُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "زَوْجُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "زَوْجُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "زَوْجُهَا",
+    "N;NOM;SG;POSS;PSS1P": "زَوْجُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "زَوْجُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "زَوْجُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "زَوْجِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Husband — and, at root, one of a pair.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "husband; spouse",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.husband"
+     },
+     {
+      "id": "s2",
+      "def": "a pair, a couple; one of a pair (زَوْجَانِ, a married couple)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "measure.pair"
+     }
+    ],
+    "examples": [
+     {
+      "text": "زَوْجِي مُهَنْدِسٌ.",
+      "tr": "My husband is an engineer.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "زَوْجُهَا مِنْ مِصْرَ.",
+      "tr": "Her husband is from Egypt.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "هُمَا زَوْجَانِ سَعِيدَانِ.",
+      "tr": "They are a happy couple.",
+      "register": "neutral",
+      "context": "weddings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الزَّوْجُ وَالزَّوْجَةُ",
+      "tr": "husband and wife"
+     },
+     {
+      "text": "الزَّوْجَانِ",
+      "tr": "the (married) couple"
+     },
+     {
+      "text": "زَوْجُ الْأُمِّ",
+      "tr": "stepfather"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَعْل",
+      "register": "literary",
+      "nuance": "husband — old and literary"
+     },
+     {
+      "word": "جُوز",
+      "register": "colloquial",
+      "nuance": "husband — Egyptian: جُوزِي, my husband"
+     }
+    ],
+    "etymology": {
+     "text": "From Aramaic זוגא (zawgā, “yoke, pair”), from Ancient Greek ζεῦγος (zeûgos, “yoke”), used in Greek for the yoke of marriage; in Arabic it became the root ز و ج (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A word with a Greek past: ζεῦγος → Aramaic → Arabic زَوْج; Modern Greek ζευγάρι (pair, couple) comes from the same Greek word.",
+     "Turkish zevç / zevce (husband / wife, dated) are زَوْج / زَوْجَة."
+    ],
+    "pitfalls": [
+     "In Classical Arabic زَوْج means “spouse” of either sex (Wiktionary also gives “wife”); in modern use “wife” is زَوْجَة."
+    ],
+    "subtleties": [
+     "The dual زَوْجَانِ is “a (married) couple”."
+    ]
+   }
+  },
+  {
+   "id": "ar:zawja",
+   "lemma": "زَوْجَة",
+   "pos": "NOUN",
+   "senses": [
+    "family.wife"
+   ],
+   "features": {
+    "root": "ز و ج",
+    "pattern": "فَعْلَة",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "زَوْجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "زَوْجَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "the standard word: wife"
+    }
+   ],
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "zawja",
+   "forms": {
+    "N;NOM;SG;INDF": "زَوْجَةٌ",
+    "N;NOM;PL;INDF": "زَوْجَاتٌ",
+    "N;NOM;DU;INDF": "زَوْجَتَانِ",
+    "N;NOM;SG;DEF": "الزَّوْجَةُ",
+    "N;NOM;PL;DEF": "الزَّوْجَاتُ",
+    "N;NOM;DU;DEF": "الزَّوْجَتَانِ",
+    "N;ACC;SG;INDF": "زَوْجَةً",
+    "N;ACC;PL;INDF": "زَوْجَاتٍ",
+    "N;ACC;DU;INDF": "زَوْجَتَيْنِ",
+    "N;ACC;SG;DEF": "الزَّوْجَةَ",
+    "N;ACC;PL;DEF": "الزَّوْجَاتِ",
+    "N;ACC;DU;DEF": "الزَّوْجَتَيْنِ",
+    "N;GEN;SG;INDF": "زَوْجَةٍ",
+    "N;GEN;PL;INDF": "زَوْجَاتٍ",
+    "N;GEN;DU;INDF": "زَوْجَتَيْنِ",
+    "N;GEN;SG;DEF": "الزَّوْجَةِ",
+    "N;GEN;PL;DEF": "الزَّوْجَاتِ",
+    "N;GEN;DU;DEF": "الزَّوْجَتَيْنِ",
+    "N;NOM;SG;CONST": "زَوْجَةُ",
+    "N;NOM;SG;POSS;PSS1S": "زَوْجَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "زَوْجَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "زَوْجَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "زَوْجَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "زَوْجَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "زَوْجَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "زَوْجَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "زَوْجَتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "زَوْجَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wife.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wife",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.wife"
+     }
+    ],
+    "examples": [
+     {
+      "text": "زَوْجَتِي طَبِيبَةٌ.",
+      "tr": "My wife is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ زَوْجَتُهُ.",
+      "tr": "This is his wife.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "الزَّوْجُ وَالزَّوْجَةُ فِي الْمَطْبَخِ.",
+      "tr": "Husband and wife are in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "زَوْجَةُ الْأَبِ",
+      "tr": "stepmother"
+     },
+     {
+      "text": "الزَّوْجُ وَالزَّوْجَةُ",
+      "tr": "husband and wife"
+     },
+     {
+      "text": "زَوْجَتُهُ الْأُولَى",
+      "tr": "his first wife"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَرَم",
+      "register": "honorific",
+      "nuance": "wife (of a dignitary): حَرَمُ الرَّئِيسِ, the president's wife"
+     },
+     {
+      "word": "عَقِيلَة",
+      "register": "formal",
+      "nuance": "wife — very polite: عَقِيلَتُهُ"
+     },
+     {
+      "word": "مَرَة",
+      "register": "colloquial",
+      "nuance": "wife — literally “woman”, in many dialects: مَرَتِي"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ز و ج (Wiktionary): the feminine of زَوْج.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish zevce (wife, dated) is this word."
+    ],
+    "pitfalls": [
+     "Possessive: زَوْجَتِي, زَوْجَتُكَ — the ة becomes ت before every ending."
+    ],
+    "subtleties": [
+     "Speaking politely about someone's wife, people say حَرَمُهُ or عَقِيلَتُهُ rather than زَوْجَتُهُ."
+    ]
+   }
+  },
+  {
+   "id": "ar:radi",
+   "lemma": "رَضِيع",
+   "pos": "NOUN",
+   "senses": [
+    "family.baby"
+   ],
+   "features": {
+    "root": "ر ض ع",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "رُضَّع",
+      "kind": "broken",
+      "pattern": "فُعَّل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "رَضِيعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "raḍīʿ",
+   "forms": {
+    "N;NOM;SG;INDF": "رَضِيعٌ",
+    "N;NOM;PL;INDF": "رُضَّعٌ",
+    "N;NOM;DU;INDF": "رَضِيعَانِ",
+    "N;NOM;SG;DEF": "الرَّضِيعُ",
+    "N;NOM;PL;DEF": "الرُّضَّعُ",
+    "N;NOM;DU;DEF": "الرَّضِيعَانِ",
+    "N;ACC;SG;INDF": "رَضِيعًا",
+    "N;ACC;PL;INDF": "رُضَّعًا",
+    "N;ACC;DU;INDF": "رَضِيعَيْنِ",
+    "N;ACC;SG;DEF": "الرَّضِيعَ",
+    "N;ACC;PL;DEF": "الرُّضَّعَ",
+    "N;ACC;DU;DEF": "الرَّضِيعَيْنِ",
+    "N;GEN;SG;INDF": "رَضِيعٍ",
+    "N;GEN;PL;INDF": "رُضَّعٍ",
+    "N;GEN;DU;INDF": "رَضِيعَيْنِ",
+    "N;GEN;SG;DEF": "الرَّضِيعِ",
+    "N;GEN;PL;DEF": "الرُّضَّعِ",
+    "N;GEN;DU;DEF": "الرَّضِيعَيْنِ",
+    "N;NOM;SG;CONST": "رَضِيعُ",
+    "N;NOM;SG;POSS;PSS1S": "رَضِيعِي",
+    "N;NOM;SG;POSS;PSS2SM": "رَضِيعُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "رَضِيعُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "رَضِيعُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "رَضِيعُهَا",
+    "N;NOM;SG;POSS;PSS1P": "رَضِيعُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "رَضِيعُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "رَضِيعُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "رَضِيعِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A baby at the breast — tiny, fragile, cared for.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "baby, infant (still nursing)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.baby"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الرَّضِيعُ نَائِمٌ.",
+      "tr": "The baby is asleep.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهَا طِفْلٌ رَضِيعٌ.",
+      "tr": "She has a baby.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَطْفَالُ الرُّضَّعُ فِي الْغُرْفَةِ.",
+      "tr": "The babies are in the room.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طِفْلٌ رَضِيعٌ",
+      "tr": "a baby (a nursing child)"
+     },
+     {
+      "text": "الْأَطْفَالُ الرُّضَّعُ",
+      "tr": "infants"
+     },
+     {
+      "text": "حَلِيبُ الرُّضَّعِ",
+      "tr": "infant formula"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "طِفْل",
+      "register": "neutral",
+      "nuance": "child — also a baby: طِفْلٌ صَغِيرٌ"
+     },
+     {
+      "word": "بَيْبِي",
+      "register": "colloquial",
+      "nuance": "baby — from English, common in the Levant and Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ر ض ع (Wiktionary), the root of رَضَعَ (to suckle) and رَضَاعَة (breastfeeding); the pattern فَعِيل.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Milk kinship” (الرَّضَاعَة, same root): in Islamic law children nursed by the same woman count as brother and sister."
+    ],
+    "pitfalls": [
+     "رَضِيع is a baby still fed on milk; an older small child is طِفْل.",
+     "Plural رُضَّع (Wiktionary also gives رَضَائِع)."
+    ],
+    "subtleties": [
+     "It often follows طِفْل as an adjective: طِفْلٌ رَضِيعٌ, طِفْلَةٌ رَضِيعَةٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:ajdad",
+   "lemma": "أَجْدَاد",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandparents",
+    "family.ancestor"
+   ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "أَفْعَال",
+    "sunLetter": false,
+    "human": true,
+    "plurals": {
+     "none": "itself a plural (of جَدّ)"
+    },
+    "dual": {
+     "none": "a plural noun"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.ancestor",
+     "axis": "how the ancestors are named",
+     "value": "the forefathers as a group (a plural word)"
+    }
+   ],
+   "class": "plt",
+   "translit": "ʾajdād",
+   "forms": {
+    "N;NOM;PL;INDF": "أَجْدَادٌ",
+    "N;NOM;PL;DEF": "الْأَجْدَادُ",
+    "N;ACC;PL;INDF": "أَجْدَادًا",
+    "N;ACC;PL;DEF": "الْأَجْدَادَ",
+    "N;GEN;PL;INDF": "أَجْدَادٍ",
+    "N;GEN;PL;DEF": "الْأَجْدَادِ",
+    "N;NOM;PL;POSS;PSS2SM": "أَجْدَادُكَ",
+    "N;NOM;PL;POSS;PSS2SF": "أَجْدَادُكِ",
+    "N;NOM;PL;POSS;PSS3SM": "أَجْدَادُهُ",
+    "N;NOM;PL;POSS;PSS3SF": "أَجْدَادُهَا",
+    "N;NOM;PL;POSS;PSS1P": "أَجْدَادُنَا",
+    "N;NOM;PL;POSS;PSS2PM": "أَجْدَادُكُمْ",
+    "N;NOM;PL;POSS;PSS3PM": "أَجْدَادُهُمْ",
+    "N;NOM;PL;POSS;PSS1S": "أَجْدَادِي",
+    "N;GEN;PL;POSS;PSS1S": "أَجْدَادِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary's entry only says “plural of جَدّ (grandfather, ancestor)”; in use أَجْدَاد is “grandparents” (and “ancestors”)"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The grandparents, and behind them the ancestors.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandparents; grandfathers (a plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandparents"
+     },
+     {
+      "id": "s2",
+      "def": "ancestors, forefathers",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.ancestor"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَجْدَادِي فِي الْقَرْيَةِ.",
+      "tr": "My grandparents are in the village.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَزُورُ الْأَجْدَادَ كُلَّ جُمُعَةٍ.",
+      "tr": "We visit the grandparents every Friday.",
+      "register": "neutral",
+      "context": "weekend",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ أَرْضُ الْأَجْدَادِ.",
+      "tr": "This is the land of our ancestors.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْآبَاءُ وَالْأَجْدَادُ",
+      "tr": "the forefathers"
+     },
+     {
+      "text": "بَيْتُ الْأَجْدَادِ",
+      "tr": "the grandparents' house"
+     },
+     {
+      "text": "الْأَجْدَادُ وَالْأَحْفَادُ",
+      "tr": "grandparents and grandchildren"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جَدِّي وَجَدَّتِي",
+      "register": "neutral",
+      "nuance": "my grandfather and my grandmother — the usual precise way"
+     },
+     {
+      "word": "الْجَدَّانِ",
+      "register": "formal",
+      "nuance": "the two grandparents (the dual of جَدّ)"
+     }
+    ],
+    "etymology": {
+     "text": "The plural of جَدّ (grandfather, ancestor) (Wiktionary); root ج د د.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek οι παππούδες also uses the plural of “grandfather” for both grandparents; German has a word of its own, Großeltern."
+    ],
+    "pitfalls": [
+     "It is the masculine plural of جَدّ: it covers grandmothers only in a mixed group; “grandmothers” is جَدَّات.",
+     "It also means “ancestors” — the context decides."
+    ],
+    "subtleties": [
+     "To be precise, people say جَدِّي وَجَدَّتِي (my grandfather and grandmother)."
+    ]
+   },
+   "gender": "MASC"
+  },
+  {
+   "id": "ar:jadd",
+   "lemma": "جَدّ",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandfather",
+    "family.ancestor",
+    "abstract.luck"
+   ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَجْدَاد",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "جُدُود",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "fortunes (the homonym “luck”)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "dual": "جَدَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.ancestor",
+     "axis": "how the ancestors are named",
+     "value": "one ancestor, a forefather (singular)"
+    }
+   ],
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "jadd",
+   "forms": {
+    "N;NOM;SG;INDF": "جَدٌّ",
+    "N;NOM;PL;INDF": "أَجْدَادٌ",
+    "N;NOM;DU;INDF": "جَدَّانِ",
+    "N;NOM;SG;DEF": "الْجَدُّ",
+    "N;NOM;PL;DEF": "الْأَجْدَادُ",
+    "N;NOM;DU;DEF": "الْجَدَّانِ",
+    "N;ACC;SG;INDF": "جَدًّا",
+    "N;ACC;PL;INDF": "أَجْدَادًا",
+    "N;ACC;DU;INDF": "جَدَّيْنِ",
+    "N;ACC;SG;DEF": "الْجَدَّ",
+    "N;ACC;PL;DEF": "الْأَجْدَادَ",
+    "N;ACC;DU;DEF": "الْجَدَّيْنِ",
+    "N;GEN;SG;INDF": "جَدٍّ",
+    "N;GEN;PL;INDF": "أَجْدَادٍ",
+    "N;GEN;DU;INDF": "جَدَّيْنِ",
+    "N;GEN;SG;DEF": "الْجَدِّ",
+    "N;GEN;PL;DEF": "الْأَجْدَادِ",
+    "N;GEN;DU;DEF": "الْجَدَّيْنِ",
+    "N;NOM;SG;CONST": "جَدُّ",
+    "N;NOM;SG;POSS;PSS1S": "جَدِّي",
+    "N;NOM;SG;POSS;PSS2SM": "جَدُّكَ",
+    "N;NOM;SG;POSS;PSS2SF": "جَدُّكِ",
+    "N;NOM;SG;POSS;PSS3SM": "جَدُّهُ",
+    "N;NOM;SG;POSS;PSS3SF": "جَدُّهَا",
+    "N;NOM;SG;POSS;PSS1P": "جَدُّنَا",
+    "N;NOM;SG;POSS;PSS2PM": "جَدُّكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "جَدُّهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "جَدِّي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandfather — age, stories, respect.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandfather",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandfather"
+     },
+     {
+      "id": "s2",
+      "def": "ancestor, forefather",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.ancestor"
+     },
+     {
+      "id": "s3",
+      "def": "good fortune, luck (a homonym)",
+      "register": [
+       "literary"
+      ],
+      "concept": "abstract.luck"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَدِّي فِي الثَّمَانِينَ.",
+      "tr": "My grandfather is in his eighties.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَ جَدِّي بَيْتٌ فِي الْقَرْيَةِ.",
+      "tr": "My grandfather has a house in the village.",
+      "register": "neutral",
+      "context": "village",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَدُّ يُحِبُّ الْأَحْفَادَ.",
+      "tr": "The grandfather loves the grandchildren.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عَاشَ الْأَجْدَادُ فِي هٰذِهِ الْأَرْضِ قَبْلَنَا.",
+      "tr": "Our forefathers lived in this land before us.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     },
+     {
+      "text": "وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ.",
+      "tr": "And the good fortune of the fortunate is of no avail against You (a well-known prayer).",
+      "register": "literary",
+      "context": "prayer",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جَدِّي لِأَبِي",
+      "tr": "my paternal grandfather"
+     },
+     {
+      "text": "جَدِّي لِأُمِّي",
+      "tr": "my maternal grandfather"
+     },
+     {
+      "text": "الْجَدُّ الْأَكْبَرُ",
+      "tr": "the great-grandfather, the forefather"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "جِدُّو",
+      "register": "colloquial",
+      "nuance": "grandpa — Egyptian and Levantine family speech"
+     }
+    ],
+    "etymology": {
+     "text": "Root ج د د (Wiktionary); Wiktionary gives no older origin for “grandfather”. The homonym جَدّ “luck” is compared with Hebrew גַּד (gad).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The homonym جَدّ (luck) has a Hebrew twin, גַּד (gad, fortune) — Wiktionary compares them."
+    ],
+    "pitfalls": [
+     "Do not confuse جَدّ (jadd, grandfather), جِدّ (jidd, seriousness) and جِدًّا (jiddan, very).",
+     "One word for both grandfathers; to be precise: جَدِّي لِأَبِي / جَدِّي لِأُمِّي."
+    ],
+    "subtleties": [
+     "Plurals: أَجْدَاد (grandparents, ancestors) and the literary جُدُود."
+    ]
+   }
+  },
+  {
+   "id": "ar:jadda",
+   "lemma": "جَدَّة",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandmother"
+   ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "جَدَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَدَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "jadda",
+   "forms": {
+    "N;NOM;SG;INDF": "جَدَّةٌ",
+    "N;NOM;PL;INDF": "جَدَّاتٌ",
+    "N;NOM;DU;INDF": "جَدَّتَانِ",
+    "N;NOM;SG;DEF": "الْجَدَّةُ",
+    "N;NOM;PL;DEF": "الْجَدَّاتُ",
+    "N;NOM;DU;DEF": "الْجَدَّتَانِ",
+    "N;ACC;SG;INDF": "جَدَّةً",
+    "N;ACC;PL;INDF": "جَدَّاتٍ",
+    "N;ACC;DU;INDF": "جَدَّتَيْنِ",
+    "N;ACC;SG;DEF": "الْجَدَّةَ",
+    "N;ACC;PL;DEF": "الْجَدَّاتِ",
+    "N;ACC;DU;DEF": "الْجَدَّتَيْنِ",
+    "N;GEN;SG;INDF": "جَدَّةٍ",
+    "N;GEN;PL;INDF": "جَدَّاتٍ",
+    "N;GEN;DU;INDF": "جَدَّتَيْنِ",
+    "N;GEN;SG;DEF": "الْجَدَّةِ",
+    "N;GEN;PL;DEF": "الْجَدَّاتِ",
+    "N;GEN;DU;DEF": "الْجَدَّتَيْنِ",
+    "N;NOM;SG;CONST": "جَدَّةُ",
+    "N;NOM;SG;POSS;PSS1S": "جَدَّتِي",
+    "N;NOM;SG;POSS;PSS2SM": "جَدَّتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "جَدَّتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "جَدَّتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "جَدَّتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "جَدَّتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "جَدَّتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "جَدَّتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "جَدَّتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandmother — tales, food and blessings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandmother",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandmother"
+     }
+    ],
+    "examples": [
+     {
+      "text": "جَدَّتِي تَطْبُخُ أَطْيَبَ طَعَامٍ.",
+      "tr": "My grandmother cooks the best food.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "جَدَّتُهَا فِي الْبَيْتِ.",
+      "tr": "Her grandmother is at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "حِكَايَاتُ الْجَدَّةِ جَمِيلَةٌ.",
+      "tr": "Grandmother's tales are beautiful.",
+      "register": "neutral",
+      "context": "stories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْجَدُّ وَالْجَدَّةُ",
+      "tr": "grandfather and grandmother"
+     },
+     {
+      "text": "حِكَايَاتُ الْجَدَّةِ",
+      "tr": "grandmother's tales"
+     },
+     {
+      "text": "بَيْتُ الْجَدَّةِ",
+      "tr": "grandmother's house"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تِيتَا",
+      "register": "colloquial",
+      "nuance": "granny — Levantine and Egyptian family speech"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of جَدّ (grandfather, ancestor) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The city جِدَّة (Jeddah) is written with the same letters; the popular story of Eve's tomb there is folk etymology — Wiktionary links the name to a word for a strip of shore."
+    ],
+    "pitfalls": [
+     "Unvocalized جدة can be جَدَّة (grandmother), جِدَّة (newness) or the city Jeddah — read the vowels."
+    ],
+    "subtleties": [
+     "Plural جَدَّات; possessive جَدَّتِي (ة → ت)."
+    ]
+   }
+  },
+  {
+   "id": "ar:hafid",
+   "lemma": "حَفِيد",
+   "pos": "NOUN",
+   "senses": [
+    "family.grandson",
+    "family.descendant"
+   ],
+   "features": {
+    "root": "ح ف د",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَحْفَاد",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَفِيدَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "ḥafīd",
+   "forms": {
+    "N;NOM;SG;INDF": "حَفِيدٌ",
+    "N;NOM;PL;INDF": "أَحْفَادٌ",
+    "N;NOM;DU;INDF": "حَفِيدَانِ",
+    "N;NOM;SG;DEF": "الْحَفِيدُ",
+    "N;NOM;PL;DEF": "الْأَحْفَادُ",
+    "N;NOM;DU;DEF": "الْحَفِيدَانِ",
+    "N;ACC;SG;INDF": "حَفِيدًا",
+    "N;ACC;PL;INDF": "أَحْفَادًا",
+    "N;ACC;DU;INDF": "حَفِيدَيْنِ",
+    "N;ACC;SG;DEF": "الْحَفِيدَ",
+    "N;ACC;PL;DEF": "الْأَحْفَادَ",
+    "N;ACC;DU;DEF": "الْحَفِيدَيْنِ",
+    "N;GEN;SG;INDF": "حَفِيدٍ",
+    "N;GEN;PL;INDF": "أَحْفَادٍ",
+    "N;GEN;DU;INDF": "حَفِيدَيْنِ",
+    "N;GEN;SG;DEF": "الْحَفِيدِ",
+    "N;GEN;PL;DEF": "الْأَحْفَادِ",
+    "N;GEN;DU;DEF": "الْحَفِيدَيْنِ",
+    "N;NOM;SG;CONST": "حَفِيدُ",
+    "N;NOM;SG;POSS;PSS1S": "حَفِيدِي",
+    "N;NOM;SG;POSS;PSS2SM": "حَفِيدُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "حَفِيدُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "حَفِيدُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "حَفِيدُهَا",
+    "N;NOM;SG;POSS;PSS1P": "حَفِيدُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "حَفِيدُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "حَفِيدُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "حَفِيدِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grandson — the family going on.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "grandson",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.grandson"
+     },
+     {
+      "id": "s2",
+      "def": "descendant (plural أَحْفَاد)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.descendant"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَفِيدِي طَالِبٌ فِي الْجَامِعَةِ.",
+      "tr": "My grandson is a university student.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهُمْ أَرْبَعَةُ أَحْفَادٍ.",
+      "tr": "They have four grandchildren.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "يُحِبُّ الْجَدُّ الْأَحْفَادَ.",
+      "tr": "The grandfather loves the grandchildren.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "سَيَتَذَكَّرُ الْأَحْفَادُ مَا فَعَلْنَاهُ.",
+      "tr": "Our descendants will remember what we did.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْأَبْنَاءُ وَالْأَحْفَادُ",
+      "tr": "children and grandchildren"
+     },
+     {
+      "text": "حَفِيدُ الْمَلِكِ",
+      "tr": "the king's grandson"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سِبْط",
+      "register": "literary",
+      "nuance": "grandson, especially a daughter's son (al-Ḥasan, the Prophet's grandson)"
+     },
+     {
+      "word": "اِبْنُ الِابْنِ",
+      "register": "neutral",
+      "nuance": "son's son — when you need to be precise"
+     }
+    ],
+    "etymology": {
+     "text": "Root ح ف د (Wiktionary); Wiktionary gives no older origin and notes the older sense “grandson through a son”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Traditionally the eldest son is named after his paternal grandfather: the grandson carries the grandfather's name."
+    ],
+    "pitfalls": [
+     "أَحْفَاد covers grandsons and granddaughters together: “grandchildren”."
+    ],
+    "subtleties": [
+     "The feminine is حَفِيدَة; German Enkel / Enkelin and Greek εγγονός / εγγονή pair the same way."
+    ]
+   }
+  },
+  {
+   "id": "ar:hafida",
+   "lemma": "حَفِيدَة",
+   "pos": "NOUN",
+   "senses": [
+    "family.granddaughter"
+   ],
+   "features": {
+    "root": "ح ف د",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "حَفِيدَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "حَفِيدَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ḥafīda",
+   "forms": {
+    "N;NOM;SG;INDF": "حَفِيدَةٌ",
+    "N;NOM;PL;INDF": "حَفِيدَاتٌ",
+    "N;NOM;DU;INDF": "حَفِيدَتَانِ",
+    "N;NOM;SG;DEF": "الْحَفِيدَةُ",
+    "N;NOM;PL;DEF": "الْحَفِيدَاتُ",
+    "N;NOM;DU;DEF": "الْحَفِيدَتَانِ",
+    "N;ACC;SG;INDF": "حَفِيدَةً",
+    "N;ACC;PL;INDF": "حَفِيدَاتٍ",
+    "N;ACC;DU;INDF": "حَفِيدَتَيْنِ",
+    "N;ACC;SG;DEF": "الْحَفِيدَةَ",
+    "N;ACC;PL;DEF": "الْحَفِيدَاتِ",
+    "N;ACC;DU;DEF": "الْحَفِيدَتَيْنِ",
+    "N;GEN;SG;INDF": "حَفِيدَةٍ",
+    "N;GEN;PL;INDF": "حَفِيدَاتٍ",
+    "N;GEN;DU;INDF": "حَفِيدَتَيْنِ",
+    "N;GEN;SG;DEF": "الْحَفِيدَةِ",
+    "N;GEN;PL;DEF": "الْحَفِيدَاتِ",
+    "N;GEN;DU;DEF": "الْحَفِيدَتَيْنِ",
+    "N;NOM;SG;CONST": "حَفِيدَةُ",
+    "N;NOM;SG;POSS;PSS1S": "حَفِيدَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "حَفِيدَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "حَفِيدَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "حَفِيدَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "حَفِيدَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "حَفِيدَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "حَفِيدَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "حَفِيدَتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "حَفِيدَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Granddaughter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "granddaughter",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.granddaughter"
+     }
+    ],
+    "examples": [
+     {
+      "text": "حَفِيدَتِي فِي الْمَدْرَسَةِ.",
+      "tr": "My granddaughter is at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهَا حَفِيدَةٌ صَغِيرَةٌ.",
+      "tr": "She has a little granddaughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْجَدَّةُ وَالْحَفِيدَاتُ فِي الْمَطْبَخِ.",
+      "tr": "The grandmother and the granddaughters are in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْحَفِيدُ وَالْحَفِيدَةُ",
+      "tr": "the grandson and the granddaughter"
+     },
+     {
+      "text": "حَفِيدَةُ الْمَلِكِ",
+      "tr": "the king's granddaughter"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بِنْتُ الِابْنِ",
+      "register": "neutral",
+      "nuance": "son's daughter — when you need to be precise"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of حَفِيد (grandson) (Wiktionary); root ح ف د.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Enkelin and Greek εγγονή are built from the masculine in the same way: حَفِيد → حَفِيدَة."
+    ],
+    "pitfalls": [
+     "Plural حَفِيدَات (girls only); grandchildren in general = أَحْفَاد."
+    ],
+    "subtleties": [
+     "Possessive: حَفِيدَتِي (ة → ت)."
+    ]
+   }
+  },
+  {
+   "id": "ar:amm",
+   "lemma": "عَمّ",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle"
+   ],
+   "features": {
+    "root": "ع م م",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَعْمَام",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "عَمَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side of the family",
+     "value": "father’s brother"
+    }
+   ],
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "ʿamm",
+   "forms": {
+    "N;NOM;SG;INDF": "عَمٌّ",
+    "N;NOM;DU;INDF": "عَمَّانِ",
+    "N;NOM;SG;DEF": "الْعَمُّ",
+    "N;NOM;DU;DEF": "الْعَمَّانِ",
+    "N;ACC;SG;INDF": "عَمًّا",
+    "N;ACC;DU;INDF": "عَمَّيْنِ",
+    "N;ACC;SG;DEF": "الْعَمَّ",
+    "N;ACC;DU;DEF": "الْعَمَّيْنِ",
+    "N;GEN;SG;INDF": "عَمٍّ",
+    "N;GEN;DU;INDF": "عَمَّيْنِ",
+    "N;GEN;SG;DEF": "الْعَمِّ",
+    "N;GEN;DU;DEF": "الْعَمَّيْنِ",
+    "N;NOM;PL;INDF": "أَعْمَامٌ",
+    "N;NOM;PL;DEF": "الْأَعْمَامُ",
+    "N;ACC;PL;INDF": "أَعْمَامًا",
+    "N;ACC;PL;DEF": "الْأَعْمَامَ",
+    "N;GEN;PL;INDF": "أَعْمَامٍ",
+    "N;GEN;PL;DEF": "الْأَعْمَامِ",
+    "N;NOM;SG;CONST": "عَمُّ",
+    "N;NOM;SG;POSS;PSS1S": "عَمِّي",
+    "N;NOM;SG;POSS;PSS2SM": "عَمُّكَ",
+    "N;NOM;SG;POSS;PSS2SF": "عَمُّكِ",
+    "N;NOM;SG;POSS;PSS3SM": "عَمُّهُ",
+    "N;NOM;SG;POSS;PSS3SF": "عَمُّهَا",
+    "N;NOM;SG;POSS;PSS1P": "عَمُّنَا",
+    "N;NOM;SG;POSS;PSS2PM": "عَمُّكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "عَمُّهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "عَمِّي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;PL;INDF": "the usual plural أَعْمَام (paternal uncles), listed in Wiktionary's headword; its declension table shows only the rarer عُمُوم",
+     "N;NOM;PL;DEF": "the usual plural أَعْمَام (paternal uncles), listed in Wiktionary's headword; its declension table shows only the rarer عُمُوم",
+     "N;ACC;PL;INDF": "the usual plural أَعْمَام (paternal uncles), listed in Wiktionary's headword; its declension table shows only the rarer عُمُوم",
+     "N;ACC;PL;DEF": "the usual plural أَعْمَام (paternal uncles), listed in Wiktionary's headword; its declension table shows only the rarer عُمُوم",
+     "N;GEN;PL;INDF": "the usual plural أَعْمَام (paternal uncles), listed in Wiktionary's headword; its declension table shows only the rarer عُمُوم",
+     "N;GEN;PL;DEF": "the usual plural أَعْمَام (paternal uncles), listed in Wiktionary's headword; its declension table shows only the rarer عُمُوم"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The father's brother — close family, often a second father; also a polite “uncle” for older men.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle (the father's brother)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     },
+     {
+      "id": "s2",
+      "def": "“uncle”: a polite address to an older man (يَا عَمِّي)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عَمِّي مُعَلِّمٌ.",
+      "tr": "My uncle (my father's brother) is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي ثَلَاثَةُ أَعْمَامٍ.",
+      "tr": "I have three uncles on my father's side.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "شُكْرًا يَا عَمِّي!",
+      "tr": "Thank you, uncle! (to an older man)",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِبْنُ الْعَمِّ",
+      "tr": "cousin (son of the father's brother)"
+     },
+     {
+      "text": "عَمِّي وَعَمَّتِي",
+      "tr": "my uncle and my aunt (father's side)"
+     },
+     {
+      "text": "الْعَمُّ وَالْخَالُ",
+      "tr": "the uncles on both sides"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَمُّو",
+      "register": "colloquial",
+      "nuance": "uncle — family speech, also to any older man"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no Arabic root and compares Hebrew עַם (am, “nation, people”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish amca (father's brother) comes from عَمّ.",
+     "Chinese also splits uncles: 叔叔 / 伯伯 are the father's brothers, 舅舅 the mother's — like عَمّ / خَال."
+    ],
+    "pitfalls": [
+     "عَمّ is only the father's brother; the mother's brother is خَال.",
+     "Plural أَعْمَام."
+    ],
+    "subtleties": [
+     "Children call any older man عَمُّو or يَا عَمِّي out of respect."
+    ]
+   }
+  },
+  {
+   "id": "ar:khal",
+   "lemma": "خَال",
+   "pos": "NOUN",
+   "senses": [
+    "family.uncle",
+    "body.mole"
+   ],
+   "features": {
+    "root": "خ و ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَخْوَال",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "maternal uncles",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "خِيلَان",
+      "kind": "broken",
+      "pattern": "فِعْلَان",
+      "declension": "triptote",
+      "note": "moles, beauty spots (the homonym)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "خَالَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side of the family",
+     "value": "mother’s brother"
+    }
+   ],
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "ḫāl",
+   "forms": {
+    "N;NOM;SG;INDF": "خَالٌ",
+    "N;NOM;PL;INDF": "أَخْوَالٌ",
+    "N;NOM;DU;INDF": "خَالَانِ",
+    "N;NOM;SG;DEF": "الْخَالُ",
+    "N;NOM;PL;DEF": "الْأَخْوَالُ",
+    "N;NOM;DU;DEF": "الْخَالَانِ",
+    "N;ACC;SG;INDF": "خَالًا",
+    "N;ACC;PL;INDF": "أَخْوَالًا",
+    "N;ACC;DU;INDF": "خَالَيْنِ",
+    "N;ACC;SG;DEF": "الْخَالَ",
+    "N;ACC;PL;DEF": "الْأَخْوَالَ",
+    "N;ACC;DU;DEF": "الْخَالَيْنِ",
+    "N;GEN;SG;INDF": "خَالٍ",
+    "N;GEN;PL;INDF": "أَخْوَالٍ",
+    "N;GEN;DU;INDF": "خَالَيْنِ",
+    "N;GEN;SG;DEF": "الْخَالِ",
+    "N;GEN;PL;DEF": "الْأَخْوَالِ",
+    "N;GEN;DU;DEF": "الْخَالَيْنِ",
+    "N;NOM;SG;CONST": "خَالُ",
+    "N;NOM;SG;POSS;PSS1S": "خَالِي",
+    "N;NOM;SG;POSS;PSS2SM": "خَالُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "خَالُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "خَالُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "خَالُهَا",
+    "N;NOM;SG;POSS;PSS1P": "خَالُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "خَالُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "خَالُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "خَالِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The mother's brother — traditionally a warm, protective figure.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "uncle (the mother's brother)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.uncle"
+     },
+     {
+      "id": "s2",
+      "def": "a beauty spot, a mole (a homonym)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "body.mole"
+     }
+    ],
+    "examples": [
+     {
+      "text": "خَالِي طَبِيبٌ.",
+      "tr": "My uncle (my mother's brother) is a doctor.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "خَالِي يَسْكُنُ فِي بَيْرُوتَ.",
+      "tr": "My uncle lives in Beirut.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "عَلَى خَدِّهَا خَالٌ.",
+      "tr": "She has a beauty spot on her cheek.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِبْنُ الْخَالِ",
+      "tr": "cousin (son of the mother's brother)"
+     },
+     {
+      "text": "الْخَالُ وَالْخَالَةُ",
+      "tr": "the mother's brother and sister"
+     },
+     {
+      "text": "بَيْتُ خَالِي",
+      "tr": "my uncle's house"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "خَالُو",
+      "register": "colloquial",
+      "nuance": "uncle — family speech"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary lists it under the roots خ و ل and خ ل ل and gives no older origin; plural أَخْوَال.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 舅舅 (jiùjiu) is also only the mother's brother; Turkish uses dayı."
+    ],
+    "pitfalls": [
+     "Three look-alikes: خَال (mother's brother), خَال (mole) and خَالٍ (empty, free: خَالٍ مِنَ السُّكَّرِ, sugar-free).",
+     "Not the father's brother — that is عَمّ."
+    ],
+    "subtleties": [
+     "Arabic always says which side: عَمّ / عَمَّة on the father's side, خَال / خَالَة on the mother's."
+    ]
+   }
+  },
+  {
+   "id": "ar:amma",
+   "lemma": "عَمَّة",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "features": {
+    "root": "ع م م",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "عَمَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عَمَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side of the family",
+     "value": "father’s sister"
+    }
+   ],
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ʿamma",
+   "forms": {
+    "N;NOM;SG;INDF": "عَمَّةٌ",
+    "N;NOM;PL;INDF": "عَمَّاتٌ",
+    "N;NOM;DU;INDF": "عَمَّتَانِ",
+    "N;NOM;SG;DEF": "الْعَمَّةُ",
+    "N;NOM;PL;DEF": "الْعَمَّاتُ",
+    "N;NOM;DU;DEF": "الْعَمَّتَانِ",
+    "N;ACC;SG;INDF": "عَمَّةً",
+    "N;ACC;PL;INDF": "عَمَّاتٍ",
+    "N;ACC;DU;INDF": "عَمَّتَيْنِ",
+    "N;ACC;SG;DEF": "الْعَمَّةَ",
+    "N;ACC;PL;DEF": "الْعَمَّاتِ",
+    "N;ACC;DU;DEF": "الْعَمَّتَيْنِ",
+    "N;GEN;SG;INDF": "عَمَّةٍ",
+    "N;GEN;PL;INDF": "عَمَّاتٍ",
+    "N;GEN;DU;INDF": "عَمَّتَيْنِ",
+    "N;GEN;SG;DEF": "الْعَمَّةِ",
+    "N;GEN;PL;DEF": "الْعَمَّاتِ",
+    "N;GEN;DU;DEF": "الْعَمَّتَيْنِ",
+    "N;NOM;SG;CONST": "عَمَّةُ",
+    "N;NOM;SG;POSS;PSS1S": "عَمَّتِي",
+    "N;NOM;SG;POSS;PSS2SM": "عَمَّتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "عَمَّتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "عَمَّتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "عَمَّتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "عَمَّتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "عَمَّتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "عَمَّتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "عَمَّتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The father's sister.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt (the father's sister)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عَمَّتِي تَسْكُنُ مَعَنَا.",
+      "tr": "My aunt (my father's sister) lives with us.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدِي عَمَّتَانِ.",
+      "tr": "I have two aunts on my father's side.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ عَمَّتِي.",
+      "tr": "This is my aunt.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِبْنُ الْعَمَّةِ",
+      "tr": "cousin (son of the father's sister)"
+     },
+     {
+      "text": "عَمَّتِي وَخَالَتِي",
+      "tr": "my aunts on both sides"
+     },
+     {
+      "text": "بَيْتُ عَمَّتِي",
+      "tr": "my aunt's house"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "MSA has no other word: عَمَّة is the father's sister, and خَالَة, the mother's sister, is a different relative.",
+    "etymology": {
+     "text": "The feminine of عَمّ (paternal uncle) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 姑姑 (gūgu) is likewise only the father's sister."
+    ],
+    "pitfalls": [
+     "Do not mix up عَمَّة (father's sister) and خَالَة (mother's sister).",
+     "Unvocalized عمة is also عِمَّة (turban)."
+    ],
+    "subtleties": [
+     "Plural عَمَّات; possessive عَمَّتِي."
+    ]
+   }
+  },
+  {
+   "id": "ar:khala",
+   "lemma": "خَالَة",
+   "pos": "NOUN",
+   "senses": [
+    "family.aunt"
+   ],
+   "features": {
+    "root": "خ و ل",
+    "pattern": "فَعَلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "خَالَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "خَالَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side of the family",
+     "value": "mother’s sister"
+    }
+   ],
+   "class": "kin",
+   "gender": "FEM",
+   "translit": "ḫāla",
+   "forms": {
+    "N;NOM;SG;INDF": "خَالَةٌ",
+    "N;NOM;PL;INDF": "خَالَاتٌ",
+    "N;NOM;DU;INDF": "خَالَتَانِ",
+    "N;NOM;SG;DEF": "الْخَالَةُ",
+    "N;NOM;PL;DEF": "الْخَالَاتُ",
+    "N;NOM;DU;DEF": "الْخَالَتَانِ",
+    "N;ACC;SG;INDF": "خَالَةً",
+    "N;ACC;PL;INDF": "خَالَاتٍ",
+    "N;ACC;DU;INDF": "خَالَتَيْنِ",
+    "N;ACC;SG;DEF": "الْخَالَةَ",
+    "N;ACC;PL;DEF": "الْخَالَاتِ",
+    "N;ACC;DU;DEF": "الْخَالَتَيْنِ",
+    "N;GEN;SG;INDF": "خَالَةٍ",
+    "N;GEN;PL;INDF": "خَالَاتٍ",
+    "N;GEN;DU;INDF": "خَالَتَيْنِ",
+    "N;GEN;SG;DEF": "الْخَالَةِ",
+    "N;GEN;PL;DEF": "الْخَالَاتِ",
+    "N;GEN;DU;DEF": "الْخَالَتَيْنِ",
+    "N;NOM;SG;CONST": "خَالَةُ",
+    "N;NOM;SG;POSS;PSS1S": "خَالَتِي",
+    "N;NOM;SG;POSS;PSS2SM": "خَالَتُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "خَالَتُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "خَالَتُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "خَالَتُهَا",
+    "N;NOM;SG;POSS;PSS1P": "خَالَتُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "خَالَتُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "خَالَتُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "خَالَتِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "The mother's sister — “like a mother”; also a kind “auntie” for older women.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aunt (the mother's sister)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.aunt"
+     },
+     {
+      "id": "s2",
+      "def": "“auntie”: a polite address to an older woman",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "خَالَتِي مُعَلِّمَةٌ.",
+      "tr": "My aunt (my mother's sister) is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "بِنْتُ خَالَتِي صَدِيقَتِي.",
+      "tr": "My cousin is my friend.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "شُكْرًا يَا خَالَتِي!",
+      "tr": "Thank you, auntie! (to an older woman)",
+      "register": "colloquial",
+      "context": "street",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِنْتُ الْخَالَةِ",
+      "tr": "cousin (daughter of the mother's sister)"
+     },
+     {
+      "text": "اِبْنُ الْخَالَةِ",
+      "tr": "cousin (son of the mother's sister)"
+     },
+     {
+      "text": "الْخَالَةُ وَالْعَمَّةُ",
+      "tr": "the aunts on both sides"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْخَالَةُ بِمَنْزِلَةِ الْأُمِّ",
+      "tr": "the maternal aunt is in the place of the mother",
+      "kind": "saying",
+      "meaning": "a mother's sister counts as a mother (a hadith)",
+      "register": "religious"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "MSA has no other word; colloquial forms such as خَالْتُو are the same word.",
+    "etymology": {
+     "text": "The feminine of خَال (maternal uncle) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese 姨 (yí, 姨妈) is also the mother's sister — and 阿姨, like خَالَة, is said to older women in general."
+    ],
+    "pitfalls": [
+     "False friend for Turkish speakers: Turkish hala (the father's sister) comes from خَالَة, but in Arabic خَالَة is the mother's sister (Turkish teyze).",
+     "Not the father's sister — that is عَمَّة."
+    ],
+    "subtleties": [
+     "Plural خَالَات; possessive خَالَتِي."
+    ]
+   }
+  },
+  {
+   "id": "ar:qarib_relative",
+   "lemma": "قَرِيب",
+   "pos": "NOUN",
+   "senses": [
+    "family.relative",
+    "adv.near"
+   ],
+   "features": {
+    "root": "ق ر ب",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَقَارِب",
+      "kind": "broken",
+      "pattern": "أَفَاعِل",
+      "declension": "diptote",
+      "note": "relatives (the usual word)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "أَقْرِبَاء",
+      "kind": "broken",
+      "pattern": "أَفْعِلَاء",
+      "declension": "diptote",
+      "note": "relatives (formal)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "قَرِيبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "as the adjective “near” (of people)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "قَرِيبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "word class (the same form قَرِيب)",
+     "value": "the noun “relative”, here used as the adjective"
+    }
+   ],
+   "class": "kin",
+   "gender": "MASC",
+   "translit": "qarīb",
+   "forms": {
+    "N;NOM;SG;INDF": "قَرِيبٌ",
+    "N;NOM;PL;INDF": "أَقْرِبَاءُ",
+    "N;NOM;DU;INDF": "قَرِيبَانِ",
+    "N;NOM;SG;DEF": "الْقَرِيبُ",
+    "N;NOM;PL;DEF": "الْأَقْرِبَاءُ",
+    "N;NOM;DU;DEF": "الْقَرِيبَانِ",
+    "N;ACC;SG;INDF": "قَرِيبًا",
+    "N;ACC;PL;INDF": "أَقْرِبَاءَ",
+    "N;ACC;DU;INDF": "قَرِيبَيْنِ",
+    "N;ACC;SG;DEF": "الْقَرِيبَ",
+    "N;ACC;PL;DEF": "الْأَقْرِبَاءَ",
+    "N;ACC;DU;DEF": "الْقَرِيبَيْنِ",
+    "N;GEN;SG;INDF": "قَرِيبٍ",
+    "N;GEN;PL;INDF": "أَقْرِبَاءَ",
+    "N;GEN;DU;INDF": "قَرِيبَيْنِ",
+    "N;GEN;SG;DEF": "الْقَرِيبِ",
+    "N;GEN;PL;DEF": "الْأَقْرِبَاءِ",
+    "N;GEN;DU;DEF": "الْقَرِيبَيْنِ",
+    "N;NOM;SG;CONST": "قَرِيبُ",
+    "N;NOM;SG;POSS;PSS1S": "قَرِيبِي",
+    "N;NOM;SG;POSS;PSS2SM": "قَرِيبُكَ",
+    "N;NOM;SG;POSS;PSS2SF": "قَرِيبُكِ",
+    "N;NOM;SG;POSS;PSS3SM": "قَرِيبُهُ",
+    "N;NOM;SG;POSS;PSS3SF": "قَرِيبُهَا",
+    "N;NOM;SG;POSS;PSS1P": "قَرِيبُنَا",
+    "N;NOM;SG;POSS;PSS2PM": "قَرِيبُكُمْ",
+    "N;NOM;SG;POSS;PSS3PM": "قَرِيبُهُمْ",
+    "N;GEN;SG;POSS;PSS1S": "قَرِيبِي"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "N;NOM;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3SF": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS1P": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS2PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;NOM;SG;POSS;PSS3PM": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun",
+     "N;GEN;SG;POSS;PSS1S": "possessed form (noun + pronoun suffix), built by the regular rule; Wiktionary's declension table has no possessed forms, so the check compares it with the bare noun"
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Kinship — the people close to you by blood or marriage.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "relative, relation (a family member)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.relative"
+     },
+     {
+      "id": "s2",
+      "def": "near, close (the same word as an adjective, lesson 12)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.near"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُوَ قَرِيبِي.",
+      "tr": "He is my relative.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَنَا أَقْرِبَاءُ فِي كَنَدَا.",
+      "tr": "We have relatives in Canada.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَيْتُ قَرِيبٌ مِنْ هُنَا.",
+      "tr": "The house is close to here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s2"
+     },
+     {
+      "text": "هَلِ الْمَطْعَمُ قَرِيبٌ؟",
+      "tr": "Is the restaurant close?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "الْأَقَارِبُ وَالْأَصْدِقَاءُ",
+      "tr": "relatives and friends"
+     },
+     {
+      "text": "قَرِيبٌ بَعِيدٌ",
+      "tr": "a distant relative"
+     },
+     {
+      "text": "قَرِيبٌ مِنَ الْعَائِلَةِ",
+      "tr": "a relative of the family"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْأَقَارِبُ عَقَارِبُ",
+      "tr": "relatives are scorpions",
+      "kind": "proverb",
+      "meaning": "relatives can sting (a joking rhyme)",
+      "register": "humorous"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "نَسِيب",
+      "register": "neutral",
+      "nuance": "a relative by marriage, an in-law"
+     },
+     {
+      "word": "أَهْل",
+      "register": "neutral",
+      "nuance": "kin, family (collective)"
+     }
+    ],
+    "etymology": {
+     "text": "A فَعِيل-type adjective from قَرُبَ (to be near); cognate with Hebrew קָרוֹב (karóv, “close, near”) and Amharic ቅርብ (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew קָרוֹב (karóv) also means both “near” and “relative” — the same Semitic word.",
+     "Turkish akraba (relatives) is the Arabic plural أَقْرِبَاء."
+    ],
+    "pitfalls": [
+     "Two plurals: أَقْرِبَاء and the very common أَقَارِب (الْأَقَارِبُ) — both are diptotes: no -un, and -a for the indefinite genitive.",
+     "As a noun “relative”, as an adjective “near” (قَرِيبٌ مِنَ الْبَيْتِ) — the sentence decides."
+    ],
+    "subtleties": [
+     "A female relative is قَرِيبَة; قَرَابَة is kinship."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "family.cousin",
+   "reason": "Arabic has no word for “cousin”: it always says which parent's sibling the cousin comes from, with “son / daughter of” + the uncle or aunt.",
+   "use": "اِبْنُ عَمٍّ / بِنْتُ عَمٍّ (father's brother), اِبْنُ عَمَّةٍ / بِنْتُ عَمَّةٍ (father's sister), اِبْنُ خَالٍ / بِنْتُ خَالٍ (mother's brother), اِبْنُ خَالَةٍ / بِنْتُ خَالَةٍ (mother's sister) — “my cousin”: اِبْنُ عَمِّي, بِنْتُ خَالَتِي (the possessive goes on the last word)."
+  },
+  {
+   "concept": "family.nephew",
+   "reason": "No single word: a nephew is “the brother's son” or “the sister's son”.",
+   "use": "اِبْنُ الْأَخِ (brother's son), اِبْنُ الْأُخْتِ (sister's son); “my nephew”: اِبْنُ أَخِي / اِبْنُ أُخْتِي."
+  },
+  {
+   "concept": "family.niece",
+   "reason": "No single word: a niece is “the brother's daughter” or “the sister's daughter”.",
+   "use": "بِنْتُ الْأَخِ (brother's daughter), بِنْتُ الْأُخْتِ (sister's daughter); “my niece”: بِنْتُ أَخِي / بِنْتُ أُخْتِي."
+  },
+  {
+   "concept": "poss.my",
+   "reason": "No separate word: “my” is the suffix -ī (after a vowel -ya) on the noun.",
+   "use": "كِتَابِي (my book), أُمِّي (my mother), غُرْفَتِي (my room); the same suffix on عِنْدَ: عِنْدِي (I have)."
+  },
+  {
+   "concept": "poss.your.sg",
+   "reason": "No separate word: “your” is a suffix, -ka to a man and -ki to a woman.",
+   "use": "كِتَابُكَ (your book, to a man), كِتَابُكِ (to a woman); أَبُوكَ / أَبُوكِ (your father)."
+  },
+  {
+   "concept": "poss.his",
+   "reason": "No separate word: “his” is the suffix -hu (-hi after i or y).",
+   "use": "كِتَابُهُ (his book), أَبُوهُ (his father), عِنْدَهُ (he has)."
+  },
+  {
+   "concept": "poss.her",
+   "reason": "No separate word: “her” is the suffix -hā.",
+   "use": "كِتَابُهَا (her book), أُمُّهَا (her mother), عِنْدَهَا (she has)."
+  },
+  {
+   "concept": "poss.our",
+   "reason": "No separate word: “our” is the suffix -nā.",
+   "use": "بَيْتُنَا (our house), أُسْرَتُنَا (our family), عِنْدَنَا (we have)."
+  },
+  {
+   "concept": "poss.your.pl",
+   "reason": "No separate word: “your” (several people) is the suffix -kum (-kunna for women only).",
+   "use": "بَيْتُكُمْ (your house), عِنْدَكُمْ (you have); to women only: بَيْتُكُنَّ."
+  },
+  {
+   "concept": "poss.their",
+   "reason": "No separate word: “their” is the suffix -hum (-hunna for women only; -him after i or y).",
+   "use": "بَيْتُهُمْ (their house), عِنْدَهُمْ (they have); women only: بَيْتُهُنَّ."
+  }
+ ]
+}

@@ -1,0 +1,480 @@
+{
+ "function": "fn.past",
+ "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "verb.past",
+   "value": "none"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "particle"
+  },
+  {
+   "feature": "verb.perfect",
+   "value": "finish-already"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "optional"
+  }
+ ],
+ "summary": "Chinese has no past tense: the verb is the same for yesterday, today and tomorrow (我昨天十一点睡觉 / 我每天十一点睡觉). A past event is placed in time by a time word before the verb — 昨天, 昨天晚上, 上个星期, 去年, 以前 — or simply by the situation. What Chinese marks is completion: 了 after the verb says the action is done, usually with a number or a length (我睡了八个小时 ‘I slept eight hours’); 了 at the end says a new situation holds (他起床了 ‘he’s up’); 已经 … 了 is ‘already’. A past action is denied with 没 + verb, and 了 disappears: 他没起床 ‘he didn’t get up’. Questions add 吗 or 没有: 你吃早饭了吗？ / 你吃早饭了没有？. Plain descriptions of the past — states, adjectives, 是 and 在, habits — take no 了: 昨天我很累 ‘I was tired yesterday’. 过 (S14) adds ‘ever, before’: 我去过北京. Many routine verbs are verb + object words (起床, 洗澡, 睡觉, 出门): 了 or a length go inside them, and they take no further object.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Step",
+    "How",
+    "Example"
+   ],
+   "rows": [
+    [
+     "When?",
+     "a time word before the verb",
+     "我昨天十一点睡觉。 I went to bed at eleven yesterday."
+    ],
+    [
+     "Done (counted)",
+     "verb + 了 + number / length",
+     "我睡了八个小时。 I slept eight hours."
+    ],
+    [
+     "Done (new situation)",
+     "了 at the end",
+     "他起床了。 He’s up."
+    ],
+    [
+     "Already",
+     "已经 + verb … 了",
+     "我已经洗澡了。 I’ve already had a shower."
+    ],
+    [
+     "Not done",
+     "没 + verb, no 了",
+     "他没起床。 He didn’t get up / hasn’t got up."
+    ],
+    [
+     "Asking",
+     "…了吗？ / …了没有？",
+     "你吃早饭了吗？ Have you had breakfast?"
+    ]
+   ],
+   "caption": "Past events: a time word, then 了 for what was completed",
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "none"
+    },
+    {
+     "feature": "verb.perfective",
+     "value": "particle"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Every day (habit)",
+    "Yesterday (done)"
+   ],
+   "rows": [
+    [
+     "我每天七点醒。 I wake up at seven every day.",
+     "我昨天六点就醒了。 Yesterday I was awake by six."
+    ],
+    [
+     "他每天睡八个小时。 He sleeps eight hours a night.",
+     "他昨天睡了八个小时。 He slept eight hours last night."
+    ],
+    [
+     "我每天八点出门。 I leave home at eight every day.",
+     "我今天八点就出门了。 Today I was out of the door by eight."
+    ],
+    [
+     "我每天吃早饭。 I have breakfast every day.",
+     "我今天没吃早饭。 I didn’t have breakfast today."
+    ]
+   ],
+   "caption": "The same verb for habit and event: the frame and 了 make the difference"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "了 is not a past tense",
+   "text": "了 marks an action as done or a situation as new — not ‘past’. No 了 for states and adjectives (昨天我很累 ‘I was tired yesterday’), for 是 and 在 (昨天我在家), for habits (以前我每天七点起床) and after 才 ‘not until’ (他十点才起床). And 了 also works in the future: 明天我吃了早饭就走 ‘tomorrow I’ll leave once I’ve had breakfast’.",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Where 了 goes",
+   "text": "With a bare object, put 了 at the end: 我吃早饭了 ‘I’ve had breakfast’. Verb + 了 + object wants more — a number (我喝了两杯咖啡), a length (我睡了八个小时) or a next step (我吃了早饭就出门了 ‘after breakfast I went out’). Both together, verb 了 … 了, means ‘so far, and still going’: 我睡了八个小时了 ‘I’ve been asleep for eight hours now’."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "没 swallows 了",
+   "text": "他起床了 → 他没起床 (never *他没起床了). ‘Not yet’ is 还没 … (呢): 他还没起床呢. 不 + verb is a refusal or a habit, not a past event: 他不起床 ‘he won’t get up’."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "没 — it did not happen",
+     "points": [
+      "他没吃早饭。 He didn’t have breakfast.",
+      "昨天晚上我没睡着。 I couldn’t get to sleep last night."
+     ]
+    },
+    {
+     "title": "不 — will not / does not (as a rule)",
+     "points": [
+      "他不吃早饭。 He doesn’t eat breakfast.",
+      "我不睡觉！ I’m not going to bed!"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Verb–object words open up",
+   "text": "Many routine verbs are verb + object (离合词): 起床, 洗澡, 睡觉, 出门, 穿衣. 了, 个, a number or a length go between the parts: 洗了个澡 ‘had a shower’, 睡了一觉 ‘had a sleep’, 出了门 ‘went out’. The whole word never takes another object, so a length goes with the bare verb: 睡了八个小时, not *睡觉了八个小时.",
+   "typology": [
+    {
+     "feature": "verb.objectCompounds",
+     "value": "present"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "就 and 才 with clock times",
+   "text": "就 + verb + 了: early, sooner than expected — 他六点就起床了 ‘he was up by six’. 才 + verb, without 了: late, not until — 他十点才起床 ‘he didn’t get up till ten’. The time stays before both."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "已经 … 了 — already",
+   "text": "已经 goes before the verb and 了 at the end: 他已经出门了 ‘he has already gone out’. With a time or an age, no verb is needed: 已经十二点了 ‘it’s already twelve’. The negative is 还没: 他还没出门 ‘he hasn’t gone out yet’.",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "finish-already"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "Time word",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "昨天",
+     "yesterday"
+    ],
+    [
+     "昨天晚上",
+     "last night, yesterday evening"
+    ],
+    [
+     "今天早上",
+     "this morning"
+    ],
+    [
+     "上个星期",
+     "last week"
+    ],
+    [
+     "上个月",
+     "last month"
+    ],
+    [
+     "去年",
+     "last year"
+    ],
+    [
+     "以前",
+     "before, in the past"
+    ]
+   ],
+   "caption": "Time words that place an event in the past — before the verb"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking about the past",
+   "text": "你吃早饭了吗？ · 你吃早饭了没有？ ‘have you had breakfast (or not)?’ · 你昨天几点睡觉？ ‘what time did you go to bed yesterday?’ The answer echoes the verb: 吃了 / 没吃. You will also hear 你昨天几点睡的？ — 是 … 的, which asks when, where or how a past event happened, comes later with emphasis (C43)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it in the past? → put a time word before the verb (昨天, 上个星期); the verb itself never changes.",
+   "Was something completed and counted (two cups, eight hours)? → verb + 了 + number + noun.",
+   "Is a new situation the point (he’s up, the holidays are over)? → 了 at the end.",
+   "Is it a state, an adjective, 是 / 在, a habit, or a sentence with 才? → no 了.",
+   "Is it negative? → 没 + verb, and drop 了 (过 stays).",
+   "Is it a verb–object word (起床, 洗澡, 睡觉)? → nothing after it; 了, 个 or a length go inside.",
+   "Is it a question? → …了吗？ or …了没有？"
+  ],
+  "steps": [
+   "Place the event in time: the time word comes first.",
+   "Completed → 了 (after the verb with a quantity, or at the end).",
+   "Did not happen → 没 + verb; not yet → 还没."
+  ]
+ },
+ "traps": [
+  "*他没起床了 → 他没起床.",
+  "*昨天我很累了 (for a plain past state) → 昨天我很累.",
+  "*我睡觉了八个小时 → 我睡了八个小时.",
+  "*我昨天不起床 (for ‘didn’t get up’) → 我昨天没起床.",
+  "*他十点才起床了 → 他十点才起床 (才 takes no 了).",
+  "*以前我每天七点起床了 → 以前我每天七点起床 (a habit takes no 了).",
+  "他去北京了 (has gone, is there) ≠ 他去过北京 (has been, came back)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:le",
+   "zh:guo",
+   "zh:yijing",
+   "zh:zuotian",
+   "zh:mei"
+  ]
+ },
+ "needs": {
+  "VERB": 6
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.past"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘He didn’t get up.’",
+   "options": [
+    "他没起床。",
+    "他没起床了。",
+    "他不起床了。"
+   ],
+   "answer": "他没起床。",
+   "why": "没 denies a past event and 了 goes; 他不起床了 means ‘he won’t get up any more’."
+  },
+  {
+   "q": "‘Yesterday I was tired.’",
+   "options": [
+    "昨天我很累。",
+    "昨天我很累了。",
+    "昨天我了很累。"
+   ],
+   "answer": "昨天我很累。",
+   "why": "A plain past state takes no 了 — 昨天 already says when."
+  },
+  {
+   "q": "‘I slept eight hours.’",
+   "options": [
+    "我睡了八个小时。",
+    "我睡觉了八个小时。",
+    "我八个小时睡了。"
+   ],
+   "answer": "我睡了八个小时。",
+   "why": "睡觉 already has its object; the length follows 睡 + 了."
+  },
+  {
+   "q": "‘Have you had breakfast?’",
+   "options": [
+    "你吃早饭了吗？",
+    "你吃早饭吗了？",
+    "你了吃早饭吗？"
+   ],
+   "answer": "你吃早饭了吗？",
+   "why": "了 follows the verb phrase and 吗 comes last."
+  },
+  {
+   "q": "‘He was up by six (early!).’",
+   "options": [
+    "他六点就起床了。",
+    "他六点才起床了。",
+    "他就六点起床了。"
+   ],
+   "answer": "他六点就起床了。",
+   "why": "就 … 了 = as early as; 才 means ‘not until’ and takes no 了."
+  },
+  {
+   "q": "‘I had a shower.’",
+   "options": [
+    "我洗了个澡。",
+    "我洗澡了个。",
+    "我了洗澡。"
+   ],
+   "answer": "我洗了个澡。",
+   "why": "洗澡 is verb + object: 了 and 个 go between the parts."
+  },
+  {
+   "q": "‘He has already gone out.’",
+   "options": [
+    "他已经出门了。",
+    "他出门已经了。",
+    "他已经了出门。"
+   ],
+   "answer": "他已经出门了。",
+   "why": "已经 stands before the verb, 了 at the end."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek must choose a past form: ξύπνησα ‘I woke up (once, done)’ or ξυπνούσα ‘I used to wake up / was waking’. Chinese marks only the ‘done’ side, with 了, and only when it matters: 我醒了; the habit has no marker at all (以前我七点醒)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "The Russian perfective past (проснулся, встал) is close to verb + 了 (醒了, 起床了), the imperfective past (вставал) to the bare verb with a time word. But Russian also marks gender in the past (встал / встала); the Chinese verb never changes."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Me levanté (pretérito, done) ~ 我起床了; me levantaba (imperfecto, habit) ~ 以前我…起床, without 了. Ayer ~ 昨天, before the verb."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English puts every past verb in the past tense (got up, was tired). Chinese adds 了 only for a completed event: ‘I was tired yesterday’ is 昨天我很累, with no 了, and ‘I got up at seven’ can be 我七点起床 when 昨天 already says when."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Passé composé je me suis levé ~ 我起床了; imparfait je me levais (habit) ~ no 了. Chinese has no auxiliary and no participle: the verb stays 起床."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German Perfekt (ich bin aufgestanden, ich habe geduscht) and Präteritum (ich stand auf) both put the verb into the past; Chinese has no auxiliary, no participle and no tense — 我起床了, 我洗澡了."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi’s perfective (उठा ‘got up’, उठी said of a woman) marks a completed event like 了, but agrees in gender and number; Chinese 起床了 is the same for everyone."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian builds the past from a past stem with person endings (bidār shodam ‘I woke up’, raftam ‘I went’); Chinese verbs have no stems and no endings — 醒了, 去了."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic has a past (perfect) conjugation with endings for person, number and gender (قُمْتُ ‘I got up’, قَامَتْ ‘she got up’); Chinese keeps the verb bare and adds 了 or a time word."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew conjugates the past by person (קַמְתִּי ‘I got up’, קַמְנוּ ‘we got up’); Chinese has one bare form and marks completion with 了, not tense."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish -di is an obligatory past suffix (kalktım ‘I got up’); Chinese 了 marks completion and is optional — and Chinese has nothing like the reported past -miş."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese -ta is a past form of the verb (起きた ‘got up’, 起きなかった ‘didn’t get up’); Chinese adds 了 to an unchanged verb, and the negative 没起床 drops it."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean -았/었- is an obligatory past suffix (일어났어요 ‘got up’); Chinese uses a time word, and 了 only when the event is completed."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has a past tense with person endings (heräsin ‘I woke up’, heräsit ‘you woke up’); Chinese has no tense and no endings: 我醒了, 你醒了."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian marks the past with -t / -tt and completion often with a preverb (felkeltem ‘I got up’); Chinese marks the completion with a separate 了 and has no tense or person endings."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili -li- is the past (niliamka ‘I woke up’) and -me- ‘has done, and so now’ (nimeamka ‘I’m awake now’) — close to verb-了 and sentence-final 了, which in Chinese are separate words and optional."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese works like Chinese: no tense, a time word (hôm qua ~ 昨天) and optional markers — đã for a completed or past event, rồi ~ 了 (tôi dậy rồi ~ 我起床了), chưa ~ 还没 ‘not yet’."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks past time with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate words to a verb that never changes: 我吃了."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.past",
+   "note": "German has two past tenses — the Perfekt with haben / sein + participle in speech (ich bin aufgestanden, ich habe geduscht) and the Präteritum in writing (ich stand auf); Chinese has no past form at all: 我起床了, with 了 only for completion."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.past",
+   "note": "Arabic has the perfect, a past form with endings for person, number and gender (قُمْتُ ‘I got up’); Chinese keeps the verb bare and adds 了 or a time word."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.past",
+   "note": "Hebrew conjugates the past by person (קַמְתִּי ‘I got up’, קַמְנוּ ‘we got up’); Chinese has one form for everyone and no tense."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.aspect",
+   "note": "了, 过 and 在 were introduced with the days (S14); here they carry the past."
+  }
+ ]
+}

@@ -1,0 +1,3595 @@
+{
+ "lexemes": [
+  {
+   "id": "he:ani",
+   "lemma": "אֲנִי",
+   "pos": "PRON",
+   "senses": [
+    "pron.i",
+    "mind.ego"
+   ],
+   "translit": "ani",
+   "features": {
+    "spelling": "אני",
+    "agreement": "both",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The speaker; the first word of every self-introduction.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "I (first person singular, masculine and feminine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.i"
+     },
+     {
+      "id": "s2",
+      "def": "the ego, the self (as a noun: הָאֲנִי)",
+      "register": [
+       "formal"
+      ],
+      "concept": "mind.ego"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אוֹהֵב סָלָט.",
+      "tr": "I (m.) like salad.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא יוֹדַעַת.",
+      "tr": "I (f.) don’t know.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "גַּם אֲנִי!",
+      "tr": "Me too!",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גַּם אֲנִי",
+      "tr": "me too"
+     },
+     {
+      "text": "אֲנִי עַצְמִי",
+      "tr": "I myself"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אָנֹכִי",
+      "register": "literary",
+      "nuance": "the older Biblical “I”, used today only in elevated or archaic style (it opens the Ten Commandments: אָנֹכִי ה׳)"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔanāku, from Proto-Afroasiatic *ʔanāku.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Biblical form אָנֹכִי keeps the k of Proto-Semitic *ʔanāku, like Akkadian anāku; Arabic أَنَا (ʔanā) lost it, as did אֲנִי."
+    ],
+    "pitfalls": [
+     "The present-tense verb after אֲנִי shows the speaker’s gender: a man says אֲנִי אוֹכֵל, a woman אֲנִי אוֹכֶלֶת."
+    ],
+    "subtleties": [
+     "In the past and future the verb ending already means “I” (אָכַלְתִּי “I ate”), so אֲנִי is often dropped; in the present (a participle without person endings) it cannot be dropped.",
+     "As a noun, הָאֲנִי means “the ego, the self”."
+    ]
+   }
+  },
+  {
+   "id": "he:ata",
+   "lemma": "אַתָּה",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "translit": "ata",
+   "features": {
+    "spelling": "אתה",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "addressee",
+     "value": "to a man"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Direct address to one man or boy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (second person singular, masculine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַתָּה רוֹצֶה קָפֶה?",
+      "tr": "Do you (m.) want coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה אַתָּה אוֹכֵל?",
+      "tr": "What are you (m.) eating?",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה צוֹדֵק.",
+      "tr": "You’re right (to a man).",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַתָּה בְּסֵדֶר?",
+      "tr": "are you (m.) OK?"
+     },
+     {
+      "text": "גַּם אַתָּה",
+      "tr": "you too (m.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Hebrew has no formal “you” (no T/V distinction like German du/Sie) — the same pronoun is used to a friend, a child, a boss or a minister; politeness comes from words like בְּבַקָּשָׁה, not from the pronoun.",
+    "etymology": {
+     "text": "From Proto-Semitic *ʔanta. Cognate with Arabic أَنْتَ (ʔanta).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The dagesh in the ת is the trace of a lost n: Proto-Semitic *ʔanta became *ʔatta — compare Arabic أَنْتَ (ʔanta), which kept the n."
+    ],
+    "pitfalls": [
+     "Masculine only: to a woman say אַתְּ. The verb agrees too: אַתָּה רוֹצֶה, but אַתְּ רוֹצָה.",
+     "Spelled with a final ה although it is pronounced atá."
+    ],
+    "subtleties": [
+     "Hebrew has no polite “you”: אַתָּה is used to everyone, including strangers and superiors."
+    ]
+   }
+  },
+  {
+   "id": "he:at",
+   "lemma": "אַתְּ",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "translit": "at",
+   "features": {
+    "spelling": "את",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "addressee",
+     "value": "to a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Direct address to one woman or girl.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (second person singular, feminine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַתְּ רוֹצָה תֵּה?",
+      "tr": "Do you (f.) want tea?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה אַתְּ שׁוֹתָה?",
+      "tr": "What are you (f.) drinking?",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתְּ צוֹדֶקֶת.",
+      "tr": "You’re right (to a woman).",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַתְּ בְּסֵדֶר?",
+      "tr": "are you (f.) OK?"
+     },
+     {
+      "text": "גַּם אַתְּ",
+      "tr": "you too (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: Hebrew has no formal “you” (no T/V distinction like German du/Sie) — the same pronoun is used to a friend, a child, a boss or a minister; politeness comes from words like בְּבַקָּשָׁה, not from the pronoun.",
+    "etymology": {
+     "text": "From Proto-Semitic *ʔanti.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic keeps the vowel that Hebrew lost: أَنْتِ (ʔanti) ~ אַתְּ (at)."
+    ],
+    "pitfalls": [
+     "Without vowel marks אַתְּ is written את — exactly like the object marker אֶת. Only the context tells them apart.",
+     "The verb agrees: אַתְּ רוֹצָה (not אַתְּ רוֹצֶה)."
+    ],
+    "subtleties": [
+     "The final ת carries a dagesh and a shva — one of the few Hebrew words ending in a consonant cluster (at < *ant)."
+    ]
+   }
+  },
+  {
+   "id": "he:hu",
+   "lemma": "הוּא",
+   "pos": "PRON",
+   "senses": [
+    "pron.he",
+    "verb.be",
+    "pron.it"
+   ],
+   "translit": "hu",
+   "features": {
+    "spelling": "הוא",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.be",
+     "axis": "tense and subject",
+     "value": "present, masculine subject: the pronoun הוּא links subject and predicate"
+    },
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun",
+     "value": "for a masculine noun"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A man — or any masculine thing (Hebrew has no “it”).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "he (a male person; an animal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.he"
+     },
+     {
+      "id": "s2",
+      "def": "is (present-tense copula linking subject and predicate)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s3",
+      "def": "it (for a masculine noun: אֵיפֹה הַסֵּפֶר? הוּא עַל הַשֻּׁלְחָן)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אוֹכֵל עַגְבָנִיָּה.",
+      "tr": "He is eating a tomato.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַגֶּזֶר? הוּא פֹּה.",
+      "tr": "The carrot? It’s here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s3"
+     },
+     {
+      "text": "יוֹסִי הוּא מוֹרֶה.",
+      "tr": "Yossi is a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "הַסֵּפֶר? הוּא עַל הַשֻּׁלְחָן.",
+      "tr": "The book? It’s on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "דָּוִד הוּא הָאָח שֶׁלִּי.",
+      "tr": "David is my brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הוּא עַצְמוֹ",
+      "tr": "he himself"
+     },
+     {
+      "text": "זֶה הוּא",
+      "tr": "it’s him"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Modern Hebrew.",
+    "etymology": {
+     "text": "From Proto-Semitic *šuʔa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic هُوَ (huwa) is the same pronoun.",
+     "In the Torah scroll the letters הוא are also written for “she”; the vowels turn them into הִוא (read hi)."
+    ],
+    "pitfalls": [
+     "Hebrew has no neuter: a masculine thing is הוּא too — הַגֶּזֶר? הוּא פֹּה."
+    ],
+    "subtleties": [
+     "In the present, הוּא can link subject and predicate like “is”: דָּוִד הוּא מוֹרֶה. It agrees with the subject: הִיא for a feminine subject, הֵם / הֵן for plurals."
+    ]
+   }
+  },
+  {
+   "id": "he:hi",
+   "lemma": "הִיא",
+   "pos": "PRON",
+   "senses": [
+    "pron.she",
+    "verb.be",
+    "pron.it"
+   ],
+   "translit": "hi",
+   "features": {
+    "spelling": "היא",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.be",
+     "axis": "tense and subject",
+     "value": "present, feminine subject: the pronoun הִיא links subject and predicate"
+    },
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun",
+     "value": "for a feminine noun"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A woman — or any feminine thing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "she (a female person; an animal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.she"
+     },
+     {
+      "id": "s2",
+      "def": "is (present-tense copula for a feminine subject)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s3",
+      "def": "it (for a feminine noun: אֵיפֹה הַמְּכוֹנִית? הִיא בַּחוּץ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא קוֹנָה חַסָּה בַּשּׁוּק.",
+      "tr": "She buys lettuce at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַדְּלַעַת? הִיא פֹּה.",
+      "tr": "The pumpkin? It’s here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s3"
+     },
+     {
+      "text": "שָׂרָה הִיא רוֹפְאָה.",
+      "tr": "Sarah is a doctor.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "הַמְּכוֹנִית? הִיא בַּחוּץ.",
+      "tr": "The car? It’s outside.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s3"
+     },
+     {
+      "text": "רוּתִי הִיא הָאָחוֹת שֶׁלִּי.",
+      "tr": "Ruti is my sister.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הִיא עַצְמָהּ",
+      "tr": "she herself"
+     },
+     {
+      "text": "זֹאת הִיא",
+      "tr": "it’s her"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Modern Hebrew.",
+    "etymology": {
+     "text": "From Proto-Semitic *šiʔa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic هِيَ (hiya) is the same pronoun.",
+     "In the Torah the word is usually written הוא and pointed הִוא — the scribes’ spelling for “she” in the Five Books."
+    ],
+    "pitfalls": [
+     "Feminine nouns are “she”: הָעַגְבָנִיָּה? הִיא פֹּה (The tomato? It’s here.).",
+     "Do not confuse הִיא (hi, she) with הוּא (hu, he) — the letters differ only in י / ו."
+    ],
+    "subtleties": [
+     "The verb after הִיא takes the feminine form: הִיא אוֹכֶלֶת, הִיא שׁוֹתָה, הִיא רוֹצָה."
+    ]
+   }
+  },
+  {
+   "id": "he:anachnu",
+   "lemma": "אֲנַחְנוּ",
+   "pos": "PRON",
+   "senses": [
+    "pron.we"
+   ],
+   "translit": "anachnu",
+   "features": {
+    "spelling": "אנחנו",
+    "agreement": "both",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The group, the family, “us”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "we (first person plural, masculine and feminine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.we"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ אוֹכְלִים בַּבַּיִת.",
+      "tr": "We eat at home.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ לֹא רוֹצִים מָרָק.",
+      "tr": "We don’t want soup.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנַחְנוּ פֹּה!",
+      "tr": "We’re here!",
+      "register": "informal",
+      "context": "meeting friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גַּם אֲנַחְנוּ",
+      "tr": "we too"
+     },
+     {
+      "text": "אֲנַחְנוּ בְּיַחַד",
+      "tr": "we (are) together"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אָנוּ",
+      "register": "formal",
+      "nuance": "the short form of formal writing and speeches (אָנוּ מוֹדִים … “we thank …”)"
+     },
+     {
+      "word": "נַחְנוּ",
+      "register": "literary",
+      "nuance": "a rare Biblical variant"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *niḥnu. Cognate with Arabic نَحْنُ (naḥnu).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic نَحْنُ (naḥnu) is the same word without the initial a-; Hebrew נַחְנוּ also exists (rarely) in the Bible."
+    ],
+    "pitfalls": [
+     "אֲנַחְנוּ has no gender; the verb shows it: אֲנַחְנוּ אוֹכְלִים (men or a mixed group), אֲנַחְנוּ אוֹכְלוֹת (women only)."
+    ],
+    "subtleties": [
+     "The stress is on the middle syllable: a-NACH-nu."
+    ]
+   }
+  },
+  {
+   "id": "he:atem",
+   "lemma": "אַתֶּם",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.pl"
+   ],
+   "translit": "atem",
+   "features": {
+    "spelling": "אתם",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.pl",
+     "axis": "addressee",
+     "value": "to men or a mixed group"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Talking to a group — of men, or of men and women together.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (second person plural, masculine; also for a mixed group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַתֶּם סְטוּדֶנְטִים?",
+      "tr": "Are you (pl.) students?",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתֶּם רוֹצִים קָפֶה?",
+      "tr": "Do you (pl.) want coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתֶּם בְּסֵדֶר?",
+      "tr": "Are you all OK?",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גַּם אַתֶּם",
+      "tr": "you too (pl.)"
+     },
+     {
+      "text": "אַתֶּם וַאֲנַחְנוּ",
+      "tr": "you and we"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym, and no polite plural either: אַתֶּם is the only plural “you” for men or a mixed group, to friends or to an audience.",
+    "etymology": {
+     "text": "From Proto-Semitic *ʔantum. Cognate with Arabic أَنْتُمْ (ʔantum).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The dagesh in the ת is the trace of a lost n, as in אַתָּה: Proto-Semitic *ʔantum became אַתֶּם, while Arabic أَنْتُمْ (ʔantum) kept it."
+    ],
+    "pitfalls": [
+     "A mixed group is masculine: talking to five women and one man you say אַתֶּם.",
+     "Casual speech often uses אַתֶּם for women too; standard Hebrew uses אַתֶּן for a group of women only."
+    ],
+    "subtleties": [
+     "In the past and future the verb ending already says “you (pl.)” (הֱיִיתֶם “you were”), so אַתֶּם can be dropped there — but not in the present."
+    ]
+   }
+  },
+  {
+   "id": "he:aten",
+   "lemma": "אַתֶּן",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.pl"
+   ],
+   "translit": "aten",
+   "features": {
+    "spelling": "אתן",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.pl",
+     "axis": "addressee",
+     "value": "to women only"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Talking to a group of women only.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (second person plural, feminine: a group of women only)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַתֶּן סְטוּדֶנְטִיּוֹת?",
+      "tr": "Are you (f. pl.) students?",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתֶּן רוֹצוֹת תֵּה?",
+      "tr": "Do you (f. pl.) want tea?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "בָּנוֹת, אַתֶּן מוּכָנוֹת?",
+      "tr": "Girls, are you ready?",
+      "register": "informal",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גַּם אַתֶּן",
+      "tr": "you too (f. pl.)"
+     },
+     {
+      "text": "אַתֶּן וַאֲנַחְנוּ",
+      "tr": "you (f. pl.) and we"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; there is no polite form either.",
+    "etymology": {
+     "text": "From Proto-Semitic *ʔantin. Wiktionary also gives the pointing אַתֵּן. Cognate with Arabic أَنْتُنَّ (ʔantunna).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic أَنْتُنَّ (ʔantunna) has the same feminine plural -n as Hebrew אַתֶּן and הֵן."
+    ],
+    "pitfalls": [
+     "Only for an all-female group: one man in the group makes it אַתֶּם.",
+     "Unvocalized אתן is also אִתָּן “with them (f.)” or אֹתָן “them (f.)” — the context decides."
+    ],
+    "subtleties": [
+     "In casual speech אַתֶּם often replaces אַתֶּן; in writing and careful speech אַתֶּן is expected."
+    ]
+   }
+  },
+  {
+   "id": "he:hem",
+   "lemma": "הֵם",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "translit": "hem",
+   "features": {
+    "spelling": "הם",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who is meant",
+     "value": "men, a mixed group or masculine nouns"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A group of men, or a mixed group.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they (masculine plural, also for mixed groups)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵם אוֹהֲבִים מְלָפְפוֹנִים.",
+      "tr": "They like cucumbers.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הֵם?",
+      "tr": "Where are they?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הֵם עַצְמָם",
+      "tr": "they themselves"
+     },
+     {
+      "text": "הַיָּמִים הָהֵם",
+      "tr": "those days"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הֵמָּה",
+      "register": "literary",
+      "nuance": "a longer Biblical variant"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šum. Cognate with Arabic هُم (hum).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic هُم (hum) is the same pronoun."
+    ],
+    "pitfalls": [
+     "הֵם is used for any mixed group: nine women and one man are הֵם."
+    ],
+    "subtleties": [
+     "With the article, הָהֵם means “those”: הַיָּמִים הָהֵם (those days), as opposed to הַיָּמִים הָאֵלֶּה (these days)."
+    ]
+   }
+  },
+  {
+   "id": "he:hen",
+   "lemma": "הֵן",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "translit": "hen",
+   "features": {
+    "spelling": "הן",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who is meant",
+     "value": "women only, or feminine nouns"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A group of women only, or feminine things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they (feminine plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הֵן אוֹכְלוֹת סָלָט.",
+      "tr": "They (f.) are eating salad.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַבָּנוֹת? הֵן בַּבַּיִת.",
+      "tr": "The girls? They’re at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעַגְבָנִיּוֹת? הֵן פֹּה.",
+      "tr": "The tomatoes? They’re here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הֵן עַצְמָן",
+      "tr": "they (f.) themselves"
+     },
+     {
+      "text": "גַּם הֵן",
+      "tr": "they (f.) too"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הֵנָּה",
+      "register": "literary",
+      "nuance": "a longer Biblical variant"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šin. Cognate with Arabic هُنَّ (hunna).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic هُنَّ (hunna) has the same feminine -n as Hebrew הֵן."
+    ],
+    "pitfalls": [
+     "Only for an all-female group or feminine nouns; add one man and it becomes הֵם.",
+     "In casual speech many Israelis say הֵם even for women; written and careful Hebrew keeps הֵן."
+    ],
+    "subtleties": [
+     "A homograph: the particle הֵן “behold; (formal) yes”."
+    ]
+   }
+  },
+  {
+   "id": "he:haya",
+   "lemma": "הָיָה",
+   "pos": "VERB",
+   "class": "copula",
+   "senses": [
+    "verb.be",
+    "verb.exist",
+    "poss.have"
+   ],
+   "translit": "haya",
+   "features": {
+    "spelling": "היה",
+    "root": "ה י ה",
+    "binyan": "paal",
+    "rootClass": [
+     "lamed-he",
+     "pe-guttural"
+    ],
+    "future": "יִהְיֶה",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in everyday use (the infinitive לִהְיוֹת serves)"
+    },
+    "meaningForms": [
+     {
+      "form": "הָיָה לִי, הָיְתָה לִי, הָיוּ לִי",
+      "senses": [
+       "s3"
+      ],
+      "note": "agrees with the thing possessed, not with the possessor: הָיְתָה לִי מְכוֹנִית"
+     }
+    ]
+   },
+   "forms": {
+    "V;PST;3;SG;MASC": "הָיָה",
+    "V;PST;3;SG;FEM": "הָיְתָה",
+    "V;PST;3;PL": "הָיוּ",
+    "V;FUT;3;SG;MASC": "יִהְיֶה",
+    "V;FUT;3;SG;FEM": "תִּהְיֶה",
+    "V;NFIN": "לִהְיוֹת",
+    "V;PST;1;SG": "הָיִיתִי",
+    "V;PST;2;SG;MASC": "הָיִיתָ",
+    "V;PST;2;SG;FEM": "הָיִית",
+    "V;PST;1;PL": "הָיִינוּ",
+    "V;PST;2;PL;MASC": "הֱיִיתֶם",
+    "V;PST;2;PL;FEM": "הֱיִיתֶן",
+    "V;FUT;1;SG": "אֶהְיֶה",
+    "V;FUT;1;PL": "נִהְיֶה",
+    "V;FUT;3;PL;MASC": "יִהְיוּ"
+   },
+   "plene": {
+    "V;PST;3;SG;FEM": "הייתה"
+   },
+   "note": "No present tense: in the present Hebrew uses a nominal sentence without a verb (הַמּוֹרֶה פֹּה “the teacher is here”). The participle הוֹוֶה exists only as a rare literary form, so only past, future and infinitive are stored. The past has person endings (הָיִיתִי “I was”); the third person agrees with the subject in gender and number.",
+   "contrasts": [
+    {
+     "concept": "verb.be",
+     "axis": "tense and subject",
+     "value": "past and future: the verb הָיָה / יִהְיֶה"
+    },
+    {
+     "concept": "verb.exist",
+     "axis": "tense",
+     "value": "past and future (הָיָה, יִהְיֶה)"
+    },
+    {
+     "concept": "poss.have",
+     "axis": "tense",
+     "value": "past and future (הָיָה לִי, יִהְיֶה לִי)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "V;PST;3;SG;FEM": "Wiktionary lists the full and the vocalized spelling as one string “הייתה \\ הָיְתָה”; we store the vocalized form הָיְתָה and the full spelling הייתה in plene."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The invisible verb: everywhere in the past and future, absent in the present.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be (in the past and future; no present form in use)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s2",
+      "def": "there was / there will be (existence)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.exist"
+     },
+     {
+      "id": "s3",
+      "def": "with לְ: to have (in the past and future: הָיָה לִי “I had”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.have"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא הָיָה מוֹרֶה וְהִיא הָיְתָה סְטוּדֶנְטִית.",
+      "tr": "He was a teacher and she was a student.",
+      "register": "neutral",
+      "context": "life story",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי הָיִיתִי תַּלְמִיד טוֹב.",
+      "tr": "I (m.) was a good pupil.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסָּלָט הָיָה טָעִים.",
+      "tr": "The salad was tasty.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶתְמוֹל הָיָה חַם.",
+      "tr": "Yesterday it was hot.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "מָחָר יִהְיֶה מָרָק.",
+      "tr": "Tomorrow there will be soup.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "הָיְתָה לִי עַגְבָנִיָּה.",
+      "tr": "I had a tomato.",
+      "register": "neutral",
+      "context": "possession",
+      "sense": "s3"
+     },
+     {
+      "text": "הָיָה לָנוּ בַּיִת גָּדוֹל.",
+      "tr": "We had a big house.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מָה הָיָה?",
+      "tr": "what happened?"
+     },
+     {
+      "text": "הָיָה לִי",
+      "tr": "I had"
+     },
+     {
+      "text": "לִהְיוֹת אוֹ לֹא לִהְיוֹת",
+      "tr": "to be or not to be"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "הָיֹה הָיָה",
+      "tr": "there was, there was",
+      "kind": "fixed expression",
+      "meaning": "once upon a time — the opening of fairy tales",
+      "register": "neutral"
+     },
+     {
+      "text": "מַה־שֶּׁהָיָה הוּא שֶׁיִּהְיֶה",
+      "tr": "what has been is what will be",
+      "kind": "quote",
+      "meaning": "nothing really changes",
+      "register": "literary",
+      "source": "Ecclesiastes 1:9"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: הָיָה is the only verb “to be”; in the present Hebrew uses no verb, or a pronoun as copula (הוּא, הִיא, הֵם, הֵן).",
+    "etymology": {
+     "text": "From Proto-Semitic *haway- (“to fall, happen, be, become”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "God’s name in Exodus 3:14 is explained with this verb: אֶהְיֶה אֲשֶׁר אֶהְיֶה “I will be what I will be”."
+    ],
+    "pitfalls": [
+     "No present: “the salad is tasty” is הַסָּלָט טָעִים, with no verb at all.",
+     "Past and future agree with the subject: הַסָּלָט הָיָה, הָעַגְבָנִיָּה הָיְתָה, הַיְּרָקוֹת הָיוּ; הוּא יִהְיֶה, הִיא תִּהְיֶה.",
+     "In possession the verb agrees with the thing possessed, not with the owner: הָיְתָה לִי עַגְבָנִיָּה (עַגְבָנִיָּה is feminine).",
+     "The past has a person ending, so the pronoun may be dropped: הָיִיתִי בַּבַּיִת “I was at home”; in the present the pronoun is needed: אֲנִי בַּבַּיִת."
+    ],
+    "subtleties": [
+     "הָיָה + a present participle gives a habitual past: הוּא הָיָה אוֹכֵל … “he used to eat …”.",
+     "The everyday full spelling of הָיְתָה is הייתה."
+    ]
+   }
+  },
+  {
+   "id": "he:ve",
+   "lemma": "וְ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "prefix": true,
+   "translit": "ve-",
+   "alts": [
+    "וּ",
+    "וַ"
+   ],
+   "features": {
+    "spelling": "ו"
+   },
+   "note": "Written attached to the next word. Normative form וּ (u-) before ב, מ, פ and before a consonant with shva; before a hataf vowel it takes the matching short vowel (וַ before ־ֲ); before יְ it becomes וִי. The sentence bank uses וְ, and וּ before מ or a shva and וַ before a hataf patah (it avoids וּ before ב / כ / פ, which would also remove the dagesh of the next letter).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The glue of every list.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "and",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.and"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹנֶה עַגְבָנִיּוֹת וְחַסָּה.",
+      "tr": "I (m.) buy tomatoes and lettuce.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "אַבָּא וְאִמָּא בַּבַּיִת.",
+      "tr": "Dad and Mum are at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא אוֹכֵל וְשׁוֹתֶה.",
+      "tr": "He eats and drinks.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מוֹרָה וְאַתְּ סְטוּדֶנְטִית.",
+      "tr": "I am a teacher and you (f.) are a student.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "וְגַם",
+      "tr": "and also"
+     },
+     {
+      "text": "וְעוֹד",
+      "tr": "and more; moreover"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "תֹּהוּ וָבֹהוּ",
+      "tr": "formless and void",
+      "kind": "idiom",
+      "meaning": "total chaos (from Genesis 1:2)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym: וְ is the only “and”; גַּם means “also, too”.",
+    "etymology": {
+     "text": "From Proto-Semitic *wa. Cognate with Arabic وَ (wa).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic وَ (wa) is written attached in the same way."
+    ],
+    "pitfalls": [
+     "Before ב, מ, פ and before a shva the normative form is וּ: גֶּזֶר וּמְלָפְפוֹן; a following ב / כ / פ then loses its dagesh (לֶחֶם וּבָצָל).",
+     "Before a hataf vowel it copies the vowel: וַחֲצִילִים; before יְ it becomes וִי: וִירָקוֹת.",
+     "It is never written as a separate word."
+    ],
+    "subtleties": [
+     "In everyday speech most people say ve- everywhere; u- is heard in careful speech, the news and reading aloud.",
+     "In pairs it is sometimes וָ: תֹּהוּ וָבֹהוּ, יוֹם וָלַיְלָה."
+    ]
+   }
+  },
+  {
+   "id": "he:gever",
+   "lemma": "גֶּבֶר",
+   "pos": "NOUN",
+   "senses": [
+    "person.man"
+   ],
+   "gender": "MASC",
+   "translit": "gever",
+   "features": {
+    "spelling": "גבר",
+    "root": "ג ב ר",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "גְּבָרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גֶּבֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גַּבְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "גֶּבֶר",
+    "N;SG;DEF": "הַגֶּבֶר",
+    "N;PL;INDF": "גְּבָרִים",
+    "N;PL;DEF": "הַגְּבָרִים",
+    "N;SG;CONST": "גֶּבֶר",
+    "N;PL;CONST": "גַּבְרֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An adult man — men and women, the sign on the door, and (in slang) a “real man”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "man (an adult male)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.man"
+     },
+     {
+      "id": "s2",
+      "def": "dude, man (a friendly colloquial address: גֶּבֶר!)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא גֶּבֶר נֶחְמָד.",
+      "tr": "He is a nice man.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּכִּתָּה יֵשׁ עֶשֶׂר נָשִׁים וַחֲמִשָּׁה גְּבָרִים.",
+      "tr": "There are ten women and five men in the class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "מַה נִּשְׁמַע, גֶּבֶר?",
+      "tr": "What’s up, man?",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גְּבָרִים וְנָשִׁים",
+      "tr": "men and women"
+     },
+     {
+      "text": "גֶּבֶר צָעִיר",
+      "tr": "a young man"
+     },
+     {
+      "text": "שֵׁרוּתֵי גְּבָרִים",
+      "tr": "men’s toilets"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אִישׁ",
+      "register": "neutral",
+      "nuance": "“a man, someone” (אִישׁ אֶחָד “a man, one man”); its plural אֲנָשִׁים means “people”, not “men”"
+     },
+     {
+      "word": "בָּחוּר",
+      "register": "colloquial",
+      "nuance": "a young man, a guy"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "אִשָּׁה",
+      "note": "woman"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-West Semitic *gabr-; compare Aramaic גַּבְרָא (gaḇrā, “man”). Root ג־ב־ר, as in the verb גָּבַר “to become stronger, to prevail”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives גִּבּוֹר “hero” and גְּבוּרָה “heroism”, and the name גַּבְרִיאֵל (Gabriel).",
+     "The feminine counterpart is גְּבֶרֶת “lady, Mrs.” — a speech opens with גְּבִירוֹתַי וְרַבּוֹתַי “ladies and gentlemen”."
+    ],
+    "pitfalls": [
+     "“Men” is גְּבָרִים; אֲנָשִׁים means “people” (the plural of אִישׁ), not “men”.",
+     "The first vowel changes in the plural: גֶּבֶר → גְּבָרִים."
+    ],
+    "subtleties": [
+     "On signs and forms the pair is גְּבָרִים / נָשִׁים (men / women); in polite address one says אֲדוֹנִי “sir” and גְּבִרְתִּי “madam”.",
+     "Calling a friend גֶּבֶר! is friendly slang (“dude!”)."
+    ]
+   }
+  },
+  {
+   "id": "he:isha",
+   "lemma": "אִשָּׁה",
+   "pos": "NOUN",
+   "senses": [
+    "person.woman",
+    "family.wife"
+   ],
+   "gender": "FEM",
+   "translit": "isha",
+   "features": {
+    "spelling": "אישה",
+    "root": "א נ שׁ",
+    "pattern": "קִטְלָה",
+    "plurals": [
+     {
+      "form": "נָשִׁים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֵשֶׁת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נְשׁוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "אִשָּׁה",
+    "N;SG;DEF": "הָאִשָּׁה",
+    "N;PL;INDF": "נָשִׁים",
+    "N;PL;DEF": "הַנָּשִׁים",
+    "N;POSS;1;SG": "אִשְׁתִּי",
+    "N;POSS;2;SG;MASC": "אִשְׁתְּךָ",
+    "N;POSS;2;SG;FEM": "אִשְׁתֵּךְ",
+    "N;POSS;3;SG;MASC": "אִשְׁתּוֹ",
+    "N;POSS;3;SG;FEM": "אִשְׁתָּהּ",
+    "N;POSS;1;PL": "אִשְׁתֵּנוּ",
+    "N;POSS;2;PL;MASC": "אִשְׁתְּכֶם",
+    "N;POSS;2;PL;FEM": "אִשְׁתְּכֶן",
+    "N;POSS;3;PL;MASC": "אִשְׁתָּם",
+    "N;POSS;3;PL;FEM": "אִשְׁתָּן",
+    "N;SG;CONST": "אֵשֶׁת",
+    "N;PL;CONST": "נְשׁוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "אישה",
+    "N;SG;DEF": "האישה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An adult woman; with “his / my”, a wife.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "woman (an adult female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.woman"
+     },
+     {
+      "id": "s2",
+      "def": "wife (הָאִשָּׁה שֶׁלּוֹ “his wife”; with a suffix אִשְׁתִּי “my wife”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.wife"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא אִשָּׁה חֲכָמָה.",
+      "tr": "She is a clever woman.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנָּשִׁים הָאֵלֶּה מוֹרוֹת.",
+      "tr": "These women are teachers.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "זֹאת הָאִשָּׁה שֶׁלּוֹ.",
+      "tr": "This is his wife.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "אִשְׁתִּי מוֹרָה.",
+      "tr": "My wife is a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "גְּבָרִים וְנָשִׁים",
+      "tr": "men and women"
+     },
+     {
+      "text": "אִשָּׁה צְעִירָה",
+      "tr": "a young woman"
+     },
+     {
+      "text": "אֵשֶׁת עֲסָקִים",
+      "tr": "a businesswoman"
+     },
+     {
+      "text": "בַּעַל וְאִשָּׁה",
+      "tr": "husband and wife"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֵשֶׁת חַיִל מִי יִמְצָא",
+      "tr": "a woman of valour, who can find?",
+      "kind": "quote",
+      "meaning": "praise of a capable, devoted woman; sung at home on Friday evening",
+      "register": "literary",
+      "source": "Proverbs 31:10"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "גְּבֶרֶת",
+      "register": "formal",
+      "nuance": "“lady; Mrs.” — the polite word in address and titles (גְּבֶרֶת כֹּהֵן “Mrs. Cohen”)"
+     },
+     {
+      "word": "בַּחוּרָה",
+      "register": "colloquial",
+      "nuance": "a young woman, a “gal”"
+     },
+     {
+      "word": "בַּת זוּג",
+      "register": "neutral",
+      "nuance": "“partner, spouse” (of a woman) — for “wife”, neutral and equal; many couples prefer it"
+     },
+     {
+      "word": "רַעְיָה",
+      "register": "formal",
+      "nuance": "“wife, consort” — formal and literary (invitations, speeches)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "גֶּבֶר",
+      "note": "man"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔanθ-at-. Cognate with Aramaic אִנְתְּתָא (ʾintəṯā) and Arabic أُنْثَى (ʔunṯā, “female”). Wiktionary notes that it is a false cognate of אִישׁ “man”: Semitic š and ṯ merged into Hebrew שׁ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Genesis 2:23 explains אִשָּׁה “woman” as taken from אִישׁ “man” — a famous wordplay; historically the two words come from different roots.",
+     "The true cousin is Arabic أُنْثَى (ʔunṯā) “female”."
+    ],
+    "pitfalls": [
+     "The plural is irregular — נָשִׁים — and it stays feminine although it ends in -ִים: הַנָּשִׁים הָהֵן “those women”.",
+     "The modern full spelling is אישה (with י); the older spelling אשה is still seen."
+    ],
+    "subtleties": [
+     "With a possessive it means “wife”: אִשְׁתִּי “my wife”, אִשְׁתּוֹ “his wife” (from the construct form אֵשֶׁת־).",
+     "The article takes a qamats before א: הָאִשָּׁה."
+    ]
+   }
+  },
+  {
+   "id": "he:yeled",
+   "lemma": "יֶלֶד",
+   "pos": "NOUN",
+   "senses": [
+    "person.child",
+    "person.boy",
+    "family.child"
+   ],
+   "gender": "MASC",
+   "translit": "yeled",
+   "features": {
+    "spelling": "ילד",
+    "root": "י ל ד",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "יְלָדִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יֶלֶד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "יַלְדֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יֶלֶד",
+    "N;SG;DEF": "הַיֶּלֶד",
+    "N;PL;INDF": "יְלָדִים",
+    "N;PL;DEF": "הַיְּלָדִים",
+    "N;SG;CONST": "יֶלֶד",
+    "N;PL;CONST": "יַלְדֵי"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Childhood, play, family — the everyday word for a kid.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "child, kid (the plural יְלָדִים is “children”, boys and girls together)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.child"
+     },
+     {
+      "id": "s2",
+      "def": "boy (a male child)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.boy"
+     },
+     {
+      "id": "s3",
+      "def": "child, son (one’s own child)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "family.child"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָהֶם שְׁלוֹשָׁה יְלָדִים.",
+      "tr": "They have three children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים מְשַׂחֲקִים בַּגַּן.",
+      "tr": "The children are playing in the park.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא יֶלֶד טוֹב.",
+      "tr": "He is a good boy.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s2"
+     },
+     {
+      "text": "יֶלֶד וְיַלְדָּה מְשַׂחֲקִים בַּחוּץ.",
+      "tr": "A boy and a girl are playing outside.",
+      "register": "neutral",
+      "context": "playground",
+      "sense": "s2"
+     },
+     {
+      "text": "הַיֶּלֶד שֶׁלִּי בֶּן חָמֵשׁ.",
+      "tr": "My child is five.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יֶלֶד קָטָן",
+      "tr": "a little boy, a small child"
+     },
+     {
+      "text": "גַּן יְלָדִים",
+      "tr": "kindergarten"
+     },
+     {
+      "text": "יְלָדִים וּמְבֻגָּרִים",
+      "tr": "children and adults"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נַעַר",
+      "register": "neutral",
+      "nuance": "a boy in his teens, a youth — older than a יֶלֶד"
+     },
+     {
+      "word": "טַף",
+      "register": "literary",
+      "nuance": "small children as a group (collective, formal)"
+     },
+     {
+      "word": "בֵּן",
+      "register": "neutral",
+      "nuance": "“son” — the family relation, not the age"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *walad-. Compare Arabic وَلَد (walad, “child”), وَلَدَ (walada, “to give birth”), Ge’ez ወልድ (wäld, “child”). Root י־ל־ד “to give birth” (יָלַד).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew turned a word-initial w into y: Arabic وَلَد walad ~ יֶלֶד yeled.",
+     "Turkish evlat “child, offspring” comes from Arabic أَوْلَاد (awlād), the plural of وَلَد — a cousin of יֶלֶד."
+    ],
+    "pitfalls": [
+     "יְלָדִים means “children” (boys and girls together); for girls only say יְלָדוֹת.",
+     "The vowels change in the plural: יֶלֶד → יְלָדִים."
+    ],
+    "subtleties": [
+     "יֶלֶד is both “boy” and “child”; when the sex matters, Hebrew contrasts יֶלֶד / יַלְדָּה.",
+     "Among adults it can mean “a kid”: הוּא עוֹד יֶלֶד “he’s still a kid”."
+    ]
+   }
+  },
+  {
+   "id": "he:yalda",
+   "lemma": "יַלְדָּה",
+   "pos": "NOUN",
+   "senses": [
+    "person.girl"
+   ],
+   "gender": "FEM",
+   "translit": "yalda",
+   "features": {
+    "spelling": "ילדה",
+    "root": "י ל ד",
+    "pattern": "קַטְלָה",
+    "plurals": [
+     {
+      "form": "יְלָדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יַלְדַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "יַלְדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "יַלְדָּה",
+    "N;SG;DEF": "הַיַּלְדָּה",
+    "N;PL;INDF": "יְלָדוֹת",
+    "N;PL;DEF": "הַיְּלָדוֹת",
+    "N;SG;CONST": "יַלְדַּת",
+    "N;PL;CONST": "יַלְדוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A little girl — play, school, family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "girl (a female child)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.girl"
+     },
+     {
+      "id": "s2",
+      "def": "girl (of a young woman; affectionate or condescending)",
+      "register": [
+       "colloquial"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לָנוּ יַלְדָּה וְיֶלֶד.",
+      "tr": "We have a girl and a boy.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיַּלְדָּה הַזֹּאת תַּלְמִידָה.",
+      "tr": "This girl is a pupil.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדוֹת מְשַׂחֲקוֹת בַּגַּן.",
+      "tr": "The girls are playing in the park.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יַלְדָּה קְטַנָּה",
+      "tr": "a little girl"
+     },
+     {
+      "text": "יְלָדִים וִילָדוֹת",
+      "tr": "boys and girls"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בַּת",
+      "register": "neutral",
+      "nuance": "“daughter”; in the plural, הַבָּנוֹת is also everyday “the girls”"
+     },
+     {
+      "word": "נַעֲרָה",
+      "register": "neutral",
+      "nuance": "a girl in her teens, a young woman"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "יֶלֶד",
+      "note": "boy"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of יֶלֶד (Wiktionary lists it as the feminine form), from the root י־ל־ד “to give birth”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Unvocalized ילדה is also the verb יָלְדָה “she gave birth” — the same root."
+    ],
+    "pitfalls": [
+     "The plural is יְלָדוֹת (girls); יְלָדִים is “children” or “boys”.",
+     "The ד of יַלְדָּה has a dagesh (yal-da); the ד of יֶלֶד has none."
+    ],
+    "subtleties": [
+     "Adults sometimes call a young woman יַלְדָּה — affectionate or belittling, depending on the tone (Wiktionary: “can be a compliment or an insult”)."
+    ]
+   }
+  },
+  {
+   "id": "he:adam",
+   "lemma": "אָדָם",
+   "pos": "NOUN",
+   "class": "sgt",
+   "senses": [
+    "person.person"
+   ],
+   "gender": "MASC",
+   "translit": "adam",
+   "features": {
+    "spelling": "אדם",
+    "root": "א ד ם",
+    "pattern": "קָטָל",
+    "plurals": {
+     "none": "no plural in use"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "not used as the first word of a construct (“the people of …” is אַנְשֵׁי …)"
+    },
+    "meaningForms": [
+     {
+      "form": "הָאָדָם",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: man, humankind"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "אָדָם",
+    "N;SG;DEF": "הָאָדָם"
+   },
+   "note": "No plural in use: “people” is אֲנָשִׁים (or בְּנֵי אָדָם).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses the noun אָדָם “man, human”; in Modern Hebrew it is the ordinary word for “a person, a human being” (אָדָם טוֹב “a good person”, כָּל אָדָם “every person”)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A human being — neutral and a little serious; the warm everyday word is בֶּן אָדָם.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "person, human being",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.person"
+     },
+     {
+      "id": "s2",
+      "def": "man, humankind (with the article: הָאָדָם)",
+      "register": [
+       "formal"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אָדָם טוֹב.",
+      "tr": "He is a good person.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s1"
+     },
+     {
+      "text": "כָּל אָדָם יָכוֹל לִלְמֹד עִבְרִית.",
+      "tr": "Every person can learn Hebrew.",
+      "register": "neutral",
+      "context": "learning",
+      "sense": "s1"
+     },
+     {
+      "text": "זְכֻיּוֹת הָאָדָם חֲשׁוּבוֹת.",
+      "tr": "Human rights are important.",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כָּל אָדָם",
+      "tr": "every person, everyone"
+     },
+     {
+      "text": "בֶּן אָדָם",
+      "tr": "a person (colloquial); a decent person"
+     },
+     {
+      "text": "זְכֻיּוֹת הָאָדָם",
+      "tr": "human rights"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֹא טוֹב הֱיוֹת הָאָדָם לְבַדּוֹ",
+      "tr": "it is not good for man to be alone",
+      "kind": "quote",
+      "meaning": "people need company",
+      "register": "literary",
+      "source": "Genesis 2:18"
+     },
+     {
+      "text": "אָדָם לְאָדָם זְאֵב",
+      "tr": "man is a wolf to man",
+      "kind": "saying",
+      "meaning": "people are cruel to each other (the Latin homo homini lupus)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בֶּן אָדָם",
+      "register": "colloquial",
+      "nuance": "the everyday “person” (plural בְּנֵי אָדָם “people”); הוּא בֶּן אָדָם can also mean “he’s a decent person, a mensch”"
+     },
+     {
+      "word": "אִישׁ",
+      "register": "neutral",
+      "nuance": "“a man; someone” — and in counting crowds: מֵאָה אִישׁ “a hundred people”"
+     },
+     {
+      "word": "אֱנוֹשׁ",
+      "register": "literary",
+      "nuance": "“mortal, human” — poetic"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔadam-; compare Phoenician ʾdm (“man”) and Ugaritic ảdm (“man; red earth”). Wiktionary relates the word to *dam- “blood” and the colour red: Hebrew דָּם “blood”, אָדֹם “red”, אֲדָמָה “earth, soil”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Genesis links אָדָם with אֲדָמָה “earth”: the first human is formed from the soil.",
+     "Arabic آدَم (Ādam) is the same name; Turkish uses adam for “man, person” in everyday speech."
+    ],
+    "pitfalls": [
+     "אָדָם has no plural in use: “people” is אֲנָשִׁים or בְּנֵי אָדָם.",
+     "With the article, הָאָדָם often means “man, humankind” in general, not “the person”."
+    ],
+    "subtleties": [
+     "In speech the compound בֶּן אָדָם (often pronounced benadam) is more common than plain אָדָם for “a person”."
+    ]
+   }
+  },
+  {
+   "id": "he:anashim",
+   "lemma": "אֲנָשִׁים",
+   "pos": "NOUN",
+   "class": "plt",
+   "senses": [
+    "person.people"
+   ],
+   "gender": "MASC",
+   "translit": "anashim",
+   "features": {
+    "spelling": "אנשים",
+    "root": "א נ שׁ",
+    "pattern": {
+     "none": "the plural of אִישׁ “man”, not built on a pattern of its own"
+    },
+    "plurals": {
+     "none": "used only in the plural: the word itself is the plural (of אִישׁ “man”)"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַנְשֵׁי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;PL;INDF": "אֲנָשִׁים",
+    "N;PL;DEF": "הָאֲנָשִׁים",
+    "N;PL;CONST": "אַנְשֵׁי"
+   },
+   "note": "Plural only: grammatically the plural of אִישׁ “man”, used as the plural of “person”.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary files אֲנָשִׁים only as “plural indefinite form of אִישׁ”; its meaning in use is “people, persons”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crowds, company, the people around you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "people, persons (plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.people"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ פֹּה הַרְבֵּה אֲנָשִׁים.",
+      "tr": "There are a lot of people here.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "הָאֲנָשִׁים הָאֵלֶּה חֲבֵרִים שֶׁלִּי.",
+      "tr": "These people are my friends.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "כַּמָּה אֲנָשִׁים בָּאוּ?",
+      "tr": "How many people came?",
+      "register": "neutral",
+      "context": "party",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַרְבֵּה אֲנָשִׁים",
+      "tr": "a lot of people"
+     },
+     {
+      "text": "אֲנָשִׁים טוֹבִים",
+      "tr": "good people"
+     },
+     {
+      "text": "אַנְשֵׁי עֲסָקִים",
+      "tr": "business people"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּנֵי אָדָם",
+      "register": "neutral",
+      "nuance": "“human beings, people” — stresses being human"
+     },
+     {
+      "word": "קָהָל",
+      "register": "neutral",
+      "nuance": "“audience, crowd, the public”"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary files אֲנָשִׁים as the plural of אִישׁ “man” (and of the poetic אֱנוֹשׁ “human”, from Proto-Semitic *ʔināš-). אִישׁ goes back to *ʔinš-: the n lost in the singular shows up in the plural.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic إِنْسَان (insān, “human being”) and نَاس (nās, “people”) share this old root; Turkish insan “human being” is borrowed from the Arabic."
+    ],
+    "pitfalls": [
+     "אֲנָשִׁים is the plural of אִישׁ “man” but means “people” (men and women); “men” is גְּבָרִים.",
+     "“A people, a nation” is עַם, not אֲנָשִׁים."
+    ],
+    "subtleties": [
+     "When counting big groups, formal Hebrew uses the singular אִישׁ after the number: אֶלֶף אִישׁ “a thousand people”."
+    ]
+   }
+  },
+  {
+   "id": "he:chaver",
+   "lemma": "חָבֵר",
+   "pos": "NOUN",
+   "senses": [
+    "person.friend",
+    "person.boyfriend",
+    "person.member"
+   ],
+   "gender": "MASC",
+   "translit": "chaver",
+   "features": {
+    "spelling": "חבר",
+    "root": "ח ב ר",
+    "pattern": "קָטֵל",
+    "plurals": [
+     {
+      "form": "חֲבֵרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲבֵר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַבְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חָבֵר",
+    "N;SG;DEF": "הֶחָבֵר",
+    "N;PL;INDF": "חֲבֵרִים",
+    "N;PL;DEF": "הַחֲבֵרִים",
+    "N;SG;CONST": "חֲבֵר",
+    "N;PL;CONST": "חַבְרֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    },
+    {
+     "concept": "person.member",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warmth and loyalty — friends, comrades, members.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "friend (male; the plural also for a mixed group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.friend"
+     },
+     {
+      "id": "s2",
+      "def": "boyfriend",
+      "register": [
+       "informal"
+      ],
+      "concept": "person.boyfriend"
+     },
+     {
+      "id": "s3",
+      "def": "member (of a party, club, the Knesset); comrade",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.member"
+     }
+    ],
+    "examples": [
+     {
+      "text": "יוֹסִי הוּא חָבֵר טוֹב.",
+      "tr": "Yossi is a good friend.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי הוֹלֵךְ לַחֲבֵרִים.",
+      "tr": "I’m going over to my friends.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָהּ חָבֵר.",
+      "tr": "She has a boyfriend.",
+      "register": "informal",
+      "context": "relationships",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא חָבֵר בַּמִּפְלָגָה.",
+      "tr": "He is a member of the party.",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חָבֵר טוֹב",
+      "tr": "a good friend"
+     },
+     {
+      "text": "חָבֵר קָרוֹב",
+      "tr": "a close friend"
+     },
+     {
+      "text": "חֲבֵר כְּנֶסֶת",
+      "tr": "a member of the Knesset (abbreviated ח״כ)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יָדִיד",
+      "register": "formal",
+      "nuance": "a friend in a more formal or literary register — also a safe way to say “just a friend”"
+     },
+     {
+      "word": "אָחִי",
+      "register": "slang",
+      "nuance": "“bro” — literally “my brother”, a friendly address"
+     },
+     {
+      "word": "רֵעַ",
+      "register": "literary",
+      "nuance": "a companion, a fellow (Biblical and poetic)"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Arabic خ ب ر (ḵ b r) and Aramaic חבר. Root ח־ב־ר “to join, to be associated” (the verb חָבַר “to join, to be friends with”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Yiddish khaver “friend, comrade” comes from this word, and the slang חֶבְרֶ׳ה “the gang, the guys” goes back to Hebrew חֶבְרָה “company” through Yiddish khevre.",
+     "In the kibbutz movement חָבֵר also meant “comrade, member”."
+    ],
+    "pitfalls": [
+     "With the article: הֶחָבֵר (not *הַחָבֵר), but in the plural הַחֲבֵרִים.",
+     "הֶחָבֵר שֶׁלִּי usually means “my boyfriend”; “a friend of mine” is חָבֵר שֶׁלִּי."
+    ],
+    "subtleties": [
+     "The plural חֲבֵרִים covers a mixed group of friends; for female friends only, say חֲבֵרוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:chavera",
+   "lemma": "חֲבֵרָה",
+   "pos": "NOUN",
+   "senses": [
+    "person.friend",
+    "person.girlfriend",
+    "person.member"
+   ],
+   "gender": "FEM",
+   "translit": "chavera",
+   "features": {
+    "spelling": "חברה",
+    "root": "ח ב ר",
+    "pattern": "קְטֵלָה",
+    "plurals": [
+     {
+      "form": "חֲבֵרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲבֶרֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַבְרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "חֲבֵרָה",
+    "N;SG;DEF": "הַחֲבֵרָה",
+    "N;PL;INDF": "חֲבֵרוֹת",
+    "N;PL;DEF": "הַחֲבֵרוֹת",
+    "N;SG;CONST": "חֲבֶרֶת",
+    "N;PL;CONST": "חַבְרוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "gender of the person",
+     "value": "a woman"
+    },
+    {
+     "concept": "person.member",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A (female) friend — closeness, chats, company.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "friend (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.friend"
+     },
+     {
+      "id": "s2",
+      "def": "girlfriend",
+      "register": [
+       "informal"
+      ],
+      "concept": "person.girlfriend"
+     },
+     {
+      "id": "s3",
+      "def": "member (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.member"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שָׂרָה הִיא חֲבֵרָה שֶׁלִּי.",
+      "tr": "Sarah is a friend of mine.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא נִפְגֶּשֶׁת עִם חֲבֵרוֹת.",
+      "tr": "She is meeting (girl)friends.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲבֵרָה שֶׁלּוֹ מוֹרָה.",
+      "tr": "His girlfriend is a teacher.",
+      "register": "informal",
+      "context": "relationships",
+      "sense": "s2"
+     },
+     {
+      "text": "הִיא חֲבֵרָה בַּמִּפְלָגָה.",
+      "tr": "She is a member of the party.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חֲבֵרָה טוֹבָה",
+      "tr": "a good friend (f.)"
+     },
+     {
+      "text": "חֲבֵרָה קְרוֹבָה",
+      "tr": "a close friend (f.)"
+     },
+     {
+      "text": "חֲבֵרוֹת לַכִּתָּה",
+      "tr": "classmates (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "יְדִידָה",
+      "register": "formal",
+      "nuance": "a (female) friend in a more formal or literary register — and a clear way to say “just a friend”"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of חָבֵר (Wiktionary lists it as its feminine form), root ח־ב־ר “to join”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "חֶבְרָה “company, society” comes from the same root: people joined together."
+    ],
+    "pitfalls": [
+     "Unvocalized חברה is either חֲבֵרָה “a friend (f.)” or חֶבְרָה “a company, society” — context decides.",
+     "הַחֲבֵרָה שֶׁלִּי usually means “my girlfriend”."
+    ],
+    "subtleties": [
+     "Women often call their friends הַחֲבֵרוֹת (“my girlfriends”) with no romantic meaning."
+    ]
+   }
+  },
+  {
+   "id": "he:talmid",
+   "lemma": "תַּלְמִיד",
+   "pos": "NOUN",
+   "senses": [
+    "person.student",
+    "person.disciple"
+   ],
+   "gender": "MASC",
+   "translit": "talmid",
+   "features": {
+    "spelling": "תלמיד",
+    "root": "ל מ ד",
+    "pattern": "תַּקְטִיל",
+    "plurals": [
+     {
+      "form": "תַּלְמִידִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּלְמִיד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּלְמִידֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תַּלְמִיד",
+    "N;SG;DEF": "הַתַּלְמִיד",
+    "N;PL;INDF": "תַּלְמִידִים",
+    "N;PL;DEF": "הַתַּלְמִידִים",
+    "N;SG;CONST": "תַּלְמִיד",
+    "N;PL;CONST": "תַּלְמִידֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a pupil at school, a boy (plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "School bags, classrooms, homework.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pupil, schoolboy (a student at school)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student"
+     },
+     {
+      "id": "s2",
+      "def": "disciple (of a teacher or a rabbi)",
+      "register": [
+       "formal"
+      ],
+      "concept": "person.disciple"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא תַּלְמִיד בְּכִתָּה שְׁלִישִׁית.",
+      "tr": "He is a pupil in the third grade.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתַּלְמִידִים יוֹצְאִים לַהַפְסָקָה.",
+      "tr": "The pupils go out for the break.",
+      "register": "neutral",
+      "context": "break time",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא תַּלְמִיד שֶׁל הָרַב.",
+      "tr": "He is the rabbi’s disciple.",
+      "register": "formal",
+      "context": "religion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּלְמִיד טוֹב",
+      "tr": "a good pupil"
+     },
+     {
+      "text": "תַּלְמִידֵי תִּיכוֹן",
+      "tr": "high-school pupils"
+     },
+     {
+      "text": "תַּלְמִיד חָכָם",
+      "tr": "a learned man, a Torah scholar"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "תַּלְמִיד חָכָם",
+      "tr": "a wise disciple",
+      "kind": "idiom",
+      "meaning": "a learned man, a Torah scholar",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "סְטוּדֶנְט",
+      "register": "neutral",
+      "nuance": "a university or college student — not a school pupil"
+     },
+     {
+      "word": "חָנִיךְ",
+      "register": "neutral",
+      "nuance": "a member of a youth movement, a trainee"
+     }
+    ],
+    "etymology": {
+     "text": "From Akkadian talmīdu. Cognate with Aramaic תלמידא (talmīḏā). Root ל־מ־ד “to learn” (לָמַד), as in תַּלְמוּד “Talmud, learning”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Same root as the Talmud (תַּלְמוּד “learning”) and לָמַד “to learn”; Arabic تِلْمِيذ (tilmīdh, “pupil”) is a close relative."
+    ],
+    "pitfalls": [
+     "תַּלְמִיד is a pupil at school; at a university you are a סְטוּדֶנְט.",
+     "A class of girls and boys is תַּלְמִידִים (masculine plural)."
+    ],
+    "subtleties": [
+     "In religious language תַּלְמִיד is a rabbi’s disciple; תַּלְמִיד חָכָם is a learned person, not “a clever pupil”."
+    ]
+   }
+  },
+  {
+   "id": "he:talmida",
+   "lemma": "תַּלְמִידָה",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "gender": "FEM",
+   "translit": "talmida",
+   "features": {
+    "spelling": "תלמידה",
+    "root": "ל מ ד",
+    "pattern": "תַּקְטִילָה",
+    "plurals": [
+     {
+      "form": "תַּלְמִידוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּלְמִידַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּלְמִידוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "תַּלְמִידָה",
+    "N;SG;DEF": "הַתַּלְמִידָה",
+    "N;PL;INDF": "תַּלְמִידוֹת",
+    "N;PL;DEF": "הַתַּלְמִידוֹת",
+    "N;SG;CONST": "תַּלְמִידַת",
+    "N;PL;CONST": "תַּלְמִידוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a pupil at school, a girl"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A schoolgirl — classes, notebooks, friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pupil, schoolgirl (a female student at school)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא תַּלְמִידָה בְּכִתָּה שְׁלִישִׁית.",
+      "tr": "She is a pupil in the third grade.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתַּלְמִידוֹת כּוֹתְבוֹת מִבְחָן.",
+      "tr": "The (female) pupils are writing a test.",
+      "register": "neutral",
+      "context": "exam",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא הָיְתָה תַּלְמִידָה טוֹבָה.",
+      "tr": "She was a good pupil.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּלְמִידָה טוֹבָה",
+      "tr": "a good pupil (f.)"
+     },
+     {
+      "text": "תַּלְמִידַת תִּיכוֹן",
+      "tr": "a high-school girl"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סְטוּדֶנְטִית",
+      "register": "neutral",
+      "nuance": "a female university student"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of תַּלְמִיד (from Akkadian talmīdu), root ל־מ־ד “to learn”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Israeli schools often write to mixed classes with both forms, e.g. תלמידים/ות."
+    ],
+    "pitfalls": [
+     "A class of girls and boys is תַּלְמִידִים (masculine plural); תַּלְמִידוֹת is girls only."
+    ],
+    "subtleties": [
+     "תַּלְמִידָה is a school pupil; a woman at a university is a סְטוּדֶנְטִית."
+    ]
+   }
+  },
+  {
+   "id": "he:student",
+   "lemma": "סְטוּדֶנְט",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "gender": "MASC",
+   "translit": "student",
+   "features": {
+    "spelling": "סטודנט",
+    "root": {
+     "none": "a loanword (an internationalism, from Latin studens): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סְטוּדֶנְטִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְטוּדֶנְט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְטוּדֶנְטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סְטוּדֶנְט",
+    "N;SG;DEF": "הַסְּטוּדֶנְט",
+    "N;PL;INDF": "סְטוּדֶנְטִים",
+    "N;PL;DEF": "הַסְּטוּדֶנְטִים",
+    "N;SG;CONST": "סְטוּדֶנְט",
+    "N;PL;CONST": "סְטוּדֶנְטֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a university student, a man (plural also mixed)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Lectures, exams, cheap coffee — university life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "student (at a university or college)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי סְטוּדֶנְט לִרְפוּאָה.",
+      "tr": "I am a medical student.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּטוּדֶנְטִים לוֹמְדִים בַּסִּפְרִיָּה.",
+      "tr": "The students study in the library.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ הֲנָחָה לִסְטוּדֶנְטִים.",
+      "tr": "There is a discount for students.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְטוּדֶנְט לִרְפוּאָה",
+      "tr": "a medical student"
+     },
+     {
+      "text": "תְּעוּדַת סְטוּדֶנְט",
+      "tr": "a student card"
+     },
+     {
+      "text": "מְעוֹנוֹת סְטוּדֶנְטִים",
+      "tr": "student dorms"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תַּלְמִיד",
+      "register": "neutral",
+      "nuance": "a school pupil (and a disciple) — university students are not called תַּלְמִידִים"
+     },
+     {
+      "word": "לוֹמֵד",
+      "register": "formal",
+      "nuance": "“learner” — used in official texts"
+     }
+    ],
+    "etymology": {
+     "text": "Internationalism, ultimately from Latin studens. Compare Polish student, Ukrainian студе́нт (studént).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A word you already know: German Student, Russian студент; Greek says φοιτητής and Turkish öğrenci instead."
+    ],
+    "pitfalls": [
+     "A pupil at school is a תַּלְמִיד, not a סְטוּדֶנְט.",
+     "The article doubles the ס: הַסְּטוּדֶנְט."
+    ],
+    "subtleties": [
+     "The stress is on the last syllable: stu-DENT."
+    ]
+   }
+  },
+  {
+   "id": "he:studentit",
+   "lemma": "סְטוּדֶנְטִית",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "gender": "FEM",
+   "translit": "studentit",
+   "features": {
+    "spelling": "סטודנטית",
+    "root": {
+     "none": "a loanword (סְטוּדֶנְט with the Hebrew feminine ending ־ִית): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סְטוּדֶנְטִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְטוּדֶנְטִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְטוּדֶנְטִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "סְטוּדֶנְטִית",
+    "N;SG;DEF": "הַסְּטוּדֶנְטִית",
+    "N;PL;INDF": "סְטוּדֶנְטִיּוֹת",
+    "N;PL;DEF": "הַסְּטוּדֶנְטִיּוֹת",
+    "N;SG;CONST": "סְטוּדֶנְטִית",
+    "N;PL;CONST": "סְטוּדֶנְטִיּוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a university student, a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "note": "Wiktionary has no page for סטודנטית; it lists סְטוּדֶנְטִית as the feminine of סְטוּדֶנְט."
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "University life — from a woman’s side of the lecture hall.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "student (female, at a university or college)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא סְטוּדֶנְטִית לְמִשְׁפָּטִים.",
+      "tr": "She is a law student.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסְּטוּדֶנְטִיּוֹת גָּרוֹת בְּדִירָה.",
+      "tr": "The (female) students live in a flat.",
+      "register": "neutral",
+      "context": "housing",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי סְטוּדֶנְטִית, יֵשׁ לִי הֲנָחָה?",
+      "tr": "I’m a student (f.) — do I get a discount?",
+      "register": "informal",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְטוּדֶנְטִית לְמִשְׁפָּטִים",
+      "tr": "a law student (f.)"
+     },
+     {
+      "text": "סְטוּדֶנְטִית בְּשָׁנָה רִאשׁוֹנָה",
+      "tr": "a first-year student (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תַּלְמִידָה",
+      "register": "neutral",
+      "nuance": "a schoolgirl, a pupil"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of the internationalism סְטוּדֶנְט (Wiktionary lists it as its feminine form), made with the Hebrew suffix ־ִית.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Studentin and Russian студентка also make the feminine with a suffix — Hebrew ־ִית does the same job."
+    ],
+    "pitfalls": [
+     "Plural סְטוּדֶנְטִיּוֹת: -ִית becomes -ִיּוֹת.",
+     "A mixed group of students is סְטוּדֶנְטִים."
+    ],
+    "subtleties": [
+     "The feminine suffix ־ִית is the one Hebrew adds to many borrowed masculine nouns."
+    ]
+   }
+  },
+  {
+   "id": "he:more",
+   "lemma": "מוֹרֶה",
+   "pos": "NOUN",
+   "senses": [
+    "person.teacher"
+   ],
+   "gender": "MASC",
+   "translit": "more",
+   "features": {
+    "spelling": "מורה",
+    "root": "י ר ה",
+    "pattern": "מַקְטִיל",
+    "plurals": [
+     {
+      "form": "מוֹרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹרֵה"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹרֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "מוֹרֵה",
+      "senses": [
+       "s2"
+      ],
+      "note": "in this meaning only in the construct: מוֹרֵה דֶּרֶךְ “tour guide”, מוֹרֵה נְהִיגָה “driving instructor”"
+     }
+    ]
+   },
+   "forms": {
+    "N;SG;INDF": "מוֹרֶה",
+    "N;SG;DEF": "הַמּוֹרֶה",
+    "N;PL;INDF": "מוֹרִים",
+    "N;PL;DEF": "הַמּוֹרִים",
+    "N;SG;CONST": "מוֹרֵה",
+    "N;PL;CONST": "מוֹרֵי"
+   },
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Classrooms, chalk, patience — the man in front of the class.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "teacher (male)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.teacher"
+     },
+     {
+      "id": "s2",
+      "def": "guide, instructor — in the construct form מוֹרֵה־: מוֹרֵה דֶּרֶךְ “tour guide”, מוֹרֵה נְהִיגָה “driving instructor”",
+      "register": [
+       "neutral"
+      ],
+      "of": "s1"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַמּוֹרֶה שֶׁלִּי סַבְלָנִי מְאוֹד.",
+      "tr": "My teacher is very patient.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא מוֹרֶה לְמָתֵמָטִיקָה.",
+      "tr": "He is a maths teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמּוֹרִים בְּבֵית הַסֵּפֶר שֶׁלָּנוּ טוֹבִים.",
+      "tr": "The teachers at our school are good.",
+      "register": "neutral",
+      "context": "parents’ evening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מוֹרֶה לְאַנְגְּלִית",
+      "tr": "an English teacher"
+     },
+     {
+      "text": "חֲדַר מוֹרִים",
+      "tr": "the staff room"
+     },
+     {
+      "text": "מוֹרֵה דֶּרֶךְ",
+      "tr": "a tour guide (construct form מוֹרֵה־)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְחַנֵּךְ",
+      "register": "neutral",
+      "nuance": "the class (homeroom) teacher, responsible for the pupils — literally “educator”"
+     },
+     {
+      "word": "רַב",
+      "register": "religious",
+      "nuance": "“rabbi, master” — a teacher of Torah"
+     },
+     {
+      "word": "מַדְרִיךְ",
+      "register": "neutral",
+      "nuance": "a guide, an instructor, a youth leader"
+     }
+    ],
+    "etymology": {
+     "text": "The present participle of הוֹרָה “to instruct, to teach” (Wiktionary), root י־ר־ה — the root of תּוֹרָה “teaching, the Torah”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Teacher” and “Torah” are relatives: מוֹרֶה is “one who instructs”, תּוֹרָה is “instruction”.",
+     "Unvocalized מורה is also a verb form and an adjective (“rebellious”) — Wiktionary lists all of them."
+    ],
+    "pitfalls": [
+     "The feminine מוֹרָה is spelled with the same letters (מורה): only the vowel, or the context, tells them apart.",
+     "Plural מוֹרִים: the final ה drops."
+    ],
+    "subtleties": [
+     "Israeli pupils often call their teacher by the first name, or simply מוֹרֶה / מוֹרָה — Hebrew has no polite “you”."
+    ]
+   }
+  },
+  {
+   "id": "he:mora",
+   "lemma": "מוֹרָה",
+   "pos": "NOUN",
+   "senses": [
+    "person.teacher"
+   ],
+   "gender": "FEM",
+   "translit": "mora",
+   "features": {
+    "spelling": "מורה",
+    "root": "י ר ה",
+    "pattern": "מַקְטִילָה",
+    "plurals": [
+     {
+      "form": "מוֹרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹרַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "forms": {
+    "N;SG;INDF": "מוֹרָה",
+    "N;SG;DEF": "הַמּוֹרָה",
+    "N;PL;INDF": "מוֹרוֹת",
+    "N;PL;DEF": "הַמּוֹרוֹת",
+    "N;SG;CONST": "מוֹרַת",
+    "N;PL;CONST": "מוֹרוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "gender": "Wiktionary has no page of its own for the feminine מוֹרָה: it lists it on the page of the masculine מוֹרֶה (gender m), whose forms the check then compares.",
+     "N;PL;INDF": "מוֹרִים is the plural of the masculine מוֹרֶה; the plural of מוֹרָה is מוֹרוֹת, which Wiktionary lists on the same page as the feminine plural.",
+     "N;SG;CONST": "Wiktionary’s מוֹרֵה־ is the construct of the masculine מוֹרֶה on the same page; the feminine מוֹרָה has מוֹרַת (like תַּלְמִידָה → תַּלְמִידַת)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The woman in front of the class — and the word every pupil shouts.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "teacher (female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.teacher"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא מוֹרָה לְעִבְרִית בָּאוּלְפָּן.",
+      "tr": "She is a Hebrew teacher at the ulpan.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "מוֹרָה, אֶפְשָׁר לָצֵאת?",
+      "tr": "Teacher, may I go out?",
+      "register": "informal",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "רֹב הַמּוֹרוֹת בְּבֵית הַסֵּפֶר צְעִירוֹת.",
+      "tr": "Most of the (female) teachers at the school are young.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מוֹרָה לְעִבְרִית",
+      "tr": "a Hebrew teacher (f.)"
+     },
+     {
+      "text": "מוֹרָה מְחַנֶּכֶת",
+      "tr": "the class teacher (f.)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְחַנֶּכֶת",
+      "register": "neutral",
+      "nuance": "the class (homeroom) teacher"
+     },
+     {
+      "word": "גַּנֶּנֶת",
+      "register": "neutral",
+      "nuance": "a kindergarten teacher"
+     }
+    ],
+    "etymology": {
+     "text": "The feminine of מוֹרֶה, the participle of הוֹרָה “to teach” (root י־ר־ה, as in תּוֹרָה).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Children in class simply call out “מוֹרָה!” — the word itself is the form of address."
+    ],
+    "pitfalls": [
+     "מוֹרָה (mora) and מוֹרֶה (more) look the same without vowels: מורה.",
+     "Plural מוֹרוֹת; a mixed staff is מוֹרִים."
+    ],
+    "subtleties": [
+     "As a form of address מוֹרָה needs no name or title: “מוֹרָה, יֵשׁ לִי שְׁאֵלָה” (“Teacher, I have a question”)."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "pron.it",
+   "reason": "Hebrew has no neuter and no word for “it”: every noun is masculine or feminine, and a thing is “he” or “she”.",
+   "use": "הוּא for a masculine thing (הַסֵּפֶר? הוּא פֹּה “the book? it’s here”), הִיא for a feminine one (הַמְּנוֹרָה? הִיא שָׁם “the lamp? it’s there”); זֶה for “it” pointing at something or at a whole situation (זֶה טוֹב “it’s good”)."
+  },
+  {
+   "concept": "det.def",
+   "reason": "No separate word: the definite article ha- (הַ, also הָ / הֶ before gutturals) is a prefix and is stored in the DEF cells of every noun.",
+   "use": "הַ + noun (הַגֶּזֶר, הָעַגְבָנִיָּה, הֶחָצִיל)"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "Hebrew has no indefinite article: a bare noun is indefinite (גֶּזֶר = a carrot / carrots). אֶחָד / אַחַת (“one”) can be added for emphasis.",
+   "use": "bare noun"
+  }
+ ]
+}

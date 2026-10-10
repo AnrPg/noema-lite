@@ -1,0 +1,131 @@
+/* ---- a course inside the frame (docs/LANGUAGES.md §8, docs/NEW_FRAME_AND_LANGUAGES.md): the frame's colours and fonts (--bg, --paper, --ink, --acc …, set by the learner's character) ---- */
+body.ns-on.lx-frame main#ns-main{max-width:1000px}
+@media (min-width:760px){body.ns-on.lx-frame main#ns-main{max-width:calc(1000px + 100px)}}
+body.ns-on .lx-host{display:flex;flex-direction:column;gap:6px;min-width:0;color:var(--ink);font-family:var(--font)}
+body.ns-on .lx-host .lx-main{min-width:0}
+body.ns-on .lx-host .lx-subbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 0 10px;border-bottom:1px solid var(--line)}
+body.ns-on .lx-host .lx-subbar .spacer{flex:1}
+body.ns-on .lx-host .chip{background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:999px}
+body.ns-on .lx-host .lx-flagchip{display:inline-flex;align-items:center;min-height:36px;font-weight:700;font-size:.86rem}
+body.ns-on .lx-host .lx-flagchip.on{border-color:var(--acc);background:var(--acc-soft);color:var(--ink)}
+body.ns-on .lx-host .lx-explain{color:var(--ink2);font-size:.8rem}
+body.ns-on .lx-host .lx-ring{background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line) 0)}
+body.ns-on .lx-host .lx-hero h1{font-size:1.75rem;font-family:var(--display);font-weight:var(--dw)}
+body.ns-on .lx-host .lx-sub,body.ns-on .lx-host .tiny{color:var(--ink2)}
+body.ns-on .lx-host :is(.lx-card,.lx-node,.lx-tile,.lx-opt,.lx-lanerow){background:var(--paper);border-color:var(--line);color:var(--ink)}
+body.ns-on .lx-host :is(.lx-node,.lx-tile,.lx-opt):hover{border-color:var(--acc)}
+body.ns-on .lx-host .lx-card{border-radius:var(--r);box-shadow:none}
+body.ns-on .lx-host .lx-progress{background:var(--line)}
+body.ns-on .lx-host .lx-progress i{background:var(--acc)}
+body.ns-on .lx-host .lx-step{color:var(--t1i)}
+body.ns-on .lx-host a{color:var(--acc)}
+body.ns-on .lx-host .lx-h2{font-family:var(--display)}
+/* what lies over the frame: the word card, the tutor drawer, toasts (above the tabs on phones) */
+body.ns-on .lx-pop{z-index:60;background:color-mix(in srgb,var(--ink) 35%,transparent)}
+body.ns-on .lx-pop .lx-popbox{background:var(--paper);color:var(--ink)}
+body.ns-on .lx-tutor{z-index:45;background:var(--paper);color:var(--ink)}
+body.ns-on .lx-toast{z-index:60;background:var(--ink);color:var(--paper)}
+@media (max-width:759px){body.ns-on .lx-toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+/* ---- main's calm style inside the frame (docs/LANGUAGES.md §8 *Style inside the frame*; 99z_frame.js tidies the views) ---- */
+body.ns-on .lx-host{gap:18px}
+body.ns-on .lx-host .lx-view>h1{font-size:1.75rem;margin:0 0 4px}
+body.ns-on .lx-host .lx-view>h1 .ns-hint{font-size:.68rem}
+body.ns-on .lx-host .lx-h2{font-size:1.2rem;margin:28px 0 10px}
+body.ns-on .lx-host .tiny{font-size:.86rem}
+/* the languages switch: the frame's segmented control (a colour stripe per language stays on the chosen one) */
+body.ns-on .lx-host .lx-subbar{display:flex;flex-wrap:nowrap;gap:4px;padding:4px;border:0;border-radius:calc(var(--br) + 4px);background:var(--line);overflow-x:auto;scrollbar-width:none;align-self:flex-start;max-width:100%}
+body.ns-on .lx-host .lx-subbar :is(.spacer,.lx-explain),body.ns-on .lx-host .lx-ring{display:none}
+body.ns-on .lx-host .lx-subbar .lx-flagchip{flex:none;min-height:34px;padding:0 12px;gap:6px;border:0;border-radius:var(--br);background:transparent;color:var(--ink2);box-shadow:none;font-weight:700;font-size:.86rem}
+body.ns-on .lx-host .lx-subbar .lx-flagchip.on{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08),inset 0 -2px 0 var(--lc,transparent)}
+:is([data-m="axo"],[data-m="alien"],[data-m="berry"],[data-m="candy"]) body.ns-on .lx-host :is(.lx-subbar,.lx-rail),:is([data-m="axo"],[data-m="alien"],[data-m="berry"],[data-m="candy"]) body.ns-on .lx-host :is(.lx-subbar .lx-flagchip,.lx-railbtn){border-radius:999px}
+/* the flag rail of a card: the same control, smaller */
+body.ns-on .lx-host .lx-rail{background:var(--line);border:0;border-radius:calc(var(--br) + 4px);padding:3px;gap:3px}
+body.ns-on .lx-host .lx-railbtn{border-radius:var(--br);width:42px;height:34px;font-size:18px}
+body.ns-on .lx-host .lx-railbtn.on{background:var(--paper);box-shadow:0 1px 3px rgba(0,0,0,.08),inset 0 -2px 0 var(--lc,transparent)}
+body.ns-on .lx-host .lx-dot{border-color:var(--paper)}
+/* cards and panels: the frame's panel (paper, a line, the character's radius and border) */
+body.ns-on .lx-host :is(.lx-card,.lx-absent,.lx-callout){border-radius:var(--r);border:1px solid var(--line);background:var(--paper);box-shadow:none}
+body.ns-on .lx-host .lx-card{padding:18px}
+[data-m="bear"] body.ns-on .lx-host :is(.lx-card,.lx-nodes,.lx-lanegrid,.lx-texts,.lx-cmplist){border-style:dashed;border-color:color-mix(in srgb,var(--ink3) 45%,transparent)}
+[data-m="heron"] body.ns-on .lx-host :is(.lx-card,.lx-nodes,.lx-lanegrid,.lx-texts,.lx-cmplist){border-color:color-mix(in srgb,var(--line) 70%,transparent)}
+body.ns-on .lx-host .lx-note{background:var(--t2);color:var(--t2i);border-radius:var(--br)}
+/* badges: the frame's pills */
+body.ns-on .lx-host .lx-badge{border:0;background:var(--acc-soft);color:var(--t1i);font-weight:600;white-space:normal;border-radius:999px}
+body.ns-on .lx-host .lx-badge.new{background:var(--t2);color:var(--t2i)} body.ns-on .lx-host .lx-badge.ctx{background:var(--t4);color:var(--t4i)}
+:is([data-m="knight"],[data-m="piglet"],[data-m="wolf"],[data-m="eagle"],[data-m="robot"],[data-m="prism"]) body.ns-on .lx-host :is(.lx-badge,.lx-step){border-radius:5px}
+body.ns-on .lx-host .lx-step{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--acc-soft);color:var(--t1i);font-family:var(--font);font-size:.74rem;font-weight:700;vertical-align:middle}
+/* lists of steps, lanes and texts: the frame's list (one row each, a line between) */
+body.ns-on .lx-host :is(.lx-nodes,.lx-lanegrid,.lx-texts,.lx-cmplist){display:flex;flex-direction:column;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:0}
+body.ns-on .lx-host :is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow){border:0;border-radius:0;background:transparent;padding:14px 16px;box-shadow:none}
+body.ns-on .lx-host :is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow)+:is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow){border-top:1px solid var(--line)}
+body.ns-on .lx-host :is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow):hover:not([disabled]){background:color-mix(in srgb,var(--acc-soft) 50%,var(--paper))}
+body.ns-on .lx-host .lx-node .lx-nodetitle>.tiny{display:none}
+body.ns-on .lx-host .lx-nodestates{gap:10px}
+body.ns-on .lx-host .lx-ns{background:none;border:0;padding:0;font-size:.82rem;color:var(--ink2)}
+body.ns-on .lx-host .lx-lanecard{display:grid;grid-template-columns:40px 1fr;column-gap:14px;row-gap:2px;align-items:center;text-align:start}
+body.ns-on .lx-host .lx-lanecard>*:not(.lx-laneicon){grid-column:2}
+body.ns-on .lx-host .lx-laneicon{grid-row:1/span 3;width:40px;height:40px;border-radius:var(--ir);display:grid;place-items:center;background:var(--t1);font-size:1.2rem}
+body.ns-on .lx-host .lx-lanecard .tiny{color:var(--ink2)}
+/* rows of actions: the primary one and "Practice ▾" */
+body.ns-on .lx-host .lx-frow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+body.ns-on .lx-host .lx-actions .btn.primary{min-height:48px;padding:0 22px}
+/* the home: the frame's header, one card, labels, lists */
+body.ns-on .lx-host .lx-fhome{display:flex;flex-direction:column;gap:12px}
+body.ns-on .lx-host .lx-fhome>*{margin:0}
+body.ns-on .lx-host .lx-fhome>.ns-label{margin-top:16px}
+body.ns-on .lx-host .lx-fhead h1{font-size:1.75rem;margin:0 0 4px}
+body.ns-on .lx-host .lx-fhead .lx-fsub{margin:0;font-size:.95rem}
+body.ns-on .lx-host .lx-fgo{margin-top:8px}
+body.ns-on .lx-host .lx-fgo.lx-fdone h2{color:var(--ink2)}
+body.ns-on .lx-host .lx-fhome .lx-mapmore{align-self:flex-start}
+body.ns-on .lx-host .lx-moved{display:none}
+body.ns-on .lx-host .lx-node .lx-nodetitle b{font-family:var(--font);font-size:1rem;font-weight:700}
+body.ns-on .lx-host .lx-subbar[hidden]{display:none}
+body.ns-on .lx-host:has(.lx-session) .lx-subbar{display:none}
+body.ns-on .lx-host .lx-ffold{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);margin:0 0 12px}
+body.ns-on .lx-host .lx-ffold>summary{padding:14px 16px;font-weight:700;cursor:pointer;list-style-position:inside}
+body.ns-on .lx-host .lx-ffold>.lx-card{border:0;margin:0;padding-top:0}
+body.ns-on .lx-host .lx-ffold[open]>.lx-card .lx-cardtop h3{display:none}
+[data-m="bear"] body.ns-on .lx-host .lx-ffold{border-style:dashed;border-color:color-mix(in srgb,var(--ink3) 45%,transparent)}
+/* ---- second pass: details on demand (99z_frame.js frameTidy2) ---- */
+body.ns-on .lx-fhide{display:none!important}
+body.ns-on .lx-fmorebtn{margin:6px 0 4px;color:var(--t1i)}
+body.ns-on .lx-ftap{cursor:pointer}
+body.ns-on .lx-fword .lx-lemma{display:flex;align-items:center;gap:8px}
+body.ns-on .lx-fword .lx-meta{font-size:1.05rem}
+body.ns-on .lx-fparts{margin:6px 0 2px;color:var(--ink2);font-size:.92rem}
+body.ns-on .lx-fword>.lx-feeling,body.ns-on .lx-fword details>.lx-feeling{color:var(--ink2);font-size:.95rem}
+body.ns-on .lx-fword>details.lx-sec{border-top:1px solid var(--line);padding:0}
+body.ns-on .lx-fword>details.lx-sec>summary{padding:12px 0;font-weight:700}
+body.ns-on .lx-fword ol.lx-senses>li .lx-badge{display:none}
+body.ns-on .lx-fword ol.lx-senses>li.lx-fopen .lx-badge{display:inline-flex}
+body.ns-on .lx-fword ol.lx-senses>li.lx-ftap:not(.lx-fopen)>b::after,body.ns-on .lx-ex.lx-ftap:not(.lx-fopen)>.lx-tr::after{content:" \203A";color:var(--ink3);font-weight:400}
+body.ns-on .lx-ex.lx-ftap:not(.lx-fopen)>:not(.lx-extext):not(.lx-tr){display:none}
+body.ns-on .lx-ex.lx-ftap{border-radius:var(--br)}
+body.ns-on .lx-ex.lx-ftap:hover{background:color-mix(in srgb,var(--acc-soft) 35%,transparent)}
+/* a grammar point: quiet sections after the first block */
+body.ns-on details.lx-fsec{border-top:1px solid var(--line);margin:0}
+body.ns-on details.lx-fsec>summary{padding:14px 0;font-weight:700;cursor:pointer;color:var(--ink)}
+body.ns-on details.lx-fsec[open]>summary{color:var(--t1i)}
+body.ns-on .lx-gram .lx-feas{font-size:.86rem;color:var(--ink2)}
+/* settings: the frame's panels */
+body.ns-on .lx-host .lx-fpanel{margin:0 0 14px}
+body.ns-on .lx-host .lx-fpanel .lx-h3{display:none}
+/* the peculiarities' filter: a small segmented switch */
+body.ns-on .lx-host p.lx-fseg .btn.small{min-height:30px;padding:0 10px;border:0;background:var(--line);color:var(--ink2);font-size:.84rem}
+body.ns-on .lx-host p.lx-fseg .btn.small.primary{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+/* counters that do not help the next decision */
+body.ns-on .lx-host :is(.lx-cmprow .tiny,.lx-textcard .tiny,.lx-lanen){display:none}
+/* the character while you read: a small face (docs/UI_MAP.md "a small face while you read or practise"), so it covers less of the text */
+@media (max-width:759px){body.ns-on.lx-frame.ns-reading .ns-fab.full .nm{display:none} body.ns-on.lx-frame.ns-reading .ns-fab.full .ns-fabface{width:52px;height:48px}}
+body.ns-on .lx-host .lx-fpanel :is(label.lx-check,.lx-check){display:flex;align-items:flex-start;gap:10px;margin:4px 0}
+body.ns-on .lx-host .lx-fpanel .lx-check>input{margin-top:5px;flex:none}
+body.ns-on .lx-host .lx-fpanel select{max-width:100%}
+body.ns-on .lx-host p.lx-fseg{display:inline-flex;gap:4px;padding:3px;border-radius:calc(var(--br) + 4px);background:var(--line);margin:0 0 8px}
+body.ns-on .lx-host p.lx-fseg .btn.small{background:transparent}
+body.ns-on .lx-host .lx-fpanel label.lx-check:not(:has(select)){flex-wrap:nowrap}
+
+/* "Ask <character>" on an exercise (the app's .exask, in the card's top corner) and the tutor's face */
+body.ns-on .lx-ex.has-ask{position:relative}
+body.ns-on .lx-ex>.lx-exask{position:absolute;top:6px;inset-inline-end:6px;z-index:2}
+.lx-tface{display:inline-block;width:28px;height:28px;line-height:0;margin-inline-end:6px;vertical-align:middle}.lx-tface svg{width:100%;height:100%;overflow:visible}

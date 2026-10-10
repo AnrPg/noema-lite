@@ -1,0 +1,398 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.polarQuestion",
+   "value": "particle-optional"
+  },
+  {
+   "feature": "syn.questionParticlePosition",
+   "value": "initial"
+  }
+ ],
+ "summary": "A yes/no question keeps the word order of the statement. In speech the voice simply rises at the end: אַתָּה רוֹצֶה קָפֶה? “Do you want coffee?” — in writing the question mark shows it. Formal and written Hebrew may open the question with הַאִם: הַאִם אַתָּה רוֹצֶה קָפֶה? There is no inversion and no auxiliary verb. Answer with כֵּן “yes” or לֹא “no” — or, very often, by repeating the verb: — אַתָּה רוֹצֶה? — רוֹצֶה! Useful replies: כַּמּוּבָן or בָּרוּר “of course”, אוּלַי “maybe”, בֶּאֱמֶת? “really?”, גַּם אֲנִי “me too”, רַק … “only …”. A choice question uses אוֹ “or”: תֵּה אוֹ קָפֶה? — and is answered with one of the choices, not with yes or no. To contradict a negative question (German doch), say the verb again or דַּוְקָא כֵּן “actually, yes”: — אַתָּה לֹא רוֹצֶה? — דַּוְקָא כֵּן!",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "statement",
+    "question (speech)",
+    "question (formal)"
+   ],
+   "rows": [
+    [
+     "אַתָּה שׁוֹתֶה קָפֶה.",
+     "אַתָּה שׁוֹתֶה קָפֶה?",
+     "הַאִם אַתָּה שׁוֹתֶה קָפֶה?"
+    ],
+    [
+     "יֵשׁ לָנוּ מֶלַח.",
+     "יֵשׁ לָנוּ מֶלַח?",
+     "הַאִם יֵשׁ לָנוּ מֶלַח?"
+    ],
+    [
+     "הִיא לֹא אוֹכֶלֶת בָּשָׂר.",
+     "הִיא לֹא אוֹכֶלֶת בָּשָׂר?",
+     "הַאִם הִיא לֹא אוֹכֶלֶת בָּשָׂר?"
+    ]
+   ],
+   "caption": "Same words, same order: only the voice — or הַאִם — makes the question.",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle-optional"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "initial"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "answer",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "כֵּן · לֹא",
+     "yes · no",
+     "כֵּן, בְּבַקָּשָׁה. · לֹא, תּוֹדָה."
+    ],
+    [
+     "the verb again",
+     "yes (I do)",
+     "אַתָּה רוֹצֶה? רוֹצֶה!"
+    ],
+    [
+     "כַּמּוּבָן · בָּרוּר",
+     "of course · sure",
+     "אַתָּה אוֹהֵב פֵּרוֹת? בָּרוּר!"
+    ],
+    [
+     "אוּלַי",
+     "maybe",
+     "אוּלַי."
+    ],
+    [
+     "בֶּאֱמֶת?",
+     "really?",
+     "אֲנִי לֹא אוֹכֵל בָּשָׂר. בֶּאֱמֶת?"
+    ],
+    [
+     "גַּם אֲנִי · רַק …",
+     "me too · only …",
+     "גַּם אֲנִי רוֹצֶה קָפֶה. · רַק מַיִם, בְּבַקָּשָׁה."
+    ],
+    [
+     "דַּוְקָא כֵּן",
+     "yes, actually (against a “not”)",
+     "אַתָּה לֹא רוֹצֶה? דַּוְקָא כֵּן!"
+    ]
+   ],
+   "caption": "Short answers"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Your voice is the grammar",
+   "text": "Hebrew changes nothing in the sentence: no inversion, no “do”, no particle in everyday speech. The rising voice — and in writing the question mark — turns a statement into a question.",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle-optional"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "A choice: אוֹ",
+   "text": "תֵּה אוֹ קָפֶה? asks “which one?”: the voice rises on תֵּה and falls on קָפֶה, and the answer is one of them — not כֵּן or לֹא."
+  },
+  {
+   "t": "callout",
+   "kind": "warn",
+   "title": "הַאִם is not אִם",
+   "text": "הַאִם opens a question (formal); אִם alone means “if”. In conversation הַאִם can sound stiff — leave it out.",
+   "typology": [
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "initial"
+    }
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Hebrew",
+     "points": [
+      "אַתָּה רוֹצֶה קָפֶה?",
+      "order unchanged; הַאִם in formal style"
+     ]
+    },
+    {
+     "title": "German",
+     "points": [
+      "Willst du Kaffee?",
+      "the verb moves to the front; doch contradicts a negative question"
+     ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle-optional"
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Everyday or formal? (voice only, or הַאִם)",
+    "Did I keep the statement order?",
+    "Is it a choice with אוֹ? (then it is not a yes/no question)"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it everyday speech? → keep the statement and raise your voice at the end (write “?”).",
+   "Is it formal or written? → put הַאִם at the very beginning.",
+   "Did I change the word order? → don’t: Hebrew questions keep the statement order.",
+   "Do I need a word for “do / does”? → no, Hebrew has none.",
+   "Is it a choice between two things? → use אוֹ; the answer is one of them.",
+   "Answering a negative question with “yes, I do”? → repeat the verb or say דַּוְקָא כֵּן."
+  ],
+  "steps": [
+   "Say the statement.",
+   "Raise the voice at the end (or open with הַאִם).",
+   "Answer with כֵּן / לֹא, or repeat the verb."
+  ]
+ },
+ "traps": [
+  "No inversion and no “do”: “Do you want tea?” = אַתָּה רוֹצֶה תֵּה?",
+  "הַאִם is formal; in conversation it can sound stiff.",
+  "Do not confuse הַאִם (question particle) with אִם (“if”).",
+  "A question by intonation alone shows in writing only by its question mark — don’t forget it.",
+  "A choice question with אוֹ is not answered with כֵּן / לֹא, but with one of the choices.",
+  "To a negative question, a bare כֵּן is unclear — repeat the verb or say דַּוְקָא כֵּן."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:haim"
+  ],
+  "punct": [
+   "?"
+  ],
+  "exclude": [
+   "he:ma",
+   "he:eifo",
+   "he:o",
+   "he:mi",
+   "he:matay",
+   "he:eich",
+   "he:lama",
+   "he:madua",
+   "he:kama",
+   "he:eize",
+   "he:shel-mi",
+   "he:lean"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 1,
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ],
+    "variant": "Mood"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "How do you turn אַתָּה שׁוֹתֶה תֵּה into a question in everyday speech?",
+   "options": [
+    "raise the voice at the end: אַתָּה שׁוֹתֶה תֵּה?",
+    "put the verb first: שׁוֹתֶה אַתָּה תֵּה?",
+    "add a word for “do”"
+   ],
+   "answer": "raise the voice at the end: אַתָּה שׁוֹתֶה תֵּה?",
+   "why": "Hebrew keeps the statement order and has no “do”; intonation (and the question mark) makes the question."
+  },
+  {
+   "q": "Which word opens a yes/no question in formal Hebrew?",
+   "options": [
+    "הַאִם",
+    "אִם",
+    "אוֹ"
+   ],
+   "answer": "הַאִם",
+   "why": "הַאִם is the question particle; אִם alone means “if”, and אוֹ means “or”."
+  },
+  {
+   "q": "Someone asks אַתָּה לֹא רוֹצֶה קָפֶה? — but you do want some. What do you answer?",
+   "options": [
+    "דַּוְקָא כֵּן! — or simply רוֹצֶה!",
+    "לֹא.",
+    "אוּלַי."
+   ],
+   "answer": "דַּוְקָא כֵּן! — or simply רוֹצֶה!",
+   "why": "Hebrew has no “doch”: you contradict the “not” by repeating the verb or with דַּוְקָא כֵּן “actually, yes”."
+  },
+  {
+   "q": "תֵּה אוֹ קָפֶה? — what kind of answer does it expect?",
+   "options": [
+    "one of the two: תֵּה or קָפֶה",
+    "כֵּן or לֹא"
+   ],
+   "answer": "one of the two: תֵּה or קָפֶה",
+   "why": "With אוֹ it is a choice question, not a yes/no question."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.question.yesno",
+   "note": "Arabic opens a yes/no question with هَلْ or أَ — the counterpart of the formal הַאִם; in everyday Arabic intonation alone is also common."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "German puts the verb first (Willst du …?) and answers a negative question with doch; Hebrew keeps the statement order and says דַּוְקָא כֵּן."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.yesno",
+   "note": "Chinese adds 吗 at the end or asks A-not-A (要不要); its choice questions use 还是 — Hebrew uses intonation or הַאִם, and אוֹ for a choice."
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "As in Russian, intonation alone makes the question (Ты хочешь кофе? ~ אַתָּה רוֹצֶה קָפֶה?). The formal הַאִם is a little like ли, but it always stands first."
+  },
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "As in Greek, the word order stays and only the voice rises (Θέλεις καφέ; ~ אַתָּה רוֹצֶה קָפֶה?). Hebrew writes the question mark ?, not ;."
+  },
+  {
+   "for": "es",
+   "rel": "same",
+   "text": "As in Spanish, intonation alone turns a statement into a question (¿Quieres café? ~ אַתָּה רוֹצֶה קָפֶה?); Hebrew writes only the final question mark."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English inverts or uses “do”; Hebrew changes nothing: “Do you want coffee?” = אַתָּה רוֹצֶה קָפֶה?"
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "As in spoken French (tu veux du café ?), intonation is enough; formal הַאִם at the start plays the part of est-ce que."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German moves the verb to the front (Willst du Kaffee?); Hebrew keeps the statement order. For doch, Hebrew repeats the verb or says דַּוְקָא כֵּן."
+  },
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi may open a yes/no question with क्या or rely on intonation alone; Hebrew הַאִם works the same way, but it is formal."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian آیا at the start is optional and formal, like הַאִם; in speech intonation alone does it, in both languages."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi often adds का at the end (तू येणार आहेस का?); Hebrew puts its optional particle at the start (הַאִם) and in speech usually uses none."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic opens a question with هَلْ or أَ; Hebrew הַאִם is the formal counterpart, and everyday Hebrew drops it and uses intonation."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds the particle mi after the word in question (Kahve istiyor musun?); Hebrew adds nothing in speech — formal הַאִם goes at the start."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese ends a question with か (コーヒーを飲みますか); Hebrew uses only the voice, or formal הַאִם at the start."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks a question with the verb ending and intonation (커피 마셔요?); Hebrew changes no ending — the voice alone does it."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adds -ko / -kö to the first word and moves it to the front (Haluatko kahvia?); Hebrew keeps the order and adds nothing."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "As in Hungarian (Kávét kérsz?), a yes/no question keeps the order and uses intonation; formal Hebrew can add הַאִם at the start."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili also uses intonation (unataka kahawa?) and may open with je, as Hebrew may with הַאִם."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese ends with 吗 or uses verb-不-verb (你要不要咖啡?); Hebrew needs neither — the rising voice alone, or formal הַאִם at the start. As in Chinese, a short “yes” can repeat the verb: — רוֹצֶה!"
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese frames the question with có … không (anh có muốn cà phê không?); Hebrew uses only the rising voice, or formal הַאִם at the start."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks a question with an interrogative verb ending (such as -vit “you?”); Hebrew leaves the verb as it is and uses intonation."
+  }
+ ]
+}

@@ -1,0 +1,588 @@
+{
+ "function": "fn.question.wh",
+ "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.whPosition",
+   "value": "fronted"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "v2-and-final"
+  }
+ ],
+ "summary": "A German question-word question puts the question word first and the conjugated verb second, then the subject: Was trinkst du? Wo ist der Bahnhof? Wer ist das? – the same “verb in second place” as in a statement, while a yes/no question puts the verb first (Trinkst du Tee?). All question words begin with w- (die W-Fragen): was (what), wer (who), wo (where), wann (when), wie (how), warum (why), wie viel / wie viele (how much / how many), welcher (which) and wessen (whose). Two of them decline. wer has cases like the article der: wer (subject), wen (object), wem (dative: mit wem?), wessen (whose). welcher declines like dieser: welcher Tee, welche Tasche, welches Buch, welchen Tee (accusative). A noun that belongs to the question word moves with it into first place: Welchen Tee möchten Sie? Wie viele Kinder haben Sie? wie viel goes with uncountable nouns (wie viel Zucker), wie viele with plurals (wie viele Kinder). wessen sounds formal; everyday German asks Von wem ist das? The jobs of this step answer Was sind Sie von Beruf? – with no article after sein: Ich bin Ärztin. Er ist Koch. German marks the sex of the person in the job word: der Arzt / die Ärztin, der Koch / die Köchin (-in, often with umlaut).",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "question word",
+    "verb (2nd)",
+    "subject",
+    "the rest",
+    "?"
+   ],
+   "caption": "Wo – ist – der Bahnhof? · Was – trinkst – du? · Wann – essen – wir?",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "German",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "was",
+     "what",
+     "Was trinkst du?"
+    ],
+    [
+     "wer",
+     "who",
+     "Wer ist das?"
+    ],
+    [
+     "wo",
+     "where",
+     "Wo ist die Bank?"
+    ],
+    [
+     "wann",
+     "when",
+     "Wann essen wir?"
+    ],
+    [
+     "wie",
+     "how",
+     "Wie heißt du?"
+    ],
+    [
+     "warum",
+     "why",
+     "Warum trinkst du keinen Kaffee?"
+    ],
+    [
+     "wie viel / wie viele",
+     "how much / how many",
+     "Wie viel Zucker? · Wie viele Kinder?"
+    ],
+    [
+     "welcher, welche, welches",
+     "which",
+     "Welchen Tee möchten Sie?"
+    ],
+    [
+     "wessen (von wem?)",
+     "whose",
+     "Wessen Tasche ist das? · Von wem ist das Buch?"
+    ]
+   ],
+   "caption": "The W-questions"
+  },
+  {
+   "t": "table",
+   "head": [
+    "case",
+    "wer",
+    "compare der",
+    "example"
+   ],
+   "rows": [
+    [
+     "nominative (subject)",
+     "wer",
+     "der",
+     "Wer kocht heute?"
+    ],
+    [
+     "accusative (object)",
+     "wen",
+     "den",
+     "Wen fragst du? · Für wen ist der Tee?"
+    ],
+    [
+     "dative",
+     "wem",
+     "dem",
+     "Mit wem trinkst du Kaffee?"
+    ],
+    [
+     "genitive (owner)",
+     "wessen",
+     "des",
+     "Wessen Buch ist das?"
+    ]
+   ],
+   "caption": "wer declines like the article"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "welcher Tee",
+     "welche Tasche",
+     "welches Buch",
+     "welche Bücher"
+    ],
+    [
+     "accusative",
+     "welchen Tee",
+     "welche Tasche",
+     "welches Buch",
+     "welche Bücher"
+    ],
+    [
+     "dative",
+     "welchem Tee",
+     "welcher Tasche",
+     "welchem Buch",
+     "welchen Büchern"
+    ]
+   ],
+   "caption": "welcher – the endings of dieser"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Verb second, not first",
+   "text": "Was trinkst du? (question word + verb) – Trinkst du Tee? (verb first: yes/no). Never *Was du trinkst? in a main question: that order belongs to indirect questions (Ich weiß nicht, was du trinkst).",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    },
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "wer = who, wo = where",
+   "text": "wer asks about a person (who), wo about a place (where); woher and wohin ask where from and where to. Wer ist das? – Wo ist das?"
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Asking the name and the job",
+   "text": "Wie heißt du? / Wie heißen Sie? (literally “How are you called?”) – not *Was heißt du? · Was bist du von Beruf? / Was sind Sie von Beruf? – Ich bin Ingenieurin."
+  },
+  {
+   "t": "table",
+   "head": [
+    "man",
+    "woman",
+    "meaning"
+   ],
+   "rows": [
+    [
+     "der Arzt",
+     "die Ärztin",
+     "doctor"
+    ],
+    [
+     "der Krankenpfleger",
+     "die Krankenpflegerin (die Krankenschwester)",
+     "nurse"
+    ],
+    [
+     "der Ingenieur",
+     "die Ingenieurin",
+     "engineer"
+    ],
+    [
+     "der Fahrer",
+     "die Fahrerin",
+     "driver"
+    ],
+    [
+     "der Koch",
+     "die Köchin",
+     "cook"
+    ],
+    [
+     "der Verkäufer",
+     "die Verkäuferin",
+     "shop assistant"
+    ],
+    [
+     "der Arbeiter",
+     "die Arbeiterin",
+     "worker"
+    ],
+    [
+     "der Bauer / der Landwirt",
+     "die Bäuerin / die Landwirtin",
+     "farmer"
+    ],
+    [
+     "der Polizist",
+     "die Polizistin",
+     "police officer"
+    ],
+    [
+     "der Anwalt",
+     "die Anwältin",
+     "lawyer"
+    ],
+    [
+     "der Künstler",
+     "die Künstlerin",
+     "artist"
+    ]
+   ],
+   "caption": "The jobs: -in for a woman, often with umlaut"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No article for the job",
+   "text": "Ich bin Arzt. Sie ist Polizistin. – the article comes back only with an adjective: Er ist ein guter Koch."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What do I want to know? A person → wer; a thing → was; a place → wo; a time → wann; the manner → wie; the reason → warum; an amount → wie viel / wie viele; a choice → welcher; the owner → wessen / von wem.",
+   "Is the person I ask about the subject (wer), the object (wen) or after a dative preposition (mit wem, bei wem)?",
+   "Does a noun belong to the question word (welchen Tee, wie viele Kinder)? Then both go together into first place.",
+   "Can I count it? wie viele + plural; otherwise wie viel + singular.",
+   "Is the conjugated verb in second place, right after the question word?",
+   "Am I asking about a job? Was … von Beruf? – and the answer has no article: Ich bin Lehrerin.",
+   "Is the person a woman? Then the job word ends in -in (Ärztin, Köchin)."
+  ],
+  "steps": [
+   "Choose the question word (and its case or ending).",
+   "Put it first, with its noun if it has one.",
+   "Put the conjugated verb second.",
+   "Then the subject and the rest; end with ?"
+  ]
+ },
+ "traps": [
+  "Verb second, not first: Wo ist der Bahnhof? (not *Wo der Bahnhof ist? in a direct question).",
+  "wer is who, wo is where.",
+  "Wie heißt du? – not *Was heißt du? (Was heißt …? asks what a word means).",
+  "wen and wem: Für wen …? (für + accusative) – Mit wem …? (mit + dative).",
+  "wie viel + uncountable, wie viele + plural: wie viel Milch, wie viele Äpfel.",
+  "welcher takes the endings of dieser: Welchen Tee? (masculine accusative) – Welches Buch? (neuter).",
+  "No article before a job after sein: Ich bin Ärztin. – but Sie ist eine gute Ärztin.",
+  "A woman’s job word ends in -in: Arzt → Ärztin, Koch → Köchin, Anwalt → Anwältin (umlaut!)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:was",
+   "de:wer",
+   "de:wo",
+   "de:wann",
+   "de:wie",
+   "de:warum",
+   "de:wie_viel",
+   "de:wie_viele",
+   "de:welcher",
+   "de:wohin",
+   "de:woher"
+  ]
+ },
+ "paradigmCells": [
+  "PRON;NOM",
+  "PRON;ACC",
+  "PRON;DAT",
+  "PRON;GEN",
+  "DET;NOM;SG;MASC",
+  "DET;ACC;SG;MASC",
+  "DET;NOM;SG;NEUT",
+  "DET;NOM;SG;FEM"
+ ],
+ "needs": {
+  "NOUN": 6,
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "PRON",
+   "lemmas": [
+    "de:wer"
+   ],
+   "cells": [
+    "PRON;NOM",
+    "PRON;ACC",
+    "PRON;DAT",
+    "PRON;GEN"
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:welcher"
+   ],
+   "cells": [
+    "DET;NOM;SG;FEM",
+    "DET;NOM;SG;NEUT",
+    "DET;ACC;SG;MASC",
+    "DET;DAT;SG;MASC",
+    "DET;DAT;SG;FEM",
+    "DET;NOM;PL"
+   ]
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.wh"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.question.wh"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.question.wh"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“What’s your name?” (to a friend)",
+   "options": [
+    "Wie heißt du?",
+    "Was heißt du?",
+    "Wer heißt du?"
+   ],
+   "answer": "Wie heißt du?",
+   "why": "German asks “How are you called?”: Wie heißt du?"
+  },
+  {
+   "q": "___ ist das? – Das ist mein Bruder.",
+   "options": [
+    "Wer",
+    "Wo",
+    "Was"
+   ],
+   "answer": "Wer",
+   "why": "A person → wer (who)."
+  },
+  {
+   "q": "___ ist der Bahnhof? – Dort.",
+   "options": [
+    "Wo",
+    "Wer",
+    "Wann"
+   ],
+   "answer": "Wo",
+   "why": "A place → wo (where)."
+  },
+  {
+   "q": "Mit ___ trinkst du Kaffee?",
+   "options": [
+    "wem",
+    "wen",
+    "wer"
+   ],
+   "answer": "wem",
+   "why": "mit takes the dative: mit wem."
+  },
+  {
+   "q": "___ Kinder haben Sie?",
+   "options": [
+    "Wie viele",
+    "Wie viel",
+    "Welcher"
+   ],
+   "answer": "Wie viele",
+   "why": "Children can be counted: wie viele + plural."
+  },
+  {
+   "q": "___ Tee möchten Sie? (which)",
+   "options": [
+    "Welchen",
+    "Welcher",
+    "Welches"
+   ],
+   "answer": "Welchen",
+   "why": "der Tee is masculine and the object: welchen (like diesen)."
+  },
+  {
+   "q": "Correct word order:",
+   "options": [
+    "Was trinkst du?",
+    "Was du trinkst?",
+    "Was tust du trinken?"
+   ],
+   "answer": "Was trinkst du?",
+   "why": "Question word first, verb second, no “do”."
+  },
+  {
+   "q": "A woman says: “I’m a doctor.”",
+   "options": [
+    "Ich bin Ärztin.",
+    "Ich bin eine Arzt.",
+    "Ich bin Arzt."
+   ],
+   "answer": "Ich bin Ärztin.",
+   "why": "No article, and the feminine job word -in (with umlaut)."
+  },
+  {
+   "q": "Whose bag is this? – the everyday way",
+   "options": [
+    "Von wem ist die Tasche?",
+    "Wer ist die Tasche?",
+    "Was ist die Tasche?"
+   ],
+   "answer": "Von wem ist die Tasche?",
+   "why": "wessen is formal; speech uses von wem."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.question.wh",
+   "note": "Arabic also puts the question word first: mā / mādhā (what), man (who), ayna (where), matā (when), kayfa (how), li-mādhā (why), kam (how many, + a singular noun), ayy (which)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.question.wh",
+   "note": "Hebrew question words come first too: ma, mi, eifo, matai, eikh, lama, kama, eize / eizo; “whose” is shel mi – literally “of whom”, like German von wem."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.wh",
+   "note": "Chinese leaves the question word where the answer would be: 你喝什么？ (you drink what?) – no inversion, no verb movement."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "A yes/no question puts the verb first; a W-question puts it second."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "The question word comes first in Greek too (Τι πίνεις;), and ποιος / ποιον / ποιου decline like wer / wen / wessen. German adds a strict rule: the verb right after the question word, then the subject. τι – was, ποιος – wer, πού – wo, πότε – wann, πώς – wie, γιατί – warum, πόσο / πόσοι – wie viel / wie viele."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Что ты пьёшь? puts the question word first as German does, but Russian lets the subject come before the verb; German never does: Was trinkst du? кто / кого / кому decline like wer / wen / wem."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "¿Qué bebes? – question word first, then the verb, as in German: Was trinkst du? quién / quiénes is wer (for one or many)."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "German has no do: What do you drink? = Was trinkst du? wer looks like “where” but means “who”; “where” is wo. whose = wessen, but everyday German prefers Von wem ist das?"
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "Spoken French can leave the question word in place (Tu bois quoi ?); German always puts it first, with the verb second: Was trinkst du?"
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi leaves the question word in the place of the answer, before the verb (tum kyā pīte ho?); German moves it to the front: Was trinkst du?"
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian keeps the question word where the answer would be (to či mixori?); German puts it first, with the verb second."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi keeps the question word in place (tū kāy pitos?); German moves it to the front, with the verb right after it."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic also puts the question word first (mādhā tashrabu?); German adds the subject after the verb: Was trinkst du?"
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "ma ata shote? puts the question word first, then the subject; German puts the verb before the subject: Was trinkst du?"
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish keeps the question word before the verb at the end (Ne içiyorsun?); German puts it first and the verb second: Was trinkst du?"
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese keeps the question word in place and adds ka (nani o nomimasu ka?); German moves the question word to the front."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean keeps the question word in place (mwo masyeoyo?); German puts it first, with the verb second."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Mitä juot? – question word first and verb second, exactly the German order: Was trinkst du?"
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "The question word comes right before the verb (Mit iszol?), as in German, where the verb follows it at once: Was trinkst du?"
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "The question word usually follows the verb (unakunywa nini?); German puts it first: Was trinkst du?"
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese keeps the question word where the answer would be (你喝什么?); German moves it to the front and the verb follows: Was trinkst du?"
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese leaves the question word in place (anh uống gì?); German puts it first."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut uses question words together with question endings on the verb (Qanuippit? How are you?); German puts the question word first and the plain verb right after it: Wie geht es dir?"
+  }
+ ]
+}

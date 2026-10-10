@@ -1,0 +1,34 @@
+{
+ "field": "law",
+ "title": "Law",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "law.oath",
+   "gloss": "oath",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "law.law",
+   "gloss": "law",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "law.court",
+   "gloss": "court (of law)",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "law.rights",
+   "gloss": "rights",
+   "tier": 1,
+   "rank": 3
+  }
+ ]
+}

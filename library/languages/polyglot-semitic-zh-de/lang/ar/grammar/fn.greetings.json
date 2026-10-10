@@ -1,0 +1,382 @@
+{
+ "function": "fn.greetings",
+ "status": "realized",
+ "summary": "Arabic greetings are fixed formulas with fixed answers: السَّلَامُ عَلَيْكُمْ → وَعَلَيْكُمُ السَّلَامُ, صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ, مَسَاءُ الْخَيْرِ → مَسَاءُ النُّورِ, شُكْرًا → عَفْوًا. There is no polite “you” like Sie or 您, but every formula that contains “you” changes with the listener: كَيْفَ حَالُكَ to a man, كَيْفَ حَالُكِ to a woman, كَيْفَ حَالُكُمْ to several people — and an apology follows the speaker: a man says آسِفٌ, a woman آسِفَةٌ. The Standard formulas are understood everywhere; everyday speech adds regional ones (كِيفَك، إِزَّيَّك، شْلَوْنَك).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "you say",
+    "it means",
+    "the answer"
+   ],
+   "rows": [
+    [
+     "السَّلَامُ عَلَيْكُمْ",
+     "peace be upon you — hello (to anyone, at any time)",
+     "وَعَلَيْكُمُ السَّلَامُ"
+    ],
+    [
+     "مَرْحَبًا / أَهْلًا",
+     "hello / hi",
+     "مَرْحَبًا / أَهْلًا"
+    ],
+    [
+     "صَبَاحُ الْخَيْرِ",
+     "good morning",
+     "صَبَاحُ النُّورِ"
+    ],
+    [
+     "مَسَاءُ الْخَيْرِ",
+     "good evening",
+     "مَسَاءُ النُّورِ"
+    ],
+    [
+     "كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟",
+     "how are you? (a man / a woman)",
+     "بِخَيْرٍ، شُكْرًا — or الْحَمْدُ لِلّٰهِ; then وَأَنْتَ؟ / وَأَنْتِ؟"
+    ],
+    [
+     "اِسْمِي …",
+     "my name is …",
+     "تَشَرَّفْنَا / فُرْصَةٌ سَعِيدَةٌ"
+    ],
+    [
+     "تَشَرَّفْنَا",
+     "nice to meet you",
+     "الشَّرَفُ لِي (the honour is mine)"
+    ],
+    [
+     "شُكْرًا",
+     "thank you",
+     "عَفْوًا"
+    ],
+    [
+     "تُصْبِحُ عَلَى خَيْرٍ / تُصْبِحِينَ عَلَى خَيْرٍ",
+     "good night (to a man / a woman)",
+     "وَأَنْتَ مِنْ أَهْلِهِ / وَأَنْتِ مِنْ أَهْلِهِ"
+    ],
+    [
+     "مَعَ السَّلَامَةِ / إِلَى اللِّقَاءِ",
+     "goodbye",
+     "مَعَ السَّلَامَةِ / إِلَى اللِّقَاءِ"
+    ]
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "to a man",
+    "to a woman",
+    "to several people"
+   ],
+   "rows": [
+    [
+     "how are you?",
+     "كَيْفَ حَالُكَ؟",
+     "كَيْفَ حَالُكِ؟",
+     "كَيْفَ حَالُكُمْ؟"
+    ],
+    [
+     "please",
+     "مِنْ فَضْلِكَ",
+     "مِنْ فَضْلِكِ",
+     "مِنْ فَضْلِكُمْ"
+    ],
+    [
+     "excuse me",
+     "لَوْ سَمَحْتَ",
+     "لَوْ سَمَحْتِ",
+     "لَوْ سَمَحْتُمْ"
+    ],
+    [
+     "see you later",
+     "أَرَاكَ لَاحِقًا",
+     "أَرَاكِ لَاحِقًا",
+     "أَرَاكُمْ لَاحِقًا"
+    ],
+    [
+     "good night",
+     "تُصْبِحُ عَلَى خَيْرٍ",
+     "تُصْبِحِينَ عَلَى خَيْرٍ",
+     "تُصْبِحُونَ عَلَى خَيْرٍ"
+    ]
+   ],
+   "caption": "“I am sorry” follows the speaker instead: آسِفٌ (a man), آسِفَةٌ (a woman), آسِفُونَ (men or mixed), آسِفَاتٌ (women); عُذْرًا never changes.",
+   "typology": [
+    {
+     "feature": "prag.genderedSpeech",
+     "value": "grammatical"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Register.",
+   "text": "Fine everywhere, also formal: السَّلَامُ عَلَيْكُمْ، صَبَاحُ الْخَيْرِ، إِلَى اللِّقَاءِ، مِنْ فَضْلِكَ، تَشَرَّفْنَا. Everyday and friendly: أَهْلًا، مَرْحَبًا، مَعَ السَّلَامَةِ، أَرَاكَ لَاحِقًا. Respect comes from titles, not from the pronoun: يَا أُسْتَاذُ (sir, teacher), يَا سَيِّدَتِي (madam), حَضْرَتُكَ.",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    },
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Answer with the answer.",
+   "text": "صَبَاحُ الْخَيْرِ is answered with صَبَاحُ النُّورِ, not repeated; and أَهْلًا وَسَهْلًا (welcome, to a guest) is not عَفْوًا (you’re welcome, after thanks)."
+  },
+  {
+   "t": "p",
+   "text": "Many formulas are frozen accusatives with tanwīn: شُكْرًا، عَفْوًا، مَرْحَبًا، أَهْلًا، عُذْرًا — pronounce the final -n: šukran, ʿafwan."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I meeting someone, leaving, or is someone going to bed?",
+   "Morning or evening?",
+   "Is there a fixed answer? (السَّلَامُ عَلَيْكُمْ → وَعَلَيْكُمُ السَّلَامُ; صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ)",
+   "Does the formula contain “you”? → -ka to a man, -ki to a woman, -kum to several people.",
+   "Is it about me (آسِفٌ / آسِفَةٌ)? → it follows my own gender."
+  ]
+ },
+ "traps": [
+  "كَيْفَ حَالُكَ to a woman sounds wrong: it is حَالُكِ (-ki).",
+  "صَبَاحُ النُّورِ is only an answer; you do not start with it.",
+  "مَسَاءُ الْخَيْرِ greets; it is not “good night” before sleep (تُصْبِحُ عَلَى خَيْرٍ).",
+  "آسِفٌ / آسِفَةٌ agrees with the speaker, not with the listener.",
+  "عَلَيْكُمْ in السَّلَامُ عَلَيْكُمْ stays plural even to one person."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:marhaban",
+   "ar:ahlan",
+   "ar:assalamu_alaykum",
+   "ar:waalaykumu_ssalam",
+   "ar:sabah_alkhayr",
+   "ar:sabah_annur",
+   "ar:masa_alkhayr",
+   "ar:masa_annur",
+   "ar:tusbihu",
+   "ar:tusbihina",
+   "ar:maa_assalama",
+   "ar:ila_alliqa",
+   "ar:araka_lahiqan",
+   "ar:araki_lahiqan",
+   "ar:kayfa_haluka",
+   "ar:kayfa_haluki",
+   "ar:bikhayr",
+   "ar:alhamdulillah",
+   "ar:ismi",
+   "ar:tasharrafna",
+   "ar:fursa_saida",
+   "ar:shukran",
+   "ar:afwan",
+   "ar:min_fadlika",
+   "ar:min_fadliki",
+   "ar:law_samahta",
+   "ar:law_samahti",
+   "ar:asif",
+   "ar:udhran",
+   "ar:naam",
+   "ar:la_no"
+  ]
+ },
+ "needs": {
+  "INTJ": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "variant": "Addressee"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "صَبَاحُ الْخَيْرِ! — the answer:",
+   "options": [
+    "صَبَاحُ النُّورِ",
+    "صَبَاحُ الْخَيْرِ",
+    "مَسَاءُ النُّورِ"
+   ],
+   "answer": "صَبَاحُ النُّورِ",
+   "why": "The fixed answer: “morning of light”."
+  },
+  {
+   "q": "“How are you?” to a woman:",
+   "options": [
+    "كَيْفَ حَالُكِ؟",
+    "كَيْفَ حَالُكَ؟",
+    "كَيْفَ حَالُكُمْ؟"
+   ],
+   "answer": "كَيْفَ حَالُكِ؟",
+   "why": "-ki is “your” to a woman."
+  },
+  {
+   "q": "The answer to شُكْرًا:",
+   "options": [
+    "عَفْوًا",
+    "أَهْلًا وَسَهْلًا",
+    "مَعَ السَّلَامَةِ"
+   ],
+   "answer": "عَفْوًا",
+   "why": "عَفْوًا = you’re welcome; أَهْلًا وَسَهْلًا welcomes a guest."
+  },
+  {
+   "q": "A woman apologises:",
+   "options": [
+    "أَنَا آسِفَةٌ",
+    "أَنَا آسِفٌ",
+    "أَنَا آسِفُونَ"
+   ],
+   "answer": "أَنَا آسِفَةٌ",
+   "why": "آسِف agrees with the speaker."
+  },
+  {
+   "q": "Good night, to a man going to bed:",
+   "options": [
+    "تُصْبِحُ عَلَى خَيْرٍ",
+    "مَسَاءُ الْخَيْرِ",
+    "صَبَاحُ النُّورِ"
+   ],
+   "answer": "تُصْبِحُ عَلَى خَيْرٍ",
+   "why": "مَسَاءُ الْخَيْرِ greets in the evening; تُصْبِحُ عَلَى خَيْرٍ is said at bedtime."
+  },
+  {
+   "q": "السَّلَامُ عَلَيْكُمْ — the answer:",
+   "options": [
+    "وَعَلَيْكُمُ السَّلَامُ",
+    "مَعَ السَّلَامَةِ",
+    "صَبَاحُ النُّورِ"
+   ],
+   "answer": "وَعَلَيْكُمُ السَّلَامُ",
+   "why": "“And upon you be peace.”"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.greetings",
+   "note": "Hebrew שָׁלוֹם is the same word as سَلَام (שָׁלוֹם עֲלֵיכֶם = السَّلَامُ عَلَيْكُمْ), and Hebrew also changes formulas with the listener: מָה שְׁלוֹמְךָ / מָה שְׁלוֹמֵךְ like كَيْفَ حَالُكَ / حَالُكِ."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.greetings",
+   "note": "German chooses by formality — Wie geht’s dir? / Wie geht es Ihnen? — where Arabic chooses by the listener’s gender."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.greetings",
+   "note": "Chinese shows politeness with 您 (你好 / 您好) and has no gender in “you” at all."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "none"
+  },
+  {
+   "feature": "prag.genderedSpeech",
+   "value": "grammatical"
+  },
+  {
+   "feature": "prag.speechLevels",
+   "value": "none"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek chooses γεια σου / γεια σας by politeness and number; Arabic chooses by the listener’s gender and number (كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ), and many greetings have a fixed, different answer (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian chooses здравствуй / здравствуйте by politeness; Arabic formulas change by gender instead, and have set answers (مَسَاءُ الْخَيْرِ → مَسَاءُ النُّورِ)."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish answers Buenos días with the same words and picks ¿cómo estás? / ¿cómo está? by politeness; Arabic answers صَبَاحُ الْخَيْرِ with صَبَاحُ النُّورِ and picks كَيْفَ حَالُكَ / حَالُكِ by gender."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English answers “Good morning” with the same words; Arabic has a set answer (صَبَاحُ النُّورِ, “morning of light”), and “how are you?” and “please” change with the listener’s gender."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French changes greetings by politeness (comment vas-tu / comment allez-vous); Arabic changes them by gender and number, and politeness comes from titles (يَا أُسْتَاذُ)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi and Urdu use Arabic words in greetings too — सलाम, शुक्रिया (from شُكْر) —, but where नमस्ते serves for hello and goodbye, Arabic has separate formulas, each with its answer."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian asks about your حال as Arabic does (حال شما چطور است؟ — كَيْفَ حَالُكَ؟) and uses سلام; Arabic adds fixed answers and changes the ending by the listener’s gender."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish greets with Arabic formulas itself: merhaba (مَرْحَبًا), selamün aleyküm — aleyküm selam (السَّلَامُ عَلَيْكُمْ — وَعَلَيْكُمُ السَّلَامُ). It picks sen / siz by politeness; Arabic picks the ending by gender: حَالُكَ / حَالُكِ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese changes greetings by politeness (おはよう / おはようございます); Arabic has no polite verb forms and changes the formula by the listener’s gender and number instead."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean changes the ending by speech level (안녕 / 안녕하세요); Arabic changes the pronoun ending by gender: كَيْفَ حَالُكَ / كَيْفَ حَالُكِ."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish moi, hei and terve have no fixed answers; Arabic pairs are set: السَّلَامُ عَلَيْكُمْ → وَعَلَيْكُمُ السَّلَامُ."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili greetings also come in fixed question–answer pairs, and some are Arabic: Shikamoo is answered marahaba (from مَرْحَبًا), and habari is خَبَر (news)."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda greetings also come in set exchanges (Oli otya? — Bulungi); Arabic answers كَيْفَ حَالُكَ؟ with بِخَيْرٍ, and the question changes with the listener’s gender."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese chooses the word for “you” in a greeting by age and status (chào anh, chào bà); Arabic chooses only by gender and number."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut asks Qanuippit? (how are you?) and answers with one word, qanuingittunga (I’m fine); Arabic uses set phrases: كَيْفَ حَالُكَ؟ — بِخَيْرٍ، شُكْرًا."
+  }
+ ]
+}

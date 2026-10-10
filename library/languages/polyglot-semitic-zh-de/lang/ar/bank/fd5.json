@@ -1,0 +1,5686 @@
+{
+ "sentences": [
+  {
+   "id": "ar.f5.001",
+   "frame": "fr.go.to",
+   "text": "أَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I go to school.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.002",
+   "frame": "fr.go.to",
+   "text": "تَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "تَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "You go to school.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.003",
+   "frame": "fr.go.to",
+   "text": "اِذْهَبْ إِلَى الْمَدْرَسَةِ!",
+   "tokens": [
+    {
+     "t": "اِذْهَبْ",
+     "l": "ar:dhahaba",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Go to school!",
+   "level": "A1",
+   "variantOf": "ar.f5.002",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "ar.f5.004",
+   "frame": "fr.go.to",
+   "text": "اِذْهَبِي إِلَى الْمَدْرَسَةِ!",
+   "tokens": [
+    {
+     "t": "اِذْهَبِي",
+     "l": "ar:dhahaba",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Go to school! (to a woman)",
+   "level": "A1",
+   "variantOf": "ar.f5.003",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f5.005",
+   "frame": "fr.go.to",
+   "text": "اِذْهَبُوا إِلَى الْمَدْرَسَةِ!",
+   "tokens": [
+    {
+     "t": "اِذْهَبُوا",
+     "l": "ar:dhahaba",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Go to school! (to several people)",
+   "level": "A1",
+   "variantOf": "ar.f5.003",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f5.006",
+   "frame": "fr.go.to",
+   "text": "لَا أَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I don’t go to school.",
+   "level": "A1",
+   "variantOf": "ar.f5.001",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f5.007",
+   "frame": "fr.go.to",
+   "text": "يَذْهَبُ أَبِي إِلَى الْعَمَلِ بِالسَّيَّارَةِ.",
+   "tokens": [
+    {
+     "t": "يَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِالسَّيَّارَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "السَّيَّارَةِ",
+       "l": "ar:sayyara",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My father goes to work by car.",
+   "level": "A1",
+   "alts": [
+    "أَبِي يَذْهَبُ إِلَى الْعَمَلِ بِالسَّيَّارَةِ."
+   ]
+  },
+  {
+   "id": "ar.f5.008",
+   "frame": "fr.go.to",
+   "text": "تَذْهَبُ أُمِّي إِلَى السُّوقِ بِالْحَافِلَةِ.",
+   "tokens": [
+    {
+     "t": "تَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِالْحَافِلَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْحَافِلَةِ",
+       "l": "ar:hafila",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My mother goes to the market by bus.",
+   "level": "A1",
+   "alts": [
+    "أُمِّي تَذْهَبُ إِلَى السُّوقِ بِالْحَافِلَةِ."
+   ]
+  },
+  {
+   "id": "ar.f5.009",
+   "frame": "fr.go.to",
+   "text": "نُسَافِرُ إِلَى الْمَدِينَةِ بِالْقِطَارِ.",
+   "tokens": [
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدِينَةِ",
+     "l": "ar:madina",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِالْقِطَارِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْقِطَارِ",
+       "l": "ar:qitar",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We travel to the city by train.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.010",
+   "frame": "fr.go.to",
+   "text": "تُسَافِرُ بِالطَّائِرَةِ.",
+   "tokens": [
+    {
+     "t": "تُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "بِالطَّائِرَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الطَّائِرَةِ",
+       "l": "ar:taira",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "You travel by plane.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.011",
+   "frame": "fr.go.to",
+   "text": "هَلْ تُسَافِرُ بِالطَّائِرَةِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "بِالطَّائِرَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الطَّائِرَةِ",
+       "l": "ar:taira",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you travel by plane?",
+   "level": "A1",
+   "variantOf": "ar.f5.010",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f5.012",
+   "frame": "fr.go.to",
+   "text": "أَذْهَبُ إِلَى الْعَمَلِ مَشْيًا.",
+   "tokens": [
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "مَشْيًا",
+     "l": "ar:mashyan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I go to work on foot.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.013",
+   "frame": "fr.go.to",
+   "text": "الْمَحَطَّةُ قَرِيبَةٌ، نَذْهَبُ مَشْيًا.",
+   "tokens": [
+    {
+     "t": "الْمَحَطَّةُ",
+     "l": "ar:mahatta",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "قَرِيبَةٌ",
+     "l": "ar:qarib",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "نَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "مَشْيًا",
+     "l": "ar:mashyan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "The station is near; we’ll walk (go on foot).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.014",
+   "frame": "fr.go.to",
+   "text": "يَمْشِي الْأَطْفَالُ إِلَى الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "يَمْشِي",
+     "l": "ar:masha",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children walk to school.",
+   "level": "A1",
+   "alts": [
+    "الْأَطْفَالُ يَمْشُونَ إِلَى الْمَدْرَسَةِ."
+   ]
+  },
+  {
+   "id": "ar.f5.015",
+   "frame": "fr.go.to",
+   "text": "يَمْشِي الطِّفْلُ إِلَى الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "يَمْشِي",
+     "l": "ar:masha",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الطِّفْلُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "The child walks to school.",
+   "level": "A1",
+   "variantOf": "ar.f5.014",
+   "variant": {
+    "Number": "SG"
+   },
+   "alts": [
+    "الطِّفْلُ يَمْشِي إِلَى الْمَدْرَسَةِ."
+   ]
+  },
+  {
+   "id": "ar.f5.016",
+   "frame": "fr.go.to",
+   "text": "يَرْكُضُ الْوَلَدُ إِلَى الْبَابِ.",
+   "tokens": [
+    {
+     "t": "يَرْكُضُ",
+     "l": "ar:rakada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْوَلَدُ",
+     "l": "ar:walad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَابِ",
+     "l": "ar:bab",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "The boy runs to the door.",
+   "level": "A1",
+   "alts": [
+    "الْوَلَدُ يَرْكُضُ إِلَى الْبَابِ."
+   ]
+  },
+  {
+   "id": "ar.f5.017",
+   "frame": "fr.command",
+   "text": "اُرْكُضُوا إِلَى الْمَحَطَّةِ!",
+   "tokens": [
+    {
+     "t": "اُرْكُضُوا",
+     "l": "ar:rakada",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَحَطَّةِ",
+     "l": "ar:mahatta",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Run to the station! (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.018",
+   "frame": "fr.go.to",
+   "text": "أَبِي يَقُودُ السَّيَّارَةَ.",
+   "tokens": [
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَقُودُ",
+     "l": "ar:qada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "السَّيَّارَةَ",
+     "l": "ar:sayyara",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "My father drives the car.",
+   "level": "A1",
+   "alts": [
+    "يَقُودُ أَبِي السَّيَّارَةَ."
+   ]
+  },
+  {
+   "id": "ar.f5.019",
+   "frame": "fr.go.to",
+   "text": "هَلْ تَقُودِينَ السَّيَّارَةَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تَقُودِينَ",
+     "l": "ar:qada",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "السَّيَّارَةَ",
+     "l": "ar:sayyara",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you drive (the car)? (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.020",
+   "frame": "fr.go.to",
+   "text": "السَّائِقُ يَقُودُ الْحَافِلَةَ.",
+   "tokens": [
+    {
+     "t": "السَّائِقُ",
+     "l": "ar:saiq",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "يَقُودُ",
+     "l": "ar:qada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْحَافِلَةَ",
+     "l": "ar:hafila",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The driver drives the bus.",
+   "level": "A1",
+   "alts": [
+    "يَقُودُ السَّائِقُ الْحَافِلَةَ."
+   ]
+  },
+  {
+   "id": "ar.f5.021",
+   "frame": "fr.from",
+   "text": "يَعُودُ أَخِي مِنَ الْعَمَلِ.",
+   "tokens": [
+    {
+     "t": "يَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My brother comes back from work.",
+   "level": "A1",
+   "alts": [
+    "أَخِي يَعُودُ مِنَ الْعَمَلِ."
+   ]
+  },
+  {
+   "id": "ar.f5.022",
+   "frame": "fr.go.to",
+   "text": "نَعُودُ إِلَى الْبَيْتِ بِسَيَّارَةِ أُجْرَةٍ.",
+   "tokens": [
+    {
+     "t": "نَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِسَيَّارَةِ أُجْرَةٍ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "سَيَّارَةِ أُجْرَةٍ",
+       "l": "ar:sayyarat_ujra",
+       "f": "N;GEN;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We go back home by taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.023",
+   "frame": "fr.go.to",
+   "text": "تَعُودُ إِلَى الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "تَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "You come back home.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.024",
+   "frame": "fr.go.to",
+   "text": "عُدْ إِلَى الْبَيْتِ!",
+   "tokens": [
+    {
+     "t": "عُدْ",
+     "l": "ar:ada",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Come back home!",
+   "level": "A1",
+   "variantOf": "ar.f5.023",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "ar.f5.025",
+   "frame": "fr.go.to",
+   "text": "عُودِي إِلَى الْبَيْتِ!",
+   "tokens": [
+    {
+     "t": "عُودِي",
+     "l": "ar:ada",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Come back home! (to a woman)",
+   "level": "A1",
+   "variantOf": "ar.f5.024",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f5.026",
+   "frame": "fr.go.to",
+   "text": "نَدْخُلُ الْبَيْتَ.",
+   "tokens": [
+    {
+     "t": "نَدْخُلُ",
+     "l": "ar:dakhala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْبَيْتَ",
+     "l": "ar:bayt",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We go into the house.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.027",
+   "frame": "fr.command",
+   "text": "اُدْخُلْ، مِنْ فَضْلِكَ!",
+   "tokens": [
+    {
+     "t": "اُدْخُلْ",
+     "l": "ar:dakhala",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Come in, please!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.028",
+   "frame": "fr.command",
+   "text": "اُدْخُلِي، مِنْ فَضْلِكِ!",
+   "tokens": [
+    {
+     "t": "اُدْخُلِي",
+     "l": "ar:dakhala",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكِ",
+     "l": "ar:min_fadliki"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Come in, please! (to a woman)",
+   "level": "A1",
+   "variantOf": "ar.f5.027",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f5.029",
+   "frame": "fr.from",
+   "text": "أَخْرُجُ مِنَ الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "أَخْرُجُ",
+     "l": "ar:kharaja",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I leave the house.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.030",
+   "frame": "fr.from",
+   "text": "يَخْرُجُ الطُّلَّابُ مِنَ الْمَدْرَسَةِ.",
+   "tokens": [
+    {
+     "t": "يَخْرُجُ",
+     "l": "ar:kharaja",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الطُّلَّابُ",
+     "l": "ar:talib",
+     "f": "N;NOM;PL;MASC;DEF"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun"
+   ],
+   "gloss": "The students come out of school.",
+   "level": "A1",
+   "alts": [
+    "الطُّلَّابُ يَخْرُجُونَ مِنَ الْمَدْرَسَةِ."
+   ]
+  },
+  {
+   "id": "ar.f5.031",
+   "frame": "fr.command",
+   "text": "اُخْرُجْ مِنَ الْمَطْبَخِ!",
+   "tokens": [
+    {
+     "t": "اُخْرُجْ",
+     "l": "ar:kharaja",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْمَطْبَخِ",
+     "l": "ar:matbakh",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Get out of the kitchen!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.032",
+   "frame": "fr.from",
+   "text": "يُغَادِرُ الْقِطَارُ الْمَحَطَّةَ.",
+   "tokens": [
+    {
+     "t": "يُغَادِرُ",
+     "l": "ar:ghadara",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْمَحَطَّةَ",
+     "l": "ar:mahatta",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The train leaves the station.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.033",
+   "frame": "fr.from",
+   "text": "تُغَادِرُ الطَّائِرَةُ الْمَطَارَ.",
+   "tokens": [
+    {
+     "t": "تُغَادِرُ",
+     "l": "ar:ghadara",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الطَّائِرَةُ",
+     "l": "ar:taira",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْمَطَارَ",
+     "l": "ar:matar",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "The plane leaves the airport.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.034",
+   "frame": "fr.go.to",
+   "text": "يَصِلُ الْقِطَارُ إِلَى الْمَحَطَّةِ.",
+   "tokens": [
+    {
+     "t": "يَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَحَطَّةِ",
+     "l": "ar:mahatta",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "The train arrives at the station.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.035",
+   "frame": "fr.go.to",
+   "text": "تَصِلُ الطَّائِرَةُ إِلَى الْمَطَارِ.",
+   "tokens": [
+    {
+     "t": "تَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الطَّائِرَةُ",
+     "l": "ar:taira",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطَارِ",
+     "l": "ar:matar",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "The plane arrives at the airport.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.036",
+   "frame": "fr.wh",
+   "text": "مَتَى تَصِلُ الْحَافِلَةُ؟",
+   "tokens": [
+    {
+     "t": "مَتَى",
+     "l": "ar:mata"
+    },
+    {
+     "t": "تَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْحَافِلَةُ",
+     "l": "ar:hafila",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "When does the bus arrive?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.037",
+   "frame": "fr.be.where",
+   "text": "أَبْقَى فِي الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "أَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I’m staying at home.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.038",
+   "frame": "fr.be.where",
+   "text": "تَبْقَى هُنَا.",
+   "tokens": [
+    {
+     "t": "تَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present"
+   ],
+   "gloss": "You stay here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.039",
+   "frame": "fr.be.where",
+   "text": "اِبْقَ هُنَا!",
+   "tokens": [
+    {
+     "t": "اِبْقَ",
+     "l": "ar:baqiya",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Stay here!",
+   "level": "A1",
+   "variantOf": "ar.f5.038",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "ar.f5.040",
+   "frame": "fr.be.where",
+   "text": "اِبْقَيْ هُنَا!",
+   "tokens": [
+    {
+     "t": "اِبْقَيْ",
+     "l": "ar:baqiya",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Stay here! (to a woman)",
+   "level": "A1",
+   "variantOf": "ar.f5.039",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f5.041",
+   "frame": "fr.be.where",
+   "text": "نَنْتَظِرُ فِي الْمَحَطَّةِ.",
+   "tokens": [
+    {
+     "t": "نَنْتَظِرُ",
+     "l": "ar:intazara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَحَطَّةِ",
+     "l": "ar:mahatta",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We are waiting at the station.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.042",
+   "frame": "fr.go.to",
+   "text": "أَنْتَظِرُ الْحَافِلَةَ.",
+   "tokens": [
+    {
+     "t": "أَنْتَظِرُ",
+     "l": "ar:intazara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْحَافِلَةَ",
+     "l": "ar:hafila",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’m waiting for the bus.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.043",
+   "frame": "fr.command",
+   "text": "اِنْتَظِرْ هُنَا!",
+   "tokens": [
+    {
+     "t": "اِنْتَظِرْ",
+     "l": "ar:intazara",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Wait here!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.044",
+   "frame": "fr.command",
+   "text": "اِنْتَظِرُوا هُنَا!",
+   "tokens": [
+    {
+     "t": "اِنْتَظِرُوا",
+     "l": "ar:intazara",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Wait here! (to several people)",
+   "level": "A1",
+   "variantOf": "ar.f5.043",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "ar.f5.045",
+   "frame": "fr.command",
+   "text": "تَعَالَ هُنَا!",
+   "tokens": [
+    {
+     "t": "تَعَالَ",
+     "l": "ar:taala",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Come here!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.046",
+   "frame": "fr.command",
+   "text": "تَعَالَيْ هُنَا!",
+   "tokens": [
+    {
+     "t": "تَعَالَيْ",
+     "l": "ar:taala",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative"
+   ],
+   "gloss": "Come here! (to a woman)",
+   "level": "A1",
+   "variantOf": "ar.f5.045",
+   "variant": {
+    "Addressee": "FEM"
+   }
+  },
+  {
+   "id": "ar.f5.047",
+   "frame": "fr.command",
+   "text": "تَعَالَوْا إِلَى الْمَطْبَخِ!",
+   "tokens": [
+    {
+     "t": "تَعَالَوْا",
+     "l": "ar:taala",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطْبَخِ",
+     "l": "ar:matbakh",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Come to the kitchen! (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.048",
+   "frame": "fr.go.to",
+   "text": "يَجِيءُ صَدِيقِي إِلَى الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "يَجِيءُ",
+     "l": "ar:jaa",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "صَدِيقِي",
+     "l": "ar:sadiq",
+     "f": "N;NOM;SG;MASC;POSS;PSS1S"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My friend is coming to the house.",
+   "level": "A1",
+   "alts": [
+    "صَدِيقِي يَجِيءُ إِلَى الْبَيْتِ."
+   ]
+  },
+  {
+   "id": "ar.f5.049",
+   "frame": "fr.from",
+   "text": "مِنْ أَيْنَ تَجِيئِينَ؟",
+   "tokens": [
+    {
+     "t": "مِنْ",
+     "l": "ar:min",
+     "f": "ADP"
+    },
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "تَجِيئِينَ",
+     "l": "ar:jaa",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "Where are you coming from? (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.050",
+   "frame": "fr.wh",
+   "text": "إِلَى أَيْنَ تَذْهَبُ؟",
+   "tokens": [
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "تَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "Where are you going?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.051",
+   "frame": "fr.wh",
+   "text": "كَيْفَ تَذْهَبُ إِلَى الْعَمَلِ؟ بِالدَّرَّاجَةِ.",
+   "tokens": [
+    {
+     "t": "كَيْفَ",
+     "l": "ar:kayfa"
+    },
+    {
+     "t": "تَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "بِالدَّرَّاجَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الدَّرَّاجَةِ",
+       "l": "ar:darraja",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "How do you get to work? — By bike.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.052",
+   "frame": "fr.go.to",
+   "text": "نُسَافِرُ بِالسَّفِينَةِ.",
+   "tokens": [
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "بِالسَّفِينَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "السَّفِينَةِ",
+       "l": "ar:safina",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We travel by ship.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.053",
+   "frame": "fr.go.to",
+   "text": "أُسَافِرُ إِلَى الْقَرْيَةِ بِالْقَارِبِ.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِالْقَارِبِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْقَارِبِ",
+       "l": "ar:qarib_boat",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I go to the village by boat.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.054",
+   "frame": "fr.want",
+   "text": "أُرِيدُ تَذْكِرَةً إِلَى الْمَدِينَةِ.",
+   "tokens": [
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "تَذْكِرَةً",
+     "l": "ar:tadhkira",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدِينَةِ",
+     "l": "ar:madina",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I’d like a ticket to the city.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.055",
+   "frame": "fr.wh",
+   "text": "كَمْ تَذْكِرَةً تُرِيدُ؟",
+   "tokens": [
+    {
+     "t": "كَمْ",
+     "l": "ar:kam"
+    },
+    {
+     "t": "تَذْكِرَةً",
+     "l": "ar:tadhkira",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "gloss": "How many tickets do you want?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.056",
+   "frame": "fr.command",
+   "text": "اِشْتَرِ تَذْكِرَتَيْنِ!",
+   "tokens": [
+    {
+     "t": "اِشْتَرِ",
+     "l": "ar:ishtara",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "تَذْكِرَتَيْنِ",
+     "l": "ar:tadhkira",
+     "f": "N;ACC;DU;INDF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Buy two tickets!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.057",
+   "frame": "fr.eat",
+   "text": "تَأْكُلِينَ الْخُبْزَ.",
+   "tokens": [
+    {
+     "t": "تَأْكُلِينَ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الْخُبْزَ",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You eat the bread. (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.058",
+   "frame": "fr.eat",
+   "text": "كُلِي الْخُبْزَ!",
+   "tokens": [
+    {
+     "t": "كُلِي",
+     "l": "ar:akala",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "الْخُبْزَ",
+     "l": "ar:khubz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Eat the bread! (to a woman)",
+   "level": "A1",
+   "variantOf": "ar.f5.057",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "ar.f5.059",
+   "frame": "fr.eat",
+   "text": "تَشْرَبُونَ الْمَاءَ.",
+   "tokens": [
+    {
+     "t": "تَشْرَبُونَ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;2;PL;MASC"
+    },
+    {
+     "t": "الْمَاءَ",
+     "l": "ar:maa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "You drink the water. (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.060",
+   "frame": "fr.eat",
+   "text": "اِشْرَبُوا الْمَاءَ!",
+   "tokens": [
+    {
+     "t": "اِشْرَبُوا",
+     "l": "ar:shariba",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "الْمَاءَ",
+     "l": "ar:maa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Drink the water! (to several people)",
+   "level": "A1",
+   "variantOf": "ar.f5.059",
+   "variant": {
+    "Mood": "IMP"
+   }
+  },
+  {
+   "id": "ar.f5.061",
+   "frame": "fr.command",
+   "text": "سَافِرُوا بِالْقِطَارِ!",
+   "tokens": [
+    {
+     "t": "سَافِرُوا",
+     "l": "ar:safara",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "بِالْقِطَارِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْقِطَارِ",
+       "l": "ar:qitar",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Travel by train! (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.062",
+   "frame": "fr.command",
+   "text": "قُودِي السَّيَّارَةَ، مِنْ فَضْلِكِ!",
+   "tokens": [
+    {
+     "t": "قُودِي",
+     "l": "ar:qada",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "السَّيَّارَةَ",
+     "l": "ar:sayyara",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكِ",
+     "l": "ar:min_fadliki"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Drive the car, please! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.063",
+   "frame": "fr.command",
+   "text": "اِمْشِ إِلَى الْمَحَطَّةِ!",
+   "tokens": [
+    {
+     "t": "اِمْشِ",
+     "l": "ar:masha",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَحَطَّةِ",
+     "l": "ar:mahatta",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Walk to the station!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.064",
+   "frame": "fr.command",
+   "text": "اِمْشِي مَعِي!",
+   "tokens": [
+    {
+     "t": "اِمْشِي",
+     "l": "ar:masha",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "مَعِي",
+     "l": "ar:maa_with",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.prep.core"
+   ],
+   "gloss": "Walk with me! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.065",
+   "frame": "fr.from",
+   "text": "يَجِيءُ الْقِطَارُ مِنَ الْمَطَارِ.",
+   "tokens": [
+    {
+     "t": "يَجِيءُ",
+     "l": "ar:jaa",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْمَطَارِ",
+     "l": "ar:matar",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "The train comes from the airport.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.066",
+   "frame": "fr.command",
+   "text": "اُطْبُخِي الْأَرُزَّ، مِنْ فَضْلِكِ!",
+   "tokens": [
+    {
+     "t": "اُطْبُخِي",
+     "l": "ar:tabakha",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "الْأَرُزَّ",
+     "l": "ar:aruzz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكِ",
+     "l": "ar:min_fadliki"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Cook the rice, please! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.067",
+   "frame": "fr.go.to",
+   "text": "أَنَا فِي الْمَحَطَّةِ، أَذْهَبُ إِلَى الْمَطَارِ بِسَيَّارَةِ أُجْرَةٍ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَحَطَّةِ",
+     "l": "ar:mahatta",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطَارِ",
+     "l": "ar:matar",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِسَيَّارَةِ أُجْرَةٍ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "سَيَّارَةِ أُجْرَةٍ",
+       "l": "ar:sayyarat_ujra",
+       "f": "N;GEN;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I’m at the station; I’m going to the airport by taxi.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.068",
+   "frame": "fr.day",
+   "text": "الْيَوْمُ الْأَحَدُ.",
+   "tokens": [
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْأَحَدُ",
+     "l": "ar:ahad",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Today is Sunday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.069",
+   "frame": "fr.day",
+   "text": "الْيَوْمُ يَوْمُ الْجُمُعَةِ.",
+   "tokens": [
+    {
+     "t": "الْيَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "يَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "الْجُمُعَةِ",
+     "l": "ar:jumua",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Today is Friday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.070",
+   "frame": "fr.day",
+   "text": "يَوْمَ الْجُمُعَةِ نَذْهَبُ إِلَى السُّوقِ.",
+   "tokens": [
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْجُمُعَةِ",
+     "l": "ar:jumua",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "نَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "On Friday we go to the market.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.071",
+   "frame": "fr.day",
+   "text": "يَوْمَ الْجُمُعَةِ لَا نَذْهَبُ إِلَى السُّوقِ.",
+   "tokens": [
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْجُمُعَةِ",
+     "l": "ar:jumua",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "نَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.negation",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "On Friday we don’t go to the market.",
+   "level": "A1",
+   "variantOf": "ar.f5.070",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f5.072",
+   "frame": "fr.day",
+   "text": "يَوْمَ السَّبْتِ أَبْقَى فِي الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "السَّبْتِ",
+     "l": "ar:sabt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "أَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "On Saturday I stay at home.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.073",
+   "frame": "fr.day",
+   "text": "يَجِيءُ جَدِّي يَوْمَ الْأَحَدِ.",
+   "tokens": [
+    {
+     "t": "يَجِيءُ",
+     "l": "ar:jaa",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "جَدِّي",
+     "l": "ar:jadd",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْأَحَدِ",
+     "l": "ar:ahad",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "My grandfather comes on Sunday.",
+   "level": "A1",
+   "alts": [
+    "جَدِّي يَجِيءُ يَوْمَ الْأَحَدِ."
+   ]
+  },
+  {
+   "id": "ar.f5.074",
+   "frame": "fr.day",
+   "text": "تُسَافِرُ يَوْمَ الِاثْنَيْنِ.",
+   "tokens": [
+    {
+     "t": "تُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الِاثْنَيْنِ",
+     "l": "ar:ithnayn",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "You’re travelling on Monday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.075",
+   "frame": "fr.day",
+   "text": "هَلْ تُسَافِرُ يَوْمَ الِاثْنَيْنِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الِاثْنَيْنِ",
+     "l": "ar:ithnayn",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you travelling on Monday?",
+   "level": "A1",
+   "variantOf": "ar.f5.074",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f5.076",
+   "frame": "fr.day",
+   "text": "أُسَافِرُ يَوْمَ الثُّلَاثَاءِ.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الثُّلَاثَاءِ",
+     "l": "ar:thulathaa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "I’m travelling on Tuesday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.077",
+   "frame": "fr.day",
+   "text": "نَأْكُلُ السَّمَكَ يَوْمَ الْأَرْبِعَاءِ.",
+   "tokens": [
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "السَّمَكَ",
+     "l": "ar:samak",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْأَرْبِعَاءِ",
+     "l": "ar:arbiaa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "We eat fish on Wednesday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.078",
+   "frame": "fr.day",
+   "text": "يَعُودُ أَبِي مِنَ الْعَمَلِ مَسَاءَ الْخَمِيسِ.",
+   "tokens": [
+    {
+     "t": "يَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "مَسَاءَ",
+     "l": "ar:masa",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْخَمِيسِ",
+     "l": "ar:khamis",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My father comes back from work on Thursday evening.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.079",
+   "frame": "fr.day",
+   "text": "فِي نِهَايَةِ الْأُسْبُوعِ نُسَافِرُ إِلَى الْقَرْيَةِ.",
+   "tokens": [
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "نِهَايَةِ الْأُسْبُوعِ",
+     "l": "ar:nihayat_usbu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "At the weekend we go to the village.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.080",
+   "frame": "fr.day",
+   "text": "أَشْرَبُ الْقَهْوَةَ فِي الصَّبَاحِ.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الصَّبَاحِ",
+     "l": "ar:sabah",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I drink coffee in the morning.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.081",
+   "frame": "fr.day",
+   "text": "أَشْرَبُ الشَّايَ مَسَاءً.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "مَسَاءً",
+     "l": "ar:masa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I drink tea in the evening.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.082",
+   "frame": "fr.day",
+   "text": "نَأْكُلُ الْغَدَاءَ عِنْدَ الظُّهْرِ.",
+   "tokens": [
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْغَدَاءَ",
+     "l": "ar:ghada",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "عِنْدَ",
+     "l": "ar:inda",
+     "f": "ADP"
+    },
+    {
+     "t": "الظُّهْرِ",
+     "l": "ar:zuhr",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object",
+    "fn.case"
+   ],
+   "gloss": "We have lunch at noon.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.083",
+   "frame": "fr.day",
+   "text": "يَعُودُ الْأَطْفَالُ مِنَ الْمَدْرَسَةِ ظُهْرًا.",
+   "tokens": [
+    {
+     "t": "يَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْأَطْفَالُ",
+     "l": "ar:tifl",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "ظُهْرًا",
+     "l": "ar:zuhr",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.plural.noun"
+   ],
+   "gloss": "The children come back from school at noon.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.084",
+   "frame": "fr.day",
+   "text": "أَشْرَبُ الشَّايَ بَعْدَ الظُّهْرِ.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "بَعْدَ الظُّهْرِ",
+     "l": "ar:bada_zuhr"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I drink tea in the afternoon.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.085",
+   "frame": "fr.day",
+   "text": "أُسَافِرُ اللَّيْلَةَ.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "اللَّيْلَةَ",
+     "l": "ar:layla",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "I’m travelling tonight.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.086",
+   "frame": "fr.day",
+   "text": "أَشْرَبُ الْقَهْوَةَ لَيْلًا.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "لَيْلًا",
+     "l": "ar:layl",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I drink coffee at night.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.087",
+   "frame": "fr.day",
+   "text": "لَا أَشْرَبُ الْقَهْوَةَ لَيْلًا.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "لَيْلًا",
+     "l": "ar:layl",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object",
+    "fn.negation"
+   ],
+   "gloss": "I don’t drink coffee at night.",
+   "level": "A1",
+   "variantOf": "ar.f5.086",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f5.088",
+   "frame": "fr.be.where",
+   "text": "أَنَا فِي الْبَيْتِ الْآنَ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الْآنَ",
+     "l": "ar:alana"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I’m at home now.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.089",
+   "frame": "fr.wh",
+   "text": "أَيْنَ أَنْتِ الْآنَ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "أَنْتِ",
+     "l": "ar:anti",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "الْآنَ",
+     "l": "ar:alana"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.wh"
+   ],
+   "gloss": "Where are you now? (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.090",
+   "frame": "fr.day",
+   "text": "الْيَوْمَ أَبْقَى فِي الْبَيْتِ.",
+   "tokens": [
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": "أَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Today I’m staying at home.",
+   "level": "A1",
+   "alts": [
+    "أَبْقَى فِي الْبَيْتِ الْيَوْمَ."
+   ]
+  },
+  {
+   "id": "ar.f5.091",
+   "frame": "fr.day",
+   "text": "تَبْقَى فِي الْبَيْتِ الْيَوْمَ.",
+   "tokens": [
+    {
+     "t": "تَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "You’re staying at home today.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.092",
+   "frame": "fr.day",
+   "text": "هَلْ تَبْقَى فِي الْبَيْتِ الْيَوْمَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are you staying at home today?",
+   "level": "A1",
+   "variantOf": "ar.f5.091",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f5.093",
+   "frame": "fr.day",
+   "text": "أُسَافِرُ غَدًا.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "I’m travelling tomorrow.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.094",
+   "frame": "fr.day",
+   "text": "غَدًا يَوْمُ السَّبْتِ.",
+   "tokens": [
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": "يَوْمُ",
+     "l": "ar:yawm",
+     "f": "N;NOM;SG;CONST"
+    },
+    {
+     "t": "السَّبْتِ",
+     "l": "ar:sabt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day"
+   ],
+   "gloss": "Tomorrow is Saturday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.095",
+   "frame": "fr.day",
+   "text": "كُنْتُ فِي الْبَيْتِ أَمْسِ.",
+   "tokens": [
+    {
+     "t": "كُنْتُ",
+     "l": "ar:kana",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I was at home yesterday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.096",
+   "frame": "fr.day",
+   "text": "كَانَ أَبِي فِي الْعَمَلِ أَمْسِ.",
+   "tokens": [
+    {
+     "t": "كَانَ",
+     "l": "ar:kana",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "أَمْسِ",
+     "l": "ar:amsi"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My father was at work yesterday.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.097",
+   "frame": "fr.day",
+   "text": "أَعُودُ لَاحِقًا.",
+   "tokens": [
+    {
+     "t": "أَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "لَاحِقًا",
+     "l": "ar:lahiqan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present"
+   ],
+   "gloss": "I’ll come back later.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.098",
+   "frame": "fr.day",
+   "text": "يَصِلُ الْقِطَارُ قَرِيبًا.",
+   "tokens": [
+    {
+     "t": "يَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "قَرِيبًا",
+     "l": "ar:qariban"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "The train arrives soon.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.099",
+   "frame": "fr.day",
+   "text": "يَصِلُ الْقِطَارُ مُتَأَخِّرًا.",
+   "tokens": [
+    {
+     "t": "يَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "مُتَأَخِّرًا",
+     "l": "ar:mutaakhkhiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present"
+   ],
+   "gloss": "The train arrives late.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.100",
+   "frame": "fr.day",
+   "text": "أَخْرُجُ مِنَ الْبَيْتِ مُبَكِّرًا.",
+   "tokens": [
+    {
+     "t": "أَخْرُجُ",
+     "l": "ar:kharaja",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "مُبَكِّرًا",
+     "l": "ar:mubakkiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I leave the house early.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.101",
+   "frame": "fr.day",
+   "text": "أَشْرَبُ الْقَهْوَةَ دَائِمًا فِي الصَّبَاحِ.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "دَائِمًا",
+     "l": "ar:daiman"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الصَّبَاحِ",
+     "l": "ar:sabah",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I always drink coffee in the morning.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.102",
+   "frame": "fr.day",
+   "text": "نَأْكُلُ فِي الْمَطْعَمِ أَحْيَانًا.",
+   "tokens": [
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطْعَمِ",
+     "l": "ar:matam",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "أَحْيَانًا",
+     "l": "ar:ahyanan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We sometimes eat at the restaurant.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.103",
+   "frame": "fr.day",
+   "text": "أَذْهَبُ إِلَى السُّوقِ كَثِيرًا.",
+   "tokens": [
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "كَثِيرًا",
+     "l": "ar:kathiran"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I often go to the market.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.104",
+   "frame": "fr.day",
+   "text": "غَالِبًا أَذْهَبُ إِلَى الْعَمَلِ بِالْحَافِلَةِ.",
+   "tokens": [
+    {
+     "t": "غَالِبًا",
+     "l": "ar:ghaliban"
+    },
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "بِالْحَافِلَةِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْحَافِلَةِ",
+       "l": "ar:hafila",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I usually go to work by bus.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.105",
+   "frame": "fr.wh",
+   "text": "مَتَى تُسَافِرُ؟ غَدًا.",
+   "tokens": [
+    {
+     "t": "مَتَى",
+     "l": "ar:mata"
+    },
+    {
+     "t": "تُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.question.wh",
+    "fn.present"
+   ],
+   "gloss": "When are you travelling? — Tomorrow.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.106",
+   "frame": "fr.day",
+   "text": "كُلَّ صَبَاحٍ أَشْرَبُ الشَّايَ.",
+   "tokens": [
+    {
+     "t": "كُلَّ",
+     "l": "ar:kull",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "صَبَاحٍ",
+     "l": "ar:sabah",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Every morning I drink tea.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.107",
+   "frame": "fr.day",
+   "text": "نَذْهَبُ إِلَى الْمَدْرَسَةِ كُلَّ يَوْمٍ.",
+   "tokens": [
+    {
+     "t": "نَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "كُلَّ",
+     "l": "ar:kull",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "يَوْمٍ",
+     "l": "ar:yawm",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We go to school every day.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.108",
+   "frame": "fr.day",
+   "text": "صَبَاحَ الْأَحَدِ أَذْهَبُ إِلَى السُّوقِ.",
+   "tokens": [
+    {
+     "t": "صَبَاحَ",
+     "l": "ar:sabah",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْأَحَدِ",
+     "l": "ar:ahad",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "أَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "On Sunday morning I go to the market.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.109",
+   "frame": "fr.time",
+   "text": "عِيدُ مِيلَادِي فِي يَنَايِرَ.",
+   "tokens": [
+    {
+     "t": "عِيدُ مِيلَادِي",
+     "l": "ar:id_milad",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "يَنَايِرَ",
+     "l": "ar:yanayir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "My birthday is in January.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.110",
+   "frame": "fr.time",
+   "text": "هَلْ عِيدُ مِيلَادِكِ فِي شُبَاطَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "عِيدُ مِيلَادِكِ",
+     "l": "ar:id_milad",
+     "f": "N;NOM;SG;POSS;PSS2SF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "شُبَاطَ",
+     "l": "ar:shubat",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is your birthday in February? (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.111",
+   "frame": "fr.time",
+   "text": "الرَّبِيعُ فِي آذَارَ وَنَيْسَانَ.",
+   "tokens": [
+    {
+     "t": "الرَّبِيعُ",
+     "l": "ar:rabi",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "آذَارَ",
+     "l": "ar:adhar",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "وَنَيْسَانَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "نَيْسَانَ",
+       "l": "ar:naysan",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "Spring is in March and April.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.112",
+   "frame": "fr.time",
+   "text": "نُسَافِرُ فِي مَارِسَ.",
+   "tokens": [
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "مَارِسَ",
+     "l": "ar:maris",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "We travel in March.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.113",
+   "frame": "fr.time",
+   "text": "أُسَافِرُ إِلَى مِصْرَ فِي أَبْرِيلَ.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "مِصْرَ",
+     "name": true
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "أَبْرِيلَ",
+     "l": "ar:abril",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I’m travelling to Egypt in April.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.114",
+   "frame": "fr.time",
+   "text": "عِيدُ مِيلَادِهِ فِي أَيَّارَ.",
+   "tokens": [
+    {
+     "t": "عِيدُ مِيلَادِهِ",
+     "l": "ar:id_milad",
+     "f": "N;NOM;SG;POSS;PSS3SM"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "أَيَّارَ",
+     "l": "ar:ayyar",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "His birthday is in May.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.115",
+   "frame": "fr.time",
+   "text": "نَذْهَبُ إِلَى الْقَرْيَةِ فِي مَايُو.",
+   "tokens": [
+    {
+     "t": "نَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "مَايُو",
+     "l": "ar:mayu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core"
+   ],
+   "gloss": "We go to the village in May.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.116",
+   "frame": "fr.time",
+   "text": "الصَّيْفُ فِي حَزِيرَانَ وَتَمُّوزَ وَآبَ.",
+   "tokens": [
+    {
+     "t": "الصَّيْفُ",
+     "l": "ar:sayf",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "حَزِيرَانَ",
+     "l": "ar:haziran",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "وَتَمُّوزَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "تَمُّوزَ",
+       "l": "ar:tammuz",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "وَآبَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "آبَ",
+       "l": "ar:ab_month",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "Summer is in June, July and August.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.117",
+   "frame": "fr.time",
+   "text": "الْعُطْلَةُ فِي يُونْيُو وَيُولْيُو.",
+   "tokens": [
+    {
+     "t": "الْعُطْلَةُ",
+     "l": "ar:utla",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "يُونْيُو",
+     "l": "ar:yunyu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "وَيُولْيُو",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "يُولْيُو",
+       "l": "ar:yulyu",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time"
+   ],
+   "gloss": "The holidays are in June and July.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.118",
+   "frame": "fr.time",
+   "text": "نُسَافِرُ فِي أَغُسْطُسَ.",
+   "tokens": [
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "أَغُسْطُسَ",
+     "l": "ar:aghustus",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "We travel in August.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.119",
+   "frame": "fr.time",
+   "text": "نَعُودُ إِلَى الْمَدْرَسَةِ فِي أَيْلُولَ.",
+   "tokens": [
+    {
+     "t": "نَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدْرَسَةِ",
+     "l": "ar:madrasa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "أَيْلُولَ",
+     "l": "ar:aylul",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "We go back to school in September.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.120",
+   "frame": "fr.time",
+   "text": "تَعُودُ أُخْتِي إِلَى الْجَامِعَةِ فِي سِبْتِمْبِرَ.",
+   "tokens": [
+    {
+     "t": "تَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "أُخْتِي",
+     "l": "ar:ukht",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْجَامِعَةِ",
+     "l": "ar:jamia",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "سِبْتِمْبِرَ",
+     "l": "ar:sibtimbir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "My sister goes back to university in September.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.121",
+   "frame": "fr.time",
+   "text": "الْخَرِيفُ فِي تِشْرِينَ الْأَوَّلِ وَتِشْرِينَ الثَّانِي.",
+   "tokens": [
+    {
+     "t": "الْخَرِيفُ",
+     "l": "ar:kharif",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "تِشْرِينَ الْأَوَّلِ",
+     "l": "ar:tishrin_awwal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "وَتِشْرِينَ الثَّانِي",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "تِشْرِينَ الثَّانِي",
+       "l": "ar:tishrin_thani",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "Autumn is in October and November.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.122",
+   "frame": "fr.time",
+   "text": "يُسَافِرُ أَبِي فِي أُكْتُوبِرَ.",
+   "tokens": [
+    {
+     "t": "يُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَبِي",
+     "l": "ar:ab",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "أُكْتُوبِرَ",
+     "l": "ar:uktubir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "My father travels in October.",
+   "level": "A1",
+   "alts": [
+    "أَبِي يُسَافِرُ فِي أُكْتُوبِرَ."
+   ]
+  },
+  {
+   "id": "ar.f5.123",
+   "frame": "fr.time",
+   "text": "أَعُودُ إِلَى الْبَيْتِ فِي نُوفِمْبِرَ.",
+   "tokens": [
+    {
+     "t": "أَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "نُوفِمْبِرَ",
+     "l": "ar:nufimbir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "I go back home in November.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.124",
+   "frame": "fr.time",
+   "text": "الشِّتَاءُ فِي كَانُونَ الْأَوَّلِ وَكَانُونَ الثَّانِي وَشُبَاطَ.",
+   "tokens": [
+    {
+     "t": "الشِّتَاءُ",
+     "l": "ar:shita",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "كَانُونَ الْأَوَّلِ",
+     "l": "ar:kanun_awwal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "وَكَانُونَ الثَّانِي",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "كَانُونَ الثَّانِي",
+       "l": "ar:kanun_thani",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "وَشُبَاطَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "شُبَاطَ",
+       "l": "ar:shubat",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "Winter is in December, January and February.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.125",
+   "frame": "fr.wh",
+   "text": "مَتَى عِيدُ مِيلَادِكَ؟ فِي دِيسِمْبِرَ.",
+   "tokens": [
+    {
+     "t": "مَتَى",
+     "l": "ar:mata"
+    },
+    {
+     "t": "عِيدُ مِيلَادِكَ",
+     "l": "ar:id_milad",
+     "f": "N;NOM;SG;POSS;PSS2SM"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "دِيسِمْبِرَ",
+     "l": "ar:disimbir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "When is your birthday? — In December.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.126",
+   "frame": "fr.time",
+   "text": "يَعُودُ أَخِي فِي فِبْرَايِرَ.",
+   "tokens": [
+    {
+     "t": "يَعُودُ",
+     "l": "ar:ada",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "فِبْرَايِرَ",
+     "l": "ar:fibrayir",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "My brother comes back in February.",
+   "level": "A1",
+   "alts": [
+    "أَخِي يَعُودُ فِي فِبْرَايِرَ."
+   ]
+  },
+  {
+   "id": "ar.f5.127",
+   "frame": "fr.time",
+   "text": "أَشْرَبُ الْقَهْوَةَ قَبْلَ الْفَطُورِ.",
+   "tokens": [
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "قَبْلَ",
+     "l": "ar:qabla",
+     "f": "ADP"
+    },
+    {
+     "t": "الْفَطُورِ",
+     "l": "ar:fatur",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.object",
+    "fn.case"
+   ],
+   "gloss": "I drink coffee before breakfast.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.128",
+   "frame": "fr.time",
+   "text": "نَشْرَبُ الشَّايَ بَعْدَ الْغَدَاءِ.",
+   "tokens": [
+    {
+     "t": "نَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "بَعْدَ",
+     "l": "ar:bada",
+     "f": "ADP"
+    },
+    {
+     "t": "الْغَدَاءِ",
+     "l": "ar:ghada",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.object",
+    "fn.case"
+   ],
+   "gloss": "We drink tea after lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.129",
+   "frame": "fr.time",
+   "text": "لَا نَشْرَبُ الشَّايَ بَعْدَ الْغَدَاءِ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "نَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الشَّايَ",
+     "l": "ar:shay",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "بَعْدَ",
+     "l": "ar:bada",
+     "f": "ADP"
+    },
+    {
+     "t": "الْغَدَاءِ",
+     "l": "ar:ghada",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.object",
+    "fn.case",
+    "fn.negation"
+   ],
+   "gloss": "We don’t drink tea after lunch.",
+   "level": "A1",
+   "variantOf": "ar.f5.128",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "ar.f5.130",
+   "frame": "fr.time",
+   "text": "تَبْقَى فِي الْبَيْتِ حَتَّى الْمَسَاءِ.",
+   "tokens": [
+    {
+     "t": "تَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "حَتَّى",
+     "l": "ar:hatta"
+    },
+    {
+     "t": "الْمَسَاءِ",
+     "l": "ar:masa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "You stay at home until the evening.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.131",
+   "frame": "fr.time",
+   "text": "هَلْ تَبْقَى فِي الْبَيْتِ حَتَّى الْمَسَاءِ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تَبْقَى",
+     "l": "ar:baqiya",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَيْتِ",
+     "l": "ar:bayt",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "حَتَّى",
+     "l": "ar:hatta"
+    },
+    {
+     "t": "الْمَسَاءِ",
+     "l": "ar:masa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you stay at home until the evening?",
+   "level": "A1",
+   "variantOf": "ar.f5.130",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "ar.f5.132",
+   "frame": "fr.command",
+   "text": "اِنْتَظِرْ حَتَّى الْمَسَاءِ!",
+   "tokens": [
+    {
+     "t": "اِنْتَظِرْ",
+     "l": "ar:intazara",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "حَتَّى",
+     "l": "ar:hatta"
+    },
+    {
+     "t": "الْمَسَاءِ",
+     "l": "ar:masa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.imperative",
+    "fn.case"
+   ],
+   "gloss": "Wait until the evening!",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.133",
+   "frame": "fr.time",
+   "text": "أَنْتَظِرُ مُنْذُ الصَّبَاحِ.",
+   "tokens": [
+    {
+     "t": "أَنْتَظِرُ",
+     "l": "ar:intazara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "مُنْذُ",
+     "l": "ar:mundhu"
+    },
+    {
+     "t": "الصَّبَاحِ",
+     "l": "ar:sabah",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "I’ve been waiting since the morning.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.134",
+   "frame": "fr.time",
+   "text": "أَنْتَظِرُ الْحَافِلَةَ مُنْذُ سَاعَةٍ.",
+   "tokens": [
+    {
+     "t": "أَنْتَظِرُ",
+     "l": "ar:intazara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْحَافِلَةَ",
+     "l": "ar:hafila",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "مُنْذُ",
+     "l": "ar:mundhu"
+    },
+    {
+     "t": "سَاعَةٍ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.object",
+    "fn.case"
+   ],
+   "gloss": "I’ve been waiting for the bus for an hour.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.135",
+   "frame": "fr.time",
+   "text": "أَنَا هُنَا مُنْذُ أُسْبُوعٍ.",
+   "tokens": [
+    {
+     "t": "أَنَا",
+     "l": "ar:ana",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": "مُنْذُ",
+     "l": "ar:mundhu"
+    },
+    {
+     "t": "أُسْبُوعٍ",
+     "l": "ar:usbu",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "I’ve been here for a week.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.136",
+   "frame": "fr.time",
+   "text": "هُوَ فِي الْمَدِينَةِ مُنْذُ عَامٍ.",
+   "tokens": [
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَدِينَةِ",
+     "l": "ar:madina",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "مُنْذُ",
+     "l": "ar:mundhu"
+    },
+    {
+     "t": "عَامٍ",
+     "l": "ar:am_year",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "He has been in the city for a year.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.137",
+   "frame": "fr.time",
+   "text": "خِلَالَ الْعُطْلَةِ نُسَافِرُ.",
+   "tokens": [
+    {
+     "t": "خِلَالَ",
+     "l": "ar:khilala",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعُطْلَةِ",
+     "l": "ar:utla",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "During the holidays we travel.",
+   "level": "A1",
+   "alts": [
+    "نُسَافِرُ خِلَالَ الْعُطْلَةِ."
+   ]
+  },
+  {
+   "id": "ar.f5.138",
+   "frame": "fr.time",
+   "text": "أَصِلُ خِلَالَ سَاعَةٍ.",
+   "tokens": [
+    {
+     "t": "أَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "خِلَالَ",
+     "l": "ar:khilala",
+     "f": "ADP"
+    },
+    {
+     "t": "سَاعَةٍ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "I’ll arrive within an hour.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.139",
+   "frame": "fr.time",
+   "text": "لَا أَشْرَبُ الْقَهْوَةَ أَثْنَاءَ الْعَمَلِ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أَشْرَبُ",
+     "l": "ar:shariba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْقَهْوَةَ",
+     "l": "ar:qahwa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "أَثْنَاءَ",
+     "l": "ar:athnaa",
+     "f": "ADP"
+    },
+    {
+     "t": "الْعَمَلِ",
+     "l": "ar:amal",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.object",
+    "fn.negation",
+    "fn.case"
+   ],
+   "gloss": "I don’t drink coffee during work.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.140",
+   "frame": "fr.time",
+   "text": "أُسَافِرُ بَعْدَ أُسْبُوعٍ.",
+   "tokens": [
+    {
+     "t": "أُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "بَعْدَ",
+     "l": "ar:bada",
+     "f": "ADP"
+    },
+    {
+     "t": "أُسْبُوعٍ",
+     "l": "ar:usbu",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "I’m travelling in a week.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.141",
+   "frame": "fr.time",
+   "text": "يَصِلُ الْقِطَارُ بَعْدَ خَمْسِ دَقَائِقَ.",
+   "tokens": [
+    {
+     "t": "يَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْقِطَارُ",
+     "l": "ar:qitar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "بَعْدَ",
+     "l": "ar:bada",
+     "f": "ADP"
+    },
+    {
+     "t": "خَمْسِ",
+     "l": "ar:khamsa",
+     "f": "NUM;GEN;FEM;CONST"
+    },
+    {
+     "t": "دَقَائِقَ",
+     "l": "ar:daqiqa",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.case",
+    "fn.numerals"
+   ],
+   "gloss": "The train arrives in five minutes.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.142",
+   "frame": "fr.count",
+   "text": "فِي السَّنَةِ اثْنَا عَشَرَ شَهْرًا.",
+   "tokens": [
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّنَةِ",
+     "l": "ar:sana",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "اثْنَا عَشَرَ",
+     "l": "ar:ithna_ashar",
+     "f": "NUM;NOM;MASC"
+    },
+    {
+     "t": "شَهْرًا",
+     "l": "ar:shahr",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "There are twelve months in a year.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.143",
+   "frame": "fr.count",
+   "text": "فِي الْأُسْبُوعِ سَبْعَةُ أَيَّامٍ.",
+   "tokens": [
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْأُسْبُوعِ",
+     "l": "ar:usbu",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "سَبْعَةُ",
+     "l": "ar:saba",
+     "f": "NUM;NOM;MASC;CONST"
+    },
+    {
+     "t": "أَيَّامٍ",
+     "l": "ar:yawm",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "There are seven days in a week.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.144",
+   "frame": "fr.count",
+   "text": "فِي السَّاعَةِ سِتُّونَ دَقِيقَةً.",
+   "tokens": [
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "السَّاعَةِ",
+     "l": "ar:saa",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "سِتُّونَ",
+     "l": "ar:sittun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "دَقِيقَةً",
+     "l": "ar:daqiqa",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "There are sixty minutes in an hour.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.145",
+   "frame": "fr.wh",
+   "text": "مَا التَّارِيخُ الْيَوْمَ؟",
+   "tokens": [
+    {
+     "t": "مَا",
+     "l": "ar:ma"
+    },
+    {
+     "t": "التَّارِيخُ",
+     "l": "ar:tarikh",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.time.day"
+   ],
+   "gloss": "What’s the date today?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.146",
+   "frame": "fr.time",
+   "text": "الْعُطْلَةُ فِي الصَّيْفِ.",
+   "tokens": [
+    {
+     "t": "الْعُطْلَةُ",
+     "l": "ar:utla",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الصَّيْفِ",
+     "l": "ar:sayf",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case"
+   ],
+   "gloss": "The holidays are in the summer.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.147",
+   "frame": "fr.time",
+   "text": "نُسَافِرُ فِي الشِّتَاءِ.",
+   "tokens": [
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الشِّتَاءِ",
+     "l": "ar:shita",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.present",
+    "fn.case"
+   ],
+   "gloss": "We travel in winter.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.148",
+   "frame": "fr.time",
+   "text": "كُلَّ سَنَةٍ نُسَافِرُ إِلَى الْقَرْيَةِ.",
+   "tokens": [
+    {
+     "t": "كُلَّ",
+     "l": "ar:kull",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "سَنَةٍ",
+     "l": "ar:sana",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": "نُسَافِرُ",
+     "l": "ar:safara",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "الْقَرْيَةِ",
+     "l": "ar:qarya",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.direction",
+    "fn.present",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "Every year we go to the village.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.f5.149",
+   "frame": "fr.time",
+   "text": "كُلَّ شَهْرٍ أَشْتَرِي كِتَابًا.",
+   "tokens": [
+    {
+     "t": "كُلَّ",
+     "l": "ar:kull",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "شَهْرٍ",
+     "l": "ar:shahr",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "كِتَابًا",
+     "l": "ar:kitab",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "Every month I buy a book.",
+   "level": "A1"
+  }
+ ]
+}

@@ -1,0 +1,529 @@
+{
+ "field": "abstract",
+ "title": "Abstract things",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "abstract.advantage",
+   "gloss": "an (unfair) advantage, a petty gain (占便宜 to take advantage)",
+   "tier": 1,
+   "rank": 34
+  },
+  {
+   "id": "abstract.age",
+   "gloss": "age, years of life (年纪)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "abstract.airs",
+   "gloss": "airs, arrogance (摆架子 to put on airs)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "abstract.bottom",
+   "gloss": "bottom (of a container, the sea)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "abstract.circuit",
+   "gloss": "circle, circuit; all around (周围)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "abstract.concern",
+   "gloss": "(one’s) business, concern (that’s not my problem)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "abstract.cowardice",
+   "gloss": "cowardice",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "abstract.deed",
+   "gloss": "deed, action, act",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "abstract.detail",
+   "gloss": "detail, subtlety",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "abstract.disaster",
+   "gloss": "disaster, calamity (灾难)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "abstract.disgrace",
+   "gloss": "shame, disgrace; shameful (出丑 to make a fool of oneself)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  },
+  {
+   "id": "abstract.factor",
+   "gloss": "factor",
+   "tier": 2,
+   "rank": 12,
+   "pending": true
+  },
+  {
+   "id": "abstract.famine",
+   "gloss": "famine, starvation",
+   "tier": 2,
+   "rank": 13,
+   "pending": true
+  },
+  {
+   "id": "abstract.field",
+   "gloss": "field, sphere (of activity)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true
+  },
+  {
+   "id": "abstract.forgiveness",
+   "gloss": "forgiveness, pardon (the noun)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true
+  },
+  {
+   "id": "abstract.freedom",
+   "gloss": "freedom, release (from bondage)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true
+  },
+  {
+   "id": "abstract.guidance",
+   "gloss": "right guidance, rectitude",
+   "tier": 2,
+   "rank": 17,
+   "pending": true
+  },
+  {
+   "id": "abstract.history",
+   "gloss": "history",
+   "tier": 1,
+   "rank": 44
+  },
+  {
+   "id": "abstract.luck",
+   "gloss": "luck, good fortune",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "abstract.mess",
+   "gloss": "a mess, a mix-up",
+   "tier": 2,
+   "rank": 20,
+   "pending": true
+  },
+  {
+   "id": "abstract.nonsense",
+   "gloss": "nonsense, rubbish",
+   "tier": 2,
+   "rank": 21,
+   "pending": true
+  },
+  {
+   "id": "abstract.number",
+   "gloss": "number (of a room, a house, a phone)",
+   "tier": 2,
+   "rank": 22,
+   "pending": true
+  },
+  {
+   "id": "abstract.occasion",
+   "gloss": "time, occasion (去过两回 have been there twice)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true
+  },
+  {
+   "id": "abstract.point",
+   "gloss": "dot, point, spot",
+   "tier": 2,
+   "rank": 24,
+   "pending": true
+  },
+  {
+   "id": "abstract.procession",
+   "gloss": "procession, march",
+   "tier": 2,
+   "rank": 25,
+   "pending": true
+  },
+  {
+   "id": "abstract.rank",
+   "gloss": "class, grade, rank (一等 first class)",
+   "tier": 2,
+   "rank": 26,
+   "pending": true
+  },
+  {
+   "id": "abstract.reason",
+   "gloss": "the reason why; the means by which (literary: 所以然)",
+   "tier": 1,
+   "rank": 31
+  },
+  {
+   "id": "abstract.space",
+   "gloss": "space, room (free space)",
+   "tier": 2,
+   "rank": 28,
+   "pending": true
+  },
+  {
+   "id": "abstract.stage",
+   "gloss": "stage, phase (a station on the way)",
+   "tier": 2,
+   "rank": 29,
+   "pending": true
+  },
+  {
+   "id": "abstract.thing",
+   "gloss": "thing",
+   "tier": 2,
+   "rank": 30,
+   "pending": true
+  },
+  {
+   "id": "abstract.trait",
+   "gloss": "feature, trait (of a face, a character)",
+   "tier": 2,
+   "rank": 31,
+   "pending": true
+  },
+  {
+   "id": "abstract.weakness",
+   "gloss": "weak point, shortcoming; lacking (短处)",
+   "tier": 2,
+   "rank": 32,
+   "pending": true
+  },
+  {
+   "id": "abstract.game",
+   "gloss": "game",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "abstract.plan",
+   "gloss": "plan",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "abstract.trip",
+   "gloss": "trip, journey",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "abstract.rule",
+   "gloss": "rule",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "abstract.permission",
+   "gloss": "permission",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "abstract.event",
+   "gloss": "event",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "abstract.story",
+   "gloss": "story",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "abstract.sport",
+   "gloss": "sport",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "abstract.hobby",
+   "gloss": "hobby",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "abstract.freetime",
+   "gloss": "free time",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "abstract.schedule",
+   "gloss": "schedule, timetable",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "abstract.population",
+   "gloss": "population",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "abstract.mistake",
+   "gloss": "mistake",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "abstract.problem",
+   "gloss": "problem",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "abstract.dream",
+   "gloss": "dream (a wish)",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "abstract.success",
+   "gloss": "success",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "abstract.goal",
+   "gloss": "goal, aim",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "abstract.chance",
+   "gloss": "chance, opportunity",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "abstract.decision",
+   "gloss": "decision",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "abstract.accident",
+   "gloss": "accident",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "abstract.reading",
+   "gloss": "reading (the activity)",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "abstract.writing",
+   "gloss": "writing (the activity)",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "abstract.travel",
+   "gloss": "travel, travelling (the activity)",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "abstract.arrival",
+   "gloss": "arrival",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "abstract.departure",
+   "gloss": "departure",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "abstract.development",
+   "gloss": "development",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "abstract.help",
+   "gloss": "help (the noun)",
+   "tier": 1,
+   "rank": 28
+  },
+  {
+   "id": "abstract.change",
+   "gloss": "change (the noun)",
+   "tier": 1,
+   "rank": 29
+  },
+  {
+   "id": "abstract.opinion",
+   "gloss": "opinion",
+   "tier": 1,
+   "rank": 30
+  },
+  {
+   "id": "abstract.example",
+   "gloss": "example",
+   "tier": 1,
+   "rank": 32
+  },
+  {
+   "id": "abstract.argument",
+   "gloss": "argument (a reason given)",
+   "tier": 1,
+   "rank": 33
+  },
+  {
+   "id": "abstract.disadvantage",
+   "gloss": "disadvantage",
+   "tier": 1,
+   "rank": 35
+  },
+  {
+   "id": "abstract.party",
+   "gloss": "party (a celebration)",
+   "tier": 1,
+   "rank": 36
+  },
+  {
+   "id": "abstract.wedding",
+   "gloss": "wedding",
+   "tier": 1,
+   "rank": 37
+  },
+  {
+   "id": "abstract.queue",
+   "gloss": "queue, line",
+   "tier": 1,
+   "rank": 38
+  },
+  {
+   "id": "abstract.environment",
+   "gloss": "environment",
+   "tier": 1,
+   "rank": 39
+  },
+  {
+   "id": "abstract.pollution",
+   "gloss": "pollution",
+   "tier": 1,
+   "rank": 40
+  },
+  {
+   "id": "abstract.energy",
+   "gloss": "energy",
+   "tier": 1,
+   "rank": 41
+  },
+  {
+   "id": "abstract.society",
+   "gloss": "society",
+   "tier": 1,
+   "rank": 42
+  },
+  {
+   "id": "abstract.solution",
+   "gloss": "solution",
+   "tier": 1,
+   "rank": 43
+  },
+  {
+   "id": "abstract.word",
+   "gloss": "word",
+   "tier": 1,
+   "rank": 45
+  },
+  {
+   "id": "abstract.meaning",
+   "gloss": "meaning (of a word)",
+   "tier": 1,
+   "rank": 46
+  },
+  {
+   "id": "abstract.family.word",
+   "gloss": "word family",
+   "tier": 1,
+   "rank": 47
+  },
+  {
+   "id": "abstract.tradition",
+   "gloss": "tradition",
+   "tier": 1,
+   "rank": 48
+  },
+  {
+   "id": "abstract.custom",
+   "gloss": "custom",
+   "tier": 1,
+   "rank": 49
+  },
+  {
+   "id": "abstract.festival",
+   "gloss": "festival",
+   "tier": 1,
+   "rank": 50
+  },
+  {
+   "id": "abstract.proverb",
+   "gloss": "proverb, saying",
+   "tier": 1,
+   "rank": 51
+  },
+  {
+   "id": "abstract.dialect",
+   "gloss": "dialect",
+   "tier": 1,
+   "rank": 52
+  },
+  {
+   "id": "abstract.accent",
+   "gloss": "accent",
+   "tier": 1,
+   "rank": 53
+  },
+  {
+   "id": "abstract.slang",
+   "gloss": "slang",
+   "tier": 1,
+   "rank": 54
+  }
+ ]
+}
