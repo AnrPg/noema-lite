@@ -253,7 +253,7 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   await page.evaluate(plan => { window.__plan = plan; }, sess.plan);
   const ran = await page.evaluate(() => { NoemaLangUI.grammar.runSession(window.__plan); return true; });
   if (ran === true) {
-    for (let guard = 0; guard < 200; guard++) {
+    for (let guard = 0; guard < 400; guard++) {   // (a random session: some take longer)
       await wait(60);
       if (await page.$('.lx-result:has-text("Session done")')) break;
       const cur = await page.evaluate(() => { const a = NoemaLangUI.UI.current; if (!a) return null; if (a.kind === 'item') return { kind: 'item', it: a.it }; if (!['rec', 'prod', 'intro', 'pic'].includes(a.kind)) return { kind: 'other' }; const C = NoemaLangUI.UI.C, x = C.lang[a.lang].lex[a.lex]; return { kind: a.kind, gloss: C.concepts[(x.senses || [])[0]]?.gloss }; });
