@@ -3,8 +3,10 @@
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
-const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {},
-  window.NoemaShell?.mounted && window.NoemaThemes ? (t => ({ name: t.n, avatar: t.emoji }))(NoemaThemes.tutor(NoemaThemes.owned())) : {});   // in the new frame the tutor is the learner's character (engine/themes.js), named in the menus' language
+const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
+// in the new frame the tutor is the character on screen now (NoemaThemes.current(): the learner's own, or the one on a 5-minute try), named in the menus' language;
+// read on every use, so a try or a change shows at once everywhere (buttons, the drawer, the prompts)
+if (window.NoemaShell?.mounted && window.NoemaThemes) for (const [k, f] of [['name', t => t.n], ['avatar', t => t.emoji]]) Object.defineProperty(TUTOR, k, { get: () => f(NoemaThemes.tutor()), enumerable: true });
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
 const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
 const PALETTE = [

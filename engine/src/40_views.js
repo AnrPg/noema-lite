@@ -8,7 +8,22 @@ const SL = (k, v) => window.NoemaShell ? NoemaShell.L(k, v) : k;
 const HOME = () => SHL() ? '#/subject' : '#/';
 function shellChrome(c = {}) { const X = SHL(); if (X) X.chrome(X.subjectChrome(c)); }
 const backBtn = (label, hash) => SHL() ? null : h('button', { class: 'back', onclick: () => go(hash) }, label);
-function view(...kids) { const m = main(); m.innerHTML = ''; m.dataset.page = '@engine'; const v = h('div', { class: 'view' }, ...kids); const fb = typeof filterBanner === 'function' ? filterBanner() : null; if (fb) v.prepend(fb); m.append(v); scrollTo({ top: 0 }); return v; }
+function view(...kids) { const m = main(); m.innerHTML = ''; m.dataset.page = '@engine'; const v = h('div', { class: 'view' }, ...kids); const fb = typeof filterBanner === 'function' ? filterBanner() : null; if (fb) v.prepend(fb); if (STEP_LOCK) v.prepend(h('div', { class: 'lockbar', role: 'note' }, '🔒 ' + SL('lockedPreview'))); m.append(v); scrollTo({ top: 0 }); return v; }
+/* ---------- 🔒 a Roadmap step that is still locked opens for reading: its theory is there, its exercises wait until the step opens ---------- */
+let STEP_LOCK = null;
+/** { missing: titles of the steps to master first } when every Roadmap step this subject teaches is still locked, else null. */
+function stepLock() {
+  const CU = window.NoemaCurriculum, acc = ACCOUNT?.id; if (!CU?.stepsOf || !acc) return null;
+  const on = CU.stepsOf(acc, SUBJ.id).filter(x => !x.c.nodes[x.nid].pack?.assigned).map(x => ({ ...x, all: CU.statuses(acc, x.c) })).filter(x => x.all[x.nid]);   // a subject of the learner's own, attached to a step, stays theirs
+  if (!on.length || on.some(x => x.all[x.nid].open || x.all[x.nid].mastered)) return null;
+  const x = on[0]; return { missing: (x.all[x.nid].parents || []).filter(p => !x.all[p]?.mastered).map(p => x.c.nodes[p]?.title || p) };
+}
+const lockNote = () => h('div', { class: 'locknote' }, '🔒 ', SL('exLocked', { list: STEP_LOCK.missing.join(', ') || '…' }));
+function lockedView() {
+  shellChrome({ sub: true, crumbs: [[SL('exercisesWord')]], back: HOME(), corner: true });
+  view(lockNote(), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(HOME()) }, '📖 ' + SL('backToTheory'))));
+}
+const LOCKED_ROUTES = new Set(['practice', 'run', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'ex']);
 const go = hash => { location.hash = hash; };
 /** Remember where the learner reads (Today › Continue, across subjects; engine/shell.js). */
 function noteRecent(extra = {}) {
@@ -123,6 +138,7 @@ function nodeBanner() {
 }
 /** 🎯 Practice ▾ — every way to practise the whole subject, in one place. */
 function practiceItems() {
+  if (STEP_LOCK) return [{ label: SL('exercisesWord'), sub: SL('exLocked', { list: STEP_LOCK.missing.join(', ') || '…' }), icon: '🔒', run: () => toast('🔒 ' + SL('lockedPreview'), 4000) }];
   const dueFc = countDueCards(), duePb = countDuePlaybooks(), wrong = mistakesList().length;
   return [
     { label: t('home.mixed'), sub: t('home.mixedSub'), icon: '🎲', href: '#/practice/all' },
@@ -131,7 +147,7 @@ function practiceItems() {
     { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong || null, tone: 3 },
     { label: t('home.lightning'), sub: t('home.lightningSub'), icon: '⚡', href: '#/lightning' },
     '-',
-    { label: SHL() ? SL('askTutor') : t('home.tutor'), sub: t('home.tutorSub'), icon: TUTOR.avatar, run: () => openTutor(null, 'socratic', null, { intent: INTENT.course }) }];
+    { label: SHL() ? SL('askTutor') : t('home.tutor'), sub: SHL() ? SL(window.NoemaThemes?.tutor?.()?.pl ? 'askTutorSubPl' : 'askTutorSub') : t('home.tutorSub'), icon: TUTOR.avatar, run: () => openTutor(null, 'socratic', null, { intent: INTENT.course }) }];
 }
 function practiceButton(items = practiceItems()) {
   const X = SHL();
@@ -234,7 +250,7 @@ function doSearch(q, box) {
   if (!searchIdx) searchIdx = Object.values(SEC).map(s => ({ s, title: s.title.toLowerCase(), body: sectionText(s).toLowerCase() }));
   const words = q.split(/\s+/);
   const res = searchIdx.map(x => { let sc = 0; for (const w of words) { if (x.title.includes(w)) sc += 10; const c = x.body.split(w).length - 1; if (!c) return null; sc += Math.min(c, 8); } return { ...x, sc }; }).filter(Boolean).sort((a, b) => b.sc - a.sc).slice(0, 7);
-  if (!res.length) { box.append(h('div', { class: 'tiny' }, `No match — try a different word, or ask ${TN} ${TUTOR.avatar}`)); return; }
+  if (!res.length) { box.append(h('div', { class: 'tiny' }, `No match — try a different word, or ask ${TUTOR.name} ${TUTOR.avatar}`)); return; }
   res.forEach((r, i) => {
     const pos = r.body.indexOf(words[0]);
     const snip = sectionText(r.s).slice(Math.max(0, pos - 50), pos + 90).replace(/\s+/g, ' ');
@@ -290,7 +306,8 @@ function chapterView(id, tab) {
         nextSec ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + nextSec.id) }, (S.read[c.sections[0].id] ? SL('continueSec', { title: nextSec.title }) : SL('startReading'))) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${id}/practice`) }, '🎯 ' + SL('practiceChapter')),
         h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
   } else if (on === 'practice') {
-    if (tab === 'practice') body.append(chapterPractice(c));
+    if (STEP_LOCK) body.append(lockNote());
+    else if (tab === 'practice') body.append(chapterPractice(c));
     else {
       body.append(h('button', { class: 'linkish subback', onclick: () => go(`#/ch/${id}/practice`) }, '‹ ' + SL('allWays')));
       if (tab === 'debug') drillList(body, c.debug);
@@ -423,24 +440,25 @@ function sectionTail(s, prev, next) {
   const quick = exs.filter(e => e.quick);
   const pbs = c.debug.filter(d => d.section === s.id);
   const zone = h('div', { class: 'quickzone' });
-  if (quick.length) {
+  if (STEP_LOCK) { if (exs.length || pbs.length) zone.append(lockNote()); }
+  else if (quick.length) {
     zone.append(h('h3', {}, '⚡ ' + SL('quickCheck'), h('span', { class: 'tiny' }, SL('quickCheckSub', { n: quick.length }))));
     quick.forEach(e => zone.append(exerciseCard(e)));
   }
-  if (pbs.length) {
+  if (pbs.length && !STEP_LOCK) {
     zone.append(h('h3', { style: { margin: '22px 0 10px' } }, '🔧 ' + SL('sectionDrill')));
     pbs.forEach(d => zone.append(drillTile(d)));
   }
-  const fresh = h('div', { class: 'freshslot' });
+  const fresh = h('div', { class: STEP_LOCK ? '' : 'freshslot' });
   const freshQ = async () => { const note = h('p', { class: 'tiny' }, '✨ ' + SL('generating')); fresh.prepend(note); try { const ex = await aiQuestion(s); note.replaceWith(exerciseCard(ex)); } catch (er) { note.remove(); toast('⚠️ ' + er.message, 4000); } };
   const ask = [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, { label: SL('askDebug'), icon: '🔧', run: () => askSection(s, 'debug') },
     { label: SL('askInterview'), icon: '🎤', run: () => askSection(s, 'interview') }, '-', { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: freshQ }];
   const X = SHL();
-  fresh.addEventListener('noema-fresh', freshQ);   // the section's ⋮ › A new question
+  if (!STEP_LOCK) fresh.addEventListener('noema-fresh', freshQ);   // the section's ⋮ › A new question
   // in the frame the tutor's ways (Socratic, debugging, interview) are in its own window and a new question in the section's ⋮
   zone.append(fresh, h('div', { class: 'row sectools' },
     X ? null : h('span', { class: 'row' }, ...ask.filter(a => a !== '-').map(a => h('button', { class: 'btn' + (a.icon === TUTOR.avatar ? ' ai' : ''), onclick: a.run }, `${a.icon} ${a.label}`))),
-    exs.length ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
+    exs.length && !STEP_LOCK ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
   if (!X) {
     zone.append(h('div', { class: 'secnav' },
       prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
@@ -588,7 +606,7 @@ function playLightning(chid) {
   const draw = () => { const ex = pool[i % pool.length]; stmt.innerHTML = ''; stmt.append(h('div', { html: fmt(ex.q) })); setAccent(stmt, ex._ch); sc.textContent = `Score: ${score}`; };
   const key = e => { if (e.key === 'ArrowLeft') ans(true); if (e.key === 'ArrowRight') ans(false); };
   document.addEventListener('keydown', key);
-  view(h('div', { class: 'runner lightning' }, clock, stmt, h('div', { class: 'tfrow' }, h('button', { class: 'tfbtn t', onclick: () => ans(true) }, '👍 True  ←'), h('button', { class: 'tfbtn f', onclick: () => ans(false) }, '→  👎 False')), h('div', { style: { marginTop: '12px' } }, sc)));
+  view(h('div', { class: 'runner lightning' + (SHL() ? ' has-ask' : '') }, SHL() ? askBuddyBtn(() => askAIAbout(pool[i % pool.length], null)) : null, clock, stmt, h('div', { class: 'tfrow' }, h('button', { class: 'tfbtn t', onclick: () => ans(true) }, '👍 True  ←'), h('button', { class: 'tfbtn f', onclick: () => ans(false) }, '→  👎 False')), h('div', { style: { marginTop: '12px' } }, sc)));
   draw();
   const t = setInterval(() => {
     if (location.hash !== here) { clearInterval(t); document.removeEventListener('keydown', key); over = true; return; }
@@ -636,11 +654,19 @@ function flashDeck(body, cards) {
       h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} Ch${c._ch.num} · ${i + 1}/${queue.length}`), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, 'tap to flip')),
       h('div', { class: 'face back' }, h('small', {}, 'answer'), h('div', { html: fmt(c.a) }))));
     setAccent(fl, c._ch);
+    if (SHL()) { fl.classList.add('has-ask'); fl.append(askBuddyBtn(() => askAboutCard(c, fl.classList.contains('flipped')))); }
     const rate = q => { rateCardKey(c.key, q); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
     stage.append(fl, h('div', { class: 'rate' }, h('button', { class: 'btn', onclick: () => rate(0) }, '😵 Again'), h('button', { class: 'btn', onclick: () => rate(1) }, '🙂 Good'), h('button', { class: 'btn primary', onclick: () => rate(2) }, '😎 Easy')),
       c.section && SEC[c.section] ? h('div', { style: { textAlign: 'center', marginTop: '10px' } }, h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => go('#/s/' + c.section) }, 'open the section')) : null);
   }
   show();
+}
+
+/** Ask the character about a flashcard: a hint while its answer is hidden, a deeper explanation once it is turned. */
+function askAboutCard(c, turned) {
+  const ctx = { kind: 'exercise', id: 'fc:' + c.key, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
+  if (turned) openTutor(ctx, 'explain', 'Explain this flashcard to me in more depth, with an example.');
+  else openTutor(ctx, 'hint', 'Give me a hint for this flashcard — don\'t tell me the answer.', { intent: INTENT.exHint('') });
 }
 
 /* ---------- debug drills ---------- */
@@ -682,7 +708,7 @@ function drillView(id) {
       h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 Reveal checklist'),
       h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Grading…'; try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + er.message, 4000); reveal(null); } } }, '✨ Grade my checklist'),
       h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 Order drill'),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, `🎭 Role-play it with ${TN}`)),
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, `🎭 Role-play it with ${TUTOR.name}`)),
     stage));
   function orderDrill() {
     stage.innerHTML = '';
@@ -725,6 +751,8 @@ function route() {
   const X = SHL();
   if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
   closeTutorIfMobile();
+  STEP_LOCK = stepLock();
+  if (STEP_LOCK && LOCKED_ROUTES.has(p[0])) return lockedView();
   if (!p[0] || p[0] === 'subject') return homeView();
   if (p[0] === 'ch') return chapterView(p[1], p[2]);
   if (p[0] === 's') return sectionView(p[1]);
@@ -763,8 +791,9 @@ function boot() {
   renderTopStats();
   if (!X) addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());
-  if (X) X.attachEngine({ route, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => { T.showHistory = true; openTutor(); },
+  if (X) { X.attachEngine({ route, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
     accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
+    setTimeout(resumeConvo, 300); }
   else route();
   if (S.settings.apiKey && !S.settings.models.length) detectModels().catch(() => { });
 }

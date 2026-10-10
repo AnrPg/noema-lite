@@ -163,8 +163,9 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 /* ✨ Create with Claude — two ways, numbered steps with sub-steps, ⓘ tips (loader.js claudeGuide) */
 .cg-box{width:min(820px,100%)}
 .cg-q{font-weight:700;margin:14px 0 8px}
-.cg-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.cg-choice{text-align:left;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);cursor:pointer;display:grid;gap:6px;font:inherit;color:inherit;transition:border-color .15s,transform .15s}
+.cg-choices{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}   /* the three ways: all in one row, or one under the other — never 2 + 1 */
+@media (min-width:900px){.cg-choices{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cg-choice{text-align:left;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);cursor:pointer;display:grid;gap:6px;align-content:start;font:inherit;color:inherit;transition:border-color .15s,transform .15s}
 .cg-choice:hover,.cg-choice:focus-visible{border-color:var(--violet);transform:translateY(-2px);outline:none}
 .cg-choice b{font-size:18px}.cg-choice ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14.5px;color:var(--ink2)}
 .cg-ico{font-size:30px}
@@ -250,6 +251,14 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-r-intro,.cm-r-synthesis{font-size:14.5px}.cm-r-synthesis.cm-open,.cm-r-intro.cm-open{background:var(--violet-bg)}
 .cm-panel{width:min(420px,40vw);border-left:1px solid var(--line);background:var(--card);overflow:auto;padding:16px;display:none;position:relative}
 .cm-panel.on{display:block}.cm-pclose{position:absolute;right:10px;top:10px}
+/* the step panel's emoji buttons (✏️ edit, 📚 sources) and the sources sheet */
+.cm-emo{min-width:36px;justify-content:center;font-size:16px;padding-inline:8px}
+.cm-srcbox{max-width:560px}.cm-srchead h3{margin:0}
+.cm-srclist{display:grid;gap:8px;margin-top:10px}
+.cm-srcrow{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:inherit;font:inherit;cursor:pointer}
+.cm-srcrow:hover:not([disabled]){border-color:var(--c)}.cm-srcrow[disabled]{opacity:.65;cursor:default}
+.cm-srcrow b{display:block;font-weight:600}.cm-srcrow small{display:block;color:var(--ink3);font-size:12.5px;margin-top:2px}
+.cm-srcic{font-size:20px;line-height:1}.cm-srceye{opacity:.7}
 .cm-ptitle{display:flex;gap:10px;align-items:center;padding-right:36px}.cm-ptitle h3{margin:0;font-size:19px}.cm-ptitle .cm-ic{font-size:28px}
 .cm-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.cm-live{display:grid;gap:2px;padding:8px 10px;border-radius:12px;background:var(--violet-bg);font-weight:700;width:100%}
 .cm-lock{padding:8px 10px;border-radius:12px;background:var(--bg2)}

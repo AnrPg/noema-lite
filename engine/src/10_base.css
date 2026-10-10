@@ -409,3 +409,6 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 .chatlang{margin-left:auto;font-size:12.5px;padding:3px 6px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--ink2);max-width:170px}
+/* 🔒 a locked Roadmap step opened for reading: one quiet line on top, one note where the exercises would be */
+.lockbar{margin:0 0 14px;padding:8px 12px;border-radius:var(--r-sm);background:var(--bg2);color:var(--ink2);font-size:13.5px}
+.locknote{margin:14px 0;padding:12px 14px;border:1px dashed var(--line);border-radius:var(--r-sm);color:var(--ink2);font-size:14px}

@@ -132,7 +132,7 @@ async function mockGemini(ctx) {
   ok(await page.$$eval('.katex', k => k.length) > 0, 'math rendered with KaTeX on home');
   await page.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(700);
   ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
-  ok(await page.evaluate(() => TN === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
+  ok(await page.evaluate(() => TUTOR.name === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
   await page.screenshot({ path: SHOTS + '/a4_physics_section.png', fullPage: true });
   const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); addXP(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
   ok(xpOk, 'XP counted per subject and in the account total');

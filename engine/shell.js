@@ -578,7 +578,7 @@ window.NoemaShell = (() => {
   PAGES.me = ([sec]) => {
     if (sec === 'look') return lookPage();
     if (sec && ME_VIEWS[sec]) return mePage(sec);
-    const a = N().account || {}, m = TH()?.owned(), t = tv(m);
+    const a = N().account || {}, m = TH()?.current(), t = tv(m), trying = !!TH()?.preview();
     const changeAt = TH()?.nextChangeAt(), can = TH()?.canChange();
     const it = (icon, n, title, sub, run, extra = {}) => h('button', { class: 'ns-item', onclick: run, ...extra }, icon, h('span', { class: 't' }, h('b', {}, title), sub ? h('small', {}, sub) : null), chev());
     const w = TH()?.world() || 'know';
@@ -587,11 +587,11 @@ window.NoemaShell = (() => {
       h('section', { class: 'ns-panel' }, h('span', { class: 'ns-label' }, L('whatILearn')), h('p', { class: 'tiny' }, L('whatILearnSub')),
         h('div', { class: 'ns-seg', role: 'radiogroup', 'aria-label': L('whatILearn') }, ...[['know', L('knowledge')], ['lang', L('languages')], ['both', L('both')]].map(([k, l]) => h('button', { class: w === k ? 'on' : '', role: 'radio', 'aria-checked': String(w === k), onclick: () => { TH().putSettings({ world: k }); drawTabs(); PAGES.me([]); } }, l)))),
       h('div', { class: 'ns-list' },
-        it(h('span', { class: 'ns-ico face', style: tone(2) }, faceEl(m)), 2, L('character'), TH()?.locked() ? L('charLocked', { tutor: t.tutor }) : `${t.tutor} · ${can ? L('canChange') : L('nextChange', { date: fmtDate(changeAt) })}`, () => go('#/character')),
+        it(h('span', { class: 'ns-ico face', style: tone(2) }, faceEl(m)), 2, L('character'), TH()?.locked() ? L('charLocked', { tutor: t.tutor }) : trying ? L('tryingNow') : `${t.tutor} · ${can ? L('canChange') : L('nextChange', { date: fmtDate(changeAt) })}`, () => go('#/character')),
         it(ico('user', 4), 4, L('profile'), L('profileSub'), () => go('#/me/profile')),
         it(ico('spark', 2), 2, L('aiTitle'), L('aiSub'), () => go('#/me/ai')),
         it(ico('palette', 4), 4, L('look'), L('lookSub', { lang: (window.NoemaI18n?.LANGS.find(x => x[0] === lang()) || [, lang()])[1] }), () => go('#/me/look')),
-        ENGINE ? it(ico('clock', 1), 1, L('activity'), L('activitySub'), () => ENGINE.history?.()) : null,
+        it(ico('clock', 1), 1, L('activity'), L('activitySub'), () => convos()),
         it(ico('book', 3), 3, L('mySubjects'), L('mySubjectsSub'), () => go('#/me/subjects')),
         it(ico('cloud', 1), 1, L('data'), L('dataSub'), () => go('#/me/data')),
         it(ico('help', 2), 2, L('help'), L('helpSub'), () => go('#/me/help'))),
@@ -627,7 +627,7 @@ window.NoemaShell = (() => {
         seg(L('gameMode'), game, [['playful', L('gamePlayful')], ['calm', L('gameCalm')], ['off', L('gameOff')]], k => TH().putSettings({ game: k })),
         h('p', { class: 'tiny' }, L('gameRules'))),
       h('section', { class: 'ns-panel ns-form' }, h('span', { class: 'ns-label' }, L('studying')), chk('sound', true, L('sound')), chk('chunk', true, L('chunk')), h('label', { class: 'row ns-check' }, goal, L('dailyGoal'))),
-      h('div', { class: 'row' }, h('button', { class: 'btn', onclick: () => go('#/character') }, faceEl(TH()?.owned(), 'mini'), L('character'))));
+      h('div', { class: 'row' }, h('button', { class: 'btn', onclick: () => go('#/character') }, faceEl(undefined, 'mini'), L('character'))));
     uiL.addEventListener('change', () => { putS({ lang: uiL.value || undefined }); location.reload(); });
   }
   /** Save account settings (a:settings, synced) and keep the open subject's copy (S.settings) in step. */
@@ -636,13 +636,13 @@ window.NoemaShell = (() => {
     TH()?.putSettings(patch);
   }
 
-  /* ---------- the character gallery: try anyone for 5 minutes, change once every 15 days ---------- */
+  /* ---------- the character gallery: try anyone for 5 minutes; change freely for 15 days, then once every 5 days ---------- */
   PAGES.character = () => {
     const own = TH().owned(), can = TH().canChange(), locked = TH().locked(), at = TH().settings().characterAt;
     const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('character')]], back: '#/me' },
       h('div', {}, h('span', { class: 'ns-label' }, L('companion')), h('h1', {}, L('character'))),
       h('p', { class: 'ns-muted' }, L('characterIntro')),
-      h('p', { class: 'tiny' }, locked ? L('charLockedLong') : can ? L('canChangeNow') : L('changedOn', { date: fmtDate(at), next: fmtDate(TH().nextChangeAt()) })));
+      h('p', { class: 'tiny' }, locked ? L('charLockedLong') : Date.now() < TH().freeUntil() ? L('freeUntil', { date: fmtDate(TH().freeUntil()) }) : can ? L('canChangeNow') : L('changedOn', { date: fmtDate(at), next: fmtDate(TH().nextChangeAt()) })));
     const sample = { el: 'Αα Καλησπέρα', en: 'Aa Good evening', ru: 'Аа Добрый вечер', fr: 'Aa Bonsoir' }[lang()] || 'Aa';
     for (const g of ['animals', 'tales', 'grown']) {
       const gal = h('div', { class: 'ns-gal' }); v.append(charGroup(g, gal));
@@ -654,7 +654,7 @@ window.NoemaShell = (() => {
           h('span', { class: 'sws' }, ...[d.light[6], d.light[9], d.light[11], d.light[13], d.light[15]].map(c => h('i', { style: { background: c } }))),
           h('span', { class: 'fs' }, sample),
           cur || locked ? null : h('div', { class: 'row' }, h('button', { class: 'btn small soft', 'data-try': k, onclick: () => { TH().startPreview(k); toast(L('tryingNow', { tutor: nm }), 2500); } }, L('try5'))
-            , !TH().settings().character ? h('button', { class: 'btn small', onclick: () => { TH().choose(k); window.NoemaReact?.big('level', L('welcomeWorld')); } }, L('choose')) : null)));
+            , !TH().settings().character || can ? h('button', { class: 'btn small', 'data-choose': k, onclick: () => { TH().choose(k); window.NoemaReact?.big('level', L('welcomeWorld')); } }, L('choose')) : null)));
       }
     }
   };
@@ -673,6 +673,103 @@ window.NoemaShell = (() => {
     F.pv.replaceChildren(h('div', { class: 'ns-preview', role: 'status', 'data-m': p.m }, faceEl(p.m), h('span', {}, L('trying'), ' ', h('b', {}, nm), ' · ', h('b', { class: 'ns-pvtime' }, `${mm}:${ss}`)),
       h('span', { class: 'row grow-end' }, h('button', { class: 'btn small primary', disabled: can ? null : true, onclick: () => { TH().choose(p.m); window.NoemaReact?.big('level', L('welcomeWorld')); } }, L('keepIt')), h('button', { class: 'btn small', onclick: () => TH().endPreview() }, L('endTry'))),
       can ? null : h('span', { class: 'tiny full' }, L('keepFrom', { date: fmtDate(TH().nextChangeAt()) }))));
+  }
+
+  /* ---------- 🕘 the conversations with the tutor, in every subject: a window in the middle of the screen, grouped by Roadmap and step ---------- */
+  const emoBtn = (emo, label, run) => h('button', { class: 'ns-emobtn', type: 'button', title: label, 'aria-label': label, onclick: run }, emo);
+  /** A window in the middle of the screen. build({ head, body, close }) */
+  /** A window in the middle of the screen: focus moves into it, Tab stays inside, and closing gives focus back to what opened it. */
+  function modal(title, build, { cls = '' } = {}) {
+    const opener = document.activeElement;
+    const close = () => { F.layer.replaceChildren(); if (opener?.isConnected) opener.focus?.(); };
+    const head = h('div', { class: 'ns-mdhead' }), body = h('div', { class: 'ns-mdbody' });
+    const win = h('div', { class: 'ns-modal ns-mdwin ' + cls, role: 'dialog', 'aria-modal': 'true', 'aria-label': title, tabindex: '-1', onkeydown: e => {
+      if (e.key === 'Escape') { e.stopPropagation(); close(); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...win.querySelectorAll('button,[href],input,select,textarea,summary')].filter(x => !x.disabled && x.getClientRects().length);
+      if (!f.length) return;
+      const a = document.activeElement;
+      if (e.shiftKey && (a === f[0] || a === win)) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && a === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    } }, head, body);
+    const refocus = () => { if (!win.contains(document.activeElement)) win.focus(); };   // after a re-render dropped the focused button
+    F.layer.replaceChildren(h('div', { class: 'ns-scrim', onclick: close }), win);
+    build({ head, body, close, refocus }); refocus(); return close;
+  }
+  const cvTitle = r => r.title || String(r.messages.find(m => m.role === 'user')?.content || '').replace(/\s+/g, ' ').slice(0, 60) || L('untitled');
+  const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), v = L('mode' + m.charAt(0).toUpperCase() + m.slice(1)); return v.startsWith('sh.') ? m : v; };
+  const cvWhat = r => !r.context || r.context.type === 'course' ? '' : r.context.type === 'exercise' ? L('forExercise') : r.context.label || '';   // a whole-subject chat needs no label (it read like a filter)
+  const cvText = t => String(t || '').replace(/<noema-state>[\s\S]*?<\/noema-state>/g, '').trim();
+  function cvMd(t) { const d = h('div', { class: 'ns-md' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parse(cvText(t))); else d.textContent = cvText(t); return d; }
+  function download(name, text) { const a = h('a', { href: URL.createObjectURL(new Blob([text], { type: 'text/markdown;charset=utf-8' })), download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+  const cvMarkdown = r => window.NoemaConvos?.toMarkdown ? NoemaConvos.toMarkdown({ ...r, messages: r.messages.map(m => ({ ...m, content: cvText(m.content) })) }, { tutorName: tv().tutor, tutorAvatar: TH()?.tutor()?.emoji || '' }) : r.messages.map(m => `**${m.role === 'user' ? L('you') : tv().tutor}:** ${cvText(m.content)}`).join('\n\n');
+  const slug = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 60) || 'conversation';
+  /** Where a subject sits: { group: Roadmap (or "no Roadmap"), step: its step (or the subject itself) } */
+  function placeOf(sid, title) {
+    const st = window.NoemaCurriculum?.stepsOf ? NoemaCurriculum.stepsOf(acc(), sid) : [];
+    if (st.length) { const { c, nid } = st[0]; return { g: 'c:' + c.id, gt: c.title || c.goal || L('roadmap'), s: c.id + '/' + nid, st: c.nodes[nid]?.title || title }; }
+    return { g: 'other', gt: L('otherSubjects'), s: 's:' + sid, st: title || sid };
+  }
+  function convos() {
+    const C = window.NoemaConvos; if (!C || !acc()) return;
+    let q = '', allKinds = false;
+    modal(L('activity'), ({ head, body, close, refocus }) => {
+      const closeBtn = h('button', { class: 'ns-iconbtn', 'aria-label': L('close'), onclick: close }, svg('close'));
+      const groups = h('div', { class: 'ns-cvgroups' });
+      const search = h('input', { class: 'noema-input ns-cvsearch', type: 'search', placeholder: L('convosSearch'), 'aria-label': L('convosSearch'), oninput: e => { q = e.target.value.trim().toLowerCase(); draw(); } });
+      let rows = [];
+      async function load() { rows = (await C.list(acc()).catch(() => [])).filter(r => r.messages?.length).sort((a, b) => String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''))); }
+      async function listView() {
+        await load();
+        const tutorOnly = rows.filter(r => !r.kind || r.kind === 'tutor'), others = rows.length - tutorOnly.length;
+        head.replaceChildren(...[h('h2', { class: 'grow' }, `${L('activity')} (${tutorOnly.length})`), rows.length ? emoBtn('⬇️', L('exportAll'), () => download('conversations.md', (allKinds ? rows : tutorOnly).map(cvMarkdown).join('\n\n---\n\n'))) : null, closeBtn].filter(Boolean));
+        body.replaceChildren(...[h('p', { class: 'tiny ns-muted' }, L('convosSaved')),
+          rows.length > 3 ? search : null,
+          others ? h('label', { class: 'row tiny ns-check' }, h('input', { type: 'checkbox', checked: allKinds, onchange: e => { allKinds = e.target.checked; draw(); } }), L('convosOthers', { n: others })) : null,
+          groups].filter(Boolean));   // replaceChildren() would print a null as text
+        draw(); refocus();
+      }
+      function draw() {
+        const shown = rows.filter(r => (allKinds || !r.kind || r.kind === 'tutor') && (!q || (cvTitle(r) + ' ' + cvWhat(r) + ' ' + (r.subject?.title || '') + ' ' + r.messages.map(m => m.content).join(' ')).toLowerCase().includes(q)));
+        if (!shown.length) { groups.replaceChildren(h('p', { class: 'ns-muted' }, rows.length ? L('noResults') : L('noConvos'))); return; }
+        const G = new Map();   // Roadmap → step → conversations, newest first (rows are sorted)
+        for (const r of shown) {
+          const p = placeOf(r.subject?.id || '', r.subject?.title);
+          if (!G.has(p.g)) G.set(p.g, { t: p.gt, steps: new Map() });
+          const g = G.get(p.g); if (!g.steps.has(p.s)) g.steps.set(p.s, { t: p.st, rows: [] }); g.steps.get(p.s).rows.push(r);
+        }
+        const first = [...G.keys()].sort((a, b) => (a === 'other') - (b === 'other'));
+        groups.replaceChildren(...first.map((gk, gi) => { const g = G.get(gk), n = [...g.steps.values()].reduce((a, s) => a + s.rows.length, 0);
+          return h('details', { class: 'ns-cvgrp', open: q || gi === 0 ? true : null }, h('summary', {}, h('span', { class: 'grow' }, g.t), pill(String(n), 4)),
+            ...[...g.steps.values()].map((s, si) => h('details', { class: 'ns-cvstep', open: q || (gi === 0 && si === 0) ? true : null }, h('summary', {}, h('span', { class: 'grow' }, s.t), h('span', { class: 'tiny' }, String(s.rows.length))), ...s.rows.map(row)))); }));
+      }
+      function row(r) {
+        let sure = false; const tl = h('b', {}, cvTitle(r));
+        return h('div', { class: 'ns-cvrow' },
+          h('button', { class: 'ns-cvmain', onclick: () => oneView(r) }, tl, h('small', {}, [cvMode(r), cvWhat(r), fmtDate(r.updatedAt, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), L('nMessages', { n: r.messages.length })].filter(Boolean).join(' · '))),
+          h('span', { class: 'ns-cvacts' },
+            emoBtn('✏️', L('rename'), () => { const inp = h('input', { class: 'noema-input', value: cvTitle(r), 'aria-label': L('rename'), onkeydown: e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { e.stopPropagation(); inp.value = cvTitle(r); inp.blur(); } },
+              onblur: async () => { const v = inp.value.trim().slice(0, 80); if (v && v !== cvTitle(r)) { r.title = v; r.titleSource = 'user'; r = await C.put(acc(), r); ENGINE?.convoChanged?.(r.id, { title: v }); /* put() gives it a newer updatedAt, or other devices keep the old title */ } inp.replaceWith(tl); tl.textContent = cvTitle(r); setTimeout(refocus); } });
+              tl.replaceWith(inp); inp.focus(); inp.select(); }),
+            emoBtn('⬇️', L('exportMd'), () => download(slug(cvTitle(r)) + '.md', cvMarkdown(r))),
+            emoBtn('🗑️', L('del'), async e => { const b = e.currentTarget; if (!sure) { sure = true; b.textContent = '❓'; b.title = L('delAgain'); return; } await C.remove(acc(), r.id); ENGINE?.convoChanged?.(r.id, null); listView(); })));
+      }
+      function oneView(r) {
+        head.replaceChildren(emoBtn('↩️', L('convBack'), listView), h('h2', { class: 'grow' }, cvTitle(r)), emoBtn('⬇️', L('exportMd'), () => download(slug(cvTitle(r)) + '.md', cvMarkdown(r))), closeBtn);
+        const p = placeOf(r.subject?.id || '', r.subject?.title);
+        body.replaceChildren(h('p', { class: 'tiny ns-muted' }, [p.st, cvMode(r), cvWhat(r), fmtDate(r.updatedAt, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })].filter(Boolean).join(' · ')),
+          h('div', { class: 'ns-cvmsgs' }, ...r.messages.filter(m => cvText(m.content)).map(m => h('div', { class: 'ns-cvmsg ' + (m.role === 'user' ? 'me' : 'ai') }, h('small', {}, m.role === 'user' ? L('you') : tv().tutor), cvMd(m.content)))),
+          r.subject?.id && (!r.kind || r.kind === 'tutor') ? h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); goConvo(r); } }, L('convContinue'))) : null);
+        body.scrollTop = 0; refocus();
+      }
+      listView();
+    }, { cls: 'ns-convos' });
+  }
+  /** Continue a conversation in the tutor's window: in this subject at once, else after opening its subject (engine/src/60_convos.js resumeConvo). */
+  function goConvo(r) {
+    try { sessionStorage.setItem('noema-device:openConvo', JSON.stringify({ acc: acc(), sid: r.subject.id, id: r.id })); } catch (e) { }
+    if (ENGINE && r.subject.id === subjectId()) { ENGINE.resumeConvo?.(); return; }
+    N().switchTo(acc(), r.subject.id, '#/subject');
   }
 
   /* ---------- first time: what do you want to learn, and who comes with you ---------- */
@@ -712,6 +809,6 @@ window.NoemaShell = (() => {
   /** Small items an engine page shows in the top bar, next to ⋮ (e.g. the focus-sprint clock). */
   function setActs(nodes) { F.acts.prepend(...nodes.filter(Boolean)); }
 
-  return { level: LEVEL, mount, attachEngine, noEngine, chrome, subjectChrome, route, go, open, menuButton, popMenu, closePops, sheet, tip, hint, h, svg, faceEl, ico, icoTxt, pill, bar, ring, L, tv, noteRecent, recent, registerWorld, setActs, onboarding, importFile,
+  return { level: LEVEL, mount, attachEngine, noEngine, chrome, subjectChrome, route, go, open, menuButton, popMenu, closePops, sheet, modal, convos, tip, hint, h, svg, faceEl, ico, icoTxt, pill, bar, ring, L, tv, noteRecent, recent, registerWorld, setActs, onboarding, importFile,
     get mounted() { return mounted; }, get engine() { return ENGINE; }, ENGINE_ROUTES };
 })();

@@ -203,12 +203,12 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
 
   console.log('— editing the map');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
-  await p.click('.cm-panel button:has-text("Edit step")'); await wait(300);
+  await p.click('.cm-panel .cm-editbtn'); await wait(300);
   ok(await p.locator('.noema-ovbox .cm-chedit').count() === 0 && await p.locator('.noema-ovbox [disabled]:is(input, textarea, select)').count() === 0 && /fixed/.test(await p.locator('.noema-ovbox').last().innerText()), 'a prepared step: its chapters are fixed, so the window shows only what can change…');
   await p.fill('.noema-ovbox input[placeholder="Name of the step"]', 'Sets, events and Venn diagrams'); await p.click('.noema-ovbox button:has-text("Save")'); await wait(400);
   c = await cur(p);
   ok(c.nodes.sets_and_events.title === 'Sets, events and Venn diagrams' && /Sets, events and Venn/.test(await p.evaluate(id => localStorage.getItem(`noema1:${Noema.account.id}:a:subjoverride:${id}`), c.nodes.sets_and_events.pack.id)), '…but it can still be renamed (its subject too)');
-  await p.click('.cm-node[data-id="prob_basics"]'); await wait(200); await p.click('.cm-panel button:has-text("Edit step")'); await wait(300);
+  await p.click('.cm-node[data-id="prob_basics"]'); await wait(200); await p.click('.cm-panel .cm-editbtn'); await wait(300);
   const opts = await p.$$eval('select[aria-label="Add prerequisite"] option', o => o.map(x => x.value));
   ok(!opts.includes('distributions') && !opts.includes('likelihood') && opts.includes('calculus_basics'), 'only steps that keep the graph acyclic can be added as prerequisites');
   await p.selectOption('select[aria-label="Add prerequisite"]', 'calculus_basics'); await p.click('.noema-ovbox button:has-text("Save")'); await wait(300);
@@ -217,7 +217,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   await p.fill('.noema-ovbox input[placeholder="Name of the step"]', 'Measure theory (light)'); await p.selectOption('select[aria-label="Add dependent step"]', 'distributions');
   await p.click('.noema-ovbox button:has-text("Add the step")');
   ok(await until(async () => { const cc = await cur(p); const n = Object.values(cc.nodes).find(x => x.title === 'Measure theory (light)'); return n && n.chapters.length === 4 && cc.edges.some(e => e.from === n.id && e.to === 'distributions'); }, 15000), '➕ a new step is added where you put it, and the AI plans its chapters');
-  await p.click('.cm-node[data-id="random_variables"]'); await wait(200); await p.click('.cm-panel button:has-text("Edit step")'); await wait(300);
+  await p.click('.cm-node[data-id="random_variables"]'); await wait(200); await p.click('.cm-panel .cm-editbtn'); await wait(300);
   p.once('dialog', d => d.accept()); await p.click('.noema-ovbox button:has-text("Remove the step")'); await wait(500);
   c = await cur(p);
   ok(!c.nodes.random_variables && c.edges.some(e => e.from === 'prob_basics' && e.to === 'distributions') && await p.locator('.cm-node[data-id="random_variables"]').count() === 0, '🗑 a removed step is bridged: its prerequisites now lead to the steps after it');

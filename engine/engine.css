@@ -412,6 +412,9 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 .chatlang{margin-left:auto;font-size:12.5px;padding:3px 6px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--ink2);max-width:170px}
+/* 🔒 a locked Roadmap step opened for reading: one quiet line on top, one note where the exercises would be */
+.lockbar{margin:0 0 14px;padding:8px 12px;border-radius:var(--r-sm);background:var(--bg2);color:var(--ink2);font-size:13.5px}
+.locknote{margin:14px 0;padding:12px 14px;border:1px dashed var(--line);border-radius:var(--r-sm);color:var(--ink2);font-size:14px}
 
 /* ---- 20_sources_convos.css ---- */
 /* ---------- v3 additions: sources deck, new badges, filter bar, conversation history, rich markdown ---------- */
@@ -643,8 +646,9 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 /* ✨ Create with Claude — two ways, numbered steps with sub-steps, ⓘ tips (loader.js claudeGuide) */
 .cg-box{width:min(820px,100%)}
 .cg-q{font-weight:700;margin:14px 0 8px}
-.cg-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.cg-choice{text-align:left;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);cursor:pointer;display:grid;gap:6px;font:inherit;color:inherit;transition:border-color .15s,transform .15s}
+.cg-choices{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}   /* the three ways: all in one row, or one under the other — never 2 + 1 */
+@media (min-width:900px){.cg-choices{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cg-choice{text-align:left;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);cursor:pointer;display:grid;gap:6px;align-content:start;font:inherit;color:inherit;transition:border-color .15s,transform .15s}
 .cg-choice:hover,.cg-choice:focus-visible{border-color:var(--violet);transform:translateY(-2px);outline:none}
 .cg-choice b{font-size:18px}.cg-choice ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14.5px;color:var(--ink2)}
 .cg-ico{font-size:30px}
@@ -730,6 +734,14 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-r-intro,.cm-r-synthesis{font-size:14.5px}.cm-r-synthesis.cm-open,.cm-r-intro.cm-open{background:var(--violet-bg)}
 .cm-panel{width:min(420px,40vw);border-left:1px solid var(--line);background:var(--card);overflow:auto;padding:16px;display:none;position:relative}
 .cm-panel.on{display:block}.cm-pclose{position:absolute;right:10px;top:10px}
+/* the step panel's emoji buttons (✏️ edit, 📚 sources) and the sources sheet */
+.cm-emo{min-width:36px;justify-content:center;font-size:16px;padding-inline:8px}
+.cm-srcbox{max-width:560px}.cm-srchead h3{margin:0}
+.cm-srclist{display:grid;gap:8px;margin-top:10px}
+.cm-srcrow{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:inherit;font:inherit;cursor:pointer}
+.cm-srcrow:hover:not([disabled]){border-color:var(--c)}.cm-srcrow[disabled]{opacity:.65;cursor:default}
+.cm-srcrow b{display:block;font-weight:600}.cm-srcrow small{display:block;color:var(--ink3);font-size:12.5px;margin-top:2px}
+.cm-srcic{font-size:20px;line-height:1}.cm-srceye{opacity:.7}
 .cm-ptitle{display:flex;gap:10px;align-items:center;padding-right:36px}.cm-ptitle h3{margin:0;font-size:19px}.cm-ptitle .cm-ic{font-size:28px}
 .cm-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.cm-live{display:grid;gap:2px;padding:8px 10px;border-radius:12px;background:var(--violet-bg);font-weight:700;width:100%}
 .cm-lock{padding:8px 10px;border-radius:12px;background:var(--bg2)}
@@ -1682,10 +1694,44 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 @media (prefers-reduced-motion:reduce){
   body.ns-on *,body.ns-on *::before,body.ns-on *::after{animation:none!important;transition:none!important}
 }
-/* "Ask <character>" on an exercise: in its top corner, shown while you are on the card (always, faintly, on touch screens) */
-.ex .exask{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:3px 13px 3px 5px;border-radius:999px;border:1px solid color-mix(in srgb,var(--acc) 40%,var(--line));background:var(--paper);color:var(--ink);font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;box-shadow:0 3px 10px -6px rgba(0,0,0,.3);opacity:0;transform:translateY(2px);transition:opacity .15s,transform .15s,border-color .15s}
-.ex .exask .face{display:inline-block;width:28px;height:28px;line-height:0}.ex .exask .face svg{width:100%;height:100%;overflow:visible}
-.ex:hover .exask,.ex:focus-within .exask{opacity:1;transform:none}
-.ex .exask:hover{border-color:var(--acc)}
-@media (hover:none){.ex .exask{opacity:.85;transform:none}}
+/* "Ask <character>" on every exercise, flashcard and lightning question: the face alone in a top corner, faint while you are on the
+   exercise (always faint on touch screens), its name only on hover or focus; it never covers the question nor draws the eye */
+.exask{display:inline-flex;align-items:center;gap:0;height:32px;padding:2px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--ink2);font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;opacity:0;filter:grayscale(.6);transition:opacity .15s,filter .15s,background .15s,border-color .15s}
+.exask .exface{display:inline-block;width:26px;height:26px;line-height:0}.exask .exface svg{width:100%;height:100%;overflow:visible}
+.exask .lbl{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .2s}
+.has-ask:hover .exask,.has-ask:focus-within .exask{opacity:.5}
+.exask:hover,.exask:focus-visible{opacity:1!important;filter:none;background:var(--paper);border-color:var(--line);gap:6px;padding-right:12px}
+.exask:hover .lbl,.exask:focus-visible .lbl{max-width:16em}
+.flash.has-ask{position:relative}.flash>.exask{position:absolute;top:8px;right:8px;z-index:2}
+.runner.has-ask{position:relative}.runner>.exask{position:absolute;top:0;right:0;z-index:2}
+@media (hover:none){.exask{opacity:.4}}
 
+
+/* a window in the middle of the screen: the conversations with the tutor, every subject grouped by Roadmap and step (shell.js convos) */
+.ns-modal.ns-mdwin{width:min(760px,calc(100% - 32px));height:min(84vh,820px);padding:0;gap:0;overflow:hidden}
+.ns-mdhead{display:flex;align-items:center;gap:8px;padding:14px 14px 12px 20px;border-bottom:1px solid var(--line)}
+.ns-mdhead h2{margin:0;font-size:1.15rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ns-mdbody{flex:1;overflow:auto;padding:16px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.ns-emobtn{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;border:1px solid transparent;background:transparent;font-size:17px;line-height:1;cursor:pointer}
+.ns-emobtn:hover,.ns-emobtn:focus-visible{background:var(--acc-soft);border-color:var(--line)}
+.ns-cvgroups{display:flex;flex-direction:column;gap:10px}
+.ns-cvgrp{border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.ns-cvgrp>summary,.ns-cvstep>summary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;padding:12px 14px;font-weight:700}
+.ns-cvgrp>summary::-webkit-details-marker,.ns-cvstep>summary::-webkit-details-marker{display:none}
+.ns-cvgrp>summary::before,.ns-cvstep>summary::before{content:'›';display:inline-block;width:10px;color:var(--ink3);transition:transform .15s}
+.ns-cvgrp[open]>summary::before,.ns-cvstep[open]>summary::before{transform:rotate(90deg)}
+.ns-cvstep{margin:0 10px 10px;border-radius:12px;background:color-mix(in srgb,var(--line) 30%,transparent)}
+.ns-cvstep>summary{font-weight:600;padding:10px 12px;font-size:.95rem}
+.ns-cvrow{display:flex;align-items:center;gap:4px;margin:0 8px 8px;padding:8px 6px 8px 12px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.ns-cvmain{flex:1;min-width:0;display:grid;gap:2px;text-align:left;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.ns-cvmain b{font-weight:600;overflow-wrap:anywhere}.ns-cvmain small{color:var(--ink3);font-size:.8rem}
+.ns-cvacts{display:flex;gap:2px;flex:none}.ns-cvacts .ns-emobtn{width:32px;height:32px;font-size:15px;opacity:.75}
+.ns-cvacts .ns-emobtn:hover{opacity:1}
+.ns-cvmsgs{display:flex;flex-direction:column;gap:10px}
+.ns-cvmsg{max-width:88%;padding:10px 14px;border-radius:16px;background:var(--acc-soft);overflow-wrap:anywhere}
+.ns-cvmsg.me{align-self:flex-end;background:color-mix(in srgb,var(--line) 55%,var(--paper))}
+.ns-cvmsg small{display:block;color:var(--ink3);font-size:.75rem;font-weight:700;margin-bottom:2px}
+.ns-cvmsg .ns-md>:first-child{margin-top:0}.ns-cvmsg .ns-md>:last-child{margin-bottom:0}
+.ns-cvmsg pre{overflow:auto;max-width:100%}
+.ns-cvsearch{width:100%}
+@media (max-width:759px){.ns-modal.ns-mdwin{height:calc(100% - 24px)}.ns-cvstep{margin:0 6px 8px}.ns-cvrow{margin:0 6px 6px;padding-left:10px}.ns-cvmain b{font-size:.95rem}.ns-cvacts .ns-emobtn{width:28px;height:28px;font-size:14px}}
