@@ -133,6 +133,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.$$eval('.cm-list .cm-listnode', l => l.length) === 5 && await page.evaluate(() => localStorage.getItem('noema-mapview')) === 'list', 'Map ↔ List (remembered)');
   await page.click('.cm-listnode[data-id="a"]'); await wait(300);
   ok(await page.$('.cm-panel.on'), 'a station opens its panel');
+  ok((await page.$eval('.cm-panel.on .cm-editbtn', b => [b.textContent, b.title].join('|'))) === '✏️|Edit this step' && !(await page.$$eval('.cm-panel.on > p', l => l.some(p => p.textContent === 'Python basics'))), 'the panel: no description (its contents say it), ✏️ edits the step');
   await page.screenshot({ path: SHOTS + '/sh_d1_map_list.png' });
   await page.click('.cm-vbtn[data-list="false"]'); await wait(200);
   ok(await page.evaluate(() => document.body.classList.contains('ns-mapmode')), 'the map takes the whole page');
@@ -164,7 +165,22 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(await page.$('.ns-preview') && await page.evaluate(() => document.documentElement.dataset.m) === 'owl', 'try anyone for 5 minutes: the preview bar, the app in its clothes');
   await page.click('.ns-preview .btn:not(.primary)'); await wait(300);
   ok(!(await page.$('.ns-preview')) && await page.evaluate(() => document.documentElement.dataset.m) === 'robot', 'end of the try: back to yours');
-  ok(!(await page.$('.ns-gcard [data-try] + .btn')), 'changing waits 15 days (no “Choose” button)');
+  ok(await page.$$eval('.ns-gcard [data-choose]', l => l.length) >= 28 && /as often as you like/.test(await page.locator('.ns-view').innerText()), 'the first 15 days: change as often as you like (a “Choose” on every other character)');
+  // during a try every surface shows the character on trial: one way to ask, NoemaThemes.current()
+  if (!(await page.$eval('.ns-chgrp[data-group="animals"]', d => d.open))) { await page.click('.ns-chgrp[data-group="animals"] summary'); await wait(200); }
+  await page.click('[data-try="owl"]'); await wait(400);
+  const tr = await page.evaluate(() => ({ fab: document.querySelector('#ns-fab .nm').textContent, tutor: typeof TUTOR !== 'undefined' ? TUTOR.name : 'Hootie', ask: NoemaShell.L('askTutor'), sub: NoemaShell.L('askTutorSub') }));
+  ok(tr.fab === 'Hootie' && tr.ask === 'Ask Hootie' && tr.tutor === 'Hootie' && tr.sub.startsWith('Hootie asks you'), 'during a try the tutor everywhere is the one on trial: ' + JSON.stringify(tr));
+  await page.goto(url + '#/me'); await wait(400);
+  ok((await page.$eval('.ns-list .ns-item', b => b.textContent)).includes('Trying Hootie'), 'Me › Character says the try');
+  await page.evaluate(() => sessionStorage.setItem('noema-preview', JSON.stringify({ m: 'owl', until: Date.now() + 1500 })));
+  await page.reload(); await wait(700);
+  const before = await page.evaluate(() => document.documentElement.dataset.m); await wait(2300);
+  ok(before === 'owl' && await page.evaluate(() => document.documentElement.dataset.m) === 'robot' && (await page.$eval('#ns-fab .nm', b => b.textContent)) === 'Cobalt', 'after a reload a try still ends on time, and everything goes back to yours: ' + before);
+  await page.evaluate(() => NoemaThemes.putSettings({ characterSince: Date.now() - 20 * 864e5, characterAt: Date.now() - 864e5 }));
+  await page.goto(url + '#/character'); await wait(500);
+  const nx = await page.evaluate(() => (NoemaThemes.nextChangeAt() - (Date.now() - 864e5)) / 864e5);
+  ok(!(await page.$('.ns-gcard [data-choose]')) && Math.round(nx) === 5, 'after the first 15 days: once every 5 days (no “Choose”; the next change 5 days after the last): ' + nx);
 
   console.log('F. reactions');
   const R = await page.evaluate(() => {
@@ -221,6 +237,34 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
     NoemaThemes.putSettings({ world: 'know' }); return { list, inside, today };
   });
   ok(lw.list && lw.inside && lw.today, 'a registered language world: its list on the Languages tab, a course inside the frame (#/lang/<course>/…), its card on Today: ' + JSON.stringify(lw));
+
+  console.log('I. Me › Conversations, a locked step, Ask on every exercise');
+  await page.goto(url + '#/subject'); await until(() => page.$('.subjhead'));
+  await page.evaluate(async () => { const t = new Date().toISOString(); await Noema.convos.put(Noema.account.id, Noema.convos.normalize({ kind: 'tutor', mode: 'socratic', title: 'Why is the sky blue', context: { type: 'course' },
+    messages: [{ role: 'user', content: 'Why is the sky blue?', createdAt: t }, { role: 'assistant', content: '**Rayleigh** scattering.<noema-state>{}</noema-state>', createdAt: t }] }, { account: { id: Noema.account.id, kind: 'local' }, subject: { id: SUBJ.id, title: SUBJ.title } })); });
+  await page.goto(url + '#/me'); await wait(400);
+  await page.click('.ns-item:has-text("Conversations")'); await wait(700);
+  ok(await page.$('.ns-modal.ns-mdwin .ns-cvgrp') && !(await page.$('.drawer.open')) && !(await page.$('.ns-mdwin .ns-forchip')), 'Me › Conversations: a window in the middle, grouped by Roadmap and step (no side panel, no “For:” chip)');
+  ok(!/null|undefined|sh\./.test(await page.$eval('.ns-mdwin', d => d.innerText)), 'no stray “null” or missing-text keys in the window');
+  await page.click('.ns-cvmain:has-text("Why is the sky blue")'); await wait(300);
+  ok(await page.$('.ns-cvmsg.ai strong') && !/noema-state/.test(await page.$eval('.ns-cvmsgs', d => d.textContent)) && await page.$('.ns-mdhead .ns-emobtn[aria-label="Back to the conversations"]'), 'a conversation opens inside the window, with ↩️ back');
+  await page.click('.ns-mdhead .ns-emobtn[aria-label="Back to the conversations"]'); await wait(400);
+  ok(await page.$('.ns-mdwin .ns-cvrow'), '↩️ goes back to the conversations');
+  await page.click('.ns-mdhead .ns-iconbtn'); await wait(200);
+  const lk = await page.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid); c.nodes.f.pack = { id: SUBJ.id, status: 'ready', title: SUBJ.title }; C.save(acc, c); return C.statuses(acc, c).f.open; }, cid);
+  await page.goto(url + '#/map/' + cid); await until(() => page.$('.cm-page'));
+  await page.click('.cm-node[data-id="f"]'); await wait(400);
+  ok(lk === false && await page.$('.cm-panel.on .cm-lock') && await page.$('.cm-panel.on .cm-readtheory') && await page.$('.cm-panel.on .cm-srcbtn'), 'a locked, prepared step: “Read the theory” and 📚 its sources');
+  await page.click('.cm-panel.on .cm-srcbtn'); await until(() => page.$('.cm-srcbox .cm-srcrow'), 5000);
+  ok(await page.$('.cm-srcbox .cm-srcrow'), '📚 lists the sources the step is taught from');
+  await page.click('.cm-srcbox .cm-srchead button'); await wait(300);
+  await page.goto(url + '#/subject'); await until(() => page.$('.subjhead'));
+  ok(await page.$('.lockbar'), 'the subject of a locked step opens for reading, with a quiet note');
+  await page.goto(url + '#/cards'); await wait(500);
+  ok(await page.$('.locknote') && !(await page.$('.flash')), 'its flashcards and exercises wait until the step opens');
+  await page.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid); delete c.nodes.f.pack; C.save(acc, c); }, cid);
+  await page.goto(url + '#/subject'); await wait(300); await page.goto(url + '#/cards'); await wait(600);
+  ok(await page.$('.flash.has-ask .exask .exface svg') && !(await page.$('.lockbar')), 'a flashcard has the quiet “Ask <character>” in its corner');
 
   console.log('G. Greek, wide screens');
   await page.evaluate(() => { NoemaThemes.putSettings({ lang: 'el' }); }); await page.goto(url + '#/learn'); await page.reload(); await wait(1500);

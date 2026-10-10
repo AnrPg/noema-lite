@@ -110,7 +110,7 @@ window.NoemaThemes = (() => {
   const KEYS = ['bg', 'paper', 'ink', 'ink2', 'ink3', 'line', 'acc', 'acc-ink', 'acc-soft', 't1', 't1i', 't2', 't2i', 't3', 't3i', 't4', 't4i', 'deco1', 'deco2', 'deco3'];
   const SYS = 'ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
   const q = f => `"${f}"`;
-  const DAY = 864e5, CHANGE_DAYS = 15, PREVIEW_MS = 5 * 60e3, DEFAULT = 'hedge';
+  const DAY = 864e5, FREE_DAYS = 15, CHANGE_DAYS = 5, PREVIEW_MS = 5 * 60e3, DEFAULT = 'hedge';
 
   /* ---------- CSS: one block per character; every [data-m] element wears its own theme (the gallery shows each in its own clothes) ---------- */
   function vars(m, dark) {
@@ -142,7 +142,8 @@ window.NoemaThemes = (() => {
     const st = document.createElement('style'); st.id = 'noema-themes'; st.textContent = css(); document.head.append(st);
   }
 
-  /* ---------- the learner's character: a:settings.character (synced), changed once every 15 days; a 5-minute preview of any other ---------- */
+  /* ---------- the learner's character: a:settings.character (synced). Changes are free for 15 days after the first choice, then once every
+     5 days; any other can be tried for 5 minutes. current() is THE character on screen: every surface asks it, never owned() or settings. ---------- */
   const P = 'noema1:';
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const accNow = () => window.Noema?.account?.id || window.Noema?.kv?.acc || jget(P + 'current', {}).acc || null;
@@ -160,8 +161,12 @@ window.NoemaThemes = (() => {
   const locked = () => !!(cfg().lockCharacter && DATA[cfg().character]);
   function owned(acc) { if (locked()) return cfg().character; const m = settingsOf(acc).character; return DATA[m] ? m : (DATA[cfg().character] ? cfg().character : DEFAULT); }
   function preview() { try { const p = JSON.parse(sessionStorage.getItem('noema-preview') || 'null'); return p && DATA[p.m] && p.until > Date.now() && !locked() ? p : null; } catch (e) { return null; } }
+  /** The character on screen now: the one on a 5-minute try, else the learner's own. The frame, the tutor, the reactions, the Roadmap and the exercises all use it. */
   const current = acc => preview()?.m || owned(acc);
-  function nextChangeAt(acc) { const s = settingsOf(acc); return s.character && s.characterAt ? s.characterAt + CHANGE_DAYS * DAY : 0; }
+  /** Until when changes are free: 15 days after the first choice (settings made before 2026-10-10 count from their last choice). */
+  function freeUntil(acc) { const s = settingsOf(acc), since = s.characterSince || s.characterAt; return s.character && since ? since + FREE_DAYS * DAY : 0; }
+  /** When the next change is possible (0 or a past time: now). */
+  function nextChangeAt(acc) { const s = settingsOf(acc); if (!s.character || Date.now() < freeUntil(acc)) return 0; return (s.characterAt || 0) + CHANGE_DAYS * DAY; }
   const canChange = acc => !locked() && Date.now() >= nextChangeAt(acc);
   const listeners = [];
   const onChange = f => { listeners.push(f); return () => listeners.splice(listeners.indexOf(f), 1); };
@@ -172,12 +177,12 @@ window.NoemaThemes = (() => {
     if (root.dataset.m !== m) { root.dataset.m = m; root.dataset.tone = DATA[m].tone; listeners.forEach(f => { try { f(m); } catch (e) { } }); }
     return m;
   }
-  /** Choose (keep) a character. The first choice is free; later ones wait 15 days. */
+  /** Choose (keep) a character: as often as the learner likes for 15 days after the first choice, then once every 5 days. */
   function choose(m, { acc = accNow(), force = false } = {}) {
     if (!DATA[m] || locked()) return false;
     const s = settingsOf(acc);
     if (!force && s.character && s.character !== m && !canChange(acc)) return false;
-    putSettings({ character: m, characterAt: s.character && s.character !== m ? Date.now() : (s.characterAt || Date.now()) }, acc);
+    putSettings({ character: m, characterAt: s.character && s.character !== m ? Date.now() : (s.characterAt || Date.now()), characterSince: s.characterSince || s.characterAt || Date.now() }, acc);
     endPreview(false); apply(m); return true;
   }
   let pvTimer = 0;
@@ -213,7 +218,8 @@ window.NoemaThemes = (() => {
   const world = (acc) => settingsOf(acc).world || 'know';                       // know · lang · both
   const game = (acc) => locked() && DATA[cfg().character].tone === 'strict' ? (settingsOf(acc).game === 'off' ? 'off' : 'calm') : (settingsOf(acc).game || (DATA[current(acc)].tone === 'strict' ? 'calm' : 'playful'));   // playful · calm · off
 
-  return { DATA, ORDER, GROUPS, EMOJI, NAMES, TEXT, css, ensureCSS, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, locked, onChange,
-    tutor, text, uiLang, world, game, settings: settingsOf, putSettings, tone: (m = current()) => DATA[m].tone, PREVIEW_MS, CHANGE_DAYS };
+  if (typeof window !== 'undefined' && preview()) watchPreview();   // a try that goes on after a reload still ends on time
+  return { DATA, ORDER, GROUPS, EMOJI, NAMES, TEXT, css, ensureCSS, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, freeUntil, locked, onChange,
+    tutor, text, uiLang, world, game, settings: settingsOf, putSettings, tone: (m = current()) => DATA[m].tone, PREVIEW_MS, CHANGE_DAYS, FREE_DAYS };
 })();
 if (window.NoemaThemes) window.NoemaThemes.apply();

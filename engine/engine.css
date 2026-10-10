@@ -39,7 +39,7 @@ strong{font-weight:750}
 /* ---------- top bar ---------- */
 .topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;padding:10px 20px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:18px;cursor:pointer;user-select:none}
-.brand .logo{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:conic-gradient(from 200deg,#ff6b6b,#ffb020,#2ec4b6,#4d7cfe,#a35cff,#ff6b6b);color:#fff;font-size:17px;box-shadow:0 4px 14px -4px rgba(124,92,255,.6);animation:spinIn 1s cubic-bezier(.2,.9,.3,1.3)}
+.brand .logo{width:36px;height:34px;line-height:0}.brand .logo svg{width:100%;height:100%;overflow:visible}
 .topbar .spacer{flex:1}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:650;font-size:14px;white-space:nowrap;transition:transform .15s}
 .chip:hover{transform:translateY(-1px)}
@@ -412,6 +412,9 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 .chatlang{margin-left:auto;font-size:12.5px;padding:3px 6px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--ink2);max-width:170px}
+/* 🔒 a locked Roadmap step opened for reading: one quiet line on top, one note where the exercises would be */
+.lockbar{margin:0 0 14px;padding:8px 12px;border-radius:var(--r-sm);background:var(--bg2);color:var(--ink2);font-size:13.5px}
+.locknote{margin:14px 0;padding:12px 14px;border:1px dashed var(--line);border-radius:var(--r-sm);color:var(--ink2);font-size:14px}
 
 /* ---- 20_sources_convos.css ---- */
 /* ---------- v3 additions: sources deck, new badges, filter bar, conversation history, rich markdown ---------- */
@@ -480,7 +483,8 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 /* ---- 30_shell.css ---- */
 /* ---------- shell: splash, pickers, subject/account chips, account menu ---------- */
 #noema-splash{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:5;transition:opacity .3s}
-#noema-splash .logo{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:30px;color:#fff;background:conic-gradient(from 200deg,#ff6b6b,#ffb020,#2ec4b6,#4d7cfe,#a35cff,#ff6b6b);animation:spinIn 1.2s cubic-bezier(.2,.9,.3,1.3) infinite alternate}
+#noema-splash .logo{width:14px;height:14px;border-radius:50%;background:var(--line);animation:splashDot 1.6s ease-in-out infinite alternate}
+@keyframes splashDot{to{transform:scale(1.6);opacity:.5}}
 .noema-overlay{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--bg) 70%,rgba(20,22,30,.55));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:viewIn .3s}
 .noema-overlay.out{opacity:0;transition:opacity .25s}
 .noema-inuse-ov{z-index:300}
@@ -492,7 +496,6 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 @media (prefers-reduced-motion:reduce){.noema-inuse-dot{animation:none}}
 .noema-ovbox{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:26px;box-shadow:0 40px 90px -30px rgba(0,0,0,.45);animation:pop .4s cubic-bezier(.2,.9,.3,1.2)}
 .noema-ovhead{display:flex;gap:14px;align-items:center;margin-bottom:18px}
-.noema-ovhead .logo{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:22px;background:conic-gradient(from 200deg,#ff6b6b,#ffb020,#2ec4b6,#4d7cfe,#a35cff,#ff6b6b);animation:spinIn 1s cubic-bezier(.2,.9,.3,1.3)}
 .noema-ovhead h1{font-size:26px}
 .noema-ovhead p{margin:2px 0 0}
 .noema-accgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
@@ -643,8 +646,9 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 /* ✨ Create with Claude — two ways, numbered steps with sub-steps, ⓘ tips (loader.js claudeGuide) */
 .cg-box{width:min(820px,100%)}
 .cg-q{font-weight:700;margin:14px 0 8px}
-.cg-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.cg-choice{text-align:left;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);cursor:pointer;display:grid;gap:6px;font:inherit;color:inherit;transition:border-color .15s,transform .15s}
+.cg-choices{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}   /* the three ways: all in one row, or one under the other — never 2 + 1 */
+@media (min-width:900px){.cg-choices{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cg-choice{text-align:left;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--card);cursor:pointer;display:grid;gap:6px;align-content:start;font:inherit;color:inherit;transition:border-color .15s,transform .15s}
 .cg-choice:hover,.cg-choice:focus-visible{border-color:var(--violet);transform:translateY(-2px);outline:none}
 .cg-choice b{font-size:18px}.cg-choice ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14.5px;color:var(--ink2)}
 .cg-ico{font-size:30px}
@@ -730,6 +734,14 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-r-intro,.cm-r-synthesis{font-size:14.5px}.cm-r-synthesis.cm-open,.cm-r-intro.cm-open{background:var(--violet-bg)}
 .cm-panel{width:min(420px,40vw);border-left:1px solid var(--line);background:var(--card);overflow:auto;padding:16px;display:none;position:relative}
 .cm-panel.on{display:block}.cm-pclose{position:absolute;right:10px;top:10px}
+/* the step panel's emoji buttons (✏️ edit, 📚 sources) and the sources sheet */
+.cm-emo{min-width:36px;justify-content:center;font-size:16px;padding-inline:8px}
+.cm-srcbox{max-width:560px}.cm-srchead h3{margin:0}
+.cm-srclist{display:grid;gap:8px;margin-top:10px}
+.cm-srcrow{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:inherit;font:inherit;cursor:pointer}
+.cm-srcrow:hover:not([disabled]){border-color:var(--c)}.cm-srcrow[disabled]{opacity:.65;cursor:default}
+.cm-srcrow b{display:block;font-weight:600}.cm-srcrow small{display:block;color:var(--ink3);font-size:12.5px;margin-top:2px}
+.cm-srcic{font-size:20px;line-height:1}.cm-srceye{opacity:.7}
 .cm-ptitle{display:flex;gap:10px;align-items:center;padding-right:36px}.cm-ptitle h3{margin:0;font-size:19px}.cm-ptitle .cm-ic{font-size:28px}
 .cm-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.cm-live{display:grid;gap:2px;padding:8px 10px;border-radius:12px;background:var(--violet-bg);font-weight:700;width:100%}
 .cm-lock{padding:8px 10px;border-radius:12px;background:var(--bg2)}
@@ -1083,6 +1095,13 @@ body.ns-on .srcdeck{top:56px}
 .ns-face svg{width:100%;height:100%;display:block;overflow:visible}
 .ns-face .eye{transform-box:fill-box;transform-origin:center;animation:ns-blink 6s infinite}
 @keyframes ns-blink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+/* the serious characters' quiet props: a slowly turning atom, a server's blinking lights, greetings bobbing in the Hydra's landscape */
+.ns-face .spin{transform-box:view-box;animation:ns-turn 24s linear infinite}
+@keyframes ns-turn{to{transform:rotate(360deg)}}
+.ns-face .led{animation:ns-led 2.4s steps(2) infinite}
+@keyframes ns-led{50%{opacity:.25}}
+.ns-land .bob{animation:ns-bob 5s ease-in-out infinite}
+@keyframes ns-bob{50%{transform:translateY(-2px)}}
 .breathe svg{transform-origin:50% 92%;animation:ns-breathe 4.5s ease-in-out infinite}
 @keyframes ns-breathe{50%{transform:scale(1.02,1.03)}}
 .hop svg{animation:ns-hop .7s ease-out}
@@ -1200,6 +1219,29 @@ button.ns-item:hover{background:color-mix(in srgb,var(--acc-soft) 50%,var(--pape
 .ns-seg.small{padding:3px;flex:none}
 .ns-seg.small button{min-height:30px;padding:0 10px;font-size:.84rem;flex:none}
 .ns-search{margin:0}
+.ns-exp{display:flex;flex-direction:column;gap:10px}
+.ns-doms{display:flex;flex-direction:column;gap:10px}
+.ns-doms[hidden],.ns-results[hidden]{display:none}
+.ns-dom{border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.ns-dom>summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;list-style:none;border-radius:var(--r)}
+.ns-dom>summary::-webkit-details-marker{display:none}
+.ns-dom>summary:hover{background:color-mix(in srgb,var(--acc-soft) 45%,transparent)}
+.ns-domt{flex:1;min-width:0;font-family:var(--display);font-weight:var(--dw);font-style:var(--dsty,normal);font-size:1.05rem}
+.ns-domchev{color:var(--ink3);font-size:1.25rem;line-height:1;transition:transform .2s}
+.ns-dom[open]>summary .ns-domchev{transform:rotate(90deg)}
+/* the characters in three folded groups (gallery and first start) */
+.ns-chgrp{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);margin:10px 0}
+.ns-chgrp>summary{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;list-style:none}
+.ns-chgrp>summary::-webkit-details-marker{display:none}
+.ns-chgt{font-weight:700;flex:0 1 auto;min-width:0}
+.ns-chfaces{display:flex;flex:1;min-width:0;overflow:hidden;justify-content:flex-end}
+.ns-chfaces .ns-face{width:30px;height:28px;flex:none;margin-left:-6px}
+.ns-chgrp[open]>summary .ns-domchev{transform:rotate(90deg)}
+.ns-chgrp[open]>summary .ns-chfaces{visibility:hidden}
+.ns-chgrp>.ns-gal,.ns-chgrp>.ns-pick{padding:4px 12px 12px}
+.ns-pickgroups .ns-chgrp{margin:6px 0}
+@media (max-width:420px){.ns-chfaces .ns-face{width:24px;height:22px}}
+.ns-dom>.ns-list{border:0;border-top:1px solid var(--line);border-radius:0 0 var(--r) var(--r);background:none}
 .ns-shelf{display:flex;justify-content:center;padding-top:6px}
 .ns-shelflink{display:inline-flex;align-items:center;gap:6px;align-self:center;font-size:.86rem;color:var(--ink3);padding:6px 12px;border-radius:999px}
 .ns-shelflink:hover{color:var(--ink2);background:var(--line)}
@@ -1302,6 +1344,7 @@ body.ns-on .ns-rmcard:hover{border-color:var(--acc);transform:none}
 .ns-bars span{font-size:.75rem;color:var(--ink3);font-weight:700}
 .ns-medals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center}
 .ns-medal{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ns-medal .m .ns-svg svg{width:30px;height:30px}
 .ns-medal .m{width:66px;height:66px;border-radius:var(--ir);display:grid;place-items:center;font-family:var(--display);font-weight:var(--dw);font-size:1.3rem;background:var(--bgc);color:var(--fgc);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--bgc)}
 [data-m="dragon"] .ns-medal .m,[data-m="knight"] .ns-medal .m,[data-m="robot"] .ns-medal .m,[data-m="prism"] .ns-medal .m{border-radius:50%}
 .ns-medal.lock .m{background:transparent;border:2px dashed var(--ink3);box-shadow:none;color:var(--ink3)}
@@ -1309,7 +1352,6 @@ body.ns-on .ns-rmcard:hover{border-color:var(--acc);transform:none}
 
 /* ---------- the character gallery, the preview bar ---------- */
 .ns-gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.ns-gal .galsep{grid-column:1/-1;margin-top:10px}
 .ns-gcard{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg);position:relative;color:var(--ink);font-family:var(--font)}
 .ns-gcard.cur{box-shadow:0 0 0 2px var(--acc)}
 .ns-gcard>.ns-face{width:110px;height:100px;margin-inline:auto}
@@ -1476,7 +1518,7 @@ body.ns-mapmode .ns-view.ns-mapview{gap:0;animation:none}
 .cm-listmode .cm-zoom{display:none}
 .cm-vert .cm-band{border-radius:var(--r)}
 .cm-chest{position:absolute;z-index:1;pointer-events:none}
-.cm-page .cm-canvas{margin-inline:auto}
+.cm-page .cm-canvas{margin:12px auto 132px}
 .cm-vert .cm-band span{margin:8px 12px;font-size:12px}
 .cm-node .cm-hero{display:inline-block;width:34px;height:32px;line-height:0;margin:-4px 0 -4px -4px}
 .cm-hero svg{width:100%;height:100%;overflow:visible;animation:ns-breathe 4.5s ease-in-out infinite;transform-origin:50% 92%}
@@ -1489,6 +1531,48 @@ body.ns-on .cm-nextup{box-shadow:0 0 0 4px var(--acc-soft),0 8px 20px -12px var(
 body.ns-on .cm-node.sel{outline-color:var(--acc)}
 body.ns-on .cm-node .cm-prog{background:var(--acc)}
 body.ns-on .cm-edges path.hl{stroke:var(--acc)}
+/* the treasure map (the design's Roadmap page): dotted paths, round stations with a code, flags, the character beside the next one */
+.cm-tmap{--mapbg:color-mix(in srgb,var(--t2) 40%,var(--paper));background:var(--mapbg);border-radius:var(--r);font-family:var(--font)}
+.cm-tsvg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.cm-tsvg .cm-e{fill:none;stroke:var(--ink2);stroke-width:3.8;stroke-dasharray:.1 8.5;stroke-linecap:round;opacity:.75}
+.cm-tsvg .cm-e.ok{stroke:var(--t1i);opacity:.95}
+.cm-tsvg .cm-e.lk{stroke:var(--ink3);opacity:.7}
+.cm-tsvg .cm-e.hl{stroke:var(--acc);stroke-dasharray:none;stroke-width:4.2;opacity:1}
+.cm-tsvg .cm-e.dim{opacity:.16}
+.cm-tsvg .cm-flag{fill:var(--t3i);stroke:var(--t3i);stroke-width:1.6;stroke-linejoin:round}
+.cm-tsvg .cm-start{font-size:12px;fill:var(--ink3);font-family:var(--font)}
+.cm-tlabel{position:absolute;text-align:center;font-family:var(--display);font-weight:var(--dw);font-style:var(--dsty,normal);font-size:.95rem;line-height:1.25;color:var(--ink);pointer-events:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 0 3px var(--mapbg),0 0 3px var(--mapbg)}
+body.ns-on .cm-tmap .cm-node{width:116px;height:auto;display:flex;flex-direction:column;align-items:center;gap:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;font-weight:400;line-height:1.2;text-align:center;outline:none}
+body.ns-on .cm-tmap .cm-node:hover,body.ns-on .cm-tmap .cm-node:focus-visible{transform:none;box-shadow:none}
+body.ns-on .cm-tmap .cm-locked{opacity:.78;background:none}
+body.ns-on .cm-tmap .cm-node.dim{opacity:.35}
+.cm-tmap .cm-dot{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--paper);border:2px solid var(--ink3);color:var(--ink3);font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums;transition:transform .15s}
+.cm-tmap .cm-dot svg.i{width:20px;height:20px}
+.cm-tmap .cm-dot .cm-openic svg,.cm-tmap .cm-dot>svg[style]{width:20px;height:20px}
+.cm-tmap .cm-node:hover .cm-dot,.cm-tmap .cm-node:focus-visible .cm-dot{transform:scale(1.08)}
+.cm-tmap .cm-locked .cm-dot{border-style:dashed}
+.cm-tmap .cm-open .cm-dot{border-color:var(--acc);color:var(--t1i)}
+.cm-tmap .cm-mastered .cm-dot{background:var(--t1);border-color:var(--t1i);color:var(--t1i)}
+.cm-tmap .cm-mastered .cm-dot svg.i{stroke-width:3}
+body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
+.cm-tmap .cm-nextup .cm-dot{border-width:3px;box-shadow:0 0 0 7px var(--acc-soft)}
+.cm-tmap .cm-node.sel .cm-dot,.cm-tmap .cm-node:focus-visible .cm-dot{outline:3px solid var(--acc);outline-offset:3px}
+.cm-tmap .cm-code{margin-top:4px;padding:0 5px;border-radius:6px;background:var(--mapbg);font-size:14px;font-weight:800;line-height:1.25;color:var(--ink)}
+.cm-tmap .cm-node .cm-t{font-size:12.5px;color:var(--ink2);max-width:116px;-webkit-line-clamp:2;padding:0 4px;border-radius:6px;background:var(--mapbg)}
+.cm-tmap .cm-node .cm-badges{position:absolute;top:-7px;left:calc(50% + 12px);right:auto;display:flex;gap:2px;font-size:0}
+.cm-pip{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--paper);border:1.5px solid var(--line);color:var(--ink2);font-style:normal}
+.cm-pip svg.i{width:12px;height:12px}
+.cm-pip[data-k=review]{background:var(--t2);color:var(--t2i);border-color:var(--paper)}
+.cm-pip[data-k=ready]{background:var(--t1);color:var(--t1i);border-color:var(--paper)}
+.cm-pip[data-k=failed]{background:var(--t3);color:var(--t3i);border-color:var(--paper)}
+.cm-pip[data-k=busy],.cm-pip[data-k=app],.cm-pip[data-k=others]{background:var(--t4);color:var(--t4i);border-color:var(--paper)}
+.cm-tmap .cm-node .cm-hero{position:absolute;top:-30px;width:64px;height:60px;margin:0;line-height:0;pointer-events:none}
+.cm-tmap .cm-hero.l{left:-34px} .cm-tmap .cm-hero.r{right:-34px;transform:scaleX(-1)}
+.cm-signs{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:var(--r)}
+.cm-sign{display:flex;align-items:center;gap:12px;font-size:.92rem}
+.cm-sign>span:first-child{flex:none;display:grid;place-items:center;width:52px}
+.cm-sign .cm-badges{position:static;display:flex}
+.cm-sign .cm-st.cm-locked{opacity:.78}
 .cm-list{list-style:none;margin:0 auto;padding:14px 14px 120px;display:flex;flex-direction:column;gap:8px;max-width:760px}
 .cm-list li{display:block}
 .cm-listnode{position:relative!important;display:flex!important;align-items:center;gap:12px;width:100%;padding:12px 44px 12px 14px;font-size:.98rem}
@@ -1610,10 +1694,44 @@ body.ns-on .cm-edges path.hl{stroke:var(--acc)}
 @media (prefers-reduced-motion:reduce){
   body.ns-on *,body.ns-on *::before,body.ns-on *::after{animation:none!important;transition:none!important}
 }
-/* "Ask <character>" on an exercise: in its top corner, shown while you are on the card (always, faintly, on touch screens) */
-.ex .exask{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:3px 13px 3px 5px;border-radius:999px;border:1px solid color-mix(in srgb,var(--acc) 40%,var(--line));background:var(--paper);color:var(--ink);font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;box-shadow:0 3px 10px -6px rgba(0,0,0,.3);opacity:0;transform:translateY(2px);transition:opacity .15s,transform .15s,border-color .15s}
-.ex .exask .face{display:inline-block;width:28px;height:28px;line-height:0}.ex .exask .face svg{width:100%;height:100%;overflow:visible}
-.ex:hover .exask,.ex:focus-within .exask{opacity:1;transform:none}
-.ex .exask:hover{border-color:var(--acc)}
-@media (hover:none){.ex .exask{opacity:.85;transform:none}}
+/* "Ask <character>" on every exercise, flashcard and lightning question: the face alone in a top corner, faint while you are on the
+   exercise (always faint on touch screens), its name only on hover or focus; it never covers the question nor draws the eye */
+.exask{display:inline-flex;align-items:center;gap:0;height:32px;padding:2px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--ink2);font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;opacity:0;filter:grayscale(.6);transition:opacity .15s,filter .15s,background .15s,border-color .15s}
+.exask .exface{display:inline-block;width:26px;height:26px;line-height:0}.exask .exface svg{width:100%;height:100%;overflow:visible}
+.exask .lbl{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .2s}
+.has-ask:hover .exask,.has-ask:focus-within .exask{opacity:.5}
+.exask:hover,.exask:focus-visible{opacity:1!important;filter:none;background:var(--paper);border-color:var(--line);gap:6px;padding-right:12px}
+.exask:hover .lbl,.exask:focus-visible .lbl{max-width:16em}
+.flash.has-ask{position:relative}.flash>.exask{position:absolute;top:8px;right:8px;z-index:2}
+.runner.has-ask{position:relative}.runner>.exask{position:absolute;top:0;right:0;z-index:2}
+@media (hover:none){.exask{opacity:.4}}
 
+
+/* a window in the middle of the screen: the conversations with the tutor, every subject grouped by Roadmap and step (shell.js convos) */
+.ns-modal.ns-mdwin{width:min(760px,calc(100% - 32px));height:min(84vh,820px);padding:0;gap:0;overflow:hidden}
+.ns-mdhead{display:flex;align-items:center;gap:8px;padding:14px 14px 12px 20px;border-bottom:1px solid var(--line)}
+.ns-mdhead h2{margin:0;font-size:1.15rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ns-mdbody{flex:1;overflow:auto;padding:16px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.ns-emobtn{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;border:1px solid transparent;background:transparent;font-size:17px;line-height:1;cursor:pointer}
+.ns-emobtn:hover,.ns-emobtn:focus-visible{background:var(--acc-soft);border-color:var(--line)}
+.ns-cvgroups{display:flex;flex-direction:column;gap:10px}
+.ns-cvgrp{border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.ns-cvgrp>summary,.ns-cvstep>summary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;padding:12px 14px;font-weight:700}
+.ns-cvgrp>summary::-webkit-details-marker,.ns-cvstep>summary::-webkit-details-marker{display:none}
+.ns-cvgrp>summary::before,.ns-cvstep>summary::before{content:'›';display:inline-block;width:10px;color:var(--ink3);transition:transform .15s}
+.ns-cvgrp[open]>summary::before,.ns-cvstep[open]>summary::before{transform:rotate(90deg)}
+.ns-cvstep{margin:0 10px 10px;border-radius:12px;background:color-mix(in srgb,var(--line) 30%,transparent)}
+.ns-cvstep>summary{font-weight:600;padding:10px 12px;font-size:.95rem}
+.ns-cvrow{display:flex;align-items:center;gap:4px;margin:0 8px 8px;padding:8px 6px 8px 12px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.ns-cvmain{flex:1;min-width:0;display:grid;gap:2px;text-align:left;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.ns-cvmain b{font-weight:600;overflow-wrap:anywhere}.ns-cvmain small{color:var(--ink3);font-size:.8rem}
+.ns-cvacts{display:flex;gap:2px;flex:none}.ns-cvacts .ns-emobtn{width:32px;height:32px;font-size:15px;opacity:.75}
+.ns-cvacts .ns-emobtn:hover{opacity:1}
+.ns-cvmsgs{display:flex;flex-direction:column;gap:10px}
+.ns-cvmsg{max-width:88%;padding:10px 14px;border-radius:16px;background:var(--acc-soft);overflow-wrap:anywhere}
+.ns-cvmsg.me{align-self:flex-end;background:color-mix(in srgb,var(--line) 55%,var(--paper))}
+.ns-cvmsg small{display:block;color:var(--ink3);font-size:.75rem;font-weight:700;margin-bottom:2px}
+.ns-cvmsg .ns-md>:first-child{margin-top:0}.ns-cvmsg .ns-md>:last-child{margin-bottom:0}
+.ns-cvmsg pre{overflow:auto;max-width:100%}
+.ns-cvsearch{width:100%}
+@media (max-width:759px){.ns-modal.ns-mdwin{height:calc(100% - 24px)}.ns-cvstep{margin:0 6px 8px}.ns-cvrow{margin:0 6px 6px;padding-left:10px}.ns-cvmain b{font-size:.95rem}.ns-cvacts .ns-emobtn{width:28px;height:28px;font-size:14px}}

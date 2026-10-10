@@ -272,6 +272,13 @@ R.write = (ex, api) => {
 };
 
 /* ---------- exercise card ---------- */
+/** "Ask <character>" on every kind of exercise (exercises, flashcards, lightning questions): the face alone, faint, in a top corner;
+    its name shows on hover or focus. It must never draw the eye nor cover the question (95_shell.css .exask). */
+function askBuddyBtn(onclick) {
+  const face = window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '', l = SL('askTutor');
+  return h('button', { class: 'exask', type: 'button', title: l, 'aria-label': l, onclick: e => { e.stopPropagation(); onclick(e); } },
+    face ? h('span', { class: 'exface', html: face, 'aria-hidden': 'true' }) : h('span', { 'aria-hidden': 'true' }, TUTOR.avatar), h('span', { class: 'lbl' }, l));
+}
 function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection = false } = {}) {
   const ch = ex._ch;
   const card = h('div', { class: 'ex' });
@@ -299,10 +306,10 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
   const ask = () => askAIAbout(ex, null, givenOf(w));
-  if (SHL()) {   // the frame: "Ask <character>" waits in the card's top corner and shows when you are on the card, like 💡 does
-    const face = window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '';
-    head.append(h('button', { class: 'exask', type: 'button', style: { marginLeft: showSection && SEC[ex.section] ? '8px' : 'auto' }, onclick: ask }, face ? h('span', { class: 'face', html: face, 'aria-hidden': 'true' }) : TUTOR.avatar, SL('askTutor')));
-  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} Ask ${TN}`));
+  if (SHL()) {   // the frame: a quiet "Ask <character>" in the card's top corner
+    card.classList.add('has-ask');
+    const b = askBuddyBtn(ask); b.style.marginLeft = showSection && SEC[ex.section] ? '8px' : 'auto'; head.append(b);
+  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} Ask ${TUTOR.name}`));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;

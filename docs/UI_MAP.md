@@ -82,7 +82,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | S20 ← previous, S21 next → | One big **Next section →** (with the next title; across chapters too), Practise the chapter next to it when the chapter ends, ← Previous section small below; after the very last section: Practise the chapter → |
 
 ## 5. Exercises, pictures, runs, flashcards, drills, what's new, sources, viewer (E, V, P, F, D, W, SD, FV)
-Unchanged, except "Ask <character>" on an exercise: it waits in the card's top corner and shows while you are on the card (always, faintly, on touch screens). Their pages get crumbs and ← in the top bar instead of a "← Home" button (P6, P13, P15, F1, D1, W1), and runs,
+Unchanged, except "Ask <character>": on every kind of exercise (a question, a flashcard — a hint before you turn it, an explanation after — and a lightning round) only the character's face, faint, in the card's top corner while you are on the card; its name appears when you point at it (always faint on touch screens). Their pages get crumbs and ← in the top bar instead of a "← Home" button (P6, P13, P15, F1, D1, W1), and runs,
 drills and the Lightning round are in reading mode. The run summary, the daily goal, a new level, a beaten boss, a
 mastered station and the last 5 seconds of a timed round can bring a big reaction of the character (at most one every
 3 minutes, milestones always; Me › Language & appearance › How much game: playful / calm / off).
@@ -91,7 +91,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | Old | New home |
 |---|---|
 | The tutor button | The character itself, whole, animated and with its name, bottom right on every page (also before any subject is open: the last subject studied loads quietly behind it) |
-| TU1 🕘 history, TU2 ⬇️ export, TU3 ↺ new conversation, 🗣 conversation language | The tutor's ⋮ (Back to the conversation while the history is open; Export once there is a conversation); Me › Conversations opens the history |
+| TU1 🕘 history, TU2 ⬇️ export, TU3 ↺ new conversation, 🗣 conversation language | The tutor's ⋮ (Export once there is a conversation). The history (Me › Conversations, or the tutor's ⋮ › Conversation history) is a window in the middle of the screen, not a side panel: every subject's conversations grouped by Roadmap › step (subjects on no Roadmap in their own group), a search once there are more than three, ✏️ rename · ⬇️ export · 🗑️ delete on each, ⬇️ export all. A conversation opens inside the window with ↩️ back to the list and "Continue this conversation" |
 | Mode chips | One list under "How <character> helps you": each mode with its line ("Socratic · I ask you until you find it yourself") |
 | Context chip, "use whole course" | A "For: …" chip; its ✕ goes back to the whole subject |
 | Model label | Me › <character> and AI |
@@ -111,7 +111,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | ASu1–ASu8 Subjects | Me › My subjects (unchanged), and each subject's ⋮ on the Shelf |
 | AB1–AB10 Backup & restore, AC1–AC13 Cloud | Me › Data and sync (cloud first, then backup and restore) |
 | AH1–AH11 Help | Me › Help (unchanged guides) |
-| — | Me › Character: the gallery of 29 characters in three folded groups (pet friends and fruits · fairy tales · serious; the same groups at first start), "Try for 5 minutes", a new one every 15 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`). Characters from fairy tales keep their tale's name in every language. The Serious group holds the nine professions of 2026-10-09 (two philologists, two tech nerds, two maths-and-physics scientists, two biochemists, the polyglot Hydra), each with its props beside it and its own collection item |
+| — | Me › Character: the gallery of 29 characters in three folded groups (pet friends and fruits · fairy tales · serious; the same groups at first start), "Try for 5 minutes" (everything — the tutor's name and face, the ask buttons, the reactions — follows the character on trial: `NoemaThemes.current()` is the one way to read it), change it as often as you like for the first 15 days, then once every 5 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`). Characters from fairy tales keep their tale's name in every language. The Serious group holds the nine professions of 2026-10-09 (two philologists, two tech nerds, two maths-and-physics scientists, two biochemists, the polyglot Hydra), each with its props beside it and its own collection item |
 | — | Me › What I learn: Knowledge / Languages / Both (shows or hides the Languages tab) |
 
 ## 8. Before a subject: accounts, picker, Shelf, Explore, sharing, Claude (PA, SP, SH, SC, ES, SS, EX, CG, CS)
@@ -148,7 +148,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | MP12 legend | The map's ⋮ › What the signs mean (a sheet) |
 | MB1–MB6 bars | Unchanged, above the map |
 | MB "for your Claude app" bar | Gone from the map: a dot on the map's ⋮ while steps wait for material and you have never sent them to the Claude app; ⋮ › Copy the message for Claude |
-| ST1–ST24 station panel | A bottom sheet on phones. 📎 next to the title opens your material (its line is the tooltip); the path (Path C › Foundations) is a quiet subtitle next to the kind of step; the file name and pages are no longer under the title. "I already know this" first explains the test (Proceed / Go back). "Use a subject I have" and "Detach" are in Edit step, which shows only fields you can change |
+| ST1–ST24 station panel | A bottom sheet on phones. 📎 next to the title opens your material (its line is the tooltip); the path (Path C › Foundations) is a quiet subtitle next to the kind of step; the file name and pages are no longer under the title. "I already know this" first explains the test (Proceed / Go back). "Use a subject I have" and "Detach" are in ✏️ (Edit this step), which shows only fields you can change. The step's description is not repeated (its chapters and "After this step you can" say it). 📚 lists the step's sources (your material and the prepared subject's PDFs) and opens them. A locked step that is already prepared has "Read the theory": the subject opens read-only, with a 🔒 line on top, and its exercises, flashcards, drills and runs wait until the step opens |
 | everything else in §6 (NC, BP, IM, SCu, AT, RC, MS, AP-, NU, PT, SU) | Unchanged dialogs, opened from the places above |
 
 ## 10. Keyboard and gestures
