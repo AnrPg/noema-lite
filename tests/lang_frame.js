@@ -81,7 +81,7 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   const pagesOf = await page.evaluate(() => {
     const C = NoemaLangUI.UI.C, fn = Object.keys(C.functions).find(f => C.functions[f].category !== 'overview' && C.lang.de.grammar[f]);
     const multi = Object.entries(C.lang.de.lex).find(([, x]) => (x.senses || []).length > 1 && x.senses.every(s => C.concepts[s]));
-    return { fn, word: multi && multi[0], concept: multi && multi[1].senses[0] };
+    return { fn, word: multi && multi[0], concept: multi && multi[1].senses[0], field: (C.data.fields.find(f => (f.concepts || []).length > 30) || C.data.fields[0]).field };
   });
   // the settings and the Claude queue from ⋮
   const cm = await menuItems(page);
@@ -104,7 +104,18 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   await page.goto(url + `${BASE}/w/de/${encodeURIComponent(pagesOf.word)}`); await inCourse(page); await wait(500);
   const links = await page.$$eval('.lx-host a[href^="#/"]', l => l.map(a => a.getAttribute('href')));
   ok(links.length > 0 && links.every(x => x.startsWith(`#/lang/${'polyglot-semitic-zh-de'}/c/`)), 'links inside a word card point under the course: ' + links.slice(0, 2).join(' '));
-  if (links.length) { await page.click('.lx-host a[href^="#/lang/"]'); await wait(600); ok(/\/c\//.test(await hash(page)) && await page.$('.lx-host .lx-view h1'), 'a link opens the concept in the frame'); }
+  // the word card in the frame: the word, 🔊, its meaning and one quiet line; tags, register, context on tap; Practise this word in ⋮
+  ok(await page.$('.lx-fword .lx-cardtop .ns-hint') && !(await page.$('.lx-fword .lx-cardtop .lx-chips')) && !(await page.$('.lx-fword > .lx-deepbtn')), 'the word card’s head: the word, 🔊, its meaning and an (i) for its state, level and register');
+  ok((await menuItems(page)).some(x => /Practise this word/.test(x)), '… Practise this word waits in ⋮');
+  const secs = await page.$$eval('.lx-fword > details.lx-sec', l => l.map(d => (d.open ? '+' : '-') + d.querySelector('summary').textContent.trim()));
+  ok(secs.filter(x => x[0] === '+').length === 2 && secs.some(x => /^\+Meanings/.test(x)) && secs.some(x => /^\+In sentences/.test(x)), 'its sections start folded, the meanings and the sentences open: ' + secs.join(' | '));
+  const ex0 = '.lx-fword .lx-ex >> nth=0';
+  ok(!(await page.locator(ex0).locator('.lx-badge').first().isVisible()) && await page.locator(ex0).locator('.lx-tr').isVisible(), 'an example: the sentence and its translation; its register, context and new words wait');
+  await page.locator(ex0).click({ position: { x: 4, y: 4 } }); await wait(200);
+  ok(await page.locator(ex0).locator('.lx-badge').first().isVisible(), '… a tap shows them');
+  ok(await page.locator('.lx-fword .lx-ex:visible').count() <= 3 && await page.$('.lx-fword .lx-fmorebtn'), 'three sentences, then More');
+  await page.click('.lx-fword ol.lx-senses > li:has(a.lx-badge)', { position: { x: 6, y: 6 } }); await wait(200);
+  if (links.length) { await page.click('.lx-host a[href^="#/lang/"]:visible'); await wait(600); ok(/\/c\//.test(await hash(page)) && await page.$('.lx-host .lx-view h1'), 'a link opens the concept in the frame'); }
   await page.goBack(); await wait(600);
   ok(await hash(page) === `${BASE}/w/de/${encodeURIComponent(pagesOf.word)}` && await page.$('.lx-host .lx-view'), 'back: the word again');
   await page.goBack(); await wait(600);
@@ -202,6 +213,24 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   ok(['Letter forms', 'Vowel marks', 'Tracing'].every(w => dm.some(x => x.includes(w))), 'the letters’ drills in “Practice ▾”: ' + dm.join(' · '));
   await page.click('.ns-pop button:has-text("Letter forms")'); await wait(800);
   ok(await page.$('.lx-host .lx-session, .lx-host .lx-scriptrun'), '… a drill from ▾ runs');
+  // the second pass: content views with details on demand
+  await page.goto(url + `${BASE}/fn/${pagesOf.fn}/de`); await inCourse(page); await wait(400);
+  const fn = await page.evaluate(() => ({ h: document.scrollingElement.scrollHeight, secs: [...document.querySelectorAll('.lx-gram > details.lx-fsec')].map(d => (d.open ? '+' : '') + d.querySelector('summary').textContent), fam: !!document.querySelector('.lx-gram > .lx-familiarline'), first: !!document.querySelector('.lx-gram > .lx-summary') }));
+  ok(fn.first && !fn.fam && fn.secs.length >= 3 && fn.secs.every(x => x[0] !== '+') && fn.h < 2600, `a grammar point: the summary and the first block, the rest in folded sections (${fn.secs.join(' · ')}), ${fn.h} px tall at 390`);
+  await page.click('.lx-gram > details.lx-fsec[data-k="traps"] > summary').catch(() => { }); await wait(200);
+  ok(await page.$eval('.lx-gram > details.lx-fsec[data-k="traps"]', d => d.open && d.textContent.length > 40).catch(() => false), '… Traps open on a tap');
+  ok(await page.$eval('#ns-fab .nm', x => getComputedStyle(x).display === 'none') && await page.evaluate(() => document.body.classList.contains('ns-reading')), 'while you read a point the character is a small face (it covers less text)');
+  await page.goto(url + `${BASE}/settings`); await inCourse(page); await wait(300);
+  const panels = await page.$$eval('.lx-host .lx-fpanel > .ns-label', l => l.map(x => x.textContent));
+  ok(panels.length >= 4 && panels.length <= 6 && panels.includes('Sessions'), 'settings in a few panels, like Me: ' + panels.join(' · '));
+  await page.goto(url + `${BASE}/peculiar/de`); await inCourse(page); await wait(300);
+  ok(await page.$$eval('.lx-host details.lx-sec[open]', l => l.length) === 1 && await page.$('.lx-host p.lx-fseg') && await page.$('.lx-host h1 .ns-hint'), 'peculiarities: the first group open, the others folded, the filter a small switch, the counts behind (i)');
+  await page.goto(url + `${BASE}/field/${encodeURIComponent(pagesOf.field)}`); await inCourse(page); await wait(400);
+  ok(await page.locator('.lx-host .lx-cgrid > :visible').count() <= 25 && await page.$('.lx-host .lx-fmorebtn') && !/in all/.test(await page.$eval('.lx-host h1', x => x.textContent)), 'a field map: the first 24 words, then More; no counter in the title');
+  await page.click('.lx-host .lx-fmorebtn'); await wait(200);
+  ok(await page.locator('.lx-host .lx-cgrid > :visible').count() > 25, '… More shows the rest');
+  await page.goto(url + `${BASE}/cmp`); await inCourse(page); await wait(300);
+  ok(await page.locator('.lx-host .lx-cmplist >> nth=0').locator('.lx-cmprow:visible').count() === 8, 'compare: eight points, then More');
   for (const r of ['', `/lesson/${lesson}`, `/w/de/${encodeURIComponent(pagesOf.word)}`, `/fn/${pagesOf.fn}`, '/write/de', '/script/ar', '/cmp', '/settings', '/claude']) {
     await page.goto(url + BASE + r); await inCourse(page); await wait(250);
     if (!(await noHScroll(page))) ok(false, 'phone 390 px: nothing scrolls sideways on ' + (r || 'the home'));

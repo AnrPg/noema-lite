@@ -900,6 +900,18 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
     buttons and panels apply to the course's rows (they are the same components), and the course's own cards, lists and labels follow
     the same rules (the bear's dashed lines, the robot's and knight's square labels, round switches for the axolotl, alien, berry and
     candy, each character's display font).
+  * **Content views, details on demand** (second pass, `frameTidy2`): a **word card** shows the word, 🔊, its meaning (state, level
+    and register behind an (i)) and one quiet line of its facade (article / plural / measure word / root …); *Practise this word* is in
+    ⋮; its sections start folded except *Meanings* (a numbered list, each meaning's tags on tap) and the sentences (the sentence with
+    🔊 and its translation; register, context, meaning and 🆕 new words on tap; three, then More) — the same card over the page
+    when a word is tapped. A **grammar point** shows its title, its state, the summary and the first table or block; the rest is in
+    quiet folded sections: From your languages (the notes and the D18 folds), Ask yourself, Traps, More about this point, Sentences,
+    See also, In your other languages; the line of languages it is familiar from is behind an (i) (≈ two phone screens). **Lists**
+    show their first items then More (lists 5, sentences 3, compare 8, field maps 24); **settings** are the frame's panels, one per
+    subject; **peculiarities** open their first group only, the filter a small switch, the counts behind (i); counters in titles
+    and on rows (“· 82 in all”, “55 sentences”, “3 ready”) are gone. While reading (lesson, word, point, reader, map pages) the frame is
+    in reading mode and on phones the character is a small face without its name, so it covers less text; the page keeps main's
+    bottom padding so the last lines scroll clear of it.
   * **Plain chrome**: titles, summaries and buttons drop their pictographs, as main's frame does (`Noema.plain`); kept: flags,
     foreign words, lesson text, the pictures of words and exercises, 🆕 marks, arrows and ✓. `lang` / `dir` on every foreign span,
     the keyboard of every exercise and the 390 px layout are unchanged (`tests/lang_frame.js` H checks them with four characters).
@@ -1143,6 +1155,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-10 — Second declutter pass inside the frame (asked by the user, §8 *Content views, details on demand*): word cards, grammar points, lessons, reader, compare, peculiarities, field maps, node pages and settings show the essentials and fold the rest (tags on tap, three sentences then More, quiet sections, panels); the character a small face while reading on phones; `tests/lang_frame.js` checks it.
 - 2026-10-10 — The course inside the frame in main's calm style (asked by the user, §8 *Style inside the frame*): one primary action per screen, the other actions in ⋮ / Practice ▾ / sheets, the home as the frame's components (one big card, Your languages with a sheet of lanes each, the map as a list), no counts, rings or legends unless asked for, plain chrome, the chosen character's colours, fonts and shapes; `engine/lang/99z_frame.js`, `97_frame.css`; `tests/lang_frame.js` H. With `shell: false` nothing changes.
 - 2026-10-09 — The new frame (`main`: PR #14 the frame, PR #11 the Shelf) merged into the language work, and the courses live inside it (§8 *Inside the frame*): the Languages tab lists every course (library and account) with its languages, progress and what is due; `#/lang/<course>/…` draws a course in the frame with crumbs and ⋮ (settings, ✨ Through Claude, another course), the course's addresses mapped both ways; a "continue" card on Today; + New language; the boot opens `?subject=lang:<id>` or the course you were in at `#/lang/<id>`; the frame's colours; `shell: false` unchanged. Conflicts resolved as docs/NEW_FRAME_AND_LANGUAGES.md and docs/SHELF_AND_LANGUAGES.md say (README, `loader.js`, `tests/curriculum.js`, `tools/build.py`). Tested by `tests/lang_frame.js`.
 - 2026-10-09 — P9 listening and speaking: browser speech synthesis (voice per language, slow rate, text sent as written), 🔊 on cards, examples, sentences, intro, feedback, reader and compare views; `listen_pick`, `listen_tone`, `dictation`, `listen_meaning`, `shadowing`, `speak` (transcript compared with the stored forms, shadowing without recognition); the 🎧 lane, the settings, two items in the daily session (§3.9, §6.8, §7.5, §8, §13).

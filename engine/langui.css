@@ -356,6 +356,43 @@ body.ns-on .lx-host .lx-ffold>summary{padding:14px 16px;font-weight:700;cursor:p
 body.ns-on .lx-host .lx-ffold>.lx-card{border:0;margin:0;padding-top:0}
 body.ns-on .lx-host .lx-ffold[open]>.lx-card .lx-cardtop h3{display:none}
 [data-m="bear"] body.ns-on .lx-host .lx-ffold{border-style:dashed;border-color:color-mix(in srgb,var(--ink3) 45%,transparent)}
+/* ---- second pass: details on demand (99z_frame.js frameTidy2) ---- */
+body.ns-on .lx-fhide{display:none!important}
+body.ns-on .lx-fmorebtn{margin:6px 0 4px;color:var(--t1i)}
+body.ns-on .lx-ftap{cursor:pointer}
+body.ns-on .lx-fword .lx-lemma{display:flex;align-items:center;gap:8px}
+body.ns-on .lx-fword .lx-meta{font-size:1.05rem}
+body.ns-on .lx-fparts{margin:6px 0 2px;color:var(--ink2);font-size:.92rem}
+body.ns-on .lx-fword>.lx-feeling,body.ns-on .lx-fword details>.lx-feeling{color:var(--ink2);font-size:.95rem}
+body.ns-on .lx-fword>details.lx-sec{border-top:1px solid var(--line);padding:0}
+body.ns-on .lx-fword>details.lx-sec>summary{padding:12px 0;font-weight:700}
+body.ns-on .lx-fword ol.lx-senses>li .lx-badge{display:none}
+body.ns-on .lx-fword ol.lx-senses>li.lx-fopen .lx-badge{display:inline-flex}
+body.ns-on .lx-fword ol.lx-senses>li.lx-ftap:not(.lx-fopen)>b::after,body.ns-on .lx-ex.lx-ftap:not(.lx-fopen)>.lx-tr::after{content:" \203A";color:var(--ink3);font-weight:400}
+body.ns-on .lx-ex.lx-ftap:not(.lx-fopen)>:not(.lx-extext):not(.lx-tr){display:none}
+body.ns-on .lx-ex.lx-ftap{border-radius:var(--br)}
+body.ns-on .lx-ex.lx-ftap:hover{background:color-mix(in srgb,var(--acc-soft) 35%,transparent)}
+/* a grammar point: quiet sections after the first block */
+body.ns-on details.lx-fsec{border-top:1px solid var(--line);margin:0}
+body.ns-on details.lx-fsec>summary{padding:14px 0;font-weight:700;cursor:pointer;color:var(--ink)}
+body.ns-on details.lx-fsec[open]>summary{color:var(--t1i)}
+body.ns-on .lx-gram .lx-feas{font-size:.86rem;color:var(--ink2)}
+/* settings: the frame's panels */
+body.ns-on .lx-host .lx-fpanel{margin:0 0 14px}
+body.ns-on .lx-host .lx-fpanel .lx-h3{display:none}
+/* the peculiarities' filter: a small segmented switch */
+body.ns-on .lx-host p.lx-fseg .btn.small{min-height:30px;padding:0 10px;border:0;background:var(--line);color:var(--ink2);font-size:.84rem}
+body.ns-on .lx-host p.lx-fseg .btn.small.primary{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+/* counters that do not help the next decision */
+body.ns-on .lx-host :is(.lx-cmprow .tiny,.lx-textcard .tiny,.lx-lanen){display:none}
+/* the character while you read: a small face (docs/UI_MAP.md "a small face while you read or practise"), so it covers less of the text */
+@media (max-width:759px){body.ns-on.lx-frame.ns-reading .ns-fab.full .nm{display:none} body.ns-on.lx-frame.ns-reading .ns-fab.full .ns-fabface{width:52px;height:48px}}
+body.ns-on .lx-host .lx-fpanel :is(label.lx-check,.lx-check){display:flex;align-items:flex-start;gap:10px;margin:4px 0}
+body.ns-on .lx-host .lx-fpanel .lx-check>input{margin-top:5px;flex:none}
+body.ns-on .lx-host .lx-fpanel select{max-width:100%}
+body.ns-on .lx-host p.lx-fseg{display:inline-flex;gap:4px;padding:3px;border-radius:calc(var(--br) + 4px);background:var(--line);margin:0 0 8px}
+body.ns-on .lx-host p.lx-fseg .btn.small{background:transparent}
+body.ns-on .lx-host .lx-fpanel label.lx-check:not(:has(select)){flex-wrap:nowrap}
 /* ---------- P9 — listening and speaking (98_speech.js) ---------- */
 .lx-spk { border: 0; background: transparent; cursor: pointer; font-size: .9em; padding: 0 .25em; margin-inline-start: .15em; border-radius: 6px; line-height: 1.2; vertical-align: middle; opacity: .75; }
 .lx-spk:hover, .lx-spk:focus-visible { opacity: 1; background: var(--chip, rgba(127,127,127,.15)); }

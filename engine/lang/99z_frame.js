@@ -82,6 +82,7 @@ function frameTidy(v, r) {
   const grams = kids('article.lx-gram');
   if (grams.length > 1) grams.forEach((card, i) => { const d = h('details', { class: 'lx-ffold', open: i === 0 ? true : null }, h('summary', {}, card.querySelector('h3')?.textContent || 'Grammar')); card.replaceWith(d); d.append(card); });
   if (r.name === 'home' && v.querySelector('.lx-hero')) frameHome(v, acts, hold);
+  else frameTidy2(v, r, move);
   if (hold.children.length) v.append(hold);
   // one primary action per screen: the first one stays primary, the others become plain buttons
   [...v.querySelectorAll('.btn.primary')].filter(b => !b.closest('.lx-moved, .lx-stage, .lx-session')).slice(1).forEach(b => b.classList.remove('primary'));
@@ -153,3 +154,92 @@ function frameTodaySheet() {
     draw();
   });
 }
+
+/* ---------- second pass: the content views, details on demand (docs/LANGUAGES.md §8 *Style inside the frame*) ---------- */
+/** Show the first n items of a list, the others after "More" (a quiet button under it). */
+function frameMore(box, items, n, what = 'more') {
+  items = items.filter(x => x.isConnected); if (items.length <= n + 1 || box.dataset.fmore) return;
+  box.dataset.fmore = '1';
+  const rest = items.slice(n); rest.forEach(x => x.classList.add('lx-fhide'));
+  const b = h('button', { class: 'btn ghost small lx-fmorebtn', type: 'button', onclick: e => { e.stopPropagation(); rest.forEach(x => x.classList.remove('lx-fhide')); b.remove(); } }, `More (${rest.length} ${what})`);
+  (items[items.length - 1].parentElement === box ? box : items[0].parentElement).after(b);
+}
+/** A word card: the word, 🔊, its meaning and one quiet line of its facade; the rest on demand. move: a page's ⋮ (else the button stays, quiet). */
+function frameWordCard(card, move = null) {
+  if (card.dataset.ftidy) return; card.dataset.ftidy = '1'; card.classList.add('lx-fword');
+  const meta = card.querySelector(':scope > .lx-cardtop .lx-meta'), chips = meta?.querySelector('.lx-chips');
+  if (chips) { const t = [...chips.children].map(x => framePlain(x.textContent)).filter(Boolean).join(' · '); chips.remove(); if (t) meta.firstElementChild?.append(' ', FS().hint(t)); }
+  // the facade essentials (article, plural, measure word, root …) as one quiet line
+  const parts = card.querySelector(':scope > dl.lx-parts');
+  if (parts) {
+    const pairs = []; for (const dt of parts.querySelectorAll(':scope > dt')) { const dd = dt.nextElementSibling; if (dd?.tagName === 'DD' && !/translit|pinyin/i.test(dt.textContent)) pairs.push([dt.textContent.trim(), dd]); }
+    const line = h('p', { class: 'lx-fparts' }, ...pairs.slice(0, 4).flatMap(([l, dd], i) => [i ? ' · ' : null, h('span', { title: l }, ...dd.childNodes)]));
+    parts.replaceWith(line);
+  }
+  const deep = card.querySelector(':scope > .lx-deepbtn'); if (deep) { if (move) move(deep, { icon: 'gym' }); else deep.classList.add('ghost'); }
+  // sections closed, without counts; the feeling of the word opens the first one
+  const secs = [...card.querySelectorAll(':scope > details.lx-sec')];   // open: the meanings (a compact list) and the sentences (three); the rest closed
+  secs.forEach(d => { d.open = !!d.querySelector(':scope > ol.lx-senses, :scope > div > .lx-ex'); d.querySelector(':scope > summary > .tiny')?.remove(); });
+  const feel = card.querySelector(':scope > .lx-feeling'); if (feel && secs[0]) secs[0].querySelector(':scope > summary').after(feel);
+  // meanings: a numbered list; each meaning's tags on tap
+  card.querySelectorAll('ol.lx-senses > li').forEach(li => { if (li.querySelector('.lx-badge')) { li.classList.add('lx-ftap'); li.addEventListener('click', e => { if (e.target.closest('a, button, .lx-tok')) return; li.classList.toggle('lx-fopen'); }); } });
+  frameExamples(card);
+}
+/** Examples: the sentence (🔊) and its translation; register, context, meaning and new words on tap; three, then More. */
+function frameExamples(root) {
+  const exs = [...root.querySelectorAll('.lx-ex')].filter(x => !x.closest('.lx-stage, .lx-session') && !x.dataset.ftidy);
+  for (const ex of exs) {
+    ex.dataset.ftidy = '1';
+    if (ex.querySelector(':scope > :not(.lx-extext, .lx-tr)')) { ex.classList.add('lx-ftap'); ex.addEventListener('click', e => { if (e.target.closest('a, button, .lx-tok, .lx-w')) return; ex.classList.toggle('lx-fopen'); }); }
+  }
+  const groups = new Map(); for (const ex of exs) { const p = ex.parentElement; if (!groups.has(p)) groups.set(p, []); groups.get(p).push(ex); }
+  for (const [p, l] of groups) frameMore(p, l, 3, 'examples');
+}
+/** A grammar point: its title, its state, one summary and the first table or block; everything else in a few quiet sections. */
+const GRAM_GROUPS = [['from', 'From your languages'], ['ask', 'Ask yourself'], ['traps', 'Traps'], ['more', 'More about this point'], ['examples', 'Sentences'], ['also', 'See also'], ['other', 'In your other languages']];
+function frameGram(card) {
+  if (card.dataset.ftidy) return; card.dataset.ftidy = '1';
+  const fam = card.querySelector(':scope > .lx-familiarline'); if (fam) { card.querySelector(':scope > .lx-cardtop h3')?.append(' ', FS().hint(framePlain(fam.textContent))); fam.remove(); }
+  card.querySelector(':scope > .lx-feas .lx-fnstate')?.remove();
+  const kids = [...card.children]; let i = kids.findIndex(x => x.matches('.lx-summary')); if (i < 0) i = kids.findIndex(x => !x.matches('.lx-cardtop, .lx-feas'));
+  let first = null; const groups = {};
+  for (const x of kids.slice(i + 1)) {
+    const head = (x.querySelector(':scope > b, :scope > .tiny, :scope > summary')?.textContent || '').toLowerCase();
+    const k = x.matches('.lx-familiar, .lx-notesbox') ? 'from' : /ask yourself/.test(head) ? 'ask' : x.matches('.k-pitfall') || /trap/.test(head) ? 'traps'
+      : /see also/.test(head) ? 'also' : x.matches('.lx-across, .lx-fnstrip, .lx-strip') ? 'other' : x.matches('.lx-exs, .lx-examples') || x.querySelector(':scope > .lx-ex') ? 'examples' : 'more';
+    if (!first && k === 'more' && x.matches('.lx-compare, .lx-callout, .lx-paradigm, table, .lx-block')) { first = x; continue; }
+    (groups[k] = groups[k] || []).push(x);
+  }
+  for (const [k, title] of GRAM_GROUPS) if (groups[k]) { const d = h('details', { class: 'lx-fsec', 'data-k': k }, h('summary', {}, title)); groups[k][0].before(d); d.append(...groups[k]); card.append(d); }
+}
+/** The settings as the frame's panels: one per subject (like Me's pages). */
+function frameSettings(v) {
+  const kids = [...v.children]; let cur = null;
+  for (const x of kids) {
+    if (x.matches('h1, .lx-moved')) continue;
+    const h3 = x.matches('h3') ? x : x.querySelector(':scope > h3.lx-h3');
+    if (h3) { cur = h('section', { class: 'ns-panel lx-fpanel' }, h('span', { class: 'ns-label' }, framePlain(h3.textContent))); x.before(cur); if (x === h3) { x.remove(); continue; } h3.remove(); }
+    if (cur) cur.append(x);
+  }
+}
+/** The second pass over a view (called by frameTidy). */
+function frameTidy2(v, r, move) {
+  v.querySelectorAll('article.lx-card').forEach(c => { if (c.querySelector(':scope > .lx-cardtop .lx-lemma')) frameWordCard(c, move); });
+  v.querySelectorAll('article.lx-gram').forEach(frameGram);
+  frameExamples(v);
+  v.querySelectorAll('ul.lx-list, ol.lx-list').forEach(l => { if (!l.closest('.lx-stage, .lx-session, .lx-moved')) frameMore(l, [...l.children], 5, 'items'); });
+  v.querySelectorAll('.lx-cmplist').forEach(l => frameMore(l, [...l.children], 8, 'more'));
+  v.querySelectorAll('.lx-cgrid').forEach(l => frameMore(l, [...l.children].filter(x => !x.matches('.lx-tierbreak:not(button)')), 24, 'more'));
+  v.querySelectorAll(':scope details.lx-sec').forEach((d, i) => { d.querySelector(':scope > summary > .tiny')?.remove(); if (r.name === 'peculiar' && i > 0) d.open = false; });
+  // counters in titles ("· 82 in all", a lone count): the grid says it
+  v.querySelectorAll(':scope > :is(h1, h2, h3) > .tiny').forEach(t => { if (/^[\s·\d]*(in all)?\s*$/.test(t.textContent)) t.remove(); });
+  v.querySelectorAll(':scope > :is(h2, h3)').forEach(x => { if (!x.textContent.trim()) x.remove(); });
+  if (r.name === 'peculiar') {   // the filter as a small switch; how many are new or familiar on demand
+    const p = v.querySelector(':scope > p.tiny');
+    if (p) { const t = framePlain([...p.childNodes].filter(n => n.nodeType === 3).map(n => n.nodeValue).join(' ')); [...p.childNodes].filter(n => n.nodeType === 3).forEach(n => n.remove()); p.classList.add('lx-fseg'); if (t) v.querySelector(':scope > h1')?.append(' ', FS().hint(t)); }
+  }
+  if (r.name === 'settings') frameSettings(v);
+}
+/** A word card over the page (tap on a word): the same quiet card. */
+new MutationObserver(ms => { if (!FR.on) return; for (const m of ms) m.addedNodes.forEach(x => { if (x.nodeType === 1 && x.classList?.contains('lx-pop')) { x.querySelectorAll('article.lx-card').forEach(c => { if (c.querySelector(':scope > .lx-cardtop .lx-lemma')) frameWordCard(c); }); framePlainTree(x); } }); })
+  .observe(document.body, { childList: true });
