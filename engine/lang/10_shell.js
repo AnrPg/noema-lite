@@ -11,7 +11,7 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   document.documentElement.lang = UI.C.explainLang;
   if (!document.querySelector('link[data-lx-fonts]')) document.head.append(h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
-  if (host) host.replaceChildren(h('div', { class: 'lx-top lx-subbar' }), h('div', { class: 'lx-main' }));   // inside the frame: its top bar and tabs stay
+  if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': 'Your languages' }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
   if (!wired) {
     wired = true;
@@ -61,13 +61,16 @@ function viewLabel(r) {
 function render() {
   if (!UI.C || !shown()) return;
   const r = route(); UI.view = r.name;
-  if (FR.on) { document.documentElement.lang = UI.C.explainLang; try { FR.onRoute?.({ view: r.name, label: viewLabel(r), home: r.name === 'home' && !r.arg }); } catch (e) { console.warn('[lang] frame', e); } }
+  if (FR.on) document.documentElement.lang = UI.C.explainLang;
   topbar();
   const m = $('.lx-main'); m.innerHTML = ''; window.scrollTo(0, 0);
   const v = h('div', { class: 'view lx-view' });
   m.append(v);
   (VIEWS[r.name] || VIEWS.home)(v, r);
-  if (FR.on && r.name === 'home') frameSummary(v);
+  if (!FR.on) return;
+  if (r.name === 'home') frameSummary(v);
+  let acts = []; try { acts = frameTidy(v, r); } catch (e) { console.warn('[lang] frame', e); }   // main's calm style: one primary action, the rest in ⋮ (99z_frame.js)
+  try { FR.onRoute?.({ view: r.name, label: viewLabel(r), home: r.name === 'home' && !r.arg, acts }); } catch (e) { console.warn('[lang] frame', e); }
 }
 /** What the frame's Languages tab and Today card show without loading the course: the next lesson (device-local, docs/LANGUAGES.md §8). */
 function frameSummary(v) {

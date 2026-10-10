@@ -295,6 +295,67 @@ body.ns-on .lx-pop .lx-popbox{background:var(--paper);color:var(--ink)}
 body.ns-on .lx-tutor{z-index:45;background:var(--paper);color:var(--ink)}
 body.ns-on .lx-toast{z-index:60;background:var(--ink);color:var(--paper)}
 @media (max-width:759px){body.ns-on .lx-toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+/* ---- main's calm style inside the frame (docs/LANGUAGES.md §8 *Style inside the frame*; 99z_frame.js tidies the views) ---- */
+body.ns-on .lx-host{gap:18px}
+body.ns-on .lx-host .lx-view>h1{font-size:1.75rem;margin:0 0 4px}
+body.ns-on .lx-host .lx-view>h1 .ns-hint{font-size:.68rem}
+body.ns-on .lx-host .lx-h2{font-size:1.2rem;margin:28px 0 10px}
+body.ns-on .lx-host .tiny{font-size:.86rem}
+/* the languages switch: the frame's segmented control (a colour stripe per language stays on the chosen one) */
+body.ns-on .lx-host .lx-subbar{display:flex;flex-wrap:nowrap;gap:4px;padding:4px;border:0;border-radius:calc(var(--br) + 4px);background:var(--line);overflow-x:auto;scrollbar-width:none;align-self:flex-start;max-width:100%}
+body.ns-on .lx-host .lx-subbar :is(.spacer,.lx-explain),body.ns-on .lx-host .lx-ring{display:none}
+body.ns-on .lx-host .lx-subbar .lx-flagchip{flex:none;min-height:34px;padding:0 12px;gap:6px;border:0;border-radius:var(--br);background:transparent;color:var(--ink2);box-shadow:none;font-weight:700;font-size:.86rem}
+body.ns-on .lx-host .lx-subbar .lx-flagchip.on{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08),inset 0 -2px 0 var(--lc,transparent)}
+:is([data-m="axo"],[data-m="alien"],[data-m="berry"],[data-m="candy"]) body.ns-on .lx-host :is(.lx-subbar,.lx-rail),:is([data-m="axo"],[data-m="alien"],[data-m="berry"],[data-m="candy"]) body.ns-on .lx-host :is(.lx-subbar .lx-flagchip,.lx-railbtn){border-radius:999px}
+/* the flag rail of a card: the same control, smaller */
+body.ns-on .lx-host .lx-rail{background:var(--line);border:0;border-radius:calc(var(--br) + 4px);padding:3px;gap:3px}
+body.ns-on .lx-host .lx-railbtn{border-radius:var(--br);width:42px;height:34px;font-size:18px}
+body.ns-on .lx-host .lx-railbtn.on{background:var(--paper);box-shadow:0 1px 3px rgba(0,0,0,.08),inset 0 -2px 0 var(--lc,transparent)}
+body.ns-on .lx-host .lx-dot{border-color:var(--paper)}
+/* cards and panels: the frame's panel (paper, a line, the character's radius and border) */
+body.ns-on .lx-host :is(.lx-card,.lx-absent,.lx-callout){border-radius:var(--r);border:1px solid var(--line);background:var(--paper);box-shadow:none}
+body.ns-on .lx-host .lx-card{padding:18px}
+[data-m="bear"] body.ns-on .lx-host :is(.lx-card,.lx-nodes,.lx-lanegrid,.lx-texts,.lx-cmplist){border-style:dashed;border-color:color-mix(in srgb,var(--ink3) 45%,transparent)}
+[data-m="heron"] body.ns-on .lx-host :is(.lx-card,.lx-nodes,.lx-lanegrid,.lx-texts,.lx-cmplist){border-color:color-mix(in srgb,var(--line) 70%,transparent)}
+body.ns-on .lx-host .lx-note{background:var(--t2);color:var(--t2i);border-radius:var(--br)}
+/* badges: the frame's pills */
+body.ns-on .lx-host .lx-badge{border:0;background:var(--acc-soft);color:var(--t1i);font-weight:600;white-space:normal;border-radius:999px}
+body.ns-on .lx-host .lx-badge.new{background:var(--t2);color:var(--t2i)} body.ns-on .lx-host .lx-badge.ctx{background:var(--t4);color:var(--t4i)}
+:is([data-m="knight"],[data-m="piglet"],[data-m="wolf"],[data-m="eagle"],[data-m="robot"],[data-m="prism"]) body.ns-on .lx-host :is(.lx-badge,.lx-step){border-radius:5px}
+body.ns-on .lx-host .lx-step{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--acc-soft);color:var(--t1i);font-family:var(--font);font-size:.74rem;font-weight:700;vertical-align:middle}
+/* lists of steps, lanes and texts: the frame's list (one row each, a line between) */
+body.ns-on .lx-host :is(.lx-nodes,.lx-lanegrid,.lx-texts,.lx-cmplist){display:flex;flex-direction:column;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:0}
+body.ns-on .lx-host :is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow){border:0;border-radius:0;background:transparent;padding:14px 16px;box-shadow:none}
+body.ns-on .lx-host :is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow)+:is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow){border-top:1px solid var(--line)}
+body.ns-on .lx-host :is(.lx-node,.lx-lanecard,.lx-textcard,.lx-cmprow):hover:not([disabled]){background:color-mix(in srgb,var(--acc-soft) 50%,var(--paper))}
+body.ns-on .lx-host .lx-node .lx-nodetitle>.tiny{display:none}
+body.ns-on .lx-host .lx-nodestates{gap:10px}
+body.ns-on .lx-host .lx-ns{background:none;border:0;padding:0;font-size:.82rem;color:var(--ink2)}
+body.ns-on .lx-host .lx-lanecard{display:grid;grid-template-columns:40px 1fr;column-gap:14px;row-gap:2px;align-items:center;text-align:start}
+body.ns-on .lx-host .lx-lanecard>*:not(.lx-laneicon){grid-column:2}
+body.ns-on .lx-host .lx-laneicon{grid-row:1/span 3;width:40px;height:40px;border-radius:var(--ir);display:grid;place-items:center;background:var(--t1);font-size:1.2rem}
+body.ns-on .lx-host .lx-lanecard .tiny{color:var(--ink2)}
+/* rows of actions: the primary one and "Practice ▾" */
+body.ns-on .lx-host .lx-frow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+body.ns-on .lx-host .lx-actions .btn.primary{min-height:48px;padding:0 22px}
+/* the home: the frame's header, one card, labels, lists */
+body.ns-on .lx-host .lx-fhome{display:flex;flex-direction:column;gap:12px}
+body.ns-on .lx-host .lx-fhome>*{margin:0}
+body.ns-on .lx-host .lx-fhome>.ns-label{margin-top:16px}
+body.ns-on .lx-host .lx-fhead h1{font-size:1.75rem;margin:0 0 4px}
+body.ns-on .lx-host .lx-fhead .lx-fsub{margin:0;font-size:.95rem}
+body.ns-on .lx-host .lx-fgo{margin-top:8px}
+body.ns-on .lx-host .lx-fgo.lx-fdone h2{color:var(--ink2)}
+body.ns-on .lx-host .lx-fhome .lx-mapmore{align-self:flex-start}
+body.ns-on .lx-host .lx-moved{display:none}
+body.ns-on .lx-host .lx-node .lx-nodetitle b{font-family:var(--font);font-size:1rem;font-weight:700}
+body.ns-on .lx-host .lx-subbar[hidden]{display:none}
+body.ns-on .lx-host:has(.lx-session) .lx-subbar{display:none}
+body.ns-on .lx-host .lx-ffold{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);margin:0 0 12px}
+body.ns-on .lx-host .lx-ffold>summary{padding:14px 16px;font-weight:700;cursor:pointer;list-style-position:inside}
+body.ns-on .lx-host .lx-ffold>.lx-card{border:0;margin:0;padding-top:0}
+body.ns-on .lx-host .lx-ffold[open]>.lx-card .lx-cardtop h3{display:none}
+[data-m="bear"] body.ns-on .lx-host .lx-ffold{border-style:dashed;border-color:color-mix(in srgb,var(--ink3) 45%,transparent)}
 /* ---------- P9 — listening and speaking (98_speech.js) ---------- */
 .lx-spk { border: 0; background: transparent; cursor: pointer; font-size: .9em; padding: 0 .25em; margin-inline-start: .15em; border-radius: 6px; line-height: 1.2; vertical-align: middle; opacity: .75; }
 .lx-spk:hover, .lx-spk:focus-visible { opacity: 1; background: var(--chip, rgba(127,127,127,.15)); }

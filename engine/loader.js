@@ -616,7 +616,7 @@
     if (langOpening !== mine || !nhost.isConnected) return;   // the learner went elsewhere meanwhile
     if (data instanceof Error) { nhost.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, data.message), h('button', { class: 'btn', onclick: () => S.go('#/lang') }, L('languages')))); return; }
     document.body.classList.add('lx-frame');
-    NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => langMenu(id), menuLabel: L('langMore'), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
+    NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => [...(r.acts || []), r.acts?.length ? '-' : null, ...langMenu(id)], menuLabel: L('langMore'), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
     if (!langRoute.polling) { langRoute.polling = true; NoemaLangUI.claude.startPolling(acc); }
     langProfiles(meta);
   }
