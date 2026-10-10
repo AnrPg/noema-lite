@@ -22,7 +22,7 @@
   const claimKey = (cid, nid) => `${CLAIM}${cid}:${nid}`;
   const isApp = c => c?.provider === 'claudeapp';
   const prepared = n => ['ready', 'generating'].includes(n?.pack?.status);
-  const needsPlan = n => !prepared(n) && (!n.chapters?.length || !!n.replan);
+  const needsPlan = n => (!prepared(n) || !!n.pack?.assigned) && (!n.chapters?.length || !!n.replan);   // 📦 a step taught by an attached subject is planned (from it), never prepared
   const clone = o => JSON.parse(JSON.stringify(o));
   const ms = v => Date.parse(v || '') || 0;
 
@@ -31,7 +31,7 @@
   const member = c => c?.shared?.role === 'member' && !c.shared.ended;   // 👥 a curriculum someone shared with the learner: its map and plans are the owner's
   function work(c) {
     const graph = isApp(c) && !member(c) && GRAPH.includes(c.stage) ? c.stage : null;
-    const toPlan = isApp(c) && !member(c) && !graph && c.stage !== 'dag' ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];
+    const toPlan = isApp(c) && !graph && c.stage !== 'dag' && !C().holding(c) ? C().order(c).filter(id => needsPlan(c.nodes[id]) && (!member(c) || !!c.nodes[id].pack?.assigned)) : [];   // holding: the learner attaches their own subjects first · a member plans only the steps their own subjects teach
     const queued = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')) || a.localeCompare(b));
     const steps = queued.filter(id => !c.nodes[id].pack.claimedAt), claimed = queued.filter(id => c.nodes[id].pack.claimedAt);
     return { graph, toPlan, steps, claimed, done: !graph && !toPlan.length && !steps.length };
@@ -60,7 +60,7 @@
   }
 
   /* ---------- tasks ---------- */
-  const TITLES = { dag: 'Agent 1 — the map: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
+  const TITLES = { dag: 'Agent 1 — the Roadmap: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
   /** Which re-plan requests a plan task answers: a hash of the replanAt of each of its steps, in order ('' when none was asked
@@ -75,20 +75,20 @@
     if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
     if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: SYS.audit, prompt: P.auditPrompt(x, C().snapshot(c, { withSummaries: true })), schema: S.S_AUDIT };
     if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: SYS.expand, prompt: P.expandPrompt(x, C().snapshot(c), c.nodes[c.goalId]), schema: S.S_EXPAND };
-    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(',') + planGen(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
+    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(',') + planGen(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + P.packageText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
     return null;
   }
   /** The learner's files of some steps, each file once (even when several steps or page ranges use it). */
   function downloadsOf(c, ids) {
     const downloads = [], seen = new Set();
-    for (const nid of ids) for (const f of c.nodes[nid]?.material?.files || []) {
+    for (const nid of ids) for (const f of c.nodes[nid]?.pack?.assigned ? [] : c.nodes[nid]?.material?.files || []) {
       const store = f.fileId ? C().curStore(c.id) : C().packId(c, nid), src = f.fileId || f.srcId, k = store + '/' + src;
       if (seen.has(k)) continue; seen.add(k);
       downloads.push({ store, src, name: f.name, size: f.size || 0, type: f.type || '', pages: f.pages || null, sha256: f.sha256 || null });
     }
     return downloads;
   }
-  const hasFiles = (c, id) => !!c.nodes[id]?.material?.files?.length;
+  const hasFiles = (c, id) => !!c.nodes[id]?.material?.files?.length && !c.nodes[id].pack?.assigned;
   /** The next plan batch: up to 5 steps, of which at most 2 with files (Claude reads their pages before planning them). */
   function planBatch(c, ids) {
     const out = []; let withFiles = 0;
@@ -106,10 +106,11 @@
     if (step) {
       const s = String(step).trim().toLowerCase(); const nid = c.nodes[step] ? step : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
       if (!nid) return { error: `No step “${step}” in “${c.title}”.` };
+      if (c.nodes[nid].pack?.assigned) return needsPlan(c.nodes[nid]) && isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” is taught by “${c.nodes[nid].pack.title || c.nodes[nid].pack.id}”, a subject the learner attached to it — it is not prepared.` };
       if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
       if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
-      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared curriculum — do not prepare it again (the learner gets it on the map).` };
-      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared curriculum plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
+      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared Roadmap — do not prepare it again (the learner gets it on the map).` };
+      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared Roadmap plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
       return stepSpec(c, nid);
     }
     const w = work(c);
@@ -152,10 +153,20 @@
     const cc = clone(c);
     for (const r of [...rows].sort((a, b) => a.key.localeCompare(b.key))) {
       let e; try { e = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; }
-      if (e.kind === 'step') { const n = cc.nodes[e.nid]; if (n) n.pack = { ...(n.pack || {}), id: e.packId, status: 'ready' }; continue; }
+      if (e.kind === 'step') { const n = cc.nodes[e.nid]; if (n && !n.pack?.assigned) n.pack = { ...(n.pack || {}), id: e.packId, status: 'ready' }; continue; }
+      if (e.kind === 'assign') { const n = cc.nodes[e.nid]; if (n && !C().Edit?.cannotAssign?.(cc, n)) attachTo(cc, n, e); continue; }
       const t = byId(cc, e.task); if (t && !check(cc, t, e.data).length) apply(cc, t, e.data);
     }
     return cc;
+  }
+  /** 📦 What an attached subject changes on its step (the same here, in the connector's view and in Edit.assign's effect on
+      the plan): the step is taught by it, and re-planned from its outline. e: { packId, title, description, outline, at } */
+  function attachTo(c, n, e) {
+    const at = e.at || new Date().toISOString();
+    n.pack = { id: e.packId, status: 'ready', assigned: { from: e.from || 'claude', at }, title: e.title || e.packId, description: e.description || '', outline: e.outline || [], ...(e.sections ? { sections: e.sections, exercises: e.exercises || 0, chapters: e.chapters || 0 } : {}) };
+    n.assignedAt = at; if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C().planOf(n);
+    if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = C().stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; } delete n.reviewed;
+    if (c.stage === 'done') c.stage = 'plan';
   }
   const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;
 
@@ -201,6 +212,7 @@
   /** A step the connector saved: get the pack from the cloud (and its pictures) and mark the step ready. */
   async function finishStep(acc, c, e) {
     const n = c.nodes[e.nid]; if (!n) return false;
+    if (n.pack?.assigned) return false;   // 📦 the learner attached their own subject to this step since — it is not replaced
     if (n.pack?.status === 'ready' && n.pack.id === e.packId && (!e.version || n.pack.version === e.version)) return false;
     const pack = await root.Noema.getPackById(acc, e.packId);
     await C().Gen.finish(c, e.nid, pack, { stored: true, via: 'claude-app' });
@@ -221,6 +233,12 @@
         if (!c) { if (Date.now() - (Date.parse(r.updated_at) || 0) > 7 * 864e5) done.push(r.key); continue; }   // not on this device (yet)
         try {
           if (e.kind === 'step') { if (await finishStep(acc, c, e)) { n++; steps++; } }
+          else if (e.kind === 'assign') {   // 📦 Claude saved a subject for a step the learner named: it teaches that step from now on
+            const res = await C().Edit.assign(acc, cid, e.nid, e.packId, { from: e.from || 'claude' });
+            if (res.error && /not in your library/.test(res.error) && Date.now() - (Date.parse(r.updated_at) || 0) < 864e5) continue;   // its card has not synced yet: next time
+            if (res.ok) { n++; toast(`📦 “${e.title || e.packId}” now teaches “${C().get(acc, cid)?.nodes[e.nid]?.title || e.nid}”${res.replan ? ' — that step is being re-planned' : ''}`, 5000); }
+            else toast('📦 ' + res.error, 5000);
+          }
           else {
             const t = byId(c, e.task);   // null: applied already (an earlier check) — or out of date
             if (t) { const errs = check(c, t, e.data); if (!errs.length) { apply(c, t, e.data); C().save(acc, c); n++; } else console.warn('[curjobs] answer refused', errs); }
@@ -257,8 +275,8 @@
 
   /** Without the connector: the learner pasted Claude's answer to a copied task → { ok, line } | { errors } */
   App.paste = (acc, cid, taskId, text) => {
-    const c = C().get(acc, cid); if (!c) return { errors: ['This curriculum is not on this device.'] };
-    const t = byId(c, taskId); if (!t) return { errors: ['This task is already done (or the curriculum changed) — copy the current task again.'] };
+    const c = C().get(acc, cid); if (!c) return { errors: ['This Roadmap is not on this device.'] };
+    const t = byId(c, taskId); if (!t) return { errors: ['This task is already done (or the Roadmap changed) — copy the current task again.'] };
     let data; try { data = L().parseJSON(text); } catch (e) { return { errors: ['That is not a JSON answer — paste exactly what Claude answered (the JSON object).'] }; }
     const errs = check(c, t, data); if (errs.length) return { errors: errs };
     const line = apply(c, t, data); C().save(acc, c); C().Gen.kick(); return { ok: true, line };
@@ -293,5 +311,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, attachTo, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

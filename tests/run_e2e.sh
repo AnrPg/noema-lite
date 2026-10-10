@@ -7,7 +7,10 @@ cp -r "$T/tests/fixtures/demo-physics" "$T/library/subjects/demo-physics"
 mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/accounts/anr/packs/secret-notes"
 # (sed -i.bak works with both GNU sed on Linux and BSD sed on macOS)
 sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/"title": "Secret Notes"/' "$T/accounts/anr/packs/secret-notes/subject.json" && rm -f "$T/accounts/anr/packs/secret-notes/subject.json.bak"
+# the older suites test the classic screens (shell: false: the subject picker at start, no first-time questions); tests/shell.js sets noema-test:newUI for the new frame
+echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
+node "$ROOT/tests/shell.js" "$T"
 node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
@@ -22,6 +25,7 @@ node "$ROOT/tests/curriculum.js" "$T"
 node "$ROOT/tests/curriculum_import.js" "$T"
 node "$ROOT/tests/curriculum_app.js" "$T"
 node "$ROOT/tests/curriculum_share.js" "$T"
+node "$ROOT/tests/shelf.js" "$T"
 node "$ROOT/tests/sources.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed
 # foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI
@@ -42,3 +46,4 @@ node "$ROOT/tests/lang_prod.js" "$T"     # production and reading, the tutor (P7
 node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: tasks, checks, connector, app (docs/LANGUAGES.md §10.1)
 node "$ROOT/tests/lang_speech.js" "$T"   # P9 listening and speaking: speech synthesis, dictation, shadowing, recognition (speech services mocked)
 node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end to end — three learners, two widths, every route (docs/LANGUAGES.md §13 QA)
+node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new frame: the Languages tab, #/lang/<course>/…, Today, + New language (docs/LANGUAGES.md §8)

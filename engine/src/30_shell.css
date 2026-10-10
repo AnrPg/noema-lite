@@ -1,6 +1,7 @@
 /* ---------- shell: splash, pickers, subject/account chips, account menu ---------- */
 #noema-splash{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:5;transition:opacity .3s}
-#noema-splash .logo{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:30px;color:#fff;background:conic-gradient(from 200deg,#ff6b6b,#ffb020,#2ec4b6,#4d7cfe,#a35cff,#ff6b6b);animation:spinIn 1.2s cubic-bezier(.2,.9,.3,1.3) infinite alternate}
+#noema-splash .logo{width:14px;height:14px;border-radius:50%;background:var(--line);animation:splashDot 1.6s ease-in-out infinite alternate}
+@keyframes splashDot{to{transform:scale(1.6);opacity:.5}}
 .noema-overlay{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--bg) 70%,rgba(20,22,30,.55));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:viewIn .3s}
 .noema-overlay.out{opacity:0;transition:opacity .25s}
 .noema-inuse-ov{z-index:300}
@@ -12,7 +13,6 @@
 @media (prefers-reduced-motion:reduce){.noema-inuse-dot{animation:none}}
 .noema-ovbox{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:26px;box-shadow:0 40px 90px -30px rgba(0,0,0,.45);animation:pop .4s cubic-bezier(.2,.9,.3,1.2)}
 .noema-ovhead{display:flex;gap:14px;align-items:center;margin-bottom:18px}
-.noema-ovhead .logo{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:22px;background:conic-gradient(from 200deg,#ff6b6b,#ffb020,#2ec4b6,#4d7cfe,#a35cff,#ff6b6b);animation:spinIn 1s cubic-bezier(.2,.9,.3,1.3)}
 .noema-ovhead h1{font-size:26px}
 .noema-ovhead p{margin:2px 0 0}
 .noema-accgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
@@ -320,6 +320,12 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .xbtn:hover{opacity:1;border-color:var(--violet);box-shadow:0 2px 8px rgba(99,102,241,.25)}
 @media (hover:none){.xbtn{opacity:.4;transform:none;width:26px;height:26px}.xable:not(:has(.xable))>.xbtn{opacity:.5}}
 .b-list li.xable,.terms .term.xable,.compare>div.xable{padding-right:30px}
+/* docked: the 💡 joins a block's own top row (a picture's ⤢, a question set's switch) instead of covering it */
+.xbtn.docked{position:static;flex:none}
+.xable:hover:not(:has(.xable:hover)) .xbtn.docked{opacity:.9;transform:none}
+.vx.full .xbtn.docked{display:none}
+.xable>.pre .lang{right:42px}
+.xable>.reveal>button{padding-right:44px}
 /* 📥 import a map: the preview graph, the step's files, the file table */
 .cm-miniscroll{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:14px;margin:8px 0;background:var(--bg2,rgba(127,127,127,.04))}
 .cm-mini{position:relative}
@@ -369,3 +375,30 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cg-recommend{margin:6px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px}
 .cg-way-c>summary{border-left:4px solid var(--warn);padding-left:8px}
 .cg-choice-c{outline:2px solid var(--warn)}
+/* 📦 subjects you already have, on steps · 📚 the Shelf (docs/CURRICULUM.md §9) */
+.cm-holdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--warn-bg);border-bottom:1px solid var(--line);font-size:14px}
+.cm-holdbar:empty{padding:0;border:0}
+.cm-attachwarn{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px;line-height:1.45}
+.cm-attachshared{margin-top:6px;font-weight:600}
+.cm-attachchips{max-height:42vh;overflow:auto;margin:8px 0}
+.cm-attachchip .o{opacity:.75;font-weight:500}
+.cm-attachlist{display:grid;gap:6px;margin:10px 0;padding-left:22px;max-height:48vh;overflow:auto}
+.cm-attachlist li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:8px;align-items:center}
+.cm-attachstep{font-weight:700;font-size:14px;overflow-wrap:anywhere}
+.cm-changes{display:flex;flex-direction:column;gap:6px;margin:10px 0;max-height:50vh;overflow:auto}
+.cm-change{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);line-height:1.4;font-size:14px;cursor:pointer;overflow-wrap:anywhere}
+.cm-change.own{background:var(--warn-bg)}
+.cm-change input{margin-top:3px;flex:none}
+.cm-replanning{background:var(--warn-bg)}
+.cm-flag{color:var(--ink2)}
+.pick-curs{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin:4px 0 12px}
+.pick-cur{display:grid;gap:4px;text-align:left;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);font:inherit;color:inherit;cursor:pointer}
+.pick-cur:hover{border-color:var(--violet)}.pick-cur .tiny{color:var(--ink2)}
+.pick-nocur{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.pick-shelf{margin:6px 0 4px;border-top:1px solid var(--line);padding-top:8px}
+.pick-shelf>summary{cursor:pointer;font-weight:700;color:var(--ink2);font-size:14px;padding:4px 0}
+.pick-shelf[open]>summary{margin-bottom:6px}
+@media (max-width:560px){.cm-attachlist li{grid-template-columns:1fr}}
+.noema-mapbtn{position:absolute;bottom:-7px;right:-7px;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:11px;display:grid;place-items:center;opacity:0;transition:opacity .15s,transform .15s;box-shadow:var(--shadow);padding:0;cursor:pointer;z-index:2}
+.noema-chipwrap:hover .noema-mapbtn,.noema-mapbtn:focus-visible{opacity:1}.noema-mapbtn:hover{transform:scale(1.12)}
+@media (hover:none){.noema-mapbtn{opacity:.85}}

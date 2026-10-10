@@ -10,7 +10,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const PORT = 54331, BASE = `http://localhost:${PORT}`;
 
 (async () => {
-  const cfgJs = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
+  const cfgJs = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfgJs });
   // the public library may be read by other apps (Meletee fetches registry.js and pack.json as data)
   ok(/\/library\/\*\n(  .+\n)*  Access-Control-Allow-Origin: \*\n/.test(fs.readFileSync(path.join(ROOT, 'dist/site/_headers'), 'utf8')), '_headers: the public library allows cross-origin reads');

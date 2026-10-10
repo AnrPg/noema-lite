@@ -444,6 +444,8 @@
     /* ---------- sharing: public packs (everyone) and shares with one person (docs/SHARING.md) ---------- */
     publicPackUrl(owner, id) { return `${BASE}/storage/v1/object/public/noema-public/${owner}/${id}.json`; },
     async listPublic() { return call('/rest/v1/noema_public_packs?select=*&order=updated_at.desc', { auth: !!session() }); },
+    /** The public rows of some subject ids (🔔 a new version of a subject taken from 🌍 Explore). */
+    async publicRows(ids) { return ids.length ? call(`/rest/v1/noema_public_packs?select=owner,subject_id,owner_name,title,updated_at,meta&subject_id=in.(${ids.map(enc).join(',')})`, { auth: !!session() }) : []; },
     /** files: [{ srcId, blob, name, type }] — the subject's source files go with it (pack.sharedFiles tells the receiver where). */
     async publish(pack, meta, { files = [], onProgress } = {}) {
       const id = pack.subject.id;

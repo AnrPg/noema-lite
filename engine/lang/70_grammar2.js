@@ -189,13 +189,13 @@ function toast(msg) { document.querySelector('.lx-toast')?.remove(); const t = h
 function practiseFn(c, fid) {
   const items = N.exercises(UI.C, UI.L, c, fid, { auto: true, max: 10 });
   if (!items.length) return toast('Nothing to practise yet with the words you know.');
-  runPractice(items, { title: `${info(c).flag} ${UI.C.functions[fid]?.title || fid}`, back: location.hash || '#/', again: () => practiseFn(c, fid) });
+  runPractice(items, { title: `${info(c).flag} ${UI.C.functions[fid]?.title || fid}`, back: innerHash() || '#/', again: () => practiseFn(c, fid) });
 }
 function practiseMixed(c) {
   const fids = N.grammarLane(UI.C, UI.L, c).filter(x => x.state !== 'mastered' && ['ready', 'thin'].includes(x.feasibility.state)).map(x => x.fn);
   const items = N.practiceBlock(UI.C, UI.L, c, shuffle(fids).slice(0, 6), { max: 12 });
   if (!items.length) return toast('Nothing to practise yet with the words you know.');
-  runPractice(items, { title: `${info(c).flag} 📐 Mixed grammar`, back: location.hash || '#/', again: () => practiseMixed(c) });
+  runPractice(items, { title: `${info(c).flag} 📐 Mixed grammar`, back: innerHash() || '#/', again: () => practiseMixed(c) });
 }
 function runPractice(items, { title, back = '#/', again = null }) {
   metNew.clear();

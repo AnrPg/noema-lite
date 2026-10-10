@@ -14,7 +14,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
 
 (async () => {
   execFileSync('python3', [path.join(ROOT, 'tests/fixtures/make_viewer_files.py'), TF], { stdio: 'ignore' });
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000); const E = []; p.on('pageerror', e => E.push(e.message));
@@ -39,7 +39,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   console.log('— the chapter header');
   await p.evaluate(() => { location.hash = '#/ch/ch01'; }); await wait(700);
   ok(await p.evaluate(() => document.documentElement.lang) === 'el', '<html lang> follows the subject (Greek capitals without accents, Greek hyphenation)');
-  ok(await p.$eval('.chhead .num', e => e.textContent) === 'Chapter 1', 'the kicker is only “Chapter 1” (no long capitalised page list)');
+  ok(/^Chapter 1( of \d+)?$/.test(await p.$eval('.chhead .num', e => e.textContent)), 'the kicker is only “Chapter 1 (of N)” (no long capitalised page list)');
   const chips = await p.$$eval('.srcrefs .srcref', b => b.map(x => x.textContent));
   ok(chips.length === 4 && /chat F/.test(chips[0]) && chips.some(t => /ECB σ\. 2–3/.test(t)) && chips.some(t => /Karp 9\.2/.test(t)) && chips.some(t => /Khan Academy/.test(t)), 'one chip per source the chapter uses, its main source first: ' + chips.join(' | '));
   await p.screenshot({ path: SHOTS + '/s1_header.png', clip: { x: 0, y: 0, width: 1280, height: 330 } });
@@ -99,7 +99,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   console.log('— 💡 explain any part of the lesson');
   await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); location.hash = '#/s/' + COURSE[0].sections[0].id; }); await wait(700);
   await p.evaluate(() => { const b = [...document.querySelectorAll('.continue button')].find(x => /show all/.test(x.textContent)); b && b.click(); }); await wait(300);
-  const nBlk = await p.locator('.reader .blk').count(), nX = await p.locator('.reader .blk > .xbtn').count();
+  const nBlk = await p.locator('.reader .blk').count(), nX = await p.$$eval('.reader .blk', l => l.filter(b => [...b.querySelectorAll('.xbtn')].some(x => x.parentElement === b || (x.classList.contains('docked') && x.closest('.xable') === b))).length);   // a picture's 💡 sits in its own top row
   ok(nBlk > 0 && nX === nBlk && await p.locator('.sechead > .xbtn').count() === 1, `every part of the lesson has a 💡 (${nX} blocks + the section heading)`);
   const op0 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
   await p.hover('.reader .blk >> nth=0'); await wait(250);
@@ -116,7 +116,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(() => openAccountMenu('help')); await wait(500);
   await p.click('summary:has-text("Set up Claude and create subjects")'); await wait(500);
   const cs = await p.locator('.claudesetup').innerText();
-  ok(await p.locator('.claudesetup .cg-way').count() === 3 && /recommended for curricula/.test(cs) && /Create a Claude Console account/.test(cs) && /Create an API key/.test(cs) && /Paste the key here/.test(cs), 'way A: the same numbered steps as in ✨ Create with Claude (account, credit, key, paste & check)');
+  ok(await p.locator('.claudesetup .cg-way').count() === 3 && /recommended for Roadmaps/.test(cs) && /Create a Claude Console account/.test(cs) && /Create an API key/.test(cs) && /Paste the key here/.test(cs), 'way A: the same numbered steps as in ✨ Create with Claude (account, credit, key, paste & check)');
   await p.click('.claudesetup .cg-way >> nth=1 >> summary'); await wait(200);
   const cs2 = await p.locator('.claudesetup').innerText();
   ok(/Customize → Connectors/.test(cs2) && cs2.includes(BASE + '/mcp') && /Switch on “Code execution”/.test(cs2) && /Download the skill/.test(cs2), 'way B: code execution, the connector (with its address), the skill and the prompt');

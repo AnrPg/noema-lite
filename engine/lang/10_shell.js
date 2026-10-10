@@ -1,43 +1,82 @@
 /* ---------- the shell: start, top bar, routes ---------- */
-function start({ acc, id, data }) {
-  UI.acc = acc; UI.id = id; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today();
+let wired = false;
+/** Open a course. host: an element inside the frame (the course is drawn there, its addresses live under #/lang/<course>/…,
+    onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
+function start({ acc, id, data, host = null, onRoute = null }) {
+  if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
+  UI.acc = acc; UI.id = id; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
+  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${UI.C.data.course.title} · noema-lite`;
   document.documentElement.lang = UI.C.explainLang;
-  const fonts = h('link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' });
-  document.head.append(fonts);
+  if (!document.querySelector('link[data-lx-fonts]')) document.head.append(h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
-  document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
-  addEventListener('hashchange', render);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') save(true); });
+  if (host) host.replaceChildren(h('div', { class: 'lx-top lx-subbar' }), h('div', { class: 'lx-main' }));   // inside the frame: its top bar and tabs stay
+  else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
+  if (!wired) {
+    wired = true;
+    addEventListener('hashchange', () => { if (!FR.on) render(); });   // inside the frame its router calls render()
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && UI.C) save(true); });
+  }
   render();
 }
-function go(hash) { if (location.hash === hash) render(); else location.hash = hash; }
-function route() { const p = (location.hash || '#/').slice(2).split('/').map(decodeURIComponent); return { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null }; }
+/** Is the course on screen? (inside the frame the learner may be on another tab) */
+const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
+function go(hash) { const full = toHash(hash); if (location.hash === full) render(); else location.hash = full; }
+function route() { const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } }); return { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null }; }
 
 function topbar() {
-  const t = $('.lx-top'); t.innerHTML = '';
+  const t = $('.lx-top'); if (!t) return; t.innerHTML = '';
   const k = Object.fromEntries(activeLangs().map(c => [c, N.known(UI.C, UI.L, c)]));
+  const chips = activeLangs().map(c => {
+    const total = Object.keys(LX(c).lex).length, kn = Object.values(k[c].state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
+    return h('button', { class: 'chip lx-flagchip' + (c === UI.lang ? ' on' : ''), 'data-lang': c, title: `${info(c).name}: ${kn} of ${total} words known`, onclick: () => { UI.lang = c; UI.prefs.lang = c; save(); render(); } },
+      h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
+  });
+  const explain = h('span', { class: 'chip lx-explain', title: 'Explanations, meanings and feedback are written in this language (chosen when the course was made)' }, '💬 ' + info(UI.C.explainLang).name);
+  if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, UI.C.data.course.title)),
-    h('span', { class: 'spacer' }),
-    h('span', { class: 'chip lx-explain', title: 'Explanations, meanings and feedback are written in this language (chosen when the course was made)' }, '💬 ' + info(UI.C.explainLang).name),
-    ...activeLangs().map(c => {
-      const total = Object.keys(LX(c).lex).length, kn = Object.values(k[c].state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-      return h('button', { class: 'chip lx-flagchip' + (c === UI.lang ? ' on' : ''), 'data-lang': c, title: `${info(c).name}: ${kn} of ${total} words known`, onclick: () => { UI.lang = c; UI.prefs.lang = c; save(); render(); } },
-        h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
-    }),
+    h('span', { class: 'spacer' }), explain, ...chips,
     h('button', { class: 'iconbtn', title: 'Settings', onclick: () => go('#/settings') }, '⚙️'),
     h('button', { class: 'iconbtn', title: 'Choose another subject or course', onclick: () => window.Noema?.openSubjectPicker ? Noema.openSubjectPicker() : null }, '📚'));
 }
 const VIEWS = {};
+/** Where the learner is, in words: the last crumb of the frame. */
+const VIEW_LABEL = { settings: 'Settings', claude: 'Through Claude', grammar: 'Grammar', write: 'Writing', read: 'Reading', script: 'Script', listen: 'Listening & speaking',
+  cmp: 'Compare', poly: 'Polyglot drills', sort: 'Sort a field', parts: 'Principal parts', peculiar: 'Peculiarities', recall: 'Name them all', deep: 'Practise this word', deepen: 'Deepen' };
+function viewLabel(r) {
+  const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
+  try {
+    if (r.name === 'home') return null;
+    if (r.name === 'c') return C.concepts[r.arg]?.gloss || r.arg;
+    if (r.name === 'w') return C.lang[r.arg]?.lex[r.arg2]?.lemma || r.arg2;
+    if (r.name === 'node' || r.name === 'lesson') return C.nodes[r.arg] ? (C.nodes[r.arg].kind === 'lesson' ? stepLabel(C.nodes[r.arg]) + ' ' : '') + C.nodes[r.arg].title : r.arg;
+    if (r.name === 'fn') return C.functions[r.arg]?.title || r.arg;
+    if (r.name === 'field') return (C.data.fields.find(f => f.field === r.arg) || {}).title || r.arg;
+    if (r.name === 'deepen') return 'Deepen · ' + (C.nodes[r.arg]?.title || r.arg);
+    return (r.arg && C.lang[r.arg] ? fl(r.arg) : '') + (VIEW_LABEL[r.name] || r.name);
+  } catch (e) { return VIEW_LABEL[r.name] || r.name; }
+}
 function render() {
+  if (!UI.C || !shown()) return;
   const r = route(); UI.view = r.name;
+  if (FR.on) { document.documentElement.lang = UI.C.explainLang; try { FR.onRoute?.({ view: r.name, label: viewLabel(r), home: r.name === 'home' && !r.arg }); } catch (e) { console.warn('[lang] frame', e); } }
   topbar();
   const m = $('.lx-main'); m.innerHTML = ''; window.scrollTo(0, 0);
   const v = h('div', { class: 'view lx-view' });
   m.append(v);
   (VIEWS[r.name] || VIEWS.home)(v, r);
+  if (FR.on && r.name === 'home') frameSummary(v);
+}
+/** What the frame's Languages tab and Today card show without loading the course: the next lesson (device-local, docs/LANGUAGES.md §8). */
+function frameSummary(v) {
+  try {
+    const b = v.querySelector('.lx-lessonbtn'), nid = b?.dataset.node, n = nid && UI.C.nodes[nid];
+    const k = `noema1:${UI.acc}:meta:langsum`, all = JSON.parse(localStorage.getItem(k) || '{}') || {};
+    all[UI.id] = { at: Date.now(), title: UI.C.data.course.title, next: n ? { node: nid, step: stepLabel(n), title: n.title } : null, lang: UI.lang };
+    localStorage.setItem(k, JSON.stringify(all));
+  } catch (e) { }
 }
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */
 function flagRail(cid, current, onPick) {

@@ -2,6 +2,21 @@
    It runs instead of the subject engine when a language course is open; the runtime logic lives in engine/langcore.js. */
 const N = window.NoemaLang;
 const UI = { acc: null, id: null, C: null, L: null, lang: null, view: 'home', arg: null, prefs: {}, day: 0 };
+/* ---------- inside the frame (docs/LANGUAGES.md §8, docs/NEW_FRAME_AND_LANGUAGES.md): the course is drawn into a host element and
+   its addresses live under #/lang/<course>/… — every view keeps writing the course's own addresses (#/c/…, #/fn/…), mapped both ways here ---------- */
+const FR = { on: false, base: '', host: null, onRoute: null };
+/** A course address (#/c/<id>) as the address bar holds it: #/lang/<course>/c/<id> inside the frame, unchanged without it. */
+function toHash(inner) {
+  if (!FR.on) return inner || '#/';
+  const rest = String(inner || '#/').replace(/^#\/?/, '');
+  return FR.base + (rest ? '/' + rest : '');
+}
+/** The course address of the address bar (#/c/<id>), or null when the frame shows something else. */
+function innerHash(full = location.hash) {
+  if (!FR.on) return full || '#/';
+  if (full === FR.base || full === FR.base + '/') return '#/';
+  return full.startsWith(FR.base + '/') ? '#/' + full.slice(FR.base.length + 1) : null;
+}
 
 /* ---------- tiny DOM helper ---------- */
 function h(tag, attrs, ...kids) {
@@ -11,6 +26,7 @@ function h(tag, attrs, ...kids) {
     if (k === 'style' && typeof v === 'object') Object.assign(e.style, v);
     else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
     else if (k === 'html') e.innerHTML = v;
+    else if (k === 'href' && typeof v === 'string' && v.startsWith('#/')) e.setAttribute(k, toHash(v));   // links inside the course keep working in the frame
     else e.setAttribute(k, v === true ? '' : v);
   }
   for (const k of kids.flat(9)) if (k != null && k !== false) e.append(k instanceof Node ? k : document.createTextNode(String(k)));

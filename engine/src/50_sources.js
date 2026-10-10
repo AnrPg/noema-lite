@@ -161,7 +161,7 @@ function filterBanner() {
 function whatsNewButton() {
   const ns = newSources();
   if (!ns.length) return null;
-  return h('button', { class: 'btn ai', style: { marginTop: '14px', marginLeft: '8px' }, onclick: () => go('#/new') }, '✨ Show me only what’s new');
+  return h('button', { class: 'btn ai whatsnewbtn', onclick: () => go('#/new') }, '✨ Show me only what’s new');
 }
 
 /* ---------- "What's new" view ---------- */
@@ -177,7 +177,8 @@ function whatsNewView() {
   const pbNew = FULL_COURSE.flatMap(c => c.debug.filter(d => ids.includes(srcOfItem(d, c))));
   const filterOnly = () => setSrcFilter(ids);
   const runNew = () => { setSrcFilter(ids); startRun(ALL_EX.slice(), { title: '✨ New exercises', count: 15, back: '#/new' }); };
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')),
+  shellChrome({ sub: true, crumbs: [[t('view.whatsNew')]], back: HOME() });
+  view(backBtn(t('nav.home'), HOME()),
     h('h1', {}, none ? t('view.latest') : t('view.whatsNew')),
     h('p', { class: 'muted' }, ids.map(id => `${SRC_BY_ID[id].emoji || '📗'} ${SRC_BY_ID[id].title} (pages ${SRC_BY_ID[id].pages})`).join(' · ') + (none ? ' — already marked as seen.' : '')),
     h('div', { class: 'statgrid', style: { gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))' } },
@@ -187,7 +188,7 @@ function whatsNewView() {
       h('button', { class: 'btn', onclick: runNew }, `🎯 Practice new exercises (${exNew.length})`),
       pbNew.length ? h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/drill/' + pbNew[0].id); } }, `🔧 New debug drills (${pbNew.length})`) : null,
       h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/cards'); } }, '🃏 New flashcards'),
-      none ? null : h('button', { class: 'btn ghost', onclick: () => { markSeen(ids); applySourceFilter(); toast('Marked as seen ✔'); go('#/'); } }, '✔ Mark as seen')),
+      none ? null : h('button', { class: 'btn ghost', onclick: () => { markSeen(ids); applySourceFilter(); toast('Marked as seen ✔'); go(HOME()); } }, '✔ Mark as seen')),
     newChs.length ? h('h2', { style: { marginBottom: '12px' } }, 'New chapters') : null,
     newChs.length ? h('div', { class: 'chapters' }, ...newChs.map((c, i) => { const card = h('button', { class: 'chcard', style: { animationDelay: i * 50 + 'ms' }, onclick: () => go('#/ch/' + c.id) }, h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `Chapter ${c.num}`), h('h3', {}, c.title), h('p', {}, c.subtitle), h('div', { class: 'tiny' }, `${c.sections.length} sections · ${c.exercises.length} exercises · ${c.debug.length} drills`)); setAccent(card, c); return card; })) : null,
     enriched.length ? h('h2', { style: { margin: '28px 0 6px' } }, 'Existing sections that got new material') : null,
@@ -200,7 +201,7 @@ const DECK = { open: false, expanded: {} };
 function toggleSourcesDeck(force) { DECK.open = force ?? !DECK.open; renderSourcesDeck(); }
 function renderSourcesDeck() {
   let d = $('.srcdeck');
-  if (!d) { d = h('div', { class: 'srcdeck' }); $('.topbar').after(d); }
+  if (!d) { d = h('div', { class: 'srcdeck' }); ($('.topbar') || $('.ns-top') || document.body.firstChild).after(d); }
   d.classList.toggle('open', DECK.open);
   $('.srcbtn')?.classList.toggle('on', DECK.open || !!activeSrcSet());
   d.innerHTML = '';

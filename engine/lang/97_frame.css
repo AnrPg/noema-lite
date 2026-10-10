@@ -1,0 +1,28 @@
+/* ---- a course inside the frame (docs/LANGUAGES.md §8, docs/NEW_FRAME_AND_LANGUAGES.md): the frame's colours and fonts (--bg, --paper, --ink, --acc …, set by the learner's character) ---- */
+body.ns-on.lx-frame main#ns-main{max-width:1000px}
+@media (min-width:760px){body.ns-on.lx-frame main#ns-main{max-width:calc(1000px + 100px)}}
+body.ns-on .lx-host{display:flex;flex-direction:column;gap:6px;min-width:0;color:var(--ink);font-family:var(--font)}
+body.ns-on .lx-host .lx-main{min-width:0}
+body.ns-on .lx-host .lx-subbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 0 10px;border-bottom:1px solid var(--line)}
+body.ns-on .lx-host .lx-subbar .spacer{flex:1}
+body.ns-on .lx-host .chip{background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:999px}
+body.ns-on .lx-host .lx-flagchip{display:inline-flex;align-items:center;min-height:36px;font-weight:700;font-size:.86rem}
+body.ns-on .lx-host .lx-flagchip.on{border-color:var(--acc);background:var(--acc-soft);color:var(--ink)}
+body.ns-on .lx-host .lx-explain{color:var(--ink2);font-size:.8rem}
+body.ns-on .lx-host .lx-ring{background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line) 0)}
+body.ns-on .lx-host .lx-hero h1{font-size:1.75rem;font-family:var(--display);font-weight:var(--dw)}
+body.ns-on .lx-host .lx-sub,body.ns-on .lx-host .tiny{color:var(--ink2)}
+body.ns-on .lx-host :is(.lx-card,.lx-node,.lx-tile,.lx-opt,.lx-lanerow){background:var(--paper);border-color:var(--line);color:var(--ink)}
+body.ns-on .lx-host :is(.lx-node,.lx-tile,.lx-opt):hover{border-color:var(--acc)}
+body.ns-on .lx-host .lx-card{border-radius:var(--r);box-shadow:none}
+body.ns-on .lx-host .lx-progress{background:var(--line)}
+body.ns-on .lx-host .lx-progress i{background:var(--acc)}
+body.ns-on .lx-host .lx-step{color:var(--t1i)}
+body.ns-on .lx-host a{color:var(--acc)}
+body.ns-on .lx-host .lx-h2{font-family:var(--display)}
+/* what lies over the frame: the word card, the tutor drawer, toasts (above the tabs on phones) */
+body.ns-on .lx-pop{z-index:60;background:color-mix(in srgb,var(--ink) 35%,transparent)}
+body.ns-on .lx-pop .lx-popbox{background:var(--paper);color:var(--ink)}
+body.ns-on .lx-tutor{z-index:45;background:var(--paper);color:var(--ink)}
+body.ns-on .lx-toast{z-index:60;background:var(--ink);color:var(--paper)}
+@media (max-width:759px){body.ns-on .lx-toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}

@@ -14,7 +14,8 @@ const t = (key, vars) => window.NoemaI18n ? NoemaI18n.t(key, vars, S.settings.la
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
-const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
+const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {},
+  window.NoemaShell?.mounted && window.NoemaThemes ? (t => ({ name: t.n, avatar: t.emoji }))(NoemaThemes.tutor(NoemaThemes.owned())) : {});   // in the new frame the tutor is the learner's character (engine/themes.js), named in the menus' language
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
 const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
 const PALETTE = [
@@ -206,13 +207,15 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 function touchStreak() { Noema.stats.touchStreak(); }
 function addXP(n, el) {
   if (n <= 0) return;
-  const before = Noema.stats.todayXP();
+  const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(Noema.stats.get().xp || 0).lv : 0;
   S.xp += n; Noema.stats.add(n); save();
   renderTopStats();
   const r = el?.getBoundingClientRect?.();
   const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, `+${n} XP`);
   document.body.append(f); setTimeout(() => f.remove(), 1200);
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { confetti(160); toast('🎯 Daily goal smashed!'); }
+  const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
+  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 Daily goal smashed!'); }
+  else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
 }
 function record(ex, ok, firstTry = true) {
   const r = S.res[ex.id] || { n: 0, ok: 0 };
@@ -254,13 +257,13 @@ function confetti(n = 120) {
 }
 function toast(msg, ms = 2200) {
   let t = $('.toasts'); if (!t) { t = h('div', { class: 'toasts' }); document.body.append(t); }
-  const el = h('div', { class: 'toast' }, msg); t.append(el); setTimeout(() => el.remove(), ms);
+  const el = h('div', { class: 'toast' }, window.Noema?.plain ? Noema.plain.text(msg) : msg); t.append(el); setTimeout(() => el.remove(), ms);
 }
 function modal(build) {
   const m = h('div', { class: 'modal', onclick: e => { if (e.target === m) close(); } });
   const box = h('div', { class: 'box' }); m.append(box);
   const close = () => m.remove();
-  build(box, close); document.body.append(m);
+  build(box, close); window.Noema?.plain?.watch(box); document.body.append(m);
   return close;
 }
 function confirmBox(text, onYes) {
@@ -584,7 +587,11 @@ function tutorContextText() {
 function explainable(el, get) {
   if (!el || [...el.children].some(k => k.classList.contains('xbtn'))) return el;
   el.classList.add('xable');
-  el.append(h('button', { class: 'xbtn', type: 'button', title: 'Explain this (AI)', 'aria-label': 'Explain this with the AI tutor', onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡'));
+  const b = h('button', { class: 'xbtn', type: 'button', title: 'Explain this (AI)', 'aria-label': 'Explain this with the AI tutor', onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡');
+  // a block with its own buttons on top (a picture's ⤢, a question set's recall switch) takes the 💡 into that row, so it never covers them
+  const dock = el.querySelector(':scope > .vx-fig > .vx > .vx-tools, :scope > .ask > .hd');
+  if (dock) { b.classList.add('docked'); const zoom = $(':scope > .vx-zoom', dock); zoom ? dock.insertBefore(b, zoom) : dock.append(b); }
+  else el.append(b);
   return el;
 }
 function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {
@@ -636,18 +643,75 @@ function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
     h('option', { value: '', selected: !chatLang() }, `🗣 Same as the course (${CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG})`),
     ...CHAT_LANGS.map(([v, l]) => h('option', { value: v, selected: chatLang() === v }, '🗣 ' + l)));
 }
+/** The tutor is the learner's character: its face (engine/art.js), else the subject's emoji. */
+function tutorFace() { const svg = SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : ''; return svg ? h('div', { class: 'avatar face', html: svg }) : h('div', { class: 'avatar' }, TUTOR.avatar); }
+/** 🕘 history, ⬇️ export, ↺ new: in a ⋮ with the shell, three small buttons without it. */
+function tutorTools() {
+  const items = [{ label: 'Conversation history', icon: '🕘', run: () => { T.showHistory = !T.showHistory; renderTutor(); } }, { label: 'Export this conversation (.md)', icon: '⬇️', run: () => exportConvo(currentConvo()) },
+    { label: 'New conversation', icon: '↺', run: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }];
+  if (SHL()) return [T.showHistory ? h('button', { class: 'iconbtn on', title: 'Conversation history', onclick: items[0].run }, '🕘') : null, SHL().menuButton(items, { label: 'More' })];
+  return items.map((it, i) => h('button', { class: 'iconbtn' + (i === 0 && T.showHistory ? ' on' : ''), title: it.label, onclick: it.run }, it.icon));
+}
+function renderTutorHead() { if (T.open) renderTutor(); }
+/** The frame's tutor (docs/UI_MAP.md): face, name, ⋮, ✕ · "How <name> helps you" over one list of the modes ·
+    a "For: …" chip (✕ = the whole subject) · the conversation · the box to write in. Nothing else. */
+const MODE_WORDS = { socratic: 'Socratic', explain: 'Explain', quiz: 'Quiz', interview: 'Interview', debug: 'Debug', hint: 'Hint' };
+const modeName = k => MODE_WORDS[k] ? SL('mode' + MODE_WORDS[k]) : (MODES[k]?.label || k), modeSub = k => MODE_WORDS[k] ? SL('mode' + MODE_WORDS[k] + 'Sub') : '';
+function renderShellTutor(d) {
+  const X = SHL(), hist = T.hist[tutorCtxKey()] || [];
+  const msgs = h('div', { class: 'msgs' });
+  const send = () => { const ta = $('.composer textarea', d); const v = ta.value.trim(); if (v) { ta.value = ''; ta.style.height = 'auto'; sendTutor(v); } };
+  const langMenu = btn => X.popMenu(btn, [{ label: SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: !chatLang() ? '✓' : ' ', run: () => { S.settings.chatLang = ''; save(); renderTutor(); } },
+    ...CHAT_LANGS.map(([v, l]) => ({ label: l, icon: chatLang() === v ? '✓' : ' ', run: () => { S.settings.chatLang = v; save(); renderTutor(); } }))]);
+  const more = X.menuButton(() => [
+    { label: T.showHistory ? SL('chatBack') : SL('chatHistory'), icon: 'clock', run: () => { T.showHistory = !T.showHistory; renderTutor(); } },
+    { label: SL('chatNew'), icon: '↺', run: () => { T.showHistory = false; T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } },
+    hist.length ? { label: SL('chatExport'), icon: '⬇️', run: () => exportConvo(currentConvo()) } : null,
+    { label: SL('chatLangItem'), sub: chatLang() ? CHAT_LANGS.find(l => l[0] === chatLang())?.[1] : SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: '🗣', run: () => setTimeout(() => langMenu(more.querySelector('button') || more), 0) }], { label: X.L('more') });
+  const modeBtn = h('button', { class: 'ns-modesel', type: 'button', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); const had = modeWrap.querySelector(':scope > .ns-pop'); X.closePops(); if (had) return;
+    X.popMenu(modeBtn, Object.keys(MODES).filter(k => MODES[k].chip !== false || T.mode === k).map(k => ({ label: modeName(k), sub: modeSub(k), icon: T.mode === k ? '✓' : ' ', run: () => { T.mode = k; renderTutor(); } }))); } },
+    h('b', {}, modeName(T.mode)), modeSub(T.mode) ? h('span', { class: 'sub' }, ' · ' + modeSub(T.mode)) : null, h('span', { class: 'caret', 'aria-hidden': 'true' }, '▾'));
+  const modeWrap = h('div', { class: 'ns-menu ns-modewrap' }, modeBtn);
+  const ex = T.ctx?.kind === 'exercise', what = ex ? SL('forExercise') : T.ctx ? ctxLabel().replace(/^\S+\s/, '').replace(/^Ch\d+\s*·\s*/, '') : SL('tutorWhole');
+  d.append(
+    h('div', { class: 'dh ns-dh', lang: uiLang() },   // the frame's words: capitals and hyphens of the menus' language (the page has the subject's)
+      h('div', { class: 'top' }, tutorFace(), h('b', { class: 'ns-tname grow' }, TN), more,
+        h('button', { class: 'iconbtn', title: X.L('close'), 'aria-label': X.L('close'), onclick: closeTutor }, '✕')),
+      h('div', { class: 'ns-modelabel' }, SL(window.NoemaThemes?.tutor?.()?.pl ? 'tutorHelpsPl' : 'tutorHelps')),
+      modeWrap),
+    h('div', { class: 'ns-forrow', lang: uiLang() }, h('span', { class: 'ctxchip ns-forchip' }, SL('tutorFor', { what }),
+      T.ctx ? h('button', { type: 'button', title: SL('tutorWholeBack'), 'aria-label': SL('tutorWholeBack'), onclick: () => setTutorContext(null) }, '✕') : null)),
+    msgs,
+    h('div', { class: 'composer' },
+      h('textarea', { rows: 1, placeholder: SL('tutorWrite'), 'aria-label': SL('tutorWrite'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }, oninput: e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(160, e.target.scrollHeight) + 'px'; } }),
+      h('button', { class: 'send', title: 'Send', 'aria-label': 'Send', onclick: send }, '➤')));
+  if (T.showHistory) { renderConvoHistory(msgs); return; }
+  if (!hist.length) {
+    const topic = T.ctx && !ex ? '«' + what + '»' : what;
+    const hi = SL('greet' + (MODE_WORDS[T.mode] || 'Socratic'), { name: ACCOUNT.name || '', topic });
+    msgs.append(h('div', { class: 'msg ai ns-greet', lang: uiLang() }, ACCOUNT.name ? hi : hi.replace(/,?\s+([.,])/, '$1')));   // no name: "Hi." 
+  }
+  hist.forEach(m => {
+    if (m.hidden) return;
+    const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
+    const res = m.meta?.noemaState?.resolved || [];
+    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
+    msgs.append(b);
+  });
+  const tb = threadTracker(tutorCtxKey(), hist.length); if (tb) msgs.before(tb);
+  msgs.scrollTop = msgs.scrollHeight;
+}
 function renderTutor() {
   const d = $('.drawer'); d.innerHTML = '';
+  if (SHL()) return renderShellTutor(d);
   const hist = T.hist[tutorCtxKey()] || [];
   const msgs = h('div', { class: 'msgs' });
   d.append(
     h('div', { class: 'dh' },
-      h('div', { class: 'top' }, h('div', { class: 'avatar' }, TUTOR.avatar),
+      h('div', { class: 'top' }, tutorFace(),
         h('div', { class: 'grow' }, h('b', {}, TN), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
-        h('button', { class: 'iconbtn' + (T.showHistory ? ' on' : ''), title: 'Conversation history', onclick: () => { T.showHistory = !T.showHistory; renderTutor(); } }, '🕘'),
-        h('button', { class: 'iconbtn', title: 'Export this conversation (.md)', onclick: () => exportConvo(currentConvo()) }, '⬇️'),
-        h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }, '↺'),
-        h('button', { class: 'iconbtn', title: 'Close', onclick: closeTutor }, '✕')),
+        ...tutorTools(),
+        h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close', onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
         T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null,
         chatLangSelect({ cls: 'chatlang', onChange: () => renderTutor() })),
@@ -1064,8 +1128,11 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
-  const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null, givenOf(w)) }, `${TUTOR.avatar} Ask ${TN}`);
-  actions.append(h('span', { class: 'grow' }), hintBtn);
+  const ask = () => askAIAbout(ex, null, givenOf(w));
+  if (SHL()) {   // the frame: "Ask <character>" waits in the card's top corner and shows when you are on the card, like 💡 does
+    const face = window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '';
+    head.append(h('button', { class: 'exask', type: 'button', style: { marginLeft: showSection && SEC[ex.section] ? '8px' : 'auto' }, onclick: ask }, face ? h('span', { class: 'face', html: face, 'aria-hidden': 'true' }) : TUTOR.avatar, SL('askTutor')));
+  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} Ask ${TN}`));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;
@@ -1087,10 +1154,12 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
       h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} Help me get it (Socratic)`),
       h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 Explain differently')));
     card.append(exp);
+    window.NoemaReact?.answered(!!ok, { hard: ex.difficulty >= 3 });   // the character reacts (rarely big: engine/react.js)
     if (onDone) onDone(ok, card);
   }
   card._w = w; card._check = doCheck; card._locked = () => locked;
-  setTimeout(() => w.focus?.(), 50);
+  // the answer box gets the focus only when the card is in sight: a lesson with exercises at its end opens at its top
+  setTimeout(() => { if (!card.isConnected) return; const r = card.getBoundingClientRect(); if (r.top >= 0 && r.bottom <= innerHeight) w.focus?.(); }, 50);
   return card;
 }
 const pickOne = a => a[Math.random() * a.length | 0];
@@ -1195,7 +1264,8 @@ function vStage(ex, { regions } = {}) {
   stage.style.setProperty('--ar', String(W / H));
   const below = h('div', { class: 'vx-below' });
   const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: 'Bigger picture (Esc to close)', 'aria-label': 'Toggle full screen picture', onclick: () => toggleFull() }, '⤢');
-  const wrap = h('div', { class: 'vx' }, h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn), stage, below);
+  const tools = h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn);
+  const wrap = h('div', { class: 'vx' }, tools, stage, below);
   // Full screen: the picture moves to <body> (an animated/transformed ancestor would otherwise trap position:fixed)
   // and comes back to its placeholder afterwards; the accent colours travel with it.
   let holder = null;
@@ -1261,7 +1331,7 @@ function vStage(ex, { regions } = {}) {
     stage.addEventListener('blur', () => { cross.classList.remove('on'); shown = false; });
     stage.addEventListener('mousedown', () => { cross.classList.remove('on'); shown = false; });
   }
-  return { m, W, H, regs, RG, el: wrap, hover, keyboard, wrap, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
+  return { m, W, H, regs, RG, el: wrap, hover, keyboard, wrap, tools, zoomBtn, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.vx.full').forEach(w => w._exitFull?.()); });
 addEventListener('hashchange', () => $$('.vx.full').forEach(w => w._exitFull?.()));
@@ -1579,7 +1649,8 @@ function figureBlock(b) {
     st.layer.append(tipEl);
     let pinned = null;
     const showTip = (r, x, y) => { tipEl.innerHTML = ''; tipEl.append(h('b', { html: fmt(r.label || r.id) }), r.note ? h('div', { html: fmt(r.note) }) : null); Object.assign(tipEl.style, st.pos(x, y)); tipEl.classList.add('on'); tipEl.classList.toggle('below', y < st.H * 0.3); };
-    st.stage.addEventListener('mousemove', ev => { if (pinned) return; const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0]; r ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on'); });
+    const covered = r => r && st.masks[r.id] && !st.masks[r.id].classList.contains('off');   // a hidden label stays hidden until you peek
+    st.stage.addEventListener('mousemove', ev => { if (pinned) return; const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0]; r && !covered(r) ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on'); });
     st.stage.addEventListener('mouseleave', () => { if (!pinned) tipEl.classList.remove('on'); });
     st.stage.addEventListener('click', ev => {
       const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0];
@@ -1591,11 +1662,17 @@ function figureBlock(b) {
     st.keyboard({   // keyboard exploring: arrows move, the part under the crosshair is shown and announced; Enter peeks under a cover
       tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return 'Uncovered: ' + (r.label || r.id); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : 'Nothing here.'; },
       undo: () => '',
-      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
+      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r && covered(r)) { tipEl.classList.remove('on'); return 'A hidden label. Enter peeks.'; } if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
     const named = regs.filter(r => r.label && !/-area$/.test(r.id));
-    let hidden = false;
-    const hideBtn = h('button', { class: 'btn small ghost', onclick: () => { hidden = !hidden; named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; } }, '🙈 Hide labels');
-    st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 Hover or tap a part to see what it is. Hide the labels to test yourself, then tap a cover to peek.'), named.length ? hideBtn : null));
+    if (named.length) {   // the labels start hidden (test yourself first); the switch and its line sit on top of the picture
+      let hidden = true;
+      const say = h('span', { class: 'vx-lbltext' }), hideBtn = h('button', { class: 'btn small vx-lblbtn', type: 'button' });
+      const draw = () => { named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; say.textContent = hidden ? 'Labels hidden: tap a cover to peek.' : 'Hover or tap a part to see what it is.'; };
+      hideBtn.onclick = () => { hidden = !hidden; draw(); };
+      const credit = $('.vx-credit', st.tools); if (credit) st.below.append(h('div', { class: 'vx-figbar' }, credit));
+      st.tools.prepend(h('div', { class: 'vx-labelbar' }, hideBtn, say));
+      draw();
+    } else st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 Hover or tap a part to see what it is.')));
   }
   if (cap) box.append(h('figcaption', { class: 'caption', html: fmt(cap) }));
   return box;
@@ -1617,25 +1694,42 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
 /* ---- 40_views.js ---- */
 /* ===================== Views ===================== */
 const main = () => $('main');
-function view(...kids) { const m = main(); m.innerHTML = ''; const v = h('div', { class: 'view' }, ...kids); const fb = typeof filterBanner === 'function' ? filterBanner() : null; if (fb) v.prepend(fb); m.append(v); scrollTo({ top: 0 }); return v; }
+/* The new frame (engine/shell.js) owns the top bar, the tabs, the back arrow and the ⋮ menus; these views draw
+   the pages of the open subject (#/subject, #/ch, #/s, …) and tell it their crumbs and menu (docs/UI_MAP.md).
+   Without the shell (an old index.html) the classic top bar below is used. */
+const SHL = () => window.NoemaShell?.mounted ? window.NoemaShell : null;
+const SL = (k, v) => window.NoemaShell ? NoemaShell.L(k, v) : k;
+const HOME = () => SHL() ? '#/subject' : '#/';
+function shellChrome(c = {}) { const X = SHL(); if (X) X.chrome(X.subjectChrome(c)); }
+const backBtn = (label, hash) => SHL() ? null : h('button', { class: 'back', onclick: () => go(hash) }, label);
+function view(...kids) { const m = main(); m.innerHTML = ''; m.dataset.page = '@engine'; const v = h('div', { class: 'view' }, ...kids); const fb = typeof filterBanner === 'function' ? filterBanner() : null; if (fb) v.prepend(fb); m.append(v); scrollTo({ top: 0 }); return v; }
 const go = hash => { location.hash = hash; };
+/** Remember where the learner reads (Today › Continue, across subjects; engine/shell.js). */
+function noteRecent(extra = {}) {
+  const X = window.NoemaShell; if (!X?.noteRecent) return;
+  X.noteRecent({ subj: SUBJ.id, title: SUBJ.title, cid: Noema.node?.id || null, node: Noema.node?.node || null, ...extra });
+}
 
-/* ---------- top bar ---------- */
+/* ---------- top bar (classic, without the shell) ---------- */
 let timerT = null, timerEnd = 0;
 function renderTopStats() {
   const x = $('#xpchip'), s = $('#streakchip');
   if (x) x.textContent = `⭐ ${S.xp} XP`;
   if (s) s.textContent = `🔥 ${Noema.stats.streakNow()}`;
 }
+/** ⏱️ The 15-minute focus sprint (top bar chip, or the shell's ⋮ with a small clock next to it). */
+function focusSprint(btn) {
+  const clock = btn || $('.ns-focus') || (SHL() ? (() => { const b = h('button', { class: 'chip timer ns-focus', title: t('top.focusTitle'), onclick: () => focusSprint() }); SHL().setActs([b]); return b; })() : null);
+  const idle = () => { clock?.classList.remove('running'); if (clock) { if (clock.classList.contains('ns-focus')) clock.remove(); else clock.textContent = '⏱️ ' + t('top.focus'); } };
+  if (timerT) { clearInterval(timerT); timerT = null; idle(); return; }
+  timerEnd = Date.now() + 15 * 60e3; clock?.classList.add('running');
+  const tick = () => { const left = Math.max(0, timerEnd - Date.now()); const c = $('.timer.running') || clock; if (c) c.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; idle(); confetti(120); beep('win'); toast('🎉 Sprint done! Take a 3-minute break — stretch, water, breathe.', 5000); } };
+  tick(); timerT = setInterval(tick, 1000);
+}
 function topbar() {
-  const timer = h('button', { class: 'chip timer hide-m', title: t('top.focusTitle'), onclick: () => {
-    if (timerT) { clearInterval(timerT); timerT = null; timer.classList.remove('running'); timer.textContent = '⏱️ ' + t('top.focus'); return; }
-    timerEnd = Date.now() + 15 * 60e3; timer.classList.add('running');
-    const tick = () => { const left = Math.max(0, timerEnd - Date.now()); timer.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; timer.classList.remove('running'); timer.textContent = '⏱️ ' + t('top.focus'); confetti(120); beep('win'); toast('🎉 Sprint done! Take a 3-minute break — stretch, water, breathe.', 5000); } };
-    tick(); timerT = setInterval(tick, 1000);
-  } }, '⏱️ ' + t('top.focus'));
+  const timer = h('button', { class: 'chip timer hide-m', title: t('top.focusTitle'), onclick: () => focusSprint(timer) }, '⏱️ ' + t('top.focus'));
   return h('header', { class: 'topbar' },
-    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
+    h('div', { class: 'brand', onclick: () => go('#/') }, window.NoemaArt && window.NoemaThemes ? h('div', { class: 'logo', html: NoemaArt.mascot(NoemaThemes.current()) }) : null, h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
     h('button', { class: 'subjchip', title: t('top.switchSubject'), onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
     Noema.node ? h('button', { class: 'chip curchip', title: t('top.mapTitle'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🧭', h('span', { class: 'hide-s' }, ' ' + t('top.map')))
@@ -1650,7 +1744,7 @@ function topbar() {
     h('button', { class: 'acchip', title: t('top.account', { name: ACCOUNT.name }), onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
 }
 
-/* ---------- 🔔 notifications: subjects shared with me (bell + banner) ---------- */
+/* ---------- 🔔 notifications: subjects shared with me (bell + banner; the shell has its own) ---------- */
 function bellButton() {
   const badge = h('span', { class: 'bellbadge' });
   const b = h('button', { class: 'iconbtn bell', id: 'bellbtn', title: t('top.notifications'), 'aria-label': t('top.notifications'), onclick: () => openNotes() }, '🔔', badge);
@@ -1672,8 +1766,15 @@ function shareBanner() {
     const items = list.filter(x => !later.has(x.id)); bar.innerHTML = '';
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0];
+    if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine
+      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); else b.disabled = false; } catch (er) { toast('⚠️ ' + er.message, 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
+      bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
+        h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'),
+        h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
+      return;
+    }
     const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
-    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', h('b', {}, sh.from_name || sh.from_email || 'Someone'), cur ? ' invites you to the curriculum ' : ' wants to share ', h('b', {}, `“${sh.title}”`), cur ? '' : ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
+    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', h('b', {}, sh.from_name || sh.from_email || 'Someone'), cur ? ' invites you to the Roadmap ' : ' wants to share ', h('b', {}, `“${sh.title}”`), cur ? '' : ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
       h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? `👥 You joined “${s.title}” — your progress is your own, the prepared steps are shared` : `✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, cur ? '✓ Join' : '✓ Accept'),
       h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + er.message)); } }, '✕ Reject'),
       h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
@@ -1682,66 +1783,143 @@ function shareBanner() {
   return bar;
 }
 
-/* ---------- home ---------- */
+
+/* ---------- the subject's page (#/subject): where you are, Continue, Practice ▾, the chapters as a list or as cards ---------- */
 function ring(pct, size = 120, stroke = 12, color = 'var(--c)') {
   const r = (size - stroke) / 2, C = 2 * Math.PI * r;
   const holder = h('div', { style: { position: 'absolute', inset: '0' }, html: `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg)"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--bg2)" stroke-width="${stroke}"/><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)" data-off="${C * (1 - Math.min(1, pct))}"/></svg>` });
   return holder;
 }
 function animateRings(root) { requestAnimationFrame(() => requestAnimationFrame(() => $$('circle[data-off]', root).forEach(c => c.style.strokeDashoffset = c.dataset.off))); }
-/** This subject is a step of a 🧭 curriculum: where it sits, mastery so far, back to the map. */
-function nodeBanner() {
+/** Read / solved over the whole subject (0…1). */
+function courseProgress() {
+  const secs = COURSE.flatMap(c => c.sections.map(s => s.id)); const exN = COURSE.reduce((a, c) => a + c.exercises.length, 0);
+  return { sr: secs.length ? secs.filter(id => S.read[id]).length / secs.length : 0, ex: exN ? Object.values(S.res).filter(r => r.ok > 0).length / exN : 0 };
+}
+/** This subject is a station of a 🧭 Roadmap: which one, its mastery so far, the way back to the map. */
+/** The subject as a step of a Roadmap: where, how far to mastery (and the 🎉 once it is mastered). → null when it is not a step */
+function stationInfo() {
   if (!Noema.node || !window.NoemaCurMap) return null;
   const info = NoemaCurMap.nodeInfo(ACCOUNT.id, Noema.node); if (!info) return null;
-  const secs = COURSE.flatMap(c => c.sections.map(s => s.id)); const exN = COURSE.reduce((a, c) => a + c.exercises.length, 0);
-  const read = secs.length ? secs.filter(id => S.read[id]).length / secs.length : 0, solved = exN ? Object.values(S.res).filter(r => r.ok > 0).length / exN : 0;
+  const { sr: read, ex: solved } = courseProgress();
   const done = info.st.mastered || (read >= 0.999 && solved >= NoemaCurriculum.PASS);
-  return h('div', { class: 'callout key nodebanner' }, h('span', { class: 'ci' }, '🧭'),
-    h('div', { class: 'grow' }, h('b', { class: 't' }, `Step of “${info.c.title || info.c.goal}”`),
-      h('div', { class: 'tiny' }, done ? '✅ Mastered — the next steps are open on the map.' : `Mastery: ${Math.round(read * 100)} % of the sections read · ${Math.round(solved * 100)} % of the exercises solved — the next steps open at 100 % read + ${Math.round(NoemaCurriculum.PASS * 100)} % solved.`),
-      h('div', { class: 'nbbar' }, h('i', { style: { width: Math.round(Math.min(read, solved / NoemaCurriculum.PASS) * 100) + '%' } }))),
-    h('button', { class: 'btn small', onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🗺️ Map'));
+  if (done && !S.nodeDone) { S.nodeDone = Date.now(); save(); setTimeout(() => window.NoemaReact?.big('node'), 600); }
+  return { info, read, solved, done };
 }
-function homeView() {
-  setTutorContext(null);
-  setAccent(document.body, null);
-  const xpToday = Noema.stats.todayXP();
-  const goal = h('div', { class: 'goalring' }, ring(xpToday / S.settings.goal, 120, 12, '#ff922b'), h('div', { class: 'lbl' }, h('b', {}, xpToday), h('small', { class: 'tiny' }, `/ ${S.settings.goal} XP today`)));
+function nodeBanner() {
+  const st = stationInfo(); if (!st) return null;
+  const { info, read, solved, done } = st;
+  return h('div', { class: 'callout key nodebanner' }, h('span', { class: 'ci' }, '🧭'),
+    h('div', { class: 'grow' }, h('b', { class: 't' }, SL('stationOf', { title: info.c.title || info.c.goal })),
+      h('div', { class: 'tiny' }, done ? SL('stationDone') : SL('stationMastery', { r: Math.round(read * 100), e: Math.round(solved * 100), p: Math.round(NoemaCurriculum.PASS * 100) })),
+      h('div', { class: 'nbbar' }, h('i', { style: { width: Math.round(Math.min(read, solved / NoemaCurriculum.PASS) * 100) + '%' } }))),
+    h('button', { class: 'btn small', onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🗺️ ' + SL('openMap')));
+}
+/** 🎯 Practice ▾ — every way to practise the whole subject, in one place. */
+function practiceItems() {
   const dueFc = countDueCards(), duePb = countDuePlaybooks(), wrong = mistakesList().length;
-  const results = h('div', { class: 'results' });
-  const search = h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), h('input', { placeholder: `Jump to any concept…${SUBJ.searchExamples ? ' (e.g. ' + SUBJ.searchExamples + ')' : ''}`, oninput: e => doSearch(e.target.value, results) }));
-  const last = S.last && SEC[S.last];
-  const v = view(
-    setupBanner(), nodeBanner(),
-    h('section', { class: 'hero' },
-      h('div', {},
-        h('h1', { class: 'herohead', html: fmt(SUBJ.hero?.headline || `Master **${SUBJ.title}**, one bite at a time.`) }),
-        SUBJ.hero?.mantra || SUBJ.description ? h('p', { class: 'mantra', html: fmt(SUBJ.hero?.mantra || SUBJ.description) }) : null,
-        last ? h('button', { class: 'btn primary', style: { marginTop: '14px' }, onclick: () => go(`#/s/${last.id}`) }, `▶ Continue: ${last.title}`) : h('button', { class: 'btn primary', style: { marginTop: '14px' }, onclick: () => go('#/s/' + COURSE[0].sections[0].id) }, '▶ Start chapter 1'),
-        whatsNewButton()),
-      goal),
-    search, results,
-    h('div', { class: 'modes' },
-      modeTile('⚡', t('home.lightning'), t('home.lightningSub'), '#/lightning'),
-      modeTile('🔧', t('home.drills'), t('home.drillsSub'), '#/drills', duePb ? t('home.due', { n: duePb }) : null),
-      modeTile('🃏', t('home.cards'), t('home.cardsSub'), '#/cards', dueFc ? t('home.due', { n: dueFc }) : null),
-      modeTile('🔁', t('home.mistakes'), t('home.mistakesSub'), '#/mistakes', wrong ? `${wrong}` : null),
-      modeTile('🎲', t('home.mixed'), t('home.mixedSub'), '#/practice/all'),
-      modeTile(TUTOR.avatar, t('home.tutor'), t('home.tutorSub'), null, null, () => openTutor(null, 'socratic', null, { intent: INTENT.course }))),
-    h('div', { class: 'row', style: { marginBottom: '14px' } }, h('h2', {}, t('home.chapters')), h('span', { class: 'tiny' }, `${COURSE.length} chapters · ${COURSE.reduce((a, c) => a + c.sections.length, 0)} sections · ${ALL_EX.length} exercises`)),
-    h('div', { class: 'chapters' }, ...COURSE.map((c, i) => {
-      const p = chProgress(c);
-      const card = h('button', { class: 'chcard', style: { animationDelay: i * 40 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
-        newBadge(c), h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `Chapter ${c.num}${S.boss[c.id] ? ' · 🏆' : ''}`), h('h3', {}, c.title), h('p', {}, c.subtitle),
-        h('div', { class: 'bars' },
-          h('div', { class: 'barlbl' }, h('span', {}, '📖 Theory'), h('span', {}, Math.round(p.sr * 100) + '%')), h('div', { class: 'bar' }, h('i', { style: { width: '0%' }, 'data-w': p.sr * 100 + '%' })),
-          h('div', { class: 'barlbl' }, h('span', {}, '🎯 Practice'), h('span', {}, Math.round(p.ex * 100) + '%')), h('div', { class: 'bar alt' }, h('i', { style: { width: '0%' }, 'data-w': p.ex * 100 + '%' }))));
-      setAccent(card, c); return card;
-    })));
-  animateRings(v); requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar>i[data-w]').forEach(i => i.style.width = i.dataset.w)));
+  return [
+    { label: t('home.mixed'), sub: t('home.mixedSub'), icon: '🎲', href: '#/practice/all' },
+    { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: '#/cards', badge: dueFc ? t('home.due', { n: dueFc }) : null, tone: 4 },
+    Object.keys(PB).length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: '#/drills', badge: duePb ? t('home.due', { n: duePb }) : null, tone: 4 } : null,
+    { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong || null, tone: 3 },
+    { label: t('home.lightning'), sub: t('home.lightningSub'), icon: '⚡', href: '#/lightning' },
+    '-',
+    { label: SHL() ? SL('askTutor') : t('home.tutor'), sub: t('home.tutorSub'), icon: TUTOR.avatar, run: () => openTutor(null, 'socratic', null, { intent: INTENT.course }) }];
+}
+function practiceButton(items = practiceItems()) {
+  const X = SHL();
+  if (!X?.menuButton) return h('div', { class: 'modes' }, ...items.filter(x => x && x !== '-').map(it => modeTile(it.icon, it.label, it.sub, it.href, it.badge, it.run)));
+  return X.menuButton(items, { cls: 'btn ns-practicebtn', label: t('ch.practice'), content: h('span', {}, t('ch.practice'), ' ▾') });
 }
 function modeTile(ic, title, sub, hash, badge, fn) {
   return h('button', { class: 'mode', onclick: fn || (() => go(hash)) }, badge ? h('span', { class: 'pill badge', style: { background: '#ffe3d3', color: '#e8590c' } }, badge) : null, h('span', { class: 'ic' }, ic), h('b', {}, title), h('small', {}, sub));
+}
+/** ⋮ of the subject: everything that is not studying itself. */
+async function subjectMeta() { return (await Noema.subjectsFor(ACCOUNT.id)).find(x => x.id === SUBJ.id) || { ...SUBJ, origin: Noema.subjectMeta?.origin }; }
+function subjectMenu() {
+  const own = m => m.origin !== 'library';
+  return () => [
+    { label: SL('searchSubject'), icon: 'search', run: openSearch },
+    newSources().length ? { label: t('view.whatsNew'), icon: 'spark', href: '#/new' } : null,
+    { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
+    { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
+    '-',
+    Noema.node ? { label: SL('openMap'), icon: 'map', run: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) } : null,
+    window.NoemaCurMap?.attachDialog ? { label: Noema.node ? SL('otherStation') : SL('putOnMap'), sub: SL('putOnMapSub'), icon: 'path', run: async () => NoemaCurMap.attachDialog(ACCOUNT.id, { subject: await subjectMeta(), onDone: () => location.reload() }) } : null,
+    { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
+    own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
+    { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + e.message, 4000)) },
+    { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
+    '-',
+    { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
+}
+function resetProgress(after) {
+  confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
+}
+/** 🔎 Jump to any concept of the subject. */
+function openSearch() {
+  const results = h('div', { class: 'results' });
+  const inp = h('input', { class: 'noema-input', placeholder: `${SL('searchConcept')}${SUBJ.searchExamples ? ' (' + SUBJ.searchExamples + ')' : ''}`, 'aria-label': SL('searchSubject'), oninput: e => doSearch(e.target.value, results) });
+  const X = SHL();
+  if (X?.sheet) { X.sheet(SL('searchSubject'), (body, close) => { body.append(h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), inp), results); results.addEventListener('click', e => { if (e.target.closest('.result')) close(); }); setTimeout(() => inp.focus(), 50); }); return; }
+  modal((box, close) => { box.append(h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), inp), results); results.addEventListener('click', e => { if (e.target.closest('.result')) close(); }); setTimeout(() => inp.focus(), 50); });
+}
+const CHVIEW_KEY = 'noema-chview';
+function chapterViewStyle() { try { return localStorage.getItem(CHVIEW_KEY) === 'list' ? 'list' : 'cards'; } catch (e) { return 'cards'; } }   // cards unless the learner chose the list
+function homeView() {
+  setTutorContext(null);
+  setAccent(document.body, null);
+  shellChrome({ corner: true, menu: subjectMenu() });
+  noteRecent();
+  const p = courseProgress(), last = S.last && SEC[S.last], first = COURSE[0]?.sections[0];
+  const nSec = COURSE.reduce((a, c) => a + c.sections.length, 0);
+  const body = h('div', { class: 'chbox' });
+  let style = chapterViewStyle();
+  const seg = h('div', { class: 'ns-seg small chviewseg', role: 'radiogroup', 'aria-label': SL('chView') }, ...[['list', SL('viewList')], ['cards', SL('viewCards')]].map(([k, l]) => h('button', { 'data-v': k, class: style === k ? 'on' : '', role: 'radio', 'aria-checked': String(style === k), onclick: () => { style = k; try { localStorage.setItem(CHVIEW_KEY, k); } catch (e) { } $$('button', seg).forEach(b => { b.classList.toggle('on', b.dataset.v === k); b.setAttribute('aria-checked', String(b.dataset.v === k)); }); draw(); } }, l)));
+  const X = SHL(), st = X ? stationInfo() : null, pr = { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) };
+  const mantra = SUBJ.hero?.mantra || SUBJ.description;
+  // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the classic screens keep the emoji and the step banner
+  const top = X ? [st ? h('button', { class: 'ns-kicker subjkicker', title: SL('openMap'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, SL('stationOf', { title: st.info.c.title || st.info.c.goal }), ' ›') : null,
+      h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
+    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
+  const barW = st ? Math.round(Math.min(st.read, st.solved / NoemaCurriculum.PASS) * 100) : Math.round((p.sr + p.ex) * 50);
+  const barTip = st ? (st.done ? SL('stationDone') : SL('stationMastery', { ...pr, p: Math.round(NoemaCurriculum.PASS * 100) })) : SL('subjProgress', pr);
+  const v = view(
+    setupBanner(), X ? null : nodeBanner(),
+    h('section', { class: 'subjhead' + (st ? ' station' : '') }, ...top,
+      h('div', { class: 'subjbar', title: barTip }, h('div', { class: 'bar' }, h('i', { style: { width: barW + '%' } })), h('span', { class: 'tiny' }, st?.done ? '✓ ' + SL('stationMastered') : SL('subjProgress', pr))),
+      h('div', { class: 'row subjgo' },
+        last ? h('button', { class: 'btn primary', onclick: () => go(`#/s/${last.id}`) }, SL('continueSec', { title: last.title }))
+          : first ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + first.id) }, SL('startCh1')) : null,
+        practiceButton(), whatsNewButton())),
+    h('div', { class: 'row chlisthead' }, h('h2', { class: 'grow' }, t('home.chapters')), h('span', { class: 'tiny hide-s' }, SL('subjCounts', { c: COURSE.length, s: nSec, e: ALL_EX.length })), seg),
+    body);
+  function draw() {
+    body.innerHTML = '';
+    if (style === 'cards') {
+      body.append(h('div', { class: 'chapters' }, ...COURSE.map((c, i) => {
+        const p = chProgress(c);
+        const card = h('button', { class: 'chcard', style: { animationDelay: i * 40 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
+          newBadge(c), h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `${SL('chapterN', { n: c.num })}${S.boss[c.id] ? ' · 🏆' : ''}`), h('h3', {}, c.title), h('p', {}, c.subtitle),
+          h('div', { class: 'bars' },
+            h('div', { class: 'barlbl' }, h('span', {}, '📖 ' + SL('theory')), h('span', {}, Math.round(p.sr * 100) + '%')), h('div', { class: 'bar' }, h('i', { style: { width: '0%' }, 'data-w': p.sr * 100 + '%' })),
+            h('div', { class: 'barlbl' }, h('span', {}, '🎯 ' + SL('practice')), h('span', {}, Math.round(p.ex * 100) + '%')), h('div', { class: 'bar alt' }, h('i', { style: { width: '0%' }, 'data-w': p.ex * 100 + '%' }))));
+        setAccent(card, c); return card;
+      })));
+      requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar>i[data-w]', body).forEach(i => i.style.width = i.dataset.w)));
+    } else {
+      body.append(h('div', { class: 'chlist' }, ...COURSE.map((c, i) => {
+        const p = chProgress(c), pct = Math.round((p.sr + p.ex) * 50);
+        const row = h('button', { class: 'chrow' + (pct >= 100 ? ' done' : ''), style: { animationDelay: i * 25 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
+          h('span', { class: 'emo' }, c.emoji), h('span', { class: 'grow' }, h('small', {}, SL('chapterN', { n: c.num }), S.boss[c.id] ? ' · 🏆' : ''), h('b', {}, c.title), c.subtitle ? h('small', { class: 'sub' }, c.subtitle) : null),
+          newBadge(c), h('span', { class: 'chpct' }, h('span', { class: 'minibar' }, h('i', { style: { width: pct + '%' } })), h('small', {}, pct + '%')));
+        setAccent(row, c); return row;
+      })));
+    }
+  }
+  draw();
+  animateRings(v);
 }
 let searchIdx = null;
 function doSearch(q, box) {
@@ -1759,28 +1937,43 @@ function doSearch(q, box) {
   });
 }
 
-/* ---------- chapter ---------- */
+/* ---------- chapter: Theory · Practice · Traps (the old Cards and Debug-drill tabs live inside Practice; their links still work) ---------- */
 let chTab = {};
+/** A row of choices: a ⋮-style pop-up in the shell, plain buttons without it. */
+function choiceList(items) {
+  return h('div', { class: 'plist' }, ...items.filter(Boolean).map(it => h('button', { class: 'pitem' + (it.cls ? ' ' + it.cls : ''), onclick: it.run || (() => go(it.href)) },
+    h('span', { class: 'pic' }, it.icon), h('span', { class: 'grow' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge != null && it.badge !== '' ? h('span', { class: 'pill c' }, it.badge) : null, h('span', { class: 'chev', 'aria-hidden': 'true' }, '›'))));
+}
+function chapterMenu(c) {
+  return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id }, 'socratic', null, { intent: INTENT.chSocratic }) },
+    { label: SL('searchSubject'), icon: 'search', run: openSearch }, { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
+    { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() }, '-',
+    { label: SL('allChapters'), icon: 'list', href: HOME() }];
+}
 function chapterView(id, tab) {
-  const c = CH[id]; if (!c) return go('#/');
+  const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
   setTutorContext({ kind: 'chapter', id });
   tab = tab || chTab[id] || 'learn'; chTab[id] = tab;
+  const on = ['debug', 'cards', 'filters'].includes(tab) ? 'practice' : ['learn', 'practice', 'traps'].includes(tab) ? tab : 'learn';
+  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`]], back: HOME(), corner: true, menu: chapterMenu(c) });
+  noteRecent({ chNum: c.num, chOf: COURSE.length });
   const p = chProgress(c);
-  const tabs = [['learn', t('ch.learn'), c.sections.length], ['practice', t('ch.practice'), c.exercises.length], ['debug', t('ch.debug'), c.debug.length], ['cards', t('ch.cards'), c.flashcards.length], ['traps', t('ch.traps'), c.pitfalls.length]];
+  const tabs = [['learn', t('ch.learn'), c.sections.length], ['practice', t('ch.practice'), c.exercises.length], ['traps', t('ch.traps'), c.pitfalls.length]];
   const body = h('div');
   const v = view(
-    h('button', { class: 'back', onclick: () => go('#/') }, t('ch.all')),
+    backBtn(t('ch.all'), HOME()),
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
-      h('div', { class: 'grow' }, h('div', { class: 'num' }, `Chapter ${c.num}`), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
-      h('div', { style: { position: 'relative', width: '76px', height: '76px', flex: 'none' } }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { style: { position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontWeight: 800 } }, Math.round((p.sr + p.ex) * 50) + '%'))),
+      h('div', { class: 'grow' }, h('div', { class: 'num' }, SL('chOf', { n: c.num, of: COURSE.length })), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
+      h('div', { class: 'chring' }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { class: 'chringc' }, Math.round((p.sr + p.ex) * 50) + '%'))),
     explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),
-    h('div', { class: 'tabs' }, ...tabs.map(([k, l, n]) => h('button', { class: tab === k ? 'on' : '', onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),
+    h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),
     body);
   animateRings(v);
-  if (tab === 'learn') {
+  if (on === 'learn') {
+    const nextSec = c.sections.find(s => !S.read[s.id]);
     body.append(
-      h('details', { class: 'obj' }, h('summary', {}, '🎯 What you will be able to do ▸'), h('ul', {}, ...c.objectives.map(o => h('li', { html: fmt(o) })))),
+      h('details', { class: 'obj' }, h('summary', {}, '🎯 ' + SL('objectives') + ' ▸'), h('ul', {}, ...c.objectives.map(o => h('li', { html: fmt(o) })))),
       h('div', { class: 'path' }, ...c.sections.map((s, i) => {
         const nEx = c.exercises.filter(e => e.section === s.id), nOk = nEx.filter(e => solved(e.id)).length;
         return h('button', { class: 'node' + (S.read[s.id] ? ' done' : ''), style: { animationDelay: i * 35 + 'ms' }, onclick: () => go('#/s/' + s.id) },
@@ -1788,17 +1981,38 @@ function chapterView(id, tab) {
           h('div', { class: 'meta' }, newBadge(s), h('span', { class: 'pill' + (nOk === nEx.length && nEx.length ? ' c' : '') }, `🎯 ${nOk}/${nEx.length}`)));
       })),
       h('div', { class: 'row', style: { marginTop: '22px' } },
-        h('button', { class: 'btn primary', onclick: () => go(`#/practice/${id}`) }, '🎯 Practice this chapter'),
-        h('button', { class: 'btn', onclick: () => go(`#/boss/${id}`) }, S.boss[id] ? '🏆 Boss battle (beaten!)' : '👾 Boss battle'),
-        h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} Socratic review`)));
-  } else if (tab === 'practice') practiceSetup(body, c);
-  else if (tab === 'debug') drillList(body, c.debug);
-  else if (tab === 'cards') flashDeck(body, c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c })));
-  else if (tab === 'traps') {
-    body.append(h('p', { class: 'muted' }, 'Every trap in this chapter, side by side. Read them, then hit the trap drill.'),
-      h('div', { class: 'row', style: { marginBottom: '14px' } }, h('button', { class: 'btn primary', onclick: () => startRun(c.exercises.filter(e => e.tags.some(t => ['pitfall', 'exam'].includes(t))), { title: `⚠️ Trap drill · Ch${c.num}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ Start trap drill')),
+        nextSec ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + nextSec.id) }, (S.read[c.sections[0].id] ? SL('continueSec', { title: nextSec.title }) : SL('startReading'))) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${id}/practice`) }, '🎯 ' + SL('practiceChapter')),
+        h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
+  } else if (on === 'practice') {
+    if (tab === 'practice') body.append(chapterPractice(c));
+    else {
+      body.append(h('button', { class: 'linkish subback', onclick: () => go(`#/ch/${id}/practice`) }, '‹ ' + SL('allWays')));
+      if (tab === 'debug') drillList(body, c.debug);
+      else if (tab === 'cards') flashDeck(body, c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c })));
+      else practiceSetup(body, c);
+    }
+  } else if (on === 'traps') {
+    const traps = c.exercises.filter(e => e.tags.some(t => ['pitfall', 'exam'].includes(t))), tf = c.exercises.filter(e => e.type === 'tf');
+    body.append(h('p', { class: 'muted' }, SL('trapsIntro')),
+      h('div', { class: 'row', style: { marginBottom: '14px' } },
+        traps.length ? h('button', { class: 'btn primary', onclick: () => startRun(traps, { title: `⚠️ ${SL('trapDrill')} · Ch${c.num}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ ' + SL('trapsNoTimer')) : null,
+        tf.length >= 3 ? h('button', { class: 'btn', onclick: () => go('#/lightning/' + id) }, '⚡ ' + SL('trapsTimed')) : null),
       h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));
   }
+}
+/** Practice tab: every way to practise this chapter. */
+function chapterPractice(c) {
+  const id = c.id, ok = c.exercises.filter(e => solved(e.id)).length, wrong = c.exercises.filter(e => S.res[e.id]?.last === false);
+  const cards = c.flashcards.map((f, i) => f._key || c.id + '#' + i), dueC = cards.filter(k => S.fc[k] && cardDue(k)).length;
+  const dueD = c.debug.filter(d => !S.pb[d.id] || S.pb[d.id].due <= today()).length;
+  return choiceList([
+    c.exercises.length ? { label: SL('round10'), sub: SL('solvedOf', { n: ok, of: c.exercises.length }), icon: '🎯', cls: 'main', run: () => startRun(c.exercises, { title: `🎯 Ch${c.num} · ${c.title}`, count: 10, back: `#/ch/${id}/practice` }) } : null,
+    c.exercises.length ? { label: SL('chooseRound'), sub: SL('chooseRoundSub'), icon: '🎛️', href: `#/ch/${id}/filters` } : null,
+    c.flashcards.length ? { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: `#/ch/${id}/cards`, badge: dueC ? t('home.due', { n: dueC }) : c.flashcards.length } : null,
+    c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : c.debug.length } : null,
+    wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: wrong.length, run: () => startRun(wrong, { title: `🔁 Ch${c.num} mistakes`, count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
+    c.exercises.length ? { label: S.boss[id] ? SL('bossBeaten') : SL('boss'), sub: SL('bossSub'), icon: S.boss[id] ? '🏆' : '👾', href: `#/boss/${id}` } : null,
+    { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
 }
 
 /* ---------- section reader ---------- */
@@ -1849,11 +2063,19 @@ function chunkBlocks(blocks) {
   return out;
 }
 const revealedChunks = {};
+function sectionMenu(s) {
+  const fresh = () => { const slot = $('.freshslot'); if (slot) { slot.dispatchEvent(new Event('noema-fresh')); slot.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else go('#/s/' + s.id); };
+  return () => [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, $('.freshslot') ? { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: fresh } : null, { label: SL('searchSubject'), icon: 'search', run: openSearch },
+    { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() }, { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
+    '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
+}
 function sectionView(sid) {
-  const s = SEC[sid]; if (!s) return go('#/');
+  const s = SEC[sid]; if (!s) return go(HOME());
   const c = s._ch; setAccent(document.body, c);
   S.last = sid; save();
   setTutorContext({ kind: 'section', id: sid });
+  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + c.id]], back: '#/ch/' + c.id, reading: true, menu: sectionMenu(s) });
+  noteRecent({ sid, secTitle: s.title, chNum: c.num, chOf: COURSE.length, secNum: s._j + 1, secOf: c.sections.length });
   const chunks = S.settings.chunk ? chunkBlocks(s.blocks) : [s.blocks];
   let shown = revealedChunks[sid] || (S.read[sid] ? chunks.length : 1);
   const prev = c.sections[s._j - 1], next = c.sections[s._j + 1];
@@ -1861,9 +2083,9 @@ function sectionView(sid) {
   const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
   const tail = h('div');
   const v = view(h('div', { class: 'reader' },
-    h('button', { class: 'back', onclick: () => go('#/ch/' + c.id) }, `← ${c.emoji} Ch${c.num} · ${c.title}`),
+    backBtn(`← ${c.emoji} Ch${c.num} · ${c.title}`, '#/ch/' + c.id),
     pl,
-    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ read') : null),
+    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null),
       h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),
     body, tail));
   function draw(scroll) {
@@ -1873,41 +2095,59 @@ function sectionView(sid) {
     tail.innerHTML = '';
     if (shown < chunks.length) {
       tail.append(h('div', { class: 'continue' }, h('div', { class: 'row' },
-        h('button', { class: 'btn primary', style: { animation: 'pulse 2s infinite' }, onclick: () => { shown++; revealedChunks[sid] = shown; draw(true); } }, `Continue ▾  (${shown}/${chunks.length})`),
-        h('button', { class: 'btn ghost small', onclick: () => { shown = chunks.length; revealedChunks[sid] = shown; draw(); } }, 'show all'))));
+        h('button', { class: 'btn primary', onclick: () => { shown++; revealedChunks[sid] = shown; draw(true); } }, `${SL('continueRead')} ▾  (${shown}/${chunks.length})`),
+        h('button', { class: 'btn ghost small', onclick: () => { shown = chunks.length; revealedChunks[sid] = shown; draw(); } }, SL('showAll')))));
       if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     } else {
-      if (!S.read[sid]) { S.read[sid] = true; save(); addXP(5, pl); }
+      if (!S.read[sid]) {
+        S.read[sid] = true; save(); addXP(5, pl);
+        if (c.sections.every(x => S.read[x.id])) setTimeout(() => window.NoemaReact?.big('chapter'), 500);   // the last section of the chapter
+      }
       tail.append(sectionTail(s, prev, next));
       if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }
   }
   draw();
 }
+const SEC_ASK = { socratic: ['Start a Socratic session on "{t}". Begin by probing what I already think.', 'secSocratic'], debug: ['Start a debugging simulation related to "{t}".', 'secDebug'], interview: ['Interview me about "{t}".', 'secInterview'] };
+function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id }, mode, msg.replace('{t}', s.title), { intent: INTENT[intent] }); }
 function sectionTail(s, prev, next) {
   const c = s._ch;
   const exs = c.exercises.filter(e => e.section === s.id);
   const quick = exs.filter(e => e.quick);
   const pbs = c.debug.filter(d => d.section === s.id);
   const zone = h('div', { class: 'quickzone' });
-  zone.append(h('div', { class: 'row', style: { margin: '6px 0 18px' } },
-    h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'section', id: s.id }, 'socratic', `Start a Socratic session on "${s.title}". Begin by probing what I already think.`, { intent: INTENT.secSocratic }) }, `${TUTOR.avatar} Socratic dialogue on this`),
-    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'debug', `Start a debugging simulation related to "${s.title}".`, { intent: INTENT.secDebug }) }, '🔧 Debug simulation'),
-    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'interview', `Interview me about "${s.title}".`, { intent: INTENT.secInterview }) }, '🎤 Interview me')));
   if (quick.length) {
-    zone.append(h('h3', {}, '⚡ Quick check', h('span', { class: 'tiny' }, `${quick.length} right here, right now`)));
+    zone.append(h('h3', {}, '⚡ ' + SL('quickCheck'), h('span', { class: 'tiny' }, SL('quickCheckSub', { n: quick.length }))));
     quick.forEach(e => zone.append(exerciseCard(e)));
   }
   if (pbs.length) {
-    zone.append(h('h3', { style: { margin: '22px 0 10px' } }, '🔧 Debug drill for this section'));
+    zone.append(h('h3', { style: { margin: '22px 0 10px' } }, '🔧 ' + SL('sectionDrill')));
     pbs.forEach(d => zone.append(drillTile(d)));
   }
-  zone.append(h('div', { class: 'row', style: { marginTop: '18px' } },
-    h('button', { class: 'btn primary', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, `🎯 All ${exs.length} exercises for this section`),
-    h('button', { class: 'btn ai', onclick: async e => { const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Generating…'; try { const ex = await aiQuestion(s); b.after(exerciseCard(ex)); } catch (er) { toast('⚠️ ' + er.message, 4000); } b.disabled = false; b.textContent = '✨ Fresh AI question'; } }, '✨ Fresh AI question')));
-  zone.append(h('div', { class: 'secnav' },
-    prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
-    next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/boss/${c.id}`) }, '👾 Chapter boss battle →')));
+  const fresh = h('div', { class: 'freshslot' });
+  const freshQ = async () => { const note = h('p', { class: 'tiny' }, '✨ ' + SL('generating')); fresh.prepend(note); try { const ex = await aiQuestion(s); note.replaceWith(exerciseCard(ex)); } catch (er) { note.remove(); toast('⚠️ ' + er.message, 4000); } };
+  const ask = [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, { label: SL('askDebug'), icon: '🔧', run: () => askSection(s, 'debug') },
+    { label: SL('askInterview'), icon: '🎤', run: () => askSection(s, 'interview') }, '-', { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: freshQ }];
+  const X = SHL();
+  fresh.addEventListener('noema-fresh', freshQ);   // the section's ⋮ › A new question
+  // in the frame the tutor's ways (Socratic, debugging, interview) are in its own window and a new question in the section's ⋮
+  zone.append(fresh, h('div', { class: 'row sectools' },
+    X ? null : h('span', { class: 'row' }, ...ask.filter(a => a !== '-').map(a => h('button', { class: 'btn' + (a.icon === TUTOR.avatar ? ' ai' : ''), onclick: a.run }, `${a.icon} ${a.label}`))),
+    exs.length ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
+  if (!X) {
+    zone.append(h('div', { class: 'secnav' },
+      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
+      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' →')));
+    return zone;
+  }
+  // the frame: one big “Next section” (the next chapter's first one after the last section), the chapter's practice beside it
+  const nextCh = !next && COURSE[COURSE.indexOf(c) + 1], to = next || nextCh?.sections[0];
+  zone.append(h('nav', { class: 'secnav ns-secnav', 'aria-label': SL('nextSection') },
+    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' →'), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
+      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' →')),
+    to && !next ? h('button', { class: 'btn', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter')) : null,
+    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, '← ' + SL('prevSection')) : null));
   return zone;
 }
 
@@ -1938,13 +2178,14 @@ function runOrder(list) {
   return [...shuffle(g2), ...shuffle(g1), ...shuffle(g3)];
 }
 function startRun(list, opt = {}) {
-  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || 'Practice', back: opt.back || '#/', lives: opt.lives || 0, boss: opt.boss || null };
+  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || 'Practice', back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null };
   if (location.hash === '#/run') runView(); else go('#/run');
 }
 let RUN = null;
 function runView() {
-  if (!RUN) return go('#/');
+  if (!RUN) return go(HOME());
   const R0 = RUN;
+  shellChrome({ sub: true, crumbs: [[R0.title]], back: R0.back, reading: true });
   if (R0.i >= R0.list.length || (R0.lives && R0.lives <= 0)) return runSummary();
   const ex = R0.list[R0.i];
   setAccent(document.body, ex._ch);
@@ -1963,11 +2204,13 @@ function runSummary() {
   const R0 = RUN, n = R0.i, pct = n ? R0.ok / n : 0, xp = S.xp - R0.xp0;
   let big = pct >= .9 ? '🏆' : pct >= .7 ? '🎉' : pct >= .5 ? '💪' : '🌱';
   let msg = pct >= .9 ? 'Outstanding!' : pct >= .7 ? 'Great work!' : pct >= .5 ? 'Solid progress — the mistakes are where the learning is.' : 'Good start — retry the mistakes while they are fresh.';
+  const RX = SHL() ? window.NoemaReact : null;
   if (R0.boss) {
     const won = R0.lives > 0 && R0.i >= R0.list.length && pct >= .7;
-    if (won) { S.boss[R0.boss] = true; save(); big = '🏆'; msg = 'Boss defeated! Chapter badge unlocked.'; } else { big = '👾'; msg = 'The boss wins this time. Review the misses and come back stronger!'; }
-  }
-  if (pct >= .7) { confetti(); beep('win'); }
+    if (won) { S.boss[R0.boss] = true; save(); big = '🏆'; msg = 'Boss defeated! Chapter badge unlocked.'; RX?.big('bosswin'); } else { big = '👾'; msg = 'The boss wins this time. Review the misses and come back stronger!'; }
+  } else if (R0.back === '#/mistakes' && R0.ok && !mistakesList().length) RX?.big('gym');   // the gym is empty
+  else if (n >= 5 && R0.ok === n) RX?.big('perfect');
+  if (pct >= .7) { if (!RX) confetti(); beep('win'); }
   view(h('div', { class: 'runner' }, h('div', { class: 'card summary' },
     h('div', { class: 'big' }, big), h('h2', {}, msg),
     h('div', { class: 'statgrid' }, h('div', { class: 'stat' }, h('b', {}, `${R0.ok}/${n}`), h('span', { class: 'tiny' }, 'correct')), h('div', { class: 'stat' }, h('b', {}, Math.round(pct * 100) + '%'), h('span', { class: 'tiny' }, 'accuracy')), h('div', { class: 'stat' }, h('b', {}, '+' + xp), h('span', { class: 'tiny' }, 'XP'))),
@@ -1979,8 +2222,9 @@ function runSummary() {
 function mistakesList() { return ALL_EX.filter(e => S.res[e.id] && S.res[e.id].last === false); }
 function mistakesView() {
   setAccent(document.body, null);
+  shellChrome({ sub: true, crumbs: [[t('home.mistakes')]], back: HOME() });
   const list = mistakesList();
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.mistakes')),
+  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mistakes')),
     h('p', { class: 'muted' }, 'Everything whose last attempt was wrong. Get it right once and it leaves the gym.'),
     list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: '🔁 Mistakes gym', count: 15, back: '#/mistakes' }) }, `▶ Train ${Math.min(15, list.length)} of ${list.length}`)),
       h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: `🔁 Ch${c.num} mistakes`, count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, n)) : null; })))
@@ -1988,9 +2232,10 @@ function mistakesView() {
 }
 function mixedView() {
   setAccent(document.body, null);
+  shellChrome({ sub: true, crumbs: [[t('home.mixed')]], back: HOME() });
   const readSecs = new Set(Object.keys(S.read));
   const pool = ALL_EX.filter(e => readSecs.has(e.section));
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.mixed')),
+  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mixed')),
     h('p', { class: 'muted' }, 'Interleaving beats blocking: random exercises from every section you have read (or from everything).'),
     h('div', { class: 'row', style: { marginTop: '14px' } },
       h('button', { class: 'btn primary', disabled: !pool.length, onclick: () => startRun(pool, { title: '🎲 Mixed: what I have read', count: 12, back: '#/practice/all' }) }, `▶ From what I've read (${pool.length})`),
@@ -1999,9 +2244,10 @@ function mixedView() {
       h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('exam')), { title: '🎓 Exam traps only', count: 12, back: '#/practice/all' }) }, '🎓 Exam traps only')));
 }
 function bossView(id) {
-  const c = CH[id]; if (!c) return go('#/');
+  const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
-  view(h('button', { class: 'back', onclick: () => go('#/ch/' + id) }, `← ${c.title}`),
+  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + id], [SL('boss')]], back: '#/ch/' + id + '/practice' });
+  view(backBtn(`← ${c.title}`, '#/ch/' + id),
     h('div', { class: 'card summary' }, h('div', { class: 'big' }, '👾'), h('h1', {}, `Boss battle · Ch${c.num}`),
       h('p', { class: 'muted' }, '15 mixed questions, mostly medium/hard. You have 3 lives ❤️❤️❤️. Lose them all and the boss wins. Score ≥ 70% with lives left to earn the 🏆.'),
       h('button', { class: 'btn primary', style: { marginTop: '10px' }, onclick: () => {
@@ -2009,15 +2255,17 @@ function bossView(id) {
         const hard = shuffle(pool.filter(e => e.difficulty >= 2)), easy = shuffle(pool.filter(e => e.difficulty < 2));
         const pick = [...hard.slice(0, 12), ...easy.slice(0, 3)];
         startRun(shuffle(pick).slice(0, 15), { title: `👾 Boss · Ch${c.num}`, count: 15, back: '#/ch/' + id, lives: 3, boss: id, keepOrder: true });
+        window.NoemaReact?.big('boss');
       } }, '⚔️ Fight!')));
 }
 
 /* ---------- lightning ---------- */
 function lightningView() {
   setAccent(document.body, null);
+  shellChrome({ sub: true, crumbs: [[t('home.lightning')]], back: HOME() });
   const chSel = h('select', { class: 'sel' }, h('option', { value: 'all' }, 'All chapters'), ...COURSE.map(c => h('option', { value: c.id }, `${c.emoji} Ch${c.num} ${c.title}`)));
   const best = S.bestLightning || 0;
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')),
+  view(backBtn(t('nav.home'), HOME()),
     h('div', { class: 'card lightning' }, h('div', { style: { fontSize: '56px' } }, '⚡'), h('h1', {}, t('view.lightning')),
       h('p', { class: 'muted' }, '60 seconds. True or false. Use ← / → or the buttons. Wrong answers are explained at the end.'),
       h('div', { class: 'row', style: { justifyContent: 'center', margin: '14px 0' } }, chSel), h('p', { class: 'tiny' }, `Personal best: ${best}`),
@@ -2025,7 +2273,10 @@ function lightningView() {
 }
 function playLightning(chid) {
   const pool = shuffle(ALL_EX.filter(e => e.type === 'tf' && (chid === 'all' || e._ch.id === chid)));
-  let i = 0, score = 0, end = Date.now() + 60e3, wrong = [], over = false;
+  if (!pool.length) { toast('No true/false questions here'); return go(HOME()); }
+  const c0 = CH[chid], back = c0 ? `#/ch/${chid}/traps` : '#/lightning', here = location.hash;
+  shellChrome({ sub: true, crumbs: c0 ? [[`${c0.emoji} ${c0.title}`, '#/ch/' + chid], [t('home.lightning')]] : [[t('home.lightning')]], back, reading: true });
+  let i = 0, score = 0, end = Date.now() + 60e3, wrong = [], over = false, warned = false;
   const clock = h('div', { class: 'clock' }, '60'), stmt = h('div', { class: 'stmt' }), sc = h('div', { class: 'tiny' });
   const ans = v => { if (over) return; const ex = pool[i % pool.length]; if (v === ex.answer) { score++; beep('ok'); stmt.classList.remove('pop'); void stmt.offsetWidth; stmt.classList.add('pop'); } else { wrong.push(ex); beep('bad'); stmt.classList.remove('shake'); void stmt.offsetWidth; stmt.classList.add('shake'); } record(ex, v === ex.answer); i++; draw(); };
   const draw = () => { const ex = pool[i % pool.length]; stmt.innerHTML = ''; stmt.append(h('div', { html: fmt(ex.q) })); setAccent(stmt, ex._ch); sc.textContent = `Score: ${score}`; };
@@ -2034,17 +2285,18 @@ function playLightning(chid) {
   view(h('div', { class: 'runner lightning' }, clock, stmt, h('div', { class: 'tfrow' }, h('button', { class: 'tfbtn t', onclick: () => ans(true) }, '👍 True  ←'), h('button', { class: 'tfbtn f', onclick: () => ans(false) }, '→  👎 False')), h('div', { style: { marginTop: '12px' } }, sc)));
   draw();
   const t = setInterval(() => {
-    if (location.hash !== '#/lightning') { clearInterval(t); document.removeEventListener('keydown', key); over = true; return; }
+    if (location.hash !== here) { clearInterval(t); document.removeEventListener('keydown', key); over = true; return; }
     const left = Math.max(0, Math.ceil((end - Date.now()) / 1000)); clock.textContent = left;
+    if (left <= 5 && left > 0) { if (!warned) { warned = true; window.NoemaReact?.big('timer'); } else window.NoemaReact?.tick(left); }
     if (!left) {
       clearInterval(t); document.removeEventListener('keydown', key); over = true;
       addXP(score * 3, clock);
       const pb = score > (S.bestLightning || 0); if (pb) { S.bestLightning = score; save(); }
-      if (score >= 8 || pb) confetti();
+      if (!wrong.length && score >= 5 && SHL() && window.NoemaReact) window.NoemaReact.big('timerwin'); else if (score >= 8 || pb) confetti();
       beep('win');
       view(h('div', { class: 'runner' }, h('div', { class: 'card summary' }, h('div', { class: 'big' }, pb ? '🏅' : '⚡'), h('h2', {}, `${score} correct in 60 s${pb ? ' — new personal best!' : ''}`),
         wrong.length ? h('div', { style: { textAlign: 'left', marginTop: '16px', display: 'grid', gap: '10px' } }, h('b', {}, 'The ones that fooled you:'), ...wrong.map(ex => h('div', { class: 'explain bad' }, h('div', { class: 'hd' }, ex.answer ? 'TRUE' : 'FALSE'), h('div', { html: '<b>' + fmt(ex.q) + '</b>' }), h('div', { style: { marginTop: '4px' }, html: fmt(ex.explain) })))) : h('p', {}, 'Flawless! 🔥'),
-        h('div', { class: 'row', style: { justifyContent: 'center', marginTop: '18px' } }, h('button', { class: 'btn primary', onclick: () => playLightning(chid) }, '⚡ Again'), h('button', { class: 'btn', onclick: () => go('#/') }, 'Home')))));
+        h('div', { class: 'row', style: { justifyContent: 'center', marginTop: '18px' } }, h('button', { class: 'btn primary', onclick: () => playLightning(chid) }, '⚡ Again'), h('button', { class: 'btn', onclick: () => go(c0 ? back : HOME()) }, c0 ? SL('back') : 'Home')))));
     }
   }, 200);
 }
@@ -2058,8 +2310,9 @@ function countDueCards() { return COURSE.reduce((a, c) => a + c.flashcards.filte
 function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
 function cardsView() {
   setAccent(document.body, null);
+  shellChrome({ sub: true, crumbs: [[t('home.cards')]], back: HOME() });
   const body = h('div');
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, 'Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.'), body);
+  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, 'Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.'), body);
   flashDeck(body, allCards());
 }
 function flashDeck(body, cards) {
@@ -2101,8 +2354,9 @@ function drillList(body, list) {
 }
 function drillsView() {
   setAccent(document.body, null);
+  shellChrome({ sub: true, crumbs: [[t('home.drills')]], back: HOME() });
   const body = h('div');
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.drills')),
+  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.drills')),
     h('p', { class: 'muted' }, `${Object.keys(PB).length} debugging playbooks. The goal: the right questions pop into your head automatically when something breaks.`), body);
   COURSE.forEach(c => { if (!c.debug.length) return; const sub = h('div', { style: { margin: '22px 0 0' } }); body.append(h('h3', { style: { margin: '20px 0 10px' } }, `${c.emoji} Ch${c.num} · ${c.title}`), sub); sub.append(...c.debug.map(drillTile)); });
 }
@@ -2110,10 +2364,11 @@ function drillView(id) {
   const d = PB[id]; if (!d) return go('#/drills');
   const c = d._ch; setAccent(document.body, c);
   setTutorContext({ kind: 'playbook', id });
+  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + c.id], [t('home.drills'), `#/ch/${c.id}/debug`]], back: `#/ch/${c.id}/debug`, reading: true });
   const ta = h('textarea', { class: 'answer', placeholder: 'One question per line, in the order you would ask them…' });
   const stage = h('div');
   view(h('div', { class: 'reader' },
-    h('button', { class: 'back', onclick: () => go(`#/ch/${c.id}/debug`) }, `← ${c.emoji} Ch${c.num} debug drills`),
+    backBtn(`← ${c.emoji} Ch${c.num} debug drills`, `#/ch/${c.id}/debug`),
     h('span', { class: 'pill c' }, '🔧 Debug drill'), h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
     h('div', { class: 'tiny', style: { fontWeight: 700, marginBottom: '6px' } }, 'SYMPTOM'), h('div', { class: 'symptom', html: fmt(d.symptom) }),
     h('h3', { style: { margin: '22px 0 8px' } }, '🧠 What do you ask yourself? (before peeking)'), ta,
@@ -2121,7 +2376,7 @@ function drillView(id) {
       h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 Reveal checklist'),
       h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Grading…'; try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + er.message, 4000); reveal(null); } } }, '✨ Grade my checklist'),
       h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 Order drill'),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, '🎭 Role-play it with Brick')),
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, `🎭 Role-play it with ${TN}`)),
     stage));
   function orderDrill() {
     stage.innerHTML = '';
@@ -2158,16 +2413,19 @@ function drillView(id) {
 }
 
 /* ---------- router ---------- */
+/** The subject's pages. In the shell, #/ is Today and the subject lives at #/subject; any other address is the shell's. */
 function route() {
   const p = (location.hash || '#/').slice(2).split('/');
+  const X = SHL();
+  if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
   closeTutorIfMobile();
-  if (!p[0]) return homeView();
+  if (!p[0] || p[0] === 'subject') return homeView();
   if (p[0] === 'ch') return chapterView(p[1], p[2]);
   if (p[0] === 's') return sectionView(p[1]);
   if (p[0] === 'practice') return p[1] === 'all' ? mixedView() : (chTab[p[1]] = 'practice', chapterView(p[1], 'practice'));
   if (p[0] === 'run') return runView();
   if (p[0] === 'boss') return bossView(p[1]);
-  if (p[0] === 'lightning') return lightningView();
+  if (p[0] === 'lightning') return p[1] && CH[p[1]] ? playLightning(p[1]) : lightningView();
   if (p[0] === 'cards') return cardsView();
   if (p[0] === 'drills') return drillsView();
   if (p[0] === 'drill') return drillView(p[1]);
@@ -2193,11 +2451,15 @@ document.addEventListener('keydown', e => {
 /* ---------- boot ---------- */
 function boot() {
   applyTheme();
-  document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
+  const X = SHL();
+  if (X) document.body.append(h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));   // the shell has the top bar, the banner and <main>
+  else document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
   renderTopStats();
-  addEventListener('hashchange', route);
+  if (!X) addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());
-  route();
+  if (X) X.attachEngine({ route, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => { T.showHistory = true; openTutor(); },
+    accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
+  else route();
   if (S.settings.apiKey && !S.settings.models.length) detectModels().catch(() => { });
 }
 
@@ -2365,7 +2627,7 @@ function filterBanner() {
 function whatsNewButton() {
   const ns = newSources();
   if (!ns.length) return null;
-  return h('button', { class: 'btn ai', style: { marginTop: '14px', marginLeft: '8px' }, onclick: () => go('#/new') }, '✨ Show me only what’s new');
+  return h('button', { class: 'btn ai whatsnewbtn', onclick: () => go('#/new') }, '✨ Show me only what’s new');
 }
 
 /* ---------- "What's new" view ---------- */
@@ -2381,7 +2643,8 @@ function whatsNewView() {
   const pbNew = FULL_COURSE.flatMap(c => c.debug.filter(d => ids.includes(srcOfItem(d, c))));
   const filterOnly = () => setSrcFilter(ids);
   const runNew = () => { setSrcFilter(ids); startRun(ALL_EX.slice(), { title: '✨ New exercises', count: 15, back: '#/new' }); };
-  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')),
+  shellChrome({ sub: true, crumbs: [[t('view.whatsNew')]], back: HOME() });
+  view(backBtn(t('nav.home'), HOME()),
     h('h1', {}, none ? t('view.latest') : t('view.whatsNew')),
     h('p', { class: 'muted' }, ids.map(id => `${SRC_BY_ID[id].emoji || '📗'} ${SRC_BY_ID[id].title} (pages ${SRC_BY_ID[id].pages})`).join(' · ') + (none ? ' — already marked as seen.' : '')),
     h('div', { class: 'statgrid', style: { gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))' } },
@@ -2391,7 +2654,7 @@ function whatsNewView() {
       h('button', { class: 'btn', onclick: runNew }, `🎯 Practice new exercises (${exNew.length})`),
       pbNew.length ? h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/drill/' + pbNew[0].id); } }, `🔧 New debug drills (${pbNew.length})`) : null,
       h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/cards'); } }, '🃏 New flashcards'),
-      none ? null : h('button', { class: 'btn ghost', onclick: () => { markSeen(ids); applySourceFilter(); toast('Marked as seen ✔'); go('#/'); } }, '✔ Mark as seen')),
+      none ? null : h('button', { class: 'btn ghost', onclick: () => { markSeen(ids); applySourceFilter(); toast('Marked as seen ✔'); go(HOME()); } }, '✔ Mark as seen')),
     newChs.length ? h('h2', { style: { marginBottom: '12px' } }, 'New chapters') : null,
     newChs.length ? h('div', { class: 'chapters' }, ...newChs.map((c, i) => { const card = h('button', { class: 'chcard', style: { animationDelay: i * 50 + 'ms' }, onclick: () => go('#/ch/' + c.id) }, h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `Chapter ${c.num}`), h('h3', {}, c.title), h('p', {}, c.subtitle), h('div', { class: 'tiny' }, `${c.sections.length} sections · ${c.exercises.length} exercises · ${c.debug.length} drills`)); setAccent(card, c); return card; })) : null,
     enriched.length ? h('h2', { style: { margin: '28px 0 6px' } }, 'Existing sections that got new material') : null,
@@ -2404,7 +2667,7 @@ const DECK = { open: false, expanded: {} };
 function toggleSourcesDeck(force) { DECK.open = force ?? !DECK.open; renderSourcesDeck(); }
 function renderSourcesDeck() {
   let d = $('.srcdeck');
-  if (!d) { d = h('div', { class: 'srcdeck' }); $('.topbar').after(d); }
+  if (!d) { d = h('div', { class: 'srcdeck' }); ($('.topbar') || $('.ns-top') || document.body.firstChild).after(d); }
   d.classList.toggle('open', DECK.open);
   $('.srcbtn')?.classList.toggle('on', DECK.open || !!activeSrcSet());
   d.innerHTML = '';
@@ -2835,7 +3098,9 @@ const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
+const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
 function openAccountMenu(tab = 'profile') {
+  if (SHL()) { closeTutor(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
   modal((box, close) => {
     box.classList.add('accbox');
     const body = h('div', { class: 'accbody' });
@@ -2853,7 +3118,8 @@ function openAccountMenu(tab = 'profile') {
 
 const ACC_VIEWS = {
   /** ⚙️ Settings: the AI (Gemini for the tutor, Claude optionally), how the app looks and studies, this subject. */
-  settings(body, close) {
+  /** opts.only = 'ai': just the AI sections (the shell has its own page for language and appearance). */
+  settings(body, close, opts = {}) {
     const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
     // — Gemini (the tutor and every in-app AI helper)
     const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': 'Gemini API key' });
@@ -2874,8 +3140,8 @@ const ACC_VIEWS = {
     const cmodel = h('select', { 'aria-label': 'Claude model' }, h('option', { value: '' }, 'Newest Sonnet (recommended)'));
     const savedModel = jgetA('claudeModel', ''); if (savedModel) cmodel.append(h('option', { value: savedModel, selected: true }, savedModel));
     const cbudget = h('input', { type: 'number', min: 1, step: 1, value: jgetA('claudeBudget', 15), style: { width: '90px' }, 'aria-label': 'Spending limit per subject' });
-    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': 'Spending limit per curriculum step' });
-    const curProv = h('select', { 'aria-label': 'AI for new curricula' }, ...[['', 'Recommended (the Claude app for cloud accounts)'], ['claudeapp', '💬 Claude app — your Claude plan'], ['auto', 'Automatic — an API key here'], ['claude', 'Claude — API key'], ['gemini', 'Gemini — free key']].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
+    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': 'Spending limit per Roadmap step' });
+    const curProv = h('select', { 'aria-label': 'AI for new Roadmaps' }, ...[['', 'Recommended (the Claude app for cloud accounts)'], ['claudeapp', '💬 Claude app — your Claude plan'], ['auto', 'Automatic — an API key here'], ['claude', 'Claude — API key'], ['gemini', 'Gemini — free key']].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
     const cstat = h('div', { class: 'tiny' });
     const checkClaude = async () => {
       const k = ckey.value.trim();
@@ -2886,13 +3152,13 @@ const ACC_VIEWS = {
       catch (e) { cstat.textContent = '❌ ' + e.message; return false; }
     };
     const claude = !CL ? h('p', { class: 'tiny' }, 'This installation has no Claude module.') : h('div', {},
-      h('p', { class: 'tiny' }, 'Optional. Claude builds subjects from your sources (✨ Create with Claude) and curricula. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.'),
+      h('p', { class: 'tiny' }, 'Optional. Claude builds subjects from your sources (✨ Create with Claude) and Roadmaps. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.'),
       h('div', { class: 'field' }, h('label', {}, 'Claude API key ', tip('From the Claude Console (platform.claude.com → API keys). It stays in this browser: never uploaded to the noema-lite cloud, not part of backups. Leave it empty to remove it.')), ckey,
         h('label', { class: 'row tiny' }, remember, 'Remember it on this device (untick on a shared computer)'),
         h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: checkClaude }, '✔️ Check the key'), CL.Key.get(acc) ? h('button', { class: 'btn small ghost', onclick: () => { CL.Key.forget(acc); ckey.value = ''; cstat.textContent = '🗑 Removed from this device.'; } }, 'Remove the key') : null), cstat),
       h('div', { class: 'field' }, h('label', {}, 'Claude model ', tip('“Sonnet” gives very good courses for its price; “Opus” is the strongest and costs more; “Haiku” is cheaper but weaker. Check the key to list the models your key can use.')), cmodel),
-      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Limit per subject ($)'), cbudget), h('div', { class: 'field' }, h('label', {}, 'Limit per curriculum step ($)'), nbudget)),
-      h('div', { class: 'field' }, h('label', {}, 'AI for new curricula ', tip('Preselected when you create or import a curriculum. The Claude app (your Claude plan) is usually the cheapest for curricula; an API key or Gemini runs everything here.')), curProv),
+      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Limit per subject ($)'), cbudget), h('div', { class: 'field' }, h('label', {}, 'Limit per Roadmap step ($)'), nbudget)),
+      h('div', { class: 'field' }, h('label', {}, 'AI for new Roadmaps ', tip('Preselected when you create or import a Roadmap. The Claude app (your Claude plan) is usually the cheapest for Roadmaps; an API key or Gemini runs everything here.')), curProv),
       h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => { close(); Noema.claudeGuide(); } }, '✨ Create a subject with Claude'), h('button', { class: 'btn small', onclick: () => openAccountMenu('help') }, '❓ How to set up Claude (A · B · C)')));
     if (CL && CL.Key.get(acc)) setTimeout(checkClaude, 0);
     // — display & studying
@@ -2916,10 +3182,10 @@ const ACC_VIEWS = {
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(
       accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
-      accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and curricula: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
+      accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and Roadmaps: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
       accSection('🗣️', 'Language of the AI conversations', { status: { ok: true, text: chatLang() ? langName(chatLang()) : 'as the course' }, body: langBox }),
-      accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
-      accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
+      opts.only === 'ai' ? null : accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
+      opts.only === 'ai' ? null : accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
           S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
@@ -2966,16 +3232,19 @@ const ACC_VIEWS = {
   async subjects(body) {
     const list = await Noema.subjectsFor(ACCOUNT.id);
     const set = accountSettings(); const hidden = new Set(set.hiddenSubjects || []);
+    const CU = window.NoemaCurriculum, on = id => CU?.stepsOf ? CU.stepsOf(ACCOUNT.id, id).length : 0;   // 📦 how many curriculum steps a subject teaches (none: 📚 on the Shelf)
     body.append(h('p', { class: 'muted' }, 'Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.'),
+      CU ? h('p', { class: 'tiny' }, '🧭 The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).') : null,
       h('div', { class: 'sublist' }, ...list.map(s => h('div', { class: 'subrow' },
         h('label', { class: 'switch' }, h('input', { type: 'checkbox', checked: !hidden.has(s.id), onchange: e => { e.target.checked ? hidden.delete(s.id) : hidden.add(s.id); putAccountSettings({ hiddenSubjects: [...hidden] }); } }), h('i')),
         h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
-        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises`)),
+        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises${CU ? (on(s.id) ? ` · 🧭 on ${on(s.id)} Roadmap step${on(s.id) === 1 ? '' : 's'}` : ' · 📚 on the Shelf') : ''}`)),
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
         h('button', { class: 'iconbtn', title: 'Rename, describe or delete', 'aria-label': 'Edit ' + s.title, onclick: () => Noema.editSubject(s, { onChange: () => openAccountMenu('subjects') }) }, '✏️'),
         s.origin !== 'library' ? h('button', { class: 'iconbtn', title: 'Share or make public', onclick: () => Noema.share(s) }, '🔗') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
+        CU && Noema.openShelf ? h('button', { class: 'btn', onclick: () => Noema.openShelf(ACCOUNT.id) }, '📚 Open the Shelf') : null,
         h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, `⬇️ Export “${SUBJ.title}” (package with its source files)`)));
   },
@@ -3116,6 +3385,7 @@ ACC_VIEWS.help = function (body) {
 
 /* ---------- sync indicator ---------- */
 function wireSyncDot() {
+  if (SHL()) return;   // the shell paints its own (engine/shell.js)
   const dot = $('#syncdot'); if (!dot) return;
   if (ACCOUNT.kind !== 'cloud' || !window.NoemaCloud) { dot.remove(); return; }
   const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? 'Sync error: ' + s.error : s.syncing ? 'Syncing…' : s.pending ? 'Changes waiting to sync' : 'All changes synced'; };
@@ -3172,17 +3442,18 @@ const GUIDES = {
     'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.',
     '**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.',
     `**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.`,
-    '**Way C — a whole curriculum with your Claude plan (⭐ recommended for curricula, usually the cheapest):** set up the connector as in way B, then in 🧭 Curricula choose **💬 Claude app** when you create or import a curriculum. Copy the one message noema-lite shows into a Claude chat: Claude builds the map, plans the chapters and prepares the queued steps; they appear on the map by themselves. No API cost — the bigger the curriculum, the bigger the saving.',
+    '**Way C — a whole Roadmap with your Claude plan (⭐ recommended for Roadmaps, usually the cheapest):** set up the connector as in way B, then in 🧭 Roadmaps choose **💬 Claude app** when you create or import a Roadmap. Copy the one message noema-lite shows into a Claude chat: Claude builds the Roadmap, plans the chapters and prepares the queued steps; they appear on the Roadmap by themselves. No API cost — the bigger the Roadmap, the bigger the saving.',
     'Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.',
     'Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.'],
     notes: ['Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
-  curricula: { icon: '🧭', title: 'Curricula: from a goal to a map of steps', who: 'Everyone with a Claude API key or a Gemini key', steps: [
-    'Subject picker → **🧭 Curricula** (or 🧭 in the top bar) → **➕ New curriculum**.',
-    'Type what you want to master, your starting point and the depth. Four AI agents map it: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.',
-    'The map shows three parts. **open** steps (green open padlock) can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.',
+  curricula: { icon: '🧭', title: 'Roadmaps: from a goal to a Roadmap of steps', who: 'Everyone with a Claude API key or a Gemini key', steps: [
+    'Subject picker → **🧭 Roadmaps** (or 🧭 in the top bar) → **➕ New Roadmap**.',
+    'Type what you want to master, your starting point and the depth. Four AI agents lay it out: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.',
+    'The Roadmap shows three parts. **open** steps (green open padlock) can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.',
     'Every step becomes a full subject (theory, exercises, flashcards, drills, tutor), prepared in the background a few steps ahead while the app is open — with Claude from official sources found on the web, or with Gemini and Google Search.',
-    'A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).'],
-    notes: ['Curricula and prepared steps are saved in your account (cloud) like your subjects.', 'Claude costs a few dollars per prepared step (limit per step in ⚙️ of the map); Gemini’s free quota is limited.'] },
+    'A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).',
+    'Already have a subject for a step? On the step: **📦 Use a subject I have**. Only that step is re-planned to follow the subject (🔄 until its new plan is here); it is never generated. Subjects on no step wait on the **📚 Shelf** (bottom of the subject picker): study them there, or **🧭 Put on a Roadmap…**.'],
+    notes: ['Roadmaps and prepared steps are saved in your account (cloud) like your subjects.', 'Claude costs a few dollars per prepared step (limit per step in ⚙️ of the Roadmap); Gemini’s free quota is limited.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
     `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
     'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',

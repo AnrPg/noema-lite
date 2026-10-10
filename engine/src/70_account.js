@@ -12,7 +12,9 @@ const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
+const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
 function openAccountMenu(tab = 'profile') {
+  if (SHL()) { closeTutor(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
   modal((box, close) => {
     box.classList.add('accbox');
     const body = h('div', { class: 'accbody' });
@@ -30,7 +32,8 @@ function openAccountMenu(tab = 'profile') {
 
 const ACC_VIEWS = {
   /** ⚙️ Settings: the AI (Gemini for the tutor, Claude optionally), how the app looks and studies, this subject. */
-  settings(body, close) {
+  /** opts.only = 'ai': just the AI sections (the shell has its own page for language and appearance). */
+  settings(body, close, opts = {}) {
     const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
     // — Gemini (the tutor and every in-app AI helper)
     const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': 'Gemini API key' });
@@ -51,8 +54,8 @@ const ACC_VIEWS = {
     const cmodel = h('select', { 'aria-label': 'Claude model' }, h('option', { value: '' }, 'Newest Sonnet (recommended)'));
     const savedModel = jgetA('claudeModel', ''); if (savedModel) cmodel.append(h('option', { value: savedModel, selected: true }, savedModel));
     const cbudget = h('input', { type: 'number', min: 1, step: 1, value: jgetA('claudeBudget', 15), style: { width: '90px' }, 'aria-label': 'Spending limit per subject' });
-    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': 'Spending limit per curriculum step' });
-    const curProv = h('select', { 'aria-label': 'AI for new curricula' }, ...[['', 'Recommended (the Claude app for cloud accounts)'], ['claudeapp', '💬 Claude app — your Claude plan'], ['auto', 'Automatic — an API key here'], ['claude', 'Claude — API key'], ['gemini', 'Gemini — free key']].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
+    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': 'Spending limit per Roadmap step' });
+    const curProv = h('select', { 'aria-label': 'AI for new Roadmaps' }, ...[['', 'Recommended (the Claude app for cloud accounts)'], ['claudeapp', '💬 Claude app — your Claude plan'], ['auto', 'Automatic — an API key here'], ['claude', 'Claude — API key'], ['gemini', 'Gemini — free key']].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
     const cstat = h('div', { class: 'tiny' });
     const checkClaude = async () => {
       const k = ckey.value.trim();
@@ -63,13 +66,13 @@ const ACC_VIEWS = {
       catch (e) { cstat.textContent = '❌ ' + e.message; return false; }
     };
     const claude = !CL ? h('p', { class: 'tiny' }, 'This installation has no Claude module.') : h('div', {},
-      h('p', { class: 'tiny' }, 'Optional. Claude builds subjects from your sources (✨ Create with Claude) and curricula. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.'),
+      h('p', { class: 'tiny' }, 'Optional. Claude builds subjects from your sources (✨ Create with Claude) and Roadmaps. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.'),
       h('div', { class: 'field' }, h('label', {}, 'Claude API key ', tip('From the Claude Console (platform.claude.com → API keys). It stays in this browser: never uploaded to the noema-lite cloud, not part of backups. Leave it empty to remove it.')), ckey,
         h('label', { class: 'row tiny' }, remember, 'Remember it on this device (untick on a shared computer)'),
         h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: checkClaude }, '✔️ Check the key'), CL.Key.get(acc) ? h('button', { class: 'btn small ghost', onclick: () => { CL.Key.forget(acc); ckey.value = ''; cstat.textContent = '🗑 Removed from this device.'; } }, 'Remove the key') : null), cstat),
       h('div', { class: 'field' }, h('label', {}, 'Claude model ', tip('“Sonnet” gives very good courses for its price; “Opus” is the strongest and costs more; “Haiku” is cheaper but weaker. Check the key to list the models your key can use.')), cmodel),
-      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Limit per subject ($)'), cbudget), h('div', { class: 'field' }, h('label', {}, 'Limit per curriculum step ($)'), nbudget)),
-      h('div', { class: 'field' }, h('label', {}, 'AI for new curricula ', tip('Preselected when you create or import a curriculum. The Claude app (your Claude plan) is usually the cheapest for curricula; an API key or Gemini runs everything here.')), curProv),
+      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Limit per subject ($)'), cbudget), h('div', { class: 'field' }, h('label', {}, 'Limit per Roadmap step ($)'), nbudget)),
+      h('div', { class: 'field' }, h('label', {}, 'AI for new Roadmaps ', tip('Preselected when you create or import a Roadmap. The Claude app (your Claude plan) is usually the cheapest for Roadmaps; an API key or Gemini runs everything here.')), curProv),
       h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => { close(); Noema.claudeGuide(); } }, '✨ Create a subject with Claude'), h('button', { class: 'btn small', onclick: () => openAccountMenu('help') }, '❓ How to set up Claude (A · B · C)')));
     if (CL && CL.Key.get(acc)) setTimeout(checkClaude, 0);
     // — display & studying
@@ -93,10 +96,10 @@ const ACC_VIEWS = {
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(
       accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
-      accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and curricula: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
+      accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and Roadmaps: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
       accSection('🗣️', 'Language of the AI conversations', { status: { ok: true, text: chatLang() ? langName(chatLang()) : 'as the course' }, body: langBox }),
-      accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
-      accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
+      opts.only === 'ai' ? null : accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
+      opts.only === 'ai' ? null : accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
           S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
@@ -143,16 +146,19 @@ const ACC_VIEWS = {
   async subjects(body) {
     const list = await Noema.subjectsFor(ACCOUNT.id);
     const set = accountSettings(); const hidden = new Set(set.hiddenSubjects || []);
+    const CU = window.NoemaCurriculum, on = id => CU?.stepsOf ? CU.stepsOf(ACCOUNT.id, id).length : 0;   // 📦 how many curriculum steps a subject teaches (none: 📚 on the Shelf)
     body.append(h('p', { class: 'muted' }, 'Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.'),
+      CU ? h('p', { class: 'tiny' }, '🧭 The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).') : null,
       h('div', { class: 'sublist' }, ...list.map(s => h('div', { class: 'subrow' },
         h('label', { class: 'switch' }, h('input', { type: 'checkbox', checked: !hidden.has(s.id), onchange: e => { e.target.checked ? hidden.delete(s.id) : hidden.add(s.id); putAccountSettings({ hiddenSubjects: [...hidden] }); } }), h('i')),
         h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
-        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises`)),
+        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises${CU ? (on(s.id) ? ` · 🧭 on ${on(s.id)} Roadmap step${on(s.id) === 1 ? '' : 's'}` : ' · 📚 on the Shelf') : ''}`)),
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
         h('button', { class: 'iconbtn', title: 'Rename, describe or delete', 'aria-label': 'Edit ' + s.title, onclick: () => Noema.editSubject(s, { onChange: () => openAccountMenu('subjects') }) }, '✏️'),
         s.origin !== 'library' ? h('button', { class: 'iconbtn', title: 'Share or make public', onclick: () => Noema.share(s) }, '🔗') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
+        CU && Noema.openShelf ? h('button', { class: 'btn', onclick: () => Noema.openShelf(ACCOUNT.id) }, '📚 Open the Shelf') : null,
         h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, `⬇️ Export “${SUBJ.title}” (package with its source files)`)));
   },
@@ -293,6 +299,7 @@ ACC_VIEWS.help = function (body) {
 
 /* ---------- sync indicator ---------- */
 function wireSyncDot() {
+  if (SHL()) return;   // the shell paints its own (engine/shell.js)
   const dot = $('#syncdot'); if (!dot) return;
   if (ACCOUNT.kind !== 'cloud' || !window.NoemaCloud) { dot.remove(); return; }
   const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? 'Sync error: ' + s.error : s.syncing ? 'Syncing…' : s.pending ? 'Changes waiting to sync' : 'All changes synced'; };

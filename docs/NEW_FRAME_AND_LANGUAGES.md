@@ -30,11 +30,13 @@ window.NoemaShell?.registerWorld('lang', {
   },
   create() { /* "+ New language" on the Languages tab and in Discover */ },
   menu() { return [/* the Languages tab's ⋮: { label, sub?, icon?, run } */]; },
-  today(box, { h, L, open, go }) { /* optional: a "continue" card for the course you were in, on Today */ },
+  today(box, { h, L, open, go, lead }) { /* optional: a "continue" card for the course you were in, on Today; with lead
+    (nothing else to continue) draw only the course the learner was in and return true, so it leads the page */ },
 });
 ```
 
-Every member is optional. Without a registered world the Languages tab lists the subjects with `kind: 'language'` (none
+Every member is optional. `chrome({ tutor })` (and `page`) may name what the character button opens on that page (a
+course: its own tutor). Done on the `languages` branch on 2026-10-09: docs/LANGUAGES.md §8 *Inside the frame*. Without a registered world the Languages tab lists the subjects with `kind: 'language'` (none
 today) and says there are no languages yet. Menus and ⋮ items take `{ label, sub, icon, run, href, danger }` (or `'-'` for a line).
 
 ## Where the two branches will meet (merge conflicts)

@@ -6,7 +6,8 @@
    ===================================================================================== */
 (function () {
   'use strict';
-  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseKey: '', autoBackupMinutes: 5, askSubjectOnStart: true }, window.NOEMA_CONFIG || {});
+  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseKey: '', autoBackupMinutes: 5, askSubjectOnStart: false, shell: true, onboarding: true }, window.NOEMA_CONFIG || {});
+  const SHELL = () => !!window.NoemaShell && CFG.shell !== false;   // the new frame (engine/shell.js): tabs, Today, Knowledge, … docs/UI_MAP.md
   const LOCAL = window.NOEMA_CONFIG_LOCAL || {};            // config.local.js — never committed (e.g. a default Gemini key)
   const REG = window.NOEMA_REGISTRY || { groups: [], subjects: [], accounts: [] };
   const P = 'noema1:';
@@ -42,7 +43,7 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slugify = s => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
   const stamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`; };
-  const toastL = (m, ms = 2400) => { if (window.toast) return window.toast(m, ms); let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); } const x = el('div', { class: 'toast' }, m); t.append(x); setTimeout(() => x.remove(), ms); };
+  const toastL = (m, ms = 2400) => { m = plainText(m); if (window.toast) return window.toast(m, ms); let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); } const x = el('div', { class: 'toast' }, m); t.append(x); setTimeout(() => x.remove(), ms); };
   async function sha256(s) { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); } catch (e) { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) | 0; return 'x' + h; } }
 
   /* ---------------- IndexedDB (imported packs, folder handles, restore points) ---------------- */
@@ -197,7 +198,8 @@
       const newer = !!(extra.version && extra.version !== (p.version || null));
       list.push(newer
         ? { ...m, ...extra, origin: 'imported', counts: extra.counts || p.counts || countPack(p), version: extra.version, updateAvailable: true }
-        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner });
+        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner,
+          chapters: (p.chapters || []).map(c => ({ id: c.id, num: c.num, sections: (c.sections || []).length })) });
     });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
@@ -215,6 +217,8 @@
     if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`]).catch(e => console.warn('[delete subject]', e));
     if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(() => { });
     if (s.curriculum && window.NoemaCurriculum) { const c = NoemaCurriculum.get(acc, s.curriculum); if (c?.nodes[s.node]) { c.nodes[s.node].pack = null; NoemaCurriculum.save(acc, c); } }
+    // 📦 every other step it teaches (attached to them): the step is planned and prepared the usual way again
+    if (window.NoemaCurriculum?.stepsOf) for (const { c, nid } of NoemaCurriculum.stepsOf(acc, s.id)) { if (c.nodes[nid].pack?.assigned) NoemaCurriculum.Edit.detach(acc, c.id, nid); else { const cc = NoemaCurriculum.get(acc, c.id); cc.nodes[nid].pack = null; NoemaCurriculum.save(acc, cc); } }
     if (window.NOEMA_PACKS) delete window.NOEMA_PACKS[s.id];
   }
   /** ✏️ Edit a subject: name, description, hide, delete (and share for your own). */
@@ -282,15 +286,39 @@
     catch (e) { try { await loadCSS('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'); } catch (e2) { console.warn('[Noema] math rendering unavailable'); } }
   }
 
+  /* ---------------- 🧹 the new frame speaks without the older screens' emoji ----------------
+     A dialog of the older screens opened from the new frame, the Roadmap page and the toasts lose their pictographs (the
+     frame uses line icons). Kept: arrows and ©®™, anything inside an element whose class names an emoji (a subject's own
+     icon: .nx-emo, .cm-emo…), [data-emoji], what the learner typed (inputs) and lesson text (.md, .lesson). */
+  const EMO = /(?![\u00A9\u00AE\u2122\u2190-\u21FF\u25A0-\u25FF])[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}](?:\uFE0F|\u20E3|[\u{1F3FB}-\u{1F3FF}]|\u200D[\p{Extended_Pictographic}\u2640\u2642])*\uFE0F?[ \u00A0]?/gu;
+  const plainOn = () => !!(SHELL() && NoemaShell.mounted);
+  const plainText = t => { if (typeof t !== 'string') return t; const r = t.replace(EMO, ''); return r === t ? t : r.replace(/[ \u00A0]{2,}/g, ' ').replace(/^[ \u00A0]+(?=\S)/, ''); };
+  const KEEP = '[class*="emo"],[data-emoji],.md,.lesson,.ns-ico,script,style,textarea';
+  function plainTree(root) {
+    if (!root || !plainOn()) return root;
+    if (root.nodeType === 3) { if (!root.parentElement?.closest(KEEP)) { const t = plainText(root.nodeValue); if (t !== root.nodeValue) root.nodeValue = t; } return root; }
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = []; let n;
+    while ((n = w.nextNode())) list.push(n);
+    for (const x of list) plainTree(x);
+    root.querySelectorAll?.('[title],[aria-label],[placeholder]').forEach(e => { for (const a of ['title', 'aria-label', 'placeholder']) { const v = e.getAttribute(a); if (v) { const t = plainText(v); if (t !== v) e.setAttribute(a, t); } } });
+    return root;
+  }
+  /** keep a part of the page plain while it redraws itself */
+  function plainWatch(root) {
+    if (!root || !plainOn() || root._plain) return root; root._plain = true; plainTree(root);
+    new MutationObserver(ms => { for (const m of ms) { if (m.type === 'characterData') plainTree(m.target); else m.addedNodes.forEach(x => plainTree(x)); } }).observe(root, { childList: true, subtree: true, characterData: true });
+    return root;
+  }
+
   /* ---------------- overlays (account + subject pickers) ---------------- */
   function overlay(build, { closable = true } = {}) {
     const o = el('div', { class: 'noema-overlay' }); const box = el('div', { class: 'noema-ovbox' }); o.append(box);
     const close = () => { o.classList.add('out'); setTimeout(() => o.remove(), 250); };
     if (closable) o.addEventListener('click', e => { if (e.target === o) close(); });
-    build(box, close); document.body.append(o); return close;
+    build(box, close); plainWatch(box); document.body.append(o); return close;
   }
   function brandHead(title, sub) {
-    return el('div', { class: 'noema-ovhead' }, el('div', { class: 'logo' }, '◆'), el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
+    return el('div', { class: 'noema-ovhead' }, el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
   }
   /** The interface language (engine/i18n.js): the account's settings.lang (else the last account's), else the browser's. */
   const uiPref = (acc = KV.acc || jget(P + 'current', {}).acc) => acc ? jget(`${P}${acc}:a:settings`, {}).lang : null;
@@ -360,42 +388,105 @@
     };
     draw();
   }
-  async function pickSubject(acc, { closable = false } = {}) {
-    const subs = (await subjectsFor(acc)).filter(s => !s.hidden && !s.curriculum);   // curriculum steps live in 🧭 Curricula
+  /* ---------------- 📚 the Shelf (docs/CURRICULUM.md §9): subjects that teach no step of any curriculum ---------------- */
+  /** The subjects on the Shelf: studyable, but the curriculum map is the way to study. (Language courses are never on it.) */
+  async function shelf(acc) {
+    const CU = window.NoemaCurriculum, on = new Set();
+    for (const c of CU?.list(acc) || []) for (const n of Object.values(c.nodes || {})) if (n.pack?.id) on.add(n.pack.id);
+    const onItsWay = s => { const c = s.curriculum && CU?.get(acc, s.curriculum); return !!(c?.nodes[s.node] && !c.nodes[s.node].pack); };   // made for a step that has not picked it up yet
+    return (await subjectsFor(acc)).filter(s => !s.hidden && !on.has(s.id) && !onItsWay(s) && s.kind !== 'language' && !String(s.id).startsWith('lang:'));
+  }
+  /** The curriculum step a subject teaches → { id, node } | null: the step it was opened from on the map (one subject may
+      teach several steps; curmap.js viaStep), else the step it was made for while that step still uses it, else the first
+      step it is attached to — or the step it was made for that has not picked it up yet. */
+  function stepOf(acc, meta, pack) {
+    const CU = window.NoemaCurriculum, ref = pack?.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);
+    if (!CU?.stepsOf) return ref;
+    const on = CU.stepsOf(acc, meta.id), uses = r => !!r && on.some(x => x.c.id === r.id && x.nid === r.node);
+    let via = null; try { via = JSON.parse(sessionStorage.getItem('noema-device:viaStep') || 'null'); } catch (e) { }
+    if (via?.acc === acc && via.sid === meta.id && uses(via)) return { id: via.id, node: via.node };
+    if (uses(ref)) return ref;
+    if (on.length) return { id: on[0].c.id, node: on[0].nid };
+    const c = ref && CU.get(acc, ref.id); return ref && (!c || !c.nodes[ref.node]?.pack?.id) ? ref : null;
+  }
+  /** A subject's pack by its id (library, private or imported) — e.g. one attached to a curriculum step. */
+  async function loadSubject(acc, id) { const meta = (await subjectsFor(acc)).find(s => s.id === id); if (!meta) throw new Error('That subject is not in your library.'); return getPack(acc, meta); }
+  /** A subject that just arrived (imported, from 🌍 Explore, shared with you) is on the Shelf: say how to put it on a map. */
+  function landed(acc, s) {
+    if (!s || !window.NoemaCurMap || !window.NoemaCurriculum || NoemaCurriculum.stepsOf(acc, s.id).length) return;
+    setTimeout(() => toastL(tr('pick.onShelf', { title: s.title || s.id }, acc), 6000), 3800);
+  }
+  /** The Shelf's subjects as chips, by group: tap = study it; ✏️ edit · 🔗 share · 🧭 put it on a map. → { list, draw(subs) } */
+  function shelfChips(acc, { q, onPick, onChange }) {
     const groups = (REG.groups || []).slice(); if (!groups.some(g => g.id === 'other')) groups.push({ id: 'other', title: tr('pick.other', null, acc), emoji: '✨' });
+    const list = el('div'); let subs = [];
+    const draw = next => {
+      if (next) subs = next; list.innerHTML = '';
+      const term = (q?.value || '').trim().toLowerCase(); let n = 0;
+      groups.forEach(g => {
+        const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
+        if (!items.length) return;
+        list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
+          el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
+            const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
+              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
+            const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange }); } }, '✏️');
+            const toMap = window.NoemaCurMap?.attachDialog ? el('button', { class: 'noema-mapbtn', title: tr('pick.putOnMap', null, acc), 'aria-label': `${tr('pick.putOnMap', null, acc)} ${s.title}`, onclick: e => { e.stopPropagation(); NoemaCurMap.attachDialog(acc, { subject: s, onDone: onChange }); } }, '🧭') : null;
+            return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗'), toMap); }))));
+      });
+      if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
+    };
+    return { list, draw };
+  }
+  /** 📚 The Shelf on its own (from 🧭 Curricula and ⚙️ → Subjects). onStudy(id) — default: open the subject. */
+  async function openShelf(acc, { onStudy } = {}) {
+    const study = id => onStudy ? onStudy(id) : Noema.switchTo(acc, id);
+    overlay(async (box, close) => {
+      const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
+      const S = shelfChips(acc, { q, onPick: s => { close(); study(s.id); }, onChange: async () => S.draw(await shelf(acc)) });
+      const subs = await shelf(acc);
+      box.append(brandHead(tr('pick.shelf', { n: subs.length }, acc), tr('pick.shelfSub', null, acc)), q, S.list,
+        el('div', { class: 'row noema-ovfoot' }, window.NoemaCurMap ? el('button', { class: 'btn small', onclick: () => { close(); NoemaCurMap.library(acc, { onStudy }); } }, tr('pick.curricula', null, acc)) : null, el('button', { class: 'btn small', onclick: close }, tr('pick.close', null, acc))));
+      S.draw(subs);
+    }, { closable: true });
+  }
+  async function pickSubject(acc, { closable = false } = {}) {
+    let subs = await shelf(acc);   // 📚 on no step of any curriculum
     const a = getAccount(acc) || { name: acc, emoji: '🙂' };
+    const CU = window.NoemaCurriculum, CM = () => window.NoemaCurMap;
     return new Promise(resolve => {
       overlay((box, close) => {
-        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => draw() });
-        const list = el('div');
-        const draw = () => {
-          list.innerHTML = '';
-          const term = q.value.trim().toLowerCase();
-          let n = 0;
-          groups.forEach(g => {
-            const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
-            if (!items.length) return;
-            list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
-              el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
-                const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
-                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
-                const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
-                return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
-          });
-          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? tr('pick.noMatch', null, acc) : tr('pick.none', null, acc))));
-        };
-        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const pick = s => { close(); resolve(s); };
+        const onStudy = async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) pick(s); };
+        const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
+        const S = shelfChips(acc, { q, onPick: pick, onChange: async () => { subs = await shelf(acc); S.draw(subs); drawCurs(); sum.textContent = tr('pick.shelf', { n: subs.length }, acc); } });
+        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
-        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
-        // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
+        Notes.on(all => { const pending = all.filter(x => !x.kind); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
+        // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
-          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, tr('pick.subjects', null, acc), el('small', {}, tr('pick.subjectsSub', null, acc))),
-          (REG.languages || []).length || langAccount(acc).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 Languages', el('small', {}, 'several at once')) : null,
-          el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
-        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
-          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
+          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))),
+          (REG.languages || []).length || langAccount(acc).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 Languages', el('small', {}, 'several at once')) : null);
+        const curs = el('div', { class: 'pick-curs' });
+        const drawCurs = () => {
+          curs.innerHTML = ''; const list = CU?.list(acc) || [];
+          if (!list.length) { curs.append(el('div', { class: 'tiny pick-nocur' }, tr('pick.noCurricula', null, acc), ' ', CM() ? el('button', { class: 'btn small', onclick: () => CM().create(acc, { onStudy }) }, tr('pick.newCurriculum', null, acc)) : null, ' ', CM() ? el('button', { class: 'btn small ghost', onclick: () => CM().importMap(acc, { onStudy }) }, tr('pick.importMap', null, acc)) : null)); return; }
+          curs.append(...list.slice(0, 6).map(c => { const sm = c.status === 'ready' ? CU.summary(acc, c) : null;
+            return el('button', { class: 'pick-cur', onclick: () => c.status === 'ready' || c.status === 'attach' ? CM()?.map(acc, c.id, { onStudy }) : CM()?.progress(acc, c, { onStudy }) },
+              el('b', {}, (c.shared && !c.shared.ended ? '👥 ' : '🧭 ') + (c.title || c.goal)), el('span', { class: 'tiny' }, sm ? `${sm.mastered}/${sm.total} · ${sm.open} open` : '⏳')); }),
+            list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => CM()?.library(acc, { onStudy }) }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
+        };
+        // 📚 the Shelf: folded away once the learner has a map (it remembers, per device, whether it was left open)
+        const SK = `${P}${acc}:pickShelfOpen`; let remembered = null; try { remembered = localStorage.getItem(SK); } catch (e) { }
+        const sum = el('summary', {}, tr('pick.shelf', { n: subs.length }, acc));
+        const shelfBox = el('details', { class: 'pick-shelf', open: remembered != null ? remembered === '1' : !(CU?.list(acc) || []).length || !CM() },
+          sum, el('p', { class: 'tiny' }, tr('pick.shelfSub', null, acc)), q, S.list);
+        sum.addEventListener('click', () => setTimeout(() => { try { localStorage.setItem(SK, shelfBox.open ? '1' : '0'); } catch (e) { } if (shelfBox.open && subs.length > 8) q.focus(); }, 0));   // only the learner's own choice is remembered
+        box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, curs, shelfBox,
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { landed(acc, s); pick(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { landed(acc, s); pick(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, tr('pick.close', null, acc)) : null));
-        draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
+        drawCurs(); S.draw(subs); if (shelfBox.open && subs.length > 8) setTimeout(() => q.focus(), 300);
+        const offC = CU?.onChange?.(() => { if (box.isConnected) drawCurs(); else offC?.(); });
       }, { closable });
     });
   }
@@ -404,7 +495,20 @@
   const langAccount = acc => ls.keys(`${P}${acc}:a:langcourse:`).map(k => jget(k, null)).filter(r => r && r.origin === 'account' && r.id);
   const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); if (m) return { ...m, id: 'lang:' + m.id, courseId: m.id, kind: 'language' };
     const r = KV.acc && langAccount(KV.acc).find(x => 'lang:' + x.id === id); return r ? { id: 'lang:' + r.id, courseId: r.id, title: r.title, languages: r.languages, kind: 'language', account: true } : null; };
-  const loadLangUI = async () => { const base = window.NOEMA_ENGINE_BASE || 'engine/'; await loadCSS(base + 'langui.css'); if (!window.NoemaLang) await loadScript(base + 'langcore.js'); if (!window.NoemaLangUI) await loadScript(base + 'langui.js'); };
+  let langCSS = null;
+  const loadLangUI = async () => { const base = window.NOEMA_ENGINE_BASE || 'engine/'; await (langCSS || (langCSS = loadCSS(base + 'langui.css'))); if (!window.NoemaLang) await loadScript(base + 'langcore.js'); if (!window.NoemaLangUI) await loadScript(base + 'langui.js'); };
+  /** A course's content: an account course from the device / the cloud; a library course with the learner's private refills (docs/LANGUAGES.md §10.1). */
+  async function langData(acc, meta) {
+    await loadLangUI();
+    if (!meta.account && !(window.NOEMA_LANGPACKS || {})[meta.courseId]) await loadScript(meta.path);
+    return meta.account ? NoemaLangUI.claude.loadCourse(acc, meta.courseId) : NoemaLangUI.claude.withPatch(acc, meta.courseId, window.NOEMA_LANGPACKS[meta.courseId]);
+  }
+  /** The depth of every word (word profiles), loaded after the course is open; again after the course is opened again. */
+  function langProfiles(meta) {
+    const have = () => (window.NOEMA_LANGPROFILES || {})[meta.courseId];
+    if (have()) { NoemaLangUI.addProfiles(have()); return; }
+    if (meta.profiles) loadScript(meta.profiles).then(() => { if (NoemaLangUI.UI.id === meta.courseId) NoemaLangUI.addProfiles(have()); }).catch(e => console.warn('[noema] word profiles', e));
+  }
   const LANG_FLAGS = { ar: '🇸🇦', he: '🇮🇱', zh: '🇨🇳', de: '🇩🇪', el: '🇬🇷', en: '🇬🇧', ru: '🇷🇺', tr: '🇹🇷', hi: '🇮🇳', fr: '🇫🇷', es: '🇪🇸', it: '🇮🇹', ja: '🇯🇵' };
   function pickLanguage(acc, onPick) {
     overlay((box, close) => {
@@ -417,18 +521,142 @@
   async function startLanguage(acc, meta) {
     KV.subj = meta.id; Noema.setCurrent(acc.id, meta.id);
     Noema.subject = { id: meta.id, title: meta.title, kind: 'language', tutor: {}, hero: {}, features: {} };
-    const base = window.NOEMA_ENGINE_BASE || 'engine/';
-    await loadCSS(base + 'langui.css');
-    if (!window.NoemaLang) await loadScript(base + 'langcore.js');
-    if (!meta.account && !(window.NOEMA_LANGPACKS || {})[meta.courseId]) await loadScript(meta.path);
-    if (!window.NoemaLangUI) await loadScript(base + 'langui.js');
-    // an account course comes from the device / the cloud; a library course gets the learner's private refills (docs/LANGUAGES.md §10.1)
-    const data = await (meta.account ? NoemaLangUI.claude.loadCourse(acc.id, meta.courseId) : NoemaLangUI.claude.withPatch(acc.id, meta.courseId, window.NOEMA_LANGPACKS[meta.courseId])).catch(e => e);
+    const data = await langData(acc.id, meta).catch(e => e);
     document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
     if (data instanceof Error) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, data.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
     NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data }); NoemaLangUI.claude.startPolling(acc.id);
-    if (meta.profiles) loadScript(meta.profiles).then(() => NoemaLangUI.addProfiles((window.NOEMA_LANGPROFILES || {})[meta.courseId])).catch(e => console.warn('[noema] word profiles', e));   // the depth of every word, loaded after the course is open
+    langProfiles(meta);
     AutoBackup.start(acc.id).catch(() => { });
+  }
+  /* ---------------- language courses inside the frame (docs/NEW_FRAME_AND_LANGUAGES.md, docs/LANGUAGES.md §8) ----------------
+     The Languages tab (#/lang) lists the learner's courses; #/lang/<course>/… draws a course inside the frame (NoemaLangUI.start
+     with a host: the frame's top bar and tabs stay; the course's own addresses #/c/…, #/fn/… live under it); Today gets a
+     "continue" card; the ⋮ holds the course's settings, its Claude task queue and the other courses. With shell: false none of
+     this runs: startLanguage takes the whole page, as before. */
+  const LANG_LAST = acc => `${P}${acc}:meta:lastLang`;   // device-local: the course you were in (Today's card, the tab's ⋮)
+  const langSum = acc => jget(`${P}${acc}:meta:langsum`, {}) || {};   // device-local: the next lesson the open course last showed (langui)
+  const langCourses = acc => [...(REG.languages || []).map(m => m.id), ...langAccount(acc).map(r => r.id)].filter((x, i, a) => a.indexOf(x) === i).map(id => langMeta('lang:' + id)).filter(Boolean);
+  const langDay = () => { const d = new Date(); return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 864e5); };   // = NoemaLang.dayNumber
+  const langHash = id => '#/lang/' + encodeURIComponent(id);
+  const langFlags = m => (m.languages || []).map(c => LANG_FLAGS[c] || c.toUpperCase()).join(' ');
+  const langNames = (codes, acc, loc = null) => { let dn = null; try { dn = new Intl.DisplayNames([loc || (window.NoemaI18n && NoemaI18n.lang(uiPref(acc))) || 'en', 'en'], { type: 'language' }); } catch (e) { } return codes.map(c => { try { return dn?.of(c) || c; } catch (e) { return c; } }).join(' · '); };
+  /** Progress without loading the course (7 MB): from the stored learner state (docs/LANGUAGES.md §5.6) — per language the words met
+      and the reviews due today; the next lesson as the course last showed it. */
+  function langProgress(acc, meta) {
+    const pre = `${P}${acc}:s:lang:${meta.courseId}:`, day = langDay(), set = jget(pre + 'settings', {}) || {};
+    const langs = (set.languages || meta.languages || []).filter(c => (meta.languages || []).includes(c));
+    const per = Object.fromEntries(langs.map(c => [c, { words: 0, due: 0, total: (meta.words || {})[c] || 0 }]));
+    let started = false;
+    for (const k of ls.keys(pre + 'lang:')) {
+      const m = k.slice(pre.length).match(/^lang:([^:]+):(node:.+|script)$/); if (!m || !per[m[1]]) continue;
+      for (const it of Object.values((jget(k, null) || {}).items || {})) {
+        if (!it || typeof it !== 'object') continue; started = true;
+        if (m[2] !== 'script') per[m[1]].words++;
+        for (const t of ['r', 'p']) if (it[t] && typeof it[t].due === 'number' && it[t].due <= day) per[m[1]].due++;
+      }
+    }
+    const sumOf = f => Object.values(per).reduce((a, x) => a + x[f], 0), words = sumOf('words'), total = sumOf('total');
+    return { langs, per, due: sumOf('due'), words, total, pct: total ? Math.min(1, words / total) : 0, started, sum: langSum(acc)[meta.courseId] || null };
+  }
+  /** The learner opens a course in the frame (Languages tab, Today, a link, ?subject=lang:<id>). */
+  const langOpen = id => window.NoemaShell?.go(langHash(id));
+  function langCreate() {
+    const acc = KV.acc;
+    loadLangUI().then(() => NoemaLangUI.newCourse(acc, { onCreated: r => langOpen(r.id) })).catch(e => toastL('⚠️ ' + e.message, 4000));
+  }
+  /** Choose another course: a sheet with every course. */
+  function langChooser() {
+    const S = window.NoemaShell; if (!S) return;
+    S.sheet(S.L('langOther'), (body, close) => body.append(langList(KV.acc, S, { onPick: id => { close(); langOpen(id); } })));
+  }
+  /** One row per course: flags, title, languages, words met, what is due today, the next lesson; a bar for the words met. */
+  function langList(acc, S, { onPick = langOpen, menus = false } = {}) {
+    const { h, L } = S, cur = jget(LANG_LAST(acc), null);
+    const list = langCourses(acc);
+    return h('div', { class: 'ns-list ns-langlist' }, ...list.map((m, i) => {
+      const pr = langProgress(acc, m), next = pr.sum?.next;
+      const names = langNames(pr.langs.length ? pr.langs : m.languages || [], acc), named = (m.languages || []).every(c => String(m.title).includes(langNames([c], acc, 'en')));
+      const sub = [named ? null : names, pr.started ? L('langWords', { n: pr.words }) : null, m.account ? L('langOwn') : null].filter(Boolean).join(' · ');
+      const line2 = pr.due ? L('langDue', { n: pr.due }) : next ? L('langNext', { lesson: `${next.step ? next.step + ' ' : ''}${next.title}` }) : pr.started ? L('langNothingDue') : null;
+      const row = h('button', { class: 'ns-item ns-langitem', 'data-course': m.courseId, style: { animationDelay: i * 30 + 'ms' }, onclick: () => onPick(m.courseId) },
+        S.icoTxt(h('span', { class: 'ns-langflags', style: { fontSize: (m.languages || []).length > 2 ? '.8rem' : '1.1rem', lineHeight: '1.1', whiteSpace: 'normal', textAlign: 'center' } }, langFlags(m)), (i % 4) + 1, 'emo'),
+        h('span', { class: 't' }, h('b', {}, m.title, m.courseId === cur ? h('span', { class: 'ns-muted', style: { fontWeight: 400 } }, ' · ' + L('langContinue').toLowerCase()) : null), h('small', {}, sub), line2 ? h('small', { class: 'ns-langdue' }, line2) : null, pr.total ? S.bar(pr.pct) : null),
+        pr.due ? S.pill(pr.due, 4) : S.h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'));
+      if (!menus) return row;
+      return h('div', { class: 'ns-itemwrap noema-chipwrap' }, row, S.menuButton([
+        { label: m.courseId === cur ? L('langContinue') : L('langStart'), icon: 'play', run: () => onPick(m.courseId) },
+        { label: L('langSettings'), sub: L('langSettingsSub'), icon: 'gear', href: langHash(m.courseId) + '/settings' },
+        { label: L('langClaude'), sub: L('langClaudeSub'), icon: 'spark', href: langHash(m.courseId) + '/claude' }], { label: L('moreFor', { title: m.title }) }));
+    }));
+  }
+  /** The ⋮ of the Languages tab and of a course: the course's settings and Claude queue, another course, a new one. */
+  function langMenu(id) {
+    const L = window.NoemaShell.L, m = id && langMeta('lang:' + id);
+    return [m ? { label: L('langSettings'), sub: L('langSettingsSub'), icon: 'gear', href: langHash(id) + '/settings' } : null,
+      m ? { label: L('langClaude'), sub: L('langClaudeSub'), icon: 'spark', href: langHash(id) + '/claude' } : null,
+      m ? '-' : null,
+      langCourses(KV.acc).length > 1 || !m ? { label: L('langOther'), icon: 'book', run: langChooser } : null,
+      { label: L('langNew'), sub: L('newLanguageSub'), icon: 'plus', run: langCreate },
+      { label: L('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() }];
+  }
+  /** #/lang/<course>/… : the course inside the frame. The course is started once and re-drawn on every address of it. */
+  let langOpening = null;
+  async function langRoute(parts, ctx) {
+    const S = window.NoemaShell, { h, L } = ctx, acc = KV.acc, id = parts[0], meta = langMeta('lang:' + id), base = langHash(id);
+    if (!meta) { document.body.classList.remove('lx-frame'); ctx.page({ crumbs: [[L('languages'), '#/lang'], [id]], menu: langMenu(null) }, h('div', { class: 'ns-panel ns-empty' }, S.faceEl(undefined, 'breathe'), h('p', {}, L('langMissing')), h('button', { class: 'btn primary', onclick: () => S.go('#/lang') }, L('languages')))); return; }
+    jset(LANG_LAST(acc), id); Noema.setCurrent(acc, meta.id);   // a reload comes back here; Today's card continues it
+    const UI = window.NoemaLangUI?.UI, host = ctx.main.querySelector('.lx-host');
+    if (host && host.dataset.course === id && UI?.id === id && NoemaLangUI.FR.host === host) { document.body.classList.add('lx', 'lx-frame'); NoemaLangUI.render(); return; }
+    const top = { crumbs: [[L('languages'), '#/lang'], [meta.title]], back: '#/lang', menu: () => langMenu(id) };
+    const nhost = h('div', { class: 'lx-host', 'data-course': id }, h('div', { class: 'ns-wait' }, S.faceEl(undefined, 'breathe')));
+    ctx.page(top, nhost);
+    const mine = langOpening = {};
+    let data = UI?.id === id && UI.C ? UI.C.data : null;   // the course was open a moment ago (the learner went to another tab): what it holds now
+    if (!data) data = await langData(acc, meta).catch(e => e);
+    if (langOpening !== mine || !nhost.isConnected) return;   // the learner went elsewhere meanwhile
+    if (data instanceof Error) { nhost.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, data.message), h('button', { class: 'btn', onclick: () => S.go('#/lang') }, L('languages')))); return; }
+    document.body.classList.add('lx-frame');
+    NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => langMenu(id), menuLabel: L('langMore'), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
+    if (!langRoute.polling) { langRoute.polling = true; NoemaLangUI.claude.startPolling(acc); }
+    langProfiles(meta);
+  }
+  /** Today: continue the course you were in (reviews due, the next lesson), else start the first one. lead: only the course you
+      were in (it then stands for the big "continue" when no subject waits); returns whether a card was drawn. */
+  function langToday(box, { h, L, lead = false }) {
+    const S = window.NoemaShell, acc = KV.acc, all = langCourses(acc); if (!all.length) return false;
+    const last = jget(LANG_LAST(acc), null), cur = jget(P + 'current', {}).subj;
+    const m = all.find(x => x.courseId === last) || all.find(x => x.id === cur) || (lead ? null : all[0]);
+    if (!m) return false;
+    const pr = langProgress(acc, m), next = pr.sum?.next;
+    box.append(h('button', { class: 'ns-go ns-langgo', 'data-course': m.courseId, onclick: () => langOpen(m.courseId) },
+      h('span', { class: 'rm' }, h('span', { class: 'ns-tx' }, '文A'), ' ', m.title),
+      h('h2', {}, pr.due ? L('langSession') : next ? `${next.step ? next.step + ' · ' : ''}${next.title}` : pr.started ? L('langSession') : m.title),
+      h('span', { class: 'meta' }, S.pill(langFlags(m), 1), pr.due ? S.pill(L('langDue', { n: pr.due }), 4) : pr.started ? S.pill(L('langNothingDue'), 2) : S.pill(L('langStart'), 1), pr.due && next ? S.pill(L('langNext', { lesson: next.step || next.title }), 2) : null),
+      h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')));
+    return true;
+  }
+  /** The Languages tab: every course, + New language. */
+  function langPage(v, { h, L }) {
+    const S = window.NoemaShell, acc = KV.acc;
+    if (!langCourses(acc).length) { v.append(h('div', { class: 'ns-panel ns-empty' }, S.faceEl(undefined, 'breathe'), h('p', {}, L('noLanguages')), h('button', { class: 'btn primary', onclick: langCreate }, '+ ' + L('newLanguage')))); return; }
+    v.append(langList(acc, S, { menus: true }));
+  }
+  /** Boot in the frame with a course (?subject=lang:<id>, or the course the learner was in): open it at #/lang/<id>. */
+  function langBoot(acc, meta, asked) {
+    const h0 = location.hash, want = langHash(meta.courseId);
+    if (h0.startsWith(want + '/') || h0 === want) return;
+    if (!h0 || h0 === '#' || (asked && h0 === '#/')) history.replaceState(null, '', location.pathname + location.search + want);
+    if (window.NoemaThemes?.world(acc.id) === 'know' && location.hash.startsWith('#/lang/')) NoemaThemes.putSettings({ world: 'both' }, acc.id);   // a course is open: the Languages tab shows
+  }
+  if (SHELL()) {
+    NoemaShell.registerWorld('lang', { page: langPage, route: langRoute, create: langCreate, today: langToday,
+      menu: () => langMenu(jget(LANG_LAST(KV.acc), null)) });
+    addEventListener('hashchange', () => {   // leaving a course: the frame's own pages again; a subject's page: that subject is the one a reload reopens
+      const hs = location.hash || '#/', inCourse = /^#\/lang\/[^/]+/.test(hs);
+      if (!inCourse) { document.body.classList.remove('lx-frame'); window.NoemaLangUI?.prod?.closeLangTutor?.(); document.querySelector('.lx-pop')?.remove(); if (window.NoemaLangUI?.FR?.on) document.title = CFG.appName || 'noema-lite'; }
+      const k = hs.replace(/^#\/?/, '').split('/')[0];
+      if (NoemaShell.ENGINE_ROUTES?.has(k) && NoemaShell.engine && Noema.subject?.id && Noema.subject.kind !== 'language' && KV.acc) Noema.setCurrent(KV.acc, Noema.subject.id);
+    });
   }
   /** 📥 Import: a package (<id>.noema.zip = pack + its source files) or a plain pack (.json). */
   async function importPackFile(acc, file) {
@@ -512,6 +740,7 @@
     await IDB.put('packs', acc + '|' + p.subject.id, p);
     KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...extra }));
     if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
+    window.NoemaCurriculum?.Edit?.refreshAssigned?.(acc, p.subject.id, p);   // 📦 a new version of a subject that teaches steps: those steps follow it
     return { ...p.subject, origin: 'imported', counts: p.counts, ...extra };
   }
 
@@ -580,25 +809,30 @@
   }
 
   /* ---- 🌍 Explore: every public subject (library + published by users) ---- */
-  async function explore(acc, { onChoose } = {}) {
-    const choose = onChoose || (s => Noema.switchTo(acc, s.id));
+  /** every public subject (library + published by users) and how to study one: the shell's Explore page and the dialog below */
+  async function publicSubjects(acc) {
     let pub = [];
     try { if (window.NoemaCloud && CFG.supabaseUrl) pub = (await NoemaCloud.listPublic()) || []; } catch (e) { console.warn('[explore]', e.message); }
     const mine = new Map((await subjectsFor(acc)).map(s => [s.id, s]));
     const lib = (REG.subjects || []).filter(s => !s.owner).map(s => ({ kind: 'library', id: s.id, title: s.title, emoji: s.emoji, description: s.description, language: s.language, counts: s.counts, meta: { counts: s.counts, chapters: s.chapters, sources: s.sources, language: s.language } }));
     const users = pub.map(r => ({ kind: 'public', id: r.subject_id, owner: r.owner, owner_name: r.owner_name, title: r.title, emoji: r.emoji, description: r.description, language: r.language, counts: r.meta?.counts || {}, meta: r.meta || {}, updated_at: r.updated_at }));
-    const all = [...lib, ...users];
-    const study = async s => {
+    const all = [...lib, ...users].map(s => ({ ...s, domain: window.NoemaCurriculum?.domainOf ? NoemaCurriculum.domainOf({ group: s.group || s.meta?.group || (REG.subjects || []).find(x => x.id === s.id)?.group, title: s.title, description: s.description }) : 'other' }));
+    const study = async (s, choose) => {
       if (s.kind === 'library') return choose(s);
       const have = mine.get(s.id);
       if (have && have.origin !== 'library' && (have.version || null) === (s.meta.version || null)) return choose(have);
       toastL('⬇️ Getting “' + s.title + '”…');
       const r = await fetch(NoemaCloud.publicPackUrl(s.owner, s.id)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
       const p = await r.json(); if (REG.subjects.some(x => x.id === p.subject.id)) p.subject.id = p.subject.id + '-' + slugify(s.owner_name || 'shared');
-      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '' });
+      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '', publicId: s.id, publicAt: s.updated_at || null });
       await attachSharedFiles(acc, p, 'noema-public');
       toastL(`📥 “${p.subject.title}” added to your subjects`); choose(added);
     };
+    return { all, study };
+  }
+  async function explore(acc, { onChoose } = {}) {
+    const choose = onChoose || (s => Noema.switchTo(acc, s.id));
+    const { all, study: studyIt } = await publicSubjects(acc), study = s => studyIt(s, choose);
     overlay((box, close) => {
       const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 Search public subjects…', oninput: () => draw() });
       const grid = el('div', { class: 'nx-grid' });
@@ -653,17 +887,49 @@
   }
 
   /* ---- 🔔 incoming shares: bell + banner (engine) and the picker ---- */
+  /* ---- 🔔 a new version of a subject taken from 🌍 Explore waits for the learner: ⬆️ Update or Keep mine ---- */
+  const SubjUpdates = {
+    list: [],
+    async check(acc) {
+      const metas = ls.keys(`${P}${acc}:a:packmeta:`).map(k => jget(k, null)).filter(m => m?.id && m.publicFrom);
+      if (!metas.length) return (this.list = []);
+      const rows = await NoemaCloud.publicRows([...new Set(metas.map(m => m.publicId || m.id))]).catch(() => null); if (!rows) return this.list;
+      const CU = window.NoemaCurriculum;
+      this.list = metas.map(m => {
+        const r = rows.find(x => x.owner === m.publicFrom && x.subject_id === (m.publicId || m.id)); if (!r) return null;
+        const v = r.meta?.version || null, mark = v || r.updated_at;
+        const newer = v ? v !== (m.version || null) : !!(m.publicAt && r.updated_at > m.publicAt);
+        if (!newer || m.publicSkip === mark) return null;
+        const steps = CU?.stepsOf ? CU.stepsOf(acc, m.id).filter(x => x.c.nodes[x.nid].pack?.assigned).length : 0;
+        return { id: 'subup:' + m.id, kind: 'subjupdate', subject: m.id, title: m.title, from_name: r.owner_name || m.publicOwner || '', owner: r.owner, publicId: r.subject_id, mark, at: r.updated_at, steps };
+      }).filter(Boolean);
+      return this.list;
+    },
+    /** ⬆️ Take the new version: the same subject id, so progress, notes and conversations stay; steps it teaches are re-planned. */
+    async apply(acc, u) {
+      const r = await fetch(NoemaCloud.publicPackUrl(u.owner, u.publicId)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
+      const p = await r.json(); p.subject.id = u.subject;
+      const s = await importPack(acc, p, { publicFrom: u.owner, publicOwner: u.from_name || '', publicId: u.publicId, publicAt: u.at });
+      await attachSharedFiles(acc, p, 'noema-public');
+      this.list = this.list.filter(x => x.id !== u.id); return s;
+    },
+    keep(acc, u) { const k = KV.accountKey('packmeta:' + u.subject, acc), m = jget(k, null); if (m) KV.set(k, JSON.stringify({ ...m, publicSkip: u.mark })); this.list = this.list.filter(x => x.id !== u.id); },
+  };
+  const UPDATE_KINDS = ['curupdate', 'stepupdate', 'subjupdate'];
   const Notes = {
-    pending: [], listeners: [], timer: null, acc: null,
+    pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
+    /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
+    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list]; this.emit(); return this.pending; },
     async refresh() {
       if (!this.acc || !isCloudAcc(this.acc)) return this.pending;
       try {
         const subs = (await NoemaCloud.incomingShares()) || [];
         // 👥 invitations to curricula (engine/curshare.js) — in the same bell and banner
         const curs = window.NoemaCurShare ? ((await NoemaCurShare.invites().catch(e => { console.warn('[notes] curricula', e.message); return []; })) || []).map(i => ({ ...i, id: 'cur:' + i.curriculum, kind: 'curriculum', from_name: i.owner_name || '', meta: { ...(i.meta || {}), counts: i.meta?.counts || {} } })) : [];
-        this.pending = [...subs, ...curs]; this.emit();
+        await SubjUpdates.check(this.acc).catch(e => console.warn('[notes] updates', e.message));
+        this.remote = [...subs, ...curs]; this.local();
       } catch (e) { console.warn('[notes]', e.message); }
       return this.pending;
     },
@@ -671,6 +937,14 @@
       this.acc = acc; if (!isCloudAcc(acc)) return;
       this.refresh(); clearInterval(this.timer); this.timer = setInterval(() => this.refresh(), 120e3);
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') this.refresh(); });
+      if (!this.curOn && window.NoemaCurShare?.onChange) { this.curOn = true; NoemaCurShare.onChange(() => this.local()); }
+    },
+    /** An update: take it (true) or keep mine (false). A shared map's changes open their review (you tick what you take). */
+    async update(sh, take) {
+      const acc = this.acc, done = () => { this.local(); };
+      if (sh.kind === 'curupdate') { if (take) { await window.NoemaCurMap?.reviewChanges(acc, sh.curriculum, { onDone: done }); return; } await NoemaCurShare.takeChanges(acc, sh.curriculum, []); return done(); }
+      if (sh.kind === 'stepupdate') { if (take) await NoemaCurShare.download(acc, sh.curriculum, sh.node); else NoemaCurShare.keepStep(acc, sh.curriculum, sh.node); return done(); }
+      if (sh.kind === 'subjupdate') { if (take) await SubjUpdates.apply(acc, sh); else SubjUpdates.keep(acc, sh); return done(); }
     },
     async accept(sh) {
       if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together
@@ -690,15 +964,29 @@
   };
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
+    if (UPDATE_KINDS.includes(sh.kind)) return updateRow(sh);
     const row = el('div', { class: 'nx-req' },
-      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the curriculum ', el('b', {}, `“${sh.title}”`),
+      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the Roadmap ', el('b', {}, `“${sh.title}”`),
         el('div', { class: 'tiny' }, `👥 ${nOf(sh.meta?.counts?.steps, 'step')} — your own progress, the prepared steps are shared` + (sh.message ? ` · “${sh.message}”` : '')))
       : el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || sh.from_email}`), ` wants to share `, el('b', {}, `“${sh.title}”`), ' with you',
         el('div', { class: 'tiny' }, `${nOf(sh.meta?.counts?.chapters, 'chapter')} · ${nOf(sh.meta?.counts?.exercises, 'exercise')}` + (sh.message ? ` · “${sh.message}”` : ''))),
       sh.kind === 'curriculum' ? null : el('button', { class: 'btn small ghost', title: 'Details', onclick: () => overlay((b, c) => b.append(infoCard({ title: sh.title, emoji: sh.meta?.emoji, owner_name: sh.from_name }, sh.meta), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: c }, 'Back')))) }, 'ℹ️'),
-      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Curricula` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
+      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Roadmaps` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
       el('button', { class: 'btn small', onclick: async () => { await Notes.reject(sh).catch(er => toastL('⚠️ ' + er.message)); toastL('Rejected'); } }, '✕ Reject'));
     return row;
+  }
+
+  /** 🔔 An update as a row: what changed, and Take / Keep mine (it waits until the learner answers). */
+  function updateText(sh) {
+    if (sh.kind === 'curupdate') return [`🧭 ${sh.from_name || 'The owner'} changed the Roadmap `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `${nOf(sh.count, 'change')}${sh.lines?.length ? ': ' + sh.lines.join(' · ') : ''} — nothing changes in your copy until you take it`)];
+    if (sh.kind === 'stepupdate') return [`⚡ ${sh.from_name || 'Its author'} made a new version of the step `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `in “${sh.curTitle}” — yours stays until you take it`)];
+    return [`🌍 ${sh.from_name || 'Its author'} published a new version of `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, 'your progress stays (the same subject)' + (sh.steps ? ` · the ${nOf(sh.steps, 'Roadmap step')} it teaches ${sh.steps === 1 ? 'is' : 'are'} re-planned to follow it` : ''))];
+  }
+  const updateLabel = sh => sh.kind === 'curupdate' ? '🔎 Review' : sh.kind === 'stepupdate' ? '⬇️ Get it' : '⬆️ Update';
+  function updateRow(sh) {
+    const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toastL(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); else b.disabled = false; } catch (er) { toastL('⚠️ ' + er.message, 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
+    return el('div', { class: 'nx-req nx-update' }, el('div', { class: 'grow' }, ...updateText(sh)),
+      el('button', { class: 'btn small primary', onclick: act(true) }, updateLabel(sh)), el('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'));
   }
 
   /* ---------------- Claude: two ways (docs/CLAUDE_CONNECTOR.md) ----------------
@@ -782,25 +1070,25 @@
   function claudeCurriculumSteps(acc) {
     const lib = () => window.NoemaCurMap?.library(acc);
     return [
-      el('p', { class: 'cg-recommend' }, '⭐ ', el('b', {}, 'Recommended for curricula — usually the cheapest way. '), 'A curriculum has many steps and each one becomes a full subject. With an API key (way A) every prepared step costs a few dollars, so 30–40 steps add up; with your Claude plan (Free, Pro or Max) there is nothing to pay beyond the plan. The difference grows with the size of the curriculum. The catch: your plan has usage limits, so a big curriculum may be prepared over a few days — prepare the next steps while you study the first ones.'),
+      el('p', { class: 'cg-recommend' }, '⭐ ', el('b', {}, 'Recommended for Roadmaps — usually the cheapest way. '), 'A Roadmap has many steps and each one becomes a full subject. With an API key (way A) every prepared step costs a few dollars, so 30–40 steps add up; with your Claude plan (Free, Pro or Max) there is nothing to pay beyond the plan. The difference grows with the size of the Roadmap. The catch: your plan has usage limits, so a big Roadmap may be prepared over a few days — prepare the next steps while you study the first ones.'),
       el('ol', { class: 'cg-steps' },
         ...claudeConnectSteps(acc),
-        step('Choose “Claude app” in noema-lite', 'It is preselected when you have a cloud account. Your curricula made with an API key can switch too: open the map → ⚙️ → AI for new steps; or send single steps with “💬 In my Claude app instead”.',
-          sub('Open ', el('button', { class: 'btn small', onclick: lib }, '🧭 Curricula'), ' → ', el('b', {}, '➕ New curriculum'), ' or ', el('b', {}, '📥 Import a map'), '.'),
+        step('Choose “Claude app” in noema-lite', 'It is preselected when you have a cloud account. Your Roadmaps made with an API key can switch too: open the Roadmap → ⚙️ → AI for new steps; or send single steps with “💬 In my Claude app instead”.',
+          sub('Open ', el('button', { class: 'btn small', onclick: lib }, '🧭 Roadmaps'), ' → ', el('b', {}, '➕ New Roadmap'), ' or ', el('b', {}, '📥 Import a Roadmap'), '.'),
           sub('At “Which AI…?” choose ', el('b', {}, '💬 Claude app — with your Claude plan'), '.'),
           sub('Press ', el('b', {}, 'Build'), ' / ', el('b', {}, 'Import'), '. Nothing runs in noema-lite: it waits for your Claude app.')),
-        step('Paste one message into a Claude chat', 'Claude asks the connector for the next task — the map’s agents, the chapter plans, then the queued steps — does it and saves it into your account. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.',
-          sub('In noema-lite press ', el('b', {}, '📋 Copy the message'), ' (on the waiting curriculum, in the 💬 bar of its map, or on a step).'),
+        step('Paste one message into a Claude chat', 'Claude asks the connector for the next task — the Roadmap’s agents, the chapter plans, then the queued steps — does it and saves it into your account. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.',
+          sub('In noema-lite press ', el('b', {}, '📋 Copy the message'), ' (on the waiting Roadmap, in the 💬 bar of its Roadmap, or on a step).'),
           sub(ext('https://claude.ai/new', 'Open a new chat'), ' — in the chat, make sure the noema-lite connector is on (', el('b', {}, '+ → Connectors'), ').'),
-          sub('Paste the message and send it. Claude works for a few minutes (the map) up to 10–40 minutes (a step with big files).')),
-        step('Come back to noema-lite', 'The app checks when you return to it and every 20 seconds while something waits. ⚡ on the map = ready to study.',
-          sub('What Claude saved appears by itself: the map, the chapters, the prepared steps.'),
+          sub('Paste the message and send it. Claude works for a few minutes (the Roadmap) up to 10–40 minutes (a step with big files).')),
+        step('Come back to noema-lite', 'The app checks when you return to it and every 20 seconds while something waits. ⚡ on the Roadmap = ready to study.',
+          sub('What Claude saved appears by itself: the Roadmap, the chapters, the prepared steps.'),
           sub('No connector (or no cloud account)? Press ', el('b', {}, 'How? · by hand'), ': copy a task into any Claude chat and paste the answer back; for a step, download its bundle (task + your files + toolkit), give it to Claude, and import the .noema.zip it makes with ', el('b', {}, '📥 Import its package'), '.'))),
       el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Which way should I choose?'),
-        el('ul', {}, el('li', {}, el('b', {}, 'C (Claude plan): '), 'cheapest for curricula, best for big ones; you paste a message per step and the plan’s limits set the pace.'),
+        el('ul', {}, el('li', {}, el('b', {}, 'C (Claude plan): '), 'cheapest for Roadmaps, best for big ones; you paste a message per step and the plan’s limits set the pace.'),
           el('li', {}, el('b', {}, 'A (API key): '), 'fully automatic — steps are prepared in the background while the app is open; you pay per step (you set a limit).'),
           el('li', {}, el('b', {}, 'Gemini (free key): '), 'free and automatic, simpler subjects (no web pictures).'),
-          el('li', {}, 'You can mix them: switch a curriculum in ⚙️, or send single steps to the Claude app.'))),
+          el('li', {}, 'You can mix them: switch a Roadmap in ⚙️, or send single steps to the Claude app.'))),
     ];
   }
   /** ❓ Help → “Set up Claude”: all ways, always available (the same steps as in ✨ Create with Claude). open: 'A' | 'B' | 'C' */
@@ -810,10 +1098,10 @@
     wrap.append(
       el('details', { class: 'cg-way', open: open === 'A' }, el('summary', {}, el('b', {}, '🏠 A. Here in noema-lite — with a Claude API key'), el('span', { class: 'tiny' }, ' · you pay Anthropic per use; everything happens in this app')),
         A ? el('ol', { class: 'cg-steps' }, ...A.steps) : el('p', {}, 'This installation has no Claude module.'),
-        el('div', { class: 'row' }, el('button', { class: 'btn ai', onclick: () => claudeGuide(acc, { way: 'A' }) }, '✨ Create a subject this way'), el('button', { class: 'btn small', onclick: () => window.NoemaCurMap?.library(acc) }, '🧭 Curricula (use the same key)'))),
+        el('div', { class: 'row' }, el('button', { class: 'btn ai', onclick: () => claudeGuide(acc, { way: 'A' }) }, '✨ Create a subject this way'), el('button', { class: 'btn small', onclick: () => window.NoemaCurMap?.library(acc) }, '🧭 Roadmaps (use the same key)'))),
       el('details', { class: 'cg-way', open: open === 'B' }, el('summary', {}, el('b', {}, '💬 B. In the Claude app or website — with the noema-lite connector'), el('span', { class: 'tiny' }, ' · uses your Claude plan; the subject arrives here by itself')),
         ...claudeAppSteps(acc)),
-      el('details', { class: 'cg-way cg-way-c', open: open === 'C' }, el('summary', {}, el('b', {}, '🧭 C. Curricula with your Claude plan — the Claude app plans and prepares the steps'), el('span', { class: 'cg-badge' }, '⭐ recommended for curricula · usually cheapest'), el('span', { class: 'tiny' }, ' · no API cost; results arrive here by themselves')),
+      el('details', { class: 'cg-way cg-way-c', open: open === 'C' }, el('summary', {}, el('b', {}, '🧭 C. Roadmaps with your Claude plan — the Claude app plans and prepares the steps'), el('span', { class: 'cg-badge' }, '⭐ recommended for Roadmaps · usually cheapest'), el('span', { class: 'tiny' }, ' · no API cost; results arrive here by themselves')),
         ...claudeCurriculumSteps(acc)));
     return wrap;
   }
@@ -880,8 +1168,8 @@
               el('ul', {}, el('li', {}, 'You never leave this app'), el('li', {}, 'Needs a Claude API key: you pay Anthropic per use (a few dollars per subject — you see the cost live and set a limit)'), el('li', {}, 'Simplest: everything happens on this page'))),
             el('button', { class: 'cg-choice', onclick: wayB }, el('span', { class: 'cg-ico' }, '💬'), el('b', {}, 'B. In the Claude app or website'),
               el('ul', {}, el('li', {}, 'Uses your Claude plan (Free, Pro or Max) — no extra cost'), el('li', {}, 'You chat with Claude there; the finished subject arrives here by itself'), el('li', {}, 'Best for very big sources (Pro / Max)'))),
-            el('button', { class: 'cg-choice cg-choice-c', onclick: wayC }, el('span', { class: 'cg-ico' }, '🧭'), el('b', {}, 'C. A whole curriculum with your Claude plan'), el('span', { class: 'cg-badge' }, '⭐ usually cheapest'),
-              el('ul', {}, el('li', {}, 'A map of steps (from a goal, or your own map + files); every step becomes a subject'), el('li', {}, 'Your Claude app plans and prepares the steps — no API cost'), el('li', {}, 'The bigger the curriculum, the bigger the saving')))),
+            el('button', { class: 'cg-choice cg-choice-c', onclick: wayC }, el('span', { class: 'cg-ico' }, '🧭'), el('b', {}, 'C. A whole Roadmap with your Claude plan'), el('span', { class: 'cg-badge' }, '⭐ usually cheapest'),
+              el('ul', {}, el('li', {}, 'A Roadmap of steps (from a goal, or your own Roadmap + files); every step becomes a subject'), el('li', {}, 'Your Claude app plans and prepares the steps — no API cost'), el('li', {}, 'The bigger the Roadmap, the bigger the saving')))),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       };
       const back = () => el('button', { class: 'btn small ghost cg-back', onclick: home }, '← Back');
@@ -982,7 +1270,7 @@
       /* ---------- C: curricula with the Claude plan ---------- */
       function wayC() {
         box.innerHTML = '';
-        box.append(back(), brandHead('🧭 A curriculum with your Claude plan', 'Steps 1–4 are needed only the first time (the same as way B).'), ...claudeCurriculumSteps(acc),
+        box.append(back(), brandHead('🧭 A Roadmap with your Claude plan', 'Steps 1–4 are needed only the first time (the same as way B).'), ...claudeCurriculumSteps(acc),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       }
       /* ---------- B: the Claude app / website + connector ---------- */
@@ -1019,7 +1307,7 @@
       box.append(brandHead('🔗 Connect Claude to noema-lite', who ? 'Signed in as ' + who : ''),
         el('div', { class: 'noema-form' },
           el('p', {}, el('b', {}, det?.client?.client_name || 'Claude'), ' wants to use your noema-lite account.'),
-          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'), el('li', {}, '✅ read your curricula and send their map, chapter plans and prepared steps (you see them arrive in noema-lite)'),
+          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'), el('li', {}, '✅ read your Roadmaps and send their steps, chapter plans and prepared steps (you see them arrive in noema-lite)'),
             el('li', {}, '🚫 it gets only the connector’s tools: no access to your conversations, progress or keys through them')),
           back ? el('p', { class: 'tiny' }, 'After approving you return to ', el('b', {}, back), '.') : null,
           el('div', { class: 'row' }, el('button', { class: 'btn', onclick: e => go('deny', e.currentTarget) }, 'Deny'), el('button', { class: 'btn primary', onclick: e => go('approve', e.currentTarget) }, 'Allow'))));
@@ -1116,16 +1404,17 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
-    curricula() { return window.NoemaCurMap?.library(Noema.account.id); }, curriculumMap(cid, focus) { return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, infoCard, packInfo,
+    curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
+    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
-    switchTo(acc, subj) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname); return; } location.hash = ''; location.reload(); },   // a ?subject= link must not win over the new choice
-    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject.id) Noema.switchTo(Noema.account.id, s.id); },
+    switchTo(acc, subj, hash) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname + (hash || '')); return; } location.hash = hash || ''; location.reload(); },   // a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …)
+    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s?.kind === 'language' && SHELL() && NoemaShell.mounted) return NoemaShell.go('#/lang/' + encodeURIComponent(s.courseId)); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },
     async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
 
@@ -1183,11 +1472,23 @@
     let meta = subs.find(s => s.id === wanted) || (String(wanted || '').startsWith('lang:') ? langMeta(wanted) : null);
     const settings = jget(KV.accountKey('settings'), {});
     const ask = settings.askSubjectOnStart ?? CFG.askSubjectOnStart;
-    if (!meta || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
-    if (!meta) return;
-    if (meta.kind === 'language') return startLanguage(acc, meta);
+    // the new frame opens on Today and needs no subject; the picker at start stays for whoever asked for it (Me › Profile)
+    if ((!meta && !SHELL()) || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
+    // a language course (docs/LANGUAGES.md §8): with shell: false it takes the whole page; in the frame it opens at #/lang/<course>
+    if (meta?.kind === 'language' && !SHELL()) return startLanguage(acc, meta);
+    const course = meta?.kind === 'language' ? meta : null;
+    if (course && SHELL()) langBoot(acc, course, url.get('subject') === course.id);
+    if (SHELL()) { try { NoemaShell.mount({ engine: !!meta && !course }); document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); } catch (e) { console.error('[shell]', e); } }
+    if (!meta || course) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(() => { }); } return; }
+    return openEngine(acc, subs, meta);
+  }
+  /** Boot the engine on a subject. background: the frame needs the engine's account pages (Me › Profile, AI, Help…) or the
+      tutor before any subject was opened: the last subject you studied (else the first) loads quietly, without becoming the
+      one you are "in" and without the start-of-day things start() already did. */
+  let engineBoot = null;
+  async function openEngine(acc, subs, meta, { background = false } = {}) {
     KV.subj = meta.id;
-    Noema.setCurrent(acc.id, meta.id);
+    if (!background) Noema.setCurrent(acc.id, meta.id);
     migrateLegacy(acc.id, meta.id);
     jset(`${P}${acc.id}:meta:sessions`, (jget(`${P}${acc.id}:meta:sessions`, 0) || 0) + 1);
     if (window.NoemaConvos) {
@@ -1196,12 +1497,14 @@
       try { Noema.preloadedConvos = await NoemaConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { Noema.preloadedConvos = []; }
     }
     let pack;
-    try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
+    try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(e.message); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
-    Noema.node = pack.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);   // a curriculum step?
+    Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮
+    Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
-    document.title = `${Noema.subject.title} · ${CFG.appName}`;
-    document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS)
+    if (!background) document.title = `${Noema.subject.title} · ${CFG.appName}`;
+    if (!SHELL() || !NoemaShell.mounted) document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS); in the frame each route sets it
+    if (background) Noema.backgroundEngine = true;
     if (Noema.subject.features?.math) await ensureMath();
     // start the engine
     const inline = document.getElementById('noema-engine-src');
@@ -1209,8 +1512,22 @@
     else await loadScript((window.NOEMA_ENGINE_BASE || 'engine/') + 'engine.js');
     document.body.classList.remove('noema-booting');
     document.getElementById('noema-splash')?.remove();
+    if (background) return;
+    window.NoemaReact?.dayStart(acc.id);
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
     AutoBackup.start(acc.id).catch(() => { });
   }
+  /** The frame asks for an engine when none is open (see openEngine). Resolves true once it is there. */
+  Noema.ensureEngine = () => {
+    if (window.NoemaShell?.engine) return Promise.resolve(true);
+    return engineBoot || (engineBoot = (async () => {
+      const acc = Noema.account; if (!acc) return false;
+      const subs = await subjectsFor(acc.id); if (!subs.length) return false;
+      const last = window.NoemaShell?.recent?.()?.find?.(r => subs.some(s => s.id === r.subj));
+      const meta = subs.find(s => s.id === last?.subj) || subs[0];
+      await openEngine(acc, subs, meta, { background: true });
+      return !!window.NoemaShell?.engine;
+    })().catch(e => { console.warn('[noema] engine', e); return false; }).finally(() => { engineBoot = null; }));
+  };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

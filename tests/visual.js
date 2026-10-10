@@ -188,15 +188,20 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   ok(await p.$$eval('main .vx-fig img', x => x.length) === 2, 'figure blocks render in the section (diagram + function graph)');
   await p.evaluate(() => { document.querySelector('main .vx-fig').id = 'F1'; });
   const fsel = '#F1 .vx-stage'; await p.locator(fsel).scrollIntoViewIfNeeded(); await wait(200);
+  ok(await p.$$eval('#F1 .vx-mask:not(.off)', x => x.length) >= 5 && await p.$('#F1 .vx-tools .vx-labelbar button:has-text("Show labels")'), 'figure: the labels start hidden, “Show labels” on top of the picture');
   const [hx, hy] = await at(p, ...C.boiler, fsel); await p.mouse.move(hx, hy); await wait(150);
-  ok(await p.$eval('#F1 .vx-tip', t => t.classList.contains('on') && /Boiler/.test(t.textContent)), 'figure: hovering a part shows its name');
-  await p.click('#F1 button:has-text("Hide labels")'); await wait(150);
-  ok(await p.$$eval('#F1 .vx-mask:not(.off)', x => x.length) >= 5, 'figure: 🙈 Hide labels covers the parts');
+  ok(await p.$eval('#F1 .vx-tip', t => !t.classList.contains('on')), 'figure: hovering a hidden label does not give it away');
   await p.mouse.click(hx, hy); await wait(100);
   ok(await p.$$eval('#F1 .vx-mask.off', x => x.length) === 1, 'figure: tapping a cover peeks under it');
+  await p.mouse.move(hx + 1, hy); await wait(150);
+  ok(await p.$eval('#F1 .vx-tip', t => t.classList.contains('on') && /Boiler/.test(t.textContent)), 'figure: hovering an uncovered part shows its name');
+  await p.click('#F1 button:has-text("Show labels")'); await wait(150);
+  ok(await p.$$eval('#F1 .vx-mask:not(.off)', x => x.length) === 0 && await p.$('#F1 button:has-text("Hide labels")'), 'figure: 👀 Show labels uncovers them all');
+  { const z = await p.$eval('#F1 .vx-zoom', b => b.getBoundingClientRect().toJSON()), x = await p.$eval('main .xable:has(#F1) .xbtn', b => b.getBoundingClientRect().toJSON());
+    ok(x.right <= z.left || x.left >= z.right || x.bottom <= z.top || x.top >= z.bottom, 'figure: the 💡 sits beside ⤢, never on it'); }
   await p.screenshot({ path: SHOTS + '/v2_figure.png' });
-  // practice tab lists the visual types as filters
-  await p.evaluate(() => { location.hash = '#/practice/ch01'; }); await wait(500);
+  // Practice › “Choose what to practise” lists the visual types as filters
+  await p.evaluate(() => { location.hash = '#/ch/ch01/filters'; }); await wait(500);
   ok(/Drag the labels/.test(await p.locator('main').innerText()), 'practice filters show the visual types');
   // tutor context
   ok(await p.evaluate(() => /Labeled parts: .*Boiler/.test(exerciseAsText(EX['ch01-e104'])) && /Correct order: Fuel → Boiler/.test(exerciseAsText(EX['ch01-e103']))), 'the tutor gets a text version of the picture and the answers');

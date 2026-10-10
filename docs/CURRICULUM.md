@@ -1,12 +1,9 @@
 # 🧭 Curricula — from a goal to a map of steps
 
-noema-lite has two ways to study:
-
-| | 📚 **Subjects** | 🧭 **Curricula** |
-|---|---|---|
-| What | ready-made subject packs (your sources → a course) | a goal → a directed acyclic graph (DAG) of steps |
-| Material | fixed, made once | **generated on demand**, one subject per step, then kept for good |
-| Order | free | prerequisites → the goal → applications; a step opens when its prerequisites are mastered |
+The way to study in noema-lite is a **curriculum**: a goal → a directed acyclic graph (DAG) of steps (prerequisites → the
+goal → applications; a step opens when its prerequisites are mastered). Each step is taught by a **subject pack** —
+generated on demand for that step and then kept for good, or **📦 a subject you already have**, attached to the step (§9).
+Subjects that teach no step wait on the **📚 Shelf** (§9): they stay studyable, but the subject picker leads with 🧭 Curricula.
 
 Every step of a curriculum **is a normal subject pack**: the same home page, theory, exercises (all
 types, picture exercises), flashcards, debug drills, mistakes gym, Socratic tutor, sources, sync and
@@ -225,9 +222,9 @@ prepared so far and the curriculum's material files go with the map.
 
 | | who | what |
 |---|---|---|
-| **the map** (steps, links, chapter plans, the files) | the owner | changes reach everybody by themselves (members cannot edit it; their copy is replaced by the newest map — their own state stays) |
+| **the map** (steps, links, chapter plans, the files) | the owner | members cannot edit it. When the owner changes it, each member gets a **🔔** (and *🔔 N changes · Review* on the map) and **takes what they want**: a list of the changes, each with a tick box. Nothing changes in their copy until they take it; what they leave is not offered again unless it changes again |
 | **progress** (read, solved, mastered, placement tests) | everybody | in their **own** account, as for any curriculum — nobody sees anybody's progress |
-| **prepared steps** | **any participant** (owner or a member who joined) | prepares a step **nobody has prepared yet**, with their own AI (API key, Gemini or their Claude app). Everybody sees it (⚡👤 *prepared by …*) and gets it into their own account when they study it (the next prepared ones are fetched ahead) |
+| **prepared steps** | **any participant** (owner or a member who joined) | prepares a step **nobody has prepared yet**, with their own AI (API key, Gemini or their Claude app). Everybody sees it (⚡👤 *prepared by …*) and gets it into their own account when they study it (the next prepared ones are fetched ahead). A **new version** by its author waits for each person who has the step: 🔔 *⬇️ Get it* or *Keep mine* (asked again only for a later version) |
 | **overwriting** | nobody | a prepared step is **never overwritten by someone else** — not by the owner, not by a member. Only its author may publish a new version of it; the owner may *remove* it (moderation: 🗑 *X's version*) and then it can be prepared again |
 
 **First come, first served — and nobody prepares a step twice.** Before a step is prepared it is **reserved** for its preparer
@@ -256,10 +253,62 @@ prepared on their account by itself) and no review step (the plans are the owner
 who **leaves** loses the map from their curricula; the steps they studied stay their subjects, with their progress. When the
 owner **stops sharing**, the shared steps and files are removed; everybody keeps their copy (*no longer shared with you*).
 
+**🔔 Taking the owner's changes** (`Core.changes` / `Core.take`, `Share.incoming` / `Share.takeChanges`): when the shared map has a
+new version, the member's copy stays as it is and `c.shared.incoming` says how many changes wait. The review lists them one by
+one — the curriculum's name or description, a step added / removed / renamed / re-described, a step's new chapter plan, its
+material, the links between steps — and takes the ticked ones into the copy (*Keep my copy* takes none). What was left is
+remembered with its signature (`c.shared.declined`) and is offered again only when it changes again. A step the member
+studies from **their own subject** (§9) is listed too when the group's plan of it changes, **unticked**: taking it brings the
+group's version of the step back (their subject goes to the Shelf, the shared prepared step can be studied again); leaving
+it keeps their step, and the group's new plan is kept aside for the day they take their subject off.
+
 **The Claude app** (§7) follows the same rules through the connector: `noema_curricula` shows *👥 shared by …*, the queue skips
 steps others have (prepared or reserved), a step handed out is reserved in the shared curriculum too, `noema_finish_upload`
 publishes it at once (*👥 Shared: every member … sees this step*) and its source files follow from the learner's app; a member
-gets signed links to the owner's material files. Members are never given map / plan tasks.
+gets signed links to the owner's material files. Members are never given map tasks, nor plan tasks except for the steps
+their own subjects teach (§9).
+
+## 9. 📦 Subjects you already have, on steps · 📚 the Shelf
+A subject you already have — your own, imported, made with Claude, shared with you, from 🌍 Explore or the library — can
+**teach a step** of one of your curricula. That step is then studied from that subject: it is **never generated** and no agent
+touches it (not the background preparer, not the Claude app's queue). Only **that step is re-planned**: its chapters and
+learning goals are redesigned to describe the subject (the planner gets the subject's outline — its chapters, their sections,
+how many exercises — and follows its chapters in order; what the step's role needs and the subject lacks is listed as
+*Not in the pack: …*). Until its new plan is here the step is **closed** (🔄 on the map, no 📖 Study). The **subject never
+changes**: the plan adapts to it. The steps after it keep their plans; their panel says *⚑ … is now taught by your own
+subject — check that this step still fits*.
+* **Where:** on any step — **📦 Use a subject I have** (the warning says exactly what happens) · while creating a map —
+  *Use subjects you already have* (➕ New curriculum and 📥 Import a map): the map is built, then it waits (📦 *Attach subjects*,
+  with ✨ *Suggest matches* by title) before its steps are planned (▶ *Plan the steps now*) · from the Shelf —
+  **🧭 Put on a map…** (choose the curriculum; the matching step is suggested) · by Claude — `noema_save_pack` /
+  `noema_finish_upload` with `curriculum_id` + `step` (the connector writes `{kind: 'assign'}` to the inbox; the app applies it).
+* **By reference:** the subject keeps its id, so its progress, notes and conversations stay — progress in it **is** the step's
+  progress (mastery: every section read + 80 % solved). One subject may teach several steps (the same progress everywhere).
+* **Replacing:** a subject that was prepared for the step goes to the Shelf (nothing is deleted). **↩ Take it off this step**:
+  the subject stays (on the Shelf when no step uses it); the step is planned and prepared the usual way again.
+* **Re-planning:** with an API key / Gemini right away (or **↻ Re-plan now**); with the Claude app, the step's plan task waits
+  in the 💬 bar like any other (it carries the subject's outline). Its plan stays editable (✏️ Edit step) because the
+  subject is never rebuilt.
+* **Sync:** the attachment travels with the curriculum (`n.pack = { id, status: 'ready', assigned: { from, at }, title,
+  description, sections, exercises, outline }`, `n.assignedAt`); `mergePlans` keeps the newer attachment, so an older copy
+  on another device never drops it.
+* **In a shared curriculum (§8)** it is **the learner's own**, owner or member: only their copy of the step changes. The
+  step's new plan is theirs; the group's plan of it is kept aside (`n.groupPlan`) and is what the owner's shared map keeps
+  (`Core.strip` publishes it, never the owner's own plan or subject); the subject is never shared with the group (the step
+  is not contributed). Owner updates never overwrite it: a change to the group's plan of that step is offered in the 🔔
+  review, unticked. **↩ Take it off this step** gives the step the group's (newest) plan and prepared step back, with
+  nothing to re-plan. A member's Claude app plans such a step like the owner's would.
+* **A new version of the subject** (an update from 🌍 Explore, a share accepted again, a new import): every step it teaches
+  takes the new outline and is re-planned — only those steps (`Edit.refreshAssigned`).
+* Language courses are studied on their own and are never attached to steps or shown on the Shelf
+  (docs/SHELF_AND_LANGUAGES.md).
+
+**📚 The Shelf** is every subject that teaches no step of any of your curricula. It is the folded section at the bottom of
+the subject picker (open while you have no curriculum yet; it remembers per device whether you left it open), **📚 Shelf (N)**
+in 🧭 Curricula, and **📚 Open the Shelf** in ⚙️ → Subjects (where every subject says *🧭 on N curriculum steps* or *📚 on the
+Shelf*). Nothing was moved or deleted to make it: subjects that were not on a map simply appear there. A subject that just
+arrived (imported, from Explore, shared with you, made by Claude without a step) lands on the Shelf, with a hint to put it
+on a map.
 
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
@@ -274,8 +323,16 @@ file not uploaded twice); copy / paste, a step bundle and its package; re-plan w
 `tests/curriculum_share.js`: §8 with three people and the connector — share with a person (her prepared step + her file
 go with it), the invitation in the banner, join, a step fetched ahead and studied (own progress), a step reserved by a member's
 Claude app (the owner cannot take it, ⏳ on her map) and published on saving, nobody overwrites anybody (app, connector, API,
-files), public → 🌍 Explore curricula → join → prepare, the owner's renamed step reaches the members, removing a version,
-leaving, stopping, phone. `tests/sql_policies.py` checks every rule of §8 on PostgreSQL.
+files), public → 🌍 Explore curricula → join → prepare, the owner's renamed step offered in 🔔 and taken in the review,
+removing a version, a member's own subject on a shared step (his plan, the group's aside, never shared, the group's new plan
+offered unticked, what he left not offered again, taking it off), the owner's own subject on a step (the shared map keeps the
+group's plan), a new version of a prepared step (keep mine / get it), leaving, stopping, phone. `tests/sql_policies.py` checks every rule of §8 on PostgreSQL.
+`tests/shelf.js`: §9 — the picker (🧭 first, the Shelf folded once there is a map), attaching a subject to a step (the warning,
+only that step re-planned from the subject's outline, closed meanwhile, the next step flagged not re-planned, progress shared,
+studying it), taking it off, a prepared subject going to the Shelf, a new version of the subject re-planning its step, sync
+of an attachment, the creation hold (Claude app and
+API key, ✨ suggest matches), the connector (`curriculum_id` + `step` → the step; without → the Shelf; where each subject is),
+🧭 Put on a map… from the Shelf, phone.
 `tests/curriculum_import.js`: the parser (tree art, nesting + independent, Mermaid, ⇄, JSON, Greek outline, loops, file
 matching), then in the browser: a pasted tree with two files → only the planner runs (with the files' pages, outline and
 first lines) → a step with a PDF built by Claude from the uploaded file (no web_fetch, packaged back as its source) → a

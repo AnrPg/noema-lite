@@ -43,8 +43,9 @@ The app in use must never be affected or left half-done by this work.
   never shows it; only `main` is published.
 * **Additive code.** New files for everything (`engine/langcore.js`, `engine/lang/*`, `tools/*lang*`,
   `library/languages/`, `tests/lang*`). Existing files are touched only at registration points (the build lists,
-  `index.html`, the subject picker), and only for courses with `kind: "language"`; ordinary subjects and curricula take
-  exactly the same code paths as before.
+  `index.html`, the subject picker, the boot and the frame's `registerWorld('lang', …)` in `engine/loader.js`, two small
+  hooks in `engine/shell.js` — §8 *Inside the frame*), and only for courses with `kind: "language"`; ordinary subjects and
+  curricula take exactly the same code paths as before.
 * **Own storage namespace.** Learner state lives only in `…:s:<course>:lang:*` keys (§5.6); no existing key changes format.
   While developing, the branch copy is opened with a local test profile, not the cloud account; automated tests use the
   Supabase emulator.
@@ -849,6 +850,31 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 
 ## 8. User interface
 
+* **Inside the frame** (2026-10-09, docs/NEW_FRAME_AND_LANGUAGES.md; `engine/loader.js` registers `NoemaShell.registerWorld('lang', { page, route, create, menu, today })`):
+  * **The Languages tab** (`#/lang`, icon 文A, shown for "Languages" or "Both"): one row per course — the library's (`REG.languages`)
+    and the learner's own account courses (P8, `a:langcourse:<id>`) — with its flags, languages, words met, the reviews due today
+    and the next lesson; a bar for the words met; each row's ⋮: Start / Continue · Course settings · ✨ Through Claude. **+ New language**
+    (and Discover › New language) opens the ✨ new-course dialog; the new course opens at once. Nothing of the course is loaded for
+    this list: progress and due reviews are counted from the stored learner keys (§5.6), the next lesson is what the course last
+    showed (device-local `meta:langsum`).
+  * **A course** opens at `#/lang/<course>` **inside the frame**: `NoemaLangUI.start({ …, host, onRoute })` draws it into the frame's
+    `<main>` (its top bar, tabs and the character stay); the course's own bar keeps the language chips and the explanation language;
+    the frame's top bar shows the crumbs **Languages › course › page** (the lesson, concept, word, function, lane…), ← and the ⋮
+    (Course settings `#/lang/<course>/settings` · ✨ Through Claude `#/lang/<course>/claude` (the P8 task queue) · Choose another
+    course · New language course · Choose a subject). The character opens the course's own tutor (§8 *Tutor*).
+  * **Addresses, both ways.** Every view keeps writing the course's own addresses (`#/c/…`, `#/fn/…`, `#/lesson/…`, `#/`); inside the
+    frame `go()` writes them as `#/lang/<course>/c/…` (`toHash`), `route()` reads them back (`innerHash`), links (`<a href="#/…">`
+    made by `h()`) are mapped the same way and a run's "back" is the inner address. So deep links, reloads, ← and back / forward work
+    at every place of the course; with `shell: false` nothing is mapped and the addresses stay as they were.
+  * **Today**: a "continue" card for the course you were in (the reviews due, else the next lesson; the first course to start when
+    you have none); with no subject to continue it leads the page.
+  * **Boot**: in the frame, `?subject=lang:<id>` — or, on a start without an address, the course you were in — opens at
+    `#/lang/<id>`; `#/` stays Today. A link to a course turns on the Languages tab for a "Knowledge" learner. A subject's page
+    opened afterwards becomes the one a reload reopens again. With `shell: false` the older `startLanguage` (the course takes the
+    whole page with its own top bar) is unchanged.
+  * **Look**: the course uses the frame's variables (`--bg`, `--paper`, `--ink`, `--line`, `--acc`, `--acc-soft`, `--font`, `--display`;
+    `engine/lang/97_frame.css`, everything under `body.ns-on`) and the older tokens the themes bridge to them, so it wears the
+    learner's character like every other page. Tested by `tests/lang_frame.js` (phone 390 px and desktop 1280 px).
 * **Course home**: flags of the active languages, each with progress ring and "due" badge; lanes **Vocabulary · Grammar · Script · Reading · Writing · Compare**; the daily session button. The explanation language is shown in the header ("explained in English"). P7: a **✍️ Writing · 📖 Reading** row per active language (and its 🎓 tutor): `#/write/<lang>` (the sets translate, rewrite and expand, guided writing, register and dialogue, numbers, the clock, dates — each a short run, `#/write/<lang>/<set>`), `#/read/<lang>` (the graded texts, `#/read/<lang>/<text>`, ✨ a new AI-written text). QA: one order — the session button (it starts the next lesson when nothing is due), today's languages, the next lesson, **🧭 Your lanes** (one row per language: 📐 grammar · ✍️ writing · 📖 reading · 🔤 script · 📚 peculiarities · 🎓 tutor; then the polyglot drills and the drills, the field sorts folded), the 📐 grammar lane, the map — the steps near the learner with compact state chips (a sign per language, the words in the tooltip and a legend), the rest one tap away.
 * **Flag card** (one component for concepts, functions, sentences, fields): content in one language at a time; a vertical rail of small flags, each with a state dot (✅ mastered, 🟢 known, 🟡 learning, 🔓 open, 🔒 locked); click → that language's realization loads in place; **⇄ Compare** opens the aligned table of all course languages. The last chosen language is remembered per card type.
 * **Word card** (the flag card of a word, `langcore.wordCard`): principal parts (article/plural, unit noun, root, pinyin + measure word), then the profile in sections — Meanings · In sentences (register and context chips, translation, unknown words marked) · Goes with · Verbs built on it · Idioms, sayings and quotes · Synonyms by register · Opposites · ⚠️ Watch out · Subtleties · Where it comes from · Fun facts — and the feeling / connotation / status / frequency badges. The flags switch the same concept to another language.
@@ -969,6 +995,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 | `tools/langlib.py`, `tests/fixtures/lang-vectors.json` | the shared helpers in Python (cells, vowel marks, pinyin, joining tokens) and the vectors both twins must pass |
 | `engine/langcore.js` | pure module (no DOM; also runs in Node and in the connector): loading the course packs, state machine, SM-2 two-track scheduler, gating, known sets, form index, tokenizer/segmenter, feasibility, bank selection, session planner, script utilities (strip marks, positional forms, pinyin numbers ↔ marks, transliteration) |
 | `engine/lang/*.js`, `engine/lang/lang.css` → `engine/langui.js`, `engine/langui.css` (built) | the language-course UI, a bundle of its own, loaded **instead of** `engine.js` when a language course is open (so the subject engine is untouched): `00_base` (helpers, word rendering, storage), `10_shell` (top bar, routes, home, vocabulary map), `20_cards` (node page, flag card, compare, word card), `30_vocab` (field map, name-them-all, settings), `40_ex` (exercises), `50_session` (the session runner); later `60_grammar`, `70_script`, `80_input` … |
+| `engine/lang/97_frame.css`, `engine/loader.js` (*language courses inside the frame*) | the course inside the new frame (§8): the Languages tab, `#/lang/<course>/…`, Today's card, the ⋮ |
 | `library/languages/<id>/course.pack.js` (built) | the whole course as one script (`window.NOEMA_LANGPACKS[id]`); the registry lists it under `languages` |
 | `tools/validate_lang.py`, `tools/lang_refcheck.py`, `tools/schemas/noema.lang.v1.schema.json` | validation |
 | `tools/build.py` | builds `core.pack.js` / `<code>.pack.js`, registry entries `kind: "language"` |
@@ -1088,6 +1115,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-09 — The new frame (`main`: PR #14 the frame, PR #11 the Shelf) merged into the language work, and the courses live inside it (§8 *Inside the frame*): the Languages tab lists every course (library and account) with its languages, progress and what is due; `#/lang/<course>/…` draws a course in the frame with crumbs and ⋮ (settings, ✨ Through Claude, another course), the course's addresses mapped both ways; a "continue" card on Today; + New language; the boot opens `?subject=lang:<id>` or the course you were in at `#/lang/<id>`; the frame's colours; `shell: false` unchanged. Conflicts resolved as docs/NEW_FRAME_AND_LANGUAGES.md and docs/SHELF_AND_LANGUAGES.md say (README, `loader.js`, `tests/curriculum.js`, `tools/build.py`). Tested by `tests/lang_frame.js`.
 - 2026-10-09 — P9 listening and speaking: browser speech synthesis (voice per language, slow rate, text sent as written), 🔊 on cards, examples, sentences, intro, feedback, reader and compare views; `listen_pick`, `listen_tone`, `dictation`, `listen_meaning`, `shadowing`, `speak` (transcript compared with the stored forms, shadowing without recognition); the 🎧 lane, the settings, two items in the daily session (§3.9, §6.8, §7.5, §8, §13).
 - 2026-10-09 — QA of the whole language part (three learners × two widths, every lane / view / exercise): the home organized (session · next lesson · lanes per language · grammar · the map near you), the next step offered after a lesson and a session, answers no longer given away in deepening and principal parts, foreign script always with lang + dir, readable reading titles and language names, Esc for the tutor without a key; `tests/lang_walkthrough.js` (§8, §13 QA).
 - 2026-10-09 — P4 scripts and input: script modules as reference data (`tools/lang_script.py`, §4.9: ar / he alphabets with forms derived from Unicode, zh characters from Make Me a Hanzi + Unihan), the script stage stored in `lang:<L>:script` (§5.5, merged like words), the 🔤 lane and the exercise types of §6.1, keyboards / pinyin input for every typed answer and vowel-mark fading (§8), tokenizer fixes (§7.2: prefix spellings and וָ, لِلْـ, the bank's own Chinese splits).

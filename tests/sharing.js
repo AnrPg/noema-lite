@@ -18,7 +18,7 @@ async function signUp(browser, email, name) {
   return { p, E, ctx };
 }
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, storageChunkBytes: 200000 };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, shell: false, storageChunkBytes: 200000 };`;
   // like Supabase's free plan, the emulator refuses objects over a size (here 300 KB) → big source files travel in parts
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg, maxObject: 300000 });
   const BIG = 700000, bytes = (n, k) => { const b = Buffer.alloc(n); for (let i = 0; i < n; i++) b[i] = (i * k + (i >> 8)) % 251; return b; };
@@ -132,6 +132,23 @@ async function signUp(browser, email, name) {
   await Cc.p.screenshot({ path: SHOTS + '/x6_carl.png' });
   ok(await Cc.p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart test'), 'Choose → downloaded from the public bucket, added to Carl’s subjects and opened');
   ok(await Cc.p.evaluate(async () => { const r = await NoemaSrcFiles.get(ACCOUNT.id, 'heart-test', 'atlas'); return r?.blob.size; }) === BIG, 'the public subject comes with its source files (the big one joined again)');
+  // 🔔 a new version of the public subject waits for Carl: Keep mine, then Update
+  const republish = v => A.p.evaluate(async v => { const p = await Noema.loadSubject(ACCOUNT.id, 'heart-test'); p.version = v; await Noema.importPack(ACCOUNT.id, JSON.parse(JSON.stringify(p))); document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.share({ id: 'heart-test', title: 'Heart test', origin: 'imported' }); }, v);
+  await republish('heart-test-v2'); await wait(700);
+  await A.p.check('.nx-warn input').catch(() => { }); await A.p.locator('.noema-ovbox').last().locator('button:has-text("Publish the newest version")').click(); await wait(900);
+  ok(srv.state.pubPacks.find(r => r.subject_id === 'heart-test')?.meta?.version === 'heart-test-v2', 'Anna publishes a new version of “Heart test”');
+  let up = await Cc.p.evaluate(() => Noema.notes.refresh().then(l => l.filter(x => x.kind === 'subjupdate').map(x => x.subject)));
+  ok(up.join() === 'heart-test' && /published a new version of/.test(await Cc.p.locator('.sharebar').innerText()), '🔔 Carl is told (bell + banner): Update or Keep mine');
+  await Cc.p.click('.sharebar button:has-text("Keep mine")'); await wait(500);
+  up = await Cc.p.evaluate(() => Noema.notes.refresh().then(l => l.filter(x => x.kind === 'subjupdate').length));
+  ok(up === 0 && await Cc.p.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)).version) === 'heart-test-v1', '“Keep mine”: he keeps v1 and is not asked again about v2');
+  await republish('heart-test-v3'); await wait(700);
+  await A.p.check('.nx-warn input').catch(() => { }); await A.p.locator('.noema-ovbox').last().locator('button:has-text("Publish the newest version")').click(); await wait(900);
+  await Cc.p.evaluate(() => Noema.notes.refresh()); await wait(300);
+  await Cc.p.click('.sharebar button:has-text("Update")'); await wait(2000);
+  const cm = await Cc.p.evaluate(async () => ({ meta: JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)), pack: (await Noema.loadSubject(ACCOUNT.id, 'heart-test')).version }));
+  ok(cm.meta.version === 'heart-test-v3' && cm.pack === 'heart-test-v3' && cm.meta.publicFrom === anna && !(await Cc.p.evaluate(() => Noema.notes.pending.some(x => x.kind === 'subjupdate'))), '⬆️ Update: he has v3 — the same subject (his progress stays), still from Anna');
+  await A.p.click('.noema-ovbox button:has-text("Close") >> nth=-1').catch(() => { });
   // withdrawing removes the shared copies of the files
   await A.p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.share({ id: 'heart-test', title: 'Heart test', origin: 'imported' }); }); await wait(700);
   await A.p.locator('.noema-ovbox').last().locator('button:has-text("Withdraw")').first().click(); await wait(800);
