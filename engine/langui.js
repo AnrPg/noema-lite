@@ -577,7 +577,7 @@ VIEWS.sort = (v, r) => {
       h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'), ' ', h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, 'Field map')));
   };
   for (const p of pool) {
-    const chip = h('button', { class: 'btn lx-sortchip', 'data-id': p.id, onclick: () => { if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { p, chip }; } }, word(c, X.lex[p.id].lemma, { sub: false }));
+    const chip = h('button', { class: 'btn lx-sortchip', 'data-id': p.id, 'data-cid': p.cid, onclick: () => { if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { p, chip }; } }, word(c, X.lex[p.id].lemma, { sub: false }));
     chips.append(chip);
   }
   for (const g of groups) {

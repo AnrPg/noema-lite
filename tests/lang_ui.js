@@ -168,14 +168,14 @@ async function answer(page, right) {
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/sort/food.vegetables'); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(800);
   const nChips = await page.locator('.lx-sortchip').count();
   // the group a chip belongs to: the subgroup of the field's concept the word stands for there (not always its first meaning)
-  const groupOf = () => page.evaluate(() => { const U = NoemaLangUI.UI, id = document.querySelector('.lx-sortchip').dataset.id, f = U.C.data.fields.find(x => x.field === 'food.vegetables');
-    return (f.concepts.find(con => (U.C.lang.de.byConcept[con.id] || []).includes(id)) || {}).subgroup || U.C.concepts[U.C.lang.de.lex[id].senses[0]].subgroup; });
+  const groupOf = () => page.evaluate(() => { const U = NoemaLangUI.UI, ch = document.querySelector('.lx-sortchip'); return U.C.concepts[ch.dataset.cid || U.C.lang.de.lex[ch.dataset.id].senses[0]].subgroup; });   // the concept the chip stands for in this field
   const wrongBin = await page.evaluate(g => {
     return [...document.querySelectorAll('.lx-sortbin')].map(b => b.dataset.group).find(x => x !== g); }, await groupOf());
-  await page.click('.lx-sortchip >> nth=0'); await page.click(`.lx-sortbin[data-group="${wrongBin}"]`); await wait(450);
+  await page.click('.lx-sortchip >> nth=0'); await page.click(`.lx-sortbin[data-group="${wrongBin}"] .lx-sorthead`); await wait(450);
   for (let i = 0; i < 60 && await page.locator('.lx-sortchip').count(); i++) {   // bounded: a mistake in the test must fail, not hang the suite
+    // (the head of a bin: its sorted words carry a 🔊 that takes the tap)
     const g = await groupOf();
-    await page.click('.lx-sortchip >> nth=0'); await page.click(`.lx-sortbin[data-group="${g}"]`); await wait(40);
+    await page.click('.lx-sortchip >> nth=0'); await page.click(`.lx-sortbin[data-group="${g}"] .lx-sorthead`); await wait(40);
   }
   ok(nChips >= 4 && new RegExp(`${nChips - 1} of ${nChips} right`).test(await page.locator('.lx-sortdone').innerText()), `sorting: ${nChips} German vegetables into their groups, one wrong drop counted`);
 
