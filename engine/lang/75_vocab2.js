@@ -4,9 +4,9 @@
    (langcore.deepRecord: R or P track; a sorting item reviews every word on it).
    🏋️ practise this word (#/deep/<lang>/<lexeme>, from the word card) · 🏋️ deepen (#/deepen/<node>/<lang>, from the node and lesson pages)
    · 1–3 deepening items at the end of the daily session (sessionDeep, §7.5). */
-const DEEP_LABEL = { root_family: '🌳 Root families', compound_split: '🧱 Compounds', sense_split: '🔀 Which word here?', collocation: '🤝 Goes with', confusables: '👯 Easily mixed up',
-  intensity_scale: '📶 Strength', register_pick: '🎭 Register', nuance_pick: '🔍 Nuance', connotation: '💭 Feeling', idiom_meaning: '🗝️ Idioms and sayings', example_cloze: '✏️ In context',
-  sense_pick: '🧭 Which meaning?', etymology_link: '🏺 Where it comes from' };
+const DEEP_SIGN = { root_family: '🌳', compound_split: '🧱', sense_split: '🔀', collocation: '🤝', confusables: '👯', intensity_scale: '📶', register_pick: '🎭', nuance_pick: '🔍', connotation: '💭',
+  idiom_meaning: '🗝️', example_cloze: '✏️', sense_pick: '🧭', etymology_link: '🏺' };
+const DEEP_LABEL = new Proxy({}, { get: (o, k) => typeof k === 'string' && DEEP_SIGN[k] ? DEEP_SIGN[k] + ' ' + LT('lang.deep.kind.' + k) : undefined });   // lang.deep.kind.<kind>
 const MET_DEEP = ['seen', 'learning', 'known_r', 'known_p', 'mastered'];
 /** Explanation parts: text in the explanation language (Arabic, Hebrew, Chinese runs tagged) and foreign words {w, lang} with their lang and dir. */
 function richText(parts, c) { return (Array.isArray(parts) ? parts : [parts]).map(p => p && typeof p === 'object' ? word(UI.C.lang[p.lang] ? p.lang : c, p.w, { sub: false }) : wordsIn(c, String(p ?? ''))); }
@@ -16,14 +16,14 @@ function deepTokens(c, toks, fill = null, interactive = true) {
   let glue = true;
   for (const k of toks || []) {
     let el;
-    if (k.gap) el = h('span', { class: 'lx-gapw' }, show(k.pre || ''), h('span', { class: 'lx-gap' + (fill ? ' filled' : ''), 'aria-label': fill ? null : 'gap' }, fill ? show(fill) : '＿＿＿'), show(k.post || ''));
+    if (k.gap) el = h('span', { class: 'lx-gapw' }, show(k.pre || ''), h('span', { class: 'lx-gap' + (fill ? ' filled' : ''), 'aria-label': fill ? null : LT('lang.deep.gap') }, fill ? show(fill) : '＿＿＿'), show(k.post || ''));
     else if (k.p) el = document.createTextNode(k.t);
     else if (k.target) el = h('mark', { class: 'lx-target' }, show(k.t));
     else if (k.l && X.lex[k.l] && !interactive) el = h('span', { class: 'lx-w' + (k.new ? ' lx-new' : ''), title: (k.new ? '🆕 ' : '') + gloss(c, k.l) }, show(k.t));   // inside a button: the 🆕 words open from the line above
     else if (k.l && X.lex[k.l]) {
       const open = e => { e.stopPropagation(); wordPopup(c, k.l); };
       el = h('span', { class: 'lx-w lx-tok' + (k.new ? ' lx-new' : ''), tabindex: '0', role: 'button', title: (k.new ? '🆕 ' : '') + gloss(c, k.l), onclick: open, onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); } } }, show(k.t));
-    } else el = h('span', { class: k.out ? 'lx-out' : '', title: k.out ? 'not in the course yet — see the translation' : null }, show(k.t));
+    } else el = h('span', { class: k.out ? 'lx-out' : '', title: k.out ? LT('lang.deep.outOfCourse') : null }, show(k.t));
     if (out.length && sp && !glue && k.p !== true) out.push(' ');
     out.push(el); glue = k.p === 'open';
   }
@@ -50,7 +50,7 @@ WIDGETS.vpick = (it, done) => {
   let promptEl = deepPrompt(it);
   const after = pr.trAfter ? h('div', { class: 'lx-tr lx-trafter', hidden: true }, pr.trAfter) : null;
   box.append(h('div', { class: 'lx-q' }, ...richText(it.ask, c)), promptEl,
-    pr.tr ? h('div', { class: 'lx-tr' }, pr.tr) : null, pr.hint ? h('div', { class: 'lx-chips' }, h('span', { class: 'lx-badge reg' }, '🎭 ' + pr.hint)) : null, pr.lit ? h('div', { class: 'tiny' }, 'literally: “' + pr.lit + '”') : null, newWordsLine(c, it.unknown));
+    pr.tr ? h('div', { class: 'lx-tr' }, pr.tr) : null, pr.hint ? h('div', { class: 'lx-chips' }, h('span', { class: 'lx-badge reg' }, '🎭 ' + pr.hint)) : null, pr.lit ? h('div', { class: 'tiny' }, LT('lang.deep.literally', { lit: pr.lit })) : null, newWordsLine(c, it.unknown));
   const opts = it.options.map(o => ({ o, label: deepOpt(it, o, it.optLang), ok: o === it.answer }));
   box.append(options(opts, (o, b, wrap) => {
     b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok);
@@ -69,19 +69,19 @@ WIDGETS.vsort = (it, done) => {
   const label = (card, inChip) => card.tokens ? h('span', {}, deepTokens(c, card.tokens, null, !inChip), card.tr ? h('span', { class: 'tiny lx-cardtr' }, ' — ' + card.tr) : null, card.hint ? h('span', { class: 'tiny lx-cardtr' }, ' (' + card.hint + ')') : null) : h('span', {}, word(card.lang || c, card.text, { sub: false }), card.note ? h('span', { class: 'tiny' }, ' ' + card.note) : null);
   for (const card of it.cards) {
     const chip = h('button', { class: 'btn lx-sortchip' + (card.tokens ? ' lx-sortsent' : ''), 'data-id': card.id, 'data-bucket': card.bucket, onclick: () => {
-      if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { card, chip }; status.textContent = 'Now its group…'; } }, label(card, true));
+      if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { card, chip }; status.textContent = LT('lang.deep.nowGroup'); } }, label(card, true));
     chips.append(chip);
   }
   for (const b of it.buckets) {
     const list = h('div', { class: 'lx-sortlist' });
     const drop = () => {
-      if (!picked) { status.textContent = 'Tap a card first.'; return; }
+      if (!picked) { status.textContent = LT('lang.deep.tapFirst'); return; }
       const { card, chip } = picked;
       if (card.bucket === b.id) {
         if (!(card.lex in perLex)) perLex[card.lex] = true;
-        chip.remove(); list.append(h('div', { class: 'lx-sortin' }, label(card, true))); picked = null; left--; status.textContent = left ? `${left} to sort` : '';
+        chip.remove(); list.append(h('div', { class: 'lx-sortin' }, label(card, true))); picked = null; left--; status.textContent = left ? LT('lang.sort.left', { n: left }) : '';
         if (!left) { it.perLex = perLex; box.append(deepFeedback(it, !wrong)); done(!wrong); }
-      } else { perLex[card.lex] = false; wrong++; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = 'Not this one — try another group'; }
+      } else { perLex[card.lex] = false; wrong++; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = LT('lang.deep.notThis'); }
     };
     const bin = h('div', { class: 'lx-sortbin', 'data-group': b.id, role: 'button', tabindex: '0', onclick: drop, onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); drop(); } } },
       h('div', { class: 'lx-sorthead' }, b.lang ? word(b.lang, b.label, { sub: false }) : b.label), list);
@@ -129,17 +129,17 @@ function deepRun(holder, items, { again = null } = {}) {
     bar.firstChild.style.width = Math.round(i / items.length * 100) + '%'; stage.innerHTML = '';
     if (i >= items.length) {
       save(true);
-      stage.append(h('div', { class: 'lx-result lx-deepdone' }, h('h2', {}, `🏋️ ${right} of ${items.length} right`),
-        h('ul', { class: 'lx-list' }, ...Object.entries(byKind).map(([k, r]) => h('li', {}, `${DEEP_LABEL[k] || k}: ${r.c} / ${r.n}`))),
-        h('p', { class: 'tiny' }, 'Every answer counts as a review of its word.'), newWordsList(),
-        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ Again') : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← Back'))));
+      stage.append(h('div', { class: 'lx-result lx-deepdone' }, h('h2', {}, '🏋️ ' + LT('lang.deep.score', { right, n: items.length })),
+        h('ul', { class: 'lx-list' }, ...Object.entries(byKind).map(([k, r]) => h('li', {}, `${DEEP_LABEL[k] || k}: ${LNUM(r.c)} / ${LNUM(r.n)}`))),
+        h('p', { class: 'tiny' }, LT('lang.deep.eachReview')), newWordsList(),
+        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back')))));
       return;
     }
     const it = items[i++];
     const el = exItem(it, ok => {
       N.deepRecord(UI.C, UI.L, it.lang, it, ok, day, it.perLex); save();
       if (ok) right++; const t = byKind[it.kind] = byKind[it.kind] || { c: 0, n: 0 }; t.n++; if (ok) t.c++;
-      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? 'Next →' : 'Finish'); b.onclick = next;
+      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? LT('lang.drill.next') + ' →' : LT('lang.deep.finish')); b.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(el.dataset, { kind: it.kind, lang: it.lang, lex: it.lex });
@@ -156,7 +156,7 @@ function deepRun(holder, items, { again = null } = {}) {
 function whenProfiles(c, draw, v) {
   const ready = () => UI.profiles || Object.values(LX(c).lex).some(x => x.profile);
   if (ready()) return draw();
-  v.append(h('p', { class: 'lx-note lx-wait' }, '⏳ Loading the word profiles…'));
+  v.append(h('p', { class: 'lx-note lx-wait' }, '⏳ ' + LT('lang.deep.loading')));
   const hash = location.hash; let n = 0;
   const t = setInterval(() => { if (location.hash !== hash) return clearInterval(t); if (ready() || ++n > 50) { clearInterval(t); render(); } }, 200);
 }
@@ -164,20 +164,20 @@ const hasDepthData = x => !!(x.profile || x.root || x.compound || (x.contrasts |
 /** 🏋️ on the word card (the types its data allows). */
 function deepButton(c, lid) {
   const x = LX(c)?.lex[lid]; if (!x || !hasDepthData(x) || document.querySelector('.lx-session')) return null;
-  return h('button', { class: 'btn small lx-deepbtn', onclick: () => { document.querySelector('.lx-pop')?.remove(); go(`#/deep/${c}/${encodeURIComponent(lid)}`); } }, '🏋️ Practise this word');
+  return h('button', { class: 'btn small lx-deepbtn', onclick: () => { document.querySelector('.lx-pop')?.remove(); go(`#/deep/${c}/${encodeURIComponent(lid)}`); } }, '🏋️ ' + LT('lang.view.deep'));
 }
 /** 🏋️ deepen on a node or lesson page: when the learner has met some of its words in this language. */
 function deepenButton(nid, c) {
   const k = N.known(UI.C, UI.L, c), met = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]) && hasDepthData(LX(c).lex[id]));
-  return met.length ? h('button', { class: 'btn small lx-deepenbtn', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, `🏋️ Deepen (${met.length} word${met.length === 1 ? '' : 's'})`) : null;
+  return met.length ? h('button', { class: 'btn small lx-deepenbtn', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, '← Back')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, '← ' + LT('lang.card.back'))),
     h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).name}`)));
   whenProfiles(c, () => {
     const types = N.deepTypes(UI.C, UI.L, c, lid);
-    if (!types.length) return v.append(h('p', { class: 'lx-note' }, 'Nothing to practise in depth for this word yet: its data allows none of the depth exercises (or they need words you have not met).'));
+    if (!types.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.deep.noneForWord')));
     v.append(h('div', { class: 'lx-chips lx-deeptypes' }, ...types.map(t => h('span', { class: 'lx-badge ctx', 'data-type': t }, DEEP_LABEL[t] || t))));
     const run = () => { v.querySelector('.lx-deephold')?.remove(); const hold = h('div', { class: 'lx-deephold' }); v.append(hold); deepRun(hold, N.deepItems(UI.C, UI.L, c, [lid], { max: 10 }), { again: run }); };
     run();
@@ -187,15 +187,15 @@ VIEWS.deepen = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n) return VIEWS.home(v);
   const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang;
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, '← ' + n.title)),
-    h('h1', {}, '🏋️ Deepen', h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '🏋️ ' + LT('lang.view.deepen'), h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).name}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go(`#/deepen/${encodeURIComponent(nid)}/${x}`); })));
   whenProfiles(c, () => {
     const k = N.known(UI.C, UI.L, c), ids = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]));
-    if (!ids.length) return v.append(h('p', { class: 'lx-note' }, `Meet some words of this node in ${info(c).name} first.`));
+    if (!ids.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.deep.meetFirst', { lang: info(c).name })));
     const run = () => { v.querySelector('.lx-deephold')?.remove(); const hold = h('div', { class: 'lx-deephold' }); v.append(hold);
       const items = N.deepItems(UI.C, UI.L, c, shuffle(ids), { k, max: 12 });
-      if (!items.length) return hold.append(h('p', { class: 'lx-note' }, 'Nothing to deepen here yet.'));
-      hold.append(h('p', { class: 'tiny' }, `A mixed set over the ${ids.length} word${ids.length === 1 ? '' : 's'} you have met: `, ...uniq(items.map(it => it.kind)).map(t => h('span', { class: 'lx-badge ctx' }, DEEP_LABEL[t] || t))));
+      if (!items.length) return hold.append(h('p', { class: 'lx-note' }, LT('lang.deep.nothingHere')));
+      hold.append(h('p', { class: 'tiny' }, LT('lang.deep.mixedSet', { n: ids.length }) + ' ', ...uniq(items.map(it => it.kind)).map(t => h('span', { class: 'lx-badge ctx' }, DEEP_LABEL[t] || t))));
       deepRun(hold, items, { again: run }); };
     run();
   }, v);

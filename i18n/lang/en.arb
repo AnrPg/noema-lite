@@ -1036,6 +1036,258 @@
   "@lang.sess.backToMap": {
     "description": "Button at the end of a session."
   },
+  "lang.gram.periphrastic": "said another way",
+  "@lang.gram.periphrastic": {
+    "description": "Badge (after ≈) of a grammar point that this language expresses with other means (periphrastically)."
+  },
+  "lang.gram.absent": "not in this language",
+  "@lang.gram.absent": {
+    "description": "Badge (after —) of a grammar point this language does not have."
+  },
+  "lang.gram.familiarShow": "familiar from {from} — show",
+  "@lang.gram.familiarShow": {
+    "description": "Summary of a folded part of a grammar page (after ✓) that the learner knows from their languages; tapping shows it. {from} = list of language names.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Greek, Russian"
+      }
+    }
+  },
+  "lang.expl.askYourself": "Ask yourself",
+  "@lang.expl.askYourself": {
+    "description": "EXPLANATION (follows the course’s explanation language): default title of a course block of questions the learner asks themself."
+  },
+  "lang.gram.rel.same": "the same",
+  "@lang.gram.rel.same": {
+    "description": "Badge of a comparison note (after =): the point works the same in the learner’s language."
+  },
+  "lang.gram.rel.similar": "similar",
+  "@lang.gram.rel.similar": {
+    "description": "Badge of a comparison note (after ≈): similar."
+  },
+  "lang.gram.rel.different": "different",
+  "@lang.gram.rel.different": {
+    "description": "Badge of a comparison note (after ≠): different."
+  },
+  "lang.gram.rel.new": "new",
+  "@lang.gram.rel.new": {
+    "description": "Badge of a comparison note (after ✨): new for a speaker of that language."
+  },
+  "lang.gram.rel.trap": "trap",
+  "@lang.gram.rel.trap": {
+    "description": "Badge of a comparison note (after ⚠️): a trap for a speaker of that language."
+  },
+  "lang.gram.aiBadge": "AI",
+  "@lang.gram.aiBadge": {
+    "description": "Badge on a comparison note written by an AI. Very short."
+  },
+  "lang.gram.fromYours": "From your languages",
+  "@lang.gram.fromYours": {
+    "description": "Heading (after 🧭) of the comparison notes for the learner’s own languages."
+  },
+  "lang.gram.fromOthers": "The same point from other languages",
+  "@lang.gram.fromOthers": {
+    "description": "Folded section (after 🌐) of comparison notes for other languages."
+  },
+  "lang.gram.notesFor": "Notes for {langs}",
+  "@lang.gram.notesFor": {
+    "description": "Button (after ✨): ask the AI to write comparison notes for these languages ({langs} = list of language names).",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Greek, Turkish"
+      }
+    }
+  },
+  "lang.gram.writing": "writing…",
+  "@lang.gram.writing": {
+    "description": "Button text (after ✨) while the AI writes the notes."
+  },
+  "lang.gram.failed": "failed",
+  "@lang.gram.failed": {
+    "description": "Button text (after ✨) when writing the notes failed and no reason is known."
+  },
+  "lang.gram.sameInOthers": "The same point in your other languages",
+  "@lang.gram.sameInOthers": {
+    "description": "Heading (after ⇄) of the table that shows a grammar point in every course language."
+  },
+  "lang.gram.worksAsIn": "This point works as in {from}: the parts you know are folded.",
+  "@lang.gram.worksAsIn": {
+    "description": "Line on a grammar page (after ✓): the point works as in the learner’s languages ({from} = list of language names).",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Greek, Russian"
+      }
+    }
+  },
+  "lang.gram.askYourself": "Ask yourself",
+  "@lang.gram.askYourself": {
+    "description": "Heading (after 🤔) of the learner’s checklist on a grammar page."
+  },
+  "lang.gram.traps": "Traps",
+  "@lang.gram.traps": {
+    "description": "Heading (after ⚠️) of the traps of a grammar point."
+  },
+  "lang.gram.inSentences": "In sentences",
+  "@lang.gram.inSentences": {
+    "description": "Folded section of example sentences on a grammar page (a count follows)."
+  },
+  "lang.gram.fitsWords": "fits your words",
+  "@lang.gram.fitsWords": {
+    "description": "Under an example sentence (after ✓): every word of it is known to the learner."
+  },
+  "lang.gram.seeAlso": "See also",
+  "@lang.gram.seeAlso": {
+    "description": "Heading (after 🔗) of links to related grammar points."
+  },
+  "lang.expl.fourWays": "Four ways languages build words",
+  "@lang.expl.fourWays": {
+    "description": "EXPLANATION (follows the course’s explanation language): title (after 🧬) of the card about the four types of languages (isolating, agglutinating, fusional, polysynthetic)."
+  },
+  "lang.expl.learnFirst": "Learn first:",
+  "@lang.expl.learnFirst": {
+    "description": "EXPLANATION (follows the course’s explanation language): label (after 🧭) before what to learn first in a language of this type (course content)."
+  },
+  "lang.expl.languages": "Languages:",
+  "@lang.expl.languages": {
+    "description": "EXPLANATION (follows the course’s explanation language): label before example languages of a type (course content)."
+  },
+  "lang.expl.spectrum": "A spectrum, not boxes.",
+  "@lang.expl.spectrum": {
+    "description": "EXPLANATION (follows the course’s explanation language): bold lead-in before the course’s note that language types are a spectrum."
+  },
+  "lang.gram.atAGlance": "{lang} at a glance",
+  "@lang.gram.atAGlance": {
+    "description": "Title of a language’s overview card. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.expl.type": "Type: {type}.",
+  "@lang.expl.type": {
+    "description": "EXPLANATION (follows the course’s explanation language): bold lead-in on the overview card before why the language is of this type. {type} = the type’s name from the course (e.g. “fusional”).",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "fusional"
+      }
+    }
+  },
+  "lang.expl.also": "Also:",
+  "@lang.expl.also": {
+    "description": "EXPLANATION (follows the course’s explanation language): label before other type features the language shows (course content)."
+  },
+  "lang.gram.special": "What is special from the very beginning",
+  "@lang.gram.special": {
+    "description": "Heading (after ✨) on a language’s overview card."
+  },
+  "lang.gram.path": "Its path through the steps",
+  "@lang.gram.path": {
+    "description": "Heading (after 🛤️) on a language’s overview card: how the language goes through the course steps."
+  },
+  "lang.gram.library": "The library of {lang}’s peculiarities",
+  "@lang.gram.library": {
+    "description": "Button (after 📚) to a language’s peculiarities. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.gram.sameOverview": "The same overview for:",
+  "@lang.gram.sameOverview": {
+    "description": "Label before buttons that open the overview of the other course languages."
+  },
+  "lang.gram.newFamiliar": "New for you, familiar to you",
+  "@lang.gram.newFamiliar": {
+    "description": "Heading (after 🧭) of what is new and what is familiar in this language for the learner."
+  },
+  "lang.gram.computed": "Computed from the languages you know: {langs} · {nNew, number} new · {nFam, number} familiar",
+  "@lang.gram.computed": {
+    "description": "Under “New for you, familiar to you”: the languages used ({langs} = list of names or —) and the counts.",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Greek, Russian"
+      },
+      "nNew": {
+        "type": "int",
+        "example": "12"
+      },
+      "nFam": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "lang.gram.computedNoProfile": "Computed from the languages you know: {langs} (no profile yet for {unknown}) · {nNew, number} new · {nFam, number} familiar",
+  "@lang.gram.computedNoProfile": {
+    "description": "As lang.gram.computed, when some of the learner’s languages have no profile yet ({unknown} = their names).",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Greek, Russian"
+      },
+      "unknown": {
+        "type": "String",
+        "example": "Pontic"
+      },
+      "nNew": {
+        "type": "int",
+        "example": "12"
+      },
+      "nFam": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "lang.gram.newForYou": "New for you ({n, number})",
+  "@lang.gram.newForYou": {
+    "description": "Folded section (after ✨) of peculiarities new for the learner, with the count.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.gram.familiarFromYours": "Familiar from your languages ({n, number})",
+  "@lang.gram.familiarFromYours": {
+    "description": "Folded section (after 🤝) of peculiarities familiar from the learner’s languages, with the count.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.gram.asIn": "(as in {langs})",
+  "@lang.gram.asIn": {
+    "description": "After a familiar peculiarity: the learner’s languages it works like ({langs} = list of names).",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Greek, Russian"
+      }
+    }
+  },
+  "lang.gram.buildIn": "Build it in {lang}:",
+  "@lang.gram.buildIn": {
+    "description": "Exercise question: build the sentence with the tiles in that language. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
   "lang.lesson.pct": "{pct, number} %",
   "@lang.lesson.pct": {
     "description": "A lesson check’s best score in percent, after a language’s state on the lesson page.",
@@ -1179,5 +1431,543 @@
   "lang.lesson.back": "Back to the lesson",
   "@lang.lesson.back": {
     "description": "Button at the end of a lesson run."
+  },
+  "lang.fn.new": "new",
+  "@lang.fn.new": {
+    "description": "State of a grammar point (after ○): not practised yet. One word."
+  },
+  "lang.fn.practicing": "practising",
+  "@lang.fn.practicing": {
+    "description": "State of a grammar point (after ◑): being practised. One word."
+  },
+  "lang.fn.solid": "solid",
+  "@lang.fn.solid": {
+    "description": "State of a grammar point (after ●): known solidly. One word."
+  },
+  "lang.fn.mastered": "mastered",
+  "@lang.fn.mastered": {
+    "description": "State of a grammar point (after ★): mastered. One word."
+  },
+  "lang.feas.ready": "ready",
+  "@lang.feas.ready": {
+    "description": "Feasibility light of a grammar point (after 🟢): it can be practised now with the learner’s words. One word."
+  },
+  "lang.feas.readyN": "ready · {n, number} sentences",
+  "@lang.feas.readyN": {
+    "description": "Feasibility light (after 🟢) with the number of sentences of the course that fit the learner’s words.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "14"
+      }
+    }
+  },
+  "lang.feas.thin": "thin ({n, plural, one {# sentence} other {# sentences}})",
+  "@lang.feas.thin": {
+    "description": "Feasibility light (after 🟡): only a few sentences fit the learner’s words yet.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.feas.missPos": "{have, number}/{need, number} {pos}s",
+  "@lang.feas.missPos": {
+    "description": "In the feasibility light: words of a part of speech the learner has / needs. {pos} = the part of speech in the singular, as the course engine names it (e.g. “verb”); English adds “s”.",
+    "placeholders": {
+      "have": {
+        "type": "int",
+        "example": "2"
+      },
+      "need": {
+        "type": "int",
+        "example": "4"
+      },
+      "pos": {
+        "type": "String",
+        "example": "verb"
+      }
+    }
+  },
+  "lang.feas.needsNode": "needs {node}",
+  "@lang.feas.needsNode": {
+    "description": "Feasibility light (after 🔒): the course step that unlocks the point ({node} = step code and title).",
+    "placeholders": {
+      "node": {
+        "type": "String",
+        "example": "S05 Greetings"
+      }
+    }
+  },
+  "lang.feas.needsWords": "needs more words",
+  "@lang.feas.needsWords": {
+    "description": "Feasibility light (after 🔒): more words are needed first."
+  },
+  "lang.feas.title": "Can this point be trained now with the words you know? (§7.3)",
+  "@lang.feas.title": {
+    "description": "Tooltip of the feasibility light. Keep “(§7.3)”."
+  },
+  "lang.glane.practise": "Practise",
+  "@lang.glane.practise": {
+    "description": "Button (after ▶): practise a grammar point."
+  },
+  "lang.kind.inflect": "forms",
+  "@lang.kind.inflect": {
+    "description": "Kind of grammar exercise, in a list after “Exercises:”."
+  },
+  "lang.kind.gender": "gender",
+  "@lang.kind.gender": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.measure": "measure words",
+  "@lang.kind.measure": {
+    "description": "Kind of grammar exercise (Chinese measure words)."
+  },
+  "lang.kind.meaning": "meanings",
+  "@lang.kind.meaning": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.build": "building sentences",
+  "@lang.kind.build": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.transform": "changing sentences",
+  "@lang.kind.transform": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.quiz": "quiz",
+  "@lang.kind.quiz": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.paradigm": "tables",
+  "@lang.kind.paradigm": {
+    "description": "Kind of grammar exercise: paradigm tables."
+  },
+  "lang.kind.analyze": "analysing forms",
+  "@lang.kind.analyze": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.morph": "pieces of words",
+  "@lang.kind.morph": {
+    "description": "Kind of grammar exercise: morphemes."
+  },
+  "lang.kind.root": "roots and patterns",
+  "@lang.kind.root": {
+    "description": "Kind of grammar exercise (Semitic roots)."
+  },
+  "lang.kind.agree": "agreement",
+  "@lang.kind.agree": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.contrast": "contrasts",
+  "@lang.kind.contrast": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.parse": "word roles",
+  "@lang.kind.parse": {
+    "description": "Kind of grammar exercise: the role of each word."
+  },
+  "lang.kind.gloss": "glosses",
+  "@lang.kind.gloss": {
+    "description": "Kind of grammar exercise: interlinear glosses."
+  },
+  "lang.kind.proofread": "finding mistakes",
+  "@lang.kind.proofread": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.combine": "joining sentences",
+  "@lang.kind.combine": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.kind.word": "words",
+  "@lang.kind.word": {
+    "description": "Kind of grammar exercise."
+  },
+  "lang.glane.exercises": "Exercises: {kinds}",
+  "@lang.glane.exercises": {
+    "description": "Under a grammar card: the kinds of exercises it has ({kinds} = list of kinds joined with “ · ”).",
+    "placeholders": {
+      "kinds": {
+        "type": "String",
+        "example": "forms · tables"
+      }
+    }
+  },
+  "lang.ex.check": "Check",
+  "@lang.ex.check": {
+    "description": "Button (before ✓): check the answer."
+  },
+  "lang.ex.choose": "choose",
+  "@lang.ex.choose": {
+    "description": "Accessible name of a select in an exercise when it has no label."
+  },
+  "lang.ex.given": "Given:",
+  "@lang.ex.given": {
+    "description": "Label before the part of the answer given in an analysis exercise."
+  },
+  "lang.expl.tag.NOM": "nominative",
+  "@lang.expl.tag.NOM": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag NOM in the legend of a gloss exercise (“NOM = nominative”). A grammar term."
+  },
+  "lang.expl.tag.ACC": "accusative",
+  "@lang.expl.tag.ACC": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag ACC in the legend of a gloss exercise (“ACC = accusative”). A grammar term."
+  },
+  "lang.expl.tag.DAT": "dative",
+  "@lang.expl.tag.DAT": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag DAT in the legend of a gloss exercise (“DAT = dative”). A grammar term."
+  },
+  "lang.expl.tag.GEN": "genitive",
+  "@lang.expl.tag.GEN": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag GEN in the legend of a gloss exercise (“GEN = genitive”). A grammar term."
+  },
+  "lang.expl.tag.SG": "singular",
+  "@lang.expl.tag.SG": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag SG in the legend of a gloss exercise (“SG = singular”). A grammar term."
+  },
+  "lang.expl.tag.PL": "plural",
+  "@lang.expl.tag.PL": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PL in the legend of a gloss exercise (“PL = plural”). A grammar term."
+  },
+  "lang.expl.tag.DU": "dual",
+  "@lang.expl.tag.DU": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag DU in the legend of a gloss exercise (“DU = dual”). A grammar term."
+  },
+  "lang.expl.tag.COLL": "collective",
+  "@lang.expl.tag.COLL": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag COLL in the legend of a gloss exercise (“COLL = collective”). A grammar term."
+  },
+  "lang.expl.tag.MASC": "masculine",
+  "@lang.expl.tag.MASC": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag MASC in the legend of a gloss exercise (“MASC = masculine”). A grammar term."
+  },
+  "lang.expl.tag.FEM": "feminine",
+  "@lang.expl.tag.FEM": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag FEM in the legend of a gloss exercise (“FEM = feminine”). A grammar term."
+  },
+  "lang.expl.tag.NEUT": "neuter",
+  "@lang.expl.tag.NEUT": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag NEUT in the legend of a gloss exercise (“NEUT = neuter”). A grammar term."
+  },
+  "lang.expl.tag.DEF": "definite",
+  "@lang.expl.tag.DEF": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag DEF in the legend of a gloss exercise (“DEF = definite”). A grammar term."
+  },
+  "lang.expl.tag.INDF": "indefinite",
+  "@lang.expl.tag.INDF": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag INDF in the legend of a gloss exercise (“INDF = indefinite”). A grammar term."
+  },
+  "lang.expl.tag.PRS": "present",
+  "@lang.expl.tag.PRS": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PRS in the legend of a gloss exercise (“PRS = present”). A grammar term."
+  },
+  "lang.expl.tag.PST": "past",
+  "@lang.expl.tag.PST": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PST in the legend of a gloss exercise (“PST = past”). A grammar term."
+  },
+  "lang.expl.tag.FUT": "future",
+  "@lang.expl.tag.FUT": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag FUT in the legend of a gloss exercise (“FUT = future”). A grammar term."
+  },
+  "lang.expl.tag.IND": "indicative",
+  "@lang.expl.tag.IND": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag IND in the legend of a gloss exercise (“IND = indicative”). A grammar term."
+  },
+  "lang.expl.tag.SBJV": "subjunctive",
+  "@lang.expl.tag.SBJV": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag SBJV in the legend of a gloss exercise (“SBJV = subjunctive”). A grammar term."
+  },
+  "lang.expl.tag.JUS": "jussive",
+  "@lang.expl.tag.JUS": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag JUS in the legend of a gloss exercise (“JUS = jussive”). A grammar term."
+  },
+  "lang.expl.tag.IMP": "imperative",
+  "@lang.expl.tag.IMP": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag IMP in the legend of a gloss exercise (“IMP = imperative”). A grammar term."
+  },
+  "lang.expl.tag.NFIN": "infinitive",
+  "@lang.expl.tag.NFIN": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag NFIN in the legend of a gloss exercise (“NFIN = infinitive”). A grammar term."
+  },
+  "lang.expl.tag.PTCP": "participle",
+  "@lang.expl.tag.PTCP": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PTCP in the legend of a gloss exercise (“PTCP = participle”). A grammar term."
+  },
+  "lang.expl.tag.CONST": "construct state",
+  "@lang.expl.tag.CONST": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag CONST in the legend of a gloss exercise (“CONST = construct state”). A grammar term."
+  },
+  "lang.expl.tag.STRG": "strong ending",
+  "@lang.expl.tag.STRG": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag STRG in the legend of a gloss exercise (“STRG = strong ending”). A grammar term."
+  },
+  "lang.expl.tag.WEAK": "weak ending",
+  "@lang.expl.tag.WEAK": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag WEAK in the legend of a gloss exercise (“WEAK = weak ending”). A grammar term."
+  },
+  "lang.expl.tag.MIX": "mixed ending",
+  "@lang.expl.tag.MIX": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag MIX in the legend of a gloss exercise (“MIX = mixed ending”). A grammar term."
+  },
+  "lang.expl.tag.CMPR": "comparative",
+  "@lang.expl.tag.CMPR": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag CMPR in the legend of a gloss exercise (“CMPR = comparative”). A grammar term."
+  },
+  "lang.expl.tag.SPRL": "superlative",
+  "@lang.expl.tag.SPRL": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag SPRL in the legend of a gloss exercise (“SPRL = superlative”). A grammar term."
+  },
+  "lang.expl.tag.PFV": "perfective",
+  "@lang.expl.tag.PFV": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PFV in the legend of a gloss exercise (“PFV = perfective”). A grammar term."
+  },
+  "lang.expl.tag.IPFV": "imperfective",
+  "@lang.expl.tag.IPFV": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag IPFV in the legend of a gloss exercise (“IPFV = imperfective”). A grammar term."
+  },
+  "lang.expl.tag.FORM": "formal",
+  "@lang.expl.tag.FORM": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag FORM in the legend of a gloss exercise (“FORM = formal”). A grammar term."
+  },
+  "lang.expl.tag.INFM": "informal",
+  "@lang.expl.tag.INFM": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag INFM in the legend of a gloss exercise (“INFM = informal”). A grammar term."
+  },
+  "lang.expl.tag.1": "1st person",
+  "@lang.expl.tag.1": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag 1 in the legend of a gloss exercise (“1 = 1st person”). A grammar term."
+  },
+  "lang.expl.tag.2": "2nd person",
+  "@lang.expl.tag.2": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag 2 in the legend of a gloss exercise (“2 = 2nd person”). A grammar term."
+  },
+  "lang.expl.tag.3": "3rd person",
+  "@lang.expl.tag.3": {
+    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag 3 in the legend of a gloss exercise (“3 = 3rd person”). A grammar term."
+  },
+  "lang.ex.proofAsk": "One word is wrong — tap it, then fix it.",
+  "@lang.ex.proofAsk": {
+    "description": "Question of the proofreading exercise."
+  },
+  "lang.ex.rightForm": "The right form?",
+  "@lang.ex.rightForm": {
+    "description": "Proofreading exercise, after the wrong word was found: choose the right form."
+  },
+  "lang.ex.morphAsk": "Put the pieces together, in order:",
+  "@lang.ex.morphAsk": {
+    "description": "Question of the exercise that builds a word from its pieces (morphemes)."
+  },
+  "lang.ex.combineAsk": "Join the two sentences into one with “{connector}” ({gloss}):",
+  "@lang.ex.combineAsk": {
+    "description": "Question of the exercise that joins two sentences. {connector} = a word of the learned language, {gloss} = its meaning.",
+    "placeholders": {
+      "connector": {
+        "type": "String",
+        "example": "und"
+      },
+      "gloss": {
+        "type": "String",
+        "example": "and"
+      }
+    }
+  },
+  "lang.glane.nothing": "Nothing to practise yet with the words you know.",
+  "@lang.glane.nothing": {
+    "description": "Message (toast) when no grammar item can be made from the learner’s words."
+  },
+  "lang.glane.mixedTitle": "Mixed grammar",
+  "@lang.glane.mixedTitle": {
+    "description": "Title of a practice run over several grammar points (after a flag and 📐)."
+  },
+  "lang.glane.done": "Practice done",
+  "@lang.glane.done": {
+    "description": "Title at the end of a grammar practice run (after 📐)."
+  },
+  "lang.glane.title": "Grammar lane",
+  "@lang.glane.title": {
+    "description": "Section title on the course home (after 📐)."
+  },
+  "lang.glane.points": "{n, plural, one {# point} other {# points}}",
+  "@lang.glane.points": {
+    "description": "In the grammar lane: how many grammar points a language has open (states and counts follow).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "lang.glane.mixed": "Mixed practice",
+  "@lang.glane.mixed": {
+    "description": "Button (after ▶): practise several grammar points mixed."
+  },
+  "lang.glane.all": "All",
+  "@lang.glane.all": {
+    "description": "Button (before →): the whole grammar lane of a language."
+  },
+  "lang.glane.empty": "The grammar of your lessons appears here once a lesson is open.",
+  "@lang.glane.empty": {
+    "description": "The grammar lane on the home before any lesson is open."
+  },
+  "lang.glane.help": "The points of your open lessons. 🟢 ready · 🟡 thin (few sentences with your words yet) · 🔒 needs a lesson or words first. Practising records how sure you are: new → practising → solid → mastered.",
+  "@lang.glane.help": {
+    "description": "Explanation at the top of a language’s grammar lane. Keep the signs."
+  },
+  "lang.glane.noLesson": "No lesson is open yet in {lang}.",
+  "@lang.glane.noLesson": {
+    "description": "A language’s grammar lane before any lesson is open. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.deep.kind.root_family": "Root families",
+  "@lang.deep.kind.root_family": {
+    "description": "Kind of depth exercise (after 🌳): words of the same root."
+  },
+  "lang.deep.kind.compound_split": "Compounds",
+  "@lang.deep.kind.compound_split": {
+    "description": "Kind of depth exercise (after 🧱): split a compound word."
+  },
+  "lang.deep.kind.sense_split": "Which word here?",
+  "@lang.deep.kind.sense_split": {
+    "description": "Kind of depth exercise (after 🔀): which of two words fits this meaning."
+  },
+  "lang.deep.kind.collocation": "Goes with",
+  "@lang.deep.kind.collocation": {
+    "description": "Kind of depth exercise (after 🤝): collocations."
+  },
+  "lang.deep.kind.confusables": "Easily mixed up",
+  "@lang.deep.kind.confusables": {
+    "description": "Kind of depth exercise (after 👯): words often confused."
+  },
+  "lang.deep.kind.intensity_scale": "Strength",
+  "@lang.deep.kind.intensity_scale": {
+    "description": "Kind of depth exercise (after 📶): order words by intensity."
+  },
+  "lang.deep.kind.register_pick": "Register",
+  "@lang.deep.kind.register_pick": {
+    "description": "Kind of depth exercise (after 🎭): formal, neutral, colloquial."
+  },
+  "lang.deep.kind.nuance_pick": "Nuance",
+  "@lang.deep.kind.nuance_pick": {
+    "description": "Kind of depth exercise (after 🔍)."
+  },
+  "lang.deep.kind.connotation": "Feeling",
+  "@lang.deep.kind.connotation": {
+    "description": "Kind of depth exercise (after 💭): connotation."
+  },
+  "lang.deep.kind.idiom_meaning": "Idioms and sayings",
+  "@lang.deep.kind.idiom_meaning": {
+    "description": "Kind of depth exercise (after 🗝️)."
+  },
+  "lang.deep.kind.example_cloze": "In context",
+  "@lang.deep.kind.example_cloze": {
+    "description": "Kind of depth exercise (after ✏️): fill the gap in a sentence."
+  },
+  "lang.deep.kind.sense_pick": "Which meaning?",
+  "@lang.deep.kind.sense_pick": {
+    "description": "Kind of depth exercise (after 🧭)."
+  },
+  "lang.deep.kind.etymology_link": "Where it comes from",
+  "@lang.deep.kind.etymology_link": {
+    "description": "Kind of depth exercise (after 🏺): etymology."
+  },
+  "lang.deep.gap": "gap",
+  "@lang.deep.gap": {
+    "description": "Accessible name of the gap in a fill-in sentence."
+  },
+  "lang.deep.outOfCourse": "not in the course yet — see the translation",
+  "@lang.deep.outOfCourse": {
+    "description": "Tooltip of a word of a sentence that the course does not teach yet."
+  },
+  "lang.deep.literally": "literally: “{lit}”",
+  "@lang.deep.literally": {
+    "description": "Under an idiom: its literal translation ({lit}, course content).",
+    "placeholders": {
+      "lit": {
+        "type": "String",
+        "example": "to have tomatoes on the eyes"
+      }
+    }
+  },
+  "lang.deep.nowGroup": "Now its group…",
+  "@lang.deep.nowGroup": {
+    "description": "Status in a sorting exercise after a card was tapped."
+  },
+  "lang.deep.tapFirst": "Tap a card first.",
+  "@lang.deep.tapFirst": {
+    "description": "Status in a sorting exercise when a group was tapped before a card."
+  },
+  "lang.deep.notThis": "Not this one — try another group",
+  "@lang.deep.notThis": {
+    "description": "Status in a sorting exercise after a wrong group."
+  },
+  "lang.deep.score": "{right, number} of {n, number} right",
+  "@lang.deep.score": {
+    "description": "Title at the end of a set of depth exercises (after 🏋️).",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "7"
+      },
+      "n": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "lang.deep.eachReview": "Every answer counts as a review of its word.",
+  "@lang.deep.eachReview": {
+    "description": "Note at the end of a set of depth exercises."
+  },
+  "lang.deep.finish": "Finish",
+  "@lang.deep.finish": {
+    "description": "Button after the last depth exercise."
+  },
+  "lang.deep.loading": "Loading the word profiles…",
+  "@lang.deep.loading": {
+    "description": "Note (after ⏳) while the word data loads."
+  },
+  "lang.deep.deepenN": "Deepen ({n, plural, one {# word} other {# words}})",
+  "@lang.deep.deepenN": {
+    "description": "Button (after 🏋️) on a step’s page: depth exercises over the words met there.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "lang.deep.noneForWord": "Nothing to practise in depth for this word yet: its data allows none of the depth exercises (or they need words you have not met).",
+  "@lang.deep.noneForWord": {
+    "description": "Page “practise this word” when no depth exercise is possible."
+  },
+  "lang.deep.meetFirst": "Meet some words of this node in {lang} first.",
+  "@lang.deep.meetFirst": {
+    "description": "Deepen page when no word of the step has been met in that language.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.deep.nothingHere": "Nothing to deepen here yet.",
+  "@lang.deep.nothingHere": {
+    "description": "Deepen page when no depth exercise can be made."
+  },
+  "lang.deep.mixedSet": "A mixed set over the {n, plural, one {# word} other {# words}} you have met:",
+  "@lang.deep.mixedSet": {
+    "description": "Deepen page: before the badges of the exercise kinds in the set.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
   }
 }
