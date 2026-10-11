@@ -2890,6 +2890,1048 @@
   "@lang.tutor.rowLabel": {
     "description": "Label (after 🎓) before the tutor buttons of a page."
   },
+  "lang.script.marksLabel": "vowel marks:",
+  "@lang.script.marksLabel": {
+    "description": "Course settings, per language (after “Arabic — ”): label of the vowel-marks select."
+  },
+  "lang.script.marksIn": "Vowel marks in {lang}",
+  "@lang.script.marksIn": {
+    "description": "Accessible name of the vowel-marks select. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.marksFull": "always all of them",
+  "@lang.script.marksFull": {
+    "description": "Vowel-marks option: always show every mark."
+  },
+  "lang.script.marksFading": "fading: on new words, fewer on known ones",
+  "@lang.script.marksFading": {
+    "description": "Vowel-marks option: marks fade as words become known."
+  },
+  "lang.script.marksNone": "none (unvocalized)",
+  "@lang.script.marksNone": {
+    "description": "Vowel-marks option: no marks."
+  },
+  "lang.script.fadingHelp": "Fading: a new word shows every mark; once you know it for reading only the šadda / dagesh stay; once you can write it, none. Drills about the marks always show them.",
+  "@lang.script.fadingHelp": {
+    "description": "Help under the vowel-marks settings. Keep “šadda / dagesh” (names of marks)."
+  },
+  "lang.script.answerIn": "Your answer in {lang}",
+  "@lang.script.answerIn": {
+    "description": "Accessible name of an answer field. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.special": "Special letters",
+  "@lang.script.special": {
+    "description": "Accessible name of the row of ä ö ü ß buttons."
+  },
+  "lang.script.keyboardOf": "{lang} keyboard",
+  "@lang.script.keyboardOf": {
+    "description": "Accessible name of the on-screen keyboard. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.shinDot": "shin dot",
+  "@lang.script.shinDot": {
+    "description": "Tooltip of the Hebrew shin-dot key."
+  },
+  "lang.script.sinDot": "sin dot",
+  "@lang.script.sinDot": {
+    "description": "Tooltip of the Hebrew sin-dot key."
+  },
+  "lang.script.space": "space",
+  "@lang.script.space": {
+    "description": "Tooltip of the space key of the on-screen keyboard."
+  },
+  "lang.script.delete": "delete",
+  "@lang.script.delete": {
+    "description": "Tooltip of the ⌫ key of the on-screen keyboard."
+  },
+  "lang.script.onScreen": "On-screen keyboard",
+  "@lang.script.onScreen": {
+    "description": "Tooltip of the ⌨️ toggle."
+  },
+  "lang.script.pyPlaceholder": "pinyin, e.g. ni3hao3 or nihao",
+  "@lang.script.pyPlaceholder": {
+    "description": "Placeholder of the pinyin input. Keep the examples."
+  },
+  "lang.script.pyLabel": "Type pinyin, then choose the characters",
+  "@lang.script.pyLabel": {
+    "description": "Accessible name of the pinyin input."
+  },
+  "lang.script.chars": "Characters",
+  "@lang.script.chars": {
+    "description": "Accessible name of the list of candidate Chinese characters."
+  },
+  "lang.script.orType": "or type it…",
+  "@lang.script.orType": {
+    "description": "Placeholder of the typing field under the letter tiles."
+  },
+  "lang.script.joinAsk": "Write it in {lang} — tap its letters in order (they join by themselves):",
+  "@lang.script.joinAsk": {
+    "description": "Question of the letter-tiles exercise (Arabic: the letters join automatically).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.joinAskHe": "Write it in {lang} — tap its letters in order (mind the final forms):",
+  "@lang.script.joinAskHe": {
+    "description": "Question of the letter-tiles exercise for Hebrew (final letter forms).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.composeAsk": "Build the character from its parts ({layout}):",
+  "@lang.script.composeAsk": {
+    "description": "Question of the character-building exercise. {layout} = how the parts are arranged (lang.script.layout.*).",
+    "placeholders": {
+      "layout": {
+        "type": "String",
+        "example": "left | right"
+      }
+    }
+  },
+  "lang.script.layout.lr": "left | right",
+  "@lang.script.layout.lr": {
+    "description": "Arrangement of a Chinese character’s parts. Keep the | sign."
+  },
+  "lang.script.layout.tb": "top / bottom",
+  "@lang.script.layout.tb": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.lmr": "left | middle | right",
+  "@lang.script.layout.lmr": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.tmb": "top / middle / bottom",
+  "@lang.script.layout.tmb": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.around": "outside around inside",
+  "@lang.script.layout.around": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.openBelow": "open below",
+  "@lang.script.layout.openBelow": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.openAbove": "open above",
+  "@lang.script.layout.openAbove": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.openRight": "open right",
+  "@lang.script.layout.openRight": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.tl": "top-left around",
+  "@lang.script.layout.tl": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.tr": "top-right around",
+  "@lang.script.layout.tr": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.bl": "bottom-left around",
+  "@lang.script.layout.bl": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.layout.overlap": "overlapping",
+  "@lang.script.layout.overlap": {
+    "description": "Arrangement of a character’s parts."
+  },
+  "lang.script.letterN": "letter {n, number}",
+  "@lang.script.letterN": {
+    "description": "Accessible name of a letter button in the vowel-marks exercise.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.script.clearMarks": "clear",
+  "@lang.script.clearMarks": {
+    "description": "Button (after ∅): remove the marks of the selected letter."
+  },
+  "lang.script.vowelAsk": "Add the vowel marks, letter by letter (tap a letter, then its marks; ← → move, 1–9 marks, Enter checks):",
+  "@lang.script.vowelAsk": {
+    "description": "Question of the vowel-marks exercise. Keep the key names."
+  },
+  "lang.script.toneLabel": "syllable {n, number}: tone {tone, select, neutral {neutral} other {{tone}}}",
+  "@lang.script.toneLabel": {
+    "description": "Accessible name of a tone button: the syllable and the tone (1–4, or neutral).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "1"
+      },
+      "tone": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "lang.script.toneSpoken": "How is it said? (the tones change in speech)",
+  "@lang.script.toneSpoken": {
+    "description": "Question of the tone exercise about tone changes in speech (tone sandhi)."
+  },
+  "lang.script.toneAsk": "Mark the tone of every syllable (keys 1–5, 5 = neutral):",
+  "@lang.script.toneAsk": {
+    "description": "Question of the tone exercise."
+  },
+  "lang.script.written": "written:",
+  "@lang.script.written": {
+    "description": "Tone exercise: label before the written tones."
+  },
+  "lang.script.youRight": "you: {you} · right: {right}",
+  "@lang.script.youRight": {
+    "description": "Tooltip of a wrong letter in the spelling feedback. {you}/{right} = letters.",
+    "placeholders": {
+      "you": {
+        "type": "String",
+        "example": "a"
+      },
+      "right": {
+        "type": "String",
+        "example": "ä"
+      }
+    }
+  },
+  "lang.script.op.same": "same",
+  "@lang.script.op.same": {
+    "description": "Tooltip of a right letter in the spelling feedback."
+  },
+  "lang.script.op.missing": "missing",
+  "@lang.script.op.missing": {
+    "description": "Tooltip of a missing letter in the spelling feedback."
+  },
+  "lang.script.op.extra": "extra",
+  "@lang.script.op.extra": {
+    "description": "Tooltip of an extra letter in the spelling feedback."
+  },
+  "lang.script.typeIn": "Type it in {lang}…",
+  "@lang.script.typeIn": {
+    "description": "Placeholder of the spelling field.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.writeIn": "Write it in {lang}:",
+  "@lang.script.writeIn": {
+    "description": "Question of the spelling exercise.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.draw": "Draw {glyph}",
+  "@lang.script.draw": {
+    "description": "Accessible name of the drawing canvas. {glyph} = a letter or character.",
+    "placeholders": {
+      "glyph": {
+        "type": "String",
+        "example": "人"
+      }
+    }
+  },
+  "lang.script.strokeOk": "stroke {n, number} of {of, number}",
+  "@lang.script.strokeOk": {
+    "description": "Status while writing a character (✓ follows).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "lang.script.reversed": "the other way round — strokes go from where they start",
+  "@lang.script.reversed": {
+    "description": "Status: the stroke was drawn in the wrong direction."
+  },
+  "lang.script.notStroke": "not stroke {n, number} — try again",
+  "@lang.script.notStroke": {
+    "description": "Status: the stroke drawn is not the expected one.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.script.notStrokeHint": "not stroke {n, number} — follow the orange one",
+  "@lang.script.notStrokeHint": {
+    "description": "Status after two misses: the expected stroke is shown in orange.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.script.wrongStrokes": "{n, plural, one {# wrong stroke} other {# wrong strokes}}",
+  "@lang.script.wrongStrokes": {
+    "description": "Feedback after writing a character.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.script.strokeAsk": "Write {glyph} stroke by stroke (in the right order):",
+  "@lang.script.strokeAsk": {
+    "description": "Question of the stroke-order exercise.",
+    "placeholders": {
+      "glyph": {
+        "type": "String",
+        "example": "人"
+      }
+    }
+  },
+  "lang.script.traceAsk": "Trace the letter, then compare it with the model:",
+  "@lang.script.traceAsk": {
+    "description": "Question of the letter-tracing exercise."
+  },
+  "lang.script.strokeOrder": "Stroke order",
+  "@lang.script.strokeOrder": {
+    "description": "Button (after ▶): show the stroke order."
+  },
+  "lang.script.clear": "Clear",
+  "@lang.script.clear": {
+    "description": "Button: clear the drawing."
+  },
+  "lang.script.looksRight": "Looks right",
+  "@lang.script.looksRight": {
+    "description": "Self-check button (after ✓) after tracing a letter."
+  },
+  "lang.script.notYet": "Not yet",
+  "@lang.script.notYet": {
+    "description": "Self-check button (after ✗) after tracing a letter."
+  },
+  "lang.script.newLetter": "New in {lang}: a letter",
+  "@lang.script.newLetter": {
+    "description": "Heading of the first meeting with a letter. {lang} = flag and language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "🇮🇱 Hebrew"
+      }
+    }
+  },
+  "lang.script.newMark": "New in {lang}: a vowel mark",
+  "@lang.script.newMark": {
+    "description": "Heading of the first meeting with a vowel mark.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "🇮🇱 Hebrew"
+      }
+    }
+  },
+  "lang.script.mixUp": "Do not mix up with",
+  "@lang.script.mixUp": {
+    "description": "Label (after 👀) before letters that look alike."
+  },
+  "lang.script.field.reading": "reading",
+  "@lang.script.field.reading": {
+    "description": "Label on a character’s card: its readings."
+  },
+  "lang.script.field.meaning": "meaning",
+  "@lang.script.field.meaning": {
+    "description": "Label on a character’s card."
+  },
+  "lang.script.field.traditional": "traditional",
+  "@lang.script.field.traditional": {
+    "description": "Label on a character’s card: the traditional form."
+  },
+  "lang.script.field.parts": "parts",
+  "@lang.script.field.parts": {
+    "description": "Label on a character’s card: its components."
+  },
+  "lang.script.field.radical": "radical",
+  "@lang.script.field.radical": {
+    "description": "Label on a character’s card."
+  },
+  "lang.script.field.strokes": "strokes",
+  "@lang.script.field.strokes": {
+    "description": "Label on a character’s card: number of strokes."
+  },
+  "lang.script.field.built": "how it is built",
+  "@lang.script.field.built": {
+    "description": "Label on a character’s card: its etymology."
+  },
+  "lang.script.field.name": "name",
+  "@lang.script.field.name": {
+    "description": "Label on a letter’s card."
+  },
+  "lang.script.field.transliteration": "transliteration",
+  "@lang.script.field.transliteration": {
+    "description": "Label on a letter’s card."
+  },
+  "lang.script.field.sound": "sound",
+  "@lang.script.field.sound": {
+    "description": "Label on a letter’s card."
+  },
+  "lang.script.field.what": "what it does",
+  "@lang.script.field.what": {
+    "description": "Label on a mark’s card."
+  },
+  "lang.script.field.joins": "joins",
+  "@lang.script.field.joins": {
+    "description": "Label on an Arabic letter’s card: how it joins."
+  },
+  "lang.script.field.note": "note",
+  "@lang.script.field.note": {
+    "description": "Label on a letter’s card."
+  },
+  "lang.script.joins.dual": "to both sides",
+  "@lang.script.joins.dual": {
+    "description": "How an Arabic letter joins."
+  },
+  "lang.script.joins.right": "only to the letter before it",
+  "@lang.script.joins.right": {
+    "description": "How an Arabic letter joins."
+  },
+  "lang.script.joins.none": "to no letter",
+  "@lang.script.joins.none": {
+    "description": "How an Arabic letter joins."
+  },
+  "lang.script.inWords": "In words of the course",
+  "@lang.script.inWords": {
+    "description": "Section of a letter’s card: words with it."
+  },
+  "lang.script.traceIt": "Trace it",
+  "@lang.script.traceIt": {
+    "description": "Button (after ✍️) on a letter’s card."
+  },
+  "lang.script.drill.glyph_form": "Letter forms",
+  "@lang.script.drill.glyph_form": {
+    "description": "Script drill (after 🔣)."
+  },
+  "lang.script.drill.transliterate": "Reading",
+  "@lang.script.drill.transliterate": {
+    "description": "Script drill (after 🔤): read letters and words."
+  },
+  "lang.script.drill.vowelize": "Vowel marks",
+  "@lang.script.drill.vowelize": {
+    "description": "Script drill (after ◌َ)."
+  },
+  "lang.script.drill.tone_mark": "Tones",
+  "@lang.script.drill.tone_mark": {
+    "description": "Script drill (after 〽️)."
+  },
+  "lang.script.drill.char_compose": "Building characters",
+  "@lang.script.drill.char_compose": {
+    "description": "Script drill (after 🧩)."
+  },
+  "lang.script.drill.trace": "Tracing",
+  "@lang.script.drill.trace": {
+    "description": "Script drill (after ✍️)."
+  },
+  "lang.script.drill.spell": "Spelling",
+  "@lang.script.drill.spell": {
+    "description": "Script drill (after ⌨️), and the script lane of a Latin-script language."
+  },
+  "lang.script.drill.learn": "The next letters",
+  "@lang.script.drill.learn": {
+    "description": "Script drill (after 🆕): learn the next letters."
+  },
+  "lang.script.characters": "Characters",
+  "@lang.script.characters": {
+    "description": "Script lane of Chinese (button and title)."
+  },
+  "lang.script.letters": "Letters",
+  "@lang.script.letters": {
+    "description": "Script lane of Arabic or Hebrew (button and title)."
+  },
+  "lang.script.mixed": "Mixed",
+  "@lang.script.mixed": {
+    "description": "Button (after ▶): a mixed script drill."
+  },
+  "lang.expl.script.de": "{lang} is written in the Latin alphabet: ä ö ü and ß are letters of their own, every noun starts with a capital letter. Spelling drills use the words you have met; the buttons under the answer field type the special letters.",
+  "@lang.expl.script.de": {
+    "description": "EXPLANATION (follows the course’s explanation language): German’s writing system, on its script lane, then how the spelling drills work. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "German"
+      }
+    }
+  },
+  "lang.expl.script.latin": "{lang} is written in the Latin alphabet. Spelling drills use the words you have met; the buttons under the answer field type the special letters.",
+  "@lang.expl.script.latin": {
+    "description": "EXPLANATION (follows the course’s explanation language): a Latin-script language’s writing system, on its script lane.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Spanish"
+      }
+    }
+  },
+  "lang.expl.script.other": "{lang} is written in the {script}. Spelling drills use the words you have met; the buttons under the answer field type the special letters.",
+  "@lang.expl.script.other": {
+    "description": "EXPLANATION (follows the course’s explanation language): a language’s writing system ({script} = an ISO 15924 code such as “Cyrl”).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Russian"
+      },
+      "script": {
+        "type": "String",
+        "example": "Cyrl"
+      }
+    }
+  },
+  "lang.script.stage": "Stage {n, number} of {of, number}",
+  "@lang.script.stage": {
+    "description": "Script lane: the letter stage the learner is at.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      },
+      "of": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "lang.script.knownChars": "{known, number} of {total, number} characters known · {met, number} met",
+  "@lang.script.knownChars": {
+    "description": "Script lane (Chinese): characters known and met.",
+    "placeholders": {
+      "known": {
+        "type": "int",
+        "example": "40"
+      },
+      "total": {
+        "type": "int",
+        "example": "300"
+      },
+      "met": {
+        "type": "int",
+        "example": "60"
+      }
+    }
+  },
+  "lang.script.knownLetters": "{known, number} of {total, number} letters and marks known · {met, number} met",
+  "@lang.script.knownLetters": {
+    "description": "Script lane (Arabic, Hebrew): letters and marks known and met.",
+    "placeholders": {
+      "known": {
+        "type": "int",
+        "example": "12"
+      },
+      "total": {
+        "type": "int",
+        "example": "40"
+      },
+      "met": {
+        "type": "int",
+        "example": "16"
+      }
+    }
+  },
+  "lang.script.complete": "complete",
+  "@lang.script.complete": {
+    "description": "Badge (after ✅): the letter stage is complete."
+  },
+  "lang.script.charsHelp": "A character is known when you know a word with it (or from its own drills). The groups follow the lessons.",
+  "@lang.script.charsHelp": {
+    "description": "Help on the Chinese script lane."
+  },
+  "lang.script.lettersDone": "Every letter is known: words may now be typed, and transliteration follows your setting.",
+  "@lang.script.lettersDone": {
+    "description": "Help on the letters lane once the letter stage is complete."
+  },
+  "lang.script.lettersHelp": "Letters come in groups of similar shapes; the next group opens when you have practised this one. Until every letter is known, words show their transliteration and you write them with tiles.",
+  "@lang.script.lettersHelp": {
+    "description": "Help on the letters lane during the letter stage."
+  },
+  "lang.script.learnNext": "{n, plural, one {Learn the next one} other {Learn the next #}}",
+  "@lang.script.learnNext": {
+    "description": "Button (after 🆕): learn the next letters (at most 6).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "lang.script.groupKnown": "{known, number}/{n, number} known",
+  "@lang.script.groupKnown": {
+    "description": "After a group of letters: how many are known.",
+    "placeholders": {
+      "known": {
+        "type": "int",
+        "example": "3"
+      },
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "lang.script.later": "later",
+  "@lang.script.later": {
+    "description": "After a locked group of letters (after 🔒)."
+  },
+  "lang.script.nothingLetters": "Nothing to drill here yet in {lang}: learn some letters first.",
+  "@lang.script.nothingLetters": {
+    "description": "A script drill with nothing to ask yet (Arabic, Hebrew).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.nothingWords": "Nothing to drill here yet in {lang}: learn some words first.",
+  "@lang.script.nothingWords": {
+    "description": "A script drill with nothing to ask yet.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.script.backLetters": "Back to the letters",
+  "@lang.script.backLetters": {
+    "description": "Button at the end of a script drill."
+  },
+  "lang.speech.noVoice": "No {lang} voice on this device",
+  "@lang.speech.noVoice": {
+    "description": "Tooltip of a muted 🔇 speaker button. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.speech.noVoiceToast": "No {lang} voice on this device — add one in the system’s speech settings, then reload.",
+  "@lang.speech.noVoiceToast": {
+    "description": "Message (after 🔇), once per language, when no voice exists.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.speech.listen": "Listen ({lang})",
+  "@lang.speech.listen": {
+    "description": "Tooltip and accessible name of a 🔊 button after a word or sentence. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.speech.playIn": "Play ({lang})",
+  "@lang.speech.playIn": {
+    "description": "Accessible name of the play button of a listening exercise.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.speech.play": "Play",
+  "@lang.speech.play": {
+    "description": "Play button (after 🔊) of a listening exercise."
+  },
+  "lang.speech.playSlowly": "Play slowly",
+  "@lang.speech.playSlowly": {
+    "description": "Accessible name of the 🐢 button."
+  },
+  "lang.speech.slowly": "Slowly",
+  "@lang.speech.slowly": {
+    "description": "Button (after 🐢): play slowly."
+  },
+  "lang.speech.rAgain": "r = again",
+  "@lang.speech.rAgain": {
+    "description": "Keyboard hint: the r key plays the audio again."
+  },
+  "lang.speech.noVoiceDot": "No {lang} voice on this device.",
+  "@lang.speech.noVoiceDot": {
+    "description": "In a listening exercise (after 🔇) without a voice.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.speech.readInstead": "Read it instead",
+  "@lang.speech.readInstead": {
+    "description": "Button (after 👁) without a voice: show the text."
+  },
+  "lang.speech.tone": "{t, select, 1 {1st} 2 {2nd} 3 {3rd} 4 {4th} other {neutral}}",
+  "@lang.speech.tone": {
+    "description": "Name of a Mandarin tone in the tone exercise (the tone mark follows). 1st–4th tone, or neutral.",
+    "placeholders": {
+      "t": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "lang.speech.variant": "Right — the course writes it like this.",
+  "@lang.speech.variant": {
+    "description": "Dictation feedback: right, written a little differently by the course."
+  },
+  "lang.speech.typeHeard": "Type what you hear…",
+  "@lang.speech.typeHeard": {
+    "description": "Placeholder of the dictation field."
+  },
+  "lang.speech.dictWord": "Listen and write the word",
+  "@lang.speech.dictWord": {
+    "description": "Dictation question (after ✍️)."
+  },
+  "lang.speech.dictSentence": "Listen and write the sentence",
+  "@lang.speech.dictSentence": {
+    "description": "Dictation question (after ✍️)."
+  },
+  "lang.speech.meaning": "Meaning:",
+  "@lang.speech.meaning": {
+    "description": "Label before the meaning hint in a dictation."
+  },
+  "lang.speech.noRecording": "Recording is not available in this browser: say it aloud after the voice, then judge yourself.",
+  "@lang.speech.noRecording": {
+    "description": "Shadowing without recording (after 🎙️)."
+  },
+  "lang.speech.yourRecording": "Your recording",
+  "@lang.speech.yourRecording": {
+    "description": "Accessible name of the audio player of the learner’s recording."
+  },
+  "lang.speech.voiceThenYou": "The voice, then you",
+  "@lang.speech.voiceThenYou": {
+    "description": "Button (after ▶): play the voice, then the learner’s recording."
+  },
+  "lang.speech.recordAgain": "Record again",
+  "@lang.speech.recordAgain": {
+    "description": "Button (after 🎙️)."
+  },
+  "lang.speech.noMic": "The microphone is not available ({err}): say it aloud and judge yourself.",
+  "@lang.speech.noMic": {
+    "description": "Shadowing when the microphone fails (after 🎙️). {err} = the browser’s error name.",
+    "placeholders": {
+      "err": {
+        "type": "String",
+        "example": "NotAllowedError"
+      }
+    }
+  },
+  "lang.speech.recordYourself": "Record yourself",
+  "@lang.speech.recordYourself": {
+    "description": "Button (after 🎙️)."
+  },
+  "lang.speech.selfGraded": "self-graded",
+  "@lang.speech.selfGraded": {
+    "description": "Badge (after 🙋): the learner judges the answer."
+  },
+  "lang.speech.closeToVoice": "Close to the voice",
+  "@lang.speech.closeToVoice": {
+    "description": "Self-grade button (after ✓)."
+  },
+  "lang.speech.shadowNoSR": "Say it after the voice (speech recognition is not available here, so you judge yourself)",
+  "@lang.speech.shadowNoSR": {
+    "description": "Shadowing question (after 🗣️) when the browser cannot recognise speech."
+  },
+  "lang.speech.shadowAsk": "Listen, then say it after the voice",
+  "@lang.speech.shadowAsk": {
+    "description": "Shadowing question (after 🗣️)."
+  },
+  "lang.speech.speak": "Speak",
+  "@lang.speech.speak": {
+    "description": "Microphone button (after 🎤)."
+  },
+  "lang.speech.checkedHeard": "Checked against the course’s words (what your browser heard)",
+  "@lang.speech.checkedHeard": {
+    "description": "Under the feedback of a speaking exercise."
+  },
+  "lang.speech.heard": "Heard:",
+  "@lang.speech.heard": {
+    "description": "Label before what the browser heard."
+  },
+  "lang.speech.listening": "listening",
+  "@lang.speech.listening": {
+    "description": "Microphone button text (after …) while listening."
+  },
+  "lang.speech.nothingHeard": "Nothing heard — try again.",
+  "@lang.speech.nothingHeard": {
+    "description": "Speaking exercise: nothing recognised."
+  },
+  "lang.speech.notQuite": "Not quite — try again ({n, number} left).",
+  "@lang.speech.notQuite": {
+    "description": "Speaking exercise (after ❌): tries left.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.speech.sayIn": "Say it in {lang}",
+  "@lang.speech.sayIn": {
+    "description": "Speaking question (after 🎤): say the meaning in that language.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.speech.sayAloud": "Say it aloud",
+  "@lang.speech.sayAloud": {
+    "description": "Speaking question (after 🎤): read the text aloud."
+  },
+  "lang.speech.srNote": "Your browser turns your voice into text (it may use its own online service); the course compares that text with its stored words.",
+  "@lang.speech.srNote": {
+    "description": "Note under a speaking exercise (privacy)."
+  },
+  "lang.speech.wholeText": "Listen to the whole text",
+  "@lang.speech.wholeText": {
+    "description": "Button (after 🔊) on a graded text."
+  },
+  "lang.listen.hear": "Hear and choose",
+  "@lang.listen.hear": {
+    "description": "Listening set (title)."
+  },
+  "lang.listen.hearWhat": "a word → which one it is, or what it means",
+  "@lang.listen.hearWhat": {
+    "description": "What the listening set asks."
+  },
+  "lang.listen.sentences": "Sentences",
+  "@lang.listen.sentences": {
+    "description": "Listening set (title)."
+  },
+  "lang.listen.sentencesWhat": "a sentence → what it means",
+  "@lang.listen.sentencesWhat": {
+    "description": "What the listening set asks."
+  },
+  "lang.listen.dictation": "Dictation",
+  "@lang.listen.dictation": {
+    "description": "Listening set (title)."
+  },
+  "lang.listen.dictationWhat": "a word or a sentence → write it",
+  "@lang.listen.dictationWhat": {
+    "description": "What the listening set asks."
+  },
+  "lang.listen.shadow": "Shadowing",
+  "@lang.listen.shadow": {
+    "description": "Listening set (title): repeat after the voice."
+  },
+  "lang.listen.shadowWhat": "say it after the voice, record yourself, compare",
+  "@lang.listen.shadowWhat": {
+    "description": "What the listening set asks."
+  },
+  "lang.listen.speak": "Say it",
+  "@lang.listen.speak": {
+    "description": "Listening set (title): speak and be checked."
+  },
+  "lang.listen.speakWhat": "say a word or a sentence — checked against the course",
+  "@lang.listen.speakWhat": {
+    "description": "What the speaking set asks."
+  },
+  "lang.listen.tones": "Tones by ear",
+  "@lang.listen.tones": {
+    "description": "Listening set (title): Mandarin tones."
+  },
+  "lang.listen.tonesWhat": "one syllable of a word → its tone",
+  "@lang.listen.tonesWhat": {
+    "description": "What the tones set asks."
+  },
+  "lang.listen.looking": "looking for voices on this device",
+  "@lang.listen.looking": {
+    "description": "Loading line (after …) of the listening lane."
+  },
+  "lang.listen.voice": "Voice: {name} ({tag})",
+  "@lang.listen.voice": {
+    "description": "Listening lane (after 🔊): the device’s voice. {name} = voice name, {tag} = its language tag.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Google Deutsch"
+      },
+      "tag": {
+        "type": "String",
+        "example": "de-DE"
+      }
+    }
+  },
+  "lang.listen.noVoiceLane": "No {lang} voice on this device — listening needs one (add it in the system’s speech settings).",
+  "@lang.listen.noVoiceLane": {
+    "description": "Listening lane (after 🔇) without a voice.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.listen.srYes": "Speech recognition: yes (your browser may use its own online service)",
+  "@lang.listen.srYes": {
+    "description": "Listening lane (after 🎤)."
+  },
+  "lang.listen.srNo": "No speech recognition in this browser — “Say it” becomes shadowing.",
+  "@lang.listen.srNo": {
+    "description": "Listening lane (after 🎤). “Say it” = lang.listen.speak."
+  },
+  "lang.listen.recYes": "Recording: yes (kept on this page only)",
+  "@lang.listen.recYes": {
+    "description": "Listening lane (after 🎙️)."
+  },
+  "lang.listen.recNo": "No recording here — shadowing without it.",
+  "@lang.listen.recNo": {
+    "description": "Listening lane (after 🎙️)."
+  },
+  "lang.listen.choseNoListen": "You chose “I can’t listen now” for today.",
+  "@lang.listen.choseNoListen": {
+    "description": "Listening lane note (after 🙉)."
+  },
+  "lang.listen.canListen": "I can listen again",
+  "@lang.listen.canListen": {
+    "description": "Button: undo “I can’t listen now”."
+  },
+  "lang.listen.choseNoSpeak": "You chose “I can’t speak now” for today.",
+  "@lang.listen.choseNoSpeak": {
+    "description": "Listening lane note (after 🤐)."
+  },
+  "lang.listen.canSpeak": "I can speak again",
+  "@lang.listen.canSpeak": {
+    "description": "Button: undo “I can’t speak now”."
+  },
+  "lang.listen.needsVoice": "needs a voice",
+  "@lang.listen.needsVoice": {
+    "description": "On a listening set card when no voice exists."
+  },
+  "lang.listen.settingsHint": "Voice, speed, auto-play and “I can’t listen / speak now”:",
+  "@lang.listen.settingsHint": {
+    "description": "Before the Settings button on the listening lane (after ⚙️)."
+  },
+  "lang.listen.listening": "Listening",
+  "@lang.listen.listening": {
+    "description": "Section title on the course home (after 🎧)."
+  },
+  "lang.listen.speaking": "Speaking",
+  "@lang.listen.speaking": {
+    "description": "Section title on the course home (after 🗣️)."
+  },
+  "lang.listen.noSynth": "This browser has no speech synthesis.",
+  "@lang.listen.noSynth": {
+    "description": "Speech settings (after 🔇)."
+  },
+  "lang.listen.voiceLabel": "voice:",
+  "@lang.listen.voiceLabel": {
+    "description": "Speech settings, per language (after “German — ”)."
+  },
+  "lang.listen.voiceFor": "Voice for {lang}",
+  "@lang.listen.voiceFor": {
+    "description": "Accessible name of the voice select.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.listen.automatic": "automatic",
+  "@lang.listen.automatic": {
+    "description": "Voice option: let the device choose."
+  },
+  "lang.listen.automaticWith": "automatic ({name})",
+  "@lang.listen.automaticWith": {
+    "description": "Voice option: let the device choose ({name} = the voice it would choose).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Google Deutsch"
+      }
+    }
+  },
+  "lang.listen.noneHere": "none on this device ({tag})",
+  "@lang.listen.noneHere": {
+    "description": "Speech settings (after 🔇): no voice for this language tag.",
+    "placeholders": {
+      "tag": {
+        "type": "String",
+        "example": "he-IL"
+      }
+    }
+  },
+  "lang.listen.speed": "Speed:",
+  "@lang.listen.speed": {
+    "description": "Label of the speed select."
+  },
+  "lang.listen.speedLabel": "Speed of the voice",
+  "@lang.listen.speedLabel": {
+    "description": "Accessible name of the speed select."
+  },
+  "lang.listen.normal": "normal",
+  "@lang.listen.normal": {
+    "description": "Speed option."
+  },
+  "lang.listen.slow": "slow",
+  "@lang.listen.slow": {
+    "description": "Speed option."
+  },
+  "lang.listen.autoplay": "Play new words aloud in the session",
+  "@lang.listen.autoplay": {
+    "description": "Checkbox in the speech settings."
+  },
+  "lang.listen.noListen": "I can’t listen now (no audio items today)",
+  "@lang.listen.noListen": {
+    "description": "Checkbox in the speech settings."
+  },
+  "lang.listen.noSpeak": "I can’t speak now (no speaking items today)",
+  "@lang.listen.noSpeak": {
+    "description": "Checkbox in the speech settings."
+  },
+  "lang.listen.srAvail": "Speech recognition is available in this browser (it may send what you say to its own service); the course compares the text with its stored words.",
+  "@lang.listen.srAvail": {
+    "description": "Speech settings note (after 🎤)."
+  },
+  "lang.listen.srNone": "No speech recognition in this browser: speaking items become shadowing.",
+  "@lang.listen.srNone": {
+    "description": "Speech settings note (after 🎤)."
+  },
+  "lang.listen.recNever": "Recordings stay on the page and are never stored.",
+  "@lang.listen.recNever": {
+    "description": "Speech settings note (after 🎙️)."
+  },
   "lang.frame.tutor": "Tutor",
   "@lang.frame.tutor": {
     "description": "Subtitle of a tutor action moved into the frame’s ⋮ menu."
