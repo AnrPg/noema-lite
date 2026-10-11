@@ -1,0 +1,383 @@
+{
+  "@@locale": "en",
+  "roadmap.fixing": "fixing {n, number} problem(s)…",
+  "@roadmap.fixing": {
+    "description": "Progress line (in the Roadmap’s log) while the AI repairs its answer after the app found problems in it. n = number of problems.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.stepNotFound": "Step not found.",
+  "@roadmap.stepNotFound": {
+    "description": "Error: the step (a node of the Roadmap) no longer exists, e.g. it was removed on another device."
+  },
+  "roadmap.notFound": "Roadmap not found.",
+  "@roadmap.notFound": {
+    "description": "Error: the Roadmap (a learning map of steps) is not on this device."
+  },
+  "roadmap.stopped": "Stopped.",
+  "@roadmap.stopped": {
+    "description": "Message when the learner stopped re-planning the steps of a Roadmap."
+  },
+  "roadmap.build.dag": "Agent 1 — mapping every prerequisite of “{goal}”…",
+  "@roadmap.build.dag": {
+    "description": "Log line while the first AI agent builds the Roadmap. goal = the topic the learner wants to master.",
+    "placeholders": {
+      "goal": {
+        "type": "String",
+        "example": "Quantum computing"
+      }
+    }
+  },
+  "roadmap.build.fixingGraph": "fixing {n, number} problem(s) in the graph…",
+  "@roadmap.build.fixingGraph": {
+    "description": "Log line while the AI repairs the map (graph of steps) it made. n = number of problems.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "roadmap.build.dagDone": "{pre, number} prerequisites, {apps, number} applications, {links, number} links",
+  "@roadmap.build.dagDone": {
+    "description": "Log line after the first agent: how many prerequisite steps, application steps and links between steps the map has.",
+    "placeholders": {
+      "pre": {
+        "type": "int",
+        "example": "24"
+      },
+      "apps": {
+        "type": "int",
+        "example": "4"
+      },
+      "links": {
+        "type": "int",
+        "example": "40"
+      }
+    }
+  },
+  "roadmap.build.audit": "Agent 1b — independent check: are the prerequisites complete?",
+  "@roadmap.build.audit": {
+    "description": "Log line while a second AI agent checks the prerequisite steps of the map."
+  },
+  "roadmap.build.auditAdded": "added {n, number} missing prerequisite(s): {list}",
+  "@roadmap.build.auditAdded": {
+    "description": "Log line after the check: prerequisite steps that were added. list = their titles, comma-separated (may end with …).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      },
+      "list": {
+        "type": "String",
+        "example": "Vectors, Probability"
+      }
+    }
+  },
+  "roadmap.build.auditNone": "nothing missing",
+  "@roadmap.build.auditNone": {
+    "description": "Log line after the check of the prerequisites: none was missing."
+  },
+  "roadmap.build.expand": "Agent 2 — expanding the goal “{goal}” into its full Roadmap ({depth, select, standard {standard} deep {deep} exhaustive {exhaustive} other {{depth}}})…",
+  "@roadmap.build.expand": {
+    "description": "Log line while the second AI agent expands the goal into many steps. goal = the goal’s title; depth = how deep the learner asked for (standard, deep or exhaustive).",
+    "placeholders": {
+      "goal": {
+        "type": "String",
+        "example": "Quantum computing"
+      },
+      "depth": {
+        "type": "String",
+        "example": "deep"
+      }
+    }
+  },
+  "roadmap.build.expandDone": "{aspects, number} aspects, {subtopics, number} sub-topics, {related, number} related topics + synthesis",
+  "@roadmap.build.expandDone": {
+    "description": "Log line after the goal was expanded: how many steps of each kind were made, plus one synthesis step.",
+    "placeholders": {
+      "aspects": {
+        "type": "int",
+        "example": "6"
+      },
+      "subtopics": {
+        "type": "int",
+        "example": "18"
+      },
+      "related": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.build.plan": "Agent 3 — planning the chapters of {n, number} nodes…",
+  "@roadmap.build.plan": {
+    "description": "Log line while the third AI agent plans the chapters of the steps (nodes). n = number of steps.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "roadmap.build.planProgress": "{done, number}/{total, number} nodes planned",
+  "@roadmap.build.planProgress": {
+    "description": "Log line: how many steps (nodes) of the Roadmap have their chapters planned so far.",
+    "placeholders": {
+      "done": {
+        "type": "int",
+        "example": "10"
+      },
+      "total": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "roadmap.build.waitingApp": "Waiting for your Claude app to build the map (copy the message below into a Claude chat).",
+  "@roadmap.build.waitingApp": {
+    "description": "Log line: the learner chose their Claude app to build the Roadmap; it waits for that."
+  },
+  "roadmap.build.plannedByApp": "The chapters of the steps are planned by your Claude app.",
+  "@roadmap.build.plannedByApp": {
+    "description": "Log line: the learner’s Claude app plans the chapters of the Roadmap’s steps."
+  },
+  "roadmap.build.needKey": "Add a Claude API key (✨ Create with Claude → Here in noema-lite) or a Gemini key (⚙️ Settings) first.",
+  "@roadmap.build.needKey": {
+    "description": "Error when a Roadmap should be built in the app but no AI key is set. Names menu paths of the app."
+  },
+  "roadmap.build.attachFirst": "The map is ready. Attach the subjects you already have to its steps — then the other steps are planned.",
+  "@roadmap.build.attachFirst": {
+    "description": "Log line: the map is built; the learner first attaches subjects they already have to steps, then the other steps get chapter plans."
+  },
+  "roadmap.build.readyImported": "Ready: your map with {n, number} steps, every step planned.",
+  "@roadmap.build.readyImported": {
+    "description": "Log line when an imported Roadmap is complete. n = number of steps.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.build.ready": "Ready: {n, number} nodes in three parts — prerequisites, the goal, applications.",
+  "@roadmap.build.ready": {
+    "description": "Log line when a Roadmap built by the agents is complete. n = number of steps (nodes).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "48"
+      }
+    }
+  },
+  "roadmap.gen.sharedBusy": "{state, select, ready {{known, select, yes {{who} has prepared this step — it is shared with you} other {Somebody has prepared this step — it is shared with you}}} other {{known, select, yes {{who} is preparing this step — it is shared with you} other {Somebody is preparing this step — it is shared with you}}}}",
+  "@roadmap.gen.sharedBusy": {
+    "description": "Progress line of a step in a shared Roadmap that another member prepared (state ready) or is preparing. who = their name; known = yes when the name is known.",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "ready"
+      },
+      "known": {
+        "type": "String",
+        "example": "yes"
+      },
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.gen.saving": "Saving the subject (this device + cloud)…",
+  "@roadmap.gen.saving": {
+    "description": "Progress line of a step: its new subject is being saved on this device and in the cloud account."
+  },
+  "roadmap.gen.ready": "Ready",
+  "@roadmap.gen.ready": {
+    "description": "Progress line of a step: its subject is ready. Very short."
+  },
+  "roadmap.gen.readyToStudy": "“{title}” is ready to study",
+  "@roadmap.gen.readyToStudy": {
+    "description": "Toast: the subject of a Roadmap step is ready. title = the step’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "DNA replication"
+      }
+    }
+  },
+  "roadmap.gen.paused": "Paused.",
+  "@roadmap.gen.paused": {
+    "description": "Status of a step whose preparation the learner stopped (it can be resumed)."
+  },
+  "roadmap.gen.shareFailed": "The step is ready for you, but sharing it failed: {error} — it is tried again when you open the map.",
+  "@roadmap.gen.shareFailed": {
+    "description": "Toast in a shared Roadmap: the step was prepared but could not be published to the other members. error = the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "roadmap.gen.fileMissing": "{name} is not available on this device — continuing without it",
+  "@roadmap.gen.fileMissing": {
+    "description": "Progress line: one of the learner’s files for this step is not on this device; the step is prepared without it. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "chapter5.pdf"
+      }
+    }
+  },
+  "roadmap.gen.noPack": "Claude stopped without a pack",
+  "@roadmap.gen.noPack": {
+    "description": "Error: Claude (the AI) ended its work without producing the subject pack."
+  },
+  "roadmap.test.true": "True",
+  "@roadmap.test.true": {
+    "description": "Answer option of a true/false question in the placement test (“I already know this”)."
+  },
+  "roadmap.test.false": "False",
+  "@roadmap.test.false": {
+    "description": "Answer option of a true/false question in the placement test (“I already know this”)."
+  },
+  "roadmap.edit.loop": "That link would make a loop (a step would become its own prerequisite).",
+  "@roadmap.edit.loop": {
+    "description": "Error when editing the links between steps would create a cycle."
+  },
+  "roadmap.edit.planLocked": "This step has already been prepared — its chapters can no longer change (you can still rename it, move it or change its links).",
+  "@roadmap.edit.planLocked": {
+    "description": "Error when changing the chapters of a step whose subject was already made."
+  },
+  "roadmap.edit.needName": "A step needs a name.",
+  "@roadmap.edit.needName": {
+    "description": "Error when the learner saves a step with an empty title."
+  },
+  "roadmap.assign.generating": "This step is being prepared right now — wait until it is ready, or stop it first.",
+  "@roadmap.assign.generating": {
+    "description": "Error when the learner attaches a subject to a step whose subject is being made right now."
+  },
+  "roadmap.assign.language": "Language courses are studied on their own — they cannot be attached to a step.",
+  "@roadmap.assign.language": {
+    "description": "Error when the learner tries to attach a language course to a step of a Roadmap."
+  },
+  "roadmap.assign.notInLibrary": "That subject is not in your library.",
+  "@roadmap.assign.notInLibrary": {
+    "description": "Error when attaching a subject the learner does not have (any more)."
+  },
+  "roadmap.assign.loadFailed": "The subject could not be loaded.",
+  "@roadmap.assign.loadFailed": {
+    "description": "Error when the subject to attach to a step cannot be opened."
+  },
+  "roadmap.assign.noChapters": "That subject has no chapters.",
+  "@roadmap.assign.noChapters": {
+    "description": "Error when the subject to attach to a step is empty."
+  },
+  "roadmap.assign.log": "“{step}” is now taught by “{subject}”{replan, select, yes { — re-planning this step} other {}}",
+  "@roadmap.assign.log": {
+    "description": "Log line of a Roadmap: a subject the learner has now teaches a step. replan = yes when the step’s chapters are planned again to match it.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "DNA replication"
+      },
+      "subject": {
+        "type": "String",
+        "example": "Molecular biology"
+      },
+      "replan": {
+        "type": "String",
+        "example": "yes"
+      }
+    }
+  },
+  "roadmap.assign.newVersion": "“{subject}” has a new version — re-planning “{step}”",
+  "@roadmap.assign.newVersion": {
+    "description": "Log line: a subject attached to a step was updated, so the step is planned again.",
+    "placeholders": {
+      "subject": {
+        "type": "String",
+        "example": "Molecular biology"
+      },
+      "step": {
+        "type": "String",
+        "example": "DNA replication"
+      }
+    }
+  },
+  "roadmap.detach.none": "No subject is attached to this step.",
+  "@roadmap.detach.none": {
+    "description": "Error when taking a subject off a step that has none attached."
+  },
+  "roadmap.detach.log": "“{subject}” taken off “{step}”",
+  "@roadmap.detach.log": {
+    "description": "Log line: the learner took their subject off a step.",
+    "placeholders": {
+      "subject": {
+        "type": "String",
+        "example": "Molecular biology"
+      },
+      "step": {
+        "type": "String",
+        "example": "DNA replication"
+      }
+    }
+  },
+  "roadmap.plan.planning": "Planning the chapters…",
+  "@roadmap.plan.planning": {
+    "description": "Progress line while the AI plans the chapters of a step."
+  },
+  "roadmap.plan.batch": "Planning {from, number}–{to, number} of {n, number}: {list}",
+  "@roadmap.plan.batch": {
+    "description": "Progress line while re-planning all steps in batches. from–to = the steps of this batch, n = all steps, list = their titles.",
+    "placeholders": {
+      "from": {
+        "type": "int",
+        "example": "1"
+      },
+      "to": {
+        "type": "int",
+        "example": "5"
+      },
+      "n": {
+        "type": "int",
+        "example": "30"
+      },
+      "list": {
+        "type": "String",
+        "example": "Vectors, Matrices"
+      }
+    }
+  },
+  "roadmap.plan.replanned": "{n, number} steps re-planned",
+  "@roadmap.plan.replanned": {
+    "description": "Progress line: all steps of the Roadmap that were not prepared yet were planned again.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "roadmap.material.locked": "This step has already been prepared — its material can no longer change.",
+  "@roadmap.material.locked": {
+    "description": "Error when adding or removing files of a step whose subject was already made."
+  },
+  "roadmap.material.noFiles": "Files are not available in this installation.",
+  "@roadmap.material.noFiles": {
+    "description": "Error: this copy of the app cannot store files."
+  },
+  "roadmap.material.notFound": "Not found.",
+  "@roadmap.material.notFound": {
+    "description": "Error: the file entry of the step no longer exists. Short."
+  },
+  "roadmap.material.prepared": "This step has already been prepared.",
+  "@roadmap.material.prepared": {
+    "description": "Error when changing the pages of a step’s file after its subject was made."
+  }
+}
