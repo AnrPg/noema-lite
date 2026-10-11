@@ -11,6 +11,8 @@ window.NoemaCurMap = (() => {
   const CM = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
   const cmNum = n => window.NoemaI18n ? window.NoemaI18n.fmt.number(n) : String(n);
   const errMsg = e => window.NoemaI18n ? window.NoemaI18n.err(e) : (e?.message || String(e));   // an error's words (its code's message, else its English text)
+  /** 🌐 a text another learner shared (docs/i18n.md §11): marked for machine translation (engine/mt.js), with its stored language. */
+  const mtMark = (node, language, kind) => window.NoemaMT ? window.NoemaMT.mark(node, { language, kind }) : node;
   /** A code of the AI's plan (a knowledge domain, a processing level) in the UI language; a value the catalog does not know: its own words. */
   const codeWord = (prefix, v, own) => window.NoemaI18n && window.NoemaI18n.has(prefix + v) ? CM(prefix + v) : own;
   /** A Roadmap's language for the learner: its name in the UI language (English keeps the words it always had: “Greek (Ελληνικά)”). */
@@ -79,8 +81,9 @@ window.NoemaCurMap = (() => {
   const when = t => t ? (window.NoemaI18n ? window.NoemaI18n.fmt.date(t, { year: 'numeric', month: 'numeric', day: 'numeric' }) : new Date(t).toLocaleDateString()) : '';
   /** An invitation: who shares what, Join / No thanks. */
   function inviteRow(acc, i, { onJoined, onDone } = {}) {
+    const tN = mtMark(el('span', {}, i.title), i.language, 'shared.roadmap'), mtT = window.NoemaMT?.toggle(acc, [tN]);   // the title only: the inviter's personal message is never sent
     return el('div', { class: 'nx-req cm-invite' },
-      el('div', { class: 'grow' }, ...rich(CM('roadmap.map.inv.invites', { who: '\u0001', title: '\u0002' }), { '\u0001': el('b', {}, i.owner_name || CM('roadmap.map.inv.someone')), '\u0002': el('b', {}, `“${i.title}”`) }),
+      el('div', { class: 'grow' }, ...rich(CM('roadmap.map.inv.invites', { who: '\u0001', title: '\u0002' }), { '\u0001': el('b', {}, i.owner_name || CM('roadmap.map.inv.someone')), '\u0002': el('b', {}, '“', tN, '”') }), mtT ? ' ' : null, mtT,
         el('div', { class: 'tiny' }, [i.meta?.counts?.steps ? CM('roadmap.map.inv.steps', { n: i.meta.counts.steps }) : CM('roadmap.map.inv.stepsUnknown'), i.language ? '🗣️ ' + i.language : '', i.message ? `“${i.message}”` : ''].filter(Boolean).join(' · '))),
       el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const c = await SH().join(acc, i.curriculum); toast('👥 ' + CM('roadmap.map.inv.joined', { title: c.title || c.goal }), 5000); onJoined?.(c); } catch (er) { toast('⚠️ ' + errMsg(er), 5000); e.target.disabled = false; } } }, '✓ ' + CM('roadmap.map.inv.join')),
       el('button', { class: 'btn small', onclick: async () => { await SH().decline(i.curriculum).catch(er => toast('⚠️ ' + errMsg(er))); toast(CM('roadmap.map.inv.declined')); onDone?.(); } }, '✕ ' + CM('roadmap.map.inv.noThanks')));
@@ -148,9 +151,11 @@ window.NoemaCurMap = (() => {
         if (!list.length) { grid.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '🌍'), el('p', {}, all.length ? CM('roadmap.map.pub.noMatch') : CM('roadmap.map.pub.none')))); return; }
         for (const x of list) {
           const have = C().get(acc, x.id), own = have && !(have.shared?.role === 'member') || (CL()?.session?.()?.user?.id === x.owner);
+          const tN = mtMark(el('b', {}, x.title), x.language, 'explore.roadmap'), dN = x.description ? mtMark(el('div', { class: 'tiny' }, x.description), x.language, 'explore.roadmap') : null;
           grid.append(el('div', { class: 'cm-card cm-pubcard' },
-            el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, '🧭'), el('b', {}, x.title)),
-            x.description ? el('div', { class: 'tiny' }, x.description) : null,
+            el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, '🧭'), tN),
+            dN,
+            window.NoemaMT?.toggle(acc, [tN, dN]),
             el('div', { class: 'tiny' }, ['👤 ' + (x.owner_name || CM('roadmap.map.pub.someone')), x.meta?.counts?.steps ? CM('roadmap.map.inv.steps', { n: x.meta.counts.steps }) : CM('roadmap.map.inv.stepsUnknown'), '⚡ ' + CM('roadmap.map.pub.prepared', { n: x.prepared || 0 }), x.language ? '🗣️ ' + x.language : '', '🕒 ' + when(x.updated_at)].filter(Boolean).join(' · ')),
             el('div', { class: 'row' }, have ? el('button', { class: 'btn small primary', onclick: () => { close(); map(acc, x.id, { onStudy }); } }, '🗺️ ' + (own ? CM('roadmap.map.pub.openYours') : CM('roadmap.map.pub.openJoined')))
               : el('button', { class: 'btn small primary cm-joinbtn', onclick: async e => {
@@ -158,7 +163,7 @@ window.NoemaCurMap = (() => {
                 e.currentTarget.disabled = true; try { const c = await SH().join(acc, x.id); toast('👥 ' + CM('roadmap.map.inv.joined', { title: c.title || c.goal }), 5000); close(); map(acc, x.id, { onStudy }); } catch (er) { toast('⚠️ ' + errMsg(er), 5000); e.target.disabled = false; } } }, '➕ ' + CM('roadmap.map.inv.join')))));
         }
       };
-      box.append(head('🌍 ' + CM('roadmap.map.lib.explore'), CM('roadmap.map.pub.lead') + ' ' + SHARE_RULES()), q, grid,
+      box.append(head('🌍 ' + CM('roadmap.map.lib.explore'), CM('roadmap.map.pub.lead') + ' ' + SHARE_RULES()), q, window.NoemaMT?.bar(acc, grid) || null, grid,
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.pub.mine')), el('button', { class: 'btn small', onclick: close }, CM('roadmap.map.close'))));
       SH().explore().then(l => { all = l || []; drawList(); }).catch(e => { grid.innerHTML = ''; grid.append(el('p', { class: 'cg-warn' }, '⚠️ ' + errMsg(e))); });
     });

@@ -922,6 +922,10 @@
       const hideTip = () => { clearTimeout(tipTimer); tipCard.classList.remove('on', 'sheet'); tipFor = null; };
       const showTip = (s, card, { sheet = false } = {}) => {
         tipCard.innerHTML = ''; tipCard.append(infoCard(s, s.meta));
+        if (window.NoemaMT) {   // 🌐 its title and description in the UI language, on request (docs/i18n.md §11)
+          const ns = [tipCard.querySelector('.nx-infohead h3'), tipCard.querySelector('.nx-desc')].filter(Boolean).map(n => NoemaMT.mark(n, { language: s.language || s.meta?.language, kind: 'explore.pack' }));
+          const tg = NoemaMT.toggle(acc, ns); if (tg) tipCard.querySelector('.nx-info').append(tg);
+        }
         if (sheet) tipCard.append(el('div', { class: 'row nx-sheetfoot' }, el('button', { class: 'btn primary', onclick: () => pick(s) }, '📚 ' + tr('loader.explore.study')), el('button', { class: 'btn small', onclick: hideTip }, tr('loader.close'))));
         if (!tipCard.isConnected) document.body.append(tipCard);
         tipFor = s.id; tipCard.classList.toggle('sheet', sheet);
@@ -951,12 +955,12 @@
             onpointermove: e => { if (startXY && Math.hypot(e.clientX - startXY[0], e.clientY - startXY[1]) > 10) clearTimeout(pressT); },
             onpointerup: () => clearTimeout(pressT), onpointercancel: () => clearTimeout(pressT),
             oncontextmenu: e => { if (touch || held) e.preventDefault(); } },
-            el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('b', {}, s.title), langTag(s));
+            el('span', { class: 'nx-emo' }, s.emoji || '📘'), window.NoemaMT ? NoemaMT.mark(el('b', {}, s.title), { language: s.language || s.meta?.language, kind: 'explore.pack' }) : el('b', {}, s.title), langTag(s));
           grid.append(card);
         });
       };
       box.classList.add('nx-explore');
-      box.append(brandHead('🌍 ' + tr('loader.explore.title'), matchMedia('(hover: none)').matches ? tr('loader.explore.subTouch') : tr('loader.explore.subMouse')), q, grid,   // i18n-ignore (a media query)
+      box.append(brandHead('🌍 ' + tr('loader.explore.title'), matchMedia('(hover: none)').matches ? tr('loader.explore.subTouch') : tr('loader.explore.subMouse')), q, window.NoemaMT?.bar(acc, grid) || null, grid,   // i18n-ignore (a media query)
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, tr('loader.close'))));
       draw(); setTimeout(() => q.focus(), 200);
       const iv = setInterval(() => { if (!box.isConnected) { tipCard.remove(); clearInterval(iv); } }, 300);

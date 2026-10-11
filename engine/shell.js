@@ -483,19 +483,21 @@ window.NoemaShell = (() => {
       else { const r = await N().publicSubjects(); items = r.all; studyIt = r.study; }
     } catch (e) { body.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, L('exploreOffline')), h('p', { class: 'ns-muted' }, e.message))); q.hidden = true; return; }
     const busy = async (b, fn) => { b.disabled = true; try { await fn(); } catch (er) { toast(er.message, 5000); } b.disabled = false; };
+    const mtK = rm ? 'explore.roadmap' : 'explore.pack';   // 🌐 shared texts, translatable on request (engine/mt.js, docs/i18n.md §11)
+    const mtN = (n, x) => window.NoemaMT ? NoemaMT.mark(n, { language: x.language || x.meta?.language, kind: mtK }) : n;
     const mk = (x, i) => rm
       ? h('button', { class: 'ns-item ns-pubitem', 'data-id': x.id, onclick: e => busy(e.currentTarget, () => CM().openPublic(acc(), x, { onOpen: id => go('#/map/' + encodeURIComponent(id)) })) },
-        ico('map', (i % 4) + 1), h('span', { class: 't' }, h('b', {}, x.title), h('small', {}, [x.description, L('rmPubMeta', { who: x.owner_name || '…', n: x.steps, p: x.prepared })].filter(Boolean).join(' · '))),
+        ico('map', (i % 4) + 1), h('span', { class: 't' }, mtN(h('b', {}, x.title), x), h('small', {}, x.description ? mtN(h('span', {}, x.description), x) : null, x.description ? ' · ' : null, L('rmPubMeta', { who: x.owner_name || '…', n: x.steps, p: x.prepared }))),
         h('span', { class: 'ns-pill' }, L(x.have ? (x.own ? 'rmYours' : 'rmJoined') : 'rmJoin')))
       : h('button', { class: 'ns-item ns-pubitem', 'data-id': x.id, onclick: e => busy(e.currentTarget, () => studyIt(x, s => open(s.id))) },
-        icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, x.title, N().langTag?.(x) || ''), x.description ? h('small', {}, x.description) : null), chev());
+        icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, mtN(h('b', {}, x.title), x), N().langTag?.(x) || '', x.description ? mtN(h('small', {}, x.description), x) : null), chev());
     if (!items.length) { q.hidden = true; body.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L(rm ? 'noPublicRoadmaps' : 'noPublicSubjects')))); return; }
     const DOMS = CU()?.DOMAINS || ['other'];
     const sections = h('div', { class: 'ns-doms' }, ...DOMS.map(d => [d, items.filter(x => (x.domain || 'other') === d)]).filter(([, l]) => l.length).map(([d, l]) =>
       h('details', { class: 'ns-dom', 'data-dom': d }, h('summary', {}, h('span', { class: 'ns-domt' }, L('dom_' + d)), h('span', { class: 'ns-pill' }, String(l.length)), h('span', { class: 'ns-domchev', 'aria-hidden': 'true' }, '›')),
         h('div', { class: 'ns-list' }, ...l.map(mk)))));
     const results = h('div', { class: 'ns-list ns-results', hidden: true });
-    body.replaceChildren(sections, results);
+    body.replaceChildren(...[window.NoemaMT?.bar(acc(), body)].filter(Boolean), sections, results);
     // searching (the field has the focus, or something is typed): only the matches, or nothing; the sections come back when the field is left empty
     let focused = false;
     const show = () => { const t = q.value.trim(); sections.hidden = focused || !!t; results.hidden = !t; };
@@ -627,6 +629,7 @@ window.NoemaShell = (() => {
         h('p', { class: 'tiny' }, L('gameRules'))),
       h('section', { class: 'ns-panel ns-form' }, h('span', { class: 'ns-label' }, L('studying')), chk('sound', true, L('sound')), chk('chunk', true, L('chunk')), h('label', { class: 'row ns-check' }, goal, L('dailyGoal'))),
       nativeField(s),
+      window.NoemaMT ? NoemaMT.panel(acc()) : null,   // 🌐 machine translation of shared texts: consent, provider, caps (engine/mt.js, docs/i18n.md §11)
       h('div', { class: 'row' }, h('button', { class: 'btn', onclick: () => go('#/character') }, faceEl(undefined, 'mini'), L('character'))));
     uiL.addEventListener('change', () => { putS({ lang: uiL.value || undefined }); location.reload(); });
   }

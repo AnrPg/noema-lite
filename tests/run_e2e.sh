@@ -57,3 +57,4 @@ node "$ROOT/tests/lang_package.js" "$T"   # a whole language in one prompt: the 
 node "$ROOT/tests/i18n.js"   # the interface languages: runtime, plurals per CLDR, drafts, pseudo-locales, catalog checks (docs/i18n.md)
 node "$ROOT/tests/i18n_errors.js"   # error-code contract, Auth mapping, account locale, e-mail templates (docs/i18n.md §6)
 node "$ROOT/tests/i18n_runtime.js" "$T"   # the runtime audit: every surface in the pseudo-locale en-XA — no untranslated interface text; ar-XB right to left (docs/i18n.md §5.3)
+node "$ROOT/tests/mt.js" "$T"   # machine translation of shared content: policy, cache, caps, toggle (docs/i18n.md §11; provider mocked)
