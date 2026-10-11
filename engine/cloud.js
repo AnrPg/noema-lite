@@ -501,7 +501,7 @@
       for (const pth of this.partPaths(path, chunks)) {
         const enc2 = pth.split('/').map(encodeURIComponent).join('/');
         const r = isPublic ? await fetch(`${BASE}/storage/v1/object/public/${bucket}/${enc2}`) : await call(`/storage/v1/object/authenticated/${bucket}/${enc2}`, { raw: true });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        if (!r.ok) throw Object.assign(failed('/storage/v1/object', null, r), { message: `HTTP ${r.status}` });
         blobs.push(await r.blob());
       }
       return new Blob(blobs, { type: type || blobs[0]?.type || '' });
