@@ -306,7 +306,7 @@
     {
      "for": "hu",
      "rel": "similar",
-     "text": "Hungarian also puts a comma before every subordinate clause and writes the decimal comma and the ordinal dot (3.); quotes open low too: „…”."
+     "text": "Hungarian also puts a comma before every subordinate clause and writes the decimal comma and the ordinal dot (3.).\n\nQuotes open low too: „…”."
     }
    ]
   },
@@ -545,7 +545,7 @@
     {
      "for": "el",
      "rel": "similar",
-     "text": "χ has the same two sounds: [ç] in χέρι, [x] in χαρά. In Greek the vowel after it decides, in German the vowel before: ich – ach."
+     "text": "χ has the same two sounds: [ç] in χέρι, [x] in χαρά.\n\nIn Greek the vowel after it decides, in German the vowel before:\n→ ich – ach"
     },
     {
      "for": "ru",
@@ -565,7 +565,7 @@
     {
      "for": "he",
      "rel": "similar",
-     "text": "ח and כ (as most speakers say them) are close to the ach-sound (Bach); the ich-sound of ich, Milch is new."
+     "text": "ח and כ (as most speakers say them) are close to the ach-sound (Bach).\n\nThe ich-sound of ich, Milch is new."
     }
    ]
   },
@@ -1271,7 +1271,7 @@
     {
      "for": "en",
      "rel": "similar",
-     "text": "Stress on the stem is familiar; German also stresses separable prefixes (ˈankommen) but never inseparable ones (verˈstehen)."
+     "text": "Stress on the stem is familiar; German also stresses separable prefixes but never inseparable ones:\n→ ˈankommen – verˈstehen"
     },
     {
      "for": "nl",
@@ -1531,7 +1531,7 @@
     {
      "for": "sv",
      "rel": "similar",
-     "text": "Swedish also has several plural classes learned with the noun, some with umlaut (bok – böcker, man – män); the dative plural -n (den Kindern) is new."
+     "text": "Swedish also has several plural classes learned with the noun, some with umlaut (bok – böcker, man – män).\n\nThe dative plural -n (den Kindern) is new."
     }
    ]
   },
@@ -1727,7 +1727,7 @@
     {
      "for": "sv",
      "rel": "similar",
-     "text": "Swedish uses umlaut in plurals (man – män, bok – böcker) and in comparison (stor – större), but not in verbs; German also has du fährst, er läuft."
+     "text": "Swedish uses umlaut in plurals (man – män, bok – böcker) and in comparison (stor – större), but not in verbs.\n\nGerman also has du fährst, er läuft."
     }
    ]
   },
@@ -1805,7 +1805,7 @@
     {
      "for": "el",
      "rel": "similar",
-     "text": "The Greek article declines for case too, but the Greek noun also changes; the German noun mostly stays: der Tisch, den Tisch, dem Tisch."
+     "text": "The Greek article declines for case too, but the Greek noun also changes; the German noun mostly stays:\n→ der Tisch, den Tisch, dem Tisch"
     },
     {
      "for": "sq",
@@ -2027,12 +2027,12 @@
     {
      "for": "ru",
      "rel": "similar",
-     "text": "Declension classes are familiar; this one adds -(e)n everywhere except the nominative: der Junge, den Jungen, dem Jungen."
+     "text": "Declension classes are familiar; this one adds -(e)n everywhere except the nominative:\n→ der Junge, den Jungen, dem Jungen"
     },
     {
      "for": "el",
      "rel": "similar",
-     "text": "Declension classes are familiar; this one adds -(e)n everywhere except the nominative: der Junge, den Jungen, dem Jungen."
+     "text": "Declension classes are familiar; this one adds -(e)n everywhere except the nominative:\n→ der Junge, den Jungen, dem Jungen"
     }
    ]
   },
@@ -2715,22 +2715,22 @@
     {
      "for": "fr",
      "rel": "similar",
-     "text": "le / la / un / une change for gender and number; German articles also change for case: der, den, dem, des."
+     "text": "le / la / un / une change for gender and number; German articles also change for case:\n→ der, den, dem, des"
     },
     {
      "for": "es",
      "rel": "similar",
-     "text": "el / la / un / una change for gender and number; German articles also change for case: der, den, dem, des."
+     "text": "el / la / un / una change for gender and number; German articles also change for case:\n→ der, den, dem, des"
     },
     {
      "for": "it",
      "rel": "similar",
-     "text": "il / la / un / una change for gender and number; German articles also change for case: der, den, dem, des."
+     "text": "il / la / un / una change for gender and number; German articles also change for case:\n→ der, den, dem, des"
     },
     {
      "for": "pt",
      "rel": "similar",
-     "text": "o / a / um / uma change for gender and number; German articles also change for case: der, den, dem, des."
+     "text": "o / a / um / uma change for gender and number; German articles also change for case:\n→ der, den, dem, des"
     }
    ]
   },
@@ -2865,12 +2865,12 @@
     {
      "for": "en",
      "rel": "similar",
-     "text": "his / her pick by the owner, like sein / ihr; German adds an ending for the thing owned: seine Schwester."
+     "text": "his / her pick by the owner, like sein / ihr; German adds an ending for the thing owned:\n→ seine Schwester"
     },
     {
      "for": "fr",
      "rel": "trap",
-     "text": "son / sa agree only with the thing owned; German first picks by the owner: seine Frau (his), ihre Frau (her)."
+     "text": "son / sa agree only with the thing owned; German first picks by the owner:\n→ seine Frau (his), ihre Frau (her)"
     },
     {
      "for": "es",
@@ -2880,7 +2880,7 @@
     {
      "for": "it",
      "rel": "trap",
-     "text": "suo / sua agree only with the thing owned; German first picks by the owner: seine Frau (his), ihre Frau (her)."
+     "text": "suo / sua agree only with the thing owned; German first picks by the owner:\n→ seine Frau (his), ihre Frau (her)"
     }
    ]
   },
@@ -3498,7 +3498,7 @@
     {
      "for": "sv",
      "rel": "similar",
-     "text": "därpå, varmed are the same construction, but formal or old-fashioned; darauf, womit are everyday German."
+     "text": "därpå, varmed are the same construction, but formal or old-fashioned.\n\ndarauf, womit are everyday German."
     }
    ]
   },
@@ -3990,7 +3990,7 @@
     {
      "for": "el",
      "rel": "similar",
-     "text": "Principal parts are familiar from Greek irregular verbs; German strong verbs change the vowel: trinken – trank – getrunken."
+     "text": "Principal parts are familiar from Greek irregular verbs; German strong verbs change the vowel:\n→ trinken – trank – getrunken"
     }
    ]
   },
@@ -4307,22 +4307,22 @@
     {
      "for": "en",
      "rel": "different",
-     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state:\n→ Ich bin gegangen, Ich bin aufgewacht."
     },
     {
      "for": "es",
      "rel": "different",
-     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state:\n→ Ich bin gegangen, Ich bin aufgewacht."
     },
     {
      "for": "el",
      "rel": "different",
-     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state:\n→ Ich bin gegangen, Ich bin aufgewacht."
     },
     {
      "for": "sq",
      "rel": "different",
-     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state:\n→ Ich bin gegangen, Ich bin aufgewacht."
     }
    ]
   },
@@ -4954,12 +4954,12 @@
     {
      "for": "fr",
      "rel": "similar",
-     "text": "zu works like de before an infinitive: Ich versuche zu schlafen (j’essaie de dormir); after modals no zu."
+     "text": "zu works like de before an infinitive:\n→ Ich versuche zu schlafen (j’essaie de dormir)\n\nAfter modals no zu."
     },
     {
      "for": "it",
      "rel": "similar",
-     "text": "zu works like di before an infinitive: Ich versuche zu schlafen (cerco di dormire); after modals no zu."
+     "text": "zu works like di before an infinitive:\n→ Ich versuche zu schlafen (cerco di dormire)\n\nAfter modals no zu."
     },
     {
      "for": "es",
@@ -4969,12 +4969,12 @@
     {
      "for": "el",
      "rel": "new",
-     "text": "Greek has no infinitive; German uses one, with zu (Ich versuche zu schlafen) or bare after modals (Ich kann schlafen)."
+     "text": "Greek has no infinitive; German uses one, with zu or bare after modals:\n→ Ich versuche zu schlafen\n→ Ich kann schlafen"
     },
     {
      "for": "ru",
      "rel": "different",
-     "text": "Russian has no infinitive marker; German adds zu except after modals: Ich versuche zu schlafen, Ich kann schlafen."
+     "text": "Russian has no infinitive marker; German adds zu except after modals:\n→ Ich versuche zu schlafen, Ich kann schlafen."
     }
    ]
   },
@@ -5998,7 +5998,7 @@
     {
      "for": "fr",
      "rel": "similar",
-     "text": "Das sind meine Eltern is ce sont mes parents; and Das bin ich agrees too, where French says c’est moi."
+     "text": "Das sind meine Eltern is ce sont mes parents.\n\nAnd Das bin ich agrees too, where French says c’est moi."
     },
     {
      "for": "nl",
@@ -6259,7 +6259,7 @@
     {
      "for": "en",
      "rel": "trap",
-     "text": "English uses the perfect (I have lived here for three years); German the present: Ich wohne seit drei Jahren hier."
+     "text": "English uses the perfect (I have lived here for three years); German the present:\n→ Ich wohne seit drei Jahren hier."
     }
    ]
   },
@@ -6626,7 +6626,7 @@
     {
      "for": "ru",
      "rel": "similar",
-     "text": "куда / откуда split the questions like wohin / woher; hin / her also add the direction to the verb: hingehen, herkommen."
+     "text": "куда / откуда split the questions like wohin / woher.\n\nhin / her also add the direction to the verb: hingehen, herkommen."
     },
     {
      "for": "hu",
@@ -6849,7 +6849,7 @@
     {
      "for": "el",
      "rel": "trap",
-     "text": "die Apotheke is the same word as αποθήκη but means φαρμακείο; Schule comes from σχολή, Telefon from τῆλε + φωνή."
+     "text": "die Apotheke is the same word as αποθήκη but means φαρμακείο.\n\nSchule comes from σχολή, Telefon from τῆλε + φωνή."
     },
     {
      "for": "fr",
