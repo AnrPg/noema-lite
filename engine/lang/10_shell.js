@@ -4,16 +4,13 @@ let wired = false;
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
 function start({ acc, id, data, host = null, onRoute = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
-  UI.acc = acc; UI.id = id; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
+  UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
+  applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
-  try {   // the explanations this code writes (lang.expl.*) follow the explanation language: its catalog, when it is a UI locale
-    const xl = window.NoemaI18n && NoemaI18n.match(UI.C.explainLang);
-    if (xl && xl !== 'en' && !NoemaI18n.catalogs[xl]) NoemaI18n.load(xl).then(() => { if (UI.C && !document.querySelector('.lx-session')) render(); });
-  } catch (e) { }
   if (!document.querySelector('link[data-lx-fonts]')) document.head.append(   // i18n: Noto from Google Fonts until the fonts are self-hosted (docs/i18n.md §2 Fonts)
     h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
@@ -25,6 +22,58 @@ function start({ acc, id, data, host = null, onRoute = null }) {
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && UI.C) save(true); });
   }
   render();
+}
+/* ---------- D19: the explanation locale and its facade (docs/language-packs.md §2.2, §3) ---------- */
+/** The locale facades of the open course: {locale: {status, coverage, path?}} — from the registry (built course.expl.<locale>.js) and those loaded. */
+function facadeStatuses() {
+  const meta = ((window.NOEMA_REGISTRY || {}).languages || []).find(m => m.id === UI.id), out = {};
+  for (const [loc, f] of Object.entries(meta?.expl || {})) out[loc] = f;
+  for (const [loc, f] of Object.entries(((window.NOEMA_LANGEXPL || {})[UI.id]) || {})) out[loc] = { ...(out[loc] || {}), status: f.status, coverage: f.coverage };
+  return out;
+}
+const previewHost = () => { try { return !!window.NOEMA_CONFIG?.i18nPreview || /^(deploy-preview-\d+|[\w-]+--)/.test(location.hostname); } catch (e) { return false; } };
+const facadeOpts = () => ({ preview: previewHost(), drafts: window.NOEMA_CONFIG?.i18nDrafts === true });
+/** The locales the explanations can be shown in: the master and every usable facade. */
+function explanationLocales() {
+  const master = UI.data.course.masterLang || UI.data.course.explainLang || 'en', F = facadeStatuses();
+  return [master, ...Object.keys(F).filter(l => l !== master && N.facadeUsable(F[l], facadeOpts()))];
+}
+/** The course as the learner sees it: the master, or the master through the facade of the explanation locale. */
+const buildCourse = data => N.course(UI.facade ? N.applyFacade(data, UI.facade) : data);
+/** The word profiles (course.profiles.js) through the facade. */
+const facadeProfMap = map => UI.facade && map ? N.facadeProfiles(map, UI.facade) : map;
+const facadeLoading = {};
+/** Resolve the explanation locale (native ▸ UI locale ▸ master; the learner's choice first) and show the course through its facade:
+ *  at once when the facade is loaded, else after its file (course.expl.<locale>.js, loaded like the word profiles). → the locale */
+function applyExplanationLocale() {
+  const master = UI.data.course.masterLang || UI.data.course.explainLang || 'en';
+  const loc = N.explanationLocale({ native: nativeL(), uiLocale: window.NoemaI18n?.locale || 'en', override: UI.L?.settings.speaker, facades: facadeStatuses(), master, ...facadeOpts() });
+  const id = UI.id, loaded = l => ((window.NOEMA_LANGEXPL || {})[id] || {})[l];
+  const swap = fac => {
+    const kv = UI.L ? N.toKV(UI.C, UI.L) : null;
+    UI.facade = fac ? { ...fac, locale: fac.locale || loc } : null; UI.C = buildCourse(UI.data);
+    if (kv) UI.L = N.fromKV(UI.C, kv);
+    if (UI.profMap) N.addProfiles(UI.C, facadeProfMap(UI.profMap));
+    nativeMemo = null;
+  };
+  const want = loc === master ? null : loc;
+  if ((UI.facade?.locale || null) !== want) {
+    if (!want) swap(null);
+    else if (loaded(want)) swap(loaded(want));
+    else {
+      const path = facadeStatuses()[want]?.path;
+      if (path && !facadeLoading[id + '|' + want]) facadeLoading[id + '|' + want] = new Promise(res => { const sc = document.createElement('script'); sc.src = path; sc.onload = sc.onerror = () => res(); document.head.append(sc); })
+        .then(() => { delete facadeLoading[id + '|' + want]; if (UI.id === id && loaded(want)) { applyExplanationLocale(); if (UI.C && !document.querySelector('.lx-session')) render(); } });
+      N.setExplainLocale(UI.C.explainLang); return UI.C.explainLang;   // until it is in: the master
+    }
+  }
+  N.setExplainLocale(UI.C.explainLang);
+  try {   // the explanations this code writes (lang.expl.*, lc.expl.*) follow the explanation language: its catalog, when it is a UI locale
+    const xl = window.NoemaI18n && NoemaI18n.match(UI.C.explainLang);
+    if (xl && xl !== 'en' && !NoemaI18n.catalogs[xl]) NoemaI18n.load(xl).then(() => { if (UI.C && UI.id === id && !document.querySelector('.lx-session')) render(); });
+  } catch (e) { }
+  if (UI.C.explainLang && document.documentElement && UI.view) document.documentElement.lang = UI.C.explainLang;
+  return UI.C.explainLang;
 }
 /** Is the course on screen? (inside the frame the learner may be on another tab) */
 const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
@@ -109,7 +158,7 @@ VIEWS.home = (v) => {
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), 'data-go': nRev || nNew || nScript ? 'session' : 'none', 'data-rest': counts, onclick: () => runSession(plan) }, nRev || nNew || nScript ? '▶ ' + LT('lang.home.session', { counts }) : '✅ ' + LT('lang.home.nothingDue')),
       learn ? h('span', { class: 'tiny' }, LT('lang.home.newFrom', { title: UI.C.nodes[learn.node].title })) : null)));
-  v.append(polyHome());   // P6: today's languages, the compare lane, the polyglot drills
+  v.append(nativeAsk() || '', polyHome());   // D19: “Your native language?” (once) · P6: today's languages, the compare lane, the polyglot drills
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 ' + LT(lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? 'lang.home.nextLesson' : 'lang.home.nextFoundation')), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).label).join(' · '))),

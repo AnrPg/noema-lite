@@ -600,9 +600,9 @@
       }
     }
   },
-  "lang.set.knowsNote": "Native and C2 languages decide what is folded as familiar; comparison notes are shown for all of them.",
+  "lang.set.knowsNote": "Other languages you know, with their level. Only your native language decides the explanations and the comparisons.",
   "@lang.set.knowsNote": {
-    "description": "Note under the learner’s languages in the course settings."
+    "description": "Language course › ⚙️ Settings, under “Languages you already know”: what the list is for (D19: only the native language decides explanations and comparisons)."
   },
   "lang.set.aiNotes": "Let Claude or Gemini write comparison notes for my languages that the course has none for (needs your API key in the app’s ⚙️ Settings)",
   "@lang.set.aiNotes": {
@@ -1085,10 +1085,6 @@
   "lang.gram.fromYours": "From your languages",
   "@lang.gram.fromYours": {
     "description": "Heading (after 🧭) of the comparison notes for the learner’s own languages."
-  },
-  "lang.gram.fromOthers": "The same point from other languages",
-  "@lang.gram.fromOthers": {
-    "description": "Folded section (after 🌐) of comparison notes for other languages."
   },
   "lang.gram.notesFor": "Notes for {langs}",
   "@lang.gram.notesFor": {
@@ -4689,5 +4685,61 @@
         "example": "What does it mean? Hund"
       }
     }
+  },
+  "lang.native.label": "Your native language",
+  "@lang.native.label": {
+    "description": "Language course › ⚙️ Settings: the title of the section where the learner sets their native language (one setting for every course); also the aria-label of its picker."
+  },
+  "lang.native.none": "— not set —",
+  "@lang.native.none": {
+    "description": "The first option of the native-language picker when no native language is set yet."
+  },
+  "lang.native.other": "Another language…",
+  "@lang.native.other": {
+    "description": "The last option of the native-language picker: a language not in the list; opens fields for its name, type and family."
+  },
+  "lang.native.name": "Its name",
+  "@lang.native.name": {
+    "description": "Placeholder / aria-label of the text field for the name of a native language that is not in the list."
+  },
+  "lang.native.type": "Its type",
+  "@lang.native.type": {
+    "description": "aria-label of the picker of the language type (isolating, agglutinating, fusional, polysynthetic) of a native language that is not in the list."
+  },
+  "lang.native.family": "Its family",
+  "@lang.native.family": {
+    "description": "aria-label of the picker of the language family of a native language that is not in the list."
+  },
+  "lang.native.familyUnknown": "Family: not sure",
+  "@lang.native.familyUnknown": {
+    "description": "The first option of the language-family picker (the learner does not know the family of their language)."
+  },
+  "lang.native.save": "Save",
+  "@lang.native.save": {
+    "description": "Button that saves a native language typed by the learner (name, type, family)."
+  },
+  "lang.native.ask": "Your native language?",
+  "@lang.native.ask": {
+    "description": "A language course’s home: the title of the card that asks once for the learner’s native language. Short."
+  },
+  "lang.native.askWhy": "The course explains each language through yours: comparisons only with your language (or its type), and the explanations in it once they are translated.",
+  "@lang.native.askWhy": {
+    "description": "Under “Your native language?” on a language course’s home: why the course asks. One or two sentences."
+  },
+  "lang.native.later": "Not now",
+  "@lang.native.later": {
+    "description": "Button on the “Your native language?” card: close it without choosing (it is not asked again; the setting stays in ⚙️ Settings)."
+  },
+  "lang.native.note": "One setting for all your courses (also in Me › Language and appearance). The explanations and comparisons follow it; no other language is used as a reference.",
+  "@lang.native.note": {
+    "description": "Language course › ⚙️ Settings: the note under the native-language picker. “Me › Language and appearance” names the account page where it can also be changed."
+  },
+  "lang.native.speaker": "Explanations in",
+  "@lang.native.speaker": {
+    "description": "Language course › ⚙️ Settings: label of the picker of the language the course’s explanations are shown in (shown only when a translation of the explanations is available)."
+  },
+  "lang.native.speakerAuto": "Automatic (your language when its translation is ready)",
+  "@lang.native.speakerAuto": {
+    "description": "The first option of the “Explanations in” picker: the app chooses (the native language’s translation when it is on, else the UI language’s, else the original)."
   }
 }

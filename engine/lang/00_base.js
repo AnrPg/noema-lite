@@ -90,13 +90,26 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
     : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
-/* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
-/** The languages the learner knows: settings, else the course's known languages as native ones. */
-/** The learner's languages (D18); without = the language on screen, which is never “familiar” from itself. */
-const knowsL = (without = null) => (UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }))).filter(k => (k.code || k) !== without);
+/* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned ---------- */
+/** The account's settings (a:settings: synced; the native language lives there, for every course). */
+const accSettings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
+function putAccSettings(patch) {
+  if (window.NoemaThemes?.putSettings) return NoemaThemes.putSettings(patch, UI.acc);
+  const k = `noema1:${UI.acc}:a:settings`, s = Object.assign(accSettings(), patch); Object.keys(patch).forEach(x => patch[x] === undefined && delete s[x]);
+  if (window.Noema?.kv) Noema.kv.set(k, JSON.stringify(s)); else try { localStorage.setItem(k, JSON.stringify(s)); } catch (e) { }
+}
+let nativeMemo = null;
+/** The learner's native language: a:settings.native, else the course's settings.knows entry at level native → {code?, name, type, family, branch, supported} | null. */
+const nativeL = () => {
+  const raw = (localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '') + '|' + JSON.stringify(UI.L?.settings.knows || null);
+  if (nativeMemo && nativeMemo.raw === raw && nativeMemo.C === UI.C) return nativeMemo.v;
+  const v = N.nativeOf(UI.C, accSettings().native, UI.L?.settings.knows); nativeMemo = { raw, C: UI.C, v }; return v;
+};
+/** The languages that decide what is familiar (D18 → D19: the native language only); without = the language on screen, never “familiar” from itself. */
+const knowsL = (without = null) => N.nativeKnows(nativeL()).filter(k => (k.code || k.name) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
 /** A learner's language by name: a group (type:… / family:…), else the course profile's (English) name in an English UI, else the UI language's name. */
-const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) })
+const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) }) : code?.startsWith('branch:') ? LT('lang.base.langGroup', { group: code.slice(7) })
   : (() => { const ui = info(code).name; return (!window.NoemaI18n || NoemaI18n.locale === 'en' || ui === code) && profileOf(code)?.name || ui || code; })();   // Intl without a name: the profile's
 /** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
 function sentenceView(c, s, unknown = []) {
