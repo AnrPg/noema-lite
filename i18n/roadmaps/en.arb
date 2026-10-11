@@ -749,5 +749,101 @@
   "roadmap.share.notPrepared": "This step is not prepared in the shared Roadmap (any more).",
   "@roadmap.share.notPrepared": {
     "description": "Error when getting a step of a shared Roadmap that nobody has prepared (or that was removed)."
+  },
+  "roadmap.import.stepN": "Step {n, number}",
+  "@roadmap.import.stepN": {
+    "description": "Title given to an imported step that has no name (JSON without a title). n = its position.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "roadmap.import.jsonNoSteps": "This JSON has no list of steps I can read (nodes / steps / topics / children). Try “✨ Let the AI read it”.",
+  "@roadmap.import.jsonNoSteps": {
+    "description": "Error when importing a Roadmap from JSON without a list of steps. The words in brackets are JSON field names (keep them). “✨ Let the AI read it” is a button of the import screen."
+  },
+  "roadmap.import.noSteps": "No steps found in this text.",
+  "@roadmap.import.noSteps": {
+    "description": "Error when the text to import contains no steps."
+  },
+  "roadmap.import.tooMany": "{n, number} steps — the limit is 160. Split the Roadmap into several Roadmaps.",
+  "@roadmap.import.tooMany": {
+    "description": "Error when an imported map has more than 160 steps. n = how many it has.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "210"
+      }
+    }
+  },
+  "roadmap.import.fileNotStep": "“{key}” in the files section is not a step of the Roadmap — ignored",
+  "@roadmap.import.fileNotStep": {
+    "description": "Warning when importing: a line of the “📎 Files” section names a step that does not exist. key = what it names.",
+    "placeholders": {
+      "key": {
+        "type": "String",
+        "example": "2.4"
+      }
+    }
+  },
+  "roadmap.import.prereqNotStep": "“{step}”: prerequisite “{prereq}” is not a step of the Roadmap — ignored",
+  "@roadmap.import.prereqNotStep": {
+    "description": "Warning when importing: a step names a prerequisite that is not a step of the map.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "Calculus"
+      },
+      "prereq": {
+        "type": "String",
+        "example": "Algebra II"
+      }
+    }
+  },
+  "roadmap.import.loop": "The Roadmap has a loop — a step would have to come before itself. Branches and joins are fine; a circle of “needs” is not. Fix one link, or use ⇄ if your arrows point from a step to what it needs.",
+  "@roadmap.import.loop": {
+    "description": "Error when an imported map has a cycle. ⇄ is the import screen’s button that reverses the arrows."
+  },
+  "roadmap.import.loopThrough": "The Roadmap has a loop — a step would have to come before itself: {cycle}. Branches and joins are fine; a circle of “needs” is not. Fix one link, or use ⇄ if your arrows point from a step to what it needs.",
+  "@roadmap.import.loopThrough": {
+    "description": "Error when an imported map has a cycle. cycle = the steps on it, joined by “ → ”. ⇄ is the button that reverses the arrows.",
+    "placeholders": {
+      "cycle": {
+        "type": "String",
+        "example": "A → B → C"
+      }
+    }
+  },
+  "roadmap.import.needKey": "Add a Claude API key or a Gemini key first.",
+  "@roadmap.import.needKey": {
+    "description": "Error when the learner asks the AI to read their map but no AI key is set."
+  },
+  "roadmap.import.aiReading": "The AI is reading your Roadmap…",
+  "@roadmap.import.aiReading": {
+    "description": "Progress line while the AI reads a map the learner pasted."
+  },
+  "roadmap.import.defaultTitle": "My Roadmap",
+  "@roadmap.import.defaultTitle": {
+    "description": "Name of an imported Roadmap when the map has no title."
+  },
+  "roadmap.import.log": "Imported your Roadmap ({how, select, ai {read by the AI} other {{how}}}): {n, number} steps, {links, number} links — no AI mapping.",
+  "@roadmap.import.log": {
+    "description": "First log line of an imported Roadmap. how = ai (the AI read it) or the format it was read from (outline, arrows, mermaid, json — technical names, keep them); n = steps, links = links between steps.",
+    "placeholders": {
+      "how": {
+        "type": "String",
+        "example": "outline"
+      },
+      "n": {
+        "type": "int",
+        "example": "12"
+      },
+      "links": {
+        "type": "int",
+        "example": "14"
+      }
+    }
   }
 }

@@ -97,5 +97,17 @@
   "roadmap.share.logEnded": "n’est plus partagé avec toi — ta copie et tes étapes préparées restent",
   "roadmap.share.cannotPrepare": "Tu ne peux plus préparer d’étapes de ce parcours (tu l’as quitté, ou son propriétaire t’a retiré).",
   "roadmap.share.ownSubject": "Ta propre matière enseigne cette étape — retire-la de l’étape (↩) pour obtenir celle du groupe.",
-  "roadmap.share.notPrepared": "Cette étape n’est pas (ou plus) préparée dans le parcours partagé."
+  "roadmap.share.notPrepared": "Cette étape n’est pas (ou plus) préparée dans le parcours partagé.",
+  "roadmap.import.stepN": "Étape {n, number}",
+  "roadmap.import.jsonNoSteps": "Ce JSON n’a pas de liste d’étapes que je sais lire (nodes / steps / topics / children). Essaie « ✨ Laisser l’IA le lire ».",
+  "roadmap.import.noSteps": "Aucune étape trouvée dans ce texte.",
+  "roadmap.import.tooMany": "{n, number} étapes — la limite est de 160. Découpe le parcours en plusieurs parcours.",
+  "roadmap.import.fileNotStep": "« {key} » dans la section des fichiers n’est pas une étape du parcours — ignoré",
+  "roadmap.import.prereqNotStep": "« {step} » : le prérequis « {prereq} » n’est pas une étape du parcours — ignoré",
+  "roadmap.import.loop": "Le parcours contient une boucle — une étape devrait venir avant elle-même. Les embranchements et les jonctions sont permis ; un cercle de « nécessite » ne l’est pas. Corrige un lien, ou utilise ⇄ si tes flèches vont d’une étape vers ce dont elle a besoin.",
+  "roadmap.import.loopThrough": "Le parcours contient une boucle — une étape devrait venir avant elle-même : {cycle}. Les embranchements et les jonctions sont permis ; un cercle de « nécessite » ne l’est pas. Corrige un lien, ou utilise ⇄ si tes flèches vont d’une étape vers ce dont elle a besoin.",
+  "roadmap.import.needKey": "Ajoute d’abord une clé API Claude ou une clé Gemini.",
+  "roadmap.import.aiReading": "L’IA lit ton parcours…",
+  "roadmap.import.defaultTitle": "Mon parcours",
+  "roadmap.import.log": "Ton parcours a été importé ({how, select, ai {lu par l’IA} other {{how}}}) : {n, plural, one {# étape} many {# étapes} other {# étapes}}, {links, plural, one {# lien} many {# liens} other {# liens}} — sans cartographie par l’IA."
 }
