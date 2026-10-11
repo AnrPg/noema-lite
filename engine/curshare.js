@@ -31,6 +31,14 @@
   const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan', 'assignedAt', 'planFrom', 'groupPlan'];   // 📦 an attached subject is the learner's own
   const NODE_PLAN = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'];   // a step's chapter plan (= NoemaCurriculum.PLAN_KEYS): with an attached subject, the learner's own
   const clone = o => JSON.parse(JSON.stringify(o));
+  /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). The core also runs in the connector (no i18n runtime):
+      there the English catalog when it is loaded, else the key — the connector uses no words of this file. */
+  function rt(k, p) {
+    const I = root.NoemaI18n; if (I) return I.t(k, p);
+    const m = root.NOEMA_I18N?.en?.m?.[k]; if (m == null) return k;
+    const F = root.IntlMessageFormat, M = F && (F.IntlMessageFormat || F.default || F);
+    try { return M ? String(new M(m, 'en', undefined, { ignoreTag: true }).format(p || {})) : m; } catch (e) { return m; }
+  }
 
   /** The map everybody shares: the curriculum without anybody's settings, progress or preparation state. */
   function strip(c) {
@@ -67,17 +75,17 @@
   function changes(local, rec, declined = {}) {
     const mine = strip(local || {}), out = [];
     const add = (key, val, x) => { const sig = hash(val ?? null); if (declined[key] !== sig) out.push({ key, sig, ...x }); };
-    if (!same(topInfo(mine), topInfo(rec))) add('map', topInfo(rec), { kind: 'map', text: (rec.title || rec.goal) !== (mine.title || mine.goal) ? `The Roadmap is now called “${rec.title || rec.goal}”` : 'The Roadmap’s description changed' });
+    if (!same(topInfo(mine), topInfo(rec))) add('map', topInfo(rec), { kind: 'map', text: (rec.title || rec.goal) !== (mine.title || mine.goal) ? rt('roadmap.share.ch.renamed', { title: rec.title || rec.goal }) : rt('roadmap.share.ch.described') });
     for (const [id, r] of Object.entries(rec.nodes || {})) {
       const l = mine.nodes?.[id], own = !!local.nodes?.[id]?.pack?.assigned;
-      if (!l) { add('add:' + id, r, { kind: 'add', nid: id, text: `New step “${r.title}”` }); continue; }
-      if (!same(nodeInfo(l), nodeInfo(r))) add('info:' + id, nodeInfo(r), { kind: 'info', nid: id, text: l.title !== r.title ? `“${l.title}” is now called “${r.title}”` : `“${r.title}”: its description changed` });
-      if (!same(planSig(l), planSig(r))) add('plan:' + id, planSig(r), { kind: 'plan', nid: id, own, text: own ? `“${r.title}”: a new chapter plan for the group. You study this step from your own subject; taking this brings the group’s version of the step back` : `“${r.title}”: a new chapter plan` });
-      if (!same(l.material, r.material)) add('mat:' + id, r.material || null, { kind: 'mat', nid: id, text: `“${r.title}”: its material changed` });
+      if (!l) { add('add:' + id, r, { kind: 'add', nid: id, text: rt('roadmap.share.ch.added', { title: r.title }) }); continue; }
+      if (!same(nodeInfo(l), nodeInfo(r))) add('info:' + id, nodeInfo(r), { kind: 'info', nid: id, text: l.title !== r.title ? rt('roadmap.share.ch.stepRenamed', { old: l.title, title: r.title }) : rt('roadmap.share.ch.stepDescribed', { title: r.title }) });
+      if (!same(planSig(l), planSig(r))) add('plan:' + id, planSig(r), { kind: 'plan', nid: id, own, text: rt(own ? 'roadmap.share.ch.planOwn' : 'roadmap.share.ch.plan', { title: r.title }) });
+      if (!same(l.material, r.material)) add('mat:' + id, r.material || null, { kind: 'mat', nid: id, text: rt('roadmap.share.ch.material', { title: r.title }) });
     }
-    for (const id of Object.keys(mine.nodes || {})) if (!rec.nodes?.[id]) add('del:' + id, 'gone', { kind: 'del', nid: id, text: `Step “${mine.nodes[id].title}” removed` });
+    for (const id of Object.keys(mine.nodes || {})) if (!rec.nodes?.[id]) add('del:' + id, 'gone', { kind: 'del', nid: id, text: rt('roadmap.share.ch.removed', { title: mine.nodes[id].title }) });
     const le = new Set((mine.edges || []).map(edgeKey)), re = new Set((rec.edges || []).map(edgeKey));
-    if (le.size !== re.size || [...re].some(k => !le.has(k))) add('links', [...re].sort(), { kind: 'links', text: 'The links between the steps changed' });
+    if (le.size !== re.size || [...re].some(k => !le.has(k))) add('links', [...re].sort(), { kind: 'links', text: rt('roadmap.share.ch.links') });
     return out;
   }
   /** My copy with the changes I take (keys of changes()) → { c, declined: { key: sig } for the ones I leave }. Everything of
@@ -127,11 +135,11 @@
   const dup = e => /duplicate|23505|already exists|conflict|409/i.test(String(e && e.message || e));
 
   /* ---------- the rules of a step, through any Supabase caller api(path, { method, body, headers }) → JSON ---------- */
-  const one = (cid, nid) => `${T.steps}?curriculum=eq.${enc(cid)}&node_id=eq.${enc(nid)}`;
+  const one = (cid, nid) => `${T.steps}?curriculum=eq.${enc(cid)}&node_id=eq.${enc(nid)}`;   // i18n-ignore (REST queries)
   const Core = {
     BUCKET, LEASE, T, strip, merge, changes, take, hash, remoteOf, taken, isMember, stepPath, filePath,
-    rows: (api, cid) => api(`${T.steps}?select=*&curriculum=eq.${enc(cid)}&order=node_id`),
-    async row(api, cid, nid) { return ((await api(one(cid, nid) + '&select=*')) || [])[0] || null; },
+    rows: (api, cid) => api(`${T.steps}?select=*&curriculum=eq.${enc(cid)}&order=node_id`),   // i18n-ignore (REST queries)
+    async row(api, cid, nid) { return ((await api(one(cid, nid) + '&select=*')) || [])[0] || null; },   // i18n-ignore (REST queries)
     /** Reserve a step for preparing it → { ok, row } — or { ok: false, row } when somebody else has it (prepared, or
         reserved and not run out). An expired reservation is taken over; my own one is renewed. */
     async claim(api, { cid, nid, me, name = '', packId = null, lease = LEASE }) {
@@ -144,28 +152,28 @@
       if (!row) return { ok: false, row: null };
       if (row.author === me && row.status === 'preparing') return { ok: true, row: (await Core.renew(api, { cid, nid, me, lease })) || row };
       if (row.status === 'preparing' && Date.parse(row.claimed_until || '') < Date.now()) {
-        const upd = await api(one(cid, nid) + `&status=eq.preparing&claimed_until=lt.${enc(new Date().toISOString())}`, { method: 'PATCH', body: { author: me, author_name: name, pack_id: packId, claimed_until: until }, headers: { Prefer: 'return=representation' } });
+        const upd = await api(one(cid, nid) + `&status=eq.preparing&claimed_until=lt.${enc(new Date().toISOString())}`, { method: 'PATCH', body: { author: me, author_name: name, pack_id: packId, claimed_until: until }, headers: { Prefer: 'return=representation' } });   // i18n-ignore (REST queries)
         if (Array.isArray(upd) && upd.length) return { ok: true, row: upd[0] };
       }
       return { ok: false, row };
     },
     async renew(api, { cid, nid, me, lease = LEASE }) {
-      const upd = await api(one(cid, nid) + `&author=eq.${enc(me)}&status=eq.preparing`, { method: 'PATCH', body: { claimed_until: new Date(Date.now() + lease).toISOString() }, headers: { Prefer: 'return=representation' } });
+      const upd = await api(one(cid, nid) + `&author=eq.${enc(me)}&status=eq.preparing`, { method: 'PATCH', body: { claimed_until: new Date(Date.now() + lease).toISOString() }, headers: { Prefer: 'return=representation' } });   // i18n-ignore (REST queries)
       return Array.isArray(upd) && upd[0] || null;
     },
     /** Give a reservation back (preparing failed / stopped). A prepared step is never released this way. */
-    release: (api, { cid, nid, me }) => api(one(cid, nid) + `&author=eq.${enc(me)}&status=eq.preparing`, { method: 'DELETE' }),
+    release: (api, { cid, nid, me }) => api(one(cid, nid) + `&author=eq.${enc(me)}&status=eq.preparing`, { method: 'DELETE' }),   // i18n-ignore (REST queries)
     /** The step is prepared and its pack uploaded → the row says so (my reservation or my earlier version; a new row if
         there is none; an expired reservation of someone else is taken over). → { ok, row } | { ok: false, row } (someone else's) */
     async ready(api, { cid, nid, me, name = '', packId, version = null, path, meta = {} }) {
       const body = { status: 'ready', author: me, author_name: name, pack_id: packId, version, path, meta, claimed_until: null };
-      const mine = await api(one(cid, nid) + `&author=eq.${enc(me)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } });
+      const mine = await api(one(cid, nid) + `&author=eq.${enc(me)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } });   // i18n-ignore (REST queries)
       if (Array.isArray(mine) && mine.length) return { ok: true, row: mine[0] };
       try {
         const ins = await api(T.steps, { method: 'POST', body: [{ curriculum: cid, node_id: nid, ...body }], headers: { Prefer: 'return=representation' } });
         if (Array.isArray(ins) && ins.length) return { ok: true, row: ins[0] };
       } catch (e) { if (!dup(e)) throw e; }
-      const upd = await api(one(cid, nid) + `&status=eq.preparing&claimed_until=lt.${enc(new Date().toISOString())}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } });
+      const upd = await api(one(cid, nid) + `&status=eq.preparing&claimed_until=lt.${enc(new Date().toISOString())}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } });   // i18n-ignore (REST queries)
       if (Array.isArray(upd) && upd.length) return { ok: true, row: upd[0] };
       return { ok: false, row: await Core.row(api, cid, nid) };
     },
@@ -183,7 +191,7 @@
   const toast = (m, ms) => root.Noema?.toast?.(m, ms);
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });
   Share.onChange = f => { listeners.add(f); return () => listeners.delete(f); };
-  const need = acc => { if (!cloudOn(acc)) throw new Error('Sharing a Roadmap needs a ☁️ cloud account (⚙️ → Cloud).'); };
+  const need = acc => { if (!cloudOn(acc)) throw new Error(rt('roadmap.share.needCloud')); };
   const save = (acc, c) => C().save(acc, c);
   function patchNode(acc, cid, nid, pack) { const c = C().get(acc, cid); if (!c?.nodes[nid]) return null; c.nodes[nid].pack = { ...(c.nodes[nid].pack || {}), ...pack }; save(acc, c); return c; }
   const stats = c => ({ steps: Object.keys(c.nodes || {}).length, files: Object.keys(c.files || {}).length, chapters: Object.values(c.nodes || {}).reduce((a, n) => a + (n.chapters?.length || 0), 0) });
@@ -195,7 +203,7 @@
     for (const [fid, f] of Object.entries(c.files || {})) {
       if (out[fid] && (!f.sha256 || out[fid].sha256 === f.sha256)) continue;
       const rec = await SF().get(acc, C().curStore(c.id), fid).catch(() => null);
-      if (!rec?.blob) { onLog(`⚠️ ${f.name}: not on this device — not shared (members cannot prepare its steps from it)`); continue; }
+      if (!rec?.blob) { onLog('⚠️ ' + rt('roadmap.share.fileMissing', { name: f.name })); continue; }
       onLog(`📎 ${f.name}…`);
       const path = Core.filePath(c.id, fid, f.name || rec.name); const r = await CL().putFile(BUCKET, path, rec.blob, rec.type || f.type || 'application/octet-stream');
       out[fid] = { path, chunks: r.chunks || 0, name: f.name || rec.name, type: rec.type || f.type || '', size: rec.blob.size, sha256: f.sha256 || null };
@@ -206,31 +214,31 @@
   /** Share one of my curricula (or change how): isPublic, the steps prepared so far, the material files. */
   Share.publish = async (acc, cid, { isPublic = false, steps = true, onLog = () => { } } = {}) => {
     need(acc); let c = C().get(acc, cid);
-    if (!c) throw new Error('Roadmap not found.');
-    if (isMember(c)) throw new Error('This Roadmap belongs to ' + (c.shared.ownerName || 'someone else') + ' — only its owner shares it.');
-    if (!Object.keys(c.nodes || {}).length || (!c.imported && ['dag', 'audit', 'expand'].includes(c.stage) && c.status !== 'ready')) throw new Error('Its Roadmap is not ready yet — share it when the Roadmap is built.');
-    if (!/^c[a-z0-9]{2,30}$/.test(c.id)) throw new Error('This Roadmap has an old id that cannot be shared.');
+    if (!c) throw new Error(rt('roadmap.notFound'));
+    if (isMember(c)) throw new Error(rt('roadmap.share.notOwner', { owner: c.shared.ownerName || '', known: c.shared.ownerName ? 'yes' : 'no' }));
+    if (!Object.keys(c.nodes || {}).length || (!c.imported && ['dag', 'audit', 'expand'].includes(c.stage) && c.status !== 'ready')) throw new Error(rt('roadmap.share.notReady'));
+    if (!/^c[a-z0-9]{2,30}$/.test(c.id)) throw new Error(rt('roadmap.share.oldId'));
     const rec = Core.strip(c), h = Core.hash(rec), at = new Date().toISOString();
-    onLog('🗺️ The Roadmap…');
+    onLog('🗺️ ' + rt('roadmap.share.uploading'));
     const base = { id: cid, owner: me(), owner_name: myName(acc), title: c.title || c.goal, description: c.goal !== c.title ? c.goal : (c.scope || null), language: c.language || null, public: !!isPublic, record: rec };
-    const old = ((await api(`${T.cur}?select=id,version,meta&id=eq.${enc(cid)}`).catch(() => [])) || [])[0];
+    const old = ((await api(`${T.cur}?select=id,version,meta&id=eq.${enc(cid)}`).catch(() => [])) || [])[0];   // i18n-ignore (REST queries)
     const meta = { ...(old?.meta || {}), counts: stats(c), domain: C().domainOf(c) };
-    if (old) await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { ...base, meta, version: (old.version || 1) + 1 }, headers: { Prefer: 'return=minimal' } });
+    if (old) await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { ...base, meta, version: (old.version || 1) + 1 }, headers: { Prefer: 'return=minimal' } });   // i18n-ignore (REST queries)
     else await api(T.cur, { method: 'POST', body: [{ ...base, meta, version: 1 }], headers: { Prefer: 'return=minimal' } });
     meta.files = await uploadFiles(acc, c, meta.files || {}, onLog);
-    await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { meta }, headers: { Prefer: 'return=minimal' } });
+    await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { meta }, headers: { Prefer: 'return=minimal' } });   // i18n-ignore (REST queries)
     c = C().get(acc, cid);
     c.shared = { id: cid, role: 'owner', owner: me(), ownerName: myName(acc), public: !!isPublic, version: (old?.version || 0) + 1, at, hash: h, files: meta.files };
-    (c.log = c.log || []).push({ t: Date.now(), m: isPublic ? '👥 shared — 🌍 public' : '👥 shared' }); save(acc, c); emit();
+    (c.log = c.log || []).push({ t: Date.now(), m: '👥 ' + rt('roadmap.share.logShared', { pub: isPublic ? 'yes' : 'no' }) }); save(acc, c); emit();
     if (steps) for (const [nid, n] of Object.entries(c.nodes)) if (n.pack?.status === 'ready' && !n.pack.assigned && !(n.pack.author && n.pack.author !== me())) {
       onLog(`⚡ “${n.title}”…`);
       try { await Share.contribute(acc, cid, nid); } catch (e) { onLog(`⚠️ “${n.title}”: ${e.message}`); }
     }
     await Share.refresh(acc, cid).catch(() => { });
-    onLog('✅ Shared'); return C().get(acc, cid);
+    onLog('✅ ' + rt('roadmap.share.shared')); return C().get(acc, cid);
   };
   Share.setPublic = async (acc, cid, isPublic) => {
-    need(acc); await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { public: !!isPublic }, headers: { Prefer: 'return=minimal' } });
+    need(acc); await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { public: !!isPublic }, headers: { Prefer: 'return=minimal' } });   // i18n-ignore (REST queries)
     const c = C().get(acc, cid); if (c?.shared) { c.shared.public = !!isPublic; save(acc, c); } emit();
   };
   /** The owner's map changed → the shared map (new material files too). Called by itself shortly after every change. */
@@ -238,7 +246,7 @@
     const c = C().get(acc, cid); if (c?.shared?.role !== 'owner' || !cloudOn(acc)) return false;
     const rec = Core.strip(c), h = Core.hash(rec); if (h === c.shared.hash) return false;
     const files = await uploadFiles(acc, c, c.shared.files || {});
-    const [row] = (await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { record: rec, title: c.title || c.goal, meta: { counts: stats(c), files, domain: C().domainOf(c) }, version: (c.shared.version || 1) + 1 }, headers: { Prefer: 'return=representation' } })) || [];
+    const [row] = (await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'PATCH', body: { record: rec, title: c.title || c.goal, meta: { counts: stats(c), files, domain: C().domainOf(c) }, version: (c.shared.version || 1) + 1 }, headers: { Prefer: 'return=representation' } })) || [];   // i18n-ignore (REST queries)
     const cur = C().get(acc, cid); if (!cur?.shared) return false;
     if (!row) { cur.shared = null; cur.remote = null; save(acc, cur); emit(); return false; }   // the sharing was stopped elsewhere
     cur.shared = { ...cur.shared, hash: h, version: row.version, at: row.updated_at, files }; save(acc, cur); emit(); return true;
@@ -246,7 +254,7 @@
   /** 🔔 The owner's newest map, as changes I may take → { list, record, version, at } (list empty: nothing new). */
   Share.incoming = async (acc, cid) => {
     const c = C().get(acc, cid); if (c?.shared?.role !== 'member' || c.shared.ended) return { list: [] };
-    const full = ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0]; if (!full?.record) return { list: [] };
+    const full = ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0]; if (!full?.record) return { list: [] };   // i18n-ignore (REST queries)
     return { list: Core.changes(c, full.record, c.shared.declined || {}), record: full.record, version: full.version, at: full.updated_at, files: full.meta?.files || {} };
   };
   /** Take some of the owner's changes (keys from Share.incoming; [] = keep my copy). The others are not offered again until they change. */
@@ -255,7 +263,8 @@
     const { c, declined } = Core.take(cur, inc.record, keys, inc.list);
     const dec = { ...(cur.shared.declined || {}) }; for (const k of keys) delete dec[k]; Object.assign(dec, declined);
     c.shared = { ...cur.shared, version: inc.version, seen: inc.version, at: inc.at, files: inc.files || cur.shared.files || {}, incoming: null, declined: dec }; c.autoApprove = true;
-    (c.log = c.log || []).push({ t: Date.now(), m: `👥 ${keys.length ? `took ${keys.length} of ${inc.list.length} change(s)` : 'kept my copy'} from ${cur.shared.ownerName || 'the owner'}` });
+    const owner = { owner: cur.shared.ownerName || '', known: cur.shared.ownerName ? 'yes' : 'no' };
+    (c.log = c.log || []).push({ t: Date.now(), m: '👥 ' + (keys.length ? rt('roadmap.share.logTook', { took: keys.length, n: inc.list.length, ...owner }) : rt('roadmap.share.logKept', owner)) });
     save(acc, c); emit(); return C().get(acc, cid);
   };
   /** Keep the version of a prepared step I have (its author made a new one) — until they make another. */
@@ -275,28 +284,28 @@
   Share.unpublish = async (acc, cid) => {
     need(acc);
     const rows = (await Core.rows(api, cid).catch(() => [])) || [];
-    const row = ((await api(`${T.cur}?select=meta&id=eq.${enc(cid)}`).catch(() => [])) || [])[0];
+    const row = ((await api(`${T.cur}?select=meta&id=eq.${enc(cid)}`).catch(() => [])) || [])[0];   // i18n-ignore (REST queries)
     const paths = [];
     for (const r of rows) { if (r.path) paths.push(...CL().partPaths(r.path, r.meta?.chunks || 0)); paths.push(...(r.meta?.filePaths || [])); }
     for (const f of Object.values(row?.meta?.files || {})) paths.push(...CL().partPaths(f.path, f.chunks || 0));
     for (let i = 0; i < paths.length; i += 100) await CL().deleteObjects(BUCKET, paths.slice(i, i + 100)).catch(() => { });
-    await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'DELETE' });
-    const c = C().get(acc, cid); if (c) { c.shared = null; c.remote = null; (c.log = c.log || []).push({ t: Date.now(), m: '👥 sharing stopped' }); save(acc, c); } emit();
+    await api(`${T.cur}?id=eq.${enc(cid)}`, { method: 'DELETE' });   // i18n-ignore (REST queries)
+    const c = C().get(acc, cid); if (c) { c.shared = null; c.remote = null; (c.log = c.log || []).push({ t: Date.now(), m: '👥 ' + rt('roadmap.share.logStopped') }); save(acc, c); } emit();
   };
   Share.invite = async (acc, cid, email, message = '') => {
     need(acc); const to = String(email || '').trim().toLowerCase();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error('Please type a valid e-mail address.');
-    if (to === (CL().session().user.email || '').toLowerCase()) throw new Error('That is your own e-mail address.');
-    const old = ((await api(`${T.mem}?select=status&curriculum=eq.${enc(cid)}&email=eq.${enc(to)}`).catch(() => [])) || [])[0];
-    if (old?.status === 'joined') throw new Error(to + ' is already in this Roadmap.');
-    if (old) await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(to)}`, { method: 'DELETE' });   // invited again (after a “no”, leaving or removal)
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error(rt('roadmap.share.badEmail'));
+    if (to === (CL().session().user.email || '').toLowerCase()) throw new Error(rt('roadmap.share.ownEmail'));
+    const old = ((await api(`${T.mem}?select=status&curriculum=eq.${enc(cid)}&email=eq.${enc(to)}`).catch(() => [])) || [])[0];   // i18n-ignore (REST queries)
+    if (old?.status === 'joined') throw new Error(rt('roadmap.share.alreadyIn', { email: to }));
+    if (old) await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(to)}`, { method: 'DELETE' });   // invited again (after a “no”, leaving or removal) · i18n-ignore (REST queries)
     await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: to, message: message || null, status: 'pending', invited_by: me() }], headers: { Prefer: 'return=minimal' } });
     emit();
   };
-  Share.members = async cid => (await api(`${T.mem}?select=*&curriculum=eq.${enc(cid)}&order=created_at.asc`)) || [];
+  Share.members = async cid => (await api(`${T.mem}?select=*&curriculum=eq.${enc(cid)}&order=created_at.asc`)) || [];   // i18n-ignore (REST queries)
   Share.removeMember = async (cid, email, { pending = false } = {}) => {
-    if (pending) await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(email)}`, { method: 'DELETE' });
-    else await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(email)}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } });
+    if (pending) await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(email)}`, { method: 'DELETE' });   // i18n-ignore (REST queries)
+    else await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(email)}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } });   // i18n-ignore (REST queries)
     emit();
   };
   /** The owner removes a step someone prepared (it can be prepared again). */
@@ -312,9 +321,9 @@
   /** 🌍 Public curricula (also for signed-out visitors), with how many steps are prepared. */
   Share.explore = async () => {
     const auth = !!CL()?.session?.();
-    const list = (await api(`${T.cur}?select=id,owner,owner_name,title,description,language,meta,version,updated_at,published_at&public=eq.true&order=updated_at.desc&limit=200`, { auth })) || [];
+    const list = (await api(`${T.cur}?select=id,owner,owner_name,title,description,language,meta,version,updated_at,published_at&public=eq.true&order=updated_at.desc&limit=200`, { auth })) || [];   // i18n-ignore (REST queries)
     if (list.length) {
-      const st = (await api(`${T.steps}?select=curriculum,status&status=eq.ready&curriculum=in.(${list.map(x => enc(x.id)).join(',')})`, { auth }).catch(() => [])) || [];
+      const st = (await api(`${T.steps}?select=curriculum,status&status=eq.ready&curriculum=in.(${list.map(x => enc(x.id)).join(',')})`, { auth }).catch(() => [])) || [];   // i18n-ignore (REST queries)
       for (const x of list) x.prepared = st.filter(s => s.curriculum === x.id).length;
     }
     return list;
@@ -322,21 +331,21 @@
   /** Invitations waiting for me → [{ curriculum, title, owner_name, message, meta, … }] */
   Share.invites = async () => {
     const em = (CL()?.session?.()?.user?.email || '').toLowerCase(); if (!em) return [];
-    const inv = (await api(`${T.mem}?select=*&email=eq.${enc(em)}&status=eq.pending`)) || []; if (!inv.length) return [];
-    const curs = (await api(`${T.cur}?select=id,owner,owner_name,title,description,language,meta,updated_at&id=in.(${inv.map(x => enc(x.curriculum)).join(',')})`)) || [];
+    const inv = (await api(`${T.mem}?select=*&email=eq.${enc(em)}&status=eq.pending`)) || []; if (!inv.length) return [];   // i18n-ignore (REST queries)
+    const curs = (await api(`${T.cur}?select=id,owner,owner_name,title,description,language,meta,updated_at&id=in.(${inv.map(x => enc(x.curriculum)).join(',')})`)) || [];   // i18n-ignore (REST queries)
     return inv.map(i => { const c = curs.find(x => x.id === i.curriculum); return c ? { ...i, title: c.title, owner_name: c.owner_name, owner: c.owner, description: c.description, language: c.language, meta: c.meta || {} } : null; }).filter(Boolean);
   };
   /** Join (an invitation, or a public curriculum) → this person's copy of the map; their progress is their own. */
   Share.join = async (acc, cid) => {
     need(acc);
-    const row = ((await api(`${T.cur}?select=*&id=eq.${enc(cid)}`)) || [])[0];
-    if (!row) throw new Error('This Roadmap is not shared any more.');
-    if (row.owner === me()) throw new Error('This is your own Roadmap.');
+    const row = ((await api(`${T.cur}?select=*&id=eq.${enc(cid)}`)) || [])[0];   // i18n-ignore (REST queries)
+    if (!row) throw new Error(rt('roadmap.share.gone'));
+    if (row.owner === me()) throw new Error(rt('roadmap.share.own'));
     const em = CL().session().user.email.toLowerCase(), body = { status: 'joined', user_id: me(), name: myName(acc), responded_at: new Date().toISOString() };
-    const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw new Error(/row-level|403|permission/i.test(e.message) ? 'You cannot join this Roadmap (the owner removed you, or it is not public).' : e.message); });
+    const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw new Error(/row-level|403|permission/i.test(e.message) ? rt('roadmap.share.cannotJoin') : e.message); });   // i18n-ignore (REST queries)
     if (!upd?.length) {
-      if (!row.public) throw new Error('This Roadmap is shared with invited people only.');
-      await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw new Error(dup(e) || /row-level|403/i.test(e.message) ? 'You cannot join this Roadmap any more (its owner removed you).' : e.message); });
+      if (!row.public) throw new Error(rt('roadmap.share.inviteOnly'));
+      await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw new Error(dup(e) || /row-level|403/i.test(e.message) ? rt('roadmap.share.removed') : e.message); });
     }
     const local = C().get(acc, cid);
     const L = root.NoemaLLM; const provider = local?.provider || (L?.pick?.(acc, 'auto') ? 'auto' : 'claudeapp');
@@ -344,15 +353,15 @@
     const c = Core.merge(base, row.record || {});
     Object.assign(c, { format: 'noema.curriculum/v1', id: cid, status: c.status === 'waiting' ? 'ready' : (c.status || 'ready'), autoApprove: true,
       shared: { id: cid, role: 'member', owner: row.owner, ownerName: row.owner_name || '', public: !!row.public, version: row.version, at: row.updated_at, files: row.meta?.files || {} } });
-    (c.log = c.log || []).push({ t: Date.now(), m: `👥 joined — shared by ${row.owner_name || 'its owner'}` });
+    (c.log = c.log || []).push({ t: Date.now(), m: '👥 ' + rt('roadmap.share.logJoined', { owner: row.owner_name || '', known: row.owner_name ? 'yes' : 'no' }) });
     save(acc, c); emit();
     await Share.refresh(acc, cid).catch(e => console.warn('[curshare]', e));
     return C().get(acc, cid);
   };
-  Share.decline = async cid => { const em = CL().session().user.email.toLowerCase(); await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body: { status: 'rejected', user_id: me(), responded_at: new Date().toISOString() }, headers: { Prefer: 'return=minimal' } }); emit(); };
+  Share.decline = async cid => { const em = CL().session().user.email.toLowerCase(); await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body: { status: 'rejected', user_id: me(), responded_at: new Date().toISOString() }, headers: { Prefer: 'return=minimal' } }); emit(); };   // i18n-ignore (REST queries)
   /** Leave a curriculum someone shared: my copy of the map goes, the steps I studied stay in my subjects (with my progress). */
   Share.leave = async (acc, cid) => {
-    if (cloudOn(acc)) { const em = CL().session().user.email.toLowerCase(); await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body: { status: 'left', user_id: me() }, headers: { Prefer: 'return=minimal' } }).catch(() => { }); }
+    if (cloudOn(acc)) { const em = CL().session().user.email.toLowerCase(); await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body: { status: 'left', user_id: me() }, headers: { Prefer: 'return=minimal' } }).catch(() => { }); }   // i18n-ignore (REST queries)
     C().remove(acc, cid); emit();
   };
 
@@ -360,15 +369,15 @@
   /** The newest shared map (for members) and who prepared / is preparing which step (everybody) → saved when it changed. */
   Share.refresh = async (acc, cid) => {
     let c = C().get(acc, cid); if (!c?.shared || c.shared.ended || !cloudOn(acc)) return c;
-    const head = ((await api(`${T.cur}?select=id,owner_name,public,version,updated_at,title,meta&id=eq.${enc(cid)}`)) || [])[0];
+    const head = ((await api(`${T.cur}?select=id,owner_name,public,version,updated_at,title,meta&id=eq.${enc(cid)}`)) || [])[0];   // i18n-ignore (REST queries)
     if (!head) {   // no longer shared (stopped, or I was removed): my copy stays, as my own curriculum
       c = C().get(acc, cid);
-      if (c.shared.role === 'member') { c.shared = { ...c.shared, ended: true }; (c.log = c.log || []).push({ t: Date.now(), m: '👥 no longer shared with you — your copy and your prepared steps stay' }); }
+      if (c.shared.role === 'member') { c.shared = { ...c.shared, ended: true }; (c.log = c.log || []).push({ t: Date.now(), m: '👥 ' + rt('roadmap.share.logEnded') }); }
       else c.shared = null;
       c.remote = null; save(acc, c); emit(); return c;
     }
     const newer = x => x.shared.role === 'member' && head.version !== (x.shared.seen || x.shared.version);
-    const full = newer(c) ? ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0] : null;
+    const full = newer(c) ? ((await api(`${T.cur}?select=record,version,updated_at,meta&id=eq.${enc(cid)}`)) || [])[0] : null;   // i18n-ignore (REST queries)
     const rows = (await Core.rows(api, cid)) || [];
     c = C().get(acc, cid); if (!c?.shared || c.shared.ended) return c;   // every await is done: from here on the newest copy (an edit made meanwhile — a subject attached, a plan — stays)
     const before = JSON.stringify([c.shared, c.remote, c.nodes]);
@@ -405,7 +414,7 @@
     if (!cloudOn(acc)) return false;
     let r;
     try { r = await Core.claim(api, { cid: c.id, nid, me: me(), name: myName(acc), packId: C().packId(c, nid) }); }
-    catch (e) { console.warn('[curshare] claim', e.message); toast(/row-level|403|permission/i.test(e.message) ? '👥 You cannot prepare steps of this Roadmap any more (you left it, or its owner removed you).' : '⚠️ ' + e.message, 6000); r = { ok: false }; }
+    catch (e) { console.warn('[curshare] claim', e.message); toast(/row-level|403|permission/i.test(e.message) ? '👥 ' + rt('roadmap.share.cannotPrepare') : '⚠️ ' + e.message, 6000); r = { ok: false }; }
     if (!r.ok) await Share.refresh(acc, c.id).catch(() => { });
     return r.ok;
   };
@@ -454,8 +463,8 @@
     const k = cid + '/' + nid; if (getting.has(k)) return getting.get(k);
     const job = (async () => {
       let c = await Share.refresh(acc, cid); const x = c?.remote?.[nid];
-      if (c?.nodes[nid]?.pack?.assigned) throw new Error('Your own subject teaches this step — take it off the step (↩) to get the shared one.');
-      if (!x || x.status !== 'ready' || !x.path) throw new Error('This step is not prepared in the shared Roadmap (any more).');
+      if (c?.nodes[nid]?.pack?.assigned) throw new Error(rt('roadmap.share.ownSubject'));
+      if (!x || x.status !== 'ready' || !x.path) throw new Error(rt('roadmap.share.notPrepared'));
       const pid = C().packId(c, nid);
       const blob = await CL().getFile(BUCKET, x.path, x.meta?.chunks || 0, { type: 'application/json' });
       const pack = JSON.parse(await blob.text());

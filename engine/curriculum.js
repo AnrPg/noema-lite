@@ -14,8 +14,18 @@ window.NoemaCurriculum = (() => {
   const N = () => window.Noema;
   const today = () => new Date().toISOString().slice(0, 10);
   const uid = () => Date.now().toString(36).slice(-5) + Math.random().toString(36).slice(2, 5);
+  /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). Without the i18n runtime — this file also runs in the
+      Claude connector (tools/build.py) and in Node tests — the English catalog when it is loaded, else the key; nothing a
+      learner reads is produced there (texts for Claude stay English, marked i18n-ignore). */
+  function rt(k, p) {
+    const I = window.NoemaI18n; if (I) return I.t(k, p);
+    const m = window.NOEMA_I18N?.en?.m?.[k]; if (m == null) return k;
+    const F = window.IntlMessageFormat, M = F && (F.IntlMessageFormat || F.default || F);
+    try { return M ? String(new M(m, 'en', undefined, { ignoreTag: true }).format(p || {})) : m; } catch (e) { return m; }
+  }
 
   /* ======================= prompts (adapted from the curriculum design brief) ======================= */
+  /* i18n-ignore-start — prompts and JSON schemas for the AI (docs/i18n.md approach 6: English, they ask for the curriculum's language) */
   const FRAMEWORKS = `# Mastery Requirements
 
 Every node should support multiple complementary dimensions of understanding.
@@ -343,7 +353,9 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   }
 
   /* ======================= the curriculum object ======================= */
+  /** The curriculum's language, as the prompts name it (English words for the AI; a learner sees NoemaI18n.fmt.langName(code)). */
   const LANG = { en: 'English', el: 'Greek (Ελληνικά)', de: 'German', fr: 'French', es: 'Spanish', it: 'Italian', ru: 'Russian', tr: 'Turkish', ar: 'Arabic', he: 'Hebrew', hi: 'Hindi', zh: 'Chinese' };
+  /* i18n-ignore-end */
   function blank(o) {
     const id = 'c' + uid();
     return { format: 'noema.curriculum/v1', id, goal: o.goal.trim(), title: o.goal.trim(), language: o.language || 'en', learner: (o.learner || '').trim(), depth: o.depth || 'deep',
@@ -351,7 +363,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
       created: new Date().toISOString(), updated: new Date().toISOString(), status: 'building', stage: 'dag', log: [], usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
       nodes: {}, edges: [], goalId: null, synthesisId: null, bottlenecks: [], paths: { minimal: [], deep: [] }, coveragePlan: [], audit: [] };
   }
-  const ctx = c => ({ goal: c.goal, languageName: LANG[c.language] || c.language, learner: c.learner || 'a complete beginner with no specialized prior knowledge', apps: c.apps, depth: c.depth, scope: c.scope, constraints: c.constraints, maxBase: 110, maxAudit: 25 });
+  const ctx = c => ({ goal: c.goal, languageName: LANG[c.language] || c.language, learner: c.learner || 'a complete beginner with no specialized prior knowledge', apps: c.apps, depth: c.depth, scope: c.scope, constraints: c.constraints, maxBase: 110, maxAudit: 25 });   // i18n-ignore (for the prompts)
   /** Compact graph snapshot for the agents (ids, titles, roles, edges — not the chapter plans). */
   function snapshot(c, { withSummaries = false } = {}) {
     return JSON.stringify({ goalId: c.goalId, nodes: Object.values(c.nodes).map(n => ({ id: n.id, title: n.title, role: n.role, ...(withSummaries && n.summary ? { summary: n.summary } : {}) })), edges: c.edges.map(e => [e.from, e.to]) });
@@ -380,9 +392,9 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   const llmOpts = (acc, c, extra) => ({ acc, provider: L().pick(acc, c.provider), model: L().pick(acc, c.provider) === 'claude' ? c.model || undefined : undefined, ...extra });
 
   async function stageDag(acc, c, on) {
-    on('🧭 Agent 1 — mapping every prerequisite of “' + c.goal + '”…');
+    on('🧭 ' + rt('roadmap.build.dag', { goal: c.goal }));
     const x = ctx(c);
-    const { data, usage } = await L().json(llmOpts(acc, c, { system: dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S_DAG, name: 'submit_curriculum_dag', maxTokens: 32000, validate: d => validateDag(d, x), onRepair: e => on(`   ↻ fixing ${e.length} problem(s) in the graph…`), signal: on.signal, onProgress: n => on.tick?.(n) }));
+    const { data, usage } = await L().json(llmOpts(acc, c, { system: dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S_DAG, name: 'submit_curriculum_dag', maxTokens: 32000, validate: d => validateDag(d, x), onRepair: e => on('   ↻ ' + rt('roadmap.build.fixingGraph', { n: e.length })), signal: on.signal, onProgress: n => on.tick?.(n) }));   // i18n-ignore (the prompt)
     addUsage(c, usage);
     on(applyDag(c, data));
   }
@@ -394,12 +406,12 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     c.edges = E2(data.edges); c.goalId = data.goalRef; c.bottlenecks = data.bottlenecks.map(b => ({ node: b.nodeRef, why: b.explanation }));
     c.paths = { minimal: data.minimalLearningPath, deep: data.deepLearningPath };
     const f = data.nodes.filter(n => n.role === 'foundation').length;
-    return `   ✓ ${f} prerequisites, ${data.applicationRefs.length} applications, ${data.edges.length} links`;
+    return '   ✓ ' + rt('roadmap.build.dagDone', { pre: f, apps: data.applicationRefs.length, links: data.edges.length });
   }
   async function stageAudit(acc, c, on) {
-    on('🔍 Agent 1b — independent check: are the prerequisites complete?');
+    on('🔍 ' + rt('roadmap.build.audit'));
     const x = ctx(c); const base = auditBase(c);
-    const { data, usage } = await L().json(llmOpts(acc, c, { system: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', prompt: auditPrompt(x, snapshot(c, { withSummaries: true })), schema: S_AUDIT, name: 'submit_prerequisite_audit', maxTokens: 16000, validate: a => validateAudit(a, base), onRepair: e => on(`   ↻ fixing ${e.length} problem(s)…`), signal: on.signal }));
+    const { data, usage } = await L().json(llmOpts(acc, c, { system: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', prompt: auditPrompt(x, snapshot(c, { withSummaries: true })), schema: S_AUDIT, name: 'submit_prerequisite_audit', maxTokens: 16000, validate: a => validateAudit(a, base), onRepair: e => on('   ↻ ' + rt('roadmap.fixing', { n: e.length })), signal: on.signal }));   // i18n-ignore (the prompt)
     addUsage(c, usage);
     on(applyAudit(c, data));
   }
@@ -407,17 +419,17 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   function applyAudit(c, data) {
     for (const n of data.added) addNode(c, { id: n.ref, title: n.title, summary: n.summary, role: 'foundation', domains: n.knowledgeDomains, kDomain: n.knowledgeDomain, levels: n.processingLevels, audit: n.why });
     c.edges.push(...E2(data.edges)); c.audit = data.notes;
-    return data.added.length ? `   ✓ added ${data.added.length} missing prerequisite(s): ${data.added.slice(0, 6).map(n => n.title).join(', ')}${data.added.length > 6 ? '…' : ''}` : '   ✓ nothing missing';
+    return '   ✓ ' + (data.added.length ? rt('roadmap.build.auditAdded', { n: data.added.length, list: data.added.slice(0, 6).map(n => n.title).join(', ') + (data.added.length > 6 ? '…' : '') }) : rt('roadmap.build.auditNone'));
   }
   async function stageExpand(acc, c, on) {
     const goal = c.nodes[c.goalId];
-    on(`🎯 Agent 2 — expanding the goal “${goal.title}” into its full Roadmap (${c.depth})…`);
-    const { data: x, usage } = await L().json(llmOpts(acc, c, { system: 'You are a curriculum graph editor. Answer only through the requested structure.', prompt: expandPrompt(ctx(c), snapshot(c), goal), schema: S_EXPAND, name: 'submit_goal_expansion', maxTokens: 24000, validate: d => validateExpand(d, c), onRepair: e => on(`   ↻ fixing ${e.length} problem(s)…`), signal: on.signal }));
+    on('🎯 ' + rt('roadmap.build.expand', { goal: goal.title, depth: c.depth }));
+    const { data: x, usage } = await L().json(llmOpts(acc, c, { system: 'You are a curriculum graph editor. Answer only through the requested structure.', prompt: expandPrompt(ctx(c), snapshot(c), goal), schema: S_EXPAND, name: 'submit_goal_expansion', maxTokens: 24000, validate: d => validateExpand(d, c), onRepair: e => on('   ↻ ' + rt('roadmap.fixing', { n: e.length })), signal: on.signal }));   // i18n-ignore (the prompt)
     addUsage(c, usage);
     applyExpansion(c, x);
     on(expandLine(x));
   }
-  const expandLine = x => `   ✓ ${x.aspects.length} aspects, ${x.subtopics.length} sub-topics, ${x.relatedTopics.length} related topics + synthesis`;
+  const expandLine = x => '   ✓ ' + rt('roadmap.build.expandDone', { aspects: x.aspects.length, subtopics: x.subtopics.length, related: x.relatedTopics.length });
   /** The application (not the model) rebuilds the graph around the trusted base snapshot. */
   function applyExpansion(c, x) {
     const gid = c.goalId; const goal = c.nodes[gid];
@@ -439,12 +451,12 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     // paths: replace the goal by intro → expansion (topological) → synthesis
     const ord = order(c); const core = ord.filter(id => exp.has(id));
     for (const k of ['minimal', 'deep']) { const p = c.paths[k] || []; const i = p.indexOf(gid); c.paths[k] = i < 0 ? p : [...p.slice(0, i + 1), ...(k === 'deep' ? core : core.filter(id => c.nodes[id].role !== 'related')), syn, ...p.slice(i + 1)]; }
-    if (!topo(Object.keys(c.nodes), c.edges)) throw new Error('internal: the expanded graph has a cycle');
+    if (!topo(Object.keys(c.nodes), c.edges)) throw new Error('internal: the expanded graph has a cycle');   // i18n-ignore (a bug, never a learner's doing)
   }
   async function stagePlan(acc, c, on, { concurrency = 3, batch = 5 } = {}) {
     const todo = order(c).filter(id => !c.nodes[id].chapters?.length);
     if (!todo.length) return;
-    on(`📚 Agent 3 — planning the chapters of ${todo.length} nodes…`);
+    on('📚 ' + rt('roadmap.build.plan', { n: todo.length }));
     const batches = []; { let rest = todo.slice(); while (rest.length) { const b = window.NoemaCurJobs?.planBatch ? window.NoemaCurJobs.planBatch(c, rest) : rest.slice(0, batch); batches.push(b); rest = rest.filter(id => !b.includes(id)); } }   // at most 2 steps with files per request
     const snap = snapshot(c, { withSummaries: true }); let done = Object.keys(c.nodes).length - todo.length; const total = Object.keys(c.nodes).length;
     const worker = async () => {
@@ -452,16 +464,17 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
         const ids = batches.shift(); if (!ids) return;
         const { data, usage } = await L().json(llmOpts(acc, c, { system: PLANNER_SYSTEM, prompt: planPrompt(ctx(c), snap, ids) + materialText(c, ids) + packageText(c, ids) + await materialPages(acc, c, ids), schema: S_PLAN, name: 'submit_chapter_plans', maxTokens: 24000, signal: on.signal,
           validate: d => validatePlans(d, ids, c),
-          onRepair: e => on(`   ↻ fixing ${e.length} problem(s)…`) }));
+          onRepair: e => on('   ↻ ' + rt('roadmap.fixing', { n: e.length })) }));
         addUsage(c, usage);
         applyPlans(c, data);
-        done += ids.length; on(`   ✓ ${done}/${total} nodes planned`, { progress: done / total });
+        done += ids.length; on('   ✓ ' + rt('roadmap.build.planProgress', { done, total }), { progress: done / total });
         save(acc, c);
       }
     };
     await Promise.all(Array.from({ length: concurrency }, worker));
   }
 
+  /* i18n-ignore-start — the checks of a plan: problems the AI (or Claude, through the connector) fixes */
   function validatePlans(d, ids, c = null) { const got = d.plans.map(p => p.nodeId); const e = []; for (const id of ids) if (got.filter(g => g === id).length !== 1) e.push(`exactly one plan needed for "${id}"`); for (const g of got) if (!ids.includes(g)) e.push(`"${g}" was not requested`); for (const p of d.plans) { const r = p.chapters.map(ch => ch.ref); if (new Set(r).size !== r.length) e.push(`${p.nodeId}: chapter refs must be unique`); if (c?.nodes[p.nodeId] && !c.nodes[p.nodeId].pack?.assigned) e.push(...materialCoverage(c.nodes[p.nodeId], p)); } return e; }
   /** A step with the learner's files: every page of them must be taught by some chapter ("material" = file + pages), every file cited.
       From 20 pages on, up to 5 % (at most 3) may stay uncited — title, blank or reference pages. → [errors] */
@@ -490,6 +503,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     }
     return errs;
   }
+  /* i18n-ignore-end */
   /** A step whose plan can no longer change: its subject was generated from it (or is being generated). A step taught by a
       pack the learner attached (pack.assigned) is not: its plan describes that pack and is re-planned when the pack changes. */
   const planLocked = n => ['ready', 'generating'].includes(n?.pack?.status) && !n.pack.assigned;
@@ -550,25 +564,25 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     if (c.stage === 'done') { c.status = 'ready'; save(acc, c); return c; }   // an imported map that already has every chapter
     if (c.provider === 'claudeapp') {   // the learner's Claude app does the agents' work (engine/curjobs.js): nothing runs here
       c.status = ['dag', 'audit', 'expand'].includes(c.stage) ? 'waiting' : 'ready'; if (c.status === 'ready' && c.stage === 'plan' && !Object.values(c.nodes).some(n => !n.chapters?.length)) c.stage = 'done';
-      logTo(c, c.status === 'waiting' ? '💬 Waiting for your Claude app to build the map (copy the message below into a Claude chat).' : '💬 The chapters of the steps are planned by your Claude app.'); save(acc, c); onLog(c.log.at(-1).m, c); return c;
+      logTo(c, '💬 ' + (c.status === 'waiting' ? rt('roadmap.build.waitingApp') : rt('roadmap.build.plannedByApp'))); save(acc, c); onLog(c.log.at(-1).m, c); return c;
     }
-    if (!L().pick(acc, c.provider)) throw new Error('Add a Claude API key (✨ Create with Claude → Here in noema-lite) or a Gemini key (⚙️ Settings) first.');
+    if (!L().pick(acc, c.provider)) throw new Error(rt('roadmap.build.needKey'));
     const on = (m, extra) => { logTo(c, m); onLog(m, c, extra); }; on.signal = signal;
-    if (L().pick(acc, c.provider) === 'claude' && !c.model) { try { const CL = window.NoemaClaude; const ms = await CL.models(CL.Key.get(acc)); const pref = kvGet(acc, 'claudeModel', ''); c.model = pref && ms.some(m => m.id === pref) ? pref : CL.defaultModel(ms); } catch (e) { throw new Error('Claude: ' + e.message); } }   // ⚙️ Settings → Claude model
+    if (L().pick(acc, c.provider) === 'claude' && !c.model) { try { const CL = window.NoemaClaude; const ms = await CL.models(CL.Key.get(acc)); const pref = kvGet(acc, 'claudeModel', ''); c.model = pref && ms.some(m => m.id === pref) ? pref : CL.defaultModel(ms); } catch (e) { throw new Error('Claude: ' + e.message); } }   // ⚙️ Settings → Claude model   // i18n-ignore (a name before the error)
     c.status = 'building'; save(acc, c);
     const stages = [['dag', stageDag], ['audit', stageAudit], ['expand', stageExpand], ['plan', stagePlan]];
     try {
       for (let i = stages.findIndex(s => s[0] === c.stage); i >= 0 && i < stages.length; i++) {
         c.stage = stages[i][0]; save(acc, c);
         if (c.stage === 'plan' && holding(c)) {   // 📦 the learner first attaches the subjects they already have (curmap.js attachMany), then the rest is planned
-          c.status = 'attach'; on('📦 The map is ready. Attach the subjects you already have to its steps — then the other steps are planned.'); save(acc, c); return c;
+          c.status = 'attach'; on('📦 ' + rt('roadmap.build.attachFirst')); save(acc, c); return c;
         }
         if (c.stage === 'dag' && Object.keys(c.nodes).length) { c.nodes = {}; c.edges = []; }
         await stages[i][1](acc, c, on);
         c.stage = stages[i + 1]?.[0] || 'done'; save(acc, c);
       }
       c.status = 'ready'; c.stage = 'done'; c.title = c.nodes[c.goalId]?.goalTitle || c.title || c.goal;
-      on(c.imported ? `✅ Ready: your map with ${Object.keys(c.nodes).length} steps, every step planned.` : `✅ Ready: ${Object.keys(c.nodes).length} nodes in three parts — prerequisites, the goal, applications.`);
+      on('✅ ' + rt(c.imported ? 'roadmap.build.readyImported' : 'roadmap.build.ready', { n: Object.keys(c.nodes).length }));
     } catch (e) {
       c.status = e.kind === 'aborted' ? 'paused' : 'failed'; c.error = e.message; on('⚠️ ' + e.message);
     }
@@ -642,6 +656,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     return `cur-${c.id.slice(1, 7)}-${slug}-${h.toString(36).slice(0, 4)}`;
   }
   /** The brief a pack generator receives for one node (what to teach and how it fits the curriculum). */
+  /* i18n-ignore-start — a prompt */
   function nodeBrief(c, id) {
     const n = c.nodes[id]; const T = x => c.nodes[x]?.title;
     const parents = c.edges.filter(e => e.to === id).map(e => T(e.from)).filter(Boolean), kids = c.edges.filter(e => e.from === id).map(e => T(e.to)).filter(Boolean);
@@ -655,6 +670,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
       `Planned chapters (one pack chapter per planned chapter, same order and titles):\n` + (n.chapters || []).map((ch, i) => `${i + 1}. ${ch.title}\n   Teaching goals: ${(ch.goals || []).join('; ')}\n   Must cover: ${(ch.coverage || []).join('; ')}${ch.material ? `\n   From the material: ${ch.material}` : ''}`).join('\n'),
     ].filter(Boolean).join('\n\n');
   }
+  /* i18n-ignore-end */
 
   /** The learner's files of a curriculum are stored once (a textbook may serve several steps): subject key curfiles-<id>. */
   const curStore = cid => 'curfiles-' + cid;
@@ -664,6 +680,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   /** The domains, in the order Explore shows them. A Roadmap is filed by its goal's knowledge domain, its title and its goal;
       a subject by its group, title and description. Stems in the four interface languages; the domain with most hits wins (ties: the earlier one). */
   const DOMAINS = ['cs', 'math', 'health', 'science', 'eng', 'business', 'society', 'humanities', 'lang', 'other'];
+  /* i18n-ignore-start — word stems to match, not words to show */
   const DOMAIN_STEMS = {
     cs: ['data', 'databricks', 'spark', 'sql', 'python', 'javascript', 'typescript', ' java ', 'programm', 'software', 'comput', 'machine learning', 'deep learning', ' ai ', 'artificial intelligence', 'llm', 'cloud', 'devops', 'kubernetes', 'docker', 'network', 'cyber', ' web ', 'algorithm', 'database', 'lakehouse', ' etl ', 'analytics', 'linux', ' rust ', 'golang', 'frontend', 'backend', 'πληροφορ', 'προγραμματ', 'δεδομέν', 'υπολογιστ', 'τεχνητή νοημοσύνη', 'αλγόριθ', 'данн', 'программ', 'информат', 'компьют', 'нейросет', 'informatique', 'donnée', 'logiciel', 'réseau', 'intelligence artificielle'],
     math: ['math', 'algebra', 'calculus', 'geometr', 'statistic', 'probabilit', 'topolog', 'number theory', 'μαθηματ', 'άλγεβρ', 'γεωμετρ', 'στατιστ', 'πιθανοτ', 'λογισμ', 'математ', 'алгебр', 'геометр', 'статист', 'вероятн', 'mathémat', 'algèbre', 'géométr', 'statistique'],
@@ -675,6 +692,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     humanities: ['histor', 'philosoph', 'religio', 'theolog', 'literatur', 'music', ' art ', ' arts ', 'archaeolog', 'ιστορ', 'φιλοσοφ', 'θρησκ', 'λογοτεχν', 'μουσικ', 'τέχν', 'αρχαιολ', 'истор', 'философ', 'религ', 'литерат', 'музык', 'искусств', 'histoire', 'littérat', 'musique'],
     lang: ['language', 'grammar', 'vocabular', 'γλώσσ', 'γραμματικ', 'λεξιλόγ', 'язык', 'граммат', 'langue', 'grammaire', 'vocabulaire'],
   };
+  /* i18n-ignore-end */
   function domainOf(x) {
     if (x && typeof x === 'object') { if (DOMAINS.includes(x.domain)) return x.domain; const g = x.nodes?.[x.goalId] || {};
       const own = [x.group, g.kDomain, ...(g.domains || [])];   // what the author named counts twice
@@ -686,7 +704,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   }
 
   return { DOMAINS, domainOf, packageText, outlineOf, planLocked, PLAN_KEYS, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, stampAfter, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
-    schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART };
+    schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART, rt };
 })();
 
 /* ======================= node packs: generation queue (prefetch) + placement test =======================
@@ -696,7 +714,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
    the same node. Claude (API key) → the noema-pack-builder skill job (engine/claude.js, web research);
    otherwise Gemini → engine/packgen.js. */
 window.NoemaCurriculum.Gen = (() => {
-  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare;
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare, rt = C.rt;
   const TAB = 't' + Math.random().toString(36).slice(2, 9);
   const live = {};            // nodeKey → { msg, at } (in memory: progress lines are not synced)
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });
@@ -749,7 +767,7 @@ window.NoemaCurriculum.Gen = (() => {
     const provider = L().pick(acc, c.provider);
     // 👥 a shared curriculum: reserve the step first (somebody else may have it), and get the curriculum's material here
     if (c.shared && !c.shared.ended && SH()) {
-      if (!(await SH().claim(acc, c, nid))) { if (priority.includes(k)) priority.splice(priority.indexOf(k), 1); patchNode(c.id, nid, { status: c.nodes[nid].pack?.status === 'generating' ? null : c.nodes[nid].pack?.status || null, failedAt: Date.now() }); const x = C.get(acc, c.id)?.remote?.[nid]; say(`👥 ${x?.by || 'Somebody'} ${x?.status === 'ready' ? 'has prepared' : 'is preparing'} this step — it is shared with you`); return; }
+      if (!(await SH().claim(acc, c, nid))) { if (priority.includes(k)) priority.splice(priority.indexOf(k), 1); patchNode(c.id, nid, { status: c.nodes[nid].pack?.status === 'generating' ? null : c.nodes[nid].pack?.status || null, failedAt: Date.now() }); const x = C.get(acc, c.id)?.remote?.[nid]; say('👥 ' + rt('roadmap.gen.sharedBusy', { who: x?.by || '', known: x?.by ? 'yes' : 'no', state: x?.status === 'ready' ? 'ready' : 'preparing' })); return; }
       await SH().ensureNodeFiles(acc, c, nid);
     }
     let beats = 0;
@@ -761,12 +779,12 @@ window.NoemaCurriculum.Gen = (() => {
       if (provider === 'claude') pack = await viaClaude(c, nid, pid, say);
       else pack = await window.NoemaPackGen.generate({ acc, curriculum: c, nodeId: nid, packId: pid, onLog: say, signal: ctl.signal });
       if (!pack) return;
-      say('📥 Saving the subject (this device + cloud)…');
+      say('📥 ' + rt('roadmap.gen.saving'));
       await finish(c, nid, pack, { files: pack._bundleFiles });
-      say('✅ Ready'); window.Noema?.toast?.(`🧭 “${n.title}” is ready to study`);
+      say('✅ ' + rt('roadmap.gen.ready')); window.Noema?.toast?.('🧭 ' + rt('roadmap.gen.readyToStudy', { title: n.title }));
     } catch (e) {
       const stopped = e.kind === 'aborted' || /Stopped/.test(e.message);
-      patchNode(c.id, nid, stopped ? { status: 'paused', error: 'Paused.' } : { status: 'failed', error: e.message, failedAt: Date.now() });
+      patchNode(c.id, nid, stopped ? { status: 'paused', error: rt('roadmap.gen.paused') } : { status: 'failed', error: e.message, failedAt: Date.now() });
       if (!stopped) SH()?.release(acc, c, nid);   // 👥 free for the others again
       say((stopped ? '⏸️ ' : '⚠️ ') + e.message);
     } finally { clearInterval(hb); lock(c.id, nid, false); ctl = null; }
@@ -802,7 +820,7 @@ window.NoemaCurriculum.Gen = (() => {
       if (was) { const cc = C.get(acc, c.id); cc.nodes[nid].assignedAt = new Date().toISOString(); delete cc.nodes[nid].planFrom; C.save(acc, cc); }   // 📦 this subject replaces the one attached to the step
     }
     // 👥 a shared curriculum: everybody gets it (unless somebody else's version was there first — then this one stays mine)
-    if (c.shared && !c.shared.ended && SH()) await SH().contribute(acc, c.id, nid).catch(e => { console.warn('[curriculum] sharing the step failed', e); window.Noema?.toast?.('⚠️ The step is ready for you, but sharing it failed: ' + e.message + ' — it is tried again when you open the map.', 6000); patchNode(c.id, nid, { shareError: e.message }); });
+    if (c.shared && !c.shared.ended && SH()) await SH().contribute(acc, c.id, nid).catch(e => { console.warn('[curriculum] sharing the step failed', e); window.Noema?.toast?.('⚠️ ' + rt('roadmap.gen.shareFailed', { error: e.message }), 6000); patchNode(c.id, nid, { shareError: e.message }); });
   }
 
   async function viaClaude(c, nid, pid, say) {
@@ -813,15 +831,15 @@ window.NoemaCurriculum.Gen = (() => {
       // the learner's own files for this step (if any) go into Claude's sandbox: the step is built FROM them
       const files = [];
       const seen = new Set();
-      for (const f of c.nodes[nid].material?.files || []) { const k = f.fileId || f.srcId; if (seen.has(k)) continue; seen.add(k); const rec = await C.materialFile(acc, c, nid, f).catch(() => null); if (rec?.blob) files.push(new File([rec.blob], f.name, { type: rec.type || f.type || '' })); else say(`⚠️ ${f.name} is not available on this device — continuing without it`); }
+      for (const f of c.nodes[nid].material?.files || []) { const k = f.fileId || f.srcId; if (seen.has(k)) continue; seen.add(k); const rec = await C.materialFile(acc, c, nid, f).catch(() => null); if (rec?.blob) files.push(new File([rec.blob], f.name, { type: rec.type || f.type || '' })); else say('⚠️ ' + rt('roadmap.gen.fileMissing', { name: f.name })); }
       job = await CL.create({ acc, key: apiKey, model, kind: 'node', title: c.nodes[nid].title, subjectId: pid, language: c.language, brief: C.nodeBrief(c, nid), budget: c.nodeBudget || 8, meta: { curriculum: c.id, node: nid }, files, onLog: say });
     }
     for (let answers = 0; ; answers++) {
-      job = job.status === 'question' && answers < 3 ? await CL.answer(job, apiKey, 'Continue with sensible defaults and finish the pack (do not wait for me).', { onLog: say, signal: ctl.signal }) : await CL.run(job, apiKey, { onLog: say, signal: ctl.signal });
+      job = job.status === 'question' && answers < 3 ? await CL.answer(job, apiKey, 'Continue with sensible defaults and finish the pack (do not wait for me).', { onLog: say, signal: ctl.signal }) : await CL.run(job, apiKey, { onLog: say, signal: ctl.signal });   // i18n-ignore (the answer to Claude)
       if (job.status === 'done') { const p = job.pack; if (job.bundleFiles && Object.keys(job.bundleFiles).length) p._bundleFiles = job.bundleFiles; await CL.deleteJob(job.id); return p; }
       if (job.status === 'question' && answers < 3) continue;
       if (job.status === 'budget') { patchNode(c.id, nid, { status: 'paused', error: job.error, budgetHit: true, cost: CL.cost(job.usage, job.model) }); say('💰 ' + job.error); return null; }
-      throw Object.assign(new Error(job.error || 'Claude stopped without a pack'), { kind: job.status === 'paused' ? 'aborted' : 'api' });
+      throw Object.assign(new Error(job.error || rt('roadmap.gen.noPack')), { kind: job.status === 'paused' ? 'aborted' : 'api' });
     }
   }
 
@@ -879,12 +897,14 @@ window.NoemaCurriculum.Gen = (() => {
       if (pool.length >= 8) {
         const pick = []; const by = {}; pool.forEach(e => (by[e.section] = by[e.section] || []).push(e)); const groups = Object.values(by);
         for (let i = 0; pick.length < 10 && i < 200; i++) { const g = groups[i % groups.length]; const e = g.splice(Math.floor(Math.random() * g.length), 1)[0]; if (e) pick.push(e); }
-        return pick.map(e => e.type === 'tf' ? { q: e.q, options: ['True', 'False'], answer: e.answer ? 0 : 1, explain: e.explain || '' } : { q: e.q, options: e.options, answer: e.answer, explain: e.explain || '' });
+        return pick.map(e => e.type === 'tf' ? { q: e.q, options: [rt('roadmap.test.true'), rt('roadmap.test.false')], answer: e.answer ? 0 : 1, explain: e.explain || '' } : { q: e.q, options: e.options, answer: e.answer, explain: e.explain || '' });
       }
     }
+    /* i18n-ignore-start — the prompt and its checks (for the AI) */
     const { data } = await L().json({ acc, provider: L().pick(acc, c.provider), system: 'You write rigorous placement tests. Answer only through the requested structure.',
       prompt: `Write a 10-question multiple-choice placement test (in ${C.LANG[c.language] || c.language}) that only someone who has really mastered “${n.title}” passes — the curriculum goal is ${c.goal}. Cover these chapters evenly, test understanding and application rather than trivia, use plausible distractors, vary the position of the right answer:\n${(n.chapters || []).map(ch => '- ' + ch.title + ': ' + (ch.coverage || []).join('; ')).join('\n')}`,
       schema: S_TEST, name: 'submit_test', maxTokens: 8000, validate: d => d.questions.flatMap((q, i) => q.answer < q.options.length ? [] : [`question ${i + 1}: answer index out of range`]) });
+    /* i18n-ignore-end */
     return data.questions;
   }
   function passTest(c, nid, score) { if (score >= C.PASS) C.setMastered(acc, c, nid, 'test', { score }); return score >= C.PASS; }
@@ -895,13 +915,13 @@ window.NoemaCurriculum.Gen = (() => {
 
 /* ======================= editing the map ======================= */
 window.NoemaCurriculum.Edit = (() => {
-  const C = window.NoemaCurriculum, L = () => window.NoemaLLM;
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, rt = C.rt;
   const ROLES = ['foundation', 'intro', 'aspect', 'subtopic', 'related', 'synthesis', 'application'];
   const PART = { foundation: 'prereq', intro: 'core', aspect: 'core', subtopic: 'core', related: 'core', synthesis: 'core', application: 'apps', goal: 'core' };
   const generated = n => ['ready', 'generating'].includes(n?.pack?.status);
   const slug = t => String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 36) || 'step';
   /** Would these edges keep the graph acyclic? → null or an error message. */
-  function check(c, edges) { return C.topo(Object.keys(c.nodes), edges) ? null : 'That link would make a loop (a step would become its own prerequisite).'; }
+  function check(c, edges) { return C.topo(Object.keys(c.nodes), edges) ? null : rt('roadmap.edit.loop'); }
   /** Every node that may become a prerequisite of `id` (not itself, not one of its dependents). */
   function possibleParents(c, id) { const down = new Set([id]); let grew = true; while (grew) { grew = false; for (const e of c.edges) if (down.has(e.from) && !down.has(e.to)) { down.add(e.to); grew = true; } } return Object.keys(c.nodes).filter(x => !down.has(x)); }
   function possibleChildren(c, id) { const up = new Set([id]); let grew = true; while (grew) { grew = false; for (const e of c.edges) if (up.has(e.to) && !up.has(e.from)) { up.add(e.from); grew = true; } } return Object.keys(c.nodes).filter(x => !up.has(x)); }
@@ -912,14 +932,14 @@ window.NoemaCurriculum.Edit = (() => {
    * → { ok: true } | { error }
    */
   function update(acc, cid, id, patch) {
-    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: 'Step not found.' };
-    if ((patch.chapters || patch.learningGoals) && C.planLocked(n)) return { error: 'This step has already been prepared — its chapters can no longer change (you can still rename it, move it or change its links).' };
+    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: rt('roadmap.stepNotFound') };
+    if ((patch.chapters || patch.learningGoals) && C.planLocked(n)) return { error: rt('roadmap.edit.planLocked') };
     let edges = c.edges;
-    if (patch.parents) { const ps = [...new Set(patch.parents)].filter(p => c.nodes[p] && p !== id); edges = [...edges.filter(e => e.to !== id), ...ps.map(p => ({ from: p, to: id, why: (c.edges.find(e => e.from === p && e.to === id) || {}).why || 'Added by you' }))]; }
-    if (patch.children) { const ks = [...new Set(patch.children)].filter(k => c.nodes[k] && k !== id); edges = [...edges.filter(e => e.from !== id), ...ks.map(k => ({ from: id, to: k, why: (c.edges.find(e => e.from === id && e.to === k) || {}).why || 'Added by you' }))]; }
+    if (patch.parents) { const ps = [...new Set(patch.parents)].filter(p => c.nodes[p] && p !== id); edges = [...edges.filter(e => e.to !== id), ...ps.map(p => ({ from: p, to: id, why: (c.edges.find(e => e.from === p && e.to === id) || {}).why || 'Added by you' }))]; }   // i18n-ignore (a link's reason: data for the planner, not shown)
+    if (patch.children) { const ks = [...new Set(patch.children)].filter(k => c.nodes[k] && k !== id); edges = [...edges.filter(e => e.from !== id), ...ks.map(k => ({ from: id, to: k, why: (c.edges.find(e => e.from === id && e.to === k) || {}).why || 'Added by you' }))]; }   // i18n-ignore (a link's reason: data, not shown)
     const err = check(c, edges); if (err) return { error: err };
     c.edges = edges;
-    if (patch.title != null) { const t = String(patch.title).trim(); if (!t) return { error: 'A step needs a name.' }; n.title = t.slice(0, 120); if (n.pack?.id && !n.pack.assigned) C.kvSet(acc, 'subjoverride:' + n.pack.id, { ...(C.kvGet(acc, 'subjoverride:' + n.pack.id, {}) || {}), title: n.title }); }
+    if (patch.title != null) { const t = String(patch.title).trim(); if (!t) return { error: rt('roadmap.edit.needName') }; n.title = t.slice(0, 120); if (n.pack?.id && !n.pack.assigned) C.kvSet(acc, 'subjoverride:' + n.pack.id, { ...(C.kvGet(acc, 'subjoverride:' + n.pack.id, {}) || {}), title: n.title }); }
     if (patch.summary != null) n.summary = String(patch.summary).trim();
     if (patch.role && ROLES.includes(patch.role)) { n.role = patch.role; n.part = PART[patch.role]; }
     if (patch.learningGoals) n.learningGoals = patch.learningGoals.map(x => String(x).trim()).filter(Boolean);
@@ -930,16 +950,16 @@ window.NoemaCurriculum.Edit = (() => {
   function add(acc, cid, { title, summary = '', role = 'foundation', parents = [], children = [] }) {
     const c = C.get(acc, cid); let id = slug(title); while (c.nodes[id]) id += '_x';
     c.nodes[id] = { id, title: String(title).trim(), summary, role, part: PART[role] || 'prereq', chapters: [], learningGoals: [], added: 'user' };
-    const edges = [...c.edges, ...parents.filter(p => c.nodes[p]).map(p => ({ from: p, to: id, why: 'Added by you' })), ...children.filter(k => c.nodes[k]).map(k => ({ from: id, to: k, why: 'Added by you' }))];
+    const edges = [...c.edges, ...parents.filter(p => c.nodes[p]).map(p => ({ from: p, to: id, why: 'Added by you' })), ...children.filter(k => c.nodes[k]).map(k => ({ from: id, to: k, why: 'Added by you' }))];   // i18n-ignore (links' reasons: data, not shown)
     const err = check(c, edges); if (err) return { error: err };
     c.edges = edges; C.save(acc, c); return { ok: true, id };
   }
   /** Remove a step. bridge: its prerequisites become prerequisites of its dependents (keeps the order). */
   async function remove(acc, cid, id, { bridge = true, deleteMaterial = true } = {}) {
-    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: 'Step not found.' };
+    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: rt('roadmap.stepNotFound') };
     const ps = c.edges.filter(e => e.to === id).map(e => e.from), ks = c.edges.filter(e => e.from === id).map(e => e.to);
     c.edges = c.edges.filter(e => e.from !== id && e.to !== id);
-    if (bridge) for (const p of ps) for (const k of ks) if (!c.edges.some(e => e.from === p && e.to === k)) c.edges.push({ from: p, to: k, why: `Through “${n.title}” (removed)` });
+    if (bridge) for (const p of ps) for (const k of ks) if (!c.edges.some(e => e.from === p && e.to === k)) c.edges.push({ from: p, to: k, why: `Through “${n.title}” (removed)` });   // i18n-ignore (a link's reason: data, not shown)
     delete c.nodes[id];
     if (n.material?.files?.length && !n.pack?.id) { window.NoemaSrcFiles?.removeAll(acc, C.packId(c, id)).catch(() => { }); for (const f of n.material.files) if (f.fileId) dropUnused(acc, c, f.fileId); }
     for (const k of ['minimal', 'deep']) c.paths[k] = (c.paths[k] || []).filter(x => x !== id);
@@ -957,12 +977,15 @@ window.NoemaCurriculum.Edit = (() => {
     const k = `noema1:${acc}:a:packmeta:${subjectId}`;
     try { const m = JSON.parse(localStorage.getItem(k) || 'null'); if (m && m.curriculum === cid && (!nid || m.node === nid)) { delete m.curriculum; delete m.node; window.Noema?.kv ? window.Noema.kv.set(k, JSON.stringify(m)) : localStorage.setItem(k, JSON.stringify(m)); } } catch (e) { }
   }
-  /** 📦 Can a subject be attached to this step? → null or why not. */
+  /** 📦 Can a subject be attached to this step? → null | 'missing' | 'generating' (the reason, as a code). */
+  const assignBlock = (c, n) => !n ? 'missing' : n.pack?.status === 'generating' ? 'generating' : null;
+  /** The same in English words, for Claude (the connector, cloud/mcp/server.mjs) → null or why not. A learner reads assignNo(). */
   function cannotAssign(c, n) {
-    if (!n) return 'Step not found.';
-    if (n.pack?.status === 'generating') return 'This step is being prepared right now — wait until it is ready, or stop it first.';
-    return null;
+    /* i18n-ignore-start */
+    return { missing: 'Step not found.', generating: 'This step is being prepared right now — wait until it is ready, or stop it first.' }[assignBlock(c, n)] || null;
+    /* i18n-ignore-end */
   }
+  const assignNo = why => why === 'generating' ? rt('roadmap.assign.generating') : why === 'missing' ? rt('roadmap.stepNotFound') : rt('roadmap.notFound');
   /**
    * 📦 Attach a subject pack the learner already has to a step. The step is then taught by that pack — it is never generated
    * (no agent touches it) — and ONLY this step is re-planned to describe the pack (its chapters, goals); it stays closed
@@ -972,15 +995,15 @@ window.NoemaCurriculum.Edit = (() => {
    * from: who chose it ('me' | 'import' | 'claude' | 'share'). → { ok, replan } | { error }
    */
   async function assign(acc, cid, nid, subjectId, { from = 'me' } = {}) {
-    let c = C.get(acc, cid); let n = c?.nodes[nid]; const no = c ? cannotAssign(c, n) : 'Roadmap not found.'; if (no) return { error: no };
+    let c = C.get(acc, cid); let n = c?.nodes[nid]; const no = c ? assignBlock(c, n) : 'roadmap'; if (no) return { error: assignNo(no), code: no };
     if (n.pack?.id === subjectId && n.pack.assigned) return { ok: true, replan: !!n.replan };
-    if (String(subjectId).startsWith('lang:')) return { error: 'Language courses are studied on their own — they cannot be attached to a step.' };
+    if (String(subjectId).startsWith('lang:')) return { error: rt('roadmap.assign.language'), code: 'language' };
     const meta = (await window.Noema?.subjectsFor?.(acc) || []).find(s => s.id === subjectId);
-    if (!meta) return { error: 'That subject is not in your library.' };
-    if (meta.kind === 'language') return { error: 'Language courses are studied on their own — they cannot be attached to a step.' };
-    let pack; try { pack = await window.Noema.loadSubject(acc, subjectId); } catch (e) { return { error: e.message || 'The subject could not be loaded.' }; }
-    const chapters = pack?.chapters || []; if (!chapters.length) return { error: 'That subject has no chapters.' };
-    c = C.get(acc, cid); n = c.nodes[nid]; const again = cannotAssign(c, n); if (again) return { error: again };
+    if (!meta) return { error: rt('roadmap.assign.notInLibrary'), code: 'notInLibrary' };
+    if (meta.kind === 'language') return { error: rt('roadmap.assign.language'), code: 'language' };
+    let pack; try { pack = await window.Noema.loadSubject(acc, subjectId); } catch (e) { return { error: e.message || rt('roadmap.assign.loadFailed'), code: 'load' }; }
+    const chapters = pack?.chapters || []; if (!chapters.length) return { error: rt('roadmap.assign.noChapters'), code: 'empty' };
+    c = C.get(acc, cid); n = c.nodes[nid]; const again = assignBlock(c, n); if (again) return { error: assignNo(again), code: again };
     const old = n.pack?.id && !n.pack.assigned && n.pack.id !== subjectId ? n.pack.id : null;
     const at = new Date().toISOString();
     n.pack = { id: subjectId, status: 'ready', assigned: { from, at }, title: meta.title || pack.subject?.title || subjectId, description: String(meta.description || pack.subject?.description || '').slice(0, 400),
@@ -989,7 +1012,7 @@ window.NoemaCurriculum.Edit = (() => {
     if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C.planOf(n);   // 👥 shared: the new plan is mine only — the group keeps the step's shared plan
     const replan = !!n.chapters?.length || c.stage === 'done';   // while the map is being created, the plan stage plans it with the others
     if (replan) { n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan'; }   // only this step: its plan now follows the pack
-    (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.title}” is now taught by “${n.pack.title}”${replan ? ' — re-planning this step' : ''}` });
+    (c.log = c.log || []).push({ t: Date.now(), m: '📦 ' + rt('roadmap.assign.log', { step: n.title, subject: n.pack.title, replan: replan ? 'yes' : 'no' }) });
     C.save(acc, c);
     if (old) toShelf(acc, cid, nid, old);
     window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
@@ -1005,7 +1028,7 @@ window.NoemaCurriculum.Edit = (() => {
       const c = C.get(acc, c0.id), n = c?.nodes[nid]; if (!n?.pack?.assigned || n.pack.id !== subjectId || sig(n.pack) === sig(next)) continue;
       n.pack = { ...n.pack, ...JSON.parse(JSON.stringify(next)) };
       n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan';
-      (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.pack.title}” has a new version — re-planning “${n.title}”` });
+      (c.log = c.log || []).push({ t: Date.now(), m: '📦 ' + rt('roadmap.assign.newVersion', { subject: n.pack.title, step: n.title }) });
       C.save(acc, c); k++;
     }
     if (k) window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
@@ -1014,13 +1037,13 @@ window.NoemaCurriculum.Edit = (() => {
   /** 📦 Take an attached subject off a step: the subject stays (📚 on the Shelf when no other step uses it); the step is
       planned and prepared again the usual way — in a shared curriculum it gets the group's plan and prepared step back. */
   function detach(acc, cid, nid) {
-    const c = C.get(acc, cid); const n = c?.nodes[nid]; if (!n?.pack?.assigned) return { error: 'No subject is attached to this step.' };
+    const c = C.get(acc, cid); const n = c?.nodes[nid]; if (!n?.pack?.assigned) return { error: rt('roadmap.detach.none') };
     const title = n.pack.title; const at = new Date().toISOString();
     n.pack = null; n.assignedAt = at; delete n.planFrom; delete n.reviewed;
     const group = !!n.groupPlan;
     if (group) { C.setPlan(n, n.groupPlan); delete n.groupPlan; delete n.replan; }   // 👥 shared: back to the group's plan (and its prepared step)
     else { if (n.chapters?.length) { n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); } else delete n.replan; if (c.stage === 'done') c.stage = 'plan'; }
-    (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${title}” taken off “${n.title}”` });
+    (c.log = c.log || []).push({ t: Date.now(), m: '📦 ' + rt('roadmap.detach.log', { subject: title, step: n.title }) });
     C.save(acc, c); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
     return { ok: true, group };
   }
@@ -1033,10 +1056,10 @@ window.NoemaCurriculum.Edit = (() => {
       if (c.stage === 'done') c.stage = 'plan'; C.save(acc, c); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
       return { ok: true, queued: true };
     }
-    const x = C.ctx(c); onLog('📚 Planning the chapters…');
+    const x = C.ctx(c); onLog('📚 ' + rt('roadmap.plan.planning'));
     const asked = n => JSON.stringify([n?.pack?.id || null, n?.assignedAt || null]), was = Object.fromEntries(ids.map(id => [id, asked(c.nodes[id])]));   // 📦 which subject teaches each step now
     const { data, usage } = await L().json({ acc, provider: L().pick(acc, c.provider), model: L().pick(acc, c.provider) === 'claude' ? c.model || undefined : undefined, system: C.prompts.PLANNER_SYSTEM,
-      prompt: C.prompts.planPrompt(x, C.snapshot(c, { withSummaries: true }), ids) + C.prompts.materialText(c, ids) + C.packageText(c, ids) + await C.materialPages(acc, c, ids) + (instruction ? `\n\nThe learner's own wishes for these steps (follow them): ${instruction}` : ''), schema: C.schemas.S_PLAN, name: 'submit_chapter_plans', maxTokens: 16000,
+      prompt: C.prompts.planPrompt(x, C.snapshot(c, { withSummaries: true }), ids) + C.prompts.materialText(c, ids) + C.packageText(c, ids) + await C.materialPages(acc, c, ids) + (instruction ? `\n\nThe learner's own wishes for these steps (follow them): ${instruction}` : ''), schema: C.schemas.S_PLAN, name: 'submit_chapter_plans', maxTokens: 16000,   // i18n-ignore (the prompt)
       validate: d => C.validatePlans(d, ids, c) });
     const cur = C.get(acc, cid);
     const stale = data.plans.filter(p => p.nodeId in was && was[p.nodeId] !== asked(cur.nodes[p.nodeId])).map(p => p.nodeId);   // a subject attached / taken off meanwhile: this plan is for the old one
@@ -1047,7 +1070,7 @@ window.NoemaCurriculum.Edit = (() => {
       Gemini). Prepared steps keep their chapters. The re-planned steps are reviewed again before they are prepared.
       → { ok, count, queued } (queued: the Claude app will do it) */
   async function replanAll(acc, cid, { instruction = '', onLog = () => { }, signal } = {}) {
-    let c = C.get(acc, cid); if (!c) return { error: 'Roadmap not found.' };
+    let c = C.get(acc, cid); if (!c) return { error: rt('roadmap.notFound') };
     const ids = C.order(c).filter(id => c.nodes[id] && !generated(c.nodes[id]));
     if (!ids.length) return { ok: true, count: 0 };
     for (const id of ids) { const n = c.nodes[id]; if (!c.autoApprove) delete n.reviewed; if (n.pack?.status === 'app' || n.pack?.status === 'failed' || n.pack?.status === 'paused') n.pack = { ...n.pack, status: null, queuedAt: null }; }
@@ -1055,13 +1078,13 @@ window.NoemaCurriculum.Edit = (() => {
     if (c.provider === 'claudeapp') return { ...(await plan(acc, cid, ids, { instruction })), count: ids.length };
     let rest = ids.slice(), done = 0;
     while (rest.length) {
-      if (signal?.aborted) return { error: 'Stopped.', count: done };
+      if (signal?.aborted) return { error: rt('roadmap.stopped'), count: done };
       const b = window.NoemaCurJobs?.planBatch ? window.NoemaCurJobs.planBatch(C.get(acc, cid), rest) : rest.slice(0, 5);
-      onLog(`📚 Planning ${done + 1}–${done + b.length} of ${ids.length}: ${b.map(id => c.nodes[id]?.title).join(', ')}`, { progress: done / ids.length });
+      onLog('📚 ' + rt('roadmap.plan.batch', { from: done + 1, to: done + b.length, n: ids.length, list: b.map(id => c.nodes[id]?.title).join(', ') }), { progress: done / ids.length });
       await plan(acc, cid, b, { instruction });
       done += b.length; rest = rest.filter(id => !b.includes(id));
     }
-    onLog(`✅ ${ids.length} steps re-planned`, { progress: 1 });
+    onLog('✅ ' + rt('roadmap.plan.replanned', { n: ids.length }), { progress: 1 });
     return { ok: true, count: ids.length };
   }
   /** A file of the curriculum that no step uses any more is deleted (device + cloud). Mutates and saves c. */
@@ -1088,9 +1111,9 @@ window.NoemaCurriculum.Edit = (() => {
       (range = [first, last] page of the file that belongs to this step). Each file is stored once per curriculum;
       the step gets an entry with its pages, the part of the outline in them and the first lines — for the planner. */
   async function addMaterial(acc, cid, id, items, { onLog = () => { } } = {}) {
-    let c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: 'Step not found.' };
-    if (generated(n)) return { error: 'This step has already been prepared — its material can no longer change.' };
-    if (!window.NoemaSrcFiles) return { error: 'Files are not available in this installation.' };
+    let c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: rt('roadmap.stepNotFound') };
+    if (generated(n)) return { error: rt('roadmap.material.locked') };
+    if (!window.NoemaSrcFiles) return { error: rt('roadmap.material.noFiles') };
     const added = [];
     for (const it0 of items) {
       const it = it0 instanceof Blob ? { file: it0, range: null } : it0;
@@ -1109,8 +1132,8 @@ window.NoemaCurriculum.Edit = (() => {
     return { ok: true, added };
   }
   async function removeMaterial(acc, cid, id, srcId) {
-    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: 'Step not found.' };
-    if (generated(n)) return { error: 'This step has already been prepared — its material can no longer change.' };
+    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: rt('roadmap.stepNotFound') };
+    if (generated(n)) return { error: rt('roadmap.material.locked') };
     const f = (n.material?.files || []).find(x => x.srcId === srcId);
     n.material = { files: (n.material?.files || []).filter(x => x.srcId !== srcId) }; C.save(acc, c);
     if (f?.fileId) dropUnused(acc, c, f.fileId); else await window.NoemaSrcFiles?.remove(acc, C.packId(c, id), srcId).catch(() => { });
@@ -1118,11 +1141,11 @@ window.NoemaCurriculum.Edit = (() => {
   }
   /** Change the pages of a step's material entry (before it is prepared). */
   function setMaterialRange(acc, cid, id, srcId, range) {
-    const c = C.get(acc, cid); const f = c?.nodes[id]?.material?.files?.find(x => x.srcId === srcId); if (!f) return { error: 'Not found.' };
-    if (generated(c.nodes[id])) return { error: 'This step has already been prepared.' };
+    const c = C.get(acc, cid); const f = c?.nodes[id]?.material?.files?.find(x => x.srcId === srcId); if (!f) return { error: rt('roadmap.material.notFound') };
+    if (generated(c.nodes[id])) return { error: rt('roadmap.material.prepared') };
     f.range = range && range[0] ? [+range[0], +(range[1] || range[0])] : null;
     const info = c.files?.[f.fileId]; if (info) f.outline = (info.outline || []).filter(o => !f.range || !o.page || (o.page >= f.range[0] && o.page <= f.range[1])).slice(0, 80);
     C.save(acc, c); return { ok: true };
   }
-  return { update, add, remove, plan, replanAll, possibleParents, possibleChildren, generated, planLocked: C.planLocked, assign, detach, refreshAssigned, cannotAssign, toShelf, ROLES, addMaterial, removeMaterial, setMaterialRange, storeFile };
+  return { update, add, remove, plan, replanAll, possibleParents, possibleChildren, generated, planLocked: C.planLocked, assign, detach, refreshAssigned, cannotAssign, assignBlock, toShelf, ROLES, addMaterial, removeMaterial, setMaterialRange, storeFile };
 })();

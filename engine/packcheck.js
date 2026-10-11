@@ -1,8 +1,12 @@
 /* noema-lite — pack checks shared by the app (in-browser generators) and the Claude connector (cloud/mcp).
    checkPack(p, expectId, { strict }) → { errors, warnings, counts }
    strict = also check every exercise's own fields (used for packs generated in the browser, where nothing
-   else validated them; the Python validator in the skill is the full check for skill-built packs). */
+   else validated them; the Python validator in the skill is the full check for skill-built packs).
+   i18n (docs/i18n.md): every message here stays English — they are diagnostics with the pack's own field names, read by
+   the AI that repairs its chapter (engine/packgen.js), by Claude through the connector, and by the learner only as the
+   technical detail after a translated sentence (“The pack has 3 error(s): …”, engine/curjobs.js, engine/packgen.js). */
 (function (root) {
+  /* i18n-ignore-start */
   const TYPES = new Set(['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'spotbug', 'calc', 'scenario', 'free', 'write', 'img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']);
   const BLOCKS = new Set(['p', 'list', 'code', 'diagram', 'table', 'callout', 'compare', 'flow', 'reveal', 'ask', 'terms', 'figure']);
   const ID_RE = /^[a-z0-9][a-z0-9-]{1,60}$/;
@@ -116,5 +120,6 @@
     for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
     return { errors: E, warnings: W, counts: { chapters: chapters.length, sections: secN, exercises: ex, visual: vis, media: Object.keys(media).length } };
   }
+  /* i18n-ignore-end */
   root.NoemaPackCheck = { checkPack, checkExercise, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);
