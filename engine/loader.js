@@ -332,10 +332,10 @@
   /** <b> <i> <code> <kbd> in a message (literal text for ICU) → those elements, with plain text inside (never HTML). */
   const TAGS = /<(b|i|code|kbd)>([^<]*)<\/\1>/g;
   function tagged(t) { const out = []; let last = 0; for (const m of t.matchAll(TAGS)) { out.push(t.slice(last, m.index), el(m[1], {}, m[2])); last = m.index + m[0].length; } out.push(t.slice(last)); return out; }
-  /** The words for an error a learner reads: a known error code → its translation, else the (English) message (NoemaI18n.err). */
   const fmtPct = p => window.NoemaI18n ? NoemaI18n.fmt.percent(p / 100) : p + '%';   // 45 → “45%” in the UI locale
   const fmtMB1 = n => (window.NoemaI18n ? NoemaI18n.fmt.number(n / 1048576, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1048576).toFixed(1)) + ' MB';
   const fmtUSD = (x, min = 2) => window.NoemaI18n ? NoemaI18n.fmt.number(x, { style: 'currency', currency: 'USD', minimumFractionDigits: min, maximumFractionDigits: 2 }) : '$' + (min ? x.toFixed(2) : x);   // Claude’s prices are in US dollars
+  /** The words for an error a learner reads: a known error code → its translation, else the (English) message (NoemaI18n.err). */
   const errMsg = e => window.NoemaI18n ? NoemaI18n.err(e) : String(e?.message || e);
   function pickAccount({ closable = false } = {}) {
     return new Promise(resolve => {
@@ -540,7 +540,7 @@
     Noema.subject = { id: meta.id, title: meta.title, kind: 'language', tutor: {}, hero: {}, features: {} };
     const data = await langData(acc.id, meta).catch(e => e);
     document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
-    if (data instanceof Error) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, data.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
+    if (data instanceof Error) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(data)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
     NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data }); NoemaLangUI.claude.startPolling(acc.id);
     langProfiles(meta);
     AutoBackup.start(acc.id).catch(() => { });
@@ -631,7 +631,7 @@
     let data = UI?.id === id && UI.C ? UI.C.data : null;   // the course was open a moment ago (the learner went to another tab): what it holds now
     if (!data) data = await langData(acc, meta).catch(e => e);
     if (langOpening !== mine || !nhost.isConnected) return;   // the learner went elsewhere meanwhile
-    if (data instanceof Error) { nhost.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, data.message), h('button', { class: 'btn', onclick: () => S.go('#/lang') }, L('languages')))); return; }
+    if (data instanceof Error) { nhost.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, errMsg(data)), h('button', { class: 'btn', onclick: () => S.go('#/lang') }, L('languages')))); return; }
     document.body.classList.add('lx-frame');
     NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => [...(r.acts || []), r.acts?.length ? '-' : null, ...langMenu(id)], menuLabel: L('langMore'), reading: ['lesson', 'node', 'c', 'w', 'fn', 'read', 'peculiar', 'field', 'cmp'].includes(r.view), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
     if (!langRoute.polling) { langRoute.polling = true; NoemaLangUI.claude.startPolling(acc); }
@@ -1521,7 +1521,7 @@
       try { Noema.preloadedConvos = await NoemaConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { Noema.preloadedConvos = []; }
     }
     let pack;
-    try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(e.message); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
+    try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(errMsg(e)); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(e)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
     Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮
     Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
