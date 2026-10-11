@@ -64,28 +64,31 @@
   }
 
   /** Human-readable Markdown rendition of a record (used for folder files and exports). */
-  const KIND_NAME = { tutor: 'Tutor conversation', grading: 'AI grading', 'code-review': 'AI code review', question: 'AI-generated question', 'drill-grading': 'Debug-drill grading' };
-  const MODE_NAME = { socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation',
-    hint: 'Hint', feynman: 'Feynman coach', 'teach-back': 'Teach-back', 'why-chain': 'Why-chain', examples: 'Examples coach', mnemonic: 'Memory hook', 'method-lab': 'Method Lab', plan: 'Study plan' };   // the last ones come from Meletee
-  const APP_NAME = { meletee: 'Meletee' };
+  // The names in the UI language (docs/i18n.md; i18n/loader: loader.convo.*): read when used, so a change of language shows at once.
+  const CT = (k, v) => window.NoemaI18n ? NoemaI18n.t(k, v) : k;
+  const named = (keys, prefix) => Object.defineProperties({}, Object.fromEntries(Object.entries(keys).map(([k, id]) => [k, { enumerable: true, get: () => CT(prefix + id) }])));
+  const KIND_NAME = named({ tutor: 'tutor', grading: 'grading', 'code-review': 'codeReview', question: 'question', 'drill-grading': 'drillGrading' }, 'loader.convo.kind.');
+  const MODE_NAME = named({ socratic: 'socratic', explain: 'explain', quiz: 'quiz', interview: 'interview', debug: 'debug',
+    hint: 'hint', feynman: 'feynman', 'teach-back': 'teachBack', 'why-chain': 'whyChain', examples: 'examples', mnemonic: 'mnemonic', 'method-lab': 'methodLab', plan: 'plan' }, 'loader.convo.mode.');   // the last ones come from Meletee
+  const APP_NAME = { meletee: 'Meletee' };   // i18n-ignore (an app’s name)
   /** The other app that wrote this record (meta.app), as a name to show; null for noema-lite's own records. */
   const fromApp = rec => { const a = rec?.meta?.app; return a && a !== 'noema-lite' ? (APP_NAME[a] || String(a)) : null; };
   const fmt = s => { const d = new Date(s), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`; };
   function demote(text, minLevel) { let fence = false; return text.split('\n').map(l => { if (/^\s*(```|~~~)/.test(l)) fence = !fence; if (fence) return l; return l.replace(/^(#{1,6})\s+/, (m, hs) => '#'.repeat(Math.min(6, hs.length + minLevel - 1)) + ' '); }).join('\n'); }
-  function toMarkdown(rec, { level = 1, tutorName = 'Tutor', tutorAvatar = '🦉', appName = 'noema-lite' } = {}) {
-    const H = '#'.repeat(level), esc = s => String(s ?? '').replace(/\|/g, '\\|');
+  function toMarkdown(rec, { level = 1, tutorName = CT('loader.convo.tutor'), tutorAvatar = '🦉', appName = 'noema-lite' } = {}) {
+    const H = '#'.repeat(level), esc = s => String(s ?? '').replace(/\|/g, '\\|'), row = (k, v) => `| **${CT('loader.convo.md.' + k)}** | ${v} |`;
     const lines = [`${H} ${rec.title || (rec.context?.label ? rec.context.label : KIND_NAME[rec.kind])}`, '',
       '| | |', '|---|---|',
-      `| **Type** | ${KIND_NAME[rec.kind]}${rec.mode ? ' · ' + (MODE_NAME[rec.mode] || rec.mode) : ''} |`,
-      `| **Subject** | ${esc(rec.subject?.title || rec.subject?.id || '—')} |`,
-      `| **Context** | ${esc(rec.context?.label || 'Whole course')} |`,
-      `| **Started** | ${fmt(rec.createdAt)} |`, `| **Last message** | ${fmt(rec.updatedAt)} |`,
-      `| **Messages** | ${rec.stats.messages} |`, `| **Model** | ${esc(rec.model?.name || '—')} |`,
-      `| **Id** | \`${rec.id}\` |`, `| **Source** | ${fromApp(rec) || appName} |`, '', '---', ''];
-    if (rec.deleted) lines.push('*This conversation was deleted.*');
+      row('type', `${KIND_NAME[rec.kind]}${rec.mode ? ' · ' + (MODE_NAME[rec.mode] || rec.mode) : ''}`),
+      row('subject', esc(rec.subject?.title || rec.subject?.id || '—')),
+      row('context', esc(rec.context?.label || CT('loader.convo.wholeCourse'))),
+      row('started', fmt(rec.createdAt)), row('lastMessage', fmt(rec.updatedAt)),
+      row('messages', rec.stats.messages), row('model', esc(rec.model?.name || '—')),
+      row('id', `\`${rec.id}\``), row('source', fromApp(rec) || appName), '', '---', ''];
+    if (rec.deleted) lines.push(`*${CT('loader.convo.deleted')}*`);
     const lessons = rec.tutorState?.lessons || [];
-    if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
-    rec.messages.forEach(m => lines.push(`${H}# ${m.role === 'user' ? '🧑 You' : `${tutorAvatar} ${tutorName}`} · ${fmt(m.createdAt).slice(11)}`, '', demote(m.content.trim(), level + 2), ''));
+    if (lessons.length) lines.push(`${H}# 📌 ${CT('loader.convo.lessons')}`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
+    rec.messages.forEach(m => lines.push(`${H}# ${m.role === 'user' ? '🧑 ' + CT('loader.convo.you') : `${tutorAvatar} ${tutorName}`} · ${fmt(m.createdAt).slice(11)}`, '', demote(m.content.trim(), level + 2), ''));
     return lines.join('\n');
   }
 
