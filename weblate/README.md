@@ -112,9 +112,9 @@ language-course facades are in it.
 `i18n/glossary/<locale>.csv` (bilingual CSV) becomes Weblate's glossary for the UI project, so terms are highlighted
 while translating. Weblate reads and writes CSV through translate-toolkit, which knows the columns `source`, `target`,
 `developer_comments` (and a few others) — **a column called `description` is written back empty** on Weblate's
-first commit. Before the glossary component is created, rename that column in `i18n/glossary/*.csv` and
-`i18n/glossary/drafts/*.csv` to `developer_comments` and let `tools/lang_facade.py` (function `glossary`, which
-reads `description`) accept both names. `weblate_setup.py` leaves the glossary out until then. `terms.csv` (the
+first commit. So `i18n/glossary/*.csv` and `i18n/glossary/drafts/*.csv` use the header
+`source,target,developer_comments` (renamed 2026-10-11; `tools/lang_facade.py` function `glossary` accepts both names),
+and `weblate_setup.py` leaves the glossary out if any of them goes back to `description`. `terms.csv` (the
 English term list) is excluded by the component's language filter.
 
 ## 5. Language-course facades (separate project `noema-lite-courses`)

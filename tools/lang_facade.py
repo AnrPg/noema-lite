@@ -880,7 +880,7 @@ def glossary(loc):
         with open(p, encoding='utf-8', newline='') as f:
             for r in csv.DictReader(f):
                 if r.get('source') and r.get('target') and not any(x[0] == r['source'] for x in rows):
-                    rows.append([r['source'], r['target'], r.get('description', '')])
+                    rows.append([r['source'], r['target'], r.get('developer_comments') or r.get('description') or ''])   # Weblate's column name; older files: description
     return rows
 
 

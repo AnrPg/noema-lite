@@ -1,4 +1,4 @@
-source,target,description
+source,target,developer_comments
 "Roadmap","percorso","A goal broken into steps, drawn as a map; every step is taught by a full subject. Product term, capitalised in English; one fixed translation everywhere."
 "step","tappa","One stop on a Roadmap; each step is a subject. Called “station” on the map (same translation)."
 "station","tappa","Synonym of “step” on the Roadmap map and its legend; translate exactly like step."
