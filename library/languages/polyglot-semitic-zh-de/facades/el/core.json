@@ -6590,7 +6590,7 @@
   "by": "claude"
  },
  "c:veg.habanero/gloss": {
-  "t": "αβανέρο",
+  "t": "χαμπανέρο",
   "src": "4f791509efb1",
   "by": "claude"
  },
@@ -6625,7 +6625,7 @@
   "by": "claude"
  },
  "c:veg.jalapeno/gloss": {
-  "t": "χαλαπένιο (jalapeño)",
+  "t": "χαλαπένιο",
   "src": "41137d53ae38",
   "by": "claude"
  },
@@ -6640,7 +6640,7 @@
   "by": "claude"
  },
  "c:veg.jicama/gloss": {
-  "t": "χίκαμα (jícama)",
+  "t": "χίκαμα",
   "src": "a8b40a9dfb2e",
   "by": "claude"
  },
@@ -7165,7 +7165,7 @@
   "by": "claude"
  },
  "c:veg.wasabi/gloss": {
-  "t": "ουασάμπι",
+  "t": "γουασάμπι",
   "src": "0b32f06a18e4",
   "by": "claude"
  },
@@ -7235,7 +7235,7 @@
   "by": "claude"
  },
  "c:veg.yacon/gloss": {
-  "t": "γιακόν (yacón)",
+  "t": "γιακόν",
   "src": "c4cef8ad96e9",
   "by": "claude"
  },
