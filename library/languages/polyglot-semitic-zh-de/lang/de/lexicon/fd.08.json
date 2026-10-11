@@ -150,12 +150,12 @@
      {
       "for": "el",
       "rel": "trap",
-      "text": "δεν stands before the verb and goes with τίποτα (δεν τρώω τίποτα); nicht usually comes late, and Ich esse nichts needs no second negation."
+      "text": "δεν stands before the verb and goes with τίποτα (δεν τρώω τίποτα).\n\nnicht usually comes late, and Ich esse nichts needs no second negation."
      },
      {
       "for": "ru",
       "rel": "trap",
-      "text": "не stands before the verb and goes with ничего (я ничего не ем); nicht usually comes late, and Ich esse nichts needs no second negation."
+      "text": "не stands before the verb and goes with ничего (я ничего не ем).\n\nnicht usually comes late, and Ich esse nichts needs no second negation."
      }
     ]
    },
@@ -1228,7 +1228,7 @@
     },
     "funFacts": [],
     "pitfalls": [
-     "noch alone usually means “still” or “more”: Ich habe noch Brot (I still have bread). Only after weder does it mean “nor”."
+     "noch alone usually means “still” or “more”:\n→ Ich habe noch Brot (I still have bread).\n\nOnly after weder does it mean “nor”."
     ],
     "subtleties": [
      "Noch einen Kaffee, bitte! = Another coffee, please!"

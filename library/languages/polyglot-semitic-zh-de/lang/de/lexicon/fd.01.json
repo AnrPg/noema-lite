@@ -276,12 +276,12 @@
      "Traditionally, switching from Sie to du was sealed with a drink: Brüderschaft trinken."
     ],
     "pitfalls": [
-     "Using du with a stranger, a shop assistant or an official can sound rude; the older or higher-ranking person usually offers the du.",
+     "Using du with a stranger, a shop assistant or an official can sound rude.\n\nThe older or higher-ranking person usually offers the du.",
      "Verb ending -st: du isst, du trinkst, du bist, du hast."
     ],
     "subtleties": [
-     "In letters and e-mails du/dich/dir may be capitalized (Du, Dich, Dir) as a sign of respect; both spellings are correct.",
-     "Many companies, start-ups and online services address everyone with du; IKEA in Germany famously does."
+     "In letters and e-mails du/dich/dir may be capitalized (Du, Dich, Dir) as a sign of respect.\n\nBoth spellings are correct.",
+     "Many companies, start-ups and online services address everyone with du.\n\nIKEA in Germany famously does."
     ],
     "notes": [
      {
@@ -431,7 +431,7 @@
      "Polite Sie is grammatically “they”: Sie essen means both “you eat” (polite) and “they eat” – only the capital letter tells them apart in writing."
     ],
     "pitfalls": [
-     "Always capitalize Sie, Ihnen (and Ihr = your) when they mean polite “you”; sie with a small s means “she” or “they”.",
+     "Always capitalize Sie, Ihnen (and Ihr = your) when they mean polite “you”.\n\nsie with a small s means “she” or “they”.",
      "The verb takes the 3rd person plural form: Sie sind, Sie haben, Sie essen – never *Sie bist."
     ],
     "subtleties": [
@@ -564,7 +564,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The h in ihn and ihm is not pronounced; it was added in writing only to distinguish them from in and im."
+     "The h in ihn and ihm is not pronounced.\n\nIt was added in writing only to distinguish them from in and im."
     ],
     "pitfalls": [
      "Things are er when their noun is masculine: Der Salat ist frisch – er ist frisch (not *es).",
@@ -703,7 +703,7 @@
      "sie has three meanings in German: she, they – and, capitalized, the polite you (Sie)."
     ],
     "pitfalls": [
-     "sie (she) and sie (they) look the same; the verb tells them apart: sie isst (she) / sie essen (they).",
+     "sie (she) and sie (they) look the same; the verb tells them apart:\n→ sie isst (she) / sie essen (they)",
      "Dative is ihr, not *sie: Ich helfe ihr."
     ],
     "subtleties": [
@@ -1194,7 +1194,7 @@
      "The paradigm mixes three old roots: ist / sind (Indo-European *h₁es-), bin / bist (*bʰuH-, “become”) and war / gewesen (old wesan, “to remain”)."
     ],
     "pitfalls": [
-     "Feelings of cold, heat or sickness use the dative: Mir ist kalt / Mir ist schlecht. Ich bin kalt means “I am cold-hearted”.",
+     "Feelings of cold, heat or sickness use the dative:\n→ Mir ist kalt / Mir ist schlecht.\n\n**Ich bin kalt means “I am cold-hearted”.**",
      "Perfect with sein, not haben, for motion and change of state: Ich bin gefahren / Er ist gewesen.",
      "Imperative: Sei ruhig! (du) – Seid leise! (ihr) – Seien Sie bitte pünktlich! (polite) – seien is the only Sie-imperative that is not the infinitive."
     ],
@@ -1337,7 +1337,7 @@
      "und does not change the word order: … und sie deckt den Tisch (verb still second)."
     ],
     "subtleties": [
-     "No comma before und in a simple list (Tomaten, Gurken und Zwiebeln); between two full main clauses the comma is optional."
+     "- No comma before und in a simple list (Tomaten, Gurken und Zwiebeln);\n- between two full main clauses the comma is optional."
     ],
     "notes": [
      {
@@ -1651,10 +1651,10 @@
     ],
     "pitfalls": [
      "Verb ending -t: ihr seid, ihr habt, ihr esst – never *ihr sind.",
-     "ihr has three meanings: you (plural), (to) her (Ich helfe ihr) and her/their (ihr Buch). The verb and the context tell them apart."
+     "ihr has three meanings:\n- you (plural);\n- (to) her (Ich helfe ihr);\n- her/their (ihr Buch).\n\nThe verb and the context tell them apart."
     ],
     "subtleties": [
-     "ihr is only for people you would each address with du. A group of adults you say Sie to is addressed with Sie: Wie geht es Ihnen?"
+     "ihr is only for people you would each address with du.\n\nA group of adults you say Sie to is addressed with Sie:\n→ Wie geht es Ihnen?"
     ],
     "notes": [
      {
@@ -2091,7 +2091,7 @@
     ],
     "subtleties": [
      "meine Frau / seine Frau means wife: Ehefrau is the formal word.",
-     "In the Middle Ages frouwe meant “lady” (a woman of rank) and wîp was the plain word for woman; today’s Weib is old-fashioned or insulting."
+     "In the Middle Ages frouwe meant “lady” (a woman of rank) and wîp was the plain word for woman.\n\nToday’s Weib is old-fashioned or insulting."
     ]
    }
   },
@@ -2692,7 +2692,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Friedrich Fröbel opened the first Kindergarten (“children’s garden”) in 1840; the word has since travelled into many languages.",
+     "Friedrich Fröbel opened the first Kindergarten (“children’s garden”) in 1840.\n\nThe word has since travelled into many languages.",
      "Kind goes back to the Indo-European root *ǵenh₁- “to give birth”."
     ],
     "pitfalls": [
@@ -2899,7 +2899,7 @@
      "Plural Personen; for “people” in general German prefers Leute or Menschen."
     ],
     "subtleties": [
-     "Person counts heads (Tisch für vier Personen); Mensch stresses the human being (Er ist ein guter Mensch); Leute is plural only."
+     "- Person counts heads (Tisch für vier Personen);\n- Mensch stresses the human being (Er ist ein guter Mensch);\n- Leute is plural only."
     ],
     "notes": [
      {
@@ -2910,7 +2910,7 @@
      {
       "for": "ru",
       "rel": "trap",
-      "text": "персона exists too, but is formal or ironic; the everyday word is человек – while German Person is neutral and common."
+      "text": "персона exists too, but is formal or ironic; the everyday word is человек.\n\nGerman Person is neutral and common."
      }
     ]
    }
@@ -3273,7 +3273,7 @@
      "Freund literally means “the loving one”: it is an old present participle of a verb “to love”."
     ],
     "pitfalls": [
-     "mein Freund / meine Freundin usually means boyfriend / girlfriend; for “a friend” say ein Freund von mir / eine Freundin von mir.",
+     "**mein Freund / meine Freundin usually means boyfriend / girlfriend.**\n\nFor “a friend” say ein Freund von mir / eine Freundin von mir.",
      "Feminine: die Freundin (plural Freundinnen); a mixed group is die Freunde."
     ],
     "subtleties": [
@@ -3451,7 +3451,7 @@
      "The suffix -in is old: Old High German friuntinna already had it."
     ],
     "pitfalls": [
-     "mein Freund / meine Freundin usually means boyfriend / girlfriend; for “a friend” say ein Freund von mir / eine Freundin von mir.",
+     "**mein Freund / meine Freundin usually means boyfriend / girlfriend.**\n\nFor “a friend” say ein Freund von mir / eine Freundin von mir.",
      "Plural with double n: die Freundinnen."
     ],
     "subtleties": [
@@ -3622,7 +3622,7 @@
      {
       "for": "en",
       "rel": "trap",
-      "text": "English student also means a school pupil; German Student is only at university – a pupil is a Schüler."
+      "text": "English student also means a school pupil.\n\nGerman Student is only at university – a pupil is a Schüler."
      },
      {
       "for": "el",
@@ -3779,7 +3779,7 @@
      "For school, the word is Schülerin."
     ],
     "subtleties": [
-     "The plural Studenten traditionally covers mixed groups; many people now write Studentinnen und Studenten or Studierende."
+     "The plural Studenten traditionally covers mixed groups.\n\nMany people now write Studentinnen und Studenten or Studierende."
     ]
    }
   },
@@ -3951,7 +3951,7 @@
      {
       "for": "en",
       "rel": "trap",
-      "text": "English student covers school and university; German says Schüler at school and Student at university."
+      "text": "English student covers school and university.\n\nGerman says Schüler at school and Student at university."
      },
      {
       "for": "el",
@@ -4602,10 +4602,10 @@
     ],
     "pitfalls": [
      "Learn every noun with its article: the gender is often not predictable (der Kohl, die Gurke, das Radieschen).",
-     "die is feminine singular AND every plural; der is masculine nominative AND feminine dative/genitive AND genitive plural."
+     "- die is feminine singular AND every plural;\n- der is masculine nominative AND feminine dative/genitive AND genitive plural."
     ],
     "subtleties": [
-     "Compounds take the article of their last part: der Kohl → der Blumenkohl; die Zwiebel → die Frühlingszwiebel."
+     "Compounds take the article of their last part:\n→ der Kohl → der Blumenkohl; die Zwiebel → die Frühlingszwiebel"
     ]
    }
   },

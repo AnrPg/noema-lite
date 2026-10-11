@@ -255,7 +255,7 @@
      "A comma always comes before weil."
     ],
     "subtleties": [
-     "A weil-clause can come first; then the main clause starts with its verb: Weil ich müde bin, gehe ich nach Hause.",
+     "A weil-clause can come first; then the main clause starts with its verb:\n→ Weil ich müde bin, gehe ich nach Hause.",
      "The answer to Warum? is a weil-clause on its own: Weil ich müde bin."
     ],
     "notes": [
@@ -666,7 +666,7 @@
      "Like deshalb it takes the first place and the verb follows: deswegen bleiben wir (not *deswegen wir bleiben)."
     ],
     "subtleties": [
-     "deswegen = des + wegen (“because of that”); wegen alone is the preposition “because of” (wegen des Wetters)."
+     "- deswegen = des + wegen (“because of that”);\n- wegen alone is the preposition “because of” (wegen des Wetters)."
     ]
    },
    "features": {
@@ -833,7 +833,7 @@
      {
       "for": "en",
       "rel": "trap",
-      "text": "also is the same word as English also (and as) – but in German it means “so, therefore”; “also” is auch."
+      "text": "also is the same word as English also (and as) – but in German it means “so, therefore”.\n\n“also” is auch."
      }
     ]
    },
@@ -1310,7 +1310,7 @@
      "ob goes back to Proto-Germanic *jabai."
     ],
     "pitfalls": [
-     "“if” = “whether” is ob: Ich weiß nicht, ob er kommt; “if” = a condition is wenn: Wenn er kommt, essen wir.",
+     "- “if” = “whether” is ob: Ich weiß nicht, ob er kommt;\n- “if” = a condition is wenn: Wenn er kommt, essen wir.",
      "The finite verb goes to the END of the clause: …, ob er heute kommt."
     ],
     "subtleties": [
@@ -1425,7 +1425,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "dass and das are the same word – the spelling split is only a convention; before 1996 dass was written daß."
+     "dass and das are the same word – the spelling split is only a convention.\n\nBefore 1996 dass was written daß."
     ],
     "pitfalls": [
      "dass (conjunction, ss) vs das (article or pronoun, s): if you can replace it with dieses or welches, write das.",
@@ -1535,7 +1535,7 @@
     ],
     "pitfalls": [
      "The finite verb goes to the END of the clause: …, obwohl es kalt ist.",
-     "obwohl joins (…, obwohl es kalt ist); trotzdem is an adverb with the verb next (Es ist kalt, trotzdem gehen wir)."
+     "- obwohl joins (…, obwohl es kalt ist);\n- trotzdem is an adverb with the verb next (Es ist kalt, trotzdem gehen wir)."
     ],
     "subtleties": [
      "Speech sometimes uses obwohl as a correction with main-clause order: Ich komme mit – obwohl, nein, ich bin zu müde."

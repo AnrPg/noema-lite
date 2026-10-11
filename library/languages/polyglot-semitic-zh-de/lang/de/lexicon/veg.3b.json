@@ -301,7 +301,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Kiwano is a trade name from New Zealand; the plant itself comes from Africa, where it grows wild in the Kalahari.",
+     "Kiwano is a trade name from New Zealand.\n\nThe plant itself comes from Africa, where it grows wild in the Kalahari.",
      "Gurke comes from Byzantine Greek ἀγγούριον."
     ],
     "pitfalls": [
@@ -630,12 +630,12 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English names it after Savoy (savoy cabbage); German Wirsing comes from a dialect word of northern Italy (verza)."
+      "text": "English names it after Savoy (savoy cabbage).\n\nGerman Wirsing comes from a dialect word of northern Italy (verza)."
      },
      {
       "for": "fr",
       "rel": "different",
-      "text": "chou de Savoie is named after Savoy; German Wirsing comes from a dialect word of northern Italy (verza)."
+      "text": "chou de Savoie is named after Savoy.\n\nGerman Wirsing comes from a dialect word of northern Italy (verza)."
      },
      {
       "for": "it",
@@ -1251,7 +1251,7 @@
      "Gender varies: German Wikipedia uses die Tomatillo, “occasionally der Tomatillo”."
     ],
     "subtleties": [
-     "The fruit is sticky under the husk; wash it before use. Tomatillos are used green and sour, not ripe and sweet."
+     "- The fruit is sticky under the husk; wash it before use.\n- Tomatillos are used green and sour, not ripe and sweet."
     ]
    }
   },
@@ -1688,7 +1688,7 @@
      "Pfeffer here is misleading: Cayennepfeffer is a chili (Capsicum), not black pepper (Piper)."
     ],
     "subtleties": [
-     "In everyday German Cayennepfeffer usually means the dried powder; fresh pods are called Cayennechilis or Chilischoten."
+     "In everyday German Cayennepfeffer usually means the dried powder.\n\nFresh pods are called Cayennechilis or Chilischoten."
     ]
    }
   },
@@ -1966,10 +1966,10 @@
      "On the Scoville scale habaneros reach a few hundred thousand units – roughly a hundred times a jalapeño."
     ],
     "pitfalls": [
-     "Gender varies: die Habanero (German Wikipedia, as die Chilischote) and der Habanero are both used; plural Habaneros."
+     "Gender varies: die Habanero (German Wikipedia, as die Chilischote) and der Habanero are both used.\n\nPlural Habaneros."
     ],
     "subtleties": [
-     "The heat sits mostly in the white placenta inside; the fruity aroma is the reason cooks still love it."
+     "The heat sits mostly in the white placenta inside.\n\nThe fruity aroma is the reason cooks still love it."
     ]
    }
   },
@@ -2815,10 +2815,10 @@
      "Duden has listed Edamame since 2013."
     ],
     "pitfalls": [
-     "Plural only (Duden: Pluralwort): die Edamame sind lecker. There is no singular gender; die is the plural article."
+     "Plural only (Duden: Pluralwort): die Edamame sind lecker.\n\nThere is no singular gender; die is the plural article."
     ],
     "subtleties": [
-     "Edamame are soybeans harvested unripe; the same beans left to ripen become the dry soybeans for tofu and soy sauce."
+     "Edamame are soybeans harvested unripe.\n\nThe same beans left to ripen become the dry soybeans for tofu and soy sauce."
     ]
    }
   },
@@ -3239,7 +3239,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The German Wikipedia article Stängelkohl describes the vegetable of the Apulian cime di rapa; the plant is a turnip, not a broccoli."
+     "The German Wikipedia article Stängelkohl describes the vegetable of the Apulian cime di rapa.\n\nThe plant is a turnip, not a broccoli."
     ],
     "pitfalls": [
      "It is no broccoli: botanically it is a form of the turnip (Brassica rapa)."
@@ -3832,7 +3832,7 @@
      "src": "Wiktionary (kaikki.org), for Maiskolben and Kölbchen"
     },
     "funFacts": [
-     "Chinese 玉米笋 (yùmǐsǔn, “corn shoot”). The cobs are picked a few days after the silk appears, before the kernels develop."
+     "Chinese 玉米笋 (yùmǐsǔn, “corn shoot”).\n\nThe cobs are picked a few days after the silk appears, before the kernels develop."
     ],
     "pitfalls": [
      "-chen nouns are always neuter and do not change in the plural: das Maiskölbchen, die Maiskölbchen."

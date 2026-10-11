@@ -164,11 +164,11 @@
     "pitfalls": [
      "Two-way preposition: Wo? → dative (Ich bin in der Küche), Wohin? → accusative (Ich gehe in die Küche).",
      "in dem → im and in das → ins: Ich bin im Park. – not *in dem Park (unless “in that park”).",
-     "A city or a country without article: in Berlin, in Griechenland; with an article: in der Türkei, in der Schweiz.",
-     "Months and seasons take im (in + dem): im Mai, im Sommer; a year takes no preposition (2026) or im Jahr 2026 – not *in 2026."
+     "- A city or a country without article: in Berlin, in Griechenland;\n- with an article: in der Türkei, in der Schweiz.",
+     "- Months and seasons take im (in + dem): im Mai, im Sommer;\n- a year takes no preposition (2026) or im Jahr 2026 – not *in 2026."
     ],
     "subtleties": [
-     "in for buildings you go inside (im Café, im Supermarkt); an open market or a square takes auf: auf dem Markt, auf dem Platz."
+     "- in for buildings you go inside (im Café, im Supermarkt);\n- an open market or a square takes auf: auf dem Markt, auf dem Platz."
     ],
     "notes": [
      {
@@ -381,7 +381,7 @@
      "an = at the side or edge (an der Wand, am Fenster); auf = on top of a surface (auf dem Tisch).",
      "an dem → am, an das → ans: am Bahnhof, ans Meer.",
      "Two-way preposition: Wo? + dative (am Fenster), Wohin? + accusative (ans Fenster).",
-     "Days, parts of the day and dates take an + dative, nearly always as am: am Montag, am Morgen, am Wochenende, am 3. Mai – but in der Nacht."
+     "Days, parts of the day and dates take an + dative, nearly always as am – but in der Nacht:\n→ am Montag, am Morgen, am Wochenende, am 3. Mai"
     ],
     "subtleties": [
      "“At” a place is three words in German: an (an edge: am Bahnhof), bei (a person or firm: beim Arzt) and in (inside: in der Schule)."
@@ -564,7 +564,7 @@
      "bei + a person means “at someone’s home”: bei Anna, bei meinen Eltern."
     ],
     "pitfalls": [
-     "bei is only for where you ARE: Ich bin bei meiner Mutter. Going there is zu: Ich gehe zu meiner Mutter (not *bei meiner Mutter gehen).",
+     "bei is only for where you ARE: Ich bin bei meiner Mutter.\n\nGoing there is zu:\n→ Ich gehe zu meiner Mutter (not *bei meiner Mutter gehen).",
      "bei always takes the dative: bei dem → beim."
     ],
     "subtleties": [
@@ -799,7 +799,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "zu is English to and too in one word: zum Arzt (to the doctor), zu groß (too big). zu is related to English to and too."
+      "text": "zu is English to and too in one word:\n→ zum Arzt (to the doctor), zu groß (too big)\n\nzu is related to English to and too."
      }
     ]
    }
@@ -940,13 +940,13 @@
      "nach and nah (near) are one word historically – “going near” became “going to”."
     ],
     "pitfalls": [
-     "nach for cities and countries WITHOUT article (nach Spanien); with an article use in + accusative: in die Türkei, in die Schweiz, in die USA.",
+     "- nach for cities and countries WITHOUT article (nach Spanien);\n- with an article use in + accusative: in die Türkei, in die Schweiz, in die USA.",
      "nach is never used for going to a person or a building: zum Arzt, zur Schule (not *nach der Schule, which means “after school”).",
      "Two meanings, both with the dative: nach Berlin / nach Hause (to) and nach dem Essen / nach der Arbeit (after)."
     ],
     "subtleties": [
      "nach Hause has the old dative Hause; nach always takes the dative.",
-     "after + a verb is the conjunction nachdem (Nachdem ich gegessen habe, …); after = afterwards is danach."
+     "- after + a verb is the conjunction nachdem (Nachdem ich gegessen habe, …);\n- after = afterwards is danach."
     ],
     "notes": [
      {
@@ -1122,7 +1122,7 @@
      "aus always takes the dative: aus dem Haus, aus der Schule."
     ],
     "subtleties": [
-     "aus = out of an inside (aus dem Haus, aus der Stadt); von = from a point, a person or the surface (vom Arzt, von der Arbeit)."
+     "- aus = out of an inside (aus dem Haus, aus der Stadt);\n- von = from a point, a person or the surface (vom Arzt, von der Arbeit)."
     ],
     "notes": [
      {
@@ -1656,7 +1656,7 @@
     ],
     "pitfalls": [
      "für takes the accusative: für meinen Vater (masculine -en), für dich, für ihn.",
-     "A period of time often needs no für: Ich bleibe zwei Wochen (für zwei Wochen is also fine for a planned stay); a time still going on takes seit (S15)."
+     "A period of time often needs no für: Ich bleibe zwei Wochen (für zwei Wochen is also fine for a planned stay).\n\nA time still going on takes seit (S15)."
     ],
     "subtleties": [
      "für vs vor: für = for; vor = in front of / before – they were once the same word."
@@ -1855,7 +1855,7 @@
     ],
     "pitfalls": [
      "über meaning “about” always takes the accusative: über den Film, über die Stadt.",
-     "über = above without touching (Die Lampe ist über dem Tisch); auf = on, touching (Das Buch ist auf dem Tisch)."
+     "- über = above without touching (Die Lampe ist über dem Tisch);\n- auf = on, touching (Das Buch ist auf dem Tisch)."
     ],
     "subtleties": [
      "über is a two-way preposition for place (S12): über dem Tisch (where) – über den Tisch (across, where to)."
@@ -2205,7 +2205,7 @@
     ],
     "subtleties": [
      "The -e of Hause is an old dative ending kept only in these phrases; elsewhere: im Haus.",
-     "The spelling zuhause (one word) is also accepted; das Zuhause is a noun: “home” as a place you belong to."
+     "The spelling zuhause (one word) is also accepted.\n\ndas Zuhause is a noun: “home” as a place you belong to."
     ],
     "notes": [
      {
@@ -2329,7 +2329,7 @@
      "Not *zu Hause gehen: going home is always nach Hause gehen."
     ],
     "subtleties": [
-     "The spelling nachhause (one word) is also accepted; nach Haus (without -e) is heard in speech and songs."
+     "The spelling nachhause (one word) is also accepted.\n\nnach Haus (without -e) is heard in speech and songs."
     ],
     "notes": [
      {
@@ -2534,7 +2534,7 @@
     ],
     "pitfalls": [
      "in der Schule (at school – where) vs zur Schule / in die Schule (to school – where to).",
-     "das Gymnasium is an academic secondary school; for sport you go to the Fitnessstudio or the Turnhalle."
+     "das Gymnasium is an academic secondary school.\n\nFor sport you go to the Fitnessstudio or the Turnhalle."
     ],
     "subtleties": [
      "zur Schule gehen also means “to be a pupil”: Mein Sohn geht noch zur Schule."
@@ -3037,7 +3037,7 @@
      "Arbeit first meant hardship, toil; the same old root is in Roboter, from a word for forced labour."
     ],
     "pitfalls": [
-     "At work = bei der Arbeit (colloquially auf der Arbeit; in Austria and Bavaria also in der Arbeit); to work = zur Arbeit.",
+     "- At work = bei der Arbeit (colloquially auf der Arbeit; in Austria and Bavaria also in der Arbeit);\n- to work = zur Arbeit.",
      "Plural Arbeiten only for pieces of work (Klassenarbeiten); “jobs” are Stellen or Jobs."
     ],
     "subtleties": [
@@ -3198,7 +3198,7 @@
      "Büro comes from bureau, which first meant a desk covered with coarse woollen cloth (bure)."
     ],
     "pitfalls": [
-     "Stress on the last syllable: Bü-RO; plural die Büros (with -s, so no -n in the dative: in den Büros)."
+     "Stress on the last syllable: Bü-RO.\n\nPlural die Büros (with -s, so no -n in the dative: in den Büros)."
     ],
     "subtleties": [
      "Homeoffice is a German coinage from borrowed parts: im Homeoffice arbeiten."
@@ -4043,7 +4043,7 @@
      "Said with a nasal vowel at the end: [ʁɛstoˈʁãː], often also [ʁɛstoˈʁaŋ]."
     ],
     "subtleties": [
-     "In Germany you usually wait to be seated only in better restaurants; in a pub you choose a free table."
+     "In Germany you usually wait to be seated only in better restaurants.\n\nIn a pub you choose a free table."
     ],
     "notes": [
      {
@@ -4196,7 +4196,7 @@
     ],
     "subtleties": [
      "Many German cafés are also bakeries or cake shops (Konditorei); a Kneipe is a pub.",
-     "In older texts Café is also found as a spelling of the drink (today Kaffee); now it means only the place."
+     "In older texts Café is also found as a spelling of the drink (today Kaffee).\n\nNow it means only the place."
     ]
    }
   },
@@ -4499,7 +4499,7 @@
      "A Drogerie (dm, Rossmann) sells soap, cosmetics and household goods – medicines are in der Apotheke."
     ],
     "subtleties": [
-     "German pharmacies take turns staying open at night and on Sundays (Notdienst); a sign on the door says which one is open."
+     "German pharmacies take turns staying open at night and on Sundays (Notdienst).\n\nA sign on the door says which one is open."
     ],
     "notes": [
      {
@@ -4660,7 +4660,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Bank took its money sense from Italian banco, the money-changer’s bench; bankrott is banca rotta, “broken bench”."
+     "Bank took its money sense from Italian banco, the money-changer’s bench.\n\nbankrott is banca rotta, “broken bench”."
     ],
     "pitfalls": [
      "Same singular, two plurals: die Banken (banks) – die Bänke (benches).",
