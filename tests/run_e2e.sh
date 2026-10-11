@@ -31,6 +31,7 @@ python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is ins
 # foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI
 python3 "$ROOT/tests/lang_rules.py"
 python3 "$ROOT/tests/lang_validate.py"
+python3 "$ROOT/tests/lang_facade.py"   # D19: the explanation-field registry, round trip of the master facade, parity, lint
 python3 "$ROOT/tests/lang_refcheck.py"
 python3 "$ROOT/tools/lang_phenomena.py" > /dev/null   # the catalogues of phenomena agree with the implementation (D14)
 node "$ROOT/tests/langcore.js"
@@ -47,6 +48,7 @@ node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: t
 node "$ROOT/tests/lang_speech.js" "$T"   # P9 listening and speaking: speech synthesis, dictation, shadowing, recognition (speech services mocked)
 node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end to end — three learners, two widths, every route (docs/LANGUAGES.md §13 QA)
 node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new frame: the Languages tab, #/lang/<course>/…, Today, + New language (docs/LANGUAGES.md §8)
+node "$ROOT/tests/lang_native.js" "$T"   # D19: taught through the learner's native language — the question once, only the native's notes, the explanation facade (docs/language-packs.md)
 node "$ROOT/tests/lang_lanes.js" "$T"   # ⫴ parallel lanes: the same subject level across the languages (D13, §9.2)
 node "$ROOT/tests/lang_package.js" "$T"   # a whole language in one prompt: the package, the connector's guide / start / finish, the app on two devices (§10.2)
 node "$ROOT/tests/i18n.js"   # the interface languages: runtime, plurals per CLDR, drafts, pseudo-locales, catalog checks (docs/i18n.md)

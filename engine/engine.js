@@ -424,6 +424,8 @@ setTimeout(checkInbox, 0);   // once the whole engine has loaded
 const GEM_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 /** An error of the Gemini client in the learner's words (needsKey: the 🔑 guide helps). */
 const gemErr = (key, vars, extra) => Object.assign(new Error(tE(key, vars)), extra || {});
+/** Gemini could not be reached (docs/i18n.md §6): the English words in .message (logs), the code for the learner's words (errText → err.ai.network_gemini). */
+const gemNetErr = e => Object.assign(new Error(`Network error — are you online? (${e && e.message})`), { code: 'ai.network_gemini', params: { detail: String(e && e.message) } });   // i18n-ignore (English .message of the error contract)
 const FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'];
 
 function modelScore(name) {
@@ -492,7 +494,7 @@ async function gemini(opts, retry = 1) {
   let r;
   try {
     r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(buildBody({ ...opts, model })) });
-  } catch (e) { throw gemErr('engine.gemini.network', { detail: e.message }); }
+  } catch (e) { throw gemNetErr(e); }
   if (!r.ok) {
     const t = await r.text();
     if (r.status === 400 && /thinking/i.test(t) && !noThinking.has(model)) { noThinking.add(model); return gemini(opts, retry); }
@@ -1946,7 +1948,7 @@ function subjectMenu() {
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
 }
 function resetProgress(after) {
-  confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title })); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
+  confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
 }
 /** 🔎 Jump to any concept of the subject. */
 function openSearch() {
@@ -2907,9 +2909,9 @@ function currentConvo() {
 }
 
 /* ---------- titles: succinct, descriptive, canonical ---------- */
-const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js) — English: for the AI's prompts and file names (i18n-ignore)
+const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js) — English: for the AI's prompts and file names only; the learner reads cvModeName (i18n-ignore)
 /** A conversation's mode for the learner: this app's modes in the UI language, other apps' as they name them. */
-const cvModeName = m => ['socratic', 'explain', 'quiz', 'interview', 'debug'].includes(m) ? tE('engine.cv.mode_' + m) : (MODE_NAME[m] || m);
+const cvModeName = m => ['socratic', 'explain', 'quiz', 'interview', 'debug'].includes(m) ? tE('engine.cv.mode_' + m) : (Noema.convos?.MODE_NAME?.[m] || m);   // other apps' modes: engine/convos.js's names, read now (loader.convo.mode.*)
 const fromApp = cv => Noema.convos?.fromApp?.(cv) || null;
 function cleanTitle(t) {
   return String(t || '').split('\n')[0].replace(/^\s*(title\s*:\s*)/i, '').replace(/[*_#`"“”'‘’]/g, '')
@@ -3066,7 +3068,7 @@ function renderConvoHistory(box) {
     const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · ' + tE('engine.cv.namingShort')) : null);
     const card = h('div', { class: 'cvcard', style: { animationDelay: Math.min(i, 12) * 25 + 'ms' } },
       h('button', { class: 'cvmain', onclick: () => openConvo(cv) }, titleEl,
-        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, tE('engine.cv.fromApp', { app: fromApp(cv) })) : null, `${cv.kind && cv.kind !== 'tutor' ? kindBadge(cv.kind) : (MODES[cv.mode]?.label || MODE_NAME[cv.mode] || cv.mode)} · ${cv.ctx?.label || tE('engine.cv.wholeCourse')}`),
+        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, tE('engine.cv.fromApp', { app: fromApp(cv) })) : null, `${cv.kind && cv.kind !== 'tutor' ? kindBadge(cv.kind) : (MODES[cv.mode]?.label || cvModeName(cv.mode))} · ${cv.ctx?.label || tE('engine.cv.wholeCourse')}`),
         h('small', {}, `${fmtDate(cv.updated || cv.created)} · ` + tE('engine.cv.messages', { n: cv.msgs.length }))),
       h('div', { class: 'cvactions' },
         h('button', { class: 'iconbtn', title: tE('engine.cv.rename'), onclick: () => {
@@ -3232,6 +3234,12 @@ const fmtDay = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, WHEN_DAY) : ne
 const fmtTime = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.time(t, WHEN_TIME) : new Date(t).toLocaleTimeString();
 /** A language's name in the UI language (Intl.DisplayNames), for the learner; langName() keeps the English one for the prompts. */
 const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : langName(code);
+/** A restore point's name in the UI language of now: its catalog key (k, p) when it has one, else the words it was saved with. */
+const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) : x.label;
+/** A cloud snapshot's name: the app's own snapshots are stored with fixed English names (matched by engine/cloud.js too) → the UI language;
+    any other name (older snapshots taken in another language, self-tests) as stored. */
+const SNAP_LABEL = { 'Manual snapshot': 'engine.cl.snapManual', 'Daily auto-snapshot': 'engine.cl.snapDaily' };   // i18n-ignore (stored names)
+const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(SNAP_LABEL[l]) : l;
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
@@ -3322,7 +3330,7 @@ const ACC_VIEWS = {
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, tE('engine.acc.chunk')));
     const subject = h('div', { class: 'row' },
       h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 ' + tE('engine.acc.backupBtn')),
-      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title })); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
+      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
     const show = t => openAccountMenu(t);
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(
@@ -3418,7 +3426,7 @@ const ACC_VIEWS = {
       rpBox.innerHTML = '';
       const pts = await Noema.backup.listRestorePoints(ACCOUNT.id);
       if (!pts.length) { rpBox.append(h('p', { class: 'tiny' }, tE('engine.bk.noPoints'))); return; }
-      pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, p.label), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
+      pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, storedLabel(p)), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await Noema.backup.getRestorePoint(p.key)) }, '⬇️'),
         h('button', { class: 'btn small', onclick: () => confirmBox(tE(ACCOUNT.kind === 'cloud' ? 'engine.bk.goBackCloud' : 'engine.bk.goBack'), async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 700); }) }, tE('engine.bk.restore')))));
     };
@@ -3480,7 +3488,7 @@ const ACC_VIEWS = {
       snapBox.innerHTML = '';
       let list = []; try { list = await NoemaCloud.listSnapshots(); } catch (e) { snapBox.append(h('p', { class: 'tiny' }, '⚠️ ' + errText(e))); return; }
       if (!list.length) snapBox.append(h('p', { class: 'tiny' }, tE('engine.cl.noSnaps')));
-      list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, sn.label), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
+      list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, snapLabel(sn.label)), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await NoemaCloud.getSnapshot(sn.id)) }, '⬇️'),
         h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.cl.restoreSnapConfirm'), async () => { await NoemaCloud.snapshot(tE('engine.cl.snapBeforeRestore')); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 900); }) }, tE('engine.bk.restore')),
         h('button', { class: 'iconbtn', onclick: async () => { await NoemaCloud.deleteSnapshot(sn.id); drawSnaps(); } }, '🗑️'))));
@@ -3488,7 +3496,7 @@ const ACC_VIEWS = {
     body.append(h('p', { class: 'tiny' }, tE('engine.cl.signedInAs', { email: sess.user.email })), stBox,
       h('div', { class: 'row', style: { margin: '10px 0' } },
         h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.push(ACCOUNT.id); const n = await NoemaCloud.pull(ACCOUNT.id); toast(n ? tE('engine.cl.pulled', { n }) : tE('engine.cl.upToDate')); if (n) setTimeout(() => location.reload(), 800); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '🔄 ' + tE('engine.cl.syncNow')),
-        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot(tE('engine.cl.snapManual')); toast('📸 ' + tE('engine.cl.snapSaved')); drawSnaps(); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '📸 ' + tE('engine.cl.takeSnap')),
+        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot(); toast('📸 ' + tE('engine.cl.snapSaved')); drawSnaps(); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '📸 ' + tE('engine.cl.takeSnap')),
         h('label', { class: 'btn' }, '🗄️ ' + tE('engine.cl.uploadDb'), h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ ' + tE('engine.cl.dbUploaded')); } catch (er) { toast('⚠️ ' + errText(er), 4000); } } })),
         h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, tE('engine.cl.signOut'))),
       accSection('🩺', tE('engine.cl.secCheck'), { info: tE('engine.cl.checkInfo'), body: selfTestBox() }),

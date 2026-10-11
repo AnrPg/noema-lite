@@ -94,13 +94,26 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
     : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
-/* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
-/** The languages the learner knows: settings, else the course's known languages as native ones. */
-/** The learner's languages (D18); without = the language on screen, which is never “familiar” from itself. */
-const knowsL = (without = null) => (UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }))).filter(k => (k.code || k) !== without);
+/* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned ---------- */
+/** The account's settings (a:settings: synced; the native language lives there, for every course). */
+const accSettings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
+function putAccSettings(patch) {
+  if (window.NoemaThemes?.putSettings) return NoemaThemes.putSettings(patch, UI.acc);
+  const k = `noema1:${UI.acc}:a:settings`, s = Object.assign(accSettings(), patch); Object.keys(patch).forEach(x => patch[x] === undefined && delete s[x]);
+  if (window.Noema?.kv) Noema.kv.set(k, JSON.stringify(s)); else try { localStorage.setItem(k, JSON.stringify(s)); } catch (e) { }
+}
+let nativeMemo = null;
+/** The learner's native language: a:settings.native, else the course's settings.knows entry at level native → {code?, name, type, family, branch, supported} | null. */
+const nativeL = () => {
+  const raw = (localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '') + '|' + JSON.stringify(UI.L?.settings.knows || null);
+  if (nativeMemo && nativeMemo.raw === raw && nativeMemo.C === UI.C) return nativeMemo.v;
+  const v = N.nativeOf(UI.C, accSettings().native, UI.L?.settings.knows); nativeMemo = { raw, C: UI.C, v }; return v;
+};
+/** The languages that decide what is familiar (D18 → D19: the native language only); without = the language on screen, never “familiar” from itself. */
+const knowsL = (without = null) => N.nativeKnows(nativeL()).filter(k => (k.code || k.name) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
 /** A learner's language by name: a group (type:… / family:…), else the course profile's (English) name in an English UI, else the UI language's name. */
-const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) })
+const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) }) : code?.startsWith('branch:') ? LT('lang.base.langGroup', { group: code.slice(7) })
   : (() => { const ui = info(code).name; return (!window.NoemaI18n || NoemaI18n.locale === 'en' || ui === code) && profileOf(code)?.name || ui || code; })();   // Intl without a name: the profile's
 /** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
 function sentenceView(c, s, unknown = []) {
@@ -193,16 +206,13 @@ let wired = false;
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
 function start({ acc, id, data, host = null, onRoute = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
-  UI.acc = acc; UI.id = id; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
+  UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
+  applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
-  try {   // the explanations this code writes (lang.expl.*) follow the explanation language: its catalog, when it is a UI locale
-    const xl = window.NoemaI18n && NoemaI18n.match(UI.C.explainLang);
-    if (xl && xl !== 'en' && !NoemaI18n.catalogs[xl]) NoemaI18n.load(xl).then(() => { if (UI.C && !document.querySelector('.lx-session')) render(); });
-  } catch (e) { }
   if (!document.querySelector('link[data-lx-fonts]')) document.head.append(   // i18n: Noto from Google Fonts until the fonts are self-hosted (docs/i18n.md §2 Fonts)
     h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
@@ -214,6 +224,58 @@ function start({ acc, id, data, host = null, onRoute = null }) {
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && UI.C) save(true); });
   }
   render();
+}
+/* ---------- D19: the explanation locale and its facade (docs/language-packs.md §2.2, §3) ---------- */
+/** The locale facades of the open course: {locale: {status, coverage, path?}} — from the registry (built course.expl.<locale>.js) and those loaded. */
+function facadeStatuses() {
+  const meta = ((window.NOEMA_REGISTRY || {}).languages || []).find(m => m.id === UI.id), out = {};
+  for (const [loc, f] of Object.entries(meta?.expl || {})) out[loc] = f;
+  for (const [loc, f] of Object.entries(((window.NOEMA_LANGEXPL || {})[UI.id]) || {})) out[loc] = { ...(out[loc] || {}), status: f.status, coverage: f.coverage };
+  return out;
+}
+const previewHost = () => { try { return !!window.NOEMA_CONFIG?.i18nPreview || /^(deploy-preview-\d+|[\w-]+--)/.test(location.hostname); } catch (e) { return false; } };
+const facadeOpts = () => ({ preview: previewHost(), drafts: window.NOEMA_CONFIG?.i18nDrafts === true });
+/** The locales the explanations can be shown in: the master and every usable facade. */
+function explanationLocales() {
+  const master = UI.data.course.masterLang || UI.data.course.explainLang || 'en', F = facadeStatuses();
+  return [master, ...Object.keys(F).filter(l => l !== master && N.facadeUsable(F[l], facadeOpts()))];
+}
+/** The course as the learner sees it: the master, or the master through the facade of the explanation locale. */
+const buildCourse = data => N.course(UI.facade ? N.applyFacade(data, UI.facade) : data);
+/** The word profiles (course.profiles.js) through the facade. */
+const facadeProfMap = map => UI.facade && map ? N.facadeProfiles(map, UI.facade) : map;
+const facadeLoading = {};
+/** Resolve the explanation locale (native ▸ UI locale ▸ master; the learner's choice first) and show the course through its facade:
+ *  at once when the facade is loaded, else after its file (course.expl.<locale>.js, loaded like the word profiles). → the locale */
+function applyExplanationLocale() {
+  const master = UI.data.course.masterLang || UI.data.course.explainLang || 'en';
+  const loc = N.explanationLocale({ native: nativeL(), uiLocale: window.NoemaI18n?.locale || 'en', override: UI.L?.settings.speaker, facades: facadeStatuses(), master, ...facadeOpts() });
+  const id = UI.id, loaded = l => ((window.NOEMA_LANGEXPL || {})[id] || {})[l];
+  const swap = fac => {
+    const kv = UI.L ? N.toKV(UI.C, UI.L) : null;
+    UI.facade = fac ? { ...fac, locale: fac.locale || loc } : null; UI.C = buildCourse(UI.data);
+    if (kv) { const st = UI.L.settings; UI.L = N.fromKV(UI.C, kv); UI.L.settings = st; }   // every setting kept as it is (fromKV keeps only the known ones)
+    if (UI.profMap) N.addProfiles(UI.C, facadeProfMap(UI.profMap));
+    nativeMemo = null;
+  };
+  const want = loc === master ? null : loc;
+  if ((UI.facade?.locale || null) !== want) {
+    if (!want) swap(null);
+    else if (loaded(want)) swap(loaded(want));
+    else {
+      const path = facadeStatuses()[want]?.path;
+      if (path && !facadeLoading[id + '|' + want]) facadeLoading[id + '|' + want] = new Promise(res => { const sc = document.createElement('script'); sc.src = path; sc.onload = sc.onerror = () => res(); document.head.append(sc); })
+        .then(() => { delete facadeLoading[id + '|' + want]; if (UI.id === id && loaded(want)) { applyExplanationLocale(); if (UI.C && !document.querySelector('.lx-session')) render(); } });
+      N.setExplainLocale(UI.C.explainLang); return UI.C.explainLang;   // until it is in: the master
+    }
+  }
+  N.setExplainLocale(UI.C.explainLang);
+  try {   // the explanations this code writes (lang.expl.*, lc.expl.*) follow the explanation language: its catalog, when it is a UI locale
+    const xl = window.NoemaI18n && NoemaI18n.match(UI.C.explainLang);
+    if (xl && xl !== 'en' && !NoemaI18n.catalogs[xl]) NoemaI18n.load(xl).then(() => { if (UI.C && UI.id === id && !document.querySelector('.lx-session')) render(); });
+  } catch (e) { }
+  if (UI.C.explainLang && document.documentElement && UI.view) document.documentElement.lang = UI.C.explainLang;
+  return UI.C.explainLang;
 }
 /** Is the course on screen? (inside the frame the learner may be on another tab) */
 const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
@@ -256,6 +318,7 @@ function viewLabel(r) {
 function render() {
   if (!UI.C || !shown()) return;
   const r = route(); UI.view = r.name;
+  if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
   if (FR.on) document.documentElement.lang = UI.C.explainLang;
   topbar();
   const m = $('.lx-main'); m.innerHTML = ''; window.scrollTo(0, 0);
@@ -298,14 +361,14 @@ VIEWS.home = (v) => {
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), 'data-go': nRev || nNew || nScript ? 'session' : 'none', 'data-rest': counts, onclick: () => runSession(plan) }, nRev || nNew || nScript ? '▶ ' + LT('lang.home.session', { counts }) : '✅ ' + LT('lang.home.nothingDue')),
       learn ? h('span', { class: 'tiny' }, LT('lang.home.newFrom', { title: UI.C.nodes[learn.node].title })) : null)));
-  v.append(polyHome());   // P6: today's languages, the compare lane, the polyglot drills
+  v.append(nativeAsk() || '', polyHome());   // D19: “Your native language?” (once) · P6: today's languages, the compare lane, the polyglot drills
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 ' + LT(lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? 'lang.home.nextLesson' : 'lang.home.nextFoundation')), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).label).join(' · '))),
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.home.learn'))));
   })));
   v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ ' + LT('lang.home.drills') + ' '),
-    h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
+    h('button', { class: 'btn ghost small', 'data-icon': 'gym', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
     ...UI.C.data.fields.filter(f => (f.subgroups || []).length > 1).map(f => h('button', { class: 'btn ghost small', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, '🧩 ' + f.title))));
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 ' + LT('lang.home.peculiarAnyTime') + ' '),
     ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).label))));
@@ -333,9 +396,9 @@ VIEWS.node = (v, r) => {
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('span', { class: 'lx-ns ns-' + ns }, info(c).flag, ' ', STATE_LABEL[ns] || ns)),
     h('div', { class: 'row lx-actions' },
-      ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ ' + LT('lang.card.learnNode')) : null,
-      n.kind === 'field' ? h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 ' + LT('lang.card.fieldMap')) : null,
-      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ ' + LT('lang.view.recall')) : null,
+      ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', 'data-icon': 'plus', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ ' + LT('lang.card.learnNode')) : null,
+      n.kind === 'field' ? h('button', { class: 'btn small', 'data-icon': 'map', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 ' + LT('lang.card.fieldMap')) : null,
+      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', 'data-icon': 'dots', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ ' + LT('lang.view.recall')) : null,
       deepenButton(n.id, c)),
     !X.prepared[n.id] ? h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.nodeUnwritten', { lang: info(c).name })) : null);
   const grid = h('div', { class: 'lx-cgrid' });
@@ -386,6 +449,10 @@ function compareTable(cid) {
 }
 
 const CONNOTATION = { positive: '🙂', negative: '🙁', neutral: '😐', mixed: '🤔' };   // + lang.card.conn.<connotation>
+/** A code of a word profile in words of the explanation language (a value the catalog does not know stays as the course wrote it):
+    registers lc.expl.reg.*, phrase kinds lc.expl.phraseKind.* (langcore's words), status lang.expl.status.*, domains lang.expl.domain.*. */
+const codeWord = (prefix, v) => v != null && v !== '' && window.NoemaI18n && NoemaI18n.has(prefix + v) ? LE(prefix + v) : v;
+const regWord = r => codeWord('lc.expl.reg.', r), regWords = rs => [].concat(rs || []).map(regWord).join(', ');
 /** Everything about one word (docs/LANGUAGES.md §4.6). */
 function wordCardView(c, lid, concept) {
   const card = N.wordCard(UI.C, UI.L, c, lid, { concept }), X = LX(c), lx = X.lex[lid];
@@ -395,22 +462,22 @@ function wordCardView(c, lid, concept) {
     e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
     X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + [].concat(e.register).join(', '), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
       e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
-      h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null,
+      h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,
       s.current ? badge('← ' + LT('lang.card.thisMeaning'), 'sense') : s.concept ? h('a', { class: 'lx-badge sense', href: '#/c/' + s.concept }, (s.pending ? '⏳ ' : '→ ') + s.gloss) : null,
       ...s.forms.map(f => badge(f.label + ': ' + f.text, 'ctx')),
       s.words.length ? h('div', { class: 'tiny' }, LT('lang.card.alsoSaid') + ' ', s.words.join(' · '), s.contrast ? h('span', {}, ' — ⇄ ', h('b', {}, s.contrast.axis), ': ', LT('lang.card.thisWordIs', { value: s.contrast.value })) : null) : null,
-      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge([].concat(n.register || []).join(', '), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
+      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge(regWords(n.register), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
     facade: items => h('dl', { class: 'lx-parts' }, ...items.flatMap(x => [h('dt', {}, x.title), h('dd', { class: x.none ? 'tiny' : null }, /[֐-ۿ一-鿿]/.test(x.text) ? word(c, x.text, { sub: false }) : x.text)])),
     examples: items => h('div', {}, ...items.map(ex)),
     collocations: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
     particleVerbs: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
-    phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(x.kind, 'ctx'), x.register ? badge([].concat(x.register).join(', '), 'reg') : null,
+    phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(codeWord('lc.expl.phraseKind.', x.kind), 'ctx'), x.register ? badge(regWords(x.register), 'reg') : null,
       h('div', { class: 'tiny' }, '“' + x.tr + '” — ', h('b', {}, x.meaning), x.source ? ' (' + x.source + ')' : '')))),
-    synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(reg, 'reg'),
+    synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(regWord(reg), 'reg'),
       h('ul', { class: 'lx-list' }, ...list.map(s => h('li', {}, word(c, s.word, { sub: false }), s.region ? badge('🗺️ ' + s.region, 'ctx') : null, ' — ', s.nuance)))))),
     antonyms: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.word, { sub: false }), x.note ? ' — ' + x.note : ''))),
     pitfalls: items => h('ul', { class: 'lx-list lx-warn' }, ...items.map(x => h('li', {}, x))),
@@ -422,14 +489,15 @@ function wordCardView(c, lid, concept) {
     h('div', { class: 'lx-cardtop' },
       h('div', { class: 'lx-lemma' }, word(c, lx.lemma, { lex: lx })),
       h('div', { class: 'lx-meta' }, h('div', {}, h('b', {}, card.gloss)), h('div', { class: 'lx-chips' },
-        badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? card.status : null, 'reg'),
-        ...card.register.map(r => badge('🎭 ' + r, 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
+        badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
+        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     deepButton(c, lid),
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
     ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + LNUM(Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
+    (() => { const ns = N.contrastFor(lx.profile?.notes, nativeL()); return ns.length ? h('div', { class: 'lx-callout k-key lx-wnotes' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(ns, c)) : null; })(),   // D19: the word seen from the learner's native language
     polyWordExtras(c, lid),   // P6: bridges and false friends across the learner's languages
     card.synonymsNone ? h('p', { class: 'tiny' }, LT('lang.card.synonyms') + ' ', card.synonymsNone) : null,
     !card.hasProfile ? h('p', { class: 'tiny' }, LT('lang.card.littleWord') + ' ', gloss(c, lid)) : null);
@@ -513,7 +581,7 @@ VIEWS.recall = (v, r) => {
 const LEVELS = [['native', () => LT('lang.set.native')], ['C2', () => LT('lang.set.c2')], ['C1', () => 'C1'], ['B2', () => 'B2'], ['B1', () => 'B1'], ['A2', () => LT('lang.set.a2')]];
 function knowsEditor() {
   const S = UI.L.settings, W = UI.C.data.world, box = h('div', { class: 'lx-knows' });
-  const list = () => S.knows || (S.knows = knowsL().map(k => ({ ...k })));
+  const list = () => S.knows || (S.knows = []);
   const draw = () => {
     box.innerHTML = '';
     for (const [i, k] of list().entries()) box.append(h('div', { class: 'lx-setrow', 'data-know': k.code || k.name },
@@ -539,6 +607,44 @@ function knowsEditor() {
   };
   draw(); return box;
 }
+/** D19: the learner's native language (a:settings.native, one for every course): a picker of every profiled language + “another
+ *  language” (its name, type and family). onPick(native | null) after it is saved. */
+function nativePicker(onPick = () => { }) {
+  const W = UI.C.data.world, cur = accSettings().native || null, box = h('div', { class: 'lx-native' });
+  const nm = l => capFirst(langName(l.code) || l.name), cmp = window.NoemaI18n ? NoemaI18n.fmt.compare : (a, b) => a.localeCompare(b);
+  const langs = (W?.languages || []).slice().sort((a, b) => cmp(nm(a), nm(b)));
+  const known = cur?.code && langs.some(l => l.code === cur.code);
+  const sel = h('select', { class: 'lx-nativesel', 'aria-label': LT('lang.native.label') }, h('option', { value: '' }, LT('lang.native.none')),
+    ...langs.map(l => h('option', { value: l.code, selected: cur?.code === l.code ? true : null }, `${nm(l)} — ${l.family}`)),
+    cur && !known ? h('option', { value: '=', selected: true }, cur.name || cur.code) : null,
+    h('option', { value: '*' }, LT('lang.native.other')));
+  const typeNames = Object.fromEntries((UI.C.data.typology?.types || []).map(t => [t.id, t.name]));
+  const other = h('div', { class: 'lx-nativeother', hidden: true });
+  const name = h('input', { class: 'noema-input', 'aria-label': LT('lang.native.name'), placeholder: LT('lang.native.name') });
+  const type = h('select', { 'aria-label': LT('lang.native.type') }, ...N.TYPES.map(t => h('option', { value: t }, typeNames[t] || t)));
+  const fams = [...new Set((W?.languages || []).map(l => l.family))].sort(cmp);
+  const fam = h('select', { 'aria-label': LT('lang.native.family') }, h('option', { value: '' }, LT('lang.native.familyUnknown')), ...fams.map(f => h('option', { value: f }, f)));
+  const put = v => { putAccSettings({ native: v || undefined }); nativeMemo = null; onPick(nativeL()); };
+  other.append(name, type, fam, h('button', { class: 'btn small', onclick: () => { const n = name.value.trim(); if (!n) return name.focus(); put({ name: n, type: type.value, ...(fam.value ? { family: fam.value } : {}) }); } }, LT('lang.native.save')));
+  sel.onchange = () => { other.hidden = sel.value !== '*'; if (sel.value === '*') return name.focus(); if (sel.value !== '=') put(sel.value ? { code: sel.value } : null); };
+  box.append(sel, other);
+  return box;
+}
+/** D19: asked once in a language course while the native language is not known (until then: no comparisons, general texts only). */
+function nativeAsk() {
+  if (nativeL() || UI.prefs.nativeAsked || !UI.C.data.world) return null;
+  const box = h('div', { class: 'lx-card lx-native-ask', 'data-ask': 'native' }, h('b', {}, '🧭 ' + LT('lang.native.ask')), h('p', { class: 'tiny' }, LT('lang.native.askWhy')),
+    nativePicker(() => { UI.prefs.nativeAsked = true; save(); applyExplanationLocale(); render(); }),
+    h('button', { class: 'btn ghost small lx-nativelater', onclick: () => { UI.prefs.nativeAsked = true; save(); box.remove(); } }, LT('lang.native.later')));
+  return box;
+}
+/** D19: the language of the explanations — automatic (the native language's, else the UI's, when its facade is on) or the learner's choice (settings.speaker). */
+function speakerPicker() {
+  const opts = explanationLocales(); if (opts.length < 2) return null;
+  const S = UI.L.settings;
+  return h('label', { class: 'lx-setrow' }, LT('lang.native.speaker') + ' ', h('select', { class: 'lx-speaker', onchange: e => { if (e.target.value) S.speaker = e.target.value; else delete S.speaker; save(); applyExplanationLocale(); render(); } },
+    h('option', { value: '' }, LT('lang.native.speakerAuto')), ...opts.map(l => h('option', { value: l, selected: S.speaker === l ? true : null }, capFirst(uiLangName(l))))));
+}
 const PEC_AREAS = ['script', 'orthography', 'phonology', 'morphology', 'syntax', 'lexicon', 'semantics', 'pragmatics', 'culture', 'numbers'];   // lang.pec.area.<area>
 /** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
 VIEWS.peculiar = (v, r) => {
@@ -560,7 +666,7 @@ VIEWS.peculiar = (v, r) => {
         fam[p.id] ? h('span', { class: 'tiny' }, ' — ' + LT('lang.pec.familiarFrom', { from: LLIST(fam[p.id].map(langName)) })) : null),
       h('p', {}, wordsIn(c, p.what)),
       ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
-      (() => { const mine = N.notesFor(UI.C, p.notes, knowsL()); return mine.length ? notesList(mine) : null; })(),
+      (() => { const mine = N.contrastFor(p.notes, nativeL()); return mine.length ? notesList(mine, c) : null; })(),   // D19: the native language's notes only
       p.when ? h('p', { class: 'tiny' }, '🛤️ ' + LT('lang.pec.inCourse') + ' ', p.when) : null))));
 };
 VIEWS.settings = (v) => {
@@ -574,6 +680,7 @@ VIEWS.settings = (v) => {
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
+    h('h3', { class: 'lx-h3' }, LT('lang.native.label')), nativePicker(() => { applyExplanationLocale(); render(); }), h('p', { class: 'tiny' }, LT('lang.native.note')), speakerPicker(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.knowAlready')), knowsEditor(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.sessions')), num(LT('lang.set.batch'), 'batch', 3, 30, 12), num(LT('lang.set.minutes'), 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
     h('h3', { class: 'lx-h3' }, LT('lang.set.readingHelp')), tog(LT('lang.set.marks'), 'marks'), marksSettings(), tog(LT('lang.set.translit'), 'translit'), tog(LT('lang.set.pinyin'), 'pinyin'),
@@ -633,7 +740,7 @@ function partsPool(c) {
   const X = LX(c), k = N.known(UI.C, UI.L, c), out = [];
   for (const [id, x] of Object.entries(X.lex)) {
     if (!MET.includes(k.state[id])) continue;
-    const parts = N.principalParts(UI.C, c, x).filter(([l]) => l !== 'transliteration');
+    const parts = N.principalParts(UI.C, c, x).filter(q => q[2] !== 'transliteration');   // q = [label (words), value, id]
     if (parts.length) out.push({ id, parts });
   }
   return out;
@@ -644,22 +751,22 @@ VIEWS.parts = (v, r) => {
     h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
   if (!pool.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.parts.nothing', { lang: info(c).name })));
-  // every value a label takes among the words met: the distractors
-  const byLabel = {}; for (const p of partsPool(c)) for (const [l, val] of p.parts) (byLabel[l] = byLabel[l] || new Set()).add(val);
+  // every value a part (by its id) takes among the words met: the distractors
+  const byLabel = {}; for (const p of partsPool(c)) for (const [, val, id] of p.parts) (byLabel[id] = byLabel[id] || new Set()).add(val);
   const stage = h('div', { class: 'lx-stage' }); v.append(stage);
   let i = 0, right = 0; const day = today();
   const next = () => {
     stage.innerHTML = '';
     if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, '✅ ' + LT('lang.drill.score', { right, n: pool.length })), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ ' + LT('lang.drill.again')))); }
-    const p = pool[i++], x = X.lex[p.id], [label, val] = p.parts[Math.floor(Math.random() * p.parts.length)];
-    const others = qaPartsDistractors(c, p, label, val, byLabel[label]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
-    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': label });
+    const p = pool[i++], x = X.lex[p.id], [label, val, pid] = p.parts[Math.floor(Math.random() * p.parts.length)];   // label: the words shown; pid: the part's stable id (compared)
+    const others = qaPartsDistractors(c, p, pid, val, byLabel[pid]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
+    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': pid });
     if (!others.length) {   // nothing to choose among: show it and go on
       box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' →'));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
-    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: label !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(label) ? label[0].toUpperCase() + label.slice(1) + ' …?' : LT('lang.parts.its', { label })),   // the pinyin under the word would be the answer
+    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: pid !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(pid) ? label[0].toUpperCase() + label.slice(1) + ' …?' : LT('lang.parts.its', { label })),   // the pinyin under the word would be the answer
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();
@@ -864,8 +971,8 @@ function blocks(c, list) {
   return (list || []).map(b => {
     const el = block1(c, b, t);
     if (!el || !b) return el;
-    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));
-    const body = mine.length ? h('div', {}, el, notesList(mine)) : el;
+    const mine = N.contrastFor(b.notes, nativeL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));   // D19: only the learner's native language (or its type)
+    const body = mine.length ? h('div', {}, el, notesList(mine, c)) : el;
     // D18: a part the learner knows from a native / C2 language is folded into one line
     return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, '✓ ' + LT('lang.gram.familiarShow', { from: LLIST(from) })), body) : body;
   });
@@ -887,18 +994,19 @@ function block1(c, b, t) {
 }
 const REL_SIGN = { same: '=', similar: '≈', different: '≠', new: '✨', trap: '⚠️' };
 const REL_LABEL = new Proxy({}, { get: (o, r) => typeof r === 'string' && REL_SIGN[r] ? REL_SIGN[r] + ' ' + LT('lang.gram.rel.' + r) : undefined });   // lang.gram.rel.<rel>
-function notesList(notes) {
-  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, capFirst(langName(n.for))), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn('en', n.text))));
+/** Comparison notes in a list: who it is for (the native language, or its type / branch / family), how it relates, the text — foreign script in its font (c: the language on screen). */
+function notesList(notes, c = UI.lang) {
+  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, capFirst(langName(n.for))), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn(c, n.text))));
 }
-/** Comparison notes (D18): those for the learner's languages open, the whole reference set folded. */
+/** Comparison notes (D19): only those for the learner's native language — or, when it is not supported, for its branch, family or type
+ *  (N.contrastFor). No notes for other languages, no fold of them; nothing until the native language is known. */
 function notesView(c, notes, fid) {
   const all = [...(notes || []), ...((UI.prefs.aiNotes || {})[c + '|' + fid] || [])];
-  const mine = N.notesFor(UI.C, all, knowsL()), rest = all.filter(n => !mine.includes(n));
+  const nat = nativeL(), mine = N.contrastFor(all, nat);
   const wantAI = UI.L.settings.aiNotes && window.NoemaLLM?.pick?.(UI.acc);
-  const missing = knowsL().filter(k => k.code ? !all.some(n => n.for === k.code) : true);
+  const missing = nat && !all.some(n => (n.ai || nat.supported) && (n.for === nat.code || n.for === nat.name)) ? [nat] : [];   // D18: Claude / Gemini may write one for the learner's own language
   const box = h('div', { class: 'lx-notesbox' });
-  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(mine)) : null,
-    rest.length ? h('details', { class: 'lx-sec' }, h('summary', {}, '🌐 ' + LT('lang.gram.fromOthers') + ' ', h('span', { class: 'tiny' }, LNUM(rest.length))), notesList(rest)) : null,
+  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(mine, c)) : null,
     wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, '✨ ' + LT('lang.gram.notesFor', { langs: LLIST(missing.map(k => k.name || langName(k.code))) })) : null);
   return box;
 }
@@ -914,11 +1022,12 @@ What the course says:
 ${g.summary}
 
 For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || profileOf(k.code)?.name || langDisplay(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
-Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.` });
+Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.
+Write the notes in the language with code "${UI.C.explainLang}". ${N.nativeRule(nativeL())}` });
     /* i18n-ignore-end */
     const notes = (r.data.notes || []).map(n => ({ ...n, ai: true }));
     UI.prefs.aiNotes = { ...(UI.prefs.aiNotes || {}), [c + '|' + fid]: [...((UI.prefs.aiNotes || {})[c + '|' + fid] || []), ...notes] }; save();
-    btn.replaceWith(notesList(notes));
+    btn.replaceWith(notesList(notes, c));
   } catch (e) { btn.disabled = false; btn.textContent = '✨ ' + ((window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed')); }
 }
 /** Mixed text: runs of Arabic, Hebrew or Chinese script get their own span (font, direction), the rest stays as it is. */
@@ -1141,7 +1250,7 @@ function runSession(plan, { only = null } = {}) {
   next();
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
-function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
+function addProfiles(map) { UI.profMap = map; const n = N.addProfiles(UI.C, facadeProfMap(map)); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
 window.NoemaLangUI = { start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
 
 /* ---- 55_lesson.js ---- */
@@ -1162,8 +1271,8 @@ VIEWS.lesson = (v, r) => {
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
     h('div', { class: 'row lx-actions' },
-      can.length ? h('button', { class: 'btn primary', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
-      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
+      can.length ? h('button', { class: 'btn primary', 'data-icon': can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'gym' : 'plus', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
+      can.length ? h('button', { class: 'btn', 'data-icon': 'check', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (fns.includes('fn.overview')) v.append(typologyCard());
   v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
@@ -1289,7 +1398,7 @@ function feasText(c, f) {
   if (f.state === 'ready') return '🟢 ' + (f.usesBank ? LT('lang.feas.readyN', { n: f.sentences }) : LT('lang.feas.ready'));
   if (f.state === 'thin') return '🟡 ' + LT('lang.feas.thin', { n: f.sentences });
   if (f.state === 'absent') return '— ' + LT('lang.gram.absent');
-  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => LT('lang.feas.missPos', { have, need, pos: (N.POS_LABEL[pos] || pos).split(' ')[0] }));
+  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => LT('lang.feas.missPosN', { have, need, pos, posWord: (N.POS_LABEL[pos] || pos).split(' ')[0] }));
   const node = f.unlockBy?.[0] && UI.C.nodes[f.unlockBy[0]];
   return '🔒 ' + (node ? LT('lang.feas.needsNode', { node: (node.step != null ? stepLabel(node) + ' ' : '') + node.title }) : LT('lang.feas.needsWords')) + (miss.length ? ` (${LLIST(miss)})` : '');
 }
@@ -1382,10 +1491,8 @@ WIDGETS.slots = (it, done) => {
 /** The tags of a gloss line, spelled out (ACC = accusative …). */
 function legend(it) {
   const tags = uniq(it.units.filter(u => u.slot).flatMap(u => u.slot.options).flatMap(o => o.split('.').slice(1))).filter(t => /^[A-Z0-9]+$/.test(t));
-  // the names of the gloss tags are explanations: they follow the course's explanation language (lang.expl.tag.<TAG>)
-  const TAGS = ['NOM', 'ACC', 'DAT', 'GEN', 'SG', 'PL', 'DU', 'COLL', 'MASC', 'FEM', 'NEUT', 'DEF', 'INDF', 'PRS', 'PST', 'FUT', 'IND', 'SBJV', 'JUS', 'IMP', 'NFIN', 'PTCP',
-    'CONST', 'STRG', 'WEAK', 'MIX', 'CMPR', 'SPRL', 'PFV', 'IPFV', 'FORM', 'INFM', '1', '2', '3'];
-  const lab = t => TAGS.includes(t) ? LE('lang.expl.tag.' + t) : t;
+  // the names of the gloss tags are langcore's (N.TAG_LABEL, keys lc.expl.tag.<TAG>): one list of tags and words for the whole module
+  const lab = t => Object.prototype.hasOwnProperty.call(N.TAG_LABEL || {}, t) ? N.TAG_LABEL[t] : t;
   return tags.length ? '🔤 ' + tags.map(t => `${t} = ${lab(t)}`).join(' · ') : '';
 }
 /* paradigm: a table with hidden cells */
@@ -1739,7 +1846,7 @@ function deepButton(c, lid) {
 /** 🏋️ deepen on a node or lesson page: when the learner has met some of its words in this language. */
 function deepenButton(nid, c) {
   const k = N.known(UI.C, UI.L, c), met = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]) && hasDepthData(LX(c).lex[id]));
-  return met.length ? h('button', { class: 'btn small lx-deepenbtn', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
+  return met.length ? h('button', { class: 'btn small lx-deepenbtn', 'data-icon': 'gym', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);
@@ -1816,11 +1923,12 @@ function polyHome() {
   const box = h('div', { class: 'lx-polyhome' });
   box.append(todayPicker() || '');
   if (activeLangs().length > 1) box.append(h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🌐 ' + LT('lang.poly.acrossLabel') + ' '),
-    h('button', { class: 'btn small', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')),
-    ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, onclick: () => go('#/poly/' + t) }, label))));
+    h('button', { class: 'btn small', 'data-icon': 'globe', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')),
+    ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, 'data-icon': POLY_ICON[t] || 'globe', onclick: () => go('#/poly/' + t) }, label))));
   return box;
 }
 const POLY_SIGN = { which_language: '🔤', cognate_bridge: '🌉', parallel_translate: '🔀', parallel_align: '🧷', compare_rule: '⚖️' };
+const POLY_ICON = { parallel_translate: 'edit' };   // the frame's line icon of a polyglot drill (99z_frame.js data-icon; the others: globe)
 /** The polyglot drills: [type, sign + name] (lang.poly.drill.<type>). */
 const POLY_DRILLS = () => Object.keys(POLY_SIGN).map(t => [t, POLY_SIGN[t] + ' ' + LT('lang.poly.drill.' + t)]);
 
@@ -2031,7 +2139,7 @@ VIEWS.cmp = (v, r) => {
   if (r.arg === 'frame' && UI.C.frames[r.arg2]) return cmpFrame(v, r.arg2, langs, redraw);
   if (r.arg === 'c' && UI.C.concepts[r.arg2]) return cmpConcept(v, r.arg2);
   v.append(h('h1', {}, '⇄ ' + LT('lang.poly.cmpTitle')), cmpLangPicker(redraw),
-    h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🏋️ '), ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, onclick: () => go('#/poly/' + t) }, label))));
+    h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🏋️ '), ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, 'data-icon': POLY_ICON[t] || 'globe', onclick: () => go('#/poly/' + t) }, label))));
   // grammar side by side
   const fns = fnOrder().filter(f => langs.filter(c => LX(c).grammar[f]).length >= 2);
   v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.poly.grammarSide') + ' ', h('span', { class: 'tiny' }, LNUM(fns.length))),
@@ -2215,7 +2323,7 @@ async function judgeOpen(box, c, task) {
   if (!aiVendor()) { box.append(h('div', { class: 'lx-fb bad' }, '🤷 ' + LT('lang.prod.notStored') + ' ', keyHelp())); return false; }
   const wait = h('div', { class: 'tiny lx-aiwait' }, '🤖 ' + LT('lang.prod.asking')); box.append(wait);
   try {
-    const t = N.aiTask(UI.C, UI.L, c, task, { chatLang: chatLangOf() });
+    const t = N.aiTask(UI.C, UI.L, c, task, { chatLang: chatLangOf(), native: nativeL() });
     const r = await aiJSON(t); wait.remove();
     box.append(verdictView(c, r.data));
     return r.data.verdict !== 'wrong';
@@ -2288,7 +2396,7 @@ WIDGETS.compose = (it, done) => {
     if (!aiVendor()) { out.append(h('p', { class: 'tiny' }, LT('lang.prod.rubricNeedsAI') + ' '), keyHelp()); return done(ok); }
     const wait = h('div', { class: 'tiny' }, '🤖 ' + LT('lang.prod.aiReads')); out.append(wait);
     try {
-      const res = await aiJSON(N.aiTask(UI.C, UI.L, c, { ...it, kind: 'compose', answer: val }, { chatLang: chatLangOf() })); wait.remove();
+      const res = await aiJSON(N.aiTask(UI.C, UI.L, c, { ...it, kind: 'compose', answer: val }, { chatLang: chatLangOf(), native: nativeL() })); wait.remove();
       out.append(rubricView(c, val, res.data));
       const avg = ['grammar', 'vocabulary', 'spelling', 'cohesion'].reduce((a, x) => a + (res.data.aspects[x]?.score || 0), 0) / 4;
       ok = ok && avg >= 3;
@@ -2456,7 +2564,7 @@ function textBody(c, rows, { aiGloss = false, noEye = false } = {}) {
 async function aiReader(c, btn) {
   btn.disabled = true; const old = btn.textContent; btn.textContent = '✨ ' + LT('lang.gram.writing');
   try {
-    const k = N.known(UI.C, UI.L, c), t = N.readerTask(UI.C, UI.L, c, { k, chatLang: chatLangOf() });
+    const k = N.known(UI.C, UI.L, c), t = N.readerTask(UI.C, UI.L, c, { k, chatLang: chatLangOf(), native: nativeL() });
     const res = await aiJSON(t, { repairs: 2 });
     const rows = res.data.sentences.map(x => ({ r: { text: x.text, check: N.checkText(UI.C, c, x.text, k.R) }, gl: x.gloss }));
     const okRows = rows.filter(x => !x.r.check.unknown.length && x.r.check.unlearned.length <= 1);
@@ -2497,7 +2605,7 @@ function drawTutor() {
   const msgs = h('div', { class: 'lx-tmsgs', 'aria-live': 'polite' });
   const ta = h('textarea', { class: 'noema-input lx-tin', rows: 2, placeholder: LT('lang.tutor.placeholder'), 'aria-label': LT('lang.tutor.msgLabel'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } } });
   const sel = h('select', { class: 'lx-tlang', 'aria-label': LT('lang.tutor.langLabel'), onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },
-    ...uniq([UI.C.explainLang, 'en', 'el', 'de', 'ru', 'tr', 'fr', 'es', ...knowsL().map(k => k.code).filter(Boolean)]).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + capFirst(langName(x)))));
+    ...uniq([UI.C.explainLang, UI.C.masterLang, nativeL()?.code, (window.NoemaI18n?.locale || '').split('-')[0], ...N.SUPPORTED_NATIVES].filter(Boolean)).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + capFirst(langName(x)))));
   const box = h('aside', { class: 'lx-tutor', role: 'dialog', 'aria-label': LT('lang.frame.tutor') },
     h('div', { class: 'lx-thead' }, tutorFaceNow(), h('b', { class: 'lx-tname' }, tutorNameNow() || '🎓 ' + LT('lang.frame.tutor')), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn lx-tclose', title: LT('lang.tutor.close'), 'aria-label': LT('lang.tutor.closeLabel'), onclick: closeLangTutor }, '✕')),
     h('div', { class: 'lx-tintents' }, ...intents.map(x => h('button', { class: 'chip' + (x === ctx.intent ? ' on' : ''), 'data-intent': x, onclick: () => {
@@ -2548,7 +2656,7 @@ async function sendTutor(text) {
   hist.push({ role: 'user', text, t: Date.now() }); TT.busy = true; drawTutor();
   const msgs = document.querySelector('.lx-tmsgs'); msgs?.append(h('div', { class: 'lx-tmsg ai lx-typing' }, '…'));
   try {
-    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow() });
+    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow(), native: nativeL() });
     /* i18n-ignore-start (the prompt for the AI stays English; the reply language is chatLang, set in langcore.tutorTask's system prompt) */
     const convo = hist.filter(m => m.role !== 'error').map(m => `${m.role === 'user' ? 'Learner' : 'Tutor'}: ${m.text}`).join('\n\n');
     const r = await NoemaLLM.json({ acc: UI.acc, system: task.system, prompt: `The conversation so far:\n\n${convo}\n\nWrite the tutor's next message.`, schema: task.schema, name: task.name, repairs: 1, maxTokens: 6000 });
@@ -2556,7 +2664,7 @@ async function sendTutor(text) {
     const target = (r.data.target || []).filter(x => typeof x === 'string' && x.trim());
     hist.push({ role: 'assistant', text: r.data.reply, target, check: target.map(t => N.checkText(UI.C, c, t, k.R)), t: Date.now() });
     persistTutor(key, ctx, hist, r.provider);
-  } catch (e) { hist.push({ role: 'error', text: e.message || String(e) }); }
+  } catch (e) { hist.push({ role: 'error', text: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || String(e) }); }
   finally { TT.busy = false; if (TT.open && tutorKey(TT.ctx) === key) drawTutor(); }
 }
 /** Keep the conversation with the others (engine/convos.js: IndexedDB, the backup folder, the cloud). */
@@ -2576,9 +2684,9 @@ function prodLanes() {
   return h('div', { class: 'lx-prodlanes' }, h('h2', { class: 'lx-h2' }, '✍️ ' + LT('lang.view.write') + ' · 📖 ' + LT('lang.view.read')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
       h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
-      h('button', { class: 'btn small lx-towrite', onclick: () => go('#/write/' + c) }, '✍️ ' + LT('lang.view.write')),
-      h('button', { class: 'btn small lx-toread', onclick: () => go('#/read/' + c) }, '📖 ' + LT('lang.view.read')),
-      h('button', { class: 'btn ghost small lx-totutor', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.frame.tutor'))))));
+      h('button', { class: 'btn small lx-towrite', 'data-icon': 'edit', onclick: () => go('#/write/' + c) }, '✍️ ' + LT('lang.view.write')),
+      h('button', { class: 'btn small lx-toread', 'data-icon': 'book', onclick: () => go('#/read/' + c) }, '📖 ' + LT('lang.view.read')),
+      h('button', { class: 'btn ghost small lx-totutor', 'data-icon': 'chat', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.frame.tutor'))))));
 }
 const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('span', { class: 'tiny' }, '🎓 ' + LT('lang.tutor.rowLabel') + ' '),
   ...intents.map(x => h('button', { class: 'btn ghost small', 'data-intent': x, onclick: () => openLangTutor({ ...ctx, intent: x }) }, INTENT_LABEL[x])));
@@ -2892,9 +3000,11 @@ function glyphCard(c, key) {
 /* ---------- the 🔤 script lane ---------- */
 const SCRIPT_SIGN = { glyph_form: '🔣', transliterate: '🔤', vowelize: '◌َ', tone_mark: '〽️', char_compose: '🧩', trace: '✍️', spell: '⌨️', learn: '🆕' };
 /** [sign, name] of a script drill (lang.script.drill.<type>). */
+/** The frame's line icon of each script drill (99z_frame.js data-icon). */
+const SCRIPT_ICON = { glyph_form: 'doc', transliterate: 'book', vowelize: 'dots', tone_mark: 'dots', char_compose: 'doc', trace: 'doc', spell: 'doc', learn: 'doc' };
 const SCRIPT_TITLE = new Proxy({}, { get: (o, t) => typeof t === 'string' && SCRIPT_SIGN[t] ? [SCRIPT_SIGN[t], LT('lang.script.drill.' + t)] : undefined });
 function scriptHomeButtons() {
-  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', LT(N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell')));
+  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, 'data-icon': 'doc', onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', LT(N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell')));
 }
 VIEWS.script = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, M = N.scriptModule(UI.C, c), X = LX(c);
@@ -2903,8 +3013,8 @@ VIEWS.script = (v, r) => {
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
     h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
-  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
-    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
+  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, 'data-icon': SCRIPT_ICON[t] || 'doc', onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
+    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', 'data-icon': 'gym', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
   if (!M) {   // how the language is written: an explanation (lang.expl.*, the course's explanation language)
     v.append(h('p', { class: 'lx-note' }, LE(c === 'de' ? 'lang.expl.script.de' : X.language.script === 'Latn' ? 'lang.expl.script.latin' : 'lang.expl.script.other', { lang: explName(c), script: X.language.script })), drills);
     return;
@@ -3009,6 +3119,10 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   }
   const cloudAcc = acc => { try { const s = window.NoemaCloud?.session?.(); return !!s && acc === 'u_' + s.user.id; } catch (e) { return false; } };
   const toast = (m, ms = 3000) => window.Noema?.toast ? Noema.toast(m, ms) : console.log(m);
+  /** An error's words for the learner: its code's message in the UI language, else its (English) text (docs/i18n.md §6). */
+  const errW = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
+  /** A refused task's error: task.error keeps the English text (the connector, older apps), task.errorInfo { code, params } the learner's words. */
+  const taskErr = t => t.errorInfo && t.errorInfo.code && window.NoemaI18n && NoemaI18n.has('err.' + t.errorInfo.code) ? NoemaI18n.err(t.errorInfo) : t.error;
 
   /* ---------- device + cloud storage of the content ---------- */
   const ownDb = { db: null, open() { if (this.db) return Promise.resolve(this.db); return new Promise((res, rej) => { const r = indexedDB.open('noema-lite', 1); r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); }; r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error); }); } };
@@ -3116,7 +3230,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   /* ---------- the course that is open: rebuilt after a merge ---------- */
   function refresh(acc, cid, data) {
     if (UI.acc !== acc || UI.id !== cid || !UI.C) return;
-    UI.C = N.course(applyPacks(data, PACKS[acc + '|' + cid])); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) N.addProfiles(UI.C, prof);
+    UI.data = applyPacks(data, PACKS[acc + '|' + cid]); UI.C = buildCourse(UI.data); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) { UI.profMap = prof; N.addProfiles(UI.C, facadeProfMap(prof)); }   // D19: through the facade of the explanation locale
     UI.L = N.fromKV(UI.C, N.toKV(UI.C, UI.L));
     if (!document.querySelector('.lx-session')) render();
   }
@@ -3147,7 +3261,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
       if (signal?.aborted) break;
       const t = N.langNext(getRec(acc, cid) || { tasks: [] }); if (!t || t.error) break;
       try { await runTask(acc, cid, t.id, { onLog, signal }); }
-      catch (e) { onLog('⚠️ ' + t.id + ': ' + e.message); const rec = getRec(acc, cid), x = N.langTaskById(rec, t.id); if (x && !signal?.aborted) { x.status = 'refused'; x.error = String(e.message).slice(0, 300); putRec(acc, rec); } if (/key|credit|401|Stopped/i.test(e.message)) break; }
+      catch (e) { onLog('⚠️ ' + t.id + ': ' + errW(e)); const rec = getRec(acc, cid), x = N.langTaskById(rec, t.id); if (x && !signal?.aborted) { x.status = 'refused'; x.error = String(e.message).slice(0, 300); x.errorInfo = e.code ? { code: e.code, params: e.params || {} } : null; putRec(acc, rec); } if (/key|credit|401|Stopped/i.test(e.message)) break; }
     }
     return n;
   }
@@ -3182,7 +3296,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
         try {
           const ctx = ctxs[cid] = ctxs[cid] || await contentFor(acc, rec);
           const errs = N.checkLangAnswer(rec, ctx.data, task, e.data, { peers: task.kind === K.core ? await libraryData() : [] });
-          if (errs.length) { console.warn('[langjobs] answer refused', errs); task.status = 'refused'; task.error = errs.slice(0, 5).join('; '); putRec(acc, rec); }
+          if (errs.length) { console.warn('[langjobs] answer refused', errs); task.status = 'refused'; task.error = errs.slice(0, 5).join('; '); task.errorInfo = null; putRec(acc, rec); }
           else { await applyAndSave(acc, rec, ctx, task, e.data); n++; }
           done.push(r.key);
         } catch (x) { console.warn('[langjobs]', x); }
@@ -3269,13 +3383,13 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
           const { record } = await create(acc, opts);
           if (way === 'claude') {
             msg.textContent = '✨ ' + LT('lang.claude.writingCore');
-            try { await runTask(acc, record.id, 'core', { onLog: t => { msg.textContent = t; } }); } catch (e) { msg.textContent = '⚠️ ' + LT('lang.claude.staysQueued', { err: window.NoemaI18n ? NoemaI18n.err(e) : e.message }); }
+            try { await runTask(acc, record.id, 'core', { onLog: t => { msg.textContent = t; } }); } catch (e) { msg.textContent = '⚠️ ' + LT('lang.claude.staysQueued', { err: errW(e) }); }
             close(); onCreated(record); return;
           }
           box.innerHTML = '';
           box.append(h('h2', {}, '✨ ' + LT('lang.claude.waiting', { title: record.title })), h('p', {}, LT('lang.claude.waitingHow')),
             textBox(N.langMessage(record)), h('div', { class: 'row' }, h('button', { class: 'btn', onclick: e => copy(N.langMessage(record), e.currentTarget) }, '📋 ' + LT('lang.claude.copyMsg')), h('button', { class: 'btn primary', onclick: () => { close(); onCreated(record); } }, LT('lang.claude.openCourse'))));
-        } catch (e) { go1.disabled = false; msg.textContent = '⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(e) : e.message); }
+        } catch (e) { go1.disabled = false; msg.textContent = '⚠️ ' + errW(e); }
       } }, '✨ ' + LT('lang.claude.create'));
       box.append(h('h2', {}, '✨ ' + LT('lang.claude.newTitle')), h('p', { class: 'tiny' }, LT('lang.claude.newSub')),
         h('label', { class: 'lj-field' }, h('b', {}, LT('lang.claude.titleLabel')), title),
@@ -3321,14 +3435,14 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
       log));
     const open = N.langOpenTasks(rec), past = (rec.tasks || []).filter(t => t.status !== 'queued').slice(-12).reverse();
     v.append(h('h2', { class: 'lx-h2' }, LT('lang.claude.queue')), open.length ? h('div', { class: 'lj-tasks' }, ...open.map(t => taskRow(acc, C, t, say))) : h('p', { class: 'tiny' }, account && !nd.core && !nd.nodes.length ? '🎉 ' + LT('lang.claude.allWritten') : LT('lang.claude.nothingInQueue')));
-    if (past.length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.past') + ' ', h('span', { class: 'tiny' }, LNUM(past.length))), h('ul', { class: 'lx-list' }, ...past.map(t => h('li', { 'data-task': t.id }, STATUS[t.status] || t.status, ' ', h('code', {}, t.id), t.error ? h('div', { class: 'tiny' }, t.error) : null)))));
-    if ((rec.log || []).length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.wrote')), h('ul', { class: 'lx-list' }, ...rec.log.slice(-15).reverse().map(l => h('li', {}, window.NoemaI18n ? NoemaI18n.fmt.date(l.t, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) : new Date(l.t).toLocaleString(), ' — ', l.m)))));
+    if (past.length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.past') + ' ', h('span', { class: 'tiny' }, LNUM(past.length))), h('ul', { class: 'lx-list' }, ...past.map(t => h('li', { 'data-task': t.id }, STATUS[t.status] || t.status, ' ', h('code', {}, t.id), t.error ? h('div', { class: 'tiny' }, taskErr(t)) : null)))));
+    if ((rec.log || []).length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.wrote')), h('ul', { class: 'lx-list' }, ...rec.log.slice(-15).reverse().map(l => h('li', {}, window.NoemaI18n ? NoemaI18n.fmt.date(l.t, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) : new Date(l.t).toLocaleString(), ' — ', l.k && window.NoemaI18n ? '✓ ' + NoemaI18n.t(l.k, l.p) : l.m)))));   // l.m: English (the connector, older entries); l.k, l.p: the learner's words
   };
   function taskRow(acc, C, t, say) {
     const row = h('div', { class: 'lx-card lj-task', 'data-task': t.id },
       h('div', { class: 'lj-taskhead' }, h('b', {}, kindLabel[t.kind] || t.kind), ' ', h('code', {}, t.id), t.night ? h('span', { class: 'lx-badge' }, '🌙') : null, t.claimedAt ? h('span', { class: 'lx-badge ctx' }, '✍️ ' + LT('lang.claude.claimedByRun')) : null),
       h('div', { class: 'row' },
-        hasKey(acc) ? h('button', { class: 'btn small primary lj-run', onclick: async e => { e.currentTarget.disabled = true; try { await runTask(acc, C.id, t.id, { onLog: say }); } catch (x) { say('⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(x) : x.message)); } render(); } }, '▶ ' + LT('lang.claude.writeNow')) : null,
+        hasKey(acc) ? h('button', { class: 'btn small primary lj-run', onclick: async e => { e.currentTarget.disabled = true; try { await runTask(acc, C.id, t.id, { onLog: say }); } catch (x) { say('⚠️ ' + errW(x)); } render(); } }, '▶ ' + LT('lang.claude.writeNow')) : null,
         h('button', { class: 'btn small lj-copy', onclick: async e => copy(await copyTask(acc, C.id, t.id), e.currentTarget) }, '📋 ' + LT('lang.claude.copyTask')),
         h('button', { class: 'btn small lj-paste', onclick: () => pasteBox(acc, C, t, row) }, '📥 ' + LT('lang.claude.pasteAnswer'))));
     return row;
@@ -3712,7 +3826,7 @@ function speechLanes() {
   return h('div', { class: 'lx-speechlanes' }, h('h2', { class: 'lx-h2' }, '🎧 ' + LT('lang.listen.listening') + ' · 🗣️ ' + LT('lang.listen.speaking')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
       h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
-      h('button', { class: 'btn small lx-tolisten', onclick: () => go('#/listen/' + c) }, '🎧 ' + LT('lang.view.listen'))))));
+      h('button', { class: 'btn small lx-tolisten', 'data-icon': 'mic', onclick: () => go('#/listen/' + c) }, '🎧 ' + LT('lang.view.listen'))))));
 }
 /** ⚙️ Settings → 🎧: a voice per language, the speed, auto-play, “I can't listen / speak now” (today). */
 function speechSettings() {
@@ -3832,11 +3946,11 @@ const QA_FAR = new Set(['locked', 'unprepared']);
       lanes.querySelector('h2').textContent = '🧭 ' + LT('lang.qa.yourLanes');
       for (const row of lanes.querySelectorAll('.lx-lanerow')) {
         const c = row.dataset.lang, tutor = row.querySelector('.lx-totutor');
-        const gram = h('button', { class: 'btn small lx-togrammar', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
+        const gram = h('button', { class: 'btn small lx-togrammar', 'data-icon': 'grid', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
         row.querySelector('.lx-towrite')?.before(gram);
         const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
         const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).label));
-        if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
+        if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); pec.dataset.icon = 'info'; tutor ? tutor.before(pec) : row.append(pec); }
         const lis = v.querySelector(`.lx-speechlanes .lx-lanerow[data-lang="${c}"] .lx-tolisten`);   // P9: 🎧 in the same row
         if (lis) { lis.textContent = '🎧 ' + LT('lang.view.listen'); tutor ? tutor.before(lis) : row.append(lis); }
         row.append(h('div', { class: 'lx-laneacts' }, ...row.querySelectorAll(':scope > button')));
@@ -3890,6 +4004,7 @@ function qaNextLessonButton(nid, ran = []) {
 /* ---------- 🔁 principal parts: distractors that do not give the answer away ---------- */
 /** Wrong options for “its <label>?” of one word: German forms built from the same word (der / die / das + noun, the plural
     and genitive patterns, du / er forms), then the word's other principal parts, then the same label of other words. */
+/** Wrong answers for a principal part: label = the part's stable id (langcore principalParts → [words, value, id]), never its words. */
 function qaPartsDistractors(c, p, label, val, pool) {
   const lem = LX(c).lex[p.id].lemma, made = [];
   if (c === 'de') {
@@ -3901,8 +4016,8 @@ function qaPartsDistractors(c, p, label, val, pool) {
     else if (label === 'er/sie/es') made.push(stem + 't', stem + 'et', uml(stem) + 't', lem);
     else if (label === 'du') made.push(stem + 'st', stem + 'est', uml(stem) + 'st', lem);
   }
-  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // labels whose values are forms of the word   // i18n-ignore (langcore's labels, compared)
-  const own = FORM.includes(label) ? p.parts.filter(([l]) => l !== label && FORM.includes(l)).map(([, x]) => x).filter(x => x !== lem) : [];
+  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // parts (ids) whose values are forms of the word   // i18n-ignore (langcore's part ids, compared)
+  const own = FORM.includes(label) ? p.parts.filter(q => q[2] !== label && FORM.includes(q[2])).map(([, x]) => x).filter(x => x !== lem) : [];
   const seen = new Set([val]), out = [];
   const closed = c === 'de' && label === 'article';   // der / die / das: two wrong ones, nothing else
   for (const x of [...shuffle(made), ...(closed ? [] : [...shuffle(own), ...shuffle([...(pool || [])])])]) if (!seen.has(x) && x && out.length < 3) { seen.add(x); out.push(x); }
@@ -3921,11 +4036,13 @@ function qaPartsDistractors(c, p, label, val, pool) {
 const FS = () => window.NoemaShell;
 const FRAME_EMO = /(?![\u00A9\u00AE\u2122\u2190-\u21FF\u25A0-\u25FF\u2713\u2715])\p{Extended_Pictographic}(?:\uFE0F|\u20E3|[\u{1F3FB}-\u{1F3FF}]|\u200D\p{Extended_Pictographic})*\uFE0F?[ \u00A0]?/gu;
 const framePlain = t => String(t || '').replace(FRAME_EMO, '').replace(/\u25B6\s*/g, '').replace(/^\s*[\u2190-\u21FF]\s*/, '').replace(/[ \u00A0]{2,}/g, ' ').trim();
-/* the frame's line icons for the lanes and the actions the course offers (engine/art.js keys) */
+/* the frame's line icons for the lanes and the actions the course offers (engine/art.js keys): a button says its own (data-icon);
+   for the others (titles written by the course) a guess from its English words */
 const FRAME_ICON = [[/grammar|rule|point/i, 'grid'], [/writ|rewrite|translate/i, 'edit'], [/read|text/i, 'book'], [/letter|character|spelling|script|trac/i, 'doc'], [/peculiar|signs mean|what the/i, 'info'],
   [/listen|speak|say|shadow|dictat|voice/i, 'mic'], [/tutor|conversation|quiz|explain|ask/i, 'chat'], [/compare|across|bridge|which|align|holds/i, 'globe'], [/check/i, 'check'], [/claude|sentences/i, 'spark'],
   [/field|sort|map/i, 'map'], [/practi|drill|deepen|parts|mixed|round/i, 'gym'], [/setting/i, 'gear'], [/today/i, 'sun'], [/new|learn/i, 'plus']];
 const frameIcon = label => (FRAME_ICON.find(([re]) => re.test(label)) || [null, 'dots'])[1];
+const frameIconOf = b => b.dataset?.icon || frameIcon(b.textContent);
 const FRAME_TEXT = 'h1, h2, h3, h4, summary, button.btn, .lx-note, .lx-sub';   // i18n-ignore (selectors)
 const FRAME_KEEP = '.lx-w, .lx-tile, .lx-temoji, .lx-opt, .lx-prompt, .lx-glyphs, .lx-stage .lx-ex, .lx-ns, .lx-flag, .lx-laneicon, .lx-new, [lang]:not([lang|="en"]), textarea, input, select, .ns-ico';   // i18n-ignore (selectors)
 /** Chrome text without pictographs (flags, foreign words, pictures of words and exercises stay). */
@@ -3955,7 +4072,7 @@ function frameList(items, { close = null } = {}) {
     h('span', { class: 't' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge ? S.pill(it.badge, it.tone || 2) : h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'))));
 }
 /** A button of the older screen as an action: its words without pictographs, pressing the (hidden) button itself. */
-const frameAct = (b, extra = {}) => ({ label: framePlain(b.textContent) || b.title || '…', icon: frameIcon(b.textContent), disabled: b.disabled, run: () => b.click(), ...extra });
+const frameAct = (b, extra = {}) => ({ label: framePlain(b.textContent) || b.title || '…', icon: frameIconOf(b), disabled: b.disabled, run: () => b.click(), ...extra });
 const frameSheet = (title, items) => FS().sheet(title, (body, close) => body.append(frameList(items(), { close })));
 
 /** Tidy a view that was just drawn: → the actions for the frame's ⋮. */
@@ -4019,7 +4136,7 @@ function frameHome(v, acts, hold) {
     h('h2', {}, session ? go1.dataset.rest || txt : start ? start[1] : txt.replace(/^✅\s*/, '')),
     h('span', { class: 'meta' }, todays.length > 1 || UI.C.languages.length > 1 ? S.pill(todays.map(c => info(c).flag).join(' '), 1) : null),
     none ? null : h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→'));
-  const out = [head, card];
+  const out = [head, card], ask = v.querySelector('.lx-native-ask'); if (ask) out.push(ask);   // D19: “Your native language?” stays in sight
   if (go1) hold.append(go1);
   if (todayRow) {   // which languages today: on demand
     hold.append(todayRow);
