@@ -26,7 +26,41 @@
      "所",
      "套",
      "间"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "栋",
+       "座",
+       "所"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "套"
+      ],
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "measure": [
+       "间"
+      ],
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -205,7 +239,35 @@
      "间",
      "栋",
      "座"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "套",
+       "间"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "栋",
+       "座"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -338,7 +400,18 @@
     "measure": [
      "间",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "contrasts": [
     {
@@ -467,7 +540,26 @@
     "measure": [
      "扇",
      "道"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "扇",
+       "道"
+      ],
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -629,7 +721,16 @@
     "measure": [
      "扇",
      "个"
-    ]
+    ],
+    "neutralTone": "户 hu is toneless in this word (alone: hù); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -766,7 +867,18 @@
     "measure": [
      "面",
      "堵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -912,7 +1024,16 @@
     "measure": [
      "张",
      "套"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1044,7 +1165,16 @@
     "measure": [
      "把",
      "张"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1163,7 +1293,18 @@
     },
     "measure": [
      "张"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1303,7 +1444,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -1438,7 +1588,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -1563,7 +1724,18 @@
     },
     "measure": [
      "盏"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1710,7 +1882,18 @@
     "measure": [
      "本",
      "部"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1879,7 +2062,18 @@
     "measure": [
      "支",
      "枝"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2026,7 +2220,18 @@
     },
     "measure": [
      "张"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2173,7 +2378,18 @@
      "部",
      "台",
      "支"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -2313,7 +2529,42 @@
     },
     "measure": [
      "部"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "部"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "个",
+       "通"
+      ],
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "measure": [
+       "个"
+      ],
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -2473,7 +2724,16 @@
     },
     "measure": [
      "把"
-    ]
+    ],
+    "neutralTone": "匙 shi is toneless in this word (alone: chí); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2611,7 +2871,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2787,7 +3058,16 @@
     "measure": [
      "个",
      "只"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2947,7 +3227,16 @@
     "measure": [
      "个",
      "只"
-    ]
+    ],
+    "neutralTone": "璃 li is toneless in this word (alone: lí); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3062,7 +3351,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3207,7 +3505,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "whole buildings (一栋楼, 一栋房子)"
    }
   },
   {
@@ -3234,7 +3539,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "rooms (一间卧室, 一间办公室)"
    }
   },
   {
@@ -3261,7 +3573,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "doors and windows — things that swing open (一扇门, 一扇窗户)"
    }
   },
   {
@@ -3288,7 +3607,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "flat surfaces facing you: walls, mirrors, flags (一面墙, 一面镜子, 一面旗子)"
    }
   },
   {
@@ -3315,7 +3641,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "flat things that spread out: paper, tickets, tables, beds (一张纸, 一张票, 一张桌子, 一张床)"
    }
   },
   {
@@ -3342,7 +3675,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "things held by a handle: chairs, knives, keys, umbrellas (一把椅子, 一把钥匙, 一把伞); a handful (一把葱)"
    }
   },
   {
@@ -3369,7 +3709,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "books and bound volumes (一本书, 一本护照)"
    }
   },
   {
@@ -3396,7 +3743,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "long thin things: pens, cigarettes; also songs and teams (一支笔, 一支歌)"
    }
   },
   {
@@ -3423,7 +3777,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "films and written works; phones and other machines (一部电影, 一部手机)"
    }
   },
   {
@@ -3450,7 +3811,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "lamps (一盏灯)"
    }
   },
   {
@@ -3477,7 +3845,14 @@
     },
     "kind": [
      "container"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "a cup or glass of a drink (一杯茶, 一杯水)"
    }
   }
  ],

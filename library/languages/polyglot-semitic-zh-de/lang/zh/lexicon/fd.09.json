@@ -24,7 +24,11 @@
     },
     "position": [
      "sentenceFinal"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 吗 ma (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -210,7 +214,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "是 shi is toneless in this word (alone: shì); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "choices in a question"
+    ]
    }
   },
   {
@@ -345,7 +356,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "choices in a statement"
+    ]
    }
   },
   {
@@ -467,7 +487,14 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "也许不 ‘maybe not’ (他也许不来)"
    }
   },
   {
@@ -614,7 +641,14 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "可能不 ‘may not’ · 不可能 ‘cannot possibly’"
    }
   },
   {
@@ -743,7 +777,12 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": "的 de is toneless, as the particle always is",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "真的不 ‘really not’ · 不是真的 ‘not true’"
    }
   },
   {
@@ -887,7 +926,14 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "当然不 ‘of course not’"
    }
   },
   {
@@ -1033,7 +1079,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "也不 / 也没 ‘not … either’ — never *不也"
    }
   },
   {
@@ -1159,7 +1212,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "不只 ‘not only’ (不只是我)"
    }
   },
   {
@@ -1324,7 +1384,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "就不 ‘simply won’t’ (我就不去)"
    }
   }
  ]

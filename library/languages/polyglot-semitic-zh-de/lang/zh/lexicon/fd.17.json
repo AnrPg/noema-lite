@@ -21,6 +21,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -279,7 +292,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "白白的 (AA); 白花花 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -303,6 +326,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -565,7 +601,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "黑黑的 (AA); 黑乎乎 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -589,6 +635,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -900,7 +959,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "红红的 (AA); 红彤彤 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -924,6 +993,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -1158,7 +1240,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "蓝蓝的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1182,6 +1274,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -1423,7 +1528,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "绿绿的 (AA); 绿油油 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1448,6 +1563,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -1690,7 +1818,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "黄黄的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1714,6 +1852,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -1836,6 +1987,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -1953,6 +2117,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "ref": {
@@ -2074,6 +2251,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -2237,6 +2427,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -2353,6 +2556,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -2469,6 +2685,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "contrasts": [
@@ -2585,6 +2814,19 @@
     },
     "measure": {
      "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a colour word, not a place"
     }
    },
    "ref": {
@@ -2806,7 +3048,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "浅浅的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2946,7 +3198,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "深深(地) (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -3102,7 +3364,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "更不 ‘even less’ (更不想去)"
    }
   },
   {
@@ -3215,7 +3484,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "最不 ‘least’ (最不喜欢)"
    }
   },
   {
@@ -3356,7 +3632,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "比 ‘to compare, to compete’ (比一比)"
    }
   },
   {
@@ -3500,7 +3783,19 @@
     "tradPerSense": {
      "none": "traditional 一樣 for every sense"
     },
-    "toneSandhi": "yí yàng"
+    "toneSandhi": "yí yàng",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "no degree adverb",
+    "redup": {
+     "none": "not doubled (一模一样 ‘exactly alike’ is a set phrase)"
+    },
+    "attributive": "with 的"
    }
   }
  ]

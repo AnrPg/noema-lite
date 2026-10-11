@@ -126,7 +126,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -241,7 +248,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "polite"
    }
   },
   {
@@ -360,7 +374,12 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "上 shang is toneless in this word (alone: shàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -456,7 +475,12 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "上 shang is toneless in this word (alone: shàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -545,7 +569,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -689,7 +720,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -790,7 +828,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "informal"
    }
   },
   {
@@ -913,7 +958,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "informal"
    }
   },
   {
@@ -1025,7 +1077,12 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "吗 ma is toneless, as the particle always is",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -1199,7 +1256,21 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": {
+     "none": "already contains 很"
+    },
+    "redup": {
+     "none": "a phrase: not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -1340,7 +1411,21 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": {
+     "none": "a set phrase: 还 is already its degree word"
+    },
+    "redup": {
+     "none": "a set phrase: not doubled"
+    },
+    "attributive": "not before a noun"
    }
   },
   {
@@ -1535,7 +1620,41 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "叫醒",
+      "gloss": "wake someone up"
+     },
+     {
+      "kind": "direction",
+      "form": "叫来",
+      "gloss": "call over"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他叫得很响",
+    "object": [
+     "noun",
+     "two objects",
+     "noun + verb (pivot)"
+    ]
    }
   },
   {
@@ -1651,7 +1770,12 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "识 shi is toneless in this word (alone: shí); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -1761,7 +1885,12 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "识 shi is toneless in this word (alone: shí); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -1886,7 +2015,12 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "the second 谢 is toneless: xiè xie",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -2006,7 +2140,12 @@
     "tradPerSense": {
      "none": "traditional 不客氣 for every sense"
     },
-    "toneSandhi": "bú kè qi"
+    "toneSandhi": "bú kè qi",
+    "neutralTone": "气 qi is toneless in this word (alone: qì); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -2212,7 +2351,42 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "请来",
+      "gloss": "invite over"
+     },
+     {
+      "kind": "direction",
+      "form": "请进来",
+      "gloss": "ask in"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "noun + verb (pivot)"
+    ]
    }
   },
   {
@@ -2340,7 +2514,12 @@
     },
     "toneSandhi": {
      "none": "the 不 in 对不起 is toneless (duì bu qǐ): no sandhi"
-    }
+    },
+    "neutralTone": "不 bu is toneless, as it is between a verb and its complement (alone: bù)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "neutral"
    }
   },
   {
@@ -2462,7 +2641,12 @@
     },
     "toneSandhi": {
      "none": "不 stays bù before the 3rd tone of 好"
-    }
+    },
+    "neutralTone": "思 si is toneless in this word (alone: sī); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "informal"
    }
   },
   {
@@ -2577,7 +2761,14 @@
     "tradPerSense": {
      "none": "traditional 打擾一下 for every sense"
     },
-    "toneSandhi": "dǎ rǎo yí xià"
+    "toneSandhi": "dǎ rǎo yí xià",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "polite"
    }
   },
   {
@@ -2693,7 +2884,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "formality": "polite"
    }
   },
   {
@@ -2914,7 +3112,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3092,7 +3302,16 @@
     "toneSandhi": "bú before a 4th tone (不是 bú shì, 不要 bú yào); bù elsewhere",
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "it is itself the negation"
+    }
    }
   },
   {
@@ -3266,7 +3485,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "早早(地) (AA: ‘nice and early’)",
+    "attributive": "directly"
    }
   }
  ],

@@ -160,7 +160,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "after"
+    "position": "after",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "上 ‘to go up, to get on’ (上车, 上楼)"
    }
   },
   {
@@ -185,7 +192,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "面 mian is toneless in this word (alone: miàn); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -475,7 +491,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "after"
+    "position": "after",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "下 ‘to go down, to get off’ (下车, 下雨)"
    }
   },
   {
@@ -500,7 +523,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "面 mian is toneless in this word (alone: miàn); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -792,7 +824,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "after"
+    "position": "after",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -816,7 +857,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "面 mian is toneless in this word (alone: miàn); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -949,7 +999,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "面 mian is toneless in this word (alone: miàn); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1084,7 +1143,18 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1202,7 +1272,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "面 mian is toneless in this word (alone: miàn); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1329,7 +1408,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "面 mian is toneless in this word (alone: miàn); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -1466,7 +1554,18 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -1708,7 +1807,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "after"
+    "position": "after",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -1732,7 +1840,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "边 bian is toneless in this word (alone: biān); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1845,7 +1962,16 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": "边 bian is toneless in this word (alone: biān); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2100,7 +2226,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -2233,7 +2371,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "远远(地) (AA: ‘far, by far’)",
+    "attributive": "with 的"
    }
   },
   {
@@ -2257,7 +2405,18 @@
     },
     "measure": {
      "none": "a place word (方位词): it names a position and is not counted with a measure word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -2381,7 +2540,18 @@
     "measure": [
      "间",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2495,7 +2665,18 @@
     "measure": [
      "间",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "contrasts": [
     {
@@ -2621,7 +2802,18 @@
     "measure": [
      "个",
      "间"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "contrasts": [
     {
@@ -2748,7 +2940,18 @@
     },
     "measure": [
      "间"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2863,7 +3066,18 @@
     "measure": [
      "个",
      "间"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2977,7 +3191,18 @@
     "measure": [
      "个",
      "座"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "contrasts": [
     {
@@ -3102,7 +3327,14 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": "院儿 yuànr — Beijing colloquial",
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "contrasts": [
     {
@@ -3225,7 +3457,18 @@
     },
     "measure": [
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3339,7 +3582,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3456,7 +3710,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3588,7 +3851,18 @@
      "张",
      "套",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3714,7 +3988,18 @@
     },
     "measure": [
      "台"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

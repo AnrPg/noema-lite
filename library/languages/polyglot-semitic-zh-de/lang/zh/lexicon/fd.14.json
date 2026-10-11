@@ -21,7 +21,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -151,7 +164,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -285,7 +311,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -409,7 +448,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -543,7 +595,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -677,7 +742,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -826,7 +904,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -987,7 +1078,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -1119,7 +1223,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "role": "week — in the day names 星期一 … 星期六 and 星期几 ‘which day?’ (S14); ‘week’ as a unit of time is the topic of S15",
    "contrasts": [
@@ -1253,7 +1370,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1380,6 +1510,19 @@
     },
     "measure": {
      "none": "天 is itself a counter: 三天 ‘three days’ (no 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -1652,7 +1795,12 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": "里 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "夜里不 / 夜里没 — the time word comes first (他夜里不睡觉)"
    }
   },
   {
@@ -1676,7 +1824,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "上 shang is toneless in this word (alone: shàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -1805,7 +1964,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -1920,6 +2092,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2033,7 +2218,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2154,7 +2352,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "上 shang is toneless in this word (alone: shàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -2323,6 +2532,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "今儿 jīnr — Beijing colloquial",
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2464,6 +2684,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "明儿 míngr — Beijing colloquial",
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2585,6 +2816,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "昨儿 zuór — Beijing colloquial",
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2698,6 +2940,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -2832,6 +3087,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -3107,7 +3375,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "rarely negated: ‘not right away’ is 先不 / 不急着"
+    }
    }
   },
   {
@@ -3257,7 +3534,14 @@
      "preverbal",
      "sentenceInitial",
      "afterVerb"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "一会儿 yíhuìr — the usual spoken form in the north",
+    "withNeg": {
+     "none": "rarely negated"
+    }
    }
   },
   {
@@ -3421,7 +3705,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly"
    }
   },
   {
@@ -3571,7 +3867,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "总是不 ‘always fails to’ · 不总是 ‘not always’"
    }
   },
   {
@@ -3696,7 +3999,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "常常不 ‘often not’ · ‘not often’ is 不常 (rarely *不常常)"
    }
   },
   {
@@ -3829,7 +4139,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "经常不 ‘often not’ · 不经常 ‘not often’"
    }
   },
   {
@@ -3951,7 +4268,12 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": "候 hou is toneless in this word (alone: hòu); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "有时候不 ‘sometimes not’"
    }
   },
   {
@@ -4072,7 +4394,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "not negated: the negation is 没在 (他没在吃饭)"
+    }
    }
   },
   {
@@ -4233,7 +4564,11 @@
     "position": [
      "afterVerb",
      "sentenceFinal"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 了 le (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    },
    "contrasts": [
     {
@@ -4372,7 +4707,11 @@
     },
     "position": [
      "afterVerb"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 过 guo (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -4396,7 +4735,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "每 + measure word: 每个人; words that count themselves follow directly: 每天, 每年"
    }
   }
  ],

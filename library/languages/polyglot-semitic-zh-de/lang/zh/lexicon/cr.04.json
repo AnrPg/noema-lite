@@ -134,6 +134,16 @@
     },
     "toneSandhi": {
      "none": "一 keeps its first tone in ordinals: dì-yī, before any syllable"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第一 + measure word: 第一个, 第一天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -242,6 +252,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第二 + measure word: 第二个, 第二天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -337,6 +357,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第三 + measure word: 第三个, 第三天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -428,6 +458,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第四 + measure word: 第四个, 第四天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -519,6 +559,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第五 + measure word: 第五个, 第五天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -614,6 +664,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第六 + measure word: 第六个, 第六天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -705,6 +765,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第七 + measure word: 第七个, 第七天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -796,6 +866,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第八 + measure word: 第八个, 第八天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -887,6 +967,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第九 + measure word: 第九个, 第九天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -978,6 +1068,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第十 + measure word: 第十个, 第十天",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -1002,6 +1102,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "第 + number + measure word: 第三本书",
+    "ordinal": {
+     "none": "already an ordinal"
     }
    }
   },
@@ -1146,7 +1256,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "区别词 (not a predicate)",
+    "degree": "no degree adverb",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1269,7 +1391,17 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yí bàn"
+    "toneSandhi": "yí bàn",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "一半儿 yíbànr — northern",
+    "withMeasure": {
+     "none": "no measure word: 一半的人, 吃了一半"
+    },
+    "ordinal": {
+     "none": "a fraction: not counted in order"
+    }
    }
   },
   {
@@ -1420,6 +1552,19 @@
     },
     "measure": {
      "none": "counts by itself: 一刻, 三刻 (never *一个刻)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -1532,7 +1677,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    }
   },
   {
@@ -1665,7 +1823,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    }
   },
   {
@@ -1773,6 +1944,19 @@
     },
     "measure": {
      "none": "counts by itself after the number: 十周年"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   }

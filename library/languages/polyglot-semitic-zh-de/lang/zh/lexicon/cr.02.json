@@ -24,7 +24,11 @@
     },
     "position": [
      "afterVerb"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 着 zhe (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -150,6 +154,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": "候 hou is toneless in this word (alone: hòu); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -275,7 +290,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    }
   },
   {
@@ -388,7 +416,18 @@
     "measure": [
      "个",
      "件"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    }
   },
   {
@@ -521,7 +560,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    }
   },
   {
@@ -655,7 +705,38 @@
     "neg": "bu+mei",
     "separable": {
      "none": "a single verb"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "玩儿 wánr — the everyday northern form",
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "玩够",
+      "gloss": "have had enough fun"
+     },
+     {
+      "kind": "result",
+      "form": "玩累",
+      "gloss": "play till tired"
+     }
+    ],
+    "redup": "玩玩 / 玩一玩 (AA, A一A)",
+    "degreeComplement": "我们玩得很开心",
+    "object": [
+     "no object",
+     "noun"
+    ]
    }
   },
   {
@@ -769,7 +850,35 @@
     "neg": "mei",
     "separable": {
      "none": "a verb with its result (长 + 大); nothing goes inside"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "change of state"
+    ],
+    "aspect": [
+     "了"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "长不大",
+      "gloss": "never grow up"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: a change of state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -896,7 +1005,30 @@
     "neg": "bu",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": "得 de is toneless here (alone: dé)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "state"
+    ],
+    "aspect": {
+     "none": "a state verb: no aspect particle — ‘still remember’ is 还记得"
+    },
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: a state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "clause"
+    ]
    }
   },
   {
@@ -1022,7 +1154,33 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "change of state"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": {
+     "none": "takes none (忘 takes them: 忘掉, 忘不了)"
+    },
+    "redup": {
+     "none": "not doubled: a change of state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "verb"
+    ]
    }
   },
   {
@@ -1159,7 +1317,42 @@
     "neg": "bu+mei",
     "separable": {
      "none": "a single verb"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "change of state"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "忘掉",
+      "gloss": "forget completely"
+     },
+     {
+      "kind": "potential",
+      "form": "忘不了",
+      "gloss": "cannot forget"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: a change of state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "verb"
+    ]
    }
   },
   {
@@ -1273,7 +1466,18 @@
     "measure": [
      "所",
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    }
   },
   {
@@ -1398,7 +1602,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    }
   },
   {
@@ -1527,7 +1742,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    }
   },
   {
@@ -1656,7 +1884,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    }
   }
  ],

@@ -137,7 +137,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "the place word ‘here’ is 这儿 zhèr (see 这里)"
+    },
+    "withMeasure": "这 + measure word + noun: 这个人, 这本书 (colloquially also 这人)"
    }
   },
   {
@@ -278,7 +285,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "the place word ‘there’ is 那儿 nàr (see 那里)"
+    },
+    "withMeasure": "那 + measure word + noun: 那个人, 那本书 (colloquially also 那人)"
    }
   },
   {
@@ -380,7 +394,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "no measure word: 这些书 (些 is itself one)"
    }
   },
   {
@@ -482,7 +503,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "no measure word: 那些人 (些 is itself one)"
    }
   },
   {
@@ -608,6 +636,11 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "里 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": "这儿 zhèr — northern",
+    "plural": {
+     "none": "a place word: no plural"
     }
    }
   },
@@ -734,6 +767,11 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "里 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": "那儿 nàr — northern",
+    "plural": {
+     "none": "a place word: no plural"
     }
    }
   },
@@ -761,7 +799,14 @@
     },
     "kind": [
      "general"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "the general measure word: people (一个人), most objects, abstract things (一个问题) — safe when unsure"
    }
   },
   {
@@ -788,7 +833,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "people, politely (一位老师, 几位客人)"
    }
   }
  ],

@@ -156,7 +156,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": "我们 (咱们 includes the listener)"
    }
   },
   {
@@ -294,7 +301,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": "你们"
    }
   },
   {
@@ -422,6 +436,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "no plural in speech: several people are 你们 or, politely, 各位 (您们 only in writing)"
     }
    }
   },
@@ -559,7 +582,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": "他们 (also for a mixed group)"
    }
   },
   {
@@ -666,7 +696,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": "她们"
    }
   },
   {
@@ -808,7 +845,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": "它们"
    }
   },
   {
@@ -940,6 +984,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "们 men: the plural suffix 们 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "already plural"
     }
    }
   },
@@ -1067,6 +1118,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "们 men: the plural suffix 们 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "already plural"
     }
    }
   },
@@ -1183,6 +1241,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "们 men: the plural suffix 们 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "already plural"
     }
    }
   },
@@ -1297,6 +1362,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "们 men: the plural suffix 们 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "already plural"
     }
    }
   },
@@ -1405,6 +1477,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "们 men: the plural suffix 们 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "already plural"
     }
    }
   },
@@ -1514,6 +1593,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "们 men: the plural suffix 们 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "already plural"
     }
    }
   },
@@ -1709,7 +1795,31 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu"
+    "neg": "bu",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "copula"
+    ],
+    "aspect": {
+     "none": "the copula takes no aspect particle"
+    },
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: the copula"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -1880,7 +1990,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "nouns"
+    ]
    }
   },
   {
@@ -2075,7 +2194,31 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "state"
+    ],
+    "aspect": {
+     "none": "a verb of location: no aspect particle (‘is no longer here’ is 不在了 — the 了 of the sentence)"
+    },
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: a state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "place"
+    ]
    }
   },
   {
@@ -2111,7 +2254,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2274,7 +2428,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2444,7 +2609,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "男孩儿 nánháir — northern",
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2583,7 +2757,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "女孩儿 nǚháir — northern",
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2730,7 +2913,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2885,7 +3077,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "only the person is counted (一个人); ‘people’ and ‘others’ are not"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3079,7 +3282,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "友 you is toneless in this word (alone: yǒu); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3252,7 +3464,16 @@
      "个",
      "名",
      "位"
-    ]
+    ],
+    "neutralTone": "生 sheng is toneless in this word (alone: shēng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3401,7 +3622,18 @@
      "位",
      "个",
      "名"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "the title (王老师) is not counted; the person takes 位 / 个 / 名"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3722,7 +3954,15 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yí before a 4th tone (一个 yí ge), yì before the 1st–3rd tones (一本 yì běn); yī alone, in counting, in dates and ordinals"
+    "toneSandhi": "yí before a 4th tone (一个 yí ge), yì before the 1st–3rd tones (一本 yì běn); yī alone, in counting, in dates and ordinals",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "一 + measure word: 一个, 一本 (said yí gè, yì běn)",
+    "ordinal": "第一"
    }
   }
  ],

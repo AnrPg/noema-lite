@@ -21,7 +21,18 @@
     },
     "measure": [
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -159,7 +170,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -305,7 +327,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -417,7 +450,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -566,7 +610,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "头 tou: the noun suffix 头 is toneless (alone: tóu)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -697,7 +750,18 @@
     "measure": [
      "节",
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -815,7 +879,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -942,7 +1017,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1052,7 +1138,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1164,7 +1261,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1287,7 +1395,18 @@
     "measure": [
      "个",
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1409,7 +1528,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1525,7 +1655,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1637,7 +1778,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1743,7 +1895,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1849,7 +2012,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1961,7 +2135,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2069,7 +2254,18 @@
     "measure": [
      "把",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2184,7 +2380,18 @@
     "measure": [
      "把",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2306,7 +2513,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2422,7 +2640,16 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": "药 yao is toneless in this word (alone: yào); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2544,7 +2771,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2666,7 +2904,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2784,7 +3033,18 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2909,7 +3169,16 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": "麻 ma is toneless in this word (alone: má); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3026,7 +3295,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3133,7 +3413,18 @@
     "measure": [
      "把",
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3270,7 +3561,16 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": "卜 bo is toneless in this word (alone: bǔ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3391,7 +3691,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3509,7 +3820,18 @@
     "measure": [
      "棵",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3617,7 +3939,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3735,7 +4068,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3853,7 +4197,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

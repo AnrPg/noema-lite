@@ -150,7 +150,20 @@
     "measure": [
      "个",
      "项"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "an abstract noun, not a place"
+    }
    }
   },
   {
@@ -284,7 +297,29 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "auxiliary (+ verb)"
+    ],
+    "aspect": [
+     "过"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": "打算打算 (ABAB: ‘think it over’)",
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "verb"
+    ]
    }
   },
   {
@@ -402,7 +437,18 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    }
   },
   {
@@ -525,7 +571,45 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "预订好",
+      "gloss": "have booked"
+     },
+     {
+      "kind": "result",
+      "form": "预订到",
+      "gloss": "manage to book"
+     },
+     {
+      "kind": "potential",
+      "form": "预订不到",
+      "gloss": "cannot get a booking"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "我们预订得很早",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -628,7 +712,18 @@
     },
     "measure": [
      "本"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    }
   },
   {
@@ -746,7 +841,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "李 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    }
   },
   {
@@ -876,7 +980,18 @@
     },
     "measure": {
      "none": "a place word: it is not counted"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    }
   },
   {
@@ -1005,8 +1120,34 @@
      {
       "verb": "出",
       "object": "国",
-      "example": "出过国"
+      "example": "出过国",
+      "inserts": "了 · 过 (出过国)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
     ]
    }
   },
@@ -1133,7 +1274,33 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "参观完",
+      "gloss": "finish the visit"
+     }
+    ],
+    "redup": "参观参观 (ABAB)",
+    "degreeComplement": "我们参观得很仔细",
+    "object": [
+     "place"
+    ]
    }
   },
   {
@@ -1259,7 +1426,32 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -1382,7 +1574,18 @@
      "个",
      "位",
      "名"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    }
   },
   {
@@ -1497,7 +1700,18 @@
      "个",
      "位",
      "名"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    }
   },
   {
@@ -1628,6 +1842,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -1748,6 +1975,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -1875,6 +2115,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -2048,7 +2301,32 @@
     "neg": "bu",
     "separable": {
      "none": "a single verb (as ‘will’ or ‘can’ it stands before another verb)"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "auxiliary (+ verb)"
+    ],
+    "aspect": {
+     "none": "an auxiliary: no aspect particle (the verb after it may take one)"
+    },
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: an auxiliary"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "verb",
+     "noun"
+    ]
    }
   }
  ]

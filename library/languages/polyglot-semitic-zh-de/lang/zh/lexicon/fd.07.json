@@ -195,7 +195,49 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "吃完",
+      "gloss": "finish eating"
+     },
+     {
+      "kind": "result",
+      "form": "吃饱",
+      "gloss": "eat one’s fill"
+     },
+     {
+      "kind": "potential",
+      "form": "吃不下",
+      "gloss": "cannot eat any more"
+     },
+     {
+      "kind": "potential",
+      "form": "吃不了",
+      "gloss": "cannot finish it"
+     }
+    ],
+    "redup": "吃吃看 (AA + 看: ‘try eating’)",
+    "degreeComplement": "他吃得很快 / 他吃饭吃得很快",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -333,7 +375,44 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "喝完",
+      "gloss": "finish drinking"
+     },
+     {
+      "kind": "result",
+      "form": "喝醉",
+      "gloss": "get drunk"
+     },
+     {
+      "kind": "potential",
+      "form": "喝不了",
+      "gloss": "cannot drink it all"
+     }
+    ],
+    "redup": "喝喝茶 (AA)",
+    "degreeComplement": "他喝得太多了",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -478,7 +557,45 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "买到",
+      "gloss": "manage to buy"
+     },
+     {
+      "kind": "result",
+      "form": "买好",
+      "gloss": "have bought"
+     },
+     {
+      "kind": "potential",
+      "form": "买不到",
+      "gloss": "cannot get it"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "这件衣服买得很便宜",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -631,7 +748,33 @@
     "separable": {
      "none": "not a verb-object word: it does not split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": "欢 huan is toneless in this word (alone: huān); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "psych (takes 很)"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "喜欢上",
+      "gloss": "come to like, fall for"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "喜欢得不得了 ‘like it terribly’",
+    "object": [
+     "noun",
+     "verb"
+    ]
    }
   },
   {
@@ -808,7 +951,44 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action",
+     "auxiliary (+ verb)"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "要到",
+      "gloss": "manage to get"
+     },
+     {
+      "kind": "direction",
+      "form": "要回来",
+      "gloss": "ask back, get back"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "verb",
+     "noun + verb (pivot)"
+    ]
    }
   },
   {
@@ -989,7 +1169,52 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "psych (takes 很)",
+     "auxiliary (+ verb)"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "想起来",
+      "gloss": "recall"
+     },
+     {
+      "kind": "direction",
+      "form": "想出来",
+      "gloss": "think up"
+     },
+     {
+      "kind": "result",
+      "form": "想到",
+      "gloss": "think of"
+     },
+     {
+      "kind": "potential",
+      "form": "想不起来",
+      "gloss": "cannot recall"
+     }
+    ],
+    "redup": "想想 / 想一想 (AA, A一A)",
+    "degreeComplement": "你想得太多了",
+    "object": [
+     "noun",
+     "verb",
+     "clause"
+    ]
    }
   },
   {
@@ -1131,10 +1356,37 @@
      {
       "verb": "做",
       "object": "饭",
-      "example": "做了一顿饭"
+      "example": "做了一顿饭",
+      "inserts": "了 · 好 · a measure (做了一顿饭, 做好饭)"
      }
     ],
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "做好饭",
+      "gloss": "have the meal ready (the result goes inside)"
+     }
+    ],
+    "redup": "做做饭 (AAB)",
+    "degreeComplement": "她做饭做得很好",
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1160,7 +1412,34 @@
      "个",
      "片",
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "片",
+       "块"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "个"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1287,7 +1566,18 @@
     },
     "measure": [
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1443,7 +1733,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1586,7 +1887,18 @@
     "measure": [
      "块",
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1749,7 +2061,18 @@
     },
     "measure": [
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1890,7 +2213,18 @@
     },
     "measure": [
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2000,7 +2334,18 @@
     },
     "measure": [
      "碗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -2123,7 +2468,33 @@
     "measure": [
      "碗",
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "碗"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "顿"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -2301,7 +2672,18 @@
     },
     "measure": [
      "碗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2478,7 +2860,18 @@
     "measure": [
      "份",
      "盘"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2639,7 +3032,18 @@
     "measure": [
      "个",
      "种"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2759,7 +3163,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2876,7 +3291,18 @@
     },
     "measure": {
      "none": "sugar as a substance is measured, not counted: 一点儿糖, 一勺糖 ‘a spoonful’; a lump or a sweet is 一块糖 / 一颗糖"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3018,7 +3444,18 @@
     },
     "measure": {
      "none": "a mass noun, measured rather than counted: 一点儿盐 ‘a little salt’, 一勺盐 ‘a spoonful’, 一袋盐 ‘a bag of salt’"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3156,7 +3593,18 @@
     "measure": [
      "杯",
      "瓶"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3319,7 +3767,18 @@
     "measure": [
      "杯",
      "壶"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3526,7 +3985,18 @@
     },
     "measure": [
      "杯"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3653,7 +4123,18 @@
      "杯",
      "瓶",
      "盒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3772,7 +4253,16 @@
     "measure": [
      "杯",
      "瓶"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "果汁儿 guǒzhīr — northern",
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3887,7 +4377,16 @@
     "measure": [
      "杯",
      "瓶"
-    ]
+    ],
+    "neutralTone": "萄 tao is toneless in this word (alone: táo); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4016,7 +4515,18 @@
      "杯",
      "瓶",
      "罐"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4129,7 +4639,18 @@
     },
     "measure": [
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4242,7 +4763,18 @@
     },
     "measure": [
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4355,7 +4887,18 @@
     },
     "measure": [
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4471,7 +5014,14 @@
     },
     "kind": [
      "container"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "a bowl of food (一碗饭, 一碗汤)"
    }
   },
   {
@@ -4499,7 +5049,12 @@
     "kind": [
      "partitive",
      "unit"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "块儿 kuàir — northern (一块儿蛋糕)",
+    "counts": "pieces and lumps (一块蛋糕, 一块肉); money: yuan in speech (五块钱)"
    }
   },
   {
@@ -4526,7 +5081,14 @@
     },
     "kind": [
      "container"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "a bottle of (一瓶水, 一瓶啤酒)"
    }
   },
   {
@@ -4554,7 +5116,14 @@
     "kind": [
      "partitive",
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "portions and copies: a serving, a newspaper, a job (一份沙拉, 一份报纸, 一份工作)"
    }
   }
  ]

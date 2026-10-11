@@ -22,7 +22,18 @@
     "measure": [
      "颗",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 刺山柑 (title for Capparis spinosa, Wikidata Q156251); Wiktionary has no entry (its 酸豆 lists “pickled caper”)",
@@ -158,7 +169,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "market name (not in Wiktionary or CC-CEDICT); zh.wikipedia files the plant as 刺角瓜 (Wikidata Q41318)",
@@ -265,7 +287,18 @@
     "measure": [
      "颗",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -384,7 +417,18 @@
     "measure": [
      "个",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "descriptive standard name (not in Wiktionary or CC-CEDICT)",
@@ -500,7 +544,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -606,7 +661,18 @@
     "measure": [
      "张",
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -716,7 +782,18 @@
     "measure": [
      "根",
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -840,7 +917,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -946,7 +1034,34 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "根"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "颗",
+       "粒"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1087,7 +1202,18 @@
     "measure": [
      "个",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 宝塔花菜 (title for Wikidata Q1775431, “又称罗马花椰菜”); Wiktionary has no entry",
@@ -1200,7 +1326,18 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1299,7 +1436,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 哈瓦那辣椒 (title for Wikidata Q764375); Wiktionary has no entry",
@@ -1405,7 +1553,18 @@
     },
     "measure": [
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1516,7 +1675,18 @@
     "measure": [
      "根",
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1622,7 +1792,18 @@
     "measure": [
      "片",
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1750,7 +1931,18 @@
     },
     "measure": [
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 石莼属 (Ulva, Wikidata Q1109330), species 石莼 (Ulva lactuca); Wiktionary has no entry",
@@ -1855,7 +2047,18 @@
     "measure": [
      "棵",
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1977,7 +2180,18 @@
     "measure": [
      "颗",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2093,7 +2307,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "market and seed-catalogue name (not in Wiktionary, CC-CEDICT or zh.wikipedia)",
@@ -2204,7 +2429,18 @@
     },
     "measure": [
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 羊栖菜 (title for Wikidata Q1204264); Wiktionary has no entry",
@@ -2310,7 +2546,18 @@
     "measure": [
      "串",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2437,7 +2684,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 金絲瓜 (title for Wikidata Q2142043); Wiktionary has no entry",
@@ -2548,7 +2806,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "CC-CEDICT (MDBG): 小松菜 xiao3 song1 cai4 ‘komatsuna’; zh.wikipedia (Wikidata Q4383692); Wiktionary has no Chinese entry",
@@ -2655,7 +2924,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 水菜 (title for Wikidata Q50912348), “也称京菜、京水、京水菜、京都水菜”; Wiktionary has no entry",
@@ -2759,7 +3039,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2874,7 +3165,18 @@
     },
     "measure": [
      "朵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "transparent compound 南瓜 + 花 (not in Wiktionary or CC-CEDICT); the usual Chinese name for squash blossoms as food",
@@ -2995,7 +3297,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3107,7 +3420,18 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "CC-CEDICT (MDBG): 玉米筍|玉米笋 yu4 mi3 sun3 ‘baby corn’; zh.wikipedia (Wikidata Q4838440); Wiktionary has no entry",
@@ -3206,7 +3530,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

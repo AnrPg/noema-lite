@@ -197,7 +197,34 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "change of state"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "到不了",
+      "gloss": "cannot get there"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: a change of state"
+    },
+    "degreeComplement": "他到得很早",
+    "object": [
+     "place"
+    ]
    }
   },
   {
@@ -348,7 +375,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -528,7 +564,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "跟 ‘to follow’ (跟我来)"
    }
   },
   {
@@ -678,7 +721,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "给 ‘to give’ (给他一本书)"
    }
   },
   {
@@ -848,7 +898,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "为 wéi ‘to act as, to be’ (written: 以…为…)"
    }
   },
   {
@@ -971,7 +1028,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -1110,7 +1176,14 @@
     "toneSandhi": "yì qǐ",
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "不一起 ‘not together’ (我们不一起去)"
    }
   },
   {
@@ -1137,7 +1210,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "businesses and institutions: shops, restaurants, hotels, companies (一家商店, 一家饭馆)"
    }
   },
   {
@@ -1164,7 +1244,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "long, narrow or winding things: streets, rivers, fish, trousers (一条街, 一条鱼, 一条裤子)"
    }
   },
   {
@@ -1191,7 +1278,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "institutions in their buildings: schools, hospitals, universities (一所大学)"
    }
   },
   {
@@ -1216,7 +1310,18 @@
     "measure": [
      "所",
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1330,7 +1435,18 @@
     },
     "measure": [
      "所"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1455,7 +1571,20 @@
     "measure": [
      "份",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "an activity, not a place: 在工作 means ‘is working’"
+    }
    },
    "contrasts": [
     {
@@ -1629,7 +1758,18 @@
     },
     "measure": [
      "间"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1742,7 +1882,18 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1860,7 +2011,18 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1973,7 +2135,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2099,7 +2272,16 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "饭馆儿 fànguǎnr — northern",
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2218,7 +2400,16 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "咖啡馆儿 kāfēiguǎnr — northern",
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2333,7 +2524,18 @@
      "家",
      "所",
      "座"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2446,7 +2648,18 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2560,7 +2773,18 @@
     "measure": [
      "家",
      "所"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2668,7 +2892,18 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2777,7 +3012,18 @@
     "measure": [
      "个",
      "座"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2897,7 +3143,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3010,7 +3267,18 @@
     },
     "measure": [
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3146,7 +3414,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3262,7 +3541,18 @@
     },
     "measure": [
      "座"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3376,7 +3666,18 @@
     "measure": [
      "座",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3490,7 +3791,16 @@
     "measure": [
      "个",
      "座"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3613,7 +3923,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3830,7 +4151,14 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": "离 ‘to leave, to part from’ (离家)"
    }
   }
  ],

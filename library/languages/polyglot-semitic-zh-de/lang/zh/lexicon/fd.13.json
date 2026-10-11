@@ -200,7 +200,40 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "去成",
+      "gloss": "manage to go"
+     },
+     {
+      "kind": "potential",
+      "form": "去不了",
+      "gloss": "cannot go"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他去得很早",
+    "object": [
+     "place",
+     "verb"
+    ]
    }
   },
   {
@@ -379,7 +412,40 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "来不了",
+      "gloss": "cannot come"
+     },
+     {
+      "kind": "potential",
+      "form": "来得及",
+      "gloss": "be in time"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "你来得正好",
+    "object": [
+     "place",
+     "noun"
+    ]
    }
   },
   {
@@ -600,7 +666,45 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "走进 / 走出",
+      "gloss": "walk in / out"
+     },
+     {
+      "kind": "result",
+      "form": "走累",
+      "gloss": "walk till tired"
+     },
+     {
+      "kind": "potential",
+      "form": "走不动",
+      "gloss": "cannot walk any further"
+     }
+    ],
+    "redup": "走走 (AA: ‘take a stroll’)",
+    "degreeComplement": "他走得很快",
+    "object": [
+     "no object",
+     "place"
+    ]
    }
   },
   {
@@ -760,7 +864,45 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "跑过来 / 跑出去",
+      "gloss": "run over / run out"
+     },
+     {
+      "kind": "result",
+      "form": "跑累",
+      "gloss": "run till tired"
+     },
+     {
+      "kind": "potential",
+      "form": "跑不动",
+      "gloss": "cannot run any more"
+     }
+    ],
+    "redup": "跑跑 (AA)",
+    "degreeComplement": "他跑得很快",
+    "object": [
+     "no object",
+     "place"
+    ]
    }
   },
   {
@@ -918,10 +1060,37 @@
      {
       "verb": "开",
       "object": "车",
-      "example": "开了两个小时车"
+      "example": "开了两个小时车",
+      "inserts": "了 · 过 · a length (开了两个小时车)"
      }
     ],
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "开不了车",
+      "gloss": "cannot drive (the potential goes inside)"
+     }
+    ],
+    "redup": "开开车 (AAB)",
+    "degreeComplement": "他开车开得很稳",
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1145,7 +1314,46 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "开开",
+      "gloss": "get it open (开开门)"
+     },
+     {
+      "kind": "direction",
+      "form": "开走",
+      "gloss": "drive away"
+     },
+     {
+      "kind": "potential",
+      "form": "开不开",
+      "gloss": "cannot open it"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他开得很快",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -1300,7 +1508,33 @@
     "separable": {
      "none": "not a verb-object word: it does not split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1438,7 +1672,33 @@
     "separable": {
      "none": "not a verb-object word: it does not split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1611,7 +1871,39 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "回来 / 回去",
+      "gloss": "come / go back"
+     },
+     {
+      "kind": "potential",
+      "form": "回不去",
+      "gloss": "cannot go back"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他回得很晚",
+    "object": [
+     "place"
+    ]
    }
   },
   {
@@ -1750,7 +2042,34 @@
     "separable": {
      "none": "not a verb-object word: it does not split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "回得来 / 回不来",
+      "gloss": "can / cannot get back"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他回来得很晚",
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1902,7 +2221,41 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "进来 / 进去",
+      "gloss": "come / go in"
+     },
+     {
+      "kind": "potential",
+      "form": "进不去",
+      "gloss": "cannot get in"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "place"
+    ]
    }
   },
   {
@@ -2077,7 +2430,42 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "出来 / 出去",
+      "gloss": "come / go out"
+     },
+     {
+      "kind": "potential",
+      "form": "出不去",
+      "gloss": "cannot get out"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "place",
+     "noun"
+    ]
    }
   },
   {
@@ -2215,7 +2603,37 @@
     "separable": {
      "none": "not a verb-object word: it does not split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "离不开",
+      "gloss": "cannot do without"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "place",
+     "noun"
+    ]
    }
   },
   {
@@ -2395,7 +2813,44 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "留下",
+      "gloss": "stay on; leave behind"
+     },
+     {
+      "kind": "result",
+      "form": "留住",
+      "gloss": "get someone to stay"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object",
+     "noun",
+     "noun + verb (pivot)"
+    ]
    }
   },
   {
@@ -2573,7 +3028,43 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "待不住",
+      "gloss": "cannot stay put"
+     },
+     {
+      "kind": "direction",
+      "form": "待下去",
+      "gloss": "stay on"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object",
+     "place"
+    ]
    }
   },
   {
@@ -2762,7 +3253,39 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "等到",
+      "gloss": "wait until"
+     },
+     {
+      "kind": "potential",
+      "form": "等不及",
+      "gloss": "cannot wait"
+     }
+    ],
+    "redup": "等等 / 等一等 (AA, A一A)",
+    "degreeComplement": "他等得很着急",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -2908,7 +3431,44 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "坐下",
+      "gloss": "sit down"
+     },
+     {
+      "kind": "result",
+      "form": "坐好",
+      "gloss": "sit properly"
+     },
+     {
+      "kind": "potential",
+      "form": "坐不下",
+      "gloss": "there is no room to sit"
+     }
+    ],
+    "redup": "坐坐 (AA: ‘drop in for a while’)",
+    "degreeComplement": "他坐得很直",
+    "object": [
+     "place",
+     "noun"
+    ]
    }
   },
   {
@@ -3043,7 +3603,41 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "骑上",
+      "gloss": "get on (a bike, a horse)"
+     },
+     {
+      "kind": "direction",
+      "form": "骑走",
+      "gloss": "ride off"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他骑得很快",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -3067,7 +3661,18 @@
     },
     "measure": [
      "辆"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -3200,7 +3805,18 @@
     },
     "measure": [
      "辆"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -3326,7 +3942,18 @@
     "measure": [
      "列",
      "趟"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3446,7 +4073,34 @@
     },
     "measure": [
      "架"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "架"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "班",
+       "趟"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3579,7 +4233,18 @@
     },
     "measure": [
      "辆"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3698,7 +4363,18 @@
     },
     "measure": [
      "辆"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -3869,7 +4545,18 @@
     "measure": [
      "辆",
      "部"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -4034,7 +4721,18 @@
     },
     "measure": [
      "辆"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4154,7 +4852,18 @@
      "条",
      "艘",
      "只"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4441,10 +5150,33 @@
      {
       "verb": "走",
       "object": "路",
-      "example": "走了很多路"
+      "example": "走了很多路",
+      "inserts": "了 · an amount or a length (走了很多路, 走了半个小时路)"
      }
     ],
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": {
+     "none": "the results go with 走 (走不动)"
+    },
+    "redup": "走走路 (AAB)",
+    "degreeComplement": "他走路走得很快",
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -4470,7 +5202,25 @@
     },
     "measure": [
      "张"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "张"
+      ],
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4620,7 +5370,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "vehicles on wheels: cars, buses, bikes (一辆车, 一辆自行车)"
    }
   },
   {
@@ -4647,7 +5404,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "planes and machines on a frame: planes, pianos (一架飞机, 一架钢琴)"
    }
   },
   {
@@ -4674,7 +5438,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "trains (一列火车); rows and lines"
    }
   },
   {
@@ -4701,7 +5472,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "ships and boats (一艘船)"
    }
   },
   {
@@ -4840,7 +5618,11 @@
     },
     "position": [
      "sentenceFinal"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 吧 ba (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -5013,7 +5795,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "it is itself a negation (‘don’t’)"
+    }
    }
   },
   {
@@ -5161,7 +5952,29 @@
     },
     "neg": {
      "none": "a fixed request (‘wait a moment’), not negated — ‘don’t wait’ is 别等了"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "等一下儿 děng yíxiàr — northern",
+    "verbKind": [
+     "action"
+    ],
+    "aspect": {
+     "none": "a set request: no aspect particle"
+    },
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
+    ]
    }
   }
  ],

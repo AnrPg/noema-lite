@@ -161,7 +161,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "大大的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -339,7 +349,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "小小的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -518,7 +538,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "长长的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -666,7 +696,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "短短的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -812,7 +852,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "高高的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1037,7 +1087,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "好好(儿) (AA: ‘properly’, before a verb: 好好学习)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1202,7 +1262,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1359,7 +1431,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1513,7 +1597,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1637,7 +1733,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled (年纪轻轻 ‘so young’ is the set phrase)"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1827,7 +1935,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1999,7 +2119,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "热热的 (AA); 热乎乎 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2165,7 +2295,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "冷冰冰 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2303,7 +2443,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "和 huo is toneless in this word (alone: hé); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "暖暖和和 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -2464,7 +2612,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "亮 liang is toneless in this word (alone: liàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "漂漂亮亮 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -2609,7 +2765,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -2796,7 +2964,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "美美的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2928,7 +3106,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3104,7 +3294,19 @@
     ],
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -3246,7 +3448,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    },
    "contrasts": [
     {
@@ -3435,7 +3649,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3610,7 +3836,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "宜 yi is toneless in this word (alone: yí); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3767,7 +4003,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -3925,7 +4173,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "高高兴兴 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -4062,7 +4320,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "开开心心 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -4225,7 +4493,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4380,7 +4660,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4554,7 +4846,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4694,7 +4998,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4820,7 +5136,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -5007,7 +5335,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "快快(地) (AA: ‘quickly’)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -5164,7 +5502,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "慢慢(地) (AA: ‘slowly’, 慢慢吃)",
+    "attributive": "directly or with 的"
    }
   }
  ]

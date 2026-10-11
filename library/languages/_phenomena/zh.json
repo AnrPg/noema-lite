@@ -775,7 +775,8 @@
    "record": "pinyin without a mark on the toneless syllable",
    "model": {
     "wordFields": [
-     "pinyin"
+     "pinyin",
+     "features.neutralTone"
     ],
     "paradigm": [],
     "grammar": [
@@ -787,7 +788,7 @@
     "other": "pinyin stores toneless syllables without a mark (xiè xie) P4: tone_mark has the neutral tone (5)."
    },
    "status": "partial",
-   "gap": "Regional readings (Taiwan full tones) cannot be stored.",
+   "gap": "Regional readings (Taiwan full tones) cannot be stored as a second pinyin; features.neutralTone names the toneless syllable and says when Taiwan speech keeps the full tone.",
    "when": "fd.00"
   },
   {
@@ -925,7 +926,8 @@
    "record": "variants: the erhua form with its pinyin and region; a separate lexeme when the meaning changes",
    "model": {
     "wordFields": [
-     "variants"
+     "variants",
+     "features.erhua"
     ],
     "paradigm": [],
     "grammar": [
@@ -936,7 +938,7 @@
     "other": "variants with region on zh:zheli, zh:nali.there, zh:nali, zh:yidian (一点儿), zh:yihui (一会儿); validator accepts erhua pinyin (nǎr); variants is a shared field, not a declared parameter (not every word has one)"
    },
    "status": "partial",
-   "gap": "Only 5 words have their erhua variant (有点儿, 一下儿, 一块儿 … are not in the course yet), and the variant is never used in the bank or accepted in answers; no declared parameter records erhua for every word.",
+   "gap": "Every word now states its 儿 form (wordFeatures erhua, R3), but the forms are never used in the bank or accepted in answers, and 有点儿, 一下儿, 一块儿 … are not in the course yet.",
    "when": "fd.03"
   },
   {

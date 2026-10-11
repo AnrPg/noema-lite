@@ -127,6 +127,18 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": {
+     "none": "zero does not count things: it fills gaps inside numbers (一百零一)"
+    },
+    "ordinal": {
+     "none": "zero has no ordinal"
     }
    }
   },
@@ -282,7 +294,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": {
+     "none": "not before a measure word: 两个, not *二个 (but 十二个, 二十个)"
+    },
+    "ordinal": "第二"
    }
   },
   {
@@ -463,6 +485,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "两 + measure word: 两个人",
+    "ordinal": {
+     "none": "the ordinal is 第二 (from 二), never *第两"
     }
    }
   },
@@ -571,7 +603,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "三 + measure word: 三个人",
+    "ordinal": "第三"
    }
   },
   {
@@ -679,7 +719,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "四 + measure word: 四个人",
+    "ordinal": "第四"
    }
   },
   {
@@ -779,7 +827,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "五 + measure word: 五个人",
+    "ordinal": "第五"
    }
   },
   {
@@ -879,7 +935,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "六 + measure word: 六个人",
+    "ordinal": "第六"
    }
   },
   {
@@ -986,7 +1050,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "七 + measure word: 七个人",
+    "ordinal": "第七"
    }
   },
   {
@@ -1086,7 +1158,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "八 + measure word: 八个人",
+    "ordinal": "第八"
    }
   },
   {
@@ -1186,7 +1266,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "九 + measure word: 九个人",
+    "ordinal": "第九"
    }
   },
   {
@@ -1286,7 +1374,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十 + measure word: 十个人",
+    "ordinal": "第十"
    }
   },
   {
@@ -1311,7 +1407,15 @@
     },
     "toneSandhi": {
      "none": "一 at the end of a number keeps yī"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十一 + measure word: 十一个人",
+    "ordinal": "第十一"
    }
   },
   {
@@ -1336,7 +1440,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十二 + measure word: 十二个人 (here 二, never 两)",
+    "ordinal": "第十二"
    }
   },
   {
@@ -1361,7 +1473,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十三 + measure word: 十三个人",
+    "ordinal": "第十三"
    }
   },
   {
@@ -1386,7 +1506,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十四 + measure word: 十四个人",
+    "ordinal": "第十四"
    }
   },
   {
@@ -1411,7 +1539,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十五 + measure word: 十五个人",
+    "ordinal": "第十五"
    }
   },
   {
@@ -1436,7 +1572,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十六 + measure word: 十六个人",
+    "ordinal": "第十六"
    }
   },
   {
@@ -1461,7 +1605,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十七 + measure word: 十七个人",
+    "ordinal": "第十七"
    }
   },
   {
@@ -1486,7 +1638,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十八 + measure word: 十八个人",
+    "ordinal": "第十八"
    }
   },
   {
@@ -1511,7 +1671,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "十九 + measure word: 十九个人",
+    "ordinal": "第十九"
    }
   },
   {
@@ -1536,7 +1704,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "二十 + measure word: 二十个人 (here 二, never 两)",
+    "ordinal": "第二十"
    }
   },
   {
@@ -1561,7 +1737,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "三十 + measure word: 三十个人",
+    "ordinal": "第三十"
    }
   },
   {
@@ -1586,7 +1770,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "四十 + measure word: 四十个人",
+    "ordinal": "第四十"
    }
   },
   {
@@ -1611,7 +1803,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "五十 + measure word: 五十个人",
+    "ordinal": "第五十"
    }
   },
   {
@@ -1636,7 +1836,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "六十 + measure word: 六十个人",
+    "ordinal": "第六十"
    }
   },
   {
@@ -1661,7 +1869,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "七十 + measure word: 七十个人",
+    "ordinal": "第七十"
    }
   },
   {
@@ -1686,7 +1902,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "八十 + measure word: 八十个人",
+    "ordinal": "第八十"
    }
   },
   {
@@ -1711,7 +1935,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "九十 + measure word: 九十个人",
+    "ordinal": "第九十"
    }
   },
   {
@@ -1809,7 +2041,15 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yì bǎi"
+    "toneSandhi": "yì bǎi",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "一百 + measure word: 一百个人",
+    "ordinal": "第一百"
    }
   },
   {
@@ -1908,7 +2148,15 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yì qiān"
+    "toneSandhi": "yì qiān",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "一千 + measure word: 一千个人",
+    "ordinal": "第一千"
    }
   },
   {
@@ -2049,7 +2297,21 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": {
+     "none": "already contains 很"
+    },
+    "redup": {
+     "none": "a phrase: not doubled"
+    },
+    "attributive": "directly"
    }
   },
   {
@@ -2224,7 +2486,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "多多 (AA, in set phrases: 多多关照)",
+    "attributive": "not before a noun"
    }
   },
   {
@@ -2419,7 +2691,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "not before a noun"
    }
   },
   {
@@ -2533,7 +2817,21 @@
     },
     "toneSandhi": {
      "none": "不 stays bù before the 1st tone of 多"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": {
+     "none": "a negated phrase: 不 already modifies 多"
+    },
+    "redup": {
+     "none": "a phrase: not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -2721,7 +3019,15 @@
     "tradPerSense": {
      "none": "traditional 一點 for every sense"
     },
-    "toneSandhi": "yì diǎn"
+    "toneSandhi": "yì diǎn",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "一点儿 yìdiǎnr — northern; the south and Taiwan say 一点",
+    "predicative": "区别词 (not a predicate)",
+    "degree": "no degree adverb",
+    "redup": "一点点 (‘a tiny bit’)",
+    "attributive": "directly"
    }
   },
   {
@@ -2860,7 +3166,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "区别词 (not a predicate)",
+    "degree": "no degree adverb",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -3064,7 +3382,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "都不 ‘none of them’ · 不都 ‘not all of them’"
    }
   },
   {
@@ -3197,7 +3522,14 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yì xiē"
+    "toneSandhi": "yì xiē",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "no measure word: 一些水, 一些人"
    }
   },
   {
@@ -3324,7 +3656,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "no measure word: 有些人"
    }
   },
   {
@@ -3470,7 +3809,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "很不好 ‘very bad’ · 不很好 ‘not very good’ (usually 不太好)"
    }
   },
   {
@@ -3497,7 +3843,11 @@
     },
     "position": [
      "afterNoun"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 们 men (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -3524,7 +3874,14 @@
     },
     "kind": [
      "unit"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "years of age (他三岁)"
    }
   }
  ],

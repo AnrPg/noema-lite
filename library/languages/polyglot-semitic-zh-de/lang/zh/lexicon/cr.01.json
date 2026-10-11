@@ -120,7 +120,40 @@
     "neg": "bu+mei",
     "separable": {
      "none": "a single verb, nothing goes inside"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "change of state"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "醒来",
+      "gloss": "wake up"
+     },
+     {
+      "kind": "direction",
+      "form": "醒过来",
+      "gloss": "come round"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: a change of state"
+    },
+    "degreeComplement": "我今天醒得很早",
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -249,8 +282,31 @@
      {
       "verb": "起",
       "object": "床",
-      "example": "起了床"
+      "example": "起了床",
+      "inserts": "了 (起了床)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了"
+    ],
+    "complements": {
+     "none": "the result goes with 起 (起不来 ‘can’t get up’); 起床 itself takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他起床起得很早 / 他起得很早 — the verb is said again after its object",
+    "object": [
+     "no object"
     ]
    }
   },
@@ -378,7 +434,44 @@
     "neg": "bu+mei",
     "separable": {
      "none": "a single verb that takes an object (洗手, 洗衣服)"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "洗干净",
+      "gloss": "wash clean"
+     },
+     {
+      "kind": "result",
+      "form": "洗完",
+      "gloss": "finish washing"
+     },
+     {
+      "kind": "potential",
+      "form": "洗不干净",
+      "gloss": "cannot get it clean"
+     }
+    ],
+    "redup": "洗洗 / 洗一洗 (AA, A一A)",
+    "degreeComplement": "衣服洗得很干净",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -499,8 +592,35 @@
      {
       "verb": "洗",
       "object": "澡",
-      "example": "洗了个澡"
+      "example": "洗了个澡",
+      "inserts": "了 · 过 · 个 · a length (洗了个澡, 洗了半个小时澡)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "洗完澡",
+      "gloss": "finish one’s bath (the result goes inside)"
+     }
+    ],
+    "redup": "洗洗澡 (AAB)",
+    "degreeComplement": "他洗澡洗得很快",
+    "object": [
+     "no object"
     ]
    }
   },
@@ -625,8 +745,36 @@
     "separable": [
      {
       "verb": "穿",
-      "object": "衣"
+      "object": "衣",
+      "inserts": "了 · 好 (穿好衣)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "穿好衣",
+      "gloss": "be dressed (the result goes inside)"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "她穿衣穿得很快",
+    "object": [
+     "no object"
     ]
    }
   },
@@ -759,8 +907,32 @@
      {
       "verb": "出",
       "object": "门",
-      "example": "出了门"
+      "example": "出了门",
+      "inserts": "了 · 过 · 远 (出了门, 出远门 ‘go on a long trip’)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": {
+     "none": "the direction is in the word itself (出 ‘out’)"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他出门出得很早",
+    "object": [
+     "no object"
     ]
    }
   },
@@ -899,7 +1071,32 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word: nothing goes inside"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了"
+    ],
+    "complements": {
+     "none": "takes none: the verb or noun that begins follows it (开始学中文)"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "verb"
+    ]
    }
   },
   {
@@ -1025,7 +1222,30 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word: nothing goes inside"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了"
+    ],
+    "complements": {
+     "none": "takes none: 结束 is itself the end point"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "会议结束得很晚",
+    "object": [
+     "no object",
+     "noun"
+    ]
    }
   },
   {
@@ -1183,8 +1403,42 @@
      {
       "verb": "睡",
       "object": "觉",
-      "example": "睡了一觉"
+      "example": "睡了一觉",
+      "inserts": "了 · 过 · 个 · a length · 好 (睡了一觉, 睡了八个小时的觉, 睡个好觉)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "睡好觉",
+      "gloss": "sleep well (the result goes inside)"
+     },
+     {
+      "kind": "potential",
+      "form": "睡不好觉",
+      "gloss": "cannot sleep well"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "他睡觉睡得很晚",
+    "object": [
+     "no object"
     ]
    }
   },
@@ -1323,7 +1577,47 @@
     "neg": "bu+mei",
     "separable": {
      "none": "a single verb; results and lengths follow it (睡着, 睡八个小时)"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "睡着",
+      "gloss": "fall asleep"
+     },
+     {
+      "kind": "result",
+      "form": "睡醒",
+      "gloss": "wake up after sleep"
+     },
+     {
+      "kind": "potential",
+      "form": "睡不着",
+      "gloss": "cannot fall asleep"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "昨天我睡得很好",
+    "object": [
+     "no object",
+     "place"
+    ]
    }
   },
   {
@@ -1437,7 +1731,35 @@
     "neg": "mei",
     "separable": {
      "none": "a verb with its result (睡 + 着): 得 / 不 can go between (睡得着, 睡不着), but no object"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "change of state"
+    ],
+    "aspect": [
+     "了"
+    ],
+    "complements": [
+     {
+      "kind": "potential",
+      "form": "睡得着 / 睡不着",
+      "gloss": "can / cannot fall asleep"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: a change of state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1564,7 +1886,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "已经不 ‘no longer’ (已经不下雨了); ‘not yet’ is 还没, not *已经没"
    }
   }
  ],

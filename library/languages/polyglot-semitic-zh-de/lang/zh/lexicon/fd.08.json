@@ -176,7 +176,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "it is itself the negation"
+    }
    }
   },
   {
@@ -323,6 +332,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "么 me is always toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "not a personal pronoun: no plural"
     }
    }
   },
@@ -441,6 +457,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "not a personal pronoun: no plural"
     }
    }
   },
@@ -599,7 +624,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "从来不 / 从来没 ‘never’: in this sense 从来 needs the negation"
    }
   },
   {
@@ -764,7 +796,16 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yě bú before a 4th-tone syllable (也不是, 也不去); yě bù before the others (也不吃)"
+    "toneSandhi": "yě bú before a 4th-tone syllable (也不是, 也不去); yě bù before the others (也不吃)",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "verb phrases"
+    ]
    }
   }
  ],
