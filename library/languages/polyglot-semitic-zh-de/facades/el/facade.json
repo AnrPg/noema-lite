@@ -13,18 +13,18 @@
   },
   "2": {
    "total": 43782,
-   "done": 41224,
+   "done": 41525,
    "stale": 430,
-   "missing": 2128
+   "missing": 1827
   },
   "3": {
    "total": 17999,
-   "done": 13418,
+   "done": 13429,
    "stale": 409,
-   "missing": 4172
+   "missing": 4161
   }
  },
- "built": "2026-10-11T16:26:28Z",
+ "built": "2026-10-11T16:32:29Z",
  "files": [
   "_phenomena/facades/el/ar.json",
   "_phenomena/facades/el/de.json",
