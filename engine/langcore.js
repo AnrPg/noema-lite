@@ -478,7 +478,8 @@
     o[k] = text; return true;
   }
   /** The master texts the bridges parse (etymology, pitfalls, subtleties: the polyglot layer reads them) kept beside a translated profile. */
-  const keepMasterProfile = p => { if (p && !p.$m) p.$m = { etymology: p.etymology && typeof p.etymology.text === 'string' ? p.etymology.text : '', pitfalls: (p.pitfalls || []).slice(), subtleties: (p.subtleties || []).slice() }; };
+  const keepMasterProfile = p => { if (p && !p.$m) p.$m = { etymology: p.etymology && typeof p.etymology.text === 'string' ? p.etymology.text : '', pitfalls: (p.pitfalls || []).slice(), subtleties: (p.subtleties || []).slice(),
+    notes: Array.isArray(p.notes) ? p.notes.map(n => (n && typeof n === 'object' ? { for: n.for, rel: n.rel, text: typeof n.text === 'string' ? n.text : '' } : null)) : [] }; };
   /** The word profiles of a course (course.profiles.js: {lexeme id: profile}) with a facade's x:<id>/profile/… texts → a new map. */
   function facadeProfiles(map, facade) {
     const T = facadeTexts(facade), out = { ...(map || {}) }, done = new Set();
@@ -2871,7 +2872,11 @@
   const QUALIFIER = /(?:Proto-|Pre-|Old|Middle|Classical|Ancient|Byzantine|Late|Medieval|Biblical|Mishnaic|Koine|Vulgar|Early|Ottoman|Egyptian|Levantine|Gulf|Literary|Moroccan|Iraqi|Syrian|Palestinian|Swiss|Austrian|American|British|Brazilian|Western|Eastern|Northern|Southern|Upper|Lower|High|Low|Judeo-|Jewish|Imperial|Archaic|Colloquial|Dialectal|Regional|Taiwanese|Mainland|Hong Kong)\s*$/;
   const NOT_A_WORD = new Set(('and or for entry word words people the a an in au la le el from speakers speaker also via with to of as is was are has have it its this that which who form forms name names spelling origin source sense meaning ' +
     'edition cognate cognates loan loanword term verb noun adjective plural dialect dialects variety cousin equivalent translation calque version influence ultimately itself one same').split(' '));
+  const NON_LATIN_LANGS = new Set('el ru uk bg mk be kk ky mn tg hi bn ur fa ps hy pa gu mr ne ar he yi am ti zh yue my bo ja ko ka ta te ml kn si km th lo dv'.split(' '));   // codes of languages not written in Latin letters
   /* i18n-ignore-end */
+  /** A text in the Markdown subset of the notes (R2) as plain sentences: list marks, → and the emphasis stars go (a star glued to one
+   *  form only, a wrong form *gegesst, stays). */
+  const mdPlain = t => t.replace(/^[ \t]*(?:[-→•]|\d+\.)[ \t]+/gm, '').replace(/\*\*([^*\n]+?)\*\*/g, '$1').replace(/(^|[^\p{L}\p{M}*])\*([^*\s][^*\n]*?)\*(?![\p{L}\p{M}*])/gu, '$1$2');
   const CUES = [['other', /\b(another word|other words?|different word|unrelated|not related|instead)\b/g], ['calque', /\b(calques?|loan[- ]translation|translated from|built (?:exactly )?like)\b/g], ['loan', /\b(borrow\w*|loan\w*|internationalism|from|via|through|passed into|whence|derived?s?|adopted|taken over|goes back|go back)\b/g], ['cognate', /\b(cognates?|related|akin|inherited|same root|continues|shares?|doublet)\b/g], ['compare', /\b(compare[sd]?|cf|see|like|as in|matches|similar)\b/g]];
   function cueOf(before, after, sentence) {
     if (/false friend/i.test(sentence)) return 'falseFriend';
@@ -2893,8 +2898,8 @@
   }
   /** Words of other languages named in a text: [{code, word, kind: loan|cognate|compare|falseFriend|mention, note, named}] */
   function mentionsIn(C, text, ownCode) {
-    const out = [], spans = [], subjects = [], NI = nameIndex(C); text = nfc(text || ''); if (!text) return out;
-    const sentenceAt = i => { const s = Math.max(text.lastIndexOf('. ', i), text.lastIndexOf('; ', i), text.lastIndexOf('? ', i)) + 1; let e = text.slice(i).search(/[.;?](\s|$)/); e = e < 0 ? text.length : i + e + 1; return [s, e]; };
+    const out = [], spans = [], subjects = [], NI = nameIndex(C); text = mdPlain(nfc(text || '')); if (!text) return out;
+    const sentenceAt = i => { const s = Math.max(text.lastIndexOf('. ', i), text.lastIndexOf('; ', i), text.lastIndexOf('? ', i), text.lastIndexOf('\n', i)) + 1; let e = text.slice(i).search(/[.;?](\s|$)|\n/); e = e < 0 ? text.length : i + e + 1; return [s, e]; };
     if (NI.re) for (const m of text.matchAll(NI.re)) {
       const pre = text.slice(Math.max(0, m.index - 14), m.index), [s, e] = sentenceAt(m.index), before = text.slice(s, m.index);
       // a sentence about another word (“English shallot is from French échalote”): a language named with no cue before it; what follows is about that word
@@ -2905,7 +2910,8 @@
       let word = null;
       if (/^[A-Za-zÀ-ɏ]/.test(rest)) {
         const w = (rest.match(/^[\p{L}\p{M}'’-]+/u) || [''])[0].replace(/['’-]+$/, ''), after = rest.slice(w.length);
-        if (w.length >= 2 && !NOT_A_WORD.has(w.toLowerCase()) && /^(?:['’]?\s*[(,;:.)”’—–]|\s+(?:and|or)\b|\s*$)/u.test(after)) word = w;
+        const adjective = NON_LATIN_LANGS.has(NI.names[m[1]]) && /^[A-Za-z'’-]+$/.test(w) && /\bin\s+$/i.test(pre) && !/\bas\s+in\s+$/i.test(pre);   // “in Russian history”: the name is an adjective, the English word no citation
+        if (w.length >= 2 && !adjective && !NOT_A_WORD.has(w.toLowerCase()) && /^(?:['’]?\s*[(,;:.)”’—–]|\s+(?:and|or)\b|\s*$)/u.test(after)) word = w;
       } else if (!/^[“"‘(\s]/.test(rest)) {
         const w = (rest.match(/^[^\s,;:.()“”"!?،؛。，、]+/u) || [''])[0];
         if ([...w].length >= 2 || /[㐀-鿿]/.test(w)) word = w;
@@ -2977,12 +2983,17 @@
     // 2 · texts: etymologies (cognates, loans, the sources of loans), and the sentences that say “false friend”
     for (const code of C.languages) for (const lx of Object.values(C.lang[code].lex)) {
       const p0 = lx.profile; if (!p0) continue;
-      const p = p0.$m ? { etymology: { text: p0.$m.etymology }, pitfalls: p0.$m.pitfalls, subtleties: p0.$m.subtleties } : p0;   // D19: always the master's texts (a facade keeps them in $m)
-      const texts = [[p.etymology?.text || '', 'etymology'], ...(p.pitfalls || []).map(t => [t, 'pitfall']), ...(p.subtleties || []).map(t => [t, 'pitfall'])];
-      for (const [text, src] of texts) {
+      const p = p0.$m ? { etymology: { text: p0.$m.etymology }, pitfalls: p0.$m.pitfalls, subtleties: p0.$m.subtleties, notes: p0.$m.notes || p0.notes } : p0;   // D19: always the master's texts (a facade keeps them in $m)
+      // D19: the comparisons live in profile.notes ({for, rel, text}): a note for a language is read like an etymology (it names its own
+      // language and the course languages only); the note's place is kept, so a facade can show its own translation of it
+      const noteTexts = (Array.isArray(p.notes) ? p.notes : []).map((n, i) => [n, i]).filter(([n]) => n && typeof n.text === 'string' && typeof n.for === 'string' && !n.for.includes(':'))
+        .map(([n, i]) => [n.text, 'note', n.for, i]);
+      const texts = [[p.etymology?.text || '', 'etymology'], ...(p.pitfalls || []).map(t => [t, 'pitfall']), ...(p.subtleties || []).map(t => [t, 'pitfall']), ...noteTexts];
+      for (const [text, src, nFor, nAt] of texts) {
         if (!text || (src === 'pitfall' && !/false friend/i.test(text))) continue;
         for (const m of mentionsIn(C, text, code)) {
           if (['own', 'other', 'calque'].includes(m.kind) || (src === 'pitfall' && m.kind !== 'falseFriend')) continue;
+          if (src === 'note' && m.code !== nFor && !C.lang[m.code]) continue;   // a note speaks of its own language (and the course languages)
           if (C.lang[m.code]) {   // a word of another course language
             const ids = resolveWord(C, m.code, m.word); if (!ids.length) continue;
             const best = ids.find(id => sharedSenses(lx, C.lang[m.code].lex[id]).length) || ids[0], same = sharedSenses(lx, C.lang[m.code].lex[best]).length > 0;
@@ -2991,7 +3002,7 @@
             if (m.kind === 'compare' && !(same && familyOf(C, code) && familyOf(C, code) === familyOf(C, m.code))) continue;   // “compare”: a relation only between words of one family with the same meaning
             add(m.kind === 'loan' ? 'loan' : 'cognate', { lang: code, lex: lx.id }, { lang: m.code, lex: best }, 'etymology', m.note);
           } else if (m.named && m.kind !== 'mention') {   // a language outside the course (the learner may speak it)
-            knownL.push({ lang: code, lex: lx.id, code: m.code, word: m.word, kind: m.kind, note: m.note });
+            knownL.push({ lang: code, lex: lx.id, code: m.code, word: m.word, kind: m.kind, note: m.note, ...(src === 'note' ? { noteAt: nAt } : {}) });
             if (m.kind === 'loan' && src === 'etymology') { const k = m.code + '|' + polyFold('', m.word); if (!bySource.has(k)) bySource.set(k, []); bySource.get(k).push({ lang: code, lex: lx.id, word: m.word }); }
           }
         }
@@ -3004,7 +3015,10 @@
       if (sharedSenses(C.lang[a.lang].lex[a.lex], C.lang[b.lang].lex[b.lex]).length) add('loan', a, b, 'source', lcX('lc.expl.bridgeSource', { lang: nameOf(k.split('|')[0]), word: a.word }));
     }
     const list = [...pairs.values()];
-    if (C.explainLang !== C.masterLang) { for (const b of list) if (!(b.via.length === 1 && b.via[0] === 'source')) b.note = ''; for (const x of knownL) x.note = ''; }   // D19: a sentence of the master is not shown through a facade
+    if (C.explainLang !== C.masterLang) {   // D19: a sentence of the master is not shown through a facade — a note is, in the facade's own translation
+      const noteOf = x => { const p = x.noteAt != null ? C.lang[x.lang].lex[x.lex]?.profile : null, n = p?.notes?.[x.noteAt], m = p?.$m?.notes?.[x.noteAt]; return n && m && typeof n.text === 'string' && n.text !== m.text ? n.text : ''; };
+      for (const b of list) if (!(b.via.length === 1 && b.via[0] === 'source')) b.note = ''; for (const x of knownL) x.note = noteOf(x);
+    }
     for (const b of list) if (!b.note && b.roots) b.note = lcX('lc.expl.bridgeRoots', { a: b.roots[0], b: b.roots[1] });
     const byWord = new Map(); for (const b of list) for (const w of [b.a, b.b]) { const k = w.lang + '|' + w.lex; if (!byWord.has(k)) byWord.set(k, []); byWord.get(k).push(b); }
     return C._bridges = { stamp, list, known: knownL, byWord };
