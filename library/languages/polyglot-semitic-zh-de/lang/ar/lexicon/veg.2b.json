@@ -126,11 +126,11 @@
      }
     ],
     "etymology": {
-     "text": "Origin unknown (Wiktionary). One suggestion: a dialectal form of إِبْهَام (“thumb”) + the dish suffix ـِيَّة — the pods look like fingers, as in English “ladies’ fingers”.",
+     "text": "Origin unknown (Wiktionary). One suggestion: a dialectal form of إِبْهَام (“thumb”) + the dish suffix ـِيَّة — the pods look like fingers.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish bamya and Greek μπάμια (bámia) come from this Arabic word."
+     "بَامِيَة is both the vegetable and the stew cooked with it, usually with meat and tomato."
     ],
     "pitfalls": [
      "In Morocco okra is called مْلُوخِيَّة — elsewhere that word is jute mallow (Wiktionary).",
@@ -138,6 +138,28 @@
     ],
     "subtleties": [
      "A mass noun: one pod is حَبَّةُ بَامِيَةٍ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μπάμια comes from this Arabic word."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian bamje comes from this Arabic word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish bamya comes from this Arabic word."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The guess pictures the pods as fingers, as in English “ladies’ fingers”."
+     }
     ]
    }
   },
@@ -577,7 +599,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English artichoke, Italian carciofo and Spanish alcachofa all come from Andalusian Arabic al-ḵaršūfa.",
+     "Through Andalusian Arabic al-ḵaršūfa the name reached Europe: the artichoke has an Arabic name in many languages.",
      "Modern Hebrew חֻרְשָׁף (ḥurshaf) is the same word."
     ],
     "pitfalls": [
@@ -587,6 +609,38 @@
     "subtleties": [
      "An ordinary countable noun in Wiktionary (خُرْشُوفٌ, plural خَرَاشِيفُ); Egyptian Arabic says ḵaršūf, with a unit noun ḵaršūfa (Wiktionary).",
      "Levantine أَرْضِي شَوْكِي is a phono-semantic match of English “artichoke”: “earthy-thorny” (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English artichoke comes, through Italian, from Andalusian Arabic al-ḵaršūfa."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian carciofo comes from Andalusian Arabic al-ḵaršūfa."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish alcachofa comes from Andalusian Arabic al-ḵaršūfa, article and all."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese alcachofra comes from Andalusian Arabic al-ḵaršūfa, article and all."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French artichaut comes, through Italian, from Andalusian Arabic al-ḵaršūfa."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian артишок goes back to Andalusian Arabic al-ḵaršūfa."
+     }
     ]
    }
   },
@@ -747,7 +801,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English loofah and the botanical name Luffa come from this Arabic word."
+     "The botanical name Luffa comes from this Arabic word."
     ],
     "pitfalls": [
      "Wiktionary also gives لُوف for arum, a wild plant — context decides.",
@@ -755,6 +809,13 @@
     ],
     "subtleties": [
      "Collective: اللُّوفُ (the plant, the gourds), لُوفَة (one gourd or one sponge), لُوفَات (counted)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English loofah comes from this Arabic word."
+     }
     ]
    }
   },

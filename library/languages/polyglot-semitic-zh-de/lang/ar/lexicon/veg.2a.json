@@ -126,7 +126,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic زَنْجَبِيل, Hebrew זַנְגְּבִיל (zangvil), Turkish zencefil, Ancient Greek ζιγγίβερις and Latin zingiber (→ English ginger, German Ingwer) all go back to the same South Indian word."
+     "Arabic زَنْجَبِيل, Hebrew זַנְגְּבִיל (zangvil) and, through Greek and Latin, German Ingwer all go back to the same South Indian word."
     ],
     "pitfalls": [
      "In Egypt the consonants are often swapped: جنزبيل (ganzabīl, Wiktionary) — write زَنْجَبِيل.",
@@ -134,6 +134,58 @@
     ],
     "subtleties": [
      "A mass noun: a piece is قِطْعَةُ زَنْجَبِيلٍ, the root جِذْرُ الزَّنْجَبِيلِ; there is no unit noun."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ginger goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French gingembre goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian zenzero goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish jengibre goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese gengibre goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Ancient Greek ζιγγίβερις is the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian имбирь goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian xhenxhefil is the same word, through Turkish zencefil."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "The South Indian word behind زَنْجَبِيل is also the source of Sanskrit शृङ्गवेर (śṛṅgavera, ginger)."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish zencefil is the same word."
+     }
     ]
    }
   },
@@ -273,7 +325,7 @@
     },
     "funFacts": [
      "Hebrew שׁוּמָר (shumar, fennel) is the same Akkadian-Aramaic word.",
-     "The Greek town of Marathon is named after fennel (μάραθο): the battlefield was a “fennel field”."
+     "The seeds (بُذُورُ الشَّمَرِ) are a spice of their own, and a tea made from them is an old remedy for the stomach."
     ],
     "pitfalls": [
      "Without vowels شمر is also the verb شَمَّرَ (to tuck up): شَمَّرَ عَنْ سَاعِدَيْهِ = he rolled up his sleeves (got down to work).",
@@ -281,6 +333,13 @@
     ],
     "subtleties": [
      "One word for the vegetable and the spice: the seeds are بُذُورُ الشَّمَرِ; context tells which is meant."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The town of Marathon is named after fennel (μάραθο): the battlefield was a “fennel field”."
+     }
     ]
    }
   },
@@ -571,7 +630,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قُلْقَاس and Greek κολοκάσι (taro in Cyprus) are one word that travelled between Egypt, Aramaic and Greek."
+     "One word that travelled between Egypt, Aramaic and Greek — the botanical name Colocasia is the same word."
     ],
     "pitfalls": [
      "Raw taro irritates mouth and skin; it is always cooked, and many cooks wear gloves to peel it.",
@@ -579,6 +638,13 @@
     ],
     "subtleties": [
      "Collective: الْقُلْقَاسُ (taro as food), قُلْقَاسَة (one corm), قُلْقَاسَات (corms counted)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek κολοκάσι (taro in Cyprus) is the same word as قُلْقَاس."
+     }
     ]
    }
   },
@@ -731,7 +797,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and German name the leaf after a lion’s tooth (dent-de-lion, Löwenzahn); the Persian name inside Arabic speaks of poverty — “the poor man’s herb”.",
+     "German names the leaf after a lion’s tooth (Löwenzahn); the Persian name inside Arabic speaks of poverty — “the poor man’s herb”.",
      "The botanists’ Latin Taraxacum is usually traced to this Arabic-Persian word."
     ],
     "pitfalls": [
@@ -740,6 +806,33 @@
     ],
     "subtleties": [
      "A learned word: in markets the bitter wild greens are sold under the name هِنْدِبَاء (Levantine هندبة), not طَرْخَشْقُون."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English dandelion is “lion’s tooth” (dent-de-lion); the Persian name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French dent-de-lion is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian dente di leone is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish diente de león is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese dente-de-leão is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+     }
     ]
    }
   },
@@ -1052,11 +1145,11 @@
      }
     ],
     "etymology": {
-     "text": "From Aramaic hendǝḇā, cognate with Arabic هَدَب (“twisted leaves or sprigs”). From Semitic also Byzantine Greek ἔντυβον, whence Late Latin intibus and English endive (Wiktionary).",
+     "text": "From Aramaic hendǝḇā, cognate with Arabic هَدَب (“twisted leaves or sprigs”). From Semitic also Byzantine Greek ἔντυβον, whence Late Latin intibus (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English endive (and its cousins in the European languages) goes back, through Greek and Latin, to this Semitic word."
+     "The European words for endive go back, through Greek and Latin, to this Semitic word."
     ],
     "pitfalls": [
      "Diptote: no tanwīn — هِنْدِبَاءُ, accusative and genitive هِنْدِبَاءَ (Wiktionary).",
@@ -1064,6 +1157,38 @@
     ],
     "subtleties": [
      "Feminine: الْهِنْدِبَاءُ الْمُرَّةُ (the bitter chicory); Wiktionary treats it as a collective without a unit noun."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English endive goes back, through Greek and Latin, to this Semitic word."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French endive goes back, through Greek and Latin, to this Semitic word."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian indivia goes back, through Greek and Latin, to this Semitic word."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish endibia goes back, through Greek and Latin, to this Semitic word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese endívia goes back, through Greek and Latin, to this Semitic word."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek αντίδι goes back to Byzantine ἔντυβον, borrowed from this Semitic word."
+     }
     ]
    }
   },
@@ -1423,13 +1548,35 @@
      "src": "Wiktionary (kaikki.org): ثوم; the phrase has no entry"
     },
     "funFacts": [
-     "German Bärlauch and Latin Allium ursinum say “bear’s garlic”; Arabic, like English, just says “wild garlic”."
+     "German Bärlauch and the botanical Allium ursinum say “bear’s garlic”; Arabic just says “wild garlic”."
     ],
     "pitfalls": [
      "بَرِّيّ (barrī, wild) and بَرِيء (barīʾ, innocent) sound alike — listen for the doubled r and the final hamza."
     ],
     "subtleties": [
      "Two words, one noun: the adjective follows the noun in case and definiteness — الثُّومُ الْبَرِّيُّ, الثُّومَ الْبَرِّيَّ, الثُّومِ الْبَرِّيِّ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Arabic says just what English says: “wild garlic”."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French ail des ours says “bears’ garlic”; Arabic says “wild garlic”."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian aglio orsino says “bear’s garlic”; Arabic says “wild garlic”."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian медвежий лук says “bear’s onion”; Arabic says “wild garlic”."
+     }
     ]
    }
   },
@@ -2630,13 +2777,35 @@
      "src": "Wiktionary (kaikki.org): بصل and the translation table of English red onion"
     },
     "funFacts": [
-     "Arabic, English and German (rote Zwiebel) all call it “red”, though the colour is really purple."
+     "Arabic, like German (rote Zwiebel), calls it “red”, though the colour is really purple."
     ],
     "pitfalls": [
      "أَحْمَر is a diptote with the feminine حَمْرَاء: بَصَلٌ أَحْمَرُ, but بَصَلَةٌ حَمْرَاءُ (one red onion) — never *بَصَلَةٌ أَحْمَرُ."
     ],
     "subtleties": [
      "Counted red onions: بَصَلَاتٌ حَمْرَاءُ — a non-human plural takes a feminine singular adjective."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English also says “red onion”, though the colour is purple."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish says cebolla morada, “purple onion”; Arabic says “red”: بَصَل أَحْمَر."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese says cebola roxa, “purple onion”; Arabic says “red”: بَصَل أَحْمَر."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek also says κόκκινο κρεμμύδι, “red onion”."
+     }
     ]
    }
   }
@@ -2670,12 +2839,31 @@
   {
    "concept": "veg.shallot",
    "reason": "No single established word for the shallot.",
-   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes; English shallot itself comes from the city of Ascalon (عَسْقَلَان)"
+   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "English shallot itself comes from the city of Ascalon (عَسْقَلَان)."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "French échalote comes from the city of Ascalon (عَسْقَلَان)."
+    }
+   ]
   },
   {
    "concept": "veg.yam",
    "reason": "True yams (Dioscorea) are not grown in most Arab countries; no established word.",
-   "use": "the English loan يَام (Wiktionary’s translation table); note that American “yam” often means sweet potato = بَطَاطَا حُلْوَة"
+   "use": "the English loan يَام (Wiktionary’s translation table)",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "American “yam” often means the sweet potato: that is بَطَاطَا حُلْوَة, not يَام."
+    }
+   ]
   },
   {
    "concept": "veg.mustardgreens",

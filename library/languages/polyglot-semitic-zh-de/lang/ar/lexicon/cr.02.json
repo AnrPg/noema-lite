@@ -1302,8 +1302,15 @@
   },
   {
    "concept": "adv.usedto",
-   "reason": "Arabic has no word for “used to”: the habitual past is a construction, كَانَ (was) + a present verb, both agreeing with the subject.",
-   "use": "كُنْتُ أَلْعَبُ فِي الشَّارِعِ “I used to play in the street”, كَانَتْ تَذْهَبُ إِلَى الرَّوْضَةِ “she used to go to kindergarten”. A verb can make the habit explicit: اِعْتَادَ أَنْ + subjunctive “to be in the habit of”. The construction is taught in this lesson (كَانَ + present)."
+   "reason": "No separate word marks a past habit: the habitual past is a construction, كَانَ (was) + a present verb, both agreeing with the subject.",
+   "use": "كُنْتُ أَلْعَبُ فِي الشَّارِعِ “I used to play in the street”, كَانَتْ تَذْهَبُ إِلَى الرَّوْضَةِ “she used to go to kindergarten”. A verb can make the habit explicit: اِعْتَادَ أَنْ + subjunctive “to be in the habit of”. The construction is taught in this lesson (كَانَ + present).",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "There is no word for “used to”: كُنْتُ أَلْعَبُ is “I used to play” and “I was playing”."
+    }
+   ]
   }
  ]
 }
