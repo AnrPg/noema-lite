@@ -94,6 +94,18 @@
     const nu = (state.digits || {})[tag];
     return nu ? `${tag}-u-nu-${nu}` : tag;
   }
+  /** In a right-to-left locale a text put into a message ({title}, {name} …: a subject's title, a name — often left-to-right)
+      is bidi-isolated (FSI … PDI), so its direction neither takes from nor gives to the sentence around it. Only plain {x}
+      arguments: numbers, plurals and selects keep their values. */
+  const SIMPLE = new Map();
+  function isolate(tag, msg, params) {
+    if (!params || (BY[tag.toLowerCase()] || {}).dir !== 'rtl') return params;
+    let names = SIMPLE.get(msg);
+    if (!names) { names = new Set([...String(msg).matchAll(/\{\s*(\w+)\s*\}/g)].map(m => m[1])); SIMPLE.set(msg, names); }
+    let out = params;
+    for (const k of names) if (typeof params[k] === 'string' && params[k]) { if (out === params) out = { ...params }; out[k] = '⁨' + params[k] + '⁩'; }
+    return out;
+  }
   function format(tag, key, params) {
     const [msg, from] = source(tag, key);
     if (msg == null) {
@@ -109,7 +121,7 @@
       catch (e) { console.warn('[i18n] invalid message ' + key + ' (' + from + '): ' + e.message); f = { format: () => msg }; }
       cache.set(ck, f);
     }
-    try { const out = f.format(params || {}); return Array.isArray(out) ? out.join('') : out; }
+    try { const out = f.format(isolate(tag, msg, params) || {}); return Array.isArray(out) ? out.join('') : out; }
     catch (e) { console.warn('[i18n] ' + key + ': ' + e.message); return String(msg); }
   }
   /** t('home.due', { n: 3 }) in the current locale; the third argument (a preference) is kept for older callers. */

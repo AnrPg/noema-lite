@@ -12,7 +12,7 @@
 .lx-sortsent .lx-deepsent{font-size:19px}
 .lx-sortin{padding:4px 6px;border-radius:8px;background:var(--ok-bg);overflow-wrap:anywhere}
 .lx-cardtr{color:var(--ink2)}
-.lx-orderlist{min-height:48px;padding:8px 8px 8px 32px;border-radius:14px;border:2px dashed var(--line);font-size:22px;margin:8px 0}
+.lx-orderlist{min-height:48px;padding-block:8px;padding-inline:32px 8px;border-radius:14px;border:2px dashed var(--line);font-size:22px;margin:8px 0}
 .lx-orderlist.right{border-color:var(--ok);background:var(--ok-bg)}.lx-orderlist.wrong{border-color:var(--bad);background:var(--bad-bg)}
 .lx-vorder .lx-tile1{height:auto;min-height:48px;padding:6px 12px}
 .lx-deeptypes{margin:6px 0 10px}

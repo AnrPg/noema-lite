@@ -1,0 +1,25 @@
+/* ---------- right-to-left interfaces (docs/i18n.md §5: logical properties everywhere; here what they cannot say) ---------- */
+/* the Han font follows the UI locale (the font stacks end in var(--noema-cjk, 'Noto Sans SC'); fonts/scripts.css) */
+:root[data-ui-locale="zh-Hant"]{--noema-cjk:'Noto Sans TC'}
+:root[data-ui-locale="ja"]{--noema-cjk:'Noto Sans JP'}
+/* left-to-right islands: formulas, code and pictures drawn in coordinates keep their direction in an RTL page */
+.katex,code,kbd,samp{direction:ltr;unicode-bidi:isolate}
+.katex-display,pre,.pre,.codelines,.cloze.code,textarea.answer.code,.diagram,.cm-canvas,.cm-mini,.cm-tmap,.vx-stage{direction:ltr}
+/* glyphs that point somewhere (← → ▸ ➤ are not mirrored by the bidi algorithm; › ‹ are) */
+.ns-back:dir(rtl),.arrow:dir(rtl),.lx-arrow:dir(rtl),.lx-md-arrow:dir(rtl),.flow .ar:dir(rtl),.chev:dir(rtl),.composer .send:dir(rtl){scale:-1 1}
+.pitem .chev:dir(rtl){scale:none}
+.cg-way>summary:dir(rtl)::before{scale:-1 1}
+.ns-dom[open]>summary .ns-domchev:dir(rtl),.ns-chgrp[open]>summary .ns-domchev:dir(rtl){transform:rotate(-90deg)}
+/* movements along the line */
+.drawer:not(.open):dir(rtl){transform:translateX(-105%)}
+.drawer:dir(rtl){box-shadow:20px 0 50px -20px rgba(0,0,0,.35)}
+body.ns-on .drawer:dir(rtl){box-shadow:20px 0 50px -24px rgba(0,0,0,.35)}
+@media (max-width:759px){body.ns-on .drawer:not(.open):dir(rtl){transform:translateY(105%)}}
+.switch input:checked+i:dir(rtl)::after{transform:translateX(-18px)}
+.node:hover:dir(rtl){transform:translateX(-4px)}
+.opt:hover:dir(rtl){transform:translateX(-2px)}
+.starters button:hover:dir(rtl){transform:translateX(-3px)}
+/* a pack's own text (its language, not the interface's): every paragraph takes the direction of its first letter, so an
+   English pack reads left to right in an Arabic interface and a Hebrew pack right to left in an English one */
+:is(.blk,.mdx,.drawer .msg,.ns-cvmsg),:is(.blk,.mdx,.drawer .msg,.ns-cvmsg) :is(p,li,h2,h3,h4,h5,td,th,dt,dd,blockquote,figcaption,summary),
+.mantra,.herohead,.hook,.sechead h1,.chhead h1,.subjhead h1,.ns-item b,.ns-rmcard .ttl,.ns-crumbs button,.cm-tlabel,.cm-panel h2,.cm-panel li{unicode-bidi:plaintext}
