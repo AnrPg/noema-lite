@@ -423,7 +423,7 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek builds most place words from an adverb + preposition (πάνω σε, κάτω από, δίπλα σε, μπροστά από, πίσω από); Arabic uses one word + the genitive: عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ."
+   "text": "Greek builds most place words from an adverb + preposition; Arabic uses one word + the genitive:\n→ πάνω σε, κάτω από, δίπλα σε, μπροστά από, πίσω από\n→ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ"
   },
   {
    "for": "ru",
@@ -498,12 +498,12 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German auf, unter, neben, vor, hinter take the dative for “where?” and the accusative for “where to?”; Arabic عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ always take the genitive. Auf dem Tisch liegt ein Buch = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+   "text": "German auf, unter, neben, vor, hinter take the dative for “where?” and the accusative for “where to?”; Arabic عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ **always take the genitive**.\n\n→ Auf dem Tisch liegt ein Buch = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb"
   },
   {
    "for": "zh",
    "rel": "similar",
-   "text": "Chinese puts the place word after the noun (桌子上, 桌子下面); Arabic puts it before: عَلَى الطَّاوِلَةِ, تَحْتَ الطَّاوِلَةِ. But 桌子上有一本书 has the same order as عَلَى الطَّاوِلَةِ كِتَابٌ — the place first, then the thing."
+   "text": "Chinese puts the place word after the noun (桌子上, 桌子下面); Arabic puts it before: عَلَى الطَّاوِلَةِ, تَحْتَ الطَّاوِلَةِ.\n\nBut the sentence has the same order — the place first, then the thing:\n→ 桌子上有一本书 — عَلَى الطَّاوِلَةِ كِتَابٌ"
   },
   {
    "for": "it",
@@ -513,12 +513,12 @@
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian mbi, nën, pranë, para, prapa ↔ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; but where Albanian varies the case by preposition, Arabic place words always take the genitive. Ka një libër mbi tavolinë = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+   "text": "Albanian mbi, nën, pranë, para, prapa ↔ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; but where Albanian varies the case by preposition, **Arabic place words always take the genitive**.\n\n→ Ka një libër mbi tavolinë = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese em cima de, debaixo de, ao lado de, à frente de, atrás de are built like Arabic place words: a word + “of” — in Arabic the genitive: تَحْتَ الطَّاوِلَةِ. Há um livro na mesa = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+   "text": "Portuguese em cima de, debaixo de, ao lado de, à frente de, atrás de are built like Arabic place words: a word + “of” — in Arabic the genitive:\n→ تَحْتَ الطَّاوِلَةِ\n→ Há um livro na mesa = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb"
   },
   {
    "for": "type:fusional",

@@ -151,7 +151,7 @@
     "fa",
     "ur"
    ],
-   "alsoNote": "The obligatory لا ligature belongs to the Arabic script and is shared by every language written in it (Persian, Urdu …); other joining scripts do not have it.",
+   "alsoNote": "The obligatory لا ligature belongs to the Arabic script and is shared by every language written in it; other joining scripts do not have it.",
    "what": "When ل is followed by ا (also أ إ آ) the two letters must be written as one ligature, لا. Learners who know the separate shapes often fail to recognise it.",
    "examples": [
     {
@@ -178,7 +178,19 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.00"
+   "when": "fd.00",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "same",
+     "text": "Persian has the same obligatory لا ligature: nothing new to learn."
+    },
+    {
+     "for": "ur",
+     "rel": "same",
+     "text": "Urdu has the same obligatory لا ligature; in Arabic print (Naskh) it has the shape لا."
+    }
+   ]
   },
   {
    "id": "ar.orth.harakat",
@@ -239,7 +251,7 @@
     "fa",
     "ur"
    ],
-   "alsoNote": "Persian and Urdu write the same mark (tašdīd), mostly in Arabic loanwords. Hebrew dagesh once marked doubling but Modern Hebrew does not pronounce it; Japanese marks a doubled consonant with a small っ before it. Knowing gemination alone does not teach the mark.",
+   "alsoNote": "Every language written in the Arabic script has the mark, mostly in Arabic loanwords. Hebrew dagesh once marked doubling, but Modern Hebrew does not pronounce it. Knowing gemination alone does not teach the mark.",
    "what": "A doubled consonant is written once with a šadda above it. It is meaningful: it distinguishes verb forms and words, and it appears after the article before sun letters.",
    "examples": [
     {
@@ -276,6 +288,16 @@
      "for": "ja",
      "rel": "similar",
      "text": "Japanese writes a doubled consonant with a small っ before it (きって); Arabic writes the consonant once with the šadda above it: دَرَّسَ."
+    },
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian writes the same mark (tašdīd), mostly in Arabic loanwords (محمّد); in Arabic it is everywhere, in native words and verb forms: دَرَّسَ، عَلَّمَ."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu writes the same mark (tašdīd), mostly in Arabic loanwords (محمّد); in Arabic it is everywhere, in native words and verb forms: دَرَّسَ، عَلَّمَ."
     }
    ]
   },
@@ -296,7 +318,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Persian and Urdu keep the written -an (ـاً) only in Arabic loan adverbs (فوراً، اتفاقاً); the Persian indefinite suffix -i is a different thing.",
+   "alsoNote": "Languages that borrowed Arabic adverbs keep the written -an (ـاً) only in those loanwords; in Arabic it is the living accusative ending.",
    "what": "Indefinite endings are written as doubled vowel marks (ـٌ ـً ـٍ). The accusative -an adds a written alif (كِتَابًا), except after ة and after ـاء, and the same -an ending makes many adverbs and formulas (شُكْرًا).",
    "examples": [
     {
@@ -334,7 +356,24 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.07"
+   "when": "fd.07",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian keeps the written -an (ـاً) only in Arabic loan adverbs (فوراً، اتفاقاً); the Persian indefinite -i is a different thing. In Arabic the ending is productive: كِتَابًا، شُكْرًا."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu keeps the written -an (ـاً) only in Arabic loan adverbs (فوراً، تقریباً); in Arabic it is the regular accusative ending: كِتَابًا، شُكْرًا."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish adverbs in -en / -an are this ending, borrowed:\n\n→ *tamamen* — تَمَامًا\n→ *kısmen* — قِسْمًا\n→ *tesadüfen* — تَصَادُفًا\n\nIn Arabic it is the living accusative ending of every indefinite noun."
+    }
+   ]
   },
   {
    "id": "ar.orth.ta_marbuta",
@@ -353,7 +392,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Hebrew has the same alternation of the feminine ending, -a in isolation and -at- in the construct (ה → ת), but with two different letters; Persian and Urdu keep ة only in a few Arabic loanwords.",
+   "alsoNote": "Hebrew has the same alternation of the feminine ending, -a in isolation and -at- in the construct (ה → ת), but with two different letters; languages that borrowed Arabic words keep ة only in a few of them.",
    "what": "The feminine ending ة looks like h with two dots; it is said -a in pause and -at- whenever something follows: a case ending, a possessive suffix, or a second noun in a construct. Before suffixes it is written ت.",
    "examples": [
     {
@@ -389,7 +428,24 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.04"
+   "when": "fd.04",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian writes most Arabic words in -a / -at with ه or ت (مدرسه، دولت); Arabic writes ة in both and reads it -a in pause, -at- in a construct."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu writes most Arabic words in -a / -at with ہ or ت (مدرسہ، دولت); Arabic writes ة in both and reads it -a in pause, -at- in a construct."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish loanwords show the two readings of ة:\n\n- *medrese* — مَدْرَسَة, read -a (the pausal form)\n- *devlet*, *saat* — دَوْلَة، سَاعَة, read -at"
+    }
+   ]
   },
   {
    "id": "ar.orth.alif_maqsura",
@@ -409,7 +465,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Persian and Urdu write a few Arabic loanwords with a final ی read ā (موسی، حتی).",
+   "alsoNote": "Languages written in the Arabic script spell a few Arabic loanwords with a final ی read ā.",
    "what": "A final ā can be written ى (a dotless yāʾ). It turns into ي or ا when a suffix is added, and nouns in -an (مَقْهًى) keep the ى under their tanwīn.",
    "examples": [
     {
@@ -448,7 +504,19 @@
    },
    "status": "partial",
    "gap": "No spelling rule page for ى ↔ ي / ا (the spell exercise names the confusion).",
-   "when": "fd.11"
+   "when": "fd.11",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian writes a few Arabic loanwords with a final ی read ā (موسی، حتی) — the spelling Arabic writes ى: مُوسَى، حَتَّى."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu writes a few Arabic loanwords with a final ی and often a small alif above it (موسیٰ، حتیٰ) — the spelling Arabic writes ى: مُوسَى، حَتَّى."
+    }
+   ]
   },
   {
    "id": "ar.orth.hamza",
@@ -468,7 +536,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Persian and Urdu write hamza on seats too, mainly in Arabic loanwords (مسئله، تأثیر), without the changes across a paradigm; Urdu ئ mostly marks a vowel sequence. Hebrew א has no seats.",
+   "alsoNote": "Hebrew א has no seats. Languages that borrowed Arabic words write hamza on seats too, mainly in those loanwords, without the changes across a paradigm.",
    "what": "The glottal stop ء is a full consonant, but it is written on a seat (أ إ ؤ ئ) or alone (ء) by rules that depend on the surrounding vowels; the same root letter therefore changes its spelling across a paradigm.",
    "examples": [
     {
@@ -505,7 +573,19 @@
    },
    "status": "partial",
    "gap": "No rule page for the seats.",
-   "when": "fd.07"
+   "when": "fd.07",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian writes hamza on seats too, mainly in Arabic loanwords (مسئله، تأثیر), but without the changes across a paradigm (سَأَلَ، يَسْأَلُ، سُئِلَ)."
+    },
+    {
+     "for": "ur",
+     "rel": "different",
+     "text": "Urdu writes hamza on seats in Arabic loanwords, and its ئ mostly marks a vowel sequence; in Arabic every hamza is a glottal stop, and its seat follows the vowels around it."
+    }
+   ]
   },
   {
    "id": "ar.orth.hamzat_wasl",
@@ -623,7 +703,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Urdu writes the same small alif in a few words (عیسیٰ، موسیٰ، اللّٰہ); Hebrew has historical defective spellings, a related but different idea.",
+   "alsoNote": "Hebrew has historical defective spellings, a related but different idea.",
    "what": "A few very frequent words have a long ā that is not written with a full alif but with a small superscript alif (or nothing in plain text): هٰذَا, ذٰلِكَ, لٰكِنْ, اللّٰه. مِائَة (hundred) has an alif that is not pronounced.",
    "examples": [
     {
@@ -655,7 +735,14 @@
    },
    "status": "partial",
    "gap": "Spelling variants (مِئَة) are not recorded; no pitfall page on these spellings.",
-   "when": "fd.03"
+   "when": "fd.03",
+   "notes": [
+    {
+     "for": "ur",
+     "rel": "same",
+     "text": "Urdu writes the same small alif in a few words (عیسیٰ، موسیٰ، اللّٰہ)."
+    }
+   ]
   },
   {
    "id": "ar.orth.punctuation",
@@ -674,7 +761,7 @@
     "fa",
     "ur"
    ],
-   "alsoNote": "Persian and Urdu use the same turned marks ، ؛ ؟ (Urdu adds ۔ as its full stop); Hebrew uses the unturned marks. The long chains of clauses with وَ / فَ are a matter of Arabic prose style.",
+   "alsoNote": "Hebrew uses the unturned marks. The long chains of clauses with وَ / فَ are a matter of Arabic prose style.",
    "what": "The comma, semicolon and question mark are mirrored or turned (، ؛ ؟), and all marks follow the right-to-left direction. Traditional and much modern prose uses few full stops and links clauses with وَ 'and' and فَ 'so'.",
    "examples": [
     {
@@ -703,7 +790,19 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.09"
+   "when": "fd.09",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "same",
+     "text": "Persian uses the same turned marks ، ؛ ؟."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu uses the same turned marks ، ؛ ؟, but ends a sentence with ۔ where Arabic uses a dot."
+    }
+   ]
   },
   {
    "id": "ar.orth.unvocalized_homographs",
@@ -762,7 +861,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "DIN 31635 is a scheme for Arabic; scholarly transliterations of Persian and Urdu use similar conventions (macrons, ʿ, ʾ).",
+   "alsoNote": "DIN 31635 is a scheme for Arabic; scholarly transliterations of other languages written in the Arabic script use similar conventions (macrons, ʿ, ʾ).",
    "what": "Until the script is learned every word is shown with a scientific transliteration: macrons for long vowels, dots for emphatics (ṣ ḍ ṭ ẓ ḥ), ʿ for ع and ʾ for hamza.",
    "examples": [
     {
@@ -791,7 +890,19 @@
    },
    "status": "partial",
    "gap": "Transliteration exists only for lemmas (not forms or sentences).",
-   "when": "fd.00"
+   "when": "fd.00",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Scholarly transliteration of Persian uses the same conventions (macrons, ʿ, ʾ): ā, š, ḥ will look familiar."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Scholarly transliteration of Urdu uses the same conventions (macrons, ʿ, ʾ): ā, š, ḥ will look familiar."
+    }
+   ]
   },
   {
    "id": "ar.numbers.digits",
@@ -816,7 +927,7 @@
     "fa",
     "ur"
    ],
-   "alsoNote": "Persian and Urdu use the extended Arabic-Indic digits ۰–۹, in which 4, 5 and 6 (and in Urdu 7) have other shapes; Hebrew uses 0–9 but shares the left-to-right numbers inside right-to-left text.",
+   "alsoNote": "Hebrew uses 0–9 but shares the left-to-right numbers inside right-to-left text. Further east, the Arabic script uses extended digits in which 4, 5 and 6 (sometimes 7) have other shapes.",
    "what": "The Arab East writes the Arabic-Indic digits ٠١٢٣٤٥٦٧٨٩; the Maghreb uses the digits 0–9, which come from the same Indian system. Inside right-to-left text a multi-digit number is still written with its highest digit on the left, so numbers are read left to right.",
    "examples": [
     {
@@ -843,7 +954,19 @@
    },
    "status": "partial",
    "gap": "number_words / clock / date exercises (§6.5) with digits ↔ words.",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "trap",
+     "text": "Persian uses the extended digits ۰–۹: ۴ ۵ ۶ have other shapes than the Arabic ٤ ٥ ٦."
+    },
+    {
+     "for": "ur",
+     "rel": "trap",
+     "text": "Urdu uses the extended digits ۰–۹: ۴ ۵ ۶ ۷ have other shapes than the Arabic ٤ ٥ ٦ ٧."
+    }
+   ]
   },
   {
    "id": "ar.phon.emphatics",
@@ -1345,7 +1468,8 @@
    "model": {
     "wordFields": [
      "root",
-     "rootClass"
+     "rootClass",
+     "past1sg"
     ],
     "paradigm": [
      "V;PST;1;SG",
@@ -1495,7 +1619,7 @@
     "he",
     "am"
    ],
-   "alsoNote": "Hebrew: past = suffix conjugation, future = prefix conjugation (its present is a participle). Amharic: perfective with suffixes, imperfective with prefixes.",
+   "alsoNote": "Hebrew: past = suffix conjugation, future = prefix conjugation (its present is a participle).",
    "what": "Every verb has two finite stems: the perfect with person endings (past, completed) and the imperfect with person prefixes (present, and the base of the moods and the future).",
    "examples": [
     {
@@ -1531,7 +1655,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "cr.01"
+   "when": "cr.01",
+   "notes": [
+    {
+     "for": "am",
+     "rel": "same",
+     "text": "Amharic has the same split: a perfective with suffixes and an imperfective with prefixes, like كَتَبَ / يَكْتُبُ."
+    }
+   ]
   },
   {
    "id": "ar.morph.verb.stem_vowel",
@@ -1574,7 +1705,8 @@
    "record": "present: the 3rd person singular imperfect (يَفْعَلُ) on every verb, shown in the facade section of the word card.",
    "model": {
     "wordFields": [
-     "present"
+     "present",
+     "stemVowels"
     ],
     "paradigm": [
      "V;PRS;IND;3;SG;MASC"
@@ -1607,7 +1739,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The أَنْ-subjunctive matches the subjunctive of Romance languages, German or Greek only in part; the jussive (also the past after لَمْ) has no counterpart there. Amharic has a jussive (\"let him …\"); Biblical Hebrew had one, Modern Hebrew does not.",
+   "alsoNote": "The أَنْ-subjunctive matches a subjunctive after “that” only in part, and the jussive (also the past after لَمْ) rarely has a counterpart. Biblical Hebrew had a jussive; Modern Hebrew does not.",
    "what": "The imperfect has three moods shown by the ending: indicative -u, subjunctive -a (after أَنْ، لَنْ، لِـ 'in order to'), jussive with no vowel (after لَمْ, prohibitive لَا, and لِـ of command). An energetic mood exists in formal style.",
    "examples": [
     {
@@ -1629,7 +1761,9 @@
    "level": "word",
    "record": null,
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "governs"
+    ],
     "paradigm": [
      "V;SBJV;*",
      "V;JUS;*"
@@ -1677,6 +1811,11 @@
      "for": "sq",
      "rel": "similar",
      "text": "Albanian të + subjunctive (dua të shkruajë) matches أَنْ + subjunctive (أُرِيدُ أَنْ يَكْتُبَ); the jussive after لَمْ has no Albanian counterpart."
+    },
+    {
+     "for": "am",
+     "rel": "similar",
+     "text": "Amharic has a jussive (“let him …”), like لِيَكْتُبْ; Arabic also uses it for the negated past: لَمْ يَكْتُبْ."
     }
    ]
   },
@@ -1770,7 +1909,9 @@
    "level": "word",
    "record": null,
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "imperative"
+    ],
     "paradigm": [
      "V;IMP;2;SG;MASC",
      "V;IMP;2;SG;FEM",
@@ -1875,7 +2016,9 @@
    "level": "word",
    "record": null,
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "passive"
+    ],
     "paradigm": [],
     "grammar": [],
     "exercises": [],
@@ -1954,7 +2097,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Hebrew says a past habit with הָיָה + participle; Amharic puts a finite imperfective before ነበር. Elsewhere the meaning is familiar, the two finite agreeing verbs are not.",
+   "alsoNote": "Hebrew says a past habit with הָיָה + participle. Elsewhere the meaning is familiar; the two finite, agreeing verbs are not.",
    "what": "كَانَ followed by an imperfect verb gives the past continuous or habitual ('was doing, used to do'); both verbs agree with the subject.",
    "examples": [
     {
@@ -1987,7 +2130,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "cr.02"
+   "when": "cr.02",
+   "notes": [
+    {
+     "for": "am",
+     "rel": "similar",
+     "text": "Amharic puts a finite imperfective before ነበር (“he used to write”), like كَانَ يَكْتُبُ — but with the auxiliary after the verb."
+    }
+   ]
   },
   {
    "id": "ar.morph.masdar",
@@ -2186,7 +2336,8 @@
    "record": "gender: MASC | FEM (both for a few nouns).",
    "model": {
     "wordFields": [
-     "gender"
+     "gender",
+     "pair"
     ],
     "paradigm": [],
     "grammar": [
@@ -2394,7 +2545,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Hebrew changes stem vowels together with a plural suffix (מֶלֶךְ → מְלָכִים) but has no true broken plurals; Amharic keeps a few learned Ge'ez broken plurals (ኮከብ → ከዋክብት); Persian and Urdu use Arabic broken plurals of Arabic loanwords (کتب، اخبار).",
+   "alsoNote": "Hebrew changes stem vowels together with a plural suffix (מֶלֶךְ → מְלָכִים) but has no true broken plurals. Languages that borrowed many Arabic words took some of their broken plurals with them.",
    "what": "Most nouns form the plural by a new pattern of the root (about thirty common patterns). The plural is not predictable from the singular with certainty and is learned with the word.",
    "examples": [
     {
@@ -2439,7 +2590,29 @@
    },
    "status": "partial",
    "gap": "An exercise grouping plurals by pattern; the plural drills do not read the plurals list yet.",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "am",
+     "rel": "similar",
+     "text": "Amharic keeps a few learned Geʿez broken plurals (ኮከብ → ከዋክብት); in Arabic they are the normal plural of most nouns."
+    },
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian uses the Arabic broken plurals of Arabic loanwords (کتب، اخبار); in Arabic every noun has such a plural to learn: كُتُب، أَخْبَار."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu uses the Arabic broken plurals of Arabic loanwords (کتب، اخبار); in Arabic every noun has such a plural to learn: كُتُب، أَخْبَار."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Ottoman Turkish used Arabic broken plurals, and some live on in Turkish as singular words:\n\n→ *evrak* (papers) — أَوْرَاق, plural of وَرَقَة\n→ *esnaf* (tradesmen) — أَصْنَاف, plural of صِنْف\n\nIn Arabic they are the ordinary plurals."
+    }
+   ]
   },
   {
    "id": "ar.morph.plural.multiple",
@@ -2781,7 +2954,9 @@
    "level": "word",
    "record": null,
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "construct"
+    ],
     "paradigm": [
      "N;NOM;SG;CONST",
      "NOUN.quant",
@@ -2794,7 +2969,7 @@
     "exercises": [
      "build_sentence"
     ],
-    "other": "CONST cells exist only for kin, quant and number words; the dual of a phrase is stated in its construct form (مَكْتَبَا بَرِيدٍ); multiword lexemes (مَكْتَب بَرِيد) store construct forms. No construct parameter: the forms are paradigm data."
+    "other": "CONST cells exist only for kin, quant and number words; the dual of a phrase is stated in its construct form (مَكْتَبَا بَرِيدٍ); multiword lexemes (مَكْتَب بَرِيد) store construct forms. Every noun states its construct form in the parameter construct (with its reading: ة read -t-, the five nouns, the dual without nūn, the defective ī)."
    },
    "status": "partial",
    "gap": "CONST cells for all nouns (dual بَيْتَا, sound plural مُعَلِّمُو); a dedicated construct function and transform.",
@@ -2837,7 +3012,9 @@
    "level": "word",
    "record": null,
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "construct"
+    ],
     "paradigm": [
      "N;NOM;SG;CONST",
      "N;NOM;SG;POSS;PSS2SM"
@@ -2879,7 +3056,7 @@
    "alsoIn": [
     "he"
    ],
-   "alsoNote": "Hebrew attaches the same pronouns to nouns, verbs (formal style) and prepositions (לִי، אִתּוֹ). Persian has possessive and object clitics, Amharic possessive and object suffixes, but not on prepositions in the same way.",
+   "alsoNote": "Hebrew attaches the same pronouns to nouns, verbs (formal style) and prepositions (לִי، אִתּוֹ). Possessive and object suffixes are common elsewhere, but rarely on prepositions in the same way.",
    "what": "Possessors, objects and prepositional objects are suffixes: -ī/-ya my, -ka/-ki your, -hu his, -hā her … On a verb 'me' is -nī, not -ī.",
    "examples": [
     {
@@ -2907,7 +3084,8 @@
    "record": "suffix on every personal pronoun (ـكَ، ـهُ، ـهَا …); the suffixed forms as cells (POSS;PSS…, ADP;person, PART;person).",
    "model": {
     "wordFields": [
-     "suffix"
+     "suffix",
+     "withPronoun"
     ],
     "paradigm": [
      "N;NOM;SG;POSS;PSS1S",
@@ -2927,7 +3105,24 @@
    },
    "status": "partial",
    "gap": "Object suffixes on verbs (V;…;OBJ cells or a morph_build exercise); POSS cells exist mostly for kin nouns and in the nominative.",
-   "when": "fd.06"
+   "when": "fd.06",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian has possessive and object clitics (کتابم، دیدمش), but does not attach them to prepositions as Arabic does: لِي، مِنْهُ، عَلَيْكَ."
+    },
+    {
+     "for": "am",
+     "rel": "similar",
+     "text": "Amharic has possessive and object suffixes, but does not attach them to prepositions as Arabic does: لِي، مِنْهُ، عَلَيْكَ."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish possessive suffixes work like the Arabic ones:\n\n→ *kitabım* — كِتَابِي\n→ *kitabın* — كِتَابُكَ\n\nArabic also attaches them to verbs (the object: رَأَيْتُهُ) and to prepositions (لِي، مَعَكَ)."
+    }
+   ]
   },
   {
    "id": "ar.morph.prefix_clitics",
@@ -3011,7 +3206,7 @@
     "am",
     "ha"
    ],
-   "alsoNote": "Spanish has gender in \"you\" and \"they\" only in the plural (vosotros / vosotras, ellos / ellas); a gendered singular \"you\" is new there.",
+   "alsoNote": "A gendered singular “you” (أَنْتَ / أَنْتِ) is rare among the world’s languages; Hebrew has it too (אַתָּה / אַתְּ).",
    "what": "Second-person pronouns, verb forms and suffixes differ for a man and a woman (and for groups of women); 3rd-person plural too. Speaking to someone requires knowing their gender.",
    "examples": [
     {
@@ -3053,6 +3248,16 @@
      "for": "es",
      "rel": "similar",
      "text": "Spanish has gender in “you” and “they” only in the plural (vosotros / vosotras, ellos / ellas); a gendered singular “you” (أَنْتَ / أَنْتِ) is new."
+    },
+    {
+     "for": "am",
+     "rel": "same",
+     "text": "Amharic also has a “you” for a man and one for a woman (አንተ / አንቺ), like أَنْتَ / أَنْتِ."
+    },
+    {
+     "for": "ha",
+     "rel": "same",
+     "text": "Hausa also has a “you” for a man and one for a woman (kai / ke), like أَنْتَ / أَنْتِ."
     }
    ]
   },
@@ -3076,7 +3281,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Hebrew repeats the article on the adjective and agrees in gender and number (no case); Romanian and Albanian agree in case but mark definiteness on the adjective differently.",
+   "alsoNote": "Hebrew repeats the article on the adjective and agrees in gender and number (no case); languages with case agreement often mark definiteness on the adjective differently.",
    "what": "The adjective follows the noun and agrees in gender, number, case and definiteness (al- is repeated on the adjective). Human plurals take plural adjectives, non-human plurals feminine singular.",
    "examples": [
     {
@@ -3120,6 +3325,11 @@
      "for": "sq",
      "rel": "similar",
      "text": "Albanian adjectives also follow the noun and agree in gender, number and case, but definiteness is shown by the linking article, not by repeating the article: shtëpia e madhe = الْبَيْتُ الْكَبِيرُ."
+    },
+    {
+     "for": "ro",
+     "rel": "similar",
+     "text": "Romanian adjectives agree in case too, but the article goes on the first word only (casa mare), while Arabic repeats it: الْبَيْتُ الْكَبِيرُ."
     }
    ]
   },
@@ -3363,7 +3573,8 @@
    "record": "polarity (bool) on every number; MASC/FEM cells of the number.",
    "model": {
     "wordFields": [
-     "polarity"
+     "polarity",
+     "genderForms"
     ],
     "paradigm": [
      "NUM.unit"
@@ -3785,7 +3996,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Russian and Ukrainian put the predicate of быть / стать in the instrumental, a close parallel with another case.",
+   "alsoNote": "Putting the predicate of “to be” in another case than the subject is not common; Hebrew leaves it unchanged after הָיָה.",
    "what": "The 'sisters of kāna' (كَانَ, لَيْسَ, أَصْبَحَ, مَا زَالَ …) keep the subject nominative and make the predicate accusative.",
    "examples": [
     {
@@ -3824,6 +4035,11 @@
      "for": "ru",
      "rel": "similar",
      "text": "Russian puts the predicate of был / стал in the instrumental (был учителем); Arabic puts it in the accusative after كَانَ and لَيْسَ: كَانَ مُعَلِّمًا."
+    },
+    {
+     "for": "uk",
+     "rel": "similar",
+     "text": "Ukrainian puts the predicate of бути / стати in the instrumental (був учителем), as Arabic puts it in the accusative: كَانَ مُعَلِّمًا."
     }
    ]
   },
@@ -3969,7 +4185,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Only the initial question particle is shared with Irish, Welsh or Estonian; French si / German doch match بَلَى, and Finnish vai / tai match أَمْ / أَوْ.",
+   "alsoNote": "An initial yes/no particle is found in some languages; German doch matches بَلَى (“yes” to a negative question).",
    "what": "A yes/no question puts هَلْ (or the prefix أَ) before the unchanged statement. In a choice question 'or' is أَمْ, not أَوْ. 'Yes' that contradicts a negative question is a word of its own, بَلَى.",
    "examples": [
     {
@@ -4012,6 +4228,31 @@
      "for": "fr",
      "rel": "same",
      "text": "French si answers a negative question like بَلَى: tu n’aimes pas le thé ? — Si !"
+    },
+    {
+     "for": "fi",
+     "rel": "same",
+     "text": "Finnish vai / tai match أَمْ / أَوْ: “or” in a choice question and “or” in a statement."
+    },
+    {
+     "for": "ga",
+     "rel": "same",
+     "text": "Irish also opens a yes/no question with a particle (An bhfuil …?), like هَلْ."
+    },
+    {
+     "for": "cy",
+     "rel": "same",
+     "text": "Welsh also opens a yes/no question with a particle (A ydych chi …?), like هَلْ."
+    },
+    {
+     "for": "et",
+     "rel": "same",
+     "text": "Estonian also opens a yes/no question with a particle (Kas …?), like هَلْ."
+    },
+    {
+     "for": "tr",
+     "rel": "different",
+     "text": "Turkish marks a yes/no question with *mi* after the word asked about; Arabic puts هَلْ or أَ at the very start of the sentence.\n\n→ *geliyor musun?* — هَلْ تَأْتِي؟"
     }
    ]
   },
@@ -4093,7 +4334,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "derivedFrom"
+     "derivedFrom",
+     "formation"
     ],
     "paradigm": [],
     "grammar": [
@@ -4129,7 +4371,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Russian depictives in the instrumental (пришёл усталым) are a partial parallel.",
+   "alsoNote": "Some languages say the same with an adjective in an oblique case; most use an adverb or a clause.",
    "what": "An indefinite accusative describes the state of the subject or object during the action.",
    "examples": [
     {
@@ -4178,7 +4420,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Hebrew and Persian also repeat the head as a pronoun, but use one relativizer (שֶׁ، که) after any head.",
+   "alsoNote": "Hebrew also repeats the head as a pronoun, but uses one relativizer (שֶׁ) after any head.",
    "what": "The relative pronoun agrees with a definite head (الَّذِي، الَّتِي، الَّذِينَ …); after an indefinite head there is none. The clause repeats the head as a pronoun.",
    "examples": [
     {
@@ -4203,7 +4445,14 @@
    },
    "status": "missing",
    "gap": "Relative pronoun lexemes (with dual and plural forms) and the cr.06 function.",
-   "when": "cr.06"
+   "when": "cr.06",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian also repeats the head as a pronoun, but uses one relativizer که after any head; Arabic uses الَّذِي only after a definite head and nothing after an indefinite one."
+    }
+   ]
   },
   {
    "id": "ar.syn.conditional",
@@ -4264,7 +4513,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Russian also fronts the place before an indefinite subject; Hebrew uses יֵשׁ.",
+   "alsoNote": "Hebrew uses יֵשׁ, close to هُنَاكَ / يُوجَدُ.",
    "what": "An indefinite subject does not start a sentence: the place phrase comes first, or the sentence opens with هُنَاكَ or يُوجَدُ.",
    "examples": [
     {
@@ -4431,7 +4680,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Persian (ای, literary) and Irish (a) have a vocative particle, without the loss of the article.",
+   "alsoNote": "A vocative particle that also removes the article is Arabic’s own.",
    "what": "People are called with يَا before the name or title; a definite address noun loses al-.",
    "examples": [
     {
@@ -4458,7 +4707,19 @@
    },
    "status": "missing",
    "gap": "A يَا lexeme and a short pragmatics page.",
-   "when": "fd.02"
+   "when": "fd.02",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian has a literary vocative particle ای, like يَا; Arabic also drops the article after it: يَا أُسْتَاذُ."
+    },
+    {
+     "for": "ga",
+     "rel": "similar",
+     "text": "Irish has a vocative particle a (a Sheáin), like يَا; Arabic also drops the article after it: يَا أُسْتَاذُ."
+    }
+   ]
   },
   {
    "id": "ar.lex.kinship_split",
@@ -4523,7 +4784,7 @@
    "alsoIn": [
     "he"
    ],
-   "alsoNote": "Spanish adjectives in formulas agree with the speaker or listener (encantado / encantada), but its singular \"you\" has no gender.",
+   "alsoNote": "Hebrew formulas change with the listener in the same way, because its singular “you” has gender too (מָה שְׁלוֹמְךָ / מָה שְׁלוֹמֵךְ).",
    "what": "Every polite formula that contains 'you' has a form for a man, a woman and a group; formulas that describe the speaker (آسِف 'sorry') agree with the speaker.",
    "examples": [
     {
@@ -4617,7 +4878,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Set replies to greetings also exist in Turkish (hoş geldiniz – hoş bulduk), Swahili (shikamoo – marahaba) and others, but not the Arabic echo-and-outdo pairs.",
+   "alsoNote": "Set replies to greetings exist in many languages, but not the Arabic echo-and-outdo pairs (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ).",
    "what": "Many greetings require a set reply that echoes and outdoes them.",
    "examples": [
     {
@@ -4649,7 +4910,19 @@
    },
    "status": "partial",
    "gap": "The answer is text, not a link to the answer lexeme; dialogue_turn exercise.",
-   "when": "fd.02"
+   "when": "fd.02",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish has set replies too (*hoş geldiniz* – *hoş bulduk*); Arabic answers by echoing and outdoing the greeting:\n\n→ صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ"
+    },
+    {
+     "for": "sw",
+     "rel": "similar",
+     "text": "Swahili has set replies too (shikamoo – marahaba); Arabic answers by echoing and outdoing: صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ."
+    }
+   ]
   },
   {
    "id": "ar.prag.religious_formulas",
@@ -4671,7 +4944,7 @@
     "ur",
     "tr"
    ],
-   "alsoNote": "Persian, Urdu and Turkish use the same Arabic formulas (inşallah, maşallah …), as do many languages of Muslim communities (Somali, Hausa, Swahili, Malay, Indonesian, Azerbaijani, Uzbek …); Hebrew has its own (בְּעֶזְרַת הַשֵּׁם، בָּרוּךְ הַשֵּׁם).",
+   "alsoNote": "Many languages of Muslim communities use the same Arabic formulas; Hebrew has its own (בְּעֶזְרַת הַשֵּׁם، בָּרוּךְ הַשֵּׁם).",
    "what": "Formulas naming God are used by Muslims and Christians alike as ordinary politeness: for the future, for good news, before starting, when praising.",
    "examples": [
     {
@@ -4705,7 +4978,59 @@
    },
    "status": "partial",
    "gap": "Lexemes for إِنْ شَاءَ اللّٰهُ، مَا شَاءَ اللّٰهُ، بِسْمِ اللّٰهِ with usage notes; bridges to Turkish inşallah, maşallah.",
-   "when": "fd.02"
+   "when": "fd.02",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "same",
+     "text": "Turkish uses the same formulas, borrowed:\n\n- *inşallah* — إِنْ شَاءَ اللّٰهُ\n- *maşallah* — مَا شَاءَ اللّٰهُ\n- *elhamdülillah* — الْحَمْدُ لِلّٰهِ"
+    },
+    {
+     "for": "fa",
+     "rel": "same",
+     "text": "Persian uses the same formulas (ان‌شاءالله، ماشاءالله، الحمدلله)."
+    },
+    {
+     "for": "ur",
+     "rel": "same",
+     "text": "Urdu uses the same formulas (ان شاء اللہ، ماشاء اللہ، الحمد للہ)."
+    },
+    {
+     "for": "sw",
+     "rel": "same",
+     "text": "Swahili uses the same formulas, borrowed: inshallah, mashallah, alhamdulillahi."
+    },
+    {
+     "for": "ha",
+     "rel": "same",
+     "text": "Hausa uses the same formulas, borrowed: in sha Allahu, alhamdulillahi."
+    },
+    {
+     "for": "so",
+     "rel": "same",
+     "text": "Somali uses the same formulas, borrowed: inshaallah, alxamdulillaah."
+    },
+    {
+     "for": "ms",
+     "rel": "same",
+     "text": "Malay uses the same formulas, borrowed: insya-Allah, masya-Allah, alhamdulillah."
+    },
+    {
+     "for": "id",
+     "rel": "same",
+     "text": "Indonesian uses the same formulas, borrowed: insyaallah, masyaallah, alhamdulillah."
+    },
+    {
+     "for": "az",
+     "rel": "same",
+     "text": "Azerbaijani uses the same formulas, borrowed: inşallah, maşallah."
+    },
+    {
+     "for": "uz",
+     "rel": "same",
+     "text": "Uzbek uses the same formulas, borrowed: inshoolloh, mashaolloh, alhamdulilloh."
+    }
+   ]
   },
   {
    "id": "ar.lex.diglossia",
@@ -4877,7 +5202,7 @@
     {
      "for": "el",
      "rel": "similar",
-     "text": "Greek took Arabic words, mostly in the time of the sultans: χαΐρι (خَيْر), κέφι (كَيْف), φλιτζάνι (فِنْجَان), μαχαλάς (مَحَلَّة); and Arabic took many from Greek: قَلَم (κάλαμος), فُنْدُق (πανδοκεῖον)."
+     "text": "Greek took Arabic words, mostly in the time of the sultans:\n→ χαΐρι (خَيْر), κέφι (كَيْف), φλιτζάνι (فِنْجَان), μαχαλάς (مَحَلَّة)\n\nAnd Arabic took many from Greek:\n→ قَلَم (κάλαμος), فُنْدُق (πανδοκεῖον)"
     },
     {
      "for": "ru",
@@ -5004,7 +5329,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Hebrew also starts the week on Sunday, with its own lunisolar calendar; Persian, Urdu, Turkish and other languages of Muslim communities know the Hijri months and Friday prayer.",
+   "alsoNote": "Hebrew also starts the week on Sunday and numbers the days, with its own lunisolar calendar; Muslim communities everywhere know the Hijri months and the Friday prayer.",
    "what": "The week starts on Sunday; Friday (الْجُمُعَة, 'the gathering') is the day of congregational prayer and, with Saturday, the weekend in many Arab states. Religious life follows the lunar Hijri calendar (رَمَضَان …), which moves about eleven days a year against the solar calendar.",
    "examples": [
     {
@@ -5031,7 +5356,24 @@
    },
    "status": "partial",
    "gap": "Hijri month names and a culture note.",
-   "when": "fd.14"
+   "when": "fd.14",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish uses the Hijri months for religious dates (*Muharrem*, *Ramazan*), and *Cuma* (Friday) is الْجُمُعَة, “the gathering”."
+    },
+    {
+     "for": "fa",
+     "rel": "similar",
+     "text": "Persian uses the solar Hijri calendar in daily life and the lunar Hijri months for religious dates; Friday is جمعه, the Arabic الْجُمُعَة."
+    },
+    {
+     "for": "ur",
+     "rel": "similar",
+     "text": "Urdu uses the Hijri months for religious dates; Friday is جمعہ, the Arabic الْجُمُعَة."
+    }
+   ]
   },
   {
    "id": "ar.cult.days_numbers",
@@ -5145,7 +5487,7 @@
     "ja",
     "th"
    ],
-   "alsoNote": "Swahili (mama, kaka, dada) and many other languages address strangers with kin terms too; having two kinds of uncle does not imply it (Swedish does not).",
+   "alsoNote": "Addressing strangers with kin terms is common in many languages (Chinese 叔叔, 阿姨 too); having two kinds of uncle does not imply it.",
    "what": "Strangers are addressed as relatives: an older man 'uncle', an older woman 'auntie', a peer 'brother' or 'sister'.",
    "examples": [
     {
@@ -5172,7 +5514,34 @@
    },
    "status": "partial",
    "gap": "A pragmatics note and dialogue exercises (§6.5).",
-   "when": "fd.06"
+   "when": "fd.06",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "same",
+     "text": "Turkish does the same — *amca*, *teyze*, *abla*, *ağabey* for strangers — like يَا عَمِّي، يَا خَالَة، يَا أُخْتِي. It also has two uncles: *amca* = عَمّ, *dayı* = خَال."
+    },
+    {
+     "for": "hi",
+     "rel": "same",
+     "text": "Hindi does the same — भैया, दीदी, चाचा जी for strangers — like يَا أَخِي، يَا أُخْتِي، يَا عَمِّي."
+    },
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese does the same — おじさん, おばさん, おにいさん, おねえさん for strangers — like يَا عَمِّي، يَا خَالَة، يَا أَخِي."
+    },
+    {
+     "for": "sw",
+     "rel": "same",
+     "text": "Swahili also addresses strangers with kin terms (mama, kaka, dada), like يَا خَالَة، يَا أَخِي، يَا أُخْتِي."
+    },
+    {
+     "for": "sv",
+     "rel": "different",
+     "text": "Swedish has two kinds of uncle (farbror / morbror) like عَمّ / خَال, but does not use them to address strangers."
+    }
+   ]
   },
   {
    "id": "ar.lex.multiword",
@@ -5277,7 +5646,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The principle of meanings grouped in one root is familiar to Hebrew and Amharic speakers; the particular pairs are Arabic's own (see polysemy).",
+   "alsoNote": "The principle of meanings grouped in one root is familiar to speakers of Hebrew and other Semitic languages; the particular pairs are Arabic’s own (see polysemy).",
    "what": "One word often covers concepts that many languages keep apart (house / verse, grandfather / luck, maternal uncle / mole), sometimes with a different plural per meaning; distinct roots also coincide in spelling.",
    "examples": [
     {
@@ -5311,7 +5680,14 @@
    },
    "status": "partial",
    "gap": "sense_pick exercise.",
-   "when": "fd.04"
+   "when": "fd.04",
+   "notes": [
+    {
+     "for": "am",
+     "rel": "similar",
+     "text": "The principle of meanings grouped in one root is familiar to Amharic speakers; the particular pairs are Arabic’s own."
+    }
+   ]
   },
   {
    "id": "ar.syn.quantifiers",
@@ -5457,7 +5833,7 @@
    "alsoIn": [
     "he"
    ],
-   "alsoNote": "Hebrew attaches the same kind of one-letter words (ו ה ב ל כ מ ש) and pronoun suffixes; Persian attaches far fewer.",
+   "alsoNote": "Hebrew attaches the same kind of one-letter words (ו ה ב ל כ מ ש) and pronoun suffixes.",
    "what": "Words are separated by spaces. One-letter words (وَ فَ بِـ لِـ كَـ سَـ) and the article are written together with the next word, and pronoun suffixes with the word before, so one written word can be a whole phrase; the letter shapes also mark word ends (final forms).",
    "examples": [
     {
@@ -5482,7 +5858,14 @@
    },
    "status": "partial",
    "gap": "Segmenting a written word into its clitics is shown on words but not practised as a reading skill.",
-   "when": "fd.04"
+   "when": "fd.04",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "different",
+     "text": "Persian writes و and به mostly apart; Arabic joins وَ، فَ، بِـ، لِـ، كَـ to the next word: وَبِالْقَلَمِ."
+    }
+   ]
   },
   {
    "id": "ar.phon.no_tone",
@@ -5544,7 +5927,7 @@
    "alsoIn": [
     "fa"
    ],
-   "alsoNote": "Persian has the same CV(C)(C) syllable with a consonant at every syllable start; Turkish also bans initial clusters but allows syllables that begin with a vowel.",
+   "alsoNote": "Every syllable starts with a consonant — at least the glottal stop ء — and never with two.",
    "what": "Syllables are CV, CVC and CVV; at the end of a word in pause also CVVC and CVCC, and CVVC before a doubled consonant (دَابَّة). A syllable never begins with two consonants: words that would start with a cluster take a helping vowel (hamzat al-waṣl), and inside a word no more than two consonants meet. Final two-consonant clusters (كَلْب kalb) are frequent in pause.",
    "examples": [
     {
@@ -5574,7 +5957,19 @@
    },
    "status": "partial",
    "gap": "Pause forms and helping vowels are described; no exercise trains syllable shapes or initial vowel insertion.",
-   "when": "fd.00"
+   "when": "fd.00",
+   "notes": [
+    {
+     "for": "fa",
+     "rel": "same",
+     "text": "Persian has the same CV(C)(C) syllable, with a consonant at the start of every syllable."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish also avoids two consonants at the start of a word (*istasyon* for “station”), but allows syllables that begin with a vowel.\n\nArabic starts every syllable with a consonant, at least the glottal stop ء."
+    }
+   ]
   },
   {
    "id": "ar.phon.voicing",
@@ -7644,45 +8039,9 @@
      "FEM"
     ],
     "phenomenon": "ar.morph.gender",
-    "why": "Drives the agreement of adjectives, verbs and pronouns and the polarity of the numbers 3–10."
-   },
-   {
-    "id": "translit",
-    "title": "transliteration",
-    "at": "top",
-    "type": "string",
-    "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels and the sounds until the script is read fluently: the pausal form, without case or tanwīn ending (kitāb, muḥāmī, maqhā)."
-   },
-   {
-    "id": "root",
-    "title": "root (radicals)",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.root",
-    "why": "Links the word to its family and to the dictionary; “none” for loanwords and for phrases (their parts have their own roots)."
-   },
-   {
-    "id": "pattern",
-    "title": "pattern (wazn)",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.pattern",
-    "why": "The measure in ف ع ل letters (mafʿal = place, mifʿāl = tool, fāʿil = doer …) lets the learner guess new words; “none” for loanwords, phrases and words that fit no measure."
-   },
-   {
-    "id": "sunLetter",
-    "title": "sun letter (al- assimilates)",
-    "type": "bool",
-    "phenomenon": "ar.orth.sun_letters",
-    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar."
-   },
-   {
-    "id": "human",
-    "title": "human (agreement class)",
-    "type": "bool",
-    "phenomenon": "ar.syn.nonhuman_plural",
-    "why": "Plurals of people agree in the plural; all other plurals agree as feminine singular (الْكُتُبُ جَدِيدَةٌ)."
+    "why": "Drives the agreement of adjectives, verbs and pronouns and the polarity of the numbers 3–10.",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "plurals",
@@ -7691,6 +8050,7 @@
     "none": true,
     "item": {
      "form": "string",
+     "translit": "string?",
      "kind": "enum:broken|soundMasc|soundFem",
      "pattern": "string?",
      "declension": "enum:triptote|diptote|defective|invariable|sound",
@@ -7698,7 +8058,9 @@
      "senses": "senses"
     },
     "phenomenon": "ar.morph.plural.broken",
-    "why": "The plural is learned with the noun: its kind (broken, sound masculine -ūna, sound feminine -āt), its pattern and declension, and the meanings it belongs to (بُيُوت houses / أَبْيَات verses). “none” for mass nouns, names and words used only in the singular."
+    "why": "The plural is learned with the noun: its kind (broken, sound masculine -ūna, sound feminine -āt), its pattern and declension, and the meanings it belongs to (بُيُوت houses / أَبْيَات verses). “none” for mass nouns, names and words used only in the singular. Each plural also gives its transliteration (pausal).",
+    "prominent": true,
+    "order": 2
    },
    {
     "id": "dual",
@@ -7706,7 +8068,18 @@
     "type": "string",
     "none": true,
     "phenomenon": "ar.morph.number.dual",
-    "why": "Mostly regular (-āni), but ة becomes ت (سَنَتَانِ) and some duals are irregular (أَبَوَانِ); “none” for mass nouns, names and plural-only words."
+    "why": "Mostly regular (-āni), but ة becomes ت (سَنَتَانِ) and some duals are irregular (أَبَوَانِ); “none” for mass nouns, names and plural-only words.",
+    "prominent": true,
+    "order": 3
+   },
+   {
+    "id": "human",
+    "title": "human (agreement class)",
+    "type": "bool",
+    "phenomenon": "ar.syn.nonhuman_plural",
+    "why": "Plurals of people agree in the plural; all other plurals agree as feminine singular (الْكُتُبُ جَدِيدَةٌ).",
+    "prominent": true,
+    "order": 4
    },
    {
     "id": "declension",
@@ -7720,7 +8093,44 @@
      "dual"
     ],
     "phenomenon": "ar.morph.diptote",
-    "why": "Triptotes take tanwīn and -i in the genitive; diptotes (names, أَفْعَل, -ān, many broken plurals) take no tanwīn and -a; defective nouns end in -in (مُحَامٍ); invariable nouns never change (مَقْهًى، كُوسَا)."
+    "why": "Triptotes take tanwīn and -i in the genitive; diptotes (names, أَفْعَل, -ān, many broken plurals) take no tanwīn and -a; defective nouns end in -in (مُحَامٍ); invariable nouns never change (مَقْهًى، كُوسَا).",
+    "prominent": true,
+    "order": 5
+   },
+   {
+    "id": "construct",
+    "title": "construct form (iḍāfa)",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "translit": "string?",
+     "note": "string?"
+    },
+    "phenomenon": "ar.morph.construct",
+    "why": "The form the noun takes as the first word of “X of Y” (بَيْتُ الطَّالِبِ): no article, no tanwīn, ة read -t- (مَدْرَسَةُ madrasatu); irregular for the five nouns (أَبُو، أَخُو), duals lose their nūn (وَالِدَا), defective nouns get their ī back (مُحَامِي). “none” for phrases (only their head noun changes) and for names that are only ever the second word (days, months).",
+    "prominent": true,
+    "order": 6
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the word to its family and to the dictionary; “none” for loanwords and for phrases (their parts have their own roots).",
+    "prominent": true,
+    "order": 7
+   },
+   {
+    "id": "pattern",
+    "title": "pattern (wazn)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.pattern",
+    "why": "The measure in ف ع ل letters (mafʿal = place, mifʿāl = tool, fāʿil = doer …) lets the learner guess new words; “none” for loanwords, phrases and words that fit no measure.",
+    "prominent": true,
+    "order": 8
    },
    {
     "id": "unit",
@@ -7730,7 +8140,32 @@
      "NOUN.collective"
     ],
     "phenomenon": "ar.morph.collective_unit",
-    "why": "One piece of a collective (تُفَّاحَة from تُفَّاح); needed for counting."
+    "why": "One piece of a collective (تُفَّاحَة from تُفَّاح); needed for counting.",
+    "prominent": true,
+    "order": 9
+   },
+   {
+    "id": "pair",
+    "title": "male / female counterpart",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "note": "string?"
+    },
+    "phenomenon": "ar.morph.gender",
+    "why": "A person noun has a feminine in -a (مُعَلِّم → مُعَلِّمَة) or a word of another root (رَجُل ↔ اِمْرَأَة, أَب ↔ أُمّ); kinship pairs are learned together. “none” for things and for words that cover both sexes.",
+    "prominent": true,
+    "order": 10
+   },
+   {
+    "id": "sunLetter",
+    "title": "sun letter (al- assimilates)",
+    "type": "bool",
+    "phenomenon": "ar.orth.sun_letters",
+    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar.",
+    "prominent": false,
+    "order": 11
    },
    {
     "id": "meaningForms",
@@ -7743,56 +8178,31 @@
      "senses": "senses"
     },
     "phenomenon": "ar.sem.polysemy_homonymy",
-    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
-   }
-  ],
-  "ADJ": [
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals.",
+    "prominent": false,
+    "order": 12
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels: the pausal masculine singular (kabīr, ġālī)."
-   },
-   {
-    "id": "root",
-    "title": "root (radicals)",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.root",
-    "why": "Links the adjective to the verb and the noun of the same family; “none” for adjectives made from loanwords."
-   },
-   {
-    "id": "pattern",
-    "title": "pattern (wazn)",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.pattern",
-    "why": "faʿīl, fāʿil, faʿlān, afʿal (colours), nisba -ī …; “none” when no measure applies."
-   },
-   {
-    "id": "sunLetter",
-    "title": "sun letter (al- assimilates)",
-    "type": "bool",
-    "phenomenon": "ar.orth.sun_letters",
-    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar."
-   },
-   {
-    "id": "derivedFrom",
-    "title": "made from",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.nisba",
-    "why": "A participle of a verb (بَارِد ← بَرَدَ), a nisba in -ī (بُنِّيّ ← بُنّ) or an elative; “none” for a basic adjective."
-   },
+    "why": "Shows the vowels and the sounds until the script is read fluently: the pausal form, without case or tanwīn ending (kitāb, muḥāmī, maqhā).",
+    "prominent": false,
+    "order": 13
+   }
+  ],
+  "ADJ": [
    {
     "id": "feminine",
     "title": "feminine form",
     "type": "string",
     "none": true,
     "phenomenon": "ar.morph.adj.colour",
-    "why": "Regular -a (كَبِيرَة), but فَعْلَاء for colours (حَمْرَاء) and فَعْلَى for faʿlān (عَطْشَى)."
+    "why": "Regular -a (كَبِيرَة), but فَعْلَاء for colours (حَمْرَاء) and فَعْلَى for faʿlān (عَطْشَى).",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "plurals",
@@ -7801,6 +8211,7 @@
     "none": true,
     "item": {
      "form": "string",
+     "translit": "string?",
      "kind": "enum:broken|soundMasc|soundFem",
      "pattern": "string?",
      "declension": "enum:triptote|diptote|defective|invariable|sound",
@@ -7808,7 +8219,19 @@
      "senses": "senses"
     },
     "phenomenon": "ar.morph.plural.multiple",
-    "why": "Broken or sound -ūna, for masculine plurals of people (non-human plurals usually take the feminine singular, though broken plurals also go with things: لَيَالٍ طِوَالٌ); some meanings have their own plural (كِبَار big / كُبَرَاء great men)."
+    "why": "Broken or sound -ūna, for masculine plurals of people (non-human plurals usually take the feminine singular, though broken plurals also go with things: لَيَالٍ طِوَالٌ); some meanings have their own plural (كِبَار big / كُبَرَاء great men). Each plural also gives its transliteration (pausal).",
+    "prominent": true,
+    "order": 2
+   },
+   {
+    "id": "elative",
+    "title": "comparative / superlative (elative)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.adj.elative",
+    "why": "أَكْبَرُ from كَبِير; “none” when the comparison is made with أَكْثَرُ / أَشَدُّ + a maṣdar (colours, nisbas, participles).",
+    "prominent": true,
+    "order": 3
    },
    {
     "id": "declension",
@@ -7821,15 +8244,63 @@
      "invariable"
     ],
     "phenomenon": "ar.morph.diptote",
-    "why": "Colours (أَحْمَرُ) and faʿlān (عَطْشَانُ) are diptotes; غَالٍ is defective."
+    "why": "Colours (أَحْمَرُ) and faʿlān (عَطْشَانُ) are diptotes; غَالٍ is defective.",
+    "prominent": true,
+    "order": 4
    },
    {
-    "id": "elative",
-    "title": "comparative / superlative (elative)",
+    "id": "governs",
+    "title": "preposition",
+    "type": "list",
+    "none": true,
+    "item": {
+     "prep": "string",
+     "what": "string",
+     "senses": "senses?"
+    },
+    "phenomenon": "ar.syn.verb_government",
+    "why": "Some adjectives take a fixed preposition for their complement (قَرِيب مِنْ near to, بَعِيد عَنْ far from, سَعِيد بِـ happy with, سَهْل عَلَى easy for); it is not predictable and is learned with the adjective.",
+    "prominent": true,
+    "order": 5
+   },
+   {
+    "id": "derivedFrom",
+    "title": "made from",
     "type": "string",
     "none": true,
-    "phenomenon": "ar.morph.adj.elative",
-    "why": "أَكْبَرُ from كَبِير; “none” when the comparison is made with أَكْثَرُ / أَشَدُّ + a maṣdar (colours, nisbas, participles)."
+    "phenomenon": "ar.morph.nisba",
+    "why": "A participle of a verb (بَارِد ← بَرَدَ), a nisba in -ī (بُنِّيّ ← بُنّ) or an elative; “none” for a basic adjective.",
+    "prominent": true,
+    "order": 6
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the adjective to the verb and the noun of the same family; “none” for adjectives made from loanwords.",
+    "prominent": true,
+    "order": 7
+   },
+   {
+    "id": "pattern",
+    "title": "pattern (wazn)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.pattern",
+    "why": "faʿīl, fāʿil, faʿlān, afʿal (colours), nisba -ī …; “none” when no measure applies.",
+    "prominent": true,
+    "order": 8
+   },
+   {
+    "id": "sunLetter",
+    "title": "sun letter (al- assimilates)",
+    "type": "bool",
+    "phenomenon": "ar.orth.sun_letters",
+    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar.",
+    "prominent": false,
+    "order": 9
    },
    {
     "id": "meaningForms",
@@ -7842,40 +8313,22 @@
      "senses": "senses"
     },
     "phenomenon": "ar.sem.polysemy_homonymy",
-    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
-   }
-  ],
-  "VERB": [
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals.",
+    "prominent": false,
+    "order": 10
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels of the 3rd person singular past (the citation form)."
-   },
-   {
-    "id": "root",
-    "title": "root (radicals)",
-    "type": "string",
-    "phenomenon": "ar.morph.root",
-    "why": "The verb is the centre of its word family."
-   },
-   {
-    "id": "rootClass",
-    "title": "root class",
-    "type": "strings",
-    "values": [
-     "sound",
-     "hollow",
-     "defective",
-     "assimilated",
-     "doubled",
-     "hamzated"
-    ],
-    "phenomenon": "ar.morph.root.weak",
-    "why": "Weak radicals (و ي), a doubled radical or hamza change the conjugation: hollow قَالَ، defective مَشَى، assimilated وَصَلَ، doubled أَحَبَّ، hamzated أَكَلَ."
-   },
+    "why": "Shows the vowels: the pausal masculine singular (kabīr, ġālī).",
+    "prominent": false,
+    "order": 11
+   }
+  ],
+  "VERB": [
    {
     "id": "verbForm",
     "title": "verb form",
@@ -7893,7 +8346,9 @@
      "X"
     ],
     "phenomenon": "ar.morph.verb.forms",
-    "why": "Form I … X gives the present, participle and maṣdar patterns and a typical meaning."
+    "why": "Form I … X gives the present, participle and maṣdar patterns and a typical meaning.",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "present",
@@ -7901,7 +8356,27 @@
     "type": "string",
     "none": true,
     "phenomenon": "ar.morph.verb.stem_vowel",
-    "why": "The second principal part: the stem vowel of form I (يَكْتُبُ / يَشْرَبُ / يَجْلِسُ) cannot be predicted. “none” for a verb that has no present."
+    "why": "The second principal part: the stem vowel of form I (يَكْتُبُ / يَشْرَبُ / يَجْلِسُ) cannot be predicted. “none” for a verb that has no present.",
+    "prominent": true,
+    "order": 2
+   },
+   {
+    "id": "stemVowels",
+    "title": "vowels (past – present)",
+    "type": "enum",
+    "none": true,
+    "values": [
+     "a–u",
+     "a–i",
+     "a–a",
+     "i–a",
+     "i–i",
+     "u–u"
+    ],
+    "phenomenon": "ar.morph.verb.stem_vowel",
+    "why": "Form I: the vowel of the second radical in the past and in the present (كَتَبَ يَكْتُبُ a–u, جَلَسَ يَجْلِسُ a–i, فَتَحَ يَفْتَحُ a–a, شَرِبَ يَشْرَبُ i–a); for hollow and defective verbs the underlying vowel (نَامَ = i–a). “none” for forms II–X, whose vowels are fixed by the form.",
+    "prominent": true,
+    "order": 3
    },
    {
     "id": "masdar",
@@ -7909,7 +8384,9 @@
     "type": "strings",
     "none": true,
     "phenomenon": "ar.morph.masdar",
-    "why": "Arabic’s “infinitive” (to eat = أَكْل); unpredictable for form I. “none” for a verb that has none."
+    "why": "Arabic’s “infinitive” (to eat = أَكْل); unpredictable for form I. “none” for a verb that has none.",
+    "prominent": true,
+    "order": 4
    },
    {
     "id": "participles",
@@ -7921,7 +8398,26 @@
      "kind": "enum:active|passive"
     },
     "phenomenon": "ar.morph.participles",
-    "why": "Very frequent as nouns and adjectives (كَاتِب writer, مَكْتُوب written); the passive participle only for verbs with an object."
+    "why": "Very frequent as nouns and adjectives (كَاتِب writer, مَكْتُوب written); the passive participle only for verbs with an object.",
+    "prominent": true,
+    "order": 5
+   },
+   {
+    "id": "rootClass",
+    "title": "root class",
+    "type": "strings",
+    "values": [
+     "sound",
+     "hollow",
+     "defective",
+     "assimilated",
+     "doubled",
+     "hamzated"
+    ],
+    "phenomenon": "ar.morph.root.weak",
+    "why": "Weak radicals (و ي), a doubled radical or hamza change the conjugation: hollow قَالَ، defective مَشَى، assimilated وَصَلَ، doubled أَحَبَّ، hamzated أَكَلَ.",
+    "prominent": true,
+    "order": 6
    },
    {
     "id": "governs",
@@ -7935,7 +8431,54 @@
      "senses": "senses"
     },
     "phenomenon": "ar.syn.verb_government",
-    "why": "What the verb takes: a direct object (accusative) or a preposition (ذَهَبَ إِلَى، خَرَجَ مِنْ، اِنْتَظَرَ + acc.), per meaning. “none” for a verb used without an object."
+    "why": "What the verb takes: a direct object (accusative) or a preposition (ذَهَبَ إِلَى، خَرَجَ مِنْ، اِنْتَظَرَ + acc.), per meaning. “none” for a verb used without an object.",
+    "prominent": true,
+    "order": 7
+   },
+   {
+    "id": "imperative",
+    "title": "imperative (to one man)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.verb.imperative",
+    "why": "Made from the jussive without the prefix; it may need a helping alif (اُكْتُبْ، اِشْرَبْ), loses weak letters (قُلْ، نَمْ، اِمْشِ، صِلْ) or is irregular (كُلْ from أَكَلَ). “none” for verbs with no imperative.",
+    "prominent": true,
+    "order": 8
+   },
+   {
+    "id": "passive",
+    "title": "passive (past / present)",
+    "type": "list",
+    "none": true,
+    "item": {
+     "past": "string",
+     "present": "string",
+     "senses": "senses?",
+     "note": "string?"
+    },
+    "phenomenon": "ar.morph.verb.passive",
+    "why": "The internal passive changes only the vowels (كَتَبَ → كُتِبَ، يَكْتُبُ → يُكْتَبُ; hollow قَادَ → قِيدَ، يُقَادُ). “none” for verbs without an object, which have no personal passive.",
+    "prominent": true,
+    "order": 9
+   },
+   {
+    "id": "past1sg",
+    "title": "past, 1st person (I …)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root.weak",
+    "why": "The past before a consonant ending shows the stem change of weak and doubled verbs: كَانَ → كُنْتُ, نَامَ → نِمْتُ, مَشَى → مَشَيْتُ, أَحَبَّ → أَحْبَبْتُ; regular for sound verbs (كَتَبْتُ). “none” for a verb with no past.",
+    "prominent": true,
+    "order": 10
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "phenomenon": "ar.morph.root",
+    "why": "The verb is the centre of its word family.",
+    "prominent": true,
+    "order": 11
    },
    {
     "id": "meaningForms",
@@ -7948,25 +8491,35 @@
      "senses": "senses"
     },
     "phenomenon": "ar.sem.polysemy_homonymy",
-    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
-   }
-  ],
-  "ADV": [
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals.",
+    "prominent": false,
+    "order": 12
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels; adverbs in -an keep the ending, which is part of the word."
-   },
+    "why": "Shows the vowels of the 3rd person singular past (the citation form).",
+    "prominent": false,
+    "order": 13
+   }
+  ],
+  "ADV": [
    {
-    "id": "root",
-    "title": "root (radicals)",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.root",
-    "why": "Links the adverb to its family; “none” for particles and phrases."
+    "id": "formation",
+    "title": "how it is made",
+    "type": "enum",
+    "values": [
+     "adverbial accusative",
+     "indeclinable particle",
+     "phrase"
+    ],
+    "phenomenon": "ar.syn.adverbial_accusative",
+    "why": "Most adverbs are a noun or adjective in the accusative (غَدًا، كَثِيرًا، الْيَوْمَ) and keep the -an / -a in reading and spelling (the extra alif); others are fixed particles that never change (هُنَا، أَمْسِ، الْآنَ، فَقَطْ) or phrases (بِسُرْعَةٍ، مِنْ فَضْلِكَ).",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "derivedFrom",
@@ -7974,7 +8527,19 @@
     "type": "string",
     "none": true,
     "phenomenon": "ar.syn.adverbial_accusative",
-    "why": "Most adverbs are accusatives of nouns or adjectives (كَثِيرًا ← كَثِير، صَبَاحًا ← صَبَاح) or a preposition + a word (بِخَيْرٍ); “none” for a basic particle (هُنَا، الْآنَ)."
+    "why": "Most adverbs are accusatives of nouns or adjectives (كَثِيرًا ← كَثِير، صَبَاحًا ← صَبَاح) or a preposition + a word (بِخَيْرٍ); “none” for a basic particle (هُنَا، الْآنَ).",
+    "prominent": true,
+    "order": 2
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the adverb to its family; “none” for particles and phrases.",
+    "prominent": true,
+    "order": 3
    },
    {
     "id": "meaningForms",
@@ -7987,33 +8552,31 @@
      "senses": "senses"
     },
     "phenomenon": "ar.sem.polysemy_homonymy",
-    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
-   }
-  ],
-  "ADP": [
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals.",
+    "prominent": false,
+    "order": 4
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels of the preposition."
-   },
+    "why": "Shows the vowels; adverbs in -an keep the ending, which is part of the word.",
+    "prominent": false,
+    "order": 5
+   }
+  ],
+  "ADP": [
    {
-    "id": "prefix",
-    "title": "written attached",
-    "at": "top",
-    "type": "bool",
-    "phenomenon": "ar.morph.prefix_clitics",
-    "why": "بِـ and لِـ are written together with the next word; the others stand alone."
-   },
-   {
-    "id": "root",
-    "title": "root (radicals)",
-    "type": "string",
+    "id": "withPronoun",
+    "title": "with a pronoun (me / him)",
+    "type": "strings",
     "none": true,
-    "phenomenon": "ar.morph.root",
-    "why": "The prepositions that are nouns (ẓarf) have a root (قَبْلَ ← ق ب ل); the short particles (فِي، مِنْ) have none."
+    "phenomenon": "ar.morph.suffix_pronouns",
+    "why": "Pronouns are attached to the preposition, and its shape may change: عَلَى → عَلَيَّ، عَلَيْهِ; إِلَى → إِلَيَّ; فِي → فِيَّ; مِنْ → مِنِّي; لِـ → لِي، لَهُ; بِـ → بِهِ. “none” for prepositions that take no attached pronoun (حَتَّى، مُنْذُ).",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "kind",
@@ -8025,7 +8588,29 @@
      "phrase"
     ],
     "phenomenon": "ar.morph.case",
-    "why": "A true preposition (ḥarf: فِي، مِنْ، إِلَى), a noun in the accusative used as a preposition (ẓarf: قَبْلَ، عِنْدَ، أَمَامَ — it can itself follow مِنْ: مِنْ عِنْدِ), or a preposition + noun (phrase: بِدُونِ، بِجَانِبِ). All take the genitive."
+    "why": "A true preposition (ḥarf: فِي، مِنْ، إِلَى), a noun in the accusative used as a preposition (ẓarf: قَبْلَ، عِنْدَ، أَمَامَ — it can itself follow مِنْ: مِنْ عِنْدِ), or a preposition + noun (phrase: بِدُونِ، بِجَانِبِ). All take the genitive.",
+    "prominent": true,
+    "order": 2
+   },
+   {
+    "id": "prefix",
+    "title": "written attached",
+    "at": "top",
+    "type": "bool",
+    "phenomenon": "ar.morph.prefix_clitics",
+    "why": "بِـ and لِـ are written together with the next word; the others stand alone.",
+    "prominent": true,
+    "order": 3
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "The prepositions that are nouns (ẓarf) have a root (قَبْلَ ← ق ب ل); the short particles (فِي، مِنْ) have none.",
+    "prominent": false,
+    "order": 4
    },
    {
     "id": "meaningForms",
@@ -8038,18 +8623,22 @@
      "senses": "senses"
     },
     "phenomenon": "ar.sem.polysemy_homonymy",
-    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
-   }
-  ],
-  "PRON": [
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals.",
+    "prominent": false,
+    "order": 5
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels."
-   },
+    "why": "Shows the vowels of the preposition.",
+    "prominent": false,
+    "order": 6
+   }
+  ],
+  "PRON": [
    {
     "id": "person",
     "title": "person, number, gender",
@@ -8058,7 +8647,9 @@
      "PRON"
     ],
     "phenomenon": "ar.morph.pron.gender2",
-    "why": "Gender in the 2nd and 3rd person (أَنْتَ / أَنْتِ، هُمْ / هُنَّ)."
+    "why": "Gender in the 2nd and 3rd person (أَنْتَ / أَنْتِ، هُمْ / هُنَّ).",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "suffix",
@@ -8068,42 +8659,66 @@
      "PRON"
     ],
     "phenomenon": "ar.morph.suffix_pronouns",
-    "why": "The pronoun as an ending on nouns, verbs and prepositions (كِتَابُكَ، يَرَاهُ، لَهَا)."
+    "why": "The pronoun as an ending on nouns, verbs and prepositions (كِتَابُكَ، يَرَاهُ، لَهَا).",
+    "prominent": true,
+    "order": 2
+   },
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels.",
+    "prominent": false,
+    "order": 3
    }
   ],
   "DET": [
    {
+    "id": "governs",
+    "title": "what follows",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.construct",
+    "why": "أَيّ heads a construct with a genitive noun (أَيُّ كِتَابٍ؟); لِمَنْ is a predicate before the thing owned (لِمَنْ هٰذَا؟).",
+    "prominent": true,
+    "order": 1
+   },
+   {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels."
+    "why": "Shows the vowels.",
+    "prominent": false,
+    "order": 2
    }
   ],
   "NUM": [
-   {
-    "id": "translit",
-    "title": "transliteration",
-    "at": "top",
-    "type": "string",
-    "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels of the citation form."
-   },
-   {
-    "id": "root",
-    "title": "root (radicals)",
-    "type": "string",
-    "none": true,
-    "phenomenon": "ar.morph.root",
-    "why": "The numbers are native words with roots (ث ل ث، ع ش ر); “none” for the compound numbers 11–19."
-   },
    {
     "id": "polarity",
     "title": "gender polarity",
     "type": "bool",
     "phenomenon": "ar.numbers.polarity",
-    "why": "3–10 (and the units of 13–19) take the form of the opposite gender: ثَلَاثَةُ كُتُبٍ but ثَلَاثُ سَيَّارَاتٍ."
+    "why": "3–10 (and the units of 13–19) take the form of the opposite gender: ثَلَاثَةُ كُتُبٍ but ثَلَاثُ سَيَّارَاتٍ.",
+    "prominent": true,
+    "order": 1
+   },
+   {
+    "id": "genderForms",
+    "title": "with a masculine / feminine noun",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "with": "enum:MASC|FEM"
+    },
+    "phenomenon": "ar.numbers.polarity",
+    "why": "The form of the number used with a masculine and with a feminine counted noun: 1–2 agree (وَاحِد / وَاحِدَة), 3–10 take the opposite gender (ثَلَاثَة كُتُبٍ / ثَلَاث بَنَاتٍ), the teens combine both. “none” for the tens, hundred and thousand (one form).",
+    "prominent": true,
+    "order": 2
    },
    {
     "id": "countedNoun",
@@ -8118,7 +8733,9 @@
     ],
     "none": true,
     "phenomenon": "ar.numbers.counted_noun",
-    "why": "The case and number of the noun with the number."
+    "why": "The case and number of the noun with the number.",
+    "prominent": true,
+    "order": 3
    },
    {
     "id": "ordinal",
@@ -8126,26 +8743,32 @@
     "type": "string",
     "none": true,
     "phenomenon": "ar.numbers.ordinals",
-    "why": "The ordinal (masculine): ثَالِث from ثَلَاثَة; “first” is suppletive (أَوَّل); “none” for zero."
-   }
-  ],
-  "CCONJ": [
+    "why": "The ordinal (masculine): ثَالِث from ثَلَاثَة; “first” is suppletive (أَوَّل); “none” for zero.",
+    "prominent": true,
+    "order": 4
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "The numbers are native words with roots (ث ل ث، ع ش ر); “none” for the compound numbers 11–19.",
+    "prominent": false,
+    "order": 5
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels."
-   },
-   {
-    "id": "prefix",
-    "title": "written attached",
-    "at": "top",
-    "type": "bool",
-    "phenomenon": "ar.morph.prefix_clitics",
-    "why": "وَ and فَ are written together with the next word."
-   },
+    "why": "Shows the vowels of the citation form.",
+    "prominent": false,
+    "order": 6
+   }
+  ],
+  "CCONJ": [
    {
     "id": "governs",
     "title": "what follows",
@@ -8156,18 +8779,32 @@
      "words or clauses"
     ],
     "phenomenon": "ar.syn.inna_sisters",
-    "why": "لٰكِنَّ takes a noun in the accusative or a pronoun suffix; the others join words or whole clauses."
-   }
-  ],
-  "SCONJ": [
+    "why": "لٰكِنَّ takes a noun in the accusative or a pronoun suffix; the others join words or whole clauses.",
+    "prominent": true,
+    "order": 1
+   },
+   {
+    "id": "prefix",
+    "title": "written attached",
+    "at": "top",
+    "type": "bool",
+    "phenomenon": "ar.morph.prefix_clitics",
+    "why": "وَ and فَ are written together with the next word.",
+    "prominent": true,
+    "order": 2
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels."
-   },
+    "why": "Shows the vowels.",
+    "prominent": false,
+    "order": 3
+   }
+  ],
+  "SCONJ": [
    {
     "id": "governs",
     "title": "what follows",
@@ -8179,17 +8816,31 @@
      "clause"
     ],
     "phenomenon": "ar.syn.inna_sisters",
-    "why": "أَنَّ / لِأَنَّ + an accusative noun or a pronoun suffix; أَنْ + a subjunctive verb; إِذَا + a past verb; عِنْدَمَا + a clause."
-   }
-  ],
-  "PART": [
+    "why": "أَنَّ / لِأَنَّ + an accusative noun or a pronoun suffix; أَنْ + a subjunctive verb; إِذَا + a past verb; عِنْدَمَا + a clause.",
+    "prominent": true,
+    "order": 1
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels."
+    "why": "Shows the vowels.",
+    "prominent": false,
+    "order": 2
+   }
+  ],
+  "PART": [
+   {
+    "id": "governs",
+    "title": "what follows",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.verb.moods",
+    "why": "Each particle chooses the form of what follows: لَمْ + jussive, لَنْ + subjunctive, سَـ / سَوْفَ + present indicative, مَا + past, قَدْ + past or present; هَلْ / أَ + a whole statement.",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "prefix",
@@ -8197,18 +8848,22 @@
     "at": "top",
     "type": "bool",
     "phenomenon": "ar.morph.prefix_clitics",
-    "why": "أَ is written together with the next word; the other particles stand alone."
-   }
-  ],
-  "INTJ": [
+    "why": "أَ is written together with the next word; the other particles stand alone.",
+    "prominent": true,
+    "order": 2
+   },
    {
     "id": "translit",
     "title": "transliteration",
     "at": "top",
     "type": "string",
     "phenomenon": "ar.orth.romanization",
-    "why": "Shows the vowels of the formula."
-   },
+    "why": "Shows the vowels.",
+    "prominent": false,
+    "order": 3
+   }
+  ],
+  "INTJ": [
    {
     "id": "addressee",
     "title": "said to",
@@ -8220,7 +8875,9 @@
      "any"
     ],
     "phenomenon": "ar.prag.addressee_gender",
-    "why": "Many formulas change with the person addressed: a man, a woman, a group (كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ)."
+    "why": "Many formulas change with the person addressed: a man, a woman, a group (كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ).",
+    "prominent": true,
+    "order": 1
    },
    {
     "id": "response",
@@ -8228,7 +8885,19 @@
     "type": "string",
     "none": true,
     "phenomenon": "ar.prag.greeting_pairs",
-    "why": "The answer this formula gets (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ); “none” when there is no fixed answer."
+    "why": "The answer this formula gets (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ); “none” when there is no fixed answer.",
+    "prominent": true,
+    "order": 2
+   },
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the formula.",
+    "prominent": false,
+    "order": 3
    }
   ]
  },

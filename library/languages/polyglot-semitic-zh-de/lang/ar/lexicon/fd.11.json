@@ -20,7 +20,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "فِيَّ",
+     "فِيهِ"
+    ]
    },
    "contrasts": [
     {
@@ -301,7 +305,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "إِلَيَّ",
+     "إِلَيْهِ"
+    ]
    },
    "contrasts": [
     {
@@ -452,7 +460,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "مِنِّي",
+     "مِنْهُ"
+    ]
    },
    "translit": "min",
    "forms": {
@@ -616,7 +628,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "مَعِي",
+     "مَعَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -768,7 +784,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "بِي",
+     "بِهِ"
+    ]
    },
    "contrasts": [
     {
@@ -940,7 +960,11 @@
     "kind": "phrase",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "withPronoun": [
+     "بِدُونِي",
+     "بِدُونِهِ"
+    ]
    },
    "translit": "bi-dūni",
    "forms": {
@@ -1072,7 +1096,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "لِي",
+     "لَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -1237,7 +1265,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "عَنِّي",
+     "عَنْهُ"
+    ]
    },
    "contrasts": [
     {
@@ -1393,6 +1425,7 @@
     "plurals": [
      {
       "form": "مَدَارِس",
+      "translit": "madāris",
       "kind": "broken",
       "pattern": "مَفَاعِل",
       "declension": "diptote",
@@ -1405,7 +1438,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَدْرَسَةُ",
+      "translit": "madrasatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "madrasa",
@@ -1550,6 +1592,7 @@
     "plurals": [
      {
       "form": "جَامِعَات",
+      "translit": "jāmiʿāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1562,7 +1605,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جَامِعَةُ",
+      "translit": "jāmiʿatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "jāmiʿa",
@@ -1700,6 +1752,7 @@
     "plurals": [
      {
       "form": "أَعْمَال",
+      "translit": "ʾaʿmāl",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1714,7 +1767,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَمَلُ",
+      "translit": "ʿamalu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʿamal",
@@ -1878,6 +1940,7 @@
     "plurals": [
      {
       "form": "مَكَاتِب",
+      "translit": "makātib",
       "kind": "broken",
       "pattern": "مَفَاعِل",
       "declension": "diptote",
@@ -1892,7 +1955,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَكْتَبُ",
+      "translit": "maktabu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "maktab",
@@ -2053,6 +2125,7 @@
     "plurals": [
      {
       "form": "مَحَلَّات",
+      "translit": "maḥallāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2062,6 +2135,7 @@
      },
      {
       "form": "مَحَالّ",
+      "translit": "maḥāll",
       "kind": "broken",
       "pattern": "مَفَاعِل",
       "declension": "diptote",
@@ -2076,7 +2150,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَحَلُّ",
+      "translit": "maḥallu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "maḥall",
@@ -2244,7 +2327,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سُوبَرْمَارْكِتُ",
+      "translit": "sūbarmārkitu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "sūbarmārkit",
@@ -2368,6 +2460,7 @@
     "plurals": [
      {
       "form": "أَسْوَاق",
+      "translit": "ʾaswāq",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2381,7 +2474,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سُوقُ",
+      "translit": "sūqu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "sūq",
@@ -2534,6 +2636,7 @@
     "plurals": [
      {
       "form": "مَطَاعِم",
+      "translit": "maṭāʿim",
       "kind": "broken",
       "pattern": "مَفَاعِل",
       "declension": "diptote",
@@ -2546,7 +2649,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَطْعَمُ",
+      "translit": "maṭʿamu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "maṭʿam",
@@ -2690,6 +2802,7 @@
     "plurals": [
      {
       "form": "مَقَاهٍ",
+      "translit": "maqāhī",
       "kind": "broken",
       "pattern": "مَفَاعٍ",
       "declension": "defective",
@@ -2702,7 +2815,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَقْهَى",
+      "translit": "maqhā"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2854,6 +2976,7 @@
     "plurals": [
      {
       "form": "مُسْتَشْفَيَات",
+      "translit": "mustašfayāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2865,7 +2988,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مُسْتَشْفَى",
+      "translit": "mustašfā"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "mustašfā",
@@ -2996,6 +3128,7 @@
     "plurals": [
      {
       "form": "صَيْدَلِيَّات",
+      "translit": "ṣaydaliyyāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3007,7 +3140,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "صَيْدَلِيَّةُ",
+      "translit": "ṣaydaliyyatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ṣaydaliyya",
@@ -3129,6 +3271,7 @@
     "plurals": [
      {
       "form": "بُنُوك",
+      "translit": "bunūk",
       "kind": "broken",
       "declension": "triptote",
       "senses": [
@@ -3140,7 +3283,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَنْكُ",
+      "translit": "banku"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bank",
@@ -3232,7 +3384,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian banco is the moneychanger’s bench."
+     "The word first meant a bench: the counter at which the moneychangers sat."
     ],
     "pitfalls": [
      "A sukūn on n: bank, not *banak; the plural is broken: بُنُوك."
@@ -3245,6 +3397,16 @@
       "for": "el",
       "rel": "similar",
       "text": "Greek τράπεζα (bank) is literally “table”: the same counter as banco, the source of بَنْك — another picture."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "*banco* — the moneychanger’s bench — is where بَنْك comes from, together with *banca*."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "*banque* is the same word; it reinforced بَنْك later."
      }
     ]
    }
@@ -3268,6 +3430,7 @@
     "plurals": [
      {
       "form": "مَكَاتِب بَرِيد",
+      "translit": "makātib barīd",
       "kind": "broken",
       "declension": "diptote",
       "note": "the head noun takes the plural: مَكَاتِبُ بَرِيدٍ",
@@ -3280,6 +3443,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: مَكْتَب is in the construct state and بَرِيد is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "MASC",
@@ -3402,6 +3571,7 @@
     "plurals": [
      {
       "form": "مَحَطَّات",
+      "translit": "maḥaṭṭāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3413,7 +3583,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَحَطَّةُ",
+      "translit": "maḥaṭṭatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "maḥaṭṭa",
@@ -3534,6 +3713,7 @@
     "plurals": [
      {
       "form": "مَطَارَات",
+      "translit": "maṭārāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3545,7 +3725,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَطَارُ",
+      "translit": "maṭāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "maṭār",
@@ -3661,6 +3850,7 @@
     "plurals": [
      {
       "form": "شَوَارِع",
+      "translit": "šawāriʿ",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -3673,7 +3863,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَارِعُ",
+      "translit": "šāriʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šāriʿ",
@@ -3805,6 +4004,7 @@
     "plurals": [
      {
       "form": "مَيَادِين",
+      "translit": "mayādīn",
       "kind": "broken",
       "declension": "diptote",
       "senses": [
@@ -3818,7 +4018,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَيْدَانُ",
+      "translit": "maydānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "maydān",
@@ -3993,6 +4202,7 @@
     "plurals": [
      {
       "form": "حَدَائِق",
+      "translit": "ḥadāʾiq",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -4006,7 +4216,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَدِيقَةُ",
+      "translit": "ḥadīqatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḥadīqa",
@@ -4201,6 +4420,7 @@
     "plurals": [
      {
       "form": "مُدُن",
+      "translit": "mudun",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -4210,6 +4430,7 @@
      },
      {
       "form": "مَدَائِن",
+      "translit": "madāʾin",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -4223,7 +4444,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَدِينَةُ",
+      "translit": "madīnatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -4357,6 +4587,7 @@
     "plurals": [
      {
       "form": "قُرًى",
+      "translit": "qurā",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "invariable",
@@ -4369,7 +4600,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَرْيَةُ",
+      "translit": "qaryatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "qarya",
@@ -4500,6 +4740,7 @@
     "plurals": [
      {
       "form": "بُلْدَان",
+      "translit": "buldān",
       "kind": "broken",
       "pattern": "فُعْلَان",
       "declension": "triptote",
@@ -4511,6 +4752,7 @@
      },
      {
       "form": "بِلَاد",
+      "translit": "bilād",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -4524,7 +4766,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَلَدُ",
+      "translit": "baladu"
+     }
+    ]
    },
    "contrasts": [
     {

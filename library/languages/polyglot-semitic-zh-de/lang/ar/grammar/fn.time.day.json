@@ -353,7 +353,7 @@
   {
    "lang": "he",
    "fn": "fn.time.day",
-   "note": "Hebrew numbers the days the same way: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי … (first, second …), then שַׁבָּת = السَّبْت; “in the morning” is בַּבֹּקֶר with בְּ, where Arabic can use the accusative صَبَاحًا."
+   "note": "Hebrew numbers the days the same way: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי … (first, second …), then שַׁבָּת = السَّبْت.\n\n“In the morning” is בַּבֹּקֶר with בְּ, where Arabic can use the accusative صَبَاحًا."
   },
   {
    "lang": "de",
@@ -391,7 +391,7 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English names the days after gods and planets (Sunday, Monday …); Arabic mostly numbers them, starting from Sunday: الْأَحَد, “the one”. “On Monday” needs no preposition: يَوْمَ الِاثْنَيْنِ."
+   "text": "English names the days after gods and planets (Sunday, Monday …); Arabic mostly numbers them, starting from Sunday: الْأَحَد, “the one”.\n\n“On Monday” needs no preposition:\n→ يَوْمَ الِاثْنَيْنِ"
   },
   {
    "for": "es",
@@ -431,32 +431,32 @@
   {
    "for": "fr",
    "rel": "different",
-   "text": "French lundi, mardi … are named after the Moon and the planets; Arabic numbers the days from Sunday: الْأَحَد “the one”, الِاثْنَيْن “the two”. As with lundi, “on Monday” needs no preposition (يَوْمَ الِاثْنَيْنِ), and le matin is the bare accusative صَبَاحًا."
+   "text": "French lundi, mardi … are named after the Moon and the planets; Arabic numbers the days from Sunday: الْأَحَد “the one”, الِاثْنَيْن “the two”.\n\nAs with lundi, no preposition is needed:\n→ “on Monday” — يَوْمَ الِاثْنَيْنِ\n→ le matin — the bare accusative صَبَاحًا"
   },
   {
    "for": "de",
    "rel": "similar",
-   "text": "German also says “when” with a bare case: jeden Tag, eines Tages, morgens = كُلَّ يَوْمٍ, صَبَاحًا; for am Montag Arabic has يَوْمَ الِاثْنَيْنِ — an accusative instead of am. The days are numbers from Sunday, except الْجُمُعَة and السَّبْت."
+   "text": "German also says “when” with a bare case:\n→ jeden Tag, eines Tages, morgens = كُلَّ يَوْمٍ, صَبَاحًا\n\nFor am Montag Arabic has يَوْمَ الِاثْنَيْنِ — **an accusative instead of am**. The days are numbers from Sunday, except الْجُمُعَة and السَّبْت."
   },
   {
    "for": "zh",
    "rel": "trap",
-   "text": "Chinese also numbers the days — 星期一, 星期二 … — but from Monday; Arabic starts from Sunday: الْأَحَد (“one”) is Sunday, الِاثْنَيْن (“two”) is Monday. As with 星期一, يَوْمَ الِاثْنَيْنِ needs no preposition."
+   "text": "Chinese also numbers the days — 星期一, 星期二 … — but from Monday; **Arabic starts from Sunday**:\n- الْأَحَد (“one”) is Sunday;\n- الِاثْنَيْن (“two”) is Monday.\n\nAs with 星期一, يَوْمَ الِاثْنَيْنِ needs no preposition."
   },
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian lunedì, martedì … are named after the Moon and the planets; Arabic numbers the days from Sunday: الْأَحَد “the one”, الِاثْنَيْن “the two”. As with lunedì, “on Monday” needs no preposition: يَوْمَ الِاثْنَيْنِ."
+   "text": "Italian lunedì, martedì … are named after the Moon and the planets; Arabic numbers the days from Sunday: الْأَحَد “the one”, الِاثْنَيْن “the two”.\n\nAs with lunedì, “on Monday” needs no preposition:\n→ يَوْمَ الِاثْنَيْنِ"
   },
   {
    "for": "sq",
    "rel": "same",
-   "text": "Albanian also says “when” with a bare case form: të hënën (on Monday), natën (at night) — like يَوْمَ الِاثْنَيْنِ, لَيْلًا. The names differ: Arabic numbers the days from Sunday (الْأَحَد, “the one”)."
+   "text": "Albanian also says “when” with a bare case form — like يَوْمَ الِاثْنَيْنِ, لَيْلًا:\n→ të hënën (on Monday), natën (at night)\n\nThe names differ: Arabic numbers the days from Sunday (الْأَحَد, “the one”)."
   },
   {
    "for": "pt",
    "rel": "same",
-   "text": "Portuguese numbers the days exactly like Arabic, from Sunday: segunda-feira = الِاثْنَيْن (“two”), terça = الثُّلَاثَاء, quarta = الْأَرْبِعَاء, quinta = الْخَمِيس, sexta = الْجُمُعَة (the sixth day); sábado is السَّبْت, the same word."
+   "text": "Portuguese numbers the days exactly like Arabic, from Sunday:\n- segunda-feira = الِاثْنَيْن (“two”)\n- terça = الثُّلَاثَاء\n- quarta = الْأَرْبِعَاء\n- quinta = الْخَمِيس\n- sexta = الْجُمُعَة (the sixth day)\n- sábado is السَّبْت, the same word"
   },
   {
    "for": "type:fusional",
@@ -482,6 +482,11 @@
    "for": "branch:Semitic",
    "rel": "same",
    "text": "If your language is Semitic, days named by numbers and the Sabbath are familiar; Arabic adds the accusative ending for “when”: يَوْمَ الْأَحَدِ."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Like Turkish, Arabic says “day + name” for a day and needs no preposition:\n\n→ *pazartesi günü* — يَوْمَ الِاثْنَيْنِ\n→ *sabah*, *akşam* — صَبَاحًا، مَسَاءً\n\n**Arabic adds the accusative ending -a / -an** where Turkish leaves the word bare. *Cuma* is الْجُمُعَة, and *Çarşamba*, *Perşembe* (the “fourth” and “fifth” day, from Persian) count like الْأَرْبِعَاء، الْخَمِيس."
   }
  ]
 }

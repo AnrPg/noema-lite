@@ -28,7 +28,15 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form X: the vowels are fixed by the form"
+    },
+    "imperative": "اِسْتَيْقِظْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "اِسْتَيْقَظْتُ"
    },
    "translit": "istayqaẓa",
    "forms": {
@@ -159,7 +167,7 @@
      "The root ي ق ظ is about being alert: يَقَظَة is wakefulness or vigilance, and يَقِظ an alert, watchful person."
     ],
     "pitfalls": [
-     "Form X: the past starts with اِسْتَـ (اِسْتَيْقَظْتُ), the present with يَسْتَـ and has i before the last root letter: يَسْتَيْقِظُ. The first alif is a connecting hamza: silent inside a sentence.",
+     "Form X:\n- the past starts with اِسْتَـ: اِسْتَيْقَظْتُ;\n- the present with يَسْتَـ, and has i before the last root letter: يَسْتَيْقِظُ.\n\nThe first alif is a connecting hamza: silent inside a sentence.",
      "To wake someone else up is أَيْقَظَ (form IV): أَيْقَظَتْنِي أُمِّي “my mother woke me up”."
     ],
     "subtleties": [
@@ -202,7 +210,13 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–a",
+    "imperative": "اِنْهَضْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "نَهَضْتُ"
    },
    "translit": "nahaḍa",
    "forms": {
@@ -375,7 +389,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–i",
+    "imperative": "اِغْسِلْ",
+    "passive": [
+     {
+      "past": "غُسِلَ",
+      "present": "يُغْسَلُ"
+     }
+    ],
+    "past1sg": "غَسَلْتُ"
    },
    "translit": "ġasala",
    "forms": {
@@ -541,7 +564,15 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form X: the vowels are fixed by the form"
+    },
+    "imperative": "اِسْتَحِمَّ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "اِسْتَحْمَمْتُ"
    },
    "translit": "istaḥamma",
    "forms": {
@@ -743,7 +774,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "اِلْبَسْ",
+    "passive": [
+     {
+      "past": "لُبِسَ",
+      "present": "يُلْبَسُ"
+     }
+    ],
+    "past1sg": "لَبِسْتُ"
    },
    "translit": "labisa",
    "forms": {
@@ -947,7 +987,15 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "stemVowels": {
+     "none": "form IV: the vowels are fixed by the form"
+    },
+    "imperative": "أَفْطِرْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "أَفْطَرْتُ"
    },
    "translit": "ʾafṭara",
    "forms": {
@@ -1141,7 +1189,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–a",
+    "imperative": "اِبْدَأْ",
+    "passive": [
+     {
+      "past": "بُدِئَ",
+      "present": "يُبْدَأُ"
+     }
+    ],
+    "past1sg": "بَدَأْتُ"
    },
    "translit": "badaʾa",
    "forms": {
@@ -1321,7 +1378,15 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form VIII: the vowels are fixed by the form"
+    },
+    "imperative": "اِنْتَهِ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "اِنْتَهَيْتُ"
    },
    "translit": "intahā",
    "forms": {
@@ -1485,7 +1550,13 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "نَمْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "نِمْتُ"
    },
    "translit": "nāma",
    "forms": {
@@ -1680,6 +1751,9 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-09"
+   },
+   "features": {
+    "governs": "the jussive (present stem without -u), with a past meaning: لَمْ يَذْهَبْ"
    }
   },
   {
@@ -1693,6 +1767,9 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-09"
+   },
+   "features": {
+    "governs": "a past verb (completed: قَدْ وَصَلَ) or a present verb (“may, sometimes”: قَدْ يَتَأَخَّرُ)"
    }
   }
  ],

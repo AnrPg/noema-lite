@@ -115,7 +115,8 @@
     "subtleties": [
      "Formal Arabic also uses مَاذَا before a past verb: مَاذَا فَعَلْتَ؟ (what did you do?)."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:ma",
@@ -245,7 +246,8 @@
     "subtleties": [
      "In the exclamation مَا أَجْمَلَ …! the noun is accusative: مَا أَجْمَلَ الْبَحْرَ!"
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:ayna",
@@ -263,7 +265,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "ʾayna",
    "ref": {
@@ -509,7 +512,8 @@
       "text": "Amharic ማን (man) is a cognate of مَنْ."
      }
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:mata",
@@ -528,7 +532,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "contrasts": [
     {
@@ -680,7 +685,8 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "formation": "indeclinable particle"
    },
    "translit": "kayfa",
    "ref": {
@@ -824,7 +830,8 @@
     "derivedFrom": "لِ + مَاذَا (what?)",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "translit": "li-māḏā",
    "ref": {
@@ -971,7 +978,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "kam",
    "ref": {
@@ -1214,6 +1222,9 @@
      "With a feminine noun both أَيُّ مَدِينَةٍ and أَيَّةُ مَدِينَةٍ are correct; أَيُّ is more common.",
      "With a pronoun ending: أَيُّهُمْ؟ (which of them?), أَيُّهُمَا؟ (which of the two?)."
     ]
+   },
+   "features": {
+    "governs": "a genitive noun, as the first term of a construct: أَيُّ كِتَابٍ؟ (feminine أَيَّةُ is optional)"
    }
   },
   {
@@ -1346,6 +1357,9 @@
       "text": "English has a word of its own, whose; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
      }
     ]
+   },
+   "features": {
+    "governs": "the thing owned, as a predicate: لِمَنْ هٰذَا الْكِتَابُ؟"
    }
   },
   {
@@ -1364,6 +1378,7 @@
     "plurals": [
      {
       "form": "أَطِبَّاء",
+      "translit": "ʾaṭibbāʾ",
       "kind": "broken",
       "pattern": "أَفْعِلَاء",
       "declension": "diptote",
@@ -1376,7 +1391,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "طَبِيبَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "طَبِيبُ",
+      "translit": "ṭabību"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭabīb",
@@ -1534,6 +1561,7 @@
     "plurals": [
      {
       "form": "مُمَرِّضُونَ",
+      "translit": "mumarriḍūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1545,7 +1573,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُمَرِّضَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُمَرِّضُ",
+      "translit": "mumarriḍu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "mumarriḍ",
@@ -1678,6 +1718,7 @@
     "plurals": [
      {
       "form": "مُهَنْدِسُونَ",
+      "translit": "muhandisūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1690,7 +1731,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُهَنْدِسَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُهَنْدِسُ",
+      "translit": "muhandisu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "muhandis",
@@ -1858,6 +1911,7 @@
     "plurals": [
      {
       "form": "سَائِقُونَ",
+      "translit": "sāʾiqūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1869,7 +1923,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "سَائِقَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "سَائِقُ",
+      "translit": "sāʾiqu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "sāʾiq",
@@ -2011,6 +2077,7 @@
     "plurals": [
      {
       "form": "طَبَّاخُونَ",
+      "translit": "ṭabbāḫūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2022,7 +2089,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "طَبَّاخَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "طَبَّاخُ",
+      "translit": "ṭabbāḫu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭabbāḫ",
@@ -2164,6 +2243,7 @@
     "plurals": [
      {
       "form": "بَاعَة",
+      "translit": "bāʿa",
       "kind": "broken",
       "pattern": "فَعَلَة",
       "declension": "triptote",
@@ -2173,6 +2253,7 @@
      },
      {
       "form": "بَائِعُونَ",
+      "translit": "bāʾiʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2184,7 +2265,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "بَائِعَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "بَائِعُ",
+      "translit": "bāʾiʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bāʾiʿ",
@@ -2350,6 +2443,7 @@
     "plurals": [
      {
       "form": "عُمَّال",
+      "translit": "ʿummāl",
       "kind": "broken",
       "pattern": "فُعَّال",
       "declension": "triptote",
@@ -2360,6 +2454,7 @@
      },
      {
       "form": "عَامِلُونَ",
+      "translit": "ʿāmilūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "employees, those working (الْعَامِلُونَ فِي الشَّرِكَةِ)",
@@ -2369,6 +2464,7 @@
      },
      {
       "form": "عَوَامِل",
+      "translit": "ʿawāmil",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -2382,7 +2478,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "عَامِلَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "عَامِلُ",
+      "translit": "ʿāmilu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʿāmil",
@@ -2569,6 +2677,7 @@
     "plurals": [
      {
       "form": "مُزَارِعُونَ",
+      "translit": "muzāriʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2580,7 +2689,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُزَارِعَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُزَارِعُ",
+      "translit": "muzāriʿu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2724,6 +2845,7 @@
     "plurals": [
      {
       "form": "فَلَّاحُونَ",
+      "translit": "fallāḥūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2735,7 +2857,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "فَلَّاحَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "فَلَّاحُ",
+      "translit": "fallāḥu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2879,6 +3013,7 @@
     "plurals": [
      {
       "form": "شُرْطِيُّونَ",
+      "translit": "šurṭiyyūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2890,7 +3025,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "شُرْطِيَّة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "شُرْطِيُّ",
+      "translit": "šurṭiyyu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šurṭī",
@@ -3036,6 +3183,7 @@
     "plurals": [
      {
       "form": "مُحَامُونَ",
+      "translit": "muḥāmūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3047,7 +3195,20 @@
     "declension": "defective",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُحَامِيَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُحَامِي",
+      "translit": "muḥāmī",
+      "note": "the final ī comes back (مُحَامِي الشَّرِكَةِ)"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "muḥāmī",
@@ -3189,6 +3350,7 @@
     "plurals": [
      {
       "form": "فَنَّانُونَ",
+      "translit": "fannānūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3200,7 +3362,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "فَنَّانَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "فَنَّانُ",
+      "translit": "fannānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "fannān",

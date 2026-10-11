@@ -369,12 +369,12 @@
   {
    "lang": "he",
    "fn": "fn.question.wh",
-   "note": "Hebrew question words also come first and are often the same Semitic words: מָה = مَا, מָתַי = مَتَى, כַּמָּה = كَمْ. But Hebrew כַּמָּה takes a plural noun (כַּמָּה אַחִים), Arabic كَمْ a singular accusative (كَمْ أَخًا)."
+   "note": "Hebrew question words also come first and are often the same Semitic words:\n→ מָה = مَا, מָתַי = مَتَى, כַּמָּה = كَمْ\n\nBut Hebrew כַּמָּה takes a plural noun (כַּמָּה אַחִים), **Arabic كَمْ a singular accusative** (كَمْ أَخًا)."
   },
   {
    "lang": "de",
    "fn": "fn.question.wh",
-   "note": "German puts the W-word first and the verb second (Was trinkst du?); Arabic also fronts the question word but never moves the verb. German welcher declines like Arabic أَيّ (welchen Kaffee / أَيَّ قَهْوَةٍ)."
+   "note": "German puts the W-word first and the verb second (Was trinkst du?); Arabic also fronts the question word but never moves the verb.\n\nGerman welcher declines like Arabic أَيّ:\n→ welchen Kaffee / أَيَّ قَهْوَةٍ"
   },
   {
    "lang": "zh",
@@ -472,7 +472,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German puts the verb second after the question word (Was trinkst du?); Arabic does not move anything: مَاذَا تَشْرَبُ؟ (“what you-drink?”). Wessen is لِمَنْ (“to whom”), and wie viele takes a singular noun: كَمْ أَخًا؟"
+   "text": "German puts the verb second after the question word (Was trinkst du?); Arabic does not move anything:\n→ مَاذَا تَشْرَبُ؟ (“what you-drink?”)\n\n- Wessen is لِمَنْ (“to whom”).\n- Wie viele takes a singular noun: كَمْ أَخًا؟"
   },
   {
    "for": "zh",
@@ -482,17 +482,17 @@
   {
    "for": "it",
    "rel": "similar",
-   "text": "Italian also fronts the question word with no helper verb (cosa bevi?) — مَاذَا تَشْرَبُ؟ Di chi è? is لِمَنْ هٰذَا؟ (“to whom (is) this?”), and quanti fratelli? takes a singular in Arabic: كَمْ أَخًا؟"
+   "text": "Italian also fronts the question word with no helper verb:\n→ cosa bevi? — مَاذَا تَشْرَبُ؟\n\n- Di chi è? is لِمَنْ هٰذَا؟ (“to whom (is) this?”).\n- Quanti fratelli? takes a singular in Arabic: كَمْ أَخًا؟"
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian also fronts the question word with no helper verb (çfarë pi?) — مَاذَا تَشْرَبُ؟ Kush is مَنْ, ku أَيْنَ, kur مَتَى, si كَيْفَ, pse لِمَاذَا; and sa vëllezër? takes a singular in Arabic: كَمْ أَخًا؟"
+   "text": "Albanian also fronts the question word with no helper verb:\n→ çfarë pi? — مَاذَا تَشْرَبُ؟\n\n- Kush is مَنْ, ku أَيْنَ, kur مَتَى, si كَيْفَ, pse لِمَاذَا.\n- Sa vëllezër? takes a singular in Arabic: كَمْ أَخًا؟"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese also fronts the question word (o que bebes?), often adding é que; Arabic adds nothing: مَاذَا تَشْرَبُ؟ De quem é? is لِمَنْ هٰذَا؟, and quantos irmãos? takes a singular: كَمْ أَخًا؟"
+   "text": "Portuguese also fronts the question word (o que bebes?), often adding é que; Arabic adds nothing:\n→ مَاذَا تَشْرَبُ؟\n\n- De quem é? is لِمَنْ هٰذَا؟.\n- Quantos irmãos? takes a singular: كَمْ أَخًا؟"
   },
   {
    "for": "type:fusional",

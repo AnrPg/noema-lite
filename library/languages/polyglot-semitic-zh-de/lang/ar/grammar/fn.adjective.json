@@ -472,17 +472,17 @@
   {
    "lang": "he",
    "fn": "fn.adjective",
-   "note": "Hebrew is the closest: the adjective follows the noun and repeats the article (הַבַּיִת הַגָּדוֹל, the big house; הַבַּיִת גָּדוֹל, the house is big), with four forms (גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת) — but no cases, no dual, and things in the plural stay plural (בָּתִּים גְּדוֹלִים)."
+   "note": "Hebrew is the closest: the adjective follows the noun and repeats the article, with four forms (גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת).\n→ הַבַּיִת הַגָּדוֹל, the big house\n→ הַבַּיִת גָּדוֹל, the house is big\n\nBut: no cases, no dual, and things in the plural stay plural (בָּתִּים גְּדוֹלִים)."
   },
   {
    "lang": "de",
    "fn": "fn.adjective",
-   "note": "German puts the adjective BEFORE the noun with strong / weak / mixed endings (ein großes Haus, das große Haus); a predicate never changes (das Haus ist groß) — in Arabic the predicate agrees too (الْغُرْفَةُ كَبِيرَةٌ)."
+   "note": "German puts the adjective BEFORE the noun with strong / weak / mixed endings:\n→ ein großes Haus, das große Haus\n\nA predicate never changes (das Haus ist groß) — in Arabic the predicate agrees too (الْغُرْفَةُ كَبِيرَةٌ)."
   },
   {
    "lang": "zh",
    "fn": "fn.adjective",
-   "note": "Chinese adjectives are stative verbs: 房子很大 (the house is big — with 很), 大房子 or 很大的房子 before the noun with 的; no agreement at all."
+   "note": "Chinese adjectives are stative verbs; no agreement at all.\n- 房子很大 — the house is big (with 很)\n- 大房子 or 很大的房子 — before the noun, with 的"
   },
   {
    "lang": "ar",
@@ -513,17 +513,17 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek puts the adjective before the noun (το μεγάλο σπίτι); Arabic after it, with the article repeated: الْبَيْتُ الْكَبِيرُ. Both agree in gender, number and case."
+   "text": "Greek puts the adjective before the noun:\n→ το μεγάλο σπίτι\n\nArabic puts it after, with the article repeated:\n→ الْبَيْتُ الْكَبِيرُ\n\nBoth agree in gender, number and case."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian adjectives come first (большой дом) and agree in gender, number and case; Arabic adjectives follow and agree in definiteness too."
+   "text": "Russian adjectives come first and agree in gender, number and case:\n→ большой дом\n\nArabic adjectives follow the noun and **agree in definiteness too**."
   },
   {
    "for": "es",
    "rel": "same",
-   "text": "Spanish also puts most adjectives after the noun and makes them agree (casa grande, casas grandes) — بَيْتٌ كَبِيرٌ; Arabic adds case and the article, and things in the plural take the feminine singular."
+   "text": "Spanish also puts most adjectives after the noun and makes them agree:\n→ casa grande, casas grandes — بَيْتٌ كَبِيرٌ\n\nArabic adds:\n- case and the article;\n- things in the plural take the feminine singular."
   },
   {
    "for": "en",
@@ -533,12 +533,12 @@
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French also puts many adjectives after the noun and makes them agree (une maison blanche); Arabic always does, and adds case and the article."
+   "text": "French also puts many adjectives after the noun and makes them agree:\n→ une maison blanche\n\nArabic always does, and adds case and the article."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi adjectives come first (बड़ा घर), and only those in -ā change; Arabic adjectives follow the noun and all of them change."
+   "text": "Hindi adjectives come first, and only those in -ā change:\n→ बड़ा घर\n\nArabic adjectives follow the noun, and **all of them change**."
   },
   {
    "for": "fa",
@@ -558,7 +558,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese adjectives behave like verbs and have tenses (高い / 高かった); Arabic adjectives behave like nouns, with case and gender, and need كَانَ for the past (كَانَ الْبَيْتُ كَبِيرًا)."
+   "text": "Japanese adjectives behave like verbs and have tenses:\n→ 高い / 高かった\n\nArabic adjectives behave like nouns, with case and gender, and need كَانَ for the past:\n→ كَانَ الْبَيْتُ كَبِيرًا"
   },
   {
    "for": "ko",
@@ -588,7 +588,7 @@
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese also puts the adjective after the noun (nhà lớn) and needs no “is” before it; Arabic adds agreement, and the article tells “the big house” (الْبَيْتُ الْكَبِيرُ) from “the house is big” (الْبَيْتُ كَبِيرٌ)."
+   "text": "Vietnamese also puts the adjective after the noun (nhà lớn) and needs no “is” before it.\n\nArabic adds agreement, and **the article tells the phrase from the sentence**:\n→ الْبَيْتُ الْكَبِيرُ — “the big house”\n→ الْبَيْتُ كَبِيرٌ — “the house is big”"
   },
   {
    "for": "iu",
@@ -598,52 +598,52 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German adjectives come before the noun and change their ending by article, case, gender and number (ein großes Haus, das große Haus); Arabic adjectives follow the noun and simply copy its gender, number, case and article: بَيْتٌ كَبِيرٌ, الْبَيْتُ الْكَبِيرُ. A predicate adjective never changes in German (die Küche ist groß); in Arabic it still agrees: الْغُرْفَةُ كَبِيرَةٌ."
+   "text": "German adjectives come before the noun and change their ending by article, case, gender and number:\n→ ein großes Haus, das große Haus\n\nArabic adjectives follow the noun and simply copy its gender, number, case and article:\n→ بَيْتٌ كَبِيرٌ, الْبَيْتُ الْكَبِيرُ\n\n**A predicate adjective never changes in German; in Arabic it still agrees:**\n→ die Küche ist groß — الْغُرْفَةُ كَبِيرَةٌ"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese puts the adjective before the noun, often with 的 (大房子, 漂亮的房间), and it never changes; Arabic puts it after the noun and makes it agree: بَيْتٌ كَبِيرٌ, غُرْفَةٌ كَبِيرَةٌ. 房子很大 (the house is big) is the verbless الْبَيْتُ كَبِيرٌ — with nothing in the place of 很."
+   "text": "Chinese puts the adjective before the noun, often with 的, and it never changes:\n→ 大房子, 漂亮的房间\n\nArabic puts it after the noun and makes it agree:\n→ بَيْتٌ كَبِيرٌ, غُرْفَةٌ كَبِيرَةٌ\n\n房子很大 (the house is big) is the verbless الْبَيْتُ كَبِيرٌ — with nothing in the place of 很."
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Italian also puts most adjectives after the noun and makes them agree (una casa grande, le case grandi) — بَيْتٌ كَبِيرٌ; Arabic also repeats the article on the adjective (الْبَيْتُ الْكَبِيرُ, “the house the big”) and gives plurals of things a feminine singular adjective: الْبُيُوتُ كَبِيرَةٌ."
+   "text": "Italian also puts most adjectives after the noun and makes them agree:\n→ una casa grande, le case grandi — بَيْتٌ كَبِيرٌ\n\nArabic also:\n- repeats the article on the adjective: الْبَيْتُ الْكَبِيرُ, “the house the big”;\n- gives plurals of things a feminine singular adjective: الْبُيُوتُ كَبِيرَةٌ."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian is close: the adjective follows the noun, agrees with it and takes a linking article (një shtëpi e madhe, shtëpia e madhe); Arabic instead repeats the definite article on the adjective: بَيْتٌ كَبِيرٌ / الْبَيْتُ الْكَبِيرُ."
+   "text": "Albanian is close: the adjective follows the noun, agrees with it and takes a linking article:\n→ një shtëpi e madhe, shtëpia e madhe\n\nArabic instead **repeats the definite article** on the adjective:\n→ بَيْتٌ كَبِيرٌ / الْبَيْتُ الْكَبِيرُ"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese also puts most adjectives after the noun and makes them agree (uma casa grande, casas brancas); Arabic adds case and the article on the adjective — الْبَيْتُ الْكَبِيرُ — and plurals of things take a feminine singular adjective: الْبُيُوتُ كَبِيرَةٌ."
+   "text": "Portuguese also puts most adjectives after the noun and makes them agree:\n→ uma casa grande, casas brancas\n\nArabic adds:\n- case and the article on the adjective — الْبَيْتُ الْكَبِيرُ;\n- plurals of things take a feminine singular adjective: الْبُيُوتُ كَبِيرَةٌ."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your adjectives agree with the noun in gender, number and case through endings, the Arabic adjective will feel familiar; it agrees in a fourth thing too, definiteness, and always stands after the noun."
+   "text": "If your adjectives agree with the noun in gender, number and case through endings, the Arabic adjective will feel familiar.\n\nIt agrees in a fourth thing too, **definiteness**, and always stands after the noun."
   },
   {
    "for": "type:agglutinating",
    "rel": "new",
-   "text": "If your adjectives stand before the noun and never change, Arabic is new: the adjective follows the noun and copies its gender, number, case and article — كِتَابٌ جَدِيدٌ, الْكُتُبُ الْجَدِيدَةُ."
+   "text": "If your adjectives stand before the noun and never change, Arabic is new: the adjective follows the noun and copies its gender, number, case and article.\n→ كِتَابٌ جَدِيدٌ, الْكُتُبُ الْجَدِيدَةُ"
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your language puts an unchanging describing word before the noun (often with a linking particle), note that Arabic puts it after the noun and makes it agree: غُرْفَةٌ صَغِيرَةٌ. An adjective without the article after a definite noun makes a sentence: الْبَيْتُ كَبِيرٌ = the house is big."
+   "text": "If your language puts an unchanging describing word before the noun (often with a linking particle), note that Arabic puts it after the noun and makes it agree:\n→ غُرْفَةٌ صَغِيرَةٌ\n\n**An adjective without the article after a definite noun makes a sentence:**\n→ الْبَيْتُ كَبِيرٌ = the house is big"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language says most qualities with verbs (“it-is-big”), think of the Arabic adjective as a noun that follows another noun and copies its endings: بَيْتٌ كَبِيرٌ, فِي الْبَيْتِ الْكَبِيرِ."
+   "text": "If your language says most qualities with verbs (“it-is-big”), think of the Arabic adjective as a noun that follows another noun and copies its endings:\n→ بَيْتٌ كَبِيرٌ, فِي الْبَيْتِ الْكَبِيرِ"
   },
   {
    "for": "branch:Semitic",
    "rel": "same",
-   "text": "If your language is Semitic, the order noun + adjective and the repeated article are familiar (الْبَيْتُ الْكَبِيرُ); Arabic adds case endings and makes plurals of things agree as feminine singular."
+   "text": "If your language is Semitic, the order noun + adjective and the repeated article are familiar (الْبَيْتُ الْكَبِيرُ).\n\nArabic adds:\n- case endings;\n- plurals of things agree as feminine singular."
   }
  ]
 }

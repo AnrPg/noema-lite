@@ -204,12 +204,12 @@
   {
    "lang": "he",
    "fn": "fn.demonstrative",
-   "note": "Hebrew puts the demonstrative after the noun, both with the article — הַבַּיִת הַזֶּה “the house the this” — where Arabic puts it first: هٰذَا الْبَيْتُ. Arabic ذ corresponds to Hebrew ז (זֶה ↔ ذَا)."
+   "note": "Hebrew puts the demonstrative after the noun, both with the article — “the house the this”; Arabic puts it first:\n→ הַבַּיִת הַזֶּה — هٰذَا الْبَيْتُ\n\nArabic ذ corresponds to Hebrew ז (זֶה ↔ ذَا)."
   },
   {
    "lang": "de",
    "fn": "fn.demonstrative",
-   "note": "German dieser / diese / dieses is declined in four cases; for “this is a …” the invariable das ist … works like هٰذَا …."
+   "note": "German dieser / diese / dieses is declined in four cases.\n\nFor “this is a …”, the invariable das ist … works like هٰذَا …."
   },
   {
    "lang": "zh",
@@ -231,7 +231,7 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also puts the article after the demonstrative — αυτό το σπίτι, “this the house” — like هٰذَا الْبَيْتُ; and αυτό είναι σπίτι (this is a house) has no article, like هٰذَا بَيْتٌ."
+   "text": "Greek also puts the article after the demonstrative — “this the house”:\n→ αυτό το σπίτι — هٰذَا الْبَيْتُ\n\nAnd “this is a house” has no article in either:\n→ αυτό είναι σπίτι — هٰذَا بَيْتٌ"
   },
   {
    "for": "hu",
@@ -241,7 +241,7 @@
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian это in “this is …” never changes (это книга); Arabic هٰذَا / هٰذِهِ agrees with the noun: هٰذَا كِتَابٌ, هٰذِهِ غُرْفَةٌ."
+   "text": "Russian это in “this is …” never changes (это книга); Arabic هٰذَا / هٰذِهِ agrees with the noun:\n→ هٰذَا كِتَابٌ, هٰذِهِ غُرْفَةٌ"
   },
   {
    "for": "es",
@@ -251,12 +251,12 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English this / these change only for number; Arabic also for gender (هٰذَا / هٰذِهِ), and things in the plural take the feminine singular: هٰذِهِ الْكُتُبُ (these books)."
+   "text": "English this / these change only for number. Arabic also changes for gender (هٰذَا / هٰذِهِ), and **things in the plural take the feminine singular**:\n→ هٰذِهِ الْكُتُبُ (these books)"
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French ce / cette agree in gender like هٰذَا / هٰذِهِ — but for things in the plural Arabic uses the feminine singular: هٰذِهِ الْكُتُبُ (ces livres)."
+   "text": "French ce / cette agree in gender like هٰذَا / هٰذِهِ.\n\nBut for things in the plural Arabic uses **the feminine singular**:\n→ هٰذِهِ الْكُتُبُ (ces livres)"
   },
   {
    "for": "hi",
@@ -311,42 +311,42 @@
   {
    "for": "de",
    "rel": "similar",
-   "text": "German dieser / diese / dieses agree like هٰذَا / هٰذِهِ; but Arabic adds the article after the demonstrative — هٰذَا الْبَيْتُ, “this the house” — and without it the words form a sentence: هٰذَا بَيْتٌ = das ist ein Haus. Plurals of things take هٰذِهِ."
+   "text": "German dieser / diese / dieses agree like هٰذَا / هٰذِهِ. But Arabic **adds the article after the demonstrative**:\n→ هٰذَا الْبَيْتُ, “this the house”\n\nWithout it the words form a sentence:\n→ هٰذَا بَيْتٌ = das ist ein Haus\n\nPlurals of things take هٰذِهِ."
   },
   {
    "for": "zh",
    "rel": "similar",
-   "text": "Chinese also has two distances, 这 and 那, but they never change and need a measure word (这本书); Arabic هٰذَا / هٰذِهِ agree in gender — and هٰذَا الْكِتَابُ (this book) needs the article."
+   "text": "Chinese also has two distances, 这 and 那, but they never change and need a measure word (这本书).\n\nArabic هٰذَا / هٰذِهِ agree in gender — and **this book needs the article**:\n→ هٰذَا الْكِتَابُ"
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Italian also has two distances, questo and quello, which agree in gender and number; Arabic adds the article after them (هٰذَا الْكِتَابُ, “this the book”) and uses the feminine singular for plurals of things: هٰذِهِ الْكُتُبُ."
+   "text": "Italian also has two distances, questo and quello, which agree in gender and number.\n\nArabic adds:\n- the article after them: هٰذَا الْكِتَابُ, “this the book”;\n- the feminine singular for plurals of things: هٰذِهِ الْكُتُبُ."
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "Albanian ky libër has no article on the noun; Arabic needs it — هٰذَا الْكِتَابُ —, because هٰذَا كِتَابٌ means “this is a book”. Like ky / kjo, هٰذَا / هٰذِهِ agree in gender."
+   "text": "Albanian ky libër has no article on the noun; Arabic needs it, because هٰذَا كِتَابٌ means “this is a book”:\n→ هٰذَا الْكِتَابُ\n\nLike ky / kjo, هٰذَا / هٰذِهِ agree in gender."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese has three distances (este, esse, aquele); Arabic has two: هٰذَا near, ذٰلِكَ far. And Arabic adds the article: هٰذَا الْبَيْتُ = esta casa, but هٰذَا بَيْتٌ = isto é uma casa."
+   "text": "Portuguese has three distances (este, esse, aquele); Arabic has two: هٰذَا near, ذٰلِكَ far.\n\nAnd Arabic adds the article:\n- هٰذَا الْبَيْتُ = esta casa\n- هٰذَا بَيْتٌ = isto é uma casa"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your demonstratives agree in gender and number, Arabic is familiar; add the article after them (هٰذَا الْبَيْتُ) and use the feminine singular for plurals of things."
+   "text": "If your demonstratives agree in gender and number, Arabic is familiar. Add:\n- the article after them: هٰذَا الْبَيْتُ;\n- the feminine singular for plurals of things."
   },
   {
    "for": "type:agglutinating",
    "rel": "new",
-   "text": "If your demonstratives never change, Arabic ones do: هٰذَا (m.), هٰذِهِ (f.), هٰؤُلَاءِ (people in the plural) — and ذٰلِكَ / تِلْكَ / أُولٰئِكَ for “that, those”."
+   "text": "If your demonstratives never change, Arabic ones do:\n- هٰذَا (m.), هٰذِهِ (f.), هٰؤُلَاءِ (people in the plural);\n- ذٰلِكَ / تِلْكَ / أُولٰئِكَ for “that, those”."
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If you say “this” with a measure word and no article, note that Arabic uses the article instead: هٰذَا الْكِتَابُ = this book; without it, هٰذَا كِتَابٌ = this is a book."
+   "text": "If you say “this” with a measure word and no article, note that Arabic uses the article instead:\n- هٰذَا الْكِتَابُ = this book\n- without it, هٰذَا كِتَابٌ = this is a book"
   },
   {
    "for": "type:polysynthetic",
@@ -356,7 +356,7 @@
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "If your language is Semitic, demonstratives that agree in gender and the article on the noun are familiar; Arabic puts the demonstrative first: هٰذَا الْبَيْتُ."
+   "text": "If your language is Semitic, demonstratives that agree in gender and the article on the noun are familiar.\n\nArabic puts **the demonstrative first**:\n→ هٰذَا الْبَيْتُ"
   }
  ]
 }

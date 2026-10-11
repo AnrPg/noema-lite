@@ -26,7 +26,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَامِيَةُ",
+      "translit": "bāmiyatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -184,6 +193,7 @@
     "plurals": [
      {
       "form": "فُولَات",
+      "translit": "fūlāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted beans (plural of فُولَة)",
@@ -202,6 +212,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فُولُ",
+      "translit": "fūlu"
      }
     ]
    },
@@ -354,6 +373,7 @@
     "plurals": [
      {
       "form": "دُبَّاءَات",
+      "translit": "dubbāʾāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -367,7 +387,16 @@
     "unit": "دُبَّاءَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دُبَّاءُ",
+      "translit": "dubbāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "dubbāʾ",
@@ -495,6 +524,7 @@
     "plurals": [
      {
       "form": "خَرَاشِيف",
+      "translit": "ḫarāšīf",
       "kind": "broken",
       "declension": "diptote",
       "senses": [
@@ -506,7 +536,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خُرْشُوفُ",
+      "translit": "ḫuršūfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫuršūf",
@@ -666,6 +705,7 @@
     "plurals": [
      {
       "form": "لُوفَات",
+      "translit": "lūfāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted (plural of لُوفَة)",
@@ -680,7 +720,16 @@
     "unit": "لُوفَة",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "لُوفُ",
+      "translit": "lūfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "lūf",
@@ -845,6 +894,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only كُرُنْب takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -957,6 +1012,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only مَلْفُوف takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",

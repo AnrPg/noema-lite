@@ -40,7 +40,16 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "كُلْ",
+    "passive": [
+     {
+      "past": "أُكِلَ",
+      "present": "يُؤْكَلُ"
+     }
+    ],
+    "past1sg": "أَكَلْتُ"
    },
    "translit": "ʾakala",
    "forms": {
@@ -225,7 +234,16 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "اِشْرَبْ",
+    "passive": [
+     {
+      "past": "شُرِبَ",
+      "present": "يُشْرَبُ"
+     }
+    ],
+    "past1sg": "شَرِبْتُ"
    },
    "translit": "šariba",
    "forms": {
@@ -465,7 +483,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُطْبُخْ",
+    "passive": [
+     {
+      "past": "طُبِخَ",
+      "present": "يُطْبَخُ"
+     }
+    ],
+    "past1sg": "طَبَخْتُ"
    },
    "translit": "ṭabaḫa",
    "forms": {
@@ -632,7 +659,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form IV: the vowels are fixed by the form"
+    },
+    "imperative": "أَرِدْ",
+    "passive": [
+     {
+      "past": "أُرِيدَ",
+      "present": "يُرَادُ"
+     }
+    ],
+    "past1sg": "أَرَدْتُ"
    },
    "translit": "ʾarāda",
    "forms": {
@@ -820,7 +858,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form IV: the vowels are fixed by the form"
+    },
+    "imperative": "أَحْبِبْ",
+    "passive": [
+     {
+      "past": "أُحِبَّ",
+      "present": "يُحَبُّ"
+     }
+    ],
+    "past1sg": "أَحْبَبْتُ"
    },
    "translit": "ʾaḥabba",
    "forms": {
@@ -1018,7 +1067,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form VIII: the vowels are fixed by the form"
+    },
+    "imperative": "اِشْتَرِ",
+    "passive": [
+     {
+      "past": "اُشْتُرِيَ",
+      "present": "يُشْتَرَى"
+     }
+    ],
+    "past1sg": "اِشْتَرَيْتُ"
    },
    "translit": "ištarā",
    "forms": {
@@ -1176,7 +1236,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خُبْزُ",
+      "translit": "ḫubzu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫubz",
@@ -1301,7 +1370,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جُبْنُ",
+      "translit": "jubnu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jubn",
@@ -1426,6 +1504,7 @@
     "plurals": [
      {
       "form": "بَيْضَات",
+      "translit": "bayḍāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1439,7 +1518,16 @@
     "unit": "بَيْضَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَيْضُ",
+      "translit": "bayḍu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bayḍ",
@@ -1570,6 +1658,7 @@
     "plurals": [
      {
       "form": "لُحُوم",
+      "translit": "luḥūm",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -1585,7 +1674,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "لَحْمُ",
+      "translit": "laḥmu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "laḥm",
@@ -1705,6 +1803,7 @@
     "plurals": [
      {
       "form": "أَسْمَاك",
+      "translit": "ʾasmāk",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1716,6 +1815,7 @@
      },
      {
       "form": "سَمَكَات",
+      "translit": "samakāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: ثَلَاثُ سَمَكَاتٍ (plural of سَمَكَة)",
@@ -1730,7 +1830,16 @@
     "unit": "سَمَكَة",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَمَكُ",
+      "translit": "samaku"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "samak",
@@ -1895,6 +2004,7 @@
     "plurals": [
      {
       "form": "دَجَاجَات",
+      "translit": "dajājāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "hens (plural of دَجَاجَة)",
@@ -1913,6 +2023,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دَجَاجُ",
+      "translit": "dajāju"
      }
     ]
    },
@@ -2068,7 +2187,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "أَرُزُّ",
+      "translit": "ʾaruzzu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʾaruzz",
@@ -2209,7 +2337,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَسَاءُ",
+      "translit": "ḥasāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḥasāʾ",
@@ -2334,6 +2471,7 @@
     "plurals": [
      {
       "form": "سَلَطَات",
+      "translit": "salaṭāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2345,7 +2483,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَلَطَةُ",
+      "translit": "salaṭatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "salaṭa",
@@ -2503,6 +2650,7 @@
     "plurals": [
      {
       "form": "فَوَاكِه",
+      "translit": "fawākih",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -2515,7 +2663,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فَاكِهَةُ",
+      "translit": "fākihatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "fākiha",
@@ -2637,6 +2794,7 @@
     "plurals": [
      {
       "form": "تُفَّاحَات",
+      "translit": "tuffāḥāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -2650,7 +2808,16 @@
     "unit": "تُفَّاحَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "تُفَّاحُ",
+      "translit": "tuffāḥu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "tuffāḥ",
@@ -2796,6 +2963,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سُكَّرُ",
+      "translit": "sukkaru"
      }
     ]
    },
@@ -2963,7 +3139,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مِلْحُ",
+      "translit": "milḥu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "milḥ",
@@ -3075,6 +3260,7 @@
     "plurals": [
      {
       "form": "مِيَاه",
+      "translit": "miyāh",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -3090,7 +3276,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَاءُ",
+      "translit": "māʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "māʾ",
@@ -3221,7 +3416,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَايُ",
+      "translit": "šāyu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šāy",
@@ -3384,6 +3588,7 @@
     "plurals": [
      {
       "form": "قَهَاوٍ",
+      "translit": "qahāwī",
       "kind": "broken",
       "pattern": "فَعَالٍ",
       "declension": "defective",
@@ -3399,7 +3604,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَهْوَةُ",
+      "translit": "qahwatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3594,7 +3808,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَلِيبُ",
+      "translit": "ḥalību"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḥalīb",
@@ -3703,6 +3926,7 @@
     "plurals": [
      {
       "form": "عَصَائِر",
+      "translit": "ʿaṣāʾir",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -3718,7 +3942,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَصِيرُ",
+      "translit": "ʿaṣīru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʿaṣīr",
@@ -3845,7 +4078,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "نَبِيذُ",
+      "translit": "nabīḏu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "nabīḏ",
@@ -3965,7 +4207,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بِيرَةُ",
+      "translit": "bīratu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "bīra",
@@ -4081,7 +4332,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فَطُورُ",
+      "translit": "faṭūru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "faṭūr",
@@ -4219,7 +4479,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "غَدَاءُ",
+      "translit": "ġadāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ġadāʾ",
@@ -4330,7 +4599,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَشَاءُ",
+      "translit": "ʿašāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʿašāʾ",

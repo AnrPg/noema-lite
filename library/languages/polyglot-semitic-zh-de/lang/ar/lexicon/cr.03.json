@@ -15,6 +15,7 @@
     "plurals": [
      {
       "form": "خُطَط",
+      "translit": "ḫuṭaṭ",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -27,7 +28,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خُطَّةُ",
+      "translit": "ḫuṭṭatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḫuṭṭa",
@@ -150,6 +160,7 @@
     "plurals": [
      {
       "form": "رِحْلَات",
+      "translit": "riḥlāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -161,7 +172,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رِحْلَةُ",
+      "translit": "riḥlatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "riḥla",
@@ -294,6 +314,7 @@
     "plurals": [
      {
       "form": "فَنَادِق",
+      "translit": "fanādiq",
       "kind": "broken",
       "pattern": "فَعَالِل",
       "declension": "diptote",
@@ -306,7 +327,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فُنْدُقُ",
+      "translit": "funduqu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "funduq",
@@ -469,7 +499,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–i",
+    "imperative": "اِحْجِزْ",
+    "passive": [
+     {
+      "past": "حُجِزَ",
+      "present": "يُحْجَزُ"
+     }
+    ],
+    "past1sg": "حَجَزْتُ"
    },
    "translit": "ḥajaza",
    "forms": {
@@ -725,6 +764,7 @@
     "plurals": [
      {
       "form": "جَوَازَات سَفَر",
+      "translit": "jawāzāt safar",
       "kind": "soundFem",
       "declension": "sound",
       "note": "the head noun takes the plural: جَوَازَاتُ سَفَرٍ",
@@ -737,6 +777,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: جَوَاز is in the construct state and سَفَر is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "MASC",
@@ -868,6 +914,7 @@
     "plurals": [
      {
       "form": "حَقَائِب سَفَر",
+      "translit": "ḥaqāʾib safar",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -881,6 +928,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: حَقِيبَة is in the construct state and سَفَر is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "FEM",
@@ -1027,7 +1080,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "زُرْ",
+    "passive": [
+     {
+      "past": "زِيرَ",
+      "present": "يُزَارُ"
+     }
+    ],
+    "past1sg": "زُرْتُ"
    },
    "contrasts": [
     {
@@ -1187,6 +1249,7 @@
     "plurals": [
      {
       "form": "سُيَّاح",
+      "translit": "suyyāḥ",
       "kind": "broken",
       "pattern": "فُعَّال",
       "declension": "triptote",
@@ -1196,6 +1259,7 @@
      },
      {
       "form": "سَائِحُون",
+      "translit": "sāʾiḥūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1207,7 +1271,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "سَائِحَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "سَائِحُ",
+      "translit": "sāʾiḥu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "sāʾiḥ",
@@ -1350,6 +1426,7 @@
     "plurals": [
      {
       "form": "مُرْشِدُون",
+      "translit": "muršidūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1361,7 +1438,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُرْشِدَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُرْشِدُ",
+      "translit": "muršidu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "muršid",
@@ -1496,7 +1585,8 @@
     "derivedFrom": "الْأُسْبُوع (the week) + الْقَادِم (coming, next), in the accusative of time",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "translit": "al-ʾusbūʿa l-qādima",
    "ref": {
@@ -1598,7 +1688,8 @@
     "derivedFrom": "السَّنَة (the year) + الْقَادِمَة (coming, next; feminine), in the accusative of time",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "translit": "as-sanata l-qādimata",
    "ref": {
@@ -1701,6 +1792,9 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-09"
+   },
+   "features": {
+    "governs": "a present indicative, written joined to it: سَيَذْهَبُ"
    }
   },
   {
@@ -1714,6 +1808,9 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-09"
+   },
+   "features": {
+    "governs": "a present indicative: سَوْفَ يَذْهَبُ"
    }
   },
   {
@@ -1730,6 +1827,9 @@
     "override": {
      "pos": "Wiktionary files لَنْ as an adverb; it is the negative particle of the future (UD: PART), like لَمْ, which Wiktionary files as a particle."
     }
+   },
+   "features": {
+    "governs": "the subjunctive (present with -a): لَنْ يَذْهَبَ"
    }
   }
  ]
