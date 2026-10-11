@@ -731,12 +731,12 @@ window.NoemaCurMap = (() => {
       function drawNode() {
         nodeBox.innerHTML = ''; if (!parsed || !sel || !parsed.nodes[sel]) return;
         const mine = [...A.entries()].filter(([, a]) => a.targets.some(t => t.id === sel));
-        const add = el('select', { class: 'noema-input', 'aria-label': 'Give a file to this step', onchange: e => { const f = files[+e.target.value]; if (f) addTarget(f, sel); } }, el('option', { value: '' }, files.length ? '＋ Give it a file…' : 'Add files below first'), ...files.map((f, i) => el('option', { value: i }, relPath(f))));
-        nodeBox.append(el('div', { class: 'cm-nodehead' }, el('b', {}, '📎 ' + T(sel)), el('button', { class: 'btn small ghost', 'aria-label': 'Close', onclick: () => { sel = null; redraw(); } }, '✕')),
-          mine.length ? el('ul', { class: 'cm-matlist' }, ...mine.map(([f, a]) => { const t = a.targets.find(x => x.id === sel); return el('li', {}, '📄 ' + relPath(f), rangeInput(f, t), el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name + ' from this step', onclick: () => { a.targets = a.targets.filter(x => x !== t); a.manual = true; redraw(); } }, '✕')); }))
-            : el('div', { class: 'tiny' }, 'No files — the AI will research this step (or drop a file on it).'), add);
+        const add = el('select', { class: 'noema-input', 'aria-label': CM('roadmap.map.imp.giveAria'), onchange: e => { const f = files[+e.target.value]; if (f) addTarget(f, sel); } }, el('option', { value: '' }, files.length ? '＋ ' + CM('roadmap.map.imp.giveOpt') : CM('roadmap.map.imp.addBelow')), ...files.map((f, i) => el('option', { value: i }, relPath(f))));
+        nodeBox.append(el('div', { class: 'cm-nodehead' }, el('b', {}, '📎 ' + T(sel)), el('button', { class: 'btn small ghost', 'aria-label': CM('roadmap.map.close'), onclick: () => { sel = null; redraw(); } }, '✕')),
+          mine.length ? el('ul', { class: 'cm-matlist' }, ...mine.map(([f, a]) => { const t = a.targets.find(x => x.id === sel); return el('li', {}, '📄 ' + relPath(f), rangeInput(f, t), el('button', { class: 'btn small ghost', 'aria-label': CM('roadmap.map.imp.removeFromStep', { name: f.name }), onclick: () => { a.targets = a.targets.filter(x => x !== t); a.manual = true; redraw(); } }, '✕')); }))
+            : el('div', { class: 'tiny' }, CM('roadmap.map.imp.stepNoFiles')), add);
       }
-      const rangeInput = (f, t) => el('label', { class: 'tiny cm-rangel' }, ' pages ', el('input', { class: 'noema-input cm-range', value: fmtRange(t.range), placeholder: 'all', 'aria-label': `Pages of ${f.name} for “${T(t.id)}”`, onchange: e => { t.range = parseRange(e.target.value); A.get(f).manual = true; } }));
+      const rangeInput = (f, t) => el('label', { class: 'tiny cm-rangel' }, ' ' + CM('roadmap.map.mat.pagesLabel') + ' ', el('input', { class: 'noema-input cm-range', value: fmtRange(t.range), placeholder: CM('roadmap.map.imp.all'), 'aria-label': CM('roadmap.map.imp.pagesFor', { name: f.name, title: T(t.id) }), onchange: e => { t.range = parseRange(e.target.value); A.get(f).manual = true; } }));
       const relPath = f => String(f.hint || f.webkitRelativePath || f.name);
 
       function show(g) {
@@ -744,11 +744,11 @@ window.NoemaCurMap = (() => {
         if (sel && !(g && g.nodes[sel])) sel = null;
         if (!g) { info.textContent = ''; redraw(); return; }
         const s = g.stats || {}; const planned = Object.values(g.nodes).filter(n => n.chapters?.length).length;
-        info.textContent = `✓ ${FMT[g.format] || g.format}: ${s.steps} steps · ${s.links} links` + (s.branches ? ` · ${s.branches} branch${s.branches > 1 ? 'es' : ''}` : '') + (s.joins ? ` · ${s.joins} join${s.joins > 1 ? 's' : ''}` : '') + (s.starts > 1 ? ` · ${s.starts} starting points` : '') + (planned ? ` · ${planned} with their chapters` : '') + (s.named ? ` · files named for ${s.named} step(s)` : '');
+        info.textContent = '✓ ' + CM('roadmap.map.imp.detected', { format: FMT[g.format] || g.format, steps: s.steps, links: s.links }) + (s.branches ? ' · ' + CM('roadmap.map.imp.branches', { n: s.branches }) : '') + (s.joins ? ' · ' + CM('roadmap.map.imp.joins', { n: s.joins }) : '') + (s.starts > 1 ? ' · ' + CM('roadmap.map.imp.starts', { n: s.starts }) : '') + (planned ? ' · ' + CM('roadmap.map.imp.planned', { n: planned }) : '') + (s.named ? ' · ' + CM('roadmap.map.imp.named', { n: s.named }) : '');
         if (g.warnings.length) warnBox.append(...g.warnings.slice(0, 6).map(w => el('div', {}, '⚠️ ' + w)));
         if (!title.value.trim() || title.dataset.auto) { title.value = g.title || ''; title.dataset.auto = '1'; }
         if (g.language && C().LANG[g.language]) lang.value = g.language;
-        g.order.forEach(id => { const ps = g.edges.filter(e => e.to === id).map(e => T(e.from)); prev.append(el('li', {}, el('span', { class: 'cm-ic' }, ICON[g.nodes[id].role] || '•'), ' ', el('b', {}, T(id)), ps.length ? el('span', { class: 'tiny' }, '  ← ' + ps.join(', ')) : el('span', { class: 'tiny' }, '  (starts here)'))); });
+        g.order.forEach(id => { const ps = g.edges.filter(e => e.to === id).map(e => T(e.from)); prev.append(el('li', {}, el('span', { class: 'cm-ic' }, ICON[g.nodes[id].role] || '•'), ' ', el('b', {}, T(id)), ps.length ? el('span', { class: 'tiny' }, '  ← ' + ps.join(', ')) : el('span', { class: 'tiny' }, '  ' + CM('roadmap.map.imp.startsHere')))); });
         rematch(); redraw();
       }
       let t0 = null;
@@ -757,7 +757,7 @@ window.NoemaCurMap = (() => {
           if (!text.value.trim()) { show(null); return; }
           if (aiParsed) { show(aiParsed); return; }
           try { show(I.parse(text.value, { mode: mode.value, reverse: reverse.checked, keepCaps: keepCaps.checked })); }
-          catch (e) { parsed = null; prev.innerHTML = ''; info.textContent = ''; perr.textContent = '⚠️ ' + e.message + (LLM().pick(acc, provider.value) ? ' — or tap ✨ Let the AI read it.' : ''); redraw(); }
+          catch (e) { parsed = null; prev.innerHTML = ''; info.textContent = ''; perr.textContent = '⚠️ ' + errMsg(e) + (LLM().pick(acc, provider.value) ? ' — ' + CM('roadmap.map.imp.orAi') : ''); redraw(); }
         }, 250);
       }
       text.addEventListener('input', () => { aiParsed = null; reparse(); }); title.addEventListener('input', () => { delete title.dataset.auto; });
@@ -770,44 +770,44 @@ window.NoemaCurMap = (() => {
       async function addFiles(fs, toStep) {
         const added = [];
         for (const f of fs) {
-          if (/\.zip$/i.test(f.name)) { try { const inner = await I.unzipMaterial(f); for (const g of inner) if (!files.some(x => relPath(x) === relPath(g) && x.size === g.size)) { files.push(g); added.push(g); } } catch (e) { toast('⚠️ ' + f.name + ': ' + e.message, 4000); } continue; }
+          if (/\.zip$/i.test(f.name)) { try { const inner = await I.unzipMaterial(f); for (const g of inner) if (!files.some(x => relPath(x) === relPath(g) && x.size === g.size)) { files.push(g); added.push(g); } } catch (e) { toast('⚠️ ' + f.name + ': ' + errMsg(e), 4000); } continue; }
           if (!files.some(x => relPath(x) === relPath(f) && x.size === f.size)) { files.push(f); added.push(f); }
         }
         rematch();
         if (toStep) for (const f of added) addTarget(f, toStep);
         redraw();
       }
-      const BADGE = { high: ['✓', 'sure'], medium: ['≈', 'likely'], low: ['?', 'guess — check'], check: ['⚠️', 'check: more than one step fits'], none: ['—', 'not used'] };
-      const HOW = { map: 'named in your Roadmap', folder: 'by its folder', number: 'by its number', name: 'by its name', you: 'by you' };
+      const BADGE = { get high() { return ['✓', CM('roadmap.map.imp.cHigh')]; }, get medium() { return ['≈', CM('roadmap.map.imp.cMedium')]; }, get low() { return ['?', CM('roadmap.map.imp.cLow')]; }, get check() { return ['⚠️', CM('roadmap.map.imp.cCheck')]; }, get none() { return ['—', CM('roadmap.map.imp.cNone')]; } };
+      const HOW = { get map() { return CM('roadmap.map.imp.howMap'); }, get folder() { return CM('roadmap.map.imp.howFolder'); }, get number() { return CM('roadmap.map.imp.howNumber'); }, get name() { return CM('roadmap.map.imp.howName'); }, get you() { return CM('roadmap.map.imp.howYou'); } };
       function drawFiles() {
         fileBox.innerHTML = ''; fileSum.textContent = '';
         if (!files.length) return;
         const all = files.map((f, i) => ({ f, i, a: A.get(f) || { targets: [], confidence: 'none', alts: [] } }));
         const unused = all.filter(x => !x.a.targets.length), check = all.filter(x => x.a.targets.length && (x.a.confidence === 'check' || x.a.confidence === 'low') && !x.a.manual);
         const stepsWith = parsed ? parsed.order.filter(id => nFiles(id)).length : 0;
-        fileSum.textContent = `${files.length} file(s) · ${stepsWith}/${parsed ? parsed.order.length : 0} steps have files` + (check.length ? ` · ⚠️ ${check.length} to check` : '') + (unused.length ? ` · ${unused.length} not used` : '');
-        const tabs = el('div', { class: 'cm-filetabs', role: 'tablist' }, ...[['all', `All ${all.length}`], ['check', `⚠️ To check ${check.length}`], ['unused', `Not used ${unused.length}`]].map(([k, l]) => el('button', { class: 'fchip' + (filter === k ? ' on' : ''), role: 'tab', onclick: () => { filter = k; drawFiles(); } }, l)));
+        fileSum.textContent = CM('roadmap.map.imp.fileSum', { n: files.length, with: stepsWith, total: parsed ? parsed.order.length : 0 }) + (check.length ? ' · ⚠️ ' + CM('roadmap.map.imp.toCheckN', { n: check.length }) : '') + (unused.length ? ' · ' + CM('roadmap.map.imp.unusedN', { n: unused.length }) : '');
+        const tabs = el('div', { class: 'cm-filetabs', role: 'tablist' }, ...[['all', CM('roadmap.map.imp.tabAll', { n: all.length })], ['check', '⚠️ ' + CM('roadmap.map.imp.tabCheck', { n: check.length })], ['unused', CM('roadmap.map.imp.tabUnused', { n: unused.length })]].map(([k, l]) => el('button', { class: 'fchip' + (filter === k ? ' on' : ''), role: 'tab', onclick: () => { filter = k; drawFiles(); } }, l)));
         const rows = (filter === 'check' ? check : filter === 'unused' ? unused : all);
         fileBox.append(tabs, el('table', { class: 'cm-filetable' }, el('tbody', {}, ...rows.map(({ f, i, a }) => {
-          const conf = a.manual ? ['✓', 'set by you'] : BADGE[a.confidence] || BADGE.none;
+          const conf = a.manual ? ['✓', CM('roadmap.map.imp.setByYou')] : BADGE[a.confidence] || BADGE.none;
           const chips = el('div', { class: 'cm-chips' }, ...a.targets.map(t => el('span', { class: 'cm-tchip' }, el('button', { class: 'linklike', onclick: () => { sel = t.id; redraw(); graph.querySelector(`[data-id="${CSS.escape(t.id)}"]`)?.scrollIntoView?.({ block: 'nearest', inline: 'center' }); } }, T(t.id)), rangeInput(f, t),
-            el('button', { class: 'btn small ghost', 'aria-label': `Remove ${f.name} from “${T(t.id)}”`, onclick: () => { a.targets = a.targets.filter(x => x !== t); a.manual = true; redraw(); } }, '✕'))));
-          const addSel = el('select', { class: 'noema-input cm-addstep', 'aria-label': (a.targets.length ? 'Another step for ' : 'Step for ') + f.name, onchange: e => { if (e.target.value) addTarget(f, e.target.value); } },
-            el('option', { value: '' }, a.targets.length ? '＋ also for…' : '— choose a step —'), ...(parsed ? parsed.order.filter(id => !a.targets.some(t => t.id === id)).map(id => el('option', { value: id }, T(id))) : []));
-          const alts = !a.manual && a.alts?.length ? el('div', { class: 'tiny' }, 'or: ', ...a.alts.map((id, k) => [k ? ', ' : '', el('button', { class: 'linklike', onclick: () => { a.targets = [{ id, range: null }]; a.manual = true; redraw(); } }, T(id))])) : null;
+            el('button', { class: 'btn small ghost', 'aria-label': CM('roadmap.map.imp.removeFrom', { name: f.name, title: T(t.id) }), onclick: () => { a.targets = a.targets.filter(x => x !== t); a.manual = true; redraw(); } }, '✕'))));
+          const addSel = el('select', { class: 'noema-input cm-addstep', 'aria-label': CM('roadmap.map.imp.stepForAria', { more: a.targets.length ? 'yes' : 'no', name: f.name }), onchange: e => { if (e.target.value) addTarget(f, e.target.value); } },
+            el('option', { value: '' }, a.targets.length ? '＋ ' + CM('roadmap.map.imp.alsoFor') : '— ' + CM('roadmap.map.imp.chooseStep') + ' —'), ...(parsed ? parsed.order.filter(id => !a.targets.some(t => t.id === id)).map(id => el('option', { value: id }, T(id))) : []));
+          const alts = !a.manual && a.alts?.length ? el('div', { class: 'tiny' }, CM('roadmap.map.imp.or') + ' ', ...a.alts.map((id, k) => [k ? ', ' : '', el('button', { class: 'linklike', onclick: () => { a.targets = [{ id, range: null }]; a.manual = true; redraw(); } }, T(id))])) : null;
           return el('tr', { draggable: 'true', ondragstart: e => { dragging = i; e.dataTransfer.setData('text/noema-file', String(i)); e.dataTransfer.setData('text/plain', String(i)); e.dataTransfer.effectAllowed = 'copy'; }, ondragend: () => { setTimeout(() => { dragging = null; }, 0); } },
-            el('td', {}, el('span', { class: 'cm-conf c-' + (a.manual ? 'high' : a.confidence), title: conf[1] }, conf[0]), ' 📄 ', el('b', {}, f.name), el('div', { class: 'tiny' }, relPath(f) !== f.name ? relPath(f).replace(/[^/]+$/, '') + ' · ' : '', (f.size / 1048576).toFixed(1) + ' MB' + (a.targets.length ? ' · ' + (a.manual ? HOW.you : HOW[a.how] || '') : ''))),
+            el('td', {}, el('span', { class: 'cm-conf c-' + (a.manual ? 'high' : a.confidence), title: conf[1] }, conf[0]), ' 📄 ', el('b', {}, f.name), el('div', { class: 'tiny' }, relPath(f) !== f.name ? relPath(f).replace(/[^/]+$/, '') + ' · ' : '', CM('roadmap.map.imp.mb', { n: f.size / 1048576 }) + (a.targets.length ? ' · ' + (a.manual ? HOW.you : HOW[a.how] || '') : ''))),
             el('td', {}, chips, alts, addSel),
-            el('td', {}, el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name, onclick: () => { files = files.filter(x => x !== f); A.delete(f); redraw(); } }, '✕')));
+            el('td', {}, el('button', { class: 'btn small ghost', 'aria-label': CM('roadmap.map.ed.removeAria', { title: f.name }), onclick: () => { files = files.filter(x => x !== f); A.delete(f); redraw(); } }, '✕')));
         }))));
       }
       function redraw() { drawGraph(); drawNode(); drawFiles(); }
       const go = el('button', { class: 'btn primary cg-go', onclick: async () => {
         err.textContent = '';
-        if (!parsed) { err.textContent = '👆 Paste a Roadmap that can be read (step 1).'; return; }
+        if (!parsed) { err.textContent = '👆 ' + CM('roadmap.map.imp.needParsed'); return; }
         const needPlan = Object.values(parsed.nodes).some(n => !n.chapters?.length);
-        if (needPlan && provider.value !== 'claudeapp' && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Planning the chapters needs a Claude API key or a Gemini key (step 4) — or choose the Claude app.'; return; }
-        const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 2147483648)); if (big) { err.textContent = `⚠️ ${big.name} is too big for a browser to keep (over 2 GB).`; return; }
+        if (needPlan && provider.value !== 'claudeapp' && !LLM().pick(acc, provider.value)) { err.textContent = '👆 ' + CM('roadmap.map.imp.planNeedsKey'); return; }
+        const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 2147483648)); if (big) { err.textContent = '⚠️ ' + CM('roadmap.map.imp.tooBig', { name: big.name }); return; }
         go.disabled = true;
         try {
           const assignments = files.map(f => ({ file: f, targets: (A.get(f)?.targets || []).filter(t => parsed.nodes[t.id]) })).filter(a => a.targets.length);
@@ -818,109 +818,111 @@ window.NoemaCurMap = (() => {
           }
           if (c.provider === 'claudeapp') { const r = await C().build(acc, c); close(); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); G().kick(); map(acc, r.id, { onStudy, appHelp: !J().work(r).done }); return; }
           close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
-        } catch (e) { err.textContent = '⚠️ ' + e.message; go.disabled = false; }
-      } }, '📥 Import my Roadmap');
+        } catch (e) { err.textContent = '⚠️ ' + errMsg(e); go.disabled = false; }
+      } }, '📥 ' + CM('roadmap.map.imp.go'));
       // ⓘ guides (step 1: how to write a map · step 3: how to give steps their files) — every example is read by the real parser
-      const tryIt = code => el('button', { class: 'btn small ghost cm-try', onclick: e => { e.preventDefault(); text.value = code; aiParsed = null; reparse(); text.scrollIntoView({ block: 'center', behavior: 'smooth' }); } }, '▶ Try it');
+      const tryIt = code => el('button', { class: 'btn small ghost cm-try', onclick: e => { e.preventDefault(); text.value = code; aiParsed = null; reparse(); text.scrollIntoView({ block: 'center', behavior: 'smooth' }); } }, '▶ ' + CM('roadmap.map.guide.try'));
       const rules = rows => el('table', { class: 'cm-rules' }, el('tbody', {}, ...rows.map(([c, m]) => el('tr', {}, el('td', {}, el('code', {}, c)), el('td', {}, m)))));
-      const ex = (code, reads) => el('div', { class: 'cm-ex' }, el('pre', {}, code), reads ? el('div', { class: 'cm-reads' }, el('b', {}, 'Read as: '), el('pre', {}, reads)) : null, tryIt(code));
+      const ex = (code, reads) => el('div', { class: 'cm-ex' }, el('pre', {}, code), reads ? el('div', { class: 'cm-reads' }, el('b', {}, CM('roadmap.map.guide.readAs') + ' '), el('pre', {}, reads)) : null, tryIt(code));
       const sec = (h, ...c) => el('section', { class: 'cm-gsec' }, el('h4', {}, h), ...c);
+      /* i18n-ignore-start — the guides' syntax column and examples are input for the parser (curimport.js), written as it reads them; their prose is CM() */
       const mapGuide = el('div', { class: 'cm-guide' },
-        el('p', {}, 'A Roadmap is your list of steps and which step needs which. Any shape works: a step may open several steps (a ', el('b', {}, 'branch'), ') and need several (a ', el('b', {}, 'join'), '). Only a circle of “needs” is refused (the steps on it are named). Write it in any of the forms below — the preview under the box shows how it was read, so you can check it at once. “A ⟵ B” below means “A needs B” (B is learned first).'),
-        sec('1 · Tree or outline',
+        el('p', {}, ...boldMd(CM('roadmap.map.guide.intro'))),
+        sec(CM('roadmap.map.guide.s1'),
           rules([
-            ['├── └── │   - * •   1.  2.3  a)   # ##   indentation', 'a topic written under another is its sub-topic'],
-            ['(sub-topic)', 'comes after its parent topic; the next topic at the parent’s level waits for all of its sub-topics (a join)'],
-            ['topics at the same level', 'in the order written: each needs the one before it. To make unnumbered levels independent everywhere: “How to read it” ▸ in any order'],
-            ['1. 2. 3.   2.1 2.2', 'numbered topics always follow each other'],
-            ['Topic (any order)', 'its sub-topics are independent: each needs only the parent (on the top line: the whole first level)'],
-            ['Topic (in order)', 'its sub-topics follow each other, even when “any order” is the default'],
-            ['Topic (after: A, 2.1)   Topic ← A', 'an extra link: it also needs A (by title or by number) — e.g. a join across two branches'],
-            ['Topic — one line', 'a short description of what the step covers'],
-            ['one top line with everything under it', 'the name of the course, not a step'],
-            ['Prerequisites / Applications', 'top-level groups with these names come before / after the main topics, even in “any order”'],
-            ['Topic 📎 file.pdf pp. 3–9', 'the files of this step (see ⓘ in step 3)']]),
+            ['├── └── │   - * •   1.  2.3  a)   # ##   indentation', CM('roadmap.map.guide.t1a')],
+            [CM('roadmap.map.guide.c.sub'), CM('roadmap.map.guide.t1b')],
+            [CM('roadmap.map.guide.c.same'), CM('roadmap.map.guide.t1c')],
+            ['1. 2. 3.   2.1 2.2', CM('roadmap.map.guide.t1d')],
+            ['Topic (any order)', CM('roadmap.map.guide.t1e')],
+            ['Topic (in order)', CM('roadmap.map.guide.t1f')],
+            ['Topic (after: A, 2.1)   Topic ← A', CM('roadmap.map.guide.t1g')],
+            ['Topic — one line', CM('roadmap.map.guide.t1h')],
+            [CM('roadmap.map.guide.c.top'), CM('roadmap.map.guide.t1i')],
+            ['Prerequisites / Applications', CM('roadmap.map.guide.t1j')],
+            ['Topic 📎 file.pdf pp. 3–9', CM('roadmap.map.guide.t1k')]]),
           ex('Molecular biology\n├── Chemistry basics\n├── DNA (any order)\n│   ├── Structure\n│   └── Replication — how cells copy DNA\n├── Transcription\n└── Applications',
             '1 Chemistry basics   (start)\n2 DNA                ⟵ Chemistry basics\n2.1 Structure        ⟵ DNA\n2.2 Replication      ⟵ DNA      (independent of 2.1)\n3 Transcription      ⟵ Structure, Replication   (a join)\n4 Applications       ⟵ Transcription'),
           ex('Course (any order)\n- Algebra\n- Geometry\n- Calculus (after: Algebra, Geometry)',
             'Algebra    (start)\nGeometry   (start)\nCalculus   ⟵ Algebra, Geometry')),
-        sec('2 · Arrows',
+        sec(CM('roadmap.map.guide.s2'),
           rules([
-            ['A → B     (also -> => ⇒)', 'B needs A: A comes first'],
-            ['A → B → C', 'a chain'],
-            ['A, B → C', 'a join: C needs both A and B'],
-            ['A → B, C', 'a branch: B and C both need A (and not each other)'],
-            ['one chain per line', 'the same title in several lines is the same step'],
-            ['⇄ in “How to read it”', 'if your arrows point from a step to what it needs (C → A, B), reverse them'],
-            ['A — one line   A 📎 a.pdf', 'a description / files on a step work here too']]),
+            ['A → B     (also -> => ⇒)', CM('roadmap.map.guide.t2a')],
+            ['A → B → C', CM('roadmap.map.guide.t2b')],
+            ['A, B → C', CM('roadmap.map.guide.t2c')],
+            ['A → B, C', CM('roadmap.map.guide.t2d')],
+            [CM('roadmap.map.guide.c.chain'), CM('roadmap.map.guide.t2e')],
+            [CM('roadmap.map.guide.c.rev'), CM('roadmap.map.guide.t2f')],
+            ['A — one line   A 📎 a.pdf', CM('roadmap.map.guide.t2g')]]),
           ex('Algebra → Calculus → Probability\nCalculus → Linear algebra\nProbability, Linear algebra → Bayesian inference',
             'Algebra             (start)\nCalculus            ⟵ Algebra\nProbability         ⟵ Calculus\nLinear algebra      ⟵ Calculus          (a branch from Calculus)\nBayesian inference  ⟵ Probability, Linear algebra   (a join)')),
-        sec('3 · Mermaid',
+        sec(CM('roadmap.map.guide.s3'),
           rules([
-            ['flowchart LR   graph TD', 'the first line (the direction does not matter)'],
-            ['A[Algebra]   A(Algebra)   A{Algebra}', 'a step: id A, title Algebra (any shape)'],
-            ['A --> B    A ==> B    A -.-> B    A -- text --> B', 'B needs A (labels are ignored)'],
-            ['B & C --> D', 'a join: D needs B and C'],
-            ['subgraph Prerequisites … end', 'a group: its steps are marked as prerequisites (or applications…) — only arrows make links'],
-            ['%% 📎 Files   then   %% D: proofs/', 'files by step id, in comment lines (Mermaid ignores them)']]),
+            ['flowchart LR   graph TD', CM('roadmap.map.guide.t3a')],
+            ['A[Algebra]   A(Algebra)   A{Algebra}', CM('roadmap.map.guide.t3b')],
+            ['A --> B    A ==> B    A -.-> B    A -- text --> B', CM('roadmap.map.guide.t3c')],
+            ['B & C --> D', CM('roadmap.map.guide.t3d')],
+            ['subgraph Prerequisites … end', CM('roadmap.map.guide.t3e')],
+            ['%% 📎 Files   then   %% D: proofs/', CM('roadmap.map.guide.t3f')]]),
           ex('flowchart LR\n  A[Algebra] --> B[Calculus]\n  A --> C[Logic]\n  B & C --> D[Proofs]',
             'Algebra    (start)\nCalculus   ⟵ Algebra\nLogic      ⟵ Algebra\nProofs     ⟵ Calculus, Logic')),
-        sec('4 · JSON',
+        sec(CM('roadmap.map.guide.s4'),
           rules([
-            ['"nodes": [{ "id", "title", "after": [ids] }]', 'the steps; “after” may also be called prerequisites, requires, needs, dependsOn'],
-            ['"edges": [{ "from": "a", "to": "b" }]   or   ["a → b"]', 'links instead of “after”: b needs a'],
-            ['"children": [ … ]   "order": "any"', 'a nested tree, read like an outline'],
-            ['"summary"   "files"   "folder"', 'a description and the files of a step: "files": ["book.pdf pp. 1-40"] or [{ "path": "book.pdf", "pages": "1-40" }], "folder": "bayes/"'],
-            ['"files": { "<id or title>": ["path", …] }', 'all files at the top level instead'],
-            ['a Roadmap exported from noema-lite', 'is imported as it is (with its chapters)']]),
+            ['"nodes": [{ "id", "title", "after": [ids] }]', CM('roadmap.map.guide.t4a')],
+            ['"edges": [{ "from": "a", "to": "b" }]   or   ["a → b"]', CM('roadmap.map.guide.t4b')],
+            ['"children": [ … ]   "order": "any"', CM('roadmap.map.guide.t4c')],
+            ['"summary"   "files"   "folder"', CM('roadmap.map.guide.t4d', { a: '"files": ["book.pdf pp. 1-40"]', b: '[{ "path": "book.pdf", "pages": "1-40" }]', c: '"folder": "bayes/"' })],
+            ['"files": { "<id or title>": ["path", …] }', CM('roadmap.map.guide.t4e')],
+            [CM('roadmap.map.guide.c.exported'), CM('roadmap.map.guide.t4f')]]),
           ex('{ "title": "Bayes",\n  "nodes": [\n    { "id": "prob", "title": "Probability" },\n    { "id": "lin", "title": "Linear algebra" },\n    { "id": "bayes", "title": "Bayesian inference", "after": ["prob", "lin"] } ] }',
             'Probability          (start)\nLinear algebra       (start)\nBayesian inference   ⟵ Probability, Linear algebra')),
-        sec('5 · Anything else', el('p', {}, 'Prose, a table, a syllabus copied from a web page… press “✨ Let the AI read it”. It keeps only your Roadmap’s own topics (it may not add, drop or rename any) and you see the result before importing.')),
-        el('p', { class: 'tiny' }, 'Links that other links already imply are dropped (A → B → C makes “C needs A” unnecessary). ALL-CAPS titles become normal capitalisation unless you tick “Keep CAPITALS”.'));
+        sec(CM('roadmap.map.guide.s5'), el('p', {}, CM('roadmap.map.guide.s5text'))),
+        el('p', { class: 'tiny' }, CM('roadmap.map.guide.implied')));
       const filesGuide = el('div', { class: 'cm-guide' },
-        el('p', {}, 'A step with files is planned and taught FROM them (no web research of its theory); steps without files are researched by the AI as usual. Add files, a folder (📁, keeps its sub-folders) or a .zip — then each file is given to a step in this order:'),
-        sec('1 · Named in your Roadmap (✓ sure)',
+        el('p', {}, CM('roadmap.map.guide.filesIntro')),
+        sec(CM('roadmap.map.guide.f1'),
           rules([
-            ['Topic 📎 book.pdf pp. 40–62, notes/dna/', 'on the step itself, after 📎 (comma-separated)'],
-            ['Topic (files: lab/)', 'the same, without the emoji'],
-            ['📎 Files   — a line of its own at the end', 'starts a files section: one line per step, “key: paths”'],
-            ['DNA replication: …   2.1: …   D: …', 'the key is the step’s title, its outline number or its Mermaid / JSON id'],
-            ['%% 📎 Files   %% D: proofs/', 'in Mermaid, as comment lines'],
-            ['"files" / "folder"', 'in JSON (see ⓘ in step 1)']]),
+            ['Topic 📎 book.pdf pp. 40–62, notes/dna/', CM('roadmap.map.guide.f1a')],
+            ['Topic (files: lab/)', CM('roadmap.map.guide.f1b')],
+            ['📎 Files   — ' + CM('roadmap.map.guide.c.ownLine'), CM('roadmap.map.guide.f1c')],
+            ['DNA replication: …   2.1: …   D: …', CM('roadmap.map.guide.f1d')],
+            ['%% 📎 Files   %% D: proofs/', CM('roadmap.map.guide.f1e')],
+            ['"files" / "folder"', CM('roadmap.map.guide.f1f')]]),
           ex('1. Cell biology\n2. DNA replication 📎 dna/*.pdf, notes/dna.md\n3. Transcription\n\n📎 Files\nCell biology: cells/\n3: book.pdf pp. 40–62',
             'Cell biology      📎 every file in cells/\nDNA replication   📎 the PDFs in dna/ + notes/dna.md\nTranscription     📎 pages 40–62 of book.pdf')),
-        sec('2 · Paths',
+        sec(CM('roadmap.map.guide.f2'),
           rules([
-            ['book.pdf', 'that file, wherever it is in what you added (add its folder to be precise: dna/book.pdf)'],
-            ['dna/   (or dna)', 'a folder: every file in it, at any depth'],
-            ['notes/*.md   lab?/x.pdf   dna/**', '* any name, ? one character, ** any sub-folders'],
-            ['book.pdf pp. 40–62   p. 40   #40-62   σσ. 40–62', 'only these pages of a PDF belong to the step'],
-            ['the same book in several steps', 'name it on each with its pages — one textbook can serve the whole Roadmap and is stored once']])),
-        sec('3 · Not named? Matched automatically',
+            ['book.pdf', CM('roadmap.map.guide.f2a')],
+            ['dna/   (or dna)', CM('roadmap.map.guide.f2b')],
+            ['notes/*.md   lab?/x.pdf   dna/**', CM('roadmap.map.guide.f2c')],
+            ['book.pdf pp. 40–62   p. 40   #40-62   σσ. 40–62', CM('roadmap.map.guide.f2d')],
+            [CM('roadmap.map.guide.c.sameBook'), CM('roadmap.map.guide.f2e')]])),
+        sec(CM('roadmap.map.guide.f3'),
           rules([
-            ['DNA replication/   03 DNA replication/   2.1/', '≈ a sub-folder named like a step (at any depth) → every file in it'],
-            ['2.1 Structure.pdf   03-transcription.pdf', '≈ a name that starts with the step’s number (or its position)'],
-            ['transcription-notes.pdf', '? a name that looks like a step’s title — a guess, check it'],
-            ['⚠️', 'more than one step fits — pick one (tab “⚠️ To check”)'],
-            ['—', 'no step fits — tab “Not used”: give it a step or leave it out (it is not stored)']]),
-          el('p', {}, 'A folder that holds everything (the folder you dropped, “material/”) is ignored when matching. A good layout: one sub-folder per step, named like the step or with its number.'),
+            ['DNA replication/   03 DNA replication/   2.1/', CM('roadmap.map.guide.f3a')],
+            ['2.1 Structure.pdf   03-transcription.pdf', CM('roadmap.map.guide.f3b')],
+            ['transcription-notes.pdf', CM('roadmap.map.guide.f3c')],
+            ['⚠️', CM('roadmap.map.guide.f3d')],
+            ['—', CM('roadmap.map.guide.f3e')]]),
+          el('p', {}, CM('roadmap.map.guide.f3f')),
           el('pre', { class: 'cm-tree' }, 'Biology/\n├── 01 Cell biology/        → step 1 (every file)\n├── 02 DNA replication/\n│   ├── lecture.pdf\n│   └── notes.md\n└── book.pdf               → named in the Roadmap with pages per step')),
-        sec('4 · Change anything',
-          el('p', {}, 'Tap a step chip to remove it, “＋ step” to give the file to one more step, type pages (40–62) next to a step, or drag a file onto a step in the Roadmap above. ✓ = set by you. Files can also be added later: ✏️ Edit step → 📎, until the step is prepared.')));
-      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← Roadmaps'),
-        head('📥 Import a Roadmap', 'Your own Roadmap of steps becomes the Roadmap as it is — no AI redraws it. Give steps their files and they are taught from them.'),
+        sec(CM('roadmap.map.guide.f4'),
+          el('p', {}, CM('roadmap.map.guide.f4a'))));
+      /* i18n-ignore-end */
+      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.lib.title')),
+        head('📥 ' + CM('roadmap.map.lib.import'), CM('roadmap.map.imp.lead')),
         el('ol', { class: 'cg-steps' },
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Your Roadmap'), tip(mapGuide)),
-            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 Open a file', fileIn), aiBtn),
-            el('details', { class: 'cg-faq' }, el('summary', {}, 'How to read it'), el('label', { class: 'cg-field' }, 'Topics at the same level (when not numbered and not marked)', mode), el('label', { class: 'tiny' }, reverse, ' ⇄ my arrows point from a step to what it needs (reverse them)'), el('label', { class: 'tiny' }, keepCaps, ' Keep CAPITALS as written')),
-            info, perr, warnBox, graph, nodeBox, el('details', { class: 'cg-faq' }, el('summary', {}, 'The steps as a list'), prev)),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Name and language')), el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'Language of the course', lang), el('label', { class: 'cg-field' }, 'Your starting point', learner)),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip(filesGuide)), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip(el('div', {}, el('p', {}, 'The Roadmap is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.'), el('p', {}, el('b', {}, '💬 Claude app (recommended): '), 'nothing more to do in this form — press Import. The Roadmap opens with a 💬 bar: copy its message into a chat of your Claude app (or claude.ai); Claude plans the chapters and prepares the steps that wait in its queue, one per chat, and they appear here by themselves. Your files are given to Claude through the connector (or in a bundle you download, without it). Usually the cheapest way — no cost beyond your Claude plan, which matters most for big Roadmaps.'), el('p', {}, el('b', {}, 'API key / Gemini: '), 'the work runs here, in the background while the app is open.')))), PP.box,
-            el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude API key: stop and ask me when one step costs more than $', budget)),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Use subjects you already have (optional)'), tip('Steps you attach one of your subjects to are planned from that subject and never generated — no agent touches them. You can also do it later, on any step: 📦 Use a subject I have.')),
-            el('label', { class: 'tiny' }, attachFirst, ' Open the Roadmap first so I can attach my subjects to its steps — then the other steps are planned')),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Import')), go, busy, err)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s1')), tip(mapGuide)),
+            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 ' + CM('roadmap.map.imp.openFile'), fileIn), aiBtn),
+            el('details', { class: 'cg-faq' }, el('summary', {}, CM('roadmap.map.imp.howRead')), el('label', { class: 'cg-field' }, CM('roadmap.map.imp.sameLevel'), mode), el('label', { class: 'tiny' }, reverse, ' ⇄ ' + CM('roadmap.map.imp.reverse')), el('label', { class: 'tiny' }, keepCaps, ' ' + CM('roadmap.map.imp.keepCaps'))),
+            info, perr, warnBox, graph, nodeBox, el('details', { class: 'cg-faq' }, el('summary', {}, CM('roadmap.map.imp.asList')), prev)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s2'))), el('label', { class: 'cg-field' }, CM('roadmap.map.ed.name'), title), el('label', { class: 'cg-field' }, CM('roadmap.map.new.lang'), lang), el('label', { class: 'cg-field' }, CM('roadmap.map.new.start'), learner)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s3')), tip(filesGuide)), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s4')), tip(el('div', {}, el('p', {}, CM('roadmap.map.imp.s4used')), el('p', {}, ...boldMd(CM('roadmap.map.imp.s4app'))), el('p', {}, ...boldMd(CM('roadmap.map.imp.s4key')))))), PP.box,
+            el('label', { class: 'cg-field' }, CM('roadmap.map.new.prepAhead'), prefetch), el('label', { class: 'cg-field' }, CM('roadmap.map.new.budget'), budget)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s5')), tip(CM('roadmap.map.imp.s5tip'))),
+            el('label', { class: 'tiny' }, attachFirst, ' ' + CM('roadmap.map.imp.attachFirst'))),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s6'))), go, busy, err)),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       setTimeout(() => text.focus(), 200);
     });
