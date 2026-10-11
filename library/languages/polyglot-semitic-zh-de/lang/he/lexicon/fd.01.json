@@ -92,7 +92,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Biblical form אָנֹכִי keeps the k of Proto-Semitic *ʔanāku, like Akkadian anāku; Arabic أَنَا (ʔanā) lost it, as did אֲנִי."
+     "The Biblical form אָנֹכִי keeps the k of Proto-Semitic *ʔanāku; Arabic أَنَا (ʔanā) lost it, as did אֲנִי."
     ],
     "pitfalls": [
      "The present-tense verb after אֲנִי shows the speaker’s gender: a man says אֲנִי אוֹכֵל, a woman אֲנִי אוֹכֶלֶת."
@@ -335,7 +335,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "A man — or any masculine thing (Hebrew has no “it”).",
+    "feeling": "A man — or any masculine thing (Hebrew has no neuter).",
     "senses": [
      {
       "id": "s1",
@@ -424,7 +424,7 @@
      "Hebrew has no neuter: a masculine thing is הוּא too — הַגֶּזֶר? הוּא פֹּה."
     ],
     "subtleties": [
-     "In the present, הוּא can link subject and predicate like “is”: דָּוִד הוּא מוֹרֶה. It agrees with the subject: הִיא for a feminine subject, הֵם / הֵן for plurals."
+     "In the present, הוּא can link subject and predicate as a copula: דָּוִד הוּא מוֹרֶה. It agrees with the subject: הִיא for a feminine subject, הֵם / הֵן for plurals."
     ]
    }
   },
@@ -1519,7 +1519,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-West Semitic *gabr-; compare Aramaic גַּבְרָא (gaḇrā, “man”). Root ג־ב־ר, as in the verb גָּבַר “to become stronger, to prevail”.",
+     "text": "From Proto-West Semitic *gabr-. Root ג־ב־ר, as in the verb גָּבַר “to become stronger, to prevail”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1716,7 +1716,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ʔanθ-at-. Cognate with Aramaic אִנְתְּתָא (ʾintəṯā) and Arabic أُنْثَى (ʔunṯā, “female”). Wiktionary notes that it is a false cognate of אִישׁ “man”: Semitic š and ṯ merged into Hebrew שׁ.",
+     "text": "From Proto-Semitic *ʔanθ-at-. Cognate with Arabic أُنْثَى (ʔunṯā, “female”). Wiktionary notes that it is a false cognate of אִישׁ “man”: Semitic š and ṯ merged into Hebrew שׁ.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1892,12 +1892,12 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *walad-. Compare Arabic وَلَد (walad, “child”), وَلَدَ (walada, “to give birth”), Ge’ez ወልድ (wäld, “child”). Root י־ל־ד “to give birth” (יָלַד).",
+     "text": "From Proto-Semitic *walad-. Compare Arabic وَلَد (walad, “child”), وَلَدَ (walada, “to give birth”). Root י־ל־ד “to give birth” (יָלַד).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Hebrew turned a word-initial w into y: Arabic وَلَد walad ~ יֶלֶד yeled.",
-     "Turkish evlat “child, offspring” comes from Arabic أَوْلَاد (awlād), the plural of وَلَد — a cousin of יֶלֶד."
+     "Arabic وَلَد “child, boy” and its plural أَوْلَاد (awlād) are cousins of יֶלֶד / יְלָדִים."
     ],
     "pitfalls": [
      "יְלָדִים means “children” (boys and girls together); for girls only say יְלָדוֹת.",
@@ -1906,6 +1906,13 @@
     "subtleties": [
      "יֶלֶד is both “boy” and “child”; when the sex matters, Hebrew contrasts יֶלֶד / יַלְדָּה.",
      "Among adults it can mean “a kid”: הוּא עוֹד יֶלֶד “he’s still a kid”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish evlat “child, offspring” comes from Arabic أَوْلَاد (awlād), the plural of وَلَد — a cousin of יֶלֶד."
+     }
     ]
    }
   },
@@ -2176,7 +2183,7 @@
       "text": "אָדָם לְאָדָם זְאֵב",
       "tr": "man is a wolf to man",
       "kind": "saying",
-      "meaning": "people are cruel to each other (the Latin homo homini lupus)",
+      "meaning": "people are cruel to each other",
       "register": "neutral"
      }
     ],
@@ -2198,12 +2205,12 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Proto-Semitic *ʔadam-; compare Phoenician ʾdm (“man”) and Ugaritic ảdm (“man; red earth”). Wiktionary relates the word to *dam- “blood” and the colour red: Hebrew דָּם “blood”, אָדֹם “red”, אֲדָמָה “earth, soil”.",
+     "text": "Inherited from Proto-Semitic *ʔadam-. Wiktionary relates the word to *dam- “blood” and the colour red: Hebrew דָּם “blood”, אָדֹם “red”, אֲדָמָה “earth, soil”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Genesis links אָדָם with אֲדָמָה “earth”: the first human is formed from the soil.",
-     "Arabic آدَم (Ādam) is the same name; Turkish uses adam for “man, person” in everyday speech."
+     "Arabic آدَم (Ādam) is the same name."
     ],
     "pitfalls": [
      "אָדָם has no plural in use: “people” is אֲנָשִׁים or בְּנֵי אָדָם.",
@@ -2211,6 +2218,18 @@
     ],
     "subtleties": [
      "In speech the compound בֶּן אָדָם (often pronounced benadam) is more common than plain אָדָם for “a person”."
+    ],
+    "notes": [
+     {
+      "for": "la",
+      "rel": "same",
+      "text": "אָדָם לְאָדָם זְאֵב is homo homini lupus, word for word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish adam “man, person” is the same word, through Arabic آدَم."
+     }
     ]
    }
   },
@@ -2332,7 +2351,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic إِنْسَان (insān, “human being”) and نَاس (nās, “people”) share this old root; Turkish insan “human being” is borrowed from the Arabic."
+     "Arabic إِنْسَان (insān, “human being”) and نَاس (nās, “people”) share this old root."
     ],
     "pitfalls": [
      "אֲנָשִׁים is the plural of אִישׁ “man” but means “people” (men and women); “men” is גְּבָרִים.",
@@ -2340,6 +2359,13 @@
     ],
     "subtleties": [
      "When counting big groups, formal Hebrew uses the singular אִישׁ after the number: אֶלֶף אִישׁ “a thousand people”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish insan “human being” is borrowed from Arabic إِنْسَان, which shares its old root with אֲנָשִׁים."
+     }
     ]
    }
   },
@@ -2507,11 +2533,11 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Arabic خ ب ر (ḵ b r) and Aramaic חבר. Root ח־ב־ר “to join, to be associated” (the verb חָבַר “to join, to be friends with”).",
+     "text": "Cognate with Arabic خ ب ر (ḵ b r). Root ח־ב־ר “to join, to be associated” (the verb חָבַר “to join, to be friends with”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Yiddish khaver “friend, comrade” comes from this word, and the slang חֶבְרֶ׳ה “the gang, the guys” goes back to Hebrew חֶבְרָה “company” through Yiddish khevre.",
+     "The slang חֶבְרֶ׳ה “the gang, the guys” goes back to חֶבְרָה “company”, from the same root — it came back into Hebrew through Yiddish.",
      "In the kibbutz movement חָבֵר also meant “comrade, member”."
     ],
     "pitfalls": [
@@ -2837,7 +2863,7 @@
      }
     ],
     "etymology": {
-     "text": "From Akkadian talmīdu. Cognate with Aramaic תלמידא (talmīḏā). Root ל־מ־ד “to learn” (לָמַד), as in תַּלְמוּד “Talmud, learning”.",
+     "text": "From Akkadian talmīdu. Root ל־מ־ד “to learn” (לָמַד), as in תַּלְמוּד “Talmud, learning”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3115,11 +3141,11 @@
      }
     ],
     "etymology": {
-     "text": "Internationalism, ultimately from Latin studens. Compare Polish student, Ukrainian студе́нт (studént).",
+     "text": "Internationalism, ultimately from Latin studens.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A word you already know: German Student, Russian студент; Greek says φοιτητής and Turkish öğrenci instead."
+     "An internationalism: German Student is the same word."
     ],
     "pitfalls": [
      "A pupil at school is a תַּלְמִיד, not a סְטוּדֶנְט.",
@@ -3127,6 +3153,38 @@
     ],
     "subtleties": [
      "The stress is on the last syllable: stu-DENT."
+    ],
+    "notes": [
+     {
+      "for": "uk",
+      "rel": "same",
+      "text": "The same internationalism as Ukrainian студе́нт."
+     },
+     {
+      "for": "pl",
+      "rel": "same",
+      "text": "The same internationalism as Polish student."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same word as студент — and, as in Russian, it is a university student; a school pupil is תַּלְמִיד (ученик)."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek says φοιτητής; Hebrew uses the international סְטוּדֶנְט — and תַּלְמִיד for a pupil (μαθητής)."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “student” also covers school pupils; סְטוּדֶנְט is only for a university or college — a pupil is תַּלְמִיד."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish says öğrenci for both; Hebrew uses the international סְטוּדֶנְט at a university and תַּלְמִיד at school."
+     }
     ]
    }
   },
@@ -3257,7 +3315,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Studentin and Russian студентка also make the feminine with a suffix — Hebrew ־ִית does the same job."
+     "German Studentin also makes the feminine with a suffix — Hebrew ־ִית does the same job."
     ],
     "pitfalls": [
      "Plural סְטוּדֶנְטִיּוֹת: -ִית becomes -ִיּוֹת.",
@@ -3265,6 +3323,13 @@
     ],
     "subtleties": [
      "The feminine suffix ־ִית is the one Hebrew adds to many borrowed masculine nouns."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like студентка, the feminine is made with a suffix: סְטוּדֶנְט → סְטוּדֶנְטִית."
+     }
     ]
    }
   },
