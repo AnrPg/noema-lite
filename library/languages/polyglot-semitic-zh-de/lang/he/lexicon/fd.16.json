@@ -195,7 +195,7 @@
     ],
     "pitfalls": [
      "The first vowel shortens in the other forms: גָּדוֹל → גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת (ga- → g’-).",
-     "After a definite noun it takes the article too: הַבַּיִת הַגָּדוֹל “the big house”. Without it, הַבַּיִת גָּדוֹל is a sentence: “the house is big”."
+     "- After a definite noun it takes the article too:\n→ הַבַּיִת הַגָּדוֹל “the big house”\n- Without it, הַבַּיִת גָּדוֹל is a sentence: “the house is big”."
     ],
     "subtleties": [
      "Of people גָּדוֹל means “older, grown-up” (הָאָח הַגָּדוֹל “the older brother”), not “tall” — that is גָּבֹהַּ.",
@@ -804,7 +804,7 @@
      "The opposite is נָמוּךְ “low, short” — Hebrew measures people the way it measures walls: high or low."
     ],
     "pitfalls": [
-     "The last letter is a sounded h: ה with a dot (mappiq) and a “stolen” a before it — gavóha. Unpointed: גבוה.",
+     "- The last letter is a sounded h: ה with a dot (mappiq) and a “stolen” a before it — gavóha.\n- Unpointed: גבוה.",
      "Of people גָּבֹהַּ is “tall”; גָּדוֹל of a person means “older, grown-up”."
     ],
     "subtleties": [
@@ -1015,7 +1015,7 @@
      "Arabic طَيِّب is the same word; German Masel “luck” comes from מַזָּל, as in מַזָּל טוֹב."
     ],
     "pitfalls": [
-     "As a reply טוֹב means “OK, fine” (טוֹב, אֲנִי בָּא); as an adverb it is “well”: הוּא מְבַשֵּׁל טוֹב “he cooks well”.",
+     "As a reply טוֹב means “OK, fine” (טוֹב, אֲנִי בָּא); as an adverb it is “well”:\n→ הוּא מְבַשֵּׁל טוֹב “he cooks well”",
      "“Better” has no special form: טוֹב יוֹתֵר or יוֹתֵר טוֹב (lesson 17)."
     ],
     "subtleties": [
@@ -1509,7 +1509,7 @@
     ],
     "pitfalls": [
      "Use יָשָׁן for things, זָקֵן (or politely מְבֻגָּר) for people: סֵפֶר יָשָׁן, but אִישׁ זָקֵן.",
-     "יָשָׁן “old” and יָשֵׁן “asleep, sleeps” are both written ישן: הַבַּיִת יָשָׁן “the house is old”, הַיֶּלֶד יָשֵׁן “the child is sleeping”."
+     "יָשָׁן “old” and יָשֵׁן “asleep, sleeps” are both written ישן:\n→ הַבַּיִת יָשָׁן “the house is old”, הַיֶּלֶד יָשֵׁן “the child is sleeping”"
     ],
     "subtleties": [
      "חָבֵר יָשָׁן is “an old (long-standing) friend”, not an elderly one."
@@ -1656,7 +1656,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic صَغِير means “small”; Hebrew kept the sense “young”. Lot’s refuge town צוֹעַר (Zoar) was named “the small one” (Genesis 19:20–22)."
+     "- Arabic صَغِير means “small”; Hebrew kept the sense “young”.\n- Lot’s refuge town צוֹעַר (Zoar) was named “the small one” (Genesis 19:20–22)."
     ],
     "pitfalls": [
      "The first vowel shortens: צְעִירָה (tse’irá), צְעִירִים."
@@ -2463,7 +2463,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German warm / heiß = Hebrew חָמִים / חַם: one root, a gentler pattern. The Sabbath stew חַמִּין (hamin) is named for being kept hot."
+     "- German warm / heiß = Hebrew חָמִים / חַם: one root, a gentler pattern.\n- The Sabbath stew חַמִּין (hamin) is named for being kept hot."
     ],
     "pitfalls": [
      "חָמִים “warm” and חַמִּים “hot” (plural of חַם) are both written חמים: מַיִם חַמִּים “hot water”, but בַּיִת חָמִים “a warm home”.",
@@ -2647,7 +2647,7 @@
      "Masculine יָפֶה ends in -e, feminine יָפָה in -a: the same letters יפה — only the vowel (and the context) tells them apart."
     ],
     "subtleties": [
-     "יָפֶה also praises an action (“nice!, well done!”) and works as an adverb: הִיא שָׁרָה יָפֶה “she sings beautifully”."
+     "יָפֶה also praises an action (“nice!, well done!”) and works as an adverb:\n→ הִיא שָׁרָה יָפֶה “she sings beautifully”"
     ]
    }
   },
@@ -3276,7 +3276,7 @@
      "A common sign in Israeli shops: הַמְּחִירִים הוּזְלוּ “prices have been reduced” — the verb of זוֹל."
     ],
     "pitfalls": [
-     "Of a price itself Hebrew prefers “low”: מְחִיר נָמוּךְ (as German niedriger Preis); זוֹל describes the thing: הַכַּרְטִיס זוֹל."
+     "Of a price itself Hebrew prefers “low”: מְחִיר נָמוּךְ (as German niedriger Preis); זוֹל describes the thing:\n→ הַכַּרְטִיס זוֹל"
     ],
     "subtleties": [
      "זוֹל can sound pejorative (“cheap, tacky”); a positive “good value” is מִשְׁתַּלֵּם."
@@ -4464,7 +4464,7 @@
      "Biblical אַט means “gently”: David asks his men “לְאַט לִי לַנַּעַר לְאַבְשָׁלוֹם” — “deal gently, for my sake, with the young man Absalom” (2 Samuel 18:5)."
     ],
     "pitfalls": [
-     "The masculine plural has two yods: אִטִּיִּים (also written and said אִטִּים); the feminine ends in ־ִית: אִטִּית.",
+     "The masculine plural has two yods: אִטִּיִּים (also written and said אִטִּים); the feminine ends in ־ִית:\n→ אִטִּית",
      "“Slowly” is the adverb לְאַט, not *אִטִּי."
     ],
     "subtleties": [

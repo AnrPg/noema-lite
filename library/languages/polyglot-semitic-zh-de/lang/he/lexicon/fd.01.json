@@ -191,7 +191,7 @@
      "The dagesh in the ת is the trace of a lost n: Proto-Semitic *ʔanta became *ʔatta — compare Arabic أَنْتَ (ʔanta), which kept the n."
     ],
     "pitfalls": [
-     "Masculine only: to a woman say אַתְּ. The verb agrees too: אַתָּה רוֹצֶה, but אַתְּ רוֹצָה.",
+     "- Masculine only: to a woman say אַתְּ.\n- The verb agrees too: אַתָּה רוֹצֶה, but אַתְּ רוֹצָה.",
      "Spelled with a final ה although it is pronounced atá."
     ],
     "subtleties": [
@@ -287,7 +287,7 @@
      "Arabic keeps the vowel that Hebrew lost: أَنْتِ (ʔanti) ~ אַתְּ (at)."
     ],
     "pitfalls": [
-     "Without vowel marks אַתְּ is written את — exactly like the object marker אֶת. Only the context tells them apart.",
+     "- Without vowel marks אַתְּ is written את — exactly like the object marker אֶת.\n- Only the context tells them apart.",
      "The verb agrees: אַתְּ רוֹצָה (not אַתְּ רוֹצֶה)."
     ],
     "subtleties": [
@@ -424,7 +424,7 @@
      "Hebrew has no neuter: a masculine thing is הוּא too — הַגֶּזֶר? הוּא פֹּה."
     ],
     "subtleties": [
-     "In the present, הוּא can link subject and predicate as a copula: דָּוִד הוּא מוֹרֶה. It agrees with the subject: הִיא for a feminine subject, הֵם / הֵן for plurals."
+     "- In the present, הוּא can link subject and predicate as a copula:\n→ דָּוִד הוּא מוֹרֶה\n- It agrees with the subject: הִיא for a feminine subject, הֵם / הֵן for plurals."
     ]
    }
   },
@@ -653,7 +653,7 @@
      "Arabic نَحْنُ (naḥnu) is the same word without the initial a-; Hebrew נַחְנוּ also exists (rarely) in the Bible."
     ],
     "pitfalls": [
-     "אֲנַחְנוּ has no gender; the verb shows it: אֲנַחְנוּ אוֹכְלִים (men or a mixed group), אֲנַחְנוּ אוֹכְלוֹת (women only)."
+     "אֲנַחְנוּ has no gender; the verb shows it:\n→ אֲנַחְנוּ אוֹכְלִים (men or a mixed group), אֲנַחְנוּ אוֹכְלוֹת (women only)"
     ],
     "subtleties": [
      "The stress is on the middle syllable: a-NACH-nu."
@@ -1267,8 +1267,8 @@
     "pitfalls": [
      "No present: “the salad is tasty” is הַסָּלָט טָעִים, with no verb at all.",
      "Past and future agree with the subject: הַסָּלָט הָיָה, הָעַגְבָנִיָּה הָיְתָה, הַיְּרָקוֹת הָיוּ; הוּא יִהְיֶה, הִיא תִּהְיֶה.",
-     "In possession the verb agrees with the thing possessed, not with the owner: הָיְתָה לִי עַגְבָנִיָּה (עַגְבָנִיָּה is feminine).",
-     "The past has a person ending, so the pronoun may be dropped: הָיִיתִי בַּבַּיִת “I was at home”; in the present the pronoun is needed: אֲנִי בַּבַּיִת."
+     "In possession the verb agrees with the thing possessed, not with the owner:\n→ הָיְתָה לִי עַגְבָנִיָּה (עַגְבָנִיָּה is feminine)",
+     "The past has a person ending, so the pronoun may be dropped: הָיִיתִי בַּבַּיִת “I was at home”; in the present the pronoun is needed:\n→ אֲנִי בַּבַּיִת"
     ],
     "subtleties": [
      "הָיָה + a present participle gives a habitual past: הוּא הָיָה אוֹכֵל … “he used to eat …”.",
@@ -1724,11 +1724,11 @@
      "The true cousin is Arabic أُنْثَى (ʔunṯā) “female”."
     ],
     "pitfalls": [
-     "The plural is irregular — נָשִׁים — and it stays feminine although it ends in -ִים: הַנָּשִׁים הָהֵן “those women”.",
+     "The plural is irregular — נָשִׁים — and it stays feminine although it ends in -ִים:\n→ הַנָּשִׁים הָהֵן “those women”",
      "The modern full spelling is אישה (with י); the older spelling אשה is still seen."
     ],
     "subtleties": [
-     "With a possessive it means “wife”: אִשְׁתִּי “my wife”, אִשְׁתּוֹ “his wife” (from the construct form אֵשֶׁת־).",
+     "With a possessive it means “wife”:\n→ אִשְׁתִּי “my wife”, אִשְׁתּוֹ “his wife” (from the construct form אֵשֶׁת־)",
      "The article takes a qamats before א: הָאִשָּׁה."
     ]
    }
@@ -2358,7 +2358,7 @@
      "“A people, a nation” is עַם, not אֲנָשִׁים."
     ],
     "subtleties": [
-     "When counting big groups, formal Hebrew uses the singular אִישׁ after the number: אֶלֶף אִישׁ “a thousand people”."
+     "When counting big groups, formal Hebrew uses the singular אִישׁ after the number:\n→ אֶלֶף אִישׁ “a thousand people”"
     ],
     "notes": [
      {
@@ -3635,7 +3635,7 @@
      "Plural מוֹרוֹת; a mixed staff is מוֹרִים."
     ],
     "subtleties": [
-     "As a form of address מוֹרָה needs no name or title: “מוֹרָה, יֵשׁ לִי שְׁאֵלָה” (“Teacher, I have a question”)."
+     "As a form of address מוֹרָה needs no name or title:\n→ “מוֹרָה, יֵשׁ לִי שְׁאֵלָה” (“Teacher, I have a question”)"
     ]
    }
   }

@@ -355,7 +355,7 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "ο αδερφός μου — article + noun + “of me” — has the same order as הָאָח שֶׁלִּי, and as in Greek the possessive word does not agree with the thing owned. The suffix (אָחִי) has no Greek match."
+   "text": "ο αδερφός μου — article + noun + “of me” — has the same order as הָאָח שֶׁלִּי, and as in Greek the possessive word does not agree with the thing owned.\n\nThe suffix (אָחִי) has no Greek match."
   },
   {
    "for": "tr",
@@ -365,12 +365,12 @@
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian мой / моя / моё agree with the thing owned; Hebrew שֶׁלִּי never does — it follows only the owner: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי."
+   "text": "Russian мой / моя / моё agree with the thing owned; Hebrew שֶׁלִּי never does — it follows only the owner:\n→ הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי"
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish mi / mis come before the noun and agree in number with it; Hebrew שֶׁלִּי comes after a definite noun and never changes for it: הַסְּפָרִים שֶׁלִּי. Unlike su, Hebrew separates “his” and “her”: שֶׁלּוֹ / שֶׁלָּהּ."
+   "text": "Spanish mi / mis come before the noun and agree in number with it; Hebrew שֶׁלִּי comes after a definite noun and never changes for it:\n→ הַסְּפָרִים שֶׁלִּי\n\nUnlike su, Hebrew separates “his” and “her”:\n→ שֶׁלּוֹ / שֶׁלָּהּ"
   },
   {
    "for": "en",
@@ -380,7 +380,7 @@
   {
    "for": "fr",
    "rel": "trap",
-   "text": "son / sa follow the thing owned (sa sœur is “his” or “her sister”); Hebrew follows the owner: הָאָחוֹת שֶׁלּוֹ “his sister”, הָאָחוֹת שֶׁלָּהּ “her sister”."
+   "text": "son / sa follow the thing owned (sa sœur is “his” or “her sister”); Hebrew follows the owner:\n→ הָאָחוֹת שֶׁלּוֹ “his sister”, הָאָחוֹת שֶׁלָּהּ “her sister”"
   },
   {
    "for": "de",
@@ -450,27 +450,27 @@
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut marks the owner with a suffix on the noun — “my house” is one word; Hebrew has such suffixes too (אָחִי), but everyday speech uses שֶׁל: הַבַּיִת שֶׁלִּי."
+   "text": "Inuktitut marks the owner with a suffix on the noun — “my house” is one word; Hebrew has such suffixes too (אָחִי), but everyday speech uses שֶׁל:\n→ הַבַּיִת שֶׁלִּי"
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "As in il mio libro, the noun keeps its article: הַסֵּפֶר שֶׁלִּי. But שֶׁלִּי follows the noun and never agrees with it, and “his” and “her” are different words (שֶׁלּוֹ / שֶׁלָּהּ) where Italian has suo / sua by the thing owned."
+   "text": "As in il mio libro, the noun keeps its article:\n→ הַסֵּפֶר שֶׁלִּי\n\nBut שֶׁלִּי follows the noun and never agrees with it, and “his” and “her” are different words (שֶׁלּוֹ / שֶׁלָּהּ) where Italian has suo / sua by the thing owned."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "As in o meu livro, the noun keeps its article: הַסֵּפֶר שֶׁלִּי. But שֶׁלִּי follows the noun and never changes for it (הַסְּפָרִים שֶׁלִּי ~ os meus livros), and “his” and “her” differ (שֶׁלּוֹ / שֶׁלָּהּ), where seu / sua follow the thing owned."
+   "text": "As in o meu livro, the noun keeps its article:\n→ הַסֵּפֶר שֶׁלִּי\n\nBut שֶׁלִּי follows the noun and never changes for it (הַסְּפָרִים שֶׁלִּי ~ os meus livros), and “his” and “her” differ (שֶׁלּוֹ / שֶׁלָּהּ), where seu / sua follow the thing owned."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian also puts the possessive after a definite noun: libri im ~ הַסֵּפֶר שֶׁלִּי, motra ime ~ הָאָחוֹת שֶׁלִּי. But im / ime agree with the thing owned, while שֶׁלִּי never changes."
+   "text": "Albanian also puts the possessive after a definite noun: libri im ~ הַסֵּפֶר שֶׁלִּי, motra ime ~ הָאָחוֹת שֶׁלִּי.\n\nBut im / ime agree with the thing owned, while שֶׁלִּי never changes."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your possessives agree with the thing owned, stop: שֶׁלִּי, שֶׁלּוֹ, שֶׁלָּהּ change only for the owner, and they follow a definite noun: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי."
+   "text": "If your possessives agree with the thing owned, stop: שֶׁלִּי, שֶׁלּוֹ, שֶׁלָּהּ change only for the owner, and they follow a definite noun:\n→ הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי"
   },
   {
    "for": "type:agglutinating",
@@ -485,7 +485,7 @@
   {
    "for": "type:polysynthetic",
    "rel": "similar",
-   "text": "If possession in your language is an affix on the noun, the formal Hebrew suffix is similar (אָחִי, אִשְׁתִּי); in everyday speech Hebrew uses a separate word after the noun: הָאָח שֶׁלִּי."
+   "text": "If possession in your language is an affix on the noun, the formal Hebrew suffix is similar (אָחִי, אִשְׁתִּי); in everyday speech Hebrew uses a separate word after the noun:\n→ הָאָח שֶׁלִּי"
   },
   {
    "for": "branch:Semitic",

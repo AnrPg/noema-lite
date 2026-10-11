@@ -2809,7 +2809,7 @@
     {
      "for": "hi",
      "rel": "similar",
-     "text": "Hindi participle tenses also agree in gender and number (*खाता, खाती, खाते*) but add है / हैं for the person; the Hebrew present has no auxiliary: אֲנִי אוֹכֵל."
+     "text": "Hindi participle tenses also agree in gender and number (*खाता, खाती, खाते*) but add है / हैं for the person; the Hebrew present has no auxiliary:\n→ אֲנִי אוֹכֵל"
     }
    ]
   },
@@ -3051,12 +3051,12 @@
     {
      "for": "es",
      "rel": "similar",
-     "text": "Spanish also forbids with a form other than the imperative (*no vayas*, not *ve*) — a partial parallel to אַל + the future: אַל תֵּלֵךְ."
+     "text": "Spanish also forbids with a form other than the imperative (*no vayas*, not *ve*) — a partial parallel to אַל + the future:\n→ אַל תֵּלֵךְ"
     },
     {
      "for": "el",
      "rel": "similar",
-     "text": "Greek also forbids with a form other than the imperative (*μην πας*) — a partial parallel to אַל + the future: אַל תֵּלֵךְ."
+     "text": "Greek also forbids with a form other than the imperative (*μην πας*) — a partial parallel to אַל + the future:\n→ אַל תֵּלֵךְ"
     }
    ]
   },
@@ -5908,7 +5908,7 @@
     {
      "for": "ru",
      "rel": "similar",
-     "text": "You will recognise some slang from Russian: חלטורה (*халтура*, a job on the side), צ'ייניק (*чайник*, a clueless beginner)."
+     "text": "You will recognise some slang from Russian:\n→ חלטורה (*халтура*, a job on the side), צ'ייניק (*чайник*, a clueless beginner)"
     },
     {
      "for": "en",
@@ -6213,7 +6213,7 @@
     {
      "for": "branch:Semitic",
      "rel": "same",
-     "text": "If your language is Semitic, you will recognise thousands of Hebrew roots, often through regular sound correspondences: שָׁלוֹם, בַּיִת, יוֹם, אָכַל."
+     "text": "If your language is Semitic, you will recognise thousands of Hebrew roots, often through regular sound correspondences:\n→ שָׁלוֹם, בַּיִת, יוֹם, אָכַל"
     },
     {
      "for": "am",

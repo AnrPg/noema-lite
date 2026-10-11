@@ -332,7 +332,7 @@
   {
    "lang": "ar",
    "fn": "fn.connectors",
-   "note": "Arabic has the same kind of “that” — أَنَّ, also inside لِأَنَّ “because” — but it must be followed by a noun in the accusative or a pronoun suffix (لِأَنَّهُ مُتْعَبٌ); Hebrew שֶׁ / כִּי take a plain clause. إِذَا “if”, عِنْدَمَا “when”, لِذٰلِكَ “so”, لٰكِنَّ “but”."
+   "note": "Arabic has the same kind of “that” — أَنَّ, also inside لِأَنَّ “because” — but it must be followed by a noun in the accusative or a pronoun suffix (لِأَنَّهُ مُتْعَبٌ); Hebrew שֶׁ / כִּי take a plain clause.\n\nإِذَا “if”, عِنْدَمَا “when”, لِذٰلِكَ “so”, لٰكِنَّ “but”."
   },
   {
    "lang": "de",
@@ -354,27 +354,27 @@
   {
    "for": "ru",
    "rel": "similar",
-   "text": "что ~ שֶׁ, когда ~ כְּשֶׁ, если ~ אִם, потому что ~ כִּי, но ~ אֲבָל; Russian also uses the future after когда / если for a future event (когда я вырасту ~ כְּשֶׁאֶהְיֶה גָּדוֹל). Hebrew שֶׁ is never left out."
+   "text": "что ~ שֶׁ, когда ~ כְּשֶׁ, если ~ אִם, потому что ~ כִּי, но ~ אֲבָל; Russian also uses the future after когда / если for a future event (когда я вырасту ~ כְּשֶׁאֶהְיֶה גָּדוֹל).\n\nHebrew שֶׁ is never left out."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "que ~ שֶׁ, cuando ~ כְּשֶׁ, si ~ אִם, porque ~ כִּי, pero ~ אֲבָל. Where Spanish puts cuando + subjunctive (cuando sea grande), Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל. Like que, שֶׁ is never left out."
+   "text": "que ~ שֶׁ, cuando ~ כְּשֶׁ, si ~ אִם, porque ~ כִּי, pero ~ אֲבָל.\n\n- Where Spanish puts cuando + subjunctive (cuando sea grande), Hebrew uses the future:\n→ כְּשֶׁאֶהְיֶה גָּדוֹל\n- Like que, שֶׁ is never left out."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "“That” can be left out in English, שֶׁ never: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה. After “when” and “if” English uses the present for the future (“when I grow up”); Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם."
+   "text": "“That” can be left out in English, שֶׁ never:\n→ אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה\n\nAfter “when” and “if” English uses the present for the future (“when I grow up”); Hebrew uses the future:\n→ כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם"
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "que ~ שֶׁ (never left out in either language), quand ~ כְּשֶׁ, si ~ אִם, parce que ~ כִּי, mais ~ אֲבָל. As with quand + future (quand je serai grand), Hebrew uses the future after כְּשֶׁ — and after אִם too, where French says s’il pleut."
+   "text": "que ~ שֶׁ (never left out in either language), quand ~ כְּשֶׁ, si ~ אִם, parce que ~ כִּי, mais ~ אֲבָל.\n\nAs with quand + future (quand je serai grand), Hebrew uses the future after כְּשֶׁ — and after אִם too, where French says s’il pleut."
   },
   {
    "for": "de",
    "rel": "different",
-   "text": "weil, dass, wenn send the verb to the end; כִּי, שֶׁ, כְּשֶׁ change nothing. deshalb puts the verb before the subject; לָכֵן does not: לָכֵן אֲנִי נִשְׁאָר."
+   "text": "weil, dass, wenn send the verb to the end; כִּי, שֶׁ, כְּשֶׁ change nothing. deshalb puts the verb before the subject; לָכֵן does not:\n→ לָכֵן אֲנִי נִשְׁאָר"
   },
   {
    "for": "hi",
@@ -394,12 +394,12 @@
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic أَنَّ ~ שֶׁ, عِنْدَمَا ~ כְּשֶׁ, إِذَا / إِنْ ~ אִם, لِأَنَّ ~ כִּי, لٰكِنْ ~ אֲבָל, لِذٰلِكَ ~ לָכֵן. Written Arabic often puts the verb first; Hebrew keeps the subject first in both clauses."
+   "text": "Arabic أَنَّ ~ שֶׁ, عِنْدَمَا ~ כְּשֶׁ, إِذَا / إِنْ ~ אִם, لِأَنَّ ~ כִּי, لٰكِنْ ~ אֲבָל, لِذٰلِكَ ~ לָכֵן.\n\nWritten Arabic often puts the verb first; Hebrew keeps the subject first in both clauses."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish builds subordinate clauses with verb forms (geldiğinde “when he comes”, geldiği için “because he came”); Hebrew uses linking words and leaves the verb as it is: כְּשֶׁהוּא בָּא, כִּי הוּא בָּא."
+   "text": "Turkish builds subordinate clauses with verb forms (geldiğinde “when he comes”, geldiği için “because he came”); Hebrew uses linking words and leaves the verb as it is:\n→ כְּשֶׁהוּא בָּא, כִּי הוּא בָּא"
   },
   {
    "for": "ja",
@@ -409,7 +409,7 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean joins clauses with endings on the verb (-고, -아서, -면); Hebrew puts a separate linking word before the clause: וְ, כִּי, אִם."
+   "text": "Korean joins clauses with endings on the verb (-고, -아서, -면); Hebrew puts a separate linking word before the clause:\n→ וְ, כִּי, אִם"
   },
   {
    "for": "fi",
@@ -429,7 +429,7 @@
   {
    "for": "zh",
    "rel": "similar",
-   "text": "因为 ~ כִּי, 所以 ~ לָכֵן, 但是 ~ אֲבָל, 如果 ~ אִם; Chinese often pairs 因为 … 所以 …, Hebrew uses one of them. Chinese …的时候 “when” closes its clause; Hebrew כְּשֶׁ opens it."
+   "text": "因为 ~ כִּי, 所以 ~ לָכֵן, 但是 ~ אֲבָל, 如果 ~ אִם; Chinese often pairs 因为 … 所以 …, Hebrew uses one of them.\n\nChinese …的时候 “when” closes its clause; Hebrew כְּשֶׁ opens it."
   },
   {
    "for": "vi",
@@ -444,22 +444,22 @@
   {
    "for": "it",
    "rel": "similar",
-   "text": "che ~ שֶׁ, quando ~ כְּשֶׁ, se ~ אִם, perché ~ כִּי, ma ~ אֲבָל, and the word order stays as in a main clause. As with quando sarò grande, Hebrew uses the future after כְּשֶׁ (כְּשֶׁאֶהְיֶה גָּדוֹל) — and after אִם too, where Italian usually says se piove."
+   "text": "che ~ שֶׁ, quando ~ כְּשֶׁ, se ~ אִם, perché ~ כִּי, ma ~ אֲבָל, and the word order stays as in a main clause.\n\nAs with quando sarò grande, Hebrew uses the future after כְּשֶׁ (כְּשֶׁאֶהְיֶה גָּדוֹל) — and after אִם too, where Italian usually says se piove."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "que ~ שֶׁ, quando ~ כְּשֶׁ, se ~ אִם, porque ~ כִּי, mas ~ אֲבָל. Where Portuguese uses the future subjunctive (quando eu for grande, se chover), Hebrew uses the plain future: כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם."
+   "text": "que ~ שֶׁ, quando ~ כְּשֶׁ, se ~ אִם, porque ~ כִּי, mas ~ אֲבָל.\n\nWhere Portuguese uses the future subjunctive (quando eu for grande, se chover), Hebrew uses the plain future:\n→ כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם"
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "që ~ שֶׁ, kur ~ כְּשֶׁ, nëse ~ אִם, sepse ~ כִּי, por ~ אֲבָל; as in Albanian, the clause keeps its word order. And like që, שֶׁ is not left out: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה."
+   "text": "që ~ שֶׁ, kur ~ כְּשֶׁ, nëse ~ אִם, sepse ~ כִּי, por ~ אֲבָל; as in Albanian, the clause keeps its word order.\n\nAnd like që, שֶׁ is not left out:\n→ אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language links clauses with conjunctions and keeps their order, Hebrew is familiar: the linking word goes first (כִּי, אִם, שֶׁ) and nothing moves. New: שֶׁ and כְּשֶׁ are written onto the next word."
+   "text": "If your language links clauses with conjunctions and keeps their order, Hebrew is familiar: the linking word goes first (כִּי, אִם, שֶׁ) and nothing moves.\n\nNew: שֶׁ and כְּשֶׁ are written onto the next word."
   },
   {
    "for": "type:agglutinating",
@@ -469,17 +469,17 @@
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If your language pairs connectors (“because … so …”) or reports speech without a “that”, Hebrew uses one connector and always says שֶׁ before a reported clause: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה."
+   "text": "If your language pairs connectors (“because … so …”) or reports speech without a “that”, Hebrew uses one connector and always says שֶׁ before a reported clause:\n→ אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language joins clauses with affixes on the verb, Hebrew uses separate linking words before the clause, and the verb inside it does not change: כִּי אֲנִי עָיֵף, כְּשֶׁהוּא בָּא."
+   "text": "If your language joins clauses with affixes on the verb, Hebrew uses separate linking words before the clause, and the verb inside it does not change:\n→ כִּי אֲנִי עָיֵף, כְּשֶׁהוּא בָּא"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Semitic languages commonly link clauses with a word before the clause and keep its order. Hebrew’s “that”, שֶׁ, is a one-letter prefix, and it is never left out: אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה."
+   "text": "Semitic languages commonly link clauses with a word before the clause and keep its order.\n\nHebrew’s “that”, שֶׁ, is a one-letter prefix, and it is never left out:\n→ אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה"
   }
  ]
 }

@@ -428,34 +428,34 @@
   {
    "lang": "de",
    "fn": "fn.past",
-   "note": "German speaks of the past mostly with the Perfekt, haben / sein + participle (ich bin aufgestanden); Hebrew has one form with endings and no helper verb: קַמְתִּי."
+   "note": "German speaks of the past mostly with the Perfekt, haben / sein + participle (ich bin aufgestanden); Hebrew has one form with endings and no helper verb:\n→ קַמְתִּי"
   },
   {
    "lang": "zh",
    "fn": "fn.past",
-   "note": "Chinese verbs do not change: 了 and 过 and words of time show the past (我七点起床了); in Hebrew the verb itself carries the past and the person: קַמְתִּי בְּשֶׁבַע."
+   "note": "Chinese verbs do not change: 了 and 过 and words of time show the past (我七点起床了); in Hebrew the verb itself carries the past and the person:\n→ קַמְתִּי בְּשֶׁבַע"
   }
  ],
  "notes": [
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek has two pasts — the aorist for a finished act (σηκώθηκα) and the imperfect for a habit or a process (σηκωνόμουν); Hebrew has one past form, קַמְתִּי, and says habits with הָיָה + present. Like Greek, the ending shows the person, so the pronoun can be dropped (in Hebrew in the 1st and 2nd person)."
+   "text": "Greek has two pasts — the aorist for a finished act (σηκώθηκα) and the imperfect for a habit or a process (σηκωνόμουν); Hebrew has one past form, קַמְתִּי, and says habits with הָיָה + present.\n\nLike Greek, the ending shows the person, so the pronoun can be dropped (in Hebrew in the 1st and 2nd person)."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "The Russian past shows gender and number but not person (встал / встала), so я / ты are needed; the Hebrew past shows the person: קַמְתִּי, קַמְתָּ, קַמְתְּ. And there are no aspect pairs (встал / вставал): one form, קַמְתִּי."
+   "text": "The Russian past shows gender and number but not person (встал / встала), so я / ты are needed; the Hebrew past shows the person:\n→ קַמְתִּי, קַמְתָּ, קַמְתְּ\n\nAnd there are no aspect pairs (встал / вставал): one form, קַמְתִּי."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish chooses between pretérito, imperfecto and perfecto (me levanté, me levantaba, me he levantado); Hebrew has just קַמְתִּי. As in Spanish, the ending shows the person, so the pronoun is left out: קַמְתִּי “(yo) me levanté”."
+   "text": "Spanish chooses between pretérito, imperfecto and perfecto (me levanté, me levantaba, me he levantado); Hebrew has just קַמְתִּי.\n\nAs in Spanish, the ending shows the person, so the pronoun is left out:\n→ קַמְתִּי “(yo) me levanté”"
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "One Hebrew form covers “I got up”, “I have got up” and “I did get up”: קַמְתִּי — no “have”, no “did” in questions (קַמְתָּ? “did you get up?”) or negation (לֹא קַמְתִּי). The ending shows the person, so the pronoun usually goes."
+   "text": "One Hebrew form covers “I got up”, “I have got up” and “I did get up”: קַמְתִּי — no “have”, no “did” in questions (קַמְתָּ? “did you get up?”) or negation (לֹא קַמְתִּי).\n\nThe ending shows the person, so the pronoun usually goes."
   },
   {
    "for": "fr",
@@ -465,7 +465,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German uses the Perfekt with haben / sein in speech (ich habe gegessen, ich bin aufgestanden); Hebrew has one simple past with endings, אָכַלְתִּי, קַמְתִּי — no auxiliary and no participle. It also marks gender in “you” and “he / she”: קַמְתָּ / קַמְתְּ."
+   "text": "German uses the Perfekt with haben / sein in speech (ich habe gegessen, ich bin aufgestanden); Hebrew has one simple past with endings, אָכַלְתִּי, קַמְתִּי — no auxiliary and no participle.\n\nIt also marks gender in “you” and “he / she”:\n→ קַמְתָּ / קַמְתְּ"
   },
   {
    "for": "hi",
@@ -475,7 +475,7 @@
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian builds the past from a past stem plus person endings (خوردم، خوردی، خورد) — the same idea as Hebrew אָכַלְתִּי, אָכַלְתָּ, אָכַל; Hebrew adds gender in “you” and “he / she”, and has no ongoing past like می‌خوردم (it uses הָיָה + present)."
+   "text": "Persian builds the past from a past stem plus person endings (خوردم، خوردی، خورد) — the same idea as Hebrew אָכַלְתִּי, אָכַלְתָּ, אָכַל.\n\nHebrew differs:\n- it adds gender in “you” and “he / she”;\n- it has no ongoing past like می‌خوردم (it uses הָיָה + present)."
   },
   {
    "for": "mr",
@@ -485,27 +485,27 @@
   {
    "for": "ar",
    "rel": "similar",
-   "text": "The Hebrew past is the cousin of the Arabic perfect: suffixes on the stem, with endings that sound alike (كَتَبْتُ / כָּתַבְתִּי, كَتَبْنَا / כָּתַבְנוּ). Hebrew has fewer forms (no dual, one form for “they”) and the form is only a past, not an aspect."
+   "text": "The Hebrew past is the cousin of the Arabic perfect: suffixes on the stem, with endings that sound alike (كَتَبْتُ / כָּתַבְתִּי, كَتَبْنَا / כָּתַבְנוּ).\n\nHebrew has fewer forms (no dual, one form for “they”) and the form is only a past, not an aspect."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Like Turkish -di + person ending (kalktım, kalktın, kalktı), the Hebrew past puts the person at the end: קַמְתִּי, קַמְתָּ, קָם — but Hebrew also marks gender (קַמְתְּ for a woman) and has no separate reported past like -miş."
+   "text": "Like Turkish -di + person ending (kalktım, kalktın, kalktı), the Hebrew past puts the person at the end:\n→ קַמְתִּי, קַמְתָּ, קָם\n\nBut Hebrew also marks gender (קַמְתְּ for a woman) and has no separate reported past like -miş."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese marks the past with -ta and nothing about the subject (起きた); a Hebrew past form tells who: קַמְתִּי “I got up”, קָמָה “she got up”."
+   "text": "Japanese marks the past with -ta and nothing about the subject (起きた); a Hebrew past form tells who:\n→ קַמְתִּי “I got up”, קָמָה “she got up”"
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean marks the past with -었/았- and politeness, not the subject (일어났어요); the Hebrew past ending is the subject: קַמְתִּי, קַמְנוּ."
+   "text": "Korean marks the past with -었/았- and politeness, not the subject (일어났어요); the Hebrew past ending is the subject:\n→ קַמְתִּי, קַמְנוּ"
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish adds person endings to a past stem (nousin, nousit, nousi) — so does Hebrew (קַמְתִּי, קַמְתָּ, קָם). Hebrew has no perfect like olen noussut: the simple past serves."
+   "text": "Finnish adds person endings to a past stem (nousin, nousit, nousi) — so does Hebrew (קַמְתִּי, קַמְתָּ, קָם).\n\nHebrew has no perfect like olen noussut: the simple past serves."
   },
   {
    "for": "hu",
@@ -515,7 +515,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili puts the past marker -li- and the person in front (niliamka “I woke up”); Hebrew puts the person at the end of a past stem: הִתְעוֹרַרְתִּי."
+   "text": "Swahili puts the past marker -li- and the person in front (niliamka “I woke up”); Hebrew puts the person at the end of a past stem:\n→ הִתְעוֹרַרְתִּי"
   },
   {
    "for": "lg",
@@ -540,17 +540,17 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Where Italian chooses between passato prossimo, passato remoto and imperfetto (mi sono alzato, mi alzavo), Hebrew has one simple form: קַמְתִּי. As in Italian, the ending shows the person, so the pronoun is left out in the 1st and 2nd person."
+   "text": "Where Italian chooses between passato prossimo, passato remoto and imperfetto (mi sono alzato, mi alzavo), Hebrew has one simple form:\n→ קַמְתִּי\n\nAs in Italian, the ending shows the person, so the pronoun is left out in the 1st and 2nd person."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese chooses between pretérito perfeito and imperfeito (levantei-me, levantava-me); Hebrew has one past form, קַמְתִּי, and says habits with הָיָה + present. As in Portuguese, the ending shows the person and the pronoun is dropped."
+   "text": "Portuguese chooses between pretérito perfeito and imperfeito (levantei-me, levantava-me); Hebrew has one past form, קַמְתִּי, and says habits with הָיָה + present.\n\nAs in Portuguese, the ending shows the person and the pronoun is dropped."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian chooses between the aorist (u ngrita), the imperfect (ngrihesha) and the perfect (jam ngritur); Hebrew has just קַמְתִּי. As in Albanian, the ending shows the person, so the pronoun is left out."
+   "text": "Albanian chooses between the aorist (u ngrita), the imperfect (ngrihesha) and the perfect (jam ngritur); Hebrew has just קַמְתִּי.\n\nAs in Albanian, the ending shows the person, so the pronoun is left out."
   },
   {
    "for": "type:fusional",
@@ -560,7 +560,7 @@
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "Like a past suffix followed by a person suffix, the Hebrew past puts the person at the end (קַמְתִּי, קַמְנוּ). But the ending also carries gender (קַמְתָּ / קַמְתְּ), and the stem vowels change with the pattern."
+   "text": "Like a past suffix followed by a person suffix, the Hebrew past puts the person at the end (קַמְתִּי, קַמְנוּ).\n\nBut the ending also carries gender (קַמְתָּ / קַמְתְּ), and the stem vowels change with the pattern."
   },
   {
    "for": "type:isolating",
@@ -575,7 +575,7 @@
   {
    "for": "branch:Semitic",
    "rel": "same",
-   "text": "The suffix conjugation is common Semitic (-tī “I”, -nū “we”); in Hebrew it is purely a past tense, with no dual and one form for “they”: קָמוּ."
+   "text": "The suffix conjugation is common Semitic (-tī “I”, -nū “we”); in Hebrew it is purely a past tense, with no dual and one form for “they”:\n→ קָמוּ"
   }
  ]
 }

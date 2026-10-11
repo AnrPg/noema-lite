@@ -421,7 +421,7 @@
   {
    "lang": "ar",
    "fn": "fn.comparison",
-   "note": "Arabic builds a special form, the elative أَفْعَلُ (كَبِير → أَكْبَرُ), with مِنْ for “than” (أَكْبَرُ مِنْ = גָּדוֹל יוֹתֵר מִ…, the same “from”); its colours have a pattern of their own too: أَحْمَرُ / حَمْرَاءُ / حُمْرٌ."
+   "note": "Arabic builds a special form, the elative أَفْعَلُ (كَبِير → أَكْبَرُ), with مِنْ for “than” (أَكْبَرُ مِنْ = גָּדוֹל יוֹתֵר מִ…, the same “from”); its colours have a pattern of their own too:\n→ أَحْمَرُ / حَمْرَاءُ / حُمْرٌ"
   },
   {
    "lang": "de",
@@ -438,12 +438,12 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also says “than” with “from” (μεγαλύτερος από ~ גָּדוֹל יוֹתֵר מִ…); but Greek can use an ending (-τερος), Hebrew only יוֹתֵר: גָּדוֹל יוֹתֵר."
+   "text": "Greek also says “than” with “from” (μεγαλύτερος από ~ גָּדוֹל יוֹתֵר מִ…); but Greek can use an ending (-τερος), Hebrew only יוֹתֵר:\n→ גָּדוֹל יוֹתֵר"
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian uses an ending (выше) and “than” as чем or the genitive (выше брата); Hebrew uses יוֹתֵר + מִ: גָּבֹהַּ יוֹתֵר מֵהָאָח. Russian синий / голубой are two blues; Hebrew also has two, כָּחֹל and תְּכֵלֶת."
+   "text": "Russian uses an ending (выше) and “than” as чем or the genitive (выше брата); Hebrew uses יוֹתֵר + מִ:\n→ גָּבֹהַּ יוֹתֵר מֵהָאָח\n\nRussian синий / голубой are two blues; Hebrew also has two, כָּחֹל and תְּכֵלֶת."
   },
   {
    "for": "es",
@@ -453,7 +453,7 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English -er / -est have no Hebrew counterpart: “bigger” is גָּדוֹל יוֹתֵר, “the biggest” הֲכִי גָּדוֹל, and even “better” is just טוֹב יוֹתֵר. “Than” is מִ, the word for “from”."
+   "text": "English -er / -est have no Hebrew counterpart: “bigger” is גָּדוֹל יוֹתֵר, “the biggest” הֲכִי גָּדוֹל, and even “better” is just טוֹב יוֹתֵר.\n\n“Than” is מִ, the word for “from”."
   },
   {
    "for": "fr",
@@ -463,7 +463,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German uses endings (größer, am größten) and als; Hebrew uses words (יוֹתֵר, הֲכִי) and מִ “from”. Light and dark follow the colour in Hebrew (כָּחֹל בָּהִיר), where German hell- / dunkel- come before it."
+   "text": "German uses endings (größer, am größten) and als; Hebrew uses words (יוֹתֵר, הֲכִי) and מִ “from”.\n\nLight and dark follow the colour in Hebrew (כָּחֹל בָּהִיר), where German hell- / dunkel- come before it."
   },
   {
    "for": "hi",
@@ -473,17 +473,17 @@
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian adds the ending -تر (بزرگ‌تر از …); Hebrew has no ending, only יוֹתֵר — but “than” is “from” in both: از ~ מִ."
+   "text": "Persian adds the ending -تر (بزرگ‌تر از …); Hebrew has no ending, only יוֹתֵר — but “than” is “from” in both:\n→ از ~ מִ"
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi compares with पेक्षा after the standard (भावापेक्षा उंच “taller than the brother”); Hebrew puts מִ before it and adds יוֹתֵר: גָּבֹהַּ יוֹתֵר מֵהָאָח."
+   "text": "Marathi compares with पेक्षा after the standard (भावापेक्षा उंच “taller than the brother”); Hebrew puts מִ before it and adds יוֹתֵר:\n→ גָּבֹהַּ יוֹתֵר מֵהָאָח"
   },
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic also says “than” with مِنْ, but builds a special form, the elative (أَكْبَرُ مِنْ); Hebrew has no such form — just יוֹתֵר: גָּדוֹל יוֹתֵר מִ…."
+   "text": "Arabic also says “than” with مِنْ, but builds a special form, the elative (أَكْبَرُ مِنْ); Hebrew has no such form — just יוֹתֵר:\n→ גָּדוֹל יוֹתֵר מִ…"
   },
   {
    "for": "tr",
@@ -493,7 +493,7 @@
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese also compares with “from” (兄より高い); Hebrew says גָּבֹהַּ יוֹתֵר מֵהָאָח and adds יוֹתֵר “more”. 一番 ~ הֲכִי."
+   "text": "Japanese also compares with “from” (兄より高い); Hebrew says גָּבֹהַּ יוֹתֵר מֵהָאָח and adds יוֹתֵר “more”.\n\n一番 ~ הֲכִי."
   },
   {
    "for": "ko",
@@ -513,7 +513,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili uses kuliko “than” (mrefu kuliko kaka); Hebrew uses יוֹתֵר “more” and מִ “from”: גָּבֹהַּ יוֹתֵר מֵהָאָח."
+   "text": "Swahili uses kuliko “than” (mrefu kuliko kaka); Hebrew uses יוֹתֵר “more” and מִ “from”:\n→ גָּבֹהַּ יוֹתֵר מֵהָאָח"
   },
   {
    "for": "lg",
@@ -523,27 +523,27 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese puts 比 before the standard (他比我高) and leaves the adjective unchanged; Hebrew too leaves it unchanged, but adds יוֹתֵר and marks the standard with מִ: הוּא גָּבֹהַּ יוֹתֵר מִמֶּנִּי. 最 ~ הֲכִי."
+   "text": "Chinese puts 比 before the standard (他比我高) and leaves the adjective unchanged; Hebrew too leaves it unchanged, but adds יוֹתֵר and marks the standard with מִ:\n→ הוּא גָּבֹהַּ יוֹתֵר מִמֶּנִּי\n\n最 ~ הֲכִי."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese puts hơn after the adjective (cao hơn tôi); Hebrew uses יוֹתֵר and מִ: גָּבֹהַּ יוֹתֵר מִמֶּנִּי. nhất ~ הֲכִי. And where xanh covers green and blue, Hebrew always separates יָרֹק and כָּחֹל."
+   "text": "Vietnamese puts hơn after the adjective (cao hơn tôi); Hebrew uses יוֹתֵר and מִ: גָּבֹהַּ יוֹתֵר מִמֶּנִּי. nhất ~ הֲכִי.\n\nAnd where xanh covers green and blue, Hebrew always separates יָרֹק and כָּחֹל."
   },
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut adds a comparative suffix and puts the thing compared in the ablative case (“from”); Hebrew has no suffix, but uses מִ “from” the same way: גָּדוֹל יוֹתֵר מֵהַבַּיִת."
+   "text": "Inuktitut adds a comparative suffix and puts the thing compared in the ablative case (“from”); Hebrew has no suffix, but uses מִ “from” the same way:\n→ גָּדוֹל יוֹתֵר מֵהַבַּיִת"
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "più … di ~ יוֹתֵר … מִ, il più ~ הֲכִי: as in Italian, comparison uses words, not endings. But Hebrew has no irregular migliore — “better” is טוֹב יוֹתֵר — and “than” is מִ, the word for “from”."
+   "text": "più … di ~ יוֹתֵר … מִ, il più ~ הֲכִי: as in Italian, comparison uses words, not endings.\n\nBut Hebrew has no irregular migliore — “better” is טוֹב יוֹתֵר — and “than” is מִ, the word for “from”."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "mais … do que ~ יוֹתֵר … מִ, o mais ~ הֲכִי. Hebrew has no irregular melhor or maior: טוֹב יוֹתֵר, גָּדוֹל יוֹתֵר. And “than” is מִ, the word for “from”: גָּדוֹל יוֹתֵר מֵהַדִּירָה."
+   "text": "mais … do que ~ יוֹתֵר … מִ, o mais ~ הֲכִי.\n\n- Hebrew has no irregular melhor or maior:\n→ טוֹב יוֹתֵר, גָּדוֹל יוֹתֵר\n- And “than” is מִ, the word for “from”:\n→ גָּדוֹל יוֹתֵר מֵהַדִּירָה"
   },
   {
    "for": "sq",
@@ -563,17 +563,17 @@
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "As in your language, the adjective has no comparative form: comparison is done with words (יוֹתֵר, הֲכִי, כְּמוֹ). But the adjective still agrees in gender and number: גְּבֹהָה יוֹתֵר for a woman."
+   "text": "As in your language, the adjective has no comparative form: comparison is done with words (יוֹתֵר, הֲכִי, כְּמוֹ).\n\nBut the adjective still agrees in gender and number: גְּבֹהָה יוֹתֵר for a woman."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language compares with an affix inside the verb or adjective word, Hebrew uses separate words around an unchanged adjective: יוֹתֵר גָּדוֹל מִ…, הֲכִי גָּדוֹל."
+   "text": "If your language compares with an affix inside the verb or adjective word, Hebrew uses separate words around an unchanged adjective:\n→ יוֹתֵר גָּדוֹל מִ…, הֲכִי גָּדוֹל"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Semitic languages commonly say “than” with “from”, as Hebrew does with מִ. If yours has a special comparative pattern for adjectives, Hebrew has none: just יוֹתֵר + the adjective."
+   "text": "Semitic languages commonly say “than” with “from”, as Hebrew does with מִ.\n\nIf yours has a special comparative pattern for adjectives, Hebrew has none: just יוֹתֵר + the adjective."
   }
  ]
 }

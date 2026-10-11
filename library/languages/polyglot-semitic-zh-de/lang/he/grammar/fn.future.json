@@ -363,7 +363,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek builds the future with θα + verb and chooses an aspect (θα κλείσω / θα κλείνω); Hebrew has one future form with person prefixes: אַזְמִין “I will book”."
+   "text": "Greek builds the future with θα + verb and chooses an aspect (θα κλείσω / θα κλείνω); Hebrew has one future form with person prefixes:\n→ אַזְמִין “I will book”"
   },
   {
    "for": "ru",
@@ -378,7 +378,7 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "No “will”: the future is one word, with the person in front — אַזְמִין “I will book”, נְבַקֵּר “we will visit”. הוֹלֵךְ + infinitive is close to “going to”."
+   "text": "No “will”: the future is one word, with the person in front — אַזְמִין “I will book”, נְבַקֵּר “we will visit”.\n\nהוֹלֵךְ + infinitive is close to “going to”."
   },
   {
    "for": "fr",
@@ -403,7 +403,7 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi too has a one-word future with person endings (मी जाईन, तो जाईल); Hebrew marks the person mostly with prefixes: אֶזְכֹּר, יִזְכֹּר."
+   "text": "Marathi too has a one-word future with person endings (मी जाईन, तो जाईल); Hebrew marks the person mostly with prefixes:\n→ אֶזְכֹּר, יִזְכֹּר"
   },
   {
    "for": "ar",
@@ -413,12 +413,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish puts the future suffix and the person at the end (rezervasyon yapacağım); Hebrew puts most of the person at the beginning: אַזְמִין."
+   "text": "Turkish puts the future suffix and the person at the end (rezervasyon yapacağım); Hebrew puts most of the person at the beginning:\n→ אַזְמִין"
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese has no future form — the non-past and a time word (明日予約する); Hebrew must use the future form: מָחָר אַזְמִין."
+   "text": "Japanese has no future form — the non-past and a time word (明日予約する); Hebrew must use the future form:\n→ מָחָר אַזְמִין"
   },
   {
    "for": "ko",
@@ -438,12 +438,12 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Swahili, too, puts the person in front of the verb, with the future marker -ta- (nitakumbuka “I will remember”); Hebrew fuses person and future into one prefix: אֶזְכֹּר."
+   "text": "Swahili, too, puts the person in front of the verb, with the future marker -ta- (nitakumbuka “I will remember”); Hebrew fuses person and future into one prefix:\n→ אֶזְכֹּר"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese leaves the verb unchanged and adds 要 / 会 / 打算; Hebrew changes the verb itself: אֶזְכֹּר “I will remember”."
+   "text": "Chinese leaves the verb unchanged and adds 要 / 会 / 打算; Hebrew changes the verb itself:\n→ אֶזְכֹּר “I will remember”"
   },
   {
    "for": "vi",
@@ -453,22 +453,22 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut adds a future suffix inside one long verb word; Hebrew marks the future with a prefix that is also the person: נְבַקֵּר."
+   "text": "Inuktitut adds a future suffix inside one long verb word; Hebrew marks the future with a prefix that is also the person:\n→ נְבַקֵּר"
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Like the Italian futuro (prenoterò), the Hebrew future is one word — אַזְמִין “I will book” — but the person is shown mostly by a prefix (אֶ־, תִּ־, יִ־, נִ־). As in Italian, the present also serves for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים “domani partiamo”."
+   "text": "Like the Italian futuro (prenoterò), the Hebrew future is one word — אַזְמִין “I will book” — but the person is shown mostly by a prefix (אֶ־, תִּ־, יִ־, נִ־).\n\nAs in Italian, the present also serves for fixed plans:\n→ מָחָר אֲנַחְנוּ נוֹסְעִים “domani partiamo”"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Like reservarei and vou reservar, Hebrew has a one-word future (אַזְמִין) and a colloquial “go” + infinitive (אֲנִי הוֹלֵךְ לְהַזְמִין); but the person is marked at the front of the word: אַזְמִין, תַּזְמִין, נַזְמִין."
+   "text": "Like reservarei and vou reservar, Hebrew has a one-word future (אַזְמִין) and a colloquial “go” + infinitive (אֲנִי הוֹלֵךְ לְהַזְמִין); but the person is marked at the front of the word:\n→ אַזְמִין, תַּזְמִין, נַזְמִין"
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian builds the future with do të + the subjunctive (do të shkoj); Hebrew has a one-word future with person prefixes: אֵלֵךְ “I will go”, נֵלֵךְ “we will go”."
+   "text": "Albanian builds the future with do të + the subjunctive (do të shkoj); Hebrew has a one-word future with person prefixes:\n→ אֵלֵךְ “I will go”, נֵלֵךְ “we will go”"
   },
   {
    "for": "type:fusional",
@@ -483,7 +483,7 @@
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If your language adds a word for “will” before an unchanged verb, Hebrew changes the verb itself: אֶזְכֹּר “I will remember”, תִּזְכְּרִי “you (f.) will remember”."
+   "text": "If your language adds a word for “will” before an unchanged verb, Hebrew changes the verb itself:\n→ אֶזְכֹּר “I will remember”, תִּזְכְּרִי “you (f.) will remember”"
   },
   {
    "for": "type:polysynthetic",
@@ -493,7 +493,7 @@
   {
    "for": "branch:Semitic",
    "rel": "same",
-   "text": "The prefix conjugation (ʔ- t- y- n- for I, you / she, he, we) is Semitic heritage. In Hebrew it is the future itself and needs no extra future particle: אֶזְכֹּר “I will remember”."
+   "text": "The prefix conjugation (ʔ- t- y- n- for I, you / she, he, we) is Semitic heritage.\n\nIn Hebrew it is the future itself and needs no extra future particle:\n→ אֶזְכֹּר “I will remember”"
   }
  ]
 }
