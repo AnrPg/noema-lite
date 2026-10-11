@@ -41339,6 +41339,11 @@
   "src": "f57afded4d26",
   "by": "claude"
  },
+ "x:ar:wahid/profile/notes/0/text": {
+  "t": "Το τουρκικό tevhit (πίστη σε έναν Θεό) είναι το αραβικό تَوْحِيد, από τη ρίζα و ح د του وَاحِد.",
+  "src": "15314d4af457",
+  "by": "claude"
+ },
  "x:ar:ithnan/profile/feeling": {
   "t": "Δύο — συνήθως κρυμμένο μέσα στο ίδιο το ουσιαστικό: ο δυϊκός.",
   "src": "fe39ceac385a",
@@ -42409,6 +42414,11 @@
   "src": "d2151c8d8a60",
   "by": "claude"
  },
+ "x:ar:arbaun/profile/notes/0/text": {
+  "t": "Το τουρκικό erbain, οι σαράντα πιο κρύες μέρες του χειμώνα, είναι το αραβικό أَرْبَعِين.",
+  "src": "45d0feb5ebc6",
+  "by": "claude"
+ },
  "x:ar:khamsun/features/genderForms/none": {
   "t": "ένας τύπος για αρσενικά και θηλυκά ουσιαστικά",
   "src": "03f88cc2bbb7",
@@ -42974,6 +42984,11 @@
   "src": "73dba70bb2b6",
   "by": "claude"
  },
+ "x:ar:kathir/profile/notes/0/text": {
+  "t": "Το τουρκικό ekseriyet (πλειοψηφία) και το ekseriya (κυρίως) προέρχονται από το أَكْثَر, τον συγκριτικό αυτής της λέξης.",
+  "src": "07595980b2b7",
+  "by": "claude"
+ },
  "x:ar:qalil/features/derivedFrom/none": {
   "t": "βασικό επίθετο, δεν παράγεται από άλλη λέξη",
   "src": "097e5b69cb16",
@@ -43114,9 +43129,39 @@
   "src": "25441ac98b5c",
   "by": "claude"
  },
+ "x:ar:qalil/profile/notes/0/text": {
+  "t": "Τα αραβικά δεν ξεχωρίζουν το «few» από το «a few»: το قَلِيل καλύπτει και τα δύο.",
+  "src": "2b51e8782f1a",
+  "by": "claude"
+ },
+ "x:ar:qalil/profile/notes/1/text": {
+  "t": "Τα αραβικά δεν ξεχωρίζουν το peu από το quelques: το قَلِيل καλύπτει και τα δύο.",
+  "src": "c34c64cbd975",
+  "by": "claude"
+ },
  "x:ar:qalil/profile/notes/2/text": {
   "t": "Τα αραβικά δεν ξεχωρίζουν το λίγοι (όχι αρκετοί) από το μερικοί: το قَلِيل καλύπτει και τα δύο.",
   "src": "e3bede7e9845",
+  "by": "claude"
+ },
+ "x:ar:qalil/profile/notes/3/text": {
+  "t": "Τα αραβικά δεν ξεχωρίζουν το мало από το несколько: το قَلِيل καλύπτει και τα δύο.",
+  "src": "915c34810859",
+  "by": "claude"
+ },
+ "x:ar:qalil/profile/notes/4/text": {
+  "t": "Τα αραβικά δεν ξεχωρίζουν το pochi από το alcuni: το قَلِيل καλύπτει και τα δύο.",
+  "src": "1e48b9a4bef5",
+  "by": "claude"
+ },
+ "x:ar:qalil/profile/notes/5/text": {
+  "t": "Τα αραβικά δεν ξεχωρίζουν το pocos από το unos pocos: το قَلِيل καλύπτει και τα δύο.",
+  "src": "28be0f7a07f9",
+  "by": "claude"
+ },
+ "x:ar:qalil/profile/notes/6/text": {
+  "t": "Τα αραβικά δεν ξεχωρίζουν το poucos από το alguns: το قَلِيل καλύπτει και τα δύο.",
+  "src": "082cd15c3e4f",
   "by": "claude"
  },
  "x:ar:qalilan/features/meaningForms/none": {
@@ -43222,6 +43267,36 @@
  "x:ar:qalilan/profile/notes/0/text": {
   "t": "Όπως το λίγο, απαντά και στο «πόσο;» και στο «για πόση ώρα;»: περίμενε λίγο = اِنْتَظِرْ قَلِيلًا.",
   "src": "a878cce5a3f1",
+  "by": "claude"
+ },
+ "x:ar:qalilan/profile/notes/1/text": {
+  "t": "Όπως το немного, απαντά και στο «πόσο;» και στο «για πόση ώρα;»: подожди немного = اِنْتَظِرْ قَلِيلًا.",
+  "src": "209b90310f94",
+  "by": "claude"
+ },
+ "x:ar:qalilan/profile/notes/2/text": {
+  "t": "Όπως το un peu, απαντά και στο «πόσο;» και στο «για πόση ώρα;»: attends un peu = اِنْتَظِرْ قَلِيلًا.",
+  "src": "174efb0c945b",
+  "by": "claude"
+ },
+ "x:ar:qalilan/profile/notes/3/text": {
+  "t": "Όπως το un po’, απαντά και στο «πόσο;» και στο «για πόση ώρα;»: aspetta un po’ = اِنْتَظِرْ قَلِيلًا.",
+  "src": "3072f362e2fc",
+  "by": "claude"
+ },
+ "x:ar:qalilan/profile/notes/4/text": {
+  "t": "Όπως το un poco, απαντά και στο «πόσο;» και στο «για πόση ώρα;»: espera un poco = اِنْتَظِرْ قَلِيلًا.",
+  "src": "59955e250271",
+  "by": "claude"
+ },
+ "x:ar:qalilan/profile/notes/5/text": {
+  "t": "Όπως το um pouco, απαντά και στο «πόσο;» και στο «για πόση ώρα;»: espera um pouco = اِنْتَظِرْ قَلِيلًا.",
+  "src": "cba6765cbea3",
+  "by": "claude"
+ },
+ "x:ar:qalilan/profile/notes/6/text": {
+  "t": "Όπως το «a little», απαντά και στο «πόσο;» και στο «για πόση ώρα;»: wait a little = اِنْتَظِرْ قَلِيلًا.",
+  "src": "d16e96cb8a1f",
   "by": "claude"
  },
  "x:ar:kull/features/plurals/none": {
@@ -43379,6 +43454,11 @@
   "src": "5a48a2fc4ae2",
   "by": "claude"
  },
+ "x:ar:kull/profile/notes/0/text": {
+  "t": "Το τουρκικό külliye (συγκρότημα τζαμιού και σχολών) είναι το αραβικό كُلِّيَّة, από αυτή τη λέξη.",
+  "src": "a2b3d3cd198b",
+  "by": "claude"
+ },
  "x:ar:bad/features/plurals/none": {
   "t": "ποσοτική λέξη: δεν έχει πληθυντικό",
   "src": "7bfa1181c74d",
@@ -43497,6 +43577,11 @@
  "x:ar:bad/profile/subtleties/0": {
   "t": "Το بَعْضَ الشَّيْءِ (κάπως) είναι το επίσημο «λίγο».",
   "src": "8fd29e641efd",
+  "by": "claude"
+ },
+ "x:ar:bad/profile/notes/0/text": {
+  "t": "Το τουρκικό bazı (μερικοί) και το bazen (μερικές φορές) προέρχονται από το بَعْض και το بَعْضًا.",
+  "src": "88d561e60f52",
   "by": "claude"
  },
  "x:ar:inda/features/meaningForms/none": {
@@ -43719,9 +43804,39 @@
   "src": "5cc06c3da149",
   "by": "claude"
  },
+ "x:ar:inda/profile/notes/0/text": {
+  "t": "Το у меня есть το λέει με τον ίδιο τρόπο: «σε μένα (υπάρχει)» = عِنْدِي.",
+  "src": "193274e40d37",
+  "by": "claude"
+ },
+ "x:ar:inda/profile/notes/1/text": {
+  "t": "Το मेरे पास … है το λέει με τον ίδιο τρόπο: «κοντά μου (υπάρχει)» = عِنْدِي.",
+  "src": "7d9d9b7658b4",
+  "by": "claude"
+ },
  "x:ar:inda/profile/notes/2/text": {
   "t": "Τα ελληνικά χρησιμοποιούν ρήμα, το έχω· τα αραβικά λένε «σε μένα (υπάρχει)»: عِنْدِي.",
   "src": "3a6646fb4fca",
+  "by": "claude"
+ },
+ "x:ar:inda/profile/notes/3/text": {
+  "t": "Τα αγγλικά χρησιμοποιούν ρήμα, το have· τα αραβικά λένε «σε μένα (υπάρχει)»: عِنْدِي.",
+  "src": "1859a786d862",
+  "by": "claude"
+ },
+ "x:ar:inda/profile/notes/4/text": {
+  "t": "Τα γαλλικά χρησιμοποιούν ρήμα, το avoir· τα αραβικά λένε «σε μένα», όπως το chez moi: عِنْدِي.",
+  "src": "0dc9cb93811a",
+  "by": "claude"
+ },
+ "x:ar:inda/profile/notes/5/text": {
+  "t": "Το τουρκικό bende var το λέει με τον ίδιο τρόπο: «σε μένα (υπάρχει)».",
+  "src": "aa75e2bd0887",
+  "by": "claude"
+ },
+ "x:ar:inda/profile/notes/6/text": {
+  "t": "Το عِنَاد (πείσμα) είναι το τουρκικό inat.",
+  "src": "2189161686a9",
   "by": "claude"
  },
  "x:ar:usra/features/meaningForms/none": {
@@ -43837,6 +43952,11 @@
  "x:ar:usra/profile/subtleties/0": {
   "t": "Το أُسْرَة είναι η οικογένεια ως μονάδα (κοινωνιολογία, έντυπα: الْأُسْرَةُ النَّوَوِيَّةُ, η πυρηνική οικογένεια)· το عَائِلَة είναι συχνά η ευρύτερη οικογένεια.",
   "src": "c7c409c3cadc",
+  "by": "claude"
+ },
+ "x:ar:usra/profile/notes/0/text": {
+  "t": "Το τουρκικό esir (αιχμάλωτος πολέμου) είναι το αραβικό أَسِير, από την ίδια ρίζα.",
+  "src": "b211692224f3",
   "by": "claude"
  },
  "x:ar:aila/features/plurals/1/note": {
@@ -43959,6 +44079,11 @@
   "src": "445589985250",
   "by": "claude"
  },
+ "x:ar:aila/profile/notes/0/text": {
+  "t": "Το τουρκικό aile (οικογένεια) είναι αυτή η αραβική λέξη.",
+  "src": "2242fec72b17",
+  "by": "claude"
+ },
  "x:ar:walidan/features/plurals/none": {
   "t": "δυϊκός (οι δύο γονείς)",
   "src": "4e966569c926",
@@ -44072,6 +44197,11 @@
  "x:ar:walidan/profile/subtleties/0": {
   "t": "Τα وَالِد / وَالِدَة μόνα τους είναι το σεβαστικό «πατέρας / μητέρα»: وَالِدِي، وَالِدَتِي.",
   "src": "5e1f900b6987",
+  "by": "claude"
+ },
+ "x:ar:walidan/profile/notes/0/text": {
+  "t": "Το τουρκικό ebeveyn (γονείς) είναι η άλλη αραβική λέξη, το أَبَوَيْن· το τουρκικό valide (μητέρα) είναι το وَالِدَة.",
+  "src": "17faf95d6218",
   "by": "claude"
  },
  "x:ar:umm/features/meaningForms/none": {
@@ -44212,6 +44342,11 @@
  "x:ar:umm/profile/subtleties/0": {
   "t": "Μια γυναίκα συχνά τη λένε με το όνομα του μεγαλύτερου γιου της, أُمُّ أَحْمَدَ — ένας ζεστός, σεβαστικός τρόπος να της μιλήσεις.",
   "src": "6d6636e7320f",
+  "by": "claude"
+ },
+ "x:ar:umm/profile/notes/0/text": {
+  "t": "Το أُمَّة (έθνος, κοινότητα) είναι το τουρκικό ümmet.",
+  "src": "e9126dcc1f85",
   "by": "claude"
  },
  "x:ar:ab/features/meaningForms/none": {
@@ -44364,9 +44499,39 @@
   "src": "50490bdf9cdb",
   "by": "claude"
  },
+ "x:ar:ab/profile/notes/0/text": {
+  "t": "Το αγγλικό abbot ανάγεται στο אַבָּא (abba, «πατέρας») — την ίδια σημιτική λέξη με το أَب.",
+  "src": "a02287dc8771",
+  "by": "claude"
+ },
+ "x:ar:ab/profile/notes/1/text": {
+  "t": "Το γαλλικό abbé ανάγεται στο אַבָּא (abba, «πατέρας») — την ίδια σημιτική λέξη με το أَب.",
+  "src": "470c1814c8c7",
+  "by": "claude"
+ },
+ "x:ar:ab/profile/notes/2/text": {
+  "t": "Το ιταλικό abate ανάγεται στο אַבָּא (abba, «πατέρας») — την ίδια σημιτική λέξη με το أَب.",
+  "src": "445a031997b7",
+  "by": "claude"
+ },
+ "x:ar:ab/profile/notes/3/text": {
+  "t": "Το ισπανικό abad ανάγεται στο אַבָּא (abba, «πατέρας») — την ίδια σημιτική λέξη με το أَب.",
+  "src": "316f65e1f04f",
+  "by": "claude"
+ },
+ "x:ar:ab/profile/notes/4/text": {
+  "t": "Το πορτογαλικό abade ανάγεται στο אַבָּא (abba, «πατέρας») — την ίδια σημιτική λέξη με το أَب.",
+  "src": "9b32076d9f42",
+  "by": "claude"
+ },
  "x:ar:ab/profile/notes/5/text": {
   "t": "Το ελληνικό αββάς ανάγεται στο אַבָּא (abba, «πατέρας») — την ίδια σημιτική λέξη με το أَب.",
   "src": "e336346104fe",
+  "by": "claude"
+ },
+ "x:ar:ab/profile/notes/6/text": {
+  "t": "Το τουρκικό ebeveyn (γονείς) είναι το αραβικό أَبَوَيْن.",
+  "src": "fae88f95a697",
   "by": "claude"
  },
  "x:ar:ibn/features/pattern/none": {
@@ -44964,6 +45129,11 @@
   "src": "9620bce6fe95",
   "by": "claude"
  },
+ "x:ar:zawj/profile/notes/1/text": {
+  "t": "Τα τουρκικά zevç / zevce (σύζυγος / σύζυγος, παρωχημένα) είναι τα زَوْج / زَوْجَة.",
+  "src": "7d1de2d1ba78",
+  "by": "claude"
+ },
  "x:ar:zawja/features/meaningForms/none": {
   "t": "μία σημασία",
   "src": "b27b98c09fbc",
@@ -45067,6 +45237,11 @@
  "x:ar:zawja/profile/subtleties/0": {
   "t": "Όταν μιλούν ευγενικά για τη γυναίκα κάποιου, λένε حَرَمُهُ ή عَقِيلَتُهُ αντί για زَوْجَتُهُ.",
   "src": "55205b87b3f7",
+  "by": "claude"
+ },
+ "x:ar:zawja/profile/notes/0/text": {
+  "t": "Το τουρκικό zevce (σύζυγος, παρωχημένο) είναι αυτή η λέξη.",
+  "src": "7066e2961e93",
   "by": "claude"
  },
  "x:ar:radi/features/meaningForms/none": {
@@ -45292,6 +45467,21 @@
  "x:ar:ajdad/profile/notes/0/text": {
   "t": "Και το οι παππούδες χρησιμοποιεί τον πληθυντικό του «παππούς» και για τους δύο, παππού και γιαγιά.",
   "src": "a754a4b62690",
+  "by": "claude"
+ },
+ "x:ar:ajdad/profile/notes/1/text": {
+  "t": "Όπως το los abuelos, ο πληθυντικός του «παππούς» καλύπτει και τους δύο, παππού και γιαγιά.",
+  "src": "cd09fac3c717",
+  "by": "claude"
+ },
+ "x:ar:ajdad/profile/notes/2/text": {
+  "t": "Όπως το i nonni, ο πληθυντικός του «παππούς» καλύπτει και τους δύο, παππού και γιαγιά.",
+  "src": "93c4ddc23dce",
+  "by": "claude"
+ },
+ "x:ar:ajdad/profile/notes/3/text": {
+  "t": "Όπως το os avós, ο πληθυντικός καλύπτει και τους δύο, παππού και γιαγιά.",
+  "src": "97351113fefd",
   "by": "claude"
  },
  "x:ar:jadd/features/plurals/1/note": {
@@ -45814,6 +46004,26 @@
   "src": "e8a86e8cb220",
   "by": "claude"
  },
+ "x:ar:amm/profile/notes/0/text": {
+  "t": "Τα χίντι χωρίζουν τους θείους με τον ίδιο τρόπο: चाचा (αδελφός του πατέρα) = عَمّ, मामा (αδελφός της μητέρας) = خَال.",
+  "src": "56d0cff2f550",
+  "by": "claude"
+ },
+ "x:ar:amm/profile/notes/1/text": {
+  "t": "Τα αλβανικά χωρίζουν τους θείους με τον ίδιο τρόπο: xhaxha (αδελφός του πατέρα) = عَمّ, dajë (αδελφός της μητέρας) = خَال.",
+  "src": "2a0d904c32b2",
+  "by": "claude"
+ },
+ "x:ar:amm/profile/notes/2/text": {
+  "t": "Ένα αγγλικό «uncle» είναι δύο αραβικές λέξεις: عَمّ (ο αδελφός του πατέρα) και خَال (ο αδελφός της μητέρας).",
+  "src": "d1453d06bb99",
+  "by": "claude"
+ },
+ "x:ar:amm/profile/notes/3/text": {
+  "t": "Το τουρκικό amca (αδελφός του πατέρα) προέρχεται από το عَمّ.",
+  "src": "4f253bec6955",
+  "by": "claude"
+ },
  "x:ar:khal/features/plurals/0/note": {
   "t": "θείοι από τη μεριά της μητέρας",
   "src": "cda2fb31fee4",
@@ -45927,6 +46137,16 @@
  "x:ar:khal/profile/subtleties/0": {
   "t": "Τα αραβικά λένε πάντα από ποια πλευρά: عَمّ / عَمَّة από τον πατέρα, خَال / خَالَة από τη μητέρα.",
   "src": "474c11775757",
+  "by": "claude"
+ },
+ "x:ar:khal/profile/notes/0/text": {
+  "t": "Και το αλβανικό dajë είναι μόνο ο αδελφός της μητέρας = خَال.",
+  "src": "ff6779eec480",
+  "by": "claude"
+ },
+ "x:ar:khal/profile/notes/1/text": {
+  "t": "Και το τουρκικό dayı είναι μόνο ο αδελφός της μητέρας.",
+  "src": "29c664b01135",
   "by": "claude"
  },
  "x:ar:amma/features/meaningForms/none": {
@@ -46144,6 +46364,11 @@
   "src": "77de17be9a94",
   "by": "claude"
  },
+ "x:ar:khala/profile/notes/0/text": {
+  "t": "Ψευδόφιλη λέξη: το τουρκικό hala (η αδελφή του πατέρα) προέρχεται από το خَالَة, αλλά στα αραβικά το خَالَة είναι η αδελφή της μητέρας (τουρκικά teyze).",
+  "src": "07002f6d9554",
+  "by": "claude"
+ },
  "x:ar:qarib_relative/features/plurals/0/note": {
   "t": "συγγενείς (η συνηθισμένη λέξη)",
   "src": "f1a91dabdb48",
@@ -46292,6 +46517,16 @@
  "x:ar:qarib_relative/profile/subtleties/0": {
   "t": "Η συγγενής είναι قَرِيبَة· το قَرَابَة είναι η συγγένεια.",
   "src": "33134020e6fc",
+  "by": "claude"
+ },
+ "x:ar:qarib_relative/profile/notes/0/text": {
+  "t": "Το τουρκικό akraba (συγγενείς) είναι ο αραβικός πληθυντικός أَقْرِبَاء.",
+  "src": "cec5a20f5994",
+  "by": "claude"
+ },
+ "x:ar:qarib_relative/profile/notes/1/text": {
+  "t": "Το αμχαρικό ቅርብ είναι ομόρριζο του قَرِيب.",
+  "src": "765214d72ba0",
   "by": "claude"
  },
  "a:ar:family.cousin/reason": {
@@ -46634,9 +46869,54 @@
   "src": "677b4e229667",
   "by": "claude"
  },
+ "x:ar:shariba/profile/notes/0/text": {
+  "t": "Τα αγγλικά syrup και sherbet προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "df955ac90268",
+  "by": "claude"
+ },
  "x:ar:shariba/profile/notes/1/text": {
   "t": "Το ελληνικό σιρόπι και το σερμπέτι προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
   "src": "d95ab7486134",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/2/text": {
+  "t": "Τα γαλλικά sirop και sorbet προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "5b71a4b651f3",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/3/text": {
+  "t": "Τα ιταλικά sciroppo και sorbetto προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "c5a8e9228e1a",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/4/text": {
+  "t": "Τα ισπανικά jarabe και sorbete προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "302383a5a37a",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/5/text": {
+  "t": "Το πορτογαλικό xarope προέρχεται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "0cc93516715f",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/6/text": {
+  "t": "Τα ρωσικά сироп και шербет προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "3766de66edfe",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/7/text": {
+  "t": "Τα αλβανικά shurup και sherbet προέρχονται από αυτή τη ρίζα: شَرَاب, «ποτό».",
+  "src": "f45407a7803b",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/8/text": {
+  "t": "Το शरबत των χίντι προέρχεται από αυτή τη ρίζα: شَرْبَة, «ποτό».",
+  "src": "a2cd25f2c4be",
+  "by": "claude"
+ },
+ "x:ar:shariba/profile/notes/9/text": {
+  "t": "Το τουρκικό şerbet προέρχεται από αυτή τη ρίζα.",
+  "src": "4c4fa173b9e4",
   "by": "claude"
  },
  "x:ar:tabakha/features/governs/0/what": {
@@ -46742,6 +47022,11 @@
  "x:ar:tabakha/profile/subtleties/1": {
   "t": "Οι κατάλογοι και οι συνταγές χρησιμοποιούν και το επίσημο طَهَا / طَهْو· στο σπίτι λένε طَبَخَ.",
   "src": "8444c472f39d",
+  "by": "claude"
+ },
+ "x:ar:tabakha/profile/notes/0/text": {
+  "t": "Το τουρκικό mutfak, «κουζίνα», είναι το αραβικό مَطْبَخ.",
+  "src": "5dc257cabdfd",
   "by": "claude"
  },
  "x:ar:arada/features/governs/0/what": {
@@ -46877,6 +47162,11 @@
  "x:ar:arada/profile/subtleties/0": {
   "t": "Ακολουθείται από ουσιαστικό (أُرِيدُ خُبْزًا) ή από أَنْ + υποτακτική (أُرِيدُ أَنْ آكُلَ). Σε μαγαζί το أُرِيدُ + مِنْ فَضْلِكَ είναι μια χαρά· το أَوَدُّ είναι πιο επίσημο.",
   "src": "1b41d82b2c03",
+  "by": "claude"
+ },
+ "x:ar:arada/profile/notes/0/text": {
+  "t": "Το τουρκικό irade (θέληση, διάταγμα) και το mürit (μαθητής) προέρχονται από τα αραβικά إِرَادَة και مُرِيد.",
+  "src": "969be6b18e9a",
   "by": "claude"
  },
  "x:ar:ahabba/features/governs/0/what": {
@@ -47017,6 +47307,21 @@
  "x:ar:ahabba/profile/subtleties/1": {
   "t": "Για το «μου αρέσει να κάνω»: أُحِبُّ + ρηματικό ουσιαστικό (أُحِبُّ السِّبَاحَةَ) ή أَنْ + υποτακτική (أُحِبُّ أَنْ أَسْبَحَ).",
   "src": "88ab1fe2aead",
+  "by": "claude"
+ },
+ "x:ar:ahabba/profile/notes/0/text": {
+  "t": "Το मोहब्बत (αγάπη) των χίντι είναι το αραβικό مَحَبَّة, από την ίδια ρίζα.",
+  "src": "9a588ea997c0",
+  "by": "claude"
+ },
+ "x:ar:ahabba/profile/notes/1/text": {
+  "t": "Το αλβανικό muhabet (φιλική κουβέντα) προέρχεται από το مَحَبَّة.",
+  "src": "f18fec6753cd",
+  "by": "claude"
+ },
+ "x:ar:ahabba/profile/notes/2/text": {
+  "t": "Το τουρκικό muhabbet (φιλική κουβέντα, στοργή) προέρχεται από το αραβικό مَحَبَّة.",
+  "src": "53de262a6fd6",
   "by": "claude"
  },
  "x:ar:ishtara/features/governs/0/what": {
@@ -47924,9 +48229,24 @@
   "src": "f504bbee9801",
   "by": "claude"
  },
+ "x:ar:aruzz/profile/notes/0/text": {
+  "t": "Το ισπανικό arroz είναι το الرُّزّ, μαζί με το άρθρο.",
+  "src": "f2b37b4dbe49",
+  "by": "claude"
+ },
+ "x:ar:aruzz/profile/notes/1/text": {
+  "t": "Το πορτογαλικό arroz είναι το الرُّزّ, μαζί με το άρθρο.",
+  "src": "33c71f019397",
+  "by": "claude"
+ },
  "x:ar:aruzz/profile/notes/2/text": {
   "t": "Η ὄρυζα είναι το ρύζι σου: η αραβική λέξη προέρχεται από τα ελληνικά.",
   "src": "e17d4017676c",
+  "by": "claude"
+ },
+ "x:ar:aruzz/profile/notes/3/text": {
+  "t": "Το ιταλικό riso και το αραβικό أَرُزّ ανάγονται και τα δύο στην αρχαία ὄρυζα.",
+  "src": "35ebc7fd2a53",
   "by": "claude"
  },
  "x:ar:hasa/features/plurals/none": {
@@ -48027,6 +48347,16 @@
  "x:ar:hasa/profile/subtleties/0": {
   "t": "Στην ομιλία και στους περισσότερους καταλόγους θα διαβάσεις شُورْبَة· το حَسَاء είναι η λέξη της πρότυπης αραβικής στα βιβλία και στις ειδήσεις.",
   "src": "583481589c74",
+  "by": "claude"
+ },
+ "x:ar:hasa/profile/notes/0/text": {
+  "t": "Το شُورْبَة είναι το αλβανικό çorbë.",
+  "src": "467885c92222",
+  "by": "claude"
+ },
+ "x:ar:hasa/profile/notes/1/text": {
+  "t": "Το شُورْبَة είναι το τουρκικό çorba.",
+  "src": "118ef15f3d06",
   "by": "claude"
  },
  "x:ar:salata/features/root/none": {
@@ -48132,6 +48462,41 @@
  "x:ar:salata/profile/notes/0/text": {
   "t": "Το ελληνικό σαλάτα είναι η ίδια λέξη.",
   "src": "1d7084739ced",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/1/text": {
+  "t": "Το سَلَطَة προέρχεται από το ιταλικό (in)salata.",
+  "src": "8e4154949505",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/2/text": {
+  "t": "Το γαλλικό salade είναι η ίδια λέξη.",
+  "src": "fe23d839475e",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/3/text": {
+  "t": "Το ισπανικό ensalada είναι η ίδια λέξη.",
+  "src": "a37e72d8fea1",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/4/text": {
+  "t": "Το πορτογαλικό salada είναι η ίδια λέξη.",
+  "src": "db07e7f8a646",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/5/text": {
+  "t": "Το αλβανικό sallatë είναι η ίδια λέξη.",
+  "src": "095689443aaa",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/6/text": {
+  "t": "Το ρωσικό салат είναι η ίδια λέξη.",
+  "src": "a8363ab3ec14",
+  "by": "claude"
+ },
+ "x:ar:salata/profile/notes/7/text": {
+  "t": "Το αγγλικό salad είναι η ίδια λέξη.",
+  "src": "7a5ed86d0ea9",
   "by": "claude"
  },
  "x:ar:fakiha/features/meaningForms/none": {
@@ -48319,6 +48684,11 @@
   "src": "58d58b21b423",
   "by": "claude"
  },
+ "x:ar:tuffah/profile/notes/0/text": {
+  "t": "Η εβραϊκή «πατάτα», תַּפּוּחַ אֲדָמָה, «μήλο της γης», είναι το δικό σου pomme de terre.",
+  "src": "8aaddbc6856b",
+  "by": "claude"
+ },
  "x:ar:sukkar/features/root/none": {
   "t": "δάνειο (περσικό, από τα σανσκριτικά): χωρίς αραβική ρίζα",
   "src": "db020227c6e9",
@@ -48434,9 +48804,49 @@
   "src": "8464c94cc183",
   "by": "claude"
  },
+ "x:ar:sukkar/profile/notes/0/text": {
+  "t": "Το αγγλικό sugar ήρθε στην Ευρώπη μέσω του αραβικού سُكَّر.",
+  "src": "e06bfd39abd0",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/1/text": {
+  "t": "Το ισπανικό azúcar είναι το السُّكَّر, as-sukkar, μαζί με το άρθρο.",
+  "src": "fca5c4afcec9",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/2/text": {
+  "t": "Το πορτογαλικό açúcar είναι το السُّكَّر, as-sukkar, μαζί με το άρθρο.",
+  "src": "3cc4e85acf34",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/3/text": {
+  "t": "Το γαλλικό sucre ήρθε μέσω του αραβικού سُكَّر.",
+  "src": "3f4e5c98720a",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/4/text": {
+  "t": "Το ιταλικό zucchero ήρθε μέσω του αραβικού سُكَّر.",
+  "src": "0a6cd90ee963",
+  "by": "claude"
+ },
  "x:ar:sukkar/profile/notes/5/text": {
   "t": "Η ελληνική ζάχαρη είναι ξαδέλφη της, από την ίδια αρχαία ινδική λέξη.",
   "src": "1294188d9263",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/6/text": {
+  "t": "Το ρωσικό сахар είναι ξάδελφός του, από την ίδια αρχαία ινδική λέξη.",
+  "src": "cbf402d5207a",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/7/text": {
+  "t": "Το αλβανικό sheqer είναι ξάδελφός του, από την ίδια αρχαία ινδική λέξη.",
+  "src": "c1df532547e3",
+  "by": "claude"
+ },
+ "x:ar:sukkar/profile/notes/8/text": {
+  "t": "Το سُكَّر ανάγεται στην παλιά ινδική λέξη शर्करा (śarkarā), πρόγονο του शक्कर των χίντι.",
+  "src": "99bb4d518140",
   "by": "claude"
  },
  "x:ar:milh/features/plurals/none": {
@@ -48779,9 +49189,59 @@
   "src": "70c3703fb305",
   "by": "claude"
  },
+ "x:ar:shay/profile/notes/0/text": {
+  "t": "Το ρωσικό чай είναι η ίδια λέξη, από το κινέζικο 茶.",
+  "src": "710c212e080b",
+  "by": "claude"
+ },
  "x:ar:shay/profile/notes/1/text": {
   "t": "Το ελληνικό τσάι είναι η ίδια λέξη, από το κινέζικο 茶.",
   "src": "5ea297cbc4de",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/2/text": {
+  "t": "Το चाय των χίντι είναι η ίδια λέξη, από το κινέζικο 茶.",
+  "src": "3bfd93b75a2d",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/3/text": {
+  "t": "Το πορτογαλικό chá είναι η ίδια λέξη, από το κινέζικο 茶.",
+  "src": "434a30b717b2",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/4/text": {
+  "t": "Το αλβανικό çaj είναι η ίδια λέξη, από το κινέζικο 茶.",
+  "src": "b412ca7b0f56",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/5/text": {
+  "t": "Το ιαπωνικό 茶 (cha) είναι η ίδια λέξη.",
+  "src": "b2d3756803cd",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/6/text": {
+  "t": "Το αγγλικό tea προέρχεται από την άλλη μορφή της κινέζικης λέξης, που διαδόθηκε από τη θάλασσα· το chai, από τη μορφή που διαδόθηκε από την ξηρά, είναι το شَاي.",
+  "src": "6a7f40b4c0fd",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/7/text": {
+  "t": "Το γαλλικό thé προέρχεται από την άλλη μορφή της κινέζικης λέξης, που διαδόθηκε από τη θάλασσα· το شَاي προέρχεται από τη μορφή που διαδόθηκε από την ξηρά.",
+  "src": "56c26685847f",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/8/text": {
+  "t": "Το ιταλικό tè προέρχεται από την άλλη μορφή της κινέζικης λέξης, που διαδόθηκε από τη θάλασσα· το شَاي προέρχεται από τη μορφή που διαδόθηκε από την ξηρά.",
+  "src": "bca558e8a75f",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/9/text": {
+  "t": "Το ισπανικό té προέρχεται από την άλλη μορφή της κινέζικης λέξης, που διαδόθηκε από τη θάλασσα· το شَاي προέρχεται από τη μορφή που διαδόθηκε από την ξηρά.",
+  "src": "1845f09a0396",
+  "by": "claude"
+ },
+ "x:ar:shay/profile/notes/10/text": {
+  "t": "Το τουρκικό çay είναι η ίδια λέξη.",
+  "src": "6038e4454aa4",
   "by": "claude"
  },
  "x:ar:qahwa/features/plurals/0/note": {
@@ -48909,9 +49369,59 @@
   "src": "73f62ef0dd14",
   "by": "claude"
  },
+ "x:ar:qahwa/profile/notes/0/text": {
+  "t": "Το αγγλικό coffee ανάγεται στο قَهْوَة.",
+  "src": "021407e7139b",
+  "by": "claude"
+ },
  "x:ar:qahwa/profile/notes/1/text": {
   "t": "Ο ελληνικός καφές ανάγεται στο قَهْوَة.",
   "src": "d3f1e5bed9b8",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/2/text": {
+  "t": "Το ρωσικό кофе ανάγεται στο قَهْوَة.",
+  "src": "2dd706396ace",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/3/text": {
+  "t": "Το γαλλικό café ανάγεται στο قَهْوَة.",
+  "src": "81fd1ffd4b62",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/4/text": {
+  "t": "Το ιταλικό caffè ανάγεται στο قَهْوَة.",
+  "src": "e295f7ce707d",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/5/text": {
+  "t": "Το ισπανικό café ανάγεται στο قَهْوَة.",
+  "src": "cae243942e71",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/6/text": {
+  "t": "Το πορτογαλικό café ανάγεται στο قَهْوَة.",
+  "src": "0b76d8d389b2",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/7/text": {
+  "t": "Το αλβανικό kafe ανάγεται στο قَهْوَة.",
+  "src": "367ad5531077",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/8/text": {
+  "t": "Το कॉफ़ी των χίντι ανάγεται στο قَهْوَة.",
+  "src": "a8d7d19798f4",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/9/text": {
+  "t": "Το ιαπωνικό コーヒー ανάγεται στο قَهْوَة.",
+  "src": "00a31cb0d760",
+  "by": "claude"
+ },
+ "x:ar:qahwa/profile/notes/10/text": {
+  "t": "Το τουρκικό kahve είναι η λέξη μέσω της οποίας το قَهْوَة έφτασε στην Ευρώπη.",
+  "src": "e4de5678a4ee",
   "by": "claude"
  },
  "x:ar:halib/features/plurals/none": {
@@ -49437,6 +49947,26 @@
  "x:ar:fatur/profile/subtleties/0": {
   "t": "Με τα γεύματα τα αραβικά λένε عَلَى: عَلَى الْفَطُورِ (στο πρωινό)· οι προθέσεις έρχονται στο μάθημα 11.",
   "src": "4c18e582b7e7",
+  "by": "claude"
+ },
+ "x:ar:fatur/profile/notes/0/text": {
+  "t": "Ακριβώς όπως το break-fast: το γεύμα που σπάει τη νυχτερινή νηστεία.",
+  "src": "1b2a262f98b9",
+  "by": "claude"
+ },
+ "x:ar:fatur/profile/notes/1/text": {
+  "t": "Όπως το déjeuner, που κάποτε σήμαινε «σπάω τη νηστεία»: το γεύμα που τελειώνει τη νυχτερινή νηστεία.",
+  "src": "ff24e73f358f",
+  "by": "claude"
+ },
+ "x:ar:fatur/profile/notes/2/text": {
+  "t": "Όπως το desayuno, «ξε-νήστεμα»: το γεύμα που τελειώνει τη νυχτερινή νηστεία.",
+  "src": "6dcddafc7deb",
+  "by": "claude"
+ },
+ "x:ar:fatur/profile/notes/3/text": {
+  "t": "Όπως το desjejum, «ξε-νήστεμα»: το γεύμα που τελειώνει τη νυχτερινή νηστεία.",
+  "src": "a7133a122db3",
   "by": "claude"
  },
  "x:ar:ghada/features/plurals/none": {
@@ -50134,6 +50664,11 @@
   "src": "51134213a1a6",
   "by": "claude"
  },
+ "x:ar:la_shay/profile/notes/0/text": {
+  "t": "Φτιαγμένο ακριβώς όπως το «no-thing»: لَا + شَيْء.",
+  "src": "27e244d94732",
+  "by": "claude"
+ },
  "x:ar:la_ahad/profile/feeling": {
   "t": "Ένα άδειο δωμάτιο, μια κλειστή πόρτα: «κανένας».",
   "src": "315f7ff0ded3",
@@ -50424,6 +50959,41 @@
   "src": "72fd51e8d5d0",
   "by": "claude"
  },
+ "x:ar:wala/profile/notes/1/text": {
+  "t": "Όπως στο ни … ни, η άρνηση επαναλαμβάνεται: لَا … وَلَا …",
+  "src": "f9e7e44813f3",
+  "by": "claude"
+ },
+ "x:ar:wala/profile/notes/2/text": {
+  "t": "Όπως στο ni … ni, η άρνηση επαναλαμβάνεται: لَا … وَلَا …",
+  "src": "9837e87c7fda",
+  "by": "claude"
+ },
+ "x:ar:wala/profile/notes/3/text": {
+  "t": "Όπως στο ni … ni, η άρνηση επαναλαμβάνεται: لَا … وَلَا …",
+  "src": "9837e87c7fda",
+  "by": "claude"
+ },
+ "x:ar:wala/profile/notes/4/text": {
+  "t": "Όπως στο né … né, η άρνηση επαναλαμβάνεται: لَا … وَلَا …",
+  "src": "b812b6ecb467",
+  "by": "claude"
+ },
+ "x:ar:wala/profile/notes/5/text": {
+  "t": "Όπως στο nem … nem, η άρνηση επαναλαμβάνεται: لَا … وَلَا …",
+  "src": "81adf5ad14da",
+  "by": "claude"
+ },
+ "x:ar:wala/profile/notes/6/text": {
+  "t": "Όπως στο as … as, η άρνηση επαναλαμβάνεται: لَا … وَلَا …",
+  "src": "14051c40389c",
+  "by": "claude"
+ },
+ "x:ar:wala/profile/notes/7/text": {
+  "t": "Όπως το neither … nor, αλλά με την ίδια λέξη δύο φορές: لَا … وَلَا …",
+  "src": "16a1a5814d99",
+  "by": "claude"
+ },
  "x:ar:shay_thing/features/plurals/0/note": {
   "t": "πράγματα: δίπτωτο, αν και μοιάζει με أَفْعَال (οι γραμματικοί διαφωνούν για το μοτίβο του)",
   "src": "a95ec0746533",
@@ -50559,9 +51129,44 @@
   "src": "ee90de684da5",
   "by": "claude"
  },
+ "x:ar:shay_thing/profile/notes/0/text": {
+  "t": "Μία άρνηση, όπως το «not … anything»: لَا آكُلُ شَيْئًا.",
+  "src": "dba05f3329c4",
+  "by": "claude"
+ },
  "x:ar:shay_thing/profile/notes/1/text": {
   "t": "Τα ελληνικά διπλασιάζουν την άρνηση (δεν τρώω τίποτα)· τα αραβικά όχι: لَا آكُلُ شَيْئًا.",
   "src": "47c26b1baf52",
+  "by": "claude"
+ },
+ "x:ar:shay_thing/profile/notes/2/text": {
+  "t": "Τα ρωσικά διπλασιάζουν την άρνηση (я ничего не ем)· τα αραβικά όχι: لَا آكُلُ شَيْئًا.",
+  "src": "81bc2d5a6f45",
+  "by": "claude"
+ },
+ "x:ar:shay_thing/profile/notes/3/text": {
+  "t": "Τα γαλλικά θέλουν το ne … rien· τα αραβικά έχουν μία άρνηση και ένα απλό «πράγμα»: لَا آكُلُ شَيْئًا.",
+  "src": "4f3ac80cf983",
+  "by": "claude"
+ },
+ "x:ar:shay_thing/profile/notes/4/text": {
+  "t": "Τα ισπανικά διπλασιάζουν την άρνηση (no como nada)· τα αραβικά όχι: لَا آكُلُ شَيْئًا.",
+  "src": "100ca23bcf81",
+  "by": "claude"
+ },
+ "x:ar:shay_thing/profile/notes/5/text": {
+  "t": "Τα ιταλικά διπλασιάζουν την άρνηση (non mangio niente)· τα αραβικά όχι: لَا آكُلُ شَيْئًا.",
+  "src": "309ad7a61526",
+  "by": "claude"
+ },
+ "x:ar:shay_thing/profile/notes/6/text": {
+  "t": "Τα πορτογαλικά διπλασιάζουν την άρνηση (não como nada)· τα αραβικά όχι: لَا آكُلُ شَيْئًا.",
+  "src": "46ae47739b1c",
+  "by": "claude"
+ },
+ "x:ar:shay_thing/profile/notes/7/text": {
+  "t": "Τα αλβανικά διπλασιάζουν την άρνηση (nuk ha asgjë)· τα αραβικά όχι: لَا آكُلُ شَيْئًا.",
+  "src": "bc56e2b8ab49",
   "by": "claude"
  },
  "x:ar:hal/contrasts/0/axis": {
@@ -51129,6 +51734,21 @@
   "src": "c89a8e785269",
   "by": "claude"
  },
+ "x:ar:haqqan/profile/notes/0/text": {
+  "t": "Το हक़ (δικαίωμα) των χίντι είναι αυτή η λέξη.",
+  "src": "746d5798bd90",
+  "by": "claude"
+ },
+ "x:ar:haqqan/profile/notes/1/text": {
+  "t": "Το αλβανικό hak (αυτό που αξίζει κανείς) προέρχεται από το حَقّ.",
+  "src": "1e7e999026f3",
+  "by": "claude"
+ },
+ "x:ar:haqqan/profile/notes/2/text": {
+  "t": "Το τουρκικό hak (δικαίωμα, δικαιοσύνη) είναι αυτή η λέξη.",
+  "src": "344f3679da97",
+  "by": "claude"
+ },
  "x:ar:taban/features/meaningForms/none": {
   "t": "μία σημασία",
   "src": "b27b98c09fbc",
@@ -51217,6 +51837,36 @@
  "x:ar:taban/profile/notes/0/text": {
   "t": "Ακριβώς όπως το φυσικά: «από τη φύση» → «βεβαίως».",
   "src": "63bbfde0f36c",
+  "by": "claude"
+ },
+ "x:ar:taban/profile/notes/1/text": {
+  "t": "Ακριβώς όπως το естественно: «από τη φύση» → «βεβαίως».",
+  "src": "f4ee5884c138",
+  "by": "claude"
+ },
+ "x:ar:taban/profile/notes/2/text": {
+  "t": "Ακριβώς όπως το naturellement: «από τη φύση» → «βεβαίως».",
+  "src": "ece6e57142a9",
+  "by": "claude"
+ },
+ "x:ar:taban/profile/notes/3/text": {
+  "t": "Ακριβώς όπως το naturalmente: «από τη φύση» → «βεβαίως».",
+  "src": "55a68f7c90ba",
+  "by": "claude"
+ },
+ "x:ar:taban/profile/notes/4/text": {
+  "t": "Ακριβώς όπως το naturalmente: «από τη φύση» → «βεβαίως».",
+  "src": "55a68f7c90ba",
+  "by": "claude"
+ },
+ "x:ar:taban/profile/notes/5/text": {
+  "t": "Ακριβώς όπως το naturalmente: «από τη φύση» → «βεβαίως».",
+  "src": "55a68f7c90ba",
+  "by": "claude"
+ },
+ "x:ar:taban/profile/notes/6/text": {
+  "t": "Ακριβώς όπως το naturally: «από τη φύση» → «βεβαίως».",
+  "src": "198a20c97292",
   "by": "claude"
  },
  "x:ar:aydan/features/meaningForms/none": {
@@ -51394,9 +52044,19 @@
   "src": "11388c2b79ce",
   "by": "claude"
  },
+ "x:ar:faqat/profile/notes/0/text": {
+  "t": "Δεν μπαίνει πριν από τη λέξη όπως το «only»: قَهْوَةً فَقَطْ = only coffee.",
+  "src": "c2a6390dcd83",
+  "by": "claude"
+ },
  "x:ar:faqat/profile/notes/1/text": {
   "t": "Δεν μπαίνει πριν από τη λέξη όπως το μόνο: قَهْوَةً فَقَطْ = μόνο καφέ.",
   "src": "b6951ab389c1",
+  "by": "claude"
+ },
+ "x:ar:faqat/profile/notes/2/text": {
+  "t": "Δεν μπαίνει πριν από τη λέξη όπως το только: قَهْوَةً فَقَطْ = только кофе.",
+  "src": "ae1df7d7c48f",
   "by": "claude"
  },
  "x:ar:bala/features/root/none": {
@@ -51492,6 +52152,11 @@
  "x:ar:bala/profile/subtleties/0": {
   "t": "Στην καθημερινή ομιλία πολλοί απαντούν αντί γι’ αυτό نَعَمْ + ολόκληρη την πρόταση· το بَلَى είναι ο σωστός πρότυπος τύπος.",
   "src": "7c5397c83237",
+  "by": "claude"
+ },
+ "x:ar:bala/profile/notes/0/text": {
+  "t": "Το بَلَى είναι το si σου: μία λέξη για το «ναι» απέναντι σε ένα «όχι».",
+  "src": "d97f27042af5",
   "by": "claude"
  },
  "x:ar:madha/contrasts/0/axis": {
@@ -51969,6 +52634,16 @@
   "src": "de8228c19d3e",
   "by": "claude"
  },
+ "x:ar:man/profile/notes/0/text": {
+  "t": "Το αμχαρικό ማን (man), «ποιος», είναι η ίδια σημιτική λέξη (Wiktionary).",
+  "src": "b2a791e415bd",
+  "by": "claude"
+ },
+ "x:ar:man/profile/notes/1/text": {
+  "t": "Το αμχαρικό ማን (man) είναι ομόρριζο του مَنْ.",
+  "src": "ec6aea9c4e65",
+  "by": "claude"
+ },
  "x:ar:mata/features/root/none": {
   "t": "ερωτηματικό μόριο",
   "src": "6fd056f4596d",
@@ -52114,6 +52789,11 @@
   "src": "9ced25adb81b",
   "by": "claude"
  },
+ "x:ar:mata/profile/notes/0/text": {
+  "t": "Χωρίς «do» και χωρίς αντιστροφή: مَتَى تَأْكُلُ؟, «πότε εσύ-τρως;».",
+  "src": "7a3bd7808d03",
+  "by": "claude"
+ },
  "x:ar:kayfa/features/root/none": {
   "t": "ερωτηματικό μόριο",
   "src": "6fd056f4596d",
@@ -52239,6 +52919,21 @@
   "src": "bda47f6a36ab",
   "by": "claude"
  },
+ "x:ar:kayfa/profile/notes/1/text": {
+  "t": "Το ρωσικό кайф (απόλαυση, μαστούρα) προέρχεται από το ουσιαστικό كَيْف.",
+  "src": "c9c4aab061a5",
+  "by": "claude"
+ },
+ "x:ar:kayfa/profile/notes/2/text": {
+  "t": "Το αλβανικό qejf (απόλαυση, κέφι) προέρχεται από το ουσιαστικό كَيْف.",
+  "src": "56c348bf3ecd",
+  "by": "claude"
+ },
+ "x:ar:kayfa/profile/notes/3/text": {
+  "t": "Το τουρκικό keyif (κέφι, απόλαυση) προέρχεται από το ουσιαστικό كَيْف.",
+  "src": "95c85eb9778f",
+  "by": "claude"
+ },
  "x:ar:limadha/features/root/none": {
   "t": "μόριο: لِ + مَاذَا",
   "src": "22b4f1ad8f5e",
@@ -52342,6 +53037,36 @@
  "x:ar:limadha/profile/notes/0/text": {
   "t": "Φτιαγμένο όπως το γιατί (για + τι).",
   "src": "0adce274c537",
+  "by": "claude"
+ },
+ "x:ar:limadha/profile/notes/1/text": {
+  "t": "Φτιαγμένο όπως το почему (по + чему).",
+  "src": "23ba71ccd3c5",
+  "by": "claude"
+ },
+ "x:ar:limadha/profile/notes/2/text": {
+  "t": "Φτιαγμένο όπως το pourquoi (pour + quoi).",
+  "src": "5b9cfd235a97",
+  "by": "claude"
+ },
+ "x:ar:limadha/profile/notes/3/text": {
+  "t": "Φτιαγμένο όπως το perché (per + che).",
+  "src": "d1c108dcc2c9",
+  "by": "claude"
+ },
+ "x:ar:limadha/profile/notes/4/text": {
+  "t": "Φτιαγμένο όπως το por qué (por + qué).",
+  "src": "ef96b53146d7",
+  "by": "claude"
+ },
+ "x:ar:limadha/profile/notes/5/text": {
+  "t": "Φτιαγμένο όπως το porquê (por + quê).",
+  "src": "f7fed45099fd",
+  "by": "claude"
+ },
+ "x:ar:limadha/profile/notes/6/text": {
+  "t": "Φτιαγμένο όπως το niçin (ne + için).",
+  "src": "658f830541c3",
   "by": "claude"
  },
  "x:ar:kam/features/root/none": {
@@ -52467,6 +53192,16 @@
  "x:ar:kam/profile/subtleties/1": {
   "t": "Πριν από το al- παίρνει το βοηθητικό φωνήεν i: كَمِ السَّاعَةُ؟.",
   "src": "8561e51d5717",
+  "by": "claude"
+ },
+ "x:ar:kam/profile/notes/0/text": {
+  "t": "Όχι όπως το «how many brothers»: το ουσιαστικό μετά το كَمْ είναι σε ενικό — كَمْ أَخًا؟",
+  "src": "3aae25cb2c9f",
+  "by": "claude"
+ },
+ "x:ar:kam/profile/notes/1/text": {
+  "t": "Όχι όπως το сколько братьев: το ουσιαστικό μετά το كَمْ είναι σε ενικό και αιτιατική — كَمْ أَخًا؟",
+  "src": "78d9b97367b2",
   "by": "claude"
  },
  "x:ar:ayy/profile/feeling": {
@@ -52679,9 +53414,24 @@
   "src": "0855dfd03a62",
   "by": "claude"
  },
+ "x:ar:liman/profile/notes/0/text": {
+  "t": "Όπως το à qui est ce livre ?: لِمَنْ هٰذَا الْكِتَابُ؟",
+  "src": "2c5586b40079",
+  "by": "claude"
+ },
  "x:ar:liman/profile/notes/1/text": {
   "t": "Το ελληνικό ποιανού είναι τύπος πτώσης· τα αραβικά ρωτούν «σε ποιον;»: لِمَنْ هٰذَا الْكِتَابُ؟",
   "src": "0d6f76fd166a",
+  "by": "claude"
+ },
+ "x:ar:liman/profile/notes/2/text": {
+  "t": "Τα ρωσικά έχουν δική τους λέξη, το чей· τα αραβικά ρωτούν «σε ποιον;»: لِمَنْ هٰذَا الْكِتَابُ؟",
+  "src": "5b3034a71a9d",
+  "by": "claude"
+ },
+ "x:ar:liman/profile/notes/3/text": {
+  "t": "Τα αγγλικά έχουν δική τους λέξη, το whose· τα αραβικά ρωτούν «σε ποιον;»: لِمَنْ هٰذَا الْكِتَابُ؟",
+  "src": "5b2823e32f96",
   "by": "claude"
  },
  "x:ar:tabib/features/meaningForms/none": {
@@ -52782,6 +53532,16 @@
  "x:ar:tabib/profile/subtleties/1": {
   "t": "Το Wiktionary δίνει και τον σπανιότερο πληθυντικό أَطِبَّة.",
   "src": "a48d7dada241",
+  "by": "claude"
+ },
+ "x:ar:tabib/profile/notes/0/text": {
+  "t": "Το γαλλικό toubib (γιατρός, στην καθομιλουμένη) είναι αυτή η λέξη.",
+  "src": "a2f2cf9bc9ab",
+  "by": "claude"
+ },
+ "x:ar:tabib/profile/notes/1/text": {
+  "t": "Το τουρκικό tıp (ιατρική) και το tabip (γιατρός) προέρχονται από αυτήν.",
+  "src": "21b3434d64d4",
   "by": "claude"
  },
  "x:ar:mumarrid/features/meaningForms/none": {
@@ -52977,6 +53737,16 @@
  "x:ar:muhandis/profile/subtleties/0": {
   "t": "Το هَنْدَسَة είναι και «μηχανική» και «γεωμετρία»· το Wiktionary δίνει και τις παλαιότερες σημασίες «γεωμέτρης, αρχιτέκτονας, τοπογράφος».",
   "src": "7af711c87ed5",
+  "by": "claude"
+ },
+ "x:ar:muhandis/profile/notes/0/text": {
+  "t": "Το τουρκικό mühendis (μηχανικός) είναι αυτή η αραβική λέξη.",
+  "src": "911b94ac6f23",
+  "by": "claude"
+ },
+ "x:ar:muhandis/profile/notes/1/text": {
+  "t": "Η περσική πηγή της επιβιώνει στο περσικό andâze, «μέτρο».",
+  "src": "b58a9deb07ca",
   "by": "claude"
  },
  "x:ar:saiq/features/meaningForms/none": {
@@ -53387,6 +54157,11 @@
  "x:ar:amil/profile/subtleties/0": {
   "t": "Το عَامِل είναι η χειρωνακτική ή η εργοστασιακή δουλειά· ο υπάλληλος γραφείου είναι مُوَظَّف.",
   "src": "3256f7751b33",
+  "by": "claude"
+ },
+ "x:ar:amil/profile/notes/0/text": {
+  "t": "Το τουρκικό amele (εργάτης) προέρχεται από τον αραβικό πληθυντικό عَمَلَة.",
+  "src": "e85708a0d6aa",
   "by": "claude"
  },
  "x:ar:muzari/features/meaningForms/none": {
@@ -53879,6 +54654,11 @@
   "src": "b42e2da7e9d9",
   "by": "claude"
  },
+ "x:ar:fannan/profile/notes/0/text": {
+  "t": "Το τουρκικό fen (επιστήμη, τεχνική) είναι η ίδια λέξη فَنّ.",
+  "src": "b56fa2f3d74a",
+  "by": "claude"
+ },
  "x:ar:fi/features/root/none": {
   "t": "βασική πρόθεση (σύντομο μόριο)",
   "src": "37d2324b9fde",
@@ -54142,6 +54922,31 @@
  "x:ar:fi/profile/notes/0/text": {
   "t": "Το ελληνικό σε καλύπτει το «μέσα», το «εκεί» και το «προς»· τα αραβικά το μοιράζουν: فِي (πού;), إِلَى (προς τα πού;).",
   "src": "588ebc323c0f",
+  "by": "claude"
+ },
+ "x:ar:fi/profile/notes/1/text": {
+  "t": "Το γαλλικό à καλύπτει το «σε (τόπο)» και το «προς» (à l’école)· τα αραβικά το χωρίζουν: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ.",
+  "src": "eeb487e08c66",
+  "by": "claude"
+ },
+ "x:ar:fi/profile/notes/2/text": {
+  "t": "Τα ιταλικά a / in καλύπτουν το «σε (τόπο)» και το «προς» (a scuola)· τα αραβικά τα χωρίζουν: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ.",
+  "src": "6957f1006b05",
+  "by": "claude"
+ },
+ "x:ar:fi/profile/notes/3/text": {
+  "t": "Το αλβανικό në καλύπτει το «μέσα σε» και το «προς τα μέσα» (në shkollë)· τα αραβικά το χωρίζουν: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ.",
+  "src": "40e70638f619",
+  "by": "claude"
+ },
+ "x:ar:fi/profile/notes/4/text": {
+  "t": "Το ρωσικό в δείχνει τόπο ή κατεύθυνση με την πτώση (в школе / в школу)· τα αραβικά με την πρόθεση: فِي / إِلَى.",
+  "src": "768da47a680d",
+  "by": "claude"
+ },
+ "x:ar:fi/profile/notes/5/text": {
+  "t": "Ένα فِي για το at / on / in: at five, on Sunday, in January, in summer.",
+  "src": "f8c5b045aaa8",
   "by": "claude"
  },
  "x:ar:ila/features/root/none": {
@@ -55229,6 +56034,21 @@
   "src": "6a3f1568bd20",
   "by": "claude"
  },
+ "x:ar:madrasa/profile/notes/0/text": {
+  "t": "Το αγγλικό madrasa σημαίνει θρησκευτικό σχολείο· το αραβικό مَدْرَسَة είναι οποιοδήποτε σχολείο.",
+  "src": "a5cc33fffde1",
+  "by": "claude"
+ },
+ "x:ar:madrasa/profile/notes/1/text": {
+  "t": "Το मदरसा των χίντι σημαίνει θρησκευτικό σχολείο· το αραβικό مَدْرَسَة είναι οποιοδήποτε σχολείο.",
+  "src": "359d08aa48ca",
+  "by": "claude"
+ },
+ "x:ar:madrasa/profile/notes/2/text": {
+  "t": "Το τουρκικό medrese είναι θρησκευτικό σχολείο· το αραβικό مَدْرَسَة είναι οποιοδήποτε σχολείο.",
+  "src": "a3aaa8f38690",
+  "by": "claude"
+ },
  "x:ar:jamia/features/meaningForms/none": {
   "t": "οι ίδιοι τύποι σε όλες τις σημασίες",
   "src": "9f8d61bec0e6",
@@ -55454,6 +56274,16 @@
   "src": "e772b13eb116",
   "by": "claude"
  },
+ "x:ar:amal/profile/notes/0/text": {
+  "t": "Το अमल (πράξη, όπως στο अमल करना, εφαρμόζω) των χίντι είναι αυτή η λέξη.",
+  "src": "113c4d5d311a",
+  "by": "claude"
+ },
+ "x:ar:amal/profile/notes/1/text": {
+  "t": "Το τουρκικό amel (πράξη) είναι η αραβική λέξη.",
+  "src": "57a9ba18b9c2",
+  "by": "claude"
+ },
  "x:ar:maktab/features/meaningForms/none": {
   "t": "οι ίδιοι τύποι σε όλες τις σημασίες",
   "src": "9f8d61bec0e6",
@@ -55569,6 +56399,11 @@
   "src": "80bd84f09b25",
   "by": "claude"
  },
+ "x:ar:maktab/profile/notes/0/text": {
+  "t": "Το τουρκικό mektep (σχολείο) και το mektup (γράμμα) προέρχονται από την ίδια ρίζα.",
+  "src": "a47794e6e105",
+  "by": "claude"
+ },
  "x:ar:mahall/features/plurals/1/note": {
   "t": "επίσημο: الْمَحَالُّ التِّجَارِيَّةُ (καταστήματα)",
   "src": "67cc46c74c59",
@@ -55682,6 +56517,21 @@
  "x:ar:mahall/profile/notes/0/text": {
   "t": "Ο ελληνικός μαχαλάς είναι η αδελφή του, το مَحَلَّة.",
   "src": "c93e7282c5b3",
+  "by": "claude"
+ },
+ "x:ar:mahall/profile/notes/1/text": {
+  "t": "Το मोहल्ला (γειτονιά) των χίντι είναι η αδελφή του, το مَحَلَّة.",
+  "src": "f23082642ab9",
+  "by": "claude"
+ },
+ "x:ar:mahall/profile/notes/2/text": {
+  "t": "Το αλβανικό mëhallë (γειτονιά) είναι η αδελφή του, το مَحَلَّة.",
+  "src": "170d351efe11",
+  "by": "claude"
+ },
+ "x:ar:mahall/profile/notes/3/text": {
+  "t": "Το τουρκικό mahalle είναι η αδελφή του, το مَحَلَّة.",
+  "src": "84a353bbfdb0",
   "by": "claude"
  },
  "x:ar:supermarket/features/root/none": {
@@ -55804,6 +56654,11 @@
   "src": "76d247ba9517",
   "by": "claude"
  },
+ "x:ar:supermarket/profile/notes/1/text": {
+  "t": "Μια διεθνής λέξη, όπως το супермаркет.",
+  "src": "6437114c19e1",
+  "by": "claude"
+ },
  "x:ar:suq/features/meaningForms/none": {
   "t": "οι ίδιοι τύποι σε όλες τις σημασίες",
   "src": "9f8d61bec0e6",
@@ -55902,6 +56757,26 @@
  "x:ar:suq/profile/subtleties/0": {
   "t": "Ο πληθυντικός أَسْوَاق σημαίνει «αγορές» και στα οικονομικά· στον Κόλπο οι الْأَسْوَاقُ الْمَرْكَزِيَّةُ είναι σούπερ μάρκετ.",
   "src": "c5b8982d5504",
+  "by": "claude"
+ },
+ "x:ar:suq/profile/notes/0/text": {
+  "t": "Το αγγλικό souk είναι αυτή η λέξη.",
+  "src": "eddaa4c62e83",
+  "by": "claude"
+ },
+ "x:ar:suq/profile/notes/1/text": {
+  "t": "Το γαλλικό souk είναι αυτή η λέξη (και το c’est le souk, «είναι χάος»).",
+  "src": "78518c818078",
+  "by": "claude"
+ },
+ "x:ar:suq/profile/notes/2/text": {
+  "t": "Το ισπανικό zoco είναι αυτή η λέξη.",
+  "src": "fb5389db7950",
+  "by": "claude"
+ },
+ "x:ar:suq/profile/notes/3/text": {
+  "t": "Το πορτογαλικό açougue (κρεοπωλείο) είναι το السُّوق, as-sūq, μαζί με το άρθρο.",
+  "src": "d3c388399369",
   "by": "claude"
  },
  "x:ar:matam/features/meaningForms/none": {
@@ -56129,9 +57004,19 @@
   "src": "8a43b9d36378",
   "by": "claude"
  },
+ "x:ar:maqha/profile/notes/0/text": {
+  "t": "Όπως το café, μία λέξη δίνει το ρόφημα (قَهْوَة) και τον τόπο (مَقْهًى).",
+  "src": "d7b0c426f79e",
+  "by": "claude"
+ },
  "x:ar:maqha/profile/notes/1/text": {
   "t": "Όπως καφές → καφενείο: قَهْوَة → مَقْهًى.",
   "src": "6f4318313484",
+  "by": "claude"
+ },
+ "x:ar:maqha/profile/notes/2/text": {
+  "t": "Το αγγλικό coffee προέρχεται από το قَهْوَة.",
+  "src": "240689c8714e",
   "by": "claude"
  },
  "x:ar:mustashfa/features/meaningForms/none": {
@@ -56427,6 +57312,16 @@
  "x:ar:bank/profile/notes/0/text": {
   "t": "Η ελληνική τράπεζα είναι κυριολεκτικά «τραπέζι»: ο ίδιος πάγκος με το banco, την πηγή του بَنْك — μια άλλη εικόνα.",
   "src": "b66a57009769",
+  "by": "claude"
+ },
+ "x:ar:bank/profile/notes/1/text": {
+  "t": "Το *banco* — ο πάγκος του αργυραμοιβού — είναι η πηγή του بَنْك, μαζί με το *banca*.",
+  "src": "0b2aaa5f45b2",
+  "by": "claude"
+ },
+ "x:ar:bank/profile/notes/2/text": {
+  "t": "Το *banque* είναι η ίδια λέξη· ενίσχυσε αργότερα το بَنْك.",
+  "src": "4981e62cc5b2",
   "by": "claude"
  },
  "x:ar:maktab_barid/features/root/none": {
@@ -56964,6 +57859,21 @@
   "src": "e64f9ae069fb",
   "by": "claude"
  },
+ "x:ar:maydan/profile/notes/1/text": {
+  "t": "Η λέξη ήρθε από το Ιράν· η παλιά ρίζα της είναι κοινή με το αγγλικό middle: μια πλατεία είναι «η μέση» της πόλης.",
+  "src": "d8053d3fd46c",
+  "by": "claude"
+ },
+ "x:ar:maydan/profile/notes/2/text": {
+  "t": "Η λέξη ήρθε από το Ιράν· η παλιά ρίζα της είναι κοινή με το ιταλικό mezzo: μια πλατεία είναι «η μέση» της πόλης.",
+  "src": "988768d220ca",
+  "by": "claude"
+ },
+ "x:ar:maydan/profile/notes/3/text": {
+  "t": "Η λέξη ήρθε από το Ιράν· η παλιά ρίζα της είναι κοινή με το मध्य των χίντι: μια πλατεία είναι «η μέση» της πόλης.",
+  "src": "185496e18291",
+  "by": "claude"
+ },
  "x:ar:hadiqa/features/meaningForms/none": {
   "t": "οι ίδιοι τύποι σε όλες τις σημασίες",
   "src": "9f8d61bec0e6",
@@ -57089,9 +57999,44 @@
   "src": "e357ecd81b34",
   "by": "claude"
  },
+ "x:ar:hadiqa/profile/notes/1/text": {
+  "t": "Η ίδια εικόνα με το paradise, από μια παλιά λέξη του Ιράν για περιφραγμένο πάρκο.",
+  "src": "d69ee8d2ba34",
+  "by": "claude"
+ },
+ "x:ar:hadiqa/profile/notes/2/text": {
+  "t": "Μία λέξη για το park και το garden: حَدِيقَة.",
+  "src": "32c0a61bfc1b",
+  "by": "claude"
+ },
+ "x:ar:hadiqa/profile/notes/3/text": {
+  "t": "Μία λέξη για το parc και το jardin: حَدِيقَة.",
+  "src": "3eb53a80bcee",
+  "by": "claude"
+ },
  "x:ar:hadiqa/profile/notes/4/text": {
   "t": "Μία λέξη για το πάρκο και τον κήπο: حَدِيقَة.",
   "src": "59c707a9a2de",
+  "by": "claude"
+ },
+ "x:ar:hadiqa/profile/notes/5/text": {
+  "t": "Μία λέξη για το парк και το сад: حَدِيقَة.",
+  "src": "f405160812e5",
+  "by": "claude"
+ },
+ "x:ar:hadiqa/profile/notes/6/text": {
+  "t": "Μία λέξη για το parco και το giardino: حَدِيقَة.",
+  "src": "b6c9521ebf26",
+  "by": "claude"
+ },
+ "x:ar:hadiqa/profile/notes/7/text": {
+  "t": "Μία λέξη για το parque και το jardín: حَدِيقَة.",
+  "src": "a67e79941d3c",
+  "by": "claude"
+ },
+ "x:ar:hadiqa/profile/notes/8/text": {
+  "t": "Μία λέξη για το parque και το jardim: حَدِيقَة.",
+  "src": "9de2d29e6b64",
   "by": "claude"
  },
  "x:ar:madina/features/plurals/1/note": {
@@ -57462,6 +58407,11 @@
  "x:ar:balad/profile/subtleties/0": {
   "t": "Το «η χώρα μου» είναι بَلَدِي· το «στο εξωτερικό» είναι خَارِجَ الْبَلَدِ ή فِي الْخَارِجِ.",
   "src": "51d2beb8d192",
+  "by": "claude"
+ },
+ "x:ar:balad/profile/notes/0/text": {
+  "t": "Το τουρκικό belde (κωμόπολη) και το belediye (δήμος) προέρχονται από αυτή τη ρίζα (αραβικά بَلْدَة, بَلَدِيَّة).",
+  "src": "d079ff9a496e",
   "by": "claude"
  },
  "x:ar:ala/features/root/none": {
@@ -58364,6 +59314,11 @@
   "src": "015756b67e8d",
   "by": "claude"
  },
+ "x:ar:qarib/profile/notes/0/text": {
+  "t": "Το αμχαρικό ቅርብ είναι ομόρριζο του قَرِيب.",
+  "src": "765214d72ba0",
+  "by": "claude"
+ },
  "x:ar:baid/features/meaningForms/none": {
   "t": "οι ίδιοι τύποι σε όλες τις σημασίες",
   "src": "9f8d61bec0e6",
@@ -59109,14 +60064,54 @@
   "src": "91f663ceb26d",
   "by": "claude"
  },
+ "x:ar:matbakh/profile/notes/0/text": {
+  "t": "Το τουρκικό mutfak είναι η ίδια λέξη.",
+  "src": "f50cfeb02308",
+  "by": "claude"
+ },
  "x:ar:matbakh/profile/notes/1/text": {
   "t": "Το خ είναι το χ σου πριν από a, o, u (χαρά)· το ط, το εμφατικό t, είναι καινούργιο.",
   "src": "7680d96011b5",
   "by": "claude"
  },
+ "x:ar:matbakh/profile/notes/2/text": {
+  "t": "Το خ είναι ο ach-Laut σου (Bach)· το ط, το εμφατικό t, είναι καινούργιο.",
+  "src": "4681d8aae25a",
+  "by": "claude"
+ },
+ "x:ar:matbakh/profile/notes/3/text": {
+  "t": "Όπως το kitchen, το مَطْبَخ είναι και μια κουζίνα με την έννοια της μαγειρικής παράδοσης.",
+  "src": "b5d38b806f86",
+  "by": "claude"
+ },
+ "x:ar:matbakh/profile/notes/4/text": {
+  "t": "Όπως το cuisine, το مَطْبَخ είναι και το δωμάτιο και η μαγειρική: الْمَطْبَخُ الْمَغْرِبِيُّ.",
+  "src": "4f55de005f10",
+  "by": "claude"
+ },
+ "x:ar:matbakh/profile/notes/5/text": {
+  "t": "Όπως το cucina, το مَطْبَخ είναι και το δωμάτιο και η μαγειρική.",
+  "src": "452049380820",
+  "by": "claude"
+ },
+ "x:ar:matbakh/profile/notes/6/text": {
+  "t": "Όπως το cocina, το مَطْبَخ είναι και το δωμάτιο και η μαγειρική.",
+  "src": "967668c58814",
+  "by": "claude"
+ },
+ "x:ar:matbakh/profile/notes/7/text": {
+  "t": "Όπως το cozinha, το مَطْبَخ είναι και το δωμάτιο και η μαγειρική.",
+  "src": "5f6af60345c4",
+  "by": "claude"
+ },
  "x:ar:matbakh/profile/notes/8/text": {
   "t": "Όπως η κουζίνα, το مَطْبَخ είναι και το δωμάτιο και η μαγειρική.",
   "src": "8cd1e791d6cb",
+  "by": "claude"
+ },
+ "x:ar:matbakh/profile/notes/9/text": {
+  "t": "Όπως το кухня, το مَطْبَخ είναι και το δωμάτιο και η μαγειρική.",
+  "src": "488fef9770c1",
   "by": "claude"
  },
  "x:ar:hammam/features/meaningForms/none": {
@@ -59219,9 +60214,29 @@
   "src": "5a6eba70165f",
   "by": "claude"
  },
+ "x:ar:hammam/profile/notes/0/text": {
+  "t": "Το αγγλικό hammam είναι το ατμόλουτρο· το αραβικό حَمَّام είναι και ένα συνηθισμένο μπάνιο ή τουαλέτα.",
+  "src": "ba6184eb535c",
+  "by": "claude"
+ },
+ "x:ar:hammam/profile/notes/1/text": {
+  "t": "Το γαλλικό hammam είναι το ατμόλουτρο· το αραβικό حَمَّام είναι και ένα συνηθισμένο μπάνιο ή τουαλέτα.",
+  "src": "86c58c69496a",
+  "by": "claude"
+ },
  "x:ar:hammam/profile/notes/2/text": {
   "t": "Το ελληνικό χαμάμ είναι το ατμόλουτρο· το αραβικό حَمَّام είναι και ένα συνηθισμένο μπάνιο ή τουαλέτα.",
   "src": "30d86f2ff088",
+  "by": "claude"
+ },
+ "x:ar:hammam/profile/notes/3/text": {
+  "t": "Το αλβανικό hamam είναι το ατμόλουτρο· το αραβικό حَمَّام είναι και ένα συνηθισμένο μπάνιο ή τουαλέτα.",
+  "src": "03d883bcc091",
+  "by": "claude"
+ },
+ "x:ar:hammam/profile/notes/4/text": {
+  "t": "Το τουρκικό hamam είναι το ατμόλουτρο· το αραβικό حَمَّام είναι και ένα συνηθισμένο μπάνιο.",
+  "src": "6ad5e852f529",
   "by": "claude"
  },
  "x:ar:ghurfat_nawm/features/root/none": {
@@ -59854,6 +60869,26 @@
   "src": "11c41b770cbb",
   "by": "claude"
  },
+ "x:ar:kanaba/profile/notes/1/text": {
+  "t": "Το γαλλικό canapé είναι η ίδια λέξη, από το αρχαίο κωνωπεῖον, ανάκλιντρο με κουνουπιέρα.",
+  "src": "6aed3393fbd7",
+  "by": "claude"
+ },
+ "x:ar:kanaba/profile/notes/2/text": {
+  "t": "Το ιταλικό canapè είναι η ίδια λέξη, από το αρχαίο κωνωπεῖον, ανάκλιντρο με κουνουπιέρα.",
+  "src": "54995ebe530a",
+  "by": "claude"
+ },
+ "x:ar:kanaba/profile/notes/3/text": {
+  "t": "Το αγγλικό canopy είναι η ίδια λέξη, από το αρχαίο κωνωπεῖον, ανάκλιντρο με κουνουπιέρα.",
+  "src": "216d2100c6e6",
+  "by": "claude"
+ },
+ "x:ar:kanaba/profile/notes/4/text": {
+  "t": "Το *kanepe* είναι η ίδια λέξη, και ο πιθανός δρόμος από τον οποίο μπήκε στα αραβικά: كَنَبَة.",
+  "src": "61aab5f08e2d",
+  "by": "claude"
+ },
  "x:ar:thallaja/features/meaningForms/none": {
   "t": "μία σημασία",
   "src": "b27b98c09fbc",
@@ -59939,9 +60974,24 @@
   "src": "31470427b1e5",
   "by": "claude"
  },
+ "x:ar:thallaja/profile/notes/0/text": {
+  "t": "Το ث είναι το th του «think».",
+  "src": "5e313fc53c96",
+  "by": "claude"
+ },
  "x:ar:thallaja/profile/notes/1/text": {
   "t": "Το ث είναι το ελληνικό θ: θάλασσα.",
   "src": "3e7c3b762d4e",
+  "by": "claude"
+ },
+ "x:ar:thallaja/profile/notes/2/text": {
+  "t": "Το ث είναι το z / c της Ισπανίας: zapato, cero.",
+  "src": "2b7773cb6cb2",
+  "by": "claude"
+ },
+ "x:ar:thallaja/profile/notes/3/text": {
+  "t": "Το ث είναι το αλβανικό th: thikë.",
+  "src": "25595846e571",
   "by": "claude"
  },
  "x:ar:dhahaba/features/governs/0/what": {
@@ -60247,6 +61297,11 @@
  "x:ar:jaa/profile/subtleties/0": {
   "t": "Τα αραβικά ξεχωρίζουν το ذَهَبَ (πηγαίνω, φεύγω από εδώ) και το جَاءَ (έρχομαι, προς τον ομιλητή).",
   "src": "90bb8293272f",
+  "by": "claude"
+ },
+ "x:ar:jaa/profile/notes/0/text": {
+  "t": "Όπως το go και το come: ذَهَبَ και جَاءَ.",
+  "src": "79a647725f51",
   "by": "claude"
  },
  "x:ar:jaa/profile/notes/1/text": {
@@ -60837,6 +61892,16 @@
  "x:ar:safara/profile/subtleties/0": {
   "t": "Το سَافَرَ είναι ταξίδι σε άλλη πόλη ή χώρα· για την καθημερινή διαδρομή ως τη δουλειά χρησιμοποίησε το ذَهَبَ.",
   "src": "e3091dcd3a64",
+  "by": "claude"
+ },
+ "x:ar:safara/profile/notes/0/text": {
+  "t": "Το αγγλικό safari προέρχεται, μέσω της Ανατολικής Αφρικής, από το سَفَر.",
+  "src": "fbe720f7f1a4",
+  "by": "claude"
+ },
+ "x:ar:safara/profile/notes/1/text": {
+  "t": "Το safari (ταξίδι) των σουαχίλι προέρχεται από το αραβικό سَفَر.",
+  "src": "6674b8f3baa4",
   "by": "claude"
  },
  "x:ar:ada/features/governs/0/what": {
@@ -62959,6 +64024,21 @@
   "src": "d7b3ae689b71",
   "by": "claude"
  },
+ "x:ar:ahad/profile/notes/1/text": {
+  "t": "Όπως το domingo πριν από το segunda-feira, η Κυριακή ανοίγει την εβδομάδα: الْأَحَد, «η μία».",
+  "src": "ba30b7a4d184",
+  "by": "claude"
+ },
+ "x:ar:ahad/profile/notes/2/text": {
+  "t": "Το 星期一 είναι η Δευτέρα, αλλά το الْأَحَد («ένα») είναι η Κυριακή: τα αραβικά μετρούν από την Κυριακή.",
+  "src": "332cfa5dc835",
+  "by": "claude"
+ },
+ "x:ar:ahad/profile/notes/3/text": {
+  "t": "Η αραβική εβδομάδα αρχίζει από την Κυριακή: الْأَحَد, «η μία».",
+  "src": "1a3191f95a20",
+  "by": "claude"
+ },
  "x:ar:ithnayn/features/pattern/none": {
   "t": "τύπος δυϊκού: (يَوْمُ) الِاثْنَيْنِ, «(η ημέρα) των δύο»",
   "src": "7d68354a1fc5",
@@ -63079,6 +64159,21 @@
   "src": "1b21bf83c8af",
   "by": "claude"
  },
+ "x:ar:ithnayn/profile/notes/1/text": {
+  "t": "Το segunda-feira, «η δεύτερη μέρα», είναι το الِاثْنَيْن, «οι δύο».",
+  "src": "cb150247cbcf",
+  "by": "claude"
+ },
+ "x:ar:ithnayn/profile/notes/2/text": {
+  "t": "Το الِاثْنَيْن («δύο») είναι η Δευτέρα = 星期一: τα αραβικά μετρούν από την Κυριακή.",
+  "src": "cfca1bf5c0c8",
+  "by": "claude"
+ },
+ "x:ar:ithnayn/profile/notes/3/text": {
+  "t": "Το понедельник είναι «μετά την εβδομάδα (την Κυριακή)»· τα αραβικά μετρούν: الِاثْنَيْن, «οι δύο».",
+  "src": "4072a3745d1c",
+  "by": "claude"
+ },
  "x:ar:thulathaa/features/plurals/none": {
   "t": "όνομα ημέρας, στον ενικό (κάθε Τρίτη: كُلَّ يَوْمِ ثُلَاثَاءَ)",
   "src": "06d3f43ecc29",
@@ -63187,6 +64282,21 @@
  "x:ar:thulathaa/profile/notes/0/text": {
   "t": "Η Τρίτη, «η τρίτη», είναι το الثُّلَاثَاء, από το «τρία».",
   "src": "f2034bd3b69a",
+  "by": "claude"
+ },
+ "x:ar:thulathaa/profile/notes/1/text": {
+  "t": "Το terça-feira, «η τρίτη μέρα», είναι το الثُّلَاثَاء, από το «τρία».",
+  "src": "8eac448913b8",
+  "by": "claude"
+ },
+ "x:ar:thulathaa/profile/notes/2/text": {
+  "t": "Το вторник είναι η «δεύτερη» μέρα, αλλά το الثُّلَاثَاء (από το «τρία») είναι η ίδια Τρίτη: τα αραβικά μετρούν από την Κυριακή.",
+  "src": "5edf2b2d8a8c",
+  "by": "claude"
+ },
+ "x:ar:thulathaa/profile/notes/3/text": {
+  "t": "Το الثُّلَاثَاء (από το «τρία») είναι η Τρίτη = 星期二.",
+  "src": "7e88552194d9",
   "by": "claude"
  },
  "x:ar:arbiaa/features/plurals/none": {
@@ -63304,6 +64414,21 @@
   "src": "164a16eb358b",
   "by": "claude"
  },
+ "x:ar:arbiaa/profile/notes/1/text": {
+  "t": "Το quarta-feira, «η τέταρτη μέρα», είναι το الْأَرْبِعَاء, από το «τέσσερα».",
+  "src": "3f0e6b10c8c2",
+  "by": "claude"
+ },
+ "x:ar:arbiaa/profile/notes/2/text": {
+  "t": "Το среда είναι «η μέση»· το الْأَرْبِعَاء είναι «η τέταρτη».",
+  "src": "d4db13b1437a",
+  "by": "claude"
+ },
+ "x:ar:arbiaa/profile/notes/3/text": {
+  "t": "Το الْأَرْبِعَاء (από το «τέσσερα») είναι η Τετάρτη = 星期三.",
+  "src": "95dde9a2cfde",
+  "by": "claude"
+ },
  "x:ar:khamis/features/plurals/none": {
   "t": "όνομα ημέρας, στον ενικό (κάθε Πέμπτη: كُلَّ يَوْمِ خَمِيسٍ)",
   "src": "a36cc9eb8bd5",
@@ -63412,6 +64537,21 @@
  "x:ar:khamis/profile/notes/0/text": {
   "t": "Η Πέμπτη, «η πέμπτη», είναι το الْخَمِيس, από το «πέντε».",
   "src": "43125aecb1cf",
+  "by": "claude"
+ },
+ "x:ar:khamis/profile/notes/1/text": {
+  "t": "Το quinta-feira, «η πέμπτη μέρα», είναι το الْخَمِيس, από το «πέντε».",
+  "src": "8bb7c8b48264",
+  "by": "claude"
+ },
+ "x:ar:khamis/profile/notes/2/text": {
+  "t": "Το четверг είναι η «τέταρτη» μέρα, αλλά το الْخَمِيس (από το «πέντε») είναι η ίδια Πέμπτη: τα αραβικά μετρούν από την Κυριακή.",
+  "src": "5675a0f75c81",
+  "by": "claude"
+ },
+ "x:ar:khamis/profile/notes/3/text": {
+  "t": "Το الْخَمِيس (από το «πέντε») είναι η Πέμπτη = 星期四.",
+  "src": "02276375aaec",
   "by": "claude"
  },
  "x:ar:jumua/features/plurals/none": {
@@ -63559,9 +64699,24 @@
   "src": "de280d482a64",
   "by": "claude"
  },
+ "x:ar:jumua/profile/notes/0/text": {
+  "t": "Το sexta-feira, «η έκτη μέρα», είναι η Παρασκευή και στην αραβική αρίθμηση — αλλά το όνομά της, الْجُمُعَة, σημαίνει «συνάθροιση».",
+  "src": "008d3f1b2590",
+  "by": "claude"
+ },
+ "x:ar:jumua/profile/notes/1/text": {
+  "t": "Το пятница είναι «η πέμπτη»· η Παρασκευή είναι η έκτη μέρα στην αραβική αρίθμηση και ονομάζεται الْجُمُعَة, «συνάθροιση».",
+  "src": "a73df28477b3",
+  "by": "claude"
+ },
  "x:ar:jumua/profile/notes/2/text": {
   "t": "Η Παρασκευή είναι η «προετοιμασία»· το الْجُمُعَة είναι η «συνάθροιση».",
   "src": "289f67701255",
+  "by": "claude"
+ },
+ "x:ar:jumua/profile/notes/3/text": {
+  "t": "Το 星期五 είναι αριθμός· το الْجُمُعَة είναι «συνάθροιση».",
+  "src": "cbdf95f23b16",
   "by": "claude"
  },
  "x:ar:sabt/features/plurals/none": {
@@ -63677,6 +64832,36 @@
  "x:ar:sabt/profile/notes/0/text": {
   "t": "Το Σάββατο είναι η ίδια λέξη με το السَّبْت.",
   "src": "21a630c42a5b",
+  "by": "claude"
+ },
+ "x:ar:sabt/profile/notes/1/text": {
+  "t": "Το суббота είναι η ίδια λέξη με το السَّبْت.",
+  "src": "9065b6f55adf",
+  "by": "claude"
+ },
+ "x:ar:sabt/profile/notes/2/text": {
+  "t": "Το sábado είναι η ίδια λέξη με το السَّبْت.",
+  "src": "fbabc56aaefc",
+  "by": "claude"
+ },
+ "x:ar:sabt/profile/notes/3/text": {
+  "t": "Το sábado είναι η ίδια λέξη με το السَّبْت.",
+  "src": "fbabc56aaefc",
+  "by": "claude"
+ },
+ "x:ar:sabt/profile/notes/4/text": {
+  "t": "Το sabato είναι η ίδια λέξη με το السَّبْت.",
+  "src": "d8af3ecc1caa",
+  "by": "claude"
+ },
+ "x:ar:sabt/profile/notes/5/text": {
+  "t": "Το samedi ανάγεται στην ίδια λέξη με το السَّبْت.",
+  "src": "9def1969da36",
+  "by": "claude"
+ },
+ "x:ar:sabt/profile/notes/6/text": {
+  "t": "Το e shtunë ανάγεται στην ίδια λέξη με το السَّبْت.",
+  "src": "4de32344deca",
   "by": "claude"
  },
  "x:ar:nihayat_usbu/features/root/none": {
@@ -63797,6 +64982,11 @@
  "x:ar:nihayat_usbu/profile/subtleties/0": {
   "t": "Ποιες μέρες; Στις περισσότερες αραβικές χώρες Παρασκευή και Σάββατο· στο Μαρόκο, στην Τυνησία και στον Λίβανο Σάββατο και Κυριακή.",
   "src": "ca7cc0926e0c",
+  "by": "claude"
+ },
+ "x:ar:nihayat_usbu/profile/notes/0/text": {
+  "t": "Φτιαγμένο όπως το week-end — αλλά με την αραβική σειρά: «τέλος (της) εβδομάδας».",
+  "src": "234b7e3cae19",
   "by": "claude"
  },
  "x:ar:yawm/features/meaningForms/none": {
@@ -64502,6 +65692,16 @@
  "x:ar:bada_zuhr/profile/subtleties/0": {
   "t": "Στα δρομολόγια είναι το μ.μ.· οι πρωινές ώρες είναι قَبْلَ الظُّهْرِ (π.μ.).",
   "src": "bf14a5df8ff0",
+  "by": "claude"
+ },
+ "x:ar:bada_zuhr/profile/notes/0/text": {
+  "t": "Φτιαγμένο όπως το after-noon.",
+  "src": "8df46d4384a3",
+  "by": "claude"
+ },
+ "x:ar:bada_zuhr/profile/notes/1/text": {
+  "t": "Φτιαγμένο όπως το après-midi.",
+  "src": "4808fc3e2320",
   "by": "claude"
  },
  "x:ar:bada_zuhr/profile/notes/4/text": {
