@@ -119,6 +119,13 @@
     return format(tag, key, params);
   }
   const has = (key, tag = state.locale) => source(tag, key)[0] != null;
+  /** The words for an error: a backend answer { code, params, message } or an Error with .code/.params → t('err.' + code),
+      else its (English) message — older servers and unknown codes keep working (docs/i18n.md §6). */
+  function err(e) {
+    if (e == null) return '';
+    const x = e.error && typeof e.error === 'object' ? e.error : e, code = x.code, msg = x.message || (typeof e === 'string' ? e : String(e));
+    return code && has('err.' + code) ? t('err.' + code, x.params || {}) : msg;
+  }
 
   /* ---------- the current locale ---------- */
   /** The last account's settings (a:settings: lang, numerals) — read before any account is open, so the first screen is right. */
@@ -168,7 +175,7 @@
 
   const LANGS = LOCALES.filter(L => !L.pseudo).map(L => [L.tag, L.name]);   // older callers: [[tag, endonym]] (filtered by available() where offered)
   root.NoemaI18n = {
-    t, has, lang, browser, match, chain, use, load, ready, flag, available, onChange: f => listeners.push(f),
+    t, has, err, lang, browser, match, chain, use, load, ready, flag, available, onChange: f => listeners.push(f),
     get locale() { return state.locale; }, get dir() { return (BY[state.locale.toLowerCase()] || BY.en).dir; },
     setDigits: (tag, nu) => { state.digits = { ...state.digits, [tag]: nu }; cache.clear(); },
     fmt, LOCALES, LANGS, missingKeys: () => [...missing], catalogs: CAT,
