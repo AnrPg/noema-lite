@@ -192,7 +192,7 @@
       }
     }
   },
-  "lang.home.session": "Today’s session — {counts}",
+  "lang.home.session": "Today's session — {counts}",
   "@lang.home.session": {
     "description": "The main button of a language course’s home (after ▶): today’s session; {counts} = lang.home.sessionCounts (reviews and new words).",
     "placeholders": {
@@ -1190,7 +1190,7 @@
   "@lang.gram.path": {
     "description": "Heading (after 🛤️) on a language’s overview card: how the language goes through the course steps."
   },
-  "lang.gram.library": "The library of {lang}’s peculiarities",
+  "lang.gram.library": "The library of {lang}'s peculiarities",
   "@lang.gram.library": {
     "description": "Button (after 📚) to a language’s peculiarities. {lang} = language name.",
     "placeholders": {
@@ -2652,7 +2652,7 @@
   "@lang.write.dateWhat": {
     "description": "What the writing set “Dates” asks."
   },
-  "lang.write.help": "Sentences with the words you know ({n, number}); a few new ones are marked 🆕. The course’s stored sentences decide; other answers are judged by the AI with your key and marked “AI-judged”.",
+  "lang.write.help": "Sentences with the words you know ({n, number}); a few new ones are marked 🆕. The course's stored sentences decide; other answers are judged by the AI with your key and marked “AI-judged”.",
   "@lang.write.help": {
     "description": "Explanation on the writing lane. {n} = words known. Keep 🆕. “AI-judged” = lang.prod.aiJudged.",
     "placeholders": {
@@ -3592,7 +3592,7 @@
   "@lang.claude.taskClosed": {
     "description": "Error: the Claude task is no longer open."
   },
-  "lang.claude.fixes": "Claude fixes {n, plural, one {# problem} other {# problems}}…",
+  "lang.claude.fixes": "Claude fixes {n, number} problem(s)…",
   "@lang.claude.fixes": {
     "description": "Log line (after ↻) while Claude repairs its answer.",
     "placeholders": {
@@ -3610,7 +3610,7 @@
   "@lang.claude.notJSON": {
     "description": "Error when the pasted answer is not JSON."
   },
-  "lang.claude.merged": "{n, plural, one {# answer} other {# answers}} from your Claude app merged into your course",
+  "lang.claude.merged": "{n, number} answer(s) from your Claude app merged into your course",
   "@lang.claude.merged": {
     "description": "Toast (after ✨) after answers from the Claude app were merged.",
     "placeholders": {
@@ -3846,7 +3846,7 @@
   "@lang.claude.queueNext": {
     "description": "Button (after 🧱)."
   },
-  "lang.claude.nightQueued": "{n, plural, one {# task queued} other {# tasks queued}} — a scheduled Claude run (or ▶ here) works through them",
+  "lang.claude.nightQueued": "{n, number} task(s) queued — a scheduled Claude run (or ▶ here) works through them",
   "@lang.claude.nightQueued": {
     "description": "Toast (after 🌙).",
     "placeholders": {
@@ -3930,7 +3930,7 @@
   "@lang.claude.copyForApp": {
     "description": "Button (after 💬)."
   },
-  "lang.claude.nMerged": "{n, plural, one {# answer merged} other {# answers merged}}",
+  "lang.claude.nMerged": "{n, number} answer(s) merged",
   "@lang.claude.nMerged": {
     "description": "Log line (after ✓) after fetching answers.",
     "placeholders": {
@@ -4000,7 +4000,7 @@
   "@lang.claude.answerLabel": {
     "description": "Accessible name of the paste box."
   },
-  "lang.claude.problems": "{n, plural, one {# problem} other {# problems}} — give them to Claude to fix:",
+  "lang.claude.problems": "{n, number} problem(s) — give them to Claude to fix:",
   "@lang.claude.problems": {
     "description": "Header (after ❌) of the problems found in a pasted answer.",
     "placeholders": {
@@ -4014,7 +4014,7 @@
   "@lang.claude.checkAdd": {
     "description": "Button (after ✓) of the paste box."
   },
-  "lang.claude.homeWaiting": "Through Claude — {n, plural, one {# task waiting} other {# tasks waiting}}",
+  "lang.claude.homeWaiting": "Through Claude — {n, number} task(s) waiting",
   "@lang.claude.homeWaiting": {
     "description": "Button on the course home (after ✨) when tasks wait.",
     "placeholders": {
@@ -4096,7 +4096,7 @@
       }
     }
   },
-  "lang.speech.noVoiceToast": "No {lang} voice on this device — add one in the system’s speech settings, then reload.",
+  "lang.speech.noVoiceToast": "No {lang} voice on this device — add one in the system's speech settings, then reload.",
   "@lang.speech.noVoiceToast": {
     "description": "Message (after 🔇), once per language, when no voice exists.",
     "placeholders": {
@@ -4350,7 +4350,7 @@
       }
     }
   },
-  "lang.listen.noVoiceLane": "No {lang} voice on this device — listening needs one (add it in the system’s speech settings).",
+  "lang.listen.noVoiceLane": "No {lang} voice on this device — listening needs one (add it in the system's speech settings).",
   "@lang.listen.noVoiceLane": {
     "description": "Listening lane (after 🔇) without a voice.",
     "placeholders": {
