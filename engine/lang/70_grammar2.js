@@ -3,17 +3,18 @@
    contrasts, morphemes and joined sentences), the feasibility light of a function, the 📐 grammar lane (home and
    #/grammar/<lang>), practice blocks that record practiceFunction, and the grammar step of the daily session. */
 const FEAS_LIGHT = { ready: '🟢', thin: '🟡', locked: '🔒', absent: '—' };
-const FN_STATE = { new: '○ new', practicing: '◑ practising', solid: '● solid', mastered: '★ mastered' };
+const FN_SIGN = { new: '○', practicing: '◑', solid: '●', mastered: '★' };
+const FN_STATE = new Proxy({}, { get: (o, s) => typeof s === 'string' && FN_SIGN[s] ? FN_SIGN[s] + ' ' + LT('lang.fn.' + s) : undefined });   // lang.fn.<state>
 const explainAttrs = () => ({ lang: UI.C.explainLang, dir: 'ltr' });
 
 /** The light of one function in one language (§7.3): 🟢 ready · 🟡 thin (n sentences) · 🔒 needs node X. */
 function feasText(c, f) {
-  if (f.state === 'ready') return `🟢 ready${f.usesBank ? ` · ${f.sentences} sentences` : ''}`;
-  if (f.state === 'thin') return `🟡 thin (${f.sentences} sentence${f.sentences === 1 ? '' : 's'})`;
-  if (f.state === 'absent') return '— not in this language';
-  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => `${have}/${need} ${(N.POS_LABEL[pos] || pos).split(' ')[0]}s`);
+  if (f.state === 'ready') return '🟢 ' + (f.usesBank ? LT('lang.feas.readyN', { n: f.sentences }) : LT('lang.feas.ready'));
+  if (f.state === 'thin') return '🟡 ' + LT('lang.feas.thin', { n: f.sentences });
+  if (f.state === 'absent') return '— ' + LT('lang.gram.absent');
+  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => LT('lang.feas.missPos', { have, need, pos: (N.POS_LABEL[pos] || pos).split(' ')[0] }));
   const node = f.unlockBy?.[0] && UI.C.nodes[f.unlockBy[0]];
-  return '🔒 ' + (node ? `needs ${node.step != null ? stepLabel(node) + ' ' : ''}${node.title}` : 'needs more words') + (miss.length ? ` (${miss.join(', ')})` : '');
+  return '🔒 ' + (node ? LT('lang.feas.needsNode', { node: (node.step != null ? stepLabel(node) + ' ' : '') + node.title }) : LT('lang.feas.needsWords')) + (miss.length ? ` (${LLIST(miss)})` : '');
 }
 /** On a grammar card: the light, the state and ▶ practise (not inside a running lesson). */
 function feasibilityBar(c, fid, compact) {
@@ -21,27 +22,26 @@ function feasibilityBar(c, fid, compact) {
   const f = N.feasibility(UI.C, UI.L, c, fid), st = N.functionState(UI.C, UI.L, c, fid);
   const can = (f.state === 'ready' || f.state === 'thin') && !document.querySelector('.lx-session');
   return h('div', { class: 'lx-feas s-' + f.state, 'data-feas': f.state, 'data-fn': fid, 'data-lang': c },
-    h('span', { class: 'lx-light', title: 'Can this point be trained now with the words you know? (§7.3)' }, feasText(c, f)),
+    h('span', { class: 'lx-light', title: LT('lang.feas.title') }, feasText(c, f)),
     h('span', { class: 'lx-badge lx-fnstate' }, FN_STATE[st] || st),
-    can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, fid) }, '▶ Practise') : null,
+    can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, fid) }, '▶ ' + LT('lang.glane.practise')) : null,
     !compact && can ? h('span', { class: 'tiny lx-kinds' }, kindsOf(c, fid)) : null);
 }
-const KIND_NAME = { inflect: 'forms', gender: 'gender', measure: 'measure words', meaning: 'meanings', build: 'building sentences', transform: 'changing sentences', quiz: 'quiz',
-  paradigm: 'tables', analyze: 'analysing forms', morph: 'pieces of words', root: 'roots and patterns', agree: 'agreement', contrast: 'contrasts', parse: 'word roles',
-  gloss: 'glosses', proofread: 'finding mistakes', combine: 'joining sentences', word: 'words' };
+const KIND_KEYS = ['inflect', 'gender', 'measure', 'meaning', 'build', 'transform', 'quiz', 'paradigm', 'analyze', 'morph', 'root', 'agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'word'];
+const KIND_NAME = new Proxy({}, { get: (o, k) => KIND_KEYS.includes(k) ? LT('lang.kind.' + k) : undefined });   // lang.kind.<kind>
 function kindsOf(c, fid) {
   const kinds = uniq(N.exercises(UI.C, UI.L, c, fid, { auto: true, max: 60 }).map(it => it.kind));
-  return kinds.length ? 'Exercises: ' + kinds.map(k => KIND_NAME[k] || k).join(' · ') : '';
+  return kinds.length ? LT('lang.glane.exercises', { kinds: kinds.map(k => KIND_NAME[k] || k).join(' · ') }) : '';
 }
 
 /* ---------- widgets (exItem → WIDGETS[it.type]) ---------- */
 function fbBox(ok, it) { return h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ ' : '❌ ', wordsIn(it.lang, it.why || '')); }
 function checkRow(onCheck, onReveal) {
-  return h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn primary lx-check', onclick: onCheck }, 'Check ✓'), h('button', { class: 'btn small ghost lx-reveal', onclick: onReveal }, 'Show me'));
+  return h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn primary lx-check', onclick: onCheck }, LT('lang.ex.check') + ' ✓'), h('button', { class: 'btn small ghost lx-reveal', onclick: onReveal }, LT('lang.ex.showMe')));
 }
 /** A choice inside a sentence or a row: a native select (keyboard and screen readers work), foreign options in their script. */
 function selectFor(slot, { foreign, c, label }) {
-  const s = h('select', { class: 'lx-sel', 'aria-label': label || 'choose', ...(foreign ? { lang: c, dir: dirOf(c) } : explainAttrs()) },
+  const s = h('select', { class: 'lx-sel', 'aria-label': label || LT('lang.ex.choose'), ...(foreign ? { lang: c, dir: dirOf(c) } : explainAttrs()) },
     slot.value == null ? h('option', { value: '' }, '…') : null, ...slot.options.map(o => h('option', { value: o }, foreign && LX(c).language.vowelMarks && UI.prefs.marks === false ? N.stripMarks(c, o) : o)));
   s.value = slot.value ?? '';
   return s;
@@ -58,7 +58,7 @@ WIDGETS.slots = (it, done) => {
   const c = it.lang, X = LX(c), box = h('div', { class: 'lx-ex lx-exslots', 'data-kind': it.kind }), un = it.unknown || [];
   noteNew(c, un);
   box.append(h('div', { class: 'lx-q' }, wordsIn(c, it.ask)));
-  if (it.kind === 'analyze') box.append(h('div', { class: 'lx-prompt' }, word(c, it.prompt, { sub: false })), it.fixed ? h('div', { class: 'tiny lx-fixed' }, 'Given: ', it.fixed) : null);
+  if (it.kind === 'analyze') box.append(h('div', { class: 'lx-prompt' }, word(c, it.prompt, { sub: false })), it.fixed ? h('div', { class: 'tiny lx-fixed' }, LT('lang.ex.given') + ' ', it.fixed) : null);
   if (it.kind === 'agree') box.append(h('div', { class: 'lx-src' }, X.sentenceById[it.sentences?.[0]] ? sentenceView(c, X.sentenceById[it.sentences[0]], un) : word(c, it.source, { sub: false })), h('div', { class: 'tiny' }, it.sourceGloss, ' → ', h('b', {}, it.gloss)));
   else if (it.gloss) box.append(h('div', { class: 'tiny lx-tr' }, '“', it.gloss, '”'));
   const sels = [], foreign = FOREIGN_SLOTS(it);
@@ -105,10 +105,11 @@ WIDGETS.slots = (it, done) => {
 /** The tags of a gloss line, spelled out (ACC = accusative …). */
 function legend(it) {
   const tags = uniq(it.units.filter(u => u.slot).flatMap(u => u.slot.options).flatMap(o => o.split('.').slice(1))).filter(t => /^[A-Z0-9]+$/.test(t));
-  const lab = { NOM: 'nominative', ACC: 'accusative', DAT: 'dative', GEN: 'genitive', SG: 'singular', PL: 'plural', DU: 'dual', COLL: 'collective', MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter',
-    DEF: 'definite', INDF: 'indefinite', PRS: 'present', PST: 'past', FUT: 'future', IND: 'indicative', SBJV: 'subjunctive', JUS: 'jussive', IMP: 'imperative', NFIN: 'infinitive', PTCP: 'participle',
-    CONST: 'construct state', STRG: 'strong ending', WEAK: 'weak ending', MIX: 'mixed ending', CMPR: 'comparative', SPRL: 'superlative', PFV: 'perfective', IPFV: 'imperfective', FORM: 'formal', INFM: 'informal', 1: '1st person', 2: '2nd person', 3: '3rd person' };
-  return tags.length ? '🔤 ' + tags.map(t => `${t} = ${lab[t] || t}`).join(' · ') : '';
+  // the names of the gloss tags are explanations: they follow the course's explanation language (lang.expl.tag.<TAG>)
+  const TAGS = ['NOM', 'ACC', 'DAT', 'GEN', 'SG', 'PL', 'DU', 'COLL', 'MASC', 'FEM', 'NEUT', 'DEF', 'INDF', 'PRS', 'PST', 'FUT', 'IND', 'SBJV', 'JUS', 'IMP', 'NFIN', 'PTCP',
+    'CONST', 'STRG', 'WEAK', 'MIX', 'CMPR', 'SPRL', 'PFV', 'IPFV', 'FORM', 'INFM', '1', '2', '3'];
+  const lab = t => TAGS.includes(t) ? LE('lang.expl.tag.' + t) : t;
+  return tags.length ? '🔤 ' + tags.map(t => `${t} = ${lab(t)}`).join(' · ') : '';
 }
 /* paradigm: a table with hidden cells */
 WIDGETS.table = (it, done) => {
@@ -134,7 +135,7 @@ WIDGETS.table = (it, done) => {
 WIDGETS.proofread = (it, done) => {
   const c = it.lang, X = LX(c), box = h('div', { class: 'lx-ex lx-exproof', 'data-kind': it.kind }), un = it.unknown || [];
   noteNew(c, un);
-  box.append(h('div', { class: 'lx-q' }, 'One word is wrong — tap it, then fix it.'), h('div', { class: 'tiny lx-tr' }, '“', it.gloss, '”'));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.proofAsk')), h('div', { class: 'tiny lx-tr' }, '“', it.gloss, '”'));
   const line = h('div', { class: 'lx-proofline', lang: c, dir: dirOf(c) }), sp = X.language.tokenJoin !== 'none';
   let over = false, at = null;
   const btns = it.units.map((u, i) => u.p ? h('span', { lang: c }, u.t) : h('button', { class: 'lx-pword' + (u.l && un.includes(u.l) ? ' lx-new' : ''), lang: c, 'data-i': i, title: u.l && un.includes(u.l) ? '🆕 ' + gloss(c, u.l) : '', onclick: () => pick(i) },
@@ -152,11 +153,11 @@ WIDGETS.proofread = (it, done) => {
     if (i !== it.wrongAt) { btns[i].classList.add('wrong'); btns[it.wrongAt].classList.add('right'); return end(false, i, null); }
     btns[i].classList.add('found');
     const opts = it.fix.options.map(o => ({ label: word(c, o, { sub: false }), v: o, ok: it.fix.accept.includes(N.nfc(o)) }));
-    box.insertBefore(h('div', { class: 'lx-q' }, 'The right form?'), box.querySelector('.lx-checkrow'));
+    box.insertBefore(h('div', { class: 'lx-q' }, LT('lang.ex.rightForm')), box.querySelector('.lx-checkrow'));
     box.insertBefore(options(opts, (o, b, wrap) => { const r = N.checkProofread(it, i, o.v); b.classList.add(r.ok ? 'right' : 'wrong'); if (!r.ok) markOpts(wrap, j => opts[j].ok); end(r.ok, i, o.v); }), box.querySelector('.lx-checkrow'));
     setTimeout(() => box.querySelector('.lx-opts .lx-opt')?.focus(), 30);
   }
-  box.append(h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn small ghost lx-reveal', onclick: () => { if (over) return; btns[it.wrongAt].classList.add('right'); end(false, null, null); } }, 'Show me')));
+  box.append(h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn small ghost lx-reveal', onclick: () => { if (over) return; btns[it.wrongAt].classList.add('right'); end(false, null, null); } }, LT('lang.ex.showMe'))));
   setTimeout(() => btns.find(b => b.tagName === 'BUTTON')?.focus(), 30);
   return box;
 };
@@ -172,13 +173,13 @@ WIDGETS.contrast = (it, done) => {
 /* morph_build and combine: tiles, as when building a sentence */
 WIDGETS.morph = (it, done) => {
   const box = exBuild({ ...it, type: 'build' }, done); box.dataset.kind = 'morph';
-  const q = box.querySelector('.lx-q'); if (q) q.textContent = 'Put the pieces together, in order:';
+  const q = box.querySelector('.lx-q'); if (q) q.textContent = LT('lang.ex.morphAsk');
   const p = box.querySelector('.lx-prompt'); if (p) { p.innerHTML = ''; p.append(...wordsIn(it.lang, it.gloss)); }
   return box;
 };
 WIDGETS.combine = (it, done) => {
   const c = it.lang, X = LX(c), box = exBuild({ ...it, type: 'build' }, done); box.dataset.kind = 'combine';
-  const q = box.querySelector('.lx-q'); if (q) q.textContent = `Join the two sentences into one with “${it.connector}” (${it.connectorGloss}):`;
+  const q = box.querySelector('.lx-q'); if (q) q.textContent = LT('lang.ex.combineAsk', { connector: it.connector, gloss: it.connectorGloss });
   const srcs = h('ol', { class: 'lx-list lx-sources' }, ...(it.sentences || []).slice(0, 2).map((id, i) => h('li', {}, X.sentenceById[id] ? sentenceView(c, X.sentenceById[id], it.unknown || []) : word(c, it.sources[i], { sub: false }), h('div', { class: 'tiny' }, it.sourceGlosses?.[i] || ''))));
   q?.after(srcs);
   return box;
@@ -188,22 +189,22 @@ function toast(msg) { document.querySelector('.lx-toast')?.remove(); const t = h
 /* ---------- practice blocks: items of one or more functions, every answer recorded (practiceFunction) ---------- */
 function practiseFn(c, fid) {
   const items = N.exercises(UI.C, UI.L, c, fid, { auto: true, max: 10 });
-  if (!items.length) return toast('Nothing to practise yet with the words you know.');
+  if (!items.length) return toast(LT('lang.glane.nothing'));
   runPractice(items, { title: `${info(c).flag} ${UI.C.functions[fid]?.title || fid}`, back: innerHash() || '#/', again: () => practiseFn(c, fid) });
 }
 function practiseMixed(c) {
   const fids = N.grammarLane(UI.C, UI.L, c).filter(x => x.state !== 'mastered' && ['ready', 'thin'].includes(x.feasibility.state)).map(x => x.fn);
   const items = N.practiceBlock(UI.C, UI.L, c, shuffle(fids).slice(0, 6), { max: 12 });
-  if (!items.length) return toast('Nothing to practise yet with the words you know.');
-  runPractice(items, { title: `${info(c).flag} 📐 Mixed grammar`, back: innerHash() || '#/', again: () => practiseMixed(c) });
+  if (!items.length) return toast(LT('lang.glane.nothing'));
+  runPractice(items, { title: `${info(c).flag} 📐 ` + LT('lang.glane.mixedTitle'), back: innerHash() || '#/', again: () => practiseMixed(c) });
 }
 function runPractice(items, { title, back = '#/', again = null }) {
   metNew.clear();
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-practice' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-practice' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const queue = items.map(it => ({ it })), byFn = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
-  const nextBtn = () => { const b = h('button', { class: 'btn primary lx-next' }, 'Next →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
+  const nextBtn = () => { const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
     bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
     const a = queue.shift(); if (!a) return finish();
@@ -219,15 +220,15 @@ function runPractice(items, { title, back = '#/', again = null }) {
     };
     const ex = exItem(a.it, done);
     Object.assign(ex.dataset, { kind: a.it.kind, lang: a.it.lang });
-    stage.append(h('div', { class: 'tiny lx-which' }, info(a.it.lang).flag, ' ', info(a.it.lang).name, ' · ', UI.C.functions[a.it.fn]?.title || '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(a.it.lang).flag, ' ', info(a.it.lang).name, ' · ', UI.C.functions[a.it.fn]?.title || '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   }
   function finish() {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = ''; UI.current = null;
     const rows = Object.values(byFn);
-    stage.append(h('div', { class: 'lx-result lx-practicedone' }, h('h2', {}, '📐 Practice done'),
-      h('ul', { class: 'lx-list' }, ...rows.map(R => h('li', { 'data-fn': R.fn, 'data-lang': R.lang }, info(R.lang).flag, ' ', UI.C.functions[R.fn]?.title || R.fn, `: ${R.c}/${R.n} — `, FN_STATE[N.functionState(UI.C, UI.L, R.lang, R.fn)]))),
+    stage.append(h('div', { class: 'lx-result lx-practicedone' }, h('h2', {}, '📐 ' + LT('lang.glane.done')),
+      h('ul', { class: 'lx-list' }, ...rows.map(R => h('li', { 'data-fn': R.fn, 'data-lang': R.lang }, info(R.lang).flag, ' ', UI.C.functions[R.fn]?.title || R.fn, `: ${LNUM(R.c)}/${LNUM(R.n)} — `, FN_STATE[N.functionState(UI.C, UI.L, R.lang, R.fn)]))),
       newWordsList(),
-      h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ Again') : null, h('button', { class: 'btn', onclick: () => go(back) }, 'Back'))));
+      h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => go(back) }, LT('lang.card.back')))));
   }
   document.onkeydown = e => {
     if (!$('.lx-practice')) { document.onkeydown = null; return; }
@@ -243,34 +244,34 @@ function laneRow(c, x) {
     h('div', { class: 'lx-lanetitle' }, h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn)}/${c}`) }, x.title),
       x.lesson && UI.C.nodes[x.lesson]?.step != null ? h('span', { class: 'lx-step' }, stepLabel(UI.C.nodes[x.lesson])) : null),
     h('div', { class: 'lx-lanemeta' }, h('span', { class: 'lx-badge lx-fnstate' }, FN_STATE[x.state]), h('span', { class: 'lx-light' }, feasText(c, x.feasibility)),
-      can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, x.fn) }, '▶ Practise') : null));
+      can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, x.fn) }, '▶ ' + LT('lang.glane.practise')) : null));
 }
 const toPractise = lane => lane.filter(x => x.state !== 'mastered' && ['ready', 'thin'].includes(x.feasibility.state)).sort((a, b) => ['practicing', 'new', 'solid'].indexOf(a.state) - ['practicing', 'new', 'solid'].indexOf(b.state));
 /** On the home: per language, what the open lessons teach, how far each point is and what can be practised now. */
 function grammarLaneHome() {
-  const box = h('section', { class: 'lx-glane' }, h('h2', { class: 'lx-h2' }, '📐 Grammar lane'));
+  const box = h('section', { class: 'lx-glane' }, h('h2', { class: 'lx-h2' }, '📐 ' + LT('lang.glane.title')));
   let any = false;
   for (const c of activeLangs()) {
     const lane = N.grammarLane(UI.C, UI.L, c); if (!lane.length) continue;
     any = true;
     const n = s => lane.filter(x => x.state === s).length, ready = toPractise(lane);
     box.append(h('div', { class: 'lx-card lx-laneh', 'data-lang': c },
-      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, `${lane.length} point${lane.length === 1 ? '' : 's'} · ${FN_STATE.new} ${n('new')} · ${FN_STATE.practicing} ${n('practicing')} · ${FN_STATE.solid} ${n('solid')} · ${FN_STATE.mastered} ${n('mastered')}`),
-        h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ Mixed practice') : null,
-        h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, 'All →')),
+      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).label), h('span', { class: 'tiny' }, [LT('lang.glane.points', { n: lane.length }), ...['new', 'practicing', 'solid', 'mastered'].map(s => `${FN_STATE[s]} ${LNUM(n(s))}`)].join(' · ')),
+        h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null,
+        h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, LT('lang.glane.all') + ' →')),
       ...ready.slice(0, 3).map(x => laneRow(c, x))));
   }
-  if (!any) box.append(h('p', { class: 'tiny' }, 'The grammar of your lessons appears here once a lesson is open.'));
+  if (!any) box.append(h('p', { class: 'tiny' }, LT('lang.glane.empty')));
   return box;
 }
 VIEWS.grammar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, lane = N.grammarLane(UI.C, UI.L, c);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '📐 Grammar', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+    h('h1', {}, '📐 ' + LT('lang.view.grammar'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/grammar/' + x); }),
-      toPractise(lane).length ? h('button', { class: 'btn primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ Mixed practice') : null),
-    h('p', { class: 'tiny' }, 'The points of your open lessons. 🟢 ready · 🟡 thin (few sentences with your words yet) · 🔒 needs a lesson or words first. Practising records how sure you are: new → practising → solid → mastered.'));
-  if (!lane.length) return v.append(h('p', { class: 'lx-note' }, `No lesson is open yet in ${info(c).name}.`));
+      toPractise(lane).length ? h('button', { class: 'btn primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null),
+    h('p', { class: 'tiny' }, LT('lang.glane.help')));
+  if (!lane.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.glane.noLesson', { lang: info(c).name })));
   v.append(h('div', { class: 'lx-lane' }, ...lane.map(x => laneRow(c, x))));
 };
 

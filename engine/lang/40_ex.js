@@ -23,7 +23,7 @@ function exRecognize(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-exrec' });
   const right = gloss(c, lid);
   const opts = shuffle([{ label: right, ok: true }, ...uniq(neighbours(c, lid, 8).map(x => gloss(c, x.id))).filter(g => g && g !== right).slice(0, 3).map(g => ({ label: g }))]);
-  box.append(h('div', { class: 'lx-q' }, 'What does it mean?'), h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.whatMeans')), h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
     options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
   return box;
 }
@@ -32,7 +32,7 @@ const hasPic = (c, lid) => { const cid = (LX(c).lex[lid].senses || [])[0], con =
 function exPicture(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-expic' });
   const opts = shuffle([{ id: lid, ok: true }, ...neighbours(c, lid, 8).filter(x => x.lemma !== me.lemma).slice(0, 3).map(x => ({ id: x.id }))]);
-  box.append(h('div', { class: 'lx-q' }, `What is it in ${info(c).name}?`), h('div', { class: 'lx-prompt' }, conceptPic(me.senses[0], 'lx-bigemoji')));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.whatIsIt', { lang: info(c).name })), h('div', { class: 'lx-prompt' }, conceptPic(me.senses[0], 'lx-bigemoji')));
   box.append(options(opts.map(o => ({ ...o, label: word(c, X.lex[o.id].lemma, { sub: false }) })), (o, b, wrap) => {
     b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
   return box;
@@ -41,7 +41,7 @@ function exPicture(c, lid, done) {
 function exProduce(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-exprod' });
   const cid = (me.senses || [])[0];
-  box.append(h('div', { class: 'lx-q' }, `In ${info(c).name}?`), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptPic(cid, 'lx-exemoji') : '', ' ', gloss(c, lid)));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.inLang', { lang: info(c).name })), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptPic(cid, 'lx-exemoji') : '', ' ', gloss(c, lid)));
   const parts = clusters(me.lemma).filter(t => t.trim());   // multi-word words: the spaces are not tiles
   const afterWord = ok => extraCheck(c, lid, box, ok2 => { feedback(box, ok && ok2, c, lid); done(ok && ok2); }, ok);
   if (parts.length > 14) {
@@ -60,7 +60,7 @@ function exProduce(c, lid, done) {
   };
   tiles.forEach(tile => pool.append(h('button', { class: 'lx-tile1', onclick: e => { if (over || e.currentTarget.disabled) return; built.push(tile); e.currentTarget.disabled = true; e.currentTarget.dataset.used = built.length; drawSlot(); if (built.length === parts.length) check(); } }, tile.t === ' ' ? '␣' : tile.t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; built.pop(); const b = [...pool.children].find(x => +x.dataset.used === built.length + 1); if (b) { b.disabled = false; delete b.dataset.used; } drawSlot(); } }, '⌫');
-  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); afterWord(false); } } }, 'Show me');
+  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); afterWord(false); } } }, LT('lang.ex.showMe'));
   // typing is allowed too, in every script (keyboards, pinyin, umlauts: 90_script.js); ar / he once the letters are known
   const typed = produceTyping(c, lid, (ok, t) => { if (over) return; over = true; slot.textContent = t; slot.classList.add(ok ? 'right' : 'wrong'); [...pool.children].forEach(b => b.disabled = true); afterWord(ok); });
   drawSlot();
@@ -72,14 +72,14 @@ function extraCheck(c, lid, box, done, wordOk) {
   const me = LX(c).lex[lid];
   if (c === 'de' && me.pos === 'NOUN' && me.gender && me.class !== 'plt') {
     const right = { MASC: 'der', FEM: 'die', NEUT: 'das' }[me.gender], opts = ['der', 'die', 'das'].map(a => ({ label: a, ok: a === right }));
-    box.append(h('div', { class: 'lx-q' }, wordOk ? 'And its article?' : 'Its article?'), options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
+    box.append(h('div', { class: 'lx-q' }, LT(wordOk ? 'lang.ex.andArticle' : 'lang.ex.article')), options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
     return;
   }
   if (c === 'zh' && me.pos === 'NOUN' && me.measure?.length) {
     const clf = Object.values(LX(c).lex).filter(x => x.pos === 'CLF').map(x => x.lemma);
     const right = me.measure[0], wrongs = shuffle(clf.filter(m => !me.measure.includes(m))).slice(0, 3);
     const opts = shuffle([{ label: '一' + right, ok: true }, ...wrongs.map(m => ({ label: '一' + m }))]);
-    box.append(h('div', { class: 'lx-q' }, 'Which measure word? (one …)'), options(opts.map(o => ({ ...o, label: word(c, o.label, { sub: false }) })), (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
+    box.append(h('div', { class: 'lx-q' }, LT('lang.ex.measure')), options(opts.map(o => ({ ...o, label: word(c, o.label, { sub: false }) })), (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
     return;
   }
   done(true);
@@ -89,12 +89,12 @@ function exIntro(c, lid, done) {
   const X = LX(c), me = X.lex[lid], card = N.wordCard(UI.C, UI.L, c, lid);
   const e1 = card.examples[0];
   const box = h('div', { class: 'lx-ex lx-intro' },
-    h('div', { class: 'lx-q' }, `New in ${info(c).flag} ${info(c).name}`),
+    h('div', { class: 'lx-q' }, LT('lang.ex.newIn', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
     h('div', { class: 'lx-meaning' }, me.senses?.[0] ? conceptPic(me.senses[0], 'lx-exemoji') : '', ' ', card.gloss),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     e1 ? h('div', { class: 'lx-ex1' }, word(c, e1.text, { sub: false }), h('div', { class: 'tiny' }, e1.tr)) : null,
     card.sections.find(s => s.key === 'pitfalls') ? h('div', { class: 'lx-warn tiny' }, '⚠️ ', card.sections.find(s => s.key === 'pitfalls').items[0]) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, 'Got it →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, LT('lang.ex.gotIt') + ' →')));
   return box;
 }

@@ -10,25 +10,25 @@ VIEWS.lesson = (v, r) => {
   const c = langs.includes(UI.lang) ? UI.lang : langs[0], X = LX(c), k = N.known(UI.C, UI.L, c);
   const st = Object.fromEntries(langs.map(x => [x, N.nodeStates(UI.C, UI.L, x)[nid]]));
   const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(st[x]));
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
     h('h1', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', n.title),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
-      ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ` · ${Math.round(UI.L.langs[x].checks[nid].best * 100)} %` : ''))),
+      ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
     h('div', { class: 'row lx-actions' },
-      can.length ? h('button', { class: 'btn primary', onclick: () => runLesson(nid, can) }, '▶ ' + (can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'Practise' : 'Learn') + ' — ' + can.map(x => info(x).flag).join(' ')) : h('span', { class: 'lx-note' }, '🔒 Pass the lesson before it first.'),
-      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ Lesson check') : null, deepenButton(nid, c)));
+      can.length ? h('button', { class: 'btn primary', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
+      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (fns.includes('fn.overview')) v.append(typologyCard());
-  v.append(h('h2', { class: 'lx-h2' }, '📖 Grammar in ', info(c).name), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
+  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
   // the same step in the other languages: their own extra points (D10)
   const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);
-  if (extra.length) v.append(h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 At this step your other languages also learn: '),
+  if (extra.length) v.append(h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 ' + LT('lang.lesson.othersLearn') + ' '),
     h('ul', { class: 'lx-list' }, ...extra.map(([x, f]) => h('li', {}, info(x).flag, ' ', ...f.map(fid => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(fid)}/${x}`) }, UI.C.functions[fid]?.title || fid)))))));
   if (n.concepts.length || (X.byNode[nid] || []).length) {
     const grid = h('div', { class: 'lx-cgrid' });
     for (const cid of n.concepts) grid.append(conceptTile(c, { cid }, k));
     for (const id of (X.byNode[nid] || []).filter(id => !(X.lex[id].senses || []).length)) grid.append(conceptTile(c, { lex: id }, k));
-    v.append(h('h2', { class: 'lx-h2' }, '🔤 Words ', h('span', { class: 'tiny' }, n.concepts.length)), grid);
+    v.append(h('h2', { class: 'lx-h2' }, '🔤 ' + LT('lang.lanes.sec.words') + ' ', h('span', { class: 'tiny' }, LNUM(n.concepts.length))), grid);
   }
 };
 
@@ -59,10 +59,10 @@ function runLesson(nid, langs, { checkOnly = false } = {}) {
 function runQueue(queue, { nid, langs, title }) {
   metNew.clear();   // the 🆕 words of this run, listed at the end (D19)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
-  const nextBtn = (label = 'Next →') => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
+  const nextBtn = (label = LT('lang.drill.next') + ' →') => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
     bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
     const a = queue.shift(); if (!a) return finish();
@@ -70,7 +70,7 @@ function runQueue(queue, { nid, langs, title }) {
     if (a.kind === 'screen') {
       if (a.make) stage.append(a.make());
       else { let cur = a.langs[0] || langs[0]; const holder = h('div'); const draw = () => { holder.innerHTML = ''; holder.append(grammarCard(cur, a.fn, { compact: true, onPick: x => { cur = x; draw(); } })); }; draw(); stage.append(a.langs.length > 1 ? flagRail(null, cur, x => { cur = x; draw(); }) : null, holder); }
-      return nextBtn('Got it →');
+      return nextBtn(LT('lang.ex.gotIt') + ' →');
     }
     if (a.kind === 'drills') {   // expand into exercises now that the words are known
       const items = [];
@@ -86,8 +86,8 @@ function runQueue(queue, { nid, langs, title }) {
         for (const it of its) items.push({ kind: 'item', it, check: true });
       }
       if (!items.length) return finish();
-      stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '✔ The lesson check'), h('p', {}, `${items.length} questions in ${uniq(items.map(x => x.it.lang)).map(c => info(c).flag).join(' ')} — 80 % in a language passes the lesson there.`)));
-      queue.unshift(...shuffle(items)); total += items.length; return nextBtn('Start →');
+      stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '✔ ' + LT('lang.lesson.theCheck')), h('p', {}, LT('lang.lesson.checkIntro', { n: items.length, flags: uniq(items.map(x => x.it.lang)).map(c => info(c).flag).join(' ') }))));
+      queue.unshift(...shuffle(items)); total += items.length; return nextBtn(LT('lang.lesson.start') + ' →');
     }
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
@@ -107,18 +107,18 @@ function runQueue(queue, { nid, langs, title }) {
     const ex = a.kind === 'item' ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     const lang = a.lang || a.it.lang;
     Object.assign(ex.dataset, { kind: a.kind === 'item' ? a.it.kind : a.kind, lang, ...(a.check ? { check: '1' } : {}) });
-    stage.append(h('div', { class: 'tiny lx-which' }, info(lang).flag, ' ', info(lang).name, a.check ? ' · lesson check' : '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(lang).flag, ' ', info(lang).label, a.check ? ' · ' + LT('lang.lesson.checkTag') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   }
   function finish() {
     for (const [c, R] of Object.entries(results)) N.recordCheck(UI.C, UI.L, c, nid, R.n ? R.c / R.n : 0, day);
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
     const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]]));
-    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 Lesson check done' : '🎉 Well done'),
-      h('p', {}, `${stats.introduced} new words · ${stats.right} right · ${stats.wrong} to practise again`),
-      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, !['passed', 'known', 'mastered'].includes(st[c]) ? 'not yet (80 % passes)' : R.c / R.n >= N.PASS ? '✔ passed' : `✔ passed before (best ${Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100)} %) — practise it again`))) : null,
-      langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, 'More words of this lesson are waiting — continue when you are ready.') : null,
+    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 ' + LT('lang.lesson.checkDone') : '🎉 ' + LT('lang.lesson.wellDone')),
+      h('p', {}, LT('lang.lesson.stats', { nNew: stats.introduced, right: stats.right, wrong: stats.wrong })),
+      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).label, ': ' + LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ', !['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })))) : null,
+      langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, LT('lang.lesson.moreWaiting')) : null,
       newWordsList(),
-      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
+      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, LT('lang.lesson.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
   }
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }

@@ -33,21 +33,42 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 const $ = (s, r = document) => r.querySelector(s);
+/* ---------- the three languages (docs/i18n.md §1): the UI language (menus, buttons, labels, messages: the catalog i18n/lang/, keys
+   lang.*) · the course's speaker language (UI.C.explainLang: the course's own explanations come from its data; the few explanations
+   this code writes itself are lang.expl.* and follow it when it is a UI locale) · the learned languages (never translated) ---------- */
+const LT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+const LE = (k, p) => !window.NoemaI18n ? k : UI.C?.explainLang && NoemaI18n.match(UI.C.explainLang) ? NoemaI18n.t(k, p, UI.C.explainLang) : NoemaI18n.t(k, p);
+/** A list in the UI locale (“a, b, c” in English, as the course always wrote it; “a, b и c” in Russian …). */
+const LLIST = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.fmt.list(items.map(String)) : items.join(', ');
+/** A message with elements inside (a link, a bold word): LTE('lang.x', { link: element, n: 3 }) → [text, element, text …], the
+    element where the message puts its placeholder (ICU formats the rest). */
+const LTE = (k, p = {}) => {
+  const els = {}, q = {};
+  for (const [n, v] of Object.entries(p)) if (typeof Node !== 'undefined' && v instanceof Node) { els[n] = v; q[n] = '\u0001' + n + '\u0001'; } else q[n] = v;
+  return LT(k, q).split('\u0001').map((x, i) => i % 2 ? (els[x] || x) : x).filter(x => x !== '');
+};
+/** A language's name for a lang.expl.* message: in the language that message is shown in (the explanation language when it is a UI locale). */
+const explName = code => { try { const loc = window.NoemaI18n && UI.C?.explainLang && NoemaI18n.match(UI.C.explainLang) ? UI.C.explainLang : (window.NoemaI18n?.locale || 'en'); return new Intl.DisplayNames([loc, 'en'], { type: 'language' }).of(code) || code; } catch (e) { return code; } };
+/** A number in the UI locale's digits. */
+const LNUM = n => window.NoemaI18n ? NoemaI18n.fmt.number(n) : String(n);
 const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [b[i], b[j]] = [b[j], b[i]]; } return b; };
 const uniq = a => [...new Set(a)];
 
 /* ---------- languages: names, flags, scripts ---------- */
-const LANG_INFO = {
-  ar: { flag: '🇸🇦', name: 'Arabic', font: "'Noto Naskh Arabic'" }, he: { flag: '🇮🇱', name: 'Hebrew', font: "'Noto Sans Hebrew'" },
-  zh: { flag: '🇨🇳', name: 'Chinese', font: "'Noto Sans SC'" }, de: { flag: '🇩🇪', name: 'German' }, el: { flag: '🇬🇷', name: 'Greek' },
-  en: { flag: '🇬🇧', name: 'English' }, ru: { flag: '🇷🇺', name: 'Russian' }, tr: { flag: '🇹🇷', name: 'Turkish' }, hi: { flag: '🇮🇳', name: 'Hindi' },
-  fr: { flag: '🇫🇷', name: 'French' }, es: { flag: '🇪🇸', name: 'Spanish' }, it: { flag: '🇮🇹', name: 'Italian' }, ja: { flag: '🇯🇵', name: 'Japanese' },
+const LANG_INFO = {   // the names come from Intl in the UI language (uiLangName)
+  ar: { flag: '🇸🇦', font: "'Noto Naskh Arabic'" }, he: { flag: '🇮🇱', font: "'Noto Sans Hebrew'" },   // i18n-ignore
+  zh: { flag: '🇨🇳', font: "'Noto Sans SC'" }, de: { flag: '🇩🇪' }, el: { flag: '🇬🇷' },   // i18n-ignore
+  en: { flag: '🇬🇧' }, ru: { flag: '🇷🇺' }, tr: { flag: '🇹🇷' }, hi: { flag: '🇮🇳' },
+  fr: { flag: '🇫🇷' }, es: { flag: '🇪🇸' }, it: { flag: '🇮🇹' }, ja: { flag: '🇯🇵' },
   pt: { flag: '🇵🇹' }, ko: { flag: '🇰🇷' }, fa: { flag: '🇮🇷' }, nl: { flag: '🇳🇱' }, pl: { flag: '🇵🇱' }, sw: { flag: '🇹🇿' }, vi: { flag: '🇻🇳' }, uk: { flag: '🇺🇦' }, fi: { flag: '🇫🇮' }, hu: { flag: '🇭🇺' },
 };
-/** A language's English name for codes without an entry above (Intl knows them all). */
+/** A language's name in the UI language (Intl knows them all; English when the runtime is missing). */
 const LANG_DN = (() => { try { return new Intl.DisplayNames(['en'], { type: 'language' }); } catch (e) { return null; } })();
 const langDisplay = code => { try { return LANG_DN?.of(code) || code; } catch (e) { return code; } };
-const info = code => ({ flag: '🏳️', name: langDisplay(code), ...(LANG_INFO[code] || {}), ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
+const uiLangName = code => window.NoemaI18n ? NoemaI18n.fmt.langName(code) : langDisplay(code);
+/** A language: its flag, its name in the UI language (name: inside a sentence) and as a label of its own (label: “Arabe”, not “arabe”). */
+const capFirst = s => { const a = [...String(s || '')]; return a.length ? (window.NoemaI18n ? NoemaI18n.fmt.upper(a[0]) : a[0].toUpperCase()) + a.slice(1).join('') : ''; };
+const info = code => ({ flag: '🏳️', ...(LANG_INFO[code] || {}), name: uiLangName(code), get label() { return capFirst(this.name); }, ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
 const LX = code => UI.C.lang[code];
 const SUB_EMOJI = { root: '🥕', bulb: '🧅', stem: '🌿', leafy: '🥬', brassica: '🥦', fruitveg: '🍅', cucurbit: '🎃', legume: '🫛', flower: '🌸', sea: '🌊', pron: '👤', verb: '🏃', func: '🔤' };
 const conceptEmoji = cid => SUB_EMOJI[UI.C.concepts[cid]?.subgroup] || '🔹';
@@ -74,7 +95,9 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
 /** The learner's languages (D18); without = the language on screen, which is never “familiar” from itself. */
 const knowsL = (without = null) => (UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }))).filter(k => (k.code || k) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
-const langName = code => code?.startsWith('type:') ? `${code.slice(5)} languages` : code?.startsWith('family:') ? `${code.slice(7)} languages` : (profileOf(code)?.name || info(code).name || code);
+/** A learner's language by name: a group (type:… / family:…), else the course profile's (English) name in an English UI, else the UI language's name. */
+const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) })
+  : (() => { const ui = info(code).name; return (!window.NoemaI18n || NoemaI18n.locale === 'en' || ui === code) && profileOf(code)?.name || ui || code; })();   // Intl without a name: the profile's
 /** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
 function sentenceView(c, s, unknown = []) {
   if (!s?.tokens) return word(c, s?.text || '', { sub: false });
@@ -99,10 +122,10 @@ function wordPopup(c, lid) {
 /** Words met before they were learned (D19): remembered per session, listed at the end of a lesson. */
 const metNew = new Map();
 function noteNew(c, ids) { for (const l of ids || []) metNew.set(c + '|' + l, { c, l }); }
-function newWordsList(title = '🆕 Words you met before learning them') {
+function newWordsList(title = '🆕 ' + LT('lang.base.metBefore')) {
   if (!metNew.size) return null;
   const items = [...metNew.values()];
-  return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + items.length)),
+  return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + LNUM(items.length))),
     h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l)))));
 }
 /** What a word means, in the explanation language. */
@@ -110,7 +133,9 @@ function gloss(code, lid) {
   const x = LX(code).lex[lid], c = (x.senses || [])[0];
   return c ? UI.C.concepts[c]?.gloss || c : (x.role || '');
 }
-const STATE_LABEL = { locked: '🔒 locked', ready: '○ new', seen: '◔ seen', learning: '◑ learning', known_r: '◕ known (reading)', known_p: '● known', mastered: '★ mastered', absent: '— no word', unprepared: '⏳ not written yet', open: '○ open', known: '● known', skipped: '⤼ skipped', passed: '✔ passed', na: '—' };
+/** The state of a word or a step: its sign + its name in the UI language (STATE_LABEL[state], read at draw time). */
+const STATE_SIGN = { locked: '🔒', ready: '○', seen: '◔', learning: '◑', known_r: '◕', known_p: '●', mastered: '★', absent: '—', unprepared: '⏳', open: '○', known: '●', skipped: '⤼', passed: '✔' };
+const STATE_LABEL = new Proxy({}, { get: (o, s) => s === 'na' ? '—' : typeof s === 'string' && STATE_SIGN[s] ? STATE_SIGN[s] + ' ' + LT('lang.state.' + s) : undefined });
 
 /* ---------- learner state: one storage key per (language, node) and per (language, function) ---------- */
 const P = () => `noema1:${UI.acc}:s:lang:${UI.id}:`;
