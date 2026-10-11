@@ -261,7 +261,9 @@
    "id": "typology-sources", "prefix": "ts", "scope": "typology", "files": "*.json", "at": "", "key": "_", "facade": "typology",
    "fields": [
     { "path": "sources/*", "kind": "author-only" },
-    { "path": "about", "kind": "author-only" }
+    { "path": "about", "kind": "author-only" },
+    { "path": "supported/*", "kind": "author-only" },
+    { "path": "types/*", "kind": "author-only" }
    ]
   },
   {
