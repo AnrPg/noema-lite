@@ -1,0 +1,1167 @@
+{
+  "@@locale": "en",
+  "char.hedge.name": "Prickles",
+  "@char.hedge.name": {
+    "description": "The tutor’s name: Prickles — a cute explorer hedgehog (animal group); gender: male. The English name: “Prickles” = a hedgehog’s spines (Greek has «Αγκαθούλης», from αγκάθι “thorn”). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.hedge.nameNom": "Prickles",
+  "@char.hedge.nameNom": {
+    "description": "The tutor’s name Prickles (a cute explorer hedgehog) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.hedge.name."
+  },
+  "char.hedge.nameAcc": "Prickles",
+  "@char.hedge.nameAcc": {
+    "description": "The tutor’s name Prickles (a cute explorer hedgehog) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.hedge.name."
+  },
+  "char.hedge.nameTo": "Prickles",
+  "@char.hedge.nameTo": {
+    "description": "The tutor’s name Prickles (a cute explorer hedgehog) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.hedge.name."
+  },
+  "char.hedge.title": "Explorer hedgehog",
+  "@char.hedge.title": {
+    "description": "Character: Explorer hedgehog (the tutor Prickles, a cute explorer hedgehog). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.hedge.short": "Hedgehog",
+  "@char.hedge.short": {
+    "description": "Character: Explorer hedgehog (the tutor Prickles, a cute explorer hedgehog). The short form of its title, one or two words (“Explorer hedgehog” → “Hedgehog”)."
+  },
+  "char.hedge.world": "The forest path",
+  "@char.hedge.world": {
+    "description": "Character: Explorer hedgehog (the tutor Prickles, a cute explorer hedgehog). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Explorer hedgehog · The forest path”. A short noun phrase, sentence case."
+  },
+  "char.hedge.place": "Deep forest",
+  "@char.hedge.place": {
+    "description": "Character: Explorer hedgehog (the tutor Prickles, a cute explorer hedgehog). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.hedge.coll": "Your tree",
+  "@char.hedge.coll": {
+    "description": "Character: Explorer hedgehog (the tutor Prickles, a cute explorer hedgehog). Name of the learner’s collection on Progress (the picture fills with one leaf per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.hedge.item": "leaf",
+  "@char.hedge.item": {
+    "description": "Character: Explorer hedgehog (the tutor Prickles, a cute explorer hedgehog). One item of the collection “Your tree” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.owl.name": "Hootie",
+  "@char.owl.name": {
+    "description": "The tutor’s name: Hootie — a cute treasure-hunting owlet (animal group); gender: female. The English name: “Hootie” comes from an owl’s hoot. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.owl.nameNom": "Hootie",
+  "@char.owl.nameNom": {
+    "description": "The tutor’s name Hootie (a cute treasure-hunting owlet) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.owl.name."
+  },
+  "char.owl.nameAcc": "Hootie",
+  "@char.owl.nameAcc": {
+    "description": "The tutor’s name Hootie (a cute treasure-hunting owlet) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.owl.name."
+  },
+  "char.owl.nameTo": "Hootie",
+  "@char.owl.nameTo": {
+    "description": "The tutor’s name Hootie (a cute treasure-hunting owlet) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.owl.name."
+  },
+  "char.owl.title": "Treasure-hunter owlet",
+  "@char.owl.title": {
+    "description": "Character: Treasure-hunter owlet (the tutor Hootie, a cute treasure-hunting owlet). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.owl.short": "Owlet",
+  "@char.owl.short": {
+    "description": "Character: Treasure-hunter owlet (the tutor Hootie, a cute treasure-hunting owlet). The short form of its title, one or two words (“Treasure-hunter owlet” → “Owlet”)."
+  },
+  "char.owl.world": "The tower of books",
+  "@char.owl.world": {
+    "description": "Character: Treasure-hunter owlet (the tutor Hootie, a cute treasure-hunting owlet). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Treasure-hunter owlet · The tower of books”. A short noun phrase, sentence case."
+  },
+  "char.owl.place": "The map room",
+  "@char.owl.place": {
+    "description": "Character: Treasure-hunter owlet (the tutor Hootie, a cute treasure-hunting owlet). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.owl.coll": "Your library",
+  "@char.owl.coll": {
+    "description": "Character: Treasure-hunter owlet (the tutor Hootie, a cute treasure-hunting owlet). Name of the learner’s collection on Progress (the picture fills with one book per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.owl.item": "book",
+  "@char.owl.item": {
+    "description": "Character: Treasure-hunter owlet (the tutor Hootie, a cute treasure-hunting owlet). One item of the collection “Your library” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.axo.name": "Axie",
+  "@char.axo.name": {
+    "description": "The tutor’s name: Axie — a cute axolotl living in the deep sea (animal group); gender: female. The English name: “Axie” is a pet form of “axolotl”. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.axo.nameNom": "Axie",
+  "@char.axo.nameNom": {
+    "description": "The tutor’s name Axie (a cute axolotl living in the deep sea) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.axo.name."
+  },
+  "char.axo.nameAcc": "Axie",
+  "@char.axo.nameAcc": {
+    "description": "The tutor’s name Axie (a cute axolotl living in the deep sea) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.axo.name."
+  },
+  "char.axo.nameTo": "Axie",
+  "@char.axo.nameTo": {
+    "description": "The tutor’s name Axie (a cute axolotl living in the deep sea) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.axo.name."
+  },
+  "char.axo.title": "Axolotl of the deep",
+  "@char.axo.title": {
+    "description": "Character: Axolotl of the deep (the tutor Axie, a cute axolotl living in the deep sea). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.axo.short": "Axolotl",
+  "@char.axo.short": {
+    "description": "Character: Axolotl of the deep (the tutor Axie, a cute axolotl living in the deep sea). The short form of its title, one or two words (“Axolotl of the deep” → “Axolotl”)."
+  },
+  "char.axo.world": "The coral reef",
+  "@char.axo.world": {
+    "description": "Character: Axolotl of the deep (the tutor Axie, a cute axolotl living in the deep sea). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Axolotl of the deep · The coral reef”. A short noun phrase, sentence case."
+  },
+  "char.axo.place": "The coral garden",
+  "@char.axo.place": {
+    "description": "Character: Axolotl of the deep (the tutor Axie, a cute axolotl living in the deep sea). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.axo.coll": "Your reef",
+  "@char.axo.coll": {
+    "description": "Character: Axolotl of the deep (the tutor Axie, a cute axolotl living in the deep sea). Name of the learner’s collection on Progress (the picture fills with one pearl per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.axo.item": "pearl",
+  "@char.axo.item": {
+    "description": "Character: Axolotl of the deep (the tutor Axie, a cute axolotl living in the deep sea). One item of the collection “Your reef” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.dragon.name": "Ember",
+  "@char.dragon.name": {
+    "description": "The tutor’s name: Ember — a cute little crystal dragon (animal group); gender: male. The English name: “Ember” = a glowing spark of a fire. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.dragon.nameNom": "Ember",
+  "@char.dragon.nameNom": {
+    "description": "The tutor’s name Ember (a cute little crystal dragon) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.dragon.name."
+  },
+  "char.dragon.nameAcc": "Ember",
+  "@char.dragon.nameAcc": {
+    "description": "The tutor’s name Ember (a cute little crystal dragon) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.dragon.name."
+  },
+  "char.dragon.nameTo": "Ember",
+  "@char.dragon.nameTo": {
+    "description": "The tutor’s name Ember (a cute little crystal dragon) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.dragon.name."
+  },
+  "char.dragon.title": "Crystal dragonling",
+  "@char.dragon.title": {
+    "description": "Character: Crystal dragonling (the tutor Ember, a cute little crystal dragon). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.dragon.short": "Dragonling",
+  "@char.dragon.short": {
+    "description": "Character: Crystal dragonling (the tutor Ember, a cute little crystal dragon). The short form of its title, one or two words (“Crystal dragonling” → “Dragonling”)."
+  },
+  "char.dragon.world": "The cave of gems",
+  "@char.dragon.world": {
+    "description": "Character: Crystal dragonling (the tutor Ember, a cute little crystal dragon). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Crystal dragonling · The cave of gems”. A short noun phrase, sentence case."
+  },
+  "char.dragon.place": "The crystal cave",
+  "@char.dragon.place": {
+    "description": "Character: Crystal dragonling (the tutor Ember, a cute little crystal dragon). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.dragon.coll": "Your hoard",
+  "@char.dragon.coll": {
+    "description": "Character: Crystal dragonling (the tutor Ember, a cute little crystal dragon). Name of the learner’s collection on Progress (the picture fills with one gem per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.dragon.item": "gem",
+  "@char.dragon.item": {
+    "description": "Character: Crystal dragonling (the tutor Ember, a cute little crystal dragon). One item of the collection “Your hoard” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.alien.name": "Zib",
+  "@char.alien.name": {
+    "description": "The tutor’s name: Zib — a cute alien engineer from a space station (animal group); gender: male. The English name: “Zib” is a short, made-up, alien-sounding name (Russian «Винтик» “little screw”, French «Bidule» “gizmo”). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.alien.nameNom": "Zib",
+  "@char.alien.nameNom": {
+    "description": "The tutor’s name Zib (a cute alien engineer from a space station) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.alien.name."
+  },
+  "char.alien.nameAcc": "Zib",
+  "@char.alien.nameAcc": {
+    "description": "The tutor’s name Zib (a cute alien engineer from a space station) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.alien.name."
+  },
+  "char.alien.nameTo": "Zib",
+  "@char.alien.nameTo": {
+    "description": "The tutor’s name Zib (a cute alien engineer from a space station) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.alien.name."
+  },
+  "char.alien.title": "Alien engineer",
+  "@char.alien.title": {
+    "description": "Character: Alien engineer (the tutor Zib, a cute alien engineer from a space station). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.alien.short": "Alien",
+  "@char.alien.short": {
+    "description": "Character: Alien engineer (the tutor Zib, a cute alien engineer from a space station). The short form of its title, one or two words (“Alien engineer” → “Alien”)."
+  },
+  "char.alien.world": "The space station",
+  "@char.alien.world": {
+    "description": "Character: Alien engineer (the tutor Zib, a cute alien engineer from a space station). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Alien engineer · The space station”. A short noun phrase, sentence case."
+  },
+  "char.alien.place": "The ring of Saturn",
+  "@char.alien.place": {
+    "description": "Character: Alien engineer (the tutor Zib, a cute alien engineer from a space station). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.alien.coll": "Your solar system",
+  "@char.alien.coll": {
+    "description": "Character: Alien engineer (the tutor Zib, a cute alien engineer from a space station). Name of the learner’s collection on Progress (the picture fills with one planet per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.alien.item": "planet",
+  "@char.alien.item": {
+    "description": "Character: Alien engineer (the tutor Zib, a cute alien engineer from a space station). One item of the collection “Your solar system” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.bear.name": "Captain Honeypaw",
+  "@char.bear.name": {
+    "description": "The tutor’s name: Captain Honeypaw — a cute pirate bear cub (animal group); gender: male. The English name: a pirate captain’s title + honey + paw. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.bear.nameNom": "Captain Honeypaw",
+  "@char.bear.nameNom": {
+    "description": "The tutor’s name Captain Honeypaw (a cute pirate bear cub) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.bear.name."
+  },
+  "char.bear.nameAcc": "Captain Honeypaw",
+  "@char.bear.nameAcc": {
+    "description": "The tutor’s name Captain Honeypaw (a cute pirate bear cub) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.bear.name."
+  },
+  "char.bear.nameTo": "Captain Honeypaw",
+  "@char.bear.nameTo": {
+    "description": "The tutor’s name Captain Honeypaw (a cute pirate bear cub) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.bear.name."
+  },
+  "char.bear.title": "Pirate bear cub",
+  "@char.bear.title": {
+    "description": "Character: Pirate bear cub (the tutor Captain Honeypaw, a cute pirate bear cub). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.bear.short": "Bear cub",
+  "@char.bear.short": {
+    "description": "Character: Pirate bear cub (the tutor Captain Honeypaw, a cute pirate bear cub). The short form of its title, one or two words (“Pirate bear cub” → “Bear cub”)."
+  },
+  "char.bear.world": "Treasure island",
+  "@char.bear.world": {
+    "description": "Character: Pirate bear cub (the tutor Captain Honeypaw, a cute pirate bear cub). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Pirate bear cub · Treasure island”. A short noun phrase, sentence case."
+  },
+  "char.bear.place": "Pirates’ cove",
+  "@char.bear.place": {
+    "description": "Character: Pirate bear cub (the tutor Captain Honeypaw, a cute pirate bear cub). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.bear.coll": "Your chest",
+  "@char.bear.coll": {
+    "description": "Character: Pirate bear cub (the tutor Captain Honeypaw, a cute pirate bear cub). Name of the learner’s collection on Progress (the picture fills with one gold coin per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.bear.item": "gold coin",
+  "@char.bear.item": {
+    "description": "Character: Pirate bear cub (the tutor Captain Honeypaw, a cute pirate bear cub). One item of the collection “Your chest” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.fruit.name": "Clemmie",
+  "@char.fruit.name": {
+    "description": "The tutor’s name: Clemmie — a cute little mandarin (a fruit with a face; animal group); gender: free to choose (Greek masculine, Russian and French feminine). The English name: “Clemmie” is a pet form of “clementine”. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.fruit.nameNom": "Clemmie",
+  "@char.fruit.nameNom": {
+    "description": "The tutor’s name Clemmie (a cute little mandarin) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.fruit.name."
+  },
+  "char.fruit.nameAcc": "Clemmie",
+  "@char.fruit.nameAcc": {
+    "description": "The tutor’s name Clemmie (a cute little mandarin) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.fruit.name."
+  },
+  "char.fruit.nameTo": "Clemmie",
+  "@char.fruit.nameTo": {
+    "description": "The tutor’s name Clemmie (a cute little mandarin) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.fruit.name."
+  },
+  "char.fruit.title": "Little mandarin",
+  "@char.fruit.title": {
+    "description": "Character: Little mandarin (the tutor Clemmie, a cute little mandarin). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.fruit.short": "Mandarin",
+  "@char.fruit.short": {
+    "description": "Character: Little mandarin (the tutor Clemmie, a cute little mandarin). The short form of its title, one or two words (“Little mandarin” → “Mandarin”)."
+  },
+  "char.fruit.world": "The sunny orchard",
+  "@char.fruit.world": {
+    "description": "Character: Little mandarin (the tutor Clemmie, a cute little mandarin). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Little mandarin · The sunny orchard”. A short noun phrase, sentence case."
+  },
+  "char.fruit.place": "The great orchard",
+  "@char.fruit.place": {
+    "description": "Character: Little mandarin (the tutor Clemmie, a cute little mandarin). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.fruit.coll": "Your fruit salad",
+  "@char.fruit.coll": {
+    "description": "Character: Little mandarin (the tutor Clemmie, a cute little mandarin). Name of the learner’s collection on Progress (the picture fills with one fruit per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.fruit.item": "fruit",
+  "@char.fruit.item": {
+    "description": "Character: Little mandarin (the tutor Clemmie, a cute little mandarin). One item of the collection “Your fruit salad” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.knight.name": "Sir Pip",
+  "@char.knight.name": {
+    "description": "The tutor’s name: Sir Pip — a cute little knight, a child in armour (animal group); gender: male. The English name: the knight’s title “Sir” + “Pip”, a small one. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.knight.nameNom": "Sir Pip",
+  "@char.knight.nameNom": {
+    "description": "The tutor’s name Sir Pip (a cute little knight, a child in armour) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.knight.name."
+  },
+  "char.knight.nameAcc": "Sir Pip",
+  "@char.knight.nameAcc": {
+    "description": "The tutor’s name Sir Pip (a cute little knight, a child in armour) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.knight.name."
+  },
+  "char.knight.nameTo": "Sir Pip",
+  "@char.knight.nameTo": {
+    "description": "The tutor’s name Sir Pip (a cute little knight, a child in armour) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.knight.name."
+  },
+  "char.knight.title": "Little knight",
+  "@char.knight.title": {
+    "description": "Character: Little knight (the tutor Sir Pip, a cute little knight, a child in armour). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.knight.short": "Knight",
+  "@char.knight.short": {
+    "description": "Character: Little knight (the tutor Sir Pip, a cute little knight, a child in armour). The short form of its title, one or two words (“Little knight” → “Knight”)."
+  },
+  "char.knight.world": "The castle on the hill",
+  "@char.knight.world": {
+    "description": "Character: Little knight (the tutor Sir Pip, a cute little knight, a child in armour). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Little knight · The castle on the hill”. A short noun phrase, sentence case."
+  },
+  "char.knight.place": "The castle courtyard",
+  "@char.knight.place": {
+    "description": "Character: Little knight (the tutor Sir Pip, a cute little knight, a child in armour). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.knight.coll": "Your banners",
+  "@char.knight.coll": {
+    "description": "Character: Little knight (the tutor Sir Pip, a cute little knight, a child in armour). Name of the learner’s collection on Progress (the picture fills with one banner per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.knight.item": "banner",
+  "@char.knight.item": {
+    "description": "Character: Little knight (the tutor Sir Pip, a cute little knight, a child in armour). One item of the collection “Your banners” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.berry.name": "Berrie",
+  "@char.berry.name": {
+    "description": "The tutor’s name: Berrie — a cute strawberry girl (animal group); gender: female. The English name: “Berrie” comes from “strawberry”. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.berry.nameNom": "Berrie",
+  "@char.berry.nameNom": {
+    "description": "The tutor’s name Berrie (a cute strawberry girl) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.berry.name."
+  },
+  "char.berry.nameAcc": "Berrie",
+  "@char.berry.nameAcc": {
+    "description": "The tutor’s name Berrie (a cute strawberry girl) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.berry.name."
+  },
+  "char.berry.nameTo": "Berrie",
+  "@char.berry.nameTo": {
+    "description": "The tutor’s name Berrie (a cute strawberry girl) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.berry.name."
+  },
+  "char.berry.title": "Strawberry girl",
+  "@char.berry.title": {
+    "description": "Character: Strawberry girl (the tutor Berrie, a cute strawberry girl). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.berry.short": "Strawberry",
+  "@char.berry.short": {
+    "description": "Character: Strawberry girl (the tutor Berrie, a cute strawberry girl). The short form of its title, one or two words (“Strawberry girl” → “Strawberry”)."
+  },
+  "char.berry.world": "The strawberry garden",
+  "@char.berry.world": {
+    "description": "Character: Strawberry girl (the tutor Berrie, a cute strawberry girl). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Strawberry girl · The strawberry garden”. A short noun phrase, sentence case."
+  },
+  "char.berry.place": "The strawberry fair",
+  "@char.berry.place": {
+    "description": "Character: Strawberry girl (the tutor Berrie, a cute strawberry girl). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.berry.coll": "Your strawberry basket",
+  "@char.berry.coll": {
+    "description": "Character: Strawberry girl (the tutor Berrie, a cute strawberry girl). Name of the learner’s collection on Progress (the picture fills with one strawberry per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.berry.item": "strawberry",
+  "@char.berry.item": {
+    "description": "Character: Strawberry girl (the tutor Berrie, a cute strawberry girl). One item of the collection “Your strawberry basket” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.hood.name": "Little Red Riding Hood",
+  "@char.hood.name": {
+    "description": "The tutor’s name: Little Red Riding Hood — Little Red Riding Hood, the girl of the fairy tale; gender: female. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea); a fairy-tale character takes the name its tale has in your language. Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.hood.nameNom": "Little Red Riding Hood",
+  "@char.hood.nameNom": {
+    "description": "The tutor’s name Little Red Riding Hood (Little Red Riding Hood, the girl of the fairy tale) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.hood.name."
+  },
+  "char.hood.nameAcc": "Little Red Riding Hood",
+  "@char.hood.nameAcc": {
+    "description": "The tutor’s name Little Red Riding Hood (Little Red Riding Hood, the girl of the fairy tale) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.hood.name."
+  },
+  "char.hood.nameTo": "Little Red Riding Hood",
+  "@char.hood.nameTo": {
+    "description": "The tutor’s name Little Red Riding Hood (Little Red Riding Hood, the girl of the fairy tale) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.hood.name."
+  },
+  "char.hood.title": "Little Red Riding Hood",
+  "@char.hood.title": {
+    "description": "Character: Little Red Riding Hood (the tutor Little Red Riding Hood, Little Red Riding Hood, the girl of the fairy tale). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.hood.short": "Red Riding Hood",
+  "@char.hood.short": {
+    "description": "Character: Little Red Riding Hood (the tutor Little Red Riding Hood, Little Red Riding Hood, the girl of the fairy tale). The short form of its title, one or two words (“Little Red Riding Hood” → “Red Riding Hood”)."
+  },
+  "char.hood.world": "The path to Grandma’s",
+  "@char.hood.world": {
+    "description": "Character: Little Red Riding Hood (the tutor Little Red Riding Hood, Little Red Riding Hood, the girl of the fairy tale). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Little Red Riding Hood · The path to Grandma’s”. A short noun phrase, sentence case."
+  },
+  "char.hood.place": "The strawberry clearing",
+  "@char.hood.place": {
+    "description": "Character: Little Red Riding Hood (the tutor Little Red Riding Hood, Little Red Riding Hood, the girl of the fairy tale). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.hood.coll": "Your basket",
+  "@char.hood.coll": {
+    "description": "Character: Little Red Riding Hood (the tutor Little Red Riding Hood, Little Red Riding Hood, the girl of the fairy tale). Name of the learner’s collection on Progress (the picture fills with one flower per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.hood.item": "flower",
+  "@char.hood.item": {
+    "description": "Character: Little Red Riding Hood (the tutor Little Red Riding Hood, Little Red Riding Hood, the girl of the fairy tale). One item of the collection “Your basket” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.piglet.name": "Bricksy",
+  "@char.piglet.name": {
+    "description": "The tutor’s name: Bricksy — the builder piglet of “The Three Little Pigs”, the one who builds the brick house; gender: male. The English name: “Bricksy” comes from “bricks” (Russian and French use the tale’s name «Наф-Наф» / «Naf-Naf»). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea); a fairy-tale character takes the name its tale has in your language. Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.piglet.nameNom": "Bricksy",
+  "@char.piglet.nameNom": {
+    "description": "The tutor’s name Bricksy (the builder piglet of “The Three Little Pigs”, the one who builds the brick house) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.piglet.name."
+  },
+  "char.piglet.nameAcc": "Bricksy",
+  "@char.piglet.nameAcc": {
+    "description": "The tutor’s name Bricksy (the builder piglet of “The Three Little Pigs”, the one who builds the brick house) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.piglet.name."
+  },
+  "char.piglet.nameTo": "Bricksy",
+  "@char.piglet.nameTo": {
+    "description": "The tutor’s name Bricksy (the builder piglet of “The Three Little Pigs”, the one who builds the brick house) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.piglet.name."
+  },
+  "char.piglet.title": "Builder piglet",
+  "@char.piglet.title": {
+    "description": "Character: Builder piglet (the tutor Bricksy, the builder piglet of “The Three Little Pigs”, the one who builds the brick house). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.piglet.short": "Piglet",
+  "@char.piglet.short": {
+    "description": "Character: Builder piglet (the tutor Bricksy, the builder piglet of “The Three Little Pigs”, the one who builds the brick house). The short form of its title, one or two words (“Builder piglet” → “Piglet”)."
+  },
+  "char.piglet.world": "The brick house",
+  "@char.piglet.world": {
+    "description": "Character: Builder piglet (the tutor Bricksy, the builder piglet of “The Three Little Pigs”, the one who builds the brick house). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Builder piglet · The brick house”. A short noun phrase, sentence case."
+  },
+  "char.piglet.place": "The second floor",
+  "@char.piglet.place": {
+    "description": "Character: Builder piglet (the tutor Bricksy, the builder piglet of “The Three Little Pigs”, the one who builds the brick house). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.piglet.coll": "Your house",
+  "@char.piglet.coll": {
+    "description": "Character: Builder piglet (the tutor Bricksy, the builder piglet of “The Three Little Pigs”, the one who builds the brick house). Name of the learner’s collection on Progress (the picture fills with one brick per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.piglet.item": "brick",
+  "@char.piglet.item": {
+    "description": "Character: Builder piglet (the tutor Bricksy, the builder piglet of “The Three Little Pigs”, the one who builds the brick house). One item of the collection “Your house” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.candy.name": "Hansel and Gretel",
+  "@char.candy.name": {
+    "description": "The tutor’s name: Hansel and Gretel — Hansel and Gretel, the brother and sister of the fairy tale — TWO characters; gender: plural (a boy and a girl; verbs about them are in the plural). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea); a fairy-tale character takes the name its tale has in your language. The name stands for two characters: the interface uses it with plural verbs. Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short.",
+    "x-plural": true
+  },
+  "char.candy.nameNom": "Hansel and Gretel",
+  "@char.candy.nameNom": {
+    "description": "The tutor’s name Hansel and Gretel (Hansel and Gretel, the brother and sister of the fairy tale — TWO characters) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.candy.name. The name stands for two characters: the interface uses it with plural verbs.",
+    "x-plural": true
+  },
+  "char.candy.nameAcc": "Hansel and Gretel",
+  "@char.candy.nameAcc": {
+    "description": "The tutor’s name Hansel and Gretel (Hansel and Gretel, the brother and sister of the fairy tale — TWO characters) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.candy.name. The name stands for two characters: the interface uses it with plural verbs.",
+    "x-plural": true
+  },
+  "char.candy.nameTo": "Hansel and Gretel",
+  "@char.candy.nameTo": {
+    "description": "The tutor’s name Hansel and Gretel (Hansel and Gretel, the brother and sister of the fairy tale — TWO characters) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.candy.name. The name stands for two characters: the interface uses it with plural verbs.",
+    "x-plural": true
+  },
+  "char.candy.title": "Hansel and Gretel",
+  "@char.candy.title": {
+    "description": "Character: Hansel and Gretel (the tutor Hansel and Gretel, Hansel and Gretel, the brother and sister of the fairy tale — TWO characters). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.candy.short": "Hansel & Gretel",
+  "@char.candy.short": {
+    "description": "Character: Hansel and Gretel (the tutor Hansel and Gretel, Hansel and Gretel, the brother and sister of the fairy tale — TWO characters). The short form of its title, one or two words (“Hansel and Gretel” → “Hansel & Gretel”)."
+  },
+  "char.candy.world": "The gingerbread house",
+  "@char.candy.world": {
+    "description": "Character: Hansel and Gretel (the tutor Hansel and Gretel, Hansel and Gretel, the brother and sister of the fairy tale — TWO characters). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Hansel and Gretel · The gingerbread house”. A short noun phrase, sentence case."
+  },
+  "char.candy.place": "The forest of crumbs",
+  "@char.candy.place": {
+    "description": "Character: Hansel and Gretel (the tutor Hansel and Gretel, Hansel and Gretel, the brother and sister of the fairy tale — TWO characters). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.candy.coll": "Your sugar house",
+  "@char.candy.coll": {
+    "description": "Character: Hansel and Gretel (the tutor Hansel and Gretel, Hansel and Gretel, the brother and sister of the fairy tale — TWO characters). Name of the learner’s collection on Progress (the picture fills with one sweet per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.candy.item": "sweet",
+  "@char.candy.item": {
+    "description": "Character: Hansel and Gretel (the tutor Hansel and Gretel, Hansel and Gretel, the brother and sister of the fairy tale — TWO characters). One item of the collection “Your sugar house” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.jack.name": "Jack",
+  "@char.jack.name": {
+    "description": "The tutor’s name: Jack — Jack of the fairy tale “Jack and the Beanstalk”; gender: male. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea); a fairy-tale character takes the name its tale has in your language. Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.jack.nameNom": "Jack",
+  "@char.jack.nameNom": {
+    "description": "The tutor’s name Jack (Jack of the fairy tale “Jack and the Beanstalk”) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.jack.name."
+  },
+  "char.jack.nameAcc": "Jack",
+  "@char.jack.nameAcc": {
+    "description": "The tutor’s name Jack (Jack of the fairy tale “Jack and the Beanstalk”) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.jack.name."
+  },
+  "char.jack.nameTo": "Jack",
+  "@char.jack.nameTo": {
+    "description": "The tutor’s name Jack (Jack of the fairy tale “Jack and the Beanstalk”) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.jack.name."
+  },
+  "char.jack.title": "Jack and the beanstalk",
+  "@char.jack.title": {
+    "description": "Character: Jack and the beanstalk (the tutor Jack, Jack of the fairy tale “Jack and the Beanstalk”). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.jack.short": "Jack",
+  "@char.jack.short": {
+    "description": "Character: Jack and the beanstalk (the tutor Jack, Jack of the fairy tale “Jack and the Beanstalk”). The short form of its title, one or two words (“Jack and the beanstalk” → “Jack”)."
+  },
+  "char.jack.world": "The beanstalk to the clouds",
+  "@char.jack.world": {
+    "description": "Character: Jack and the beanstalk (the tutor Jack, Jack of the fairy tale “Jack and the Beanstalk”). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Jack and the beanstalk · The beanstalk to the clouds”. A short noun phrase, sentence case."
+  },
+  "char.jack.place": "The castle in the clouds",
+  "@char.jack.place": {
+    "description": "Character: Jack and the beanstalk (the tutor Jack, Jack of the fairy tale “Jack and the Beanstalk”). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.jack.coll": "Your beanstalk",
+  "@char.jack.coll": {
+    "description": "Character: Jack and the beanstalk (the tutor Jack, Jack of the fairy tale “Jack and the Beanstalk”). Name of the learner’s collection on Progress (the picture fills with one leaf per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.jack.item": "leaf",
+  "@char.jack.item": {
+    "description": "Character: Jack and the beanstalk (the tutor Jack, Jack of the fairy tale “Jack and the Beanstalk”). One item of the collection “Your beanstalk” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.frog.name": "Prince Ribbit",
+  "@char.frog.name": {
+    "description": "The tutor’s name: Prince Ribbit — the frog prince of the fairy tale; gender: male. The English name: “Ribbit” is the sound a frog makes. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea); a fairy-tale character takes the name its tale has in your language. Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.frog.nameNom": "Prince Ribbit",
+  "@char.frog.nameNom": {
+    "description": "The tutor’s name Prince Ribbit (the frog prince of the fairy tale) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.frog.name."
+  },
+  "char.frog.nameAcc": "Prince Ribbit",
+  "@char.frog.nameAcc": {
+    "description": "The tutor’s name Prince Ribbit (the frog prince of the fairy tale) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.frog.name."
+  },
+  "char.frog.nameTo": "Prince Ribbit",
+  "@char.frog.nameTo": {
+    "description": "The tutor’s name Prince Ribbit (the frog prince of the fairy tale) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.frog.name."
+  },
+  "char.frog.title": "The frog prince",
+  "@char.frog.title": {
+    "description": "Character: The frog prince (the tutor Prince Ribbit, the frog prince of the fairy tale). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.frog.short": "Frog prince",
+  "@char.frog.short": {
+    "description": "Character: The frog prince (the tutor Prince Ribbit, the frog prince of the fairy tale). The short form of its title, one or two words (“The frog prince” → “Frog prince”)."
+  },
+  "char.frog.world": "The palace pond",
+  "@char.frog.world": {
+    "description": "Character: The frog prince (the tutor Prince Ribbit, the frog prince of the fairy tale). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “The frog prince · The palace pond”. A short noun phrase, sentence case."
+  },
+  "char.frog.place": "The well of the golden ball",
+  "@char.frog.place": {
+    "description": "Character: The frog prince (the tutor Prince Ribbit, the frog prince of the fairy tale). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.frog.coll": "Your pond",
+  "@char.frog.coll": {
+    "description": "Character: The frog prince (the tutor Prince Ribbit, the frog prince of the fairy tale). Name of the learner’s collection on Progress (the picture fills with one water lily per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.frog.item": "water lily",
+  "@char.frog.item": {
+    "description": "Character: The frog prince (the tutor Prince Ribbit, the frog prince of the fairy tale). One item of the collection “Your pond” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.puss.name": "Puss in Boots",
+  "@char.puss.name": {
+    "description": "The tutor’s name: Puss in Boots — Puss in Boots, the clever cat of the fairy tale; gender: male. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea); a fairy-tale character takes the name its tale has in your language. Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.puss.nameNom": "Puss in Boots",
+  "@char.puss.nameNom": {
+    "description": "The tutor’s name Puss in Boots (Puss in Boots, the clever cat of the fairy tale) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.puss.name."
+  },
+  "char.puss.nameAcc": "Puss in Boots",
+  "@char.puss.nameAcc": {
+    "description": "The tutor’s name Puss in Boots (Puss in Boots, the clever cat of the fairy tale) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.puss.name."
+  },
+  "char.puss.nameTo": "Puss in Boots",
+  "@char.puss.nameTo": {
+    "description": "The tutor’s name Puss in Boots (Puss in Boots, the clever cat of the fairy tale) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.puss.name."
+  },
+  "char.puss.title": "Puss in Boots",
+  "@char.puss.title": {
+    "description": "Character: Puss in Boots (the tutor Puss in Boots, Puss in Boots, the clever cat of the fairy tale). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.puss.short": "Puss",
+  "@char.puss.short": {
+    "description": "Character: Puss in Boots (the tutor Puss in Boots, Puss in Boots, the clever cat of the fairy tale). The short form of its title, one or two words (“Puss in Boots” → “Puss”)."
+  },
+  "char.puss.world": "The Marquis’s estate",
+  "@char.puss.world": {
+    "description": "Character: Puss in Boots (the tutor Puss in Boots, Puss in Boots, the clever cat of the fairy tale). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Puss in Boots · The Marquis’s estate”. A short noun phrase, sentence case."
+  },
+  "char.puss.place": "The ogre’s castle",
+  "@char.puss.place": {
+    "description": "Character: Puss in Boots (the tutor Puss in Boots, Puss in Boots, the clever cat of the fairy tale). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.puss.coll": "Your hat",
+  "@char.puss.coll": {
+    "description": "Character: Puss in Boots (the tutor Puss in Boots, Puss in Boots, the clever cat of the fairy tale). Name of the learner’s collection on Progress (the picture fills with one feather per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.puss.item": "feather",
+  "@char.puss.item": {
+    "description": "Character: Puss in Boots (the tutor Puss in Boots, Puss in Boots, the clever cat of the fairy tale). One item of the collection “Your hat” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.wolf.name": "Ridge",
+  "@char.wolf.name": {
+    "description": "The tutor’s name: Ridge — a mountain wolf (grown-up, serious group); gender: male. The English name: “Ridge” = a mountain crest. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.wolf.nameNom": "Ridge",
+  "@char.wolf.nameNom": {
+    "description": "The tutor’s name Ridge (a mountain wolf) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.wolf.name."
+  },
+  "char.wolf.nameAcc": "Ridge",
+  "@char.wolf.nameAcc": {
+    "description": "The tutor’s name Ridge (a mountain wolf) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.wolf.name."
+  },
+  "char.wolf.nameTo": "Ridge",
+  "@char.wolf.nameTo": {
+    "description": "The tutor’s name Ridge (a mountain wolf) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.wolf.name."
+  },
+  "char.wolf.title": "Mountain wolf",
+  "@char.wolf.title": {
+    "description": "Character: Mountain wolf (the tutor Ridge, a mountain wolf). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.wolf.short": "Wolf",
+  "@char.wolf.short": {
+    "description": "Character: Mountain wolf (the tutor Ridge, a mountain wolf). The short form of its title, one or two words (“Mountain wolf” → “Wolf”)."
+  },
+  "char.wolf.world": "The ridge at dawn",
+  "@char.wolf.world": {
+    "description": "Character: Mountain wolf (the tutor Ridge, a mountain wolf). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Mountain wolf · The ridge at dawn”. A short noun phrase, sentence case."
+  },
+  "char.wolf.place": "The summit hut",
+  "@char.wolf.place": {
+    "description": "Character: Mountain wolf (the tutor Ridge, a mountain wolf). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.wolf.coll": "Your peaks",
+  "@char.wolf.coll": {
+    "description": "Character: Mountain wolf (the tutor Ridge, a mountain wolf). Name of the learner’s collection on Progress (the picture fills with one peak per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.wolf.item": "peak",
+  "@char.wolf.item": {
+    "description": "Character: Mountain wolf (the tutor Ridge, a mountain wolf). One item of the collection “Your peaks” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.eagle.name": "Skye",
+  "@char.eagle.name": {
+    "description": "The tutor’s name: Skye — an eagle who is a pilot (grown-up, serious group); gender: male. The English name: “Skye” sounds like “sky”. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.eagle.nameNom": "Skye",
+  "@char.eagle.nameNom": {
+    "description": "The tutor’s name Skye (an eagle who is a pilot) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.eagle.name."
+  },
+  "char.eagle.nameAcc": "Skye",
+  "@char.eagle.nameAcc": {
+    "description": "The tutor’s name Skye (an eagle who is a pilot) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.eagle.name."
+  },
+  "char.eagle.nameTo": "Skye",
+  "@char.eagle.nameTo": {
+    "description": "The tutor’s name Skye (an eagle who is a pilot) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.eagle.name."
+  },
+  "char.eagle.title": "Eagle pilot",
+  "@char.eagle.title": {
+    "description": "Character: Eagle pilot (the tutor Skye, an eagle who is a pilot). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.eagle.short": "Eagle",
+  "@char.eagle.short": {
+    "description": "Character: Eagle pilot (the tutor Skye, an eagle who is a pilot). The short form of its title, one or two words (“Eagle pilot” → “Eagle”)."
+  },
+  "char.eagle.world": "Above the clouds",
+  "@char.eagle.world": {
+    "description": "Character: Eagle pilot (the tutor Skye, an eagle who is a pilot). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Eagle pilot · Above the clouds”. A short noun phrase, sentence case."
+  },
+  "char.eagle.place": "The control tower",
+  "@char.eagle.place": {
+    "description": "Character: Eagle pilot (the tutor Skye, an eagle who is a pilot). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.eagle.coll": "Your sky chart",
+  "@char.eagle.coll": {
+    "description": "Character: Eagle pilot (the tutor Skye, an eagle who is a pilot). Name of the learner’s collection on Progress (the picture fills with one star per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.eagle.item": "star",
+  "@char.eagle.item": {
+    "description": "Character: Eagle pilot (the tutor Skye, an eagle who is a pilot). One item of the collection “Your sky chart” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.robot.name": "Cobalt",
+  "@char.robot.name": {
+    "description": "The tutor’s name: Cobalt — a laboratory robot (grown-up, serious group); gender: male (Greek); a machine. The English name: “Cobalt” is a metal, a chemical element. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.robot.nameNom": "Cobalt",
+  "@char.robot.nameNom": {
+    "description": "The tutor’s name Cobalt (a laboratory robot) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.robot.name."
+  },
+  "char.robot.nameAcc": "Cobalt",
+  "@char.robot.nameAcc": {
+    "description": "The tutor’s name Cobalt (a laboratory robot) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.robot.name."
+  },
+  "char.robot.nameTo": "Cobalt",
+  "@char.robot.nameTo": {
+    "description": "The tutor’s name Cobalt (a laboratory robot) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.robot.name."
+  },
+  "char.robot.title": "Lab robot",
+  "@char.robot.title": {
+    "description": "Character: Lab robot (the tutor Cobalt, a laboratory robot). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.robot.short": "Robot",
+  "@char.robot.short": {
+    "description": "Character: Lab robot (the tutor Cobalt, a laboratory robot). The short form of its title, one or two words (“Lab robot” → “Robot”)."
+  },
+  "char.robot.world": "The robotics lab",
+  "@char.robot.world": {
+    "description": "Character: Lab robot (the tutor Cobalt, a laboratory robot). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Lab robot · The robotics lab”. A short noun phrase, sentence case."
+  },
+  "char.robot.place": "The data centre",
+  "@char.robot.place": {
+    "description": "Character: Lab robot (the tutor Cobalt, a laboratory robot). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.robot.coll": "Your circuit board",
+  "@char.robot.coll": {
+    "description": "Character: Lab robot (the tutor Cobalt, a laboratory robot). Name of the learner’s collection on Progress (the picture fills with one chip per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.robot.item": "chip",
+  "@char.robot.item": {
+    "description": "Character: Lab robot (the tutor Cobalt, a laboratory robot). One item of the collection “Your circuit board” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.heron.name": "Iris",
+  "@char.heron.name": {
+    "description": "The tutor’s name: Iris — a grey heron (grown-up, serious group); gender: female. The English name: “Iris” is a woman’s name, a flower and the Greek goddess of the rainbow. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.heron.nameNom": "Iris",
+  "@char.heron.nameNom": {
+    "description": "The tutor’s name Iris (a grey heron) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.heron.name."
+  },
+  "char.heron.nameAcc": "Iris",
+  "@char.heron.nameAcc": {
+    "description": "The tutor’s name Iris (a grey heron) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.heron.name."
+  },
+  "char.heron.nameTo": "Iris",
+  "@char.heron.nameTo": {
+    "description": "The tutor’s name Iris (a grey heron) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.heron.name."
+  },
+  "char.heron.title": "Grey heron",
+  "@char.heron.title": {
+    "description": "Character: Grey heron (the tutor Iris, a grey heron). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.heron.short": "Heron",
+  "@char.heron.short": {
+    "description": "Character: Grey heron (the tutor Iris, a grey heron). The short form of its title, one or two words (“Grey heron” → “Heron”)."
+  },
+  "char.heron.world": "The wetland at dawn",
+  "@char.heron.world": {
+    "description": "Character: Grey heron (the tutor Iris, a grey heron). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Grey heron · The wetland at dawn”. A short noun phrase, sentence case."
+  },
+  "char.heron.place": "The reed lake",
+  "@char.heron.place": {
+    "description": "Character: Grey heron (the tutor Iris, a grey heron). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.heron.coll": "Your reeds",
+  "@char.heron.coll": {
+    "description": "Character: Grey heron (the tutor Iris, a grey heron). Name of the learner’s collection on Progress (the picture fills with one reed per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.heron.item": "reed",
+  "@char.heron.item": {
+    "description": "Character: Grey heron (the tutor Iris, a grey heron). One item of the collection “Your reeds” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.litM.name": "Professor Quill",
+  "@char.litM.name": {
+    "description": "The tutor’s name: Professor Quill — a young philologist, a man who loves old books (grown-up, serious group); gender: male. The English name: “Quill” = a feather pen. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.litM.nameNom": "Professor Quill",
+  "@char.litM.nameNom": {
+    "description": "The tutor’s name Professor Quill (a young philologist, a man who loves old books) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.litM.name."
+  },
+  "char.litM.nameAcc": "Professor Quill",
+  "@char.litM.nameAcc": {
+    "description": "The tutor’s name Professor Quill (a young philologist, a man who loves old books) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.litM.name."
+  },
+  "char.litM.nameTo": "Professor Quill",
+  "@char.litM.nameTo": {
+    "description": "The tutor’s name Professor Quill (a young philologist, a man who loves old books) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.litM.name."
+  },
+  "char.litM.title": "Young philologist",
+  "@char.litM.title": {
+    "description": "Character: Young philologist (the tutor Professor Quill, a young philologist, a man who loves old books). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.litM.short": "Philologist",
+  "@char.litM.short": {
+    "description": "Character: Young philologist (the tutor Professor Quill, a young philologist, a man who loves old books). The short form of its title, one or two words (“Young philologist” → “Philologist”)."
+  },
+  "char.litM.world": "The old library",
+  "@char.litM.world": {
+    "description": "Character: Young philologist (the tutor Professor Quill, a young philologist, a man who loves old books). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Young philologist · The old library”. A short noun phrase, sentence case."
+  },
+  "char.litM.place": "The rare-books room",
+  "@char.litM.place": {
+    "description": "Character: Young philologist (the tutor Professor Quill, a young philologist, a man who loves old books). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.litM.coll": "Your bookcase",
+  "@char.litM.coll": {
+    "description": "Character: Young philologist (the tutor Professor Quill, a young philologist, a man who loves old books). Name of the learner’s collection on Progress (the picture fills with one book per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.litM.item": "book",
+  "@char.litM.item": {
+    "description": "Character: Young philologist (the tutor Professor Quill, a young philologist, a man who loves old books). One item of the collection “Your bookcase” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.litF.name": "Paige",
+  "@char.litF.name": {
+    "description": "The tutor’s name: Paige — a philologist woman, a bookworm (grown-up, serious group); gender: female. The English name: “Paige” sounds like a book’s “page” (Greek «κα Θάλεια» = Mrs Thalia, the muse). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.litF.nameNom": "Paige",
+  "@char.litF.nameNom": {
+    "description": "The tutor’s name Paige (a philologist woman, a bookworm) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.litF.name."
+  },
+  "char.litF.nameAcc": "Paige",
+  "@char.litF.nameAcc": {
+    "description": "The tutor’s name Paige (a philologist woman, a bookworm) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.litF.name."
+  },
+  "char.litF.nameTo": "Paige",
+  "@char.litF.nameTo": {
+    "description": "The tutor’s name Paige (a philologist woman, a bookworm) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.litF.name."
+  },
+  "char.litF.title": "Bookworm philologist",
+  "@char.litF.title": {
+    "description": "Character: Bookworm philologist (the tutor Paige, a philologist woman, a bookworm). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.litF.short": "Bookworm",
+  "@char.litF.short": {
+    "description": "Character: Bookworm philologist (the tutor Paige, a philologist woman, a bookworm). The short form of its title, one or two words (“Bookworm philologist” → “Bookworm”)."
+  },
+  "char.litF.world": "The reading room",
+  "@char.litF.world": {
+    "description": "Character: Bookworm philologist (the tutor Paige, a philologist woman, a bookworm). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Bookworm philologist · The reading room”. A short noun phrase, sentence case."
+  },
+  "char.litF.place": "The dictionary archive",
+  "@char.litF.place": {
+    "description": "Character: Bookworm philologist (the tutor Paige, a philologist woman, a bookworm). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.litF.coll": "Your inkwell",
+  "@char.litF.coll": {
+    "description": "Character: Bookworm philologist (the tutor Paige, a philologist woman, a bookworm). Name of the learner’s collection on Progress (the picture fills with one quill per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.litF.item": "quill",
+  "@char.litF.item": {
+    "description": "Character: Bookworm philologist (the tutor Paige, a philologist woman, a bookworm). One item of the collection “Your inkwell” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.techM.name": "Byte",
+  "@char.techM.name": {
+    "description": "The tutor’s name: Byte — a young tech nerd, a man who codes (grown-up, serious group); gender: male. The English name: “Byte” is a unit of computer data. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.techM.nameNom": "Byte",
+  "@char.techM.nameNom": {
+    "description": "The tutor’s name Byte (a young tech nerd, a man who codes) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.techM.name."
+  },
+  "char.techM.nameAcc": "Byte",
+  "@char.techM.nameAcc": {
+    "description": "The tutor’s name Byte (a young tech nerd, a man who codes) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.techM.name."
+  },
+  "char.techM.nameTo": "Byte",
+  "@char.techM.nameTo": {
+    "description": "The tutor’s name Byte (a young tech nerd, a man who codes) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.techM.name."
+  },
+  "char.techM.title": "Tech nerd",
+  "@char.techM.title": {
+    "description": "Character: Tech nerd (the tutor Byte, a young tech nerd, a man who codes). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.techM.short": "Nerd",
+  "@char.techM.short": {
+    "description": "Character: Tech nerd (the tutor Byte, a young tech nerd, a man who codes). The short form of its title, one or two words (“Tech nerd” → “Nerd”)."
+  },
+  "char.techM.world": "The coding den",
+  "@char.techM.world": {
+    "description": "Character: Tech nerd (the tutor Byte, a young tech nerd, a man who codes). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Tech nerd · The coding den”. A short noun phrase, sentence case."
+  },
+  "char.techM.place": "The midnight hackathon",
+  "@char.techM.place": {
+    "description": "Character: Tech nerd (the tutor Byte, a young tech nerd, a man who codes). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.techM.coll": "Your motherboard",
+  "@char.techM.coll": {
+    "description": "Character: Tech nerd (the tutor Byte, a young tech nerd, a man who codes). Name of the learner’s collection on Progress (the picture fills with one microchip per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.techM.item": "microchip",
+  "@char.techM.item": {
+    "description": "Character: Tech nerd (the tutor Byte, a young tech nerd, a man who codes). One item of the collection “Your motherboard” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.techF.name": "Pixel",
+  "@char.techF.name": {
+    "description": "The tutor’s name: Pixel — a computer genius woman (grown-up, serious group); gender: female. The English name: “Pixel” is a dot of a screen (Greek «Άντα» after Ada Lovelace). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.techF.nameNom": "Pixel",
+  "@char.techF.nameNom": {
+    "description": "The tutor’s name Pixel (a computer genius woman) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.techF.name."
+  },
+  "char.techF.nameAcc": "Pixel",
+  "@char.techF.nameAcc": {
+    "description": "The tutor’s name Pixel (a computer genius woman) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.techF.name."
+  },
+  "char.techF.nameTo": "Pixel",
+  "@char.techF.nameTo": {
+    "description": "The tutor’s name Pixel (a computer genius woman) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.techF.name."
+  },
+  "char.techF.title": "Computer genius",
+  "@char.techF.title": {
+    "description": "Character: Computer genius (the tutor Pixel, a computer genius woman). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.techF.short": "Genius",
+  "@char.techF.short": {
+    "description": "Character: Computer genius (the tutor Pixel, a computer genius woman). The short form of its title, one or two words (“Computer genius” → “Genius”)."
+  },
+  "char.techF.world": "The server room",
+  "@char.techF.world": {
+    "description": "Character: Computer genius (the tutor Pixel, a computer genius woman). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Computer genius · The server room”. A short noun phrase, sentence case."
+  },
+  "char.techF.place": "The night shift",
+  "@char.techF.place": {
+    "description": "Character: Computer genius (the tutor Pixel, a computer genius woman). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.techF.coll": "Your bathtub of ducks",
+  "@char.techF.coll": {
+    "description": "Character: Computer genius (the tutor Pixel, a computer genius woman). Name of the learner’s collection on Progress (the picture fills with one rubber duck per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.techF.item": "rubber duck",
+  "@char.techF.item": {
+    "description": "Character: Computer genius (the tutor Pixel, a computer genius woman). One item of the collection “Your bathtub of ducks” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.physM.name": "Professor Pi",
+  "@char.physM.name": {
+    "description": "The tutor’s name: Professor Pi — a young physicist and mathematician, a man (grown-up, serious group); gender: male. The English name: “Pi” is the number π. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.physM.nameNom": "Professor Pi",
+  "@char.physM.nameNom": {
+    "description": "The tutor’s name Professor Pi (a young physicist and mathematician, a man) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.physM.name."
+  },
+  "char.physM.nameAcc": "Professor Pi",
+  "@char.physM.nameAcc": {
+    "description": "The tutor’s name Professor Pi (a young physicist and mathematician, a man) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.physM.name."
+  },
+  "char.physM.nameTo": "Professor Pi",
+  "@char.physM.nameTo": {
+    "description": "The tutor’s name Professor Pi (a young physicist and mathematician, a man) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.physM.name."
+  },
+  "char.physM.title": "Young physicist",
+  "@char.physM.title": {
+    "description": "Character: Young physicist (the tutor Professor Pi, a young physicist and mathematician, a man). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.physM.short": "Physicist",
+  "@char.physM.short": {
+    "description": "Character: Young physicist (the tutor Professor Pi, a young physicist and mathematician, a man). The short form of its title, one or two words (“Young physicist” → “Physicist”)."
+  },
+  "char.physM.world": "The lecture hall",
+  "@char.physM.world": {
+    "description": "Character: Young physicist (the tutor Professor Pi, a young physicist and mathematician, a man). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Young physicist · The lecture hall”. A short noun phrase, sentence case."
+  },
+  "char.physM.place": "The particle lab",
+  "@char.physM.place": {
+    "description": "Character: Young physicist (the tutor Professor Pi, a young physicist and mathematician, a man). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.physM.coll": "Your atoms",
+  "@char.physM.coll": {
+    "description": "Character: Young physicist (the tutor Professor Pi, a young physicist and mathematician, a man). Name of the learner’s collection on Progress (the picture fills with one atom per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.physM.item": "atom",
+  "@char.physM.item": {
+    "description": "Character: Young physicist (the tutor Professor Pi, a young physicist and mathematician, a man). One item of the collection “Your atoms” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.physF.name": "Dr. Quanta",
+  "@char.physF.name": {
+    "description": "The tutor’s name: Dr. Quanta — a mathematician and physicist woman (grown-up, serious group); gender: female. The English name: “Quanta” from quantum physics (Greek «Υπατία» after Hypatia). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.physF.nameNom": "Dr. Quanta",
+  "@char.physF.nameNom": {
+    "description": "The tutor’s name Dr. Quanta (a mathematician and physicist woman) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.physF.name."
+  },
+  "char.physF.nameAcc": "Dr. Quanta",
+  "@char.physF.nameAcc": {
+    "description": "The tutor’s name Dr. Quanta (a mathematician and physicist woman) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.physF.name."
+  },
+  "char.physF.nameTo": "Dr. Quanta",
+  "@char.physF.nameTo": {
+    "description": "The tutor’s name Dr. Quanta (a mathematician and physicist woman) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.physF.name."
+  },
+  "char.physF.title": "Mathematician and physicist",
+  "@char.physF.title": {
+    "description": "Character: Mathematician and physicist (the tutor Dr. Quanta, a mathematician and physicist woman). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.physF.short": "Physicist",
+  "@char.physF.short": {
+    "description": "Character: Mathematician and physicist (the tutor Dr. Quanta, a mathematician and physicist woman). The short form of its title, one or two words (“Mathematician and physicist” → “Physicist”)."
+  },
+  "char.physF.world": "The observatory",
+  "@char.physF.world": {
+    "description": "Character: Mathematician and physicist (the tutor Dr. Quanta, a mathematician and physicist woman). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Mathematician and physicist · The observatory”. A short noun phrase, sentence case."
+  },
+  "char.physF.place": "The quantum lab",
+  "@char.physF.place": {
+    "description": "Character: Mathematician and physicist (the tutor Dr. Quanta, a mathematician and physicist woman). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.physF.coll": "Your planets",
+  "@char.physF.coll": {
+    "description": "Character: Mathematician and physicist (the tutor Dr. Quanta, a mathematician and physicist woman). Name of the learner’s collection on Progress (the picture fills with one planet per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.physF.item": "planet",
+  "@char.physF.item": {
+    "description": "Character: Mathematician and physicist (the tutor Dr. Quanta, a mathematician and physicist woman). One item of the collection “Your planets” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.bioM.name": "Dr. Fizz",
+  "@char.bioM.name": {
+    "description": "The tutor’s name: Dr. Fizz — a biochemist man in a bubbling lab (grown-up, serious group); gender: male. The English name: “Fizz” = the bubbling of a reaction. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.bioM.nameNom": "Dr. Fizz",
+  "@char.bioM.nameNom": {
+    "description": "The tutor’s name Dr. Fizz (a biochemist man in a bubbling lab) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.bioM.name."
+  },
+  "char.bioM.nameAcc": "Dr. Fizz",
+  "@char.bioM.nameAcc": {
+    "description": "The tutor’s name Dr. Fizz (a biochemist man in a bubbling lab) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.bioM.name."
+  },
+  "char.bioM.nameTo": "Dr. Fizz",
+  "@char.bioM.nameTo": {
+    "description": "The tutor’s name Dr. Fizz (a biochemist man in a bubbling lab) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.bioM.name."
+  },
+  "char.bioM.title": "Biochemist",
+  "@char.bioM.title": {
+    "description": "Character: Biochemist (the tutor Dr. Fizz, a biochemist man in a bubbling lab). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.bioM.short": "Biochemist",
+  "@char.bioM.short": {
+    "description": "Character: Biochemist (the tutor Dr. Fizz, a biochemist man in a bubbling lab). The short form of its title, one or two words (“Biochemist” → “Biochemist”)."
+  },
+  "char.bioM.world": "The bubbling lab",
+  "@char.bioM.world": {
+    "description": "Character: Biochemist (the tutor Dr. Fizz, a biochemist man in a bubbling lab). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Biochemist · The bubbling lab”. A short noun phrase, sentence case."
+  },
+  "char.bioM.place": "The greenhouse lab",
+  "@char.bioM.place": {
+    "description": "Character: Biochemist (the tutor Dr. Fizz, a biochemist man in a bubbling lab). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.bioM.coll": "Your lab bench",
+  "@char.bioM.coll": {
+    "description": "Character: Biochemist (the tutor Dr. Fizz, a biochemist man in a bubbling lab). Name of the learner’s collection on Progress (the picture fills with one flask per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.bioM.item": "flask",
+  "@char.bioM.item": {
+    "description": "Character: Biochemist (the tutor Dr. Fizz, a biochemist man in a bubbling lab). One item of the collection “Your lab bench” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.bioF.name": "Dr. Helix",
+  "@char.bioF.name": {
+    "description": "The tutor’s name: Dr. Helix — a biologist and chemist woman (grown-up, serious group); gender: female. The English name: “Helix” = the DNA double helix (Greek «Δρ. Ροζαλίν» after Rosalind Franklin). A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.bioF.nameNom": "Dr. Helix",
+  "@char.bioF.nameNom": {
+    "description": "The tutor’s name Dr. Helix (a biologist and chemist woman) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.bioF.name."
+  },
+  "char.bioF.nameAcc": "Dr. Helix",
+  "@char.bioF.nameAcc": {
+    "description": "The tutor’s name Dr. Helix (a biologist and chemist woman) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.bioF.name."
+  },
+  "char.bioF.nameTo": "Dr. Helix",
+  "@char.bioF.nameTo": {
+    "description": "The tutor’s name Dr. Helix (a biologist and chemist woman) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.bioF.name."
+  },
+  "char.bioF.title": "Biologist and chemist",
+  "@char.bioF.title": {
+    "description": "Character: Biologist and chemist (the tutor Dr. Helix, a biologist and chemist woman). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.bioF.short": "Biologist",
+  "@char.bioF.short": {
+    "description": "Character: Biologist and chemist (the tutor Dr. Helix, a biologist and chemist woman). The short form of its title, one or two words (“Biologist and chemist” → “Biologist”)."
+  },
+  "char.bioF.world": "The cell lab",
+  "@char.bioF.world": {
+    "description": "Character: Biologist and chemist (the tutor Dr. Helix, a biologist and chemist woman). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Biologist and chemist · The cell lab”. A short noun phrase, sentence case."
+  },
+  "char.bioF.place": "The DNA vault",
+  "@char.bioF.place": {
+    "description": "Character: Biologist and chemist (the tutor Dr. Helix, a biologist and chemist woman). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.bioF.coll": "Your model kit",
+  "@char.bioF.coll": {
+    "description": "Character: Biologist and chemist (the tutor Dr. Helix, a biologist and chemist woman). Name of the learner’s collection on Progress (the picture fills with one molecule per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.bioF.item": "molecule",
+  "@char.bioF.item": {
+    "description": "Character: Biologist and chemist (the tutor Dr. Helix, a biologist and chemist woman). One item of the collection “Your model kit” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.hydra.name": "Polly Glot",
+  "@char.hydra.name": {
+    "description": "The tutor’s name: Polly Glot — the Hydra of Lerna from Greek myth, many-headed and speaking many languages (grown-up group); gender: female. The English name: “Polly Glot” sounds like “polyglot”. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.hydra.nameNom": "Polly Glot",
+  "@char.hydra.nameNom": {
+    "description": "The tutor’s name Polly Glot (the Hydra of Lerna from Greek myth, many-headed and speaking many languages) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.hydra.name."
+  },
+  "char.hydra.nameAcc": "Polly Glot",
+  "@char.hydra.nameAcc": {
+    "description": "The tutor’s name Polly Glot (the Hydra of Lerna from Greek myth, many-headed and speaking many languages) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.hydra.name."
+  },
+  "char.hydra.nameTo": "Polly Glot",
+  "@char.hydra.nameTo": {
+    "description": "The tutor’s name Polly Glot (the Hydra of Lerna from Greek myth, many-headed and speaking many languages) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.hydra.name."
+  },
+  "char.hydra.title": "Polyglot Hydra",
+  "@char.hydra.title": {
+    "description": "Character: Polyglot Hydra (the tutor Polly Glot, the Hydra of Lerna from Greek myth, many-headed and speaking many languages). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.hydra.short": "Hydra",
+  "@char.hydra.short": {
+    "description": "Character: Polyglot Hydra (the tutor Polly Glot, the Hydra of Lerna from Greek myth, many-headed and speaking many languages). The short form of its title, one or two words (“Polyglot Hydra” → “Hydra”)."
+  },
+  "char.hydra.world": "The lake of Lerna",
+  "@char.hydra.world": {
+    "description": "Character: Polyglot Hydra (the tutor Polly Glot, the Hydra of Lerna from Greek myth, many-headed and speaking many languages). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Polyglot Hydra · The lake of Lerna”. A short noun phrase, sentence case."
+  },
+  "char.hydra.place": "The tower of languages",
+  "@char.hydra.place": {
+    "description": "Character: Polyglot Hydra (the tutor Polly Glot, the Hydra of Lerna from Greek myth, many-headed and speaking many languages). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.hydra.coll": "Your stamp album",
+  "@char.hydra.coll": {
+    "description": "Character: Polyglot Hydra (the tutor Polly Glot, the Hydra of Lerna from Greek myth, many-headed and speaking many languages). Name of the learner’s collection on Progress (the picture fills with one postage stamp per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.hydra.item": "postage stamp",
+  "@char.hydra.item": {
+    "description": "Character: Polyglot Hydra (the tutor Polly Glot, the Hydra of Lerna from Greek myth, many-headed and speaking many languages). One item of the collection “Your stamp album” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  },
+  "char.prism.name": "Prism",
+  "@char.prism.name": {
+    "description": "The tutor’s name: Prism — an abstract glass prism, for a strict, plain look (grown-up group); gender: none (neuter). The English name: the plain word “prism”. A proper noun: you may adapt it to your language (a name that sounds natural and keeps the idea). Shown on its own: the button that opens the tutor, the gallery, titles of conversations. Short."
+  },
+  "char.prism.nameNom": "Prism",
+  "@char.prism.nameNom": {
+    "description": "The tutor’s name Prism (an abstract glass prism, for a strict, plain look) as the subject of a sentence, with the article your language puts before a name (Greek «ο Αγκαθούλης»): “{Tutor} asks you questions until it clicks”. Starts the sentence (the interface capitalises the first letter). No articles or cases in your language: write exactly char.prism.name."
+  },
+  "char.prism.nameAcc": "Prism",
+  "@char.prism.nameAcc": {
+    "description": "The tutor’s name Prism (an abstract glass prism, for a strict, plain look) as the object of a verb (accusative), with its article if your language uses one (Greek «τον Αγκαθούλη», Russian «Колючку»): “Ask {tutorAcc}”. No cases in your language: write exactly char.prism.name."
+  },
+  "char.prism.nameTo": "Prism",
+  "@char.prism.nameTo": {
+    "description": "The tutor’s name Prism (an abstract glass prism, for a strict, plain look) in the form after “to / at” (French «à Piquou», «au Capitaine Miel»; Greek «στον Αγκαθούλη»), for languages that say “ask to someone”. No such form in your language: write exactly char.prism.name."
+  },
+  "char.prism.title": "Prism",
+  "@char.prism.title": {
+    "description": "Character: Prism (the tutor Prism, an abstract glass prism, for a strict, plain look). The character’s full title in the character gallery (Me › Character), under the tutor’s name and followed by “· ” and its world. A short noun phrase, sentence case. A fairy-tale title takes the tale’s name in your language."
+  },
+  "char.prism.short": "Prism",
+  "@char.prism.short": {
+    "description": "Character: Prism (the tutor Prism, an abstract glass prism, for a strict, plain look). The short form of its title, one or two words (“Prism” → “Prism”)."
+  },
+  "char.prism.world": "The grid",
+  "@char.prism.world": {
+    "description": "Character: Prism (the tutor Prism, an abstract glass prism, for a strict, plain look). The world the character lives in (the still landscape at the foot of every page), shown in the gallery after its title: “Prism · The grid”. A short noun phrase, sentence case."
+  },
+  "char.prism.place": "The core",
+  "@char.prism.place": {
+    "description": "Character: Prism (the tutor Prism, an abstract glass prism, for a strict, plain look). A special place in its world, shown as the small label above the level card on Progress (where the learner has got to). A short noun phrase, sentence case."
+  },
+  "char.prism.coll": "Your facets",
+  "@char.prism.coll": {
+    "description": "Character: Prism (the tutor Prism, an abstract glass prism, for a strict, plain look). Name of the learner’s collection on Progress (the picture fills with one facet per completed chapter): a label above the picture and its spoken description. Addressed to the learner (“your”)."
+  },
+  "char.prism.item": "facet",
+  "@char.prism.item": {
+    "description": "Character: Prism (the tutor Prism, an abstract glass prism, for a strict, plain look). One item of the collection “Your facets” (one per completed chapter), a singular noun in lower case, used inside the sentence “Every {item} is a chapter you have completed.”."
+  }
+}
