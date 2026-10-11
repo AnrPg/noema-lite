@@ -1,0 +1,47 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "noema.langfacade.v1",
+ "title": "noema-lite explanation facade of a language course, one locale (D19, docs/language-packs.md §3)",
+ "description": "The master explanation texts of a course (written in English, inline in the course files) translated and adapted to one locale, keyed by address (tools/schemas/noema.langfacade.fields.json). Files: facades/<locale>/facade.json (this manifest, $defs.manifest), facades/<locale>/core.json and facades/<locale>/<L>.json (entries, $defs.entries), library/languages/_phenomena/facades/<locale>/<L>.json and library/languages/_typology/facades/<locale>.json (entries of the shared texts). Made by tools/lang_facade.py extract (the master as a facade) and by translation tasks (lang_facade.py task); checked by lang_facade.py parity / lint; built by tools/build.py into course.expl.<locale>.js and overlaid by langcore.applyFacade (a missing address falls back to the master). Not to be confused with the WORD facade of D14 (features / wordFeatures).",
+ "oneOf": [ { "$ref": "#/$defs/manifest" }, { "$ref": "#/$defs/entries" } ],
+ "$defs": {
+  "manifest": {
+   "type": "object",
+   "required": ["format", "course", "locale", "master", "status"],
+   "properties": {
+    "format": { "const": "noema.langfacade/v1" },
+    "course": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "the course id" },
+    "locale": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$", "description": "a UI locale of docs/i18n.md §2 (en el ru fr ar-EG de hi zh-Hans zh-Hant ja it es-ES sq pt-PT)" },
+    "master": { "const": "en", "description": "the language of the master texts" },
+    "status": { "enum": ["draft", "preview", "on"], "description": "draft: shown only with config.i18nDrafts; preview: on deploy previews; on: offered as an explanation language (with Tier 1 complete)" },
+    "coverage": {
+     "type": "object",
+     "description": "per tier: master addresses, translated, stale (src ≠ the master's hash), missing",
+     "additionalProperties": {
+      "type": "object",
+      "properties": { "total": { "type": "integer" }, "done": { "type": "integer" }, "stale": { "type": "integer" }, "missing": { "type": "integer" } }
+     }
+    },
+    "built": { "type": "string", "description": "ISO time of the last extract / parity run" },
+    "files": { "type": "array", "items": { "type": "string" }, "description": "the entry files of this facade (core.json, <L>.json …)" },
+    "notes": { "type": "array", "items": { "type": "string" }, "description": "the `for` values whose notes this facade carries: its own language, every type: / branch: / family:" }
+   },
+   "additionalProperties": false
+  },
+  "entries": {
+   "type": "object",
+   "description": "address → the translated text and the hash of the master text it was made from",
+   "propertyNames": { "pattern": "^[a-z]{1,4}:[^/]+/.+$" },
+   "additionalProperties": {
+    "type": "object",
+    "required": ["t", "src"],
+    "properties": {
+     "t": { "type": "string", "minLength": 1, "description": "the text in the locale" },
+     "src": { "type": "string", "pattern": "^[0-9a-f]{12}$", "description": "sha256(master text, UTF-8), first 12 hex digits" },
+     "by": { "type": "string", "description": "who made it: claude (a draft), review, weblate, extract (the master itself)" }
+    },
+    "additionalProperties": false
+   }
+  }
+ }
+}
