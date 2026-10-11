@@ -65704,6 +65704,16 @@
   "src": "4808fc3e2320",
   "by": "claude"
  },
+ "x:ar:bada_zuhr/profile/notes/2/text": {
+  "t": "Φτιαγμένο όπως το pomeriggio, «μετά το μεσημέρι».",
+  "src": "e3b773b444eb",
+  "by": "claude"
+ },
+ "x:ar:bada_zuhr/profile/notes/3/text": {
+  "t": "Φτιαγμένο όπως το после полудня.",
+  "src": "57d25ae39b7a",
+  "by": "claude"
+ },
  "x:ar:bada_zuhr/profile/notes/4/text": {
   "t": "Το απόγευμα είναι «μετά το γεύμα»· τα αραβικά λένε «μετά το μεσημέρι».",
   "src": "523764c09e96",
@@ -65897,6 +65907,21 @@
  "x:ar:alyawma/profile/notes/0/text": {
   "t": "Και το σήμερα προέρχεται από το «αυτή τη μέρα».",
   "src": "c5099857cbb9",
+  "by": "claude"
+ },
+ "x:ar:alyawma/profile/notes/1/text": {
+  "t": "Και το сегодня προέρχεται από το «αυτή τη μέρα» (сего дня).",
+  "src": "6cd17da9666e",
+  "by": "claude"
+ },
+ "x:ar:alyawma/profile/notes/2/text": {
+  "t": "Και το oggi προέρχεται από το «αυτή τη μέρα».",
+  "src": "9cd6f9e135e3",
+  "by": "claude"
+ },
+ "x:ar:alyawma/profile/notes/3/text": {
+  "t": "Και το aujourd’hui περιέχει το «αυτή τη μέρα».",
+  "src": "89078c89ad55",
   "by": "claude"
  },
  "x:ar:ghadan/features/meaningForms/none": {
@@ -66932,6 +66957,11 @@
  "x:ar:ahyanan/profile/subtleties/0": {
   "t": "Μπορεί να ανοίξει την πρόταση (أَحْيَانًا أَعْمَلُ لَيْلًا) ή να την κλείσει.",
   "src": "24090afb4ac0",
+  "by": "claude"
+ },
+ "x:ar:ahyanan/profile/notes/0/text": {
+  "t": "Κατά λέξη «at times» — ακριβώς η αγγλική έκφραση.",
+  "src": "33f17d4c9030",
   "by": "claude"
  },
  "x:ar:kanun_thani/features/root/none": {
@@ -68574,6 +68604,51 @@
   "src": "794c27b0f0be",
   "by": "claude"
  },
+ "x:ar:yanayir/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το январь: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e38fb3a3547e",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το January: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "8a0fa2baef63",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το janvier: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "d42bdb214ccd",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το gennaio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "cad7a1ee2174",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το enero: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0c5790e63889",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το janeiro: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "ad24e80aff44",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/7/text": {
+  "t": "Το ίδιο όνομα με το janar: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "9b259ecc3a95",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το जनवरी: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "ca5f5b1516b4",
+  "by": "claude"
+ },
+ "x:ar:yanayir/profile/notes/9/text": {
+  "t": "Το يَنَايِر ακούγεται κοντά στο δικό σου gennaio — το Wiktionary παραπέμπει σε αυτό για την προφορά.",
+  "src": "99e3886d7d13",
+  "by": "claude"
+ },
  "x:ar:fibrayir/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -68702,6 +68777,51 @@
  "x:ar:fibrayir/profile/notes/0/text": {
   "t": "Το ίδιο όνομα με τον Φεβρουάριο: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
   "src": "33dbbe9027e3",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το февраль: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "6ca32b9d6cdb",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το February: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "ddcddf2d035a",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το février: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e75165c60337",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το febbraio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "cf2d5e93f0f3",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το febrero: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0273eafdb4d3",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το fevereiro: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "d1b7bb690638",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/7/text": {
+  "t": "Το αλβανικό shkurt είναι γηγενές όνομα· το αραβικό όνομα είναι το ρωμαϊκό, όπως στις περισσότερες γλώσσες.",
+  "src": "130273273993",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το फ़रवरी: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e7ad2a355e6e",
+  "by": "claude"
+ },
+ "x:ar:fibrayir/profile/notes/9/text": {
+  "t": "Το فِبْرَايِر ακούγεται κοντά στο δικό σου febbraio — το Wiktionary παραπέμπει σε αυτό για την προφορά.",
+  "src": "de392ab29cc0",
   "by": "claude"
  },
  "x:ar:maris/features/root/none": {
@@ -68834,6 +68954,46 @@
   "src": "82e268e478b6",
   "by": "claude"
  },
+ "x:ar:maris/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το март: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "75f4b19e72dc",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το March: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "045dfac6b804",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το mars: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "62554ec09538",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το marzo: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "1b2769a1fb9e",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το marzo: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "1b2769a1fb9e",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το março: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "10239ca2bd0d",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/7/text": {
+  "t": "Το ίδιο όνομα με το mars: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "62554ec09538",
+  "by": "claude"
+ },
+ "x:ar:maris/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το मार्च: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "847dc4429f35",
+  "by": "claude"
+ },
  "x:ar:abril/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -68964,6 +69124,46 @@
   "src": "9f60de49e682",
   "by": "claude"
  },
+ "x:ar:abril/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το апрель: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e9301f07d8f8",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το April: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "2b21ab5d28aa",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το avril: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "8172ecdd1eeb",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το aprile: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "4884d131f47b",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το abril: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "a3fae9613ab0",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το abril: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "a3fae9613ab0",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/7/text": {
+  "t": "Το ίδιο όνομα με το prill: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "32e89b66c2a4",
+  "by": "claude"
+ },
+ "x:ar:abril/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το अप्रैल: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "5107eda4ef45",
+  "by": "claude"
+ },
  "x:ar:mayu/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -69092,6 +69292,46 @@
  "x:ar:mayu/profile/notes/0/text": {
   "t": "Το ίδιο όνομα με τον Μάιο: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
   "src": "3af88295cf57",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το май: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0802825c0819",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το May: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e58acdf9717e",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το mai: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "22274cf0dfbb",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το maggio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0d2b60328a52",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το mayo: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "172f20e9c641",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το maio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e8f3b93d2f75",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/7/text": {
+  "t": "Το ίδιο όνομα με το maj: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "4b8a1a337a51",
+  "by": "claude"
+ },
+ "x:ar:mayu/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το मई: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "972435b251d0",
   "by": "claude"
  },
  "x:ar:yunyu/features/root/none": {
@@ -69229,6 +69469,46 @@
   "src": "065fa7f361b4",
   "by": "claude"
  },
+ "x:ar:yunyu/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το июнь: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "1e41e96a2cf1",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το June: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "88061b956caf",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το juin: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "f93fd87968fe",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το giugno: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "ed932f5efcf2",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το junio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "78c01328dd41",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το junho: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "846f5c5a9acc",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/7/text": {
+  "t": "Το αλβανικό qershor είναι γηγενές όνομα (ο μήνας των κερασιών)· το αραβικό όνομα είναι το ρωμαϊκό, όπως στις περισσότερες γλώσσες.",
+  "src": "b7eb0dd524d1",
+  "by": "claude"
+ },
+ "x:ar:yunyu/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το जून: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0a3bbef21262",
+  "by": "claude"
+ },
  "x:ar:yulyu/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -69364,6 +69644,46 @@
   "src": "1ecd75364ed4",
   "by": "claude"
  },
+ "x:ar:yulyu/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το июль: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "352ad4aa4789",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το July: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "d7af2eda3238",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το juillet: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "789f6424fb7a",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το luglio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "10975dfd9cfe",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το julio: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "29466900dfb3",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το julho: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "73683a808902",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/7/text": {
+  "t": "Το αλβανικό korrik είναι γηγενές όνομα (ο μήνας του θερισμού)· το αραβικό όνομα είναι το ρωμαϊκό, όπως στις περισσότερες γλώσσες.",
+  "src": "6cb7f9f76055",
+  "by": "claude"
+ },
+ "x:ar:yulyu/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το जुलाई: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "5db73a21bb99",
+  "by": "claude"
+ },
  "x:ar:aghustus/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -69492,6 +69812,46 @@
  "x:ar:aghustus/profile/notes/0/text": {
   "t": "Το ίδιο όνομα με τον Αύγουστο: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
   "src": "a57f421b12ba",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το август: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "2393f265a89b",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το August: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "f064092be30e",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το août: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e828a8f1da95",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το agosto: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "3fac4863ded6",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το agosto: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "3fac4863ded6",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το agosto: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "3fac4863ded6",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/7/text": {
+  "t": "Το ίδιο όνομα με το gusht: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "2e3fcea0538c",
+  "by": "claude"
+ },
+ "x:ar:aghustus/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το अगस्त: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "25e74586ba26",
   "by": "claude"
  },
  "x:ar:sibtimbir/features/root/none": {
@@ -69624,6 +69984,46 @@
   "src": "806ae84559bf",
   "by": "claude"
  },
+ "x:ar:sibtimbir/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το сентябрь: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0a2cde28c59c",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το September: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "0c439da2b6b8",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το septembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "def0a6595202",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το settembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "848c7a6bf268",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το septiembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "075c62d05a80",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το setembro: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "f3c994f5eb4f",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/7/text": {
+  "t": "Το ίδιο όνομα με το shtator: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "f2121e44643f",
+  "by": "claude"
+ },
+ "x:ar:sibtimbir/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το सितंबर: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "4d0474732f03",
+  "by": "claude"
+ },
  "x:ar:uktubir/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -69752,6 +70152,46 @@
  "x:ar:uktubir/profile/notes/0/text": {
   "t": "Το ίδιο όνομα με τον Οκτώβριο: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
   "src": "0d02bd779ef4",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το октябрь: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e9c57eaee21d",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το October: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "171c84db345e",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το octobre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e905aab97892",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το ottobre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "88b0e43dfdbd",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το octubre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "44bd4d89ba58",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το outubro: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "996a89f04637",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/7/text": {
+  "t": "Το αλβανικό tetor σχηματίζεται από το tetë (οκτώ), όπως το ρωμαϊκό όνομα από το octo.",
+  "src": "5078532fe520",
+  "by": "claude"
+ },
+ "x:ar:uktubir/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το अक्टूबर: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "7460521817b9",
   "by": "claude"
  },
  "x:ar:nufimbir/features/root/none": {
@@ -69884,6 +70324,46 @@
   "src": "87cc0b7dcb72",
   "by": "claude"
  },
+ "x:ar:nufimbir/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το ноябрь: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e747b59ebc4d",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το November: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "ec4d631dcbb5",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το novembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "87b9e1667aa6",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το novembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "87b9e1667aa6",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το noviembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "7ad0f2cbe768",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το novembro: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "55a05c64fc09",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/7/text": {
+  "t": "Το αλβανικό nëntor σχηματίζεται από το nëntë (εννέα), όπως το ρωμαϊκό όνομα από το novem.",
+  "src": "c35c5c1d43dd",
+  "by": "claude"
+ },
+ "x:ar:nufimbir/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το नवंबर: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "9130e425a827",
+  "by": "claude"
+ },
  "x:ar:disimbir/features/root/none": {
   "t": "δάνειο (λατινικό, μέσω ευρωπαϊκών γλωσσών): χωρίς αραβική ρίζα",
   "src": "a5cc1cff709c",
@@ -70012,6 +70492,46 @@
  "x:ar:disimbir/profile/notes/0/text": {
   "t": "Το ίδιο όνομα με τον Δεκέμβριο: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
   "src": "1b479f0c1fd0",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/1/text": {
+  "t": "Το ίδιο όνομα με το декабрь: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "e65881d12494",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/2/text": {
+  "t": "Το ίδιο όνομα με το December: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "4337f1c205e6",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/3/text": {
+  "t": "Το ίδιο όνομα με το décembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "50310e069f4e",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/4/text": {
+  "t": "Το ίδιο όνομα με το dicembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "af684976aacd",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/5/text": {
+  "t": "Το ίδιο όνομα με το diciembre: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "ee84a9e20539",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/6/text": {
+  "t": "Το ίδιο όνομα με το dezembro: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "3a3d6b2eb6b7",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/7/text": {
+  "t": "Το αλβανικό dhjetor σχηματίζεται από το dhjetë (δέκα), όπως το ρωμαϊκό όνομα από το decem.",
+  "src": "17548f147096",
+  "by": "claude"
+ },
+ "x:ar:disimbir/profile/notes/8/text": {
+  "t": "Το ίδιο όνομα με το दिसंबर: και τα δύο προέρχονται από το ρωμαϊκό ημερολόγιο.",
+  "src": "811ff58bc979",
   "by": "claude"
  },
  "x:ar:rabi/features/plurals/none": {
@@ -71044,6 +71564,11 @@
   "src": "9c436dbdf92a",
   "by": "claude"
  },
+ "x:ar:saa/profile/notes/0/text": {
+  "t": "Δεν υπάρχει λέξη για το «o’clock»: το five o’clock είναι «η πέμπτη ώρα», السَّاعَةُ الْخَامِسَةُ.",
+  "src": "7872ddb4a193",
+  "by": "claude"
+ },
  "x:ar:daqiqa/features/meaningForms/none": {
   "t": "οι ίδιοι τύποι σε όλες τις σημασίες",
   "src": "9f8d61bec0e6",
@@ -71944,9 +72469,49 @@
   "src": "13c7505805d8",
   "by": "claude"
  },
+ "x:ar:mundhu/profile/notes/0/text": {
+  "t": "Όχι παρακείμενος: το «I have lived here for a year» είναι ενεστωτικός τύπος, أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "63d2cedac441",
+  "by": "claude"
+ },
  "x:ar:mundhu/profile/notes/1/text": {
   "t": "Όπως το εδώ και, πάει με ενεστώτα: μένω στην Αθήνα εδώ και ένα χρόνο = أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
   "src": "149fc3d97c66",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/2/text": {
+  "t": "Όπως το depuis, πάει με ενεστώτα: j’habite ici depuis un an = أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "8e677fd63c9d",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/3/text": {
+  "t": "Όπως το da, πάει με ενεστώτα: abito qui da un anno = أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "079a2ab1c00c",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/4/text": {
+  "t": "Όπως το desde hace, πάει με ενεστώτα: vivo aquí desde hace un año = أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "549f46f5b256",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/5/text": {
+  "t": "Όπως το há, πάει με ενεστώτα: moro aqui há um ano = أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "6b19edc473c2",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/6/text": {
+  "t": "Όπως στο живу здесь уже год, χρησιμοποιείται ενεστώτας: أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "2cf469060c35",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/7/text": {
+  "t": "Όπως στο jetoj këtu prej një viti, χρησιμοποιείται ενεστώτας: أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "258964e4c92e",
+  "by": "claude"
+ },
+ "x:ar:mundhu/profile/notes/8/text": {
+  "t": "Όπως στο मैं एक साल से यहाँ रहता हूँ, χρησιμοποιείται ενεστώτας: أَعِيشُ هُنَا مُنْذُ سَنَةٍ.",
+  "src": "0892bef72c05",
   "by": "claude"
  },
  "x:ar:khilala/features/meaningForms/none": {
@@ -72364,6 +72929,21 @@
   "src": "49000eaa6985",
   "by": "claude"
  },
+ "x:ar:kabir/profile/notes/1/text": {
+  "t": "Το grand κάνει την ίδια διπλή δουλειά: mon grand frère = أَخِي الْأَكْبَرُ.",
+  "src": "b4b7d01b7612",
+  "by": "claude"
+ },
+ "x:ar:kabir/profile/notes/2/text": {
+  "t": "Το big κάνει την ίδια διπλή δουλειά: my big brother = أَخِي الْأَكْبَرُ.",
+  "src": "da164ad43488",
+  "by": "claude"
+ },
+ "x:ar:kabir/profile/notes/3/text": {
+  "t": "Τα ρωσικά λένε старший брат, όχι большой· τα αραβικά χρησιμοποιούν το «μεγαλύτερος»: أَخِي الْأَكْبَرُ.",
+  "src": "030e6f4f97a6",
+  "by": "claude"
+ },
  "x:ar:saghir/features/derivedFrom/none": {
   "t": "βασικό επίθετο, δεν παράγεται από άλλη λέξη",
   "src": "097e5b69cb16",
@@ -72649,6 +73229,51 @@
   "src": "f14a43fa1e50",
   "by": "claude"
  },
+ "x:ar:tawil/profile/notes/1/text": {
+  "t": "Τα ρωσικά ξεχωρίζουν το длинный από το высокий· τα αραβικά έχουν μία λέξη: طَوِيل.",
+  "src": "701a4a45aaa5",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/2/text": {
+  "t": "Τα αγγλικά ξεχωρίζουν το long από το tall· τα αραβικά έχουν μία λέξη: طَوِيل.",
+  "src": "cb275630d367",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/3/text": {
+  "t": "Τα γαλλικά ξεχωρίζουν το long από το grand· τα αραβικά έχουν μία λέξη: طَوِيل.",
+  "src": "56a8d515e0ac",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/4/text": {
+  "t": "Τα ιταλικά ξεχωρίζουν το lungo από το alto· τα αραβικά έχουν μία λέξη: طَوِيل.",
+  "src": "cf49c6f7cb9f",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/5/text": {
+  "t": "Τα ισπανικά ξεχωρίζουν το largo από το alto· τα αραβικά έχουν μία λέξη: طَوِيل.",
+  "src": "81a452a81ab8",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/6/text": {
+  "t": "Τα πορτογαλικά ξεχωρίζουν το comprido από το alto· τα αραβικά έχουν μία λέξη: طَوِيل.",
+  "src": "109c390798fc",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/7/text": {
+  "t": "Όπως το लंबा, μία λέξη για το μακρύς και το ψηλός: طَوِيل.",
+  "src": "9fca49db75dc",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/8/text": {
+  "t": "Όπως το i gjatë, μία λέξη για το μακρύς και το ψηλός: طَوِيل.",
+  "src": "a0776b5b6308",
+  "by": "claude"
+ },
+ "x:ar:tawil/profile/notes/9/text": {
+  "t": "Όπως το uzun (uzun yol, uzun boylu), μία λέξη για το μακρύς και το ψηλός.",
+  "src": "f90d829f664a",
+  "by": "claude"
+ },
  "x:ar:qasir/features/derivedFrom/none": {
   "t": "βασικό επίθετο, δεν παράγεται από άλλη λέξη",
   "src": "097e5b69cb16",
@@ -72772,6 +73397,11 @@
  "x:ar:qasir/profile/subtleties/0": {
   "t": "Το «ελλιπής, που του λείπει κάτι» δεν είναι قَصِير αλλά نَاقِص.",
   "src": "bd80a8501d00",
+  "by": "claude"
+ },
+ "x:ar:qasir/profile/notes/0/text": {
+  "t": "Το αμχαρικό አጭር (ač̣ər, «κοντός») είναι ομόρριζο του قَصِير.",
+  "src": "b972b08249cc",
   "by": "claude"
  },
  "x:ar:jayyid/features/derivedFrom/none": {
@@ -73704,9 +74334,39 @@
   "src": "8e4627235d1c",
   "by": "claude"
  },
+ "x:ar:harr/profile/notes/0/text": {
+  "t": "Το حَرَارَة πέρασε στα τουρκικά ως hararet (ζέστη, πυρετός, δίψα).",
+  "src": "9a86e8c3bec2",
+  "by": "claude"
+ },
+ "x:ar:harr/profile/notes/1/text": {
+  "t": "Χωρίς κενό «it is»: το «it is hot» είναι الْجَوُّ حَارٌّ, «ο καιρός (είναι) ζεστός».",
+  "src": "521959675e3b",
+  "by": "claude"
+ },
+ "x:ar:harr/profile/notes/2/text": {
+  "t": "Χωρίς il fait: το il fait chaud είναι الْجَوُّ حَارٌّ, «ο καιρός (είναι) ζεστός».",
+  "src": "a52f461a0d9a",
+  "by": "claude"
+ },
+ "x:ar:harr/profile/notes/3/text": {
+  "t": "Χωρίς fa: το fa caldo είναι الْجَوُّ حَارٌّ, «ο καιρός (είναι) ζεστός».",
+  "src": "c16c098965e1",
+  "by": "claude"
+ },
+ "x:ar:harr/profile/notes/4/text": {
+  "t": "Χωρίς hace: το hace calor είναι الْجَوُّ حَارٌّ, «ο καιρός (είναι) ζεστός».",
+  "src": "5e005156ebb5",
+  "by": "claude"
+ },
  "x:ar:harr/profile/notes/5/text": {
   "t": "Χωρίς «κάνει»: το κάνει ζέστη είναι الْجَوُّ حَارٌّ, «ο καιρός (είναι) ζεστός».",
   "src": "6d75a1212eb0",
+  "by": "claude"
+ },
+ "x:ar:harr/profile/notes/6/text": {
+  "t": "Όπως στο жарко, δεν χρειάζεται ρήμα — αλλά τα αραβικά ονομάζουν ένα υποκείμενο: الْجَوُّ حَارٌّ, «ο καιρός (είναι) ζεστός».",
+  "src": "04c8a671d06a",
   "by": "claude"
  },
  "x:ar:sakhin/features/meaningForms/none": {
@@ -73962,6 +74622,11 @@
  "x:ar:barid/profile/subtleties/0": {
   "t": "Καιρός: الْجَوُّ بَارِدٌ (κάνει κρύο) — πρόταση χωρίς ρήμα.",
   "src": "887dd7dbf10e",
+  "by": "claude"
+ },
+ "x:ar:barid/profile/notes/0/text": {
+  "t": "Το αμχαρικό ብርድ (bɨrd, κρύο) είναι ομόρριζο.",
+  "src": "3208f88ee618",
   "by": "claude"
  },
  "x:ar:dafi/features/meaningForms/none": {
@@ -74237,6 +74902,31 @@
  "x:ar:jamil/profile/notes/0/text": {
   "t": "Η ελληνική καμήλα (κάμηλος) προέρχεται από τη σημιτική λέξη για την καμήλα.",
   "src": "953d9c10ee95",
+  "by": "claude"
+ },
+ "x:ar:jamil/profile/notes/1/text": {
+  "t": "Το αγγλικό camel προέρχεται από τη σημιτική λέξη جَمَل.",
+  "src": "2b6e1c00919e",
+  "by": "claude"
+ },
+ "x:ar:jamil/profile/notes/2/text": {
+  "t": "Το γαλλικό chameau προέρχεται από τη σημιτική λέξη جَمَل.",
+  "src": "545ca735b8ff",
+  "by": "claude"
+ },
+ "x:ar:jamil/profile/notes/3/text": {
+  "t": "Το ιταλικό cammello προέρχεται από τη σημιτική λέξη جَمَل.",
+  "src": "7f337359c709",
+  "by": "claude"
+ },
+ "x:ar:jamil/profile/notes/4/text": {
+  "t": "Το ισπανικό camello προέρχεται από τη σημιτική λέξη جَمَل.",
+  "src": "05bc68df39ae",
+  "by": "claude"
+ },
+ "x:ar:jamil/profile/notes/5/text": {
+  "t": "Το πορτογαλικό camelo προέρχεται από τη σημιτική λέξη جَمَل.",
+  "src": "c447caa9cadd",
   "by": "claude"
  },
  "x:ar:qabih/features/derivedFrom/none": {
@@ -74707,6 +75397,11 @@
  "x:ar:rakhis/profile/subtleties/0": {
   "t": "Στην αγορά: هَلْ عِنْدَكَ شَيْءٌ أَرْخَصُ؟ — έχεις κάτι φτηνότερο;",
   "src": "9289fb5f8721",
+  "by": "claude"
+ },
+ "x:ar:rakhis/profile/notes/0/text": {
+  "t": "Το αμχαρικό ርካሽ (rɨkaš) είναι η ίδια σημιτική λέξη (Wiktionary).",
+  "src": "28914071797e",
   "by": "claude"
  },
  "x:ar:ghali/features/meaningForms/none": {
@@ -75182,6 +75877,11 @@
  "x:ar:mutab/profile/notes/0/text": {
   "t": "Το ίδιο ζευγάρι με το κουρασμένος / κουραστικός: مُتْعَب / مُتْعِب.",
   "src": "34aa3aa11d41",
+  "by": "claude"
+ },
+ "x:ar:mutab/profile/notes/1/text": {
+  "t": "Το ίδιο ζευγάρι με το tired / tiring: مُتْعَب / مُتْعِب.",
+  "src": "4c7981f45e9d",
   "by": "claude"
  },
  "x:ar:jai/features/elative/none": {
@@ -75734,6 +76434,11 @@
   "src": "889e141349ad",
   "by": "claude"
  },
+ "x:ar:abyad/profile/notes/0/text": {
+  "t": "Και το τουρκικό Akdeniz είναι «η λευκή θάλασσα».",
+  "src": "cea36bb1c752",
+  "by": "claude"
+ },
  "x:ar:aswad/features/derivedFrom/none": {
   "t": "βασικό επίθετο χρώματος (το μοτίβο أَفْعَل)",
   "src": "babcb85cabb0",
@@ -75852,6 +76557,11 @@
  "x:ar:aswad/profile/subtleties/0": {
   "t": "Το سُوق (αγορά) είναι εδώ θηλυκό: السُّوقُ السَّوْدَاءُ.",
   "src": "1e0c9faf8b72",
+  "by": "claude"
+ },
+ "x:ar:aswad/profile/notes/0/text": {
+  "t": "Το الْبَحْرُ الْأَسْوَدُ είναι το Karadeniz.",
+  "src": "78b7507a15a0",
   "by": "claude"
  },
  "x:ar:ahmar/features/derivedFrom/none": {
@@ -76204,9 +76914,39 @@
   "src": "786e0bc3be91",
   "by": "claude"
  },
+ "x:ar:akhdar/profile/notes/0/text": {
+  "t": "Όπως στα αγγλικά: give the green light = أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
+  "src": "237b44567e16",
+  "by": "claude"
+ },
+ "x:ar:akhdar/profile/notes/1/text": {
+  "t": "Όπως στο donner le feu vert: أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
+  "src": "78fa2bb3f76b",
+  "by": "claude"
+ },
  "x:ar:akhdar/profile/notes/2/text": {
   "t": "Όπως στο δίνω το πράσινο φως: أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
   "src": "a444ed1e4b16",
+  "by": "claude"
+ },
+ "x:ar:akhdar/profile/notes/3/text": {
+  "t": "Όπως στο дать зелёный свет: أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
+  "src": "4e4908bf0a86",
+  "by": "claude"
+ },
+ "x:ar:akhdar/profile/notes/4/text": {
+  "t": "Όπως στο dar luz verde: أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
+  "src": "574c62393bf3",
+  "by": "claude"
+ },
+ "x:ar:akhdar/profile/notes/5/text": {
+  "t": "Όπως στο dare il via libera: أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
+  "src": "4aa769ac1527",
+  "by": "claude"
+ },
+ "x:ar:akhdar/profile/notes/6/text": {
+  "t": "Όπως στο dar luz verde: أَعْطَى الضَّوْءَ الْأَخْضَرَ.",
+  "src": "574c62393bf3",
   "by": "claude"
  },
  "x:ar:asfar/features/derivedFrom/none": {
@@ -76519,6 +77259,11 @@
   "src": "39a11ce8c0db",
   "by": "claude"
  },
+ "x:ar:ramadi/profile/notes/1/text": {
+  "t": "Όπως το пепельный, από το пепел (στάχτη).",
+  "src": "99da7312177e",
+  "by": "claude"
+ },
  "x:ar:burtuqali/features/root/none": {
   "t": "φτιαγμένο από το بُرْتُقَال (πορτοκάλι), δάνειο",
   "src": "90520b21aa9b",
@@ -76627,6 +77372,26 @@
  "x:ar:burtuqali/profile/notes/0/text": {
   "t": "Όπως το πορτοκάλι, το γλυκό πορτοκάλι είναι «ο καρπός της Πορτογαλίας».",
   "src": "febbe9f01fc3",
+  "by": "claude"
+ },
+ "x:ar:burtuqali/profile/notes/1/text": {
+  "t": "Όπως το portokall, το γλυκό πορτοκάλι είναι «ο καρπός της Πορτογαλίας».",
+  "src": "ff7511895445",
+  "by": "claude"
+ },
+ "x:ar:burtuqali/profile/notes/2/text": {
+  "t": "Το γλυκό πορτοκάλι πήρε το όνομά του από την Πορτογαλία: بُرْتُقَال· και το πορτογαλικό laranja προέρχεται από το αραβικό نَارَنْج, το νεράντζι.",
+  "src": "29f351136b99",
+  "by": "claude"
+ },
+ "x:ar:burtuqali/profile/notes/3/text": {
+  "t": "Το апельсин είναι το «κινέζικο μήλο»· το بُرْتُقَال είναι «ο καρπός της Πορτογαλίας».",
+  "src": "a7091184761e",
+  "by": "claude"
+ },
+ "x:ar:burtuqali/profile/notes/4/text": {
+  "t": "Το τουρκικό portakal είναι το ίδιο όνομα.",
+  "src": "b15cc472b9b1",
   "by": "claude"
  },
  "x:ar:wardi/features/elative/none": {
@@ -76744,6 +77509,16 @@
   "src": "e39bbe6e6920",
   "by": "claude"
  },
+ "x:ar:wardi/profile/notes/1/text": {
+  "t": "Όπως στα αγγλικά, το «rosy» μπορεί να σημαίνει «αισιόδοξος»: أَحْلَامٌ وَرْدِيَّةٌ.",
+  "src": "130ae2e4c946",
+  "by": "claude"
+ },
+ "x:ar:wardi/profile/notes/2/text": {
+  "t": "Όπως στο voir la vie en rose: أَحْلَامٌ وَرْدِيَّةٌ, ροζ όνειρα.",
+  "src": "cf0c11a51c4a",
+  "by": "claude"
+ },
  "x:ar:banafsaji/features/root/none": {
   "t": "φτιαγμένο από το بَنَفْسَج (βιολέτα), δάνειο από τα περσικά",
   "src": "5baa09641786",
@@ -76852,6 +77627,21 @@
  "x:ar:banafsaji/profile/notes/0/text": {
   "t": "Ο ελληνικός μενεξές είναι το ίδιο όνομα λουλουδιού, από το Ιράν.",
   "src": "77c67c76842b",
+  "by": "claude"
+ },
+ "x:ar:banafsaji/profile/notes/1/text": {
+  "t": "Το αλβανικό manushaqe (βιολέτα) είναι το ίδιο όνομα λουλουδιού, από το Ιράν.",
+  "src": "1d9006593656",
+  "by": "claude"
+ },
+ "x:ar:banafsaji/profile/notes/2/text": {
+  "t": "Το बनफ़शा (βιολέτα) των χίντι είναι το ίδιο όνομα λουλουδιού, από το Ιράν.",
+  "src": "182dedd8355a",
+  "by": "claude"
+ },
+ "x:ar:banafsaji/profile/notes/3/text": {
+  "t": "Το τουρκικό menekşe είναι το ίδιο περσικό όνομα λουλουδιού.",
+  "src": "bec6bb851886",
   "by": "claude"
  },
  "x:ar:fatih/features/meaningForms/none": {
@@ -77222,6 +78012,36 @@
  "x:ar:akthar/profile/notes/0/text": {
   "t": "Εκεί που τα ελληνικά προσθέτουν το πιο, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
   "src": "a50d9ed792c0",
+  "by": "claude"
+ },
+ "x:ar:akthar/profile/notes/1/text": {
+  "t": "Εκεί που τα γαλλικά προσθέτουν το plus, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
+  "src": "c3c06a64d8e6",
+  "by": "claude"
+ },
+ "x:ar:akthar/profile/notes/2/text": {
+  "t": "Εκεί που τα ιταλικά προσθέτουν το più, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
+  "src": "cfdceb181f68",
+  "by": "claude"
+ },
+ "x:ar:akthar/profile/notes/3/text": {
+  "t": "Εκεί που τα ισπανικά προσθέτουν το más, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
+  "src": "af3bb7d105a4",
+  "by": "claude"
+ },
+ "x:ar:akthar/profile/notes/4/text": {
+  "t": "Εκεί που τα πορτογαλικά προσθέτουν το mais, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
+  "src": "dfbe11caf85a",
+  "by": "claude"
+ },
+ "x:ar:akthar/profile/notes/5/text": {
+  "t": "Εκεί που τα αλβανικά προσθέτουν το më, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
+  "src": "8c4b75122539",
+  "by": "claude"
+ },
+ "x:ar:akthar/profile/notes/6/text": {
+  "t": "Εκεί που τα τουρκικά προσθέτουν το daha, τα αραβικά συνήθως φτιάχνουν καινούργια λέξη: كَبِير → أَكْبَر.",
+  "src": "137050e49727",
   "by": "claude"
  },
  "x:ar:lakin/contrasts/0/axis": {
@@ -77622,6 +78442,26 @@
  "x:ar:lidhalika/profile/notes/0/text": {
   "t": "Φτιαγμένο όπως το γι’ αυτό, «για αυτό».",
   "src": "5e47f47486da",
+  "by": "claude"
+ },
+ "x:ar:lidhalika/profile/notes/1/text": {
+  "t": "Φτιαγμένο όπως το поэтому, «για αυτό».",
+  "src": "8f5d7d579584",
+  "by": "claude"
+ },
+ "x:ar:lidhalika/profile/notes/2/text": {
+  "t": "Φτιαγμένο όπως το por eso, «για εκείνο».",
+  "src": "e76052ed7388",
+  "by": "claude"
+ },
+ "x:ar:lidhalika/profile/notes/3/text": {
+  "t": "Φτιαγμένο όπως το per questo, «για αυτό».",
+  "src": "7bf7da448d4c",
+  "by": "claude"
+ },
+ "x:ar:lidhalika/profile/notes/4/text": {
+  "t": "Φτιαγμένο όπως το por isso, «για εκείνο».",
+  "src": "6d1f2ea06d97",
   "by": "claude"
  },
  "x:ar:fa/contrasts/0/axis": {
@@ -78134,6 +78974,11 @@
   "src": "307be2cfda30",
   "by": "claude"
  },
+ "x:ar:anna/profile/notes/0/text": {
+  "t": "Το أَنْ + ρήμα είναι συχνά το αγγλικό «to»: أُرِيدُ أَنْ آكُلَ = I want to eat.",
+  "src": "c7a29351f36e",
+  "by": "claude"
+ },
  "x:ar:an_that/contrasts/0/axis": {
   "t": "τι ακολουθεί",
   "src": "a7bdbc109bb2",
@@ -78244,6 +79089,26 @@
   "src": "1e6a5a086d15",
   "by": "claude"
  },
+ "x:ar:an_that/profile/notes/1/text": {
+  "t": "Τα αλβανικά το λένε με τον ίδιο τρόπο: dua të shkoj = أُرِيدُ أَنْ أَذْهَبَ.",
+  "src": "101759eac5bf",
+  "by": "claude"
+ },
+ "x:ar:an_that/profile/notes/2/text": {
+  "t": "Εκεί που τα αγγλικά έχουν «to» (I want to eat), τα αραβικά έχουν أَنْ + ρήμα με πρόσωπο: أُرِيدُ أَنْ آكُلَ.",
+  "src": "d9fc889a503e",
+  "by": "claude"
+ },
+ "x:ar:an_that/profile/notes/3/text": {
+  "t": "Εκεί που τα γαλλικά έχουν απαρέμφατο (je veux manger), τα αραβικά έχουν أَنْ + ρήμα με πρόσωπο: أُرِيدُ أَنْ آكُلَ.",
+  "src": "5ae345836e9a",
+  "by": "claude"
+ },
+ "x:ar:an_that/profile/notes/4/text": {
+  "t": "Εκεί που τα ρωσικά έχουν απαρέμφατο (я хочу есть), τα αραβικά έχουν أَنْ + ρήμα με πρόσωπο: أُرِيدُ أَنْ آكُلَ.",
+  "src": "137b9487f376",
+  "by": "claude"
+ },
  "x:ar:maa_anna/profile/feeling": {
   "t": "Μια αντίθεση μέσα σε μία πρόταση: παρόλο που….",
   "src": "8c42b7508dc9",
@@ -78337,6 +79202,21 @@
  "x:ar:maa_anna/profile/notes/0/text": {
   "t": "Το ελληνικό παρόλο που φτιάχνεται από άλλα κομμάτια, αλλά η ιδέα είναι η ίδια: «με όλο αυτό, …».",
   "src": "ad0f5355600b",
+  "by": "claude"
+ },
+ "x:ar:maa_anna/profile/notes/1/text": {
+  "t": "Όπως με το «although …, but …», η διπλή σύνδεση είναι λάθος.",
+  "src": "bad4ac72b63d",
+  "by": "claude"
+ },
+ "x:ar:maa_anna/profile/notes/2/text": {
+  "t": "Τα κινέζικα βάζουν σε ζευγάρι το 虽然 … 但是 …· τα αραβικά όχι: مَعَ أَنَّنِي مُتْعَبٌ أَذْهَبُ, χωρίς لٰكِنْ.",
+  "src": "49de1a1e6004",
+  "by": "claude"
+ },
+ "x:ar:maa_anna/profile/notes/3/text": {
+  "t": "Τα ρωσικά επιτρέπουν το хотя …, но …· τα αραβικά όχι: κανένα لٰكِنْ μετά το مَعَ أَنَّ.",
+  "src": "c966f9799a95",
   "by": "claude"
  },
  "x:ar:tamatim/features/root/none": {
@@ -78567,6 +79447,16 @@
  "x:ar:basal/profile/subtleties/0": {
   "t": "Ως περιληπτικό συμφωνεί σε αρσενικό ενικό: الْبَصَلُ رَخِيصٌ الْيَوْمَ (τα κρεμμύδια είναι φτηνά σήμερα).",
   "src": "057ea88db7af",
+  "by": "claude"
+ },
+ "x:ar:basal/profile/notes/0/text": {
+  "t": "Το ίδιο το αγγλικό shallot προέρχεται από την πόλη Ασκαλών (عَسْقَلَان).",
+  "src": "e153d94c5b75",
+  "by": "claude"
+ },
+ "x:ar:basal/profile/notes/1/text": {
+  "t": "Το γαλλικό échalote προέρχεται από την πόλη Ασκαλών (عَسْقَلَان).",
+  "src": "dbf35e74a639",
   "by": "claude"
  },
  "x:ar:batatis/features/root/none": {
@@ -78889,6 +79779,11 @@
   "src": "64c45d6354d3",
   "by": "claude"
  },
+ "x:ar:khiyar/profile/notes/0/text": {
+  "t": "Το τουρκικό hıyar (αγγούρι) είναι η ίδια περσική λέξη.",
+  "src": "5f6809c084ed",
+  "by": "claude"
+ },
  "x:ar:badhinjan/features/root/none": {
   "t": "δάνειο (περσικό): χωρίς αραβική ρίζα",
   "src": "f15b6732a969",
@@ -78989,14 +79884,59 @@
   "src": "6d1da64ee7da",
   "by": "claude"
  },
+ "x:ar:badhinjan/profile/notes/0/text": {
+  "t": "Το ισπανικό berenjena προέρχεται από το αραβικό al-bāḏinjān.",
+  "src": "1bbdeebdba64",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/1/text": {
+  "t": "Το πορτογαλικό beringela προέρχεται από το αραβικό al-bāḏinjān.",
+  "src": "8429d56e5d47",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/2/text": {
+  "t": "Το γαλλικό aubergine προέρχεται από το αραβικό al-bāḏinjān.",
+  "src": "3a3d0c5244fe",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/3/text": {
+  "t": "Το βρετανικό αγγλικό aubergine προέρχεται από το αραβικό al-bāḏinjān.",
+  "src": "6198ecd1095e",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/4/text": {
+  "t": "Το ιταλικό melanzana είναι η ίδια λέξη, ξαναπλασμένη σαν να ήταν mela (μήλο).",
+  "src": "840f74e6e247",
+  "by": "claude"
+ },
  "x:ar:badhinjan/profile/notes/5/text": {
   "t": "Η ελληνική μελιτζάνα ανάγεται στην ίδια λέξη με το بَاذِنْجَان.",
   "src": "698f03bcd0ad",
   "by": "claude"
  },
+ "x:ar:badhinjan/profile/notes/6/text": {
+  "t": "Το बैंगन των χίντι και το αραβικό بَاذِنْجَان ανάγονται στην ίδια παλιά ινδική λέξη, वातिङ्गण (vātiṅgaṇa).",
+  "src": "343a0c752dc9",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/7/text": {
+  "t": "Το ذ είναι το th του αγγλικού «this».",
+  "src": "968e43e3e028",
+  "by": "claude"
+ },
  "x:ar:badhinjan/profile/notes/8/text": {
   "t": "Το ذ είναι το ελληνικό δ: δέντρο.",
   "src": "d9ce98204360",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/9/text": {
+  "t": "Το ذ είναι κοντά στο μαλακό d ανάμεσα σε φωνήεντα στα ισπανικά (cada), αλλά λέγεται με τη γλώσσα ανάμεσα στα δόντια.",
+  "src": "8d4c282c8f61",
+  "by": "claude"
+ },
+ "x:ar:badhinjan/profile/notes/10/text": {
+  "t": "Το ذ είναι το αλβανικό dh: dhomë.",
+  "src": "b43ed1bef9d1",
   "by": "claude"
  },
  "x:ar:jazar/features/root/none": {
@@ -79224,6 +80164,31 @@
   "src": "9780d656ca82",
   "by": "claude"
  },
+ "x:ar:batata_hulwa/profile/notes/0/text": {
+  "t": "Το ίδιο το αγγλικό potato προέρχεται από το batata, ένα καραϊβικό όνομα της γλυκοπατάτας.",
+  "src": "a675b288eab8",
+  "by": "claude"
+ },
+ "x:ar:batata_hulwa/profile/notes/1/text": {
+  "t": "Το ισπανικό batata είναι η γλυκοπατάτα και το patata η πατάτα· τα αραβικά λένε بَطَاطَا حُلْوَة (γλυκοπατάτα) και بَطَاطِس (πατάτα).",
+  "src": "e4be74aa399d",
+  "by": "claude"
+ },
+ "x:ar:batata_hulwa/profile/notes/2/text": {
+  "t": "Το πορτογαλικό batata-doce είναι φτιαγμένο με τον ίδιο τρόπο: بَطَاطَا حُلْوَة, «γλυκιά πατάτα».",
+  "src": "78b46b0a6d6e",
+  "by": "claude"
+ },
+ "x:ar:batata_hulwa/profile/notes/3/text": {
+  "t": "Το γαλλικό patate douce είναι φτιαγμένο με τον ίδιο τρόπο: بَطَاطَا حُلْوَة.",
+  "src": "58511ee27856",
+  "by": "claude"
+ },
+ "x:ar:batata_hulwa/profile/notes/4/text": {
+  "t": "Το αμερικανικό «yam» συχνά σημαίνει τη γλυκοπατάτα: αυτή είναι το بَطَاطَا حُلْوَة, όχι το يَام.",
+  "src": "490a7784330e",
+  "by": "claude"
+ },
  "x:ar:bazilla/features/root/none": {
   "t": "δάνειο (ιταλικό piselli): χωρίς αραβική ρίζα",
   "src": "fbe25cf0e2b3",
@@ -79332,6 +80297,11 @@
  "x:ar:bazilla/profile/notes/0/text": {
   "t": "Το ελληνικό μπιζέλι προέρχεται από την ίδια λέξη για τα μπιζέλια με το بَازِلَّاء — το ξέρεις ήδη μισό.",
   "src": "6bcf76b36875",
+  "by": "claude"
+ },
+ "x:ar:bazilla/profile/notes/1/text": {
+  "t": "Το بَازِلَّاء είναι τα δικά σου piselli.",
+  "src": "144e25a64215",
   "by": "claude"
  },
  "x:ar:sabanikh/features/root/none": {
@@ -79447,6 +80417,46 @@
  "x:ar:sabanikh/profile/notes/0/text": {
   "t": "Το ελληνικό σπανάκι είναι η ίδια λέξη, που ήρθε από το Ιράν.",
   "src": "cfdba1c6975e",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/1/text": {
+  "t": "Το αγγλικό spinach προέρχεται από αυτή τη λέξη.",
+  "src": "91e665d36273",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/2/text": {
+  "t": "Το γαλλικό épinard προέρχεται από αυτή τη λέξη.",
+  "src": "9209b9e88fb4",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/3/text": {
+  "t": "Το ιταλικό spinaci προέρχεται από αυτή τη λέξη.",
+  "src": "9067968c9c4b",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/4/text": {
+  "t": "Το ισπανικό espinaca προέρχεται, μέσω των ανδαλουσιανών αραβικών, από αυτή τη λέξη.",
+  "src": "13a8fabcbc29",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/5/text": {
+  "t": "Το πορτογαλικό espinafre προέρχεται από αυτή τη λέξη.",
+  "src": "540a634e3473",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/6/text": {
+  "t": "Το ρωσικό шпинат ανάγεται, μέσω της Δυτικής Ευρώπης, σε αυτή τη λέξη.",
+  "src": "46c5c7ca5c5b",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/7/text": {
+  "t": "Το αλβανικό spinaq ανάγεται στην ίδια λέξη.",
+  "src": "f0eed1c2b973",
+  "by": "claude"
+ },
+ "x:ar:sabanikh/profile/notes/8/text": {
+  "t": "Το τουρκικό ıspanak είναι η ίδια περσική λέξη.",
+  "src": "e42340acb0be",
   "by": "claude"
  },
  "x:ar:fujl/features/plurals/0/note": {
@@ -79859,6 +80869,36 @@
   "src": "c7fa57a290dc",
   "by": "claude"
  },
+ "x:ar:filfil_harr/profile/notes/1/text": {
+  "t": "Το αγγλικό pepper ανάγεται στην ίδια αρχαία ινδική λέξη, pippalī.",
+  "src": "ee574a559f63",
+  "by": "claude"
+ },
+ "x:ar:filfil_harr/profile/notes/2/text": {
+  "t": "Το γαλλικό poivre ανάγεται στην ίδια αρχαία ινδική λέξη, pippalī.",
+  "src": "b752e886abfb",
+  "by": "claude"
+ },
+ "x:ar:filfil_harr/profile/notes/3/text": {
+  "t": "Το ιταλικό pepe ανάγεται στην ίδια αρχαία ινδική λέξη, pippalī.",
+  "src": "0e24bb2b2902",
+  "by": "claude"
+ },
+ "x:ar:filfil_harr/profile/notes/4/text": {
+  "t": "Το ρωσικό перец ανάγεται στην ίδια αρχαία ινδική λέξη, pippalī.",
+  "src": "3d5e67e84f04",
+  "by": "claude"
+ },
+ "x:ar:filfil_harr/profile/notes/5/text": {
+  "t": "Το αλβανικό piper ανάγεται στην ίδια αρχαία ινδική λέξη, pippalī.",
+  "src": "8d9f0189b799",
+  "by": "claude"
+ },
+ "x:ar:filfil_harr/profile/notes/6/text": {
+  "t": "Το पिप्पली (μακρύ πιπέρι) των χίντι είναι η ίδια παλιά λέξη με το فِلْفِل: και τα δύο ανάγονται στο pippalī.",
+  "src": "6a1e331e76a3",
+  "by": "claude"
+ },
  "x:ar:malfuf/features/plurals/none": {
   "t": "ουσιαστικό ύλης: χωρίς πληθυντικό στην καθημερινή χρήση",
   "src": "74424425d77d",
@@ -80167,6 +81207,11 @@
  "x:ar:brukuli/profile/subtleties/0": {
   "t": "Αρσενικό (Wiktionary): الْبْرُوكُلِي غَنِيٌّ (το μπρόκολο είναι πλούσιο).",
   "src": "e4c2787f7529",
+  "by": "claude"
+ },
+ "x:ar:brukuli/profile/notes/0/text": {
+  "t": "Το *broccoli* είναι η ίδια λέξη, δανεισμένη μαζί με την κατάληξη του πληθυντικού της· στα αραβικά το بْرُوكُلِي είναι αρσενικό ουσιαστικό ύλης.",
+  "src": "41f64410063e",
   "by": "claude"
  },
  "x:ar:kurrath/features/root/none": {
@@ -80509,6 +81554,11 @@
   "src": "a056b9ed3c2e",
   "by": "claude"
  },
+ "x:ar:shamandar/profile/notes/0/text": {
+  "t": "Όποιος μιλά τουρκικά αναγνωρίζει αμέσως το بَنْجَر: είναι το pancar.",
+  "src": "edd02801cae2",
+  "by": "claude"
+ },
  "x:ar:kusa/features/root/none": {
   "t": "διαλεκτική λέξη αβέβαιης προέλευσης: χωρίς ρίζα",
   "src": "da48b80724c5",
@@ -80744,6 +81794,21 @@
   "src": "2adf864e7338",
   "by": "claude"
  },
+ "x:ar:fasulya_khadra/profile/notes/1/text": {
+  "t": "Το ρωσικό фасоль είναι η ίδια λέξη με το فَاصُولِيَا.",
+  "src": "741662dcf519",
+  "by": "claude"
+ },
+ "x:ar:fasulya_khadra/profile/notes/2/text": {
+  "t": "Το ιταλικό fagioli είναι ξάδελφος του فَاصُولِيَا: και τα δύο ανάγονται στο αρχαίο φασίολος.",
+  "src": "af8616a2a636",
+  "by": "claude"
+ },
+ "x:ar:fasulya_khadra/profile/notes/3/text": {
+  "t": "Το αλβανικό fasule είναι η ίδια λέξη με το فَاصُولِيَا.",
+  "src": "5a5b91779e49",
+  "by": "claude"
+ },
  "x:ar:basal_akhdar/features/root/none": {
   "t": "φράση: بَصَل (ب ص ل) + أَخْضَر (خ ض ر)",
   "src": "eb9f6fa9af9f",
@@ -80854,6 +81919,11 @@
   "src": "ed1498e1bd67",
   "by": "claude"
  },
+ "x:ar:basal_akhdar/profile/notes/0/text": {
+  "t": "Η αραβική εικόνα είναι η ίδια με το αμερικανικό αγγλικό «green onion».",
+  "src": "4e801d2803a3",
+  "by": "claude"
+ },
  "x:ar:karafs/features/root/none": {
   "t": "δάνειο (περσικό, από τα συριακά): χωρίς αραβική ρίζα",
   "src": "07e8e1cc2384",
@@ -80957,6 +82027,11 @@
  "x:ar:karafs/profile/subtleties/0": {
   "t": "Αρσενικό ουσιαστικό ύλης: كَرَفْسٌ طَازَجٌ (φρέσκο σέλινο).",
   "src": "78e2d82571e2",
+  "by": "claude"
+ },
+ "x:ar:karafs/profile/notes/0/text": {
+  "t": "Το τουρκικό kereviz (σέλινο) προέρχεται από την ίδια περσική λέξη.",
+  "src": "0ce83a1dd679",
   "by": "claude"
  },
  "x:ar:dhura/features/root/none": {
@@ -81087,6 +82162,11 @@
  "x:ar:dhura/profile/subtleties/0": {
   "t": "Θηλυκό (τελειώνει σε ة): الذُّرَةُ الْمَشْوِيَّةُ (ψητό καλαμπόκι).",
   "src": "b9e981914d09",
+  "by": "claude"
+ },
+ "x:ar:dhura/profile/notes/0/text": {
+  "t": "Το αγγλικό durra (σόργο) είναι αυτή η αραβική λέξη.",
+  "src": "0caeb972f393",
   "by": "claude"
  },
  "x:ar:zanjabil/features/root/none": {
@@ -81224,9 +82304,54 @@
   "src": "05995d95c2a6",
   "by": "claude"
  },
+ "x:ar:zanjabil/profile/notes/0/text": {
+  "t": "Το αγγλικό ginger ανάγεται στην ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
+  "src": "3bc9c10a7fca",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/1/text": {
+  "t": "Το γαλλικό gingembre ανάγεται στην ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
+  "src": "1b36a806e864",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/2/text": {
+  "t": "Το ιταλικό zenzero ανάγεται στην ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
+  "src": "fb3218b94c00",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/3/text": {
+  "t": "Το ισπανικό jengibre ανάγεται στην ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
+  "src": "5e0db9b397fd",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/4/text": {
+  "t": "Το πορτογαλικό gengibre ανάγεται στην ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
+  "src": "c3c539d6400e",
+  "by": "claude"
+ },
  "x:ar:zanjabil/profile/notes/5/text": {
   "t": "Το ζιγγίβερις, το παλιό ελληνικό όνομα της πιπερόριζας, είναι η ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
   "src": "b3756cd0f9d9",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/6/text": {
+  "t": "Το ρωσικό имбирь ανάγεται στην ίδια νοτιοϊνδική λέξη με το زَنْجَبِيل.",
+  "src": "3308ba419374",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/7/text": {
+  "t": "Το αλβανικό xhenxhefil είναι η ίδια λέξη.",
+  "src": "3e290638d133",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/8/text": {
+  "t": "Η νοτιοϊνδική λέξη πίσω από το زَنْجَبِيل είναι και η πηγή του शृङ्गवेर (śṛṅgavera, πιπερόριζα).",
+  "src": "551be39ba209",
+  "by": "claude"
+ },
+ "x:ar:zanjabil/profile/notes/9/text": {
+  "t": "Το τουρκικό zencefil είναι η ίδια λέξη.",
+  "src": "91bddc77436d",
   "by": "claude"
  },
  "x:ar:shamar/features/root/none": {
@@ -81809,6 +82934,31 @@
   "src": "9de4e600a885",
   "by": "claude"
  },
+ "x:ar:tarakhshaqun/profile/notes/0/text": {
+  "t": "Το αγγλικό dandelion είναι «δόντι λιονταριού» (dent-de-lion)· το όνομα μέσα στα αραβικά σημαίνει «το χόρτο του φτωχού».",
+  "src": "f85d90387e71",
+  "by": "claude"
+ },
+ "x:ar:tarakhshaqun/profile/notes/1/text": {
+  "t": "Το γαλλικό dent-de-lion είναι «δόντι λιονταριού»· το όνομα μέσα στα αραβικά σημαίνει «το χόρτο του φτωχού».",
+  "src": "453ed8704926",
+  "by": "claude"
+ },
+ "x:ar:tarakhshaqun/profile/notes/2/text": {
+  "t": "Το ιταλικό dente di leone είναι «δόντι λιονταριού»· το όνομα μέσα στα αραβικά σημαίνει «το χόρτο του φτωχού».",
+  "src": "4ce93cba56e9",
+  "by": "claude"
+ },
+ "x:ar:tarakhshaqun/profile/notes/3/text": {
+  "t": "Το ισπανικό diente de león είναι «δόντι λιονταριού»· το όνομα μέσα στα αραβικά σημαίνει «το χόρτο του φτωχού».",
+  "src": "d1ab2a5a14bc",
+  "by": "claude"
+ },
+ "x:ar:tarakhshaqun/profile/notes/4/text": {
+  "t": "Το πορτογαλικό dente-de-leão είναι «δόντι λιονταριού»· το όνομα μέσα στα αραβικά σημαίνει «το χόρτο του φτωχού».",
+  "src": "5944b4f993d1",
+  "by": "claude"
+ },
  "x:ar:lift/features/plurals/none": {
   "t": "ουσιαστικό ύλης: χωρίς πληθυντικό στην καθημερινή χρήση",
   "src": "74424425d77d",
@@ -82122,6 +83272,31 @@
  "x:ar:hindiba/profile/subtleties/0": {
   "t": "Θηλυκό: الْهِنْدِبَاءُ الْمُرَّةُ (το πικρό ραδίκι)· το Wiktionary το θεωρεί περιληπτικό χωρίς ουσιαστικό μονάδας.",
   "src": "1166d0f55cf8",
+  "by": "claude"
+ },
+ "x:ar:hindiba/profile/notes/0/text": {
+  "t": "Το αγγλικό endive ανάγεται σε αυτή τη σημιτική λέξη.",
+  "src": "2dd4c10c7486",
+  "by": "claude"
+ },
+ "x:ar:hindiba/profile/notes/1/text": {
+  "t": "Το γαλλικό endive ανάγεται σε αυτή τη σημιτική λέξη.",
+  "src": "fccbb869f9c6",
+  "by": "claude"
+ },
+ "x:ar:hindiba/profile/notes/2/text": {
+  "t": "Το ιταλικό indivia ανάγεται σε αυτή τη σημιτική λέξη.",
+  "src": "4ac2b6e2105e",
+  "by": "claude"
+ },
+ "x:ar:hindiba/profile/notes/3/text": {
+  "t": "Το ισπανικό endibia ανάγεται σε αυτή τη σημιτική λέξη.",
+  "src": "ac1f8d8cab87",
+  "by": "claude"
+ },
+ "x:ar:hindiba/profile/notes/4/text": {
+  "t": "Το πορτογαλικό endívia ανάγεται σε αυτή τη σημιτική λέξη.",
+  "src": "d2a6a873f5b8",
   "by": "claude"
  },
  "x:ar:hindiba/profile/notes/5/text": {
@@ -82469,6 +83644,26 @@
   "src": "c1e1e0148eed",
   "by": "claude"
  },
+ "x:ar:thum_barri/profile/notes/0/text": {
+  "t": "Τα αραβικά λένε ακριβώς ό,τι και τα αγγλικά: «άγριο σκόρδο».",
+  "src": "aca35c92f8da",
+  "by": "claude"
+ },
+ "x:ar:thum_barri/profile/notes/1/text": {
+  "t": "Το γαλλικό ail des ours λέει «σκόρδο των αρκούδων»· τα αραβικά λένε «άγριο σκόρδο».",
+  "src": "0c975170a1fd",
+  "by": "claude"
+ },
+ "x:ar:thum_barri/profile/notes/2/text": {
+  "t": "Το ιταλικό aglio orsino λέει «σκόρδο της αρκούδας»· τα αραβικά λένε «άγριο σκόρδο».",
+  "src": "43580dfed254",
+  "by": "claude"
+ },
+ "x:ar:thum_barri/profile/notes/3/text": {
+  "t": "Το ρωσικό медвежий лук λέει «κρεμμύδι της αρκούδας»· τα αραβικά λένε «άγριο σκόρδο».",
+  "src": "b3c9fe599266",
+  "by": "claude"
+ },
  "x:ar:jazar_abyad/features/root/none": {
   "t": "φράση: جَزَر (δάνειο) + أَبْيَض (ب ي ض)",
   "src": "7b6d90d760b7",
@@ -82807,6 +84002,11 @@
  "x:ar:fujl_harr/profile/subtleties/0": {
   "t": "Το حَارّ σημαίνει και «ζεστός» για θερμοκρασία και «καυτερός, πικάντικος»· εδώ είναι το τσίμπημα του μουσταρδέλαιου.",
   "src": "9a56b568520f",
+  "by": "claude"
+ },
+ "x:ar:fujl_harr/profile/notes/0/text": {
+  "t": "Το わさび είναι στενός συγγενής: η φτηνή πάστα わさび είναι συχνά βαμμένο χρένο, فُجْل حَارّ.",
+  "src": "bc88d83344da",
   "by": "claude"
  },
  "x:ar:qurra/features/plurals/none": {
@@ -83604,6 +84804,21 @@
   "src": "35ebda380a06",
   "by": "claude"
  },
+ "x:ar:basal_ahmar/profile/notes/0/text": {
+  "t": "Και τα αγγλικά λένε «red onion», αν και το χρώμα είναι μωβ.",
+  "src": "b9a153cb488f",
+  "by": "claude"
+ },
+ "x:ar:basal_ahmar/profile/notes/1/text": {
+  "t": "Τα ισπανικά λένε cebolla morada, «μωβ κρεμμύδι»· τα αραβικά λένε «κόκκινο»: بَصَل أَحْمَر.",
+  "src": "ffeb22c22f7a",
+  "by": "claude"
+ },
+ "x:ar:basal_ahmar/profile/notes/2/text": {
+  "t": "Τα πορτογαλικά λένε cebola roxa, «μωβ κρεμμύδι»· τα αραβικά λένε «κόκκινο»: بَصَل أَحْمَر.",
+  "src": "bdf76c9efc21",
+  "by": "claude"
+ },
  "x:ar:basal_ahmar/profile/notes/3/text": {
   "t": "Και τα ελληνικά λένε κόκκινο κρεμμύδι.",
   "src": "0f7580a323ce",
@@ -83922,6 +85137,21 @@
  "x:ar:bamiya/profile/notes/0/text": {
   "t": "Η ελληνική μπάμια προέρχεται από αυτή την αραβική λέξη.",
   "src": "0b99f60a9b65",
+  "by": "claude"
+ },
+ "x:ar:bamiya/profile/notes/1/text": {
+  "t": "Το αλβανικό bamje προέρχεται από αυτή την αραβική λέξη.",
+  "src": "293c78818e34",
+  "by": "claude"
+ },
+ "x:ar:bamiya/profile/notes/2/text": {
+  "t": "Το τουρκικό bamya προέρχεται από αυτή την αραβική λέξη.",
+  "src": "640dd3afb111",
+  "by": "claude"
+ },
+ "x:ar:bamiya/profile/notes/3/text": {
+  "t": "Η εικασία φαντάζεται τους λοβούς σαν δάχτυλα, όπως στο αγγλικό «ladies’ fingers».",
+  "src": "c47d5ec0e23e",
   "by": "claude"
  },
  "x:ar:ful/features/root/none": {
@@ -84284,6 +85514,36 @@
   "src": "9e44d68d28c7",
   "by": "claude"
  },
+ "x:ar:khurshuf/profile/notes/0/text": {
+  "t": "Το αγγλικό artichoke προέρχεται από το ανδαλουσιανό αραβικό al-ḵaršūfa.",
+  "src": "01ef10699499",
+  "by": "claude"
+ },
+ "x:ar:khurshuf/profile/notes/1/text": {
+  "t": "Το ιταλικό carciofo προέρχεται από το ανδαλουσιανό αραβικό al-ḵaršūfa.",
+  "src": "5ee8a268d4f3",
+  "by": "claude"
+ },
+ "x:ar:khurshuf/profile/notes/2/text": {
+  "t": "Το ισπανικό alcachofa προέρχεται από το ανδαλουσιανό αραβικό al-ḵaršūfa, μαζί με το άρθρο.",
+  "src": "bde62142e3f5",
+  "by": "claude"
+ },
+ "x:ar:khurshuf/profile/notes/3/text": {
+  "t": "Το πορτογαλικό alcachofra προέρχεται από το ανδαλουσιανό αραβικό al-ḵaršūfa, μαζί με το άρθρο.",
+  "src": "e191ce7b46c0",
+  "by": "claude"
+ },
+ "x:ar:khurshuf/profile/notes/4/text": {
+  "t": "Το γαλλικό artichaut προέρχεται από το ανδαλουσιανό αραβικό al-ḵaršūfa.",
+  "src": "48f55911e9ff",
+  "by": "claude"
+ },
+ "x:ar:khurshuf/profile/notes/5/text": {
+  "t": "Το ρωσικό артишок ανάγεται στο ανδαλουσιανό αραβικό al-ḵaršūfa.",
+  "src": "e26ac1a351f8",
+  "by": "claude"
+ },
  "x:ar:luf/features/root/none": {
   "t": "παραλλαγή του لِيف (ίνα φοίνικα): χωρίς δική του ρίζα",
   "src": "fb71f72886a4",
@@ -84407,6 +85667,11 @@
  "x:ar:luf/profile/subtleties/0": {
   "t": "Περιληπτικό: اللُّوفُ (το φυτό, οι κολοκύθες), لُوفَة (μία κολοκύθα ή ένα σφουγγάρι), لُوفَات (μετρημένα).",
   "src": "794aef9bc232",
+  "by": "claude"
+ },
+ "x:ar:luf/profile/notes/0/text": {
+  "t": "Το αγγλικό loofah προέρχεται από αυτή την αραβική λέξη.",
+  "src": "5879ea2d9302",
   "by": "claude"
  },
  "x:ar:kurunb_ajad/features/root/none": {
@@ -84949,6 +86214,11 @@
   "src": "e051d8d9401c",
   "by": "claude"
  },
+ "x:ar:kurkum/profile/notes/1/text": {
+  "t": "Τα τουρκικά χρησιμοποιούν ένα άλλο, περσικό όνομα: zerdeçal («κίτρινο ξύλο»).",
+  "src": "49f16b75be85",
+  "by": "claude"
+ },
  "x:ar:himhim/features/pattern/none": {
   "t": "λέξη με αναδιπλασιασμό (ḥim-ḥim): δεν ταιριάζει σε κανένα μοτίβο του ح م م",
   "src": "4ca69c0236f7",
@@ -85087,6 +86357,31 @@
  "x:ar:himhim/profile/subtleties/1": {
   "t": "Ουσιαστικό ύλης χωρίς πληθυντικό: ένα φυτό = نَبْتَةُ حِمْحِمٍ.",
   "src": "98ae96a7810e",
+  "by": "claude"
+ },
+ "x:ar:himhim/profile/notes/0/text": {
+  "t": "Το αγγλικό borage προέρχεται από το μεσαιωνικό όνομα borrago — ίσως από το αραβικό أَبُو الْعَرَقِ, «πατέρας του ιδρώτα».",
+  "src": "59910456fa89",
+  "by": "claude"
+ },
+ "x:ar:himhim/profile/notes/1/text": {
+  "t": "Το γαλλικό bourrache προέρχεται από το μεσαιωνικό όνομα borrago — ίσως από το αραβικό أَبُو الْعَرَقِ, «πατέρας του ιδρώτα».",
+  "src": "8bc3a65103d5",
+  "by": "claude"
+ },
+ "x:ar:himhim/profile/notes/2/text": {
+  "t": "Το ιταλικό borragine προέρχεται από το μεσαιωνικό όνομα borrago — ίσως από το αραβικό أَبُو الْعَرَقِ, «πατέρας του ιδρώτα».",
+  "src": "f42ee05d2146",
+  "by": "claude"
+ },
+ "x:ar:himhim/profile/notes/3/text": {
+  "t": "Το ισπανικό borraja προέρχεται από το μεσαιωνικό όνομα borrago — ίσως από το αραβικό أَبُو الْعَرَقِ, «πατέρας του ιδρώτα».",
+  "src": "da66b10ada8a",
+  "by": "claude"
+ },
+ "x:ar:himhim/profile/notes/4/text": {
+  "t": "Το πορτογαλικό borragem προέρχεται από το μεσαιωνικό όνομα borrago — ίσως από το αραβικό أَبُو الْعَرَقِ, «πατέρας του ιδρώτα».",
+  "src": "5dbe8506d284",
   "by": "claude"
  },
  "x:ar:sarmaq/features/root/none": {
@@ -85232,6 +86527,11 @@
  "x:ar:sarmaq/profile/subtleties/0": {
   "t": "Η περσική πηγή σήμαινε το ανδράκλι του κήπου, όμως το Wiktionary δίνει την αραβική λέξη πρώτα για το χηνοπόδιο (Chenopodium): τα δύο φυλλώδη ζιζάνια μοιάζουν, και το όνομα τα καλύπτει και τα δύο.",
   "src": "eaf3b5bd5989",
+  "by": "claude"
+ },
+ "x:ar:sarmaq/profile/notes/0/text": {
+  "t": "Το αγγλικό goosefoot μεταφράζει το όνομα του γένους Chenopodium.",
+  "src": "08d6de7afbea",
   "by": "claude"
  },
  "x:ar:wasabi/features/root/none": {
@@ -85469,9 +86769,24 @@
   "src": "1ba06ff48f95",
   "by": "claude"
  },
+ "x:ar:rawand/profile/notes/0/text": {
+  "t": "Το ρωσικό ревень προέρχεται από την ίδια λέξη, από το Ιράν, με το رَاوَنْد.",
+  "src": "45f3b4299188",
+  "by": "claude"
+ },
  "x:ar:rawand/profile/notes/1/text": {
   "t": "Το ελληνικό ραβέντι προέρχεται από την ίδια λέξη, από το Ιράν, με το رَاوَنْد.",
   "src": "eeccfc5c84e3",
+  "by": "claude"
+ },
+ "x:ar:rawand/profile/notes/2/text": {
+  "t": "Το αγγλικό rhubarb ανάγεται στο μεσαιωνικό όνομα rheubarbarum, όχι στο رَاوَنْد.",
+  "src": "db3c5c86c676",
+  "by": "claude"
+ },
+ "x:ar:rawand/profile/notes/3/text": {
+  "t": "Το τουρκικό ravent προέρχεται από την ίδια περσική λέξη.",
+  "src": "ad9cca8130c8",
   "by": "claude"
  },
  "x:ar:khawlanjan/features/root/none": {
@@ -85577,6 +86892,16 @@
  "x:ar:khawlanjan/profile/subtleties/0": {
   "t": "Δύο φωνηεντισμοί είναι καθιερωμένοι: خَوْلَنْجَان (ḵawlanjān) και خُولَنْجَان (ḵūlanjān) (Wiktionary).",
   "src": "9f52c8412d17",
+  "by": "claude"
+ },
+ "x:ar:khawlanjan/profile/notes/0/text": {
+  "t": "Το αγγλικό galangal προέρχεται από αυτή την αραβική λέξη.",
+  "src": "45df1fd3a0ae",
+  "by": "claude"
+ },
+ "x:ar:khawlanjan/profile/notes/1/text": {
+  "t": "Το γαλλικό galanga προέρχεται από αυτή την αραβική λέξη.",
+  "src": "9fe234110990",
   "by": "claude"
  },
  "x:ar:qataf/features/root/none": {
@@ -85819,9 +87144,24 @@
   "src": "a90233f3465a",
   "by": "claude"
  },
+ "x:ar:ushnan/profile/notes/0/text": {
+  "t": "Το αγγλικό alkali είναι το αραβικό al-qily, η στάχτη του φυτού.",
+  "src": "56c95c129d1b",
+  "by": "claude"
+ },
+ "x:ar:ushnan/profile/notes/1/text": {
+  "t": "Το γαλλικό alcali είναι το αραβικό al-qily, η στάχτη του φυτού.",
+  "src": "fae2d3fc81fa",
+  "by": "claude"
+ },
  "x:ar:ushnan/profile/notes/2/text": {
   "t": "Το ελληνικό αλκάλιο ανάγεται στο αραβικό al-qily, τη στάχτη του φυτού.",
   "src": "96fab75c1f54",
+  "by": "claude"
+ },
+ "x:ar:ushnan/profile/notes/3/text": {
+  "t": "Το αγγλικό glasswort λέει την ίδια ιστορία: η στάχτη χρησιμοποιούνταν για να φτιάχνεται γυαλί.",
+  "src": "e94439fbebc1",
   "by": "claude"
  },
  "x:ar:jummar/features/dual/none": {
@@ -86067,6 +87407,31 @@
  "x:ar:jarbuz/profile/subtleties/0": {
   "t": "Το Wiktionary δίνει τους εναλλακτικούς τύπους يَرْبُوز (απαρχαιωμένο), أَرْبُوز και جَرْمُوز.",
   "src": "68c2ac334d05",
+  "by": "claude"
+ },
+ "x:ar:jarbuz/profile/notes/0/text": {
+  "t": "Το αγγλικό cockscomb, ο διακοσμητικός συγγενής, είναι η ίδια εικόνα.",
+  "src": "891e89fb4102",
+  "by": "claude"
+ },
+ "x:ar:jarbuz/profile/notes/1/text": {
+  "t": "Το γαλλικό crête-de-coq, ο διακοσμητικός συγγενής, είναι η ίδια εικόνα.",
+  "src": "a17b807f4863",
+  "by": "claude"
+ },
+ "x:ar:jarbuz/profile/notes/2/text": {
+  "t": "Το ιταλικό cresta di gallo, ο διακοσμητικός συγγενής, είναι η ίδια εικόνα.",
+  "src": "842229c5e7f4",
+  "by": "claude"
+ },
+ "x:ar:jarbuz/profile/notes/3/text": {
+  "t": "Το ισπανικό cresta de gallo, ο διακοσμητικός συγγενής, είναι η ίδια εικόνα.",
+  "src": "2813689b5929",
+  "by": "claude"
+ },
+ "x:ar:jarbuz/profile/notes/4/text": {
+  "t": "Το πορτογαλικό crista-de-galo, ο διακοσμητικός συγγενής, είναι η ίδια εικόνα.",
+  "src": "5e5df020a335",
   "by": "claude"
  },
  "a:ar:veg.burdock/reason": {
@@ -86492,6 +87857,41 @@
  "x:ar:kabar/profile/notes/0/text": {
   "t": "Η ελληνική κάππαρη είναι η ίδια λέξη: το كَبَر ανάγεται στο κάππαρις.",
   "src": "4f6235264793",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/1/text": {
+  "t": "Το ρωσικό каперсы ανάγεται στο αρχαίο κάππαρις, όπως το كَبَر.",
+  "src": "252858c3ba4b",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/2/text": {
+  "t": "Το αγγλικό caper ανάγεται στο αρχαίο κάππαρις, όπως το كَبَر.",
+  "src": "78f1c0d2f7e9",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/3/text": {
+  "t": "Το γαλλικό câpre ανάγεται στο αρχαίο κάππαρις, όπως το كَبَر.",
+  "src": "d19b8b4fdf80",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/4/text": {
+  "t": "Το ιταλικό cappero ανάγεται στο αρχαίο κάππαρις, όπως το كَبَر.",
+  "src": "496cdbbb3a7b",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/5/text": {
+  "t": "Το ισπανικό alcaparra κρατά το αραβικό άρθρο: ανδαλουσιανό al-kappára, η ίδια λέξη με το كَبَر.",
+  "src": "fd5171fd541b",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/6/text": {
+  "t": "Το πορτογαλικό alcaparra κρατά το αραβικό άρθρο: ανδαλουσιανό al-kappára, η ίδια λέξη με το كَبَر.",
+  "src": "9c7a6e248880",
+  "by": "claude"
+ },
+ "x:ar:kabar/profile/notes/7/text": {
+  "t": "Το τουρκικό kapari ανάγεται στην ίδια ελληνική λέξη.",
+  "src": "d481be553729",
   "by": "claude"
  },
  "x:ar:qiththa/features/plurals/0/note": {
