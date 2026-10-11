@@ -3528,6 +3528,564 @@
   "@lang.script.backLetters": {
     "description": "Button at the end of a script drill."
   },
+  "lang.claude.notHereCloud": "This course is not on this device yet (and not in the cloud).",
+  "@lang.claude.notHereCloud": {
+    "description": "Error when an account course’s content is missing (signed in to the cloud)."
+  },
+  "lang.claude.notHereSignIn": "This course is not on this device yet — sign in to the cloud account it was made with.",
+  "@lang.claude.notHereSignIn": {
+    "description": "Error when an account course’s content is missing (not signed in)."
+  },
+  "lang.claude.libMissing": "The library course “{id}” is not available here.",
+  "@lang.claude.libMissing": {
+    "description": "Error: a library course is missing. {id} = the course’s id.",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "polyglot-semitic-zh-de"
+      }
+    }
+  },
+  "lang.claude.removeAsk": "Remove {lang} from “{title}”?",
+  "@lang.claude.removeAsk": {
+    "description": "Confirm dialog, first line: remove a language a Claude package added. {title} = the course title.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Turkish"
+      },
+      "title": {
+        "type": "String",
+        "example": "Arabic · Hebrew · Chinese · German"
+      }
+    }
+  },
+  "lang.claude.removeAskSub": "The language leaves this course on every device. Your progress in it is kept: adding it again through Claude brings it back.",
+  "@lang.claude.removeAskSub": {
+    "description": "Confirm dialog, second paragraph."
+  },
+  "lang.claude.removed": "{lang} removed from the course",
+  "@lang.claude.removed": {
+    "description": "Toast after removing a language.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Turkish"
+      }
+    }
+  },
+  "lang.claude.addedTitle": "Languages added through Claude",
+  "@lang.claude.addedTitle": {
+    "description": "Section title in the course settings."
+  },
+  "lang.claude.made": "made {date}",
+  "@lang.claude.made": {
+    "description": "After a language added through Claude: when its package was made ({date} = YYYY-MM-DD).",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2026-10-11"
+      }
+    }
+  },
+  "lang.claude.taskClosed": "This task is not open any more.",
+  "@lang.claude.taskClosed": {
+    "description": "Error: the Claude task is no longer open."
+  },
+  "lang.claude.fixes": "Claude fixes {n, plural, one {# problem} other {# problems}}…",
+  "@lang.claude.fixes": {
+    "description": "Log line (after ↻) while Claude repairs its answer.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.claude.taskClosedCopy": "This task is not open any more — copy the current task again.",
+  "@lang.claude.taskClosedCopy": {
+    "description": "Error when pasting an answer to a closed task."
+  },
+  "lang.claude.notJSON": "That is not a JSON answer — paste exactly what Claude answered (the JSON object).",
+  "@lang.claude.notJSON": {
+    "description": "Error when the pasted answer is not JSON."
+  },
+  "lang.claude.merged": "{n, plural, one {# answer} other {# answers}} from your Claude app merged into your course",
+  "@lang.claude.merged": {
+    "description": "Toast (after ✨) after answers from the Claude app were merged.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.copied": "Copied",
+  "@lang.claude.copied": {
+    "description": "Button text (after ✓) for a moment after copying."
+  },
+  "lang.claude.status.queued": "queued",
+  "@lang.claude.status.queued": {
+    "description": "State of a Claude task (after ⏳)."
+  },
+  "lang.claude.status.done": "done",
+  "@lang.claude.status.done": {
+    "description": "State of a Claude task (after ✅)."
+  },
+  "lang.claude.status.refused": "refused",
+  "@lang.claude.status.refused": {
+    "description": "State of a Claude task (after ⚠️): its answer did not pass the checks."
+  },
+  "lang.claude.kind.core": "the core",
+  "@lang.claude.kind.core": {
+    "description": "Kind of Claude task (after 🧱): the core of a new course."
+  },
+  "lang.claude.kind.node": "a node",
+  "@lang.claude.kind.node": {
+    "description": "Kind of Claude task (after 📖): one step of the course in one language."
+  },
+  "lang.claude.kind.function": "grammar",
+  "@lang.claude.kind.function": {
+    "description": "Kind of Claude task (after 🧩): a grammar point."
+  },
+  "lang.claude.kind.compare": "comparison",
+  "@lang.claude.kind.compare": {
+    "description": "Kind of Claude task (after ⇄)."
+  },
+  "lang.claude.kind.refill": "more sentences",
+  "@lang.claude.kind.refill": {
+    "description": "Kind of Claude task (after ✨)."
+  },
+  "lang.claude.textToCopy": "Text to copy",
+  "@lang.claude.textToCopy": {
+    "description": "Accessible name of a read-only text box to copy."
+  },
+  "lang.claude.titlePh": "e.g. Spanish and Japanese for travelling",
+  "@lang.claude.titlePh": {
+    "description": "Placeholder of the new course’s title."
+  },
+  "lang.claude.titleLabel": "Title",
+  "@lang.claude.titleLabel": {
+    "description": "Label of the new course’s title field."
+  },
+  "lang.claude.morePh": "other codes, e.g. uk, ta",
+  "@lang.claude.morePh": {
+    "description": "Placeholder: more language codes (ISO 639). Keep the codes."
+  },
+  "lang.claude.moreLabel": "Other language codes",
+  "@lang.claude.moreLabel": {
+    "description": "Accessible name of the field of more language codes."
+  },
+  "lang.claude.knownPh": "e.g. el, en",
+  "@lang.claude.knownPh": {
+    "description": "Placeholder: codes of the languages the learner knows. Keep the codes."
+  },
+  "lang.claude.knownLabel": "Languages you know",
+  "@lang.claude.knownLabel": {
+    "description": "Accessible name of the field of known languages."
+  },
+  "lang.claude.explainLabel": "Explanation language",
+  "@lang.claude.explainLabel": {
+    "description": "Accessible name of the select of the explanation language."
+  },
+  "lang.claude.depthOf": "Depth {code}",
+  "@lang.claude.depthOf": {
+    "description": "Accessible name of the depth select of a language ({code} = its ISO code).",
+    "placeholders": {
+      "code": {
+        "type": "String",
+        "example": "es"
+      }
+    }
+  },
+  "lang.claude.depth3": "everything (tiers 1–3)",
+  "@lang.claude.depth3": {
+    "description": "Depth option of a new course."
+  },
+  "lang.claude.depth2": "common + intermediate",
+  "@lang.claude.depth2": {
+    "description": "Depth option of a new course."
+  },
+  "lang.claude.depth1": "the common words",
+  "@lang.claude.depth1": {
+    "description": "Depth option of a new course."
+  },
+  "lang.claude.whoWrites": "Who writes it",
+  "@lang.claude.whoWrites": {
+    "description": "Label of the choice of who writes the new course."
+  },
+  "lang.claude.wayApp": "The Claude app — recommended",
+  "@lang.claude.wayApp": {
+    "description": "Choice (after 💬): the Claude app writes the course."
+  },
+  "lang.claude.wayAppSub": "With the noema-lite connector: your Claude plan writes the course task by task (scheduled runs at night); the app merges every answer by itself.",
+  "@lang.claude.wayAppSub": {
+    "description": "Explanation of the Claude-app choice."
+  },
+  "lang.claude.wayKey": "Here, with your Claude key",
+  "@lang.claude.wayKey": {
+    "description": "Choice (after ▶): this device asks Claude with the learner’s API key."
+  },
+  "lang.claude.wayKeySub": "The app asks Claude now (paid per use on your API account); the key stays on this device.",
+  "@lang.claude.wayKeySub": {
+    "description": "Explanation of the API-key choice."
+  },
+  "lang.claude.wayKeyNeeds": "Needs a Claude API key on this device (⚙️ Settings → Claude).",
+  "@lang.claude.wayKeyNeeds": {
+    "description": "Explanation of the API-key choice without a key."
+  },
+  "lang.claude.wayCowork": "Claude here in Cowork",
+  "@lang.claude.wayCowork": {
+    "description": "Choice (after 🧑‍💻): Claude Code / Cowork writes a library course."
+  },
+  "lang.claude.wayCoworkSub": "For the shared library of the app: Claude writes the course into library/languages/ of the repository and validates it.",
+  "@lang.claude.wayCoworkSub": {
+    "description": "Explanation of the Cowork choice. Keep the path."
+  },
+  "lang.claude.needTitle": "Give the course a title.",
+  "@lang.claude.needTitle": {
+    "description": "Validation message (after ⚠️)."
+  },
+  "lang.claude.needLang": "Choose at least one language.",
+  "@lang.claude.needLang": {
+    "description": "Validation message (after ⚠️)."
+  },
+  "lang.claude.coworkTitle": "A course for the shared library",
+  "@lang.claude.coworkTitle": {
+    "description": "Title (after 🧑‍💻) of the brief for Claude Code / Cowork."
+  },
+  "lang.claude.coworkHow": "Give Claude (Claude Code / Cowork, in the noema-lite repository) this brief. The course is written into library/languages/, validated (validate_lang.py --strict, lang_refcheck.py, lang_phenomena.py) and appears for everybody after the next build.",
+  "@lang.claude.coworkHow": {
+    "description": "How to use the brief. Keep paths and tool names."
+  },
+  "lang.claude.copy": "Copy",
+  "@lang.claude.copy": {
+    "description": "Button (after 📋)."
+  },
+  "lang.claude.creating": "Creating the course…",
+  "@lang.claude.creating": {
+    "description": "Status (after ⏳)."
+  },
+  "lang.claude.writingCore": "Claude writes the core of the course…",
+  "@lang.claude.writingCore": {
+    "description": "Status (after ✨)."
+  },
+  "lang.claude.staysQueued": "{err} — the task stays in the queue (✨ Through Claude).",
+  "@lang.claude.staysQueued": {
+    "description": "Error (after ⚠️) when writing the core failed. {err} = the reason.",
+    "placeholders": {
+      "err": {
+        "type": "String",
+        "example": "network error"
+      }
+    }
+  },
+  "lang.claude.waiting": "“{title}” is waiting for your Claude app",
+  "@lang.claude.waiting": {
+    "description": "Title (after ✨) after creating a course for the Claude app.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Spanish for travelling"
+      }
+    }
+  },
+  "lang.claude.waitingHow": "Paste this into a chat in the Claude app (with the noema-lite connector). Claude writes the core first, then the nodes in each language; every answer reaches this app by itself. On the course page ✨ Through Claude shows the queue.",
+  "@lang.claude.waitingHow": {
+    "description": "How to start the Claude app on the new course."
+  },
+  "lang.claude.copyMsg": "Copy the message",
+  "@lang.claude.copyMsg": {
+    "description": "Button (after 📋)."
+  },
+  "lang.claude.openCourse": "Open the course",
+  "@lang.claude.openCourse": {
+    "description": "Button after creating a course."
+  },
+  "lang.claude.create": "Create the course",
+  "@lang.claude.create": {
+    "description": "Main button (after ✨) of the new-course dialog."
+  },
+  "lang.claude.newTitle": "New language course",
+  "@lang.claude.newTitle": {
+    "description": "Title (after ✨) of the new-course dialog."
+  },
+  "lang.claude.newSub": "A private course in your account, written by Claude to the rules of the language courses (correct forms, the common order of every language, sentences from what you know).",
+  "@lang.claude.newSub": {
+    "description": "Explanation in the new-course dialog."
+  },
+  "lang.claude.explainIn": "Explanations in",
+  "@lang.claude.explainIn": {
+    "description": "Label of the explanation-language select."
+  },
+  "lang.claude.depthPer": "Depth per language",
+  "@lang.claude.depthPer": {
+    "description": "Label of the depth selects."
+  },
+  "lang.claude.cancel": "Cancel",
+  "@lang.claude.cancel": {
+    "description": "Button of the new-course dialog."
+  },
+  "lang.claude.theCourse": "The course",
+  "@lang.claude.theCourse": {
+    "description": "Back button (after ←) to the course home."
+  },
+  "lang.claude.subAccount": "Your own course: Claude writes it task by task, every answer is checked before it joins the course.",
+  "@lang.claude.subAccount": {
+    "description": "Under the title of the Through Claude page (account course)."
+  },
+  "lang.claude.subLibrary": "This course is from the library: here Claude writes more sentences with the words you know (✨ on a grammar page).",
+  "@lang.claude.subLibrary": {
+    "description": "Under the title of the Through Claude page (library course)."
+  },
+  "lang.claude.nothingQueued": "Nothing queued for Claude yet. On a grammar page, “✨ Ask Claude for more sentences” queues a task.",
+  "@lang.claude.nothingQueued": {
+    "description": "Through Claude page with no record yet."
+  },
+  "lang.claude.queueNext": "Queue the next node in each language",
+  "@lang.claude.queueNext": {
+    "description": "Button (after 🧱)."
+  },
+  "lang.claude.nightQueued": "{n, plural, one {# task queued} other {# tasks queued}} — a scheduled Claude run (or ▶ here) works through them",
+  "@lang.claude.nightQueued": {
+    "description": "Toast (after 🌙).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "lang.claude.queueAll": "Queue every unwritten node ({n, number})",
+  "@lang.claude.queueAll": {
+    "description": "Button (after 🌙).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.queueCmp": "Queue comparisons ({n, number})",
+  "@lang.claude.queueCmp": {
+    "description": "Button (after ⇄).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.runAll": "Write the queue with my Claude key ({n, number})",
+  "@lang.claude.runAll": {
+    "description": "Button (after ▶).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.nQueued": "{n, number} queued",
+  "@lang.claude.nQueued": {
+    "description": "Badge: tasks queued.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.nClaimed": "{n, number} being written",
+  "@lang.claude.nClaimed": {
+    "description": "Badge: tasks being written by a run.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.nDone": "{n, number} done",
+  "@lang.claude.nDone": {
+    "description": "Badge: tasks done.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.nRefused": "{n, number} refused",
+  "@lang.claude.nRefused": {
+    "description": "Badge: tasks whose answers were refused.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.copyForApp": "Copy the message for the Claude app",
+  "@lang.claude.copyForApp": {
+    "description": "Button (after 💬)."
+  },
+  "lang.claude.nMerged": "{n, plural, one {# answer merged} other {# answers merged}}",
+  "@lang.claude.nMerged": {
+    "description": "Log line (after ✓) after fetching answers.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.claude.noAnswers": "No answers waiting.",
+  "@lang.claude.noAnswers": {
+    "description": "Log line after fetching answers when there are none."
+  },
+  "lang.claude.fetch": "Fetch answers",
+  "@lang.claude.fetch": {
+    "description": "Button (after 🔄)."
+  },
+  "lang.claude.courseFile": "The course file",
+  "@lang.claude.courseFile": {
+    "description": "Button (after ⬇️): download the course as a file."
+  },
+  "lang.claude.withKey": "With a Claude API key on this device (⚙️ Settings → Claude) the app writes the queue itself.",
+  "@lang.claude.withKey": {
+    "description": "Note (after ▶) without a Claude key."
+  },
+  "lang.claude.queue": "The queue",
+  "@lang.claude.queue": {
+    "description": "Section title on the Through Claude page."
+  },
+  "lang.claude.allWritten": "Every node is written.",
+  "@lang.claude.allWritten": {
+    "description": "Empty queue of an account course (after 🎉)."
+  },
+  "lang.claude.nothingInQueue": "Nothing queued.",
+  "@lang.claude.nothingInQueue": {
+    "description": "Empty queue."
+  },
+  "lang.claude.past": "Done and refused",
+  "@lang.claude.past": {
+    "description": "Folded section of past tasks (a count follows)."
+  },
+  "lang.claude.wrote": "What Claude wrote",
+  "@lang.claude.wrote": {
+    "description": "Folded section: the log of what Claude wrote."
+  },
+  "lang.claude.claimedByRun": "being written by a run",
+  "@lang.claude.claimedByRun": {
+    "description": "Badge (after ✍️) of a task taken by a run."
+  },
+  "lang.claude.writeNow": "Write it now",
+  "@lang.claude.writeNow": {
+    "description": "Button (after ▶): write this task now with the Claude key."
+  },
+  "lang.claude.copyTask": "Copy the task",
+  "@lang.claude.copyTask": {
+    "description": "Button (after 📋)."
+  },
+  "lang.claude.pasteAnswer": "Paste the answer",
+  "@lang.claude.pasteAnswer": {
+    "description": "Button (after 📥)."
+  },
+  "lang.claude.pastePh": "Paste Claude’s answer (the JSON object) here",
+  "@lang.claude.pastePh": {
+    "description": "Placeholder of the paste box."
+  },
+  "lang.claude.answerLabel": "Claude’s answer",
+  "@lang.claude.answerLabel": {
+    "description": "Accessible name of the paste box."
+  },
+  "lang.claude.problems": "{n, plural, one {# problem} other {# problems}} — give them to Claude to fix:",
+  "@lang.claude.problems": {
+    "description": "Header (after ❌) of the problems found in a pasted answer.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.checkAdd": "Check and add",
+  "@lang.claude.checkAdd": {
+    "description": "Button (after ✓) of the paste box."
+  },
+  "lang.claude.homeWaiting": "Through Claude — {n, plural, one {# task waiting} other {# tasks waiting}}",
+  "@lang.claude.homeWaiting": {
+    "description": "Button on the course home (after ✨) when tasks wait.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.claude.acrossLangs": "{title} across the languages",
+  "@lang.claude.acrossLangs": {
+    "description": "Title (after ⇄) of a grammar point’s comparison table. {title} = the point (course content).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Plural"
+      }
+    }
+  },
+  "lang.claude.thinN": "thin ({n, number} sentences)",
+  "@lang.claude.thinN": {
+    "description": "Feasibility (after 🟡) on the refill card.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.withYourWords": "Sentences with the words you know:",
+  "@lang.claude.withYourWords": {
+    "description": "Bold lead-in on the refill card (the feasibility follows)."
+  },
+  "lang.claude.usable": "{n, number} usable",
+  "@lang.claude.usable": {
+    "description": "On the refill card: how many sentences fit.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.claude.askedAlready": "Asked already ({id}) — ✨ Through Claude shows how it gets written.",
+  "@lang.claude.askedAlready": {
+    "description": "On the refill card (after ⏳) when a refill is queued. {id} = the task id.",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "refill-3"
+      }
+    }
+  },
+  "lang.claude.asked": "Asked: {id}",
+  "@lang.claude.asked": {
+    "description": "Toast (after ✨) after queuing a refill.",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "refill-3"
+      }
+    }
+  },
+  "lang.claude.askEvenMore": "Ask Claude for even more sentences",
+  "@lang.claude.askEvenMore": {
+    "description": "Button (after ✨) on the refill card when enough sentences exist."
+  },
+  "lang.claude.askMore": "Ask Claude for more sentences with what I know",
+  "@lang.claude.askMore": {
+    "description": "Button (after ✨) on the refill card."
+  },
   "lang.speech.noVoice": "No {lang} voice on this device",
   "@lang.speech.noVoice": {
     "description": "Tooltip of a muted 🔇 speaker button. {lang} = language name.",
@@ -3931,6 +4489,54 @@
   "lang.listen.recNever": "Recordings stay on the page and are never stored.",
   "@lang.listen.recNever": {
     "description": "Speech settings note (after 🎙️)."
+  },
+  "lang.qa.start": "Start: {lesson}",
+  "@lang.qa.start": {
+    "description": "The big button of the course home (after ▶) when nothing is due but a lesson waits. {lesson} = step code and title.",
+    "placeholders": {
+      "lesson": {
+        "type": "String",
+        "example": "S01 Greetings"
+      }
+    }
+  },
+  "lang.qa.yourLanes": "Your lanes",
+  "@lang.qa.yourLanes": {
+    "description": "Section title on the course home (after 🧭): one row per language with its lanes."
+  },
+  "lang.qa.grammarTitle": "The grammar points of your open lessons",
+  "@lang.qa.grammarTitle": {
+    "description": "Tooltip of the 📐 Grammar button in a language’s row."
+  },
+  "lang.qa.sortFold": "Sort a field into its groups ({n, number})",
+  "@lang.qa.sortFold": {
+    "description": "Folded row of sorting drills on the course home (after 🧩), with how many fields.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.qa.wholeMap": "The whole map — {n, plural, one {# more step} other {# more steps}}",
+  "@lang.qa.wholeMap": {
+    "description": "Button under the course map (after 🗺️): show the folded, far steps.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "lang.qa.nextLesson": "Next lesson: {lesson}",
+  "@lang.qa.nextLesson": {
+    "description": "Button (after ▶) at the end of a lesson or session. {lesson} = step code and title.",
+    "placeholders": {
+      "lesson": {
+        "type": "String",
+        "example": "S02 Numbers"
+      }
+    }
   },
   "lang.frame.tutor": "Tutor",
   "@lang.frame.tutor": {

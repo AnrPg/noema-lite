@@ -5,7 +5,7 @@
 const QA_SCRIPT = /[֐-׿יִ-ﭏ]+(?:[\s֐-׿יִ-ﭏ]*[֐-׿יִ-ﭏ])?|[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+(?:[\s؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿ً-ٟ]*[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿])?|[㐀-鿿豈-﫿]+/g;
 const QA_SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'OPTION', 'SELECT', 'TITLE', 'svg', 'SVG', 'text', 'CANVAS']);
 const QA_OTHER = { Arab: ['fa', 'ur', 'ps', 'ku', 'sd', 'ug'], Hebr: ['yi', 'lad'], Hani: ['ja', 'ko', 'yue', 'vi'] };
-function qaScriptOf(run) { return /[֐-׿יִ-ﭏ]/.test(run) ? 'Hebr' : /[㐀-鿿豈-﫿]/.test(run) ? 'Hani' : 'Arab'; }
+function qaScriptOf(run) { return /[֐-׿יִ-ﭏ]/.test(run) ? 'Hebr' : /[㐀-鿿豈-﫿]/.test(run) ? 'Hani' : 'Arab'; }   // i18n-ignore
 function qaLangOf(run, el) {
   const sc = qaScriptOf(run), base = { Hebr: 'he', Arab: 'ar', Hani: 'zh' }[sc];
   const forCode = el.closest('[data-for]')?.dataset.for;   // a comparison note about Persian, Yiddish, Japanese …
@@ -47,7 +47,7 @@ function qaMarkScripts(root) {
     const roots = new Set();
     for (const mu of list) for (const n of mu.addedNodes) {
       const el = n.nodeType === 1 ? n : n.parentElement;
-      if (el && el.isConnected && !el.classList?.contains('lx-autolang') && el.closest?.('.lx-main, .lx-pop, .lx-tutor, .lx-top, .lj-box, .lx-glyphcard')) roots.add(el);
+      if (el && el.isConnected && !el.classList?.contains('lx-autolang') && el.closest?.('.lx-main, .lx-pop, .lx-tutor, .lx-top, .lj-box, .lx-glyphcard')) roots.add(el);   // i18n-ignore
     }
     for (const r of roots) { let up = r.parentElement, inner = false; while (up && !inner) { inner = roots.has(up); up = up.parentElement; } if (!inner) qaMarkScripts(r); }   // the outermost only
   });
@@ -68,7 +68,7 @@ const QA_FAR = new Set(['locked', 'unprepared']);
     if (go1 && go1.disabled && first) {
       const nid = first.dataset.node, n = UI.C.nodes[nid];
       const st = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() }).steps.find(s => s.kind === 'lesson' && s.node === nid);
-      const start = go1.cloneNode(false); start.disabled = false; start.textContent = `▶ Start: ${stepLabel(n)} ${n.title}`;   // a clone: without the session's listener
+      const start = go1.cloneNode(false); start.disabled = false; start.dataset.go = 'start'; start.dataset.rest = `${stepLabel(n)} ${n.title}`; start.textContent = '▶ ' + LT('lang.qa.start', { lesson: start.dataset.rest });   // a clone: without the session's listener
       start.addEventListener('click', () => runLesson(nid, st?.langs?.length ? st.langs : lessonLangs(nid))); go1.replaceWith(start);
     }
     const poly = v.querySelector('.lx-polyhome'), today1 = poly?.querySelector('.lx-today');
@@ -76,16 +76,16 @@ const QA_FAR = new Set(['locked', 'unprepared']);
     // the lanes: one row per language — grammar, writing, reading, script, peculiarities, tutor; then what spans languages
     const lanes = v.querySelector('.lx-prodlanes');
     if (lanes) {
-      lanes.querySelector('h2').textContent = '🧭 Your lanes';
+      lanes.querySelector('h2').textContent = '🧭 ' + LT('lang.qa.yourLanes');
       for (const row of lanes.querySelectorAll('.lx-lanerow')) {
         const c = row.dataset.lang, tutor = row.querySelector('.lx-totutor');
-        const gram = h('button', { class: 'btn small lx-togrammar', title: 'The grammar points of your open lessons', onclick: () => go('#/grammar/' + c) }, '📐 Grammar');
+        const gram = h('button', { class: 'btn small lx-togrammar', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
         row.querySelector('.lx-towrite')?.before(gram);
         const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
         const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).name));
-        if (pec) { pec.textContent = '📚 Peculiarities'; pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
+        if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
         const lis = v.querySelector(`.lx-speechlanes .lx-lanerow[data-lang="${c}"] .lx-tolisten`);   // P9: 🎧 in the same row
-        if (lis) { lis.textContent = '🎧 Listening & speaking'; tutor ? tutor.before(lis) : row.append(lis); }
+        if (lis) { lis.textContent = '🎧 ' + LT('lang.view.listen'); tutor ? tutor.before(lis) : row.append(lis); }
         row.append(h('div', { class: 'lx-laneacts' }, ...row.querySelectorAll(':scope > button')));
       }
       v.querySelector('.lx-libraries')?.remove();
@@ -94,7 +94,7 @@ const QA_FAR = new Set(['locked', 'unprepared']);
       const drills = v.querySelector('.lx-drills');
       if (drills) {
         const sorts = [...drills.querySelectorAll('button')].filter(b => b.textContent.startsWith('🧩'));
-        if (sorts.length) drills.append(h('details', { class: 'lx-sortfold' }, h('summary', { class: 'btn ghost small' }, `🧩 Sort a field into its groups (${sorts.length})`), h('div', { class: 'row' }, ...sorts)));
+        if (sorts.length) drills.append(h('details', { class: 'lx-sortfold' }, h('summary', { class: 'btn ghost small' }, '🧩 ' + LT('lang.qa.sortFold', { n: sorts.length })), h('div', { class: 'row' }, ...sorts)));
         lanes.append(drills);
       }
       if (poly && !poly.children.length) poly.remove();
@@ -118,7 +118,7 @@ function qaCompactMap(v) {
   const cut = lastNear + 4, hidden = nodes.slice(cut);
   if (hidden.length > 2) {
     hidden.forEach(n => { n.hidden = true; });
-    box.after(h('button', { class: 'btn ghost small lx-mapmore', onclick: e => { hidden.forEach(n => { n.hidden = false; }); e.currentTarget.remove(); } }, `🗺️ The whole map — ${hidden.length} more steps`));
+    box.after(h('button', { class: 'btn ghost small lx-mapmore', onclick: e => { hidden.forEach(n => { n.hidden = false; }); e.currentTarget.remove(); } }, '🗺️ ' + LT('lang.qa.wholeMap', { n: hidden.length })));
   }
   const legend = [...seen].filter(Boolean).map(s => `${QA_ICON(s)} ${(STATE_LABEL[s] || s).split(' ').slice(1).join(' ')}`).join(' · ');
   box.before(h('p', { class: 'tiny lx-maplegend' }, legend));
@@ -131,7 +131,7 @@ function qaNextLessonButton(nid, ran = []) {
   const st = N.nextLessons(UI.C, UI.L, langs, K).filter(s => s.node !== nid).sort((a, b) => mine(a) - mine(b))[0];   // the languages just learned first
   if (!st) return null;
   const n = UI.C.nodes[st.node];
-  return h('button', { class: 'btn primary lx-nextlesson', onclick: () => runLesson(st.node, st.langs) }, `▶ Next lesson: ${stepLabel(n)} ${n.title}`);
+  return h('button', { class: 'btn primary lx-nextlesson', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.qa.nextLesson', { lesson: `${stepLabel(n)} ${n.title}` }));
 }
 
 /* ---------- 🔁 principal parts: distractors that do not give the answer away ---------- */
@@ -140,7 +140,7 @@ function qaNextLessonButton(nid, ran = []) {
 function qaPartsDistractors(c, p, label, val, pool) {
   const lem = LX(c).lex[p.id].lemma, made = [];
   if (c === 'de') {
-    const noun = val.replace(/^(der|die|das|des|dem|den) /, ''), uml = w => w.replace(/(au|a|o|u)(?=[^aou]*$)/i, x => ({ au: 'äu', a: 'ä', o: 'ö', u: 'ü', Au: 'Äu', A: 'Ä', O: 'Ö', U: 'Ü' }[x] || x));
+    const noun = val.replace(/^(der|die|das|des|dem|den) /, ''), uml = w => w.replace(/(au|a|o|u)(?=[^aou]*$)/i, x => ({ au: 'äu', a: 'ä', o: 'ö', u: 'ü', Au: 'Äu', A: 'Ä', O: 'Ö', U: 'Ü' }[x] || x));   // i18n-ignore
     const stem = lem.replace(/e?n$/, '');
     if (label === 'article') made.push(...['der', 'die', 'das'].map(a => a + ' ' + noun));
     else if (label === 'plural') made.push(...[lem, lem + 'e', lem + 'en', lem + 'n', lem + 'er', lem + 's', uml(lem) + 'e', uml(lem) + 'er', uml(lem)].map(x => 'die ' + x));
@@ -148,7 +148,7 @@ function qaPartsDistractors(c, p, label, val, pool) {
     else if (label === 'er/sie/es') made.push(stem + 't', stem + 'et', uml(stem) + 't', lem);
     else if (label === 'du') made.push(stem + 'st', stem + 'est', uml(stem) + 'st', lem);
   }
-  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // labels whose values are forms of the word
+  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // labels whose values are forms of the word   // i18n-ignore (langcore's labels, compared)
   const own = FORM.includes(label) ? p.parts.filter(([l]) => l !== label && FORM.includes(l)).map(([, x]) => x).filter(x => x !== lem) : [];
   const seen = new Set([val]), out = [];
   const closed = c === 'de' && label === 'article';   // der / die / das: two wrong ones, nothing else
