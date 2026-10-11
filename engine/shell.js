@@ -538,7 +538,7 @@ window.NoemaShell = (() => {
     const days = [...Array(7)].map((_, i) => { const d = new Date(Date.now() - (6 - i) * DAY); return { k: d.toISOString().slice(0, 10), l: fmtDate(d, { weekday: 'narrow' }) }; });
     const stones = [[40, 90], [110, 70], [180, 84], [250, 62], [320, 78], [390, 58], [460, 72]];
     const did = days.map(d => (st.xpDay || {})[d.k] > 0);
-    const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length })}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
+    const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length }).replace(/[&<>"]/g, c => '&#' + c.charCodeAt(0) + ';')}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
       + stones.map(([x, y], i) => did[i] ? `<ellipse cx="${x}" cy="${y}" rx="20" ry="9" fill="var(--t2)" stroke="var(--t2i)" stroke-width="1.5"/>` : `<ellipse cx="${x}" cy="${y}" rx="20" ry="9" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-dasharray="4 4"/>`).join('')
       + `<rect x="447" y="42" width="26" height="18" rx="4" fill="var(--t2)" stroke="var(--t2i)" stroke-width="1.5"/><path d="M447 50 h26" stroke="var(--t2i)" stroke-width="1.5"/>`
       + days.map((d, i) => `<text x="${stones[i][0]}" y="${stones[i][1] + 28}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink3)">${d.l}</text>`).join('')
