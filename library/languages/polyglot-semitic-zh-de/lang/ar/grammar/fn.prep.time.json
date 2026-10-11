@@ -1,7 +1,7 @@
 {
  "function": "fn.prep.time",
  "status": "realized",
- "summary": "The time prepositions take the genitive like every preposition: قَبْلَ (before), بَعْدَ (after), حَتَّى (until; from … to … = مِنْ … إِلَى …), مُنْذُ (since; for a period up to now), خِلَالَ and أَثْنَاءَ (during). قَبْلَ, بَعْدَ, خِلَالَ and أَثْنَاءَ are old nouns in the accusative, like أَمَامَ in lesson 12: they end in -a and take pronoun endings (قَبْلِي, بَعْدَكَ, خِلَالَهُ). “At / on / in” a time is فِي for all three — فِي السَّاعَةِ الْخَامِسَةِ, فِي يَوْمِ الْجُمُعَةِ, فِي يَنَايِرَ, فِي الصَّيْفِ — where German needs um / am / im; often no preposition is needed at all (يَوْمَ الْجُمُعَةِ, صَيْفًا), and عِنْدَ marks a moment (عِنْدَ الظُّهْرِ). قَبْلَ + a span means “ago” (قَبْلَ سَنَةٍ), بَعْدَ + a span “in” (بَعْدَ أُسْبُوعٍ). مُنْذُ goes with the present for what is still going on — أَعِيشُ هُنَا مُنْذُ سَنَةٍ, exactly like German “ich wohne seit einem Jahr hier”. Arabic has no word for “o’clock”: the hour is السَّاعَةُ + a feminine ordinal, السَّاعَةُ الْخَامِسَةُ (“the fifth hour”). The months have two sets of names: old Syriac ones (كَانُونُ الثَّانِي, شُبَاطُ …) in Syria, Lebanon, Jordan, Palestine and Iraq, Latin ones (يَنَايِرُ, فِبْرَايِرُ …) in Egypt, Sudan and the Arabian Peninsula; a month name is a diptote: فِي يَنَايِرَ, فِي شُبَاطَ.",
+ "summary": "The time prepositions take the genitive like every preposition: قَبْلَ (before), بَعْدَ (after), حَتَّى (until; from … to … = مِنْ … إِلَى …), مُنْذُ (since; for a period up to now), خِلَالَ and أَثْنَاءَ (during). قَبْلَ, بَعْدَ, خِلَالَ and أَثْنَاءَ are old nouns in the accusative, like أَمَامَ in lesson 12: they end in -a and take pronoun endings (قَبْلِي, بَعْدَكَ, خِلَالَهُ). Any point in time — an hour, a day, a month, a season — takes فِي: فِي السَّاعَةِ الْخَامِسَةِ, فِي يَوْمِ الْجُمُعَةِ, فِي يَنَايِرَ, فِي الصَّيْفِ — where German needs um / am / im; often no preposition is needed at all (يَوْمَ الْجُمُعَةِ, صَيْفًا), and عِنْدَ marks a moment (عِنْدَ الظُّهْرِ). قَبْلَ + a span means “ago” (قَبْلَ سَنَةٍ), بَعْدَ + a span “in” (بَعْدَ أُسْبُوعٍ). مُنْذُ goes with the present for what is still going on — أَعِيشُ هُنَا مُنْذُ سَنَةٍ, exactly like German “ich wohne seit einem Jahr hier”. The hour is simply السَّاعَةُ + a feminine ordinal, السَّاعَةُ الْخَامِسَةُ (“the fifth hour”). The months have two sets of names: old Syriac ones (كَانُونُ الثَّانِي, شُبَاطُ …) in Syria, Lebanon, Jordan, Palestine and Iraq, Latin ones (يَنَايِرُ, فِبْرَايِرُ …) in Egypt, Sudan and the Arabian Peninsula; a month name is a diptote: فِي يَنَايِرَ, فِي شُبَاطَ.",
  "blocks": [
   {
    "t": "table",
@@ -196,7 +196,7 @@
      "five minus a quarter"
     ]
    ],
-   "caption": "كَمِ السَّاعَةُ؟ — What time is it? There is no word for “o’clock”; in everyday speech the cardinal is common (السَّاعَة خَمْسَة).",
+   "caption": "كَمِ السَّاعَةُ؟ — What time is it? The hour needs no extra word; in everyday speech the cardinal is common (السَّاعَة خَمْسَة).",
    "typology": [
     {
      "feature": "time.halfHour",

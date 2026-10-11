@@ -1,7 +1,7 @@
 {
  "function": "fn.question.yesno",
  "status": "realized",
- "summary": "A yes/no question is the statement with هَلْ in front and the Arabic question mark ؟ at the end; the word order does not change and there is no helper verb: تُحِبُّ الشَّايَ → هَلْ تُحِبُّ الشَّايَ؟ (Do you like tea?). Before al- هَلْ takes a helping vowel: هَلِ الطِّفْلُ يَشْرَبُ الْحَلِيبَ؟. The prefix أَ, written together with the first word, is the formal alternative (أَتَشْرَبُ الْقَهْوَةَ؟) and the only one before a negation (أَلَا تُحِبُّ …؟، أَلَيْسَ …؟). “Or” in a choice question (which one?) is أَمْ: أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟; أَوْ asks “any of them?” (هَلْ تُرِيدُ سُكَّرًا أَوْ حَلِيبًا؟ — answer yes / no). Answers: نَعَمْ (yes), لَا (no), and بَلَى “yes, it is so” against a negative question — the Arabic doch. Short answers: رُبَّمَا (maybe), طَبْعًا (of course), حَقًّا؟ (really?); add أَيْضًا (too) or فَقَطْ (only) after the word they belong to.",
+ "summary": "A yes/no question is the statement with هَلْ in front and the Arabic question mark ؟ at the end; the word order does not change and nothing else is added: تُحِبُّ الشَّايَ → هَلْ تُحِبُّ الشَّايَ؟ (Do you like tea?). Before al- هَلْ takes a helping vowel: هَلِ الطِّفْلُ يَشْرَبُ الْحَلِيبَ؟. The prefix أَ, written together with the first word, is the formal alternative (أَتَشْرَبُ الْقَهْوَةَ؟) and the only one before a negation (أَلَا تُحِبُّ …؟، أَلَيْسَ …؟). “Or” in a choice question (which one?) is أَمْ: أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟; أَوْ asks “any of them?” (هَلْ تُرِيدُ سُكَّرًا أَوْ حَلِيبًا؟ — answer yes / no). Answers: نَعَمْ (yes), لَا (no), and بَلَى “yes, it is so” against a negative question — the Arabic doch. Short answers: رُبَّمَا (maybe), طَبْعًا (of course), حَقًّا؟ (really?); add أَيْضًا (too) or فَقَطْ (only) after the word they belong to.",
  "procedure": {
   "askYourself": [
    "Is it a yes/no question (not who / what / where)? → هَلْ + the unchanged statement + ؟",
@@ -13,7 +13,7 @@
   ]
  },
  "traps": [
-  "No inversion and no “do”: هَلْ تُرِيدُ قَهْوَةً؟ = do you want a coffee?",
+  "The order of the statement stays and nothing is added: هَلْ تُرِيدُ قَهْوَةً؟ = do you want a coffee?",
   "Do not combine هَلْ with a question word: *هَلْ أَيْنَ …؟",
   "Not *هَلْ لَا …: a negative question takes أَ — أَلَا تُحِبُّ …؟",
   "أَ is written together with the next word: أَتُرِيدُ, not *أَ تُرِيدُ.",

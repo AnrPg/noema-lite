@@ -1,7 +1,7 @@
 {
  "function": "fn.pronoun.subject",
  "status": "realized",
- "summary": "Arabic subject pronouns mark person, number and — in the 2nd and 3rd person — gender: أَنَا I, أَنْتَ you (a man), أَنْتِ you (a woman), هُوَ he, هِيَ she, نَحْنُ we, أَنْتُمْ you (men or a mixed group), أَنْتُنَّ you (women), هُمْ they (men or mixed), هُنَّ they (women). Exactly two people have dual pronouns: أَنْتُمَا (you two) and هُمَا (they two). There is no “it”: a thing is هُوَ or هِيَ by its gender, and every plural of things is هِيَ. Before a verb the pronoun is usually left out, because the verb ending shows the person; in a sentence without a verb it is needed: أَنَا طَالِبٌ.",
+ "summary": "Arabic subject pronouns mark person, number and — in the 2nd and 3rd person — gender: أَنَا I, أَنْتَ you (a man), أَنْتِ you (a woman), هُوَ he, هِيَ she, نَحْنُ we, أَنْتُمْ you (men or a mixed group), أَنْتُنَّ you (women), هُمْ they (men or mixed), هُنَّ they (women). Exactly two people have dual pronouns: أَنْتُمَا (you two) and هُمَا (they two). There is no neuter pronoun: a thing is هُوَ or هِيَ by its gender, and every plural of things is هِيَ. Before a verb the pronoun is usually left out, because the verb ending shows the person; in a sentence without a verb it is needed: أَنَا طَالِبٌ.",
  "blocks": [
   {
    "t": "table",
@@ -58,7 +58,7 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No “it”.",
+   "title": "No neuter pronoun.",
    "text": "الْبَابُ؟ هُوَ هُنَا (the door? it is here) — الْغُرْفَةُ؟ هِيَ هُنَاكَ (the room? it is there) — الْكُتُبُ؟ هِيَ هُنَا (the books? they are here): a plural of things is هِيَ."
   },
   {
@@ -142,7 +142,7 @@
  "traps": [
   "أَنْتَ and أَنْتِ look the same without vowels (انت): pronounce the last vowel clearly.",
   "*الْكُتُبُ؟ هُمْ هُنَا is wrong: things in the plural are هِيَ.",
-  "هُوَ / هِيَ also mean “it”; there is no separate word.",
+  "هُوَ / هِيَ also stand for things; there is no neuter pronoun.",
   "For exactly two people careful MSA uses أَنْتُمَا / هُمَا, not أَنْتُمْ / هُمْ."
  ],
  "evidence": {

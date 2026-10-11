@@ -1,7 +1,7 @@
 {
  "function": "fn.definite",
  "status": "realized",
- "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no word for “a”: بَيْتٌ = a house, الْبَيْتُ = the house. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الشَّقَّةُ = aš-šaqqa. Diptotes (نَوَافِذُ، مَصَابِيحُ، طَمَاطِم) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
+ "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no separate indefinite article: بَيْتٌ = a house, الْبَيْتُ = the house. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الشَّقَّةُ = aš-šaqqa. Diptotes (نَوَافِذُ، مَصَابِيحُ، طَمَاطِم) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
  "procedure": {
   "askYourself": [
    "Is the noun specific (one we both know) or meant in general (“books”, “onions as food”)? → al-",

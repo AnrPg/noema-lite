@@ -1,7 +1,7 @@
 {
  "function": "fn.past.ongoing",
  "status": "periphrastic",
- "summary": "Arabic has no special verb form for “was doing” or “used to do”: it puts كَانَ “was” in the past before a verb in the present (the imperfect), and both verbs agree with the subject: كُنْتُ أَلْعَبُ “I was playing / I used to play”, كَانَتْ أُمِّي تَطْبُخُ “my mother was cooking”, كُنَّا نُسَافِرُ “we used to travel”. The same construction is the background of a past moment (كُنْتُ أَنَامُ عِنْدَمَا عَادَ أَبِي “I was sleeping when my father came back”) and a past habit (كُنْتُ أَذْهَبُ إِلَى الرَّوْضَةِ “I used to go to kindergarten”); a time clause with عِنْدَمَا or words like كُلَّ يَوْمٍ, دَائِمًا, فِي طُفُولَتِي show which. The plain past (لَعِبْتُ) is one finished event. The negative puts لَا before the second verb (كُنْتُ لَا أُحِبُّ الْحَلِيبَ “I didn’t like milk”) or uses لَمْ أَكُنْ + present.",
+ "summary": "Arabic has no special verb form for an action going on or repeated in the past: it puts كَانَ “was” in the past before a verb in the present (the imperfect), and both verbs agree with the subject: كُنْتُ أَلْعَبُ “I was playing / I used to play”, كَانَتْ أُمِّي تَطْبُخُ “my mother was cooking”, كُنَّا نُسَافِرُ “we used to travel”. The same construction is the background of a past moment (كُنْتُ أَنَامُ عِنْدَمَا عَادَ أَبِي “I was sleeping when my father came back”) and a past habit (كُنْتُ أَذْهَبُ إِلَى الرَّوْضَةِ “I used to go to kindergarten”); a time clause with عِنْدَمَا or words like كُلَّ يَوْمٍ, دَائِمًا, فِي طُفُولَتِي show which. The plain past (لَعِبْتُ) is one finished event. The negative puts لَا before the second verb (كُنْتُ لَا أُحِبُّ الْحَلِيبَ “I didn’t like milk”) or uses لَمْ أَكُنْ + present.",
  "blocks": [
   {
    "t": "table",
@@ -174,7 +174,7 @@
  "traps": [
   "The second verb is present, not past: كُنْتُ أَلْعَبُ, not *كُنْتُ لَعِبْتُ (كَانَ + past, usually with قَدْ, is “had done” — a later lesson).",
   "Both verbs agree with the same person: كُنَّا نَلْعَبُ, not *كُنَّا أَلْعَبُ.",
-  "There is no word for “used to”: the habit is in كَانَ + present and in the time words.",
+  "No separate word marks a past habit: it lies in كَانَ + present and in the time words.",
   "The present alone is not a past habit: أَلْعَبُ فِي الشَّارِعِ is “I play in the street” (now).",
   "كَانَتْ before al- takes a helping vowel: كَانَتِ الْبِنْتُ تَلْعَبُ."
  ],
@@ -319,7 +319,7 @@
    "why": "كَانَ before the noun stays singular; the second verb comes after the noun and agrees fully."
   },
   {
-   "q": "Which word is Arabic’s “used to”?",
+   "q": "Which word marks a habit in the past?",
    "options": [
     "there is none: كَانَ + present",
     "سَوْفَ",
