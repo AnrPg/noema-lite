@@ -727,7 +727,7 @@
      {
       "for": "en",
       "rel": "trap",
-      "text": "The ‘Welsh’ of English Welsh onion has nothing to do with Wales: it is usually explained from Old English welisc ‘foreign’."
+      "text": "The English name of 大葱 has nothing to do with Wales: its first word is usually explained from welisc, an old word for ‘foreign’."
      },
      {
       "for": "ja",
@@ -1352,12 +1352,12 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "English ‘yam bean’ says the same; jicama is the Spanish name, from Nahuatl xicamatl."
+      "text": "English ‘yam bean’ says the same; jicama is the plant’s Mexican name, xicamatl."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Spanish jícama comes from Nahuatl xicamatl."
+      "text": "Spanish jícama comes from the plant’s Mexican name, xicamatl."
      }
     ]
    }
@@ -2419,7 +2419,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English amaranth comes from Greek ἀμάραντος ‘unfading’."
+      "text": "English amaranth comes from ἀμάραντος ‘unfading’."
      }
     ]
    }

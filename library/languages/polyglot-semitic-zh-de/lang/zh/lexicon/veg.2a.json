@@ -530,7 +530,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "English asparagus comes from the same Greek word."
+      "text": "English asparagus is the same old word."
      },
      {
       "for": "el",
@@ -540,7 +540,7 @@
      {
       "for": "ru",
       "rel": "same",
-      "text": "Russian спаржа comes from the same Greek word."
+      "text": "Russian спаржа is the same old word."
      }
     ]
    }
@@ -906,7 +906,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "English dandelion comes from French dent de lion ‘lion’s tooth’."
+      "text": "English dandelion is a ‘lion’s tooth’ too (dent de lion)."
      },
      {
       "for": "fr",
@@ -1378,7 +1378,7 @@
      {
       "for": "en",
       "rel": "trap",
-      "text": "Neither from Jerusalem nor an artichoke: English ‘Jerusalem artichoke’ is often explained from Italian girasole ‘sunflower’."
+      "text": "Neither from Jerusalem nor an artichoke: ‘Jerusalem’ in the English name is often explained as a corruption of girasole ‘sunflower’."
      },
      {
       "for": "it",
@@ -1935,7 +1935,7 @@
      {
       "for": "ru",
       "rel": "same",
-      "text": "Russian хрен is that same Slavic word."
+      "text": "Russian хрен is that same word."
      }
     ]
    }
@@ -2042,7 +2042,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English ‘swede’ is short for ‘Swedish turnip’."
+      "text": "English ‘swede’ names the turnip after Sweden."
      }
     ]
    }
@@ -2640,7 +2640,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English mustard comes from Latin mustum ‘grape must’, which was mixed with the ground seeds."
+      "text": "English mustard is named after ‘must’ (mustum), the grape juice once mixed with the ground seeds."
      }
     ]
    }
@@ -2995,12 +2995,12 @@
      {
       "for": "el",
       "rel": "same",
-      "text": "Greek ρόκα comes from the same Latin eruca."
+      "text": "Greek ρόκα is the same word (from eruca)."
      },
      {
       "for": "en",
       "rel": "same",
-      "text": "English rocket comes from the same Latin eruca."
+      "text": "English rocket is the same word (from eruca)."
      }
     ]
    }
@@ -3477,7 +3477,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English ‘cos’ is traditionally traced to the Greek island of Kos."
+      "text": "English ‘cos’ is traditionally traced to the island of Kos."
      },
      {
       "for": "el",
@@ -3944,7 +3944,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English endive goes back through Latin to Greek."
+      "text": "English endive goes back to the same word as αντίδι."
      }
     ]
    }

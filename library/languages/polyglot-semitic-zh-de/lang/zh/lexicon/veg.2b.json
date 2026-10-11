@@ -617,7 +617,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English artichoke goes back, via Italian, to Arabic al-kharshūf."
+      "text": "English artichoke goes back to Arabic al-kharshūf."
      },
      {
       "for": "it",
@@ -637,7 +637,7 @@
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French artichaut comes, via Italian, from Arabic al-kharshūf."
+      "text": "French artichaut goes back to Arabic al-kharshūf."
      },
      {
       "for": "el",
@@ -1031,12 +1031,12 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English chayote comes, via Spanish, from Nahuatl chayohtli."
+      "text": "English chayote is the plant’s Mexican name, chayohtli."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Spanish chayote comes from Nahuatl chayohtli."
+      "text": "Spanish chayote comes from the plant’s Mexican name, chayohtli."
      }
     ]
    }
@@ -1274,7 +1274,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English loofah is that Egyptian Arabic word."
+      "text": "English loofah is that Arabic word, لُوف (lūf)."
      }
     ]
    }
