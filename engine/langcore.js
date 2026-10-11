@@ -549,8 +549,26 @@
   }
 
   /* ---------- the indexed course ---------- */
-  function course(data) {
-    const C = { data, id: data.course.id, explainLang: data.course.explainLang || 'en', masterLang: data.course.masterLang || data.course.explainLang || 'en', languages: data.course.languages.slice(),
+  /** D21 — the languages the learner studies in a course: courseLangs ∩ study (a:settings.studyLangs, the learner's answer to
+   *  “Which languages do you want to study?”, for every course of the app), else the course's own stored choice (settings.languages,
+   *  before D21), else all. → {langs, chosen: the learner answered and this course has one of the answers, none: answered, but none
+   *  of the answers is a language of this course (the course then asks)}. */
+  function studyLangs(courseLangs, study, stored) {
+    const all = [...new Set(courseLangs || [])];
+    const own = Array.isArray(stored) ? all.filter(c => stored.includes(c)) : [];
+    if (Array.isArray(study)) {
+      const x = all.filter(c => study.includes(c));
+      if (x.length) return { langs: x, chosen: true, none: false };
+      return { langs: own.length ? own : all, chosen: false, none: all.length > 0 };
+    }
+    return { langs: own.length ? own : all, chosen: false, none: false };
+  }
+  /** The indexed course. opts.languages (D21): only these course languages are built — the course as a learner who studies them
+   *  sees it (every view, generator, session, comparison and bridge then knows only them); C.data stays the whole course and
+   *  C.allLanguages lists every language of it. */
+  function course(data, opts = {}) {
+    const pick = Array.isArray(opts.languages) ? data.course.languages.filter(c => opts.languages.includes(c)) : [];
+    const C = { data, id: data.course.id, explainLang: data.course.explainLang || 'en', masterLang: data.course.masterLang || data.course.explainLang || 'en', languages: (pick.length ? pick : data.course.languages).slice(), allLanguages: data.course.languages.slice(),
       concepts: {}, nodes: {}, order: [], owner: {}, functions: {}, frames: {}, lang: {}, typology: data.typology || null };
     for (const f of data.fields) for (const c of f.concepts) C.concepts[c.id] = { ...c, field: f.field };
     for (const n of data.nodes) { C.nodes[n.id] = n; for (const c of n.concepts) C.owner[c] = n.id; }
@@ -1364,7 +1382,7 @@
 
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
-    readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, SUPPORTED_NATIVES, setExplainLocale, nativeOf, nativeKnows, speaksOf, contrastFor, contrastNotes, explanationLocale, facadeUsable, nativeRule, ruleLangs, noteMarkdown,
+    readCourse, course, studyLangs, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, SUPPORTED_NATIVES, setExplainLocale, nativeOf, nativeKnows, speaksOf, contrastFor, contrastNotes, explanationLocale, facadeUsable, nativeRule, ruleLangs, noteMarkdown,
     applyFacade, facadeProfiles, facadeAddress, facadeTexts, masterStamps, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
