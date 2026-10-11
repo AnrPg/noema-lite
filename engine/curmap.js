@@ -1307,8 +1307,8 @@ window.NoemaCurMap = (() => {
             !pk.status && !st.mastered && (n.reviewed || c.autoApprove) && !(st.open) && !c.remote?.[id] ? el('span', { class: 'tiny' }, '✔ ' + CM('roadmap.map.pnl.reviewed')) : null),
           n.learningGoals?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '🎯 ' + CM('roadmap.map.pnl.afterThis')), el('ul', { class: 'cm-goals' }, ...n.learningGoals.map(g => el('li', {}, g)))) : null,
           n.chapters?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '📖 ' + CM('roadmap.map.pnl.nChapters', { n: n.chapters.length }), tip(CM('roadmap.map.pnl.chaptersTip'))), chBox) : null,
-          st.parents.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.buildsOn') + ' '), st.parents.map(T).join(' · ')) : null,
-          (() => { const kids = c.edges.filter(e => e.from === id).map(e => T(e.to)); return kids.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.opens') + ' '), kids.join(' · ')) : null; })(),
+          st.parents.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.buildsOn') + ' '), el('span', { class: 'cm-names' }, st.parents.map(T).join(' · '))) : null,
+          (() => { const kids = c.edges.filter(e => e.from === id).map(e => T(e.to)); return kids.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.opens') + ' '), el('span', { class: 'cm-names' }, kids.join(' · '))) : null; })(),
           n.kDomain ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.kind') + ' '), codeWord('roadmap.map.kd.', n.kDomain, n.kDomain.replace('_', ' ')), n.levels?.length ? ' — ' + n.levels.map(l => codeWord('roadmap.map.level.', l, l.replace(/_/g, ' '))).join(', ') : '') : null);
       }
       // scroll only the map (scrollIntoView would also scroll the full-screen frame and hide the top bar)

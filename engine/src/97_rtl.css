@@ -23,3 +23,13 @@ body.ns-on .drawer:dir(rtl){box-shadow:20px 0 50px -24px rgba(0,0,0,.35)}
    English pack reads left to right in an Arabic interface and a Hebrew pack right to left in an English one */
 :is(.blk,.mdx,.drawer .msg,.ns-cvmsg),:is(.blk,.mdx,.drawer .msg,.ns-cvmsg) :is(p,li,h2,h3,h4,h5,td,th,dt,dd,blockquote,figcaption,summary),
 .mantra,.herohead,.hook,.sechead h1,.chhead h1,.subjhead h1,.ns-item b,.ns-rmcard .ttl,.ns-crumbs button,.cm-tlabel,.cm-panel h2,.cm-panel li{unicode-bidi:plaintext}
+/* … the same for the pack's text elsewhere: exercises (prompt, options, chips, pairs, groups, gaps, explanations),
+   flashcards, the chapter pages, the crumbs and Today's card, the Roadmap's titles. Only elements that hold the pack's
+   (or the learner's) text and nothing else: a message of the interface keeps the interface's direction, even when it
+   begins with a Latin name ("Claude …"). On an inline element: isolated, in the direction of its own first letter. */
+.ex .q,.ex .opt>span:not(.k),.ex .why,.ex .chipx,.ex .chipx>span:not(.no),.ex .mitem,.ex .bucket h4,.ex .cloze:not(.code),.ex .calcrow>b,
+.ex .fb li,.ex .explain>div:not(.hd),.ex .explain>span,.ex .explain>label,.scstep .sp>span:not(.pill),.blk .callout>:not(.ci),
+.flash .face>div:not(.tiny),.chcard :is(h3,p),.chhead p,.mantrabox,.mantrabox>span,.obj li,.path .node :is(b,small),.pb .grow>b,.runner>.tiny,
+.ns-crumbs b,.ns-go:not(.lx-fgo) :is(h2,.rm),.cm-title b,.cm-ptitle h3,.cm-listnode .cm-t>b,.cm-pre>.cm-names,.ns-cvgrp>summary .grow,
+.ns-cvstep>summary .grow{unicode-bidi:plaintext}
+.scstep .fb:not(:has(b)){unicode-bidi:plaintext}   /* a scenario step's feedback (✅/❌ + the pack's text) */
