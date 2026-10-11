@@ -49,7 +49,7 @@ try:
 except ImportError as e:
     print(f'  ⏭  schema check skipped ({e})')
 
-def mutated(change):
+def mutated(change, **kw):
     d = tempfile.mkdtemp(prefix='lang-mini-'); dst = os.path.join(d, 'c'); shutil.copytree(MINI, dst)
     def J(rel, fn=None):
         p = os.path.join(dst, rel)
@@ -58,10 +58,10 @@ def mutated(change):
         r = fn(obj)
         with open(p, 'w', encoding='utf-8') as f: f.write(r if isinstance(r, Raw) else json.dumps(obj, ensure_ascii=False, indent=1))
     change(J, dst)
-    v = validate(dst, strict=True); shutil.rmtree(d); return v.errors
+    v = validate(dst, strict=True, **kw); shutil.rmtree(d); return (v.errors, v.warns) if kw.pop('_warns', None) else v.errors
 
-def expect(name, change, needle):
-    errs = mutated(change)
+def expect(name, change, needle, **kw):
+    errs = mutated(change, **kw)
     hit = [e for e in errs if needle in e]
     ok(bool(hit), f'{name} → “{hit[0] if hit else needle}”' + ('' if hit else f' (got {errs[:3]})'))
 
@@ -206,8 +206,17 @@ def drop_tone(c): c['phenomena'] = [p for p in c['phenomena'] if not any(t['feat
 e = phen_errors(drop_tone)
 ok(any('not covered by any phenomenon' in x and 'tone.lexical' in x for x in e), 'an uncovered feature — here an absence, “no lexical tone” — is refused')
 
-# ---------- D18: comparison notes for the reference set; D19: every field brings sentences for the nodes before it ----------
-expect('a page without comparison notes', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'comparison notes for the reference set: 0 of at least 8')
+# ---------- D19: contrast notes for every supported native + every type; D20: every field brings sentences for the nodes before it ----------
+expect('a page without contrast notes (--d19-strict)', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'contrast notes missing (D19: every supported native but ar, every type and branch:Semitic): en, el, ru', d19_strict=True)
+errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')))
+ok(not [e for e in errs if 'contrast notes missing' in e], 'without --d19-strict the D19 rules are warnings (the content is being rewritten)')
+full = [{'for': c, 'rel': 'same', 'text': 'x'} for c in ['en', 'el', 'ru', 'fr', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']]
+errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.update(notes=full)), d19_strict=True)
+ok(not [e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast notes missing' in e], 'a page with a note for every supported native but its own, every type and branch:Semitic passes')
+expect('a note for an unknown branch', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'branch:Klingonic', 'rel': 'new', 'text': '…'})), 'unknown branch “Klingonic”')
+expect('a word profile note without a valid `for`', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['profile'].update(notes=[{'for': 'xx', 'rel': 'trap', 'text': '…'}])), '“xx” has no profile')
+expect('a comparison in a word profile (--d19-strict: the lint of every learner text)', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['profile'].update(funFacts=['Cognate with English carrot.'])), 'x:de:Karotte/profile/funFacts/0: names a language outside the course (English)', d19_strict=True)
+expect('an unregistered text field (--d19-strict)', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(newText='hello')), 'not in tools/schemas/noema.langfacade.fields.json', d19_strict=True)
 expect('a comparison in the general text', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(summary=o['summary'] + ' As in English.')), 'names other languages in its general text (English)')
 expect('a note for a language without a profile', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'xx', 'rel': 'new', 'text': '…'})), '“xx” has no profile')
 expect('a note with an unknown relation', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'][0].update(rel='odd')), 'rel must be one of')
