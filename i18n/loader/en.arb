@@ -2495,5 +2495,19 @@
   "loader.meta.description": "noema-lite — structured theory, a Socratic AI tutor and gamified practice for any subject.",
   "@loader.meta.description": {
     "description": "The page’s description (HTML meta description, e.g. shown when the page is shared or bookmarked). “noema-lite” is the app’s name."
+  },
+  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {Android phone} android_tablet {Android tablet} chromebook {Chromebook} mac {Mac} windows {Windows PC} linux {Linux PC} other {another device}}{browser, select, none {} other { · {browser}}}",
+  "@loader.inuse.device": {
+    "description": "“Noema is open on {where}” (inuse.title): the other device that is using the account right now. os = a code of its kind (iphone, ipad, android_phone, android_tablet, chromebook, mac, windows, linux, other); browser = the browser’s name (Chrome, Safari, Firefox, Edge, Opera — never translated) or none. Product names stay as they are.",
+    "placeholders": {
+      "os": {
+        "type": "String",
+        "example": "android_phone"
+      },
+      "browser": {
+        "type": "String",
+        "example": "Chrome"
+      }
+    }
   }
 }

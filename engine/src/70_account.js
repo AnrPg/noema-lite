@@ -15,6 +15,12 @@ const fmtDay = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, WHEN_DAY) : ne
 const fmtTime = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.time(t, WHEN_TIME) : new Date(t).toLocaleTimeString();
 /** A language's name in the UI language (Intl.DisplayNames), for the learner; langName() keeps the English one for the prompts. */
 const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : langName(code);
+/** A restore point's name in the UI language of now: its catalog key (k, p) when it has one, else the words it was saved with. */
+const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) : x.label;
+/** A cloud snapshot's name: the app's own snapshots are stored with fixed English names (matched by engine/cloud.js too) → the UI language;
+    any other name (older snapshots taken in another language, self-tests) as stored. */
+const SNAP_LABEL = { 'Manual snapshot': 'engine.cl.snapManual', 'Daily auto-snapshot': 'engine.cl.snapDaily' };   // i18n-ignore (stored names)
+const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(SNAP_LABEL[l]) : l;
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
@@ -105,7 +111,7 @@ const ACC_VIEWS = {
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, tE('engine.acc.chunk')));
     const subject = h('div', { class: 'row' },
       h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 ' + tE('engine.acc.backupBtn')),
-      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title })); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
+      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
     const show = t => openAccountMenu(t);
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(
@@ -201,7 +207,7 @@ const ACC_VIEWS = {
       rpBox.innerHTML = '';
       const pts = await Noema.backup.listRestorePoints(ACCOUNT.id);
       if (!pts.length) { rpBox.append(h('p', { class: 'tiny' }, tE('engine.bk.noPoints'))); return; }
-      pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, p.label), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
+      pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, storedLabel(p)), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await Noema.backup.getRestorePoint(p.key)) }, '⬇️'),
         h('button', { class: 'btn small', onclick: () => confirmBox(tE(ACCOUNT.kind === 'cloud' ? 'engine.bk.goBackCloud' : 'engine.bk.goBack'), async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 700); }) }, tE('engine.bk.restore')))));
     };
@@ -263,7 +269,7 @@ const ACC_VIEWS = {
       snapBox.innerHTML = '';
       let list = []; try { list = await NoemaCloud.listSnapshots(); } catch (e) { snapBox.append(h('p', { class: 'tiny' }, '⚠️ ' + errText(e))); return; }
       if (!list.length) snapBox.append(h('p', { class: 'tiny' }, tE('engine.cl.noSnaps')));
-      list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, sn.label), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
+      list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, snapLabel(sn.label)), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await NoemaCloud.getSnapshot(sn.id)) }, '⬇️'),
         h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.cl.restoreSnapConfirm'), async () => { await NoemaCloud.snapshot(tE('engine.cl.snapBeforeRestore')); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 900); }) }, tE('engine.bk.restore')),
         h('button', { class: 'iconbtn', onclick: async () => { await NoemaCloud.deleteSnapshot(sn.id); drawSnaps(); } }, '🗑️'))));
@@ -271,7 +277,7 @@ const ACC_VIEWS = {
     body.append(h('p', { class: 'tiny' }, tE('engine.cl.signedInAs', { email: sess.user.email })), stBox,
       h('div', { class: 'row', style: { margin: '10px 0' } },
         h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.push(ACCOUNT.id); const n = await NoemaCloud.pull(ACCOUNT.id); toast(n ? tE('engine.cl.pulled', { n }) : tE('engine.cl.upToDate')); if (n) setTimeout(() => location.reload(), 800); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '🔄 ' + tE('engine.cl.syncNow')),
-        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot(tE('engine.cl.snapManual')); toast('📸 ' + tE('engine.cl.snapSaved')); drawSnaps(); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '📸 ' + tE('engine.cl.takeSnap')),
+        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot(); toast('📸 ' + tE('engine.cl.snapSaved')); drawSnaps(); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '📸 ' + tE('engine.cl.takeSnap')),
         h('label', { class: 'btn' }, '🗄️ ' + tE('engine.cl.uploadDb'), h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ ' + tE('engine.cl.dbUploaded')); } catch (er) { toast('⚠️ ' + errText(er), 4000); } } })),
         h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, tE('engine.cl.signOut'))),
       accSection('🩺', tE('engine.cl.secCheck'), { info: tE('engine.cl.checkInfo'), body: selfTestBox() }),

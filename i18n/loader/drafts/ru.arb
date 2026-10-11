@@ -454,5 +454,6 @@
   "loader.viewer.kind.unknown": "Файл",
   "loader.viewer.kind.youtube": "Видео YouTube",
   "loader.viewer.kind.web": "Веб-страница",
-  "loader.meta.description": "noema-lite — структурированная теория, сократовский ИИ-наставник и практика в форме игры для любого предмета."
+  "loader.meta.description": "noema-lite — структурированная теория, сократовский ИИ-наставник и практика в форме игры для любого предмета.",
+  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {телефон Android} android_tablet {планшет Android} chromebook {Chromebook} mac {Mac} windows {компьютер с Windows} linux {компьютер с Linux} other {другое устройство}}{browser, select, none {} other { · {browser}}}"
 }

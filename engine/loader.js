@@ -1359,8 +1359,8 @@
       }
       throw new Error(tr('loader.backup.notBackup'));
     },
-    async restorePoint(acc, label) { const snap = await this.collect(acc, { includeSecrets: true }); const key = acc + '|' + Date.now(); await IDB.put('restore', key, { label, at: Date.now(), snap }); const all = (await IDB.entries('restore', acc + '|')).sort((x, y) => x[1].at - y[1].at); while (all.length > 12) { const [k] = all.shift(); await IDB.del('restore', k); } return key; },
-    async listRestorePoints(acc) { try { return (await IDB.entries('restore', acc + '|')).map(([k, v]) => ({ key: k, label: v.label, at: v.at, size: JSON.stringify(v.snap).length })).sort((a, b) => b.at - a.at); } catch (e) { return []; } },
+    async restorePoint(acc, label, words) { const snap = await this.collect(acc, { includeSecrets: true }); const key = acc + '|' + Date.now(); await IDB.put('restore', key, { label, at: Date.now(), snap, ...(words?.k ? { k: words.k, p: words.p || {} } : {}) }); /* label: the words of now; k, p: a catalog key, shown in the UI language of later */ const all = (await IDB.entries('restore', acc + '|')).sort((x, y) => x[1].at - y[1].at); while (all.length > 12) { const [k] = all.shift(); await IDB.del('restore', k); } return key; },
+    async listRestorePoints(acc) { try { return (await IDB.entries('restore', acc + '|')).map(([k, v]) => ({ key: k, label: v.label, k: v.k || null, p: v.p || null, at: v.at, size: JSON.stringify(v.snap).length })).sort((a, b) => b.at - a.at); } catch (e) { return []; } },
     async getRestorePoint(key) { return (await IDB.get('restore', key))?.snap; },
     /** mode: 'replace' (wipe target profile, then write) | 'merge' (overwrite keys present in backup) */
     async apply(obj, targetAcc, mode = 'replace') {
@@ -1446,7 +1446,7 @@
      undo each other's progress; "Use here" pauses the other one and brings in what it did. */
   let inUse = null;
   function showInUse({ holder, unsynced }) {
-    const where = holder?.sameDevice ? tr('inuse.otherTab') : (holder?.name || tr('inuse.otherDevice'));
+    const where = holder?.sameDevice ? tr('inuse.otherTab') : holder?.os ? tr('loader.inuse.device', { os: holder.os, browser: holder.br || 'none' }) : (holder?.name || tr('inuse.otherDevice'));   // os, br: newer apps; name: English words of older ones
     const draw = (box, busy) => {
       box.innerHTML = '';
       box.append(el('div', { class: 'noema-inuse-dot' }),
