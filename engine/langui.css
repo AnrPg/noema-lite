@@ -38,6 +38,51 @@
 .lx-ldot.s-locked{opacity:.6}.lx-ldot.s-unprepared{border-style:dashed;opacity:.6}
 .lx-lhover{position:fixed;z-index:60;max-width:240px;padding:8px 10px;border-radius:10px;background:var(--paper,#fff);color:var(--ink,#222);border:1px solid var(--line,#ddd);box-shadow:0 6px 24px rgba(0,0,0,.14);font-size:.85rem;pointer-events:none}
 .lx-ldots .lx-lrow.lx-lcommon::before{opacity:.28}.lx-ldots .lx-lrow:hover::before{opacity:.8}
+/* R1 / R2 — comparison notes in sections (From your languages · Among the languages you are learning · From other languages, folded)
+   and the Markdown subset of notes and comparison-like texts (46_notes.js). Colours from the theme tokens: light and dark alike. */
+.lx-cmp{margin:12px 0;padding:10px 12px 4px;border-radius:12px;border:1px solid var(--line);border-inline-start:4px solid var(--violet);background:var(--violet-bg)}
+.lx-cmp.k-learning{border-inline-start-color:var(--info);background:var(--info-bg)}
+.lx-cmp.k-others{border-inline-start-color:var(--line);background:var(--bg2);padding-bottom:6px}
+.lx-cmp.compact{margin:8px 0;padding:6px 10px 2px;font-size:.95em}
+.lx-cmp-title{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+details.lx-cmp>summary.lx-cmp-title{cursor:pointer;margin:0;padding:2px 0;list-style:none}
+details.lx-cmp>summary.lx-cmp-title::-webkit-details-marker{display:none}
+details.lx-cmp>summary.lx-cmp-title::after{content:'▸';margin-inline-start:auto;font-size:14px;transition:transform .15s}
+details.lx-cmp[open]>summary.lx-cmp-title{margin-bottom:6px}
+details.lx-cmp[open]>summary.lx-cmp-title::after{transform:rotate(90deg)}
+.lx-cmp-n{font-weight:600;padding:0 7px;border-radius:999px;background:var(--card);border:1px solid var(--line);letter-spacing:0}
+.lx-cgroup{padding:8px 0;border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.lx-cmp-title+.lx-cgroup{border-top:0;padding-top:2px}
+.lx-cg-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:0 0 3px}
+.lx-cg-name{font-size:15px}
+.lx-cg-sub{font-size:12px;color:var(--ink2)}
+.lx-cg-lvl{font-size:11px;font-weight:700;padding:0 6px;border-radius:6px;border:1px solid var(--line);color:var(--ink2)}
+.lx-cg-flag{font-size:1.05em;line-height:1}
+.lx-cg-more{margin:6px 0 2px;display:flex;gap:6px}
+.lx-cg-also{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:4px}
+.lx-cg-also li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.lx-rel{font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.lx-rel.r-same{background:var(--ok-bg);border-color:var(--ok)}
+.lx-rel.r-similar{background:var(--info-bg);border-color:var(--info)}
+.lx-rel.r-different{background:var(--violet-bg);border-color:var(--violet)}
+.lx-rel.r-new{background:var(--warn-bg);border-color:var(--warn)}
+.lx-rel.r-trap{background:var(--bad-bg);border-color:var(--bad)}
+/* the Markdown subset */
+.lx-md{line-height:1.5;overflow-wrap:anywhere}
+div.lx-md>:first-child{margin-top:0}div.lx-md>:last-child{margin-bottom:0}
+.lx-md p{margin:0 0 6px}
+.lx-md-list{margin:2px 0 6px;padding-inline-start:20px}
+.lx-md-list>li{margin:2px 0}
+.lx-md-list>li::marker{color:var(--ink2)}
+.lx-md strong{font-weight:700}
+.lx-md em{font-style:italic}
+.lx-md-ex{display:flex;gap:6px;align-items:baseline;margin:3px 0 6px;padding:3px 8px;border-radius:8px;background:color-mix(in srgb,var(--card) 75%,transparent)}
+.lx-md-list .lx-md-ex{margin:3px 0}
+.lx-md-arrow{color:var(--ink2);flex:none}
+.lx-md [lang]:not(.lx-w){unicode-bidi:isolate}
+.lx-list li>.lx-md,.lx-feeling>.lx-md{display:inline}
+.lx-list li>div.lx-md,.lx-feeling>div.lx-md{display:block;margin-top:2px}
+@media (max-width:600px){.lx-cmp{padding:8px 10px 2px}.lx-cg-name{font-size:14px}.lx-md-list{padding-inline-start:18px}}
 /* P5 — the grammar lane (docs/LANGUAGES.md §6.3, §6.4, §7.3, §8) */
 .lx-feas{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 10px;padding:6px 10px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);font-size:14px}
 .lx-feas.s-ready{background:var(--ok-bg)}.lx-feas.s-thin{background:var(--warn-bg)}.lx-feas.s-locked{opacity:.85}
@@ -615,3 +660,36 @@ img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}im
 .lx-native{display:flex;flex-direction:column;gap:6px;max-width:100%}.lx-native select,.lx-native input{max-width:100%;min-width:0}
 .lx-nativeother{display:flex;flex-wrap:wrap;gap:6px}.lx-nativeother[hidden]{display:none}
 .lx-native-ask{display:flex;flex-direction:column;gap:6px;align-items:flex-start;overflow-wrap:anywhere}
+/* R3: the word's parameters, right under the word (20_cards.js paramsBlock) */
+.lx-params,.lx-pmorebody{display:grid;grid-template-columns:minmax(6.5em,30%) minmax(0,1fr)}
+.lx-params{gap:0;margin:10px 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);overflow:hidden;font-size:15px}
+.lx-prow{display:contents}
+.lx-prow>.lx-pk,.lx-prow>.lx-pv{padding:7px 12px;border-top:1px solid var(--line);min-width:0}
+.lx-params>.lx-prow:first-child>.lx-pk,.lx-params>.lx-prow:first-child>.lx-pv{border-top:0}
+.lx-params{gap:0}
+.lx-pk{color:var(--ink2);font-size:13px;line-height:1.35;overflow-wrap:anywhere;align-self:start;padding-top:9px!important}
+.lx-pv{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;background:var(--card)}
+.lx-pval{display:inline-flex;flex-wrap:wrap;gap:3px 8px;align-items:baseline;max-width:100%}
+.lx-pval.lx-pwide{flex-basis:100%}
+.lx-pform{font-weight:600;font-size:1.05em}.lx-pform .lx-help{font-weight:400}
+.lx-pform.lx-ppattern,.lx-pform.lx-pexample{font-weight:400;font-size:.9em;color:var(--ink2)}
+.lx-platin{font-style:italic;font-weight:500}
+.lx-plink{color:inherit;text-decoration:none;border-bottom:1px dotted var(--ink3,var(--ink2))}
+.lx-plink:hover,.lx-plink:focus-visible{border-bottom-style:solid}
+.lx-ptext{font-weight:500}
+.lx-ptag{font-size:12px;padding:1px 7px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
+.lx-psense{font-size:12.5px;padding:1px 8px 1px 2px;border-radius:999px;background:var(--info-bg,var(--bg2));color:var(--ink);max-width:100%;overflow-wrap:anywhere}
+.lx-psense b{display:inline-grid;place-items:center;min-width:1.45em;height:1.45em;border-radius:50%;background:var(--card);font-size:11px;margin-inline-end:2px}
+.lx-pnote{flex-basis:100%;font-size:12.5px;color:var(--ink2);overflow-wrap:anywhere}
+.lx-pwhy{font-size:13px;color:var(--ink2);overflow-wrap:anywhere}
+.lx-pmore{grid-column:1/-1}
+.lx-pmore>summary{padding:6px 12px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2);cursor:pointer;list-style-position:inside}
+.lx-pcompact{font-size:14px;margin:8px 0}.lx-pcompact .lx-prow>*{padding:5px 10px}.lx-pcompact .lx-pk{padding-top:6px!important}
+.lx-pline{margin-inline-start:4px}
+.lx-params [dir=rtl]{unicode-bidi:isolate}
+@media (max-width:520px){
+  .lx-params,.lx-pmorebody{grid-template-columns:minmax(0,1fr)}
+  .lx-prow>.lx-pk{padding:6px 12px 0!important;border-top:1px solid var(--line);background:var(--card);font-size:12px}
+  .lx-prow>.lx-pv{border-top:0;padding-top:2px}
+  .lx-params>.lx-prow:first-child>.lx-pk{border-top:0}
+}
