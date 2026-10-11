@@ -2518,5 +2518,17 @@
   "sh.fontSample": "Aa Good evening",
   "@sh.fontSample": {
     "description": "Sample text under each font in Me › Character/appearance: “Aa” (a capital and a small letter of the language’s alphabet) and a short greeting, written in that font. Keep it short."
+  },
+  "sh.native": "Native language",
+  "@sh.native": {
+    "description": "Me › Language & appearance: label of the picker of the learner’s native language (used by the language courses)."
+  },
+  "sh.nativeTip": "The language courses explain through it: comparisons only with your language, and the explanations in it once they are translated. Any other language: choose it in a language course’s settings.",
+  "@sh.nativeTip": {
+    "description": "Me › Language & appearance: the note under the native-language picker."
+  },
+  "sh.nativeNone": "— not set —",
+  "@sh.nativeNone": {
+    "description": "Me › Language & appearance: the first option of the native-language picker (none set yet)."
   }
 }
