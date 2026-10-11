@@ -13,6 +13,64 @@
   'use strict';
   const nfc = s => String(s == null ? '' : s).normalize('NFC');
 
+  /* ---------- the words a learner reads (docs/i18n.md: catalog i18n/langcore, keys lc.*) ----------
+     lcU / lcUP   lc.ui.*    the interface: exercise instructions, labels, feedback — in the UI language;
+     lcX / lcXP   lc.expl.*  explanations: “why” lines, grammar terms, notes — in the UI language for now; they will follow the
+                             course's speaker language (docs/i18n.md §1), which is why they have their own prefix and wrapper.
+     …P variants return parts [text | {w, lang} …] for messages with words of a learned language inside (the UI renders them).
+     The app formats with NoemaI18n. Node (tests, tools, the skill's scripts) has no NoemaI18n: the English catalog comes from
+     tools/i18n/node.js (in the skill: i18n/node.js next to this file) and the same intl-messageformat, so Node prints the same
+     English as before. lcEn: English whatever the UI language — for the prompts, which stay English.
+     Words of the learned languages, AI prompts and the texts for course authors and Claude (P8, validators) are not translated. */
+  const LC_EN = { msgs: null, IMF: null, cache: new Map(), tried: false };
+  function lcEnglish() {
+    if (LC_EN.msgs) return LC_EN;
+    const cat = root.NOEMA_I18N && root.NOEMA_I18N.en, M = root.IntlMessageFormat;
+    if (cat && cat.m && M) { LC_EN.msgs = cat.m; LC_EN.IMF = M.IntlMessageFormat || M.default || M; return LC_EN; }
+    if (!LC_EN.tried && typeof require === 'function' && typeof __dirname === 'string') {   // Node (CommonJS): the helper
+      LC_EN.tried = true;
+      for (const rel of [['..', 'tools', 'i18n', 'node.js'], ['i18n', 'node.js']]) {
+        try { const E = require(require('path').join(__dirname, ...rel)).english(); LC_EN.msgs = E.messages; LC_EN.IMF = E.IntlMessageFormat; break; } catch (e) { }
+      }
+    }
+    return LC_EN;
+  }
+  const lcFormat = (E, key, params) => {
+    const msg = E.msgs && E.msgs[key];
+    if (msg == null) return key.split('.').pop();   // as NoemaI18n does for a missing key
+    let f = E.cache.get(key);
+    if (!f) { try { f = new E.IMF(msg, 'en', undefined, { ignoreTag: true }); } catch (e) { f = { format: () => msg }; } E.cache.set(key, f); }
+    const out = f.format(params || {}); return Array.isArray(out) ? out.join('') : out;
+  };
+  /** English, whatever the UI language (the prompts, which stay English). */
+  const lcEn = (key, params) => lcFormat(lcEnglish(), key, params);
+  const lcT = (key, params) => { const N = root.NoemaI18n; return N && N.t ? N.t(key, params) : lcEn(key, params); };
+  const lcU = (key, params) => lcT(key, params);
+  const lcLocale = () => (root.NoemaI18n && root.NoemaI18n.locale) || 'en';
+  const lcX = (key, params) => lcT(key, params);
+  /** A message as parts: params that are objects ({w, lang}) or arrays of parts are put in as they are. */
+  function lcParts(fmt, key, params) {
+    const rich = [], p = {};
+    for (const [k, v] of Object.entries(params || {})) if (v && typeof v === 'object') { p[k] = '' + rich.length + ''; rich.push(v); } else p[k] = v;
+    const out = [];
+    for (const piece of fmt(key, p).split(/(\d+)/)) {
+      const m = /^(\d+)$/.exec(piece);
+      if (!m) { if (piece) out.push(piece); continue; }
+      const v = rich[+m[1]]; if (Array.isArray(v)) out.push(...v); else out.push(v);
+    }
+    return out;
+  }
+  const lcUP = (key, params) => lcParts(lcU, key, params);
+  const lcXP = (key, params) => lcParts(lcX, key, params);
+  /** “a or b or c” (lc.expl.or joins two at a time). */
+  const lcOr = items => items.length ? items.reduce((a, b) => lcX('lc.expl.or', { a, b })) : '';
+  /** The labels of a table of codes (grammar tags, parts of speech …): {code: key} read in the current language each time. */
+  function lcLabels(keys, fmt = lcX) {
+    const o = {};
+    for (const [code, key] of Object.entries(keys)) Object.defineProperty(o, code, { enumerable: true, configurable: true, get: () => fmt(key) });
+    return o;
+  }
+
   /* ---------- feature cells ---------- */
   const cellParts = c => String(c || '').split(';').filter(Boolean);
   const canon = c => { const p = cellParts(c); return p.length ? [p[0], ...p.slice(1).sort()].join(';') : ''; };
@@ -36,6 +94,7 @@
     'ī': ['i', 1], 'í': ['i', 2], 'ǐ': ['i', 3], 'ì': ['i', 4], 'ō': ['o', 1], 'ó': ['o', 2], 'ǒ': ['o', 3], 'ò': ['o', 4],
     'ū': ['u', 1], 'ú': ['u', 2], 'ǔ': ['u', 3], 'ù': ['u', 4], 'ǖ': ['ü', 1], 'ǘ': ['ü', 2], 'ǚ': ['ü', 3], 'ǜ': ['ü', 4] };
   const MARK_OF = {}; for (const [m, [v, t]] of Object.entries(TONE)) MARK_OF[v + t] = m;
+  /* i18n-ignore-start — pinyin syllables, and the pinyin checks of the validator (for course authors; tools/langlib.py has the same messages) */
   const FINALS = ['a', 'o', 'e', 'ai', 'ei', 'ao', 'ou', 'an', 'en', 'ang', 'eng', 'ong', 'er', 'i', 'ia', 'ie', 'iao', 'iu', 'ian', 'in', 'iang', 'ing',
     'iong', 'u', 'ua', 'uo', 'uai', 'ui', 'uan', 'un', 'uang', 'ueng', 'ü', 'üe', 'üan', 'ün', 'ue'];
   const SYL = new RegExp('^(zh|ch|sh|[bpmfdtnlgkhjqxrzcsyw])?(' + [...FINALS].sort((a, b) => b.length - a.length).join('|') + ')$');
@@ -72,6 +131,7 @@
     }
     return err;
   }
+  /* i18n-ignore-end */
   function pinyinNumbersToMarks(s) {
     return pinyinSplit(s).map(syl => {
       const m = syl.match(/^([a-zü:v]+)([0-5])?$/);
@@ -172,7 +232,7 @@
       if (!tags.length) continue;
       if (p.specific) {   // the tags only approximate it: familiar only to speakers of the languages that really have it
         const from = mine.filter(k => (p.alsoIn || []).includes(k));
-        if (from.length) out.familiar.push({ p, from }); else out.new.push({ p, notes: p.alsoNote ? [{ feature: '', title: 'Specific to this language', value: '', note: p.alsoNote }] : [] });
+        if (from.length) out.familiar.push({ p, from }); else out.new.push({ p, notes: p.alsoNote ? [{ feature: '', title: lcX('lc.expl.specificToLanguage'), value: '', note: p.alsoNote }] : [] });
         continue;
       }
       const from = new Set(), notes = []; let familiar = true;
@@ -411,7 +471,7 @@
   /** Can a function be trained now in this language? (§7.3) → {state: ready|thin|locked|absent, sentences, needs: {POS: [have, need]}, unlockBy: [node ids]} */
   function feasibility(C, L, code, fid, opts = {}) {
     const X = C.lang[code], g = X.grammar[fid], min = opts.minSentences || 12;
-    if (!g) return { state: 'absent', reason: 'no realization file', sentences: 0, needs: {}, unlockBy: [] };
+    if (!g) return { state: 'absent', reason: 'no realization file', sentences: 0, needs: {}, unlockBy: [] };   // i18n-ignore (an internal reason, not shown)
     if (g.status === 'absent') return { state: 'absent', reason: g.summary, sentences: 0, needs: {}, unlockBy: [] };
     const k = opts.k || known(C, L, code);
     const ok = selectSentences(C, code, { known: k.R, functions: [fid], maxUnknown: 'auto' });   // D19: the sentences the exercises really use
@@ -522,26 +582,37 @@
 
   /* ---------- the word card: everything about one word, in depth (§4.6) ---------- */
   const ARTICLE = { MASC: 'der', FEM: 'die', NEUT: 'das' };
-  /** The forms a learner memorizes with the word, per language: [[label, value], …] */
+  /** The labels of the principal parts: id (English, stable — the UI may compare it) → key. German pronouns are the language's own words. */
+  /* i18n-ignore-start (ids) */
+  const PART_KEY = { 'plural only': 'lc.expl.part.pluralOnly', article: 'lc.expl.part.article', genitive: 'lc.expl.part.genitive', plural: 'lc.expl.part.plural',
+    'perfect with': 'lc.expl.part.perfectWith', collective: 'lc.expl.part.collective', 'one (unit noun)': 'lc.expl.part.unitNoun', 'counted plural': 'lc.expl.part.countedPlural',
+    feminine: 'lc.expl.part.feminine', 'with the article': 'lc.expl.part.withArticle', 'feminine plural': 'lc.expl.part.femininePlural', root: 'lc.expl.part.root',
+    binyan: 'lc.expl.part.binyan', 'verb form': 'lc.expl.part.verbForm', gender: 'lc.expl.part.gender', pinyin: 'lc.expl.part.pinyin', traditional: 'lc.expl.part.traditional',
+    'measure word': 'lc.expl.part.measureWord', transliteration: 'lc.expl.part.transliteration' };
+  /* i18n-ignore-end */
+  /** The forms a learner memorizes with the word, per language: [[label, value, id], …] — label in the learner's language, id the
+   *  stable English name of the part (article, plural, transliteration …; er/sie/es and du for German verbs). */
   function principalParts(C, code, lx) {
     const f = lx.forms || {}, get = c => { const k = Object.keys(f).find(x => canon(x) === canon(c)); return k ? f[k] : null; }, out = [];
-    const G = { MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter' };
+    const push = (id, v) => out.push([PART_KEY[id] ? lcX(PART_KEY[id]) : id, v, id]);
+    /* i18n-ignore-start (the ids of the parts, German words and feature cells) */
     // German: the article with the form used after it (der Gute Heinrich); plural-only nouns (die Edamame)
-    if (code === 'de' && lx.pos === 'NOUN' && lx.class === 'plt') { out.push(['plural only', 'die ' + (get('N;NOM;PL') || lx.lemma)]); }
-    else if (code === 'de' && lx.pos === 'NOUN') { out.push(['article', ARTICLE[lx.gender] + ' ' + (get('N;NOM;SG;DEF') || lx.lemma)]); if (get('N;GEN;SG')) out.push(['genitive', (lx.gender === 'FEM' ? 'der ' : 'des ') + get('N;GEN;SG')]); if (get('N;NOM;PL')) out.push(['plural', 'die ' + get('N;NOM;PL')]); }
-    else if (code === 'de' && lx.pos === 'VERB') { for (const [l, c] of [['er/sie/es', 'V;PRS;3;SG'], ['du', 'V;PRS;2;SG']]) if (get(c)) out.push([l, get(c)]); if (lx.aux) out.push(['perfect with', lx.aux]); }
-    else if (lx.pos === 'NOUN' && lx.class === 'collective') { out.push(['collective', lx.lemma]); if (lx.unit) out.push(['one (unit noun)', lx.unit]); if (get('N;NOM;PL;INDF')) out.push(['counted plural', get('N;NOM;PL;INDF')]); }
-    else if (code === 'he' && lx.pos === 'NOUN') { if (get('N;SG;FEM;INDF')) out.push(['feminine', get('N;SG;FEM;INDF')]); if (get('N;PL;INDF')) out.push(['plural', get('N;PL;INDF')]); if (get('N;SG;DEF')) out.push(['with the article', get('N;SG;DEF')]); }
+    if (code === 'de' && lx.pos === 'NOUN' && lx.class === 'plt') { push('plural only', 'die ' + (get('N;NOM;PL') || lx.lemma)); }
+    else if (code === 'de' && lx.pos === 'NOUN') { push('article', ARTICLE[lx.gender] + ' ' + (get('N;NOM;SG;DEF') || lx.lemma)); if (get('N;GEN;SG')) push('genitive', (lx.gender === 'FEM' ? 'der ' : 'des ') + get('N;GEN;SG')); if (get('N;NOM;PL')) push('plural', 'die ' + get('N;NOM;PL')); }
+    else if (code === 'de' && lx.pos === 'VERB') { for (const [l, c] of [['er/sie/es', 'V;PRS;3;SG'], ['du', 'V;PRS;2;SG']]) if (get(c)) push(l, get(c)); if (lx.aux) push('perfect with', lx.aux); }
+    else if (lx.pos === 'NOUN' && lx.class === 'collective') { push('collective', lx.lemma); if (lx.unit) push('one (unit noun)', lx.unit); if (get('N;NOM;PL;INDF')) push('counted plural', get('N;NOM;PL;INDF')); }
+    else if (code === 'he' && lx.pos === 'NOUN') { if (get('N;SG;FEM;INDF')) push('feminine', get('N;SG;FEM;INDF')); if (get('N;PL;INDF')) push('plural', get('N;PL;INDF')); if (get('N;SG;DEF')) push('with the article', get('N;SG;DEF')); }
     else if (code === 'ar' && lx.pos === 'NOUN') {
       const pick = (...cs) => { for (const c of cs) { const f = get(c); if (f) return f; } return null; };
       const fem = pick('N;NOM;SG;FEM;INDF'), pl = pick('N;NOM;PL;INDF', 'N;NOM;PL;MASC;INDF'), plf = pick('N;NOM;PL;FEM;INDF'), def = pick('N;NOM;SG;DEF', 'N;NOM;SG;MASC;DEF');
-      if (fem) out.push(['feminine', fem]); if (pl) out.push(['plural', pl]); if (plf) out.push(['feminine plural', plf]); if (def) out.push(['with the article', def]);
+      if (fem) push('feminine', fem); if (pl) push('plural', pl); if (plf) push('feminine plural', plf); if (def) push('with the article', def);
     }
-    else if (lx.pos === 'VERB' && lx.root) { out.push(['root', lx.root]); if (lx.binyan) out.push(['binyan', lx.binyan]); if (lx.verbForm) out.push(['verb form', lx.verbForm]); }
-    if (lx.gender && !(code === 'de' && lx.pos === 'NOUN')) out.push(['gender', G[lx.gender]]);
-    if (lx.root && lx.pos !== 'VERB') out.push(['root', lx.root]);
-    if (code === 'zh') { if (lx.pinyin) out.push(['pinyin', lx.pinyin.replace(/\s+/g, '')]); if (lx.trad && lx.trad !== lx.lemma) out.push(['traditional', lx.trad]); if (lx.measure) out.push(['measure word', lx.measure.join(' · ')]); }
-    if (lx.translit && code !== 'zh') out.push(['transliteration', lx.translit]);
+    else if (lx.pos === 'VERB' && lx.root) { push('root', lx.root); if (lx.binyan) push('binyan', lx.binyan); if (lx.verbForm) push('verb form', lx.verbForm); }
+    if (lx.gender && !(code === 'de' && lx.pos === 'NOUN')) push('gender', GENDER_WORD[lx.gender]);
+    if (lx.root && lx.pos !== 'VERB') push('root', lx.root);
+    if (code === 'zh') { if (lx.pinyin) push('pinyin', lx.pinyin.replace(/\s+/g, '')); if (lx.trad && lx.trad !== lx.lemma) push('traditional', lx.trad); if (lx.measure) push('measure word', lx.measure.join(' · ')); }
+    if (lx.translit && code !== 'zh') push('transliteration', lx.translit);
+    /* i18n-ignore-end */
     return out;
   }
   /** → {lex, lemma, pos, parts, flags (the concept in every course language), meaning, register, examples (with their words checked against what the learner knows), sections} */
@@ -562,18 +633,18 @@
     for (const s of p.synonyms || []) for (const r of [].concat(s.register)) (byRegister[r] = byRegister[r] || []).push(s);
     const sec = (key, title, items) => (items && (Array.isArray(items) ? items.length : Object.keys(items).length)) ? { key, title, items } : null;
     const sections = [
-      sec('senses', 'Meanings', meanings(C, code, lx, concept)),
-      sec('facade', 'This word in ' + (X.language.name || code), facadeOf(C, code, lx)),
-      sec('examples', 'In sentences — contexts and registers', examples),
-      sec('collocations', 'Goes with', p.collocations),
-      sec('particleVerbs', 'Verbs built on it', p.particleVerbs),
-      sec('phrases', 'Idioms, sayings and quotes', p.phrases),
-      sec('synonyms', 'Synonyms by register', byRegister),
-      sec('antonyms', 'Opposites', p.antonyms),
-      sec('pitfalls', '⚠️ Watch out', p.pitfalls),
-      sec('subtleties', 'Subtleties', p.subtleties),
-      sec('etymology', 'Where it comes from', p.etymology ? [p.etymology] : []),
-      sec('funFacts', 'Fun facts', p.funFacts),
+      sec('senses', lcU('lc.ui.card.meanings'), meanings(C, code, lx, concept)),
+      sec('facade', lcU('lc.ui.card.facade', { lang: X.language.name || code }), facadeOf(C, code, lx)),
+      sec('examples', lcU('lc.ui.card.examples'), examples),
+      sec('collocations', lcU('lc.ui.card.collocations'), p.collocations),
+      sec('particleVerbs', lcU('lc.ui.card.particleVerbs'), p.particleVerbs),
+      sec('phrases', lcU('lc.ui.card.phrases'), p.phrases),
+      sec('synonyms', lcU('lc.ui.card.synonyms'), byRegister),
+      sec('antonyms', lcU('lc.ui.card.antonyms'), p.antonyms),
+      sec('pitfalls', '⚠️ ' + lcU('lc.ui.card.pitfalls'), p.pitfalls),
+      sec('subtleties', lcU('lc.ui.card.subtleties'), p.subtleties),
+      sec('etymology', lcU('lc.ui.card.etymology'), p.etymology ? [p.etymology] : []),
+      sec('funFacts', lcU('lc.ui.card.funFacts'), p.funFacts),
     ].filter(Boolean);
     return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx),
       state: k.state[lexId], flags, frequency: p.frequency || null, status: p.status || null, register: [].concat(p.register || []), connotation: p.connotation || null,
@@ -609,7 +680,7 @@
       if (d.classes && !d.classes.includes(key)) continue;
       const val = d.at === 'top' ? lx[d.id] : (lx.features || {})[d.id];
       if (val == null) continue;
-      const show = v => v == null ? '' : typeof v === 'boolean' ? (v ? 'yes' : 'no') : Array.isArray(v) ? v.map(show).filter(Boolean).join(' · ')
+      const show = v => v == null ? '' : typeof v === 'boolean' ? lcX(v ? 'lc.expl.yes' : 'lc.expl.no') : Array.isArray(v) ? v.map(show).filter(Boolean).join(' · ')
         : typeof v === 'object' ? ('none' in v ? '— ' + v.none : Object.entries(v).filter(([k2]) => k2 !== 'senses').map(([, v2]) => show(v2)).filter(Boolean).join(' ')
           + (v.senses ? ' (' + v.senses.map(sid => ((lx.profile || {}).senses || []).find(x => x.id === sid)?.def?.split(/[;,(—]/)[0].trim() || sid).join(', ') + ')' : '')) : /^[A-Z]{2,}$/.test(v) && TAG_LABEL[v] ? TAG_LABEL[v] : String(v);   // MASC → masculine (QA)
       const text = show(val); if (text) out.push({ id: d.id, title: d.title || d.id, text, none: !!(val && typeof val === 'object' && 'none' in val) });
@@ -618,32 +689,35 @@
   }
 
   /* ---------- exercises made from stored data (§6.7 generators) — every answer comes from the course files ---------- */
-  const TAG_LABEL = { NOM: 'nominative', ACC: 'accusative', DAT: 'dative', GEN: 'genitive', SG: 'singular', PL: 'plural', DU: 'dual', COLL: 'collective',
-    MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter', DEF: 'definite (“the”)', INDF: 'indefinite', PRS: 'present', PST: 'past', FUT: 'future',
-    PFV: 'perfective', IPFV: 'imperfective', IND: 'indicative', SBJV: 'subjunctive', JUSS: 'jussive', IMP: 'imperative', NFIN: 'infinitive', CSTR: 'construct state',
-    '1': '1st person', '2': '2nd person', '3': '3rd person' };
-  Object.assign(TAG_LABEL, { STRG: 'strong ending (no article)', WEAK: 'weak ending (after der / die / das)', MIX: 'mixed ending (after ein / kein / mein)', SEP: 'the separated particle', PFX: 'after an attached preposition', ALT: 'before the article (another spelling)', CONST: 'construct state (“the … of”)', POSS: 'with an owner ending', INFM: 'informal', FORM: 'formal', CMPR: 'comparative', SPRL: 'superlative', NEG: 'negative', PTCP: 'participle', MSDR: 'verbal noun' });
-  const OWNER = { '1S': 'my', '2S': 'your', '2SM': 'your (m.)', '2SF': 'your (f.)', '3S': 'his/her', '3SM': 'his', '3SF': 'her', '1P': 'our', '2P': 'your (pl.)', '2PM': 'your (pl. m.)', '2PF': 'your (pl. f.)', '3P': 'their', '3PM': 'their (m.)', '3PF': 'their (f.)', '2D': 'your (two)', '3D': 'their (two)' };
+  /** The words for the feature tags (UniMorph) in the learner's language: TAG_LABEL.NOM → “nominative” (keys lc.expl.tag.<TAG>). */
+  const TAG_LABEL = lcLabels(Object.fromEntries(['NOM', 'ACC', 'DAT', 'GEN', 'SG', 'PL', 'DU', 'COLL', 'MASC', 'FEM', 'NEUT', 'DEF', 'INDF', 'PRS', 'PST', 'FUT',
+    'PFV', 'IPFV', 'IND', 'SBJV', 'JUSS', 'IMP', 'NFIN', 'CSTR', '1', '2', '3', 'STRG', 'WEAK', 'MIX', 'SEP', 'PFX', 'ALT', 'CONST', 'POSS', 'INFM', 'FORM', 'CMPR', 'SPRL',
+    'NEG', 'PTCP', 'MSDR', 'JUS', 'HAB', 'INT', 'DIR', 'POS'].map(t => [t, 'lc.expl.tag.' + t])));   // i18n-ignore (tags)
+  /** The owner of a possessed form (PSS1S → “my”, keys lc.expl.owner.<person/number/gender>). */
+  const OWNER = lcLabels(Object.fromEntries(['1S', '2S', '2SM', '2SF', '3S', '3SM', '3SF', '1P', '2P', '2PM', '2PF', '3P', '3PM', '3PF', '2D', '3D'].map(t => [t, 'lc.expl.owner.' + t])));
+  const ownerIs = owner => lcX('lc.expl.ownerIs', { owner });
   /** A feature cell in words: V;PRS;3;SG → “present · 3rd person · singular”; possessed forms name the owner: N;NOM;SG;PSS1S → “nominative · singular · owner: my” */
   function cellLabel(cell) {
     const p = cellParts(canon(cell)).slice(1), pss = p.find(t => /^PSS\d/.test(t));
-    if (pss) return [...p.filter(t => t !== pss && t !== 'POSS').map(t => TAG_LABEL[t] || t), 'owner: ' + (OWNER[pss.slice(3)] || pss.slice(3))].join(' · ');
+    if (pss) return [...p.filter(t => t !== pss && t !== 'POSS').map(t => TAG_LABEL[t] || t), ownerIs(OWNER[pss.slice(3)] || pss.slice(3))].join(' · ');
     if (p.includes('POSS') && p[0] !== 'POSS') {   // N;POSS;3;PL;FEM — person, number and gender are the owner's
       const own = p.filter(t => ['1', '2', '3', 'SG', 'PL', 'DU', 'MASC', 'FEM'].includes(t)), key = (own.find(t => /\d/.test(t)) || '') + ((own.includes('PL') ? 'P' : own.includes('DU') ? 'D' : 'S')) + (own.includes('MASC') ? 'M' : own.includes('FEM') ? 'F' : '');
       const rest = p.filter(t => t !== 'POSS' && !own.includes(t)).map(t => TAG_LABEL[t] || t);
-      return [...rest, 'owner: ' + (OWNER[key] || OWNER[key.slice(0, 2)] || own.join(' '))].join(' · ');
+      return [...rest, ownerIs(OWNER[key] || OWNER[key.slice(0, 2)] || own.join(' '))].join(' · ');
     }
-    return p.map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form';
+    return p.map(t => TAG_LABEL[t] || t).join(' · ') || lcX('lc.expl.basicForm');
   }
-  const VARIANT_LABEL = { Polarity: { NEG: 'Make it negative', POS: 'Make it positive' }, Mood: { INT: 'Make it a question', IMP: 'Make it a command' },
-    Number: { PL: 'Make it plural', SG: 'Make it singular', DU: 'Make it dual (two)' }, Definiteness: { DEF: 'Make it definite (“the”)', INDF: 'Make it indefinite' },
-    Gender: { FEM: 'Say it about / to a woman', MASC: 'Say it about / to a man' }, Addressee: { FEM: 'Say it to a woman', MASC: 'Say it to a man' },
-    Tense: { PST: 'Put it in the past', FUT: 'Put it in the future', PRS: 'Put it in the present' }, Aspect: { PFV: 'Say that it happened (completed)', IPFV: 'Say that it is going on' },
-    Formality: { formal: 'Say it politely (formal)', informal: 'Say it informally' }, Address: { formal: 'Say it politely (formal)', informal: 'Say it informally' },
-    Deixis: { FAR: 'Point to something farther away (that)', NEAR: 'Point to something near (this)' },
-    QuestionForm: { 'A-not-A': 'Ask with A-not-A (是不是, 要不要)' }, QuestionMarker: { intonation: 'Ask with intonation only' } };
-  const variantLabel = v => Object.entries(v || {}).map(([k, x]) => VARIANT_LABEL[k]?.[x] || VARIANT_LABEL[k]?.[String(x).split(' ')[0].toLowerCase()] || (/formal/i.test(x) ? (/informal/i.test(x) ? VARIANT_LABEL.Formality.informal : VARIANT_LABEL.Formality.formal) : `${k}: ${x}`)).join(' · ');
-  const GENDER_WORD = { MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter' };
+  /** What a variant asks for (“Make it plural”): {parameter: {value: key}} — the change of a transform / agree / rewrite item. */
+  const VARIANT_KEY = { Polarity: { NEG: 'lc.ui.variant.negative', POS: 'lc.ui.variant.positive' }, Mood: { INT: 'lc.ui.variant.question', IMP: 'lc.ui.variant.command' },
+    Number: { PL: 'lc.ui.variant.plural', SG: 'lc.ui.variant.singular', DU: 'lc.ui.variant.dual' }, Definiteness: { DEF: 'lc.ui.variant.definite', INDF: 'lc.ui.variant.indefinite' },
+    Gender: { FEM: 'lc.ui.variant.aboutWoman', MASC: 'lc.ui.variant.aboutMan' }, Addressee: { FEM: 'lc.ui.variant.toWoman', MASC: 'lc.ui.variant.toMan' },
+    Tense: { PST: 'lc.ui.variant.past', FUT: 'lc.ui.variant.future', PRS: 'lc.ui.variant.present' }, Aspect: { PFV: 'lc.ui.variant.completed', IPFV: 'lc.ui.variant.ongoing' },
+    Formality: { formal: 'lc.ui.variant.formal', informal: 'lc.ui.variant.informal' }, Address: { formal: 'lc.ui.variant.formal', informal: 'lc.ui.variant.informal' },
+    Deixis: { FAR: 'lc.ui.variant.far', NEAR: 'lc.ui.variant.near' },
+    QuestionForm: { 'A-not-A': 'lc.ui.variant.aNotA' }, QuestionMarker: { intonation: 'lc.ui.variant.intonation' } };   // i18n-ignore (keys)
+  const variantKeys = v => Object.entries(v || {}).map(([k, x]) => VARIANT_KEY[k]?.[x] || VARIANT_KEY[k]?.[String(x).split(' ')[0].toLowerCase()] || (/formal/i.test(x) ? (/informal/i.test(x) ? VARIANT_KEY.Formality.informal : VARIANT_KEY.Formality.formal) : { k, x }));
+  const variantLabel = (v, fmt) => variantKeys(v).map(key => typeof key === 'string' ? (typeof fmt === 'function' ? fmt : lcU)(key) : `${key.k}: ${key.x}`).join(' · ');   // fmt: lcEn for the prompts
+  const GENDER_WORD = lcLabels({ MASC: 'lc.expl.tag.MASC', FEM: 'lc.expl.tag.FEM', NEUT: 'lc.expl.tag.NEUT' });
   function shuffled(a, rng) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const uniqStr = a => [...new Set(a)];
   /** The pieces of a sentence a learner puts in order: its written words (a word with attached prefixes stays one tile). */
@@ -695,8 +769,8 @@
       } else if (gen.type === 'gender_article') {
         for (const lx of Object.values(X.lex)) {
           if (!K.has(lx.id) || lx.pos !== 'NOUN' || !GENDER_WORD[lx.gender] || lx.class === 'plt' || (gen.concepts && !(lx.senses || []).some(c => gen.concepts.some(p => c.startsWith(p))))) continue;
-          if (code === 'de') { const a = { MASC: 'der', FEM: 'die', NEUT: 'das' }[lx.gender], f = lx.forms || {}, after = f[Object.keys(f).find(x => canon(x) === canon('N;NOM;SG;DEF'))] || lx.lemma; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its article?', options: ['der', 'die', 'das'], answer: a, why: `${a} ${after} (${GENDER_WORD[lx.gender]})` }); }
-          else { const opts2 = code === 'ar' || code === 'he' ? ['masculine', 'feminine'] : ['masculine', 'feminine', 'neuter']; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its gender?', options: opts2, answer: GENDER_WORD[lx.gender], why: `${lx.lemma}: ${GENDER_WORD[lx.gender]}` }); }
+          if (code === 'de') { const a = { MASC: 'der', FEM: 'die', NEUT: 'das' }[lx.gender], f = lx.forms || {}, after = f[Object.keys(f).find(x => canon(x) === canon('N;NOM;SG;DEF'))] || lx.lemma; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: lcU('lc.ui.ask.article'), options: ['der', 'die', 'das'], answer: a, why: `${a} ${after} (${GENDER_WORD[lx.gender]})` }); }   // i18n-ignore (German words, a cell)
+          else { const opts2 = (code === 'ar' || code === 'he' ? ['MASC', 'FEM'] : ['MASC', 'FEM', 'NEUT']).map(g => GENDER_WORD[g]); items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: lcU('lc.ui.ask.gender'), options: opts2, answer: GENDER_WORD[lx.gender], why: `${lx.lemma}: ${GENDER_WORD[lx.gender]}` }); }
         }
       } else if (gen.type === 'measure_word') {
         const clf = Object.values(X.lex).filter(x => x.pos === 'CLF'), knownClf = clf.filter(x => K.has(x.id)).map(x => x.lemma), allClf = clf.map(x => x.lemma);
@@ -704,7 +778,7 @@
           if (!K.has(lx.id) || lx.pos !== 'NOUN' || !(lx.measure || []).length) continue;
           const ans = lx.measure[0], wrong = (knownClf.length >= 3 ? knownClf : allClf).filter(m => !lx.measure.includes(m) && m !== '个');   // 个 is never offered as wrong: it is often heard with anything
           if (wrong.length < 1) continue;
-          items.push({ type: 'choose', kind: 'measure', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'one … — which measure word?', options: shuffled([ans, ...shuffled(wrong, rng).slice(0, 3)], rng).map(m => '一' + m), answer: '一' + ans, why: `一${lx.measure.join(' / 一')}${lx.lemma}` });
+          items.push({ type: 'choose', kind: 'measure', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: lcU('lc.ui.ask.measureWord'), options: shuffled([ans, ...shuffled(wrong, rng).slice(0, 3)], rng).map(m => '一' + m), answer: '一' + ans, why: `一${lx.measure.join(' / 一')}${lx.lemma}` });   // i18n-ignore (Chinese words)
         }
       } else if (gen.type === 'sentence_meaning') {
         const ss = bankFor(gen);
@@ -716,7 +790,7 @@
           const others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && conceptKey(o) !== key), rng);
           const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).slice(0, 3);
           if (wrong.length < 2) continue;
-          items.push({ type: 'choose', kind: 'meaning', fn: fid, lang: code, sentence: s.id, prompt: s.text, ask: 'What does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss, unknown: s.unknown });
+          items.push({ type: 'choose', kind: 'meaning', fn: fid, lang: code, sentence: s.id, prompt: s.text, ask: lcU('lc.ui.ask.meaning'), options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss, unknown: s.unknown });
         }
       } else if (gen.type === 'build_sentence' || gen.type === 'word_order') {
         for (const s of bankFor(gen)) {
@@ -758,7 +832,7 @@
     const X = C.lang[code], rng = opts.rng || Math.random, gl = id => { const c = (X.lex[id].senses || [])[0]; return c ? C.concepts[c].gloss : (X.lex[id].role || ''); };
     return lexIds.filter(id => (X.lex[id].senses || []).length).map(id => {
       const pool = uniqStr([...lexIds, ...Object.keys(X.lex)].filter(x => x !== id && (X.lex[x].senses || []).length && !(X.lex[x].senses || []).some(s => X.lex[id].senses.includes(s))).map(gl)).filter(g => g && g !== gl(id));
-      return { type: 'choose', kind: 'word', lang: code, lex: id, prompt: X.lex[id].lemma, ask: 'What does it mean?', options: shuffled([gl(id), ...pool.slice(0, 3)], rng), answer: gl(id), why: `${X.lex[id].lemma} — ${gl(id)}` };
+      return { type: 'choose', kind: 'word', lang: code, lex: id, prompt: X.lex[id].lemma, ask: lcU('lc.ui.ask.meaning'), options: shuffled([gl(id), ...pool.slice(0, 3)], rng), answer: gl(id), why: `${X.lex[id].lemma} — ${gl(id)}` };
     });
   }
   /** The lesson check (§6.7): n items mixing the lesson's words and its functions, in one language. */
@@ -1029,7 +1103,7 @@
     SYLS = new Set();
     const ini = ['', 'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w'];
     for (const i of ini) for (const f of FINALS) { const s = i + f; if (!pinyinSyllableErrors(s).length) SYLS.add(s); }
-    for (const s of ['yu', 'yue', 'yuan', 'yun', 'ju', 'jue', 'juan', 'jun', 'qu', 'que', 'quan', 'qun', 'xu', 'xue', 'xuan', 'xun', 'lü', 'lüe', 'nü', 'nüe', 'r']) SYLS.add(s);
+    for (const s of ['yu', 'yue', 'yuan', 'yun', 'ju', 'jue', 'juan', 'jun', 'qu', 'que', 'quan', 'qun', 'xu', 'xue', 'xuan', 'xun', 'lü', 'lüe', 'nü', 'nüe', 'r']) SYLS.add(s);   // i18n-ignore (pinyin syllables)
     return SYLS;
   }
   /** "ni3hao3", "ni hao", "nǐhǎo", "lv4" → [{base, tone|null}] (null when the text is not pinyin). A digit gives the tone of the syllable
@@ -1079,11 +1153,12 @@
     }
     return out.reverse();
   }
+  /** The spelling rule behind a wrong letter (a note under a typed answer): [wanted, typed, key]. */
   const NOTE_PAIRS = [
-    [/^[aouAOU]$/, /^[äöüÄÖÜ]$/, 'umlaut: ä ö ü are letters of their own'], [/^s$/, /^ß$/, 'ß (or ss after a long vowel / diphthong)'],
-    [/^[اأإآءؤئ]/, /^[اأإآءؤئ]/, 'hamza and its seat (أ إ آ ء ؤ ئ)'], [/^[هة]/, /^[هة]/, 'tāʾ marbūṭa ة at the end, not هـ'], [/^[يى]/, /^[يى]/, 'alif maqṣūra ى (no dots) vs yāʾ ي'],
-    [/^[כך]/, /^[כך]/, 'final form (ך ם ן ף ץ at the end of a word only)'], [/^[מם]/, /^[מם]/, 'final form (ך ם ן ף ץ at the end of a word only)'], [/^[נן]/, /^[נן]/, 'final form (ך ם ן ף ץ at the end of a word only)'],
-    [/^[פף]/, /^[פף]/, 'final form (ך ם ן ף ץ at the end of a word only)'], [/^[צץ]/, /^[צץ]/, 'final form (ך ם ן ף ץ at the end of a word only)']];
+    [/^[aouAOU]$/, /^[äöüÄÖÜ]$/, 'lc.expl.typed.umlaut'], [/^s$/, /^ß$/, 'lc.expl.typed.eszett'],
+    [/^[اأإآءؤئ]/, /^[اأإآءؤئ]/, 'lc.expl.typed.hamza'], [/^[هة]/, /^[هة]/, 'lc.expl.typed.taMarbuta'], [/^[يى]/, /^[يى]/, 'lc.expl.typed.alifMaqsura'],
+    [/^[כך]/, /^[כך]/, 'lc.expl.typed.finalForm'], [/^[מם]/, /^[מם]/, 'lc.expl.typed.finalForm'], [/^[נן]/, /^[נן]/, 'lc.expl.typed.finalForm'],
+    [/^[פף]/, /^[פף]/, 'lc.expl.typed.finalForm'], [/^[צץ]/, /^[צץ]/, 'lc.expl.typed.finalForm']];
   /** Is a typed answer the word? → {ok, expected, diff, notes, marksOk}. ar/he: without vowel marks the letters must match (with marks,
    *  the marks too); de: capitals, umlauts and ß count; zh: the characters (simplified or traditional). */
   function checkTyped(C, code, lexId, typed, opts = {}) {
@@ -1095,12 +1170,12 @@
     if (swiss) ok = true;   // the Swiss spelling: ss for ß (accepted, with a note)
     if (!ok && vm && !typedMarks) ok = wants.some(w => plain(w) === t) || Object.values(lx.plene || {}).some(p => nfc(p) === t);
     const expected = wants[0], cmp = vm && !typedMarks ? plain(expected) : expected;
-    const diff = letterDiff(cmp, t), notes = swiss ? ['the Swiss spelling (ss for ß) — elsewhere ß'] : [];
+    const diff = letterDiff(cmp, t), notes = swiss ? [lcX('lc.expl.typed.swiss')] : [];
     if (!ok) {
-      if (vm && typedMarks && wants.some(w => plain(w) === plain(t))) notes.push('the letters are right; a vowel mark is not');
-      if (code === 'de' && t.toLowerCase() === expected.toLowerCase()) notes.push(lx.pos === 'NOUN' ? 'nouns start with a capital letter' : 'capital / small letter');
-      if (code === 'zh' && /^[a-zA-Züāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ0-9\s']+$/.test(t)) notes.push('type the pinyin, then choose the characters');
-      for (const d of diff) if (d.op === 'wrong') for (const [x, y, n] of NOTE_PAIRS) if ((x.test(d.want) && y.test(d.t)) || (y.test(d.want) && x.test(d.t))) { if (!notes.includes(n)) notes.push(n); }
+      if (vm && typedMarks && wants.some(w => plain(w) === plain(t))) notes.push(lcX('lc.expl.typed.vowelMark'));
+      if (code === 'de' && t.toLowerCase() === expected.toLowerCase()) notes.push(lcX(lx.pos === 'NOUN' ? 'lc.expl.typed.nounCapital' : 'lc.expl.typed.capital'));
+      if (code === 'zh' && /^[a-zA-Züāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ0-9\s']+$/.test(t)) notes.push(lcU('lc.ui.typed.pinyinThenChars'));
+      for (const d of diff) if (d.op === 'wrong') for (const [x, y, key] of NOTE_PAIRS) if ((x.test(d.want) && y.test(d.t)) || (y.test(d.want) && x.test(d.t))) { const n = lcX(key); if (!notes.includes(n)) notes.push(n); }
     }
     return { ok, expected, diff, notes, marksTyped: typedMarks };
   }
@@ -1170,8 +1245,7 @@
         const forms = it.forms || {}, poss = Object.keys(forms).filter(p => p !== 'isolated' && p !== 'regular');
         for (const pos of poss) {
           const wrong = uniqStr([...Object.entries(forms).filter(([p]) => p !== pos).map(([, f]) => f), ...(M.look[key] || []).map(b => M.items[b]?.forms?.[pos]).filter(Boolean)]);
-          const label = { initial: 'at the start of a word (joined to the next letter)', medial: 'in the middle of a word', final: 'at the end of a word' }[pos];
-          const x = chooseItem('glyph_form', 'position', code, { glyph: key, track: 'p', pos, prompt: forms.isolated || forms.regular || key, promptAs: 'glyph', ask: `${it.name}: its form ${label}?`, answer: forms[pos], wrong, optionsAs: 'glyph', why: `${it.name} ${label}: ${forms[pos].replace(/\u200d/g, '')}` }, rng);
+          const x = chooseItem('glyph_form', 'position', code, { glyph: key, track: 'p', pos, prompt: forms.isolated || forms.regular || key, promptAs: 'glyph', ask: lcU('lc.ui.ask.glyphForm', { name: it.name, pos }), answer: forms[pos], wrong, optionsAs: 'glyph', why: lcX('lc.expl.glyphForm', { name: it.name, pos, form: forms[pos].replace(/\u200d/g, '') }) }, rng);
           if (x) out.push(x);
         }
       }
@@ -1194,8 +1268,8 @@
         for (const key of keys) {
           const it = M.items[key]; if (it.type !== 'letter' || !it.translit) continue;
           const others = shuffled(all.filter(b => b !== key && M.items[b].translit !== it.translit), rng), look = (M.look[key] || []).filter(b => M.items[b]?.translit && M.items[b].translit !== it.translit);
-          const a = chooseItem('transliterate', 'letter', code, { glyph: key, track: 'r', prompt: key, promptAs: 'glyph', ask: 'How is it written in Latin letters?', answer: it.translit, wrong: [...look.map(b => M.items[b].translit), ...others.map(b => M.items[b].translit)], optionsAs: 'latin', why: `${key} ${it.name}: ${it.translit} [${it.sound}]` }, rng);
-          const b = chooseItem('transliterate', 'letter_rev', code, { glyph: key, track: 'p', prompt: `${it.translit}  [${it.sound}]`, promptAs: 'latin', ask: 'Which letter?', answer: key, wrong: [...look, ...others].filter(x => M.items[x].translit !== it.translit), optionsAs: 'glyph', why: `${it.translit} = ${key} (${it.name})` }, rng);
+          const a = chooseItem('transliterate', 'letter', code, { glyph: key, track: 'r', prompt: key, promptAs: 'glyph', ask: lcU('lc.ui.ask.latinLetters'), answer: it.translit, wrong: [...look.map(b => M.items[b].translit), ...others.map(b => M.items[b].translit)], optionsAs: 'latin', why: `${key} ${it.name}: ${it.translit} [${it.sound}]` }, rng);
+          const b = chooseItem('transliterate', 'letter_rev', code, { glyph: key, track: 'p', prompt: `${it.translit}  [${it.sound}]`, promptAs: 'latin', ask: lcU('lc.ui.ask.whichLetter'), answer: key, wrong: [...look, ...others].filter(x => M.items[x].translit !== it.translit), optionsAs: 'glyph', why: `${it.translit} = ${key} (${it.name})` }, rng);
           if (a) out.push(a); if (b) out.push(b);
         }
       }
@@ -1212,15 +1286,15 @@
           const realOthers = new Set(pool.filter(o => X.lex[o].lemma === lx.lemma).map(rom));
           wrong = [...shuffled(toneVar.filter(v => !realOthers.has(v)), rng).slice(0, 2), ...wrong];
         }
-        const a = chooseItem('transliterate', 'word', code, { lex: id, track: 'r', prompt: lx.lemma, promptAs: 'word', ask: code === 'zh' ? 'Its pinyin?' : 'How is it read?', answer: r, wrong, optionsAs: 'latin', why: `${lx.lemma} = ${r} — ${glossOf(C, code, id)}` }, rng);
-        const b = chooseItem('transliterate', 'word_rev', code, { lex: id, prompt: r, promptAs: 'latin', ask: 'Which is it?', answer: lx.lemma, wrong: near.map(o => X.lex[o].lemma).filter(w => w !== lx.lemma), optionsAs: 'word', why: `${r} = ${lx.lemma} — ${glossOf(C, code, id)}` }, rng);
+        const a = chooseItem('transliterate', 'word', code, { lex: id, track: 'r', prompt: lx.lemma, promptAs: 'word', ask: lcU(code === 'zh' ? 'lc.ui.ask.pinyin' : 'lc.ui.ask.howRead'), answer: r, wrong, optionsAs: 'latin', why: `${lx.lemma} = ${r} — ${glossOf(C, code, id)}` }, rng);
+        const b = chooseItem('transliterate', 'word_rev', code, { lex: id, prompt: r, promptAs: 'latin', ask: lcU('lc.ui.ask.whichIsIt'), answer: lx.lemma, wrong: near.map(o => X.lex[o].lemma).filter(w => w !== lx.lemma), optionsAs: 'word', why: `${r} = ${lx.lemma} — ${glossOf(C, code, id)}` }, rng);
         if (a) out.push(a); if (b) out.push(b);
       }
       if (M?.kind === 'chars') for (const id of words) for (const ch of new Set(X.lex[id].lemma)) {   // a character → its readings
         const e = M.items[ch]; if (!e) continue; const rd = [...(e.readings || []), ...(e.wordReadings || [])]; if (!rd.length) continue;
         const syl = pinyinSplit(X.lex[id].pinyin), i = [...X.lex[id].lemma].indexOf(ch), ans = syl[i] && rd.includes(syl[i]) ? syl[i] : rd[0];
         const wrong = [1, 2, 3, 4].map(t => withTone(pinyinBase(ans), t)).filter(v => !rd.includes(v));
-        const x = chooseItem('transliterate', 'char', code, { glyph: ch, track: 'r', prompt: ch, promptAs: 'word', ask: `Its reading in ${X.lex[id].lemma} (${glossOf(C, code, id)})?`, answer: ans, wrong, optionsAs: 'latin', why: `${ch}: ${rd.join(', ')} — ${e.meaning || ''}` }, rng);
+        const x = chooseItem('transliterate', 'char', code, { glyph: ch, track: 'r', prompt: ch, promptAs: 'word', ask: lcU('lc.ui.ask.charReading', { word: X.lex[id].lemma, gloss: glossOf(C, code, id) }), answer: ans, wrong, optionsAs: 'latin', why: `${ch}: ${rd.join(', ')} — ${e.meaning || ''}` }, rng);
         if (x) out.push(x);
       }
       return out;
@@ -1245,7 +1319,7 @@
         out.push({ type: 'tone_mark', kind: 'tone_mark', mode: 'written', lang: code, lex: id, prompt: glossOf(C, code, id), chars, bases, answer: tones, why: `${lx.lemma} ${lx.pinyin}` });
         const sp = toneSandhi(chars, tones);
         if (sp) out.push({ type: 'tone_mark', kind: 'tone_mark', mode: 'spoken', lang: code, lex: id, prompt: glossOf(C, code, id), chars, bases, written: tones, answer: sp,
-          why: `written ${lx.pinyin}, said ${bases.map((b, i) => withTone(b, sp[i])).join(' ')} (${chars.includes('不') && tones.some((t, i) => chars[i] === '不' && t !== sp[i]) ? '不 before a 4th tone → bú' : '3rd + 3rd → 2nd + 3rd'})` });
+          why: lcX('lc.expl.toneSandhi', { written: lx.pinyin, said: bases.map((b, i) => withTone(b, sp[i])).join(' '), rule: chars.includes('不') && tones.some((t, i) => chars[i] === '不' && t !== sp[i]) ? 'bu' : 'threes' }) });
       }
       return out;
     },
@@ -1259,10 +1333,10 @@
         if (parts.length >= 2 && parts.length <= 3 && /^[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺]/.test(e.ids || '') && parts.every(p => p !== ch)) {   // overlapping parts (⿻) are not built
           const wrong = shuffled(allParts.filter(p => !parts.includes(p)), rng).slice(0, 4);
           out.push({ type: 'char_compose', kind: 'compose', lang: code, glyph: ch, track: 'p', prompt: e.meaning || '', reading: (e.readings || e.wordReadings || [])[0] || '', ids: e.ids, layout: e.ids[0], answer: parts, tiles: shuffled([...parts, ...wrong], rng),
-            hint: e.etymology?.hint || '', why: `${ch} = ${e.ids}${e.etymology?.semantic ? ` · meaning from ${e.etymology.semantic}` : ''}${e.etymology?.phonetic ? ` · sound from ${e.etymology.phonetic}` : ''}` });
+            hint: e.etymology?.hint || '', why: lcX('lc.expl.charParts', { ch, ids: e.ids, hasMeaning: e.etymology?.semantic ? 'yes' : 'no', meaning: e.etymology?.semantic || '', hasSound: e.etymology?.phonetic ? 'yes' : 'no', sound: e.etymology?.phonetic || '' }) });
         }
         if (e.radical && e.radical !== ch) {
-          const x = chooseItem('char_compose', 'radical', code, { glyph: ch, track: 'r', prompt: ch, promptAs: 'word', ask: 'Its radical (the part it is filed under in a dictionary)?', answer: e.radical, wrong: shuffled(radicals.filter(r => r !== e.radical && !idsParts(e.ids).includes(r)), rng), optionsAs: 'word', why: `${ch}: radical ${e.radical}${e.meaning ? ' — ' + e.meaning : ''}` }, rng);
+          const x = chooseItem('char_compose', 'radical', code, { glyph: ch, track: 'r', prompt: ch, promptAs: 'word', ask: lcU('lc.ui.ask.radical'), answer: e.radical, wrong: shuffled(radicals.filter(r => r !== e.radical && !idsParts(e.ids).includes(r)), rng), optionsAs: 'word', why: lcX('lc.expl.radical', { ch, radical: e.radical, hasMeaning: e.meaning ? 'yes' : 'no', meaning: e.meaning || '' }) }, rng);
           if (x) out.push(x);
         }
       }
@@ -1271,7 +1345,7 @@
     trace(ctx) {
       const { C, code } = ctx, M = scriptModule(C, code); if (!M) return [];
       if (M.kind === 'chars') return uniqStr(scriptWords(C, ctx.L, code, ctx.k).flatMap(id => [...C.lang[code].lex[id].lemma])).filter(ch => M.items[ch]?.medians)
-        .map(ch => ({ type: 'trace', kind: 'trace', lang: code, glyph: ch, track: 'p', check: 'medians', medians: M.items[ch].medians, prompt: M.items[ch].meaning || '', reading: (M.items[ch].readings || [])[0] || '', why: `${ch}: ${M.items[ch].medians.length} strokes` }));
+        .map(ch => ({ type: 'trace', kind: 'trace', lang: code, glyph: ch, track: 'p', check: 'medians', medians: M.items[ch].medians, prompt: M.items[ch].meaning || '', reading: (M.items[ch].readings || [])[0] || '', why: lcX('lc.expl.strokes', { ch, n: M.items[ch].medians.length }) }));
       const ss = scriptState(C, ctx.L, code, ctx.k);
       return scriptLetters(C, ctx.L, code, ss).filter(k => M.items[k].type === 'letter').map(k => ({ type: 'trace', kind: 'trace', lang: code, glyph: k, track: 'p', check: 'self', prompt: M.items[k].name, reading: M.items[k].translit, why: `${k} — ${M.items[k].name}` }));
     },
@@ -1368,23 +1442,25 @@
        {type:'proofread'}  units, wrongAt, fix {options, accept}
        {type:'contrast'}   a meaning → one of the sentences of a variant group
        {type:'morph'} / {type:'combine'}   tiles like 'build' (checkBuilt), morph joined without spaces (join: 'none') */
-  for (const [t, l] of Object.entries({ JUS: 'jussive', HAB: 'habitual', INT: 'question', CSTR: 'construct state', DIR: 'directional', POS: 'positive' })) if (!(t in TAG_LABEL)) TAG_LABEL[t] = l;
+  // the tags of the grammar lane (JUS, HAB, INT, DIR, POS) are in TAG_LABEL above
+  /* i18n-ignore-start — tags, dimension ids (their words: TAG_LABEL, POS_LABEL, DIM_TITLE) */
   const POS_OF_TAG = { N: 'NOUN', V: 'VERB', ADJ: 'ADJ', DET: 'DET', PRON: 'PRON', NUM: 'NUM', ADP: 'ADP', PART: 'PART', ADV: 'ADV', CLF: 'CLF' };
-  const POS_LABEL = { NOUN: 'noun', PROPN: 'name', VERB: 'verb', AUX: 'auxiliary verb', ADJ: 'adjective', DET: 'determiner / article', PRON: 'pronoun', ADP: 'preposition', ADV: 'adverb',
-    PART: 'particle', CCONJ: 'conjunction (and, but …)', SCONJ: 'subordinator (that, because …)', NUM: 'number', CLF: 'measure word', INTJ: 'interjection' };
+  /** The parts of speech (Universal Dependencies) in words (keys lc.expl.pos.<POS>). */
+  const POS_LABEL = lcLabels(Object.fromEntries(['NOUN', 'PROPN', 'VERB', 'AUX', 'ADJ', 'DET', 'PRON', 'ADP', 'ADV', 'PART', 'CCONJ', 'SCONJ', 'NUM', 'CLF', 'INTJ'].map(t => [t, 'lc.expl.pos.' + t])));   // i18n-ignore (tags)
   const POS_ORDER = Object.keys(POS_LABEL);
   const DIMS = [['Case', ['NOM', 'ACC', 'DAT', 'GEN']], ['Number', ['SG', 'DU', 'PL', 'COLL']], ['Gender', ['MASC', 'FEM', 'NEUT']], ['Person', ['1', '2', '3']],
     ['Definiteness', ['DEF', 'INDF', 'CONST', 'CSTR']], ['Tense', ['PRS', 'PST', 'FUT']], ['Mood', ['IND', 'SBJV', 'JUS', 'JUSS', 'IMP']], ['Aspect', ['PFV', 'IPFV', 'HAB']],
     ['Form', ['NFIN', 'PTCP', 'MSDR']], ['Degree', ['CMPR', 'SPRL']], ['Ending', ['STRG', 'WEAK', 'MIX']], ['Address', ['FORM', 'INFM']], ['Polarity', ['NEG']]];
   const DIM_OF = {}; for (const [d, vs] of DIMS) for (const x of vs) DIM_OF[x] = d;
   const DIM_ORDER = [...DIMS.map(d => d[0]), 'Owner'];
-  const DIM_TITLE = { Case: 'Case', Number: 'Number', Gender: 'Gender', Person: 'Person', Definiteness: 'Definiteness', Tense: 'Tense', Mood: 'Mood', Aspect: 'Aspect',
-    Form: 'Form', Degree: 'Degree', Ending: 'Ending', Address: 'Address', Polarity: 'Polarity', Owner: 'Owner' };
-  const NOT_MARKED = '— (not marked)';
+  /** The names of the dimensions of a table (Case, Number …; keys lc.expl.dim.<Dimension>). */
+  const DIM_TITLE = lcLabels(Object.fromEntries(['Case', 'Number', 'Gender', 'Person', 'Definiteness', 'Tense', 'Mood', 'Aspect', 'Form', 'Degree', 'Ending', 'Address', 'Polarity', 'Owner'].map(d => [d, 'lc.expl.dim.' + d])));   // i18n-ignore (ids)
+  const notMarked = () => lcX('lc.expl.notMarked');
   const GLOSS_ORDER = ['Tense', 'Mood', 'Aspect', 'Form', 'Degree', 'Polarity', 'Person', 'Number', 'Gender', 'Case', 'Definiteness', 'Ending', 'Address', 'Owner'];
   const SKIP_CELL = /(^|;)(PFX|ALT|SEP)(;|$)/;
   const AGREE_DIMS = ['Case', 'Number', 'Gender', 'Person'];
   const AGREE_KEYS = ['Number', 'Gender', 'Definiteness', 'Person', 'Addressee', 'Case'];
+  /* i18n-ignore-end */
   const BANK_TYPES = new Set(['sentence_meaning', 'build_sentence', 'word_order', 'transform', 'agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'morph_build']);
   const P5_TYPES = ['paradigm', 'analyze', 'morph_build', 'root_pattern', 'agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine'];
   const CANON = new WeakMap();   // lexeme → Map(canonical cell → its key in forms), built once
@@ -1400,15 +1476,15 @@
     const p = cellParts(canon(cell)).slice(1), out = {}, pss = p.find(t => /^PSS/.test(t));
     for (const t of p) {
       if (t === 'POSS' && pss) continue;
-      const d = /^PSS/.test(t) ? 'Owner' : DIM_OF[t];
+      const d = /^PSS/.test(t) ? 'Owner' : DIM_OF[t];   // i18n-ignore (a dimension id)
       if (!d || out[d]) return null;
       out[d] = t;
     }
     return out;
   }
   /** A cell in words, in the order a table reads (person · number · gender · case · definiteness …), not alphabetically. */
-  const labelOf = cell => { const p = cellParts(canon(cell)).slice(1); if (p.some(t => t === 'POSS' || /^PSS/.test(t))) return cellLabel(cell); const rk = t => { const i = GLOSS_ORDER.indexOf(DIM_OF[t]); return i < 0 ? 99 : i; }; return p.sort((a, b) => rk(a) - rk(b)).map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form'; };
-  const valLabel = t => t == null ? NOT_MARKED : /^PSS/.test(t) ? (OWNER[t.slice(3)] || t.slice(3)) : (TAG_LABEL[t] || t);
+  const labelOf = cell => { const p = cellParts(canon(cell)).slice(1); if (p.some(t => t === 'POSS' || /^PSS/.test(t))) return cellLabel(cell); const rk = t => { const i = GLOSS_ORDER.indexOf(DIM_OF[t]); return i < 0 ? 99 : i; }; return p.sort((a, b) => rk(a) - rk(b)).map(t => TAG_LABEL[t] || t).join(' · ') || lcX('lc.expl.basicForm'); };
+  const valLabel = t => t == null ? notMarked() : /^PSS/.test(t) ? (OWNER[t.slice(3)] || t.slice(3)) : (TAG_LABEL[t] || t);
   /** The known words a drill may use (the same filters as inflect: pos, class, lemmas, exclude, concepts). */
   function drillLexemes(X, gen, K, rng) {
     return shuffled(Object.values(X.lex).filter(lx => K.has(lx.id) && (!gen.pos || lx.pos === gen.pos) && (!gen.class || lx.class === gen.class) && (!gen.lemmas || gen.lemmas.includes(lx.id))
@@ -1431,7 +1507,7 @@
   function unitPos(X, k) { if (k.name) return 'PROPN'; const lx = X.lex[k.l]; if (lx?.pos && lx.pos !== 'NOUN' && lx.pos !== 'VERB') return lx.pos; return (k.f && POS_OF_TAG[cellParts(k.f)[0]]) || lx?.pos || null; }
   /** The gloss of one word: its meaning + the tags of its cell (carrot.ACC.SG), Leipzig style. */
   function unitGloss(C, code, u, cell) {
-    const f = cell === undefined ? u.f : cell, rk = t => { const i = GLOSS_ORDER.indexOf(/^PSS/.test(t) ? 'Owner' : DIM_OF[t]); return i < 0 ? 99 : i; };
+    const f = cell === undefined ? u.f : cell, rk = t => { const i = GLOSS_ORDER.indexOf(/^PSS/.test(t) ? 'Owner' : DIM_OF[t]); return i < 0 ? 99 : i; };   // i18n-ignore (a dimension id)
     const tags = f ? cellParts(canon(f)).slice(1).filter(t => !['PFX', 'ALT', 'POSS'].includes(t)).sort((a, b) => rk(a) - rk(b)) : [];
     return meaningOf(C, code, u.l) + (tags.length ? '.' + tags.join('.') : '');
   }
@@ -1466,7 +1542,7 @@
       const extra = uniqStr(Object.keys(lx.forms).filter(c => !SKIP_CELL.test(c) && !rows.includes(c)).map(c => nfc(lx.forms[c]))).filter(f => !forms.includes(f));
       const pool = uniqStr([...forms, ...shuffled(extra, rng).slice(0, 1)]);
       const optsFor = c => shuffled(uniqStr([nfc(lx.forms[c]), ...shuffled(pool.filter(f => !acceptOf(lx, c).includes(f)), rng).slice(0, 5)]), rng);   // the answer + five others
-      out.push({ type: 'table', kind: 'paradigm', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: `Fill in the table of ${lx.lemma}`,
+      out.push({ type: 'table', kind: 'paradigm', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: lcU('lc.ui.ask.paradigm', { word: lx.lemma }),
         rows: rows.map(c => ({ cell: canon(c), label: labelOf(c), form: lx.forms[c], hidden: hide.has(c), ...(hide.has(c) ? { options: optsFor(c), accept: acceptOf(lx, c) } : {}) })),
         why: rows.map(c => `${labelOf(c)}: ${lx.forms[c]}`).join(' · ') });
     }
@@ -1493,8 +1569,8 @@
           const ordered = present.sort((a, b) => (a === 'null' ? 99 : vals.indexOf(a) < 0 ? 50 : vals.indexOf(a)) - (b === 'null' ? 99 : vals.indexOf(b) < 0 ? 50 : vals.indexOf(b)));
           return { label: DIM_TITLE[d], slot: { options: ordered.map(v => valLabel(v === 'null' ? null : v)), answer: uniqStr(matches.map(m => valLabel(m.dims[d]))) } };
         });
-        out.push({ type: 'slots', kind: 'analyze', layout: 'rows', fn: fid, lang: code, lex: lx.id, prompt: lx.forms[x.key], ask: `Which form of ${lx.lemma} is it?`, fixed: fixed.join(' · '),
-          units, combos: matches.map(m => dims.map(d => valLabel(m.dims[d]))), why: `${lx.forms[x.key]} = ${matches.map(m => labelOf(m.cell)).join(' or ')} of ${lx.lemma}` });
+        out.push({ type: 'slots', kind: 'analyze', layout: 'rows', fn: fid, lang: code, lex: lx.id, prompt: lx.forms[x.key], ask: lcU('lc.ui.ask.whichForm', { word: lx.lemma }), fixed: fixed.join(' · '),
+          units, combos: matches.map(m => dims.map(d => valLabel(m.dims[d]))), why: lcX('lc.expl.formOf', { form: lx.forms[x.key], labels: lcOr(matches.map(m => labelOf(m.cell))), word: lx.lemma }) });
       }
     }
     return out;
@@ -1535,7 +1611,7 @@
   };
   /* root_pattern: root × pattern → word; word → root; word → pattern (Arabic and Hebrew; verbs: the verb form / binyan) */
   const rootOf = x => typeof x.root === 'string' && x.root.trim() ? x.root : null;
-  const patternOf = x => typeof x.pattern === 'string' && x.pattern.trim() ? x.pattern : typeof x.verbForm === 'string' ? 'Form ' + x.verbForm : typeof x.binyan === 'string' ? x.binyan : null;
+  const patternOf = x => typeof x.pattern === 'string' && x.pattern.trim() ? x.pattern : typeof x.verbForm === 'string' ? lcX('lc.expl.verbFormN', { form: x.verbForm }) : typeof x.binyan === 'string' ? x.binyan : null;
   GEN.root_pattern = ctx => {
     const { C, code, fid, gen, K, rng } = ctx, X = C.lang[code], out = [];
     const all = Object.values(X.lex).filter(x => rootOf(x) && patternOf(x) && (!gen.pos || x.pos === gen.pos));
@@ -1553,16 +1629,16 @@
           const more = d.length < 2 ? pickFrom(all.filter(x => x.id !== lx.id && nfc(x.lemma) !== lem && !d.includes(x) && x.pos === lx.pos), 3 - d.length) : [];
           const ds = [...d, ...more]; if (ds.length < 2) continue;
           ds.forEach(x => { if (!K.has(x.id)) unknown.push(x.id); });
-          options = uniqStr([lx.lemma, ...ds.map(x => x.lemma)]); answer = lx.lemma; ask = 'Root × pattern — which word?'; prompt = `${r} + ${p}`; why = `${r} + ${p} → ${lx.lemma} (${meaningOf(C, code, lx.id)})`;
+          options = uniqStr([lx.lemma, ...ds.map(x => x.lemma)]); answer = lx.lemma; ask = lcU('lc.ui.ask.rootPattern'); prompt = `${r} + ${p}`; why = `${r} + ${p} → ${lx.lemma} (${meaningOf(C, code, lx.id)})`;
         } else if (mode === 'root') {
           const letters = new Set(r.split(/\s+/));
           const roots = uniqStr(all.map(rootOf).filter(x => x !== r)).sort((a, b) => b.split(/\s+/).filter(z => letters.has(z)).length - a.split(/\s+/).filter(z => letters.has(z)).length || (rng() - 0.5));
           if (roots.length < 2) continue;
-          options = [r, ...roots.slice(0, 3)]; answer = r; ask = 'Its root?'; prompt = lx.lemma; why = `${lx.lemma}: root ${r}, pattern ${p}`;
+          options = [r, ...roots.slice(0, 3)]; answer = r; ask = lcU('lc.ui.ask.root'); prompt = lx.lemma; why = lcX('lc.expl.rootPattern', { word: lx.lemma, root: r, pattern: p });
         } else {
           const pats = shuffled(uniqStr(all.filter(x => x.pos === lx.pos).map(patternOf).filter(x => x !== p)), rng);
           if (pats.length < 2) continue;
-          options = [p, ...pats.slice(0, 3)]; answer = p; ask = 'Its pattern?'; prompt = lx.lemma; why = `${lx.lemma}: pattern ${p}, root ${r}`;
+          options = [p, ...pats.slice(0, 3)]; answer = p; ask = lcU('lc.ui.ask.pattern'); prompt = lx.lemma; why = lcX('lc.expl.patternRoot', { word: lx.lemma, root: r, pattern: p });
         }
         out.push({ type: 'choose', kind: 'root', mode, fn: fid, lang: code, lex: lx.id, prompt, ask, options: shuffled(uniqStr(options), rng), answer, why, unknown: mode === 'build' ? uniqStr(unknown) : [] });
       }
@@ -1597,7 +1673,7 @@
       if (!nslots) continue;
       const un = uniqStr([...unknownOf(s2, K), ...unknownOf(s1, K)]);
       out.push({ type: 'slots', kind: 'agree', layout: 'inline', fn: fid, lang: code, sentence: s2.id, sentences: [s1.id, s2.id], source: s1.text, sourceGloss: s1.gloss, gloss: s2.gloss,
-        change: variantLabel(s2.variant), ask: `${variantLabel(s2.variant)}: ${w1[tr].k.t} → ${w2[tr].k.t}. Change the words that agree with it.`, units, why: s2.text, unknown: un });
+        change: variantLabel(s2.variant), ask: lcU('lc.ui.ask.agree', { change: variantLabel(s2.variant), from: w1[tr].k.t, to: w2[tr].k.t }), units, why: s2.text, unknown: un });
     }
     return out;
   };
@@ -1613,9 +1689,9 @@
       for (const t of grp) {
         if (grp.some(o => o !== t && (o.gloss === t.gloss || nfc(o.text) === nfc(t.text)))) continue;   // the meaning must tell them apart
         const others = grp.filter(o => o !== t);
-        out.push({ type: 'contrast', kind: 'contrast', fn: fid, lang: code, sentence: t.id, sentences: grp.map(x => x.id), prompt: t.gloss, ask: 'Which sentence says this?',
+        out.push({ type: 'contrast', kind: 'contrast', fn: fid, lang: code, sentence: t.id, sentences: grp.map(x => x.id), prompt: t.gloss, ask: lcU('lc.ui.ask.whichSentence'),
           options: shuffled(uniqStr(grp.map(x => x.text)), rng), answer: t.text,
-          why: `${t.text} — ${t.variant ? variantWords(t.variant) : 'the starting sentence'}` + others.map(o => ` · ${o.text} = “${o.gloss}”${o.variant ? ' (' + variantWords(o.variant) + ')' : ''}`).join(''),
+          why: `${t.text} — ${t.variant ? variantWords(t.variant) : lcX('lc.expl.startingSentence')}` + others.map(o => ' · ' + (o.variant ? lcX('lc.expl.contrastOtherVariant', { text: o.text, gloss: o.gloss, variant: variantWords(o.variant) }) : lcX('lc.expl.contrastOther', { text: o.text, gloss: o.gloss }))).join(''),
           unknown: uniqStr(grp.flatMap(x => unknownOf(x, K))) });
       }
     }
@@ -1648,7 +1724,7 @@
       const slots = asked.filter(u => u.slot);
       if (slots.length < 2 || new Set(slots.map(u => u.slot.answer[0])).size < 2) continue;
       out.push({ type: 'slots', kind: 'parse', mode, layout: 'inline', fn: fid, lang: code, sentence: s.id, gloss: s.gloss,
-        ask: mode === 'case' ? 'Which case is each marked word in?' : 'Which part of speech is each word?', units: asked.map(stripUnit),
+        ask: lcU(mode === 'case' ? 'lc.ui.ask.parseCase' : 'lc.ui.ask.parsePos'), units: asked.map(stripUnit),
         why: slots.map(u => `${u.t} = ${u.slot.answer[0]}`).join(' · '), unknown: s.unknown });
     }
     return out;
@@ -1678,7 +1754,7 @@
       });
       if (units.filter(u => u.slot).length < 2) continue;
       out.push({ type: 'slots', kind: 'gloss', reverse: !!gen.reverse, layout: 'inline', fn: fid, lang: code, sentence: s.id, gloss: s.gloss,
-        ask: gen.reverse ? 'Choose the word for every gloss' : 'Gloss every word (meaning.FEATURES)', units, why: words.map(u => `${u.t} = ${glossOf(u)}`).join(' · '), unknown: s.unknown });
+        ask: lcU(gen.reverse ? 'lc.ui.ask.glossReverse' : 'lc.ui.ask.gloss'), units, why: words.map(u => `${u.t} = ${glossOf(u)}`).join(' · '), unknown: s.unknown });
     }
     return out;
   };
@@ -1694,7 +1770,7 @@
   function errorsOf(C, code, s, rng) {
     const X = C.lang[code], cache = X._errs || (X._errs = new Map());
     if (!cache.has(s.id)) cache.set(s.id, findErrors(C, code, s));
-    return cache.get(s.id).map(e => e.clfs ? { ...e, wrong: e.clfs[Math.floor(rng() * e.clfs.length)] } : e);
+    return cache.get(s.id).map(({ mk, ...e }) => ({ ...e, why: mk(), ...(e.clfs ? { wrong: e.clfs[Math.floor(rng() * e.clfs.length)] } : {}) }));   // the why in the current language
   }
   function findErrors(C, code, s) {
     const X = C.lang[code], toks = s.tokens || [], out = [];
@@ -1728,7 +1804,7 @@
             const pk = changedCell(plx, P.f, v, v2); if (!pk) return;
             if (!sameWord(code, plx.forms[pk], P.t)) partner = P;
           });
-          if (partner) out.push({ i, wrong, right: T.t, accept, why: `${labelOf(T.f)}, to agree with ${partner.t}` });
+          if (partner) { const word = partner.t; out.push({ i, wrong, right: T.t, accept, mk: () => lcX('lc.expl.agreeWith', { label: labelOf(T.f), word }) }); }
         }
       }
     });
@@ -1739,7 +1815,7 @@
       const nk = toks.slice(i + 1, i + 3).find(k => k.l && X.lex[k.l]?.pos === 'NOUN'), noun = nk && X.lex[nk.l];
       if (!noun || !(noun.measure || []).length || !noun.measure.includes(T.t)) return;
       const bad = clfs.filter(m => !noun.measure.includes(m) && m !== '个' && m !== T.t);
-      if (bad.length) out.push({ i, clfs: bad, right: T.t, accept: [T.t, ...noun.measure.filter(m => m !== T.t)], why: `${noun.lemma} takes ${noun.measure.join(' / ')}` });
+      if (bad.length) out.push({ i, clfs: bad, right: T.t, accept: [T.t, ...noun.measure.filter(m => m !== T.t)], mk: () => lcX('lc.expl.takesMeasure', { noun: noun.lemma, measures: noun.measure.join(' / ') }) });
     });
     return out;
   }
@@ -1891,7 +1967,7 @@
   const deepGlossOf = (C, X, id) => { const c = (X.lex[id].senses || [])[0]; return c ? C.concepts[c]?.gloss || c : X.lex[id].role || ''; };
   const W = (w, lang) => ({ w, lang });
   const firstSentences = (s, max = 260) => { s = String(s || '').trim(); if (s.length <= max) return s; const cut = s.slice(0, max), i = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; ')); return (i > 60 ? cut.slice(0, i + 1) : cut) + ' …'; };
-  const SCRIPT_MARKS = { Arab: '[\\u064B-\\u0652\\u0670]*', Hebr: '[\\u0591-\\u05BD\\u05BF\\u05C1\\u05C2\\u05C4\\u05C5\\u05C7]*' };
+  const SCRIPT_MARKS = { Arab: '[\\u064B-\\u0652\\u0670]*', Hebr: '[\\u0591-\\u05BD\\u05BF\\u05C1\\u05C2\\u05C4\\u05C5\\u05C7]*' };   // i18n-ignore (regular expressions)
   const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   /** Hide words in a text (an explanation that would give the answer away): with or without vowel marks, Latin words whole and in any case. */
   const MASK_RE = new Map();
@@ -1902,10 +1978,10 @@
     for (const w0 of list) {
       if (!lp.includes(loosePlain(w0).replace(/\s+/g, ' '))) continue;   // not in the text at all (the cheap test first)
       if (MASK_RE.has(w0)) { const re = MASK_RE.get(w0); if (re) out = out.replace(re, mask); continue; }
-      const scr = /\p{Script=Arabic}/u.test(w0) ? 'Arab' : /\p{Script=Hebrew}/u.test(w0) ? 'Hebr' : /\p{Script=Han}/u.test(w0) ? 'Han' : 'Latn';
+      const scr = /\p{Script=Arabic}/u.test(w0) ? 'Arab' : /\p{Script=Hebrew}/u.test(w0) ? 'Hebr' : /\p{Script=Han}/u.test(w0) ? 'Han' : 'Latn';   // i18n-ignore (script codes)
       const w = scr === 'Arab' ? stripMarks('ar', w0) : scr === 'Hebr' ? stripMarks('he', w0) : w0, n = [...w.replace(/\s/g, '')].length;
       if (scr === 'Latn' && n < 2) { MASK_RE.set(w0, null); continue; }
-      const body = [...w].map(ch => (/\s/.test(ch) ? '[\\s\\u05BE-]+' : escRe(ch) + (SCRIPT_MARKS[scr] || ''))).join('');
+      const body = [...w].map(ch => (/\s/.test(ch) ? '[\\s\\u05BE-]+' : escRe(ch) + (SCRIPT_MARKS[scr] || ''))).join('');   // i18n-ignore (a regular expression)
       const re = scr === 'Han' ? new RegExp(body, 'gu') : (scr === 'Latn' || n < 3) ? new RegExp('(?<![\\p{L}\\p{M}])' + body + '(?![\\p{L}])', 'giu') : new RegExp(body, 'gu');
       MASK_RE.set(w0, re); out = out.replace(re, mask);
     }
@@ -2003,10 +2079,13 @@
     for (const id of P.look[lexId] || []) if (!out.some(o => o.lex === id)) out.push({ lex: id, why: 'lookalike' });
     return out;
   }
-  const REG_SITUATION = { formal: 'in a formal letter or an official text', informal: 'talking to family and friends', colloquial: 'chatting with friends', slang: 'in slang, among young people',
-    literary: 'in literature', poetic: 'in poetry', technical: 'in a technical or specialist text', honorific: 'speaking respectfully to someone', neutral: 'in everyday neutral speech',
-    dated: 'in older texts (dated)', archaic: 'in very old texts (archaic)', humorous: 'as a joke', pejorative: 'to sound disparaging', euphemistic: 'to put it gently (a euphemism)',
-    children: 'talking to small children', religious: 'in a religious context', vulgar: 'vulgarly', dialectal: 'in a dialect' };
+  /** The registers a word is marked with, in words (keys lc.expl.reg.<register>; another register stays as written). */
+  const REG_LABEL = lcLabels(Object.fromEntries(['neutral', 'colloquial', 'formal', 'informal', 'literary', 'regional', 'technical', 'religious', 'slang', 'dated', 'honorific', 'archaic',
+    'humorous', 'pejorative', 'children', 'euphemistic', 'dialectal', 'poetic', 'vulgar', 'obsolete'].map(r => [r, 'lc.expl.reg.' + r])));   // i18n-ignore (ids)
+  const regLabel = r => (Object.prototype.hasOwnProperty.call(REG_LABEL, r) ? REG_LABEL[r] : null) || r;
+  /** The kind of a phrase of a word profile (idiom, proverb …), in words; another kind stays as written. */
+  const PHRASE_KIND = lcLabels(Object.fromEntries(['idiom', 'proverb', 'saying', 'quote', 'colloquial', 'phrase'].map(k => [k, 'lc.expl.phraseKind.' + k])));   // i18n-ignore (ids)
+  const phraseKind = k => (Object.prototype.hasOwnProperty.call(PHRASE_KIND, k) ? PHRASE_KIND[k] : null) || k;
   /** The generators: DEEP[type](x, lx) → items for one word; x = {C, L, code, X, K (known, for 🆕), M (met), rng, maxUnknown, P (pools)}. */
   const DEEP = {};
   const deepBase = (x, type, lx, more) => ({ deep: true, kind: type, lang: x.code, lex: lx.id, track: deepTrack(type), ...more });
@@ -2020,8 +2099,9 @@
     const wrong = rankBy(shuffled(Object.keys(P.byRoot).filter(q => q !== r), x.rng), q => -shared(q)).slice(0, 3);
     const rootShown = q => X.lex[P.byRoot[q][0]].root.trim();
     const family = fam.filter(id => id !== lx.id && (x.M.has(id) || x.K.has(id)));
-    const why = [W(lx.lemma, code), ' — root ', W(lx.root.trim(), code), ...(family.length ? ['. The same root: ', ...family.slice(0, 6).flatMap((id, i) => [i ? ', ' : '', W(X.lex[id].lemma, code), ` (${deepGlossOf(x.C, X, id)})`])] : [])];
-    if (wrong.length >= 2) out.push(deepBase(x, 'root_family', lx, { type: 'vpick', ask: 'Its root?', prompt: { word: lx.lemma }, options: shuffled([lx.root.trim(), ...wrong.map(rootShown)], x.rng), optLang: code, answer: lx.root.trim(), why }));
+    const why = family.length ? lcXP('lc.expl.rootFamily', { word: W(lx.lemma, code), root: W(lx.root.trim(), code), family: family.slice(0, 6).flatMap((id, i) => [i ? ', ' : '', W(X.lex[id].lemma, code), ` (${deepGlossOf(x.C, X, id)})`]) })
+      : lcXP('lc.expl.rootOf', { word: W(lx.lemma, code), root: W(lx.root.trim(), code) });
+    if (wrong.length >= 2) out.push(deepBase(x, 'root_family', lx, { type: 'vpick', ask: lcU('lc.ui.ask.root'), prompt: { word: lx.lemma }, options: shuffled([lx.root.trim(), ...wrong.map(rootShown)], x.rng), optLang: code, answer: lx.root.trim(), why }));
     // sort met words into two families
     const metFam = q => (P.byRoot[q] || []).filter(id => id === lx.id || x.M.has(id));
     const mine = metFam(r);
@@ -2029,7 +2109,7 @@
       const other = shuffled(Object.keys(P.byRoot).filter(q => q !== r && metFam(q).length >= 2), x.rng)[0];
       if (other) {
         const cards = [...[lx.id, ...pickN(x, mine.filter(id => id !== lx.id), 2)].map(id => ({ id, bucket: r })), ...pickN(x, metFam(other), 3).map(id => ({ id, bucket: other }))];
-        out.push(deepBase(x, 'root_family', lx, { type: 'vsort', ask: 'Sort the words by their root', buckets: [r, other].map(q => ({ id: q, label: rootShown(q), lang: code })),
+        out.push(deepBase(x, 'root_family', lx, { type: 'vsort', ask: lcU('lc.ui.ask.sortByRoot'), buckets: [r, other].map(q => ({ id: q, label: rootShown(q), lang: code })),
           cards: shuffled(cards.map(c => ({ ...c, text: X.lex[c.id].lemma, lang: code, lex: c.id, note: deepGlossOf(x.C, X, c.id) })), x.rng),
           why: [r, other].flatMap((q, i) => [i ? ' · ' : '', W(rootShown(q), code), ': ', ...metFam(q).flatMap((id, j) => [j ? ', ' : '', W(X.lex[id].lemma, code)])]) }));
       }
@@ -2048,12 +2128,13 @@
     }
     if (wrongs.length < 2) return [];
     const head = Object.values(X.lex).find(y => y.id !== lx.id && y.pos === 'NOUN' && nfc(y.lemma) === nfc(sp.head));
-    const steps = [{ ask: 'Where does it split?', options: shuffled([right, ...wrongs], x.rng), optLang: code, answer: right }];
+    const steps = [{ ask: lcU('lc.ui.ask.whereSplit'), options: shuffled([right, ...wrongs], x.rng), optLang: code, answer: right }];
     const g = GENDER_WORD[lx.gender];
-    if (g && lx.class !== 'plt') steps.push(code === 'de' ? { ask: 'And its article?', options: ['der', 'die', 'das'], optLang: code, answer: ARTICLE[lx.gender] } : { ask: 'And its gender?', options: ['masculine', 'feminine', 'neuter'], answer: g });
-    const last = sp.pieces[sp.pieces.length - 1], why = [W(right, code), ' — the last part, ', W(last, code), ', is the head: it decides the gender'];
-    if (g) why.push(` (${g}`, ...(head ? [', as in ', W((code === 'de' ? ARTICLE[head.gender] + ' ' : '') + head.lemma, code)] : []), ')', ...(code === 'de' ? [': ', W(ARTICLE[lx.gender] + ' ' + lx.lemma, code)] : []));
-    why.push('.');
+    if (g && lx.class !== 'plt') steps.push(code === 'de' ? { ask: lcU('lc.ui.ask.andArticle'), options: ['der', 'die', 'das'], optLang: code, answer: ARTICLE[lx.gender] } : { ask: lcU('lc.ui.ask.andGender'), options: ['MASC', 'FEM', 'NEUT'].map(t => GENDER_WORD[t]), answer: g });
+    const last = sp.pieces[sp.pieces.length - 1];
+    const why = lcXP('lc.expl.compoundHead', { split: W(right, code), last: W(last, code), hasGender: g ? 'yes' : 'no', gender: g || '',
+      hasExample: g && head ? 'yes' : 'no', example: g && head ? W((code === 'de' ? ARTICLE[head.gender] + ' ' : '') + head.lemma, code) : '',
+      hasArticle: g && code === 'de' ? 'yes' : 'no', withArticle: g && code === 'de' ? W(ARTICLE[lx.gender] + ' ' + lx.lemma, code) : '' });
     return [deepBase(x, 'compound_split', lx, { type: 'vsteps', prompt: { word: lx.lemma }, steps, why })];
   };
   /** Profile examples of a word for one concept (its sense's concept), fit for an item (D19) and with the word found. */
@@ -2066,16 +2147,17 @@
       if (group.length < 2 || new Set(group.map(id => nfc(X.lex[id].lemma))).size !== group.length) continue;
       const val = id => ((X.lex[id].contrasts || []).find(t => t.concept === cid) || {});
       const axis = val(lx.id).axis || val(group[1]).axis || '';
-      const why = [`“${x.C.concepts[cid]?.gloss || cid}”${axis ? ' — ' + axis : ''}: `, ...group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), val(id).value ? ' = ' + val(id).value : ''])];
+      const words = group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), val(id).value ? ' = ' + val(id).value : '']);
+      const why = lcXP(axis ? 'lc.expl.senseSplitAxis' : 'lc.expl.senseSplit', { gloss: x.C.concepts[cid]?.gloss || cid, axis, words });
       const mine = contexts(x, lx, cid);
       const hint = e => [].concat(e.register || [], e.context || []).join(' · ');   // the register and context of the example: often what separates the words
-      for (const { e, s } of mine.slice(0, 3)) out.push(deepBase(x, 'sense_split', lx, { type: 'vpick', ask: 'Which word fills the gap?', prompt: { sentence: gapped(s), tr: e.tr || '', trAfter: e.py || '', hint: hint(e) },
+      for (const { e, s } of mine.slice(0, 3)) out.push(deepBase(x, 'sense_split', lx, { type: 'vpick', ask: lcU('lc.ui.ask.fillGap'), prompt: { sentence: gapped(s), tr: e.tr || '', trAfter: e.py || '', hint: hint(e) },
         options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma, unknown: s.unknown, why: [...why, '. ', W(e.text, code)] }));
       // sorting contexts into the words (kennen / wissen)
       const all = group.map(id => ({ id, cs: id === lx.id ? mine : contexts(x, X.lex[id], cid) })).filter(g => g.cs.length);
       if (all.length >= 2 && all.reduce((a, g) => a + Math.min(2, g.cs.length), 0) >= 3) {
         const cards = all.flatMap(g => g.cs.slice(0, 2).map((o, i) => ({ id: g.id + '#' + i, tokens: gapped(o.s), tr: o.e.tr || '', hint: hint(o.e), bucket: g.id, lex: g.id, lang: code, unknown: o.s.unknown })));
-        out.push(deepBase(x, 'sense_split', lx, { type: 'vsort', ask: 'Which word goes in each gap? Sort the sentences', buckets: all.map(g => ({ id: g.id, label: X.lex[g.id].lemma, lang: code })),
+        out.push(deepBase(x, 'sense_split', lx, { type: 'vsort', ask: lcU('lc.ui.ask.sortGaps'), buckets: all.map(g => ({ id: g.id, label: X.lex[g.id].lemma, lang: code })),
           cards: shuffled(cards, x.rng), unknown: uniqStr(cards.flatMap(c => c.unknown)), why }));
       }
     }
@@ -2089,7 +2171,7 @@
       const wrong = uniqStr(rankBy(others, q => (q.side === p.side ? 0 : 2) + (q.n === p.n ? 0 : 1) + (X.lex[q.lex].pos === lx.pos ? 0 : 1) + x.rng()).map(q => q.text)).slice(0, 3);
       if (wrong.length < 2) continue;
       const toks = [...p.s.tokens.slice(0, p.from), { gap: true, pre: '', post: '' }, ...p.s.tokens.slice(p.to + 1)];
-      out.push(deepBase(x, 'collocation', lx, { type: 'vpick', ask: ['What goes with ', W(lx.lemma, code), ' here?'], prompt: { sentence: toks, tr: p.tr }, options: shuffled([p.text, ...wrong], x.rng), optLang: code, answer: p.text,
+      out.push(deepBase(x, 'collocation', lx, { type: 'vpick', ask: lcUP('lc.ui.ask.goesWith', { word: W(lx.lemma, code) }), prompt: { sentence: toks, tr: p.tr }, options: shuffled([p.text, ...wrong], x.rng), optLang: code, answer: p.text,
         why: [W(p.col, code), p.tr ? ' — ' + p.tr : ''] }));
     }
     return out;
@@ -2101,14 +2183,14 @@
       const val = id => ((X.lex[id].contrasts || []).find(u => u.concept === t.concept) || {}).value || '';
       if (group.length < 2 || !t.value || new Set(group.map(val)).size !== group.length || new Set(group.map(id => nfc(X.lex[id].lemma))).size !== group.length) continue;
       const clue = maskWords(t.value, group.flatMap(id => [X.lex[id].lemma, ...Object.values(X.lex[id].forms || {})]));
-      out.push(deepBase(x, 'confusables', lx, { type: 'vpick', ask: 'Which word is it?', prompt: { text: `“${C.concepts[t.concept]?.gloss || t.concept}” — ${t.axis}: ${clue}` },
+      out.push(deepBase(x, 'confusables', lx, { type: 'vpick', ask: lcU('lc.ui.ask.whichWord'), prompt: { text: `“${C.concepts[t.concept]?.gloss || t.concept}” — ${t.axis}: ${clue}` },
         options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma, why: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), ' = ' + val(id)]) }));
     }
     const lemmas = new Set([nfc(lx.lemma)]), look = [];
     for (const o of shuffled(conf, x.rng)) if (o.why === 'lookalike' && deepGlossOf(C, X, o.lex) !== deepGlossOf(C, X, lx.id) && !lemmas.has(nfc(X.lex[o.lex].lemma))) { lemmas.add(nfc(X.lex[o.lex].lemma)); look.push(o.lex); }
     if (look.length) {
       const group = [lx.id, ...look.slice(0, 3)];
-      out.push(deepBase(x, 'confusables', lx, { type: 'vpick', ask: `Which one means “${deepGlossOf(C, X, lx.id)}”?`, prompt: { text: 'Words that look alike' }, options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma,
+      out.push(deepBase(x, 'confusables', lx, { type: 'vpick', ask: lcU('lc.ui.ask.whichMeans', { gloss: deepGlossOf(C, X, lx.id) }), prompt: { text: lcU('lc.ui.prompt.lookAlike') }, options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: lx.lemma,
         why: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), X.lex[id].pinyin ? ` ${X.lex[id].pinyin}` : '', ' = ' + deepGlossOf(C, X, id)]) }));
     }
     return out;
@@ -2120,9 +2202,9 @@
     const group = [lx.id, ...Object.values(byVal)].sort((a, b) => profOf(X.lex[a]).intensity - profOf(X.lex[b]).intensity);
     if (group.length < 2) return [];
     const why = group.flatMap((id, i) => [i ? ' < ' : '', W(X.lex[id].lemma, code), ` (${deepGlossOf(x.C, X, id)}, ${profOf(X.lex[id]).intensity}/5)`]);
-    if (group.length >= 3) return [deepBase(x, 'intensity_scale', lx, { type: 'vorder', ask: 'Put them in order: the weakest first', cards: group.map(id => ({ text: X.lex[id].lemma, lang: code, lex: id, note: deepGlossOf(x.C, X, id) })), why })];
+    if (group.length >= 3) return [deepBase(x, 'intensity_scale', lx, { type: 'vorder', ask: lcU('lc.ui.ask.weakestFirst'), cards: group.map(id => ({ text: X.lex[id].lemma, lang: code, lex: id, note: deepGlossOf(x.C, X, id) })), why })];
     const strong = group[group.length - 1];
-    return [deepBase(x, 'intensity_scale', lx, { type: 'vpick', ask: 'Which is stronger?', prompt: { text: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), ' = ' + deepGlossOf(x.C, X, id)]) }, options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: X.lex[strong].lemma, why })];
+    return [deepBase(x, 'intensity_scale', lx, { type: 'vpick', ask: lcU('lc.ui.ask.stronger'), prompt: { text: group.flatMap((id, i) => [i ? ' · ' : '', W(X.lex[id].lemma, code), ' = ' + deepGlossOf(x.C, X, id)]) }, options: shuffled(group.map(id => X.lex[id].lemma), x.rng), optLang: code, answer: X.lex[strong].lemma, why })];
   };
   DEEP.register_pick = (x, lx) => {
     const p = profOf(lx), { code } = x, seen = new Set(), opts = [];
@@ -2134,10 +2216,10 @@
     for (const r of uniqStr(opts.flatMap(o => o.regs))) {
       const holders = opts.filter(o => o.regs.includes(r)); if (holders.length !== 1) continue;
       const others = opts.filter(o => !o.regs.includes(r)); if (!others.length) continue;
-      const h = holders[0], sit = r === 'regional' ? (h.region ? `in ${h.region}` : 'in one region (a regional word)') : REG_SITUATION[r] || `in ${r} use`;
+      const h = holders[0], reg = r === 'regional' ? (h.region ? 'regionalNamed' : 'regional') : r;
       const shown = [h, ...pickN(x, others, 3)];
-      out.push(deepBase(x, 'register_pick', lx, { type: 'vpick', ask: `Which word fits ${sit}?`, prompt: { text: `Words around “${gl}”` }, options: shuffled(shown.map(o => o.w), x.rng), optLang: code, answer: h.w,
-        why: shown.flatMap((o, i) => [i ? ' · ' : '', W(o.w, code), ` (${o.regs.join(', ')}${o.region ? ', ' + o.region : ''})`, o.nuance ? ' — ' + o.nuance : '']), register: r }));
+      out.push(deepBase(x, 'register_pick', lx, { type: 'vpick', ask: lcU('lc.ui.ask.registerFits', { reg, region: h.region || '' }), prompt: { text: lcU('lc.ui.prompt.wordsAround', { gloss: gl }) }, options: shuffled(shown.map(o => o.w), x.rng), optLang: code, answer: h.w,
+        why: shown.flatMap((o, i) => [i ? ' · ' : '', W(o.w, code), ` (${o.regs.map(regLabel).join(', ')}${o.region ? ', ' + o.region : ''})`, o.nuance ? ' — ' + o.nuance : '']), register: r }));
     }
     return out.sort((a, b) => (a.register === 'neutral') - (b.register === 'neutral'));
   };
@@ -2153,15 +2235,16 @@
       const clue = o.clue; if (clue.replace(/[…\s\p{P}]/gu, '').length < 5) continue;
       const shown = [o, ...pickN(x, opts.filter(q => q !== o && q.clue !== clue), 3)];
       if (shown.length < 2) continue;
-      out.push(deepBase(x, 'nuance_pick', lx, { type: 'vpick', ask: 'Which word has this nuance?', prompt: { text: clue }, options: shuffled(shown.map(q => q.w), x.rng), optLang: code, answer: o.w,
+      out.push(deepBase(x, 'nuance_pick', lx, { type: 'vpick', ask: lcU('lc.ui.ask.nuance'), prompt: { text: clue }, options: shuffled(shown.map(q => q.w), x.rng), optLang: code, answer: o.w,
         why: shown.flatMap((q, i) => [i ? ' · ' : '', W(q.w, code), ' — ' + q.nuance]) }));
     }
     return out;
   };
   DEEP.connotation = (x, lx) => {
     const p = profOf(lx), c = p.connotation; if (!['positive', 'negative', 'neutral', 'mixed'].includes(c)) return [];
-    return [deepBase(x, 'connotation', lx, { type: 'vpick', ask: 'What feeling does it carry?', prompt: { word: lx.lemma }, options: c === 'mixed' ? ['positive', 'neutral', 'negative', 'mixed'] : ['positive', 'neutral', 'negative'], answer: c,
-      why: [W(lx.lemma, x.code), ` — ${c}`, p.feeling ? '. ' + p.feeling : ''] })];
+    const word = v => lcU('lc.ui.connotation.' + v);   // i18n-ignore (key prefix)
+    return [deepBase(x, 'connotation', lx, { type: 'vpick', ask: lcU('lc.ui.ask.feeling'), prompt: { word: lx.lemma }, options: (c === 'mixed' ? ['positive', 'neutral', 'negative', 'mixed'] : ['positive', 'neutral', 'negative']).map(word), answer: word(c),
+      why: [W(lx.lemma, x.code), ` — ${word(c)}`, p.feeling ? '. ' + p.feeling : ''] })];
   };
   DEEP.idiom_meaning = (x, lx) => {
     const { code, P } = x, out = [];
@@ -2171,8 +2254,8 @@
       const near = rankBy(others, q => (q.kind === ph.kind ? 0 : 1) + x.rng());
       const wrongM = uniqStr(near.map(q => q.meaning)).slice(0, 3), wrongT = uniqStr(near.map(q => q.text)).slice(0, 3);
       const s = deepSentence(x.C, code, ph.text, lx.id, x.K, 99), why = [W(ph.text, code), ph.tr ? ` (“${ph.tr}”)` : '', ' — ' + ph.meaning, ph.source ? ` — ${ph.source}` : ''];
-      if (wrongM.length >= 2) out.push(deepBase(x, 'idiom_meaning', lx, { type: 'vpick', ask: `What does it mean${ph.kind ? ' (' + ph.kind + ')' : ''}?`, prompt: { sentence: s.tokens, lit: ph.tr || '' }, options: shuffled([ph.meaning, ...wrongM], x.rng), answer: ph.meaning, unknown: s.unknown, why }));
-      if (wrongT.length >= 2) out.push(deepBase(x, 'idiom_meaning', lx, { type: 'vpick', ask: 'Which expression says this?', prompt: { text: ph.meaning }, options: shuffled([ph.text, ...wrongT], x.rng), optLang: code, answer: ph.text, why }));
+      if (wrongM.length >= 2) out.push(deepBase(x, 'idiom_meaning', lx, { type: 'vpick', ask: ph.kind ? lcU('lc.ui.ask.meaningOfKind', { kind: phraseKind(ph.kind) }) : lcU('lc.ui.ask.meaning'), prompt: { sentence: s.tokens, lit: ph.tr || '' }, options: shuffled([ph.meaning, ...wrongM], x.rng), answer: ph.meaning, unknown: s.unknown, why }));
+      if (wrongT.length >= 2) out.push(deepBase(x, 'idiom_meaning', lx, { type: 'vpick', ask: lcU('lc.ui.ask.whichExpression'), prompt: { text: ph.meaning }, options: shuffled([ph.text, ...wrongT], x.rng), optLang: code, answer: ph.text, why }));
     }
     return out;
   };
@@ -2189,7 +2272,7 @@
       const formOf = y => { if (tg.cell) { const f = y.forms || {}, kk = Object.keys(f).find(c => canon(c) === canon(tg.cell)); return kk ? f[kk] : null; } return Object.keys(y.forms || {}).length ? null : y.lemma; };
       const wrong = uniqStr(ranked.map(formOf).filter(f => f && !ownForms.has(plainOf(code, f)) && plainOf(code, f) !== plainOf(code, ans)).map(f => cap ? capFirst(f) : f)).slice(0, 3);
       if (wrong.length < 2) continue;
-      out.push(deepBase(x, 'example_cloze', lx, { type: 'vpick', ask: 'Which word fills the gap?', prompt: { sentence: gapped(s), tr: e.tr || '', trAfter: e.py || '' }, options: shuffled([ans, ...wrong], x.rng), optLang: code, answer: ans,
+      out.push(deepBase(x, 'example_cloze', lx, { type: 'vpick', ask: lcU('lc.ui.ask.fillGap'), prompt: { sentence: gapped(s), tr: e.tr || '', trAfter: e.py || '' }, options: shuffled([ans, ...wrong], x.rng), optLang: code, answer: ans,
         unknown: s.unknown, why: [W(e.text, code), e.tr ? ' — ' + e.tr : '', tg.cell ? ` (${cellLabel(tg.cell)})` : ''] }));
     }
     return out;
@@ -2201,7 +2284,7 @@
       const m = senseMain(lx, e.sense); if (!m || !ms.includes(m) || !e.text) continue;
       const s = deepSentence(x.C, x.code, e.text, lx.id, x.K, x.maxUnknown); if (!s.ok) continue;
       const shown = [m, ...pickN(x, ms.filter(o => o !== m && o.def !== m.def), 3)];
-      out.push(deepBase(x, 'sense_pick', lx, { type: 'vpick', ask: ['Which meaning of ', W(lx.lemma, x.code), ' is used here?'], prompt: { sentence: s.tokens, trAfter: [e.tr, e.py].filter(Boolean).join(' · ') }, options: shuffled(shown.map(o => o.def), x.rng), answer: m.def,
+      out.push(deepBase(x, 'sense_pick', lx, { type: 'vpick', ask: lcUP('lc.ui.ask.whichMeaning', { word: W(lx.lemma, x.code) }), prompt: { sentence: s.tokens, trAfter: [e.tr, e.py].filter(Boolean).join(' · ') }, options: shuffled(shown.map(o => o.def), x.rng), answer: m.def,
         unknown: s.unknown, why: [W(e.text, x.code), e.tr ? ' — ' + e.tr : '', ' → ' + m.def] }));
     }
     return out;
@@ -2216,7 +2299,7 @@
     const sc = y => (x.M.has(y.id) ? 0 : 2) + (y.pos === lx.pos ? 0 : 1) + ((C.concepts[(y.senses || [])[0]] || {}).field === con.field ? 0 : 1) + x.rng();
     const wrong = uniqStr(rankBy(pool, sc).map(y => y.lemma)).slice(0, 3);
     if (wrong.length < 2) return [];
-    return [deepBase(x, 'etymology_link', lx, { type: 'vpick', ask: 'Which word comes from this?', prompt: { text: clue }, options: shuffled([lx.lemma, ...wrong], x.rng), optLang: code, answer: lx.lemma,
+    return [deepBase(x, 'etymology_link', lx, { type: 'vpick', ask: lcU('lc.ui.ask.comesFrom'), prompt: { text: clue }, options: shuffled([lx.lemma, ...wrong], x.rng), optLang: code, answer: lx.lemma,
       why: [W(lx.lemma, code), ' — ' + ety.text, ety.src ? ` (${ety.src})` : ''] })];
   };
   /** Depth items for some words of one language, the types mixed (one per word and type in turn). opts: {types, max = 10, rng, k, maxUnknown = 'auto', strictKnown, perWord} */
@@ -2338,6 +2421,7 @@
   }
 
   // ---- bridges: related words across the course languages and to the learner's languages (computed from the stored data) ----
+  /* i18n-ignore-start — letters, and the English words of etymology texts the parser skips */
   const AR_HE = { 'ا': 'א', 'أ': 'א', 'إ': 'א', 'آ': 'א', 'ء': 'א', 'ئ': 'א', 'ؤ': 'א', 'ب': 'ב', 'ت': 'ת', 'ث': 'ש', 'ج': 'ג', 'ح': 'ח', 'خ': 'ח', 'د': 'ד', 'ذ': 'ז',
     'ر': 'ר', 'ز': 'ז', 'س': 'שס', 'ش': 'ש', 'ص': 'צ', 'ض': 'צ', 'ط': 'ט', 'ظ': 'צט', 'ع': 'ע', 'غ': 'ע', 'ف': 'פ', 'ق': 'ק', 'ك': 'כ', 'ل': 'ל', 'م': 'מ', 'ن': 'נ', 'ه': 'ה',
     'و': 'וי', 'ي': 'יו', 'ى': 'יו' };
@@ -2350,6 +2434,7 @@
   const QUALIFIER = /(?:Proto-|Pre-|Old|Middle|Classical|Ancient|Byzantine|Late|Medieval|Biblical|Mishnaic|Koine|Vulgar|Early|Ottoman|Egyptian|Levantine|Gulf|Literary|Moroccan|Iraqi|Syrian|Palestinian|Swiss|Austrian|American|British|Brazilian|Western|Eastern|Northern|Southern|Upper|Lower|High|Low|Judeo-|Jewish|Imperial|Archaic|Colloquial|Dialectal|Regional|Taiwanese|Mainland|Hong Kong)\s*$/;
   const NOT_A_WORD = new Set(('and or for entry word words people the a an in au la le el from speakers speaker also via with to of as is was are has have it its this that which who form forms name names spelling origin source sense meaning ' +
     'edition cognate cognates loan loanword term verb noun adjective plural dialect dialects variety cousin equivalent translation calque version influence ultimately itself one same').split(' '));
+  /* i18n-ignore-end */
   const CUES = [['other', /\b(another word|other words?|different word|unrelated|not related|instead)\b/g], ['calque', /\b(calques?|loan[- ]translation|translated from|built (?:exactly )?like)\b/g], ['loan', /\b(borrow\w*|loan\w*|internationalism|from|via|through|passed into|whence|derived?s?|adopted|taken over|goes back|go back)\b/g], ['cognate', /\b(cognates?|related|akin|inherited|same root|continues|shares?|doublet)\b/g], ['compare', /\b(compare[sd]?|cf|see|like|as in|matches|similar)\b/g]];
   function cueOf(before, after, sentence) {
     if (/false friend/i.test(sentence)) return 'falseFriend';
@@ -2425,7 +2510,7 @@
   /** Every bridge of the course: {bridges: [{kind: cognate|loan|falseFriend, a:{lang,lex}, b:{lang,lex}, via: [root|etymology|source|pitfall], same, note, roots?}],
    *  known: [{lang, lex, code, word, kind, note}] — links to languages outside the course (the learner's, by their etymology)}. Cached until the profiles change. */
   function bridges(C) {
-    const stamp = C.languages.reduce((n, c) => n + Object.values(C.lang[c].lex).filter(x => x.profile).length, 0);
+    const stamp = C.languages.reduce((n, c) => n + Object.values(C.lang[c].lex).filter(x => x.profile).length, 0) + '|' + lcLocale();   // the notes are in the current language
     if (C._bridges && C._bridges.stamp === stamp) return C._bridges;
     const pairs = new Map(), knownL = [], bySource = new Map();
     const RANK = { cognate: 1, loan: 2, falseFriend: 3 };
@@ -2478,10 +2563,10 @@
     const NI = nameIndex(C), nameOf = cd => Object.keys(NI.names).find(n => NI.names[n] === cd) || cd;
     for (const [k, ws] of bySource) for (let i = 0; i < ws.length; i++) for (let j = i + 1; j < ws.length; j++) {
       const a = ws[i], b = ws[j]; if (a.lang === b.lang) continue;
-      if (sharedSenses(C.lang[a.lang].lex[a.lex], C.lang[b.lang].lex[b.lex]).length) add('loan', a, b, 'source', `Both from ${nameOf(k.split('|')[0])} ${a.word}.`);
+      if (sharedSenses(C.lang[a.lang].lex[a.lex], C.lang[b.lang].lex[b.lex]).length) add('loan', a, b, 'source', lcX('lc.expl.bridgeSource', { lang: nameOf(k.split('|')[0]), word: a.word }));
     }
     const list = [...pairs.values()];
-    for (const b of list) if (!b.note && b.roots) b.note = `Root ${b.roots[0]} ↔ ${b.roots[1]}: the same radicals by the regular sound correspondences, and a meaning in common.`;
+    for (const b of list) if (!b.note && b.roots) b.note = lcX('lc.expl.bridgeRoots', { a: b.roots[0], b: b.roots[1] });
     const byWord = new Map(); for (const b of list) for (const w of [b.a, b.b]) { const k = w.lang + '|' + w.lex; if (!byWord.has(k)) byWord.set(k, []); byWord.get(k).push(b); }
     return C._bridges = { stamp, list, known: knownL, byWord };
   }
@@ -2498,7 +2583,6 @@
   }
 
   // ---- comparison statements of a function across the languages ----
-  const STATUS_TEXT = { realized: 'has a form or construction of its own for it', periphrastic: 'says it with other means (other words, word order)', absent: 'does not mark it at all' };
   /** One function across the languages: {fn, title, langs, rows: [{lang, status, first, typology}], features: [{feature, title, values: {lang: {value, title, from}}}], seeAlso: [{from, lang, fn, note}]} */
   function compareFn(C, fid, langs) {
     const W = C.data.world, feat = Object.fromEntries((W?.features || []).map(f => [f.id, f])), prof = Object.fromEntries((W?.languages || []).map(l => [l.code, l]));
@@ -2535,7 +2619,7 @@
         for (const [v, hs] of groups) st.push({ text: `${f.title}: ${f.values[hs[0]].title}`, holds: hs, differs: groups.length > 1, feature: f.feature });
       }
       const sts = {}; for (const r of cf.rows) (sts[r.status] = sts[r.status] || []).push(r.lang);
-      if (Object.keys(sts).length > 1) for (const [s, hs] of Object.entries(sts)) st.push({ text: `This language ${STATUS_TEXT[s] || s}.`, holds: hs, differs: true, feature: 'status' });
+      if (Object.keys(sts).length > 1) for (const [s, hs] of Object.entries(sts)) st.push({ text: lcX('lc.expl.statusStatement', { status: s }), holds: hs, differs: true, feature: 'status' });
       const diff = shuffled(st.filter(s => s.differs), rng), samek = shuffled(st.filter(s => !s.differs), rng);
       const pick = [...diff.slice(0, 4)]; if (pick.length < 4 && samek.length) pick.push(samek[0]);
       if (pick.length >= 2 && pick.some(s => s.holds.length < cf.langs.length))
@@ -2806,11 +2890,17 @@
   /* rewrite / expand: the same sentence under a constraint. A constraint the bank holds a variant for (negative, question, plural …)
      has stored answers (decided here); a paraphrase or an added detail is open: AI-judged, with the known-vocabulary check. */
   const EXPAND = [
-    { id: 'time', text: 'Add when it happens (a time word).', need: x => (x.senses || []).some(c => /^time\./.test(c)) || x.pos === 'ADV' },
-    { id: 'place', text: 'Add where it happens (a place).', need: x => (x.senses || []).some(c => /^place\./.test(c)) },
-    { id: 'describe', text: 'Add a describing word (an adjective).', need: x => x.pos === 'ADJ' },
-    { id: 'reason', text: 'Add a reason (because …).', need: x => (x.senses || []).includes('conj.because') },
-    { id: 'and', text: 'Add a second sentence joined with “and” or “but”.', need: x => (x.senses || []).some(c => c === 'conj.and' || c === 'conj.but') }];
+    { id: 'time', key: 'lc.ui.expand.time', need: x => (x.senses || []).some(c => /^time\./.test(c)) || x.pos === 'ADV' },
+    { id: 'place', key: 'lc.ui.expand.place', need: x => (x.senses || []).some(c => /^place\./.test(c)) },
+    { id: 'describe', key: 'lc.ui.expand.describe', need: x => x.pos === 'ADJ' },
+    { id: 'reason', key: 'lc.ui.expand.reason', need: x => (x.senses || []).includes('conj.because') },
+    { id: 'and', key: 'lc.ui.expand.and', need: x => (x.senses || []).some(c => c === 'conj.and' || c === 'conj.but') }];
+  /** A constraint shown to the learner, back in English for the AI's prompt (the prompts stay English): the expand / rewrite texts and the variant labels. */
+  function constraintEn(text) {
+    const keys = [...EXPAND.map(e => e.key), 'lc.ui.rewrite.otherWords', ...new Set(Object.values(VARIANT_KEY).flatMap(m => Object.values(m)))];
+    const one = t => { const k = keys.find(x => lcU(x) === t); return k ? lcEn(k) : t; };
+    return String(text || '').split(' · ').map(one).join(' · ');
+  }
   function rewriteItems(C, L, code, opts = {}) {
     const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), K = k.R, max = opts.max ?? 6;
     const byBase = {}; for (const s of X.sentences) if (s.variantOf) (byBase[s.variantOf] = byBase[s.variantOf] || []).push(s);
@@ -2823,14 +2913,14 @@
       const kind = opts.kind || (vs.length && rng() < 0.6 ? 'rewrite' : rng() < 0.5 ? 'expand' : 'rewrite');
       const base = { type: 'rewrite', lang: code, sentence: s.id, source: s.text, sourceGloss: s.gloss, unknown: s.unknown };
       if (kind === 'rewrite' && vs.length) { const v = vs[Math.floor(rng() * vs.length)]; out.push({ ...base, kind: 'rewrite', constraint: variantLabel(v.variant), target: v.id, gloss: v.gloss, answers: [v.text, ...(v.alts || [])], why: v.text }); }
-      else if (kind === 'rewrite' && !opts.storedOnly) out.push({ ...base, kind: 'rewrite', constraint: 'Say the same thing in other words.', answers: [] });
-      else if (kind === 'expand' && can.length) { const e = can[Math.floor(rng() * can.length)]; out.push({ ...base, kind: 'expand', constraint: e.text, expand: e.id, answers: [] }); }
+      else if (kind === 'rewrite' && !opts.storedOnly) out.push({ ...base, kind: 'rewrite', constraint: lcU('lc.ui.rewrite.otherWords'), answers: [] });
+      else if (kind === 'expand' && can.length) { const e = can[Math.floor(rng() * can.length)]; out.push({ ...base, kind: 'expand', constraint: lcU(e.key), expand: e.id, answers: [] }); }
       if (out.length >= max) break;
     }
     return out;
   }
   /* guided_compose: a prompt (or a picture) + required words → the learner writes a few sentences → the AI rubric per aspect */
-  const TEXT_TYPES = [{ id: 'message', title: 'a short message to a friend', sentences: '2–3' }, { id: 'description', title: 'a short description', sentences: '3–4' }, { id: 'narration', title: 'a short story of what happened', sentences: '3–5' }];
+  const TEXT_TYPES = [{ id: 'message', sentences: '2–3' }, { id: 'description', sentences: '3–4' }, { id: 'narration', sentences: '3–5' }];   // the task: lc.ui.compose.task
   function composeTask(C, L, code, opts = {}) {
     const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code);
     const content = l => ['NOUN', 'VERB', 'ADJ'].includes(X.lex[l]?.pos) && (X.lex[l].senses || []).length;
@@ -2844,7 +2934,7 @@
     const pastKnown = X.grammar['fn.past'] && [...k.R].some(l => X.lex[l]?.pos === 'VERB') && functionState(C, L, code, 'fn.past') !== 'new';
     const tt = TEXT_TYPES[k.R.size < 150 ? 0 : pastKnown && rng() < 0.4 ? 2 : Math.floor(rng() * 2)];
     const pic = (C.nodes[nid].concepts || []).find(cid => C.concepts[cid]?.media && (X.byConcept[cid] || []).some(l => required.includes(l))) || null;
-    return { type: 'compose', kind: 'compose', lang: code, node: nid, topic: C.nodes[nid].title, textType: tt.id, prompt: `Write ${tt.title} (${tt.sentences} sentences) about “${C.nodes[nid].title}”.`, required, picture: pic };
+    return { type: 'compose', kind: 'compose', lang: code, node: nid, topic: C.nodes[nid].title, textType: tt.id, prompt: lcU('lc.ui.compose.task', { type: tt.id, sentences: tt.sentences, topic: C.nodes[nid].title }), required, picture: pic };
   }
   /** The deterministic part of judging a written text: which required words it uses (in any form), which words are new or not in the course. */
   function composeCheck(C, code, text, task, knownSet) {
@@ -2891,7 +2981,7 @@
     for (const s of shuffled(inText, rng)) {
       const wrong = uniqStr([...shuffled(pool, rng), ...shuffled(wide, rng)].map(o => o.gloss)).slice(0, 3);
       if (wrong.length < 2) continue;
-      out.push({ type: 'choose', kind: 'quiz', reader: text.id, lang: code, sentence: s.id, prompt: 'Which of these does the text say?', ask: '', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss });
+      out.push({ type: 'choose', kind: 'quiz', reader: text.id, lang: code, sentence: s.id, prompt: lcU('lc.ui.ask.textSays'), ask: '', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss });
       if (out.length >= n) break;
     }
     return out;
@@ -2917,8 +3007,8 @@
   /** Hebrew וְ "and" before a word: וּ before a shva and before ב מ פ, וַ / וֶ / וָ before a hataf; null where the course has no rule (a begadkefat letter with dagesh). */
   function heAnd(word) {
     const cs = [...nfc(word)], first = cs[0], marks = []; for (let i = 1; i < cs.length && /\p{M}/u.test(cs[i]); i++) marks.push(cs[i]);
-    if ('בגדכפת'.includes(first) && marks.includes('ּ')) return null;
-    if (marks.includes('ְ') || 'במפ'.includes(first)) return nfc('וּ' + word);
+    if ('בגדכפת'.includes(first) && marks.includes('ּ')) return null;   // i18n-ignore (Hebrew letters)
+    if (marks.includes('ְ') || 'במפ'.includes(first)) return nfc('וּ' + word);   // i18n-ignore (Hebrew letters)
     if (marks.includes('ֲ')) return nfc('וַ' + word);
     if (marks.includes('ֱ')) return nfc('וֶ' + word);
     if (marks.includes('ֳ')) return nfc('וָ' + word);
@@ -2955,9 +3045,9 @@
       for (const x of shuffled(range, rng)) if (others.length < 6 && x !== n && !others.includes(x)) others.push(x);
       const wrong = uniqStr(others.map(x => say(x).text)).filter(t => t !== w.text).slice(0, 3);
       if (wrong.length < 2) continue;
-      const g = code === 'ar' || code === 'he' ? ' (the form used with masculine nouns)' : '';
-      if (rng() < 0.5) out.push({ type: 'number', kind: 'digits2word', lang: code, n, prompt: digitsIn(code, n), ask: `How do you say it in words?${g}`, options: shuffled([w.text, ...wrong], rng), answer: w.text, why: `${n} = ${w.text}`, lex: w.lex });
-      else { const ws = others.slice(0, 3).map(String); out.push({ type: 'number', kind: 'word2digits', lang: code, n, prompt: w.text, ask: 'Which number is it?', options: shuffled([String(n), ...ws], rng), answer: String(n), why: `${w.text} = ${n}`, lex: w.lex }); }
+      const masc = code === 'ar' || code === 'he' ? 'yes' : 'no';
+      if (rng() < 0.5) out.push({ type: 'number', kind: 'digits2word', lang: code, n, prompt: digitsIn(code, n), ask: lcU('lc.ui.ask.numberInWords', { masc }), options: shuffled([w.text, ...wrong], rng), answer: w.text, why: `${n} = ${w.text}`, lex: w.lex });
+      else { const ws = others.slice(0, 3).map(String); out.push({ type: 'number', kind: 'word2digits', lang: code, n, prompt: w.text, ask: lcU('lc.ui.ask.whichNumber'), options: shuffled([String(n), ...ws], rng), answer: String(n), why: `${w.text} = ${n}`, lex: w.lex }); }
       if (out.length >= Math.ceil(max * 0.6)) break;
     }
     out.push(...countingItems(C, L, code, { k, rng, max: max - out.length }));
@@ -2974,19 +3064,19 @@
       for (const nn of nouns) {
         const pl = findCell(nn, plCell); if (!pl) continue;
         const n = 3 + Math.floor(rng() * 8), id = (W[n] || [])[0]; if (!id) continue;
-        const lx = X.lex[id], cell = g => code === 'ar' ? Object.keys(lx.forms || {}).find(c => cellHas(c, ['NOM', g, 'CONST'])) : Object.keys(lx.forms || {}).find(c => canon(c) === canon('NUM;' + g));
+        const lx = X.lex[id], cell = g => code === 'ar' ? Object.keys(lx.forms || {}).find(c => cellHas(c, ['NOM', g, 'CONST'])) : Object.keys(lx.forms || {}).find(c => canon(c) === canon('NUM;' + g));   // i18n-ignore (a cell)
         const m = cell('MASC'), f = cell('FEM'); if (!m || !f || lx.forms[m] === lx.forms[f]) continue;
         const right = lx.forms[nn.gender === 'MASC' ? m : f], wrong = lx.forms[nn.gender === 'MASC' ? f : m];
-        out.push({ type: 'number', kind: 'counting', lang: code, n, noun: nn.id, prompt: `${digitsIn(code, n)} × ${nn.lemma}`, ask: `${n} — ${glossOfLex(C, X, nn.id)} (plural): which is right?`,
+        out.push({ type: 'number', kind: 'counting', lang: code, n, noun: nn.id, prompt: `${digitsIn(code, n)} × ${nn.lemma}`, ask: lcU('lc.ui.ask.countingPlural', { n: String(n), gloss: glossOfLex(C, X, nn.id) }),
           options: shuffled([right + ' ' + pl, wrong + ' ' + pl], rng), answer: right + ' ' + pl,
-          why: `${nn.lemma} is ${GENDER_WORD[nn.gender]} → ${right} ${pl}. From 3 to 10 the number takes the form of the other gender (the form in -a goes with masculine nouns).`, lex: [id, nn.id] });
+          why: lcX('lc.expl.countingGender', { noun: nn.lemma, gender: GENDER_WORD[nn.gender], phrase: right + ' ' + pl }), lex: [id, nn.id] });
         if (out.length >= max) break;
       }
     } else if (code === 'zh') {
       const two = Object.keys(X.lex).filter(id => numOf(X, id) === 2), liang = two.find(id => X.lex[id].lemma === '两'), er = two.find(id => X.lex[id].lemma === '二');
       if (liang && er && K.has(liang)) for (const nn of shuffled(Object.values(X.lex).filter(x => K.has(x.id) && x.pos === 'NOUN' && (x.measure || []).length), rng)) {
         const m = nn.measure[0], ph = w => w + m + nn.lemma;
-        out.push({ type: 'number', kind: 'counting', lang: code, n: 2, noun: nn.id, prompt: `2 × ${nn.lemma}`, ask: `two ${glossOfLex(C, X, nn.id)}: which is right?`, options: shuffled([ph('两'), ph('二')], rng), answer: ph('两'), why: `${ph('两')} — before a measure word “two” is 两; 二 is for counting and inside numbers (十二, 二十).`, lex: [liang, nn.id] });
+        out.push({ type: 'number', kind: 'counting', lang: code, n: 2, noun: nn.id, prompt: `2 × ${nn.lemma}`, ask: lcU('lc.ui.ask.countingTwo', { gloss: glossOfLex(C, X, nn.id) }), options: shuffled([ph('两'), ph('二')], rng), answer: ph('两'), why: lcX('lc.expl.liang', { phrase: ph('两') }), lex: [liang, nn.id] });
         if (out.length >= max) break;
       }
     }
@@ -3037,7 +3127,7 @@
     const near = []; for (const d of [-2, -1, 1, 2]) { const w = ws[mi + d]; if (!w || !w.l) continue; if (Math.abs(d) === 2 && !between(ws[mi + d / 2])) continue; const v = ordOf(X, w.l) ?? numOf(X, w.l); if (v != null && v >= 1 && v <= 31) near.push({ d: Math.abs(d), v }); }
     near.sort((a, b) => a.d - b.d); if (!near.length || (near[1] && near[1].d === near[0].d && near[1].v !== near[0].v)) return null;
     const day = near[0].v, g = String(s.gloss || '').toLowerCase(), mg = String(C.concepts[mc]?.gloss || '').toLowerCase();
-    const D = `(${day}(st|nd|rd|th)?${C.explainLang === 'en' && EN_ORD[day] ? '|' + EN_ORD[day] : ''})`;
+    const D = `(${day}(st|nd|rd|th)?${C.explainLang === 'en' && EN_ORD[day] ? '|' + EN_ORD[day] : ''})`;   // i18n-ignore (a regular expression over English glosses)
     const ok = mg && (new RegExp(`\\b(the )?${D} of ${mg}\\b`).test(g) || new RegExp(`\\b${mg} ${D}\\b`).test(g) || new RegExp(`\\b${D}\\.? ?${mg}\\b`).test(g));
     return ok ? { d: day, m } : null;
   }
@@ -3050,8 +3140,8 @@
       const times = uniqStr([hm(t), ...shuffled([{ h: t.h % 12 + 1, m: t.m }, { h: t.h, m: (t.m + 30) % 60 }, { h: (t.h + 10) % 12 + 1, m: t.m }, { h: (t.h + 5) % 12 + 1, m: t.m === 0 ? 30 : 0 }], rng).map(hm)]).slice(0, 4);
       const others = []; for (const o of shuffled(all, rng)) if (hm(o.t) !== hm(t) && !others.some(x => hm(x.t) === hm(o.t))) others.push(o);   // other times, one sentence each
       if (others.length >= 2 && rng() < 0.5) {
-        out.push({ type: 'clock', kind: 'time2sentence', lang: code, time: t, sentence: s.id, ask: 'Which sentence says this time?', options: shuffled([s.id, ...others.slice(0, 3).map(o => o.s.id)], rng), answer: s.id, why: `${hm(t)} — ${s.text}`, unknown: s.unknown });
-      } else out.push({ type: 'clock', kind: 'sentence2time', lang: code, time: t, sentence: s.id, ask: 'What time does it say?', options: shuffled(times, rng), answer: hm(t), why: `${s.text} — ${hm(t)}`, unknown: s.unknown });
+        out.push({ type: 'clock', kind: 'time2sentence', lang: code, time: t, sentence: s.id, ask: lcU('lc.ui.ask.whichSentenceTime'), options: shuffled([s.id, ...others.slice(0, 3).map(o => o.s.id)], rng), answer: s.id, why: `${hm(t)} — ${s.text}`, unknown: s.unknown });
+      } else out.push({ type: 'clock', kind: 'sentence2time', lang: code, time: t, sentence: s.id, ask: lcU('lc.ui.ask.whatTime'), options: shuffled(times, rng), answer: hm(t), why: `${s.text} — ${hm(t)}`, unknown: s.unknown });
       if (out.length >= max) break;
     }
     return out;
@@ -3064,24 +3154,24 @@
     for (const mo of shuffled(months, rng).slice(0, 3)) {
       const wrong = shuffled(months.filter(x => x.c !== mo.c), rng).slice(0, 3).map(x => lemma(x.ids[0])); if (wrong.length < 2) break;
       const id = mo.ids[Math.floor(rng() * mo.ids.length)];
-      if (rng() < 0.5) out.push({ type: 'date', kind: 'month2word', lang: code, prompt: digitsIn(code, mo.i + 1) + '.', ask: 'Which month is it?', options: shuffled([lemma(id), ...wrong], rng), answer: lemma(id), why: `${mo.i + 1} = ${mo.ids.map(lemma).join(' / ')} (${C.concepts[mo.c].gloss})`, lex: [id] });
-      else { const nums = shuffled(months.filter(x => x.c !== mo.c), rng).slice(0, 3).map(x => String(x.i + 1)); out.push({ type: 'date', kind: 'word2month', lang: code, prompt: lemma(id), ask: 'Which month is it (its number)?', options: shuffled([String(mo.i + 1), ...nums], rng), answer: String(mo.i + 1), why: `${lemma(id)} = ${mo.i + 1} (${C.concepts[mo.c].gloss})`, lex: [id] }); }
+      if (rng() < 0.5) out.push({ type: 'date', kind: 'month2word', lang: code, prompt: digitsIn(code, mo.i + 1) + '.', ask: lcU('lc.ui.ask.whichMonth'), options: shuffled([lemma(id), ...wrong], rng), answer: lemma(id), why: `${mo.i + 1} = ${mo.ids.map(lemma).join(' / ')} (${C.concepts[mo.c].gloss})`, lex: [id] });
+      else { const nums = shuffled(months.filter(x => x.c !== mo.c), rng).slice(0, 3).map(x => String(x.i + 1)); out.push({ type: 'date', kind: 'word2month', lang: code, prompt: lemma(id), ask: lcU('lc.ui.ask.monthNumber'), options: shuffled([String(mo.i + 1), ...nums], rng), answer: String(mo.i + 1), why: `${lemma(id)} = ${mo.i + 1} (${C.concepts[mo.c].gloss})`, lex: [id] }); }
     }
     for (const dy of shuffled(days, rng).slice(0, 2)) {
       const nx = days.find(x => x.i === (dy.i + 1) % 7); if (!nx) continue;
       const wrong = shuffled(days.filter(x => x.c !== nx.c && x.c !== dy.c), rng).slice(0, 3).map(x => lemma(x.ids[0])); if (wrong.length < 2) continue;
-      out.push({ type: 'date', kind: 'nextday', lang: code, prompt: lemma(dy.ids[0]), ask: 'Which day comes after it?', options: shuffled([lemma(nx.ids[0]), ...wrong], rng), answer: lemma(nx.ids[0]), why: `${lemma(dy.ids[0])} → ${lemma(nx.ids[0])} (${C.concepts[dy.c].gloss} → ${C.concepts[nx.c].gloss})`, lex: [dy.ids[0], nx.ids[0]] });
+      out.push({ type: 'date', kind: 'nextday', lang: code, prompt: lemma(dy.ids[0]), ask: lcU('lc.ui.ask.nextDay'), options: shuffled([lemma(nx.ids[0]), ...wrong], rng), answer: lemma(nx.ids[0]), why: `${lemma(dy.ids[0])} → ${lemma(nx.ids[0])} (${C.concepts[dy.c].gloss} → ${C.concepts[nx.c].gloss})`, lex: [dy.ids[0], nx.ids[0]] });
     }
     const ords = Object.keys(X.lex).filter(id => K.has(id) && ordOf(X, id) != null && (X.lex[id].senses || [])[0] === `num.ord.${ordOf(X, id)}`);
     for (const id of shuffled(ords, rng).slice(0, 2)) {
       const n = ordOf(X, id), wrong = uniqStr(shuffled(ords.filter(x => ordOf(X, x) !== n), rng).map(lemma)).slice(0, 3); if (wrong.length < 2) continue;
-      out.push({ type: 'date', kind: 'ordinal', lang: code, prompt: digitsIn(code, n) + '.', ask: `The ${EN_ORD[n] || n + 'th'}: which word?`, options: shuffled([lemma(id), ...wrong], rng), answer: lemma(id), why: `${n}. = ${lemma(id)}`, lex: [id] });
+      out.push({ type: 'date', kind: 'ordinal', lang: code, prompt: digitsIn(code, n) + '.', ask: lcU('lc.ui.ask.ordinal', { n }), options: shuffled([lemma(id), ...wrong], rng), answer: lemma(id), why: `${n}. = ${lemma(id)}`, lex: [id] });
     }
     const fmt = t => `${t.d} ${C.concepts[MONTHS[t.m - 1]]?.gloss || t.m}`;
     for (const s of shuffled(selectSentences(C, code, { known: K, maxUnknown: 'auto' }), rng)) {
       const t = dateOf(C, code, s); if (!t) continue;
       const opts2 = uniqStr([fmt(t), fmt({ d: t.d, m: t.m % 12 + 1 }), fmt({ d: t.d % 28 + 1, m: t.m }), fmt({ d: (t.d + 9) % 28 + 1, m: (t.m + 5) % 12 + 1 })]);
-      out.push({ type: 'date', kind: 'sentence2date', lang: code, sentence: s.id, ask: 'Which date does it say?', options: shuffled(opts2, rng), answer: fmt(t), why: `${s.text} — ${fmt(t)}`, unknown: s.unknown });
+      out.push({ type: 'date', kind: 'sentence2date', lang: code, sentence: s.id, ask: lcU('lc.ui.ask.whichDate'), options: shuffled(opts2, rng), answer: fmt(t), why: `${s.text} — ${fmt(t)}`, unknown: s.unknown });
       if (out.filter(x => x.kind === 'sentence2date').length >= 2) break;
     }
     return shuffled(out, rng).slice(0, max);
@@ -3092,11 +3182,11 @@
   function registerItems(C, L, code, opts = {}) {
     const X = C.lang[code], rng = opts.rng || Math.random, k = opts.k || known(C, L, code), max = opts.max ?? 6, out = [];
     const fits = s => s.req.filter(l => !k.R.has(l)).length <= s.cap;
-    const ASK = { Formality: { formal: 'Which one is polite (formal)?', informal: 'Which one is informal (familiar)?' }, Address: { formal: 'Which one is polite (formal)?', informal: 'Which one is informal (familiar)?' },
-      Addressee: { FEM: 'Which one do you say to a woman?', MASC: 'Which one do you say to a man?', PL: 'Which one do you say to several people?' } };
+    const ASK = { Formality: { formal: 'lc.ui.ask.whichPolite', informal: 'lc.ui.ask.whichInformal' }, Address: { formal: 'lc.ui.ask.whichPolite', informal: 'lc.ui.ask.whichInformal' },
+      Addressee: { FEM: 'lc.ui.ask.toWoman', MASC: 'lc.ui.ask.toMan', PL: 'lc.ui.ask.toSeveral' } };   // i18n-ignore (keys)
     for (const s2 of shuffled(X.sentences.filter(s => s.variantOf && fits(s)), rng)) {
       const [key, val] = Object.entries(s2.variant || {}).find(([kk]) => ASK[kk]) || []; if (!key) continue;
-      const ask = ASK[key][val] || ASK[key][String(val).toLowerCase()]; const s1 = X.sentenceById[s2.variantOf];
+      const askKey = ASK[key][val] || ASK[key][String(val).toLowerCase()], ask = askKey ? lcU(askKey) : null; const s1 = X.sentenceById[s2.variantOf];
       if (!ask || !s1 || !fits(s1) || cmpText(code, s1.text) === cmpText(code, s2.text)) continue;
       out.push({ type: 'register', kind: 'register', lang: code, sentence: s2.id, ask, gloss: s2.gloss.replace(/\s*\((polite|formal|informal|to a (wo)?man|to several people)\)\s*/gi, ' ').trim(),
         options: shuffled([s2.text, s1.text], rng), answer: s2.text, why: `${s2.text} — ${s2.gloss}`, unknown: uniqStr([...s2.req, ...s1.req].filter(l => !k.R.has(l))) });
@@ -3123,12 +3213,13 @@
       const wrong = uniqStr(shuffled(ex.filter(o => o.b !== x.b && ![...o.la].some(l => x.la.has(l)) && ![...o.lb].some(l => x.lb.has(l))), rng).map(o => o.b)).slice(0, 3);
       if (wrong.length < 2) continue; used.add(x.a);
       const [ga, gb] = String(x.s.gloss).split(/\s+[–—]\s+/);
-      out.push({ type: 'dialogue', kind: 'dialogue', lang: code, sentence: x.s.id, prompt: x.a, promptGloss: gb ? ga : '', ask: 'What fits as the answer?', options: shuffled([x.b, ...wrong], rng), answer: x.b, why: `${x.s.text} — ${x.s.gloss}`, unknown: x.s.unknown });
+      out.push({ type: 'dialogue', kind: 'dialogue', lang: code, sentence: x.s.id, prompt: x.a, promptGloss: gb ? ga : '', ask: lcU('lc.ui.ask.fitsAnswer'), options: shuffled([x.b, ...wrong], rng), answer: x.b, why: `${x.s.text} — ${x.s.gloss}`, unknown: x.s.unknown });
       if (out.length >= max) break;
     }
     return out;
   }
 
+  /* i18n-ignore-start — the AI's prompts stay English (docs/i18n.md §5.2, approach 6: they ask for the learner's language) */
   /* the AI's tasks — built here (pure), sent by the UI with the learner's own key; their answers are never an answer key */
   const AI_VERDICT = { type: 'object', required: ['verdict', 'feedback'], properties: { verdict: { type: 'string', enum: ['correct', 'acceptable', 'wrong'] }, corrected: { type: 'string' },
     mistakes: { type: 'array', items: { type: 'object', required: ['wrong', 'right', 'why'], properties: { wrong: { type: 'string' }, right: { type: 'string' }, why: { type: 'string' } } } }, feedback: { type: 'string' } } };
@@ -3146,9 +3237,9 @@
       `When you correct, change as little as possible and keep the learner's words. Never invent facts about the language; when unsure, say so in the feedback.\nThe learner knows these words: ${words || '(few yet)'}.`;
     let prompt, schema = AI_VERDICT;
     if (task.kind === 'translate') prompt = `The learner had to say in ${name}: "${task.gloss}".\nThe course's answer(s): ${task.reference.map(r => `"${r}"`).join(' / ')}.\nThe learner wrote: "${task.answer}".\nIs it correct ${name} with this meaning? verdict: correct (fully right), acceptable (right meaning, small slips), wrong. corrected: the learner's sentence, minimally corrected (or unchanged when it is right). mistakes: each error with the right form and why.`;
-    else if (task.kind === 'rewrite') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: ${task.constraint}\n${task.reference?.length ? `One answer the course knows: ${task.reference.map(r => `"${r}"`).join(' / ')}.\n` : ''}The learner wrote: "${task.answer}".\nDoes it do the task in correct ${name}? verdict: correct, acceptable (does it, small slips) or wrong (wrong language, wrong meaning or the task not done). corrected: the learner's sentence minimally corrected. mistakes: each error.`;
-    else if (task.kind === 'expand') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: keep the sentence and ${task.constraint.charAt(0).toLowerCase() + task.constraint.slice(1)}\nThe learner wrote: "${task.answer}".\nDoes it keep the meaning, add what was asked and stay correct ${name}? verdict: correct, acceptable or wrong. corrected: minimally corrected. mistakes: each error.`;
-    else { schema = AI_RUBRIC; prompt = `The task: ${task.prompt}\nWords the learner had to use: ${(task.required || []).map(l => `${X.lex[l]?.lemma} (${glossOfLex(C, X, l)})`).join(', ')}.\nThe learner wrote:\n"""${task.answer}"""\nGrade each aspect 0–5 with a short comment: grammar, vocabulary (fits the task, the required words used well), spelling (and vowel marks / characters as written), cohesion (the sentences connect). corrections: every error as {from: the exact wrong text, to: the fix, why}. corrected: the whole text minimally corrected. feedback: two or three sentences.`; }
+    else if (task.kind === 'rewrite') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: ${constraintEn(task.constraint)}\n${task.reference?.length ? `One answer the course knows: ${task.reference.map(r => `"${r}"`).join(' / ')}.\n` : ''}The learner wrote: "${task.answer}".\nDoes it do the task in correct ${name}? verdict: correct, acceptable (does it, small slips) or wrong (wrong language, wrong meaning or the task not done). corrected: the learner's sentence minimally corrected. mistakes: each error.`;
+    else if (task.kind === 'expand') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: keep the sentence and ${(c => c.charAt(0).toLowerCase() + c.slice(1))(constraintEn(task.constraint))}\nThe learner wrote: "${task.answer}".\nDoes it keep the meaning, add what was asked and stay correct ${name}? verdict: correct, acceptable or wrong. corrected: minimally corrected. mistakes: each error.`;
+    else { schema = AI_RUBRIC; prompt = `The task: ${task.textType && TEXT_TYPES.some(t => t.id === task.textType) ? lcEn('lc.ui.compose.task', { type: task.textType, sentences: TEXT_TYPES.find(t => t.id === task.textType).sentences, topic: task.topic }) : task.prompt}\nWords the learner had to use: ${(task.required || []).map(l => `${X.lex[l]?.lemma} (${glossOfLex(C, X, l)})`).join(', ')}.\nThe learner wrote:\n"""${task.answer}"""\nGrade each aspect 0–5 with a short comment: grammar, vocabulary (fits the task, the required words used well), spelling (and vowel marks / characters as written), cohesion (the sentences connect). corrections: every error as {from: the exact wrong text, to: the fix, why}. corrected: the whole text minimally corrected. feedback: two or three sentences.`; }
     return { system, prompt, schema, name: task.kind === 'compose' ? 'rubric' : 'verdict' };
   }
   /** The prompt for a new graded text written by the AI and checked by the tokenizer (the LLM proposes, the validator decides). */
@@ -3201,6 +3292,8 @@
     return { system, schema: { type: 'object', required: ['reply', 'target'], properties: { reply: { type: 'string' }, target: { type: 'array', items: { type: 'string' } } } }, name: 'tutor', context: t };
   }
 
+  /* i18n-ignore-end */
+
   GEN.translate = ctx => translateItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max, sentences: ctx.bank(), fn: ctx.fid, mode: ctx.gen.mode });
   GEN.rewrite = ctx => rewriteItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max, kind: 'rewrite' }).map(it => ({ ...it, fn: ctx.fid }));
   GEN.expand = ctx => rewriteItems(ctx.C, ctx.L, ctx.code, { k: ctx.k, rng: ctx.rng, max: ctx.max, kind: 'expand' }).map(it => ({ ...it, fn: ctx.fid }));
@@ -3214,6 +3307,8 @@
   /* ---------- P8 — Through Claude (course creation and generation): account courses, task queue, checks and merges (§7.4, §10.1) ---------- */
   /* The same code runs in the app (engine/lang/95_claude.js) and in the connector (cloud/mcp/server.mjs, bundled by tools/build.py):
      a task, the check of its answer and the way the answer changes the course are identical everywhere. Pure: no DOM, no storage. */
+  /* i18n-ignore-start — P8 speaks to Claude and to course authors (tasks, checks, the guide): English. The learner-facing words of
+     this part (a new course's errors, the log lines) use lcU and the catalog. */
   const LANG_P8 = (() => {
     const FORMAT = 'noema.langjobs/v1', DATA = 'noema.langdata/v1', PATCH = 'noema.langpatch/v1';
     const IN = 'a:langin:', CLAIM = 'a:langclaim:', LEASE = 4 * 3600e3, KEEP = 400;
@@ -3244,8 +3339,8 @@
     /** A new course made through Claude → {record, data}. library: built library courses (their language.json and typology are reused). */
     function newCourse({ title, languages, explainLang = 'en', depth = {}, knownLanguages = [], provider = 'claudeapp', id = null, now = Date.now(), library = [] } = {}) {
       const langs = [...new Set((languages || []).map(x => String(x).trim().toLowerCase()).filter(x => /^[a-z]{2,3}$/.test(x)))];
-      if (!str(title)) throw new Error('A course needs a title.');
-      if (!langs.length) throw new Error('Choose at least one language.');
+      if (!str(title)) throw new Error(lcU('lc.ui.course.needsTitle'));   // shown to the learner (engine/lang/95_claude.js)
+      if (!langs.length) throw new Error(lcU('lc.ui.course.needsLanguage'));
       id = id || newCourseId(title);
       const dep = Object.fromEntries(langs.map(c => [c, [1, 2, 3].includes(+depth[c]) ? +depth[c] : 3]));
       const known = [...new Set((knownLanguages || []).map(x => String(x).trim().toLowerCase()).filter(Boolean))];
@@ -3939,31 +4034,35 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     const upsert = (arr, items, key = 'id') => { for (const it of items || []) { const i = arr.findIndex(x => x?.[key] === it?.[key]); if (i >= 0) arr[i] = it; else arr.push(it); } return arr; };
     /** Apply a checked answer (mutates data — or, for a library course's refill, the patch — and the record) → a log line. */
     function applyAnswer(rec, data, task, ans, { now = Date.now(), patch = null } = {}) {
-      let line;
+      let line, log = null;
       if (task.kind === KIND.core) {
         upsert(data.fields, clone(ans.fields), 'field'); upsert(data.nodes, clone(ans.nodes)); upsert(data.functions, clone(ans.functions)); upsert(data.frames, clone(ans.frames));
         if (ans.typology) data.typology = clone(ans.typology);
         for (const [L, lj] of Object.entries(ans.languages || {})) if (data.langs[L]) data.langs[L].language = clone(lj);
-        line = `the core: ${ans.nodes.length} nodes, ${ans.fields.reduce((a, f) => a + (f.concepts || []).length, 0)} concepts, ${ans.functions.length} grammar points, ${ans.frames.length} frames`;
+        log = ['lc.ui.claudeLog.core', { nodes: ans.nodes.length, concepts: ans.fields.reduce((a, f) => a + (f.concepts || []).length, 0), functions: ans.functions.length, frames: ans.frames.length }];
+        line = `the core: ${log[1].nodes} nodes, ${log[1].concepts} concepts, ${log[1].functions} grammar points, ${log[1].frames} frames`;
       } else if (task.kind === KIND.node) {
         const L = data.langs[task.lang], f = L.lexicon[task.node] = L.lexicon[task.node] || { lexemes: [], absent: [] };
         f.absent = f.absent || []; upsert(f.lexemes, clone(ans.lexicon.lexemes)); upsert(f.absent, clone(ans.lexicon.absent || []), 'concept');
         for (const [fid, g] of Object.entries(ans.grammar || {})) L.grammar[fid] = clone(g);
         upsert(L.bank, clone(ans.bank || []));
-        line = `${task.node} in ${nameOf(task.lang)}: ${ans.lexicon.lexemes.length} words, ${(ans.lexicon.absent || []).length} absent, ${(ans.bank || []).length} sentences`;
+        log = ['lc.ui.claudeLog.node', { node: task.node, lang: nameOf(task.lang), words: ans.lexicon.lexemes.length, absent: (ans.lexicon.absent || []).length, sentences: (ans.bank || []).length }];
+        line = `${task.node} in ${nameOf(task.lang)}: ${log[1].words} words, ${log[1].absent} absent, ${log[1].sentences} sentences`;
       } else if (task.kind === KIND.function) {
         const L = data.langs[task.lang]; L.grammar[task.fn] = clone(ans.grammar); upsert(L.bank, clone(ans.bank || []));
-        line = `${task.fn} in ${nameOf(task.lang)}: the realization + ${(ans.bank || []).length} sentences`;
+        log = ['lc.ui.claudeLog.function', { fn: task.fn, lang: nameOf(task.lang), sentences: (ans.bank || []).length }];
+        line = `${task.fn} in ${nameOf(task.lang)}: the realization + ${log[1].sentences} sentences`;
       } else if (task.kind === KIND.compare) {
-        (data.compare = data.compare || {})[task.fn] = clone(ans.compare); line = `${task.fn} compared across ${data.course.languages.length} languages`;
+        (data.compare = data.compare || {})[task.fn] = clone(ans.compare); log = ['lc.ui.claudeLog.compare', { fn: task.fn, n: data.course.languages.length }]; line = `${task.fn} compared across ${log[1].n} languages`;
       } else if (task.kind === KIND.refill) {
         if (patch) { const P = patch.langs[task.lang] = patch.langs[task.lang] || { bank: [] }; upsert(P.bank, clone(ans.bank)); patch.rev = (patch.rev || 0) + 1; }
         upsert(data.langs[task.lang].bank, clone(ans.bank));
-        line = `${ans.bank.length} new sentences for ${task.fn} in ${nameOf(task.lang)} with the words you know`;
+        log = ['lc.ui.claudeLog.refill', { n: ans.bank.length, fn: task.fn, lang: nameOf(task.lang) }];
+        line = `${log[1].n} new sentences for ${task.fn} in ${nameOf(task.lang)} with the words you know`;
       }
       if (!patch) { data.rev = (data.rev || 0) + 1; rec.rev = data.rev; }
       const t = (rec.tasks || []).find(x => x.id === task.id && isOpen(x)); if (t) { t.status = 'done'; t.doneAt = iso(now); delete t.claimedAt; }
-      rec.updated = iso(now); (rec.log = rec.log || []).push({ t: now, m: '✓ ' + line }); if (rec.log.length > 200) rec.log = rec.log.slice(-200);
+      rec.updated = iso(now); (rec.log = rec.log || []).push({ t: now, m: '✓ ' + line, ...(log ? { k: log[0], p: log[1] } : {}) });   // m: English (the connector, older apps); k, p: the words in the learner's language (NoemaI18n.t(k, p)) if (rec.log.length > 200) rec.log = rec.log.slice(-200);
       return line;
     }
     /** The course as it will be once the app has merged the answers waiting in the inbox (the connector works on this). */
@@ -4074,6 +4173,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
       langCoursePaths: coursePaths, langOrderConflicts: orderConflicts, checkLangAnswer: checkAnswer, applyLangAnswer: applyAnswer, langMerged: merged, langInboxKey: inboxKey, langClaimKey: claimKey,
       langTaskSpec: taskSpec, langTaskText: taskText, langMessage: message, langWordLines: wordLines };
   })();
+  /* i18n-ignore-end */
   API.GEN = GEN;
   Object.assign(API, LANG_P8);   // P8 — Through Claude: account courses, tasks, checks, merges
   /* ---------- P9 — Listening and speaking: speech synthesis, dictation, shadowing, speech recognition (docs/LANGUAGES.md §3.9, §6.8, §7.5) ----------
@@ -4154,7 +4254,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
     });
     return { chars, bases, written, spoken, sure };
   }
-  const SP_TONE_NAME = { 1: '1st tone', 2: '2nd tone', 3: '3rd tone', 4: '4th tone', 5: 'neutral tone' };
+  const SP_TONE_NAME = lcLabels({ 1: 'lc.expl.tone.1', 2: 'lc.expl.tone.2', 3: 'lc.expl.tone.3', 4: 'lc.expl.tone.4', 5: 'lc.expl.tone.5' });
 
   /* ---------- the items (§6.8) ---------- */
   const spGloss = (C, code, id) => glossOf(C, code, id);
@@ -4188,11 +4288,11 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
         if (i % 2 === 0) {   // hear_word: choose the written word — the same part of speech and a similar sound first
           const near = o => (X.lex[o].pos === lx.pos ? 0 : 2) + (soundKey(C, code, o)[0] === key[0] ? 0 : 1) + rng();
           const wrong = uniqStr(others.sort((a, b) => near(a) - near(b)).map(o => nfc(X.lex[o].lemma))).slice(0, 3);
-          if (wrong.length >= 2) out.push({ type: 'listen_pick', kind: 'hear_word', lang: code, lex: id, say: lx.lemma, ask: 'Listen — which word is it?', options: shuffled([nfc(lx.lemma), ...wrong], rng), answer: nfc(lx.lemma), why: `${lx.lemma} — ${g}`, track: 'r', ...fn });
+          if (wrong.length >= 2) out.push({ type: 'listen_pick', kind: 'hear_word', lang: code, lex: id, say: lx.lemma, ask: lcU('lc.ui.ask.listenWord'), options: shuffled([nfc(lx.lemma), ...wrong], rng), answer: nfc(lx.lemma), why: `${lx.lemma} — ${g}`, track: 'r', ...fn });
         } else {   // hear_meaning: choose what it means (no meaning of a word that sounds the same)
           const same = new Set(homophones(C, code, id).map(o => spGloss(C, code, o)));
           const wrong = uniqStr(shuffled(others, rng).map(o => spGloss(C, code, o))).filter(x => x && x !== g && !same.has(x)).slice(0, 3);
-          if (wrong.length >= 2) out.push({ type: 'listen_pick', kind: 'hear_meaning', lang: code, lex: id, say: lx.lemma, ask: 'Listen — what does it mean?', options: shuffled([g, ...wrong], rng), answer: g, why: `${lx.lemma} — ${g}`, track: 'r', ...fn });
+          if (wrong.length >= 2) out.push({ type: 'listen_pick', kind: 'hear_meaning', lang: code, lex: id, say: lx.lemma, ask: lcU('lc.ui.ask.listenMeaning'), options: shuffled([g, ...wrong], rng), answer: g, why: `${lx.lemma} — ${g}`, track: 'r', ...fn });
         }
       });
     } else if (type === 'listen_tone') {
@@ -4203,9 +4303,10 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
         const ats = t.chars.map((_, i) => i).filter(i => t.sure[i]); if (!ats.length) continue;
         const changed = ats.filter(i => t.spoken[i] !== t.written[i]), at = changed.length ? changed[0] : ats[Math.floor(rng() * ats.length)];
         const lx = X.lex[id], said = t.bases.map((b, i) => withTone(b, t.spoken[i])).join(' ');
-        out.push({ type: 'listen_tone', kind: 'tone', lang: code, lex: id, say: lx.lemma, chars: t.chars, at, gloss: spGloss(C, code, id), ask: `Listen — the tone of ${t.chars[at]} (syllable ${at + 1} of ${t.chars.length})?`,
+        out.push({ type: 'listen_tone', kind: 'tone', lang: code, lex: id, say: lx.lemma, chars: t.chars, at, gloss: spGloss(C, code, id), ask: lcU('lc.ui.ask.listenTone', { ch: t.chars[at], at: at + 1, n: t.chars.length }),
           options: ['1', '2', '3', '4', '5'], answer: String(t.spoken[at]), written: String(t.written[at]),
-          why: `${lx.lemma} — said ${said}` + (t.spoken[at] !== t.written[at] ? ` (written ${lx.pinyin}: ${t.chars[at]} ${SP_TONE_NAME[t.written[at]]} → ${SP_TONE_NAME[t.spoken[at]]} in speech)` : ` · ${t.chars[at]}: ${SP_TONE_NAME[t.spoken[at]]}`), track: 'r', ...fn });
+          why: t.spoken[at] !== t.written[at] ? lcX('lc.expl.toneChanged', { word: lx.lemma, said, pinyin: lx.pinyin, ch: t.chars[at], from: SP_TONE_NAME[t.written[at]], to: SP_TONE_NAME[t.spoken[at]] })
+            : lcX('lc.expl.toneSaid', { word: lx.lemma, said, ch: t.chars[at], tone: SP_TONE_NAME[t.spoken[at]] }), track: 'r', ...fn });
       }
     } else if (type === 'dictation') {
       const words = spWords(C, L, code, k, { ...opts, rng }).sort((a, b) => (k.P.has(b) ? 1 : 0) - (k.P.has(a) ? 1 : 0)), ss = opts.wordsOnly ? [] : shuffled(spSentences(C, code, k, opts), rng);
@@ -4222,7 +4323,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
         const key = conceptKey(s), others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && conceptKey(o) !== key), rng);
         const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).filter(x => x !== s.gloss).slice(0, 3);
         if (wrong.length < 2) continue;
-        out.push({ type: 'listen_meaning', kind: 'hear_sentence', lang: code, sentence: s.id, say: s.text, ask: 'Listen — what does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss, unknown: spUnknownOf(s, k), ...fn });
+        out.push({ type: 'listen_meaning', kind: 'hear_sentence', lang: code, sentence: s.id, say: s.text, ask: lcU('lc.ui.ask.listenMeaning'), options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss, unknown: spUnknownOf(s, k), ...fn });
       }
     } else if (type === 'shadowing' || type === 'speak') {
       const recog = type === 'speak' && spCanRecognize(caps, code), as = type === 'speak' && !recog ? 'shadowing' : type;

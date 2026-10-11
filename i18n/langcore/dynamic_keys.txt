@@ -1,0 +1,8 @@
+# keys engine/langcore.js builds at run time (docs/i18n.md §5.1)
+lc.expl.tag.*
+lc.expl.owner.*
+lc.expl.pos.*
+lc.expl.dim.*
+lc.expl.reg.*
+lc.expl.phraseKind.*
+lc.ui.connotation.*
