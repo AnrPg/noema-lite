@@ -10,7 +10,9 @@ const T = { literal: 0, argument: 1, number: 2, date: 3, time: 4, select: 5, plu
 
 /** The UI locales (BCP 47) in the order of docs/i18n.md. */
 const LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT'];
-const components = () => fs.readdirSync(CAT_DIR).filter(d => fs.statSync(path.join(CAT_DIR, d)).isDirectory()).sort();
+/** The catalog components: every folder of i18n/ except i18n/glossary (the translators' term lists, CSV for Weblate). */
+const NOT_COMPONENTS = new Set(['glossary']);
+const components = () => fs.readdirSync(CAT_DIR).filter(d => !NOT_COMPONENTS.has(d) && fs.statSync(path.join(CAT_DIR, d)).isDirectory()).sort();
 const readArb = f => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { if (e.code === 'ENOENT') return null; throw new Error(f + ': ' + e.message); } };
 /** {component: {locale: arb, …}} and the drafts {component: {locale: arb}}. */
 function loadAll() {
