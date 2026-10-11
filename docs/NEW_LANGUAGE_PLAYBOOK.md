@@ -199,8 +199,9 @@ named here:
    to three sentences or a short structured list (R2), examples in <code>). seeAlso notes compare course languages only (they are general texts).
 3. Bridges: cognates and loans between <code> and the other course languages that the etymologies support
    (tests/lang_poly.js shows how they are found); report false friends.
-Checks: python3 tools/validate_lang.py library/languages/<course> --strict --d19-strict --lang <code>; python3 tools/lang_refcheck.py
+Checks: python3 tools/validate_lang.py library/languages/<course> --strict --lang <code>; python3 tools/lang_refcheck.py
 library/languages/<course>; node tests/lang_poly.js .; commit; report the counts.
+(The D19 rules are errors by default; --d19-lenient, which makes them warnings, is only for test fixtures — never for a course.)
 ```
 
 ## Prompt 14 — Audit
@@ -213,7 +214,7 @@ Audit <LANG> (<code>) in library/languages/<course> as a demanding reviewer, the
 3. Open the course in the app (tests/lang_walkthrough.js shows how) with <code> active, phone 390 px and desktop: lessons,
    word cards, grammar pages, the session, ⫴ parallel lanes — the new lane must keep the same levels as the others.
 4. D19: python3 tools/lang_facade.py lint library/languages/<course> (nothing for <code>), python3 tools/validate_lang.py
-   library/languages/<course> --strict --d19-strict --lang <code>, python3 tools/lang_facade.py roundtrip library/languages/<course>;
+   library/languages/<course> --strict --lang <code>, python3 tools/lang_facade.py roundtrip library/languages/<course>;
    read 10 contrast notes and 10 type notes of <code> as a learner of that language / type would.
 5. List what a native speaker should still check (idioms, register, regional words) in a short file
    docs/review/<code>-native-check.md.
