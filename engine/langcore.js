@@ -3316,7 +3316,13 @@
     const POS = new Set(['NOUN', 'PROPN', 'VERB', 'AUX', 'ADJ', 'ADV', 'PRON', 'DET', 'ADP', 'CCONJ', 'SCONJ', 'NUM', 'PART', 'INTJ', 'CLF', 'X']);
     const CONTENT = new Set(['NOUN', 'VERB', 'ADJ', 'ADV']);
     const GENDERED = new Set(['de', 'ar', 'he', 'fr', 'es', 'it', 'pt', 'ru', 'el', 'hi']);
-    // D18: the reference set (library/languages/_typology/reference.json) with the type of each language
+    // D19 (docs/language-packs.md): every grammar page has a contrast note for each supported native (the UI locales'
+    // languages) but its own language + the five type notes. strict: false while the library content is rewritten — then a
+    // page needs notes for at least D19.minNatives supported natives and the full list is reported only when strict is on.
+    const D19 = { natives: ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt'],
+      groups: ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic'], minNatives: 5, strict: false };
+    const d19Required = code => [...D19.natives.filter(c => c !== code), ...D19.groups];
+    // D18: the reference set (library/languages/_typology/reference.json) with the type of each language — source material since D19
     const REF = { el: 'fusional', ru: 'fusional', es: 'fusional', en: 'fusional', fr: 'fusional', de: 'fusional', hi: 'fusional', fa: 'fusional', mr: 'fusional', ar: 'fusional', he: 'fusional',
       tr: 'agglutinating', ja: 'agglutinating', ko: 'agglutinating', fi: 'agglutinating', hu: 'agglutinating', sw: 'agglutinating', lg: 'agglutinating', zh: 'isolating', vi: 'isolating', iu: 'polysynthetic' };
     const STATUS = new Set(['realized', 'periphrastic', 'absent']);
@@ -3511,19 +3517,30 @@
       const c = data.course, name = o.name || nameOf(code), plan = packagePlan(data, code, o.typ || null), dir = `work/lang/${c.id}`;
       const main = (o.files || [])[0]?.name || 'course.pack.js', T = '$T';
       const steps = [
-        { id: '1', title: 'Typology and phenomena', how: `the profile of ${code} in work/lang/_typology/languages.json (only if it is missing: a value for EVERY feature of _typology/features.json, WALS-based, its family and type) and the complete catalogue work/lang/_phenomena/${code}.json — every feature ${name} has AND lacks, tagged {feature, value}, kind has|lacks, notes for ≥ 8 reference languages of all four types, status "missing" (nothing is taught yet), distinctions and polysemy for the words the course needs (read core/fields/*.json). Model: the other catalogues in work/lang/_phenomena (and ${T}/library/languages/_phenomena). Check: python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}` },
+        { id: '1', title: 'Typology and phenomena', how: `the profile of ${code} in work/lang/_typology/languages.json (only if it is missing: a value for EVERY feature of _typology/features.json, WALS-based, its family and type) and the complete catalogue work/lang/_phenomena/${code}.json — every feature ${name} has AND lacks, tagged {feature, value}, kind has|lacks, neutral texts (D19: no language outside the course; comparisons as notes for the supported natives and the types), status "missing" (nothing is taught yet), distinctions and polysemy for the words the course needs (read core/fields/*.json). Model: the other catalogues in work/lang/_phenomena (and ${T}/library/languages/_phenomena). Check: python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}` },
         { id: '2', title: 'The facade', how: `${dir}/lang/${code}/language.json (name "${name}", nativeName, script, dir, tokenJoin, vowelMarks / romanization, typology, citationCells and paradigmCells per POS and class in UniMorph tags as the other languages use, extraTags, wordFeatures — EVERY parameter a word must state, per POS, each tied to its phenomenon, D14); add "${code}" to ${dir}/course.json languages (and defaults.depth). The reference checker reads the Wiktionary language name from language.json "name" (or "wiktionaryName"): test it on 20 common words (python3 -c "import sys; sys.path.insert(0,'${T}/scripts'); import lang_refcheck as R; print(R.fetch('${code}','<word>'))"). The app's engine (LANG_INFO, tokenizer clitics, script modules, keyboards, speech tag) is NOT in the sandbox: write down what ${name} would need there for the final report. Checks: python3 ${T}/scripts/validate_lang.py ${dir} --lang ${code} --alone (0 errors; missing words are warnings now) and lang_phenomena.py as above. No words, pages or sentences yet.` },
         ...plan.batches.map(b => ({ id: b.id, batch: b, title: `${b.kind === 'foundations' ? 'Foundations' : b.kind === 'field' ? 'Field ' + b.field : 'Core'} ${b.id}: ${b.nodes.join(', ')}`,
-          how: `python3 ${T}/scripts/mkbrief.py ${b.kind === 'foundations' ? 'foundations' : b.kind === 'field' ? 'field' : 'core'} --course-dir ${dir} --lang ${code} --batch ${b.id} --nodes ${b.nodes.join(',')} --sandbox > work/brief-${b.id}.txt — the sub-agent reads the brief completely and follows it: ${b.kind === 'field' ? 'the field in the other course languages as models; a rare item without a real word is an "absent" entry with what people say instead — never an invented word' : 'lesson by lesson: (A) the words with their full facade and profile, grounded in Wiktionary; (B) the grammar page of each function (status, blocks, ask yourself, traps, evidence, generators, seeAlso, typology tags, notes for ≥ 8 reference languages of all four types); (C) the sentences (≥ 15 per lesson); (D) the catalogue\'s status for what the lesson teaches'}${b.kind === 'core' ? '; before adding a word, search the lexicon for the concept id (D15)' : ''}; checks after EACH lesson.` })),
-        { id: 'links', title: 'Links across the course', how: `seeAlso both ways: every grammar page of ${code} points to the same point in the other course languages, and every other language's page of a function ${code} also has gets a seeAlso entry {lang: "${code}", fn, note} (one line: what is parallel or different) — in ${dir}/lang/<other>/grammar/*.json, nothing else of those languages; comparison notes for ${code} where ${code} is in _typology/reference.json; report cognates, loans and false friends with the other course languages. Checks: validate_lang.py ${dir} --strict --lang ${code} --alone, lang_refcheck.py.` },
+          how: `python3 ${T}/scripts/mkbrief.py ${b.kind === 'foundations' ? 'foundations' : b.kind === 'field' ? 'field' : 'core'} --course-dir ${dir} --lang ${code} --batch ${b.id} --nodes ${b.nodes.join(',')} --sandbox > work/brief-${b.id}.txt — the sub-agent reads the brief completely and follows it: ${b.kind === 'field' ? 'the field in the other course languages as models; a rare item without a real word is an "absent" entry with what people say instead — never an invented word' : 'lesson by lesson: (A) the words with their full facade and profile, grounded in Wiktionary; (B) the grammar page of each function (status, blocks, ask yourself, traps, evidence, generators, seeAlso, typology tags — neutral texts, and a contrast note for every supported native but ${code} and the five type notes, D19); (C) the sentences (≥ 15 per lesson); (D) the catalogue\'s status for what the lesson teaches'}${b.kind === 'core' ? '; before adding a word, search the lexicon for the concept id (D15)' : ''}; checks after EACH lesson.` })),
+        { id: 'links', title: 'Links across the course', how: `seeAlso both ways: every grammar page of ${code} points to the same point in the other course languages, and every other language's page of a function ${code} also has gets a seeAlso entry {lang: "${code}", fn, note} (one line: what is parallel or different) — in ${dir}/lang/<other>/grammar/*.json, nothing else of those languages; ${D19.natives.includes(code) ? `${name} is a supported native: a contrast note for ${code} on EVERY grammar page of the other course languages (D19)` : `${name} is not a supported native: no notes for ${code} are needed on the other pages (D19)`}; report cognates, loans and false friends with the other course languages. Checks: validate_lang.py ${dir} --strict --d19-strict --lang ${code} --alone, lang_refcheck.py, lang_facade.py lint ${dir}.` },
         { id: 'audit', title: 'Audit', how: `as a demanding reviewer: draw 40 random words and 40 random sentences of ${code}; check each against Wiktionary (lang_refcheck.fetch) and the grammar pages (forms, gender, plural, vowel marks / tones, the meaning of the sentence vs its gloss, the token annotation); run every check; write work/${code}-native-check.md — what a native speaker should still check (idioms, register, regional words); fix in place (smallest change) and run the checks again.` }];
-      const checks = (nodes = null) => [`python3 ${T}/scripts/validate_lang.py ${dir} --lang ${code} --alone${nodes ? ' --batch ' + nodes.join(',') : ''}`, `python3 ${T}/scripts/lang_refcheck.py ${dir} --lang ${code}`, `python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}`, `node ${T}/scripts/lang_readback.js ${dir} --lang ${code}   (if node is available)`];
+      const checks = (nodes = null) => [`python3 ${T}/scripts/validate_lang.py ${dir} --lang ${code} --alone${nodes ? ' --batch ' + nodes.join(',') : ''}`, `python3 ${T}/scripts/lang_refcheck.py ${dir} --lang ${code}`, `python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}`, `python3 ${T}/scripts/lang_facade.py lint ${dir}   (D19: nothing for ${code})`, `node ${T}/scripts/lang_readback.js ${dir} --lang ${code}   (if node is available)`];
       const get = (o.files || []).map(f => `curl -sSL -o work/${f.name} "${f.url}"`).join('\n');
       return `# Add ${name} (${code}) to “${c.title}” — one prompt, the whole language (noema-lite, docs/LANGUAGES.md §10.2)
 
 You build a complete **language package** for ONE language of ONE course and upload it into the learner's noema-lite account;
 the app then adds ${name} to the course by itself on every device. This is the skill **noema-language-builder** specialised for
 this course and language: follow it step by step, in order.
+
+## First rule — D19: ${name} is taught through each learner's native language
+Supported natives = the app's UI locales: ${D19.natives.join(' ')}. A learner with a supported native reads the explanations in
+it and gets comparisons with it only; any other learner gets comparisons with the type / branch / family of their language
+(${T}/references/language-packs.md). So everything you and every sub-agent write is **neutral**: a general text (summary,
+blocks, procedure, traps, quiz, seeAlso, facts, word profiles, features.*.none, phenomena) names NO language outside the
+course and never explains through English grammar ("no ‘do’", "-ing", "is not ‘the’"). Every comparison is a **contrast
+note** {for, rel, text}: on EVERY grammar page of ${code} one for each of ${D19.natives.filter(x => x !== code).join(' ')} and one each for
+${D19.groups.join(', ')} (a type note names no language: "If your language …"); profile.notes on a word that invites a
+comparison; notes on phenomena. Notes are written in English with examples in the note's own language. The translations
+into the learners' languages (locale facades) are not part of the package.
 
 ## Be honest about what this is
 * It is the work of ≈ ${steps.length} batches (docs/NEW_LANGUAGE_PLAYBOOK.md), each a careful session with an audit turn — **hours**
@@ -3535,11 +3552,11 @@ this course and language: follow it step by step, in order.
 * If the run is interrupted, it resumes from the progress file (below). Tell the learner how far you got.
 
 ## Binding rules
-Read ${T}/references/LANGUAGE_RULES.md (D1–D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D19 apply to the
+Read ${T}/references/LANGUAGE_RULES.md (D1–D20) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
 package: the language fills the course's existing nodes and functions in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a concept
-(D15); no built-in point of view (D16); notes for ≥ 8 reference languages of all four types on every grammar page (D18);
-every word used is in the lexicon (D19).
+(D15); no built-in point of view (D16); taught through the native language — neutral texts, contrast notes for every supported
+native and the five type notes on every grammar page (D19); every word used is in the lexicon (D20).
 
 ## Setup (once)
 \`\`\`
@@ -3566,7 +3583,9 @@ files written, counts, doubtful cases." When it finishes, start a **second sub-a
 > Audit what was just written for step <id>: (1) go through ${T}/references/LANGUAGE_RULES.md §C point by point for each
 > file; (2) pick 10 words and 10 sentences at random and check them again against Wiktionary and the grammar pages;
 > (3) look for words used in sentences that have no lexeme, paradigm cells left empty, glosses that do not match the
-> sentence, notes that compare with a language you are not sure about; (4) fix, re-run the checks, and report what changed.
+> sentence, notes that compare with a language you are not sure about, general texts that name a language outside the course
+> or explain through English, grammar pages without a note for every supported native and type (D19); (4) fix, re-run the
+> checks, and report what changed.
 Then run the checks yourself; only when they pass mark the step "done".
 
 ${steps.map((s, i) => `### ${i + 1}. ${s.id === '1' || s.id === '2' ? 'Prompt ' + s.id + ' — ' : ''}${s.title}\n${s.how}\nChecks: ${s.batch ? checks(s.batch.nodes).join(' · ') : s.id === '1' ? 'lang_phenomena.py (no ❌)' : checks().slice(0, 1).join(' · ')}`).join('\n\n')}
@@ -3574,7 +3593,8 @@ ${plan.draft.length ? `\nNodes still being written in the course (course.draft �
 
 ## Final checks, the package, the upload
 \`\`\`
-python3 ${T}/scripts/validate_lang.py ${dir} --strict --lang ${code} --alone   # 0 errors
+python3 ${T}/scripts/validate_lang.py ${dir} --strict --d19-strict --lang ${code} --alone   # 0 errors (D19 included)
+python3 ${T}/scripts/lang_facade.py lint ${dir}                                     # D19: nothing for ${code}
 python3 ${T}/scripts/lang_refcheck.py ${dir} --lang ${code}                     # no disagreement (ref.override only with a reason)
 python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}         # no ❌
 node ${T}/scripts/lang_readback.js ${dir} --lang ${code}                        # the app's runtime reads it back
@@ -3587,7 +3607,7 @@ package again, upload again. When it is accepted, the app adds ${name} to the co
 
 ## Report to the learner (short)
 What was written (words, absent entries, grammar pages, sentences per batch), what is absent and why, the words and
-facts you were unsure of or left out, every ref.override with its reason, what the app's engine would still need for
+facts you were unsure of or left out, every ref.override with its reason, the D19 notes written (per supported native and type), what the app's engine would still need for
 ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-native-check.md — what a native speaker should check.`;
     }
 
@@ -3824,10 +3844,12 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
       if (g.function !== fid) E.push(`${where}: function must be “${fid}”`);
       if (!STATUS.has(g.status)) E.push(`${where}: status must be one of realized, periphrastic, absent`);
       if (!str(g.summary)) E.push(`${where}: “summary” is required (text)`);
-      const fors = new Set([...(g.notes || []), ...(g.blocks || []).flatMap(b => isObj(b) ? b.notes || [] : [])].map(n => n?.for).filter(Boolean));
-      for (const n of [...(g.notes || []), ...(g.blocks || []).flatMap(b => isObj(b) ? b.notes || [] : [])]) if (!str(n?.for) || !str(n?.text)) E.push(`${where}: a comparison note needs “for” and “text”`);
-      const refs = [...fors].filter(f => REF[f]), types = new Set([...refs.map(f => REF[f]), ...[...fors].filter(f => String(f).startsWith('type:')).map(f => f.slice(5))]);
-      if (refs.length < 8 || !TYPES.every(t => types.has(t))) E.push(`${where}: comparison notes for the reference set: ${refs.length} of at least 8 languages, types ${[...types].sort().join(', ') || 'none'} of all four (D18: ${Object.keys(REF).join(' ')})`);
+      for (const n of [...(g.notes || []), ...(g.blocks || []).flatMap(b => isObj(b) ? b.notes || [] : [])]) if (!str(n?.for) || !str(n?.text)) E.push(`${where}: a contrast note needs “for” and “text”`);
+      // D19: the top-level notes — one for every supported native but the page's language, and the five type notes
+      const fors = new Set((g.notes || []).filter(n => str(n?.text)).map(n => n?.for).filter(Boolean));
+      const missing = d19Required(code).filter(f => !fors.has(f)), natives = D19.natives.filter(c => c !== code && fors.has(c)).length;
+      if (missing.length && (D19.strict || natives < D19.minNatives))
+        E.push(`${where}: contrast notes (D19) missing: ${missing.join(', ')} — every grammar page has a note {for, rel, text} for each supported native but ${code} (${D19.natives.filter(c => c !== code).join(' ')}) and for ${D19.groups.join(', ')}${D19.strict ? '' : ` (now at least ${D19.minNatives} supported natives: ${natives})`}`);
       for (const gen of g.generators || []) {
         if (!GENS.has(gen?.type)) E.push(`${where}: unknown exercise type “${gen?.type}”`);
         if (gen?.type === 'inflect' && !gen.pos) E.push(`${where}: inflect needs pos`);
@@ -3922,7 +3944,7 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
         if (!str(f?.id) || fns[f.id]) { E.push(`core/functions: function id missing or used twice (${f?.id})`); continue; }
         fns[f.id] = f;
         if (!str(f.title)) E.push(`core/functions/${f.id}.json: “title” is required`);
-        if (!CATS.has(f.category)) E.push(`core/functions/${f.id}.json: category must be one of ${[...CATS].join(', ')} (D19)`);
+        if (!CATS.has(f.category)) E.push(`core/functions/${f.id}.json: category must be one of ${[...CATS].join(', ')} (D20)`);
       }
       for (const f of Object.values(fns)) for (const a of f.after || []) if (!fns[a]) E.push(`core/functions/${f.id}.json: unknown function “${a}” in after`);
       for (const f of ans.frames || []) { if (!str(f?.id) || frames[f.id]) E.push(`core/frames.json: frame id missing or used twice (${f?.id})`); else frames[f.id] = f; if (!str(f?.meaning)) E.push(`core/frames.json · ${f?.id}: “meaning” is required`); }
@@ -4078,8 +4100,9 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     const claimKey = (cid, tid) => `${CLAIM}${cid}:${tid}`;
 
     /* ---------- the task as text (the connector, a copied task, the in-app runner) ---------- */
-    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D19 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
-- D1 every gloss, rule text, trap and feedback is written in the course's explanation language.
+    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D20 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
+- D19 FIRST — the language is taught through each learner's NATIVE language (docs/language-packs.md): supported natives = ${D19.natives.join(' ')} (the app's UI locales). Every general text you write (summary, blocks, procedure, traps, quiz, seeAlso, facts, word profiles, features.*.none, phenomena) names NO language outside the course and never explains through English grammar ("no ‘do’", "-ing", "is not ‘the’"): it says what the language does (the course languages may be compared; an etymology may name a source language). Every comparison is a contrast note {for, rel: same|similar|different|new|trap, text}: on EVERY grammar page one for each supported native except the page's language and one each for ${D19.groups.join(', ')} (a type note names no language: "If your language …"); a word that invites a comparison gets profile.notes. A note names only its own language (examples in it), the course languages and the point. Translations into the learners' languages (locale facades) are separate tasks.
+- D1 every gloss, rule text, trap and feedback is written once in the master facade: English (the course's explainLang), neutral (D19); learners read it in their own language through locale facades.
 - D3/D5 correctness over speed: every form, gender, plural, vowel mark, tone and fact is grounded (Wiktionary via kaikki.org — tools/lang_refcheck.py —, CC-CEDICT, reference grammars); leave out what you are not sure of; ref.override only with a reason. You never invent an answer key: exercises are made by the app from the paradigms and sentences you store.
 - D6 UniMorph cells (N;NOM;SG, V;PRS;3;SG) and Universal Dependencies parts of speech.
 - D9 complete thematic word groups that combine with the words already taught (verbs take the nouns taught, adjectives fit them).
@@ -4087,8 +4110,8 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
 - D14 every word states its language's whole facade: features for every parameter of wordFeatures (a value, or {"none": "<why>"}); several words for one concept each give contrasts (one axis per concept).
 - D15 every distinct meaning of a word is its own concept (pending until a node teaches it); a nuance says "of" the sense it belongs to.
 - D16 no built-in point of view: texts describe the language itself, never "unlike English / as in Greek"; comparisons go into notes.
-- D18 every grammar page has comparison notes ({for, rel: same|similar|different|new|trap, text}) for at least 8 languages of the reference set covering all four types: fusional el ru es en fr de hi fa mr ar he · agglutinating tr ja ko fi hu sw lg · isolating zh vi · polysynthetic iu.
-- D19 every word used anywhere is in the lexicon with its full facade; sentences for the other aspects may hold up to ⌈30 %⌉ unknown words; every field brings ≥ 2 sentences for every non-vocabulary node before it.
+- D18 the learner's languages decide what is familiar; the notes they see are those for their native language (D19) — notes for other languages of the old reference set (fa mr tr ko fi hu sw lg vi iu) are source material only.
+- D20 every word used anywhere is in the lexicon with its full facade; sentences for the other aspects may hold up to ⌈30 %⌉ unknown words; every field brings ≥ 2 sentences for every non-vocabulary node before it.
 - ar and he forms are stored fully vocalized; zh words give pinyin (syllables separated by spaces), trad, and measure words for nouns.`;
     const fmtForms = x => { const f = x.forms || {}; const ks = Object.keys(f); return ks.length ? ' {' + ks.map(k => `${k}=${f[k]}`).join(', ') + '}' : ''; };
     /** The words of a language written so far (before a node in course order when `before` is given): one line each, with all forms. */
@@ -4104,7 +4127,7 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     /** {id, kind, title, system, prompt, schema} — the prompt says everything but how to deliver the answer. */
     function taskSpec(rec, data, task, { peers = [], courseUrl = '' } = {}) {
       const c = data.course, code = task.lang, lj = code ? data.langs?.[code]?.language : null, typ = lj?.typology;
-      const concepts = conceptsOf(data), head = `Course “${c.title}” (${c.id}) · languages: ${c.languages.map(x => `${nameOf(x)} (${x})`).join(', ')} · explanations in ${nameOf(c.explainLang)} (${c.explainLang})${(c.knownLanguages || []).length ? ' · the learner already speaks: ' + c.knownLanguages.join(', ') : ''}`;
+      const concepts = conceptsOf(data), head = `Course “${c.title}” (${c.id}) · languages: ${c.languages.map(x => `${nameOf(x)} (${x})`).join(', ')} · explanations in ${nameOf(c.explainLang)} (${c.explainLang})${(c.knownLanguages || []).length ? ' · the learner already speaks: ' + c.knownLanguages.join(', ') + ' (familiarity only — texts stay neutral, D19)' : ''}`;
       const system = `You write content for a noema-lite language course (docs/LANGUAGES.md). Correctness first: every form, gender, plural, vowel mark, tone and fact is grounded in reference data. Answer only through the requested JSON structure.`;
       const frames = (data.frames || []).map(f => `${f.id}: ${f.meaning}`).join('\n') || '(none yet)';
       const fnsList = (data.functions || []).map(f => `${f.id} (${f.category}) — ${f.title}`).join('\n') || '(none yet)';
@@ -4118,17 +4141,17 @@ Depth per language: ${Object.entries(c.defaults?.depth || {}).map(([k, v]) => `$
       } else if (task.kind === KIND.node) {
         const n = (data.nodes || []).find(x => x.id === task.node) || { concepts: [] };
         title = `${n.title} (${task.node}) in ${nameOf(code)}`;
-        what = `Write node ${task.node} in ${nameOf(code)} (${code}): \`lexicon\` = lang/${code}/lexicon/${task.node}.json — a lexeme for every concept of the node (or an "absent" entry with reason and what is said instead), each with id "${code}:<lemma>", lemma, pos, senses (concept ids; every meaning a concept, D15), forms (every cell of paradigmCells for its part of speech; fully vocalized for ar/he), gender, features (the whole facade, D14), contrasts when a concept has several words, ref, and its profile (§4.6) — and \`bank\`: sentences (lang/${code}/bank) that combine the new words with the earlier ones (at least 3 per new content word over the course's frames, variants for negation / questions / plural where the functions allow), every token {t, l, f} equal to its paradigm cell, ids "${code}.${task.node}.001"…, gloss in ${nameOf(c.explainLang)}; list in "functions" only grammar a word of the sentence shows (by the realization's evidence).` + (n.kind === 'lesson' ? ` This is a lesson: give in \`grammar\` the realization of every function of the lesson in ${code} that is not written yet (${lessonFns(n, code, typ).filter(f => !data.langs[code].grammar[f]).join(', ') || 'none'}).` : '');
+        what = `Write node ${task.node} in ${nameOf(code)} (${code}): \`lexicon\` = lang/${code}/lexicon/${task.node}.json — a lexeme for every concept of the node (or an "absent" entry with reason and what is said instead), each with id "${code}:<lemma>", lemma, pos, senses (concept ids; every meaning a concept, D15), forms (every cell of paradigmCells for its part of speech; fully vocalized for ar/he), gender, features (the whole facade, D14), contrasts when a concept has several words, ref, and its profile (§4.6) — and \`bank\`: sentences (lang/${code}/bank) that combine the new words with the earlier ones (at least 3 per new content word over the course's frames, variants for negation / questions / plural where the functions allow), every token {t, l, f} equal to its paradigm cell, ids "${code}.${task.node}.001"…, gloss in ${nameOf(c.explainLang)}; list in "functions" only grammar a word of the sentence shows (by the realization's evidence). D19: the profiles name no language outside the course (cognates, false friends, "like X" → profile.notes for the supported natives).` + (n.kind === 'lesson' ? ` This is a lesson: give in \`grammar\` the realization of every function of the lesson in ${code} that is not written yet (${lessonFns(n, code, typ).filter(f => !data.langs[code].grammar[f]).join(', ') || 'none'}) — with its D19 contrast notes.` : '');
         ctx = `### The node\n${nodeLine(n, code, typ)}\nConcepts:\n${(n.concepts || []).map(cid => `- ${cid}: ${concepts[cid]?.gloss || ''}${concepts[cid]?.subgroup ? ' [' + concepts[cid].subgroup + ']' : ''}${concepts[cid]?.note ? ' — ' + concepts[cid].note : ''}`).join('\n')}\n\n### language.json of ${code}\n${JSON.stringify({ typology: lj?.typology, dir: lj?.dir, tokenJoin: lj?.tokenJoin, capitalizeFirst: lj?.capitalizeFirst, vowelMarks: lj?.vowelMarks, paradigmCells: lj?.paradigmCells, citationCells: lj?.citationCells, extraTags: lj?.extraTags, wordFeatures: lj?.wordFeatures })}\n\n### The words of ${code} written before this node (id · lemma · pos · concepts {cell=form})\n${wordLines(data, code, { before: task.node }).join('\n') || '(none yet)'}\n\n### Grammar realized in ${code} (a sentence may list these when a word shows them)\n${Object.entries(data.langs[code].grammar || {}).map(([fid, g]) => `${fid}: ${g.status}; evidence ${JSON.stringify(g.evidence || {})}`).join('\n') || '(none yet)'}`;
       } else if (task.kind === KIND.function) {
         const f = (data.functions || []).find(x => x.id === task.fn) || {};
         title = `${f.title || task.fn} (${task.fn}) in ${nameOf(code)}`;
-        what = `Write the realization of ${task.fn} in ${nameOf(code)}: \`grammar\` = lang/${code}/grammar/${task.fn}.json (function, status realized | periphrastic | absent, summary, blocks, procedure.askYourself, traps, evidence {tags | lemmas | punct, exclude?}, paradigmCells, needs, generators — exercise ids of §6 —, notes for the reference set, D18; an absent point says how the language expresses the meaning instead) — and \`bank\`: at least 12 sentences that show it (each lists ${task.fn} in functions and a word of it shows the evidence), made only of words of the lexicon below.`;
+        what = `Write the realization of ${task.fn} in ${nameOf(code)}: \`grammar\` = lang/${code}/grammar/${task.fn}.json (function, status realized | periphrastic | absent, summary, blocks, procedure.askYourself, traps, evidence {tags | lemmas | punct, exclude?}, paradigmCells, needs, generators — exercise ids of §6 —, contrast notes for every supported native but ${code} (${D19.natives.filter(x => x !== code).join(' ')}) and ${D19.groups.join(', ')}, D19 — neutral general texts; an absent point says how the language expresses the meaning instead) — and \`bank\`: at least 12 sentences that show it (each lists ${task.fn} in functions and a word of it shows the evidence), made only of words of the lexicon below.`;
         ctx = `### The function\n${JSON.stringify(f)}\n\n### language.json of ${code}\n${JSON.stringify({ typology: lj?.typology, tokenJoin: lj?.tokenJoin, paradigmCells: lj?.paradigmCells, extraTags: lj?.extraTags })}\n\n### The words of ${code} (id · lemma · pos · concepts {cell=form})\n${wordLines(data, code).join('\n') || '(none yet)'}${data.langs[code]?.grammar?.[task.fn] ? `\n\n### The realization written so far (improve it, keep what is right)\n${JSON.stringify(data.langs[code].grammar[task.fn])}` : ''}`;
       } else if (task.kind === KIND.compare) {
         const f = (data.functions || []).find(x => x.id === task.fn) || {};
         title = `${f.title || task.fn} (${task.fn}) across the course languages`;
-        what = `Write \`compare\` = compare/${task.fn}.json: {function: "${task.fn}", rows: [{aspect, cells: {<language code>: text}}], notes?} — one row per aspect of the point (form, position, agreement, what it marks, what is absent …), every course language side by side, neutral (D16), examples in the languages themselves.`;
+        what = `Write \`compare\` = compare/${task.fn}.json: {function: "${task.fn}", rows: [{aspect, cells: {<language code>: text}}], notes?} — one row per aspect of the point (form, position, agreement, what it marks, what is absent …), every course language side by side, neutral (D16, D19: no language outside the course), examples in the languages themselves.`;
         ctx = c.languages.map(L => `### ${nameOf(L)} (${L})\n${data.langs[L]?.grammar?.[task.fn] ? JSON.stringify({ status: data.langs[L].grammar[task.fn].status, summary: data.langs[L].grammar[task.fn].summary, traps: data.langs[L].grammar[task.fn].traps }) : '(not written yet)'}`).join('\n\n');
       } else {
         const f = (data.functions || []).find(x => x.id === task.fn) || {}, g = data.langs?.[code]?.grammar?.[task.fn] || {};
@@ -4166,7 +4189,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
       return `Use the noema-lite connector to write my noema-lite language course “${rec.title}” (course_id ${rec.id}): ${n ? `do the next ${count > 1 ? Math.min(count, n) + ' queued tasks' : 'queued task'} (${n} waiting)` : 'see what is left to do'}.\nCall noema_lang_task with course_id "${rec.id}" and follow what it returns — check every answer with the toolkit (validate_lang.py, lang_refcheck.py) before noema_lang_submit; after each accepted answer call noema_lang_task again. Stop after ${count > 1 ? count + ' tasks' : 'one task'} or when it says there is nothing left. Do not ask me questions — choose sensible defaults.`;
     }
 
-    return { LANGJOBS: { FORMAT, DATA, PATCH, PACK, IN, CLAIM, LEASE, KIND, SCHEMA, REF },
+    return { LANGJOBS: { FORMAT, DATA, PATCH, PACK, IN, CLAIM, LEASE, KIND, SCHEMA, REF, D19 },
       langApplyPackage: applyPackage, checkLangPackage: checkPackage, langPackagePlan: packagePlan, langPackageGuide: packageGuide, langPackKey: packKey, langPackPath: packPath,
       langNewCourseId: newCourseId, langNewCourse: newCourse, langLibraryRecord: libraryRecord, langEmptyPatch: emptyPatch, langApplyPatch: applyPatch,
       langQueue: queueTask, langOpenTasks: order, langSettle: settle, langWork: work, langTaskById: byId, langNext: next, langNeeds: needs, langQueueNight: queueNight, langRefillRequest: refillRequest,
