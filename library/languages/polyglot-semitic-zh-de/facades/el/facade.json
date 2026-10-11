@@ -7,9 +7,9 @@
  "coverage": {
   "1": {
    "total": 35228,
-   "done": 31988,
+   "done": 32135,
    "stale": 124,
-   "missing": 3116
+   "missing": 2969
   },
   "2": {
    "total": 43782,
@@ -24,7 +24,7 @@
    "missing": 4172
   }
  },
- "built": "2026-10-11T16:19:07Z",
+ "built": "2026-10-11T16:21:40Z",
  "files": [
   "_phenomena/facades/el/ar.json",
   "_phenomena/facades/el/de.json",
