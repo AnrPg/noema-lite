@@ -36,51 +36,62 @@ export function sniff(b) {
 }
 
 const IMG = () => globalThis.NoemaImgLib;
-const out = (status, msg, extra = {}) => new Response(msg, { status, headers: { 'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', ...extra } });
+const out = (status, msg, extra = {}) => new Response(msg, { status, headers: { 'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', ...extra } });   // i18n-ignore
+/** A refusal with a stable code (docs/i18n.md §6, contract v1; the app shows t('err.' + code, params)):
+    a client that accepts JSON gets { error: { code, params, message } }; any other client (older apps, scripts) gets the English
+    message as plain text, as before — with the code in x-error-code and the params (URI-encoded JSON) in x-error-params. */
+const ERR_HEADERS = { 'x-error-code': '', 'x-error-params': '', 'access-control-expose-headers': 'x-error-code, x-error-params, x-final-url' };   // i18n-ignore
+export function fail(req, status, code, params, message) {
+  const h = { ...ERR_HEADERS, 'x-error-code': code, 'x-error-params': encodeURIComponent(JSON.stringify(params || {})) };
+  if (/application\/json/i.test(req.headers.get('accept') || '')) return new Response(JSON.stringify({ error: { code, params: params || {}, message } }), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'access-control-allow-origin': '*', ...h } });   // i18n-ignore
+  return out(status, message, h);
+}
 
 export default async function handler(req) {
   const me = new URL(req.url);
   const fileMode = me.pathname.endsWith('/api/file'); const LIMIT = fileMode ? MAX_FILE : MAX;
   if (req.method === 'OPTIONS') return out(204, '', { 'access-control-allow-methods': 'GET' });
-  if (req.method !== 'GET') return out(405, 'GET only');
+  /* i18n-ignore-start */   // the English message of each code (i18n/errors/en.arb err.img.* has the same words)
+  if (req.method !== 'GET') return fail(req, 405, 'img.method', {}, 'GET only');
   // only this site's own pages (browsers always send Origin or Referer for these requests)
   const from = req.headers.get('origin') || req.headers.get('referer') || '';
-  try { if (from && new URL(from).host !== me.host) return out(403, 'only for noema-lite pages'); } catch (e) { return out(403, 'bad origin'); }
+  try { if (from && new URL(from).host !== me.host) return fail(req, 403, 'img.origin', {}, 'only for noema-lite pages'); } catch (e) { return fail(req, 403, 'img.bad_origin', {}, 'bad origin'); }
   if (me.pathname.endsWith('/api/imgsearch')) {
     const q = (me.searchParams.get('q') || '').slice(0, 200), n = Math.min(30, Math.max(1, +me.searchParams.get('n') || 12));
     const sources = (me.searchParams.get('sources') || '').split(',').map(x => x.trim()).filter(Boolean);
-    if (!q) return out(400, 'q parameter missing');
+    if (!q) return fail(req, 400, 'img.no_query', {}, 'q parameter missing');
     const r = await IMG().searchImages(q, { n, sources: sources.length ? sources : null });
     return new Response(JSON.stringify(r), { status: 200, headers: { 'content-type': 'application/json; charset=utf-8', 'access-control-allow-origin': '*', 'cache-control': 'public, max-age=3600' } });
   }
   let target;
-  try { target = new URL(IMG() && !fileMode ? IMG().resolvePictureUrl(me.searchParams.get('url') || '') : me.searchParams.get('url') || ''); } catch (e) { return out(400, 'url parameter missing or invalid'); }
+  try { target = new URL(IMG() && !fileMode ? IMG().resolvePictureUrl(me.searchParams.get('url') || '') : me.searchParams.get('url') || ''); } catch (e) { return fail(req, 400, 'img.bad_url', {}, 'url parameter missing or invalid'); }
   let pageHops = 0;
   for (let hop = 0; hop < 6; hop++) {
-    if (!/^https?:$/.test(target.protocol) || target.username || target.password) return out(400, 'only plain http(s) urls');
-    if (blockedHost(target.hostname) && !globalThis.NOEMA_IMG_ALLOW_LOCAL) return out(400, 'this address is not allowed');   // (the flag exists only in the test emulator)
+    if (!/^https?:$/.test(target.protocol) || target.username || target.password) return fail(req, 400, 'img.scheme', {}, 'only plain http(s) urls');
+    if (blockedHost(target.hostname) && !globalThis.NOEMA_IMG_ALLOW_LOCAL) return fail(req, 400, 'img.blocked', {}, 'this address is not allowed');   // (the flag exists only in the test emulator)
     let r;
     try {
       const wiki = /(^|\.)wiki[mp]edia\.org$/.test(target.hostname);   // Wikimedia asks for a descriptive user agent; other hosts get a browser's
       r = await fetch(target, { redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'user-agent': wiki || !IMG() ? (IMG()?.UA || 'noema-lite-picture-fetcher/1.0 (personal study app)') : IMG().BROWSER_UA, accept: fileMode ? '*/*' : 'image/avif,image/webp,image/*,text/html;q=0.8,*/*;q=0.5' } });
       if (r.status === 429 && hop < 5) { await new Promise(res => setTimeout(res, 1200)); r = await fetch(target, { redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'user-agent': IMG()?.UA || 'noema-lite' } }); }
-    } catch (e) { return out(502, 'could not reach the picture: ' + e.message); }
+    } catch (e) { return fail(req, 502, e.name === 'TimeoutError' ? 'img.timeout' : 'img.unreachable', { detail: e.message }, 'could not reach the picture: ' + e.message); }
     if (r.status >= 300 && r.status < 400 && r.headers.get('location')) { target = new URL(r.headers.get('location'), target); continue; }
-    if (!r.ok) return out(502, `the picture host answered ${r.status}`);
+    if (!r.ok) return fail(req, 502, 'img.upstream', { status: r.status }, `the picture host answered ${r.status}`);
     let type = (r.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
     if (!fileMode && /^text\/html|application\/xhtml/.test(type) && IMG() && pageHops < 2) {   // a page: follow its main picture
       const html = (await r.text()).slice(0, 2e6); const pic = IMG().pageImage(html, target.href);
-      if (!pic) return out(415, 'this page has no main picture — give the image file url');
+      if (!pic) return fail(req, 415, 'img.no_main_picture', {}, 'this page has no main picture — give the image file url');
       pageHops++; target = new URL(IMG().resolvePictureUrl(pic)); continue;
     }
     const generic = !type || /octet-stream/.test(type);
-    if (fileMode ? !FILE_TYPES.test(type) && !generic : !TYPES.test(type) && !generic) return out(415, fileMode ? `this kind of file cannot be previewed (${type})` : `not a picture (${type}) — use the direct image url, not the page`);
-    if (+r.headers.get('content-length') > LIMIT) return out(413, `larger than ${LIMIT / 1048576} MB`);
+    if (fileMode ? !FILE_TYPES.test(type) && !generic : !TYPES.test(type) && !generic) return fileMode ? fail(req, 415, 'img.file_type', { type }, `this kind of file cannot be previewed (${type})`) : fail(req, 415, 'img.not_picture', { type }, `not a picture (${type}) — use the direct image url, not the page`);
+    if (+r.headers.get('content-length') > LIMIT) return fail(req, 413, 'img.too_large', { max: LIMIT / 1048576 }, `larger than ${LIMIT / 1048576} MB`);
     const buf = new Uint8Array(await r.arrayBuffer());
-    if (buf.byteLength > LIMIT) return out(413, `larger than ${LIMIT / 1048576} MB`);
-    if (generic && !fileMode) { type = sniff(buf); if (!type) return out(415, 'not a picture — use the direct image url, not the page'); }
+    if (buf.byteLength > LIMIT) return fail(req, 413, 'img.too_large', { max: LIMIT / 1048576 }, `larger than ${LIMIT / 1048576} MB`);
+    if (generic && !fileMode) { type = sniff(buf); if (!type) return fail(req, 415, 'img.not_picture_bytes', {}, 'not a picture — use the direct image url, not the page'); }
     if (generic && fileMode) type = sniff(buf) || (buf[0] === 0x25 && buf[1] === 0x50 && buf[2] === 0x44 && buf[3] === 0x46 ? 'application/pdf' : 'application/octet-stream');
     return new Response(buf, { status: 200, headers: { 'content-type': type, 'access-control-allow-origin': '*', 'cache-control': 'public, max-age=86400', 'x-final-url': target.href, 'access-control-expose-headers': 'x-final-url' } });
   }
-  return out(508, 'too many redirects');
+  return fail(req, 508, 'img.redirects', {}, 'too many redirects');
+  /* i18n-ignore-end */
 }

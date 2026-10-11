@@ -1,0 +1,1 @@
+{{ $l := printf "%v" .Data.locale }}{{ if eq $l "el" }}Επιβεβαίωσε τον λογαριασμό σου στο noema-lite{{ else if eq $l "ru" }}Подтверди аккаунт noema-lite{{ else if eq $l "fr" }}Confirme ton compte noema-lite{{ else }}Confirm your noema-lite account{{ end }}

@@ -1,0 +1,2 @@
+# the account e-mails: used by tools/i18n/emails.js (cloud/email/), not by the app
+email.*

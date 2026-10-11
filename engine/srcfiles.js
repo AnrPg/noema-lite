@@ -17,6 +17,10 @@ window.NoemaSrcFiles = (() => {
   const cloudPath = (subj, src, name) => `sources/${subj}/${String(src).replace(/[^a-zA-Z0-9_-]/g, '_')}/file.${safeExt(name)}`;
   const MAX = 2 * 1024 * 1024 * 1024;   // a practical browser limit; the cloud stores big files in parts (NoemaCloud.putFile)
   const fullPath = (subj, src, name) => `${NoemaCloud.session().user.id}/${cloudPath(subj, src, name)}`;
+  /* errors with a stable code (docs/i18n.md §6): .message stays English, NoemaI18n.err(e) shows them in the UI language */
+  const coded = (message, code, params = {}) => Object.assign(new Error(message), { code, params });
+  const FT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+  const errText = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
 
   function index(acc, subj) { try { return JSON.parse(localStorage.getItem(idxKey(acc, subj)) || '{}'); } catch (e) { return {}; } }
   function setIndex(acc, subj, ix) { const v = JSON.stringify(ix); if (kv()) { if (Object.keys(ix).length) kv().set(idxKey(acc, subj), v); else kv().del(idxKey(acc, subj)); } else localStorage.setItem(idxKey(acc, subj), v); }
@@ -24,7 +28,7 @@ window.NoemaSrcFiles = (() => {
   /** Attach (or replace) the file of a source. */
   async function put(acc, subj, src, file, { name } = {}) {
     name = name || file.name || 'file'; const type = file.type || '';
-    if (file.size > MAX) throw new Error(`The file is ${Math.round(file.size / 1048576)} MB — too big for a browser to keep (limit ${Math.round(MAX / 1073741824)} GB).`);
+    if (file.size > MAX) throw coded(`The file is ${Math.round(file.size / 1048576)} MB — too big for a browser to keep (limit ${Math.round(MAX / 1073741824)} GB).`, 'files.too_big', { mb: Math.round(file.size / 1048576), limit: Math.round(MAX / 1073741824) });   // i18n-ignore (English .message of err.files.too_big)
     await DB.put(key(acc, subj, src), { blob: file, name, type, size: file.size, added: new Date().toISOString() });
     const meta = { name, type, size: file.size, added: new Date().toISOString(), cloud: false };
     const old = index(acc, subj)[src];
@@ -33,7 +37,7 @@ window.NoemaSrcFiles = (() => {
         if (old?.cloud && (old.chunks || cloudPath(subj, src, old.name) !== cloudPath(subj, src, name))) await NoemaCloud.deleteObjects('noema-private', NoemaCloud.partPaths(fullPath(subj, src, old.name), old.chunks || 0)).catch(() => { });
         const r = await NoemaCloud.putFile('noema-private', fullPath(subj, src, name), file, type || 'application/octet-stream'); meta.cloud = true; if (r.chunks) meta.chunks = r.chunks;
       }
-      catch (e) { console.warn('[source files] cloud upload failed — kept on this device', e); meta.cloudError = e.message; }
+      catch (e) { console.warn('[source files] cloud upload failed — kept on this device', e); meta.cloudError = e.message; }   // i18n-ignore (a log; cloudError is stored, not shown)
     }
     const ix = index(acc, subj); ix[src] = meta; setIndex(acc, subj, ix);
     return meta;
@@ -79,7 +83,8 @@ window.NoemaSrcFiles = (() => {
   }
 
   /* ---------- packages: <id>.noema.zip = pack.json + sources/<file> (docs/SOURCES.md §3) ---------- */
-  const loadZip = async buf => { if (!window.JSZip) { if (!window.NoemaViewer?.loadZip) throw new Error('The package reader is not available.'); return NoemaViewer.loadZip(buf); } return JSZip.loadAsync(buf); };
+  /* i18n-ignore-start */   // the English .message of each coded error (err.files.*)
+  const loadZip = async buf => { if (!window.JSZip) { if (!window.NoemaViewer?.loadZip) throw coded('The package reader is not available.', 'files.no_reader'); return NoemaViewer.loadZip(buf); } return JSZip.loadAsync(buf); };
   const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
   async function sha256(blob) { if (!crypto?.subtle) return null; return hex(await crypto.subtle.digest('SHA-256', await blob.arrayBuffer())); }
   /** Is this file a zip (a package)? */
@@ -88,10 +93,11 @@ window.NoemaSrcFiles = (() => {
   const packaged = p => ((p?.sources?.sources) || []).filter(s => s && s.sha256 && /^sources\//.test(String(s.file || '')));
   /** Read a package → { pack, file(path) → Blob|null }. */
   async function readBundle(blob) {
-    let z; try { z = await loadZip(await blob.arrayBuffer()); } catch (e) { throw new Error('This file is not a noema-lite package (not a readable zip).'); }
+    let z; try { z = await loadZip(await blob.arrayBuffer()); } catch (e) { throw coded('This file is not a noema-lite package (not a readable zip).', 'files.not_zip'); }
     const pj = z.file('pack.json') || Object.values(z.files).find(f => !f.dir && /(^|\/)pack\.json$/.test(f.name));
-    if (!pj) throw new Error('This zip is not a noema-lite package (no pack.json inside).');
-    let pack; try { pack = JSON.parse(await pj.async('string')); } catch (e) { throw new Error('pack.json inside the package is not valid: ' + e.message); }
+    if (!pj) throw coded('This zip is not a noema-lite package (no pack.json inside).', 'files.no_pack_json');
+    let pack; try { pack = JSON.parse(await pj.async('string')); } catch (e) { throw coded('pack.json inside the package is not valid: ' + e.message, 'files.bad_pack_json', { detail: e.message }); }
+    /* i18n-ignore-end */
     const root = pj.name.replace(/pack\.json$/, '');
     return { pack, file: async path => { const f = z.file(root + path); return f ? f.async('blob') : null; } };
   }
@@ -104,19 +110,19 @@ window.NoemaSrcFiles = (() => {
       if (ref) { link(acc, pack.subject.id, s.id, ref, { name: s.fileName || String(s.file).split('/').pop(), type: s.mime, size: s.size }); res.attached.push(s.id); continue; }   // the same file is already stored (same SHA-256)
       let blob = null; try { blob = await fileOf(s.file, s); } catch (e) { }
       if (!blob) { res.missing.push(s.id); continue; }
-      if (s.size && blob.size !== s.size) { res.bad.push(s.id); onLog(`⚠️ ${s.file}: size differs from the pack — not attached`); continue; }
+      if (s.size && blob.size !== s.size) { res.bad.push(s.id); onLog('⚠️ ' + FT('err.ui.files.sizeDiffers', { file: s.file })); continue; }
       const sum = await sha256(blob).catch(() => null);
-      if (sum && sum !== s.sha256) { res.bad.push(s.id); onLog(`⚠️ ${s.file}: content differs from the pack — not attached`); continue; }
+      if (sum && sum !== s.sha256) { res.bad.push(s.id); onLog('⚠️ ' + FT('err.ui.files.contentDiffers', { file: s.file })); continue; }
       const name = s.fileName || String(s.file).split('/').pop();
       const f = new File([blob], name, { type: s.mime || blob.type || '' });
-      try { await put(acc, pack.subject.id, s.id, f, { name }); res.attached.push(s.id); } catch (e) { res.bad.push(s.id); onLog('⚠️ ' + name + ': ' + e.message); }
+      try { await put(acc, pack.subject.id, s.id, f, { name }); res.attached.push(s.id); } catch (e) { res.bad.push(s.id); onLog('⚠️ ' + FT('err.ui.files.attachFailed', { file: name, error: errText(e) })); }
     }
     return res;
   }
   /** A package of a subject: pack.json + every attached source file (also files attached by hand). */
   async function makeBundle(acc, pack) {
     if (!window.JSZip && window.NoemaViewer?.jszip) await NoemaViewer.jszip();
-    if (!window.JSZip) throw new Error('The package writer is not available.');
+    if (!window.JSZip) throw coded('The package writer is not available.', 'files.no_writer');   // i18n-ignore (English .message of err.files.no_writer)
     const seen = new WeakSet(); const p = JSON.parse(JSON.stringify(pack, (k, v) => { if (v && typeof v === 'object') { if (seen.has(v)) return undefined; seen.add(v); } return v; })); const z = new JSZip(); const used = new Set(); let n = 0;
     for (const s of (p.sources?.sources || [])) {
       const rec = await get(acc, p.subject.id, s.id).catch(() => null); if (!rec?.blob) continue;
@@ -155,7 +161,7 @@ window.NoemaSrcFiles = (() => {
       try {
         onLog(`📎 ${f.name}…`);
         const blob = await NoemaCloud.getFile(bucket, f.path, f.chunks || 0, { isPublic: bucket === 'noema-public', type: f.type });
-        if (f.size && blob.size !== f.size) throw new Error('incomplete download');
+        if (f.size && blob.size !== f.size) throw new Error('incomplete download');   // i18n-ignore (caught below: only logged)
         await put(acc, pack.subject.id, src, new File([blob], f.name, { type: f.type || blob.type || '' }), { name: f.name }); res.attached++;
       } catch (e) { console.warn('[shared files]', f.name, e); res.failed.push(f.name); }
     }
