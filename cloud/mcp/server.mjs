@@ -426,7 +426,7 @@ async function callTool(name, args, ctx) {
     case 'noema_authoring_guide': {
       const part = args?.part || 'all';
       const parts = { workflow: DOCS.workflow, content: DOCS.content, visual: DOCS.visual };
-      if (part === 'languages') return text(DOCS.languages || 'No language rules in this build.');   // language courses: the binding rules (D1–D20, D19 first) + docs/language-packs.md
+      if (part === 'languages') return text(DOCS.languages || 'No language rules in this build.');   // language courses: the binding rules (D1–D21, D19 first) + docs/language-packs.md
       return text(part === 'all' ? Object.values(parts).join('\n\n---\n\n') : parts[part] || DOCS.workflow);
     }
     case 'noema_get_toolkit': {
