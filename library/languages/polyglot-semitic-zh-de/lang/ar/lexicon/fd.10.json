@@ -482,11 +482,11 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man), Geʿez መኑ (männu) and Amharic ማን (man) (Wiktionary).",
+     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man) and Geʿez መኑ (männu) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Amharic ማን (man), “who”, is the same Semitic word (Wiktionary).",
+     "مَنْ also opens a clause: مَنْ يَدْرُسُ يَنْجَحُ, whoever studies succeeds.",
      "One word for any person: مَنْ does not change for gender or number — مَنْ هُوَ؟ مَنْ هِيَ؟ مَنْ هُمْ؟"
     ],
     "pitfalls": [
@@ -496,6 +496,18 @@
     "subtleties": [
      "Before al- it takes a helping vowel i: مَنِ الطَّبِيبُ؟ (who is the doctor?).",
      "As a relative or conditional word it means “whoever”: مَنْ جَدَّ وَجَدَ."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ማን (man), “who”, is the same Semitic word (Wiktionary)."
+     },
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ማን (man) is a cognate of مَنْ."
+     }
     ]
    }
   },
@@ -630,12 +642,19 @@
      "Hebrew מָתַי (matáy), “when?”, is the same word — one of the easiest bridges between the two languages."
     ],
     "pitfalls": [
-     "No helper verb and no inversion: مَتَى تَأْكُلُ؟ is literally “when you-eat?”.",
+     "The order of the statement stays and nothing is added: مَتَى تَأْكُلُ؟ is literally “when you-eat?”.",
      "Written with ى (alif maqṣūra) but read -ā: matā."
     ],
     "subtleties": [
      "With a noun no verb is needed: مَتَى الْعَشَاءُ؟ (When is dinner?) — the noun is nominative.",
      "In formal conditional sentences مَتَى means “whenever”: مَتَى شِئْتَ (whenever you wish)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “do” and no inversion: مَتَى تَأْكُلُ؟, “when you-eat?”."
+     }
     ]
    }
   },
@@ -757,7 +776,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The noun كَيْف (state, mood, pleasure) went into Turkish as keyif (good mood, pleasure) and from there into Greek as κέφι (kéfi, high spirits)."
+     "The noun كَيْف means a state, a mood — and in everyday speech pleasure: عَلَى كَيْفِكَ, as you like."
     ],
     "pitfalls": [
      "كَيْفَ asks “how?” — “how many?” is كَمْ and “how much (price)?” is بِكَمْ.",
@@ -766,6 +785,28 @@
     "subtleties": [
      "كَيْفَ + a noun asks after a state: كَيْفَ الْعَمَلُ؟ (How is work?).",
      "كَيْفَمَا = however, in whatever way (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek κέφι (high spirits) comes from the noun كَيْف."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian кайф (pleasure, a high) comes from the noun كَيْف."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian qejf (pleasure, good mood) comes from the noun كَيْف."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish keyif (good mood, pleasure) comes from the noun كَيْف."
+     }
     ]
    }
   },
@@ -866,7 +907,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “for what?” — built like Greek γιατί (για + τι), Russian почему (по + чему) and Turkish niçin (ne + için)."
+     "Literally “for what?”: لِـ (for) + مَاذَا (what)."
     ],
     "pitfalls": [
      "Written as one word: لِمَاذَا, not *لِ مَاذَا.",
@@ -874,6 +915,43 @@
     ],
     "subtleties": [
      "لِمَاذَا لَا …؟ also makes a suggestion: لِمَاذَا لَا نَأْكُلُ هُنَا؟ (Why don’t we eat here?)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Built like γιατί (για + τι)."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Built like почему (по + чему)."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Built like pourquoi (pour + quoi)."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Built like perché (per + che)."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Built like por qué (por + qué)."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Built like porquê (por + quê)."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Built like niçin (ne + için)."
+     }
     ]
    }
   },
@@ -993,12 +1071,24 @@
      "Hebrew כַּמָּה (kamá), “how many, how much”, is its cousin."
     ],
     "pitfalls": [
-     "After كَمْ the noun is singular and accusative indefinite: كَمْ أَخًا؟ — not *كَمْ إِخْوَةً؟ (unlike English “how many brothers”).",
+     "After كَمْ the noun is singular and accusative indefinite: كَمْ أَخًا؟ — not *كَمْ إِخْوَةً؟.",
      "The price is asked with بِ: بِكَمْ هٰذَا؟ — كَمْ alone asks for a number."
     ],
     "subtleties": [
      "Wiktionary: after a preposition (بِكَمْ) the noun may also be genitive — بِكَمْ دِرْهَمٍ؟.",
      "Before al- it takes the helping vowel i: كَمِ السَّاعَةُ؟."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not like “how many brothers”: the noun after كَمْ is singular — كَمْ أَخًا؟"
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Not like сколько братьев: the noun after كَمْ is singular and accusative — كَمْ أَخًا؟"
+     }
     ]
    }
   },
@@ -1225,7 +1315,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "No special word for “whose”: Arabic asks “to whom (is) this book?”, like French à qui est ce livre ? — German wessen and Greek ποιανού are case forms instead."
+     "No special word for “whose”: Arabic asks “to whom (is) this book?” — German wessen is a case form instead."
     ],
     "pitfalls": [
      "Answer with لِ + the owner: هٰذَا لِأَبِي (it is my father’s), هٰذَا لِي (it is mine) — لِي, never *لِأَنَا."
@@ -1233,6 +1323,28 @@
     "subtleties": [
      "Also correct: كِتَابُ مَنْ هٰذَا؟ (whose book is this?), with مَنْ as the second word of a construct.",
      "Before al- it takes the helping vowel i: لِمَنِ الْكِتَابُ؟."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like à qui est ce livre ?: لِمَنْ هٰذَا الْكِتَابُ؟"
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek ποιανού is a case form; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian has a word of its own, чей; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English has a word of its own, whose; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
+     }
     ]
    }
   },
@@ -1383,7 +1495,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "طِبّ (ṭibb, medicine) is the same root: Turkish tıp (medicine) and tabip (physician) come from it."
+     "طِبّ (ṭibb, medicine) is the same root, and the plural is أَطِبَّاء."
     ],
     "pitfalls": [
      "The plural is broken and a diptote: أَطِبَّاءُ (no tanwīn), not *طَبِيبُونَ; women doctors are طَبِيبَات."
@@ -1391,6 +1503,18 @@
     "subtleties": [
      "In speech a doctor is addressed as دُكْتُور / دُكْتُورَة; طَبِيب is the word for the profession.",
      "Wiktionary also lists the rarer plural أَطِبَّة."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French toubib (a doctor, colloquial) is this word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish tıp (medicine) and tabip (physician) come from it."
+     }
     ]
    }
   },
@@ -1696,13 +1820,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish mühendis (engineer) is this Arabic word; its Persian source survives in Persian andâze, “measure”."
+     "From هَنْدَسَة — geometry, then engineering: the engineer is “the geometer”."
     ],
     "pitfalls": [
      "Four root letters (ه ن د س): the plural is sound, مُهَنْدِسُونَ — no broken plural."
     ],
     "subtleties": [
      "هَنْدَسَة is both “engineering” and “geometry”; Wiktionary also lists the older senses “geometer, architect, surveyor”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mühendis (engineer) is this Arabic word."
+     },
+     {
+      "for": "fa",
+      "rel": "similar",
+      "text": "Its Persian source survives in Persian andâze, “measure”."
+     }
     ]
    }
   },
@@ -2400,13 +2536,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same root gives عَمَل (work) — a place word of the next lesson; Turkish amele (labourer) comes from the Arabic plural عَمَلَة."
+     "The same root gives عَمَل (work) — a place word of the next lesson — and the plural عُمَّال (workers)."
     ],
     "pitfalls": [
      "“Workers” is usually the broken plural عُمَّال; عَوَامِل is the plural of the other عَامِل, “factor”."
     ],
     "subtleties": [
      "عَامِل is manual or factory work; an office employee is مُوَظَّف."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish amele (labourer) comes from the Arabic plural عَمَلَة."
+     }
     ]
    }
   },
@@ -3172,13 +3315,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In the Arab world الْفَنَّانُ … very often introduces a singer or an actor; Turkish fen (science, technique) is the same word فَنّ."
+     "In the Arab world الْفَنَّانُ … very often introduces a singer or an actor; فَنّ itself is “art”: الْفُنُونُ الْجَمِيلَةُ, the fine arts."
     ],
     "pitfalls": [
      "The n is doubled: فَنَّان (fannān) — the faʿʿāl pattern of professions."
     ],
     "subtleties": [
      "فَنّ (art) has the plural فُنُون: كُلِّيَّةُ الْفُنُونِ الْجَمِيلَةِ (faculty of fine arts)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish fen (science, technique) is the same word فَنّ."
+     }
     ]
    }
   }

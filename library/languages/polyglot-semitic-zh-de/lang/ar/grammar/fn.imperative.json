@@ -555,6 +555,56 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut commands are a mood ending with singular, dual and plural; Arabic has a dual command too (اِذْهَبَا, you two, go!), plus gender in the singular and plural."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German splits geh! / geht! by number and adds a polite Gehen Sie!; Arabic splits by gender and number — اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ — and has no polite form: politeness comes from مِنْ فَضْلِكَ."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese uses the bare verb for everyone (去!, 请坐); Arabic has four forms by the listener’s gender and number: اِجْلِسْ, اِجْلِسِي, اِجْلِسُوا, اِجْلِسْنَ. 请 is مِنْ فَضْلِكَ / مِنْ فَضْلِكِ — which changes too."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian chooses the command by politeness (mangia / mangi, mangiate); Arabic only by gender and number: كُلْ, كُلِي, كُلُوا, كُلْنَ. As non mangiare uses another form, “Don’t …!” is لَا + the jussive: لَا تَأْكُلْ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also has a singular and a plural command (shko! / shkoni!), and the plural is also polite; Arabic has four by gender and number — اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ — and, as with mos shko!, the negative uses another form: لَا تَذْهَبْ."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese chooses the command by politeness (come / coma, comam); Arabic only by gender and number: كُلْ, كُلِي, كُلُوا, كُلْنَ. As in não comas, the negative uses another form: لَا تَأْكُلْ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has command forms by number, Arabic adds gender: اِذْهَبْ (to a man), اِذْهَبِي (to a woman), اِذْهَبُوا (to several), اِذْهَبْنَ (to women)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your commands are a stem + an ending for the listener, the Arabic idea is the same: the present stem without its prefix + an ending — but the endings show gender: اِذْهَبْ / اِذْهَبِي."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language uses the bare verb for any listener, note that the Arabic command changes for gender and number, and often needs a helping alif in front: اِذْهَبْ, اُدْخُلْ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your verbs already carry the listener in an ending, the Arabic command will feel natural: the ending says who is spoken to — nothing, -ī, -ū or -na."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, an imperative cut from the prefix form, with gender endings, is familiar; new are the helping alif (اِذْهَبْ) and the jussive after لَا."
   }
  ]
 }

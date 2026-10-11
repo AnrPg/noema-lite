@@ -453,6 +453,51 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks the subject of a transitive verb (ergative) rather than the object, and puts an indefinite object in the -mik case; Arabic always marks the object with the accusative -a / -an."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese shows the object by its place after the verb (我喝茶) or with 把; Arabic marks every object on the noun — أَشْرَبُ الشَّايَ / شَايًا — so the ending, not the place, says who does what. 我爱你 is one Arabic word: أُحِبُّكَ."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian nouns do not change as objects (bevo il tè), and object pronouns go before the verb (lo bevo); Arabic marks the noun with -a / -an and attaches the pronoun after the verb: أَشْرَبُهُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also marks the object on the noun (pi kafenë, the accusative with the article) and often repeats it with a pronoun before the verb (e pi kafenë); Arabic marks every object with -a / -an and attaches a pronoun only after the verb: أَشْرَبُهَا."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese nouns do not change as objects (bebo chá), and object pronouns sit next to the verb (bebo-o); Arabic marks the noun itself — أَشْرَبُ الشَّايَ / شَايًا — and joins the pronoun to the end of the verb: أَشْرَبُهُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language marks the object with an ending, Arabic does too: -a with the article (الشَّايَ), -an without (شَايًا) — on every noun, whatever its gender."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you mark (definite) objects with a suffix, note that Arabic marks every object, definite or not — الشَّايَ, شَايًا — and the verb usually comes before it."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If word order alone shows the object, note that Arabic adds an ending to it: أَشْرَبُ الشَّايَ / شَايًا; object pronouns are endings on the verb: أُحِبُّكَ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your verb already contains the object, note that Arabic keeps a noun object separate (with -a / -an); only a pronoun object joins the verb: آكُلُهُ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, object pronouns as verb endings are familiar (أُحِبُّكَ); new may be the accusative ending -a / -an on noun objects."
   }
  ]
 }

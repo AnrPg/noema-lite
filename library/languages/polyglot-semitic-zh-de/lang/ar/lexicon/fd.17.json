@@ -151,7 +151,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Mediterranean is الْبَحْرُ الْأَبْيَضُ الْمُتَوَسِّطُ, “the white middle sea” — Turkish Akdeniz is also “the white sea”.",
+     "The Mediterranean is الْبَحْرُ الْأَبْيَضُ الْمُتَوَسِّطُ, “the white middle sea”.",
      "بَيْض (eggs, lesson 7) has the same root ب ي ض: the egg is “the white one”."
     ],
     "pitfalls": [
@@ -160,6 +160,13 @@
     ],
     "subtleties": [
      "“Whiter” is not *أَبْيَضُ مِنْ: Wiktionary gives أَشَدُّ بَيَاضًا or أَنْصَعُ بَيَاضًا (“stronger in whiteness”)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish Akdeniz is also “the white sea”."
+     }
     ]
    }
   },
@@ -324,7 +331,7 @@
     },
     "funFacts": [
      "السُّودَان (Sudan) is one of its plurals: “the black (people)” — Wiktionary lists سُود and سُودَان.",
-     "The Black Sea is الْبَحْرُ الْأَسْوَدُ, like Turkish Karadeniz."
+     "The Black Sea is الْبَحْرُ الْأَسْوَدُ."
     ],
     "pitfalls": [
      "Diptote, feminine سَوْدَاءُ, plural سُود: حَقِيبَةٌ سَوْدَاءُ, a black bag.",
@@ -332,6 +339,13 @@
     ],
     "subtleties": [
      "سُوق (market) is feminine here: السُّوقُ السَّوْدَاءُ."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "الْبَحْرُ الْأَسْوَدُ is Karadeniz."
+     }
     ]
    }
   },
@@ -636,11 +650,11 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root ز ر ق (z r q); its first sense is “flickering, glinting” — compare Ancient Greek γλαυκός (glaukós) for the same development.",
+     "text": "Wiktionary: a colour adjective (pattern أَفْعَل) from the root ز ر ق (z r q); its first sense is “flickering, glinting”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek γλαυκός also went from “gleaming” to “blue-grey” (Wiktionary compares them).",
+     "The colour word grew out of a gleam: the root first meant “flickering, glinting”.",
      "Zarqāʾ al-Yamāma, “the blue(-eyed) woman of al-Yamāma”, is a legendary Arabian woman who could see riders three days away."
     ],
     "pitfalls": [
@@ -648,6 +662,13 @@
     ],
     "subtleties": [
      "Light and dark shades follow the colour: أَزْرَقُ فَاتِحٌ, أَزْرَقُ غَامِقٌ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "γλαυκός also went from “gleaming” to “blue-grey” (Wiktionary compares them)."
+     }
     ]
    }
   },
@@ -833,7 +854,44 @@
      "Diptote, feminine خَضْرَاءُ, plural خُضْر: الْحَدِيقَةُ خَضْرَاءُ."
     ],
     "subtleties": [
-     "To give the green light = أَعْطَى الضَّوْءَ الْأَخْضَرَ, as in English."
+     "To give the green light (to allow) = أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in English: give the green light = أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "As in donner le feu vert: أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "As in δίνω το πράσινο φως: أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "As in дать зелёный свет: أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "As in dar luz verde: أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "As in dare il via libera: أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "As in dar luz verde: أَعْطَى الضَّوْءَ الْأَخْضَرَ."
+     }
     ]
    }
   },
@@ -1329,13 +1387,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "“Ash-coloured”, like Greek σταχτής / σταχτί (from στάχτη, ash) and Russian пепельный."
+     "“Ash-coloured”: رَمَاد (ash) + -iyy."
     ],
     "pitfalls": [
      "A nisba adjective: regular, with tanwīn — رَمَادِيٌّ, رَمَادِيَّةٌ."
     ],
     "subtleties": [
      "Grey hair from age is also شَعْرٌ أَشْيَبُ (from شَيْب, grey hair)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like σταχτής / σταχτί, from στάχτη (ash)."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like пепельный, from пепел (ash)."
+     }
     ]
    }
   },
@@ -1480,13 +1550,40 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek πορτοκάλι, Turkish portakal, Arabic بُرْتُقَال: the sweet orange is “the Portugal fruit”."
+     "بُرْتُقَال, the sweet orange, is “the Portugal fruit” — the same letters as الْبُرْتُغَال, Portugal."
     ],
     "pitfalls": [
      "A nisba adjective: regular, with tanwīn — بُرْتُقَالِيٌّ, بُرْتُقَالِيَّةٌ."
     ],
     "subtleties": [
      "The fruit is بُرْتُقَال (a collective noun), the colour بُرْتُقَالِيّ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like πορτοκάλι, the sweet orange is “the Portugal fruit”."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like portokall, the sweet orange is “the Portugal fruit”."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "The sweet orange is named after Portugal: بُرْتُقَال; and Portuguese laranja comes from Arabic نَارَنْج, the bitter orange."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "апельсин is the “Chinese apple”; بُرْتُقَال is “the Portugal fruit”."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish portakal is the same name."
+     }
     ]
    }
   },
@@ -1654,17 +1751,34 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: from وَرْد (ward, “roses, blossoms”) + ـِيّ (-iyy); وَرْد, like Hebrew וֶרֶד and Ancient Greek ῥόδον, is borrowed from a reflex of Proto-Iranian *wardah.",
+     "text": "Wiktionary: from وَرْد (ward, “roses, blossoms”) + ـِيّ (-iyy); وَرْد, like Hebrew וֶרֶד, is borrowed from a reflex of Proto-Iranian *wardah.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Rose = وَرْد, Hebrew וֶרֶד (vered), Greek ρόδο: one Iranian word behind all three (Wiktionary)."
+     "Rose = وَرْد; Hebrew וֶרֶד (vered) has it too: an old Iranian word (Wiktionary)."
     ],
     "pitfalls": [
      "A nisba adjective: regular, with tanwīn — وَرْدِيٌّ, وَرْدِيَّةٌ."
     ],
     "subtleties": [
-     "As in English, “rosy” can mean hopeful: أَحْلَامٌ وَرْدِيَّةٌ."
+     "“Rosy” can mean hopeful: أَحْلَامٌ وَرْدِيَّةٌ, rosy dreams."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek ρόδο goes back to the same old word, from Iran, as وَرْد."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in English, “rosy” can mean hopeful: أَحْلَامٌ وَرْدِيَّةٌ."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "As in voir la vie en rose: أَحْلَامٌ وَرْدِيَّةٌ, rosy dreams."
+     }
     ]
    }
   },
@@ -1815,13 +1929,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same Persian flower name is Turkish menekşe and Greek μενεξές (violet)."
+     "بَنَفْسَج is the violet flower, and the colour is named after it."
     ],
     "pitfalls": [
      "A nisba adjective: regular, with tanwīn — بَنَفْسَجِيٌّ, بَنَفْسَجِيَّةٌ."
     ],
     "subtleties": [
      "“Ultraviolet” is literally “above the violet”: فَوْقَ الْبَنَفْسَجِيِّ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μενεξές (violet) is the same flower name, from Iran."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian manushaqe (violet) is the same flower name, from Iran."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi बनफ़शा (violet) is the same flower name, from Iran."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish menekşe is the same Persian flower name."
+     }
     ]
    }
   },
@@ -2309,7 +2445,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Where Greek and Turkish add a word (πιο, daha), Arabic usually makes a new word: كَبِير → أَكْبَر. أَكْثَر is the elative of كَثِير — “more” is literally “much-er”."
+     "Arabic usually makes a new word for “more …” (كَبِير → أَكْبَر) and uses أَكْثَر where the pattern cannot be made. أَكْثَر is the elative of كَثِير — “more” is literally “much-er”."
     ],
     "pitfalls": [
      "Not for adjectives that have an elative: bigger is أَكْبَرُ, not *أَكْثَرُ كَبِيرًا.",
@@ -2318,6 +2454,43 @@
     "subtleties": [
      "After a verb, “more” is accusative: أُحِبُّ الشَّايَ أَكْثَرَ.",
      "أَكْثَرُ + a definite plural = most of: أَكْثَرُ الطُّلَّابِ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Where Greek adds πιο, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "Where French adds plus, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Where Italian adds più, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Where Spanish adds más, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Where Portuguese adds mais, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     },
+     {
+      "for": "sq",
+      "rel": "different",
+      "text": "Where Albanian adds më, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Where Turkish adds daha, Arabic usually makes a new word: كَبِير → أَكْبَر."
+     }
     ]
    }
   }

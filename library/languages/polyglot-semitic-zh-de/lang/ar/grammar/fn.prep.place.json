@@ -494,6 +494,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut shows position with a noun of place and a case ending; Arabic puts a place word before the noun and the noun in the genitive."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German auf, unter, neben, vor, hinter take the dative for “where?” and the accusative for “where to?”; Arabic عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ always take the genitive. Auf dem Tisch liegt ein Buch = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "Chinese puts the place word after the noun (桌子上, 桌子下面); Arabic puts it before: عَلَى الطَّاوِلَةِ, تَحْتَ الطَّاوِلَةِ. But 桌子上有一本书 has the same order as عَلَى الطَّاوِلَةِ كِتَابٌ — the place first, then the thing."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian sopra, sotto, accanto a, davanti a, dietro ↔ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; c’è un libro sul tavolo = عَلَى الطَّاوِلَةِ كِتَابٌ — the place first, no verb."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian mbi, nën, pranë, para, prapa ↔ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; but where Albanian varies the case by preposition, Arabic place words always take the genitive. Ka një libër mbi tavolinë = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese em cima de, debaixo de, ao lado de, à frente de, atrás de are built like Arabic place words: a word + “of” — in Arabic the genitive: تَحْتَ الطَّاوِلَةِ. Há um livro na mesa = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your place prepositions take different cases for “where?” and “where to?”, Arabic ones take only the genitive; most are old nouns, so they also take pronoun endings: تَحْتَهُ, أَمَامَكَ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you say “the table’s top-on”, Arabic says the relation first and the noun after it in the genitive: عَلَى الطَّاوِلَةِ, تَحْتَ الطَّاوِلَةِ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your place words follow the noun, Arabic ones precede it: عَلَى الطَّاوِلَةِ. For “there is”, the place comes first: عَلَى الطَّاوِلَةِ كِتَابٌ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If location is a suffix on the noun in your language, Arabic uses a word before the noun — عَلَى, تَحْتَ, أَمَامَ — with the noun in the genitive."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, place words that are old nouns with pronoun endings (أَمَامَكَ, تَحْتَهُ) are familiar; Arabic adds the genitive after them."
   }
  ]
 }

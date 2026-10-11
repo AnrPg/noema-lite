@@ -682,6 +682,56 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut adds a comparative suffix and puts the standard in the “from” case (-mit) — the same idea as مِنْ."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German has endings (größer, am größten) and als for “than”; Arabic has one pattern for both degrees, أَكْبَرُ, and says مِنْ (“from”) for als. As besser is not a form of gut, أَفْضَلُ is not a form of جَيِّد."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese compares with 比 and leaves the adjective unchanged (房子比公寓大); Arabic changes the adjective itself (كَبِير → أَكْبَرُ) and puts مِنْ after it: الْبَيْتُ أَكْبَرُ مِنَ الشَّقَّةِ. 最大 is الْأَكْبَرُ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian says più grande di — and di is close to Arabic مِنْ, “from”; but Arabic changes the adjective itself: أَكْبَرُ. Like maggiore, migliore and peggiore, the Arabic forms are words of their own, and the article makes a superlative: il più grande = الْأَكْبَرُ."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts më before the adjective (më i madh se); Arabic changes the adjective itself (كَبِير → أَكْبَرُ) and says مِنْ (“from”) for se. The superlative with the article, më i madhi, is الْأَكْبَرُ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese has a few one-word comparatives (maior, melhor, pior) next to mais … do que; Arabic makes every simple adjective into one — أَكْبَرُ, أَصْغَرُ, أَجْمَلُ — and, as in o maior, the article makes it a superlative: الْأَكْبَرُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language forms comparatives with an ending, Arabic does it with a pattern: the root goes into أَفْعَل (كَبِير → أَكْبَرُ), the same form for “bigger” and, with the article, “the biggest”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you compare with a word for “more” and put the standard in the “from” case, half of it transfers: Arabic’s “than” is مِنْ, “from”; but the adjective changes its pattern: أَكْبَرُ مِنْ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language compares with a particle and an unchanged adjective, note that Arabic changes the adjective’s pattern (كَبِير → أَكْبَرُ) and puts مِنْ after it."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your language adds a comparative suffix and puts the standard in the “from” case, Arabic has the same idea: أَكْبَرُ مِنَ الْبَيْتِ, “bigger from the house”."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, “than” as “from” (مِنْ) is familiar; the special pattern أَفْعَل for “more / most” may be new."
   }
  ]
 }

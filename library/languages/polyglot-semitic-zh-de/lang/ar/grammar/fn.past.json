@@ -730,6 +730,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks how long ago something happened (earlier today, yesterday, long ago) with suffixes inside the verb; Arabic has one past and adds time words (أَمْسِ، قَبْلَ سَنَةٍ)."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like the passato remoto (mangiai), the Arabic past is one word with a person ending; the spoken passato prossimo (ho mangiato) is also أَكَلْتُ — Arabic has no auxiliary. The negative needs another form: لَمْ آكُلْ, not *لَا أَكَلْتُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like the Albanian aorist (shkova, “I went”), the Arabic past is one word with a person ending: ذَهَبْتُ. The perfect kam shkuar is also ذَهَبْتُ (with قَدْ for “already”), and the negative uses لَمْ + jussive: لَمْ أَذْهَبْ."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "Like the pretérito perfeito (acordei, “I woke up / I have woken up”), the Arabic past is one word with a person ending and covers both meanings: اِسْتَيْقَظْتُ. The negative needs another form: لَمْ أَسْتَيْقِظْ (não acordei)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your past has person endings, Arabic is close: one form with an ending (نِمْتُ, نِمْنَا) for every finished action, with no auxiliary; the negative uses لَمْ + the jussive."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you add a past suffix and then a person suffix, note that Arabic has a separate past stem with its own person endings: كَتَبَ → كَتَبْتُ, كَتَبْنَا."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you mark completion with a particle after an unchanged verb, note that Arabic changes the verb itself — نَامَ (he slept) → نِمْتُ (I slept) — and قَدْ before it stresses “already”."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your verbs carry person and tense in endings, the Arabic past will feel natural: one word, with the ending for the person: غَسَلْتُ, غَسَلَتْ, غَسَلْنَا."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the suffix past is the same old form, with endings close to yours (-tu, -nā, -ū); only the negative لَمْ + jussive is Arabic’s own."
   }
  ]
 }

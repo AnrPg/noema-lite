@@ -277,7 +277,7 @@
    "A consequence? → لِذٰلِكَ (therefore) or فَـ (and so); one thing after another → ثُمَّ (later) / فَـ (at once).",
    "A time clause → عِنْدَمَا; a question “when?” → مَتَى.",
    "A condition → إِذَا + past form; a command after it → فَـ.",
-   "Is there an “is” in the when / if clause? → كَانَ (أَكُونُ, كُنْتَ) + accusative."
+   "Does the when / if clause need “to be” (a state, a place, a job)? → كَانَ (أَكُونُ, كُنْتَ) + accusative."
   ]
  },
  "traps": [
@@ -583,7 +583,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi लेकिन is Arabic لٰكِنْ, borrowed through Persian, and कि (that) opens a clause like أَنَّ; but after لِأَنَّ / أَنَّ a pronoun becomes an ending (لِأَنَّهُ), which Hindi क्योंकि never does."
+   "text": "Hindi लेकिन is Arabic لٰكِنْ, and कि (that) opens a clause like أَنَّ; but after لِأَنَّ / أَنَّ a pronoun becomes an ending (لِأَنَّهُ), which Hindi क्योंकि never does."
   },
   {
    "for": "fa",
@@ -634,6 +634,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut joins clauses with special verb moods (“when …”, “because …”) instead of separate words; Arabic uses linking words: عِنْدَمَا, لِأَنَّ, إِذَا."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German sends the verb to the end after weil, dass, wenn (weil er müde ist); Arabic never changes the order — what changes is the case: لِأَنَّهُ مُتْعَبٌ. Ich will gehen has an infinitive; Arabic says أُرِيدُ أَنْ أَذْهَبَ, “I want that I go”."
+  },
+  {
+   "for": "zh",
+   "rel": "trap",
+   "text": "Chinese pairs its connectors (因为…所以…, 虽然…但是…); Arabic uses one: لِأَنَّ … alone, and مَعَ أَنَّ never takes لٰكِنْ in the main clause. 我想去 has no person on 去; Arabic puts it on both verbs: أُرِيدُ أَنْ أَذْهَبَ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian che + subjunctive (voglio che tu vada) is close to أَنْ + subjunctive, but where Italian has an infinitive (voglio andare) Arabic still says أُرِيدُ أَنْ أَذْهَبَ. Like benché, مَعَ أَنَّ takes no “but” in the main clause."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Albanian also has no infinitive here: dua të shkoj, with të + subjunctive, is exactly أُرِيدُ أَنْ أَذْهَبَ. New is that after لِأَنَّ / أَنَّ a pronoun becomes an ending (لِأَنَّهُ مُتْعَبٌ) and a noun turns accusative."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese quero ir has an infinitive; Arabic says أُرِيدُ أَنْ أَذْهَبَ, “I want that I go”. Que + subjunctive (quero que vás) is close to أَنْ + subjunctive, and porque is لِأَنَّ — but only Arabic attaches the pronoun: لِأَنَّهُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language uses conjunctions with an ordinary clause, most Arabic connectors work the same way; new are the few (لِأَنَّ, أَنَّ, لٰكِنَّ) after which the subject is accusative or a pronoun ending."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you join clauses with verb endings placed before the main clause, Arabic does the reverse: a separate word at the start of the clause — عِنْدَمَا, لِأَنَّ, إِذَا — and the main clause often comes first."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you join clauses with separate words and unchanged verbs, the Arabic connectors will feel natural; only the verbs change: أُرِيدُ أَنْ أَذْهَبَ (I want that I go), and a pronoun after لِأَنَّ is an ending."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language joins clauses with special verb moods, note that Arabic uses linking words at the start of the clause (عِنْدَمَا, لِأَنَّ, إِذَا) and needs only one special verb form, the subjunctive after أَنْ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, joining with “and” (وَ) and “so” (فَـ) and a “that” before a clause will feel familiar; new is that لِأَنَّ, أَنَّ and لٰكِنَّ make the following subject accusative or take a pronoun ending."
   }
  ]
 }

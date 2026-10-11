@@ -294,6 +294,56 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut nouns have no gender; Arabic splits every noun into masculine and feminine."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has three genders, shown on the article (der / die / das); Arabic has two, mostly visible on the noun — ة means feminine. Genders differ: die Sonne is feminine like شَمْس, but das Haus is masculine بَيْت, and every German neuter becomes masculine or feminine."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns have no gender; every Arabic noun is masculine or feminine, and هٰذَا / هٰذِهِ, هُوَ / هِيَ and later adjectives and verbs follow it. Most feminine nouns end in ة: غُرْفَة."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian also has two genders with a typical feminine ending (-a ≈ ة: la camera ≈ غُرْفَة). Genders often differ: il sole is masculine, شَمْس feminine; la casa is feminine, بَيْت masculine."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also has (mainly) two genders, with a typical feminine ending -ë / -e (dhomë ≈ غُرْفَة); the Arabic sign is ة. Genders often differ: dielli (the sun) is masculine, شَمْس feminine; shtëpia (the house) is feminine, بَيْت masculine."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese also has two genders with a typical feminine ending (-a ≈ ة: a mesa ≈ طَاوِلَة). Genders often differ: o sol is masculine, شَمْس feminine; a casa is feminine, بَيْت masculine."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your nouns have gender, two is easy: Arabic has no neuter, and ة is a reliable feminine sign — with a short list of feminines without it (شَمْس, يَد, كَأْس)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your nouns have no gender, learn it with every noun: it decides هٰذَا / هٰذِهِ, هُوَ / هِيَ, and later adjectives and verbs. Most nouns in ة are feminine."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your nouns have no gender, start with the ending: ة (غُرْفَة, شَقَّة) means feminine, nouns for women are feminine, and the rest are mostly masculine."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language does not classify nouns by gender, note that every Arabic noun is masculine or feminine — things too (بَيْت m., غُرْفَة f.) — and the words that point to it follow."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, two genders and a feminine ending in -t / -a are familiar; ة (tāʾ marbūṭa) is the Arabic sign, and body parts that come in pairs are feminine (يَد, عَيْن)."
   }
  ]
 }

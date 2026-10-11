@@ -893,10 +893,17 @@
     ],
     "pitfalls": [
      "Past with i, present with a: لَبِسَ / يَلْبَسُ. لَبَسَ (with a in the past) is another verb, “to confuse, to mix up”.",
-     "Arabic names what is put on as a plain object: لَبِسَ قَمِيصَهُ “he put on his shirt” — no word for “on”."
+     "Arabic names what is put on as a plain object: لَبِسَ قَمِيصَهُ “he put on his shirt”, with no preposition."
     ],
     "subtleties": [
      "One verb for the moment and the state: لَبِسَتْ فُسْتَانًا is “she put on a dress”; “she was wearing a dress” is كَانَتْ تَلْبَسُ فُسْتَانًا."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “put on” needs on; Arabic has no particle: لَبِسَ قَمِيصَهُ."
+     }
     ]
    }
   },

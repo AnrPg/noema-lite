@@ -116,7 +116,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek κάππαρη, Turkish kapari, German Kaper, Russian каперсы and English caper all go back to Greek κάππαρις, like Arabic كَبَر."
+     "Arabic كَبَر, like German Kaper, goes back to Greek κάππαρις."
     ],
     "pitfalls": [
      "Only the vowels separate كَبَر (kabar, capers) from كِبَر (kibar, old age), كِبْر (kibr, pride) and the verb كَبُرَ (kabura, to grow up) (Wiktionary)."
@@ -124,6 +124,48 @@
     "subtleties": [
      "A mass noun: one bud = حَبَّةُ كَبَرٍ.",
      "The word names both the bush and the buds; the context (a jar, a sauce, a wall) decides."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek κάππαρη is the same word: كَبَر goes back to κάππαρις."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian каперсы goes back to ancient κάππαρις, like كَبَر."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English caper goes back to ancient κάππαρις, like كَبَر."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French câpre goes back to ancient κάππαρις, like كَبَر."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian cappero goes back to ancient κάππαρις, like كَبَر."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish alcaparra keeps the Arabic article: Andalusian al-kappára, the same word as كَبَر."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese alcaparra keeps the Arabic article: Andalusian al-kappára, the same word as كَبَر."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish kapari goes back to the same Greek word."
+     }
     ]
    }
   },

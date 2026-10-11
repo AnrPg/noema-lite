@@ -348,7 +348,7 @@
   {
    "for": "el",
    "rel": "new",
-   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed through Aramaic — a loan with no usable root."
+   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed — a loan with no usable root."
   },
   {
    "for": "ru",
@@ -373,7 +373,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi borrowed whole Arabic word families through Persian — इल्म (knowledge), आलिम (scholar), मालूम (known) all come from ع ل م; in Arabic the patterns behind them are living rules."
+   "text": "Hindi borrowed whole Arabic word families — इल्म (knowledge), आलिम (scholar), मालूम (known) all come from ع ل م; in Arabic the patterns behind them are living rules."
   },
   {
    "for": "fa",
@@ -424,6 +424,56 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut builds long words by adding suffix after suffix to a stem; Arabic keeps words short and changes the vowels and added letters around a root of three consonants."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German builds families with prefixes, suffixes and some vowel changes (fahren, Fahrer, Fuhre, fuhr); Arabic does it all with vowels and extra letters around three root consonants: كَتَبَ, كَاتِب, كِتَاب, مَكْتَب. Ablaut as in singen / sang / gesungen is the closest German idea."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese builds words by combining syllables (厨 + 房 = 厨房); Arabic weaves three root consonants into patterns: ط ب خ → طَبَخَ (to cook), مَطْبَخ (kitchen), طَبَّاخ (a cook). Find the root, and a whole family opens."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian builds families with suffixes on a stem (cucinare, cucina, cuoco); Arabic puts the root ط ب خ into patterns: طَبَخَ (to cook), مَطْبَخ (kitchen), طَبَّاخ (a cook)."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian builds families with suffixes on a stem (gatuaj, gatim, gatues); Arabic weaves three root consonants into vowel patterns: طَبَخَ (to cook), مَطْبَخ (kitchen), طَبَّاخ (a cook)."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese builds words with suffixes (cozinhar, cozinha, cozinheiro); Arabic with patterns around a root: طَبَخَ (to cook), مَطْبَخ (kitchen), طَبَّاخ (a cook)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If your words change their endings, Arabic also changes their inside: the root (k-t-b) stays, the vowels and extra letters change — كَتَبَ, كِتَاب, كُتُب, مَكْتَب."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If you build words by adding suffixes in a row, Arabic builds them by fitting a root into a template: مَـ + root for a place (مَطْبَخ), a doubled middle letter + ā for a trade (طَبَّاخ)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your words are mostly fixed syllables, learn to see the root: three consonants (ش ر ب = drinking) that come back in every word of the family — شَرِبَ, شَرَاب, مَشْرُوب."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If you build long words from many pieces, Arabic words are made differently: a three-consonant root threaded through a pattern of vowels — ف ع ل in فَاعِل (the doer), مَفْعَل (the place)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, roots and patterns are your home ground: many roots are shared (ك ت ب, ش ر ب), and the model root ف ع ل names the patterns."
   }
  ]
 }

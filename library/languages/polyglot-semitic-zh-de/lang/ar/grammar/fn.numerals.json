@@ -561,6 +561,56 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut nouns have a dual too, so “two” can be said by the noun alone — as Arabic كِتَابَانِ is “two books”."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "As in German, 21–99 say the unit first: خَمْسَةٌ وَعِشْرُونَ = fünfundzwanzig. Different: Arabic uses the dual for 2, gives 3–10 the opposite gender of the noun (ثَلَاثَةُ كُتُبٍ) and puts a singular noun after 11–99: عِشْرُونَ طَالِبًا, “zwanzig Student”."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese numbers never change and need a measure word (三本书); Arabic needs no measure word but changes the number and the noun: كِتَابَانِ (two books — the dual), ثَلَاثَةُ كُتُبٍ, عِشْرُونَ كِتَابًا (with a singular noun). 二十五 says the ten first, Arabic the unit: خَمْسَةٌ وَعِشْرُونَ."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian numbers barely change (uno / una) and the noun is plural after 1 (tre libri); Arabic uses the dual for 2, reverses the gender of 3–10 and uses the singular after 10. Italian says the tens first (ventuno), Arabic the unit: وَاحِدٌ وَعِشْرُونَ."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian counts some tens in twenties (njëzet = 20, dyzet = 40) and says the ten first (njëzet e një); Arabic is decimal and says the unit first (وَاحِدٌ وَعِشْرُونَ). Tre / tri agree with the noun’s gender; Arabic 3–10 take the OPPOSITE gender: ثَلَاثَةُ كُتُبٍ, ثَلَاثُ غُرَفٍ."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese changes 1 and 2 for gender (um / uma, dois / duas), as Arabic does (وَاحِد / وَاحِدَة, اِثْنَانِ / اِثْنَتَانِ); but Arabic reverses the gender of 3–10, uses the singular after 10 and says the unit first: وَاحِدٌ وَعِشْرُونَ (vinte e um)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If the noun in your language is simply plural after every number above one, expect four rules in Arabic: the dual for 2, reversed gender + genitive plural for 3–10, accusative singular for 11–99, genitive singular for 100 and 1000."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If the noun stays singular after numbers in your language, Arabic does the same from 11 up (عِشْرُونَ طَالِبًا); for 3–10 it uses a plural, and the number takes the opposite gender of the noun."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you count with a measure word and an unchanged noun, note that Arabic has no measure words but changes the noun: the dual for two (كِتَابَانِ), a plural for 3–10, a singular from 11 on."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Learn the four steps: 1 and 2 are in the noun itself (كِتَابٌ, كِتَابَانِ), 3–10 take the opposite gender of the noun, 11–99 a singular accusative noun, 100 and 1000 a singular genitive one."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, gender polarity in 3–10 (ثَلَاثَةُ كُتُبٍ / ثَلَاثُ غُرَفٍ) is the familiar Semitic rule; the case of the noun after the number is Arabic’s own."
   }
  ]
 }

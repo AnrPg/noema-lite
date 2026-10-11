@@ -1,7 +1,7 @@
 {
  "function": "fn.pronoun.subject",
  "status": "realized",
- "summary": "Arabic subject pronouns mark person, number and — in the 2nd and 3rd person — gender: أَنَا I, أَنْتَ you (a man), أَنْتِ you (a woman), هُوَ he, هِيَ she, نَحْنُ we, أَنْتُمْ you (men or a mixed group), أَنْتُنَّ you (women), هُمْ they (men or mixed), هُنَّ they (women). Exactly two people have dual pronouns: أَنْتُمَا (you two) and هُمَا (they two). There is no “it”: a thing is هُوَ or هِيَ by its gender, and every plural of things is هِيَ. Before a verb the pronoun is usually left out, because the verb ending shows the person; in a sentence without a verb it is needed: أَنَا طَالِبٌ.",
+ "summary": "Arabic subject pronouns mark person, number and — in the 2nd and 3rd person — gender: أَنَا I, أَنْتَ you (a man), أَنْتِ you (a woman), هُوَ he, هِيَ she, نَحْنُ we, أَنْتُمْ you (men or a mixed group), أَنْتُنَّ you (women), هُمْ they (men or mixed), هُنَّ they (women). Exactly two people have dual pronouns: أَنْتُمَا (you two) and هُمَا (they two). There is no neuter pronoun: a thing is هُوَ or هِيَ by its gender, and every plural of things is هِيَ. Before a verb the pronoun is usually left out, because the verb ending shows the person; in a sentence without a verb it is needed: أَنَا طَالِبٌ.",
  "blocks": [
   {
    "t": "table",
@@ -58,7 +58,7 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No “it”.",
+   "title": "No neuter pronoun.",
    "text": "الْبَابُ؟ هُوَ هُنَا (the door? it is here) — الْغُرْفَةُ؟ هِيَ هُنَاكَ (the room? it is there) — الْكُتُبُ؟ هِيَ هُنَا (the books? they are here): a plural of things is هِيَ."
   },
   {
@@ -142,7 +142,7 @@
  "traps": [
   "أَنْتَ and أَنْتِ look the same without vowels (انت): pronounce the last vowel clearly.",
   "*الْكُتُبُ؟ هُمْ هُنَا is wrong: things in the plural are هِيَ.",
-  "هُوَ / هِيَ also mean “it”; there is no separate word.",
+  "هُوَ / هِيَ also stand for things; there is no neuter pronoun.",
   "For exactly two people careful MSA uses أَنْتُمَا / هُمَا, not أَنْتُمْ / هُمْ."
  ],
  "evidence": {
@@ -385,6 +385,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut also has dual pronouns and person endings (uvaguk, we two) and drops pronouns because the verb shows the person — but it has no gender."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in Italian, the pronoun is dropped before a verb (mangio → آكُلُ); Arabic adds gender to “you” (أَنْتَ / أَنْتِ) and to “they” (هُمْ / هُنَّ), and a thing is هُوَ or هِيَ by its gender. There is no polite Lei."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also splits “they” by gender (ata / ato = هُمْ / هُنَّ) and drops the pronoun before a verb; Arabic also splits “you” — أَنْتَ / أَنْتِ, أَنْتُمْ / أَنْتُنَّ — and has dual pronouns for two people."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese, the pronoun is dropped (como → آكُلُ) and “they” has two forms (eles / elas = هُمْ / هُنَّ); Arabic also splits the singular “you” (أَنْتَ / أَنْتِ), has dual pronouns, and no polite você / o senhor."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your pronouns have gender in the 3rd person and are dropped before verbs, Arabic adds gender in the 2nd person too (أَنْتَ / أَنْتِ), and a dual for two people (أَنْتُمَا, هُمَا)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your pronouns have no gender, Arabic ones mostly do: هُوَ / هِيَ, أَنْتَ / أَنْتِ, هُمْ / هُنَّ. A thing is هُوَ or هِيَ by the gender of its noun."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If one pronoun covers he, she and it, note that Arabic gender is heard: huwa / hiya, ʾanta / ʾanti. Before a verb the pronoun is usually dropped."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If the person is already in your verb, Arabic is similar: the verb ending shows it, so the separate pronoun is used for stress or in sentences without a verb: أَنَا طَالِبٌ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the pronouns are cousins of yours — gender in “you” and “they” included; Arabic adds dual pronouns: أَنْتُمَا, هُمَا."
   }
  ]
 }

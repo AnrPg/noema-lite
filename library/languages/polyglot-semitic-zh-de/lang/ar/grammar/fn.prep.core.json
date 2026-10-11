@@ -567,6 +567,61 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut uses case endings: illumi (in the house), illumut (to the house), illumit (from the house); Arabic uses prepositions: فِي الْبَيْتِ, إِلَى الْبَيْتِ, مِنَ الْبَيْتِ."
+  },
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek σε covers “in”, “at” and “to” (στο σχολείο); Arabic splits it — فِي (where?) and إِلَى (where to?). Από is مِنْ, με is مَعَ (with someone) or بِـ (with a tool), χωρίς is بِدُونِ."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German bei is close to عِنْدَ (beim Arzt = عِنْدَ الطَّبِيبِ), and nach / zu are إِلَى; but Arabic never changes the case by direction — after every preposition the noun is genitive."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese uses few prepositions and puts 在 / 从 / 到 + place before the verb (我在家吃饭); Arabic prepositions are many, stand before the noun, and the noun takes the genitive: فِي الْبَيْتِ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian da is Arabic عِنْدَ in dal medico = عِنْدَ الطَّبِيبِ; but Italian a covers “at” and “to” (a scuola), where Arabic splits فِي / إِلَى."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian te / tek is Arabic عِنْدَ: te mjeku = عِنْدَ الطَّبِيبِ. But në covers “in” and “into” (në shkollë), where Arabic splits فِي / إِلَى; nga is مِنْ, me is مَعَ or بِـ, pa is بِدُونِ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese em / a / de match فِي / إِلَى / مِنْ (na escola, à escola, da escola), com is مَعَ (or بِـ for a tool), sem is بِدُونِ. As in comigo, Arabic joins the pronoun to the preposition — مَعِي — but with every preposition."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your prepositions govern different cases, Arabic is simpler: the noun after every preposition is genitive, and a pronoun after it is an ending: مَعِي, لَكَ, مِنْهُ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you use case suffixes or postpositions, Arabic puts the relation before the noun (فِي الْبَيْتِ, “in the house”) and attaches pronouns to the preposition: فِيهِ, مَعَهُ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language uses prepositions with unchanged nouns, the order is the same; Arabic adds the genitive ending after them, and has one-letter prepositions joined to the word: بِالْحَلِيبِ, لِأَخِي."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your relations are suffixes on the noun, Arabic uses words before it — فِي, إِلَى, مِنْ, مَعَ — and joins pronouns to them as endings: مَعِي."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, prepositions with pronoun endings and one-letter prepositions joined to the word (بِـ, لِـ) are familiar; Arabic adds the genitive ending on the noun after them."
   }
  ]
 }

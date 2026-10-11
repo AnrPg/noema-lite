@@ -399,6 +399,56 @@
    "for": "iu",
    "rel": "same",
    "text": "Inuktitut also has possessive endings on the noun; the Arabic ones show the owner’s person, number and, in the 2nd and 3rd person, gender."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German mein / dein / sein are words before the noun that agree with the thing owned; Arabic uses endings after the noun that change only with the owner: كِتَابِي, كِتَابُكَ, كِتَابُهُ. As with sein / ihr, Arabic tells his from her: كِتَابُهُ / كِتَابُهَا."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese puts 我的 before the noun (我的书); Arabic adds an ending after it: كِتَابِي. 你的 has two Arabic forms by gender, كِتَابُكَ / كِتَابُكِ, and the noun takes no article: كِتَابِي, never *الْكِتَابِي."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian puts the article and an agreeing possessive before the noun (il mio libro, la mia casa); Arabic adds an ending after the noun and no article: كِتَابِي, بَيْتِي. Il suo libro is both كِتَابُهُ (his) and كِتَابُهَا (her)."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also puts the possessive after the noun (libri im, “the book my”) and tells his from her (libri i tij / libri i saj), as Arabic does with كِتَابُهُ / كِتَابُهَا; but the Arabic possessive is an ending joined to the noun: كِتَابِي."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese o livro dele / o livro dela tells his from her after the noun, as Arabic does with endings: كِتَابُهُ / كِتَابُهَا. O meu livro has an article; كِتَابِي has none — the ending makes it definite."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your possessives are words that agree with the thing owned, note that Arabic uses endings that change with the owner: كِتَابُهُ (his book), كِتَابُهَا (her book)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "same",
+   "text": "If you add a possessive suffix to the noun, Arabic does the same — كِتَابِي, كِتَابُكَ, كِتَابُنَا — keeping the case vowel before it (كِتَابُكَ / كِتَابَكَ / كِتَابِكَ)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you say “I + linking particle + book”, note that Arabic joins the owner to the end of the noun as an ending: كِتَابِي (my book) — and “your” changes for gender: -ka / -ki."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If possession is a suffix on the noun in your language, Arabic works the same way: an ending for the owner — -ī, -ka, -ki, -hu, -hā, -nā — and no article."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, possessive suffixes are familiar (كِتَابِي, كِتَابُهُ); Arabic keeps the case vowel before them and lengthens أَب / أَخ: أَبُوكَ, أَخُوهُ."
   }
  ]
 }

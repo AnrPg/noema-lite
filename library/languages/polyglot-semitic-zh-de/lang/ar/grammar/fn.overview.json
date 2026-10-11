@@ -107,7 +107,7 @@
    ]
   },
   {
-   "title": "“The” is a prefix, “a” is an ending",
+   "title": "The definite article is a prefix, the indefinite an ending",
    "text": "بَيْتٌ (baytun) = a house, الْبَيْتُ (al-baytu) = the house. Before “sun letters” the l of al- is not heard: الشَّقَّةُ = aš-šaqqa.",
    "typology": [
     {
@@ -249,7 +249,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi took many Arabic words through Persian: किताब kitāb (كِتَاب — feminine in Hindi, masculine in Arabic), दुनिया (دُنْيَا), हाल (حَال, as in كَيْفَ حَالُكَ), लेकिन (لٰكِنْ). Familiar: two genders, “I have” as “near me is” (मेरे पास … है ≈ عِنْدِي) and a question word at the start (क्या ≈ هَلْ). New: prepositions instead of postpositions, three cases on the noun itself, the verb first, and a script read right to left. Arabic has no retroflex or aspirated consonants and no nasal vowels — its ṭ ḍ ṣ ẓ are emphatic (said with the back of the tongue raised), not retroflex —, and few करना-type compounds: “to work” is one verb, عَمِلَ."
+   "text": "Hindi took many Arabic words: किताब kitāb (كِتَاب — feminine in Hindi, masculine in Arabic), दुनिया (دُنْيَا), हाल (حَال, as in كَيْفَ حَالُكَ), लेकिन (لٰكِنْ). Familiar: two genders, “I have” as “near me is” (मेरे पास … है ≈ عِنْدِي) and a question word at the start (क्या ≈ هَلْ). New: prepositions instead of postpositions, three cases on the noun itself, the verb first, and a script read right to left. Arabic has no retroflex or aspirated consonants and no nasal vowels — its ṭ ḍ ṣ ẓ are emphatic (said with the back of the tongue raised), not retroflex —, and few करना-type compounds: “to work” is one verb, عَمِلَ."
   },
   {
    "for": "fa",
@@ -310,6 +310,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Familiar: the dual (two of anything has its own form), possessive endings on nouns, person endings that make pronouns unnecessary, and the uvular q (Arabic ق). New: short separate words instead of one long word — no noun incorporation, no antipassive, no applicatives —, prepositions, gender, subjects marked the same way with every verb (no ergative), no evidential endings such as -guuq (“reportedly”), sentences joined with conjunctions instead of verb moods, and a script read right to left."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Familiar: two genders and no neuter, the article for things in general (mi piace il caffè = أُحِبُّ الْقَهْوَةَ), adjectives after the noun, a dropped subject pronoun, and a present that also means “I am eating”. Italian took many words from Arabic: zucchero (سُكَّر), arancia (نَارَنْج), magazzino (مَخَازِن), dogana (دِيوَان), zero (صِفْر). New: three cases, the dual, “you” by gender, no “to be” in the present, no capital letters, and only three vowel qualities."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Familiar: two genders, case endings on the noun, adjectives after the noun that agree, no infinitive after “want” (dua të shkoj = أُرِيدُ أَنْ أَذْهَبَ), a question word in front (a = هَلْ), and the sounds dh and th = ذ and ث. Many words reached Albanian from Arabic in the time of the sultans: dyqan (دُكَّان), hesap (حِسَاب), kismet (قِسْمَة), qejf (كَيْف). New: a script read right to left, no capital letters, the article in front of the noun (الْ), the dual, “you” by gender, no “to be” in the present, and roots of three consonants."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Hundreds of Portuguese words come from Arabic, many with the article al- fused in: azeite (الزَّيْت), arroz (الرُّزّ), açúcar (السُّكَّر), aldeia (الضَّيْعَة), alface (الْخَسّ), and oxalá (لَوْ شَاءَ اللّٰهُ). Familiar: two genders, agreement, adjectives after the noun, a dropped subject pronoun, and one simple past for a finished action (comi = أَكَلْتُ). New: three cases, the dual, “you” by gender, no “to be” in the present (so no ser / estar choice), and only three vowel qualities."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language is fusional, much is familiar: endings that pack case, number and gender, agreement, and a fairly free word order. New are the roots of three consonants that change inside the word (كِتَاب → كُتُب) and the article as a prefix."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language is agglutinating, some Arabic pieces will feel familiar — وَ, الْ, بِـ joined in front, pronoun endings behind (كِتَابِي) — but the core is fusional and root-and-pattern: كَتَبَ, كِتَاب, كُتُب, مَكْتَب share only k-t-b."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your words never change, Arabic is a big step: words change inside (كِتَاب → كُتُب), take case endings, agree in gender and number, and the verb carries the person. Easier: no tones and no measure words."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language packs a sentence into one long word, Arabic words are shorter but dense: a verb holds person, number and gender (كَتَبْنَا = we wrote), and a noun can take an article in front and a pronoun ending behind."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, you know the essentials: roots of three consonants and vowel patterns, two genders, sentences without “be”. Arabic adds three cases, the dual for every noun, broken plurals and consonants that keep their old distinct values (ع ح ق ط ص ض ظ)."
   }
  ]
 }

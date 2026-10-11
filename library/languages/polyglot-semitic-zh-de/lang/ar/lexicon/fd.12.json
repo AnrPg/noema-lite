@@ -759,7 +759,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "مَا وَرَاءَ الطَّبِيعَةِ, “what is beyond nature”, is the Arabic for metaphysics — exactly Greek μετὰ τὰ φυσικά."
+     "مَا وَرَاءَ الطَّبِيعَةِ, “what is beyond nature”, is the Arabic for metaphysics — a translation of the Greek term."
     ],
     "pitfalls": [
      "With pronoun endings the hamza changes its seat: وَرَائِي (behind me), but وَرَاءَكَ, وَرَاءَهُ.",
@@ -767,6 +767,13 @@
     ],
     "subtleties": [
      "وَرَاءَ often sounds a little more literary than خَلْفَ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "مَا وَرَاءَ الطَّبِيعَةِ is exactly μετὰ τὰ φυσικά."
+     }
     ]
    },
    "prefix": false
@@ -1102,7 +1109,7 @@
      }
     ],
     "etymology": {
-     "text": "A faʿīl-type stative adjective from قَرُبَ (qaruba, “to be near”); cognate with Hebrew קָרוֹב (karóv, “close, near”) and Amharic ቅርብ (Wiktionary).",
+     "text": "A faʿīl-type stative adjective from قَرُبَ (qaruba, “to be near”); cognate with Hebrew קָרוֹב (karóv, “close, near”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1115,6 +1122,13 @@
     "subtleties": [
      "The same word is the noun “relative” (lesson 6), with the plurals أَقَارِبُ / أَقْرِبَاءُ; as “near” its plural is قَرِيبُونَ.",
      "Wiktionary: the feminine can also be قَرِيب, as in the Qurʾān: إِنَّ رَحْمَتَ اللّٰهِ قَرِيبٌ (7:56)."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ቅርብ is a cognate of قَرِيب."
+     }
     ]
    }
   },
@@ -2038,14 +2052,66 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish mutfak and Hebrew מִטְבָּח (mitbach) are the same word: “the place of cooking”."
+     "Hebrew מִטְבָּח (mitbach) is the same word: “the place of cooking”."
     ],
     "pitfalls": [
-     "ط and خ: maṭbaḫ — two sounds that Greek and German do not have.",
+     "ط and خ: maṭbaḫ — the emphatic ṭ and the rough ḫ at the back of the mouth must both be heard.",
      "The plural مَطَابِخُ is a diptote."
     ],
     "subtleties": [
-     "Like English “kitchen” and German Küche, مَطْبَخ is also a cuisine: الْمَطْبَخُ الْمَغْرِبِيُّ (Moroccan cooking)."
+     "Like German Küche, مَطْبَخ is also a cuisine: الْمَطْبَخُ الْمَغْرِبِيُّ (Moroccan cooking)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mutfak is the same word."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "خ is your χ before a, o, u (χαρά); ط, the emphatic t, is new."
+     },
+     {
+      "for": "de",
+      "rel": "similar",
+      "text": "خ is your ach-Laut (Bach); ط, the emphatic t, is new."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like kitchen, مَطْبَخ is also a cuisine."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like cuisine, مَطْبَخ is the room and the cooking: الْمَطْبَخُ الْمَغْرِبِيُّ."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like cucina, مَطْبَخ is the room and the cooking."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like cocina, مَطْبَخ is the room and the cooking."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like cozinha, مَطْبَخ is the room and the cooking."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like κουζίνα, مَطْبَخ is the room and the cooking."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like кухня, مَطْبَخ is the room and the cooking."
+     }
     ]
    }
   },
@@ -2186,13 +2252,40 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English hammam and Turkish hamam are this word: “the heating place”, the steam bath."
+     "“The heating place”, from the root ح م م (heat): once the steam bath, now any bathroom."
     ],
     "pitfalls": [
      "حَمَّام (ḥammām, bathroom) has a doubled m; حَمَام (ḥamām) is “pigeons”."
     ],
     "subtleties": [
      "“Where is the toilet?” is simply أَيْنَ الْحَمَّامُ؟ — حَمَّام covers bathroom and WC."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English hammam is the steam bath; Arabic حَمَّام is also an ordinary bathroom or toilet."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French hammam is the steam bath; Arabic حَمَّام is also an ordinary bathroom or toilet."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek χαμάμ is the steam bath; Arabic حَمَّام is also an ordinary bathroom or toilet."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Albanian hamam is the steam bath; Arabic حَمَّام is also an ordinary bathroom or toilet."
+     },
+     {
+      "for": "tr",
+      "rel": "trap",
+      "text": "Turkish hamam is the steam bath; Arabic حَمَّام is also an ordinary bathroom."
+     }
     ]
    }
   },
@@ -3007,13 +3100,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The chain begins in Greek: κωνωπεῖον was a couch with a net against mosquitoes (κώνωψ, “mosquito”); Modern Greek καναπές and κουνούπι are its descendants (Wiktionary)."
+     "The chain begins in Greek: κωνωπεῖον was a couch with a net against mosquitoes (κώνωψ, “mosquito”) (Wiktionary)."
     ],
     "pitfalls": [
      "Not a classical word: in formal writing you will also see أَرِيكَة."
     ],
     "subtleties": [
      "Feminine in ة: الْكَنَبَةُ مُرِيحَةٌ; plural كَنَبَات."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek καναπές and κουνούπι are descendants of the same κωνωπεῖον and κώνωψ."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French canapé is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian canapè is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English canopy is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
+     }
     ]
    }
   },
@@ -3142,10 +3257,32 @@
      "ثَلْج is snow and ice; Hebrew שֶׁלֶג (sheleg, snow) is its cousin."
     ],
     "pitfalls": [
-     "ث is the th of English “think”, and the l is doubled: ṯallāja."
+     "ث is said with the tongue between the teeth, voiceless, and the l is doubled: ṯallāja."
     ],
     "subtleties": [
      "faʿʿāla is a pattern for machines: ثَلَّاجَة (fridge), غَسَّالَة (washing machine), سَيَّارَة (car)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "ث is the th of “think”."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "ث is Greek θ: θάλασσα."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "ث is the z / c of Spain: zapato, cero."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "ث is Albanian th: thikë."
+     }
     ]
    }
   }

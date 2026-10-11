@@ -1,7 +1,7 @@
 {
  "function": "fn.prep.time",
  "status": "realized",
- "summary": "The time prepositions take the genitive like every preposition: قَبْلَ (before), بَعْدَ (after), حَتَّى (until; from … to … = مِنْ … إِلَى …), مُنْذُ (since; for a period up to now), خِلَالَ and أَثْنَاءَ (during). قَبْلَ, بَعْدَ, خِلَالَ and أَثْنَاءَ are old nouns in the accusative, like أَمَامَ in lesson 12: they end in -a and take pronoun endings (قَبْلِي, بَعْدَكَ, خِلَالَهُ). “At / on / in” a time is فِي for all three — فِي السَّاعَةِ الْخَامِسَةِ, فِي يَوْمِ الْجُمُعَةِ, فِي يَنَايِرَ, فِي الصَّيْفِ — where German needs um / am / im; often no preposition is needed at all (يَوْمَ الْجُمُعَةِ, صَيْفًا), and عِنْدَ marks a moment (عِنْدَ الظُّهْرِ). قَبْلَ + a span means “ago” (قَبْلَ سَنَةٍ), بَعْدَ + a span “in” (بَعْدَ أُسْبُوعٍ). مُنْذُ goes with the present for what is still going on — أَعِيشُ هُنَا مُنْذُ سَنَةٍ, exactly like German “ich wohne seit einem Jahr hier”. Arabic has no word for “o’clock”: the hour is السَّاعَةُ + a feminine ordinal, السَّاعَةُ الْخَامِسَةُ (“the fifth hour”). The months have two sets of names: old Syriac ones (كَانُونُ الثَّانِي, شُبَاطُ …) in Syria, Lebanon, Jordan, Palestine and Iraq, Latin ones (يَنَايِرُ, فِبْرَايِرُ …) in Egypt, Sudan and the Arabian Peninsula; a month name is a diptote: فِي يَنَايِرَ, فِي شُبَاطَ.",
+ "summary": "The time prepositions take the genitive like every preposition: قَبْلَ (before), بَعْدَ (after), حَتَّى (until; from … to … = مِنْ … إِلَى …), مُنْذُ (since; for a period up to now), خِلَالَ and أَثْنَاءَ (during). قَبْلَ, بَعْدَ, خِلَالَ and أَثْنَاءَ are old nouns in the accusative, like أَمَامَ in lesson 12: they end in -a and take pronoun endings (قَبْلِي, بَعْدَكَ, خِلَالَهُ). Any point in time — an hour, a day, a month, a season — takes فِي: فِي السَّاعَةِ الْخَامِسَةِ, فِي يَوْمِ الْجُمُعَةِ, فِي يَنَايِرَ, فِي الصَّيْفِ — where German needs um / am / im; often no preposition is needed at all (يَوْمَ الْجُمُعَةِ, صَيْفًا), and عِنْدَ marks a moment (عِنْدَ الظُّهْرِ). قَبْلَ + a span means “ago” (قَبْلَ سَنَةٍ), بَعْدَ + a span “in” (بَعْدَ أُسْبُوعٍ). مُنْذُ goes with the present for what is still going on — أَعِيشُ هُنَا مُنْذُ سَنَةٍ, exactly like German “ich wohne seit einem Jahr hier”. The hour is simply السَّاعَةُ + a feminine ordinal, السَّاعَةُ الْخَامِسَةُ (“the fifth hour”). The months have two sets of names: old Syriac ones (كَانُونُ الثَّانِي, شُبَاطُ …) in Syria, Lebanon, Jordan, Palestine and Iraq, Latin ones (يَنَايِرُ, فِبْرَايِرُ …) in Egypt, Sudan and the Arabian Peninsula; a month name is a diptote: فِي يَنَايِرَ, فِي شُبَاطَ.",
  "blocks": [
   {
    "t": "table",
@@ -196,7 +196,7 @@
      "five minus a quarter"
     ]
    ],
-   "caption": "كَمِ السَّاعَةُ؟ — What time is it? There is no word for “o’clock”; in everyday speech the cardinal is common (السَّاعَة خَمْسَة).",
+   "caption": "كَمِ السَّاعَةُ؟ — What time is it? The hour needs no extra word; in everyday speech the cardinal is common (السَّاعَة خَمْسَة).",
    "typology": [
     {
      "feature": "time.halfHour",
@@ -620,6 +620,81 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks time with case endings on time words (the locative -mi); Arabic uses prepositions before the noun or the bare accusative."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English before / after / until / since / during match قَبْلَ, بَعْدَ, حَتَّى, مُنْذُ, خِلَالَ; at / on / in for times are all فِي, and “ago” is قَبْلَ + a span (قَبْلَ سَنَةٍ). Trap: “I have lived here for a year” is the present: أَعِيشُ هُنَا مُنْذُ سَنَةٍ. Arabic has no word for “o’clock”: السَّاعَةُ الْخَامِسَةُ is “the fifth hour”."
+  },
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek πριν από, μετά από, μέχρι, κατά τη διάρκεια ↔ قَبْلَ, بَعْدَ, حَتَّى, خِلَالَ; like εδώ και + present (μένω στην Αθήνα εδώ και ένα χρόνο), مُنْذُ takes the present: أَعِيشُ هُنَا مُنْذُ سَنَةٍ. Πριν από ένα χρόνο is قَبْلَ سَنَةٍ."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian до, после, во время ↔ قَبْلَ, بَعْدَ, خِلَالَ; год назад is قَبْلَ سَنَةٍ, через неделю بَعْدَ أُسْبُوعٍ, and, as in я живу здесь уже год, مُنْذُ takes the present: أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French avant, après, jusqu’à, depuis, pendant ↔ قَبْلَ, بَعْدَ, حَتَّى, مُنْذُ, خِلَالَ — and depuis + present is exactly مُنْذُ + present: j’habite ici depuis un an = أَعِيشُ هُنَا مُنْذُ سَنَةٍ. Il y a un an is قَبْلَ سَنَةٍ, dans une semaine بَعْدَ أُسْبُوعٍ."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "Like seit, مُنْذُ takes the present (ich wohne seit einem Jahr hier = أَعِيشُ هُنَا مُنْذُ سَنَةٍ); vor einem Jahr is قَبْلَ سَنَةٍ, in einer Woche بَعْدَ أُسْبُوعٍ. Um / am / im all become فِي — or nothing at all: يَوْمَ الْجُمُعَةِ."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese puts 以前 / 以后 after the noun (吃饭以前, 一年以前 = a year ago); Arabic puts قَبْلَ / بَعْدَ before it: قَبْلَ الْأَكْلِ, قَبْلَ سَنَةٍ. 从…到… is مِنْ … إِلَى …, and a time of day takes فِي or nothing: فِي الصَّبَاحِ, صَبَاحًا."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian prima di, dopo, fino a, da, durante ↔ قَبْلَ, بَعْدَ, حَتَّى, مُنْذُ, خِلَالَ; abito qui da un anno = أَعِيشُ هُنَا مُنْذُ سَنَةٍ — the present in both. Un anno fa is قَبْلَ سَنَةٍ, fra una settimana بَعْدَ أُسْبُوعٍ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish antes de, después de, hasta, desde, durante ↔ قَبْلَ, بَعْدَ, حَتَّى, مُنْذُ, خِلَالَ; vivo aquí desde hace un año = أَعِيشُ هُنَا مُنْذُ سَنَةٍ, with the present in both. Hace un año is قَبْلَ سَنَةٍ — and hasta itself comes from حَتَّى."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian para and pas are close to قَبْلَ and بَعْدَ: para një viti = قَبْلَ سَنَةٍ (a year ago), pas një jave = بَعْدَ أُسْبُوعٍ; and, as in jetoj këtu prej një viti, مُنْذُ takes the present: أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese até comes from Arabic حَتَّى. Antes de, depois de, durante ↔ قَبْلَ, بَعْدَ, خِلَالَ; há um ano is قَبْلَ سَنَةٍ, and moro aqui há um ano = أَعِيشُ هُنَا مُنْذُ سَنَةٍ, with the present in both."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language uses one preposition per time unit (hour, day, month), Arabic simplifies: فِي for all, or the bare accusative (يَوْمَ الْجُمُعَةِ, صَيْفًا); مُنْذُ + present for what still goes on."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you say “before / after / ago” with a word after the noun, Arabic puts it first: قَبْلَ الْأَكْلِ, قَبْلَ سَنَةٍ (a year ago), بَعْدَ أُسْبُوعٍ (in a week) — with the genitive."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your time words follow the event, note that Arabic قَبْلَ and بَعْدَ come before it and take the genitive: قَبْلَ الْعَشَاءِ, بَعْدَ سَنَةٍ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If time relations are endings in your language, Arabic uses separate words before the noun — قَبْلَ, بَعْدَ, حَتَّى, مُنْذُ — and the noun takes the genitive."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, old nouns used as prepositions (قَبْلَ, بَعْدَ) and the old word for “until” (حَتَّى) will feel familiar; the hour as “the fifth hour” (السَّاعَةُ الْخَامِسَةُ) is Arabic’s own."
   }
  ]
 }

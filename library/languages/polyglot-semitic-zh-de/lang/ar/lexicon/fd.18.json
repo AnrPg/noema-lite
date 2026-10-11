@@ -112,7 +112,7 @@
      "Before a noun or pronoun ending you need the heavy لٰكِنَّ: لٰكِنَّهُ جَمِيلٌ."
     ],
     "subtleties": [
-     "وَلٰكِنْ (“and but”) is the most frequent form at the start of a clause; the وَ adds nothing in English."
+     "وَلٰكِنْ (“and but”) is the most frequent form at the start of a clause; the وَ adds no meaning of its own."
     ]
    },
    "prefix": false
@@ -461,7 +461,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German deswegen is built the same way (“because of that”), and Greek γι’ αυτό, “for this”."
+     "German deswegen is built the same way (“because of that”)."
     ],
     "pitfalls": [
      "Spelt with a dagger alif like ذٰلِكَ: لِذٰلِكَ (liḏālika); in print usually لذلك.",
@@ -469,6 +469,33 @@
     ],
     "subtleties": [
      "فَـ is the lighter, more frequent “so”; لِذٰلِكَ states the cause explicitly."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Built like γι’ αυτό, “for this”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Built like поэтому, “for this”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Built like por eso, “for that”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Built like per questo, “for this”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Built like por isso, “for that”."
+     }
     ]
    }
   },
@@ -1028,7 +1055,7 @@
      {
       "word": "أَنْ",
       "register": "neutral",
-      "nuance": "that + a verb (usually in the subjunctive) — often English “to”"
+      "nuance": "that + a verb (usually in the subjunctive) — where many languages use an infinitive"
      },
      {
       "word": "إِنَّ",
@@ -1049,6 +1076,13 @@
     ],
     "subtleties": [
      "أَنِّي and أَنَّنِي (that I) are both correct; أَنَّنِي is more frequent today."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "أَنْ + a verb is often English “to”: أُرِيدُ أَنْ آكُلَ = I want to eat."
+     }
     ]
    }
   },
@@ -1155,14 +1189,41 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek says it the same way: θέλω να πάω, “I want that I go” = أُرِيدُ أَنْ أَذْهَبَ — no infinitive."
+     "No infinitive: “I want that I go” = أُرِيدُ أَنْ أَذْهَبَ, with the person on both verbs."
     ],
     "pitfalls": [
      "The verb after it takes the subjunctive: -a instead of -u (أَنْ أَذْهَبَ, not أَذْهَبُ); the -na of تَأْكُلِينَ / يَأْكُلُونَ drops (أَنْ تَأْكُلِي, أَنْ يَأْكُلُوا).",
      "أَنْ + لَا is written أَلَّا: أُرِيدُ أَلَّا أَذْهَبَ (I want not to go)."
     ],
     "subtleties": [
-     "Where English has “to” (I want to eat), Arabic has أَنْ + a verb with a person: أُرِيدُ أَنْ آكُلَ, تُرِيدُ أَنْ تَأْكُلَ."
+     "Arabic has no infinitive: أَنْ + a verb with a person: أُرِيدُ أَنْ آكُلَ, تُرِيدُ أَنْ تَأْكُلَ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek says it the same way: θέλω να πάω = أُرِيدُ أَنْ أَذْهَبَ."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian says it the same way: dua të shkoj = أُرِيدُ أَنْ أَذْهَبَ."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "Where English has “to” (I want to eat), Arabic has أَنْ + a verb with a person: أُرِيدُ أَنْ آكُلَ."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "Where French has an infinitive (je veux manger), Arabic has أَنْ + a verb with a person: أُرِيدُ أَنْ آكُلَ."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Where Russian has an infinitive (я хочу есть), Arabic has أَنْ + a verb with a person: أُرِيدُ أَنْ آكُلَ."
+     }
     ]
    }
   },
@@ -1277,14 +1338,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek παρόλο που and German obwohl are built from other pieces, but the idea is the same: “with all that, …”."
+     "German obwohl is built from other pieces, but the idea is the same: “with all that, …”."
     ],
     "pitfalls": [
-     "No لٰكِنْ in the main clause: *مَعَ أَنَّنِي مُتْعَبٌ لٰكِنْ أَذْهَبُ is wrong, like English “although …, but …”.",
+     "No لٰكِنْ in the main clause: *مَعَ أَنَّنِي مُتْعَبٌ لٰكِنْ أَذْهَبُ is wrong: مَعَ أَنَّ already does the work.",
      "Like أَنَّ, it takes the accusative or a pronoun ending: مَعَ أَنَّ الْمَدْرَسَةَ بَعِيدَةٌ."
     ],
     "subtleties": [
      "The clause can come first or second: مَعَ أَنَّهَا غَالِيَةٌ، اِشْتَرَاهَا / اِشْتَرَاهَا مَعَ أَنَّهَا غَالِيَةٌ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek παρόλο που is built from other pieces, but the idea is the same: “with all that, …”."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As with “although …, but …”, the double link is wrong."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "Chinese pairs 虽然 … 但是 …; Arabic does not: مَعَ أَنَّنِي مُتْعَبٌ أَذْهَبُ, with no لٰكِنْ."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Russian allows хотя …, но …; Arabic does not: no لٰكِنْ after مَعَ أَنَّ."
+     }
     ]
    }
   }

@@ -1,7 +1,7 @@
 {
  "function": "fn.past.ongoing",
  "status": "periphrastic",
- "summary": "Arabic has no special verb form for “was doing” or “used to do”: it puts كَانَ “was” in the past before a verb in the present (the imperfect), and both verbs agree with the subject: كُنْتُ أَلْعَبُ “I was playing / I used to play”, كَانَتْ أُمِّي تَطْبُخُ “my mother was cooking”, كُنَّا نُسَافِرُ “we used to travel”. The same construction is the background of a past moment (كُنْتُ أَنَامُ عِنْدَمَا عَادَ أَبِي “I was sleeping when my father came back”) and a past habit (كُنْتُ أَذْهَبُ إِلَى الرَّوْضَةِ “I used to go to kindergarten”); a time clause with عِنْدَمَا or words like كُلَّ يَوْمٍ, دَائِمًا, فِي طُفُولَتِي show which. The plain past (لَعِبْتُ) is one finished event. The negative puts لَا before the second verb (كُنْتُ لَا أُحِبُّ الْحَلِيبَ “I didn’t like milk”) or uses لَمْ أَكُنْ + present.",
+ "summary": "Arabic has no special verb form for an action going on or repeated in the past: it puts كَانَ “was” in the past before a verb in the present (the imperfect), and both verbs agree with the subject: كُنْتُ أَلْعَبُ “I was playing / I used to play”, كَانَتْ أُمِّي تَطْبُخُ “my mother was cooking”, كُنَّا نُسَافِرُ “we used to travel”. The same construction is the background of a past moment (كُنْتُ أَنَامُ عِنْدَمَا عَادَ أَبِي “I was sleeping when my father came back”) and a past habit (كُنْتُ أَذْهَبُ إِلَى الرَّوْضَةِ “I used to go to kindergarten”); a time clause with عِنْدَمَا or words like كُلَّ يَوْمٍ, دَائِمًا, فِي طُفُولَتِي show which. The plain past (لَعِبْتُ) is one finished event. The negative puts لَا before the second verb (كُنْتُ لَا أُحِبُّ الْحَلِيبَ “I didn’t like milk”) or uses لَمْ أَكُنْ + present.",
  "blocks": [
   {
    "t": "table",
@@ -174,7 +174,7 @@
  "traps": [
   "The second verb is present, not past: كُنْتُ أَلْعَبُ, not *كُنْتُ لَعِبْتُ (كَانَ + past, usually with قَدْ, is “had done” — a later lesson).",
   "Both verbs agree with the same person: كُنَّا نَلْعَبُ, not *كُنَّا أَلْعَبُ.",
-  "There is no word for “used to”: the habit is in كَانَ + present and in the time words.",
+  "No separate word marks a past habit: it lies in كَانَ + present and in the time words.",
   "The present alone is not a past habit: أَلْعَبُ فِي الشَّارِعِ is “I play in the street” (now).",
   "كَانَتْ before al- takes a helping vowel: كَانَتِ الْبِنْتُ تَلْعَبُ."
  ],
@@ -319,7 +319,7 @@
    "why": "كَانَ before the noun stays singular; the second verb comes after the noun and agrees fully."
   },
   {
-   "q": "Which word is Arabic’s “used to”?",
+   "q": "Which word marks a habit in the past?",
    "options": [
     "there is none: كَانَ + present",
     "سَوْفَ",
@@ -471,6 +471,41 @@
    "for": "type:polysynthetic",
    "rel": "different",
    "text": "Polysynthetic languages usually put habit and duration into the verb word as suffixes; Arabic expresses them with two separate verbs, كَانَ + present."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "The imperfetto (giocavo) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two verbs, and the passato remoto / prossimo (giocai, ho giocato) matches the plain past لَعِبْتُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "The Albanian imperfect (luaja, “I was playing / I used to play”) is one word for both meanings; Arabic says it with two verbs, كَانَ + present: كُنْتُ أَلْعَبُ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "The pretérito imperfeito (jogava) covers habit and background like كُنْتُ أَلْعَبُ, and so does estava a jogar; the pretérito perfeito (joguei) matches the plain past لَعِبْتُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has an imperfect that covers habits and background, Arabic builds the same meaning with two words: كَانَ (was) + the present, both agreeing with the subject."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you stack a habit or progressive suffix and a past suffix on one verb, Arabic spreads them over two verbs — كَانَ for the past, the present for the ongoing action: كُنَّا نُسَافِرُ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If the verb never changes and time words carry the meaning, note that Arabic changes both verbs for the person — كُنْتُ أَلْعَبُ, كَانَتْ تَلْعَبُ —; time words like دَائِمًا still help."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, “was” + a present form for habits is familiar; Arabic uses كَانَ + the prefix present, both agreeing: كُنْتُ أَلْعَبُ."
   }
  ]
 }

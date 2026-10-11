@@ -509,6 +509,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks the future with a suffix inside the verb word (-langa-); Arabic puts سَـ before the present."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian has a one-word future (viaggerò) and uses the present for plans (domani parto); Arabic does both: سَأُسَافِرُ or أُسَافِرُ غَدًا. The negative changes the particle: لَنْ أُسَافِرَ, not *لَا سَأُسَافِرُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian builds the future like Arabic, with a particle before the verb — do të shkoj = سَأَذْهَبُ; but the negative keeps do (nuk do të shkoj), while Arabic replaces سَـ with لَنْ: لَنْ أَذْهَبَ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese has a one-word future (viajarei), ir + infinitive (vou viajar) and the present for plans (viajo amanhã); Arabic uses سَـ / سَوْفَ or the present with a time word, and لَنْ + subjunctive for “will not”."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your future is an ending or an auxiliary, Arabic is simpler: سَـ (or سَوْفَ) before the present — سَأُسَافِرُ — and لَنْ + the subjunctive for the negative."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language marks the future with a suffix inside the verb, Arabic puts a particle in front of the present instead: سَـ + أُسَافِرُ = سَأُسَافِرُ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you mark the future with a word before an unchanged verb, the idea is the same — but the Arabic verb already carries the person: سَأُسَافِرُ, سَتُسَافِرُ, سَيُسَافِرُ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks the future with a suffix inside the verb word, note that Arabic puts سَـ before the present and negates it with a different particle, لَنْ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language is Semitic, the prefix verb may already be your future; in Arabic it is the present, and the future needs سَـ or سَوْفَ: سَأُسَافِرُ."
   }
  ]
 }

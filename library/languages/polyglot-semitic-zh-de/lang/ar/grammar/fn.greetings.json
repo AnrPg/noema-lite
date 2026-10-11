@@ -331,7 +331,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi and Urdu use Arabic words in greetings too — सलाम, शुक्रिया (from شُكْر) —, but where नमस्ते serves for hello and goodbye, Arabic has separate formulas, each with its answer."
+   "text": "Hindi uses Arabic words in greetings too — सलाम, शुक्रिया (from شُكْر) —, but where नमस्ते serves for hello and goodbye, Arabic has separate formulas, each with its answer."
   },
   {
    "for": "fa",
@@ -377,6 +377,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut asks Qanuippit? (how are you?) and answers with one word, qanuingittunga (I’m fine); Arabic uses set phrases: كَيْفَ حَالُكَ؟ — بِخَيْرٍ، شُكْرًا."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German chooses du or Sie (Wie geht’s dir? / Wie geht es Ihnen?); Arabic has no polite form but chooses by gender and number: كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ. Guten Morgen is answered in kind; صَبَاحُ الْخَيْرِ has a set answer, صَبَاحُ النُّورِ."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese 你好 / 您好 choose by politeness; Arabic chooses by the listener’s gender and number: كَيْفَ حَالُكَ (to a man), كَيْفَ حَالُكِ (to a woman). As with 谢谢 → 不客气, every Arabic formula has its set answer: شُكْرًا → عَفْوًا."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian answers buongiorno with buongiorno and picks come stai? / come sta? by politeness; Arabic answers صَبَاحُ الْخَيْرِ with صَبَاحُ النُّورِ and picks كَيْفَ حَالُكَ / حَالُكِ by gender."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian answers mirëmëngjes with mirëmëngjes and picks si je? / si jeni? by number and politeness; Arabic answers صَبَاحُ الْخَيْرِ with صَبَاحُ النُّورِ and changes “you” by gender: كَيْفَ حَالُكَ / حَالُكِ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As obrigado / obrigada follows the speaker, the Arabic apology does: آسِفٌ (a man), آسِفَةٌ (a woman). New: “you” in a greeting changes with the listener’s gender (كَيْفَ حَالُكَ / حَالُكِ), and صَبَاحُ الْخَيْرِ has a set answer, صَبَاحُ النُّورِ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language chooses “you” by politeness, note that Arabic chooses it by gender and number instead — كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ — and shows respect with titles (يَا أُسْتَاذُ)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your greetings have fixed replies, the Arabic pairs will feel natural: each formula has its own answer — صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ, السَّلَامُ عَلَيْكُمْ → وَعَلَيْكُمُ السَّلَامُ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If greetings in your language never change, note that Arabic formulas with “you” change with the listener: حَالُكَ to a man, حَالُكِ to a woman, حَالُكُمْ to several people."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Learn each formula with its answer — the reply often outdoes the greeting (صَبَاحُ النُّورِ, “morning of light”) — and change the “you” ending for the listener: -ka, -ki, -kum."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the peace greeting and its answer are familiar (السَّلَامُ عَلَيْكُمْ, from the root س ل م); only the Arabic forms of “you” by gender and number need practice."
   }
  ]
 }

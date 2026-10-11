@@ -399,13 +399,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian fondaco (a merchants’ warehouse) and Spanish fonda (an inn) came from this Arabic word."
+     "A round trip: a Greek word for an inn became Arabic فُنْدُق, and Arabic lent it back to Mediterranean words for warehouses, inns and customs houses."
     ],
     "pitfalls": [
      "The plural فَنَادِقُ is a diptote: no tanwīn and -a in the genitive: فِي فَنَادِقَ كَثِيرَةٍ."
     ],
     "subtleties": [
      "In older North African usage a فُنْدُق was a caravanserai, an inn with a courtyard for merchants and their animals."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian fondaco (a merchants’ warehouse, as in Venice’s Fondaco dei Tedeschi) comes from this Arabic word."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish fonda (an inn) comes from this Arabic word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese alfândega (customs house) is الْفُنْدُق, article and all."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "فُنْدُق is Greek πανδοκεῖον, “the inn that receives all” — today πανδοχείο."
+     }
     ]
    }
   },
