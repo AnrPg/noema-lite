@@ -306,22 +306,40 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
   const J = rel => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'library', 'languages', rel), 'utf8'));
   const d = N.readCourse(read, list); d.world = { features: J('_typology/features.json').features, languages: J('_typology/languages.json').languages, phenomena: { de: J('_phenomena/de.json').phenomena } };
   const CW = N.course(d), nat = x => N.nativeOf(CW, x);
-  const el = nat({ code: 'el' }), tr = nat({ code: 'tr' }), he = nat({ code: 'he' }), en = nat({ code: 'en' }), pt = nat({ code: 'pt' });
-  ok(el.supported && el.type === 'fusional' && el.branch === 'Hellenic' && !tr.supported && tr.type === 'agglutinating' && tr.family === 'Turkic' && /^Semitic/.test(he.branch) && !he.supported,
-    'nativeOf: a code is completed from its profile (type, family, branch); supported = a UI locale (el yes, tr / he no)');
+  const el = nat({ code: 'el' }), tr = nat({ code: 'tr' }), he = nat({ code: 'he' }), en = nat({ code: 'en' }), pt = nat({ code: 'pt' }), ko = nat({ code: 'ko' });
+  ok(el.supported && el.type === 'fusional' && el.branch === 'Hellenic' && tr.supported && tr.type === 'agglutinating' && tr.family === 'Turkic' && /^Semitic/.test(he.branch) && !he.supported && !ko.supported,
+    'nativeOf: a code is completed from its profile (type, family, branch); supported = a UI locale (el, tr yes; he, ko no)');
+  { const I18N = fs.readFileSync(path.join(ROOT, 'engine', 'i18n.js'), 'utf8'), tags = [...I18N.matchAll(/\{ tag: '([a-z]{2,3}(?:-[A-Za-z]+)?)', name:(?![^}]*pseudo)/g)].map(m => m[1].split('-')[0]);
+    ok(JSON.stringify(N.SUPPORTED_NATIVES) === JSON.stringify([...new Set(tags)]) && N.SUPPORTED_NATIVES.includes('tr'), 'SUPPORTED_NATIVES = the languages of the UI locales (one source of truth; tr included): ' + N.SUPPORTED_NATIVES.join(' ')); }
   ok(N.nativeOf(CW, null, [{ code: 'ru', level: 'C2' }, { code: 'tr', level: 'native' }]).code === 'tr' && N.nativeOf(CW, { code: 'el' }, [{ code: 'tr', level: 'native' }]).code === 'el' && N.nativeOf(CW, null, null) === null && N.nativeOf(CW, null, [{ code: 'fr', level: 'B1' }]) === null,
     'nativeOf: the account’s setting wins; else the course’s known language at level native; else unknown');
   const ki = N.nativeOf(CW, { name: 'Kirundi', type: 'agglutinating', family: 'Niger-Congo' });
   ok(!ki.code && ki.type === 'agglutinating' && !ki.supported && N.learnerProfiles(CW, N.nativeKnows(ki))[0]?.inferred === 'family', 'a native language without a profile: its type and family; the familiar parts inferred from its family');
   const notes = [{ for: 'el', rel: 'similar', text: 'EL' }, { for: 'en', rel: 'same', text: 'EN' }, { for: 'tr', rel: 'new', text: 'TR' }, { for: 'ja', rel: 'new', text: 'JA' }, { for: 'fa', rel: 'new', text: 'FA' },
     { for: 'type:agglutinating', rel: 'new', text: 'AGG' }, { for: 'type:fusional', rel: 'similar', text: 'FUS' }, { for: 'branch:Semitic', rel: 'different', text: 'SEM' }];
-  const seen = (ns, n) => N.contrastFor(ns, n).map(x => x.text).join();
-  ok(seen(notes, el) === 'EL' && seen(notes, en) === 'EN' && seen(notes, nat({ code: 'ja' })) === 'JA', 'contrastFor: a supported native sees the notes for its own language only (el → el, en → en: no English for a Greek speaker)');
-  ok(seen(notes, tr) === 'AGG' && seen(notes, he) === 'SEM' && seen(notes, nat({ code: 'fa' })) === 'FUS', 'contrastFor: an unsupported native never sees the note for its code (tr, fa): its branch (he → Semitic), else its type (tr → agglutinating, fa → fusional)');
-  ok(seen([...notes, { for: 'family:Turkic', rel: 'same', text: 'TURKIC' }], tr) === 'TURKIC' && seen(notes, pt) === 'FUS' && seen(notes, ki) === 'AGG' && seen(notes, null) === '' && seen(null, el) === '',
-    'contrastFor: branch ▸ family ▸ type; a supported native without a note of its own gets its type’s; no native: no notes');
-  ok(seen([...notes, { for: 'tr', rel: 'new', text: 'MINE', ai: true }], tr) === 'AGG,MINE' && seen([...notes, { for: 'Kirundi', rel: 'new', text: 'KI', ai: true }], ki) === 'AGG,KI' && seen([...notes, { for: 'tr', text: 'X', ai: true }], el) === 'EL',
-    'contrastFor: notes the learner asked Claude for (ai) in their own language are added; never those for another language');
+  const seen = (ns, n, o) => N.contrastFor(ns, n, o).yours.flatMap(g => g.notes).map(x => x.text).join();
+  const secs = r => ['yours', 'learning', 'others'].map(k => r[k].map(g => g.for + ':' + g.notes.map(n => n.text).join('+') + (g.seeAlso ? '@' + g.seeAlso.map(x => x.fn).join('+') : '')).join(' ')).join(' | ');
+  ok(seen(notes, el) === 'EL' && seen(notes, en) === 'EN' && seen(notes, nat({ code: 'ja' })) === 'JA' && seen(notes, tr) === 'TR', 'contrastFor: a native sees the notes for its own language first (el → el, en → en, tr → tr: no English for a Greek speaker)');
+  ok(seen(notes, he) === 'SEM' && seen(notes, ko) === 'AGG' && seen(notes, nat({ code: 'fa' })) === 'FA', 'contrastFor: a native language without notes of its own: its branch (he → Semitic), else its type (ko → agglutinating); one with notes (fa) sees them');
+  ok(seen([...notes, { for: 'family:Turkic', rel: 'same', text: 'TURKIC' }], nat({ name: 'Gagauz', type: 'agglutinating', family: 'Turkic' })) === 'TURKIC' && seen(notes, pt) === 'FUS' && seen(notes, ki) === 'AGG' && seen(notes, null) === '' && seen(null, el) === '',
+    'contrastFor: branch ▸ family ▸ type; a supported native without a note of its own gets its type’s; no native: no “yours” section');
+  ok(seen([...notes, { for: 'tr', rel: 'new', text: 'MINE', ai: true }], tr) === 'TR,MINE' && seen([...notes, { for: 'Kirundi', rel: 'new', text: 'KI', ai: true }], ki) === 'AGG,KI' && seen([...notes, { for: 'tr', text: 'X', ai: true }], el) === 'EL',
+    'contrastFor: notes the learner asked Claude for (ai) join their own language; never those for another language');
+  { const all = [...notes, { for: 'de', rel: 'different', text: 'DE' }, { for: 'ar', rel: 'new', text: 'AR' }, { for: 'zh', rel: 'new', text: 'ZH' }, { for: 'fi', rel: 'new', text: 'FI' }];
+    const r = N.contrastFor(all, el, { speaks: N.speaksOf([{ code: 'el', level: 'native' }, { code: 'en', level: 'C1' }, { code: 'fr', level: 'B2' }], el), learning: ['ar', 'de', 'he'], page: 'ar', seeAlso: [{ lang: 'de', fn: 'fn.x' }, { lang: 'zh', fn: 'fn.y' }, { lang: 'ar', fn: 'fn.self' }] });
+    ok(secs(r) === 'el:EL en:EN | de:DE@fn.x | zh:ZH@fn.y ja:JA tr:TR fa:FA fi:FI type:agglutinating:AGG type:fusional:FUS branch:Semitic:SEM',
+      'contrastFor sections: yours = native first, then C1 / C2 (B2 not); learning = the other course languages studied, with their seeAlso links; others = every other language (supported natives first), then type / branch notes; never the page’s own language: ' + secs(r));
+    ok(r.yours[1].level === 'C1' && r.yours[0].native && r.others.every(g => g.kind === (g.for.includes(':') ? g.for.split(':')[0] : 'lang')) && N.contrastNotes(r).length === 11 && N.contrastNotes(r, { folded: false }).length === 3,
+      'contrastFor: group kind and level; contrastNotes (with or without the folded section)');
+    const r2 = N.contrastFor(all, he, { learning: ['ar', 'de'], page: 'de' });
+    ok(secs(r2) === 'he:SEM | ar:AR | en:EN el:EL zh:ZH ja:JA tr:TR fa:FA fi:FI type:agglutinating:AGG type:fusional:FUS' && r2.yours[0].via === 'branch:Semitic',
+      'contrastFor: an unsupported native shown through its branch at its place (group.via); the branch note is not repeated in the others: ' + secs(r2)); }
+  ok(JSON.stringify(N.speaksOf([{ code: 'el', level: 'native' }, { code: 'EN', level: 'c1' }, { code: 'de', level: 'B2' }, { name: 'Kirundi', level: 'C2' }, { code: 'en', level: 'C2' }], el)) === '[{"code":"en","level":"C1"},{"name":"Kirundi","level":"C2"}]',
+    'speaksOf: the C1 / C2 languages in the learner’s order, once each, without the native one');
+  { const md = N.noteMarkdown('Two points:\n- **one** is *eins*\n- two\n→ zwei — δύο\n\n1. a\n2. b\n\n→ ich habe gegessen — έχω φάει\nAnd 2 * 3 = 6, *x');
+    ok(md.map(b => b.t).join() === 'p,ul,ol,ex,p' && md[1].items.length === 2 && md[1].items[0].lines[0][0].t === 'b' && md[1].items[0].lines[0][2].t === 'i' && md[1].items[1].ex[0][0].s === 'zwei — δύο' && md[2].start === 1 && md[3].inl[0].s === 'ich habe gegessen — έχω φάει' && md[4].lines[0].every(x => x.t === 'text') && md[4].lines[0].map(x => x.s).join('') === 'And 2 * 3 = 6, *x',
+      'noteMarkdown: paragraphs, - and 1. lists, **bold**, *italic*, → examples (under an item or alone); stray stars stay text');
+    ok(N.noteMarkdown('<b>x</b> [l](u) # h').length === 1 && N.noteMarkdown('<b>x</b> [l](u) # h')[0].lines[0][0].s === '<b>x</b> [l](u) # h' && !N.noteMarkdown('').length, 'noteMarkdown: no HTML, links or headings — they stay text'); }
   // the explanation locale
   const X = o => N.explanationLocale(o);
   ok(X({ native: el, uiLocale: 'el' }) === 'en' && X({ native: el, uiLocale: 'ru', facades: { el: 'on' } }) === 'el' && X({ native: tr, uiLocale: 'el', facades: { el: 'on' } }) === 'el' && X({ native: tr, uiLocale: 'fr', facades: { el: 'on' } }) === 'en',
@@ -334,12 +352,15 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
     'explanationLocale: the learner’s choice (settings.speaker) first, when it can be shown');
   ok(X({ native: nat({ code: 'zh' }), uiLocale: 'zh-Hant', facades: { 'zh-Hans': 'on', 'zh-Hant': 'on' } }) === 'zh-Hant' && X({ native: nat({ code: 'es' }), facades: { 'es-ES': 'on' } }) === 'es-ES' && X({ native: nat({ code: 'ar' }), facades: ['ar-EG'] }) === 'ar-EG',
     'explanationLocale: a language matches its locales (zh → the UI’s script, es → es-ES, ar → ar-EG)');
-  ok(/native language: Greek \(Modern\) \(el\)/.test(N.nativeRule(el)) && /Turkish, a language of the agglutinating type \(Turkic family\)\. When you compare, compare only with that type/.test(N.nativeRule(tr)) && N.nativeRule(null).includes('Never refer to languages the learner does not speak natively'),
-    'the rule for every AI prompt: the native language (or its type), never other languages');
-  { const L0 = N.newLearner(CW), sys = [N.aiTask(CW, L0, 'de', { kind: 'translate', gloss: 'x', reference: ['y'], answer: 'z' }, { native: tr }).system, N.readerTask(CW, L0, 'de', { native: tr }).system, N.tutorTask(CW, L0, 'de', {}, { native: tr }).system];
-    ok(sys.every(s => s.includes('agglutinating type') && s.includes('Never refer to languages the learner does not speak natively')), 'aiTask, readerTask and tutorTask tell the AI the native language (its type) and the rule'); }
-  ok(N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], N.nativeKnows(el)).length === 1 && !N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], N.nativeKnows(tr)).length && !N.nativeKnows(null).length,
-    'familiar (D18) from the native language only (nativeKnows)'); }
+  { const rl = N.nativeRule(el, { speaks: [{ code: 'en', name: 'English' }], learning: [{ code: 'de', name: 'German' }, { code: 'ar', name: 'Arabic' }] });
+    ok(/native language: Greek \(Modern\) \(el\)\. When you compare, compare with it first/.test(rl) && /also speaks English \(en\) at level C1 \/ C2/.test(rl) && /learning in this course \(German \(de\), Arabic \(ar\)\)/.test(rl) && /Never refer to any other language/.test(rl)
+      && /Kirundi, a language of the agglutinating type \(Niger-Congo family\)\. When you compare with it, compare only with that type/.test(N.nativeRule(ki)) && /native language is not known/.test(N.nativeRule(null)),
+      'the rule for every AI prompt: the native language (or its type) first, the C1 / C2 languages, the course languages — never any other'); }
+  { const L0 = N.newLearner(CW, { knows: [{ code: 'en', level: 'C1' }] }), sys = [N.aiTask(CW, L0, 'de', { kind: 'translate', gloss: 'x', reference: ['y'], answer: 'z' }, { native: ki }).system, N.readerTask(CW, L0, 'de', { native: ki }).system, N.tutorTask(CW, L0, 'de', {}, { native: ki }).system];
+    ok(sys.every(s => s.includes('agglutinating type') && s.includes('Never refer to any other language') && /also speaks [^.]*\(en\)/.test(s)), 'aiTask, readerTask and tutorTask tell the AI the native language (its type), the C1 / C2 languages and the rule'); }
+  ok(N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], N.nativeKnows(el)).length === 1 && !N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], N.nativeKnows(tr)).length && !N.nativeKnows(null).length
+    && N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], [...N.nativeKnows(tr), { code: 'el', level: 'C1' }]).length === 1 && !N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], [...N.nativeKnows(tr), { code: 'el', level: 'B2' }]).length,
+    'familiar (D18, R1) from the native language and the C1 / C2 ones (not B2)'); }
 { // ---------- D19 §3: a locale facade over the pilot course — the texts change, the exercises do not ----------
   const PD = path.join(__dirname, '..', 'library', 'languages', 'polyglot-semitic-zh-de'), FX = path.join(__dirname, 'fixtures', 'lang-facade', 'el');
   const rp = rel => { const p = path.join(PD, rel); return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : null; };

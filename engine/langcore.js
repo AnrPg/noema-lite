@@ -184,15 +184,15 @@
   const trimPhenomenon = p => ({ id: p.id, title: p.title, area: p.area, kind: p.kind || 'has', typology: p.typology || [], what: p.what, examples: (p.examples || []).slice(0, 2), when: p.when || '', notes: p.notes || [], ...(p.specific ? { specific: true, alsoIn: p.alsoIn || [], alsoNote: p.alsoNote || '' } : {}) });
   /** D16 — what is new and what is familiar in a language for a learner who knows `knows` (language codes), computed from the
    *  shared typological profiles, never written from one point of view. → {knownProfiles, unknownLangs, new: [{p, notes}], familiar: [{p, from}]} */
-  const UNKNOWN_SHARE = 0.3;   // D19
+  const UNKNOWN_SHARE = 0.3;   // D20
   /** The learner's languages (D18): settings.knows = [{code | name, level, type?, family?}] → the ones that decide what is familiar
-   *  (native, C2) as profiles; a language without a profile gets the prototype of its family, else of its type. */
+   *  (native, C1, C2) as profiles; a language without a profile gets the prototype of its family, else of its type. */
   function learnerProfiles(C, knows) {
     const W = C.data.world; if (!W) return [];
     const prof = Object.fromEntries(W.languages.map(l => [l.code, l]));
     const out = [];
     for (const k of (knows || []).map(x => typeof x === 'string' ? { code: x, level: 'native' } : x)) {
-      if (!['native', 'C2'].includes(k.level || 'native')) continue;
+      if (!['native', 'C2', 'C1'].includes(k.level || 'native')) continue;   // R1: C1 and C2 work the same
       if (k.code && prof[k.code]) { out.push({ ...prof[k.code], level: k.level || 'native' }); continue; }
       const p = prototype(C, k.family ? { family: k.family } : null) || prototype(C, k.type ? { typology: k.type } : null);
       if (p) out.push({ code: k.code || k.name, name: k.name || k.code, typology: k.type || p.typology, family: k.family || p.family, values: p.values, inferred: k.family && prototype(C, { family: k.family }) ? 'family' : 'type', level: k.level || 'native' });
@@ -267,20 +267,123 @@
   }
   /** The native language as a settings.knows entry (what learnerProfiles / familiarFrom / forLearner / knownLinks read): [] when unknown. */
   const nativeKnows = native => native ? [{ ...(native.code ? { code: native.code } : { name: native.name }), ...(native.type ? { type: native.type } : {}), ...(native.family ? { family: native.family } : {}), level: 'native' }] : [];
-  /** The comparison notes a learner sees (§2.2): those for their native language when it is supported; else (or when a page has none
-   *  for it) those for its branch, else its family, else its type. A note for another language is never shown; notes the learner had
-   *  Claude / Gemini write (ai: true) for their own language are added. native: as nativeOf returns it. */
-  function contrastFor(notes, native) {
-    const list = (notes || []).filter(n => n && n.for); if (!native || !list.length) return [];
-    const ai = list.filter(n => n.ai && ((native.code && n.for === native.code) || (native.name && n.for === native.name)));
-    const own = list.filter(n => !n.ai);
-    if (native.code && SUPPORTED_NATIVES.includes(baseLang(native.code))) { const mine = own.filter(n => n.for === baseLang(native.code)); if (mine.length) return [...mine, ...ai]; }
-    const bare = x => String(x).replace(/\s*\(.*\)\s*$/, '');   // “Semitic (Northwest)” → Semitic
-    for (const keys of [native.branch && ['branch:' + native.branch, 'branch:' + bare(native.branch)], native.family && ['family:' + native.family, 'family:' + bare(native.family)], native.type && ['type:' + native.type]]) {
-      if (!keys) continue;
-      const m = own.filter(n => keys.includes(n.for)); if (m.length) return [...m, ...ai];
+  /** R1: the languages the learner speaks at C1 or C2 (settings.knows, C1 and C2 alike), in the order they listed them, without the
+   *  native one → [{code?, name?, level}] (a language typed by name keeps its name). */
+  function speaksOf(knows, native) {
+    const nat = native && native.code ? baseLang(native.code) : null, out = [], seen = new Set();
+    for (const k0 of knows || []) {
+      const k = typeof k0 === 'string' ? null : k0; if (!k || !['C1', 'C2'].includes(String(k.level || '').toUpperCase())) continue;
+      const code = k.code ? baseLang(k.code) : null, id = code || k.name; if (!id || id === nat || seen.has(id)) continue;
+      seen.add(id); out.push({ ...(code ? { code } : { name: k.name }), level: String(k.level).toUpperCase() });
     }
-    return ai;
+    return out;
+  }
+  /** The comparison notes a learner sees (§2.2, R1), in three sections, each a list of groups {for, lang, kind, notes, …} shown under
+   *  the heading of their language (or group):
+   *  · yours — “From your languages”: the native language first (its own notes; else — a language without notes on this place —
+   *    the notes of its branch ▸ family ▸ type, once, at its place: group.via = the key used), then each C1 / C2 language in the
+   *    learner's order (its notes; nothing for one without);
+   *  · learning — “Among the languages you are learning”: the other course languages the learner studies (D10: the notes whose
+   *    `for` is one of them, and opts.seeAlso [{lang, fn, note}] links to them), in the order given;
+   *  · others — “From other languages” (folded by the app): every other note — other languages (the supported natives first, in
+   *    SUPPORTED_NATIVES order, then the rest in their order), then the type ▸ branch ▸ family notes not shown above — and the
+   *    seeAlso links to course languages the learner does not study.
+   *  Notes for the language on screen (opts.page) are never shown. Notes the learner had Claude / Gemini write (ai: true) join their
+   *  language's group. native: as nativeOf returns it (null: no “yours” section); opts: {speaks: speaksOf(…) or codes, learning:
+   *  [course codes the learner studies], page: the language on screen, seeAlso}. Group kind: lang | type | branch | family | name. */
+  function contrastFor(notes, native, { speaks = [], learning = [], page = null, seeAlso = [] } = {}) {
+    const list = (notes || []).filter(n => n && n.for && n.text != null), out = { yours: [], learning: [], others: [] };
+    const kindOf = f => /^(type|branch|family):/.test(f) ? f.split(':')[0] : /^[a-z]{2,3}([-_][a-z0-9]+)*$/i.test(f) ? 'lang' : 'name';
+    const pg = page ? baseLang(page) : null, used = new Set(), keyOf = f => kindOf(f) === 'lang' ? baseLang(f) : String(f);
+    const notesOf = k => list.filter(n => keyOf(n.for) === k);
+    const also = (seeAlso || []).filter(x => x && x.lang && baseLang(x.lang) !== pg), alsoUsed = new Set();
+    const alsoOf = code => { const a = also.filter(x => baseLang(x.lang) === code); a.forEach(x => alsoUsed.add(x)); return a.length ? { seeAlso: a } : {}; };
+    if (pg) used.add(pg);
+    if (native) {
+      const code = native.code ? baseLang(native.code) : null, id = code || native.name;
+      let mine = id && id !== pg ? notesOf(code || native.name) : [], via = null;
+      if (!mine.filter(n => !n.ai).length) {
+        const bare = x => String(x).replace(/\s*\(.*\)\s*$/, '');   // “Semitic (Northwest)” → Semitic
+        for (const keys of [native.branch && ['branch:' + native.branch, 'branch:' + bare(native.branch)], native.family && ['family:' + native.family, 'family:' + bare(native.family)], native.type && ['type:' + native.type]]) {
+          if (!keys) continue;
+          const m = list.filter(n => keys.includes(n.for)); if (m.length) { mine = [...m, ...mine]; via = m[0].for; used.add(via); break; }
+        }
+      }
+      if (mine.length) out.yours.push({ for: id, lang: code, kind: code ? 'lang' : 'name', name: native.name || code, native: true, ...(via ? { via } : {}), notes: mine });
+      if (id) used.add(id);
+    }
+    for (const s of speaks || []) {
+      const code = typeof s === 'string' ? baseLang(s) : s && s.code ? baseLang(s.code) : null, id = code || (s && s.name); if (!id || used.has(id)) continue;
+      used.add(id);
+      const ns = notesOf(id); if (ns.length) out.yours.push({ for: id, lang: code, kind: code ? 'lang' : 'name', ...(s && s.level ? { level: s.level } : {}), notes: ns });
+    }
+    for (const l of learning || []) {
+      const code = baseLang(l); if (!code || used.has(code)) continue;
+      used.add(code);
+      const ns = notesOf(code), a = alsoOf(code);
+      if (ns.length || a.seeAlso) out.learning.push({ for: code, lang: code, kind: 'lang', notes: ns, ...a });
+    }
+    const rest = [...new Set(list.map(n => keyOf(n.for)).filter(k => !used.has(k)))], rank = k => {
+      const kind = kindOf(k), i = SUPPORTED_NATIVES.indexOf(k);
+      return kind === 'lang' || kind === 'name' ? (i >= 0 ? i : SUPPORTED_NATIVES.length) : 100 + ['type', 'branch', 'family'].indexOf(kind);
+    };
+    for (const a of also) if (!alsoUsed.has(a) && !used.has(baseLang(a.lang)) && !rest.includes(baseLang(a.lang))) rest.push(baseLang(a.lang));
+    for (const k of rest.map((k, i) => [k, i]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map(x => x[0])) {
+      const kind = kindOf(k), a = kind === 'lang' ? alsoOf(k) : {};
+      out.others.push({ for: k, lang: kind === 'lang' ? k : null, kind, ...(kind === 'name' ? { name: k } : {}), notes: notesOf(k), ...a });
+    }
+    return out;
+  }
+  /** Every note of contrastFor's sections, in their order (folded: false leaves out “From other languages”). */
+  const contrastNotes = (r, { folded = true } = {}) => r ? [...(r.yours || []), ...(r.learning || []), ...(folded ? r.others || [] : [])].flatMap(g => g.notes) : [];
+  /** R2: the Markdown subset of a note or a comparison-like text (pitfalls, subtleties, fun facts, feeling …) → blocks the UI turns
+   *  into DOM nodes (never HTML): [{t: 'p', lines: [inl]} | {t: 'ul' | 'ol', start, items: [{lines: [inl], ex: [inl]}]} | {t: 'ex', inl}],
+   *  inl = [{t: 'text', s} | {t: 'b' | 'i', c: inl}]. Paragraphs are separated by a blank line (a single line break stays a break);
+   *  “- ” / “• ” / “* ” and “1. ” / “1) ” at the start of a line make list items (an indented line continues the item); a line
+   *  starting with “→ ” is an example — on its own, or the example of the list item right above it; **bold**, *italic*, \* a star.
+   *  Nothing else is markup (no headings, links, HTML, tables, code): it stays text. */
+  function noteMarkdown(text) {
+    const out = []; let para = null, list = null;
+    const inl = s => {
+      const r = []; let buf = '', i = 0;
+      const flush = () => { if (buf) r.push({ t: 'text', s: buf }); buf = ''; };
+      const word = ch => /[\p{L}\p{N}]/u.test(ch || '');
+      while (i < s.length) {
+        const ch = s[i];
+        if (ch === '\\' && /[*\\→•-]/.test(s[i + 1] || '')) { buf += s[i + 1]; i += 2; continue; }
+        if (ch === '*' && s[i + 1] === '*') {
+          const j = s.indexOf('**', i + 2);
+          if (j > i + 2 && !/\s/.test(s[i + 2]) && !/\s/.test(s[j - 1])) { flush(); r.push({ t: 'b', c: inl(s.slice(i + 2, j)) }); i = j + 2; continue; }
+        } else if (ch === '*' && s[i + 1] && !/\s/.test(s[i + 1]) && !word(s[i - 1])) {
+          let j = i + 1, end = -1;
+          while ((j = s.indexOf('*', j)) !== -1) { if (s[j + 1] === '*') { j += 2; continue; } if (!/\s/.test(s[j - 1]) && !word(s[j + 1])) { end = j; break; } j++; }
+          if (end > i + 1) { flush(); r.push({ t: 'i', c: inl(s.slice(i + 1, end)) }); i = end + 1; continue; }
+        }
+        buf += ch; i++;
+      }
+      flush(); return r;
+    };
+    for (const raw of String(text == null ? '' : text).replace(/\r\n?/g, '\n').split('\n')) {
+      const t = raw.trim(), indented = /^\s/.test(raw); let m;
+      if (!t) { para = list = null; continue; }
+      if ((m = t.match(/^→\s*(.*)$/))) {
+        const item = list && list.items[list.items.length - 1];
+        if (item) item.ex.push(inl(m[1])); else { para = null; out.push({ t: 'ex', inl: inl(m[1]) }); }
+        continue;
+      }
+      const ul = t.match(/^[-•*]\s+(.*)$/), ol = !ul && t.match(/^(\d{1,3})[.)]\s+(.*)$/);
+      if (ul || ol) {
+        const kind = ul ? 'ul' : 'ol';
+        if (!list || list.t !== kind) { list = { t: kind, start: ol ? +ol[1] : 1, items: [] }; out.push(list); }
+        para = null; list.items.push({ lines: [inl(ul ? ul[1] : ol[2])], ex: [] });
+        continue;
+      }
+      if (list && indented) { list.items[list.items.length - 1].lines.push(inl(t)); continue; }
+      list = null;
+      if (!para) { para = { t: 'p', lines: [] }; out.push(para); }
+      para.lines.push(inl(t));
+    }
+    return out;
   }
   /** Is a locale facade complete enough to be offered (§3.1: Tier 1)? coverage["1"] = {total, done, stale, missing} as tools/lang_facade.py
    *  writes it: no address missing (stale ones are still shown until refreshed); no coverage = trusted. */
@@ -310,12 +413,22 @@
     return pick(override) || pick(native && native.code) || pick(uiLocale) || master;
   }
   /* i18n-ignore-start (prompt text for the AI: stays English) */
-  /** The rule every AI prompt gets (§2.2), with the learner's native language or its type. */
-  function nativeRule(native) {
-    const who = !native ? 'The learner\'s native language is not known: compare with no language outside the course.'
-      : native.supported ? `The learner's native language: ${native.name || native.code} (${native.code}). When you compare, compare only with it.`
-        : `The learner's native language: ${native.name || native.code || 'not named'}${native.type ? `, a language of the ${native.type} type` : ''}${native.family ? ` (${native.family} family)` : ''}. When you compare, compare only with that type of language, without naming other languages.`;
-    return `${who} Never refer to languages the learner does not speak natively (the languages of the course may always be compared with each other).`;
+  /** The rule every AI prompt gets (§2.2, R1): the learner's native language (or its type) first, the languages they speak at C1 / C2,
+   *  the course languages they learn — never any other. speaks / learning: [{code?, name?} | name]. */
+  function nativeRule(native, { speaks = [], learning = [] } = {}) {
+    const nm = x => typeof x === 'string' ? x : !x ? '' : x.name && x.code && x.name !== x.code ? `${x.name} (${x.code})` : x.name || x.code || '';
+    const sp = (speaks || []).map(nm).filter(Boolean), le = (learning || []).map(nm).filter(Boolean);
+    const who = !native ? 'The learner\'s native language is not known: compare with no language outside the course' + (sp.length ? ' but the ones named below' : '') + '.'
+      : native.supported ? `The learner's native language: ${native.name || native.code} (${native.code}). When you compare, compare with it first.`
+        : `The learner's native language: ${native.name || native.code || 'not named'}${native.type ? `, a language of the ${native.type} type` : ''}${native.family ? ` (${native.family} family)` : ''}. When you compare with it, compare only with that type of language, without naming other languages.`;
+    const also = sp.length ? ` The learner also speaks ${sp.join(', ')} at level C1 / C2: you may compare with ${sp.length > 1 ? 'these languages' : 'it'} too.` : '';
+    return `${who}${also} The languages the learner is learning in this course${le.length ? ` (${le.join(', ')})` : ''} may always be compared with each other. Never refer to any other language: the learner neither speaks nor learns it.`;
+  }
+  /** nativeRule's languages of a learner (R1): their C1 / C2 languages (settings.knows) and the course languages they study, named. */
+  function ruleLangs(C, L, native) {
+    const W = (C && C.data && C.data.world && C.data.world.languages) || [], name = code => (C.lang && C.lang[code] && C.lang[code].language && C.lang[code].language.name) || (W.find(l => l.code === code) || {}).name || code;
+    return { speaks: speaksOf(L && L.settings && L.settings.knows, native).map(s => s.code ? { code: s.code, name: name(s.code) } : { name: s.name }),
+      learning: ((L && L.settings && L.settings.languages) || (C && C.languages) || []).filter(c => C.lang && C.lang[c]).map(code => ({ code, name: name(code) })) };
   }
   /* i18n-ignore-end */
 
@@ -620,7 +733,7 @@
   /* ---------- the sentence bank ---------- */
   /** Sentences whose words are all known (or at most maxUnknown unknown). opts: {known: Set, functions: [ids] (all of them), frame, maxUnknown = 0, variants = true} */
   /** Sentences for an exercise or an example. maxUnknown: a number, or 'auto' = at most ⌈30 %⌉ of the sentence's words
-   *  unknown to the learner (D19: every aspect but vocabulary trains with any vocabulary). Fewest unknown words first. */
+   *  unknown to the learner (D20: every aspect but vocabulary trains with any vocabulary). Fewest unknown words first. */
   function selectSentences(C, code, opts = {}) {
     const X = C.lang[code], K = opts.known || new Set(), max = opts.maxUnknown || 0;
     return X.sentences.filter(s => {
@@ -636,7 +749,7 @@
     if (!g) return { state: 'absent', reason: 'no realization file', sentences: 0, needs: {}, unlockBy: [] };   // i18n-ignore (an internal reason, not shown)
     if (g.status === 'absent') return { state: 'absent', reason: g.summary, sentences: 0, needs: {}, unlockBy: [] };
     const k = opts.k || known(C, L, code);
-    const ok = selectSentences(C, code, { known: k.R, functions: [fid], maxUnknown: 'auto' });   // D19: the sentences the exercises really use
+    const ok = selectSentences(C, code, { known: k.R, functions: [fid], maxUnknown: 'auto' });   // D20: the sentences the exercises really use
     const needs = {}; let needsMet = true;
     for (const [pos, n] of Object.entries(g.needs || {})) {
       const have = [...k.R].filter(id => X.lex[id].pos === pos).length;
@@ -908,7 +1021,7 @@
     const gens = opts.auto ? gens0.concat(autoGenerators(C, code, fid, gens0)) : gens0;   // P5: the types its data allows (grammar lane, function page, session)
     const fnsOf = gen => gen.bank?.functions || [fid];
     // the sentences a generator draws on: by functions (default: this one) or by frames (for points no word shows, e.g. a verbless “to be”)
-    const U = opts.strictKnown ? 0 : 'auto';   // D19: up to ⌈30 %⌉ unknown words (marked 🆕); strictKnown: only known words
+    const U = opts.strictKnown ? 0 : 'auto';   // D20: up to ⌈30 %⌉ unknown words (marked 🆕); strictKnown: only known words
     const bankFor = gen => gen.bank?.frames ? selectSentences(C, code, { known: K, maxUnknown: U }).filter(s => gen.bank.frames.includes(s.frame)) : selectSentences(C, code, { known: K, functions: fnsOf(gen), maxUnknown: U });
     const pools = [];
     for (const gen of gens) {
@@ -1105,7 +1218,7 @@
 
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
-    readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, SUPPORTED_NATIVES, setExplainLocale, nativeOf, nativeKnows, contrastFor, explanationLocale, facadeUsable, nativeRule,
+    readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, SUPPORTED_NATIVES, setExplainLocale, nativeOf, nativeKnows, speaksOf, contrastFor, contrastNotes, explanationLocale, facadeUsable, nativeRule, ruleLangs, noteMarkdown,
     applyFacade, facadeProfiles, facadeAddress, facadeTexts, masterStamps, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
@@ -2113,7 +2226,7 @@
   Object.assign(API, { autoGenerators, checkSlots, checkTable, checkProofread, grammarLane, practiceBlock, sessionGrammar, sentenceUnits, P5_TYPES, POS_LABEL, TAG_LABEL });   // P5 — grammar lane
   /* ---------- P5v — Vocabulary depth (the remaining §6.2 types): roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins ----------
      Every item is made from the stored lexemes and their profiles (never written at runtime) and reviews its word: R track, or P where the
-     learner picks or completes the word itself. Other course words appear only when the learner has met them. Profile sentences follow D19 /
+     learner picks or completes the word itself. Other course words appear only when the learner has met them. Profile sentences follow D20 /
      §7.1: at most ⌈30 %⌉ unknown words besides the word trained (course words not known yet are marked new, the others outside the course).
      Item kinds (ask and prompt.text: a text or parts like why): {type:'vpick', ask, prompt:{word|text|sentence, tr?, trAfter?, lit?}, options, optLang, answer, why} · {type:'vsort', ask, buckets, cards, why}
      · {type:'vorder', ask, cards (in the right order), why} · {type:'vsteps', prompt, steps:[{ask, options, optLang, answer}], why}; why = [text | {w, lang}]. */
@@ -2150,7 +2263,7 @@
     }
     return out;
   }
-  /** A profile sentence as a vocabulary item shows it (D19): tokens with the trained word (target: its form, cell, attached prefixes),
+  /** A profile sentence as a vocabulary item shows it (D20): tokens with the trained word (target: its form, cell, attached prefixes),
    *  course words not known yet (new, with the lexeme for its card) and words outside the course (out); ok when the unknown words besides
    *  the target are at most ⌈30 %⌉ of the words ('auto') or maxUnknown. */
   function deepSentence(C, code, text, lexId, K, maxUnknown = 'auto') {
@@ -2300,7 +2413,7 @@
       hasArticle: g && code === 'de' ? 'yes' : 'no', withArticle: g && code === 'de' ? W(ARTICLE[lx.gender] + ' ' + lx.lemma, code) : '' });
     return [deepBase(x, 'compound_split', lx, { type: 'vsteps', prompt: { word: lx.lemma }, steps, why })];
   };
-  /** Profile examples of a word for one concept (its sense's concept), fit for an item (D19) and with the word found. */
+  /** Profile examples of a word for one concept (its sense's concept), fit for an item (D20) and with the word found. */
   const contexts = (x, lx, cid) => (profOf(lx).examples || []).filter(e => e.text && senseMain(lx, e.sense)?.concept === cid)
     .map(e => ({ e, s: deepSentence(x.C, x.code, e.text, lx.id, x.K, x.maxUnknown) })).filter(o => o.s.ok && o.s.target >= 0);
   DEEP.sense_split = (x, lx) => {
@@ -3418,7 +3531,7 @@
     const k = opts.k || known(C, L, code), words = [...k.R].slice(0, opts.cap || 120).map(l => `${X.lex[l].lemma} = ${glossOfLex(C, X, l)}`).join('; ');
     const system = `[noema:lang-judge] You grade the open answer of a learner of ${name} (course "${C.data.course.title}"). Write every explanation in the language with code "${expl}". Judge only what is asked; be precise and kind. ` +
       `The course's stored answers are the reference: you do not replace them. Accept every answer that is correct ${name} and says what was asked, even when it differs from the reference. ` +
-      `When you correct, change as little as possible and keep the learner's words. Never invent facts about the language; when unsure, say so in the feedback.\n${nativeRule(opts.native)}\nThe learner knows these words: ${words || '(few yet)'}.`;
+      `When you correct, change as little as possible and keep the learner's words. Never invent facts about the language; when unsure, say so in the feedback.\n${nativeRule(opts.native, ruleLangs(C, L, opts.native))}\nThe learner knows these words: ${words || '(few yet)'}.`;
     let prompt, schema = AI_VERDICT;
     if (task.kind === 'translate') prompt = `The learner had to say in ${name}: "${task.gloss}".\nThe course's answer(s): ${task.reference.map(r => `"${r}"`).join(' / ')}.\nThe learner wrote: "${task.answer}".\nIs it correct ${name} with this meaning? verdict: correct (fully right), acceptable (right meaning, small slips), wrong. corrected: the learner's sentence, minimally corrected (or unchanged when it is right). mistakes: each error with the right form and why.`;
     else if (task.kind === 'rewrite') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: ${constraintEn(task.constraint)}\n${task.reference?.length ? `One answer the course knows: ${task.reference.map(r => `"${r}"`).join(' / ')}.\n` : ''}The learner wrote: "${task.answer}".\nDoes it do the task in correct ${name}? verdict: correct, acceptable (does it, small slips) or wrong (wrong language, wrong meaning or the task not done). corrected: the learner's sentence minimally corrected. mistakes: each error.`;
@@ -3430,7 +3543,7 @@
   function readerTask(C, L, code, opts = {}) {
     const X = C.lang[code], k = opts.k || known(C, L, code), name = langLabel(C, code);
     const words = [...k.R].slice(0, opts.cap || 200).map(l => X.lex[l].lemma).join(', ');
-    return { name: 'reader', system: `[noema:lang-reader] You write graded reading texts for a learner of ${name}. Use ONLY words from the learner's list, in any of their forms; at most one word per sentence may be outside it. Simple, natural, neutral sentences; no names of real people. ${nativeRule(opts.native)}`,
+    return { name: 'reader', system: `[noema:lang-reader] You write graded reading texts for a learner of ${name}. Use ONLY words from the learner's list, in any of their forms; at most one word per sentence may be outside it. Simple, natural, neutral sentences; no names of real people. ${nativeRule(opts.native, ruleLangs(C, L, opts.native))}`,
       prompt: `The learner's words: ${words}.\nWrite a short text (${opts.sentences || 5} sentences) in ${name}${opts.topic ? ` about "${opts.topic}"` : ''}: one object per sentence, with its translation into the language with code "${opts.chatLang || C.explainLang}".`,
       schema: { type: 'object', required: ['title', 'sentences'], properties: { title: { type: 'string' }, sentences: { type: 'array', minItems: 2, items: { type: 'object', required: ['text', 'gloss'], properties: { text: { type: 'string' }, gloss: { type: 'string' } } } } } },
       // the validator decides: sentences that fail are dropped by the UI; a repair is asked only when fewer than three would remain
@@ -3469,7 +3582,7 @@
   function tutorTask(C, L, code, ctx = {}, opts = {}) {
     const t = tutorContext(C, L, code, ctx, opts), lang = opts.chatLang || C.explainLang;
     const system = `[noema:lang-tutor] You are ${opts.tutorName ? `"${opts.tutorName}", ` : ''}the tutor of a learner of ${t.langName} (course "${C.data.course.title}"). Explain in the language with code "${lang}"; write ${t.langName} where you give examples or talk in it. ` +
-      `Describe languages neutrally: no language is the norm. ${nativeRule(opts.native)}\nRULE: ${t.rule}\n${t.intent ? 'WHY THIS CONVERSATION WAS OPENED: ' + t.intent + '\n' : ''}` +
+      `Describe languages neutrally: no language is the norm. ${nativeRule(opts.native, ruleLangs(C, L, opts.native))}\nRULE: ${t.rule}\n${t.intent ? 'WHY THIS CONVERSATION WAS OPENED: ' + t.intent + '\n' : ''}` +
       `THE LEARNER'S KNOWN WORDS in ${t.langName} (${t.words.length} of ${t.total}${t.total > t.words.length ? ', the best known first' : ''}): ${t.words.map(w => `${w.lemma} = ${w.gloss}`).join('; ') || '(none yet — use very simple words and gloss each one)'}\n` +
       (t.context ? '\n' + t.context + '\n' : '') +
       `\nAnswer with: reply (your message; markdown **bold** allowed) and target (every sentence or phrase in ${t.langName} that your reply contains, exactly as written in it).`;
@@ -4479,7 +4592,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
     const pool = (opts.words || [...k.R]).filter(id => X.lex[id] && (X.lex[id].senses || []).length && (!opts.pos || X.lex[id].pos === opts.pos) && (!opts.P || k.P.has(id)));
     return shuffled(pool, rng);
   }
-  /** Sentences to hear: D19 (≤ ⌈30 %⌉ unknown words), short enough, fewest unknown first. */
+  /** Sentences to hear: D20 (≤ ⌈30 %⌉ unknown words), short enough, fewest unknown first. */
   function spSentences(C, code, k, opts = {}) {
     const ss = opts.sentences || selectSentences(C, code, { known: k.R, maxUnknown: 'auto', variants: opts.variants });
     return ss.filter(s => (s.nwords || 0) >= (opts.minWords || 2) && (s.nwords || 0) <= (opts.maxWords || 8) && s.text);
