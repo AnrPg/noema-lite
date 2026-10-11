@@ -12,7 +12,7 @@
 const fs = require('fs'), path = require('path'), cp = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const SCOPE = ['engine', 'cloud', 'index.html'];
-const SKIP = /(^|\/)(vendor|i18n|node_modules)\/|^engine\/(engine|langui|authoring)\.js$|^cloud\/mcp\/|^engine\/i18n\.js$|\.min\.js$/;
+const SKIP = /(^|\/)(vendor|i18n|node_modules)\/|^cloud\/email\/|^engine\/(engine|langui|authoring)\.js$|^cloud\/mcp\/|^engine\/i18n\.js$|\.min\.js$/;
 
 /** A small JavaScript tokenizer: every string / template literal with its line, skipping comments and regular expressions. */
 function literals(src) {

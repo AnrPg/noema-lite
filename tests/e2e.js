@@ -115,7 +115,7 @@ async function mockGemini(ctx) {
   await page.evaluate(() => $('.modal')?.remove());
   // menus in the learner's language (engine/i18n.js): ⚙️ Settings → Language of the menus
   ok(await page.evaluate(async () => { await Promise.all(['el', 'ru', 'fr'].map(l => NoemaI18n.load(l))); const B = NoemaI18n.catalogs, en = Object.keys(B.en.m); return ['el', 'ru', 'fr'].every(l => en.every(k => B[l].m[k] || (B[l].d || {})[k])); }), 'every menu string is translated (or drafted) in el, ru and fr');
-  const setUiLang = async v => { await page.evaluate(v => { $('.modal')?.remove(); openAccountMenu('settings'); const sel = $('.modal select[aria-label="' + t('set.uiLang') + '"]'); sel.value = v; [...$$('.modal button')].find(b => b.textContent === 'Save settings').click(); }, v); await wait(1200); };
+  const setUiLang = async v => { await page.evaluate(v => { $('.modal')?.remove(); openAccountMenu('settings'); const sel = $('.modal select[aria-label="' + t('set.uiLang') + '"]'); sel.value = v; $('.modal [data-act="save-settings"]').click(); }, v); await wait(1200); };
   await setUiLang('fr');
   ok(await page.evaluate(() => document.body.innerText.includes('Qu’est-ce que tu veux étudier\u202f?')), 'after the change the subject picker speaks French');
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);

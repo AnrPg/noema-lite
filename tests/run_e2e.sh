@@ -50,3 +50,4 @@ node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new fr
 node "$ROOT/tests/lang_lanes.js" "$T"   # ⫴ parallel lanes: the same subject level across the languages (D13, §9.2)
 node "$ROOT/tests/lang_package.js" "$T"   # a whole language in one prompt: the package, the connector's guide / start / finish, the app on two devices (§10.2)
 node "$ROOT/tests/i18n.js"   # the interface languages: runtime, plurals per CLDR, drafts, pseudo-locales, catalog checks (docs/i18n.md)
+node "$ROOT/tests/i18n_errors.js"   # error-code contract, Auth mapping, account locale, e-mail templates (docs/i18n.md §6)
