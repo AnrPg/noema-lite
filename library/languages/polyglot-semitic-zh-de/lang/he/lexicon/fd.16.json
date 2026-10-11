@@ -199,7 +199,14 @@
     ],
     "subtleties": [
      "Of people גָּדוֹל means “older, grown-up” (הָאָח הַגָּדוֹל “the older brother”), not “tall” — that is גָּבֹהַּ.",
-     "It also means “great, important” (סוֹפֵר גָּדוֹל), like German groß and Greek μεγάλος."
+     "It also means “great, important” (סוֹפֵר גָּדוֹל), like German groß."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like μεγάλος, it also means “great, important”."
+     }
     ]
    }
   },
@@ -364,7 +371,7 @@
      }
     ],
     "etymology": {
-     "text": "Root ק־ט־ן; compare Ge’ez ቀጢን (ḳäṭin) (Wiktionary).",
+     "text": "Root ק־ט־ן, an old Semitic root (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -515,7 +522,7 @@
      }
     ],
     "etymology": {
-     "text": "Pattern קָטֹל; from the same root as Aramaic אריכא (’ariḵa, “long”) (Wiktionary). The root א־ר־ךְ also gives אֹרֶךְ “length”.",
+     "text": "Pattern קָטֹל, from an old Semitic root (Wiktionary). The root א־ר־ךְ also gives אֹרֶךְ “length”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -645,7 +652,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قَصِير “short” is the same word; Turkish kusur “fault, shortcoming” comes from Arabic قُصُور, from this root."
+     "Arabic قَصِير “short” is the same word."
     ],
     "pitfalls": [
      "A short PERSON is נָמוּךְ (“low”), not קָצָר: הוּא נָמוּךְ “he is short”."
@@ -653,6 +660,13 @@
     "subtleties": [
      "The construct form קְצַר appears in set phrases: קְצַר רוּחַ “impatient”.",
      "The noun קֶצֶר “short circuit” is written with the same letters (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish kusur “fault, shortcoming” comes from Arabic قُصُور, from the root of קָצָר."
+     }
     ]
    }
   },
@@ -994,11 +1008,11 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ṭāb- (“good”); cognate with Akkadian ṭābum and Arabic طَيِّب (ṭayyib) (Wiktionary). Root ט־ו־ב.",
+     "text": "From Proto-Semitic *ṭāb- (“good”); cognate with Arabic طَيِّب (ṭayyib) (Wiktionary). Root ט־ו־ב.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic طَيِّب is the same word (Turkish has it as the name Tayyip); German Masel and English mazel tov come from מַזָּל טוֹב."
+     "Arabic طَيِّب is the same word; German Masel “luck” comes from מַזָּל, as in מַזָּל טוֹב."
     ],
     "pitfalls": [
      "As a reply טוֹב means “OK, fine” (טוֹב, אֲנִי בָּא); as an adverb it is “well”: הוּא מְבַשֵּׁל טוֹב “he cooks well”.",
@@ -1006,6 +1020,18 @@
     ],
     "subtleties": [
      "טוֹב לִי means “I feel good / I’m fine (here)”; טוֹב שֶׁ… “it is good that …” (lesson 18)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "The name Tayyip is Arabic طَيِّب, the same word as טוֹב."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English mazel tov is מַזָּל טוֹב “good luck”."
+     }
     ]
    }
   },
@@ -1322,17 +1348,24 @@
      }
     ],
     "etymology": {
-     "text": "Related to Arabic حَدِيث (ḥadīṯ) and Amharic አዲስ (ʾäddis); ultimately from Proto-Semitic *ḥdṯ- (“to be new”) (Wiktionary). Root ח־ד־שׁ, pattern קָטָל.",
+     "text": "Related to Arabic حَدِيث (ḥadīṯ); ultimately from Proto-Semitic *ḥdṯ- (“to be new”) (Wiktionary). Root ח־ד־שׁ, pattern קָטָל.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same root gives חֹדֶשׁ “month” (the “new” moon, lesson 15); Amharic አዲስ “new” is in Addis Ababa, “new flower”."
+     "The same root gives חֹדֶשׁ “month” (the “new” moon, lesson 15)."
     ],
     "pitfalls": [
      "With the article it is הֶחָדָשׁ (הֶ, because ח cannot be doubled and its a is unstressed) — but הַחֲדָשָׁה, הַחֲדָשִׁים."
     ],
     "subtleties": [
      "חֲדָשׁוֹת, the feminine plural, also means “the news”."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic አዲስ “new” (as in Addis Ababa, “new flower”) comes from the same Semitic root."
+     }
     ]
    }
   },
@@ -1619,7 +1652,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ṣaɣir- (“to be small, young”); cognate with Akkadian ṣeḫrum (“small, young”) and Arabic صَغِير (ṣaḡīr) (Wiktionary). Pattern קָטִיל.",
+     "text": "From Proto-Semitic *ṣaɣir- (“to be small, young”); cognate with Arabic صَغِير (ṣaḡīr) (Wiktionary). Pattern קָטִיל.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1783,7 +1816,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ḏaḳan- (“beard”); cognate with Akkadian ziqnum and Arabic ذَقَن (ḏaqan) (Wiktionary) — the old man is “the bearded one”.",
+     "text": "From Proto-Semitic *ḏaḳan- (“beard”); cognate with Arabic ذَقَن (ḏaqan) (Wiktionary) — the old man is “the bearded one”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2127,7 +2160,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic حَمَّام “bath” (Turkish hamam) is built on the same Semitic root of heat, ח־מ־ם / ح-م-م."
+     "Arabic حَمَّام “bath” is built on the same Semitic root of heat, ח־מ־ם / ح-م-م."
     ],
     "pitfalls": [
      "“I am hot” is חַם לִי (“it is hot to me”), not *אֲנִי חַם.",
@@ -2135,6 +2168,13 @@
     ],
     "subtleties": [
      "With לְ the adjective stays masculine singular and tells how someone feels: חַם לָנוּ, חַם לָהּ."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish hamam is Arabic حَمَّام “bath”, built on the root of heat ח־מ־ם."
+     }
     ]
    }
   },
@@ -2597,7 +2637,7 @@
      }
     ],
     "etymology": {
-     "text": "Pattern קָטָל; cognate with Phoenician 𐤉𐤐 (yp, “proper, good”) and Ugaritic yp (“dignity, honour”); compare also Arabic وَفَى (wafā) (Wiktionary).",
+     "text": "Pattern קָטָל; an old Northwest Semitic word; compare Arabic وَفَى (wafā) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3081,7 +3121,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like English hard, קָשֶׁה is both “difficult” and “not soft”."
+     "קָשֶׁה is both “difficult” and “not soft”: עֲבוֹדָה קָשָׁה, לֶחֶם קָשֶׁה."
     ],
     "pitfalls": [
      "Masculine קָשֶׁה (kashé) and feminine קָשָׁה (kashá) are both written קשה.",
@@ -3089,6 +3129,23 @@
     ],
     "subtleties": [
      "In set phrases it takes the construct form קְשֵׁה: קְשֵׁה עֹרֶף “stubborn”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like hard, קָשֶׁה is both “difficult” and “not soft”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like dur, קָשֶׁה is both “difficult” and “not soft”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like duro, קָשֶׁה is both “difficult” and “not soft”."
+     }
     ]
    }
   },
@@ -3358,11 +3415,11 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *waqar- (“to be heavy or weighty; to hold weight in value”), from Proto-Afroasiatic; compare Egyptian jqr (“excellent, worthy”) and Arabic وَقَار (waqār, “dignity”) (Wiktionary).",
+     "text": "From Proto-Semitic *waqar- (“to be heavy or weighty; to hold weight in value”), from Proto-Afroasiatic; compare Arabic وَقَار (waqār, “dignity”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like German teuer, Greek ακριβός and Russian дорогой, יָקָר means both “expensive” and “dear”."
+     "Like German teuer, יָקָר means both “expensive” and “dear”."
     ],
     "pitfalls": [
      "The first vowel shortens: יְקָרָה (yekará), יְקָרִים.",
@@ -3370,6 +3427,33 @@
     ],
     "subtleties": [
      "In letters: יְקָרִי / יְקָרָתִי “my dear (m. / f.)”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like ακριβός, it means both “expensive” and “dear”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like дорогой, it means both “expensive” and “dear”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like cher, it means both “expensive” and “dear”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like caro, it means both “expensive” and “dear”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like caro, it means both “expensive” and “dear”."
+     }
     ]
    }
   },
@@ -3503,7 +3587,7 @@
      }
     ],
     "etymology": {
-     "text": "Root שׂ־מ־ח; inherited from Proto-Semitic; cognate with Ugaritic šmḫ (“to be glad, rejoice”) (Wiktionary).",
+     "text": "Root שׂ־מ־ח; inherited from Proto-Semitic (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -4226,13 +4310,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic مَاهِر “skilled” — and Turkish mahir “skilful”, from it — share this root; Hebrew kept both senses."
+     "Arabic مَاهِر “skilled” share this root; Hebrew kept both senses."
     ],
     "pitfalls": [
      "“Quickly” is the adverb מַהֵר, not מָהִיר: הוּא רָץ מַהֵר “he runs fast”."
     ],
     "subtleties": [
      "מָהִיר is about speed; “early” is a different word, מֻקְדָּם (lesson 14)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish mahir “skilful” comes from Arabic مَاهِر, from the root of מָהִיר."
+     }
     ]
    }
   },

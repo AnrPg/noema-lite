@@ -223,8 +223,30 @@
      "The ה disappears in the future and the imperative: תֵּלֵךְ “you will go”, לֵךְ “go!” — and the infinitive is לָלֶכֶת."
     ],
     "subtleties": [
-     "הוֹלֵךְ + infinitive is the colloquial “going to”: הוּא הוֹלֵךְ לִקְנוֹת “he is going to buy”, exactly as in English.",
+     "הוֹלֵךְ + infinitive is a colloquial near future: הוּא הוֹלֵךְ לִקְנוֹת “he is going to buy”.",
      "Like German gehen (on foot) vs fahren (by vehicle): הָלַךְ vs נָסַע."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "הוֹלֵךְ + infinitive is exactly “going to”: הוּא הוֹלֵךְ לִקְנוֹת “he is going to buy”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like aller + infinitive (il va acheter): הוּא הוֹלֵךְ לִקְנוֹת."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like ir a + infinitive (va a comprar): הוּא הוֹלֵךְ לִקְנוֹת."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like ir + infinitive (vai comprar): הוּא הוֹלֵךְ לִקְנוֹת."
+     }
     ]
    }
   },
@@ -422,11 +444,11 @@
      }
     ],
     "etymology": {
-     "text": "Compare Phoenician 𐤁𐤀 (bʾ), Arabic بَاءَ (bāʔa, “to return, come back”) and Ge’ez ቦአ (boʾä, “to enter”) (Wiktionary).",
+     "text": "Compare Arabic بَاءَ (bāʔa, “to return, come back”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The sign at the entrance of a town or a home, בָּרוּךְ הַבָּא, uses this verb — like Greek καλώς ήρθες “well you came”.",
+     "The sign at the entrance of a town or a home, בָּרוּךְ הַבָּא, uses this verb — literally “blessed (is) the one who comes”.",
      "The coming days, the next world: הָעוֹלָם הַבָּא “the world to come”."
     ],
     "pitfalls": [
@@ -436,6 +458,13 @@
     "subtleties": [
      "בּוֹא / בּוֹאוּ + future verb is “let’s …”: בּוֹאוּ נֵלֵךְ “let’s go”, בּוֹא נֹאכַל “let’s eat”.",
      "Coming from somewhere is בָּא מִ…: הִיא בָּאָה מֵהָעֲבוֹדָה “she is coming from work”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The welcome sign בָּרוּךְ הַבָּא uses “come”, as καλώς ήρθες does."
+     }
     ]
    }
   },
@@ -587,7 +616,7 @@
      }
     ],
     "etymology": {
-     "text": "A hollow root ר־ו־ץ. Compare Ge’ez ሮጸ (roṣä, “to run”) (Wiktionary).",
+     "text": "A hollow root ר־ו־ץ. An old Semitic root (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1579,7 +1608,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Ge’ez ወፅአ (wäṣ́ʾä), Akkadian waṣûm and Ugaritic yṣả (Wiktionary). The first root letter (originally ו) falls away in the future, the imperative and the infinitive: תֵּצֵא, צֵא, לָצֵאת.",
+     "text": "An old Semitic verb (Wiktionary). The first root letter (originally ו) falls away in the future, the imperative and the infinitive: תֵּצֵא, צֵא, לָצֵאת.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1771,11 +1800,11 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ʕazab-; cognate with Arabic عَزَبَ (ʕazaba, “to be remote or absent”) and Akkadian ezēbum (“to leave”) (Wiktionary).",
+     "text": "From Proto-Semitic *ʕazab-; cognate with Arabic عَزَبَ (ʕazaba, “to be remote or absent”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The cognate Akkadian ezēbum also meant “to leave” — the word is older than Hebrew itself (Wiktionary)."
+     "The verb is older than Hebrew itself: the oldest written Semitic language already used it for “to leave” (Wiktionary)."
     ],
     "pitfalls": [
      "עָזַב takes a direct object with אֶת: עוֹזֵב אֶת הַבַּיִת — no מִ. Going out of a room for a moment is יָצָא מֵהַחֶדֶר.",
@@ -2421,7 +2450,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek λεωφορείο, Turkish otobüs, Arabic أُتُوبِيس / أُتُوبُوس and Hebrew אוֹטוֹבּוּס: three of them borrowed the French autobus."
+     "Arabic أُتُوبِيس / أُتُوبُوس and Hebrew אוֹטוֹבּוּס both borrowed the French autobus; German shortened it to Bus."
     ],
     "pitfalls": [
      "You get “on” a bus with עָלָה עַל: עוֹלֶה עַל הָאוֹטוֹבּוּס; you get off with יָרַד מִ: יוֹרֵד מֵהָאוֹטוֹבּוּס.",
@@ -2429,6 +2458,18 @@
     ],
     "subtleties": [
      "Travelling by bus is נוֹסֵעַ בְּאוֹטוֹבּוּס (also בָּאוֹטוֹבּוּס) — never הוֹלֵךְ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek has its own word, λεωφορείο; Hebrew borrowed the international אוֹטוֹבּוּס."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Like otobüs, it is the French autobus."
+     }
     ]
    }
   },
@@ -2817,7 +2858,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “taxi” is short for “taximeter”; Hebrew built its word the same way, from מוֹנֶה “meter”."
+     "Built from מוֹנֶה “meter, counter”: the car is named after its meter, as German Taxi comes from Taxameter."
     ],
     "pitfalls": [
      "Feminine: הַמּוֹנִית מְחַכָּה “the taxi is waiting” (f.).",
@@ -2825,6 +2866,13 @@
     ],
     "subtleties": [
      "A מוֹנִית שֵׁרוּת (“service taxi”, a שֵׁרוּת) is a shared minibus that runs on a fixed line, also on Shabbat in some cities."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As “taxi” is short for “taximeter”, מוֹנִית is built from מוֹנֶה “meter”."
+     }
     ]
    }
   },
@@ -2959,7 +3007,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Auto, Greek αυτοκίνητο and Hebrew אוֹטוֹ: the “self-moving” car went round the world; מְכוֹנִית is Hebrew’s own “little machine”."
+     "German Auto and colloquial Hebrew אוֹטוֹ: the “self-moving” car went round the world; מְכוֹנִית is Hebrew’s own “little machine”."
     ],
     "pitfalls": [
      "Feminine (-ִית): מְכוֹנִית חֲדָשָׁה; but the colloquial אוֹטוֹ is masculine: אוֹטוֹ חָדָשׁ.",
@@ -2967,6 +3015,13 @@
     ],
     "subtleties": [
      "In speech אוֹטוֹ is at least as common as מְכוֹנִית; in writing מְכוֹנִית or רֶכֶב."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Colloquial אוֹטוֹ is the same “self-moving” word as αυτοκίνητο; מְכוֹנִית is a Hebrew coinage, “little machine”."
+     }
     ]
    }
   },
@@ -3529,7 +3584,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From Greek χάρτης — the same word as Greek χαρτί “paper”, χάρτης “map” and English “chart”, “card”."
+     "From Greek χάρτης “papyrus, sheet” — a word that also gave German Karte."
     ],
     "pitfalls": [
      "After בְּ the כּ softens: בְּכַרְטִיס (bekhartis).",
@@ -3537,6 +3592,33 @@
     ],
     "subtleties": [
      "The same word is “card”: כַּרְטִיס אַשְׁרַאי “credit card”, כַּרְטִיס בְּרָכָה “greeting card” (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as χάρτης and χαρτί."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "A distant relative of English chart and card."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "A relative of carta “paper” and cartolina."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "A relative of carte."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "A relative of карта."
+     }
     ]
    }
   },
