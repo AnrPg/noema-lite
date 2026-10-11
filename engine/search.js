@@ -397,7 +397,7 @@ window.NoemaSearch = (() => {
       const kinds = listOf(P.t), canPractise = kinds.length && kinds.every(t => PRACTISABLE.includes(t));   // only when the filter keeps things that can be practised
       actions.replaceChildren(...(res.shownTotal ? [
         canPractise ? h('button', { class: 'btn small primary ns-srpractise', onclick: () => practise(res, P) }, L('practise')) : null,
-        sv ? h('span', { class: 'ns-pill ns-srsaved' }, L('collection'), ': ', sv.name) : h('button', { class: 'btn small ghost ns-srsave', onclick: () => saveCollection(P, ctx) }, L('save'))] : []));
+        sv ? h('span', { class: 'ns-pill ns-srsaved' }, L('collection'), ': ', sv.name) : h('button', { class: 'btn small ghost ns-srsave', onclick: () => saveCollection(P, ctx) }, L('save'))].filter(Boolean) : []));
     }
     function drawEmpty() {
       const cols = collections(), rec = recents();
