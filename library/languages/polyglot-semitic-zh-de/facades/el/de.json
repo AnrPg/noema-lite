@@ -200,7 +200,7 @@
   "by": "claude"
  },
  "g:de:fn.adjective/blocks/1/caption": {
-  "t": "Βήμα 2 – ΜΙΚΤΕΣ καταλήξεις μετά από ein, kein, mein, dein … : το ασθενές σχήμα, εκτός από τις τρεις θέσεις όπου το ein δεν έχει κατάληξη – εκεί το επίθετο δείχνει το γένος (-er, -es)",
+  "t": "Βήμα 2 – ΜΙΚΤΕΣ καταλήξεις μετά από ein, kein, mein, dein … : το ασθενές μοτίβο, εκτός από τις τρεις θέσεις όπου το ein δεν έχει κατάληξη – εκεί το επίθετο δείχνει το γένος (-er, -es)",
   "src": "4a666a9788d4",
   "by": "claude"
  },
@@ -3585,7 +3585,7 @@
   "by": "claude"
  },
  "g:de:fn.comparison/summary": {
-  "t": "Τα γερμανικά συγκρίνουν με καταλήξεις, όχι με λέξεις όπως «πιο» και «ο πιο»: ο συγκριτικός προσθέτει -er (schnell → schneller), και το «από» της σύγκρισης είναι als: Der Zug ist schneller als der Bus (η αντωνυμία μετά το als μένει σε ονομαστική: älter als ich). Ο υπερθετικός έχει δύο μορφές: am …-sten μετά το sein και με ρήματα (Der Zug ist am schnellsten· Er fährt am schnellsten), και der / die / das …-ste μπροστά από ουσιαστικό (der schnellste Zug). Τα περισσότερα σύντομα επίθετα με a, o, u παίρνουν umlaut: alt – älter – am ältesten, groß – größer, jung – jünger, kurz – kürzer, lang – länger, kalt – kälter, warm – wärmer (αλλά όχι όλα: blau – blauer, froh – froher). Μετά από -t, -d, -s, -ß, -z, -sch ο υπερθετικός προσθέτει -est: am ältesten, am heißesten, am kürzesten. Λίγα είναι ανώμαλα: gut – besser – am besten, viel – mehr – am meisten, hoch – höher – am höchsten, nah – näher – am nächsten, gern – lieber – am liebsten. Ο συγκριτικός και ο υπερθετικός μπροστά από ουσιαστικό παίρνουν τις κανονικές καταλήξεις: ein größeres Haus, der ältere Bruder, die größten Zimmer. Η ισότητα είναι so … wie: so groß wie ich. Χρώματα: όλες οι λέξεις για χρώματα κλίνονται (ein rotes Auto) εκτός από τα orange, rosa και lila· οι ανοιχτές και σκούρες αποχρώσεις είναι σύνθετες λέξεις που γράφονται μαζί – hellblau, dunkelrot, dunkelgrün.",
+  "t": "Τα γερμανικά συγκρίνουν με καταλήξεις, όχι με λέξεις όπως «πιο» και «ο πιο»: ο συγκριτικός προσθέτει -er (schnell → schneller), και το «από» της σύγκρισης είναι als: Der Zug ist schneller als der Bus (η αντωνυμία μετά το als μένει σε ονομαστική: älter als ich). Ο υπερθετικός έχει δύο μορφές: am …-sten μετά το sein και με ρήματα (Der Zug ist am schnellsten· Er fährt am schnellsten), και der / die / das …-ste μπροστά από ουσιαστικό (der schnellste Zug). Τα περισσότερα σύντομα επίθετα με a, o, u παίρνουν Umlaut: alt – älter – am ältesten, groß – größer, jung – jünger, kurz – kürzer, lang – länger, kalt – kälter, warm – wärmer (αλλά όχι όλα: blau – blauer, froh – froher). Μετά από -t, -d, -s, -ß, -z, -sch ο υπερθετικός προσθέτει -est: am ältesten, am heißesten, am kürzesten. Λίγα είναι ανώμαλα: gut – besser – am besten, viel – mehr – am meisten, hoch – höher – am höchsten, nah – näher – am nächsten, gern – lieber – am liebsten. Ο συγκριτικός και ο υπερθετικός μπροστά από ουσιαστικό παίρνουν τις κανονικές καταλήξεις: ein größeres Haus, der ältere Bruder, die größten Zimmer. Η ισότητα είναι so … wie: so groß wie ich. Χρώματα: όλες οι λέξεις για χρώματα κλίνονται (ein rotes Auto) εκτός από τα orange, rosa και lila· οι ανοιχτές και σκούρες αποχρώσεις είναι σύνθετες λέξεις που γράφονται μαζί – hellblau, dunkelrot, dunkelgrün.",
   "src": "b257db141bf6",
   "by": "claude"
  },
@@ -3790,7 +3790,7 @@
   "by": "claude"
  },
  "g:de:fn.comparison/blocks/0/caption": {
-  "t": "Κανονικά παραθετικά – πρόσεξε το umlaut και το -est μετά από t, s, ß, z",
+  "t": "Κανονικά παραθετικά – πρόσεξε το Umlaut και το -est μετά από t, s, ß, z",
   "src": "e57bbc7d2a1f",
   "by": "claude"
  },
@@ -4160,7 +4160,7 @@
   "by": "claude"
  },
  "g:de:fn.comparison/blocks/7/questions/4": {
-  "t": "Σύντομη λέξη με a, o, u; → μάλλον umlaut (älter, größer, jünger).",
+  "t": "Σύντομη λέξη με a, o, u; → μάλλον Umlaut (älter, größer, jünger).",
   "src": "617ec3ff81ce",
   "by": "claude"
  },
@@ -4195,7 +4195,7 @@
   "by": "claude"
  },
  "g:de:fn.comparison/procedure/askYourself/4": {
-  "t": "Σύντομο επίθετο με a, o, u; → έλεγξε το umlaut (alt – älter).",
+  "t": "Σύντομο επίθετο με a, o, u; → έλεγξε το Umlaut (alt – älter).",
   "src": "27bcc4017a9c",
   "by": "claude"
  },
@@ -4220,7 +4220,7 @@
   "by": "claude"
  },
  "g:de:fn.comparison/procedure/steps/1": {
-  "t": "Φτιάξε τη μορφή (umlaut, -est, ανώμαλο).",
+  "t": "Φτιάξε τη μορφή (Umlaut, -est, ανώμαλο).",
   "src": "def96e7a045a",
   "by": "claude"
  },
@@ -4295,7 +4295,7 @@
   "by": "claude"
  },
  "g:de:fn.comparison/quiz/0/why": {
-  "t": "Συγκριτικός με umlaut: alt → älter.",
+  "t": "Συγκριτικός με Umlaut: alt → älter.",
   "src": "a3afd4ac52d8",
   "by": "claude"
  },
@@ -4725,7 +4725,7 @@
   "by": "claude"
  },
  "g:de:fn.connectors/summary": {
-  "t": "Οι γερμανικές συνδετικές λέξεις χωρίζονται σε τρεις ομάδες, και κάθε ομάδα κάνει κάτι διαφορετικό στη σειρά των λέξεων. (1) Τα und, oder, aber, denn (και sondern) στέκονται ανάμεσα σε δύο κύριες προτάσεις και δεν αλλάζουν τίποτα: Ich bin müde, aber ich gehe zur Arbeit. (2) Επιρρήματα όπως τα deshalb, deswegen, also, dann (και trotzdem) πιάνουν την πρώτη θέση της πρότασής τους, οπότε το ρήμα ακολουθεί αμέσως: Ich habe Hunger, deshalb esse ich ein Brot. (3) Οι υποτακτικοί σύνδεσμοι – weil, dass, wenn, als, ob, obwohl – στέλνουν το κλιτό ρήμα στο ΤΕΛΟΣ της πρότασής τους: …, weil ich Durst habe. Αν η δευτερεύουσα πρόταση μπει πρώτη, πιάνει την πρώτη θέση της περιόδου και η κύρια πρόταση ξεκινά με το ρήμα της: Weil es kalt ist, trinken wir Tee (ρήμα – κόμμα – ρήμα). Οι προτάσεις χωρίζονται πάντα με κόμμα. Ένα χωριζόμενο ρήμα ενώνεται ξανά στο τέλος (…, weil der Zug um acht ankommt) και ένα ρήμα τροπικότητας μπαίνει τελευταίο (…, weil ich Tee trinken will). Τρεις σημασίες θέλουν δύο ή τρεις λέξεις: η αιτία είναι weil (ρήμα στο τέλος) ή denn (κανονική σειρά)· το χρονικό «όταν/πότε» είναι wenn (παρόν, μέλλον, κάθε φορά), als (ένα γεγονός στο παρελθόν) ή η ερωτηματική λέξη wann· το «αν» είναι wenn για υπόθεση και ob για πλάγια ερώτηση.",
+  "t": "Οι γερμανικές συνδετικές λέξεις χωρίζονται σε τρεις ομάδες, και κάθε ομάδα κάνει κάτι διαφορετικό στη σειρά των λέξεων. (1) Τα und, oder, aber, denn (και sondern) στέκονται ανάμεσα σε δύο κύριες προτάσεις και δεν αλλάζουν τίποτα: Ich bin müde, aber ich gehe zur Arbeit. (2) Επιρρήματα όπως τα deshalb, deswegen, also, dann (και trotzdem) πιάνουν την πρώτη θέση της πρότασής τους, οπότε το ρήμα ακολουθεί αμέσως: Ich habe Hunger, deshalb esse ich ein Brot. (3) Οι υποτακτικοί σύνδεσμοι – weil, dass, wenn, als, ob, obwohl – στέλνουν το κλιτό ρήμα στο ΤΕΛΟΣ της πρότασής τους: …, weil ich Durst habe. Αν η δευτερεύουσα πρόταση μπει πρώτη, πιάνει την πρώτη θέση της περιόδου και η κύρια πρόταση ξεκινά με το ρήμα της: Weil es kalt ist, trinken wir Tee (ρήμα – κόμμα – ρήμα). Οι προτάσεις χωρίζονται πάντα με κόμμα. Ένα χωριζόμενο ρήμα ενώνεται ξανά στο τέλος (…, weil der Zug um acht ankommt) και ένα τροπικό ρήμα μπαίνει τελευταίο (…, weil ich Tee trinken will). Τρεις σημασίες θέλουν δύο ή τρεις λέξεις: η αιτία είναι weil (ρήμα στο τέλος) ή denn (κανονική σειρά)· το χρονικό «όταν/πότε» είναι wenn (παρόν, μέλλον, κάθε φορά), als (ένα γεγονός στο παρελθόν) ή η ερωτηματική λέξη wann· το «αν» είναι wenn για υπόθεση και ob για πλάγια ερώτηση.",
   "src": "29d3742343f6",
   "by": "claude"
  },
@@ -5060,7 +5060,7 @@
   "by": "claude"
  },
  "g:de:fn.connectors/blocks/4/rows/2/0": {
-  "t": "weil + ρήμα τροπικότητας",
+  "t": "weil + τροπικό ρήμα",
   "src": "0a4a822b3481",
   "by": "claude"
  },
@@ -5185,7 +5185,7 @@
   "by": "claude"
  },
  "g:de:fn.connectors/procedure/askYourself/7": {
-  "t": "Χωριζόμενο ρήμα ή ρήμα τροπικότητας σε πρόταση με το ρήμα στο τέλος; → ankommt ενωμένο· το τροπικό τελευταίο.",
+  "t": "Χωριζόμενο ρήμα ή τροπικό ρήμα σε πρόταση με το ρήμα στο τέλος; → ankommt ενωμένο· το τροπικό τελευταίο.",
   "src": "11d9a0750da1",
   "by": "claude"
  },
@@ -7110,7 +7110,7 @@
   "by": "claude"
  },
  "g:de:fn.demonstrative/seeAlso/2/note": {
-  "t": "Τα κινεζικά 这 / 那 (αυτός / εκείνος) θέλουν μετρητική λέξη πριν από το ουσιαστικό: 这本书, 那个人 – χωρίς γένος, χωρίς καταλήξεις.",
+  "t": "Τα κινεζικά 这 / 那 (αυτός / εκείνος) θέλουν ταξινομητή πριν από το ουσιαστικό: 这本书, 那个人 – χωρίς γένος, χωρίς καταλήξεις.",
   "src": "495afae9f1c9",
   "by": "claude"
  },
@@ -9810,7 +9810,7 @@
   "by": "claude"
  },
  "g:de:fn.have/blocks/4/text": {
-  "t": "Es gibt hier ein Café (εδώ υπάρχει ένα café) – όχι *Hier hat ein Café. Το haben θέλει πρόσωπο ή πράγμα που κατέχει κάτι.",
+  "t": "Es gibt hier ein Café (εδώ υπάρχει μια καφετέρια) – όχι *Hier hat ein Café. Το haben θέλει πρόσωπο ή πράγμα που κατέχει κάτι.",
   "src": "ecf1db43f14d",
   "by": "claude"
  },
@@ -10250,7 +10250,7 @@
   "by": "claude"
  },
  "g:de:fn.imperative/summary": {
-  "t": "Τα γερμανικά έχουν τρεις τύπους προστακτικής, έναν για κάθε τρόπο να πεις «εσύ/εσείς». Σε ένα πρόσωπο που του μιλάς με du: το θέμα, συχνά χωρίς κατάληξη – Geh! Komm! Warte! (το Gehe! με -e είναι σωστό αλλά επίσημο ή παλιομοδίτικο· μετά από -t / -d το -e χρειάζεται: Warte!). Σε πολλά πρόσωπα που τους μιλάς με ihr: ο τύπος του ihr στον ενεστώτα χωρίς το ihr – Geht! Kommt! Wartet! Σε ένα ή περισσότερα πρόσωπα που τους μιλάς με Sie: ο τύπος του απαρεμφάτου + Sie, το ρήμα πρώτο – Gehen Sie! Kommen Sie! Warten Sie! (η αντωνυμία δεν παραλείπεται ποτέ). Το ρήμα μπαίνει πρώτο και η πρόταση τελειώνει με θαυμαστικό. Τα ρήματα που αλλάζουν e σε i / ie στον ενεστώτα το κρατούν και ρίχνουν το -e: essen → Iss! (du isst), nehmen → Nimm!, lesen → Lies!· τα ρήματα που αλλάζουν a σε ä ΔΕΝ κρατούν το umlaut: fahren → Fahr! (du fährst), laufen → Lauf! (du läufst). Το μόριο ενός χωριζόμενου ρήματος πάει στο τέλος: Komm herein! Geh weg! Kommen Sie bitte zurück! Το sein είναι ανώμαλο: Sei …! Seid …! Seien Sie …! Τα bitte (παρακαλώ), mal και doch κάνουν την εντολή πιο μαλακή: Komm doch mal her! – και το nicht την κάνει αρνητική: Geh nicht weg! Το «ας …» είναι ο τύπος του wir με το ρήμα πρώτο: Gehen wir! Οι πινακίδες και οι συνταγές χρησιμοποιούν συχνά το σκέτο απαρέμφατο: Bitte nicht rauchen! Langsam fahren!",
+  "t": "Τα γερμανικά έχουν τρεις τύπους προστακτικής, έναν για κάθε τρόπο να πεις «εσύ/εσείς». Σε ένα πρόσωπο που του μιλάς με du: το θέμα, συχνά χωρίς κατάληξη – Geh! Komm! Warte! (το Gehe! με -e είναι σωστό αλλά επίσημο ή παλιομοδίτικο· μετά από -t / -d το -e χρειάζεται: Warte!). Σε πολλά πρόσωπα που τους μιλάς με ihr: ο τύπος του ihr στον ενεστώτα χωρίς το ihr – Geht! Kommt! Wartet! Σε ένα ή περισσότερα πρόσωπα που τους μιλάς με Sie: ο τύπος του απαρεμφάτου + Sie, το ρήμα πρώτο – Gehen Sie! Kommen Sie! Warten Sie! (η αντωνυμία δεν παραλείπεται ποτέ). Το ρήμα μπαίνει πρώτο και η πρόταση τελειώνει με θαυμαστικό. Τα ρήματα που αλλάζουν e σε i / ie στον ενεστώτα το κρατούν και ρίχνουν το -e: essen → Iss! (du isst), nehmen → Nimm!, lesen → Lies!· τα ρήματα που αλλάζουν a σε ä ΔΕΝ κρατούν το Umlaut: fahren → Fahr! (du fährst), laufen → Lauf! (du läufst). Το μόριο ενός χωριζόμενου ρήματος πάει στο τέλος: Komm herein! Geh weg! Kommen Sie bitte zurück! Το sein είναι ανώμαλο: Sei …! Seid …! Seien Sie …! Τα bitte (παρακαλώ), mal και doch κάνουν την εντολή πιο μαλακή: Komm doch mal her! – και το nicht την κάνει αρνητική: Geh nicht weg! Το «ας …» είναι ο τύπος του wir με το ρήμα πρώτο: Gehen wir! Οι πινακίδες και οι συνταγές χρησιμοποιούν συχνά το σκέτο απαρέμφατο: Bitte nicht rauchen! Langsam fahren!",
   "src": "ca0fdea8f6c8",
   "by": "claude"
  },
@@ -10510,7 +10510,7 @@
   "by": "claude"
  },
  "g:de:fn.imperative/blocks/3/title": {
-  "t": "Χωρίς umlaut, αλλά κράτα το i",
+  "t": "Χωρίς Umlaut, αλλά κράτα το i",
   "src": "1da550361c3a",
   "by": "claude"
  },
@@ -10560,7 +10560,7 @@
   "by": "claude"
  },
  "g:de:fn.imperative/procedure/askYourself/2": {
-  "t": "Αλλάζει το ρήμα e → i / ie (essen, nehmen, lesen); Κράτα το i: Iss! – Αλλάζει a → ä (fahren, laufen); Ρίξε το umlaut: Fahr!",
+  "t": "Αλλάζει το ρήμα e → i / ie (essen, nehmen, lesen); Κράτα το i: Iss! – Αλλάζει a → ä (fahren, laufen); Ρίξε το Umlaut: Fahr!",
   "src": "4421dacfdf92",
   "by": "claude"
  },
@@ -10615,7 +10615,7 @@
   "by": "claude"
  },
  "g:de:fn.imperative/traps/0": {
-  "t": "Τα Fahr! και Lauf! δεν έχουν umlaut (du fährst, du läufst).",
+  "t": "Τα Fahr! και Lauf! δεν έχουν Umlaut (du fährst, du läufst).",
   "src": "0779030d882b",
   "by": "claude"
  },
@@ -10675,7 +10675,7 @@
   "by": "claude"
  },
  "g:de:fn.imperative/quiz/0/why": {
-  "t": "Τα ρήματα με a → ä χάνουν το umlaut στην προστακτική: du fährst → Fahr!",
+  "t": "Τα ρήματα με a → ä χάνουν το Umlaut στην προστακτική: du fährst → Fahr!",
   "src": "c675baccf1f3",
   "by": "claude"
  },
@@ -12270,7 +12270,7 @@
   "by": "claude"
  },
  "g:de:fn.noun.gender/seeAlso/2/note": {
-  "t": "Τα κινεζικά ουσιαστικά δεν έχουν καθόλου γραμματικό γένος· αυτό που μαθαίνεις μαζί με το ουσιαστικό είναι η μετρητική λέξη.",
+  "t": "Τα κινεζικά ουσιαστικά δεν έχουν καθόλου γραμματικό γένος· αυτό που μαθαίνεις μαζί με το ουσιαστικό είναι ο ταξινομητής.",
   "src": "7905057bcd2f",
   "by": "claude"
  },
@@ -15270,7 +15270,7 @@
   "by": "claude"
  },
  "g:de:fn.overview/facts/5/value": {
-  "t": "Η διάρκεια των φωνηέντων έχει σημασία (Staat – Stadt)· τα umlaut ä, ö, ü· το ch μετά από a, o, u (Bach) διαφέρει από το ch μετά από άλλα φωνήεντα (ich)· τα τελικά b, d, g ακούγονται σαν p, t, k (Tag)",
+  "t": "Η διάρκεια των φωνηέντων έχει σημασία (Staat – Stadt)· τα Umlaut ä, ö, ü· το ch μετά από a, o, u (Bach) διαφέρει από το ch μετά από άλλα φωνήεντα (ich)· τα τελικά b, d, g ακούγονται σαν p, t, k (Tag)",
   "src": "11ffce846c11",
   "by": "claude"
  },
@@ -15355,7 +15355,7 @@
   "by": "claude"
  },
  "g:de:fn.overview/pathNote": {
-  "t": "Τα γερμανικά ακολουθούν τον συγχωνευτικό δρόμο. Το θέμα και οι λέξεις κάθε βήματος είναι ίδια με των άλλων γλωσσών· η επιπλέον γραμματική είναι οι πίνακες των γερμανικών και οι θέσεις του ρήματος. S00 η επισκόπηση. S01 οι προσωπικές αντωνυμίες (με το ευγενικό Sie) και το sein ολόκληρο (bin, bist, ist …). S02 οι χαιρετισμοί και η επιλογή du / Sie (Wie geht es dir / Ihnen?). S03 τα dieser / jener με τις καταλήξεις τους και το δεικτικό das. S04 τα τρία γένη, τα der / ein και η συμφωνία τους, και τι είναι πτώση – η ονομαστική. S05 οι αριθμοί και οι πολλοί τύποι πληθυντικού (Tische, Bücher, Lampen, Handys). S06 το haben και τα mein, dein, sein, ihr … με καταλήξεις. S07 η κλίση του ενεστώτα (μαζί με το essen → isst) και η αιτιατική (den, einen). S08 nicht ή kein. S09 οι ερωτήσεις ναι/όχι με το ρήμα πρώτο, και το doch. S10 οι ερωτήσεις με ερωτηματική λέξη (wer / wen, welcher με καταλήξεις) και οι θηλυκοί τίτλοι επαγγελμάτων σε -in. S11 οι προθέσεις με την πτώση τους (mit, aus, zu + δοτική· für, ohne + αιτιατική) και τα im, am, zum, zur. S12 δοτική για το «πού», αιτιατική για το «προς τα πού». S13 gehen ή fahren, wohin / woher, τα χωριζόμενα ρήματα (ankommen → kommt … an) και η προστακτική (Komm! Kommt! Kommen Sie!). S14 οι ημέρες, τα μέρη της ημέρας και τα χρονικά επιρρήματα – μια χρονική λέξη στην αρχή τραβά το ρήμα πριν από το υποκείμενο (Heute gehe ich …). S15 um, am, im· vor, nach, seit + δοτική· bis· während + γενική· η ώρα (halb neun = 8:30). S16 οι καταλήξεις του επιθέτου: ασθενής, μικτή και ισχυρή κλίση (der große, ein großer, großer)· Mir ist kalt· Ich habe Hunger. S17 ο συγκριτικός -er + als και ο υπερθετικός am -sten / der -ste, με umlaut (älter) και το ανώμαλο gut – besser – am besten· mehr, am meisten· τα χρώματα, με τα rosa, lila και orange χωρίς καταλήξεις. S18 τρεις σειρές λέξεων μετά από συνδετικές λέξεις: τα und / aber / denn δεν αλλάζουν τίποτα, τα deshalb / also / dann τραβούν το ρήμα μπροστά, τα weil / dass / wenn / als / ob / obwohl το στέλνουν στο τέλος. Μια απομονωτική γλώσσα (τα κινεζικά) δεν έχει καθόλου πίνακες αλλά τόνους, μετρητικές λέξεις και σταθερή σειρά λέξεων· μια συγκολλητική κολλάει μία σημασία ανά επίθημα· τα αραβικά και τα εβραϊκά φτιάχνουν λέξεις από ρίζες και μοτίβα – τα γερμανικά συγχωνεύουν πολλές σημασίες σε μία κατάληξη.",
+  "t": "Τα γερμανικά ακολουθούν τον συγχωνευτικό δρόμο. Το θέμα και οι λέξεις κάθε βήματος είναι ίδια με των άλλων γλωσσών· η επιπλέον γραμματική είναι οι πίνακες των γερμανικών και οι θέσεις του ρήματος. S00 η επισκόπηση. S01 οι προσωπικές αντωνυμίες (με το ευγενικό Sie) και το sein ολόκληρο (bin, bist, ist …). S02 οι χαιρετισμοί και η επιλογή du / Sie (Wie geht es dir / Ihnen?). S03 τα dieser / jener με τις καταλήξεις τους και το δεικτικό das. S04 τα τρία γένη, τα der / ein και η συμφωνία τους, και τι είναι πτώση – η ονομαστική. S05 οι αριθμοί και οι πολλοί τύποι πληθυντικού (Tische, Bücher, Lampen, Handys). S06 το haben και τα mein, dein, sein, ihr … με καταλήξεις. S07 η κλίση του ενεστώτα (μαζί με το essen → isst) και η αιτιατική (den, einen). S08 nicht ή kein. S09 οι ερωτήσεις ναι/όχι με το ρήμα πρώτο, και το doch. S10 οι ερωτήσεις με ερωτηματική λέξη (wer / wen, welcher με καταλήξεις) και οι θηλυκοί τίτλοι επαγγελμάτων σε -in. S11 οι προθέσεις με την πτώση τους (mit, aus, zu + δοτική· für, ohne + αιτιατική) και τα im, am, zum, zur. S12 δοτική για το «πού», αιτιατική για το «προς τα πού». S13 gehen ή fahren, wohin / woher, τα χωριζόμενα ρήματα (ankommen → kommt … an) και η προστακτική (Komm! Kommt! Kommen Sie!). S14 οι ημέρες, τα μέρη της ημέρας και τα χρονικά επιρρήματα – μια χρονική λέξη στην αρχή τραβά το ρήμα πριν από το υποκείμενο (Heute gehe ich …). S15 um, am, im· vor, nach, seit + δοτική· bis· während + γενική· η ώρα (halb neun = 8:30). S16 οι καταλήξεις του επιθέτου: ασθενής, μικτή και ισχυρή κλίση (der große, ein großer, großer)· Mir ist kalt· Ich habe Hunger. S17 ο συγκριτικός -er + als και ο υπερθετικός am -sten / der -ste, με Umlaut (älter) και το ανώμαλο gut – besser – am besten· mehr, am meisten· τα χρώματα, με τα rosa, lila και orange χωρίς καταλήξεις. S18 τρεις σειρές λέξεων μετά από συνδετικές λέξεις: τα und / aber / denn δεν αλλάζουν τίποτα, τα deshalb / also / dann τραβούν το ρήμα μπροστά, τα weil / dass / wenn / als / ob / obwohl το στέλνουν στο τέλος. Μια απομονωτική γλώσσα (τα κινεζικά) δεν έχει καθόλου πίνακες αλλά τόνους, ταξινομητές και σταθερή σειρά λέξεων· μια συγκολλητική κολλάει μία σημασία ανά επίθημα· τα αραβικά και τα εβραϊκά φτιάχνουν λέξεις από ρίζες και μοτίβα – τα γερμανικά συγχωνεύουν πολλές σημασίες σε μία κατάληξη.",
   "src": "3500c0b221cb",
   "by": "claude"
  },
@@ -15725,7 +15725,7 @@
   "by": "claude"
  },
  "g:de:fn.past/summary": {
-  "t": "Τα γερμανικά έχουν έναν παρελθοντικό χρόνο και δύο τρόπους να τον πουν. Στον προφορικό λόγο ο συνηθισμένος τύπος είναι ο Perfekt: ένας τύπος του haben ή του sein στη δεύτερη θέση και το Partizip II (μετοχή παρελθόντος) στο τέλος της πρότασης – Ich habe gefrühstückt. Ich bin um sechs aufgestanden. Στη γραπτή αφήγηση (ιστορίες, ειδήσεις, μυθιστορήματα) χρησιμοποιείται ο μονολεκτικός Präteritum: Er stand auf und duschte. Και οι δύο λένε το ίδιο: η πράξη τελείωσε. Κανένας δεν δείχνει αν ήταν ολοκληρωμένη ή αν συνεχιζόταν – τα γερμανικά δεν έχουν ποιόν ενεργείας (όψη) – και δεν υπάρχουν βαθμίδες του «πόσο παλιά». Τα περισσότερα ρήματα παίρνουν haben· τα ρήματα κίνησης και αλλαγής κατάστασης χωρίς αντικείμενο παίρνουν sein (aufstehen, aufwachen, einschlafen, losgehen, heimkommen, gehen, fahren, kommen), όπως και τα sein και bleiben. Το Partizip II σχηματίζεται με ge-: ge-…-t για τα ασθενή ρήματα (gefrühstückt, geduscht), ge-…-en και συχνά καινούργιο φωνήεν για τα ισχυρά (geschlafen, gewaschen). Ένα χωριζόμενο μόριο μπαίνει πρώτο (auf-ge-standen, an-ge-zogen, heim-ge-kommen)· τα ρήματα με αχώριστο πρόθημα (be-, er-, ver- …) και τα ρήματα σε -ieren δεν παίρνουν ge- (begonnen, beendet, vergessen, reserviert). Τα sein και haben προτιμούν τον Präteritum ακόμη και στον προφορικό λόγο: Gestern war Sonntag. Er hatte Hunger.",
+  "t": "Τα γερμανικά έχουν έναν παρελθοντικό χρόνο και δύο τρόπους να τον πουν. Στον προφορικό λόγο ο συνηθισμένος τύπος είναι ο Perfekt: ένας τύπος του haben ή του sein στη δεύτερη θέση και το Partizip II (μετοχή παρελθόντος) στο τέλος της πρότασης – Ich habe gefrühstückt. Ich bin um sechs aufgestanden. Στη γραπτή αφήγηση (ιστορίες, ειδήσεις, μυθιστορήματα) χρησιμοποιείται ο μονολεκτικός Präteritum: Er stand auf und duschte. Και οι δύο λένε το ίδιο: η πράξη τελείωσε. Κανένας δεν δείχνει αν ήταν ολοκληρωμένη ή αν συνεχιζόταν – τα γερμανικά δεν έχουν όψη – και δεν υπάρχουν βαθμίδες του «πόσο παλιά». Τα περισσότερα ρήματα παίρνουν haben· τα ρήματα κίνησης και αλλαγής κατάστασης χωρίς αντικείμενο παίρνουν sein (aufstehen, aufwachen, einschlafen, losgehen, heimkommen, gehen, fahren, kommen), όπως και τα sein και bleiben. Το Partizip II σχηματίζεται με ge-: ge-…-t για τα ασθενή ρήματα (gefrühstückt, geduscht), ge-…-en και συχνά καινούργιο φωνήεν για τα ισχυρά (geschlafen, gewaschen). Ένα χωριζόμενο μόριο μπαίνει πρώτο (auf-ge-standen, an-ge-zogen, heim-ge-kommen)· τα ρήματα με αχώριστο πρόθημα (be-, er-, ver- …) και τα ρήματα σε -ieren δεν παίρνουν ge- (begonnen, beendet, vergessen, reserviert). Τα sein και haben προτιμούν τον Präteritum ακόμη και στον προφορικό λόγο: Gestern war Sonntag. Er hatte Hunger.",
   "src": "da8d2bd0ee9f",
   "by": "claude"
  },
@@ -15845,7 +15845,7 @@
   "by": "claude"
  },
  "g:de:fn.past/blocks/1/head/1": {
-  "t": "σχήμα",
+  "t": "μοτίβο",
   "src": "1fd38d5cbd2a",
   "by": "claude"
  },
@@ -17130,7 +17130,7 @@
   "by": "claude"
  },
  "g:de:fn.past.ongoing/seeAlso/0/note": {
-  "t": "Τα αραβικά χρησιμοποιούν kāna كَانَ + τον τύπο του ατελούς (imperfect) για συνήθειες και πράξεις σε εξέλιξη στο παρελθόν: كَانَ يَلْعَبُ kāna yalʿabu (συνήθιζε να παίζει / έπαιζε).",
+  "t": "Τα αραβικά χρησιμοποιούν kāna كَانَ + τον ενεστωτικό τύπο (muḍāriʿ) για συνήθειες και πράξεις σε εξέλιξη στο παρελθόν: كَانَ يَلْعَبُ kāna yalʿabu (συνήθιζε να παίζει / έπαιζε).",
   "src": "9c30eea5f129",
   "by": "claude"
  },
@@ -17280,12 +17280,12 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/summary": {
-  "t": "Τα γερμανικά δεν έχουν μία μόνο κατάληξη πληθυντικού: υπάρχουν πέντε σχήματα, και το φωνήεν συχνά παίρνει umlaut (a → ä, o → ö, u → ü). -e: der Tisch – die Tische, der Stuhl – die Stühle. -er (με umlaut όπου γίνεται): das Kind – die Kinder, das Buch – die Bücher. -(e)n: die Frau – die Frauen, die Lampe – die Lampen, die Lehrerin – die Lehrerinnen. -s (κυρίως δάνειες λέξεις και λέξεις που τελειώνουν σε φωνήεν): das Handy – die Handys, das Baby – die Babys. Χωρίς κατάληξη (συχνά ουσιαστικά σε -er, -el, -chen): das Zimmer – die Zimmer, der Lehrer – die Lehrer, και μόνο με umlaut: die Mutter – die Mütter, der Bruder – die Brüder. Μάθαινε κάθε ουσιαστικό με το άρθρο και τον πληθυντικό του, όπως το δίνει το λεξικό (der Stuhl, -e). Το άρθρο του πληθυντικού είναι πάντα die (dieser → diese, mein → meine), το αόριστο άρθρο δεν έχει πληθυντικό (ein Buch → Bücher), και στη δοτική πληθυντικού το ουσιαστικό παίρνει -n, εκτός αν τελειώνει ήδη σε -n ή -s: den Kindern, αλλά den Frauen, den Handys.",
+  "t": "Τα γερμανικά δεν έχουν μία μόνο κατάληξη πληθυντικού: υπάρχουν πέντε μοτίβα, και το φωνήεν συχνά παίρνει Umlaut (a → ä, o → ö, u → ü). -e: der Tisch – die Tische, der Stuhl – die Stühle. -er (με Umlaut όπου γίνεται): das Kind – die Kinder, das Buch – die Bücher. -(e)n: die Frau – die Frauen, die Lampe – die Lampen, die Lehrerin – die Lehrerinnen. -s (κυρίως δάνειες λέξεις και λέξεις που τελειώνουν σε φωνήεν): das Handy – die Handys, das Baby – die Babys. Χωρίς κατάληξη (συχνά ουσιαστικά σε -er, -el, -chen): das Zimmer – die Zimmer, der Lehrer – die Lehrer, και μόνο με Umlaut: die Mutter – die Mütter, der Bruder – die Brüder. Μάθαινε κάθε ουσιαστικό με το άρθρο και τον πληθυντικό του, όπως το δίνει το λεξικό (der Stuhl, -e). Το άρθρο του πληθυντικού είναι πάντα die (dieser → diese, mein → meine), το αόριστο άρθρο δεν έχει πληθυντικό (ein Buch → Bücher), και στη δοτική πληθυντικού το ουσιαστικό παίρνει -n, εκτός αν τελειώνει ήδη σε -n ή -s: den Kindern, αλλά den Frauen, den Handys.",
   "src": "171f49946660",
   "by": "claude"
  },
  "g:de:fn.plural.noun/blocks/0/head/0": {
-  "t": "σχήμα",
+  "t": "μοτίβο",
   "src": "1fd38d5cbd2a",
   "by": "claude"
  },
@@ -17435,7 +17435,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/blocks/0/caption": {
-  "t": "Τα σχήματα του πληθυντικού με τα ουσιαστικά των S01, S04 και S06 (¨ = umlaut)",
+  "t": "Τα μοτίβα του πληθυντικού με τα ουσιαστικά των S01, S04 και S06 (¨ = Umlaut)",
   "src": "3d74063bdc14",
   "by": "claude"
  },
@@ -17540,7 +17540,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/blocks/3/text": {
-  "t": "Θηλυκά → συνήθως -(e)n (και -in → -innen). Ουσιαστικά σε -chen, -lein, και αρσενικά/ουδέτερα σε -er, -el, -en → χωρίς κατάληξη. Δάνειες λέξεις (das Handy, das Baby, der Cousin) και ουσιαστικά που τελειώνουν σε φωνήεν εκτός από -e → -s. Μονοσύλλαβα αρσενικά → συχνά -e, συχνά με umlaut. Μονοσύλλαβα ουδέτερα → συχνά -er με umlaut.",
+  "t": "Θηλυκά → συνήθως -(e)n (και -in → -innen). Ουσιαστικά σε -chen, -lein, και αρσενικά/ουδέτερα σε -er, -el, -en → χωρίς κατάληξη. Δάνειες λέξεις (das Handy, das Baby, der Cousin) και ουσιαστικά που τελειώνουν σε φωνήεν εκτός από -e → -s. Μονοσύλλαβα αρσενικά → συχνά -e, συχνά με Umlaut. Μονοσύλλαβα ουδέτερα → συχνά -er με Umlaut.",
   "src": "4df23c220013",
   "by": "claude"
  },
@@ -17565,7 +17565,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/procedure/askYourself/2": {
-  "t": "Τελειώνει σε -er, -el, -en ή -chen (αρσενικό ή ουδέτερο); Τότε χωρίς κατάληξη – ίσως με umlaut (Mütter, Väter, Brüder).",
+  "t": "Τελειώνει σε -er, -el, -en ή -chen (αρσενικό ή ουδέτερο); Τότε χωρίς κατάληξη – ίσως με Umlaut (Mütter, Väter, Brüder).",
   "src": "894ae2b1922b",
   "by": "claude"
  },
@@ -17575,7 +17575,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/procedure/askYourself/4": {
-  "t": "Είναι μονοσύλλαβο ουδέτερο (Kind, Buch, Haus); Τότε συχνά -er με umlaut.",
+  "t": "Είναι μονοσύλλαβο ουδέτερο (Kind, Buch, Haus); Τότε συχνά -er με Umlaut.",
   "src": "3cdfb25ab4e7",
   "by": "claude"
  },
@@ -17605,7 +17605,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/traps/0": {
-  "t": "Μόνο umlaut: die Mutter – die Mütter, der Vater – die Väter, der Bruder – die Brüder, die Tochter – die Töchter (τα die Muttern είναι τα παξιμάδια για τις βίδες!).",
+  "t": "Μόνο Umlaut: die Mutter – die Mütter, der Vater – die Väter, der Bruder – die Brüder, die Tochter – die Töchter (τα die Muttern είναι τα παξιμάδια για τις βίδες!).",
   "src": "65492c0b99ca",
   "by": "claude"
  },
@@ -17665,7 +17665,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/quiz/0/why": {
-  "t": "Μονοσύλλαβο ουδέτερο: -er με umlaut.",
+  "t": "Μονοσύλλαβο ουδέτερο: -er με Umlaut.",
   "src": "a13afddb5484",
   "by": "claude"
  },
@@ -17785,7 +17785,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/quiz/4/why": {
-  "t": "Μόνο umlaut· τα Muttern είναι παξιμάδια για βίδες.",
+  "t": "Μόνο Umlaut· τα Muttern είναι παξιμάδια για βίδες.",
   "src": "a785660eade3",
   "by": "claude"
  },
@@ -17830,7 +17830,7 @@
   "by": "claude"
  },
  "g:de:fn.plural.noun/seeAlso/2/note": {
-  "t": "Τα κινεζικά ουσιαστικά δεν αλλάζουν· οι αριθμοί και οι μετρητικές λέξεις δείχνουν την ποσότητα, το 们 προστίθεται μόνο για πρόσωπα.",
+  "t": "Τα κινεζικά ουσιαστικά δεν αλλάζουν· οι αριθμοί και οι ταξινομητές δείχνουν την ποσότητα, το 们 προστίθεται μόνο για πρόσωπα.",
   "src": "a1aff75a07c2",
   "by": "claude"
  },
@@ -21830,7 +21830,7 @@
   "by": "claude"
  },
  "g:de:fn.present/summary": {
-  "t": "Ένα γερμανικό ρήμα αλλάζει κατάληξη για κάθε πρόσωπο: παίρνεις το θέμα (το απαρέμφατο χωρίς -en: koch-en, trink-en, kauf-en) και προσθέτεις -e, -st, -t για τα ich, du, er/sie/es και -en, -t, -en για τα wir, ihr, sie/Sie. Το ευγενικό Sie παίρνει πάντα τον τύπο του πληθυντικού (Sie trinken). Μια ομάδα ισχυρών ρημάτων αλλάζει επίσης το φωνήεν του θέματος, αλλά μόνο στους τύπους του du και του er/sie/es: essen → du isst, er isst (e → i)· αργότερα θα συναντήσεις και το a → ä (fahren → du fährst). Τα ρήματα τροπικότητας wollen και mögen είναι ανώμαλα: χωρίς κατάληξη στα ich και er (ich will, er will· ich mag, er mag) και με άλλο φωνήεν στον ενικό. Ο ευγενικός «ξάδερφός» τους möchte (θα ήθελα) είναι τύπος του mögen που χρησιμοποιείται σαν ενεστώτας: ich möchte, du möchtest, er möchte, wir möchten. Και τα sein και haben είναι ανώμαλα (ich bin, du bist, er ist …· du hast, er hat). Τα γερμανικά έχουν έναν ενεστώτα για ό,τι γίνεται τακτικά, ό,τι γίνεται τώρα και συχνά για ό,τι θα γίνει: ich esse = τρώω (συνήθως), τρώω (αυτή τη στιγμή), θα φάω – δεν υπάρχει ξεχωριστός τύπος εξέλιξης. Το κλιτό ρήμα στέκεται πάντα στη δεύτερη θέση σε μια δήλωση (Ich trinke Tee. Vielleicht trinke ich Tee.)· με ρήμα τροπικότητας, το δεύτερο ρήμα πάει στο τέλος-τέλος ως απαρέμφατο (Ich will Tee trinken).",
+  "t": "Ένα γερμανικό ρήμα αλλάζει κατάληξη για κάθε πρόσωπο: παίρνεις το θέμα (το απαρέμφατο χωρίς -en: koch-en, trink-en, kauf-en) και προσθέτεις -e, -st, -t για τα ich, du, er/sie/es και -en, -t, -en για τα wir, ihr, sie/Sie. Το ευγενικό Sie παίρνει πάντα τον τύπο του πληθυντικού (Sie trinken). Μια ομάδα ισχυρών ρημάτων αλλάζει επίσης το φωνήεν του θέματος, αλλά μόνο στους τύπους του du και του er/sie/es: essen → du isst, er isst (e → i)· αργότερα θα συναντήσεις και το a → ä (fahren → du fährst). Τα τροπικά ρήματα wollen και mögen είναι ανώμαλα: χωρίς κατάληξη στα ich και er (ich will, er will· ich mag, er mag) και με άλλο φωνήεν στον ενικό. Ο ευγενικός «ξάδερφός» τους möchte (θα ήθελα) είναι τύπος του mögen που χρησιμοποιείται σαν ενεστώτας: ich möchte, du möchtest, er möchte, wir möchten. Και τα sein και haben είναι ανώμαλα (ich bin, du bist, er ist …· du hast, er hat). Τα γερμανικά έχουν έναν ενεστώτα για ό,τι γίνεται τακτικά, ό,τι γίνεται τώρα και συχνά για ό,τι θα γίνει: ich esse = τρώω (συνήθως), τρώω (αυτή τη στιγμή), θα φάω – δεν υπάρχει ξεχωριστός τύπος εξέλιξης. Το κλιτό ρήμα στέκεται πάντα στη δεύτερη θέση σε μια δήλωση (Ich trinke Tee. Vielleicht trinke ich Tee.)· με τροπικό ρήμα, το δεύτερο ρήμα πάει στο τέλος-τέλος ως απαρέμφατο (Ich will Tee trinken).",
   "src": "76e63ea0b07a",
   "by": "claude"
  },
@@ -22325,7 +22325,7 @@
   "by": "claude"
  },
  "g:de:fn.present/blocks/4/caption": {
-  "t": "Με ρήμα τροπικότητας (wollen, mögen, möchte): το τροπικό είναι δεύτερο, το άλλο ρήμα περιμένει στο τέλος σε απαρέμφατο",
+  "t": "Με τροπικό ρήμα (wollen, mögen, möchte): το τροπικό είναι δεύτερο, το άλλο ρήμα περιμένει στο τέλος σε απαρέμφατο",
   "src": "53cc7c62a2f2",
   "by": "claude"
  },
@@ -22355,7 +22355,7 @@
   "by": "claude"
  },
  "g:de:fn.present/blocks/7/text": {
-  "t": "Το wollen σημαίνει «θέλω»: Ich will Kaffee = θέλω καφέ. Σε μαγαζί ή σε café το möchte είναι πιο ευγενικό: Ich möchte einen Kaffee, bitte.",
+  "t": "Το wollen σημαίνει «θέλω»: Ich will Kaffee = θέλω καφέ. Σε μαγαζί ή σε καφετέρια το möchte είναι πιο ευγενικό: Ich möchte einen Kaffee, bitte.",
   "src": "542abab95054",
   "by": "claude"
  },
@@ -22380,7 +22380,7 @@
   "by": "claude"
  },
  "g:de:fn.present/procedure/askYourself/4": {
-  "t": "Είναι ρήμα τροπικότητας (wollen, mögen); → ich will / er will, ich mag / er mag – χωρίς κατάληξη· ευγενική επιθυμία: möchte.",
+  "t": "Είναι τροπικό ρήμα (wollen, mögen); → ich will / er will, ich mag / er mag – χωρίς κατάληξη· ευγενική επιθυμία: möchte.",
   "src": "129bbd0bd62e",
   "by": "claude"
  },
@@ -22440,7 +22440,7 @@
   "by": "claude"
  },
  "g:de:fn.present/traps/6": {
-  "t": "Με ρήμα τροπικότητας το δεύτερο ρήμα είναι απαρέμφατο στο τέλος: Ich will Tee trinken – όχι *Ich will trinke Tee.",
+  "t": "Με τροπικό ρήμα το δεύτερο ρήμα είναι απαρέμφατο στο τέλος: Ich will Tee trinken – όχι *Ich will trinke Tee.",
   "src": "059284876c7e",
   "by": "claude"
  },
@@ -23525,7 +23525,7 @@
   "by": "claude"
  },
  "g:de:fn.question.wh/summary": {
-  "t": "Μια γερμανική ερώτηση με ερωτηματική λέξη βάζει την ερωτηματική λέξη πρώτη και το κλιτό ρήμα δεύτερο, μετά το υποκείμενο: Was trinkst du? Wo ist der Bahnhof? Wer ist das? – το ίδιο «ρήμα στη δεύτερη θέση» όπως στη δήλωση, ενώ μια ερώτηση ναι/όχι βάζει το ρήμα πρώτο (Trinkst du Tee?). Όλες οι ερωτηματικές λέξεις αρχίζουν από w- (die W-Fragen): was (τι), wer (ποιος), wo (πού), wann (πότε), wie (πώς), warum (γιατί), wie viel / wie viele (πόσο / πόσοι), welcher (ποιος από όλους) και wessen (τίνος). Δύο από αυτές κλίνονται. Το wer έχει πτώσεις όπως το άρθρο der: wer (υποκείμενο), wen (αντικείμενο), wem (δοτική: mit wem?), wessen (τίνος). Το welcher κλίνεται όπως το dieser: welcher Tee, welche Tasche, welches Buch, welchen Tee (αιτιατική). Ένα ουσιαστικό που ανήκει στην ερωτηματική λέξη μετακινείται μαζί της στην πρώτη θέση: Welchen Tee möchten Sie? Wie viele Kinder haben Sie? Το wie viel πάει με μη αριθμήσιμα ουσιαστικά (wie viel Zucker), το wie viele με πληθυντικούς (wie viele Kinder). Το wessen ακούγεται επίσημο· τα καθημερινά γερμανικά ρωτούν Von wem ist das? Τα επαγγέλματα αυτού του βήματος απαντούν στο Was sind Sie von Beruf? – χωρίς άρθρο μετά το sein: Ich bin Ärztin. Er ist Koch. Τα γερμανικά δείχνουν το φύλο του προσώπου στη λέξη του επαγγέλματος: der Arzt / die Ärztin, der Koch / die Köchin (-in, συχνά με umlaut).",
+  "t": "Μια γερμανική ερώτηση με ερωτηματική λέξη βάζει την ερωτηματική λέξη πρώτη και το κλιτό ρήμα δεύτερο, μετά το υποκείμενο: Was trinkst du? Wo ist der Bahnhof? Wer ist das? – το ίδιο «ρήμα στη δεύτερη θέση» όπως στη δήλωση, ενώ μια ερώτηση ναι/όχι βάζει το ρήμα πρώτο (Trinkst du Tee?). Όλες οι ερωτηματικές λέξεις αρχίζουν από w- (die W-Fragen): was (τι), wer (ποιος), wo (πού), wann (πότε), wie (πώς), warum (γιατί), wie viel / wie viele (πόσο / πόσοι), welcher (ποιος από όλους) και wessen (τίνος). Δύο από αυτές κλίνονται. Το wer έχει πτώσεις όπως το άρθρο der: wer (υποκείμενο), wen (αντικείμενο), wem (δοτική: mit wem?), wessen (τίνος). Το welcher κλίνεται όπως το dieser: welcher Tee, welche Tasche, welches Buch, welchen Tee (αιτιατική). Ένα ουσιαστικό που ανήκει στην ερωτηματική λέξη μετακινείται μαζί της στην πρώτη θέση: Welchen Tee möchten Sie? Wie viele Kinder haben Sie? Το wie viel πάει με μη αριθμήσιμα ουσιαστικά (wie viel Zucker), το wie viele με πληθυντικούς (wie viele Kinder). Το wessen ακούγεται επίσημο· τα καθημερινά γερμανικά ρωτούν Von wem ist das? Τα επαγγέλματα αυτού του βήματος απαντούν στο Was sind Sie von Beruf? – χωρίς άρθρο μετά το sein: Ich bin Ärztin. Er ist Koch. Τα γερμανικά δείχνουν το φύλο του προσώπου στη λέξη του επαγγέλματος: der Arzt / die Ärztin, der Koch / die Köchin (-in, συχνά με Umlaut).",
   "src": "54198565b81c",
   "by": "claude"
  },
@@ -24130,7 +24130,7 @@
   "by": "claude"
  },
  "g:de:fn.question.wh/blocks/7/caption": {
-  "t": "Τα επαγγέλματα: -in για γυναίκα, συχνά με umlaut",
+  "t": "Τα επαγγέλματα: -in για γυναίκα, συχνά με Umlaut",
   "src": "cb0e1c11837e",
   "by": "claude"
  },
@@ -24235,7 +24235,7 @@
   "by": "claude"
  },
  "g:de:fn.question.wh/traps/7": {
-  "t": "Η λέξη του επαγγέλματος για γυναίκα τελειώνει σε -in: Arzt → Ärztin, Koch → Köchin, Anwalt → Anwältin (umlaut!).",
+  "t": "Η λέξη του επαγγέλματος για γυναίκα τελειώνει σε -in: Arzt → Ärztin, Koch → Köchin, Anwalt → Anwältin (Umlaut!).",
   "src": "33d16c7decac",
   "by": "claude"
  },
@@ -24475,7 +24475,7 @@
   "by": "claude"
  },
  "g:de:fn.question.wh/quiz/7/why": {
-  "t": "Χωρίς άρθρο, και η θηλυκή λέξη του επαγγέλματος σε -in (με umlaut).",
+  "t": "Χωρίς άρθρο, και η θηλυκή λέξη του επαγγέλματος σε -in (με Umlaut).",
   "src": "0cdaa93f26a7",
   "by": "claude"
  },
@@ -25195,7 +25195,7 @@
   "by": "claude"
  },
  "g:de:fn.question.yesno/seeAlso/2/note": {
-  "t": "Τα κινεζικά προσθέτουν το 吗 στο τέλος ή χρησιμοποιούν το σχήμα ρήμα-όχι-ρήμα (喝不喝), και το 还是 για το «ή» σε ερώτηση επιλογής.",
+  "t": "Τα κινεζικά προσθέτουν το 吗 στο τέλος ή χρησιμοποιούν το μοτίβο ρήμα-όχι-ρήμα (喝不喝), και το 还是 για το «ή» σε ερώτηση επιλογής.",
   "src": "0cc64a98b01f",
   "by": "claude"
  },
@@ -25290,7 +25290,7 @@
   "by": "claude"
  },
  "g:de:fn.question.yesno/notes/16/text": {
-  "t": "Τα κινεζικά προσθέτουν 吗 (你喝茶吗?) ή χρησιμοποιούν το σχήμα ρήμα-όχι-ρήμα (你喝不喝茶?)· τα γερμανικά μεταφέρουν το ρήμα μπροστά:\n→ Trinkst du Tee?",
+  "t": "Τα κινεζικά προσθέτουν 吗 (你喝茶吗?) ή χρησιμοποιούν το μοτίβο ρήμα-όχι-ρήμα (你喝不喝茶?)· τα γερμανικά μεταφέρουν το ρήμα μπροστά:\n→ Trinkst du Tee?",
   "src": "53f688b4f56a",
   "by": "claude"
  },
@@ -32640,7 +32640,7 @@
   "by": "claude"
  },
  "x:de:nächstes_Jahr/profile/funFacts/0": {
-  "t": "Τα letztes Jahr (πέρσι) και dieses Jahr (φέτος) ακολουθούν το ίδιο σχήμα.",
+  "t": "Τα letztes Jahr (πέρσι) και dieses Jahr (φέτος) ακολουθούν το ίδιο μοτίβο.",
   "src": "d33fd3d03091",
   "by": "claude"
  },
@@ -33020,7 +33020,7 @@
   "by": "claude"
  },
  "x:de:zweite/profile/examples/1/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -35015,7 +35015,7 @@
   "by": "claude"
  },
  "x:de:du/profile/examples/0/context": {
-  "t": "café με έναν φίλο",
+  "t": "καφετέρια με έναν φίλο",
   "src": "d3efd630f8c1",
   "by": "claude"
  },
@@ -35595,7 +35595,7 @@
   "by": "claude"
  },
  "x:de:wir/profile/phrases/0/meaning": {
-  "t": "διάσημος τίτλος της εφημερίδας Bild (2005), όταν ο Γερμανός Joseph Ratzinger έγινε Πάπας· σήμερα αστείο σχήμα για εθνική υπερηφάνεια",
+  "t": "διάσημος τίτλος της εφημερίδας Bild (2005), όταν ο Γερμανός Joseph Ratzinger έγινε Πάπας· σήμερα αστείο μοτίβο για εθνική υπερηφάνεια",
   "src": "c4fef0e51604",
   "by": "claude"
  },
@@ -36190,7 +36190,7 @@
   "by": "claude"
  },
  "x:de:es/profile/examples/3/tr": {
-  "t": "Υπάρχει κάποιο café εδώ;",
+  "t": "Υπάρχει κάποια καφετέρια εδώ;",
   "src": "3bf9133fcaa4",
   "by": "claude"
  },
@@ -39020,7 +39020,7 @@
   "by": "claude"
  },
  "x:de:ein/profile/examples/2/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -40670,7 +40670,7 @@
   "by": "claude"
  },
  "x:de:gut/profile/examples/5/context": {
-  "t": "cafés",
+  "t": "καφετέριες",
   "src": "108ec6324275",
   "by": "claude"
  },
@@ -41330,7 +41330,7 @@
   "by": "claude"
  },
  "x:de:bitte/profile/examples/5/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -43360,7 +43360,7 @@
   "by": "claude"
  },
  "x:de:Tür/profile/subtleties/0": {
-  "t": "an der Tür (στην πόρτα, δοτική: πού;) και an die Tür (προς την πόρτα, αιτιατική: προς τα πού;) – πρόθεση διπλής σύνταξης.",
+  "t": "an der Tür (στην πόρτα, δοτική: πού;) και an die Tür (προς την πόρτα, αιτιατική: προς τα πού;) – πρόθεση διπλής πτώσης.",
   "src": "ddaa8e30e845",
   "by": "claude"
  },
@@ -46315,7 +46315,7 @@
   "by": "claude"
  },
  "x:de:zwei/profile/examples/1/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -46345,7 +46345,7 @@
   "by": "claude"
  },
  "x:de:zwei/profile/subtleties/0": {
-  "t": "Στο café το ποτό μένει στον ενικό μετά τον αριθμό: Zwei Kaffee, bitte (δύο καφέδες).",
+  "t": "Στην καφετέρια το ποτό μένει στον ενικό μετά τον αριθμό: Zwei Kaffee, bitte (δύο καφέδες).",
   "src": "e297adbdb043",
   "by": "claude"
  },
@@ -53425,7 +53425,7 @@
   "by": "claude"
  },
  "x:de:trinken/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -53890,7 +53890,7 @@
   "by": "claude"
  },
  "x:de:mögen/profile/examples/2/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -56550,7 +56550,7 @@
   "by": "claude"
  },
  "x:de:Zucker/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -56920,7 +56920,7 @@
   "by": "claude"
  },
  "x:de:Wasser/profile/examples/1/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -57270,7 +57270,7 @@
   "by": "claude"
  },
  "x:de:Kaffee/profile/examples/1/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -57445,7 +57445,7 @@
   "by": "claude"
  },
  "x:de:Milch/profile/examples/1/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -59625,7 +59625,7 @@
   "by": "claude"
  },
  "x:de:noch/profile/examples/2/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -60745,7 +60745,7 @@
   "by": "claude"
  },
  "x:de:was/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -61485,7 +61485,7 @@
   "by": "claude"
  },
  "x:de:warum/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -61905,7 +61905,7 @@
   "by": "claude"
  },
  "x:de:welcher/profile/examples/2/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -65235,7 +65235,7 @@
   "by": "claude"
  },
  "x:de:in/profile/pitfalls/0": {
-  "t": "Πρόθεση διπλής σύνταξης: Wo? → δοτική (Ich bin in der Küche), Wohin? → αιτιατική (Ich gehe in die Küche).",
+  "t": "Πρόθεση διπλής πτώσης: Wo? → δοτική (Ich bin in der Küche), Wohin? → αιτιατική (Ich gehe in die Küche).",
   "src": "30d0d024a698",
   "by": "claude"
  },
@@ -65450,7 +65450,7 @@
   "by": "claude"
  },
  "x:de:an/profile/pitfalls/2": {
-  "t": "Πρόθεση διπλής σύνταξης: Wo? + δοτική (am Fenster), Wohin? + αιτιατική (ans Fenster).",
+  "t": "Πρόθεση διπλής πτώσης: Wo? + δοτική (am Fenster), Wohin? + αιτιατική (ans Fenster).",
   "src": "f27f4f2adfef",
   "by": "claude"
  },
@@ -65735,7 +65735,7 @@
   "by": "claude"
  },
  "x:de:zu/profile/examples/3/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -66330,7 +66330,7 @@
   "by": "claude"
  },
  "x:de:mit/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -66430,7 +66430,7 @@
   "by": "claude"
  },
  "x:de:ohne/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -66535,7 +66535,7 @@
   "by": "claude"
  },
  "x:de:für/profile/examples/0/context": {
-  "t": "café",
+  "t": "καφετέρια",
   "src": "850f7dc43910",
   "by": "claude"
  },
@@ -66775,7 +66775,7 @@
   "by": "claude"
  },
  "x:de:über/profile/subtleties/0": {
-  "t": "Για τόπο το über είναι πρόθεση διπλής σύνταξης (S12): über dem Tisch (πού;) – über den Tisch (από πάνω, προς τα πού;).",
+  "t": "Για τόπο το über είναι πρόθεση διπλής πτώσης (S12): über dem Tisch (πού;) – über den Tisch (από πάνω, προς τα πού;).",
   "src": "5d1cf477fda3",
   "by": "claude"
  },
@@ -67550,7 +67550,7 @@
   "by": "claude"
  },
  "x:de:Uni/profile/examples/1/tr": {
-  "t": "Μετά τη σχολή πάμε στο café.",
+  "t": "Μετά τη σχολή πάμε στην καφετέρια.",
   "src": "0d83f288d209",
   "by": "claude"
  },
@@ -68660,12 +68660,12 @@
   "by": "claude"
  },
  "x:de:Café/profile/senses/0/def": {
-  "t": "καφετέρια, café",
+  "t": "καφετέρια, καφενείο",
   "src": "6f28a9d03e83",
   "by": "claude"
  },
  "x:de:Café/profile/examples/0/tr": {
-  "t": "Πίνουμε καφέ στο café.",
+  "t": "Πίνουμε καφέ στην καφετέρια.",
   "src": "399c6fdb1ff7",
   "by": "claude"
  },
@@ -68675,7 +68675,7 @@
   "by": "claude"
  },
  "x:de:Café/profile/examples/1/tr": {
-  "t": "Το café στη γωνία έχει καλά γλυκά.",
+  "t": "Η καφετέρια στη γωνία έχει καλά γλυκά.",
   "src": "bf1bccc1b73c",
   "by": "claude"
  },
@@ -68685,7 +68685,7 @@
   "by": "claude"
  },
  "x:de:Café/profile/examples/2/tr": {
-  "t": "Να βρεθούμε στο café;",
+  "t": "Να βρεθούμε στην καφετέρια;",
   "src": "28ab0ce45e11",
   "by": "claude"
  },
@@ -68695,12 +68695,12 @@
   "by": "claude"
  },
  "x:de:Café/profile/collocations/0/tr": {
-  "t": "πηγαίνω σε café",
+  "t": "πηγαίνω σε καφετέρια",
   "src": "50d910888acc",
   "by": "claude"
  },
  "x:de:Café/profile/collocations/1/tr": {
-  "t": "café με τραπεζάκια στο πεζοδρόμιο",
+  "t": "καφετέρια με τραπεζάκια στο πεζοδρόμιο",
   "src": "ffb4830fb5be",
   "by": "claude"
  },
@@ -68710,12 +68710,12 @@
   "by": "claude"
  },
  "x:de:Café/profile/synonyms/0/nuance": {
-  "t": "καφενείο – η λέξη για τα κλασικά cafés της Βιέννης",
+  "t": "καφενείο – η λέξη για τα κλασικά καφενεία της Βιέννης",
   "src": "b0dd287c5a2d",
   "by": "claude"
  },
  "x:de:Café/profile/synonyms/1/nuance": {
-  "t": "ζαχαροπλαστείο με café",
+  "t": "ζαχαροπλαστείο με καφετέρια",
   "src": "b8e81db789ec",
   "by": "claude"
  },
@@ -68740,7 +68740,7 @@
   "by": "claude"
  },
  "x:de:Café/profile/subtleties/0": {
-  "t": "Πολλά γερμανικά cafés είναι και φούρνοι ή ζαχαροπλαστεία (Konditorei)· το Kneipe είναι μπαρ-ταβέρνα.",
+  "t": "Πολλές γερμανικές καφετέριες είναι και φούρνοι ή ζαχαροπλαστεία (Konditorei)· το Kneipe είναι μπαρ-ταβέρνα.",
   "src": "f78b157d6002",
   "by": "claude"
  },
@@ -69720,7 +69720,7 @@
   "by": "claude"
  },
  "x:de:Platz/profile/feeling": {
-  "t": "Μια πλατεία με σιντριβάνι, cafés και περιστέρια.",
+  "t": "Μια πλατεία με σιντριβάνι, καφετέριες και περιστέρια.",
   "src": "8dc27d3ba307",
   "by": "claude"
  },
@@ -69750,7 +69750,7 @@
   "by": "claude"
  },
  "x:de:Platz/profile/examples/0/tr": {
-  "t": "Το café είναι στην πλατεία της αγοράς.",
+  "t": "Η καφετέρια είναι στην πλατεία της αγοράς.",
   "src": "9f36697bd853",
   "by": "claude"
  },
@@ -71220,7 +71220,7 @@
   "by": "claude"
  },
  "x:de:zwischen/profile/examples/1/tr": {
-  "t": "Το café είναι ανάμεσα στην τράπεζα και το ταχυδρομείο.",
+  "t": "Η καφετέρια είναι ανάμεσα στην τράπεζα και το ταχυδρομείο.",
   "src": "4bf3853c3104",
   "by": "claude"
  },
@@ -71845,7 +71845,7 @@
   "by": "claude"
  },
  "x:de:draußen/profile/examples/2/tr": {
-  "t": "Καθόμαστε έξω στο café.",
+  "t": "Καθόμαστε έξω στην καφετέρια.",
   "src": "be81c6f1aea3",
   "by": "claude"
  },
@@ -71890,7 +71890,7 @@
   "by": "claude"
  },
  "x:de:draußen/profile/funFacts/0": {
-  "t": "Το Draußen nur Kännchen («έξω μόνο κανατάκια καφέ») είναι διάσημη πινακίδα των παλιών γερμανικών cafés – ένα διαρκές αστείο για τους γερμανικούς κανόνες.",
+  "t": "Το Draußen nur Kännchen («έξω μόνο κανατάκια καφέ») είναι διάσημη πινακίδα των παλιών γερμανικών καφετεριών – ένα διαρκές αστείο για τους γερμανικούς κανόνες.",
   "src": "b8214e303f80",
   "by": "claude"
  },
@@ -76725,7 +76725,7 @@
   "by": "claude"
  },
  "x:de:wohin/profile/pitfalls/1": {
-  "t": "Η απάντηση στο wohin παίρνει αιτιατική μετά από τις προθέσεις διπλής σύνταξης: in den Park, auf den Markt – και nach / zu + δοτική.",
+  "t": "Η απάντηση στο wohin παίρνει αιτιατική μετά από τις προθέσεις διπλής πτώσης: in den Park, auf den Markt – και nach / zu + δοτική.",
   "src": "f8632fdb7ba6",
   "by": "claude"
  },
@@ -82045,7 +82045,7 @@
   "by": "claude"
  },
  "x:de:morgens/profile/subtleties/0": {
-  "t": "Το ίδιο σχήμα: mittags, nachmittags, abends, nachts, montags, sonntags – όλα για συνήθειες, όλα με μικρό.",
+  "t": "Το ίδιο μοτίβο: mittags, nachmittags, abends, nachts, montags, sonntags – όλα για συνήθειες, όλα με μικρό.",
   "src": "c203f4fd5102",
   "by": "claude"
  },
@@ -94730,7 +94730,7 @@
   "by": "claude"
  },
  "x:de:ob/profile/examples/1/tr": {
-  "t": "Μπορείς να ρωτήσεις αν το café είναι ανοιχτό;",
+  "t": "Μπορείς να ρωτήσεις αν η καφετέρια είναι ανοιχτή;",
   "src": "28353edd6296",
   "by": "claude"
  },
@@ -115270,7 +115270,7 @@
   "by": "claude"
  },
  "s:de.f4.076/gloss": {
-  "t": "Πίνουν καφέ στο café.",
+  "t": "Πίνουν καφέ στην καφετέρια.",
   "src": "4fb03eb703ac",
   "by": "claude"
  },
@@ -115425,7 +115425,7 @@
   "by": "claude"
  },
  "s:de.f4.107/gloss": {
-  "t": "Θέλουμε να πάμε στο café.",
+  "t": "Θέλουμε να πάμε στην καφετέρια.",
   "src": "afa3c83e2e9b",
   "by": "claude"
  },
@@ -115505,7 +115505,7 @@
   "by": "claude"
  },
  "s:de.f4.123/gloss": {
-  "t": "Πίνουμε καφέ σε ένα café στην πλατεία.",
+  "t": "Πίνουμε καφέ σε μια καφετέρια στην πλατεία.",
   "src": "e4f51d319ed2",
   "by": "claude"
  },
@@ -115565,12 +115565,12 @@
   "by": "claude"
  },
  "s:de.f4.135/gloss": {
-  "t": "Είμαι στο café με τη φίλη μου.",
+  "t": "Είμαι στην καφετέρια με τη φίλη μου.",
   "src": "82ca66f75852",
   "by": "claude"
  },
  "s:de.f4.136/gloss": {
-  "t": "Είμαι στο café με τον φίλο μου.",
+  "t": "Είμαι στην καφετέρια με τον φίλο μου.",
   "src": "10d3638c5f35",
   "by": "claude"
  },
@@ -115740,7 +115740,7 @@
   "by": "claude"
  },
  "s:de.f4.170/gloss": {
-  "t": "Το café είναι μπροστά στον σταθμό.",
+  "t": "Η καφετέρια είναι μπροστά στον σταθμό.",
   "src": "4a836ad4a0c2",
   "by": "claude"
  },
@@ -115775,7 +115775,7 @@
   "by": "claude"
  },
  "s:de.f4.177/gloss": {
-  "t": "Ανάμεσα στον σταθμό και στο ταχυδρομείο υπάρχει ένα café.",
+  "t": "Ανάμεσα στον σταθμό και στο ταχυδρομείο υπάρχει μια καφετέρια.",
   "src": "168b91b22c4d",
   "by": "claude"
  },
@@ -119670,7 +119670,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/1/why": {
-  "t": "Ο πληθυντικός δεν προβλέπεται και μαθαίνεται μαζί με το ουσιαστικό· μια σημασία μπορεί να έχει δικό της πληθυντικό (Banken / Bänke) ή κανέναν (das Land = η ύπαιθρος, η εξοχή). Μια σημασία που δεν εμφανίζεται σε κανένα στοιχείο δεν έχει πληθυντικό. Χωρίς τιμή: τα μη μετρήσιμα ουσιαστικά (κατηγορία sgt) και τα ουσιαστικά μόνο πληθυντικού (κατηγορία plt).",
+  "t": "Ο πληθυντικός δεν προβλέπεται και μαθαίνεται μαζί με το ουσιαστικό· μια σημασία μπορεί να έχει δικό της πληθυντικό (Banken / Bänke) ή κανέναν (das Land = η ύπαιθρος, η εξοχή). Μια σημασία που δεν εμφανίζεται σε κανένα στοιχείο δεν έχει πληθυντικό. «Κανένα»: τα μη μετρήσιμα ουσιαστικά (κατηγορία sgt) και τα ουσιαστικά μόνο πληθυντικού (κατηγορία plt).",
   "src": "70c6298fc139",
   "by": "claude"
  },
@@ -119680,7 +119680,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/2/why": {
-  "t": "Η γενική του ενικού δείχνει με μια ματιά την κλίση: des Tisches / des Tischs (-(e)s), des Jungen (κλίση σε -n), des Namens (μεικτή), der Frau (θηλυκό: χωρίς κατάληξη). Τα λεξικά τη δίνουν μαζί με τον πληθυντικό (der Tisch, -(e)s, -e). Ο πρώτος τύπος είναι ο συνηθισμένος. Χωρίς τιμή: τα ουσιαστικά μόνο πληθυντικού.",
+  "t": "Η γενική του ενικού δείχνει με μια ματιά την κλίση: des Tisches / des Tischs (-(e)s), des Jungen (κλίση σε -n), des Namens (μικτή), der Frau (θηλυκό: χωρίς κατάληξη). Τα λεξικά τη δίνουν μαζί με τον πληθυντικό (der Tisch, -(e)s, -e). Ο πρώτος τύπος είναι ο συνηθισμένος. «Κανένα»: τα ουσιαστικά μόνο πληθυντικού.",
   "src": "7e25776dce91",
   "by": "claude"
  },
@@ -119690,7 +119690,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/3/why": {
-  "t": "ισχυρή: des Tisches, dem Tisch (-(e)s στη γενική)· ασθενής (κλίση σε -n): den / dem / des Jungen· μεικτή: des Namens, den Namen· θηλυκά: χωρίς κατάληξη στον ενικό· επιθετική: κλίνεται σαν επίθετο (der Verwandte, ein Verwandter).",
+  "t": "ισχυρή: des Tisches, dem Tisch (-(e)s στη γενική)· ασθενής (κλίση σε -n): den / dem / des Jungen· μικτή: des Namens, den Namen· θηλυκά: χωρίς κατάληξη στον ενικό· επιθετική: κλίνεται σαν επίθετο (der Verwandte, ein Verwandter).",
   "src": "a4f3fd3a5f7d",
   "by": "claude"
  },
@@ -119720,7 +119720,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/6/why": {
-  "t": "Ο κανόνας που δίνει σε αυτό το ουσιαστικό το γένος του, όταν υπάρχει: μια κατάληξη (-ung, -heit, -keit, -schaft, -ion, -tät, -ie, -in → die· -chen, -lein, -um → das· -ling → der), μια σημασιολογική κατηγορία (ημέρες, μήνες, εποχές, μέρη της ημέρας, άρρενα πρόσωπα → der· θήλεα πρόσωπα → die), το τελευταίο μέρος ενός συνθέτου ή η τάση των ουσιαστικών σε -e να είναι θηλυκά. Όταν η λέξη είναι εξαίρεση σε κανόνα, αυτό σημειώνεται. Χωρίς τιμή: κανένας κανόνας – το άρθρο μαθαίνεται μαζί με το ουσιαστικό.",
+  "t": "Ο κανόνας που δίνει σε αυτό το ουσιαστικό το γένος του, όταν υπάρχει: μια κατάληξη (-ung, -heit, -keit, -schaft, -ion, -tät, -ie, -in → die· -chen, -lein, -um → das· -ling → der), μια σημασιολογική κατηγορία (ημέρες, μήνες, εποχές, μέρη της ημέρας, άρρενα πρόσωπα → der· θήλεα πρόσωπα → die), το τελευταίο μέρος ενός συνθέτου ή η τάση των ουσιαστικών σε -e να είναι θηλυκά. Όταν η λέξη είναι εξαίρεση σε κανόνα, αυτό σημειώνεται. «Κανένα»: κανένας κανόνας – το άρθρο μαθαίνεται μαζί με το ουσιαστικό.",
   "src": "5381e1283e51",
   "by": "claude"
  },
@@ -119730,7 +119730,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/7/why": {
-  "t": "Τα ουσιαστικά προσώπων έρχονται σε ζευγάρια: συνήθως το θηλυκό σχηματίζεται με -in, συχνά με Umlaut (der Lehrer → die Lehrerin, der Arzt → die Ärztin, der Koch → die Köchin)· μερικά ζευγάρια είναι διαφορετικές λέξεις (der Bruder – die Schwester). Τύπος: το αντίστοιχο με το άρθρο του· λήμμα: όταν υπάρχει στο λεξικό του μαθήματος. Χωρίς τιμή: δεν είναι ουσιαστικό προσώπου ή είναι ένα ουσιαστικό για όλους (das Kind, die Person).",
+  "t": "Τα ουσιαστικά προσώπων έρχονται σε ζευγάρια: συνήθως το θηλυκό σχηματίζεται με -in, συχνά με Umlaut (der Lehrer → die Lehrerin, der Arzt → die Ärztin, der Koch → die Köchin)· μερικά ζευγάρια είναι διαφορετικές λέξεις (der Bruder – die Schwester). Τύπος: το αντίστοιχο με το άρθρο του· λήμμα: όταν υπάρχει στο λεξικό του μαθήματος. «Κανένα»: δεν είναι ουσιαστικό προσώπου ή είναι ένα ουσιαστικό για όλους (das Kind, die Person).",
   "src": "bd007e7f716a",
   "by": "claude"
  },
@@ -119750,7 +119750,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/9/why": {
-  "t": "Το τελευταίο μέρος (η κεφαλή) δίνει το γένος και τον πληθυντικό, τα μέρη πριν από αυτό περιορίζουν τη σημασία· συνδετικό στοιχείο = το στοιχείο που ενώνει τα μέρη (Blume-n-kohl, Geburt-s-tag) ή «−e» όταν το πρώτο μέρος χάνει το τελικό του e (Kirsch-tomate). Ένα ρήμα ως πρώτο μέρος εμφανίζεται με το θέμα του (wohnen → Wohnzimmer). Χωρίς τιμή: απλή ή παράγωγη λέξη ή δύο χωριστές λέξεις.",
+  "t": "Το τελευταίο μέρος (η κεφαλή) δίνει το γένος και τον πληθυντικό, τα μέρη πριν από αυτό περιορίζουν τη σημασία· συνδετικό στοιχείο = το στοιχείο που ενώνει τα μέρη (Blume-n-kohl, Geburt-s-tag) ή «−e» όταν το πρώτο μέρος χάνει το τελικό του e (Kirsch-tomate). Ένα ρήμα ως πρώτο μέρος εμφανίζεται με το θέμα του (wohnen → Wohnzimmer). «Κανένα»: απλή ή παράγωγη λέξη ή δύο χωριστές λέξεις.",
   "src": "dd82487092e6",
   "by": "claude"
  },
@@ -119760,7 +119760,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NOUN/10/why": {
-  "t": "Μια σημασία που χρησιμοποιείται με δικό της τύπο ή δική της σύνταξη πέρα από τον πληθυντικό της (Frau ως τίτλος: Frau Weber, ποτέ στον πληθυντικό· Bad σε τοπωνύμια: in Bad Ems). Χωρίς τιμή: όλες οι σημασίες έχουν τους ίδιους τύπους.",
+  "t": "Μια σημασία που χρησιμοποιείται με δικό της τύπο ή δική της σύνταξη πέρα από τον πληθυντικό της (Frau ως τίτλος: Frau Weber, ποτέ στον πληθυντικό· Bad σε τοπωνύμια: in Bad Ems). «Κανένα»: όλες οι σημασίες έχουν τους ίδιους τύπους.",
   "src": "08a1fda2256e",
   "by": "claude"
  },
@@ -119790,7 +119790,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/2/why": {
-  "t": "Για ρήματα που παίρνουν και τα δύο βοηθητικά: ποια σημασία (ή σύνταξη) παίρνει ποιο βοηθητικό. Χωρίς τιμή: ένα βοηθητικό ρήμα για όλες τις σημασίες.",
+  "t": "Για ρήματα που παίρνουν και τα δύο βοηθητικά: ποια σημασία (ή σύνταξη) παίρνει ποιο βοηθητικό. «Κανένα»: ένα βοηθητικό ρήμα για όλες τις σημασίες.",
   "src": "1418a909bf58",
   "by": "claude"
  },
@@ -119830,7 +119830,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/6/why": {
-  "t": "Η πτώση κάθε αντικειμένου (helfen + δοτική, kaufen + αιτιατική (+ δοτική)), η πρόθεση που επιλέγει το ρήμα (warten auf + αιτιατική) ή κατηγορούμενο σε ονομαστική (Ich heiße Anna). Χωρίς τιμή: το ρήμα δεν παίρνει αντικείμενο σε καμία σημασία.",
+  "t": "Η πτώση κάθε αντικειμένου (helfen + δοτική, kaufen + αιτιατική (+ δοτική)), η πρόθεση που επιλέγει το ρήμα (warten auf + αιτιατική) ή κατηγορούμενο σε ονομαστική (Ich heiße Anna). «Κανένα»: το ρήμα δεν παίρνει αντικείμενο σε καμία σημασία.",
   "src": "eea774f106b6",
   "by": "claude"
  },
@@ -119840,7 +119840,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/7/why": {
-  "t": "Μια σημασία που χρειάζεται την αυτοπαθή αντωνυμία (sich verlassen auf: ich verlasse mich). Χωρίς τιμή: δεν έχει αυτοπαθή σημασία.",
+  "t": "Μια σημασία που χρειάζεται την αυτοπαθή αντωνυμία (sich verlassen auf: ich verlasse mich). «Κανένα»: δεν έχει αυτοπαθή σημασία.",
   "src": "b9298e4617ca",
   "by": "claude"
  },
@@ -119850,7 +119850,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/8/why": {
-  "t": "ασθενή: -te, ge-…-t (kaufen)· ισχυρά: αλλαγή φωνήεντος, ge-…-en (trinken – trank – getrunken)· μεικτά: αλλαγή φωνήεντος με καταλήξεις ασθενούς (rennen – rannte – gerannt)· τροπικά: τα τροπικά ρήματα (mögen, wollen)· ανώμαλα: sein, haben.",
+  "t": "ασθενή: -te, ge-…-t (kaufen)· ισχυρά: αλλαγή φωνήεντος, ge-…-en (trinken – trank – getrunken)· μικτά: αλλαγή φωνήεντος με καταλήξεις ασθενούς (rennen – rannte – gerannt)· τροπικά: τα τροπικά ρήματα (mögen, wollen)· ανώμαλα: sein, haben.",
   "src": "fa06b246e706",
   "by": "claude"
  },
@@ -119870,7 +119870,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/10/why": {
-  "t": "Ο τύπος του du είναι το θέμα, με προαιρετικό -e (komm(e)!), που όμως χρειάζεται μετά από -t, -d (warte!) και -er (erinnere!)· τα ρήματα με e → i/ie κρατούν την αλλαγή και δεν παίρνουν ποτέ -e (iss!, lies!), ενώ τα ρήματα με a → ä δεν την κρατούν (fahr!, schlaf!). ihr = ο τύπος του ενεστώτα (kommt!), Sie = απαρέμφατο + Sie (kommen Sie!). sein: sei! seid! seien Sie!. Χωρίς τιμή: ρήματα χωρίς προστακτική (τα τροπικά ρήματα).",
+  "t": "Ο τύπος του du είναι το θέμα, με προαιρετικό -e (komm(e)!), που όμως χρειάζεται μετά από -t, -d (warte!) και -er (erinnere!)· τα ρήματα με e → i/ie κρατούν την αλλαγή και δεν παίρνουν ποτέ -e (iss!, lies!), ενώ τα ρήματα με a → ä δεν την κρατούν (fahr!, schlaf!). ihr = ο τύπος του ενεστώτα (kommt!), Sie = απαρέμφατο + Sie (kommen Sie!). sein: sei! seid! seien Sie!. «Κανένα»: ρήματα χωρίς προστακτική (τα τροπικά ρήματα).",
   "src": "ac3d57f4d641",
   "by": "claude"
  },
@@ -119880,7 +119880,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/11/why": {
-  "t": "Ο μονολεκτικός Konjunktiv II (er wäre, hätte, käme, ginge) είναι συνηθισμένος μόνο για τα sein, haben, werden, τα τροπικά ρήματα και λίγα συχνά ισχυρά ρήματα· για τα υπόλοιπα ανήκει στον γραπτό λόγο ή είναι σπάνιος, και στον προφορικό λόγο λέμε würde + απαρέμφατο (er würde essen). Χωρίς τιμή: τα ασθενή ρήματα, που ο Konjunktiv II τους συμπίπτει με το Präteritum (kaufte) – χρησιμοποιείται würde + απαρέμφατο.",
+  "t": "Ο μονολεκτικός Konjunktiv II (er wäre, hätte, käme, ginge) είναι συνηθισμένος μόνο για τα sein, haben, werden, τα τροπικά ρήματα και λίγα συχνά ισχυρά ρήματα· για τα υπόλοιπα ανήκει στον γραπτό λόγο ή είναι σπάνιος, και στον προφορικό λόγο λέμε würde + απαρέμφατο (er würde essen). «Κανένα»: τα ασθενή ρήματα, που ο Konjunktiv II τους συμπίπτει με το Präteritum (kaufte) – χρησιμοποιείται würde + απαρέμφατο.",
   "src": "7e8f954a1426",
   "by": "claude"
  },
@@ -119890,7 +119890,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/12/why": {
-  "t": "Τα θέματα σε -t, -d (και σε σύμφωνο + m/n) βάζουν ένα -e- πριν από το -st και το -t: du wartest, er wartet, ihr wartet· τα θέματα σε -s, -ß, -z, -x παίρνουν μόνο -t στον τύπο του du: du heißt, du reist, du isst· τα θέματα σε -er / -el παίρνουν -n (όχι -en) στους τύπους του πληθυντικού. Χωρίς τιμή: οι καταλήξεις προστίθενται κανονικά (ή το ρήμα είναι ανώμαλο: sein, haben, werden).",
+  "t": "Τα θέματα σε -t, -d (και σε σύμφωνο + m/n) βάζουν ένα -e- πριν από το -st και το -t: du wartest, er wartet, ihr wartet· τα θέματα σε -s, -ß, -z, -x παίρνουν μόνο -t στον τύπο του du: du heißt, du reist, du isst· τα θέματα σε -er / -el παίρνουν -n (όχι -en) στους τύπους του πληθυντικού. «Κανένα»: οι καταλήξεις προστίθενται κανονικά (ή το ρήμα είναι ανώμαλο: sein, haben, werden).",
   "src": "c060216b7814",
   "by": "claude"
  },
@@ -119910,7 +119910,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/14/why": {
-  "t": "Τα τροπικά ρήματα (και τα lassen, sehen, hören, helfen) στον Perfekt, όταν έχουν εξαρτημένο απαρέμφατο, χρησιμοποιούν το απαρέμφατό τους αντί για την Partizip II: Ich habe kommen wollen (όχι gewollt). Χωρίς τιμή: χρησιμοποιείται πάντα η Partizip II.",
+  "t": "Τα τροπικά ρήματα (και τα lassen, sehen, hören, helfen) στον Perfekt, όταν έχουν εξαρτημένο απαρέμφατο, χρησιμοποιούν το απαρέμφατό τους αντί για την Partizip II: Ich habe kommen wollen (όχι gewollt). «Κανένα»: χρησιμοποιείται πάντα η Partizip II.",
   "src": "c2197f16f4ba",
   "by": "claude"
  },
@@ -119930,7 +119930,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/16/why": {
-  "t": "Το hin δείχνει μακριά από τον ομιλητή, το her προς τον ομιλητή: Komm herein! (προς εμένα) – Geh hinein! (μακριά από μένα)· wohin? – woher?. Στον προφορικό λόγο και τα δύο συχνά συντομεύονται σε r- (rein, raus). Χωρίς τιμή: η λέξη δεν δηλώνει κατεύθυνση.",
+  "t": "Το hin δείχνει μακριά από τον ομιλητή, το her προς τον ομιλητή: Komm herein! (προς εμένα) – Geh hinein! (μακριά από μένα)· wohin? – woher?. Στον προφορικό λόγο και τα δύο συχνά συντομεύονται σε r- (rein, raus). «Κανένα»: η λέξη δεν δηλώνει κατεύθυνση.",
   "src": "e462f596ab1c",
   "by": "claude"
  },
@@ -119940,7 +119940,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/17/why": {
-  "t": "Το να βάζεις κάτι κάπου και το να βρίσκεται εκεί εκφράζονται με ζεύγη ρημάτων ανάλογα με τη θέση: stellen – stehen (όρθιο), legen – liegen (ξαπλωμένο), setzen – sitzen (καθιστό), hängen – hängen (κρεμασμένο). Το ρήμα της τοποθέτησης είναι ασθενές και παίρνει αιτιατική μετά από πρόθεση διπλής πτώσης, το ρήμα της κατάστασης είναι ισχυρό και παίρνει δοτική. Χωρίς τιμή: δεν ανήκει σε αυτά τα ρήματα.",
+  "t": "Το να βάζεις κάτι κάπου και το να βρίσκεται εκεί εκφράζονται με ζεύγη ρημάτων ανάλογα με τη θέση: stellen – stehen (όρθιο), legen – liegen (ξαπλωμένο), setzen – sitzen (καθιστό), hängen – hängen (κρεμασμένο). Το ρήμα της τοποθέτησης είναι ασθενές και παίρνει αιτιατική μετά από πρόθεση διπλής πτώσης, το ρήμα της κατάστασης είναι ισχυρό και παίρνει δοτική. «Κανένα»: δεν ανήκει σε αυτά τα ρήματα.",
   "src": "f849208561a1",
   "by": "claude"
  },
@@ -119950,7 +119950,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/VERB/18/why": {
-  "t": "Μια σημασία που έχει δικούς της τύπους (mögen «θα ήθελα» → möchte, möchtest …). Χωρίς τιμή: όλες οι σημασίες έχουν τους ίδιους τύπους.",
+  "t": "Μια σημασία που έχει δικούς της τύπους (mögen «θα ήθελα» → möchte, möchtest …). «Κανένα»: όλες οι σημασίες έχουν τους ίδιους τύπους.",
   "src": "3967792c85c9",
   "by": "claude"
  },
@@ -119970,7 +119970,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADJ/1/why": {
-  "t": "Ο συγκριτικός και ο κατηγορηματικός υπερθετικός (am …sten), με Umlaut ή ανώμαλους τύπους όπου το επίθετο τους έχει: alt – älter – am ältesten, gut – besser – am besten. Ένας δεύτερος τύπος μετά από κάθετο είναι επίσης σωστός. Χωρίς τιμή: το επίθετο δεν έχει παραθετικά.",
+  "t": "Ο συγκριτικός και ο κατηγορηματικός υπερθετικός (am …sten), με Umlaut ή ανώμαλους τύπους όπου το επίθετο τους έχει: alt – älter – am ältesten, gut – besser – am besten. Ένας δεύτερος τύπος μετά από κάθετο είναι επίσης σωστός. «Κανένα»: το επίθετο δεν έχει παραθετικά.",
   "src": "24cc2d592c55",
   "by": "claude"
  },
@@ -119980,7 +119980,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADJ/2/why": {
-  "t": "Μερικά επίθετα αλλάζουν πριν από κατάληξη: hoch → hoh- (ein hoher Turm), dunkel → dunkl-, teuer → teur-. Χωρίς τιμή: η κατάληξη προστίθεται στη βασική μορφή (ή η λέξη δεν παίρνει καταλήξεις).",
+  "t": "Μερικά επίθετα αλλάζουν πριν από κατάληξη: hoch → hoh- (ein hoher Turm), dunkel → dunkl-, teuer → teur-. «Κανένα»: η κατάληξη προστίθεται στη βασική μορφή (ή η λέξη δεν παίρνει καταλήξεις).",
   "src": "da69f25a44a7",
   "by": "claude"
  },
@@ -120000,7 +120000,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADJ/4/why": {
-  "t": "Μερικά επίθετα παίρνουν συμπλήρωμα με σταθερή πρόθεση και πτώση (froh über + αιτιατική, hungrig nach + δοτική) ή δοτική του προσώπου που νιώθει κάτι (Mir ist kalt). Χωρίς τιμή: δεν παίρνει δικό του συμπλήρωμα.",
+  "t": "Μερικά επίθετα παίρνουν συμπλήρωμα με σταθερή πρόθεση και πτώση (froh über + αιτιατική, hungrig nach + δοτική) ή δοτική του προσώπου που νιώθει κάτι (Mir ist kalt). «Κανένα»: δεν παίρνει δικό του συμπλήρωμα.",
   "src": "9c8945207226",
   "by": "claude"
  },
@@ -120020,7 +120020,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADV/0/why": {
-  "t": "Μερικά επιρρήματα έχουν παραθετικά: oft – öfter – am öftesten, bald – eher – am ehesten. Χωρίς τιμή: δεν έχει παραθετικά (ή είναι το ίδιο τύπος συγκριτικού / υπερθετικού).",
+  "t": "Μερικά επιρρήματα έχουν παραθετικά: oft – öfter – am öftesten, bald – eher – am ehesten. «Κανένα»: δεν έχει παραθετικά (ή είναι το ίδιο τύπος συγκριτικού / υπερθετικού).",
   "src": "7682178d3506",
   "by": "claude"
  },
@@ -120030,7 +120030,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADV/1/why": {
-  "t": "Το hin δείχνει μακριά από τον ομιλητή, το her προς τον ομιλητή: Komm herein! (προς εμένα) – Geh hinein! (μακριά από μένα)· wohin? – woher?. Στον προφορικό λόγο και τα δύο συχνά συντομεύονται σε r- (rein, raus). Χωρίς τιμή: η λέξη δεν δηλώνει κατεύθυνση.",
+  "t": "Το hin δείχνει μακριά από τον ομιλητή, το her προς τον ομιλητή: Komm herein! (προς εμένα) – Geh hinein! (μακριά από μένα)· wohin? – woher?. Στον προφορικό λόγο και τα δύο συχνά συντομεύονται σε r- (rein, raus). «Κανένα»: η λέξη δεν δηλώνει κατεύθυνση.",
   "src": "e462f596ab1c",
   "by": "claude"
  },
@@ -120040,7 +120040,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADV/2/why": {
-  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. Χωρίς τιμή: η λέξη δεν έχει σημασία τροπικού μορίου.",
+  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. «Κανένα»: η λέξη δεν έχει σημασία τροπικού μορίου.",
   "src": "a2b09e36c155",
   "by": "claude"
  },
@@ -120060,7 +120060,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADP/1/why": {
-  "t": "in + dem = im, zu + der = zur· κάποιοι συγχωνευμένοι τύποι ανήκουν στην καθομιλουμένη (unterm, übers). Χωρίς τιμή: δεν έχει συγχωνευμένους τύπους ή η λέξη είναι η ίδια συγχωνευμένος τύπος.",
+  "t": "in + dem = im, zu + der = zur· κάποιοι συγχωνευμένοι τύποι ανήκουν στην καθομιλουμένη (unterm, übers). «Κανένα»: δεν έχει συγχωνευμένους τύπους ή η λέξη είναι η ίδια συγχωνευμένος τύπος.",
   "src": "2e20e02af616",
   "by": "claude"
  },
@@ -120070,7 +120070,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/ADP/2/why": {
-  "t": "Για πράγμα (όχι για πρόσωπο) η πρόθεση με αντωνυμία γίνεται da(r)- + πρόθεση και στις ερωτήσεις wo(r)- + πρόθεση: darauf / worauf (r πριν από φωνήεν), damit / womit· στην καθομιλουμένη dr- (drauf, drin). Ich warte darauf. Worauf wartest du? Χωρίς τιμή: η πρόθεση δεν έχει τέτοιο τύπο.",
+  "t": "Για πράγμα (όχι για πρόσωπο) η πρόθεση με αντωνυμία γίνεται da(r)- + πρόθεση και στις ερωτήσεις wo(r)- + πρόθεση: darauf / worauf (r πριν από φωνήεν), damit / womit· στην καθομιλουμένη dr- (drauf, drin). Ich warte darauf. Worauf wartest du? «Κανένα»: η πρόθεση δεν έχει τέτοιο τύπο.",
   "src": "4ac581f8ec43",
   "by": "claude"
  },
@@ -120090,7 +120090,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/DET/0/why": {
-  "t": "λέξεις τύπου der → ασθενείς καταλήξεις (der gute Wein), λέξεις τύπου ein → μεικτές (ein guter Wein), λέξεις που δεν δείχνουν οι ίδιες πτώση → ισχυρές (viel guter Wein, einige gute Freunde).",
+  "t": "λέξεις τύπου der → ασθενείς καταλήξεις (der gute Wein), λέξεις τύπου ein → μικτές (ein guter Wein), λέξεις που δεν δείχνουν οι ίδιες πτώση → ισχυρές (viel guter Wein, einige gute Freunde).",
   "src": "f3c8ea0647f7",
   "by": "claude"
  },
@@ -120110,7 +120110,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/DET/2/why": {
-  "t": "dein / euer (du, ihr) ή Ihr (Sie). Χωρίς τιμή: ο κάτοχος δεν είναι το πρόσωπο στο οποίο μιλάς.",
+  "t": "dein / euer (du, ihr) ή Ihr (Sie). «Κανένα»: ο κάτοχος δεν είναι το πρόσωπο στο οποίο μιλάς.",
   "src": "d1f123fa1a82",
   "by": "claude"
  },
@@ -120120,7 +120120,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/DET/3/why": {
-  "t": "Όταν χρησιμοποιούνται χωρίς ουσιαστικό, μερικοί προσδιοριστές έχουν δικούς τους τύπους: ein → einer, eine, ein(e)s· mein → meiner, meine, mein(e)s· der → dessen, deren, denen στη γενική και στη δοτική πληθυντικού. Χωρίς τιμή: οι ίδιοι τύποι όπως πριν από ουσιαστικό.",
+  "t": "Όταν χρησιμοποιούνται χωρίς ουσιαστικό, μερικοί προσδιοριστές έχουν δικούς τους τύπους: ein → einer, eine, ein(e)s· mein → meiner, meine, mein(e)s· der → dessen, deren, denen στη γενική και στη δοτική πληθυντικού. «Κανένα»: οι ίδιοι τύποι όπως πριν από ουσιαστικό.",
   "src": "8804ccf31c43",
   "by": "claude"
  },
@@ -120130,7 +120130,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/DET/4/why": {
-  "t": "Το euer χάνει το e του πριν από κατάληξη (eure, euren), το unser μπορεί να το χάσει σε λογοτεχνικό ύφος (unsre). Χωρίς τιμή: οι καταλήξεις προστίθενται στη βασική μορφή ή η λέξη δεν παίρνει καταλήξεις.",
+  "t": "Το euer χάνει το e του πριν από κατάληξη (eure, euren), το unser μπορεί να το χάσει σε λογοτεχνικό ύφος (unsre). «Κανένα»: οι καταλήξεις προστίθενται στη βασική μορφή ή η λέξη δεν παίρνει καταλήξεις.",
   "src": "4091565abe41",
   "by": "claude"
  },
@@ -120140,7 +120140,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/DET/5/why": {
-  "t": "Μια σημασία με δικούς της τύπους (ein μόνο του → einer, eine, eins). Χωρίς τιμή: όλες οι σημασίες έχουν τους ίδιους τύπους.",
+  "t": "Μια σημασία με δικούς της τύπους (ein μόνο του → einer, eine, eins). «Κανένα»: όλες οι σημασίες έχουν τους ίδιους τύπους.",
   "src": "09c68bdbc15c",
   "by": "claude"
  },
@@ -120160,7 +120160,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/PRON/1/why": {
-  "t": "du / ihr (ανεπίσημα) ή Sie (επίσημα). Χωρίς τιμή: δεν είναι αντωνυμία προσφώνησης.",
+  "t": "du / ihr (ανεπίσημα) ή Sie (επίσημα). «Κανένα»: δεν είναι αντωνυμία προσφώνησης.",
   "src": "59737250678b",
   "by": "claude"
  },
@@ -120170,7 +120170,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/PRON/2/why": {
-  "t": "Ο κτητικός προσδιοριστής που αντιστοιχεί στην αντωνυμία: ich → mein, er / es → sein, sie → ihr, Sie → Ihr. Χωρίς τιμή: δεν έχει δική της κτητική μορφή.",
+  "t": "Ο κτητικός προσδιοριστής που αντιστοιχεί στην αντωνυμία: ich → mein, er / es → sein, sie → ihr, Sie → Ihr. «Κανένα»: δεν έχει δική της κτητική μορφή.",
   "src": "4d9baafd5bc9",
   "by": "claude"
  },
@@ -120190,7 +120190,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/PRON/4/why": {
-  "t": "Μια σημασία με δικούς της τύπους (das Ich, die Ichs· Ihr γραμμένο με κεφαλαίο). Χωρίς τιμή: όλες οι σημασίες έχουν τους ίδιους τύπους.",
+  "t": "Μια σημασία με δικούς της τύπους (das Ich, die Ichs· Ihr γραμμένο με κεφαλαίο). «Κανένα»: όλες οι σημασίες έχουν τους ίδιους τύπους.",
   "src": "00d8ac377945",
   "by": "claude"
  },
@@ -120210,7 +120210,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/NUM/1/why": {
-  "t": "Τα αριθμητικά γράφονται ως μία λέξη έως το εκατομμύριο, οι μονάδες πριν από τις δεκάδες, ενωμένες με το und (einundzwanzig, zweihundertvierunddreißig)· κάποιοι αριθμοί αλλάζουν στα σύνθετα (sechs → sechzehn, sechzig· sieben → siebzehn, siebzig· drei → dreißig). Χωρίς τιμή: ο τύπος μένει αμετάβλητος στα σύνθετα ή η λέξη είναι η ίδια σύνθετη.",
+  "t": "Τα αριθμητικά γράφονται ως μία λέξη έως το εκατομμύριο, οι μονάδες πριν από τις δεκάδες, ενωμένες με το und (einundzwanzig, zweihundertvierunddreißig)· κάποιοι αριθμοί αλλάζουν στα σύνθετα (sechs → sechzehn, sechzig· sieben → siebzehn, siebzig· drei → dreißig). «Κανένα»: ο τύπος μένει αμετάβλητος στα σύνθετα ή η λέξη είναι η ίδια σύνθετη.",
   "src": "5b9706ab7383",
   "by": "claude"
  },
@@ -120240,7 +120240,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/CCONJ/1/why": {
-  "t": "Σύνδεσμοι δύο μερών: weder … noch (ούτε … ούτε), entweder … oder (ή … ή), zwar … aber (βέβαια … αλλά), sowohl … als auch (και … και). Χωρίς τιμή: δεν είναι μέρος ζεύγους.",
+  "t": "Σύνδεσμοι δύο μερών: weder … noch (ούτε … ούτε), entweder … oder (ή … ή), zwar … aber (βέβαια … αλλά), sowohl … als auch (και … και). «Κανένα»: δεν είναι μέρος ζεύγους.",
   "src": "a38c38dff851",
   "by": "claude"
  },
@@ -120250,7 +120250,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/CCONJ/2/why": {
-  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. Χωρίς τιμή: η λέξη δεν έχει σημασία τροπικού μορίου.",
+  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. «Κανένα»: η λέξη δεν έχει σημασία τροπικού μορίου.",
   "src": "a2b09e36c155",
   "by": "claude"
  },
@@ -120270,7 +120270,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/INTJ/1/why": {
-  "t": "Οι φράσεις έρχονται μαζί με την απάντησή τους: danke – bitte, wie geht's? – gut, danke, und dir?. Χωρίς τιμή: η λέξη είναι η ίδια απάντηση.",
+  "t": "Οι φράσεις έρχονται μαζί με την απάντησή τους: danke – bitte, wie geht's? – gut, danke, und dir?. «Κανένα»: η λέξη είναι η ίδια απάντηση.",
   "src": "862a885bf371",
   "by": "claude"
  },
@@ -120280,7 +120280,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/INTJ/2/why": {
-  "t": "Πού χρησιμοποιείται η φράση και τι λένε αντί γι’ αυτήν άλλες γερμανόφωνες περιοχές (Grüß Gott στη νότια Γερμανία και στην Αυστρία, Moin στον βορρά, Grüezi στην Ελβετία). Χωρίς τιμή: χρησιμοποιείται παντού, χωρίς διαδεδομένη τοπική εναλλακτική.",
+  "t": "Πού χρησιμοποιείται η φράση και τι λένε αντί γι’ αυτήν άλλες γερμανόφωνες περιοχές (Grüß Gott στη νότια Γερμανία και στην Αυστρία, Moin στον βορρά, Grüezi στην Ελβετία). «Κανένα»: χρησιμοποιείται παντού, χωρίς διαδεδομένη τοπική εναλλακτική.",
   "src": "98d3d239591d",
   "by": "claude"
  },
@@ -120290,7 +120290,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/INTJ/3/why": {
-  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. Χωρίς τιμή: η λέξη δεν έχει σημασία τροπικού μορίου.",
+  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. «Κανένα»: η λέξη δεν έχει σημασία τροπικού μορίου.",
   "src": "a2b09e36c155",
   "by": "claude"
  },
@@ -120300,7 +120300,7 @@
   "by": "claude"
  },
  "lg:de/wordFeatures/PART/0/why": {
-  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. Χωρίς τιμή: η λέξη δεν έχει σημασία τροπικού μορίου.",
+  "t": "Άτονο στη μέση της πρότασης, ένα τροπικό μόριο προσθέτει τη στάση του ομιλητή, όχι περιεχόμενο: ja (όπως ξέρουμε), doch (τελικά, παρότρυνση), denn (ενδιαφέρον σε ερώτηση), aber / vielleicht (έκπληξη), nur (παρότρυνση, ευχές), auch (ζητά επιβεβαίωση). Λειτουργία: τι δηλώνει, με παράδειγμα. «Κανένα»: η λέξη δεν έχει σημασία τροπικού μορίου.",
   "src": "a2b09e36c155",
   "by": "claude"
  }
