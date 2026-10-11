@@ -776,7 +776,7 @@
    "model": {
     "wordFields": [
      "pinyin",
-     "features.neutralTone"
+     "neutralTone"
     ],
     "paradigm": [],
     "grammar": [
@@ -927,7 +927,7 @@
    "model": {
     "wordFields": [
      "variants",
-     "features.erhua"
+     "erhua"
     ],
     "paradigm": [],
     "grammar": [
@@ -7568,6 +7568,8 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 7,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7576,6 +7578,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7584,6 +7588,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 8,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7596,6 +7602,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7608,16 +7616,92 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 11,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
     "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "predicative",
+    "title": "as a predicate",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "zh.syntax.adjpred",
+    "type": "enum",
+    "values": [
+     "without 是",
+     "区别词 (not a predicate)"
+    ],
+    "why": "Chinese adjectives are predicates by themselves, without 是: 他很高, 房子很大 (*房子是大). A few words that look like adjectives (区别词 / 非谓形容词: 所有, 最后) only stand before a noun, or with 是…的."
+   },
+   {
+    "id": "degree",
+    "title": "takes 很 (degree adverbs)",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "zh.syntax.adjpred",
+    "type": "enum",
+    "none": true,
+    "values": [
+     "takes 很",
+     "no degree adverb"
+    ],
+    "why": "Most adjectives take 很, 非常, 太, 有点: a bare adjective predicate sounds like a contrast (这个大，那个小), so a plain statement takes an unstressed 很. 区别词 and words of identity (一样) take none. none: a phrase that already has its degree word (很好, 还好)."
+   },
+   {
+    "id": "redup",
+    "title": "reduplication",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "zh.morph.reduplication",
+    "type": "string",
+    "none": true,
+    "why": "Adjectives double for vividness: AA(的) for one syllable (大大的, 慢慢吃), AABB for two (高高兴兴, 漂漂亮亮), ABB with a fixed tail (红彤彤, 绿油油). A doubled adjective takes no 很. none: the word is not doubled."
+   },
+   {
+    "id": "attributive",
+    "title": "before a noun",
+    "prominent": false,
+    "order": 4,
+    "phenomenon": "zh.syntax.modifier.first",
+    "type": "enum",
+    "values": [
+     "directly",
+     "directly or with 的",
+     "with 的",
+     "not before a noun"
+    ],
+    "why": "One syllable joins the noun directly (大房子, 新书) or with 的 for emphasis; two syllables, and anything with 很, take 的 (漂亮的房间, 很好的朋友); 多 and 少 cannot stand alone before a noun (很多人, 不少人)."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 10,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "ADP": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7626,6 +7710,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7634,6 +7720,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7646,6 +7734,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7658,6 +7748,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 9,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -7666,6 +7758,8 @@
    {
     "id": "position",
     "title": "before or after its noun",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "zh.syntax.localizers",
     "type": "enum",
     "values": [
@@ -7673,12 +7767,44 @@
      "after"
     ],
     "why": "Coverbs stand before their noun (从北京, 跟朋友); localizers and 以来 after it (桌子上, 冰箱里, 三年以来)."
+   },
+   {
+    "id": "alsoVerb",
+    "title": "also a full verb",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "zh.syntax.coverbs",
+    "type": "string",
+    "none": true,
+    "why": "Most Chinese prepositions are coverbs — verbs used before another verb — and many are still full verbs: 给 ‘to give’, 跟 ‘to follow’, 上 / 下 ‘to go up / down’. The verb use with an example; none when the word is only a preposition or a localizer."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "ADV": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7687,6 +7813,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7695,6 +7823,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7707,6 +7837,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7719,6 +7851,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 9,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -7727,6 +7861,8 @@
    {
     "id": "position",
     "title": "where the adverb stands",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "zh.syntax.adverbs",
     "type": "strings",
     "values": [
@@ -7735,12 +7871,44 @@
      "afterVerb"
     ],
     "why": "Chinese adverbs stand after the subject and before the verb (他也去, 我很好); some may also open the sentence (当然, 也许), a few follow the verb as a length of time (等一会)."
+   },
+   {
+    "id": "withNeg",
+    "title": "with a negation (不 / 没)",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "zh.syntax.negation",
+    "type": "string",
+    "none": true,
+    "why": "Where 不 / 没 stands next to the adverb, and how the order changes the meaning: 都不 ‘none’ vs 不都 ‘not all’, 很不好 ‘very bad’ vs 不太好 ‘not very good’. none: the adverb is itself a negation, or is rarely negated."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "CCONJ": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7749,6 +7917,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7757,6 +7927,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7769,6 +7941,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7781,16 +7955,59 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 8,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
     "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "joins",
+    "title": "what it joins",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": [
+     "zh.sem.or",
+     "zh.syntax.connectors"
+    ],
+    "type": "strings",
+    "values": [
+     "nouns",
+     "verb phrases",
+     "clauses",
+     "choices in a question",
+     "choices in a statement"
+    ],
+    "why": "和 joins nouns, never clauses (*我吃饭和他喝茶); 还是 offers choices in a question, 或者 in a statement; 但是, 所以, 然后 join clauses."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "CLF": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7799,6 +8016,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7807,6 +8026,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7819,6 +8040,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7831,6 +8054,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 9,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -7839,6 +8064,8 @@
    {
     "id": "kind",
     "title": "kind of measure word",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.syntax.measure.kinds",
     "type": "strings",
     "values": [
@@ -7851,12 +8078,43 @@
      "verbal"
     ],
     "why": "个 is general; 本, 张, 条 sort nouns by kind or shape (sortal); 杯, 碗, 瓶 measure by a container; 块, 份 take a piece or a portion (partitive); 岁 is a unit; most usual use first."
+   },
+   {
+    "id": "counts",
+    "title": "what it counts",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "zh.syntax.measure.kinds",
+    "type": "string",
+    "why": "The kind of thing the measure word goes with — by shape (张 flat, 条 long and winding, 根 long and thin), by kind (本 books, 辆 vehicles, 家 businesses), by container (杯, 碗, 瓶) — with examples."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "DET": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7865,6 +8123,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7873,6 +8133,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7885,6 +8147,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7897,16 +8161,49 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 8,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
     "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "withMeasure",
+    "title": "with a measure word",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "zh.syntax.measure",
+    "type": "string",
+    "why": "这, 那, 哪 and 每 need a measure word before the noun (这本书, 每个人); 这些, 一些, 有些 do not (些 is itself a measure)."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "INTJ": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7915,6 +8212,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7923,6 +8222,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7935,6 +8236,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7947,16 +8250,57 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 8,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
     "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "formality",
+    "title": "formality",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": [
+     "zh.prag.greetings",
+     "zh.prag.tv"
+    ],
+    "type": "enum",
+    "values": [
+     "informal",
+     "neutral",
+     "polite"
+    ],
+    "why": "Which situations the formula fits: informal (friends, family: 拜拜, 回头见), neutral (anyone: 你好, 谢谢), polite (strangers, older people, asking a favour: 您好, 劳驾, 打扰一下)."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "NOUN": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -7965,6 +8309,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -7973,6 +8319,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -7985,6 +8333,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -7997,6 +8347,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 11,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -8005,16 +8357,83 @@
    {
     "id": "measure",
     "title": "measure word(s), most usual first",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "zh.syntax.measure",
     "type": "strings",
     "none": true,
     "why": "A noun cannot be counted or pointed at (一个, 这本) without its measure word; none for nouns that count by themselves (天, 年), mass nouns, time and place words and pair words, with the reason."
+   },
+   {
+    "id": "measurePerSense",
+    "title": "measure word(s) per meaning",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "zh.syntax.measure",
+    "type": "list",
+    "none": true,
+    "item": {
+     "measure": "strings",
+     "senses": "senses"
+    },
+    "why": "A noun with several meanings may count each one with its own measure word: 房子 a house 栋 / 座, a flat 套, a room 间; 饭 rice 碗, a meal 顿; 电话 the phone 部, a call 个 / 通. Each list with the senses it serves; none when every counted sense takes the measure words above (or the word has one meaning, or is not counted)."
+   },
+   {
+    "id": "men",
+    "title": "plural with 们",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.morph.men",
+    "type": "enum",
+    "values": [
+     "takes 们 (people)",
+     "no 们"
+    ],
+    "why": "Nouns have no plural, but nouns for people may take 们 for a known group (朋友们, 孩子们, 老师们); nouns for things never do (*书们), and 们 is dropped after a number (三个朋友)."
+   },
+   {
+    "id": "locative",
+    "title": "as a place (在 / 到 / 从 …)",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "zh.syntax.localizers",
+    "type": "enum",
+    "none": true,
+    "values": [
+     "place word (在家)",
+     "place or + 里 (在学校 / 在学校里)",
+     "needs 上 / 里 … (在桌子上)",
+     "needs 这儿 / 那儿 (在朋友那儿)"
+    ],
+    "why": "After 在, 到, 从 a noun must name a place. Place words stand alone (在家, 在附近); institutions and rooms stand alone or take 里 (在学校 / 在学校里); objects need a localizer (在桌子上, 在冰箱里); people need 这儿 / 那儿 (在朋友那儿). none: time words, colours and abstract nouns, with the reason."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 10,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "NUM": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -8023,6 +8442,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -8031,6 +8452,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 7,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -8043,6 +8466,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -8055,16 +8480,63 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
     "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "withMeasure",
+    "title": "with a measure word",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": [
+     "zh.syntax.measure",
+     "zh.num.liang"
+    ],
+    "type": "string",
+    "none": true,
+    "why": "A number counts a noun only through a measure word (三个人, not *三人 in speech): 两 before a measure word, 二 in counting and inside numbers (两个, 十二个); 一 changes its tone before the measure (一个 yí gè). none: the word does not count things."
+   },
+   {
+    "id": "ordinal",
+    "title": "ordinal (第 …)",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "zh.num.ordinal",
+    "type": "string",
+    "none": true,
+    "why": "The ordinal is 第 + the number (第一, 第三, 第几 ‘which in order?’); 两 has none (第二). none: the word is already an ordinal, or has no ordinal."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "PART": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -8073,6 +8545,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -8081,6 +8555,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -8093,6 +8569,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -8105,6 +8583,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 8,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -8113,6 +8593,8 @@
    {
     "id": "position",
     "title": "where the particle stands",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "zh.syntax.particles",
     "type": "strings",
     "values": [
@@ -8123,12 +8605,34 @@
      "afterNoun"
     ],
     "why": "了 after the verb or at the end of the sentence, 吗 / 吧 at the end, 的 after a modifier, 们 after a noun, 的话 at the end of a condition."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "PRON": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -8137,6 +8641,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -8145,6 +8651,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -8157,6 +8665,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -8169,16 +8679,50 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 8,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
     "why": "Dictionaries write 一 yī and 不 bù; in speech 一 is yí before a 4th tone and yì before the others, 不 is bú before a 4th tone. The spoken pinyin of the word where it differs; none for words without 一 / 不 or where the tone does not change."
+   },
+   {
+    "id": "plural",
+    "title": "plural form",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "zh.morph.men",
+    "type": "string",
+    "none": true,
+    "why": "Personal pronouns form their plural with 们 (我们, 你们, 他们); 咱们 is ‘we’ including the listener; 您 has no spoken plural. none: already plural, or not a personal pronoun."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "SCONJ": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -8187,6 +8731,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -8195,6 +8741,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -8207,6 +8755,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -8219,6 +8769,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 9,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -8227,16 +8779,53 @@
    {
     "id": "pair",
     "title": "its partner in the paired construction",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "zh.syntax.connectors",
     "type": "string",
     "none": true,
     "why": "因为 … 所以, 虽然 … 但是, 如果 … 就: the second clause has its own linking word."
+   },
+   {
+    "id": "position",
+    "title": "where it stands in its clause",
+    "prominent": false,
+    "order": 2,
+    "phenomenon": "zh.syntax.connectors",
+    "type": "strings",
+    "values": [
+     "before the subject",
+     "after the subject"
+    ],
+    "why": "The conjunction opens its clause or follows its subject: 因为他病了 / 他因为病了; the clause it opens comes first in the sentence."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ],
   "VERB": [
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
+    "prominent": true,
+    "order": 11,
     "phenomenon": "zh.phon.tones",
     "type": "string",
     "at": "top",
@@ -8245,6 +8834,8 @@
    {
     "id": "trad",
     "title": "traditional characters",
+    "prominent": true,
+    "order": 9,
     "phenomenon": "zh.script.simptrad",
     "type": "string",
     "at": "top",
@@ -8253,6 +8844,8 @@
    {
     "id": "readings",
     "title": "reading per meaning (多音字)",
+    "prominent": true,
+    "order": 12,
     "phenomenon": "zh.script.polyphones",
     "type": "list",
     "none": true,
@@ -8265,6 +8858,8 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
+    "prominent": true,
+    "order": 10,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
     "none": true,
@@ -8277,6 +8872,8 @@
    {
     "id": "toneSandhi",
     "title": "spoken tone of 一 / 不",
+    "prominent": false,
+    "order": 15,
     "phenomenon": "zh.phon.sandhi.yibu",
     "type": "string",
     "none": true,
@@ -8285,19 +8882,24 @@
    {
     "id": "separable",
     "title": "splits into verb + object (离合词)",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "zh.morph.separable",
     "type": "list",
     "none": true,
     "item": {
      "verb": "string",
      "object": "string",
-     "example": "string?"
+     "example": "string?",
+     "inserts": "string?"
     },
-    "why": "Verb-object words open up: 了, a number or a measure go between the parts (放了三天假, 做了一顿饭). None for verbs that do not split."
+    "why": "Verb-object words open up at the point between the verb and its object: 了, 过, a measure word, a length of time, a result or a possessor go there (洗了个澡, 睡了八个小时的觉, 帮他的忙), and the whole word takes no further object (见面 → 跟他见面). verb + object = the two parts; inserts: what goes in between. None for verbs that do not split."
    },
    {
     "id": "neg",
     "title": "negated with 不, 没 or both",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "zh.syntax.negation",
     "type": "enum",
     "none": true,
@@ -8307,6 +8909,121 @@
      "mei"
     ],
     "why": "不 negates habits, wishes and the present / future, 没 past events and 有; 是 takes only 不, 有 only 没."
+   },
+   {
+    "id": "aspect",
+    "title": "aspect particles it takes",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "zh.morph.aspect",
+    "type": "strings",
+    "none": true,
+    "values": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "why": "Which of 了 (done, a change), 过 (ever, once before), 着 (a lasting state: 坐着, 开着) and 在 (in progress: 在吃) the verb takes. State verbs, the copula and auxiliaries take none (*是了, *会着), change-of-state verbs no 在 or 着 (*在醒来 …), with the reason."
+   },
+   {
+    "id": "verbKind",
+    "title": "kind of verb",
+    "prominent": true,
+    "order": 5,
+    "phenomenon": [
+     "zh.morph.aspect",
+     "zh.syntax.modals"
+    ],
+    "type": "strings",
+    "values": [
+     "action",
+     "state",
+     "psych (takes 很)",
+     "change of state",
+     "auxiliary (+ verb)",
+     "copula"
+    ],
+    "why": "Action verbs take every aspect particle, 得 and doubling; state verbs (有, 在, 记得) take few; psych verbs take 很 like adjectives (很喜欢, 很想); change-of-state verbs (醒, 到, 忘) are done at once — 了 but not 在; auxiliaries stand before another verb (会, 要, 想); 是 is the copula."
+   },
+   {
+    "id": "complements",
+    "title": "resultative, directional and potential complements",
+    "prominent": true,
+    "order": 4,
+    "phenomenon": [
+     "zh.syntax.complement.result",
+     "zh.syntax.complement.direction"
+    ],
+    "type": "list",
+    "none": true,
+    "item": {
+     "kind": "enum:result|direction|potential",
+     "form": "string",
+     "gloss": "string?"
+    },
+    "why": "The usual complements after the verb: a result (吃完, 洗干净), a direction (走进, 想起来) and the potential with 得 / 不 inside (吃不下, 睡不着, 来得及). With a separable verb the complement goes between its parts (洗完澡). none: the verb takes none, with the reason."
+   },
+   {
+    "id": "redup",
+    "title": "reduplication (‘do a little’)",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "zh.morph.reduplication",
+    "type": "string",
+    "none": true,
+    "why": "Action verbs double for a short or casual action: AA or A一A (看看, 看一看), ABAB for two syllables (休息休息), AAB for verb-object words (洗洗澡). none: states, changes, auxiliaries and the copula do not double."
+   },
+   {
+    "id": "degreeComplement",
+    "title": "complement of manner or degree with 得",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "zh.syntax.complement.degree",
+    "type": "string",
+    "none": true,
+    "why": "How well, how fast, how much: verb + 得 + comment (他跑得很快). With an object the verb is said twice, or the object goes first: 他开车开得很稳 / 他车开得很稳. An example; none when the verb takes no such comment."
+   },
+   {
+    "id": "object",
+    "title": "what follows it",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": [
+     "zh.syntax.svo",
+     "zh.syntax.pivot"
+    ],
+    "type": "strings",
+    "values": [
+     "no object",
+     "noun",
+     "place",
+     "verb",
+     "clause",
+     "two objects",
+     "noun + verb (pivot)"
+    ],
+    "why": "What may stand after the verb: nothing (a separable verb already has its object: 见面, not *见面他), a noun, a place (去北京, without a preposition), another verb (想去, 开始学), a clause (记得他来过), two objects (叫他老王), or a noun that is the subject of the next verb (pivot: 请他来)."
+   },
+   {
+    "id": "neutralTone",
+    "title": "neutral (toneless) syllables",
+    "prominent": false,
+    "order": 13,
+    "phenomenon": "zh.phon.neutraltone",
+    "type": "string",
+    "none": true,
+    "why": "A syllable that loses its tone in the word is short and light, and its dictionary tone does not apply: suffixes (子, 们, 么), particles (了, 吗), the second half of doubled kinship words (妈妈) and many common two-syllable words (朋友, 喜欢). The pinyin shows it without a mark; here: which syllable, and its tone when it stands alone. none: every syllable keeps its tone."
+   },
+   {
+    "id": "erhua",
+    "title": "erhua (-儿) form",
+    "prominent": false,
+    "order": 14,
+    "phenomenon": "zh.phon.erhua",
+    "type": "string",
+    "none": true,
+    "why": "Northern speech, above all Beijing, adds a rhotic 儿 to many words (玩儿, 一点儿, 这儿); the south and Taiwan mostly do not. The form, its pinyin and where it is said; none when the word has no 儿 form in common use (or when 儿 makes another word: 头儿 ‘boss’)."
    }
   ]
  },
