@@ -66,7 +66,9 @@ const LANG_INFO = {   // the names come from Intl in the UI language (uiLangName
 const LANG_DN = (() => { try { return new Intl.DisplayNames(['en'], { type: 'language' }); } catch (e) { return null; } })();
 const langDisplay = code => { try { return LANG_DN?.of(code) || code; } catch (e) { return code; } };
 const uiLangName = code => window.NoemaI18n ? NoemaI18n.fmt.langName(code) : langDisplay(code);
-const info = code => ({ flag: '🏳️', ...(LANG_INFO[code] || {}), name: uiLangName(code), ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
+/** A language: its flag, its name in the UI language (name: inside a sentence) and as a label of its own (label: “Arabe”, not “arabe”). */
+const capFirst = s => { const a = [...String(s || '')]; return a.length ? (window.NoemaI18n ? NoemaI18n.fmt.upper(a[0]) : a[0].toUpperCase()) + a.slice(1).join('') : ''; };
+const info = code => ({ flag: '🏳️', ...(LANG_INFO[code] || {}), name: uiLangName(code), get label() { return capFirst(this.name); }, ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
 const LX = code => UI.C.lang[code];
 const SUB_EMOJI = { root: '🥕', bulb: '🧅', stem: '🌿', leafy: '🥬', brassica: '🥦', fruitveg: '🍅', cucurbit: '🎃', legume: '🫛', flower: '🌸', sea: '🌊', pron: '👤', verb: '🏃', func: '🔤' };
 const conceptEmoji = cid => SUB_EMOJI[UI.C.concepts[cid]?.subgroup] || '🔹';

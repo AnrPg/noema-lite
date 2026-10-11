@@ -117,7 +117,7 @@
   const addedPanel = () => {
     const added = UI.C.data.course.added || {}, codes = Object.keys(added); if (!codes.length) return null;
     return h('div', { class: 'lj-added' }, h('h3', { class: 'lx-h3' }, LT('lang.claude.addedTitle')),
-      ...codes.map(c => h('div', { class: 'row lj-addedrow', 'data-lang': c }, h('span', {}, info(c).flag, ' ', h('b', {}, added[c].name || info(c).name), added[c].built ? h('span', { class: 'tiny' }, ' · ' + LT('lang.claude.made', { date: String(added[c].built).slice(0, 10) })) : null),
+      ...codes.map(c => h('div', { class: 'row lj-addedrow', 'data-lang': c }, h('span', {}, info(c).flag, ' ', h('b', {}, added[c].name || info(c).label), added[c].built ? h('span', { class: 'tiny' }, ' · ' + LT('lang.claude.made', { date: String(added[c].built).slice(0, 10) })) : null),
         h('button', { class: 'btn small ghost lj-remove', 'data-lang': c, onclick: () => removeAdded(c) }, LT('lang.frame.removeLang')))));
   };
 
@@ -257,9 +257,9 @@
       const explain = h('select', { class: 'noema-input lj-in', 'aria-label': LT('lang.claude.explainLabel') }, ...EXPLAIN.map(([v, t]) => h('option', { value: v }, t)));
       const depths = h('div', { class: 'lj-depths' });
       const langsNow = () => [...chosen, ...more.value.split(/[\s,;]+/).map(x => x.trim().toLowerCase()).filter(x => /^[a-z]{2,3}$/.test(x))].filter((x, i, a) => a.indexOf(x) === i);
-      const drawDepth = () => { depths.innerHTML = ''; for (const c of langsNow()) depths.append(h('label', { class: 'lj-depth' }, info(c).flag, ' ', info(c).name, ' ', h('select', { 'aria-label': LT('lang.claude.depthOf', { code: c }), 'data-lang': c, onchange: e => { depth[c] = +e.target.value; } }, ...[[3, LT('lang.claude.depth3')], [2, LT('lang.claude.depth2')], [1, LT('lang.claude.depth1')]].map(([v, t]) => h('option', { value: v, selected: (depth[c] || 3) === v ? '' : null }, t))))); };
+      const drawDepth = () => { depths.innerHTML = ''; for (const c of langsNow()) depths.append(h('label', { class: 'lj-depth' }, info(c).flag, ' ', info(c).label, ' ', h('select', { 'aria-label': LT('lang.claude.depthOf', { code: c }), 'data-lang': c, onchange: e => { depth[c] = +e.target.value; } }, ...[[3, LT('lang.claude.depth3')], [2, LT('lang.claude.depth2')], [1, LT('lang.claude.depth1')]].map(([v, t]) => h('option', { value: v, selected: (depth[c] || 3) === v ? '' : null }, t))))); };
       more.addEventListener('input', drawDepth);
-      const chips = h('div', { class: 'lj-chips' }, ...LANGS.map(c => h('button', { class: 'chip lj-lang', type: 'button', 'data-lang': c, 'aria-pressed': 'false', onclick: e => { const b = e.currentTarget; if (chosen.has(c)) chosen.delete(c); else chosen.add(c); b.setAttribute('aria-pressed', chosen.has(c) ? 'true' : 'false'); b.classList.toggle('on', chosen.has(c)); drawDepth(); } }, info(c).flag, ' ', info(c).name)));
+      const chips = h('div', { class: 'lj-chips' }, ...LANGS.map(c => h('button', { class: 'chip lj-lang', type: 'button', 'data-lang': c, 'aria-pressed': 'false', onclick: e => { const b = e.currentTarget; if (chosen.has(c)) chosen.delete(c); else chosen.add(c); b.setAttribute('aria-pressed', chosen.has(c) ? 'true' : 'false'); b.classList.toggle('on', chosen.has(c)); drawDepth(); } }, info(c).flag, ' ', info(c).label)));
       let way = 'claudeapp';
       const ways = h('div', { class: 'cg-choices lj-ways', role: 'radiogroup', 'aria-label': LT('lang.claude.whoWrites') }, ...[
         ['claudeapp', '💬 ' + LT('lang.claude.wayApp'), LT('lang.claude.wayAppSub')],
@@ -368,7 +368,7 @@
     if ((UI.C.data.course.added || {})[c]) return;   // a language added by a package: no refills for it yet (§10.2)
     const cmp = (UI.C.data.compare || {})[fid];
     if (cmp) {
-      const head = h('thead', {}, h('tr', {}, h('th', {}, ''), ...UI.C.languages.map(x => h('th', {}, info(x).flag, ' ', info(x).name))));
+      const head = h('thead', {}, h('tr', {}, h('th', {}, ''), ...UI.C.languages.map(x => h('th', {}, info(x).flag, ' ', info(x).label))));
       const body = h('tbody', {}, ...cmp.rows.map(row => h('tr', {}, h('th', {}, row.aspect), ...UI.C.languages.map(x => h('td', { lang: x, dir: LX(x).language.dir || 'ltr' }, row.cells[x] ? wordsIn(x, row.cells[x]) : '—')))));
       v.append(h('div', { class: 'lx-card lj-cmp' }, h('h3', {}, '⇄ ', LT('lang.claude.acrossLangs', { title: UI.C.functions[fid].title })), h('div', { class: 'lx-compare' }, h('table', {}, head, body))));
     }

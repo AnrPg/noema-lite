@@ -82,7 +82,7 @@ const QA_FAR = new Set(['locked', 'unprepared']);
         const gram = h('button', { class: 'btn small lx-togrammar', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
         row.querySelector('.lx-towrite')?.before(gram);
         const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
-        const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).name));
+        const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).label));
         if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
         const lis = v.querySelector(`.lx-speechlanes .lx-lanerow[data-lang="${c}"] .lx-tolisten`);   // P9: 🎧 in the same row
         if (lis) { lis.textContent = '🎧 ' + LT('lang.view.listen'); tutor ? tutor.before(lis) : row.append(lis); }

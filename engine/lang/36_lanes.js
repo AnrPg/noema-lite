@@ -20,7 +20,7 @@ function laneCompact(n) {
 let laneHover = null;
 function laneHoverShow(btn, c, nid) {
   laneHoverHide(); const n = UI.C.nodes[nid], s = N.nodeStates(UI.C, UI.L, c)[nid], r = btn.getBoundingClientRect();
-  laneHover = h('div', { class: 'lx-lhover', role: 'tooltip' }, h('b', {}, (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title), h('div', { class: 'tiny' }, info(c).flag + ' ' + info(c).name + ' · ' + String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')));
+  laneHover = h('div', { class: 'lx-lhover', role: 'tooltip' }, h('b', {}, (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title), h('div', { class: 'tiny' }, info(c).flag + ' ' + info(c).label + ' · ' + String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')));
   document.body.append(laneHover);
   const w = laneHover.offsetWidth, x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8), above = r.top > 90;
   Object.assign(laneHover.style, { left: x + 'px', top: (above ? r.top - laneHover.offsetHeight - 8 : r.bottom + 8) + 'px' });
@@ -36,7 +36,7 @@ VIEWS.lanes = (v) => {
   v.append(h('div', { class: 'lx-lanestop' }, h('h1', {}, LT('lang.view.lanes')), seg),
     h('p', { class: 'tiny lx-lanesnote' }, LT('lang.lanes.note')));
   const grid = h('div', { class: 'lx-lanes2' + (dots ? ' lx-ldots' : ''), 'data-n': langs.length, style: `--n:${langs.length}`, role: 'table', 'aria-label': LT('lang.lanes.tableLabel') });
-  grid.append(h('div', { class: 'lx-lhead', role: 'row' }, ...langs.map(c => h('div', { class: 'lx-lflag', role: 'columnheader', 'data-lang': c, title: info(c).name }, info(c).flag, h('span', { class: 'lx-lname' }, info(c).name)))));
+  grid.append(h('div', { class: 'lx-lhead', role: 'row' }, ...langs.map(c => h('div', { class: 'lx-lflag', role: 'columnheader', 'data-lang': c, title: info(c).label }, info(c).flag, h('span', { class: 'lx-lname' }, info(c).label)))));
   let sec = null;
   L.rows.forEach((row, i) => {
     if (row.section !== sec) { sec = row.section; const t = LANE_SECTION(sec); if (t) grid.append(h('div', { class: 'lx-lsec', role: 'row' }, h('span', {}, t))); }
@@ -45,9 +45,9 @@ VIEWS.lanes = (v) => {
       const nid = row.cells[c], n = nid && UI.C.nodes[nid], s = nid ? st[c][nid] : null;
       r.append(h('div', { class: 'lx-lcell' + (nid ? '' : ' lx-lgap'), role: 'cell', 'data-lang': c },
         !nid ? null : dots
-          ? h('button', { class: 'lx-ldot s-' + s, 'data-node': nid, 'data-lang': c, 'aria-label': `${info(c).name} · ${n.title} · ${STATE_LABEL[s] || s}`,
+          ? h('button', { class: 'lx-ldot s-' + s, 'data-node': nid, 'data-lang': c, 'aria-label': `${info(c).label} · ${n.title} · ${STATE_LABEL[s] || s}`,
               onclick: () => { laneHoverHide(); laneInfo(c, nid); }, onmouseenter: e => laneHoverShow(e.currentTarget, c, nid), onmouseleave: laneHoverHide, onfocus: e => laneHoverShow(e.currentTarget, c, nid), onblur: laneHoverHide }, laneCode(n))
-          : h('button', { class: 'lx-lnode s-' + s, 'data-node': nid, 'data-lang': c, title: `${info(c).name} · ${n.title} · ${STATE_LABEL[s] || s}`, onclick: () => laneInfo(c, nid) },
+          : h('button', { class: 'lx-lnode s-' + s, 'data-node': nid, 'data-lang': c, title: `${info(c).label} · ${n.title} · ${STATE_LABEL[s] || s}`, onclick: () => laneInfo(c, nid) },
               h('span', { class: 'lx-lstep' }, stepLabel(n) || (n.kind === 'field' ? '·' : '')), h('span', { class: 'lx-ltitle' }, laneShort(n)), LANE_SIGN[s] ? h('span', { class: 'lx-lsign', 'aria-hidden': 'true' }, LANE_SIGN[s]) : null)));
     }
     grid.append(r);
@@ -61,10 +61,10 @@ function laneInfo(c, nid) {
   const words = (X.byNode[nid] || []).length;
   const others = UI.C.languages.filter(x => x !== c && UI.C.lang[x]?.applies[nid]);
   const body = box => box.append(
-    h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).name, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
+    h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).label, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
     fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + g.status) : null); })) : null,
     words ? h('p', { class: 'tiny' }, LT('lang.lanes.words', { n: words, lang: info(c).name })) : null,
-    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, LT('lang.lanes.alsoIn') + ' ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).name + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, LT('lang.lanes.onlyIn', { lang: info(c).name })),
+    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, LT('lang.lanes.alsoIn') + ' ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).label + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, LT('lang.lanes.onlyIn', { lang: info(c).name })),
     h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, LT('lang.home.open'))));
   let close = () => document.querySelector('.lx-pop')?.remove();
   const title = (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title;

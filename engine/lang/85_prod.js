@@ -229,7 +229,7 @@ function runProd(items, { title, back = '#/', lang }) {
       const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = exItem(it, done);
-    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', info(it.lang).name), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', info(it.lang).label), ex);
   };
   const finish = () => {
     UI.current = null; save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
@@ -254,9 +254,9 @@ const WRITE_SETS = [
   { id: 'date', icon: '📅', get title() { return LT('lang.write.date'); }, get what() { return LT('lang.write.dateWhat'); }, make: (c, k) => N.dateItems(UI.C, UI.L, c, { k, max: 8 }) }];
 VIEWS.write = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
-  if (r.arg2) { const set = WRITE_SETS.find(s => s.id === r.arg2); if (set) return runProd(set.make(c, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).name}`, back: '#/write/' + c, lang: c }); }
+  if (r.arg2) { const set = WRITE_SETS.find(s => s.id === r.arg2); if (set) return runProd(set.make(c, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/write/' + c, lang: c }); }
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
-    h('h1', {}, '✍️ ' + LT('lang.view.write'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '✍️ ' + LT('lang.view.write'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/write/' + x); })),
     h('p', { class: 'tiny' }, LT('lang.write.help', { n: k.R.size })),
     !aiVendor() ? keyHelp(() => render()) : null);
@@ -275,7 +275,7 @@ VIEWS.read = (v, r) => {
   if (r.arg2) return readerView(v, c, r.arg2, k);
   const texts = N.readerTexts(UI.C, UI.L, c, { k });
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
-    h('h1', {}, '📖 ' + LT('lang.view.read'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '📖 ' + LT('lang.view.read'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/read/' + x); })),
     h('p', { class: 'tiny' }, LT('lang.read.help')),
     h('div', { class: 'row' }, aiVendor() ? h('button', { class: 'btn small', onclick: e => aiReader(c, e.currentTarget) }, '✨ ' + LT('lang.read.aiText')) : h('span', { class: 'tiny' }, '✨ ' + LT('lang.read.aiNeedsKey'))));
@@ -339,7 +339,7 @@ function openLangTutor(ctx) {
 function closeLangTutor() { TT.open = false; document.querySelector('.lx-tutor')?.remove(); }
 function ctxLabelOf(ctx) {
   const c = ctx.lang, fn = ctx.fn && UI.C.functions[ctx.fn], n = ctx.node && UI.C.nodes[ctx.node];
-  return `${info(c).flag} ${info(c).name}` + (fn ? ' · ' + fn.title : n ? ' · ' + n.title : '');
+  return `${info(c).flag} ${info(c).label}` + (fn ? ' · ' + fn.title : n ? ' · ' + n.title : '');
 }
 function drawTutor() {
   document.querySelector('.lx-tutor')?.remove(); if (!TT.open) return;
@@ -348,7 +348,7 @@ function drawTutor() {
   const msgs = h('div', { class: 'lx-tmsgs', 'aria-live': 'polite' });
   const ta = h('textarea', { class: 'noema-input lx-tin', rows: 2, placeholder: LT('lang.tutor.placeholder'), 'aria-label': LT('lang.tutor.msgLabel'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } } });
   const sel = h('select', { class: 'lx-tlang', 'aria-label': LT('lang.tutor.langLabel'), onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },
-    ...uniq([UI.C.explainLang, 'en', 'el', 'de', 'ru', 'tr', 'fr', 'es', ...knowsL().map(k => k.code).filter(Boolean)]).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + langName(x))));
+    ...uniq([UI.C.explainLang, 'en', 'el', 'de', 'ru', 'tr', 'fr', 'es', ...knowsL().map(k => k.code).filter(Boolean)]).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + capFirst(langName(x)))));
   const box = h('aside', { class: 'lx-tutor', role: 'dialog', 'aria-label': LT('lang.frame.tutor') },
     h('div', { class: 'lx-thead' }, tutorFaceNow(), h('b', { class: 'lx-tname' }, tutorNameNow() || '🎓 ' + LT('lang.frame.tutor')), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn lx-tclose', title: LT('lang.tutor.close'), 'aria-label': LT('lang.tutor.closeLabel'), onclick: closeLangTutor }, '✕')),
     h('div', { class: 'lx-tintents' }, ...intents.map(x => h('button', { class: 'chip' + (x === ctx.intent ? ' on' : ''), 'data-intent': x, onclick: () => {
@@ -426,7 +426,7 @@ function persistTutor(key, ctx, hist, provider) {
 function prodLanes() {
   return h('div', { class: 'lx-prodlanes' }, h('h2', { class: 'lx-h2' }, '✍️ ' + LT('lang.view.write') + ' · 📖 ' + LT('lang.view.read')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
-      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).name),
+      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
       h('button', { class: 'btn small lx-towrite', onclick: () => go('#/write/' + c) }, '✍️ ' + LT('lang.view.write')),
       h('button', { class: 'btn small lx-toread', onclick: () => go('#/read/' + c) }, '📖 ' + LT('lang.view.read')),
       h('button', { class: 'btn ghost small lx-totutor', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.frame.tutor'))))));

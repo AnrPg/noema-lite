@@ -4,7 +4,7 @@
    on the home. Every answer comes from langcore (N.polyItems, N.bridges, N.compareFn): stored data only. */
 const RTL_CODES = ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'sd', 'ug', 'dv', 'ku-Arab'];
 const dirOf = code => UI.C.lang[code] ? (LX(code).language.dir || 'ltr') : RTL_CODES.includes(code) ? 'rtl' : 'ltr';
-const flagName = c => [info(c).flag, ' ', info(c).name];
+const flagName = c => [info(c).flag, ' ', info(c).label];
 /** A word of a language outside the course (the learner's), with its language and direction. */
 const otherWord = (code, text) => h('span', { class: 'lx-w lx-ow', lang: code, dir: dirOf(code) }, text);
 const BRIDGE_SIGN = { cognate: '🌉', loan: '🔁', falseFriend: '⚠️' };
@@ -76,7 +76,7 @@ WIDGETS.cognate_bridge = (it, done) => {
     return box;
   }
   const prompt = it.kind === 'known'
-    ? h('div', { class: 'lx-prompt' }, h('span', { class: 'tiny' }, langName(it.other.code) + ' '), otherWord(it.other.code, it.other.word))
+    ? h('div', { class: 'lx-prompt' }, h('span', { class: 'tiny' }, capFirst(langName(it.other.code)) + ' '), otherWord(it.other.code, it.other.word))
     : h('div', { class: 'lx-prompt' }, info(it.from).flag, ' ', lexWord(it.from, it.lex, true), h('div', { class: 'tiny' }, gloss(it.from, it.lex)));
   const q = it.kind === 'known' ? LT('lang.poly.knownAsk', { other: langName(it.other.code), lang: info(it.lang).name }) : LT('lang.poly.relatedAsk', { lang: info(it.lang).name });
   const opts = it.options.map(id => ({ label: lexWord(it.lang, id), ok: id === it.answer }));
@@ -127,7 +127,7 @@ WIDGETS.parallel_align = (it, done) => {
       const b = h('button', { class: 'lx-atok', lang: c, dir: X.language.dir || 'ltr', 'data-i': i, onclick: () => pick(c, i, b) }, tokText(c, t.t));
       btns[c][i] = b; return b;
     });
-    return h('div', { class: 'lx-aline', 'data-lang': c, lang: c, dir: X.language.dir || 'ltr' }, h('span', { class: 'lx-aflag', title: info(c).name }, info(c).flag),
+    return h('div', { class: 'lx-aline', 'data-lang': c, lang: c, dir: X.language.dir || 'ltr' }, h('span', { class: 'lx-aflag', title: info(c).label }, info(c).flag),
       ...parts.flatMap((p, i) => i && sp && !/^[.,!?;:،؟。，！？、)」]/.test(p.textContent) ? [' ', p] : [p]));
   });
   const show = () => {
@@ -166,7 +166,7 @@ WIDGETS.compare_rule = (it, done) => {
   let over = false;
   const check = h('button', { class: 'btn primary small lx-check', disabled: true }, LT('lang.ex.check'));
   const rows = it.statements.map((st, i) => {
-    const chips = it.langs.map(c => h('button', { class: 'chip lx-bucket', 'data-lang': c, 'aria-pressed': 'false', title: info(c).name, onclick: e => {
+    const chips = it.langs.map(c => h('button', { class: 'chip lx-bucket', 'data-lang': c, 'aria-pressed': 'false', title: info(c).label, onclick: e => {
       if (over) return; const set = picks[i], b = e.currentTarget;
       if (!it.multi) { set.clear(); b.parentNode.querySelectorAll('.lx-bucket').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); }); }
       if (set.has(c)) { set.delete(c); b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); } else { set.add(c); b.classList.add('on'); b.setAttribute('aria-pressed', 'true'); }
@@ -179,7 +179,7 @@ WIDGETS.compare_rule = (it, done) => {
     it.statements.forEach((st, i) => {
       const ok = st.holds.length === picks[i].size && st.holds.every(c => picks[i].has(c)); if (!ok) all = false;
       rows[i].classList.add(ok ? 'right' : 'wrong');
-      if (!ok) rows[i].append(h('div', { class: 'tiny' }, '→ ', ...st.holds.flatMap(c => [info(c).flag, ' ', info(c).name, ' '])));
+      if (!ok) rows[i].append(h('div', { class: 'tiny' }, '→ ', ...st.holds.flatMap(c => [info(c).flag, ' ', info(c).label, ' '])));
     });
     box.append(h('div', { class: 'lx-fb ' + (all ? 'ok' : 'bad') }, all ? '✅ ' : '❌ ', it.title, h('div', { class: 'tiny' }, wordsIn(it.lang, it.why || ''))));
     done(all);
@@ -200,7 +200,7 @@ function polyWordExtras(c, lid) {
         ...b.via.map(x => h('span', { class: 'lx-badge reg' }, VIA_LABEL[x] || x)),
         b.note ? h('div', { class: 'tiny' }, wordsIn(c, b.note)) : null)),
       ...kl.map(x => h('li', { 'data-kind': 'known', 'data-for': x.code, class: x.kind === 'falseFriend' ? 'lx-ff' : null },
-        h('span', { class: 'lx-badge ctx' }, x.kind === 'falseFriend' ? BRIDGE_LABEL.falseFriend : x.kind === 'compare' ? '≈ ' + LT('lang.poly.compareBadge') : '🔗 ' + LT('lang.poly.linked')), ' ', h('b', {}, langName(x.code)), ' ', otherWord(x.code, x.word),
+        h('span', { class: 'lx-badge ctx' }, x.kind === 'falseFriend' ? BRIDGE_LABEL.falseFriend : x.kind === 'compare' ? '≈ ' + LT('lang.poly.compareBadge') : '🔗 ' + LT('lang.poly.linked')), ' ', h('b', {}, capFirst(langName(x.code))), ' ', otherWord(x.code, x.word),
         h('div', { class: 'tiny' }, wordsIn(c, x.note))))));
 }
 /** The bridges among the words of one concept (under the flag card's ⇄ table) and the way to the compare lane. */
@@ -256,7 +256,7 @@ VIEWS.cmp = (v, r) => {
   const fns = fnOrder().filter(f => langs.filter(c => LX(c).grammar[f]).length >= 2);
   v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.poly.grammarSide') + ' ', h('span', { class: 'tiny' }, LNUM(fns.length))),
     h('div', { class: 'lx-cmplist' }, ...fns.map(f => h('button', { class: 'lx-cmprow', 'data-fn': f, onclick: () => go('#/cmp/fn/' + encodeURIComponent(f)) }, h('span', {}, UI.C.functions[f].title),
-      h('span', { class: 'lx-cmpst' }, ...langs.map(c => { const g = LX(c).grammar[f]; return h('span', { class: 'lx-badge', 'data-lang': c, title: `${info(c).name}: ${g ? LT('lang.poly.st.' + (['realized', 'periphrastic', 'absent'].includes(g.status) ? g.status : 'other'), { status: g.status }) : LT('lang.state.unprepared')}` }, info(c).flag, ' ', g ? STATUS_MARK[g.status] || '?' : '⏳'); }))))));
+      h('span', { class: 'lx-cmpst' }, ...langs.map(c => { const g = LX(c).grammar[f]; return h('span', { class: 'lx-badge', 'data-lang': c, title: `${info(c).label}: ${g ? LT('lang.poly.st.' + (['realized', 'periphrastic', 'absent'].includes(g.status) ? g.status : 'other'), { status: g.status }) : LT('lang.state.unprepared')}` }, info(c).flag, ' ', g ? STATUS_MARK[g.status] || '?' : '⏳'); }))))));
   // frames: the same meaning in every language
   const groups = N.parallelGroups(UI.C), byFrame = {};
   for (const G of groups) if (langs.filter(c => G.by[c]).length >= 2) byFrame[G.frame] = (byFrame[G.frame] || 0) + 1;

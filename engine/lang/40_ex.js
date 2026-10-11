@@ -89,7 +89,7 @@ function exIntro(c, lid, done) {
   const X = LX(c), me = X.lex[lid], card = N.wordCard(UI.C, UI.L, c, lid);
   const e1 = card.examples[0];
   const box = h('div', { class: 'lx-ex lx-intro' },
-    h('div', { class: 'lx-q' }, LT('lang.ex.newIn', { lang: info(c).flag + ' ' + info(c).name })),
+    h('div', { class: 'lx-q' }, LT('lang.ex.newIn', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
     h('div', { class: 'lx-meaning' }, me.senses?.[0] ? conceptPic(me.senses[0], 'lx-exemoji') : '', ' ', card.gloss),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,

@@ -174,7 +174,7 @@ function deepenButton(nid, c) {
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, '← ' + LT('lang.card.back'))),
-    h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).name}`)));
+    h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).label}`)));
   whenProfiles(c, () => {
     const types = N.deepTypes(UI.C, UI.L, c, lid);
     if (!types.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.deep.noneForWord')));
@@ -187,7 +187,7 @@ VIEWS.deepen = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n) return VIEWS.home(v);
   const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang;
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, '← ' + n.title)),
-    h('h1', {}, '🏋️ ' + LT('lang.view.deepen'), h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '🏋️ ' + LT('lang.view.deepen'), h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go(`#/deepen/${encodeURIComponent(nid)}/${x}`); })));
   whenProfiles(c, () => {
     const k = N.known(UI.C, UI.L, c), ids = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]));

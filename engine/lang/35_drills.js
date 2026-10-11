@@ -15,7 +15,7 @@ VIEWS.sort = (v, r) => {
   const fid = r.arg, field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, X = LX(c), pool = sortPool(c, fid);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, '← ' + LT('lang.card.fieldMap'))),
-    h('h1', {}, '🧩 ' + LT('lang.field.sortGroups'), h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '🧩 ' + LT('lang.field.sortGroups'), h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); })));
   if (pool.length < 4) return v.append(h('p', { class: 'lx-note' }, LT('lang.sort.tooFew', { lang: info(c).name, n: pool.length })));
   const groups = (field.subgroups || []).filter(g => pool.some(p => p.group === g.id));
@@ -58,7 +58,7 @@ function partsPool(c) {
 VIEWS.parts = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), pool = shuffle(partsPool(c)).slice(0, 10);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
-    h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
   if (!pool.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.parts.nothing', { lang: info(c).name })));
   // every value a label takes among the words met: the distractors

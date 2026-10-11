@@ -97,7 +97,7 @@ function frameTidy(v, r) {
 function frameHome(v, acts, hold) {
   const S = FS(), hero = v.querySelector('.lx-hero'), course = UI.C.data.course;
   const go1 = hero.querySelector('.lx-go'), todayRow = v.querySelector('.lx-today');
-  const names = UI.C.languages.map(c => info(c).name), named = names.every(n => course.title.includes(n));
+  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => course.title.includes(n));
   const head = h('div', { class: 'lx-fhead' }, h('h1', {}, course.title), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
   // the one primary action (what it is: data-go = session | start | none, its words without the label: data-rest)
   const txt = framePlain(go1?.textContent || ''), session = go1?.dataset.go === 'session', start = go1?.dataset.go === 'start' ? [txt, go1.dataset.rest || txt] : null, none = !go1 || go1.disabled;
@@ -111,7 +111,7 @@ function frameHome(v, acts, hold) {
   if (go1) hold.append(go1);
   if (todayRow) {   // which languages today: on demand
     hold.append(todayRow);
-    acts.unshift({ label: LT('lang.frame.todaysLangs'), sub: todays.map(c => info(c).name).join(' · '), icon: 'sun', run: () => frameTodaySheet() });
+    acts.unshift({ label: LT('lang.frame.todaysLangs'), sub: todays.map(c => info(c).label).join(' · '), icon: 'sun', run: () => frameTodaySheet() });
   }
   // the next lessons (when the card is the session, or more than one waits)
   const lessons = [...v.querySelectorAll('.lx-lessonbtn')];
@@ -126,11 +126,11 @@ function frameHome(v, acts, hold) {
     const c = row.dataset.lang, bs = [...row.querySelectorAll('button')]; bs.forEach(b => hold.append(b));
     const k = N.known(UI.C, UI.L, c), kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
     const added = (course.added || {})[c], rm = added ? [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.addedClaude'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
-    return { label: info(c).name, sub: kn ? LT('lang.frame.wordsKnown', { n: kn }) : added ? LT('lang.frame.addedClaude') : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
+    return { label: info(c).label, sub: kn ? LT('lang.frame.wordsKnown', { n: kn }) : added ? LT('lang.frame.addedClaude') : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
   });
   // ⋮ › a language added by a package (docs/LANGUAGES.md §10.2) › Remove this language
-  for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).name, sub: LT('lang.frame.addedClaude'), flag: info(c).flag, icon: 'globe', key: 'added-' + c,
-    run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.removeLangSub'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
+  for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).label, sub: LT('lang.frame.addedClaude'), flag: info(c).flag, icon: 'globe', key: 'added-' + c,
+    run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.removeLangSub'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
   const poly = [...v.querySelectorAll('.lx-polydrills button')], drills = [...v.querySelectorAll('.lx-drills button:not(summary)')];
   poly.forEach(b => hold.append(b)); drills.forEach(b => hold.append(b));
   if (poly.length) langItems.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
@@ -152,7 +152,7 @@ function frameTodaySheet() {
   FS().sheet(LT('lang.frame.todaysLangs'), (body, close) => {
     const draw = () => {
       const chips = [...document.querySelectorAll('.lx-moved .lx-todaychip')];
-      body.replaceChildren(h('p', { class: 'ns-muted' }, LT('lang.frame.todaysLangsSub')), frameList(chips.map(ch => ({ label: info(ch.dataset.lang).name, flag: info(ch.dataset.lang).flag,
+      body.replaceChildren(h('p', { class: 'ns-muted' }, LT('lang.frame.todaysLangsSub')), frameList(chips.map(ch => ({ label: info(ch.dataset.lang).label, flag: info(ch.dataset.lang).flag,
         badge: ch.classList.contains('on') ? '✓' : null, run: () => { ch.click(); setTimeout(draw, 50); } }))));
     };
     draw();

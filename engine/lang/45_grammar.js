@@ -31,7 +31,7 @@ function block1(c, b, t) {
 const REL_SIGN = { same: '=', similar: '≈', different: '≠', new: '✨', trap: '⚠️' };
 const REL_LABEL = new Proxy({}, { get: (o, r) => typeof r === 'string' && REL_SIGN[r] ? REL_SIGN[r] + ' ' + LT('lang.gram.rel.' + r) : undefined });   // lang.gram.rel.<rel>
 function notesList(notes) {
-  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, langName(n.for)), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn('en', n.text))));
+  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, capFirst(langName(n.for))), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn('en', n.text))));
 }
 /** Comparison notes (D18): those for the learner's languages open, the whole reference set folded. */
 function notesView(c, notes, fid) {
@@ -52,11 +52,11 @@ async function aiNotes(c, fid, langsWanted, btn) {
     const r = await NoemaLLM.json({ acc: UI.acc, name: 'notes', schema: { type: 'object', required: ['notes'], properties: { notes: { type: 'array', items: { type: 'object', required: ['for', 'rel', 'text'],
       properties: { for: { type: 'string' }, rel: { type: 'string', enum: ['same', 'similar', 'different', 'new', 'trap'] }, text: { type: 'string' } } } } } },
       /* i18n-ignore-start (a prompt for the AI: stays English) */
-      prompt: `You write short comparison notes for a language course. The point: "${UI.C.functions[fid]?.title}" in ${info(c).name}.
+      prompt: `You write short comparison notes for a language course. The point: "${UI.C.functions[fid]?.title}" in ${langDisplay(c)}.
 What the course says:
 ${g.summary}
 
-For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || langName(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
+For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || profileOf(k.code)?.name || langDisplay(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
 Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.` });
     /* i18n-ignore-end */
     const notes = (r.data.notes || []).map(n => ({ ...n, ai: true }));
@@ -84,7 +84,7 @@ const firstSentence = s => (String(s || '').match(/^.*?[.!?](\s|$)/) || [s || ''
 function acrossLanguages(fid, current, onPick) {
   const rows = UI.C.languages.map(c => {
     const g = LX(c).grammar[fid];
-    return h('tr', { class: c === current ? 'on' : '' }, h('th', {}, h('button', { class: 'btn ghost small', onclick: () => onPick(c) }, info(c).flag + ' ' + info(c).name)),
+    return h('tr', { class: c === current ? 'on' : '' }, h('th', {}, h('button', { class: 'btn ghost small', onclick: () => onPick(c) }, info(c).flag + ' ' + info(c).label)),
       h('td', {}, !g ? h('i', { class: 'tiny' }, LT('lang.state.unprepared')) : [g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null, ' ', wordsIn(c, firstSentence(g.summary))]));
   });
   return h('div', { class: 'lx-compare lx-across' }, h('div', { class: 'tiny' }, '⇄ ' + LT('lang.gram.sameInOthers')), h('table', {}, h('tbody', {}, ...rows)));
@@ -139,7 +139,7 @@ function overviewCard(c, g) {
     notesView(c, g.notes, 'fn.overview'),
     h('p', {}, h('button', { class: 'btn small', onclick: () => go('#/peculiar/' + c) }, '📚 ' + LT('lang.gram.library', { lang: info(c).name }))),
     learnerView(c),
-    others.length ? h('p', { class: 'tiny' }, LT('lang.gram.sameOverview') + ' ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).name))) : null);
+    others.length ? h('p', { class: 'tiny' }, LT('lang.gram.sameOverview') + ' ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).label))) : null);
 }
 /** D16 — computed, not written from one point of view: what is new and what is familiar for this learner, from the languages they know. */
 function learnerView(c) {

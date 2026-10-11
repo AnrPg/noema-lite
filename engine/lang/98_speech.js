@@ -296,13 +296,13 @@ VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
   const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
-    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {
     if (route().name !== 'listen' || !wait.isConnected) return;
     wait.remove();
     const k = N.known(UI.C, UI.L, c);
-    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).name}`, back: '#/listen/' + c, lang: c }); }
+    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
     const v0 = voiceOf(c);
     v.append(h('div', { class: 'lx-callout k-key lx-devline' },
       h('div', {}, v0 ? '🔊 ' + LT('lang.listen.voice', { name: v0.name, tag: v0.lang }) : '🔇 ' + LT('lang.listen.noVoiceLane', { lang: info(c).name })),
@@ -323,7 +323,7 @@ VIEWS.listen = (v, r) => {
 function speechLanes() {
   return h('div', { class: 'lx-speechlanes' }, h('h2', { class: 'lx-h2' }, '🎧 ' + LT('lang.listen.listening') + ' · 🗣️ ' + LT('lang.listen.speaking')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
-      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).name),
+      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
       h('button', { class: 'btn small lx-tolisten', onclick: () => go('#/listen/' + c) }, '🎧 ' + LT('lang.view.listen'))))));
 }
 /** ⚙️ Settings → 🎧: a voice per language, the speed, auto-play, “I can't listen / speak now” (today). */
@@ -332,7 +332,7 @@ function speechSettings() {
   if (!synthOK()) box.append(h('p', { class: 'tiny' }, '🔇 ' + LT('lang.listen.noSynth')));
   for (const c of UI.C.languages) {
     const vs = N.voicesFor(SP.voices, tagOf(c)), cur = (sp.voice || {})[c] || '';
-    box.append(h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).name, ' — ' + LT('lang.listen.voiceLabel') + ' ',
+    box.append(h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).label, ' — ' + LT('lang.listen.voiceLabel') + ' ',
       vs.length ? h('select', { 'data-lang': c, class: 'lx-voicesel', 'aria-label': LT('lang.listen.voiceFor', { lang: info(c).name }), onchange: e => setSp({ voice: { ...(spPrefs().voice || {}), [c]: e.target.value || undefined } }) },
         h('option', { value: '' }, vs[0] ? LT('lang.listen.automaticWith', { name: vs[0].name }) : LT('lang.listen.automatic')), ...vs.map(v => h('option', { value: v.name, selected: v.name === cur ? true : null }, `${v.name} · ${v.lang}`)))
         : h('span', { class: 'tiny lx-novoice' }, '🔇 ' + LT('lang.listen.noneHere', { tag: tagOf(c) }))));

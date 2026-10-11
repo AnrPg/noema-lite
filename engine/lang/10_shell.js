@@ -10,6 +10,10 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
+  try {   // the explanations this code writes (lang.expl.*) follow the explanation language: its catalog, when it is a UI locale
+    const xl = window.NoemaI18n && NoemaI18n.match(UI.C.explainLang);
+    if (xl && xl !== 'en' && !NoemaI18n.catalogs[xl]) NoemaI18n.load(xl).then(() => { if (UI.C && !document.querySelector('.lx-session')) render(); });
+  } catch (e) { }
   if (!document.querySelector('link[data-lx-fonts]')) document.head.append(   // i18n: Noto from Google Fonts until the fonts are self-hosted (docs/i18n.md §2 Fonts)
     h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
@@ -87,7 +91,7 @@ function frameSummary(v) {
 function flagRail(cid, current, onPick) {
   return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': LT('lang.shell.languages') }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
-    return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).name} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
+    return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
       h('span', { class: 'lx-flag' }, info(c).flag), h('span', { class: 'lx-dot s-' + (st || 'none') }));
   }));
 }
@@ -101,21 +105,21 @@ VIEWS.home = (v) => {
   const counts = LT(nScript ? 'lang.home.sessionCountsScript' : 'lang.home.sessionCounts', { rev: nRev, nNew, script: nScript });   // the frame's big card shows them (data-rest)
   v.append(h('div', { class: 'lx-hero' },
     h('h1', {}, UI.C.data.course.title),
-    h('p', { class: 'lx-sub' }, LT('lang.home.sub', { langs: UI.C.languages.map(c => info(c).flag + ' ' + info(c).name).join(' · '), lang: info(UI.C.explainLang).name })),
+    h('p', { class: 'lx-sub' }, LT('lang.home.sub', { langs: UI.C.languages.map(c => info(c).flag + ' ' + info(c).label).join(' · '), lang: info(UI.C.explainLang).name })),
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), 'data-go': nRev || nNew || nScript ? 'session' : 'none', 'data-rest': counts, onclick: () => runSession(plan) }, nRev || nNew || nScript ? '▶ ' + LT('lang.home.session', { counts }) : '✅ ' + LT('lang.home.nothingDue')),
       learn ? h('span', { class: 'tiny' }, LT('lang.home.newFrom', { title: UI.C.nodes[learn.node].title })) : null)));
   v.append(polyHome());   // P6: today's languages, the compare lane, the polyglot drills
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 ' + LT(lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? 'lang.home.nextLesson' : 'lang.home.nextFoundation')), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
-    return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),
+    return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).label).join(' · '))),
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.home.learn'))));
   })));
   v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ ' + LT('lang.home.drills') + ' '),
     h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
     ...UI.C.data.fields.filter(f => (f.subgroups || []).length > 1).map(f => h('button', { class: 'btn ghost small', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, '🧩 ' + f.title))));
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 ' + LT('lang.home.peculiarAnyTime') + ' '),
-    ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));
+    ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).label))));
   if (typeof grammarLaneHome === 'function') v.append(grammarLaneHome());   // P5: the 📐 grammar lane
   v.append(h('div', { class: 'row lx-maphead' }, h('h2', { class: 'lx-h2' }, '🗺️ ' + LT('lang.home.map')), lanesButton()), nodeList());
 };
@@ -125,6 +129,6 @@ function nodeList() {
     const n = UI.C.nodes[nid];
     return h('button', { class: 'lx-node' + (n.kind === 'lesson' ? ' lx-lessonnode' : ''), onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) },
       h('div', { class: 'lx-nodetitle' }, h('b', {}, n.kind === 'lesson' ? h('span', { class: 'lx-step' }, stepLabel(n)) : null, n.kind === 'lesson' ? ' ' : null, n.title), h('span', { class: 'tiny' }, n.prereqs?.length ? LT('lang.home.ideasAfter', { n: n.concepts.length, after: LLIST(n.prereqs.map(p => UI.C.nodes[p].title.split(' — ')[0])) }) : LT('lang.home.ideas', { n: n.concepts.length }))),
-      h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).name}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
+      h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).label}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
   }));
 }

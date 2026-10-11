@@ -256,7 +256,7 @@ function grammarLaneHome() {
     any = true;
     const n = s => lane.filter(x => x.state === s).length, ready = toPractise(lane);
     box.append(h('div', { class: 'lx-card lx-laneh', 'data-lang': c },
-      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, [LT('lang.glane.points', { n: lane.length }), ...['new', 'practicing', 'solid', 'mastered'].map(s => `${FN_STATE[s]} ${LNUM(n(s))}`)].join(' · ')),
+      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).label), h('span', { class: 'tiny' }, [LT('lang.glane.points', { n: lane.length }), ...['new', 'practicing', 'solid', 'mastered'].map(s => `${FN_STATE[s]} ${LNUM(n(s))}`)].join(' · ')),
         h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null,
         h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, LT('lang.glane.all') + ' →')),
       ...ready.slice(0, 3).map(x => laneRow(c, x))));
@@ -267,7 +267,7 @@ function grammarLaneHome() {
 VIEWS.grammar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, lane = N.grammarLane(UI.C, UI.L, c);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
-    h('h1', {}, '📐 ' + LT('lang.view.grammar'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+    h('h1', {}, '📐 ' + LT('lang.view.grammar'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/grammar/' + x); }),
       toPractise(lane).length ? h('button', { class: 'btn primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null),
     h('p', { class: 'tiny' }, LT('lang.glane.help')));

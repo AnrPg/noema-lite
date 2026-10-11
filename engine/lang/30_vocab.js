@@ -63,7 +63,7 @@ VIEWS.recall = (v, r) => {
     else msg.textContent = LT(words.some(x => spellings(c, x).has(t)) ? 'lang.recall.already' : 'lang.recall.notInField');
   });
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← ' + LT('lang.card.back'))),
-    h('h1', {}, '⏱️ ' + LT('lang.recall.title', { field: field.title.toLowerCase(), lang: info(c).flag + ' ' + info(c).name })),
+    h('h1', {}, '⏱️ ' + LT('lang.recall.title', { field: field.title.toLowerCase(), lang: info(c).flag + ' ' + info(c).label })),
     h('p', { class: 'tiny' }, LT('lang.recall.how')),
     h('div', { class: 'row' }, si.el, clock, h('button', { class: 'btn small', onclick: finish }, LT('lang.recall.done'))), msg, list);
   setTimeout(() => input.focus(), 50);
@@ -79,10 +79,10 @@ function knowsEditor() {
   const draw = () => {
     box.innerHTML = '';
     for (const [i, k] of list().entries()) box.append(h('div', { class: 'lx-setrow', 'data-know': k.code || k.name },
-      h('b', {}, k.code ? langName(k.code) : k.name), k.code ? null : h('span', { class: 'tiny' }, ' ' + LT('lang.set.inferred', { what: (k.type || '?') + (k.family ? ', ' + k.family : '') })), ' ',
+      h('b', {}, k.code ? capFirst(langName(k.code)) : k.name), k.code ? null : h('span', { class: 'tiny' }, ' ' + LT('lang.set.inferred', { what: (k.type || '?') + (k.family ? ', ' + k.family : '') })), ' ',
       h('select', { 'aria-label': LT('lang.set.level'), onchange: e => { k.level = e.target.value; save(); } }, ...LEVELS.map(([v, t]) => h('option', { value: v, selected: (k.level || 'native') === v ? true : null }, t()))),
       h('button', { class: 'btn ghost small', onclick: () => { list().splice(i, 1); save(); draw(); } }, '✕')));
-    const nm = l => langName(l.code) || l.name, cmp = window.NoemaI18n ? NoemaI18n.fmt.compare : (a, b) => a.localeCompare(b);
+    const nm = l => capFirst(langName(l.code) || l.name), cmp = window.NoemaI18n ? NoemaI18n.fmt.compare : (a, b) => a.localeCompare(b);
     const langs = (W?.languages || []).slice().sort((a, b) => cmp(nm(a), nm(b)));
     const pick = h('select', { 'aria-label': LT('lang.set.addLang') }, h('option', { value: '' }, '+ ' + LT('lang.set.addLangItem')), ...langs.map(l => h('option', { value: l.code }, `${nm(l)} — ${l.family}`)), h('option', { value: '*' }, LT('lang.set.otherLang')));
     pick.onchange = () => {
@@ -129,7 +129,7 @@ VIEWS.settings = (v) => {
   const S = UI.L.settings;
   const langBox = h('div', { class: 'lx-setrow' }, ...UI.C.languages.map(c => h('label', { class: 'lx-check' },
     h('input', { type: 'checkbox', checked: activeLangs().includes(c) ? true : null, onchange: e => { const s = new Set(activeLangs()); e.target.checked ? s.add(c) : s.delete(c); if (!s.size) { e.target.checked = true; return; } S.languages = UI.C.languages.filter(x => s.has(x)); save(); } }),
-    ' ', info(c).flag, ' ', info(c).name,
+    ' ', info(c).flag, ' ', info(c).label,
     h('select', { 'aria-label': LT('lang.set.depthFor', { lang: info(c).name }), onchange: e => { S.depth = { ...(S.depth || {}), [c]: +e.target.value }; save(); } },
       ...[[1, LT('lang.set.depth1')], [2, LT('lang.set.depth2')], [3, LT('lang.set.depth3')]].map(([d, t]) => h('option', { value: d, selected: (S.depth?.[c] ?? 3) === d ? true : null }, t))))));
   const num = (label, key, min, max, def) => h('label', { class: 'lx-setrow' }, label, ' ', h('input', { type: 'number', min, max, value: S[key] || def, onchange: e => { S[key] = Math.max(min, Math.min(max, +e.target.value || def)); save(); } }));

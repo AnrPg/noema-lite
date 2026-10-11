@@ -59,7 +59,7 @@ function runSession(plan, { only = null } = {}) {
     UI.current = a;
     const ex = a.kind === 'script' ? scriptStep(a, done) : ['item', 'deep', 'poly'].includes(a.kind) ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, a.kind === 'poly' ? { kind: a.it.kind, lang: a.lang, poly: '1' } : { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
-    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 ' + LT('lang.sess.across') : [info(a.lang).flag, ' ', info(a.lang).name], a.review ? ' · ' + LT('lang.sess.review') : '', a.pair ? ' · ⇄ ' + LT('lang.sess.relative') : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 ' + LT('lang.sess.across') : [info(a.lang).flag, ' ', info(a.lang).label], a.review ? ' · ' + LT('lang.sess.review') : '', a.pair ? ' · ⇄ ' + LT('lang.sess.relative') : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   };
   const finish = () => {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';

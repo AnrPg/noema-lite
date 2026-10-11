@@ -21,7 +21,7 @@ const needTranslit = c => { try { return N.needsTranslit(UI.C, UI.L, c); } catch
 function marksSettings() {
   const langs = UI.C.languages.filter(c => LX(c).language.vowelMarks);
   if (!langs.length) return null;
-  return h('div', { class: 'lx-marklevels' }, ...langs.map(c => h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).name, ' — ' + LT('lang.script.marksLabel') + ' ',
+  return h('div', { class: 'lx-marklevels' }, ...langs.map(c => h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).label, ' — ' + LT('lang.script.marksLabel') + ' ',
     h('select', { 'aria-label': LT('lang.script.marksIn', { lang: info(c).name }), 'data-lang': c, onchange: e => { UI.prefs.markLevel = { ...(UI.prefs.markLevel || {}), [c]: e.target.value }; save(); } },
       ...[['full', LT('lang.script.marksFull')], ['fading', LT('lang.script.marksFading')], ['none', LT('lang.script.marksNone')]].map(([v2, t]) => h('option', { value: v2, selected: ((UI.prefs.markLevel || {})[c] || 'full') === v2 ? true : null }, t))))),
     h('p', { class: 'tiny' }, LT('lang.script.fadingHelp')));
@@ -264,7 +264,7 @@ function glyphIntro(c, key, done) {
   const ex = Object.values(X.lex).filter(x => !x.prefix && hasGlyph(c, x, key) && x.translit).sort((a, b) => a.lemma.length - b.lemma.length)[0];
   const forms = Object.entries(it.forms || {}).filter(([, f]) => f);
   const box = h('div', { class: 'lx-ex lx-intro lx-glyphintro', 'data-kind': 'glyph_intro', 'data-glyph': key },
-    h('div', { class: 'lx-q' }, LT(it.type === 'mark' ? 'lang.script.newMark' : 'lang.script.newLetter', { lang: info(c).flag + ' ' + info(c).name })),
+    h('div', { class: 'lx-q' }, LT(it.type === 'mark' ? 'lang.script.newMark' : 'lang.script.newLetter', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, it.type === 'mark' ? '◌' + key : key)),
     h('div', { class: 'lx-meaning' }, h('b', {}, it.name), ' · ', h('span', { class: 'lx-latin' }, it.translit || '—'), it.sound ? ` · [${it.sound}]` : '', it.what ? ' · ' + it.what : ''),
     forms.length > 1 ? h('dl', { class: 'lx-parts lx-forms' }, ...forms.flatMap(([p, f]) => [h('dt', {}, p), h('dd', {}, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, f))])) : null,
@@ -304,7 +304,7 @@ VIEWS.script = (v, r) => {
   if (c !== UI.lang) { UI.lang = c; UI.prefs.lang = c; save(); }
   v.classList.add('lx-scriptview'); v.dataset.lang = c;
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
-    h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).name),
+    h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
   const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
     N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
@@ -371,7 +371,7 @@ function runScriptDrill(c, type, { only = null } = {}) {
       const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = a.intro ? glyphIntro(c, a.intro, done) : exItem(a.item, done);
-    stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).name), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).label), ex);
   };
   document.onkeydown = e => {
     if (!$('.lx-scriptrun')) { document.onkeydown = null; return; }

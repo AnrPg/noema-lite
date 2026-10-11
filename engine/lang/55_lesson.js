@@ -107,7 +107,7 @@ function runQueue(queue, { nid, langs, title }) {
     const ex = a.kind === 'item' ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     const lang = a.lang || a.it.lang;
     Object.assign(ex.dataset, { kind: a.kind === 'item' ? a.it.kind : a.kind, lang, ...(a.check ? { check: '1' } : {}) });
-    stage.append(h('div', { class: 'tiny lx-which' }, info(lang).flag, ' ', info(lang).name, a.check ? ' · ' + LT('lang.lesson.checkTag') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(lang).flag, ' ', info(lang).label, a.check ? ' · ' + LT('lang.lesson.checkTag') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   }
   function finish() {
     for (const [c, R] of Object.entries(results)) N.recordCheck(UI.C, UI.L, c, nid, R.n ? R.c / R.n : 0, day);
@@ -115,7 +115,7 @@ function runQueue(queue, { nid, langs, title }) {
     const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]]));
     stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 ' + LT('lang.lesson.checkDone') : '🎉 ' + LT('lang.lesson.wellDone')),
       h('p', {}, LT('lang.lesson.stats', { nNew: stats.introduced, right: stats.right, wrong: stats.wrong })),
-      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, ': ' + LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ', !['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })))) : null,
+      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).label, ': ' + LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ', !['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })))) : null,
       langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, LT('lang.lesson.moreWaiting')) : null,
       newWordsList(),
       h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, LT('lang.lesson.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));

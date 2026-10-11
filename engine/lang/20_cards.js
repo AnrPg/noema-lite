@@ -52,7 +52,7 @@ function compareTable(cid) {
   const rows = UI.C.languages.map(c => {
     const X = LX(c), lids = X.byConcept[cid] || [];
     const first = lids[0] && N.wordCard(UI.C, UI.L, c, lids[0]);
-    return h('tr', {}, h('th', {}, info(c).flag + ' ' + info(c).name),
+    return h('tr', {}, h('th', {}, info(c).flag + ' ' + info(c).label),
       h('td', {}, X.absent[cid] ? h('i', {}, '— ', X.absent[cid].use || LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? h('br') : null, word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
       h('td', { class: 'tiny' }, first ? first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ') : ''),
       h('td', {}, first?.examples[0] ? h('span', {}, word(c, first.examples[0].text, { sub: false }), h('div', { class: 'tiny' }, first.examples[0].tr)) : ''));
