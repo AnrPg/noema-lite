@@ -449,5 +449,15 @@
   "engine.cv.rename": "Renommer",
   "engine.cv.exportMd": "Exporter en .md",
   "engine.cv.delete": "Supprimer",
-  "engine.cv.deleteAgain": "Clique encore pour supprimer"
+  "engine.cv.deleteAgain": "Clique encore pour supprimer",
+  "engine.thr.workingOn": "En cours :",
+  "engine.thr.try": "essai {n, number}/{of, number}",
+  "engine.thr.open": "{n, plural, one {# question ouverte} many {# questions ouvertes} other {# questions ouvertes}}",
+  "engine.thr.allAnswered": "Toutes les questions ont une réponse",
+  "engine.thr.askAnything": "Demande ce que tu veux — je réponds ou je te guide, puis je conclus avec la réponse",
+  "engine.thr.lessons": "{n, plural, one {# leçon} many {# leçons} other {# leçons}}",
+  "engine.thr.showAll": "Afficher tous les fils",
+  "engine.thr.takeaways": "Tu veux l’essentiel de cette conversation ?",
+  "engine.thr.tellMe": "Dis-le-moi",
+  "engine.thr.wrapUp": "Conclure"
 }

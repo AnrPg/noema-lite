@@ -449,5 +449,15 @@
   "engine.cv.rename": "Переименовать",
   "engine.cv.exportMd": "Экспорт .md",
   "engine.cv.delete": "Удалить",
-  "engine.cv.deleteAgain": "Нажми ещё раз, чтобы удалить"
+  "engine.cv.deleteAgain": "Нажми ещё раз, чтобы удалить",
+  "engine.thr.workingOn": "Разбираем:",
+  "engine.thr.try": "попытка {n, number}/{of, number}",
+  "engine.thr.open": "{n, plural, one {# открытый вопрос} few {# открытых вопроса} many {# открытых вопросов} other {# открытого вопроса}}",
+  "engine.thr.allAnswered": "На все вопросы есть ответ",
+  "engine.thr.askAnything": "Спрашивай что угодно — я отвечу или подведу тебя к ответу, а в конце дам его",
+  "engine.thr.lessons": "{n, plural, one {# урок} few {# урока} many {# уроков} other {# урока}}",
+  "engine.thr.showAll": "Показать все ветки",
+  "engine.thr.takeaways": "Хочешь главные выводы этой беседы?",
+  "engine.thr.tellMe": "Просто скажи",
+  "engine.thr.wrapUp": "Подвести итог"
 }

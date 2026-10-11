@@ -449,5 +449,15 @@
   "engine.cv.rename": "Μετονομασία",
   "engine.cv.exportMd": "Εξαγωγή .md",
   "engine.cv.delete": "Διαγραφή",
-  "engine.cv.deleteAgain": "Πάτα ξανά για διαγραφή"
+  "engine.cv.deleteAgain": "Πάτα ξανά για διαγραφή",
+  "engine.thr.workingOn": "Δουλεύουμε:",
+  "engine.thr.try": "προσπάθεια {n, number}/{of, number}",
+  "engine.thr.open": "{n, plural, one {# ανοιχτή ερώτηση} other {# ανοιχτές ερωτήσεις}}",
+  "engine.thr.allAnswered": "Απαντήθηκαν όλες οι ερωτήσεις",
+  "engine.thr.askAnything": "Ρώτα ό,τι θέλεις — θα απαντήσω ή θα σε καθοδηγήσω και στο τέλος θα σου δώσω την απάντηση",
+  "engine.thr.lessons": "{n, plural, one {# μάθημα} other {# μαθήματα}}",
+  "engine.thr.showAll": "Δείξε όλα τα νήματα",
+  "engine.thr.takeaways": "Θέλεις τα βασικά συμπεράσματα αυτής της συζήτησης;",
+  "engine.thr.tellMe": "Πες μου απλώς",
+  "engine.thr.wrapUp": "Ολοκλήρωση"
 }

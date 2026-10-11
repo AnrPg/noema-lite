@@ -2695,5 +2695,67 @@
   "engine.cv.deleteAgain": "Click again to delete",
   "@engine.cv.deleteAgain": {
     "description": "Tooltip of the delete button after the first click (confirm by clicking again)."
+  },
+  "engine.thr.workingOn": "Working on:",
+  "@engine.thr.workingOn": {
+    "description": "Bold label of the Socratic thread bar in the tutor drawer; the question being worked on follows."
+  },
+  "engine.thr.try": "try {n, number}/{of, number}",
+  "@engine.thr.try": {
+    "description": "Pill: the learner’s attempt n of the allowed of on the current question. Lowercase.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.thr.open": "{n, plural, one {# open question(s)} other {# open question(s)}}",
+  "@engine.thr.open": {
+    "description": "Thread bar: how many questions are still open. (English keeps “question(s)”.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.thr.allAnswered": "All questions answered",
+  "@engine.thr.allAnswered": {
+    "description": "Thread bar when every question is resolved."
+  },
+  "engine.thr.askAnything": "Ask anything — I’ll answer or guide you, then close with the answer",
+  "@engine.thr.askAnything": {
+    "description": "Thread bar before any question (the tutor speaks)."
+  },
+  "engine.thr.lessons": "{n, plural, one {# lesson} other {# lessons}}",
+  "@engine.thr.lessons": {
+    "description": "Pill (after 📌) with the number of lessons saved in this conversation.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.thr.showAll": "Show all threads",
+  "@engine.thr.showAll": {
+    "description": "Tooltip of the ▾ button that shows every question (thread) of the conversation."
+  },
+  "engine.thr.takeaways": "Want the key takeaways of this conversation?",
+  "@engine.thr.takeaways": {
+    "description": "Thread bar in non-Socratic modes, next to the “Wrap up” button."
+  },
+  "engine.thr.tellMe": "Just tell me",
+  "@engine.thr.tellMe": {
+    "description": "Button (after 💡): the learner wants the answer now."
+  },
+  "engine.thr.wrapUp": "Wrap up",
+  "@engine.thr.wrapUp": {
+    "description": "Button (after 🎓): the tutor closes the conversation with the answers and a summary."
   }
 }
