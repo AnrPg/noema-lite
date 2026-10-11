@@ -6,13 +6,24 @@ nodes (lessons, core lessons, field tiers), grammar functions and sentence frame
 exercise **from what you store** (paradigms, sentences): you never write an answer key, so every form must be right.
 
 **First rule — D19 (`references/language-packs.md`): every language is taught through the learner's native language.**
-Supported natives = en el ru fr ar de hi zh ja it es sq pt (the UI locales' languages). Everything you write is **neutral**: general texts
+Supported natives = en el ru fr ar de hi zh ja it es sq pt tr (the UI locales' languages). Everything you write is **neutral**: general texts
 (summary, blocks, procedure, traps, quiz, seeAlso, word profiles, `features.*.none`, phenomena) name no language outside
 the course and explain nothing through English grammar; comparisons are **contrast notes** `{for, rel, text}` — on every
 grammar page one for each supported native except the page's language + `type:fusional`, `type:agglutinating`,
 `type:isolating`, `type:polysynthetic`, `branch:Semitic`; `profile.notes` on words. Glosses and notes are written in
 English (the master); the app shows each learner the texts in their own language through locale facades (later tasks).
 Check: `python3 scripts/lang_facade.py lint work/lang/<id>`.
+
+**R1–R3 (2026-10-11, with D19; `references/language-packs.md` §2.2–§2.4).** **R1**: the learner sees comparisons in three
+sections — “From your languages” (the native's note first, then one per C1 / C2 language), “Among the languages you are
+learning”, “From other languages” (folded, every other note) — so a note for **every** supported native and type.
+**R2**: every note (and pitfall, subtlety, fun fact, feeling) is structured, in this Markdown subset only — paragraphs
+separated by a blank line, `- ` / `1. ` lists for two or more points, `**bold**` for the one key sentence or word,
+`*italic*` for a cited word, an example on its own line starting with `→ ` (`→ ich habe gegessen — έχω φάει`); no headings,
+links, HTML, tables or code. **R3**: a new language's first step, before any word, is the exhaustive per-part-of-speech map
+of the word's distinctive parameters — `lang/<code>/WORD_PARAMETERS.md` + `wordFeatures` (with `prominent` / `order`);
+every word states every parameter of its part of speech (a value or `{"none": "<why>"}`); the validator checks the map,
+every word and the checklist of the language's type.
 
 **Then read `references/LANGUAGE_RULES.md` (binding, D1–D20).** The full contract is `references/LANGUAGES.md`
 (§4 the content model, §6.7 generators, §7.4 refills, §10 these tasks, §11 the checks). The JSON Schema of every file:

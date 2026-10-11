@@ -138,16 +138,22 @@ task on a language course** (the short form of decisions D1–D20; with the conn
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
 0. **Taught through the learner's native language** (D19, `references/language-packs.md` — first): supported natives =
-   the UI locales' languages (en el ru fr ar de hi zh ja it es sq pt); a learner reads the explanations in their native language and gets
-   comparisons with it only (others: with its type / branch / family). Every general text you write names **no language
+   the UI locales' languages (en el ru fr ar de hi zh ja it es sq pt tr); a learner reads the explanations in their native language and sees
+   the comparisons in three sections (R1: “From your languages” — the native first, then C1 / C2 —, “Among the languages
+   you are learning”, “From other languages”, folded). Every general text you write names **no language
    outside the course** and explains nothing through English grammar; every comparison is a **contrast note**
    `{for, rel, text}` — on every grammar page one for each supported native but the page's language and the five type
    notes (`type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`, `branch:Semitic`);
-   `profile.notes` on words. Check with `scripts/lang_facade.py lint <course folder>`.
+   `profile.notes` on words. Every note is **structured** (R2): paragraphs separated by a blank line, `- ` lists,
+   `**bold**` for the one key point, `*italic*` for cited words, examples on their own line (`→ …`); no headings, links,
+   HTML, tables or code. Check with `scripts/lang_facade.py lint <course folder>`.
 1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
    special, uncommon or notable feature of the language — script, sounds, the morphology of every part of speech, syntax,
    one concept with several words, one word with several meanings, register, politeness, culture, numbers — with how the
    app records and teaches it and what is missing. The language's `wordFeatures` and its course content come from it.
+   **Then, before any word (R3): the exhaustive per-part-of-speech map of the word's parameters** —
+   `lang/<code>/WORD_PARAMETERS.md` + `wordFeatures` with `prominent` / `order` (the word card shows them right under the
+   word); every word states every one (a value or `{"none": "<why>"}`).
 2. **Every word states its language's whole facade** (`features` per `wordFeatures`, §4.5.1): a value for every parameter
    of its part of speech, or `{"none": "<why>"}` — e.g. Arabic nouns: root, pattern, every plural with the meanings it
    belongs to, dual, human or not; Chinese: measure words, readings and traditional forms per meaning.
