@@ -461,6 +461,11 @@
      ],
      "description": "the morphological type → the path of foundation lessons (D10)"
     },
+    "wordFeaturesChecklist": {
+     "type": "object",
+     "description": "R3: an item of the validator's checklist (a typology feature id of the language's profile, e.g. nom.constructState, or type:<typology>) that is NOT a parameter of a word in this language, with the reason (e.g. the construct form is predictable from the paradigm). The map itself is lang/<L>/WORD_PARAMETERS.md (the first step of a language package)",
+     "additionalProperties": { "type": "string", "minLength": 1 }
+    },
     "wordFeatures": {
      "type": "object",
      "description": "the facade of each part of speech (D14, §4.5.1)",

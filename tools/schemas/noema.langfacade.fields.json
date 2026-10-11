@@ -184,6 +184,7 @@
     { "path": "wordFeatures/*/*/title", "tier": 3, "kind": "gloss" },
     { "path": "wordFeatures/*/*/why", "tier": 3, "kind": "prose" },
     { "path": "classes/*/*", "tier": 3, "kind": "prose" },
+    { "path": "wordFeaturesChecklist/*", "kind": "author-only" },
     { "path": "notes/*/text", "tier": 3, "kind": "prose", "note": true }
    ]
   },

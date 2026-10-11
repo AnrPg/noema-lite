@@ -13,7 +13,16 @@ D19 (taught through the learner's native language, docs/language-packs.md): ever
 supported native but its own language + type:fusional / agglutinating / isolating / polysynthetic + branch:Semitic, and
 the lint of tools/lang_facade.py runs over every learner text (word profiles, phenomena, typology, quiz, facts, seeAlso,
 function titles …: no language outside the course, no English-anchored explanation, every text field registered).
-These D19 rules are WARNINGS for now (the content is being rewritten); --d19-strict makes them errors.
+Supported natives (R1, 2026-10-11): en el ru fr ar de hi zh ja it es sq pt tr.
+R2: notes and comparison-like texts (pitfalls, subtleties, fun facts, feeling) use the structured Markdown subset —
+a note over ~220 characters in one paragraph, or markup outside the subset (headings, links, HTML, tables, code), is a
+WARNING (never an error, not even with --d19-strict).
+R3: the first step of a language is the exhaustive map of its word parameters — lang/<L>/WORD_PARAMETERS.md (a section
+per part of speech naming every parameter of wordFeatures) and wordFeatures with prominent / order; every word states
+every parameter of its part of speech (a value or {"none": "<why>"}: an ERROR); the map covers the checklist of the
+language's type and typological profile (R3_CHECKLIST, R3_TYPE: warnings; wordFeaturesChecklist says why an item is
+not a word parameter).
+These D19 rules and the R3 map file are WARNINGS for now (the content is being rewritten); --d19-strict makes them errors.
 
 Exit 0 when valid, 1 with the list of problems otherwise. Every check here has a negative test in tests/lang_validate.py.
 """
@@ -411,6 +420,77 @@ def check_decls(v, where, wf, phen):
     return out
 
 
+# R3: the checklist a language's word-parameter map must cover, from its typological profile (_typology/languages.json):
+# (feature, values meaning "absent", part of speech ('*' = every content POS declared), parameter id regex, what to declare)
+R3_CONTENT = ('NOUN', 'VERB', 'ADJ', 'ADV')
+R3_CHECKLIST = [
+    ('nom.genderCount', {'none'}, 'NOUN', r'^gender$', 'the gender'),
+    ('nom.plural', {'none', 'optional'}, 'NOUN', r'plural', 'the plural(s), per meaning'),
+    ('nom.dual', {'none', 'pronouns-or-verbs-only'}, 'NOUN', r'dual', 'the dual'),
+    ('nom.classifiers', {'none'}, 'NOUN', r'measure|classifier|clf', 'the measure word(s)'),
+    ('nom.cases', {'none'}, 'NOUN', r'declension|case|genitive', 'the declension (class / genitive)'),
+    ('nom.cases', {'none'}, 'ADP', r'govern|case', 'the case it governs'),
+    ('nom.constructState', {'none'}, 'NOUN', r'construct|ezafe|linker|state', 'the construct / linked form'),
+    ('morph.rootPattern', {'none'}, 'NOUN', r'^root$', 'the root'),
+    ('morph.rootPattern', {'none'}, 'NOUN', r'pattern|wazn|mishkal', 'the pattern'),
+    ('morph.rootPattern', {'none'}, 'VERB', r'^root$', 'the root'),
+    ('morph.rootPattern', {'none'}, 'VERB', r'binyan|verbForm|form|pattern|measure', 'the verb pattern (binyan / form)'),
+    ('morph.stemChange', {'none'}, 'VERB', r'principal|present|past|future|stem|conjugation|binyan|verbForm', 'the principal parts / stems'),
+    ('verb.particleVerbs', {'none'}, 'VERB', r'separab|particle|prefix', 'the separable / particle part'),
+    ('verb.perfect', {'none', 'finish-already', 'other'}, 'VERB', r'aux|principal|participle', 'the perfect (auxiliary / participle)'),
+    ('adj.comparativeForm', {'analytic'}, 'ADJ', r'compar|elative|degree', 'the comparison forms'),
+    ('phon.vowelHarmony', {'none', 'limited'}, 'NOUN', r'harmony', 'the vowel-harmony class'),
+    ('morph.incorporation', {'none', 'limited'}, 'VERB', r'incorporat|template|slot', 'the incorporation template'),
+    ('tone.lexical', {'none'}, '*', r'pinyin|reading|tone|accent', 'the tones / reading'),
+    ('script.multiple', {'single'}, '*', r'trad|variant|script|spelling|kana|kanji', 'the other script forms'),
+    ('script.vowels', {'full', 'inherent'}, '*', r'translit|vocal|spelling|reading|romaniz', 'the transliteration / vocalization'),
+]
+R3_TYPE = {   # the minimal map of a morphological type (always, whatever the profile)
+    'fusional': [('NOUN', r'declension|plural|pattern|class|gender', 'an inflection class (declension / plural / pattern)'),
+                 ('VERB', r'principal|conjugation|binyan|verbForm|present|class|stem', 'the conjugation class / principal parts')],
+    'agglutinating': [('VERB', r'harmony|stem|class|govern|valency|aspect', 'the stem class / harmony / government')],
+    'isolating': [('VERB', r'separab|neg|aspect|complement|position|govern', 'how it combines (separable, negation, aspect, position)')],
+    'polysynthetic': [('VERB', r'incorporat|template|slot|class', 'the verb template / incorporation')],
+}
+
+
+def check_word_map(v, L, lw, lj, decls, profile, root, R3):
+    """R3: the exhaustive per-POS parameter map — lang/<L>/WORD_PARAMETERS.md and wordFeatures (prominent / order) cover
+    the checklist of the language's type and profile. R3 = v.W now (v.E with --d19-strict) for the map file."""
+    if not decls: return
+    md_path = os.path.join(root, lw, 'WORD_PARAMETERS.md')
+    if not os.path.exists(md_path):
+        R3(f'{lw}/WORD_PARAMETERS.md', 'missing: the FIRST step of a language package is the exhaustive map of the parameters of every part of speech (R3), written before any word')
+    else:
+        md = open(md_path, encoding='utf-8').read()
+        for pos, ds in decls.items():
+            if not re.search(r'(?m)^#{1,4}\s.*\b' + re.escape(pos) + r'\b', md): R3(f'{lw}/WORD_PARAMETERS.md', f'no section for {pos} (a heading naming it): map every part of speech of wordFeatures (R3)')
+            miss = [d['id'] for d in ds if not re.search(r'\b' + re.escape(d['id']) + r'\b', md)]
+            if miss: R3(f'{lw}/WORD_PARAMETERS.md', f'{pos}: parameters of wordFeatures not in the map: {", ".join(miss)} (R3)')
+    for pos, ds in decls.items():
+        for d in ds:
+            dw = f'{lw}/language.json · wordFeatures.{pos}.{d.get("id")}'
+            if 'prominent' in d and not isinstance(d['prominent'], bool): v.E(dw, 'prominent must be true or false (R3)')
+            if 'order' in d and (isinstance(d['order'], bool) or not isinstance(d['order'], (int, float))): v.E(dw, 'order must be a number (R3)')
+    unordered = [p for p in R3_CONTENT if len(decls.get(p) or []) > 1 and not any('order' in d or 'prominent' in d for d in decls[p])]
+    if unordered: v.W(f'{lw}/language.json · wordFeatures', f'{", ".join(unordered)}: declare how the word card shows the parameters (prominent, order — the most important first; default: declaration order, R3)')
+    ok = lj.get('wordFeaturesChecklist') or {}
+    if not isinstance(ok, dict): v.E(f'{lw}/language.json', 'wordFeaturesChecklist must map checklist items to the reason they are not word parameters (R3)'); ok = {}
+    for k, why in ok.items():
+        if not (isinstance(why, str) and why.strip()): v.E(f'{lw}/language.json · wordFeaturesChecklist.{k}', 'say why it is not a parameter of a word (R3)')
+    content = [p for p in R3_CONTENT if p in decls]
+    vals = (profile or {}).get('values') or {}
+    def has(pos, rx): return any(re.search(rx, d['id'], re.I) or re.search(rx, ' '.join(d['phenomenon'] if isinstance(d.get('phenomenon'), list) else [d.get('phenomenon') or '']), re.I) for d in decls.get(pos, []))
+    for feat, absent, pos, rx, what in R3_CHECKLIST:
+        val = vals.get(feat)
+        if val is None or val in absent or feat in ok: continue
+        for p in (content if pos == '*' else [pos] if pos in decls else []):
+            if not has(p, rx): v.W(f'{lw}/language.json · wordFeatures.{p}', f'R3 checklist: {feat} = {val} — declare {what} for {p} (or say in wordFeaturesChecklist.{feat} why it is not a word parameter)')
+    for pos, rx, what in R3_TYPE.get(lj.get('typology'), []):
+        if f'type:{lj.get("typology")}' in ok: break
+        if pos in decls and not has(pos, rx): v.W(f'{lw}/language.json · wordFeatures.{pos}', f'R3 checklist of a {lj.get("typology")} language: declare {what} for {pos}')
+
+
 def check_features(v, w, x, decls, lexids):
     """Every parameter of the word's part of speech stated, typed (D14)."""
     pos = x.get('pos'); key = f'{pos}.{x["class"]}' if x.get('class') else pos
@@ -660,6 +740,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
         else: phen = check_phenomena(v, L, pp)
         if 'wordFeatures' not in lj: v.E(f'{lw}/language.json', 'wordFeatures is required: the parameters every word of each part of speech states (D14, §4.5.1)')
         decls = check_decls(v, f'{lw}/language.json', lj.get('wordFeatures') or {}, phen) if 'wordFeatures' in lj else {}
+        check_word_map(v, L, lw, lj, decls, W_PROF.get(L), root, D19)   # R3: the map of the word's parameters comes first
         # §4.9 (P4): the script module — ar / he: the whole alphabet with its forms; zh: every character of the course's words
         if L in ('ar', 'he', 'zh'):
             se, sw = script_check(root, L, strict); v.errors += se; v.warns += sw

@@ -225,4 +225,38 @@ expect('a field without sentences for a node before it', lambda J, d: J('lang/ar
 expect('an exemption without a reason', lambda J, d: J('lang/he/bank/basic.json', lambda o: o['fieldExemptions'][0].update(reason='')), 'say why')
 expect('a function without its aspect', lambda J, d: J('core/functions/fn.definite.json', lambda o: o.update(category='stuff')), 'category must be one of')
 
+
+# ---------- R3: the map of the word's parameters comes first; every word states every parameter ----------
+def mutated_w(change, **kw):
+    d = tempfile.mkdtemp(prefix='lang-mini-'); dst = os.path.join(d, 'c'); shutil.copytree(MINI, dst)
+    def J(rel, fn=None):
+        p = os.path.join(dst, rel)
+        if fn is None: return p
+        with open(p, encoding='utf-8') as f: obj = json.load(f)
+        fn(obj)
+        with open(p, 'w', encoding='utf-8') as f: f.write(json.dumps(obj, ensure_ascii=False, indent=1))
+    change(J, dst)
+    v = validate(dst, strict=True, **kw); shutil.rmtree(d); return v.errors, v.warns
+def write_map(d, L, text):
+    with open(os.path.join(d, 'lang', L, 'WORD_PARAMETERS.md'), 'w', encoding='utf-8') as f: f.write(text)
+def de_map(J, d, drop=()):
+    lj = json.load(open(J('lang/de/language.json'), encoding='utf-8'))
+    write_map(d, 'de', '# German word parameters\n\n' + ''.join(f'## {pos}\n\n' + ''.join(f'- `{x["id"]}`: …\n' for x in ds if x['id'] not in drop) + '\n' for pos, ds in lj['wordFeatures'].items()))
+e, w = mutated_w(lambda J, d: None, d19_strict=True)
+ok(any('lang/de/WORD_PARAMETERS.md: missing' in x for x in e), 'R3: a language without its WORD_PARAMETERS.md (--d19-strict) → error')
+e, w = mutated_w(lambda J, d: None)
+ok(not any('WORD_PARAMETERS' in x for x in e) and any('lang/de/WORD_PARAMETERS.md: missing' in x for x in w), 'R3: without --d19-strict the missing map is a warning')
+e, w = mutated_w(lambda J, d: de_map(J, d), d19_strict=True)
+ok(not any('lang/de/WORD_PARAMETERS.md' in x for x in e), 'R3: a map with a section per part of speech naming every parameter passes')
+e, w = mutated_w(lambda J, d: de_map(J, d, drop=('aux',)), d19_strict=True)
+ok(any('VERB: parameters of wordFeatures not in the map: aux' in x for x in e), 'R3: a parameter of wordFeatures missing from the map → reported')
+e, w = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures']['NOUN'][0].update(prominent='yes')))
+ok(any('prominent must be true or false' in x for x in e), 'R3: prominent must be a boolean')
+e, w = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures']['NOUN'][1].update(order='first')))
+ok(any('order must be a number' in x for x in e), 'R3: order must be a number')
+ok(any('declare how the word card shows the parameters' in x for x in mutated_w(lambda J, d: None)[1]), 'R3: no prominent / order anywhere → a warning')
+e, w = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures'].update(NOUN=[x for x in o['wordFeatures']['NOUN'] if 'plural' not in x['id']])) or J('lang/de/lexicon/veg.1.json', lambda o: [x.get('features', {}).pop('plurals', None) for x in o['lexemes']]))
+ok(any('R3 checklist: nom.plural = obligatory — declare the plural(s), per meaning for NOUN' in x for x in w), 'R3 checklist: a German noun map without the plural → warning')
+e2, w2 = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: (o['wordFeatures'].update(NOUN=[x for x in o['wordFeatures']['NOUN'] if 'plural' not in x['id']]), o.update(wordFeaturesChecklist={'nom.plural': 'test'}))) or J('lang/de/lexicon/veg.1.json', lambda o: [x.get('features', {}).pop('plurals', None) for x in o['lexemes']]))
+ok(not any('R3 checklist: nom.plural' in x for x in w2) and not any('wordFeaturesChecklist' in x for x in e2), 'R3 checklist: wordFeaturesChecklist says why an item is not a word parameter')
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)
