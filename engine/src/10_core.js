@@ -3,7 +3,9 @@
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
+/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (20_ai.js), not for the learner
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
+/* i18n-ignore-end */
 // in the new frame the tutor is the character on screen now (NoemaThemes.current(): the learner's own, or the one on a 5-minute try), named in the menus' language;
 // read on every use, so a try or a change shows at once everywhere (buttons, the drawer, the prompts)
 if (window.NoemaShell?.mounted && window.NoemaThemes) for (const [k, f] of [['name', t => t.n], ['avatar', t => t.emoji]]) Object.defineProperty(TUTOR, k, { get: () => f(NoemaThemes.tutor()), enumerable: true });
@@ -40,14 +42,14 @@ function h(tag, attrs = {}, ...kids) {
   for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
   return el;
 }
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));   // i18n-ignore
 function fmt(s) {               // inline markdown-lite → safe HTML
   s = String(s ?? '');
   const codes = [];
   s = s.replace(/`([^`]+)`/g, (_, c) => { codes.push(c); return `\u0000${codes.length - 1}\u0000`; });
   s = esc(s)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>')
+    .replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>')   // i18n-ignore
     .replace(/\n/g, '<br>');
   return s.replace(/\u0000(\d+)\u0000/g, (_, i) => `<code>${esc(codes[+i])}</code>`);
 }
@@ -60,8 +62,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------- syntax highlight ---------- */
 const KW = {
+  /* i18n-ignore-start */
   sql: 'select from where group by order having limit join left right inner outer full cross on as and or not null is in exists between like case when then else end create replace table view or if insert into values overwrite update set delete merge using matched source target alter add column columns drop truncate describe detail history restore version timestamp of vacuum retain hours optimize zorder cluster partitioned tblproperties show tables schemas catalogs use catalog schema grant revoke to all privileges with distinct union explain analyze compute statistics refresh streaming live stream materialized constraint expect violation fail row rows over partition row_number rank desc asc true false cast coalesce sum count avg min max apply purge reorg full by liquid auto',
   python: 'def return import from as if elif else for while in not and or is none true false class with try except finally raise lambda yield pass break continue global print self',
+  /* i18n-ignore-end */
 };
 const KWSET = Object.fromEntries(Object.entries(KW).map(([k, v]) => [k, new Set(v.split(' '))]));
 function highlight(code, lang) {
@@ -94,7 +98,7 @@ function guessLang(code) {
 function codeBlock(code, lang) {
   const pre = h('div', { class: 'pre', html: highlight(code, lang) });
   if (lang && lang !== 'text') pre.prepend(h('span', { class: 'lang' }, lang));
-  const cp = h('button', { class: 'copy', onclick: e => { e.stopPropagation(); navigator.clipboard?.writeText(code); toast('Copied 📋'); } }, 'copy');
+  const cp = h('button', { class: 'copy', onclick: e => { e.stopPropagation(); navigator.clipboard?.writeText(code); toast(tE('engine.core.copied')); } }, tE('engine.core.copy'));
   pre.append(cp);
   return pre;
 }
@@ -202,10 +206,10 @@ function addXP(n, el) {
   S.xp += n; Noema.stats.add(n); save();
   renderTopStats();
   const r = el?.getBoundingClientRect?.();
-  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, `+${n} XP`);
+  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, tE('engine.core.xpFloat', { n }));
   document.body.append(f); setTimeout(() => f.remove(), 1200);
   const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 Daily goal smashed!'); }
+  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
   else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
 }
 function record(ex, ok, firstTry = true) {
@@ -233,7 +237,7 @@ function beep(kind) {
 
 /* ---------- confetti ---------- */
 function confetti(n = 120) {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;   // i18n-ignore
   let cv = $('#confetti');
   if (!cv) { cv = h('canvas', { id: 'confetti' }); document.body.append(cv); }
   const ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
@@ -259,15 +263,15 @@ function modal(build) {
 }
 function confirmBox(text, onYes) {
   modal((b, close) => b.append(h('h3', {}, text), h('div', { class: 'row', style: { marginTop: '18px', justifyContent: 'flex-end' } },
-    h('button', { class: 'btn', onclick: close }, 'Cancel'), h('button', { class: 'btn primary', onclick: () => { close(); onYes(); } }, 'Yes'))));
+    h('button', { class: 'btn', onclick: close }, tE('engine.core.cancel')), h('button', { class: 'btn primary', onclick: () => { close(); onYes(); } }, tE('engine.core.yes')))));
 }
 
 /* ---------- theming per chapter ---------- */
-function isDark() { return document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }
+function isDark() { return document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }   // i18n-ignore
 function setAccent(el, ch) {
   const i = ch ? (ch._ci ?? ch._i) % PALETTE.length : 7;
   const c = isDark() ? PALETTE_DARK[i] : PALETTE[i][0];
-  const bg = isDark() ? `color-mix(in srgb, ${PALETTE_DARK[i]} 18%, #1f232e)` : PALETTE[i][1];
+  const bg = isDark() ? `color-mix(in srgb, ${PALETTE_DARK[i]} 18%, #1f232e)` : PALETTE[i][1];   // i18n-ignore
   el.style.setProperty('--c', c); el.style.setProperty('--c-bg', bg);
 }
 function applyTheme() {
@@ -283,6 +287,7 @@ function chProgress(c) {
 }
 
 /* ---------- section plain text (for AI context) ---------- */
+/* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)
 function blockText(b) {
   switch (b.t) {
     case 'p': return b.text;
@@ -305,3 +310,4 @@ function chapterOutline(c) {
   return `# Chapter ${c.num}: ${c.title} — ${c.subtitle}\nMantra: ${c.mantra}\nSections:\n` + c.sections.map(s => `- ${s.title}: ${s.hook || ''}`).join('\n') +
     '\nKey pitfalls:\n' + c.pitfalls.map(p => `- ${p.title}: ${p.text}`).join('\n');
 }
+/* i18n-ignore-end */

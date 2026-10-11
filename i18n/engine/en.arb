@@ -1,0 +1,495 @@
+{
+  "@@locale": "en",
+  "engine.core.copied": "Copied 📋",
+  "@engine.core.copied": {
+    "description": "Toast after the learner copies a code block to the clipboard. Short."
+  },
+  "engine.core.copy": "copy",
+  "@engine.core.copy": {
+    "description": "Small button on a code block (lowercase in English) that copies the code. One short word."
+  },
+  "engine.core.xpFloat": "+{n, number} XP",
+  "@engine.core.xpFloat": {
+    "description": "Floating label that rises from a button when the learner earns XP (experience points). Keep “XP”.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.core.goalSmashed": "Daily goal smashed!",
+  "@engine.core.goalSmashed": {
+    "description": "Toast when the learner reaches the daily XP goal (after a 🎯 emoji). Enthusiastic, short."
+  },
+  "engine.core.cancel": "Cancel",
+  "@engine.core.cancel": {
+    "description": "Button of a yes/no confirmation dialog that closes it without doing anything."
+  },
+  "engine.core.yes": "Yes",
+  "@engine.core.yes": {
+    "description": "Button of a yes/no confirmation dialog that confirms the action."
+  },
+  "engine.inbox.applied": "{n, plural, one {# result} other {# results}} from your other apps",
+  "@engine.inbox.applied": {
+    "description": "Toast (after a 📥 emoji) when study results from other apps (e.g. Meletee) were applied to this subject. n = number of results.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.gemini.noKeySet": "No API key set.",
+  "@engine.gemini.noKeySet": {
+    "description": "Error when the learner presses “Detect models” without a Gemini API key."
+  },
+  "engine.gemini.modelListFailed": "Model list failed ({status}): {detail}",
+  "@engine.gemini.modelListFailed": {
+    "description": "Error when the list of Gemini models could not be loaded. status = HTTP status code, detail = the server’s answer (English, technical).",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "403"
+      },
+      "detail": {
+        "type": "String",
+        "example": "API key not valid"
+      }
+    }
+  },
+  "engine.gemini.keyRejected": "Your Gemini API key was rejected. Open ⚙️ Settings and paste a valid key.",
+  "@engine.gemini.keyRejected": {
+    "description": "Error shown in the tutor when Google rejects the learner’s Gemini API key. “⚙️ Settings” is the ⚙️ Settings tab of the account menu."
+  },
+  "engine.gemini.denied": "Access denied (403). The key may be restricted (e.g. HTTP-referrer restriction blocks local files) or the Generative Language API is not enabled for it.",
+  "@engine.gemini.denied": {
+    "description": "Error (HTTP 403) from Gemini. Keep the API names “HTTP-referrer” and “Generative Language API” in English."
+  },
+  "engine.gemini.noModel": "That model is not available for your key. Open ⚙️ Settings → “Detect models”.",
+  "@engine.gemini.noModel": {
+    "description": "Error (HTTP 404) from Gemini. “Detect models” is the name of a button in the ⚙️ Settings tab of the account menu (keep it identical to engine.acc.detectModels)."
+  },
+  "engine.gemini.rateLimit": "Rate limit / quota reached (429). Wait a minute or switch to a lighter model in ⚙️ Settings.",
+  "@engine.gemini.rateLimit": {
+    "description": "Error (HTTP 429) from Gemini: too many requests or the free quota is used up."
+  },
+  "engine.gemini.hiccup": "Gemini is having a hiccup ({status}). Try again in a moment.",
+  "@engine.gemini.hiccup": {
+    "description": "Error when Gemini’s server fails (HTTP 5xx). status = HTTP status code. Light tone.",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "503"
+      }
+    }
+  },
+  "engine.gemini.error": "Gemini error {status}: {detail}",
+  "@engine.gemini.error": {
+    "description": "Any other error from Gemini. status = HTTP status code, detail = the server’s answer (technical, English).",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "400"
+      },
+      "detail": {
+        "type": "String",
+        "example": "Invalid JSON payload"
+      }
+    }
+  },
+  "engine.gemini.noKey": "No Gemini API key. Open ⚙️ Settings.",
+  "@engine.gemini.noKey": {
+    "description": "Error when the learner uses an AI feature without a Gemini API key."
+  },
+  "engine.gemini.network": "Network error — are you online? ({detail})",
+  "@engine.gemini.network": {
+    "description": "Error when Gemini cannot be reached. detail = the browser’s technical message (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "engine.gemini.emptyBlocked": "Empty answer from Gemini (blocked: {reason}).",
+  "@engine.gemini.emptyBlocked": {
+    "description": "Error when Gemini answered nothing because its safety filter blocked the request. reason = Gemini’s code (e.g. SAFETY).",
+    "placeholders": {
+      "reason": {
+        "type": "String",
+        "example": "SAFETY"
+      }
+    }
+  },
+  "engine.gemini.empty": "Empty answer from Gemini.",
+  "@engine.gemini.empty": {
+    "description": "Error when Gemini answered with no text."
+  },
+  "engine.mode.socratic": "Socratic",
+  "@engine.mode.socratic": {
+    "description": "Tutor mode chip (after the tutor’s emoji): a Socratic dialogue. One word if possible."
+  },
+  "engine.mode.explain": "Explain",
+  "@engine.mode.explain": {
+    "description": "Tutor mode chip (after 💡): the tutor explains in depth. One word."
+  },
+  "engine.mode.hint": "Hint",
+  "@engine.mode.hint": {
+    "description": "Tutor mode chip (after 🪜): hints on an exercise, never the answer. One word."
+  },
+  "engine.mode.quiz": "Quiz me",
+  "@engine.mode.quiz": {
+    "description": "Tutor mode chip (after ⚡): rapid-fire quiz questions. Short imperative."
+  },
+  "engine.mode.interview": "Interview",
+  "@engine.mode.interview": {
+    "description": "Tutor mode chip (after 🎤): a mock interview / oral exam. One word."
+  },
+  "engine.mode.debug": "Case sim",
+  "@engine.mode.debug": {
+    "description": "Tutor mode chip (after 🔧): an interactive case / debugging simulation. Very short."
+  },
+  "engine.tutor.explainThis": "Explain this (AI)",
+  "@engine.tutor.explainThis": {
+    "description": "Tooltip of the 💡 button on a part of a lesson: the AI tutor explains that part."
+  },
+  "engine.tutor.explainThisAria": "Explain this with the AI tutor",
+  "@engine.tutor.explainThisAria": {
+    "description": "Screen-reader label of the 💡 button on a part of a lesson."
+  },
+  "engine.tutor.ctxCourse": "Whole course",
+  "@engine.tutor.ctxCourse": {
+    "description": "Tutor context chip (after 🌍): the tutor talks about the whole subject."
+  },
+  "engine.tutor.ctxSection": "Section",
+  "@engine.tutor.ctxSection": {
+    "description": "Tutor context chip (after 📍) when the section has no title."
+  },
+  "engine.tutor.ctxChapter": "Chapter",
+  "@engine.tutor.ctxChapter": {
+    "description": "Tutor context chip (after 📍) when the chapter has no title."
+  },
+  "engine.tutor.ctxDrill": "Debug drill",
+  "@engine.tutor.ctxDrill": {
+    "description": "Tutor context chip (after 🔧) when the debug drill has no title."
+  },
+  "engine.tutor.ctxExercise": "This exercise",
+  "@engine.tutor.ctxExercise": {
+    "description": "Tutor context chip (after 🧩): the tutor talks about the exercise on screen."
+  },
+  "engine.tutor.ctxPart": "This part",
+  "@engine.tutor.ctxPart": {
+    "description": "Tutor context chip (after 🔎): the tutor explains one part of a lesson."
+  },
+  "engine.common.chTitle": "Ch{num} · {title}",
+  "@engine.common.chTitle": {
+    "description": "A chapter’s short number and a title (tutor context, search results, saved conversations). “Ch” = chapter, abbreviated; num = the chapter number.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      },
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.tutor.chatLangTip": "Language of the AI conversations — the course material stays as it is",
+  "@engine.tutor.chatLangTip": {
+    "description": "Tooltip of the language picker of the AI conversations (the tutor drawer and Settings)."
+  },
+  "engine.tutor.chatLangAria": "Language of the AI conversations",
+  "@engine.tutor.chatLangAria": {
+    "description": "Screen-reader label of the language picker of the AI conversations."
+  },
+  "engine.tutor.chatLangSame": "Same as the course ({lang})",
+  "@engine.tutor.chatLangSame": {
+    "description": "First option of the AI-conversation language picker (after 🗣): the language of the course material. lang = that language’s own name (e.g. English, Ελληνικά).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "English"
+      }
+    }
+  },
+  "engine.tutor.history": "Conversation history",
+  "@engine.tutor.history": {
+    "description": "Tutor drawer menu item / tooltip: shows earlier conversations."
+  },
+  "engine.tutor.export": "Export this conversation (.md)",
+  "@engine.tutor.export": {
+    "description": "Tutor drawer menu item: download this conversation as a Markdown file."
+  },
+  "engine.tutor.newConvo": "New conversation",
+  "@engine.tutor.newConvo": {
+    "description": "Tutor drawer menu item: start a new, empty conversation."
+  },
+  "engine.tutor.more": "More",
+  "@engine.tutor.more": {
+    "description": "Label of the ⋮ (more actions) menu button in the tutor drawer."
+  },
+  "engine.tutor.send": "Send",
+  "@engine.tutor.send": {
+    "description": "Tooltip / screen-reader label of the ➤ send button of the tutor chat."
+  },
+  "engine.tutor.savedLesson": "<b>Saved to your lessons:</b> {lesson}",
+  "@engine.tutor.savedLesson": {
+    "description": "Chip under a tutor answer (after 📌): a lesson was saved. Keep the <b>…</b> tags around the label. lesson = the lesson’s text.",
+    "placeholders": {
+      "lesson": {
+        "type": "String",
+        "example": "MERGE needs a unique match per target row."
+      }
+    }
+  },
+  "engine.tutor.poweredBy": "Your Gemini-powered tutor · {model}",
+  "@engine.tutor.poweredBy": {
+    "description": "Subtitle under the tutor’s name (classic layout). model = the Gemini model’s id or engine.tutor.autoModel.",
+    "placeholders": {
+      "model": {
+        "type": "String",
+        "example": "gemini-2.5-flash"
+      }
+    }
+  },
+  "engine.tutor.autoModel": "auto model",
+  "@engine.tutor.autoModel": {
+    "description": "Shown instead of a model id when the app picks the Gemini model itself. Lowercase."
+  },
+  "engine.tutor.close": "Close",
+  "@engine.tutor.close": {
+    "description": "Tooltip of the ✕ button that closes the tutor drawer."
+  },
+  "engine.tutor.useWhole": "use whole course",
+  "@engine.tutor.useWhole": {
+    "description": "Small link next to the tutor’s context chip: talk about the whole course instead. Lowercase."
+  },
+  "engine.tutor.placeholder": "Your answer or question…",
+  "@engine.tutor.placeholder": {
+    "description": "Placeholder of the tutor chat’s text box."
+  },
+  "engine.tutor.greet": "Hi {name}! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
+  "@engine.tutor.greet": {
+    "description": "First message of the tutor (classic layout), Markdown: keep the ** marks. name = the learner, tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label (e.g. “💡 Explain”).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      },
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      },
+      "avatar": {
+        "type": "String",
+        "example": "🦉"
+      },
+      "mode": {
+        "type": "String",
+        "example": "🦉 Socratic"
+      }
+    }
+  },
+  "engine.tutor.greetAnon": "Hi there! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
+  "@engine.tutor.greetAnon": {
+    "description": "First message of the tutor (classic layout) when the learner has no name, Markdown: keep the ** marks. tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      },
+      "avatar": {
+        "type": "String",
+        "example": "🦉"
+      },
+      "mode": {
+        "type": "String",
+        "example": "🦉 Socratic"
+      }
+    }
+  },
+  "engine.tutor.starterSocratic": "Question me Socratically on this",
+  "@engine.tutor.starterSocratic": {
+    "description": "Starter button in an empty tutor chat (after the tutor’s emoji): starts a Socratic dialogue."
+  },
+  "engine.tutor.starterQuiz": "Rapid-fire quiz, traps only",
+  "@engine.tutor.starterQuiz": {
+    "description": "Starter button (after ⚡): a fast quiz with trick questions only."
+  },
+  "engine.tutor.starterDebug": "Simulate a broken scenario",
+  "@engine.tutor.starterDebug": {
+    "description": "Starter button (after 🔧): a simulated case where something is broken, to diagnose."
+  },
+  "engine.tutor.starterInterview": "Interview me",
+  "@engine.tutor.starterInterview": {
+    "description": "Starter button (after 🎤): a mock interview."
+  },
+  "engine.tutor.starterExplain": "Explain it differently",
+  "@engine.tutor.starterExplain": {
+    "description": "Starter button (after 💡): explain the topic differently from the notes."
+  },
+  "engine.tutor.lessonsLearned": "{n, plural, one {# lesson learned} other {# lessons learned}}",
+  "@engine.tutor.lessonsLearned": {
+    "description": "Toast (after 📌) when the tutor saved lessons from the conversation. n = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.tutor.settings": "Settings",
+  "@engine.tutor.settings": {
+    "description": "Button under an AI error (after ⚙️): opens the Settings tab."
+  },
+  "engine.tutor.howKey": "How to get a key",
+  "@engine.tutor.howKey": {
+    "description": "Button under an AI error about the API key (after 🔑): opens the guide to get a free Gemini key."
+  },
+  "engine.log.exCtx": "{ch} · {id}",
+  "@engine.log.exCtx": {
+    "description": "Context label of a saved AI grading conversation: chapter and section (engine.common.chTitle), then the exercise’s id. Usually unchanged.",
+    "placeholders": {
+      "ch": {
+        "type": "String",
+        "example": "Ch3 · Delta Lake"
+      },
+      "id": {
+        "type": "String",
+        "example": "ch03-e012"
+      }
+    }
+  },
+  "engine.log.codeReview": "Code review: {q}",
+  "@engine.log.codeReview": {
+    "description": "Title of a saved conversation: the AI reviewed the learner’s code. q = the start of the exercise’s question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "Write a MERGE that upserts…"
+      }
+    }
+  },
+  "engine.log.grading": "Grading: {q}",
+  "@engine.log.grading": {
+    "description": "Title of a saved conversation: the AI graded the learner’s answer. q = the start of the question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "Why does OPTIMIZE…"
+      }
+    }
+  },
+  "engine.log.questionMd": "**Question:** {q}",
+  "@engine.log.questionMd": {
+    "description": "Saved conversation (Markdown, keep **): the exercise’s question. q = the question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "What does VACUUM remove?"
+      }
+    }
+  },
+  "engine.log.myAnswerMd": "**My answer:**",
+  "@engine.log.myAnswerMd": {
+    "description": "Saved conversation (Markdown, keep **): heading before the learner’s answer, in the learner’s voice."
+  },
+  "engine.log.scoreMd": "**Score: {score, number}/100**",
+  "@engine.log.scoreMd": {
+    "description": "Saved conversation (Markdown, keep **): the AI’s score out of 100.",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.log.missing": "Missing: {list}",
+  "@engine.log.missing": {
+    "description": "Saved conversation (after ➕): the points the answer missed. list = points joined with “ · ”.",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "retention period · time travel"
+      }
+    }
+  },
+  "engine.log.aiQuestion": "AI question: {q}",
+  "@engine.log.aiQuestion": {
+    "description": "Title of a saved conversation: a practice question generated by the AI. q = the start of the question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "Which command…"
+      }
+    }
+  },
+  "engine.log.aiQuestionAsk": "Generate a fresh, tricky question on “{title}”.",
+  "@engine.log.aiQuestionAsk": {
+    "description": "Saved conversation: the learner’s request for a new AI practice question. title = the section’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Log Basics"
+      }
+    }
+  },
+  "engine.log.explanationMd": "**Explanation:** {text}",
+  "@engine.log.explanationMd": {
+    "description": "Saved conversation (Markdown, keep **): the explanation of the AI question. text = the explanation.",
+    "placeholders": {
+      "text": {
+        "type": "String",
+        "example": "The log records every commit…"
+      }
+    }
+  },
+  "engine.log.drill": "Drill: {title}",
+  "@engine.log.drill": {
+    "description": "Title of a saved conversation: a graded debug drill. title = the drill’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Slow MERGE"
+      }
+    }
+  },
+  "engine.log.symptomMd": "**Symptom:** {symptom}",
+  "@engine.log.symptomMd": {
+    "description": "Saved conversation (Markdown, keep **): the symptom of the debug drill.",
+    "placeholders": {
+      "symptom": {
+        "type": "String",
+        "example": "The job got 10× slower overnight."
+      }
+    }
+  },
+  "engine.log.myQuestionsMd": "**The questions I would ask myself:**",
+  "@engine.log.myQuestionsMd": {
+    "description": "Saved conversation (Markdown, keep **): heading before the learner’s list of diagnostic questions, in the learner’s voice."
+  },
+  "engine.log.drillScoreMd": "**Score: {score, number}/100** — covered {hit, number}/{of, number}",
+  "@engine.log.drillScoreMd": {
+    "description": "Saved conversation (Markdown, keep **): the drill’s score and how many checklist questions the learner covered (hit of of).",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "3"
+      },
+      "hit": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.log.checklistMd": "**Canonical checklist:**",
+  "@engine.log.checklistMd": {
+    "description": "Saved conversation (Markdown, keep **): heading before the reference list of questions to ask oneself."
+  }
+}
