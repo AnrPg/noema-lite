@@ -27,6 +27,9 @@ function prepared() {
   g.notes.push({ for: 'type:agglutinating', rel: 'new', text: AGG }); fs.writeFileSync(gf, JSON.stringify(g, null, 1));
   const af = path.join(cdir, 'lang', 'ar', 'grammar', FN + '.json'), ga = JSON.parse(fs.readFileSync(af, 'utf8'));   // R2: a note in the Markdown subset
   ga.notes.find(n => n.for === 'de').text = MD_DE; fs.writeFileSync(af, JSON.stringify(ga, null, 1));
+  { // the real el facade translates that note's old text: drop its entry, so the test's Markdown text is what is shown
+    const ff = path.join(cdir, 'facades', 'el', 'ar.json');
+    if (fs.existsSync(ff)) { const F = JSON.parse(fs.readFileSync(ff, 'utf8')); delete F[`g:ar:${FN}/notes/${ga.notes.findIndex(n => n.for === 'de')}/text`]; fs.writeFileSync(ff, JSON.stringify(F, null, 1)); } }
   // a word with profile.notes (the new place of the comparisons of a word, §2.1)
   let word = null;
   for (const f of fs.readdirSync(path.join(cdir, 'lang', 'de', 'lexicon'))) {
