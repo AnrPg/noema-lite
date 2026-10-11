@@ -2510,5 +2510,13 @@
   "sh.synced": "All changes synced",
   "@sh.synced": {
     "description": "Tooltip of the sync dot when everything is synced."
+  },
+  "sh.tutorDefault": "Tutor",
+  "@sh.tutorDefault": {
+    "description": "The AI tutor’s plain name when no tutor character is chosen yet; also fills {tutor}, {tutorAcc} … in other messages then. One word."
+  },
+  "sh.fontSample": "Aa Good evening",
+  "@sh.fontSample": {
+    "description": "Sample text under each font in Me › Character/appearance: “Aa” (a capital and a small letter of the language’s alphabet) and a short greeting, written in that font. Keep it short."
   }
 }

@@ -1,0 +1,6 @@
+# keys of the loader component built at run time (tools/i18n/check.js)
+loader.convo.kind.*
+loader.convo.mode.*
+loader.convo.md.*
+loader.viewer.kind.*
+loader.viewer.mail.*

@@ -20,8 +20,8 @@ window.NoemaReact = (() => {
   const rnd = a => a[Math.floor(Math.random() * a.length)];
   const fx = () => document.getElementById('ns-fx');
   const fab = () => document.querySelector('#ns-fab .ns-fabface');
-  const typing = () => !!document.activeElement?.matches?.('textarea, input:not([type=checkbox]):not([type=radio]), [contenteditable="true"]');
-  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const typing = () => !!document.activeElement?.matches?.('textarea, input:not([type=checkbox]):not([type=radio]), [contenteditable="true"]');   // i18n-ignore (selectors, media queries, storage keys)
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;   // i18n-ignore (selectors, media queries, storage keys)
   const mode = () => { const g = TH()?.game() || 'playful'; return reduced() ? 'off' : g; };
   const strict = () => TH()?.tone() === 'strict';
 
@@ -35,6 +35,7 @@ window.NoemaReact = (() => {
   }
 
   /* ---------- the props of the big ones ---------- */
+  /* i18n-ignore-start — SVG props and their CSS positions, no words */
   const GOLD = '#e8c25a', GOLD2 = '#b88a2e', WOOD = '#a8743f', WOOD2 = '#7f5530', PAPER = '#f3e6c4', PAPER2 = '#b9975a';
   const STAR = (f = GOLD) => `<svg viewBox="-12 -12 24 24"><path d="M0 -11 L3.2 -3.4 L11 -3 L5 2.2 L6.8 10 L0 5.8 L-6.8 10 L-5 2.2 L-11 -3 L-3.2 -3.4Z" fill="${f}"/></svg>`;
   const SPARK = f => `<svg viewBox="-10 -10 20 20"><path d="M0 -10 Q1.5 -1.5 10 0 Q1.5 1.5 0 10 Q-1.5 1.5 -10 0 Q-1.5 -1.5 0 -10Z" fill="${f}"/></svg>`;
@@ -76,6 +77,7 @@ window.NoemaReact = (() => {
     sign: [3000, () => P('sign', 'left:-14%;top:2%;width:58%;height:52%', `<svg viewBox="0 0 120 108"><rect x="56" y="44" width="8" height="64" rx="2" fill="${WOOD}"/><rect x="4" y="4" width="112" height="54" rx="7" fill="${PAPER}" stroke="${PAPER2}" stroke-width="3"/><text x="60" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#4a3a22" style="font-family:var(--display)">${esc(L('signText'))}</text></svg>`)],
     treasure: [5000, () => fire(-8, -6, 'var(--t3i)', 0) + fire(62, -12, 'var(--t1i)', .5) + fire(28, 2, 'var(--t2i)', 1) + fire(68, 24, 'var(--t4i)', 1.5) + P('chest', 'left:24%;top:60%;width:52%;height:36%', CHEST) + burst(16, 50, 68, 1.2)] };
   function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+  /* i18n-ignore-end */
   /* when each set plays (the texts are in engine/i18n_shell.js: sh.rx.<occasion>, picked at random) */
   const EV = {
     correct: ['boing', 'spin', 'wobble', 'zoom', 'hearts'], wrong: ['faint', 'dizzy', 'sweat'], wrong3: ['sign'],
@@ -138,7 +140,7 @@ window.NoemaReact = (() => {
   function dayStart(acc) {
     try {
       const k = `noema1:${acc}:meta:lastOpen`, last = +localStorage.getItem(k) || 0, now = Date.now(), d = new Date().toISOString().slice(0, 10);
-      if (localStorage.getItem(k + 'Day') === d) return; localStorage.setItem(k, now); localStorage.setItem(k + 'Day', d);
+      if (localStorage.getItem(k + 'Day') === d) return; localStorage.setItem(k, now); localStorage.setItem(k + 'Day', d);   // i18n-ignore (selectors, media queries, storage keys)
       const sn = window.Noema?.stats?.streakNow() || 0;
       if (last && now - last > 3 * 864e5) setTimeout(() => big('back'), 1200);
       else if (sn === 7 || sn === 30 || (sn > 30 && sn % 30 === 0)) setTimeout(() => big('streak', null, { n: sn }), 1200);
