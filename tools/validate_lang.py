@@ -980,7 +980,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
         import lang_facade
         for f in lang_facade.lint(root):
             if f.cat == 'required' or f.sev == 'info': continue
-            if only and ('/lang/' in f.where or '_phenomena/' in f.where) and f'/lang/{only}/' not in f.where and f'_phenomena/{only}.json' not in f.where: continue
+            if only and f'/lang/{only}/' not in f.where and f'_phenomena/{only}.json' not in f.where: continue   # --lang: that language's files only
             D19(f.where, f'{f.msg} (D19 {f.cat})')
     except Exception as e:   # the lint must never hide the other checks
         v.W('D19 lint', f'not run ({e.__class__.__name__}: {e})')
