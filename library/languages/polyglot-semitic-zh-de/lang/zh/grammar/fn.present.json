@@ -325,6 +325,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut packs tense, person and much more into one verb word (nirijunga ‘I eat’); Chinese keeps everything separate and the verb unchanged: 我吃."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian conjugation (mangio, mangi, mangia, mangiamo, mangiate, mangiano; ho mangiato; mangerò) disappears: 我吃 for every person and time. Like mangio, 我吃 can be ‘I eat’, ‘I’m eating’ or, with a time word, ‘I’ll eat’."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian endings carry person and tense (punoj, punon, punojmë; punova; do të punoj); Chinese 工作 never changes — 我工作, 他们工作 — and time words do the rest."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese conjugation (como, comes, come, comemos, comem; comi; comerei) disappears: 我吃 for every person and every time — 我, 你 and time words do that work."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If your verb endings carry person, number and tense, Chinese has none: 我吃, 你吃, 他们吃 — the pronoun stays, and time words or 了 / 过 do the rest."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If you stack tense and person suffixes on the verb, Chinese has no suffixes at all: one bare form, with time words and the particles 了, 过, 在 around it."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your verbs never change and optional words add time or aspect, Chinese is the same: 我吃, 我在吃, 我吃了, 我明天吃."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If tense, person and much more live inside one verb word, Chinese keeps everything separate around an unchanging verb: 我 + 明天 + 吃."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your verbs change for person, number and gender with prefixes and suffixes, a Chinese verb has one form: 吃 for him, her and them, now or tomorrow."
   }
  ],
  "seeAlso": [

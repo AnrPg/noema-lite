@@ -308,6 +308,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut distinguishes singular, dual and plural on the noun (inuk, inuuk, inuit); Chinese marks none of them."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian changes the ending and the article (il libro → i libri, la casa → le case) and the adjective agrees (libri nuovi); Chinese changes nothing: 新书 is ‘new book’ or ‘new books’, and 三本书 has no plural either."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian marks the plural on the noun (libër → libra, libri → librat ‘the books’) and the adjective agrees; Chinese never changes the noun: 书, 三本书, 这些书. 们 is only for groups of people."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese adds -s to noun, article and adjective (os livros novos); Chinese adds nothing: 新书, 三本书. 们 is not a plural -s: it is only for people (朋友们) and never after a number."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If plural endings run through your noun, article and adjective, Chinese has none: 书 is one book or many; numbers, 这些 / 那些 and 很多 say how many, and 们 is only for groups of people."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your plural suffix is dropped after numbers, Chinese treats every noun like that, always: 书, 三本书, 很多书. 们 is a group suffix for people only."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your nouns never change for number and plurality comes from numbers or quantity words, Chinese is the same: 这些书, 很多书."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your nouns show singular, dual and plural, Chinese marks none of them: 书 is one book or many."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your plurals add endings or change the inside of the word, and you have a dual, Chinese has none of it: 书, 两本书, 三本书."
   }
  ],
  "seeAlso": [

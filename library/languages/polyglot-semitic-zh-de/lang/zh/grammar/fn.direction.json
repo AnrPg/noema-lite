@@ -488,6 +488,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks goal and source with case endings on the noun (-mut ‘to’, -mit ‘from’); Chinese uses the verb itself for the goal (去学校) and 从 before the verb for the source."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian vado a scuola / vengo da Pechino / in autobus put goal, source and means after the verb with prepositions; Chinese: 从北京来, 坐公共汽车去, 去学校 — source and means before the verb, the goal right after it with no preposition. a piedi ~ 走路, also before the verb: 走路去."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian shkoj në shkollë needs në for the goal, and source and means follow the verb (vij nga Pekini, me autobus); Chinese puts 从 + place and the means before the verb and the goal right after it: 从北京来, 坐公共汽车去学校."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese vou à escola / venho de Pequim / de autocarro use prepositions after the verb; Chinese 去学校 needs no ‘a’, and source and means come before the verb: 从北京来, 坐公共汽车去. a pé ~ 走路: 走路去."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language marks the goal with a preposition or a case (‘to the school’), Chinese marks nothing: the movement verb takes the place directly (去学校, 回家). Source (从 + place) and means (坐车) go before the verb."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If goal, source and means are case endings on nouns before your verb, Chinese splits them: the goal comes after the verb with no ending (去学校), the source and the means before it (从家, 坐公共汽车)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your movement verbs already take the place directly (‘go school’), so do Chinese ones: 去学校. Put the means before the main verb (坐公共汽车去), and add 来 / 去 for the direction: 进来, 出去."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If goal and source are case endings in your language, Chinese uses the verb itself for the goal (去北京) and the separate word 从 before the verb for the source: 从北京来."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language needs a ‘to’ preposition after the verb and a ‘with / by’ prefix for the means, Chinese needs neither: 去学校 ‘go school’, and the means is a small verb phrase before the main verb: 坐公共汽车去."
   }
  ],
  "seeAlso": [

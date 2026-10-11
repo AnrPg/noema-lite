@@ -382,6 +382,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no tones; it tells words apart by long and short vowels and consonants (written double, as in qujannamiik). In Chinese length never matters, but the pitch of every syllable does."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian stress can tell words apart (àncora ‘anchor’ / ancóra ‘again’, papa / papà), and pitch only colours the sentence. In Chinese every syllable has its own pitch shape — mǎi 买 ‘buy’ / mài 卖 ‘sell’ — so a questioning rise (Vieni?) would change the word: ask with 吗."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian has stress and no tones; pitch only shapes the sentence. In Chinese each syllable carries one of four tones, and changing it changes the word (mǎi 买 ‘buy’ / mài 卖 ‘sell’). Familiar: like Albanian a, Chinese makes yes/no questions with a word (吗), not with the voice."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese stress tells words apart (sabia ‘knew’ / sábia ‘wise’), pitch does not. Chinese has no such stress; each syllable’s pitch is fixed, so the rising question (Vens?) gives way to 吗. Unstressed Portuguese vowels fade, but every toned Chinese syllable keeps a full vowel; only the toneless ones (吗, 了) are short."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If your language uses stress to tell words apart and pitch only for the sentence, Chinese gives every syllable a fixed pitch shape (mā, má, mǎ, mà) and has no word stress; ask with 吗, not by raising the voice."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no tones and stress in a fixed place, Chinese adds a new dimension: each syllable has one of four tones, as much part of the word as its consonants."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language is tonal, the idea is familiar; learn the four Mandarin contours and the sandhi rules (你好 ní hǎo, 不是 bú shì), which the dictionary spelling does not show."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language tells words apart by long and short sounds, note that length means nothing in Chinese — pitch does: mā, má, mǎ, mà are four words."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your language tells words apart by consonants and vowel length, Chinese does it by pitch: mā, má, mǎ, mà are four different words, while vowel length tells nothing apart."
   }
  ],
  "seeAlso": [

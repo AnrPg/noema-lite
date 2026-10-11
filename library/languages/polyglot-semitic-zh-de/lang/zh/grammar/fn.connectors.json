@@ -138,7 +138,14 @@
    "t": "callout",
    "kind": "key",
    "title": "There is no ‘that’",
-   "text": "我知道他是老师 ‘I know (that) he is a teacher’, 我觉得这个很贵 ‘I think (that) this is expensive’ — the clause follows the verb directly. (知道 ‘know’, 觉得 ‘think’ and 说 ‘say’ come later.) Don’t translate ‘that’ with 那."
+   "text": "我知道他是老师 ‘I know (that) he is a teacher’, 我觉得这个很贵 ‘I think (that) this is expensive’ — the clause follows the verb directly. (知道 ‘know’, 觉得 ‘think’ and 说 ‘say’ come later.) 那 only points (‘that one’); it never introduces a clause.",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English ‘that’ is both a pointing word (that book) and a clause opener (I know that …). Chinese 那 is only the pointing word; the clause opener has no Chinese word: 我知道他是老师."
+    }
+   ]
   },
   {
    "t": "callout",
@@ -181,7 +188,7 @@
   "*的时候我饿 → 我饿的时候 (的时候 after the clause).",
   "*就我们去 → 我们就去 (就 after the subject).",
   "*我们所以不去 → 所以我们不去 (所以 opens its clause).",
-  "*我知道那他是老师 → 我知道他是老师 (no ‘that’).",
+  "*我知道那他是老师 → 我知道他是老师 (no word introduces the clause; 那 only points).",
   "*因为很累我 → 因为我很累 (the order inside the clause stays subject – verb).",
   "虽然…但是… is right in Chinese — keep 但是 even if your language has no ‘but’ after ‘although’."
  ],
@@ -385,6 +392,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut links clauses with special verb endings for ‘when’, ‘because’ and ‘if’; Chinese uses separate words, often in pairs: 因为…所以, 如果…就."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian anche se / benché needs no ma — Chinese 虽然…但是 needs both. se, quando, perché open their clause; 的时候 closes it (我饿的时候). Italian e joins clauses, Chinese 和 does not; and che ‘that’ has no Chinese word: 我知道他是老师."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian edhe pse, nëse, kur, sepse open their clause and need no partner; Chinese pairs them (虽然…但是, 如果…就, 因为…所以) and closes the when-clause with 的时候. Albanian që / se ‘that’ (e di që është mësues) has no Chinese word: 我知道他是老师."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese embora needs no mas; Chinese 虽然…但是 needs both. se, quando, porque open their clause; 的时候 closes it (我饿的时候). Portuguese que is obligatory (sei que ele é professor); Chinese has no word for it: 我知道他是老师."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language marks a subordinate clause with one conjunction — and perhaps a special verb form or word order — Chinese often marks both halves (因为…所以, 虽然…但是, 如果…就), and the order inside each clause never changes."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language ends a ‘when’ clause with a noun or a suffix, Chinese does the same: 我饿的时候 ‘I hungry 的 time’. But ‘because’ and ‘although’ open their clause (因为…, 虽然…), and the object follows the verb."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language links clauses with paired words (‘because … so’, ‘although … but’, ‘if … then’), Chinese is familiar: 因为…所以, 虽然…但是, 如果…就. Check only ‘when’: 的时候 closes its clause."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If you link clauses with special verb endings for ‘when’, ‘if’ and ‘because’, Chinese uses separate words, often in pairs (因为…所以, 如果…就), around clauses that keep their normal order."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If every subordinate clause in your language opens with a particle (‘if’, ‘when’, ‘because’, ‘that’), note three changes: Chinese often marks both halves (如果…就, 因为…所以), closes a when-clause with 的时候, and has no word for ‘that’: 我知道他是老师."
   }
  ],
  "seeAlso": [

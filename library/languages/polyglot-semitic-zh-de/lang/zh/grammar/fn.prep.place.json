@@ -435,6 +435,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut adds case endings to the noun (illumi ‘in the house’); Chinese adds a separate place word after the noun: 房子里, 桌子上."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian sul tavolo, sotto la sedia, dietro la casa, accanto al divano put the preposition before the noun; Chinese puts the place word after it: 桌子上, 椅子下面, 房子后面, 沙发旁边. C’è un libro sul tavolo ~ 桌子上有一本书 — the place comes first."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian mbi tryezë ‘on the table’, nën karrige, prapa shtëpisë put the preposition first; Chinese puts the place word after an unchanged noun: 桌子上, 椅子下面, 房子后面. Ka një libër mbi tryezë ~ 桌子上有一本书 — Chinese starts with the place."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese em cima da mesa, debaixo da cadeira, atrás da casa put the place before the noun; Chinese puts it after: 桌子上, 椅子下面, 房子后面. na mesa covers ‘on’ and ‘in’; Chinese chooses 上 or 里."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If prepositions (with a case) come before the noun in your language, reverse the order: noun + place word (桌子上, 冰箱里), framed by 在: 书在桌子上."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "same",
+   "text": "If your language says ‘table-of top-at’ with a postposition or place noun after the noun, Chinese does the same: 桌子上, 房子前面."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your place word comes before the noun (‘on table’), Chinese turns it round: 桌子上, 房子里."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If place is a case ending on your noun, Chinese adds a separate place word after it: 房子里, 桌子上."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your ‘on’, ‘under’ and ‘behind’ are prepositions before the noun, Chinese puts the place word after it — 桌子上, 桌子下面 — with 在 in front: 在桌子上."
   }
  ],
  "seeAlso": [

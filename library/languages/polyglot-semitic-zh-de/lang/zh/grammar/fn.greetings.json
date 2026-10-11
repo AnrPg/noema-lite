@@ -411,6 +411,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut greetings are verb words with person endings (Qanuippit? ‘how are you?’); Chinese greetings are fixed formulas that never change. Qujannamiik ↔ 谢谢."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Ciao / buongiorno ↔ 你好 / 您好, and tu / Lei is the same choice as 你 / 您. But ciao is hello and goodbye — Chinese parts with 再见 (arrivederci ‘until we see each other again’ is the same picture). Per favore may close a request, 请 must open it; prego ‘you’re welcome’ ~ 不客气."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Përshëndetje / mirëdita ↔ 你好, and ti / ju is the choice of 你 / 您. Mirupafshim ‘may we see each other well’ ~ 再见 ‘again see’. Ju lutem often closes a request; 请 must open it (请坐). Mirëmbrëma greets in the evening (晚上好), natën e mirë parts (晚安)."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Olá / bom dia have no polite form; Chinese chooses 你好 or 您好, as you choose tu or o senhor. Obrigado / obrigada change with the speaker; 谢谢 never does. Boa noite greets and parts at night, but 晚安 only parts — the evening greeting is 晚上好."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your greetings change with the gender or number of the people addressed, or politeness is a verb form, Chinese has fixed formulas: the only choice is 你好 or 您好."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language builds politeness into verb forms, Chinese does it with words: 您 instead of 你, 请 before the verb, and a title after the surname (王老师)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you greet with kinship terms or titles, Chinese does too — 王老师好！ 叔叔好！ — and 你好 / 您好 are fixed formulas that never change."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your greetings are verb words with person endings, Chinese ones are fixed formulas that never change: 你好, 谢谢, 再见."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your greetings have fixed answers and change for a man or a woman, Chinese ones never change: 你好 is answered with 你好, and the only choice is 你 or 您."
   }
  ],
  "seeAlso": [

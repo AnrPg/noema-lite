@@ -480,6 +480,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut expresses qualities as verbs (‘be big’ is a verb word with a person ending) — like Chinese adjectives, which need no 是 — but builds them with suffixes; Chinese 大 is a bare word."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian adjectives need essere and agree (la casa è grande, le case sono grandi) and usually follow the noun (una casa bianca); Chinese 大 needs no verb, never changes and comes first: 房子很大, 白房子."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian adjectives follow the noun, agree and mostly take a linking article (një shtëpi e madhe ‘a big house’, shtëpia është e madhe); Chinese 大 comes first, needs no 是 and never changes: 大房子, 房子很大. The 的 of 漂亮的房间 is a linker like Albanian e, but it stands between adjective and noun in the opposite order."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese uses ser / estar + an agreeing adjective, usually after the noun (a casa é grande, uma casa branca); Chinese: 房子很大, 白房子 — no verb, no agreement, adjective first. The 很 of 房子很大 is only the link: the sentence is a plain ‘a casa é grande’, not ‘muito grande’."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your adjectives take endings for gender, number or case and need a verb ‘to be’ as a predicate, drop both habits: 大 is the same for one house or many, and 房子很大 has no verb — an unstressed 很 is the usual link (*房子是大 is the classic mistake)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your adjectives stand before the noun and never agree, Chinese works the same way (大房子). The difference is the predicate: no copula, but 很 + adjective (房子很大), and 的 after two-syllable adjectives before a noun (漂亮的房间)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If adjectives in your language already work like verbs — no copula, no agreement — Chinese is familiar: 房子很大, 不大, 大吗？ Check only the order: the adjective comes before the noun (大房子), with 的 after longer ones (漂亮的房间)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your language expresses qualities as verbs inside a long word, Chinese adjectives are verbs too (房子很大 ‘the house is-big’), but they are separate, unchanging words: negated with 不 (不大), asked with 吗."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language puts the adjective after the noun and makes it agree in gender, number and definiteness, reverse the order and drop agreement: 大房子, 那个大房子. As a predicate Chinese, like your nominal sentence, has no verb in the present — 房子很大 — but it adds 很."
   }
  ],
  "seeAlso": [

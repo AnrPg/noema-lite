@@ -394,6 +394,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks time and aspect with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate particles to an unchanged verb: 我吃了."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian ho mangiato / mangiavo split complete and ongoing in the past; Chinese 吃了 / 在吃 split them without any tense. sto mangiando ~ 我在吃; sei mai stato a Pechino? ~ 你去过北京吗？ But ieri ero a casa is 昨天我在家 — no 了."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian hëngra ‘I ate’ / haja ‘I was eating’ split complete and ongoing, and po + verb marks ‘in progress’ (po ha ‘he is eating’) — a close cousin of 在吃. But Albanian always marks tense as well; Chinese marks only aspect, and only when it matters: 吃了, 在吃, 吃过."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese comi / comia split complete and ongoing in the past; Chinese 吃了 / 在吃 do it without tense. estou a comer ‘I am at eating’ is the same picture as 我在吃 (在 ‘be at’). Careful: tenho comido is ‘I have been eating (lately)’, not 我吃过 ‘I have eaten (before)’."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your verb endings fuse tense, person and aspect, take them apart: Chinese never marks tense or person; it adds 了 (done), 过 (experienced) or 在 (in progress) only when that matters, and a time word says when."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language stacks suffixes for ‘done’, ‘ongoing’ and tense, Chinese has the same ideas as separate words — 了 and 过 after the verb, 在 before it — and no tense marker at all: 昨天我在家."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language uses particles for ‘done’, ‘ongoing’ and ‘ever’, 了, 在 and 过 are the same kind of tool. Watch the slots: 在 before the verb, 了 / 过 after it, and 了 drops after 没."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If aspect and tense are suffixes inside your verb word, Chinese takes them out: the verb stays bare, and separate words around it add ‘done’ (了), ‘ever’ (过) or ‘in progress’ (在)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your verb has two stems — a completed one with suffixes and an incomplete one with prefixes — note that 了 is not that completed stem: it says ‘done’, not ‘past’ (昨天我在家 has no 了), and it works in the future too (明天吃了饭我们走)."
   }
  ],
  "seeAlso": [

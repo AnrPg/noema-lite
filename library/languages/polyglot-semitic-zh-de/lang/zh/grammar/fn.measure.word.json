@@ -483,6 +483,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no classifiers: numbers stand with the noun, which itself shows singular, dual or plural (inuk, inuuk, inuit). Chinese never marks number on the noun, but always puts a measure word after the number."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian counts directly (tre libri) and uses measure words only for masses (una tazza di caffè ~ 一杯咖啡, un pezzo di pane ~ 一块面包). In Chinese every counted noun needs one: 三本书, 一个人."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian counts directly (tre libra) and uses measure words for masses (një filxhan kafe ~ 一杯咖啡, një copë bukë ~ 一块面包). Colloquial copë in counting (dy copë ‘two pieces’) is the nearest thing to 个; in Chinese the slot is obligatory: 两本书."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese counts directly (três livros) and uses measure words only for masses (uma chávena de café ~ 一杯咖啡, um pedaço de pão ~ 一块面包). Chinese needs one for every counted noun: 三本书."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If your language counts nouns directly and marks number or gender on them, Chinese does neither: the noun never changes, but a measure word stands between number and noun (三本书, 这张桌子). Learn each noun with its measure word, as you learn a gender."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language has an optional counting word (‘piece’) and keeps the noun singular after numbers, Chinese makes that word obligatory and specific: 一本书, 一张桌子, 一个人 — 个 is the general one."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language uses classifiers, Chinese works the same way: number / 这 / 那 + measure word + noun (两本书, 这张桌子). The individual measure words differ, so learn them with each noun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your nouns themselves show singular, dual or plural, Chinese nouns show nothing — instead a measure word follows the number: 两个人, 三本书."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your numbers agree (or disagree) with the noun’s gender and the noun goes into the dual or plural, Chinese has none of that: number + measure word + an unchanged noun — 两本书, 十本书."
   }
  ],
  "seeAlso": [

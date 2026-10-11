@@ -135,12 +135,19 @@
   {
    "t": "callout",
    "kind": "key",
-   "title": "No -er, no -est",
+   "title": "No comparative or superlative endings",
    "text": "高 · 比他高 · 更高 · 最高 — the adjective never changes. German changes the word (größer, am größten); Chinese adds a word.",
    "typology": [
     {
      "feature": "adj.comparativeForm",
      "value": "analytic"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "different",
+     "text": "English tall – taller – tallest (and good – better – best) change the word; Chinese adds a word: 高 · 更高 · 最高, 好 · 更好 · 最好."
     }
    ]
   },
@@ -413,6 +420,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut makes the comparative with a suffix inside the word, and the thing compared with takes a ‘from’ ending; Chinese uses separate words and an unchanged adjective: 比我高."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian più alto di me is analytic like Chinese (più ~ 更, il più alto ~ 最高), but di + the other thing follows the adjective; Chinese puts 比 + the other thing first: 比我高. alto come me ~ 跟我一样高."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian më i gjatë se unë ‘more tall than me’ is analytic like Chinese (më ~ 更, më i gjati ‘the tallest’ ~ 最高), but se + the other thing follows the adjective; Chinese puts 比 first: 比我高. And the Albanian adjective still agrees (më e gjatë for a woman); 高 never changes."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese mais alto do que eu is analytic (mais ~ 更, o mais alto ~ 最高), but do que + the other thing follows the adjective; Chinese: 比我高. tão alto como eu ~ 跟我一样高; melhor is irregular, 更好 is not."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language changes the adjective to compare (comparative and superlative endings, irregular forms for ‘good’), Chinese never does: 高 · 比他高 · 更高 · 最高. And the ‘than’ part comes before the adjective: 比我高."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you mark what you compare with by a case ending (‘me-from tall’) and leave the adjective unchanged, Chinese has the same order: 比我高 — 比 + the other thing, then the bare adjective; 更 and 最 stand before it."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language compares with a word after the adjective (‘tall more-than me’), Chinese turns it round: 比 + the other thing comes first and the bare adjective last (比我高); how much more follows it: 高一点."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If you build comparatives with a suffix inside the word, Chinese uses separate words: 比我高 ‘compared-with me tall’, 更高, 最高 — the adjective never changes."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language forms a comparative from the root (a special ‘bigger’ pattern) with ‘than’ after it, Chinese leaves 大 unchanged and puts 比 + the other thing first: 比我大, 最大."
   }
  ],
  "seeAlso": [
