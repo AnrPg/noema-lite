@@ -1937,7 +1937,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English gai lan is the Cantonese pronunciation.",
+     "The name gai lan on menus abroad is the Cantonese pronunciation of 芥蓝.",
      "Su Shi (苏轼) wrote about 芥蓝 during his exile in Guangdong in the 1090s."
     ],
     "pitfalls": [
@@ -1945,6 +1945,13 @@
     ],
     "subtleties": [
      "芥蓝 is the same species as broccoli and cabbage (甘蓝), Brassica oleracea."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English gai lan / kai-lan is that Cantonese pronunciation."
+     }
     ]
    }
   },
