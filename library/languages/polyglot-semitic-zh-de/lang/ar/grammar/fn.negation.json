@@ -479,6 +479,81 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut negates with a suffix inside the verb (-nngit-); Arabic puts a separate word before the verb (لَا) or uses the verb لَيْسَ."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English uses not / don’t for everything; Arabic chooses: لَا before a present verb (لَا أُحِبُّ), لَيْسَ for a sentence without a verb (لَيْسَ عِنْدِي مَاءٌ), لَمْ for the past and لَنْ for the future. There is no “do”, and “I have no water” is said by negating the sentence."
+  },
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek δεν works with every verb; Arabic chooses لَا for a present verb and لَيْسَ for a sentence without one. And Greek doubles the negation (δεν θέλω τίποτα), Arabic does not: لَا أُرِيدُ شَيْئًا."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian не works everywhere and doubles with ничего / никто (я ничего не хочу); Arabic chooses لَا, لَيْسَ, لَمْ or لَنْ, and negates once: لَا أُرِيدُ شَيْئًا. У меня нет воды is لَيْسَ عِنْدِي مَاءٌ — a negated sentence."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "French ne … pas surrounds the verb; Arabic puts one word before it and chooses it by sentence type: لَا أُحِبُّ (je n’aime pas), لَيْسَ عِنْدِي مَاءٌ (je n’ai pas d’eau). Je ne veux rien is لَا أُرِيدُ شَيْئًا, with a plain indefinite object."
+  },
+  {
+   "for": "de",
+   "rel": "trap",
+   "text": "German chooses between nicht and kein by the word negated; Arabic chooses by the sentence: لَا before a present verb, لَيْسَ without a verb (لَيْسَ عِنْدِي مَاءٌ = ich habe kein Wasser), لَمْ for the past and لَنْ for the future. There is no word for kein."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "Chinese also chooses: 不 for the present and the future, 没 for the past and for 有; Arabic chooses لَا (present), لَمْ (past), لَنْ (future) and لَيْسَ for a sentence without a verb — so 我没有水 is لَيْسَ عِنْدِي مَاءٌ."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian non works with every verb and doubles with niente / nessuno (non voglio niente); Arabic chooses لَا for a present verb and لَيْسَ without a verb, and negates once: لَا أُرِيدُ شَيْئًا."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Spanish no works with every verb and doubles with nada / nadie (no quiero nada); Arabic chooses لَا for a present verb and لَيْسَ without a verb, and negates once: لَا أُرِيدُ شَيْئًا."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian nuk works with every indicative verb and doubles with asgjë / askush (nuk dua asgjë); Arabic chooses لَا, لَيْسَ, لَمْ or لَنْ by sentence type and tense, and negates once: لَا أُرِيدُ شَيْئًا. Like mos, لَا also forbids: لَا تَذْهَبْ."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese não works with every verb and doubles with nada / ninguém (não quero nada); Arabic chooses لَا for a present verb and لَيْسَ without a verb, and negates once: لَا أُرِيدُ شَيْئًا."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If one negative word serves every sentence in your language, note that Arabic has four: لَا (present verb), لَيْسَ (no verb; it takes person endings), لَمْ + jussive (past), لَنْ + subjunctive (future)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you negate with a suffix inside the verb, Arabic uses separate words before it, chosen by tense — لَا أَشْرَبُ, لَمْ أَشْرَبْ, لَنْ أَشْرَبَ — and لَيْسَ for a sentence without a verb."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language uses different negators for “not (now)” and “not (done)”, the idea is familiar: Arabic has لَا (present), لَمْ (past), لَنْ (future) and لَيْسَ for a sentence without a verb."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If negation in your language is a suffix in the verb word, Arabic puts a separate word before the verb — or uses لَيْسَ, which itself takes person endings (لَسْتُ, لَيْسَتْ)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, negators before the verb are familiar; Arabic chooses among several — لَا, لَمْ, لَنْ — and uses the verb لَيْسَ for sentences without a verb."
   }
  ]
 }

@@ -380,6 +380,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has a question mood inside the verb; Arabic adds the word هَلْ and leaves the verb as it is."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German moves the verb first (Magst du Tee?); Arabic keeps the statement and puts هَلْ in front: هَلْ تُحِبُّ الشَّايَ؟ And بَلَى is your doch: أَلَا تُحِبُّ الشَّايَ؟ — بَلَى!"
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "Chinese 吗 at the end of a statement (你喜欢茶吗?) is the idea of هَلْ at the start: هَلْ تُحِبُّ الشَّايَ؟ — the order does not change. 还是 in a choice question is أَمْ: أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟"
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian asks with the voice alone (vuoi del tè?); Arabic adds هَلْ in front and writes ؟ at the end. The o of a choice question is أَمْ: أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟"
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Albanian a at the start of a yes/no question (a do çaj?) is exactly Arabic هَلْ: هَلْ تُرِيدُ شَايًا؟ — the statement stays as it is. And apo in a choice question is أَمْ: أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟"
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese asks with the voice alone (queres chá?); Arabic puts هَلْ in front: هَلْ تُرِيدُ شَايًا؟ The “or” of a choice question is أَمْ, not أَوْ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If you ask by intonation or by moving the verb, Arabic does neither: هَلْ in front of the unchanged statement, and ؟ at the end."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you ask with a question particle, Arabic has one too — هَلْ, at the start of the sentence instead of after a word: هَلْ تُحِبُّ الشَّايَ؟"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you ask with a particle at the end of a statement, Arabic has the same idea at the start: هَلْ + the statement; in a choice question “or” is أَمْ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If yes/no questions are a verb ending in your language, Arabic uses a separate word, هَلْ (or the prefix أَ), at the start of the sentence."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your language is Semitic, the particle هَلْ and the prefix أَ may be new — the statement itself stays as it is; بَلَى answers “yes” to a negative question."
   }
  ]
 }

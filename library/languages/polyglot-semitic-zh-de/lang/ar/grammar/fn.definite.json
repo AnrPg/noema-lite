@@ -362,6 +362,56 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no articles; Arabic marks every noun as definite (الْ) or indefinite (-un)."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German der / die / das and ein / eine change for gender and case; Arabic has one prefix for “the”, الْ, for every noun, and says “a” with the ending -un: بَيْتٌ / الْبَيْتُ. Things in general take the article: Ich mag Kaffee = أُحِبُّ الْقَهْوَةَ."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese has no articles (一个 means “one”, 这个 “this”); Arabic marks every noun as definite (الْبَيْتُ) or indefinite (بَيْتٌ). Ask: do we both know which one? Then الْ — also for things in general: 我喜欢咖啡 = أُحِبُّ الْقَهْوَةَ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian il / la and un / una become a prefix and an ending — الْبَيْتُ / بَيْتٌ — with one prefix for every gender and number. As in mi piace il caffè, things in general take the article: أُحِبُّ الْقَهْوَةَ; there is no partitive (del caffè): أُرِيدُ قَهْوَةً."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also joins the article to the noun — but at the end (shtëpia), with a form for each gender and case; Arabic puts الْ at the front, the same for every noun (الْبَيْتُ), and says “a” with the ending -un instead of një: بَيْتٌ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese o / a and um / uma become a prefix and an ending: الْبَيْتُ / بَيْتٌ. Many Portuguese words keep the Arabic article, sun letters included: azeite (الزَّيْت az-zayt), açúcar (السُّكَّر as-sukkar), arroz (الرُّزّ ar-ruzz)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has articles that change for gender and case, Arabic is simpler: one invariable prefix الْ for “the” and the ending -un for “a”; the case is in the vowel after it."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no definite article (perhaps only a definite-object ending), Arabic marks every noun — subject or object — as definite (الْ) or indefinite (-un), and things in general take الْ too."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language leaves definiteness to context, Arabic does not: every noun is الْبَيْتُ (the one we know) or بَيْتٌ (a house). General statements use الْ: أُحِبُّ الشَّايَ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language has no articles, note that Arabic marks every noun as definite (الْ) or indefinite (-un) — and before the 14 sun letters the l of الْ is not heard: الشَّقَّةُ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, a prefixed article and no separate word for “a” may be familiar; new may be the indefinite ending -un and the sun letters that swallow the l: الشَّقَّةُ (aš-šaqqa)."
   }
  ]
 }

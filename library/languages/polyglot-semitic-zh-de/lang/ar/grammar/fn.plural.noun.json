@@ -409,6 +409,61 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut also has singular, dual and plural: inuk, inuuk, inuit (one, two, several people) — like Arabic -āni for two; but Arabic plurals are often broken."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French adds a mostly silent -s (livre → livres); most Arabic plurals are broken — the inside of the word changes (كِتَاب → كُتُب) — and two of anything take the dual: كِتَابَانِ."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German also has many plural types, some with a vowel change inside (Buch → Bücher, Mann → Männer); in Arabic the inside change is the most common kind (كِتَاب → كُتُب, رَجُل → رِجَال), and there is a dual for two. Learn every noun with its plural, as in German."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns have no plural (三本书; 们 only for people); Arabic has three numbers — بَيْت, بَيْتَانِ (two houses), بُيُوت — and most plurals change the inside of the word."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian changes the final vowel (libro → libri, casa → case); most Arabic plurals change the inside of the word (كِتَاب → كُتُب), two take the dual (كِتَابَانِ), and plurals of things agree as feminine singular: هٰذِهِ الْكُتُبُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian has many plural types, including vowel changes inside the word (dash → desh, natë → net); in Arabic that is the most common kind (قَلَم → أَقْلَام, بَيْت → بُيُوت), and two take the dual: قَلَمَانِ."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese adds -s (livro → livros); most Arabic plurals are broken — a new vowel pattern inside the word (كِتَاب → كُتُب) — and two take the dual: كِتَابَانِ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your plurals are endings, the broken plural is new: the root stays and the vowels around it change (رَجُل → رِجَال); learn each noun with its plural, and use the dual (-āni) for two."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If one plural suffix serves every noun, Arabic will surprise you: three kinds of plural, most of them inside the word (بَيْت → بُيُوت), plus the dual for two."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your nouns do not mark number, Arabic marks three: one (بَيْت), two (بَيْتَانِ) and many (بُيُوت) — and the plural must be learned with each noun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language has a dual, the Arabic dual will be familiar (-āni / -ayni); the plurals are new — mostly a change inside the word: قَلَم → أَقْلَام."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, the sound masculine and feminine plural endings are familiar, and perhaps a dual; broken plurals as the main type (كِتَاب → كُتُب) are Arabic’s speciality."
   }
  ]
 }

@@ -427,6 +427,61 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut says “when” with a case ending on the time word — ullumi, today (“on the day”, locative -mi); Arabic uses the bare accusative: الْيَوْمَ, صَبَاحًا."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French lundi, mardi … are named after the Moon and the planets; Arabic numbers the days from Sunday: الْأَحَد “the one”, الِاثْنَيْن “the two”. As with lundi, “on Monday” needs no preposition (يَوْمَ الِاثْنَيْنِ), and le matin is the bare accusative صَبَاحًا."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German also says “when” with a bare case: jeden Tag, eines Tages, morgens = كُلَّ يَوْمٍ, صَبَاحًا; for am Montag Arabic has يَوْمَ الِاثْنَيْنِ — an accusative instead of am. The days are numbers from Sunday, except الْجُمُعَة and السَّبْت."
+  },
+  {
+   "for": "zh",
+   "rel": "trap",
+   "text": "Chinese also numbers the days — 星期一, 星期二 … — but from Monday; Arabic starts from Sunday: الْأَحَد (“one”) is Sunday, الِاثْنَيْن (“two”) is Monday. As with 星期一, يَوْمَ الِاثْنَيْنِ needs no preposition."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian lunedì, martedì … are named after the Moon and the planets; Arabic numbers the days from Sunday: الْأَحَد “the one”, الِاثْنَيْن “the two”. As with lunedì, “on Monday” needs no preposition: يَوْمَ الِاثْنَيْنِ."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Albanian also says “when” with a bare case form: të hënën (on Monday), natën (at night) — like يَوْمَ الِاثْنَيْنِ, لَيْلًا. The names differ: Arabic numbers the days from Sunday (الْأَحَد, “the one”)."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "Portuguese numbers the days exactly like Arabic, from Sunday: segunda-feira = الِاثْنَيْن (“two”), terça = الثُّلَاثَاء, quarta = الْأَرْبِعَاء, quinta = الْخَمِيس, sexta = الْجُمُعَة (the sixth day); sábado is السَّبْت, the same word."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language uses a bare case for “when” (on Monday, in the morning), Arabic does the same with the accusative: يَوْمَ الِاثْنَيْنِ, صَبَاحًا, لَيْلًا."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you add a locative suffix to time words, Arabic uses the accusative ending instead — صَبَاحًا (in the morning), يَوْمَ الْجُمُعَةِ (on Friday) — or فِي + genitive."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If time words simply stand at the front of the sentence without a preposition, Arabic does the same — but gives them the accusative ending: الْيَوْمَ, غَدًا, صَبَاحًا."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Learn the time words as fixed forms, most of them ending in -an (صَبَاحًا, غَدًا, دَائِمًا): the accusative used as an adverb, with no preposition."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, days named by numbers and the Sabbath are familiar; Arabic adds the accusative ending for “when”: يَوْمَ الْأَحَدِ."
   }
  ]
 }

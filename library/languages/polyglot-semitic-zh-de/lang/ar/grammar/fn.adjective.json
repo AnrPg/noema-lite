@@ -594,6 +594,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut expresses most qualities with verbs (“it is big”) that can also describe a noun; Arabic adjectives are nouns that follow and agree."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German adjectives come before the noun and change their ending by article, case, gender and number (ein großes Haus, das große Haus); Arabic adjectives follow the noun and simply copy its gender, number, case and article: بَيْتٌ كَبِيرٌ, الْبَيْتُ الْكَبِيرُ. A predicate adjective never changes in German (die Küche ist groß); in Arabic it still agrees: الْغُرْفَةُ كَبِيرَةٌ."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese puts the adjective before the noun, often with 的 (大房子, 漂亮的房间), and it never changes; Arabic puts it after the noun and makes it agree: بَيْتٌ كَبِيرٌ, غُرْفَةٌ كَبِيرَةٌ. 房子很大 (the house is big) is the verbless الْبَيْتُ كَبِيرٌ — with nothing in the place of 很."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian also puts most adjectives after the noun and makes them agree (una casa grande, le case grandi) — بَيْتٌ كَبِيرٌ; Arabic also repeats the article on the adjective (الْبَيْتُ الْكَبِيرُ, “the house the big”) and gives plurals of things a feminine singular adjective: الْبُيُوتُ كَبِيرَةٌ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian is close: the adjective follows the noun, agrees with it and takes a linking article (një shtëpi e madhe, shtëpia e madhe); Arabic instead repeats the definite article on the adjective: بَيْتٌ كَبِيرٌ / الْبَيْتُ الْكَبِيرُ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese also puts most adjectives after the noun and makes them agree (uma casa grande, casas brancas); Arabic adds case and the article on the adjective — الْبَيْتُ الْكَبِيرُ — and plurals of things take a feminine singular adjective: الْبُيُوتُ كَبِيرَةٌ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your adjectives agree with the noun in gender, number and case through endings, the Arabic adjective will feel familiar; it agrees in a fourth thing too, definiteness, and always stands after the noun."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your adjectives stand before the noun and never change, Arabic is new: the adjective follows the noun and copies its gender, number, case and article — كِتَابٌ جَدِيدٌ, الْكُتُبُ الْجَدِيدَةُ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language puts an unchanging describing word before the noun (often with a linking particle), note that Arabic puts it after the noun and makes it agree: غُرْفَةٌ صَغِيرَةٌ. An adjective without the article after a definite noun makes a sentence: الْبَيْتُ كَبِيرٌ = the house is big."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language says most qualities with verbs (“it-is-big”), think of the Arabic adjective as a noun that follows another noun and copies its endings: بَيْتٌ كَبِيرٌ, فِي الْبَيْتِ الْكَبِيرِ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the order noun + adjective and the repeated article are familiar (الْبَيْتُ الْكَبِيرُ); Arabic adds case endings and makes plurals of things agree as feminine singular."
   }
  ]
 }

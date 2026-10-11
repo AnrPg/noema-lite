@@ -377,6 +377,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and a person ending; Arabic adds nothing at all in the present."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian needs essere (sono studente) — but, as in Arabic, a bare profession takes no article: أَنَا طَالِبٌ. Arabic drops the verb in the present and uses كَانَ for the past, with the predicate in the accusative: كُنْتُ طَالِبًا."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian needs jam in every person (jam student); Arabic says nothing in the present — أَنَا طَالِبٌ — and uses كَانَ only for the past and the future, with an accusative predicate."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese chooses ser or estar (sou estudante, estou aqui); Arabic uses no verb for either in the present: أَنَا طَالِبٌ, أَنَا هُنَا. As in sou professor, a profession takes no article."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language needs a form of “be” in every present sentence, drop it in Arabic: الرَّجُلُ مُعَلِّمٌ. It comes back as كَانَ in the past, with an accusative predicate."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language makes “be” with a suffix or leaves it out, the verbless sentence is familiar; Arabic adds nothing at all in the present (أَنَا طَالِبٌ) and uses the verb كَانَ for the past."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language needs a linking word between two nouns but none before an adjective, note that Arabic needs nothing in either case: أَنَا طَالِبٌ, أَنَا مُتْعَبٌ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language turns a noun into a verb with a “be” suffix, note that Arabic adds nothing in the present: subject and predicate just stand side by side, both nominative."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the present without “be” and a past verb for “was” are familiar; only the accusative after كَانَ (كُنْتُ طَالِبًا) may be new."
   }
  ]
 }

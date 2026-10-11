@@ -594,6 +594,71 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks “to” and “from” with endings on the place (-mut, -mit); Arabic puts إِلَى and مِنْ before it."
+  },
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek πάω στο σχολείο and είμαι στο σχολείο use the same σε; Arabic separates the goal from the place — إِلَى الْمَدْرَسَةِ / فِي الْمَدْرَسَةِ — and από is مِنْ. Like πηγαίνω, ذَهَبَ covers every way of going."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French aller à l’école / être à l’école use one à; Arabic splits: إِلَى الْمَدْرَسَةِ (to) and فِي الْمَدْرَسَةِ (at); de is مِنْ, en bus is بِالْحَافِلَةِ, à pied is مَشْيًا. Unlike entrer dans, دَخَلَ takes the place directly: دَخَلَ الْبَيْتَ."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German splits gehen and fahren and shows the direction by the case (in die Stadt / in der Stadt); Arabic has one verb, ذَهَبَ, and shows the direction by the preposition: إِلَى الْمَدِينَةِ, always with the genitive. Zu Fuß is مَشْيًا, mit dem Bus بِالْحَافِلَةِ."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "Chinese 去学校 needs no preposition before the goal; Arabic does: أَذْهَبُ إِلَى الْمَدْرَسَةِ. 从…来 is مِنْ, and 坐公共汽车 is بِالْحَافِلَةِ — after the verb, not before it."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian vado a scuola / sono a scuola use one a; Arabic splits: إِلَى الْمَدْرَسَةِ (to) and فِي الْمَدْرَسَةِ (at). Da is مِنْ, in autobus is بِالْحَافِلَةِ, a piedi is مَشْيًا."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish voy a la escuela / estoy en la escuela match إِلَى / فِي; de is مِنْ, en autobús is بِالْحَافِلَةِ, a pie is مَشْيًا. Unlike entrar en, دَخَلَ takes the place directly: دَخَلَ الْبَيْتَ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian shkoj në shkollë / jam në shkollë use one në; Arabic splits: إِلَى الْمَدْرَسَةِ / فِي الْمَدْرَسَةِ. Nga is مِنْ, me autobus is بِالْحَافِلَةِ, më këmbë is مَشْيًا — and, like shkoj, ذَهَبَ covers every way of going."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese vou à escola / estou na escola match إِلَى / فِي; de is مِنْ, de autocarro is بِالْحَافِلَةِ, a pé is مَشْيًا. Arabic has one case after all of them: the genitive."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language shows “where to?” with a case, Arabic shows it with the preposition alone: إِلَى الْمَدْرَسَةِ — the noun is genitive after every preposition."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you mark to / from / by with endings on the place word, Arabic puts إِلَى, مِنْ and بِـ before it: إِلَى الْمَدْرَسَةِ, مِنَ الْعَمَلِ, بِالْقِطَارِ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language puts the place right after a verb of motion, note that Arabic needs إِلَى before the goal (أَذْهَبُ إِلَى السُّوقِ) — except after a few verbs such as دَخَلَ and غَادَرَ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks “to” and “from” with endings on the place, Arabic puts separate prepositions before it — إِلَى and مِنْ — with the genitive."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the pattern is familiar: a verb of motion + “to” / “from” / “with” before the place; Arabic uses one verb, ذَهَبَ, however you go."
   }
  ]
 }

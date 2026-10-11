@@ -471,6 +471,41 @@
    "for": "type:polysynthetic",
    "rel": "different",
    "text": "Polysynthetic languages usually put habit and duration into the verb word as suffixes; Arabic expresses them with two separate verbs, كَانَ + present."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "The imperfetto (giocavo) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two verbs, and the passato remoto / prossimo (giocai, ho giocato) matches the plain past لَعِبْتُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "The Albanian imperfect (luaja, “I was playing / I used to play”) is one word for both meanings; Arabic says it with two verbs, كَانَ + present: كُنْتُ أَلْعَبُ."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "The pretérito imperfeito (jogava) covers habit and background like كُنْتُ أَلْعَبُ, and so does estava a jogar; the pretérito perfeito (joguei) matches the plain past لَعِبْتُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has an imperfect that covers habits and background, Arabic builds the same meaning with two words: كَانَ (was) + the present, both agreeing with the subject."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you stack a habit or progressive suffix and a past suffix on one verb, Arabic spreads them over two verbs — كَانَ for the past, the present for the ongoing action: كُنَّا نُسَافِرُ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If the verb never changes and time words carry the meaning, note that Arabic changes both verbs for the person — كُنْتُ أَلْعَبُ, كَانَتْ تَلْعَبُ —; time words like دَائِمًا still help."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, “was” + a present form for habits is familiar; Arabic uses كَانَ + the prefix present, both agreeing: كُنْتُ أَلْعَبُ."
   }
  ]
 }

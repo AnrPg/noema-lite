@@ -357,6 +357,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut adds a suffix meaning “have” (-qaq-) to the noun and makes it a verb; Arabic puts the owner after a preposition: عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German haben is a verb with an accusative object (ich habe einen Bruder); Arabic has no verb: عِنْدِي أَخٌ, “at me (is) a brother” — so the brother is nominative, the past is كَانَ عِنْدِي and the negative لَيْسَ عِنْدِي."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has a verb, 有 (我有书, negated 没有); Arabic has none: عِنْدِي كِتَابٌ, “at me (is) a book”, negated with لَيْسَ — لَيْسَ عِنْدِي كِتَابٌ — and put in the past with كَانَ."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian avere is a verb with an object (ho un fratello); Arabic says عِنْدِي أَخٌ — a preposition with an ending, like da me, “at my place” — and the brother is the subject."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian kam is a verb with an object (kam një vëlla); Arabic has no verb: عِنْدِي أَخٌ, “at me (is) a brother” — so the past is كَانَ عِنْدِي and the negative لَيْسَ عِنْدِي, not a form of “have”."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese ter is a verb with an object (tenho um irmão); Arabic says عِنْدِي أَخٌ, “at me (is) a brother”: the brother is the subject, and “I had” is كَانَ عِنْدِي."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has a verb “have”, translate it with a place: عِنْدِي = “at me”; the thing owned is the subject, in the nominative, and the tense is carried by كَانَ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you say “I have” as “at me (there is)” or “my … exists”, Arabic عِنْدِي كِتَابٌ is the same idea: a preposition with a pronoun ending + the thing as the subject."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language has a verb “have” that also means “there is”, note that Arabic uses a preposition instead (عِنْدِي, لِي, مَعِي) and says “there is” differently: with هُنَاكَ or the place first."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If possession in your language is a suffix on the noun or the verb, Arabic uses a separate preposition with a pronoun ending: عِنْدِي, عِنْدَكَ, عِنْدَهُ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, “have” without a verb is familiar — a preposition with a pronoun; Arabic uses عِنْدَ most, لِي for relatives and مَعِي for what you carry."
   }
  ]
 }

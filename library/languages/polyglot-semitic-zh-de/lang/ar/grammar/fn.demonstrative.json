@@ -307,6 +307,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has many demonstratives that also say where the thing is — above, below, inside, outside; Arabic has just two distances."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German dieser / diese / dieses agree like هٰذَا / هٰذِهِ; but Arabic adds the article after the demonstrative — هٰذَا الْبَيْتُ, “this the house” — and without it the words form a sentence: هٰذَا بَيْتٌ = das ist ein Haus. Plurals of things take هٰذِهِ."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "Chinese also has two distances, 这 and 那, but they never change and need a measure word (这本书); Arabic هٰذَا / هٰذِهِ agree in gender — and هٰذَا الْكِتَابُ (this book) needs the article."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian also has two distances, questo and quello, which agree in gender and number; Arabic adds the article after them (هٰذَا الْكِتَابُ, “this the book”) and uses the feminine singular for plurals of things: هٰذِهِ الْكُتُبُ."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian ky libër has no article on the noun; Arabic needs it — هٰذَا الْكِتَابُ —, because هٰذَا كِتَابٌ means “this is a book”. Like ky / kjo, هٰذَا / هٰذِهِ agree in gender."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has three distances (este, esse, aquele); Arabic has two: هٰذَا near, ذٰلِكَ far. And Arabic adds the article: هٰذَا الْبَيْتُ = esta casa, but هٰذَا بَيْتٌ = isto é uma casa."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your demonstratives agree in gender and number, Arabic is familiar; add the article after them (هٰذَا الْبَيْتُ) and use the feminine singular for plurals of things."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your demonstratives never change, Arabic ones do: هٰذَا (m.), هٰذِهِ (f.), هٰؤُلَاءِ (people in the plural) — and ذٰلِكَ / تِلْكَ / أُولٰئِكَ for “that, those”."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you say “this” with a measure word and no article, note that Arabic uses the article instead: هٰذَا الْكِتَابُ = this book; without it, هٰذَا كِتَابٌ = this is a book."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your demonstratives also say where something is (above, below, inside), note that Arabic has just two distances — هٰذَا near, ذٰلِكَ far — that agree with the noun."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, demonstratives that agree in gender and the article on the noun are familiar; Arabic puts the demonstrative first: هٰذَا الْبَيْتُ."
   }
  ]
 }

@@ -571,6 +571,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut “first” is sivulliq, “the one in front”, a word of its own; Arabic “first”, أَوَّل, is also not built from “one”, while 3rd–10th follow one pattern (ثَالِث … عَاشِر)."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian ordinals agree (il terzo giorno, la terza ora), but dates use cardinals except the first (il cinque maggio, il primo maggio) and the clock says alle tre; Arabic uses ordinals for both: الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian ordinals agree like adjectives (dita e tretë), but dates and the clock use cardinals (më pesë maj, ora tre); Arabic uses ordinals for both: الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese ordinals agree (o terceiro dia, a terceira hora), but dates and the clock use cardinals (cinco de maio, às três); Arabic uses ordinals: الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your ordinals are adjectives that agree, Arabic ones do too (الْيَوْمُ الثَّالِثُ / السَّاعَةُ الثَّالِثَةُ) — built from the root of the number on one pattern, فَاعِل."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you form ordinals with one suffix, Arabic uses one pattern instead: the root of the number in فَاعِل — ثَلَاثَة → ثَالِث, خَمْسَة → خَامِس — and the ordinal agrees with the noun."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you make ordinals with a word before the number, note that Arabic changes the number’s shape (ثَالِث, رَابِع) and puts it after the noun as an agreeing adjective."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Learn the pattern فَاعِل on the number root (ثَالِث “third”), the special أَوَّل “first”, and the use of ordinals for dates and the clock: السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, ordinals built from the number root are familiar; Arabic also uses them for dates and the clock: الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الْخَامِسَةُ."
   }
  ]
 }
