@@ -7,24 +7,24 @@
  "coverage": {
   "1": {
    "total": 35228,
-   "done": 31402,
-   "stale": 164,
-   "missing": 3662
+   "done": 32328,
+   "stale": 145,
+   "missing": 2755
   },
   "2": {
    "total": 43782,
-   "done": 40658,
-   "stale": 996,
-   "missing": 2128
+   "done": 41181,
+   "stale": 884,
+   "missing": 1717
   },
   "3": {
    "total": 17999,
-   "done": 9270,
-   "stale": 410,
-   "missing": 8319
+   "done": 11671,
+   "stale": 293,
+   "missing": 6035
   }
  },
- "built": "2026-10-11T15:54:58Z",
+ "built": "2026-10-11T16:29:54Z",
  "files": [
   "_phenomena/facades/el/ar.json",
   "_phenomena/facades/el/de.json",
