@@ -15,10 +15,12 @@ node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
 python3 "$ROOT/tests/validate_visual.py"
+python3 "$ROOT/tests/validate_pack_i18n.py"   # packs in several languages: subject.i18n, translated chapters (docs/i18n.md §10)
 (cd "$T" && python3 tests/package_sources.py)
 node "$ROOT/tests/connector.js" "$T"
 node "$ROOT/tests/visual_pack.js" "$T"
 node "$ROOT/tests/sharing.js" "$T"
+node "$ROOT/tests/pack_i18n.js" "$T"   # packs in several languages: picker, Shelf, Explore, home, translated chapters (docs/i18n.md §10)
 node "$ROOT/tests/claude_api.js" "$T"
 node "$ROOT/tests/imglib.js" "$ROOT"
 node "$ROOT/tests/curriculum.js" "$T"

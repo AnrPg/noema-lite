@@ -78,6 +78,36 @@ def fill_card_ids(c):
         f['id'] = cand; used.add(cand)
     return c
 
+# ---------------- subject packs in several languages (tools/CONTENT_SPEC.md, docs/i18n.md §10) ----------------
+def load_translations(sdir, chapters):
+    """translations/<locale>/chNN.json → {locale: [chapters]}: each file is a whole chapter in that language with the SAME
+    ids as the built chapter (base + patches). The source chapter's `src` (and every item's `src`) is copied over, so the
+    source filter and "what's new" work the same in every language; flashcards get their ids like the source's."""
+    out = {}
+    base = {c['id']: c for c in chapters}
+    for d in sorted(glob.glob(os.path.join(sdir, 'translations', '*'))):
+        if not os.path.isdir(d): continue
+        chs = []
+        for f in sorted(glob.glob(os.path.join(d, 'ch*.json'))):
+            c = fill_card_ids(rj(f)); b = base.get(c.get('id'))
+            if b:
+                if b.get('src') is not None: c['src'] = b['src']
+                for k in ('exercises', 'flashcards', 'debug', 'pitfalls'):
+                    srcs = {x.get('id'): x['src'] for x in b.get(k, []) if x.get('id') and x.get('src') is not None}
+                    for x in c.get(k, []):
+                        if x.get('id') in srcs: x['src'] = srcs[x['id']]
+            chs.append(c)
+        if chs: out[os.path.basename(d)] = chs
+    return out
+
+def pack_i18n(pack, translations):
+    """Pack schema v2 (additive): a pack that offers other languages (subject.i18n or translations) says "v": 2 and
+    carries "translations": {locale: {"chapters": [...]}}; old apps read it as before (they ignore the new fields).
+    Returns what the content hash adds for the translations (None when there are none, so older hashes stay the same)."""
+    if translations: pack['translations'] = {loc: {'chapters': chs} for loc, chs in translations.items()}
+    if translations or (pack.get('subject') or {}).get('i18n'): pack['v'] = 2
+    return translations or None
+
 def content_hash(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]
 

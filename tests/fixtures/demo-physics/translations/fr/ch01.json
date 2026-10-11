@@ -1,0 +1,336 @@
+{
+ "id": "ch01",
+ "num": 1,
+ "title": "Énergie",
+ "subtitle": "Énergie cinétique",
+ "emoji": "⚡",
+ "sourcePages": "1",
+ "mantra": "L’énergie cinétique vaut $\\tfrac12 mv^2$.",
+ "objectives": [
+  "Calculer une énergie cinétique"
+ ],
+ "sections": [
+  {
+   "id": "ch01-s01",
+   "title": "Énergie cinétique",
+   "hook": "Pourquoi $v^2$ ?",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "L’énergie cinétique vaut $E_k = \\tfrac{1}{2} m v^2$."
+    },
+    {
+     "t": "p",
+     "text": "En display : $$E = mc^2$$"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Unités",
+     "text": "Joule = $\\mathrm{kg\\,m^2/s^2}$"
+    },
+    {
+     "t": "figure",
+     "media": "power-station"
+    },
+    {
+     "t": "figure",
+     "media": "ek-graph"
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch01-d01",
+   "title": "L’énergie n’est pas conservée ?",
+   "section": "ch01-s01",
+   "symptom": "L’énergie mesurée diminue.",
+   "askYourself": [
+    "Y a-t-il du frottement ?",
+    "Le système est-il fermé ?",
+    "Les unités sont-elles cohérentes ?"
+   ],
+   "steps": [
+    {
+     "do": "Vérifier le frottement",
+     "why": "Perte de chaleur"
+    }
+   ],
+   "rootCauses": [
+    "Frottement"
+   ],
+   "fix": "Tenir compte de la chaleur."
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Vitesse au carré",
+   "text": "Doubler $v$ quadruple $E_k$.",
+   "fix": "Élève-la au carré."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "Formule de $E_k$ ?",
+   "a": "$\\tfrac12 mv^2$",
+   "section": "ch01-s01"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch01-e001",
+   "type": "calc",
+   "section": "ch01-s01",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "$m=2$ kg, $v=3$ m/s. $E_k$ en J ?",
+   "answer": 9,
+   "tolerance": 0,
+   "unit": "J",
+   "explain": "$\\tfrac12\\cdot 2\\cdot 9 = 9$"
+  },
+  {
+   "id": "ch01-e002",
+   "type": "tf",
+   "section": "ch01-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Doubler $v$ double $E_k$.",
+   "answer": false,
+   "explain": "Elle quadruple."
+  },
+  {
+   "id": "ch01-e003",
+   "type": "mcq",
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "q": "Unité de l’énergie ?",
+   "options": [
+    "J",
+    "W",
+    "N"
+   ],
+   "answer": 0,
+   "explain": "Le joule."
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e101",
+   "type": "img_hotspot",
+   "q": "Où l’**énergie chimique** devient-elle chaleur ?",
+   "answer": [
+    "boiler"
+   ],
+   "why": {
+    "turbine": "La turbine transforme la pression de la vapeur en rotation — la chaleur a été produite avant."
+   },
+   "explain": "La **chaudière** brûle le combustible.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e102",
+   "type": "img_hotspot",
+   "q": "Touche **les deux** formes rondes ou inclinées : le soleil et la tour de refroidissement.",
+   "answer": [
+    "sun",
+    "tower"
+   ],
+   "explain": "Régions cercle + polygone.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e103",
+   "type": "img_sequence",
+   "q": "Suis l’énergie du combustible jusqu’au réseau.",
+   "targets": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator",
+    "grid"
+   ],
+   "answer": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator",
+    "grid"
+   ],
+   "explain": "Combustible → chaudière → turbine → générateur → réseau.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e104",
+   "type": "img_drag",
+   "q": "Fais glisser les étiquettes sur la centrale.",
+   "targets": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator"
+   ],
+   "distractors": [
+    "Transformateur"
+   ],
+   "explain": "Chimique → chaleur → rotation → électricité.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e105",
+   "type": "img_label",
+   "q": "Nomme les quatre étapes.",
+   "targets": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator"
+   ],
+   "explain": "Les fautes de frappe sont tolérées.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e106",
+   "type": "img_select",
+   "q": "Choisis les noms.",
+   "targets": [
+    "boiler",
+    "turbine",
+    "grid"
+   ],
+   "distractors": [
+    "Réacteur"
+   ],
+   "explain": "Listes déroulantes.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e107",
+   "type": "img_occlusion",
+   "q": "Rappelle-toi les parties.",
+   "targets": [
+    "generator",
+    "tower"
+   ],
+   "explain": "Auto-évaluation.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e108",
+   "type": "img_reveal",
+   "q": "Que montre cette image ?",
+   "grid": [
+    3,
+    2
+   ],
+   "options": [
+    "Une centrale électrique",
+    "Un moteur de voiture",
+    "Un cœur"
+   ],
+   "answer": 0,
+   "explain": "Des cases du combustible au réseau.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "media": "ek-graph",
+   "id": "ch01-e109",
+   "type": "img_hotspot",
+   "q": "Touche la courbe qui **quadruple** quand la vitesse double.",
+   "answer": [
+    "ek"
+   ],
+   "why": {
+    "mom": "La quantité de mouvement est linéaire en v : doubler v double p."
+   },
+   "explain": "Eₖ ∝ v²."
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "media": "ek-graph",
+   "id": "ch01-e110",
+   "type": "img_drag",
+   "q": "Quelle courbe est laquelle ?",
+   "targets": [
+    "ek",
+    "mom"
+   ],
+   "distractors": [
+    "Énergie potentielle (J)"
+   ],
+   "explain": "Parabole = énergie, droite = quantité de mouvement."
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "media": "ek-graph",
+   "id": "ch01-e111",
+   "type": "img_hotspot",
+   "q": "Touche le point où la balle a **9 J**.",
+   "answer": [
+    "v3"
+   ],
+   "explain": "½·2·3² = 9 J."
+  }
+ ]
+}

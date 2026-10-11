@@ -178,6 +178,19 @@ the existing sources keep the files the learner already has, and only NEW source
 by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks` / `appendExercises`
 (reserve a fresh id range, e.g. `chNN-e7NN`), register the new source in `sources.json` (its file in `work/<id>/sources/`), rebuild, save.
 
+## Translations (optional — only when the user asks)
+A pack is written in one language (`subject.language`). It may also offer other languages; a learner whose app speaks
+one of them sees it, everyone else sees the original with a small language tag. Never required, never invented unasked.
+- **Name and description**: in `subject.json` add `"i18n": { "el": { "title": "…", "description": "…" } }` (also
+  `appTitle`, `searchExamples`, `hero`, `tutor` — only fields the subject has). Locale codes: `el ru fr de it es-ES pt-PT sq
+  tr ar-EG hi ja zh-Hans zh-Hant en` or a bare language (`es`, `pt`).
+- **Chapters**: `translations/<locale>/chNN.json` = the whole chapter (as built: base + patches) translated, with the
+  SAME ids, sections, blocks, exercises, cards, playbooks, pitfalls and answers — only the words change. Translate
+  naturally for learners of that language, keep `$…$` math and code unchanged. A chapter you do not translate stays in
+  the original language. Updating a translated pack: add the new items to every translation too.
+- `make_pack.py` validates both (same ids/structure/answers) and builds the pack with `"v": 2`; `unpack.py` gives the
+  translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".
+
 ## Quality bar (check before saving)
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.
 - Pictures: three kinds used, each verified, licensed, sharp, ≥ 3 exercises each.
