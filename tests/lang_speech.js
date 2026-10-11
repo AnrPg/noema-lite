@@ -240,6 +240,18 @@ let BROWSER = null;
   const shownAr = await page.locator('.lx-lemma .lx-w').first().innerText(), arLemma = await page.evaluate(id => NoemaLangUI.UI.C.lang.ar.lex[id].lemma, arW);
   await page.click('.lx-lemma .lx-spk'); await wait(100); sp = (await spoken()).pop();
   ok(nfc(shownAr) !== nfc(arLemma) && sp.text === nfc(arLemma) && sp.lang === 'ar-SA' && sp.voice === 'Maged', 'Arabic shown without vowel marks, sent to the voice as written (with them)');
+  // every click speaks (not only the first), a 🔊 that was re-drawn or moved still speaks, and a click while speaking is not lost
+  { const n1 = (await spoken()).length;
+    for (let i = 0; i < 3; i++) { await page.click('.lx-lemma .lx-spk'); await wait(60); }
+    const n2 = (await spoken()).length;
+    await page.evaluate(() => { const b = document.querySelector('.lx-lemma .lx-spk'), c = b.cloneNode(true); b.replaceWith(c); });
+    await page.click('.lx-lemma .lx-spk'); await wait(60);
+    const n3 = (await spoken()).length;
+    await page.evaluate(() => { window.__cancels = 0; const S = window.speechSynthesis; S.speaking = true; S.cancel = () => { window.__cancels++; S.speaking = false; }; });
+    await page.click('.lx-lemma .lx-spk'); await wait(20);
+    const early = (await spoken()).length; await wait(150);
+    const n4 = (await spoken()).length, cancels = await page.evaluate(() => window.__cancels);
+    ok(n2 - n1 === 3 && n3 - n2 === 1 && early === n3 && n4 - n3 === 1 && cancels === 1, `🔊 speaks on every click (${n2 - n1} of 3), also when re-drawn (${n3 - n2}), and while speaking it stops the voice first, then speaks (${n4 - n3}, cancel ${cancels})`); }
   await page.evaluate(() => { NoemaLangUI.UI.prefs.markLevel = {}; NoemaLangUI.save(true); });
   // Hebrew: no voice → said once
   const heW = await page.evaluate(() => Object.keys(NoemaLangUI.UI.L.langs.he.items)[0]);

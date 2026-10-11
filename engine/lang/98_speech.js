@@ -43,25 +43,37 @@ function noVoice(c) {
   if (SP.warned[c]) return; SP.warned[c] = true;
   toast(`🔇 No ${langLabel(c)} voice on this device — add one in the system's speech settings, then reload.`);
 }
-/** Speak a stored text in language c → Promise<boolean> (false: no voice / no speech synthesis). */
-async function say(c, text, { slow = false } = {}) {
-  if (!synthOK() || !text) { noVoice(c); return false; }
-  if (!SP.voices.length) await loadVoices();
-  const v = voiceOf(c); if (!v) { noVoice(c); return false; }
-  try { speechSynthesis.cancel(); } catch (e) { }
+/** Speak a stored text in language c → Promise<boolean> (false: no voice / no speech synthesis).
+    Robust against the browsers' known traps: speak() is called inside the click (Safari drops speech started after an await),
+    the utterance is kept referenced until it ends (Chrome stops firing events and goes silent when it is garbage-collected),
+    a stuck or paused queue is resumed, and speak() never follows cancel() in the same tick (Chrome then drops the new one). */
+function say(c, text, { slow = false } = {}) {
+  if (!synthOK() || !text) { noVoice(c); return Promise.resolve(false); }
+  if (!SP.voices.length) refreshVoices();
+  const v = SP.voices.length ? voiceOf(c) : null;
+  if (SP.voices.length && !v) { noVoice(c); return Promise.resolve(false); }
   const u = new SpeechSynthesisUtterance(UI.C?.lang[c] ? N.speechText(UI.C, c, text) : String(text));
-  u.lang = tagOf(c); u.voice = v; u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  u.lang = tagOf(c); if (v) u.voice = v;   // voices not listed yet (first click on some browsers): the engine picks one for the language
+  u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
   return new Promise(res => {
-    let over = false; const end = ok => { if (!over) { over = true; res(ok); } };
-    u.onend = () => end(true); u.onerror = () => end(false);
-    try { speechSynthesis.speak(u); } catch (e) { end(false); }
-    setTimeout(() => end(true), 2500 + String(text).length * 180);   // some engines never fire 'end'
+    let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
+    u.onend = () => end(true); u.onerror = e => end(e && (e.error === 'interrupted' || e.error === 'canceled'));
+    SP.utter = u;   // keep it alive until it ends
+    const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
+    let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }
+    if (busy) { try { speechSynthesis.cancel(); } catch (e) { } setTimeout(go, 80); } else go();
+    setTimeout(() => end(true), 4000 + String(text).length * 180);   // some engines never fire 'end'
+    if (!SP.voices.length) loadVoices();   // for the next time
   });
 }
-function speakerBtn(c, text) {
-  return h('button', { type: 'button', class: 'lx-spk', 'data-lang': c, 'aria-label': `Listen (${langLabel(c)})`, title: `Listen (${langLabel(c)})`,
-    onclick: e => { e.stopPropagation(); e.preventDefault(); say(c, text); } });   // the icon comes from the CSS (::before): the text of what it follows stays the same
+function speakerBtn(c, text) {   // the click is handled once for the whole page (below), so a 🔊 always works, even re-drawn or moved
+  return h('button', { type: 'button', class: 'lx-spk', 'data-lang': c, 'data-text': text, 'aria-label': `Listen (${langLabel(c)})`, title: `Listen (${langLabel(c)})` });   // the icon comes from the CSS (::before): the text of what it follows stays the same
 }
+document.addEventListener('click', e => {
+  const b = e.target.closest?.('.lx-spk'); if (!b) return;
+  e.stopPropagation(); e.preventDefault();
+  say(b.dataset.lang, b.dataset.text);
+}, true);
 
 /* ---------- 🔊 everywhere: the texts get data-say (the stored text, not the faded display); a watcher adds the buttons ---------- */
 {
