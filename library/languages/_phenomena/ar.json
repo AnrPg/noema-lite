@@ -270,7 +270,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.04"
+   "when": "fd.04",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese writes a doubled consonant with a small っ before it (きって); Arabic writes the consonant once with the šadda above it: دَرَّسَ."
+    }
+   ]
   },
   {
    "id": "ar.orth.tanwin_alif",
@@ -1639,7 +1646,39 @@
    },
    "status": "partial",
    "gap": "JUS and SBJV cells are stored only on the verbs of cr.01–cr.03 (paradigmCells.VERB does not require them, so older verbs lack them); no moods function of its own; the prohibitive لَا + jussive is not linked to fn.imperative.",
-   "when": "cr.01"
+   "when": "cr.01",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek να + subjunctive (θέλω να γράψει) matches أَنْ + subjunctive (أُرِيدُ أَنْ يَكْتُبَ); the jussive after لَمْ has no Greek counterpart."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "French que + subjunctive (je veux qu’il écrive) matches أَنْ + subjunctive only in part; the jussive after لَمْ has no French counterpart."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish que + subjunctive (quiero que escriba) matches أَنْ + subjunctive only in part; the jussive after لَمْ has no Spanish counterpart."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "Italian che + subjunctive (voglio che scriva) matches أَنْ + subjunctive only in part; the jussive after لَمْ has no Italian counterpart."
+    },
+    {
+     "for": "pt",
+     "rel": "similar",
+     "text": "Portuguese que + subjunctive (quero que escreva) matches أَنْ + subjunctive only in part; the jussive after لَمْ has no Portuguese counterpart."
+    },
+    {
+     "for": "sq",
+     "rel": "similar",
+     "text": "Albanian të + subjunctive (dua të shkruajë) matches أَنْ + subjunctive (أُرِيدُ أَنْ يَكْتُبَ); the jussive after لَمْ has no Albanian counterpart."
+    }
+   ]
   },
   {
    "id": "ar.morph.verb.agreement",
@@ -2647,7 +2686,7 @@
      "value": "suffix"
     }
    ],
-   "what": "'The' is the prefix al- written on the word; 'a' is the tanwīn ending. Definiteness is also given by a possessive suffix or a definite second noun of a construct, and is an agreement feature of the adjective.",
+   "what": "The definite article is the prefix al- written on the word; the indefinite is the tanwīn ending. Definiteness is also given by a possessive suffix or a definite second noun of a construct, and is an agreement feature of the adjective.",
    "examples": [
     {
      "text": "بَيْتٌ / الْبَيْتُ",
@@ -2657,7 +2696,7 @@
     {
      "text": "أُحِبُّ الْقَهْوَةَ",
      "translit": "ʾuḥibbu l-qahwata",
-     "note": "I like coffee — generic statements use al-, as in Greek"
+     "note": "I like coffee — generic statements use al-"
     }
    ],
    "level": "word",
@@ -2679,7 +2718,24 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.04"
+   "when": "fd.04",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "As in Greek μου αρέσει ο καφές, things in general take the article: أُحِبُّ الْقَهْوَةَ."
+    },
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English “I like coffee” has no article; Arabic needs one for things in general: أُحِبُّ الْقَهْوَةَ."
+    },
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "As in j’aime le café, things in general take the article: أُحِبُّ الْقَهْوَةَ."
+    }
+   ]
   },
   {
    "id": "ar.morph.construct",
@@ -2991,7 +3047,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.01"
+   "when": "fd.01",
+   "notes": [
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish has gender in “you” and “they” only in the plural (vosotros / vosotras, ellos / ellas); a gendered singular “you” (أَنْتَ / أَنْتِ) is new."
+    }
+   ]
   },
   {
    "id": "ar.morph.adj.agreement",
@@ -3051,7 +3114,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.16"
+   "when": "fd.16",
+   "notes": [
+    {
+     "for": "sq",
+     "rel": "similar",
+     "text": "Albanian adjectives also follow the noun and agree in gender, number and case, but definiteness is shown by the linking article, not by repeating the article: shtëpia e madhe = الْبَيْتُ الْكَبِيرُ."
+    }
+   ]
   },
   {
    "id": "ar.morph.adj.elative",
@@ -3480,7 +3550,14 @@
    },
    "status": "partial",
    "gap": "Ordinals above ten (الْحَادِيَ عَشَرَ …) are not lexemes; the clock and date exercises of §6.5 are not implemented (the lesson uses bank sentences, transforms and a quiz).",
-   "when": "cr.04"
+   "when": "cr.04",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Russian пятый час means the hour in progress (after four); Arabic السَّاعَةُ الْخَامِسَةُ is five o’clock exactly."
+    }
+   ]
   },
   {
    "id": "ar.syn.nominal_sentence",
@@ -3741,7 +3818,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.08"
+   "when": "fd.08",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Russian puts the predicate of был / стал in the instrumental (был учителем); Arabic puts it in the accusative after كَانَ and لَيْسَ: كَانَ مُعَلِّمًا."
+    }
+   ]
   },
   {
    "id": "ar.syn.inna_sisters",
@@ -3922,7 +4006,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.09"
+   "when": "fd.09",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "French si answers a negative question like بَلَى: tu n’aimes pas le thé ? — Si !"
+    }
+   ]
   },
   {
    "id": "ar.syn.idafa_adjective",
@@ -4058,7 +4149,14 @@
    },
    "status": "missing",
    "gap": "A function after the past (core grammar).",
-   "when": "later"
+   "when": "later",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Russian depictives in the instrumental (пришёл усталым) are a partial parallel of جَاءَ مُتْعَبًا."
+    }
+   ]
   },
   {
    "id": "ar.syn.relative",
@@ -4198,7 +4296,14 @@
    },
    "status": "partial",
    "gap": "يُوجَدُ is not in the lexicon; 'there is' is only a sense of هُنَاكَ.",
-   "when": "fd.12"
+   "when": "fd.12",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "Russian also puts the place first before an indefinite subject: в доме есть книга = فِي الْبَيْتِ كِتَابٌ."
+    }
+   ]
   },
   {
    "id": "ar.syn.possession",
@@ -4449,7 +4554,14 @@
    },
    "status": "partial",
    "gap": "The forms of one formula are not linked to each other; the plural forms (كَيْفَ حَالُكُمْ) are not lexemes.",
-   "when": "fd.02"
+   "when": "fd.02",
+   "notes": [
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish adjectives in formulas also agree with the speaker or listener (encantado / encantada), but the singular “you” has no gender."
+    }
+   ]
   },
   {
    "id": "ar.prag.no_tv",
@@ -4702,7 +4814,7 @@
    "specific": true,
    "alsoIn": [],
    "alsoNote": "Which loans a learner already knows is computed from the bridges, not from the tags. Hebrew also fits loans into its patterns (לְסַמֵּס).",
-   "what": "Arabic has old loans from Greek, Persian and Aramaic and newer ones from Italian, French and English, usually fitted into Arabic patterns (often with a broken plural: فِيلْم → أَفْلَام). It has lent words to many languages — Persian, Turkish, Urdu, Swahili, Malay, Spanish and, through them, much of Europe (sugar, coffee, algebra); the app shows the bridges that matter for each learner's languages.",
+   "what": "Arabic has old loans from Greek, Persian and Aramaic and newer ones from Italian, French and English, usually fitted into Arabic patterns (often with a broken plural: فِيلْم → أَفْلَام). It has lent words to many languages, near and far; the app shows the bridges that matter for each learner's languages.",
    "examples": [
     {
      "text": "قَلَم",
@@ -4717,7 +4829,7 @@
     {
      "text": "كِتَاب",
      "translit": "kitāb",
-     "note": "book — Turkish kitap"
+     "note": "book — lent to many languages"
     }
    ],
    "level": "word",
@@ -4735,7 +4847,59 @@
    },
    "status": "partial",
    "gap": "bridges.json with cognates/loans and the cognate_bridge / etymology_link exercises (P6).",
-   "when": "later"
+   "when": "later",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "English took many words from or through Arabic: sugar (سُكَّر), coffee (قَهْوَة), algebra (الْجَبْر), alcohol, cotton (قُطْن), magazine (مَخَازِن), zero (صِفْر)."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish has thousands of Arabic words, often with the article: aceite (الزَّيْت), azúcar (السُّكَّر), almacén (الْمَخْزَن), aldea (الضَّيْعَة), hasta (حَتَّى), ojalá (لَوْ شَاءَ اللّٰهُ)."
+    },
+    {
+     "for": "pt",
+     "rel": "similar",
+     "text": "Portuguese has many Arabic words, often with the article: azeite (الزَّيْت), arroz (الرُّزّ), armazém (الْمَخْزَن), aldeia (الضَّيْعَة), até (حَتَّى), oxalá (لَوْ شَاءَ اللّٰهُ)."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "French took words from Arabic directly and through Italian and Spanish: sucre, café, coton, magasin (مَخَازِن), chiffre and zéro (صِفْر), and familiar ones such as toubib (طَبِيب) and kif-kif."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "Italian took many words from Arabic through trade and Sicily: zucchero (سُكَّر), magazzino (مَخَازِن), dogana (دِيوَان), arancia (نَارَنْج), zero and cifra (صِفْر)."
+    },
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek took Arabic words mostly through Turkish: χαΐρι (خَيْر), κέφι (كَيْف), φλιτζάνι (فِنْجَان), μαχαλάς (مَحَلَّة); and Arabic took many from Greek: قَلَم (κάλαμος), فُنْدُق (πανδοκεῖον)."
+    },
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Russian has Arabic words that came through Turkic languages, Persian or Europe: кофе, сахар, магазин (مَخَازِن), алгебра (الْجَبْر), кайф (كَيْف)."
+    },
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Hindi took thousands of Arabic words through Persian: किताब (كِتَاب), क़लम (قَلَم), दुनिया (دُنْيَا), हाल (حَال), हक़ (حَقّ), शुक्रिया (شُكْر)."
+    },
+    {
+     "for": "sq",
+     "rel": "similar",
+     "text": "Albanian took many Arabic words through Turkish: dyqan (دُكَّان), hesap (حِسَاب), kismet (قِسْمَة), qejf (كَيْف), sahan (صَحْن), filxhan (فِنْجَان)."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish kitap is this word."
+    }
+   ]
   },
   {
    "id": "ar.lex.false_friends",
@@ -4759,12 +4923,12 @@
     {
      "text": "خَالَة",
      "translit": "ḫāla",
-     "note": "mother's sister — Turkish hala = father's sister"
+     "note": "mother's sister — the father's sister is عَمَّة"
     },
     {
      "text": "مَخْزَن → مَخَازِن",
      "translit": "maḫzan → maḫāzin",
-     "note": "storehouse(s) — source of 'magazine'"
+     "note": "storehouse(s) — a plural that travelled into many European languages"
     }
    ],
    "level": "word",
@@ -4780,7 +4944,49 @@
    },
    "status": "missing",
    "gap": "bridges.json entries with kind falseFriend.",
-   "when": "later"
+   "when": "later",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "trap",
+     "text": "False friend: Turkish hala (the father's sister) comes from خَالَة, but in Arabic خَالَة is the mother's sister (Turkish teyze)."
+    },
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English magazine comes from مَخَازِن (storehouses) — through Italian magazzino; the Arabic word never means a periodical."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "French magasin (a shop) comes from مَخَازِن (storehouses); in Arabic a shop is مَحَلّ or دُكَّان."
+    },
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Russian магазин (a shop) comes from مَخَازِن (storehouses); in Arabic a shop is مَحَلّ or دُكَّان."
+    },
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "Greek μαγαζί (a shop) goes back to مَخَازِن (storehouses); in Arabic a shop is مَحَلّ or دُكَّان."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish almacén keeps the Arabic article: الْمَخْزَن, the storehouse."
+    },
+    {
+     "for": "pt",
+     "rel": "similar",
+     "text": "Portuguese armazém keeps the Arabic article: الْمَخْزَن, the storehouse."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "Italian magazzino (warehouse) is the Arabic plural مَخَازِن."
+    }
+   ]
   },
   {
    "id": "ar.cult.calendar_week",
@@ -10706,7 +10912,7 @@
   {
    "concept": "adv.usedto",
    "kind": "lacks",
-   "note": "No word for “used to”: كَانَ + present (كُنْتُ أَلْعَبُ)."
+   "note": "No separate word for a past habit: كَانَ + present (كُنْتُ أَلْعَبُ)."
   },
   {
    "concept": "verb.leavehome / verb.comehome",
