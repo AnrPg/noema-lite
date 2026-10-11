@@ -1398,7 +1398,7 @@
      }
     ],
     "etymology": {
-     "text": "奶 ‘milk’ + 酪 ‘curd, fermented milk product’ (酉 ‘fermented drink’ + phonetic 各). Pulleyblank compared 酪 with Mongolian айраг and Turkish ayran.",
+     "text": "奶 ‘milk’ + 酪 ‘curd, fermented milk product’ (酉 ‘fermented drink’ + phonetic 各). Pulleyblank compared 酪 with the steppe words for fermented milk (Mongolian айраг).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1411,6 +1411,13 @@
     ],
     "subtleties": [
      "Pieces take 块 (一块奶酪); slices take 片 (一片奶酪)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Pulleyblank compared 酪 with Turkish *ayran*: both may go back to the dairy words of the steppe."
+     }
     ]
    }
   },

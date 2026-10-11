@@ -539,7 +539,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "黑 is related to 墨 ‘ink’ — and 黑客 ‘hacker’ was made to sound like the English word while meaning ‘dark guest’."
+     "黑 is related to 墨 ‘ink’ — and 黑客 hēikè ‘hacker’ imitates the sound of the foreign word while meaning ‘dark guest’."
     ],
     "pitfalls": [
      "Darkness is 黑 (外面很黑 ‘it’s dark outside’), but a dark COLOUR is 深:\n→ 深蓝色 ‘dark blue’, never *黑蓝色."
@@ -547,6 +547,13 @@
     "subtleties": [
      "天黑了 ‘it has got dark’ — 了 for the change (S14).",
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "黑客 hēikè imitates the sound of English *hacker* while meaning ‘dark guest’."
+     }
     ]
    },
    "features": {

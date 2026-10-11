@@ -1718,7 +1718,7 @@
      {
       "word": "蒟蒻",
       "register": "regional",
-      "nuance": "the name in Taiwan and on Japanese-style products (Japanese konnyaku)",
+      "nuance": "the name in Taiwan and on Japanese-style products",
       "region": "Taiwan"
      }
     ],
@@ -1735,6 +1735,13 @@
     ],
     "subtleties": [
      "Its fibre, glucomannan, swells enormously in water; that is what makes konjac foods filling but low in calories."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "蒟蒻 is the same word as Japanese 蒟蒻 *konnyaku*, and the products sold under it are Japanese-style."
+     }
     ]
    }
   },

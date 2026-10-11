@@ -3148,7 +3148,7 @@
      {
       "word": "巴士",
       "register": "regional",
-      "nuance": "bāshì: Hong Kong / southern word, the English ‘bus’ in Cantonese spelling"
+      "nuance": "bāshì: Hong Kong / southern word, a sound loan written the Cantonese way"
      },
      {
       "word": "公车",
@@ -3169,6 +3169,13 @@
     ],
     "subtleties": [
      "公共汽车 is the full, slightly old-fashioned word; in mainland speech 公交车 or just 公交 is more common."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "巴士 bāshì is English *bus* in Cantonese spelling."
+     }
     ]
    }
   },
@@ -3979,7 +3986,7 @@
      }
     ],
     "etymology": {
-     "text": "Pictogram of a carriage seen from above, with its two wheels. Perhaps an early loan from an Indo-European language with the horse and chariot (compare Tocharian kukäl ‘wagon’, a cousin of Greek κύκλος and English wheel).",
+     "text": "Pictogram of a carriage seen from above, with its two wheels. Perhaps an early loan from an Indo-European language with the horse and chariot (compare Tocharian kukäl ‘wagon’).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
