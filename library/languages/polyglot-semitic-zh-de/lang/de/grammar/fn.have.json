@@ -282,7 +282,7 @@
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian says у меня есть брат (“at me there is a brother”); German has a real verb, and the owner is its subject: Ich habe einen Bruder."
+   "text": "Russian says у меня есть брат (“at me there is a brother”); German has a real verb, and the owner is its subject:\n→ Ich habe einen Bruder."
   },
   {
    "for": "es",
@@ -292,7 +292,7 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "have is haben; but German says Hunger haben (to be hungry), Durst haben, Angst haben, Recht haben, and “there is” is es gibt."
+   "text": "have is haben; but:\n- German says Hunger haben (to be hungry), Durst haben, Angst haben, Recht haben;\n- “there is” is es gibt."
   },
   {
    "for": "fr",
@@ -312,7 +312,7 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi says malā ek bhāū āhe (“to me a brother is”) or mājhyākaḍe … āhe (“near me … is”); German turns the owner into the subject of haben."
+   "text": "Marathi says malā ek bhāū āhe (“to me a brother is”) or mājhyākaḍe … āhe (“near me … is”).\n\nGerman turns the owner into the subject of haben."
   },
   {
    "for": "ar",
@@ -322,7 +322,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew says yesh li (“there is to me”) and ein li for “not have”; German uses haben and kein: Ich habe ein Auto. Ich habe kein Auto."
+   "text": "Hebrew says yesh li (“there is to me”) and ein li for “not have”; German uses haben and kein:\n→ Ich habe ein Auto. Ich habe kein Auto."
   },
   {
    "for": "tr",
@@ -342,7 +342,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish says minulla on veli (“at me is a brother”); in German the owner is the subject: Ich habe einen Bruder."
+   "text": "Finnish says minulla on veli (“at me is a brother”); in German the owner is the subject:\n→ Ich habe einen Bruder."
   },
   {
    "for": "hu",
@@ -352,7 +352,7 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "kuwa na (“be with”: nina kaka) does the work of haben; German has a single verb with person endings: ich habe, du hast, er hat."
+   "text": "kuwa na (“be with”: nina kaka) does the work of haben; German has a single verb with person endings:\n→ ich habe, du hast, er hat"
   },
   {
    "for": "lg",

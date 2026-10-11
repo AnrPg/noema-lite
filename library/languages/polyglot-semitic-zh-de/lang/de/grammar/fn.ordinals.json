@@ -403,12 +403,12 @@
   {
    "lang": "ar",
    "fn": "fn.ordinals",
-   "note": "Arabic ordinals follow the pattern fāʿil and agree in gender: ثَالِث / ثَالِثَة (third); the first is أَوَّل / أُولَى."
+   "note": "Arabic ordinals follow the pattern fāʿil and agree in gender:\n→ ثَالِث / ثَالِثَة (third)\n→ the first is أَوَّل / أُولَى"
   },
   {
    "lang": "he",
    "fn": "fn.ordinals",
-   "note": "Hebrew has ordinals up to ten (רִאשׁוֹן, שֵׁנִי, שְׁלִישִׁי …), agreeing in gender; dates use the cardinal numbers."
+   "note": "Hebrew has ordinals up to ten (רִאשׁוֹן, שֵׁנִי, שְׁלִישִׁי …), agreeing in gender.\n\nDates use the cardinal numbers."
   },
   {
    "lang": "zh",
@@ -435,17 +435,17 @@
   {
    "for": "es",
    "rel": "trap",
-   "text": "Spanish dates use cardinals (el tres de mayo); German uses the ordinal: der dritte Mai. Las ocho y media is halb neun – not halb acht."
+   "text": "- Spanish dates use cardinals (el tres de mayo); German uses the ordinal: der dritte Mai.\n- Las ocho y media is halb neun – not halb acht."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "halb neun is 8:30, not 9:30. Ordinals decline: der erste, am ersten, ein erstes; written with a dot: der 3. Mai."
+   "text": "- halb neun is 8:30, not 9:30.\n- Ordinals decline: der erste, am ersten, ein erstes; written with a dot: der 3. Mai."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "French dates use the cardinal (le trois mai, but le premier); German always the ordinal: der dritte Mai. Huit heures et demie = halb neun."
+   "text": "- French dates use the cardinal (le trois mai, but le premier); German always the ordinal: der dritte Mai.\n- Huit heures et demie = halb neun."
   },
   {
    "for": "hi",
@@ -455,12 +455,12 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian ordinals add -om (dovvom, sevvom) and do not agree; 8:30 is hašt o nim (eight and a half) – German counts to the next hour: halb neun."
+   "text": "- Persian ordinals add -om (dovvom, sevvom) and do not agree.\n- 8:30 is hašt o nim (eight and a half) – German counts to the next hour: halb neun."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi says साडेआठ (sāḍeāṭh) for 8:30, counted from the hour before; German says halb neun, counted towards nine."
+   "text": "Marathi says साडेआठ (sāḍeāṭh) for 8:30, counted from the hour before.\n\nGerman says halb neun, counted towards nine."
   },
   {
    "for": "ar",
@@ -480,7 +480,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese makes ordinals with 第 or -番目 and has no agreement; hachi-ji han (8:30) is halb neun in German, counted towards nine."
+   "text": "- Japanese makes ordinals with 第 or -番目 and has no agreement.\n- hachi-ji han (8:30) is halb neun in German, counted towards nine."
   },
   {
    "for": "ko",
@@ -505,12 +505,12 @@
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese puts 第 before the number and never changes it; German ordinals take adjective endings (der dritte, am dritten). 八点半 (8:30) is halb neun."
+   "text": "- Chinese puts 第 before the number and never changes it; German ordinals take adjective endings (der dritte, am dritten).\n- 八点半 (8:30) is halb neun."
   },
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese uses thứ + number (thứ nhất, thứ hai) without agreement; German ordinals decline. Tám giờ rưỡi (8:30) is halb neun."
+   "text": "- Vietnamese uses thứ + number (thứ nhất, thứ hai) without agreement; German ordinals decline.\n- Tám giờ rưỡi (8:30) is halb neun."
   },
   {
    "for": "type:polysynthetic",

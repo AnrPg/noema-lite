@@ -207,7 +207,7 @@
     {
      "for": "ru",
      "rel": "trap",
-     "text": "Russian splits blue into синий (dark) and голубой (light); German has one word, blau, and adds hell- / dunkel- when needed (hellblau)."
+     "text": "Russian splits blue into синий (dark) and голубой (light).\n\nGerman has one word, blau, and adds hell- / dunkel- when needed (hellblau)."
     },
     {
      "for": "vi",
@@ -484,7 +484,7 @@
   {
    "lang": "zh",
    "fn": "fn.comparison",
-   "note": "Chinese puts 比 between the two things: 他比我高 (he is taller than me) – the adjective never changes; 更 = even more, 最 = most (最大)."
+   "note": "Chinese puts 比 between the two things – the adjective never changes:\n→ 他比我高 (he is taller than me)\n\n更 = even more, 最 = most (最大)."
   },
   {
    "lang": "de",
@@ -501,17 +501,17 @@
   {
    "for": "ru",
    "rel": "similar",
-   "text": "быстрее is like schneller; but “than” is als + nominative (älter als ich), never a genitive (старше меня)."
+   "text": "быстрее is like schneller; but “than” is als + nominative, never a genitive (старше меня):\n→ älter als ich"
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish uses más … que (más rápido que); German adds -er and uses als: schneller als. The superlative is am schnellsten or der schnellste."
+   "text": "Spanish uses más … que (más rápido que); German adds -er and uses als: schneller als.\n\nThe superlative is am schnellsten or der schnellste."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "German always uses -er, even for long adjectives: interessanter, not *mehr interessant. “than” is als, not wie; “as … as” is so … wie."
+   "text": "- German always uses -er, even for long adjectives: interessanter, not *mehr interessant.\n- “than” is als, not wie; “as … as” is so … wie."
   },
   {
    "for": "fr",
@@ -526,22 +526,22 @@
   {
    "for": "fa",
    "rel": "same",
-   "text": "bozorgtar az man is größer als ich: a suffix and a word for “than”; -tarin (bozorgtarin) is der größte."
+   "text": "bozorgtar az man is größer als ich: a suffix and a word for “than”.\n\n-tarin (bozorgtarin) is der größte."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi compares with -peksha (“than”) on the other noun and keeps the adjective; German changes the adjective (größer) and uses als."
+   "text": "Marathi compares with -peksha (“than”) on the other noun and keeps the adjective.\n\nGerman changes the adjective (größer) and uses als."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic makes one pattern ʾafʿal for “bigger” and “biggest” (kabīr → ʾakbar) with min; German has two forms (größer, am größten) and als."
+   "text": "Arabic makes one pattern ʾafʿal for “bigger” and “biggest” (kabīr → ʾakbar) with min.\n\nGerman has two forms (größer, am größten) and als."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew adds yoter (more) and mi- (than): gadol yoter mi-; German changes the adjective itself: größer als."
+   "text": "Hebrew adds yoter (more) and mi- (than): gadol yoter mi-.\n\nGerman changes the adjective itself: größer als."
   },
   {
    "for": "tr",
@@ -561,7 +561,7 @@
   {
    "for": "fi",
    "rel": "same",
-   "text": "Finnish -mpi (nopeampi) and -in (nopein) are endings like German -er and -st: schneller, am schnellsten; kuin is als."
+   "text": "Finnish -mpi (nopeampi) and -in (nopein) are endings like German -er and -st:\n→ schneller, am schnellsten\n\nkuin is als."
   },
   {
    "for": "hu",
@@ -571,17 +571,17 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili says mrefu kuliko mimi (“tall where there is me”); German changes the adjective: größer als ich."
+   "text": "Swahili says mrefu kuliko mimi (“tall where there is me”); German changes the adjective:\n→ größer als ich"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "比 sits before the compared thing and the adjective does not change (他比我高); German changes the adjective and uses als: Er ist größer als ich."
+   "text": "比 sits before the compared thing and the adjective does not change (他比我高); German changes the adjective and uses als:\n→ Er ist größer als ich."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "hơn follows the adjective (cao hơn tôi), which never changes; German adds -er (größer als ich) and the superlative ending -st."
+   "text": "hơn follows the adjective (cao hơn tôi), which never changes.\n\nGerman adds -er (größer als ich) and the superlative ending -st."
   },
   {
    "for": "iu",

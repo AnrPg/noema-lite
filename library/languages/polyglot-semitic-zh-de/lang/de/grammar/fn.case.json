@@ -465,7 +465,7 @@
   {
    "lang": "he",
    "fn": "fn.case",
-   "note": "Hebrew nouns have no cases; prepositions take personal endings instead: iti (with me), lo (to him), mimeni (from me)."
+   "note": "Hebrew nouns have no cases; prepositions take personal endings instead:\n→ iti (with me), lo (to him), mimeni (from me)"
   },
   {
    "lang": "zh",
@@ -492,7 +492,7 @@
   {
    "for": "es",
    "rel": "new",
-   "text": "Spanish nouns do not change after a preposition (only pronouns: para mí); German changes the article: für den Vater, mit dem Vater."
+   "text": "Spanish nouns do not change after a preposition (only pronouns: para mí); German changes the article:\n→ für den Vater, mit dem Vater"
   },
   {
    "for": "en",
@@ -502,7 +502,7 @@
   {
    "for": "fr",
    "rel": "new",
-   "text": "French nouns stay the same after a preposition; German articles change with the preposition’s case: mit der Mutter, für die Mutter."
+   "text": "French nouns stay the same after a preposition; German articles change with the preposition’s case:\n→ mit der Mutter, für die Mutter"
   },
   {
    "for": "hi",
@@ -512,12 +512,12 @@
   {
    "for": "fa",
    "rel": "new",
-   "text": "Persian nouns do not change after a preposition; German articles change: mit dem Bruder, für den Bruder."
+   "text": "Persian nouns do not change after a preposition; German articles change:\n→ mit dem Bruder, für den Bruder"
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi postpositions all take the oblique form of the noun; German prepositions choose between dative and accusative."
+   "text": "Marathi postpositions all take the oblique form of the noun.\n\nGerman prepositions choose between dative and accusative."
   },
   {
    "for": "ar",
@@ -537,32 +537,32 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese particles mark the relation directly (gakkō de, gakkō e); German needs a preposition and a case on the article."
+   "text": "Japanese particles mark the relation directly (gakkō de, gakkō e).\n\nGerman needs a preposition and a case on the article."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean particles do the work alone (hakgyo-eseo, hakgyo-e); German needs a preposition plus the right case."
+   "text": "Korean particles do the work alone (hakgyo-eseo, hakgyo-e).\n\nGerman needs a preposition plus the right case."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish postpositions take the genitive (talon edessä); German prepositions come first and take dative or accusative: vor dem Haus."
+   "text": "Finnish postpositions take the genitive (talon edessä); German prepositions come first and take dative or accusative:\n→ vor dem Haus"
   },
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian postpositions leave the noun as it is (a ház előtt); German prepositions change the article: vor dem Haus."
+   "text": "Hungarian postpositions leave the noun as it is (a ház előtt); German prepositions change the article:\n→ vor dem Haus"
   },
   {
    "for": "sw",
    "rel": "new",
-   "text": "Swahili has no cases (na, kwa change nothing); German prepositions put the article in the dative or accusative."
+   "text": "Swahili has no cases (na, kwa change nothing).\n\nGerman prepositions put the article in the dative or accusative."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese nouns never change after 在, 跟 or 给; German articles change after every preposition: mit dem Bus, für den Vater."
+   "text": "Chinese nouns never change after 在, 跟 or 给; German articles change after every preposition:\n→ mit dem Bus, für den Vater"
   },
   {
    "for": "vi",

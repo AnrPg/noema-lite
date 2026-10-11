@@ -173,10 +173,10 @@
  },
  "traps": [
   "Never drop the pronoun: Ich bin müde, not *Bin müde – the verb ending alone is not enough.",
-  "ich is written with a small letter inside a sentence; only the polite Sie (and Ihnen, Ihr) takes a capital.",
+  "ich is written with a small letter inside a sentence.\n\nOnly the polite Sie (and Ihnen, Ihr) takes a capital.",
   "A girl is es in grammar (das Mädchen … es), though people often say sie once they know her name.",
   "Sie (polite) takes the verb of “they”: Sie sind, never *Sie bist / *Sie ist.",
-  "ihr (you, plural) is also ihr = (to) her and ihr = her/their (possessive); the verb shows which: ihr seid."
+  "ihr (you, plural) is also ihr = (to) her and ihr = her/their (possessive).\n\nThe verb shows which: ihr seid."
  ],
  "evidence": {
   "lemmas": [
@@ -298,7 +298,7 @@
   {
    "lang": "he",
    "fn": "fn.pronoun.subject",
-   "note": "Hebrew also splits “you” and “they” by gender (atá / at, atem / aten, hem / hen); in the past tense ani / ata can be left out, in the present not."
+   "note": "Hebrew also splits “you” and “they” by gender (atá / at, atem / aten, hem / hen).\n\nIn the past tense ani / ata can be left out, in the present not."
   },
   {
    "lang": "zh",
@@ -350,7 +350,7 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "to / tī / te (he, she, it) have three genders like er / sie / es. German wir has no inclusive / exclusive split: it is used for āpaṇ and āmhī alike."
+   "text": "- to / tī / te (he, she, it) have three genders like er / sie / es.\n- German wir has no inclusive / exclusive split: it is used for āpaṇ and āmhī alike."
   },
   {
    "for": "ar",

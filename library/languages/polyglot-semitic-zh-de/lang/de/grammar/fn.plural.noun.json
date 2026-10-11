@@ -286,7 +286,7 @@
   {
    "lang": "he",
    "fn": "fn.plural.noun",
-   "note": "Hebrew plurals end mostly in -im (masculine) and -ot (feminine), with exceptions; the vowels inside the word often change too."
+   "note": "Hebrew plurals end mostly in -im (masculine) and -ot (feminine), with exceptions.\n\nThe vowels inside the word often change too."
   },
   {
    "lang": "zh",
@@ -313,7 +313,7 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish adds -s / -es; German has five patterns, often with umlaut, so the plural is learned with each noun: der Stuhl, die Stühle."
+   "text": "Spanish adds -s / -es; German has five patterns, often with umlaut, so the plural is learned with each noun:\n→ der Stuhl, die Stühle"
   },
   {
    "for": "en",
@@ -333,12 +333,12 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian has one main plural, -hā (ketābhā), and keeps the noun singular after numbers; German has five patterns and always uses the plural after zwei."
+   "text": "Persian has one main plural, -hā (ketābhā), and keeps the noun singular after numbers.\n\nGerman has five patterns and always uses the plural after zwei."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi plurals also depend on the noun’s gender and ending; German adds the vowel change (umlaut): Buch – Bücher."
+   "text": "Marathi plurals also depend on the noun’s gender and ending; German adds the vowel change (umlaut):\n→ Buch – Bücher"
   },
   {
    "for": "ar",
@@ -348,7 +348,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew plural -im / -ot is regular, and pairs and some time words take a dual (yomayim); German has five patterns and no dual: zwei Tage."
+   "text": "Hebrew plural -im / -ot is regular, and pairs and some time words take a dual (yomayim).\n\nGerman has five patterns and no dual: zwei Tage."
   },
   {
    "for": "tr",
@@ -358,7 +358,7 @@
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese usually leaves number unmarked (hon = book or books); in German a plural noun must change: Buch – Bücher, Tisch – Tische."
+   "text": "Japanese usually leaves number unmarked (hon = book or books); in German a plural noun must change:\n→ Buch – Bücher, Tisch – Tische"
   },
   {
    "for": "ko",
@@ -368,7 +368,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish has one regular plural (-t, -i-: talot, taloissa); German has five patterns and the umlaut, learned with each noun."
+   "text": "Finnish has one regular plural (-t, -i-: talot, taloissa).\n\nGerman has five patterns and the umlaut, learned with each noun."
   },
   {
    "for": "hu",
@@ -388,17 +388,17 @@
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese nouns do not change for number (们 only for people); every German plural noun changes, and must be learned: Tisch – Tische, Buch – Bücher."
+   "text": "Chinese nouns do not change for number (们 only for people); every German plural noun changes, and must be learned:\n→ Tisch – Tische, Buch – Bücher"
   },
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese marks plural with những / các before the noun if at all; German changes the noun itself (Buch – Bücher) and the article (die)."
+   "text": "Vietnamese marks plural with những / các before the noun if at all.\n\nGerman changes the noun itself (Buch – Bücher) and the article (die)."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut has singular, dual and plural endings (inuk, inuuk, inuit); German has no dual – two people are zwei Menschen, with the ordinary plural."
+   "text": "Inuktitut has singular, dual and plural endings (inuk, inuuk, inuit).\n\nGerman has no dual – two people are zwei Menschen, with the ordinary plural."
   },
   {
    "for": "it",

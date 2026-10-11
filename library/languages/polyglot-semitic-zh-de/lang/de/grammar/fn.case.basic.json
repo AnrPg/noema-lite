@@ -267,12 +267,12 @@
   {
    "lang": "ar",
    "fn": "fn.case.basic",
-   "note": "Arabic has three cases, marked by short vowel endings (iʿrāb); the nominative ends in -u (al-baytu, baytun), usually not written."
+   "note": "Arabic has three cases, marked by short vowel endings (iʿrāb).\n\nThe nominative ends in -u (al-baytu, baytun), usually not written."
   },
   {
    "lang": "he",
    "fn": "fn.case.basic",
-   "note": "Hebrew nouns have no cases; the role shows by word order, prepositions and et before a definite object."
+   "note": "Hebrew nouns have no cases.\n\nThe role shows by word order, prepositions and et before a definite object."
   },
   {
    "lang": "zh",
@@ -299,12 +299,12 @@
   {
    "for": "es",
    "rel": "new",
-   "text": "Spanish nouns have no cases (only pronouns: yo, me, mí); German shows the case on the article: der Tisch, den Tisch, dem Tisch, des Tisches."
+   "text": "Spanish nouns have no cases (only pronouns: yo, me, mí); German shows the case on the article:\n→ der Tisch, den Tisch, dem Tisch, des Tisches"
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English shows case only in pronouns (he – him); German shows it on the article too: der Tisch – den Tisch."
+   "text": "English shows case only in pronouns (he – him); German shows it on the article too:\n→ der Tisch – den Tisch"
   },
   {
    "for": "fr",
@@ -334,7 +334,7 @@
   {
    "for": "he",
    "rel": "new",
-   "text": "Hebrew nouns have no cases (only et before a definite object); German shows four cases on the article."
+   "text": "Hebrew nouns have no cases (only et before a definite object).\n\nGerman shows four cases on the article."
   },
   {
    "for": "tr",
@@ -354,27 +354,27 @@
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish has fifteen cases on the noun, German four on the article. The predicate noun of olla is nominative in both (Hän on opettaja – Er ist Lehrer)."
+   "text": "Finnish has fifteen cases on the noun, German four on the article.\n\nThe predicate noun of olla is nominative in both:\n→ Hän on opettaja – Er ist Lehrer"
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Many case suffixes, the nominative without any; German has only four cases, shown mostly on the article (der, den, dem, des)."
+   "text": "Many case suffixes, the nominative without any.\n\nGerman has only four cases, shown mostly on the article (der, den, dem, des)."
   },
   {
    "for": "sw",
    "rel": "new",
-   "text": "Swahili has no cases: word order and the verb prefixes show who does what. German changes the article for the role: der Mann, den Mann."
+   "text": "Swahili has no cases: word order and the verb prefixes show who does what.\n\nGerman changes the article for the role:\n→ der Mann, den Mann"
   },
   {
    "for": "lg",
    "rel": "new",
-   "text": "Luganda nouns have no case forms; roles show in word order and the verb. German shows them on the article."
+   "text": "Luganda nouns have no case forms; roles show in word order and the verb.\n\nGerman shows them on the article."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese has no cases; word order shows the roles. German changes the article and can therefore move the object first (Den Tisch kaufe ich)."
+   "text": "Chinese has no cases; word order shows the roles.\n\nGerman changes the article and can therefore move the object first:\n→ Den Tisch kaufe ich"
   },
   {
    "for": "vi",

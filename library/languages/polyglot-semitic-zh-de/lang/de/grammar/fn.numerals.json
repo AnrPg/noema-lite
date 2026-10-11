@@ -484,7 +484,7 @@
   {
    "lang": "zh",
    "fn": "fn.numerals",
-   "note": "Chinese numbers are perfectly regular (十一, 二十一) but need a measure word before the noun (三本书); before a measure word 两 replaces 二."
+   "note": "Chinese numbers are perfectly regular (十一, 二十一) but need a measure word before the noun (三本书).\n\nBefore a measure word 两 replaces 二."
   },
   {
    "lang": "de",
@@ -531,7 +531,7 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi also says the unit first in its fused numbers (ekvīs = 21); German builds them openly: einundzwanzig."
+   "text": "Marathi also says the unit first in its fused numbers (ekvīs = 21); German builds them openly:\n→ einundzwanzig"
   },
   {
    "for": "ar",
@@ -556,7 +556,7 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean uses counters (chaek du gwon) and two sets of numbers; German has one set and no counters: zwei Bücher."
+   "text": "Korean uses counters (chaek du gwon) and two sets of numbers; German has one set and no counters:\n→ zwei Bücher"
   },
   {
    "for": "fi",
@@ -581,7 +581,7 @@
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese uses classifiers (hai con mèo) and says the tens first (hai mươi mốt); German uses neither: zwei Katzen, einundzwanzig."
+   "text": "Vietnamese uses classifiers (hai con mèo) and says the tens first (hai mươi mốt); German uses neither:\n→ zwei Katzen, einundzwanzig"
   },
   {
    "for": "iu",

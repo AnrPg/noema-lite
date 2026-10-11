@@ -502,7 +502,7 @@
   {
    "for": "es",
    "rel": "similar",
-   "text": "¿Qué bebes? – question word first, then the verb, as in German: Was trinkst du? quién / quiénes is wer (for one or many)."
+   "text": "¿Qué bebes? – question word first, then the verb, as in German:\n→ Was trinkst du?\n\nquién / quiénes is wer (for one or many)."
   },
   {
    "for": "en",
@@ -512,42 +512,42 @@
   {
    "for": "fr",
    "rel": "different",
-   "text": "Spoken French can leave the question word in place (Tu bois quoi ?); German always puts it first, with the verb second: Was trinkst du?"
+   "text": "Spoken French can leave the question word in place (Tu bois quoi ?); German always puts it first, with the verb second:\n→ Was trinkst du?"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi leaves the question word in the place of the answer, before the verb (tum kyā pīte ho?); German moves it to the front: Was trinkst du?"
+   "text": "Hindi leaves the question word in the place of the answer, before the verb (tum kyā pīte ho?); German moves it to the front:\n→ Was trinkst du?"
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian keeps the question word where the answer would be (to či mixori?); German puts it first, with the verb second."
+   "text": "Persian keeps the question word where the answer would be (to či mixori?).\n\nGerman puts it first, with the verb second."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi keeps the question word in place (tū kāy pitos?); German moves it to the front, with the verb right after it."
+   "text": "Marathi keeps the question word in place (tū kāy pitos?).\n\nGerman moves it to the front, with the verb right after it."
   },
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic also puts the question word first (mādhā tashrabu?); German adds the subject after the verb: Was trinkst du?"
+   "text": "Arabic also puts the question word first (mādhā tashrabu?); German adds the subject after the verb:\n→ Was trinkst du?"
   },
   {
    "for": "he",
    "rel": "similar",
-   "text": "ma ata shote? puts the question word first, then the subject; German puts the verb before the subject: Was trinkst du?"
+   "text": "ma ata shote? puts the question word first, then the subject; German puts the verb before the subject:\n→ Was trinkst du?"
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish keeps the question word before the verb at the end (Ne içiyorsun?); German puts it first and the verb second: Was trinkst du?"
+   "text": "Turkish keeps the question word before the verb at the end (Ne içiyorsun?); German puts it first and the verb second:\n→ Was trinkst du?"
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese keeps the question word in place and adds ka (nani o nomimasu ka?); German moves the question word to the front."
+   "text": "Japanese keeps the question word in place and adds ka (nani o nomimasu ka?).\n\nGerman moves the question word to the front."
   },
   {
    "for": "ko",
@@ -572,7 +572,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese keeps the question word where the answer would be (你喝什么?); German moves it to the front and the verb follows: Was trinkst du?"
+   "text": "Chinese keeps the question word where the answer would be (你喝什么?); German moves it to the front and the verb follows:\n→ Was trinkst du?"
   },
   {
    "for": "vi",

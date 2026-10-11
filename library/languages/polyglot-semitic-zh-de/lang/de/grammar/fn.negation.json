@@ -362,17 +362,17 @@
   {
    "for": "fr",
    "rel": "different",
-   "text": "ne … pas surrounds the verb; German has one word, late in the clause (Ich esse den Fisch nicht). pas de pain is kein Brot, ne … rien is nichts."
+   "text": "ne … pas surrounds the verb; German has one word, late in the clause (Ich esse den Fisch nicht).\n\npas de pain is kein Brot, ne … rien is nichts."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "nahī̃ stands before the verb (maĩ nahī̃ khātā); German nicht goes late in the clause, and a noun with ein or no article takes kein."
+   "text": "nahī̃ stands before the verb (maĩ nahī̃ khātā).\n\nGerman nicht goes late in the clause, and a noun with ein or no article takes kein."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian negates with the prefix na- / ne- on the verb (nemixoram); German uses separate words, nicht or kein."
+   "text": "Persian negates with the prefix na- / ne- on the verb (nemixoram).\n\nGerman uses separate words, nicht or kein."
   },
   {
    "for": "mr",
@@ -382,7 +382,7 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic changes the negator with the tense and type of sentence (lā, lam, lan, laysa); German uses nicht and kein in every tense."
+   "text": "Arabic changes the negator with the tense and type of sentence (lā, lam, lan, laysa).\n\nGerman uses nicht and kein in every tense."
   },
   {
    "for": "he",
@@ -397,42 +397,42 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese negates with a verb ending (tabenai, tabemasen); German uses separate words, nicht and kein."
+   "text": "Japanese negates with a verb ending (tabenai, tabemasen).\n\nGerman uses separate words, nicht and kein."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean puts an before the verb or adds -ji anta; German has nicht late in the clause and kein for nouns."
+   "text": "Korean puts an before the verb or adds -ji anta.\n\nGerman has nicht late in the clause and kein for nouns."
   },
   {
    "for": "fi",
    "rel": "new",
-   "text": "Finnish negates with a verb that takes the person (en, et, ei … syö); German nicht never changes and kein changes like ein."
+   "text": "Finnish negates with a verb that takes the person (en, et, ei … syö).\n\nGerman nicht never changes and kein changes like ein."
   },
   {
    "for": "hu",
    "rel": "trap",
-   "text": "Hungarian doubles the negation (nem eszem semmit, senki sem jött); German uses one negative word: Ich esse nichts. Niemand kommt."
+   "text": "Hungarian doubles the negation (nem eszem semmit, senki sem jött); German uses one negative word:\n→ Ich esse nichts. Niemand kommt."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili negates with prefixes and a changed verb form (ninakula → sili); German leaves the verb as it is and adds nicht or kein."
+   "text": "Swahili negates with prefixes and a changed verb form (ninakula → sili).\n\nGerman leaves the verb as it is and adds nicht or kein."
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "不 and 没 stand before the verb (我不吃 / 我没有面包); German has nicht late in the clause and kein for nouns: Ich esse nicht. Ich habe kein Brot."
+   "text": "不 and 没 stand before the verb (我不吃 / 我没有面包); German has nicht late in the clause and kein for nouns:\n→ Ich esse nicht. Ich habe kein Brot."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "không stands before the verb (tôi không ăn); German nicht usually comes later (Ich esse das nicht), and kein negates a noun."
+   "text": "không stands before the verb (tôi không ăn).\n\nGerman nicht usually comes later (Ich esse das nicht), and kein negates a noun."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut negates with a suffix inside the verb (-nngit-); German uses separate words: nicht, kein, nichts."
+   "text": "Inuktitut negates with a suffix inside the verb (-nngit-); German uses separate words:\n→ nicht, kein, nichts"
   },
   {
    "for": "it",

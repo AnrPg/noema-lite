@@ -231,7 +231,7 @@
   {
    "lang": "ar",
    "fn": "fn.agreement",
-   "note": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness; non-human plurals take feminine singular agreement."
+   "note": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness.\n\nNon-human plurals take feminine singular agreement."
   },
   {
    "lang": "he",
@@ -263,7 +263,7 @@
   {
    "for": "es",
    "rel": "trap",
-   "text": "Spanish adjectives agree everywhere (la casa es pequeña); German ones agree only before the noun: das kleine Haus, but Das Haus ist klein."
+   "text": "Spanish adjectives agree everywhere (la casa es pequeña); German ones agree only before the noun:\n→ das kleine Haus, but Das Haus ist klein."
   },
   {
    "for": "en",
@@ -273,7 +273,7 @@
   {
    "for": "fr",
    "rel": "trap",
-   "text": "French adjectives agree after être (la maison est grande); German ones do not (Das Haus ist groß), but before the noun they agree in case as well."
+   "text": "French adjectives agree after être (la maison est grande); German ones do not (Das Haus ist groß).\n\nBut before the noun they agree in case as well."
   },
   {
    "for": "hi",
@@ -283,7 +283,7 @@
   {
    "for": "fa",
    "rel": "new",
-   "text": "Persian adjectives never agree (ketāb-e bozorg, ketābhā-ye bozorg); German ones take endings before the noun."
+   "text": "Persian adjectives never agree (ketāb-e bozorg, ketābhā-ye bozorg).\n\nGerman ones take endings before the noun."
   },
   {
    "for": "mr",
@@ -303,12 +303,12 @@
   {
    "for": "tr",
    "rel": "new",
-   "text": "Turkish adjectives never change (büyük masa, büyük masalar); German adjectives and articles before a noun do."
+   "text": "Turkish adjectives never change (büyük masa, büyük masalar).\n\nGerman adjectives and articles before a noun do."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese adjectives do not agree with the noun; German determiners and adjectives change with gender, number and case."
+   "text": "Japanese adjectives do not agree with the noun.\n\nGerman determiners and adjectives change with gender, number and case."
   },
   {
    "for": "ko",
@@ -338,7 +338,7 @@
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese has no agreement; German articles and adjectives before a noun change with its gender, number and case."
+   "text": "Chinese has no agreement.\n\nGerman articles and adjectives before a noun change with its gender, number and case."
   },
   {
    "for": "vi",

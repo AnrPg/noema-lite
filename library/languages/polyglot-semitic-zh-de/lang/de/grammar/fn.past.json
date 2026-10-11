@@ -381,7 +381,7 @@
   {
    "lang": "he",
    "fn": "fn.past",
-   "note": "The Hebrew past is one word with person, gender and number endings (כָּתַבְתִּי, כָּתַב, כָּתְבָה); no auxiliary, no participle."
+   "note": "The Hebrew past is one word with person, gender and number endings – no auxiliary, no participle:\n→ כָּתַבְתִּי, כָּתַב, כָּתְבָה"
   },
   {
    "lang": "zh",
@@ -433,7 +433,7 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi past forms show the gender (तो गेला / ती गेली); German does not: er ist gegangen, sie ist gegangen."
+   "text": "Marathi past forms show the gender (तो गेला / ती गेली); German does not:\n→ er ist gegangen, sie ist gegangen"
   },
   {
    "for": "ar",
@@ -443,7 +443,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "The Hebrew past is a single inflected verb (katavti, katav, katva); the German Perfekt is auxiliary + participle and does not change for gender."
+   "text": "The Hebrew past is a single inflected verb (katavti, katav, katva).\n\nThe German Perfekt is auxiliary + participle and does not change for gender."
   },
   {
    "for": "tr",
@@ -458,7 +458,7 @@
   {
    "for": "ko",
    "rel": "new",
-   "text": "Korean marks the past with a suffix in the verb (먹었어요); German uses haben or sein + the participle at the end of the clause."
+   "text": "Korean marks the past with a suffix in the verb (먹었어요).\n\nGerman uses haben or sein + the participle at the end of the clause."
   },
   {
    "for": "fi",
@@ -468,7 +468,7 @@
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian has one past suffix -t / -tt (ettem) and no auxiliary; German speech uses the Perfekt with haben / sein."
+   "text": "Hungarian has one past suffix -t / -tt (ettem) and no auxiliary.\n\nGerman speech uses the Perfekt with haben / sein."
   },
   {
    "for": "sw",
@@ -478,7 +478,7 @@
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda distinguishes a near past from a remote past with different tense markers; German has one past for any distance in time."
+   "text": "Luganda distinguishes a near past from a remote past with different tense markers.\n\nGerman has one past for any distance in time."
   },
   {
    "for": "zh",
@@ -488,7 +488,7 @@
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese may add đã or rely on time words; in German the past is obligatory on the verb: Gestern bin ich früh aufgestanden."
+   "text": "Vietnamese may add đã or rely on time words; in German the past is obligatory on the verb:\n→ Gestern bin ich früh aufgestanden."
   },
   {
    "for": "iu",

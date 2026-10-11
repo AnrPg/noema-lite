@@ -426,7 +426,7 @@
   {
    "lang": "zh",
    "fn": "fn.present",
-   "note": "Chinese verbs never change: 我吃, 你吃, 他吃; time words and particles (在, 了) do the work German does with endings and context."
+   "note": "Chinese verbs never change: 我吃, 你吃, 他吃.\n\nTime words and particles (在, 了) do the work German does with endings and context."
   },
   {
    "lang": "de",
@@ -468,17 +468,17 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian adds the prefix mi- and person endings (mixoram, mixori, mixorad) and a progressive with dāštan; German has endings only and one present."
+   "text": "Persian adds the prefix mi- and person endings (mixoram, mixori, mixorad) and a progressive with dāštan.\n\nGerman has endings only and one present."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi verbs show the subject’s gender (mī khāto / mī khāte); German verbs show only person and number: ich esse."
+   "text": "Marathi verbs show the subject’s gender (mī khāto / mī khāte); German verbs show only person and number:\n→ ich esse"
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "The Arabic imperfect uses prefixes and suffixes (aktubu, taktubu, yaktubu); German uses endings only: ich koche, du kochst, er kocht."
+   "text": "The Arabic imperfect uses prefixes and suffixes (aktubu, taktubu, yaktubu); German uses endings only:\n→ ich koche, du kochst, er kocht"
   },
   {
    "for": "he",
@@ -498,7 +498,7 @@
   {
    "for": "ko",
    "rel": "new",
-   "text": "Korean verbs change for politeness, not for the person; German verbs change for the person (ich koche, du kochst) and stand second in a statement."
+   "text": "Korean verbs change for politeness, not for the person.\n\nGerman verbs change for the person (ich koche, du kochst) and stand second in a statement."
   },
   {
    "for": "fi",
@@ -508,7 +508,7 @@
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian verbs change for a definite object (látok egy házat / látom a házat); German verbs never do: ich sehe ein Haus, ich sehe das Haus."
+   "text": "Hungarian verbs change for a definite object (látok egy házat / látom a házat); German verbs never do:\n→ ich sehe ein Haus, ich sehe das Haus"
   },
   {
    "for": "sw",
@@ -523,7 +523,7 @@
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese verbs never change and use đang / đã / sẽ for time; a German verb takes a person ending, and the present covers “now” and often the future."
+   "text": "Vietnamese verbs never change and use đang / đã / sẽ for time.\n\nA German verb takes a person ending, and the present covers “now” and often the future."
   },
   {
    "for": "iu",

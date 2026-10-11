@@ -238,7 +238,7 @@
   {
    "lang": "he",
    "fn": "fn.noun.gender",
-   "note": "Hebrew has two genders; feminine nouns usually end in -a or -t (ha-ir, the city, is a feminine exception)."
+   "note": "Hebrew has two genders; feminine nouns usually end in -a or -t.\n\nha-ir, the city, is a feminine exception."
   },
   {
    "lang": "zh",
@@ -265,7 +265,7 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish has two genders; German adds a neuter, and the genders do not carry over: la mesa – der Tisch, el libro – das Buch, la casa – das Haus."
+   "text": "Spanish has two genders; German adds a neuter, and the genders do not carry over:\n→ la mesa – der Tisch, el libro – das Buch, la casa – das Haus"
   },
   {
    "for": "en",
@@ -285,12 +285,12 @@
   {
    "for": "fa",
    "rel": "new",
-   "text": "Persian has no grammatical gender; in German every noun has one, which decides the article, the pronoun and the adjective ending."
+   "text": "Persian has no grammatical gender.\n\nIn German every noun has one, which decides the article, the pronoun and the adjective ending."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi also has three genders, a neuter included, so the idea is familiar; the gender of each German noun still has to be learned with its article."
+   "text": "Marathi also has three genders, a neuter included, so the idea is familiar.\n\nThe gender of each German noun still has to be learned with its article."
   },
   {
    "for": "ar",
@@ -305,12 +305,12 @@
   {
    "for": "tr",
    "rel": "new",
-   "text": "Turkish has no gender. In German every noun has one (der Tisch, die Tür, das Buch), and it changes the words around the noun."
+   "text": "Turkish has no gender.\n\nIn German every noun has one (der Tisch, die Tür, das Buch), and it changes the words around the noun."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese nouns have no gender; German ones do, and the gender is learned with the article: der Tisch, die Tür, das Buch."
+   "text": "Japanese nouns have no gender; German ones do, and the gender is learned with the article:\n→ der Tisch, die Tür, das Buch"
   },
   {
    "for": "ko",
@@ -320,7 +320,7 @@
   {
    "for": "fi",
    "rel": "new",
-   "text": "No gender in Finnish, and hän is he and she; German has three genders, and even a thing is er, sie or es."
+   "text": "No gender in Finnish, and hän is he and she.\n\nGerman has three genders, and even a thing is er, sie or es."
   },
   {
    "for": "hu",
@@ -340,7 +340,7 @@
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese has no grammatical gender (他 / 她 / 它 differ only in writing); every German noun has a gender that must be learned with it."
+   "text": "Chinese has no grammatical gender (他 / 她 / 它 differ only in writing).\n\nEvery German noun has a gender that must be learned with it."
   },
   {
    "for": "vi",
@@ -350,7 +350,7 @@
   {
    "for": "iu",
    "rel": "new",
-   "text": "Inuktitut nouns have no gender; in German every noun – even a thing – is masculine, feminine or neuter."
+   "text": "Inuktitut nouns have no gender.\n\nIn German every noun – even a thing – is masculine, feminine or neuter."
   },
   {
    "for": "it",

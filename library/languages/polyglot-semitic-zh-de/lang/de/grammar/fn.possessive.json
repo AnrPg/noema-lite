@@ -230,7 +230,7 @@
   ]
  },
  "traps": [
-  "seine Frau = his wife; ihr Mann = her husband – the owner chooses sein or ihr, the noun chooses the ending.",
+  "seine Frau = his wife; ihr Mann = her husband.\n\nThe owner chooses sein or ihr, the noun chooses the ending.",
   "euer → eure, euren: the e drops before an ending.",
   "Ihr (your, polite) has a capital I; ihr (her, their) does not.",
   "No article before a possessive: meine Mutter, not *die meine Mutter.",
@@ -380,7 +380,7 @@
   {
    "lang": "he",
    "fn": "fn.possessive",
-   "note": "Hebrew puts שֶׁל + suffix after the noun with the article: הַסֵּפֶר שֶׁלִּי (my book); suffixes on the noun itself are formal or fixed."
+   "note": "Hebrew puts שֶׁל + suffix after the noun with the article:\n→ הַסֵּפֶר שֶׁלִּי (my book)\n\nSuffixes on the noun itself are formal or fixed."
   },
   {
    "lang": "zh",
@@ -412,7 +412,7 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "his / her / its / their choose by the owner, like sein / ihr; German adds an ending for the thing owned: seine Schwester, sein Bruder."
+   "text": "his / her / its / their choose by the owner, like sein / ihr; German adds an ending for the thing owned:\n→ seine Schwester, sein Bruder"
   },
   {
    "for": "fr",
@@ -427,7 +427,7 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian adds a suffix (ketābam, my book) or links with the ezafe (ketāb-e man); German puts a separate word before the noun: mein Buch."
+   "text": "Persian adds a suffix (ketābam, my book) or links with the ezafe (ketāb-e man); German puts a separate word before the noun:\n→ mein Buch"
   },
   {
    "for": "mr",
@@ -452,17 +452,17 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "watashi no hon links with the particle no, which never changes; German mein changes with the noun: mein Buch, meine Tasche."
+   "text": "watashi no hon links with the particle no, which never changes; German mein changes with the noun:\n→ mein Buch, meine Tasche"
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean uses -ui (na-ui chaek) or a short form (nae chaek) that never changes; German mein takes endings and chooses sein / ihr by the owner."
+   "text": "Korean uses -ui (na-ui chaek) or a short form (nae chaek) that never changes.\n\nGerman mein takes endings and chooses sein / ihr by the owner."
   },
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish adds a suffix (kirjani, kirjasi), often with the pronoun (minun kirjani), and hänen is his and her; German uses mein, dein, and sein or ihr."
+   "text": "Finnish adds a suffix (kirjani, kirjasi), often with the pronoun (minun kirjani), and hänen is his and her.\n\nGerman uses mein, dein, and sein or ihr."
   },
   {
    "for": "hu",
@@ -477,12 +477,12 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "的 never changes (我的书) and is often dropped with family (我妈妈); German mein changes with the noun: mein Buch, meine Mutter."
+   "text": "的 never changes (我的书) and is often dropped with family (我妈妈); German mein changes with the noun:\n→ mein Buch, meine Mutter"
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese puts the owner after the noun (sách của tôi); German puts mein before it and adds an ending."
+   "text": "Vietnamese puts the owner after the noun (sách của tôi).\n\nGerman puts mein before it and adds an ending."
   },
   {
    "for": "iu",

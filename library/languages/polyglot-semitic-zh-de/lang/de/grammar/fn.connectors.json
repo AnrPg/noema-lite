@@ -426,7 +426,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek επειδή, ότι, αν, όταν leave the word order as it is; German weil, dass, wenn, ob send the verb to the end: …, weil ich Durst habe."
+   "text": "Greek επειδή, ότι, αν, όταν leave the word order as it is; German weil, dass, wenn, ob send the verb to the end:\n→ …, weil ich Durst habe."
   },
   {
    "for": "ru",
@@ -436,7 +436,7 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "porque, que, si, cuando leave the order alone; German subordinate clauses put the verb last: …, weil ich Hunger habe."
+   "text": "porque, que, si, cuando leave the order alone; German subordinate clauses put the verb last:\n→ …, weil ich Hunger habe."
   },
   {
    "for": "en",
@@ -461,12 +461,12 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi uses kāraṇ (because) and jar … tar (if … then); German weil and wenn send the verb to the end of their clause."
+   "text": "Marathi uses kāraṇ (because) and jar … tar (if … then).\n\nGerman weil and wenn send the verb to the end of their clause."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "li-ʾanna, ʾanna, idhā leave the order of the clause as it is; German weil, dass, wenn put the conjugated verb last."
+   "text": "li-ʾanna, ʾanna, idhā leave the order of the clause as it is.\n\nGerman weil, dass, wenn put the conjugated verb last."
   },
   {
    "for": "he",
@@ -486,12 +486,12 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean links clauses with verb endings (-aseo, -nikka, -myeon); German uses conjunctions, and after weil / wenn the verb comes last."
+   "text": "Korean links clauses with verb endings (-aseo, -nikka, -myeon).\n\nGerman uses conjunctions, and after weil / wenn the verb comes last."
   },
   {
    "for": "fi",
    "rel": "different",
-   "text": "koska, että, jos keep the normal order, and kun covers both wenn and als; German puts the verb last and splits “when” by time."
+   "text": "koska, että, jos keep the normal order, and kun covers both wenn and als.\n\nGerman puts the verb last and splits “when” by time."
   },
   {
    "for": "hu",
@@ -506,12 +506,12 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "因为 … 所以 … are used together; German uses either weil or deshalb, and weil sends the verb to the end: Weil ich müde bin, gehe ich nach Hause."
+   "text": "因为 … 所以 … are used together; German uses either weil or deshalb, and weil sends the verb to the end:\n→ Weil ich müde bin, gehe ich nach Hause."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "vì … nên … (because … so) go together and change no word order; German uses weil or deshalb, each with its own verb position."
+   "text": "vì … nên … (because … so) go together and change no word order.\n\nGerman uses weil or deshalb, each with its own verb position."
   },
   {
    "for": "iu",

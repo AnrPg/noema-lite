@@ -297,7 +297,7 @@
   {
    "lang": "he",
    "fn": "fn.object",
-   "note": "Hebrew puts אֶת before a definite object: אֲנִי שׁוֹתֶה אֶת הַקָּפֶה (I drink the coffee); an indefinite object has nothing."
+   "note": "Hebrew puts אֶת before a definite object; an indefinite object has nothing.\n→ אֲנִי שׁוֹתֶה אֶת הַקָּפֶה (I drink the coffee)"
   },
   {
    "lang": "zh",
@@ -349,12 +349,12 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian marks only a definite object, with rā (ketāb rā xāndam); German marks every masculine object, definite or not: den Kaffee, einen Kaffee."
+   "text": "Persian marks only a definite object, with rā (ketāb rā xāndam); German marks every masculine object, definite or not:\n→ den Kaffee, einen Kaffee"
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi marks a definite or human object with -lā; German marks the masculine object on the article, whether definite (den) or not (einen)."
+   "text": "Marathi marks a definite or human object with -lā.\n\nGerman marks the masculine object on the article, whether definite (den) or not (einen)."
   },
   {
    "for": "ar",
@@ -364,7 +364,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew puts et before a definite object (ani ochel et ha-tapuach); German has no such word, it changes the masculine article: Ich esse den Apfel."
+   "text": "Hebrew puts et before a definite object (ani ochel et ha-tapuach); German has no such word, it changes the masculine article:\n→ Ich esse den Apfel."
   },
   {
    "for": "tr",
@@ -374,12 +374,12 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese marks the object with o after it (mizu o nomimasu); German changes the masculine article (den, einen) and puts the object after the verb."
+   "text": "Japanese marks the object with o after it (mizu o nomimasu).\n\nGerman changes the masculine article (den, einen) and puts the object after the verb."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean marks the object with eul / reul (mul-eul masyeoyo); German marks it on the masculine article only."
+   "text": "Korean marks the object with eul / reul (mul-eul masyeoyo).\n\nGerman marks it on the masculine article only."
   },
   {
    "for": "fi",
@@ -394,12 +394,12 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "A known object can be a prefix inside the verb (ninakipenda, I like it); German uses a separate pronoun after the verb: Ich mag es."
+   "text": "A known object can be a prefix inside the verb (ninakipenda, I like it); German uses a separate pronoun after the verb:\n→ Ich mag es."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda, like other Bantu languages, can put an object marker inside the verb; German needs a separate pronoun: Ich sehe ihn."
+   "text": "Luganda, like other Bantu languages, can put an object marker inside the verb; German needs a separate pronoun:\n→ Ich sehe ihn."
   },
   {
    "for": "zh",
@@ -409,7 +409,7 @@
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese objects are unmarked and follow the verb; German changes the masculine article: den Kaffee, einen Kaffee."
+   "text": "Vietnamese objects are unmarked and follow the verb; German changes the masculine article:\n→ den Kaffee, einen Kaffee"
   },
   {
    "for": "iu",

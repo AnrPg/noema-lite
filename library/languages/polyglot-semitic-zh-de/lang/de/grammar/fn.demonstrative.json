@@ -262,7 +262,7 @@
   {
    "lang": "he",
    "fn": "fn.demonstrative",
-   "note": "Hebrew ze / zot (this, m./f.), ele (these); after a noun with the article it follows: ha-bayit ha-ze (this house)."
+   "note": "Hebrew ze / zot (this, m./f.), ele (these); after a noun with the article it follows:\n→ ha-bayit ha-ze (this house)"
   },
   {
    "lang": "zh",
@@ -279,7 +279,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "αυτός / αυτή / αυτό agree like dieser, but Greek adds the article too (αυτό το σπίτι); German never does: dieses Haus."
+   "text": "αυτός / αυτή / αυτό agree like dieser, but Greek adds the article too (αυτό το σπίτι); German never does:\n→ dieses Haus"
   },
   {
    "for": "ru",
@@ -289,7 +289,7 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish has three degrees (este, ese, aquel); German has dieser and, in speech, uses hier / da / dort for distance: das Buch hier, das Buch da."
+   "text": "Spanish has three degrees (este, ese, aquel); German has dieser and, in speech, uses hier / da / dort for distance:\n→ das Buch hier, das Buch da"
   },
   {
    "for": "en",
@@ -299,12 +299,12 @@
   {
    "for": "fr",
    "rel": "similar",
-   "text": "ce livre-ci / ce livre-là work like das Buch hier / das Buch da; dieser adds the gender and case endings: dieser, diese, dieses, diesen …"
+   "text": "ce livre-ci / ce livre-là work like das Buch hier / das Buch da.\n\ndieser adds the gender and case endings: dieser, diese, dieses, diesen …"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "yah (this) / vah (that) have no gender; they change only in the oblique case (is, us). dieser changes for three genders, plural and four cases."
+   "text": "yah (this) / vah (that) have no gender; they change only in the oblique case (is, us).\n\ndieser changes for three genders, plural and four cases."
   },
   {
    "for": "fa",
@@ -314,22 +314,22 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "hā / hī / he (this, m. / f. / n.) agree in gender like dieser / diese / dieses; German also changes the ending for the case (diesen, diesem)."
+   "text": "hā / hī / he (this, m. / f. / n.) agree in gender like dieser / diese / dieses.\n\nGerman also changes the ending for the case (diesen, diesem)."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "hādhā / hādhihi come with the article (hādhā l-kitāb, “this the book”); German drops the article: dieses Buch."
+   "text": "hādhā / hādhihi come with the article (hādhā l-kitāb, “this the book”); German drops the article:\n→ dieses Buch"
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew puts the pointing word after the noun, with the article on both (ha-sefer ha-ze); German puts dieser before the noun, without der."
+   "text": "Hebrew puts the pointing word after the noun, with the article on both (ha-sefer ha-ze).\n\nGerman puts dieser before the noun, without der."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "bu / şu / o never change and have three degrees; dieser takes gender and case endings, and German marks distance with hier / da / dort."
+   "text": "bu / şu / o never change and have three degrees.\n\ndieser takes gender and case endings, and German marks distance with hier / da / dort."
   },
   {
    "for": "ja",
@@ -339,7 +339,7 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "i / geu / jeo (i chaek, geu chaek, jeo chaek) are three degrees and never change; dieser has endings for gender and case."
+   "text": "i / geu / jeo (i chaek, geu chaek, jeo chaek) are three degrees and never change.\n\ndieser has endings for gender and case."
   },
   {
    "for": "fi",
@@ -359,7 +359,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "这 / 那 need a measure word (这本书, 那个人) and never change; dieser needs no measure word but takes the gender endings: dieses Buch, dieser Mann."
+   "text": "这 / 那 need a measure word (这本书, 那个人) and never change; dieser needs no measure word but takes the gender endings:\n→ dieses Buch, dieser Mann"
   },
   {
    "for": "vi",

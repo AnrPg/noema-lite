@@ -404,7 +404,7 @@
   {
    "for": "es",
    "rel": "trap",
-   "text": "en covers both in and on (en la mesa); German separates in, auf and an: im Kühlschrank, auf dem Tisch, an der Wand."
+   "text": "en covers both in and on (en la mesa); German separates in, auf and an:\n→ im Kühlschrank, auf dem Tisch, an der Wand"
   },
   {
    "for": "en",
@@ -419,22 +419,22 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi postpositions follow the noun (mez par, mez ke nīce); German prepositions precede it: auf dem Tisch, unter dem Tisch."
+   "text": "Hindi postpositions follow the noun (mez par, mez ke nīce); German prepositions precede it:\n→ auf dem Tisch, unter dem Tisch"
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian uses position nouns with the ezafe (ruy-e miz, zir-e miz); German uses one preposition + dative: auf dem Tisch, unter dem Tisch."
+   "text": "Persian uses position nouns with the ezafe (ruy-e miz, zir-e miz); German uses one preposition + dative:\n→ auf dem Tisch, unter dem Tisch"
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi adds the position after the noun (ṭeblāvar, on the table); German puts auf before it and the article in the dative."
+   "text": "Marathi adds the position after the noun (ṭeblāvar, on the table).\n\nGerman puts auf before it and the article in the dative."
   },
   {
    "for": "ar",
    "rel": "similar",
-   "text": "ʿalā, taḥta, amāma, khalfa, bayna come before the noun as German prepositions do; Arabic always uses the genitive, German the dative for “where”."
+   "text": "ʿalā, taḥta, amāma, khalfa, bayna come before the noun as German prepositions do.\n\nArabic always uses the genitive, German the dative for “where”."
   },
   {
    "for": "he",
@@ -449,7 +449,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "tsukue no ue ni (desk – top – at) puts a position noun after the thing; German uses a preposition before it: auf dem Tisch."
+   "text": "tsukue no ue ni (desk – top – at) puts a position noun after the thing; German uses a preposition before it:\n→ auf dem Tisch"
   },
   {
    "for": "ko",
@@ -459,12 +459,12 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish uses case endings (pöydällä, on the table) and postpositions (pöydän alla, under the table); German uses prepositions before the noun."
+   "text": "Finnish uses case endings (pöydällä, on the table) and postpositions (pöydän alla, under the table).\n\nGerman uses prepositions before the noun."
   },
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian uses suffixes (az asztalon) and postpositions (az asztal alatt); German puts the preposition first: auf dem Tisch, unter dem Tisch."
+   "text": "Hungarian uses suffixes (az asztalon) and postpositions (az asztal alatt); German puts the preposition first:\n→ auf dem Tisch, unter dem Tisch"
   },
   {
    "for": "sw",
@@ -474,7 +474,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "在 + noun + place word (在桌子上, 在床下): the position comes after the noun; German puts it before, as a preposition with the dative."
+   "text": "在 + noun + place word (在桌子上, 在床下): the position comes after the noun.\n\nGerman puts it before, as a preposition with the dative."
   },
   {
    "for": "vi",

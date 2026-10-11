@@ -578,7 +578,7 @@
   {
    "for": "fr",
    "rel": "different",
-   "text": "Most French adjectives follow the noun and always agree (la maison est grande); German ones precede the noun and agree only there."
+   "text": "Most French adjectives follow the noun and always agree (la maison est grande).\n\nGerman ones precede the noun and agree only there."
   },
   {
    "for": "hi",
@@ -588,12 +588,12 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian adjectives follow the noun with the ezafe and never change (ketāb-e bozorg); German ones precede it and take endings: ein großes Buch."
+   "text": "Persian adjectives follow the noun with the ezafe and never change (ketāb-e bozorg); German ones precede it and take endings:\n→ ein großes Buch"
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Adjectives in -ā agree in gender and precede the noun, as in German; German adds case and the choice between weak and strong endings."
+   "text": "Adjectives in -ā agree in gender and precede the noun, as in German.\n\nGerman adds case and the choice between weak and strong endings."
   },
   {
    "for": "ar",
@@ -603,7 +603,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew adjectives follow the noun and repeat the article (ha-bayit ha-gadol); German ones precede the noun and take an ending: das große Haus."
+   "text": "Hebrew adjectives follow the noun and repeat the article (ha-bayit ha-gadol); German ones precede the noun and take an ending:\n→ das große Haus"
   },
   {
    "for": "tr",
@@ -618,7 +618,7 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean adjectives are verbs (keuda, keun jip); a German adjective needs sein as a predicate and an ending before a noun."
+   "text": "Korean adjectives are verbs (keuda, keun jip).\n\nA German adjective needs sein as a predicate and an ending before a noun."
   },
   {
    "for": "fi",
@@ -628,7 +628,7 @@
   {
    "for": "hu",
    "rel": "new",
-   "text": "Hungarian attributive adjectives never change (a nagy házban); German ones always take an ending before a noun: in dem großen Haus."
+   "text": "Hungarian attributive adjectives never change (a nagy házban); German ones always take an ending before a noun:\n→ in dem großen Haus"
   },
   {
    "for": "sw",

@@ -439,7 +439,7 @@
   {
    "for": "fr",
    "rel": "trap",
-   "text": "huit heures et demie counts from eight; halb neun names nine. J’habite ici depuis trois ans uses the present, like Ich wohne seit drei Jahren hier."
+   "text": "- huit heures et demie counts from eight; halb neun names nine.\n- J’habite ici depuis trois ans uses the present, like Ich wohne seit drei Jahren hier."
   },
   {
    "for": "hi",
@@ -454,12 +454,12 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "sāḍe āṭh (8:30) counts from eight, with special words for 1:30 and 2:30; German halb neun names the next hour."
+   "text": "sāḍe āṭh (8:30) counts from eight, with special words for 1:30 and 2:30.\n\nGerman halb neun names the next hour."
   },
   {
    "for": "ar",
    "rel": "trap",
-   "text": "ath-thāmina wa-n-niṣf (8:30, “eight and a half”) counts from eight; halb neun names nine. mundhu with the present is seit with the present."
+   "text": "- ath-thāmina wa-n-niṣf (8:30, “eight and a half”) counts from eight; halb neun names nine.\n- mundhu with the present is seit with the present."
   },
   {
    "for": "he",
@@ -494,17 +494,17 @@
   {
    "for": "sw",
    "rel": "trap",
-   "text": "Swahili counts the hours from about 6 a.m. (saa mbili asubuhi = 8 a.m.); German counts from midnight: acht Uhr, zwanzig Uhr."
+   "text": "Swahili counts the hours from about 6 a.m. (saa mbili asubuhi = 8 a.m.); German counts from midnight:\n→ acht Uhr, zwanzig Uhr"
   },
   {
    "for": "zh",
    "rel": "trap",
-   "text": "八点半 (8:30) counts from eight; halb neun names nine. 三年前 puts “ago” after the time; vor drei Jahren puts it before."
+   "text": "- 八点半 (8:30) counts from eight; halb neun names nine.\n- 三年前 puts “ago” after the time; vor drei Jahren puts it before."
   },
   {
    "for": "vi",
    "rel": "trap",
-   "text": "tám giờ rưỡi (8:30) counts from eight; German halb neun names nine. ba năm trước (three years ago) is vor drei Jahren, with vor first."
+   "text": "- tám giờ rưỡi (8:30) counts from eight; German halb neun names nine.\n- ba năm trước (three years ago) is vor drei Jahren, with vor first."
   },
   {
    "for": "iu",

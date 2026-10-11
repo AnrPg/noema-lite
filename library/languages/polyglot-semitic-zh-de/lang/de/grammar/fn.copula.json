@@ -204,7 +204,7 @@
   {
    "for": "ru",
    "rel": "trap",
-   "text": "Russian has no present-tense “to be” (я студент); German always needs it: Ich bin Student. The job without an article is the same."
+   "text": "Russian has no present-tense “to be” (я студент); German always needs it:\n→ Ich bin Student.\n\nThe job without an article is the same."
   },
   {
    "for": "es",
@@ -234,12 +234,12 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "āhe is always there (mī śikṣak āhe), as sein is; German puts it second and changes it for the person: ich bin, du bist, er ist."
+   "text": "āhe is always there (mī śikṣak āhe), as sein is; German puts it second and changes it for the person:\n→ ich bin, du bist, er ist"
   },
   {
    "for": "ar",
    "rel": "trap",
-   "text": "In the present Arabic simply puts the two nouns side by side (ana ṭālib); German never does: Ich bin Student."
+   "text": "In the present Arabic simply puts the two nouns side by side (ana ṭālib); German never does:\n→ Ich bin Student."
   },
   {
    "for": "he",
@@ -254,7 +254,7 @@
   {
    "for": "ja",
    "rel": "similar",
-   "text": "desu / da links nouns (gakusei desu), but adjectives inflect on their own (takai); German uses sein for both: Ich bin Student. Das ist teuer."
+   "text": "desu / da links nouns (gakusei desu), but adjectives inflect on their own (takai); German uses sein for both:\n→ Ich bin Student. Das ist teuer."
   },
   {
    "for": "ko",
@@ -269,22 +269,22 @@
   {
    "for": "hu",
    "rel": "trap",
-   "text": "The 3rd person drops the copula (Anna tanár), the others keep it (tanár vagyok). German never drops it: Anna ist Lehrerin."
+   "text": "The 3rd person drops the copula (Anna tanár), the others keep it (tanár vagyok).\n\nGerman never drops it:\n→ Anna ist Lehrerin."
   },
   {
    "for": "sw",
    "rel": "similar",
-   "text": "ni links two nouns (Mimi ni mwalimu), but it never changes; German sein changes for every person: ich bin, du bist, er ist."
+   "text": "ni links two nouns (Mimi ni mwalimu), but it never changes; German sein changes for every person:\n→ ich bin, du bist, er ist"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "是 links two nouns (我是学生), but an adjective follows without it (我很好). German uses sein in both: Ich bin Student. Mir geht es gut / Das ist gut."
+   "text": "是 links two nouns (我是学生), but an adjective follows without it (我很好). German uses sein in both:\n→ Ich bin Student. Mir geht es gut / Das ist gut."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "là links nouns (tôi là giáo viên), but adjectives need no copula (tôi mệt); German says Ich bin müde."
+   "text": "là links nouns (tôi là giáo viên), but adjectives need no copula (tôi mệt).\n\nGerman says Ich bin müde."
   },
   {
    "for": "iu",

@@ -149,7 +149,7 @@
   "Gute Nacht is never a greeting on arrival.",
   "A bare Danke! when someone offers you something often means “no, thanks”.",
   "Wie geht es Ihnen? with a capital I; ihnen (small i) = them.",
-  "guten Tag, not *gute Tag: Tag, Morgen and Abend are masculine accusatives; only Nacht is feminine (gute Nacht).",
+  "guten Tag, not *gute Tag: Tag, Morgen and Abend are masculine accusatives.\n\nOnly Nacht is feminine (gute Nacht).",
   "Wie geht’s? expects a short real answer (Gut, danke – und dir?), not the same question back."
  ],
  "evidence": {
@@ -300,7 +300,7 @@
   {
    "lang": "he",
    "fn": "fn.greetings",
-   "note": "Hebrew shalom is hello and goodbye; “how are you” changes for a man or a woman (ma shlomkha? / ma shlomekh?)."
+   "note": "Hebrew shalom is hello and goodbye.\n\n“how are you” changes for a man or a woman (ma shlomkha? / ma shlomekh?)."
   },
   {
    "lang": "zh",
@@ -347,7 +347,7 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "salām works at any hour and xodāhāfez says goodbye; German has a formula for each part of the day. The du / Sie choice matches tu / šomā."
+   "text": "- salām works at any hour and xodāhāfez says goodbye; German has a formula for each part of the day.\n- The du / Sie choice matches tu / šomā."
   },
   {
    "for": "mr",
@@ -392,17 +392,17 @@
   {
    "for": "lg",
    "rel": "different",
-   "text": "Oli otya? – Bulungi works like Wie geht’s? – Gut; German adds the choice du / Sie (Wie geht es dir? / Ihnen?) and a formula for each part of the day."
+   "text": "Oli otya? – Bulungi works like Wie geht’s? – Gut. German adds:\n- the choice du / Sie (Wie geht es dir? / Ihnen?);\n- a formula for each part of the day."
   },
   {
    "for": "zh",
    "rel": "similar",
-   "text": "你好 / 您好 split like Hallo – Guten Tag / du – Sie; 晚安 is only for bedtime, like Gute Nacht. 再见 (“again see”) has the same image as Auf Wiedersehen."
+   "text": "- 你好 / 您好 split like Hallo – Guten Tag / du – Sie.\n- 晚安 is only for bedtime, like Gute Nacht.\n- 再见 (“again see”) has the same image as Auf Wiedersehen."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Xin chào is followed by the kinship word for the person (chào anh, chào bác); German greetings name no one and choose only between du and Sie."
+   "text": "Xin chào is followed by the kinship word for the person (chào anh, chào bác).\n\nGerman greetings name no one and choose only between du and Sie."
   },
   {
    "for": "iu",

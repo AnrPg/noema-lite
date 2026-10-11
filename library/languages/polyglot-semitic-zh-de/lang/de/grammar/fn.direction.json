@@ -241,7 +241,7 @@
  },
  "traps": [
   "Ich gehe nach Athen means walking; with a vehicle say fahren, with a plane fliegen.",
-  "nach only for cities, countries without article and Hause; with an article: in die Türkei, in die Schweiz.",
+  "nach only for cities, countries without article and Hause.\n\nWith an article: in die Türkei, in die Schweiz.",
   "zu + people and buildings: Ich gehe zum Arzt – not *nach dem Arzt (nach dem Arzt = after the doctor).",
   "Where from a country is aus: Ich komme aus Griechenland – not *von Griechenland.",
   "Where to into a place is accusative: in den Park – not *in dem Park (that is “in the park”, no movement).",
@@ -462,7 +462,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "jānā (go) and ānā (come) cover any way of moving; German splits gehen (on foot) and fahren (by vehicle)."
+   "text": "jānā (go) and ānā (come) cover any way of moving.\n\nGerman splits gehen (on foot) and fahren (by vehicle)."
   },
   {
    "for": "fa",
@@ -492,7 +492,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "iku (go) / kuru (come) cover any means, with de for the vehicle (densha de iku); German chooses fahren and says mit dem Zug."
+   "text": "iku (go) / kuru (come) cover any means, with de for the vehicle (densha de iku).\n\nGerman chooses fahren and says mit dem Zug."
   },
   {
    "for": "ko",
@@ -507,17 +507,17 @@
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian suffixes split where / where to / where from (a parkban, a parkba, a parkból) as German does with cases; menni covers any means."
+   "text": "Hungarian suffixes split where / where to / where from (a parkban, a parkba, a parkból) as German does with cases.\n\nmenni covers any means."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "kwenda covers any means, and the vehicle takes kwa (kwa basi); German uses fahren and mit + dative (mit dem Bus)."
+   "text": "kwenda covers any means, and the vehicle takes kwa (kwa basi).\n\nGerman uses fahren and mit + dative (mit dem Bus)."
   },
   {
    "for": "zh",
    "rel": "similar",
-   "text": "来 / 去 add the direction like her- / hin-: 进来 = herein, 进去 = hinein. German puts these particles at the end of the clause (Kommen Sie herein!)."
+   "text": "来 / 去 add the direction like her- / hin-: 进来 = herein, 进去 = hinein.\n\nGerman puts these particles at the end of the clause:\n→ Kommen Sie herein!"
   },
   {
    "for": "vi",
@@ -527,7 +527,7 @@
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut endings answer where / where to / where from (-mi, -mut, -mit), as German Wo? / Wohin? / Woher? do with prepositions and case."
+   "text": "Inuktitut endings answer where / where to / where from (-mi, -mut, -mit).\n\nGerman Wo? / Wohin? / Woher? do the same with prepositions and case."
   },
   {
    "for": "it",
