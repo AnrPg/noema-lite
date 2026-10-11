@@ -3424,6 +3424,14 @@
       if (pkg.grammar != null && !isObj(pkg.grammar)) E.push('grammar: {function id: realization}');
       if (!Array.isArray(pkg.bank)) E.push('bank: the sentences (a list)');
       if (!isObj(pkg.checks) || !isObj(pkg.checks.validator) || pkg.checks.validator.errors !== 0) E.push('checks.validator: the package must come from “lang_course.py package”, which runs validate_lang.py --strict and refuses while it has errors');
+      if (pkg.facades != null) {   // D19 (optional): locale facades of the language's texts — {locale: {address: {t, src}}}
+        if (!isObj(pkg.facades)) E.push('facades: {locale: {address: {t, src}}} (D19, docs/language-packs.md §3)');
+        else for (const [loc, es] of Object.entries(pkg.facades)) {
+          if (!/^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(loc) || !isObj(es)) { E.push(`facades.${loc}: a locale → {address: {t, src}}`); continue; }
+          const bad = Object.entries(es).find(([a, e]) => !/^[a-z]{1,4}:[^/]+\/.+$/.test(a) || !isObj(e) || !str(e.t) || !/^[0-9a-f]{12}$/.test(e.src || ''));
+          if (bad) E.push(`facades.${loc}: “${bad[0]}” — every entry is {t, src} at an address of tools/schemas/noema.langfacade.fields.json`);
+        }
+      }
       if (E.length) return E;
       const grams = pkg.grammar || {}, draft = new Set(data.course.draft || []), typ = lj.typology;
       // the course as it would be with the language (its own lexicon; no sentences yet: the package's are checked as new)
