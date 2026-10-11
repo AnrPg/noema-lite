@@ -119,6 +119,7 @@ const ACC_VIEWS = {
       accSection('✨', tE('engine.acc.secClaude'), { status: { ok: true, text: hasClaude ? tE('engine.acc.claudeOnDevice') : tE('engine.acc.claudeAppNoKey') }, info: tE('engine.acc.secClaudeInfo'), body: claude }),
       accSection('🗣️', tE('engine.acc.chatLang'), { status: { ok: true, text: chatLang() ? uiLangName(chatLang()) : tE('engine.acc.chatLangAuto', { lang: uiLangName(uiLang()) }) }, body: langBox }),
       opts.only === 'ai' ? null : accSection('🎨', tE('engine.acc.secDisplay'), { open: !!S.settings.apiKey, body: display }),
+      opts.only === 'ai' || !window.NoemaMT ? null : accSection('🌐', t('mt.set.title'), { body: NoemaMT.panel(acc, { heading: false }) }),   // machine translation of shared texts: consent, provider, caps (engine/mt.js, docs/i18n.md §11) — like Me › Language & appearance
       opts.only === 'ai' ? null : accSection('📘', tE('engine.acc.secSubject', { title: SUBJ.title }), { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', 'data-act': 'save-settings', onclick: async () => {

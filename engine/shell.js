@@ -47,7 +47,7 @@ window.NoemaShell = (() => {
   function tv(m) { let t = TH()?.tutor(m); if (!t) { const n = window.NoemaI18n ? NoemaI18n.t('sh.tutorDefault', null, uiPref()) : 'Tutor'; t = { n, nom: n, acc: n, to: n }; } return { tutor: t.n, tutorAcc: t.acc, tutorTo: t.to, tutorNom: t.nom, Tutor: t.nom ? t.nom[0].toUpperCase() + t.nom.slice(1) : t.n }; }   // i18n-ignore (English only without the i18n runtime)
   const L = (k, v) => window.NoemaI18n ? NoemaI18n.t('sh.' + k, { ...tv(), ...(v || {}) }, uiPref()) : k;
   /** A sentence with some of its values in bold (names and titles stay text, never markup) */
-  function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? h('b', {}, vals[names[+x]]) : x); }
+  function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? (vals[names[+x]]?.nodeType ? vals[names[+x]] : h('b', {}, vals[names[+x]])) : x); }   // a value that is an element goes in as it is
   const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return window.NoemaI18n ? NoemaI18n.fmt.date(t, o) : new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
   const today = () => new Date().toISOString().slice(0, 10);
   const toast = (m, ms) => (N()?.toast || (x => console.log(x)))(m, ms);
@@ -226,7 +226,8 @@ window.NoemaShell = (() => {
       return;
     }
     const cur = sh.kind === 'curriculum';
-    bar.append(h('span', { class: 'grow' }, svg(cur ? 'people' : 'bell'), ' ', ...rich(cur ? 'invitesYou' : 'wantsShare', { who: sh.from_name || sh.from_email || L('someone'), title: sh.title }), more),
+    const tB = h('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(acc(), [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: cur ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
+    bar.append(h('span', { class: 'grow' }, svg(cur ? 'people' : 'bell'), ' ', ...rich(cur ? 'invitesYou' : 'wantsShare', { who: sh.from_name || sh.from_email || L('someone'), title: tB }), more, mtT ? ' ' : null, mtT),
       h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await N().notes.accept(sh); toast(L(cur ? 'joinedToast' : 'addedToast', { title: s.title })); subjCache = null; if (confirm(L('openNow', { title: s.title }))) accepted(s); } catch (er) { toast(er.message, 5000); e.target.disabled = false; } } }, cur ? L('join') : L('accept')),
       h('button', { class: 'btn small', onclick: async () => { await N().notes.reject(sh).catch(er => toast(er.message)); } }, L('reject')), laterBtn);
   }

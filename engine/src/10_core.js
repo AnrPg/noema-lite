@@ -171,7 +171,7 @@ const CARD_KEYS_MOVED = (() => {
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, apiKey, ...glob } = settings;
+  const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }

@@ -378,7 +378,7 @@ window.NoemaMT = (() => {
   }
 
   /* ---------- ⚙️ Settings: the consent and the caps ---------- */
-  function panel(acc, { compact = false } = {}) {
+  function panel(acc, { compact = false, heading = true } = {}) {
     acc = accNow(acc); css();
     const s = settings(acc), p = () => provider(acc);
     const using = h('p', { class: 'tiny mt-using' });
@@ -392,7 +392,7 @@ window.NoemaMT = (() => {
     drawUsing();
     const kids = [h('p', { class: 'tiny mt-consent' }, T('mt.set.consent')), h('label', { class: 'row ns-check mt-row' }, on, T('mt.set.enable')), h('label', { class: 'mt-row' }, h('span', {}, T('mt.set.provider')), sel), using];
     if (compact) return h('div', { class: 'mt-panel' }, ...kids);
-    return h('section', { class: 'ns-panel ns-form mt-panel' }, h('span', { class: 'ns-label' }, '🌐 ' + T('mt.set.title')), ...kids,
+    return h('section', { class: 'ns-panel ns-form mt-panel' }, heading ? h('span', { class: 'ns-label' }, '🌐 ' + T('mt.set.title')) : null, ...kids,
       numIn('dailyChars', 500, T('mt.set.daily')), numIn('sessionRequests', 1, T('mt.set.session')), used, h('div', { class: 'row mt-row' }, clear));
   }
 
