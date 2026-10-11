@@ -42,7 +42,7 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
 const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId);
 
 async function register(token, uid, p, counts, extra = {}) {
-  const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, via: 'claude', updatedAt: new Date().toISOString(), ...extra };
+  const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}), via: 'claude', updatedAt: new Date().toISOString(), ...extra };
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key: 'a:packmeta:' + p.subject.id, value: JSON.stringify(meta), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
 /* ---------- the pack's own source files (make_pack.py packages them: file "sources/<name>" + size + sha256) ---------- */
