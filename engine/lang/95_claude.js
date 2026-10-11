@@ -308,7 +308,7 @@
   VIEWS.claude = (v) => {
     const acc = UI.acc, C = UI.C, rec = getRec(acc, C.id);
     const account = !!C.data.course.account;
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.claude.theCourse'))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.claude.theCourse'))),
       h('h1', { class: 'lj-h1' }, '✨ ' + LT('lang.view.claude')), h('p', { class: 'lx-sub' }, LT(account ? 'lang.claude.subAccount' : 'lang.claude.subLibrary')));
     if (!rec) { v.append(h('p', { class: 'lx-note' }, LT('lang.claude.nothingQueued'))); return; }
     const data = C.data, nd0 = account ? N.langNeeds(rec, data) : null, w = N.langWork(rec);

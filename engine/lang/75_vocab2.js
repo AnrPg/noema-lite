@@ -132,14 +132,14 @@ function deepRun(holder, items, { again = null } = {}) {
       stage.append(h('div', { class: 'lx-result lx-deepdone' }, h('h2', {}, '🏋️ ' + LT('lang.deep.score', { right, n: items.length })),
         h('ul', { class: 'lx-list' }, ...Object.entries(byKind).map(([k, r]) => h('li', {}, `${DEEP_LABEL[k] || k}: ${LNUM(r.c)} / ${LNUM(r.n)}`))),
         h('p', { class: 'tiny' }, LT('lang.deep.eachReview')), newWordsList(),
-        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back')))));
+        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back')))));
       return;
     }
     const it = items[i++];
     const el = exItem(it, ok => {
       N.deepRecord(UI.C, UI.L, it.lang, it, ok, day, it.perLex); save();
       if (ok) right++; const t = byKind[it.kind] = byKind[it.kind] || { c: 0, n: 0 }; t.n++; if (ok) t.c++;
-      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? LT('lang.drill.next') + ' →' : LT('lang.deep.finish')); b.onclick = next;
+      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? LT('lang.drill.next') + ' ' + arrowOn() : LT('lang.deep.finish')); b.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(el.dataset, { kind: it.kind, lang: it.lang, lex: it.lex });
@@ -173,7 +173,7 @@ function deepenButton(nid, c) {
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).label}`)));
   whenProfiles(c, () => {
     const types = N.deepTypes(UI.C, UI.L, c, lid);
@@ -186,7 +186,7 @@ VIEWS.deep = (v, r) => {
 VIEWS.deepen = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n) return VIEWS.home(v);
   const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, '← ' + n.title)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, arrowBack() + ' ' + n.title)),
     h('h1', {}, '🏋️ ' + LT('lang.view.deepen'), h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go(`#/deepen/${encodeURIComponent(nid)}/${x}`); })));
   whenProfiles(c, () => {

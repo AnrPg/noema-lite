@@ -53,7 +53,7 @@ function runSession(plan, { only = null } = {}) {
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + (a.lex || JSON.stringify([a.it?.sentence, a.it?.prompt, a.it?.kind]));
       if (!ok && a.kind !== 'poly' && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
-      const btn = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); btn.onclick = next;
+      const btn = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
     UI.current = a;

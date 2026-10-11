@@ -409,7 +409,7 @@ function sectionView(sid) {
   const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
   const tail = h('div');
   const v = view(h('div', { class: 'reader' },
-    backBtn(`← ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
+    backBtn(`${arrowBack()} ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
     pl,
     explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : tE('engine.sec.nOfM', { n: s._j + 1, of: c.sections.length })), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null),
       h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),   // i18n-ignore (for the AI)
@@ -465,17 +465,17 @@ function sectionTail(s, prev, next) {
     exs.length && !STEP_LOCK ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
   if (!X) {
     zone.append(h('div', { class: 'secnav' },
-      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
-      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' →')));
+      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + prev.title) : h('span'),
+      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' ' + arrowOn()) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())));
     return zone;
   }
   // the frame: one big “Next section” (the next chapter's first one after the last section), the chapter's practice beside it
   const nextCh = !next && COURSE[COURSE.indexOf(c) + 1], to = next || nextCh?.sections[0];
   zone.append(h('nav', { class: 'secnav ns-secnav', 'aria-label': SL('nextSection') },
-    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' →'), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
-      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' →')),
+    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' ' + arrowOn()), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
+      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())),
     to && !next ? h('button', { class: 'btn', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter')) : null,
-    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, '← ' + SL('prevSection')) : null));
+    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + SL('prevSection')) : null));
   return zone;
 }
 
@@ -575,7 +575,7 @@ function bossView(id) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
   shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + id], [SL('boss')]], back: '#/ch/' + id + '/practice' });
-  view(backBtn(`← ${c.title}`, '#/ch/' + id),
+  view(backBtn(`${arrowBack()} ${c.title}`, '#/ch/' + id),
     h('div', { class: 'card summary' }, h('div', { class: 'big' }, '👾'), h('h1', {}, tE('engine.boss.title', { num: c.num })),
       h('p', { class: 'muted' }, tE('engine.boss.intro')),
       h('button', { class: 'btn primary', style: { marginTop: '10px' }, onclick: () => {
@@ -706,7 +706,7 @@ function drillView(id) {
   const ta = h('textarea', { class: 'answer', placeholder: tE('engine.drill.placeholder') });
   const stage = h('div');
   view(h('div', { class: 'reader' },
-    backBtn(`← ${c.emoji} ` + tE('engine.drill.back', { num: c.num }), `#/ch/${c.id}/debug`),
+    backBtn(`${arrowBack()} ${c.emoji} ` + tE('engine.drill.back', { num: c.num }), `#/ch/${c.id}/debug`),
     h('span', { class: 'pill c' }, '🔧 ' + tE('engine.drill.pill')), h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
     h('div', { class: 'tiny', style: { fontWeight: 700, marginBottom: '6px' } }, tE('engine.drill.symptom')), h('div', { class: 'symptom', html: fmt(d.symptom) }),
     h('h3', { style: { margin: '22px 0 8px' } }, '🧠 ' + tE('engine.drill.askYourself')), ta,

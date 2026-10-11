@@ -37,6 +37,8 @@ const $ = (s, r = document) => r.querySelector(s);
    lang.*) · the course's speaker language (UI.C.explainLang: the course's own explanations come from its data; the few explanations
    this code writes itself are lang.expl.* and follow it when it is a UI locale) · the learned languages (never translated) ---------- */
 const LT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+/* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
+const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const LE = (k, p) => !window.NoemaI18n ? k : UI.C?.explainLang && NoemaI18n.match(UI.C.explainLang) ? NoemaI18n.t(k, p, UI.C.explainLang) : NoemaI18n.t(k, p);
 /** A list in the UI locale (“a, b, c” in English, as the course always wrote it; “a, b и c” in Russian …). */
 const LLIST = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.fmt.list(items.map(String)) : items.join(', ');

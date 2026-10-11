@@ -215,7 +215,7 @@ function runProd(items, { title, back = '#/', lang }) {
   metNew.clear();
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-prodrun', 'data-lang': lang || '' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
-  if (!items.length) { stage.append(h('p', { class: 'lx-note' }, LT('lang.prod.nothingHere')), h('button', { class: 'btn', onclick: () => go(back) }, '← ' + LT('lang.card.back'))); return; }
+  if (!items.length) { stage.append(h('p', { class: 'lx-note' }, LT('lang.prod.nothingHere')), h('button', { class: 'btn', onclick: () => go(back) }, arrowBack() + ' ' + LT('lang.card.back'))); return; }
   const queue = items.slice(), total = queue.length, stats = { right: 0, wrong: 0 }, day = today(); let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / total * 100) + '%';
@@ -226,7 +226,7 @@ function runProd(items, { title, back = '#/', lang }) {
       if (it.fn) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
       if ((it.lex || []).length && LX(it.lang).lex[it.lex[0]]) N.review(UI.C, UI.L, it.lang, it.lex[0], 'r', ok ? 'good' : 'again', day);   // the number / month word asked
       save(); ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = exItem(it, done);
     stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', info(it.lang).label), ex);
@@ -234,7 +234,7 @@ function runProd(items, { title, back = '#/', lang }) {
   const finish = () => {
     UI.current = null; save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
     stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.prod.done')), h('p', {}, LT('lang.prod.stats', { right: stats.right, wrong: stats.wrong })), newWordsList(),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(back) }, '← ' + LT('lang.card.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
+      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(back) }, arrowBack() + ' ' + LT('lang.card.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
   };
   document.onkeydown = e => {
     if (!$('.lx-prodrun')) { document.onkeydown = null; return; }
@@ -255,7 +255,7 @@ const WRITE_SETS = [
 VIEWS.write = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
   if (r.arg2) { const set = WRITE_SETS.find(s => s.id === r.arg2); if (set) return runProd(set.make(c, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/write/' + c, lang: c }); }
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '✍️ ' + LT('lang.view.write'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/write/' + x); })),
     h('p', { class: 'tiny' }, LT('lang.write.help', { n: k.R.size })),
@@ -274,7 +274,7 @@ VIEWS.read = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
   if (r.arg2) return readerView(v, c, r.arg2, k);
   const texts = N.readerTexts(UI.C, UI.L, c, { k });
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '📖 ' + LT('lang.view.read'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/read/' + x); })),
     h('p', { class: 'tiny' }, LT('lang.read.help')),
@@ -286,7 +286,7 @@ VIEWS.read = (v, r) => {
 function readerView(v, c, id, k) {
   const t = N.readerTexts(UI.C, UI.L, c, { k }).find(x => x.id === id); if (!t) return go('#/read/' + c);
   const X = LX(c); metNew.clear();
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, '← ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', t.title));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, arrowBack() + ' ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', t.title));
   v.append(textBody(c, t.sentences.map(sid => X.sentenceById[sid]).map(s => ({ s, unknown: s.req.filter(l => !k.R.has(l)) }))));
   v.append(newWordsList('🆕 ' + LT('lang.read.newInText')) || h('p', { class: 'tiny' }, '✓ ' + LT('lang.prod.onlyKnown')),
     h('div', { class: 'row' }, h('button', { class: 'btn primary lx-readq', onclick: () => runProd(N.readerQuestions(UI.C, UI.L, c, t, { n: 3 }).map(q => ({ ...q, type: 'readq', text: t.sentences })), { title: '📖 ' + LT('lang.read.questionsTitle', { title: t.title }), back: `#/read/${c}/${encodeURIComponent(t.id)}`, lang: c }) }, '❓ ' + LT('lang.read.questions')),
@@ -313,7 +313,7 @@ async function aiReader(c, btn) {
     const okRows = rows.filter(x => !x.r.check.unknown.length && x.r.check.unlearned.length <= 1);
     const v = $('.lx-view'); metNew.clear(); for (const x of okRows) noteNew(c, x.r.check.unlearned);
     v.innerHTML = '';
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, '← ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', res.data.title, ' ', aiBadge('🤖 ' + LT('lang.read.aiWritten'))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, arrowBack() + ' ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', res.data.title, ' ', aiBadge('🤖 ' + LT('lang.read.aiWritten'))),
       h('p', { class: 'tiny' }, LT(rows.length > okRows.length ? 'lang.read.passedSome' : 'lang.read.passedAll', { ok: okRows.length, n: rows.length })),
       textBody(c, okRows, { aiGloss: true }), newWordsList('🆕 ' + LT('lang.read.newInText')) || h('p', { class: 'tiny' }, '✓ ' + LT('lang.prod.onlyKnown')));
   } catch (e) { btn.disabled = false; btn.textContent = '⚠️ ' + LT('lang.read.tryAgain', { err: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed') }); console.warn(e); return; }

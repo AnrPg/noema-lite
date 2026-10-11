@@ -271,7 +271,7 @@ function glyphIntro(c, key, done) {
     it.note ? h('p', { class: 'tiny' }, it.note) : null,
     (M.look[key] || []).length ? h('p', { class: 'tiny' }, '👀 ' + LT('lang.script.mixUp') + ' ', ...(M.look[key] || []).flatMap((b, i) => [i ? ' · ' : '', h('span', { class: 'lx-w', lang: c }, b), ' ', M.items[b]?.name || ''])) : null,
     ex ? h('div', { class: 'lx-ex1' }, word(c, ex.lemma, { lex: ex, marks: 'full' }), h('div', { class: 'tiny' }, ex.translit, ' — ', gloss(c, ex.id))) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, LT('lang.ex.gotIt') + ' →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, LT('lang.ex.gotIt') + ' ' + arrowOn())));
   return box;
 }
 /** The card of a letter or a character (tap in the lane). */
@@ -305,7 +305,7 @@ VIEWS.script = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, M = N.scriptModule(UI.C, c), X = LX(c);
   if (c !== UI.lang) { UI.lang = c; UI.prefs.lang = c; save(); }
   v.classList.add('lx-scriptview'); v.dataset.lang = c;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
   const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, 'data-icon': SCRIPT_ICON[t] || 'doc', onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
@@ -370,7 +370,7 @@ function runScriptDrill(c, type, { only = null } = {}) {
     const done = ok => {
       if (a.intro) return next();
       ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = a.intro ? glyphIntro(c, a.intro, done) : exItem(a.item, done);
     stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).label), ex);

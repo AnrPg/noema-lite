@@ -256,7 +256,7 @@ R.img_sequence = (ex, api) => {
     check: () => picks.length < ex.answer.length ? null : picks.every((r, i) => r.id === ex.answer[i]),
     reveal() {
       picks.forEach((r, i) => badges[r.id]?.classList.add(r.id === ex.answer[i] ? 'right' : 'wrong'));
-      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' → ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
+      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' ' + arrowOn() + ' ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
     },
   };
 };
