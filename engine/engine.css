@@ -997,9 +997,9 @@ a.vx-credit:hover{opacity:1;text-decoration:underline}
 .vx-lblbtn:hover{border-color:var(--c,var(--violet))}
 .vx-lbltext{font-size:12.5px;color:var(--ink2)}
 @media (max-width:420px){.vx-lbltext{display:none}}
-.vx-tip{position:absolute;z-index:5;transform:translate(-50%,calc(-100% - 14px));max-width:min(280px,80%);padding:8px 11px;border-radius:12px;background:#1f2330;color:#fff;font-size:13px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none !important;transition:opacity .15s}
-.vx-tip.below{transform:translate(-50%,14px)}
+.vx-tip{position:absolute;left:0;top:0;z-index:6;width:max-content;max-width:min(320px,calc(100vw - 16px));overflow-wrap:anywhere;padding:8px 11px;border-radius:12px;background:#1f2330;color:#fff;font-size:13px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none !important;transition:opacity .15s}
 .vx-tip.on{opacity:1}
+.blk:has(.vx-tip.on){position:relative;z-index:7}   /* the label may run past the picture: over the blocks after it too */
 .vx-tip b{display:block}
 
 /* full screen */
