@@ -21,3 +21,19 @@
 .lx-lnode.s-locked,.lx-lnode.s-unprepared{opacity:.55}.lx-lnode.s-passed,.lx-lnode.s-known,.lx-lnode.s-mastered{border-color:var(--acc-soft,#cfc8ef)}
 .lx-linfo-st{font-weight:600}.lx-linfo-fns{margin:6px 0 10px;padding-inline-start:1.2em}.lx-linfo-oth .btn{margin:2px}
 @media (max-width:560px){.lx-lanes2 .lx-lhead,.lx-lanes2 .lx-lrow{column-gap:4px}.lx-lnode{padding:5px 4px;border-radius:10px}.lx-ltitle{font-size:.7rem}.lx-lname{display:none}}
+
+/* the compact lanes: small round dots, the step's code, the colour of its state; hover or focus tells more, a tap opens it */
+.lx-lanestop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.lx-lanestop h1{margin-inline-end:auto}
+.lx-lviewpick button{font-size:.78rem}
+.lx-ldots .lx-lrow,.lx-ldots .lx-lhead{column-gap:2px}.lx-ldots .lx-lcell,.lx-ldots .lx-lcell.lx-lgap{min-height:38px}
+.lx-ldots .lx-lname{display:none}.lx-ldots .lx-lflag{font-size:1.1rem}.lx-ldots .lx-lrow.lx-lcommon::before{inset:4px 0}
+.lx-ldot{position:relative;z-index:1;width:30px;height:30px;border-radius:50%;border:2px solid var(--line-c);background:var(--node-bg);color:var(--ink2,#555);
+  font:inherit;font-size:.62rem;font-weight:700;letter-spacing:-.02em;padding:0;cursor:pointer;display:grid;place-items:center}
+.lx-ldot:hover,.lx-ldot:focus-visible{outline:none;box-shadow:0 0 0 3px var(--acc-soft,rgba(107,91,210,.25));transform:scale(1.12)}
+.lx-ldot.s-passed,.lx-ldot.s-known{background:var(--t2,#4c9a6a);border-color:var(--t2,#4c9a6a);color:var(--t2i,#fff)}
+.lx-ldot.s-mastered{background:var(--t3,#d7a531);border-color:var(--t3,#d7a531);color:var(--t3i,#fff)}
+.lx-ldot.s-learning{border-color:var(--acc,#6b5bd2);background:linear-gradient(90deg,var(--acc-soft,#e3dff7) 50%,var(--node-bg) 50%);color:var(--acc,#6b5bd2)}
+.lx-ldot.s-open,.lx-ldot.s-ready{border-color:var(--acc,#6b5bd2);color:var(--acc,#6b5bd2)}
+.lx-ldot.s-locked{opacity:.6}.lx-ldot.s-unprepared{border-style:dashed;opacity:.6}
+.lx-lhover{position:fixed;z-index:60;max-width:240px;padding:8px 10px;border-radius:10px;background:var(--paper,#fff);color:var(--ink,#222);border:1px solid var(--line,#ddd);box-shadow:0 6px 24px rgba(0,0,0,.14);font-size:.85rem;pointer-events:none}
+.lx-ldots .lx-lrow.lx-lcommon::before{opacity:.28}.lx-ldots .lx-lrow:hover::before{opacity:.8}

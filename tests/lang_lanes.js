@@ -45,6 +45,23 @@ ok(secs[0] === 'foundations' && secs.includes('core') && secs.some(s => s.starts
     await p.locator('.lx-lnode[data-lang="zh"]').nth(2).click(); await wait(300);
     const info = await p.evaluate(() => (document.querySelector('.lx-linfo') || document.querySelector('.ns-sheet') || {}).innerText || '');
     ok(/Chinese/.test(info) && /Also in/.test(info) && /Open/.test(info), `${w}px: a tap on a step tells what it is there and where else it is`);
+    // dots: chosen, or automatic when the lanes are too narrow for tiles; hover / focus tells more, a tap opens the step
+    await p.evaluate(() => document.querySelector('.lx-pop')?.remove()); await p.click('.lx-lviewpick button:has-text("Dots")'); await wait(300);
+    ok(await p.locator('.lx-ldot').count() > 200 && await p.locator('.lx-lnode').count() === 0 && /^S\d+$/.test(await p.locator('.lx-ldot').first().innerText()), `${w}px: Dots — small round steps with their code (S0, S1 …)`);
+    await p.locator('.lx-ldot[data-lang="he"]').nth(3).hover(); await wait(200);
+    ok(/Hebrew/.test(await p.locator('.lx-lhover').innerText().catch(() => '')), `${w}px: pointing at a dot tells what it is`);
+    await p.locator('.lx-ldot[data-lang="he"]').nth(3).click(); await wait(300);
+    ok(/Also in/.test(await p.evaluate(() => (document.querySelector('.lx-linfo') || document.querySelector('.ns-sheet') || {}).innerText || '')), `${w}px: a tap on a dot opens its card`);
+    await p.evaluate(() => document.querySelector('.lx-pop')?.remove());
+    await p.click('.lx-lviewpick button:has-text("Auto")'); await wait(300);
+    await ctx.close();
+  }
+  { // Auto: dots when a lane would be narrower than a tile
+    const ctx = await b.newContext({ viewport: { width: 320, height: 700 } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
+    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = 'file://' + ROOT + '/index.html';
+    await p.goto(url); await p.evaluate(() => localStorage.clear());
+    await p.goto(url + '?account=anr&subject=lang:polyglot-semitic-zh-de#/lanes'); await p.waitForSelector('.lx-lanes2', { timeout: 60000 }); await wait(300);
+    ok(await p.locator('.lx-lanes2.lx-ldots').count() === 1 && await p.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 1, '320px, Auto: four lanes do not fit as tiles → dots, nothing scrolls sideways');
     await ctx.close();
   }
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
