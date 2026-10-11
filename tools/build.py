@@ -138,6 +138,18 @@ def build_lang_courses():
             for lx in L['lexicon'].values():
                 for x in lx.get('lexemes', []):
                     if 'profile' in x: profiles[x['id']] = x.pop('profile')
+        # D19 (docs/language-packs.md §3): what the runtime needs besides the texts, computed from the master — the meaning key, the time and
+        # the date of every bank sentence — so that a locale facade can never change what the exercises check (tools/lang_stamp.js)
+        try:
+            r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'lang_stamp.js')], input=json.dumps(data, ensure_ascii=False), capture_output=True, text=True, encoding='utf-8')
+            stamps = json.loads(r.stdout) if r.returncode == 0 else None
+            if stamps is None: print(f'  ⚠️ {d}: no sentence keys ({r.stderr.strip()[:200]}) — the app computes them')
+        except Exception as e:
+            stamps = None; print(f'  ⚠️ {d}: no sentence keys ({e}) — the app computes them')
+        for L in data['langs'].values():
+            for s in L['bank']:
+                if stamps and s.get('id') in stamps: s.update(stamps[s['id']])
+        expl = build_lang_facades(root, course, data)
         pbody = json.dumps(profiles, ensure_ascii=False, separators=(',', ':'))
         wt(os.path.join(root, 'course.profiles.js'), f'/* GENERATED word profiles of the language course {course["id"]} — do not edit */\n(window.NOEMA_LANGPROFILES = window.NOEMA_LANGPROFILES || {{}})[{json.dumps(course["id"])}] = ' + pbody.replace('</', '<\\/') + ';\n')
         body = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
@@ -145,9 +157,40 @@ def build_lang_courses():
         words = {c: sum(len(v['lexemes']) for v in data['langs'][c]['lexicon'].values()) for c in course['languages']}
         out.append({'id': course['id'], 'title': course['title'], 'emoji': course.get('emoji', '🌍'), 'languages': course['languages'], 'explainLang': course.get('explainLang', 'en'),
                     'path': os.path.relpath(os.path.join(root, 'course.pack.js'), ROOT).replace(os.sep, '/'),
-                    'profiles': os.path.relpath(os.path.join(root, 'course.profiles.js'), ROOT).replace(os.sep, '/'), 'media': [data['mediaBase'] + m['file'] for m in data['media'].values()], 'words': words})
+                    'profiles': os.path.relpath(os.path.join(root, 'course.profiles.js'), ROOT).replace(os.sep, '/'), 'media': [data['mediaBase'] + m['file'] for m in data['media'].values()], 'words': words,
+                    **({'expl': expl} if expl else {})})
         print(f'language course: {course["id"]} · ' + ' · '.join(f'{c} {n} words' for c, n in words.items()) + f' · {len(body)//1024} KB + profiles {len(pbody)//1024} KB')
     return out, failed
+
+def build_lang_facades(root, course, data):
+    """D19 (docs/language-packs.md §3): every locale facade of a course (facades/<locale>/*.json, plus the shared texts of
+    _phenomena/facades/<locale>/<L>.json and _typology/facades/<locale>.json) → course.expl.<locale>.js, loaded by the app when the
+    learner's explanation locale is that locale. → {locale: {path, status, coverage}} for the registry (empty without facades)."""
+    out = {}
+    fdir = os.path.join(root, 'facades')
+    for f in glob.glob(os.path.join(root, 'course.expl.*.js')): os.remove(f)   # a facade removed since the last build
+    if not os.path.isdir(fdir): return out
+    for loc in sorted(os.listdir(fdir)):
+        ldir = os.path.join(fdir, loc)
+        if not os.path.isdir(ldir) or not os.path.exists(os.path.join(ldir, 'facade.json')): continue
+        head = rj(os.path.join(ldir, 'facade.json'))
+        files = [os.path.join(ldir, f) for f in sorted(os.listdir(ldir)) if f.endswith('.json') and f != 'facade.json']
+        files += [os.path.join(LANGS, '_phenomena', 'facades', loc, c + '.json') for c in course['languages']] + [os.path.join(LANGS, '_typology', 'facades', loc + '.json')]
+        texts = {}
+        for fp in files:
+            if not os.path.exists(fp): continue
+            for k, v in (rj(fp) or {}).items():
+                t = v.get('t') if isinstance(v, dict) else v if isinstance(v, str) else None
+                if isinstance(t, str) and ':' in k: texts[k] = t
+        status = head.get('status', 'draft') if head.get('status') in ('draft', 'preview', 'on') else 'draft'
+        fac = {'locale': head.get('locale', loc), 'master': head.get('master', course.get('explainLang', 'en')), 'status': status, 'coverage': head.get('coverage') or {}, 'texts': texts}
+        name = f'course.expl.{loc}.js'
+        wt(os.path.join(root, name), f'/* GENERATED explanation facade ({loc}) of the language course {course["id"]} — do not edit; edit facades/{loc}/ */\n'
+           + f'(function (E, c) {{ E[c] = E[c] || {{}}; E[c][{json.dumps(loc)}] = ' + json.dumps(fac, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+           + f'; }})(window.NOEMA_LANGEXPL = window.NOEMA_LANGEXPL || {{}}, {json.dumps(course["id"])});\n')
+        out[loc] = {'path': os.path.relpath(os.path.join(root, name), ROOT).replace(os.sep, '/'), 'status': status, 'coverage': fac['coverage']}
+        print(f'  explanation facade {course["id"]} · {loc} ({status}): {len(texts)} texts')
+    return out
 
 def build_site(metas):
     out = os.path.join(ROOT, 'dist', 'site')
@@ -165,6 +208,8 @@ def build_site(metas):
         for k in ('path', 'profiles'):
             if not m.get(k): continue
             dst = os.path.join(out, m[k]); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m[k]), dst)
+        for f in (m.get('expl') or {}).values():   # D19: the locale facades of the explanations
+            dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
