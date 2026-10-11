@@ -3,28 +3,28 @@
  "course": "polyglot-semitic-zh-de",
  "locale": "el",
  "master": "en",
- "status": "draft",
+ "status": "preview",
  "coverage": {
   "1": {
-   "total": 35228,
-   "done": 32328,
-   "stale": 145,
-   "missing": 2755
+   "total": 32371,
+   "done": 32371,
+   "stale": 0,
+   "missing": 0
   },
   "2": {
-   "total": 43782,
-   "done": 41181,
-   "stale": 884,
-   "missing": 1717
+   "total": 42036,
+   "done": 42036,
+   "stale": 0,
+   "missing": 0
   },
   "3": {
-   "total": 17999,
-   "done": 11671,
-   "stale": 293,
-   "missing": 6035
+   "total": 22602,
+   "done": 22602,
+   "stale": 0,
+   "missing": 0
   }
  },
- "built": "2026-10-11T16:29:54Z",
+ "built": "2026-10-11T16:55:21Z",
  "files": [
   "_phenomena/facades/el/ar.json",
   "_phenomena/facades/el/de.json",
