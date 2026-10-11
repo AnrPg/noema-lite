@@ -2600,6 +2600,1028 @@
   "@roadmap.map.imp.s6": {
     "description": "Last step title of the import form."
   },
+  "roadmap.map.map.notHere": "That Roadmap is not on this device yet.",
+  "@roadmap.map.map.notHere": {
+    "description": "Toast when a Roadmap to open is not on this device."
+  },
+  "roadmap.map.map.hold": "**Before its steps are planned: **attach the subjects you already have to the steps they teach.",
+  "@roadmap.map.map.hold": {
+    "description": "Bar on a Roadmap that waits for the learner’s own subjects. Text between ** and ** is bold (keep the asterisks)."
+  },
+  "roadmap.map.map.holdN": "{n, number} attached so far.",
+  "@roadmap.map.map.holdN": {
+    "description": "Added to the bar: how many steps have a subject attached.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.map.ended": "No longer shared with you — your copy of the Roadmap and the steps you have stay yours.",
+  "@roadmap.map.map.ended": {
+    "description": "Bar on a Roadmap the owner stopped sharing."
+  },
+  "roadmap.map.map.sharedBy": "Shared by {who}",
+  "@roadmap.map.map.sharedBy": {
+    "description": "Bar on a shared Roadmap (member’s view). {who} = the owner.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.map.youShare": "{pub, select, yes {You share it · 🌍 public} other {You share it}}",
+  "@roadmap.map.map.youShare": {
+    "description": "Bar on a shared Roadmap (owner’s view); pub = yes when public.",
+    "placeholders": {
+      "pub": {
+        "type": "String",
+        "example": "yes"
+      }
+    }
+  },
+  "roadmap.map.map.sharedReady": "{n, plural, one {# step prepared for everybody} other {# steps prepared for everybody}}",
+  "@roadmap.map.map.sharedReady": {
+    "description": "Bar on a shared Roadmap: steps prepared and shared with all members.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.map.busyOthers": "{n, number} being prepared by others",
+  "@roadmap.map.map.busyOthers": {
+    "description": "Bar on a shared Roadmap: steps other members are preparing now.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.map.ownProgress": "your progress is your own",
+  "@roadmap.map.map.ownProgress": {
+    "description": "Bar on a shared Roadmap (after “ · ”)."
+  },
+  "roadmap.map.map.memberRule": "The Roadmap and its chapter plans are the owner’s. When they change it, 🔔 tells you and you take the changes you want into your copy.",
+  "@roadmap.map.map.memberRule": {
+    "description": "Info on a shared Roadmap (member’s view), after the sharing rules."
+  },
+  "roadmap.map.map.ownerRule": "Your changes to the Roadmap are offered to everybody (each member takes what they want).",
+  "@roadmap.map.map.ownerRule": {
+    "description": "Info on a shared Roadmap (owner’s view), after the sharing rules."
+  },
+  "roadmap.map.map.changes": "{n, plural, one {# change from {who} · Review} other {# changes from {who} · Review}}",
+  "@roadmap.map.map.changes": {
+    "description": "Button on a shared Roadmap: the owner made changes the member can review.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.map.theOwner": "the owner",
+  "@roadmap.map.map.theOwner": {
+    "description": "Fallback for {who} when the owner’s name is unknown (lower case, inside a sentence)."
+  },
+  "roadmap.map.map.appTitle": "Your Claude app",
+  "@roadmap.map.map.appTitle": {
+    "description": "Heading of the Claude-app panel of a Roadmap."
+  },
+  "roadmap.map.map.appLead": "Your own Claude (with your Claude plan) plans and prepares the steps; the results appear on this Roadmap by themselves.",
+  "@roadmap.map.map.appLead": {
+    "description": "Subtitle of the Claude-app panel."
+  },
+  "roadmap.map.map.forApp": "**For your Claude app: **{todo}",
+  "@roadmap.map.map.forApp": {
+    "description": "Bar of a Roadmap: what the Claude app still has to do; {todo} = e.g. “2 steps to plan · 3 to prepare”. Text between ** and ** is bold (keep the asterisks).",
+    "placeholders": {
+      "todo": {
+        "type": "String",
+        "example": "2 steps to plan · 3 to prepare"
+      }
+    }
+  },
+  "roadmap.map.map.toPlan": "{n, plural, one {# step to plan} other {# steps to plan}}",
+  "@roadmap.map.map.toPlan": {
+    "description": "Claude-app bar: steps whose chapters still have to be planned.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.map.toPrepare": "{n, number} to prepare",
+  "@roadmap.map.map.toPrepare": {
+    "description": "Claude-app bar: steps still to prepare.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.map.copyMsg": "Copy the message",
+  "@roadmap.map.map.copyMsg": {
+    "description": "Button of the Claude-app bar."
+  },
+  "roadmap.map.map.howByHand": "How? · by hand",
+  "@roadmap.map.map.howByHand": {
+    "description": "Button of the Claude-app bar: opens the explanation and the by-hand way."
+  },
+  "roadmap.map.map.legend": "✅ mastered · {open} open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app · 📦 taught by your own subject · 🔄 being re-planned",
+  "@roadmap.map.map.legend": {
+    "description": "Legend of the map’s signs. {open} is the green open-padlock icon. Keep the emojis.",
+    "placeholders": {
+      "open": {
+        "type": "String",
+        "example": "🔓"
+      }
+    }
+  },
+  "roadmap.map.map.legendTip": "A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.",
+  "@roadmap.map.map.legendTip": {
+    "description": "Help of the legend: when a step opens."
+  },
+  "roadmap.map.map.zoomOut": "Zoom out",
+  "@roadmap.map.map.zoomOut": {
+    "description": "Tooltip and screen-reader label of the − button of the map."
+  },
+  "roadmap.map.map.zoomIn": "Zoom in",
+  "@roadmap.map.map.zoomIn": {
+    "description": "Tooltip and screen-reader label of the + button of the map."
+  },
+  "roadmap.map.map.fit": "Fit",
+  "@roadmap.map.map.fit": {
+    "description": "Button of the map: show the whole map. Very short."
+  },
+  "roadmap.map.map.nextUp": "Next up",
+  "@roadmap.map.map.nextUp": {
+    "description": "Button of the map: go to the next step to study."
+  },
+  "roadmap.map.map.step": "Step",
+  "@roadmap.map.map.step": {
+    "description": "Button of the map (after ➕): add a step. Very short."
+  },
+  "roadmap.map.map.settingsTip": "Settings of this Roadmap",
+  "@roadmap.map.map.settingsTip": {
+    "description": "Tooltip of the ⚙️ button of the map."
+  },
+  "roadmap.map.map.paused": "preparing paused",
+  "@roadmap.map.map.paused": {
+    "description": "Map summary: preparing steps in the background is paused. Lower case."
+  },
+  "roadmap.map.map.bandPre": "Prerequisites",
+  "@roadmap.map.map.bandPre": {
+    "description": "Label of the map’s first band (the steps before the goal)."
+  },
+  "roadmap.map.map.bandApps": "Applications",
+  "@roadmap.map.map.bandApps": {
+    "description": "Label of the map’s last band (the steps after the goal)."
+  },
+  "roadmap.map.st.preparedBy": "prepared by {who}",
+  "@roadmap.map.st.preparedBy": {
+    "description": "State of a step of a shared Roadmap (lower case, inside a label): another member prepared it.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.st.beingPreparedBy": "being prepared by {who}",
+  "@roadmap.map.st.beingPreparedBy": {
+    "description": "State of a step of a shared Roadmap (lower case): another member is preparing it.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.st.anotherMember": "another member",
+  "@roadmap.map.st.anotherMember": {
+    "description": "Fallback for {who} when the member’s name is unknown."
+  },
+  "roadmap.map.st.state": "{s, select, mastered {mastered} open {open} other {locked}}",
+  "@roadmap.map.st.state": {
+    "description": "State of a step (screen-reader label of a map node, lower case).",
+    "placeholders": {
+      "s": {
+        "type": "String",
+        "example": "open"
+      }
+    }
+  },
+  "roadmap.map.st.replanning": "being re-planned to match your subject",
+  "@roadmap.map.st.replanning": {
+    "description": "State of a step (lower case, inside a label)."
+  },
+  "roadmap.map.st.taughtBySubject": "taught by your subject",
+  "@roadmap.map.st.taughtBySubject": {
+    "description": "State of a step (lower case, inside a label)."
+  },
+  "roadmap.map.st.yourMaterial": "Your material: {files}",
+  "@roadmap.map.st.yourMaterial": {
+    "description": "Tooltip of 📎 on a map node; {files} = file names.",
+    "placeholders": {
+      "files": {
+        "type": "int",
+        "example": "notes.pdf, slides.pdf"
+      }
+    }
+  },
+  "roadmap.map.st.preparing": "preparing",
+  "@roadmap.map.st.preparing": {
+    "description": "State of a step in the list view: being prepared now. Lower case, short."
+  },
+  "roadmap.map.st.yourSubject": "your subject",
+  "@roadmap.map.st.yourSubject": {
+    "description": "State of a step in the list view: taught by the learner’s own subject. Lower case, short."
+  },
+  "roadmap.map.pnl.useTip": "Study this step from a subject you already have — only this step is re-planned",
+  "@roadmap.map.pnl.useTip": {
+    "description": "Tooltip of “📦 Use a subject I have” on a step."
+  },
+  "roadmap.map.pnl.taughtBy": "Taught by “{title}”",
+  "@roadmap.map.pnl.taughtBy": {
+    "description": "Step panel: a subject of the learner teaches this step.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "roadmap.map.pnl.replanningNow": "Re-planning it to match its subject…",
+  "@roadmap.map.pnl.replanningNow": {
+    "description": "Step panel: the step is being re-planned now."
+  },
+  "roadmap.map.pnl.replanning": "Being re-planned to match its subject",
+  "@roadmap.map.pnl.replanning": {
+    "description": "Step panel: the step waits to be re-planned."
+  },
+  "roadmap.map.pnl.withAll": "its chapters are planned from it together with the other steps (▶ Plan the steps now).",
+  "@roadmap.map.pnl.withAll": {
+    "description": "Step panel, after “ — ”. “▶ Plan the steps now” is a button name."
+  },
+  "roadmap.map.pnl.opensWhen": "it opens when its new plan is here. The steps after it keep their plans.",
+  "@roadmap.map.pnl.opensWhen": {
+    "description": "Step panel, after “ — ”."
+  },
+  "roadmap.map.pnl.replanNow": "Re-plan now",
+  "@roadmap.map.pnl.replanNow": {
+    "description": "Button on a step: re-plan it now (after ↻)."
+  },
+  "roadmap.map.pnl.otherWays": "Other ways to prepare it",
+  "@roadmap.map.pnl.otherWays": {
+    "description": "Collapsible section on a step."
+  },
+  "roadmap.map.pnl.toApp": "In my Claude app instead",
+  "@roadmap.map.pnl.toApp": {
+    "description": "Button: prepare this step in the Claude app instead of here."
+  },
+  "roadmap.map.pnl.otherWaysText": "💬 Your Claude app prepares it with your Claude plan (no API cost). 📥 Or import a .noema.zip that Claude made for this step.",
+  "@roadmap.map.pnl.otherWaysText": {
+    "description": "Explanation in “Other ways to prepare it”. Keep .noema.zip."
+  },
+  "roadmap.map.pnl.getting": "Getting it…",
+  "@roadmap.map.pnl.getting": {
+    "description": "Button text while a shared step is downloaded."
+  },
+  "roadmap.map.pnl.tryAgain": "Try again",
+  "@roadmap.map.pnl.tryAgain": {
+    "description": "Button: try again (after ↻)."
+  },
+  "roadmap.map.pnl.review": "Review",
+  "@roadmap.map.pnl.review": {
+    "description": "Button on a mastered step: study it again (after 📖)."
+  },
+  "roadmap.map.pnl.study": "Study this step",
+  "@roadmap.map.pnl.study": {
+    "description": "Button on an open step (after 📖)."
+  },
+  "roadmap.map.pnl.newVersion": "{who} made a new version of this step — yours stays until you take it",
+  "@roadmap.map.pnl.newVersion": {
+    "description": "Shared Roadmap: the author of a step prepared a newer version.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.itsAuthor": "Its author",
+  "@roadmap.map.pnl.itsAuthor": {
+    "description": "Fallback for {who} when the step author’s name is unknown (start of a sentence)."
+  },
+  "roadmap.map.pnl.getNew": "Get the new version",
+  "@roadmap.map.pnl.getNew": {
+    "description": "Button: download the newer shared version of a step (after ⬇️)."
+  },
+  "roadmap.map.pnl.keepMine": "Keep mine",
+  "@roadmap.map.pnl.keepMine": {
+    "description": "Button: keep my version of the step."
+  },
+  "roadmap.map.pnl.preparedShared": "{mine, select, yes {Prepared by you — shared with everybody in this Roadmap} other {Prepared by {who} — shared with everybody in this Roadmap}}",
+  "@roadmap.map.pnl.preparedShared": {
+    "description": "Step panel of a shared Roadmap: who prepared the step (mine = yes: the learner).",
+    "placeholders": {
+      "mine": {
+        "type": "String",
+        "example": "no"
+      },
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.authorNew": "its author made a new version",
+  "@roadmap.map.pnl.authorNew": {
+    "description": "Added (after “ · ”): a newer version of the step exists."
+  },
+  "roadmap.map.pnl.othersPrep": "{who} is preparing this step",
+  "@roadmap.map.pnl.othersPrep": {
+    "description": "Shared Roadmap: another member is preparing this step.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.anotherMemberCap": "Another member",
+  "@roadmap.map.pnl.anotherMemberCap": {
+    "description": "Fallback for {who} at the start of a sentence."
+  },
+  "roadmap.map.pnl.othersPrepMore": "it appears here for you when it is ready (nobody prepares it twice).",
+  "@roadmap.map.pnl.othersPrepMore": {
+    "description": "After “ — ”: the step will appear when ready."
+  },
+  "roadmap.map.pnl.waitPlan": "Waiting for its chapter plan",
+  "@roadmap.map.pnl.waitPlan": {
+    "description": "Shared Roadmap (member): the step has no chapter plan yet."
+  },
+  "roadmap.map.pnl.ownerPlans": "{who} plans the steps of this Roadmap.",
+  "@roadmap.map.pnl.ownerPlans": {
+    "description": "After “ — ”: the owner plans the steps.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.preparedBy": "Prepared by {who}",
+  "@roadmap.map.pnl.preparedBy": {
+    "description": "Step panel of a shared Roadmap: who prepared the step.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.ownVersion": "{ready, select, yes {This is your own version — {who}’s version is the shared one.} other {This is your own version — {who}’s version will be the shared one.}}",
+  "@roadmap.map.pnl.ownVersion": {
+    "description": "Shared Roadmap: the learner prepared their own version of a step.",
+    "placeholders": {
+      "ready": {
+        "type": "String",
+        "example": "yes"
+      },
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.waitingApp": "Waiting for your Claude app",
+  "@roadmap.map.pnl.waitingApp": {
+    "description": "Step panel: the step waits in the Claude app’s queue."
+  },
+  "roadmap.map.pnl.pasteAppears": "paste the message into a Claude chat; the step appears here by itself.",
+  "@roadmap.map.pnl.pasteAppears": {
+    "description": "After “ — ”."
+  },
+  "roadmap.map.pnl.unqueueTip": "Take it out of the Claude app’s queue",
+  "@roadmap.map.pnl.unqueueTip": {
+    "description": "Tooltip of “↩ Not now” on a queued step."
+  },
+  "roadmap.map.pnl.appPlans": "Its chapters are planned by your Claude app",
+  "@roadmap.map.pnl.appPlans": {
+    "description": "Step panel: the Claude app will plan this step’s chapters."
+  },
+  "roadmap.map.pnl.paste": "paste the message into a Claude chat.",
+  "@roadmap.map.pnl.paste": {
+    "description": "After “ — ”."
+  },
+  "roadmap.map.pnl.preparing": "Preparing…",
+  "@roadmap.map.pnl.preparing": {
+    "description": "Step panel: the step is being prepared now."
+  },
+  "roadmap.map.pnl.pause": "Pause",
+  "@roadmap.map.pnl.pause": {
+    "description": "Button: pause preparing (after ⏸)."
+  },
+  "roadmap.map.pnl.budgetHit": "The spending limit for this step was reached.",
+  "@roadmap.map.pnl.budgetHit": {
+    "description": "Step panel: preparing stopped at the cost limit."
+  },
+  "roadmap.map.pnl.newLimit": "New limit $",
+  "@roadmap.map.pnl.newLimit": {
+    "description": "Label before the new budget (US dollars) field."
+  },
+  "roadmap.map.pnl.reviewPrepare": "Review & prepare this step",
+  "@roadmap.map.pnl.reviewPrepare": {
+    "description": "Button on an open step not yet reviewed."
+  },
+  "roadmap.map.pnl.reviewTip": "Before the material is generated you can check and change its chapters and goals. After that the chapters are fixed.",
+  "@roadmap.map.pnl.reviewTip": {
+    "description": "Help next to “Review & prepare this step”."
+  },
+  "roadmap.map.pnl.prepareApp": "Prepare it in my Claude app",
+  "@roadmap.map.pnl.prepareApp": {
+    "description": "Button: put the step in the Claude app’s queue."
+  },
+  "roadmap.map.pnl.preparingToast": "Preparing “{title}” — it usually takes 5–30 minutes; you can study something else meanwhile.",
+  "@roadmap.map.pnl.preparingToast": {
+    "description": "Toast after “Prepare this step now”.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "roadmap.map.pnl.prepareNow": "Prepare this step now",
+  "@roadmap.map.pnl.prepareNow": {
+    "description": "Button: prepare the step now (after ⚡)."
+  },
+  "roadmap.map.pnl.knowIt": "I already know this",
+  "@roadmap.map.pnl.knowIt": {
+    "description": "Button: take a short placement test to mark the step as mastered."
+  },
+  "roadmap.map.pnl.undoMastered": "Undo “mastered”",
+  "@roadmap.map.pnl.undoMastered": {
+    "description": "Button: remove the “mastered” mark of a step."
+  },
+  "roadmap.map.pnl.locked": "Locked. Master these first: {list}",
+  "@roadmap.map.pnl.locked": {
+    "description": "Step panel of a locked step; {list} = links to the steps to master first (comma-separated).",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "SQL basics, Joins"
+      }
+    }
+  },
+  "roadmap.map.pnl.preparedLocked": "Prepared by {who} — it is yours to study when it opens",
+  "@roadmap.map.pnl.preparedLocked": {
+    "description": "Locked step of a shared Roadmap that another member prepared.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.mastered": "{test, select, yes {Mastered (placement test)} other {Mastered}}",
+  "@roadmap.map.pnl.mastered": {
+    "description": "Step panel: the step is mastered (test = yes when by the “I already know this” test).",
+    "placeholders": {
+      "test": {
+        "type": "String",
+        "example": "no"
+      }
+    }
+  },
+  "roadmap.map.pnl.progress": "Progress: {read} read · {solved} of the exercises solved (needs 100 % read + 80 % solved)",
+  "@roadmap.map.pnl.progress": {
+    "description": "Step panel: progress; {read} and {solved} are percentages already formatted (e.g. 40%).",
+    "placeholders": {
+      "read": {
+        "type": "String",
+        "example": "40%"
+      },
+      "solved": {
+        "type": "String",
+        "example": "25%"
+      }
+    }
+  },
+  "roadmap.map.pnl.chGoalsTip": "Show the goals of this chapter",
+  "@roadmap.map.pnl.chGoalsTip": {
+    "description": "Tooltip of a chapter in the step panel."
+  },
+  "roadmap.map.pnl.clip": "Your material — this step is taught from it",
+  "@roadmap.map.pnl.clip": {
+    "description": "Tooltip of 📎 next to a step title."
+  },
+  "roadmap.map.pnl.clipAria": "Your material — this step is taught from it: {files}",
+  "@roadmap.map.pnl.clipAria": {
+    "description": "Screen-reader label of 📎; {files} = file names.",
+    "placeholders": {
+      "files": {
+        "type": "int",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "roadmap.map.pnl.nPages": "{n, number} pages",
+  "@roadmap.map.pnl.nPages": {
+    "description": "Number of pages of a file (menu of files).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.pnl.closeAria": "Close the panel",
+  "@roadmap.map.pnl.closeAria": {
+    "description": "Screen-reader label of ✕ on the step panel."
+  },
+  "roadmap.map.pnl.alsoTeaches": "{n, plural, one {it also teaches # other step (same progress)} other {it also teaches # other steps (same progress)}}",
+  "@roadmap.map.pnl.alsoTeaches": {
+    "description": "After “ — ”: the learner’s subject also teaches other steps.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.pnl.parentsOwn": "{n, plural, one {{list} is now taught by your own subject — check that this step still fits (✏️ → ✨ Re-plan).} other {{list} are now taught by your own subject — check that this step still fits (✏️ → ✨ Re-plan).}}",
+  "@roadmap.map.pnl.parentsOwn": {
+    "description": "Step panel: prerequisite steps are now taught by the learner’s own subjects; {list} = their titles in quotes.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "1"
+      },
+      "list": {
+        "type": "String",
+        "example": "“SQL basics”"
+      }
+    }
+  },
+  "roadmap.map.pnl.removeOtherTip": "Remove the version another member prepared (the step can then be prepared again)",
+  "@roadmap.map.pnl.removeOtherTip": {
+    "description": "Tooltip of the owner’s button that removes a member’s version of a step."
+  },
+  "roadmap.map.pnl.removeOtherConfirm": "Remove the version of “{title}” that {who} prepared? Everybody can then prepare it again.",
+  "@roadmap.map.pnl.removeOtherConfirm": {
+    "description": "Confirmation before removing a member’s version of a step.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      },
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.removedOther": "Removed — the step can be prepared again",
+  "@roadmap.map.pnl.removedOther": {
+    "description": "Toast after removing a member’s version of a step."
+  },
+  "roadmap.map.pnl.othersVersion": "{ready, select, yes {{who}’s version} other {{who}’s reservation}}",
+  "@roadmap.map.pnl.othersVersion": {
+    "description": "Button (after 🗑): remove a member’s version of a step (ready = yes) or their reservation (they are still preparing it).",
+    "placeholders": {
+      "ready": {
+        "type": "String",
+        "example": "yes"
+      },
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.pnl.member": "Member",
+  "@roadmap.map.pnl.member": {
+    "description": "Fallback for {who} when the member’s name is unknown (button)."
+  },
+  "roadmap.map.pnl.reviewed": "reviewed — prepared when it opens",
+  "@roadmap.map.pnl.reviewed": {
+    "description": "Step panel: the step’s plan was reviewed; it will be prepared when it opens (after ✔)."
+  },
+  "roadmap.map.pnl.afterThis": "After this step you can",
+  "@roadmap.map.pnl.afterThis": {
+    "description": "Heading above the learning goals of a step."
+  },
+  "roadmap.map.pnl.nChapters": "{n, number} chapters",
+  "@roadmap.map.pnl.nChapters": {
+    "description": "Heading above the chapters of a step.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.pnl.chaptersTip": "Tap a chapter for its teaching goals and what it must cover.",
+  "@roadmap.map.pnl.chaptersTip": {
+    "description": "Help next to the chapters of a step."
+  },
+  "roadmap.map.pnl.buildsOn": "Builds on:",
+  "@roadmap.map.pnl.buildsOn": {
+    "description": "Label before the steps this step needs."
+  },
+  "roadmap.map.pnl.opens": "Opens:",
+  "@roadmap.map.pnl.opens": {
+    "description": "Label before the steps this step opens."
+  },
+  "roadmap.map.pnl.kind": "Kind of knowledge:",
+  "@roadmap.map.pnl.kind": {
+    "description": "Label before the kind of knowledge of a step (a technical word from the AI)."
+  },
+  "roadmap.map.next.lead": "Open steps, in a good study order",
+  "@roadmap.map.next.lead": {
+    "description": "Subtitle of “Next up”."
+  },
+  "roadmap.map.next.needsReview": "needs your review",
+  "@roadmap.map.next.needsReview": {
+    "description": "State in “Next up”: the step’s plan waits for the learner’s review."
+  },
+  "roadmap.map.next.reviewed": "reviewed",
+  "@roadmap.map.next.reviewed": {
+    "description": "State in “Next up”: the step’s plan was reviewed."
+  },
+  "roadmap.map.next.allDone": "Everything is mastered!",
+  "@roadmap.map.next.allDone": {
+    "description": "“Next up” when every step is mastered."
+  },
+  "roadmap.map.set.ahead": "{n, plural, =0 {only when I open a step} one {# steps ahead} other {# steps ahead}}",
+  "@roadmap.map.set.ahead": {
+    "description": "Option of “Prepare ahead” in a Roadmap’s settings (n = 0, 1, 2, 3, 5, 8). Translators: use your plural forms (English keeps “steps” even for 1).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.set.app": "Claude app (your Claude plan)",
+  "@roadmap.map.set.app": {
+    "description": "Option of the AI menu in a Roadmap’s settings."
+  },
+  "roadmap.map.set.auto": "Automatic (API key here)",
+  "@roadmap.map.set.auto": {
+    "description": "Option of the AI menu in a Roadmap’s settings."
+  },
+  "roadmap.map.set.wishPh": "Optional wish for every step, e.g. “more worked examples”, “exam focus”",
+  "@roadmap.map.set.wishPh": {
+    "description": "Placeholder of the wish field when re-planning the whole Roadmap."
+  },
+  "roadmap.map.set.replanConfirm": "{how, select, app {{n, plural, one {Re-plan the chapters of # step with your Claude app (your Claude plan)?} other {Re-plan the chapters of # steps with your Claude app (your Claude plan)?}}} claude {{n, plural, one {Re-plan the chapters of # step with Claude with your API key?} other {Re-plan the chapters of # steps with Claude with your API key?}}} gemini {{n, plural, one {Re-plan the chapters of # step with Gemini?} other {Re-plan the chapters of # steps with Gemini?}}} other {{n, plural, one {Re-plan the chapters of # step with the AI (add a key first)?} other {Re-plan the chapters of # steps with the AI (add a key first)?}}}}",
+  "@roadmap.map.set.replanConfirm": {
+    "description": "Confirmation (first line) before re-planning all steps not prepared yet; how = which AI does it.",
+    "placeholders": {
+      "how": {
+        "type": "String",
+        "example": "app"
+      },
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.map.set.replanFixed": "{n, plural, one {# step is already prepared and keeps its chapters.} other {# steps are already prepared and keep its chapters.}}",
+  "@roadmap.map.set.replanFixed": {
+    "description": "Second line of the re-plan confirmation: prepared steps keep their chapters.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.set.replanReview": "You review each new plan before its step is prepared.",
+  "@roadmap.map.set.replanReview": {
+    "description": "Last line of the re-plan confirmation."
+  },
+  "roadmap.map.set.queued": "{n, number} steps wait for your Claude app — copy the message from the 💬 bar of the Roadmap.",
+  "@roadmap.map.set.queued": {
+    "description": "After “Re-plan all” with the Claude app.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.set.replanned": "{n, number} steps re-planned — review each one before it is prepared.",
+  "@roadmap.map.set.replanned": {
+    "description": "After “Re-plan all” with an API key.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.set.replanAll": "{n, plural, one {Re-plan all # step} other {Re-plan all # steps}}",
+  "@roadmap.map.set.replanAll": {
+    "description": "Button in a Roadmap’s settings (after ✨).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.set.replanWhole": "Re-plan the whole Roadmap",
+  "@roadmap.map.set.replanWhole": {
+    "description": "Collapsible section in a Roadmap’s settings (after ✨)."
+  },
+  "roadmap.map.set.replanWhat": "{how, select, app {Plans the chapters of every step that is not prepared yet again, the way this Roadmap is planned: with your Claude app (your Claude plan). Steps with your files are planned from the text of their pages.} claude {Plans the chapters of every step that is not prepared yet again, the way this Roadmap is planned: with Claude with your API key (here, now). Steps with your files are planned from the text of their pages.} gemini {Plans the chapters of every step that is not prepared yet again, the way this Roadmap is planned: with Gemini (here, now). Steps with your files are planned from the text of their pages.} other {Plans the chapters of every step that is not prepared yet again, the way this Roadmap is planned: with the AI (add a key first) (here, now). Steps with your files are planned from the text of their pages.}}",
+  "@roadmap.map.set.replanWhat": {
+    "description": "Explanation of “Re-plan the whole Roadmap”; how = which AI does it.",
+    "placeholders": {
+      "how": {
+        "type": "String",
+        "example": "app"
+      }
+    }
+  },
+  "roadmap.map.set.replanKeep": "{n, plural, one {# prepared step keeps its chapters.} other {# prepared steps keep their chapters.}}",
+  "@roadmap.map.set.replanKeep": {
+    "description": "Part of the explanation of “Re-plan the whole Roadmap”.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.set.replanAgain": "Every re-planned step waits for your review again.",
+  "@roadmap.map.set.replanAgain": {
+    "description": "Last sentence of the explanation of “Re-plan the whole Roadmap”."
+  },
+  "roadmap.map.q.howMany": "How many steps",
+  "@roadmap.map.q.howMany": {
+    "description": "Screen-reader label of the menu: how many steps to queue for the Claude app."
+  },
+  "roadmap.map.q.next": "the next {n, number} steps",
+  "@roadmap.map.q.next": {
+    "description": "Option: queue the next n steps (n = 5, 10, 20).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.q.all": "all {n, number} steps not prepared yet",
+  "@roadmap.map.q.all": {
+    "description": "Option: queue every step not prepared yet.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.q.queued": "{n, plural, one {# step queued for your Claude app (in study order).} other {# steps queued for your Claude app (in study order).}}",
+  "@roadmap.map.q.queued": {
+    "description": "After queueing steps for the Claude app.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.q.needReview": "{n, number} wait for your review (📝) — tick “without my review” to include them.",
+  "@roadmap.map.q.needReview": {
+    "description": "After queueing: some steps wait for review. “without my review” is a checkbox name.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.q.needPlan": "{app, select, yes {{n, number} have no chapter plan yet — the Claude app plans them first.} other {{n, number} have no chapter plan yet — plan them first (✨ Re-plan).}}",
+  "@roadmap.map.q.needPlan": {
+    "description": "After queueing: some steps have no chapter plan yet.",
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "yes"
+      },
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "roadmap.map.q.copy": "Copy the message (one step per run)",
+  "@roadmap.map.q.copy": {
+    "description": "Button after queueing steps."
+  },
+  "roadmap.map.q.go": "Queue them",
+  "@roadmap.map.q.go": {
+    "description": "Button: queue the chosen steps for the Claude app."
+  },
+  "roadmap.map.q.title": "Prepare many steps ahead in the Claude app",
+  "@roadmap.map.q.title": {
+    "description": "Collapsible section in a Roadmap’s settings."
+  },
+  "roadmap.map.q.lead": "Queue steps for your Claude app — even locked ones — so the whole Roadmap gets prepared while you do other things.",
+  "@roadmap.map.q.lead": {
+    "description": "Explanation of queueing steps ahead."
+  },
+  "roadmap.map.q.inQueue": "{n, number} already wait in the queue.",
+  "@roadmap.map.q.inQueue": {
+    "description": "Added: how many steps already wait in the Claude app’s queue.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.q.noReview": "without my review (prepare them from their current plan)",
+  "@roadmap.map.q.noReview": {
+    "description": "Checkbox when queueing steps."
+  },
+  "roadmap.map.q.night": "Overnight, by itself: a scheduled task in Claude Desktop",
+  "@roadmap.map.q.night": {
+    "description": "Collapsible help: run the Claude app automatically at night. “Claude Desktop” is a product name."
+  },
+  "roadmap.map.q.n1": "Queue the steps here.",
+  "@roadmap.map.q.n1": {
+    "description": "Overnight help, step 1."
+  },
+  "roadmap.map.q.n2": "In Claude Desktop: Scheduled → New task. Paste the message (📋 above), choose “every hour” (or every 2 hours) for the night, and make sure the noema-lite connector and code execution are on for it.",
+  "@roadmap.map.q.n2": {
+    "description": "Overnight help, step 2. “Scheduled → New task” and “every hour” are words of Claude Desktop’s interface — use the words Claude Desktop shows in your language if you know them."
+  },
+  "roadmap.map.q.n3": "Each run is a fresh chat that prepares ONE queued step and saves it; when the queue is empty, a run just says so. Your plan’s usage limits decide how many steps fit in a night — the runs after a limit simply continue later.",
+  "@roadmap.map.q.n3": {
+    "description": "Overnight help, step 3."
+  },
+  "roadmap.map.q.n4": "In the morning the prepared steps are ⚡ on this Roadmap (it picks them up when it opens).",
+  "@roadmap.map.q.n4": {
+    "description": "Overnight help, step 4."
+  },
+  "roadmap.map.set.sub": "{n, number} steps · built {date}",
+  "@roadmap.map.set.sub": {
+    "description": "Subtitle of a Roadmap’s settings; {date} = the creation date, already formatted.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "24"
+      },
+      "date": {
+        "type": "String",
+        "example": "10/11/2026"
+      }
+    }
+  },
+  "roadmap.map.set.limit": "Claude: limit per step ($)",
+  "@roadmap.map.set.limit": {
+    "description": "Field label: cost limit per step in US dollars."
+  },
+  "roadmap.map.set.aiNew": "AI for new steps",
+  "@roadmap.map.set.aiNew": {
+    "description": "Field label: which AI prepares new steps."
+  },
+  "roadmap.map.set.member": "Shared by {who}: you prepare steps nobody has prepared yet with your own AI (above); the Roadmap and its plans are the owner’s.",
+  "@roadmap.map.set.member": {
+    "description": "Settings of a shared Roadmap (member’s view).",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.map.set.review": "Let me review each step before it is prepared (recommended)",
+  "@roadmap.map.set.review": {
+    "description": "Checkbox in a Roadmap’s settings."
+  },
+  "roadmap.map.set.pause": "Pause preparing in the background on this device",
+  "@roadmap.map.set.pause": {
+    "description": "Checkbox in a Roadmap’s settings."
+  },
+  "roadmap.map.set.export": "Export",
+  "@roadmap.map.set.export": {
+    "description": "Button: download the Roadmap as a .json file (after ⬇️)."
+  },
+  "roadmap.map.set.leaveConfirm": "Leave “{title}”? Your copy of the Roadmap goes; the steps you studied stay in your subjects, with your progress.",
+  "@roadmap.map.set.leaveConfirm": {
+    "description": "Confirmation before leaving a shared Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "roadmap.map.set.leave": "Leave",
+  "@roadmap.map.set.leave": {
+    "description": "Button: leave a shared Roadmap (after ↩)."
+  },
+  "roadmap.map.set.deleteConfirm": "Delete this Roadmap? The subjects already prepared stay in your subjects.",
+  "@roadmap.map.set.deleteConfirm": {
+    "description": "Confirmation before deleting a Roadmap (settings)."
+  },
+  "roadmap.map.set.deleteShared": "It is shared: sharing stops too (the others keep their copies).",
+  "@roadmap.map.set.deleteShared": {
+    "description": "Second line of the delete confirmation for a shared Roadmap."
+  },
+  "roadmap.map.test.intro": "A 10-question test, from the step’s own exercises when it is prepared. 8 of 10 right marks the step as mastered and opens the steps after it.",
+  "@roadmap.map.test.intro": {
+    "description": "Explanation before the placement test."
+  },
+  "roadmap.map.test.proceed": "Proceed",
+  "@roadmap.map.test.proceed": {
+    "description": "Button: start the placement test."
+  },
+  "roadmap.map.test.back": "Go back",
+  "@roadmap.map.test.back": {
+    "description": "Button: do not take the test now."
+  },
+  "roadmap.map.test.sub": "Placement test — 8 of 10 right marks this step as mastered",
+  "@roadmap.map.test.sub": {
+    "description": "Subtitle of the placement test."
+  },
+  "roadmap.map.test.preparing": "Preparing the questions…",
+  "@roadmap.map.test.preparing": {
+    "description": "Message while the test questions are prepared."
+  },
+  "roadmap.map.test.passed": "{right, number}/{total, number} — mastered! The next steps are open.",
+  "@roadmap.map.test.passed": {
+    "description": "Result of a passed placement test.",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "9"
+      },
+      "total": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "roadmap.map.test.failed": "{right, number}/{total, number} — not yet (8/10 needed). Study the step and try again.",
+  "@roadmap.map.test.failed": {
+    "description": "Result of a failed placement test.",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "6"
+      },
+      "total": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "roadmap.map.test.ok": "OK",
+  "@roadmap.map.test.ok": {
+    "description": "Button that closes the test result."
+  },
+  "roadmap.map.test.question": "Question {n, number} of {total, number}",
+  "@roadmap.map.test.question": {
+    "description": "Placement test: which question this is.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "roadmap.map.test.next": "Next",
+  "@roadmap.map.test.next": {
+    "description": "Button: next question (followed by →)."
+  },
+  "roadmap.map.test.result": "See the result",
+  "@roadmap.map.test.result": {
+    "description": "Button after the last question."
+  },
   "roadmap.map.guide.c.sub": "(sub-topic)",
   "@roadmap.map.guide.c.sub": {
     "description": "Import guide, left column (shown as code): stands for a sub-topic in an outline."
