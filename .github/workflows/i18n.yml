@@ -1,0 +1,25 @@
+# The interface-language checks on every pull request that changes catalogs — above all Weblate's pull requests
+# (branch weblate-translations, docs/i18n.md §9): ICU syntax, placeholders as in English, every CLDR plural category of
+# the locale, apostrophes, sensitive keys; then the runtime test. Node only, a few seconds.
+name: i18n
+on:
+  pull_request:
+    paths: ['i18n/**', 'tools/i18n/**', 'engine/i18n.js', 'tests/i18n.js', 'tests/weblate_tools.py', 'weblate/**', '.github/workflows/i18n.yml']
+  workflow_dispatch: {}
+jobs:
+  catalogs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: catalog checks (tools/i18n/check.js)
+        run: node tools/i18n/check.js
+      - name: runtime (tests/i18n.js)
+        run: node tests/i18n.js
+      - name: drafts already approved (warning only)
+        run: node tools/i18n/prune_drafts.js --check || echo "::warning::drafts approved in Weblate are still in i18n/*/drafts — run node tools/i18n/prune_drafts.js --write"
+      - name: Weblate tools (no network)
+        run: python -m pip install pyyaml && python tests/weblate_tools.py
