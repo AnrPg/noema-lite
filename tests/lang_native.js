@@ -39,6 +39,25 @@ function prepared() {
   return { dst, word };
 }
 
+/** A copy of the prepared repo with the REAL el facade (facades/el, as the translators left it) set to status “preview”, built, and the
+ *  host taken as a deploy preview (config.i18nPreview). While Tier 1 is not complete the facade must not be offered (checked
+ *  first); to see what the finished facade will look like, the copy then marks Tier 1 complete. */
+function preparedReal() {
+  const dst = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-native-el-'));
+  fs.cpSync(SRC, dst, { recursive: true, filter: p => !/[\\/](\.git|dist|data|node_modules)([\\/]|$)/.test('/' + path.relative(SRC, p)) });
+  const fdir = path.join(dst, 'library', 'languages', COURSE, 'facades', 'el'), hf = path.join(fdir, 'facade.json');
+  if (!fs.existsSync(hf)) return { dst, none: true };
+  const head = JSON.parse(fs.readFileSync(hf, 'utf8')), N = require(path.join(SRC, 'engine', 'langcore.js'));
+  const preview = { ...head, status: 'preview' }, gate = { tier1: N.facadeUsable({ ...preview, status: 'on' }), preview: N.facadeUsable(preview, { preview: true }), off: N.facadeUsable(preview), draftsOnly: N.facadeUsable({ ...head, status: 'draft' }, { preview: true }) };
+  const t1 = (head.coverage || {})['1'] || {};
+  if (!gate.tier1) preview.coverage = { ...head.coverage, 1: { ...t1, done: (t1.total || 0) - (t1.stale || 0), missing: 0 } };
+  fs.writeFileSync(hf, JSON.stringify(preview, null, 1));
+  fs.appendFileSync(path.join(dst, 'config.js'), '\nwindow.NOEMA_CONFIG.i18nPreview = true;   // lang_native.js: a deploy-preview host\n');
+  const T = {}; for (const f of fs.readdirSync(fdir)) if (f.endsWith('.json') && f !== 'facade.json') Object.assign(T, JSON.parse(fs.readFileSync(path.join(fdir, f), 'utf8')));
+  execFileSync('python3', [path.join(dst, 'tools', 'build.py'), '--no-validate'], { cwd: dst, stdio: 'pipe' });
+  return { dst, gate, t1, T };
+}
+
 (async () => {
   const { dst: ROOT, word } = prepared();
   const reg = fs.readFileSync(path.join(ROOT, 'library', 'registry.js'), 'utf8');
@@ -88,7 +107,7 @@ function prepared() {
       return { master: sig(C0, L), facade: sig(CF, LF), gloss: CF.lang.de.sentenceById['de.c01_04.001'].gloss };
     });
     ok(r.gloss === 'Σήμερα ξύπνησα στις έξι.' && r.master[0] && JSON.stringify(r.master) === JSON.stringify(r.facade), `through the facade the exercises are the same (clock, date, parallel sentences, ${r.master[3].split('|').length} grammar items with their answers)`); }
-  if (word) { await open('#/w/de/' + encodeURIComponent(word));
+  if (word) { await open('#/w/de/' + encodeURIComponent(word)); await page.waitForSelector('.lx-card [data-cmp="yours"] [data-for]', { timeout: 10000 }).catch(() => { });
     const w = await notesFor('yours', '.lx-card'), o = await notesFor('others', '.lx-card');
     ok(w.join() === 'el' && o.join() === 'en,tr,type:agglutinating', 'a word card shows its profile.notes: the native language’s, the others folded (' + w.join(', ') + ' | ' + o.join(', ') + ')'); }
   console.log('— the Greek native speaks English at C1 and learns Arabic and German');
@@ -106,7 +125,7 @@ function prepared() {
     ok(await md.locator('ul.lx-md-list > li').count() === 2 && await md.locator('strong').innerText() === 'Gender' && await md.locator('em').innerText() === 'declines' && /der Tisch/.test(await md.locator('.lx-md-ex').innerText()) && !(await md.innerText()).includes('**'),
       'R2: a note in the Markdown subset is drawn as a list, bold, italic and an example line (no stars left)'); }
   await page.screenshot({ path: SHOTS + '/lx_native_sections.png', fullPage: true });
-  if (word) { await open('#/w/de/' + encodeURIComponent(word)); ok((await notesFor('yours', '.lx-card')).join() === 'el,en', 'the word card too: Greek, then English (C1)'); }
+  if (word) { await open('#/w/de/' + encodeURIComponent(word)); await page.waitForSelector('.lx-card [data-cmp="yours"] [data-for="en"]', { timeout: 10000 }).catch(() => { }); ok((await notesFor('yours', '.lx-card')).join() === 'el,en', 'the word card too: Greek, then English (C1)'); }
   await setCourse({ knows: [], languages: ['ar', 'he', 'zh', 'de'] });
   await open('#/settings');
   ok(await page.locator('.lx-nativesel').inputValue() === 'el' && await page.locator('.lx-speaker option').count() === 3, 'course settings: the native language, and “Explanations in” (automatic · English · Greek)');
@@ -144,6 +163,56 @@ function prepared() {
   await page.selectOption('.ns-native', 'fr'); await wait(300);
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).native?.code) === 'fr', '… and changes it');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
+
+  console.log('— the real el facade, status “preview”, on a deploy-preview host');
+  const RE = preparedReal();
+  if (RE.none) ok(false, 'library/languages/' + COURSE + '/facades/el/facade.json exists');
+  else {
+    const { gate, t1, T } = RE, tx = a => (T[a] && typeof T[a].t === 'string') ? T[a].t : null;
+    ok(gate.preview === gate.tier1 && !gate.off && !gate.draftsOnly, `the gate: “preview” is offered on a preview host only, and only with Tier 1 complete (Tier 1: ${t1.done || 0} done · ${t1.stale || 0} stale · ${t1.missing || 0} missing → ${gate.tier1 ? 'ready' : 'not offered yet'})`);
+    const ctx2 = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+    await ctx2.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
+    const p2 = await ctx2.newPage(); const E2 = []; p2.on('pageerror', e => E2.push(e.message));
+    const url2 = 'file://' + RE.dst + '/index.html';
+    const open2 = async (hash = '') => { await p2.goto('about:blank'); await p2.goto(url2 + '?account=anr&subject=' + SUBJ + hash); await p2.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900); };
+    await p2.goto(url2); await p2.evaluate(() => { localStorage.clear(); localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ native: { code: 'el' } })); });
+    const plain = t => String(t || '').split('\n')[0].replace(/[*→]/g, '').replace(/^\s*-\s+/, '').trim().slice(0, 28);
+    await open2('#/fn/' + FN + '/de');
+    await p2.waitForFunction(() => window.NoemaLangUI?.UI?.C?.explainLang === 'el' && document.querySelector('.lx-gram'), null, { timeout: 30000 }).catch(() => { }); await wait(500);   // the facade file is large: it loads after the course
+    const ex2 = await p2.evaluate(() => document.documentElement.lang + '|' + NoemaLangUI.UI.C.explainLang), gram = await p2.locator('.lx-gram').textContent().catch(() => '');
+    const sum = tx(`g:de:${FN}/summary`);
+    ok(/\|el$/.test(ex2) && sum && gram.includes(plain(sum)), `a Greek native: the explanations in Greek (${ex2}; the summary “${plain(sum)}…”)`);
+    // notes: a Greek note of a grammar page (the native's section), else any translated note of a page
+    const G = JSON.parse(fs.readFileSync(path.join(RE.dst, 'library', 'languages', COURSE, 'lang', 'de', 'grammar', FN + '.json'), 'utf8'));
+    let na = G.notes.map((n, i) => [n, `g:de:${FN}/notes/${i}/text`]).find(([n, a]) => n.for === 'el' && tx(a)), at = '#/fn/' + FN + '/de';
+    if (!na) for (const a of Object.keys(T)) { const m = /^g:(\w+):([^/]+)\/notes\/(\d+)\/text$/.exec(a); if (m && tx(a)) { const g = JSON.parse(fs.readFileSync(path.join(RE.dst, 'library', 'languages', COURSE, 'lang', m[1], 'grammar', m[2] + '.json'), 'utf8')); na = [g.notes[+m[3]], a]; at = '#/fn/' + m[2] + '/' + m[1]; if (na[0]?.for === 'el') break; } }
+    if (!na) console.log('  ⏭  Greek notes: the el facade has no translated note yet (the notes come in its delta pass) — nothing to show');
+    else {
+      await open2(at);
+      const sec = na[0].for === 'el' ? 'yours' : 'others', txt = await p2.locator(`.lx-gram [data-cmp="${sec}"]`).allTextContents().then(a => a.join('\n'));
+      ok(txt.includes(plain(tx(na[1]))) && !txt.includes(plain(na[0].text)), `Greek notes: ${na[1]} (for ${na[0].for}, in “${sec}”) is shown in Greek, not in the master's English`);
+    }
+    // the word card: the parameters right under the word, their labels in Greek
+    const LJ = JSON.parse(fs.readFileSync(path.join(RE.dst, 'library', 'languages', COURSE, 'lang', 'de', 'language.json'), 'utf8'));
+    const elT = (LJ.wordFeatures.NOUN || []).map((d, i) => tx(`lg:de/wordFeatures/NOUN/${i}/title`)).filter(Boolean), enT = (LJ.wordFeatures.NOUN || []).map(d => d.title);
+    await open2('#/w/de/' + encodeURIComponent('de:Tisch'));
+    const keys = await p2.locator('.lx-card .lx-params .lx-pk').allTextContents();
+    ok(keys.length >= 3 && elT.length && keys.filter(k => elT.includes(k.trim())).length >= 3 && !keys.some(k => enT.includes(k.trim()) && !elT.includes(k.trim())), `the word card of der Tisch: its parameters with Greek labels (${keys.slice(0, 4).join(' · ')})`);
+    // the exercises do not change through the real facade
+    const r2 = await p2.evaluate(() => {
+      const N = NoemaLang, U = NoemaLangUI.UI, C0 = N.course(U.data), CF = U.C, L = N.newLearner(C0);
+      for (const id of Object.keys(C0.lang.de.lex)) N.review(C0, L, 'de', id, 'r', 'good', 0);
+      const LF = N.fromKV(CF, N.toKV(C0, L)), kk = (C, LL) => N.known(C, LL, 'de');
+      const sig = (C, LL) => [N.clockItems(C, LL, 'de', { k: kk(C, LL), rng: N.seeded(5), max: 40 }).map(x => x.sentence + x.answer).join(), N.dateItems(C, LL, 'de', { k: kk(C, LL), rng: N.seeded(5), max: 40 }).map(x => x.kind + (x.sentence || '')).join(),
+        N.parallelGroups(C).length, N.exercises(C, LL, 'de', 'fn.definite', { k: kk(C, LL), rng: N.seeded(9), max: 12 }).map(x => x.kind + ':' + (x.kind === 'meaning' ? x.sentence + '#' + x.options.indexOf(x.answer) : JSON.stringify(x.answer ?? x.answers))).join('|')];   // a meaning is chosen in the explanation language: the same sentence, the same option
+      return { master: sig(C0, L), facade: sig(CF, LF), el: CF.explainLang };
+    });
+    ok(r2.el === 'el' && r2.master[0] && JSON.stringify(r2.master) === JSON.stringify(r2.facade), `through the real el facade the exercises are the same (clock, date, parallel sentences, ${r2.master[3].split('|').length} grammar items; a “meaning” answer is the same sentence’s gloss, in Greek)`);
+    await open2('#/fn/' + FN + '/de');
+    ok(!E2.length, 'no page errors with the real el facade ' + JSON.stringify(E2.slice(0, 3)));
+    await ctx2.close();
+  }
+  if (RE.dst) fs.rmSync(RE.dst, { recursive: true, force: true });
   await browser.close(); fs.rmSync(ROOT, { recursive: true, force: true });
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

@@ -10,6 +10,7 @@
   "de"
  ],
  "profiles": "required",
+ "d19": "lenient",
  "defaults": {
   "depth": {
    "ar": 3,

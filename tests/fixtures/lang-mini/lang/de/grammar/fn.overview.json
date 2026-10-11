@@ -187,6 +187,46 @@
    "for": "iu",
    "rel": "different",
    "text": "German words are long only as compounds of nouns (Haustür, Kleiderschrank); a sentence is still several words, and the verb does not take in its object – German has no incorporation. Every subject is in the nominative, the subject of a transitive verb included (no ergative), and there is no antipassive: the object is simply left out (Ich esse)."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like Italian, German has articles and grammatical gender; unlike Italian, it has four cases."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like Albanian, German declines nouns for case; German shows the case mostly on the article."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Like Portuguese, German has articles and gender; German has three genders and four cases."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "same",
+   "text": "If your language is fusional, the German endings that carry several meanings at once will feel familiar."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language adds one ending per meaning, expect German endings to carry several meanings at once."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language does not inflect words, German endings and articles that change with the case are new."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language builds long verb words, German keeps most meanings in separate words."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "Semitic languages build words from roots and patterns; German builds them with prefixes, suffixes and compounds."
   }
  ]
 }

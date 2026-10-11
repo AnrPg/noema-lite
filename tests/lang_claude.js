@@ -81,12 +81,16 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
   e = N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: wrong });
   ok(e.some(x => /“esst” is not the V;PRS;3;SG form of de:essen \(“isst”\)/.test(x)), 'a sentence token that is not its paradigm cell is refused: ' + (e[0] || '').slice(0, 110));
   const noNotes = clone(gDef); noNotes.notes = noNotes.notes.slice(0, 3);
-  ok(N.checkLangAnswer(rec, data, tDef, { grammar: noNotes, bank: sDef }).some(x => /contrast notes \(D19\) missing: en, fr, ar, hi, zh, ja, it, sq, pt, type:fusional.*\(now at least 5 supported natives: 3\)/.test(x)), 'a grammar page with notes for too few supported natives is refused (D19)');
-  ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef }).some(x => /D19/.test(x)), 'while the content is rewritten (LANGJOBS.D19.strict off) a page with notes for most supported natives passes');
-  N.LANGJOBS.D19.strict = true;
-  const strictE = N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef });
-  N.LANGJOBS.D19.strict = false;
+  ok(N.LANGJOBS.D19.strict === true, 'LANGJOBS.D19.strict is on by default (since 2026-10-11 the library passes the D19 rules)');
+  const gPart = clone(gDef); gPart.notes = gPart.notes.filter(n => !['it', 'sq', 'pt'].includes(n.for) && !/^(type|branch):/.test(n.for));   // most supported natives, no type note
+  const strictE = N.checkLangAnswer(rec, data, tDef, { grammar: gPart, bank: sDef });
   ok(strictE.some(x => /contrast notes \(D19\) missing: it, sq, pt, type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic/.test(x)), 'with LANGJOBS.D19.strict every supported native but the page’s language and the five type notes are required');
+  N.LANGJOBS.D19.strict = false;   // lenient (a pre-D19 course such as this mini fixture): at least 5 supported natives
+  ok(N.checkLangAnswer(rec, data, tDef, { grammar: noNotes, bank: sDef }).some(x => /contrast notes \(D19\) missing: en, fr, ar, hi, zh, ja, it, sq, pt, tr, type:fusional.*\(now at least 5 supported natives: 3\)/.test(x)), 'lenient: a grammar page with notes for too few supported natives is refused (D19)');
+  ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gPart, bank: sDef }).some(x => /D19/.test(x)), 'lenient (LANGJOBS.D19.strict off) a page with notes for most supported natives passes');
+  N.LANGJOBS.D19.strict = true;
+  ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef }).some(x => /D19/.test(x)), 'strict: a page with every required note passes');
+  N.LANGJOBS.D19.strict = false;
   const joined = clone(sDef); joined[0].text = joined[0].text + ' ';
   ok(N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: joined }).some(x => /≠ the tokens joined/.test(x)), 'text ≠ the joined tokens is refused');
   ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef }).length && sDef.length >= 3, `fn.definite in German with ${sDef.length} sentences passes`);
@@ -140,13 +144,14 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
     const dir = path.join(W, 'lang', rec.id), ans = { bank: [s1] };
     fs.writeFileSync(path.join(W, 'a.json'), JSON.stringify(ans));
     execFileSync('python3', [path.join(ROOT, 'tools/lang_course.py'), 'apply', dir, path.join(W, 'a.json'), tRef.id]);
-    let out = ''; try { out = execFileSync('python3', [path.join(ROOT, 'tools/validate_lang.py'), dir, '--lang', 'de', '--alone']).toString(); } catch (x) { out = String(x.stdout); }
+    // the course's content comes from the pre-D19 mini fixture: its D19 / R3 rules are checked lenient (warnings)
+    let out = ''; try { out = execFileSync('python3', [path.join(ROOT, 'tools/validate_lang.py'), dir, '--lang', 'de', '--alone', '--d19-lenient']).toString(); } catch (x) { out = String(x.stdout); }
     ok(/✅ valid/.test(out), 'lang_course.py unpack + apply → validate_lang.py --lang de: ' + out.split('\n').filter(l => /❌|valid/.test(l)).slice(0, 2).join(' | '));
     const back = JSON.parse(execFileSync('python3', [path.join(ROOT, 'tools/lang_course.py'), 'answer', dir, tRef.id]).toString());
     ok(back.bank.length === 1 && back.bank[0].id === s1.id && !N.checkLangAnswer(rec, data, tRef, back).length, 'lang_course.py answer reads the answer back from the folder — and the app accepts it');
     const wf = clone(ans); wf.bank[0].tokens[3].t = 'Zwiebeln'; wf.bank[0].text = 'Er isst die Zwiebeln.'; fs.writeFileSync(path.join(W, 'b.json'), JSON.stringify(wf));
     execFileSync('python3', [path.join(ROOT, 'tools/lang_course.py'), 'apply', dir, path.join(W, 'b.json'), tRef.id]);
-    try { out = execFileSync('python3', [path.join(ROOT, 'tools/validate_lang.py'), dir, '--lang', 'de', '--alone']).toString(); } catch (x) { out = String(x.stdout); }
+    try { out = execFileSync('python3', [path.join(ROOT, 'tools/validate_lang.py'), dir, '--lang', 'de', '--alone', '--d19-lenient']).toString(); } catch (x) { out = String(x.stdout); }
     ok(/“Zwiebeln” is not the N;ACC;SG form/.test(out) && N.checkLangAnswer(rec, data, tRef, wf).some(x => /“Zwiebeln” is not the N;ACC;SG form/.test(x)), 'the validator and the app refuse the same wrong form');
   } finally { fs.rmSync(W, { recursive: true, force: true }); }
   N.applyLangAnswer(rec, data, tRef, { bank: [s1] });
@@ -268,7 +273,9 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
     await p.evaluate(() => { location.hash = '#/'; }); await wait(200); await p.evaluate(() => { location.hash = '#/claude'; }); await wait(400);
     const gD = clone(mini.langs.de.grammar['fn.definite']), dataNow = await p.evaluate(() => NoemaLangUI.UI.C.data);
     const sD = sentencesFor(dataNow, 'de', ['fn.definite']).filter(s => s.functions.includes('fn.definite'));
-    claudeAnswers.push({ grammar: { ...gD, notes: [] }, bank: sD }, { grammar: gD, bank: sD });
+    const D19 = N.LANGJOBS.D19, have = new Set(gD.notes.map(n => n.for));   // the repaired page carries every required note (D19 strict)
+    const gFull = { ...gD, notes: [...gD.notes, ...[...D19.natives.filter(c => c !== 'de'), ...D19.groups].filter(f => !have.has(f)).map(f => ({ for: f, rel: 'same', text: 'The article works much the same way here.' }))] };
+    claudeAnswers.push({ grammar: { ...gD, notes: [] }, bank: sD }, { grammar: gFull, bank: sD });
     await p.click('.lj-task[data-task="function:fn.definite:de"] .lj-run'); await wait(1500);
     ok(claudeCalls.length === 2 && /contrast notes \(D19\)/.test(JSON.stringify(claudeCalls[1].messages)) && claudeCalls[0].tool_choice?.name === 'answer', '▶ the app asks Claude (a tool call); the check sends the problems back and Claude repairs its answer');
     ok(await p.evaluate(() => !!NoemaLangUI.UI.C.lang.de.grammar['fn.definite'] && NoemaLangUI.UI.C.lang.de.sentences.length) === sD.length && !(await p.$('.lj-task[data-task="function:fn.definite:de"]')), `the answer is merged: the realization + ${sD.length} sentences; the task leaves the queue`);
