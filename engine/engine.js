@@ -1653,10 +1653,24 @@ function figureBlock(b) {
   const cap = b.caption || st.m.caption;
   if (regs.length && b.explore !== false) {
     st.hover(regs);
+    // The label sits on the frame, not inside the picture (which clips at its edges): it may run past the picture,
+    // never past the screen — it is moved sideways (and above/below) until it fits.
     const tipEl = h('div', { class: 'vx-tip' });
-    st.layer.append(tipEl);
-    let pinned = null;
-    const showTip = (r, x, y) => { tipEl.innerHTML = ''; tipEl.append(h('b', { html: fmt(r.label || r.id) }), r.note ? h('div', { html: fmt(r.note) }) : null); Object.assign(tipEl.style, st.pos(x, y)); tipEl.classList.add('on'); tipEl.classList.toggle('below', y < st.H * 0.3); };
+    st.wrap.append(tipEl);
+    let pinned = null, tipAt = null;
+    const placeTip = () => {
+      if (!tipAt || !tipEl.classList.contains('on')) return;
+      const [x, y] = tipAt, sb = st.stage.getBoundingClientRect(), wb = st.wrap.getBoundingClientRect();
+      const px = sb.left - wb.left + x / st.W * sb.width, py = sb.top - wb.top + y / st.H * sb.height;
+      const w = tipEl.offsetWidth, ht = tipEl.offsetHeight, gap = 14, edge = 8, vw = document.documentElement.clientWidth || innerWidth;
+      const left = Math.max(edge, Math.min(wb.left + px - w / 2, vw - edge - w)) - wb.left;
+      const roomAbove = wb.top + py - gap - ht >= edge, roomBelow = wb.top + py + gap + ht <= innerHeight - edge;
+      const below = (y < st.H * 0.3 || !roomAbove) && (roomBelow || !roomAbove);
+      tipEl.classList.toggle('below', below);
+      Object.assign(tipEl.style, { left: left + 'px', top: (below ? py + gap : py - gap - ht) + 'px' });
+    };
+    const showTip = (r, x, y) => { tipEl.innerHTML = ''; tipEl.append(h('b', { html: fmt(r.label || r.id) }), r.note ? h('div', { html: fmt(r.note) }) : null); tipAt = [x, y]; tipEl.classList.add('on'); placeTip(); };
+    if (window.ResizeObserver) new ResizeObserver(placeTip).observe(st.stage);
     const covered = r => r && st.masks[r.id] && !st.masks[r.id].classList.contains('off');   // a hidden label stays hidden until you peek
     st.stage.addEventListener('mousemove', ev => { if (pinned) return; const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0]; r && !covered(r) ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on'); });
     st.stage.addEventListener('mouseleave', () => { if (!pinned) tipEl.classList.remove('on'); });
