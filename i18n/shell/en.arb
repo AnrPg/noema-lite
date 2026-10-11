@@ -2,1840 +2,2513 @@
   "@@locale": "en",
   "sh.today": "Today",
   "@sh.today": {
-    "description": ""
+    "description": "Name of the first bottom/side tab (sun icon): the daily home page with what to do today. Also used, lower-cased, for “today” in “last time today”. One short word."
   },
   "sh.knowledge": "Knowledge",
   "@sh.knowledge": {
-    "description": ""
+    "description": "Name of the tab with the learner’s Roadmaps and subjects (knowledge fields, as opposed to foreign languages). One short word."
   },
   "sh.languages": "Languages",
   "@sh.languages": {
-    "description": ""
+    "description": "Name of the tab with the language courses (foreign languages the learner learns). One short word."
   },
   "sh.discover": "Discover",
   "@sh.discover": {
-    "description": ""
+    "description": "Name of the tab where the learner discovers and adds things: new Roadmaps, imports, shared subjects, Claude. One short word."
   },
   "sh.progress": "Progress",
   "@sh.progress": {
-    "description": ""
+    "description": "Name of the tab with progress: level, XP, streak, collection, treasures. One short word."
   },
   "sh.me": "Me",
   "@sh.me": {
-    "description": ""
+    "description": "Name of the account tab / tooltip of the account button (the learner’s own profile, settings, data). One very short word (“Me”)."
   },
   "sh.meLong": "Me: my account",
   "@sh.meLong": {
-    "description": ""
+    "description": "Accessible label of the account button at the top: “Me” tab = my account."
   },
   "sh.myAccount": "My account",
   "@sh.myAccount": {
-    "description": ""
+    "description": "Heading and breadcrumb of the Me page."
   },
   "sh.mainNav": "Main navigation",
   "@sh.mainNav": {
-    "description": ""
+    "description": "Accessible label (screen readers) of the main navigation bar with the tabs."
   },
   "sh.back": "Back",
   "@sh.back": {
-    "description": ""
+    "description": "Accessible label of the back arrow button in the top bar."
   },
   "sh.where": "Where you are",
   "@sh.where": {
-    "description": ""
+    "description": "Accessible label (screen readers) of the breadcrumb trail in the top bar: where you are in the app."
   },
   "sh.more": "More",
   "@sh.more": {
-    "description": ""
+    "description": "Accessible label/tooltip of the ⋮ “more actions” menu button in the top bar."
   },
   "sh.moreFor": "More for “{title}”",
   "@sh.moreFor": {
-    "description": ""
+    "description": "Accessible label of the ⋮ menu of a Roadmap or a subject: more actions for that item.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "title of the Roadmap or subject"
+      }
+    }
   },
   "sh.close": "Close",
   "@sh.close": {
-    "description": ""
+    "description": "Accessible label of the ✕ button that closes a sheet or dialog."
   },
   "sh.whatIsThis": "What is this?",
   "@sh.whatIsThis": {
-    "description": ""
+    "description": "Accessible label/tooltip of the small ⓘ hint button that explains a term."
   },
   "sh.notifications": "Notifications",
   "@sh.notifications": {
-    "description": ""
+    "description": "Tooltip/accessible label of the 🔔 bell button and title of the notifications sheet."
   },
   "sh.notificationsN": "Notifications ({n, number} new)",
   "@sh.notificationsN": {
-    "description": ""
+    "description": "Accessible label of the bell when there are new notifications.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3",
+        "description": "number of new notifications"
+      }
+    }
   },
   "sh.nothingNew": "Nothing new.",
   "@sh.nothingNew": {
-    "description": ""
+    "description": "Notifications sheet when there is nothing new (cloud account)."
   },
   "sh.notesNeedCloud": "Notifications need a cloud account (Me › Data and sync).",
   "@sh.notesNeedCloud": {
-    "description": ""
+    "description": "Notifications sheet for a local (non-cloud) profile: notifications need a cloud account; tells where to set it up (Me › Data and sync — keep these names consistent with sh.me and sh.data)."
   },
   "sh.openNow": "Open “{title}” now?",
   "@sh.openNow": {
-    "description": ""
+    "description": "Confirmation dialog (OK/Cancel) after accepting a shared subject or joining a shared Roadmap: open it now?",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "title of the accepted subject or Roadmap"
+      }
+    }
   },
   "sh.moreInBell": "(+{n, number} more in the bell)",
   "@sh.moreInBell": {
-    "description": ""
+    "description": "Small text in the share bar at the top when several shares wait: how many more are in the bell (notifications).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2",
+        "description": "number of further pending items"
+      }
+    }
   },
   "sh.decideLater": "Decide later (it stays in the bell)",
   "@sh.decideLater": {
-    "description": ""
+    "description": "Tooltip of the “Later” button in the share bar: hide the bar for now; the item stays in the bell (notifications)."
   },
   "sh.later": "Later",
   "@sh.later": {
-    "description": ""
+    "description": "Button in the share bar: decide later. Very short."
   },
   "sh.upToDate": "“{title}” is up to date",
   "@sh.upToDate": {
-    "description": ""
+    "description": "Toast after taking a newer version of a shared subject: it is now up to date.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "subject title"
+      }
+    }
   },
   "sh.keepYours": "You keep your version of “{title}”",
   "@sh.keepYours": {
-    "description": ""
+    "description": "Toast after declining a newer version of a shared subject: you keep your current version.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "subject title"
+      }
+    }
   },
   "sh.askTutor": "Ask {tutor}",
   "@sh.askTutor": {
-    "description": ""
+    "description": "Label/tooltip of the floating tutor button (the character’s face, bottom right) and of the “ask the tutor” tile: open a chat with the tutor. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.askTutorSub": "{tutor} asks you questions until it clicks",
   "@sh.askTutorSub": {
-    "description": ""
+    "description": "Subtitle of the tutor tile on the subject’s home: the tutor asks you questions until you understand (“until it clicks”). Used when the character is a single being; the …Pl key is used when it is a group (plural verb). Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.askTutorSubPl": "{tutor} ask you questions until it clicks",
   "@sh.askTutorSubPl": {
-    "description": ""
+    "description": "Subtitle of the tutor tile on the subject’s home: the tutors ask you questions until you understand. Used when the character is a group (plural verb); the key without Pl is used for a single being. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.untitled": "Untitled",
   "@sh.untitled": {
-    "description": ""
+    "description": "Title of a conversation that has no title and no message text yet (conversation history)."
   },
   "sh.roadmap": "Roadmap",
   "@sh.roadmap": {
-    "description": ""
+    "description": "Generic group name in the conversation history for a Roadmap without a title. Product term (glossary: Roadmap)."
   },
   "sh.otherSubjects": "Subjects on no Roadmap",
   "@sh.otherSubjects": {
-    "description": ""
+    "description": "Group name in the conversation history for conversations about subjects that are not a step of any Roadmap."
   },
   "sh.convosSearch": "Search the conversations…",
   "@sh.convosSearch": {
-    "description": ""
+    "description": "Placeholder/accessible label of the search field in the conversation history."
   },
   "sh.convosSaved": "Every conversation is saved by itself: on this device, in your backup folder and, for cloud profiles, in the cloud.",
   "@sh.convosSaved": {
-    "description": ""
+    "description": "Note at the top of the conversation history: every conversation is saved automatically on this device, in the backup folder and, for cloud profiles, in the cloud."
   },
   "sh.convosOthers": "Also show {n, number} AI gradings, reviews and questions",
   "@sh.convosOthers": {
-    "description": ""
+    "description": "Checkbox in the conversation history: also show the AI’s other exchanges (grading free answers, reviewing, generated questions), not only tutor chats.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12",
+        "description": "number of those other exchanges"
+      }
+    }
   },
   "sh.exportAll": "Export them all (.md)",
   "@sh.exportAll": {
-    "description": ""
+    "description": "Button in the conversation history: download all conversations as one Markdown (.md) file."
   },
   "sh.noConvos": "No conversations yet. Every chat with your tutor is kept here.",
   "@sh.noConvos": {
-    "description": ""
+    "description": "Empty conversation history: no conversation yet; every chat with the tutor is kept here."
   },
   "sh.nMessages": "{n, plural, one {# message} other {# messages}}",
   "@sh.nMessages": {
-    "description": "",
+    "description": "Line under a conversation in the history: its number of messages.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "8",
+        "description": "number of messages"
       }
     }
   },
   "sh.rename": "Rename",
   "@sh.rename": {
-    "description": ""
+    "description": "Tooltip of the ✏️ button that renames a conversation."
   },
   "sh.exportMd": "Export (.md)",
   "@sh.exportMd": {
-    "description": ""
+    "description": "Tooltip of the ⬇️ button that downloads one conversation as a Markdown (.md) file."
   },
   "sh.del": "Delete",
   "@sh.del": {
-    "description": ""
+    "description": "Tooltip of the 🗑️ button that deletes a conversation (first press asks for confirmation)."
   },
   "sh.delAgain": "Press again to delete",
   "@sh.delAgain": {
-    "description": ""
+    "description": "Tooltip shown on the delete button after the first press: press again to delete for good."
   },
   "sh.convBack": "Back to the conversations",
   "@sh.convBack": {
-    "description": ""
+    "description": "Tooltip of the ↩️ button in an open conversation: back to the list of conversations."
   },
   "sh.convContinue": "Continue this conversation",
   "@sh.convContinue": {
-    "description": ""
+    "description": "Button under an open conversation: continue chatting in it with the tutor."
   },
   "sh.you": "You",
   "@sh.you": {
-    "description": ""
+    "description": "Name shown above the learner’s own messages in a conversation and in the Markdown export (vs. the tutor’s name)."
   },
   "sh.lockedPreview": "Preview: you can read the theory now; the exercises open when this step of the Roadmap opens.",
   "@sh.lockedPreview": {
-    "description": ""
+    "description": "Banner (with 🔒) on a subject that is a step of a Roadmap not yet open: the theory can be read already; the exercises open when this step opens."
   },
   "sh.exLocked": "The exercises open together with the step. Master these first: {list}.",
   "@sh.exLocked": {
-    "description": ""
+    "description": "Note (with 🔒) where the exercises would be, for a step not yet open: the exercises open with the step; first master the listed earlier steps.",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "SQL joins, Window functions",
+        "description": "comma-separated titles of the steps to master first"
+      }
+    }
   },
   "sh.exercisesWord": "Exercises",
   "@sh.exercisesWord": {
-    "description": ""
+    "description": "Heading/breadcrumb “Exercises” of a locked step (the exercises page) and label of its menu item."
   },
   "sh.backToTheory": "Back to the theory",
   "@sh.backToTheory": {
-    "description": ""
+    "description": "Button (with 📖) on a locked exercises page: go back to the theory."
   },
   "sh.readTheory": "Read the theory",
   "@sh.readTheory": {
-    "description": ""
+    "description": "Button (with 📖) on a Roadmap step that is not open yet: read its theory now."
   },
   "sh.readTheorySub": "The exercises open when the step opens",
   "@sh.readTheorySub": {
-    "description": ""
+    "description": "Tooltip of “Read the theory” on a locked Roadmap step: the exercises open when the step opens."
   },
   "sh.editStep": "Edit this step",
   "@sh.editStep": {
-    "description": ""
+    "description": "Tooltip/accessible label of the edit button on a Roadmap step (change its title, needs, plan)."
   },
   "sh.stepSources": "Sources of this step",
   "@sh.stepSources": {
-    "description": ""
+    "description": "Heading (with 📚) and tooltip: the source files of a Roadmap step."
   },
   "sh.noSources": "No sources yet. They show here once the step is prepared.",
   "@sh.noSources": {
-    "description": ""
+    "description": "Empty list of a step’s sources: none yet; they appear once the step is prepared."
   },
   "sh.srcNoFile": "no file on this device",
   "@sh.srcNoFile": {
-    "description": ""
+    "description": "Grey note on a source in a step’s source list: the file is not stored on this device. Lower case."
   },
   "sh.srcPages": "pages {p}",
   "@sh.srcPages": {
-    "description": ""
+    "description": "Grey note on a source file in a step’s source list: which pages of the file are used.",
+    "placeholders": {
+      "p": {
+        "type": "String",
+        "example": "12–18",
+        "description": "a page range"
+      }
+    }
   },
   "sh.tutorHelps": "How {tutor} helps you",
   "@sh.tutorHelps": {
-    "description": ""
+    "description": "Label above the tutor’s mode chips in the tutor panel: how the tutor can help you. Used when the character is a single being; the …Pl key is used when it is a group (plural verb). Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.tutorHelpsPl": "How {tutor} help you",
   "@sh.tutorHelpsPl": {
-    "description": ""
+    "description": "Label above the tutor’s mode chips in the tutor panel: how the tutors can help you. Used when the character is a group (plural verb); the key without Pl is used for a single being. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.modeSocratic": "Socratic",
   "@sh.modeSocratic": {
-    "description": ""
+    "description": "Tutor mode chip and conversation label: Socratic questioning (the tutor guides by asking). Very short."
   },
   "sh.modeSocraticSub": "I ask you until you find it yourself",
   "@sh.modeSocraticSub": {
-    "description": ""
+    "description": "Subtitle of the Socratic mode, in the tutor’s voice (“I”): I ask you questions until you find the answer yourself."
   },
   "sh.modeExplain": "Explain",
   "@sh.modeExplain": {
-    "description": ""
+    "description": "Tutor mode chip and conversation label: the tutor explains (no quiz). Very short."
   },
   "sh.modeExplainSub": "I explain it in depth, no quiz",
   "@sh.modeExplainSub": {
-    "description": ""
+    "description": "Subtitle of the Explain mode, in the tutor’s voice: I explain it in depth, without quizzing you."
   },
   "sh.modeQuiz": "Quiz",
   "@sh.modeQuiz": {
-    "description": ""
+    "description": "Tutor mode chip and conversation label: a quiz of quick questions. Very short."
   },
   "sh.modeQuizSub": "Quick questions, one at a time",
   "@sh.modeQuizSub": {
-    "description": ""
+    "description": "Subtitle of the Quiz mode: quick questions, one at a time."
   },
   "sh.modeInterview": "Interview",
   "@sh.modeInterview": {
-    "description": ""
+    "description": "Tutor mode chip and conversation label: a mock job interview on the subject. Very short."
   },
   "sh.modeInterviewSub": "Interview questions, with a score",
   "@sh.modeInterviewSub": {
-    "description": ""
+    "description": "Subtitle of the Interview mode: interview questions, with a score at the end."
   },
   "sh.modeDebug": "Case simulation",
   "@sh.modeDebug": {
-    "description": ""
+    "description": "Tutor mode chip and conversation label (mode “debug”): the tutor simulates a broken case (a failing system, a patient, a problem) for the learner to diagnose. Short."
   },
   "sh.modeDebugSub": "A broken case for you to solve",
   "@sh.modeDebugSub": {
-    "description": ""
+    "description": "Subtitle of the case-simulation mode: a broken case for you to solve."
   },
   "sh.modeHint": "Hint",
   "@sh.modeHint": {
-    "description": ""
+    "description": "Tutor mode chip (only on an exercise): a hint. Very short."
   },
   "sh.modeHintSub": "A nudge on this exercise, never the answer",
   "@sh.modeHintSub": {
-    "description": ""
+    "description": "Subtitle of the Hint mode: a nudge on this exercise, never the answer itself."
   },
   "sh.tutorFor": "For: {what}",
   "@sh.tutorFor": {
-    "description": ""
+    "description": "Chip in the tutor panel saying what the conversation is about.",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "this exercise",
+        "description": "sh.forExercise, sh.tutorWhole, or the label of a chapter/section"
+      }
+    }
   },
   "sh.tutorWhole": "the whole subject",
   "@sh.tutorWhole": {
-    "description": ""
+    "description": "Fills {what} in sh.tutorFor when the tutor talks about the whole subject. Lower case, a noun phrase."
   },
   "sh.forExercise": "this exercise",
   "@sh.forExercise": {
-    "description": ""
+    "description": "Fills {what} in sh.tutorFor (and labels a conversation) when the tutor talks about one exercise. Lower case, a noun phrase."
   },
   "sh.tutorWholeBack": "Talk about the whole subject",
   "@sh.tutorWholeBack": {
-    "description": ""
+    "description": "Tooltip of the ✕ on the “For: …” chip: stop focusing on the chapter/exercise and talk about the whole subject."
   },
   "sh.tutorWrite": "Write to {tutor}…",
   "@sh.tutorWrite": {
-    "description": ""
+    "description": "Placeholder of the message field in the tutor panel: write to the tutor. Keep the ellipsis. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.greetSocratic": "Hi {name}. What do you already think about {topic}?",
   "@sh.greetSocratic": {
-    "description": ""
+    "description": "First message of the tutor (Socratic mode), in the tutor’s voice. If the learner has no name, {name} is empty and the space before the punctuation is removed automatically — keep {name} right before a punctuation mark.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna",
+        "description": "the learner’s name (may be empty)"
+      },
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake",
+        "description": "the subject, chapter or section talked about"
+      }
+    }
   },
   "sh.greetExplain": "Hi {name}. What should I explain about {topic}?",
   "@sh.greetExplain": {
-    "description": ""
+    "description": "First message of the tutor (Explain mode). {name} may be empty (see sh.greetSocratic).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna",
+        "description": "the learner’s name (may be empty)"
+      },
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake",
+        "description": "the subject, chapter or section"
+      }
+    }
   },
   "sh.greetQuiz": "Hi {name}. Say “go” and I’ll quiz you on {topic}.",
   "@sh.greetQuiz": {
-    "description": ""
+    "description": "First message of the tutor (Quiz mode): the learner types “go” to start. {name} may be empty (see sh.greetSocratic). The word in quotes is what the learner types — translate it naturally.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna",
+        "description": "the learner’s name (may be empty)"
+      },
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake",
+        "description": "the subject, chapter or section"
+      }
+    }
   },
   "sh.greetInterview": "Hi {name}. Say “go” and the interview on {topic} begins.",
   "@sh.greetInterview": {
-    "description": ""
+    "description": "First message of the tutor (Interview mode): the learner types “go” to start the mock interview. {name} may be empty.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna",
+        "description": "the learner’s name (may be empty)"
+      },
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake",
+        "description": "the subject, chapter or section"
+      }
+    }
   },
   "sh.greetDebug": "Hi {name}. Say “go” and I’ll set up a case on {topic}.",
   "@sh.greetDebug": {
-    "description": ""
+    "description": "First message of the tutor (case simulation): the learner types “go” and the tutor sets up a broken case. {name} may be empty.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna",
+        "description": "the learner’s name (may be empty)"
+      },
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake",
+        "description": "the subject, chapter or section"
+      }
+    }
   },
   "sh.greetHint": "Hi {name}. Where are you stuck?",
   "@sh.greetHint": {
-    "description": ""
+    "description": "First message of the tutor (Hint mode on an exercise): where are you stuck? {name} may be empty.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna",
+        "description": "the learner’s name (may be empty)"
+      }
+    }
   },
   "sh.chatHistory": "Conversation history",
   "@sh.chatHistory": {
-    "description": ""
+    "description": "Item of the tutor panel’s ⋮ menu: open the history of conversations."
   },
   "sh.chatBack": "Back to the conversation",
   "@sh.chatBack": {
-    "description": ""
+    "description": "Back to the current conversation from the history — currently not used by the app (kept for the tutor panel)."
   },
   "sh.chatExport": "Export this conversation (.md)",
   "@sh.chatExport": {
-    "description": ""
+    "description": "Item of the tutor panel’s ⋮ menu: download this conversation as Markdown (.md)."
   },
   "sh.chatNew": "New conversation",
   "@sh.chatNew": {
-    "description": ""
+    "description": "Item of the tutor panel’s ⋮ menu: start a new conversation."
   },
   "sh.chatLangItem": "Conversation language",
   "@sh.chatLangItem": {
-    "description": ""
+    "description": "Item of the tutor panel’s ⋮ menu: the language the tutor answers in."
   },
   "sh.chatLangSame": "Same as the subject ({l})",
   "@sh.chatLangSame": {
-    "description": ""
+    "description": "Option of the conversation language: the same language as the subject’s content.",
+    "placeholders": {
+      "l": {
+        "type": "String",
+        "example": "English",
+        "description": "name of the subject’s language"
+      }
+    }
   },
   "sh.helloNight": "Hello",
   "@sh.helloNight": {
-    "description": ""
+    "description": "Greeting at the top of Today between midnight and 5 am (neutral “hello”)."
   },
   "sh.helloMorning": "Good morning",
   "@sh.helloMorning": {
-    "description": ""
+    "description": "Greeting at the top of Today from 5 am to noon."
   },
   "sh.helloDay": "Good afternoon",
   "@sh.helloDay": {
-    "description": ""
+    "description": "Greeting at the top of Today from noon to 6 pm."
   },
   "sh.helloEvening": "Good evening",
   "@sh.helloEvening": {
-    "description": ""
+    "description": "Greeting at the top of Today after 6 pm."
   },
   "sh.goalTitle": "Daily goal: {xp, number} of {goal, number} XP",
   "@sh.goalTitle": {
-    "description": ""
+    "description": "Tooltip of the daily-goal ring on Today: XP earned today out of the daily goal. XP = experience points (keep “XP”).",
+    "placeholders": {
+      "xp": {
+        "type": "int",
+        "example": "80",
+        "description": "XP earned today"
+      },
+      "goal": {
+        "type": "int",
+        "example": "120",
+        "description": "daily XP goal"
+      }
+    }
   },
   "sh.chOf": "Chapter {n, number} of {of, number}",
   "@sh.chOf": {
-    "description": ""
+    "description": "Pill on the “continue” card and on a section page: which chapter out of how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2",
+        "description": "chapter number"
+      },
+      "of": {
+        "type": "int",
+        "example": "9",
+        "description": "number of chapters"
+      }
+    }
   },
   "sh.secOf": "Section {n, number} of {of, number}",
   "@sh.secOf": {
-    "description": ""
+    "description": "Pill on the “continue” card and on a section page: which section of the chapter out of how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3",
+        "description": "section number"
+      },
+      "of": {
+        "type": "int",
+        "example": "7",
+        "description": "number of sections in the chapter"
+      }
+    }
   },
   "sh.start": "Start",
   "@sh.start": {
-    "description": ""
+    "description": "Pill on the “continue” card of a subject not started yet. Very short."
   },
   "sh.stepIs": "Step: {step}",
   "@sh.stepIs": {
-    "description": ""
+    "description": "Line on the “continue” card on Today: the Roadmap step this subject is.",
+    "placeholders": {
+      "step": {
+        "type": "String",
+        "example": "SQL joins",
+        "description": "title of the Roadmap step"
+      }
+    }
   },
   "sh.continueElsewhere": "Continue elsewhere",
   "@sh.continueElsewhere": {
-    "description": ""
+    "description": "Label above the list of other subjects in progress on Today."
   },
   "sh.lastSeen": "last time {when}",
   "@sh.lastSeen": {
-    "description": ""
+    "description": "Grey line under a subject in “Continue elsewhere”: when it was last studied.",
+    "placeholders": {
+      "when": {
+        "type": "String",
+        "example": "yesterday",
+        "description": "sh.today lower-cased, sh.yesterday or sh.daysAgo"
+      }
+    }
   },
   "sh.yesterday": "yesterday",
   "@sh.yesterday": {
-    "description": ""
+    "description": "Fills {when} in sh.lastSeen. Lower case."
   },
   "sh.daysAgo": "{n, number} days ago",
   "@sh.daysAgo": {
-    "description": ""
+    "description": "Fills {when} in sh.lastSeen: how many days ago (2 or more).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4",
+        "description": "number of days (≥ 2)"
+      }
+    }
   },
   "sh.forToday": "For today",
   "@sh.forToday": {
-    "description": ""
+    "description": "Label above the Review and Mistakes gym cards on Today: what to do today."
   },
   "sh.review": "Review",
   "@sh.review": {
-    "description": ""
+    "description": "Title of the card on Today and of its sheet: review of everything due today (flashcards and debugging checklists of all subjects). Short."
   },
   "sh.reviewTip": "Review: the flashcards and debugging checklists due today, from all your subjects together.",
   "@sh.reviewTip": {
-    "description": ""
+    "description": "Hint (ⓘ) on the Review card: what the review contains."
   },
   "sh.reviewSub": "{fc, number} cards · {pb, number} checklists due",
   "@sh.reviewSub": {
-    "description": ""
+    "description": "Line under Review (on Today and per subject): how many flashcards and checklists are due.",
+    "placeholders": {
+      "fc": {
+        "type": "int",
+        "example": "14",
+        "description": "flashcards due"
+      },
+      "pb": {
+        "type": "int",
+        "example": "2",
+        "description": "debugging checklists (playbooks) due"
+      }
+    }
   },
   "sh.reviewNone": "Nothing due today",
   "@sh.reviewNone": {
-    "description": ""
+    "description": "Line under Review when nothing is due today."
   },
   "sh.gym": "Mistakes gym",
   "@sh.gym": {
-    "description": ""
+    "description": "Title of the Mistakes gym card on Today and of its sheet (the exercises you got wrong). Product term (glossary). Short."
   },
   "sh.gymTip": "Mistakes gym: the exercises you got wrong. Each one leaves when you get it right.",
   "@sh.gymTip": {
-    "description": ""
+    "description": "Hint (ⓘ) on the Mistakes gym card: the exercises you got wrong; each leaves the gym when you get it right."
   },
   "sh.gymSub": "{n, plural, one {# exercise to try again} other {# exercises to try again}}",
   "@sh.gymSub": {
-    "description": "",
+    "description": "Line under the Mistakes gym (on Today and per subject): how many exercises wait to be tried again.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "3",
+        "description": "number of open mistakes"
       }
     }
   },
   "sh.gymNone": "No open mistakes",
   "@sh.gymNone": {
-    "description": ""
+    "description": "Line under the Mistakes gym when there is no open mistake."
   },
   "sh.streakDays": "{n, plural, one {#-day streak.} other {#-day streak.}}",
   "@sh.streakDays": {
-    "description": "",
+    "description": "Bold line of the streak card on Today and heading on Progress: the number of consecutive study days (a full sentence with a period).",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "5",
+        "description": "streak length in days (≥ 1)"
       }
     }
   },
   "sh.streakStart": "Start a streak today.",
   "@sh.streakStart": {
-    "description": ""
+    "description": "Streak card when there is no streak yet: start one today."
   },
   "sh.streakKeep": "A little every day keeps it going.",
   "@sh.streakKeep": {
-    "description": ""
+    "description": "Second line of the streak card: studying a little every day keeps the streak going."
   },
   "sh.streakTomorrowWeek": "Tomorrow you complete a week!",
   "@sh.streakTomorrowWeek": {
-    "description": ""
+    "description": "Second line of the streak card on day 6, 13, …: tomorrow the streak reaches a (new) full week."
   },
   "sh.streakStartSub": "Study a little today and the first stone is yours.",
   "@sh.streakStartSub": {
-    "description": ""
+    "description": "Under “Start a streak today” on Progress: study a little today and you get the first stone (the trail drawing shows a stone per day)."
   },
   "sh.pickWhere": "Where do you want to start?",
   "@sh.pickWhere": {
-    "description": ""
+    "description": "Sheet of Review / Mistakes gym with several subjects: choose which subject to start with."
   },
   "sh.openMap": "Open the Roadmap",
   "@sh.openMap": {
-    "description": ""
+    "description": "Button/menu item: open the Roadmap’s map. Also the card heading when no next step is known."
   },
   "sh.nextStep": "Next step",
   "@sh.nextStep": {
-    "description": ""
+    "description": "Pill on the Roadmap card on Today: the step shown is the next one to study."
   },
   "sh.welcomeTitle": "Welcome!",
   "@sh.welcomeTitle": {
-    "description": ""
+    "description": "Heading of the empty Today page for a new learner."
   },
   "sh.welcomeText": "Start with a Roadmap: write the goal you want to reach and its steps are drawn for you. Or open a subject you already have.",
   "@sh.welcomeText": {
-    "description": ""
+    "description": "Text of the empty Today page: start with a Roadmap (write a goal; its steps are drawn for you) or open a subject you have."
   },
   "sh.pickSubject": "Choose a subject",
   "@sh.pickSubject": {
-    "description": ""
+    "description": "Menu item/button: choose a subject (opens the subject picker)."
   },
   "sh.newRoadmap": "New Roadmap",
   "@sh.newRoadmap": {
-    "description": ""
+    "description": "Button/menu item: create a new Roadmap. Short."
   },
   "sh.newRoadmapSub": "Write the treasure you are after; the steps are drawn for you",
   "@sh.newRoadmapSub": {
-    "description": ""
+    "description": "Subtitle of “New Roadmap” on Discover: write the treasure you are after (the goal, pictured as a treasure on the map); the steps are drawn for you."
   },
   "sh.focusSprint": "Focus sprint",
   "@sh.focusSprint": {
-    "description": ""
+    "description": "Menu item: start a 15-minute focus sprint (concentrated study, then a break). Short."
   },
   "sh.focusSprintSub": "15 minutes, then a short break",
   "@sh.focusSprintSub": {
-    "description": ""
+    "description": "Subtitle of the focus-sprint menu item."
   },
   "sh.switchProfile": "Switch profile",
   "@sh.switchProfile": {
-    "description": ""
+    "description": "Menu item/button: switch to another profile (person) on this device."
   },
   "sh.yourRoadmaps": "Your Roadmaps",
   "@sh.yourRoadmaps": {
-    "description": ""
+    "description": "Label above the list of the learner’s Roadmaps (Knowledge tab)."
   },
   "sh.noRoadmaps": "No Roadmap yet. Write a goal and get its steps, each one a full subject.",
   "@sh.noRoadmaps": {
-    "description": ""
+    "description": "Empty Knowledge tab: no Roadmap yet; write a goal and get its steps, each step a full subject."
   },
   "sh.importMap": "Import a Roadmap",
   "@sh.importMap": {
-    "description": ""
+    "description": "Button/menu item: import a Roadmap. Short."
   },
   "sh.importMapSub": "From your Claude app, a file or pasted text",
   "@sh.importMapSub": {
-    "description": ""
+    "description": "Subtitle of “Import a Roadmap”: from the Claude app (connected to noema-lite), a file, or pasted text."
   },
   "sh.exploreRoadmaps": "Roadmaps others share",
   "@sh.exploreRoadmaps": {
-    "description": ""
+    "description": "Button/menu item and page title: public Roadmaps that other learners share."
   },
   "sh.exploreRoadmapsSub": "Public Roadmaps: join one and study together",
   "@sh.exploreRoadmapsSub": {
-    "description": ""
+    "description": "Subtitle of “Roadmaps others share” on Discover: join a public Roadmap and study together with others."
   },
   "sh.updateWaiting": "A newer version is waiting (see the bell)",
   "@sh.updateWaiting": {
-    "description": ""
+    "description": "Tooltip of the ✨ sign next to a subject: a newer version of it is waiting (accept it from the bell)."
   },
   "sh.privateSubj": "private",
   "@sh.privateSubj": {
-    "description": ""
+    "description": "Grey tag under a subject that is private (made by the learner, not public). Lower case, one word."
   },
   "sh.exploreRoadmapsLead": "Roadmaps other learners share. Everybody keeps their own progress; the prepared steps are shared by all.",
   "@sh.exploreRoadmapsLead": {
-    "description": ""
+    "description": "Intro text of the public Roadmaps page: everyone keeps their own progress; the prepared steps are shared by all members."
   },
   "sh.exploreLead": "Subjects anyone can study. Tap one to study it.",
   "@sh.exploreLead": {
-    "description": ""
+    "description": "Intro text of the public subjects page: subjects anyone can study; tap one to study it."
   },
   "sh.searchRoadmaps": "Search Roadmaps",
   "@sh.searchRoadmaps": {
-    "description": ""
+    "description": "Placeholder/accessible label of the search field on the public Roadmaps page."
   },
   "sh.loading": "Loading…",
   "@sh.loading": {
-    "description": ""
+    "description": "Generic loading text. Keep the ellipsis."
   },
   "sh.exploreOffline": "Could not reach what others share right now.",
   "@sh.exploreOffline": {
-    "description": ""
+    "description": "Error on the public pages: what others share could not be loaded right now (offline or server error; the technical message follows)."
   },
   "sh.rmPubMeta": "by {who} · {n, number} steps · {p} prepared",
   "@sh.rmPubMeta": {
-    "description": ""
+    "description": "Grey line under a public Roadmap: its author, its number of steps and how many are prepared (ready to study).",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "the author’s name"
+      },
+      "n": {
+        "type": "int",
+        "example": "12",
+        "description": "number of steps"
+      },
+      "p": {
+        "type": "int",
+        "example": "5",
+        "description": "number of prepared steps"
+      }
+    }
   },
   "sh.rmYours": "Yours",
   "@sh.rmYours": {
-    "description": ""
+    "description": "Pill on a public Roadmap the learner owns. One short word."
   },
   "sh.rmJoined": "Joined",
   "@sh.rmJoined": {
-    "description": ""
+    "description": "Pill on a public Roadmap the learner has already joined. One short word."
   },
   "sh.rmJoin": "Join",
   "@sh.rmJoin": {
-    "description": ""
+    "description": "Pill on a public Roadmap the learner can join. One short word (imperative or noun)."
   },
   "sh.noPublicRoadmaps": "No public Roadmaps yet. To share one of yours: open it, then ⋮ › Share, and make it public.",
   "@sh.noPublicRoadmaps": {
-    "description": ""
+    "description": "Empty public Roadmaps page: none yet; how to make one of yours public (open it, ⋮ › Share, make it public — keep “Share” consistent with sh.share)."
   },
   "sh.noPublicSubjects": "No public subjects yet.",
   "@sh.noPublicSubjects": {
-    "description": ""
+    "description": "Empty public subjects page."
   },
   "sh.noResults": "No results.",
   "@sh.noResults": {
-    "description": ""
+    "description": "Empty search result (Discover search, conversation history)."
   },
   "sh.joinNeedsCloud": "Joining needs a noema-lite cloud account (Me › Cloud): your progress is kept there.",
   "@sh.joinNeedsCloud": {
-    "description": ""
+    "description": "Error when joining a public Roadmap without a cloud account: joining needs a noema-lite cloud account (Me › Cloud); progress is kept there. noema-lite is the product name — do not translate."
   },
   "sh.joinedRm": "You joined “{title}”",
   "@sh.joinedRm": {
-    "description": ""
+    "description": "Toast after joining a public Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Data engineer",
+        "description": "Roadmap title"
+      }
+    }
   },
   "sh.dom_cs": "Computing & data",
   "@sh.dom_cs": {
-    "description": ""
+    "description": "Domain group on the public subjects page (built at run time from the domain id): computing and data."
   },
   "sh.dom_math": "Mathematics & statistics",
   "@sh.dom_math": {
-    "description": ""
+    "description": "Domain group on the public subjects page: mathematics and statistics."
   },
   "sh.dom_health": "Medicine & health",
   "@sh.dom_health": {
-    "description": ""
+    "description": "Domain group on the public subjects page: medicine and health."
   },
   "sh.dom_science": "Natural sciences",
   "@sh.dom_science": {
-    "description": ""
+    "description": "Domain group on the public subjects page: natural sciences."
   },
   "sh.dom_eng": "Engineering",
   "@sh.dom_eng": {
-    "description": ""
+    "description": "Domain group on the public subjects page: engineering."
   },
   "sh.dom_business": "Business & economics",
   "@sh.dom_business": {
-    "description": ""
+    "description": "Domain group on the public subjects page: business and economics."
   },
   "sh.dom_society": "Society, law & psychology",
   "@sh.dom_society": {
-    "description": ""
+    "description": "Domain group on the public subjects page: society, law and psychology."
   },
   "sh.dom_humanities": "History, philosophy & arts",
   "@sh.dom_humanities": {
-    "description": ""
+    "description": "Domain group on the public subjects page: history, philosophy and the arts."
   },
   "sh.dom_lang": "Languages",
   "@sh.dom_lang": {
-    "description": ""
+    "description": "Domain group on the public subjects page: languages (subjects about languages)."
   },
   "sh.dom_other": "Other",
   "@sh.dom_other": {
-    "description": ""
+    "description": "Domain group on the public subjects page: everything else."
   },
   "sh.shelf": "Shelf",
   "@sh.shelf": {
-    "description": ""
+    "description": "Name of the Shelf: the place for subjects that are not a step of any Roadmap (breadcrumb, button, label). Product term (glossary). One short word."
   },
   "sh.shelfN": "{n, plural, one {Shelf · # subject outside a Roadmap} other {Shelf · # subjects outside a Roadmap}}",
   "@sh.shelfN": {
-    "description": "",
+    "description": "Link on the Knowledge tab to the Shelf with its count of subjects outside any Roadmap.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "4",
+        "description": "number of subjects on the Shelf"
       }
     }
   },
   "sh.invitesN": "{n, plural, one {# Roadmap shared with you} other {# Roadmaps shared with you}}",
   "@sh.invitesN": {
-    "description": "",
+    "description": "Label above pending invitations to Roadmaps others share with the learner.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "2",
+        "description": "number of invitations"
       }
     }
   },
   "sh.rmSummary": "Mastered {m, number} of {n, number} steps",
   "@sh.rmSummary": {
-    "description": ""
+    "description": "Line under a Roadmap (list and map): how many of its steps are mastered.",
+    "placeholders": {
+      "m": {
+        "type": "int",
+        "example": "3",
+        "description": "mastered steps"
+      },
+      "n": {
+        "type": "int",
+        "example": "12",
+        "description": "all steps"
+      }
+    }
   },
   "sh.rmAttach": "Attach the subjects you have, then its steps are planned",
   "@sh.rmAttach": {
-    "description": ""
+    "description": "State line of a new Roadmap: attach the subjects you already have to its steps, then its steps are planned."
   },
   "sh.rmWaiting": "Waiting for your Claude app",
   "@sh.rmWaiting": {
-    "description": ""
+    "description": "State line of a Roadmap (and map legend sign): waiting for the learner’s Claude app to prepare its steps."
   },
   "sh.rmBuilding": "Being built…",
   "@sh.rmBuilding": {
-    "description": ""
+    "description": "State line of a Roadmap being built (its steps generated). Keep the ellipsis."
   },
   "sh.rmPaused": "Paused: tap to continue",
   "@sh.rmPaused": {
-    "description": ""
+    "description": "State line of a paused Roadmap build: tap to continue."
   },
   "sh.rmStopped": "Stopped: tap to continue",
   "@sh.rmStopped": {
-    "description": ""
+    "description": "State line of a stopped Roadmap build (e.g. after an error or a budget limit): tap to continue."
   },
   "sh.sharing": "Sharing",
   "@sh.sharing": {
-    "description": ""
+    "description": "Roadmap ⋮ menu item when the Roadmap is already shared: manage the sharing. Short noun."
   },
   "sh.share": "Share",
   "@sh.share": {
-    "description": ""
+    "description": "Menu item: share (a Roadmap or a subject). Short verb."
   },
   "sh.shareRmSub": "Everybody keeps their own progress; the prepared steps are shared",
   "@sh.shareRmSub": {
-    "description": ""
+    "description": "Subtitle of the Roadmap’s Share item: each person keeps their own progress; the prepared steps are shared."
   },
   "sh.rmSettings": "Settings",
   "@sh.rmSettings": {
-    "description": ""
+    "description": "Roadmap ⋮ menu item: the Roadmap’s settings. Short."
   },
   "sh.rmSettingsSub": "Preparing ahead, AI, budget, review, re-plan",
   "@sh.rmSettingsSub": {
-    "description": ""
+    "description": "Subtitle of the Roadmap settings item (Knowledge tab): what the settings cover — preparing steps ahead, the AI provider, budget, reviewing plans, re-planning."
   },
   "sh.exportJson": "Export (.json)",
   "@sh.exportJson": {
-    "description": ""
+    "description": "Roadmap ⋮ menu item: download the Roadmap as a .json file."
   },
   "sh.sharedBy": "shared by {who}",
   "@sh.sharedBy": {
-    "description": ""
+    "description": "Grey tag under a Roadmap or subject someone shared with the learner. Lower case.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "name of the person who shared it"
+      }
+    }
   },
   "sh.youShare": "you share it",
   "@sh.youShare": {
-    "description": ""
+    "description": "Grey tag under a Roadmap the learner shares with others. Lower case."
   },
   "sh.from": "from {who}",
   "@sh.from": {
-    "description": ""
+    "description": "Grey tag under a public subject the learner added from Explore: its author. Lower case.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "the author’s name"
+      }
+    }
   },
   "sh.shelfTip": "The Shelf: subjects that are not a step of any Roadmap. They stay here; nothing is deleted.",
   "@sh.shelfTip": {
-    "description": ""
+    "description": "Hint (ⓘ) next to the Shelf heading: Shelf subjects are not a step of any Roadmap; they stay here and nothing is deleted."
   },
   "sh.shelfTitle": "Subjects outside a Roadmap",
   "@sh.shelfTitle": {
-    "description": ""
+    "description": "Heading of the Shelf page."
   },
   "sh.searchSubjects": "Search subjects",
   "@sh.searchSubjects": {
-    "description": ""
+    "description": "Placeholder/accessible label of the search field on the Shelf and the public subjects page."
   },
   "sh.hiddenN": "{n, plural, one {# hidden subject} other {# hidden subjects}}",
   "@sh.hiddenN": {
-    "description": "",
+    "description": "Link at the end of the Shelf to the hidden subjects (Me › My subjects).",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "2",
+        "description": "number of hidden subjects"
       }
     }
   },
   "sh.noMatch": "Nothing matches.",
   "@sh.noMatch": {
-    "description": ""
+    "description": "Shelf search finds nothing."
   },
   "sh.shelfEmpty": "The Shelf is empty: every subject is a step of a Roadmap.",
   "@sh.shelfEmpty": {
-    "description": ""
+    "description": "Empty Shelf: every subject is a step of a Roadmap."
   },
   "sh.importFile": "Import a file",
   "@sh.importFile": {
-    "description": ""
+    "description": "Menu item / Discover entry: import a subject package from a file. Short."
   },
   "sh.importFileSub": "A subject package (.zip or .json)",
   "@sh.importFileSub": {
-    "description": ""
+    "description": "Subtitle of “Import a file”: a subject package (.zip or .json)."
   },
   "sh.createClaude": "Create a subject with Claude",
   "@sh.createClaude": {
-    "description": ""
+    "description": "Menu item / Discover entry: create a new subject with Claude (Anthropic’s AI, product name — do not translate)."
   },
   "sh.createClaudeSub": "From your PDFs, notes or links",
   "@sh.createClaudeSub": {
-    "description": ""
+    "description": "Subtitle of “Create a subject with Claude”: from your PDFs, notes or links."
   },
   "sh.exploreShared": "What others share",
   "@sh.exploreShared": {
-    "description": ""
+    "description": "Menu item / Discover entry and page title: public subjects other people share."
   },
   "sh.exploreSub": "Public subjects: information, statistics, study one",
   "@sh.exploreSub": {
-    "description": ""
+    "description": "Subtitle of “What others share” on Discover (Knowledge): public subjects, with information and statistics, to study."
   },
   "sh.exploreLangSub": "Public language courses",
   "@sh.exploreLangSub": {
-    "description": ""
+    "description": "Subtitle of “What others share” on Discover when only languages are learned: public language courses."
   },
   "sh.allSubjects": "All subjects",
   "@sh.allSubjects": {
-    "description": ""
+    "description": "Menu item: all subjects (opens the full subject picker)."
   },
   "sh.allSubjectsSub": "The full list, grouped",
   "@sh.allSubjectsSub": {
-    "description": ""
+    "description": "Subtitle of “All subjects”: the full list, grouped."
   },
   "sh.study": "Study",
   "@sh.study": {
-    "description": ""
+    "description": "Menu item of a Shelf subject: open it and study. Short verb."
   },
   "sh.putOnMap": "Put it on a Roadmap",
   "@sh.putOnMap": {
-    "description": ""
+    "description": "Menu item: put this subject on a Roadmap (attach it as one of its steps)."
   },
   "sh.putOnMapSub": "Make it a step of a Roadmap",
   "@sh.putOnMapSub": {
-    "description": ""
+    "description": "Subtitle of “Put it on a Roadmap”: make it a step of a Roadmap."
   },
   "sh.editSubject": "Edit",
   "@sh.editSubject": {
-    "description": ""
+    "description": "Menu item of a subject: edit it. Short."
   },
   "sh.editSubjectSub": "Name, description, hide or delete",
   "@sh.editSubjectSub": {
-    "description": ""
+    "description": "Subtitle of the Edit item: change the name or description, hide or delete the subject."
   },
   "sh.shareSubject": "Share or make public",
   "@sh.shareSubject": {
-    "description": ""
+    "description": "Menu item of a subject the learner made: share it with people or make it public."
   },
   "sh.shareSubjectSub": "With people by e-mail, or for everyone",
   "@sh.shareSubjectSub": {
-    "description": ""
+    "description": "Subtitle of the share item: with people by e-mail, or for everyone (public)."
   },
   "sh.exportPackage": "Export the package",
   "@sh.exportPackage": {
-    "description": ""
+    "description": "Menu item of a subject: download the subject package."
   },
   "sh.exportPackageSub": "The subject with its source files (.zip)",
   "@sh.exportPackageSub": {
-    "description": ""
+    "description": "Subtitle of the export item: the subject with its source files, as a .zip."
   },
   "sh.nChapters": "{n, plural, one {# chapter} other {# chapters}}",
   "@sh.nChapters": {
-    "description": "",
+    "description": "Grey count under a subject (Shelf) and pill on the collection panel (Progress): a number of chapters.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "9",
+        "description": "number of chapters"
       }
     }
   },
   "sh.onShelfNow": "“{title}” is on your Shelf: put it on a Roadmap to study it as one of its steps.",
   "@sh.onShelfNow": {
-    "description": ""
+    "description": "Toast after adding a subject (import, Claude): it is on the Shelf; put it on a Roadmap to study it as one of its steps.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "subject title"
+      }
+    }
   },
   "sh.rmMissing": "This Roadmap is not on this device.",
   "@sh.rmMissing": {
-    "description": ""
+    "description": "Shown when a link points to a Roadmap that is not on this device."
   },
   "sh.mapMenu": "Roadmap actions",
   "@sh.mapMenu": {
-    "description": ""
+    "description": "Accessible label of the ⋮ menu on a Roadmap page."
   },
   "sh.yourLanguages": "Your languages",
   "@sh.yourLanguages": {
-    "description": ""
+    "description": "Label above the list of the learner’s language courses (Languages tab)."
   },
   "sh.newLanguage": "New language",
   "@sh.newLanguage": {
-    "description": ""
+    "description": "Button / Discover entry: start a new language course. Short."
   },
   "sh.newLanguageSub": "One or several together",
   "@sh.newLanguageSub": {
-    "description": ""
+    "description": "Subtitle of “New language”: learn one language or several together."
   },
   "sh.noLanguages": "No language course yet.",
   "@sh.noLanguages": {
-    "description": ""
+    "description": "Empty Languages tab: no language course yet."
   },
   "sh.langDue": "{n, plural, one {# review due today} other {# reviews due today}}",
   "@sh.langDue": {
-    "description": "",
+    "description": "Line/pill on a language course: reviews due today.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "15",
+        "description": "number of reviews due"
       }
     }
   },
   "sh.langNothingDue": "Nothing due today",
   "@sh.langNothingDue": {
-    "description": ""
+    "description": "Pill on a started language course: nothing to review today."
   },
   "sh.langWords": "{n, plural, one {# word met} other {# words met}}",
   "@sh.langWords": {
-    "description": "",
+    "description": "Grey line under a language course: how many words the learner has met so far.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "120",
+        "description": "number of words met"
       }
     }
   },
   "sh.langNext": "Next: {lesson}",
   "@sh.langNext": {
-    "description": ""
+    "description": "Line/pill on a language course: the next lesson.",
+    "placeholders": {
+      "lesson": {
+        "type": "String",
+        "example": "A1.3 Greetings",
+        "description": "code and/or title of the next lesson"
+      }
+    }
   },
   "sh.langStart": "Start",
   "@sh.langStart": {
-    "description": ""
+    "description": "Pill/menu item on a language course not started yet: start. Short."
   },
   "sh.langContinue": "Continue",
   "@sh.langContinue": {
-    "description": ""
+    "description": "Menu item on the current language course: continue (also shown lower-cased after its title). Short."
   },
   "sh.langSession": "Today’s session",
   "@sh.langSession": {
-    "description": ""
+    "description": "Heading of the language course card when reviews are due: today’s study session."
   },
   "sh.langSettings": "Course settings",
   "@sh.langSettings": {
-    "description": ""
+    "description": "Menu item of a language course: its settings."
   },
   "sh.langSettingsSub": "Languages, depth, the languages you know, reading and listening",
   "@sh.langSettingsSub": {
-    "description": ""
+    "description": "Subtitle of the course settings: the learned languages, depth, the languages you already know, reading and listening options."
   },
   "sh.langClaude": "Through Claude",
   "@sh.langClaude": {
-    "description": ""
+    "description": "Menu item of a language course: work done through Claude (Anthropic’s AI) for this course."
   },
   "sh.langClaudeSub": "The tasks Claude still writes for this course",
   "@sh.langClaudeSub": {
-    "description": ""
+    "description": "Subtitle of “Through Claude”: the tasks Claude still has to write for this course."
   },
   "sh.langOther": "Choose another course",
   "@sh.langOther": {
-    "description": ""
+    "description": "Menu item / sheet title: choose another language course."
   },
   "sh.langNew": "New language course",
   "@sh.langNew": {
-    "description": ""
+    "description": "Menu item: a new language course."
   },
   "sh.langOwn": "Your own course",
   "@sh.langOwn": {
-    "description": ""
+    "description": "Grey tag under a language course the learner made themselves."
   },
   "sh.langMissing": "This language course is not on this device.",
   "@sh.langMissing": {
-    "description": ""
+    "description": "Shown when a link points to a language course that is not on this device."
   },
   "sh.langMore": "More for this course",
   "@sh.langMore": {
-    "description": ""
+    "description": "Accessible label of the ⋮ menu of a language course."
   },
   "sh.withClaude": "With Claude",
   "@sh.withClaude": {
-    "description": ""
+    "description": "Label above the Claude entries on Discover (your Claude app, Claude API key)."
   },
   "sh.claudeApp": "Your Claude app",
   "@sh.claudeApp": {
-    "description": ""
+    "description": "Discover entry / Roadmap menu item: the learner’s Claude app (claude.ai) connected to noema-lite."
   },
   "sh.claudeAppSub": "Connect noema-lite to Claude (your Claude plan) and prepare subjects and Roadmaps there",
   "@sh.claudeAppSub": {
-    "description": ""
+    "description": "Subtitle of “Your Claude app”: connect noema-lite to Claude (using the learner’s own Claude subscription) and prepare subjects and Roadmaps there."
   },
   "sh.claudeKey": "Claude API key",
   "@sh.claudeKey": {
-    "description": ""
+    "description": "Discover entry: use a Claude API key (pay-per-use developer key) inside the app."
   },
   "sh.claudeKeySub": "Everything runs here, paid per use",
   "@sh.claudeKeySub": {
-    "description": ""
+    "description": "Subtitle of “Claude API key”: everything runs here in the app, paid per use."
   },
   "sh.yourProgress": "Your progress",
   "@sh.yourProgress": {
-    "description": ""
+    "description": "Heading of the Progress page."
   },
   "sh.level": "Level",
   "@sh.level": {
-    "description": ""
+    "description": "Small label in the level ring on Progress (“Level” above the number)."
   },
   "sh.xpToLevel": "{n, number} XP more to level {lv}",
   "@sh.xpToLevel": {
-    "description": ""
+    "description": "Heading next to the level ring: XP still needed for the next level.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "40",
+        "description": "XP still needed"
+      },
+      "lv": {
+        "type": "int",
+        "example": "5",
+        "description": "the next level number"
+      }
+    }
   },
   "sh.xpTotal": "{xp, number} XP in total. Every level takes you to a new place of your world.",
   "@sh.xpTotal": {
-    "description": ""
+    "description": "Text under the level heading: total XP; every level takes the learner to a new place of their character’s world.",
+    "placeholders": {
+      "xp": {
+        "type": "int",
+        "example": "1240",
+        "description": "total XP"
+      }
+    }
   },
   "sh.trailAria": "{n, plural, one {A 7-day trail, # day with study} other {A 7-day trail, # days with study}}",
   "@sh.trailAria": {
-    "description": "",
+    "description": "Accessible label (screen readers) of the 7-day trail drawing on Progress: how many of the last 7 days had study.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "4",
+        "description": "days with study among the last 7"
       }
     }
   },
   "sh.nConcepts": "{n, plural, one {# section} other {# sections}}",
   "@sh.nConcepts": {
-    "description": "",
+    "description": "A number of sections — currently not used by the app.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "7",
+        "description": "number of sections"
       }
     }
   },
   "sh.collNote": "{n, plural, =0 {Every {item} is a chapter you have completed.} one {Every {item} is a chapter you have completed. The brightest one is from this week.} other {Every {item} is a chapter you have completed. The # brightest are from this week.}}",
   "@sh.collNote": {
-    "description": "",
+    "description": "Note under the collection on Progress: every collection item (a star, shell, … depending on the character) is a completed chapter; the brightest ones were completed this week.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "2",
+        "description": "items completed this week (0 = none)"
+      },
+      "item": {
+        "type": "String",
+        "example": "star",
+        "description": "the singular name of the collection item, from the character’s theme"
       }
     }
   },
   "sh.xpWeek": "XP this week",
   "@sh.xpWeek": {
-    "description": ""
+    "description": "Label of the weekly XP chart on Progress."
   },
   "sh.treasures": "Treasures you found",
   "@sh.treasures": {
-    "description": ""
+    "description": "Label of the medals panel on Progress: treasures (achievements) found."
   },
   "sh.medalStep": "First step mastered",
   "@sh.medalStep": {
-    "description": ""
+    "description": "Medal on Progress: the first Roadmap step mastered."
   },
   "sh.medalCards": "100 cards · {n, number}/100",
   "@sh.medalCards": {
-    "description": ""
+    "description": "Medal on Progress: 100 flashcards learned, with the current count.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "37",
+        "description": "flashcards so far (max 100)"
+      }
+    }
   },
   "sh.medalWeek": "A week in a row · {n, number}/7",
   "@sh.medalWeek": {
-    "description": ""
+    "description": "Medal on Progress: a 7-day streak, with the current count.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4",
+        "description": "streak days (max 7)"
+      }
+    }
   },
   "sh.medalBoss": "A boss beaten",
   "@sh.medalBoss": {
-    "description": ""
+    "description": "Medal on Progress: a chapter boss beaten (the final test of a chapter)."
   },
   "sh.medalXp": "1,000 XP",
   "@sh.medalXp": {
-    "description": ""
+    "description": "Medal on Progress: 1000 XP earned. Write the number with your language’s thousands separator."
   },
   "sh.medalMonth": "A month in a row · {n, number}/30",
   "@sh.medalMonth": {
-    "description": ""
+    "description": "Medal on Progress: a 30-day streak, with the current count.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12",
+        "description": "streak days (max 30)"
+      }
+    }
   },
   "sh.gameNote": "How much the game shows (playful, calm, off) is set in Me ›",
   "@sh.gameNote": {
-    "description": ""
+    "description": "Small note at the end of Progress, followed by a link “Language and appearance” (sh.look): where to set how much of the game is shown (playful, calm, off — keep the names of sh.gamePlayful/gameCalm/gameOff)."
   },
   "sh.whatILearn": "What I learn",
   "@sh.whatILearn": {
-    "description": ""
+    "description": "Label of the setting on the Me page: what the learner learns (knowledge, languages, or both) — decides which tabs the app shows."
   },
   "sh.whatILearnSub": "It changes the tabs of the app.",
   "@sh.whatILearnSub": {
-    "description": ""
+    "description": "Explanation under “What I learn”: it changes the tabs of the app."
   },
   "sh.both": "Both",
   "@sh.both": {
-    "description": ""
+    "description": "Option of “What I learn” and of the onboarding: both knowledge and languages. Short."
   },
   "sh.localProfile": "local profile on this device",
   "@sh.localProfile": {
-    "description": ""
+    "description": "Grey line under the name on the Me page for a profile stored only on this device. Lower case."
   },
   "sh.character": "Character",
   "@sh.character": {
-    "description": ""
+    "description": "Me page entry, button and page title: the tutor character (companion) the learner chose. Short."
   },
   "sh.charLocked": "{tutor} · chosen by your organisation",
   "@sh.charLocked": {
-    "description": ""
+    "description": "Line under “Character” when an organisation fixed the character for everyone.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "the tutor character’s name"
+      }
+    }
   },
   "sh.canChange": "you can change it",
   "@sh.canChange": {
-    "description": ""
+    "description": "Line under “Character” (after the character’s name and ·): the learner can change the character now. Lower case."
   },
   "sh.nextChange": "next change from {date}",
   "@sh.nextChange": {
-    "description": ""
+    "description": "Line under “Character” (after the name and ·): from when the next change is allowed. Lower case.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "15 Oct",
+        "description": "a formatted date"
+      }
+    }
   },
   "sh.profile": "Profile",
   "@sh.profile": {
-    "description": ""
+    "description": "Me page entry and page title: the learner’s profile. Short."
   },
   "sh.profileSub": "Name, emoji, “about me” for {tutorAcc}, PIN",
   "@sh.profileSub": {
-    "description": ""
+    "description": "Subtitle of Profile: name, emoji, an “about me” text the tutor reads, and the PIN that locks the profile. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutorAcc": {
+        "type": "String",
+        "example": "τον Αγκαθούλη",
+        "description": "context value: the tutor’s name as object"
+      }
+    }
   },
   "sh.aiTitle": "{tutor} and AI",
   "@sh.aiTitle": {
-    "description": ""
+    "description": "Me page entry and page title: the tutor and the AI settings. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "context value: the tutor character’s plain name"
+      }
+    }
   },
   "sh.aiSub": "Gemini key for {tutorAcc}, Claude for subjects and Roadmaps, the language of the chats",
   "@sh.aiSub": {
-    "description": ""
+    "description": "Subtitle of the AI entry: the Gemini API key used by the tutor, Claude for creating subjects and Roadmaps, the language of the chats. Gemini and Claude are product names. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutorAcc": {
+        "type": "String",
+        "example": "τον Αγκαθούλη",
+        "description": "context value: the tutor’s name as object"
+      }
+    }
   },
   "sh.look": "Language and appearance",
   "@sh.look": {
-    "description": ""
+    "description": "Me page entry, page title and link: language and appearance settings."
   },
   "sh.lookSub": "{lang} · light or dark · how much game",
   "@sh.lookSub": {
-    "description": ""
+    "description": "Subtitle of “Language and appearance”: the current interface language · light or dark · how much game.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "English",
+        "description": "the current interface language’s name"
+      }
+    }
   },
   "sh.activity": "Conversations",
   "@sh.activity": {
-    "description": ""
+    "description": "Me page entry and title of the conversation history (the learner’s chats with the tutor)."
   },
   "sh.activitySub": "Your chats with {tutorAcc} · export",
   "@sh.activitySub": {
-    "description": ""
+    "description": "Subtitle of Conversations: your chats with the tutor, which you can export. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutorAcc": {
+        "type": "String",
+        "example": "τον Αγκαθούλη",
+        "description": "context value: the tutor’s name as object"
+      }
+    }
   },
   "sh.mySubjects": "My subjects",
   "@sh.mySubjects": {
-    "description": ""
+    "description": "Me page entry and page title: the learner’s subjects (hidden ones, storage, the ones they made)."
   },
   "sh.mySubjectsSub": "Hidden subjects, storage, the ones you made",
   "@sh.mySubjectsSub": {
-    "description": ""
+    "description": "Subtitle of “My subjects”: hidden subjects, storage used, the subjects you made."
   },
   "sh.data": "Data and sync",
   "@sh.data": {
-    "description": ""
+    "description": "Me page entry and page title: data and sync (cloud account, backups)."
   },
   "sh.dataSub": "Cloud, backups, restore",
   "@sh.dataSub": {
-    "description": ""
+    "description": "Subtitle of “Data and sync”: cloud, backups, restore."
   },
   "sh.help": "Help",
   "@sh.help": {
-    "description": ""
+    "description": "Me page entry and page title: help. Short."
   },
   "sh.helpSub": "Setup guides",
   "@sh.helpSub": {
-    "description": ""
+    "description": "Subtitle of Help: step-by-step setup guides."
   },
   "sh.backup": "Backup and restore",
   "@sh.backup": {
-    "description": ""
+    "description": "Page title: backup and restore."
   },
   "sh.needSubject": "These settings open together with a subject. Choose one first.",
   "@sh.needSubject": {
-    "description": ""
+    "description": "Shown when settings or the tutor need an open subject and none is open: choose one first."
   },
   "sh.uiLang": "Language of the menus",
   "@sh.uiLang": {
-    "description": ""
+    "description": "Label of the select (Language and appearance page) that sets the language of the app’s interface (menus, buttons)."
   },
   "sh.uiLangAuto": "Automatic ({lang})",
   "@sh.uiLangAuto": {
-    "description": ""
+    "description": "First option of the interface-language select: follow the device’s language; shows which language that is.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Ελληνικά",
+        "description": "the device language’s own name (endonym)"
+      }
+    }
   },
   "sh.uiLangTip": "The menus and buttons. The course material and the AI conversations have their own language.",
   "@sh.uiLangTip": {
-    "description": ""
+    "description": "Note under the interface-language select: it changes the menus and buttons; course material and AI conversations have their own language settings."
   },
   "sh.lightDark": "Light or dark",
   "@sh.lightDark": {
-    "description": ""
+    "description": "Label of the light/dark appearance setting."
   },
   "sh.auto": "As the system",
   "@sh.auto": {
-    "description": ""
+    "description": "Option of the light/dark setting: follow the operating system. Short."
   },
   "sh.light": "Light",
   "@sh.light": {
-    "description": ""
+    "description": "Option of the light/dark setting: light appearance. One word."
   },
   "sh.dark": "Dark",
   "@sh.dark": {
-    "description": ""
+    "description": "Option of the light/dark setting: dark appearance. One word."
   },
   "sh.gameMode": "How much game",
   "@sh.gameMode": {
-    "description": ""
+    "description": "Label of the setting for how much of the game layer is shown (the character’s reactions, collection, treasures)."
   },
   "sh.gameModeSub": "The character’s reactions, the collection and the treasures.",
   "@sh.gameModeSub": {
-    "description": ""
+    "description": "Explanation under “How much game”: it is about the character’s reactions, the collection and the treasures."
   },
   "sh.gamePlayful": "Playful",
   "@sh.gamePlayful": {
-    "description": ""
+    "description": "Option of “How much game”: the most game-like level. One short word (segment button)."
   },
   "sh.gameCalm": "Calm",
   "@sh.gameCalm": {
-    "description": ""
+    "description": "Option of “How much game”: reactions only at milestones. One short word (segment button)."
   },
   "sh.gameOff": "Off",
   "@sh.gameOff": {
-    "description": ""
+    "description": "Option of “How much game”: no game reactions. One short word (segment button)."
   },
   "sh.gameRules": "Playful: a big reaction now and then (at most one every 3 minutes) and always at milestones. Calm: only at milestones. Off: only a short message.",
   "@sh.gameRules": {
-    "description": ""
+    "description": "Explanation of the three game levels (Playful, Calm, Off — keep the option names of sh.gamePlayful/gameCalm/gameOff)."
   },
   "sh.studying": "Studying",
   "@sh.studying": {
-    "description": ""
+    "description": "Label of the study settings section (sound, bite-size reading, daily goal)."
   },
   "sh.sound": "Sound effects",
   "@sh.sound": {
-    "description": ""
+    "description": "Checkbox in the study settings: sound effects on/off."
   },
   "sh.chunk": "Bite-size reading (the theory appears chunk by chunk)",
   "@sh.chunk": {
-    "description": ""
+    "description": "Checkbox in the study settings: bite-size reading — the theory is revealed chunk by chunk."
   },
   "sh.dailyGoal": "Daily XP goal",
   "@sh.dailyGoal": {
-    "description": ""
+    "description": "Label of the number field in the study settings: the daily XP goal (experience points per day)."
   },
   "sh.companion": "The companion of your journey",
   "@sh.companion": {
-    "description": ""
+    "description": "Small label above the Character page title: the companion of your learning journey."
   },
   "sh.characterIntro": "Your character is also your tutor: it asks, explains and corrects. It dresses the whole app in its colours, fonts, buttons and the world of the map, and its name changes with the language. Try anyone for 5 minutes. For the first 15 days you can change as often as you like, then once every 5 days.",
   "@sh.characterIntro": {
-    "description": ""
+    "description": "Intro of the Character page: the character is also your tutor; it themes the whole app and its name changes with the language; you can try any for 5 minutes; change freely for 15 days, then once every 5 days."
   },
   "sh.charLockedLong": "Your organisation chose the character for everyone.",
   "@sh.charLockedLong": {
-    "description": ""
+    "description": "Character page when an organisation chose the character for everyone."
   },
   "sh.canChangeNow": "You can change your character now.",
   "@sh.canChangeNow": {
-    "description": ""
+    "description": "Character page: the learner may change the character now."
   },
   "sh.freeUntil": "Until {date} you can change it as often as you like; after that, once every 5 days.",
   "@sh.freeUntil": {
-    "description": ""
+    "description": "Character page in the first 15 days: until the date, change as often as you like; afterwards once every 5 days.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "20 Oct",
+        "description": "a formatted date"
+      }
+    }
   },
   "sh.changedOn": "You chose it on {date}. The next change is possible from {next}. Trying is always possible.",
   "@sh.changedOn": {
-    "description": ""
+    "description": "Character page: when the character was chosen and when the next change is possible; trying another one is always possible.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "3 Oct",
+        "description": "a formatted date"
+      },
+      "next": {
+        "type": "String",
+        "example": "8 Oct",
+        "description": "a formatted date"
+      }
+    }
   },
   "sh.group_animals": "Pet friends and fruits",
   "@sh.group_animals": {
-    "description": ""
+    "description": "Group of characters on the Character page (built at run time from the group id): cute pets and fruit characters, for children."
   },
   "sh.group_tales": "Fairy tales",
   "@sh.group_tales": {
-    "description": ""
+    "description": "Group of characters on the Character page: fairy-tale figures."
   },
   "sh.group_grown": "Serious",
   "@sh.group_grown": {
-    "description": ""
+    "description": "Group of characters on the Character page: serious characters for grown-ups. One word (adjective used as a group name)."
   },
   "sh.yours": "Yours",
   "@sh.yours": {
-    "description": ""
+    "description": "Badge on the learner’s current character on the Character page. Very short."
   },
   "sh.try5": "Try for 5′",
   "@sh.try5": {
-    "description": ""
+    "description": "Button on a character: try it for 5 minutes (′ = minutes sign; keep it short)."
   },
   "sh.choose": "Choose",
   "@sh.choose": {
-    "description": ""
+    "description": "Button on a character: choose it as your companion. Short."
   },
   "sh.tryingNow": "Trying {tutor} for 5 minutes",
   "@sh.tryingNow": {
-    "description": ""
+    "description": "Toast and line under “Character” while trying a character for 5 minutes. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Prism",
+        "description": "name of the character being tried"
+      }
+    }
   },
   "sh.welcomeWorld": "Welcome to your new world!",
   "@sh.welcomeWorld": {
-    "description": ""
+    "description": "Reaction bubble after choosing a new character (its world now dresses the app)."
   },
   "sh.trying": "Trying",
   "@sh.trying": {
-    "description": ""
+    "description": "Start of the bar shown while trying a character, followed by the character’s name in bold and the remaining time (“Trying Prism · 4:12”)."
   },
   "sh.keepIt": "Keep it",
   "@sh.keepIt": {
-    "description": ""
+    "description": "Button in the trying bar: keep this character. Short."
   },
   "sh.endTry": "End the try",
   "@sh.endTry": {
-    "description": ""
+    "description": "Button in the trying bar: end the try now. Short."
   },
   "sh.keepFrom": "You can keep it from {date}.",
   "@sh.keepFrom": {
-    "description": ""
+    "description": "Note in the trying bar when keeping is not allowed yet: from which date it can be kept.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "15 Oct",
+        "description": "a formatted date"
+      }
+    }
   },
   "sh.onbWhat": "What do you want to learn?",
   "@sh.onbWhat": {
-    "description": ""
+    "description": "Onboarding, first question: what do you want to learn? (knowledge, languages, or both)."
   },
   "sh.onbKnow": "A field, a profession or an exam, step by step",
   "@sh.onbKnow": {
-    "description": ""
+    "description": "Onboarding option under “Knowledge”: a field, a profession or an exam, step by step."
   },
   "sh.onbLang": "One or more foreign languages",
   "@sh.onbLang": {
-    "description": ""
+    "description": "Onboarding option under “Languages”: one or more foreign languages."
   },
   "sh.onbBoth": "You see both tabs",
   "@sh.onbBoth": {
-    "description": ""
+    "description": "Onboarding option under “Both”: you see both tabs (Knowledge and Languages)."
   },
   "sh.onbChangeLater": "You can change it any time: Me › What I learn.",
   "@sh.onbChangeLater": {
-    "description": ""
+    "description": "Onboarding note: the choice can be changed any time in Me › What I learn (keep these names consistent with sh.me and sh.whatILearn)."
   },
   "sh.onbWho": "Who comes with you?",
   "@sh.onbWho": {
-    "description": ""
+    "description": "Onboarding, second question: which character comes with you (your companion and tutor)?"
   },
   "sh.onbWhoSub": "Your companion is also your tutor in the lessons, and it dresses the whole app.",
   "@sh.onbWhoSub": {
-    "description": ""
+    "description": "Onboarding: the companion is also your tutor in the lessons, and it themes the whole app."
   },
   "sh.onbGo": "Let’s go",
   "@sh.onbGo": {
-    "description": ""
+    "description": "Onboarding final button: start using the app. Short."
   },
   "sh.onbWhoLater": "Change it in Me › Character as often as you like for 15 days, then once every 5 days. There you can also try anyone for 5 minutes.",
   "@sh.onbWhoLater": {
-    "description": ""
+    "description": "Onboarding note: change the character in Me › Character as often as you like for 15 days, then once every 5 days; there you can also try any for 5 minutes."
   },
   "sh.rx.correct": "Five in a row!|That was a hard one. Well done!|Even I wouldn’t have found it that fast!",
   "@sh.rx.correct": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After a right answer. Several alternatives separated by “|”: one is picked at random — keep the “|” separators (any number of alternatives is fine)."
   },
   "sh.rx.correct.five": "Five in a row!",
   "@sh.rx.correct.five": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After five right answers in a row."
   },
   "sh.rx.correct.hard": "That was a hard one. Well done!",
   "@sh.rx.correct.hard": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After a right answer to a hard exercise."
   },
   "sh.rx.wrong.faint": "Oops! I fainted a little…",
   "@sh.rx.wrong.faint": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After a wrong answer, with an animation where the character faints a little."
   },
   "sh.rx.wrong.dizzy": "That one made me dizzy too!",
   "@sh.rx.wrong.dizzy": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After a wrong answer, with an animation where the character gets dizzy (“that one” = that question)."
   },
   "sh.rx.wrong.sweat": "A tough one! Again?",
   "@sh.rx.wrong.sweat": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After a wrong answer, with a sweating animation: a tough one — try again?"
   },
   "sh.rx.wrong3": "Three in a row? It happens. Shall I explain it another way?",
   "@sh.rx.wrong3": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After three wrong answers in a row: it happens; offers to explain it another way."
   },
   "sh.rx.timer": "Last seconds!",
   "@sh.rx.timer": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. In the last seconds of the Lightning round timer."
   },
   "sh.rx.timerwin": "A clean score!",
   "@sh.rx.timerwin": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. Lightning round finished without a single mistake."
   },
   "sh.rx.boss": "The boss is coming. You have 3 lives!",
   "@sh.rx.boss": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the chapter boss (the final test, 3 lives) starts."
   },
   "sh.rx.bosswin": "You beat the boss!",
   "@sh.rx.bosswin": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the learner beats the chapter boss."
   },
   "sh.rx.chapter": "End of the chapter!|Chapter done!",
   "@sh.rx.chapter": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the last section of a chapter is read. Alternatives separated by “|” (one picked at random) — keep the “|”."
   },
   "sh.rx.node": "A new step is open!",
   "@sh.rx.node": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When a Roadmap step is mastered and a new step opens."
   },
   "sh.rx.treasure": "You found the treasure!",
   "@sh.rx.treasure": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the Roadmap’s final goal (the treasure) is reached."
   },
   "sh.rx.gym": "Not a single mistake left!",
   "@sh.rx.gym": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the Mistakes gym becomes empty (no mistake left)."
   },
   "sh.rx.streak": "{n, number} days in a row!",
   "@sh.rx.streak": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. On the first open of the day at a 7-, 30-, 60-… day streak.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "30",
+        "description": "streak length in days"
+      }
+    }
   },
   "sh.rx.goal": "High five! The day’s goal is done.",
   "@sh.rx.goal": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the daily XP goal is reached (“high five!”)."
   },
   "sh.rx.level": "A new level! A new place of your world.",
   "@sh.rx.level": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the learner reaches a new level: a new place of their world opens."
   },
   "sh.rx.medal": "A new treasure!",
   "@sh.rx.medal": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When a new medal (treasure) is earned on Progress."
   },
   "sh.rx.perfect": "All right. Perfect!",
   "@sh.rx.perfect": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. At the end of a round of 5+ exercises with all answers right."
   },
   "sh.rx.back": "I was waiting for you!",
   "@sh.rx.back": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. When the learner comes back after 3 or more days away."
   },
   "sh.rx.rest": "Forty minutes! A break?",
   "@sh.rx.rest": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. After 40 minutes of study: suggests a break."
   },
   "sh.rx.hello": "Hi! Shall we start?",
   "@sh.rx.hello": {
-    "description": ""
+    "description": "Speech bubble of the tutor character’s big animated reaction (top right, a few seconds), in the character’s own voice; playful and very short. Greeting when the learner arrives: shall we start?"
   },
   "sh.rx.signText": "Together!",
   "@sh.rx.signText": {
-    "description": ""
+    "description": "Text painted on a small wooden sign the character holds up after three wrong answers in a row (encouragement: we do it together). One or two words, very short (it must fit the sign)."
   },
   "sh.stationOf": "A step of “{title}”",
   "@sh.stationOf": {
-    "description": ""
+    "description": "Kicker above a subject that is a step of a Roadmap: the Roadmap it belongs to.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Data engineer",
+        "description": "Roadmap title"
+      }
+    }
   },
   "sh.stationDone": "Step mastered: the next ones are open on the Roadmap.",
   "@sh.stationDone": {
-    "description": ""
+    "description": "Line/tooltip on a subject that is a mastered Roadmap step: the next steps are open on the Roadmap."
   },
   "sh.stationMastered": "Step mastered",
   "@sh.stationMastered": {
-    "description": ""
+    "description": "Short line next to the progress bar of a mastered Roadmap step (after ✓)."
   },
   "sh.stationMastery": "To master it: read every section ({r}% read) and solve {p}% of the exercises ({e}% solved).",
   "@sh.stationMastery": {
-    "description": ""
+    "description": "Line/tooltip on a Roadmap step: what mastering it requires and where the learner stands (percent read, percent solved). The percent sign follows the numbers: use your language’s percent typography.",
+    "placeholders": {
+      "r": {
+        "type": "int",
+        "example": "60",
+        "description": "percent of sections read"
+      },
+      "p": {
+        "type": "int",
+        "example": "80",
+        "description": "percent of exercises required"
+      },
+      "e": {
+        "type": "int",
+        "example": "45",
+        "description": "percent of exercises solved"
+      }
+    }
   },
   "sh.searchSubject": "Search this subject",
   "@sh.searchSubject": {
-    "description": ""
+    "description": "Menu item and accessible label of the search field: search this subject (its concepts, sections, exercises)."
   },
   "sh.sources": "Sources",
   "@sh.sources": {
-    "description": ""
+    "description": "Menu item: the subject’s sources (the files it was made from). Short."
   },
   "sh.sourcesSub": "The files this subject was made from",
   "@sh.sourcesSub": {
-    "description": ""
+    "description": "Subtitle of Sources: the files this subject was made from."
   },
   "sh.focusStop": "Stop the focus sprint",
   "@sh.focusStop": {
-    "description": ""
+    "description": "Menu item while a focus sprint runs: stop it."
   },
   "sh.otherStation": "Make it another step",
   "@sh.otherStation": {
-    "description": ""
+    "description": "Menu item of a subject that is already a Roadmap step: make it another step (of this or another Roadmap)."
   },
   "sh.notYours": "Only the subjects you made yourself can be shared.",
   "@sh.notYours": {
-    "description": ""
+    "description": "Only subjects the learner made can be shared — currently not used by the app."
   },
   "sh.resetProgress": "Reset my progress in “{title}”",
   "@sh.resetProgress": {
-    "description": ""
+    "description": "Dangerous menu item of a subject: reset my progress in it (asks for confirmation).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "subject title"
+      }
+    }
   },
   "sh.searchConcept": "Find a concept",
   "@sh.searchConcept": {
-    "description": ""
+    "description": "Placeholder of the subject search field: find a concept (examples may follow in parentheses)."
   },
   "sh.chView": "How to show the chapters",
   "@sh.chView": {
-    "description": ""
+    "description": "Accessible label of the List/Cards switch above the chapters: how to show the chapters."
   },
   "sh.viewList": "List",
   "@sh.viewList": {
-    "description": ""
+    "description": "Option of the view switch (chapters, Roadmap map): show as a list. One word."
   },
   "sh.viewCards": "Cards",
   "@sh.viewCards": {
-    "description": ""
+    "description": "Option of the chapters view switch: show as cards (tiles). One word."
   },
   "sh.subjProgress": "{r}% read · {e}% solved",
   "@sh.subjProgress": {
-    "description": ""
+    "description": "Line next to the subject’s progress bar: percent of sections read and of exercises solved. Use your language’s percent typography.",
+    "placeholders": {
+      "r": {
+        "type": "int",
+        "example": "60",
+        "description": "percent read"
+      },
+      "e": {
+        "type": "int",
+        "example": "45",
+        "description": "percent solved"
+      }
+    }
   },
   "sh.continueSec": "Continue: {title}",
   "@sh.continueSec": {
-    "description": ""
+    "description": "Primary button on the subject or chapter page: continue reading at a section.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Window functions",
+        "description": "section title"
+      }
+    }
   },
   "sh.startCh1": "Start with chapter 1",
   "@sh.startCh1": {
-    "description": ""
+    "description": "Primary button on a subject not started yet: start with chapter 1."
   },
   "sh.subjCounts": "{c} chapters · {s} sections · {e} exercises",
   "@sh.subjCounts": {
-    "description": ""
+    "description": "Grey line above the chapters list: how many chapters, sections and exercises the subject has (always several).",
+    "placeholders": {
+      "c": {
+        "type": "int",
+        "example": "9",
+        "description": "chapters"
+      },
+      "s": {
+        "type": "int",
+        "example": "54",
+        "description": "sections"
+      },
+      "e": {
+        "type": "int",
+        "example": "210",
+        "description": "exercises"
+      }
+    }
   },
   "sh.chapterN": "Chapter {n, number}",
   "@sh.chapterN": {
-    "description": ""
+    "description": "Small label above a chapter’s title in the chapter list.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3",
+        "description": "chapter number"
+      }
+    }
   },
   "sh.theory": "Theory",
   "@sh.theory": {
-    "description": ""
+    "description": "Label of the reading progress bar on a chapter card (with 📖): the theory."
   },
   "sh.practice": "Practice",
   "@sh.practice": {
-    "description": ""
+    "description": "Label of the exercises progress bar on a chapter card (with 🎯): the practice."
   },
   "sh.chSocratic": "Socratic dialogue on the chapter",
   "@sh.chSocratic": {
-    "description": ""
+    "description": "Menu item/button: a Socratic dialogue with the tutor about the chapter."
   },
   "sh.chSocraticSub": "{Tutor} asks, you think it through",
   "@sh.chSocraticSub": {
-    "description": ""
+    "description": "Subtitle of the Socratic dialogue: the tutor asks, you think it through. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "Tutor": {
+        "type": "String",
+        "example": "Ο Αγκαθούλης",
+        "description": "context value: the tutor’s name as subject, capitalised"
+      }
+    }
   },
   "sh.allChapters": "All chapters",
   "@sh.allChapters": {
-    "description": ""
+    "description": "Menu item: back to all chapters of the subject."
   },
   "sh.objectives": "What you will be able to do",
   "@sh.objectives": {
-    "description": ""
+    "description": "Collapsible heading (with 🎯) on a chapter page: the learning objectives (what you will be able to do)."
   },
   "sh.startReading": "Start reading",
   "@sh.startReading": {
-    "description": ""
+    "description": "Primary button on a chapter page: start reading its first section."
   },
   "sh.practiceChapter": "Practise the chapter",
   "@sh.practiceChapter": {
-    "description": ""
+    "description": "Button (with 🎯): practise the chapter (its exercises)."
   },
   "sh.nextSection": "Next section",
   "@sh.nextSection": {
-    "description": ""
+    "description": "Button at the end of a section (with →) and accessible label of that navigation."
   },
   "sh.prevSection": "Previous section",
   "@sh.prevSection": {
-    "description": ""
+    "description": "Small button at the end of a section (after ←): previous section."
   },
   "sh.nextChapterFirst": "Chapter {n, number} · {title}",
   "@sh.nextChapterFirst": {
-    "description": ""
+    "description": "Small line under “Next section” when the next section is in the next chapter.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4",
+        "description": "chapter number"
+      },
+      "title": {
+        "type": "String",
+        "example": "Joins",
+        "description": "chapter title"
+      }
+    }
   },
   "sh.allWays": "All the ways to practise",
   "@sh.allWays": {
-    "description": ""
+    "description": "Back link (after ‹) from a practice sub-page to the list of all ways to practise the chapter."
   },
   "sh.trapsIntro": "The details that are easy to confuse and the classic mistakes of this chapter.",
   "@sh.trapsIntro": {
-    "description": ""
+    "description": "Intro of a chapter’s Traps page: the details easy to confuse and the classic mistakes of the chapter."
   },
   "sh.trapDrill": "Traps",
   "@sh.trapDrill": {
-    "description": ""
+    "description": "Short name of the traps drill, used in the run’s title (“⚠️ Traps · Ch3”). One word."
   },
   "sh.trapsNoTimer": "Trap drill, no timer",
   "@sh.trapsNoTimer": {
-    "description": ""
+    "description": "Button (with ⚠️) on the Traps page: a drill of the traps, without a timer."
   },
   "sh.trapsTimed": "True or false against the clock",
   "@sh.trapsTimed": {
-    "description": ""
+    "description": "Button (with ⚡) on the Traps page: true-or-false against the clock (the Lightning round)."
   },
   "sh.round10": "A round of 10",
   "@sh.round10": {
-    "description": ""
+    "description": "Practice tile: a round of 10 exercises."
   },
   "sh.solvedOf": "{n, number} of {of, number} solved",
   "@sh.solvedOf": {
-    "description": ""
+    "description": "Subtitle of the round tile: exercises solved so far out of all exercises of the chapter.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12",
+        "description": "solved"
+      },
+      "of": {
+        "type": "int",
+        "example": "30",
+        "description": "all exercises"
+      }
+    }
   },
   "sh.chooseRound": "Choose what to practise",
   "@sh.chooseRound": {
-    "description": ""
+    "description": "Practice tile: choose what to practise (filters)."
   },
   "sh.chooseRoundSub": "By type, difficulty or tag",
   "@sh.chooseRoundSub": {
-    "description": ""
+    "description": "Subtitle of “Choose what to practise”: by exercise type, difficulty or tag."
   },
   "sh.bossBeaten": "Boss beaten · fight again",
   "@sh.bossBeaten": {
-    "description": ""
+    "description": "Practice tile once the chapter boss is beaten: beaten · fight it again."
   },
   "sh.boss": "The chapter boss",
   "@sh.boss": {
-    "description": ""
+    "description": "Practice tile: the chapter boss — a final test of the chapter with 3 lives (a game metaphor)."
   },
   "sh.bossSub": "A final test with 3 lives",
   "@sh.bossSub": {
-    "description": ""
+    "description": "Subtitle of the boss tile: a final test with 3 lives."
   },
   "sh.askSocratic": "Socratic dialogue on this",
   "@sh.askSocratic": {
-    "description": ""
+    "description": "Menu item on a section: a Socratic dialogue with the tutor about this section."
   },
   "sh.askDebug": "Debug simulation",
   "@sh.askDebug": {
-    "description": ""
+    "description": "Menu item on a section: a debugging simulation with the tutor (a broken case to diagnose)."
   },
   "sh.askInterview": "Interview me",
   "@sh.askInterview": {
-    "description": ""
+    "description": "Menu item on a section: the tutor gives you a mock interview about it."
   },
   "sh.askFresh": "A new question",
   "@sh.askFresh": {
-    "description": ""
+    "description": "Menu item on a section: a brand-new question written by the AI."
   },
   "sh.askFreshSub": "{Tutor} writes one just for you",
   "@sh.askFreshSub": {
-    "description": ""
+    "description": "Subtitle of “A new question”: the tutor writes one just for you. Tutor forms (context values, always available, filled automatically): the name of the learner’s tutor character — it changes with the chosen character and the interface language. {tutor} plain name; {tutorNom} with article, as subject (el “ο Αγκαθούλης”); {tutorAcc} as object (el “τον Αγκαθούλη”, ru accusative); {tutorTo} “to/at” form (el “στον Αγκαθούλη”, fr “à Prism”); {Tutor} subject form capitalised, for the start of a sentence. Use the form your grammar needs.",
+    "placeholders": {
+      "Tutor": {
+        "type": "String",
+        "example": "Ο Αγκαθούλης",
+        "description": "context value: the tutor’s name as subject, capitalised"
+      }
+    }
   },
   "sh.allSections": "All sections of the chapter",
   "@sh.allSections": {
-    "description": ""
+    "description": "Menu item on a section: all sections of the chapter."
   },
   "sh.read": "read",
   "@sh.read": {
-    "description": ""
+    "description": "Pill (after ✓) on a section already read. Lower case, past participle."
   },
   "sh.continueRead": "Continue",
   "@sh.continueRead": {
-    "description": ""
+    "description": "Button under a chunk of bite-size reading: reveal the next chunk (followed by ▾ and “(2/5)”). Short."
   },
   "sh.showAll": "show all",
   "@sh.showAll": {
-    "description": ""
+    "description": "Small button in bite-size reading: show the whole section at once. Lower case."
   },
   "sh.quickCheck": "Quick check",
   "@sh.quickCheck": {
-    "description": ""
+    "description": "Heading (with ⚡) of the quick questions at the end of a section."
   },
   "sh.quickCheckSub": "{n, plural, one { · # question} other { · # questions}}",
   "@sh.quickCheckSub": {
-    "description": "",
+    "description": "Small count right after “Quick check”, starting with “ · ”: the number of questions.",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "3",
+        "description": "number of questions"
       }
     }
   },
   "sh.sectionDrill": "Debug drill",
   "@sh.sectionDrill": {
-    "description": ""
+    "description": "Heading (with 🔧) of the debug drill at the end of a section."
   },
   "sh.generating": "Writing a new question…",
   "@sh.generating": {
-    "description": ""
+    "description": "Note (with ✨) while the AI writes a new question. Keep the ellipsis."
   },
   "sh.allExercises": "{n, plural, one {The one exercise of this section} other {All # exercises of this section}}",
   "@sh.allExercises": {
-    "description": "",
+    "description": "Button (with 🎯) at the end of a section: do all its exercises (for 1, “the one exercise”).",
     "placeholders": {
       "n": {
-        "type": "num"
+        "type": "int",
+        "example": "6",
+        "description": "number of exercises in the section"
       }
     }
   },
   "sh.showAsMap": "Show as a map",
   "@sh.showAsMap": {
-    "description": ""
+    "description": "Roadmap menu item: show the Roadmap as a map."
   },
   "sh.showAsList": "Show as a list",
   "@sh.showAsList": {
-    "description": ""
+    "description": "Roadmap menu item: show the Roadmap as a list."
   },
   "sh.addStep": "Add a step",
   "@sh.addStep": {
-    "description": ""
+    "description": "Roadmap menu item: add a step."
   },
   "sh.claudeAppMapSub": "Copy the message · by hand · import",
   "@sh.claudeAppMapSub": {
-    "description": ""
+    "description": "Subtitle of “Your Claude app” in a Roadmap’s menu: the ways to work with the Claude app (copy the message, by hand, import)."
   },
   "sh.copyForClaude": "Copy the message for Claude",
   "@sh.copyForClaude": {
-    "description": ""
+    "description": "Roadmap menu item: copy the message (a prompt for the Claude app) that prepares the waiting steps."
   },
   "sh.copyForClaudeSub": "{n, number} waiting · paste it into a Claude chat",
   "@sh.copyForClaudeSub": {
-    "description": ""
+    "description": "Subtitle of “Copy the message for Claude”: how many steps wait; paste the message into a chat with Claude.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3",
+        "description": "steps waiting"
+      }
+    }
   },
   "sh.copiedForClaude": "Copied: paste it into a Claude chat",
   "@sh.copiedForClaude": {
-    "description": ""
+    "description": "Toast after copying the message for Claude: paste it into a chat with Claude."
   },
   "sh.rmSettingsSubAll": "Prepare ahead, AI, budget, review, re-plan, delete",
   "@sh.rmSettingsSubAll": {
-    "description": ""
+    "description": "Subtitle of the settings item in the Roadmap page’s menu: prepare ahead, AI, budget, review, re-plan, delete."
   },
   "sh.viewMap": "Map",
   "@sh.viewMap": {
-    "description": ""
+    "description": "Option of the Map/List switch on a Roadmap page: the map. One word."
   },
   "sh.mapOrList": "Map or list",
   "@sh.mapOrList": {
-    "description": ""
+    "description": "Accessible label of the Map/List switch on a Roadmap page."
   },
   "sh.mapSigns": "What the signs mean",
   "@sh.mapSigns": {
-    "description": ""
+    "description": "Menu item and sheet title: the legend of the Roadmap map (what the signs mean)."
   },
   "sh.compassN": "N",
   "@sh.compassN": {
-    "description": ""
+    "description": "The letter for North on the map’s compass rose. One letter (or the shortest abbreviation)."
   },
   "sh.rmStart": "Start",
   "@sh.rmStart": {
-    "description": ""
+    "description": "Label at the start point of the Roadmap map. One short word."
   },
   "sh.rmTreasure": "The treasure: {goal}",
   "@sh.rmTreasure": {
-    "description": ""
+    "description": "Label at the treasure (the final goal) on the Roadmap map.",
+    "placeholders": {
+      "goal": {
+        "type": "String",
+        "example": "Become a data engineer",
+        "description": "the Roadmap’s title or goal"
+      }
+    }
   },
   "sh.signHere": "You are here",
   "@sh.signHere": {
-    "description": ""
+    "description": "Tooltip of the character on the Roadmap map: you are here."
   },
   "sh.signMastered": "mastered",
   "@sh.signMastered": {
-    "description": ""
+    "description": "State of a step in its accessible label on the map (“3 · Joins — mastered”). Lower case."
   },
   "sh.signOpen": "open",
   "@sh.signOpen": {
-    "description": ""
+    "description": "State of a step in its accessible label on the map: open. Lower case."
   },
   "sh.signLocked": "locked",
   "@sh.signLocked": {
-    "description": ""
+    "description": "State of a step in its accessible label on the map: locked. Lower case."
   },
   "sh.signReplan": "Being re-planned to match your subject",
   "@sh.signReplan": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: the step is being re-planned to match the learner’s own subject attached to it."
   },
   "sh.signOwn": "Taught by your own subject",
   "@sh.signOwn": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: the step is taught by the learner’s own subject."
   },
   "sh.signByOther": "Prepared by {who}",
   "@sh.signByOther": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: the step was prepared by another member of a shared Roadmap.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "name of the member (or “…”)"
+      }
+    }
   },
   "sh.signByOtherBusy": "Being prepared by {who}",
   "@sh.signByOtherBusy": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: another member is preparing the step right now.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "name of the member (or “…”)"
+      }
+    }
   },
   "sh.signShared": "Prepared by another member",
   "@sh.signShared": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: prepared by another member (legend entry)."
   },
   "sh.signReady": "Prepared: ready to study",
   "@sh.signReady": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: prepared, ready to study."
   },
   "sh.signBusy": "Being prepared",
   "@sh.signBusy": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: being prepared now."
   },
   "sh.signFailed": "Preparing failed: open it to try again",
   "@sh.signFailed": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: preparing failed; open the step to try again."
   },
   "sh.signPaused": "Preparing is paused",
   "@sh.signPaused": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: preparing is paused (also appended to the Roadmap summary after “ · ”)."
   },
   "sh.signReview": "Look over its plan, then it is prepared",
   "@sh.signReview": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: look over the step’s plan (approve it), then it gets prepared."
   },
   "sh.signMaterial": "Taught from your material",
   "@sh.signMaterial": {
-    "description": ""
+    "description": "Roadmap map legend (“What the signs mean”) and the step’s state line: the step is taught from material (files) the learner gave."
   },
   "sh.signMasteredLong": "Mastered: its flag stays there",
   "@sh.signMasteredLong": {
-    "description": ""
+    "description": "Roadmap map legend: a mastered step — its flag stays planted there."
   },
   "sh.signOpenLong": "Open: tap it to study; the number is how much of its practice you solved",
   "@sh.signOpenLong": {
-    "description": ""
+    "description": "Roadmap map legend: an open step — tap it to study; the number on it is how much of its practice is solved."
   },
   "sh.signHereLong": "You are here: your character waits at the next station",
   "@sh.signHereLong": {
-    "description": ""
+    "description": "Roadmap map legend: you are here — your character waits at the next step (station)."
   },
   "sh.signLockedLong": "Locked: master the stations that lead to it first",
   "@sh.signLockedLong": {
-    "description": ""
+    "description": "Roadmap map legend: a locked step — first master the steps (stations) that lead to it."
   },
   "sh.signRule": "A station opens when every station before it is mastered: all its sections read and at least 80% of its exercises solved, or the short “I already know this” test passed.",
   "@sh.signRule": {
-    "description": ""
+    "description": "Roadmap map legend, the rule: a step (station) opens when every step before it is mastered — all sections read and at least 80% of exercises solved, or the short “I already know this” test passed. Use your language’s percent typography."
   },
   "sh.fitMap": "See the whole map",
   "@sh.fitMap": {
-    "description": ""
+    "description": "Tooltip of the ⤢ button on the map: zoom out to see the whole map."
   },
   "sh.nextUp": "Next up",
   "@sh.nextUp": {
-    "description": ""
+    "description": "Button on the Roadmap map: jump to the next step to study. Short."
   },
   "sh.keepCopy": "Keep my copy",
   "@sh.keepCopy": {
-    "description": ""
+    "description": "Button in the update bar of a shared Roadmap: keep my copy (do not take the new version)."
   },
   "sh.keepMine": "Keep mine",
   "@sh.keepMine": {
-    "description": ""
+    "description": "Button in the update bar of a shared subject: keep my version."
   },
   "sh.join": "Join",
   "@sh.join": {
-    "description": ""
+    "description": "Primary button in the invitation bar: join the shared Roadmap. Short."
   },
   "sh.accept": "Accept",
   "@sh.accept": {
-    "description": ""
+    "description": "Primary button in the share bar: accept the shared subject. Short."
   },
   "sh.reject": "Reject",
   "@sh.reject": {
-    "description": ""
+    "description": "Button in the share/invitation bar: reject it. Short."
   },
   "sh.someone": "Someone",
   "@sh.someone": {
-    "description": ""
+    "description": "Fills {who} in sh.invitesYou / sh.wantsShare when the sender has no name or e-mail."
   },
   "sh.invitesYou": "{who} invites you to the Roadmap “{title}”",
   "@sh.invitesYou": {
-    "description": ""
+    "description": "Bar at the top of the app: someone invites the learner to a shared Roadmap. {who} is shown in bold.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "sender’s name or e-mail (or sh.someone)"
+      },
+      "title": {
+        "type": "String",
+        "example": "Data engineer",
+        "description": "Roadmap title"
+      }
+    }
   },
   "sh.wantsShare": "{who} wants to share “{title}” with you",
   "@sh.wantsShare": {
-    "description": ""
+    "description": "Bar at the top of the app: someone wants to share a subject with the learner. {who} is shown in bold.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Maria",
+        "description": "sender’s name or e-mail (or sh.someone)"
+      },
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "subject title"
+      }
+    }
   },
   "sh.joinedToast": "You joined “{title}”: your progress is your own, the prepared steps are shared",
   "@sh.joinedToast": {
-    "description": ""
+    "description": "Toast after joining a shared Roadmap: your progress is your own; the prepared steps are shared.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Data engineer",
+        "description": "Roadmap title"
+      }
+    }
   },
   "sh.addedToast": "“{title}” added to your subjects",
   "@sh.addedToast": {
-    "description": ""
+    "description": "Toast after accepting a shared subject: added to your subjects.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "SQL Basics",
+        "description": "subject title"
+      }
+    }
   },
   "sh.syncErr": "Sync error: {e}",
   "@sh.syncErr": {
-    "description": ""
+    "description": "Tooltip of the sync dot (red): a sync error with its technical message.",
+    "placeholders": {
+      "e": {
+        "type": "String",
+        "example": "Network error",
+        "description": "the error message"
+      }
+    }
   },
   "sh.syncing": "Syncing…",
   "@sh.syncing": {
-    "description": ""
+    "description": "Tooltip of the sync dot while syncing. Keep the ellipsis."
   },
   "sh.syncWait": "Changes waiting to sync",
   "@sh.syncWait": {
-    "description": ""
+    "description": "Tooltip of the sync dot when local changes wait to be synced."
   },
   "sh.synced": "All changes synced",
   "@sh.synced": {
-    "description": ""
+    "description": "Tooltip of the sync dot when everything is synced."
   }
 }
