@@ -11,6 +11,8 @@ window.NoemaCurMap = (() => {
   const CM = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
   const cmNum = n => window.NoemaI18n ? window.NoemaI18n.fmt.number(n) : String(n);
   const errMsg = e => window.NoemaI18n ? window.NoemaI18n.err(e) : (e?.message || String(e));   // an error's words (its code's message, else its English text)
+  /** A Roadmap's language for the learner: its name in the UI language (English keeps the words it always had: “Greek (Ελληνικά)”). */
+  const langLabel = code => window.NoemaI18n && window.NoemaI18n.locale !== 'en' ? window.NoemaI18n.fmt.langName(code) : (C().LANG[code] || code);
   /** A stored error (c.error, a step's pack.error) in the UI language of the moment: its code (…errorInfo) when it has one, else the stored words. */
   const storedErr = (info, text) => errMsg(info && info.code ? { ...info, message: text } : text);
   /** A message with elements inside (a bold name …): placeholders filled with \u0001…\u0008 markers → [text, element, text …]. */
@@ -275,7 +277,7 @@ window.NoemaCurMap = (() => {
     overlay((box, close) => {
       box.classList.add('cg-box');
       const goal = el('textarea', { class: 'noema-input', rows: 2, placeholder: CM('roadmap.map.new.goalPh') });
-      const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
+      const lang = el('select', { class: 'noema-input' }, ...Object.keys(C().LANG).map(v => el('option', { value: v }, langLabel(v)))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const learner = el('input', { class: 'noema-input', placeholder: CM('roadmap.map.new.learnerPh') });
       const depth = el('select', { class: 'noema-input' }, el('option', { value: 'standard' }, CM('roadmap.map.new.depthStd')), el('option', { value: 'deep' }, CM('roadmap.map.new.depthDeep')), el('option', { value: 'exhaustive' }, CM('roadmap.map.new.depthAll'))); depth.value = 'deep';
       const apps = el('select', { class: 'noema-input' }, ...[[2, 4], [3, 6], [5, 8]].map(([a, b]) => el('option', { value: a + '-' + b }, CM('roadmap.map.new.apps', { a, b })))); apps.value = '3-6';
@@ -491,7 +493,7 @@ window.NoemaCurMap = (() => {
         if (c.status === 'ready') { G().kick(); }
       }
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm(CM('roadmap.map.build.leaveConfirm'))) return; ctl?.abort(); close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.lib.title')),
-        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${C().LANG[c.language] || c.language} · ` + CM('roadmap.map.build.yours', { n: Object.keys(c.nodes).length }) + ` · ${c.learner || CM('roadmap.map.build.fromBasics')}` : `${C().LANG[c.language] || c.language} · ${CM('roadmap.map.build.depth', { d: String(c.depth) })} · ${c.learner || CM('roadmap.map.build.fromBasics')}`), stages, bar, status, appBox, actions,
+        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${langLabel(c.language)} · ` + CM('roadmap.map.build.yours', { n: Object.keys(c.nodes).length }) + ` · ${c.learner || CM('roadmap.map.build.fromBasics')}` : `${langLabel(c.language)} · ${CM('roadmap.map.build.depth', { d: String(c.depth) })} · ${c.learner || CM('roadmap.map.build.fromBasics')}`), stages, bar, status, appBox, actions,
         el('details', { class: 'cg-logbox', open: true }, el('summary', {}, CM('roadmap.map.build.log')), log));
       paint(); if (start || c.status === 'building') run();
     }, { closable: false });
@@ -683,7 +685,7 @@ window.NoemaCurMap = (() => {
       const info = el('div', { class: 'tiny cm-detect' }), perr = el('div', { class: 'tiny cg-kstat bad' }), warnBox = el('div', { class: 'tiny cm-warns' });
       const graph = el('div', { class: 'cm-miniscroll', 'aria-label': CM('roadmap.map.imp.previewAria') }), nodeBox = el('div', { class: 'cm-nodebox' }), prev = el('ol', { class: 'cm-preview' });
       const title = el('input', { class: 'noema-input', placeholder: CM('roadmap.map.imp.namePh') });
-      const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
+      const lang = el('select', { class: 'noema-input' }, ...Object.keys(C().LANG).map(v => el('option', { value: v }, langLabel(v)))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const learner = el('input', { class: 'noema-input', placeholder: CM('roadmap.map.imp.learnerPh') });
       const PP = providerPick(acc, { what: 'plan' }), provider = PP.sel;
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, CM('roadmap.map.new.ahead', { n })))); prefetch.value = '3';
@@ -1035,7 +1037,7 @@ window.NoemaCurMap = (() => {
       /** 💬 the Claude app has worked on this map already (or the message was copied): the learner knows the way */
       const appKey = 'noema:appUsed:' + acc;
       const knowsApp = () => { try { if (localStorage.getItem(appKey)) return true; } catch (e) { }
-        return Object.values(c.nodes || {}).some(n => /^claude-(app|chat)$/.test(n.pack?.via || '') || n.pack?.claimedAt) || (c.log || []).some(l => String(l.m || '').startsWith('💬 Claude app')); };   // i18n-ignore (matches the log's own words)   // i18n-ignore (matches the log's own words)
+        return Object.values(c.nodes || {}).some(n => /^claude-(app|chat)$/.test(n.pack?.via || '') || n.pack?.claimedAt) || (c.log || []).some(l => l.via === 'claude-app' || String(l.m || '').startsWith('💬 Claude app')); };   // i18n-ignore (older logs without via: their English words)
       const copyMsg = b => { try { localStorage.setItem(appKey, '1'); } catch (e) { } copy(J().message(C().get(acc, cid), { count: 1 }), b).then(() => { if (!b) toast(SL('copiedForClaude', '📋 Copied: paste it into a Claude chat'), 3500); }); if (page) { dotNow = null; drawMenu(); } };   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
       let dotNow = null;
       const drawBar = () => {
