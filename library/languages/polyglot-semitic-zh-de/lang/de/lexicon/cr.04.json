@@ -1970,10 +1970,10 @@
     ],
     "pitfalls": [
      "das Viertel is neuter, like every fraction in -tel: das Drittel, das Fünftel.",
-     "Clock: Viertel nach acht (8:15), Viertel vor neun (8:45). In parts of the east and south: viertel neun (8:15), dreiviertel neun (8:45) – counted towards the next hour like halb."
+     "Clock: Viertel nach acht (8:15), Viertel vor neun (8:45).\n\nIn parts of the east and south: viertel neun (8:15), dreiviertel neun (8:45) – counted towards the next hour like halb."
     ],
     "subtleties": [
-     "das Viertel is also a part of a town, a quarter or neighbourhood (das Altstadtviertel); in Austria and Bavaria ein Viertel (Wein) is a quarter litre of wine.",
+     "- das Viertel is also a part of a town, a quarter or neighbourhood (das Altstadtviertel).\n- In Austria and Bavaria ein Viertel (Wein) is a quarter litre of wine.",
      "Fractions are built the same way: ein Drittel (a third), ein Fünftel (a fifth)."
     ]
    }
