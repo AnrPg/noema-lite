@@ -196,6 +196,9 @@ def lang_builder_files():
         if os.path.isfile(f) and '__pycache__' not in f: out.append((f, os.path.relpath(f, src).replace(os.sep, '/')))
     for t in LANG_SKILL_TOOLS: out.append((os.path.join(ROOT, 'tools', t), 'scripts/' + t))
     out += [(os.path.join(ROOT, 'tools', 'lang_sources', 'mkbrief.py'), 'scripts/mkbrief.py'), (os.path.join(ENGINE, 'langcore.js'), 'scripts/langcore.js'),
+            # langcore's words for learners come from the UI catalog: in Node it reads the English one through scripts/i18n/node.js (docs/i18n.md)
+            (os.path.join(ROOT, 'tools', 'i18n', 'node.js'), 'scripts/i18n/node.js'), (os.path.join(ENGINE, 'vendor', 'intl-messageformat.iife.js'), 'scripts/i18n/intl-messageformat.iife.js'),
+            (os.path.join(ENGINE, 'i18n', 'en.js'), 'scripts/i18n/en.js'), (os.path.join(ENGINE, 'i18n.js'), 'scripts/i18n/i18n.js'),
             (os.path.join(ROOT, 'docs', 'LANGUAGES.md'), 'references/LANGUAGES.md'), (os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md'), 'references/LANGUAGE_RULES.md'),
             (os.path.join(ROOT, 'docs', 'NEW_LANGUAGE_PLAYBOOK.md'), 'references/NEW_LANGUAGE_PLAYBOOK.md'), (os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'references/CONTENT_SPEC.md'),
             (os.path.join(ROOT, 'tools', 'lang_sources', 'AGENT_BRIEF.md'), 'references/AGENT_BRIEF.md')]
