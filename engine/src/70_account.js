@@ -115,7 +115,7 @@ const ACC_VIEWS = {
       opts.only === 'ai' ? null : accSection('🎨', tE('engine.acc.secDisplay'), { open: !!S.settings.apiKey, body: display }),
       opts.only === 'ai' ? null : accSection('📘', tE('engine.acc.secSubject', { title: SUBJ.title }), { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
-        h('button', { class: 'btn primary', onclick: async () => {
+        h('button', { class: 'btn primary', 'data-act': 'save-settings', onclick: async () => {
           S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
           putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
