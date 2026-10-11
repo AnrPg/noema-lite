@@ -2757,5 +2757,1059 @@
   "engine.thr.wrapUp": "Wrap up",
   "@engine.thr.wrapUp": {
     "description": "Button (after 🎓): the tutor closes the conversation with the answers and a summary."
+  },
+  "engine.common.sizeB": "{size} B",
+  "@engine.common.sizeB": {
+    "description": "A file size in bytes. size = the number, already formatted.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "512"
+      }
+    }
+  },
+  "engine.acc.cloudAccount": "Cloud account · {email}",
+  "@engine.acc.cloudAccount": {
+    "description": "Account menu header (after ☁️): the kind of account and its e-mail.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      }
+    }
+  },
+  "engine.acc.localProfile": "Local profile on this device",
+  "@engine.acc.localProfile": {
+    "description": "Account menu header (after 💻) for a profile without a cloud account."
+  },
+  "engine.acc.xpTotal": "{n, number} XP total",
+  "@engine.acc.xpTotal": {
+    "description": "Account menu header chip (after ⭐): XP over all subjects.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.streak": "{n, plural, one {# day streak} other {# day streak}}",
+  "@engine.acc.streak": {
+    "description": "Account menu header chip (after 🔥): the number of days in a row the learner studied. (English uses “day” for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.geminiKey": "Gemini API key",
+  "@engine.acc.geminiKey": {
+    "description": "Account menu › ⚙️ Settings: label / screen-reader label of the Gemini key field."
+  },
+  "engine.acc.geminiModel": "Gemini model",
+  "@engine.acc.geminiModel": {
+    "description": "Account menu › ⚙️ Settings: label of the Gemini model choice."
+  },
+  "engine.acc.currentModel": "Current model: {model}",
+  "@engine.acc.currentModel": {
+    "description": "Account menu › ⚙️ Settings: status line under the model choice.",
+    "placeholders": {
+      "model": {
+        "type": "String",
+        "example": "gemini-2.5-flash"
+      }
+    }
+  },
+  "engine.acc.modelOnFirstUse": "The model is detected on first use.",
+  "@engine.acc.modelOnFirstUse": {
+    "description": "Account menu › ⚙️ Settings: status line when no model was chosen yet."
+  },
+  "engine.acc.noGeminiKey": "No Gemini key yet — the AI tutor is off",
+  "@engine.acc.noGeminiKey": {
+    "description": "Account menu › ⚙️ Settings: bold title of a warning when there is no Gemini key."
+  },
+  "engine.acc.freeTwoMin": "It is free and takes 2 minutes.",
+  "@engine.acc.freeTwoMin": {
+    "description": "Account menu › ⚙️ Settings: the warning’s text, before the link “Show me how”."
+  },
+  "engine.acc.showMeHow": "Show me how",
+  "@engine.acc.showMeHow": {
+    "description": "Account menu › ⚙️ Settings: link that opens the guide to get a Gemini key."
+  },
+  "engine.acc.geminiKeyTip": "Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.",
+  "@engine.acc.geminiKeyTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Gemini key (privacy statement)."
+  },
+  "engine.acc.keyStoredCloud": "Stored only in this browser. Add it once on each device.",
+  "@engine.acc.keyStoredCloud": {
+    "description": "Account menu › ⚙️ Settings: note under the Gemini key (cloud accounts)."
+  },
+  "engine.acc.keyStoredLocal": "Stored only in this browser, for this profile.",
+  "@engine.acc.keyStoredLocal": {
+    "description": "Account menu › ⚙️ Settings: note under the Gemini key (local profiles)."
+  },
+  "engine.acc.detecting": "Detecting…",
+  "@engine.acc.detecting": {
+    "description": "Account menu › ⚙️ Settings: status while the Gemini models are detected."
+  },
+  "engine.acc.foundModels": "{n, plural, one {Found # models · picked {model}} other {Found # models · picked {model}}}",
+  "@engine.acc.foundModels": {
+    "description": "Account menu › ⚙️ Settings: status after detecting the models: how many, and the one picked. (English uses “models” for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "model": {
+        "type": "String",
+        "example": "gemini-2.5-flash"
+      }
+    }
+  },
+  "engine.acc.detectModels": "Detect models",
+  "@engine.acc.detectModels": {
+    "description": "Account menu › ⚙️ Settings: button (after 🔍). Same words as in engine.gemini.noModel."
+  },
+  "engine.acc.testing": "Testing…",
+  "@engine.acc.testing": {
+    "description": "Account menu › ⚙️ Settings: status while the Gemini key is tested."
+  },
+  "engine.acc.test": "Test",
+  "@engine.acc.test": {
+    "description": "Account menu › ⚙️ Settings: button (after 🧪) that tests the Gemini key."
+  },
+  "engine.acc.claudeKey": "Claude API key",
+  "@engine.acc.claudeKey": {
+    "description": "Account menu › ⚙️ Settings: label of the Claude key field."
+  },
+  "engine.acc.claudeModel": "Claude model",
+  "@engine.acc.claudeModel": {
+    "description": "Account menu › ⚙️ Settings: label of the Claude model choice."
+  },
+  "engine.acc.newestSonnet": "Newest Sonnet (recommended)",
+  "@engine.acc.newestSonnet": {
+    "description": "Account menu › ⚙️ Settings: default option of the Claude model choice. “Sonnet” is a model name."
+  },
+  "engine.acc.limitSubjectAria": "Spending limit per subject",
+  "@engine.acc.limitSubjectAria": {
+    "description": "Account menu › ⚙️ Settings: screen-reader label of the money limit (in $) for building one subject with Claude. Billing."
+  },
+  "engine.acc.limitStepAria": "Spending limit per Roadmap step",
+  "@engine.acc.limitStepAria": {
+    "description": "Account menu › ⚙️ Settings: screen-reader label of the money limit (in $) per Roadmap step. Billing."
+  },
+  "engine.acc.curAI": "AI for new Roadmaps",
+  "@engine.acc.curAI": {
+    "description": "Account menu › ⚙️ Settings: label of the choice of which AI builds new Roadmaps."
+  },
+  "engine.acc.prov_rec": "Recommended (the Claude app for cloud accounts)",
+  "@engine.acc.prov_rec": {
+    "description": "Account menu › ⚙️ Settings: option of “AI for new Roadmaps”."
+  },
+  "engine.acc.prov_claudeapp": "Claude app — your Claude plan",
+  "@engine.acc.prov_claudeapp": {
+    "description": "Account menu › ⚙️ Settings: option (after 💬): the Claude app, paid by the learner’s Claude subscription."
+  },
+  "engine.acc.prov_auto": "Automatic — an API key here",
+  "@engine.acc.prov_auto": {
+    "description": "Account menu › ⚙️ Settings: option: automatic, with an API key in this app."
+  },
+  "engine.acc.prov_claude": "Claude — API key",
+  "@engine.acc.prov_claude": {
+    "description": "Account menu › ⚙️ Settings: option: Claude through an API key."
+  },
+  "engine.acc.prov_gemini": "Gemini — free key",
+  "@engine.acc.prov_gemini": {
+    "description": "Account menu › ⚙️ Settings: option: Gemini through a free key."
+  },
+  "engine.acc.noClaudeKey": "No Claude key on this device.",
+  "@engine.acc.noClaudeKey": {
+    "description": "Account menu › ⚙️ Settings: status when the Claude key field is empty."
+  },
+  "engine.acc.notClaudeKey": "That is not a Claude API key (it starts with sk-ant-).",
+  "@engine.acc.notClaudeKey": {
+    "description": "Account menu › ⚙️ Settings: status (after ⚠️) when the text is not a Claude key. Keep “sk-ant-”."
+  },
+  "engine.acc.checking": "Checking…",
+  "@engine.acc.checking": {
+    "description": "Account menu › ⚙️ Settings: status (after ⏳) while the Claude key is checked."
+  },
+  "engine.acc.keyWorksRemembered": "The key works. Remembered on this device only (never sent to the noema-lite cloud, not in backups).",
+  "@engine.acc.keyWorksRemembered": {
+    "description": "Account menu › ⚙️ Settings: status (after ✅) when the Claude key works and is remembered. Privacy statement."
+  },
+  "engine.acc.keyWorksTab": "The key works. Kept until you close this tab.",
+  "@engine.acc.keyWorksTab": {
+    "description": "Account menu › ⚙️ Settings: status (after ✅) when the Claude key works and is not remembered."
+  },
+  "engine.acc.noClaudeModule": "This installation has no Claude module.",
+  "@engine.acc.noClaudeModule": {
+    "description": "Account menu › ⚙️ Settings: when the app was installed without Claude support."
+  },
+  "engine.acc.claudeIntro": "Optional. Claude builds subjects from your sources (✨ Create with Claude) and Roadmaps. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.",
+  "@engine.acc.claudeIntro": {
+    "description": "Account menu › ⚙️ Settings: intro of the Claude section. “ways A, B, C” are the three set-up ways of the Help guide. Mentions billing."
+  },
+  "engine.acc.claudeKeyTip": "From the Claude Console (platform.claude.com → API keys). It stays in this browser: never uploaded to the noema-lite cloud, not part of backups. Leave it empty to remove it.",
+  "@engine.acc.claudeKeyTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Claude key (privacy statement). Keep “platform.claude.com”."
+  },
+  "engine.acc.remember": "Remember it on this device (untick on a shared computer)",
+  "@engine.acc.remember": {
+    "description": "Account menu › ⚙️ Settings: checkbox next to the Claude key."
+  },
+  "engine.acc.checkKey": "Check the key",
+  "@engine.acc.checkKey": {
+    "description": "Account menu › ⚙️ Settings: button (after ✔️) that checks the Claude key."
+  },
+  "engine.acc.keyRemoved": "Removed from this device.",
+  "@engine.acc.keyRemoved": {
+    "description": "Account menu › ⚙️ Settings: status (after 🗑) after removing the Claude key."
+  },
+  "engine.acc.removeKey": "Remove the key",
+  "@engine.acc.removeKey": {
+    "description": "Account menu › ⚙️ Settings: button that removes the Claude key."
+  },
+  "engine.acc.claudeModelTip": "“Sonnet” gives very good courses for its price; “Opus” is the strongest and costs more; “Haiku” is cheaper but weaker. Check the key to list the models your key can use.",
+  "@engine.acc.claudeModelTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Claude model. Sonnet, Opus, Haiku are model names."
+  },
+  "engine.acc.limitSubject": "Limit per subject ($)",
+  "@engine.acc.limitSubject": {
+    "description": "Account menu › ⚙️ Settings: label of the money limit for building one subject with Claude (in US dollars). Billing."
+  },
+  "engine.acc.limitStep": "Limit per Roadmap step ($)",
+  "@engine.acc.limitStep": {
+    "description": "Account menu › ⚙️ Settings: label of the money limit per Roadmap step (US dollars). Billing."
+  },
+  "engine.acc.curAITip": "Preselected when you create or import a Roadmap. The Claude app (your Claude plan) is usually the cheapest for Roadmaps; an API key or Gemini runs everything here.",
+  "@engine.acc.curAITip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of “AI for new Roadmaps”."
+  },
+  "engine.acc.createWithClaude": "Create a subject with Claude",
+  "@engine.acc.createWithClaude": {
+    "description": "Button (after ✨): opens “Create with Claude”."
+  },
+  "engine.acc.howClaude": "How to set up Claude (A · B · C)",
+  "@engine.acc.howClaude": {
+    "description": "Account menu › ⚙️ Settings: button (after ❓) to the Help guide with the three ways."
+  },
+  "engine.acc.theme": "Theme",
+  "@engine.acc.theme": {
+    "description": "Account menu › ⚙️ Settings: label of the light/dark choice."
+  },
+  "engine.acc.themeAuto": "Auto (system)",
+  "@engine.acc.themeAuto": {
+    "description": "Account menu › ⚙️ Settings: theme option: follow the system."
+  },
+  "engine.acc.themeLight": "Light",
+  "@engine.acc.themeLight": {
+    "description": "Account menu › ⚙️ Settings: theme option."
+  },
+  "engine.acc.themeDark": "Dark",
+  "@engine.acc.themeDark": {
+    "description": "Account menu › ⚙️ Settings: theme option."
+  },
+  "engine.acc.goal": "Daily XP goal",
+  "@engine.acc.goal": {
+    "description": "Account menu › ⚙️ Settings: label of the daily XP target."
+  },
+  "engine.acc.chatLang": "Language of the AI conversations",
+  "@engine.acc.chatLang": {
+    "description": "Account menu › ⚙️ Settings: label and section title (after 🗣️)."
+  },
+  "engine.acc.chatLangTip": "The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.",
+  "@engine.acc.chatLangTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the AI conversation language."
+  },
+  "engine.acc.chatLangNote": "The course material stays in its own language ({title}: {lang}). You can also switch it in the tutor (🗣 next to the topic).",
+  "@engine.acc.chatLangNote": {
+    "description": "Account menu › ⚙️ Settings: note under the AI conversation language. title = the subject, lang = its language’s name.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      },
+      "lang": {
+        "type": "String",
+        "example": "English"
+      }
+    }
+  },
+  "engine.acc.sound": "Sound effects",
+  "@engine.acc.sound": {
+    "description": "Account menu › ⚙️ Settings: checkbox."
+  },
+  "engine.acc.chunk": "Bite-size reading (reveal theory chunk by chunk)",
+  "@engine.acc.chunk": {
+    "description": "Account menu › ⚙️ Settings: checkbox."
+  },
+  "engine.acc.backupBtn": "Backup & restore…",
+  "@engine.acc.backupBtn": {
+    "description": "Account menu › ⚙️ Settings: button (after 💾) to the backup tab."
+  },
+  "engine.acc.resetBtn": "Reset {title} progress",
+  "@engine.acc.resetBtn": {
+    "description": "Account menu › ⚙️ Settings: button (after 🗑️) that resets the progress of the open subject. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.acc.secGemini": "Gemini — the AI tutor",
+  "@engine.acc.secGemini": {
+    "description": "Account menu › ⚙️ Settings: section title (after 🤖)."
+  },
+  "engine.acc.keySet": "key set",
+  "@engine.acc.keySet": {
+    "description": "Account menu › ⚙️ Settings: status pill: a key is saved. Lowercase, short."
+  },
+  "engine.acc.noKey": "no key",
+  "@engine.acc.noKey": {
+    "description": "Account menu › ⚙️ Settings: status pill: no key. Lowercase, short."
+  },
+  "engine.acc.secClaude": "Claude (optional)",
+  "@engine.acc.secClaude": {
+    "description": "Account menu › ⚙️ Settings: section title (after ✨)."
+  },
+  "engine.acc.claudeOnDevice": "API key on this device",
+  "@engine.acc.claudeOnDevice": {
+    "description": "Account menu › ⚙️ Settings: status pill of the Claude section."
+  },
+  "engine.acc.claudeAppNoKey": "Claude app / no key",
+  "@engine.acc.claudeAppNoKey": {
+    "description": "Account menu › ⚙️ Settings: status pill of the Claude section."
+  },
+  "engine.acc.secClaudeInfo": "Claude makes subjects and Roadmaps: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.",
+  "@engine.acc.secClaudeInfo": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Claude section."
+  },
+  "engine.acc.asCourse": "as the course",
+  "@engine.acc.asCourse": {
+    "description": "Account menu › ⚙️ Settings: status pill: AI conversations in the course’s language. Lowercase."
+  },
+  "engine.acc.secDisplay": "Display & studying",
+  "@engine.acc.secDisplay": {
+    "description": "Account menu › ⚙️ Settings: section title (after 🎨)."
+  },
+  "engine.acc.secSubject": "This subject — {title}",
+  "@engine.acc.secSubject": {
+    "description": "Account menu › ⚙️ Settings: section title (after 📘). title = the open subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.acc.saved": "Saved ✔",
+  "@engine.acc.saved": {
+    "description": "Toast after saving the settings."
+  },
+  "engine.acc.saveSettings": "Save settings",
+  "@engine.acc.saveSettings": {
+    "description": "Account menu › ⚙️ Settings: main button."
+  },
+  "engine.acc.learnerPh": "e.g. I have ADHD and learn best when challenged; I already know X; I prepare for exam Y…",
+  "@engine.acc.learnerPh": {
+    "description": "Account menu › Profile: placeholder of “About me”."
+  },
+  "engine.acc.newPin": "New PIN (empty = keep)",
+  "@engine.acc.newPin": {
+    "description": "Account menu › Profile: placeholder of the PIN field when a PIN exists."
+  },
+  "engine.acc.optPin": "Optional PIN",
+  "@engine.acc.optPin": {
+    "description": "Account menu › Profile: placeholder of the PIN field."
+  },
+  "engine.acc.xpChip": "{title}: {n, number}",
+  "@engine.acc.xpChip": {
+    "description": "Account menu › Profile: XP earned in one subject. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.name": "Name",
+  "@engine.acc.name": {
+    "description": "Account menu › Profile: label."
+  },
+  "engine.acc.emoji": "Emoji",
+  "@engine.acc.emoji": {
+    "description": "Account menu › Profile: label of the profile’s emoji."
+  },
+  "engine.acc.aboutMe": "About me (the tutor adapts to this, in every subject)",
+  "@engine.acc.aboutMe": {
+    "description": "Account menu › Profile: label of the free text the tutor reads."
+  },
+  "engine.acc.aboutMeTip": "Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.",
+  "@engine.acc.aboutMeTip": {
+    "description": "Account menu › Profile: info tooltip of “About me”."
+  },
+  "engine.acc.askOnStart": "Show the subject picker every time I open the app",
+  "@engine.acc.askOnStart": {
+    "description": "Account menu › Profile: checkbox."
+  },
+  "engine.acc.pin": "PIN (a privacy curtain on a shared device — not encryption)",
+  "@engine.acc.pin": {
+    "description": "Account menu › Profile: label of the PIN field (security disclaimer: it is not encryption)."
+  },
+  "engine.acc.pinRemoved": "PIN removed",
+  "@engine.acc.pinRemoved": {
+    "description": "Toast after removing the PIN."
+  },
+  "engine.acc.removePin": "Remove PIN",
+  "@engine.acc.removePin": {
+    "description": "Account menu › Profile: button."
+  },
+  "engine.acc.xpBySubject": "XP by subject",
+  "@engine.acc.xpBySubject": {
+    "description": "Account menu › Profile: label above the XP chips."
+  },
+  "engine.acc.savedReloading": "Saved ✔ — reloading",
+  "@engine.acc.savedReloading": {
+    "description": "Toast after saving the profile; the page reloads."
+  },
+  "engine.acc.saveProfile": "Save profile",
+  "@engine.acc.saveProfile": {
+    "description": "Account menu › Profile: main button."
+  },
+  "engine.acc.switchProfile": "Switch profile",
+  "@engine.acc.switchProfile": {
+    "description": "Account menu › Profile: button (after 👥)."
+  },
+  "engine.acc.danger": "Danger zone",
+  "@engine.acc.danger": {
+    "description": "Account menu › Profile: bold heading of the delete area."
+  },
+  "engine.acc.deleteNote": "Deleting removes this profile and all its data from this browser. A backup file is downloaded first.",
+  "@engine.acc.deleteNote": {
+    "description": "Account menu › Profile: note above the delete button (data deletion)."
+  },
+  "engine.acc.deleteConfirm": "Delete profile “{name}” and all its data on this device?",
+  "@engine.acc.deleteConfirm": {
+    "description": "Confirmation before deleting a local profile. name = the profile.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.acc.deleteProfile": "Delete this profile",
+  "@engine.acc.deleteProfile": {
+    "description": "Account menu › Profile: button (after 🗑️)."
+  },
+  "engine.acc.subjIntro": "Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.",
+  "@engine.acc.subjIntro": {
+    "description": "Account menu › Subjects: intro."
+  },
+  "engine.acc.subjRoadmap": "The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).",
+  "@engine.acc.subjRoadmap": {
+    "description": "Account menu › Subjects: note (after 🧭). “Put on a Roadmap…” is the name of a menu item."
+  },
+  "engine.acc.originLibrary": "Library",
+  "@engine.acc.originLibrary": {
+    "description": "Account menu › Subjects: where a subject comes from (the shared library)."
+  },
+  "engine.acc.originPrivate": "Private (folder)",
+  "@engine.acc.originPrivate": {
+    "description": "Account menu › Subjects: origin (after 🔒): a private folder of the installation."
+  },
+  "engine.acc.originImported": "Imported",
+  "@engine.acc.originImported": {
+    "description": "Account menu › Subjects: origin (after 📥): imported by this profile."
+  },
+  "engine.acc.subjCounts": "{c} chapters · {e} exercises",
+  "@engine.acc.subjCounts": {
+    "description": "Account menu › Subjects: counts of a subject (c, e are numbers, or ? when unknown).",
+    "placeholders": {
+      "c": {
+        "type": "String",
+        "example": "12"
+      },
+      "e": {
+        "type": "String",
+        "example": "340"
+      }
+    }
+  },
+  "engine.acc.onSteps": "{n, plural, one {on # Roadmap step} other {on # Roadmap steps}}",
+  "@engine.acc.onSteps": {
+    "description": "Account menu › Subjects (after 🧭): on how many Roadmap steps the subject is.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.onShelf": "on the Shelf",
+  "@engine.acc.onShelf": {
+    "description": "Account menu › Subjects (after 📚): the subject is on no Roadmap step."
+  },
+  "engine.acc.isOpen": "open",
+  "@engine.acc.isOpen": {
+    "description": "Account menu › Subjects: pill on the subject that is open now. Lowercase."
+  },
+  "engine.acc.open": "Open",
+  "@engine.acc.open": {
+    "description": "Account menu › Subjects: button that opens a subject."
+  },
+  "engine.acc.editTip": "Rename, describe or delete",
+  "@engine.acc.editTip": {
+    "description": "Account menu › Subjects: tooltip of ✏️."
+  },
+  "engine.acc.editAria": "Edit {title}",
+  "@engine.acc.editAria": {
+    "description": "Account menu › Subjects: screen-reader label of ✏️. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.acc.shareTip": "Share or make public",
+  "@engine.acc.shareTip": {
+    "description": "Account menu › Subjects: tooltip of 🔗."
+  },
+  "engine.acc.openShelf": "Open the Shelf",
+  "@engine.acc.openShelf": {
+    "description": "Account menu › Subjects: button (after 📚)."
+  },
+  "engine.acc.importPack": "Import subject pack…",
+  "@engine.acc.importPack": {
+    "description": "Account menu › Subjects: button (after 📥)."
+  },
+  "engine.acc.exportPackage": "Export “{title}” (package with its source files)",
+  "@engine.acc.exportPackage": {
+    "description": "Account menu › Subjects: button (after ⬇️). title = the open subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.bk.noFolders": "This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.",
+  "@engine.bk.noFolders": {
+    "description": "Account menu › 💾 Backup & restore: folder backups are not supported. “Download backup” = engine.bk.download."
+  },
+  "engine.bk.howFolders": "How folder backups work",
+  "@engine.bk.howFolders": {
+    "description": "Account menu › 💾 Backup & restore: button (after 📁) to the guide."
+  },
+  "engine.bk.autoTo": "Auto-backup → {folder}",
+  "@engine.bk.autoTo": {
+    "description": "Toast (after ✅) after choosing the backup folder. folder = its name.",
+    "placeholders": {
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.chooseFolder": "Choose backup folder",
+  "@engine.bk.chooseFolder": {
+    "description": "Account menu › 💾 Backup & restore: button (after 📁)."
+  },
+  "engine.bk.onFolder": "On → 📁 {folder}",
+  "@engine.bk.onFolder": {
+    "description": "Account menu › 💾 Backup & restore: status pill (after ✅): folder backups are on.",
+    "placeholders": {
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.pausedFolder": "Paused — permission needed for 📁 {folder}",
+  "@engine.bk.pausedFolder": {
+    "description": "Account menu › 💾 Backup & restore: status pill (after ⏸️): the browser needs permission again.",
+    "placeholders": {
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.backedUp": "Backed up to folder",
+  "@engine.bk.backedUp": {
+    "description": "Toast (after 💾)."
+  },
+  "engine.bk.backUpNow": "Back up now",
+  "@engine.bk.backUpNow": {
+    "description": "Account menu › 💾 Backup & restore: button."
+  },
+  "engine.bk.resumed": "Auto-backup resumed",
+  "@engine.bk.resumed": {
+    "description": "Toast (after ✅)."
+  },
+  "engine.bk.resume": "Resume",
+  "@engine.bk.resume": {
+    "description": "Account menu › 💾 Backup & restore: button that gives the permission again."
+  },
+  "engine.bk.turnOff": "Turn off",
+  "@engine.bk.turnOff": {
+    "description": "Account menu › 💾 Backup & restore: button."
+  },
+  "engine.bk.lastFolder": "Last folder backup: {when} · writes backups/ and conversations/ inside 📁 {folder}",
+  "@engine.bk.lastFolder": {
+    "description": "Account menu › 💾 Backup & restore: status line. when = date and time; keep the folder names backups/ and conversations/.",
+    "placeholders": {
+      "when": {
+        "type": "String",
+        "example": "10/11/2026, 1:55:00 PM"
+      },
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.noPoints": "No restore points yet. One is created automatically before every restore or reset.",
+  "@engine.bk.noPoints": {
+    "description": "Account menu › 💾 Backup & restore: empty list of restore points."
+  },
+  "engine.bk.goBack": "Go back to this restore point? (your current state becomes a new restore point)",
+  "@engine.bk.goBack": {
+    "description": "Confirmation before restoring a restore point (local profile)."
+  },
+  "engine.bk.goBackCloud": "Go back to this restore point? (your current state becomes a new restore point) Your other devices go back to it too.",
+  "@engine.bk.goBackCloud": {
+    "description": "Confirmation before restoring a restore point (cloud account: all devices change)."
+  },
+  "engine.bk.restored": "Restored ✔ — reloading",
+  "@engine.bk.restored": {
+    "description": "Toast after a restore; the page reloads."
+  },
+  "engine.bk.restore": "Restore",
+  "@engine.bk.restore": {
+    "description": "Button of a restore point / cloud snapshot."
+  },
+  "engine.bk.intro": "Everything below is optional. {n, plural, one {# AI conversation is} other {# AI conversations are}} saved automatically in this browser.",
+  "@engine.bk.intro": {
+    "description": "Account menu › 💾 Backup & restore: intro (local profile).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.bk.introCloud": "Everything below is optional. {n, plural, one {# AI conversation is} other {# AI conversations are}} saved automatically in this browser and in your cloud account.",
+  "@engine.bk.introCloud": {
+    "description": "Account menu › 💾 Backup & restore: intro (cloud account).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.bk.secDownload": "Download a backup",
+  "@engine.bk.secDownload": {
+    "description": "Account menu › 💾 Backup & restore: section title (after ⬇️)."
+  },
+  "engine.bk.lastOn": "last {date}",
+  "@engine.bk.lastOn": {
+    "description": "Account menu › 💾 Backup & restore: status pill: date of the last downloaded backup. Lowercase.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "10/11/2026"
+      }
+    }
+  },
+  "engine.bk.downloadInfo": "One JSON file with everything of this profile: progress in every subject, flashcard schedules, all AI conversations (canonical format), settings and imported packs. Keep it anywhere; restore it here or on another device.",
+  "@engine.bk.downloadInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip."
+  },
+  "engine.bk.download": "Download backup",
+  "@engine.bk.download": {
+    "description": "Account menu › 💾 Backup & restore: button (after 💾)."
+  },
+  "engine.bk.includeKey": "include my Gemini API key",
+  "@engine.bk.includeKey": {
+    "description": "Account menu › 💾 Backup & restore: checkbox (lowercase start)."
+  },
+  "engine.bk.includeKeyTip": "Off by default so a backup file you share or store somewhere can’t leak your key.",
+  "@engine.bk.includeKeyTip": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip of the checkbox (security)."
+  },
+  "engine.bk.secFolder": "Automatic backups to a folder",
+  "@engine.bk.secFolder": {
+    "description": "Account menu › 💾 Backup & restore: section title (after 📁)."
+  },
+  "engine.bk.notInBrowser": "not in this browser",
+  "@engine.bk.notInBrowser": {
+    "description": "Account menu › 💾 Backup & restore: status pill: not supported. Lowercase."
+  },
+  "engine.bk.on": "on",
+  "@engine.bk.on": {
+    "description": "Account menu › 💾 Backup & restore: status pill. Lowercase."
+  },
+  "engine.bk.paused": "paused",
+  "@engine.bk.paused": {
+    "description": "Account menu › 💾 Backup & restore: status pill. Lowercase."
+  },
+  "engine.bk.off": "off",
+  "@engine.bk.off": {
+    "description": "Account menu › 💾 Backup & restore: status pill. Lowercase."
+  },
+  "engine.bk.folderInfo": "Chrome/Edge can write into a folder you choose: a backup every few minutes + every AI conversation as .json and .md. Choose a folder inside Google Drive or iCloud Drive for an automatic off-site copy.",
+  "@engine.bk.folderInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip."
+  },
+  "engine.bk.secRestore": "Restore from a backup file",
+  "@engine.bk.secRestore": {
+    "description": "Account menu › 💾 Backup & restore: section title (after ⬆️)."
+  },
+  "engine.bk.restoreInfo": "Replace = exact copy of the backup. Merge = keep what you have, the backup wins where both have the same item. New profile = restore side by side without touching this profile. A restore point is created first, so you can always undo.",
+  "@engine.bk.restoreInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip. Replace, Merge, New profile are the three buttons."
+  },
+  "engine.bk.oldFile": "Also accepts the “Export progress” file of the old single-file Databricks Quest.",
+  "@engine.bk.oldFile": {
+    "description": "Account menu › 💾 Backup & restore: note. “Export progress” and “Databricks Quest” are names of an older app."
+  },
+  "engine.bk.chooseFile": "Choose backup file…",
+  "@engine.bk.chooseFile": {
+    "description": "Account menu › 💾 Backup & restore: button (after 📂)."
+  },
+  "engine.bk.restoreTitle": "Restore backup",
+  "@engine.bk.restoreTitle": {
+    "description": "Heading of the restore dialog."
+  },
+  "engine.bk.fileInfo": "From “{name}” · {when} · {items, plural, one {# items} other {# items}} · {convs, plural, one {# conversations} other {# conversations}}",
+  "@engine.bk.fileInfo": {
+    "description": "Restore dialog: what the backup file contains. name = its profile, when = its date. (English uses the plural for every number.)",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ANR"
+      },
+      "when": {
+        "type": "String",
+        "example": "10/11/2026, 1:55:00 PM"
+      },
+      "items": {
+        "type": "int",
+        "example": "3"
+      },
+      "convs": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.bk.cloudWarn": "Replace and Merge change your account on all your devices, not only this one. A restore point of how things are now is kept on this device first, so you can undo it.",
+  "@engine.bk.cloudWarn": {
+    "description": "Restore dialog note for cloud accounts."
+  },
+  "engine.bk.replace": "Replace {name}'s data with it",
+  "@engine.bk.replace": {
+    "description": "Restore dialog button (after ♻️). name = the current profile.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.bk.merged": "Merged ✔ — reloading",
+  "@engine.bk.merged": {
+    "description": "Toast after a merge; the page reloads."
+  },
+  "engine.bk.merge": "Merge into this profile (backup wins on conflicts)",
+  "@engine.bk.merge": {
+    "description": "Restore dialog button (after 🔀)."
+  },
+  "engine.bk.restoredName": "{name} (restored)",
+  "@engine.bk.restoredName": {
+    "description": "Name of a new profile restored from a backup. name = the backup’s profile name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ANR"
+      }
+    }
+  },
+  "engine.bk.restoredDefault": "Restored",
+  "@engine.bk.restoredDefault": {
+    "description": "Profile name used when the backup has no name (followed by “(restored)”)."
+  },
+  "engine.bk.asNew": "Restore as a new local profile",
+  "@engine.bk.asNew": {
+    "description": "Restore dialog button (after ➕)."
+  },
+  "engine.bk.howRestore": "How restoring works",
+  "@engine.bk.howRestore": {
+    "description": "Account menu › 💾 Backup & restore: button (after ♻️) to the guide."
+  },
+  "engine.bk.secPoints": "Restore points on this device",
+  "@engine.bk.secPoints": {
+    "description": "Account menu › 💾 Backup & restore: section title (after 🕘)."
+  },
+  "engine.bk.pointsInfo": "Automatic safety copies kept in this browser (last 12): one is made before every restore, reset or profile copy.",
+  "@engine.bk.pointsInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip."
+  },
+  "engine.cl.notSetUp": "Cloud sync is not set up for this installation yet",
+  "@engine.cl.notSetUp": {
+    "description": "Account menu › ☁️ Cloud: bold warning title."
+  },
+  "engine.cl.notSetUpNote": "Optional. Without it, everything still works on this device; use folder backups to stay safe.",
+  "@engine.cl.notSetUpNote": {
+    "description": "Account menu › ☁️ Cloud: warning text."
+  },
+  "engine.cl.secOwner": "Set up the cloud (owner, once)",
+  "@engine.cl.secOwner": {
+    "description": "Account menu › ☁️ Cloud: section title (after 🛠️), for the person who installs the app."
+  },
+  "engine.cl.secGithub": "Keep the repository on GitHub",
+  "@engine.cl.secGithub": {
+    "description": "Account menu › ☁️ Cloud: section title (after 🐙)."
+  },
+  "engine.cl.signInIntro": "Sign in to a cloud account to study from any device. Your data stays private to your account.",
+  "@engine.cl.signInIntro": {
+    "description": "Account menu › ☁️ Cloud: intro when not signed in."
+  },
+  "engine.cl.signIn": "Sign in / create account",
+  "@engine.cl.signIn": {
+    "description": "Account menu › ☁️ Cloud: button (after ☁️)."
+  },
+  "engine.cl.secHow": "How cloud accounts work",
+  "@engine.cl.secHow": {
+    "description": "Account menu › ☁️ Cloud: section title (after ☁️)."
+  },
+  "engine.cl.secFriends": "Invite friends",
+  "@engine.cl.secFriends": {
+    "description": "Account menu › ☁️ Cloud: section title (after 👥)."
+  },
+  "engine.cl.localWhileSignedIn": "You are signed in to the cloud as {email}, but you are using the local profile “{name}”.",
+  "@engine.cl.localWhileSignedIn": {
+    "description": "Account menu › ☁️ Cloud: when a local profile is open while signed in.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      },
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.cl.switchToCloud": "Switch to my cloud account",
+  "@engine.cl.switchToCloud": {
+    "description": "Account menu › ☁️ Cloud: button."
+  },
+  "engine.cl.copyConfirm": "Copy all of “{name}” into your cloud account? (cloud data with the same keys is overwritten; a cloud snapshot is taken first)",
+  "@engine.cl.copyConfirm": {
+    "description": "Confirmation before copying a local profile into the cloud.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.cl.snapBeforeCopy": "Before copying local profile {name}",
+  "@engine.cl.snapBeforeCopy": {
+    "description": "Name of the cloud snapshot taken before a local profile is copied in (shown later in Cloud snapshots).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.cl.copied": "Copied — switching to your cloud account",
+  "@engine.cl.copied": {
+    "description": "Toast after the copy."
+  },
+  "engine.cl.copyBtn": "Copy this profile into my cloud account",
+  "@engine.cl.copyBtn": {
+    "description": "Account menu › ☁️ Cloud: button (after ⬆️)."
+  },
+  "engine.cl.syncing": "Syncing…",
+  "@engine.cl.syncing": {
+    "description": "Sync status (pill after 🔄, or tooltip of the sync dot)."
+  },
+  "engine.cl.synced": "Synced {time}",
+  "@engine.cl.synced": {
+    "description": "Sync status pill (after ✅). time = time of the last sync (may be empty).",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1:55:00 PM"
+      }
+    }
+  },
+  "engine.cl.pending": "{n, plural, one {# change(s) waiting} other {# change(s) waiting}}",
+  "@engine.cl.pending": {
+    "description": "Sync status pill: changes not uploaded yet. (English keeps “change(s)”.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.noSnaps": "No snapshots yet.",
+  "@engine.cl.noSnaps": {
+    "description": "Account menu › ☁️ Cloud: empty list of cloud snapshots."
+  },
+  "engine.cl.restoreSnapConfirm": "Restore your account to this snapshot? All your devices go back to it, and anything newer is removed from them too. A snapshot of how things are now is taken first, so you can undo this.",
+  "@engine.cl.restoreSnapConfirm": {
+    "description": "Confirmation before restoring a cloud snapshot."
+  },
+  "engine.cl.snapBeforeRestore": "Before restoring a snapshot",
+  "@engine.cl.snapBeforeRestore": {
+    "description": "Name of the cloud snapshot taken before a restore (shown later in the list)."
+  },
+  "engine.cl.signedInAs": "Signed in as {email}. Progress, conversations and settings sync automatically; a daily snapshot is kept (last 30).",
+  "@engine.cl.signedInAs": {
+    "description": "Account menu › ☁️ Cloud: intro when signed in.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      }
+    }
+  },
+  "engine.cl.pulled": "{n, plural, one {Pulled # change(s) — reloading} other {Pulled # change(s) — reloading}}",
+  "@engine.cl.pulled": {
+    "description": "Toast after “Sync now” brought changes; the page reloads.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.upToDate": "Up to date ✔",
+  "@engine.cl.upToDate": {
+    "description": "Toast after “Sync now” when nothing changed."
+  },
+  "engine.cl.syncNow": "Sync now",
+  "@engine.cl.syncNow": {
+    "description": "Account menu › ☁️ Cloud: button (after 🔄)."
+  },
+  "engine.cl.snapManual": "Manual snapshot",
+  "@engine.cl.snapManual": {
+    "description": "Name of a snapshot the learner takes by hand (shown in the list)."
+  },
+  "engine.cl.snapSaved": "Snapshot saved",
+  "@engine.cl.snapSaved": {
+    "description": "Toast (after 📸)."
+  },
+  "engine.cl.takeSnap": "Take snapshot",
+  "@engine.cl.takeSnap": {
+    "description": "Account menu › ☁️ Cloud: button (after 📸)."
+  },
+  "engine.cl.uploadDb": "Upload database backup…",
+  "@engine.cl.uploadDb": {
+    "description": "Account menu › ☁️ Cloud: button (after 🗄️)."
+  },
+  "engine.cl.dbUploaded": "Database backup uploaded",
+  "@engine.cl.dbUploaded": {
+    "description": "Toast (after ☁️)."
+  },
+  "engine.cl.signOut": "Sign out",
+  "@engine.cl.signOut": {
+    "description": "Account menu › ☁️ Cloud: button."
+  },
+  "engine.cl.secCheck": "Check the cloud connection",
+  "@engine.cl.secCheck": {
+    "description": "Account menu › ☁️ Cloud: section title (after 🩺)."
+  },
+  "engine.cl.checkInfo": "Runs a real round trip with your account — progress, conversations, snapshots, files, Explore, sharing — and cleans up after itself. Use it after updating the database or when something does not sync.",
+  "@engine.cl.checkInfo": {
+    "description": "Account menu › ☁️ Cloud: info tooltip of the check."
+  },
+  "engine.cl.secSnaps": "Cloud snapshots",
+  "@engine.cl.secSnaps": {
+    "description": "Account menu › ☁️ Cloud: section title (after 📸)."
+  },
+  "engine.cl.snapsInfo": "Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.",
+  "@engine.cl.snapsInfo": {
+    "description": "Account menu › ☁️ Cloud: info tooltip."
+  },
+  "engine.cl.ms": "{n, number} ms",
+  "@engine.cl.ms": {
+    "description": "Cloud check: how long a step took, in milliseconds.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.checksFailed": "{n, plural, one {# check(s) failed — follow the 👉 hints.} other {# check(s) failed — follow the 👉 hints.}}",
+  "@engine.cl.checksFailed": {
+    "description": "Cloud check result when some steps failed. (English keeps “check(s)”.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.allWorks": "Everything works with the real cloud ✔",
+  "@engine.cl.allWorks": {
+    "description": "Cloud check result when all steps passed."
+  },
+  "engine.cl.runCheck": "Run the check",
+  "@engine.cl.runCheck": {
+    "description": "Account menu › ☁️ Cloud: button (after 🩺)."
+  },
+  "engine.cl.checkNote": "Takes a few seconds. Nothing of yours is changed: test data is deleted right away.",
+  "@engine.cl.checkNote": {
+    "description": "Account menu › ☁️ Cloud: note above the check button."
+  },
+  "engine.help.intro": "Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.",
+  "@engine.help.intro": {
+    "description": "Account menu › ❓ Help: intro above the setup guides."
+  },
+  "engine.help.done": "done",
+  "@engine.help.done": {
+    "description": "Help: status pill of a guide whose setup is done. Lowercase."
+  },
+  "engine.help.notSetUp": "not set up",
+  "@engine.help.notSetUp": {
+    "description": "Help: status pill of a guide not set up yet. Lowercase."
+  },
+  "engine.help.apiKeyHere": "API key here",
+  "@engine.help.apiKeyHere": {
+    "description": "Help: status pill of the Claude guide when a key is set on this device."
+  },
+  "engine.cl.syncError": "Sync error: {error}",
+  "@engine.cl.syncError": {
+    "description": "Tooltip of the sync dot when syncing failed. error = the reason.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "offline"
+      }
+    }
+  },
+  "engine.cl.waiting": "Changes waiting to sync",
+  "@engine.cl.waiting": {
+    "description": "Tooltip of the sync dot."
+  },
+  "engine.cl.allSynced": "All changes synced",
+  "@engine.cl.allSynced": {
+    "description": "Tooltip of the sync dot."
   }
 }
