@@ -167,4 +167,17 @@ ok({c_ for c_, _ in F.structure('## Title\n<b>x</b> [a](http://x) `code`')} == {
 ok(F.starred('**bold** and *italic* but *gegesst') == ['*gegesst'], 'R2: Markdown emphasis is not a starred wrong form')
 el = F.NameMatcher('el', ['de', 'ar', 'he', 'zh'], allow={'el'})
 ok(el.find('Όπως στα αγγλικά') and not el.find('Στα αραβικά και στα ελληνικά'), 'el names: “αγγλικά” found (inflected), Arabic (a course language) and Greek (the locale’s own) not')
+ordinary = 'σαν πάλι σένα λάμπα κομμάτι μπαμπάς κομμωτήριο κριτικός κομπλέ Χονγκ Κονγκ γουασάμπι ρομανέσκο κριθαριού βεγγαλικά λατινική μεταγραφή γαλλικό κλειδί'
+ok(not el.find(ordinary) and [n[0] for n in el.find('των ιαπωνικών, στα ρωσικά, η λατινική, το ούρντου')] == ['ja', 'ru', 'la', 'ur'],
+   'el names: whole words (σαν, πάλι, λάμπα, κομμάτι, Κονγκ … are no names; λατινική μεταγραφή is a script), adjectival names with their endings')
+ok(F.anchored('Dipl.-Ing. Müller') == [] and F.anchored('Use the -ing form here.'), 'anchored: “Dipl.-Ing.” is no English “-ing”')
+class _T:
+    def __init__(self, text, L=None, kind='prose'): self.text, self.L, self.kind = text, L, kind
+cl = {'ar', 'he', 'zh', 'de'}
+ok(F.runs(_T('Many cafés, a jalapeño from Yucatán and a crèche.', 'zh'), None, cl) == [], 'runs: English loanwords with diacritics (cafés, jalapeño, Yucatán, crèche) are not target-language runs')
+ok(F.runs(_T('A faʿīl-type adjective; Ibn Baṭṭūṭa’s book; the während-clause; a Qurʾānic formula.', 'ar'), {'während'}, cl) == ['faʿīl', 'Baṭṭūṭa', 'während'],
+   'runs: “-type” / “-clause” / ’s are cut off, an English adjective of a name (Qurʾānic) is no run')
+ok(F.runs(_T('cognate with Hebrew קָרוֹב (karóv)', 'ar'), None, cl) == ['קָרוֹב', 'karóv'], 'runs: a romanization in a course-language text stays a run')
+ok(F.run_kept('3,500', 'περίπου 3.500 λέξεις') and F.run_kept('2.5', '2,5 φορές') and not F.run_kept('3,500', '13.500') and not F.run_kept('3,500', '3.600'),
+   'parity: a number keeps its digits; the separators may follow the locale (3,500 ↔ 3.500)')
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

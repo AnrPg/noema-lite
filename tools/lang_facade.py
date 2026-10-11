@@ -362,14 +362,61 @@ def starred(s):
     return out
 
 
-def runs(t, forms=None):
+# Words with diacritics that are ordinary English (loanwords, place names): a translation says them its own way (καφέ, χαλαπένιο)
+LOANWORDS = set('''café cafés soirée soirées purée purées crèche crèches risqué frisée jalapeño jalapeños jícama jícamas yacón padrón yucatán
+provençal provençale naïve naïvely naïveté façade façades résumé résumés cliché clichés entrée entrées fiancé fiancée déjà vu protégé rosé
+sauté sautéed sautéing piñata piñatas piña señor señora señorita mañana pokémon brûlée crème flambé flambéed consommé pâté pâtés glacé
+açaí éclair éclairs élite début décor voilà tête touché passé exposé appliqué lamé moiré matelassé crêpe crêpes bisqué bouillabaisse
+canapé canapés négligée attaché première premières naïf coöperate zoölogy mêlée outré arête protégés dénouement détente émigré émigrés
+communiqué blasé recherché divorcée habanero piñón piñones guaraná caña jalapeño ñandú tamalé chipotlé müsli muesli über doppelgänger
+angström ångström gruyère emmentaler crème fraîche señorío são paulo bogotá méxico perú panamá yucatán córdoba málaga cádiz
+québec montréal zürich düsseldorf köln münchen'''.split())
+TRANSLIT = re.compile(r"[ʾʿʼʻāēīōūȳǖǎěǐǒǔǚǜḥḫṭṣḍẓṯḏġšžčřǧṛṇṃśẖḳṿḵṅḷḇḡḅṗṟṙṡṫẕḩ"
+                      r"ĀĒĪŌŪǍĚǏǑǓḤḪṬṢḌẒṮḎĠŠŽČŘǦṚṆṂŚḲḴṄḶ]")
+HYPHEN_EN = {'type', 'clause', 'like', 'style', 'form', 'forms', 'based', 'word', 'words', 'sound', 'pattern', 'verb', 'verbs', 'noun',
+             'nouns', 'ending', 'endings', 'stem', 'construction', 'phrase', 'prefix', 'suffix', 'root', 'speaking', 'speakers', 'era', 'period'}
+MARKED_CH = re.compile(r"[À-ÖØ-öø-ɏḀ-ỿʾʿ]")
+
+
+def marked_run(w, L=None, forms=None, course=()):
+    """A Latin word with a diacritic → the part every locale keeps (a transliteration, pinyin, a form of a Latin-script course
+    language), or None: an English word or loanword (café, jalapeño, Yucatán) that a translation renders its own way."""
+    w = w.strip("'’\"”“-")
+    w = re.sub(r"['’]s$", '', w)                                    # Baṭṭūṭa’s → Baṭṭūṭa
+    if '-' in w:                                                       # faʿīl-type, während-clause → the marked part
+        parts = w.split('-')
+        if all(MARKED_CH.search(x) or x.lower() in HYPHEN_EN for x in parts) and any(x.lower() in HYPHEN_EN for x in parts):
+            w = '-'.join(x for x in parts if x.lower() not in HYPHEN_EN)
+    if len(w) < 2 or not MARKED_CH.search(w): return None
+    low = w.lower()
+    if low in LOANWORDS or (low.endswith('s') and low[:-1] in LOANWORDS): return None
+    if w[0].isupper() and low.endswith('ic') and TRANSLIT.search(w): return None   # Qurʾānic: an English adjective of a name
+    if TRANSLIT.search(w): return w                                    # a transliteration (qaruba, faʿīl), pinyin with a macron or caron
+    if forms and low in forms: return w                                # a form of a course language (während, Mädchen)
+    if L and L in course: return w                                     # a text of a course language: its romanization (karóv, chá)
+    return None
+
+
+def runs(t, forms=None, course=(), all_forms=None):
     """The parts of a master text that every locale keeps byte-identical."""
     s = t.text
-    out = SCRIPT_RUN.findall(s) + starred(s) + NUMBER.findall(s) + [w for w in LATIN_MARKED.findall(s) if len(w) > 1]
+    marked = [marked_run(w, t.L, all_forms if all_forms is not None else forms, course) for w in LATIN_MARKED.findall(s)]
+    out = SCRIPT_RUN.findall(s) + starred(s) + NUMBER.findall(s) + [w for w in marked if w]
     if t.kind == 'mixed' and forms:
         ws = WORD.findall(s)
         if ws and all(w.lower() in forms for w in ws): out.append(s.strip())   # a cell written in the language itself
     return [r for r in out if r.strip()]
+
+
+def run_kept(r, text, loc=None):
+    """A run is kept when it is in the translation byte for byte; a number may take the locale's separators (3,500 ↔ 3.500,
+    2.5 ↔ 2,5): the digits stay identical."""
+    if r in text: return True
+    if NUMBER.fullmatch(r) and re.search(r'[.,]', r):
+        digits = re.escape(r)
+        alt = re.sub(r'\\[.,]|[.,]', '[.,\u00a0\u202f ]', digits)
+        return re.search(r'(?<![\d.,])' + alt + r'(?![\d])', text) is not None
+    return False
 
 
 # ---------------------------------------------------------------- parity
@@ -380,12 +427,14 @@ def parity(course, loc, out=None, write=True, reg=None):
     want = for_locale(texts, loc, all_notes)
     by_addr = {t.addr: t for t in texts}
     forms = {L: lang_forms(course, L) for L in course_langs(course)}
+    all_forms = set().union(*forms.values()) if forms else set()
+    clangs = set(course_langs(course))
     rows = []   # (t, state, problem)
     for t in want:
         e = entries.get(t.addr)
         if not e: rows.append((t, 'missing', None)); continue
         if e.get('src') != text_hash(t.text): rows.append((t, 'stale', None)); continue
-        lost = [r for r in runs(t, forms.get(t.L)) if r not in e.get('t', '')]
+        lost = [r for r in runs(t, forms.get(t.L), clangs, all_forms) if not run_kept(r, e.get('t', ''), loc)]
         rows.append((t, 'broken' if lost else 'done', lost))
     orphans = sorted(a for a in entries if a not in by_addr)
     forbidden = sorted(a for a in entries if a in by_addr and by_addr[a].note and not all_notes and not shows(loc, by_addr[a].for_))
@@ -459,13 +508,28 @@ EN_EXTRA = {'Farsi': 'fa', 'Mandarin': 'zh', 'Old Norse': 'non', 'Proto-Indo-Eur
             'Iranian': 'ira', 'Indo-Aryan': 'inc', 'Anglo-Saxon': 'ang', 'Castilian': 'es', 'Brazilian Portuguese': 'pt',
             'Ottoman Turkish': 'ota', 'Ottoman': 'ota', 'Sanskrit': 'sa', 'Aramaic': 'arc', 'Akkadian': 'akk', 'Phoenician': 'phn',
             'Syriac': 'syc', 'Coptic': 'cop', 'Egyptian': 'egy', 'Ge’ez': 'gez', "Ge'ez": 'gez', 'Ladino': 'lad', 'Nahuatl': 'nah',
-            'Klingon': 'tlh'}
+            'Klingon': 'tlh', 'Mongol': 'mn'}
 COURSE_ALIASES = {'zh': ['Mandarin', 'Putonghua', 'Chinese', 'Cantonese'], 'ar': ['Arabic'], 'he': ['Hebrew', 'Ivrit'], 'de': ['German']}
 EN_SKIP = {'Afar', 'Mari', 'Tonga', 'Kongo', 'Venda', 'Sango', 'Komi', 'Luba', 'Interlingua', 'Interlingue', 'Ido', 'Ewe', 'Twi',
            'Fon', 'Ga', 'Yi', 'Root', 'Bini', 'Mono', 'Ossetic', 'Duala', 'Dinka', 'Fang', 'Herero', 'Kaje', 'Kako', 'Moksha', 'Nama', 'Fulah'}
 NOT_A_LANGUAGE_AFTER = re.compile(r'^\s*(?:script|alphabet|letters?|characters?|transliteration|romanization|capitals?|punctuation|'
                                   r'digits?|numerals?|keyboard|type|font|text\b|print)', re.I)
 INFLECTING = {'el', 'ru', 'de', 'it', 'es', 'pt', 'sq', 'fr'}
+# Names of (mostly small) languages that are ordinary words of the locale: never matched as a language name there
+LOCALE_STOP = {'el': {'βεγγαλικά', 'σαν', 'σένα', 'λάμπα', 'πάλι', 'κομ', 'γκα', 'τζου', 'μέρου', 'μέτα', 'κρι', 'μπαμπάρα', 'σάνγκο', 'μάνο', 'μόνο',
+                      'τόνγκα', 'έουε', 'φον', 'ίντο', 'νάμα', 'φανγκ', 'μάρι', 'κόμι', 'λούμπα', 'ντουάλα'},
+               'ru': {'га', 'фон', 'моно', 'коми', 'йи', 'идо'}, 'fr': {'ga', 'fon', 'mono', 'ido', 'yi', 'fang'},
+               'de': {'ga', 'fon', 'mono', 'ido', 'yi'}, 'it': {'ga', 'fon', 'mono', 'ido', 'yi'}, 'es': {'ga', 'fon', 'mono', 'ido', 'yi'},
+               'pt': {'ga', 'fon', 'mono', 'ido', 'yi'}, 'sq': {'ga', 'fon', 'mono', 'ido', 'yi'}}
+LOCALE_CODE_FIX = {'el': {'den': 'sla', 'rm': 'roa'}}
+VARIETY_CODES = {'zh': {'yue', 'wuu', 'hak', 'nan', 'cmn', 'hsn', 'gan', 'cdo', 'cjy', 'cpx', 'mnp', 'czh'},
+                 'ar': {'arz', 'apc', 'acm', 'ary', 'aeb', 'arq', 'afb', 'ajp', 'ayl', 'apd', 'ars', 'acw', 'shu', 'abv', 'arb'},
+                 'de': {'gsw', 'bar', 'nds', 'ksh', 'pfl', 'swg', 'sxu', 'vmf', 'pdc', 'ltz'}, 'he': {'hbo'}}
+# what follows a name that makes it no language (Latin script, a French wrench, Gothic letters)
+NOT_A_LANGUAGE_AFTER_LOC = {'el': re.compile(r'^\s*(?:(?:της|του|τους|των|τις|τα)\s+)?(?:αλφάβητ\w*|γραφ(?:ή|ής|ές|ών)\b|γράμμα\w*|γραμμάτων|χαρακτήρ\w*|μεταγραφ\w*|στοιχεί\w*|'
+                                            r'κεφαλαί\w*|ψηφί\w*|αριθμ\w*|κλειδ\w*|πληκτρολόγι\w*|γραμματοσειρ\w*)', re.I)}
+EL_ADJ = re.compile(r'^(.{3,}ικ|.{3,}ζικ|.{3,}σκ)(?:ά|α|ή|η|ό|ο)$')   # Ελληνικά, Λατινικά, Καντονέζικα → their stem
+EL_ADJ_ENDINGS = r'(?:ά|α|ή|η|ής|ης|ό|ο|ού|ου|ών|ων|ές|ες|ές|οί|οι|ός|ος|ούς|ους|ών|ήν|ην)'
 
 
 class NameMatcher:
@@ -477,6 +541,7 @@ class NameMatcher:
         allow = set(allow) | set(course_codes)
         course_names = {n for c in course_codes for n in [names.get(c, '')] + (COURSE_ALIASES.get(c, []) if loc == 'en' else []) if n}
         cand = {}
+        allow |= {v for c in course_codes for v in VARIETY_CODES.get(c, ())}   # Cantonese, Egyptian Arabic, Swiss German: the course's own
         for c, n in names.items():
             if c in allow or not n: continue
             if any(cn and cn.lower() in n.lower() for cn in course_names): continue   # “Egyptian Arabic”, “Swiss German”: a course language
@@ -490,13 +555,20 @@ class NameMatcher:
                 for n in COURSE_ALIASES.get(c, []) + sorted(VARIETIES.get(c, ())): cand.pop(n, None)
             self.items = sorted(cand.items(), key=lambda x: -len(x[0]))
             self.rx = re.compile(r'(?<![\w-])(' + '|'.join(re.escape(n) for n, _ in self.items) + r')(?![\w-])') if self.items else None
+            self.loose = re.compile(r'(?<!\w)(' + '|'.join(re.escape(n) for n, _ in self.items) + r')(?!\w)') if self.items else None   # Latin-based, Greek-derived
             self.code = dict(self.items)
             self.kind = 'en'
         else:
             pats = []
             lang = locale_lang(loc)
+            stop = LOCALE_STOP.get(lang, set())
             for n, c in cand.items():
                 low = n.lower()
+                if low in stop: continue   # an ordinary word of the locale (el σαν, πάλι, λάμπα): not a name worth matching
+                if lang == 'el':   # whole words: an adjectival name (Ελληνικά, Λατινικά) with its endings, any other name as written
+                    m = EL_ADJ.match(low)
+                    pats.append((low, c, n, (m.group(1) + EL_ADJ_ENDINGS) if m else re.escape(low)))
+                    continue
                 if lang in ('zh', 'ja'):
                     stems = {low} | ({low[:-1]} if len(low) > 2 and low[-1] in '语語文' else set())
                 elif lang == 'ar':
@@ -505,13 +577,23 @@ class NameMatcher:
                     stems = {low[:-2] if len(low) >= 8 else low[:-1]}
                 else:
                     stems = {low}
-                for s in stems: pats.append((s, c, n))
+                for s in stems: pats.append((s, c, n, None))
             pats.sort(key=lambda x: -len(x[0]))
-            self.items = pats
-            body = '|'.join(re.escape(s) for s, _, _ in pats)
-            if lang in ('zh', 'ja', 'ar', 'hi'): self.rx = re.compile('(' + body + ')') if pats else None
-            else: self.rx = re.compile(r'(?<!\w)(' + body + r')\w*') if pats else None
-            self.code = {s: c for s, c, _ in pats}
+            self.items = [(s, c, n) for s, c, n, _ in pats]
+            if lang == 'el':   # whole-word matching (σαν ≠ Σαν, the Shan language; Κονγκ in Χονγκ Κονγκ ≠ Κονγκό)
+                self.rx = re.compile(r'(?<!\w)(?:' + '|'.join(f'(?P<n{i}>{rx})' for i, (_, _, _, rx) in enumerate(pats)) + r')(?!\w)') if pats else None
+                self.group_code = {f'n{i}': c for i, (_, c, _, _) in enumerate(pats)}
+            else:
+                body = '|'.join(re.escape(s) for s, _, _, _ in pats)
+                if lang in ('zh', 'ja', 'ar', 'hi'): self.rx = re.compile('(' + body + ')') if pats else None
+                else: self.rx = re.compile(r'(?<!\w)(' + body + r')\w*') if pats else None
+                self.group_code = None
+            fix = LOCALE_CODE_FIX.get(lang, {})   # a family adjective that CLDR gives to one small language (el Σλαβικά = Slave)
+            if fix:
+                pats = [(s_, fix.get(c, c), n, rx) for s_, c, n, rx in pats]
+                if self.group_code: self.group_code = {g: fix.get(c, c) for g, c in self.group_code.items()}
+            self.code = {s: c for s, c, _, _ in pats}
+            self.after_rx = NOT_A_LANGUAGE_AFTER_LOC.get(lang)
             self.kind = 'stem'
 
     def find(self, text):
@@ -519,6 +601,9 @@ class NameMatcher:
         out = []
         src = text if self.kind == 'en' else text.lower()
         for m in self.rx.finditer(src):
+            if getattr(self, 'group_code', None):
+                if self.after_rx and self.after_rx.match(text[m.end():]): continue
+                out.append((self.group_code[m.lastgroup], text[m.start():m.end()], m.start(), m.end())); continue
             n = m.group(1)
             if self.kind == 'en' and n == 'Latin' and NOT_A_LANGUAGE_AFTER.match(text[m.end():]): continue
             out.append((self.code.get(n), text[m.start():m.end()], m.start(), m.end()))
@@ -643,7 +728,7 @@ ANCHORED = [
     (re.compile(r"\b(?:no|not|never|without|instead of|rather than|is not|isn['’]t|are not|aren['’]t|has no|have no|there is no)\s+"
                 r"[‘'\"“](?:the|a|an|do|does|did|was|were|will|shall|would|have|has|had|be|been|being|it|there is|there are|of|to|some|any|-ing|-ed|-s|’s|'s)[’'\"”]", re.I),
      'explains through an English grammar word (“no ‘do’”, “is not ‘the’”): say what the language does in its own terms'),
-    (re.compile(r'(?<![\w-])-ing\b(?!\s*form of the|\s*\()', re.I), 'explains through the English “-ing” form'),
+    (re.compile(r'(?<![\w.-])-ing\b(?!\.|\s*form of the|\s*\()', re.I), 'explains through the English “-ing” form'),   # not Dipl.-Ing.
     (re.compile(r'\b(?:was|were|is|are)\s*…\s*-ing\b|\b(?:was|were|is|are) \w+ing\b(?= form)', re.I), 'explains through an English tense form'),
     (re.compile(r'\bphrasal verbs?\b', re.I), 'explains through English phrasal verbs'),
     (re.compile(r'\b(?:do|does|did)-support\b|\bno [‘\'"“]?do[’\'"”]?\b(?! not)', re.I), 'explains through English “do”'),
@@ -767,15 +852,20 @@ def lint_facade(course, loc, texts):
     by_addr = {t.addr: t for t in texts}
     nm = NameMatcher(loc, course_langs(course), allow={locale_lang(loc)})
     nm_all = NameMatcher(loc, course_langs(course))
+    en = NameMatcher('en', course_langs(course))
     for a, e in entries.items():
         t = by_addr.get(a)
         if not t: continue
+        named = set()
+        for m in (en.loose.finditer(t.text) if en.loose else ()):   # Ancient Greek, Ottoman Turkish: also the language the stage is of
+            named.add(en.code.get(m.group(1))); named.update(en.code.get(w) for w in m.group(1).split() if en.code.get(w))   # the languages the master text names (its own lint judges them): the translation names them too
         if t.note:
-            if t.for_.startswith(GROUP_PREFIXES) and nm_all.find(e.get('t', '')):
-                out.append(Finding('warn', 'facade-names', a, 'a type note names a language: ' + ', '.join(sorted({n[1] for n in nm_all.find(e['t'])}))))
+            th = [n for n in nm_all.find(e.get('t', '')) if n[0] not in named] if t.for_.startswith(GROUP_PREFIXES) else []
+            if th: out.append(Finding('warn', 'facade-names', a, 'a type note names a language: ' + ', '.join(sorted({n[1] for n in th}))))
             continue
         hits = nm_all.find(e.get('t', '')) if not t.prov else [n for n in nm_all.find(e.get('t', '')) if n[0] != locale_lang(loc)]
         if t.prov: hits = []   # provenance in another language cannot be judged by cue words; the master's lint decides
+        hits = [n for n in hits if n[0] not in named]
         if hits: out.append(Finding('warn', 'facade-names', a, f'names a language outside the course in a general text: {", ".join(sorted({n[1] for n in hits}))}'))
     return out
 
