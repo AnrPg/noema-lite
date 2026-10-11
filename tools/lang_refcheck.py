@@ -252,7 +252,10 @@ def run(root, only=None, offline=False):
     report = {}
     for L in course['languages']:
         if only and L != only: continue
-        if L not in LANGNAME: continue
+        if L not in LANGNAME:   # a language new to the app: Wiktionary's name for it from its language.json (wiktionaryName, else name)
+            lj = J(f'lang/{L}/language.json') or {}
+            if lj.get('wiktionaryName') or lj.get('name'): LANGNAME[L] = lj.get('wiktionaryName') or lj['name']
+            else: continue
         for n in nodes:
             d = J(f'lang/{L}/lexicon/{n["id"]}.json') or {}
             for lx in d.get('lexemes', []):

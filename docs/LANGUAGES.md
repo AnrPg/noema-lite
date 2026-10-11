@@ -28,6 +28,7 @@
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ✅ 2026-10-09 (`parallel_translate`, `parallel_align`, `which_language`, `cognate_bridge`, `compare_rule`; the ⇄ compare lane per concept / function / frame; bridges and false friends on the word card; one polyglot item in every daily session of ≥ 2 languages, confusables side by side; a colour per language; today's languages chosen on the home) |
 | P7 | Production and reading: translation, guided writing, graded readers, tutor language mode | ✅ 2026-10-09 (✍️ Writing and 📖 Reading lanes per language: translate tiles → typed with deterministic acceptance and an AI-judged fallback, rewrite / expand, guided writing with a rubric, numbers / clock / date, register and dialogue turns, graded readers with questions and AI-written texts checked by the tokenizer; 🎓 the tutor in a language) |
 | P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ✅ 2026-10-09 — ✨ new language course (account course: skeleton, three ways), task kinds `lang.core` · `lang.node` · `lang.function` · `lang.compare` · `lang.refill` with checks in JS and merges, 🌙 night queue, connector tools `noema_lang_*`, skill `LANGUAGES.md` + `lang_course.py` in the toolkit |
+| P8b | **A language in one prompt** (§10.2): the language package `noema.langpack/v1` (one language for one course), `lang_course.py package` / `unpack --package`, `langApplyPackage` / `checkLangPackage`, the skill `noema-language-builder`, the connector tools `noema_language_package_guide` · `noema_lang_package_start` · `noema_lang_package_finish`, the package applied by the app on every device (and removed) | ✅ 2026-10-11 |
 | P9 | Listening and speaking | ✅ 2026-10-09 (the browser's own speech services, no server, no key: 🔊 on word cards, examples, bank sentences, the intro, feedback, the reader and the compare views; `listen_pick`, `listen_tone` (zh), `dictation`, `listen_meaning`, `shadowing` (MediaRecorder, self-graded), `speak` (SpeechRecognition, compared with the stored forms; shadowing without it); the 🎧 lane per language; voice per language, rate, auto-play, “I can't listen / speak now”; up to two items in the daily session) |
 | QA | The whole language part end to end: every lane, view and exercise walked through as three learners on 1280 and 390 px; fixes | ✅ 2026-10-09 — the home organized (session · next lesson · lanes per language · grammar · the map near you), the first lesson from the big button, the next lesson offered at the end, answers no longer given away (deepening, principal parts), every foreign script run with its lang, readable reading titles and language names; `tests/lang_walkthrough.js` |
 | P9 | Listening and speaking (later) | ⬜ later |
@@ -966,6 +967,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 
 * **✨ New language course** (subject picker → 🌍 Languages): title, languages, explanation language (default English), depth per language, known languages. Like curricula, three ways: the app with a Claude key, the Claude app with the connector (recommended), or Claude here in Cowork for the shared library.
 * **Adding a language with Claude Code**: docs/NEW_LANGUAGE_PLAYBOOK.md — 14 prompts now (+ 11 as the core grows), one session each, with the brief templates `tools/lang_sources/briefs/*.txt` and `tools/lang_sources/mkbrief.py`.
+* **Adding a language in one prompt** (§10.2): the learner says one sentence to Claude ("add Persian to my polyglot course"); the skill `noema-language-builder` (or, without it, the connector's `noema_language_package_guide`) runs the same playbook as sub-agents, packs the result as a **language package** and uploads it into the learner's account, where the app adds it to the course on every device.
 * **Task kinds** (same queue machinery as `NoemaCurJobs`): `lang.core` (spine + field lists + DAG), `lang.node` (one node × one language: lexemes + paradigms + bank sentences), `lang.function` (realization + paradigm cells + bank), `lang.compare` (one function across the course languages), `lang.script`, `lang.refill` (§7.4). Each task text contains the relevant part of this spec, the schema and the validator command — and the parallel order (D13, §4.4.3): a task that adds a language or a node, or moves one, places it on the common order of all the languages of the app. **Adding a language starts with its typological profile** (`_typology/languages.json`, every feature) **and its catalogue of phenomena** (§4.11: tagged, every feature it has or lacks, no point of view, D16) and its `wordFeatures`; every word task fills the word's whole facade (D14) and gives every meaning its concept (D15).
 * **Skill**: `skill/noema-pack-builder/LANGUAGES.md` (authoring rules from §4 and §11), tools in the toolkit.
 * Night generation works as for curricula: queue many `lang.node` tasks.
@@ -1014,7 +1016,94 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
   the course order, for every language (and `lang.function` for the realizations its lessons need); a scheduled Claude run
   (or the key on a device left open) works through them; each run takes the next unclaimed task.
 * **Not here:** `lang.script` (the script modules come with P4) and catalogues of phenomena for new languages (written in
-  the repository, where `tools/lang_phenomena.py` checks them against the implementation).
+  the repository, where `tools/lang_phenomena.py` checks them against the implementation — or in a language package, §10.2).
+
+### 10.2 A language in one prompt: the language package (P8b, asked by the user 2026-10-11)
+The user asked: *"make the language playbook a skill for Claude and add it to the MCP to be called as a tool so that I can
+ask Claude to generate this package in full and with only one prompt of mine, and when it's done it should upload it
+straight to the app."* The whole of docs/NEW_LANGUAGE_PLAYBOOK.md (typology and phenomena → facade → F1–F6 → V1–V3 → K1… →
+links → audit) runs in Claude's sandbox; its result is ONE file, the **language package**, uploaded into the learner's
+private storage; the app adds the language to the course by itself. D1–D19 apply to a package exactly as to the library.
+
+**The package** — `noema.langpack/v1`, ONE language for ONE course (a library course or an account course); schema
+`tools/schemas/noema.langpack.v1.schema.json`:
+```json
+{ "format": "noema.langpack/v1", "course": "polyglot-semitic-zh-de", "code": "fa", "name": "Persian", "nativeName": "فارسی",
+  "flag": "🇮🇷", "built": "2026-10-11T20:00:00Z",
+  "language": { … lang/fa/language.json … },
+  "lexicon": { "fd.01": { "lexemes": [ … ], "absent": [ … ] }, … },     // node id → lang/fa/lexicon/<node>.json
+  "grammar": { "fn.definite": { … }, … },                                // function id → lang/fa/grammar/<fn>.json
+  "bank": [ … every sentence of lang/fa/bank/*.json … ],
+  "script": { … }, "chars": { … },                                       // optional script modules (§4.9)
+  "phenomena": { … _phenomena/fa.json, the whole catalogue … },
+  "typology": { "code": "fa", "name": "Persian", "family": "…", "typology": "fusional", "values": { … } },   // only when the library has no profile
+  "seeAlso": { "de": { "fn.definite": [ { "lang": "fa", "fn": "fn.definite", "note": "…" } ] } },          // additions to the other languages' pages
+  "checks": { "validator": { "errors": 0, "warnings": 3, "strict": true }, "refcheck": { "words": 512, "problems": 0, "unverified": 40, "offline": true },
+              "phenomena": { "phenomena": 96, "covered": 40, "partial": 30, "missing": 26, "errors": 0 } } }
+```
+* **It fills, it never adds.** A package fills the course's existing nodes and grammar functions in the new language: no
+  new node, concept, function or frame (those are the course's, shared by every language, D13). Every node that applies to
+  the language and is not in `course.draft` has its words (or `absent` entries); every function of an applicable lesson
+  has its realization; a node in `draft` may wait (it is written when the other languages have it). The language itself
+  must be new to the course.
+* **Made by the tools, not by hand.** `python3 tools/lang_course.py package <course-folder> <code> [-o file]` reads the
+  folder (the course with the language written into it, its catalogue in `_phenomena/` and its profile in `_typology/` next
+  to it, or the repository's), runs `validate_lang.py --strict --lang <code>` and **refuses** when it has errors, adds the
+  summaries of the reference check (from the cache, offline: no disagreement allowed) and of `lang_phenomena.py`, and
+  collects the other languages' `seeAlso` entries that point to the new language. `python3 tools/lang_course.py unpack
+  <course file> <out> --package <pkg.json>` does the opposite: the course as a folder with the language added (files,
+  `course.json`, the catalogue, the profile, the seeAlso entries), so a package can be checked again and extended.
+* **The same check everywhere.** `langcore.checkLangPackage(data, pkg, {peers})` (engine/langcore.js, P8 section; the app and
+  the connector run the same code) applies to the whole package the rules the app enforces for task answers
+  (`checkLangAnswer`): `language.json` (code, dir, tokenJoin, typology, paradigmCells, wordFeatures); every lexeme's forms
+  against its paradigm cells and citation cell, vowel marks, the facade per `wordFeatures` (D14), concepts and their owner
+  nodes, contrasts, every meaning a concept (D15), zh pinyin / trad / measure words, profiles; every realization (status,
+  notes for ≥ 8 reference languages of all four types, D18); every sentence token equal to its cell, text = the joined
+  tokens, functions shown by their evidence; no new node or function; the parallel order (D13) against the library courses;
+  the catalogue of phenomena (format, ≥ 20 entries, tagged with known feature values) and the profile (every feature);
+  the seeAlso additions (existing pages of other course languages, pointing to the new language); `checks.validator` with
+  0 errors (the package came from `lang_course.py package`). → the list of problems, empty when accepted.
+  `langcore.langApplyPackage(data, pkg)` adds the language to a loaded course **without changing the course object it was
+  given**: `course.languages` (+ `defaults.depth`, `course.added[code]`, `course.flags[code]`), `langs[code]`,
+  `world.phenomena[code]` (trimmed as the build does), the profile in `world.languages` when it is missing, the seeAlso
+  additions. `langcore.langPackagePlan(data, code)` lists the batches of the playbook for one course and language (F1–F6,
+  V1…, K1… with the node ids of THAT course, draft nodes left out).
+* **Upload** (the connector, `cloud/mcp/server.mjs`): `noema_lang_package_start` (course id — a library course or the
+  learner's own —, language code) → a signed upload URL into the learner's own private storage
+  `langs/<course>.lang-<code>.json` and the exact `curl` command, like `noema_start_upload`; `noema_lang_package_finish`
+  downloads it, runs `checkLangPackage` against the course (the library course file of the website, or the account
+  course's `langs/<id>.json`) and, when it passes, records **`a:langpack:<course>:<code>`** `{v, course, code, name, path,
+  size, built, checks, at, via}` in the learner's synced keys (every device sees it); when it fails, every problem is listed
+  (the file stays private and is replaced by the next upload). No secret is stored anywhere; only the learner's own
+  storage is used. `noema_language_package_guide` (course, language code or name) returns the complete instructions of the
+  skill specialised for that course and language — the steps in order, the batches with their node ids, the toolkit and
+  course file URLs, the upload tools — so Claude can do it from one sentence even without the skill; the prompt
+  **"Add a language to my course"** (`add_language`) starts it.
+* **The app** (`engine/lang/95_claude.js`, the loader's `langMeta`): when a course opens (library or account), the
+  learner's package records for it (`a:langpack:<course>:*`) are read, each package is taken from the device's IndexedDB
+  cache (keyed by the record's `at`) or else from the private storage, and applied with `langApplyPackage` before the
+  learner's refill patch; the language then is a language of the course like the others — a lane in ⫴ parallel lanes, a
+  chip, a row on the course home, a column in the Languages tab — and becomes active once for a learner who had chosen
+  their languages before (`prefs.addedSeen`). **Remove**: ⋮ › the language › *Remove this language* (and in the course
+  settings) deletes the record (synced: every device drops it) and the file; the learner's progress keys in that
+  language stay (adding the language again brings it back). Packages are not merged into the course's content and are
+  never written into the library.
+* **The skill** `skill/noema-language-builder/SKILL.md` (zip `noema-language-builder.zip` — `python3 tools/build.py skill`
+  → `dist/`, and on the website `downloads/`; its files are also in the `noema-pack-builder` toolkit as
+  `LANGUAGE_BUILDER.md`): one prompt → the whole package. It gets the toolkit and the course, unpacks it (`unpack … --world`
+  puts the shared typology and catalogues next to the course), runs the playbook's steps **in order, each as a fresh
+  sub-agent** (or a separate pass when there are none) with the brief of `mkbrief.py --course-dir … --sandbox`, then the
+  audit turn, then the checks (`validate_lang.py --strict`, `lang_refcheck.py`, `lang_phenomena.py --root`,
+  `lang_readback.js`), keeps `work/<code>-progress.json` so an interrupted run resumes, and ends with `package` + the
+  upload. It is honest about scale (≈ 25 batches, hours of work: it needs an environment that runs long tasks and
+  sub-agents; a plain chat without a sandbox cannot do it) and about quality (the audit is never skipped, no form is
+  invented, what a native speaker should check is reported). The playbook, the brief templates, `AGENT_BRIEF.md` and
+  `mkbrief.py` are copied into the skill, so it works without the repository.
+* **Limits.** What the playbook's prompt 2 does in the engine (LANG_INFO, the tokenizer's clitics and segmentation for
+  scripts without spaces, script modules and keyboards, speech tags) is repository code: a package cannot change it. The
+  app shows a new language with its Intl name and 🏳️ (or the package's `flag`), tokenizes it by spaces and the stored
+  forms, and speaks it if the browser has a voice; a language that needs more is reported by the skill and added in the
+  repository. Refills (✨ more sentences) and course tasks for a language added by a package are not offered yet.
 
 ## 11. Correctness and validation
 
@@ -1035,6 +1124,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 | `engine/lang/97_frame.css`, `engine/lang/99z_frame.js`, `engine/loader.js` (*language courses inside the frame*) | the course inside the new frame (§8): the Languages tab, `#/lang/<course>/…`, Today's card, the ⋮ |
 | `library/languages/<id>/course.pack.js` (built) | the whole course as one script (`window.NOEMA_LANGPACKS[id]`); the registry lists it under `languages` |
 | `tools/validate_lang.py`, `tools/lang_refcheck.py`, `tools/schemas/noema.lang.v1.schema.json` | validation |
+| `tools/lang_course.py` (`package`, `unpack --package`), `tools/lang_readback.js`, `tools/schemas/noema.langpack.v1.schema.json`, `skill/noema-language-builder/` | the language package and the skill that makes it (§10.2) |
 | `tools/build.py` | builds `core.pack.js` / `<code>.pack.js`, registry entries `kind: "language"` |
 | `library/languages/<course-id>/` | the pilot course |
 | `tests/langcore.js`, `tests/lang_validate.py`, `tests/lang_ui.js`, `tests/fixtures/lang-mini/` | tests |
@@ -1152,6 +1242,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-11 — §10.2 a language in one prompt (asked by the user): the language package `noema.langpack/v1` (one language for one course; `tools/lang_course.py package` / `unpack --package`; schema `tools/schemas/noema.langpack.v1.schema.json`), `langApplyPackage` / `checkLangPackage` / `langPackagePlan` in langcore, the skill `noema-language-builder` (the playbook as sub-agents, its briefs and `mkbrief.py` inside; `tools/lang_readback.js`), the connector tools `noema_language_package_guide`, `noema_lang_package_start`, `noema_lang_package_finish` and the prompt “Add a language to my course”, the record `a:langpack:<course>:<code>`; the app applies the learner's packages to the course on every device and removes them (⋮ › the language › Remove this language); `tests/lang_package.js`.
 - 2026-10-11 — ⫴ Parallel lanes (§9.2, asked by the user): the paths of the languages side by side, the same subject level across lanes. 🔊 plays on every click (speech started inside the click, the utterance kept alive, a stuck queue resumed, never speak in the same tick as cancel, one click handler for every 🔊). docs/NEW_LANGUAGE_PLAYBOOK.md and the brief templates for adding a language.
 - 2026-10-10 — The branch `languages` merged into `main` with its history (asked by the user) and deleted; §0 and docs/LANGUAGE_RULES.md §A.2 now describe working on `main`.
 - 2026-10-10 — Second declutter pass inside the frame (asked by the user, §8 *Content views, details on demand*): word cards, grammar points, lessons, reader, compare, peculiarities, field maps, node pages and settings show the essentials and fold the rest (tags on tap, three sentences then More, quiet sections, panels); the character a small face while reading on phones; `tests/lang_frame.js` checks it.

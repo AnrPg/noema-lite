@@ -317,6 +317,40 @@ async function langFiles(token, uid, st) {
   return [{ url: await sign(path), name: 'course.json' }];
 }
 
+/* ---------- §10.2 a whole language in one prompt: the language package (noema.langpack/v1) ----------
+   The package is ONE language for ONE course, made in Claude's sandbox (skill noema-language-builder, lang_course.py package),
+   uploaded into the learner's own storage langs/<course>.lang-<code>.json, checked here with the app's own code
+   (langcore.checkLangPackage) and recorded as a:langpack:<course>:<code> (synced: every device's app applies it). */
+/** A course a package can be for: a library course of the website or one of the learner's own (by id or title). */
+async function packCourse(token, idArg) {
+  const id = String(idArg || '').trim(), low = id.toLowerCase();
+  const lib = (CFG.languages || []).find(m => m.id === id || String(m.title || '').toLowerCase() === low);
+  if (lib) return { id: lib.id, title: lib.title, origin: 'library', meta: lib };
+  const recs = (await langRecords(token)).filter(r => r.origin === 'account');
+  const r = recs.find(x => x.id === id || String(x.title).toLowerCase() === low);
+  if (r) return { id: r.id, title: r.title, origin: 'account', rec: r };
+  const all = [...(CFG.languages || []).map(m => `- ${m.id}: “${m.title}” (library: ${(m.languages || []).join(', ')})`), ...recs.map(x => `- ${x.id}: “${x.title}” (the learner's own: ${(x.languages || []).join(', ')})`)];
+  if (!id && all.length === 1) return (CFG.languages || []).length ? packCourse(token, CFG.languages[0].id) : { id: recs[0].id, title: recs[0].title, origin: 'account', rec: recs[0] };
+  return { error: `${id ? `No language course “${id}”.` : 'Which course? Call again with course_id.'} The courses:\n${all.join('\n') || '(none)'}` };
+}
+/** The course a package is checked against: the library course file of the website, or the account course's content —
+    WITHOUT the learner's packages (a package adds a language that is new to the course itself). */
+async function packBase(token, uid, pc) {
+  if (pc.origin === 'library') return JSON.parse(JSON.stringify(await (LANG_PEERS[pc.id] = LANG_PEERS[pc.id] || fetchPack(pc.meta.path))));
+  const d = await storageJSON(token, langPath(uid, pc.id));
+  if (!d) throw new Error(`The content of “${pc.title}” is not in the cloud yet — open the course once in noema-lite (signed in), then try again.`);
+  return d;
+}
+/** A language code from a code or a name (Persian → fa): the course's profiles of the world's languages, then Intl. */
+function langCodeOf(arg, data) {
+  const a = String(arg || '').trim(); if (/^[a-z]{2,3}$/.test(a)) return a;
+  const low = a.toLowerCase(); if (!low) return null;
+  const w = (data?.world?.languages || []).find(l => String(l.name || '').toLowerCase() === low || String(l.code) === low); if (w) return w.code;
+  try { const dn = new Intl.DisplayNames(['en'], { type: 'language' }); for (let i = 0; i < 676; i++) { const c = String.fromCharCode(97 + Math.floor(i / 26), 97 + (i % 26)); if (String(dn.of(c) || '').toLowerCase() === low) return c; } } catch (e) { }
+  return null;
+}
+const packStoragePath = (uid, cid, code) => `${uid}/${NL().langPackPath(cid, code)}`;
+
 /* ---------- tools ---------- */
 const TOOLS = [
   { name: 'noema_whoami', description: 'Which noema-lite account is connected, and its private subject packs.', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
@@ -349,6 +383,12 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { course_id: { type: 'string', description: 'from noema_lang_courses (may be omitted when only one course has work)' }, want: { type: 'string', enum: ['any', 'core', 'node', 'function', 'compare', 'refill'], description: 'only this kind of task (default any, in queue order)' }, task: { type: 'string', description: 'this task id (e.g. "node:fd.03:de")' }, peek: { type: 'boolean' }, force: { type: 'boolean', description: 'with task: take over a task another run claimed but stopped writing' } } } },
   { name: 'noema_lang_submit', description: 'Submit your answer to a task from noema_lang_task. It is checked exactly as noema-lite checks it (forms against the paradigm cells, the facade of every word, sentences, the parallel order …); problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
     inputSchema: { type: 'object', properties: { course_id: { type: 'string' }, task_id: { type: 'string' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['course_id', 'task_id', 'result_json'] } },
+  { name: 'noema_language_package_guide', description: 'Add a whole new language to one of the learner\'s noema-lite language courses from ONE request (e.g. "add Persian to my polyglot course"): returns the complete instructions — the skill noema-language-builder specialised for this course and language: the playbook\'s steps in order (typology and phenomena, the facade, the foundations, the fields, the core, links, audit; each step as a sub-agent with its audit turn), the batches with the node ids of THIS course, the toolkit and course file links, the checks, a progress file to resume, and the upload (noema_lang_package_start → curl → noema_lang_package_finish). Hours of work in a sandbox that runs long tasks; it cannot be done in a plain chat.',
+    inputSchema: { type: 'object', properties: { course_id: { type: 'string', description: 'the course: a library course id (e.g. polyglot-semitic-zh-de) or the learner\'s own course (id or title); may be omitted when there is only one' }, language: { type: 'string', description: 'the language to add: ISO 639 code (fa) or English name (Persian)' } }, required: ['language'] }, annotations: { readOnlyHint: true } },
+  { name: 'noema_lang_package_start', description: 'Step 1 of saving a language package (work/<code>.langpack.json, made by lang_course.py package): returns a signed URL (valid 2 h) into the learner\'s private storage and the exact curl command to PUT the package. Then call noema_lang_package_finish.',
+    inputSchema: { type: 'object', properties: { course_id: { type: 'string', description: 'the course the package is for (library course id, or the learner\'s own course)' }, language: { type: 'string', description: 'the ISO 639 code of the language in the package' } }, required: ['course_id', 'language'] } },
+  { name: 'noema_lang_package_finish', description: 'Step 2: checks the uploaded language package exactly as noema-lite does (every form against its paradigm cells, the facade of every word, sentences, grammar pages, the catalogue of phenomena, the parallel order — and that it fills the course\'s nodes without adding any) and, when it passes, records it in the learner\'s account: the app adds the language to the course on every device. Otherwise it lists every problem — fix them, package again, upload again.',
+    inputSchema: { type: 'object', properties: { course_id: { type: 'string' }, language: { type: 'string', description: 'the ISO 639 code' } }, required: ['course_id', 'language'] } },
   { name: 'noema_curriculum_submit', description: 'Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string' }, task_id: { type: 'string', description: 'the task id given with the task (e.g. "dag", "plan:a,b,c")' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['curriculum_id', 'task_id', 'result_json'] } },
 ];
@@ -367,6 +407,10 @@ const PROMPTS = [{
   name: 'language_course_work', title: 'Write my noema-lite language course', description: 'Work through the tasks of a language course made through Claude (the core, the nodes in each language, grammar, comparisons, refills) — with your Claude plan.',
   arguments: [{ name: 'course', description: 'Its name or id (optional when only one course has work)', required: false }, { name: 'tasks', description: 'How many tasks to do in this chat (default 1)', required: false }],
   text: a => `Use the noema-lite connector to write my noema-lite language course${a.course ? ` “${a.course}”` : ''}: do ${+a.tasks > 1 ? `the next ${+a.tasks} queued tasks, one after the other` : 'the next queued task'}.\nStart with noema_lang_courses, then call noema_lang_task${a.course ? ' with that course_id' : ''} and follow what it returns — check every answer in your sandbox with the toolkit (lang_course.py, validate_lang.py, lang_refcheck.py) before noema_lang_submit; after each accepted answer call noema_lang_task again. Do not ask me questions — choose sensible defaults.`,
+}, {
+  name: 'add_language', title: 'Add a language to my course', description: 'Build a whole new language for one of your noema-lite language courses (the playbook, run by Claude as sub-agents) and upload it straight into the app — with your Claude plan. Needs a sandbox that runs long tasks.',
+  arguments: [{ name: 'language', description: 'The language to add, e.g. Persian', required: true }, { name: 'course', description: 'The course (name or id; optional when there is only one)', required: false }],
+  text: a => `Add ${a.language || 'a new language'} to my noema-lite language course${a.course ? ` “${a.course}”` : ''} — the whole language, in full, and upload it to the app when it is done.\nCall noema_language_package_guide${a.course ? ` with course_id "${a.course}" and` : ' with'} language "${a.language || ''}" and follow its instructions exactly: every step in order (as sub-agents if you can), every audit turn, every check, the progress file; then package it and save it with noema_lang_package_start → curl → noema_lang_package_finish. Never invent a form. If this environment cannot run long tasks with code execution, tell me what is needed instead of starting. Do not ask me other questions — choose sensible defaults.`,
 }];
 
 async function callTool(name, args, ctx) {
@@ -387,7 +431,7 @@ async function callTool(name, args, ctx) {
     }
     case 'noema_get_toolkit': {
       const zip = `${CFG.siteUrl.replace(/\/$/, '')}/downloads/noema-pack-builder.zip`;
-      return text(`The noema-pack-builder toolkit (same as the skill): ${zip}\n\nIn your sandbox:\ncurl -sSL -o /tmp/npb.zip "${zip}" && cd /tmp && unzip -oq npb.zip && ls /tmp/noema-pack-builder /tmp/noema-pack-builder/scripts\n\nThen follow /tmp/noema-pack-builder/SKILL.md (it is also returned by noema_authoring_guide part "workflow"); scripts are in /tmp/noema-pack-builder/scripts.\nIf the sandbox cannot download it: read noema_authoring_guide (all parts), write the pack JSON yourself (media as data: URIs, or web pictures as {"origin":"web","fetch":"app","url":<direct image url>,"w","h",…} which the app downloads) and save it with noema_save_pack.`);
+      return text(`The noema-pack-builder toolkit (same as the skill): ${zip}\n\nIn your sandbox:\ncurl -sSL -o /tmp/npb.zip "${zip}" && cd /tmp && unzip -oq npb.zip && ls /tmp/noema-pack-builder /tmp/noema-pack-builder/scripts\n\nThen follow /tmp/noema-pack-builder/SKILL.md (it is also returned by noema_authoring_guide part "workflow"); scripts are in /tmp/noema-pack-builder/scripts. (A whole new language for a language course: /tmp/noema-pack-builder/LANGUAGE_BUILDER.md — or call noema_language_package_guide.)\nIf the sandbox cannot download it: read noema_authoring_guide (all parts), write the pack JSON yourself (media as data: URIs, or web pictures as {"origin":"web","fetch":"app","url":<direct image url>,"w","h",…} which the app downloads) and save it with noema_save_pack.`);
     }
     case 'noema_list_subjects': {
       const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: `${uid}/packs/`, limit: 1000 } }).catch(() => []);
@@ -533,6 +577,46 @@ async function callTool(name, args, ctx) {
       const w = NL().langWork(after.rec);
       return text(`✅ Accepted (${t.id}). It reaches the learner's app by itself (merged into the course when noema-lite is open).\n` + (w.queued.length ? `${w.queued.length} task(s) still queued — call noema_lang_task with course_id "${st.rec.id}" if the learner asked for more.` : 'Nothing else is queued in this course 🎉.'));
     }
+    case 'noema_language_package_guide': {
+      const pc = await packCourse(token, args?.course_id); if (pc.error) return pc.error.startsWith('Which') ? text(pc.error) : fail(pc.error);
+      let data; try { data = await packBase(token, uid, pc); } catch (e) { return fail(e.message); }
+      const code = langCodeOf(args?.language, data); if (!code) return fail(`“${args?.language}”: give the language's ISO 639 code (e.g. fa for Persian).`);
+      if ((data.course.languages || []).includes(code)) return fail(`${code} is already a language of “${pc.title}” — nothing to add.`);
+      const prof = (data.world?.languages || []).find(l => l.code === code);
+      let name = prof?.name; if (!name) { try { name = new Intl.DisplayNames(['en'], { type: 'language' }).of(code); } catch (e) { } }
+      const files = pc.origin === 'library' ? [{ url: siteFile(pc.meta.path), name: 'course.pack.js' }, ...(pc.meta.profiles ? [{ url: siteFile(pc.meta.profiles), name: 'course.profiles.js' }] : [])]
+        : [{ url: `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${(await sb(`/storage/v1/object/sign/noema-private/${langPath(uid, pc.id)}`, token, { method: 'POST', body: { expiresIn: 7200 } })).signedURL}`, name: 'course.json' }];
+      const have = await sb(`/rest/v1/noema_kv?select=key&key=eq.${encodeURIComponent(NL().langPackKey(pc.id, code))}`, token).catch(() => []);
+      return text(NL().langPackageGuide(data, code, { name: name || code, typ: prof?.typology || null, toolkitUrl: siteFile('downloads/noema-language-builder.zip'), files }) +
+        (have?.length ? `\n\n(The learner already has a package for ${code} in this course: a new upload replaces it.)` : ''));
+    }
+    case 'noema_lang_package_start': {
+      const pc = await packCourse(token, args?.course_id); if (pc.error) return fail(pc.error);
+      const code = String(args?.language || '').trim(); if (!/^[a-z]{2,3}$/.test(code)) return fail('language: the ISO 639 code of the language in the package (2–3 small letters, e.g. fa)');
+      const r = await sb(`/storage/v1/object/upload/sign/noema-private/${packStoragePath(uid, pc.id, code)}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
+      const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
+      return text(`Upload URL for the ${code} package of “${pc.title}” (valid 2 h; the learner's private storage):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${code}.langpack.json "${u}"\n\nThen call noema_lang_package_finish with course_id "${pc.id}" and language "${code}".`);
+    }
+    case 'noema_lang_package_finish': {
+      const pc = await packCourse(token, args?.course_id); if (pc.error) return fail(pc.error);
+      const code = String(args?.language || '').trim(); if (!/^[a-z]{2,3}$/.test(code)) return fail('language: the ISO 639 code');
+      const path = packStoragePath(uid, pc.id, code);
+      let raw; try { const r = await sb(`/storage/v1/object/authenticated/noema-private/${path}`, token, { raw: true }); raw = await r.text(); }
+      catch (e) { return fail(`No uploaded package for ${code} in “${pc.title}” (${e.message.slice(0, 120)}). Run the curl command from noema_lang_package_start first.`); }
+      let pkg; try { pkg = JSON.parse(raw); } catch (e) { return fail('The uploaded file is not JSON — upload work/' + code + '.langpack.json as made by lang_course.py package.'); }
+      if (pkg?.code !== code) return fail(`The uploaded package is for “${pkg?.code}”, not “${code}”.`);
+      let data; try { data = await packBase(token, uid, pc); } catch (e) { return fail(e.message); }
+      const peers = (await langPeers()).filter(d => d?.course?.id !== pc.id);
+      const errs = NL().checkLangPackage(data, pkg, { peers });
+      if (errs.length) return fail(`The package has ${errs.length} problem(s) — it is NOT added to the course (the file stays private and the next upload replaces it). Fix ALL of them in work/lang/${pc.id}, run the checks, package it again (lang_course.py package), upload it again (noema_lang_package_start → curl) and call noema_lang_package_finish again:\n- ${errs.join('\n- ')}`);
+      const words = Object.values(pkg.lexicon || {}).reduce((a, f) => a + (f.lexemes || []).length, 0), absent = Object.values(pkg.lexicon || {}).reduce((a, f) => a + (f.absent || []).length, 0);
+      const rec = { v: 1, course: pc.id, code, name: pkg.name, path: NL().langPackPath(pc.id, code), size: raw.length, built: pkg.built || null, checks: pkg.checks || null,
+        counts: { nodes: Object.keys(pkg.lexicon || {}).length, words, absent, grammar: Object.keys(pkg.grammar || {}).length, sentences: (pkg.bank || []).length, phenomena: (pkg.phenomena?.phenomena || []).length }, at: new Date().toISOString(), via: 'claude' };
+      await kvPut(token, uid, NL().langPackKey(pc.id, code), rec);
+      return text(`✅ ${pkg.name} (${code}) is in the learner's noema-lite account for “${pc.title}”: ${words} words (${absent} absent) in ${rec.counts.nodes} nodes, ${rec.counts.grammar} grammar pages, ${rec.counts.sentences} sentences, ${rec.counts.phenomena} phenomena.` +
+        `\nThe app adds it to the course by itself on every device the next time the course opens: a lane in ⫴ parallel lanes, a chip, a row on the course home (⋮ › ${pkg.name} › Remove this language takes it away again).` +
+        `\nTell the learner what was written, what is absent, and what a native speaker should still check (work/${code}-native-check.md).`);
+    }
     case 'noema_curriculum_submit': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return fail(pk.error);
       const c = await curState(token, pk.c, uid); const tid = String(args?.task_id || '').trim();
@@ -560,7 +644,7 @@ async function handle(m, ctx) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
         return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step. Language courses: noema_lang_courses → noema_lang_task → noema_lang_submit (check every answer with the toolkit first).' });
+          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step. Language courses: noema_lang_courses → noema_lang_task → noema_lang_submit (check every answer with the toolkit first). A whole new language for a course ("add Persian to my course"): noema_language_package_guide gives the complete instructions; save the package with noema_lang_package_start → curl → noema_lang_package_finish.' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});

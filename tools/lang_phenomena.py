@@ -3,6 +3,7 @@
 
   python3 tools/lang_phenomena.py [--lang ar] [--gaps] [--json] [--for el,tr,ja]
 
+--root <dir>: the folder that holds _phenomena/, _typology/ and the courses (default library/languages; the skill: work/lang).
 --for: what is new / familiar in each catalogued language for a learner who knows those languages (D16: computed from the
 shared typological profiles in library/languages/_typology, never written from one point of view); without it, a table for
 learners of sample backgrounds of every family and type.
@@ -20,8 +21,10 @@ LANGS = os.path.join(ROOT, 'library', 'languages')
 
 
 def implemented_generators():
-    """Exercise types the runtime really makes (engine/langcore.js exercises())."""
-    src = open(os.path.join(ROOT, 'engine', 'langcore.js'), encoding='utf-8').read()
+    """Exercise types the runtime really makes (engine/langcore.js exercises(); in the skill's toolkit: scripts/langcore.js)."""
+    lc = os.path.join(ROOT, 'engine', 'langcore.js')
+    if not os.path.exists(lc): lc = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'langcore.js')
+    src = open(lc, encoding='utf-8').read()
     out = set(re.findall(r"gen\.type === '([a-z_]+)'", src))
     for m in re.finditer(r"\[((?:'[a-z_]+',?\s*)+)\]\.includes\(gen\.type\)", src): out |= set(re.findall(r"'([a-z_]+)'", m.group(1)))
     out |= set(re.findall(r"\bGEN\.([a-z_]+)\s*=", src))   # generators registered by later phases (GEN.<type> = ctx => items)
@@ -97,6 +100,8 @@ SAMPLE = ['el', 'en', 'ru', 'tr', 'fi', 'ja', 'ko', 'zh', 'vi', 'th', 'ar', 'he'
 
 
 def main(a):
+    global LANGS
+    if '--root' in a: LANGS = os.path.abspath(a[a.index('--root') + 1])   # a folder with _phenomena, _typology and course folders (the skill's work/lang)
     only = a[a.index('--lang') + 1] if '--lang' in a else None
     gens = implemented_generators(); bad = 0; report = {}
     feats, prof, terr = typology()

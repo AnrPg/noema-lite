@@ -3270,6 +3270,232 @@
       return data;
     }
 
+    /* ---------- §10.2 — a language package (noema.langpack/v1): ONE language for ONE course, made by lang_course.py package ---------- */
+    const PACK = 'noema.langpack/v1';
+    const packKey = (cid, code) => `a:langpack:${cid}:${code}`;
+    const packPath = (cid, code) => `langs/${cid}.lang-${code}.json`;
+    /** Add the language of a package to a loaded course (built course.pack.js data or an account course's content). The object
+        given is not changed: a new top-level object comes back (the library pack stays as the website sent it). */
+    function applyPackage(data, pkg) {
+      const code = pkg?.code; if (!data?.course || !code || !isObj(pkg.language)) return data;
+      const c = data.course; if ((c.languages || []).includes(code) && !(c.added || {})[code]) return data;   // a language of the course itself: never replaced
+      const out = { ...data };
+      out.course = { ...c, languages: [...(c.languages || []).filter(x => x !== code), code], defaults: { ...(c.defaults || {}), depth: { ...((c.defaults || {}).depth || {}), [code]: ((c.defaults || {}).depth || {})[code] || 3 } },
+        added: { ...(c.added || {}), [code]: { name: pkg.name || nameOf(code), built: pkg.built || null } }, ...(pkg.flag ? { flags: { ...(c.flags || {}), [code]: pkg.flag } } : {}) };
+      out.langs = { ...(data.langs || {}), [code]: { language: clone(pkg.language), lexicon: clone(pkg.lexicon || {}), grammar: clone(pkg.grammar || {}), bank: clone(pkg.bank || []), script: pkg.script ? clone(pkg.script) : null, chars: pkg.chars ? clone(pkg.chars) : null } };
+      if (data.world) {
+        out.world = { ...data.world, phenomena: { ...(data.world.phenomena || {}), [code]: ((pkg.phenomena || {}).phenomena || []).map(trimPhenomenon) } };
+        if (isObj(pkg.typology) && !(data.world.languages || []).some(l => l.code === code)) out.world.languages = [...(data.world.languages || []), clone(pkg.typology)];
+      }
+      for (const [L, fns] of Object.entries(pkg.seeAlso || {})) {   // the other languages' pages point to the new one
+        const src = out.langs[L]; if (!src || L === code || !isObj(fns)) continue;
+        const G = { ...(src.grammar || {}) }; let changed = false;
+        for (const [fid, adds] of Object.entries(fns)) {
+          const g = G[fid]; if (!g || !Array.isArray(adds)) continue;
+          const have = new Set((g.seeAlso || []).map(x => x.lang + '|' + x.fn)), more = adds.filter(x => isObj(x) && !have.has(x.lang + '|' + x.fn));
+          if (more.length) { G[fid] = { ...g, seeAlso: [...(g.seeAlso || []), ...clone(more)] }; changed = true; }
+        }
+        if (changed) out.langs[L] = { ...src, grammar: G };
+      }
+      return out;
+    }
+    const PHEN_AREAS = new Set(['script', 'orthography', 'phonology', 'morphology', 'syntax', 'lexicon', 'semantics', 'pragmatics', 'culture', 'numbers']);
+    /** Is this package good for this course? The rules the app enforces for answers (checkLangAnswer), over the whole language.
+        data: the course WITHOUT the learner's packages; peers: the library courses (D13). → [problems] (empty: accepted) */
+    function checkPackage(data, pkg, { peers = [], max = 400 } = {}) {
+      const E = [];
+      if (!isObj(pkg)) return ['the package must be ONE JSON object (noema.langpack/v1, made by lang_course.py package)'];
+      if (pkg.format !== PACK) E.push(`format must be "${PACK}"`);
+      const code = String(pkg.code || ''), cid = data?.course?.id;
+      if (!/^[a-z]{2,3}$/.test(code)) return [...E, 'code: the ISO 639 code of the language (2–3 small letters)'];
+      if (pkg.course !== cid) E.push(`course: the package was made for “${pkg.course}”, not for this course “${cid}”`);
+      if ((data.course.languages || []).includes(code)) E.push(`${code} is already a language of “${data.course.title}”: a package adds a NEW language`);
+      if (!str(pkg.name)) E.push('name: the language\'s name (e.g. Persian)');
+      const lj = pkg.language, w0 = `lang/${code}/language.json`;
+      if (!isObj(lj)) return [...E, `${w0}: missing (language)`];
+      if (lj.code !== code) E.push(`${w0}: code must be “${code}”`);
+      if (!['ltr', 'rtl'].includes(lj.dir)) E.push(`${w0}: dir must be "ltr" or "rtl"`);
+      if (!['space', 'none'].includes(lj.tokenJoin)) E.push(`${w0}: tokenJoin must be "space" or "none"`);
+      if (!TYPES.includes(lj.typology)) E.push(`${w0}: typology must be one of ${TYPES.join(', ')} (D10)`);
+      if (!isObj(lj.paradigmCells)) E.push(`${w0}: paradigmCells is required (the cells every word of a part of speech fills)`);
+      if (!isObj(lj.wordFeatures)) E.push(`${w0}: wordFeatures is required (D14, §4.5.1)`);
+      if (!isObj(pkg.lexicon) || !Object.keys(pkg.lexicon).length) E.push('lexicon: the words of the course\'s nodes ({node id: {lexemes, absent}})');
+      if (pkg.grammar != null && !isObj(pkg.grammar)) E.push('grammar: {function id: realization}');
+      if (!Array.isArray(pkg.bank)) E.push('bank: the sentences (a list)');
+      if (!isObj(pkg.checks) || !isObj(pkg.checks.validator) || pkg.checks.validator.errors !== 0) E.push('checks.validator: the package must come from “lang_course.py package”, which runs validate_lang.py --strict and refuses while it has errors');
+      if (E.length) return E;
+      const grams = pkg.grammar || {}, draft = new Set(data.course.draft || []), typ = lj.typology;
+      // the course as it would be with the language (its own lexicon; no sentences yet: the package's are checked as new)
+      const d = { ...data, course: { ...data.course, languages: [...data.course.languages, code] }, langs: { ...(data.langs || {}), [code]: { language: lj, lexicon: pkg.lexicon, grammar: grams, bank: [] } } };
+      const nodes = Object.fromEntries((data.nodes || []).map(n => [n.id, n])), fns = Object.fromEntries((data.functions || []).map(f => [f.id, f]));
+      for (const nid of Object.keys(pkg.lexicon)) {
+        if (!nodes[nid]) { E.push(`lexicon/${nid}: the course has no node “${nid}” — a package fills the course's nodes, it never adds one (D13)`); continue; }
+        if (!applies(nodes[nid], code, typ)) { E.push(`lexicon/${nid}: node ${nid} does not apply to ${code} (path ${nodes[nid].path || '—'}, langs ${(nodes[nid].langs || []).join('/') || '—'})`); continue; }
+        if (!isObj(pkg.lexicon[nid])) { E.push(`lexicon/${nid}: {lexemes, absent} expected`); continue; }
+        checkLexemes(E, d, code, nid, pkg.lexicon[nid], lj);
+      }
+      for (const n of data.nodes || []) {
+        if (!applies(n, code, typ) || draft.has(n.id)) continue;
+        if ((n.concepts || []).length && !pkg.lexicon[n.id]) E.push(`lexicon: node ${n.id} (${n.title}) has no words in ${code} — every node of the course that applies to the language is written (only nodes in course.draft may wait)`);
+        if (n.kind === 'lesson' && (pkg.lexicon[n.id] || !(n.concepts || []).length)) for (const f of lessonFns(n, code, typ)) if (fns[f] && !grams[f]) E.push(`grammar/${f}: lesson ${n.id} needs its realization in ${code}`);
+      }
+      for (const [fid, g] of Object.entries(grams)) {
+        if (!fns[fid]) { E.push(`grammar/${fid}: the course has no function “${fid}” — a package never adds one`); continue; }
+        checkRealization(E, d, code, fid, g, lj);
+      }
+      checkBank(E, d, code, pkg.bank, lj, { lex: lexIndex(d, code), grams, label: 'bank' });
+      // D14: the catalogue of phenomena; D16: the profile in the shared typology
+      const ph = pkg.phenomena, wp = `_phenomena/${code}.json`, W = data.world || null;
+      const feats = W ? Object.fromEntries((W.features || []).map(f => [f.id, new Set((f.values || []).map(v => v.id))])) : null;
+      if (!isObj(ph)) E.push(`${wp}: the catalogue of phenomena is required (a language starts with it, D14)`);
+      else {
+        if (ph.format !== 'noema.langphenomena/v1') E.push(`${wp}: format must be "noema.langphenomena/v1"`);
+        if (ph.lang !== code) E.push(`${wp}: lang must be “${code}”`);
+        const list = Array.isArray(ph.phenomena) ? ph.phenomena : [], ids = new Set();
+        if (list.length < 20) E.push(`${wp}: at least 20 phenomena (every area of the language, what it has and what it lacks)`);
+        for (const p of list) {
+          const pw = `${wp} · ${p?.id}`;
+          if (!str(p?.id) || ids.has(p.id)) { E.push(`${wp}: a phenomenon id is missing or repeated`); continue; } ids.add(p.id);
+          if (!str(p.title) || !str(p.what)) E.push(`${pw}: title and what are required`);
+          if (!PHEN_AREAS.has(p.area)) E.push(`${pw}: area must be one of ${[...PHEN_AREAS].join(', ')}`);
+          if (!Array.isArray(p.typology) || !p.typology.length) E.push(`${pw}: tag it with the typological feature values it is about (D16)`);
+          else if (feats) for (const t of p.typology) { if (!feats[t?.feature]) E.push(`${pw}: unknown feature “${t?.feature}”`); else if (!feats[t.feature].has(t.value)) E.push(`${pw}: “${t.value}” is not a value of ${t.feature}`); }
+        }
+      }
+      if (W && !(W.languages || []).some(l => l.code === code)) {
+        const tp = pkg.typology;
+        if (!isObj(tp)) E.push(`typology: the library has no profile for ${code} — the package brings its entry of _typology/languages.json (D16)`);
+        else {
+          if (tp.code !== code) E.push(`typology.code must be “${code}”`);
+          if (tp.typology !== typ) E.push(`typology.typology “${tp.typology}” ≠ the type in language.json “${typ}”`);
+          const vals = isObj(tp.values) ? tp.values : {};
+          const miss = Object.keys(feats || {}).filter(f => vals[f] == null);
+          if (miss.length) E.push(`typology.values: no value for ${miss.length} feature(s) (“unknown” when the sources disagree): ${miss.slice(0, 10).join(', ')}${miss.length > 10 ? ' …' : ''}`);
+          for (const [f, v] of Object.entries(vals)) if (feats && feats[f] && v !== 'unknown' && !feats[f].has(v)) E.push(`typology.values.${f}: “${v}” is not a value of the feature`);
+        }
+      }
+      // the other languages' pages that now point to the new language
+      for (const [L, fs] of Object.entries(pkg.seeAlso || {})) {
+        if (L === code || !(data.course.languages || []).includes(L)) { E.push(`seeAlso.${L}: not another language of the course`); continue; }
+        for (const [fid, adds] of Object.entries(isObj(fs) ? fs : {})) {
+          if (!data.langs?.[L]?.grammar?.[fid]) { E.push(`seeAlso.${L}.${fid}: ${L} has no page for ${fid}`); continue; }
+          for (const x of Array.isArray(adds) ? adds : [null]) if (!isObj(x) || x.lang !== code || !(grams[x.fn] || fns[x.fn]) || !str(x.note)) E.push(`seeAlso.${L}.${fid}: each entry is {lang: "${code}", fn: a function, note: one line}`);
+        }
+      }
+      // D13: one common order — the course with the new language against the library courses
+      if (!E.length) {
+        const paths = coursePaths(d, cid);
+        for (const p of peers || []) { if (p?.course?.id === cid) continue; try { paths.push(...coursePaths(p)); } catch (e) { } }
+        for (const m of orderConflicts(paths, `${cid}/${code}`)) E.push(`parallel order (D13): ${m}`);
+      }
+      return E.length > max ? E.slice(0, max).concat([`… and ${E.length - max} more`]) : E;
+    }
+    /** The playbook's batches for one course and one language (docs/NEW_LANGUAGE_PLAYBOOK.md): foundations F1…, fields V1…, core K1…
+        with the node ids of THIS course. typ: the language's type when known (nodes of another type's path are left out). */
+    const PLAY_F = [['F1', ['fd.00', 'fd.01', 'fd.02', 'fd.03', 'fd.04']], ['F2', ['fd.05', 'fd.06']], ['F3', ['fd.07', 'fd.08', 'fd.09']], ['F4', ['fd.10', 'fd.11', 'fd.12']], ['F5', ['fd.13', 'fd.14', 'fd.15']], ['F6', ['fd.16', 'fd.17', 'fd.18']]];
+    function packagePlan(data, code, typ = null) {
+      const { by, out } = topo(data.nodes || []), draft = new Set(data.course?.draft || []);
+      const ok = n => (!n.langs || n.langs.includes(code)) && (!n.path || !typ || n.path === typ);
+      const all = out.map(id => by[id]).filter(ok), batches = [], waiting = out.filter(id => draft.has(id) && ok(by[id]));
+      const live = all.filter(n => !draft.has(n.id));
+      const lessons = live.filter(n => n.kind === 'lesson' && n.stage !== 'core' && n.stage !== 'advanced'), used = new Set();
+      for (const [b, ids] of PLAY_F) { const got = ids.filter(id => lessons.some(n => n.id === id)); if (got.length) { batches.push({ id: b, kind: 'foundations', nodes: got }); got.forEach(x => used.add(x)); } }
+      const restL = lessons.filter(n => !used.has(n.id));
+      restL.forEach(n => used.add(n.id));
+      for (let i = 0; i < restL.length; i += 3) batches.push({ id: 'F' + (batches.filter(x => x.kind === 'foundations').length + 1), kind: 'foundations', nodes: restL.slice(i, i + 3).map(n => n.id) });
+      const fieldsOf = {}; for (const n of live.filter(n => n.kind === 'field')) (fieldsOf[n.field] = fieldsOf[n.field] || {})[n.tier || 1] = [...((fieldsOf[n.field] || {})[n.tier || 1] || []), n.id];
+      let v = 0; for (const f of Object.keys(fieldsOf)) for (const t of Object.keys(fieldsOf[f]).sort()) batches.push({ id: 'V' + (++v), kind: 'field', field: f, nodes: fieldsOf[f][t] });
+      const core = live.filter(n => !used.has(n.id) && n.kind !== 'field' && !(n.kind === 'lesson' && n.stage !== 'core' && n.stage !== 'advanced'));
+      for (let i = 0; i < core.length; i += 4) batches.push({ id: 'K' + (i / 4 + 1), kind: 'core', nodes: core.slice(i, i + 4).map(n => n.id) });
+      const typed = (data.nodes || []).filter(n => n.path && !n.langs && !typ).map(n => `${n.id} (path ${n.path})`);
+      return { batches, draft: waiting, typeOnly: typed, titles: Object.fromEntries((data.nodes || []).map(n => [n.id, n.title])) };
+    }
+    /** The complete instructions of the skill noema-language-builder for one course and one language (the connector's
+        noema_language_package_guide). o: {name, toolkitUrl, files: [{url, name}], typ, nativeName} */
+    function packageGuide(data, code, o = {}) {
+      const c = data.course, name = o.name || nameOf(code), plan = packagePlan(data, code, o.typ || null), dir = `work/lang/${c.id}`;
+      const main = (o.files || [])[0]?.name || 'course.pack.js', T = '$T';
+      const steps = [
+        { id: '1', title: 'Typology and phenomena', how: `the profile of ${code} in work/lang/_typology/languages.json (only if it is missing: a value for EVERY feature of _typology/features.json, WALS-based, its family and type) and the complete catalogue work/lang/_phenomena/${code}.json — every feature ${name} has AND lacks, tagged {feature, value}, kind has|lacks, notes for ≥ 8 reference languages of all four types, status "missing" (nothing is taught yet), distinctions and polysemy for the words the course needs (read core/fields/*.json). Model: the other catalogues in work/lang/_phenomena (and ${T}/library/languages/_phenomena). Check: python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}` },
+        { id: '2', title: 'The facade', how: `${dir}/lang/${code}/language.json (name "${name}", nativeName, script, dir, tokenJoin, vowelMarks / romanization, typology, citationCells and paradigmCells per POS and class in UniMorph tags as the other languages use, extraTags, wordFeatures — EVERY parameter a word must state, per POS, each tied to its phenomenon, D14); add "${code}" to ${dir}/course.json languages (and defaults.depth). The reference checker reads the Wiktionary language name from language.json "name" (or "wiktionaryName"): test it on 20 common words (python3 -c "import sys; sys.path.insert(0,'${T}/scripts'); import lang_refcheck as R; print(R.fetch('${code}','<word>'))"). The app's engine (LANG_INFO, tokenizer clitics, script modules, keyboards, speech tag) is NOT in the sandbox: write down what ${name} would need there for the final report. Checks: python3 ${T}/scripts/validate_lang.py ${dir} --lang ${code} --alone (0 errors; missing words are warnings now) and lang_phenomena.py as above. No words, pages or sentences yet.` },
+        ...plan.batches.map(b => ({ id: b.id, batch: b, title: `${b.kind === 'foundations' ? 'Foundations' : b.kind === 'field' ? 'Field ' + b.field : 'Core'} ${b.id}: ${b.nodes.join(', ')}`,
+          how: `python3 ${T}/scripts/mkbrief.py ${b.kind === 'foundations' ? 'foundations' : b.kind === 'field' ? 'field' : 'core'} --course-dir ${dir} --lang ${code} --batch ${b.id} --nodes ${b.nodes.join(',')} --sandbox > work/brief-${b.id}.txt — the sub-agent reads the brief completely and follows it: ${b.kind === 'field' ? 'the field in the other course languages as models; a rare item without a real word is an "absent" entry with what people say instead — never an invented word' : 'lesson by lesson: (A) the words with their full facade and profile, grounded in Wiktionary; (B) the grammar page of each function (status, blocks, ask yourself, traps, evidence, generators, seeAlso, typology tags, notes for ≥ 8 reference languages of all four types); (C) the sentences (≥ 15 per lesson); (D) the catalogue\'s status for what the lesson teaches'}${b.kind === 'core' ? '; before adding a word, search the lexicon for the concept id (D15)' : ''}; checks after EACH lesson.` })),
+        { id: 'links', title: 'Links across the course', how: `seeAlso both ways: every grammar page of ${code} points to the same point in the other course languages, and every other language's page of a function ${code} also has gets a seeAlso entry {lang: "${code}", fn, note} (one line: what is parallel or different) — in ${dir}/lang/<other>/grammar/*.json, nothing else of those languages; comparison notes for ${code} where ${code} is in _typology/reference.json; report cognates, loans and false friends with the other course languages. Checks: validate_lang.py ${dir} --strict --lang ${code} --alone, lang_refcheck.py.` },
+        { id: 'audit', title: 'Audit', how: `as a demanding reviewer: draw 40 random words and 40 random sentences of ${code}; check each against Wiktionary (lang_refcheck.fetch) and the grammar pages (forms, gender, plural, vowel marks / tones, the meaning of the sentence vs its gloss, the token annotation); run every check; write work/${code}-native-check.md — what a native speaker should still check (idioms, register, regional words); fix in place (smallest change) and run the checks again.` }];
+      const checks = (nodes = null) => [`python3 ${T}/scripts/validate_lang.py ${dir} --lang ${code} --alone${nodes ? ' --batch ' + nodes.join(',') : ''}`, `python3 ${T}/scripts/lang_refcheck.py ${dir} --lang ${code}`, `python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}`, `node ${T}/scripts/lang_readback.js ${dir} --lang ${code}   (if node is available)`];
+      const get = (o.files || []).map(f => `curl -sSL -o work/${f.name} "${f.url}"`).join('\n');
+      return `# Add ${name} (${code}) to “${c.title}” — one prompt, the whole language (noema-lite, docs/LANGUAGES.md §10.2)
+
+You build a complete **language package** for ONE language of ONE course and upload it into the learner's noema-lite account;
+the app then adds ${name} to the course by itself on every device. This is the skill **noema-language-builder** specialised for
+this course and language: follow it step by step, in order.
+
+## Be honest about what this is
+* It is the work of ≈ ${steps.length} batches (docs/NEW_LANGUAGE_PLAYBOOK.md), each a careful session with an audit turn — **hours**
+  of work, hundreds of words with full paradigms and profiles, ~15 sentences per lesson. It needs an environment with a
+  **sandbox that runs long tasks** (python3, curl, network to kaikki.org and to this website) and preferably **sub-agents**
+  (an Agent / Task tool). In a plain chat without code execution it CANNOT be done: say so and stop, do not fake it.
+* **Correctness over speed.** Never invent a form, gender, plural, tone or example; ground everything (Wiktionary via
+  lang_refcheck, WALS, reference grammars); leave out what you cannot ground; never skip the audit turn.
+* If the run is interrupted, it resumes from the progress file (below). Tell the learner how far you got.
+
+## Binding rules
+Read ${T}/references/LANGUAGE_RULES.md (D1–D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D19 apply to the
+package: the language fills the course's existing nodes and functions in the course's order — it never adds a node, concept,
+function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a concept
+(D15); no built-in point of view (D16); notes for ≥ 8 reference languages of all four types on every grammar page (D18);
+every word used is in the lexicon (D19).
+
+## Setup (once)
+\`\`\`
+${o.toolkitUrl ? `curl -sSL -o /tmp/nlb.zip "${o.toolkitUrl}" && (cd /tmp && unzip -oq nlb.zip) && T=/tmp/noema-language-builder` : 'T=<the folder of the skill noema-language-builder>'}
+mkdir -p work
+${get || '(the learner attaches the course file — save it as work/course.json)'}
+python3 ${T}/scripts/lang_course.py unpack work/${main} work/lang --world     # → ${dir}/ + work/lang/_typology + work/lang/_phenomena
+python3 ${T}/scripts/lang_course.py plan ${dir} ${code}                       # the batches below, from the course itself
+\`\`\`
+Path mapping for the playbook and the briefs (written for the repository): library/languages/${c.id} → ${dir};
+library/languages/_phenomena, _typology → work/lang/_phenomena, work/lang/_typology; tools/<x>.py → ${T}/scripts/<x>.py;
+docs/<x>.md → ${T}/references/<x>.md; node tests/lang_courses.js → node ${T}/scripts/lang_readback.js ${dir} --lang ${code};
+the mini course models → the other languages of ${dir}. mkbrief.py --sandbox writes the briefs with these paths already.
+
+## Progress file — work/${code}-progress.json
+\`{"course": "${c.id}", "code": "${code}", "steps": {"<step id>": {"status": "written" | "audited" | "done", "at": "<ISO time>", "report": "<the sub-agent's short report>"}}}\`
+Read it first: skip every step whose status is "done"; redo a step that is only "written" from its audit. Update it after
+every step (a step is "done" only when its checks pass).
+
+## The steps, in this order (one fresh sub-agent each, then a second one for its audit)
+For every step: start a **fresh sub-agent** (Agent / Task tool; without sub-agents: a separate, focused pass) whose prompt
+is the step's text below + "Read the brief / files named, work only in ${dir} and work/lang/_phenomena, _typology; report
+files written, counts, doubtful cases." When it finishes, start a **second sub-agent for the audit turn**:
+> Audit what was just written for step <id>: (1) go through ${T}/references/LANGUAGE_RULES.md §C point by point for each
+> file; (2) pick 10 words and 10 sentences at random and check them again against Wiktionary and the grammar pages;
+> (3) look for words used in sentences that have no lexeme, paradigm cells left empty, glosses that do not match the
+> sentence, notes that compare with a language you are not sure about; (4) fix, re-run the checks, and report what changed.
+Then run the checks yourself; only when they pass mark the step "done".
+
+${steps.map((s, i) => `### ${i + 1}. ${s.id === '1' || s.id === '2' ? 'Prompt ' + s.id + ' — ' : ''}${s.title}\n${s.how}\nChecks: ${s.batch ? checks(s.batch.nodes).join(' · ') : s.id === '1' ? 'lang_phenomena.py (no ❌)' : checks().slice(0, 1).join(' · ')}`).join('\n\n')}
+${plan.draft.length ? `\nNodes still being written in the course (course.draft — left out now, written when the other languages have them): ${plan.draft.join(', ')}.` : ''}${plan.typeOnly.length ? `\nNodes of one language type's path only (write them only if ${name} is of that type): ${plan.typeOnly.join(', ')}.` : ''}
+
+## Final checks, the package, the upload
+\`\`\`
+python3 ${T}/scripts/validate_lang.py ${dir} --strict --lang ${code} --alone   # 0 errors
+python3 ${T}/scripts/lang_refcheck.py ${dir} --lang ${code}                     # no disagreement (ref.override only with a reason)
+python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}         # no ❌
+node ${T}/scripts/lang_readback.js ${dir} --lang ${code}                        # the app's runtime reads it back
+python3 ${T}/scripts/lang_course.py package ${dir} ${code} -o work/${code}.langpack.json
+\`\`\`
+${o.connector === false ? 'Give the learner work/' + code + '.langpack.json.' : `Then call **noema_lang_package_start** with course_id "${c.id}" and language "${code}", run the curl command it returns
+(it PUTs work/${code}.langpack.json into the learner's private storage), and call **noema_lang_package_finish** with the same
+course_id and language: it checks the package exactly as noema-lite does and lists every problem — fix them in ${dir},
+package again, upload again. When it is accepted, the app adds ${name} to the course on every device.`}
+
+## Report to the learner (short)
+What was written (words, absent entries, grammar pages, sentences per batch), what is absent and why, the words and
+facts you were unsure of or left out, every ref.override with its reason, what the app's engine would still need for
+${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-native-check.md — what a native speaker should check.`;
+    }
+
     /* ---------- the queue ---------- */
     const taskIdOf = (kind, a) => kind === KIND.core ? 'core' : kind === KIND.node ? `node:${a.node}:${a.lang}` : kind === KIND.function ? `function:${a.fn}:${a.lang}` : kind === KIND.compare ? `compare:${a.fn}` : `refill:${a.fn}:${a.lang}:${a.n}`;
     const isOpen = t => t && (t.status === 'queued');
@@ -3841,7 +4067,8 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
       return `Use the noema-lite connector to write my noema-lite language course “${rec.title}” (course_id ${rec.id}): ${n ? `do the next ${count > 1 ? Math.min(count, n) + ' queued tasks' : 'queued task'} (${n} waiting)` : 'see what is left to do'}.\nCall noema_lang_task with course_id "${rec.id}" and follow what it returns — check every answer with the toolkit (validate_lang.py, lang_refcheck.py) before noema_lang_submit; after each accepted answer call noema_lang_task again. Stop after ${count > 1 ? count + ' tasks' : 'one task'} or when it says there is nothing left. Do not ask me questions — choose sensible defaults.`;
     }
 
-    return { LANGJOBS: { FORMAT, DATA, PATCH, IN, CLAIM, LEASE, KIND, SCHEMA, REF },
+    return { LANGJOBS: { FORMAT, DATA, PATCH, PACK, IN, CLAIM, LEASE, KIND, SCHEMA, REF },
+      langApplyPackage: applyPackage, checkLangPackage: checkPackage, langPackagePlan: packagePlan, langPackageGuide: packageGuide, langPackKey: packKey, langPackPath: packPath,
       langNewCourseId: newCourseId, langNewCourse: newCourse, langLibraryRecord: libraryRecord, langEmptyPatch: emptyPatch, langApplyPatch: applyPatch,
       langQueue: queueTask, langOpenTasks: order, langSettle: settle, langWork: work, langTaskById: byId, langNext: next, langNeeds: needs, langQueueNight: queueNight, langRefillRequest: refillRequest,
       langCoursePaths: coursePaths, langOrderConflicts: orderConflicts, checkLangAnswer: checkAnswer, applyLangAnswer: applyAnswer, langMerged: merged, langInboxKey: inboxKey, langClaimKey: claimKey,

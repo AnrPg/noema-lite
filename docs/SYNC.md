@@ -68,3 +68,7 @@ The keys `s:lang:<course>:…` (docs/LANGUAGES.md §5.6) have their own rule in 
 later review wins, the earliest first-seen day is kept, a lesson check keeps the best score and the most tries, and a grammar
 function's log keeps every day. The open course listens for `noema:remote` and folds the stored copies into what it holds
 (`foldRemote` in `engine/lang/00_base.js`). Tested by `tests/lang_sync.js` (two browsers, the Supabase emulator).
+The learner's **language packages** (docs/LANGUAGES.md §10.2) are records `a:langpack:<course>:<code>` written by the Claude
+connector; they sync like any record (the newer copy wins), the package file itself stays in the private storage
+(`langs/<course>.lang-<code>.json`) and is cached per device in IndexedDB by the record's `at`. Removing a language deletes
+the record — the deletion reaches every device — and the file. Tested by `tests/lang_package.js`.

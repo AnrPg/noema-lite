@@ -8,9 +8,12 @@ wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when
 missing here or when one of the places below does not point to this file.
 
 Where it is enforced: `CLAUDE.md` and `AGENTS.md` (read by code agents), `README.md` (🌍 Languages), the skill
-(`references/LANGUAGE_RULES.md` in the skill zip, step "Language courses" in `SKILL.md`), the content-agent brief
+(`references/LANGUAGE_RULES.md` in the skill zip, step "Language courses" in `SKILL.md`; the skill
+`noema-language-builder`, which adds a whole language as a package — docs/LANGUAGES.md §10.2: D13–D19 apply to a package
+exactly as to the library), the content-agent brief
 (`tools/lang_sources/AGENT_BRIEF.md`, which every brief for a language task starts with), and the validators
-(`tools/validate_lang.py`, `tools/lang_phenomena.py`, part of `tests/run_e2e.sh` and of `tools/build.py`).
+(`tools/validate_lang.py`, `tools/lang_phenomena.py`, part of `tests/run_e2e.sh` and of `tools/build.py`; for a language
+package `tools/lang_course.py package` and `langcore.checkLangPackage`, which the connector and the app run).
 
 ## A. Process
 1. **Contract first.** A change to the plan is written in `docs/LANGUAGES.md` (decision table §1, the section it concerns,

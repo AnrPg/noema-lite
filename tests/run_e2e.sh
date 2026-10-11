@@ -48,3 +48,4 @@ node "$ROOT/tests/lang_speech.js" "$T"   # P9 listening and speaking: speech syn
 node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end to end — three learners, two widths, every route (docs/LANGUAGES.md §13 QA)
 node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new frame: the Languages tab, #/lang/<course>/…, Today, + New language (docs/LANGUAGES.md §8)
 node "$ROOT/tests/lang_lanes.js" "$T"   # ⫴ parallel lanes: the same subject level across the languages (D13, §9.2)
+node "$ROOT/tests/lang_package.js" "$T"   # a whole language in one prompt: the package, the connector's guide / start / finish, the app on two devices (§10.2)

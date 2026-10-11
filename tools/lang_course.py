@@ -10,11 +10,29 @@
   python3 tools/lang_course.py answer <course-dir> <task id>
         → prints the answer of the task, read back from the folder (what changed since unpack)
 
+A whole language as ONE file — the language package (noema.langpack/v1, docs/LANGUAGES.md §10.2):
+  python3 tools/lang_course.py package <course-dir> <code> [-o <file>]
+        → the language <code> of the course folder as a package (language.json, lexicon, grammar, bank, script modules,
+          its catalogue of phenomena, its typological profile when the library has none, the other languages' seeAlso
+          entries that point to it, and the checks). Refused while validate_lang.py --strict --lang <code> has errors
+          or the reference check (from the cache, offline) disagrees.
+  python3 tools/lang_course.py unpack <course file> <out-dir> --package <pkg.json> [--patch <patch.json>]
+        → the course as a folder WITH the package's language added (to check it again or extend it)
+  unpack … --world  also puts the shared typology and catalogues next to the course (<out-dir>/_typology, _phenomena),
+        where a new language's profile and catalogue are written
+  python3 tools/lang_course.py plan <course-dir> <code>
+        → the playbook's batches for this course and language (F1…, V1…, K1… with their node ids)
+
 Task ids: core · node:<node>:<code> · function:<fn>:<code> · compare:<fn> · refill:<fn>:<code>:<n>
 """
-import hashlib, json, os, re, sys
+import hashlib, json, os, re, shutil, sys, glob
+from datetime import datetime, timezone
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 MANIFEST = '.unpacked.json'
+PACK = 'noema.langpack/v1'
+TOOLS = os.path.dirname(os.path.abspath(__file__))
+SHARED = os.path.join(os.path.dirname(TOOLS), 'library', 'languages')   # the repository's (or the toolkit's) _typology and _phenomena
 
 
 def rj(p):
@@ -50,8 +68,14 @@ def read_course_file(path):
 def safe(s): return re.sub(r'[^A-Za-z0-9._-]+', '_', s)
 
 
-def unpack(src, out, patch=None):
+def unpack(src, out, patch=None, package=None, world=False):
     data = read_course_file(src)
+    if package:
+        pkg = rj(package)
+        if pkg.get('format') != PACK: sys.exit(f'{package}: not a language package ({PACK})')
+        if pkg.get('course') != data['course']['id']: sys.exit(f'{package}: made for the course “{pkg.get("course")}”, not “{data["course"]["id"]}”')
+        add_package(data, pkg)
+        world = True
     course = dict(data['course']); cid = course['id']
     root = os.path.join(out, cid)
     wj(os.path.join(root, 'course.json'), course)
@@ -74,11 +98,148 @@ def unpack(src, out, patch=None):
         if L.get('language'): wj(os.path.join(b, 'language.json'), L['language']); man['language'][code] = h(L['language'])
         for nid, lx in (L.get('lexicon') or {}).items(): wj(os.path.join(b, 'lexicon', nid + '.json'), lx); man['lexicon'][f'{code}/{nid}'] = h(lx)
         for fid, g in (L.get('grammar') or {}).items(): wj(os.path.join(b, 'grammar', fid + '.json'), g); man['grammar'][f'{code}/{fid}'] = h(g)
-        if L.get('bank'): wj(os.path.join(b, 'bank', 'course.json'), {'sentences': L['bank']})
+        if L.get('bank'): wj(os.path.join(b, 'bank', 'course.json'), {'sentences': L['bank'], **({'fieldExemptions': L['fieldExemptions']} if L.get('fieldExemptions') else {})})
+        for k in ('script', 'chars'):   # the script modules (§4.9)
+            if L.get(k): wj(os.path.join(b, k + '.json'), L[k])
         man['bank'][code] = [s['id'] for s in L.get('bank') or []]
     wj(os.path.join(root, MANIFEST), man)
+    if world: put_world(out, data.get('_package'))
     print(root)
     return root
+
+
+def add_package(data, pkg):
+    """The language of a package into a loaded course (the Python twin of langcore.langApplyPackage)."""
+    code = pkg['code']; c = data['course']
+    if code in c.get('languages', []): sys.exit(f'{code} is already a language of the course')
+    c['languages'] = list(c.get('languages', [])) + [code]
+    c.setdefault('defaults', {}).setdefault('depth', {})[code] = 3
+    data.setdefault('langs', {})[code] = {'language': pkg['language'], 'lexicon': pkg.get('lexicon') or {}, 'grammar': pkg.get('grammar') or {}, 'bank': pkg.get('bank') or [],
+                                         **({'script': pkg['script']} if pkg.get('script') else {}), **({'chars': pkg['chars']} if pkg.get('chars') else {}),
+                                         **({'fieldExemptions': pkg['fieldExemptions']} if pkg.get('fieldExemptions') else {})}
+    for L, fns in (pkg.get('seeAlso') or {}).items():
+        G = (data['langs'].get(L) or {}).get('grammar') or {}
+        for fid, adds in fns.items():
+            g = G.get(fid)
+            if not g: continue
+            have = {(x.get('lang'), x.get('fn')) for x in g.get('seeAlso') or []}
+            g['seeAlso'] = (g.get('seeAlso') or []) + [x for x in adds if (x.get('lang'), x.get('fn')) not in have]
+    data['_package'] = pkg
+
+
+def put_world(out, pkg=None):
+    """The shared typology and catalogues next to the unpacked course (out/_typology, out/_phenomena): validate_lang.py and
+    lang_phenomena.py --root read them there; a new language's profile and catalogue are written there."""
+    for d in ('_typology', '_phenomena'):
+        os.makedirs(os.path.join(out, d), exist_ok=True)
+        for f in sorted(glob.glob(os.path.join(SHARED, d, '*.json'))):
+            dst = os.path.join(out, d, os.path.basename(f))
+            if not os.path.exists(dst): shutil.copy(f, dst)
+    if pkg:
+        code = pkg['code']
+        if pkg.get('phenomena'): wj(os.path.join(out, '_phenomena', code + '.json'), pkg['phenomena'])
+        tl = os.path.join(out, '_typology', 'languages.json'); t = rj(tl)
+        if pkg.get('typology') and not any(x.get('code') == code for x in t.get('languages', [])):
+            t['languages'].append(pkg['typology']); wj(tl, t)
+
+
+def plan(root, code):
+    """The playbook's batches for this course and language (the Python twin of langcore.langPackagePlan)."""
+    J = lambda rel: rj(os.path.join(root, rel)) if os.path.exists(os.path.join(root, rel)) else None
+    course = J('course.json'); nodes = J('core/nodes.json')['nodes']; by = {n['id']: n for n in nodes}
+    lj = J(f'lang/{code}/language.json') or {}; typ = lj.get('typology') if isinstance(lj.get('typology'), str) else None
+    if not typ:
+        for d in (os.path.join(os.path.dirname(os.path.abspath(root)), '_typology'), os.path.join(SHARED, '_typology')):
+            if os.path.exists(os.path.join(d, 'languages.json')):
+                typ = next((x.get('typology') for x in rj(os.path.join(d, 'languages.json')).get('languages', []) if x.get('code') == code), None)
+                if typ: break
+    order, seen = [], set()
+    def visit(x):
+        if x in seen or x not in by: return
+        seen.add(x)
+        for q in by[x].get('prereqs') or []: visit(q)
+        order.append(x)
+    for n in nodes: visit(n['id'])
+    draft = set(course.get('draft') or [])
+    ok = lambda n: (not n.get('langs') or code in n['langs']) and (not n.get('path') or not typ or n['path'] == typ)
+    live = [by[i] for i in order if ok(by[i]) and i not in draft]
+    F = [('F1', ['fd.00', 'fd.01', 'fd.02', 'fd.03', 'fd.04']), ('F2', ['fd.05', 'fd.06']), ('F3', ['fd.07', 'fd.08', 'fd.09']), ('F4', ['fd.10', 'fd.11', 'fd.12']), ('F5', ['fd.13', 'fd.14', 'fd.15']), ('F6', ['fd.16', 'fd.17', 'fd.18'])]
+    found = lambda n: n.get('kind') == 'lesson' and n.get('stage') not in ('core', 'advanced')
+    lessons = [n['id'] for n in live if found(n)]; used = set(); out = []
+    for b, ids in F:
+        got = [i for i in ids if i in lessons]
+        if got: out.append((b, 'foundations', got)); used |= set(got)
+    rest = [i for i in lessons if i not in used]; used |= set(rest)
+    for i in range(0, len(rest), 3): out.append((f'F{sum(1 for x in out if x[1] == "foundations") + 1}', 'foundations', rest[i:i + 3]))
+    fields = {}
+    for n in live:
+        if n.get('kind') == 'field': fields.setdefault(n.get('field'), {}).setdefault(n.get('tier') or 1, []).append(n['id'])
+    v = 0
+    for f, tiers in fields.items():
+        for t in sorted(tiers): v += 1; out.append((f'V{v}', 'field', tiers[t]))
+    core = [n['id'] for n in live if n['id'] not in used and n.get('kind') != 'field' and not found(n)]
+    for i in range(0, len(core), 4): out.append((f'K{i // 4 + 1}', 'core', core[i:i + 4]))
+    print(f'# {course["id"]} · {code}' + (f' ({typ})' if typ else ' (type not known yet: nodes of one type\'s path are listed)'))
+    for b, kind, ids in out: print(f'{b:<4} {kind:<12} {",".join(ids):<40} {"; ".join(by[i]["title"] for i in ids)}')
+    if draft: print('draft (written later, when the other languages have them): ' + ', '.join(i for i in order if i in draft))
+    return out
+
+
+def package(root, code, out_file=None):
+    """The language <code> of a course folder → one file (noema.langpack/v1)."""
+    root = root.rstrip('/'); J = lambda rel: rj(os.path.join(root, rel)) if os.path.exists(os.path.join(root, rel)) else None
+    course = J('course.json')
+    if not course or code not in (course.get('languages') or []): sys.exit(f'{code} is not a language of the course in {root}')
+    from validate_lang import validate, phenomena_path, world
+    v = validate(root, code, strict=True)
+    if v.errors:
+        print('\n'.join('❌ ' + e for e in v.errors[:60]) + (f'\n… and {len(v.errors) - 60} more' if len(v.errors) > 60 else ''))
+        sys.exit(f'\n❌ not packaged: validate_lang.py --strict --lang {code} has {len(v.errors)} error(s) — fix them first')
+    import lang_refcheck
+    rep = lang_refcheck.run(root, code, offline=True)
+    bad = {k: r['problems'] for k, r in rep.items() if r['problems']}
+    if bad:
+        for k, ps in list(bad.items())[:30]: print(f'❌ {k}: ' + '; '.join(ps))
+        sys.exit(f'\n❌ not packaged: {len(bad)} word(s) disagree with Wiktionary (lang_refcheck.py) — fix them or explain them in ref.override')
+    b = os.path.join(root, 'lang', code)
+    lj = J(f'lang/{code}/language.json'); nodes = J('core/nodes.json')['nodes']
+    fns = [os.path.basename(f)[:-5] for f in sorted(glob.glob(os.path.join(root, 'core', 'functions', '*.json')))]
+    lexicon = {n['id']: J(f'lang/{code}/lexicon/{n["id"]}.json') for n in nodes if J(f'lang/{code}/lexicon/{n["id"]}.json')}
+    grammar = {f: J(f'lang/{code}/grammar/{f}.json') for f in fns if J(f'lang/{code}/grammar/{f}.json')}
+    bank = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('sentences') or []]
+    exempt = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('fieldExemptions') or []]   # D19: a field that cannot show a node says why
+    pp = phenomena_path(root, code); phen = rj(pp) if pp else None
+    _, profiles, _, _ = world(root)
+    lib = rj(os.path.join(SHARED, '_typology', 'languages.json')) if os.path.exists(os.path.join(SHARED, '_typology', 'languages.json')) else {'languages': []}
+    in_lib = any(x.get('code') == code for x in lib.get('languages') or [])
+    see = {}
+    for L in course['languages']:
+        if L == code: continue
+        for f in fns:
+            g = J(f'lang/{L}/grammar/{f}.json')
+            adds = [x for x in (g or {}).get('seeAlso') or [] if x.get('lang') == code]
+            if adds: see.setdefault(L, {})[f] = adds
+    import subprocess
+    here = os.path.dirname(os.path.abspath(root))   # the catalogue next to the course (the skill's work/lang), else the repository's
+    pr = subprocess.run([sys.executable, os.path.join(TOOLS, 'lang_phenomena.py'), *(['--root', here] if os.path.exists(os.path.join(here, '_phenomena', code + '.json')) else []), '--lang', code, '--json'], capture_output=True, text=True)
+    try: ph = json.loads(pr.stdout[pr.stdout.index('{'):]).get(code) or {}
+    except (ValueError, KeyError): ph = {}
+    st = ph.get('status') or {}
+    pkg = {'format': PACK, 'course': course['id'], 'code': code, 'name': lj.get('name') or code, **({'nativeName': lj['nativeName']} if lj.get('nativeName') else {}),
+           **({'flag': lj['flag']} if lj.get('flag') else {}), 'built': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+           'language': lj, 'lexicon': lexicon, 'grammar': grammar, 'bank': bank, **({'fieldExemptions': exempt} if exempt else {}),
+           **({'script': J(f'lang/{code}/script.json')} if J(f'lang/{code}/script.json') else {}), **({'chars': J(f'lang/{code}/chars.json')} if J(f'lang/{code}/chars.json') else {}),
+           'phenomena': phen, **({'typology': profiles[code]} if code in profiles and not in_lib else {}), **({'seeAlso': see} if see else {}),
+           'checks': {'validator': {'errors': 0, 'warnings': len(v.warns), 'strict': True},
+                      'refcheck': {'words': len(rep), 'problems': 0, 'unverified': sum(1 for r in rep.values() if r['unverified']), 'offline': True},
+                      'phenomena': {'phenomena': ph.get('phenomena', 0), 'covered': st.get('covered', 0), 'partial': st.get('partial', 0), 'missing': st.get('missing', 0), 'errors': len(ph.get('errors') or [])}}}
+    if not phen: sys.exit(f'❌ not packaged: no catalogue of phenomena for {code} (_phenomena/{code}.json next to the course)')
+    out_file = out_file or f'{course["id"]}.lang-{code}.json'
+    with open(out_file, 'w', encoding='utf-8') as f: json.dump(pkg, f, ensure_ascii=False, separators=(',', ':'))
+    words = sum(len(x.get('lexemes') or []) for x in lexicon.values())
+    print(f'✅ {out_file}: {pkg["name"]} ({code}) for {course["id"]} — {words} words in {len(lexicon)} nodes, {len(grammar)} grammar pages, {len(bank)} sentences, '
+          f'{len(phen.get("phenomena") or [])} phenomena{", its typological profile" if "typology" in pkg else ""}{f", seeAlso on {sum(len(x) for x in see.values())} pages of other languages" if see else ""} · {os.path.getsize(out_file) // 1024} KB')
+    return out_file
 
 
 def task_parts(tid):
@@ -159,7 +320,10 @@ def answer(root, tid):
 
 if __name__ == '__main__':
     a = sys.argv[1:]
-    if len(a) >= 3 and a[0] == 'unpack': unpack(a[1], a[2], a[a.index('--patch') + 1] if '--patch' in a else None)
+    opt = lambda k: a[a.index(k) + 1] if k in a and a.index(k) + 1 < len(a) else None
+    if len(a) >= 3 and a[0] == 'unpack': unpack(a[1], a[2], opt('--patch'), opt('--package'), '--world' in a)
+    elif len(a) >= 3 and a[0] == 'package': package(a[1], a[2], opt('-o'))
+    elif len(a) == 3 and a[0] == 'plan': plan(a[1], a[2])
     elif len(a) == 4 and a[0] == 'apply': apply(a[1], a[2], a[3])
     elif len(a) == 3 and a[0] == 'answer': answer(a[1], a[2])
     else: print(__doc__); sys.exit(2)

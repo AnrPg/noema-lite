@@ -4,6 +4,7 @@
   python3 tools/build.py                 # validate + build engine, every subject pack and the registry
   python3 tools/build.py site            # + dist/site/  (what the website serves: no PDFs, no private packs, no backups)
   python3 tools/build.py skill           # + dist/noema-pack-builder.zip  (the Claude skill users add to their own Claude)
+                                         #   + dist/noema-language-builder.zip  (a whole language in one prompt, docs/LANGUAGES.md §10.2)
   python3 tools/build.py bundle [--subjects a,b] [--with-local-config]
                                          # + dist/noema-lite.html  (one self-contained file, e.g. for phone/offline)
   python3 tools/build.py --no-validate   # skip validation (faster)
@@ -176,13 +177,35 @@ def build_site(metas):
     # OAuth consent page for the Claude connector (Supabase → <site>/oauth/consent?authorization_id=…) → the app
     wt(os.path.join(out, 'oauth', 'consent', 'index.html'), '<!doctype html><meta charset="utf-8"><title>noema-lite</title><script>location.replace("/" + location.search + "#/connect-claude")</script>')
     build_skill(os.path.join(out, 'downloads', 'noema-pack-builder.zip'))
+    build_lang_skill(os.path.join(out, 'downloads', 'noema-language-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
     build_img_function(os.path.join(ROOT, 'dist', 'functions'))
     wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
     print('site →', os.path.relpath(out, ROOT))
 
 SKILL_TOOLS = ['noema_lib.py', 'validate.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
-LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py']
+LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js']
+def lang_builder_files():
+    """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
+    templates and mkbrief.py travel with it, and langcore.js for the read-back and the package check, so it works without the repo."""
+    src = os.path.join(ROOT, 'skill', 'noema-language-builder'); out = []
+    for f in sorted(glob.glob(os.path.join(src, '**', '*'), recursive=True)):
+        if os.path.isfile(f) and '__pycache__' not in f: out.append((f, os.path.relpath(f, src).replace(os.sep, '/')))
+    for t in LANG_SKILL_TOOLS: out.append((os.path.join(ROOT, 'tools', t), 'scripts/' + t))
+    out += [(os.path.join(ROOT, 'tools', 'lang_sources', 'mkbrief.py'), 'scripts/mkbrief.py'), (os.path.join(ENGINE, 'langcore.js'), 'scripts/langcore.js'),
+            (os.path.join(ROOT, 'docs', 'LANGUAGES.md'), 'references/LANGUAGES.md'), (os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md'), 'references/LANGUAGE_RULES.md'),
+            (os.path.join(ROOT, 'docs', 'NEW_LANGUAGE_PLAYBOOK.md'), 'references/NEW_LANGUAGE_PLAYBOOK.md'), (os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'references/CONTENT_SPEC.md'),
+            (os.path.join(ROOT, 'tools', 'lang_sources', 'AGENT_BRIEF.md'), 'references/AGENT_BRIEF.md')]
+    out += [(f, 'references/briefs/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'lang_sources', 'briefs', '*.txt')))]
+    out += [(f, 'schemas/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang*.schema.json')))]
+    for d in ('_typology', '_phenomena'): out += [(f, f'library/languages/{d}/{os.path.basename(f)}') for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json')))]
+    return [(a, b) for a, b in out if os.path.exists(a)]
+def build_lang_skill(out_zip):
+    """dist/noema-language-builder.zip (and downloads/ on the website): one prompt → a whole language as a package."""
+    os.makedirs(os.path.dirname(out_zip), exist_ok=True)
+    with zipfile.ZipFile(out_zip, 'w', zipfile.ZIP_DEFLATED) as z:
+        for a, b in lang_builder_files(): z.write(a, 'noema-language-builder/' + b)
+    print('skill →', os.path.relpath(out_zip, ROOT))
 def build_skill(out_zip):
     """The Claude skill (skill/noema-pack-builder) + the shared tools and the content contract, as one zip."""
     src = os.path.join(ROOT, 'skill', 'noema-pack-builder')
@@ -201,6 +224,11 @@ def build_skill(out_zip):
         if os.path.exists(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json')): z.write(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json'), 'noema-pack-builder/schemas/noema.lang.v1.schema.json')
         for d in ('_typology', '_phenomena'):
             for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json'))): z.write(f, f'noema-pack-builder/library/languages/{d}/{os.path.basename(f)}')
+        # a whole language in one prompt (docs/LANGUAGES.md §10.2): the skill noema-language-builder as LANGUAGE_BUILDER.md + its files
+        have = set(z.namelist())
+        for a, b in lang_builder_files():
+            name = 'noema-pack-builder/' + ('LANGUAGE_BUILDER.md' if b == 'SKILL.md' else b)
+            if name not in have: z.write(a, name); have.add(name)
     print('skill →', os.path.relpath(out_zip, ROOT))
 
 def public_config():
@@ -302,6 +330,6 @@ if __name__ == '__main__':
     wt(os.path.join(LIB, 'registry.js'), build_registry(metas))
     print(f'registry: {len(metas)} subjects')
     if 'site' in args: build_site(metas)
-    if 'skill' in args: build_skill(os.path.join(ROOT, 'dist', 'noema-pack-builder.zip'))
+    if 'skill' in args: build_skill(os.path.join(ROOT, 'dist', 'noema-pack-builder.zip')); build_lang_skill(os.path.join(ROOT, 'dist', 'noema-language-builder.zip'))
     if 'bundle' in args: build_bundle(metas)
     if failed: print('FAILED:', ', '.join(failed)); sys.exit(1)
