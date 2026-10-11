@@ -161,11 +161,13 @@
   const ready = load(state.locale).then(() => { apply(true); return state.locale; });
 
   /* ---------- Intl helpers (never hand-formatted) ---------- */
+  const COLL = { c: null, loc: null };
   const fmt = {
     number: (n, o) => new Intl.NumberFormat(intlTag(state.locale), o).format(n),
     percent: (x, o) => new Intl.NumberFormat(intlTag(state.locale), { style: 'percent', maximumFractionDigits: 0, ...o }).format(x),
-    date: (d, o = { dateStyle: 'medium' }) => new Intl.DateTimeFormat(intlTag(state.locale), o).format(d instanceof Date ? d : new Date(d)),
-    time: (d, o = { timeStyle: 'short' }) => new Intl.DateTimeFormat(intlTag(state.locale), o).format(d instanceof Date ? d : new Date(d)),
+    // a missing or broken time stamp (an old record, a hand-edited backup) gives '' — never a RangeError that stops a whole page from drawing
+    date: (d, o = { dateStyle: 'medium' }) => { const x = d instanceof Date ? d : new Date(d); return isNaN(x) ? '' : new Intl.DateTimeFormat(intlTag(state.locale), o).format(x); },
+    time: (d, o = { timeStyle: 'short' }) => { const x = d instanceof Date ? d : new Date(d); return isNaN(x) ? '' : new Intl.DateTimeFormat(intlTag(state.locale), o).format(x); },
     relative: (v, unit, o = { numeric: 'auto' }) => new Intl.RelativeTimeFormat(intlTag(state.locale), o).format(v, unit),
     /** “3 days ago” from a time stamp, in the largest fitting unit. */
     ago(ts, now = Date.now()) {
@@ -175,7 +177,7 @@
     },
     list: (items, o = { type: 'conjunction' }) => new Intl.ListFormat(state.locale, o).format(items.map(String)),
     collator: (o = { sensitivity: 'base', numeric: true }) => new Intl.Collator(state.locale, o),
-    compare: (a, b) => fmt.collator().compare(String(a ?? ''), String(b ?? '')),
+    compare: (a, b) => { if (!COLL.c || COLL.loc !== state.locale) { COLL.c = fmt.collator(); COLL.loc = state.locale; } return COLL.c.compare(String(a ?? ''), String(b ?? '')); },   // one Collator per locale: a sort calls this thousands of times
     plural: n => new Intl.PluralRules(state.locale).select(n),
     /** A person's name in the locale's order (family first for ja and zh). */
     name: (given, family) => (BY[state.locale.toLowerCase()] || {}).familyFirst ? [family, given].filter(Boolean).join('') : [given, family].filter(Boolean).join(' '),

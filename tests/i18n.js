@@ -81,6 +81,10 @@ ok(F.list(['α', 'β', 'γ']) === 'α, β και γ', 'list in el: ' + F.list(['
 ok(['ω', 'α', 'Ά'].sort(F.compare).join('') === 'αΆω', 'collation in el: ' + ['ω', 'α', 'Ά'].sort(F.compare).join(''));
 ok(F.upper('άλμα') === 'ΆΛΜΑ' || F.upper('άλμα') === 'ΑΛΜΑ', 'locale-aware upper case');
 ok(/πριν από 3 ημέρες|πριν 3 ημέρες/.test(F.ago(Date.now() - 3 * 86400e3)), 'relative time: ' + F.ago(Date.now() - 3 * 86400e3));
+{ let r; try { r = [F.date(undefined), F.date('not a date'), F.time(NaN), F.date(0)]; } catch (e) { r = e.message; }
+  ok(Array.isArray(r) && r[0] === '' && r[1] === '' && r[2] === '' && /1970/.test(r[3]), 'a missing or broken time stamp formats as "" (no RangeError): ' + JSON.stringify(r)); }
+{ const big = [...Array(3000)].map((_, i) => 'θέμα ' + ((i * 7919) % 3001)), t0 = Date.now(); big.sort(F.compare);
+  ok(big[0] === 'θέμα 0' && big[1] === 'θέμα 1' && big[2] === 'θέμα 2' && Date.now() - t0 < 1500, `a sort with fmt.compare is fast (${Date.now() - t0} ms for 3000) and numeric`); }
 
 console.log('catalog checks');
 const chk = cp.spawnSync('node', [path.join(ROOT, 'tools/i18n/check.js'), '--json'], { encoding: 'utf8' });
