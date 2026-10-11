@@ -1,3 +1,4 @@
+# keys built at run time (prefix* = every key that starts with it); see docs/i18n.md §5.1
 engine.exType.*
 engine.exTag.*
 engine.ex.ok.*
