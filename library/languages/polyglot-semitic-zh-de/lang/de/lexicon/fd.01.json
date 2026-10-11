@@ -1460,7 +1460,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "es corresponds to English it, which goes back to an older form with h- (Old English hit)."
+      "text": "es corresponds to English it, which goes back to an older form with h- (hit)."
      }
     ]
    }
@@ -2780,7 +2780,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "Person is English person; both come from Latin persona, an actor’s mask."
+      "text": "Person is English person; both come from persona, an actor’s mask."
      },
      {
       "for": "ru",
@@ -3437,7 +3437,7 @@
      {
       "for": "ru",
       "rel": "same",
-      "text": "студент has the same Latin source and the same meaning: only at university."
+      "text": "студент has the same source (studens) and the same meaning: only at university."
      },
      {
       "for": "en",

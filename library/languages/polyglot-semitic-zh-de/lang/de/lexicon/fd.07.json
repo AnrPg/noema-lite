@@ -1734,17 +1734,17 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "Käse and English cheese both come from Latin cāseus."
+      "text": "Käse and English cheese both come from cāseus."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Käse and queso both come from Latin cāseus."
+      "text": "Käse and queso both come from cāseus."
      },
      {
       "for": "pt",
       "rel": "similar",
-      "text": "Käse and queijo both come from Latin cāseus."
+      "text": "Käse and queijo both come from cāseus."
      },
      {
       "for": "el",
@@ -1933,7 +1933,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English once had its own word ey (plural eyren), the twin of Ei; egg came from Old Norse. In 1490 William Caxton told of a woman who did not understand “eggys”, only “eyren”. Ei is related to English egg (and the old form ey)."
+      "text": "English once had its own word ey (plural eyren), the twin of Ei; egg is a northern loan. In 1490 William Caxton told of a woman who did not understand “eggys”, only “eyren”. Ei is related to English egg (and the old form ey)."
      },
      {
       "for": "el",
@@ -2116,7 +2116,7 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English splits meat and flesh and took beef, pork and mutton from Norman French; German says Fleisch and builds compounds."
+      "text": "English splits meat and flesh and borrowed beef, pork and mutton; German says Fleisch and builds compounds."
      },
      {
       "for": "en",
@@ -2656,7 +2656,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "Reis and English rice both come from Greek ὄρυζα."
+      "text": "Reis and English rice both come from ὄρυζα."
      }
     ]
    }
@@ -2838,12 +2838,12 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English supper comes from French souper, “to have soup” – the evening meal was soup."
+      "text": "English supper comes from souper, “to have soup” – the evening meal was soup."
      },
      {
       "for": "ru",
       "rel": "same",
-      "text": "суп (from French soupe) is the same word."
+      "text": "суп (from soupe) is the same word."
      },
      {
       "for": "el",
@@ -3539,7 +3539,7 @@
      {
       "for": "hi",
       "rel": "similar",
-      "text": "Zucker goes back to Sanskrit शर्करा (śarkarā) – the word behind शक्कर (śakkar)."
+      "text": "Zucker goes back to शर्करा (śarkarā) – the word behind शक्कर (śakkar)."
      }
     ]
    }
@@ -3718,7 +3718,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "The root of salary, Latin salārium, is linked to salt as well."
+      "text": "The root of salary, salārium, is linked to salt as well."
      },
      {
       "for": "el",
@@ -4448,7 +4448,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "galaxy (from Greek γάλα, milk) has the same picture as die Milchstraße."
+      "text": "galaxy (from γάλα, milk) has the same picture as die Milchstraße."
      },
      {
       "for": "el",
@@ -4816,12 +4816,12 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "Wein and English wine both come from Latin vīnum."
+      "text": "Wein and English wine both come from vīnum."
      },
      {
       "for": "ru",
       "rel": "similar",
-      "text": "Wein and вино both come from Latin vīnum."
+      "text": "Wein and вино both come from vīnum."
      },
      {
       "for": "el",

@@ -213,7 +213,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "Haus and house were the same word a thousand years ago: Old English also said hūs."
+      "text": "Haus and house were the same word a thousand years ago: older English also said hūs."
      }
     ]
    }
@@ -864,17 +864,17 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English window is a different word, from Old Norse “wind-eye”."
+      "text": "English window is a different word, a borrowed “wind-eye”."
      },
      {
       "for": "fr",
       "rel": "same",
-      "text": "Fenster and fenêtre both come from Latin fenestra."
+      "text": "Fenster and fenêtre both come from fenestra."
      },
      {
       "for": "it",
       "rel": "same",
-      "text": "Fenster and finestra both come from Latin fenestra."
+      "text": "Fenster and finestra both come from fenestra."
      }
     ]
    }
@@ -3229,7 +3229,7 @@
      "Tasse came from Arabic طَاس (ṭās, a bowl) through French."
     ],
     "pitfalls": [
-     "No “of”: eine Tasse Kaffee (a cup of coffee), zwei Tassen Tee.",
+     "Container and contents stand side by side: eine Tasse Kaffee, zwei Tassen Tee.",
      "die Tasse (cup) ≠ die Tasche (bag)."
     ],
     "subtleties": [
@@ -3240,6 +3240,11 @@
       "for": "fr",
       "rel": "same",
       "text": "Tasse is the same word as tasse – and means the same: a cup."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “of”: a cup of coffee is eine Tasse Kaffee."
      }
     ]
    }
@@ -3427,13 +3432,18 @@
      "Glasses for the eyes are a Brille, not Gläser."
     ],
     "subtleties": [
-     "ein Glas Wasser – no “of”, like eine Tasse Kaffee."
+     "ein Glas Wasser – container and contents side by side, like eine Tasse Kaffee."
     ],
     "notes": [
      {
       "for": "en",
       "rel": "similar",
       "text": "Glas is related to English glass."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “of”: a glass of water is ein Glas Wasser."
      }
     ]
    }
@@ -3573,13 +3583,18 @@
      "Plural = singular: die Teller (dative den Tellern)."
     ],
     "subtleties": [
-     "ein Teller Suppe – no “of”, like eine Tasse Kaffee."
+     "ein Teller Suppe – container and contents side by side, like eine Tasse Kaffee."
     ],
     "notes": [
      {
       "for": "en",
       "rel": "trap",
       "text": "Teller is a plate, not a bank clerk."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “of”: a plate of soup is ein Teller Suppe."
      }
     ]
    }

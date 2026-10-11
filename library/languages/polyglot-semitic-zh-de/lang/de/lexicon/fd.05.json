@@ -97,7 +97,7 @@
      {
       "for": "el",
       "rel": "different",
-      "text": "μηδέν is null in German – a word from Latin nullus (“none”)."
+      "text": "μηδέν is null in German – a word from nullus (“none”)."
      },
      {
       "for": "en",
@@ -2425,7 +2425,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "poly- in English words is the Greek twin of viel."
+      "text": "poly- in English words is a twin of viel."
      }
     ]
    }

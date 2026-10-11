@@ -401,7 +401,7 @@
      {
       "for": "pt",
       "rel": "similar",
-      "text": "Maniok goes back, through French, to mandioca."
+      "text": "Maniok goes back to mandioca."
      }
     ]
    }
@@ -558,7 +558,7 @@
      {
       "for": "en",
       "rel": "same",
-      "text": "Spargel and English asparagus both come from Latin asparagus."
+      "text": "Spargel and English asparagus both come from asparagus."
      }
     ]
    }
@@ -2400,7 +2400,7 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English swede is short for “Swedish turnip”; German says Steckrübe."
+      "text": "English swede is short for a “turnip from Sweden”; German says Steckrübe."
      }
     ]
    }

@@ -5026,17 +5026,17 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "Straße and English street come from the same Latin strata."
+      "text": "Straße and English street come from the same strata (“paved road”)."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Straße and strada come from the same Latin strata."
+      "text": "Straße and strada come from the same strata (“paved road”)."
      },
      {
       "for": "el",
       "rel": "similar",
-      "text": "Straße and colloquial στράτα come from the same Latin strata."
+      "text": "Straße and colloquial στράτα come from the same strata (“paved road”)."
      }
     ]
    }
@@ -5242,7 +5242,7 @@
      {
       "for": "el",
       "rel": "same",
-      "text": "Platz is πλατεία, borrowed through Latin and French."
+      "text": "Platz goes back to πλατεία, borrowed by way of other languages."
      },
      {
       "for": "en",
@@ -5915,7 +5915,7 @@
      {
       "for": "el",
       "rel": "different",
-      "text": "Greece is Griechenland in German, after Latin Graeci – not after Ελλάδα."
+      "text": "Greece is Griechenland in German, after Graeci – not after Ελλάδα."
      },
      {
       "for": "en",
