@@ -14,7 +14,7 @@
     { tag: 'en', name: 'English' }, { tag: 'el', name: 'Ελληνικά' }, { tag: 'ru', name: 'Русский' }, { tag: 'fr', name: 'Français' },
     { tag: 'ar-EG', name: 'العربية (مصر)', dir: 'rtl' }, { tag: 'de', name: 'Deutsch' }, { tag: 'hi', name: 'हिन्दी' },
     { tag: 'zh-Hans', name: '中文（简体）' }, { tag: 'zh-Hant', name: '中文（繁體）' }, { tag: 'ja', name: '日本語', familyFirst: true },
-    { tag: 'it', name: 'Italiano' }, { tag: 'es-ES', name: 'Español (España)' }, { tag: 'sq', name: 'Shqip' }, { tag: 'pt-PT', name: 'Português (Portugal)' },
+    { tag: 'it', name: 'Italiano' }, { tag: 'es-ES', name: 'Español (España)' }, { tag: 'sq', name: 'Shqip' }, { tag: 'pt-PT', name: 'Português (Portugal)' }, { tag: 'tr', name: 'Türkçe' },
     // pseudo-locales for testing (never offered unless config.pseudoLocales): accented +40 %, and right-to-left
     { tag: 'en-XA', name: '[Ƥşḗŭḓǿ]', pseudo: true }, { tag: 'ar-XB', name: '[ˁƤşḗŭḓǿ RTL]', pseudo: true, dir: 'rtl' },
   ];

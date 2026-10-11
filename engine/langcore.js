@@ -253,7 +253,7 @@
      The native language decides the language of the explanations (the locale facade, when one is on) and the only comparisons
      shown (notes for that language, else for its branch / family / type). Pure: the app passes the account's a:settings.native. */
   /** The supported natives = the UI locales (docs/i18n.md §2), as language codes. */
-  const SUPPORTED_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt'];
+  const SUPPORTED_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr'];
   const baseLang = t => String(t || '').toLowerCase().split(/[-_]/)[0];
   /** The learner's native language, completed from the world profiles → {code?, name, type, family, branch, supported} or null.
    *  native: a:settings.native ({code} | {name, type, family, branch}); without it the first settings.knows entry at level native. */
@@ -3503,7 +3503,7 @@
     // D19 (docs/language-packs.md): every grammar page has a contrast note for each supported native (the UI locales'
     // languages) but its own language + the five type notes. strict: false while the library content is rewritten — then a
     // page needs notes for at least D19.minNatives supported natives and the full list is reported only when strict is on.
-    const D19 = { natives: ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt'],
+    const D19 = { natives: ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr'],
       groups: ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic'], minNatives: 5, strict: false };
     const d19Required = code => [...D19.natives.filter(c => c !== code), ...D19.groups];
     // D18: the reference set (library/languages/_typology/reference.json) with the type of each language — source material since D19

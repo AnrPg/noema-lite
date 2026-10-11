@@ -9,7 +9,7 @@ const IMF = ctx.__IMF.IntlMessageFormat;
 const T = { literal: 0, argument: 1, number: 2, date: 3, time: 4, select: 5, plural: 6, pound: 7, tag: 8 };
 
 /** The UI locales (BCP 47) in the order of docs/i18n.md. */
-const LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT'];
+const LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT', 'tr'];
 /** The catalog components: every folder of i18n/ except i18n/glossary (the translators' term lists, CSV for Weblate). */
 const NOT_COMPONENTS = new Set(['glossary']);
 const components = () => fs.readdirSync(CAT_DIR).filter(d => !NOT_COMPONENTS.has(d) && fs.statSync(path.join(CAT_DIR, d)).isDirectory()).sort();

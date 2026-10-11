@@ -41,7 +41,7 @@ NAMES_DIR = _first(os.path.join(HERE, 'i18n', 'langnames'), os.path.join(REPO, '
 GLOSSARY_DIR = os.path.join(REPO, 'i18n', 'glossary')
 
 MASTER = 'en'
-SUPPORTED = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt']        # supported natives = the UI locales' languages
+SUPPORTED = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr']        # supported natives = the UI locales' languages
 LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT']
 TYPES = ['fusional', 'agglutinating', 'isolating', 'polysynthetic']
 REQUIRED_GROUPS = ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']

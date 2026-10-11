@@ -331,7 +331,7 @@ def check_phenomena(v, L, path):
 
 
 NOTE_REL = {'same', 'similar', 'different', 'new', 'trap'}
-D19_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt']   # supported natives = the UI locales' languages
+D19_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr']   # supported natives = the UI locales' languages
 D19_GROUPS = ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']
 def D19_REQUIRED(L): return [c for c in D19_NATIVES if c != L] + D19_GROUPS
 CATEGORIES = {'overview', 'script', 'phonology', 'morphology', 'morphosyntax', 'syntax', 'semantics', 'pragmatics', 'lexicon',
