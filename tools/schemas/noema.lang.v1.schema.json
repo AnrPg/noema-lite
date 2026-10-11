@@ -527,6 +527,14 @@
         },
         "why": {
          "type": "string"
+        },
+        "prominent": {
+         "type": "boolean",
+         "description": "R3: shown on the word card right under the word, always visible (true), or folded (false). Default: every stated parameter visible, except those already shown with the headword (transliteration, pinyin) and an uninformative {none} (folded; “no plural”, “no measure word” stay visible)"
+        },
+        "order": {
+         "type": "number",
+         "description": "R3: place in the parameters block under the word (lower first; the most important first). Default: declaration order (parameters with an order come before those without)"
         }
        }
       }

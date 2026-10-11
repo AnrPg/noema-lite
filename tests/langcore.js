@@ -255,6 +255,29 @@ ok(arCard.examples[0].unlearned.includes('الْجَزَرِ'.normalize('NFC')) 
 const fnCard = N.wordCard(C, L, 'he', 'he:et');
 ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCard.flags.length === 1, 'a word without a concept: its role, one flag');
 
+// ---------- the word's parameters under the word (R3, D14): wordParams ----------
+{ const P = (c, id) => N.wordParams(C, id, c), row = (ps, id) => ps.find(r => r.id === id);
+  const jz = P('ar', 'ar:jazar'), ids = jz.map(r => r.id);
+  ok(ids.indexOf('gender') < ids.indexOf('plurals') && ids.indexOf('plurals') < ids.indexOf('dual') && ids.indexOf('dual') < ids.indexOf('unit'), 'wordParams: declaration order by default (gender → plurals → dual → unit noun)');
+  const pl = row(jz, 'plurals');
+  ok(pl.prominent && pl.values.length === 1 && /[\u0600-\u06ff]/.test(pl.values[0].forms[0].text) && pl.values[0].senses.length && pl.values[0].senses[0].n === 1 && pl.values[0].tags.length === 1,
+    'Arabic plural: the form in Arabic letters, its kind (one tag: “sound feminine” covers “sound”), the meanings it belongs to');
+  ok(row(jz, 'root').none && !row(jz, 'root').prominent && !row(jz, 'translit').prominent && row(jz, 'dual').prominent, 'a reasoned “none” and the transliteration (shown with the word) are folded; the dual is visible');
+  const gu = P('de', 'de:Gurke');
+  ok(row(gu, 'gender').values[0].forms[0].text === 'die Gurke' && row(gu, 'plurals').values[0].forms.some(f => f.text === 'die Gurken'), 'German noun: “die Gurke” (article + word), plural “die Gurken”');
+  ok(row(gu, 'genitive')?.values[0].forms[0].text === 'der Gurke' && gu.indexOf(row(gu, 'genitive')) === gu.indexOf(row(gu, 'gender')) + 1, 'German noun: the genitive right after the article');
+  const hl = P('zh', 'zh:huluobo');
+  ok(row(hl, 'measure').prominent && row(hl, 'measure').values[0].forms[0].text === '根' && !row(hl, 'pinyin').prominent, 'Chinese: the measure word visible, the pinyin (under the characters already) folded');
+  ok(row(P('zh', 'zh:chi'), 'neg').values[0].forms.map(f => f.text).join() === '不,没', 'Chinese: “bu+mei” shown as the words 不 · 没');
+  const W = C.lang.de.language.wordFeatures.NOUN, keep = JSON.stringify(W);
+  W.find(d => d.id === 'declension').order = 1; W.find(d => d.id === 'declension').prominent = false; W.find(d => d.id === 'plurals').order = 2;
+  const o = P('de', 'de:Gurke');
+  ok(o[0].id === 'declension' && !o[0].prominent && o[1].id === 'plurals' && o[2].id === 'gender', 'declared order / prominent win over the declaration order and the defaults');
+  C.lang.de.language.wordFeatures.NOUN = JSON.parse(keep);
+  ok(same(N.wordCard(C, L, 'de', 'de:Gurke').params.map(r => r.id), P('de', 'de:Gurke').map(r => r.id)), 'the word card carries the parameters (card.params)');
+  ok(same(P('xx', 'de:Gurke'), []) && same(P('de', 'de:nothing'), []), 'an unknown language or word: no parameters');
+}
+
 // ---------- exercises from stored data (§6.7) ----------
 { let r = 7; const rng = () => (r = (r * 16807) % 2147483647) / 2147483647;
   const kd = N.known(C, L, 'de'), ex = N.exercises(C, L, 'de', 'fn.definite', { k: kd, rng, max: 40 });

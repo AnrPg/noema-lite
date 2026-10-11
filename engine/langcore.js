@@ -808,7 +808,7 @@
       sec('etymology', lcU('lc.ui.card.etymology'), p.etymology ? [p.etymology] : []),
       sec('funFacts', lcU('lc.ui.card.funFacts'), p.funFacts),
     ].filter(Boolean);
-    return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx),
+    return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx), params: wordParams(C, lx, code),
       state: k.state[lexId], flags, frequency: p.frequency || null, status: p.status || null, register: [].concat(p.register || []), connotation: p.connotation || null,
       intensity: p.intensity ?? null, feeling: p.feeling || '', synonymsNone: p.synonymsNone || '', examples, sections, hasProfile: !!lx.profile };
   }
@@ -848,6 +848,151 @@
       const text = show(val); if (text) out.push({ id: d.id, title: d.title || d.id, text, none: !!(val && typeof val === 'object' && 'none' in val) });
     }
     return out;
+  }
+
+  /* ---------- the word's parameters, shown right under the word (R3, D14): structured, in display order ---------- */
+  /* i18n-ignore-start (ids of parameters, item keys, codes) */
+  /** Parameters already shown with the headword (transliteration, pinyin under the word): folded unless the language marks them prominent. */
+  const PARAM_IN_HEAD = new Set(['translit', 'pinyin']);
+  /** Parameters whose “none” says something worth seeing at once (“no plural”, “no measure word”). */
+  const PARAM_NONE_TELLS = new Set(['plurals', 'measure']);
+  /** Keys of a list item that hold a text in the explanation language (the rest of the string keys are forms of the language). */
+  const PARAM_TEXT_KEYS = new Set(['note', 'what', 'when', 'meaning', 'register', 'why', 'gloss']);
+  /** Keys of a list item that always hold a form of the language (pinyin and transliterations are written in Latin letters). */
+  const PARAM_FORM_KEYS = new Set(['form', 'pinyin', 'translit', 'trad', 'verb', 'object', 'example', 'part', 'linker', 'article']);
+  /** Enum codes of the declarations in words of the learner's language (a code not listed is shown as the course wrote it). */
+  const FV_KEY = { broken: 'lc.expl.fv.broken', soundMasc: 'lc.expl.fv.soundMasc', soundFem: 'lc.expl.fv.soundFem', triptote: 'lc.expl.fv.triptote',
+    diptote: 'lc.expl.fv.diptote', defective: 'lc.expl.fv.defective', invariable: 'lc.expl.fv.invariable', sound: 'lc.expl.fv.sound', active: 'lc.expl.fv.active',
+    passive: 'lc.expl.fv.passive', weak: 'lc.expl.fv.weak', strong: 'lc.expl.fv.strong', mixed: 'lc.expl.fv.mixed', modal: 'lc.expl.fv.modal', irregular: 'lc.expl.fv.irregular',
+    none: 'lc.expl.fv.none', dual: 'lc.expl.fv.dual', hollow: 'lc.expl.fv.hollow', assimilated: 'lc.expl.fv.assimilated', doubled: 'lc.expl.fv.doubled', hamzated: 'lc.expl.fv.hamzated',
+    regular: 'lc.expl.fv.regular', feminine: 'lc.expl.fv.feminine', adjectival: 'lc.expl.fv.adjectival', informal: 'lc.expl.fv.informal', formal: 'lc.expl.fv.formal', neutral: 'lc.expl.fv.neutral',
+    'no change': 'lc.expl.fv.noChange', 'not compared': 'lc.expl.fv.notCompared', umlaut: 'lc.expl.fv.umlaut', foreign: 'lc.expl.fv.foreign',
+    general: 'lc.expl.fv.clfGeneral', sortal: 'lc.expl.fv.clfSortal', container: 'lc.expl.fv.clfContainer', partitive: 'lc.expl.fv.clfPartitive', unit: 'lc.expl.fv.clfUnit',
+    collective: 'lc.expl.fv.clfCollective', verbal: 'lc.expl.fv.clfVerbal', before: 'lc.expl.fv.before', after: 'lc.expl.fv.after' };
+  /** Enum codes that stand for a word of the language (zh negation: bu → 不): shown as forms. */
+  const FV_FORM = { zh: { bu: '不', mei: '没' } };
+  /** Which declared parameter already shows a principal part (the rest of the principal parts are added after the declared ones). */
+  const PART_COVER = { gender: ['gender'], article: ['gender'], 'plural only': ['gender', 'plurals'], plural: ['plurals'], 'counted plural': ['plurals'], 'feminine plural': ['plurals'],
+    root: ['root'], transliteration: ['translit'], pinyin: ['pinyin'], traditional: ['trad'], 'measure word': ['measure'], binyan: ['binyan'], 'verb form': ['verbForm'],
+    'perfect with': ['aux'], feminine: ['feminine'], 'one (unit noun)': ['unit'] };
+  const PART_SKIP = new Set(['collective', 'transliteration', 'genitive', 'er/sie/es', 'du']);   // the word itself / shown with the word / German: made below
+  const AUX_3SG = { haben: 'hat', sein: 'ist' };
+  /* i18n-ignore-end */
+  const NON_LATIN = /[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
+  const fvWord = v => FV_KEY[v] ? lcX(FV_KEY[v]) : /^[A-Z]{2,}$/.test(v) && TAG_LABEL[v] ? TAG_LABEL[v] : String(v).replace(/>/g, ' → ');
+  const shortDef = d => (d || '').split(/[;,(—]/)[0].trim();
+  /** The word's parameters (R3, D14) as the card shows them: [{id, title, type, short, prominent, order, none, values, derived?}], sorted for display.
+   *  values: [{forms: [{text, lex?, sub?, latin?, role?}], text?, tags: [words], senses: [{id, n, def}], note?}] — forms are in the language (its script),
+   *  text / tags / note / def in the explanation language. `prominent` / `order` come from the declaration (wordFeatures), else:
+   *  declaration order; every stated parameter prominent, except those shown with the headword and the `none`s (folded) — but “no plural”.
+   *  German adds the forms learned with the word: der/die/das + word, genitive; present (du / er, with the vowel change), simple past,
+   *  past participle with hat / ist (per meaning when the auxiliary depends on it). Principal parts no parameter shows are added at the end. */
+  function wordParams(C, lexOrId, code) {
+    const X = C.lang[code]; if (!X) return [];
+    const lx = typeof lexOrId === 'string' ? X.lex[lexOrId] : lexOrId; if (!lx) return [];
+    const decl = ((X.language.wordFeatures || {})[lx.pos] || []), key = lx.class ? lx.pos + '.' + lx.class : lx.pos, F = lx.features || {};
+    const ss = (lx.profile || {}).senses || [], latinLang = !NON_LATIN.test(lx.lemma || '');
+    const senseOf = sid => { const i = ss.findIndex(s => s.id === sid); return { id: sid, n: i + 1, def: shortDef(ss[i] && ss[i].def) || sid }; };
+    if (!X._lemmaIdx) { X._lemmaIdx = new Map(); for (const [id, x] of Object.entries(X.lex)) { const k = nfc(x.lemma); X._lemmaIdx.set(k, [...(X._lemmaIdx.get(k) || []), id]); } }
+    const form = t => {
+      const text = String(t), o = { text };
+      if (!latinLang && !NON_LATIN.test(text)) { o.latin = true; return o; }   // pinyin, a transliteration
+      if (latinLang) return o;   // German auf, mit …: the same letters may be another word — no link guessed
+      const ids = X._lemmaIdx.get(nfc(text)) || [], id = ids.find(i => X.lex[i].pos === 'CLF') || ids[0];   // the word this form is (a measure word …)
+      if (id && id !== lx.id) { const w = X.lex[id]; o.lex = id; const sub = code === 'zh' ? (w.pinyin || '').replace(/\s+/g, '') : w.translit; if (sub) o.sub = sub; }
+      else if (code === 'zh' && [...text].length === 1) { let M = null; try { M = scriptModule(C, code); } catch (e) { } const e = M && M.items && M.items[text], r = e && (e.readings || e.wordReadings || [])[0]; if (r) o.sub = r; }   // a character the course has no word for: its reading
+      return o;
+    };
+    const isForm = s => latinLang || (NON_LATIN.test(s) && !/\p{Script=Latin}{3,}\s.*\p{Script=Latin}{3,}/u.test(s));   // a sentence of the explanation language with a word inside is a text
+    const val0 = () => ({ forms: [], tags: [], senses: [] });
+    const strVal = s => isForm(s) ? { ...val0(), forms: [form(s)] } : { ...val0(), text: String(s) };
+    /** A declared value → [value]: lists item by item, the item's keys by the declaration of the item. */
+    function values(d, v) {
+      if (typeof v === 'boolean') return [{ ...val0(), text: lcX(v ? 'lc.expl.yes' : 'lc.expl.no') }];
+      if (d.type === 'enum' && typeof v === 'string' && FV_FORM[code] && v.split('+').every(x => FV_FORM[code][x])) return [{ ...val0(), forms: v.split('+').map(x => form(FV_FORM[code][x])) }];
+      if (d.type === 'enum' || typeof v === 'number') return [{ ...val0(), text: fvWord(v) }];
+      if (d.type === 'strings' || (Array.isArray(v) && d.type !== 'list')) return [].concat(v).map(s => d.values ? { ...val0(), text: fvWord(s) } : strVal(s));
+      if (d.type !== 'list') return [strVal(v)];
+      const item = d.item || {};
+      return [].concat(v).map(it => {
+        if (!it || typeof it !== 'object') return strVal(it);
+        const o = val0(), notes = [];
+        const keys = [...Object.keys(item), ...Object.keys(it).filter(k => !(k in item))];
+        if (typeof it.verb === 'string' && typeof it.object === 'string') o.forms.push(form(it.verb + '…' + it.object));   // a splitting verb: 起…床
+        for (const k of keys) {
+          const t = String(item[k] || '').replace(/\?$/, ''), x = it[k];
+          if (x == null || x === '' || ((k === 'verb' || k === 'object') && o.forms.length && typeof it.verb === 'string' && typeof it.object === 'string')) continue;
+          if (t === 'senses' || k === 'senses') o.senses.push(...[].concat(x).map(senseOf));
+          else if (t === 'lexeme') { const w = X.lex[x]; if (w) o.forms.push({ ...form(w.lemma), lex: x }); }
+          else if (t === 'cell' || (t.startsWith('enum:') && /^[A-Z]+(;[A-Z0-9]+)+$/.test(x))) o.tags.push(cellLabel(x));
+          else if (t.startsWith('enum:')) { const w = X.lex[code + ':' + x]; if (k === 'prep' && w) o.forms.push({ ...form(w.lemma), lex: w.id }); else o.tags.push(fvWord(x)); }   // he: et → אֶת
+          else if (typeof x === 'boolean') o.tags.push(lcX(x ? 'lc.expl.yes' : 'lc.expl.no'));
+          else if (PARAM_TEXT_KEYS.has(k)) notes.push(String(x));
+          else if (k === 'translit' && typeof x === 'string' && o.forms.length && !o.forms[o.forms.length - 1].latin) o.forms[o.forms.length - 1].sub = x;   // under the form it spells
+          else if (k === 'pattern' && typeof x === 'string' && o.forms.length) o.forms.push({ ...form(x), role: 'pattern' });   // the plural's pattern (wazn): shown smaller, after the form
+          else if (PARAM_FORM_KEYS.has(k) && typeof x === 'string') o.forms.push(k === 'example' ? { ...form(x), role: 'example' } : form(x));
+          else if (typeof x === 'string' || typeof x === 'number') { if (isForm(String(x))) o.forms.push(form(x)); else notes.push(String(x)); }
+          else if (Array.isArray(x)) for (const y of x) if (typeof y === 'string') (isForm(y) ? o.forms.push(form(y)) : notes.push(y));
+        }
+        o.tags = o.tags.filter((t, i, a) => a.indexOf(t) === i && !a.some(u => u !== t && u.includes(t)));   // “sound feminine” says “sound” already
+        if (notes.length) o.note = notes.join(' · ');
+        return o;
+      });
+    }
+    const rows = [], pp = {};
+    for (const [label, value, id] of principalParts(C, code, lx)) pp[id] = { label, value };
+    const declared = new Set(decl.filter(d => !d.classes || d.classes.includes(key)).map(d => d.id));
+    const row = (d, i, extra = {}) => ({ id: d.id, title: d.title || d.id, type: d.type, short: ['enum', 'bool', 'int'].includes(d.type) || (d.type === 'strings' && !!d.values),
+      order: typeof d.order === 'number' ? d.order : 1000 + i * 10, prominent: d.prominent, none: null, values: [], ...extra });
+    const derive = (id, title, vals, at, n, prominent = true) => vals.length && rows.push({ id, title, type: 'derived', short: false, order: at + 0.01 * n, prominent, none: null, values: vals, derived: true });
+    const merged = new Set();
+    // German verbs: present (du / er), simple past, past participle with hat / ist — where the principal parts are declared, else first
+    const deVerb = code === 'de' && lx.pos === 'VERB' && !['praeteritum', 'preterite', 'pastParticiple', 'partizip2'].some(id => declared.has(id));
+    if (deVerb) {
+      const fm = lx.forms || {}, get = c => { const k = Object.keys(fm).find(x => canon(x) === canon(c)); return k ? fm[k] : null; };
+      const pps = Array.isArray(F.principalParts) && F.principalParts.length >= 4 ? F.principalParts : null;
+      const sep = typeof F.separable === 'string' ? F.separable : get('V;SEP'), withSep = w => w ? (sep ? w + ' ' + sep : w) : null;
+      const du = withSep(get('V;PRS;2;SG')), er = pps ? pps[1] : withSep(get('V;PRS;3;SG')), pst = pps ? pps[2] : withSep(get('V;PST;3;SG')), p2 = pps ? pps[3] : get('V;PTCP;PST');
+      const di = decl.findIndex(d => d.id === 'principalParts'), dd = di >= 0 ? decl[di] : null, at = dd && typeof dd.order === 'number' ? dd.order : 1000 + Math.max(di, -0.5) * 10;
+      const pc = F.presentChange, changes = typeof pc === 'string' ? pc !== 'no change' : true;
+      if (du || er) derive('present', lcX('lc.expl.param.present'), [{ ...val0(), forms: [du && form('du ' + du), er && form('er ' + er)].filter(Boolean), tags: changes && typeof pc === 'string' ? [fvWord(pc)] : [] }], at, 1, changes);
+      if (pst) derive('preterite', lcX('lc.expl.param.preterite'), [{ ...val0(), forms: [form(pst)] }], at, 2);
+      if (p2) {
+        const by = Array.isArray(F.auxBySense) && F.auxBySense.length ? F.auxBySense : null, aux = F.aux || lx.aux;
+        const vals = by ? by.map(b => ({ ...val0(), forms: [form((AUX_3SG[b.aux] || b.aux) + ' ' + p2)], senses: (b.senses || []).map(senseOf), ...(b.when ? { note: b.when } : {}) }))
+          : (aux === 'both' ? ['haben', 'sein'] : aux ? [aux] : []).map(a => ({ ...val0(), forms: [form((AUX_3SG[a] || a) + ' ' + p2)] }));
+        derive('participle', lcX('lc.expl.param.participle'), vals.length ? vals : [{ ...val0(), forms: [form(p2)] }], at, 3);
+        if (vals.length) { merged.add('aux'); merged.add('auxBySense'); }
+      }
+      if (rows.length) { merged.add('principalParts'); if (typeof pc === 'string') merged.add('presentChange'); }
+    }
+    decl.forEach((d, i) => {
+      if (d.classes && !d.classes.includes(key)) return;
+      if (merged.has(d.id)) return;
+      const v = d.at === 'top' ? lx[d.id] : F[d.id];
+      if (v == null || (Array.isArray(v) && !v.length)) return;
+      if (v && typeof v === 'object' && !Array.isArray(v) && 'none' in v) { rows.push(row(d, i, { none: String(v.none || '') })); return; }
+      const r = row(d, i);
+      if (code === 'de' && lx.pos === 'NOUN' && d.id === 'gender' && (pp.article || pp['plural only'])) {   // der / die / das + the word
+        r.short = false; r.values = [{ ...val0(), forms: [form((pp.article || pp['plural only']).value)], tags: [GENDER_WORD[v] || fvWord(v)] }];
+        rows.push(r);
+        if (pp.genitive && !declared.has('genitive')) derive('genitive', pp.genitive.label, [{ ...val0(), forms: [form(pp.genitive.value)] }], r.order, 1, d.prominent !== false);
+        return;
+      }
+      r.values = values(d, v);
+      if (code === 'de' && lx.pos === 'NOUN' && d.id === 'plurals') for (const x of r.values) x.forms = x.forms.map(f => /^(der|die|das) /.test(f.text) ? f : { ...f, text: 'die ' + f.text });
+      if (d.id === 'trad' && nfc(v) === nfc(lx.lemma) && d.prominent == null) r.prominent = false;   // written the same: nothing to see
+      rows.push(r);
+    });
+    // principal parts that no declared parameter shows (Arabic, Hebrew: the form with the article …)
+    let n = 0;
+    for (const [id, p] of Object.entries(pp)) {
+      if (PART_SKIP.has(id) || (code === 'de' && ['article', 'plural only', 'plural', 'perfect with'].includes(id))) continue;
+      if ((PART_COVER[id] || []).some(f => declared.has(f))) continue;
+      derive('part:' + id, p.label, [{ ...val0(), forms: [form(p.value)] }], 5000, ++n);
+    }
+    for (const r of rows) if (typeof r.prominent !== 'boolean') r.prominent = r.none != null ? PARAM_NONE_TELLS.has(r.id) : !PARAM_IN_HEAD.has(r.id);
+    return rows.map((r, i) => [r, i]).sort((a, b) => a[0].order - b[0].order || a[1] - b[1]).map(([r]) => r);
   }
 
   /* ---------- exercises made from stored data (§6.7 generators) — every answer comes from the course files ---------- */
@@ -1109,6 +1254,7 @@
     applyFacade, facadeProfiles, facadeAddress, facadeTexts, masterStamps, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+  API.wordParams = wordParams;   // R3: the word's parameters under the word
   /* ---------- P4 — Scripts and input: letters, characters, positional forms, vowel marks, tones, typed answers (§4.9, §5.5, §6.1, §8) ---------- */
   const ZWJ = '\u200d';
   const isMark = ch => /\p{M}/u.test(ch);
