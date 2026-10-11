@@ -26,7 +26,13 @@
       ],
       "note": "the plural forms: diese Bücher, mit diesen Kindern"
      }
-    ]
+    ],
+    "standalone": [
+     "dieser, diese, dieses – also dies (Dies ist mein Bruder.)"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;SG;MASC": "dieser",
@@ -192,7 +198,9 @@
     "reference": "persons and things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "dessen (formal: Peter und dessen Frau)",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "das",
@@ -474,6 +482,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -503,7 +517,13 @@
       ],
       "note": "the plural forms: jene, die … (those who …)"
      }
-    ]
+    ],
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;SG;MASC": "jener",
@@ -876,6 +896,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1007,6 +1033,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   }

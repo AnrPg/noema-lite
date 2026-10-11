@@ -22,6 +22,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Januars",
+     "des Januar"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -150,6 +162,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Februars",
+     "des Februar"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -274,6 +298,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des März",
+     "des Märzes"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -392,6 +428,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Aprils",
+     "des April"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -525,6 +573,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Mais",
+     "des Mai"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -651,6 +711,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Junis",
+     "des Juni"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -769,6 +841,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Julis",
+     "des Juli"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -887,6 +971,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Augusts",
+     "des August",
+     "des Augustes"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1006,6 +1103,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Septembers",
+     "des September"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1124,6 +1233,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Oktobers",
+     "des Oktober"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1249,6 +1370,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Novembers",
+     "des November"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1367,6 +1500,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Dezembers",
+     "des Dezember"
+    ],
+    "number": "singular only",
+    "genderCue": "months are masculine (der Mai)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1497,6 +1642,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Frühlings"
+    ],
+    "number": "singular and plural",
+    "genderCue": "seasons are masculine (der Sommer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1639,6 +1795,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Sommers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "seasons are masculine (der Sommer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1786,6 +1953,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Herbstes",
+     "des Herbsts"
+    ],
+    "number": "singular and plural",
+    "genderCue": "seasons are masculine (der Sommer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1928,6 +2107,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Winters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "seasons are masculine (der Sommer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2067,6 +2257,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Woche"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2217,6 +2418,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Monats",
+     "des Monates"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2361,6 +2576,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Jahres",
+     "des Jahrs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2537,7 +2766,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Stunde"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Stündchen"
    },
    "forms": {
     "N;NOM;SG": "Stunde",
@@ -2721,6 +2959,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Minute"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2887,6 +3136,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Uhr"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -3052,6 +3314,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Datums"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-um → das",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -3195,6 +3468,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Geburtstags",
+     "des Geburtstages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Tag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -3347,6 +3632,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Urlaubs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -3494,6 +3792,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -3645,7 +3956,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "no da- / wo- form (bis dahin, bis wann are phrases)"
+    },
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -3788,7 +4103,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "no da- / wo- form; seitdem (since then) is a word of its own"
+    },
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -3933,7 +4252,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "no da- / wo- form; währenddessen (meanwhile) is a word of its own"
+    },
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -4068,7 +4391,12 @@
       "form": "ums",
       "article": "das"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darum (drum)",
+     "worum"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",

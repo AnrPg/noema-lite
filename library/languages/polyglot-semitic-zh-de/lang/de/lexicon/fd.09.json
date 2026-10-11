@@ -122,7 +122,11 @@
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": "entweder … oder",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -295,7 +299,24 @@
    "features": {
     "comparison": {
      "none": "not compared"
-    }
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "softens a polite request: Können Sie mir vielleicht helfen?"
+     },
+     {
+      "senses": [
+       "s3"
+      ],
+      "function": "amazement, often ironic: Du bist vielleicht lustig!"
+     }
+    ]
    }
   },
   {
@@ -457,6 +478,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -583,6 +610,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -731,7 +764,18 @@
    "features": {
     "comparison": {
      "none": "not compared"
-    }
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s3"
+      ],
+      "function": "asks for confirmation or justifies: Hast du auch alles? – Ich bin müde, ich habe auch kaum geschlafen."
+     }
+    ]
    }
   },
   {
@@ -855,7 +899,18 @@
    "features": {
     "comparison": {
      "none": "not compared"
-    }
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "wishes and urging: Wenn ich nur Zeit hätte! – Komm nur herein!"
+     }
+    ]
    }
   },
   {
@@ -1001,6 +1056,16 @@
       "for": "en",
       "rel": "similar",
       "text": "doch is related to English though."
+     }
+    ]
+   },
+   "features": {
+    "particleUse": [
+     {
+      "senses": [
+       "s3"
+      ],
+      "function": "urging, reminding, objecting: Komm doch mit! – Das weißt du doch."
      }
     ]
    }

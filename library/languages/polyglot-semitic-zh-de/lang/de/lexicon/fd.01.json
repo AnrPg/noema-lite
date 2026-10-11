@@ -21,7 +21,9 @@
       ],
       "note": "a neuter noun"
      }
-    ]
+    ],
+    "possessive": "mein",
+    "reflexiveForm": "mich (ACC), mir (DAT)"
    },
    "forms": {
     "PRON;NOM": "ich",
@@ -166,7 +168,9 @@
     "reference": "persons",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "dein",
+    "reflexiveForm": "dich (ACC), dir (DAT)"
    },
    "forms": {
     "PRON;NOM": "du",
@@ -313,7 +317,9 @@
     "reference": "persons",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "Ihr",
+    "reflexiveForm": "sich (small s)"
    },
    "forms": {
     "PRON;NOM": "Sie",
@@ -455,7 +461,9 @@
     "reference": "persons and things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "sein",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "er",
@@ -589,7 +597,9 @@
     "reference": "persons and things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "ihr",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "sie",
@@ -715,7 +725,9 @@
     "reference": "persons",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "possessive": "unser",
+    "reflexiveForm": "uns"
    },
    "forms": {
     "PRON;NOM": "wir",
@@ -828,7 +840,9 @@
     "reference": "persons and things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "ihr",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "sie",
@@ -979,7 +993,32 @@
       ],
       "note": "the auxiliary with a past participle"
      }
-    ]
+    ],
+    "participle": "ge-",
+    "imperative": [
+     "sei!",
+     "seid!",
+     "seien Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "wäre",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "irregular forms of its own (see the paradigm)"
+    },
+    "spokenPast": "Präteritum",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
+    }
    },
    "forms": {
     "V;NFIN": "sein",
@@ -1309,7 +1348,13 @@
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": {
+     "none": "not part of a two-part conjunction"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1333,7 +1378,9 @@
     "reference": "persons and things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": "sein",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "es",
@@ -1496,7 +1543,9 @@
       ],
       "note": "written with a capital, the verb in the 2nd person plural: Habt Ihr …?"
      }
-    ]
+    ],
+    "possessive": "euer (Ihr for the old polite Ihr)",
+    "reflexiveForm": "euch"
    },
    "forms": {
     "PRON;NOM": "ihr",
@@ -1658,7 +1707,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Mannes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Frau",
+      "lexeme": "de:Frau"
+     }
+    ],
+    "diminutive": "das Männchen (also: a male animal)"
    },
    "forms": {
     "N;NOM;SG": "Mann",
@@ -1876,7 +1937,19 @@
       ],
       "note": "as a title before a surname, without an article, never plural: Frau Weber, mit Frau Weber"
      }
-    ]
+    ],
+    "genitive": [
+     "der Frau"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Mann",
+      "lexeme": "de:Mann"
+     }
+    ],
+    "diminutive": "das Fräulein (a word of its own: Miss – dated)"
    },
    "forms": {
     "N;NOM;SG": "Frau",
@@ -2062,6 +2135,20 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Jungen"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "das Mädchen",
+      "lexeme": "de:Mädchen"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2269,6 +2356,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Mädchens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-chen, -lein: a diminutive → das (even for persons: das Mädchen)",
+    "pair": [
+     {
+      "form": "der Junge",
+      "lexeme": "de:Junge"
+     }
+    ],
+    "diminutive": {
+     "none": "itself a diminutive (-chen, from Magd) that became a word of its own"
     }
    },
    "forms": {
@@ -2443,6 +2544,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Kindes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "young beings are often neuter (das Kind, das Baby, das Mädchen)",
+    "pair": {
+     "none": "one noun for a child of either sex"
+    },
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2653,6 +2765,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Person"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "one noun for anyone (always die Person)"
+    },
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2810,6 +2935,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "one noun for people of any sex"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -2983,6 +3121,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Freundes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Freundin",
+      "lexeme": "de:Freundin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3177,6 +3329,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Freundin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Freund",
+      "lexeme": "de:Freund"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3327,6 +3493,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Studenten"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Studentin",
+      "lexeme": "de:Studentin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3486,6 +3666,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Studentin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Student",
+      "lexeme": "de:Student"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3630,6 +3824,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Schülers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Schülerin",
+      "lexeme": "de:Schülerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3794,6 +4002,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Schülerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Schüler",
+      "lexeme": "de:Schüler"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3934,6 +4156,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Lehrers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Lehrerin",
+      "lexeme": "de:Lehrerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4093,6 +4329,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Lehrerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Lehrer",
+      "lexeme": "de:Lehrer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4216,6 +4466,14 @@
     "adjAfter": "weak",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": [
+     "der, die, das",
+     "dessen, deren (genitive)",
+     "denen (dative plural)"
+    ],
+    "stem": {
+     "none": "a paradigm of its own (der, die, das, den, dem, des)"
     }
    },
    "forms": {
@@ -4377,7 +4635,13 @@
       ],
       "note": "standing alone: Ich habe nur eins."
      }
-    ]
+    ],
+    "standalone": [
+     "einer, eine, ein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;SG;MASC": "ein",

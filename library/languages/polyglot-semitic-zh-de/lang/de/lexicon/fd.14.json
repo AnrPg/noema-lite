@@ -27,6 +27,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Montags",
+     "des Montages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -194,6 +206,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Dienstags",
+     "des Dienstages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -323,6 +347,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Mittwochs",
+     "des Mittwoches"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -462,6 +498,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Donnerstags",
+     "des Donnerstages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -596,6 +644,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Freitags",
+     "des Freitages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -730,6 +790,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Samstags",
+     "des Samstages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -881,6 +953,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Sonntags",
+     "des Sonntages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "days of the week are masculine (der Montag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1033,6 +1117,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Wochenendes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Ende)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1183,7 +1278,21 @@
       ],
       "note": "only in compounds: der Landtag, der Bundestag"
      }
-    ]
+    ],
+    "genitive": [
+     "des Tages",
+     "des Tags"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
+    }
    },
    "forms": {
     "N;NOM;SG": "Tag",
@@ -1383,6 +1492,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Nacht"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule – an exception among the times of day (der Morgen, der Abend, but die Nacht)"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1593,6 +1715,17 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Morgens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "times of day are masculine (der Morgen, der Abend – but die Nacht)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1779,6 +1912,17 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Mittags"
+    ],
+    "number": "singular and plural",
+    "genderCue": "times of day are masculine (der Morgen, der Abend – but die Nacht)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1933,6 +2077,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Nachmittags",
+     "des Nachmittages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Mittag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2081,6 +2237,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Abends"
+    ],
+    "number": "singular and plural",
+    "genderCue": "times of day are masculine (der Morgen, der Abend – but die Nacht)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2359,6 +2526,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2472,6 +2645,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2605,6 +2784,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2731,6 +2916,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2852,6 +3043,12 @@
    "features": {
     "comparison": {
      "none": "itself the comparative of spät"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2965,7 +3162,13 @@
     "comparison": [
      "eher",
      "am ehesten"
-    ]
+    ],
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -3108,7 +3311,13 @@
     "comparison": [
      "früher",
      "am frühesten"
-    ]
+    ],
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -3234,7 +3443,13 @@
     "comparison": [
      "später",
      "am spätesten"
-    ]
+    ],
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -3391,6 +3606,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -3509,7 +3730,13 @@
     "comparison": [
      "öfter",
      "am öftesten"
-    ]
+    ],
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -3621,6 +3848,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -3744,6 +3977,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -3860,6 +4099,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   }

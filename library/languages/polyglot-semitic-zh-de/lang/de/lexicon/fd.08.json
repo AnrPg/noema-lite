@@ -162,6 +162,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -190,7 +196,13 @@
       ],
       "note": "standing alone: Keiner hat mich gefragt."
      }
-    ]
+    ],
+    "standalone": [
+     "keiner, keine, kein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;SG;MASC": "kein",
@@ -369,7 +381,11 @@
     "reference": "things",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "possessive": {
+     "none": "no possessive of its own"
+    },
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "nichts",
@@ -537,7 +553,11 @@
     "reference": "persons",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "possessive": {
+     "none": "no possessive of its own"
+    },
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "niemand",
@@ -813,6 +833,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -934,6 +960,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1062,7 +1094,11 @@
     ]
    },
    "features": {
-    "verbPosition": "takes the first place (inversion)"
+    "verbPosition": "takes the first place (inversion)",
+    "paired": "weder … noch",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1199,7 +1235,11 @@
     ]
    },
    "features": {
-    "verbPosition": "takes the first place (inversion)"
+    "verbPosition": "takes the first place (inversion)",
+    "paired": "weder … noch",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   }
  ],

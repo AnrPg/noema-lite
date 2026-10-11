@@ -57,7 +57,32 @@
       ],
       "note": "the auxiliary with a past participle"
      }
-    ]
+    ],
+    "participle": "ge-",
+    "imperative": [
+     "hab(e)!",
+     "habt!",
+     "haben Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "hätte",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "irregular forms of its own (see the paradigm)"
+    },
+    "spokenPast": "Präteritum",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
+    }
    },
    "forms": {
     "V;NFIN": "haben",
@@ -275,6 +300,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Familie"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-ie → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -415,6 +451,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "mother and father together"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -561,7 +610,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Mutter"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Vater",
+      "lexeme": "de:Vater"
+     }
+    ],
+    "diminutive": "das Mütterchen (also: a little old woman)"
    },
    "forms": {
     "N;NOM;SG": "Mutter",
@@ -746,6 +807,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Vaters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Mutter",
+      "lexeme": "de:Mutter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -924,7 +999,19 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "des Sohnes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Tochter",
+      "lexeme": "de:Tochter"
+     }
+    ],
+    "diminutive": "das Söhnchen"
    },
    "forms": {
     "N;NOM;SG": "Sohn",
@@ -1086,7 +1173,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Tochter"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Sohn",
+      "lexeme": "de:Sohn"
+     }
+    ],
+    "diminutive": "das Töchterchen"
    },
    "forms": {
     "N;NOM;SG": "Tochter",
@@ -1242,7 +1341,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Bruders"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Schwester",
+      "lexeme": "de:Schwester"
+     }
+    ],
+    "diminutive": "das Brüderchen"
    },
    "forms": {
     "N;NOM;SG": "Bruder",
@@ -1435,7 +1546,19 @@
       ],
       "note": "as a title before a first name, without an article: Schwester Anna"
      }
-    ]
+    ],
+    "genitive": [
+     "der Schwester"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Bruder",
+      "lexeme": "de:Bruder"
+     }
+    ],
+    "diminutive": "das Schwesterchen"
    },
    "forms": {
     "N;NOM;SG": "Schwester",
@@ -1619,6 +1742,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Ehemannes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Ehefrau",
+      "lexeme": "de:Ehefrau"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1771,6 +1908,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ehefrau"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Ehemann",
+      "lexeme": "de:Ehemann"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1911,6 +2062,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Babys"
+    ],
+    "number": "singular and plural",
+    "genderCue": "young beings are often neuter (das Kind, das Baby, das Mädchen)",
+    "pair": {
+     "none": "one noun for a baby of either sex"
+    },
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2053,6 +2215,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "grandmother and grandfather together"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -2188,6 +2363,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Großvaters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Großmutter",
+      "lexeme": "de:Großmutter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2333,6 +2522,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Opas"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Oma",
+      "lexeme": "de:Oma"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2488,6 +2691,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Großmutter"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Großvater",
+      "lexeme": "de:Großvater"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2653,6 +2870,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Oma"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Opa",
+      "lexeme": "de:Opa"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2810,6 +3041,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Enkels"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Enkelin",
+      "lexeme": "de:Enkelin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2963,6 +3208,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Enkelin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Enkel",
+      "lexeme": "de:Enkel"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3081,6 +3340,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Onkels"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Tante",
+      "lexeme": "de:Tante"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3224,6 +3497,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Tante"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Onkel",
+      "lexeme": "de:Onkel"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3362,6 +3649,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Cousins"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Cousine",
+      "lexeme": "de:Cousine"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3494,6 +3795,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Cousine"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Cousin",
+      "lexeme": "de:Cousin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3623,6 +3938,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Neffen"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Nichte",
+      "lexeme": "de:Nichte"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3758,6 +4087,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Nichte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Neffe",
+      "lexeme": "de:Neffe"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3879,6 +4222,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Verwandten"
+    ],
+    "number": "singular and plural",
+    "genderCue": "an adjectival noun: the gender of the person (der Verwandte, die Verwandte)",
+    "pair": [
+     {
+      "form": "die Verwandte (ein Verwandter – eine Verwandte)"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4009,6 +4365,13 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "owner": "ich (1st person singular)",
+    "standalone": [
+     "meiner, meine, mein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4120,6 +4483,13 @@
     "address": "informal",
     "senseForms": {
      "none": "one meaning"
+    },
+    "owner": "du (one person, informal)",
+    "standalone": [
+     "deiner, deine, dein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4220,6 +4590,13 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "owner": "er / es (a masculine or neuter owner)",
+    "standalone": [
+     "seiner, seine, sein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4329,6 +4706,13 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "owner": "sie – she (a feminine owner) or they (several owners)",
+    "standalone": [
+     "ihrer, ihre, ihr(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4444,7 +4828,12 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "owner": "wir",
+    "standalone": [
+     "unserer, unsere, unser(e)s"
+    ],
+    "stem": "unser- (unsre, unsren: e dropped only in literary or casual style)"
    },
    "forms": {
     "DET;NOM;SG;MASC": "unser",
@@ -4556,7 +4945,12 @@
     "address": "informal",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "owner": "ihr (several people, informal)",
+    "standalone": [
+     "eurer, eure, eures"
+    ],
+    "stem": "eur- (eure, euren, eurem; euere is rare)"
    },
    "forms": {
     "DET;NOM;SG;MASC": "euer",
@@ -4666,6 +5060,13 @@
     "address": "formal",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "owner": "Sie (polite, one or several people)",
+    "standalone": [
+     "Ihrer, Ihre, Ihr(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
