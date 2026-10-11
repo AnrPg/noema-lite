@@ -3249,11 +3249,11 @@
      }
     ],
     "etymology": {
-     "text": "Not an entry in Wiktionary’s Arabic data; it matches Turkish kanepe, which Wiktionary derives from French canapé — itself, through Latin cōnōpēum, from Ancient Greek κωνωπεῖον (“a couch with a mosquito net”).",
+     "text": "Not an entry in Wiktionary’s Arabic data; probably borrowed through Ottoman Turkish kanepe, which Wiktionary derives from French canapé — itself, through Latin cōnōpēum, from Ancient Greek κωνωπεῖον (“a couch with a mosquito net”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The chain begins in Greek: κωνωπεῖον was a couch with a net against mosquitoes (κώνωψ, “mosquito”) (Wiktionary)."
+     "The chain begins in Ancient Greek: κωνωπεῖον was a couch with a net against mosquitoes (κώνωψ, “mosquito”) (Wiktionary)."
     ],
     "pitfalls": [
      "Not a classical word: in formal writing you will also see أَرِيكَة."
@@ -3281,6 +3281,11 @@
       "for": "en",
       "rel": "similar",
       "text": "English canopy is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "*kanepe* is the same word, and the likely way it came into Arabic: كَنَبَة."
      }
     ]
    }

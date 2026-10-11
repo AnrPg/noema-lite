@@ -3384,7 +3384,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian banco is the moneychanger’s bench."
+     "The word first meant a bench: the counter at which the moneychangers sat."
     ],
     "pitfalls": [
      "A sukūn on n: bank, not *banak; the plural is broken: بُنُوك."
@@ -3397,6 +3397,16 @@
       "for": "el",
       "rel": "similar",
       "text": "Greek τράπεζα (bank) is literally “table”: the same counter as banco, the source of بَنْك — another picture."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "*banco* — the moneychanger’s bench — is where بَنْك comes from, together with *banca*."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "*banque* is the same word; it reinforced بَنْك later."
      }
     ]
    }

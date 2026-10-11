@@ -2054,7 +2054,7 @@
      "src": "Wiktionary (kaikki.org): فجل and the translation table of English horseradish"
     },
     "funFacts": [
-     "Japanese wasabi is a close relative, and cheap “wasabi” paste is often coloured horseradish."
+     "Wasabi (وَاسَابِي) is a close relative, and cheap “wasabi” paste is often coloured horseradish."
     ],
     "pitfalls": [
      "In a salad, فُجْلٌ حَارٌّ can simply mean a sharp-tasting radish — context decides.",
@@ -2062,6 +2062,13 @@
     ],
     "subtleties": [
      "حَارّ means both “hot” in temperature and “hot, spicy”; here it is the sting of mustard oil."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "similar",
+      "text": "わさび is a close relative: cheap わさび paste is often coloured horseradish, فُجْل حَارّ."
+     }
     ]
    }
   },
@@ -2477,7 +2484,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chard is “the Sicilian vegetable”: Greek σικελικόν gave Arabic سِلْق — and, through Persian, شَلْجَم (turnip).",
+     "Chard is “the Sicilian vegetable”: Ancient Greek σικελικόν gave Arabic سِلْق through Syriac.",
      "Hebrew סֶלֶק (selek) is the same Aramaic word — but in Hebrew it means beetroot."
     ],
     "pitfalls": [
@@ -2795,7 +2802,7 @@
     "funFacts": [
      "The Fatimid caliph al-Ḥākim bi-Amr Allāh banned mulūḫiyya in Egypt in the early 11th century.",
      "Egyptian cooks traditionally gasp (شَهْقَة) as they pour the sizzling garlic into the pot — kitchen lore for a good result.",
-     "Greek μολόχα (molócha, mallow) is its cousin: the name came into Arabic from Greek."
+     "Its name came into Arabic from Ancient Greek μολόχιον, “mallow”."
     ],
     "pitfalls": [
      "In Morocco مْلُوخِيَّة means okra, not jute mallow (Wiktionary).",
@@ -2804,6 +2811,13 @@
     "subtleties": [
      "One word for the plant and the dish. In Egypt the leaves are minced into a slippery soup; in the Levant they are often cooked whole.",
      "Popular etymology links the name to مُلُوك “kings” (a “royal” dish); Wiktionary derives it from Greek."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "*μολόχα* (mallow) is its cousin: مُلُوخِيَّة comes from ancient μολόχιον."
+     }
     ]
    }
   },

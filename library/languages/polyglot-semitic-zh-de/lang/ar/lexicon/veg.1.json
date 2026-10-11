@@ -2477,7 +2477,7 @@
      "src": "Wiktionary (kaikki.org), translation tables of “broccoli”"
     },
     "funFacts": [
-     "Italian broccoli is a plural: “little sprouts”, from brocco, “shoot”."
+     "In the language it comes from, the word is a plural: “little sprouts”, from *brocco*, “shoot”."
     ],
     "pitfalls": [
      "The spelling is not fixed: بروكلي, بروكولي and بركولي all occur, and the vowels vary. The initial cluster br- is kept, so the vocalized form starts with a sukūn: بْرُوكُلِي.",
@@ -2485,6 +2485,13 @@
     ],
     "subtleties": [
      "Masculine (Wiktionary): الْبْرُوكُلِي غَنِيٌّ (broccoli is rich)."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "*broccoli* is the same word, borrowed with its plural ending; in Arabic بْرُوكُلِي is a masculine mass noun."
+     }
     ]
    }
   },

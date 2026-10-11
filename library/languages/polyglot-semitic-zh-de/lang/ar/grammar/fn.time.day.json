@@ -482,6 +482,11 @@
    "for": "branch:Semitic",
    "rel": "same",
    "text": "If your language is Semitic, days named by numbers and the Sabbath are familiar; Arabic adds the accusative ending for “when”: يَوْمَ الْأَحَدِ."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Like Turkish, Arabic says “day + name” for a day and needs no preposition:\n\n→ *pazartesi günü* — يَوْمَ الِاثْنَيْنِ\n→ *sabah*, *akşam* — صَبَاحًا، مَسَاءً\n\n**Arabic adds the accusative ending -a / -an** where Turkish leaves the word bare. *Cuma* is الْجُمُعَة, and *Çarşamba*, *Perşembe* (the “fourth” and “fifth” day, from Persian) count like الْأَرْبِعَاء، الْخَمِيس."
   }
  ]
 }
