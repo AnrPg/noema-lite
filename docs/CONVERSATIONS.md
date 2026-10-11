@@ -19,7 +19,8 @@ background**, the moment a message arrives — the ⬇️ buttons only make extr
   "context": {                           // what the conversation is about
     "type": "section",                   // course | chapter | section | playbook | exercise
     "id": "ch05-s04", "label": "Ch5 · Deletion Vectors",
-    "chapterId": "ch05", "sectionId": "ch05-s04"          // when derivable
+    "chapterId": "ch05", "sectionId": "ch05-s04",         // when derivable
+    "origin": { "via": "explainThis", "bid": "b1x9…", "sec": "ch05-s04" }  // where it began (docs/SEARCH.md §5)
   },
   "model": { "provider": "google", "name": "gemini-3-flash-preview" },
   "createdAt": "2026-10-06T14:42:10.120Z",              // ISO-8601 UTC

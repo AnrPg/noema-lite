@@ -73,7 +73,7 @@ window.NoemaShell = (() => {
 
   /* ---------- the engine of the open subject (engine/src/40_views.js calls attachEngine) ---------- */
   let ENGINE = null;
-  const ENGINE_ROUTES = new Set(['subject', 'ch', 's', 'practice', 'run', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'new', 'ex']);
+  const ENGINE_ROUTES = new Set(['subject', 'ch', 's', 'practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'new', 'ex']);
   const subjectId = () => N()?.subject?.id || null;
   /** Open a subject (loads its pack: the page reloads) or, when it is open already, go to the place. */
   function open(subj, hash = '#/subject') {
@@ -101,9 +101,10 @@ window.NoemaShell = (() => {
     F.crumbs = h('nav', { class: 'ns-crumbs', 'aria-label': L('where') });
     F.acts = h('div', { class: 'ns-acts' });
     F.bellBadge = h('span', { class: 'bellbadge' });
+    F.find = h('button', { class: 'ns-iconbtn ns-find', id: 'ns-find', title: L('sr_search'), 'aria-label': L('sr_search'), 'aria-keyshortcuts': '/', onclick: () => window.NoemaSearch?.quick(here()) }, svg('search'));   // 🔎 everything, everywhere (engine/search.js)
     F.bell = h('button', { class: 'ns-iconbtn bell', id: 'bellbtn', title: L('notifications'), 'aria-label': L('notifications'), onclick: openNotes }, svg('bell'), F.bellBadge);
     F.topMe = h('button', { class: 'ns-me acchip', id: 'ns-topme', title: L('me'), 'aria-label': L('meLong'), onclick: () => go('#/me') }, h('span', { class: 'ns-meemo' }), h('i', { class: 'syncdot', id: 'syncdot' }));
-    F.top = h('header', { class: 'ns-top', id: 'ns-top' }, F.back, F.crumbs, F.acts, F.bell, F.topMe);
+    F.top = h('header', { class: 'ns-top', id: 'ns-top' }, F.back, F.crumbs, F.acts, F.find, F.bell, F.topMe);
     F.share = h('div', { class: 'sharebar', role: 'status' });
     F.tabs = h('nav', { class: 'ns-tabs', 'aria-label': L('mainNav') });
     F.railMe = h('button', { class: 'ns-railme', onclick: () => go('#/me') }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', {}, L('me')));
@@ -120,6 +121,8 @@ window.NoemaShell = (() => {
     addEventListener('hashchange', route);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') { if (closePops()) return; if (F.layer.firstChild && !F.layer.querySelector('[data-sticky]')) { F.layer.replaceChildren(); return; } }
+      // / or Ctrl/⌘ K: search (not while typing, not over a window that must be answered)
+      if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey || (e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)) && !e.target.closest?.('input, textarea, select, [contenteditable="true"]') && !F.layer.querySelector('[data-sticky], .ns-modal') && window.NoemaSearch) { e.preventDefault(); NoemaSearch.quick(here()); }
     });
     document.addEventListener('click', e => { if (!e.target.closest('.ns-pop, [data-pop]')) closePops(); }, true);
     route();
@@ -256,7 +259,7 @@ window.NoemaShell = (() => {
   function route() {
     if (!mounted) return;
     closePops();
-    const p = (location.hash || '#/').replace(/^#\/?/, '').split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+    const p = (location.hash || '#/').replace(/^#\/?/, '').split('?')[0].split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });   // #/search?q=…: the page's own settings after ?
     const k = p[0] || '';
     // <html lang>: the subject's language on its own pages (its text), the menus' language everywhere else
     const docLang = l => { if (document.documentElement.lang !== l) document.documentElement.lang = l; };
@@ -296,6 +299,21 @@ window.NoemaShell = (() => {
     return { tab: isLang(s) ? 'lang' : 'learn', ...extra, crumbs: [...crumbs, [s.title || '…', extra.sub ? '#/subject' : null], ...(extra.crumbs || [])], back: extra.back ?? (c ? '#/map/' + encodeURIComponent(c.id) + '/' + encodeURIComponent(node.node) : '#/shelf') };
   }
   const shortTitle = c => { const t = c.title || c.goal || ''; return t.length > 28 ? t.split(/[:—–(-]/)[0].trim().slice(0, 28) || t.slice(0, 28) : t; };
+
+  /** Where the learner is now, for the search's "here": the open subject, a Roadmap, a language course (or nothing). */
+  function here() {
+    const p = (location.hash || '#/').replace(/^#\/?/, '').split('?')[0].split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+    if (ENGINE_ROUTES.has(p[0]) && N()?.subject?.id && !isLang(N().subject)) return { kind: 'subj', id: N().subject.id, title: N().subject.title };
+    if (p[0] === 'map' && p[1]) { const c = CU()?.get(acc(), p[1]); if (c) return { kind: 'cur', id: c.id, title: shortTitle(c) }; }
+    if (p[0] === 'lang' && p[1]) return { kind: 'course', id: p[1], title: (window.NOEMA_REGISTRY?.languages || []).find(x => x.id === p[1])?.title || p[1] };
+    if (p[0] === 'search') return window.NoemaSearch?.hereNow?.() || null;
+    return null;
+  }
+  /* ---------- 🔎 the search page (#/search?q=…): engine/search.js draws it ---------- */
+  PAGES.search = () => {
+    if (!window.NoemaSearch) { page({ tab: null, crumbs: [[L('sr_search')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
+    NoemaSearch.page({ page, h, L, go, open, sheet, menuButton, faceEl, pill, svg, ico, chev, main: F.main });
+  };
 
   /* ======================= pages ======================= */
   /* ---------- Today: where you left off, what is due, the day's goal ---------- */
@@ -377,7 +395,8 @@ window.NoemaShell = (() => {
     if (!list.length) v.append(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L('noRoadmaps')), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => CM()?.importMap(acc(), { onStudy }) }, L('importMap')), h('button', { class: 'btn ghost', onclick: () => CM()?.exploreCurricula?.(acc(), { onStudy }) }, L('exploreRoadmaps')))));
     v.append(...list.map((c, i) => roadmapCard(c, i)));
     const shelfLbl = h('span', {}, L('shelf')), shelfBtn = h('button', { class: 'ns-shelflink', onclick: () => go('#/shelf') }, svg('shelf'), ' ', shelfLbl);
-    v.append(h('div', { class: 'ns-shelf' }, shelfBtn));
+    const nCol = window.NoemaSearch?.collections?.().length || 0;   // saved searches: a quiet link, only when there are some
+    v.append(h('div', { class: 'ns-shelf' }, shelfBtn, nCol ? h('button', { class: 'ns-shelflink ns-collink', onclick: () => go('#/search') }, svg('search'), ' ', L('sr_collectionsN', { n: nCol })) : null));
     N().shelf?.(acc()).then(l => { shelfLbl.textContent = L('shelfN', { n: l.length }); }).catch(() => { });
     const off = CU()?.onChange?.(() => { if (v.isConnected && F.main.dataset.page === 'learn') { clearTimeout(PAGES.learn.t); PAGES.learn.t = setTimeout(() => { if (v.isConnected) PAGES.learn(); }, 300); } else off?.(); });
   };
@@ -710,7 +729,7 @@ window.NoemaShell = (() => {
     if (st.length) { const { c, nid } = st[0]; return { g: 'c:' + c.id, gt: c.title || c.goal || L('roadmap'), s: c.id + '/' + nid, st: c.nodes[nid]?.title || title }; }
     return { g: 'other', gt: L('otherSubjects'), s: 's:' + sid, st: title || sid };
   }
-  function convos() {
+  function convos(openId) {   // openId: open that conversation at once (a search result)
     const C = window.NoemaConvos; if (!C || !acc()) return;
     let q = '', allKinds = false;
     modal(L('activity'), ({ head, body, close, refocus }) => {
@@ -762,7 +781,7 @@ window.NoemaShell = (() => {
           r.subject?.id && (!r.kind || r.kind === 'tutor') ? h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); goConvo(r); } }, L('convContinue'))) : null);
         body.scrollTop = 0; refocus();
       }
-      listView();
+      if (openId) load().then(() => { const r = rows.find(x => x.id === openId); if (r) oneView(r); else listView(); }); else listView();
     }, { cls: 'ns-convos' });
   }
   /** Continue a conversation in the tutor's window: in this subject at once, else after opening its subject (engine/src/60_convos.js resumeConvo). */
@@ -809,6 +828,6 @@ window.NoemaShell = (() => {
   /** Small items an engine page shows in the top bar, next to ⋮ (e.g. the focus-sprint clock). */
   function setActs(nodes) { F.acts.prepend(...nodes.filter(Boolean)); }
 
-  return { level: LEVEL, mount, attachEngine, noEngine, chrome, subjectChrome, route, go, open, menuButton, popMenu, closePops, sheet, modal, convos, tip, hint, h, svg, faceEl, ico, icoTxt, pill, bar, ring, L, tv, noteRecent, recent, registerWorld, setActs, onboarding, importFile,
+  return { level: LEVEL, here, mount, attachEngine, noEngine, chrome, subjectChrome, route, go, open, menuButton, popMenu, closePops, sheet, modal, convos, tip, hint, h, svg, faceEl, ico, icoTxt, pill, bar, ring, L, tv, noteRecent, recent, registerWorld, setActs, onboarding, importFile,
     get mounted() { return mounted; }, get engine() { return ENGINE; }, ENGINE_ROUTES };
 })();

@@ -23,7 +23,7 @@ function lockedView() {
   shellChrome({ sub: true, crumbs: [[SL('exercisesWord')]], back: HOME(), corner: true });
   view(lockNote(), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(HOME()) }, '📖 ' + SL('backToTheory'))));
 }
-const LOCKED_ROUTES = new Set(['practice', 'run', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'ex']);
+const LOCKED_ROUTES = new Set(['practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'ex']);
 const go = hash => { location.hash = hash; };
 /** Remember where the learner reads (Today › Continue, across subjects; engine/shell.js). */
 function noteRecent(extra = {}) {
@@ -267,12 +267,12 @@ function choiceList(items) {
     h('span', { class: 'pic' }, it.icon), h('span', { class: 'grow' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge != null && it.badge !== '' ? h('span', { class: 'pill c' }, it.badge) : null, h('span', { class: 'chev', 'aria-hidden': 'true' }, '›'))));
 }
 function chapterMenu(c) {
-  return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id }, 'socratic', null, { intent: INTENT.chSocratic }) },
+  return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id, origin: { via: 'chapterSocratic', ch: c.id } }, 'socratic', null, { intent: INTENT.chSocratic }) },
     { label: SL('searchSubject'), icon: 'search', run: openSearch }, { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
     { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() }, '-',
     { label: SL('allChapters'), icon: 'list', href: HOME() }];
 }
-function chapterView(id, tab) {
+function chapterView(id, tab, focus) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
   setTutorContext({ kind: 'chapter', id });
@@ -304,7 +304,7 @@ function chapterView(id, tab) {
       })),
       h('div', { class: 'row', style: { marginTop: '22px' } },
         nextSec ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + nextSec.id) }, (S.read[c.sections[0].id] ? SL('continueSec', { title: nextSec.title }) : SL('startReading'))) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${id}/practice`) }, '🎯 ' + SL('practiceChapter')),
-        h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
+        h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
   } else if (on === 'practice') {
     if (STEP_LOCK) body.append(lockNote());
     else if (tab === 'practice') body.append(chapterPractice(c));
@@ -320,7 +320,8 @@ function chapterView(id, tab) {
       h('div', { class: 'row', style: { marginBottom: '14px' } },
         traps.length ? h('button', { class: 'btn primary', onclick: () => startRun(traps, { title: `⚠️ ${SL('trapDrill')} · Ch${c.num}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ ' + SL('trapsNoTimer')) : null,
         tf.length >= 3 ? h('button', { class: 'btn', onclick: () => go('#/lightning/' + id) }, '⚡ ' + SL('trapsTimed')) : null),
-      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));
+      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', 'data-pid': window.NoemaCatalog ? NoemaCatalog.trapId(p) : null, style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));
+    if (focus) showHit(body.querySelector(`[data-pid="${focus}"]`));
   }
 }
 /** Practice tab: every way to practise this chapter. */
@@ -335,7 +336,7 @@ function chapterPractice(c) {
     c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : c.debug.length } : null,
     wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: wrong.length, run: () => startRun(wrong, { title: `🔁 Ch${c.num} mistakes`, count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
     c.exercises.length ? { label: S.boss[id] ? SL('bossBeaten') : SL('boss'), sub: SL('bossSub'), icon: S.boss[id] ? '🏆' : '👾', href: `#/boss/${id}` } : null,
-    { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
+    { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
 }
 
 /* ---------- section reader ---------- */
@@ -367,11 +368,11 @@ function renderBlock(b, i) {
 /** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
 const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
 function explainParts(el, b, s) {
-  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || 'this figure') : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson' }));
-  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card' })); });
-  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term' })); });
-  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point' })); });
-  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table' })); });
+  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || 'this figure') : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson', bid: el.dataset.bid }));
+  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card', bid: el.dataset.bid })); });
+  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term', bid: el.dataset.bid })); });
+  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point', bid: el.dataset.bid })); });
+  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table', bid: el.dataset.bid })); });
   return el;
 }
 function chunkBlocks(blocks) {
@@ -392,8 +393,9 @@ function sectionMenu(s) {
     { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() }, { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
     '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
 }
-function sectionView(sid) {
+function sectionView(sid, bid) {
   const s = SEC[sid]; if (!s) return go(HOME());
+  const bids = s._bids || (s._bids = window.NoemaCatalog ? NoemaCatalog.blockIds(s.blocks) : s.blocks.map((b, i) => 'b' + i));   // stable ids (engine/catalog.js): #/s/<section>/<block> opens exactly that block
   const c = s._ch; setAccent(document.body, c);
   S.last = sid; save();
   setTutorContext({ kind: 'section', id: sid });
@@ -401,6 +403,8 @@ function sectionView(sid) {
   noteRecent({ sid, secTitle: s.title, chNum: c.num, chOf: COURSE.length, secNum: s._j + 1, secOf: c.sections.length });
   const chunks = S.settings.chunk ? chunkBlocks(s.blocks) : [s.blocks];
   let shown = revealedChunks[sid] || (S.read[sid] ? chunks.length : 1);
+  const target = bid ? s.blocks[bids.indexOf(bid)] : null;   // a found block: every chunk up to it is shown
+  if (target) { const ci = chunks.findIndex(ch => ch.includes(target)); if (ci >= 0 && ci + 1 > shown) shown = revealedChunks[sid] = ci + 1; }
   const prev = c.sections[s._j - 1], next = c.sections[s._j + 1];
   const body = h('div');
   const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
@@ -413,7 +417,7 @@ function sectionView(sid) {
     body, tail));
   function draw(scroll) {
     body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
+    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
     pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
     tail.innerHTML = '';
     if (shown < chunks.length) {
@@ -431,9 +435,15 @@ function sectionView(sid) {
     }
   }
   draw();
+  if (target) showHit(body.querySelector(`[data-bid="${bids[s.blocks.indexOf(target)]}"]`));
+}
+/** A place opened from the search (engine/search.js): brought into view and outlined for a moment. */
+function showHit(el) {
+  if (!el) return;
+  setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('ns-hit'); setTimeout(() => el.classList.remove('ns-hit'), 2600); }, 120);
 }
 const SEC_ASK = { socratic: ['Start a Socratic session on "{t}". Begin by probing what I already think.', 'secSocratic'], debug: ['Start a debugging simulation related to "{t}".', 'secDebug'], interview: ['Interview me about "{t}".', 'secInterview'] };
-function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id }, mode, msg.replace('{t}', s.title), { intent: INTENT[intent] }); }
+function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id, origin: { via: 'section_' + mode, sec: s.id } }, mode, msg.replace('{t}', s.title), { intent: INTENT[intent] }); }
 function sectionTail(s, prev, next) {
   const c = s._ch;
   const exs = c.exercises.filter(e => e.section === s.id);
@@ -502,7 +512,7 @@ function runOrder(list) {
   return [...shuffle(g2), ...shuffle(g1), ...shuffle(g3)];
 }
 function startRun(list, opt = {}) {
-  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || 'Practice', back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null };
+  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || 'Practice', back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
   if (location.hash === '#/run') runView(); else go('#/run');
 }
 let RUN = null;
@@ -541,7 +551,25 @@ function runSummary() {
     R0.wrong.length ? h('div', { style: { textAlign: 'left', margin: '0 0 18px' } }, h('b', {}, 'Review these:'), h('ul', {}, ...R0.wrong.map(e => h('li', { html: fmt((e.q || '').slice(0, 140)) })))) : null,
     h('div', { class: 'row', style: { justifyContent: 'center' } },
       R0.wrong.length ? h('button', { class: 'btn primary', onclick: () => startRun(R0.wrong, { title: '🔁 Retry mistakes', count: R0.wrong.length, back: R0.back }) }, '🔁 Retry mistakes') : null,
+      R0.after ? h('button', { class: 'btn primary ns-srnext', onclick: R0.after.run }, R0.after.label) : null,
       h('button', { class: 'btn', onclick: () => go(R0.back) }, 'Done')))));
+}
+/* ---------- 🔎 a round made from search results (engine/search.js): this subject's exercises, then its cards ---------- */
+function searchRunView() {
+  const X = window.NoemaSearch, R = X?.round(), st = R?.steps?.[R.i];
+  if (!st || st.sj !== SUBJ.id) return go(X ? '#/search' : HOME());
+  const after = X.after();
+  if (st.kind === 'ex') {
+    const list = st.ids.map(id => EX[id]).filter(Boolean);
+    if (!list.length) return after ? after.run() : go(R.back);
+    return startRun(list, { title: '🔎 ' + st.title, count: list.length, back: R.back, after });
+  }
+  const keys = new Set(st.keys || []), cards = allCards().filter(c => keys.has(c.key));
+  if (!cards.length) return after ? after.run() : go(R.back);
+  shellChrome({ sub: true, crumbs: [['🔎 ' + st.title]], back: R.back, reading: true });
+  const body = h('div');
+  view(h('h1', {}, '🔎 ' + st.title), body);
+  flashDeck(body, cards, { all: true, onDone: () => h('div', { class: 'row', style: { justifyContent: 'center' } }, after ? h('button', { class: 'btn primary ns-srnext', onclick: after.run }, after.label) : null, h('button', { class: 'btn', onclick: () => go(R.back) }, 'Done')) });
 }
 function mistakesList() { return ALL_EX.filter(e => S.res[e.id] && S.res[e.id].last === false); }
 function mistakesView() {
@@ -632,23 +660,25 @@ function rateCardKey(key, q, from = new Date()) { const r = S.fc[key] || { box: 
 function cardDue(key) { const r = S.fc[key]; return !r || !r.due || r.due <= today(); }
 function countDueCards() { return COURSE.reduce((a, c) => a + c.flashcards.filter((f, i) => { const k = f._key || c.id + '#' + i; return S.fc[k] && cardDue(k); }).length, 0); }
 function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
-function cardsView() {
+function cardsView(key) {
   setAccent(document.body, null);
   shellChrome({ sub: true, crumbs: [[t('home.cards')]], back: HOME() });
   const body = h('div');
   view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, 'Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.'), body);
+  const one = key ? allCards().filter(c => c.key === key) : [];   // #/cards/<key>: the one card the search found
+  if (one.length) { flashDeck(body, one, { all: true }); return; }
   flashDeck(body, allCards());
 }
-function flashDeck(body, cards) {
+function flashDeck(body, cards, { all = false, onDone = null } = {}) {
   const seen = cards.filter(c => S.fc[c.key]);
   const due = cards.filter(c => S.fc[c.key] && cardDue(c.key)), fresh = cards.filter(c => !S.fc[c.key]);
-  const queue = [...shuffle(due), ...shuffle(fresh).slice(0, 15)];
+  const queue = all ? shuffle(cards) : [...shuffle(due), ...shuffle(fresh).slice(0, 15)];   // all: every card given (the ones the search found), due or not
   body.append(h('div', { class: 'row', style: { margin: '6px 0 16px' } }, h('span', { class: 'pill c' }, `${due.length} due`), h('span', { class: 'pill' }, `${fresh.length} new`), h('span', { class: 'pill' }, `${seen.length - due.length} resting`)));
   const stage = h('div'); body.append(stage);
   let i = 0;
   function show() {
     stage.innerHTML = '';
-    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, 'Deck done for now. Come back later for due cards!'))); if (queue.length) confetti(80); return; }
+    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, 'Deck done for now. Come back later for due cards!'))); if (queue.length) confetti(80); if (onDone) stage.append(onDone()); return; }
     const c = queue[i];
     const fl = h('div', { class: 'flash' }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
       h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} Ch${c._ch.num} · ${i + 1}/${queue.length}`), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, 'tap to flip')),
@@ -664,7 +694,7 @@ function flashDeck(body, cards) {
 
 /** Ask the character about a flashcard: a hint while its answer is hidden, a deeper explanation once it is turned. */
 function askAboutCard(c, turned) {
-  const ctx = { kind: 'exercise', id: 'fc:' + c.key, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
+  const ctx = { kind: 'exercise', id: 'fc:' + c.key, origin: { via: turned ? 'cardExplain' : 'cardHint', card: c.key, ...(c.section ? { sec: c.section } : {}) }, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
   if (turned) openTutor(ctx, 'explain', 'Explain this flashcard to me in more depth, with an example.');
   else openTutor(ctx, 'hint', 'Give me a hint for this flashcard — don\'t tell me the answer.', { intent: INTENT.exHint('') });
 }
@@ -708,7 +738,7 @@ function drillView(id) {
       h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 Reveal checklist'),
       h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Grading…'; try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + er.message, 4000); reveal(null); } } }, '✨ Grade my checklist'),
       h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 Order drill'),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, `🎭 Role-play it with ${TUTOR.name}`)),
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id, origin: { via: 'drillRoleplay', drill: id } }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, `🎭 Role-play it with ${TUTOR.name}`)),
     stage));
   function orderDrill() {
     stage.innerHTML = '';
@@ -753,14 +783,16 @@ function route() {
   closeTutorIfMobile();
   STEP_LOCK = stepLock();
   if (STEP_LOCK && LOCKED_ROUTES.has(p[0])) return lockedView();
+  if (p[0] === 'subject' && p[1] === 'sources') { homeView(); setTimeout(() => toggleSourcesDeck(), 200); return; }
   if (!p[0] || p[0] === 'subject') return homeView();
-  if (p[0] === 'ch') return chapterView(p[1], p[2]);
-  if (p[0] === 's') return sectionView(p[1]);
+  if (p[0] === 'ch') return chapterView(p[1], p[2], p[3]);
+  if (p[0] === 's') return sectionView(p[1], p[2]);
   if (p[0] === 'practice') return p[1] === 'all' ? mixedView() : (chTab[p[1]] = 'practice', chapterView(p[1], 'practice'));
   if (p[0] === 'run') return runView();
+  if (p[0] === 'srun') return searchRunView();
   if (p[0] === 'boss') return bossView(p[1]);
   if (p[0] === 'lightning') return p[1] && CH[p[1]] ? playLightning(p[1]) : lightningView();
-  if (p[0] === 'cards') return cardsView();
+  if (p[0] === 'cards') return cardsView(p[1] ? decodeURIComponent(p[1]) : null);
   if (p[0] === 'drills') return drillsView();
   if (p[0] === 'drill') return drillView(p[1]);
   if (p[0] === 'mistakes') return mistakesView();

@@ -210,11 +210,12 @@ function explainable(el, get) {
   else el.append(b);
   return el;
 }
-function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {
+function explainItem({ label, text, sec, ch, what = 'part of the lesson', bid = null }) {
   const plain = String(label || text || '').replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').trim();
   const short = plain.length > 70 ? plain.slice(0, 68).replace(/\s+\S*$/, '') + '…' : plain;
   let hsh = 0; for (const x of String(text || label)) hsh = (hsh * 31 + x.charCodeAt(0)) >>> 0;
-  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`,
+  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null,
+    origin: { via: 'explainThis', what, ...(bid ? { bid } : {}), ...(sec ? { sec: sec?.id || sec } : {}), ...(ch ? { ch: ch?.id || ch } : {}) } }, 'explain', `Explain this ${what} to me: “${short}”`,
     { intent: INTENT.item(what) });
 }
 

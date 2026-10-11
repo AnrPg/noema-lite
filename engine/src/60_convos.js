@@ -23,7 +23,7 @@ const ACC_REF = { id: ACCOUNT.id, kind: ACCOUNT.kind || 'local' };
 const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: Noema.pack?.version || null };
 function fromRec(r) {     // canonical record → in-memory shape used by the UI
   return { id: r.id, kind: r.kind, mode: r.mode, created: Date.parse(r.createdAt), updated: Date.parse(r.updatedAt),
-    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label, ...(r.context.type === 'item' ? { sec: r.context.sectionId || null, ch: r.context.chapterId || null } : {}) } : null,
+    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label, ...(r.context.type === 'item' ? { sec: r.context.sectionId || null, ch: r.context.chapterId || null } : {}), ...(r.context.origin ? { origin: r.context.origin } : {}) } : null,
     model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
     titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
     msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt), ...(m.meta ? { meta: m.meta } : {}) })),
@@ -33,7 +33,8 @@ function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : cv.ctx?.kind === 'item' ? (cv.ctx.sec || null) : null;
   return Noema.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
     titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
-    context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
+    // origin: the button the conversation began from and the exact part (block, exercise, card, drill) — the search shows it (docs/SEARCH.md)
+    context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}), origin: cv.ctx.origin || { via: 'tutor' } } : { type: 'course', id: null, label: null, origin: { via: 'tutor' } },
     model: { provider: cv.provider || 'google', name: cv.model || S.settings.model || null },
     createdAt: new Date(cv.created).toISOString(), updatedAt: new Date(cv.updated || Date.now()).toISOString(),
     messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString(), ...(m.meta ? { meta: m.meta } : {}) })),
@@ -55,7 +56,7 @@ function saveConvos(cv) {
 }
 function ctxRecord() {
   const c = T.ctx; if (!c) return null;
-  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null, text: String(c.text || '').slice(0, 6000) } : {}) };
+  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null, text: String(c.text || '').slice(0, 6000) } : {}), ...(c.origin ? { origin: c.origin } : {}) };
 }
 function persistConvo(key) {
   const hist = T.hist[key];

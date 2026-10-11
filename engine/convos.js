@@ -39,6 +39,8 @@
       createdAt: m.createdAt || iso(m.t || created + i),
       ...(m.meta ? { meta: m.meta } : {}),
     }));
+    /* where the conversation began: the button (via) and the exact part — block id, exercise, card, drill, a language word … — short strings only */
+    const origin = o => o && typeof o === 'object' && o.via ? Object.fromEntries(Object.entries(o).filter(([k, v]) => /^[a-zA-Z]{1,20}$/.test(k) && v != null && ['string', 'number'].includes(typeof v)).map(([k, v]) => [k, typeof v === 'string' ? v.slice(0, 200) : v]).slice(0, 12)) : null;
     const ctx = r.context || (r.ctx ? { type: r.ctx.kind || 'course', id: r.ctx.id || null, label: r.ctx.label || null } : { type: 'course', id: null, label: null });
     const rec = {
       schema: SCHEMA,
@@ -49,7 +51,7 @@
       mode: r.kind && r.kind !== 'tutor' ? null : (validMode(r.mode) ? r.mode : 'socratic'),
       title: r.title || null,
       titleSource: r.titleSource || (r.title ? (r.titledLen >= 1e9 ? 'user' : 'ai') : 'none'),
-      context: { type: ctx.type || 'course', id: ctx.id ?? null, label: ctx.label ?? null, ...(ctx.chapterId ? { chapterId: ctx.chapterId } : {}), ...(ctx.sectionId ? { sectionId: ctx.sectionId } : {}) },
+      context: { type: ctx.type || 'course', id: ctx.id ?? null, label: ctx.label ?? null, ...(ctx.chapterId ? { chapterId: ctx.chapterId } : {}), ...(ctx.sectionId ? { sectionId: ctx.sectionId } : {}), ...(origin(ctx.origin) ? { origin: origin(ctx.origin) } : {}) },
       model: typeof r.model === 'object' && r.model ? r.model : { provider: 'google', name: r.model || null },
       createdAt: r.createdAt || iso(created),
       updatedAt: r.updatedAt || iso(r.updated || created),

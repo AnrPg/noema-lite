@@ -365,8 +365,8 @@ function givenOf(w) { try { return String(w?.given?.() || '').slice(0, 3000); } 
     "Ask Brick" before answering → hints (never the answer) · "Help me get it" after a wrong answer → Socratic, starting from the learner's answer ·
     "Explain differently" after a wrong answer → a free, in-depth explanation from another angle (no questions). */
 function askAIAbout(ex, mode, given = '') {
-  const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex) };
   const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
+  const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex), origin: { via: m === 'explain' ? 'explainDifferently' : m === 'socratic' ? 'helpSocratic' : 'askHint', ex: ex.id, ...(ex.section ? { sec: ex.section } : {}) } };
   const key = ex.id + '|' + m;
   T.hist[key] = []; delete T.tstate[key];
   const mine = given ? ` (I answered: ${given.length > 300 ? given.slice(0, 300) + '…' : given})` : '';
