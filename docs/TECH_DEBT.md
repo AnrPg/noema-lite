@@ -102,6 +102,7 @@ a backend; pdf.js TextLayer for search.
 **What:** Claude drafts of every UI catalog (`i18n/<component>/drafts/<locale>.arb`, ≈4,100 keys each) for **ar-EG, de, tr,
 zh-Hans, zh-Hant** (the owner's next priorities, in this order after el, ru, fr: ar, de, tr, zh), then hi, ja, it, es-ES,
 sq, pt-PT. Postponed by the owner to save effort; Greek comes first and is completed.
+**Started before the postponement:** partial de and zh drafts are on branches `i18n-u-de` / `i18n-u-zh` (not merged).
 **Ready:** the locales exist in `engine/i18n.js` (flag `off`), glossary drafts in `i18n/glossary/drafts/` (tr missing),
 `node tools/i18n/check.js` enforces each locale's CLDR plurals (ar: zero/one/two/few/many/other), `docs/i18n.md` §5 is the
 how-to. Each locale: ≈200 k characters of drafts → review in Weblate → flag `preview` → `on`.
