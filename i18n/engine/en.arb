@@ -2471,5 +2471,229 @@
   "engine.deck.footer": "Turning a source off hides its chapters, sections, appended blocks, exercises, drills, cards and traps everywhere (practice, lightning, search, tutor). Your progress is never deleted. New sources are merged additively — just hand Claude the next PDF.",
   "@engine.deck.footer": {
     "description": "Footnote of the Sources menu."
+  },
+  "engine.cv.mode_socratic": "Socratic dialogue",
+  "@engine.cv.mode_socratic": {
+    "description": "Mode of a saved tutor conversation (export and lists)."
+  },
+  "engine.cv.mode_explain": "Explanation",
+  "@engine.cv.mode_explain": {
+    "description": "Mode of a saved tutor conversation: the tutor explained freely."
+  },
+  "engine.cv.mode_quiz": "Quiz",
+  "@engine.cv.mode_quiz": {
+    "description": "Mode of a saved tutor conversation: a quiz."
+  },
+  "engine.cv.mode_interview": "Mock interview",
+  "@engine.cv.mode_interview": {
+    "description": "Mode of a saved tutor conversation: a practice interview."
+  },
+  "engine.cv.mode_debug": "Debugging simulation",
+  "@engine.cv.mode_debug": {
+    "description": "Mode of a saved tutor conversation: a simulated case to debug."
+  },
+  "engine.cv.fallbackTitle": "{title} Tutoring Session",
+  "@engine.cv.fallbackTitle": {
+    "description": "Title of a conversation that has no title yet and no topic. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.cv.kind_grading": "grading",
+  "@engine.cv.kind_grading": {
+    "description": "Badge (after 📝) of a saved AI grading in the conversation list. Lowercase."
+  },
+  "engine.cv.kind_code_review": "code review",
+  "@engine.cv.kind_code_review": {
+    "description": "Badge (after ⌨️) of a saved AI code review. Lowercase."
+  },
+  "engine.cv.kind_question": "AI question",
+  "@engine.cv.kind_question": {
+    "description": "Badge (after ✨) of a saved AI-generated question."
+  },
+  "engine.cv.kind_drill_grading": "drill grading",
+  "@engine.cv.kind_drill_grading": {
+    "description": "Badge (after 🔧) of a saved AI grading of a debug drill. Lowercase."
+  },
+  "engine.cv.md.mode": "Mode",
+  "@engine.cv.md.mode": {
+    "description": "Exported conversation (Markdown table): row label."
+  },
+  "engine.cv.md.context": "Context",
+  "@engine.cv.md.context": {
+    "description": "Exported conversation: row label (what the conversation was about)."
+  },
+  "engine.cv.md.started": "Started",
+  "@engine.cv.md.started": {
+    "description": "Exported conversation: row label (when it started)."
+  },
+  "engine.cv.md.last": "Last message",
+  "@engine.cv.md.last": {
+    "description": "Exported conversation: row label."
+  },
+  "engine.cv.md.messages": "Messages",
+  "@engine.cv.md.messages": {
+    "description": "Exported conversation: row label (how many messages)."
+  },
+  "engine.cv.md.tutor": "Tutor",
+  "@engine.cv.md.tutor": {
+    "description": "Exported conversation: row label (the AI tutor)."
+  },
+  "engine.cv.md.subject": "Subject",
+  "@engine.cv.md.subject": {
+    "description": "Exported conversation: row label (the subject studied)."
+  },
+  "engine.cv.md.profile": "Profile",
+  "@engine.cv.md.profile": {
+    "description": "Exported conversation: row label (the learner’s profile)."
+  },
+  "engine.cv.md.source": "Source",
+  "@engine.cv.md.source": {
+    "description": "Exported conversation: row label (which app it came from)."
+  },
+  "engine.cv.md.lessons": "Lessons learned",
+  "@engine.cv.md.lessons": {
+    "description": "Exported conversation: heading (after 📌) of the lessons saved in it."
+  },
+  "engine.cv.md.you": "You",
+  "@engine.cv.md.you": {
+    "description": "Exported conversation: speaker heading (after 🧑) of the learner’s messages."
+  },
+  "engine.cv.wholeCourse": "Whole course",
+  "@engine.cv.wholeCourse": {
+    "description": "Context of a conversation about the whole course (export and conversation list)."
+  },
+  "engine.cv.nothingToExport": "Nothing to export yet — start a conversation first 🙂",
+  "@engine.cv.nothingToExport": {
+    "description": "Toast when exporting an empty conversation."
+  },
+  "engine.cv.naming": "Naming your conversation…",
+  "@engine.cv.naming": {
+    "description": "Toast (after ✨) while the AI writes a title before export."
+  },
+  "engine.cv.exported": "Exported “{title}”",
+  "@engine.cv.exported": {
+    "description": "Toast (after ⬇️) after exporting a conversation. title = its title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Log: Commits and Checkpoints"
+      }
+    }
+  },
+  "engine.cv.none": "No conversations yet",
+  "@engine.cv.none": {
+    "description": "Toast when exporting all conversations but there are none."
+  },
+  "engine.cv.md.allTitle": "{app} — Tutor Conversations",
+  "@engine.cv.md.allTitle": {
+    "description": "Heading of the export of all conversations. app = the app/subject title.",
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Databricks Quest"
+      }
+    }
+  },
+  "engine.cv.md.exportedOn": "Exported {date} · {n, plural, one {# conversation} other {# conversations}}",
+  "@engine.cv.md.exportedOn": {
+    "description": "Line under the heading of the export of all conversations. date = date and time (YYYY-MM-DD HH:MM).",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2026-10-11 14:05"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.md.contents": "Contents",
+  "@engine.cv.md.contents": {
+    "description": "Heading of the table of contents of the export of all conversations."
+  },
+  "engine.cv.title": "Conversations ({n, number})",
+  "@engine.cv.title": {
+    "description": "Heading (after 🕘) of the conversation history in the tutor drawer.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.tip": "Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.",
+  "@engine.cv.tip": {
+    "description": "Info tooltip of the conversation history."
+  },
+  "engine.cv.exportAll": "Export all",
+  "@engine.cv.exportAll": {
+    "description": "Button (after ⬇️): export all conversations as one Markdown file."
+  },
+  "engine.cv.chat": "Chat",
+  "@engine.cv.chat": {
+    "description": "Button (after ←): back from the history to the chat."
+  },
+  "engine.cv.alsoShow": "{n, plural, one {Also show # AI grading / review / question record} other {Also show # AI grading / review / question records}}",
+  "@engine.cv.alsoShow": {
+    "description": "Checkbox in the conversation history: also list the saved one-shot AI records.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.search": "Search conversations…",
+  "@engine.cv.search": {
+    "description": "Placeholder of the search box of the conversation history."
+  },
+  "engine.cv.empty": "No conversations yet. Every chat with your tutor is saved here automatically, ready to export as Markdown.",
+  "@engine.cv.empty": {
+    "description": "Empty conversation history."
+  },
+  "engine.cv.namingShort": "naming…",
+  "@engine.cv.namingShort": {
+    "description": "After a conversation’s temporary title while the AI writes its title. Lowercase."
+  },
+  "engine.cv.fromApp": "from {app}",
+  "@engine.cv.fromApp": {
+    "description": "Conversation list: the conversation was made in another app. app = its name (e.g. Meletee).",
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Meletee"
+      }
+    }
+  },
+  "engine.cv.messages": "{n, plural, one {# messages} other {# messages}}",
+  "@engine.cv.messages": {
+    "description": "Conversation list: number of messages (after the date). (English uses “messages” also for 1.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.rename": "Rename",
+  "@engine.cv.rename": {
+    "description": "Tooltip of the ✏️ button of a conversation."
+  },
+  "engine.cv.exportMd": "Export .md",
+  "@engine.cv.exportMd": {
+    "description": "Tooltip of the ⬇️ button of a conversation (Markdown file)."
+  },
+  "engine.cv.delete": "Delete",
+  "@engine.cv.delete": {
+    "description": "Tooltip of the 🗑️ button of a conversation."
+  },
+  "engine.cv.deleteAgain": "Click again to delete",
+  "@engine.cv.deleteAgain": {
+    "description": "Tooltip of the delete button after the first click (confirm by clicking again)."
   }
 }
