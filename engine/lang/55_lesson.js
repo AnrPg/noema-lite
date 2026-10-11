@@ -57,7 +57,7 @@ function runLesson(nid, langs, { checkOnly = false } = {}) {
 }
 
 function runQueue(queue, { nid, langs, title }) {
-  metNew.clear();   // the 🆕 words of this run, listed at the end (D19)
+  metNew.clear();   // the 🆕 words of this run, listed at the end (D20)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;

@@ -90,12 +90,12 @@ function wordCardView(c, lid, concept) {
     phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(codeWord('lc.expl.phraseKind.', x.kind), 'ctx'), x.register ? badge(regWords(x.register), 'reg') : null,
       h('div', { class: 'tiny' }, '“' + x.tr + '” — ', h('b', {}, x.meaning), x.source ? ' (' + x.source + ')' : '')))),
     synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(regWord(reg), 'reg'),
-      h('ul', { class: 'lx-list' }, ...list.map(s => h('li', {}, word(c, s.word, { sub: false }), s.region ? badge('🗺️ ' + s.region, 'ctx') : null, ' — ', s.nuance)))))),
+      h('ul', { class: 'lx-list' }, ...list.map(s => h('li', {}, word(c, s.word, { sub: false }), s.region ? badge('🗺️ ' + s.region, 'ctx') : null, ' — ', mdView(s.nuance, { forLang: c, inline: true }))))))),   // R2
     antonyms: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.word, { sub: false }), x.note ? ' — ' + x.note : ''))),
-    pitfalls: items => h('ul', { class: 'lx-list lx-warn' }, ...items.map(x => h('li', {}, x))),
-    subtleties: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, x))),
+    pitfalls: items => h('ul', { class: 'lx-list lx-warn' }, ...items.map(x => h('li', {}, mdView(x, { forLang: c, inline: true })))),   // R2: structured texts
+    subtleties: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, mdView(x, { forLang: c, inline: true })))),
     etymology: items => h('div', {}, ...items.map(x => h('p', {}, x.text, h('span', { class: 'tiny' }, ' — ' + x.src)))),
-    funFacts: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, '💡 ', x))),
+    funFacts: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, '💡 ', mdView(x, { forLang: c, inline: true })))),
   };
   return h('article', { class: 'lx-card', lang: UI.C.explainLang },
     h('div', { class: 'lx-cardtop' },
@@ -106,10 +106,10 @@ function wordCardView(c, lid, concept) {
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     deepButton(c, lid),
-    card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
+    card.feeling ? h('div', { class: 'lx-feeling' }, '💭 ', mdView(card.feeling, { forLang: c, inline: true })) : null,
     ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + LNUM(Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
-    (() => { const ns = N.contrastFor(lx.profile?.notes, nativeL()); return ns.length ? h('div', { class: 'lx-callout k-key lx-wnotes' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(ns, c)) : null; })(),   // D19: the word seen from the learner's native language
+    ...wordNotesView(c, lx),   // R1: the word seen from the learner's languages and among the languages they learn (46_notes.js)
     polyWordExtras(c, lid),   // P6: bridges and false friends across the learner's languages
     card.synonymsNone ? h('p', { class: 'tiny' }, LT('lang.card.synonyms') + ' ', card.synonymsNone) : null,
     !card.hasProfile ? h('p', { class: 'tiny' }, LT('lang.card.littleWord') + ' ', gloss(c, lid)) : null);

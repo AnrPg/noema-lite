@@ -90,7 +90,7 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
     : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
-/* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned ---------- */
+/* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
 /** The account's settings (a:settings: synced; the native language lives there, for every course). */
 const accSettings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
 function putAccSettings(patch) {
@@ -105,8 +105,8 @@ const nativeL = () => {
   if (nativeMemo && nativeMemo.raw === raw && nativeMemo.C === UI.C) return nativeMemo.v;
   const v = N.nativeOf(UI.C, accSettings().native, UI.L?.settings.knows); nativeMemo = { raw, C: UI.C, v }; return v;
 };
-/** The languages that decide what is familiar (D18 → D19: the native language only); without = the language on screen, never “familiar” from itself. */
-const knowsL = (without = null) => N.nativeKnows(nativeL()).filter(k => (k.code || k.name) !== without);
+/** The languages that decide what is familiar (D18, R1: the native language and the ones spoken at C1 / C2); without = the language on screen, never “familiar” from itself. */
+const knowsL = (without = null) => [...N.nativeKnows(nativeL()), ...N.speaksOf(UI.L?.settings.knows, nativeL()).map(s => ({ ...s, level: s.level }))].filter(k => (k.code || k.name) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
 /** A learner's language by name: a group (type:… / family:…), else the course profile's (English) name in an English UI, else the UI language's name. */
 const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) }) : code?.startsWith('branch:') ? LT('lang.base.langGroup', { group: code.slice(7) })
@@ -132,7 +132,7 @@ function wordPopup(c, lid) {
     h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, gloss(c, lid)), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')), wordCardView(c, lid)));
   document.body.append(pop);
 }
-/** Words met before they were learned (D19): remembered per session, listed at the end of a lesson. */
+/** Words met before they were learned (D20): remembered per session, listed at the end of a lesson. */
 const metNew = new Map();
 function noteNew(c, ids) { for (const l of ids || []) metNew.set(c + '|' + l, { c, l }); }
 function newWordsList(title = '🆕 ' + LT('lang.base.metBefore')) {

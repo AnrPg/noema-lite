@@ -108,13 +108,13 @@ async function runThrough(page, wrongIn = []) {
   ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'phone width: the lesson page does not scroll sideways');
   // ---------- D18: notes from the learner's languages, the library of peculiarities, the languages in ⚙️ Settings ----------
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.definite/de'); await wait(900);
-  { const mine = await page.locator('.lx-notesbox [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
-    ok(!mine.some(x => /^(tr|en|el|ru|ja)$/.test(x)) && !await page.locator('.lx-notesbox details').count(), 'D19: a Turkish native sees no note for any language (Turkish is not a supported native: only its branch / family / type), no fold of other languages (' + (mine.join(', ') || 'none') + ')'); }
+  { const mine = [...new Set(await page.locator('[data-cmp="yours"] [data-for]').evaluateAll(els => els.map(e => e.dataset.for)))];
+    ok(mine.join() === 'tr' && await page.locator('details[data-cmp="others"]:not([open])').count() >= 1, 'R1: a Turkish native (a supported native) sees the Turkish notes among their languages, the other languages folded (' + (mine.join(', ') || 'none') + ')'); }
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/settings'); await wait(700);
   await page.selectOption('.lx-nativesel', 'ja'); await wait(300);
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).native?.code === 'ja'), 'Settings: the native language is set (Japanese), for the account');
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.definite/de'); await wait(900);
-  { const mine = await page.locator('.lx-notesbox .k-key [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
+  { const mine = await page.locator('[data-cmp="yours"] [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
     ok(mine.length && mine.every(x => x === 'ja'), '… and only its notes open on the grammar page (' + mine.join(', ') + ')'); }
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/peculiar/de'); await wait(900);
   { const n = await page.locator('.lx-pec').count(), t = await page.locator('.lx-view').innerText();

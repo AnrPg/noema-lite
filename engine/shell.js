@@ -633,7 +633,8 @@ window.NoemaShell = (() => {
   /** D19 (docs/language-packs.md §2.2): the learner's native language (a:settings.native), read by every language course. The supported
       natives here; any other language (with its type and family) is chosen in a language course's ⚙️ settings and shown as it is. */
   function nativeField(s) {
-    const NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr'];   // = NoemaLang.SUPPORTED_NATIVES (the UI locales)
+    // the supported natives = NoemaLang.SUPPORTED_NATIVES (one source of truth) = the UI locales' languages (langcore may not be loaded here)
+    const NATIVES = (window.NoemaLang && NoemaLang.SUPPORTED_NATIVES) || [...new Set(((window.NoemaI18n && NoemaI18n.LOCALES) || []).filter(x => !x.pseudo).map(x => x.tag.split('-')[0]))];
     const cur = s.native || null, name = c => { try { return new Intl.DisplayNames([lang(), 'en'], { type: 'language' }).of(c) || c; } catch (e) { return c; } };
     const opts = NATIVES.map(c => [c, name(c)]).sort((a, b) => window.NoemaI18n ? NoemaI18n.fmt.compare(a[1], b[1]) : a[1].localeCompare(b[1]));
     const other = cur && !(cur.code && NATIVES.includes(cur.code));

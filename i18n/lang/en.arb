@@ -600,7 +600,7 @@
       }
     }
   },
-  "lang.set.knowsNote": "Other languages you know, with their level. Only your native language decides the explanations and the comparisons.",
+  "lang.set.knowsNote": "Other languages you know, with their level. Your native language decides the language of the explanations; the comparisons start from it and from the languages you speak at C1 or C2.",
   "@lang.set.knowsNote": {
     "description": "Language course › ⚙️ Settings, under “Languages you already know”: what the list is for (D19: only the native language decides explanations and comparisons)."
   },
@@ -1085,6 +1085,14 @@
   "lang.gram.fromYours": "From your languages",
   "@lang.gram.fromYours": {
     "description": "Heading (after 🧭) of the comparison notes for the learner’s own languages."
+  },
+  "lang.gram.amongLearning": "Among the languages you are learning",
+  "@lang.gram.amongLearning": {
+    "description": "Heading (after 🌐) of the comparison notes for the other languages of the course the learner studies (under it: each language’s name, its notes and links to the same point in it)."
+  },
+  "lang.gram.fromOthers": "From other languages",
+  "@lang.gram.fromOthers": {
+    "description": "Heading (after 🗺️) of a folded section, after the learner’s own languages and the ones they learn: the comparison notes for every other language and for types / families of languages. A number follows it."
   },
   "lang.gram.notesFor": "Notes for {langs}",
   "@lang.gram.notesFor": {
@@ -4584,9 +4592,9 @@
   "@lang.native.speakerAuto": {
     "description": "The first option of the “Explanations in” picker: the app chooses (the native language’s translation when it is on, else the UI language’s, else the original)."
   },
-  "lang.feas.missPosN": "{have, number}/{need, number} {pos, select, NOUN {nouns} PROPN {names} VERB {verbs} AUX {auxiliarys} ADJ {adjectives} DET {determiners} PRON {pronouns} ADP {prepositions} ADV {adverbs} PART {particles} CCONJ {conjunctions} SCONJ {subordinators} NUM {numbers} CLF {measures} INTJ {interjections} other {{posWord}s}}",
+  "lang.feas.missPosN": "{have, number}/{need, number} {pos, select, NOUN {nouns} PROPN {names} VERB {verbs} AUX {auxiliaries} ADJ {adjectives} DET {determiners} PRON {pronouns} ADP {prepositions} ADV {adverbs} PART {particles} CCONJ {conjunctions} SCONJ {subordinators} NUM {numbers} CLF {measures} INTJ {interjections} other {words: {posWord}}}",
   "@lang.feas.missPosN": {
-    "description": "In the feasibility light of a grammar function: words of a part of speech the learner has / needs. pos = the part-of-speech tag (Universal Dependencies: NOUN, VERB, AUX …) — write the plural word of each; posWord = the course engine’s word for an unknown tag (other). English keeps its old words (“auxiliarys”, “measures”).",
+    "description": "In the feasibility light of a grammar function: words of a part of speech the learner has / needs. pos = the part-of-speech tag (Universal Dependencies: NOUN, VERB, AUX …) — write the plural word of each; posWord = the course engine’s word for an unknown tag (other: shown as “words: <posWord>”, never with an English plural ending glued to it).",
     "placeholders": {
       "have": {
         "type": "int",

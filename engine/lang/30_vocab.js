@@ -70,7 +70,7 @@ VIEWS.recall = (v, r) => {
 };
 
 /* ---------- ⚙️ settings ---------- */
-/** D18: the learner's languages with their level; native / C2 ones fold what is familiar. A language without a profile is
+/** D18, R1: the learner's languages with their level; native, C1 and C2 ones fold what is familiar and are compared with. A language without a profile is
  *  described by its type (and family), and the app infers from them. */
 const LEVELS = [['native', () => LT('lang.set.native')], ['C2', () => LT('lang.set.c2')], ['C1', () => 'C1'], ['B2', () => 'B2'], ['B1', () => 'B1'], ['A2', () => LT('lang.set.a2')]];
 function knowsEditor() {
@@ -160,7 +160,7 @@ VIEWS.peculiar = (v, r) => {
         fam[p.id] ? h('span', { class: 'tiny' }, ' — ' + LT('lang.pec.familiarFrom', { from: LLIST(fam[p.id].map(langName)) })) : null),
       h('p', {}, wordsIn(c, p.what)),
       ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
-      (() => { const mine = N.contrastFor(p.notes, nativeL()); return mine.length ? notesList(mine, c) : null; })(),   // D19: the native language's notes only
+      ...notesSections(p.notes, c, { compact: true }),   // R1: from the learner's languages · among the languages they learn
       p.when ? h('p', { class: 'tiny' }, '🛤️ ' + LT('lang.pec.inCourse') + ' ', p.when) : null))));
 };
 VIEWS.settings = (v) => {
