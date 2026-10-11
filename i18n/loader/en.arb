@@ -2509,5 +2509,41 @@
         "example": "Chrome"
       }
     }
+  },
+  "loader.group.data-cloud": "Data & Cloud Engineering",
+  "@loader.group.data-cloud": {
+    "description": "Subject picker / Shelf: the heading of a group of library subjects (library/groups.json, id data-cloud). Short."
+  },
+  "loader.group.ai-cs": "AI & Computer Science",
+  "@loader.group.ai-cs": {
+    "description": "Subject picker: heading of a group of library subjects (id ai-cs). Short."
+  },
+  "loader.group.life-sciences": "Life Sciences",
+  "@loader.group.life-sciences": {
+    "description": "Subject picker: heading of a group of library subjects (id life-sciences). Short."
+  },
+  "loader.group.physics": "Physics & Medical Physics",
+  "@loader.group.physics": {
+    "description": "Subject picker: heading of a group of library subjects (id physics). Short."
+  },
+  "loader.group.chemistry": "Chemistry",
+  "@loader.group.chemistry": {
+    "description": "Subject picker: heading of a group of library subjects (id chemistry). Short."
+  },
+  "loader.group.math": "Mathematics & Statistics",
+  "@loader.group.math": {
+    "description": "Subject picker: heading of a group of library subjects (id math). Short."
+  },
+  "loader.group.social-sciences": "Social Sciences & Philosophy",
+  "@loader.group.social-sciences": {
+    "description": "Subject picker: heading of a group of library subjects (id social-sciences). Short."
+  },
+  "loader.group.economics": "Economics & Business",
+  "@loader.group.economics": {
+    "description": "Subject picker: heading of a group of library subjects (id economics). Short."
+  },
+  "loader.group.languages": "Languages",
+  "@loader.group.languages": {
+    "description": "Subject picker: heading of the group of language subjects (id languages). Short."
   }
 }
