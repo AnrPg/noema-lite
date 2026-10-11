@@ -23,7 +23,7 @@ function modelScore(name) {
 async function detectModels() {
   const key = S.settings.apiKey;
   if (!key) throw gemErr('engine.gemini.noKeySet', null, { needsKey: true });
-  const r = await fetch(`${GEM_BASE}/models?pageSize=1000`, { headers: { 'x-goog-api-key': key } });
+  let r; try { r = await fetch(`${GEM_BASE}/models?pageSize=1000`, { headers: { 'x-goog-api-key': key } }); } catch (e) { throw gemNetErr(e); }   // offline: the coded network error (docs/i18n.md §6)
   if (!r.ok) throw gemErr('engine.gemini.modelListFailed', { status: r.status, detail: (await r.text()).slice(0, 200) });
   const d = await r.json();
   const ms = (d.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
