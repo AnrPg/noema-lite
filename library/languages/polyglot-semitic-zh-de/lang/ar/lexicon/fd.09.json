@@ -624,13 +624,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "حَقّ is also “right” and “truth” — Turkish hak (right, justice) is this word."
+     "حَقّ is also “right” and “truth”: حُقُوقُ الْإِنْسَانِ (human rights), الْحَقُّ مَعَكَ (you are right — “the truth is with you”)."
     ],
     "pitfalls": [
      "The tanwīn sits on a doubled q: حَقًّا (ḥaqqan) — keep the šadda."
     ],
     "subtleties": [
      "Alone, as a question, it shows surprise; inside a statement it intensifies: لَذِيذٌ حَقًّا (really tasty)."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi हक़ (a right) is this word."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian hak (what one deserves) comes, through Turkish, from حَقّ."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish hak (right, justice) is this word."
+     }
     ]
    }
   },
@@ -722,13 +739,50 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "“By nature” → “naturally”, exactly like German natürlich and Greek φυσικά."
+     "“By nature” → “naturally”, exactly like German natürlich."
     ],
     "pitfalls": [
      "ع (ʿayn) in the middle: ṭabʿan. The verb طَبَعَ of the same letters means “to print” (مَطْبَعَة, a printing press)."
     ],
     "subtleties": [
      "It can stand alone as an answer or open the sentence: طَبْعًا أُسَاعِدُكَ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Exactly like φυσικά: “by nature” → “of course”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Exactly like естественно: “by nature” → “of course”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Exactly like naturellement: “by nature” → “of course”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Exactly like naturalmente: “by nature” → “of course”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Exactly like naturalmente: “by nature” → “of course”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Exactly like naturalmente: “by nature” → “of course”."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Exactly like naturally: “by nature” → “of course”."
+     }
     ]
    }
   },
@@ -923,10 +977,27 @@
      "On cheques and invoices فَقَطْ is written after the amount in words so nothing can be added — there is even a verb for it, فَقَّطَ (Wiktionary)."
     ],
     "pitfalls": [
-     "It comes after the word it limits: قَهْوَةً فَقَطْ (only coffee) — not before it like English “only”."
+     "It comes after the word it limits: قَهْوَةً فَقَطْ (only coffee)."
     ],
     "subtleties": [
      "لَيْسَ … فَقَطْ، بَلْ … = not only … but also …."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not before the word like “only”: قَهْوَةً فَقَطْ = only coffee."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Not before the word like μόνο: قَهْوَةً فَقَطْ = μόνο καφέ."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Not before the word like только: قَهْوَةً فَقَطْ = только кофе."
+     }
     ]
    }
   },
@@ -1018,13 +1089,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German doch, French si, Arabic بَلَى: one word for “yes” against a “no”."
+     "German doch and Arabic بَلَى: one word for “yes” against a “no”."
     ],
     "pitfalls": [
      "To “Don’t you like tea?”, نَعَمْ means “right, I don’t”; say بَلَى for “yes, I do”."
     ],
     "subtleties": [
      "In everyday speech many people answer نَعَمْ + the full sentence instead; بَلَى is the correct Standard form."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "بَلَى is your si: one word for “yes” against a “no”."
+     }
     ]
    }
   }

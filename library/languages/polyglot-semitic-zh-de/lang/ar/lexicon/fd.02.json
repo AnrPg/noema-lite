@@ -81,13 +81,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish merhaba is this word."
+     "The root ر ح ب means “wide, spacious”: مَرْحَبًا welcomes the guest to a roomy place."
     ],
     "pitfalls": [
      "The ending -an (tanwīn) is pronounced: marḥaban — the alif only carries it."
     ],
     "subtleties": [
      "A friendly reply repeats it or answers with أَهْلًا; colloquial Levantine even says مَرْحَبْتَيْن, “two hellos”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish merhaba is this word."
+     }
     ]
    }
   },
@@ -273,7 +280,7 @@
     },
     "funFacts": [
      "Hebrew שָׁלוֹם עֲלֵיכֶם (shalóm aleikhém) is the same greeting word for word — both from the Semitic root š-l-m, “peace, wholeness”.",
-     "Turkish selam and selamünaleyküm come from it."
+     "سَلَام shares its root س ل م (“safety, peace”) with إِسْلَام and مُسْلِم."
     ],
     "pitfalls": [
      "عَلَيْكُمْ is plural even to one person: it is a fixed formula.",
@@ -281,6 +288,18 @@
     ],
     "subtleties": [
      "A fuller answer adds blessings: وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi सलाम comes from this word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish selam and selamünaleyküm come from it."
+     }
     ]
    }
   },
@@ -362,13 +381,20 @@
      }
     ],
     "funFacts": [
-     "Turkish sabah (morning) and hayır (no; also “good” in hayırlı) are Arabic loans: صَبَاح and خَيْر."
+     "The answer صَبَاحُ النُّورِ (“morning of light”) outdoes the greeting — and you can go further: صَبَاحُ الْفُلِّ (“morning of jasmine”) is heard in Egypt."
     ],
     "pitfalls": [
      "The answer is not the same phrase but صَبَاحُ النُّورِ (morning of light)."
     ],
     "subtleties": [
      "Used until about noon; later in the day people say مَسَاءُ الْخَيْرِ."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish sabah (morning) and hayır (no; also “good” in hayırlı) are Arabic loans: صَبَاح and خَيْر."
+     }
     ]
    }
   },
@@ -785,13 +811,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian до свидания is built the same way: “until the meeting” (Wiktionary compares the Slavic calques)."
+     "Literally “until the meeting”: a goodbye that promises to meet again — like German auf Wiedersehen."
     ],
     "pitfalls": [
      "إِلَى is written with alif maqṣūra (ى); before the article its long ā is shortened in speech: ʾila l-liqāʾ."
     ],
     "subtleties": [
      "A bit more formal than مَعَ السَّلَامَةِ: typical of TV, radio and the classroom."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "до свидания is built the same way: “until the meeting”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "إِلَى اللِّقَاءِ was modelled on au revoir: “until the meeting”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like arrivederci, it promises to meet again: “until the meeting”."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like εις το επανιδείν, it means “until we meet again”."
+     }
     ]
    }
   },
@@ -877,7 +925,29 @@
      "The “you” follows the listener: أَرَاكَ (man), أَرَاكِ (woman), أَرَاكُمْ (several people)."
     ],
     "subtleties": [
-     "Word for word like English “see you later”: أَرَى “I see” + -ka “you”."
+     "Word for word: أَرَى “I see” + -ka “you” + لَاحِقًا “later”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Word for word like “see you later”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Word for word close to nos vemos luego."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Word for word close to ci vediamo dopo."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Word for word close to vemo-nos mais tarde."
+     }
     ]
    }
   },
@@ -1230,7 +1300,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "خَيْر (good) is also in صَبَاحُ الْخَيْرِ; Turkish hayır and, through Turkish, Greek χαΐρι (good, benefit) go back to it."
+     "خَيْر (good) is also in صَبَاحُ الْخَيْرِ: “I am fine” is literally “with good”."
     ],
     "pitfalls": [
      "It never changes: أَنَا بِخَيْرٍ، هِيَ بِخَيْرٍ، نَحْنُ بِخَيْرٍ — no gender, no plural.",
@@ -1238,6 +1308,23 @@
     ],
     "subtleties": [
      "كُلُّ عَامٍ وَأَنْتُمْ بِخَيْرٍ (“every year may you be well”) is the standard wish for a holiday or a birthday."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek χαΐρι (good, benefit — δεν είδα χαΐρι) goes back, through Turkish, to خَيْر."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian hair (good, benefit — s’pafsh hair) goes back, through Turkish, to خَيْر."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish hayır goes back to خَيْر."
+     }
     ]
    }
   },
@@ -1626,13 +1713,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish teşekkür (thanks) comes from Arabic تَشَكُّر, of the same root ش ك ر."
+     "شُكْرًا is the accusative of شُكْر (thanks): “(I give) thanks” — the same -an as in عَفْوًا and مَرْحَبًا."
     ],
     "pitfalls": [
      "The answer is عَفْوًا (you’re welcome)."
     ],
     "subtleties": [
      "The -an (tanwīn) is pronounced: šukran; it marks the accusative of a noun used as an adverb, like أَهْلًا and عَفْوًا."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi शुक्रिया comes, through Persian, from the same root ش ك ر."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish teşekkür (thanks) comes from Arabic تَشَكُّر, of the same root ش ك ر."
+     }
     ]
    }
   },
@@ -1730,13 +1829,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish af (pardon) and affedersiniz (excuse me) come from the same Arabic word عَفْو."
+     "عَفْو means “pardon, forgiveness”: the same عَفْوًا also asks “sorry? pardon?”."
     ],
     "pitfalls": [
      "One word, three jobs: after thanks “you’re welcome”; as a question “pardon?”; before a request “excuse me”."
     ],
     "subtleties": [
      "Literally “(I ask) forgiveness”: Arabic answers thanks by playing the favour down."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish af (pardon) and affedersiniz (excuse me) come from the same Arabic word عَفْو."
+     }
     ]
    }
   },
@@ -1828,13 +1934,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish lütfen (please) is built in the same spirit from another Arabic noun, لُطْف (kindness)."
+     "Literally “from your kindness” (فَضْل, favour, grace); لَوْ سَمَحْتَ, “if you allow”, is just as common."
     ],
     "pitfalls": [
      "To a woman: مِنْ فَضْلِكِ (-ki); to several people: مِنْ فَضْلِكُمْ."
     ],
     "subtleties": [
-     "It can stand before or after the request, like English “please”."
+     "It can stand before or after the request."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish lütfen (please) is built in the same spirit from another Arabic noun, لُطْف (kindness)."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like “please”, it can stand before or after the request."
+     }
     ]
    }
   },

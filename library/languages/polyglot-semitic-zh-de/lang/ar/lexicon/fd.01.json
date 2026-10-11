@@ -206,7 +206,54 @@
      "With أَنْتَ the present verb starts with تَـ and has no ending: أَنْتَ تَأْكُلُ — the same form as “she eats” (هِيَ تَأْكُلُ)."
     ],
     "subtleties": [
-     "Arabic has no built-in polite “you” like German Sie or Russian вы: respect is shown with titles and formulas (حَضْرَتُكَ, يَا أُسْتَاذُ)."
+     "Arabic has no built-in polite “you” like German Sie: respect is shown with titles and formulas (حَضْرَتُكَ, يَا أُسْتَاذُ)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "There is no polite вы: أَنْتَ / أَنْتِ is said to everyone; respect comes from titles and formulas."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "There is no polite vous for one person: أَنْتَ / أَنْتِ is said to everyone, with a title for respect (يَا أُسْتَاذُ)."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "There is no polite εσείς for one person: أَنْتَ / أَنْتِ is said to everyone."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "There is no polite Lei: أَنْتَ / أَنْتِ is said to everyone, with a title for respect (يَا أُسْتَاذُ)."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "There is no usted: أَنْتَ / أَنْتِ is said to everyone, with a title for respect (يَا أُسْتَاذُ)."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "There is no você / o senhor: أَنْتَ / أَنْتِ is said to everyone, with a title for respect (يَا أُسْتَاذُ)."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "There is no polite ju for one person: أَنْتَ / أَنْتِ is said to everyone."
+     },
+     {
+      "for": "hi",
+      "rel": "trap",
+      "text": "There is no आप: أَنْتَ / أَنْتِ is said to everyone; respect comes from titles (يَا أُسْتَاذُ) and formulas (حَضْرَتُكَ)."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "There is no 您: أَنْتَ / أَنْتِ is said to everyone; respect comes from titles and formulas."
+     }
     ]
    }
   },
@@ -714,7 +761,29 @@
      "Exactly two people are addressed with the dual أَنْتُمَا (ʾantumā), not with أَنْتُمْ."
     ],
     "subtleties": [
-     "There is no fixed polite “you” like German Sie or Russian вы; formal letters sometimes address one important person with the plural (-كُمْ: حَضْرَتُكُمْ), but that is style, not a rule."
+     "There is no fixed polite “you” like German Sie; formal letters sometimes address one important person with the plural (-كُمْ: حَضْرَتُكُمْ), but that is style, not a rule."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Not a polite вы: أَنْتُمْ means several people; addressing one person with it is only a style of formal letters."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Not a polite vous: أَنْتُمْ means several people; addressing one person with it is only a style of formal letters."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Not a polite εσείς: أَنْتُمْ means several people; addressing one person with it is only a style of formal letters."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Not a polite ju: أَنْتُمْ means several people; addressing one person with it is only a style of formal letters."
+     }
     ]
    }
   },
@@ -1224,7 +1293,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Everywhere: Arabic links clauses with وَ far more than English uses “and”.",
+    "feeling": "Everywhere: Arabic prose links clause after clause with وَ.",
     "senses": [
      {
       "id": "s1",
@@ -1318,7 +1387,14 @@
     ],
     "subtleties": [
      "Before al- the connecting hamza is silent: وَالْبَصَلُ = wa-l-baṣalu.",
-     "Arabic prose often begins sentences with وَ; translating every one as “and” sounds odd in English."
+     "Arabic prose often begins sentences with وَ; it links, and need not be translated each time."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "Arabic links clauses with وَ far more often than English uses “and” — translate many of them as a full stop or leave them out."
+     }
     ]
    }
   },
@@ -1668,7 +1744,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The plural has nothing in common with the singular: اِمْرَأَة → نِسَاء, like English person → people.",
+     "The plural has nothing in common with the singular: اِمْرَأَة → نِسَاء, a plural from another root.",
      "Hebrew נָשִׁים (nashím, women) matches the Arabic plural نِسَاء."
     ],
     "pitfalls": [
@@ -1677,6 +1753,18 @@
     ],
     "subtleties": [
      "الْمَرْأَةُ is often “woman” as a category: حُقُوقُ الْمَرْأَةِ = women’s rights."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Like person → people, the plural is another word: اِمْرَأَة → نِسَاء."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Like человек → люди, the plural is another word: اِمْرَأَة → نِسَاء."
+     }
     ]
    }
   },
@@ -1866,7 +1954,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish evlat (child, offspring) comes from the plural أَوْلَاد (Wiktionary).",
+     "Its plural أَوْلَاد is also the everyday word for “children”, boys and girls together.",
      "Hebrew יֶלֶד (yéled, boy, child) is the same Semitic word: an Arabic root that starts with w- often starts with y- in Hebrew."
     ],
     "pitfalls": [
@@ -1875,6 +1963,13 @@
     ],
     "subtleties": [
      "In MSA writing صَبِيّ and غُلَام sound more literary; وَلَد is the word you hear every day."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish evlat (child, offspring) comes from the plural أَوْلَاد (Wiktionary)."
+     }
     ]
    }
   },
@@ -2063,7 +2158,7 @@
     },
     "funFacts": [
      "Hebrew בַּת (bat, daughter) is the same word, with the n assimilated: *bint → bat.",
-     "English slang “bint” (a woman — derogatory, British) was borrowed from Arabic بِنْت (Wiktionary)."
+     "بِنْت means both “girl” and “daughter”: بِنْتِي is my daughter."
     ],
     "pitfalls": [
      "بِنْت ends in a plain ت, not ة — but it is feminine, and its plural is بَنَات.",
@@ -2071,6 +2166,13 @@
     ],
     "subtleties": [
      "In names بِنْت means “daughter of”: فَاطِمَةُ بِنْتُ مُحَمَّدٍ — the female counterpart of اِبْن / بْن."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "British slang “bint” (a woman, derogatory) was borrowed from بِنْت — the Arabic word is neutral."
+     }
     ]
    }
   },
@@ -2198,11 +2300,11 @@
      }
     ],
     "etymology": {
-     "text": "Root ط ف ل; Wiktionary gives no older origin. The word passed into Persian, Urdu and Ottoman Turkish (Turkish tıfıl) and Maltese (tifel, “boy”).",
+     "text": "Root ط ف ل; Wiktionary gives no older origin.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Maltese tifel means “boy” — the same Arabic word (Wiktionary)."
+     "Its plural is أَطْفَال, as in رَوْضَةُ الْأَطْفَالِ, kindergarten — “the garden of the children”."
     ],
     "pitfalls": [
      "طِفْل is grammatically masculine but can mean a girl too; for a girl you also hear طِفْلَة.",
@@ -2210,6 +2312,13 @@
     ],
     "subtleties": [
      "طِفْل stresses age (a minor); وَلَد stresses birth and family (someone’s child) or means “boy”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "The word passed into Ottoman Turkish (Turkish tıfıl)."
+     }
     ]
    }
   },
@@ -2355,12 +2464,12 @@
      }
     ],
     "etymology": {
-     "text": "Root ش خ ص (“to rise, to appear”); Wiktionary gives no older origin. It passed into Persian and Ottoman Turkish: Turkish şahıs “person”.",
+     "text": "Root ش خ ص (“to rise, to appear”); Wiktionary gives no older origin.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish şahıs (person) — and Azerbaijani şəxs, Uzbek shaxs — come from شَخْص (Wiktionary).",
-     "شَخْصِيَّة (personality; a character in a story) is شَخْص + -iyya, like English person → personality."
+     "شَخْصِيًّا (personally) is built from it with the adverb ending -an.",
+     "شَخْصِيَّة (personality; a character in a story) is شَخْص + -iyya: an abstract noun made from a concrete one."
     ],
     "pitfalls": [
      "To count people Arabic uses أَشْخَاص, not نَاس: ثَلَاثَةُ أَشْخَاصٍ = three people.",
@@ -2368,6 +2477,48 @@
     ],
     "subtleties": [
      "In law شَخْصٌ اعْتِبَارِيٌّ is a legal person (a company, an institution)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish şahıs (person) comes from شَخْص (Wiktionary)."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like person → personality: شَخْص → شَخْصِيَّة."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like personne → personnalité: شَخْص → شَخْصِيَّة."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like persona → personalità: شَخْص → شَخْصِيَّة."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like persona → personalidad: شَخْص → شَخْصِيَّة."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like pessoa → personalidade: شَخْص → شَخْصِيَّة."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like πρόσωπο → προσωπικότητα: شَخْص → شَخْصِيَّة."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like лицо → личность: شَخْص → شَخْصِيَّة."
+     }
     ]
    }
   },
@@ -2720,7 +2871,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish sadık (loyal) comes from صَادِق (truthful), of the same root.",
+     "The root ص د ق means “truth”: a friend, صَدِيق, is one who is true to you, and صِدْق is truthfulness.",
      "Hebrew צֶדֶק (tsédek, justice) belongs to the cognate root צ ד ק."
     ],
     "pitfalls": [
@@ -2729,6 +2880,13 @@
     ],
     "subtleties": [
      "Do not confuse صَدِيق (ṣadīq, friend) with صِدِّيق (ṣiddīq, always truthful — the epithet of Abū Bakr)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish sadık (loyal) comes from صَادِق (truthful), of the same root."
+     }
     ]
    }
   },
@@ -2922,8 +3080,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "“Taliban” is the Pashto plural of طَالِب — “students” (of religion); Wiktionary lists Pashto طالب.",
-     "Turkish talebe (student) comes from another Arabic plural of the word, طَلَبَة (Wiktionary)."
+     "The name “Taliban” is a plural of طَالِب — “students” (of religion).",
+     "The word has two plurals: طُلَّاب, the usual one, and طَلَبَة."
     ],
     "pitfalls": [
      "There are three plurals: طُلَّاب (the usual one), طَلَبَة (also common), طَالِبُونَ (rare for students). Learn طُلَّاب.",
@@ -2931,6 +3089,13 @@
     ],
     "subtleties": [
      "The word is a participle: “one who seeks”. Arabic sees a student as a seeker — hence the saying about China."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish talebe (student) comes from the plural طَلَبَة (Wiktionary)."
+     }
     ]
    }
   },
@@ -3112,7 +3277,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish muallim and Swahili mwalimu (teacher) come from مُعَلِّم (Wiktionary).",
+     "مُعَلِّم is “one who makes others know”: the participle of عَلَّمَ (to teach), itself from عَلِمَ (to know).",
      "The same root gives عِلْم (knowledge, science), عَالِم (scholar) and عَالَم (world)."
     ],
     "pitfalls": [
@@ -3121,6 +3286,18 @@
     ],
     "subtleties": [
      "In Egypt and the Levant the spoken word مْعَلِّم / مِعَلِّم is also a respectful title for a master craftsman or a boss."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish muallim comes from مُعَلِّم."
+     },
+     {
+      "for": "sw",
+      "rel": "similar",
+      "text": "Swahili mwalimu (teacher) comes from مُعَلِّم."
+     }
     ]
    }
   }
@@ -3128,8 +3305,15 @@
  "absent": [
   {
    "concept": "pron.it",
-   "reason": "Arabic has no neuter and no word for “it”: every thing is masculine or feminine, and a pronoun that refers to it takes its gender.",
-   "use": "هُوَ for a masculine thing (الْبَابُ؟ هُوَ هُنَا — the door? it is here), هِيَ for a feminine thing and for any non-human plural (الْغُرْفَةُ؟ هِيَ هُنَاكَ; الْكُتُبُ؟ هِيَ هُنَا)."
+   "reason": "Arabic has no neuter and no neuter pronoun: every thing is masculine or feminine, and a pronoun that refers to it takes its gender.",
+   "use": "هُوَ for a masculine thing (الْبَابُ؟ هُوَ هُنَا — the door? it is here), هِيَ for a feminine thing and for any non-human plural (الْغُرْفَةُ؟ هِيَ هُنَاكَ; الْكُتُبُ؟ هِيَ هُنَا).",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "There is no word for “it”: a thing is هُوَ or هِيَ by its gender."
+    }
+   ]
   },
   {
    "concept": "det.def",

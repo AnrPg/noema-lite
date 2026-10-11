@@ -364,7 +364,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English syrup and sherbet, Turkish şerbet and Greek σιρόπι all come from this root: شَرَاب / شَرْبَة, “a drink”."
+     "The root ش ر ب gives شَرَاب (a drink; syrup) and شُرْبَة (a soup in many countries); the words for syrup and sherbet in many languages come from it."
     ],
     "pitfalls": [
      "The vowel changes: šariba (past, i) → yašrabu (present, a). Not *yašribu.",
@@ -372,6 +372,58 @@
     ],
     "subtleties": [
      "In formal or polite language تَنَاوَلَ is preferred for meals and medicine: تَنَاوَلَ الدَّوَاءَ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English syrup and sherbet come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek σιρόπι and σερμπέτι come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French sirop and sorbet come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian sciroppo and sorbetto come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish jarabe and sorbete come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese xarope comes from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian сироп and шербет come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian shurup and sherbet come from this root: شَرَاب, “a drink”."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi शरबत comes from this root: شَرْبَة, “a drink”."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish şerbet comes from this root."
+     }
     ]
    }
   },
@@ -514,7 +566,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The root gives مَطْبَخ (kitchen, the place pattern mafʿal) and طَبَّاخ (cook, the trade pattern faʿʿāl); Turkish mutfak, “kitchen”, is the Arabic مَطْبَخ.",
+     "The root gives مَطْبَخ (kitchen, the place pattern mafʿal) and طَبَّاخ (cook, the trade pattern faʿʿāl).",
      "In Hebrew the same root means “to slaughter”, but Modern Hebrew טַבָּח (tabach) is “a cook” — the butcher and the cook meet in one word."
     ],
     "pitfalls": [
@@ -524,6 +576,13 @@
     "subtleties": [
      "The dish is a direct object, no preposition: أَطْبُخُ السَّمَكَ (I cook fish).",
      "Menus and recipes also use the formal طَهَا / طَهْو; at home people say طَبَخَ."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mutfak, “kitchen”, is the Arabic مَطْبَخ."
+     }
     ]
    }
   },
@@ -698,7 +757,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish irade (will, decree) and mürit (disciple) come from Arabic إِرَادَة and مُرِيد, “one who wants”, from this root."
+     "From the same root: إِرَادَة (will, willpower) and مُرِيد, “one who wants” — a Sufi disciple."
     ],
     "pitfalls": [
      "Hollow verb: the long ī/ā shortens before consonant endings — تُرِيدُ but تُرِدْنَ (you, women, want); أَرَادَ but أَرَدْتُ (I wanted).",
@@ -706,6 +765,13 @@
     ],
     "subtleties": [
      "Followed by a noun (أُرِيدُ خُبْزًا) or by أَنْ + subjunctive (أُرِيدُ أَنْ آكُلَ). In a shop, أُرِيدُ + مِنْ فَضْلِكَ is fine; أَوَدُّ is more formal."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish irade (will, decree) and mürit (disciple) come from Arabic إِرَادَة and مُرِيد."
+     }
     ]
    }
   },
@@ -878,7 +944,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish muhabbet (friendly chat, affection) comes from Arabic مَحَبَّة, from the same root; Hebrew חִבָּה (ḥiba, fondness) is a Semitic cousin."
+     "مَحَبَّة (love, affection) comes from the same root; Hebrew חִבָּה (ḥiba, fondness) is a Semitic cousin."
     ],
     "pitfalls": [
      "Form IV: the present has u-prefixes — أُحِبُّ (ʾuḥibbu), يُحِبُّ — not *أَحِبُّ.",
@@ -887,6 +953,23 @@
     "subtleties": [
      "أُحِبُّ means both “I like” and “I love”; the object decides: أُحِبُّ الْبَصَلَ (I like onions) vs أُحِبُّكِ (I love you).",
      "To like doing: أُحِبُّ + verbal noun (أُحِبُّ السِّبَاحَةَ) or أَنْ + subjunctive (أُحِبُّ أَنْ أَسْبَحَ)."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi मोहब्बत (love) is Arabic مَحَبَّة, from the same root."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian muhabet (a friendly chat) comes, through Turkish, from مَحَبَّة."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish muhabbet (friendly chat, affection) comes from Arabic مَحَبَّة."
+     }
     ]
    }
   },
@@ -2072,13 +2155,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A Greek word in Arabic: ὄρυζα → Aramaic → Arabic الرُّزّ, which gave Spanish and Portuguese arroz."
+     "A Greek word in Arabic: ὄρυζα → Aramaic → Arabic الرُّزّ — and from Arabic it travelled on, article and all, into the Iberian Peninsula."
     ],
     "pitfalls": [
      "Not أَرْز (ʾarz): that is the cedar, the tree on Lebanon’s flag."
     ],
     "subtleties": [
      "A mass noun: one grain is حَبَّةُ أَرُزٍّ; dishes are named by what is in them: أَرُزٌّ بِالدَّجَاجِ."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish arroz is الرُّزّ, article and all."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese arroz is الرُّزّ, article and all."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "ὄρυζα is your ρύζι: the Arabic word comes from Greek."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian riso and Arabic أَرُزّ both go back to Greek ὄρυζα."
+     }
     ]
    }
   },
@@ -2180,7 +2285,7 @@
      {
       "word": "شُورْبَة",
       "register": "neutral",
-      "nuance": "the everyday word for soup in most Arab countries and on menus — the same word as Turkish çorba (from Persian)"
+      "nuance": "the everyday word for soup in most Arab countries and on menus (from Persian)"
      }
     ],
     "etymology": {
@@ -2195,6 +2300,18 @@
     ],
     "subtleties": [
      "In speech and on most menus you will read شُورْبَة; حَسَاء is the Standard Arabic word of books and the news."
+    ],
+    "notes": [
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "شُورْبَة is Albanian çorbë."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "شُورْبَة is Turkish çorba."
+     }
     ]
    }
   },
@@ -2315,17 +2432,59 @@
     "synonyms": [],
     "synonymsNone": "The only common word; kinds of salad are named after what is in them (سَلَطَةُ خُضَارٍ).",
     "etymology": {
-     "text": "Wiktionary gives no etymology; it is a European loanword, the Italian (in)salata (“salted”) that Greek σαλάτα and Turkish salata also borrowed.",
+     "text": "Wiktionary gives no etymology; it is a European loanword, the Italian (in)salata (“salted”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One dish, one word around the Mediterranean: Arabic سَلَطَة, Greek σαλάτα, Turkish salata, Italian insalata."
+     "One dish, one word around the Mediterranean: سَلَطَة is a European loan, “the salted (dish)” — German Salat is the same word."
     ],
     "pitfalls": [
      "Unvocalized سلطة is also سُلْطَة (sulṭa), “power, authority” (plural سُلُطَات) — read the vowels."
     ],
     "subtleties": [
      "س is a sun letter: السَّلَطَةُ (as-salaṭa)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σαλάτα is the same word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "سَلَطَة comes from Italian (in)salata."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French salade is the same word."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish ensalada is the same word."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese salada is the same word."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian sallatë is the same word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian салат is the same word."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English salad is the same word."
+     }
     ]
    }
   },
@@ -2588,13 +2747,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew תַּפּוּחַ (tapuach) is the same word — and Hebrew “potato” is תַּפּוּחַ אֲדָמָה, “apple of the earth”, like French pomme de terre."
+     "Hebrew תַּפּוּחַ (tapuach) is the same word — and Hebrew “potato” is תַּפּוּחַ אֲדָמָה, “apple of the earth”, like Austrian German Erdapfel."
     ],
     "pitfalls": [
      "التُّفَّاحُ = apples (in general), تُفَّاحَةٌ = one apple, ثَلَاثُ تُفَّاحَاتٍ = three apples."
     ],
     "subtleties": [
      "ت is a sun letter: التُّفَّاحُ (at-tuffāḥ)."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Hebrew “potato”, תַּפּוּחַ אֲדָמָה, “apple of the earth”, is your pomme de terre."
+     }
     ]
    }
   },
@@ -2718,13 +2884,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English sugar, German Zucker and Spanish azúcar came to Europe through Arabic سُكَّر; Greek ζάχαρη and Russian сахар are cousins from the same Sanskrit word."
+     "German Zucker and many other European words for sugar came through Arabic سُكَّر; the word itself goes back through Persian to Sanskrit."
     ],
     "pitfalls": [
      "Double k (šadda): سُكَّر (sukkar). سُكْر (sukr) is “drunkenness” and سَكَر (sakar) “an intoxicant” (Wiktionary)."
     ],
     "subtleties": [
      "In everyday talk سُكَّر also means diabetes; the medical word is السُّكَّرِيّ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English sugar came to Europe through Arabic سُكَّر."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish azúcar is السُّكَّر, as-sukkar, article and all."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese açúcar is السُّكَّر, as-sukkar, article and all."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French sucre came through Arabic سُكَّر."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian zucchero came through Arabic سُكَّر."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek ζάχαρη is a cousin from the same Sanskrit word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian сахар is a cousin from the same Sanskrit word."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian sheqer is a cousin from the same Sanskrit word, through Persian and Turkish."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi शक्कर and Sanskrit शर्करा are the source of سُكَّر, through Persian."
+     }
     ]
    }
   },
@@ -3087,13 +3300,70 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word across your languages: Arabic شَاي, Turkish çay, Russian чай and Greek τσάι all go back to Chinese 茶 (chá)."
+     "شَاي goes back, through Persian, to Chinese 茶 (chá) — the form of the word that spread over land."
     ],
     "pitfalls": [
      "In many Arab countries tea comes in a small glass: كَأْسُ شَايٍ, not فِنْجَانُ شَايٍ."
     ],
     "subtleties": [
      "The final ي is a consonant here: شَايٌ (šāyun), شَايًا, شَايٍ."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian чай is the same word, from Chinese 茶."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek τσάι is the same word, from Chinese 茶."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi चाय is the same word, from Chinese 茶."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese chá is the same word, from Chinese 茶."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian çaj is the same word, from Chinese 茶."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 茶 (cha) is the same word."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English tea comes from the other form of the Chinese word, spread by sea; chai, from the form spread over land, is شَاي."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French thé comes from the other form of the Chinese word, spread by sea; شَاي comes from the form spread over land."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian tè comes from the other form of the Chinese word, spread by sea; شَاي comes from the form spread over land."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish té comes from the other form of the Chinese word, spread by sea; شَاي comes from the form spread over land."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish çay is the same word."
+     }
     ]
    }
   },
@@ -3235,13 +3505,70 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Coffee, German Kaffee, Turkish kahve, Greek καφές and Russian кофе all go back to Arabic قَهْوَة (through Ottoman Turkish kahve)."
+     "German Kaffee and the words for coffee in most languages go back to Arabic قَهْوَة (through Ottoman Turkish kahve)."
     ],
     "pitfalls": [
      "Feminine: الْقَهْوَةُ سَاخِنَةٌ (the coffee is hot), not *سَاخِنٌ."
     ],
     "subtleties": [
      "In Egypt قَهْوَة is also the café; Standard Arabic says مَقْهًى (the place pattern mafʿal)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English coffee goes back to قَهْوَة."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek καφές goes back to قَهْوَة."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian кофе goes back to قَهْوَة."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French café goes back to قَهْوَة."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian caffè goes back to قَهْوَة."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish café goes back to قَهْوَة."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese café goes back to قَهْوَة."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian kafe goes back to قَهْوَة."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi कॉफ़ी goes back to قَهْوَة."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese コーヒー goes back to قَهْوَة."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish kahve is the word through which قَهْوَة reached Europe."
+     }
     ]
    }
   },
@@ -3722,7 +4049,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A word that crossed your languages: German Bier → Italian birra → (Greek μπίρα or Turkish bira) → Arabic بِيرَة."
+     "A word that crossed Europe: German Bier → Italian birra → (Greek μπίρα or Turkish bira) → Arabic بِيرَة."
     ],
     "pitfalls": [
      "Feminine (ة): بِيرَةٌ بَارِدَةٌ, not *بَارِدٌ."
@@ -3838,13 +4165,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Exactly like English break-fast: the meal that breaks the night’s fast."
+     "فَطُور breaks the fast: from فَطَرَ, “to break a fast” — the root of إِفْطَار, the meal at sunset in Ramadan, and of عِيدُ الْفِطْرِ."
     ],
     "pitfalls": [
      "faṭūr (فَطُور) is the meal; fuṭūr (فُطُور) is the act of breaking a fast — but in speech you will also hear fuṭūr for breakfast."
     ],
     "subtleties": [
      "With meals Arabic says عَلَى: عَلَى الْفَطُورِ (at breakfast); prepositions come in lesson 11."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Exactly like break-fast: the meal that breaks the night’s fast."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like déjeuner, once “to break the fast”: the meal that ends the night’s fast."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like desayuno, “un-fasting”: the meal that ends the night’s fast."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like desjejum, “un-fasting”: the meal that ends the night’s fast."
+     }
     ]
    }
   },

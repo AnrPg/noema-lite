@@ -199,10 +199,17 @@
     ],
     "pitfalls": [
      "The present has a: يَذْهَبُ (not *يَذْهُبُ), so the imperative starts with i: اِذْهَبْ!",
-     "The goal takes إِلَى: أَذْهَبُ إِلَى السُّوقِ — never فِي (Greek σε, German in/zu are both إِلَى here)."
+     "The goal takes إِلَى: أَذْهَبُ إِلَى السُّوقِ — never فِي (German in/zu are both إِلَى here)."
     ],
     "subtleties": [
      "ذَهَبَ is “go” however you go — on foot or by car; German gehen / fahren are both ذَهَبَ (the vehicle comes with بِـ: ذَهَبْتُ بِالْقِطَارِ)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek σε is both place and goal (στην αγορά); for the goal Arabic says إِلَى: أَذْهَبُ إِلَى السُّوقِ."
+     }
     ]
    }
   },
@@ -406,7 +413,19 @@
      "The hamza changes its seat: جَاءَ, جِئْتُ, يَجِيئُونَ, جَاؤُوا."
     ],
     "subtleties": [
-     "Like English, Arabic separates ذَهَبَ (go, away from here) and جَاءَ (come, towards the speaker); Greek έρχομαι = جَاءَ."
+     "Arabic separates ذَهَبَ (go, away from here) and جَاءَ (come, towards the speaker)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like go and come: ذَهَبَ and جَاءَ."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "έρχομαι = جَاءَ, πηγαίνω = ذَهَبَ."
+     }
     ]
    }
   },
@@ -1174,7 +1193,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Swahili safari (journey) comes from Arabic سَفَر — and English took safari from Swahili.",
+     "سَفَر is the journey; through East Africa the word went round the world as “safari”.",
      "مُسَافِر is a traveller or a passenger."
     ],
     "pitfalls": [
@@ -1183,6 +1202,18 @@
     ],
     "subtleties": [
      "سَافَرَ is a journey to another town or country; for the daily way to work use ذَهَبَ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English safari comes, through Swahili, from سَفَر."
+     },
+     {
+      "for": "sw",
+      "rel": "same",
+      "text": "Swahili safari (journey) comes from Arabic سَفَر."
+     }
     ]
    }
   },
@@ -1398,7 +1429,14 @@
      "Hollow verb like قَادَ: يَعُودُ, عُدْتُ (I came back), عُدْ! (come back!)."
     ],
     "subtleties": [
-     "One verb for both directions: عَادَ إِلَى الْبَيْتِ is “go back home” or “come back home” — Greek γυρίζω also covers both."
+     "One verb for both directions: عَادَ إِلَى الْبَيْتِ is “go back home” or “come back home”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like γυρίζω, it covers “go back” and “come back”."
+     }
     ]
    }
   },
@@ -2106,7 +2144,14 @@
      "With a place: وَصَلَ إِلَى الْمَدِينَةِ, or directly وَصَلَ الْمَدِينَةَ."
     ],
     "subtleties": [
-     "Greek φτάνω, German ankommen: Arabic says وَصَلَ + إِلَى. Its command form صِلْ! is rarely needed."
+     "German ankommen: Arabic says وَصَلَ + إِلَى. Its command form صِلْ! is rarely needed."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "φτάνω στο σπίτι = وَصَلَ إِلَى الْبَيْتِ."
+     }
     ]
    }
   },
@@ -2443,7 +2488,14 @@
      "The first alif is hamzat al-waṣl: at the start اِنْتَظِرْ!, after a vowel silent: وَانْتَظَرَ."
     ],
     "subtleties": [
-     "Like Greek περιμένω and unlike German warten auf, it takes a direct object."
+     "Unlike German warten auf, it takes a direct object."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like περιμένω, it takes a direct object: أَنْتَظِرُ الْحَافِلَةَ = περιμένω το λεωφορείο."
+     }
     ]
    }
   },
@@ -3650,7 +3702,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "If it comes from Greek κάραβος, it is a cousin of Modern Greek καράβι (ship)."
+     "Perhaps from Greek κάραβος — or a native word, “the one that comes near” the shore."
     ],
     "pitfalls": [
      "The plural قَوَارِبُ is diptote (no tanwīn): قَوَارِبُ كَثِيرَةٌ.",
@@ -3658,6 +3710,13 @@
     ],
     "subtleties": [
      "قَارِب is small (rowing, fishing); a big ship is سَفِينَة or بَاخِرَة."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "If it comes from Greek κάραβος, it is a cousin of καράβι (ship)."
+     }
     ]
    }
   },
@@ -3749,13 +3808,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German zu Fuß and Greek με τα πόδια name the foot; Arabic says “walking” — or in full مَشْيًا عَلَى الْأَقْدَامِ, walking on the feet."
+     "German zu Fuß names the foot; Arabic says “walking” — or in full مَشْيًا عَلَى الْأَقْدَامِ, walking on the feet."
     ],
     "pitfalls": [
      "Unlike the vehicles (بِالْحَافِلَةِ, بِالسَّيَّارَةِ), “on foot” takes no بِـ: أَذْهَبُ مَشْيًا."
     ],
     "subtleties": [
      "-an is the accusative used as an adverb, as in مَسَاءً (in the evening) and شُكْرًا (thanks)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "με τα πόδια names the feet; Arabic says “walking”: مَشْيًا."
+     }
     ]
    }
   },

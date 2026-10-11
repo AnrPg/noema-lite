@@ -239,7 +239,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek σε covers in, at and to; Arabic splits it: فِي for “in, at” (where?), إِلَى for “to” (where to?).",
+     "Arabic splits place and direction: فِي for “in, at” (where?), إِلَى for “to” (where to?).",
      "فِي also multiplies: ثَلَاثَةٌ فِي أَرْبَعَةٍ = three times four (Wiktionary)."
     ],
     "pitfalls": [
@@ -249,7 +249,39 @@
     "subtleties": [
      "Arabic does not distinguish “in” and “at” for places: فِي الْمَدْرَسَةِ = in school / at school. “At someone’s place” is عِنْدَ: عِنْدَ الطَّبِيبِ.",
      "The noun after فِي is genitive: فِي بَيْتٍ (-in), فِي الْبَيْتِ (-i).",
-     "Time: one فِي for English at / on / in and German um / am / im — فِي السَّاعَةِ الْخَامِسَةِ (at five), فِي يَوْمِ الْأَحَدِ (on Sunday), فِي يَنَايِرَ, فِي الصَّيْفِ (in January, in summer)."
+     "Time: one فِي for every point in time — German um / am / im — فِي السَّاعَةِ الْخَامِسَةِ (at five), فِي يَوْمِ الْأَحَدِ (on Sunday), فِي يَنَايِرَ, فِي الصَّيْفِ (in January, in summer)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek σε covers in, at and to; Arabic splits it: فِي (where?), إِلَى (where to?)."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French à covers “at” and “to” (à l’école); Arabic splits it: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Italian a / in cover “at” and “to” (a scuola); Arabic splits them: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Albanian në covers “in” and “into” (në shkollë); Arabic splits it: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian в shows place or direction by the case (в школе / в школу); Arabic by the preposition: فِي / إِلَى."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "One فِي for at / on / in: at five, on Sunday, in January, in summer."
+     }
     ]
    },
    "prefix": false
@@ -384,7 +416,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "إِلَى اللِّقَاءِ (goodbye) is literally “until the meeting” — like German auf Wiedersehen and Greek εις το επανιδείν."
+     "إِلَى اللِّقَاءِ (goodbye) is literally “until the meeting” — like German auf Wiedersehen."
     ],
     "pitfalls": [
      "Written with ى but read -ā: ʾilā. With a pronoun the ى becomes يْ: إِلَيْكَ, إِلَيْهِ, إِلَيَّ (to me).",
@@ -393,6 +425,13 @@
     "subtleties": [
      "إِلَى answers “where to?” (إِلَى أَيْنَ؟), فِي answers “where?” — but the noun is genitive after both: Arabic shows the direction with the preposition, not with the case (German: in die Schule / in der Schule).",
      "In time, مِنْ … إِلَى … is “from … to / until …”; alone, “until” is usually حَتَّى (lesson 15)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "إِلَى اللِّقَاءِ is “until the meeting”, like εις το επανιδείν."
+     }
     ]
    },
    "prefix": false
@@ -1467,7 +1506,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English madrasa and Turkish medrese are this word: “the place of studying”."
+     "“The place of studying”: the place pattern مَفْعَلَة on the root د ر س (to study)."
     ],
     "pitfalls": [
      "مَدْرَسَة (madrasa, school) vs مُدَرِّسَة (mudarrisa, a female teacher): the same letters, other vowels.",
@@ -1475,6 +1514,23 @@
     ],
     "subtleties": [
      "mafʿala / mafʿal = “the place where …”: مَدْرَسَة (studying), مَكْتَب (writing → office), مَطْبَخ (cooking → kitchen)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English madrasa means a religious school; Arabic مَدْرَسَة is any school."
+     },
+     {
+      "for": "hi",
+      "rel": "trap",
+      "text": "Hindi मदरसा means a religious school; Arabic مَدْرَسَة is any school."
+     },
+     {
+      "for": "tr",
+      "rel": "trap",
+      "text": "Turkish medrese is a religious school; Arabic مَدْرَسَة is any school."
+     }
     ]
    }
   },
@@ -1782,7 +1838,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew עָמָל (amal) means “toil, hard work” — the same Semitic word; Turkish amel (deed) is the Arabic one."
+     "Hebrew עָמָל (amal) means “toil, hard work” — the same Semitic word."
     ],
     "pitfalls": [
      "“At work” is فِي الْعَمَلِ — with the article, like فِي الْبَيْتِ.",
@@ -1790,6 +1846,18 @@
     ],
     "subtleties": [
      "مَا عَمَلُكَ؟ = What do you do for a living?"
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi अमल (action, as in अमल करना, to carry out) is this word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish amel (deed) is the Arabic word."
+     }
     ]
    }
   },
@@ -1951,7 +2019,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "“The place of writing”: كَتَبَ (to write) → كِتَاب (book) → مَكْتَب (office, desk) → مَكْتَبَة (library, bookshop). Turkish mektep (school) and mektup (letter) come from the same root."
+     "“The place of writing”: كَتَبَ (to write) → كِتَاب (book) → مَكْتَب (office, desk) → مَكْتَبَة (library, bookshop)."
     ],
     "pitfalls": [
      "مَكْتَب (office, desk) vs مَكْتَبَة (library, bookshop): the tāʾ marbūṭa makes another word.",
@@ -1959,6 +2027,13 @@
     ],
     "subtleties": [
      "مَكْتَب is also “agency, bureau” in names: مَكْتَبُ سِيَاحَةٍ, مَكْتَبُ مُحَامَاةٍ (law firm)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish mektep (school) and mektup (letter) come from the same root."
+     }
     ]
    }
   },
@@ -2110,7 +2185,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Its sister مَحَلَّة (quarter) became Turkish mahalle and Greek μαχαλάς, “neighbourhood”."
+     "Its sister مَحَلَّة is a quarter of a town; both come from حَلَّ, “to settle, to stop at a place”."
     ],
     "pitfalls": [
      "The l is doubled: مَحَلّ (maḥall); الْمَحَلُّ, فِي الْمَحَلِّ.",
@@ -2118,6 +2193,28 @@
     ],
     "subtleties": [
      "مَحَلِّيّ (local) is built on it: الْوَقْتُ الْمَحَلِّيُّ = local time."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μαχαλάς (neighbourhood) is its sister مَحَلَّة."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi मोहल्ला (neighbourhood) is its sister مَحَلَّة."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian mëhallë (neighbourhood) is its sister مَحَلَّة."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish mahalle is its sister مَحَلَّة."
+     }
     ]
    }
   },
@@ -2233,7 +2330,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One international word: Greek σουπερμάρκετ, German Supermarkt, Turkish süpermarket, Russian супермаркет."
+     "One international word, like German Supermarkt."
     ],
     "pitfalls": [
      "A loanword: careful MSA declines it like a native noun (فِي السُّوبَرْمَارْكِتِ), but in speech the ending is never heard.",
@@ -2241,6 +2338,18 @@
     ],
     "subtleties": [
      "For small daily purchases people still go to the grocer’s, الْبَقَّالَة, or the corner shop, الدُّكَّان."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "One international word, like σουπερμάρκετ."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "One international word, like супермаркет."
+     }
     ]
    }
   },
@@ -2376,7 +2485,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew שׁוּק (shuk) is the same word, and English took souk from Arabic; its oldest ancestor, Akkadian sūqum, meant “street”."
+     "Hebrew שׁוּק (shuk) is the same word; its oldest ancestor, Akkadian sūqum, meant “street”."
     ],
     "pitfalls": [
      "سُوق is traditionally feminine, though masculine is also accepted (Wiktionary: f or m): السُّوقُ مُزْدَحِمَةٌ / مُزْدَحِمٌ.",
@@ -2384,6 +2493,28 @@
     ],
     "subtleties": [
      "The plural أَسْوَاق also means “markets” in economics; in the Gulf الْأَسْوَاقُ الْمَرْكَزِيَّةُ are supermarkets."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English souk is this word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French souk is this word (and c’est le souk, “it’s a mess”)."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish zoco is this word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese açougue (a butcher’s shop) is السُّوق, as-sūq, article and all."
+     }
     ]
    }
   },
@@ -2526,7 +2657,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "“The eating place” — compare Greek εστιατόριο, from εστιάω, “to entertain at a feast”."
+     "“The eating place”: the place pattern مَفْعَل on the root ط ع م (to taste, to eat) — like مَطْبَخ, the cooking place."
     ],
     "pitfalls": [
      "ط and ع side by side: maṭʿam — not *matam.",
@@ -2534,6 +2665,13 @@
     ],
     "subtleties": [
      "A fast-food place is مَطْعَمُ وَجَبَاتٍ سَرِيعَةٍ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek εστιατόριο comes from εστιάω, “to entertain at a feast”; مَطْعَم is just “the eating place”."
+     }
     ]
    }
   },
@@ -2673,7 +2811,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "“The place of coffee”: قَهْوَة gave Turkish kahve and Greek καφές, and through Italian caffè the German Kaffee and English coffee."
+     "“The place of coffee”: the place pattern مَفْعَل on قَهْوَة — a word that travelled, through Italian caffè, as far as German Kaffee."
     ],
     "pitfalls": [
      "A defective noun: مَقْهًى (maqhan) without the article, الْمَقْهَى (al-maqhā) with it — the ending does not change for case.",
@@ -2681,6 +2819,23 @@
     ],
     "subtleties": [
      "The traditional مَقْهًى شَعْبِيٌّ is a meeting place for men: tea, coffee, backgammon and the water pipe."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like café, one word gives the drink (قَهْوَة) and the place (مَقْهًى)."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like καφές → καφενείο: قَهْوَة → مَقْهًى."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English coffee comes, through Italian caffè, from قَهْوَة."
+     }
     ]
    }
   },
@@ -3077,13 +3232,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian banco is the moneychanger’s bench — and Greek τράπεζα (bank) is literally “table”: the same counter, two pictures."
+     "Italian banco is the moneychanger’s bench."
     ],
     "pitfalls": [
      "A sukūn on n: bank, not *banak; the plural is broken: بُنُوك."
     ],
     "subtleties": [
      "Islamic banks and official names often prefer مَصْرِف."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek τράπεζα (bank) is literally “table”: the same counter as Italian banco, another picture."
+     }
     ]
    }
   },
@@ -3782,7 +3944,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Indo-European root of *mádyah also gives Greek μέσος, German Mitte and English middle: a square is “the middle” of the town."
+     "The Iranian source means “middle” — the same old root as German Mitte: a square is “the middle” of the town."
     ],
     "pitfalls": [
      "“On the square” is فِي الْمَيْدَانِ (in), not عَلَى.",
@@ -3790,6 +3952,28 @@
     ],
     "subtleties": [
      "Egypt says مَيْدَان (مَيْدَانُ التَّحْرِيرِ), the Levant mostly سَاحَة."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The Iranian source shares its old root with Greek μέσος: a square is “the middle” of the town."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The Iranian source shares its old root with English middle: a square is “the middle” of the town."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "The Iranian source shares its old root with Italian mezzo: a square is “the middle” of the town."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "The Iranian source shares its old root with Hindi मध्य: a square is “the middle” of the town."
+     }
     ]
    }
   },
@@ -3944,14 +4128,61 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "An enclosed garden — the same picture as Greek παράδεισος (paradise), from an Iranian word for a walled park."
+     "An enclosed garden: the root ح د ق means “to surround” — the same picture as the old Iranian word for a walled park behind “paradise”."
     ],
     "pitfalls": [
-     "One Arabic word for two English ones: حَدِيقَة = park and garden; the context decides.",
+     "One word for a public park and a private garden: حَدِيقَة; the context decides.",
      "The plural حَدَائِقُ is a diptote."
     ],
     "subtleties": [
      "حَدِيقَةُ الْحَيَوَانَاتِ, “the garden of the animals”, is the zoo."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same picture as παράδεισος, from an Iranian word for a walled park."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same picture as paradise, from an Iranian word for a walled park."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "One word for park and garden: حَدِيقَة."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "One word for parc and jardin: حَدِيقَة."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "One word for πάρκο and κήπος: حَدِيقَة."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "One word for парк and сад: حَدِيقَة."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "One word for parco and giardino: حَدِيقَة."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "One word for parque and jardín: حَدِيقَة."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "One word for parque and jardim: حَدِيقَة."
+     }
     ]
    }
   },
@@ -4428,7 +4659,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish belde (town) and belediye (municipality) come from this root (Arabic بَلْدَة, بَلَدِيَّة)."
+     "From the same root: بَلْدَة (a town) and بَلَدِيَّة (a town council, a municipality)."
     ],
     "pitfalls": [
      "Two plurals: بُلْدَان (countries) and بِلَاد, which often means “the land, the country” itself.",
@@ -4436,6 +4667,13 @@
     ],
     "subtleties": [
      "“My country” is بَلَدِي; “abroad” is خَارِجَ الْبَلَدِ or فِي الْخَارِجِ."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish belde (town) and belediye (municipality) come from this root (Arabic بَلْدَة, بَلَدِيَّة)."
+     }
     ]
    }
   }

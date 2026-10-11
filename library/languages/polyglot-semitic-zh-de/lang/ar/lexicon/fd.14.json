@@ -101,14 +101,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “the one”: by the Arabic count the week starts on Sunday — Greek Κυριακή (the Lord’s day) is a name, not a number.",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "Literally “the one”: by the Arabic count the week starts on Sunday.",
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: الْأَحَد — and in “on …” the genitive after يَوْمَ: يَوْمَ الْأَحَدِ."
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْأَحَدِ), or فِي يَوْمِ الْأَحَدِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Κυριακή (the Lord’s day) is a name, not a number; Arabic counts from Sunday, الْأَحَد “the one” — so Δευτέρα “the second” is الِاثْنَيْن “the two”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like domingo before segunda-feira, Sunday opens the week: الْأَحَد, “the one”."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "星期一 is Monday, but الْأَحَد (“one”) is Sunday: Arabic counts from Sunday."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "The Arabic week starts on Sunday: الْأَحَد, “the one”."
+     }
     ]
    }
   },
@@ -211,8 +233,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “the two (days)”: it is the dual of اِثْنَان (two, lesson 5), like Greek Δευτέρα (the second).",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "Literally “the two (days)”: it is the dual of اِثْنَان (two, lesson 5).",
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: الِاثْنَيْن — and in “on …” the genitive after يَوْمَ: يَوْمَ الِاثْنَيْنِ.",
@@ -220,6 +242,28 @@
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ الِاثْنَيْنِ), or فِي يَوْمِ الِاثْنَيْنِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Δευτέρα, “the second”, is الِاثْنَيْن, “the two”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "segunda-feira, “the second day”, is الِاثْنَيْن, “the two”."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "الِاثْنَيْن (“two”) is Monday = 星期一: Arabic counts from Sunday."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "понедельник is “after the week (Sunday)”; Arabic counts: الِاثْنَيْن, “the two”."
+     }
     ]
    }
   },
@@ -320,14 +364,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From ثَلَاثَة (three) — Greek Τρίτη, “the third”. Wiktionary also accepts the spelling الثَّلَاثَاء (aṯ-ṯalāṯāʾ).",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "From ثَلَاثَة (three). Wiktionary also accepts the spelling الثَّلَاثَاء (aṯ-ṯalāṯāʾ).",
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: الثُّلَاثَاء — and in “on …” the genitive after يَوْمَ: يَوْمَ الثُّلَاثَاءِ."
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ الثُّلَاثَاءِ), or فِي يَوْمِ الثُّلَاثَاءِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Τρίτη, “the third”, is الثُّلَاثَاء, from “three”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "terça-feira, “the third day”, is الثُّلَاثَاء, from “three”."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "вторник is “the second” day, but الثُّلَاثَاء (from “three”) is the same Tuesday: Arabic counts from Sunday."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "الثُّلَاثَاء (from “three”) is Tuesday = 星期二."
+     }
     ]
    }
   },
@@ -428,8 +494,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From أَرْبَعَة (four) — Greek Τετάρτη, “the fourth”. The same letters are also a plural of رَبِيع, spring (Wiktionary).",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "From أَرْبَعَة (four). The same letters are also a plural of رَبِيع, spring (Wiktionary).",
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: الْأَرْبِعَاء — and in “on …” the genitive after يَوْمَ: يَوْمَ الْأَرْبِعَاءِ.",
@@ -437,6 +503,28 @@
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْأَرْبِعَاءِ), or فِي يَوْمِ الْأَرْبِعَاءِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Τετάρτη, “the fourth”, is الْأَرْبِعَاء, from “four”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "quarta-feira, “the fourth day”, is الْأَرْبِعَاء, from “four”."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "среда is “the middle”; الْأَرْبِعَاء is “the fourth”."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "الْأَرْبِعَاء (from “four”) is Wednesday = 星期三."
+     }
     ]
    }
   },
@@ -537,14 +625,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From خَمْسَة (five) — Greek Πέμπτη, “the fifth”.",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "From خَمْسَة (five), on the pattern فَعِيل.",
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: الْخَمِيس — and in “on …” the genitive after يَوْمَ: يَوْمَ الْخَمِيسِ."
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْخَمِيسِ), or فِي يَوْمِ الْخَمِيسِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Πέμπτη, “the fifth”, is الْخَمِيس, from “five”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "quinta-feira, “the fifth day”, is الْخَمِيس, from “five”."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "четверг is “the fourth” day, but الْخَمِيس (from “five”) is the same Thursday: Arabic counts from Sunday."
+     },
+     {
+      "for": "zh",
+      "rel": "trap",
+      "text": "الْخَمِيس (from “five”) is Thursday = 星期四."
+     }
     ]
    }
   },
@@ -676,7 +786,7 @@
     },
     "funFacts": [
      "From جَمَعَ, “to gather”: Friday is the day of gathering for the noon prayer; جُمُعَة can also mean “week” (Wiktionary).",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: الْجُمُعَة — and in “on …” the genitive after يَوْمَ: يَوْمَ الْجُمُعَةِ.",
@@ -684,6 +794,28 @@
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ الْجُمُعَةِ), or فِي يَوْمِ الْجُمُعَةِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "sexta-feira, “the sixth day”, is Friday in Arabic counting too — but its name, الْجُمُعَة, means “gathering”."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "пятница is “the fifth”; Friday is the sixth day in the Arabic count and is named الْجُمُعَة, “gathering”."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Παρασκευή is “preparation”; الْجُمُعَة is “gathering”."
+     },
+     {
+      "for": "zh",
+      "rel": "different",
+      "text": "星期五 is a number; الْجُمُعَة is “gathering”."
+     }
     ]
    }
   },
@@ -790,14 +922,51 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew שַׁבָּת, Greek Σάββατο and Russian суббота are the same word.",
-     "Arabic numbers the days like Greek and Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (Δευτέρα, יוֹם שֵׁנִי), الثُّلَاثَاء “three” (Τρίτη), الْأَرْبِعَاء “four” (Τετάρτη), الْخَمِيس “five” (Πέμπτη); then الْجُمُعَة (gathering) and السَّبْت (Sabbath, Σάββατο, суббота)."
+     "Hebrew שַׁבָּת is the same word.",
+     "Arabic numbers the days like Hebrew: الْأَحَد “one”, الِاثْنَيْن “two” (יוֹם שֵׁנִי), الثُّلَاثَاء “three”, الْأَرْبِعَاء “four”, الْخَمِيس “five”; then الْجُمُعَة (gathering) and السَّبْت (Sabbath)."
     ],
     "pitfalls": [
      "Always with the article: السَّبْت — and in “on …” the genitive after يَوْمَ: يَوْمَ السَّبْتِ."
     ],
     "subtleties": [
      "On a day = يَوْمَ + the day in the genitive (يَوْمَ السَّبْتِ), or فِي يَوْمِ السَّبْتِ; the day name never stands without the article."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Σάββατο is the same word as السَّبْت."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "суббота is the same word as السَّبْت."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "sábado is the same word as السَّبْت."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "sábado is the same word as السَّبْت."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "sabato is the same word as السَّبْت."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "samedi goes back to the same word as السَّبْت."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "e shtunë goes back to the same word as السَّبْت."
+     }
     ]
    }
   },
@@ -909,7 +1078,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Built like English week-end and German Wochenende — but in Arabic order: “end (of) the week”."
+     "Built like German Wochenende — but in Arabic order: “end (of) the week”."
     ],
     "pitfalls": [
      "A construct: the case is on نِهَايَة (نِهَايَةُ / نِهَايَةَ / نِهَايَةِ), الْأُسْبُوعِ stays genitive.",
@@ -917,6 +1086,13 @@
     ],
     "subtleties": [
      "Which days? In most Arab countries Friday and Saturday; in Morocco, Tunisia and Lebanon Saturday and Sunday."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like week-end — but in Arabic order: “end (of) the week”."
+     }
     ]
    }
   },
@@ -1754,13 +1930,40 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Built like English after-noon and German Nachmittag; Greek απόγευμα is “after the meal”."
+     "Built like German Nachmittag: “after (the) noon”."
     ],
     "pitfalls": [
      "A fixed phrase: بَعْدَ never changes and الظُّهْرِ stays genitive; do not put فِي in front of it."
     ],
     "subtleties": [
      "In timetables it is p.m.; the morning hours are قَبْلَ الظُّهْرِ (a.m.)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like after-noon."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Built like après-midi."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Built like pomeriggio, “after midday”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Built like после полудня."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "απόγευμα is “after the meal”; Arabic says “after noon”."
+     }
     ]
    }
   },
@@ -1965,13 +2168,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew הַיּוֹם (hayom), “the day”, is built the same way; Greek σήμερα and German heute also come from “this day”."
+     "Hebrew הַיּוֹם (hayom), “the day”, is built the same way; German heute also comes from “this day”."
     ],
     "pitfalls": [
      "الْيَوْمَ (-a) is the adverb; الْيَوْمُ (-u) is “the day” as a subject: الْيَوْمُ الْأَحَدُ (today is Sunday)."
     ],
     "subtleties": [
      "It can stand at the start or at the end: الْيَوْمَ أَعْمَلُ = أَعْمَلُ الْيَوْمَ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "σήμερα also comes from “this day”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "сегодня also comes from “this day” (сего дня)."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "oggi also comes from “this day” (Latin hodie)."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "aujourd’hui also contains “this day” (hui, from Latin hodie)."
+     }
     ]
    }
   },
@@ -2280,13 +2505,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “the time” — like Greek τώρα, a word for a moment of time."
+     "Literally “the time”: آن, a moment, with the article."
     ],
     "pitfalls": [
      "Always with al- and -a: الْآنَ (al-ʾāna), never *آنَ alone."
     ],
     "subtleties": [
      "Often at the end: أَنَا مَشْغُولٌ الْآنَ (I’m busy now)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like τώρα, a word for a moment of time."
+     }
     ]
    }
   },
@@ -2482,7 +2714,14 @@
      "قَرِيبٌ (adjective: near) agrees with its noun; قَرِيبًا (adverb: soon) never changes."
     ],
     "subtleties": [
-     "Greek has two words (σύντομα / κοντά); Arabic uses one form for “soon” and “nearby”."
+     "Arabic uses one form for “soon” and “nearby”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek has two words, σύντομα and κοντά; Arabic has one: قَرِيبًا."
+     }
     ]
    }
   },
@@ -3133,13 +3372,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “at times” — exactly the English expression."
+     "Literally “times”: the plural of حِين (a time) in the accusative."
     ],
     "pitfalls": [
      "A plural noun used as an adverb: أَحْيَانًا (not *حِينًا) for “sometimes”."
     ],
     "subtleties": [
      "It can open the sentence (أَحْيَانًا أَعْمَلُ لَيْلًا) or close it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Literally “at times” — exactly the English expression."
+     }
     ]
    }
   }
