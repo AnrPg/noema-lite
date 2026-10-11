@@ -260,7 +260,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "Cognate with Arabic بَصَل (baṣal) and related to Aramaic בּוּצְלָא.",
+     "text": "Cognate with Arabic بَصَل (baṣal).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -383,11 +383,11 @@
      }
     ],
     "etymology": {
-     "text": "Calque of French pomme de terre (literally “apple of [the] earth”), like Dutch aardappel and others.",
+     "text": "Calque of French pomme de terre (literally “apple of [the] earth”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same image as French pomme de terre, Dutch aardappel and Austrian German Erdapfel: an “earth apple”."
+     "The same image as Austrian German Erdapfel: an “earth apple”."
     ],
     "pitfalls": [
      "A construct phrase: the plural changes only the first word — תַּפּוּחֵי אֲדָמָה.",
@@ -396,6 +396,18 @@
     ],
     "subtleties": [
      "The first noun is in the construct state (smikhut): all inflection happens on תַּפּוּחַ, the article goes on אֲדָמָה."
+    ],
+    "notes": [
+     {
+      "for": "nl",
+      "rel": "same",
+      "text": "Built like aardappel: “earth apple”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "A calque of pomme de terre: “apple of the earth”."
+     }
     ]
    }
   },
@@ -509,11 +521,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "From Proto-Semitic *ṯūm-; cognate with Akkadian 𒋧 (šūmū), Aramaic תּוּמָא (tūmā), Arabic ثُوم (ṯūm).",
+     "text": "From Proto-Semitic *ṯūm-; cognate with Arabic ثُوم (ṯūm).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic ثُوم (ṯūm) is the same word — as in the Lebanese garlic sauce toum; Hebrew ש regularly matches Arabic ث and Aramaic ת.",
+     "Arabic ثُوم (ṯūm) is the same word — as in the Lebanese garlic sauce toum; Hebrew ש regularly matches Arabic ث.",
      "The Bible has a plural, הַשּׁוּמִים (Numbers 11:5); Modern Hebrew uses the singular as a mass noun."
     ],
     "pitfalls": [
@@ -675,7 +687,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "It is often wrongly linked to לָפַף (to wrap around) because of the twisting vines; it really comes from Greek μηλοπέπων — a word a Greek speaker will recognize."
+     "It is often wrongly linked to לָפַף (to wrap around) because of the twisting vines; it really comes from Greek μηλοπέπων “melon”."
     ],
     "pitfalls": [
      "Two פ: מְלָפְפוֹן (m’laf’fon).",
@@ -683,6 +695,13 @@
     ],
     "subtleties": [
      "The Biblical cucumber word קִשּׁוּא now means zucchini — a classic ‘false friend’ inside Hebrew."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "You will recognize μηλοπέπων “melon” (μῆλον + πέπων) in it."
+     }
     ]
    }
   },
@@ -1050,7 +1069,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “potato” comes from the same Taíno word batata — it first meant the sweet potato."
+     "The word started in the Caribbean as the name of the sweet potato and reached Hebrew through Spanish and Arabic."
     ],
     "pitfalls": [
      "Not the potato: the potato is תַּפּוּחַ אֲדָמָה, the sweet potato בָּטָטָה.",
@@ -1058,6 +1077,28 @@
     ],
     "subtleties": [
      "A false friend with Levantine Arabic: there بطاطا (baṭāṭā) is the ordinary potato."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English potato comes from the same word, batata — it first meant the sweet potato."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese batata is the potato; בָּטָטָה is only the sweet potato (batata-doce)."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Italian patata (the potato) comes from the same word; בָּטָטָה is only the sweet potato."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same word as batata, the sweet potato."
+     }
     ]
    }
   },
@@ -1296,7 +1337,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "Compare Aramaic תִּרְדָּא.",
+     "text": "An old word; Wiktionary gives only a cognate in an older Semitic language.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1575,7 +1616,14 @@
      "Feminine noun with a masculine-looking plural: דְּלַעַת → דְּלוּעִים."
     ],
     "subtleties": [
-     "One Hebrew word for what English splits into pumpkin, gourd and squash."
+     "One Hebrew word for every kind of pumpkin, gourd and squash."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "One Hebrew word for what English splits into pumpkin, gourd and squash."
+     }
     ]
    }
   },
@@ -1689,7 +1737,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "From Aramaic חַסָּא (khassaʾ). Compare likely cognates Arabic خَسّ (ḵass) and Maltese ħassa, both with the same meaning.",
+     "text": "From Aramaic חַסָּא (khassaʾ). Compare its likely cognate Arabic خَسّ (ḵass), with the same meaning.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1936,7 +1984,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A Greek speaker will recognize κράμβη in כְּרוּב; Arabic قَرْنَبِيط (cauliflower) comes from the same Greek word."
+     "It comes from Greek κράμβη “cabbage”; Arabic قَرْنَبِيط (cauliflower) comes from the same Greek word."
     ],
     "pitfalls": [
      "Homograph: כְּרוּב “cherub” (plural כְּרוּבִים) — the winged figures over the Ark.",
@@ -1944,6 +1992,13 @@
     ],
     "subtleties": [
      "Cauliflower כְּרוּבִית is built on this word: “little cabbage”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "You will recognize κράμβη “cabbage” in כְּרוּב."
+     }
     ]
    }
   },
@@ -2441,13 +2496,35 @@
     },
     "funFacts": [
      "The verb פִּלְפֵּל means “to pepper” and also “to debate at length” — hence פִּלְפּוּל, sharp Talmudic hair-splitting.",
-     "English pepper and Hebrew פִּלְפֵּל both go back to Sanskrit pippali."
+     "פִּלְפֵּל goes back to Sanskrit pippali “long pepper” — and so does German Pfeffer."
     ],
     "pitfalls": [
      "One word for the vegetable and the spice: add a colour for the vegetable (פִּלְפֵּל אָדֹם) and שָׁחֹר for the spice."
     ],
     "subtleties": [
      "גַּמְבָּה, the everyday name of the red bell pepper, is according to Wiktionary supposedly a back-formation from גַּמְבּוֹת, a plural of Italian gambo “stem, stalk”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English pepper goes back to the same Sanskrit word, pippali."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "It goes back to पिप्पली “long pepper”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian pepe goes back to the same Sanskrit word, pippali."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French poivre goes back to the same Sanskrit word, pippali."
+     }
     ]
    }
   },
@@ -2561,7 +2638,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "Compare Classical Syriac ܣܠܩܐ, Arabic سَلْق (salq).",
+     "text": "Compare Arabic سَلْق (salq).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2945,7 +3022,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Exactly like English “green onion”: noun + colour adjective."
+     "Noun + colour adjective, as always in Hebrew: “onion green”."
     ],
     "pitfalls": [
      "The adjective agrees and takes the article too: הַבָּצָל הַיָּרֹק; plural on both words: בְּצָלִים יְרֻקִּים."
@@ -2953,6 +3030,13 @@
     "subtleties": [
      "Usually a mass noun for the chopped herb; the plural is used for whole stalks.",
      "Everyday spelling: בצל ירוק, בצלים ירוקים."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Exactly like “green onion”, but the colour follows: בָּצָל יָרֹק."
+     }
     ]
    }
   },
@@ -3067,7 +3151,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Maltese karfus (“celery”), Classical Syriac ܟܪܦܣܐ (kerpəsā, “celery”), Arabic كَرَفْس (karafs, “celery”). The ultimate provenance of these terms is murky.",
+     "text": "Compare Arabic كَرَفْس (karafs, “celery”). The ultimate provenance of the word is murky.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3189,7 +3273,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Many languages wrongly credited maize to the East: Hebrew “Tiras” (= the Turks), Italian granturco (“Turkish grain”) — while Turkish calls it mısır, “Egypt”."
+     "The name credits maize to the East — “Tiras” was taken for the ancestor of the Turks — though maize came from the Americas."
     ],
     "pitfalls": [
      "Normative stress is on the last syllable (tirás); in everyday speech many say TÍ-ras.",
@@ -3197,6 +3281,18 @@
     ],
     "subtleties": [
      "Also the name of the Biblical Tiras, son of Japheth (Genesis 10:2)."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like granturco (“Turkish grain”), the name wrongly credits maize to the Turks."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish calls maize mısır, “Egypt”; Hebrew תִּירָס credits it to the Turks (Tiras)."
+     }
     ]
    }
   }
