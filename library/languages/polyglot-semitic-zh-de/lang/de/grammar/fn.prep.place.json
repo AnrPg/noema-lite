@@ -485,6 +485,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut expresses positions with nouns for “top”, “underside”, “front” and the like, carrying case endings; German uses a preposition before the noun and the dative."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "su covers a top and a wall alike (sul tavolo, sul muro); German separates auf (auf dem Tisch) and an (an der Wand). sotto, davanti a, dietro, tra match unter, vor, hinter, zwischen – with the dative on the article for “where”."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "mbi, nën, para, pas, midis, pranë match auf / über, unter, vor, hinter, zwischen, neben; several take the ablative (para shtëpisë, pranë derës). German uses the dative for “where” and switches to the accusative for “where to”: auf dem Tisch / auf den Tisch. mbi is both auf (touching) and über (above)."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "em covers in and on (no frigorífico, na mesa, na parede); German separates in, auf and an: im Kühlschrank, auf dem Tisch, an der Wand. debaixo de, atrás de, ao lado de are one German word each, with the dative: unter, hinter, neben dem Bett."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your prepositions of place govern a case, German adds a switch: dative for where (auf dem Tisch), accusative for where to (auf den Tisch). Learn auf (on top), an (at a side, on a wall) and über (above) as three separate words."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you say “the table’s top-on” with a location noun and a suffix, German uses one preposition before the noun and a dative article: auf dem Tisch, unter dem Bett, neben der Tür."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If the position word follows the noun in your language, German puts it before as a preposition, and the article takes the dative: auf dem Tisch, unter dem Bett, neben der Tür."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Positions your language expresses with location suffixes are German prepositions + dative: auf dem Tisch, unter dem Bett, hinter dem Haus; with movement the same words take the accusative."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your prepositions of place are prefixes or take pronoun suffixes, German uses separate words and the dative: auf dem Tisch, unter dem Bett, neben der Tür; with movement the accusative: Ich lege das Buch auf den Tisch."
   }
  ]
 }

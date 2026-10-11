@@ -433,6 +433,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut negates with a suffix inside the verb (-nngit-); German uses separate words: nicht, kein, nichts."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian needs non with niente / nessuno (non mangio niente); German has one negation: Ich esse nichts. non stands before the verb, nicht usually late (Ich esse den Fisch nicht), and non ho pane is Ich habe kein Brot."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian needs nuk with asgjë / askush (nuk ha asgjë); German has one negation: Ich esse nichts. nuk stands before the verb, nicht usually late (Ich esse den Fisch nicht), and nuk kam bukë is Ich habe kein Brot."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese needs não with nada / ninguém (não como nada); German has one negation: Ich esse nichts. não stands before the verb, nicht usually late (Ich esse den Fisch nicht), and não tenho pão is Ich habe kein Brot."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your language negates before the verb and doubles the negation with “nothing” or “nobody”, German does neither: nicht usually comes late (Ich esse den Fisch nicht), a noun takes kein (kein Brot), and nichts alone is the whole negation: Ich esse nichts."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If the negative is a suffix on your verb, German uses separate words: nicht, usually late in the clause (Ich koche heute nicht), and kein before a noun (Ich habe kein Auto)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If one or two negative words always stand before the verb, note that German nicht comes late in the clause (Ich esse den Fisch nicht) and that kein for nouns changes like ein: kein Apfel, keine Zeit, keinen Kaffee."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If negation is a suffix inside your verb, German uses separate words: nicht for the verb or the sentence (Ich schlafe nicht) and kein before a noun (Ich habe keine Zeit)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If you choose the negative word by the kind of sentence (verb, noun, “there is not”), German chooses by what is negated: kein for a noun without der (Ich habe kein Brot), nicht for everything else (Ich esse den Fisch nicht). One negation per clause: Ich esse nichts."
   }
  ]
 }

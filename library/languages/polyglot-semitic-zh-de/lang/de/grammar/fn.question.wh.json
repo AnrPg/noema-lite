@@ -583,6 +583,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut uses question words together with question endings on the verb (Qanuippit? How are you?); German puts the question word first and the plain verb right after it: Wie geht es dir?"
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Che cosa bevi? – question word first, then the verb, as in Was trinkst du?; but German always adds the subject after the verb. Come ti chiami? asks “how”, just like Wie heißt du? (not *Was heißt du?)."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Çfarë pi? – question word first, as in Was trinkst du?, but German must add the subject after the verb. Si quhesh? asks “how”, exactly like Wie heißt du?; kush is wer, ku wo, kur wann, pse warum, sa wie viel / wie viele."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "O que bebes? – question word first, then the verb, as in Was trinkst du?; but German always adds the subject. Como te chamas? asks “how”, like Wie heißt du?; quem is wer, onde wo, quando wann."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your question words come first and decline, German is close: wer / wen / wem / wessen, welcher like dieser. The strict part is the order: question word – verb – subject: Was trinkst du?"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your question word stays where the answer would be and the verb comes last, German moves the question word to the front and the verb right after it: Was trinkst du? Wo ist der Bahnhof?"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If the question word stays in the place of the answer, German moves it to the front and puts the verb second: Was trinkst du? (Du trinkst was? is only an echo question)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "German question words are separate words, all beginning with w- (was, wer, wo, wann, wie, warum), placed first and followed by the verb: Wo ist der Bahnhof?"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Question word first will feel natural; German adds that the verb comes right after it and the subject follows (Was trinkst du?), and that wer and welcher change for case: wen, wem, welchen Tee."
   }
  ]
 }

@@ -587,6 +587,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut adds a suffix meaning “more” to the word for the quality and puts the thing compared in the case meaning “from”; German has the ending -er and the word als."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian uses più … di / che (più veloce dell’autobus); German adds -er and uses als: schneller als der Bus. migliore is besser, il migliore is der beste / am besten, and (tanto) … quanto is so … wie."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts më before the adjective and se or nga for the compared thing (më i shpejtë se autobusi); German adds -er and uses als: schneller als der Bus. The superlative më i shpejti is der schnellste or am schnellsten."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese uses mais … (do) que (mais rápido do que o autocarro); German adds -er and uses als: schneller als der Bus. melhor is besser, o melhor is der beste / am besten, and tão … como is so … wie."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "Whether your language compares with an ending or with a word for “more”, German always uses the ending -er and als, even for long adjectives (interessanter als), and many short adjectives add an umlaut: alt – älter, groß – größer."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If the compared thing takes a case suffix or a particle in your language, German uses the separate word als before it, and the adjective itself changes: Der Zug ist schneller als der Bus. The pronoun after als stays nominative: älter als ich."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your adjective stays the same and a word before the compared thing does the work, note that the German adjective itself changes (schnell → schneller → am schnellsten) and the compared thing follows als: Er ist größer als ich."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "German builds “more” and “most” into the adjective (schneller, am schnellsten) and states the comparison as a sentence with als: Der Zug ist schneller als der Bus."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If you compare with a special pattern or with “more” and a word meaning “from” before the compared thing, German changes the adjective with -er (often with an umlaut: alt → älter) and uses als, not von: größer als ich."
   }
  ]
 }

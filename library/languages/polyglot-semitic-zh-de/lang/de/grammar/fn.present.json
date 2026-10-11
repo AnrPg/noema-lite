@@ -529,6 +529,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut verbs also take person endings, at the end of one long word with many suffixes; in German the ending sits on a short verb, and the other ideas are separate words."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "One ending per person is familiar (mangio, mangi, mangia …), but German needs the pronoun (ich esse, not *esse), and the verb must be second: Vielleicht trinke ich Tee. There is no progressive like sto mangiando: Ich esse covers both."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "One ending per person is familiar (punoj, punon, punon, punojmë, punoni, punojnë), but German needs the pronoun (ich arbeite, not *arbeite), and po + verb (po ha) has no German counterpart: Er isst is both “eats” and “is eating”."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "German has no progressive like estou a comer – Ich esse covers both – and the pronoun cannot be dropped (ich esse, not *esse). The verb must be second in the sentence: Talvez beba chá – Vielleicht trinke ich Tee."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "Person endings are familiar; new are the obligatory pronoun (ich koche, du kochst), the verb in second place whatever comes first (Heute koche ich), and one present for “I eat” and “I am eating”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your verb piles up suffixes and stands at the end, the German present is short – stem + one person ending (koch-e, koch-st, koch-t) – and the verb stands second: Heute koche ich. The pronoun is always said."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your verbs never change, German adds a person ending to every verb (ich koche, du kochst, er kocht), and some change their vowel too (ich esse, du isst). “Now” needs no marker: Ich esse = I am eating."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your verb includes subject and object, German splits them: the verb carries only a person ending (ich koche, du kochst), and the subject pronoun and the object are separate words: Ich koche Reis."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your present verb shows the gender of the subject, German shows only the person: ich koche, du kochst, er kocht, sie kocht – he and she share kocht. Polite Sie takes the plural form: Sie kochen."
   }
  ]
 }

@@ -373,6 +373,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Possession is a suffix meaning “have” (-qaq-) on the noun, which becomes the verb; German uses the separate verb haben with the thing owned as its object."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "avere is haben, and ho fame / sete / paura match Hunger / Durst / Angst haben; but age takes sein (Ich bin zwanzig – not *Ich habe zwanzig Jahre, as in ho vent’anni), and c’è / ci sono is es gibt."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "kam is haben, and kam uri / etje / frikë are Hunger / Durst / Angst haben; age is sein in both (Jam njëzet vjeç – Ich bin zwanzig). But ka for “there is” (Këtu ka një kafene) is es gibt, never hat: Hier gibt es ein Café."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "ter is haben, and tenho fome / sede / medo match Hunger / Durst / Angst haben; but age is sein (Ich bin zwanzig – not *Ich habe zwanzig Jahre, as in tenho vinte anos), and há is es gibt."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has a verb “to have”, haben works like it, with the thing in the accusative (Ich habe einen Bruder). Check the uses one by one: Hunger / Durst haben for states, sein for age (Ich bin zwanzig), es gibt for “there is”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you say “at me there is” or “my X exists”, German uses a verb with the owner as subject and the thing as object: Ich habe einen Bruder. Existence is a separate phrase: Es gibt hier ein Café."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If one word means both “have” and “there is”, German splits it: Ich habe einen Bruder – Hier gibt es ein Café. haben changes for the person (ich habe, du hast, er hat), and its object takes the accusative."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If possession is a suffix on the noun or the verb in your language, German uses the separate verb haben with an object (Ich habe zwei Kinder); “there is” is the fixed phrase es gibt."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your language has no verb “to have” and says “there is to me” or “at me”, German has a real verb: Ich habe einen Bruder – the owner is the subject, the thing an accusative object. The negative is kein, not a “there is not” word: Ich habe keine Zeit."
   }
  ]
 }

@@ -408,6 +408,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no polite “you”; German must choose du or Sie before the first sentence (Wie geht es dir? / Ihnen?). danke is the everyday word for qujannamiik."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Ciao / Buongiorno and tu / Lei split like Hallo / Guten Tag and du / Sie, and Buonanotte, like Gute Nacht, is only for parting late. But ciao is hello and bye, where German splits Hallo and Tschüss; Arrivederci has the image of Auf Wiedersehen (“until we see again”)."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Mirëmëngjes, Mirëdita, Mirëmbrëma, Natën e mirë match Guten Morgen, Guten Tag, Guten Abend, Gute Nacht, and Mirupafshim (“may we see each other well”) has the image of Auf Wiedersehen. Si jeni? / Si je? split like Wie geht es Ihnen? / Wie geht’s?"
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Boa noite greets on arrival in the evening too; Gute Nacht never does – say Guten Abend. Olá / Bom dia and tu / o senhor follow the logic of Hallo / Guten Tag and du / Sie; and where obrigado / obrigada changes with the speaker, Danke never does."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language greets differently by time of day and by familiarity, the system is familiar: Guten Morgen / Tag / Abend, Gute Nacht only for parting; du-people get Hallo and Tschüss, Sie-people Guten Tag and Auf Wiedersehen."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If politeness lives in verb endings in your language, in German it lives in the choice of du or Sie and of the formula: Wie geht es Ihnen? (Sie) – Wie geht’s? (du); Guten Tag (Sie) – Hallo (du)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your greetings have a plain and a polite form, German splits the same way (Hallo / Guten Tag, Wie geht’s? / Wie geht es Ihnen?) and adds the time of day: Guten Morgen, Guten Abend, and Gute Nacht only at bedtime."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "German greetings are fixed formulas of separate words, chosen by the time of day and by du or Sie: Guten Morgen, Guten Tag, Guten Abend; Hallo – Tschüss for friends, Guten Tag – Auf Wiedersehen for others."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your greeting changes with the sex of the person you speak to, German does not: Wie geht es dir? to a man or a woman – only du / Sie and the time of day change the formula. If one word of yours is both hello and goodbye, German splits it: Hallo / Guten Tag – Tschüss / Auf Wiedersehen."
   }
  ]
 }

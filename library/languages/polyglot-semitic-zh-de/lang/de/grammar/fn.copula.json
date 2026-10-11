@@ -290,6 +290,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and adds the person ending, all in one word. German uses the separate verb sein and a noun after it: Ich bin Lehrer."
+  },
+  {
+   "for": "it",
+   "rel": "same",
+   "text": "Like essere, sein is never left out and a job takes no article: Sono insegnante – Ich bin Lehrer. German has no second verb like stare: being somewhere is sein too (Ich bin zu Hause)."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Like jam, sein is never left out and a job takes no article: Jam mësues – Ich bin Lehrer. Both make the feminine job word with an ending: mësuese – Lehrerin."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "One verb, sein, covers ser and estar: Ich bin Lehrer (sou professor), Ich bin müde (estou cansado), Ich bin zu Hause (estou em casa). As in Portuguese, a job takes no article: Sou professor – Ich bin Lehrer."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "same",
+   "text": "If your language uses a verb “to be” that changes for the person, sein is familiar – only very irregular (bin, bist, ist, sind, seid, sind) – and a job takes no article: Ich bin Lehrer."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If “to be” is a suffix on the noun in your language, or nothing at all in the 3rd person, German needs a separate verb in every person: Ich bin Lehrer, Er ist Lehrer – and sein stands second, not at the end."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If one unchanging word links two nouns and adjectives need no link at all, note that German sein changes for every person (bin, bist, ist …) and links adjectives too: Ich bin Student. Ich bin müde."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language turns the noun itself into a verb (“be a teacher” as one word), German uses the separate verb sein and a noun after it: Ich bin Lehrer, Sie ist Lehrerin."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "trap",
+   "text": "If your language can join two nouns in the present with no verb (or with a pronoun as the link), German cannot: sein is always there – Ich bin Student, Das Haus ist groß – and it changes for the person, never for the speaker’s sex."
   }
  ]
 }

@@ -503,6 +503,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut case endings split where / where to / where from (iglumi – iglumut – iglumit), the same three questions as Wo? / Wohin? / Woher?; German uses prepositions instead."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "a and in split differently: sono a Roma / vado a Roma are in Rom / nach Rom, and da + person (sono dal medico / vado dal medico) is beim Arzt (where) / zum Arzt (where to). Like nel, al, dal, German merges preposition and article: im, am, zum, vom."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "në covers in and to (jam në shkollë / shkoj në shkollë), and te covers at and to a person (jam te mjeku / shkoj te mjeku); German splits them: in der Schule / zur Schule, beim Arzt / zum Arzt. nga is both aus and von: nga Shqipëria – aus Albanien, nga puna – von der Arbeit."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "em covers in, at and on (na escola, na mesa), and a / para say “to”; German splits by place and direction: in der Schule, zur Schule, am Bahnhof, nach Lissabon. Like no, na, ao, do, German merges preposition and article: im, am, zum, vom."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your prepositions govern cases, the system is familiar; new is how finely German splits one idea by the kind of place: in der Schule, am Bahnhof, beim Arzt, zu Hause – and for movement zur Schule, nach Berlin, in die Stadt."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "Where you would use one locative, one directional and one source suffix, German chooses a preposition by the kind of place: in der Schule / am Bahnhof / beim Arzt (where), zur Schule / nach Berlin (where to), aus Athen / von der Arbeit (from)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If one word for “at” and one verb for “go” cover every place, note that German chooses the preposition by the kind of place and by direction (in der Schule, zur Schule, beim Arzt, nach Berlin) and puts the article in the matching case."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Spatial relations your language may put into endings become German prepositions before the noun, merged with the article when possible: im Park, am Bahnhof, zum Arzt, vom Markt."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If one preposition such as “in” or “to” covers many places, German splits by the kind of place: in der Schule (inside), am Bahnhof (edge, point), beim Arzt (at a person’s), zu Hause; and for movement: zur Schule, nach Berlin, in die Stadt."
   }
  ]
 }

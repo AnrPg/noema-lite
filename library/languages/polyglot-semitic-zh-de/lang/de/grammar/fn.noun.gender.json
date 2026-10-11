@@ -351,6 +351,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut nouns have no gender; in German every noun – even a thing – is masculine, feminine or neuter."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian has two genders; German adds a neuter, and the genders often do not carry over: il tavolo – der Tisch matches, but la casa – das Haus, il libro – das Buch, la sedia – der Stuhl. Learn every noun with der, die or das."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian has two genders in everyday use; German adds a full neuter, and the genders rarely carry over: libri (masculine) – das Buch, shtëpia and vajza (feminine) – das Haus, das Mädchen; dera – die Tür matches."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has two genders; German adds a neuter, and the genders do not carry over: a mesa – der Tisch, o livro – das Buch, a casa – das Haus; a porta – die Tür matches. Learn every noun with its article."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has genders, the idea is familiar, but the gender of each noun must be learned anew: the article is the only reliable sign (der Tisch, die Tür, das Fenster); endings such as -ung, -heit (die) and -chen (das) help."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no grammatical gender, every German noun brings a der, die or das that is not about sex: der Tisch, die Tür, das Mädchen. Learn it with the noun – it decides the article, the pronoun (der Tisch → er) and the endings."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "Gender is new: every German noun is der, die or das, things included, and the pronoun follows the noun, not the thing: Der Tisch ist neu – er ist groß."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language has no gender, note that German sorts every noun into der, die or das, and that a thing is er, sie or es after its gender: der Tisch → er, die Lampe → sie."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your nouns are masculine or feminine and a feminine ending often shows it, German adds a neuter and rarely shows the gender on the noun: der Tisch, die Tür, das Fenster. das Mädchen is neuter, so its pronoun is es."
   }
  ]
 }

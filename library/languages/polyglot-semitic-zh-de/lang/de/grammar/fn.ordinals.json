@@ -516,6 +516,41 @@
    "for": "type:polysynthetic",
    "rel": "different",
    "text": "In languages that pack much into one word an ordinal can be a suffix on a number or a noun; German keeps it a separate word that agrees like an adjective: der dritte Tag, am dritten Tag."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian dates use cardinals after the first (il tre maggio, but il primo maggio); German always uses the ordinal: der dritte Mai, am dritten Mai. Le otto e mezza is halb neun – not halb acht."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian dates use the cardinal (më tre maj); German uses the ordinal: am dritten Mai. Albanian ordinals take a linking article (i tretë, e tretë), German ones adjective endings (der dritte, am dritten). Ora tetë e gjysmë (8:30) is halb neun."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese dates use the cardinal (três de maio); German uses the ordinal: der dritte Mai, am dritten Mai. Oito e meia (8:30) is halb neun – not halb acht."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your ordinals agree like adjectives, the German ones do too (der erste, die erste, am ersten). Note that German dates always use the ordinal (am dritten Mai) and that halb counts towards the next hour: halb neun = 8:30."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your ordinal is the number plus one suffix that never changes, German adds -te / -ste and then an adjective ending: der dritte Tag, am dritten Tag. halb neun is 8:30 – the half on the way to nine."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If a word before the number makes the ordinal and nothing changes, German adds -te / -ste and declines the result like an adjective: der dritte, am dritten. The clock counts towards the next hour: halb neun = 8:30."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your ordinals follow the noun or have patterns of their own, German ordinals stand before it, built with -te / -ste (zweite, zwanzigste; irregular erste, dritte, siebte, achte) and declined: der dritte Tag, am dritten Tag. halb neun is 8:30."
   }
  ]
 }

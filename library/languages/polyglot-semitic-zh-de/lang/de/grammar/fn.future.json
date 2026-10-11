@@ -390,6 +390,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks the future with a suffix inside the verb word; German uses the separate auxiliary werden + infinitive."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian has a future ending (viaggerò), but like German it often uses the present for a plan: Domani parto – Morgen fahre ich. German has no ending: werden + infinitive at the end (Ich werde reisen), which also makes a guess, as the Italian future does: Sarà a casa – Er wird zu Hause sein."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like do të + verb (do të udhëtoj), German builds its future with a helper: werden + infinitive (Ich werde reisen) – but werden changes for the person and the infinitive goes to the end. With a time word both often use the present: Nesër nisem – Morgen fahre ich."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has a future ending (viajarei) and ir + infinitive (vou viajar); German has neither: Ich werde reisen, or simply the present with a time word, as in Amanhã viajo – Morgen reise ich. Do not copy vou + infinitive with gehen: the helper is werden."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "Whether your language has a future ending or a helper verb, German usually needs neither: the present with a time word is the normal future (Morgen fahre ich nach Berlin); werden + infinitive at the end makes it explicit or firm."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your future is a suffix on the verb, German uses a separate helper, werden, in second place and the infinitive at the very end (Ich werde ein Hotel buchen) – or simply the present with a time word: Morgen buche ich ein Hotel."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If a time word or a helper shows the future and the verb never changes, German often does the same with a time word (Morgen fahre ich); but the helper werden changes for the person – ich werde, du wirst, er wird – and the infinitive goes last."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where your language adds a future suffix inside the verb, German either uses the present with a time word (Morgen fahre ich) or puts the separate helper werden second and the infinitive last: Ich werde fahren."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your future is a verb form or a particle before the verb, German uses werden + infinitive – werden second, the infinitive at the end: Ich werde reisen – and with a time word most often just the present: Morgen reise ich."
   }
  ]
 }

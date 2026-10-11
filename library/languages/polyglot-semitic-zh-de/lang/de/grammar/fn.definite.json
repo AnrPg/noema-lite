@@ -291,6 +291,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no articles; German needs der or ein, chosen by whether the thing is known."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "il / la / lo and un / una are familiar, but German articles also change for case (der, den, dem, des), and there is no plural of ein (Italian dei, delle) and no partitive: Das sind Stühle. Ich esse Brot (mangio del pane)."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the definite article at the end of the noun (libri, shtëpia); German puts a separate word before it: das Buch, das Haus. një matches ein / eine, and as in Albanian a plural has no indefinite article: libra – Bücher."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "o / a and um / uma are familiar, but German articles also change for case (der, den, dem, des), and there is no plural of ein (Portuguese uns / umas): Das sind Stühle. German puts no article before a possessive or a name: mein Buch (o meu livro), Anna (a Ana)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has articles that change for gender and case, der / ein are familiar; if it has none, the choice der (known) / ein (new) is the new idea. Either way: there is no plural of ein (Stühle = chairs), and ein hides the masculine and neuter gender."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no articles (perhaps only the word “one” for “a”), German needs one before nearly every singular noun: der Tisch (known), ein Tisch (new). The article also shows gender, number and case, so learn each noun with der / die / das."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If you use “this / that” or a measure word only when needed, note that German needs an article before nearly every singular noun – der Schlüssel (the known one), ein Schlüssel (a new one) – and that the article changes with the noun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Articles are new: German puts der / die / das or ein / eine before the noun to show whether it is known or new, and the same small word carries gender, number and case."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language marks “the” with a prefix or a suffix and has no word for “a”, German uses a separate word before the noun for both – der Tisch, ein Tisch – and changes it for gender, number and case. As with you, a plural has no indefinite article: Stühle."
   }
  ]
 }

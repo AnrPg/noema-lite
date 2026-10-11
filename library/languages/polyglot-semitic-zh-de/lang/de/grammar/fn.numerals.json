@@ -587,6 +587,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has a dual: two of something take their own ending (inuuk, two people). German has no dual: zwei takes the ordinary plural (zwei Menschen, zwei Bücher)."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "ventuno puts the tens first; German says the unit first: einundzwanzig. Age takes avere (ho vent’anni) but sein in German: Ich bin zwanzig. The decimal comma and the thousands point are the same: 1.000; 1,5."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian puts the tens first and joins with e (njëzet e një); German says the unit first with und: einundzwanzig. Albanian counts some tens in twenties (njëzet, dyzet); German is decimal throughout: zwanzig, vierzig. Age is sein in both: Jam tetëmbëdhjetë vjeç – Ich bin achtzehn."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "vinte e um puts the tens first; German says the unit first: einundzwanzig. Age takes ter (tenho vinte anos) but sein in German: Ich bin zwanzig. The decimal comma and the thousands point are the same: 1.000; 1,5."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your numbers say the tens first, the unit-first order of 21–99 is the trap: einundzwanzig (1 + 20), fünfundvierzig (5 + 40). Only ein changes its form, and from zwei on the noun is plural: zwei Bücher."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If the noun after a number stays singular in your language, German makes it plural from zwei on: zwei Bücher, zehn Kinder. 21–99 say the unit first: einundzwanzig."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "German counts without measure words – zwei Bücher, drei Tassen Tee – but the noun turns plural, and 21–99 put the unit first: einundzwanzig (1 + 20)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where numbers in your language may be verbs or suffixes, German numbers are separate words before the noun, built as a kit (zwanzig, einundzwanzig, hundert, tausend), and the noun after them is plural."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your numbers change with the gender of the noun, or the noun stays singular after some of them, German is simpler: only ein changes, and from zwei on the noun is plural – zwei Bücher, elf Bücher. 21–99 put the unit first: einundzwanzig."
   }
  ]
 }
