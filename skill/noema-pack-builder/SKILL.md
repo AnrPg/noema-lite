@@ -137,6 +137,13 @@ Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULE
 task on a language course** (the short form of decisions D1–D20; with the connector: `noema_authoring_guide` part
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
+0. **Taught through the learner's native language** (D19, `references/language-packs.md` — first): supported natives =
+   the UI locales' languages (en el ru fr ar de hi zh ja it es sq pt); a learner reads the explanations in their native language and gets
+   comparisons with it only (others: with its type / branch / family). Every general text you write names **no language
+   outside the course** and explains nothing through English grammar; every comparison is a **contrast note**
+   `{for, rel, text}` — on every grammar page one for each supported native but the page's language and the five type
+   notes (`type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`, `branch:Semitic`);
+   `profile.notes` on words. Check with `scripts/lang_facade.py lint <course folder>`.
 1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
    special, uncommon or notable feature of the language — script, sounds, the morphology of every part of speech, syntax,
    one concept with several words, one word with several meanings, register, politeness, culture, numbers — with how the
@@ -148,7 +155,7 @@ task on a language course** (the short form of decisions D1–D20; with the conn
 4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
 5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
 6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
-8. **Comparison notes, not inline comparisons** (D16, D18): general texts name no outside language; every grammar page gets `notes` for at least 8 languages of the reference set (`_typology/reference.json`), covering all four types.
+8. **Contrast notes, not inline comparisons** (D16, D18, D19): general texts name no outside language; every grammar page gets `notes` for every supported native but its own language and the five type notes (`_typology/reference.json`: `supported`, `types`).
 9. **Vocabulary is its own track** (D20): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
 7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 

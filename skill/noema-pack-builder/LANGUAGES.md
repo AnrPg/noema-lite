@@ -5,7 +5,16 @@ nodes (lessons, core lessons, field tiers), grammar functions and sentence frame
 `language.json`, lexicons (one file per node), grammar realizations and a sentence bank. The learner's app makes every
 exercise **from what you store** (paradigms, sentences): you never write an answer key, so every form must be right.
 
-**First read `references/LANGUAGE_RULES.md` (binding, D1–D20).** The full contract is `references/LANGUAGES.md`
+**First rule — D19 (`references/language-packs.md`): every language is taught through the learner's native language.**
+Supported natives = en el ru fr ar de hi zh ja it es sq pt (the UI locales' languages). Everything you write is **neutral**: general texts
+(summary, blocks, procedure, traps, quiz, seeAlso, word profiles, `features.*.none`, phenomena) name no language outside
+the course and explain nothing through English grammar; comparisons are **contrast notes** `{for, rel, text}` — on every
+grammar page one for each supported native except the page's language + `type:fusional`, `type:agglutinating`,
+`type:isolating`, `type:polysynthetic`, `branch:Semitic`; `profile.notes` on words. Glosses and notes are written in
+English (the master); the app shows each learner the texts in their own language through locale facades (later tasks).
+Check: `python3 scripts/lang_facade.py lint work/lang/<id>`.
+
+**Then read `references/LANGUAGE_RULES.md` (binding, D1–D20).** The full contract is `references/LANGUAGES.md`
 (§4 the content model, §6.7 generators, §7.4 refills, §10 these tasks, §11 the checks). The JSON Schema of every file:
 `schemas/noema.lang.v1.schema.json`. The mini course in the repository (`tests/fixtures/lang-mini`) is a small,
 hand-checked example of every file.
@@ -34,6 +43,7 @@ python3 scripts/lang_course.py unpack course.json work/lang   # → work/lang/<c
 python3 scripts/lang_course.py apply work/lang/<id> answer.json <task id>
 python3 scripts/validate_lang.py work/lang/<id> --lang <code> --alone     # fix every ❌ (nodes not written yet are warnings)
 python3 scripts/lang_refcheck.py work/lang/<id> --lang <code>             # every form against Wiktionary (kaikki.org)
+python3 scripts/lang_facade.py lint work/lang/<id>                        # D19: no outside language, the required notes
 python3 scripts/lang_course.py answer work/lang/<id> <task id> > answer.json   # the answer read back from the folder
 ```
 A library course comes as `course.pack.js` + `course.profiles.js` (+ the learner's `patch.json`: `unpack … --patch
@@ -58,7 +68,7 @@ Hebrew, `gender` for nouns of gendered languages, `features` for **every** param
 `{"none": "<why>"}`), `contrasts` when a concept has several words (one axis, distinct values), `ref` (how you checked
 it: `{"src": "kaikki", "checked": "<date>"}`), and the `profile` of every content word (§4.6). Chinese: characters only,
 `trad`, `pinyin` (one syllable per character, spaces between), `features.measure` for nouns.
-Sentences: ids `<code>.<node>.001`…, a frame of the course, `gloss` in the explanation language, tokens
+Sentences: ids `<code>.<node>.001`…, a frame of the course, `gloss` in English (the master; translated later in the locale facades), tokens
 `{t, l, f}` whose `t` equals the form of cell `f` of lexeme `l` (`p: true` for punctuation, `name: true` for names,
 `parts` for words with attached prefixes), `text` = the tokens joined; `functions` lists only grammar a word of the
 sentence shows by the realization's `evidence`; at least 3 sentences per new content word, with variants
@@ -66,8 +76,9 @@ sentence shows by the realization's `evidence`; at least 3 sentences per new con
 
 **lang.function** — `function`, `status` (realized · periphrastic · absent — then say how the language does it instead),
 `summary`, `blocks`, `procedure.askYourself`, `traps`, `evidence` (tags / lemmas / punct that show the point in a
-sentence), `paradigmCells`, `needs`, `generators` (the exercise ids of §6), comparison `notes` for ≥ 8 reference
-languages of all four types (D18) — general texts name no outside language (D16).
+sentence), `paradigmCells`, `needs`, `generators` (the exercise ids of §6), contrast `notes` for every supported native but the
+language itself and the five type notes (D19) — general texts name no outside language and explain nothing through
+English (D16, D19).
 
 **lang.refill** — only the known words listed in the task (requirements ⊆ known, §7.4); every sentence lists the
 function and shows it; new ids `<code>.refill.<fn>.<n>.001`…; vary the frames and the persons; at least 12.
