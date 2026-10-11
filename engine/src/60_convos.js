@@ -83,9 +83,9 @@ function currentConvo() {
 }
 
 /* ---------- titles: succinct, descriptive, canonical ---------- */
-const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js) — English: for the AI's prompts and file names (i18n-ignore)
+const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js) — English: for the AI's prompts and file names only; the learner reads cvModeName (i18n-ignore)
 /** A conversation's mode for the learner: this app's modes in the UI language, other apps' as they name them. */
-const cvModeName = m => ['socratic', 'explain', 'quiz', 'interview', 'debug'].includes(m) ? tE('engine.cv.mode_' + m) : (MODE_NAME[m] || m);
+const cvModeName = m => ['socratic', 'explain', 'quiz', 'interview', 'debug'].includes(m) ? tE('engine.cv.mode_' + m) : (Noema.convos?.MODE_NAME?.[m] || m);   // other apps' modes: engine/convos.js's names, read now (loader.convo.mode.*)
 const fromApp = cv => Noema.convos?.fromApp?.(cv) || null;
 function cleanTitle(t) {
   return String(t || '').split('\n')[0].replace(/^\s*(title\s*:\s*)/i, '').replace(/[*_#`"“”'‘’]/g, '')
@@ -242,7 +242,7 @@ function renderConvoHistory(box) {
     const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · ' + tE('engine.cv.namingShort')) : null);
     const card = h('div', { class: 'cvcard', style: { animationDelay: Math.min(i, 12) * 25 + 'ms' } },
       h('button', { class: 'cvmain', onclick: () => openConvo(cv) }, titleEl,
-        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, tE('engine.cv.fromApp', { app: fromApp(cv) })) : null, `${cv.kind && cv.kind !== 'tutor' ? kindBadge(cv.kind) : (MODES[cv.mode]?.label || MODE_NAME[cv.mode] || cv.mode)} · ${cv.ctx?.label || tE('engine.cv.wholeCourse')}`),
+        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, tE('engine.cv.fromApp', { app: fromApp(cv) })) : null, `${cv.kind && cv.kind !== 'tutor' ? kindBadge(cv.kind) : (MODES[cv.mode]?.label || cvModeName(cv.mode))} · ${cv.ctx?.label || tE('engine.cv.wholeCourse')}`),
         h('small', {}, `${fmtDate(cv.updated || cv.created)} · ` + tE('engine.cv.messages', { n: cv.msgs.length }))),
       h('div', { class: 'cvactions' },
         h('button', { class: 'iconbtn', title: tE('engine.cv.rename'), onclick: () => {

@@ -3250,6 +3250,42 @@
   "@roadmap.map.pnl.kind": {
     "description": "Label before the kind of knowledge of a step (a technical word from the AI)."
   },
+  "roadmap.map.kd.information": "information",
+  "@roadmap.map.kd.information": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a knowledge domain of Marzano and Kendall’s New Taxonomy (data value “information”). Technical term, lowercase."
+  },
+  "roadmap.map.kd.mental_procedure": "mental procedure",
+  "@roadmap.map.kd.mental_procedure": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a knowledge domain of Marzano and Kendall’s New Taxonomy (data value “mental_procedure”). Technical term, lowercase."
+  },
+  "roadmap.map.kd.psychomotor_procedure": "psychomotor procedure",
+  "@roadmap.map.kd.psychomotor_procedure": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a knowledge domain of Marzano and Kendall’s New Taxonomy (data value “psychomotor_procedure”). Technical term, lowercase."
+  },
+  "roadmap.map.level.retrieval": "retrieval",
+  "@roadmap.map.level.retrieval": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a processing level of Marzano and Kendall’s New Taxonomy (data value “retrieval”). Technical term, lowercase."
+  },
+  "roadmap.map.level.comprehension": "comprehension",
+  "@roadmap.map.level.comprehension": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a processing level of Marzano and Kendall’s New Taxonomy (data value “comprehension”). Technical term, lowercase."
+  },
+  "roadmap.map.level.analysis": "analysis",
+  "@roadmap.map.level.analysis": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a processing level of Marzano and Kendall’s New Taxonomy (data value “analysis”). Technical term, lowercase."
+  },
+  "roadmap.map.level.knowledge_utilization": "knowledge utilization",
+  "@roadmap.map.level.knowledge_utilization": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a processing level of Marzano and Kendall’s New Taxonomy (data value “knowledge_utilization”). Technical term, lowercase."
+  },
+  "roadmap.map.level.metacognitive_system": "metacognitive system",
+  "@roadmap.map.level.metacognitive_system": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a processing level of Marzano and Kendall’s New Taxonomy (data value “metacognitive_system”). Technical term, lowercase."
+  },
+  "roadmap.map.level.self_system": "self system",
+  "@roadmap.map.level.self_system": {
+    "description": "Step panel of a Roadmap, after “Kind of knowledge:” (roadmap.map.pnl.kind): a processing level of Marzano and Kendall’s New Taxonomy (data value “self_system”). Technical term, lowercase."
+  },
   "roadmap.map.next.lead": "Open steps, in a good study order",
   "@roadmap.map.next.lead": {
     "description": "Subtitle of “Next up”."

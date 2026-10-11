@@ -11,6 +11,8 @@ window.NoemaCurMap = (() => {
   const CM = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
   const cmNum = n => window.NoemaI18n ? window.NoemaI18n.fmt.number(n) : String(n);
   const errMsg = e => window.NoemaI18n ? window.NoemaI18n.err(e) : (e?.message || String(e));   // an error's words (its code's message, else its English text)
+  /** A code of the AI's plan (a knowledge domain, a processing level) in the UI language; a value the catalog does not know: its own words. */
+  const codeWord = (prefix, v, own) => window.NoemaI18n && window.NoemaI18n.has(prefix + v) ? CM(prefix + v) : own;
   /** A Roadmap's language for the learner: its name in the UI language (English keeps the words it always had: “Greek (Ελληνικά)”). */
   const langLabel = code => window.NoemaI18n && window.NoemaI18n.locale !== 'en' ? window.NoemaI18n.fmt.langName(code) : (C().LANG[code] || code);
   /** A stored error (c.error, a step's pack.error) in the UI language of the moment: its code (…errorInfo) when it has one, else the stored words. */
@@ -1302,7 +1304,7 @@ window.NoemaCurMap = (() => {
           n.chapters?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '📖 ' + CM('roadmap.map.pnl.nChapters', { n: n.chapters.length }), tip(CM('roadmap.map.pnl.chaptersTip'))), chBox) : null,
           st.parents.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.buildsOn') + ' '), st.parents.map(T).join(' · ')) : null,
           (() => { const kids = c.edges.filter(e => e.from === id).map(e => T(e.to)); return kids.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.opens') + ' '), kids.join(' · ')) : null; })(),
-          n.kDomain ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.kind') + ' '), n.kDomain.replace('_', ' '), n.levels?.length ? ' — ' + n.levels.map(l => l.replace(/_/g, ' ')).join(', ') : '') : null);
+          n.kDomain ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.kind') + ' '), codeWord('roadmap.map.kd.', n.kDomain, n.kDomain.replace('_', ' ')), n.levels?.length ? ' — ' + n.levels.map(l => codeWord('roadmap.map.level.', l, l.replace(/_/g, ' '))).join(', ') : '') : null);
       }
       // scroll only the map (scrollIntoView would also scroll the full-screen frame and hide the top bar)
       function scrollToNode(id) {
