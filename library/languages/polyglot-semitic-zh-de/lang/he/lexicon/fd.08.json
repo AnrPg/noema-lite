@@ -131,7 +131,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Ugaritic 𐎛𐎐 (ỉn) and Arabic إِنْ (ʔin).",
+     "text": "Compare Arabic إِنْ (ʔin).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -835,7 +835,34 @@
      "It may stand before לֹא or at the end: אֲנִי אַף פַּעַם לֹא שׁוֹתֶה קָפֶה = אֲנִי לֹא שׁוֹתֶה קָפֶה אַף פַּעַם."
     ],
     "subtleties": [
-     "Unlike German nie, which needs no other negation, Hebrew keeps the double negation (אַף פַּעַם לֹא), as Russian никогда не and Greek ποτέ δεν do."
+     "Unlike German nie, which needs no other negation, Hebrew keeps the double negation: אַף פַּעַם לֹא."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "As with никогда не, the negation stays: אַף פַּעַם לֹא."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "As with ποτέ δεν, the negation stays: אַף פַּעַם לֹא."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "As with non … mai, the negation stays: אַף פַּעַם לֹא."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "As with ne … jamais, two words: אַף פַּעַם לֹא."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "As with kurrë nuk, the negation stays: אַף פַּעַם לֹא."
+     }
     ]
    }
   },
@@ -946,7 +973,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Phoenician 𐤀𐤋 (ʾl), Ugaritic ảl and Akkadian ul (Wiktionary).",
+     "text": "An old Semitic negative word, with cognates in the oldest Semitic languages (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [

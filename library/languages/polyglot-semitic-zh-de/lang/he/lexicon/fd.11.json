@@ -279,9 +279,9 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek σε covers “in, at, to” at once — בְּ covers “in” and “at” (and “to” is לְ).",
+     "בְּ covers “in” and “at”; “to” is a different prefix, לְ.",
      "Arabic keeps the article after the same prefix (بِالْبَيْتِ bi-l-bayti); Hebrew swallows it (בַּבַּיִת).",
-     "English needs three words for time — at five, on Monday, in May; Hebrew uses בְּ for all three (German um, am, im)."
+     "One prefix for every point in time — בְּחָמֵשׁ, בְּיוֹם שֵׁנִי, בְּמַאי — where German says um, am, im."
     ],
     "pitfalls": [
      "With the article it fuses: בַּבַּיִת “in the house”, never *בְּהַבַּיִת.",
@@ -292,6 +292,18 @@
     "subtleties": [
      "Unvowelled בבית is both בְּבַיִת “in a house” and בַּבַּיִת “in the house, at home” — only the vowel shows the article.",
      "A tool takes בְּ, not עִם: כּוֹתֵב בְּעֵט “writes with a pen”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek σε covers “in, at, to” at once; Hebrew splits it: בְּ for “in, at”, לְ for “to”."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English needs at five, on Monday, in May; Hebrew uses בְּ for all three."
+     }
     ]
    }
   },
@@ -374,7 +386,7 @@
      "neutral"
     ],
     "connotation": "positive",
-    "feeling": "At Grandma’s, at the doctor’s, at a friend’s — the “at” of people (German bei, French chez).",
+    "feeling": "At Grandma’s, at the doctor’s, at a friend’s — the “at” of people (German bei).",
     "senses": [
      {
       "id": "s1",
@@ -451,7 +463,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German bei is the closest: bei Oma = אֵצֶל סָבְתָא, beim Arzt = אֵצֶל הָרוֹפֵא; French chez does the same job."
+     "German bei is the closest: bei Oma = אֵצֶל סָבְתָא, beim Arzt = אֵצֶל הָרוֹפֵא."
     ],
     "pitfalls": [
      "Only for people (and their homes or offices): “at school” is בְּבֵית הַסֵּפֶר, not *אֵצֶל בֵּית הַסֵּפֶר.",
@@ -459,6 +471,28 @@
     ],
     "subtleties": [
      "אֶצְלִי also means “in my case, with me”: אֶצְלִי זֶה אַחֶרֶת “with me it’s different”."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "It is chez: אֵצֶל סָבְתָא “chez mamie”, אֵצֶל הָרוֹפֵא “chez le médecin”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "It is da with a person: אֵצֶל סָבְתָא “dalla nonna”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "It is у with a person: אֵצֶל סָבְתָא “у бабушки”."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "It is te / tek with a person: אֵצֶל סָבְתָא “te gjyshja”."
+     }
     ]
    }
   },
@@ -577,7 +611,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ʾila “towards, nigh”, cognate with Akkadian ana and Arabic إِلَى (ʔilā) (Wiktionary).",
+     "text": "From Proto-Semitic *ʾila “towards, nigh”, cognate with Arabic إِلَى (ʔilā) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -785,7 +819,7 @@
     "funFacts": [
      "Arabic مِنْ (min) is the same word — and Arabic keeps the n: مِنَ الْبَيْتِ.",
      "In comparisons it means “than”: גָּדוֹל מִ… “bigger than …” (lesson 17) — like Arabic أَكْبَر مِنْ.",
-     "Greek από and Arabic مِنْ do the same double job: “from” and “than” (μεγαλύτερος από, أَكْبَرُ مِنْ)."
+     "Arabic مِنْ does the same double job: “from” and “than” (أَكْبَرُ مِنْ)."
     ],
     "pitfalls": [
      "The נ of מִן doubles the next letter: מִתֵּל אָבִיב (dagesh). Before ע, ח, א, ר and before the article it is מֵ: מֵחֵיפָה, מֵהַבַּיִת.",
@@ -794,6 +828,23 @@
     "subtleties": [
      "The full word מִן is used before the article in careful style: מִן הַבַּיִת. Everyday speech says מֵהַבַּיִת.",
      "As “than”, מִ takes endings with pronouns (מִמֶּנִּי “than me”, מִמְּךָ, מִמֶּנּוּ, מִמֶּנָּה, מֵהֶם), and before a clause, an adverb or a phrase with a preposition the full word מֵאֲשֶׁר is used: יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like από, it is both “from” and “than”: μεγαλύτερος από ~ גָּדוֹל יוֹתֵר מִ…."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Like से, it is both “from” and “than”: भाई से लंबा ~ גָּבֹהַּ יוֹתֵר מֵהָאָח."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like nga, it is both “from” and “than”: më i madh nga ~ גָּדוֹל יוֹתֵר מִ…."
+     }
     ]
    }
   },
@@ -927,7 +978,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Ugaritic ʿm and, by metathesis, with Arabic مَعَ (maʕa) and Ugaritic mʿ (Wiktionary).",
+     "text": "Cognate, by metathesis, with Arabic مَعَ (maʕa) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1039,7 +1090,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Yiddish speakers say keyn ayin hore for the same wish as בְּלִי עַיִן הָרָע."
+     "בְּלִי עַיִן הָרָע “without the evil eye” is said after praise or good news, to ward off bad luck."
     ],
     "pitfalls": [
      "It is one word, not בְּ + לִי “in me”.",
@@ -1485,11 +1536,11 @@
      }
     ],
     "etymology": {
-     "text": "From בַּיִת “house” + סֵפֶר “book” (Wiktionary); compare Akkadian bīt ṭuppim “house of the tablet”.",
+     "text": "From בַּיִת “house” + סֵפֶר “book” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “house of book” — and Akkadian said bīt ṭuppim, “house of the tablet” (Wiktionary)."
+     "Literally “house of book”: בַּיִת in its construct form, בֵּית, + סֵפֶר."
     ],
     "pitfalls": [
      "The article goes on the second word: בֵּית הַסֵּפֶר “the school”; “at school” = בְּבֵית הַסֵּפֶר.",
@@ -2222,7 +2273,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Supermarkt, Greek σουπερμάρκετ, Russian супермаркет — Israelis simply cut the internationalism to סוּפֶּר."
+     "German Supermarkt is the same internationalism — Israelis simply cut it to סוּפֶּר."
     ],
     "pitfalls": [
      "Unvowelled סופר is also סוֹפֵר “writer” and “counting”.",
@@ -2230,6 +2281,18 @@
     ],
     "subtleties": [
      "As slang סוּפֶּר also means “super, very”: סוּפֶּר טָעִים “super tasty” (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same internationalism as σουπερμάρκετ, cut short to סוּפֶּר."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same internationalism as супермаркет, cut short to סוּפֶּר."
+     }
     ]
    }
   },
@@ -2620,13 +2683,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Kaffeehaus and Turkish kahvehane are built the same way: “coffee house”."
+     "German Kaffeehaus is built the same way: “coffee house”."
     ],
     "pitfalls": [
      "The article goes on the second word: בֵּית הַקָּפֶה; plural בָּתֵּי קָפֶה."
     ],
     "subtleties": [
      "Wiktionary writes it with a hyphen (maqaf): בֵּית־קָפֶה; with a space it is the same word."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Built like kahvehane: “coffee house”."
+     }
     ]
    }
   },
@@ -2736,7 +2806,7 @@
      }
     ],
     "etymology": {
-     "text": "From בֵּית “house” + חוֹלִים “sick people, patients” (Wiktionary); it was common enough by 1778 to enter an Italian edition of Calepinus’s dictionary. Compare German Krankenhaus.",
+     "text": "From בֵּית “house” + חוֹלִים “sick people, patients” (Wiktionary); it was common enough by 1778 to be recorded in an edition of Calepinus’s dictionary. Compare German Krankenhaus.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2748,6 +2818,13 @@
     ],
     "subtleties": [
      "Without the article, בְּבֵית חוֹלִים is “in hospital” (as a patient)."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "By 1778 the word was common enough to appear in an Italian edition of Calepinus’s dictionary (Wiktionary)."
+     }
     ]
    }
   },
@@ -2988,7 +3065,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek τράπεζα (“table”) and Italian banca (“bench”) both name the money-changer’s table."
+     "The bank is named after the money-changer’s bench: the word goes back to Old Italian banca."
     ],
     "pitfalls": [
      "Only the money bank: a river bank is גָּדָה, a bench סַפְסָל.",
@@ -2996,6 +3073,18 @@
     ],
     "subtleties": [
      "In Israel banks are open on Sunday — the first working day of the week."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Like τράπεζα “table”, the word names the money-changer’s table — here a bench, banca."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "It is banca, the money-changer’s bench."
+     }
     ]
    }
   },
@@ -3388,13 +3477,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Flughafen is a “flight harbour”, like the official נְמַל תְּעוּפָה; English airfield is a “flight field”, like שְׂדֵה תְּעוּפָה."
+     "German Flughafen is a “flight harbour”, like the official נְמַל תְּעוּפָה; שְׂדֵה תְּעוּפָה is a “flight field”."
     ],
     "pitfalls": [
      "The article goes on the second word: שְׂדֵה הַתְּעוּפָה; “at the airport” = בִּשְׂדֵה הַתְּעוּפָה (בְּ before a shva becomes בִּ)."
     ],
     "subtleties": [
      "The ש of שָׂדֶה is a שׂ (s)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "שְׂדֵה תְּעוּפָה is built like airfield: a “flight field”."
+     }
     ]
    }
   },
@@ -3743,7 +3839,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare כִּרְכָּר and Aramaic כַּכַּר (Wiktionary).",
+     "text": "Compare כִּרְכָּר (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3883,7 +3979,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Park, Greek πάρκο, Russian парк, Turkish park — the same word in every language you know."
+     "The same international word as German Park."
     ],
     "pitfalls": [
      "The א only marks the a: PARK, one syllable.",
@@ -3891,6 +3987,23 @@
     ],
     "subtleties": [
      "A small park in the neighbourhood, with swings, is a גִּנָּה or גִּנַּת שַׁעֲשׁוּעִים."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as πάρκο."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same word as парк."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "The same word as park."
+     }
     ]
    }
   },
@@ -4023,11 +4136,11 @@
      }
     ],
     "etymology": {
-     "text": "Compare Ugaritic ʿr “city” and perhaps Sumerian iri, uru “city”; the plural comes from an old word עָר of the same meaning (Wiktionary).",
+     "text": "An old Semitic word; the plural comes from another old word, עָר, of the same meaning (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The plural עָרִים comes from a different, old word, עָר (Wiktionary) — as if English “town” had the plural “cities”."
+     "The plural עָרִים comes from a different, old word, עָר (Wiktionary) — two old words share one paradigm."
     ],
     "pitfalls": [
      "Feminine without a feminine ending: עִיר גְּדוֹלָה.",
@@ -4035,6 +4148,13 @@
     ],
     "subtleties": [
      "With the article: הָעִיר; “in the city” = בָּעִיר."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "It is as if “town” had the plural “cities”."
+     }
     ]
    }
   },
