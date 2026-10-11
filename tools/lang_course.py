@@ -207,7 +207,7 @@ def package(root, code, out_file=None):
     lexicon = {n['id']: J(f'lang/{code}/lexicon/{n["id"]}.json') for n in nodes if J(f'lang/{code}/lexicon/{n["id"]}.json')}
     grammar = {f: J(f'lang/{code}/grammar/{f}.json') for f in fns if J(f'lang/{code}/grammar/{f}.json')}
     bank = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('sentences') or []]
-    exempt = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('fieldExemptions') or []]   # D19: a field that cannot show a node says why
+    exempt = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('fieldExemptions') or []]   # D20: a field that cannot show a node says why
     pp = phenomena_path(root, code); phen = rj(pp) if pp else None
     _, profiles, _, _ = world(root)
     lib = rj(os.path.join(SHARED, '_typology', 'languages.json')) if os.path.exists(os.path.join(SHARED, '_typology', 'languages.json')) else {'languages': []}

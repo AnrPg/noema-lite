@@ -90,7 +90,7 @@ console.log('— dictation: checked by checkTyped (a word) and typedAnswer (that
     if (it.kind === 'word') { words++; if (it.answer !== nfc(C.lang[c].lex[it.lex].lemma) || !N.checkDictation(C, c, it, it.answer).ok || !it.hint) bad.push([c, it.lex]); }
     else { sents++; const s = C.lang[c].sentenceById[it.sentence]; if (it.answer !== s.text || !N.checkDictation(C, c, it, s.text).ok || s.nwords > 8 || it.unknown.length > s.cap || (c === 'zh' && !it.hint)) bad.push([c, it.sentence]); }
   }
-  ok(words > 20 && sents > 20 && !bad.length, `${words} words and ${sents} sentences (≤ 8 words, D19 ⌈30 %⌉, zh with its meaning): the stored text is the answer` + (bad.length ? ' — ' + JSON.stringify(bad.slice(0, 4)) : ''));
+  ok(words > 20 && sents > 20 && !bad.length, `${words} words and ${sents} sentences (≤ 8 words, D20 ⌈30 %⌉, zh with its meaning): the stored text is the answer` + (bad.length ? ' — ' + JSON.stringify(bad.slice(0, 4)) : ''));
   const ar = N.speechItems(C, L, 'ar', 'dictation', { k: K.ar, rng, max: 40 }), aw = ar.find(i => i.kind === 'word' && [...N.stripMarks('ar', i.answer)].length >= 3), as = ar.find(i => i.kind === 'sentence');
   ok(N.checkDictation(C, 'ar', aw, N.stripMarks('ar', aw.answer)).ok && !N.checkDictation(C, 'ar', aw, N.stripMarks('ar', aw.answer).slice(0, -1) + 'ق').ok, 'Arabic word: without vowel marks → right; a wrong letter → wrong, with a letter diff');
   ok(N.checkDictation(C, 'ar', as, N.stripMarks('ar', as.answer)).ok, 'Arabic sentence without vowel marks → right (the form index reads the same words)');
@@ -111,7 +111,7 @@ console.log('— hearing sentences, shadowing, speaking');
     n++; const s = C.lang[c].sentenceById[it.sentence];
     if (it.answer !== s.gloss || !it.options.includes(it.answer) || new Set(it.options).size !== it.options.length || it.options.length < 3 || it.say !== s.text || it.unknown.length > s.cap) bad.push([c, it.sentence]);
   }
-  ok(n > 60 && !bad.length, `${n} listen_meaning items: the stored gloss among other sentences' glosses, D19` + (bad.length ? ' — ' + JSON.stringify(bad.slice(0, 3)) : ''));
+  ok(n > 60 && !bad.length, `${n} listen_meaning items: the stored gloss among other sentences' glosses, D20` + (bad.length ? ' — ' + JSON.stringify(bad.slice(0, 3)) : ''));
   const sh = N.speechItems(C, L, 'de', 'shadowing', { k: K.de, rng, max: 10 }), sp = N.speechItems(C, L, 'de', 'speak', { k: K.de, rng, max: 12 });
   ok(sh.length === 10 && sh.some(i => i.kind === 'word') && sh.some(i => i.kind === 'sentence') && sp.length === 12 && sp.every(i => i.type === 'speak') && sp.some(i => i.mode === 'produce' && K.de.P.has(i.lex)), 'shadowing and speak: words and sentences; “produce” only for words known for production');
 }

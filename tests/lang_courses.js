@@ -37,7 +37,7 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
     const first = plan.steps[0], lessons = C.order.filter(n => C.nodes[n].kind === 'lesson' && X.applies[n]);
     if (lessons.length) ok(first?.kind === 'lesson' && first.node === lessons[0], `${code}: a new learner starts with lesson ${first?.node}`);
     else ok(first?.kind === 'learn' && first.node === C.order[0], `${code}: a new learner starts with ${first?.node} (${first?.concepts.length} words)`);
-    // every lesson exercise is made from stored data; at most ⌈30 %⌉ of a sentence's words are unknown, and those are listed as 🆕 (D19)
+    // every lesson exercise is made from stored data; at most ⌈30 %⌉ of a sentence's words are unknown, and those are listed as 🆕 (D20)
     if (lessons.length) {
       const T = N.newLearner(C), bad2 = []; let n = 0;
       for (const nid of lessons) {

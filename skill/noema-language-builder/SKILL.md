@@ -25,12 +25,12 @@ toolkit the same files sit next to `LANGUAGE_BUILDER.md` (this text). Everything
   skip an audit turn. At the end say what a native speaker should still check.
 
 ## 1. Binding rules
-Read `$T/references/LANGUAGE_RULES.md` (D1–D19, binding) before anything else, then `$T/references/LANGUAGES.md` §4
-(the content model) and §10.2 (the package). D13–D19 apply to the package exactly as to the library: the new language
+Read `$T/references/LANGUAGE_RULES.md` (D1–D20, binding) before anything else, then `$T/references/LANGUAGES.md` §4
+(the content model) and §10.2 (the package). D13–D20 apply to the package exactly as to the library: the new language
 **fills the course's existing nodes and grammar functions** in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a
 concept (D15); no built-in point of view (D16); every grammar page has notes for ≥ 8 reference languages of all four
-types (D18); every word used is in the lexicon (D19).
+types (D18); every word used is in the lexicon (D20).
 
 ## 2. Setup
 With the noema-lite connector, call **`noema_language_package_guide`** (course, language): it returns these

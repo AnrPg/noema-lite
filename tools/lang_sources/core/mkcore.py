@@ -12,7 +12,7 @@ a concept that words already use.
 HARD CONSTRAINTS (docs/LANGUAGE_RULES.md): the common order of all language paths (D13) — a lesson or concept moved here
 moves for every language of every course; every word written for these lessons states its whole facade (D14), every
 meaning is a concept (D15), texts are neutral and comparisons go into notes for the reference set (D16, D18), sentences
-may carry ≤ ⌈30 %⌉ unknown words (D19).
+may carry ≤ ⌈30 %⌉ unknown words (D20).
 """
 import json, os, sys, glob, unicodedata
 

@@ -111,7 +111,7 @@ const tokC = (c, t) => (t.l ? [t.l] : (t.parts || []).map(p => p.l).filter(Boole
   const st = N.polyItems(C, all, 'compare_rule', { fn: 'fn.plural.noun', k: kAll, rng: N.seeded(1), max: 4 }).find(it => it.kind === 'compare');
   ok(st && st.statements.every(s => { const f = cf.features.find(x => s.text.startsWith(x.title + ':')); return !f || s.holds.every(c => s.text.endsWith(f.values[c].title)); }), 'compare_rule over one function: every statement holds exactly for the languages whose value it states');
 }
-{ // D19: a learner who knows a part only — every item stays within what is known (words) or ⌈30 %⌉ unknown (sentences)
+{ // D20: a learner who knows a part only — every item stays within what is known (words) or ⌈30 %⌉ unknown (sentences)
   const part = N.newLearner(C), rng = N.seeded(7);
   for (const c of C.languages) for (const id of Object.keys(C.lang[c].lex)) if (rng() < 0.45) N.review(C, part, c, id, 'r', 'good', 0);
   const k = Object.fromEntries(C.languages.map(c => [c, N.known(C, part, c)]));

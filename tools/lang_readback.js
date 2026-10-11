@@ -3,7 +3,7 @@
    any course folder, so the skill noema-language-builder can run it in a sandbox (it carries langcore.js next to this file):
      node tools/lang_readback.js <course-dir> [--lang <code>] [--package <pkg.json> --course <course file>]
    Per language: every bank sentence tokenizes back to its annotated words, every word card builds, a new learner starts with
-   the first lesson, and every lesson exercise is made from stored data with ≤ ⌈30 %⌉ unknown words, each listed (D19).
+   the first lesson, and every lesson exercise is made from stored data with ≤ ⌈30 %⌉ unknown words, each listed (D20).
    --package: also checks a language package against the course file (course.pack.js / course.json) exactly as the app and
    the connector do (langcore.checkLangPackage), and reads the course back with the package applied.
    Exit 0 when everything passes. */

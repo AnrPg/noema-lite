@@ -13,7 +13,7 @@ else, then the sections of `docs/LANGUAGES.md` your task touches. In short:
   as in Greek"; comparisons for a learner are computed from the typology (`library/languages/_typology/`).
 - **D18 notes** — comparisons go into `notes` (`for`: language / `type:` / `family:`); every grammar page has notes for ≥ 8
   languages of the reference set (`library/languages/_typology/reference.json`) covering all four types.
-- **D19 vocabulary track** — sentences for grammar and the other aspects may use any word of the lexicon (≤ ⌈30 %⌉
+- **D20 vocabulary track** — sentences for grammar and the other aspects may use any word of the lexicon (≤ ⌈30 %⌉
   unknown to the learner at run time); every word you use exists with its full facade; a field brings ≥ 2 sentences for
   every non-vocabulary node before it.
 - **D9–D12, D17** — complete thematic groups, words that combine, the grammar per type, the open-ended course.

@@ -126,7 +126,7 @@ console.log('— items from stored data only');
     const used = N.composeCheck(C, c, task.required.map(l => X.lex[l].lemma).join(' ') + (c === 'zh' ? '。' : '.'), task, k.R);
     ok(used.missing.length === 0 && N.composeCheck(C, c, X.lex[task.required[0]].lemma, task, k.R).missing.length === 2, `${c}: the required words are found in any form by the tokenizer`);
   }
-  // property: for random learners every sentence an item shows has at most ⌈30 %⌉ unknown words (D19)
+  // property: for random learners every sentence an item shows has at most ⌈30 %⌉ unknown words (D20)
   let viol = 0, items = 0;
   for (let r = 0; r < 25; r++) {
     const T = N.newLearner(C), day = 100;

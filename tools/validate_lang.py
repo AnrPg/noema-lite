@@ -335,7 +335,7 @@ D19_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es',
 D19_GROUPS = ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']
 def D19_REQUIRED(L): return [c for c in D19_NATIVES if c != L] + D19_GROUPS
 CATEGORIES = {'overview', 'script', 'phonology', 'morphology', 'morphosyntax', 'syntax', 'semantics', 'pragmatics', 'lexicon',
-              'reading', 'writing', 'speaking', 'listening', 'production', 'culture'}   # D19: non-vocabulary aspects
+              'reading', 'writing', 'speaking', 'listening', 'production', 'culture'}   # D20: non-vocabulary aspects
 
 
 def world(root):
@@ -547,7 +547,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
         functions[d.get('id')] = d
         need_str(v, where, d, 'title')
         if W_NAMES and any(re.search(r'\b' + re.escape(nm) + r'\b', d.get('title') or '') for nm in W_NAMES): v.E(where, 'the title names a language outside the course (D16): describe the point itself')
-        if d.get('category') not in CATEGORIES: v.E(where, f'category must be one of {", ".join(sorted(CATEGORIES))} (the aspect of the language it teaches, D19)')
+        if d.get('category') not in CATEGORIES: v.E(where, f'category must be one of {", ".join(sorted(CATEGORIES))} (the aspect of the language it teaches, D20)')
     for fid, d in functions.items():
         for a in d.get('after') or []:
             if a not in functions: v.E(f'core/functions/{fid}.json', f'unknown function “{a}” in after')
@@ -901,7 +901,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
             return [(l, f)]
         for fn in v.files(f'{lw}/bank'):
             where = f'{lw}/bank/{fn}'; d = v.load(where)
-            for x_ in (d or {}).get('fieldExemptions') or []:   # D19: a field that cannot show a node says why
+            for x_ in (d or {}).get('fieldExemptions') or []:   # D20: a field that cannot show a node says why
                 if not (x_.get('reason') or '').strip(): v.E(where, f'fieldExemptions {x_.get("field")} / {x_.get("function")}: say why')
                 exempt[(x_.get('field'), x_.get('function'))] = x_
             for s in (d or {}).get('sentences', []):
@@ -952,7 +952,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
         for fid, f in frames.items():
             fr_draft = f.get("lessons") and all(x in draft and not (batch and x in batch) for x in f['lessons'])   # a frame of lessons still being written
             if fid not in realized and L not in (f.get('absent') or {}): (v.E if strict and not fr_draft else v.W)(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
-        # D19: every field brings ≥ 2 sentences (with its own words) for every non-vocabulary node taught before it
+        # D20: every field brings ≥ 2 sentences (with its own words) for every non-vocabulary node taught before it
         order_ = [nid for nid in topo_order(nodes) if nid in app]
         fields_ = {}
         for nid in order_:
@@ -969,7 +969,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
             for fid in before:
                 n_ = sum(1 for sid, s in sids.items() if fid in (s.get('functions') or []) and sent_lex.get(sid, set()) & words)
                 if n_ < 2 and (fld, fid) not in exempt:
-                    (v.E if strict else v.W)(f'{lw}/bank', f'field {fld}: {n_} sentence(s) for {fid} with the field’s words — every field brings ≥ 2 for every node before it, or says why in fieldExemptions (D19)')
+                    (v.E if strict else v.W)(f'{lw}/bank', f'field {fld}: {n_} sentence(s) for {fid} with the field’s words — every field brings ≥ 2 for every node before it, or says why in fieldExemptions (D20)')
         check_generators(v, lw, functions, frames, lex, sids, {fid: g for fid, g in grams.items() if g}, extra, strict)   # P5: generators, their parameters and pools
     if not only and strict:
         for cid in sorted(pending - meant): v.E(f'concept {cid}', 'is pending, but no word of the course has this meaning: remove it')

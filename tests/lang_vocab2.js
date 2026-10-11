@@ -1,5 +1,5 @@
 /* P5v — vocabulary depth (docs/LANGUAGES.md §6.2 “Deepening”, §7.5): the thirteen depth types of langcore over the mini course and
-   the pilot course (every answer from the stored data, D19 caps, tracks, only met words as partners, the session plan, GEN),
+   the pilot course (every answer from the stored data, D20 caps, tracks, only met words as partners, the session plan, GEN),
    then the UI in a real browser (🏋️ practise this word, 🏋️ deepen, the daily session, keyboard, RTL, phone width).
    Usage: node tests/lang_vocab2.js [prepared-repo-dir]   (the browser part needs a built repo: python3 tools/build.py) */
 const fs = require('fs'), path = require('path');
@@ -28,7 +28,7 @@ function soundItem(it) {
   if (it.type === 'vorder') return it.cards.length >= 3;
   return false;
 }
-/** The tokens of a sentence prompt: unknown words besides the target at most ⌈30 %⌉ (D19), the 🆕 list = the new tokens. */
+/** The tokens of a sentence prompt: unknown words besides the target at most ⌈30 %⌉ (D20), the 🆕 list = the new tokens. */
 function d19(it, strict = false) {
   const toks = it.prompt?.sentence || it.cards?.find(c => c.tokens)?.tokens; if (!toks) return true;
   const words = toks.filter(k => !k.p).length, bad = toks.filter(k => k.new || k.out).length;
@@ -95,7 +95,7 @@ if (fs.existsSync(path.join(PILOT, 'course.json'))) {
       const lx = X.lex[it.lex], p = lx.profile || {};
       const bad = m => problems.push(`${c} ${it.kind} ${it.lex}: ${m}`);
       if (!soundItem(it)) bad('unsound options');
-      if (!d19(it)) bad('D19: too many unknown words or a 🆕 word not listed');
+      if (!d19(it)) bad('D20: too many unknown words or a 🆕 word not listed');
       if (it.track !== N.deepTrack(it.kind)) bad('track');
       if (it.kind === 'root_family' && it.type === 'vpick' && it.answer !== lx.root.trim()) bad('root ≠ stored root');
       if (it.kind === 'root_family' && it.type === 'vsort' && it.cards.some(cd => N.stripMarks(c, X.lex[cd.lex].root).replace(/\s+/g, ' ').trim() !== cd.bucket)) bad('a card in the wrong root family');
@@ -262,7 +262,7 @@ if (fs.existsSync(path.join(PILOT, 'course.json'))) {
     const { C, L } = NoemaLangUI.UI, its = NoemaLang.deepItems(C, L, 'de', C.lang.de.byNode['fd.06'], { max: 200, perWord: 99, types: ['example_cloze', 'sense_pick'] });
     return its.find(it => (it.unknown || []).length) || null;
   });
-  ok(!!found, 'some German sentence items carry 🆕 words (D19: ≤ ⌈30 %⌉ of the words)');
+  ok(!!found, 'some German sentence items carry 🆕 words (D20: ≤ ⌈30 %⌉ of the words)');
 
   // ---------- phones ----------
   await page.setViewportSize({ width: 390, height: 844 });

@@ -63,7 +63,7 @@ connector). docs/LANGUAGES.md §10.2 is the contract.
 ## Prompt 1 — Typology and phenomena
 
 ```
-Read docs/LANGUAGE_RULES.md (binding), then docs/LANGUAGES.md D13–D19, §4.11 and §4.7.1, and tools/lang_sources/AGENT_BRIEF.md.
+Read docs/LANGUAGE_RULES.md (binding), then docs/LANGUAGES.md D13–D20, §4.11 and §4.7.1, and tools/lang_sources/AGENT_BRIEF.md.
 We are adding <LANG> (<code>) to the course library/languages/<course>. This session writes ONLY:
 1. library/languages/_typology/languages.json — the profile of <code> if it is missing: a value for EVERY feature of
    _typology/features.json (WALS-based; "unknown" only when sources disagree), its family and type; check the reference set

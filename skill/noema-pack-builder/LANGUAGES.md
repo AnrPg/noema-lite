@@ -5,7 +5,7 @@ nodes (lessons, core lessons, field tiers), grammar functions and sentence frame
 `language.json`, lexicons (one file per node), grammar realizations and a sentence bank. The learner's app makes every
 exercise **from what you store** (paradigms, sentences): you never write an answer key, so every form must be right.
 
-**First read `references/LANGUAGE_RULES.md` (binding, D1–D19).** The full contract is `references/LANGUAGES.md`
+**First read `references/LANGUAGE_RULES.md` (binding, D1–D20).** The full contract is `references/LANGUAGES.md`
 (§4 the content model, §6.7 generators, §7.4 refills, §10 these tasks, §11 the checks). The JSON Schema of every file:
 `schemas/noema.lang.v1.schema.json`. The mini course in the repository (`tests/fixtures/lang-mini`) is a small,
 hand-checked example of every file.
