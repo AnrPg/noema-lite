@@ -1,0 +1,4169 @@
+{
+  "@@locale": "en",
+  "engine.core.copied": "Copied 📋",
+  "@engine.core.copied": {
+    "description": "Toast after the learner copies a code block to the clipboard. Short."
+  },
+  "engine.core.copy": "copy",
+  "@engine.core.copy": {
+    "description": "Small button on a code block (lowercase in English) that copies the code. One short word."
+  },
+  "engine.core.xpFloat": "+{n, number} XP",
+  "@engine.core.xpFloat": {
+    "description": "Floating label that rises from a button when the learner earns XP (experience points). Keep “XP”.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.core.goalSmashed": "Daily goal smashed!",
+  "@engine.core.goalSmashed": {
+    "description": "Toast when the learner reaches the daily XP goal (after a 🎯 emoji). Enthusiastic, short."
+  },
+  "engine.core.cancel": "Cancel",
+  "@engine.core.cancel": {
+    "description": "Button of a yes/no confirmation dialog that closes it without doing anything."
+  },
+  "engine.core.yes": "Yes",
+  "@engine.core.yes": {
+    "description": "Button of a yes/no confirmation dialog that confirms the action."
+  },
+  "engine.inbox.applied": "{n, plural, one {# result} other {# results}} from your other apps",
+  "@engine.inbox.applied": {
+    "description": "Toast (after a 📥 emoji) when study results from other apps (e.g. Meletee) were applied to this subject. n = number of results.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.gemini.noKeySet": "No API key set.",
+  "@engine.gemini.noKeySet": {
+    "description": "Error when the learner presses “Detect models” without a Gemini API key."
+  },
+  "engine.gemini.modelListFailed": "Model list failed ({status}): {detail}",
+  "@engine.gemini.modelListFailed": {
+    "description": "Error when the list of Gemini models could not be loaded. status = HTTP status code, detail = the server’s answer (English, technical).",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "403"
+      },
+      "detail": {
+        "type": "String",
+        "example": "API key not valid"
+      }
+    }
+  },
+  "engine.gemini.keyRejected": "Your Gemini API key was rejected. Open ⚙️ Settings and paste a valid key.",
+  "@engine.gemini.keyRejected": {
+    "description": "Error shown in the tutor when Google rejects the learner’s Gemini API key. “⚙️ Settings” is the ⚙️ Settings tab of the account menu."
+  },
+  "engine.gemini.denied": "Access denied (403). The key may be restricted (e.g. HTTP-referrer restriction blocks local files) or the Generative Language API is not enabled for it.",
+  "@engine.gemini.denied": {
+    "description": "Error (HTTP 403) from Gemini. Keep the API names “HTTP-referrer” and “Generative Language API” in English."
+  },
+  "engine.gemini.noModel": "That model is not available for your key. Open ⚙️ Settings → “Detect models”.",
+  "@engine.gemini.noModel": {
+    "description": "Error (HTTP 404) from Gemini. “Detect models” is the name of a button in the ⚙️ Settings tab of the account menu (keep it identical to engine.acc.detectModels)."
+  },
+  "engine.gemini.rateLimit": "Rate limit / quota reached (429). Wait a minute or switch to a lighter model in ⚙️ Settings.",
+  "@engine.gemini.rateLimit": {
+    "description": "Error (HTTP 429) from Gemini: too many requests or the free quota is used up."
+  },
+  "engine.gemini.hiccup": "Gemini is having a hiccup ({status}). Try again in a moment.",
+  "@engine.gemini.hiccup": {
+    "description": "Error when Gemini’s server fails (HTTP 5xx). status = HTTP status code. Light tone.",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "503"
+      }
+    }
+  },
+  "engine.gemini.error": "Gemini error {status}: {detail}",
+  "@engine.gemini.error": {
+    "description": "Any other error from Gemini. status = HTTP status code, detail = the server’s answer (technical, English).",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "400"
+      },
+      "detail": {
+        "type": "String",
+        "example": "Invalid JSON payload"
+      }
+    }
+  },
+  "engine.gemini.noKey": "No Gemini API key. Open ⚙️ Settings.",
+  "@engine.gemini.noKey": {
+    "description": "Error when the learner uses an AI feature without a Gemini API key."
+  },
+  "engine.gemini.network": "Network error — are you online? ({detail})",
+  "@engine.gemini.network": {
+    "description": "Error when Gemini cannot be reached. detail = the browser’s technical message (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "engine.gemini.emptyBlocked": "Empty answer from Gemini (blocked: {reason}).",
+  "@engine.gemini.emptyBlocked": {
+    "description": "Error when Gemini answered nothing because its safety filter blocked the request. reason = Gemini’s code (e.g. SAFETY).",
+    "placeholders": {
+      "reason": {
+        "type": "String",
+        "example": "SAFETY"
+      }
+    }
+  },
+  "engine.gemini.empty": "Empty answer from Gemini.",
+  "@engine.gemini.empty": {
+    "description": "Error when Gemini answered with no text."
+  },
+  "engine.mode.socratic": "Socratic",
+  "@engine.mode.socratic": {
+    "description": "Tutor mode chip (after the tutor’s emoji): a Socratic dialogue. One word if possible."
+  },
+  "engine.mode.explain": "Explain",
+  "@engine.mode.explain": {
+    "description": "Tutor mode chip (after 💡): the tutor explains in depth. One word."
+  },
+  "engine.mode.hint": "Hint",
+  "@engine.mode.hint": {
+    "description": "Tutor mode chip (after 🪜): hints on an exercise, never the answer. One word."
+  },
+  "engine.mode.quiz": "Quiz me",
+  "@engine.mode.quiz": {
+    "description": "Tutor mode chip (after ⚡): rapid-fire quiz questions. Short imperative."
+  },
+  "engine.mode.interview": "Interview",
+  "@engine.mode.interview": {
+    "description": "Tutor mode chip (after 🎤): a mock interview / oral exam. One word."
+  },
+  "engine.mode.debug": "Case sim",
+  "@engine.mode.debug": {
+    "description": "Tutor mode chip (after 🔧): an interactive case / debugging simulation. Very short."
+  },
+  "engine.tutor.explainThis": "Explain this (AI)",
+  "@engine.tutor.explainThis": {
+    "description": "Tooltip of the 💡 button on a part of a lesson: the AI tutor explains that part."
+  },
+  "engine.tutor.explainThisAria": "Explain this with the AI tutor",
+  "@engine.tutor.explainThisAria": {
+    "description": "Screen-reader label of the 💡 button on a part of a lesson."
+  },
+  "engine.tutor.ctxCourse": "Whole course",
+  "@engine.tutor.ctxCourse": {
+    "description": "Tutor context chip (after 🌍): the tutor talks about the whole subject."
+  },
+  "engine.tutor.ctxSection": "Section",
+  "@engine.tutor.ctxSection": {
+    "description": "Tutor context chip (after 📍) when the section has no title."
+  },
+  "engine.tutor.ctxChapter": "Chapter",
+  "@engine.tutor.ctxChapter": {
+    "description": "Tutor context chip (after 📍) when the chapter has no title."
+  },
+  "engine.tutor.ctxDrill": "Debug drill",
+  "@engine.tutor.ctxDrill": {
+    "description": "Tutor context chip (after 🔧) when the debug drill has no title."
+  },
+  "engine.tutor.ctxExercise": "This exercise",
+  "@engine.tutor.ctxExercise": {
+    "description": "Tutor context chip (after 🧩): the tutor talks about the exercise on screen."
+  },
+  "engine.tutor.ctxPart": "This part",
+  "@engine.tutor.ctxPart": {
+    "description": "Tutor context chip (after 🔎): the tutor explains one part of a lesson."
+  },
+  "engine.common.chTitle": "Ch{num} · {title}",
+  "@engine.common.chTitle": {
+    "description": "A chapter’s short number and a title (tutor context, search results, saved conversations). “Ch” = chapter, abbreviated; num = the chapter number.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      },
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.tutor.chatLangTip": "Language of the AI conversations — the course material stays as it is",
+  "@engine.tutor.chatLangTip": {
+    "description": "Tooltip of the language picker of the AI conversations (the tutor drawer and Settings)."
+  },
+  "engine.tutor.chatLangAria": "Language of the AI conversations",
+  "@engine.tutor.chatLangAria": {
+    "description": "Screen-reader label of the language picker of the AI conversations."
+  },
+  "engine.tutor.chatLangSame": "Same as the course ({lang})",
+  "@engine.tutor.chatLangSame": {
+    "description": "First option of the AI-conversation language picker (after 🗣): the language of the course material. lang = that language’s own name (e.g. English, Ελληνικά).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "English"
+      }
+    }
+  },
+  "engine.tutor.history": "Conversation history",
+  "@engine.tutor.history": {
+    "description": "Tutor drawer menu item / tooltip: shows earlier conversations."
+  },
+  "engine.tutor.export": "Export this conversation (.md)",
+  "@engine.tutor.export": {
+    "description": "Tutor drawer menu item: download this conversation as a Markdown file."
+  },
+  "engine.tutor.newConvo": "New conversation",
+  "@engine.tutor.newConvo": {
+    "description": "Tutor drawer menu item: start a new, empty conversation."
+  },
+  "engine.tutor.more": "More",
+  "@engine.tutor.more": {
+    "description": "Label of the ⋮ (more actions) menu button in the tutor drawer."
+  },
+  "engine.tutor.send": "Send",
+  "@engine.tutor.send": {
+    "description": "Tooltip / screen-reader label of the ➤ send button of the tutor chat."
+  },
+  "engine.tutor.savedLesson": "<b>Saved to your lessons:</b> {lesson}",
+  "@engine.tutor.savedLesson": {
+    "description": "Chip under a tutor answer (after 📌): a lesson was saved. Keep the <b>…</b> tags around the label. lesson = the lesson’s text.",
+    "placeholders": {
+      "lesson": {
+        "type": "String",
+        "example": "MERGE needs a unique match per target row."
+      }
+    }
+  },
+  "engine.tutor.poweredBy": "Your Gemini-powered tutor · {model}",
+  "@engine.tutor.poweredBy": {
+    "description": "Subtitle under the tutor’s name (classic layout). model = the Gemini model’s id or engine.tutor.autoModel.",
+    "placeholders": {
+      "model": {
+        "type": "String",
+        "example": "gemini-2.5-flash"
+      }
+    }
+  },
+  "engine.tutor.autoModel": "auto model",
+  "@engine.tutor.autoModel": {
+    "description": "Shown instead of a model id when the app picks the Gemini model itself. Lowercase."
+  },
+  "engine.tutor.close": "Close",
+  "@engine.tutor.close": {
+    "description": "Tooltip of the ✕ button that closes the tutor drawer."
+  },
+  "engine.tutor.useWhole": "use whole course",
+  "@engine.tutor.useWhole": {
+    "description": "Small link next to the tutor’s context chip: talk about the whole course instead. Lowercase."
+  },
+  "engine.tutor.placeholder": "Your answer or question…",
+  "@engine.tutor.placeholder": {
+    "description": "Placeholder of the tutor chat’s text box."
+  },
+  "engine.tutor.greet": "Hi {name}! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
+  "@engine.tutor.greet": {
+    "description": "First message of the tutor (classic layout), Markdown: keep the ** marks. name = the learner, tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label (e.g. “💡 Explain”).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      },
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      },
+      "avatar": {
+        "type": "String",
+        "example": "🦉"
+      },
+      "mode": {
+        "type": "String",
+        "example": "🦉 Socratic"
+      }
+    }
+  },
+  "engine.tutor.greetAnon": "Hi there! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
+  "@engine.tutor.greetAnon": {
+    "description": "First message of the tutor (classic layout) when the learner has no name, Markdown: keep the ** marks. tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      },
+      "avatar": {
+        "type": "String",
+        "example": "🦉"
+      },
+      "mode": {
+        "type": "String",
+        "example": "🦉 Socratic"
+      }
+    }
+  },
+  "engine.tutor.starterSocratic": "Question me Socratically on this",
+  "@engine.tutor.starterSocratic": {
+    "description": "Starter button in an empty tutor chat (after the tutor’s emoji): starts a Socratic dialogue."
+  },
+  "engine.tutor.starterQuiz": "Rapid-fire quiz, traps only",
+  "@engine.tutor.starterQuiz": {
+    "description": "Starter button (after ⚡): a fast quiz with trick questions only."
+  },
+  "engine.tutor.starterDebug": "Simulate a broken scenario",
+  "@engine.tutor.starterDebug": {
+    "description": "Starter button (after 🔧): a simulated case where something is broken, to diagnose."
+  },
+  "engine.tutor.starterInterview": "Interview me",
+  "@engine.tutor.starterInterview": {
+    "description": "Starter button (after 🎤): a mock interview."
+  },
+  "engine.tutor.starterExplain": "Explain it differently",
+  "@engine.tutor.starterExplain": {
+    "description": "Starter button (after 💡): explain the topic differently from the notes."
+  },
+  "engine.tutor.lessonsLearned": "{n, plural, one {# lesson learned} other {# lessons learned}}",
+  "@engine.tutor.lessonsLearned": {
+    "description": "Toast (after 📌) when the tutor saved lessons from the conversation. n = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.tutor.settings": "Settings",
+  "@engine.tutor.settings": {
+    "description": "Button under an AI error (after ⚙️): opens the Settings tab."
+  },
+  "engine.tutor.howKey": "How to get a key",
+  "@engine.tutor.howKey": {
+    "description": "Button under an AI error about the API key (after 🔑): opens the guide to get a free Gemini key."
+  },
+  "engine.log.exCtx": "{ch} · {id}",
+  "@engine.log.exCtx": {
+    "description": "Context label of a saved AI grading conversation: chapter and section (engine.common.chTitle), then the exercise’s id. Usually unchanged.",
+    "placeholders": {
+      "ch": {
+        "type": "String",
+        "example": "Ch3 · Delta Lake"
+      },
+      "id": {
+        "type": "String",
+        "example": "ch03-e012"
+      }
+    }
+  },
+  "engine.log.codeReview": "Code review: {q}",
+  "@engine.log.codeReview": {
+    "description": "Title of a saved conversation: the AI reviewed the learner’s code. q = the start of the exercise’s question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "Write a MERGE that upserts…"
+      }
+    }
+  },
+  "engine.log.grading": "Grading: {q}",
+  "@engine.log.grading": {
+    "description": "Title of a saved conversation: the AI graded the learner’s answer. q = the start of the question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "Why does OPTIMIZE…"
+      }
+    }
+  },
+  "engine.log.questionMd": "**Question:** {q}",
+  "@engine.log.questionMd": {
+    "description": "Saved conversation (Markdown, keep **): the exercise’s question. q = the question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "What does VACUUM remove?"
+      }
+    }
+  },
+  "engine.log.myAnswerMd": "**My answer:**",
+  "@engine.log.myAnswerMd": {
+    "description": "Saved conversation (Markdown, keep **): heading before the learner’s answer, in the learner’s voice."
+  },
+  "engine.log.scoreMd": "**Score: {score, number}/100**",
+  "@engine.log.scoreMd": {
+    "description": "Saved conversation (Markdown, keep **): the AI’s score out of 100.",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.log.missing": "Missing: {list}",
+  "@engine.log.missing": {
+    "description": "Saved conversation (after ➕): the points the answer missed. list = points joined with “ · ”.",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "retention period · time travel"
+      }
+    }
+  },
+  "engine.log.aiQuestion": "AI question: {q}",
+  "@engine.log.aiQuestion": {
+    "description": "Title of a saved conversation: a practice question generated by the AI. q = the start of the question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "Which command…"
+      }
+    }
+  },
+  "engine.log.aiQuestionAsk": "Generate a fresh, tricky question on “{title}”.",
+  "@engine.log.aiQuestionAsk": {
+    "description": "Saved conversation: the learner’s request for a new AI practice question. title = the section’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Log Basics"
+      }
+    }
+  },
+  "engine.log.explanationMd": "**Explanation:** {text}",
+  "@engine.log.explanationMd": {
+    "description": "Saved conversation (Markdown, keep **): the explanation of the AI question. text = the explanation.",
+    "placeholders": {
+      "text": {
+        "type": "String",
+        "example": "The log records every commit…"
+      }
+    }
+  },
+  "engine.log.drill": "Drill: {title}",
+  "@engine.log.drill": {
+    "description": "Title of a saved conversation: a graded debug drill. title = the drill’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Slow MERGE"
+      }
+    }
+  },
+  "engine.log.symptomMd": "**Symptom:** {symptom}",
+  "@engine.log.symptomMd": {
+    "description": "Saved conversation (Markdown, keep **): the symptom of the debug drill.",
+    "placeholders": {
+      "symptom": {
+        "type": "String",
+        "example": "The job got 10× slower overnight."
+      }
+    }
+  },
+  "engine.log.myQuestionsMd": "**The questions I would ask myself:**",
+  "@engine.log.myQuestionsMd": {
+    "description": "Saved conversation (Markdown, keep **): heading before the learner’s list of diagnostic questions, in the learner’s voice."
+  },
+  "engine.log.drillScoreMd": "**Score: {score, number}/100** — covered {hit, number}/{of, number}",
+  "@engine.log.drillScoreMd": {
+    "description": "Saved conversation (Markdown, keep **): the drill’s score and how many checklist questions the learner covered (hit of of).",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "3"
+      },
+      "hit": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.log.checklistMd": "**Canonical checklist:**",
+  "@engine.log.checklistMd": {
+    "description": "Saved conversation (Markdown, keep **): heading before the reference list of questions to ask oneself."
+  },
+  "engine.exType.mcq": "Choose",
+  "@engine.exType.mcq": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Multiple choice."
+  },
+  "engine.exType.tf": "True / False",
+  "@engine.exType.tf": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.odd": "Odd one out",
+  "@engine.exType.odd": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Find the item that does not belong."
+  },
+  "engine.exType.order": "Put in order",
+  "@engine.exType.order": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.match": "Match",
+  "@engine.exType.match": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Match pairs."
+  },
+  "engine.exType.bucket": "Sort",
+  "@engine.exType.bucket": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Sort items into groups."
+  },
+  "engine.exType.cloze": "Fill the gaps",
+  "@engine.exType.cloze": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.spotbug": "Spot the bug",
+  "@engine.exType.spotbug": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Find the wrong line of code."
+  },
+  "engine.exType.calc": "Calculate",
+  "@engine.exType.calc": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.scenario": "Debug simulation",
+  "@engine.exType.scenario": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. A step-by-step case to diagnose."
+  },
+  "engine.exType.free": "Explain it",
+  "@engine.exType.free": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Free written explanation."
+  },
+  "engine.exType.write": "Write the code",
+  "@engine.exType.write": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exTag.concept": "concept",
+  "@engine.exTag.concept": {
+    "description": "Tag on an exercise card (lowercase in English, a few words)."
+  },
+  "engine.exTag.syntax": "syntax",
+  "@engine.exTag.syntax": {
+    "description": "Tag on an exercise card (lowercase in English, a few words)."
+  },
+  "engine.exTag.pitfall": "pitfall",
+  "@engine.exTag.pitfall": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After ⚠️: a common mistake."
+  },
+  "engine.exTag.debug": "debug",
+  "@engine.exTag.debug": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🔧."
+  },
+  "engine.exTag.exam": "exam trap",
+  "@engine.exTag.exam": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🎓: a typical exam trick."
+  },
+  "engine.exTag.interview": "interview",
+  "@engine.exTag.interview": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🎤: a typical interview question."
+  },
+  "engine.exTag.calc": "calc",
+  "@engine.exTag.calc": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🧮: a calculation (abbreviated)."
+  },
+  "engine.exTag.compare": "compare",
+  "@engine.exTag.compare": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After ⚖️: compares two concepts."
+  },
+  "engine.ex.selectAll": "Select ALL that apply ({n, number}).",
+  "@engine.ex.selectAll": {
+    "description": "Hint above a multiple-choice question with several right answers. n = how many are right. “ALL” is stressed.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.true": "True",
+  "@engine.ex.true": {
+    "description": "Answer button of a true/false exercise (after 👍)."
+  },
+  "engine.ex.false": "False",
+  "@engine.ex.false": {
+    "description": "Answer button of a true/false exercise (after 👎)."
+  },
+  "engine.ex.orderHint": "Tap the items below in the right order ↓",
+  "@engine.ex.orderHint": {
+    "description": "Placeholder in an empty “put in order” answer row."
+  },
+  "engine.ex.correctOrder": "Correct order:",
+  "@engine.ex.correctOrder": {
+    "description": "Bold label before the correct order of a “put in order” exercise (shown after a wrong answer)."
+  },
+  "engine.ex.matchHint": "Tap a left item, then its partner on the right.",
+  "@engine.ex.matchHint": {
+    "description": "Instruction of a matching exercise."
+  },
+  "engine.ex.correctPairs": "Correct pairs:",
+  "@engine.ex.correctPairs": {
+    "description": "Bold label before the correct pairs of a matching exercise (after a wrong answer)."
+  },
+  "engine.ex.allSorted": "All sorted — check it!",
+  "@engine.ex.allSorted": {
+    "description": "Shown in the empty pool of a sorting exercise when every item is in a group."
+  },
+  "engine.ex.bucketHint": "Tap an item, then tap its bucket (or drag).",
+  "@engine.ex.bucketHint": {
+    "description": "Instruction of a sorting exercise (items into groups)."
+  },
+  "engine.ex.spotbugHint": "{n, plural, one {Click the buggy line.} other {Click the buggy lines (#).}}",
+  "@engine.ex.spotbugHint": {
+    "description": "Instruction of a “spot the bug” exercise. n = how many lines are wrong.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.fix": "Fix",
+  "@engine.ex.fix": {
+    "description": "Bold heading (after 🔧) above the corrected code of a “spot the bug” exercise."
+  },
+  "engine.ex.step": "Step {n, number}/{of, number}",
+  "@engine.ex.step": {
+    "description": "Pill of a step-by-step simulation exercise: step n of of.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.nextStep": "Next step →",
+  "@engine.ex.nextStep": {
+    "description": "Button to go on to the next step of a simulation exercise."
+  },
+  "engine.ex.freePlaceholder": "Explain in your own words… (aim for 2–5 sentences)",
+  "@engine.ex.freePlaceholder": {
+    "description": "Placeholder of the text box of an “explain it” exercise."
+  },
+  "engine.ex.grading": "Grading…",
+  "@engine.ex.grading": {
+    "description": "Button text (after ✨) while the AI grades the answer."
+  },
+  "engine.ex.missing": "Missing:",
+  "@engine.ex.missing": {
+    "description": "Label (after ➕) before the points the answer missed, in the AI’s grading."
+  },
+  "engine.ex.aiFailedSelf": "{error} — use Self-check instead.",
+  "@engine.ex.aiFailedSelf": {
+    "description": "Shown (after ⚠️) when AI grading failed. error = the error’s text. “Self-check” is the name of the button engine.ex.selfCheck.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No Gemini API key. Open ⚙️ Settings."
+      }
+    }
+  },
+  "engine.ex.gradeAI": "Grade with AI",
+  "@engine.ex.gradeAI": {
+    "description": "Button (after ✨) of an “explain it” exercise: the AI grades the answer."
+  },
+  "engine.ex.modelAnswer": "Model answer",
+  "@engine.ex.modelAnswer": {
+    "description": "Heading (after 📘) of the model answer of an “explain it” exercise."
+  },
+  "engine.ex.tickCovered": "Tick what your answer covered",
+  "@engine.ex.tickCovered": {
+    "description": "Heading (after ☑️) of the self-check list of key points."
+  },
+  "engine.ex.done": "Done",
+  "@engine.ex.done": {
+    "description": "Button that finishes the self-check."
+  },
+  "engine.ex.selfCheck": "Self-check",
+  "@engine.ex.selfCheck": {
+    "description": "Button (after 🙋): the learner checks their own answer against the model answer."
+  },
+  "engine.ex.writeLang": "-- write your {lang} here",
+  "@engine.ex.writeLang": {
+    "description": "Placeholder of the code box of a “write the code” exercise, written like a code comment (keep “-- ”). lang = the programming language (e.g. sql).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "sql"
+      }
+    }
+  },
+  "engine.ex.writeCode": "-- write your code here",
+  "@engine.ex.writeCode": {
+    "description": "Placeholder of the code box of a “write the code” exercise (no language known), written like a code comment."
+  },
+  "engine.ex.writeNote": "Checked locally for the essential keywords; use ✨ AI review for a real code review.",
+  "@engine.ex.writeNote": {
+    "description": "Note under the code box of a “write the code” exercise."
+  },
+  "engine.ex.missingEssentials": "Missing essentials:",
+  "@engine.ex.missingEssentials": {
+    "description": "Label before the keywords missing from the learner’s code."
+  },
+  "engine.ex.refSolution": "Reference solution",
+  "@engine.ex.refSolution": {
+    "description": "Heading (after ✅) of the reference code of a “write the code” exercise."
+  },
+  "engine.ex.reviewing": "Reviewing…",
+  "@engine.ex.reviewing": {
+    "description": "Button text (after ✨) while the AI reviews the code."
+  },
+  "engine.ex.aiReview": "AI review: {score, number}/100 —",
+  "@engine.ex.aiReview": {
+    "description": "Bold start of the AI’s code review (its verdict follows). score = 0–100.",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.aiReviewBtn": "AI review of my code",
+  "@engine.ex.aiReviewBtn": {
+    "description": "Button (after ✨): the AI reviews the learner’s code."
+  },
+  "engine.ex.difficulty": "difficulty {n, number}",
+  "@engine.ex.difficulty": {
+    "description": "Tooltip of the difficulty dots of an exercise (1–3). Lowercase in English.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.aiMade": "AI-made",
+  "@engine.ex.aiMade": {
+    "description": "Pill (after ✨) on an exercise generated by the AI."
+  },
+  "engine.ex.check": "Check ✓",
+  "@engine.ex.check": {
+    "description": "Button that checks the learner’s answer."
+  },
+  "engine.ex.askTutor": "Ask {tutor}",
+  "@engine.ex.askTutor": {
+    "description": "Button on an exercise (after the tutor’s emoji): ask the AI tutor for a hint. tutor = the tutor’s name.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      }
+    }
+  },
+  "engine.ex.finishFirst": "Finish your answer first 🙂",
+  "@engine.ex.finishFirst": {
+    "description": "Nudge when the learner presses Check before answering everything."
+  },
+  "engine.ex.ok.nailed": "Nailed it!",
+  "@engine.ex.ok.nailed": {
+    "description": "Heading of the explanation after a right answer (after ✅). One of several random cheers."
+  },
+  "engine.ex.ok.correct": "Correct!",
+  "@engine.ex.ok.correct": {
+    "description": "Heading after a right answer (after ✅). Random cheer."
+  },
+  "engine.ex.ok.yes": "Yes!",
+  "@engine.ex.ok.yes": {
+    "description": "Heading after a right answer (after 🎉). Random cheer."
+  },
+  "engine.ex.ok.spotOn": "Spot on!",
+  "@engine.ex.ok.spotOn": {
+    "description": "Heading after a right answer (after ✅). Random cheer."
+  },
+  "engine.ex.ok.exactly": "Exactly!",
+  "@engine.ex.ok.exactly": {
+    "description": "Heading after a right answer (after 🔥). Random cheer."
+  },
+  "engine.ex.bad.notQuite": "Not quite — here’s the key",
+  "@engine.ex.bad.notQuite": {
+    "description": "Heading of the explanation after a wrong answer (after 💡). Encouraging."
+  },
+  "engine.ex.bad.learning": "Learning moment",
+  "@engine.ex.bad.learning": {
+    "description": "Heading after a wrong answer (after 🧠). Encouraging."
+  },
+  "engine.ex.bad.close": "Close — look at this",
+  "@engine.ex.bad.close": {
+    "description": "Heading after a wrong answer (after 💡). Encouraging."
+  },
+  "engine.ex.helpSocratic": "Help me get it (Socratic)",
+  "@engine.ex.helpSocratic": {
+    "description": "Button after a wrong answer (after the tutor’s emoji): the AI tutor guides the learner with questions."
+  },
+  "engine.ex.explainDiff": "Explain differently",
+  "@engine.ex.explainDiff": {
+    "description": "Button after a wrong answer (after 💡): the AI explains it another way."
+  },
+  "engine.exType.img_hotspot": "Find it on the image",
+  "@engine.exType.img_hotspot": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short."
+  },
+  "engine.exType.img_sequence": "Trace the path",
+  "@engine.exType.img_sequence": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Tap the parts in order."
+  },
+  "engine.exType.img_reveal": "Reveal & answer",
+  "@engine.exType.img_reveal": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Uncover tiles, then answer."
+  },
+  "engine.exType.img_drag": "Drag the labels",
+  "@engine.exType.img_drag": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short."
+  },
+  "engine.exType.img_label": "Label the image",
+  "@engine.exType.img_label": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Type the names of parts."
+  },
+  "engine.exType.img_select": "Pick the labels",
+  "@engine.exType.img_select": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Choose names from drop-down lists."
+  },
+  "engine.exType.img_occlusion": "Cover & recall",
+  "@engine.exType.img_occlusion": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Parts are covered; recall them one by one."
+  },
+  "engine.vx.creditTip": "Where this picture comes from",
+  "@engine.vx.creditTip": {
+    "description": "Tooltip of the picture’s credit link (author · licence ↗)."
+  },
+  "engine.vx.missing": "Picture “{media}” is missing from this subject pack.",
+  "@engine.vx.missing": {
+    "description": "Error (after 🖼️) when a picture of an exercise is not in the pack. media = the picture’s id.",
+    "placeholders": {
+      "media": {
+        "type": "String",
+        "example": "heart-diagram"
+      }
+    }
+  },
+  "engine.vx.zoomTip": "Bigger picture (Esc to close)",
+  "@engine.vx.zoomTip": {
+    "description": "Tooltip of the ⤢ button that shows a picture full screen."
+  },
+  "engine.vx.zoomAria": "Toggle full screen picture",
+  "@engine.vx.zoomAria": {
+    "description": "Screen-reader label of the ⤢ button."
+  },
+  "engine.vx.stageAria": "Picture. Arrow keys move the crosshair (Shift for small steps), Enter or Space taps, Backspace removes the last tap.",
+  "@engine.vx.stageAria": {
+    "description": "Screen-reader label of an interactive picture (keyboard use)."
+  },
+  "engine.vx.resYou": "you: “{given}”",
+  "@engine.vx.resYou": {
+    "description": "Result row of a picture exercise, after “ — ”: what the learner answered (wrong). given = the answer.",
+    "placeholders": {
+      "given": {
+        "type": "String",
+        "example": "aorta"
+      }
+    }
+  },
+  "engine.vx.resEmpty": "left empty",
+  "@engine.vx.resEmpty": {
+    "description": "Result row of a picture exercise, after “ — ”: the learner gave no answer."
+  },
+  "engine.vx.resTypo": "accepted “{given}” (spelling: {label})",
+  "@engine.vx.resTypo": {
+    "description": "Result row, after “ — ”: an answer with a small typo was accepted. given = the learner’s answer, label = the right spelling.",
+    "placeholders": {
+      "given": {
+        "type": "String",
+        "example": "aortta"
+      },
+      "label": {
+        "type": "String",
+        "example": "aorta"
+      }
+    }
+  },
+  "engine.vx.pinRemoved": "Pin removed.",
+  "@engine.vx.pinRemoved": {
+    "description": "Spoken by screen readers when a pin is removed from the picture."
+  },
+  "engine.vx.pinNofM": "Pin {n, number} of {of, number} placed.",
+  "@engine.vx.pinNofM": {
+    "description": "Spoken by screen readers when a pin is placed (several are needed).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.pinPlaced": "Pin placed. Press Tab to reach the Check button.",
+  "@engine.vx.pinPlaced": {
+    "description": "Spoken by screen readers when the one pin is placed."
+  },
+  "engine.vx.where": "{h, select, left {left} centre {centre} other {right}} {v, select, top {top} middle {middle} other {bottom}} ({x, number}%, {y, number}%)",
+  "@engine.vx.where": {
+    "description": "Spoken by screen readers: where the crosshair is on the picture (horizontal third, vertical third, then x and y in percent).",
+    "placeholders": {
+      "h": {
+        "type": "String",
+        "example": "h"
+      },
+      "v": {
+        "type": "String",
+        "example": "v"
+      },
+      "x": {
+        "type": "int",
+        "example": "3"
+      },
+      "y": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.lastPinRemoved": "Last pin removed.",
+  "@engine.vx.lastPinRemoved": {
+    "description": "Spoken by screen readers when Backspace removes the last pin."
+  },
+  "engine.vx.hotspotMulti": "Tap {n, number} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger. ⌨️ Tab to the picture, arrows + Enter.",
+  "@engine.vx.hotspotMulti": {
+    "description": "Instruction of a “find it on the image” exercise with n places to find.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.hotspotAny": "Tap one right place on the picture (several are right) — then Check. ⌨️ arrows + Enter.",
+  "@engine.vx.hotspotAny": {
+    "description": "Instruction of a “find it on the image” exercise where any of several places is right."
+  },
+  "engine.vx.hotspotOne": "Tap the right place on the picture — then Check. ⌨️ Tab to the picture, arrows move, Enter taps.",
+  "@engine.vx.hotspotOne": {
+    "description": "Instruction of a “find it on the image” exercise with one place."
+  },
+  "engine.vx.seqCounter": "{n, number} / {of, number} steps",
+  "@engine.vx.seqCounter": {
+    "description": "Counter of a “trace the path” exercise: how many steps tapped of how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.noPart": "No part here.",
+  "@engine.vx.noPart": {
+    "description": "Spoken by screen readers: there is no part of the picture under the crosshair."
+  },
+  "engine.vx.seqRemoved": "Removed from step {n, number} on.",
+  "@engine.vx.seqRemoved": {
+    "description": "Spoken by screen readers: the steps from step n on were undone.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.seqStep": "Step {n, number}: {label}.",
+  "@engine.vx.seqStep": {
+    "description": "Spoken by screen readers: a part was added as step n. label = the part’s name.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "label": {
+        "type": "String",
+        "example": "left ventricle"
+      }
+    }
+  },
+  "engine.vx.lastStepRemoved": "Last step removed.",
+  "@engine.vx.lastStepRemoved": {
+    "description": "Spoken by screen readers when Backspace removes the last step."
+  },
+  "engine.vx.partStep": "{label} (step {n, number})",
+  "@engine.vx.partStep": {
+    "description": "Spoken by screen readers: the part under the crosshair and the step it already has. label = the part’s name.",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "left ventricle"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.seqHint": "Tap the parts in the right order. Tap a numbered part again to undo from there. ⌨️ arrows + Enter, Backspace undoes.",
+  "@engine.vx.seqHint": {
+    "description": "Instruction of a “trace the path” exercise."
+  },
+  "engine.vx.correctPath": "Correct path:",
+  "@engine.vx.correctPath": {
+    "description": "Bold label (after 🧭) before the correct order of parts, after a wrong answer."
+  },
+  "engine.vx.tilesOpened": "{n, number} / {of, number} tiles opened",
+  "@engine.vx.tilesOpened": {
+    "description": "Counter (after 🔍) of a “reveal & answer” picture exercise.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.revealHint": "tap tiles to uncover the picture — answer as early as you dare: fewer tiles = more XP",
+  "@engine.vx.revealHint": {
+    "description": "Instruction (lowercase start, after the tile counter and “ · ”) of a “reveal & answer” picture exercise."
+  },
+  "engine.vx.dropZone": "Drop zone {n, number}",
+  "@engine.vx.dropZone": {
+    "description": "Screen-reader label of the place where label n is dropped on the picture.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.allPlaced": "All placed — check it! (tap a placed label to move it)",
+  "@engine.vx.allPlaced": {
+    "description": "Shown in the empty label bank of a drag exercise when all labels are placed."
+  },
+  "engine.vx.dragHint": "Drag each label onto its place — or tap a label, then tap the place.",
+  "@engine.vx.dragHint": {
+    "description": "Instruction of a “drag the labels” picture exercise."
+  },
+  "engine.vx.partName": "Name of part {n, number}",
+  "@engine.vx.partName": {
+    "description": "Screen-reader label of the text box for the name of numbered part n.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.labelHint": "Type the name of each numbered part. Enter → next.",
+  "@engine.vx.labelHint": {
+    "description": "Instruction of a “label the image” exercise."
+  },
+  "engine.vx.part": "Part {n, number}",
+  "@engine.vx.part": {
+    "description": "Screen-reader label of the drop-down list for numbered part n.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.choose": "{n, number} · choose…",
+  "@engine.vx.choose": {
+    "description": "Empty first option of the drop-down list of numbered part n.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.selectHint": "Choose the right name at every numbered part.",
+  "@engine.vx.selectHint": {
+    "description": "Instruction of a “pick the labels” picture exercise."
+  },
+  "engine.vx.reveal": "Reveal",
+  "@engine.vx.reveal": {
+    "description": "Button (after 👁) that uncovers the hidden part in a “cover & recall” exercise."
+  },
+  "engine.vx.occQ": "What is hidden here? Say it (or think it) first.",
+  "@engine.vx.occQ": {
+    "description": "Default question of a “cover & recall” exercise."
+  },
+  "engine.vx.nOfM": "{n, number} / {of, number}",
+  "@engine.vx.nOfM": {
+    "description": "Progress of a “cover & recall” exercise: part n of of.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.knew": "I knew it",
+  "@engine.vx.knew": {
+    "description": "Self-rating button (after ✓) in “cover & recall”."
+  },
+  "engine.vx.didnt": "I didn’t",
+  "@engine.vx.didnt": {
+    "description": "Self-rating button (after ✗) in “cover & recall”: I did not know it."
+  },
+  "engine.vx.recalled": "You recalled {n, number} / {of, number}.",
+  "@engine.vx.recalled": {
+    "description": "Bold result of a “cover & recall” exercise.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.strong": "Strong!",
+  "@engine.vx.strong": {
+    "description": "Praise after a good “cover & recall” result."
+  },
+  "engine.vx.comeBack": "These come back soon in your review.",
+  "@engine.vx.comeBack": {
+    "description": "Shown after a weak “cover & recall” result."
+  },
+  "engine.vx.uncovered": "Uncovered: {label}",
+  "@engine.vx.uncovered": {
+    "description": "Spoken by screen readers when a covered label is uncovered. label = the part’s name.",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "aorta"
+      }
+    }
+  },
+  "engine.vx.nothing": "Nothing here.",
+  "@engine.vx.nothing": {
+    "description": "Spoken by screen readers: nothing under the crosshair on a theory picture."
+  },
+  "engine.vx.hiddenLabel": "A hidden label. Enter peeks.",
+  "@engine.vx.hiddenLabel": {
+    "description": "Spoken by screen readers: the part under the crosshair is covered; Enter uncovers it."
+  },
+  "engine.vx.showLabels": "Show labels",
+  "@engine.vx.showLabels": {
+    "description": "Button (after 👀) on a theory picture: show the names of its parts."
+  },
+  "engine.vx.hideLabels": "Hide labels",
+  "@engine.vx.hideLabels": {
+    "description": "Button (after 🙈) on a theory picture: hide the names (to test yourself)."
+  },
+  "engine.vx.labelsHidden": "Labels hidden: tap a cover to peek.",
+  "@engine.vx.labelsHidden": {
+    "description": "Line next to the labels button when the names on a picture are hidden."
+  },
+  "engine.vx.hoverPart": "Hover or tap a part to see what it is.",
+  "@engine.vx.hoverPart": {
+    "description": "Line on a theory picture (sometimes after 👆): how to explore its parts."
+  },
+  "engine.common.chShort": "Ch{num}",
+  "@engine.common.chShort": {
+    "description": "A chapter’s short number (“Ch” = chapter, abbreviated), e.g. in run titles and lists. num = the chapter number.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "engine.top.xp": "{n, number} XP",
+  "@engine.top.xp": {
+    "description": "XP chip in the classic top bar (after ⭐): the subject’s experience points. Keep “XP” unless your language has a common short form.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.top.sprintDone": "Sprint done! Take a 3-minute break — stretch, water, breathe.",
+  "@engine.top.sprintDone": {
+    "description": "Toast (after 🎉) when the 15-minute focus sprint ends."
+  },
+  "engine.notes.nothing": "Nothing new. 🎈",
+  "@engine.notes.nothing": {
+    "description": "Notifications window when there is nothing new."
+  },
+  "engine.notes.needCloud": "Notifications need a ☁️ cloud account (Account menu → Cloud).",
+  "@engine.notes.needCloud": {
+    "description": "Notifications window for a local profile (no cloud account). “Account menu → Cloud” is the path to the cloud settings."
+  },
+  "engine.share.openNow": "Open “{title}” now?",
+  "@engine.share.openNow": {
+    "description": "Confirmation after accepting a shared subject or Roadmap. title = its title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.share.upToDate": "“{title}” is up to date",
+  "@engine.share.upToDate": {
+    "description": "Toast (after ✅) after taking an update of a shared subject or Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.share.keepYours": "You keep your version of “{title}”",
+  "@engine.share.keepYours": {
+    "description": "Toast (after 👍) when the learner declined an update and keeps their own version.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.share.more": "(+{n, number} more in 🔔)",
+  "@engine.share.more": {
+    "description": "Small note in the share banner: n more notifications wait in the 🔔 bell.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.share.keepMyCopy": "Keep my copy",
+  "@engine.share.keepMyCopy": {
+    "description": "Banner button: decline an update of a shared Roadmap and keep one’s own copy."
+  },
+  "engine.share.keepMine": "Keep mine",
+  "@engine.share.keepMine": {
+    "description": "Banner button: decline an update of a shared subject / step and keep one’s own version."
+  },
+  "engine.share.laterTip": "Decide later (it stays in 🔔)",
+  "@engine.share.laterTip": {
+    "description": "Tooltip of the “Later” button of the share banner."
+  },
+  "engine.share.later": "Later",
+  "@engine.share.later": {
+    "description": "Banner button: decide later about a share or update."
+  },
+  "engine.share.invite": "{name} invites you to the Roadmap “{title}”",
+  "@engine.share.invite": {
+    "description": "Share banner (after 👥): an invitation to a shared Roadmap. name = the sender (shown bold), title = the Roadmap (bold).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      },
+      "title": {
+        "type": "String",
+        "example": "Data Engineer"
+      }
+    }
+  },
+  "engine.share.offer": "{name} wants to share “{title}” with you",
+  "@engine.share.offer": {
+    "description": "Share banner (after 📬): someone shares a subject. name = the sender (bold), title = the subject (bold).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      },
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.share.someone": "Someone",
+  "@engine.share.someone": {
+    "description": "Shown instead of the sender’s name when it is unknown."
+  },
+  "engine.share.joined": "You joined “{title}” — your progress is your own, the prepared steps are shared",
+  "@engine.share.joined": {
+    "description": "Toast (after 👥) after joining a shared Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.share.added": "“{title}” added to your subjects",
+  "@engine.share.added": {
+    "description": "Toast (after ✅) after accepting a shared subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.share.join": "Join",
+  "@engine.share.join": {
+    "description": "Banner button (after ✓): join a shared Roadmap."
+  },
+  "engine.share.accept": "Accept",
+  "@engine.share.accept": {
+    "description": "Banner button (after ✓): accept a shared subject."
+  },
+  "engine.share.reject": "Reject",
+  "@engine.share.reject": {
+    "description": "Banner button (after ✕): decline a share."
+  },
+  "engine.home.resetConfirm": "Reset your progress in {title}? (a restore point is kept)",
+  "@engine.home.resetConfirm": {
+    "description": "Confirmation before resetting the progress of a subject. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.home.resetPoint": "Before reset of {title}",
+  "@engine.home.resetPoint": {
+    "description": "Name of the restore point saved before a reset (shown later in Backup & restore).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.search.none": "No match — try a different word, or ask {tutor} {avatar}",
+  "@engine.search.none": {
+    "description": "Search in a subject: nothing found. tutor = the tutor’s name, avatar = its emoji.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      },
+      "avatar": {
+        "type": "String",
+        "example": "🦉"
+      }
+    }
+  },
+  "engine.ch.fixHtml": "<b>Fix:</b> {fix}",
+  "@engine.ch.fixHtml": {
+    "description": "In a trap (pitfall) card (after ✅): how to avoid it. Keep the <b>…</b> tags. fix = the text.",
+    "placeholders": {
+      "fix": {
+        "type": "String",
+        "example": "Use MERGE with a unique key."
+      }
+    }
+  },
+  "engine.run.chMistakes": "Ch{num} mistakes",
+  "@engine.run.chMistakes": {
+    "description": "Title of a practice round (after 🔁) with the mistakes of chapter num.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "engine.blk.showAll": "Show all",
+  "@engine.blk.showAll": {
+    "description": "Button (after 👁️) on an “ask yourself” question list in recall mode: show every answer."
+  },
+  "engine.blk.recallMode": "Recall mode",
+  "@engine.blk.recallMode": {
+    "description": "Button (after 🙈) on an “ask yourself” question list: hide the questions to recall them."
+  },
+  "engine.blk.askYourself": "Ask yourself",
+  "@engine.blk.askYourself": {
+    "description": "Default heading (after 🧠) of a list of questions to ask yourself."
+  },
+  "engine.sec.nOfM": "Section {n, number} / {of, number}",
+  "@engine.sec.nOfM": {
+    "description": "Pill above a section’s title (classic layout): section n of of in the chapter.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.prac.match": "{n, plural, one {# exercises match} other {# exercises match}} · {solved, number} solved",
+  "@engine.prac.match": {
+    "description": "Practice filters: how many exercises match and how many of them are solved. (English keeps “exercises” also for 1; your language should use its normal plural.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "solved": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.prac.allSections": "All sections",
+  "@engine.prac.allSections": {
+    "description": "First option of the section filter of the practice setup."
+  },
+  "engine.prac.any": "Any",
+  "@engine.prac.any": {
+    "description": "Difficulty filter chip: any difficulty."
+  },
+  "engine.prac.easy": "easy",
+  "@engine.prac.easy": {
+    "description": "Difficulty filter chip (after ●). Lowercase."
+  },
+  "engine.prac.medium": "medium",
+  "@engine.prac.medium": {
+    "description": "Difficulty filter chip (after ●●). Lowercase."
+  },
+  "engine.prac.hard": "hard",
+  "@engine.prac.hard": {
+    "description": "Difficulty filter chip (after ●●●). Lowercase."
+  },
+  "engine.prac.all": "all",
+  "@engine.prac.all": {
+    "description": "Round-size chip (after ∞): all matching exercises. Lowercase."
+  },
+  "engine.prac.section": "Section",
+  "@engine.prac.section": {
+    "description": "Label of the section filter of the practice setup."
+  },
+  "engine.prac.types": "Exercise types",
+  "@engine.prac.types": {
+    "description": "Label of the exercise-type filter."
+  },
+  "engine.prac.focus": "Focus",
+  "@engine.prac.focus": {
+    "description": "Label of the topic-focus filter (pitfalls, debugging …)."
+  },
+  "engine.prac.focus_pitfall": "pitfalls",
+  "@engine.prac.focus_pitfall": {
+    "description": "Focus filter chip (after ⚠️). Lowercase."
+  },
+  "engine.prac.focus_debug": "debugging",
+  "@engine.prac.focus_debug": {
+    "description": "Focus filter chip (after 🔧). Lowercase."
+  },
+  "engine.prac.focus_exam": "exam traps",
+  "@engine.prac.focus_exam": {
+    "description": "Focus filter chip (after 🎓). Lowercase."
+  },
+  "engine.prac.focus_syntax": "syntax",
+  "@engine.prac.focus_syntax": {
+    "description": "Focus filter chip (after ⌨️). Lowercase."
+  },
+  "engine.prac.focus_calc": "calc",
+  "@engine.prac.focus_calc": {
+    "description": "Focus filter chip (after 🧮): calculations. Lowercase, short."
+  },
+  "engine.prac.focus_interview": "interview",
+  "@engine.prac.focus_interview": {
+    "description": "Focus filter chip (after 🎤): interview questions. Lowercase."
+  },
+  "engine.prac.focus_compare": "compare",
+  "@engine.prac.focus_compare": {
+    "description": "Focus filter chip (after ⚖️): comparing concepts. Lowercase."
+  },
+  "engine.prac.difficulty": "Difficulty",
+  "@engine.prac.difficulty": {
+    "description": "Label of the difficulty filter."
+  },
+  "engine.prac.roundSize": "Round size",
+  "@engine.prac.roundSize": {
+    "description": "Label of the number-of-exercises choice."
+  },
+  "engine.prac.noMatch": "No exercises match these filters",
+  "@engine.prac.noMatch": {
+    "description": "Toast when the practice filters leave no exercise."
+  },
+  "engine.prac.start": "Start round",
+  "@engine.prac.start": {
+    "description": "Button (after ▶) that starts a practice round."
+  },
+  "engine.run.chPractice": "Ch{num} practice",
+  "@engine.run.chPractice": {
+    "description": "Title of a practice round (after 🎯) of chapter num.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "engine.run.practice": "Practice",
+  "@engine.run.practice": {
+    "description": "Default title of a practice round."
+  },
+  "engine.run.next": "Next →",
+  "@engine.run.next": {
+    "description": "Button after answering an exercise of a round: the next exercise."
+  },
+  "engine.run.finish": "Finish 🏁",
+  "@engine.run.finish": {
+    "description": "Button after the last exercise of a round."
+  },
+  "engine.run.seeResult": "See result",
+  "@engine.run.seeResult": {
+    "description": "Button when a boss battle is lost (no lives left)."
+  },
+  "engine.run.quit": "Quit",
+  "@engine.run.quit": {
+    "description": "Tooltip of the ✕ button that leaves a practice round."
+  },
+  "engine.run.outstanding": "Outstanding!",
+  "@engine.run.outstanding": {
+    "description": "Round summary for ≥ 90 % right."
+  },
+  "engine.run.great": "Great work!",
+  "@engine.run.great": {
+    "description": "Round summary for ≥ 70 % right."
+  },
+  "engine.run.solid": "Solid progress — the mistakes are where the learning is.",
+  "@engine.run.solid": {
+    "description": "Round summary for ≥ 50 % right."
+  },
+  "engine.run.goodStart": "Good start — retry the mistakes while they are fresh.",
+  "@engine.run.goodStart": {
+    "description": "Round summary for < 50 % right. Encouraging."
+  },
+  "engine.run.bossWon": "Boss defeated! Chapter badge unlocked.",
+  "@engine.run.bossWon": {
+    "description": "Summary of a won boss battle."
+  },
+  "engine.run.bossLost": "The boss wins this time. Review the misses and come back stronger!",
+  "@engine.run.bossLost": {
+    "description": "Summary of a lost boss battle. Encouraging."
+  },
+  "engine.run.correct": "correct",
+  "@engine.run.correct": {
+    "description": "Label under the “right/total” number of the round summary. Lowercase."
+  },
+  "engine.run.accuracy": "accuracy",
+  "@engine.run.accuracy": {
+    "description": "Label under the percentage of the round summary. Lowercase."
+  },
+  "engine.run.xp": "XP",
+  "@engine.run.xp": {
+    "description": "Label under the XP earned in the round (experience points)."
+  },
+  "engine.run.reviewThese": "Review these:",
+  "@engine.run.reviewThese": {
+    "description": "Bold heading before the list of exercises answered wrong in the round."
+  },
+  "engine.run.retry": "Retry mistakes",
+  "@engine.run.retry": {
+    "description": "Button / round title (after 🔁): practise the wrong answers again."
+  },
+  "engine.run.done": "Done",
+  "@engine.run.done": {
+    "description": "Button that closes the round summary."
+  },
+  "engine.gym.intro": "Everything whose last attempt was wrong. Get it right once and it leaves the gym.",
+  "@engine.gym.intro": {
+    "description": "Intro of the Mistakes gym page."
+  },
+  "engine.gym.train": "Train {n, number} of {of, number}",
+  "@engine.gym.train": {
+    "description": "Button (after ▶) in the Mistakes gym: practise n of the of open mistakes.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.gym.empty": "No open mistakes. Go make some (that’s how learning works)!",
+  "@engine.gym.empty": {
+    "description": "Mistakes gym when it is empty. Playful."
+  },
+  "engine.mixed.intro": "Interleaving beats blocking: random exercises from every section you have read (or from everything).",
+  "@engine.mixed.intro": {
+    "description": "Intro of the Mixed practice page. “Interleaving” and “blocking” are study techniques (mixing topics vs. one topic at a time)."
+  },
+  "engine.mixed.readTitle": "Mixed: what I have read",
+  "@engine.mixed.readTitle": {
+    "description": "Title of a mixed round (after 🎲) from the sections already read."
+  },
+  "engine.mixed.fromRead": "From what I've read ({n, number})",
+  "@engine.mixed.fromRead": {
+    "description": "Button (after ▶): a mixed round from the sections already read. n = how many exercises are in that pool.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.mixed.allTitle": "Mixed: everything",
+  "@engine.mixed.allTitle": {
+    "description": "Title of a mixed round (after 🎲) from all exercises."
+  },
+  "engine.mixed.fromAll": "From everything ({n, number})",
+  "@engine.mixed.fromAll": {
+    "description": "Button (after ▶): a mixed round from all exercises. n = how many there are.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.mixed.debugOnly": "Debugging only",
+  "@engine.mixed.debugOnly": {
+    "description": "Button / round title (after 🔧): only debugging exercises."
+  },
+  "engine.mixed.examOnly": "Exam traps only",
+  "@engine.mixed.examOnly": {
+    "description": "Button / round title (after 🎓): only exam-trap exercises."
+  },
+  "engine.boss.title": "Boss battle · Ch{num}",
+  "@engine.boss.title": {
+    "description": "Heading of a chapter’s boss battle (a hard final round). num = chapter number.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "engine.boss.intro": "15 mixed questions, mostly medium/hard. You have 3 lives ❤️❤️❤️. Lose them all and the boss wins. Score ≥ 70% with lives left to earn the 🏆.",
+  "@engine.boss.intro": {
+    "description": "Rules of the boss battle."
+  },
+  "engine.boss.runTitle": "Boss · Ch{num}",
+  "@engine.boss.runTitle": {
+    "description": "Title of the boss-battle round (after 👾).",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "engine.boss.fight": "Fight!",
+  "@engine.boss.fight": {
+    "description": "Button (after ⚔️) that starts the boss battle."
+  },
+  "engine.light.allChapters": "All chapters",
+  "@engine.light.allChapters": {
+    "description": "First option of the chapter choice of the Lightning round."
+  },
+  "engine.light.intro": "60 seconds. True or false. Use ← / → or the buttons. Wrong answers are explained at the end.",
+  "@engine.light.intro": {
+    "description": "Rules of the Lightning round (60-second true/false game)."
+  },
+  "engine.light.best": "Personal best: {n, number}",
+  "@engine.light.best": {
+    "description": "Lightning round: the learner’s best score.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.light.go": "Go!",
+  "@engine.light.go": {
+    "description": "Button (after ▶) that starts the Lightning round."
+  },
+  "engine.light.noTf": "No true/false questions here",
+  "@engine.light.noTf": {
+    "description": "Toast when the chosen chapter has no true/false questions for the Lightning round."
+  },
+  "engine.light.score": "Score: {n, number}",
+  "@engine.light.score": {
+    "description": "Running score during the Lightning round.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.light.result": "{n, plural, one {# correct in 60 s} other {# correct in 60 s}}",
+  "@engine.light.result": {
+    "description": "Result of the Lightning round: n right answers in 60 seconds (“s” = seconds).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.light.resultBest": "{n, plural, one {# correct in 60 s — new personal best!} other {# correct in 60 s — new personal best!}}",
+  "@engine.light.resultBest": {
+    "description": "Result of the Lightning round when it is a new record.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.light.fooled": "The ones that fooled you:",
+  "@engine.light.fooled": {
+    "description": "Heading before the statements answered wrong in the Lightning round."
+  },
+  "engine.light.TRUE": "TRUE",
+  "@engine.light.TRUE": {
+    "description": "Heading of a wrongly answered statement: the right answer was “true”. Uppercase if your script has it."
+  },
+  "engine.light.FALSE": "FALSE",
+  "@engine.light.FALSE": {
+    "description": "Heading of a wrongly answered statement: the right answer was “false”."
+  },
+  "engine.light.flawless": "Flawless! 🔥",
+  "@engine.light.flawless": {
+    "description": "Lightning round with no wrong answers."
+  },
+  "engine.light.again": "Again",
+  "@engine.light.again": {
+    "description": "Button (after ⚡): play the Lightning round again."
+  },
+  "engine.light.home": "Home",
+  "@engine.light.home": {
+    "description": "Button back to the subject’s home page."
+  },
+  "engine.cards.intro": "Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.",
+  "@engine.cards.intro": {
+    "description": "Intro of the flashcards page. “Again” and “Easy” are the rating buttons (engine.cards.again, engine.cards.easy) — use the same words."
+  },
+  "engine.cards.due": "{n, number} due",
+  "@engine.cards.due": {
+    "description": "Pill above the flashcards: cards due for review today.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cards.new": "{n, number} new",
+  "@engine.cards.new": {
+    "description": "Pill above the flashcards: cards never studied.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cards.resting": "{n, number} resting",
+  "@engine.cards.resting": {
+    "description": "Pill above the flashcards: studied cards not due yet.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cards.done": "Deck done for now. Come back later for due cards!",
+  "@engine.cards.done": {
+    "description": "When every card of the deck has been studied for now."
+  },
+  "engine.cards.flip": "tap to flip",
+  "@engine.cards.flip": {
+    "description": "Hint at the bottom of the front of a flashcard. Lowercase."
+  },
+  "engine.cards.answer": "answer",
+  "@engine.cards.answer": {
+    "description": "Small label on the back of a flashcard. Lowercase."
+  },
+  "engine.cards.again": "Again",
+  "@engine.cards.again": {
+    "description": "Flashcard rating button (after 😵): did not know it, show it again soon."
+  },
+  "engine.cards.good": "Good",
+  "@engine.cards.good": {
+    "description": "Flashcard rating button (after 🙂): knew it."
+  },
+  "engine.cards.easy": "Easy",
+  "@engine.cards.easy": {
+    "description": "Flashcard rating button (after 😎): knew it easily."
+  },
+  "engine.cards.openSection": "open the section",
+  "@engine.cards.openSection": {
+    "description": "Small link under a flashcard: open the section it comes from. Lowercase."
+  },
+  "engine.drill.questions": "{n, plural, one {# ask-yourself questions} other {# ask-yourself questions}}",
+  "@engine.drill.questions": {
+    "description": "Under a debug drill’s title: how many “ask yourself” questions it has. (English keeps the plural also for 1.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.drill.questionsMnemo": "{n, plural, one {# ask-yourself questions · has mnemonic} other {# ask-yourself questions · has mnemonic}}",
+  "@engine.drill.questionsMnemo": {
+    "description": "Same as engine.drill.questions, when the drill also has a memory hook (mnemonic).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.drill.mastery": "mastery",
+  "@engine.drill.mastery": {
+    "description": "Tooltip of the five mastery boxes of a debug drill. Lowercase."
+  },
+  "engine.drill.intro": "Each drill: read the symptom → write the questions you would ask yourself → compare with the checklist → rate yourself. Repeat until it is automatic.",
+  "@engine.drill.intro": {
+    "description": "Intro of a list of debug drills."
+  },
+  "engine.drill.nextDue": "Next due drill ({n, number})",
+  "@engine.drill.nextDue": {
+    "description": "Button (after ▶): the next debug drill due for review; n = how many are due.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.drill.allRested": "All drills rested ✓",
+  "@engine.drill.allRested": {
+    "description": "Pill when no debug drill is due."
+  },
+  "engine.drill.playbooks": "{n, plural, one {# debugging playbooks. The goal: the right questions pop into your head automatically when something breaks.} other {# debugging playbooks. The goal: the right questions pop into your head automatically when something breaks.}}",
+  "@engine.drill.playbooks": {
+    "description": "Intro of the Debug drills page: n playbooks. (English keeps the plural also for 1.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.drill.placeholder": "One question per line, in the order you would ask them…",
+  "@engine.drill.placeholder": {
+    "description": "Placeholder of the text box of a debug drill."
+  },
+  "engine.drill.back": "Ch{num} debug drills",
+  "@engine.drill.back": {
+    "description": "Back button of a debug drill (classic layout): to the chapter’s drills.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "engine.drill.pill": "Debug drill",
+  "@engine.drill.pill": {
+    "description": "Pill (after 🔧) above a debug drill’s title."
+  },
+  "engine.drill.symptom": "SYMPTOM",
+  "@engine.drill.symptom": {
+    "description": "Small uppercase label above the symptom of a debug drill."
+  },
+  "engine.drill.askYourself": "What do you ask yourself? (before peeking)",
+  "@engine.drill.askYourself": {
+    "description": "Heading (after 🧠) above the text box of a debug drill."
+  },
+  "engine.drill.reveal": "Reveal checklist",
+  "@engine.drill.reveal": {
+    "description": "Button (after 👀) that shows the drill’s checklist."
+  },
+  "engine.drill.grade": "Grade my checklist",
+  "@engine.drill.grade": {
+    "description": "Button (after ✨): the AI grades the learner’s questions."
+  },
+  "engine.drill.order": "Order drill",
+  "@engine.drill.order": {
+    "description": "Button (after 🔢): an exercise to put the checklist in the right order."
+  },
+  "engine.drill.roleplay": "Role-play it with {tutor}",
+  "@engine.drill.roleplay": {
+    "description": "Button (after 🎭): play the case as a role-play with the AI tutor. tutor = its name.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      }
+    }
+  },
+  "engine.drill.orderQ": "Put your ask-yourself questions in the best order:",
+  "@engine.drill.orderQ": {
+    "description": "Question of the generated “order drill” exercise."
+  },
+  "engine.drill.orderExplain": "Ordering matters: cheap, high-signal checks first (identity, location, history) before expensive or invasive actions.",
+  "@engine.drill.orderExplain": {
+    "description": "Explanation of the generated “order drill” exercise."
+  },
+  "engine.drill.checklist": "The checklist",
+  "@engine.drill.checklist": {
+    "description": "Heading (after 🧠) of the drill’s checklist."
+  },
+  "engine.drill.tick": "tick the ones you had",
+  "@engine.drill.tick": {
+    "description": "Small hint next to the checklist heading. Lowercase."
+  },
+  "engine.drill.hook": "MEMORY HOOK",
+  "@engine.drill.hook": {
+    "description": "Small uppercase label above the drill’s mnemonic."
+  },
+  "engine.drill.steps": "Steps",
+  "@engine.drill.steps": {
+    "description": "Heading (after 🛠️) of the drill’s steps."
+  },
+  "engine.drill.causes": "Usual root causes",
+  "@engine.drill.causes": {
+    "description": "Heading (after 🎯) of the drill’s usual root causes."
+  },
+  "engine.drill.howWell": "How well did you recall it?",
+  "@engine.drill.howWell": {
+    "description": "Heading above the self-rating buttons of a drill."
+  },
+  "engine.drill.blank": "Blank",
+  "@engine.drill.blank": {
+    "description": "Self-rating (after 😵): remembered nothing."
+  },
+  "engine.drill.partly": "Partly",
+  "@engine.drill.partly": {
+    "description": "Self-rating (after 🤔): remembered part of it."
+  },
+  "engine.drill.nailed": "Nailed it",
+  "@engine.drill.nailed": {
+    "description": "Self-rating (after 😎): remembered it all."
+  },
+  "engine.drill.savedNext": "Saved ✔ — next drill loading",
+  "@engine.drill.savedNext": {
+    "description": "Toast after rating a drill when another drill is due."
+  },
+  "engine.drill.saved": "Saved ✔",
+  "@engine.drill.saved": {
+    "description": "Toast after rating a drill."
+  },
+  "engine.src.course": "Course",
+  "@engine.src.course": {
+    "description": "Title of the single default source of a subject that lists no sources."
+  },
+  "engine.src.noFile": "No file for this source yet — attach it in its card to preview it here.",
+  "@engine.src.noFile": {
+    "description": "Toast (after 📎) when the learner opens a source that has no file attached."
+  },
+  "engine.src.opening": "Opening…",
+  "@engine.src.opening": {
+    "description": "Toast (after ⏳) while a source file opens."
+  },
+  "engine.src.unavailable": "The file is not available on this device and could not be downloaded.",
+  "@engine.src.unavailable": {
+    "description": "Toast (after ⚠️) when a source file cannot be opened."
+  },
+  "engine.src.chapterAria": "Sources of this chapter",
+  "@engine.src.chapterAria": {
+    "description": "Screen-reader label of the row of source chips under a chapter’s title."
+  },
+  "engine.src.from": "From",
+  "@engine.src.from": {
+    "description": "Small label before the source chips of a chapter (“From: book p. 23 · lecture …”)."
+  },
+  "engine.src.openAtPage": "Open the source at page {page}",
+  "@engine.src.openAtPage": {
+    "description": "Tooltip line (after 👁) of a source chip: open the file at that page.",
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "example": "23"
+      }
+    }
+  },
+  "engine.src.open": "Open the source",
+  "@engine.src.open": {
+    "description": "Tooltip line (after 👁) of a source chip: open the file."
+  },
+  "engine.src.showCard": "Show the source card",
+  "@engine.src.showCard": {
+    "description": "Tooltip line of a source chip when no file is attached: show its card in the Sources menu."
+  },
+  "engine.src.newChapter": "NEW chapter",
+  "@engine.src.newChapter": {
+    "description": "Corner badge (after ✨) on a chapter that came with a new source. “NEW” is stressed."
+  },
+  "engine.src.newContent": "new content",
+  "@engine.src.newContent": {
+    "description": "Corner badge (after ✨) on a chapter that got new material."
+  },
+  "engine.src.new": "new",
+  "@engine.src.new": {
+    "description": "Small badge (after ✨) on a new section, exercise or source. Lowercase."
+  },
+  "engine.src.NEW": "NEW",
+  "@engine.src.NEW": {
+    "description": "Tag (after ✨) on a newly added block of a lesson. Uppercase."
+  },
+  "engine.src.onlyNewLabel": "Only what’s new:",
+  "@engine.src.onlyNewLabel": {
+    "description": "Bold label of the filter banner when only new sources are shown; the source names follow."
+  },
+  "engine.src.filteredLabel": "Filtered:",
+  "@engine.src.filteredLabel": {
+    "description": "Bold label of the filter banner when some sources are hidden; the shown source names follow."
+  },
+  "engine.src.sources": "Sources",
+  "@engine.src.sources": {
+    "description": "Button / heading (after 📚): the sources menu of the subject."
+  },
+  "engine.src.showEverything": "Show everything",
+  "@engine.src.showEverything": {
+    "description": "Button of the filter banner: show all sources again."
+  },
+  "engine.src.showOnlyNew": "Show me only what’s new",
+  "@engine.src.showOnlyNew": {
+    "description": "Button (after ✨) on the subject’s page when new sources arrived."
+  },
+  "engine.new.exercisesTitle": "New exercises",
+  "@engine.new.exercisesTitle": {
+    "description": "Title (after ✨) of a practice round with the new exercises."
+  },
+  "engine.new.srcPages": "{title} (pages {pages})",
+  "@engine.new.srcPages": {
+    "description": "What’s new: a new source and its pages. title = the source, pages = its page range (may be empty).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "ECB lecture notes"
+      },
+      "pages": {
+        "type": "String",
+        "example": "23–42"
+      }
+    }
+  },
+  "engine.new.alreadySeen": "already marked as seen.",
+  "@engine.new.alreadySeen": {
+    "description": "What’s new: added after “ — ” when the latest source is already marked as seen. Lowercase start."
+  },
+  "engine.new.stat_chapters": "{n, plural, one {chapters} other {chapters}}",
+  "@engine.new.stat_chapters": {
+    "description": "Chapters. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_sections": "{n, plural, one {sections} other {sections}}",
+  "@engine.new.stat_sections": {
+    "description": "Sections. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_exercises": "{n, plural, one {exercises} other {exercises}}",
+  "@engine.new.stat_exercises": {
+    "description": "Exercises. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_drills": "{n, plural, one {debug drills} other {debug drills}}",
+  "@engine.new.stat_drills": {
+    "description": "Debug drills. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_flashcards": "{n, plural, one {flashcards} other {flashcards}}",
+  "@engine.new.stat_flashcards": {
+    "description": "Flashcards. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_traps": "{n, plural, one {traps} other {traps}}",
+  "@engine.new.stat_traps": {
+    "description": "Traps (common pitfalls). Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.filterAll": "Show only new content everywhere",
+  "@engine.new.filterAll": {
+    "description": "Button (after 🔎) on the What’s new page: filter the whole app to the new sources."
+  },
+  "engine.new.practice": "Practice new exercises ({n, number})",
+  "@engine.new.practice": {
+    "description": "Button (after 🎯): a round with the new exercises; n = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.drills": "New debug drills ({n, number})",
+  "@engine.new.drills": {
+    "description": "Button (after 🔧): the new debug drills; n = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.cards": "New flashcards",
+  "@engine.new.cards": {
+    "description": "Button (after 🃏): the new flashcards."
+  },
+  "engine.new.markedSeen": "Marked as seen ✔",
+  "@engine.new.markedSeen": {
+    "description": "Toast after marking new sources as seen."
+  },
+  "engine.new.markSeen": "Mark as seen",
+  "@engine.new.markSeen": {
+    "description": "Button (after ✔): new sources are no longer marked new."
+  },
+  "engine.new.chapters": "New chapters",
+  "@engine.new.chapters": {
+    "description": "Heading on the What’s new page."
+  },
+  "engine.new.chapterN": "Chapter {num}",
+  "@engine.new.chapterN": {
+    "description": "Small label on a chapter card on the What’s new page. num = chapter number.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "7"
+      }
+    }
+  },
+  "engine.new.chCounts": "{s, plural, one {# sections} other {# sections}} · {e, plural, one {# exercises} other {# exercises}} · {d, plural, one {# drills} other {# drills}}",
+  "@engine.new.chCounts": {
+    "description": "Counts on a new chapter’s card: sections, exercises, debug drills. (English uses the plural for every number.)",
+    "placeholders": {
+      "s": {
+        "type": "int",
+        "example": "3"
+      },
+      "e": {
+        "type": "int",
+        "example": "3"
+      },
+      "d": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.enriched": "Existing sections that got new material",
+  "@engine.new.enriched": {
+    "description": "Heading on the What’s new page."
+  },
+  "engine.new.enrichedNote": "Level-up notes and new exercises were appended — the original text is untouched. New blocks are marked ✨ NEW.",
+  "@engine.new.enrichedNote": {
+    "description": "Note under that heading. “✨ NEW” is the tag engine.src.NEW."
+  },
+  "engine.new.added": "+{blocks, number} blocks · +{ex, number} ex",
+  "@engine.new.added": {
+    "description": "Pill on an enriched section: how many blocks and exercises were added (“ex” = exercises, abbreviated).",
+    "placeholders": {
+      "blocks": {
+        "type": "int",
+        "example": "3"
+      },
+      "ex": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.countAll": "{n, plural, one {# source} other {# sources}} · showing all",
+  "@engine.deck.countAll": {
+    "description": "Header of the Sources menu (after “📚 Sources · ”): how many sources, all shown.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.countSome": "{n, plural, one {# source} other {# sources}} · showing {shown, number}",
+  "@engine.deck.countSome": {
+    "description": "Header of the Sources menu: how many sources and how many are switched on.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "shown": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.all": "All",
+  "@engine.deck.all": {
+    "description": "Filter chip of the Sources menu: all sources on."
+  },
+  "engine.deck.onlyNew": "Only new",
+  "@engine.deck.onlyNew": {
+    "description": "Filter chip (after ✨): only the new sources."
+  },
+  "engine.deck.close": "Close",
+  "@engine.deck.close": {
+    "description": "Tooltip of the ✕ of the Sources menu."
+  },
+  "engine.deck.saving": "Saving “{name}”…",
+  "@engine.deck.saving": {
+    "description": "Toast (after ⬆️) while a source file is saved. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ecb-notes.pdf"
+      }
+    }
+  },
+  "engine.deck.attached": "Attached — tap 👁 to preview it (on every device).",
+  "@engine.deck.attached": {
+    "description": "Toast (after 📎) after attaching a file to a source."
+  },
+  "engine.deck.include": "Include in the app",
+  "@engine.deck.include": {
+    "description": "Tooltip of the on/off switch of a source."
+  },
+  "engine.deck.keepOne": "Keep at least one source on",
+  "@engine.deck.keepOne": {
+    "description": "Toast when the learner tries to switch off the last source."
+  },
+  "engine.deck.pp": "pp. {pages}",
+  "@engine.deck.pp": {
+    "description": "Page range of a source in its card (“pp.” = pages, abbreviated). pages = e.g. 23–42.",
+    "placeholders": {
+      "pages": {
+        "type": "String",
+        "example": "23–42"
+      }
+    }
+  },
+  "engine.deck.preview": "Preview",
+  "@engine.deck.preview": {
+    "description": "Button / tooltip (after 👁): open the source file."
+  },
+  "engine.deck.previewAria": "Preview the source",
+  "@engine.deck.previewAria": {
+    "description": "Screen-reader label of the 👁 button of a source."
+  },
+  "engine.deck.st_chapters": "{n, plural, one {# chapters} other {# chapters}}",
+  "@engine.deck.st_chapters": {
+    "description": "Chapters. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_sections": "{n, plural, one {# sections} other {# sections}}",
+  "@engine.deck.st_sections": {
+    "description": "Sections. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_enriched": "{n, plural, one {# sections enriched} other {# sections enriched}}",
+  "@engine.deck.st_enriched": {
+    "description": "Sections that got material from this source. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_exercises": "{n, plural, one {# exercises} other {# exercises}}",
+  "@engine.deck.st_exercises": {
+    "description": "Exercises. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_drills": "{n, plural, one {# drills} other {# drills}}",
+  "@engine.deck.st_drills": {
+    "description": "Debug drills. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_cards": "{n, plural, one {# cards} other {# cards}}",
+  "@engine.deck.st_cards": {
+    "description": "Flashcards. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_traps": "{n, plural, one {# traps} other {# traps}}",
+  "@engine.deck.st_traps": {
+    "description": "Traps (pitfalls). Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.common.sizeMB": "{size} MB",
+  "@engine.common.sizeMB": {
+    "description": "A file size in megabytes. size = the number, already formatted.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "2.4"
+      }
+    }
+  },
+  "engine.common.sizeKB": "{size} KB",
+  "@engine.common.sizeKB": {
+    "description": "A file size in kilobytes. size = the number, already formatted.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "380"
+      }
+    }
+  },
+  "engine.deck.deviceOnly": "on this device only",
+  "@engine.deck.deviceOnly": {
+    "description": "After a source file’s size: the file is not in the cloud. Lowercase."
+  },
+  "engine.deck.replace": "Replace",
+  "@engine.deck.replace": {
+    "description": "Button (after ↻): attach another file to the source."
+  },
+  "engine.deck.removeConfirm": "Remove the attached file of this source? (The course itself is not changed.)",
+  "@engine.deck.removeConfirm": {
+    "description": "Confirmation before removing a source’s file."
+  },
+  "engine.deck.remove": "Remove file",
+  "@engine.deck.remove": {
+    "description": "Button (after 🗑): remove a source’s file."
+  },
+  "engine.deck.attachInstead": "Attach a file instead",
+  "@engine.deck.attachInstead": {
+    "description": "Button (after 📎) for a web source: attach a file instead of the link."
+  },
+  "engine.deck.inPackage": "{name} came in the subject's package (.noema.zip) — import the package to get it, or attach it",
+  "@engine.deck.inPackage": {
+    "description": "Source card (after 📦): the file is inside the subject’s package. name = file name. Keep “.noema.zip”.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ecb-notes.pdf"
+      }
+    }
+  },
+  "engine.deck.notAttached": "{name} — not attached yet",
+  "@engine.deck.notAttached": {
+    "description": "Source card (after 📄): the source names a file that is not attached. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ecb-notes.pdf"
+      }
+    }
+  },
+  "engine.deck.noFile": "No file attached",
+  "@engine.deck.noFile": {
+    "description": "Source card: the source has no file."
+  },
+  "engine.deck.attach": "Attach the file",
+  "@engine.deck.attach": {
+    "description": "Button (after 📎): attach the source’s file."
+  },
+  "engine.deck.pages": "Pages {pages}",
+  "@engine.deck.pages": {
+    "description": "Source card: its page range. pages = e.g. 23–42.",
+    "placeholders": {
+      "pages": {
+        "type": "String",
+        "example": "23–42"
+      }
+    }
+  },
+  "engine.deck.added": "added {date}",
+  "@engine.deck.added": {
+    "description": "Source card: when the source was added (a date as written in the pack, or —). Lowercase.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2026-10-01"
+      }
+    }
+  },
+  "engine.deck.also": "(also)",
+  "@engine.deck.also": {
+    "description": "After a chapter in a source card: the chapter also uses this source (not as its main one)."
+  },
+  "engine.deck.noChapter": "No chapter is mapped to this source.",
+  "@engine.deck.noChapter": {
+    "description": "Source card when no chapter uses the source."
+  },
+  "engine.deck.onlyThis": "Only this source",
+  "@engine.deck.onlyThis": {
+    "description": "Button (after 🔎): show only this source in the app."
+  },
+  "engine.deck.markNew": "Mark as new",
+  "@engine.deck.markNew": {
+    "description": "Button (after ↺): mark the source as new again."
+  },
+  "engine.deck.footer": "Turning a source off hides its chapters, sections, appended blocks, exercises, drills, cards and traps everywhere (practice, lightning, search, tutor). Your progress is never deleted. New sources are merged additively — just hand Claude the next PDF.",
+  "@engine.deck.footer": {
+    "description": "Footnote of the Sources menu."
+  },
+  "engine.cv.mode_socratic": "Socratic dialogue",
+  "@engine.cv.mode_socratic": {
+    "description": "Mode of a saved tutor conversation (export and lists)."
+  },
+  "engine.cv.mode_explain": "Explanation",
+  "@engine.cv.mode_explain": {
+    "description": "Mode of a saved tutor conversation: the tutor explained freely."
+  },
+  "engine.cv.mode_quiz": "Quiz",
+  "@engine.cv.mode_quiz": {
+    "description": "Mode of a saved tutor conversation: a quiz."
+  },
+  "engine.cv.mode_interview": "Mock interview",
+  "@engine.cv.mode_interview": {
+    "description": "Mode of a saved tutor conversation: a practice interview."
+  },
+  "engine.cv.mode_debug": "Debugging simulation",
+  "@engine.cv.mode_debug": {
+    "description": "Mode of a saved tutor conversation: a simulated case to debug."
+  },
+  "engine.cv.fallbackTitle": "{title} Tutoring Session",
+  "@engine.cv.fallbackTitle": {
+    "description": "Title of a conversation that has no title yet and no topic. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.cv.kind_grading": "grading",
+  "@engine.cv.kind_grading": {
+    "description": "Badge (after 📝) of a saved AI grading in the conversation list. Lowercase."
+  },
+  "engine.cv.kind_code_review": "code review",
+  "@engine.cv.kind_code_review": {
+    "description": "Badge (after ⌨️) of a saved AI code review. Lowercase."
+  },
+  "engine.cv.kind_question": "AI question",
+  "@engine.cv.kind_question": {
+    "description": "Badge (after ✨) of a saved AI-generated question."
+  },
+  "engine.cv.kind_drill_grading": "drill grading",
+  "@engine.cv.kind_drill_grading": {
+    "description": "Badge (after 🔧) of a saved AI grading of a debug drill. Lowercase."
+  },
+  "engine.cv.md.mode": "Mode",
+  "@engine.cv.md.mode": {
+    "description": "Exported conversation (Markdown table): row label."
+  },
+  "engine.cv.md.context": "Context",
+  "@engine.cv.md.context": {
+    "description": "Exported conversation: row label (what the conversation was about)."
+  },
+  "engine.cv.md.started": "Started",
+  "@engine.cv.md.started": {
+    "description": "Exported conversation: row label (when it started)."
+  },
+  "engine.cv.md.last": "Last message",
+  "@engine.cv.md.last": {
+    "description": "Exported conversation: row label."
+  },
+  "engine.cv.md.messages": "Messages",
+  "@engine.cv.md.messages": {
+    "description": "Exported conversation: row label (how many messages)."
+  },
+  "engine.cv.md.tutor": "Tutor",
+  "@engine.cv.md.tutor": {
+    "description": "Exported conversation: row label (the AI tutor)."
+  },
+  "engine.cv.md.subject": "Subject",
+  "@engine.cv.md.subject": {
+    "description": "Exported conversation: row label (the subject studied)."
+  },
+  "engine.cv.md.profile": "Profile",
+  "@engine.cv.md.profile": {
+    "description": "Exported conversation: row label (the learner’s profile)."
+  },
+  "engine.cv.md.source": "Source",
+  "@engine.cv.md.source": {
+    "description": "Exported conversation: row label (which app it came from)."
+  },
+  "engine.cv.md.lessons": "Lessons learned",
+  "@engine.cv.md.lessons": {
+    "description": "Exported conversation: heading (after 📌) of the lessons saved in it."
+  },
+  "engine.cv.md.you": "You",
+  "@engine.cv.md.you": {
+    "description": "Exported conversation: speaker heading (after 🧑) of the learner’s messages."
+  },
+  "engine.cv.wholeCourse": "Whole course",
+  "@engine.cv.wholeCourse": {
+    "description": "Context of a conversation about the whole course (export and conversation list)."
+  },
+  "engine.cv.nothingToExport": "Nothing to export yet — start a conversation first 🙂",
+  "@engine.cv.nothingToExport": {
+    "description": "Toast when exporting an empty conversation."
+  },
+  "engine.cv.naming": "Naming your conversation…",
+  "@engine.cv.naming": {
+    "description": "Toast (after ✨) while the AI writes a title before export."
+  },
+  "engine.cv.exported": "Exported “{title}”",
+  "@engine.cv.exported": {
+    "description": "Toast (after ⬇️) after exporting a conversation. title = its title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Delta Log: Commits and Checkpoints"
+      }
+    }
+  },
+  "engine.cv.none": "No conversations yet",
+  "@engine.cv.none": {
+    "description": "Toast when exporting all conversations but there are none."
+  },
+  "engine.cv.md.allTitle": "{app} — Tutor Conversations",
+  "@engine.cv.md.allTitle": {
+    "description": "Heading of the export of all conversations. app = the app/subject title.",
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Databricks Quest"
+      }
+    }
+  },
+  "engine.cv.md.exportedOn": "Exported {date} · {n, plural, one {# conversation} other {# conversations}}",
+  "@engine.cv.md.exportedOn": {
+    "description": "Line under the heading of the export of all conversations. date = date and time (YYYY-MM-DD HH:MM).",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2026-10-11 14:05"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.md.contents": "Contents",
+  "@engine.cv.md.contents": {
+    "description": "Heading of the table of contents of the export of all conversations."
+  },
+  "engine.cv.title": "Conversations ({n, number})",
+  "@engine.cv.title": {
+    "description": "Heading (after 🕘) of the conversation history in the tutor drawer.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.tip": "Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.",
+  "@engine.cv.tip": {
+    "description": "Info tooltip of the conversation history."
+  },
+  "engine.cv.exportAll": "Export all",
+  "@engine.cv.exportAll": {
+    "description": "Button (after ⬇️): export all conversations as one Markdown file."
+  },
+  "engine.cv.chat": "Chat",
+  "@engine.cv.chat": {
+    "description": "Button (after ←): back from the history to the chat."
+  },
+  "engine.cv.alsoShow": "{n, plural, one {Also show # AI grading / review / question record} other {Also show # AI grading / review / question records}}",
+  "@engine.cv.alsoShow": {
+    "description": "Checkbox in the conversation history: also list the saved one-shot AI records.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.search": "Search conversations…",
+  "@engine.cv.search": {
+    "description": "Placeholder of the search box of the conversation history."
+  },
+  "engine.cv.empty": "No conversations yet. Every chat with your tutor is saved here automatically, ready to export as Markdown.",
+  "@engine.cv.empty": {
+    "description": "Empty conversation history."
+  },
+  "engine.cv.namingShort": "naming…",
+  "@engine.cv.namingShort": {
+    "description": "After a conversation’s temporary title while the AI writes its title. Lowercase."
+  },
+  "engine.cv.fromApp": "from {app}",
+  "@engine.cv.fromApp": {
+    "description": "Conversation list: the conversation was made in another app. app = its name (e.g. Meletee).",
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Meletee"
+      }
+    }
+  },
+  "engine.cv.messages": "{n, plural, one {# messages} other {# messages}}",
+  "@engine.cv.messages": {
+    "description": "Conversation list: number of messages (after the date). (English uses “messages” also for 1.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cv.rename": "Rename",
+  "@engine.cv.rename": {
+    "description": "Tooltip of the ✏️ button of a conversation."
+  },
+  "engine.cv.exportMd": "Export .md",
+  "@engine.cv.exportMd": {
+    "description": "Tooltip of the ⬇️ button of a conversation (Markdown file)."
+  },
+  "engine.cv.delete": "Delete",
+  "@engine.cv.delete": {
+    "description": "Tooltip of the 🗑️ button of a conversation."
+  },
+  "engine.cv.deleteAgain": "Click again to delete",
+  "@engine.cv.deleteAgain": {
+    "description": "Tooltip of the delete button after the first click (confirm by clicking again)."
+  },
+  "engine.thr.workingOn": "Working on:",
+  "@engine.thr.workingOn": {
+    "description": "Bold label of the Socratic thread bar in the tutor drawer; the question being worked on follows."
+  },
+  "engine.thr.try": "try {n, number}/{of, number}",
+  "@engine.thr.try": {
+    "description": "Pill: the learner’s attempt n of the allowed of on the current question. Lowercase.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.thr.open": "{n, plural, one {# open question(s)} other {# open question(s)}}",
+  "@engine.thr.open": {
+    "description": "Thread bar: how many questions are still open. (English keeps “question(s)”.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.thr.allAnswered": "All questions answered",
+  "@engine.thr.allAnswered": {
+    "description": "Thread bar when every question is resolved."
+  },
+  "engine.thr.askAnything": "Ask anything — I’ll answer or guide you, then close with the answer",
+  "@engine.thr.askAnything": {
+    "description": "Thread bar before any question (the tutor speaks)."
+  },
+  "engine.thr.lessons": "{n, plural, one {# lesson} other {# lessons}}",
+  "@engine.thr.lessons": {
+    "description": "Pill (after 📌) with the number of lessons saved in this conversation.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.thr.showAll": "Show all threads",
+  "@engine.thr.showAll": {
+    "description": "Tooltip of the ▾ button that shows every question (thread) of the conversation."
+  },
+  "engine.thr.takeaways": "Want the key takeaways of this conversation?",
+  "@engine.thr.takeaways": {
+    "description": "Thread bar in non-Socratic modes, next to the “Wrap up” button."
+  },
+  "engine.thr.tellMe": "Just tell me",
+  "@engine.thr.tellMe": {
+    "description": "Button (after 💡): the learner wants the answer now."
+  },
+  "engine.thr.wrapUp": "Wrap up",
+  "@engine.thr.wrapUp": {
+    "description": "Button (after 🎓): the tutor closes the conversation with the answers and a summary."
+  },
+  "engine.common.sizeB": "{size} B",
+  "@engine.common.sizeB": {
+    "description": "A file size in bytes. size = the number, already formatted.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "512"
+      }
+    }
+  },
+  "engine.acc.cloudAccount": "Cloud account · {email}",
+  "@engine.acc.cloudAccount": {
+    "description": "Account menu header (after ☁️): the kind of account and its e-mail.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      }
+    }
+  },
+  "engine.acc.localProfile": "Local profile on this device",
+  "@engine.acc.localProfile": {
+    "description": "Account menu header (after 💻) for a profile without a cloud account."
+  },
+  "engine.acc.xpTotal": "{n, number} XP total",
+  "@engine.acc.xpTotal": {
+    "description": "Account menu header chip (after ⭐): XP over all subjects.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.streak": "{n, plural, one {# day streak} other {# day streak}}",
+  "@engine.acc.streak": {
+    "description": "Account menu header chip (after 🔥): the number of days in a row the learner studied. (English uses “day” for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.geminiKey": "Gemini API key",
+  "@engine.acc.geminiKey": {
+    "description": "Account menu › ⚙️ Settings: label / screen-reader label of the Gemini key field."
+  },
+  "engine.acc.geminiModel": "Gemini model",
+  "@engine.acc.geminiModel": {
+    "description": "Account menu › ⚙️ Settings: label of the Gemini model choice."
+  },
+  "engine.acc.currentModel": "Current model: {model}",
+  "@engine.acc.currentModel": {
+    "description": "Account menu › ⚙️ Settings: status line under the model choice.",
+    "placeholders": {
+      "model": {
+        "type": "String",
+        "example": "gemini-2.5-flash"
+      }
+    }
+  },
+  "engine.acc.modelOnFirstUse": "The model is detected on first use.",
+  "@engine.acc.modelOnFirstUse": {
+    "description": "Account menu › ⚙️ Settings: status line when no model was chosen yet."
+  },
+  "engine.acc.noGeminiKey": "No Gemini key yet — the AI tutor is off",
+  "@engine.acc.noGeminiKey": {
+    "description": "Account menu › ⚙️ Settings: bold title of a warning when there is no Gemini key."
+  },
+  "engine.acc.freeTwoMin": "It is free and takes 2 minutes.",
+  "@engine.acc.freeTwoMin": {
+    "description": "Account menu › ⚙️ Settings: the warning’s text, before the link “Show me how”."
+  },
+  "engine.acc.showMeHow": "Show me how",
+  "@engine.acc.showMeHow": {
+    "description": "Account menu › ⚙️ Settings: link that opens the guide to get a Gemini key."
+  },
+  "engine.acc.geminiKeyTip": "Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.",
+  "@engine.acc.geminiKeyTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Gemini key (privacy statement)."
+  },
+  "engine.acc.keyStoredCloud": "Stored only in this browser. Add it once on each device.",
+  "@engine.acc.keyStoredCloud": {
+    "description": "Account menu › ⚙️ Settings: note under the Gemini key (cloud accounts)."
+  },
+  "engine.acc.keyStoredLocal": "Stored only in this browser, for this profile.",
+  "@engine.acc.keyStoredLocal": {
+    "description": "Account menu › ⚙️ Settings: note under the Gemini key (local profiles)."
+  },
+  "engine.acc.detecting": "Detecting…",
+  "@engine.acc.detecting": {
+    "description": "Account menu › ⚙️ Settings: status while the Gemini models are detected."
+  },
+  "engine.acc.foundModels": "{n, plural, one {Found # models · picked {model}} other {Found # models · picked {model}}}",
+  "@engine.acc.foundModels": {
+    "description": "Account menu › ⚙️ Settings: status after detecting the models: how many, and the one picked. (English uses “models” for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "model": {
+        "type": "String",
+        "example": "gemini-2.5-flash"
+      }
+    }
+  },
+  "engine.acc.detectModels": "Detect models",
+  "@engine.acc.detectModels": {
+    "description": "Account menu › ⚙️ Settings: button (after 🔍). Same words as in engine.gemini.noModel."
+  },
+  "engine.acc.testing": "Testing…",
+  "@engine.acc.testing": {
+    "description": "Account menu › ⚙️ Settings: status while the Gemini key is tested."
+  },
+  "engine.acc.test": "Test",
+  "@engine.acc.test": {
+    "description": "Account menu › ⚙️ Settings: button (after 🧪) that tests the Gemini key."
+  },
+  "engine.acc.claudeKey": "Claude API key",
+  "@engine.acc.claudeKey": {
+    "description": "Account menu › ⚙️ Settings: label of the Claude key field."
+  },
+  "engine.acc.claudeModel": "Claude model",
+  "@engine.acc.claudeModel": {
+    "description": "Account menu › ⚙️ Settings: label of the Claude model choice."
+  },
+  "engine.acc.newestSonnet": "Newest Sonnet (recommended)",
+  "@engine.acc.newestSonnet": {
+    "description": "Account menu › ⚙️ Settings: default option of the Claude model choice. “Sonnet” is a model name."
+  },
+  "engine.acc.limitSubjectAria": "Spending limit per subject",
+  "@engine.acc.limitSubjectAria": {
+    "description": "Account menu › ⚙️ Settings: screen-reader label of the money limit (in $) for building one subject with Claude. Billing."
+  },
+  "engine.acc.limitStepAria": "Spending limit per Roadmap step",
+  "@engine.acc.limitStepAria": {
+    "description": "Account menu › ⚙️ Settings: screen-reader label of the money limit (in $) per Roadmap step. Billing."
+  },
+  "engine.acc.curAI": "AI for new Roadmaps",
+  "@engine.acc.curAI": {
+    "description": "Account menu › ⚙️ Settings: label of the choice of which AI builds new Roadmaps."
+  },
+  "engine.acc.prov_rec": "Recommended (the Claude app for cloud accounts)",
+  "@engine.acc.prov_rec": {
+    "description": "Account menu › ⚙️ Settings: option of “AI for new Roadmaps”."
+  },
+  "engine.acc.prov_claudeapp": "Claude app — your Claude plan",
+  "@engine.acc.prov_claudeapp": {
+    "description": "Account menu › ⚙️ Settings: option (after 💬): the Claude app, paid by the learner’s Claude subscription."
+  },
+  "engine.acc.prov_auto": "Automatic — an API key here",
+  "@engine.acc.prov_auto": {
+    "description": "Account menu › ⚙️ Settings: option: automatic, with an API key in this app."
+  },
+  "engine.acc.prov_claude": "Claude — API key",
+  "@engine.acc.prov_claude": {
+    "description": "Account menu › ⚙️ Settings: option: Claude through an API key."
+  },
+  "engine.acc.prov_gemini": "Gemini — free key",
+  "@engine.acc.prov_gemini": {
+    "description": "Account menu › ⚙️ Settings: option: Gemini through a free key."
+  },
+  "engine.acc.noClaudeKey": "No Claude key on this device.",
+  "@engine.acc.noClaudeKey": {
+    "description": "Account menu › ⚙️ Settings: status when the Claude key field is empty."
+  },
+  "engine.acc.notClaudeKey": "That is not a Claude API key (it starts with sk-ant-).",
+  "@engine.acc.notClaudeKey": {
+    "description": "Account menu › ⚙️ Settings: status (after ⚠️) when the text is not a Claude key. Keep “sk-ant-”."
+  },
+  "engine.acc.checking": "Checking…",
+  "@engine.acc.checking": {
+    "description": "Account menu › ⚙️ Settings: status (after ⏳) while the Claude key is checked."
+  },
+  "engine.acc.keyWorksRemembered": "The key works. Remembered on this device only (never sent to the noema-lite cloud, not in backups).",
+  "@engine.acc.keyWorksRemembered": {
+    "description": "Account menu › ⚙️ Settings: status (after ✅) when the Claude key works and is remembered. Privacy statement."
+  },
+  "engine.acc.keyWorksTab": "The key works. Kept until you close this tab.",
+  "@engine.acc.keyWorksTab": {
+    "description": "Account menu › ⚙️ Settings: status (after ✅) when the Claude key works and is not remembered."
+  },
+  "engine.acc.noClaudeModule": "This installation has no Claude module.",
+  "@engine.acc.noClaudeModule": {
+    "description": "Account menu › ⚙️ Settings: when the app was installed without Claude support."
+  },
+  "engine.acc.claudeIntro": "Optional. Claude builds subjects from your sources (✨ Create with Claude) and Roadmaps. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.",
+  "@engine.acc.claudeIntro": {
+    "description": "Account menu › ⚙️ Settings: intro of the Claude section. “ways A, B, C” are the three set-up ways of the Help guide. Mentions billing."
+  },
+  "engine.acc.claudeKeyTip": "From the Claude Console (platform.claude.com → API keys). It stays in this browser: never uploaded to the noema-lite cloud, not part of backups. Leave it empty to remove it.",
+  "@engine.acc.claudeKeyTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Claude key (privacy statement). Keep “platform.claude.com”."
+  },
+  "engine.acc.remember": "Remember it on this device (untick on a shared computer)",
+  "@engine.acc.remember": {
+    "description": "Account menu › ⚙️ Settings: checkbox next to the Claude key."
+  },
+  "engine.acc.checkKey": "Check the key",
+  "@engine.acc.checkKey": {
+    "description": "Account menu › ⚙️ Settings: button (after ✔️) that checks the Claude key."
+  },
+  "engine.acc.keyRemoved": "Removed from this device.",
+  "@engine.acc.keyRemoved": {
+    "description": "Account menu › ⚙️ Settings: status (after 🗑) after removing the Claude key."
+  },
+  "engine.acc.removeKey": "Remove the key",
+  "@engine.acc.removeKey": {
+    "description": "Account menu › ⚙️ Settings: button that removes the Claude key."
+  },
+  "engine.acc.claudeModelTip": "“Sonnet” gives very good courses for its price; “Opus” is the strongest and costs more; “Haiku” is cheaper but weaker. Check the key to list the models your key can use.",
+  "@engine.acc.claudeModelTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Claude model. Sonnet, Opus, Haiku are model names."
+  },
+  "engine.acc.limitSubject": "Limit per subject ($)",
+  "@engine.acc.limitSubject": {
+    "description": "Account menu › ⚙️ Settings: label of the money limit for building one subject with Claude (in US dollars). Billing."
+  },
+  "engine.acc.limitStep": "Limit per Roadmap step ($)",
+  "@engine.acc.limitStep": {
+    "description": "Account menu › ⚙️ Settings: label of the money limit per Roadmap step (US dollars). Billing."
+  },
+  "engine.acc.curAITip": "Preselected when you create or import a Roadmap. The Claude app (your Claude plan) is usually the cheapest for Roadmaps; an API key or Gemini runs everything here.",
+  "@engine.acc.curAITip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of “AI for new Roadmaps”."
+  },
+  "engine.acc.createWithClaude": "Create a subject with Claude",
+  "@engine.acc.createWithClaude": {
+    "description": "Button (after ✨): opens “Create with Claude”."
+  },
+  "engine.acc.howClaude": "How to set up Claude (A · B · C)",
+  "@engine.acc.howClaude": {
+    "description": "Account menu › ⚙️ Settings: button (after ❓) to the Help guide with the three ways."
+  },
+  "engine.acc.theme": "Theme",
+  "@engine.acc.theme": {
+    "description": "Account menu › ⚙️ Settings: label of the light/dark choice."
+  },
+  "engine.acc.themeAuto": "Auto (system)",
+  "@engine.acc.themeAuto": {
+    "description": "Account menu › ⚙️ Settings: theme option: follow the system."
+  },
+  "engine.acc.themeLight": "Light",
+  "@engine.acc.themeLight": {
+    "description": "Account menu › ⚙️ Settings: theme option."
+  },
+  "engine.acc.themeDark": "Dark",
+  "@engine.acc.themeDark": {
+    "description": "Account menu › ⚙️ Settings: theme option."
+  },
+  "engine.acc.goal": "Daily XP goal",
+  "@engine.acc.goal": {
+    "description": "Account menu › ⚙️ Settings: label of the daily XP target."
+  },
+  "engine.acc.chatLang": "Language of the AI conversations",
+  "@engine.acc.chatLang": {
+    "description": "Account menu › ⚙️ Settings: label and section title (after 🗣️)."
+  },
+  "engine.acc.chatLangTip": "The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.",
+  "@engine.acc.chatLangTip": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the AI conversation language."
+  },
+  "engine.acc.chatLangNote": "The course material stays in its own language ({title}: {lang}). You can also switch it in the tutor (🗣 next to the topic).",
+  "@engine.acc.chatLangNote": {
+    "description": "Account menu › ⚙️ Settings: note under the AI conversation language. title = the subject, lang = its language’s name.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      },
+      "lang": {
+        "type": "String",
+        "example": "English"
+      }
+    }
+  },
+  "engine.acc.sound": "Sound effects",
+  "@engine.acc.sound": {
+    "description": "Account menu › ⚙️ Settings: checkbox."
+  },
+  "engine.acc.chunk": "Bite-size reading (reveal theory chunk by chunk)",
+  "@engine.acc.chunk": {
+    "description": "Account menu › ⚙️ Settings: checkbox."
+  },
+  "engine.acc.backupBtn": "Backup & restore…",
+  "@engine.acc.backupBtn": {
+    "description": "Account menu › ⚙️ Settings: button (after 💾) to the backup tab."
+  },
+  "engine.acc.resetBtn": "Reset {title} progress",
+  "@engine.acc.resetBtn": {
+    "description": "Account menu › ⚙️ Settings: button (after 🗑️) that resets the progress of the open subject. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.acc.secGemini": "Gemini — the AI tutor",
+  "@engine.acc.secGemini": {
+    "description": "Account menu › ⚙️ Settings: section title (after 🤖)."
+  },
+  "engine.acc.keySet": "key set",
+  "@engine.acc.keySet": {
+    "description": "Account menu › ⚙️ Settings: status pill: a key is saved. Lowercase, short."
+  },
+  "engine.acc.noKey": "no key",
+  "@engine.acc.noKey": {
+    "description": "Account menu › ⚙️ Settings: status pill: no key. Lowercase, short."
+  },
+  "engine.acc.secClaude": "Claude (optional)",
+  "@engine.acc.secClaude": {
+    "description": "Account menu › ⚙️ Settings: section title (after ✨)."
+  },
+  "engine.acc.claudeOnDevice": "API key on this device",
+  "@engine.acc.claudeOnDevice": {
+    "description": "Account menu › ⚙️ Settings: status pill of the Claude section."
+  },
+  "engine.acc.claudeAppNoKey": "Claude app / no key",
+  "@engine.acc.claudeAppNoKey": {
+    "description": "Account menu › ⚙️ Settings: status pill of the Claude section."
+  },
+  "engine.acc.secClaudeInfo": "Claude makes subjects and Roadmaps: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.",
+  "@engine.acc.secClaudeInfo": {
+    "description": "Account menu › ⚙️ Settings: info tooltip of the Claude section."
+  },
+  "engine.acc.asCourse": "as the course",
+  "@engine.acc.asCourse": {
+    "description": "Account menu › ⚙️ Settings: status pill: AI conversations in the course’s language. Lowercase."
+  },
+  "engine.acc.secDisplay": "Display & studying",
+  "@engine.acc.secDisplay": {
+    "description": "Account menu › ⚙️ Settings: section title (after 🎨)."
+  },
+  "engine.acc.secSubject": "This subject — {title}",
+  "@engine.acc.secSubject": {
+    "description": "Account menu › ⚙️ Settings: section title (after 📘). title = the open subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.acc.saved": "Saved ✔",
+  "@engine.acc.saved": {
+    "description": "Toast after saving the settings."
+  },
+  "engine.acc.saveSettings": "Save settings",
+  "@engine.acc.saveSettings": {
+    "description": "Account menu › ⚙️ Settings: main button."
+  },
+  "engine.acc.learnerPh": "e.g. I have ADHD and learn best when challenged; I already know X; I prepare for exam Y…",
+  "@engine.acc.learnerPh": {
+    "description": "Account menu › Profile: placeholder of “About me”."
+  },
+  "engine.acc.newPin": "New PIN (empty = keep)",
+  "@engine.acc.newPin": {
+    "description": "Account menu › Profile: placeholder of the PIN field when a PIN exists."
+  },
+  "engine.acc.optPin": "Optional PIN",
+  "@engine.acc.optPin": {
+    "description": "Account menu › Profile: placeholder of the PIN field."
+  },
+  "engine.acc.xpChip": "{title}: {n, number}",
+  "@engine.acc.xpChip": {
+    "description": "Account menu › Profile: XP earned in one subject. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.name": "Name",
+  "@engine.acc.name": {
+    "description": "Account menu › Profile: label."
+  },
+  "engine.acc.emoji": "Emoji",
+  "@engine.acc.emoji": {
+    "description": "Account menu › Profile: label of the profile’s emoji."
+  },
+  "engine.acc.aboutMe": "About me (the tutor adapts to this, in every subject)",
+  "@engine.acc.aboutMe": {
+    "description": "Account menu › Profile: label of the free text the tutor reads."
+  },
+  "engine.acc.aboutMeTip": "Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.",
+  "@engine.acc.aboutMeTip": {
+    "description": "Account menu › Profile: info tooltip of “About me”."
+  },
+  "engine.acc.askOnStart": "Show the subject picker every time I open the app",
+  "@engine.acc.askOnStart": {
+    "description": "Account menu › Profile: checkbox."
+  },
+  "engine.acc.pin": "PIN (a privacy curtain on a shared device — not encryption)",
+  "@engine.acc.pin": {
+    "description": "Account menu › Profile: label of the PIN field (security disclaimer: it is not encryption)."
+  },
+  "engine.acc.pinRemoved": "PIN removed",
+  "@engine.acc.pinRemoved": {
+    "description": "Toast after removing the PIN."
+  },
+  "engine.acc.removePin": "Remove PIN",
+  "@engine.acc.removePin": {
+    "description": "Account menu › Profile: button."
+  },
+  "engine.acc.xpBySubject": "XP by subject",
+  "@engine.acc.xpBySubject": {
+    "description": "Account menu › Profile: label above the XP chips."
+  },
+  "engine.acc.savedReloading": "Saved ✔ — reloading",
+  "@engine.acc.savedReloading": {
+    "description": "Toast after saving the profile; the page reloads."
+  },
+  "engine.acc.saveProfile": "Save profile",
+  "@engine.acc.saveProfile": {
+    "description": "Account menu › Profile: main button."
+  },
+  "engine.acc.switchProfile": "Switch profile",
+  "@engine.acc.switchProfile": {
+    "description": "Account menu › Profile: button (after 👥)."
+  },
+  "engine.acc.danger": "Danger zone",
+  "@engine.acc.danger": {
+    "description": "Account menu › Profile: bold heading of the delete area."
+  },
+  "engine.acc.deleteNote": "Deleting removes this profile and all its data from this browser. A backup file is downloaded first.",
+  "@engine.acc.deleteNote": {
+    "description": "Account menu › Profile: note above the delete button (data deletion)."
+  },
+  "engine.acc.deleteConfirm": "Delete profile “{name}” and all its data on this device?",
+  "@engine.acc.deleteConfirm": {
+    "description": "Confirmation before deleting a local profile. name = the profile.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.acc.deleteProfile": "Delete this profile",
+  "@engine.acc.deleteProfile": {
+    "description": "Account menu › Profile: button (after 🗑️)."
+  },
+  "engine.acc.subjIntro": "Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.",
+  "@engine.acc.subjIntro": {
+    "description": "Account menu › Subjects: intro."
+  },
+  "engine.acc.subjRoadmap": "The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).",
+  "@engine.acc.subjRoadmap": {
+    "description": "Account menu › Subjects: note (after 🧭). “Put on a Roadmap…” is the name of a menu item."
+  },
+  "engine.acc.originLibrary": "Library",
+  "@engine.acc.originLibrary": {
+    "description": "Account menu › Subjects: where a subject comes from (the shared library)."
+  },
+  "engine.acc.originPrivate": "Private (folder)",
+  "@engine.acc.originPrivate": {
+    "description": "Account menu › Subjects: origin (after 🔒): a private folder of the installation."
+  },
+  "engine.acc.originImported": "Imported",
+  "@engine.acc.originImported": {
+    "description": "Account menu › Subjects: origin (after 📥): imported by this profile."
+  },
+  "engine.acc.subjCounts": "{c} chapters · {e} exercises",
+  "@engine.acc.subjCounts": {
+    "description": "Account menu › Subjects: counts of a subject (c, e are numbers, or ? when unknown).",
+    "placeholders": {
+      "c": {
+        "type": "String",
+        "example": "12"
+      },
+      "e": {
+        "type": "String",
+        "example": "340"
+      }
+    }
+  },
+  "engine.acc.onSteps": "{n, plural, one {on # Roadmap step} other {on # Roadmap steps}}",
+  "@engine.acc.onSteps": {
+    "description": "Account menu › Subjects (after 🧭): on how many Roadmap steps the subject is.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.acc.onShelf": "on the Shelf",
+  "@engine.acc.onShelf": {
+    "description": "Account menu › Subjects (after 📚): the subject is on no Roadmap step."
+  },
+  "engine.acc.isOpen": "open",
+  "@engine.acc.isOpen": {
+    "description": "Account menu › Subjects: pill on the subject that is open now. Lowercase."
+  },
+  "engine.acc.open": "Open",
+  "@engine.acc.open": {
+    "description": "Account menu › Subjects: button that opens a subject."
+  },
+  "engine.acc.editTip": "Rename, describe or delete",
+  "@engine.acc.editTip": {
+    "description": "Account menu › Subjects: tooltip of ✏️."
+  },
+  "engine.acc.editAria": "Edit {title}",
+  "@engine.acc.editAria": {
+    "description": "Account menu › Subjects: screen-reader label of ✏️. title = the subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.acc.shareTip": "Share or make public",
+  "@engine.acc.shareTip": {
+    "description": "Account menu › Subjects: tooltip of 🔗."
+  },
+  "engine.acc.openShelf": "Open the Shelf",
+  "@engine.acc.openShelf": {
+    "description": "Account menu › Subjects: button (after 📚)."
+  },
+  "engine.acc.importPack": "Import subject pack…",
+  "@engine.acc.importPack": {
+    "description": "Account menu › Subjects: button (after 📥)."
+  },
+  "engine.acc.exportPackage": "Export “{title}” (package with its source files)",
+  "@engine.acc.exportPackage": {
+    "description": "Account menu › Subjects: button (after ⬇️). title = the open subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Databricks"
+      }
+    }
+  },
+  "engine.bk.noFolders": "This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.",
+  "@engine.bk.noFolders": {
+    "description": "Account menu › 💾 Backup & restore: folder backups are not supported. “Download backup” = engine.bk.download."
+  },
+  "engine.bk.howFolders": "How folder backups work",
+  "@engine.bk.howFolders": {
+    "description": "Account menu › 💾 Backup & restore: button (after 📁) to the guide."
+  },
+  "engine.bk.autoTo": "Auto-backup → {folder}",
+  "@engine.bk.autoTo": {
+    "description": "Toast (after ✅) after choosing the backup folder. folder = its name.",
+    "placeholders": {
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.chooseFolder": "Choose backup folder",
+  "@engine.bk.chooseFolder": {
+    "description": "Account menu › 💾 Backup & restore: button (after 📁)."
+  },
+  "engine.bk.onFolder": "On → 📁 {folder}",
+  "@engine.bk.onFolder": {
+    "description": "Account menu › 💾 Backup & restore: status pill (after ✅): folder backups are on.",
+    "placeholders": {
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.pausedFolder": "Paused — permission needed for 📁 {folder}",
+  "@engine.bk.pausedFolder": {
+    "description": "Account menu › 💾 Backup & restore: status pill (after ⏸️): the browser needs permission again.",
+    "placeholders": {
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.backedUp": "Backed up to folder",
+  "@engine.bk.backedUp": {
+    "description": "Toast (after 💾)."
+  },
+  "engine.bk.backUpNow": "Back up now",
+  "@engine.bk.backUpNow": {
+    "description": "Account menu › 💾 Backup & restore: button."
+  },
+  "engine.bk.resumed": "Auto-backup resumed",
+  "@engine.bk.resumed": {
+    "description": "Toast (after ✅)."
+  },
+  "engine.bk.resume": "Resume",
+  "@engine.bk.resume": {
+    "description": "Account menu › 💾 Backup & restore: button that gives the permission again."
+  },
+  "engine.bk.turnOff": "Turn off",
+  "@engine.bk.turnOff": {
+    "description": "Account menu › 💾 Backup & restore: button."
+  },
+  "engine.bk.lastFolder": "Last folder backup: {when} · writes backups/ and conversations/ inside 📁 {folder}",
+  "@engine.bk.lastFolder": {
+    "description": "Account menu › 💾 Backup & restore: status line. when = date and time; keep the folder names backups/ and conversations/.",
+    "placeholders": {
+      "when": {
+        "type": "String",
+        "example": "10/11/2026, 1:55:00 PM"
+      },
+      "folder": {
+        "type": "String",
+        "example": "Noema backups"
+      }
+    }
+  },
+  "engine.bk.noPoints": "No restore points yet. One is created automatically before every restore or reset.",
+  "@engine.bk.noPoints": {
+    "description": "Account menu › 💾 Backup & restore: empty list of restore points."
+  },
+  "engine.bk.goBack": "Go back to this restore point? (your current state becomes a new restore point)",
+  "@engine.bk.goBack": {
+    "description": "Confirmation before restoring a restore point (local profile)."
+  },
+  "engine.bk.goBackCloud": "Go back to this restore point? (your current state becomes a new restore point) Your other devices go back to it too.",
+  "@engine.bk.goBackCloud": {
+    "description": "Confirmation before restoring a restore point (cloud account: all devices change)."
+  },
+  "engine.bk.restored": "Restored ✔ — reloading",
+  "@engine.bk.restored": {
+    "description": "Toast after a restore; the page reloads."
+  },
+  "engine.bk.restore": "Restore",
+  "@engine.bk.restore": {
+    "description": "Button of a restore point / cloud snapshot."
+  },
+  "engine.bk.intro": "Everything below is optional. {n, plural, one {# AI conversation is} other {# AI conversations are}} saved automatically in this browser.",
+  "@engine.bk.intro": {
+    "description": "Account menu › 💾 Backup & restore: intro (local profile).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.bk.introCloud": "Everything below is optional. {n, plural, one {# AI conversation is} other {# AI conversations are}} saved automatically in this browser and in your cloud account.",
+  "@engine.bk.introCloud": {
+    "description": "Account menu › 💾 Backup & restore: intro (cloud account).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.bk.secDownload": "Download a backup",
+  "@engine.bk.secDownload": {
+    "description": "Account menu › 💾 Backup & restore: section title (after ⬇️)."
+  },
+  "engine.bk.lastOn": "last {date}",
+  "@engine.bk.lastOn": {
+    "description": "Account menu › 💾 Backup & restore: status pill: date of the last downloaded backup. Lowercase.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "10/11/2026"
+      }
+    }
+  },
+  "engine.bk.downloadInfo": "One JSON file with everything of this profile: progress in every subject, flashcard schedules, all AI conversations (canonical format), settings and imported packs. Keep it anywhere; restore it here or on another device.",
+  "@engine.bk.downloadInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip."
+  },
+  "engine.bk.download": "Download backup",
+  "@engine.bk.download": {
+    "description": "Account menu › 💾 Backup & restore: button (after 💾)."
+  },
+  "engine.bk.includeKey": "include my Gemini API key",
+  "@engine.bk.includeKey": {
+    "description": "Account menu › 💾 Backup & restore: checkbox (lowercase start)."
+  },
+  "engine.bk.includeKeyTip": "Off by default so a backup file you share or store somewhere can’t leak your key.",
+  "@engine.bk.includeKeyTip": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip of the checkbox (security)."
+  },
+  "engine.bk.secFolder": "Automatic backups to a folder",
+  "@engine.bk.secFolder": {
+    "description": "Account menu › 💾 Backup & restore: section title (after 📁)."
+  },
+  "engine.bk.notInBrowser": "not in this browser",
+  "@engine.bk.notInBrowser": {
+    "description": "Account menu › 💾 Backup & restore: status pill: not supported. Lowercase."
+  },
+  "engine.bk.on": "on",
+  "@engine.bk.on": {
+    "description": "Account menu › 💾 Backup & restore: status pill. Lowercase."
+  },
+  "engine.bk.paused": "paused",
+  "@engine.bk.paused": {
+    "description": "Account menu › 💾 Backup & restore: status pill. Lowercase."
+  },
+  "engine.bk.off": "off",
+  "@engine.bk.off": {
+    "description": "Account menu › 💾 Backup & restore: status pill. Lowercase."
+  },
+  "engine.bk.folderInfo": "Chrome/Edge can write into a folder you choose: a backup every few minutes + every AI conversation as .json and .md. Choose a folder inside Google Drive or iCloud Drive for an automatic off-site copy.",
+  "@engine.bk.folderInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip."
+  },
+  "engine.bk.secRestore": "Restore from a backup file",
+  "@engine.bk.secRestore": {
+    "description": "Account menu › 💾 Backup & restore: section title (after ⬆️)."
+  },
+  "engine.bk.restoreInfo": "Replace = exact copy of the backup. Merge = keep what you have, the backup wins where both have the same item. New profile = restore side by side without touching this profile. A restore point is created first, so you can always undo.",
+  "@engine.bk.restoreInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip. Replace, Merge, New profile are the three buttons."
+  },
+  "engine.bk.oldFile": "Also accepts the “Export progress” file of the old single-file Databricks Quest.",
+  "@engine.bk.oldFile": {
+    "description": "Account menu › 💾 Backup & restore: note. “Export progress” and “Databricks Quest” are names of an older app."
+  },
+  "engine.bk.chooseFile": "Choose backup file…",
+  "@engine.bk.chooseFile": {
+    "description": "Account menu › 💾 Backup & restore: button (after 📂)."
+  },
+  "engine.bk.restoreTitle": "Restore backup",
+  "@engine.bk.restoreTitle": {
+    "description": "Heading of the restore dialog."
+  },
+  "engine.bk.fileInfo": "From “{name}” · {when} · {items, plural, one {# items} other {# items}} · {convs, plural, one {# conversations} other {# conversations}}",
+  "@engine.bk.fileInfo": {
+    "description": "Restore dialog: what the backup file contains. name = its profile, when = its date. (English uses the plural for every number.)",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ANR"
+      },
+      "when": {
+        "type": "String",
+        "example": "10/11/2026, 1:55:00 PM"
+      },
+      "items": {
+        "type": "int",
+        "example": "3"
+      },
+      "convs": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.bk.cloudWarn": "Replace and Merge change your account on all your devices, not only this one. A restore point of how things are now is kept on this device first, so you can undo it.",
+  "@engine.bk.cloudWarn": {
+    "description": "Restore dialog note for cloud accounts."
+  },
+  "engine.bk.replace": "Replace {name}'s data with it",
+  "@engine.bk.replace": {
+    "description": "Restore dialog button (after ♻️). name = the current profile.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.bk.merged": "Merged ✔ — reloading",
+  "@engine.bk.merged": {
+    "description": "Toast after a merge; the page reloads."
+  },
+  "engine.bk.merge": "Merge into this profile (backup wins on conflicts)",
+  "@engine.bk.merge": {
+    "description": "Restore dialog button (after 🔀)."
+  },
+  "engine.bk.restoredName": "{name} (restored)",
+  "@engine.bk.restoredName": {
+    "description": "Name of a new profile restored from a backup. name = the backup’s profile name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ANR"
+      }
+    }
+  },
+  "engine.bk.restoredDefault": "Restored",
+  "@engine.bk.restoredDefault": {
+    "description": "Profile name used when the backup has no name (followed by “(restored)”)."
+  },
+  "engine.bk.asNew": "Restore as a new local profile",
+  "@engine.bk.asNew": {
+    "description": "Restore dialog button (after ➕)."
+  },
+  "engine.bk.howRestore": "How restoring works",
+  "@engine.bk.howRestore": {
+    "description": "Account menu › 💾 Backup & restore: button (after ♻️) to the guide."
+  },
+  "engine.bk.secPoints": "Restore points on this device",
+  "@engine.bk.secPoints": {
+    "description": "Account menu › 💾 Backup & restore: section title (after 🕘)."
+  },
+  "engine.bk.pointsInfo": "Automatic safety copies kept in this browser (last 12): one is made before every restore, reset or profile copy.",
+  "@engine.bk.pointsInfo": {
+    "description": "Account menu › 💾 Backup & restore: info tooltip."
+  },
+  "engine.cl.notSetUp": "Cloud sync is not set up for this installation yet",
+  "@engine.cl.notSetUp": {
+    "description": "Account menu › ☁️ Cloud: bold warning title."
+  },
+  "engine.cl.notSetUpNote": "Optional. Without it, everything still works on this device; use folder backups to stay safe.",
+  "@engine.cl.notSetUpNote": {
+    "description": "Account menu › ☁️ Cloud: warning text."
+  },
+  "engine.cl.secOwner": "Set up the cloud (owner, once)",
+  "@engine.cl.secOwner": {
+    "description": "Account menu › ☁️ Cloud: section title (after 🛠️), for the person who installs the app."
+  },
+  "engine.cl.secGithub": "Keep the repository on GitHub",
+  "@engine.cl.secGithub": {
+    "description": "Account menu › ☁️ Cloud: section title (after 🐙)."
+  },
+  "engine.cl.signInIntro": "Sign in to a cloud account to study from any device. Your data stays private to your account.",
+  "@engine.cl.signInIntro": {
+    "description": "Account menu › ☁️ Cloud: intro when not signed in."
+  },
+  "engine.cl.signIn": "Sign in / create account",
+  "@engine.cl.signIn": {
+    "description": "Account menu › ☁️ Cloud: button (after ☁️)."
+  },
+  "engine.cl.secHow": "How cloud accounts work",
+  "@engine.cl.secHow": {
+    "description": "Account menu › ☁️ Cloud: section title (after ☁️)."
+  },
+  "engine.cl.secFriends": "Invite friends",
+  "@engine.cl.secFriends": {
+    "description": "Account menu › ☁️ Cloud: section title (after 👥)."
+  },
+  "engine.cl.localWhileSignedIn": "You are signed in to the cloud as {email}, but you are using the local profile “{name}”.",
+  "@engine.cl.localWhileSignedIn": {
+    "description": "Account menu › ☁️ Cloud: when a local profile is open while signed in.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      },
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.cl.switchToCloud": "Switch to my cloud account",
+  "@engine.cl.switchToCloud": {
+    "description": "Account menu › ☁️ Cloud: button."
+  },
+  "engine.cl.copyConfirm": "Copy all of “{name}” into your cloud account? (cloud data with the same keys is overwritten; a cloud snapshot is taken first)",
+  "@engine.cl.copyConfirm": {
+    "description": "Confirmation before copying a local profile into the cloud.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.cl.snapBeforeCopy": "Before copying local profile {name}",
+  "@engine.cl.snapBeforeCopy": {
+    "description": "Name of the cloud snapshot taken before a local profile is copied in (shown later in Cloud snapshots).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "engine.cl.copied": "Copied — switching to your cloud account",
+  "@engine.cl.copied": {
+    "description": "Toast after the copy."
+  },
+  "engine.cl.copyBtn": "Copy this profile into my cloud account",
+  "@engine.cl.copyBtn": {
+    "description": "Account menu › ☁️ Cloud: button (after ⬆️)."
+  },
+  "engine.cl.syncing": "Syncing…",
+  "@engine.cl.syncing": {
+    "description": "Sync status (pill after 🔄, or tooltip of the sync dot)."
+  },
+  "engine.cl.synced": "Synced {time}",
+  "@engine.cl.synced": {
+    "description": "Sync status pill (after ✅). time = time of the last sync (may be empty).",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1:55:00 PM"
+      }
+    }
+  },
+  "engine.cl.pending": "{n, plural, one {# change(s) waiting} other {# change(s) waiting}}",
+  "@engine.cl.pending": {
+    "description": "Sync status pill: changes not uploaded yet. (English keeps “change(s)”.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.noSnaps": "No snapshots yet.",
+  "@engine.cl.noSnaps": {
+    "description": "Account menu › ☁️ Cloud: empty list of cloud snapshots."
+  },
+  "engine.cl.restoreSnapConfirm": "Restore your account to this snapshot? All your devices go back to it, and anything newer is removed from them too. A snapshot of how things are now is taken first, so you can undo this.",
+  "@engine.cl.restoreSnapConfirm": {
+    "description": "Confirmation before restoring a cloud snapshot."
+  },
+  "engine.cl.snapBeforeRestore": "Before restoring a snapshot",
+  "@engine.cl.snapBeforeRestore": {
+    "description": "Name of the cloud snapshot taken before a restore (shown later in the list)."
+  },
+  "engine.cl.signedInAs": "Signed in as {email}. Progress, conversations and settings sync automatically; a daily snapshot is kept (last 30).",
+  "@engine.cl.signedInAs": {
+    "description": "Account menu › ☁️ Cloud: intro when signed in.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      }
+    }
+  },
+  "engine.cl.pulled": "{n, plural, one {Pulled # change(s) — reloading} other {Pulled # change(s) — reloading}}",
+  "@engine.cl.pulled": {
+    "description": "Toast after “Sync now” brought changes; the page reloads.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.upToDate": "Up to date ✔",
+  "@engine.cl.upToDate": {
+    "description": "Toast after “Sync now” when nothing changed."
+  },
+  "engine.cl.syncNow": "Sync now",
+  "@engine.cl.syncNow": {
+    "description": "Account menu › ☁️ Cloud: button (after 🔄)."
+  },
+  "engine.cl.snapManual": "Manual snapshot",
+  "@engine.cl.snapManual": {
+    "description": "Name of a snapshot the learner takes by hand (shown in the list)."
+  },
+  "engine.cl.snapSaved": "Snapshot saved",
+  "@engine.cl.snapSaved": {
+    "description": "Toast (after 📸)."
+  },
+  "engine.cl.takeSnap": "Take snapshot",
+  "@engine.cl.takeSnap": {
+    "description": "Account menu › ☁️ Cloud: button (after 📸)."
+  },
+  "engine.cl.uploadDb": "Upload database backup…",
+  "@engine.cl.uploadDb": {
+    "description": "Account menu › ☁️ Cloud: button (after 🗄️)."
+  },
+  "engine.cl.dbUploaded": "Database backup uploaded",
+  "@engine.cl.dbUploaded": {
+    "description": "Toast (after ☁️)."
+  },
+  "engine.cl.signOut": "Sign out",
+  "@engine.cl.signOut": {
+    "description": "Account menu › ☁️ Cloud: button."
+  },
+  "engine.cl.secCheck": "Check the cloud connection",
+  "@engine.cl.secCheck": {
+    "description": "Account menu › ☁️ Cloud: section title (after 🩺)."
+  },
+  "engine.cl.checkInfo": "Runs a real round trip with your account — progress, conversations, snapshots, files, Explore, sharing — and cleans up after itself. Use it after updating the database or when something does not sync.",
+  "@engine.cl.checkInfo": {
+    "description": "Account menu › ☁️ Cloud: info tooltip of the check."
+  },
+  "engine.cl.secSnaps": "Cloud snapshots",
+  "@engine.cl.secSnaps": {
+    "description": "Account menu › ☁️ Cloud: section title (after 📸)."
+  },
+  "engine.cl.snapsInfo": "Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.",
+  "@engine.cl.snapsInfo": {
+    "description": "Account menu › ☁️ Cloud: info tooltip."
+  },
+  "engine.cl.ms": "{n, number} ms",
+  "@engine.cl.ms": {
+    "description": "Cloud check: how long a step took, in milliseconds.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.checksFailed": "{n, plural, one {# check(s) failed — follow the 👉 hints.} other {# check(s) failed — follow the 👉 hints.}}",
+  "@engine.cl.checksFailed": {
+    "description": "Cloud check result when some steps failed. (English keeps “check(s)”.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.cl.allWorks": "Everything works with the real cloud ✔",
+  "@engine.cl.allWorks": {
+    "description": "Cloud check result when all steps passed."
+  },
+  "engine.cl.runCheck": "Run the check",
+  "@engine.cl.runCheck": {
+    "description": "Account menu › ☁️ Cloud: button (after 🩺)."
+  },
+  "engine.cl.checkNote": "Takes a few seconds. Nothing of yours is changed: test data is deleted right away.",
+  "@engine.cl.checkNote": {
+    "description": "Account menu › ☁️ Cloud: note above the check button."
+  },
+  "engine.help.intro": "Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.",
+  "@engine.help.intro": {
+    "description": "Account menu › ❓ Help: intro above the setup guides."
+  },
+  "engine.help.done": "done",
+  "@engine.help.done": {
+    "description": "Help: status pill of a guide whose setup is done. Lowercase."
+  },
+  "engine.help.notSetUp": "not set up",
+  "@engine.help.notSetUp": {
+    "description": "Help: status pill of a guide not set up yet. Lowercase."
+  },
+  "engine.help.apiKeyHere": "API key here",
+  "@engine.help.apiKeyHere": {
+    "description": "Help: status pill of the Claude guide when a key is set on this device."
+  },
+  "engine.cl.syncError": "Sync error: {error}",
+  "@engine.cl.syncError": {
+    "description": "Tooltip of the sync dot when syncing failed. error = the reason.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "offline"
+      }
+    }
+  },
+  "engine.cl.waiting": "Changes waiting to sync",
+  "@engine.cl.waiting": {
+    "description": "Tooltip of the sync dot."
+  },
+  "engine.cl.allSynced": "All changes synced",
+  "@engine.cl.allSynced": {
+    "description": "Tooltip of the sync dot."
+  },
+  "engine.help.moreInfo": "More info",
+  "@engine.help.moreInfo": {
+    "description": "Screen-reader label of the small ⓘ that shows an explanation."
+  },
+  "engine.help.how": "How?",
+  "@engine.help.how": {
+    "description": "Default label of a button (after a guide’s emoji) that opens a setup guide."
+  },
+  "engine.setup.gemini": "The AI tutor is off: add your free Gemini key.",
+  "@engine.setup.gemini": {
+    "description": "Setup banner on the subject’s page during the first sessions (after 🔑)."
+  },
+  "engine.setup.backup": "Your progress lives only in this browser: turn on backups (folder, Google Drive or cloud).",
+  "@engine.setup.backup": {
+    "description": "Setup banner (after 💾)."
+  },
+  "engine.setup.setUp": "Set up",
+  "@engine.setup.setUp": {
+    "description": "Setup banner button."
+  },
+  "engine.setup.dismiss": "Dismiss",
+  "@engine.setup.dismiss": {
+    "description": "Tooltip of the ✕ that hides an item of the setup banner."
+  },
+  "engine.setup.optional": "Optional · shown during your first sessions ({n, number}/{of, number})",
+  "@engine.setup.optional": {
+    "description": "Small line under the setup banner: n = sessions so far, of = how many sessions it shows.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.setup.allGuides": "all setup guides",
+  "@engine.setup.allGuides": {
+    "description": "Link at the end of the setup banner’s small line (opens Help). Lowercase."
+  },
+  "engine.guide.mcpPlaceholder": "<your site>/mcp",
+  "@engine.guide.mcpPlaceholder": {
+    "description": "In the Claude setup guide when the site’s address is unknown: a placeholder for “the address of your noema-lite website + /mcp”. Keep “/mcp”."
+  },
+  "engine.guide.gemini.title": "Get your free Gemini API key",
+  "@engine.guide.gemini.title": {
+    "description": "Title (after 🔑) of a setup guide in Help."
+  },
+  "engine.guide.gemini.who": "Everyone who wants the AI tutor",
+  "@engine.guide.gemini.who": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.gemini.step1": "Open **Google AI Studio** → https://aistudio.google.com/apikey and sign in with your Google account.",
+  "@engine.guide.gemini.step1": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.step2": "Click **Create API key** (accept the terms if asked) and copy the key (it starts with `AIza…`).",
+  "@engine.guide.gemini.step2": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.step3": "In this app: **⚙️ Settings → Gemini API key** → paste → **🔍 Detect models** → **🧪 Test**. You should see “Brick is ready”.",
+  "@engine.guide.gemini.step3": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.step4": "Done. On a cloud account the key follows you privately to all your devices; on a local profile it stays in this browser.",
+  "@engine.guide.gemini.step4": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.note1": "The key is personal — don’t share it. Each friend uses their own (it is free with generous limits).",
+  "@engine.guide.gemini.note1": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.note2": "Without a key everything works except the tutor, AI grading and AI-generated questions.",
+  "@engine.guide.gemini.note2": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): note 2 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.title": "Automatic backups to a folder (Google Drive / iCloud too)",
+  "@engine.guide.backupFolder.title": {
+    "description": "Title (after 📁) of a setup guide in Help."
+  },
+  "engine.guide.backupFolder.who": "Chrome, Edge or Brave on a computer",
+  "@engine.guide.backupFolder.who": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.backupFolder.step1": "Account menu (your emoji, top-right) → **💾 Backup & restore → 📁 Automatic backups** → **Choose backup folder**.",
+  "@engine.guide.backupFolder.step1": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.step2": "Pick your profile folder, e.g. **noema-lite/accounts/{acc}** (any folder works). The app creates **backups/** and **conversations/** inside it.",
+  "@engine.guide.backupFolder.step2": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. acc = the profile’s id.",
+    "placeholders": {
+      "acc": {
+        "type": "String",
+        "example": "anr"
+      }
+    }
+  },
+  "engine.guide.backupFolder.step3": "From now on: a backup file every few minutes when something changed (and when you leave), and every AI conversation as **.json + .md** within ~20 seconds.",
+  "@engine.guide.backupFolder.step3": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.step4": "**Off-site for free:** install **Google Drive for desktop** (https://www.google.com/drive/download/) and choose a folder inside **Google Drive → My Drive** — or a folder in **iCloud Drive**. Your backups then reach the cloud automatically.",
+  "@engine.guide.backupFolder.step4": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.step5": "After a browser restart the browser may ask again: open the menu and click **Resume** once.",
+  "@engine.guide.backupFolder.step5": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.note1": "Safari/Firefox can’t write to folders: use **Download backup** instead (or a cloud account).",
+  "@engine.guide.backupFolder.note1": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.title": "Restoring data",
+  "@engine.guide.restore.title": {
+    "description": "Title (after ♻️) of a setup guide in Help."
+  },
+  "engine.guide.restore.who": "Everyone",
+  "@engine.guide.restore.who": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.restore.step1": "**Restore points** (this device) are created automatically before every restore or reset — the quickest undo.",
+  "@engine.guide.restore.step1": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.step2": "**From a file:** 💾 Backup & restore → Restore from a backup file → choose **Replace** (exact copy), **Merge** (backup wins on conflicts) or **New profile** (side by side).",
+  "@engine.guide.restore.step2": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.step3": "**Cloud accounts:** ☁️ Cloud → Cloud snapshots → Restore (a snapshot of the current state is taken first).",
+  "@engine.guide.restore.step3": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.step4": "**Everything (owner):** the SQLite database in noema-lite/data can recreate any file of any past version: `python3 tools/db_restore.py list`.",
+  "@engine.guide.restore.step4": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.title": "Use a cloud account (study from anywhere)",
+  "@engine.guide.cloudUser.title": {
+    "description": "Title (after ☁️) of a setup guide in Help."
+  },
+  "engine.guide.cloudUser.who": "You and your friends",
+  "@engine.guide.cloudUser.who": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.cloudUser.step1": "Open the website{hasSite, select, yes { ({site})} other {}} on any device → **☁️ Sign in / create a cloud account**.",
+  "@engine.guide.cloudUser.step1": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. hasSite = yes/no: whether the site’s address {site} is known.",
+    "placeholders": {
+      "hasSite": {
+        "type": "String",
+        "example": "yes"
+      },
+      "site": {
+        "type": "String",
+        "example": "https://noema.example.org"
+      }
+    }
+  },
+  "engine.guide.cloudUser.step2": "Create the account (email + password). If asked, confirm the email from your inbox, then sign in.",
+  "@engine.guide.cloudUser.step2": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.step3": "Add your Gemini key (⚙️ Settings) once on each device: it stays in that browser. Progress, flashcards, conversations and settings sync automatically.",
+  "@engine.guide.cloudUser.step3": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.step4": "Already studied locally? In the local app: account menu → ☁️ Cloud → sign in → **⬆️ Copy this profile into my cloud account**.",
+  "@engine.guide.cloudUser.step4": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.note1": "Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.",
+  "@engine.guide.cloudUser.note1": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.title": "Set up the cloud (owner, once)",
+  "@engine.guide.cloudOwner.title": {
+    "description": "Title (after 🛠️) of a setup guide in Help."
+  },
+  "engine.guide.cloudOwner.who": "Only the owner of this installation",
+  "@engine.guide.cloudOwner.who": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.cloudOwner.step1": "**Supabase** (accounts + sync): https://supabase.com → New project (region Frankfurt) → **SQL Editor** → run the whole file **cloud/supabase.sql**.",
+  "@engine.guide.cloudOwner.step1": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step2": "Supabase: the **Project URL** is `https://<project-ref>.supabase.co` (the ref is in your dashboard address) and the **publishable key** (`sb_publishable_…`) is under **Project Settings → API Keys** → put both in **config.js** (or give them to Claude). Never share the secret key or the database password.",
+  "@engine.guide.cloudOwner.step2": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step3": "**Netlify** (website): https://app.netlify.com → Add new site → Import from GitHub → pick the repo → Deploy (settings come from netlify.toml).",
+  "@engine.guide.cloudOwner.step3": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step4": "Supabase → **Authentication → URL Configuration → Site URL** = your Netlify address.",
+  "@engine.guide.cloudOwner.step4": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step5": "Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.",
+  "@engine.guide.cloudOwner.step5": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.title": "Keep the repository on GitHub (owner)",
+  "@engine.guide.github.title": {
+    "description": "Title (after 🐙) of a setup guide in Help."
+  },
+  "engine.guide.github.who": "Only the owner",
+  "@engine.guide.github.who": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.github.step1": "Install **GitHub Desktop** (https://desktop.github.com) and sign in.",
+  "@engine.guide.github.step1": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.step2": "**File → Add Local Repository** → choose Documents/MyApps/noema-lite.",
+  "@engine.guide.github.step2": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.step3": "**Publish repository** → keep **Keep this code private** ticked.",
+  "@engine.guide.github.step3": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.step4": "Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.",
+  "@engine.guide.github.step4": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.title": "Set up Claude and create subjects (three ways)",
+  "@engine.guide.claude.title": {
+    "description": "Title (after ✨) of a setup guide in Help."
+  },
+  "engine.guide.claude.who": "Everyone",
+  "@engine.guide.claude.who": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.claude.step1": "Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.",
+  "@engine.guide.claude.step1": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step2": "**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.",
+  "@engine.guide.claude.step2": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step3": "**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address {mcp} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.",
+  "@engine.guide.claude.step3": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. mcp = the connector’s address.",
+    "placeholders": {
+      "mcp": {
+        "type": "String",
+        "example": "https://noema.example.org/mcp"
+      }
+    }
+  },
+  "engine.guide.claude.step4": "**Way C — a whole Roadmap with your Claude plan (⭐ recommended for Roadmaps, usually the cheapest):** set up the connector as in way B, then in 🧭 Roadmaps choose **💬 Claude app** when you create or import a Roadmap. Copy the one message noema-lite shows into a Claude chat: Claude builds the Roadmap, plans the chapters and prepares the queued steps; they appear on the Roadmap by themselves. No API cost — the bigger the Roadmap, the bigger the saving.",
+  "@engine.guide.claude.step4": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step5": "Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.",
+  "@engine.guide.claude.step5": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step6": "Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.",
+  "@engine.guide.claude.step6": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 6. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.note1": "Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.",
+  "@engine.guide.claude.note1": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.note2": "Updates are additive: Claude keeps all ids, so your progress stays.",
+  "@engine.guide.claude.note2": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): note 2 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.title": "Roadmaps: from a goal to a Roadmap of steps",
+  "@engine.guide.curricula.title": {
+    "description": "Title (after 🧭) of a setup guide in Help."
+  },
+  "engine.guide.curricula.who": "Everyone with a Claude API key or a Gemini key",
+  "@engine.guide.curricula.who": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.curricula.step1": "Subject picker → **🧭 Roadmaps** (or 🧭 in the top bar) → **➕ New Roadmap**.",
+  "@engine.guide.curricula.step1": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step2": "Type what you want to master, your starting point and the depth. Four AI agents lay it out: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.",
+  "@engine.guide.curricula.step2": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step3": "The Roadmap shows three parts. **open** steps (green open padlock) can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.",
+  "@engine.guide.curricula.step3": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step4": "Every step becomes a full subject (theory, exercises, flashcards, drills, tutor), prepared in the background a few steps ahead while the app is open — with Claude from official sources found on the web, or with Gemini and Google Search.",
+  "@engine.guide.curricula.step4": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step5": "A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).",
+  "@engine.guide.curricula.step5": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step6": "Already have a subject for a step? On the step: **📦 Use a subject I have**. Only that step is re-planned to follow the subject (🔄 until its new plan is here); it is never generated. Subjects on no step wait on the **📚 Shelf** (bottom of the subject picker): study them there, or **🧭 Put on a Roadmap…**.",
+  "@engine.guide.curricula.step6": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 6. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.note1": "Roadmaps and prepared steps are saved in your account (cloud) like your subjects.",
+  "@engine.guide.curricula.note1": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.note2": "Claude costs a few dollars per prepared step (limit per step in ⚙️ of the Roadmap); Gemini’s free quota is limited.",
+  "@engine.guide.curricula.note2": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): note 2 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.title": "Invite friends",
+  "@engine.guide.friends.title": {
+    "description": "Title (after 👥) of a setup guide in Help."
+  },
+  "engine.guide.friends.who": "You",
+  "@engine.guide.friends.who": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.friends.step1": "Send them the website link{hasSite, select, yes { ({site})} other {}}.",
+  "@engine.guide.friends.step1": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. hasSite = yes/no: whether the site’s address {site} is known.",
+    "placeholders": {
+      "hasSite": {
+        "type": "String",
+        "example": "yes"
+      },
+      "site": {
+        "type": "String",
+        "example": "https://noema.example.org"
+      }
+    }
+  },
+  "engine.guide.friends.step2": "Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.",
+  "@engine.guide.friends.step2": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.step3": "Each friend adds **their own free Gemini key** (guide: “Get your free Gemini API key”).",
+  "@engine.guide.friends.step3": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.step4": "Want to give them one of your subjects? Subject picker → **🔗** on the subject → *Share with a person* (their e-mail) — they get a 🔔 and accept. Or **🌍 Make it public** so everybody finds it in Explore.",
+  "@engine.guide.friends.step4": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.note1": "Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.",
+  "@engine.guide.friends.note1": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  }
+}

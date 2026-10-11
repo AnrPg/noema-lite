@@ -1,6 +1,10 @@
 /* ===================== Exercise engine ===================== */
-const TYPE_LABEL = { mcq: '🎯 Choose', tf: '⚖️ True / False', odd: '🕵️ Odd one out', order: '🔢 Put in order', match: '🔗 Match', bucket: '🗂️ Sort', cloze: '✍️ Fill the gaps', spotbug: '🐞 Spot the bug', calc: '🧮 Calculate', scenario: '🚨 Debug simulation', free: '🗣️ Explain it', write: '⌨️ Write the code' };
-const TAG_LABEL = { concept: 'concept', syntax: 'syntax', pitfall: '⚠️ pitfall', debug: '🔧 debug', exam: '🎓 exam trap', interview: '🎤 interview', calc: '🧮 calc', compare: '⚖️ compare' };
+/* The label of an exercise type / tag: its emoji + its words in the UI language (engine.exType.<type>, engine.exTag.<tag>).
+   TYPE_LABEL[type] reads like the old map; other modules add their types' emoji to TYPE_ICON (35_visual.js). */
+const TYPE_ICON = { mcq: '🎯', tf: '⚖️', odd: '🕵️', order: '🔢', match: '🔗', bucket: '🗂️', cloze: '✍️', spotbug: '🐞', calc: '🧮', scenario: '🚨', free: '🗣️', write: '⌨️' };
+const TAG_ICON = { concept: '', syntax: '', pitfall: '⚠️', debug: '🔧', exam: '🎓', interview: '🎤', calc: '🧮', compare: '⚖️' };
+const iconLabel = (icons, prefix) => new Proxy(icons, { get: (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k) ? (o[k] ? o[k] + ' ' : '') + tE(prefix + k) : undefined });
+const TYPE_LABEL = iconLabel(TYPE_ICON, 'engine.exType.'), TAG_LABEL = iconLabel(TAG_ICON, 'engine.exTag.');
 const PAIR_COLORS = ['#7c5cff', '#ff922b', '#12b5a5', '#e64fa5', '#3b9cf6', '#40c057', '#f2a20c'];
 
 /* Each renderer returns { el, check(): true|false|null, reveal(), auto?: bool, selfDone?: bool } */
@@ -18,7 +22,7 @@ R.mcq = (ex, api) => {
     b._oi = oi; return b;
   });
   wrap.append(...btns);
-  const el = h('div', {}, multi ? h('div', { class: 'tiny', style: { marginBottom: '8px' } }, `Select ALL that apply (${ans.size}).`) : null, wrap);
+  const el = h('div', {}, multi ? h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.selectAll', { n: ans.size })) : null, wrap);
   return {
     el, keys: k => { const b = btns[k]; b && b.click(); },
     check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
@@ -31,7 +35,7 @@ R.odd = (ex, api) => { const r = R.mcq(ex, api); r.el.querySelector('.opts').cla
 R.tf = (ex, api) => {
   let pick = null;
   const mk = (v, label, cls) => h('button', { class: 'tfbtn ' + cls, onclick: () => { if (api.locked()) return; pick = v; api.check(); } }, label);
-  const t = mk(true, '👍 True', 't'), f = mk(false, '👎 False', 'f');
+  const t = mk(true, '👍 ' + tE('engine.ex.true'), 't'), f = mk(false, '👎 ' + tE('engine.ex.false'), 'f');
   return {
     el: h('div', { class: 'tfrow' }, t, f), keys: k => (k === 0 ? t : k === 1 ? f : null)?.click(),
     check: () => pick === null ? null : pick === ex.answer,
@@ -46,8 +50,8 @@ R.order = (ex, api) => {
   const items = shuffle(ex.items.map((t, i) => ({ t, i })));
   function draw() {
     seq.innerHTML = ''; pool.innerHTML = '';
-    if (!picked.length) seq.append(h('div', { class: 'ph' }, 'Tap the items below in the right order ↓'));
-    picked.forEach((it, k) => seq.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.splice(k, 1); draw(); } }, h('span', { class: 'no' }, k + 1), F(it.t))));
+    if (!picked.length) seq.append(h('div', { class: 'ph' }, tE('engine.ex.orderHint')));
+    picked.forEach((it, k) => seq.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.splice(k, 1); draw(); } }, h('span', { class: 'no' }, nf(k + 1)), F(it.t))));
     items.filter(it => !picked.includes(it)).forEach(it => pool.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.push(it); draw(); } }, F(it.t))));
   }
   draw();
@@ -57,7 +61,7 @@ R.order = (ex, api) => {
     given: () => picked.map(it => it.t).join(' → '),
     reveal() {
       $$('.chipx', seq).forEach((b, k) => b.classList.add(picked[k].i === k ? 'right' : 'wrong'));
-      if (!picked.every((it, k) => it.i === k)) seq.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct order: '), h('ol', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.items.map(t => h('li', { html: fmt(t) })))));
+      if (!picked.every((it, k) => it.i === k)) seq.after(h('div', { class: 'fb info' }, h('b', {}, tE('engine.ex.correctOrder') + ' '), h('ol', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.items.map(t => h('li', { html: fmt(t) })))));
     },
   };
 };
@@ -72,19 +76,19 @@ R.match = (ex, api) => {
     const used = Object.entries(link);
     Object.values(lb).forEach(b => { b.classList.remove('sel'); b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
     Object.values(rb).forEach(b => { b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
-    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, k + 1)); }); });
+    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, nf(k + 1))); }); });
     if (selL != null) lb[selL].classList.add('sel');
   }
   L.forEach(it => { lb[it.i] = h('button', { class: 'mitem', onclick: () => { if (api.locked()) return; if (link[it.i] != null) { delete link[it.i]; } selL = selL === it.i ? null : it.i; paint(); } }, F(it.t)); lcol.append(lb[it.i]); });
   Rr.forEach(it => { rb[it.i] = h('button', { class: 'mitem', onclick: () => { if (api.locked()) return; const owner = Object.keys(link).find(k => link[k] === it.i); if (owner != null) delete link[owner]; if (selL != null) { link[selL] = it.i; selL = null; const next = L.find(x => link[x.i] == null); if (next) selL = next.i; } paint(); } }, F(it.t)); rcol.append(rb[it.i]); });
   selL = 0; paint();
   return {
-    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap a left item, then its partner on the right.'), h('div', { class: 'matchgrid' }, lcol, rcol)),
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.matchHint')), h('div', { class: 'matchgrid' }, lcol, rcol)),
     check: () => Object.keys(link).length < L.length ? null : L.every(it => link[it.i] === it.i),
     given: () => L.filter(it => link[it.i] != null).map(it => it.t + ' = ' + ex.pairs[link[it.i]][1]).join('; '),
     reveal() {
       L.forEach(it => { const ok = link[it.i] === it.i; lb[it.i].classList.add(ok ? 'right' : 'wrong'); });
-      if (!L.every(it => link[it.i] === it.i)) lcol.parentElement.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct pairs:'), h('ul', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.pairs.map(p => h('li', { html: fmt(p[0]) + ' → ' + fmt(p[1]) })))));
+      if (!L.every(it => link[it.i] === it.i)) lcol.parentElement.after(h('div', { class: 'fb info' }, h('b', {}, tE('engine.ex.correctPairs')), h('ul', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.pairs.map(p => h('li', { html: fmt(p[0]) + ' → ' + fmt(p[1]) })))));
     },
   };
 };
@@ -110,11 +114,11 @@ R.bucket = (ex, api) => {
     pool.innerHTML = ''; zones.forEach(z => z.querySelector('.pool').innerHTML = '');
     items.forEach(it => (place[it.i] == null ? pool : zones[place[it.i]].querySelector('.pool')).append(chip(it)));
     zones.forEach(z => z.classList.toggle('hot', sel != null));
-    if (!pool.children.length) pool.append(h('span', { class: 'tiny' }, 'All sorted — check it!'));
+    if (!pool.children.length) pool.append(h('span', { class: 'tiny' }, tE('engine.ex.allSorted')));
   }
   draw();
   return {
-    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap an item, then tap its bucket (or drag).'), pool, h('div', { class: 'buckets' }, ...zones)),
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.bucketHint')), pool, h('div', { class: 'buckets' }, ...zones)),
     check: () => Object.keys(place).length < items.length ? null : items.every(it => place[it.i] === it.bucket),
     given: () => items.filter(it => place[it.i] != null).map(it => it.text + ' → ' + ex.buckets[place[it.i]]).join('; '),
     reveal() { zones.forEach(z => $$('.chipx', z).forEach(b => { const ok = place[b._it.i] === b._it.bucket; b.classList.add(ok ? 'right' : 'wrong'); if (!ok) b.append(h('small', { style: { opacity: .8 } }, ' → ' + ex.buckets[b._it.bucket])); })); },
@@ -168,10 +172,10 @@ R.spotbug = (ex, api) => {
   const lines = ex.lines.map((l, i) => h('button', { onclick: () => { if (api.locked()) return; sel.has(i) ? sel.delete(i) : sel.add(i); lines[i].classList.toggle('sel'); } }, h('span', { class: 'ln' }, i + 1), h('span', { html: highlight(l, ex.lang || guessLang(ex.lines.join('\n'))) })));
   const bugs = new Set(ex.bugs);
   return {
-    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, `Click the buggy line${bugs.size > 1 ? 's (' + bugs.size + ')' : ''}.`), h('div', { class: 'codelines' }, ...lines)),
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.spotbugHint', { n: bugs.size })), h('div', { class: 'codelines' }, ...lines)),
     check: () => !sel.size ? null : sel.size === bugs.size && [...sel].every(i => bugs.has(i)),
-    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),
-    reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 Fix'), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
+    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),   // i18n-ignore (for the AI)
+    reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 ' + tE('engine.ex.fix')), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
   };
 };
 
@@ -190,7 +194,7 @@ R.scenario = (ex, api) => {
   let k = 0, mistakes = 0;
   function step() {
     const st = ex.steps[k];
-    const div = h('div', { class: 'scstep' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, `Step ${k + 1}/${ex.steps.length}`), ' ', F(st.prompt)), st.code ? codeBlock(st.code, guessLang(st.code)) : null);
+    const div = h('div', { class: 'scstep' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, tE('engine.ex.step', { n: k + 1, of: ex.steps.length })), ' ', F(st.prompt)), st.code ? codeBlock(st.code, guessLang(st.code)) : null);
     const opts = h('div', { class: 'opts' });
     const fbBox = h('div');
     let done = false;
@@ -202,7 +206,7 @@ R.scenario = (ex, api) => {
           done = true; b.classList.add('right'); beep('ok');
           fbBox.append(h('div', { class: 'fb ok', html: '✅ ' + fmt(o.fb) }));
           k++;
-          if (k < ex.steps.length) fbBox.append(h('div', { style: { marginTop: '10px' } }, h('button', { class: 'btn small primary', onclick: e => { e.target.remove(); step(); } }, 'Next step →')));
+          if (k < ex.steps.length) fbBox.append(h('div', { style: { marginTop: '10px' } }, h('button', { class: 'btn small primary', onclick: e => { e.target.remove(); step(); } }, tE('engine.ex.nextStep'))));
           else api.done(mistakes === 0, mistakes);
         } else { mistakes++; b.classList.add('wrong', 'shake'); beep('bad'); fbBox.append(h('div', { class: 'fb bad', html: '❌ ' + fmt(o.fb) })); }
       } }, h('span', { class: 'k' }, String.fromCharCode(65 + i)), F(o.text));
@@ -216,41 +220,41 @@ R.scenario = (ex, api) => {
 };
 
 R.free = (ex, api) => {
-  const ta = h('textarea', { class: 'answer', placeholder: 'Explain in your own words… (aim for 2–5 sentences)' });
+  const ta = h('textarea', { class: 'answer', placeholder: tE('engine.ex.freePlaceholder') });
   const out = h('div');
   let finished = false;
   const finish = ok => { if (finished) return; finished = true; api.done(ok); };
   const aiBtn = h('button', { class: 'btn ai', onclick: async () => {
     if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; }
-    aiBtn.disabled = true; aiBtn.textContent = '✨ Grading…';
+    aiBtn.disabled = true; aiBtn.textContent = '✨ ' + tE('engine.ex.grading');
     try {
       const g = await aiGrade(ex, ta.value);
       const sc = Math.max(0, Math.min(100, g.score | 0));
       out.innerHTML = '';
       out.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score', style: { background: sc >= 70 ? 'var(--ok)' : sc >= 45 ? 'var(--warn)' : 'var(--bad)' } }, sc), h('b', { class: 'grow', html: fmt(g.verdict) })),
         g.covered?.length ? h('div', { style: { marginTop: '8px' } }, '✅ ', F(g.covered.join(' · '))) : null,
-        g.missing?.length ? h('div', { style: { marginTop: '4px' } }, '➕ Missing: ', F(g.missing.join(' · '))) : null,
+        g.missing?.length ? h('div', { style: { marginTop: '4px' } }, '➕ ' + tE('engine.ex.missing') + ' ', F(g.missing.join(' · '))) : null,
         g.mistakes?.length ? h('div', { style: { marginTop: '4px' } }, '❌ ', F(g.mistakes.join(' · '))) : null,
         h('div', { style: { marginTop: '8px' } }, md(g.feedback))));
       out.append(modelBox());
       finish(sc >= 70);
-    } catch (e) { out.innerHTML = ''; out.append(h('div', { class: 'fb bad' }, '⚠️ ' + e.message + ' — use Self-check instead.')); aiBtn.disabled = false; aiBtn.textContent = '✨ Grade with AI'; }
-  } }, '✨ Grade with AI');
-  const modelBox = () => h('div', { class: 'explain' }, h('div', { class: 'hd' }, '📘 Model answer'), F(ex.model));
+    } catch (e) { out.innerHTML = ''; out.append(h('div', { class: 'fb bad' }, '⚠️ ' + tE('engine.ex.aiFailedSelf', { error: errText(e) }))); aiBtn.disabled = false; aiBtn.textContent = '✨ ' + tE('engine.ex.gradeAI'); }
+  } }, '✨ ' + tE('engine.ex.gradeAI'));
+  const modelBox = () => h('div', { class: 'explain' }, h('div', { class: 'hd' }, '📘 ' + tE('engine.ex.modelAnswer')), F(ex.model));
   const selfBtn = h('button', { class: 'btn', onclick: () => {
     selfBtn.disabled = true; out.innerHTML = '';
     const checks = ex.rubric.map(r => h('input', { type: 'checkbox' }));
-    out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ Tick what your answer covered'), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
-      h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, 'Done')));
-  } }, '🙋 Self-check');
+    out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ ' + tE('engine.ex.tickCovered')), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
+      h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, tE('engine.ex.done'))));
+  } }, '🙋 ' + tE('engine.ex.selfCheck'));
   return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus(), given: () => ta.value.trim() };
 };
 
 R.write = (ex, api) => {
-  const ta = h('textarea', { class: 'answer code', spellcheck: 'false', placeholder: '-- write your ' + (ex.lang || 'code') + ' here', onkeydown: e => { if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 2; } } });
+  const ta = h('textarea', { class: 'answer code', spellcheck: 'false', placeholder: ex.lang ? tE('engine.ex.writeLang', { lang: ex.lang }) : tE('engine.ex.writeCode'), onkeydown: e => { if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 2; } } });
   const missing = () => ex.keywords.filter(k => !ta.value.toLowerCase().replace(/\s+/g, ' ').includes(k.toLowerCase().replace(/\s+/g, ' ')));
   return {
-    el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, 'Checked locally for the essential keywords; use ✨ AI review for a real code review.')),
+    el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, tE('engine.ex.writeNote'))),
     focus: () => ta.focus(),
     check() { if (!ta.value.trim()) return null; return missing().length === 0; },
     given: () => ta.value.trim() ? '\n```\n' + ta.value.trim() + '\n```\n' : '',
@@ -258,13 +262,13 @@ R.write = (ex, api) => {
       ta.readOnly = true;
       const m = missing();
       const box = h('div', {});
-      if (m.length) box.append(h('div', { class: 'fb bad' }, 'Missing essentials: ', ...m.map(k => h('code', { style: { marginRight: '4px' } }, k))));
-      box.append(h('div', { class: 'explain' }, h('div', { class: 'hd' }, '✅ Reference solution'), codeBlock(ex.solution, ex.lang || guessLang(ex.solution))));
+      if (m.length) box.append(h('div', { class: 'fb bad' }, tE('engine.ex.missingEssentials') + ' ', ...m.map(k => h('code', { style: { marginRight: '4px' } }, k))));
+      box.append(h('div', { class: 'explain' }, h('div', { class: 'hd' }, '✅ ' + tE('engine.ex.refSolution')), codeBlock(ex.solution, ex.lang || guessLang(ex.solution))));
       const aiBtn = h('button', { class: 'btn small ai', style: { marginTop: '10px' }, onclick: async () => {
-        aiBtn.disabled = true; aiBtn.textContent = '✨ Reviewing…';
-        try { const g = await aiGrade(ex, ta.value); aiBtn.replaceWith(h('div', { class: 'fb ai' }, h('b', {}, `AI review: ${g.score}/100 — `), F(g.verdict), h('div', { style: { marginTop: '6px' } }, md(g.feedback)))); }
-        catch (e) { aiBtn.replaceWith(h('div', { class: 'fb bad' }, '⚠️ ' + e.message)); }
-      } }, '✨ AI review of my code');
+        aiBtn.disabled = true; aiBtn.textContent = '✨ ' + tE('engine.ex.reviewing');
+        try { const g = await aiGrade(ex, ta.value); aiBtn.replaceWith(h('div', { class: 'fb ai' }, h('b', {}, tE('engine.ex.aiReview', { score: g.score }) + ' '), F(g.verdict), h('div', { style: { marginTop: '6px' } }, md(g.feedback)))); }
+        catch (e) { aiBtn.replaceWith(h('div', { class: 'fb bad' }, '⚠️ ' + errText(e))); }
+      } }, '✨ ' + tE('engine.ex.aiReviewBtn'));
       box.append(aiBtn);
       ta.after(box);
     },
@@ -291,30 +295,30 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   };
   const head = h('div', { class: 'exhead' },
     h('span', { class: 'pill c' }, TYPE_LABEL[ex.type] || ex.type),
-    h('span', { class: 'diff', title: 'difficulty ' + ex.difficulty }, ...[1, 2, 3].map(i => h('i', { class: i <= ex.difficulty ? 'on' : '' }))),
+    h('span', { class: 'diff', title: tE('engine.ex.difficulty', { n: ex.difficulty }) }, ...[1, 2, 3].map(i => h('i', { class: i <= ex.difficulty ? 'on' : '' }))),
     ...(ex.tags || []).filter(t => t !== 'concept').map(t => h('span', { class: 'pill' }, TAG_LABEL[t] || t)),
     newPill(ex),
-    ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ AI-made') : null,
-    showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, `Ch${ch.num} · ${SEC[ex.section].title}`) : null);
+    ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ ' + tE('engine.ex.aiMade')) : null,
+    showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, chTitle(ch.num, SEC[ex.section].title)) : null);
   const q = h('div', { class: 'q', html: fmt(ex.q || '') });
   card.append(head, q);
   if (ex.code) card.append(h('div', { style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
   const w = (R[ex.type] || R.mcq)(ex, api);
   card.append(w.el);
   const actions = h('div', { class: 'actions' });
-  const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
+  const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, tE('engine.ex.check'));
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
   const ask = () => askAIAbout(ex, null, givenOf(w));
   if (SHL()) {   // the frame: a quiet "Ask <character>" in the card's top corner
     card.classList.add('has-ask');
     const b = askBuddyBtn(ask); b.style.marginLeft = showSection && SEC[ex.section] ? '8px' : 'auto'; head.append(b);
-  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} Ask ${TUTOR.name}`));
+  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} ` + tE('engine.ex.askTutor', { tutor: TUTOR.name })));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;
     const r = w.check();
-    if (r === null) { nudge.textContent = 'Finish your answer first 🙂'; card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); return; }
+    if (r === null) { nudge.textContent = tE('engine.ex.finishFirst'); card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); return; }
     finish(r, false);
   }
   function finish(ok, selfReported) {
@@ -326,10 +330,10 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!ex._ai) record(ex, ok);
     const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
-    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne(['✅ Nailed it!', '✅ Correct!', '🎉 Yes!', '✅ Spot on!', '🔥 Exactly!']) : pickOne(['💡 Not quite — here’s the key', '🧠 Learning moment', '💡 Close — look at this'])), h('div', { html: fmt(ex.explain || '') }));
+    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { html: fmt(ex.explain || '') }));
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
-      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} Help me get it (Socratic)`),
-      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 Explain differently')));
+      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} ` + tE('engine.ex.helpSocratic')),
+      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 ' + tE('engine.ex.explainDiff'))));
     card.append(exp);
     window.NoemaReact?.answered(!!ok, { hard: ex.difficulty >= 3 });   // the character reacts (rarely big: engine/react.js)
     if (onDone) onDone(ok, card);
@@ -340,6 +344,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   return card;
 }
 const pickOne = a => a[Math.random() * a.length | 0];
+/* i18n-ignore-start */   // the exercise as context for the AI's prompts, and the learner's first messages to the AI (prompts: English)
 function exerciseAsText(ex) {
   let t = `Exercise (${ex.type}): ${ex.q || ''}\n`;
   if (ex.code) t += 'Code:\n' + ex.code + '\n';
@@ -374,3 +379,4 @@ function askAIAbout(ex, mode, given = '') {
   else if (m === 'socratic') openTutor(ctx, 'socratic', `I got this exercise wrong${mine}. Help me get it — don't just give me the answer.`, { intent: INTENT.exSocratic(given) });
   else openTutor(ctx, 'hint', 'Give me a hint for this exercise — don\'t tell me the answer.', { intent: INTENT.exHint(given) });
 }
+/* i18n-ignore-end */

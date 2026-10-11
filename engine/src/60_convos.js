@@ -83,22 +83,27 @@ function currentConvo() {
 }
 
 /* ---------- titles: succinct, descriptive, canonical ---------- */
-const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js)
+const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js) — English: for the AI's prompts and file names (i18n-ignore)
+/** A conversation's mode for the learner: this app's modes in the UI language, other apps' as they name them. */
+const cvModeName = m => ['socratic', 'explain', 'quiz', 'interview', 'debug'].includes(m) ? tE('engine.cv.mode_' + m) : (MODE_NAME[m] || m);
 const fromApp = cv => Noema.convos?.fromApp?.(cv) || null;
 function cleanTitle(t) {
   return String(t || '').split('\n')[0].replace(/^\s*(title\s*:\s*)/i, '').replace(/[*_#`"“”'‘’]/g, '')
     .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').replace(/\s+/g, ' ').replace(/[\s.:;,!-]+$/, '').trim().slice(0, 90);
 }
 function fallbackTitle(cv) {
-  const topic = cv.ctx?.label?.replace(/^Ch\d+\s*·\s*/, '') || (cv.msgs.find(m => m.role === 'user')?.text || SUBJ.title).split(/\s+/).slice(0, 7).join(' ');
-  return cleanTitle(`${topic}`) || `${SUBJ.title} Tutoring Session`;
+  const topic = (cv.ctx?.label && stripCh(cv.ctx.label)) || (cv.msgs.find(m => m.role === 'user')?.text || SUBJ.title).split(/\s+/).slice(0, 7).join(' ');
+  return cleanTitle(`${topic}`) || tE('engine.cv.fallbackTitle', { title: SUBJ.title });
 }
 const displayTitle = cv => cv.title || fallbackTitle(cv);
-const KIND_BADGE = { tutor: '', grading: '📝 grading', 'code-review': '⌨️ code review', question: '✨ AI question', 'drill-grading': '🔧 drill grading' };
+const KIND_ICON = { grading: '📝', 'code-review': '⌨️', question: '✨', 'drill-grading': '🔧' };
+/** The badge of a one-shot AI record (grading, code review …) in the conversation list. */
+const kindBadge = k => KIND_ICON[k] ? KIND_ICON[k] + ' ' + tE('engine.cv.kind_' + k.replace('-', '_')) : '';
 async function generateTitle(cv) {
   if (CV.titling.has(cv.id)) return cv.title;
   CV.titling.add(cv.id);
   try {
+    /* i18n-ignore-start */   // the title prompt (English; it asks for the chat language when one is chosen)
     const transcript = cv.msgs.map(m => (m.role === 'user' ? 'Learner: ' : 'Tutor: ') + m.text).join('\n\n').slice(0, 9000);
     const prompt = `Write the title for this ${TUTOR.domain} tutoring conversation (mode: ${MODE_NAME[cv.mode] || cv.mode}; context: ${cv.ctx?.label || 'whole course'}).
 Rules: 3–8 words; name the specific concept(s) actually discussed, not generic words; canonical ${TUTOR.domain} terminology and capitalization (e.g. ${TUTOR.terminology}); Title Case; optionally "Topic: Angle" form; no quotes, emojis, trailing punctuation, dates, or words like Conversation/Chat/Session/Tutor.
@@ -106,6 +111,7 @@ Reply with the title only.${chatLang() && chatLang() !== COURSE_LANG ? ` Write i
 
 TRANSCRIPT:
 ${transcript}`;
+    /* i18n-ignore-end */
     const t = cleanTitle(await gemini({ contents: [{ role: 'user', parts: [{ text: prompt }] }], temperature: 0.2 }));
     if (t && t.split(' ').length <= 14) { cv.title = t; cv.titleSource = 'ai'; cv.titledLen = cv.msgs.length; saveConvos(cv); }
   } catch (e) { /* keep fallback */ }
@@ -122,23 +128,23 @@ function maybeAutoTitle(key) {
 /* ---------- export ---------- */
 const slug = s => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70) || 'conversation';
 const pad = n => String(n).padStart(2, '0');
-const fmtDate = (t, withTime = true) => { const d = new Date(t); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` + (withTime ? ` ${pad(d.getHours())}:${pad(d.getMinutes())}` : ''); };
+const fmtDate = (t, withTime = true) => { const d = new Date(t); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` + (withTime ? ` ${pad(d.getHours())}:${pad(d.getMinutes())}` : ''); };   // i18n-ignore
 function convoMarkdown(cv, level = 1) {
   const H = '#'.repeat(level);
   const title = displayTitle(cv);
   const lines = [`${H} ${title}`, '',
     `| | |`, `|---|---|`,
-    `| **Mode** | ${MODE_NAME[cv.mode] || cv.mode} |`,
-    `| **Context** | ${cv.ctx?.label ? cv.ctx.label.replace(/\|/g, '\\|') : 'Whole course'} |`,
-    `| **Started** | ${fmtDate(cv.created)} |`,
-    `| **Last message** | ${fmtDate(cv.updated || cv.created)} |`,
-    `| **Messages** | ${cv.msgs.length} |`,
-    `| **Tutor** | ${TUTOR.name} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
-    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${fromApp(cv) || `${APP_TITLE} (${Noema.config.appName})`} |`, '', '---', ''];
+    `| **${tE('engine.cv.md.mode')}** | ${cvModeName(cv.mode)} |`,
+    `| **${tE('engine.cv.md.context')}** | ${cv.ctx?.label ? cv.ctx.label.replace(/\|/g, '\\|') : tE('engine.cv.wholeCourse')} |`,
+    `| **${tE('engine.cv.md.started')}** | ${fmtDate(cv.created)} |`,
+    `| **${tE('engine.cv.md.last')}** | ${fmtDate(cv.updated || cv.created)} |`,
+    `| **${tE('engine.cv.md.messages')}** | ${nf(cv.msgs.length)} |`,
+    `| **${tE('engine.cv.md.tutor')}** | ${TUTOR.name} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,   // i18n-ignore
+    `| **${tE('engine.cv.md.subject')}** | ${SUBJ.title} |`, `| **${tE('engine.cv.md.profile')}** | ${ACCOUNT.name} |`, `| **${tE('engine.cv.md.source')}** | ${fromApp(cv) || `${APP_TITLE} (${Noema.config.appName})`} |`, '', '---', ''];
   const lessons = cv.tutorState?.lessons || [];
-  if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
+  if (lessons.length) lines.push(`${H}# 📌 ` + tE('engine.cv.md.lessons'), '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
-    const who = m.role === 'user' ? '🧑 You' : `${TUTOR.avatar} ${TUTOR.name}`;
+    const who = m.role === 'user' ? '🧑 ' + tE('engine.cv.md.you') : `${TUTOR.avatar} ${TUTOR.name}`;
     lines.push(`${H}# ${who}${m.t ? ' · ' + fmtDate(m.t).slice(11) : ''}`, '', demoteHeadings(String(m.text).trim(), level + 2), '');
   });
   return lines.join('\n');
@@ -151,24 +157,24 @@ function demoteHeadings(text, minLevel) {   // keep message headings below the s
     return l.replace(/^(#{1,6})\s+/, (m, hs) => '#'.repeat(Math.min(6, hs.length + minLevel - 1)) + ' ');
   }).join('\n');
 }
-function downloadText(name, text, type = 'text/markdown;charset=utf-8') {
+function downloadText(name, text, type = 'text/markdown;charset=utf-8') {   // i18n-ignore
   const url = URL.createObjectURL(new Blob([text], { type }));
   const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 async function exportConvo(cv) {
-  if (!cv || !cv.msgs?.length) return toast('Nothing to export yet — start a conversation first 🙂');
-  if (!cv.title || cv.msgs.length - (cv.titledLen || 0) >= 2) { toast('✨ Naming your conversation…', 1500); await generateTitle(cv); }
+  if (!cv || !cv.msgs?.length) return toast(tE('engine.cv.nothingToExport'));
+  if (!cv.title || cv.msgs.length - (cv.titledLen || 0) >= 2) { toast('✨ ' + tE('engine.cv.naming'), 1500); await generateTitle(cv); }
   const title = displayTitle(cv);
   downloadText(`${fmtDate(cv.created, false)}_${slug(MODE_NAME[cv.mode] || cv.kind || 'conversation')}_${slug(title)}.md`, convoMarkdown(cv));
-  toast('⬇️ Exported “' + title + '”');
+  toast('⬇️ ' + tE('engine.cv.exported', { title }));
 }
 function exportAllConvos() {
   const list = CV.list.filter(c => c.msgs?.length).sort((a, b) => (a.created || 0) - (b.created || 0));
-  if (!list.length) return toast('No conversations yet');
-  const head = [`# ${APP_TITLE} — Tutor Conversations`, '', `Exported ${fmtDate(Date.now())} · ${list.length} conversation${list.length > 1 ? 's' : ''}`, '', '## Contents', '',
-    ...list.map((c, i) => `${i + 1}. ${displayTitle(c)} — *${MODE_NAME[c.mode] || c.mode}, ${fmtDate(c.created, false)}*`), '', '---', ''];
-  downloadText(`${fmtDate(Date.now(), false)}_${slug(APP_TITLE)}_all-tutor-conversations.md`, head.join('\n') + list.map(c => convoMarkdown(c, 2)).join('\n\n---\n\n'));
+  if (!list.length) return toast(tE('engine.cv.none'));
+  const head = ['# ' + tE('engine.cv.md.allTitle', { app: APP_TITLE }), '', tE('engine.cv.md.exportedOn', { date: fmtDate(Date.now()), n: list.length }), '', '## ' + tE('engine.cv.md.contents'), '',
+    ...list.map((c, i) => `${i + 1}. ${displayTitle(c)} — *${cvModeName(c.mode)}, ${fmtDate(c.created, false)}*`), '', '---', ''];
+  downloadText(`${fmtDate(Date.now(), false)}_${slug(APP_TITLE)}_all-tutor-conversations.md`, head.join('\n') + list.map(c => convoMarkdown(c, 2)).join('\n\n---\n\n'));   // i18n-ignore
 }
 
 /* ---------- open a stored conversation ---------- */
@@ -222,31 +228,31 @@ function renderConvoHistory(box) {
   const list = q ? all.filter(c => (displayTitle(c) + ' ' + (c.ctx?.label || '') + ' ' + c.msgs.map(m => m.text).join(' ')).toLowerCase().includes(q)) : all;
   box.classList.add('histbox');
   box.append(h('div', { class: 'histhead' },
-    h('b', { class: 'grow' }, `🕘 Conversations (${all.length})`, tip('Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.')),
-    all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ Export all') : null,
-    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, '← Chat')));
-  if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), `Also show ${others} AI grading / review / question record${others > 1 ? 's' : ''}`));
+    h('b', { class: 'grow' }, '🕘 ' + tE('engine.cv.title', { n: all.length }), tip(tE('engine.cv.tip'))),
+    all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ ' + tE('engine.cv.exportAll')) : null,
+    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, '← ' + tE('engine.cv.chat'))));
+  if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), tE('engine.cv.alsoShow', { n: others })));
   if (all.length > 3) {
-    const inp = h('input', { class: 'histsearch', placeholder: 'Search conversations…', value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
+    const inp = h('input', { class: 'histsearch', placeholder: tE('engine.cv.search'), value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
     box.append(inp);
   }
-  if (!all.length) { box.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '💬'), h('p', {}, 'No conversations yet. Every chat with your tutor is saved here automatically, ready to export as Markdown.'))); return; }
+  if (!all.length) { box.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '💬'), h('p', {}, tE('engine.cv.empty')))); return; }
   list.forEach((cv, i) => {
     let confirmDel = false;
-    const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · naming…') : null);
+    const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · ' + tE('engine.cv.namingShort')) : null);
     const card = h('div', { class: 'cvcard', style: { animationDelay: Math.min(i, 12) * 25 + 'ms' } },
       h('button', { class: 'cvmain', onclick: () => openConvo(cv) }, titleEl,
-        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, 'from ' + fromApp(cv)) : null, `${cv.kind && cv.kind !== 'tutor' ? KIND_BADGE[cv.kind] : (MODES[cv.mode]?.label || MODE_NAME[cv.mode] || cv.mode)} · ${cv.ctx?.label || 'Whole course'}`),
-        h('small', {}, `${fmtDate(cv.updated || cv.created)} · ${cv.msgs.length} messages`)),
+        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, tE('engine.cv.fromApp', { app: fromApp(cv) })) : null, `${cv.kind && cv.kind !== 'tutor' ? kindBadge(cv.kind) : (MODES[cv.mode]?.label || MODE_NAME[cv.mode] || cv.mode)} · ${cv.ctx?.label || tE('engine.cv.wholeCourse')}`),
+        h('small', {}, `${fmtDate(cv.updated || cv.created)} · ` + tE('engine.cv.messages', { n: cv.msgs.length }))),
       h('div', { class: 'cvactions' },
-        h('button', { class: 'iconbtn', title: 'Rename', onclick: () => {
+        h('button', { class: 'iconbtn', title: tE('engine.cv.rename'), onclick: () => {
           const inp = h('input', { class: 'histsearch', value: displayTitle(cv), onkeydown: e => { if (e.key === 'Enter') done(); if (e.key === 'Escape') renderTutor(); }, onblur: () => done() });
           const done = () => { const v = cleanTitle(inp.value); if (v) { cv.title = v; cv.titleSource = 'user'; cv.titledLen = 1e9; saveConvos(cv); } renderTutor(); };
           titleEl.replaceWith(inp); inp.focus(); inp.select();
         } }, '✏️'),
-        h('button', { class: 'iconbtn', title: 'Export .md', onclick: () => exportConvo(cv) }, '⬇️'),
-        h('button', { class: 'iconbtn', title: 'Delete', onclick: e => {
-          if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = 'Click again to delete'; return; }
+        h('button', { class: 'iconbtn', title: tE('engine.cv.exportMd'), onclick: () => exportConvo(cv) }, '⬇️'),
+        h('button', { class: 'iconbtn', title: tE('engine.cv.delete'), onclick: e => {
+          if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = tE('engine.cv.deleteAgain'); return; }
           CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } Noema.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
         } }, '🗑️')));
     box.append(card);

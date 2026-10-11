@@ -36,7 +36,7 @@ async function checkInbox() {
   if (inboxRun.busy || ACCOUNT.kind !== 'cloud' || !CL?.session?.() || !CL.kvRows) return 0;
   inboxRun.busy = true; let n = 0;
   try {
-    const rows = (await CL.kvRows(INBOX)).sort((a, b) => a.key.localeCompare(b.key));
+    const rows = (await CL.kvRows(INBOX)).sort((a, b) => a.key.localeCompare(b.key));   // storage keys, not words (i18n-ignore)
     const done = []; const seen = S.inboxDone = S.inboxDone || {};
     for (const r of rows) {
       let v; try { v = JSON.parse(r.value); } catch (e) { done.push(r.key); continue; }   // unreadable: it can never be applied
@@ -51,7 +51,7 @@ async function checkInbox() {
     // the changed state reaches the cloud BEFORE its rows leave the inbox (a failed push keeps them for the next check)
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { toast(`📥 ${n} result${n === 1 ? '' : 's'} from your other apps`); renderTopStats(); }
+    if (n) { toast('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }
