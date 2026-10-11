@@ -845,5 +845,101 @@
         "example": "14"
       }
     }
+  },
+  "roadmap.gen.reading": "Reading your material…",
+  "@roadmap.gen.reading": {
+    "description": "Progress line of a step being prepared: the learner’s files for the step are being read."
+  },
+  "roadmap.gen.fileUnavailable": "{name} is not available on this device",
+  "@roadmap.gen.fileUnavailable": {
+    "description": "Progress line: one of the learner’s files for the step is not on this device. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "chapter5.pdf"
+      }
+    }
+  },
+  "roadmap.gen.noFileRead": "None of the files of this step could be read on this device.",
+  "@roadmap.gen.noFileRead": {
+    "description": "Error: none of the learner’s files for the step could be read, so the step cannot be prepared from them."
+  },
+  "roadmap.gen.filesRead": "{files, number} file(s), {pages, number} pages",
+  "@roadmap.gen.filesRead": {
+    "description": "Progress line after reading the learner’s files: how many files and pages.",
+    "placeholders": {
+      "files": {
+        "type": "int",
+        "example": "2"
+      },
+      "pages": {
+        "type": "int",
+        "example": "48"
+      }
+    }
+  },
+  "roadmap.gen.researching": "Researching official sources with Google Search…",
+  "@roadmap.gen.researching": {
+    "description": "Progress line: the AI (Gemini) researches the step’s topic on the web."
+  },
+  "roadmap.gen.sources": "{n, number} sources",
+  "@roadmap.gen.sources": {
+    "description": "Progress line after the web research: how many sources were found.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.gen.naming": "Naming the subject…",
+  "@roadmap.gen.naming": {
+    "description": "Progress line: the AI chooses the title, emoji and tutor of the step’s new subject."
+  },
+  "roadmap.gen.chapter": "Chapter {i, number}/{n, number}: {title}",
+  "@roadmap.gen.chapter": {
+    "description": "Progress line: the AI writes chapter i of n of the step’s subject. title = the chapter’s title.",
+    "placeholders": {
+      "i": {
+        "type": "int",
+        "example": "2"
+      },
+      "n": {
+        "type": "int",
+        "example": "8"
+      },
+      "title": {
+        "type": "String",
+        "example": "Replication forks"
+      }
+    }
+  },
+  "roadmap.gen.chapterDone": "{sections, number} sections · {exercises, number} exercises · {flashcards, number} flashcards",
+  "@roadmap.gen.chapterDone": {
+    "description": "Progress line after a chapter was written: its sections, exercises and flashcards.",
+    "placeholders": {
+      "sections": {
+        "type": "int",
+        "example": "5"
+      },
+      "exercises": {
+        "type": "int",
+        "example": "24"
+      },
+      "flashcards": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "roadmap.gen.invalid": "The generated pack is not valid: {list}",
+  "@roadmap.gen.invalid": {
+    "description": "Error: the subject made by the AI fails the checks. list = the first technical errors (English, separated by “; ”).",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "ch01: no sections"
+      }
+    }
   }
 }

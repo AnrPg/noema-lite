@@ -109,5 +109,15 @@
   "roadmap.import.needKey": "Сначала добавь ключ API Claude или ключ Gemini.",
   "roadmap.import.aiReading": "ИИ читает твою дорожную карту…",
   "roadmap.import.defaultTitle": "Моя дорожная карта",
-  "roadmap.import.log": "Твоя дорожная карта импортирована ({how, select, ai {прочитана ИИ} other {{how}}}): этапов — {n, number}, связей — {links, number}; без построения карты ИИ."
+  "roadmap.import.log": "Твоя дорожная карта импортирована ({how, select, ai {прочитана ИИ} other {{how}}}): этапов — {n, number}, связей — {links, number}; без построения карты ИИ.",
+  "roadmap.gen.reading": "Читаю твои материалы…",
+  "roadmap.gen.fileUnavailable": "Файла {name} нет на этом устройстве",
+  "roadmap.gen.noFileRead": "Ни один файл этого этапа не удалось прочитать на этом устройстве.",
+  "roadmap.gen.filesRead": "файлов: {files, number}, страниц: {pages, number}",
+  "roadmap.gen.researching": "Ищу официальные источники через Google Поиск…",
+  "roadmap.gen.sources": "источников: {n, number}",
+  "roadmap.gen.naming": "Придумываю название предмета…",
+  "roadmap.gen.chapter": "Глава {i, number}/{n, number}: {title}",
+  "roadmap.gen.chapterDone": "разделов: {sections, number} · упражнений: {exercises, number} · карточек: {flashcards, number}",
+  "roadmap.gen.invalid": "Созданный пакет некорректен: {list}"
 }

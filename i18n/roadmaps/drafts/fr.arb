@@ -109,5 +109,15 @@
   "roadmap.import.needKey": "Ajoute d’abord une clé API Claude ou une clé Gemini.",
   "roadmap.import.aiReading": "L’IA lit ton parcours…",
   "roadmap.import.defaultTitle": "Mon parcours",
-  "roadmap.import.log": "Ton parcours a été importé ({how, select, ai {lu par l’IA} other {{how}}}) : {n, plural, one {# étape} many {# étapes} other {# étapes}}, {links, plural, one {# lien} many {# liens} other {# liens}} — sans cartographie par l’IA."
+  "roadmap.import.log": "Ton parcours a été importé ({how, select, ai {lu par l’IA} other {{how}}}) : {n, plural, one {# étape} many {# étapes} other {# étapes}}, {links, plural, one {# lien} many {# liens} other {# liens}} — sans cartographie par l’IA.",
+  "roadmap.gen.reading": "Lecture de tes documents…",
+  "roadmap.gen.fileUnavailable": "{name} n’est pas disponible sur cet appareil",
+  "roadmap.gen.noFileRead": "Aucun des fichiers de cette étape n’a pu être lu sur cet appareil.",
+  "roadmap.gen.filesRead": "{files, plural, one {# fichier} many {# fichiers} other {# fichiers}}, {pages, plural, one {# page} many {# pages} other {# pages}}",
+  "roadmap.gen.researching": "Recherche de sources officielles avec la recherche Google…",
+  "roadmap.gen.sources": "{n, plural, one {# source} many {# sources} other {# sources}}",
+  "roadmap.gen.naming": "Choix du nom de la matière…",
+  "roadmap.gen.chapter": "Chapitre {i, number}/{n, number} : {title}",
+  "roadmap.gen.chapterDone": "{sections, plural, one {# section} many {# sections} other {# sections}} · {exercises, plural, one {# exercice} many {# exercices} other {# exercices}} · {flashcards, plural, one {# carte} many {# cartes} other {# cartes}}",
+  "roadmap.gen.invalid": "Le pack généré n’est pas valide : {list}"
 }

@@ -10,9 +10,11 @@
    for repair. Progress is saved after every step (IndexedDB), so generation resumes after a reload. */
 window.NoemaPackGen = (() => {
   const L = () => window.NoemaLLM;
+  /** The learner's words for a key of i18n/roadmaps (docs/i18n.md) — the progress lines of a step being prepared. */
+  const rt = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
 
   /* ======================= diagram kit (JS cousin of tools/svgkit.py) ======================= */
-  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));   // i18n-ignore
   const FILL = ['#eef2ff', '#ecfdf5', '#fff7ed', '#fdf2f8', '#f0f9ff', '#fefce8', '#f5f3ff', '#f1f5f9'];
   const STROKE = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#0ea5e9', '#ca8a04', '#8b5cf6', '#64748b'];
   function wrap(t, max = 18, lines = 3) {
@@ -70,7 +72,7 @@ window.NoemaPackGen = (() => {
       g.forEach((t, j) => { body += `<text x="${j ? 590 : 210}" y="${top + 18}" font-size="19" font-weight="700" text-anchor="middle" fill="${STROKE[j * 2]}" font-family="Helvetica, Arial, sans-serif">${esc(String(t).slice(0, 34))}</text>`; });
       cols.forEach((col, j) => col.forEach((it, i) => put(it, j * 2 + (i % 2), j ? 420 : 40, top + 44 + i * (bh + 14), 340, bh)));
       body = `<line x1="400" y1="${top}" x2="400" y2="${H - 10}" stroke="#cbd5e1" stroke-width="2"/>` + body;
-    } else throw new Error(`diagram "${spec.id}": unknown kind "${k}" (use flow, cycle, hub, layers, tree or compare)`);
+    } else throw new Error(`diagram "${spec.id}": unknown kind "${k}" (use flow, cycle, hub, layers, tree or compare)`);   // i18n-ignore (for the AI's repair)
     for (const [a, b, lab] of spec.links || []) { const p = at.get(a), q = at.get(b); if (!p || !q || k === 'flow' || k === 'cycle' || k === 'tree') continue; body += arrow(p.x + p.w / 2, p.y + p.h, q.x + q.w / 2, q.y, lab); }
     H = Math.round(H);
     const title = spec.title ? `<text x="${W / 2}" y="36" font-size="22" font-weight="700" text-anchor="middle" fill="#0f172a" font-family="Helvetica, Arial, sans-serif">${esc(String(spec.title).slice(0, 60))}</text>` : '';
@@ -80,6 +82,7 @@ window.NoemaPackGen = (() => {
   const b64 = s => btoa(unescape(encodeURIComponent(s)));
 
   /* ======================= the contract text for the model ======================= */
+  /* i18n-ignore-start — the contract and the schemas (for the AI) */
   let SPEC = null;
   async function spec() {
     if (SPEC) return SPEC;
@@ -112,20 +115,23 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     diagrams: { type: 'array', minItems: 1, maxItems: 3, items: { type: 'object', required: ['id', 'kind', 'title', 'alt', 'items'], properties: { id: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{1,30}$' }, kind: { type: 'string', enum: ['flow', 'cycle', 'hub', 'layers', 'tree', 'compare'] }, items: { type: 'array', minItems: 3, maxItems: 12, items: { type: 'object', required: ['id', 'label'], properties: { id: { type: 'string', pattern: '^[a-z0-9_-]{1,30}$' }, label: { type: 'string', minLength: 1, maxLength: 60 } } } } } } },
   } };
 
+  /* i18n-ignore-end */
   /** Render the chapter's diagrams into pack media (global ids) and point the chapter's references at them. */
   function materialize(ch, prefix) {
     const media = {}; const map = {};
     for (const d of ch.diagrams || []) {
       const r = render(d); const gid = `${prefix}-${ch.id}-${d.id}`.toLowerCase().replace(/[^a-z0-9-]/g, '-').slice(0, 60);
       map[d.id] = gid;
-      media[gid] = { alt: d.alt || d.title, caption: d.caption || '', credit: 'Drawn by noema-lite (diagram kit)', license: 'own', origin: 'drawn', mime: 'image/svg+xml', w: r.w, h: r.h, regions: r.regions, data: 'data:image/svg+xml;base64,' + b64(r.svg) };
+      media[gid] = { alt: d.alt || d.title, caption: d.caption || '', credit: 'Drawn by noema-lite (diagram kit)',   // i18n-ignore (pack content, kept as every pack has it)
+        license: 'own', origin: 'drawn', mime: 'image/svg+xml', w: r.w, h: r.h, regions: r.regions, data: 'data:image/svg+xml;base64,' + b64(r.svg) };
     }
     const out = JSON.parse(JSON.stringify(ch)); delete out.diagrams;
     for (const s of out.sections || []) for (const b of s.blocks || []) if (b.t === 'figure' && map[b.media]) b.media = map[b.media];
     for (const e of out.exercises || []) if (map[e.media]) e.media = map[e.media];
     return { chapter: out, media };
   }
-  /** Quantity rules for browser-made chapters (scaled-down CONTENT_SPEC). */
+  /** Quantity rules for browser-made chapters (scaled-down CONTENT_SPEC). The problems go back to the AI: English. */
+  /* i18n-ignore-start */
   function quality(ch) {
     const E = []; const ex = ch.exercises || []; const secs = ch.sections || [];
     const types = new Set(ex.map(e => e.type)); const vis = ex.filter(e => String(e.type).startsWith('img_'));
@@ -141,6 +147,7 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     for (const f of ch.flashcards || []) if (!secs.some(s => s.id === f.section)) { E.push(`flashcard section "${f.section}" does not exist`); break; }
     return E;
   }
+  /* i18n-ignore-end */
 
   /* ======================= resumable state ======================= */
   const DB = { db: null,
@@ -163,17 +170,17 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     // 1. the learner's own files (imported maps, 📎 material) are THE sources: read them, no web research
     const mat = n.material?.files || [];
     if (mat.length && !run.material) {
-      onLog('📖 Reading your material…'); run.material = [];
+      onLog('📖 ' + rt('roadmap.gen.reading')); run.material = [];
       for (const f of mat) {
         const rec = await window.NoemaCurriculum.materialFile(acc, c, nodeId, f).catch(() => null);
-        if (!rec?.blob) { onLog(`   ⚠️ ${f.name} is not available on this device`); continue; }
+        if (!rec?.blob) { onLog('   ⚠️ ' + rt('roadmap.gen.fileUnavailable', { name: f.name })); continue; }
         // only the pages that belong to this step (a textbook may serve several steps)
         const x = await window.NoemaViewer.extract(rec.blob, f.name, f.range ? { from: f.range[0], maxPages: f.range[1] - f.range[0] + 1, outline: false } : { maxPages: 1500, outline: false }).catch(e => { onLog(`   ⚠️ ${f.name}: ${e.message}`); return null; });
         if (x?.pages?.length) run.material.push({ srcId: f.srcId, name: f.name, pdf: x.kind === 'pdf', pages: x.pages, first: x.first || 1, range: f.range || null, pageCount: x.pageCount || null });
       }
-      if (!run.material.length) throw new Error('None of the files of this step could be read on this device.');
+      if (!run.material.length) throw new Error(rt('roadmap.gen.noFileRead'));
       run.research = ''; run.sources = []; await keep();
-      onLog(`   ✓ ${run.material.length} file(s), ${run.material.reduce((a, m) => a + m.pages.length, 0)} pages`);
+      onLog('   ✓ ' + rt('roadmap.gen.filesRead', { files: run.material.length, pages: run.material.reduce((a, m) => a + m.pages.length, 0) }));
     }
     /** The part of the material a chapter comes from ("file.pdf pp. 12–30" from the planner), else all of it (capped). */
     const materialFor = ch => {
@@ -181,32 +188,37 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
       const want = String(ch.material || ''); const nm = x => x.toLowerCase().replace(/\.[a-z0-9]+$/, '');
       const file = M.find(m => want.toLowerCase().includes(nm(m.name))) || (M.length === 1 ? M[0] : null);
       const r = want.match(/(\d{1,5})\s*[–-]\s*(\d{1,5})/) || want.match(/p{1,2}\.\s*(\d{1,5})/);
-      if (file && r && file.pdf) { const a = +r[1], b = +(r[2] || r[1]); const txt = file.pages.slice(Math.max(0, a - file.first), Math.max(0, b - file.first + 1)).map((t, i) => `[${file.name} p. ${Math.max(a, file.first) + i}]\n${t}`).join('\n\n'); if (txt.trim()) return { text: txt.slice(0, 160000), refs: [{ id: file.srcId, pages: `σ. ${a}–${b}` }] }; }
-      const all = (file ? [file] : M).map(m => m.pages.map((t, i) => `[${m.name} ${m.pdf ? 'p. ' + (m.first + i) : 'part ' + (i + 1)}]\n${t}`).join('\n\n')).join('\n\n');
+      if (file && r && file.pdf) { const a = +r[1], b = +(r[2] || r[1]); const txt = file.pages.slice(Math.max(0, a - file.first), Math.max(0, b - file.first + 1)).map((t, i) => `[${file.name} p. ${Math.max(a, file.first) + i}]\n${t}`).join('\n\n'); if (txt.trim()) return { text: txt.slice(0, 160000), refs: [{ id: file.srcId, pages: `σ. ${a}–${b}` }] }; }   // i18n-ignore (pack content: a chapter's source pages)
+      const all = (file ? [file] : M).map(m => m.pages.map((t, i) => `[${m.name} ${m.pdf ? 'p. ' + (m.first + i) : 'part ' + (i + 1)}]\n${t}`).join('\n\n')).join('\n\n');   // i18n-ignore (page markers in the prompt)
       return { text: all.slice(0, 160000), refs: (file ? [file] : M).map(m => ({ id: m.srcId })) };
     };
     // 1b. research (steps without material)
     if (!run.research && !run.material) {
-      onLog('🔎 Researching official sources with Google Search…');
+      onLog('🔎 ' + rt('roadmap.gen.researching'));
+      /* i18n-ignore-start — prompt */
       const r = await L().research(acc, { signal, model, system: 'You are a meticulous subject-matter researcher. Use Google Search. Prefer official documentation, standards bodies, university courses, open textbooks, reference works and review articles. Be precise and current; never invent facts.',
         prompt: `${brief}\n\nWrite a dense research brief (in ${lang}) for a teacher who will write this course: for EVERY planned chapter give the key definitions, principles, facts and numbers, formulas or procedures, worked examples, common misconceptions and pitfalls, typical errors and how to diagnose them, and current best practice. Cite sources inline as [n].` });
+      /* i18n-ignore-end */
       add(r.usage); run.research = r.text; run.sources = r.sources.slice(0, 15); await keep();
-      onLog(`   ✓ ${run.sources.length} sources`);
+      onLog('   ✓ ' + rt('roadmap.gen.sources', { n: run.sources.length }));
     }
     // 2. subject
     if (!run.meta) {
-      onLog('🪪 Naming the subject…');
+      onLog('🪪 ' + rt('roadmap.gen.naming'));
+      /* i18n-ignore-start — prompt */
       const { data, usage } = await L().json({ acc, provider: 'gemini', model, signal, system: 'You design study apps. Answer in JSON only.', prompt: `${brief}\n\nCreate the identity of this subject in ${lang}: title (the node title), one emoji, a one-line description, hero headline (may use **bold**), one-sentence mantra (the mental model), searchExamples (3–5 comma-separated concepts), math (true if formulas matter), code (true if code matters), and a Socratic tutor persona: name, avatar (one emoji), domain, examples (concrete examples to use), interviewer, simulation, terminology (key terms in quotes), examinerRole.`, schema: S_META });
+      /* i18n-ignore-end */
       add(usage); run.meta = data; await keep();
     }
     // 3. chapters
     const plan = n.chapters?.length ? n.chapters : [{ title: n.title, goals: n.learningGoals || [], coverage: [n.summary || n.title] }];
     const prefix = packId.slice(-18);
     for (let i = run.chapters.length; i < plan.length; i++) {
-      if (signal?.aborted) throw new (L().LLMError)('Stopped.', 0, 'aborted');
+      if (signal?.aborted) throw new (L().LLMError)('Stopped.', 0, 'aborted');   // i18n-ignore (an internal signal: kind 'aborted')
       const id = 'ch' + String(i + 1).padStart(2, '0'); const ch = plan[i];
-      onLog(`✍️ Chapter ${i + 1}/${plan.length}: ${ch.title}`);
+      onLog('✍️ ' + rt('roadmap.gen.chapter', { i: i + 1, n: plan.length, title: ch.title }));
       const mt = materialFor(ch);
+      /* i18n-ignore-start — the prompt and the checks of the AI's chapter */
       const prompt = `${brief}\n\n` + (mt ? `## The learner's material for this chapter (THE source — teach from it and stay faithful to it; do not add theory it does not contain beyond brief connecting explanations; page markers are in [brackets])\n${mt.text}` : `## Research brief (from Google Search; cite nothing, but stay faithful to it)\n${(run.research || '').slice(0, 24000)}`) + `\n\n## Write chapter ${i + 1} of ${plan.length} now: “${ch.title}”\nTeaching goals: ${(ch.goals || []).join('; ')}\nMust cover: ${(ch.coverage || []).join('; ')}\nEarlier chapters of this node: ${plan.slice(0, i).map(x => x.title).join('; ') || '(none)'} — do not repeat them.\n\nRules: language ${lang}. Chapter id "${id}", num ${i + 1}. 3–8 sections with ids "${id}-s01"…; 4–14 blocks each, varied (p, list, table, compare, flow, callout, reveal, ask, terms, code/diagram when useful, one figure). ≥ 4 exercises per section with ids "${id}-e001"… and ≥ 7 different types, incl. ≥ 3 picture exercises on your diagrams; ≥ 25 % tagged pitfall/debug/exam; every explanation teaches why the right answer is right and why the tempting one is wrong. 8–25 flashcards, ≥ 1 pitfall, debug playbooks where the topic has failure modes. ${S.content ? '' : 'Follow the noema-lite content format.'}`;
       const { data, usage } = await L().json({ acc, provider: 'gemini', model, signal, maxTokens: 65536, system: `You are an expert teacher and instructional designer writing one chapter of a noema-lite subject pack as JSON. Follow the content contract exactly.\n\n${S.content || ''}\n\n${S.visual ? S.visual.split('## 5.')[0] : ''}\n\n${DIAGRAM_KIT}`, prompt, schema: S_CHAPTER,
         validate: d => {
@@ -215,21 +227,24 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
           const pack = { format: 'noema-pack', subject: { id: packId, title: 'x' }, chapters: [m.chapter], media: m.media };
           const r = window.NoemaPackCheck.checkPack(pack, null, { strict: true });
           return [...r.errors, ...quality(d)].slice(0, 30);
-        }, onRepair: e => onLog(`   ↻ fixing ${e.length} problem(s)…`) });
+        }, onRepair: e => onLog('   ↻ ' + rt('roadmap.fixing', { n: e.length })) });
+      /* i18n-ignore-end */
       add(usage);
       const m = materialize(data, prefix); m.chapter.src = mt ? mt.refs[0].id : 'web'; if (mt) m.chapter.sources = mt.refs;
       run.chapters.push(m.chapter); Object.assign(run.media, m.media); await keep();
-      onLog(`   ✓ ${m.chapter.sections.length} sections · ${m.chapter.exercises.length} exercises · ${m.chapter.flashcards.length} flashcards`);
+      onLog('   ✓ ' + rt('roadmap.gen.chapterDone', { sections: m.chapter.sections.length, exercises: m.chapter.exercises.length, flashcards: m.chapter.flashcards.length }));
     }
-    // 4. assemble
+    // 4. assemble — the subject's texts are pack content (in the curriculum's language or neutral), not the app's words
+    /* i18n-ignore-start */
     const M = run.meta;
     const subject = { id: packId, title: n.title, appTitle: n.title, emoji: M.emoji, group: 'curriculum', description: M.description, language: c.language, features: { math: !!M.math, code: !!M.code },
       hero: { headline: M.headline, mantra: M.mantra }, searchExamples: M.searchExamples, tutor: { ...M.tutor, prior: `Already mastered: ${c.edges.filter(e => e.to === nodeId).map(e => c.nodes[e.from]?.title).filter(Boolean).join('; ') || 'nothing specific'}.` } };
     const sources = run.material ? { sources: run.material.map(m => ({ id: m.srcId, title: m.name.replace(/\.[a-z0-9]+$/i, ''), fileName: m.name, file: 'sources/' + m.name, pages: m.range ? `${m.range[0]}–${m.range[1]}` : m.pageCount ? `1–${m.pageCount}` : '', added: new Date().toISOString().slice(0, 10), emoji: '📄' })), chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, ch.src])), patches: {} } : { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
       ...(run.sources || []).map((s, i) => ({ id: 's' + (i + 1), title: s.title, url: s.url, added: new Date().toISOString().slice(0, 10), emoji: '🌐' }))], chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, 'web'])), patches: {} };
     const pack = { format: 'noema-pack', v: 1, subject, sources, chapters: run.chapters, media: run.media, builtAt: new Date().toISOString(), generatedBy: 'gemini', curriculum: { id: c.id, node: nodeId } };
+    /* i18n-ignore-end */
     const r = window.NoemaPackCheck.checkPack(pack, packId, { strict: true });
-    if (r.errors.length) throw new Error('The generated pack is not valid: ' + r.errors.slice(0, 3).join('; '));
+    if (r.errors.length) throw new Error(rt('roadmap.gen.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)
     pack.counts = { chapters: r.counts.chapters, sections: r.counts.sections, exercises: r.counts.exercises, visual: r.counts.visual, pictures: r.counts.media, flashcards: run.chapters.reduce((a, ch) => a + ch.flashcards.length, 0) };
     let h = 0; const js = JSON.stringify(pack.chapters); for (let i = 0; i < js.length; i += 7) h = (h * 31 + js.charCodeAt(i)) >>> 0; pack.version = 'g' + h.toString(16);
     await DB.del(packId).catch(() => { });

@@ -109,5 +109,15 @@
   "roadmap.import.needKey": "Πρόσθεσε πρώτα ένα κλειδί API του Claude ή ένα κλειδί Gemini.",
   "roadmap.import.aiReading": "Η AI διαβάζει τον Οδικό χάρτη σου…",
   "roadmap.import.defaultTitle": "Ο Οδικός χάρτης μου",
-  "roadmap.import.log": "Εισήχθη ο Οδικός χάρτης σου ({how, select, ai {τον διάβασε η AI} other {{how}}}): {n, plural, one {# σταθμός} other {# σταθμοί}}, {links, plural, one {# σύνδεσμος} other {# σύνδεσμοι}} — χωρίς χαρτογράφηση από AI."
+  "roadmap.import.log": "Εισήχθη ο Οδικός χάρτης σου ({how, select, ai {τον διάβασε η AI} other {{how}}}): {n, plural, one {# σταθμός} other {# σταθμοί}}, {links, plural, one {# σύνδεσμος} other {# σύνδεσμοι}} — χωρίς χαρτογράφηση από AI.",
+  "roadmap.gen.reading": "Διαβάζεται το υλικό σου…",
+  "roadmap.gen.fileUnavailable": "Το {name} δεν υπάρχει σε αυτή τη συσκευή",
+  "roadmap.gen.noFileRead": "Κανένα από τα αρχεία αυτού του σταθμού δεν μπόρεσε να διαβαστεί σε αυτή τη συσκευή.",
+  "roadmap.gen.filesRead": "{files, plural, one {# αρχείο} other {# αρχεία}}, {pages, plural, one {# σελίδα} other {# σελίδες}}",
+  "roadmap.gen.researching": "Έρευνα σε επίσημες πηγές με την Αναζήτηση Google…",
+  "roadmap.gen.sources": "{n, plural, one {# πηγή} other {# πηγές}}",
+  "roadmap.gen.naming": "Δίνεται όνομα στο θέμα…",
+  "roadmap.gen.chapter": "Κεφάλαιο {i, number}/{n, number}: {title}",
+  "roadmap.gen.chapterDone": "{sections, plural, one {# ενότητα} other {# ενότητες}} · {exercises, plural, one {# άσκηση} other {# ασκήσεις}} · {flashcards, plural, one {# κάρτα} other {# κάρτες}}",
+  "roadmap.gen.invalid": "Το πακέτο που δημιουργήθηκε δεν είναι έγκυρο: {list}"
 }
