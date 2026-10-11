@@ -1780,7 +1780,7 @@
   },
   "notes": {
    "type": "array",
-   "description": "D19 contrast notes (docs/language-packs.md §2.1): how a point looks from ONE native language (a supported native: en el ru fr ar de hi zh ja it es sq pt; other profiled codes are kept as source material, never shown) or from a type / branch / family (a type note names no language). Required on every grammar page: every supported native but the page’s own language + type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic. Written in the master (English), translated into the locale facade of that language.",
+   "description": "D19 contrast notes (docs/language-packs.md §2.1): how a point looks from ONE native language (a supported native: en el ru fr ar de hi zh ja it es sq pt tr; other profiled codes are shown only in the folded “From other languages” section, R1) or from a type / branch / family (a type note names no language). Required on every grammar page: every supported native but the page’s own language + type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic. Shown in three sections (R1: the learner’s native and C1/C2 languages first; the course languages being learned; every other note, folded). The text is a structured Markdown subset (R2, docs/language-packs.md §2.3: paragraphs separated by a blank line, “- ” / “1. ” lists, **bold**, *italic*, “→ ” example lines; no headings, links, HTML, tables, code). Written in the master (English), translated into every locale facade.",
    "items": {
     "type": "object",
     "required": [

@@ -1,7 +1,7 @@
 {
  "format": "noema.langtypology/v1",
- "about": "D19 (docs/language-packs.md §2.1): every grammar page has a contrast note for each SUPPORTED native (the languages of the UI locales) other than the page's own language, and one for each entry of `types` (a type note names no language). Only those notes are shown: a learner with a supported native sees the note for it; any other learner sees the note for their branch, family or type. The other languages of `languages` (the reference set of D18, chosen by the user 2026-10-09) keep their notes as source material — never shown — and serve inference by type and family.",
- "supported": ["en", "el", "ru", "fr", "ar", "de", "hi", "zh", "ja", "it", "es", "sq", "pt"],
+ "about": "D19 (docs/language-packs.md §2.1): every grammar page has a contrast note for each SUPPORTED native (the languages of the UI locales) other than the page's own language, and one for each entry of `types` (a type note names no language). R1 (2026-10-11): a learner sees “From your languages” first (the note for their native — or, if it is not supported, for its branch, family or type — then one per C1/C2 language), then “Among the languages you are learning”, then, folded, “From other languages”: every other note, including those for the other languages of `languages` (the reference set of D18, chosen by the user 2026-10-09), which also serve inference by type and family.",
+ "supported": ["en", "el", "ru", "fr", "ar", "de", "hi", "zh", "ja", "it", "es", "sq", "pt", "tr"],
  "types": ["type:fusional", "type:agglutinating", "type:isolating", "type:polysynthetic", "branch:Semitic"],
  "languages": ["el", "ru", "es", "en", "fr", "de", "hi", "fa", "mr", "ar", "he", "tr", "ja", "ko", "fi", "hu", "sw", "lg", "zh", "vi", "iu", "it", "sq", "pt"]
 }
