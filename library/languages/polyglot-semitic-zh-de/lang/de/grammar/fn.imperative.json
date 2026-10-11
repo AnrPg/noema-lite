@@ -306,7 +306,7 @@
   {
    "lang": "ar",
    "fn": "fn.imperative",
-   "note": "Arabic changes the imperative for a man, a woman and a group (اُكْتُبْ / اُكْتُبِي / اُكْتُبُوا); a negative command is لَا + the jussive (لَا تَكْتُبْ) – German changes it for du / ihr / Sie."
+   "note": "Arabic changes the imperative for a man, a woman and a group (اُكْتُبْ / اُكْتُبِي / اُكْتُبُوا); a negative command is لَا + the jussive (لَا تَكْتُبْ).\n\nGerman changes it for du / ihr / Sie."
   },
   {
    "lang": "he",
@@ -316,7 +316,7 @@
   {
    "lang": "zh",
    "fn": "fn.imperative",
-   "note": "Chinese verbs do not change: 来！ 走！; 请 + verb is polite, 别 / 不要 + verb is “don’t”, and 吧 softens – German needs a different verb form for du, ihr and Sie."
+   "note": "Chinese verbs do not change: 来！ 走！\n- 请 + verb is polite;\n- 别 / 不要 + verb is “don’t”;\n- 吧 softens.\n\nGerman needs a different verb form for du, ihr and Sie."
   },
   {
    "lang": "de",
@@ -383,7 +383,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "A polite request is -te kudasai (itte kudasai); the plain imperative (ike) sounds rough. German Gehen Sie! is a neutral polite form, softened with bitte."
+   "text": "A polite request is -te kudasai (itte kudasai); the plain imperative (ike) sounds rough.\n\nGerman Gehen Sie! is a neutral polite form, softened with bitte."
   },
   {
    "for": "ko",
@@ -423,42 +423,42 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian has va’ / andate and the polite vada; German has three forms too, but the polite one keeps its pronoun: Geh! Geht! Gehen Sie!. Italian negates the tu form with the infinitive (non andare!); German only adds nicht: Geh nicht!"
+   "text": "Italian has va’ / andate and the polite vada; German has three forms too, but **the polite one keeps its pronoun**:\n→ Geh! Geht! Gehen Sie!\n\nItalian negates the tu form with the infinitive (non andare!); German only adds nicht:\n→ Geh nicht!"
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian has two forms, hyr! / hyni!, and the plural also serves for politeness; German has three: Komm herein! Kommt herein! Kommen Sie herein!. A command is negated with mos (Mos hyr!), in German with nicht: Komm nicht herein!"
+   "text": "Albanian has two forms, hyr! / hyni!, and the plural also serves for politeness; German has three:\n→ Komm herein! Kommt herein! Kommen Sie herein!\n\nA command is negated with mos (Mos hyr!), in German with nicht:\n→ Komm nicht herein!"
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese has vai and the polite vá / vão; German has three forms, and the polite one keeps its pronoun: Geh! Geht! Gehen Sie!. Portuguese changes the form in the negative (não vás!); German adds only nicht: Geh nicht!"
+   "text": "Portuguese has vai and the polite vá / vão; German has three forms, and **the polite one keeps its pronoun**:\n→ Geh! Geht! Gehen Sie!\n\nPortuguese changes the form in the negative (não vás!); German adds only nicht:\n→ Geh nicht!"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language has imperatives for one person and for several, German adds a third for Sie, which keeps its pronoun: Geh! Geht! Gehen Sie!. The negative is the same form with nicht: Geh nicht!"
+   "text": "If your language has imperatives for one person and for several, German adds a third for Sie, which keeps its pronoun:\n→ Geh! Geht! Gehen Sie!\n\nThe negative is the same form with nicht: Geh nicht!"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your imperative is the stem plus polite suffixes, German politeness is a separate form with its pronoun (Komm! – Kommen Sie!), and commands are softened with bitte, mal, doch rather than with endings."
+   "text": "If your imperative is the stem plus polite suffixes:\n- German politeness is a separate form with its pronoun (Komm! – Kommen Sie!);\n- commands are softened with bitte, mal, doch rather than with endings."
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If a command is the bare verb plus a polite word or a final particle, German changes the verb for the person addressed (Komm! Kommt! Kommen Sie!); bitte, mal and doch soften it: Komm doch mal her!"
+   "text": "If a command is the bare verb plus a polite word or a final particle, German changes the verb for the person addressed (Komm! Kommt! Kommen Sie!).\n\nbitte, mal and doch soften it:\n→ Komm doch mal her!"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your imperative is a mood ending on a verb that also contains the object, German puts the verb alone in first place with a separate object (Iss das Brot!) and chooses one of three forms for du, ihr or Sie."
+   "text": "If your imperative is a mood ending on a verb that also contains the object, German:\n- puts the verb alone in first place with a separate object (Iss das Brot!);\n- chooses one of three forms for du, ihr or Sie."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your imperative changes for a man, a woman or several people, German changes it for du, ihr and Sie instead – never for sex: Komm! Kommt! Kommen Sie!. A prohibition is the same form with nicht: Geh nicht!"
+   "text": "If your imperative changes for a man, a woman or several people, German changes it for du, ihr and Sie instead – **never for sex**:\n→ Komm! Kommt! Kommen Sie!\n\nA prohibition is the same form with nicht: Geh nicht!"
   }
  ]
 }

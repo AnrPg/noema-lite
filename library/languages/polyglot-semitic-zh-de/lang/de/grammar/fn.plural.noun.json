@@ -303,7 +303,7 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also has several plural endings by gender and declension (-οι, -ες, -α), but never changes the vowel inside the word; German often does: Buch → Bücher, Stuhl → Stühle."
+   "text": "Greek also has several plural endings by gender and declension (-οι, -ες, -α), but never changes the vowel inside the word.\n\nGerman often does:\n→ Buch → Bücher, Stuhl → Stühle"
   },
   {
    "for": "ru",
@@ -318,17 +318,17 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "English -s is one German pattern (Handys, Babys), and man – men, foot – feet show the same old vowel change as Mann – Männer; in German that change is everywhere: Buch – Bücher, Haus – Häuser."
+   "text": "English -s is one German pattern (Handys, Babys), and man – men, foot – feet show the same old vowel change as Mann – Männer.\n\nIn German **that change is everywhere**:\n→ Buch – Bücher, Haus – Häuser"
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "In French the plural is mostly heard on the article (le / les); German shows it on the article (die) and usually on the noun too: der Tisch – die Tische."
+   "text": "In French the plural is mostly heard on the article (le / les).\n\nGerman shows it on the article (die) and usually on the noun too:\n→ der Tisch – die Tische"
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi plurals depend on gender and ending (laṛkā → laṛke, kitāb → kitābẽ), as German ones depend on gender and ending; German adds umlaut and five patterns."
+   "text": "Hindi plurals depend on gender and ending (laṛkā → laṛke, kitāb → kitābẽ), as German ones depend on gender and ending.\n\nGerman adds umlaut and five patterns."
   },
   {
    "for": "fa",
@@ -343,7 +343,7 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic broken plurals change the vowels inside the word (kitāb → kutub); German umlaut does something similar on a small scale (Buch → Bücher). German has no dual (kitābāni = zwei Bücher) and no singulative: “a tree” is ein Baum, not a form derived from the collective."
+   "text": "Arabic broken plurals change the vowels inside the word (kitāb → kutub); German umlaut does something similar on a small scale (Buch → Bücher).\n\nGerman has:\n- no dual (kitābāni = zwei Bücher);\n- no singulative: “a tree” is ein Baum, not a form derived from the collective."
   },
   {
    "for": "he",
@@ -353,7 +353,7 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "One plural suffix in Turkish (-ler / -lar); German has five patterns – learn the plural with each noun – and needs the plural after numbers too (zwei Bücher, iki kitap)."
+   "text": "One plural suffix in Turkish (-ler / -lar); German has five patterns – **learn the plural with each noun**.\n\nIt needs the plural after numbers too:\n→ zwei Bücher, iki kitap"
   },
   {
    "for": "ja",
@@ -373,17 +373,17 @@
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian has one plural, -k with a linking vowel (házak), and uses the singular after numbers; German has five patterns and uses the plural after zwei."
+   "text": "Hungarian has one plural, -k with a linking vowel (házak), and uses the singular after numbers.\n\nGerman has five patterns and uses the plural after zwei."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili makes the plural by changing the class prefix (kitabu → vitabu, mtu → watu); German changes the end of the word, often the vowel too (Buch → Bücher), and the article becomes die."
+   "text": "Swahili makes the plural by changing the class prefix (kitabu → vitabu, mtu → watu).\n\nGerman changes the end of the word, often the vowel too (Buch → Bücher), and the article becomes die."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "The plural is a different class prefix (omuntu → abantu, ekitabo → ebitabo); German changes the ending and often the vowel (Buch → Bücher) and uses die for every plural."
+   "text": "The plural is a different class prefix (omuntu → abantu, ekitabo → ebitabo).\n\nGerman changes the ending and often the vowel (Buch → Bücher) and uses die for every plural."
   },
   {
    "for": "zh",
@@ -403,42 +403,42 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian changes the final vowel (libro – libri, casa – case); German has five patterns and often an umlaut inside the word: Buch – Bücher, Stuhl – Stühle. Learn each noun with its plural; the plural article is always die, where Italian has i, gli, le."
+   "text": "Italian changes the final vowel (libro – libri, casa – case); German has five patterns and often an umlaut inside the word:\n→ Buch – Bücher, Stuhl – Stühle\n\n**Learn each noun with its plural**; the plural article is always die, where Italian has i, gli, le."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian has many plural patterns too, some with a change inside the word (natë – net, mik – miq); German also changes the vowel (Nacht – Nächte, Buch – Bücher), so each plural is learned with the noun. The plural article is always die."
+   "text": "Albanian has many plural patterns too, some with a change inside the word (natë – net, mik – miq).\n\nGerman also changes the vowel (Nacht – Nächte, Buch – Bücher), so each plural is learned with the noun. The plural article is always die."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese adds -s (livro – livros); German has five patterns, often with an umlaut (Buch – Bücher, Stuhl – Stühle), and -s only for loanwords and words in a vowel: Handys, Sofas. The plural article is always die, where Portuguese has os / as."
+   "text": "Portuguese adds -s (livro – livros). German has:\n- five patterns, often with an umlaut (Buch – Bücher, Stuhl – Stühle);\n- -s only for loanwords and words in a vowel: Handys, Sofas.\n\nThe plural article is always die, where Portuguese has os / as."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your plurals depend on gender and declension class, the idea is familiar: German has five patterns, often with umlaut (Buch – Bücher), and one plural article for all genders, die. Learn each noun as the dictionary gives it: der Stuhl, -¨e."
+   "text": "If your plurals depend on gender and declension class, the idea is familiar: German has five patterns, often with umlaut (Buch – Bücher), and one plural article for all genders, die.\n\nLearn each noun as the dictionary gives it:\n→ der Stuhl, -¨e"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your language has one plural suffix, German has five patterns and an inner vowel change: Tische, Kinder, Frauen, Zimmer, Bücher. After a number the noun is plural too: zwei Tische."
+   "text": "If your language has one plural suffix, German has five patterns and an inner vowel change:\n→ Tische, Kinder, Frauen, Zimmer, Bücher\n\nAfter a number the noun is plural too: zwei Tische."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your nouns do not change for number, note that every German noun does (Tisch – Tische, Buch – Bücher) and that its pattern must be learned with it; the plural article is die."
+   "text": "If your nouns do not change for number, note that:\n- every German noun does (Tisch – Tische, Buch – Bücher);\n- its pattern must be learned with it;\n- the plural article is die."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language marks number with suffixes, perhaps with a dual, German has only singular and plural, made in five ways – Tische, Kinder, Frauen, Zimmer, Handys – some with an umlaut: Bücher."
+   "text": "If your language marks number with suffixes, perhaps with a dual, German has only singular and plural, made in five ways – some with an umlaut:\n→ Tische, Kinder, Frauen, Zimmer, Handys\n→ Bücher"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "If some of your plurals are made inside the word, the German umlaut plurals will look familiar: Buch – Bücher, Vater – Väter, Mutter – Mütter. German has no dual, and the plural article die is the same for all genders."
+   "text": "If some of your plurals are made inside the word, the German umlaut plurals will look familiar:\n→ Buch – Bücher, Vater – Väter, Mutter – Mütter\n\nGerman has no dual, and the plural article die is the same for all genders."
   }
  ]
 }

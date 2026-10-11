@@ -398,37 +398,37 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek separates aorist and imperfect (έφαγα / έτρωγα); German has no aspect: Ich habe gegessen and Ich aß cover both. The German Perfekt (habe gegessen) is the everyday spoken past, while the Greek perfect (έχω φάει) is used much less than the aorist."
+   "text": "Greek separates aorist and imperfect (έφαγα / έτρωγα); **German has no aspect**: Ich habe gegessen and Ich aß cover both.\n\nThe German Perfekt (habe gegessen) is the everyday spoken past, while the Greek perfect (έχω φάει) is used much less than the aorist."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian chooses between aspects (делал / сделал) and marks gender in the past (делал / делала); German marks neither: Ich habe gemacht. The two German forms (Perfekt, Präteritum) differ in register, not in meaning."
+   "text": "Russian chooses between aspects (делал / сделал) and marks gender in the past (делал / делала); German marks neither:\n→ Ich habe gemacht.\n\nThe two German forms (Perfekt, Präteritum) differ **in register, not in meaning**."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "Ich habe gegessen translates both comí and he comido – the Perfekt goes happily with ayer: Ich habe gestern gegessen. Unlike haber, German also uses sein: Ich bin gegangen."
+   "text": "Ich habe gegessen translates both comí and he comido – the Perfekt goes happily with ayer:\n→ Ich habe gestern gegessen.\n\nUnlike haber, German also uses sein: Ich bin gegangen."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "Ich habe gestern gefrühstückt is fine, although “I have had breakfast yesterday” is not: the German Perfekt is simply the spoken past. Some verbs take sein (Ich bin aufgestanden), and the participle goes to the end."
+   "text": "Ich habe gestern gefrühstückt is fine, although “I have had breakfast yesterday” is not: **the German Perfekt is simply the spoken past**.\n\nSome verbs take sein (Ich bin aufgestanden), and the participle goes to the end."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "Like the passé composé, the Perfekt is the spoken past and chooses between haben and sein (être) for movement. But reflexive verbs take haben in German: Ich habe mich angezogen (je me suis habillé). The Präteritum plays the role of the written passé simple."
+   "text": "Like the passé composé, the Perfekt is the spoken past and chooses between haben and sein (être) for movement.\n\n- But reflexive verbs take haben in German: Ich habe mich angezogen (je me suis habillé).\n- The Präteritum plays the role of the written passé simple."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "The Hindi perfective past agrees in gender and number and transitive verbs take ने (मैंने खाना खाया); the German past never shows gender and has no ergative: ich habe gegessen, sie hat gegessen."
+   "text": "The Hindi perfective past agrees in gender and number and transitive verbs take ने (मैंने खाना खाया).\n\nThe German past never shows gender and has no ergative:\n→ ich habe gegessen, sie hat gegessen"
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian builds its past from the past stem with person endings (raftam “I went”); German speech needs an auxiliary and a participle at the end: Ich bin gegangen."
+   "text": "Persian builds its past from the past stem with person endings (raftam “I went”).\n\nGerman speech needs an auxiliary and a participle at the end:\n→ Ich bin gegangen."
   },
   {
    "for": "mr",
@@ -438,7 +438,7 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic says the past with one word with person endings (kataba, katabtu); German speech uses two words, the auxiliary second and the participle at the end, and shows no gender."
+   "text": "Arabic says the past with one word with person endings (kataba, katabtu).\n\nGerman speech uses two words, the auxiliary second and the participle at the end, and shows no gender."
   },
   {
    "for": "he",
@@ -448,12 +448,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish distinguishes the witnessed past -di (geldi) from the reported or inferred -miş (gelmiş); the German past forms say nothing about how you know: Er ist gekommen."
+   "text": "Turkish distinguishes the witnessed past -di (geldi) from the reported or inferred -miş (gelmiş).\n\nThe German past forms say nothing about how you know:\n→ Er ist gekommen."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese adds one past ending at the end of the verb (tabeta, tabemashita); German splits the verb: the auxiliary is second and the participle last (Ich habe … gegessen), and chooses between haben and sein."
+   "text": "Japanese adds one past ending at the end of the verb (tabeta, tabemashita). German:\n- splits the verb: the auxiliary is second and the participle last (Ich habe … gegessen);\n- chooses between haben and sein."
   },
   {
    "for": "ko",
@@ -463,7 +463,7 @@
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish also has a simple past (söin) and a perfect with an auxiliary (olen syönyt); but the Finnish participle agrees in number and the auxiliary is always olla, while German chooses haben or sein and never changes the participle."
+   "text": "Finnish also has a simple past (söin) and a perfect with an auxiliary (olen syönyt).\n\nBut the Finnish participle agrees in number and the auxiliary is always olla, while German chooses haben or sein and never changes the participle."
   },
   {
    "for": "hu",
@@ -473,7 +473,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili marks the past with the prefix -li- (nilikula) and the perfect with -me- (nimekula); in German the past is either one word (aß) or an auxiliary + participle (habe gegessen), with no difference in meaning."
+   "text": "Swahili marks the past with the prefix -li- (nilikula) and the perfect with -me- (nimekula).\n\nIn German the past is either one word (aß) or an auxiliary + participle (habe gegessen), **with no difference in meaning**."
   },
   {
    "for": "lg",
@@ -483,7 +483,7 @@
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese verbs never change and 了 marks completion; German must put the verb in the past (habe gefrühstückt), even when a time word like gestern already says it."
+   "text": "Chinese verbs never change and 了 marks completion.\n\nGerman must put the verb in the past (habe gefrühstückt), even when a time word like gestern already says it."
   },
   {
    "for": "vi",
@@ -493,47 +493,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks past time with suffixes inside the long verb word and distinguishes how long ago it happened; German has one past and builds it with separate words (auxiliary + participle)."
+   "text": "Inuktitut marks past time with suffixes inside the long verb word and distinguishes how long ago it happened.\n\nGerman has one past and builds it with separate words (auxiliary + participle)."
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Like the passato prossimo, the Perfekt is the spoken past and chooses haben or sein as avere / essere: Ich bin gegangen (sono andato). But reflexive verbs take haben (Ich habe mich angezogen – mi sono vestito), and there is no imperfetto: mangiavo is Ich aß or Ich habe gegessen, with a time word."
+   "text": "Like the passato prossimo, the Perfekt is the spoken past and chooses haben or sein as avere / essere:\n→ Ich bin gegangen (sono andato)\n\nBut:\n- reflexive verbs take haben (Ich habe mich angezogen – mi sono vestito);\n- there is no imperfetto: mangiavo is Ich aß or Ich habe gegessen, with a time word."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian separates the simple past (hëngra), the imperfect (haja) and the perfect (kam ngrënë); German has no aspect – Ich habe gegessen is the everyday past for all of them. Movement verbs take kam in Albanian (kam ardhur) but sein in German: Ich bin gekommen."
+   "text": "Albanian separates the simple past (hëngra), the imperfect (haja) and the perfect (kam ngrënë); **German has no aspect** – Ich habe gegessen is the everyday past for all of them.\n\nMovement verbs take kam in Albanian (kam ardhur) but sein in German:\n→ Ich bin gekommen."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "Ich habe gegessen is the everyday past – comi, not tenho comido (which says a repeated or continuing action). German also uses sein for movement (Ich bin gegangen – fui), and it has no imperfeito: comia is Ich aß, with a word like früher or gerade."
+   "text": "Ich habe gegessen is the everyday past – comi, not tenho comido (which says a repeated or continuing action).\n\n- German also uses sein for movement (Ich bin gegangen – fui).\n- It has no imperfeito: comia is Ich aß, with a word like früher or gerade."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language has a perfect with “have” and perhaps “be”, the Perfekt is familiar – but it is the plain spoken past, also with a past time word (Ich habe gestern gefrühstückt), and it does not separate finished from ongoing actions."
+   "text": "If your language has a perfect with “have” and perhaps “be”, the Perfekt is familiar – but:\n- it is the plain spoken past, also with a past time word (Ich habe gestern gefrühstückt);\n- it does not separate finished from ongoing actions."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your past is a suffix on the verb, the German Perfekt splits it in two: the helper (habe, bin) second and the participle (ge-…-t / ge-…-en) at the very end: Ich bin um sechs aufgestanden."
+   "text": "If your past is a suffix on the verb, the German Perfekt splits it in two: the helper (habe, bin) second and the participle (ge-…-t / ge-…-en) at the very end:\n→ Ich bin um sechs aufgestanden."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your verb never changes and a particle or a time word marks the past, German must change the verb – Ich habe gefrühstückt, Ich bin aufgestanden – even when gestern already says it."
+   "text": "If your verb never changes and a particle or a time word marks the past, German must change the verb – even when gestern already says it:\n→ Ich habe gefrühstückt, Ich bin aufgestanden"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "Where your language adds tense inside one long verb, German builds its spoken past from two words with a bracket around the rest: the helper second, the participle last – Ich habe den Kaffee getrunken."
+   "text": "Where your language adds tense inside one long verb, German builds its spoken past from two words with a bracket around the rest: the helper second, the participle last.\n→ Ich habe den Kaffee getrunken."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your past is a conjugation of the root with person suffixes, the German spoken past uses a helper (haben or sein) and a participle at the end: Ich habe gegessen, Ich bin gekommen. Strong verbs change the vowel of the participle, a little like a pattern: trinken → getrunken, nehmen → genommen."
+   "text": "If your past is a conjugation of the root with person suffixes, the German spoken past uses a helper (haben or sein) and a participle at the end:\n→ Ich habe gegessen, Ich bin gekommen.\n\nStrong verbs change the vowel of the participle, a little like a pattern: trinken → getrunken, nehmen → genommen."
   }
  ]
 }

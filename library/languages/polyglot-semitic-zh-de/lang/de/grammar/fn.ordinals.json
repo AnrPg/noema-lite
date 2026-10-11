@@ -425,12 +425,12 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "Greek ordinals also agree in gender, number and case (πρώτος, πρώτη, πρώτο), but Greek dates use the cardinal after the first (στις τρεις Μαΐου), while German always uses the ordinal: am dritten Mai. And οκτώ και μισή (8:30) is halb neun in German."
+   "text": "Greek ordinals also agree in gender, number and case (πρώτος, πρώτη, πρώτο).\n\n- Greek dates use the cardinal after the first (στις τρεις Μαΐου), while German always uses the ordinal: am dritten Mai.\n- οκτώ και μισή (8:30) is halb neun in German."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian ordinals decline like adjectives (первый, первая …) and половина девятого (8:30) counts to the next hour – exactly like halb neun. Dates: третьего мая = am dritten Mai."
+   "text": "- Russian ordinals decline like adjectives (первый, первая …).\n- половина девятого (8:30) counts to the next hour – exactly like halb neun.\n- Dates: третьего мая = am dritten Mai."
   },
   {
    "for": "es",
@@ -450,7 +450,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi ordinals (पहला, दूसरा, तीसरा, चौथा, then -वाँ: पाँचवाँ) agree in gender; the clock says साढ़े आठ for 8:30, counted from the hour before – German: halb neun."
+   "text": "- Hindi ordinals (पहला, दूसरा, तीसरा, चौथा, then -वाँ: पाँचवाँ) agree in gender.\n- The clock says साढ़े आठ for 8:30, counted from the hour before – German: halb neun."
   },
   {
    "for": "fa",
@@ -465,17 +465,17 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic ordinals are built on the pattern fāʿil (ثَالِث, رَابِع); German adds -te / -ste. 8:30 is the eighth (hour) and a half in Arabic – halb neun in German."
+   "text": "- Arabic ordinals are built on the pattern fāʿil (ثَالِث, رَابِع); German adds -te / -ste.\n- 8:30 is the eighth (hour) and a half in Arabic – halb neun in German."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew has ordinals only up to ten and uses cardinals for dates (בִּשְׁלוֹשָׁה בְּמַאי); German has an ordinal for every number and uses it for dates: am dritten Mai."
+   "text": "Hebrew has ordinals only up to ten and uses cardinals for dates (בִּשְׁלוֹשָׁה בְּמַאי).\n\nGerman has an ordinal for every number and uses it for dates:\n→ am dritten Mai"
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish ordinals add -(i)nci with vowel harmony (birinci, üçüncü) and never agree; German ordinals decline like adjectives. Sekiz buçuk (8:30) = halb neun."
+   "text": "- Turkish ordinals add -(i)nci with vowel harmony (birinci, üçüncü) and never agree; German ordinals decline like adjectives.\n- Sekiz buçuk (8:30) = halb neun."
   },
   {
    "for": "ja",
@@ -500,7 +500,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili ordinals follow the noun with an agreement prefix (siku ya tatu, the third day), and the clock counts from about 6 in the morning (saa mbili = 8:00); German counts from midnight and puts the ordinal before the noun."
+   "text": "- Swahili ordinals follow the noun with an agreement prefix (siku ya tatu, the third day); German puts the ordinal before the noun.\n- The Swahili clock counts from about 6 in the morning (saa mbili = 8:00); German counts from midnight."
   },
   {
    "for": "zh",
@@ -515,42 +515,42 @@
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "In languages that pack much into one word an ordinal can be a suffix on a number or a noun; German keeps it a separate word that agrees like an adjective: der dritte Tag, am dritten Tag."
+   "text": "In languages that pack much into one word an ordinal can be a suffix on a number or a noun.\n\nGerman keeps it a separate word that agrees like an adjective:\n→ der dritte Tag, am dritten Tag"
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "Italian dates use cardinals after the first (il tre maggio, but il primo maggio); German always uses the ordinal: der dritte Mai, am dritten Mai. Le otto e mezza is halb neun – not halb acht."
+   "text": "Italian dates use cardinals after the first (il tre maggio, but il primo maggio); German **always uses the ordinal**:\n→ der dritte Mai, am dritten Mai\n\nLe otto e mezza is halb neun – not halb acht."
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "Albanian dates use the cardinal (më tre maj); German uses the ordinal: am dritten Mai. Albanian ordinals take a linking article (i tretë, e tretë), German ones adjective endings (der dritte, am dritten). Ora tetë e gjysmë (8:30) is halb neun."
+   "text": "- Albanian dates use the cardinal (më tre maj); German uses the ordinal: am dritten Mai.\n- Albanian ordinals take a linking article (i tretë, e tretë), German ones adjective endings (der dritte, am dritten).\n- Ora tetë e gjysmë (8:30) is halb neun."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "Portuguese dates use the cardinal (três de maio); German uses the ordinal: der dritte Mai, am dritten Mai. Oito e meia (8:30) is halb neun – not halb acht."
+   "text": "Portuguese dates use the cardinal (três de maio); German uses the ordinal:\n→ der dritte Mai, am dritten Mai\n\nOito e meia (8:30) is halb neun – not halb acht."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your ordinals agree like adjectives, the German ones do too (der erste, die erste, am ersten). Note that German dates always use the ordinal (am dritten Mai) and that halb counts towards the next hour: halb neun = 8:30."
+   "text": "If your ordinals agree like adjectives, the German ones do too (der erste, die erste, am ersten). Note that:\n- German dates always use the ordinal (am dritten Mai);\n- halb counts towards the next hour: halb neun = 8:30."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your ordinal is the number plus one suffix that never changes, German adds -te / -ste and then an adjective ending: der dritte Tag, am dritten Tag. halb neun is 8:30 – the half on the way to nine."
+   "text": "If your ordinal is the number plus one suffix that never changes, German adds -te / -ste and then an adjective ending:\n→ der dritte Tag, am dritten Tag\n\nhalb neun is 8:30 – the half on the way to nine."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If a word before the number makes the ordinal and nothing changes, German adds -te / -ste and declines the result like an adjective: der dritte, am dritten. The clock counts towards the next hour: halb neun = 8:30."
+   "text": "If a word before the number makes the ordinal and nothing changes, German adds -te / -ste and declines the result like an adjective:\n→ der dritte, am dritten\n\nThe clock counts towards the next hour: halb neun = 8:30."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your ordinals follow the noun or have patterns of their own, German ordinals stand before it, built with -te / -ste (zweite, zwanzigste; irregular erste, dritte, siebte, achte) and declined: der dritte Tag, am dritten Tag. halb neun is 8:30."
+   "text": "If your ordinals follow the noun or have patterns of their own, German ordinals stand before it, built with -te / -ste (zweite, zwanzigste; irregular erste, dritte, siebte, achte) and declined:\n→ der dritte Tag, am dritten Tag\n\nhalb neun is 8:30."
   }
  ]
 }

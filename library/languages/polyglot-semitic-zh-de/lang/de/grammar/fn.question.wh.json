@@ -470,12 +470,12 @@
   {
    "lang": "ar",
    "fn": "fn.question.wh",
-   "note": "Arabic also puts the question word first: mā / mādhā (what), man (who), ayna (where), matā (when), kayfa (how), li-mādhā (why), kam (how many, + a singular noun), ayy (which)."
+   "note": "Arabic also puts the question word first:\n- mā / mādhā (what), man (who), ayna (where), matā (when);\n- kayfa (how), li-mādhā (why), kam (how many, + a singular noun), ayy (which)."
   },
   {
    "lang": "he",
    "fn": "fn.question.wh",
-   "note": "Hebrew question words come first too: ma, mi, eifo, matai, eikh, lama, kama, eize / eizo; “whose” is shel mi – literally “of whom”, like German von wem."
+   "note": "Hebrew question words come first too: ma, mi, eifo, matai, eikh, lama, kama, eize / eizo.\n\n“whose” is shel mi – literally “of whom”, like German von wem."
   },
   {
    "lang": "zh",
@@ -492,12 +492,12 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "The question word comes first in Greek too (Τι πίνεις;), and ποιος / ποιον / ποιου decline like wer / wen / wessen. German adds a strict rule: the verb right after the question word, then the subject. τι – was, ποιος – wer, πού – wo, πότε – wann, πώς – wie, γιατί – warum, πόσο / πόσοι – wie viel / wie viele."
+   "text": "The question word comes first in Greek too (Τι πίνεις;), and ποιος / ποιον / ποιου decline like wer / wen / wessen.\n\nGerman adds a strict rule: **the verb right after the question word, then the subject**.\n→ τι – was, ποιος – wer, πού – wo, πότε – wann, πώς – wie, γιατί – warum, πόσο / πόσοι – wie viel / wie viele"
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Что ты пьёшь? puts the question word first as German does, but Russian lets the subject come before the verb; German never does: Was trinkst du? кто / кого / кому decline like wer / wen / wem."
+   "text": "Что ты пьёшь? puts the question word first as German does, but Russian lets the subject come before the verb; **German never does**:\n→ Was trinkst du?\n\nкто / кого / кому decline like wer / wen / wem."
   },
   {
    "for": "es",
@@ -507,7 +507,7 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "German has no do: What do you drink? = Was trinkst du? wer looks like “where” but means “who”; “where” is wo. whose = wessen, but everyday German prefers Von wem ist das?"
+   "text": "- German has no do: What do you drink? = Was trinkst du?\n- **wer looks like “where” but means “who”**; “where” is wo.\n- whose = wessen, but everyday German prefers Von wem ist das?"
   },
   {
    "for": "fr",
@@ -582,47 +582,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut uses question words together with question endings on the verb (Qanuippit? How are you?); German puts the question word first and the plain verb right after it: Wie geht es dir?"
+   "text": "Inuktitut uses question words together with question endings on the verb (Qanuippit? How are you?).\n\nGerman puts the question word first and the plain verb right after it:\n→ Wie geht es dir?"
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Che cosa bevi? – question word first, then the verb, as in Was trinkst du?; but German always adds the subject after the verb. Come ti chiami? asks “how”, just like Wie heißt du? (not *Was heißt du?)."
+   "text": "Che cosa bevi? – question word first, then the verb, as in Was trinkst du?; but German **always adds the subject** after the verb.\n\nCome ti chiami? asks “how”, just like Wie heißt du? (not *Was heißt du?)."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Çfarë pi? – question word first, as in Was trinkst du?, but German must add the subject after the verb. Si quhesh? asks “how”, exactly like Wie heißt du?; kush is wer, ku wo, kur wann, pse warum, sa wie viel / wie viele."
+   "text": "Çfarë pi? – question word first, as in Was trinkst du?, but German must add the subject after the verb.\n\n- Si quhesh? asks “how”, exactly like Wie heißt du?\n- kush is wer, ku wo, kur wann, pse warum, sa wie viel / wie viele."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "O que bebes? – question word first, then the verb, as in Was trinkst du?; but German always adds the subject. Como te chamas? asks “how”, like Wie heißt du?; quem is wer, onde wo, quando wann."
+   "text": "O que bebes? – question word first, then the verb, as in Was trinkst du?; but German **always adds the subject**.\n\n- Como te chamas? asks “how”, like Wie heißt du?\n- quem is wer, onde wo, quando wann."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your question words come first and decline, German is close: wer / wen / wem / wessen, welcher like dieser. The strict part is the order: question word – verb – subject: Was trinkst du?"
+   "text": "If your question words come first and decline, German is close: wer / wen / wem / wessen, welcher like dieser.\n\nThe strict part is the order: question word – verb – subject.\n→ Was trinkst du?"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your question word stays where the answer would be and the verb comes last, German moves the question word to the front and the verb right after it: Was trinkst du? Wo ist der Bahnhof?"
+   "text": "If your question word stays where the answer would be and the verb comes last, German moves the question word to the front and the verb right after it:\n→ Was trinkst du? Wo ist der Bahnhof?"
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If the question word stays in the place of the answer, German moves it to the front and puts the verb second: Was trinkst du? (Du trinkst was? is only an echo question)."
+   "text": "If the question word stays in the place of the answer, German moves it to the front and puts the verb second:\n→ Was trinkst du?\n\nDu trinkst was? is only an echo question."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "German question words are separate words, all beginning with w- (was, wer, wo, wann, wie, warum), placed first and followed by the verb: Wo ist der Bahnhof?"
+   "text": "German question words are separate words, all beginning with w- (was, wer, wo, wann, wie, warum), placed first and followed by the verb:\n→ Wo ist der Bahnhof?"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Question word first will feel natural; German adds that the verb comes right after it and the subject follows (Was trinkst du?), and that wer and welcher change for case: wen, wem, welchen Tee."
+   "text": "Question word first will feel natural; German adds:\n- the verb comes right after it and the subject follows (Was trinkst du?);\n- wer and welcher change for case: wen, wem, welchen Tee."
   }
  ]
 }

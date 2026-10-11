@@ -209,12 +209,12 @@
   {
    "for": "es",
    "rel": "trap",
-   "text": "One verb, sein, covers ser and estar: Ich bin Lehrer, Ich bin müde, Ich bin hier. As in Spanish, a job takes no article (Soy profesor – Ich bin Lehrer)."
+   "text": "One verb, sein, covers ser and estar:\n→ Ich bin Lehrer, Ich bin müde, Ich bin hier.\n\nAs in Spanish, a job takes no article (Soy profesor – Ich bin Lehrer)."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English needs “a” with a job (I am a teacher); German has none: Ich bin Lehrer. Ich bin ein Lehrer sounds wrong unless an adjective comes in (ein guter Lehrer)."
+   "text": "English needs “a” with a job (I am a teacher); German has none:\n→ Ich bin Lehrer.\n\nIch bin ein Lehrer sounds wrong unless an adjective comes in (ein guter Lehrer)."
   },
   {
    "for": "fr",
@@ -224,12 +224,12 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "The copula is always there and agrees with the person (maĩ śikṣak hū̃, vah śikṣak hai), as sein does (ich bin, er ist); but German puts it second, not at the end. The speaker’s sex never shows: ich bin müde for everyone, where Hindi says maĩ thakā hū̃ / maĩ thakī hū̃."
+   "text": "The copula is always there and agrees with the person (maĩ śikṣak hū̃, vah śikṣak hai), as sein does (ich bin, er ist); but German puts it **second, not at the end**.\n\nThe speaker’s sex never shows: ich bin müde for everyone, where Hindi says maĩ thakā hū̃ / maĩ thakī hū̃."
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian also needs “to be” (man dānešju hastam / dānešju-am); German uses a separate, very irregular verb (bin, bist, ist) and puts it second, not at the end."
+   "text": "Persian also needs “to be” (man dānešju hastam / dānešju-am).\n\nGerman uses a separate, very irregular verb (bin, bist, ist) and puts it **second, not at the end**."
   },
   {
    "for": "mr",
@@ -244,12 +244,12 @@
   {
    "for": "he",
    "rel": "trap",
-   "text": "Hebrew has no present-tense “to be” (ani student; ha-bayit gadol); German always needs sein: Ich bin Student. Das Haus ist groß. Nothing shows the speaker’s sex: ich bin müde for ani ayef and ani ayefa alike."
+   "text": "Hebrew has no present-tense “to be” (ani student; ha-bayit gadol); German **always needs sein**:\n→ Ich bin Student. Das Haus ist groß.\n\nNothing shows the speaker’s sex: ich bin müde for ani ayef and ani ayefa alike."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish adds a personal suffix (öğretmenim) and often nothing in the 3rd person (O öğretmen); German needs a separate verb in every person: Ich bin Lehrer, Er ist Lehrer."
+   "text": "Turkish adds a personal suffix (öğretmenim) and often nothing in the 3rd person (O öğretmen).\n\nGerman needs a separate verb in every person:\n→ Ich bin Lehrer, Er ist Lehrer."
   },
   {
    "for": "ja",
@@ -259,7 +259,7 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "The copula -ida is attached to the noun (haksaeng-ida), and adjectives are verbs (keuda); German has the separate verb sein for both: Ich bin Student. Das Haus ist groß."
+   "text": "The copula -ida is attached to the noun (haksaeng-ida), and adjectives are verbs (keuda).\n\nGerman has the separate verb sein for both:\n→ Ich bin Student. Das Haus ist groß."
   },
   {
    "for": "fi",
@@ -289,47 +289,47 @@
   {
    "for": "iu",
    "rel": "new",
-   "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and adds the person ending, all in one word. German uses the separate verb sein and a noun after it: Ich bin Lehrer."
+   "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and adds the person ending, all in one word.\n\nGerman uses the separate verb sein and a noun after it:\n→ Ich bin Lehrer."
   },
   {
    "for": "it",
    "rel": "same",
-   "text": "Like essere, sein is never left out and a job takes no article: Sono insegnante – Ich bin Lehrer. German has no second verb like stare: being somewhere is sein too (Ich bin zu Hause)."
+   "text": "Like essere, sein is never left out and a job takes no article:\n→ Sono insegnante – Ich bin Lehrer.\n\nGerman has no second verb like stare: being somewhere is sein too (Ich bin zu Hause)."
   },
   {
    "for": "sq",
    "rel": "same",
-   "text": "Like jam, sein is never left out and a job takes no article: Jam mësues – Ich bin Lehrer. Both make the feminine job word with an ending: mësuese – Lehrerin."
+   "text": "Like jam, sein is never left out and a job takes no article:\n→ Jam mësues – Ich bin Lehrer.\n\nBoth make the feminine job word with an ending: mësuese – Lehrerin."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "One verb, sein, covers ser and estar: Ich bin Lehrer (sou professor), Ich bin müde (estou cansado), Ich bin zu Hause (estou em casa). As in Portuguese, a job takes no article: Sou professor – Ich bin Lehrer."
+   "text": "One verb, sein, covers ser and estar:\n→ Ich bin Lehrer (sou professor)\n→ Ich bin müde (estou cansado)\n→ Ich bin zu Hause (estou em casa)\n\nAs in Portuguese, a job takes no article: Sou professor – Ich bin Lehrer."
   },
   {
    "for": "type:fusional",
    "rel": "same",
-   "text": "If your language uses a verb “to be” that changes for the person, sein is familiar – only very irregular (bin, bist, ist, sind, seid, sind) – and a job takes no article: Ich bin Lehrer."
+   "text": "If your language uses a verb “to be” that changes for the person, sein is familiar – only very irregular (bin, bist, ist, sind, seid, sind).\n\nA job takes no article:\n→ Ich bin Lehrer."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If “to be” is a suffix on the noun in your language, or nothing at all in the 3rd person, German needs a separate verb in every person: Ich bin Lehrer, Er ist Lehrer – and sein stands second, not at the end."
+   "text": "If “to be” is a suffix on the noun in your language, or nothing at all in the 3rd person, German needs a separate verb in every person – and sein stands **second, not at the end**:\n→ Ich bin Lehrer, Er ist Lehrer"
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If one unchanging word links two nouns and adjectives need no link at all, note that German sein changes for every person (bin, bist, ist …) and links adjectives too: Ich bin Student. Ich bin müde."
+   "text": "If one unchanging word links two nouns and adjectives need no link at all, note that:\n- German sein changes for every person (bin, bist, ist …);\n- it links adjectives too: Ich bin Student. Ich bin müde."
   },
   {
    "for": "type:polysynthetic",
    "rel": "new",
-   "text": "If your language turns the noun itself into a verb (“be a teacher” as one word), German uses the separate verb sein and a noun after it: Ich bin Lehrer, Sie ist Lehrerin."
+   "text": "If your language turns the noun itself into a verb (“be a teacher” as one word), German uses the separate verb sein and a noun after it:\n→ Ich bin Lehrer, Sie ist Lehrerin."
   },
   {
    "for": "branch:Semitic",
    "rel": "trap",
-   "text": "If your language can join two nouns in the present with no verb (or with a pronoun as the link), German cannot: sein is always there – Ich bin Student, Das Haus ist groß – and it changes for the person, never for the speaker’s sex."
+   "text": "If your language can join two nouns in the present with no verb (or with a pronoun as the link), German cannot: **sein is always there**.\n→ Ich bin Student, Das Haus ist groß\n\nIt changes for the person, never for the speaker’s sex."
   }
  ]
 }

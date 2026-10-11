@@ -392,17 +392,17 @@
   {
    "lang": "ar",
    "fn": "fn.prep.time",
-   "note": "Arabic قَبْلَ (before), بَعْدَ (after), حَتَّى (until), مُنْذُ (since), أَثْنَاءَ / خِلَالَ (during), فِي + month; the hour is said with the ordinal: السَّاعَةَ الثَّامِنَةَ (at eight o’clock)."
+   "note": "Arabic:\n- قَبْلَ (before), بَعْدَ (after), حَتَّى (until), مُنْذُ (since), أَثْنَاءَ / خِلَالَ (during), فِي + month;\n- the hour is said with the ordinal: السَّاعَةَ الثَّامِنَةَ (at eight o’clock)."
   },
   {
    "lang": "he",
    "fn": "fn.prep.time",
-   "note": "Hebrew לִפְנֵי (before; also “ago”), אַחֲרֵי (after), עַד (until), מֵאָז / מִ־ (since), בְּמֶשֶׁךְ (during), בְּ + month or hour (בְּשָׁעָה שְׁמוֹנֶה)."
+   "note": "Hebrew:\n- לִפְנֵי (before; also “ago”), אַחֲרֵי (after), עַד (until);\n- מֵאָז / מִ־ (since), בְּמֶשֶׁךְ (during);\n- בְּ + month or hour (בְּשָׁעָה שְׁמוֹנֶה)."
   },
   {
    "lang": "zh",
    "fn": "fn.prep.time",
-   "note": "Chinese puts the time phrase before the verb and the “before / after” word after the time: 八点以前 (before eight), 八点以后 (after eight); 从 … 到 … (from … to …); o’clock is 点."
+   "note": "Chinese puts the time phrase before the verb and the “before / after” word after the time:\n→ 八点以前 (before eight), 八点以后 (after eight)\n\n从 … 到 … (from … to …); o’clock is 点."
   },
   {
    "lang": "de",
@@ -419,7 +419,7 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "οχτώμισι counts from the hour before; German halb neun is 8:30 (“half to nine”). στις οκτώ, τη Δευτέρα, τον Μάιο become um acht, am Montag, im Mai – three prepositions. μένω εδώ από … is Ich wohne seit … hier: the present in both."
+   "text": "- οχτώμισι counts from the hour before; German halb neun is 8:30 (“half to nine”).\n- στις οκτώ, τη Δευτέρα, τον Μάιο become um acht, am Montag, im Mai – three prepositions.\n- μένω εδώ από … is Ich wohne seit … hier: the present in both."
   },
   {
    "for": "ru",
@@ -429,12 +429,12 @@
   {
    "for": "es",
    "rel": "trap",
-   "text": "las ocho y media counts from eight; halb neun means the same time but names nine. Vivo aquí desde hace tres años uses the present, as Ich wohne seit drei Jahren hier does."
+   "text": "- las ocho y media counts from eight; halb neun means the same time but names nine.\n- Vivo aquí desde hace tres años uses the present, as Ich wohne seit drei Jahren hier does."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "“half past eight” is halb neun (half to nine). “I have lived here for three years” is Ich wohne seit drei Jahren hier – present tense. Not *in 2026: say 2026 or im Jahr 2026. “ago” follows the time, vor precedes it: vor zwei Wochen."
+   "text": "- “half past eight” is **halb neun** (half to nine).\n- “I have lived here for three years” is Ich wohne seit drei Jahren hier – present tense.\n- Not *in 2026: say 2026 or im Jahr 2026.\n- “ago” follows the time, vor precedes it: vor zwei Wochen."
   },
   {
    "for": "fr",
@@ -444,7 +444,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has its own words for half past (sāṛhe āṭh = 8:30, ḍeṛh = 1:30, ḍhāī = 2:30) and puts baje after the number (āṭh baje); German says um acht Uhr and halb neun for 8:30."
+   "text": "Hindi has its own words for half past (sāṛhe āṭh = 8:30, ḍeṛh = 1:30, ḍhāī = 2:30) and puts baje after the number (āṭh baje).\n\nGerman says um acht Uhr and halb neun for 8:30."
   },
   {
    "for": "fa",
@@ -464,17 +464,17 @@
   {
    "for": "he",
    "rel": "trap",
-   "text": "shmone va-chetsi (8:30) counts from eight; halb neun names nine. ani gar kan kvar shalosh shanim uses the present, like Ich wohne seit drei Jahren hier."
+   "text": "- shmone va-chetsi (8:30) counts from eight; halb neun names nine.\n- ani gar kan kvar shalosh shanim uses the present, like Ich wohne seit drei Jahren hier."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish uses suffixes (saat sekizde, mayısta) and sekiz buçuk for 8:30, counted from eight; but iki yıldır burada oturuyorum keeps the present, as German does with seit."
+   "text": "Turkish uses suffixes (saat sekizde, mayısta) and sekiz buçuk for 8:30, counted from eight.\n\nBut iki yıldır burada oturuyorum keeps the present, as German does with seit."
   },
   {
    "for": "ja",
    "rel": "trap",
-   "text": "hachi-ji han (8:30) counts from eight; halb neun names nine. Japanese puts mae / ato after the time (hachi-ji mae); German vor / nach come before it: vor acht Uhr."
+   "text": "- hachi-ji han (8:30) counts from eight; halb neun names nine.\n- Japanese puts mae / ato after the time (hachi-ji mae); German vor / nach come before it: vor acht Uhr."
   },
   {
    "for": "ko",
@@ -509,47 +509,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks “at”, “since”, “until” mostly with endings on the noun or the verb; German puts a preposition before the time word and the article in its case: am Montag, seit einer Woche."
+   "text": "Inuktitut marks “at”, “since”, “until” mostly with endings on the noun or the verb.\n\nGerman puts a preposition before the time word and the article in its case:\n→ am Montag, seit einer Woche"
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "le otto e mezza counts from eight; halb neun names nine. alle otto, lunedì, a maggio become um acht, am Montag, im Mai. Abito qui da tre anni uses the present, as Ich wohne seit drei Jahren hier does; tre anni fa puts “ago” after the time, vor drei Jahren before it."
+   "text": "- le otto e mezza counts from eight; halb neun names nine.\n- alle otto, lunedì, a maggio become um acht, am Montag, im Mai.\n- Abito qui da tre anni uses the present, as Ich wohne seit drei Jahren hier does.\n- tre anni fa puts “ago” after the time, vor drei Jahren before it."
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "tetë e gjysmë counts from eight; halb neun names nine. në orën tetë, të hënën, në maj become um acht, am Montag, im Mai. para dy javësh is built like vor zwei Wochen, and gjatë + ablative works like während + genitive: während der Woche."
+   "text": "- tetë e gjysmë counts from eight; halb neun names nine.\n- në orën tetë, të hënën, në maj become um acht, am Montag, im Mai.\n- para dy javësh is built like vor zwei Wochen.\n- gjatë + ablative works like während + genitive: während der Woche."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "oito e meia counts from eight; halb neun names nine. às oito, na segunda-feira, em maio become um acht, am Montag, im Mai. Moro aqui há três anos uses the present, as Ich wohne seit drei Jahren hier does – and há três anos (ago) is vor drei Jahren."
+   "text": "- oito e meia counts from eight; halb neun names nine.\n- às oito, na segunda-feira, em maio become um acht, am Montag, im Mai.\n- Moro aqui há três anos uses the present, as Ich wohne seit drei Jahren hier does – and há três anos (ago) is vor drei Jahren."
   },
   {
    "for": "type:fusional",
    "rel": "trap",
-   "text": "If your half hours count from the hour before, halb neun is the trap: it is 8:30, the half on the way to nine. seit takes the present for what is still going on: Ich wohne seit drei Jahren hier."
+   "text": "If your half hours count from the hour before, **halb neun is the trap**: it is 8:30, the half on the way to nine.\n\nseit takes the present for what is still going on:\n→ Ich wohne seit drei Jahren hier."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If time is a suffix on the noun or a postposition in your language, German puts a preposition before it, chosen by the kind of time: um acht Uhr, am Montag, im Mai; “ago” comes before the time too: vor zwei Wochen."
+   "text": "If time is a suffix on the noun or a postposition in your language, German puts a preposition before it, chosen by the kind of time:\n→ um acht Uhr, am Montag, im Mai\n\n“ago” comes before the time too: vor zwei Wochen."
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "Where your “before” / “after” follows the time, German puts the preposition first and chooses it by the kind of time: um acht Uhr, am Montag, im Mai, vor zwei Wochen, nach der Arbeit."
+   "text": "Where your “before” / “after” follows the time, German puts the preposition first and chooses it by the kind of time:\n→ um acht Uhr, am Montag, im Mai, vor zwei Wochen, nach der Arbeit"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "German expresses time with separate prepositions before the noun, chosen by the kind of time: um (clock), am (day), im (month, season); vor is before or ago, nach after, seit + present since."
+   "text": "German expresses time with separate prepositions before the noun, chosen by the kind of time:\n- um (clock), am (day), im (month, season);\n- vor is before or ago, nach after, seit + present since."
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "If one preposition (“in”) serves for hours, days and months, German uses three: um acht Uhr, am Montag, im Mai. If your word for “before” also means “ago”, it matches vor: vor dem Frühstück, vor zwei Wochen."
+   "text": "- If one preposition (“in”) serves for hours, days and months, German uses three: um acht Uhr, am Montag, im Mai.\n- If your word for “before” also means “ago”, it matches vor: vor dem Frühstück, vor zwei Wochen."
   }
  ]
 }

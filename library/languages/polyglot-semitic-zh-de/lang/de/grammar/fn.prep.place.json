@@ -394,12 +394,12 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek builds compound prepositions with an adverb (πάνω στο τραπέζι, κάτω από το κρεβάτι, δίπλα στην πόρτα); German uses one word + dative: auf dem Tisch, unter dem Bett, neben der Tür."
+   "text": "Greek builds compound prepositions with an adverb (πάνω στο τραπέζι, κάτω από το κρεβάτι, δίπλα στην πόρτα).\n\nGerman uses one word + dative:\n→ auf dem Tisch, unter dem Bett, neben der Tür"
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "на столе / на стол is the same where / where-to switch as auf dem Tisch / auf den Tisch, and под, над, перед, за take a case as German prepositions do."
+   "text": "- на столе / на стол is the same where / where-to switch as auf dem Tisch / auf den Tisch.\n- под, над, перед, за take a case as German prepositions do."
   },
   {
    "for": "es",
@@ -414,7 +414,7 @@
   {
    "for": "fr",
    "rel": "similar",
-   "text": "sur, sous, devant, derrière, entre match auf, unter, vor, hinter, zwischen; German adds the dative on the article, and a picture on a wall is an der Wand."
+   "text": "sur, sous, devant, derrière, entre match auf, unter, vor, hinter, zwischen.\n\nGerman adds the dative on the article, and a picture on a wall is an der Wand."
   },
   {
    "for": "hi",
@@ -439,12 +439,12 @@
   {
    "for": "he",
    "rel": "similar",
-   "text": "al, mitachat le-, leyad, lifnei, meachorei, bein precede the noun, like auf, unter, neben, vor, hinter, zwischen; German adds the dative on the article."
+   "text": "al, mitachat le-, leyad, lifnei, meachorei, bein precede the noun, like auf, unter, neben, vor, hinter, zwischen.\n\nGerman adds the dative on the article."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish uses a place noun with possessive and locative after the thing (masanın üstünde, masanın altında); German puts a preposition before it: auf dem Tisch, unter dem Tisch."
+   "text": "Turkish uses a place noun with possessive and locative after the thing (masanın üstünde, masanın altında).\n\nGerman puts a preposition before it:\n→ auf dem Tisch, unter dem Tisch"
   },
   {
    "for": "ja",
@@ -469,7 +469,7 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "juu ya, chini ya, mbele ya, nyuma ya (on, under, in front of, behind) precede the noun like German prepositions, but nothing changes in the noun; German puts the article in the dative."
+   "text": "juu ya, chini ya, mbele ya, nyuma ya (on, under, in front of, behind) precede the noun like German prepositions, but nothing changes in the noun.\n\nGerman puts the article in the dative."
   },
   {
    "for": "zh",
@@ -484,47 +484,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut expresses positions with nouns for “top”, “underside”, “front” and the like, carrying case endings; German uses a preposition before the noun and the dative."
+   "text": "Inuktitut expresses positions with nouns for “top”, “underside”, “front” and the like, carrying case endings.\n\nGerman uses a preposition before the noun and the dative."
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "su covers a top and a wall alike (sul tavolo, sul muro); German separates auf (auf dem Tisch) and an (an der Wand). sotto, davanti a, dietro, tra match unter, vor, hinter, zwischen – with the dative on the article for “where”."
+   "text": "su covers a top and a wall alike (sul tavolo, sul muro); German separates auf (auf dem Tisch) and an (an der Wand).\n\nsotto, davanti a, dietro, tra match unter, vor, hinter, zwischen – with the dative on the article for “where”."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "mbi, nën, para, pas, midis, pranë match auf / über, unter, vor, hinter, zwischen, neben; several take the ablative (para shtëpisë, pranë derës). German uses the dative for “where” and switches to the accusative for “where to”: auf dem Tisch / auf den Tisch. mbi is both auf (touching) and über (above)."
+   "text": "mbi, nën, para, pas, midis, pranë match auf / über, unter, vor, hinter, zwischen, neben; several take the ablative (para shtëpisë, pranë derës).\n\n- German uses the dative for “where” and switches to the accusative for “where to”: auf dem Tisch / auf den Tisch.\n- mbi is both auf (touching) and über (above)."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "em covers in and on (no frigorífico, na mesa, na parede); German separates in, auf and an: im Kühlschrank, auf dem Tisch, an der Wand. debaixo de, atrás de, ao lado de are one German word each, with the dative: unter, hinter, neben dem Bett."
+   "text": "em covers in and on (no frigorífico, na mesa, na parede); German separates in, auf and an:\n→ im Kühlschrank, auf dem Tisch, an der Wand\n\ndebaixo de, atrás de, ao lado de are one German word each, with the dative: unter, hinter, neben dem Bett."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your prepositions of place govern a case, German adds a switch: dative for where (auf dem Tisch), accusative for where to (auf den Tisch). Learn auf (on top), an (at a side, on a wall) and über (above) as three separate words."
+   "text": "If your prepositions of place govern a case, German adds a switch:\n→ dative for where (auf dem Tisch), accusative for where to (auf den Tisch)\n\nLearn auf (on top), an (at a side, on a wall) and über (above) as three separate words."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If you say “the table’s top-on” with a location noun and a suffix, German uses one preposition before the noun and a dative article: auf dem Tisch, unter dem Bett, neben der Tür."
+   "text": "If you say “the table’s top-on” with a location noun and a suffix, German uses one preposition before the noun and a dative article:\n→ auf dem Tisch, unter dem Bett, neben der Tür"
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If the position word follows the noun in your language, German puts it before as a preposition, and the article takes the dative: auf dem Tisch, unter dem Bett, neben der Tür."
+   "text": "If the position word follows the noun in your language, German puts it before as a preposition, and the article takes the dative:\n→ auf dem Tisch, unter dem Bett, neben der Tür"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "Positions your language expresses with location suffixes are German prepositions + dative: auf dem Tisch, unter dem Bett, hinter dem Haus; with movement the same words take the accusative."
+   "text": "Positions your language expresses with location suffixes are German prepositions + dative:\n→ auf dem Tisch, unter dem Bett, hinter dem Haus\n\nWith movement the same words take the accusative."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your prepositions of place are prefixes or take pronoun suffixes, German uses separate words and the dative: auf dem Tisch, unter dem Bett, neben der Tür; with movement the accusative: Ich lege das Buch auf den Tisch."
+   "text": "If your prepositions of place are prefixes or take pronoun suffixes, German uses separate words and the dative:\n→ auf dem Tisch, unter dem Bett, neben der Tür\n\nWith movement the accusative:\n→ Ich lege das Buch auf den Tisch."
   }
  ]
 }
