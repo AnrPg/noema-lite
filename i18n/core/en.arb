@@ -146,14 +146,6 @@
   "@ch.practice": {
     "description": "Tab and menu button on a chapter page (with emoji): the chapter’s exercises and practice modes. Very short."
   },
-  "ch.debug": "🔧 Debug drills",
-  "@ch.debug": {
-    "description": "Legacy chapter tab (with emoji) for debug drills — currently not shown by the app; kept for older layouts. Very short."
-  },
-  "ch.cards": "🃏 Cards",
-  "@ch.cards": {
-    "description": "Legacy chapter tab (with emoji) for flashcards — currently not shown by the app; kept for older layouts. Very short."
-  },
   "ch.traps": "⚠️ Traps",
   "@ch.traps": {
     "description": "Tab on a chapter page (with emoji): the pitfalls (details easy to confuse, classic mistakes) of the chapter. Very short."
@@ -311,14 +303,6 @@
   "pick.search": "🔎 Search subjects…",
   "@pick.search": {
     "description": "Placeholder of the search field in the subject picker (with 🔎 and an ellipsis)."
-  },
-  "pick.subjects": "📚 Subjects",
-  "@pick.subjects": {
-    "description": "Legacy tab of the subject picker (with emoji) for ready-made subjects — currently not shown by the app."
-  },
-  "pick.subjectsSub": "ready-made courses",
-  "@pick.subjectsSub": {
-    "description": "Legacy subtitle of the Subjects tab of the subject picker (ready-made courses) — currently not shown by the app. Lower case."
   },
   "pick.curricula": "🧭 Roadmaps",
   "@pick.curricula": {

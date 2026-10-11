@@ -426,6 +426,7 @@
   "loader.viewer.openSite": "Ouvrir",
   "loader.viewer.webNote": "Page web — si elle reste vide, le site n’autorise pas les aperçus : utilise ↗ Ouvrir.",
   "loader.viewer.noDownload": "Le fichier n’a pas pu être téléchargé pour un aperçu.",
+  "loader.viewer.noDownloadWhy": "Le fichier n’a pas pu être téléchargé pour un aperçu ({error}).",
   "loader.viewer.openOriginal": "Ouvrir l’original",
   "loader.viewer.download": "Télécharger",
   "loader.viewer.newTab": "Ouvrir dans un nouvel onglet",

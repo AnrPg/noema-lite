@@ -1,0 +1,7 @@
+# Keys of i18n/core built at run time (tools/i18n/check.js reads this list; one key or prefix* per line).
+acc.profile    # engine/src/70_account.js: t('acc.' + k) for k of ACC_TABS — the tabs of the classic account page
+acc.settings
+acc.subjects
+acc.backup
+acc.cloud
+acc.help

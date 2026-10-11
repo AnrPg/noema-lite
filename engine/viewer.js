@@ -205,12 +205,22 @@ window.NoemaViewer = (() => {
     const t = start ?? (+(String(u).match(/[?&]t=(\d+)/) || [])[1] || 0);
     return `https://www.youtube-nocookie.com/embed/${m[1]}${t ? '?start=' + t : ''}`;   // i18n-ignore (a URL parameter)
   }
+  /** The refusal of /api/file → { code, params, message } (cloud/img/proxy.mjs: JSON to a client that accepts it, else plain text
+      + x-error-code / x-error-params; docs/i18n.md §6.1), or null when it carries no code (a static server's 404). */
+  async function fileError(r) {
+    let txt = ''; try { txt = await r.text(); } catch (e) { }
+    try { const j = JSON.parse(txt); if (j && j.error && typeof j.error === 'object' && j.error.code) return { code: j.error.code, params: j.error.params || {}, message: String(j.error.message || '') }; } catch (e) { }
+    try { const code = r.headers.get('x-error-code'); if (code) return { code, params: JSON.parse(decodeURIComponent(r.headers.get('x-error-params') || '') || '{}'), message: txt.slice(0, 160) }; } catch (e) { }
+    return null;
+  }
+  /** → { blob } or { error: {code, params, message} | null } — directly, else through the site's /api/file. */
   async function fetchFile(url) {
     const site = (window.NOEMA_CONFIG?.siteUrl || (location.protocol.startsWith('http') ? location.origin : '')).replace(/\/$/, '');
-    for (const get of [() => fetch(url, { mode: 'cors', referrerPolicy: 'no-referrer' }), site ? () => fetch(site + '/api/file?url=' + encodeURIComponent(url)) : null].filter(Boolean)) {
-      try { const r = await get(); if (r.ok) { const b = await r.blob(); return b; } } catch (e) { }
+    let error = null;
+    for (const [get, api] of [[() => fetch(url, { mode: 'cors', referrerPolicy: 'no-referrer' }), false], site ? [() => fetch(site + '/api/file?url=' + encodeURIComponent(url), { headers: { accept: 'application/json' } }), true] : null].filter(Boolean)) {
+      try { const r = await get(); if (r.ok) return { blob: await r.blob() }; if (api) error = await fileError(r); } catch (e) { }
     }
-    return null;
+    return { error };
   }
 
   /* ---------- the overlay ---------- */
@@ -235,8 +245,8 @@ window.NoemaViewer = (() => {
           body.innerHTML = ''; body.append(h('p', { class: 'vw-note' }, VT('loader.viewer.webNote')), h('iframe', { class: 'vw-frame', src: o.url, sandbox: 'allow-scripts allow-same-origin allow-popups allow-forms', referrerpolicy: 'no-referrer' }));
           return { close, kind: 'web' };
         }
-        blob = await fetchFile(o.url);
-        if (!blob) { fail(VT('loader.viewer.noDownload'), h('a', { class: 'vw-btn', href: o.url, target: '_blank', rel: 'noopener' }, '↗ ' + VT('loader.viewer.openOriginal'))); return { close, kind: 'error' }; }
+        const got = await fetchFile(o.url); blob = got.blob;
+        if (!blob) { fail(got.error && window.NoemaI18n ? VT('loader.viewer.noDownloadWhy', { error: NoemaI18n.err(got.error) }) : VT('loader.viewer.noDownload'), h('a', { class: 'vw-btn', href: o.url, target: '_blank', rel: 'noopener' }, '↗ ' + VT('loader.viewer.openOriginal'))); return { close, kind: 'error' }; }
       }
       const kind = o.kind || kindOf(name, o.type || blob.type);
       title.querySelector('.vw-sub').textContent = [o.subtitle, LABEL[kind], fmtSize(blob.size)].filter(Boolean).join(' · ');

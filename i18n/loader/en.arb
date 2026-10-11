@@ -2374,6 +2374,16 @@
   "@loader.viewer.noDownload": {
     "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Error when a file on the web could not be downloaded."
   },
+  "loader.viewer.noDownloadWhy": "The file could not be downloaded for a preview ({error}).",
+  "@loader.viewer.noDownloadWhy": {
+    "description": "File viewer (👁: opens a source file on top of the app). Error when a file on the web could not be downloaded and the site’s file service said why; {error} is that reason, already in the UI language (e.g. “larger than 25 MB”).",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "larger than 25 MB"
+      }
+    }
+  },
   "loader.viewer.openOriginal": "Open the original",
   "@loader.viewer.openOriginal": {
     "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Link to the file on the web (an ↗ is shown before it)."

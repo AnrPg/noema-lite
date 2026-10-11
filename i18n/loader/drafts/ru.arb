@@ -426,6 +426,7 @@
   "loader.viewer.openSite": "Открыть",
   "loader.viewer.webNote": "Веб-страница — если она останется пустой, сайт не разрешает предпросмотр: нажми ↗ Открыть.",
   "loader.viewer.noDownload": "Не удалось скачать файл для просмотра.",
+  "loader.viewer.noDownloadWhy": "Не удалось скачать файл для просмотра ({error}).",
   "loader.viewer.openOriginal": "Открыть оригинал",
   "loader.viewer.download": "Скачать",
   "loader.viewer.newTab": "Открыть в новой вкладке",

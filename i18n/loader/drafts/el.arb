@@ -426,6 +426,7 @@
   "loader.viewer.openSite": "Άνοιγμα",
   "loader.viewer.webNote": "Ιστοσελίδα — αν μείνει κενή, ο ιστότοπος δεν επιτρέπει προεπισκόπηση: πάτα ↗ Άνοιγμα.",
   "loader.viewer.noDownload": "Το αρχείο δεν κατέβηκε για προεπισκόπηση.",
+  "loader.viewer.noDownloadWhy": "Το αρχείο δεν κατέβηκε για προεπισκόπηση ({error}).",
   "loader.viewer.openOriginal": "Άνοιξε το πρωτότυπο",
   "loader.viewer.download": "Λήψη",
   "loader.viewer.newTab": "Άνοιγμα σε νέα καρτέλα",
