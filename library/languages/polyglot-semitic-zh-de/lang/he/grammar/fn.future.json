@@ -15,7 +15,7 @@
    "value": "none"
   }
  ],
- "summary": "The Hebrew future (עָתִיד) marks the person mostly with prefixes: אֶ־ “I”, תִּ־ “you (m.)” and “she”, תִּ…־ִי “you (f.)”, יִ־ “he”, נִ־ “we”, תִּ…־וּ “you (pl.)”, יִ…־וּ “they”: אֶזְכֹּר, תִּזְכֹּר, תִּזְכְּרִי, יִזְכֹּר, תִּזְכֹּר, נִזְכֹּר, תִּזְכְּרוּ, יִזְכְּרוּ. One form serves both “you (m.)” and “she” (תִּזְכֹּר). The prefix vowel and the stem vowels depend on the pattern: paʿal יִזְכֹּר / יִגְדַּל / יִשְׁכַּח, hollow יָקוּם, piʿel יְסַיֵּם, hifʿil יַתְחִיל, nifʿal יֵרָדֵם, hitpaʿel יִתְלַבֵּשׁ. As in the past, the 1st and 2nd person often drop the pronoun (מָחָר אֶתְעוֹרֵר בְּשֵׁשׁ). The future is also the everyday form of requests and, after אַל, of prohibitions (אַל תִּשְׁכַּח! — lesson 13), and after שֶׁ it is the verb of wishes and requests: אֲנִי רוֹצֶה שֶׁתְּבַקֵּר אוֹתָנוּ “I want you to visit us”. Plans that are already fixed are often in the present (מָחָר אֲנַחְנוּ נוֹסְעִים), and colloquial הוֹלֵךְ + infinitive means “going to”. The feminine plural forms in ־נָה (תִּזְכֹּרְנָה) are literary; speech uses the masculine plural for women too.",
+ "summary": "The Hebrew future (עָתִיד) marks the person mostly with prefixes: אֶ־ “I”, תִּ־ “you (m.)” and “she”, תִּ…־ִי “you (f.)”, יִ־ “he”, נִ־ “we”, תִּ…־וּ “you (pl.)”, יִ…־וּ “they”: אֶזְכֹּר, תִּזְכֹּר, תִּזְכְּרִי, יִזְכֹּר, תִּזְכֹּר, נִזְכֹּר, תִּזְכְּרוּ, יִזְכְּרוּ. One form serves both “you (m.)” and “she” (תִּזְכֹּר). The prefix vowel and the stem vowels depend on the pattern: paʿal יִזְכֹּר / יִגְדַּל / יִשְׁכַּח, hollow יָקוּם, piʿel יְסַיֵּם, hifʿil יַתְחִיל, nifʿal יֵרָדֵם, hitpaʿel יִתְלַבֵּשׁ. As in the past, the 1st and 2nd person often drop the pronoun (מָחָר אֶתְעוֹרֵר בְּשֵׁשׁ). The future is also the everyday form of requests and, after אַל, of prohibitions (אַל תִּשְׁכַּח! — lesson 13), and after שֶׁ it is the verb of wishes and requests: אֲנִי רוֹצֶה שֶׁתְּבַקֵּר אוֹתָנוּ “I want you to visit us”. Plans that are already fixed are often in the present (מָחָר אֲנַחְנוּ נוֹסְעִים), and colloquial הוֹלֵךְ + infinitive (“go” + infinitive) announces an intention. The feminine plural forms in ־נָה (תִּזְכֹּרְנָה) are literary; speech uses the masculine plural for women too.",
  "blocks": [
   {
    "t": "table",
@@ -189,7 +189,7 @@
    "t": "callout",
    "kind": "tip",
    "title": "Three ways to talk about tomorrow",
-   "text": "The future form: מָחָר נְבַקֵּר אֶת סָבְתָא. The present with a word of time, for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים. Colloquial הוֹלֵךְ + infinitive, “going to”: אֲנִי הוֹלֵךְ לְהַזְמִין חֶדֶר."
+   "text": "The future form: מָחָר נְבַקֵּר אֶת סָבְתָא. The present with a word of time, for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים. Colloquial הוֹלֵךְ + infinitive, for an intention: אֲנִי הוֹלֵךְ לְהַזְמִין חֶדֶר."
   },
   {
    "t": "callout",

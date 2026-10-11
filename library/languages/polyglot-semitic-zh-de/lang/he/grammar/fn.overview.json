@@ -5,7 +5,7 @@
  "facts": [
   {
    "label": "Family",
-   "value": "Afro-Asiatic › Semitic › Northwest Semitic › Canaanite (with Phoenician). Its closest living relative in this course is Arabic; Aramaic is a close older neighbour."
+   "value": "Afro-Asiatic › Semitic › Northwest Semitic › Canaanite. Its closest living relative in this course is Arabic."
   },
   {
    "label": "Script and direction",
@@ -25,7 +25,7 @@
   },
   {
    "label": "Sounds",
-   "value": "Five vowels (a, e, i, o, u). Stress is mostly on the last syllable. ח and כ are a throaty [χ] as in German Bach; ר is a uvular r like the German or French r. Three letters have a hard and a soft sound: ב bet / vet, כ kaf / khaf, פ pe / fe — a dot inside the letter (dagesh) marks the hard one."
+   "value": "Five vowels (a, e, i, o, u). Stress is mostly on the last syllable. ח and כ are a throaty [χ] as in German Bach; ר is a uvular r like the German r. Three letters have a hard and a soft sound: ב bet / vet, כ kaf / khaf, פ pe / fe — a dot inside the letter (dagesh) marks the hard one."
   }
  ],
  "typology": {
@@ -97,7 +97,7 @@
    ]
   },
   {
-   "title": "“The” but no “a”",
+   "title": "A definite article, no indefinite one",
    "text": "The article הַ marks a definite noun; there is no indefinite article: זֶה סֵפֶר “this is a book”, זֶה הַסֵּפֶר “this is the book”. From lesson 7 a definite direct object also gets the small word אֶת.",
    "typology": [
     {
@@ -183,7 +183,7 @@
     "it does not exist"
    ],
    "answer": "as the prefix הַ on the next word",
-   "why": "הַבַּיִת = the house. There is no word for “a”: בַּיִת = a house."
+   "why": "הַבַּיִת = the house. There is no indefinite article: בַּיִת = a house."
   },
   {
    "q": "Which language of this course is Hebrew’s closest relative?",

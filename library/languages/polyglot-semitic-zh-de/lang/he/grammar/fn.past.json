@@ -23,7 +23,7 @@
    "value": "partial"
   }
  ],
- "summary": "The Hebrew past (עָבָר) is one tense with person endings added to the stem: ‑תִּי “I”, ‑תָּ “you (m.)”, ‑תְּ “you (f.)”, nothing for “he”, ‑ָה “she”, ‑נוּ “we”, ‑תֶּם / ‑תֶּן “you (pl.)”, ‑וּ “they”: זָכַרְתִּי, זָכַרְתָּ, זָכַרְתְּ, זָכַר, זָכְרָה, זָכַרְנוּ, זְכַרְתֶּם, זְכַרְתֶּן, זָכְרוּ. The 3rd person masculine singular, with no ending, is the form under which every verb is listed. Because the ending shows the person, the pronoun is usually dropped in the 1st and 2nd person (קַמְתִּי בְּשֶׁבַע “I got up at seven”), while the 3rd person keeps its subject (הוּא קָם). Gender shows in “you” (sg. and pl.) and in “he / she”; “I”, “we” and “they” have one form for both. There is no aspect: the same form says “I got up”, “I have got up” and, with a word of time, what was going on; repeated or habitual actions are the next lesson (הָיָה + present, C02). The endings are the same in every pattern (binyan); the stem vowels belong to the pattern: paʿal קַמְתִּי, גָּדַלְתִּי; piʿel סִיַּמְתִּי; hifʿil הִתְחַלְתִּי; nifʿal נִרְדַּמְתִּי; hitpaʿel הִתְלַבַּשְׁתִּי. Negation is לֹא before the verb, a question is the same sentence with a question mark or a question word: לֹא קַמְתִּי, מָתַי קַמְתָּ?",
+ "summary": "The Hebrew past (עָבָר) is one tense with person endings added to the stem: ‑תִּי “I”, ‑תָּ “you (m.)”, ‑תְּ “you (f.)”, nothing for “he”, ‑ָה “she”, ‑נוּ “we”, ‑תֶּם / ‑תֶּן “you (pl.)”, ‑וּ “they”: זָכַרְתִּי, זָכַרְתָּ, זָכַרְתְּ, זָכַר, זָכְרָה, זָכַרְנוּ, זְכַרְתֶּם, זְכַרְתֶּן, זָכְרוּ. The 3rd person masculine singular, with no ending, is the form under which every verb is listed. Because the ending shows the person, the pronoun is usually dropped in the 1st and 2nd person (קַמְתִּי בְּשֶׁבַע “I got up at seven”), while the 3rd person keeps its subject (הוּא קָם). Gender shows in “you” (sg. and pl.) and in “he / she”; “I”, “we” and “they” have one form for both. There is no aspect: the same form tells of a finished event, of one whose result still counts and, with a word of time, of what was going on; repeated or habitual actions are the next lesson (הָיָה + present, C02). The endings are the same in every pattern (binyan); the stem vowels belong to the pattern: paʿal קַמְתִּי, גָּדַלְתִּי; piʿel סִיַּמְתִּי; hifʿil הִתְחַלְתִּי; nifʿal נִרְדַּמְתִּי; hitpaʿel הִתְלַבַּשְׁתִּי. Negation is לֹא before the verb, a question is the same sentence with a question mark or a question word: לֹא קַמְתִּי, מָתַי קַמְתָּ?",
  "blocks": [
   {
    "t": "table",
@@ -242,7 +242,7 @@
    "t": "callout",
    "kind": "tip",
    "title": "One past for everything",
-   "text": "The same form is “I got up”, “I have got up” and “I did get up”: קַמְתִּי. “Already” or “not yet” make the result clear, a time phrase tells when (אֶתְמוֹל קַמְתִּי בְּשֶׁבַע). No helper verb is needed for questions or negation: קַמְתָּ? “did you get up?”, לֹא קַמְתִּי “I didn’t get up”.",
+   "text": "The same form serves for a finished event and for one whose result still counts: קַמְתִּי. “Already” or “not yet” make the result clear, a time phrase tells when (אֶתְמוֹל קַמְתִּי בְּשֶׁבַע). No helper verb is needed for questions or negation: קַמְתָּ? “did you get up?”, לֹא קַמְתִּי “I didn’t get up”.",
    "typology": [
     {
      "feature": "verb.perfect",

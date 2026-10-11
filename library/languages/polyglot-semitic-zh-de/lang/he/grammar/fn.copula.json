@@ -11,7 +11,7 @@
    "value": "same"
   }
  ],
- "summary": "In the present tense Hebrew has no verb “to be”: the subject and what it is simply stand side by side — אֲנִי סְטוּדֶנְט “I (am) a student”, הַמּוֹרֶה פֹּה “the teacher (is) here”. This is a nominal sentence. In the past and future the verb הָיָה appears and agrees with the subject: הוּא הָיָה מוֹרֶה “he was a teacher”, הִיא הָיְתָה סְטוּדֶנְטִית, הֵם הָיוּ חֲבֵרִים; הוּא יִהְיֶה / הִיא תִּהְיֶה “he / she will be”. Between two nouns, especially in definitions, a pronoun that agrees with the subject can stand where “is” would be: יֶלֶד הוּא אָדָם “a child is a person”.",
+ "summary": "In the present tense Hebrew has no verb “to be”: the subject and what it is simply stand side by side — אֲנִי סְטוּדֶנְט “I (am) a student”, הַמּוֹרֶה פֹּה “the teacher (is) here”. This is a nominal sentence. In the past and future the verb הָיָה appears and agrees with the subject: הוּא הָיָה מוֹרֶה “he was a teacher”, הִיא הָיְתָה סְטוּדֶנְטִית, הֵם הָיוּ חֲבֵרִים; הוּא יִהְיֶה / הִיא תִּהְיֶה “he / she will be”. Between two nouns, especially in definitions, a pronoun that agrees with the subject can stand between them as a link: יֶלֶד הוּא אָדָם “a child is a person”.",
  "blocks": [
   {
    "t": "compare",
@@ -139,8 +139,8 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "The pronoun as “is”",
-   "text": "With a noun subject, especially in definitions, Hebrew can put הוּא / הִיא / הֵם / הֵן where a linking “is / are” would stand: יֶלֶד הוּא אָדָם, יְלָדִים הֵם אֲנָשִׁים. It agrees with the subject. With a pronoun subject it is not used: אֲנִי מוֹרֶה, never *אֲנִי הוּא מוֹרֶה."
+   "title": "The pronoun as a link",
+   "text": "With a noun subject, especially in definitions, Hebrew can put הוּא / הִיא / הֵם / הֵן between subject and predicate as a link: יֶלֶד הוּא אָדָם, יְלָדִים הֵם אֲנָשִׁים. It agrees with the subject. With a pronoun subject it is not used: אֲנִי מוֹרֶה, never *אֲנִי הוּא מוֹרֶה."
   },
   {
    "t": "ask",
@@ -169,7 +169,7 @@
  },
  "traps": [
   "No present “to be”: אֲנִי מוֹרֶה, not *אֲנִי הוּא מוֹרֶה or *אֲנִי הָיָה מוֹרֶה.",
-  "הָיָה means “was”, never “is”.",
+  "הָיָה is the past (“was”), never the present.",
   "Past agreement follows the subject: הַדֶּלֶת הָיְתָה שָׁם (feminine), not *הַדֶּלֶת הָיָה שָׁם.",
   "In the past the pronoun can be dropped (הָיִיתִי סְטוּדֶנְט), in the present it cannot (אֲנִי סְטוּדֶנְט).",
   "The pronoun copula agrees with the subject, not with the predicate: אִשָּׁה הִיא אָדָם (אִשָּׁה is feminine, although אָדָם is masculine)."

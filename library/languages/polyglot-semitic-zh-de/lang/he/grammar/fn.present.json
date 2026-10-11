@@ -15,7 +15,7 @@
    "value": "none"
   }
  ],
- "summary": "Hebrew has one present tense, and in it the verb does not change for the person (I / you / he) but for **gender and number** — four forms. אָכַל “to eat”: אוֹכֵל for a man or a masculine subject, אוֹכֶלֶת for a woman, אוֹכְלִים for men or a mixed group, אוֹכְלוֹת for women only. The person is shown only by the subject, so the pronoun is never left out: אֲנִי אוֹכֵל, אַתָּה אוֹכֵל and הוּא אוֹכֵל share one form. The present is historically a participle (בֵּינוֹנִי, “the middle form”), which is why it inflects like an adjective. One form covers “I eat” and “I am eating” — there is no progressive and no helper verb “do”. The vowels depend on the verb’s pattern (binyan, see roots and patterns): paʿal אוֹכֵל, שׁוֹתֶה; piʿel מְבַשֵּׁל. After רוֹצֶה “want” or אוֹהֵב “like”, a second verb is an infinitive with לְ־: אֲנִי רוֹצֶה לֶאֱכֹל, הִיא אוֹהֶבֶת לְבַשֵּׁל. The past and the future do have person endings; they come after the foundations (C01, C02).",
+ "summary": "Hebrew has one present tense, and in it the verb does not change for the person (I / you / he) but for **gender and number** — four forms. אָכַל “to eat”: אוֹכֵל for a man or a masculine subject, אוֹכֶלֶת for a woman, אוֹכְלִים for men or a mixed group, אוֹכְלוֹת for women only. The person is shown only by the subject, so the pronoun is never left out: אֲנִי אוֹכֵל, אַתָּה אוֹכֵל and הוּא אוֹכֵל share one form. The present is historically a participle (בֵּינוֹנִי, “the middle form”), which is why it inflects like an adjective. One form covers a habit and an action in progress — there is no progressive form, and questions and negation need no helper verb. The vowels depend on the verb’s pattern (binyan, see roots and patterns): paʿal אוֹכֵל, שׁוֹתֶה; piʿel מְבַשֵּׁל. After רוֹצֶה “want” or אוֹהֵב “like”, a second verb is an infinitive with לְ־: אֲנִי רוֹצֶה לֶאֱכֹל, הִיא אוֹהֶבֶת לְבַשֵּׁל. The past and the future do have person endings; they come after the foundations (C01, C02).",
  "blocks": [
   {
    "t": "table",
@@ -239,7 +239,7 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "One form, two meanings — and no “do”",
+   "title": "One form, two meanings — and no helper verb",
    "text": "הִיא שׁוֹתָה קָפֶה is “she drinks coffee” and “she is drinking coffee”. A question is the same sentence with a question mark: אַתָּה שׁוֹתֶה קָפֶה? “Do you drink coffee?”",
    "typology": [
     {
@@ -333,7 +333,7 @@
    "One or more? A mixed group → masculine plural (-ִים).",
    "Which pattern? A root ending in ה → -ֶה / -ָה (שׁוֹתֶה, שׁוֹתָה); piʿel → מְ־ in front (מְבַשֵּׁל); otherwise like אוֹכֵל.",
    "Is there a second verb after רוֹצֶה / אוֹהֵב? → the infinitive with לְ־: לֶאֱכֹל, לִשְׁתּוֹת, לְבַשֵּׁל.",
-   "Is it a question? → the same form, no “do”: אַתָּה אוֹכֵל?"
+   "Is it a question? → the same form, no helper verb: אַתָּה אוֹכֵל?"
   ],
   "steps": [
    "Find the subject’s gender and number.",
@@ -347,7 +347,7 @@
   "*אוֹכֵל לֶחֶם for “I eat bread” — in the present the pronoun is required: אֲנִי אוֹכֵל לֶחֶם.",
   "A group of women with one man is masculine: הֵם אוֹכְלִים, אֲנַחְנוּ שׁוֹתִים.",
   "רוֹצָה “she wants” ≠ רָצְתָה “she wanted”; קוֹנָה “she buys” ≠ קָנְתָה “she bought”.",
-  "No progressive: “I am eating” is just אֲנִי אוֹכֵל — no form of הָיָה.",
+  "No progressive form: an action in progress is just אֲנִי אוֹכֵל — no form of הָיָה.",
   "*רוֹצֶה אוֹכֵל — after רוֹצֶה the second verb is the infinitive: רוֹצֶה לֶאֱכֹל."
  ],
  "evidence": {

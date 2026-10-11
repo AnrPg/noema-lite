@@ -99,7 +99,7 @@
    "t": "callout",
    "kind": "key",
    "title": "Your voice is the grammar",
-   "text": "Hebrew changes nothing in the sentence: no inversion, no “do”, no particle in everyday speech. The rising voice — and in writing the question mark — turns a statement into a question.",
+   "text": "Hebrew changes nothing in the sentence: no inversion, no helper verb, no particle in everyday speech. The rising voice — and in writing the question mark — turns a statement into a question.",
    "typology": [
     {
      "feature": "syn.polarQuestion",
@@ -165,9 +165,9 @@
    "Is it everyday speech? → keep the statement and raise your voice at the end (write “?”).",
    "Is it formal or written? → put הַאִם at the very beginning.",
    "Did I change the word order? → don’t: Hebrew questions keep the statement order.",
-   "Do I need a word for “do / does”? → no, Hebrew has none.",
+   "Do I need a helper verb? → no, Hebrew has none.",
    "Is it a choice between two things? → use אוֹ; the answer is one of them.",
-   "Answering a negative question with “yes, I do”? → repeat the verb or say דַּוְקָא כֵּן."
+   "Answering “yes” to a negative question? → repeat the verb or say דַּוְקָא כֵּן."
   ],
   "steps": [
    "Say the statement.",
@@ -176,7 +176,7 @@
   ]
  },
  "traps": [
-  "No inversion and no “do”: “Do you want tea?” = אַתָּה רוֹצֶה תֵּה?",
+  "No inversion and no helper verb: “Do you want tea?” = אַתָּה רוֹצֶה תֵּה?",
   "הַאִם is formal; in conversation it can sound stiff.",
   "Do not confuse הַאִם (question particle) with אִם (“if”).",
   "A question by intonation alone shows in writing only by its question mark — don’t forget it.",
@@ -246,10 +246,10 @@
    "options": [
     "raise the voice at the end: אַתָּה שׁוֹתֶה תֵּה?",
     "put the verb first: שׁוֹתֶה אַתָּה תֵּה?",
-    "add a word for “do”"
+    "add a helper verb"
    ],
    "answer": "raise the voice at the end: אַתָּה שׁוֹתֶה תֵּה?",
-   "why": "Hebrew keeps the statement order and has no “do”; intonation (and the question mark) makes the question."
+   "why": "Hebrew keeps the statement order and has no helper verb; intonation (and the question mark) makes the question."
   },
   {
    "q": "Which word opens a yes/no question in formal Hebrew?",

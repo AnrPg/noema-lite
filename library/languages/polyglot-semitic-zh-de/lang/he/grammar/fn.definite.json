@@ -10,7 +10,7 @@
  "summary": "Hebrew marks a definite noun with the prefix ha- (הַ), written onto the noun: בַּיִת “a house” → הַבַּיִת “the house”. There is no indefinite article: a bare noun is indefinite (זֶה סֵפֶר “this is a book”; זֶה הַסֵּפֶר “this is the book”). The article usually doubles the next consonant with a dagesh (הַסֵּפֶר, הַשֻּׁלְחָן, הַמְּנוֹרָה); before the gutturals, which cannot be doubled, its vowel changes: הָ before א, ע, ר (הָאָרוֹן, הָעֵט, הָאִשָּׁה), הַ with no doubling before ה and ח (הַחֶדֶר, הַחַלּוֹן), and הֶ before חָ (הֶחָבֵר). Words that agree with a definite noun after it take the article too (הַסֵּפֶר הַזֶּה; later הַסֵּפֶר הַחָדָשׁ). From lesson 7 a definite direct object is also introduced by אֶת (הוּא קוֹרֵא אֶת הַסֵּפֶר).",
  "procedure": {
   "askYourself": [
-   "Is the thing specific — already known to the listener, or the only one? → add הַ; if not, use the bare noun (there is no “a”).",
+   "Is the thing specific — already known to the listener, or the only one? → add הַ; if not, use the bare noun (there is no indefinite article).",
    "What is the first letter of the noun? א / ע / ר → הָ; ה / ח → הַ without a dagesh; חָ → הֶ; any other letter → הַ + a dagesh in that letter.",
    "Is there a demonstrative (or later an adjective) after the noun? It takes the article too: הַסֵּפֶר הַזֶּה.",
    "Is it a name or a noun with a possessive suffix? → it is already definite: no הַ.",
@@ -154,8 +154,8 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No word for “a”",
-   "text": "Do not translate “a” with אֶחָד / אַחַת (“one”) — that means “one”. “A key” is simply מַפְתֵּחַ."
+   "title": "No indefinite article",
+   "text": "Do not use אֶחָד / אַחַת (“one”) as an indefinite article — it means “one”. “A key” is simply מַפְתֵּחַ."
   },
   {
    "t": "callout",

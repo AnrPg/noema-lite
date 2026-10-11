@@ -321,7 +321,7 @@
      "prep": "enum:et|le|be|mi|al|im|el|none",
      "senses": "senses"
     },
-    "why": "Each verb takes its own preposition or אֶת (definite object), often unlike English or Greek: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
+    "why": "Each verb takes its own preposition or אֶת (definite object), often not the one a word-for-word translation suggests: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
    },
    {
     "id": "verbalNoun",
