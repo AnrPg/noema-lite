@@ -1,5 +1,7 @@
 {
  "format": "noema.langtypology/v1",
- "about": "The reference set of D18: every grammar page has comparison notes for at least 8 of these languages, covering all four types. Chosen by the user (2026-10-09).",
- "languages": ["el", "ru", "es", "en", "fr", "de", "hi", "fa", "mr", "ar", "he", "tr", "ja", "ko", "fi", "hu", "sw", "lg", "zh", "vi", "iu"]
+ "about": "D19 (docs/language-packs.md §2.1): every grammar page has a contrast note for each SUPPORTED native (the languages of the UI locales) other than the page's own language, and one for each entry of `types` (a type note names no language). Only those notes are shown: a learner with a supported native sees the note for it; any other learner sees the note for their branch, family or type. The other languages of `languages` (the reference set of D18, chosen by the user 2026-10-09) keep their notes as source material — never shown — and serve inference by type and family.",
+ "supported": ["en", "el", "ru", "fr", "ar", "de", "hi", "zh", "ja", "it", "es", "sq", "pt"],
+ "types": ["type:fusional", "type:agglutinating", "type:isolating", "type:polysynthetic", "branch:Semitic"],
+ "languages": ["el", "ru", "es", "en", "fr", "de", "hi", "fa", "mr", "ar", "he", "tr", "ja", "ko", "fi", "hu", "sw", "lg", "zh", "vi", "iu", "it", "sq", "pt"]
 }

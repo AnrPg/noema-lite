@@ -345,7 +345,7 @@ def world(root):
             fs = json.load(open(os.path.join(d, 'features.json'), encoding='utf-8'))['features']
             ls = json.load(open(os.path.join(d, 'languages.json'), encoding='utf-8'))['languages']
         except (OSError, ValueError, KeyError): continue
-        try: ref = json.load(open(os.path.join(d, 'reference.json'), encoding='utf-8')).get('languages') or []
+        try: rj = json.load(open(os.path.join(d, 'reference.json'), encoding='utf-8')); ref = list(dict.fromkeys((rj.get('supported') or []) + (rj.get('languages') or [])))
         except (OSError, ValueError): ref = []
         return ({f['id']: {x['id'] for x in f.get('values') or []} for f in fs}, {x['code']: x for x in ls}, {x.get('family') for x in ls}, ref)
     return None, {}, set(), []
