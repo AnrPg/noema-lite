@@ -2,9 +2,9 @@
 
 /* ---- 05_i18n.js ---- */
 /* ===================== i18n: menus, tabs and back buttons in the learner's language ===================== */
-/* The bundles live in engine/i18n.js (the pickers in engine/loader.js use them before a subject is open). The language is
-   S.settings.lang (⚙️ Settings → Display & studying; synced with the account), else the browser's. Course material and
-   the AI conversations are NOT translated here: they keep their own languages. */
+/* The catalogs are i18n/<component>/<locale>.arb (ICU MessageFormat), run by engine/i18n.js (docs/i18n.md). The language is
+   S.settings.lang (⚙️ Settings → Display & studying; synced with the account), else the device's. Course material and
+   the AI conversations are NOT translated here: they keep their own languages. Numbers and dates: NoemaI18n.fmt. */
 const uiLang = () => window.NoemaI18n ? NoemaI18n.lang(S.settings.lang) : 'en';
 const t = (key, vars) => window.NoemaI18n ? NoemaI18n.t(key, vars, S.settings.lang) : key;
 
@@ -3226,8 +3226,8 @@ const ACC_VIEWS = {
     const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
-    const uiL = h('select', { 'aria-label': t('set.uiLang') }, h('option', { value: '', selected: !S.settings.lang }, t('set.uiLangAuto', { lang: NoemaI18n.LANGS.find(l => l[0] === NoemaI18n.browser())?.[1] })),
-      ...NoemaI18n.LANGS.map(([v, l]) => h('option', { value: v, selected: S.settings.lang === v }, l)));
+    const uiL = h('select', { 'aria-label': t('set.uiLang') }, h('option', { value: '', selected: !S.settings.lang }, t('set.uiLangAuto', { lang: NoemaI18n.LOCALES.find(l => l.tag === NoemaI18n.browser())?.name })),
+      ...NoemaI18n.LOCALES.filter(l => NoemaI18n.available().includes(l) || l.tag === S.settings.lang).map(l => h('option', { value: l.tag, selected: S.settings.lang === l.tag, lang: l.tag }, `${l.name} · ${l.tag}`)));
     const chatL = chatLangSelect({ persist: false });
     const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, 'Language of the AI conversations ', tip('The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.')), chatL,
       h('div', { class: 'tiny' }, `The course material stays in its own language (${SUBJ.title}: ${langName(COURSE_LANG)}). You can also switch it in the tutor (🗣 next to the topic).`)));

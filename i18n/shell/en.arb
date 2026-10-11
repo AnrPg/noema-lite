@@ -1,0 +1,1841 @@
+{
+  "@@locale": "en",
+  "sh.today": "Today",
+  "@sh.today": {
+    "description": ""
+  },
+  "sh.knowledge": "Knowledge",
+  "@sh.knowledge": {
+    "description": ""
+  },
+  "sh.languages": "Languages",
+  "@sh.languages": {
+    "description": ""
+  },
+  "sh.discover": "Discover",
+  "@sh.discover": {
+    "description": ""
+  },
+  "sh.progress": "Progress",
+  "@sh.progress": {
+    "description": ""
+  },
+  "sh.me": "Me",
+  "@sh.me": {
+    "description": ""
+  },
+  "sh.meLong": "Me: my account",
+  "@sh.meLong": {
+    "description": ""
+  },
+  "sh.myAccount": "My account",
+  "@sh.myAccount": {
+    "description": ""
+  },
+  "sh.mainNav": "Main navigation",
+  "@sh.mainNav": {
+    "description": ""
+  },
+  "sh.back": "Back",
+  "@sh.back": {
+    "description": ""
+  },
+  "sh.where": "Where you are",
+  "@sh.where": {
+    "description": ""
+  },
+  "sh.more": "More",
+  "@sh.more": {
+    "description": ""
+  },
+  "sh.moreFor": "More for “{title}”",
+  "@sh.moreFor": {
+    "description": ""
+  },
+  "sh.close": "Close",
+  "@sh.close": {
+    "description": ""
+  },
+  "sh.whatIsThis": "What is this?",
+  "@sh.whatIsThis": {
+    "description": ""
+  },
+  "sh.notifications": "Notifications",
+  "@sh.notifications": {
+    "description": ""
+  },
+  "sh.notificationsN": "Notifications ({n, number} new)",
+  "@sh.notificationsN": {
+    "description": ""
+  },
+  "sh.nothingNew": "Nothing new.",
+  "@sh.nothingNew": {
+    "description": ""
+  },
+  "sh.notesNeedCloud": "Notifications need a cloud account (Me › Data and sync).",
+  "@sh.notesNeedCloud": {
+    "description": ""
+  },
+  "sh.openNow": "Open “{title}” now?",
+  "@sh.openNow": {
+    "description": ""
+  },
+  "sh.moreInBell": "(+{n, number} more in the bell)",
+  "@sh.moreInBell": {
+    "description": ""
+  },
+  "sh.decideLater": "Decide later (it stays in the bell)",
+  "@sh.decideLater": {
+    "description": ""
+  },
+  "sh.later": "Later",
+  "@sh.later": {
+    "description": ""
+  },
+  "sh.upToDate": "“{title}” is up to date",
+  "@sh.upToDate": {
+    "description": ""
+  },
+  "sh.keepYours": "You keep your version of “{title}”",
+  "@sh.keepYours": {
+    "description": ""
+  },
+  "sh.askTutor": "Ask {tutor}",
+  "@sh.askTutor": {
+    "description": ""
+  },
+  "sh.askTutorSub": "{tutor} asks you questions until it clicks",
+  "@sh.askTutorSub": {
+    "description": ""
+  },
+  "sh.askTutorSubPl": "{tutor} ask you questions until it clicks",
+  "@sh.askTutorSubPl": {
+    "description": ""
+  },
+  "sh.untitled": "Untitled",
+  "@sh.untitled": {
+    "description": ""
+  },
+  "sh.roadmap": "Roadmap",
+  "@sh.roadmap": {
+    "description": ""
+  },
+  "sh.otherSubjects": "Subjects on no Roadmap",
+  "@sh.otherSubjects": {
+    "description": ""
+  },
+  "sh.convosSearch": "Search the conversations…",
+  "@sh.convosSearch": {
+    "description": ""
+  },
+  "sh.convosSaved": "Every conversation is saved by itself: on this device, in your backup folder and, for cloud profiles, in the cloud.",
+  "@sh.convosSaved": {
+    "description": ""
+  },
+  "sh.convosOthers": "Also show {n, number} AI gradings, reviews and questions",
+  "@sh.convosOthers": {
+    "description": ""
+  },
+  "sh.exportAll": "Export them all (.md)",
+  "@sh.exportAll": {
+    "description": ""
+  },
+  "sh.noConvos": "No conversations yet. Every chat with your tutor is kept here.",
+  "@sh.noConvos": {
+    "description": ""
+  },
+  "sh.nMessages": "{n, plural, one {# message} other {# messages}}",
+  "@sh.nMessages": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.rename": "Rename",
+  "@sh.rename": {
+    "description": ""
+  },
+  "sh.exportMd": "Export (.md)",
+  "@sh.exportMd": {
+    "description": ""
+  },
+  "sh.del": "Delete",
+  "@sh.del": {
+    "description": ""
+  },
+  "sh.delAgain": "Press again to delete",
+  "@sh.delAgain": {
+    "description": ""
+  },
+  "sh.convBack": "Back to the conversations",
+  "@sh.convBack": {
+    "description": ""
+  },
+  "sh.convContinue": "Continue this conversation",
+  "@sh.convContinue": {
+    "description": ""
+  },
+  "sh.you": "You",
+  "@sh.you": {
+    "description": ""
+  },
+  "sh.lockedPreview": "Preview: you can read the theory now; the exercises open when this step of the Roadmap opens.",
+  "@sh.lockedPreview": {
+    "description": ""
+  },
+  "sh.exLocked": "The exercises open together with the step. Master these first: {list}.",
+  "@sh.exLocked": {
+    "description": ""
+  },
+  "sh.exercisesWord": "Exercises",
+  "@sh.exercisesWord": {
+    "description": ""
+  },
+  "sh.backToTheory": "Back to the theory",
+  "@sh.backToTheory": {
+    "description": ""
+  },
+  "sh.readTheory": "Read the theory",
+  "@sh.readTheory": {
+    "description": ""
+  },
+  "sh.readTheorySub": "The exercises open when the step opens",
+  "@sh.readTheorySub": {
+    "description": ""
+  },
+  "sh.editStep": "Edit this step",
+  "@sh.editStep": {
+    "description": ""
+  },
+  "sh.stepSources": "Sources of this step",
+  "@sh.stepSources": {
+    "description": ""
+  },
+  "sh.noSources": "No sources yet. They show here once the step is prepared.",
+  "@sh.noSources": {
+    "description": ""
+  },
+  "sh.srcNoFile": "no file on this device",
+  "@sh.srcNoFile": {
+    "description": ""
+  },
+  "sh.srcPages": "pages {p}",
+  "@sh.srcPages": {
+    "description": ""
+  },
+  "sh.tutorHelps": "How {tutor} helps you",
+  "@sh.tutorHelps": {
+    "description": ""
+  },
+  "sh.tutorHelpsPl": "How {tutor} help you",
+  "@sh.tutorHelpsPl": {
+    "description": ""
+  },
+  "sh.modeSocratic": "Socratic",
+  "@sh.modeSocratic": {
+    "description": ""
+  },
+  "sh.modeSocraticSub": "I ask you until you find it yourself",
+  "@sh.modeSocraticSub": {
+    "description": ""
+  },
+  "sh.modeExplain": "Explain",
+  "@sh.modeExplain": {
+    "description": ""
+  },
+  "sh.modeExplainSub": "I explain it in depth, no quiz",
+  "@sh.modeExplainSub": {
+    "description": ""
+  },
+  "sh.modeQuiz": "Quiz",
+  "@sh.modeQuiz": {
+    "description": ""
+  },
+  "sh.modeQuizSub": "Quick questions, one at a time",
+  "@sh.modeQuizSub": {
+    "description": ""
+  },
+  "sh.modeInterview": "Interview",
+  "@sh.modeInterview": {
+    "description": ""
+  },
+  "sh.modeInterviewSub": "Interview questions, with a score",
+  "@sh.modeInterviewSub": {
+    "description": ""
+  },
+  "sh.modeDebug": "Case simulation",
+  "@sh.modeDebug": {
+    "description": ""
+  },
+  "sh.modeDebugSub": "A broken case for you to solve",
+  "@sh.modeDebugSub": {
+    "description": ""
+  },
+  "sh.modeHint": "Hint",
+  "@sh.modeHint": {
+    "description": ""
+  },
+  "sh.modeHintSub": "A nudge on this exercise, never the answer",
+  "@sh.modeHintSub": {
+    "description": ""
+  },
+  "sh.tutorFor": "For: {what}",
+  "@sh.tutorFor": {
+    "description": ""
+  },
+  "sh.tutorWhole": "the whole subject",
+  "@sh.tutorWhole": {
+    "description": ""
+  },
+  "sh.forExercise": "this exercise",
+  "@sh.forExercise": {
+    "description": ""
+  },
+  "sh.tutorWholeBack": "Talk about the whole subject",
+  "@sh.tutorWholeBack": {
+    "description": ""
+  },
+  "sh.tutorWrite": "Write to {tutor}…",
+  "@sh.tutorWrite": {
+    "description": ""
+  },
+  "sh.greetSocratic": "Hi {name}. What do you already think about {topic}?",
+  "@sh.greetSocratic": {
+    "description": ""
+  },
+  "sh.greetExplain": "Hi {name}. What should I explain about {topic}?",
+  "@sh.greetExplain": {
+    "description": ""
+  },
+  "sh.greetQuiz": "Hi {name}. Say “go” and I’ll quiz you on {topic}.",
+  "@sh.greetQuiz": {
+    "description": ""
+  },
+  "sh.greetInterview": "Hi {name}. Say “go” and the interview on {topic} begins.",
+  "@sh.greetInterview": {
+    "description": ""
+  },
+  "sh.greetDebug": "Hi {name}. Say “go” and I’ll set up a case on {topic}.",
+  "@sh.greetDebug": {
+    "description": ""
+  },
+  "sh.greetHint": "Hi {name}. Where are you stuck?",
+  "@sh.greetHint": {
+    "description": ""
+  },
+  "sh.chatHistory": "Conversation history",
+  "@sh.chatHistory": {
+    "description": ""
+  },
+  "sh.chatBack": "Back to the conversation",
+  "@sh.chatBack": {
+    "description": ""
+  },
+  "sh.chatExport": "Export this conversation (.md)",
+  "@sh.chatExport": {
+    "description": ""
+  },
+  "sh.chatNew": "New conversation",
+  "@sh.chatNew": {
+    "description": ""
+  },
+  "sh.chatLangItem": "Conversation language",
+  "@sh.chatLangItem": {
+    "description": ""
+  },
+  "sh.chatLangSame": "Same as the subject ({l})",
+  "@sh.chatLangSame": {
+    "description": ""
+  },
+  "sh.helloNight": "Hello",
+  "@sh.helloNight": {
+    "description": ""
+  },
+  "sh.helloMorning": "Good morning",
+  "@sh.helloMorning": {
+    "description": ""
+  },
+  "sh.helloDay": "Good afternoon",
+  "@sh.helloDay": {
+    "description": ""
+  },
+  "sh.helloEvening": "Good evening",
+  "@sh.helloEvening": {
+    "description": ""
+  },
+  "sh.goalTitle": "Daily goal: {xp, number} of {goal, number} XP",
+  "@sh.goalTitle": {
+    "description": ""
+  },
+  "sh.chOf": "Chapter {n, number} of {of, number}",
+  "@sh.chOf": {
+    "description": ""
+  },
+  "sh.secOf": "Section {n, number} of {of, number}",
+  "@sh.secOf": {
+    "description": ""
+  },
+  "sh.start": "Start",
+  "@sh.start": {
+    "description": ""
+  },
+  "sh.stepIs": "Step: {step}",
+  "@sh.stepIs": {
+    "description": ""
+  },
+  "sh.continueElsewhere": "Continue elsewhere",
+  "@sh.continueElsewhere": {
+    "description": ""
+  },
+  "sh.lastSeen": "last time {when}",
+  "@sh.lastSeen": {
+    "description": ""
+  },
+  "sh.yesterday": "yesterday",
+  "@sh.yesterday": {
+    "description": ""
+  },
+  "sh.daysAgo": "{n, number} days ago",
+  "@sh.daysAgo": {
+    "description": ""
+  },
+  "sh.forToday": "For today",
+  "@sh.forToday": {
+    "description": ""
+  },
+  "sh.review": "Review",
+  "@sh.review": {
+    "description": ""
+  },
+  "sh.reviewTip": "Review: the flashcards and debugging checklists due today, from all your subjects together.",
+  "@sh.reviewTip": {
+    "description": ""
+  },
+  "sh.reviewSub": "{fc, number} cards · {pb, number} checklists due",
+  "@sh.reviewSub": {
+    "description": ""
+  },
+  "sh.reviewNone": "Nothing due today",
+  "@sh.reviewNone": {
+    "description": ""
+  },
+  "sh.gym": "Mistakes gym",
+  "@sh.gym": {
+    "description": ""
+  },
+  "sh.gymTip": "Mistakes gym: the exercises you got wrong. Each one leaves when you get it right.",
+  "@sh.gymTip": {
+    "description": ""
+  },
+  "sh.gymSub": "{n, plural, one {# exercise to try again} other {# exercises to try again}}",
+  "@sh.gymSub": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.gymNone": "No open mistakes",
+  "@sh.gymNone": {
+    "description": ""
+  },
+  "sh.streakDays": "{n, plural, one {#-day streak.} other {#-day streak.}}",
+  "@sh.streakDays": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.streakStart": "Start a streak today.",
+  "@sh.streakStart": {
+    "description": ""
+  },
+  "sh.streakKeep": "A little every day keeps it going.",
+  "@sh.streakKeep": {
+    "description": ""
+  },
+  "sh.streakTomorrowWeek": "Tomorrow you complete a week!",
+  "@sh.streakTomorrowWeek": {
+    "description": ""
+  },
+  "sh.streakStartSub": "Study a little today and the first stone is yours.",
+  "@sh.streakStartSub": {
+    "description": ""
+  },
+  "sh.pickWhere": "Where do you want to start?",
+  "@sh.pickWhere": {
+    "description": ""
+  },
+  "sh.openMap": "Open the Roadmap",
+  "@sh.openMap": {
+    "description": ""
+  },
+  "sh.nextStep": "Next step",
+  "@sh.nextStep": {
+    "description": ""
+  },
+  "sh.welcomeTitle": "Welcome!",
+  "@sh.welcomeTitle": {
+    "description": ""
+  },
+  "sh.welcomeText": "Start with a Roadmap: write the goal you want to reach and its steps are drawn for you. Or open a subject you already have.",
+  "@sh.welcomeText": {
+    "description": ""
+  },
+  "sh.pickSubject": "Choose a subject",
+  "@sh.pickSubject": {
+    "description": ""
+  },
+  "sh.newRoadmap": "New Roadmap",
+  "@sh.newRoadmap": {
+    "description": ""
+  },
+  "sh.newRoadmapSub": "Write the treasure you are after; the steps are drawn for you",
+  "@sh.newRoadmapSub": {
+    "description": ""
+  },
+  "sh.focusSprint": "Focus sprint",
+  "@sh.focusSprint": {
+    "description": ""
+  },
+  "sh.focusSprintSub": "15 minutes, then a short break",
+  "@sh.focusSprintSub": {
+    "description": ""
+  },
+  "sh.switchProfile": "Switch profile",
+  "@sh.switchProfile": {
+    "description": ""
+  },
+  "sh.yourRoadmaps": "Your Roadmaps",
+  "@sh.yourRoadmaps": {
+    "description": ""
+  },
+  "sh.noRoadmaps": "No Roadmap yet. Write a goal and get its steps, each one a full subject.",
+  "@sh.noRoadmaps": {
+    "description": ""
+  },
+  "sh.importMap": "Import a Roadmap",
+  "@sh.importMap": {
+    "description": ""
+  },
+  "sh.importMapSub": "From your Claude app, a file or pasted text",
+  "@sh.importMapSub": {
+    "description": ""
+  },
+  "sh.exploreRoadmaps": "Roadmaps others share",
+  "@sh.exploreRoadmaps": {
+    "description": ""
+  },
+  "sh.exploreRoadmapsSub": "Public Roadmaps: join one and study together",
+  "@sh.exploreRoadmapsSub": {
+    "description": ""
+  },
+  "sh.updateWaiting": "A newer version is waiting (see the bell)",
+  "@sh.updateWaiting": {
+    "description": ""
+  },
+  "sh.privateSubj": "private",
+  "@sh.privateSubj": {
+    "description": ""
+  },
+  "sh.exploreRoadmapsLead": "Roadmaps other learners share. Everybody keeps their own progress; the prepared steps are shared by all.",
+  "@sh.exploreRoadmapsLead": {
+    "description": ""
+  },
+  "sh.exploreLead": "Subjects anyone can study. Tap one to study it.",
+  "@sh.exploreLead": {
+    "description": ""
+  },
+  "sh.searchRoadmaps": "Search Roadmaps",
+  "@sh.searchRoadmaps": {
+    "description": ""
+  },
+  "sh.loading": "Loading…",
+  "@sh.loading": {
+    "description": ""
+  },
+  "sh.exploreOffline": "Could not reach what others share right now.",
+  "@sh.exploreOffline": {
+    "description": ""
+  },
+  "sh.rmPubMeta": "by {who} · {n, number} steps · {p} prepared",
+  "@sh.rmPubMeta": {
+    "description": ""
+  },
+  "sh.rmYours": "Yours",
+  "@sh.rmYours": {
+    "description": ""
+  },
+  "sh.rmJoined": "Joined",
+  "@sh.rmJoined": {
+    "description": ""
+  },
+  "sh.rmJoin": "Join",
+  "@sh.rmJoin": {
+    "description": ""
+  },
+  "sh.noPublicRoadmaps": "No public Roadmaps yet. To share one of yours: open it, then ⋮ › Share, and make it public.",
+  "@sh.noPublicRoadmaps": {
+    "description": ""
+  },
+  "sh.noPublicSubjects": "No public subjects yet.",
+  "@sh.noPublicSubjects": {
+    "description": ""
+  },
+  "sh.noResults": "No results.",
+  "@sh.noResults": {
+    "description": ""
+  },
+  "sh.joinNeedsCloud": "Joining needs a noema-lite cloud account (Me › Cloud): your progress is kept there.",
+  "@sh.joinNeedsCloud": {
+    "description": ""
+  },
+  "sh.joinedRm": "You joined “{title}”",
+  "@sh.joinedRm": {
+    "description": ""
+  },
+  "sh.dom_cs": "Computing & data",
+  "@sh.dom_cs": {
+    "description": ""
+  },
+  "sh.dom_math": "Mathematics & statistics",
+  "@sh.dom_math": {
+    "description": ""
+  },
+  "sh.dom_health": "Medicine & health",
+  "@sh.dom_health": {
+    "description": ""
+  },
+  "sh.dom_science": "Natural sciences",
+  "@sh.dom_science": {
+    "description": ""
+  },
+  "sh.dom_eng": "Engineering",
+  "@sh.dom_eng": {
+    "description": ""
+  },
+  "sh.dom_business": "Business & economics",
+  "@sh.dom_business": {
+    "description": ""
+  },
+  "sh.dom_society": "Society, law & psychology",
+  "@sh.dom_society": {
+    "description": ""
+  },
+  "sh.dom_humanities": "History, philosophy & arts",
+  "@sh.dom_humanities": {
+    "description": ""
+  },
+  "sh.dom_lang": "Languages",
+  "@sh.dom_lang": {
+    "description": ""
+  },
+  "sh.dom_other": "Other",
+  "@sh.dom_other": {
+    "description": ""
+  },
+  "sh.shelf": "Shelf",
+  "@sh.shelf": {
+    "description": ""
+  },
+  "sh.shelfN": "{n, plural, one {Shelf · # subject outside a Roadmap} other {Shelf · # subjects outside a Roadmap}}",
+  "@sh.shelfN": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.invitesN": "{n, plural, one {# Roadmap shared with you} other {# Roadmaps shared with you}}",
+  "@sh.invitesN": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.rmSummary": "Mastered {m, number} of {n, number} steps",
+  "@sh.rmSummary": {
+    "description": ""
+  },
+  "sh.rmAttach": "Attach the subjects you have, then its steps are planned",
+  "@sh.rmAttach": {
+    "description": ""
+  },
+  "sh.rmWaiting": "Waiting for your Claude app",
+  "@sh.rmWaiting": {
+    "description": ""
+  },
+  "sh.rmBuilding": "Being built…",
+  "@sh.rmBuilding": {
+    "description": ""
+  },
+  "sh.rmPaused": "Paused: tap to continue",
+  "@sh.rmPaused": {
+    "description": ""
+  },
+  "sh.rmStopped": "Stopped: tap to continue",
+  "@sh.rmStopped": {
+    "description": ""
+  },
+  "sh.sharing": "Sharing",
+  "@sh.sharing": {
+    "description": ""
+  },
+  "sh.share": "Share",
+  "@sh.share": {
+    "description": ""
+  },
+  "sh.shareRmSub": "Everybody keeps their own progress; the prepared steps are shared",
+  "@sh.shareRmSub": {
+    "description": ""
+  },
+  "sh.rmSettings": "Settings",
+  "@sh.rmSettings": {
+    "description": ""
+  },
+  "sh.rmSettingsSub": "Preparing ahead, AI, budget, review, re-plan",
+  "@sh.rmSettingsSub": {
+    "description": ""
+  },
+  "sh.exportJson": "Export (.json)",
+  "@sh.exportJson": {
+    "description": ""
+  },
+  "sh.sharedBy": "shared by {who}",
+  "@sh.sharedBy": {
+    "description": ""
+  },
+  "sh.youShare": "you share it",
+  "@sh.youShare": {
+    "description": ""
+  },
+  "sh.from": "from {who}",
+  "@sh.from": {
+    "description": ""
+  },
+  "sh.shelfTip": "The Shelf: subjects that are not a step of any Roadmap. They stay here; nothing is deleted.",
+  "@sh.shelfTip": {
+    "description": ""
+  },
+  "sh.shelfTitle": "Subjects outside a Roadmap",
+  "@sh.shelfTitle": {
+    "description": ""
+  },
+  "sh.searchSubjects": "Search subjects",
+  "@sh.searchSubjects": {
+    "description": ""
+  },
+  "sh.hiddenN": "{n, plural, one {# hidden subject} other {# hidden subjects}}",
+  "@sh.hiddenN": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.noMatch": "Nothing matches.",
+  "@sh.noMatch": {
+    "description": ""
+  },
+  "sh.shelfEmpty": "The Shelf is empty: every subject is a step of a Roadmap.",
+  "@sh.shelfEmpty": {
+    "description": ""
+  },
+  "sh.importFile": "Import a file",
+  "@sh.importFile": {
+    "description": ""
+  },
+  "sh.importFileSub": "A subject package (.zip or .json)",
+  "@sh.importFileSub": {
+    "description": ""
+  },
+  "sh.createClaude": "Create a subject with Claude",
+  "@sh.createClaude": {
+    "description": ""
+  },
+  "sh.createClaudeSub": "From your PDFs, notes or links",
+  "@sh.createClaudeSub": {
+    "description": ""
+  },
+  "sh.exploreShared": "What others share",
+  "@sh.exploreShared": {
+    "description": ""
+  },
+  "sh.exploreSub": "Public subjects: information, statistics, study one",
+  "@sh.exploreSub": {
+    "description": ""
+  },
+  "sh.exploreLangSub": "Public language courses",
+  "@sh.exploreLangSub": {
+    "description": ""
+  },
+  "sh.allSubjects": "All subjects",
+  "@sh.allSubjects": {
+    "description": ""
+  },
+  "sh.allSubjectsSub": "The full list, grouped",
+  "@sh.allSubjectsSub": {
+    "description": ""
+  },
+  "sh.study": "Study",
+  "@sh.study": {
+    "description": ""
+  },
+  "sh.putOnMap": "Put it on a Roadmap",
+  "@sh.putOnMap": {
+    "description": ""
+  },
+  "sh.putOnMapSub": "Make it a step of a Roadmap",
+  "@sh.putOnMapSub": {
+    "description": ""
+  },
+  "sh.editSubject": "Edit",
+  "@sh.editSubject": {
+    "description": ""
+  },
+  "sh.editSubjectSub": "Name, description, hide or delete",
+  "@sh.editSubjectSub": {
+    "description": ""
+  },
+  "sh.shareSubject": "Share or make public",
+  "@sh.shareSubject": {
+    "description": ""
+  },
+  "sh.shareSubjectSub": "With people by e-mail, or for everyone",
+  "@sh.shareSubjectSub": {
+    "description": ""
+  },
+  "sh.exportPackage": "Export the package",
+  "@sh.exportPackage": {
+    "description": ""
+  },
+  "sh.exportPackageSub": "The subject with its source files (.zip)",
+  "@sh.exportPackageSub": {
+    "description": ""
+  },
+  "sh.nChapters": "{n, plural, one {# chapter} other {# chapters}}",
+  "@sh.nChapters": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.onShelfNow": "“{title}” is on your Shelf: put it on a Roadmap to study it as one of its steps.",
+  "@sh.onShelfNow": {
+    "description": ""
+  },
+  "sh.rmMissing": "This Roadmap is not on this device.",
+  "@sh.rmMissing": {
+    "description": ""
+  },
+  "sh.mapMenu": "Roadmap actions",
+  "@sh.mapMenu": {
+    "description": ""
+  },
+  "sh.yourLanguages": "Your languages",
+  "@sh.yourLanguages": {
+    "description": ""
+  },
+  "sh.newLanguage": "New language",
+  "@sh.newLanguage": {
+    "description": ""
+  },
+  "sh.newLanguageSub": "One or several together",
+  "@sh.newLanguageSub": {
+    "description": ""
+  },
+  "sh.noLanguages": "No language course yet.",
+  "@sh.noLanguages": {
+    "description": ""
+  },
+  "sh.langDue": "{n, plural, one {# review due today} other {# reviews due today}}",
+  "@sh.langDue": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.langNothingDue": "Nothing due today",
+  "@sh.langNothingDue": {
+    "description": ""
+  },
+  "sh.langWords": "{n, plural, one {# word met} other {# words met}}",
+  "@sh.langWords": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.langNext": "Next: {lesson}",
+  "@sh.langNext": {
+    "description": ""
+  },
+  "sh.langStart": "Start",
+  "@sh.langStart": {
+    "description": ""
+  },
+  "sh.langContinue": "Continue",
+  "@sh.langContinue": {
+    "description": ""
+  },
+  "sh.langSession": "Today’s session",
+  "@sh.langSession": {
+    "description": ""
+  },
+  "sh.langSettings": "Course settings",
+  "@sh.langSettings": {
+    "description": ""
+  },
+  "sh.langSettingsSub": "Languages, depth, the languages you know, reading and listening",
+  "@sh.langSettingsSub": {
+    "description": ""
+  },
+  "sh.langClaude": "Through Claude",
+  "@sh.langClaude": {
+    "description": ""
+  },
+  "sh.langClaudeSub": "The tasks Claude still writes for this course",
+  "@sh.langClaudeSub": {
+    "description": ""
+  },
+  "sh.langOther": "Choose another course",
+  "@sh.langOther": {
+    "description": ""
+  },
+  "sh.langNew": "New language course",
+  "@sh.langNew": {
+    "description": ""
+  },
+  "sh.langOwn": "Your own course",
+  "@sh.langOwn": {
+    "description": ""
+  },
+  "sh.langMissing": "This language course is not on this device.",
+  "@sh.langMissing": {
+    "description": ""
+  },
+  "sh.langMore": "More for this course",
+  "@sh.langMore": {
+    "description": ""
+  },
+  "sh.withClaude": "With Claude",
+  "@sh.withClaude": {
+    "description": ""
+  },
+  "sh.claudeApp": "Your Claude app",
+  "@sh.claudeApp": {
+    "description": ""
+  },
+  "sh.claudeAppSub": "Connect noema-lite to Claude (your Claude plan) and prepare subjects and Roadmaps there",
+  "@sh.claudeAppSub": {
+    "description": ""
+  },
+  "sh.claudeKey": "Claude API key",
+  "@sh.claudeKey": {
+    "description": ""
+  },
+  "sh.claudeKeySub": "Everything runs here, paid per use",
+  "@sh.claudeKeySub": {
+    "description": ""
+  },
+  "sh.yourProgress": "Your progress",
+  "@sh.yourProgress": {
+    "description": ""
+  },
+  "sh.level": "Level",
+  "@sh.level": {
+    "description": ""
+  },
+  "sh.xpToLevel": "{n, number} XP more to level {lv}",
+  "@sh.xpToLevel": {
+    "description": ""
+  },
+  "sh.xpTotal": "{xp, number} XP in total. Every level takes you to a new place of your world.",
+  "@sh.xpTotal": {
+    "description": ""
+  },
+  "sh.trailAria": "{n, plural, one {A 7-day trail, # day with study} other {A 7-day trail, # days with study}}",
+  "@sh.trailAria": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.nConcepts": "{n, plural, one {# section} other {# sections}}",
+  "@sh.nConcepts": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.collNote": "{n, plural, =0 {Every {item} is a chapter you have completed.} one {Every {item} is a chapter you have completed. The brightest one is from this week.} other {Every {item} is a chapter you have completed. The # brightest are from this week.}}",
+  "@sh.collNote": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.xpWeek": "XP this week",
+  "@sh.xpWeek": {
+    "description": ""
+  },
+  "sh.treasures": "Treasures you found",
+  "@sh.treasures": {
+    "description": ""
+  },
+  "sh.medalStep": "First step mastered",
+  "@sh.medalStep": {
+    "description": ""
+  },
+  "sh.medalCards": "100 cards · {n, number}/100",
+  "@sh.medalCards": {
+    "description": ""
+  },
+  "sh.medalWeek": "A week in a row · {n, number}/7",
+  "@sh.medalWeek": {
+    "description": ""
+  },
+  "sh.medalBoss": "A boss beaten",
+  "@sh.medalBoss": {
+    "description": ""
+  },
+  "sh.medalXp": "1,000 XP",
+  "@sh.medalXp": {
+    "description": ""
+  },
+  "sh.medalMonth": "A month in a row · {n, number}/30",
+  "@sh.medalMonth": {
+    "description": ""
+  },
+  "sh.gameNote": "How much the game shows (playful, calm, off) is set in Me ›",
+  "@sh.gameNote": {
+    "description": ""
+  },
+  "sh.whatILearn": "What I learn",
+  "@sh.whatILearn": {
+    "description": ""
+  },
+  "sh.whatILearnSub": "It changes the tabs of the app.",
+  "@sh.whatILearnSub": {
+    "description": ""
+  },
+  "sh.both": "Both",
+  "@sh.both": {
+    "description": ""
+  },
+  "sh.localProfile": "local profile on this device",
+  "@sh.localProfile": {
+    "description": ""
+  },
+  "sh.character": "Character",
+  "@sh.character": {
+    "description": ""
+  },
+  "sh.charLocked": "{tutor} · chosen by your organisation",
+  "@sh.charLocked": {
+    "description": ""
+  },
+  "sh.canChange": "you can change it",
+  "@sh.canChange": {
+    "description": ""
+  },
+  "sh.nextChange": "next change from {date}",
+  "@sh.nextChange": {
+    "description": ""
+  },
+  "sh.profile": "Profile",
+  "@sh.profile": {
+    "description": ""
+  },
+  "sh.profileSub": "Name, emoji, “about me” for {tutorAcc}, PIN",
+  "@sh.profileSub": {
+    "description": ""
+  },
+  "sh.aiTitle": "{tutor} and AI",
+  "@sh.aiTitle": {
+    "description": ""
+  },
+  "sh.aiSub": "Gemini key for {tutorAcc}, Claude for subjects and Roadmaps, the language of the chats",
+  "@sh.aiSub": {
+    "description": ""
+  },
+  "sh.look": "Language and appearance",
+  "@sh.look": {
+    "description": ""
+  },
+  "sh.lookSub": "{lang} · light or dark · how much game",
+  "@sh.lookSub": {
+    "description": ""
+  },
+  "sh.activity": "Conversations",
+  "@sh.activity": {
+    "description": ""
+  },
+  "sh.activitySub": "Your chats with {tutorAcc} · export",
+  "@sh.activitySub": {
+    "description": ""
+  },
+  "sh.mySubjects": "My subjects",
+  "@sh.mySubjects": {
+    "description": ""
+  },
+  "sh.mySubjectsSub": "Hidden subjects, storage, the ones you made",
+  "@sh.mySubjectsSub": {
+    "description": ""
+  },
+  "sh.data": "Data and sync",
+  "@sh.data": {
+    "description": ""
+  },
+  "sh.dataSub": "Cloud, backups, restore",
+  "@sh.dataSub": {
+    "description": ""
+  },
+  "sh.help": "Help",
+  "@sh.help": {
+    "description": ""
+  },
+  "sh.helpSub": "Setup guides",
+  "@sh.helpSub": {
+    "description": ""
+  },
+  "sh.backup": "Backup and restore",
+  "@sh.backup": {
+    "description": ""
+  },
+  "sh.needSubject": "These settings open together with a subject. Choose one first.",
+  "@sh.needSubject": {
+    "description": ""
+  },
+  "sh.uiLang": "Language of the menus",
+  "@sh.uiLang": {
+    "description": ""
+  },
+  "sh.uiLangAuto": "Automatic ({lang})",
+  "@sh.uiLangAuto": {
+    "description": ""
+  },
+  "sh.uiLangTip": "The menus and buttons. The course material and the AI conversations have their own language.",
+  "@sh.uiLangTip": {
+    "description": ""
+  },
+  "sh.lightDark": "Light or dark",
+  "@sh.lightDark": {
+    "description": ""
+  },
+  "sh.auto": "As the system",
+  "@sh.auto": {
+    "description": ""
+  },
+  "sh.light": "Light",
+  "@sh.light": {
+    "description": ""
+  },
+  "sh.dark": "Dark",
+  "@sh.dark": {
+    "description": ""
+  },
+  "sh.gameMode": "How much game",
+  "@sh.gameMode": {
+    "description": ""
+  },
+  "sh.gameModeSub": "The character’s reactions, the collection and the treasures.",
+  "@sh.gameModeSub": {
+    "description": ""
+  },
+  "sh.gamePlayful": "Playful",
+  "@sh.gamePlayful": {
+    "description": ""
+  },
+  "sh.gameCalm": "Calm",
+  "@sh.gameCalm": {
+    "description": ""
+  },
+  "sh.gameOff": "Off",
+  "@sh.gameOff": {
+    "description": ""
+  },
+  "sh.gameRules": "Playful: a big reaction now and then (at most one every 3 minutes) and always at milestones. Calm: only at milestones. Off: only a short message.",
+  "@sh.gameRules": {
+    "description": ""
+  },
+  "sh.studying": "Studying",
+  "@sh.studying": {
+    "description": ""
+  },
+  "sh.sound": "Sound effects",
+  "@sh.sound": {
+    "description": ""
+  },
+  "sh.chunk": "Bite-size reading (the theory appears chunk by chunk)",
+  "@sh.chunk": {
+    "description": ""
+  },
+  "sh.dailyGoal": "Daily XP goal",
+  "@sh.dailyGoal": {
+    "description": ""
+  },
+  "sh.companion": "The companion of your journey",
+  "@sh.companion": {
+    "description": ""
+  },
+  "sh.characterIntro": "Your character is also your tutor: it asks, explains and corrects. It dresses the whole app in its colours, fonts, buttons and the world of the map, and its name changes with the language. Try anyone for 5 minutes. For the first 15 days you can change as often as you like, then once every 5 days.",
+  "@sh.characterIntro": {
+    "description": ""
+  },
+  "sh.charLockedLong": "Your organisation chose the character for everyone.",
+  "@sh.charLockedLong": {
+    "description": ""
+  },
+  "sh.canChangeNow": "You can change your character now.",
+  "@sh.canChangeNow": {
+    "description": ""
+  },
+  "sh.freeUntil": "Until {date} you can change it as often as you like; after that, once every 5 days.",
+  "@sh.freeUntil": {
+    "description": ""
+  },
+  "sh.changedOn": "You chose it on {date}. The next change is possible from {next}. Trying is always possible.",
+  "@sh.changedOn": {
+    "description": ""
+  },
+  "sh.group_animals": "Pet friends and fruits",
+  "@sh.group_animals": {
+    "description": ""
+  },
+  "sh.group_tales": "Fairy tales",
+  "@sh.group_tales": {
+    "description": ""
+  },
+  "sh.group_grown": "Serious",
+  "@sh.group_grown": {
+    "description": ""
+  },
+  "sh.yours": "Yours",
+  "@sh.yours": {
+    "description": ""
+  },
+  "sh.try5": "Try for 5′",
+  "@sh.try5": {
+    "description": ""
+  },
+  "sh.choose": "Choose",
+  "@sh.choose": {
+    "description": ""
+  },
+  "sh.tryingNow": "Trying {tutor} for 5 minutes",
+  "@sh.tryingNow": {
+    "description": ""
+  },
+  "sh.welcomeWorld": "Welcome to your new world!",
+  "@sh.welcomeWorld": {
+    "description": ""
+  },
+  "sh.trying": "Trying",
+  "@sh.trying": {
+    "description": ""
+  },
+  "sh.keepIt": "Keep it",
+  "@sh.keepIt": {
+    "description": ""
+  },
+  "sh.endTry": "End the try",
+  "@sh.endTry": {
+    "description": ""
+  },
+  "sh.keepFrom": "You can keep it from {date}.",
+  "@sh.keepFrom": {
+    "description": ""
+  },
+  "sh.onbWhat": "What do you want to learn?",
+  "@sh.onbWhat": {
+    "description": ""
+  },
+  "sh.onbKnow": "A field, a profession or an exam, step by step",
+  "@sh.onbKnow": {
+    "description": ""
+  },
+  "sh.onbLang": "One or more foreign languages",
+  "@sh.onbLang": {
+    "description": ""
+  },
+  "sh.onbBoth": "You see both tabs",
+  "@sh.onbBoth": {
+    "description": ""
+  },
+  "sh.onbChangeLater": "You can change it any time: Me › What I learn.",
+  "@sh.onbChangeLater": {
+    "description": ""
+  },
+  "sh.onbWho": "Who comes with you?",
+  "@sh.onbWho": {
+    "description": ""
+  },
+  "sh.onbWhoSub": "Your companion is also your tutor in the lessons, and it dresses the whole app.",
+  "@sh.onbWhoSub": {
+    "description": ""
+  },
+  "sh.onbGo": "Let’s go",
+  "@sh.onbGo": {
+    "description": ""
+  },
+  "sh.onbWhoLater": "Change it in Me › Character as often as you like for 15 days, then once every 5 days. There you can also try anyone for 5 minutes.",
+  "@sh.onbWhoLater": {
+    "description": ""
+  },
+  "sh.rx.correct": "Five in a row!|That was a hard one. Well done!|Even I wouldn’t have found it that fast!",
+  "@sh.rx.correct": {
+    "description": ""
+  },
+  "sh.rx.correct.five": "Five in a row!",
+  "@sh.rx.correct.five": {
+    "description": ""
+  },
+  "sh.rx.correct.hard": "That was a hard one. Well done!",
+  "@sh.rx.correct.hard": {
+    "description": ""
+  },
+  "sh.rx.wrong.faint": "Oops! I fainted a little…",
+  "@sh.rx.wrong.faint": {
+    "description": ""
+  },
+  "sh.rx.wrong.dizzy": "That one made me dizzy too!",
+  "@sh.rx.wrong.dizzy": {
+    "description": ""
+  },
+  "sh.rx.wrong.sweat": "A tough one! Again?",
+  "@sh.rx.wrong.sweat": {
+    "description": ""
+  },
+  "sh.rx.wrong3": "Three in a row? It happens. Shall I explain it another way?",
+  "@sh.rx.wrong3": {
+    "description": ""
+  },
+  "sh.rx.timer": "Last seconds!",
+  "@sh.rx.timer": {
+    "description": ""
+  },
+  "sh.rx.timerwin": "A clean score!",
+  "@sh.rx.timerwin": {
+    "description": ""
+  },
+  "sh.rx.boss": "The boss is coming. You have 3 lives!",
+  "@sh.rx.boss": {
+    "description": ""
+  },
+  "sh.rx.bosswin": "You beat the boss!",
+  "@sh.rx.bosswin": {
+    "description": ""
+  },
+  "sh.rx.chapter": "End of the chapter!|Chapter done!",
+  "@sh.rx.chapter": {
+    "description": ""
+  },
+  "sh.rx.node": "A new step is open!",
+  "@sh.rx.node": {
+    "description": ""
+  },
+  "sh.rx.treasure": "You found the treasure!",
+  "@sh.rx.treasure": {
+    "description": ""
+  },
+  "sh.rx.gym": "Not a single mistake left!",
+  "@sh.rx.gym": {
+    "description": ""
+  },
+  "sh.rx.streak": "{n, number} days in a row!",
+  "@sh.rx.streak": {
+    "description": ""
+  },
+  "sh.rx.goal": "High five! The day’s goal is done.",
+  "@sh.rx.goal": {
+    "description": ""
+  },
+  "sh.rx.level": "A new level! A new place of your world.",
+  "@sh.rx.level": {
+    "description": ""
+  },
+  "sh.rx.medal": "A new treasure!",
+  "@sh.rx.medal": {
+    "description": ""
+  },
+  "sh.rx.perfect": "All right. Perfect!",
+  "@sh.rx.perfect": {
+    "description": ""
+  },
+  "sh.rx.back": "I was waiting for you!",
+  "@sh.rx.back": {
+    "description": ""
+  },
+  "sh.rx.rest": "Forty minutes! A break?",
+  "@sh.rx.rest": {
+    "description": ""
+  },
+  "sh.rx.hello": "Hi! Shall we start?",
+  "@sh.rx.hello": {
+    "description": ""
+  },
+  "sh.rx.signText": "Together!",
+  "@sh.rx.signText": {
+    "description": ""
+  },
+  "sh.stationOf": "A step of “{title}”",
+  "@sh.stationOf": {
+    "description": ""
+  },
+  "sh.stationDone": "Step mastered: the next ones are open on the Roadmap.",
+  "@sh.stationDone": {
+    "description": ""
+  },
+  "sh.stationMastered": "Step mastered",
+  "@sh.stationMastered": {
+    "description": ""
+  },
+  "sh.stationMastery": "To master it: read every section ({r}% read) and solve {p}% of the exercises ({e}% solved).",
+  "@sh.stationMastery": {
+    "description": ""
+  },
+  "sh.searchSubject": "Search this subject",
+  "@sh.searchSubject": {
+    "description": ""
+  },
+  "sh.sources": "Sources",
+  "@sh.sources": {
+    "description": ""
+  },
+  "sh.sourcesSub": "The files this subject was made from",
+  "@sh.sourcesSub": {
+    "description": ""
+  },
+  "sh.focusStop": "Stop the focus sprint",
+  "@sh.focusStop": {
+    "description": ""
+  },
+  "sh.otherStation": "Make it another step",
+  "@sh.otherStation": {
+    "description": ""
+  },
+  "sh.notYours": "Only the subjects you made yourself can be shared.",
+  "@sh.notYours": {
+    "description": ""
+  },
+  "sh.resetProgress": "Reset my progress in “{title}”",
+  "@sh.resetProgress": {
+    "description": ""
+  },
+  "sh.searchConcept": "Find a concept",
+  "@sh.searchConcept": {
+    "description": ""
+  },
+  "sh.chView": "How to show the chapters",
+  "@sh.chView": {
+    "description": ""
+  },
+  "sh.viewList": "List",
+  "@sh.viewList": {
+    "description": ""
+  },
+  "sh.viewCards": "Cards",
+  "@sh.viewCards": {
+    "description": ""
+  },
+  "sh.subjProgress": "{r}% read · {e}% solved",
+  "@sh.subjProgress": {
+    "description": ""
+  },
+  "sh.continueSec": "Continue: {title}",
+  "@sh.continueSec": {
+    "description": ""
+  },
+  "sh.startCh1": "Start with chapter 1",
+  "@sh.startCh1": {
+    "description": ""
+  },
+  "sh.subjCounts": "{c} chapters · {s} sections · {e} exercises",
+  "@sh.subjCounts": {
+    "description": ""
+  },
+  "sh.chapterN": "Chapter {n, number}",
+  "@sh.chapterN": {
+    "description": ""
+  },
+  "sh.theory": "Theory",
+  "@sh.theory": {
+    "description": ""
+  },
+  "sh.practice": "Practice",
+  "@sh.practice": {
+    "description": ""
+  },
+  "sh.chSocratic": "Socratic dialogue on the chapter",
+  "@sh.chSocratic": {
+    "description": ""
+  },
+  "sh.chSocraticSub": "{Tutor} asks, you think it through",
+  "@sh.chSocraticSub": {
+    "description": ""
+  },
+  "sh.allChapters": "All chapters",
+  "@sh.allChapters": {
+    "description": ""
+  },
+  "sh.objectives": "What you will be able to do",
+  "@sh.objectives": {
+    "description": ""
+  },
+  "sh.startReading": "Start reading",
+  "@sh.startReading": {
+    "description": ""
+  },
+  "sh.practiceChapter": "Practise the chapter",
+  "@sh.practiceChapter": {
+    "description": ""
+  },
+  "sh.nextSection": "Next section",
+  "@sh.nextSection": {
+    "description": ""
+  },
+  "sh.prevSection": "Previous section",
+  "@sh.prevSection": {
+    "description": ""
+  },
+  "sh.nextChapterFirst": "Chapter {n, number} · {title}",
+  "@sh.nextChapterFirst": {
+    "description": ""
+  },
+  "sh.allWays": "All the ways to practise",
+  "@sh.allWays": {
+    "description": ""
+  },
+  "sh.trapsIntro": "The details that are easy to confuse and the classic mistakes of this chapter.",
+  "@sh.trapsIntro": {
+    "description": ""
+  },
+  "sh.trapDrill": "Traps",
+  "@sh.trapDrill": {
+    "description": ""
+  },
+  "sh.trapsNoTimer": "Trap drill, no timer",
+  "@sh.trapsNoTimer": {
+    "description": ""
+  },
+  "sh.trapsTimed": "True or false against the clock",
+  "@sh.trapsTimed": {
+    "description": ""
+  },
+  "sh.round10": "A round of 10",
+  "@sh.round10": {
+    "description": ""
+  },
+  "sh.solvedOf": "{n, number} of {of, number} solved",
+  "@sh.solvedOf": {
+    "description": ""
+  },
+  "sh.chooseRound": "Choose what to practise",
+  "@sh.chooseRound": {
+    "description": ""
+  },
+  "sh.chooseRoundSub": "By type, difficulty or tag",
+  "@sh.chooseRoundSub": {
+    "description": ""
+  },
+  "sh.bossBeaten": "Boss beaten · fight again",
+  "@sh.bossBeaten": {
+    "description": ""
+  },
+  "sh.boss": "The chapter boss",
+  "@sh.boss": {
+    "description": ""
+  },
+  "sh.bossSub": "A final test with 3 lives",
+  "@sh.bossSub": {
+    "description": ""
+  },
+  "sh.askSocratic": "Socratic dialogue on this",
+  "@sh.askSocratic": {
+    "description": ""
+  },
+  "sh.askDebug": "Debug simulation",
+  "@sh.askDebug": {
+    "description": ""
+  },
+  "sh.askInterview": "Interview me",
+  "@sh.askInterview": {
+    "description": ""
+  },
+  "sh.askFresh": "A new question",
+  "@sh.askFresh": {
+    "description": ""
+  },
+  "sh.askFreshSub": "{Tutor} writes one just for you",
+  "@sh.askFreshSub": {
+    "description": ""
+  },
+  "sh.allSections": "All sections of the chapter",
+  "@sh.allSections": {
+    "description": ""
+  },
+  "sh.read": "read",
+  "@sh.read": {
+    "description": ""
+  },
+  "sh.continueRead": "Continue",
+  "@sh.continueRead": {
+    "description": ""
+  },
+  "sh.showAll": "show all",
+  "@sh.showAll": {
+    "description": ""
+  },
+  "sh.quickCheck": "Quick check",
+  "@sh.quickCheck": {
+    "description": ""
+  },
+  "sh.quickCheckSub": "{n, plural, one { · # question} other { · # questions}}",
+  "@sh.quickCheckSub": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.sectionDrill": "Debug drill",
+  "@sh.sectionDrill": {
+    "description": ""
+  },
+  "sh.generating": "Writing a new question…",
+  "@sh.generating": {
+    "description": ""
+  },
+  "sh.allExercises": "{n, plural, one {The one exercise of this section} other {All # exercises of this section}}",
+  "@sh.allExercises": {
+    "description": "",
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "sh.showAsMap": "Show as a map",
+  "@sh.showAsMap": {
+    "description": ""
+  },
+  "sh.showAsList": "Show as a list",
+  "@sh.showAsList": {
+    "description": ""
+  },
+  "sh.addStep": "Add a step",
+  "@sh.addStep": {
+    "description": ""
+  },
+  "sh.claudeAppMapSub": "Copy the message · by hand · import",
+  "@sh.claudeAppMapSub": {
+    "description": ""
+  },
+  "sh.copyForClaude": "Copy the message for Claude",
+  "@sh.copyForClaude": {
+    "description": ""
+  },
+  "sh.copyForClaudeSub": "{n, number} waiting · paste it into a Claude chat",
+  "@sh.copyForClaudeSub": {
+    "description": ""
+  },
+  "sh.copiedForClaude": "Copied: paste it into a Claude chat",
+  "@sh.copiedForClaude": {
+    "description": ""
+  },
+  "sh.rmSettingsSubAll": "Prepare ahead, AI, budget, review, re-plan, delete",
+  "@sh.rmSettingsSubAll": {
+    "description": ""
+  },
+  "sh.viewMap": "Map",
+  "@sh.viewMap": {
+    "description": ""
+  },
+  "sh.mapOrList": "Map or list",
+  "@sh.mapOrList": {
+    "description": ""
+  },
+  "sh.mapSigns": "What the signs mean",
+  "@sh.mapSigns": {
+    "description": ""
+  },
+  "sh.compassN": "N",
+  "@sh.compassN": {
+    "description": ""
+  },
+  "sh.rmStart": "Start",
+  "@sh.rmStart": {
+    "description": ""
+  },
+  "sh.rmTreasure": "The treasure: {goal, number}",
+  "@sh.rmTreasure": {
+    "description": ""
+  },
+  "sh.signHere": "You are here",
+  "@sh.signHere": {
+    "description": ""
+  },
+  "sh.signMastered": "mastered",
+  "@sh.signMastered": {
+    "description": ""
+  },
+  "sh.signOpen": "open",
+  "@sh.signOpen": {
+    "description": ""
+  },
+  "sh.signLocked": "locked",
+  "@sh.signLocked": {
+    "description": ""
+  },
+  "sh.signReplan": "Being re-planned to match your subject",
+  "@sh.signReplan": {
+    "description": ""
+  },
+  "sh.signOwn": "Taught by your own subject",
+  "@sh.signOwn": {
+    "description": ""
+  },
+  "sh.signByOther": "Prepared by {who}",
+  "@sh.signByOther": {
+    "description": ""
+  },
+  "sh.signByOtherBusy": "Being prepared by {who}",
+  "@sh.signByOtherBusy": {
+    "description": ""
+  },
+  "sh.signShared": "Prepared by another member",
+  "@sh.signShared": {
+    "description": ""
+  },
+  "sh.signReady": "Prepared: ready to study",
+  "@sh.signReady": {
+    "description": ""
+  },
+  "sh.signBusy": "Being prepared",
+  "@sh.signBusy": {
+    "description": ""
+  },
+  "sh.signFailed": "Preparing failed: open it to try again",
+  "@sh.signFailed": {
+    "description": ""
+  },
+  "sh.signPaused": "Preparing is paused",
+  "@sh.signPaused": {
+    "description": ""
+  },
+  "sh.signReview": "Look over its plan, then it is prepared",
+  "@sh.signReview": {
+    "description": ""
+  },
+  "sh.signMaterial": "Taught from your material",
+  "@sh.signMaterial": {
+    "description": ""
+  },
+  "sh.signMasteredLong": "Mastered: its flag stays there",
+  "@sh.signMasteredLong": {
+    "description": ""
+  },
+  "sh.signOpenLong": "Open: tap it to study; the number is how much of its practice you solved",
+  "@sh.signOpenLong": {
+    "description": ""
+  },
+  "sh.signHereLong": "You are here: your character waits at the next station",
+  "@sh.signHereLong": {
+    "description": ""
+  },
+  "sh.signLockedLong": "Locked: master the stations that lead to it first",
+  "@sh.signLockedLong": {
+    "description": ""
+  },
+  "sh.signRule": "A station opens when every station before it is mastered: all its sections read and at least 80% of its exercises solved, or the short “I already know this” test passed.",
+  "@sh.signRule": {
+    "description": ""
+  },
+  "sh.fitMap": "See the whole map",
+  "@sh.fitMap": {
+    "description": ""
+  },
+  "sh.nextUp": "Next up",
+  "@sh.nextUp": {
+    "description": ""
+  },
+  "sh.keepCopy": "Keep my copy",
+  "@sh.keepCopy": {
+    "description": ""
+  },
+  "sh.keepMine": "Keep mine",
+  "@sh.keepMine": {
+    "description": ""
+  },
+  "sh.join": "Join",
+  "@sh.join": {
+    "description": ""
+  },
+  "sh.accept": "Accept",
+  "@sh.accept": {
+    "description": ""
+  },
+  "sh.reject": "Reject",
+  "@sh.reject": {
+    "description": ""
+  },
+  "sh.someone": "Someone",
+  "@sh.someone": {
+    "description": ""
+  },
+  "sh.invitesYou": "{who} invites you to the Roadmap “{title}”",
+  "@sh.invitesYou": {
+    "description": ""
+  },
+  "sh.wantsShare": "{who} wants to share “{title}” with you",
+  "@sh.wantsShare": {
+    "description": ""
+  },
+  "sh.joinedToast": "You joined “{title}”: your progress is your own, the prepared steps are shared",
+  "@sh.joinedToast": {
+    "description": ""
+  },
+  "sh.addedToast": "“{title}” added to your subjects",
+  "@sh.addedToast": {
+    "description": ""
+  },
+  "sh.syncErr": "Sync error: {e}",
+  "@sh.syncErr": {
+    "description": ""
+  },
+  "sh.syncing": "Syncing…",
+  "@sh.syncing": {
+    "description": ""
+  },
+  "sh.syncWait": "Changes waiting to sync",
+  "@sh.syncWait": {
+    "description": ""
+  },
+  "sh.synced": "All changes synced",
+  "@sh.synced": {
+    "description": ""
+  }
+}

@@ -39,14 +39,13 @@ window.NoemaShell = (() => {
     return h('span', { class: 'ns-ringsvg', html: `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-hidden="true"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--line)" stroke-width="${stroke}"/><circle class="ns-arc" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--acc)" stroke-width="${stroke}" stroke-linecap="round" style="--C:${C};stroke-dasharray:${C};stroke-dashoffset:${off}"/></svg>` });
   }
 
-  /* ---------- words: engine/i18n_shell.js ('sh.*'), with the tutor's name in the right form ---------- */
+  /* ---------- words: i18n/shell/<locale>.arb ('sh.*', docs/i18n.md), with the tutor's name in the right form ---------- */
   const acc = () => N()?.account?.id || N()?.kv?.acc || null;
   const settings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${acc()}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
   const uiPref = () => settings().lang;
   const lang = () => window.NoemaI18n ? NoemaI18n.lang(uiPref()) : 'en';
   function tv(m) { const t = TH()?.tutor(m) || { n: 'Tutor', nom: 'Tutor', acc: 'Tutor', to: 'Tutor' }; return { tutor: t.n, tutorAcc: t.acc, tutorTo: t.to, tutorNom: t.nom, Tutor: t.nom ? t.nom[0].toUpperCase() + t.nom.slice(1) : t.n }; }
-  const one = (k, v) => v && v.n === 1 && window.NoemaI18n?.bundles.en?.['sh.' + k + '1'] ? k + '1' : k;   // '<key>1': the words for exactly one
-  const L = (k, v) => window.NoemaI18n ? NoemaI18n.t('sh.' + one(k, v), { ...tv(), ...(v || {}) }, uiPref()) : k;
+  const L = (k, v) => window.NoemaI18n ? NoemaI18n.t('sh.' + k, { ...tv(), ...(v || {}) }, uiPref()) : k;
   /** A sentence with some of its values in bold (names and titles stay text, never markup) */
   function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? h('b', {}, vals[names[+x]]) : x); }
   const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
@@ -550,7 +549,7 @@ window.NoemaShell = (() => {
     const fresh = Math.max(0, done - base);
     v.append(h('section', { class: 'ns-panel' }, h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, tx.coll || ''), pill(L('nChapters', { n: done }), 1)),
       h('div', { class: 'ns-coll', html: `<svg viewBox="0 0 300 230" role="img" aria-label="${(tx.coll || '').replace(/"/g, '')}: ${done}">${ART()?.collection(m, done, fresh) || ''}</svg>` }),
-      h('p', { class: 'tiny center' }, L(fresh ? 'collNote' : 'collNote0', { item: tx.item || '', n: fresh }))));
+      h('p', { class: 'tiny center' }, L('collNote', { item: tx.item || '', n: fresh }))));
     // the week's XP
     const max = Math.max(settings().goal || 120, ...days.map(d => (st.xpDay || {})[d.k] || 0)), wsum = days.reduce((a, d) => a + ((st.xpDay || {})[d.k] || 0), 0);
     v.append(h('section', { class: 'ns-panel' }, h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, L('xpWeek')), pill(wsum, 1)),
@@ -590,7 +589,7 @@ window.NoemaShell = (() => {
         it(h('span', { class: 'ns-ico face', style: tone(2) }, faceEl(m)), 2, L('character'), TH()?.locked() ? L('charLocked', { tutor: t.tutor }) : trying ? L('tryingNow') : `${t.tutor} · ${can ? L('canChange') : L('nextChange', { date: fmtDate(changeAt) })}`, () => go('#/character')),
         it(ico('user', 4), 4, L('profile'), L('profileSub'), () => go('#/me/profile')),
         it(ico('spark', 2), 2, L('aiTitle'), L('aiSub'), () => go('#/me/ai')),
-        it(ico('palette', 4), 4, L('look'), L('lookSub', { lang: (window.NoemaI18n?.LANGS.find(x => x[0] === lang()) || [, lang()])[1] }), () => go('#/me/look')),
+        it(ico('palette', 4), 4, L('look'), L('lookSub', { lang: (window.NoemaI18n?.LOCALES.find(x => x.tag === lang()) || { name: lang() }).name }), () => go('#/me/look')),
         it(ico('clock', 1), 1, L('activity'), L('activitySub'), () => convos()),
         it(ico('book', 3), 3, L('mySubjects'), L('mySubjectsSub'), () => go('#/me/subjects')),
         it(ico('cloud', 1), 1, L('data'), L('dataSub'), () => go('#/me/data')),
@@ -614,7 +613,7 @@ window.NoemaShell = (() => {
   function lookPage() {
     const s = settings(), engineS = window.S?.settings || {};
     const v = page({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('look')]], back: '#/me' }, h('h1', {}, L('look')));
-    const uiL = h('select', { class: 'noema-input', 'aria-label': L('uiLang') }, h('option', { value: '' }, L('uiLangAuto', { lang: (window.NoemaI18n?.LANGS.find(x => x[0] === NoemaI18n.browser()) || [, 'English'])[1] })), ...(window.NoemaI18n?.LANGS || []).map(([k, l]) => h('option', { value: k, selected: s.lang === k || null }, l)));
+    const uiL = h('select', { class: 'noema-input', 'aria-label': L('uiLang') }, h('option', { value: '' }, L('uiLangAuto', { lang: (window.NoemaI18n?.LOCALES.find(x => x.tag === NoemaI18n.browser()) || { name: 'English' }).name })), ...uiLocaleOptions(s.lang).map(([k, l]) => h('option', { value: k, selected: s.lang === k || null, lang: k }, l)));
     const theme = engineS.theme || s.theme || 'auto';
     const seg = (name, cur, opts, onpick) => h('div', { class: 'ns-seg', role: 'radiogroup', 'aria-label': name }, ...opts.map(([k, l]) => h('button', { class: cur === k ? 'on' : '', role: 'radio', 'aria-checked': String(cur === k), 'data-v': k, onclick: e => { [...e.currentTarget.parentElement.children].forEach(b => { b.classList.toggle('on', b === e.currentTarget); b.setAttribute('aria-checked', String(b === e.currentTarget)); }); onpick(k); } }, l)));
     const game = TH()?.game() || 'playful';
@@ -629,6 +628,11 @@ window.NoemaShell = (() => {
       h('section', { class: 'ns-panel ns-form' }, h('span', { class: 'ns-label' }, L('studying')), chk('sound', true, L('sound')), chk('chunk', true, L('chunk')), h('label', { class: 'row ns-check' }, goal, L('dailyGoal'))),
       h('div', { class: 'row' }, h('button', { class: 'btn', onclick: () => go('#/character') }, faceEl(undefined, 'mini'), L('character'))));
     uiL.addEventListener('change', () => { putS({ lang: uiL.value || undefined }); location.reload(); });
+  }
+  /** The UI languages to offer (endonym · code; never flags): those switched on, plus the learner's current choice. */
+  function uiLocaleOptions(cur) {
+    const I = window.NoemaI18n; if (!I) return [];
+    return I.LOCALES.filter(x => I.available().includes(x) || x.tag === cur).map(x => [x.tag, `${x.name} · ${x.tag}`]);
   }
   /** Save account settings (a:settings, synced) and keep the open subject's copy (S.settings) in step. */
   function putS(patch) {

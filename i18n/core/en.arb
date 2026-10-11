@@ -1,0 +1,367 @@
+{
+  "@@locale": "en",
+  "top.switchSubject": "Switch subject",
+  "@top.switchSubject": {
+    "description": ""
+  },
+  "top.map": "Map",
+  "@top.map": {
+    "description": ""
+  },
+  "top.mapTitle": "Back to this Roadmap",
+  "@top.mapTitle": {
+    "description": ""
+  },
+  "top.curricula": "Roadmaps",
+  "@top.curricula": {
+    "description": ""
+  },
+  "top.curriculaTitle": "Roadmaps: type a goal, get its steps",
+  "@top.curriculaTitle": {
+    "description": ""
+  },
+  "top.explore": "Explore",
+  "@top.explore": {
+    "description": ""
+  },
+  "top.exploreTitle": "Explore: every public subject — info, statistics, study it",
+  "@top.exploreTitle": {
+    "description": ""
+  },
+  "top.focus": "Focus",
+  "@top.focus": {
+    "description": ""
+  },
+  "top.focusTitle": "15-minute focus sprint",
+  "@top.focusTitle": {
+    "description": ""
+  },
+  "top.streak": "Day streak",
+  "@top.streak": {
+    "description": ""
+  },
+  "top.notifications": "Notifications",
+  "@top.notifications": {
+    "description": ""
+  },
+  "top.sources": "Sources",
+  "@top.sources": {
+    "description": ""
+  },
+  "top.theme": "Theme",
+  "@top.theme": {
+    "description": ""
+  },
+  "top.tutor": "Tutor",
+  "@top.tutor": {
+    "description": ""
+  },
+  "top.tutorTitle": "Open tutor",
+  "@top.tutorTitle": {
+    "description": ""
+  },
+  "top.account": "{name} — profile, ⚙️ settings, backup & sync, ❓ help",
+  "@top.account": {
+    "description": ""
+  },
+  "home.lightning": "Lightning round",
+  "@home.lightning": {
+    "description": ""
+  },
+  "home.lightningSub": "60 seconds of true/false traps",
+  "@home.lightningSub": {
+    "description": ""
+  },
+  "home.drills": "Debug drills",
+  "@home.drills": {
+    "description": ""
+  },
+  "home.drillsSub": "Memorize the “ask yourself” checklists",
+  "@home.drillsSub": {
+    "description": ""
+  },
+  "home.cards": "Flashcards",
+  "@home.cards": {
+    "description": ""
+  },
+  "home.cardsSub": "Spaced-repetition recall",
+  "@home.cardsSub": {
+    "description": ""
+  },
+  "home.mistakes": "Mistakes gym",
+  "@home.mistakes": {
+    "description": ""
+  },
+  "home.mistakesSub": "Retry what you got wrong",
+  "@home.mistakesSub": {
+    "description": ""
+  },
+  "home.mixed": "Mixed practice",
+  "@home.mixed": {
+    "description": ""
+  },
+  "home.mixedSub": "Random exercises from everything you read",
+  "@home.mixedSub": {
+    "description": ""
+  },
+  "home.tutor": "Socratic tutor",
+  "@home.tutor": {
+    "description": ""
+  },
+  "home.tutorSub": "Gemini questions you until it clicks",
+  "@home.tutorSub": {
+    "description": ""
+  },
+  "home.due": "{n, number} due",
+  "@home.due": {
+    "description": ""
+  },
+  "home.chapters": "Chapters",
+  "@home.chapters": {
+    "description": ""
+  },
+  "ch.all": "← All chapters",
+  "@ch.all": {
+    "description": ""
+  },
+  "ch.learn": "📖 Learn",
+  "@ch.learn": {
+    "description": ""
+  },
+  "ch.practice": "🎯 Practice",
+  "@ch.practice": {
+    "description": ""
+  },
+  "ch.debug": "🔧 Debug drills",
+  "@ch.debug": {
+    "description": ""
+  },
+  "ch.cards": "🃏 Cards",
+  "@ch.cards": {
+    "description": ""
+  },
+  "ch.traps": "⚠️ Traps",
+  "@ch.traps": {
+    "description": ""
+  },
+  "nav.home": "← Home",
+  "@nav.home": {
+    "description": ""
+  },
+  "view.mistakes": "🔁 Mistakes gym",
+  "@view.mistakes": {
+    "description": ""
+  },
+  "view.mixed": "🎲 Mixed practice",
+  "@view.mixed": {
+    "description": ""
+  },
+  "view.lightning": "Lightning round",
+  "@view.lightning": {
+    "description": ""
+  },
+  "view.cards": "🃏 Flashcards",
+  "@view.cards": {
+    "description": ""
+  },
+  "view.drills": "🔧 Debug drills",
+  "@view.drills": {
+    "description": ""
+  },
+  "view.whatsNew": "✨ What’s new",
+  "@view.whatsNew": {
+    "description": ""
+  },
+  "view.latest": "✨ Latest additions",
+  "@view.latest": {
+    "description": ""
+  },
+  "acc.profile": "👤 Profile",
+  "@acc.profile": {
+    "description": ""
+  },
+  "acc.settings": "⚙️ Settings",
+  "@acc.settings": {
+    "description": ""
+  },
+  "acc.subjects": "📚 Subjects",
+  "@acc.subjects": {
+    "description": ""
+  },
+  "acc.backup": "💾 Backup & restore",
+  "@acc.backup": {
+    "description": ""
+  },
+  "acc.cloud": "☁️ Cloud",
+  "@acc.cloud": {
+    "description": ""
+  },
+  "acc.help": "❓ Help",
+  "@acc.help": {
+    "description": ""
+  },
+  "set.uiLang": "Language of the menus",
+  "@set.uiLang": {
+    "description": ""
+  },
+  "set.uiLangAuto": "Automatic ({lang})",
+  "@set.uiLangAuto": {
+    "description": ""
+  },
+  "set.uiLangTip": "The menus and buttons translated so far. The course material and the AI conversations have their own language settings.",
+  "@set.uiLangTip": {
+    "description": ""
+  },
+  "inuse.title": "Noema is open on {where}",
+  "@inuse.title": {
+    "description": ""
+  },
+  "inuse.why": "You were using it there just now. To keep your progress safe, Noema works on one device at a time.",
+  "@inuse.why": {
+    "description": ""
+  },
+  "inuse.use": "Use here",
+  "@inuse.use": {
+    "description": ""
+  },
+  "inuse.useNote": "The other one pauses. Everything you did there is already saved and comes here.",
+  "@inuse.useNote": {
+    "description": ""
+  },
+  "inuse.stay": "Or just keep going there: nothing here changes, and this window waits.",
+  "@inuse.stay": {
+    "description": ""
+  },
+  "inuse.offlineWork": "What you did here while offline is kept and combined with your account automatically.",
+  "@inuse.offlineWork": {
+    "description": ""
+  },
+  "inuse.otherTab": "another tab on this device",
+  "@inuse.otherTab": {
+    "description": ""
+  },
+  "inuse.otherDevice": "another device",
+  "@inuse.otherDevice": {
+    "description": ""
+  },
+  "inuse.continued": "Continuing here ✔",
+  "@inuse.continued": {
+    "description": ""
+  },
+  "inuse.offline": "Could not reach your account. Check the connection and try again.",
+  "@inuse.offline": {
+    "description": ""
+  },
+  "pick.who": "Who is studying?",
+  "@pick.who": {
+    "description": ""
+  },
+  "pick.local": "local profile",
+  "@pick.local": {
+    "description": ""
+  },
+  "pick.newProfile": "New profile",
+  "@pick.newProfile": {
+    "description": ""
+  },
+  "pick.onDevice": "on this device",
+  "@pick.onDevice": {
+    "description": ""
+  },
+  "pick.cloudSignIn": "☁️ Sign in / create a cloud account",
+  "@pick.cloudSignIn": {
+    "description": ""
+  },
+  "pick.cloudHint": "Study from any device — progress syncs automatically.",
+  "@pick.cloudHint": {
+    "description": ""
+  },
+  "pick.what": "What do you want to study?",
+  "@pick.what": {
+    "description": ""
+  },
+  "pick.search": "🔎 Search subjects…",
+  "@pick.search": {
+    "description": ""
+  },
+  "pick.subjects": "📚 Subjects",
+  "@pick.subjects": {
+    "description": ""
+  },
+  "pick.subjectsSub": "ready-made courses",
+  "@pick.subjectsSub": {
+    "description": ""
+  },
+  "pick.curricula": "🧭 Roadmaps",
+  "@pick.curricula": {
+    "description": ""
+  },
+  "pick.curriculaSub": "a goal → its steps",
+  "@pick.curriculaSub": {
+    "description": ""
+  },
+  "pick.noMatch": "No subject matches.",
+  "@pick.noMatch": {
+    "description": ""
+  },
+  "pick.none": "No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.",
+  "@pick.none": {
+    "description": ""
+  },
+  "pick.create": "✨ Create with Claude",
+  "@pick.create": {
+    "description": ""
+  },
+  "pick.explore": "🌍 Explore",
+  "@pick.explore": {
+    "description": ""
+  },
+  "pick.import": "📥 Import subject pack",
+  "@pick.import": {
+    "description": ""
+  },
+  "pick.switchProfile": "👤 Switch profile",
+  "@pick.switchProfile": {
+    "description": ""
+  },
+  "pick.close": "Close",
+  "@pick.close": {
+    "description": ""
+  },
+  "pick.other": "Other",
+  "@pick.other": {
+    "description": ""
+  },
+  "pick.shared": "📬 {n, number} subject(s) shared with you",
+  "@pick.shared": {
+    "description": ""
+  },
+  "pick.shelf": "📚 Shelf — {n, number} subject(s) not on any Roadmap",
+  "@pick.shelf": {
+    "description": ""
+  },
+  "pick.shelfSub": "Subjects that teach no step of a Roadmap. Study them here, or 🧭 put them on a Roadmap — the Roadmap is the way to study.",
+  "@pick.shelfSub": {
+    "description": ""
+  },
+  "pick.putOnMap": "Put on a Roadmap…",
+  "@pick.putOnMap": {
+    "description": ""
+  },
+  "pick.noCurricula": "No Roadmap yet. Type a goal and get its steps — then put the subjects you have on them.",
+  "@pick.noCurricula": {
+    "description": ""
+  },
+  "pick.newCurriculum": "➕ New Roadmap",
+  "@pick.newCurriculum": {
+    "description": ""
+  },
+  "pick.importMap": "📥 Import a Roadmap",
+  "@pick.importMap": {
+    "description": ""
+  },
+  "pick.onShelf": "📚 “{title}” is on your Shelf — 🧭 put it on a Roadmap to study it as one of its steps.",
+  "@pick.onShelf": {
+    "description": ""
+  }
+}

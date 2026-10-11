@@ -1456,6 +1456,7 @@
   /* ---------------- boot ---------------- */
   async function start() {
     document.body.classList.add('noema-booting');
+    if (window.NoemaI18n) { try { await Promise.race([NoemaI18n.ready, new Promise(r => setTimeout(r, 4000))]); } catch (e) { } }
     migrateOldPrefix(); try { await migrateOldIDB(); } catch (e) { console.warn('[noema] old browser database not migrated', e); }
     if (CFG.supabaseUrl && (CFG.supabaseKey || CFG.supabaseAnonKey) && window.NoemaCloud) { try { await NoemaCloud.init(CFG); } catch (e) { console.warn('[Noema] cloud init failed', e); } }
     const url = new URLSearchParams(location.search);
@@ -1467,6 +1468,7 @@
     KV.acc = acc.id; Noema.account = acc;
     GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
+    if (window.NoemaI18n) { const st = jget(`${P}${acc.id}:a:settings`, {}) || {}; try { await Promise.race([NoemaI18n.use(st.lang, st.numerals ? { digits: { 'ar-EG': st.numerals } } : {}), new Promise(r => setTimeout(r, 4000))]); } catch (e) { console.warn('[i18n]', e); } }   // the account's UI language, before the first screen
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
     Notes.start(acc.id);
     try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
