@@ -139,7 +139,7 @@ function newWordsList(title = '🆕 ' + LT('lang.base.metBefore')) {
   if (!metNew.size) return null;
   const items = [...metNew.values()];
   return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + LNUM(items.length))),
-    h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l)))));
+    h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l), paramsLine(c, l)))));
 }
 /** What a word means, in the explanation language. */
 function gloss(code, lid) {

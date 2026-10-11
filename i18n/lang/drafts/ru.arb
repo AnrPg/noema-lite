@@ -74,6 +74,8 @@
   "lang.card.strength": "сила {dots}",
   "lang.card.synonyms": "Синонимы:",
   "lang.card.littleWord": "Служебное слово:",
+  "lang.card.params.label": "Параметры слова",
+  "lang.card.params.more": "{n, plural, one {Ещё # параметр} few {Ещё # параметра} many {Ещё # параметров} other {Ещё # параметра}}",
   "lang.field.inAll": "всего {n, number}",
   "lang.field.tier0": "все",
   "lang.field.tier1": "частые",

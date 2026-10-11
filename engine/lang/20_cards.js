@@ -54,7 +54,7 @@ function compareTable(cid) {
     const first = lids[0] && N.wordCard(UI.C, UI.L, c, lids[0]);
     return h('tr', {}, h('th', {}, info(c).flag + ' ' + info(c).label),
       h('td', {}, X.absent[cid] ? h('i', {}, '— ', X.absent[cid].use || LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? h('br') : null, word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
-      h('td', { class: 'tiny' }, first ? first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ') : ''),
+      h('td', { class: 'tiny' }, first ? (first.params?.length ? paramsLine(c, lids[0]) : first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ')) : ''),
       h('td', {}, first?.examples[0] ? h('span', {}, word(c, first.examples[0].text, { sub: false }), h('div', { class: 'tiny' }, first.examples[0].tr)) : ''));
   });
   return h('div', { class: 'lx-compare' }, h('table', {}, h('tbody', {}, ...rows)));
@@ -65,6 +65,46 @@ const CONNOTATION = { positive: '🙂', negative: '🙁', neutral: '😐', mixed
     registers lc.expl.reg.*, phrase kinds lc.expl.phraseKind.* (langcore's words), status lang.expl.status.*, domains lang.expl.domain.*. */
 const codeWord = (prefix, v) => v != null && v !== '' && window.NoemaI18n && NoemaI18n.has(prefix + v) ? LE(prefix + v) : v;
 const regWord = r => codeWord('lc.expl.reg.', r), regWords = rs => [].concat(rs || []).map(regWord).join(', ');
+/* ---------- the word's parameters, right under the word (R3, D14): label · value, the forms in the language's script ---------- */
+/** One form of a parameter: in the language's font and direction (pinyin / a transliteration in Latin letters), its reading under it, a link to its own card. */
+function paramForm(c, f) {
+  const X = LX(c), showSub = f.sub && (c === 'zh' ? UI.prefs.pinyin !== false : UI.prefs.translit !== false || needTranslit(c));
+  let e = f.latin ? h('span', { class: 'lx-platin', lang: c === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, f.text) : word(c, f.text, { sub: false });
+  if (showSub) e = h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: c === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, f.sub));
+  if (f.lex && X.lex[f.lex] && !document.querySelector('.lx-session')) e = h('a', { class: 'lx-plink', href: '#/w/' + c + '/' + encodeURIComponent(f.lex), title: gloss(c, f.lex), onclick: () => document.querySelector('.lx-pop')?.remove() }, e);
+  return h('span', { class: 'lx-pform' + (f.role ? ' lx-p' + f.role : ''), dir: f.latin ? 'ltr' : null }, e);
+}
+/** One value: its forms, its kind (tags), the meanings it belongs to, a note. compact: forms and tags only. */
+function paramValue(c, v, compact) {
+  return h('span', { class: 'lx-pval' + (v.senses.length && !compact ? ' lx-pwide' : '') },
+    ...v.forms.map(f => paramForm(c, f)),
+    v.text ? h('span', { class: 'lx-ptext' }, v.text) : null,
+    ...v.tags.map(t => h('span', { class: 'lx-ptag' }, t)),
+    ...(compact ? [] : v.senses.map(s => h('span', { class: 'lx-psense', title: s.def }, h('b', {}, LNUM(s.n)), ' ', s.def))),
+    v.note && !compact ? h('span', { class: 'lx-pnote' }, v.note) : null);
+}
+function paramRow(c, r, compact) {
+  return h('div', { class: 'lx-prow' + (r.none != null ? ' lx-pnone' : '') + (r.short ? ' lx-pshort' : ''), 'data-param': r.id },
+    h('span', { class: 'lx-pk' }, r.title),
+    h('span', { class: 'lx-pv' }, r.none != null ? h('span', { class: 'lx-pwhy' }, '— ' + r.none) : r.values.map(v => paramValue(c, v, compact))));
+}
+/** The parameters block (R3): the prominent ones always visible, in the declared order; the rest (and the uninformative “none”s) folded.
+ *  compact (lesson intro, lists): the first prominent ones only, without meanings and notes. */
+function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
+  if (!params || !params.length) return null;
+  const top = params.filter(r => r.prominent), rest = params.filter(r => !r.prominent);
+  if (compact) { const rows = top.filter(r => r.none == null).slice(0, max); return rows.length ? h('div', { class: 'lx-params lx-pcompact' }, ...rows.map(r => paramRow(c, r, true))) : null; }
+  return h('section', { class: 'lx-params', 'aria-label': LT('lang.card.params.label') },
+    ...top.map(r => paramRow(c, r)),
+    rest.length ? h('details', { class: 'lx-pmore' }, h('summary', {}, LT('lang.card.params.more', { n: rest.length })), h('div', { class: 'lx-pmorebody' }, ...rest.map(r => paramRow(c, r)))) : null);
+}
+/** One line for a list of words: “plural: die Männer · genitive: des Mannes” (the first prominent parameters, as text). */
+function paramsLine(c, lid, max = 2) {
+  let ps = []; try { ps = N.wordParams(UI.C, lid, c); } catch (e) { return null; }
+  const bits = ps.filter(r => r.prominent && r.none == null && r.values.some(v => v.forms.length)).slice(0, max)
+    .map(r => [r.title + ': ', ...r.values.flatMap((v, i) => [i ? ' · ' : '', ...v.forms.filter(f => f.role !== 'pattern').map(f => f.latin ? f.text : word(c, f.text, { sub: false }))])]);
+  return bits.length ? h('span', { class: 'lx-pline tiny' }, ...bits.flatMap((b, i) => [i ? ' · ' : ' (', ...b]), ')') : null;
+}
 /** Everything about one word (docs/LANGUAGES.md §4.6). */
 function wordCardView(c, lid, concept) {
   const card = N.wordCard(UI.C, UI.L, c, lid, { concept }), X = LX(c), lx = X.lex[lid];
@@ -104,10 +144,11 @@ function wordCardView(c, lid, concept) {
         badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
         ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
-    card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
+    card.params?.length ? paramsBlock(c, card.params)   // R3: the word's parameters, right under it
+      : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     deepButton(c, lid),
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
-    ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
+    ...card.sections.filter(s => !(s.key === 'facade' && card.params?.length)).map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + LNUM(Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
     (() => { const ns = N.contrastFor(lx.profile?.notes, nativeL()); return ns.length ? h('div', { class: 'lx-callout k-key lx-wnotes' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(ns, c)) : null; })(),   // D19: the word seen from the learner's native language
     polyWordExtras(c, lid),   // P6: bridges and false friends across the learner's languages

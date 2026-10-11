@@ -420,6 +420,15 @@
   "@lang.card.littleWord": {
     "description": "Label on the card of a small function word (no full profile) before its meaning."
   },
+  "lang.card.params.label": "Parameters of the word",
+  "@lang.card.params.label": {
+    "description": "Word card: accessible name (aria-label) of the block of the word’s parameters right under the word (plural, gender, past tense, measure word …). Short."
+  },
+  "lang.card.params.more": "{n, plural, one {# more parameter} other {# more parameters}}",
+  "@lang.card.params.more": {
+    "description": "Word card: the fold that opens the less important parameters of the word (and those that do not apply). n = how many.",
+    "placeholders": { "n": { "type": "int", "example": "3" } }
+  },
   "lang.field.inAll": "{n, number} in all",
   "@lang.field.inAll": {
     "description": "After a field’s title on the field map (after “ · ”): how many ideas the field has.",

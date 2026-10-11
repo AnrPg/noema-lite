@@ -74,6 +74,8 @@
   "lang.card.strength": "intensité {dots}",
   "lang.card.synonyms": "Synonymes :",
   "lang.card.littleWord": "Un petit mot :",
+  "lang.card.params.label": "Paramètres du mot",
+  "lang.card.params.more": "{n, plural, one {# autre paramètre} many {# autres paramètres} other {# autres paramètres}}",
   "lang.field.inAll": "{n, number} en tout",
   "lang.field.tier0": "tous",
   "lang.field.tier1": "courants",

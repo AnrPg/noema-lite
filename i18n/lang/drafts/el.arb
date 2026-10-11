@@ -74,6 +74,8 @@
   "lang.card.strength": "ένταση {dots}",
   "lang.card.synonyms": "Συνώνυμα:",
   "lang.card.littleWord": "Μικρή λέξη:",
+  "lang.card.params.label": "Πληροφορίες της λέξης",
+  "lang.card.params.more": "{n, plural, one {Ακόμη # χαρακτηριστικό} other {Ακόμη # χαρακτηριστικά}}",
   "lang.field.inAll": "{n, number} συνολικά",
   "lang.field.tier0": "όλα",
   "lang.field.tier1": "συχνά",
