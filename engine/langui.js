@@ -1301,7 +1301,7 @@ function endonym(code) {
 const REL_SIGN = { same: '=', similar: '≈', different: '≠', new: '✨', trap: '⚠️' };
 const REL_LABEL = new Proxy({}, { get: (o, r) => typeof r === 'string' && REL_SIGN[r] ? REL_SIGN[r] + ' ' + LT('lang.gram.rel.' + r) : undefined });   // lang.gram.rel.<rel>
 const relChip = rel => rel ? h('span', { class: 'lx-rel r-' + (REL_SIGN[rel] ? rel : 'other') }, REL_LABEL[rel] || rel) : null;
-const noteAiBadge = n => n?.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.noteAiBadge')) : null;
+const noteAiBadge = n => n?.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null;
 
 /* ---- R2: the Markdown subset as DOM ---- */
 const RUN_SCRIPTS = [   // [script, its runs (letters, with spaces between them), the language a run is in]

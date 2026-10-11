@@ -86,6 +86,17 @@ console.log('catalog checks');
 const chk = cp.spawnSync('node', [path.join(ROOT, 'tools/i18n/check.js'), '--json'], { encoding: 'utf8' });
 const res = JSON.parse(chk.stdout);
 ok(!res.errors.length, `tools/i18n/check.js: ${res.errors.length} error(s)${res.errors.length ? ' — ' + res.errors.slice(0, 5).join(' | ') : ''}`);
+{ // every key the code asks for by its literal name exists in English (else the learner reads the key's last word, e.g. “noteAiBadge”)
+  const EN = boot().NOEMA_I18N.en.m, bad = [];
+  const files = ['loader', 'shell', 'curmap', 'curriculum', 'curshare', 'curjobs', 'curimport', 'packgen', 'cloud', 'claude', 'mt', 'themes', 'react', 'convos', 'viewer', 'imglib', 'srcfiles', 'langcore'].map(f => `engine/${f}.js`)
+    .concat(...['src', 'lang'].map(d => fs.readdirSync(path.join(ROOT, 'engine', d)).filter(f => f.endsWith('.js')).map(f => `engine/${d}/${f}`)));
+  for (const f of files) {
+    const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    for (const m of src.matchAll(/\b(?:t|tr|trx|tE|T|LT|LE|rt|lcX|lcU|lcEn|lcXP|lcUP|lcT)\(\s*'([a-z][A-Za-z0-9]*(?:\.[A-Za-z0-9_-]+)+)'(?=\s*[,)])/g)) if (EN[m[1]] == null) bad.push(`${f}: ${m[1]}`);
+    if (f === 'engine/shell.js') for (const m of src.matchAll(/\b(?:L|rich)\(\s*'([A-Za-z0-9_]+)'(?=\s*[,)])/g)) if (EN['sh.' + m[1]] == null) bad.push(`${f}: sh.${m[1]}`);
+  }
+  ok(!bad.length, `every literal key in the code is in the English catalog${bad.length ? ' — missing: ' + bad.join(' | ') : ''}`);
+}
 const icu = require(path.join(ROOT, 'tools/i18n/check.js'));
 ok(icu.apostropheHazard("l'{x}") && !icu.apostropheHazard('l’{x}') && !icu.apostropheHazard("it''s {x}"), "the apostrophe check catches l'{x}");
 
