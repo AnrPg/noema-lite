@@ -1,0 +1,82 @@
+# Weblate for noema-lite (docs/i18n.md §9, weblate/README.md). Nothing here is deployed by the repo: an operator runs
+#   cp weblate/.env.example weblate/.env   # fill it in on the server, never commit it
+#   docker compose -f weblate/docker-compose.yml up -d                       # database = Supabase (temporary hosting)
+#   docker compose -f weblate/docker-compose.yml --profile localdb up -d     # database = the local container (own server)
+# Image versions are pinned; upgrades: weblate/README.md "Upgrades".
+name: noema-weblate
+
+services:
+  weblate:
+    image: weblate/weblate:2026.10.1.0
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run
+      - /tmp
+    env_file: .env
+    environment:
+      # TLS ends at Caddy; the bundled nginx (port 8080) trusts only Caddy for the client address
+      WEBLATE_ENABLE_HTTPS: 1
+      WEBLATE_IP_PROXY_HEADER: HTTP_X_FORWARDED_FOR
+      WEBLATE_TRUSTED_PROXY_ADDRESSES: caddy
+      WEBLATE_SECURE_PROXY_SSL_HEADER: HTTP_X_FORWARDED_PROTO,https
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+    volumes:
+      # /app/data holds the Git checkouts, the SSH key Weblate pushes with, media and the daily database dump: back it up
+      - weblate-data:/app/data
+      - weblate-cache:/app/cache
+    depends_on:
+      cache:
+        condition: service_started
+      database:
+        condition: service_started
+        required: false          # only with --profile localdb (Docker Compose ≥ 2.20)
+    expose:
+      - "8080"
+
+  cache:
+    image: valkey/valkey:9.1.2-alpine
+    restart: unless-stopped
+    read_only: true
+    command: [valkey-server, --save, "60", "1", --loglevel, warning]
+    volumes:
+      - redis-data:/data
+
+  database:
+    # the own server (later): PostgreSQL next to Weblate. Temporary hosting uses Supabase instead (POSTGRES_HOST in .env)
+    profiles: [localdb]
+    image: postgres:18.6-alpine
+    restart: unless-stopped
+    environment:                 # only what PostgreSQL needs (values from .env, read by Compose for interpolation)
+      POSTGRES_DB: ${POSTGRES_DB:-weblate}
+      POSTGRES_USER: ${POSTGRES_USER:-weblate}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in weblate/.env}
+    volumes:
+      - postgres-data:/var/lib/postgresql
+
+  caddy:
+    # HTTPS with automatic Let's Encrypt certificates for WEBLATE_SITE_DOMAIN (ports 80 and 443 must reach this host)
+    image: caddy:2.11.7-alpine
+    restart: unless-stopped
+    environment:                 # only the two values the Caddyfile reads, not the secrets of .env
+      WEBLATE_SITE_DOMAIN: ${WEBLATE_SITE_DOMAIN:?set WEBLATE_SITE_DOMAIN in weblate/.env}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - weblate
+
+volumes:
+  weblate-data: {}
+  weblate-cache: {}
+  redis-data: {}
+  postgres-data: {}
+  caddy-data: {}
+  caddy-config: {}

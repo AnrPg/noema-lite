@@ -1,0 +1,13 @@
+# Caddy: TLS for Weblate (certificates from Let's Encrypt, renewed automatically). Values come from weblate/.env.
+{
+	email {$ACME_EMAIL}
+}
+
+{$WEBLATE_SITE_DOMAIN} {
+	encode zstd gzip
+	# translation uploads (the language-course drafts are a few MB per file)
+	request_body {
+		max_size 100MB
+	}
+	reverse_proxy weblate:8080
+}
