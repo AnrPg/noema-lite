@@ -1,7 +1,7 @@
 /* ---------- ⫴ parallel lanes: the paths of your languages side by side (D13, §4.4.3, §9; #/lanes) ----------
    One quiet column per language; the same subject sits on the same level in every lane (langcore.parallelLanes), a step of
    one language alone sits beside the others' running lines. Each step is a small button: a tap tells more about it there. */
-const LANE_SECTION = s => s === 'foundations' ? 'Foundations' : s === 'core' ? 'Core' : s === 'advanced' ? 'Advanced' : s.startsWith('field:') ? (UI.C.data.fields.find(f => 'field:' + f.field === s)?.title || 'Words') : '';
+const LANE_SECTION = s => ['foundations', 'core', 'advanced'].includes(s) ? LT('lang.lanes.sec.' + s) : s.startsWith('field:') ? (UI.C.data.fields.find(f => 'field:' + f.field === s)?.title || LT('lang.lanes.sec.words')) : '';
 const LANE_SIGN = { passed: '✓', known: '✓', mastered: '★', learning: '◑', open: '○', ready: '○', locked: '🔒', unprepared: '⏳', skipped: '⤼', na: '' };
 function laneShort(n) { const t = String(n.title || '').split(/ — |: /)[0]; return t.length > 34 ? t.slice(0, 32) + '…' : t; }
 /** The short code of a step for the compact lanes: S00 → S0, C05 → C5; a field node → its letter and number (veg.2a → V2a). */
@@ -31,11 +31,11 @@ VIEWS.lanes = (v) => {
   const langs = UI.C.languages.filter(c => UI.C.lang[c]), L = N.parallelLanes(UI.C, langs), dots = laneCompact(langs.length);
   const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
   v.classList.add('lx-lanesview');
-  const seg = h('div', { class: 'lx-seg lx-lviewpick', role: 'group', 'aria-label': 'How the steps look' }, ...[['', 'Auto'], ['tiles', 'Tiles'], ['dots', 'Dots']].map(([k, t]) =>
+  const seg = h('div', { class: 'lx-seg lx-lviewpick', role: 'group', 'aria-label': LT('lang.lanes.lookLabel') }, ...[['', LT('lang.lanes.auto')], ['tiles', LT('lang.lanes.tiles')], ['dots', LT('lang.lanes.dots')]].map(([k, t]) =>
     h('button', { class: (UI.prefs.lanesView || '') === k ? 'on' : '', 'aria-pressed': (UI.prefs.lanesView || '') === k ? 'true' : 'false', onclick: () => { UI.prefs.lanesView = k || undefined; save(); render(); } }, t)));
-  v.append(h('div', { class: 'lx-lanestop' }, h('h1', {}, 'Parallel lanes'), seg),
-    h('p', { class: 'tiny lx-lanesnote' }, 'The same subject is on the same level in every language. A step of one language alone sits between them.'));
-  const grid = h('div', { class: 'lx-lanes2' + (dots ? ' lx-ldots' : ''), 'data-n': langs.length, style: `--n:${langs.length}`, role: 'table', 'aria-label': 'The paths of your languages side by side' });
+  v.append(h('div', { class: 'lx-lanestop' }, h('h1', {}, LT('lang.view.lanes')), seg),
+    h('p', { class: 'tiny lx-lanesnote' }, LT('lang.lanes.note')));
+  const grid = h('div', { class: 'lx-lanes2' + (dots ? ' lx-ldots' : ''), 'data-n': langs.length, style: `--n:${langs.length}`, role: 'table', 'aria-label': LT('lang.lanes.tableLabel') });
   grid.append(h('div', { class: 'lx-lhead', role: 'row' }, ...langs.map(c => h('div', { class: 'lx-lflag', role: 'columnheader', 'data-lang': c, title: info(c).name }, info(c).flag, h('span', { class: 'lx-lname' }, info(c).name)))));
   let sec = null;
   L.rows.forEach((row, i) => {
@@ -63,9 +63,9 @@ function laneInfo(c, nid) {
   const body = box => box.append(
     h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).name, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
     fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + g.status) : null); })) : null,
-    words ? h('p', { class: 'tiny' }, `${words} words in ${info(c).name}`) : null,
-    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, 'Also in ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).name + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, `Only in ${info(c).name}.`),
-    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, 'Open')));
+    words ? h('p', { class: 'tiny' }, LT('lang.lanes.words', { n: words, lang: info(c).name })) : null,
+    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, LT('lang.lanes.alsoIn') + ' ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).name + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, LT('lang.lanes.onlyIn', { lang: info(c).name })),
+    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, LT('lang.home.open'))));
   let close = () => document.querySelector('.lx-pop')?.remove();
   const title = (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title;
   if (FR.on && window.NoemaShell?.sheet) { NoemaShell.sheet(title, (b, cl) => { close = cl; body(b); }); return; }
@@ -77,4 +77,4 @@ function laneInfo(c, nid) {
   inner.querySelector('.btn.primary')?.focus();
 }
 /** The way in: a quiet button next to the map (only with two or more languages). */
-const lanesButton = () => UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small lx-tolanes', onclick: () => go('#/lanes') }, '⫴ Parallel lanes') : null;
+const lanesButton = () => UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small lx-tolanes', onclick: () => go('#/lanes') }, '⫴ ' + LT('lang.view.lanes')) : null;

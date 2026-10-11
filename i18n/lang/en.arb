@@ -1,0 +1,1183 @@
+{
+  "@@locale": "en",
+  "lang.base.langGroup": "{group} languages",
+  "@lang.base.langGroup": {
+    "description": "A group of languages the learner knows, named by its type or family (the group name comes from course data, e.g. “Semitic”).",
+    "placeholders": {
+      "group": {
+        "type": "String",
+        "example": "Semitic"
+      }
+    }
+  },
+  "lang.base.metBefore": "Words you met before learning them",
+  "@lang.base.metBefore": {
+    "description": "Title of the list, at the end of a lesson, of the words the learner saw in sentences before they were taught."
+  },
+  "lang.state.locked": "locked",
+  "@lang.state.locked": {
+    "description": "State of a word or course step (after a sign): not available yet. One or two words."
+  },
+  "lang.state.ready": "new",
+  "@lang.state.ready": {
+    "description": "State of a word: ready to be learned, not seen yet. One word."
+  },
+  "lang.state.seen": "seen",
+  "@lang.state.seen": {
+    "description": "State of a word: seen once. One word."
+  },
+  "lang.state.learning": "learning",
+  "@lang.state.learning": {
+    "description": "State of a word: being learned. One word."
+  },
+  "lang.state.known_r": "known (reading)",
+  "@lang.state.known_r": {
+    "description": "State of a word: recognised when reading, not yet produced. Short."
+  },
+  "lang.state.known_p": "known",
+  "@lang.state.known_p": {
+    "description": "State of a word: known well enough to produce it. One word."
+  },
+  "lang.state.mastered": "mastered",
+  "@lang.state.mastered": {
+    "description": "State of a word or step: mastered. One word."
+  },
+  "lang.state.absent": "no word",
+  "@lang.state.absent": {
+    "description": "State: this language has no word for the concept. Short."
+  },
+  "lang.state.unprepared": "not written yet",
+  "@lang.state.unprepared": {
+    "description": "State of a course step: its content has not been written yet. Short."
+  },
+  "lang.state.open": "open",
+  "@lang.state.open": {
+    "description": "State of a course step: open, can be started. One word."
+  },
+  "lang.state.known": "known",
+  "@lang.state.known": {
+    "description": "State of a course step: known. One word."
+  },
+  "lang.state.skipped": "skipped",
+  "@lang.state.skipped": {
+    "description": "State of a course step: skipped by the learner. One word."
+  },
+  "lang.state.passed": "passed",
+  "@lang.state.passed": {
+    "description": "State of a course step: its check was passed. One word."
+  },
+  "lang.shell.yourLanguages": "Your languages",
+  "@lang.shell.yourLanguages": {
+    "description": "Accessible name of the bar of language chips at the top of a language course."
+  },
+  "lang.shell.chipKnown": "{lang}: {kn, number} of {total, number} words known",
+  "@lang.shell.chipKnown": {
+    "description": "Tooltip of a language chip in the course bar: how many of the course’s words in that language the learner knows. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "kn": {
+        "type": "int",
+        "example": "12"
+      },
+      "total": {
+        "type": "int",
+        "example": "200"
+      }
+    }
+  },
+  "lang.shell.explainTitle": "Explanations, meanings and feedback are written in this language (chosen when the course was made)",
+  "@lang.shell.explainTitle": {
+    "description": "Tooltip of the chip showing the course’s explanation (speaker) language."
+  },
+  "lang.shell.settings": "Settings",
+  "@lang.shell.settings": {
+    "description": "Tooltip of the ⚙️ button of a language course (its settings)."
+  },
+  "lang.shell.otherSubject": "Choose another subject or course",
+  "@lang.shell.otherSubject": {
+    "description": "Tooltip of the 📚 button: leave the course and pick another subject or language course."
+  },
+  "lang.shell.languages": "Languages",
+  "@lang.shell.languages": {
+    "description": "Accessible name of the row of flag buttons that switch a card to another course language."
+  },
+  "lang.view.lanes": "Parallel lanes",
+  "@lang.view.lanes": {
+    "description": "Name of a page of a language course (last crumb of the frame): the same levels across languages side by side."
+  },
+  "lang.view.settings": "Settings",
+  "@lang.view.settings": {
+    "description": "Name of a page of a language course: the course settings."
+  },
+  "lang.view.claude": "Through Claude",
+  "@lang.view.claude": {
+    "description": "Name of a page of a language course: the tasks Claude writes for the course."
+  },
+  "lang.view.grammar": "Grammar",
+  "@lang.view.grammar": {
+    "description": "Name of a page of a language course: the grammar lane."
+  },
+  "lang.view.write": "Writing",
+  "@lang.view.write": {
+    "description": "Name of a page of a language course: the writing lane."
+  },
+  "lang.view.read": "Reading",
+  "@lang.view.read": {
+    "description": "Name of a page of a language course: the reading lane (graded texts)."
+  },
+  "lang.view.script": "Script",
+  "@lang.view.script": {
+    "description": "Name of a page of a language course: the writing system lane (letters, characters)."
+  },
+  "lang.view.listen": "Listening & speaking",
+  "@lang.view.listen": {
+    "description": "Name of a page of a language course: the listening and speaking lane."
+  },
+  "lang.view.cmp": "Compare",
+  "@lang.view.cmp": {
+    "description": "Name of a page of a language course: compare the languages side by side."
+  },
+  "lang.view.poly": "Polyglot drills",
+  "@lang.view.poly": {
+    "description": "Name of a page of a language course: drills across several languages."
+  },
+  "lang.view.sort": "Sort a field",
+  "@lang.view.sort": {
+    "description": "Name of a page of a language course: sort the words of a field (e.g. vegetables) into groups."
+  },
+  "lang.view.parts": "Principal parts",
+  "@lang.view.parts": {
+    "description": "Name of a drill: the principal parts of words (article and plural, measure word …)."
+  },
+  "lang.view.peculiar": "Peculiarities",
+  "@lang.view.peculiar": {
+    "description": "Name of a page of a language course: the peculiarities of a language."
+  },
+  "lang.view.recall": "Name them all",
+  "@lang.view.recall": {
+    "description": "Name of a drill: name every word of a field you can remember."
+  },
+  "lang.view.deep": "Practise this word",
+  "@lang.view.deep": {
+    "description": "Name of a page: depth exercises on one word."
+  },
+  "lang.view.deepen": "Deepen",
+  "@lang.view.deepen": {
+    "description": "Name of a page: depth exercises on the words of a course step."
+  },
+  "lang.view.deepenOf": "Deepen · {title}",
+  "@lang.view.deepenOf": {
+    "description": "Last crumb of the frame on the deepen page of a course step. {title} = the step’s title (course content).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Greetings"
+      }
+    }
+  },
+  "lang.home.sub": "{langs} — explained in {lang}",
+  "@lang.home.sub": {
+    "description": "Under the course title on its home: {langs} = the course languages with flags (already joined), {lang} = the explanation language’s name.",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "🇩🇪 German · 🇨🇳 Chinese"
+      },
+      "lang": {
+        "type": "String",
+        "example": "English"
+      }
+    }
+  },
+  "lang.home.session": "Today’s session — {counts}",
+  "@lang.home.session": {
+    "description": "The main button of a language course’s home (after ▶): today’s session; {counts} = lang.home.sessionCounts (reviews and new words).",
+    "placeholders": {
+      "counts": {
+        "type": "String",
+        "example": "5 reviews · 8 new"
+      }
+    }
+  },
+  "lang.home.sessionCounts": "{rev, plural, one {# review} other {# reviews}} · {nNew, number} new",
+  "@lang.home.sessionCounts": {
+    "description": "What today’s session holds: reviews and new words (inside lang.home.session, and alone on the big card of the frame).",
+    "placeholders": {
+      "rev": {
+        "type": "int",
+        "example": "5"
+      },
+      "nNew": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "lang.home.sessionCountsScript": "{rev, plural, one {# review} other {# reviews}} · {nNew, number} new · {script, number} letters & characters",
+  "@lang.home.sessionCountsScript": {
+    "description": "As lang.home.sessionCounts, when the session also teaches letters or characters ({script} = how many).",
+    "placeholders": {
+      "rev": {
+        "type": "int",
+        "example": "5"
+      },
+      "nNew": {
+        "type": "int",
+        "example": "8"
+      },
+      "script": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "lang.home.nothingDue": "Nothing due — come back tomorrow",
+  "@lang.home.nothingDue": {
+    "description": "The main button of a course’s home when nothing is due today (after ✅)."
+  },
+  "lang.home.newFrom": "new words from “{title}”, the same ideas in every language",
+  "@lang.home.newFrom": {
+    "description": "Beside the session button: where today’s new words come from. {title} = a course step’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vegetables"
+      }
+    }
+  },
+  "lang.home.nextLesson": "Your next lesson",
+  "@lang.home.nextLesson": {
+    "description": "Section title on the course home (after 🧱)."
+  },
+  "lang.home.nextFoundation": "Foundations — your next lesson",
+  "@lang.home.nextFoundation": {
+    "description": "Section title on the course home while the learner is in the foundations stage (after 🧱)."
+  },
+  "lang.home.open": "Open",
+  "@lang.home.open": {
+    "description": "Button: open a lesson’s page."
+  },
+  "lang.home.learn": "Learn",
+  "@lang.home.learn": {
+    "description": "Button (after ▶): start learning a lesson."
+  },
+  "lang.home.drills": "Drills:",
+  "@lang.home.drills": {
+    "description": "Label before the row of drill buttons on the course home (after 🏋️)."
+  },
+  "lang.home.peculiarAnyTime": "Peculiarities, any time:",
+  "@lang.home.peculiarAnyTime": {
+    "description": "Label before one button per language that opens its peculiarities (after 📚)."
+  },
+  "lang.home.map": "The map",
+  "@lang.home.map": {
+    "description": "Section title (after 🗺️): the map of the course’s steps."
+  },
+  "lang.home.ideas": "{n, number} ideas",
+  "@lang.home.ideas": {
+    "description": "Under a step of the course map: how many ideas (concepts) it teaches.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "lang.home.ideasAfter": "{n, number} ideas · after {after}",
+  "@lang.home.ideasAfter": {
+    "description": "Under a step of the course map: how many ideas it teaches and the steps it comes after ({after} = a list of step titles).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      },
+      "after": {
+        "type": "String",
+        "example": "Greetings, Numbers"
+      }
+    }
+  },
+  "lang.card.map": "Map",
+  "@lang.card.map": {
+    "description": "Back button (after ←) to the course map."
+  },
+  "lang.card.learnNode": "Learn / review this node",
+  "@lang.card.learnNode": {
+    "description": "Button (after ▶) on a step of the course: learn or review its words."
+  },
+  "lang.card.fieldMap": "Field map",
+  "@lang.card.fieldMap": {
+    "description": "Button (after 🧺): all the words of a field (e.g. vegetables) as a picture grid."
+  },
+  "lang.card.nodeUnwritten": "The {lang} words of this node are not written yet.",
+  "@lang.card.nodeUnwritten": {
+    "description": "Note on a course step (after ⏳): its words in this language have not been written yet. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.card.noWordShort": "no word",
+  "@lang.card.noWordShort": {
+    "description": "In a tile or comparison table: this language has no word for the idea. Short."
+  },
+  "lang.card.back": "Back",
+  "@lang.card.back": {
+    "description": "Back button (after ←)."
+  },
+  "lang.card.untaughtMeaning": "a meaning not taught yet (D15) — met as another meaning of a word you learn",
+  "@lang.card.untaughtMeaning": {
+    "description": "Under a concept’s title (after ⏳) when no course step teaches it: the learner met it as another meaning of a known word. Keep “(D15)”."
+  },
+  "lang.card.noWordFor": "No {lang} word for this.",
+  "@lang.card.noWordFor": {
+    "description": "On a concept card: this language has no word for the idea (the reason follows, from the course). {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.card.instead": "Instead:",
+  "@lang.card.instead": {
+    "description": "Label before what the language says instead (course content)."
+  },
+  "lang.card.unwrittenIn": "Not written yet in {lang}.",
+  "@lang.card.unwrittenIn": {
+    "description": "Note (after ⏳): this content is not written yet in that language. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.card.newWords": "{n, plural, one {# new word} other {# new words}}",
+  "@lang.card.newWords": {
+    "description": "Badge (after 🆕) under an example sentence: how many of its words are new to the learner.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.card.thisMeaning": "this meaning",
+  "@lang.card.thisMeaning": {
+    "description": "Badge (after ←) on the meaning of a word that the current card is about."
+  },
+  "lang.card.alsoSaid": "also said:",
+  "@lang.card.alsoSaid": {
+    "description": "Label before other words with the same meaning (in the learned language)."
+  },
+  "lang.card.thisWordIs": "this word = {value}",
+  "@lang.card.thisWordIs": {
+    "description": "After a contrast axis (e.g. “register”) and a colon: where this word stands on it. {value} = course content.",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "formal"
+      }
+    }
+  },
+  "lang.card.conn.positive": "positive",
+  "@lang.card.conn.positive": {
+    "description": "Connotation badge of a word (after 🙂)."
+  },
+  "lang.card.conn.negative": "negative",
+  "@lang.card.conn.negative": {
+    "description": "Connotation badge of a word (after 🙁)."
+  },
+  "lang.card.conn.neutral": "neutral",
+  "@lang.card.conn.neutral": {
+    "description": "Connotation badge of a word (after 😐)."
+  },
+  "lang.card.conn.mixed": "mixed",
+  "@lang.card.conn.mixed": {
+    "description": "Connotation badge of a word (after 🤔)."
+  },
+  "lang.card.strength": "strength {dots}",
+  "@lang.card.strength": {
+    "description": "Badge of a word’s intensity: {dots} = five dots, filled ● and empty ○.",
+    "placeholders": {
+      "dots": {
+        "type": "String",
+        "example": "●●●○○"
+      }
+    }
+  },
+  "lang.card.synonyms": "Synonyms:",
+  "@lang.card.synonyms": {
+    "description": "Label on a word card before a note about synonyms."
+  },
+  "lang.card.littleWord": "A little word:",
+  "@lang.card.littleWord": {
+    "description": "Label on the card of a small function word (no full profile) before its meaning."
+  },
+  "lang.field.inAll": "{n, number} in all",
+  "@lang.field.inAll": {
+    "description": "After a field’s title on the field map (after “ · ”): how many ideas the field has.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "200"
+      }
+    }
+  },
+  "lang.field.tier0": "all",
+  "@lang.field.tier0": {
+    "description": "Segmented switch on the field map: show every tier of words. One word."
+  },
+  "lang.field.tier1": "common",
+  "@lang.field.tier1": {
+    "description": "Segmented switch on the field map: only the common words. One or two words."
+  },
+  "lang.field.tier2": "less common",
+  "@lang.field.tier2": {
+    "description": "Segmented switch on the field map: the less common words. Short."
+  },
+  "lang.field.tier3": "rare",
+  "@lang.field.tier3": {
+    "description": "Segmented switch on the field map: the rare words. One word."
+  },
+  "lang.field.sortGroups": "Sort into groups",
+  "@lang.field.sortGroups": {
+    "description": "Button and drill title (after 🧩): sort the words of a field into its subgroups."
+  },
+  "lang.field.peek": "show words not learned yet",
+  "@lang.field.peek": {
+    "description": "Checkbox on the field map: also show the words of tiles not learned yet."
+  },
+  "lang.recall.placeholder": "Type a {lang} word and press Enter…",
+  "@lang.recall.placeholder": {
+    "description": "Placeholder of the input in the “name them all” drill. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.recall.result": "{got, number} of {total, number} {field} in {lang}",
+  "@lang.recall.result": {
+    "description": "Result of the “name them all” drill: how many words of the field the learner named. {field} = the field’s title in lower case (course content, e.g. “vegetables”), {lang} = language name.",
+    "placeholders": {
+      "got": {
+        "type": "int",
+        "example": "12"
+      },
+      "total": {
+        "type": "int",
+        "example": "40"
+      },
+      "field": {
+        "type": "String",
+        "example": "vegetables"
+      },
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.recall.learned": "Of the {taught, number} you have learned you named {named, number}.",
+  "@lang.recall.learned": {
+    "description": "Result of the “name them all” drill: of the words already taught, how many were named.",
+    "placeholders": {
+      "taught": {
+        "type": "int",
+        "example": "20"
+      },
+      "named": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "lang.recall.bonus": "And {n, number} you have not been taught yet — well done!",
+  "@lang.recall.bonus": {
+    "description": "Result of the “name them all” drill: words named that the course has not taught yet.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.recall.notNamed": "The ones you did not name",
+  "@lang.recall.notNamed": {
+    "description": "Folded section after the “name them all” drill: the words not named."
+  },
+  "lang.recall.already": "already named",
+  "@lang.recall.already": {
+    "description": "Message in the “name them all” drill: this word was already named."
+  },
+  "lang.recall.notInField": "not in this field (or a spelling I do not know)",
+  "@lang.recall.notInField": {
+    "description": "Message in the “name them all” drill: the typed word is not in the field."
+  },
+  "lang.recall.title": "Name all the {field} you can — {lang}",
+  "@lang.recall.title": {
+    "description": "Title of the “name them all” drill (after ⏱️). {field} = field title in lower case (course content), {lang} = flag and language name.",
+    "placeholders": {
+      "field": {
+        "type": "String",
+        "example": "vegetables"
+      },
+      "lang": {
+        "type": "String",
+        "example": "🇩🇪 German"
+      }
+    }
+  },
+  "lang.recall.how": "Any form counts; without vowel marks, in transliteration or pinyin (tones optional) too. The clock starts with your first word.",
+  "@lang.recall.how": {
+    "description": "Instructions of the “name them all” drill."
+  },
+  "lang.recall.done": "Done",
+  "@lang.recall.done": {
+    "description": "Button: end the “name them all” drill now."
+  },
+  "lang.set.native": "native",
+  "@lang.set.native": {
+    "description": "Level of a language the learner knows: native speaker. One word."
+  },
+  "lang.set.c2": "C2 (near-native)",
+  "@lang.set.c2": {
+    "description": "Level of a language the learner knows (CEFR C2)."
+  },
+  "lang.set.a2": "A2 or less",
+  "@lang.set.a2": {
+    "description": "Level of a language the learner knows (CEFR A2 or below)."
+  },
+  "lang.set.inferred": "({what}: inferred)",
+  "@lang.set.inferred": {
+    "description": "After a language the learner added by hand: its type and family as typed ({what}, e.g. “agglutinating, Turkic”); the app infers from them.",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "agglutinating, Turkic"
+      }
+    }
+  },
+  "lang.set.level": "level",
+  "@lang.set.level": {
+    "description": "Accessible name of the select of a known language’s level."
+  },
+  "lang.set.addLang": "add a language",
+  "@lang.set.addLang": {
+    "description": "Accessible name of the select that adds a language the learner knows."
+  },
+  "lang.set.addLangItem": "add a language …",
+  "@lang.set.addLangItem": {
+    "description": "First item (after +) of the select that adds a language the learner knows."
+  },
+  "lang.set.otherLang": "another language (not in the list) …",
+  "@lang.set.otherLang": {
+    "description": "Last item of the select: a language that is not in the list."
+  },
+  "lang.set.askName": "Name of the language?",
+  "@lang.set.askName": {
+    "description": "Browser prompt: the name of a language the learner adds by hand."
+  },
+  "lang.set.askType": "Its type: isolating, agglutinating, fusional or polysynthetic?",
+  "@lang.set.askType": {
+    "description": "Browser prompt: the morphological type of the added language. The learner types one of the four English words (they are stored as codes): keep them in English, or add them in brackets."
+  },
+  "lang.set.askFamily": "Its family, if one of these (else leave empty): {families}",
+  "@lang.set.askFamily": {
+    "description": "Browser prompt: the family of the added language, from a list ({families} = the family names, as written in the course data).",
+    "placeholders": {
+      "families": {
+        "type": "String",
+        "example": "Indo-European, Semitic, Turkic"
+      }
+    }
+  },
+  "lang.set.knowsNote": "Native and C2 languages decide what is folded as familiar; comparison notes are shown for all of them.",
+  "@lang.set.knowsNote": {
+    "description": "Note under the learner’s languages in the course settings."
+  },
+  "lang.set.aiNotes": "Let Claude or Gemini write comparison notes for my languages that the course has none for (needs your API key in the app’s ⚙️ Settings)",
+  "@lang.set.aiNotes": {
+    "description": "Checkbox (after ✨) in the course settings."
+  },
+  "lang.pec.title": "{lang}: its peculiarities",
+  "@lang.pec.title": {
+    "description": "Title of a language’s peculiarities page (after 📚). {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.pec.noCatalogue": "The catalogue is not in this build.",
+  "@lang.pec.noCatalogue": {
+    "description": "On the peculiarities page when the catalogue of phenomena is missing."
+  },
+  "lang.pec.counts": "{nNew, number} new for you · {nFam, number} familiar from {from} · read them in any order.",
+  "@lang.pec.counts": {
+    "description": "On the peculiarities page: how many are new to the learner, how many are familiar from their languages ({from} = a list of language names, or —).",
+    "placeholders": {
+      "nNew": {
+        "type": "int",
+        "example": "12"
+      },
+      "nFam": {
+        "type": "int",
+        "example": "30"
+      },
+      "from": {
+        "type": "String",
+        "example": "Greek, Russian"
+      }
+    }
+  },
+  "lang.pec.filter.all": "all",
+  "@lang.pec.filter.all": {
+    "description": "Filter button on the peculiarities page: show all. One word."
+  },
+  "lang.pec.filter.new": "new",
+  "@lang.pec.filter.new": {
+    "description": "Filter button on the peculiarities page: only those new to the learner. One word."
+  },
+  "lang.pec.filter.familiar": "familiar",
+  "@lang.pec.filter.familiar": {
+    "description": "Filter button on the peculiarities page: only those familiar from the learner’s languages. One word."
+  },
+  "lang.pec.familiarFrom": "familiar from {from}",
+  "@lang.pec.familiarFrom": {
+    "description": "After a peculiarity: the learner’s languages it is familiar from ({from} = a list of language names).",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Greek, Russian"
+      }
+    }
+  },
+  "lang.pec.inCourse": "In the course:",
+  "@lang.pec.inCourse": {
+    "description": "Label (after 🛤️) before where the course teaches this peculiarity (course content)."
+  },
+  "lang.set.depthFor": "How far to go in {lang}",
+  "@lang.set.depthFor": {
+    "description": "Accessible name of the select of how many words to learn in a language. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.set.depth1": "common words only",
+  "@lang.set.depth1": {
+    "description": "Option of the depth select: only common words."
+  },
+  "lang.set.depth2": "common + less common",
+  "@lang.set.depth2": {
+    "description": "Option of the depth select: common and less common words."
+  },
+  "lang.set.depth3": "everything, the rare ones too",
+  "@lang.set.depth3": {
+    "description": "Option of the depth select: every word, rare ones included."
+  },
+  "lang.set.studyNow": "Languages you study now",
+  "@lang.set.studyNow": {
+    "description": "Section title in the course settings."
+  },
+  "lang.set.knowAlready": "Languages you already know",
+  "@lang.set.knowAlready": {
+    "description": "Section title in the course settings."
+  },
+  "lang.set.sessions": "Sessions",
+  "@lang.set.sessions": {
+    "description": "Section title in the course settings."
+  },
+  "lang.set.batch": "New ideas per session",
+  "@lang.set.batch": {
+    "description": "Number setting: new ideas (concepts) per session."
+  },
+  "lang.set.minutes": "Minutes per session",
+  "@lang.set.minutes": {
+    "description": "Number setting: minutes per session."
+  },
+  "lang.set.readingHelp": "Reading help",
+  "@lang.set.readingHelp": {
+    "description": "Section title in the course settings: vowel marks, transliteration, pinyin."
+  },
+  "lang.set.marks": "Vowel marks in Arabic and Hebrew",
+  "@lang.set.marks": {
+    "description": "Checkbox in the course settings."
+  },
+  "lang.set.translit": "Transliteration under Arabic and Hebrew words",
+  "@lang.set.translit": {
+    "description": "Checkbox in the course settings."
+  },
+  "lang.set.pinyin": "Pinyin under Chinese words",
+  "@lang.set.pinyin": {
+    "description": "Checkbox in the course settings."
+  },
+  "lang.set.explainNote": "Explanations are in {lang}: the language chosen when the course was made.",
+  "@lang.set.explainNote": {
+    "description": "Note at the end of the course settings. {lang} = the explanation language’s name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.pec.area.script": "script",
+  "@lang.pec.area.script": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.orthography": "orthography",
+  "@lang.pec.area.orthography": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.phonology": "phonology",
+  "@lang.pec.area.phonology": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.morphology": "morphology",
+  "@lang.pec.area.morphology": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.syntax": "syntax",
+  "@lang.pec.area.syntax": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.lexicon": "lexicon",
+  "@lang.pec.area.lexicon": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.semantics": "semantics",
+  "@lang.pec.area.semantics": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.pragmatics": "pragmatics",
+  "@lang.pec.area.pragmatics": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.culture": "culture",
+  "@lang.pec.area.culture": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.pec.area.numbers": "numbers",
+  "@lang.pec.area.numbers": {
+    "description": "Section of the peculiarities page: the area of language (a linguistics term, lower case like the English)."
+  },
+  "lang.sort.tooFew": "Meet at least 4 words of this field in {lang} first (you have met {n, number}).",
+  "@lang.sort.tooFew": {
+    "description": "The sorting drill when the learner has met too few words of the field. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.sort.left": "{n, number} to sort",
+  "@lang.sort.left": {
+    "description": "Status line of the sorting drill: words still to sort.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.sort.done": "{right, number} of {n, number} right the first time",
+  "@lang.sort.done": {
+    "description": "End of the sorting drill (after ✅).",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "8"
+      },
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "lang.drill.again": "Again",
+  "@lang.drill.again": {
+    "description": "Button (after ↻): run the drill again."
+  },
+  "lang.sort.wrong": "Not {group} — try another group",
+  "@lang.sort.wrong": {
+    "description": "Sorting drill, wrong group tapped. {group} = the group’s title in lower case (course content, e.g. “root vegetables”).",
+    "placeholders": {
+      "group": {
+        "type": "String",
+        "example": "root vegetables"
+      }
+    }
+  },
+  "lang.sort.how": "Tap a word, then the group it belongs to.",
+  "@lang.sort.how": {
+    "description": "Instructions of the sorting drill."
+  },
+  "lang.parts.nothing": "Nothing to drill yet in {lang}: learn some words first.",
+  "@lang.parts.nothing": {
+    "description": "The principal-parts drill with no words met yet. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.drill.score": "{right, number} of {n, number}",
+  "@lang.drill.score": {
+    "description": "End of a drill (after ✅): right answers out of all.",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "8"
+      },
+      "n": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "lang.drill.next": "Next",
+  "@lang.drill.next": {
+    "description": "Button (before →): the next exercise."
+  },
+  "lang.parts.its": "Its {label}?",
+  "@lang.parts.its": {
+    "description": "Principal-parts drill question: which is the word’s {label}? {label} = the part’s name as the course engine writes it (e.g. “plural”, “article”).",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "plural"
+      }
+    }
+  },
+  "lang.lanes.sec.foundations": "Foundations",
+  "@lang.lanes.sec.foundations": {
+    "description": "Section of the parallel lanes: the foundations stage of the course."
+  },
+  "lang.lanes.sec.core": "Core",
+  "@lang.lanes.sec.core": {
+    "description": "Section of the parallel lanes: the core stage of the course."
+  },
+  "lang.lanes.sec.advanced": "Advanced",
+  "@lang.lanes.sec.advanced": {
+    "description": "Section of the parallel lanes: the advanced stage."
+  },
+  "lang.lanes.sec.words": "Words",
+  "@lang.lanes.sec.words": {
+    "description": "Section of the parallel lanes: vocabulary steps of a field without a title."
+  },
+  "lang.lanes.lookLabel": "How the steps look",
+  "@lang.lanes.lookLabel": {
+    "description": "Accessible name of the switch Auto · Tiles · Dots on the parallel lanes."
+  },
+  "lang.lanes.auto": "Auto",
+  "@lang.lanes.auto": {
+    "description": "Switch on the parallel lanes: choose tiles or dots by the screen width. One word."
+  },
+  "lang.lanes.tiles": "Tiles",
+  "@lang.lanes.tiles": {
+    "description": "Switch on the parallel lanes: steps as tiles. One word."
+  },
+  "lang.lanes.dots": "Dots",
+  "@lang.lanes.dots": {
+    "description": "Switch on the parallel lanes: steps as small dots. One word."
+  },
+  "lang.lanes.note": "The same subject is on the same level in every language. A step of one language alone sits between them.",
+  "@lang.lanes.note": {
+    "description": "Note under the title of the parallel lanes."
+  },
+  "lang.lanes.tableLabel": "The paths of your languages side by side",
+  "@lang.lanes.tableLabel": {
+    "description": "Accessible name of the parallel lanes table."
+  },
+  "lang.lanes.words": "{n, number} words in {lang}",
+  "@lang.lanes.words": {
+    "description": "In the card of a step on the parallel lanes: how many words it has in that language.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "14"
+      },
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.lanes.alsoIn": "Also in",
+  "@lang.lanes.alsoIn": {
+    "description": "In the card of a step: label before buttons of the other languages that have it."
+  },
+  "lang.lanes.onlyIn": "Only in {lang}.",
+  "@lang.lanes.onlyIn": {
+    "description": "In the card of a step: no other course language has it.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.ex.whatMeans": "What does it mean?",
+  "@lang.ex.whatMeans": {
+    "description": "Exercise question: the meaning of the word shown."
+  },
+  "lang.ex.whatIsIt": "What is it in {lang}?",
+  "@lang.ex.whatIsIt": {
+    "description": "Exercise question under a picture: which word of that language is it. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.ex.inLang": "In {lang}?",
+  "@lang.ex.inLang": {
+    "description": "Exercise question before a meaning: say it in that language. {lang} = language name. Very short.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.ex.showMe": "Show me",
+  "@lang.ex.showMe": {
+    "description": "Button in a spelling exercise: give up and show the answer."
+  },
+  "lang.ex.andArticle": "And its article?",
+  "@lang.ex.andArticle": {
+    "description": "Exercise question after a German noun was spelled right: which article (der, die, das)."
+  },
+  "lang.ex.article": "Its article?",
+  "@lang.ex.article": {
+    "description": "Exercise question: which article the German noun takes."
+  },
+  "lang.ex.measure": "Which measure word? (one …)",
+  "@lang.ex.measure": {
+    "description": "Exercise question for a Chinese noun: which measure word goes with “one …”."
+  },
+  "lang.ex.newIn": "New in {lang}",
+  "@lang.ex.newIn": {
+    "description": "Heading of the first meeting with a new word. {lang} = flag and language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "🇩🇪 German"
+      }
+    }
+  },
+  "lang.ex.gotIt": "Got it",
+  "@lang.ex.gotIt": {
+    "description": "Button (before →) after the first meeting with a new word."
+  },
+  "lang.sess.stop": "Stop",
+  "@lang.sess.stop": {
+    "description": "Button (after ✕): stop the session."
+  },
+  "lang.sess.across": "across your languages",
+  "@lang.sess.across": {
+    "description": "Line above a polyglot exercise in the session (after 🌐)."
+  },
+  "lang.sess.review": "review",
+  "@lang.sess.review": {
+    "description": "Tag above an exercise (after “ · ”): it is a review. One word."
+  },
+  "lang.sess.relative": "with its relative",
+  "@lang.sess.relative": {
+    "description": "Tag above an exercise (after ⇄): asked together with a related word of another language."
+  },
+  "lang.sess.onceMore": "once more",
+  "@lang.sess.onceMore": {
+    "description": "Tag above an exercise asked again after a mistake."
+  },
+  "lang.sess.done": "Session done",
+  "@lang.sess.done": {
+    "description": "Title at the end of a session (after 🎉)."
+  },
+  "lang.sess.stats": "{nNew, number} new · {right, number} right · {wrong, number} to practise again",
+  "@lang.sess.stats": {
+    "description": "Result line at the end of a session.",
+    "placeholders": {
+      "nNew": {
+        "type": "int",
+        "example": "8"
+      },
+      "right": {
+        "type": "int",
+        "example": "20"
+      },
+      "wrong": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.sess.backToMap": "Back to the map",
+  "@lang.sess.backToMap": {
+    "description": "Button at the end of a session."
+  },
+  "lang.lesson.pct": "{pct, number} %",
+  "@lang.lesson.pct": {
+    "description": "A lesson check’s best score in percent, after a language’s state on the lesson page.",
+    "placeholders": {
+      "pct": {
+        "type": "int",
+        "example": "80"
+      }
+    }
+  },
+  "lang.lesson.practiseFlags": "Practise — {flags}",
+  "@lang.lesson.practiseFlags": {
+    "description": "Main button of a lesson (after ▶) when every word is introduced: practise it in these languages ({flags} = flag emojis).",
+    "placeholders": {
+      "flags": {
+        "type": "String",
+        "example": "🇩🇪 🇨🇳"
+      }
+    }
+  },
+  "lang.lesson.learnFlags": "Learn — {flags}",
+  "@lang.lesson.learnFlags": {
+    "description": "Main button of a lesson (after ▶): learn it in these languages ({flags} = flag emojis).",
+    "placeholders": {
+      "flags": {
+        "type": "String",
+        "example": "🇩🇪 🇨🇳"
+      }
+    }
+  },
+  "lang.lesson.locked": "Pass the lesson before it first.",
+  "@lang.lesson.locked": {
+    "description": "On a locked lesson (after 🔒)."
+  },
+  "lang.lesson.check": "Lesson check",
+  "@lang.lesson.check": {
+    "description": "Button (after ✔): only the lesson’s check (a short test)."
+  },
+  "lang.lesson.grammarIn": "Grammar in {lang}",
+  "@lang.lesson.grammarIn": {
+    "description": "Section title on a lesson page (after 📖). {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.lesson.othersLearn": "At this step your other languages also learn:",
+  "@lang.lesson.othersLearn": {
+    "description": "Lead-in (after 🔗) before the extra grammar points the other languages have at this step."
+  },
+  "lang.lesson.theCheck": "The lesson check",
+  "@lang.lesson.theCheck": {
+    "description": "Title (after ✔) before the questions of the lesson check."
+  },
+  "lang.lesson.checkIntro": "{n, number} questions in {flags} — 80 % in a language passes the lesson there.",
+  "@lang.lesson.checkIntro": {
+    "description": "Before the lesson check: how many questions, in which languages ({flags} = flag emojis), and the pass mark.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      },
+      "flags": {
+        "type": "String",
+        "example": "🇩🇪 🇨🇳"
+      }
+    }
+  },
+  "lang.lesson.start": "Start",
+  "@lang.lesson.start": {
+    "description": "Button (before →): start the lesson check."
+  },
+  "lang.lesson.checkTag": "lesson check",
+  "@lang.lesson.checkTag": {
+    "description": "Tag above an exercise (after “ · ”): it is part of the lesson check."
+  },
+  "lang.lesson.checkDone": "Lesson check done",
+  "@lang.lesson.checkDone": {
+    "description": "Title at the end of a lesson run with a check (after 🏁)."
+  },
+  "lang.lesson.wellDone": "Well done",
+  "@lang.lesson.wellDone": {
+    "description": "Title at the end of a lesson run (after 🎉)."
+  },
+  "lang.lesson.stats": "{nNew, number} new words · {right, number} right · {wrong, number} to practise again",
+  "@lang.lesson.stats": {
+    "description": "Result line at the end of a lesson run.",
+    "placeholders": {
+      "nNew": {
+        "type": "int",
+        "example": "8"
+      },
+      "right": {
+        "type": "int",
+        "example": "20"
+      },
+      "wrong": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.lesson.score": "{c, number}/{n, number} = {pct, number} %",
+  "@lang.lesson.score": {
+    "description": "A language’s result in the lesson check: right/asked = percent.",
+    "placeholders": {
+      "c": {
+        "type": "int",
+        "example": "4"
+      },
+      "n": {
+        "type": "int",
+        "example": "5"
+      },
+      "pct": {
+        "type": "int",
+        "example": "80"
+      }
+    }
+  },
+  "lang.lesson.notYet": "not yet (80 % passes)",
+  "@lang.lesson.notYet": {
+    "description": "Result of the lesson check in a language: not passed yet."
+  },
+  "lang.lesson.passedBefore": "passed before (best {best, number} %) — practise it again",
+  "@lang.lesson.passedBefore": {
+    "description": "Result of the lesson check (after ✔): below the mark this time, but passed before.",
+    "placeholders": {
+      "best": {
+        "type": "int",
+        "example": "90"
+      }
+    }
+  },
+  "lang.lesson.moreWaiting": "More words of this lesson are waiting — continue when you are ready.",
+  "@lang.lesson.moreWaiting": {
+    "description": "At the end of a lesson run with words still to introduce."
+  },
+  "lang.lesson.back": "Back to the lesson",
+  "@lang.lesson.back": {
+    "description": "Button at the end of a lesson run."
+  }
+}
