@@ -2538,7 +2538,7 @@
     },
     "funFacts": [
      "A boxer’s swollen ear is a Blumenkohlohr, a “cauliflower ear”.",
-     "Both Blumenkohl and Austrian Karfiol (Italian cavolfiore) mean “flower cabbage”."
+     "Both Blumenkohl and Austrian Karfiol mean “flower cabbage”."
     ],
     "pitfalls": [
      "Masculine like Kohl: der Blumenkohl. Compounds take the gender of their last part."
@@ -3349,19 +3349,24 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "zucchini means “little pumpkins”: Italian zucca = pumpkin, gourd."
+     "Zucchini means “little pumpkins”: it is built on zucca, “pumpkin, gourd”."
     ],
     "pitfalls": [
      "Singular and plural are the same: die Zucchini – die Zucchini (colloquially also Zucchinis)."
     ],
     "subtleties": [
-     "German uses the Italian plural zucchini as its singular; the “correct” Italian singular der Zucchino is rare."
+     "German uses the borrowed plural form Zucchini as its singular; the original singular der Zucchino is rare."
     ],
     "notes": [
      {
       "for": "it",
       "rel": "trap",
       "text": "German uses the plural zucchini as a singular – die Zucchini is one courgette; zucchino is rare."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Zucchini is your zucchini, “little zucche” – the plural of zucchino."
      }
     ]
    }

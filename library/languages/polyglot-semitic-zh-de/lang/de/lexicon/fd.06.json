@@ -3686,7 +3686,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "A (male) cousin – French in sound and spelling.",
+    "feeling": "A (male) cousin – a loanword that keeps its foreign sound and spelling.",
     "senses": [
      {
       "id": "s1",
@@ -3758,6 +3758,13 @@
     ],
     "subtleties": [
      "Cousins und Cousinen is the full way to say “cousins” of both sexes."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Cousin is your cousin, spelled and pronounced the French way (with the nasal vowel); the female form is die Cousine."
+     }
     ]
    }
   },

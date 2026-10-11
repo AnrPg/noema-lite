@@ -3151,13 +3151,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "French échalote goes back to Latin (cēpa) Ascalōnia, “onion from Ascalon” – the city of Ashkelon (Hebrew אַשְׁקְלוֹן) on the coast of Israel."
+     "Schalotte goes back to Latin (cēpa) Ascalōnia, “onion from Ascalon” – the city of Ashkelon (Hebrew אַשְׁקְלוֹן) on the coast of Israel."
     ],
     "pitfalls": [
      "Stress on the second syllable: Scha-LOT-te. Plural Schalotten."
     ],
     "subtleties": [
      "Shallots grow in clusters of several bulbs, unlike a single onion."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Schalotte is your échalote, borrowed from French."
+     }
     ]
    }
   },
@@ -4769,7 +4776,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian radicchio, German Rettich and Radieschen all go back to Latin rādīx (“root”)."
+     "Radicchio, Rettich and Radieschen all go back to Latin rādīx (“root”)."
     ],
     "pitfalls": [
      "Pronounced the Italian way: ra-DIK-kjo – cch is a k sound.",
@@ -4777,6 +4784,13 @@
     ],
     "subtleties": [
      "It belongs to the same species as Chicorée (Cichorium intybus)."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Radicchio is your radicchio, borrowed unchanged; Rettich and Radieschen come from the same Latin rādīx."
+     }
     ]
    }
   },

@@ -789,13 +789,18 @@
      "On labels you read Guarkernmehl, not Guarbohne."
     ],
     "subtleties": [
-     "The green pods are eaten young (Hindi gvār phalī); the seeds are the industrial product."
+     "The green pods are eaten young, as a vegetable in India; the seeds are the industrial product."
     ],
     "notes": [
      {
       "for": "hi",
       "rel": "same",
       "text": "Guar is ग्वार (gvār), borrowed from Hindi."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The young pods are your ग्वार फली (gvār phalī)."
      }
     ]
    }
@@ -3234,7 +3239,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Wikipedia’s article Stängelkohl is the vegetable of Italian cime di rapa; the plant is a turnip, not a broccoli."
+     "The German Wikipedia article Stängelkohl describes the vegetable of the Apulian cime di rapa; the plant is a turnip, not a broccoli."
     ],
     "pitfalls": [
      "It is no broccoli: botanically it is a form of the turnip (Brassica rapa)."
@@ -3247,6 +3252,11 @@
       "for": "en",
       "rel": "trap",
       "text": "Despite the English name broccoli rabe it is no broccoli, but a turnip."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Stängelkohl is your cime di rapa."
      }
     ]
    }
