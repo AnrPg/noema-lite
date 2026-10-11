@@ -154,12 +154,19 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No “was …-ing”, no “used to” verb",
+   "title": "No progressive or habitual verb form",
    "text": "Not *Ich war spielend. Say Ich spielte (gerade). For a habit add früher or immer: Früher spielte ich Fußball. In colloquial speech, in some regions, a progressive with am + noun-like infinitive is heard (Ich war am Kochen); the written standard uses gerade: Ich kochte gerade.",
    "typology": [
     {
      "feature": "verb.progressive",
      "value": "optional"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "Neither “was …-ing” nor “used to” has a German verb form: not *Ich war spielend, but Ich spielte gerade; I used to play football = Früher spielte ich Fußball."
     }
    ]
   },
@@ -190,7 +197,7 @@
   "ich schlief, er schlief – strong verbs have no ending in ich and er.",
   "Not *Ich war spielend; not *Ich pflegte zu spielen in everyday speech (formal only).",
   "Als ich ein Kind war … (one period) – not *Wenn ich ein Kind war …",
-  "früher (in the past) is not “earlier today”: Früher wohnte ich in Berlin = I used to live in Berlin.",
+  "früher means “in the past, formerly” (Früher wohnte ich in Berlin); a moment earlier the same day is vorhin: Vorhin war er hier.",
   "Als die Mutter kam, schlief das Baby – after the als-clause the verb comes first: not *…, das Baby schlief."
  ],
  "evidence": {

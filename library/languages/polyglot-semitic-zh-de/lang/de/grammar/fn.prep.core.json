@@ -376,14 +376,14 @@
    "why": "Where: in der Schule; where to: zur Schule."
   },
   {
-   "q": "Greek σε covers …",
+   "q": "Ich bin ___ meiner Mutter. (at my mother’s place)",
    "options": [
-    "in, at and to",
-    "only in",
-    "only to"
+    "bei",
+    "zu",
+    "nach"
    ],
-   "answer": "in, at and to",
-   "why": "German needs in / an / bei (where) and zu / nach / in (where to)."
+   "answer": "bei",
+   "why": "bei is “at a person’s place” (where); going there is zu: Ich gehe zu meiner Mutter."
   }
  ],
  "seeAlso": [

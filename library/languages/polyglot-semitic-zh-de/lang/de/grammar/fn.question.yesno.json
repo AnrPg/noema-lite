@@ -221,7 +221,7 @@
     "Tust du Tee trinken?"
    ],
    "answer": "Trinkst du Tee?",
-   "why": "The verb moves to the front; no “do”."
+   "why": "The conjugated verb itself moves to the front – tun is not a helper verb."
   },
   {
    "q": "Isst du kein Fleisch? – ___! (Yes, I do.)",

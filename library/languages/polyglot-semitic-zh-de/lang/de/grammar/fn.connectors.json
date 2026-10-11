@@ -103,7 +103,7 @@
     [
      "so, therefore",
      "also",
-     "a conclusion; verb next (also never means “too” – that is auch)"
+     "a conclusion; verb next (“too, as well” is auch)"
     ],
     [
      "then",
@@ -238,7 +238,7 @@
   "Subordinate clause first → the main clause starts with the verb: Wenn es kalt ist, bleiben wir zu Hause.",
   "als for one event in the past, wenn for present / future / repeated, wann for questions.",
   "if = whether → ob; if = condition → wenn.",
-  "also = so, therefore – never “too” (that is auch).",
+  "also = so, therefore (a conclusion); “too, as well” is auch.",
   "dass (conjunction) vs das (article / pronoun).",
   "A comma before weil, dass, wenn, ob, obwohl, aber, denn."
  ],
@@ -375,14 +375,14 @@
    "why": "The weil-clause fills the first place → the main clause starts with its verb."
   },
   {
-   "q": "German “also” means …",
+   "q": "also means …",
    "options": [
     "so, therefore",
-    "also, too",
+    "too, as well",
     "always"
    ],
    "answer": "so, therefore",
-   "why": "False friend: English “also” is auch."
+   "why": "also draws a conclusion: Ich bin müde, also gehe ich nach Hause. “Too, as well” is auch."
   },
   {
    "q": "Wir gehen in den Park, ___ es kalt ist. (although)",

@@ -443,7 +443,7 @@
     "Was tust du trinken?"
    ],
    "answer": "Was trinkst du?",
-   "why": "Question word first, verb second, no “do”."
+   "why": "Question word first, then the conjugated verb itself – tun is not a helper verb."
   },
   {
    "q": "A woman says: “I’m a doctor.”",
