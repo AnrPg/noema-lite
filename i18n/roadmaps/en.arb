@@ -495,5 +495,259 @@
         "example": "ch01: no sections"
       }
     }
+  },
+  "roadmap.share.ch.renamed": "The Roadmap is now called “{title}”",
+  "@roadmap.share.ch.renamed": {
+    "description": "A change the owner made to a shared Roadmap, offered to a member to take: the Roadmap has a new name.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Machine learning"
+      }
+    }
+  },
+  "roadmap.share.ch.described": "The Roadmap’s description changed",
+  "@roadmap.share.ch.described": {
+    "description": "A change the owner made to a shared Roadmap: its description (goal, scope, depth or language)."
+  },
+  "roadmap.share.ch.added": "New step “{title}”",
+  "@roadmap.share.ch.added": {
+    "description": "A change the owner made to a shared Roadmap: a step was added.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.ch.stepRenamed": "“{old}” is now called “{title}”",
+  "@roadmap.share.ch.stepRenamed": {
+    "description": "A change the owner made to a shared Roadmap: a step was renamed. old = its old title, title = the new one.",
+    "placeholders": {
+      "old": {
+        "type": "String",
+        "example": "Vectors"
+      },
+      "title": {
+        "type": "String",
+        "example": "Vector spaces"
+      }
+    }
+  },
+  "roadmap.share.ch.stepDescribed": "“{title}”: its description changed",
+  "@roadmap.share.ch.stepDescribed": {
+    "description": "A change the owner made to a shared Roadmap: a step’s description or role changed.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.ch.planOwn": "“{title}”: a new chapter plan for the group. You study this step from your own subject; taking this brings the group’s version of the step back",
+  "@roadmap.share.ch.planOwn": {
+    "description": "A change the owner made to a shared Roadmap: a new chapter plan for a step the member studies from their own subject; taking it gives them the group’s step back.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.ch.plan": "“{title}”: a new chapter plan",
+  "@roadmap.share.ch.plan": {
+    "description": "A change the owner made to a shared Roadmap: a step got a new chapter plan.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.ch.material": "“{title}”: its material changed",
+  "@roadmap.share.ch.material": {
+    "description": "A change the owner made to a shared Roadmap: the files of a step changed.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.ch.removed": "Step “{title}” removed",
+  "@roadmap.share.ch.removed": {
+    "description": "A change the owner made to a shared Roadmap: a step was removed.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.ch.links": "The links between the steps changed",
+  "@roadmap.share.ch.links": {
+    "description": "A change the owner made to a shared Roadmap: which step comes after which."
+  },
+  "roadmap.share.needCloud": "Sharing a Roadmap needs a ☁️ cloud account (⚙️ → Cloud).",
+  "@roadmap.share.needCloud": {
+    "description": "Error: sharing needs the learner to be signed in to a cloud account. Names a menu path."
+  },
+  "roadmap.share.fileMissing": "{name}: not on this device — not shared (members cannot prepare its steps from it)",
+  "@roadmap.share.fileMissing": {
+    "description": "Progress line while sharing: a file of the Roadmap is not on this device, so it is not shared. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "book.pdf"
+      }
+    }
+  },
+  "roadmap.share.notOwner": "{known, select, yes {This Roadmap belongs to {owner} — only its owner shares it.} other {This Roadmap belongs to someone else — only its owner shares it.}}",
+  "@roadmap.share.notOwner": {
+    "description": "Error when a member tries to share a Roadmap someone shared with them. owner = the owner’s name; known = yes when it is known.",
+    "placeholders": {
+      "known": {
+        "type": "String",
+        "example": "yes"
+      },
+      "owner": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.share.notReady": "Its Roadmap is not ready yet — share it when the Roadmap is built.",
+  "@roadmap.share.notReady": {
+    "description": "Error when sharing a Roadmap whose map is still being built."
+  },
+  "roadmap.share.oldId": "This Roadmap has an old id that cannot be shared.",
+  "@roadmap.share.oldId": {
+    "description": "Error: a very old Roadmap cannot be shared because of its internal id."
+  },
+  "roadmap.share.uploading": "The Roadmap…",
+  "@roadmap.share.uploading": {
+    "description": "Progress line while sharing: the map itself is being uploaded. Short."
+  },
+  "roadmap.share.logShared": "{pub, select, yes {shared — 🌍 public} other {shared}}",
+  "@roadmap.share.logShared": {
+    "description": "Log line of a Roadmap: the learner shared it; pub = yes when anyone can find and join it.",
+    "placeholders": {
+      "pub": {
+        "type": "String",
+        "example": "yes"
+      }
+    }
+  },
+  "roadmap.share.shared": "Shared",
+  "@roadmap.share.shared": {
+    "description": "Last progress line when sharing a Roadmap is done. Very short."
+  },
+  "roadmap.share.logTook": "{known, select, yes {took {took, number} of {n, number} change(s) from {owner}} other {took {took, number} of {n, number} change(s) from the owner}}",
+  "@roadmap.share.logTook": {
+    "description": "Log line of a shared Roadmap: the member took some of the owner’s changes. took = how many, n = how many were offered; owner = the owner’s name, known = yes when it is known.",
+    "placeholders": {
+      "known": {
+        "type": "String",
+        "example": "yes"
+      },
+      "took": {
+        "type": "int",
+        "example": "2"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "owner": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.share.logKept": "{known, select, yes {kept my copy from {owner}} other {kept my copy from the owner}}",
+  "@roadmap.share.logKept": {
+    "description": "Log line of a shared Roadmap: the member took none of the owner’s changes and kept their copy. owner = the owner’s name, known = yes when it is known.",
+    "placeholders": {
+      "known": {
+        "type": "String",
+        "example": "yes"
+      },
+      "owner": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.share.logStopped": "sharing stopped",
+  "@roadmap.share.logStopped": {
+    "description": "Log line of a Roadmap: its owner stopped sharing it."
+  },
+  "roadmap.share.badEmail": "Please type a valid e-mail address.",
+  "@roadmap.share.badEmail": {
+    "description": "Error when inviting someone to a Roadmap with an invalid e-mail address."
+  },
+  "roadmap.share.ownEmail": "That is your own e-mail address.",
+  "@roadmap.share.ownEmail": {
+    "description": "Error when the learner invites themselves to their Roadmap."
+  },
+  "roadmap.share.alreadyIn": "{email} is already in this Roadmap.",
+  "@roadmap.share.alreadyIn": {
+    "description": "Error when inviting someone who already joined the Roadmap. email = their address.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "maria@example.com"
+      }
+    }
+  },
+  "roadmap.share.gone": "This Roadmap is not shared any more.",
+  "@roadmap.share.gone": {
+    "description": "Error when joining a Roadmap that its owner stopped sharing."
+  },
+  "roadmap.share.own": "This is your own Roadmap.",
+  "@roadmap.share.own": {
+    "description": "Error when the learner tries to join their own Roadmap."
+  },
+  "roadmap.share.cannotJoin": "You cannot join this Roadmap (the owner removed you, or it is not public).",
+  "@roadmap.share.cannotJoin": {
+    "description": "Error when joining a Roadmap is refused."
+  },
+  "roadmap.share.inviteOnly": "This Roadmap is shared with invited people only.",
+  "@roadmap.share.inviteOnly": {
+    "description": "Error when joining a Roadmap that is not public without an invitation."
+  },
+  "roadmap.share.removed": "You cannot join this Roadmap any more (its owner removed you).",
+  "@roadmap.share.removed": {
+    "description": "Error when joining a Roadmap whose owner removed the learner."
+  },
+  "roadmap.share.logJoined": "{known, select, yes {joined — shared by {owner}} other {joined — shared by its owner}}",
+  "@roadmap.share.logJoined": {
+    "description": "Log line of a Roadmap the learner joined. owner = the name of the person who shares it; known = yes when it is known.",
+    "placeholders": {
+      "known": {
+        "type": "String",
+        "example": "yes"
+      },
+      "owner": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "roadmap.share.logEnded": "no longer shared with you — your copy and your prepared steps stay",
+  "@roadmap.share.logEnded": {
+    "description": "Log line of a Roadmap someone had shared with the learner: it is not shared any more; the learner keeps their copy."
+  },
+  "roadmap.share.cannotPrepare": "You cannot prepare steps of this Roadmap any more (you left it, or its owner removed you).",
+  "@roadmap.share.cannotPrepare": {
+    "description": "Toast when the learner may no longer prepare steps of a shared Roadmap."
+  },
+  "roadmap.share.ownSubject": "Your own subject teaches this step — take it off the step (↩) to get the shared one.",
+  "@roadmap.share.ownSubject": {
+    "description": "Error when getting the shared version of a step that the learner’s own subject teaches. ↩ is the button that takes it off."
+  },
+  "roadmap.share.notPrepared": "This step is not prepared in the shared Roadmap (any more).",
+  "@roadmap.share.notPrepared": {
+    "description": "Error when getting a step of a shared Roadmap that nobody has prepared (or that was removed)."
   }
 }
