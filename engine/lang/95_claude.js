@@ -108,6 +108,7 @@
     const added = Object.keys(UI.C?.data.course.added || {}); if (!added.length) return;
     const seen = UI.prefs.addedSeen || [], fresh = added.filter(c => !seen.includes(c)); if (!fresh.length) return;
     UI.L.settings.languages = [...new Set([...(UI.L.settings.languages || UI.C.languages), ...fresh])];
+    const st = studyAnswer(); if (st) putStudy([...st, ...fresh]);   // D21: the learner asked for it — it is one of the languages they study
     UI.prefs.addedSeen = [...seen, ...fresh]; save();
   }
   /** ⋮ › the language › Remove this language (and the course settings): asks, removes, opens the course again without it. */
@@ -310,12 +311,14 @@
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.claude.theCourse'))),
       h('h1', { class: 'lj-h1' }, '✨ ' + LT('lang.view.claude')), h('p', { class: 'lx-sub' }, LT(account ? 'lang.claude.subAccount' : 'lang.claude.subLibrary')));
     if (!rec) { v.append(h('p', { class: 'lx-note' }, LT('lang.claude.nothingQueued'))); return; }
-    const data = C.data, nd = account ? N.langNeeds(rec, data) : null, w = N.langWork(rec);
+    const data = C.data, nd0 = account ? N.langNeeds(rec, data) : null, w = N.langWork(rec);
+    const nd = nd0 && { ...nd0, nodes: nd0.nodes.filter(x => C.lang[x.lang]), functions: nd0.functions.filter(x => C.lang[x.lang]),   // D21: only for the languages the learner studies
+      compare: C.languages.length > 1 ? nd0.compare.filter(fn => C.languages.filter(c => C.lang[c].grammar[fn]).length >= 2) : [] };
     const log = h('div', { class: 'lj-log', role: 'log', 'aria-live': 'polite' });
     const say = t => { log.prepend(h('div', {}, t)); };
     const queueBtns = account ? h('div', { class: 'row lj-queue' },
       nd.core ? null : h('button', { class: 'btn small', disabled: nd.nodes.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const per = {}; for (const x of nd.nodes) if (!per[x.lang]) per[x.lang] = x; Object.values(per).forEach(x => N.langQueue(r, K.node, x)); putRec(acc, r); render(); } }, '🧱 ' + LT('lang.claude.queueNext')),
-      nd.core ? null : h('button', { class: 'btn small lj-night', disabled: nd.nodes.length || nd.functions.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const n = N.langQueueNight(r, data); putRec(acc, r); toast('🌙 ' + LT('lang.claude.nightQueued', { n })); render(); } }, '🌙 ' + LT('lang.claude.queueAll', { n: nd.nodes.length + nd.functions.length })),
+      nd.core ? null : h('button', { class: 'btn small lj-night', disabled: nd.nodes.length || nd.functions.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const n = N.langQueueNight(r, data, { langs: C.languages }); putRec(acc, r); toast('🌙 ' + LT('lang.claude.nightQueued', { n })); render(); } }, '🌙 ' + LT('lang.claude.queueAll', { n: nd.nodes.length + nd.functions.length })),
       nd.core ? null : h('button', { class: 'btn small', disabled: nd.compare.length ? null : '', onclick: () => { const r = getRec(acc, C.id); nd.compare.forEach(fn => N.langQueue(r, K.compare, { fn })); putRec(acc, r); render(); } }, '⇄ ' + LT('lang.claude.queueCmp', { n: nd.compare.length }))) : null;
     const runAll = hasKey(acc) && w.queued.length ? h('button', { class: 'btn primary lj-runall', onclick: async e => {
       if (busy.ctl) { busy.ctl.abort(); return; }
@@ -371,7 +374,7 @@
     const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid] || !LX(c).grammar[fid] || UI.C.functions[fid].category === 'overview') return;
     if ((UI.C.data.course.added || {})[c]) return;   // a language added by a package: no refills for it yet (§10.2)
     const cmp = (UI.C.data.compare || {})[fid];
-    if (cmp) {
+    if (cmp && UI.C.languages.length > 1) {   // D21: the languages the learner studies, two at least
       const head = h('thead', {}, h('tr', {}, h('th', {}, ''), ...UI.C.languages.map(x => h('th', {}, info(x).flag, ' ', info(x).label))));
       const body = h('tbody', {}, ...cmp.rows.map(row => h('tr', {}, h('th', {}, row.aspect), ...UI.C.languages.map(x => h('td', { lang: x, dir: LX(x).language.dir || 'ltr' }, row.cells[x] ? wordsIn(x, row.cells[x]) : '—')))));
       v.append(h('div', { class: 'lx-card lj-cmp' }, h('h3', {}, '⇄ ', LT('lang.claude.acrossLangs', { title: UI.C.functions[fid].title })), h('div', { class: 'lx-compare' }, h('table', {}, head, body))));

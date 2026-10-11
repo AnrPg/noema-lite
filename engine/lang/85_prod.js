@@ -344,7 +344,7 @@ function ctxLabelOf(ctx) {
 function drawTutor() {
   document.querySelector('.lx-tutor')?.remove(); if (!TT.open) return;
   const ctx = TT.ctx, key = tutorKey(ctx), hist = TT.hist[key] || [], c = ctx.lang;
-  const intents = ['explain', 'compare', 'quiz', 'chat'].filter(x => x === 'chat' || (x === 'quiz' ? !!(ctx.node || ctx.fn) : !!ctx.fn));
+  const intents = ['explain', 'compare', 'quiz', 'chat'].filter(x => x === 'chat' || (x === 'quiz' ? !!(ctx.node || ctx.fn) : x === 'compare' ? !!ctx.fn && UI.C.languages.length > 1 : !!ctx.fn));   // D21: comparing needs two languages studied
   const msgs = h('div', { class: 'lx-tmsgs', 'aria-live': 'polite' });
   const ta = h('textarea', { class: 'noema-input lx-tin', rows: 2, placeholder: LT('lang.tutor.placeholder'), 'aria-label': LT('lang.tutor.msgLabel'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } } });
   const sel = h('select', { class: 'lx-tlang', 'aria-label': LT('lang.tutor.langLabel'), onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },

@@ -829,5 +829,10 @@
   "lang.expl.domain.household": "домашнее хозяйство",
   "lang.expl.domain.games": "игры",
   "lang.expl.domain.chemistry": "химия",
-  "lang.expl.domain.anatomy": "анатомия"
+  "lang.expl.domain.anatomy": "анатомия",
+  "lang.study.menu": "Языки для изучения",
+  "lang.study.close": "Закрыть",
+  "lang.study.note": "Сними галочку, чтобы перестать учить язык: всё выученное в нём сохранится и вернётся, когда ты снова его отметишь.",
+  "lang.study.keptNote": "Языки, которые ты сейчас не учишь, сохраняют свой прогресс: отметь язык, чтобы снова его учить.",
+  "lang.study.allApp": "Все языки приложения…"
 }

@@ -88,7 +88,8 @@ function groupView(g, sec, fid) {
     ...g.notes.map((n, i) => h('div', { class: 'lx-cg-note', 'data-for': n.for }, i ? h('div', { class: 'lx-cg-more' }, relChip(n.rel), noteAiBadge(n)) : null,
       mdView(n.text, { forLang: g.kind === 'lang' ? g.lang : null }))),
     g.seeAlso ? h('ul', { class: 'lx-cg-also' }, ...g.seeAlso.map(x => h('li', {},
-      h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, '🔗 ' + (UI.C.functions[x.fn || fid]?.title || x.fn || fid)),
+      UI.C.lang[x.lang] ? h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, '🔗 ' + (UI.C.functions[x.fn || fid]?.title || x.fn || fid))
+        : h('span', { class: 'tiny' }, '🔗 ' + (UI.C.functions[x.fn || fid]?.title || x.fn || fid)),   // D21: a course language the learner does not study has no page now
       x.note ? mdView(x.note, { forLang: x.lang, inline: true }) : null))) : null);
 }
 /** The sections of a contrastFor result → [element …] (none when empty): “From your languages”, “Among the languages you are

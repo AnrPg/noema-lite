@@ -829,5 +829,10 @@
   "lang.expl.domain.household": "νοικοκυριό",
   "lang.expl.domain.games": "παιχνίδια",
   "lang.expl.domain.chemistry": "χημεία",
-  "lang.expl.domain.anatomy": "ανατομία"
+  "lang.expl.domain.anatomy": "ανατομία",
+  "lang.study.menu": "Γλώσσες για μελέτη",
+  "lang.study.close": "Κλείσιμο",
+  "lang.study.note": "Ξετσέκαρε μια γλώσσα για να σταματήσεις να τη μελετάς: όσα έμαθες σε αυτήν κρατιούνται και επιστρέφουν μόλις την ξανατσεκάρεις.",
+  "lang.study.keptNote": "Οι γλώσσες που δεν μελετάς τώρα κρατούν την πρόοδό τους: τσέκαρε μία για να τη μελετήσεις ξανά.",
+  "lang.study.allApp": "Όλες οι γλώσσες της εφαρμογής…"
 }

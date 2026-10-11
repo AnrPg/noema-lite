@@ -109,7 +109,8 @@ function frameHome(v, acts, hold) {
     h('h2', {}, session ? go1.dataset.rest || txt : start ? start[1] : txt.replace(/^✅\s*/, '')),
     h('span', { class: 'meta' }, todays.length > 1 || UI.C.languages.length > 1 ? S.pill(todays.map(c => info(c).flag).join(' '), 1) : null),
     none ? null : h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→'));
-  const out = [head, card], ask = v.querySelector('.lx-native-ask'); if (ask) out.push(ask);   // D19: “Your native language?” stays in sight
+  const study = v.querySelector('.lx-study-ask'), out = [head, study, card].filter(Boolean), ask = v.querySelector('.lx-native-ask'); if (ask) out.push(ask);   // D21: “Which languages?” leads; D19: “Your native language?” stays in sight
+  acts.push({ label: LT('lang.study.menu'), sub: UI.C.languages.map(c => info(c).label).join(' · '), icon: 'globe', key: 'study', run: () => studySheet() });
   if (go1) hold.append(go1);
   if (todayRow) {   // which languages today: on demand
     hold.append(todayRow);

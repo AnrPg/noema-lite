@@ -132,6 +132,24 @@ function nativeAsk() {
     h('button', { class: 'btn ghost small lx-nativelater', onclick: () => { UI.prefs.nativeAsked = true; save(); box.remove(); } }, LT('lang.native.later')));
   return box;
 }
+/** D21: “Which languages do you want to study?” (loader.js studyChooser: every language the app offers, one, several or all). On the
+    home until the learner answers (until then the course teaches what it taught before); none: the learner chose languages this
+    course does not have — it asks for its own and shows nothing else. */
+function studyAsk(none = false) {
+  const S = window.Noema?.langStudy;
+  if (!S?.chooser || (!none && (studyAnswer() || offeredLangs().length < 2))) return null;
+  return h('div', { class: 'lx-card lx-study-ask', 'data-ask': 'study' }, S.chooser(UI.acc, { course: UI.id, none, onDone: () => restudy() }));
+}
+/** The same question at any time (⚙️ Settings, the frame's ⋮): in a sheet inside the frame, else over the page. */
+function studySheet() {
+  const S = window.Noema?.langStudy; if (!S?.chooser) return;
+  if (FR.on && window.NoemaShell?.sheet) return NoemaShell.sheet(LT('lang.study.menu'), (body, close) => body.append(S.chooser(UI.acc, { course: UI.id, onDone: () => { close(); restudy(); } })));
+  document.querySelector('.lx-pop')?.remove();
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } },
+    h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, LT('lang.study.menu')), h('button', { class: 'btn ghost small', 'aria-label': LT('lang.study.close'), onclick: () => pop.remove() }, '✕')),
+      S.chooser(UI.acc, { course: UI.id, onDone: () => { pop.remove(); restudy(); } })));
+  document.body.append(pop);
+}
 /** D19: the language of the explanations — automatic (the native language's, else the UI's, when its facade is on) or the learner's choice (settings.speaker). */
 function speakerPicker() {
   const opts = explanationLocales(); if (opts.length < 2) return null;
@@ -165,15 +183,19 @@ VIEWS.peculiar = (v, r) => {
 };
 VIEWS.settings = (v) => {
   const S = UI.L.settings;
-  const langBox = h('div', { class: 'lx-setrow' }, ...UI.C.languages.map(c => h('label', { class: 'lx-check' },
-    h('input', { type: 'checkbox', checked: activeLangs().includes(c) ? true : null, onchange: e => { const s = new Set(activeLangs()); e.target.checked ? s.add(c) : s.delete(c); if (!s.size) { e.target.checked = true; return; } S.languages = UI.C.languages.filter(x => s.has(x)); save(); } }),
+  // D21: every language of the course, the ones studied ticked — a change is the learner's answer for the whole app (and the course is
+  // built again with only those; the progress of a language left out stays stored and is back when it is ticked again)
+  const langBox = h('div', { class: 'lx-setrow lx-studylangs' }, ...UI.C.allLanguages.map(c => h('label', { class: 'lx-check', 'data-lang': c },
+    h('input', { type: 'checkbox', checked: UI.C.languages.includes(c) ? true : null, onchange: e => { if (!toggleStudy(c, e.target.checked)) e.target.checked = true; } }),
     ' ', info(c).flag, ' ', info(c).label,
-    h('select', { 'aria-label': LT('lang.set.depthFor', { lang: info(c).name }), onchange: e => { S.depth = { ...(S.depth || {}), [c]: +e.target.value }; save(); } },
+    !UI.C.languages.includes(c) ? null : h('select', { 'aria-label': LT('lang.set.depthFor', { lang: info(c).name }), onchange: e => { S.depth = { ...(S.depth || {}), [c]: +e.target.value }; save(); } },
       ...[[1, LT('lang.set.depth1')], [2, LT('lang.set.depth2')], [3, LT('lang.set.depth3')]].map(([d, t]) => h('option', { value: d, selected: (S.depth?.[c] ?? 3) === d ? true : null }, t))))));
   const num = (label, key, min, max, def) => h('label', { class: 'lx-setrow' }, label, ' ', h('input', { type: 'number', min, max, value: S[key] || def, onchange: e => { S[key] = Math.max(min, Math.min(max, +e.target.value || def)); save(); } }));
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
+    h('p', { class: 'tiny lx-studynote' }, LT(UI.C.languages.length < UI.C.allLanguages.length ? 'lang.study.keptNote' : 'lang.study.note'), ' ',
+      window.Noema?.langStudy?.chooser ? h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp')) : null),
     h('h3', { class: 'lx-h3' }, LT('lang.native.label')), nativePicker(() => { applyExplanationLocale(); render(); }), h('p', { class: 'tiny' }, LT('lang.native.note')), speakerPicker(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.knowAlready')), knowsEditor(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.sessions')), num(LT('lang.set.batch'), 'batch', 3, 30, 12), num(LT('lang.set.minutes'), 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),

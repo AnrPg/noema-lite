@@ -159,7 +159,9 @@ function loadLearner() {
     if (k && k.startsWith(p)) { try { kv[k.slice(p.length)] = JSON.parse(localStorage.getItem(k)); } catch (e) { } }
   }
   UI.prefs = kv.prefs || {};
-  return N.fromKV(UI.C, kv);
+  const L = N.fromKV(UI.C, kv);
+  L.settings.languages = UI.C.languages.slice();   // D21: the course's settings say what it teaches now (the others' progress stays stored)
+  return L;
 }
 let saveTimer = null;
 function save(now = false) {
@@ -187,6 +189,8 @@ function foldRemote(e) {
     try { kv[k] = JSON.parse(m); } catch (x) { }
   }
   const L2 = N.fromKV(UI.C, kv); UI.L.settings = L2.settings; UI.L.langs = L2.langs; UI.prefs = kv.prefs || UI.prefs;   // in place: a running session keeps writing into UI.L
+  if (!studyAnswer()) { const ch = studyChoice(); if (ch.langs.join() !== UI.C.languages.join() && !document.querySelector('.lx-session')) { save(true); return restudy(); } }   // another device chose other languages (before D21's answer)
+  UI.L.settings.languages = UI.C.languages.slice();
   save();
   if (!document.querySelector('.lx-session')) render();
   UI.remoteFolds = (UI.remoteFolds || 0) + 1;
@@ -194,3 +198,29 @@ function foldRemote(e) {
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
+/* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
+   One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course
+   that has them. The course is built with only those (N.course(data, {languages})), so every view, session, generator, compare
+   table and bridge knows only them; the progress of the others stays stored (one key per language and node, §5.6) and is back as
+   soon as they are chosen again. Before the learner answers, a course teaches what it taught before (its settings.languages, else all). */
+/** The stored settings of the open course (before the learner state is loaded). */
+const storedCourseSettings = () => { try { return JSON.parse(localStorage.getItem(P() + 'settings') || '{}') || {}; } catch (e) { return {}; } };
+/** The account's answer (codes) or null when the learner has not answered yet. */
+const studyAnswer = () => { const s = accSettings().studyLangs; return Array.isArray(s) ? s : null; };
+/** N.studyLangs for the open course: {langs, chosen, none}. */
+const studyChoice = (data = UI.data) => N.studyLangs(data.course.languages, studyAnswer(), UI.L && UI.L.course === UI.id ? UI.L.settings.languages : storedCourseSettings().languages);
+/** Every language the app offers to study (the library's courses and the learner's own, loader.js), this course's first. */
+const offeredLangs = () => uniq([...(UI.data?.course.languages || []), ...((window.Noema?.langStudy?.offered?.(UI.acc)) || []).map(x => x.code)]);
+/** Store a new answer (codes, in any order) for the whole app. */
+function putStudy(codes) {
+  const all = offeredLangs(), want = all.filter(c => codes.includes(c)).concat(codes.filter(c => !all.includes(c)));
+  if (window.Noema?.langStudy?.set) Noema.langStudy.set(UI.acc, want); else putAccSettings({ studyLangs: want });
+}
+/** Study / stop studying one language of this course (⚙️ Settings): the answer so far (all the app's languages before the first
+    one) with this language in or out — a course never ends up with none. */
+function toggleStudy(code, on) {
+  const cur = studyAnswer() || offeredLangs().filter(c => !UI.data.course.languages.includes(c) || UI.C.languages.includes(c));
+  const next = on ? uniq([...cur, code]) : cur.filter(c => c !== code);
+  if (!UI.data.course.languages.some(c => next.includes(c))) return false;
+  putStudy(next); restudy(); return true;
+}
