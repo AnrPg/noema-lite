@@ -33,8 +33,11 @@ from collections import Counter, OrderedDict, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-REG_PATH = os.path.join(HERE, 'schemas', 'noema.langfacade.fields.json')
-NAMES_DIR = os.path.join(HERE, 'i18n', 'langnames')
+def _first(*ps):
+    return next((p for p in ps if os.path.exists(p)), ps[0])
+# the repository (tools/schemas, tools/i18n) or the skill toolkit (schemas/ next to scripts/, scripts/i18n)
+REG_PATH = _first(os.path.join(HERE, 'schemas', 'noema.langfacade.fields.json'), os.path.join(REPO, 'schemas', 'noema.langfacade.fields.json'))
+NAMES_DIR = _first(os.path.join(HERE, 'i18n', 'langnames'), os.path.join(REPO, 'i18n', 'langnames'))
 GLOSSARY_DIR = os.path.join(REPO, 'i18n', 'glossary')
 
 MASTER = 'en'

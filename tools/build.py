@@ -187,7 +187,7 @@ def build_site(metas):
     print('site →', os.path.relpath(out, ROOT))
 
 SKILL_TOOLS = ['noema_lib.py', 'validate.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
-LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js']
+LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 def lang_builder_files():
     """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
     templates and mkbrief.py travel with it, and langcore.js for the read-back and the package check, so it works without the repo."""
@@ -204,6 +204,9 @@ def lang_builder_files():
             (os.path.join(ROOT, 'tools', 'lang_sources', 'AGENT_BRIEF.md'), 'references/AGENT_BRIEF.md')]
     out += [(f, 'references/briefs/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'lang_sources', 'briefs', '*.txt')))]
     out += [(f, 'schemas/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang*.schema.json')))]
+    # D19: the field registry and the CLDR language names the facade lint (lang_facade.py, run by validate_lang.py) reads
+    out += [(os.path.join(ROOT, 'tools', 'schemas', 'noema.langfacade.fields.json'), 'schemas/noema.langfacade.fields.json'), (os.path.join(ROOT, 'docs', 'language-packs.md'), 'references/language-packs.md')]
+    out += [(f, 'scripts/i18n/langnames/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'i18n', 'langnames', '*.json')))]
     for d in ('_typology', '_phenomena'): out += [(f, f'library/languages/{d}/{os.path.basename(f)}') for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json')))]
     return [(a, b) for a, b in out if os.path.exists(a)]
 def build_lang_skill(out_zip):
