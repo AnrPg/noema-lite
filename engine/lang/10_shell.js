@@ -4,8 +4,9 @@ let wired = false;
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
 function start({ acc, id, data, host = null, onRoute = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
-  UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
+  UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.L = null; UI.C = buildCourse(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
+  if (studyChoice().langs.join() !== UI.C.languages.join()) { save(true); UI.C = buildCourse(data); UI.L = loadLearner(); }   // D21: … and studied
   applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
@@ -37,7 +38,18 @@ function explanationLocales() {
   return [master, ...Object.keys(F).filter(l => l !== master && N.facadeUsable(F[l], facadeOpts()))];
 }
 /** The course as the learner sees it: the master, or the master through the facade of the explanation locale. */
-const buildCourse = data => N.course(UI.facade ? N.applyFacade(data, UI.facade) : data);
+const buildCourse = data => N.course(UI.facade ? N.applyFacade(data, UI.facade) : data, { languages: studyChoice(data).langs });   // D21: only the languages the learner studies
+/** D21: the learner chose other languages (here, on the Languages tab, on another device): the course again with only those, the
+    learner state read again from the stored keys — the progress of a language chosen again is all there. */
+function restudy() {
+  if (!UI.C) return;
+  save(true);
+  UI.C = buildCourse(UI.data); if (UI.profMap) N.addProfiles(UI.C, facadeProfMap(UI.profMap));
+  UI.L = loadLearner(); save();
+  if (!UI.C.lang[UI.lang]) UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
+  nativeMemo = null;
+  if (!document.querySelector('.lx-session')) render();
+}
 /** The word profiles (course.profiles.js) through the facade. */
 const facadeProfMap = map => UI.facade && map ? N.facadeProfiles(map, UI.facade) : map;
 const facadeLoading = {};
@@ -114,6 +126,7 @@ function viewLabel(r) {
 function render() {
   if (!UI.C || !shown()) return;
   const r = route(); UI.view = r.name;
+  if (!document.querySelector('.lx-session') && studyChoice().langs.join() !== UI.C.languages.join()) return restudy();   // D21: the choice changed elsewhere
   if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
   if (FR.on) document.documentElement.lang = UI.C.explainLang;
   topbar();
@@ -137,6 +150,7 @@ function frameSummary(v) {
 }
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */
 function flagRail(cid, current, onPick) {
+  if (UI.C.languages.length < 2) return null;   // D21: one language studied — a course of one language, no switch
   return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': LT('lang.shell.languages') }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
     return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
@@ -146,11 +160,13 @@ function flagRail(cid, current, onPick) {
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
+  if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, UI.C.data.course.title), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
   const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
   const nNew = learn ? learn.concepts.reduce((a, c) => a + c.langs.length, 0) : 0, nScript = scriptSessionSteps().length;   // letters / characters in the first weeks (P4)
   const counts = LT(nScript ? 'lang.home.sessionCountsScript' : 'lang.home.sessionCounts', { rev: nRev, nNew, script: nScript });   // the frame's big card shows them (data-rest)
+  const ask = studyAsk(); if (ask) v.append(ask);   // D21: “Which languages do you want to study?” until the learner answers
   v.append(h('div', { class: 'lx-hero' },
     h('h1', {}, UI.C.data.course.title),
     h('p', { class: 'lx-sub' }, LT('lang.home.sub', { langs: UI.C.languages.map(c => info(c).flag + ' ' + info(c).label).join(' · '), lang: info(UI.C.explainLang).name })),

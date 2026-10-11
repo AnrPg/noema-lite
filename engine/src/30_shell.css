@@ -413,3 +413,17 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .noema-mapbtn{position:absolute;bottom:-7px;inset-inline-end:-7px;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:11px;display:grid;place-items:center;opacity:0;transition:opacity .15s,transform .15s;box-shadow:var(--shadow);padding:0;cursor:pointer;z-index:2}
 .noema-chipwrap:hover .noema-mapbtn,.noema-mapbtn:focus-visible{opacity:1}.noema-mapbtn:hover{transform:scale(1.12)}
 @media (hover:none){.noema-mapbtn{opacity:.85}}
+/* D21 — “Which languages do you want to study?” (engine/loader.js studyChooser; the Languages tab, a course's home, its settings) */
+.noema-study{display:flex;flex-direction:column;gap:10px}
+.noema-study-q{font-size:1.1rem}
+.noema-study-why{margin:0;color:var(--muted,var(--ink2));font-size:.9rem}
+.noema-study-langs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.noema-study-lang{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--card,var(--paper,#fff));color:inherit;font:inherit;text-align:start;cursor:pointer;min-width:0}
+.noema-study-lang .f{font-size:1.3rem;flex:none}
+.noema-study-lang .t{display:flex;flex-direction:column;min-width:0}
+.noema-study-lang .t b,.noema-study-lang .t small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.noema-study-lang .t small{color:var(--muted,var(--ink2));font-size:.78rem}
+.noema-study-lang .t small.here{color:var(--violet)}
+.noema-study-lang.on{border-color:var(--acc,var(--violet));background:var(--acc-soft,var(--violet-bg));box-shadow:inset 0 0 0 1px var(--acc,var(--violet))}
+.noema-study-lang.on .f::after{content:' ✓';font-size:.9rem}
+.noema-study-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}

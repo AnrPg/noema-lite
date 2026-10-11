@@ -586,8 +586,8 @@
     overlay((box, close) => {
       box.append(brandHead('🌍 ' + tr('loader.langs.title'), tr('loader.langs.sub')),
         el('div', { class: 'noema-chips' }, ...[...(REG.languages || []), ...langAccount(acc).map(r => ({ ...r, mine: true }))].map(m => el('button', { class: 'noema-chip', 'data-course': m.id, onclick: () => { close(); onPick(langMeta('lang:' + m.id)); } },
-          el('span', { class: 'e' }, m.languages.map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title), m.mine ? el('span', { class: 'o', title: tr('loader.langs.own') }, '🔒') : null))),
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: async () => { try { await loadLangUI(); NoemaLangUI.newCourse(acc, { onCreated: r => { close(); onPick(langMeta('lang:' + r.id)); } }); } catch (e) { toastL('⚠️ ' + errMsg(e), 4000); } } }, '✨ ' + tr('loader.langs.new')), el('button', { class: 'btn small', onclick: close }, tr('loader.close'))));
+          el('span', { class: 'e' }, (m.courseId || m.id ? langChosen(acc, { languages: m.languages, courseId: m.courseId || m.id }) : m.languages).map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title), m.mine ? el('span', { class: 'o', title: tr('loader.langs.own') }, '🔒') : null))),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: async () => { try { await loadLangUI(); NoemaLangUI.newCourse(acc, { onCreated: r => { studyAdd(acc, r.languages); close(); onPick(langMeta('lang:' + r.id)); } }); } catch (e) { toastL('⚠️ ' + errMsg(e), 4000); } } }, '✨ ' + tr('loader.langs.new')), el('button', { class: 'btn small', onclick: close }, tr('loader.close'))));
     }, { closable: true });
   }
   async function startLanguage(acc, meta) {
@@ -608,6 +608,83 @@
   const LANG_LAST = acc => `${P}${acc}:meta:lastLang`;   // device-local: the course you were in (Today's card, the tab's ⋮)
   const langSum = acc => jget(`${P}${acc}:meta:langsum`, {}) || {};   // device-local: the next lesson the open course last showed (langui)
   const langCourses = acc => [...(REG.languages || []).map(m => m.id), ...langAccount(acc).map(r => r.id)].filter((x, i, a) => a.indexOf(x) === i).map(id => langMeta('lang:' + id)).filter(Boolean);
+  /* ---------------- D21: the languages the learner studies (docs/LANGUAGES.md §8 *Languages to study*) ----------------
+     One answer for the whole app: a:settings.studyLangs (synced, in backups). Every course teaches the chosen languages it has
+     (langui builds it with only those, the progress of the others stays stored); a course with none of them asks for its own.
+     Before the first answer a course teaches what it taught before (its own settings.languages, else all). */
+  const STUDY = acc => { const s = (jget(`${P}${acc}:a:settings`, {}) || {}).studyLangs; return Array.isArray(s) ? s : null; };
+  /** Every language the app offers: [{code, courses: [course ids]}], in the order of the courses (the union over the library and the learner's own). */
+  function studyOffered(acc) {
+    const out = [];
+    for (const m of langCourses(acc)) for (const c of m.languages || []) { let x = out.find(o => o.code === c); if (!x) out.push(x = { code: c, courses: [] }); if (!x.courses.includes(m.courseId)) x.courses.push(m.courseId); }
+    return out;
+  }
+  /** The languages of a course the learner studies (the twin of NoemaLang.studyLangs, without loading the course). */
+  function langChosen(acc, meta) {
+    const all = [...new Set(meta.languages || [])], study = STUDY(acc), set = jget(`${P}${acc}:s:lang:${meta.courseId}:settings`, {}) || {};
+    const own = Array.isArray(set.languages) ? all.filter(c => set.languages.includes(c)) : [];
+    if (study) { const x = all.filter(c => study.includes(c)); if (x.length) return x; }
+    return own.length ? own : all;
+  }
+  const studiesAny = (acc, meta) => { const st = STUDY(acc); return !st || (meta.languages || []).some(c => st.includes(c)); };
+  function putStudy(acc, codes) {
+    const v = [...new Set(codes)];
+    if (window.NoemaThemes?.putSettings) NoemaThemes.putSettings({ studyLangs: v }, acc);
+    else { const k = `${P}${acc}:a:settings`, s = jget(k, {}) || {}; s.studyLangs = v; KV.set(k, JSON.stringify(s)); }
+    try { dispatchEvent(new CustomEvent('noema:study', { detail: { acc, langs: v } })); } catch (e) { }
+  }
+  /** A new course the learner made: its languages are studied (once the learner has answered). */
+  const studyAdd = (acc, codes) => { const st = STUDY(acc); if (st && (codes || []).some(c => !st.includes(c))) putStudy(acc, [...st, ...codes]); };
+  /** A language's own name (endonym: Ελληνικά, Deutsch, العربية) and its name in the UI language. */
+  function langEndo(code, acc) {
+    const cap = (s, loc) => { const a = [...String(s || '')]; return a.length ? a[0].toLocaleUpperCase(loc) + a.slice(1).join('') : ''; };
+    let own = '', ui = '';
+    try { own = new Intl.DisplayNames([code], { type: 'language' }).of(code) || ''; } catch (e) { }
+    const loc = (window.NoemaI18n && NoemaI18n.lang(uiPref(acc))) || 'en';
+    try { ui = new Intl.DisplayNames([loc, 'en'], { type: 'language' }).of(code) || ''; } catch (e) { }
+    if (!own || own.toLowerCase() === code.toLowerCase()) own = ui || code;
+    return { own: cap(own, code), ui: cap(ui || code, loc) };
+  }
+  /** “Which languages do you want to study?” — every language the app offers (endonym, its name in the UI language, its flag),
+      one, several or all; the answer is stored for the whole app. opts: {onDone(codes), course: a course id (its languages first,
+      “in this course” marked), none: the course has none of the chosen languages (says so)}. → an element. */
+  function studyChooser(acc, { onDone = null, course = null, none = false } = {}) {
+    const offered = studyOffered(acc), mine = course ? (langMeta('lang:' + course)?.languages || []) : [];
+    const list = [...offered.filter(o => mine.includes(o.code)), ...offered.filter(o => !mine.includes(o.code))];
+    const cur = STUDY(acc), pick = new Set((cur || []).filter(c => list.some(o => o.code === c)));
+    const ok = el('button', { class: 'btn primary noema-study-ok' }), all = el('button', { class: 'btn small noema-study-all' });
+    const btns = list.map(o => {
+      const n = langEndo(o.code, acc), titles = o.courses.map(id => langMeta('lang:' + id)?.title).filter(Boolean);
+      const b = el('button', { class: 'noema-study-lang', type: 'button', 'data-lang': o.code, title: titles.join(' · '), onclick: () => { pick.has(o.code) ? pick.delete(o.code) : pick.add(o.code); paint(); } },
+        el('span', { class: 'f', 'aria-hidden': 'true' }, LANG_FLAGS[o.code] || o.code.toUpperCase()),
+        el('span', { class: 't' }, el('b', { lang: o.code, dir: 'auto' }, n.own), n.ui.toLowerCase() !== n.own.toLowerCase() ? el('small', {}, n.ui) : null,
+          course && mine.includes(o.code) && offered.some(x => !mine.includes(x.code)) ? el('small', { class: 'here' }, tr('loader.study.inCourse', null, acc)) : null));
+      return b;
+    });
+    const paint = () => {
+      btns.forEach(b => { const on = pick.has(b.dataset.lang); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      ok.disabled = !pick.size; ok.textContent = tr('loader.study.ok', { n: pick.size }, acc);
+      all.textContent = tr(pick.size === list.length ? 'loader.study.none' : 'loader.study.all', null, acc);
+    };
+    all.onclick = () => { if (pick.size === list.length) pick.clear(); else list.forEach(o => pick.add(o.code)); paint(); };
+    ok.onclick = () => { if (!pick.size) return; const v = list.map(o => o.code).filter(c => pick.has(c)); putStudy(acc, v); onDone?.(v); };
+    const box = el('div', { class: 'noema-study', 'data-ask': 'study', role: 'group', 'aria-label': tr('loader.study.ask', null, acc) },
+      el('b', { class: 'noema-study-q' }, tr('loader.study.ask', null, acc)),
+      el('p', { class: 'noema-study-why' }, tr(none ? 'loader.study.noneHere' : 'loader.study.why', none ? { langs: langNames(mine, acc) } : null, acc)),
+      el('div', { class: 'noema-study-langs' }, ...btns),
+      el('div', { class: 'row noema-study-foot' }, all, ok));
+    paint();
+    return box;
+  }
+  /** Open a language's course: the one you were last in that has it, else the first; the language is the one on screen there. */
+  function studyOpen(acc, code) {
+    const last = jget(LANG_LAST(acc), null), cs = langCourses(acc).filter(m => (m.languages || []).includes(code) && langChosen(acc, m).includes(code));
+    const m = cs.find(x => x.courseId === last) || cs[0]; if (!m) return;
+    const UIx = window.NoemaLangUI?.UI;
+    if (UIx?.id === m.courseId && UIx.C?.lang[code]) { UIx.lang = code; UIx.prefs.lang = code; }
+    else { const k = `${P}${acc}:s:lang:${m.courseId}:prefs`, pr = jget(k, {}) || {}; pr.lang = code; KV.set(k, JSON.stringify(pr)); }
+    langOpen(m.courseId);
+  }
   const langDay = () => { const d = new Date(); return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 864e5); };   // = NoemaLang.dayNumber
   const langHash = id => '#/lang/' + encodeURIComponent(id);
   const langFlags = m => (m.languages || []).map(c => LANG_FLAGS[c] || c.toUpperCase()).join(' ');
@@ -615,8 +692,8 @@
   /** Progress without loading the course (7 MB): from the stored learner state (docs/LANGUAGES.md §5.6) — per language the words met
       and the reviews due today; the next lesson as the course last showed it. */
   function langProgress(acc, meta) {
-    const pre = `${P}${acc}:s:lang:${meta.courseId}:`, day = langDay(), set = jget(pre + 'settings', {}) || {};
-    const langs = (set.languages || meta.languages || []).filter(c => (meta.languages || []).includes(c));
+    const pre = `${P}${acc}:s:lang:${meta.courseId}:`, day = langDay();
+    const langs = langChosen(acc, meta);   // D21: only the languages the learner studies
     const per = Object.fromEntries(langs.map(c => [c, { words: 0, due: 0, total: (meta.words || {})[c] || 0 }]));
     let started = false;
     for (const k of ls.keys(pre + 'lang:')) {
@@ -634,7 +711,7 @@
   const langOpen = id => window.NoemaShell?.go(langHash(id));
   function langCreate() {
     const acc = KV.acc;
-    loadLangUI().then(() => NoemaLangUI.newCourse(acc, { onCreated: r => langOpen(r.id) })).catch(e => toastL('⚠️ ' + errMsg(e), 4000));
+    loadLangUI().then(() => NoemaLangUI.newCourse(acc, { onCreated: r => { studyAdd(acc, r.languages); langOpen(r.id); } })).catch(e => toastL('⚠️ ' + errMsg(e), 4000));
   }
   /** Choose another course: a sheet with every course. */
   function langChooser() {
@@ -642,16 +719,15 @@
     S.sheet(S.L('langOther'), (body, close) => body.append(langList(KV.acc, S, { onPick: id => { close(); langOpen(id); } })));
   }
   /** One row per course: flags, title, languages, words met, what is due today, the next lesson; a bar for the words met. */
-  function langList(acc, S, { onPick = langOpen, menus = false } = {}) {
+  function langList(acc, S, { onPick = langOpen, menus = false, list = langCourses(acc) } = {}) {
     const { h, L } = S, cur = jget(LANG_LAST(acc), null);
-    const list = langCourses(acc);
     return h('div', { class: 'ns-list ns-langlist' }, ...list.map((m, i) => {
       const pr = langProgress(acc, m), next = pr.sum?.next;
-      const names = langNames(pr.langs.length ? pr.langs : m.languages || [], acc), named = (m.languages || []).every(c => String(m.title).includes(langNames([c], acc, 'en')));
+      const names = langNames(pr.langs.length ? pr.langs : m.languages || [], acc), named = pr.langs.length === (m.languages || []).length && (m.languages || []).every(c => String(m.title).includes(langNames([c], acc, 'en')));
       const sub = [named ? null : names, pr.started ? L('langWords', { n: pr.words }) : null, m.account ? L('langOwn') : null].filter(Boolean).join(' · ');
       const line2 = pr.due ? L('langDue', { n: pr.due }) : next ? L('langNext', { lesson: `${next.step ? next.step + ' ' : ''}${next.title}` }) : pr.started ? L('langNothingDue') : null;
       const row = h('button', { class: 'ns-item ns-langitem', 'data-course': m.courseId, style: { animationDelay: i * 30 + 'ms' }, onclick: () => onPick(m.courseId) },
-        S.icoTxt(h('span', { class: 'ns-langflags', style: { fontSize: (m.languages || []).length > 2 ? '.8rem' : '1.1rem', lineHeight: '1.1', whiteSpace: 'normal', textAlign: 'center' } }, langFlags(m)), (i % 4) + 1, 'emo'),
+        S.icoTxt(h('span', { class: 'ns-langflags', style: { fontSize: pr.langs.length > 2 ? '.8rem' : '1.1rem', lineHeight: '1.1', whiteSpace: 'normal', textAlign: 'center' } }, langFlags({ languages: pr.langs })), (i % 4) + 1, 'emo'),
         h('span', { class: 't' }, h('b', {}, m.title, m.courseId === cur ? h('span', { class: 'ns-muted', style: { fontWeight: 400 } }, ' · ' + (window.NoemaI18n ? NoemaI18n.fmt.lower(L('langContinue')) : L('langContinue').toLowerCase())) : null), h('small', {}, sub), line2 ? h('small', { class: 'ns-langdue' }, line2) : null, pr.total ? S.bar(pr.pct) : null),
         pr.due ? S.pill(pr.due, 4) : S.h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'));
       if (!menus) return row;
@@ -697,13 +773,14 @@
   function langToday(box, { h, L, lead = false }) {
     const S = window.NoemaShell, acc = KV.acc, all = langCourses(acc); if (!all.length) return false;
     const last = jget(LANG_LAST(acc), null), cur = jget(P + 'current', {}).subj;
-    const m = all.find(x => x.courseId === last) || all.find(x => x.id === cur) || (lead ? null : all[0]);
+    const mine = all.filter(x => studiesAny(acc, x));   // D21: a course with a language the learner studies
+    const m = mine.find(x => x.courseId === last) || mine.find(x => x.id === cur) || (lead ? null : mine[0]);
     if (!m) return false;
     const pr = langProgress(acc, m), next = pr.sum?.next;
     box.append(h('button', { class: 'ns-go ns-langgo', 'data-course': m.courseId, onclick: () => langOpen(m.courseId) },
       h('span', { class: 'rm' }, h('span', { class: 'ns-tx' }, '文A'), ' ', m.title),   // i18n-ignore (文A: the Languages icon)
       h('h2', {}, pr.due ? L('langSession') : next ? `${next.step ? next.step + ' · ' : ''}${next.title}` : pr.started ? L('langSession') : m.title),
-      h('span', { class: 'meta' }, S.pill(langFlags(m), 1), pr.due ? S.pill(L('langDue', { n: pr.due }), 4) : pr.started ? S.pill(L('langNothingDue'), 2) : S.pill(L('langStart'), 1), pr.due && next ? S.pill(L('langNext', { lesson: next.step || next.title }), 2) : null),
+      h('span', { class: 'meta' }, S.pill(langFlags({ languages: pr.langs }), 1), pr.due ? S.pill(L('langDue', { n: pr.due }), 4) : pr.started ? S.pill(L('langNothingDue'), 2) : S.pill(L('langStart'), 1), pr.due && next ? S.pill(L('langNext', { lesson: next.step || next.title }), 2) : null),
       h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')));
     return true;
   }
@@ -711,7 +788,24 @@
   function langPage(v, { h, L }) {
     const S = window.NoemaShell, acc = KV.acc;
     if (!langCourses(acc).length) { v.append(h('div', { class: 'ns-panel ns-empty' }, S.faceEl(undefined, 'breathe'), h('p', {}, L('noLanguages')), h('button', { class: 'btn primary', onclick: langCreate }, '+ ' + L('newLanguage')))); return; }
-    v.append(langList(acc, S, { menus: true }));
+    const study = STUDY(acc), offered = studyOffered(acc);
+    if (!study && offered.length > 1) {   // D21: the first step — which languages? (the courses stay listed below)
+      v.append(h('div', { class: 'ns-panel ns-studyask' }, studyChooser(acc, { onDone: () => S.go('#/lang', true) })), h('span', { class: 'ns-label' }, tr('loader.study.courses', null, acc)), langList(acc, S, { menus: true }));
+      return;
+    }
+    if (!study) { v.append(langList(acc, S, { menus: true })); return; }
+    // the chosen languages, each opening its course; the courses that teach them; the others folded
+    const chosen = offered.filter(o => study.includes(o.code)), all = langCourses(acc), mine = all.filter(m => studiesAny(acc, m)), rest = all.filter(m => !studiesAny(acc, m));
+    const change = () => S.sheet(tr('loader.study.change', null, acc), (body, close) => body.append(studyChooser(acc, { onDone: () => { close(); S.go('#/lang', true); } })));
+    v.append(h('div', { class: 'ns-list ns-studylist', 'aria-label': tr('loader.study.yours', null, acc) }, ...chosen.map((o, i) => {
+        const n = langEndo(o.code, acc), titles = all.length < 2 ? [] : o.courses.map(id => langMeta('lang:' + id)).filter(m => m && langChosen(acc, m).includes(o.code)).map(m => m.title);   // its course(s), when there are several
+        return h('button', { class: 'ns-item ns-studylang', 'data-lang': o.code, onclick: () => studyOpen(acc, o.code) },
+          S.icoTxt(h('span', { style: { fontSize: '1.1rem' } }, LANG_FLAGS[o.code] || o.code.toUpperCase()), (i % 4) + 1, 'emo'),
+          h('span', { class: 't' }, h('b', { lang: o.code, dir: 'auto' }, n.own), h('small', {}, [n.ui.toLowerCase() !== n.own.toLowerCase() ? n.ui : null, ...titles].filter(Boolean).join(' · '))),
+          h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'));
+      }), h('button', { class: 'ns-item ns-studychange', onclick: change }, S.ico('edit', 2), h('span', { class: 't' }, h('b', {}, tr('loader.study.change', null, acc)), h('small', {}, tr('loader.study.changeSub', null, acc))), h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'))),
+      mine.length ? h('span', { class: 'ns-label' }, tr('loader.study.courses', null, acc)) : null, mine.length ? langList(acc, S, { menus: true, list: mine }) : null,
+      rest.length ? h('details', { class: 'ns-studyrest' }, h('summary', { class: 'ns-label' }, tr('loader.study.otherCourses', { n: rest.length }, acc)), h('p', { class: 'ns-muted' }, tr('loader.study.otherCoursesSub', null, acc)), langList(acc, S, { menus: true, list: rest })) : null);
   }
   /** Boot in the frame with a course (?subject=lang:<id>, or the course the learner was in): open it at #/lang/<id>. */
   function langBoot(acc, meta, asked) {
@@ -1484,7 +1578,9 @@
 
   /* ---------------- public API ---------------- */
   const Noema = window.Noema = {
-    version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
+    version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV,
+    langStudy: { get: STUDY, set: putStudy, offered: studyOffered, chosen: langChosen, chooser: studyChooser, open: studyOpen },   // D21: the languages the learner studies
+    geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },

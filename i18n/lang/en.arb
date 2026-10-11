@@ -427,7 +427,12 @@
   "lang.card.params.more": "{n, plural, one {# more parameter} other {# more parameters}}",
   "@lang.card.params.more": {
     "description": "Word card: the fold that opens the less important parameters of the word (and those that do not apply). n = how many.",
-    "placeholders": { "n": { "type": "int", "example": "3" } }
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   },
   "lang.field.inAll": "{n, number} in all",
   "@lang.field.inAll": {
@@ -4690,5 +4695,25 @@
   "lang.expl.domain.anatomy": "anatomy",
   "@lang.expl.domain.anatomy": {
     "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “anatomy”). One or two words, lowercase."
+  },
+  "lang.study.menu": "Languages to study",
+  "@lang.study.menu": {
+    "description": "D21: the course's ⋮ item and the title of the sheet / dialog that asks which languages to study."
+  },
+  "lang.study.close": "Close",
+  "@lang.study.close": {
+    "description": "D21: accessible name of the ✕ button of the language chooser dialog."
+  },
+  "lang.study.note": "Untick a language to stop studying it: what you learned in it is kept and comes back when you tick it again.",
+  "@lang.study.note": {
+    "description": "D21: course settings — the line under the languages you study."
+  },
+  "lang.study.keptNote": "The languages you do not study now keep their progress: tick one to study it again.",
+  "@lang.study.keptNote": {
+    "description": "D21: course settings — the line under the languages when some are not studied now."
+  },
+  "lang.study.allApp": "All the app’s languages…",
+  "@lang.study.allApp": {
+    "description": "D21: course settings — button that opens the chooser with every language the app offers (in every course)."
   }
 }

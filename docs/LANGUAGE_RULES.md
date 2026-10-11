@@ -3,7 +3,7 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
-form of the decisions D1–D20 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D21 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
@@ -101,6 +101,10 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   words but may contain unknown ones — at most ⌈30 %⌉ of the words, in production too — shown with 🆕, the word card on
   hover / tap and a list at the end of the lesson. Every word used anywhere has its full facade. Every field brings
   ≥ 2 sentences for every non-vocabulary node before it on the common order (or a reason in `fieldExemptions`).
+- **D21** **The learner chooses the languages to study** (one, several or all; `a:settings.studyLangs`, for the whole app).
+  A course teaches only the chosen languages it has — every view, generator, comparison, polyglot item, tutor context and
+  Claude task works among them only; the progress of the others is kept. Content is still written for every language of a
+  course (a learner may choose any of them); code never assumes all course languages are studied (`activeLangs()`, `C.languages`).
 
 ## C. Checklist for every task (copy it into every brief)
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.

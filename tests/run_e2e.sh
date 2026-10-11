@@ -53,6 +53,7 @@ node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end 
 node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new frame: the Languages tab, #/lang/<course>/…, Today, + New language (docs/LANGUAGES.md §8)
 node "$ROOT/tests/lang_native.js" "$T"   # D19: taught through the learner's native language — the question once, only the native's notes, the explanation facade (docs/language-packs.md)
 node "$ROOT/tests/lang_lanes.js" "$T"   # ⫴ parallel lanes: the same subject level across the languages (D13, §9.2)
+node "$ROOT/tests/lang_select.js" "$T"   # D21: the learner chooses the languages to study — one, several or all; the course, the Languages tab and Today follow
 node "$ROOT/tests/lang_package.js" "$T"   # a whole language in one prompt: the package, the connector's guide / start / finish, the app on two devices (§10.2)
 node "$ROOT/tests/i18n.js"   # the interface languages: runtime, plurals per CLDR, drafts, pseudo-locales, catalog checks (docs/i18n.md)
 node "$ROOT/tests/i18n_errors.js"   # error-code contract, Auth mapping, account locale, e-mail templates (docs/i18n.md §6)

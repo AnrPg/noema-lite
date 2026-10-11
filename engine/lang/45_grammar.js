@@ -78,6 +78,7 @@ const firstSentence = s => (String(s || '').match(/^.*?[.!?](\s|$)/) || [s || ''
 
 /** The same teaching point in every course language: status + the first sentence, each a link to that language's page. */
 function acrossLanguages(fid, current, onPick) {
+  if (UI.C.languages.length < 2) return null;   // D21: one language studied
   const rows = UI.C.languages.map(c => {
     const g = LX(c).grammar[fid];
     return h('tr', { class: c === current ? 'on' : '' }, h('th', {}, h('button', { class: 'btn ghost small', onclick: () => onPick(c) }, info(c).flag + ' ' + info(c).label)),
