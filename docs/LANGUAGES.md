@@ -995,7 +995,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
     answered, lists **your languages** (one row each, its own name; a tap opens its course — the one you were last in that has it —
     with that language on screen), *Change your languages*, the **courses** that teach them (each row with only the chosen languages'
     flags, names, words and reviews), and, folded, the **other courses** (none of your languages). Opening one of those asks which of
-    its languages to study (nothing else is shown until then); the choice is added to the answer. Today's card continues a course
+    its languages to study (nothing else is shown until then); the choice is added to the answer. A course the learner makes (✨ New language) and a language a package adds (§10.2) are studied at once (added to the answer). Today's card continues a course
     with one of your languages, with their flags only.
   * **One language** is a normal one-language course: no flag rails, no ⇄ Compare on a concept, no “same point in the other
     languages”, no comparison strip, no today's-languages chips, no compare lane / polyglot drills on the home (the lane itself says
