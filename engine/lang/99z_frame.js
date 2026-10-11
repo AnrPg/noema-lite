@@ -107,7 +107,7 @@ function frameHome(v, acts, hold) {
     h('h2', {}, session ? go1.dataset.rest || txt : start ? start[1] : txt.replace(/^✅\s*/, '')),
     h('span', { class: 'meta' }, todays.length > 1 || UI.C.languages.length > 1 ? S.pill(todays.map(c => info(c).flag).join(' '), 1) : null),
     none ? null : h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→'));
-  const out = [head, card];
+  const out = [head, card], ask = v.querySelector('.lx-native-ask'); if (ask) out.push(ask);   // D19: “Your native language?” stays in sight
   if (go1) hold.append(go1);
   if (todayRow) {   // which languages today: on demand
     hold.append(todayRow);

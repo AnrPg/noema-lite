@@ -66,7 +66,7 @@ async function judgeOpen(box, c, task) {
   if (!aiVendor()) { box.append(h('div', { class: 'lx-fb bad' }, '🤷 ' + LT('lang.prod.notStored') + ' ', keyHelp())); return false; }
   const wait = h('div', { class: 'tiny lx-aiwait' }, '🤖 ' + LT('lang.prod.asking')); box.append(wait);
   try {
-    const t = N.aiTask(UI.C, UI.L, c, task, { chatLang: chatLangOf() });
+    const t = N.aiTask(UI.C, UI.L, c, task, { chatLang: chatLangOf(), native: nativeL() });
     const r = await aiJSON(t); wait.remove();
     box.append(verdictView(c, r.data));
     return r.data.verdict !== 'wrong';
@@ -139,7 +139,7 @@ WIDGETS.compose = (it, done) => {
     if (!aiVendor()) { out.append(h('p', { class: 'tiny' }, LT('lang.prod.rubricNeedsAI') + ' '), keyHelp()); return done(ok); }
     const wait = h('div', { class: 'tiny' }, '🤖 ' + LT('lang.prod.aiReads')); out.append(wait);
     try {
-      const res = await aiJSON(N.aiTask(UI.C, UI.L, c, { ...it, kind: 'compose', answer: val }, { chatLang: chatLangOf() })); wait.remove();
+      const res = await aiJSON(N.aiTask(UI.C, UI.L, c, { ...it, kind: 'compose', answer: val }, { chatLang: chatLangOf(), native: nativeL() })); wait.remove();
       out.append(rubricView(c, val, res.data));
       const avg = ['grammar', 'vocabulary', 'spelling', 'cohesion'].reduce((a, x) => a + (res.data.aspects[x]?.score || 0), 0) / 4;
       ok = ok && avg >= 3;
@@ -307,7 +307,7 @@ function textBody(c, rows, { aiGloss = false, noEye = false } = {}) {
 async function aiReader(c, btn) {
   btn.disabled = true; const old = btn.textContent; btn.textContent = '✨ ' + LT('lang.gram.writing');
   try {
-    const k = N.known(UI.C, UI.L, c), t = N.readerTask(UI.C, UI.L, c, { k, chatLang: chatLangOf() });
+    const k = N.known(UI.C, UI.L, c), t = N.readerTask(UI.C, UI.L, c, { k, chatLang: chatLangOf(), native: nativeL() });
     const res = await aiJSON(t, { repairs: 2 });
     const rows = res.data.sentences.map(x => ({ r: { text: x.text, check: N.checkText(UI.C, c, x.text, k.R) }, gl: x.gloss }));
     const okRows = rows.filter(x => !x.r.check.unknown.length && x.r.check.unlearned.length <= 1);
@@ -348,7 +348,7 @@ function drawTutor() {
   const msgs = h('div', { class: 'lx-tmsgs', 'aria-live': 'polite' });
   const ta = h('textarea', { class: 'noema-input lx-tin', rows: 2, placeholder: LT('lang.tutor.placeholder'), 'aria-label': LT('lang.tutor.msgLabel'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } } });
   const sel = h('select', { class: 'lx-tlang', 'aria-label': LT('lang.tutor.langLabel'), onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },
-    ...uniq([UI.C.explainLang, 'en', 'el', 'de', 'ru', 'tr', 'fr', 'es', ...knowsL().map(k => k.code).filter(Boolean)]).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + capFirst(langName(x)))));
+    ...uniq([UI.C.explainLang, UI.C.masterLang, nativeL()?.code, (window.NoemaI18n?.locale || '').split('-')[0], ...N.SUPPORTED_NATIVES].filter(Boolean)).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + capFirst(langName(x)))));
   const box = h('aside', { class: 'lx-tutor', role: 'dialog', 'aria-label': LT('lang.frame.tutor') },
     h('div', { class: 'lx-thead' }, tutorFaceNow(), h('b', { class: 'lx-tname' }, tutorNameNow() || '🎓 ' + LT('lang.frame.tutor')), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn lx-tclose', title: LT('lang.tutor.close'), 'aria-label': LT('lang.tutor.closeLabel'), onclick: closeLangTutor }, '✕')),
     h('div', { class: 'lx-tintents' }, ...intents.map(x => h('button', { class: 'chip' + (x === ctx.intent ? ' on' : ''), 'data-intent': x, onclick: () => {
@@ -399,7 +399,7 @@ async function sendTutor(text) {
   hist.push({ role: 'user', text, t: Date.now() }); TT.busy = true; drawTutor();
   const msgs = document.querySelector('.lx-tmsgs'); msgs?.append(h('div', { class: 'lx-tmsg ai lx-typing' }, '…'));
   try {
-    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow() });
+    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow(), native: nativeL() });
     /* i18n-ignore-start (the prompt for the AI stays English; the reply language is chatLang, set in langcore.tutorTask's system prompt) */
     const convo = hist.filter(m => m.role !== 'error').map(m => `${m.role === 'user' ? 'Learner' : 'Tutor'}: ${m.text}`).join('\n\n');
     const r = await NoemaLLM.json({ acc: UI.acc, system: task.system, prompt: `The conversation so far:\n\n${convo}\n\nWrite the tutor's next message.`, schema: task.schema, name: task.name, repairs: 1, maxTokens: 6000 });

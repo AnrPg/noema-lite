@@ -1,4 +1,7 @@
 {
   "@@locale": "fr",
-  "sh.tutorDefault": "Tuteur"
+  "sh.tutorDefault": "Tuteur",
+  "sh.native": "Langue maternelle",
+  "sh.nativeTip": "Les cours de langues expliquent à travers elle : des comparaisons uniquement avec ta langue, et les explications dans ta langue dès qu’elles sont traduites. Toute autre langue : choisis-la dans les réglages d’un cours de langue.",
+  "sh.nativeNone": "— non défini —"
 }

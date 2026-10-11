@@ -124,7 +124,7 @@
   /* ---------- the course that is open: rebuilt after a merge ---------- */
   function refresh(acc, cid, data) {
     if (UI.acc !== acc || UI.id !== cid || !UI.C) return;
-    UI.C = N.course(applyPacks(data, PACKS[acc + '|' + cid])); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) N.addProfiles(UI.C, prof);
+    UI.data = applyPacks(data, PACKS[acc + '|' + cid]); UI.C = buildCourse(UI.data); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) { UI.profMap = prof; N.addProfiles(UI.C, facadeProfMap(prof)); }   // D19: through the facade of the explanation locale
     UI.L = N.fromKV(UI.C, N.toKV(UI.C, UI.L));
     if (!document.querySelector('.lx-session')) render();
   }

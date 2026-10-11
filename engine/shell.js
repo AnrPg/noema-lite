@@ -626,8 +626,21 @@ window.NoemaShell = (() => {
         seg(L('gameMode'), game, [['playful', L('gamePlayful')], ['calm', L('gameCalm')], ['off', L('gameOff')]], k => TH().putSettings({ game: k })),
         h('p', { class: 'tiny' }, L('gameRules'))),
       h('section', { class: 'ns-panel ns-form' }, h('span', { class: 'ns-label' }, L('studying')), chk('sound', true, L('sound')), chk('chunk', true, L('chunk')), h('label', { class: 'row ns-check' }, goal, L('dailyGoal'))),
+      nativeField(s),
       h('div', { class: 'row' }, h('button', { class: 'btn', onclick: () => go('#/character') }, faceEl(undefined, 'mini'), L('character'))));
     uiL.addEventListener('change', () => { putS({ lang: uiL.value || undefined }); location.reload(); });
+  }
+  /** D19 (docs/language-packs.md §2.2): the learner's native language (a:settings.native), read by every language course. The supported
+      natives here; any other language (with its type and family) is chosen in a language course's ⚙️ settings and shown as it is. */
+  function nativeField(s) {
+    const NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt'];   // = NoemaLang.SUPPORTED_NATIVES (the UI locales)
+    const cur = s.native || null, name = c => { try { return new Intl.DisplayNames([lang(), 'en'], { type: 'language' }).of(c) || c; } catch (e) { return c; } };
+    const opts = NATIVES.map(c => [c, name(c)]).sort((a, b) => window.NoemaI18n ? NoemaI18n.fmt.compare(a[1], b[1]) : a[1].localeCompare(b[1]));
+    const other = cur && !(cur.code && NATIVES.includes(cur.code));
+    const sel = h('select', { class: 'noema-input ns-native', 'aria-label': L('native') }, h('option', { value: '' }, L('nativeNone')),
+      ...opts.map(([c, n]) => h('option', { value: c, selected: cur?.code === c || null }, n)), other ? h('option', { value: '=', selected: true }, cur.name || name(cur.code)) : null);
+    sel.addEventListener('change', () => { if (sel.value !== '=') putS({ native: sel.value ? { code: sel.value } : undefined }); });
+    return h('section', { class: 'ns-panel ns-form' }, h('label', { class: 'ns-field' }, h('span', { class: 'ns-label' }, L('native')), sel), h('p', { class: 'tiny' }, L('nativeTip')));
   }
   /** The UI languages to offer (endonym · code; never flags): those switched on, plus the learner's current choice. */
   function uiLocaleOptions(cur) {

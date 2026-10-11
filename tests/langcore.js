@@ -302,6 +302,86 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
   ok(N.notesFor(CW, notes, [{ code: 'tr' }, { code: 'fi' }]).map(n => n.text).join('') === 'ac' && N.notesFor(CW, notes, [{ name: 'X', type: 'isolating' }]).map(n => n.text).join('') === 'b', 'notes for the learner: by language, by family (fi → Uralic), by type');
   ok(N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], [{ code: 'el' }]).join() === 'Greek (Modern)' && !N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], [{ code: 'tr' }]).length, 'three genders: familiar from Greek, not from Turkish'); }
 
+{ // ---------- D19: taught through the learner's native language (docs/language-packs.md §2.2, §3) ----------
+  const J = rel => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'library', 'languages', rel), 'utf8'));
+  const d = N.readCourse(read, list); d.world = { features: J('_typology/features.json').features, languages: J('_typology/languages.json').languages, phenomena: { de: J('_phenomena/de.json').phenomena } };
+  const CW = N.course(d), nat = x => N.nativeOf(CW, x);
+  const el = nat({ code: 'el' }), tr = nat({ code: 'tr' }), he = nat({ code: 'he' }), en = nat({ code: 'en' }), pt = nat({ code: 'pt' });
+  ok(el.supported && el.type === 'fusional' && el.branch === 'Hellenic' && !tr.supported && tr.type === 'agglutinating' && tr.family === 'Turkic' && /^Semitic/.test(he.branch) && !he.supported,
+    'nativeOf: a code is completed from its profile (type, family, branch); supported = a UI locale (el yes, tr / he no)');
+  ok(N.nativeOf(CW, null, [{ code: 'ru', level: 'C2' }, { code: 'tr', level: 'native' }]).code === 'tr' && N.nativeOf(CW, { code: 'el' }, [{ code: 'tr', level: 'native' }]).code === 'el' && N.nativeOf(CW, null, null) === null && N.nativeOf(CW, null, [{ code: 'fr', level: 'B1' }]) === null,
+    'nativeOf: the account’s setting wins; else the course’s known language at level native; else unknown');
+  const ki = N.nativeOf(CW, { name: 'Kirundi', type: 'agglutinating', family: 'Niger-Congo' });
+  ok(!ki.code && ki.type === 'agglutinating' && !ki.supported && N.learnerProfiles(CW, N.nativeKnows(ki))[0]?.inferred === 'family', 'a native language without a profile: its type and family; the familiar parts inferred from its family');
+  const notes = [{ for: 'el', rel: 'similar', text: 'EL' }, { for: 'en', rel: 'same', text: 'EN' }, { for: 'tr', rel: 'new', text: 'TR' }, { for: 'ja', rel: 'new', text: 'JA' }, { for: 'fa', rel: 'new', text: 'FA' },
+    { for: 'type:agglutinating', rel: 'new', text: 'AGG' }, { for: 'type:fusional', rel: 'similar', text: 'FUS' }, { for: 'branch:Semitic', rel: 'different', text: 'SEM' }];
+  const seen = (ns, n) => N.contrastFor(ns, n).map(x => x.text).join();
+  ok(seen(notes, el) === 'EL' && seen(notes, en) === 'EN' && seen(notes, nat({ code: 'ja' })) === 'JA', 'contrastFor: a supported native sees the notes for its own language only (el → el, en → en: no English for a Greek speaker)');
+  ok(seen(notes, tr) === 'AGG' && seen(notes, he) === 'SEM' && seen(notes, nat({ code: 'fa' })) === 'FUS', 'contrastFor: an unsupported native never sees the note for its code (tr, fa): its branch (he → Semitic), else its type (tr → agglutinating, fa → fusional)');
+  ok(seen([...notes, { for: 'family:Turkic', rel: 'same', text: 'TURKIC' }], tr) === 'TURKIC' && seen(notes, pt) === 'FUS' && seen(notes, ki) === 'AGG' && seen(notes, null) === '' && seen(null, el) === '',
+    'contrastFor: branch ▸ family ▸ type; a supported native without a note of its own gets its type’s; no native: no notes');
+  ok(seen([...notes, { for: 'tr', rel: 'new', text: 'MINE', ai: true }], tr) === 'AGG,MINE' && seen([...notes, { for: 'Kirundi', rel: 'new', text: 'KI', ai: true }], ki) === 'AGG,KI' && seen([...notes, { for: 'tr', text: 'X', ai: true }], el) === 'EL',
+    'contrastFor: notes the learner asked Claude for (ai) in their own language are added; never those for another language');
+  // the explanation locale
+  const X = o => N.explanationLocale(o);
+  ok(X({ native: el, uiLocale: 'el' }) === 'en' && X({ native: el, uiLocale: 'ru', facades: { el: 'on' } }) === 'el' && X({ native: tr, uiLocale: 'el', facades: { el: 'on' } }) === 'el' && X({ native: tr, uiLocale: 'fr', facades: { el: 'on' } }) === 'en',
+    'explanationLocale: the native language’s facade, else the UI locale’s, else the master');
+  ok(X({ native: el, facades: { el: 'preview' } }) === 'en' && X({ native: el, facades: { el: 'preview' }, preview: true }) === 'el' && X({ native: el, facades: { el: 'draft' }, preview: true }) === 'en' && X({ native: el, facades: { el: 'draft' }, drafts: true }) === 'el',
+    'explanationLocale: preview facades only on preview hosts, drafts only with config.i18nDrafts');
+  ok(X({ native: el, facades: { el: { status: 'on', coverage: { 1: { total: 10, done: 6, stale: 0, missing: 4 } } } } }) === 'en' && X({ native: el, facades: { el: { status: 'on', coverage: { 1: { total: 10, done: 8, stale: 2, missing: 0 }, 2: { total: 5, done: 0, stale: 0, missing: 5 } } } } }) === 'el',
+    'explanationLocale: a facade is offered only with Tier 1 complete (lang_facade.py coverage; stale texts still count)');
+  ok(X({ native: el, override: 'en', facades: { el: 'on' } }) === 'en' && X({ native: nat({ code: 'ru' }), override: 'el', facades: { el: 'on', ru: 'on' } }) === 'el' && X({ native: el, override: 'de', facades: { el: 'on' } }) === 'el',
+    'explanationLocale: the learner’s choice (settings.speaker) first, when it can be shown');
+  ok(X({ native: nat({ code: 'zh' }), uiLocale: 'zh-Hant', facades: { 'zh-Hans': 'on', 'zh-Hant': 'on' } }) === 'zh-Hant' && X({ native: nat({ code: 'es' }), facades: { 'es-ES': 'on' } }) === 'es-ES' && X({ native: nat({ code: 'ar' }), facades: ['ar-EG'] }) === 'ar-EG',
+    'explanationLocale: a language matches its locales (zh → the UI’s script, es → es-ES, ar → ar-EG)');
+  ok(/native language: Greek \(Modern\) \(el\)/.test(N.nativeRule(el)) && /Turkish, a language of the agglutinating type \(Turkic family\)\. When you compare, compare only with that type/.test(N.nativeRule(tr)) && N.nativeRule(null).includes('Never refer to languages the learner does not speak natively'),
+    'the rule for every AI prompt: the native language (or its type), never other languages');
+  { const L0 = N.newLearner(CW), sys = [N.aiTask(CW, L0, 'de', { kind: 'translate', gloss: 'x', reference: ['y'], answer: 'z' }, { native: tr }).system, N.readerTask(CW, L0, 'de', { native: tr }).system, N.tutorTask(CW, L0, 'de', {}, { native: tr }).system];
+    ok(sys.every(s => s.includes('agglutinating type') && s.includes('Never refer to languages the learner does not speak natively')), 'aiTask, readerTask and tutorTask tell the AI the native language (its type) and the rule'); }
+  ok(N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], N.nativeKnows(el)).length === 1 && !N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], N.nativeKnows(tr)).length && !N.nativeKnows(null).length,
+    'familiar (D18) from the native language only (nativeKnows)'); }
+{ // ---------- D19 §3: a locale facade over the pilot course — the texts change, the exercises do not ----------
+  const PD = path.join(__dirname, '..', 'library', 'languages', 'polyglot-semitic-zh-de'), FX = path.join(__dirname, 'fixtures', 'lang-facade', 'el');
+  const rp = rel => { const p = path.join(PD, rel); return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : null; };
+  const lp = rel => { const p = path.join(PD, rel); return fs.existsSync(p) ? fs.readdirSync(p).filter(f => f.endsWith('.json')).sort() : []; };
+  const d = N.readCourse(rp, lp), C0 = N.course(d), before = JSON.stringify(d.langs.de.grammar['fn.definite']);
+  const texts = {}; for (const f of fs.readdirSync(FX).filter(f => f !== 'facade.json')) Object.assign(texts, JSON.parse(fs.readFileSync(path.join(FX, f), 'utf8')));
+  const head = JSON.parse(fs.readFileSync(path.join(FX, 'facade.json'), 'utf8')), fac = { locale: head.locale, status: head.status, texts };
+  ok(N.facadeAddress('g:de:fn.definite/blocks/0/rows/0/0').join('|') === 'g|de:fn.definite|blocks,0,rows,0,0' && N.facadeAddress('x:ar:khala/profile/pitfalls/0')[1] === 'ar:khala' && !N.facadeAddress('zz:x/y') && N.facadeAddress('ty:core/intro')[0] === 'ty' && Object.keys(N.facadeTexts(fac)).length === Object.keys(texts).length,
+    'facade addresses: a root + an id + a JSON pointer; unknown roots are ignored');
+  const D = N.applyFacade(d, fac), CF = N.course(D), g = CF.lang.de.grammar['fn.definite'];
+  ok(CF.explainLang === 'el' && CF.masterLang === 'en' && C0.explainLang === 'en' && C0.masterLang === 'en' && JSON.stringify(d.langs.de.grammar['fn.definite']) === before && N.applyFacade(d, { locale: 'en', texts }) === d,
+    'applyFacade: a new course in the facade’s locale (explainLang el, masterLang en); the master is untouched; the master’s own locale is the master');
+  ok(/^Τα γερμανικά/.test(g.summary) && /^Τα ο \/ η \/ το/.test(g.notes[0].text) && g.notes[3].text === C0.lang.de.grammar['fn.definite'].notes[3].text && g.blocks[0].rows[0][0] === 'ο/η/το (οριστικό)' && g.blocks[0].rows[0][1] === 'der Tisch'
+    && CF.concepts['pron.i'].gloss === 'εγώ' && CF.functions['fn.definite'].title.startsWith('Το οριστικό') && CF.lang.de.sentenceById['de.c01_04.001'].gloss === 'Σήμερα ξύπνησα στις έξι.',
+    'applyFacade: the translated texts at their addresses (summary, a note, a table label, a gloss, a title); everything else stays the master (target-language cells too)');
+  const k = { R: new Set(Object.keys(CF.lang.de.lex)), P: new Set() }, ids = Object.keys(CF.lang.de.lex), L0 = N.newLearner(C0); for (const id of ids) N.review(C0, L0, 'de', id, 'r', 'good', 0);
+  const L1 = N.fromKV(CF, N.toKV(C0, L0)), kk = c => N.known(c, c === C0 ? L0 : L1, 'de');
+  const clocks = c => N.clockItems(c, c === C0 ? L0 : L1, 'de', { k: kk(c), rng: N.seeded(7), max: 50 }).map(it => it.sentence + '=' + JSON.stringify(it.time)).sort().join();
+  const dates = c => N.dateItems(c, c === C0 ? L0 : L1, 'de', { k: kk(c), rng: N.seeded(7), max: 50 }).filter(it => it.kind === 'sentence2date').map(it => it.sentence).sort().join();
+  ok(clocks(C0) && clocks(C0) === clocks(CF) && CF.lang.de.sentenceById['de.c01_04.001'].time.h === 6 && dates(C0) === dates(CF),
+    'a translated gloss changes no exercise: the times and dates come from the master (s.time, s.date), the same clock and date items');
+  ok(N.parallelGroups(CF).length === N.parallelGroups(C0).length && N.equivalents(CF, 'ar', 'ar.c01_04.013', 'de').join() === 'de.c01_04.022',
+    'the parallel sentences are the same through the facade (s.mk from the master), though the two glosses now differ');
+  { const D2 = JSON.parse(JSON.stringify(d)); D2.course.explainLang = 'el'; D2.course.masterLang = 'en'; for (const s of D2.langs.de.bank) if (s.id === 'de.c01_04.001') s.gloss = 'Woke up at six.';
+    const C2 = N.course(D2); ok(N.clockOf(C2, 'de', C2.lang.de.sentenceById['de.c01_04.001']) === null, 'a gloss that is not the master’s is never read (no stamp, no time)'); }
+  { const [code, fid] = (() => { for (const c of C0.languages) for (const [f, g] of Object.entries(C0.lang[c].grammar)) if ((g.quiz || []).length && g.quiz[0].options.includes(g.quiz[0].answer)) return [c, f]; return []; })();
+    const q = C0.lang[code].grammar[fid].quiz[0], at = q.options.indexOf(q.answer), qf = { locale: 'el', texts: { [`g:${code}:${fid}/quiz/0/answer`]: 'μια μετάφραση που δεν είναι επιλογή', ...Object.fromEntries(q.options.map((o, i) => [`g:${code}:${fid}/quiz/0/options/${i}`, 'επιλογή ' + i])) } };
+    const q2 = N.course(N.applyFacade(d, qf)).lang[code].grammar[fid].quiz[0];
+    ok(q2.answer === 'επιλογή ' + at && q2.options.includes(q2.answer), `a quiz through a facade: its answer is the option it was in the master, whatever the translation says (${code} ${fid})`); }
+  { const st = N.masterStamps(d); ok(Object.keys(st).length === C0.languages.reduce((n, c) => n + C0.lang[c].sentences.length, 0) && st['de.c01_04.118'].date.m === 5 && st['de.c01_04.001'].time.h === 6 && /^[0-9a-z]+$/.test(st['de.c01_04.001'].mk.k),
+    'masterStamps: a meaning key for every sentence, the time and the date where one is named (what tools/build.py stores)'); }
+  // word profiles: translated texts, the bridges still parse the master's
+  const lx = Object.values(C0.lang.ar.lex).find(x => /Turkish/.test(x.profile?.etymology?.text || '') || (x.profile?.pitfalls || []).some(p => /false friend/i.test(p)));
+  const map = Object.fromEntries(C0.languages.flatMap(c => Object.values(C0.lang[c].lex).filter(x => x.profile).map(x => [x.id, x.profile])));
+  const pf = { locale: 'el', texts: { [`x:${lx.id}/profile/etymology/text`]: 'Ελληνική μετάφραση.', ...Object.fromEntries((lx.profile.pitfalls || []).map((p, i) => [`x:${lx.id}/profile/pitfalls/${i}`, 'Παγίδα ' + i])) } };
+  const map2 = N.facadeProfiles(map, pf), dP = N.applyFacade(d, pf), CP = N.course(dP);
+  ok(map2[lx.id].etymology.text === 'Ελληνική μετάφραση.' && map[lx.id].etymology.text !== map2[lx.id].etymology.text && map2[lx.id].$m.etymology === map[lx.id].etymology.text && CP.lang.ar.lex[lx.id].profile.etymology.text === 'Ελληνική μετάφραση.',
+    'facadeProfiles / applyFacade: a word’s profile texts translated, the master’s kept for the bridges ($m)');
+  const kinds = c => N.bridges(c).list.map(b => b.kind + b.a.lex + b.b.lex).sort().join() + '|' + N.knownLinks(c, 'ar', lx.id).map(x => x.code + x.word + x.kind).join();
+  ok(kinds(C0) === kinds(CP), `the bridges and links (${N.bridges(C0).list.length}) are the same through a facade that translates etymologies and pitfalls (${lx.id})`);
+}
+
 // ---------- storage ----------
 const kv = N.toKV(C, L);
 ok(Object.keys(kv).every(k => k === 'settings' || /^lang:(de|ar|he|zh):(node|fn):/.test(k)) && !!kv['lang:de:node:core.1'], `stored per (language, node): ${Object.keys(kv).filter(k => k !== 'settings').join(', ')}`);

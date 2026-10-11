@@ -105,6 +105,7 @@ function wordCardView(c, lid, concept) {
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
     ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + LNUM(Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
+    (() => { const ns = N.contrastFor(lx.profile?.notes, nativeL()); return ns.length ? h('div', { class: 'lx-callout k-key lx-wnotes' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(ns, c)) : null; })(),   // D19: the word seen from the learner's native language
     polyWordExtras(c, lid),   // P6: bridges and false friends across the learner's languages
     card.synonymsNone ? h('p', { class: 'tiny' }, LT('lang.card.synonyms') + ' ', card.synonymsNone) : null,
     !card.hasProfile ? h('p', { class: 'tiny' }, LT('lang.card.littleWord') + ' ', gloss(c, lid)) : null);

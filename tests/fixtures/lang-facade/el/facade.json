@@ -1,0 +1,2 @@
+{ "format": "noema.langfacade/v1", "course": "polyglot-semitic-zh-de", "locale": "el", "master": "en", "status": "on", "coverage": {}, "built": "2026-10-11",
+  "note": "Test fixture (tests/langcore.js, tests/lang_native.js), not a translation of the course: copied to library/languages/polyglot-semitic-zh-de/facades/el/ it becomes course.expl.el.js at build. It translates glosses the clock, date and parallel-sentence exercises use, to show that a facade changes the texts and never what the exercises check." }

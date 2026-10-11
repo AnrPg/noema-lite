@@ -75,7 +75,7 @@ VIEWS.recall = (v, r) => {
 const LEVELS = [['native', () => LT('lang.set.native')], ['C2', () => LT('lang.set.c2')], ['C1', () => 'C1'], ['B2', () => 'B2'], ['B1', () => 'B1'], ['A2', () => LT('lang.set.a2')]];
 function knowsEditor() {
   const S = UI.L.settings, W = UI.C.data.world, box = h('div', { class: 'lx-knows' });
-  const list = () => S.knows || (S.knows = knowsL().map(k => ({ ...k })));
+  const list = () => S.knows || (S.knows = []);
   const draw = () => {
     box.innerHTML = '';
     for (const [i, k] of list().entries()) box.append(h('div', { class: 'lx-setrow', 'data-know': k.code || k.name },
@@ -101,6 +101,44 @@ function knowsEditor() {
   };
   draw(); return box;
 }
+/** D19: the learner's native language (a:settings.native, one for every course): a picker of every profiled language + “another
+ *  language” (its name, type and family). onPick(native | null) after it is saved. */
+function nativePicker(onPick = () => { }) {
+  const W = UI.C.data.world, cur = accSettings().native || null, box = h('div', { class: 'lx-native' });
+  const nm = l => capFirst(langName(l.code) || l.name), cmp = window.NoemaI18n ? NoemaI18n.fmt.compare : (a, b) => a.localeCompare(b);
+  const langs = (W?.languages || []).slice().sort((a, b) => cmp(nm(a), nm(b)));
+  const known = cur?.code && langs.some(l => l.code === cur.code);
+  const sel = h('select', { class: 'lx-nativesel', 'aria-label': LT('lang.native.label') }, h('option', { value: '' }, LT('lang.native.none')),
+    ...langs.map(l => h('option', { value: l.code, selected: cur?.code === l.code ? true : null }, `${nm(l)} — ${l.family}`)),
+    cur && !known ? h('option', { value: '=', selected: true }, cur.name || cur.code) : null,
+    h('option', { value: '*' }, LT('lang.native.other')));
+  const typeNames = Object.fromEntries((UI.C.data.typology?.types || []).map(t => [t.id, t.name]));
+  const other = h('div', { class: 'lx-nativeother', hidden: true });
+  const name = h('input', { class: 'noema-input', 'aria-label': LT('lang.native.name'), placeholder: LT('lang.native.name') });
+  const type = h('select', { 'aria-label': LT('lang.native.type') }, ...N.TYPES.map(t => h('option', { value: t }, typeNames[t] || t)));
+  const fams = [...new Set((W?.languages || []).map(l => l.family))].sort(cmp);
+  const fam = h('select', { 'aria-label': LT('lang.native.family') }, h('option', { value: '' }, LT('lang.native.familyUnknown')), ...fams.map(f => h('option', { value: f }, f)));
+  const put = v => { putAccSettings({ native: v || undefined }); nativeMemo = null; onPick(nativeL()); };
+  other.append(name, type, fam, h('button', { class: 'btn small', onclick: () => { const n = name.value.trim(); if (!n) return name.focus(); put({ name: n, type: type.value, ...(fam.value ? { family: fam.value } : {}) }); } }, LT('lang.native.save')));
+  sel.onchange = () => { other.hidden = sel.value !== '*'; if (sel.value === '*') return name.focus(); if (sel.value !== '=') put(sel.value ? { code: sel.value } : null); };
+  box.append(sel, other);
+  return box;
+}
+/** D19: asked once in a language course while the native language is not known (until then: no comparisons, general texts only). */
+function nativeAsk() {
+  if (nativeL() || UI.prefs.nativeAsked || !UI.C.data.world) return null;
+  const box = h('div', { class: 'lx-card lx-native-ask', 'data-ask': 'native' }, h('b', {}, '🧭 ' + LT('lang.native.ask')), h('p', { class: 'tiny' }, LT('lang.native.askWhy')),
+    nativePicker(() => { UI.prefs.nativeAsked = true; save(); applyExplanationLocale(); render(); }),
+    h('button', { class: 'btn ghost small lx-nativelater', onclick: () => { UI.prefs.nativeAsked = true; save(); box.remove(); } }, LT('lang.native.later')));
+  return box;
+}
+/** D19: the language of the explanations — automatic (the native language's, else the UI's, when its facade is on) or the learner's choice (settings.speaker). */
+function speakerPicker() {
+  const opts = explanationLocales(); if (opts.length < 2) return null;
+  const S = UI.L.settings;
+  return h('label', { class: 'lx-setrow' }, LT('lang.native.speaker') + ' ', h('select', { class: 'lx-speaker', onchange: e => { if (e.target.value) S.speaker = e.target.value; else delete S.speaker; save(); applyExplanationLocale(); render(); } },
+    h('option', { value: '' }, LT('lang.native.speakerAuto')), ...opts.map(l => h('option', { value: l, selected: S.speaker === l ? true : null }, capFirst(uiLangName(l))))));
+}
 const PEC_AREAS = ['script', 'orthography', 'phonology', 'morphology', 'syntax', 'lexicon', 'semantics', 'pragmatics', 'culture', 'numbers'];   // lang.pec.area.<area>
 /** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
 VIEWS.peculiar = (v, r) => {
@@ -122,7 +160,7 @@ VIEWS.peculiar = (v, r) => {
         fam[p.id] ? h('span', { class: 'tiny' }, ' — ' + LT('lang.pec.familiarFrom', { from: LLIST(fam[p.id].map(langName)) })) : null),
       h('p', {}, wordsIn(c, p.what)),
       ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
-      (() => { const mine = N.notesFor(UI.C, p.notes, knowsL()); return mine.length ? notesList(mine) : null; })(),
+      (() => { const mine = N.contrastFor(p.notes, nativeL()); return mine.length ? notesList(mine, c) : null; })(),   // D19: the native language's notes only
       p.when ? h('p', { class: 'tiny' }, '🛤️ ' + LT('lang.pec.inCourse') + ' ', p.when) : null))));
 };
 VIEWS.settings = (v) => {
@@ -136,6 +174,7 @@ VIEWS.settings = (v) => {
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
+    h('h3', { class: 'lx-h3' }, LT('lang.native.label')), nativePicker(() => { applyExplanationLocale(); render(); }), h('p', { class: 'tiny' }, LT('lang.native.note')), speakerPicker(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.knowAlready')), knowsEditor(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.sessions')), num(LT('lang.set.batch'), 'batch', 3, 30, 12), num(LT('lang.set.minutes'), 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
     h('h3', { class: 'lx-h3' }, LT('lang.set.readingHelp')), tog(LT('lang.set.marks'), 'marks'), marksSettings(), tog(LT('lang.set.translit'), 'translit'), tog(LT('lang.set.pinyin'), 'pinyin'),

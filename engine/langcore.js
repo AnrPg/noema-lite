@@ -15,8 +15,8 @@
 
   /* ---------- the words a learner reads (docs/i18n.md: catalog i18n/langcore, keys lc.*) ----------
      lcU / lcUP   lc.ui.*    the interface: exercise instructions, labels, feedback — in the UI language;
-     lcX / lcXP   lc.expl.*  explanations: “why” lines, grammar terms, notes — in the UI language for now; they will follow the
-                             course's speaker language (docs/i18n.md §1), which is why they have their own prefix and wrapper.
+     lcX / lcXP   lc.expl.*  explanations: “why” lines, grammar terms, notes — in the explanation locale (D19, docs/language-packs.md
+                             §2.2: setExplainLocale, called by the app when a course opens; the UI language until then).
      …P variants return parts [text | {w, lang} …] for messages with words of a learned language inside (the UI renders them).
      The app formats with NoemaI18n. Node (tests, tools, the skill's scripts) has no NoemaI18n: the English catalog comes from
      tools/i18n/node.js (in the skill: i18n/node.js next to this file) and the same intl-messageformat, so Node prints the same
@@ -47,7 +47,10 @@
   const lcT = (key, params) => { const N = root.NoemaI18n; return N && N.t ? N.t(key, params) : lcEn(key, params); };
   const lcU = (key, params) => lcT(key, params);
   const lcLocale = () => (root.NoemaI18n && root.NoemaI18n.locale) || 'en';
-  const lcX = (key, params) => lcT(key, params);
+  /** D19: the explanation locale (docs/language-packs.md §2.2) — set by the app when a course opens (setExplainLocale); lc.expl.* follow it. */
+  const EXPL = { locale: null };
+  const lcX = (key, params) => { const N = root.NoemaI18n, loc = EXPL.locale && N && N.match ? N.match(EXPL.locale) : null; return loc && N.t ? N.t(key, params, loc) : lcT(key, params); };
+  const setExplainLocale = loc => { EXPL.locale = loc || null; };
   /** A message as parts: params that are objects ({w, lang}) or arrays of parts are put in as they are. */
   function lcParts(fmt, key, params) {
     const rich = [], p = {};
@@ -246,6 +249,164 @@
     return out;
   }
 
+  /* ---------- D19 — taught through the learner's native language (docs/language-packs.md §2.2, §3) ----------
+     The native language decides the language of the explanations (the locale facade, when one is on) and the only comparisons
+     shown (notes for that language, else for its branch / family / type). Pure: the app passes the account's a:settings.native. */
+  /** The supported natives = the UI locales (docs/i18n.md §2), as language codes. */
+  const SUPPORTED_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt'];
+  const baseLang = t => String(t || '').toLowerCase().split(/[-_]/)[0];
+  /** The learner's native language, completed from the world profiles → {code?, name, type, family, branch, supported} or null.
+   *  native: a:settings.native ({code} | {name, type, family, branch}); without it the first settings.knows entry at level native. */
+  function nativeOf(C, native, knows) {
+    let n = native && (native.code || native.name) ? native : null;
+    if (!n) n = (knows || []).map(x => typeof x === 'string' ? { code: x, level: 'native' } : x).find(x => x && (x.code || x.name) && (x.level || 'native') === 'native') || null;
+    if (!n) return null;
+    const code = n.code ? String(n.code).toLowerCase() : null, prof = code ? ((C && C.data && C.data.world && C.data.world.languages) || []).find(l => l.code === code) : null;
+    return { ...(code ? { code } : {}), name: n.name || (prof && prof.name) || code, type: n.type || (prof && prof.typology) || null, family: n.family || (prof && prof.family) || null,
+      branch: n.branch || (prof && prof.branch) || null, supported: !!code && SUPPORTED_NATIVES.includes(baseLang(code)) };
+  }
+  /** The native language as a settings.knows entry (what learnerProfiles / familiarFrom / forLearner / knownLinks read): [] when unknown. */
+  const nativeKnows = native => native ? [{ ...(native.code ? { code: native.code } : { name: native.name }), ...(native.type ? { type: native.type } : {}), ...(native.family ? { family: native.family } : {}), level: 'native' }] : [];
+  /** The comparison notes a learner sees (§2.2): those for their native language when it is supported; else (or when a page has none
+   *  for it) those for its branch, else its family, else its type. A note for another language is never shown; notes the learner had
+   *  Claude / Gemini write (ai: true) for their own language are added. native: as nativeOf returns it. */
+  function contrastFor(notes, native) {
+    const list = (notes || []).filter(n => n && n.for); if (!native || !list.length) return [];
+    const ai = list.filter(n => n.ai && ((native.code && n.for === native.code) || (native.name && n.for === native.name)));
+    const own = list.filter(n => !n.ai);
+    if (native.code && SUPPORTED_NATIVES.includes(baseLang(native.code))) { const mine = own.filter(n => n.for === baseLang(native.code)); if (mine.length) return [...mine, ...ai]; }
+    const bare = x => String(x).replace(/\s*\(.*\)\s*$/, '');   // “Semitic (Northwest)” → Semitic
+    for (const keys of [native.branch && ['branch:' + native.branch, 'branch:' + bare(native.branch)], native.family && ['family:' + native.family, 'family:' + bare(native.family)], native.type && ['type:' + native.type]]) {
+      if (!keys) continue;
+      const m = own.filter(n => keys.includes(n.for)); if (m.length) return [...m, ...ai];
+    }
+    return ai;
+  }
+  /** Is a locale facade complete enough to be offered (§3.1: Tier 1)? coverage["1"] = {total, done, stale, missing} as tools/lang_facade.py
+   *  writes it: no address missing (stale ones are still shown until refreshed); no coverage = trusted. */
+  const facadeTier1 = f => {
+    const cov = f && typeof f === 'object' ? f.coverage : null, t = cov ? (cov['1'] ?? cov.tier1) : undefined;
+    if (t == null || t === true) return true;
+    if (typeof t === 'number') return t >= 1;
+    return typeof t === 'object' && !(t.missing > 0) && (t.done || 0) + (t.stale || 0) >= (t.total || 0);
+  };
+  /** May a facade be shown? status on; preview on a deploy-preview host; draft with config.i18nDrafts — and Tier 1 complete. */
+  function facadeUsable(f, { preview = false, drafts = false } = {}) {
+    const st = typeof f === 'string' ? f : f && f.status;
+    return !!st && facadeTier1(f) && (st === 'on' || (st === 'preview' && (preview || drafts)) || (st === 'draft' && drafts));
+  }
+  /** The locale the explanations are shown in (§2.2): the learner's override (settings.speaker) ▸ the native language's facade ▸ the UI
+   *  locale's facade ▸ the master. facades: {locale: status | {status, coverage}} or [locales that are on]. → a facade locale or `master`. */
+  function explanationLocale({ native = null, uiLocale = null, override = null, facades = {}, master = 'en', preview = false, drafts = false } = {}) {
+    const all = Array.isArray(facades) ? Object.fromEntries(facades.map(l => [l, 'on'])) : (facades || {});
+    const usable = Object.keys(all).filter(l => facadeUsable(all[l], { preview, drafts }));
+    const pick = want => {
+      if (!want) return null;
+      const w = String(want), b = baseLang(w);
+      if (b === baseLang(master)) return master;
+      const same = usable.filter(l => baseLang(l) === b);
+      return same.find(l => l.toLowerCase() === w.toLowerCase()) || same.find(l => uiLocale && l.toLowerCase() === String(uiLocale).toLowerCase()) || same[0] || null;
+    };
+    return pick(override) || pick(native && native.code) || pick(uiLocale) || master;
+  }
+  /* i18n-ignore-start (prompt text for the AI: stays English) */
+  /** The rule every AI prompt gets (§2.2), with the learner's native language or its type. */
+  function nativeRule(native) {
+    const who = !native ? 'The learner\'s native language is not known: compare with no language outside the course.'
+      : native.supported ? `The learner's native language: ${native.name || native.code} (${native.code}). When you compare, compare only with it.`
+        : `The learner's native language: ${native.name || native.code || 'not named'}${native.type ? `, a language of the ${native.type} type` : ''}${native.family ? ` (${native.family} family)` : ''}. When you compare, compare only with that type of language, without naming other languages.`;
+    return `${who} Never refer to languages the learner does not speak natively (the languages of the course may always be compared with each other).`;
+  }
+  /* i18n-ignore-end */
+
+  /* ---------- explanation facades (§3): translated texts overlaid at their addresses, the master everywhere else ---------- */
+  /** The roots of the addresses: prefix → (data, id) → the object the JSON-pointer tail starts from (the registry of the fields:
+   *  tools/schemas/noema.langfacade.fields.json). */
+  const FACADE_ROOTS = {
+    k: d => d.course || null,
+    fd: (d, id) => (d.fields || []).find(f => f.field === id) || null,
+    c: (d, id) => { for (const f of d.fields || []) { const x = (f.concepts || []).find(c => c.id === id); if (x) return x; } return null; },
+    n: (d, id) => (d.nodes || []).find(x => x.id === id) || null,
+    f: (d, id) => (d.functions || []).find(x => x.id === id) || null,
+    fr: (d, id) => (d.frames || []).find(x => x.id === id) || null,
+    m: (d, id) => (d.media && d.media[id]) || null,
+    ty: (d, id) => !d.typology ? null : id === 'core' ? d.typology : (d.typology.types || []).find(t => t.id === id) || null,
+    g: (d, id) => { const [code, ...rest] = id.split(':'); return (d.langs && d.langs[code] && d.langs[code].grammar[rest.join(':')]) || null; },
+    x: (d, id) => { const L = d.langs && d.langs[id.split(':')[0]]; for (const f of Object.values((L && L.lexicon) || {})) { const x = (f.lexemes || []).find(l => l.id === id); if (x) return x; } return null; },
+    a: (d, id) => { const [code, ...rest] = id.split(':'), cid = rest.join(':'), L = d.langs && d.langs[code]; for (const f of Object.values((L && L.lexicon) || {})) { const x = (f.absent || []).find(a => a.concept === cid); if (x) return x; } return null; },
+    s: (d, id) => { for (const L of Object.values(d.langs || {})) { const s = (L.bank || []).find(x => x.id === id); if (s) return s; } return null; },
+    lg: (d, id) => (d.langs && d.langs[id] && d.langs[id].language) || null,
+    sc: (d, id) => (d.langs && d.langs[id] && d.langs[id].script) || null,
+    chs: (d, id) => (d.langs && d.langs[id] && d.langs[id].chars) || null,
+    ch: (d, id) => { const [code, ...rest] = id.split(':'), z = d.langs && d.langs[code] && d.langs[code].chars; return (z && (z.chars || []).find(e => e.ch === rest.join(':'))) || null; },
+    p: (d, id) => { for (const ps of Object.values((d.world && d.world.phenomena) || {})) { const p = ps.find(x => x.id === id); if (p) return p; } return null; },
+    t: (d, id) => ((d.world && d.world.features) || []).find(x => x.id === id) || null,
+    tl: (d, id) => ((d.world && d.world.languages) || []).find(x => x.code === id) || null,
+    fx: () => null, ph: () => null, ts: () => null,   // in the registry, not in the app's data (bank exemptions, a catalogue's head, sources)
+  };
+  /** An address → [prefix, id, [pointer segments]] or null (c:veg.carrot/gloss → ['c', 'veg.carrot', ['gloss']]). */
+  function facadeAddress(addr) {
+    const m = /^([a-z]+):([^/]*)(\/.*)?$/.exec(String(addr || '')); if (!m || !FACADE_ROOTS[m[1]]) return null;
+    return [m[1], m[2], (m[3] || '').split('/').slice(1).map(s => s.replace(/~1/g, '/').replace(/~0/g, '~'))];
+  }
+  const facadeText = v => typeof v === 'string' ? v : v && typeof v === 'object' && typeof v.t === 'string' ? v.t : null;
+  /** The texts of a facade → {address: text}: a built course.expl.<locale>.js ({locale, status, texts}) or a facades/<locale>/*.json map ({address: {t, src}}). */
+  function facadeTexts(f) {
+    const m = f && typeof f === 'object' ? (f.texts || (f.format ? {} : f)) : {}, out = {};
+    for (const [k, v] of Object.entries(m || {})) { const t = facadeText(v); if (t != null && facadeAddress(k)) out[k] = t; }
+    return out;
+  }
+  /** Put one text at a pointer below `obj`: only where the master has a text (a missing or non-text place is left alone). */
+  function facadeSet(obj, segs, text) {
+    let o = obj;
+    for (let i = 0; i < segs.length - 1; i++) { if (o == null || typeof o !== 'object') return false; o = o[segs[i]]; }
+    const k = segs[segs.length - 1];
+    if (!segs.length || o == null || typeof o !== 'object' || typeof o[k] !== 'string') return false;
+    o[k] = text; return true;
+  }
+  /** The master texts the bridges parse (etymology, pitfalls, subtleties: the polyglot layer reads them) kept beside a translated profile. */
+  const keepMasterProfile = p => { if (p && !p.$m) p.$m = { etymology: p.etymology && typeof p.etymology.text === 'string' ? p.etymology.text : '', pitfalls: (p.pitfalls || []).slice(), subtleties: (p.subtleties || []).slice() }; };
+  /** The word profiles of a course (course.profiles.js: {lexeme id: profile}) with a facade's x:<id>/profile/… texts → a new map. */
+  function facadeProfiles(map, facade) {
+    const T = facadeTexts(facade), out = { ...(map || {}) }, done = new Set();
+    for (const [addr, text] of Object.entries(T)) {
+      const a = facadeAddress(addr); if (!a || a[0] !== 'x' || a[2][0] !== 'profile' || !out[a[1]]) continue;
+      if (!done.has(a[1])) { out[a[1]] = JSON.parse(JSON.stringify(out[a[1]])); keepMasterProfile(out[a[1]]); done.add(a[1]); }
+      facadeSet(out[a[1]], a[2].slice(1), text);
+    }
+    return out;
+  }
+  /** What the runtime needs of each sentence besides its texts, computed from the master (§3): {id: {mk, time, date}} — the meaning
+   *  key (parallel sentences), the time and the date it names (clock, date exercises). tools/build.py stores them in course.pack.js. */
+  function masterStamps(data) {
+    const C0 = course(data), out = {};
+    for (const code of C0.languages) for (const S of C0.lang[code].sentences) out[S.id] = { mk: meaningKeyOf(S), time: clockOf(C0, code, S), date: dateOf(C0, code, S) };
+    return out;
+  }
+  /** A course (readCourse data) seen through a locale facade → a new data object: the facade's texts at their addresses, the master
+   *  everywhere else; course.explainLang = the facade's locale, course.masterLang = the master's. The keys the exercises use (s.mk,
+   *  s.time, s.date) and the texts the bridges parse (profile.$m) are taken from the master first, so a translation never breaks them. */
+  function applyFacade(data, facade) {
+    const T = facadeTexts(facade), locale = (facade && facade.locale) || null;
+    const master = data.course.masterLang || data.course.explainLang || 'en';
+    if (!locale || locale === master) return data;
+    const stamps = masterStamps(data), out = JSON.parse(JSON.stringify(data));
+    for (const L of Object.values(out.langs || {})) for (const s of L.bank || []) { const st = stamps[s.id]; if (st) { s.mk = st.mk; s.time = st.time; s.date = st.date; } }
+    for (const [addr, text] of Object.entries(T)) {
+      const a = facadeAddress(addr); if (!a) continue;
+      const obj = FACADE_ROOTS[a[0]](out, a[1]); if (!obj) continue;
+      if (a[0] === 'x' && a[2][0] === 'profile') keepMasterProfile(obj.profile);
+      facadeSet(obj, a[2], text);
+    }
+    // a quiz's answer is one of its options (they are compared): it follows the option it was in the master, whatever the translation says
+    for (const [code, L] of Object.entries(out.langs || {})) for (const [fid, g] of Object.entries(L.grammar || {})) (g.quiz || []).forEach((q, i) => {
+      const m = data.langs[code].grammar[fid].quiz[i], at = m && Array.isArray(m.options) ? m.options.indexOf(m.answer) : -1;
+      if (at >= 0 && Array.isArray(q.options) && typeof q.options[at] === 'string') q.answer = q.options[at];
+    });
+    out.course = { ...out.course, explainLang: locale, masterLang: master, facade: { locale, status: (facade && facade.status) || 'on' } };
+    return out;
+  }
+
   /* ---------- paths by language type (D10): which nodes apply to which language ---------- */
   const TYPES = ['isolating', 'agglutinating', 'fusional', 'polysynthetic'];
   const applies = (n, code, typ) => (!n.path || n.path === typ) && (!n.langs || n.langs.includes(code));
@@ -275,7 +436,7 @@
 
   /* ---------- the indexed course ---------- */
   function course(data) {
-    const C = { data, id: data.course.id, explainLang: data.course.explainLang || 'en', languages: data.course.languages.slice(),
+    const C = { data, id: data.course.id, explainLang: data.course.explainLang || 'en', masterLang: data.course.masterLang || data.course.explainLang || 'en', languages: data.course.languages.slice(),
       concepts: {}, nodes: {}, order: [], owner: {}, functions: {}, frames: {}, lang: {}, typology: data.typology || null };
     for (const f of data.fields) for (const c of f.concepts) C.concepts[c.id] = { ...c, field: f.field };
     for (const n of data.nodes) { C.nodes[n.id] = n; for (const c of n.concepts) C.owner[c] = n.id; }
@@ -331,7 +492,8 @@
   /* ---------- the learner ---------- */
   function newLearner(C, settings = {}) {
     const L = { course: C.id, settings: { languages: settings.languages || C.languages.slice(), depth: { ...(C.data.course.defaults?.depth || {}), ...(settings.depth || {}) },
-      batch: settings.batch || C.data.course.defaults?.batch || 12, ...(settings.knows ? { knows: settings.knows } : {}), ...(settings.aiNotes ? { aiNotes: true } : {}) }, langs: {} };
+      batch: settings.batch || C.data.course.defaults?.batch || 12, ...(settings.knows ? { knows: settings.knows } : {}), ...(settings.aiNotes ? { aiNotes: true } : {}),
+      ...(settings.speaker ? { speaker: settings.speaker } : {}) }, langs: {} };   // D19: the learner's choice of the explanation locale
     for (const code of C.languages) L.langs[code] = { items: {}, fns: {}, checks: {} };
     return L;
   }
@@ -943,7 +1105,8 @@
 
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
-    readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
+    readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, SUPPORTED_NATIVES, setExplainLocale, nativeOf, nativeKnows, contrastFor, explanationLocale, facadeUsable, nativeRule,
+    applyFacade, facadeProfiles, facadeAddress, facadeTexts, masterStamps, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
   /* ---------- P4 — Scripts and input: letters, characters, positional forms, vowel marks, tones, typed answers (§4.9, §5.5, §6.1, §8) ---------- */
@@ -2386,15 +2549,30 @@
     for (const [re, to] of CONTRACT) t = t.replace(re, to);
     return { key: t.replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim(), marks };
   }
+  /** A short stable hash of a text (cyrb53, base 36). */
+  function hash36(str) {
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let i = 0; i < str.length; i++) { const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+  }
+  /** The meaning key of a sentence (D19 §3: computed from the master gloss, stored as s.mk at build, kept by a facade):
+   *  {k: hash of the folded gloss, G?, N?, R?: the bracket marks}. A sentence without s.mk gets it from its gloss (the master). */
+  function meaningKeyOf(s) {
+    if (s && s.mk && typeof s.mk === 'object') return s.mk;
+    if (!s || !s.gloss) return null;
+    const g = glossKey(s.gloss); return { k: hash36(g.key), ...g.marks };
+  }
   /** Groups of bank sentences that mean the same in ≥ 2 course languages: [{key, frame, gloss, by: {lang: [{id, marks}]}}] (cached). */
   function parallelGroups(C) {
     if (C._par) return C._par.groups;
     const map = new Map(), of = {};
     for (const code of C.languages) for (const s of C.lang[code].sentences) {
       if (!s.frame || !s.gloss) continue;
-      const g = glossKey(s.gloss), key = s.frame + '|' + g.key;
+      const mk = meaningKeyOf(s), key = s.frame + '|' + mk.k, marks = {}; for (const m of ['G', 'N', 'R']) if (mk[m]) marks[m] = mk[m];
       let G = map.get(key); if (!G) map.set(key, G = { key, frame: s.frame, gloss: s.gloss, by: {} });
-      (G.by[code] = G.by[code] || []).push({ id: s.id, marks: g.marks });
+      (G.by[code] = G.by[code] || []).push({ id: s.id, marks });
       of[code + '|' + s.id] = G;
     }
     const groups = [...map.values()].filter(G => Object.keys(G.by).length >= 2);
@@ -2539,7 +2717,8 @@
     }
     // 2 · texts: etymologies (cognates, loans, the sources of loans), and the sentences that say “false friend”
     for (const code of C.languages) for (const lx of Object.values(C.lang[code].lex)) {
-      const p = lx.profile; if (!p) continue;
+      const p0 = lx.profile; if (!p0) continue;
+      const p = p0.$m ? { etymology: { text: p0.$m.etymology }, pitfalls: p0.$m.pitfalls, subtleties: p0.$m.subtleties } : p0;   // D19: always the master's texts (a facade keeps them in $m)
       const texts = [[p.etymology?.text || '', 'etymology'], ...(p.pitfalls || []).map(t => [t, 'pitfall']), ...(p.subtleties || []).map(t => [t, 'pitfall'])];
       for (const [text, src] of texts) {
         if (!text || (src === 'pitfall' && !/false friend/i.test(text))) continue;
@@ -2566,6 +2745,7 @@
       if (sharedSenses(C.lang[a.lang].lex[a.lex], C.lang[b.lang].lex[b.lex]).length) add('loan', a, b, 'source', lcX('lc.expl.bridgeSource', { lang: nameOf(k.split('|')[0]), word: a.word }));
     }
     const list = [...pairs.values()];
+    if (C.explainLang !== C.masterLang) { for (const b of list) if (!(b.via.length === 1 && b.via[0] === 'source')) b.note = ''; for (const x of knownL) x.note = ''; }   // D19: a sentence of the master is not shown through a facade
     for (const b of list) if (!b.note && b.roots) b.note = lcX('lc.expl.bridgeRoots', { a: b.roots[0], b: b.roots[1] });
     const byWord = new Map(); for (const b of list) for (const w of [b.a, b.b]) { const k = w.lang + '|' + w.lex; if (!byWord.has(k)) byWord.set(k, []); byWord.get(k).push(b); }
     return C._bridges = { stamp, list, known: knownL, byWord };
@@ -2757,7 +2937,7 @@
       const pairsQ = shuffled([f, ...same], rng);
       ffQ.push({ type: 'cognate_bridge', kind: 'false_friend', lang: f.a.lang, pairs: pairsQ.map(b => ({ a: b.a, b: b.b })), answer: pairsQ.indexOf(f), why: f.note });
     }
-    const ks = new Set(knowCodes(knows || L.settings.knows || (C.data.course.knownLanguages || [])));
+    const ks = new Set(knowCodes(knows || nativeKnows(nativeOf(C, null, L.settings.knows))));   // D19: links to the learner's native language only
     for (const x of shuffled(B.known.filter(x => ks.has(x.code) && langs.includes(x.lang) && ['loan', 'cognate', 'falseFriend'].includes(x.kind) && K[x.lang].R.has(x.lex)), rng)) {
       if (knownQ.length >= max) break;
       if (focus && x.lang !== focus) continue;
@@ -2810,7 +2990,7 @@
     return 0;
   }
   API.GEN = GEN;
-  Object.assign(API, { parallelGroups, parallelOf, equivalents, glossKey, bridges, bridgesOf, knownLinks, rootsCorrespond, mentionsIn, compareFn, polyItems, POLY_TYPES, romanOf, seeded });   // P6 — polyglot layer
+  Object.assign(API, { parallelGroups, parallelOf, equivalents, glossKey, meaningKeyOf, hash36, bridges, bridgesOf, knownLinks, rootsCorrespond, mentionsIn, compareFn, polyItems, POLY_TYPES, romanOf, seeded });   // P6 — polyglot layer
 
   /* ---------- P7 — Production and reading: translation, rewriting, writing, graded readers, numbers / clock / date, register, the tutor's context ----------
      docs/LANGUAGES.md §6.5, §7.1 (3), §8 Tutor. Every automatic answer comes from stored data (the bank, the lexicon); an AI model only
@@ -3094,6 +3274,8 @@
   const WEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map(d => 'time.' + d);
   /** The time a bank sentence names → {h, m} or null. */
   function clockOf(C, code, s) {
+    if (s && s.time !== undefined) return s.time;   // D19 §3: computed from the master gloss (tools/build.py, applyFacade)
+    if (C.explainLang !== C.masterLang) return null;   // a translated gloss is never read
     const X = C.lang[code], spec = CLOCK[code]; if (!spec) return null;
     const ws = flatWords(s), isClock = k => k.l && sensesOf(X, k.l).includes('time.oclock') && !/(^|;)(PL|DU)(;|$)/.test(k.f || ''), i = ws.findIndex(isClock);
     if (i < 0 || ws.filter(isClock).length > 1) return null;   // one time per sentence
@@ -3116,10 +3298,12 @@
     if (!digits && /\d:\d\d/.test(g)) return null;
     const enHour = new RegExp(`\\b(at|by|until|till|from|since|after|before) (${hw}|${h})\\b`).test(g) || new RegExp(`\\b(${hw}|${h}) o'clock`).test(g) || new RegExp(`\\b(half|quarter) past (${hw}|${h})\\b`).test(g);
     const enMin = m === 0 ? !/\b(half|quarter|past|to|minutes?)\b/.test(g.replace(/\b(at|by|until|from|since|after|before) /g, '')) : m === 30 ? new RegExp(`half past (${hw}|${h})\\b`).test(g) : new RegExp(`quarter past (${hw}|${h})\\b`).test(g);
-    return digits || (C.explainLang === 'en' && enHour && enMin) ? { h, m } : null;
+    return digits || (C.masterLang === 'en' && enHour && enMin) ? { h, m } : null;
   }
   /** The date a bank sentence names → {d, m} or null (a day number or ordinal next to a month word; the gloss must confirm it). */
   function dateOf(C, code, s) {
+    if (s && s.date !== undefined) return s.date;   // D19 §3: computed from the master gloss (tools/build.py, applyFacade)
+    if (C.explainLang !== C.masterLang) return null;   // a translated gloss is never read
     const X = C.lang[code], ws = flatWords(s);
     const isMonth = k => k.l && sensesOf(X, k.l).some(c => MONTHS.includes(c)), mi = ws.findIndex(isMonth); if (mi < 0 || ws.filter(isMonth).length > 1) return null;
     const mc = sensesOf(X, ws[mi].l).find(c => MONTHS.includes(c)), m = MONTHS.indexOf(mc) + 1;
@@ -3127,7 +3311,7 @@
     const near = []; for (const d of [-2, -1, 1, 2]) { const w = ws[mi + d]; if (!w || !w.l) continue; if (Math.abs(d) === 2 && !between(ws[mi + d / 2])) continue; const v = ordOf(X, w.l) ?? numOf(X, w.l); if (v != null && v >= 1 && v <= 31) near.push({ d: Math.abs(d), v }); }
     near.sort((a, b) => a.d - b.d); if (!near.length || (near[1] && near[1].d === near[0].d && near[1].v !== near[0].v)) return null;
     const day = near[0].v, g = String(s.gloss || '').toLowerCase(), mg = String(C.concepts[mc]?.gloss || '').toLowerCase();
-    const D = `(${day}(st|nd|rd|th)?${C.explainLang === 'en' && EN_ORD[day] ? '|' + EN_ORD[day] : ''})`;   // i18n-ignore (a regular expression over English glosses)
+    const D = `(${day}(st|nd|rd|th)?${C.masterLang === 'en' && EN_ORD[day] ? '|' + EN_ORD[day] : ''})`;   // i18n-ignore (a regular expression over English glosses)
     const ok = mg && (new RegExp(`\\b(the )?${D} of ${mg}\\b`).test(g) || new RegExp(`\\b${mg} ${D}\\b`).test(g) || new RegExp(`\\b${D}\\.? ?${mg}\\b`).test(g));
     return ok ? { d: day, m } : null;
   }
@@ -3234,7 +3418,7 @@
     const k = opts.k || known(C, L, code), words = [...k.R].slice(0, opts.cap || 120).map(l => `${X.lex[l].lemma} = ${glossOfLex(C, X, l)}`).join('; ');
     const system = `[noema:lang-judge] You grade the open answer of a learner of ${name} (course "${C.data.course.title}"). Write every explanation in the language with code "${expl}". Judge only what is asked; be precise and kind. ` +
       `The course's stored answers are the reference: you do not replace them. Accept every answer that is correct ${name} and says what was asked, even when it differs from the reference. ` +
-      `When you correct, change as little as possible and keep the learner's words. Never invent facts about the language; when unsure, say so in the feedback.\nThe learner knows these words: ${words || '(few yet)'}.`;
+      `When you correct, change as little as possible and keep the learner's words. Never invent facts about the language; when unsure, say so in the feedback.\n${nativeRule(opts.native)}\nThe learner knows these words: ${words || '(few yet)'}.`;
     let prompt, schema = AI_VERDICT;
     if (task.kind === 'translate') prompt = `The learner had to say in ${name}: "${task.gloss}".\nThe course's answer(s): ${task.reference.map(r => `"${r}"`).join(' / ')}.\nThe learner wrote: "${task.answer}".\nIs it correct ${name} with this meaning? verdict: correct (fully right), acceptable (right meaning, small slips), wrong. corrected: the learner's sentence, minimally corrected (or unchanged when it is right). mistakes: each error with the right form and why.`;
     else if (task.kind === 'rewrite') prompt = `The sentence: "${task.source}" ("${task.sourceGloss}").\nThe task: ${constraintEn(task.constraint)}\n${task.reference?.length ? `One answer the course knows: ${task.reference.map(r => `"${r}"`).join(' / ')}.\n` : ''}The learner wrote: "${task.answer}".\nDoes it do the task in correct ${name}? verdict: correct, acceptable (does it, small slips) or wrong (wrong language, wrong meaning or the task not done). corrected: the learner's sentence minimally corrected. mistakes: each error.`;
@@ -3246,7 +3430,7 @@
   function readerTask(C, L, code, opts = {}) {
     const X = C.lang[code], k = opts.k || known(C, L, code), name = langLabel(C, code);
     const words = [...k.R].slice(0, opts.cap || 200).map(l => X.lex[l].lemma).join(', ');
-    return { name: 'reader', system: `[noema:lang-reader] You write graded reading texts for a learner of ${name}. Use ONLY words from the learner's list, in any of their forms; at most one word per sentence may be outside it. Simple, natural, neutral sentences; no names of real people.`,
+    return { name: 'reader', system: `[noema:lang-reader] You write graded reading texts for a learner of ${name}. Use ONLY words from the learner's list, in any of their forms; at most one word per sentence may be outside it. Simple, natural, neutral sentences; no names of real people. ${nativeRule(opts.native)}`,
       prompt: `The learner's words: ${words}.\nWrite a short text (${opts.sentences || 5} sentences) in ${name}${opts.topic ? ` about "${opts.topic}"` : ''}: one object per sentence, with its translation into the language with code "${opts.chatLang || C.explainLang}".`,
       schema: { type: 'object', required: ['title', 'sentences'], properties: { title: { type: 'string' }, sentences: { type: 'array', minItems: 2, items: { type: 'object', required: ['text', 'gloss'], properties: { text: { type: 'string' }, gloss: { type: 'string' } } } } } },
       // the validator decides: sentences that fail are dropped by the UI; a repair is asked only when fewer than three would remain
@@ -3285,7 +3469,7 @@
   function tutorTask(C, L, code, ctx = {}, opts = {}) {
     const t = tutorContext(C, L, code, ctx, opts), lang = opts.chatLang || C.explainLang;
     const system = `[noema:lang-tutor] You are ${opts.tutorName ? `"${opts.tutorName}", ` : ''}the tutor of a learner of ${t.langName} (course "${C.data.course.title}"). Explain in the language with code "${lang}"; write ${t.langName} where you give examples or talk in it. ` +
-      `Describe languages neutrally: no language is the norm.\nRULE: ${t.rule}\n${t.intent ? 'WHY THIS CONVERSATION WAS OPENED: ' + t.intent + '\n' : ''}` +
+      `Describe languages neutrally: no language is the norm. ${nativeRule(opts.native)}\nRULE: ${t.rule}\n${t.intent ? 'WHY THIS CONVERSATION WAS OPENED: ' + t.intent + '\n' : ''}` +
       `THE LEARNER'S KNOWN WORDS in ${t.langName} (${t.words.length} of ${t.total}${t.total > t.words.length ? ', the best known first' : ''}): ${t.words.map(w => `${w.lemma} = ${w.gloss}`).join('; ') || '(none yet — use very simple words and gloss each one)'}\n` +
       (t.context ? '\n' + t.context + '\n' : '') +
       `\nAnswer with: reply (your message; markdown **bold** allowed) and target (every sentence or phrase in ${t.langName} that your reply contains, exactly as written in it).`;
@@ -3359,7 +3543,7 @@
       return { record, data };
     }
     /** The record of a library course: only its refill queue lives in the account (the learner's private patch). */
-    const libraryRecord = (C, now = Date.now()) => ({ format: FORMAT, id: C.id, origin: 'library', title: C.data.course.title, languages: C.languages.slice(), explainLang: C.explainLang, depth: {}, knownLanguages: C.data.course.knownLanguages || [], provider: 'claudeapp', created: iso(now), updated: iso(now), rev: 0, tasks: [], log: [] });
+    const libraryRecord = (C, now = Date.now()) => ({ format: FORMAT, id: C.id, origin: 'library', title: C.data.course.title, languages: C.languages.slice(), explainLang: C.masterLang || C.explainLang, depth: {}, knownLanguages: C.data.course.knownLanguages || [], provider: 'claudeapp', created: iso(now), updated: iso(now), rev: 0, tasks: [], log: [] });
     const emptyPatch = (cid) => ({ format: PATCH, course: cid, rev: 0, langs: {} });
     /** A library course with the learner's patch laid over it (refill sentences, §7.4). Mutates and returns data. */
     function applyPatch(data, patch) {

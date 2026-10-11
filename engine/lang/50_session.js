@@ -78,5 +78,5 @@ function runSession(plan, { only = null } = {}) {
   next();
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
-function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
+function addProfiles(map) { UI.profMap = map; const n = N.addProfiles(UI.C, facadeProfMap(map)); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
 window.NoemaLangUI = { start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };

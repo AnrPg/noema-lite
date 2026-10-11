@@ -7,8 +7,8 @@ function blocks(c, list) {
   return (list || []).map(b => {
     const el = block1(c, b, t);
     if (!el || !b) return el;
-    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));
-    const body = mine.length ? h('div', {}, el, notesList(mine)) : el;
+    const mine = N.contrastFor(b.notes, nativeL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));   // D19: only the learner's native language (or its type)
+    const body = mine.length ? h('div', {}, el, notesList(mine, c)) : el;
     // D18: a part the learner knows from a native / C2 language is folded into one line
     return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, '✓ ' + LT('lang.gram.familiarShow', { from: LLIST(from) })), body) : body;
   });
@@ -30,18 +30,19 @@ function block1(c, b, t) {
 }
 const REL_SIGN = { same: '=', similar: '≈', different: '≠', new: '✨', trap: '⚠️' };
 const REL_LABEL = new Proxy({}, { get: (o, r) => typeof r === 'string' && REL_SIGN[r] ? REL_SIGN[r] + ' ' + LT('lang.gram.rel.' + r) : undefined });   // lang.gram.rel.<rel>
-function notesList(notes) {
-  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, capFirst(langName(n.for))), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn('en', n.text))));
+/** Comparison notes in a list: who it is for (the native language, or its type / branch / family), how it relates, the text — foreign script in its font (c: the language on screen). */
+function notesList(notes, c = UI.lang) {
+  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, capFirst(langName(n.for))), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn(c, n.text))));
 }
-/** Comparison notes (D18): those for the learner's languages open, the whole reference set folded. */
+/** Comparison notes (D19): only those for the learner's native language — or, when it is not supported, for its branch, family or type
+ *  (N.contrastFor). No notes for other languages, no fold of them; nothing until the native language is known. */
 function notesView(c, notes, fid) {
   const all = [...(notes || []), ...((UI.prefs.aiNotes || {})[c + '|' + fid] || [])];
-  const mine = N.notesFor(UI.C, all, knowsL()), rest = all.filter(n => !mine.includes(n));
+  const nat = nativeL(), mine = N.contrastFor(all, nat);
   const wantAI = UI.L.settings.aiNotes && window.NoemaLLM?.pick?.(UI.acc);
-  const missing = knowsL().filter(k => k.code ? !all.some(n => n.for === k.code) : true);
+  const missing = nat && !all.some(n => (n.ai || nat.supported) && (n.for === nat.code || n.for === nat.name)) ? [nat] : [];   // D18: Claude / Gemini may write one for the learner's own language
   const box = h('div', { class: 'lx-notesbox' });
-  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(mine)) : null,
-    rest.length ? h('details', { class: 'lx-sec' }, h('summary', {}, '🌐 ' + LT('lang.gram.fromOthers') + ' ', h('span', { class: 'tiny' }, LNUM(rest.length))), notesList(rest)) : null,
+  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(mine, c)) : null,
     wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, '✨ ' + LT('lang.gram.notesFor', { langs: LLIST(missing.map(k => k.name || langName(k.code))) })) : null);
   return box;
 }
@@ -57,11 +58,12 @@ What the course says:
 ${g.summary}
 
 For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || profileOf(k.code)?.name || langDisplay(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
-Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.` });
+Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.
+Write the notes in the language with code "${UI.C.explainLang}". ${N.nativeRule(nativeL())}` });
     /* i18n-ignore-end */
     const notes = (r.data.notes || []).map(n => ({ ...n, ai: true }));
     UI.prefs.aiNotes = { ...(UI.prefs.aiNotes || {}), [c + '|' + fid]: [...((UI.prefs.aiNotes || {})[c + '|' + fid] || []), ...notes] }; save();
-    btn.replaceWith(notesList(notes));
+    btn.replaceWith(notesList(notes, c));
   } catch (e) { btn.disabled = false; btn.textContent = '✨ ' + ((window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed')); }
 }
 /** Mixed text: runs of Arabic, Hebrew or Chinese script get their own span (font, direction), the rest stays as it is. */
