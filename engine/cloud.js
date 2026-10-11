@@ -536,6 +536,14 @@
       await this.deleteObjects('noema-public', [`${uid()}/${id}.json`, ...(old?.meta?.filePaths || [])]).catch(() => { });
     },
     async myPublished() { return call(`/rest/v1/noema_public_packs?select=subject_id,title,updated_at,meta&owner=eq.${uid()}`); },
+    /* ---------- the page others see (Me › Me, docs/PROFILE.md): one row per person, readable by everybody once published ---------- */
+    async myPage() { return session() ? ((await call(`/rest/v1/noema_public_profiles?select=*&owner=eq.${uid()}`)) || [])[0] || null : null; },
+    async saveMyPage(p) {
+      const row = { owner: uid(), published: !!p.published, display_name: p.display_name || null, emoji: p.emoji || null, bio: p.bio || null, avatar: p.avatar || null, show: p.show || {}, card: p.card || {}, updated_at: new Date().toISOString() };
+      await call('/rest/v1/noema_public_profiles?on_conflict=owner', { method: 'POST', body: [row], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+      return row;
+    },
+    async publicPage(owner) { return ((await call(`/rest/v1/noema_public_profiles?select=*&owner=eq.${enc(owner)}`, { auth: !!session() })) || [])[0] || null; },
     /** Upload source files for sharing → { map: { srcId: { path, name, type, size, chunks } }, paths: [every object written] } */
     async uploadShareFiles(bucket, pathOf, files, onProgress) {
       const map = {}, paths = []; let k = 0;

@@ -141,8 +141,17 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(!(await page.evaluate(() => document.body.classList.contains('ns-mapmode'))), 'leaving the map gives the page back');
 
   console.log('E. Me');
-  await page.click('#ns-topme'); await wait(400);
-  ok(await page.evaluate(() => location.hash) === '#/me' && (await texts(page, '.ns-view h1'))[0] === 'My account', 'Me › My account');
+  { const items = await menuItems(page, '#ns-topme');
+    ok(JSON.stringify(items) === JSON.stringify(['Me', 'Settings', 'Help', 'My subjects', 'Switch account', 'Log out']), 'Me ▾: Me · Settings · Help · My subjects — Switch account · Log out: ' + items.join(' · '));
+    await page.click('#ns-topme'); await wait(250);
+    ok(await page.$$eval('.ns-pop.ns-mepop > hr', l => l.length) === 1 && await page.$eval('.ns-pop.ns-mepop', p => { const r = p.getBoundingClientRect(); return r.right <= innerWidth && r.top > 0; }), 'a line before Switch account / Log out; the menu stays on the screen');
+    await page.click('#ns-topme'); await wait(200);
+    ok(!(await page.$('.ns-pop')), 'tapping Me again closes it'); }
+  await pick(page, '#ns-topme', 'Settings'); await wait(400);
+  ok(await page.evaluate(() => location.hash) === '#/me' && (await texts(page, '.ns-view h1'))[0] === 'Settings', 'Me ▾ › Settings');
+  { const l = await texts(page, '.ns-view .ns-list .ns-item b');
+    ok(!l.includes('Help') && !l.includes('My subjects') && l.includes('Profile') && l.includes('Data and sync'), 'Settings: Help and My subjects have their own places now: ' + l.join(' · '));
+    ok(await page.$('.ns-view .ns-fitrow .ns-logout') && (await texts(page, '.ns-view .ns-fitrow button')).join('|') === 'Switch profile|Log out', 'Log out next to Switch profile'); }
   await page.click('.ns-seg button:nth-child(3)'); await wait(300);
   ok((await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))).includes('lang'), 'what I learn: both → the Languages tab appears');
   await page.click('.ns-seg button:nth-child(1)'); await wait(200);
@@ -210,7 +219,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('#ns-top .ns-focus'); await wait(200);
   ok(!(await page.$('#ns-top .ns-focus')), 'tapping the clock stops the sprint');
   const homes = {}; for (const t of ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help']) { await page.evaluate(t => openAccountMenu(t), t); await wait(300); homes[t] = await page.evaluate(() => location.hash); }
-  ok(JSON.stringify(homes) === JSON.stringify({ profile: '#/me/profile', settings: '#/me/ai', subjects: '#/me/subjects', backup: '#/me/data', cloud: '#/me/data', help: '#/me/help' }), 'every tab of the old account menu has its page under Me: ' + JSON.stringify(homes));
+  ok(JSON.stringify(homes) === JSON.stringify({ profile: '#/me/profile', settings: '#/me/ai', subjects: '#/subjects', backup: '#/me/data', cloud: '#/me/data', help: '#/help' }), 'every tab of the old account menu has its page (Settings, Help, My subjects): ' + JSON.stringify(homes));
   await page.goto(url + '#/me/data'); await wait(500);
   ok(await page.evaluate(() => document.querySelectorAll('.ns-accbody details.accsec').length >= 4 && !document.querySelector('.ns-accbody details.accsec[open]')), 'Me › Data and sync: cloud, backup and restore, folded');
   await page.goto(url + '#/me/help'); await wait(400);
@@ -275,6 +284,47 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.goto(url + '#/subject'); await wait(300); await page.goto(url + '#/cards'); await wait(600);
   ok(await page.$('.flash.has-ask .exask .exface svg') && !(await page.$('.lockbar')), 'a flashcard has the quiet “Ask <character>” in its corner');
 
+  console.log('J. Me ▾: My subjects, the page others see, Help');
+  await page.goto(url + '#/me/subjects'); await until(() => page.$('.ns-subjtree .ns-sgrp'), 8000);
+  ok(await page.evaluate(() => location.hash) === '#/subjects', 'the old address #/me/subjects leads to My subjects');
+  await page.evaluate(cid => { const C = NoemaCurriculum, acc = Noema.account.id, c = C.get(acc, cid); c.nodes.f.pack = { id: SUBJ.id, status: 'ready', title: SUBJ.title }; C.save(acc, c); }, cid);
+  await page.goto(url + '#/'); await page.goto(url + '#/subjects'); await until(() => page.$(`.ns-sgrp[data-k="c:${cid}"]`), 8000);
+  { const tree = await page.$$eval('.ns-subjtree > .ns-sgrp', l => l.map(d => d.dataset.k + (d.open ? '+' : '')));
+    ok(tree[0] === 'c:' + cid && tree.includes('shelf') && tree.every(k => !k.endsWith('+')), 'grouped by Roadmap (then the Shelf), every group folded: ' + tree.join(',')); }
+  await page.click(`.ns-sgrp[data-k="c:${cid}"] > summary`); await page.click(`.ns-sgrp[data-k="c:${cid}/f"] > summary`); await wait(250);
+  { const chs = await page.$$eval(`.ns-sgrp[data-k="c:${cid}/f"] .ns-sch`, l => l.length), inner = await page.$$eval(`.ns-sgrp[data-k="c:${cid}"] .ns-sgrp`, l => l.length);
+    ok(inner >= 1 && chs > 0, 'Roadmap › station › the chapters of its subject: ' + inner + ' station(s), ' + chs + ' chapters'); }
+  ok(has(await menuItems(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`), ['Study', 'Put it on a Roadmap', 'Edit', 'Export the package', 'Hide from the subject list']), 'a subject’s ⋮: study, Roadmap, edit, export the package, hide');
+  ok(!(await page.locator('.ns-view button', { hasText: 'Export “' }).count()), 'no loose “Export …” button any more');
+  await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Hide from the subject list'); await wait(400);
+  ok(await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).hiddenSubjects.includes(SUBJ.id)) && await page.$(`.ns-sgrp[data-k="c:${cid}/f"][open] .ns-hid`), 'hide: marked, and the open groups stay open');
+  await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Show in the subject list'); await wait(400);
+  await page.setViewportSize({ width: 760, height: 844 }); await wait(300);
+  { const fr = await page.$eval('.ns-view > .ns-fitrow', r => ({ stack: r.classList.contains('stack'), labels: [...r.children].map(b => b.textContent.trim()), tips: [...r.children].map(b => b.getAttribute('aria-description')) }));
+    ok(!fr.stack && fr.labels.join('|') === 'Create with Claude|Shelf|Import' && fr.tips.every(Boolean), 'three short buttons in one row, each explained: ' + JSON.stringify(fr)); }
+  await page.hover('.ns-fitrow [data-act="import"]'); await wait(250);
+  ok(/\.zip/.test(await page.$eval('.ns-hovertip', t => t.textContent)) && await page.$eval('.ns-hovertip', t => { const r = t.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth; }), 'hovering shows the explanation, inside the screen');
+  await page.mouse.move(0, 0);
+  await page.setViewportSize({ width: 300, height: 700 }); await wait(400);
+  ok(await page.$eval('.ns-view > .ns-fitrow', r => r.classList.contains('stack')), 'when they do not fit in one row: one under the other, never ragged');
+  await page.setViewportSize({ width: 390, height: 844 }); await wait(200);
+  await page.evaluate(() => { scrollTo(0, 0); document.getElementById('ns-top').classList.remove('hide'); }); await wait(200);
+  await pick(page, '#ns-topme', 'Me'); await until(() => page.$('.ns-pfhead'), 6000);
+  ok(await page.evaluate(() => location.hash) === '#/profile' && /Only you see this page/.test(await page.locator('.ns-view').innerText()) && !(await page.$('[data-act="publish"]')) && /cloud account/.test(await page.locator('.ns-view').innerText()), 'Me ▾ › Me: your page, private; a local profile is told it needs a cloud account to publish');
+  ok(!(await page.$('.ns-pfpart')), 'nothing of you is shown until you switch it on');
+  await page.click('[data-act="edit"]'); await until(() => page.$('.ns-pfsheet textarea'), 4000);
+  await page.fill('.ns-pfsheet textarea', 'I study physics\nand Greek.');
+  await page.click('.ns-pfsheet .ns-pfsw:has(input[data-part="progress"])'); await page.click('.ns-pfsheet .ns-pfsw:has(input[data-part="topics"])');
+  await page.setInputFiles('.ns-pfsheet input[type="file"]', { name: 'me.png', mimeType: 'image/png', buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEklEQVR4nGP4z8CAB+GTG8HSALfKY52fTcuYAAAAAElFTkSuQmCC', 'base64') });
+  await until(() => page.$('.ns-pfsheet img.ns-avatar'), 4000);
+  await page.click('.ns-pfsheet [data-act="save"]'); await wait(600);
+  { const p = await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:mypage`)));
+    ok(p.bio === 'I study physics\nand Greek.' && p.show.progress && p.show.topics && !p.show.achievements && /^data:image\/jpeg;base64,/.test(p.avatar) && !p.published, 'saved: a few words, the picture (small, JPEG), what you switched on, still private');
+    ok(await page.$('.ns-pfpart[data-part="progress"]') && await page.$('.ns-pfpart[data-part="topics"]') && !(await page.$('.ns-pfpart[data-part="achievements"]')) && (await page.$eval('.ns-pfbiotext', x => x.textContent)) === 'I study physics\nand Greek.' && await page.$('.ns-pfhead img.ns-avatar'), 'the page shows the picture, the words and only the parts switched on'); }
+  await page.evaluate(() => { scrollTo(0, 0); document.getElementById('ns-top').classList.remove('hide'); }); await wait(200);
+  await pick(page, '#ns-topme', 'Help'); await wait(600);
+  ok(await page.evaluate(() => location.hash) === '#/help' && (await texts(page, '.ns-crumbs b'))[0] === 'Help', 'Me ▾ › Help: its own page');
+
   console.log('G. Greek, wide screens');
   await page.evaluate(() => { NoemaThemes.putSettings({ lang: 'el' }); }); await page.goto(url + '#/learn'); await page.reload(); await wait(1500);
   ok((await texts(page, '.ns-tab .lb')).join(',') === 'Σήμερα,Γνώσεις,Ανακάλυψη,Πρόοδος', 'Greek tabs: ' + (await texts(page, '.ns-tab .lb')).join(','));
@@ -285,6 +335,12 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   const rail = await page.$eval('.ns-tabs', t => { const r = t.getBoundingClientRect(); return [r.left, r.width, r.height]; });
   ok(rail[0] === 0 && rail[1] === 100 && rail[2] > 800 && await page.$eval('.ns-railme', x => getComputedStyle(x).display !== 'none') && await page.$eval('#ns-topme', x => getComputedStyle(x).display === 'none'), 'wide screens: the rail on the left, “Me” at its foot');
   await page.screenshot({ path: SHOTS + '/sh_g1_wide.png' });
+  ok(await page.evaluate(() => document.querySelector('.ns-railme .ns-mename').textContent === Noema.account.name && !!Noema.account.name), 'under the avatar: the account’s name, not “Me”');
+  await page.click('.ns-railme'); await wait(250);
+  ok(await page.$eval('.ns-pop.ns-mepop', p => { const r = p.getBoundingClientRect(); return r.bottom <= innerHeight && r.left >= 0 && r.top >= 0; }), 'wide screens: “Me” at the rail’s foot opens the same menu, upwards');
+  if (!(await page.$('.ns-pop.ns-mepop'))) { await page.click('.ns-railme'); await wait(250); }
+  await page.click('.ns-pop.ns-mepop button:last-of-type'); await until(() => page.$('.noema-accgrid'), 25000);   // Log out (whatever the menus' language)
+  ok(await page.$('.noema-accgrid') && await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:current') || '{}').loggedOut), 'Log out: the list of profiles opens, even with only one profile');
 
   ok(!E.length, 'no errors in the console' + (E.length ? ': ' + E.slice(0, 5).join(' | ') : ''));
   await browser.close();

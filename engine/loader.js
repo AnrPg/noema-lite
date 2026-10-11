@@ -816,7 +816,9 @@
   }
   if (SHELL()) {
     NoemaShell.registerWorld('lang', { page: langPage, route: langRoute, create: langCreate, today: langToday,
-      menu: () => langMenu(jget(LANG_LAST(KV.acc), null)) });
+      menu: () => langMenu(jget(LANG_LAST(KV.acc), null)),
+      // the page others see (Me › Me, docs/PROFILE.md): the courses the learner has started → [{ id, title, languages: [code], words }]
+      studying: () => langCourses(KV.acc).map(m => ({ m, p: langProgress(KV.acc, m) })).filter(x => x.p.started).map(({ m, p }) => ({ id: m.courseId, title: m.title, languages: p.langs, words: p.words })) });
     addEventListener('hashchange', () => {   // leaving a course: the frame's own pages again; a subject's page: that subject is the one a reload reopens
       const hs = location.hash || '#/', inCourse = /^#\/lang\/[^/]+/.test(hs);
       if (!inCourse) { document.body.classList.remove('lx-frame'); window.NoemaLangUI?.prod?.closeLangTutor?.(); document.querySelector('.lx-pop')?.remove(); if (window.NoemaLangUI?.FR?.on) document.title = CFG.appName || 'noema-lite'; }
@@ -1640,7 +1642,7 @@
     const cur = jget(P + 'current', {});
     let acc = getAccount(url.get('account') || cur.acc);
     const accs = allAccounts();
-    if (!acc) acc = accs.length === 1 ? accs[0] : await pickAccount();
+    if (!acc) acc = accs.length === 1 && !cur.loggedOut ? accs[0] : await pickAccount();   // after Log out (Me ▾) the list of profiles, even with only one
     KV.acc = acc.id; Noema.account = acc;
     GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }

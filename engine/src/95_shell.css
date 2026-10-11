@@ -227,6 +227,56 @@ button.ns-item:hover{background:color-mix(in srgb,var(--acc-soft) 50%,var(--pape
 .ns-shelflink:hover{color:var(--ink2);background:var(--line)}
 .linkish{color:var(--ink2)}
 
+/* ---------- Me ▾, My subjects, the page others see (2026-10-11) ---------- */
+.ns-pop.ns-mepop{position:fixed;z-index:96}
+.ns-mename{display:block;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ns-railme[aria-expanded="true"] .ns-me,#ns-topme[aria-expanded="true"]{box-shadow:0 0 0 3px var(--acc-soft)}
+.ns-fitrow{display:flex;gap:8px;flex-wrap:nowrap;align-items:center;margin-top:4px}
+.ns-fitrow>*{flex:none;white-space:nowrap}
+.ns-fitrow .btn{gap:7px}
+.ns-fitrow .btn svg.i{width:17px;height:17px;flex:none}
+.ns-fitrow.stack{flex-direction:column;align-items:stretch}
+.ns-fitrow.stack>*{justify-content:center;white-space:normal}
+.ns-hovertip{position:fixed;z-index:99;max-width:min(300px,calc(100vw - 16px));padding:7px 11px;border-radius:10px;background:var(--ink);color:var(--bg);font-size:.84rem;line-height:1.35;pointer-events:none;animation:ns-fade .15s;box-shadow:0 8px 20px -10px rgba(0,0,0,.4)}
+.ns-subjtree{gap:10px}
+.ns-sgrp .ns-sgrp{border:0;border-top:1px solid var(--line);border-radius:0}
+.ns-sgrp .ns-sgrp>summary{padding:11px 14px;border-radius:0}
+.ns-sstations{display:flex;flex-direction:column}
+.ns-sst{flex:1;min-width:0;display:flex;flex-direction:column}
+.ns-sst b{font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.ns-sst small{color:var(--ink3);font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ns-hid{color:var(--ink3);opacity:.7}
+.ns-sbody{padding:0 14px 12px;display:flex;flex-direction:column;gap:8px}
+.ns-sbody>.ns-itemwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.ns-sbody .ns-item{padding:10px 12px}
+.ns-schs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ns-sch{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:7px 8px;border-radius:10px;color:var(--ink2);font-size:.92rem}
+.ns-sch:hover{background:color-mix(in srgb,var(--acc-soft) 45%,transparent)}
+.ns-sch .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:700;background:var(--line);color:var(--ink3)}
+.ns-sch.done .n{background:var(--t2);color:var(--t2i)}
+.ns-sch .ns-svg{color:var(--t2i)}
+.ns-avatar{object-fit:cover;flex:none;width:36px;height:36px;border-radius:50%}
+img.ns-avatar.big,.ns-avatar.big{width:72px;height:72px;font-size:2rem}
+.ns-pfhead{align-items:flex-start}
+.ns-pfbiotext{margin:.3em 0 0;color:var(--ink2);white-space:pre-line;overflow-wrap:anywhere}
+.ns-pfstate{display:flex;align-items:center;gap:4px;color:var(--ink3)}
+.ns-pfstate svg.i,.ns-pfedit .btn svg.i{width:16px;height:16px}
+.ns-pfedit .btn{gap:7px}
+.ns-pffoot{display:flex;flex-direction:column;gap:8px}
+.ns-pffoot p{margin:0}
+.ns-pfstats{display:flex;flex-wrap:wrap;gap:6px}
+.ns-pfpart{display:flex;flex-direction:column;gap:8px}
+.ns-pfshares{display:flex;flex-direction:column;gap:6px}
+.ns-pfedit{display:flex;flex-direction:column;gap:10px}
+.ns-pfedit .row.nowrap{align-items:center;gap:14px}
+.ns-pfbio{width:100%;resize:vertical;min-height:90px}
+.ns-pfsws .ns-pfsw{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer}
+.ns-pfsws .ns-pfsw+.ns-pfsw{border-top:1px solid var(--line)}
+.ns-pfsw .grow{display:flex;flex-direction:column}
+.ns-pfsw small{color:var(--ink3);font-size:.82rem}
+.ns-who{align-self:center;opacity:.55}
+.ns-who:hover,.ns-who:focus-visible{opacity:1}
+
 /* ---------- ⋮ menus, tips, sheets ---------- */
 .ns-menu{position:relative;display:inline-flex}
 .ns-pop{position:absolute;bottom:calc(100% + 6px);inset-inline-start:0;z-index:50;min-width:250px;max-width:min(340px,calc(100vw - 24px));max-height:min(70vh,520px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 30px -12px rgba(0,0,0,.3);padding:6px;display:flex;flex-direction:column;animation:ns-in .2s;text-align:start}

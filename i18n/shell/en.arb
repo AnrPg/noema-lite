@@ -2500,5 +2500,294 @@
   "sh.nativeNone": "— not set —",
   "@sh.nativeNone": {
     "description": "Me › Language & appearance: the first option of the native-language picker (none set yet)."
+  },
+  "sh.menuMeSub": "Your page, as others see it",
+  "@sh.menuMeSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your page, as others see it”. In the code: L('menuMeSub'), icon: 'user', href: '#/profile' },"
+  },
+  "sh.settings": "Settings",
+  "@sh.settings": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Settings”. In the code: L('settings'), sub: L('settingsSub'), icon: 'gear', href: '#/me' },"
+  },
+  "sh.settingsSub": "Character, AI, appearance, data",
+  "@sh.settingsSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Character, AI, appearance, data”. In the code: L('settingsSub'), icon: 'gear', href: '#/me' },"
+  },
+  "sh.subjectsSub": "By Roadmap, station and chapter",
+  "@sh.subjectsSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “By Roadmap, station and chapter”. In the code: L('subjectsSub'), icon: 'book', href: '#/subjects' },"
+  },
+  "sh.switchAccount": "Switch account",
+  "@sh.switchAccount": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Switch account”. In the code: L('switchAccount'), icon: 'people', run: () => N().openAccountPicker?.() },"
+  },
+  "sh.logOut": "Log out",
+  "@sh.logOut": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Log out”. In the code: L('logOut'), icon: 'logout', run: logOut }], { down: !rail });"
+  },
+  "sh.logOutQ": "Log out of “{name}”? Your progress stays in your cloud account; you sign in again with your e-mail and password.",
+  "@sh.logOutQ": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Log out of “{name}”? Your progress stays in your cloud account; you sign in again with your e-mail and password.”. In the code: L('logOutQ', { name: a.name || a.email || '' }))) return; await C?.push(a.id).catch(() => { }); awai",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.logOutTip": "Leave this account on this device; the profile list opens",
+  "@sh.logOutTip": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Leave this account on this device; the profile list opens”. In the code: L('logOutTip'))));"
+  },
+  "sh.pfEditTip": "Change your picture, the few words about you and what others see",
+  "@sh.pfEditTip": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Change your picture, the few words about you and what others see”. In the code: L('pfEditTip')),"
+  },
+  "sh.pfEdit": "Edit my page",
+  "@sh.pfEdit": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Edit my page”. In the code: L('pfEdit')), L('pfEditTip')),"
+  },
+  "sh.pfDone": "Done",
+  "@sh.pfDone": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Done”. In the code: L('pfDone')))));"
+  },
+  "sh.pfPhoto": "Change picture",
+  "@sh.pfPhoto": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Change picture”."
+  },
+  "sh.pfPhotoAdd": "Add a picture",
+  "@sh.pfPhotoAdd": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Add a picture”."
+  },
+  "sh.pfPhotoDel": "Remove picture",
+  "@sh.pfPhotoDel": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Remove picture”. In the code: L('pfPhotoDel'));"
+  },
+  "sh.pfPhotoBad": "That picture could not be read.",
+  "@sh.pfPhotoBad": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “That picture could not be read.”. In the code: L('pfPhotoBad'), 4000); } } });"
+  },
+  "sh.pfBio": "About me",
+  "@sh.pfBio": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “About me”. In the code: L('pfBio') }); bio.value = p.bio || '';"
+  },
+  "sh.pfBioPh": "A few words about you and what you study",
+  "@sh.pfBioPh": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “A few words about you and what you study”. In the code: L('pfBioPh'), 'aria-label': L('pfBio') }); bio.value = p.bio || '';"
+  },
+  "sh.pfShow": "What others see",
+  "@sh.pfShow": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “What others see”. In the code: L('pfShow')), h('p', { class: 'tiny' }, L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ..."
+  },
+  "sh.pfShowSub": "Everything stays private until you publish your page. Then only what you switch on here is shown.",
+  "@sh.pfShowSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Everything stays private until you publish your page. Then only what you switch on here is shown.”. In the code: L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ...sw),"
+  },
+  "sh.pfProgress": "Progress",
+  "@sh.pfProgress": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Progress”."
+  },
+  "sh.pfProgressSub": "Level, XP, streak, chapters completed",
+  "@sh.pfProgressSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Level, XP, streak, chapters completed”."
+  },
+  "sh.pfAch": "Achievements",
+  "@sh.pfAch": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Achievements”."
+  },
+  "sh.pfAchSub": "The treasures you found",
+  "@sh.pfAchSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “The treasures you found”."
+  },
+  "sh.pfLangs": "Languages I study",
+  "@sh.pfLangs": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Languages I study”."
+  },
+  "sh.pfLangsSub": "Your language courses",
+  "@sh.pfLangsSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your language courses”."
+  },
+  "sh.pfTopics": "Topics I study",
+  "@sh.pfTopics": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Topics I study”."
+  },
+  "sh.pfTopicsSub": "Your Roadmaps and the subjects you study",
+  "@sh.pfTopicsSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your Roadmaps and the subjects you study”."
+  },
+  "sh.pfShares": "What I share",
+  "@sh.pfShares": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “What I share”."
+  },
+  "sh.pfSharesSub": "Your public Roadmaps and subjects",
+  "@sh.pfSharesSub": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your public Roadmaps and subjects”."
+  },
+  "sh.pfPublish": "Publish my page",
+  "@sh.pfPublish": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Publish my page”."
+  },
+  "sh.pfPublishTip": "Anyone with noema-lite can then see your page, with only the parts you switched on",
+  "@sh.pfPublishTip": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Anyone with noema-lite can then see your page, with only the parts you switched on”. In the code: L('pfPublishTip')) : null,"
+  },
+  "sh.pfUnpublish": "Make it private",
+  "@sh.pfUnpublish": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Make it private”."
+  },
+  "sh.pfPublic": "Your page is public",
+  "@sh.pfPublic": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your page is public”."
+  },
+  "sh.pfPrivate": "Only you see this page",
+  "@sh.pfPrivate": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Only you see this page”."
+  },
+  "sh.pfSaved": "Saved",
+  "@sh.pfSaved": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Saved”. In the code: L('pfSaved'), 2000); } catch (er) { toast(L('pfCloudErr', { e: er.message }), 5000); }"
+  },
+  "sh.pfNeedCloud": "To publish your page, sign in with a cloud account (Settings › Data and sync).",
+  "@sh.pfNeedCloud": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “To publish your page, sign in with a cloud account (Settings › Data and sync).”. In the code: L('pfNeedCloud')), acts));"
+  },
+  "sh.pfLink": "Copy the link",
+  "@sh.pfLink": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Copy the link”. In the code: L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLinkTip')) : null);"
+  },
+  "sh.pfLinkTip": "The address of your page, to send to someone",
+  "@sh.pfLinkTip": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “The address of your page, to send to someone”. In the code: L('pfLinkTip')) : null);"
+  },
+  "sh.pfLinkCopied": "Link copied",
+  "@sh.pfLinkCopied": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Link copied”. In the code: L('pfLinkCopied'), 2500), () => prompt(L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLink"
+  },
+  "sh.pfLevel": "Level {lv, number}",
+  "@sh.pfLevel": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Level {lv}”. In the code: L('pfLevel', { lv: pr.level }), 1), pill(L('pfXp', { xp: (pr.xp || 0).toLocaleString(lang()) }), 2),",
+    "placeholders": {
+      "lv": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.pfXp": "{xp, number} XP",
+  "@sh.pfXp": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{xp} XP”. In the code: L('pfXp', { xp: (pr.xp || 0).toLocaleString(lang()) }), 2), pr.streak ? pill(L('streakDays', { n: ",
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.pfWords": "{n, number} words",
+  "@sh.pfWords": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{n} words”. In the code: L('pfWords', { n: x.words }) : null].filter(Boolean).join(' · ')))))) : none()),",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.pfNone": "Nothing here yet.",
+  "@sh.pfNone": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Nothing here yet.”. In the code: L('pfNone')), pr = card.progress;"
+  },
+  "sh.pfMissing": "This page is private, or it does not exist.",
+  "@sh.pfMissing": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “This page is private, or it does not exist.”. In the code: L('pfMissing')))); return; }"
+  },
+  "sh.pfCloudErr": "Could not reach the cloud: {e}",
+  "@sh.pfCloudErr": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Could not reach the cloud: {e}”. In the code: L('pfCloudErr', { e: er.message }), 5000); } draw(); } }, svg(p.published ? 'lock' : 'globe'), L(p.p",
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.pfOpen": "{who}: their page",
+  "@sh.pfOpen": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{who}: their page”. In the code: L('pfOpen', { who: x.owner_name || '…' }), onclick: () => go('#/u/' + encodeURIComponent(x.owner)) }",
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.pfSharedRm": "Roadmaps",
+  "@sh.pfSharedRm": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Roadmaps”. In the code: L('pfSharedRm')) : null, rl.length ? h('div', { class: 'ns-list' }, ...rl.map((x, i) => h('button', "
+  },
+  "sh.pfSharedSubj": "Subjects",
+  "@sh.pfSharedSubj": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Subjects”. In the code: L('pfSharedSubj')) : null, sl.length ? h('div', { class: 'ns-list' }, ...sl.map((x, i) => h('button'"
+  },
+  "sh.pfUpdated": "Updated {date}",
+  "@sh.pfUpdated": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Updated {date}”. In the code: L('pfUpdated', { date: fmtDate(r.updated_at) })));",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.subjLead": "Grouped by Roadmap and station; open a group to see its subjects and chapters. Subjects on no Roadmap are on the Shelf.",
+  "@sh.subjLead": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Grouped by Roadmap and station; open a group to see its subjects and chapters. Subjects on no Roadmap are on the Shelf.”. In the code: L('subjLead')));"
+  },
+  "sh.subjStations": "{n, plural, one {# station} other {# stations}}",
+  "@sh.subjStations": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{n} stations”. In the code: L('subjStations', { n: ids.length }), 1)],",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.subjHidden": "Hidden subjects",
+  "@sh.subjHidden": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Hidden subjects”. In the code: L('subjHidden') }, svg('eye')) : null, pct ? pill(pct + '%', 2) : chs.length ? pill(L('nChapters', {"
+  },
+  "sh.subjHide": "Hide from the subject list",
+  "@sh.subjHide": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Hide from the subject list”."
+  },
+  "sh.subjShow": "Show in the subject list",
+  "@sh.subjShow": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Show in the subject list”."
+  },
+  "sh.subjOpen": "Open",
+  "@sh.subjOpen": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Open”. In the code: L('subjOpen'))),"
+  },
+  "sh.subjNone": "No subjects yet.",
+  "@sh.subjNone": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “No subjects yet.”. In the code: L('subjNone')))]));"
+  },
+  "sh.bCreate": "Create with Claude",
+  "@sh.bCreate": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Create with Claude”. In the code: L('bCreate')), L('createClaudeSub')),"
+  },
+  "sh.bShelf": "Shelf",
+  "@sh.bShelf": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Shelf”. In the code: L('bShelf')), L('bShelfTip')),"
+  },
+  "sh.bImport": "Import",
+  "@sh.bImport": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Import”. In the code: L('bImport')), L('importFileSub'))));"
+  },
+  "sh.bShelfTip": "The subjects that are on no Roadmap",
+  "@sh.bShelfTip": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “The subjects that are on no Roadmap”. In the code: L('bShelfTip')),"
+  },
+  "sh.exportCurTip": "Export “{title}” with its source files (.zip)",
+  "@sh.exportCurTip": {
+    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Export “{title}” with its source files (.zip)”.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   }
 }

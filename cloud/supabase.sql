@@ -326,5 +326,25 @@ create policy "noema curricula delete" on storage.objects for delete to authenti
   ((storage.foldername(name))[2] = 'steps' and (storage.foldername(name))[3] = (select auth.uid())::text)
   or public.noema_cur_access((storage.foldername(name))[1]) = 'owner'));
 
--- 11) Check: should list the 9 noema_ tables with rls_enabled = true
+-- 11) THE PAGE OTHERS SEE (Me › Me, docs/PROFILE.md): one row per person. Private until its owner publishes it; then
+--     everybody (also signed-out visitors) may read it. `card` holds only the parts the owner switched on (progress,
+--     achievements, languages, topics); the picture is a small image kept in the row (data:image/…), never a file.
+create table if not exists public.noema_public_profiles (
+  owner        uuid primary key default auth.uid() references auth.users(id) on delete cascade,
+  published    boolean not null default false,
+  display_name text check (char_length(display_name) <= 80),
+  emoji        text check (char_length(emoji) <= 16),
+  bio          text check (char_length(bio) <= 600),
+  avatar       text check (avatar is null or (char_length(avatar) <= 200000 and avatar ~ '^data:image/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$')),
+  show         jsonb not null default '{}'::jsonb,   -- which parts the owner shows: progress, achievements, languages, topics, shares
+  card         jsonb not null default '{}'::jsonb,   -- the shown parts, as of updated_at
+  updated_at   timestamptz not null default now()
+);
+alter table public.noema_public_profiles enable row level security;
+drop policy if exists "public pages readable" on public.noema_public_profiles;
+drop policy if exists "own public page"       on public.noema_public_profiles;
+create policy "public pages readable" on public.noema_public_profiles for select to anon, authenticated using (published or owner = (select auth.uid()));
+create policy "own public page"       on public.noema_public_profiles for all to authenticated using (owner = (select auth.uid())) with check (owner = (select auth.uid()));
+
+-- 12) Check: should list the 10 noema_ tables with rls_enabled = true
 select tablename, rowsecurity as rls_enabled from pg_tables where schemaname = 'public' and tablename like 'noema_%' order by 1;
