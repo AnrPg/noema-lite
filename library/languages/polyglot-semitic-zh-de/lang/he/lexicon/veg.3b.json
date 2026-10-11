@@ -816,7 +816,7 @@
      {
       "word": "פִּרְחֵי זוּקִינִי",
       "register": "informal",
-      "nuance": "with the Italian/English zucchini; frequent on restaurant menus"
+      "nuance": "with the loanword זוּקִינִי; frequent on restaurant menus"
      }
     ],
     "etymology": {
@@ -834,6 +834,13 @@
     "subtleties": [
      "On menus the Italian word is common too: פִּרְחֵי זוּקִינִי.",
      "Everyday spelling with י: פרחי קישוא."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Menus also say פִּרְחֵי זוּקִינִי, with *zucchini* borrowed."
+     }
     ]
    }
   },

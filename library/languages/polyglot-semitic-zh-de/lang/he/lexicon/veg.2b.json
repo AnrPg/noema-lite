@@ -906,7 +906,7 @@
      "Like German Kohl, it goes back to Latin caulis “stalk, cabbage”."
     ],
     "pitfalls": [
-     "Pronounced keil, as in English; masculine: קֵייל טָרִי.",
+     "- Pronounced keil.\n- Masculine: קֵייל טָרִי.",
      "A young word: older dictionaries do not have it."
     ],
     "subtleties": [
@@ -927,6 +927,11 @@
       "for": "pt",
       "rel": "same",
       "text": "It goes back to Latin caulis, like couve."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Borrowed from *kale* and said the same way: keil."
      }
     ]
    }
@@ -1037,7 +1042,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Korean kimchi is usually made from this cabbage.",
+     "Kimchi is usually made from this cabbage.",
      "German calls it Chinakohl, “China cabbage”, like the Hebrew name."
     ],
     "pitfalls": [

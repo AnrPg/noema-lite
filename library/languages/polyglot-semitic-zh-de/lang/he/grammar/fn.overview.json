@@ -70,7 +70,7 @@
   },
   {
    "title": "Gender everywhere — even in “you”",
-   "text": "Every noun is masculine or feminine (no neuter, no “it”): הַסֵּפֶר? הוּא פֹּה “the book? it (he) is here”. You say אַתָּה to a man and אַתְּ to a woman, and present-tense verbs change for gender and number, not for person: אֲנִי / אַתָּה / הוּא אוֹכֵל (a man), אֲנִי / אַתְּ / הִיא אוֹכֶלֶת (a woman).",
+   "text": "Every noun is masculine or feminine (no neuter: a thing is הוּא or הִיא too): הַסֵּפֶר? הוּא פֹּה “the book? it (he) is here”. You say אַתָּה to a man and אַתְּ to a woman, and present-tense verbs change for gender and number, not for person: אֲנִי / אַתָּה / הוּא אוֹכֵל (a man), אֲנִי / אַתְּ / הִיא אוֹכֶלֶת (a woman).",
    "typology": [
     {
      "feature": "nom.genderCount",

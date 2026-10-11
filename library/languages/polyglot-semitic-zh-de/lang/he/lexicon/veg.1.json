@@ -2227,13 +2227,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian broccoli is already a plural (“little sprouts”); Hebrew treats the word as a singular mass noun."
+     "The name comes from a plural (“little sprouts”); Hebrew treats the word as a singular mass noun."
     ],
     "pitfalls": [
      "No plural: a mass noun, masculine — בְּרוֹקוֹלִי טָעִים. Count florets: פִּרְחֵי בְּרוֹקוֹלִי."
     ],
     "subtleties": [
      "Stress on the first syllable: BRO-ko-li."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "*Broccoli* is a plural in Italian; בְּרוֹקוֹלִי is a singular mass noun.\n→ בְּרוֹקוֹלִי טָעִים"
+     }
     ]
    }
   },

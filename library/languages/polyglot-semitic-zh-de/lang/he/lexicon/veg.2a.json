@@ -2629,10 +2629,17 @@
      "Radicchio is a red-leaved variety of chicory (Cichorium intybus) — botanically a kind of עֹלֶשׁ."
     ],
     "pitfalls": [
-     "Masculine: רָדִיקְיוֹ טָרִי. The Italian cch is pronounced k: ra-DIK-yo."
+     "- Masculine: רָדִיקְיוֹ טָרִי.\n- Said with k: ra-DIK-yo."
     ],
     "subtleties": [
      "A loan that takes the Hebrew article normally: הָרָדִיקְיוֹ."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The *cch* of *radicchio* is a k in Hebrew too: ra-DIK-yo."
+     }
     ]
    }
   },

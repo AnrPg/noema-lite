@@ -19,7 +19,7 @@
    "value": "none"
   }
  ],
- "summary": "Hebrew has ten subject pronouns. In the second and third person they show gender in the singular and in the plural: אַתָּה “you” to a man, אַתְּ to a woman; הוּא “he”, הִיא “she”; אַתֶּם / אַתֶּן “you (pl.)”; הֵם / הֵן “they”. A group with at least one man takes the masculine plural. There is no “it” (a thing is הוּא or הִיא by its gender) and no polite “you”. In the present tense the pronoun is required, because the verb shows only gender and number; in the past and future the verb ending already shows the person, so the pronoun is often left out.",
+ "summary": "Hebrew has ten subject pronouns. In the second and third person they show gender in the singular and in the plural: אַתָּה “you” to a man, אַתְּ to a woman; הוּא “he”, הִיא “she”; אַתֶּם / אַתֶּן “you (pl.)”; הֵם / הֵן “they”. A group with at least one man takes the masculine plural. A thing is הוּא or הִיא by its gender — there is no neuter pronoun — and there is no polite form of address. In the present tense the pronoun is required, because the verb shows only gender and number; in the past and future the verb ending already shows the person, so the pronoun is often left out.",
  "blocks": [
   {
    "t": "table",
@@ -95,12 +95,24 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No “it”",
+   "title": "No neuter pronoun",
    "text": "Things are “he” or “she” by their gender: הַסֵּפֶר? הוּא פֹּה “the book? it is here” (סֵפֶר is masculine); הַמְּנוֹרָה? הִיא שָׁם (מְנוֹרָה is feminine). For a situation, or when you point at something, Hebrew uses זֶה (lesson 3).",
    "typology": [
     {
      "feature": "nom.genderCount",
      "value": "two"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English *it* has no Hebrew counterpart: a thing is הוּא or הִיא by its gender.\n→ הַסֵּפֶר? הוּא פֹּה — the book? it is here"
+    },
+    {
+     "for": "de",
+     "rel": "different",
+     "text": "There is no *es*: a thing is הוּא or הִיא by its own gender.\n→ הַסֵּפֶר? הוּא פֹּה — das Buch? es ist hier"
     }
    ]
   },
@@ -142,7 +154,7 @@
    "Am I talking about myself (אֲנִי / אֲנַחְנוּ), to someone (אַתָּה / אַתְּ / אַתֶּם / אַתֶּן) or about someone (הוּא / הִיא / הֵם / הֵן)?",
    "One person or more than one?",
    "Is it a man or a woman — and for a group, is there at least one man? (Then masculine plural.)",
-   "Is it a thing? Then use הוּא or הִיא by the noun’s gender — there is no “it”.",
+   "Is it a thing? Then use הוּא or הִיא by the noun’s gender — Hebrew has no neuter pronoun.",
    "Is the sentence in the present? Then keep the pronoun; in the past or future it can be dropped."
   ],
   "steps": [
@@ -155,7 +167,7 @@
  "traps": [
   "אַתְּ (to a woman) vs אַתָּה (to a man): the most common beginner mistake is to use אַתָּה for everyone.",
   "A mixed group is masculine: אַתֶּם, הֵם — even if most of them are women.",
-  "There is no “it”: *זֶה הוּא פֹּה is wrong for “it is here”; say הוּא פֹּה (for a masculine thing).",
+  "Hebrew has no neuter pronoun: *זֶה הוּא פֹּה is wrong for “it is here”; say הוּא פֹּה (for a masculine thing).",
   "There is no polite form: do not look for a “Sie” — אַתָּה / אַתְּ is polite enough with בְּבַקָּשָׁה.",
   "Do not insert a verb “to be” after the pronoun: אֲנִי מוֹרֶה, not *אֲנִי הוּא מוֹרֶה."
  ],
