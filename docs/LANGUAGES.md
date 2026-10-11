@@ -15,7 +15,7 @@
 > page's language and one per type — `type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`,
 > `branch:Semitic`; `profile.notes` on words; `notes` on phenomena) · the **locale facades** (`facades/<locale>/`, the
 > master translated and adapted). Every course, package, tool, skill and prompt follows it; `tools/lang_facade.py lint` and
-> `tools/validate_lang.py` check it (warnings until the content is rewritten, errors with `--d19-strict`).
+> `tools/validate_lang.py` check it (errors by default since 2026-10-11, when the library course passed them; `--d19-lenient` makes them warnings).
 >
 > **R1–R3 (the owner, 2026-10-11, amending D19 — `docs/language-packs.md` §2.2–§2.4).**
 > **R1 · three sections of comparisons.** (1) **“From your languages”**: the note for the learner's native language

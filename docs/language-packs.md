@@ -171,7 +171,7 @@ library/languages/_phenomena/facades/<locale>/<L>.json · _typology/facades/<loc
 | `python3 tools/lang_facade.py parity <course> --locale <loc>` | every master address present, nothing stale, target-language runs preserved, counts per tier / field / language; writes `facades/<loc>/PARITY.md` |
 | `python3 tools/lang_facade.py lint <course> [--locale <loc>]` | **no language outside the course** in the master's general texts or a facade (language names of the locale from CLDR + `tools/i18n/langnames/`), English-anchored explanations ("no ‘do’", "-ing form") flagged; notes: a valid `for`, a note names only its own language, every required note present; provenance, older stages, varieties of the course languages, cuisine / plant / people adjectives and quoted glosses are not comparisons; R2 structure warnings |
 | `python3 tools/lang_facade.py task <course> --locale <loc> --tier 1` | the translation tasks (chunks per language and file) for Claude, with the glossary of the locale |
-| `python3 tools/validate_lang.py <course>` | runs the lint and the required-notes rule (replaces "≥ 8 reference languages"), R2 structure warnings, R3 (the map file, every parameter on every word, the checklist) |
+| `python3 tools/validate_lang.py <course>` | runs the lint and the required-notes rule (replaces "≥ 8 reference languages"), R2 structure warnings, R3 (the map file, every parameter on every word, the checklist) — the D19 rules and the R3 map file are errors since 2026-10-11 (`--d19-lenient`: warnings) |
 
 ## 5. Packages and authoring
 

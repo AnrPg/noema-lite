@@ -18,7 +18,7 @@ missing here or when one of the places below does not point to this file.
 > `type:isolating`, `type:polysynthetic`, `branch:Semitic` (a type note names no language); `profile.notes` on words;
 > `notes` on phenomena. Notes are written in English (the master) with examples in the note's own language; provenance
 > ("borrowed from English") is allowed in etymologies. Locale facades (`facades/<locale>/`) are separate, later tasks.
-> Check: `python3 tools/lang_facade.py lint <course>`; `tools/validate_lang.py` (warnings now, errors with `--d19-strict`).
+> Check: `python3 tools/lang_facade.py lint <course>`; `tools/validate_lang.py` (errors by default since 2026-10-11; `--d19-lenient` makes them warnings).
 >
 > **R1–R3 (2026-10-11, with D19; `docs/language-packs.md` §2.2–§2.4).**
 > **R1** — comparisons are shown in **three sections**: “From your languages” (the native's note **first**, then one per
