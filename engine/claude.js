@@ -15,6 +15,13 @@ window.NoemaClaude = (() => {
   const VERSION_HDR = '2023-06-01';
   const SKILL_NAME = 'noema-pack-builder';
   const wait = ms => new Promise(r => setTimeout(r, ms));
+  /* errors with a stable code (docs/i18n.md §6): .message stays English (it also goes to Claude in tool results), .code/.params
+     give the learner's words: NoemaI18n.err(e). Progress lines and job errors are written in the UI language (CT). */
+  const CT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+  const errText = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
+  const errInfo = e => e ? { code: e.code || null, params: e.params || {}, message: String(e.message || e) } : null;
+  const coded = (message, code, params = {}) => Object.assign(new Error(message), { code, params });
+  const usd = (x, d = 0) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(x, { style: 'currency', currency: 'USD', minimumFractionDigits: d, maximumFractionDigits: Math.max(d, 2), useGrouping: false }) : '$' + x.toFixed(d);   // en: $20 · $3.40 (as before)
 
   /* ---------- the key: on THIS device only (never synced to the cloud, never in backups) ---------- */
   const kk = acc => 'noema-device:anthropicKey:' + acc;
@@ -27,16 +34,19 @@ window.NoemaClaude = (() => {
   };
 
   /* ---------- HTTP with friendly errors and retries ---------- */
-  class ApiError extends Error { constructor(msg, status, type) { super(msg); this.status = status; this.type = type; } }
+  class ApiError extends Error { constructor(msg, status, type, code, params) { super(msg); this.status = status; this.type = type; this.code = code || null; this.params = params || {}; } }
+  /** An answer of the Claude API → [English message, code, params] (err.ai.*). */
   function friendly(status, type, msg) {
     const m = String(msg || '');
-    if (status === 401) return 'The key was not accepted — check that you copied all of it (it starts with sk-ant-), or create a new one.';
-    if (status === 403) return 'This key is not allowed to do that (' + m + '). Use a key from your own workspace.';
-    if (/credit balance|billing|purchase credits/i.test(m)) return 'Your Claude API account has no credit left. Add credit: platform.claude.com → Settings → Billing.';
-    if (status === 413) return 'A file is too big for the Claude API (' + m + '). Split the PDF or attach fewer files.';
-    if (status === 429) return 'Too many requests or the spending limit was reached — waiting and trying again… (' + m + ')';
-    if (status === 529 || type === 'overloaded_error') return 'Claude is busy right now — trying again…';
-    return m || ('HTTP ' + status);
+    /* i18n-ignore-start */   // the English .message of each code (the catalog has the same words: i18n/errors/en.arb)
+    if (status === 401) return ['The key was not accepted — check that you copied all of it (it starts with sk-ant-), or create a new one.', 'ai.unauthorized'];
+    if (status === 403) return ['This key is not allowed to do that (' + m + '). Use a key from your own workspace.', 'ai.forbidden', { detail: m }];
+    if (/credit balance|billing|purchase credits/i.test(m)) return ['Your Claude API account has no credit left. Add credit: platform.claude.com → Settings → Billing.', 'ai.no_credit'];
+    if (status === 413) return ['A file is too big for the Claude API (' + m + '). Split the PDF or attach fewer files.', 'ai.too_large', { detail: m }];
+    if (status === 429) return ['Too many requests or the spending limit was reached — waiting and trying again… (' + m + ')', 'ai.rate_limited', { detail: m }];
+    if (status === 529 || type === 'overloaded_error') return ['Claude is busy right now — trying again…', 'ai.overloaded'];
+    return m ? [m, 'ai.api', { status, detail: m }] : ['HTTP ' + status, 'ai.http', { status }];   // ai.api: the API's own words (no catalog entry: shown as they are)
+    /* i18n-ignore-end */
   }
   async function api(key, path, { method = 'GET', json, form, raw = false, signal, retries = 6 } = {}) {
     const headers = { 'x-api-key': key, 'anthropic-version': VERSION_HDR, 'anthropic-dangerous-direct-browser-access': 'true' };
@@ -45,9 +55,9 @@ window.NoemaClaude = (() => {
       let r;
       try { r = await fetch(API() + path, { method, headers, body: json !== undefined ? JSON.stringify(json) : form, signal }); }
       catch (e) {
-        if (signal?.aborted) throw new ApiError('Stopped.', 0, 'aborted');
+        if (signal?.aborted) throw new ApiError('Stopped.', 0, 'aborted', 'ai.aborted');   // i18n-ignore (English .message)
         if (attempt < retries) { await wait(Math.min(30000, 1500 * 2 ** attempt)); continue; }
-        throw new ApiError('No connection to Claude (' + e.message + '). Check the internet connection and press Resume.', 0, 'network');
+        throw new ApiError('No connection to Claude (' + e.message + '). Check the internet connection and press Resume.', 0, 'network', 'ai.network', { detail: e.message });   // i18n-ignore (English .message)
       }
       if (r.ok) return raw ? r : (r.status === 204 ? null : r.json());
       let body = {}; try { body = await r.json(); } catch (e) { }
@@ -56,7 +66,8 @@ window.NoemaClaude = (() => {
       if (transient && attempt < retries && !/credit balance/i.test(msg)) {
         const ra = +r.headers.get('retry-after'); await wait(ra > 0 ? Math.min(ra * 1000, 60000) : Math.min(60000, 2000 * 2 ** attempt)); continue;
       }
-      throw new ApiError(friendly(r.status, type, msg), r.status, type);
+      const [fm, code, params] = friendly(r.status, type, msg);
+      throw new ApiError(fm, r.status, type, code, params);
     }
   }
 
@@ -83,7 +94,7 @@ window.NoemaClaude = (() => {
   const skKey = async key => 'noema-device:claudeSkill:' + await sha(new TextEncoder().encode(key));
   async function ensureSkill(key, onLog = () => { }) {
     const zr = await fetch(SITE() + '/downloads/noema-pack-builder.zip', { cache: 'no-cache' });
-    if (!zr.ok) throw new Error('Could not load the skill from noema-lite (' + zr.status + ').');
+    if (!zr.ok) throw coded('Could not load the skill from noema-lite (' + zr.status + ').', 'ai.skill_unavailable', { status: zr.status });   // i18n-ignore (English .message)
     const zip = await zr.arrayBuffer(); const ver = await sha(zip);
     const sk = await skKey(key); let cached = null; try { cached = JSON.parse(localStorage.getItem(sk) || 'null'); } catch (e) { }
     let field = 'files[]';
@@ -97,8 +108,8 @@ window.NoemaClaude = (() => {
       try { const l = await api(key, '/v1/skills?source=custom&limit=100', { retries: 2 }); const f = (l?.data || []).find(s => (s.display_title || s.display_name || s.name) === SKILL_NAME || s.name === SKILL_NAME); if (f) id = f.id; } catch (e) { }
     }
     if (id && cached?.id === id && cached.ver === ver) return id;
-    if (id) { onLog('📦 Updating the noema-pack-builder skill in your Claude workspace…'); await post(`/v1/skills/${id}/versions`, f => f); return remember(id); }
-    onLog('📦 Adding the noema-pack-builder skill to your Claude workspace (only the first time)…');
+    if (id) { onLog('📦 ' + CT('err.ui.claude.skillUpdating')); await post(`/v1/skills/${id}/versions`, f => f); return remember(id); }
+    onLog('📦 ' + CT('err.ui.claude.skillAdding'));
     const r = await post('/v1/skills', f => { f.append('display_title', SKILL_NAME); return f; });
     return remember(r.id);
   }
@@ -127,21 +138,29 @@ window.NoemaClaude = (() => {
   async function downloadImage(url) {
     url = window.NoemaImgLib ? NoemaImgLib.resolvePictureUrl(url) : url;   // Wikimedia file pages / thumbnails → the picture file
     const tries = [() => fetch(url, { mode: 'cors', referrerPolicy: 'no-referrer' })];
-    if (SITE()) tries.push(() => fetch(SITE() + '/api/img?url=' + encodeURIComponent(url)));
-    let last = '';
+    if (SITE()) tries.push(() => fetch(SITE() + '/api/img?url=' + encodeURIComponent(url), { headers: { accept: 'image/*, application/json;q=0.5' } }));   // JSON: a refusal comes with its code (docs/i18n.md §6)
+    let last = null;   // the last failure: { code, params, message } (message in English)
     for (const t of tries) {
       try {
         const r = await t();
-        if (!r.ok) { last = (await r.text().catch(() => '')).slice(0, 160) || 'HTTP ' + r.status; continue; }
+        if (!r.ok) { last = await proxyError(r); continue; }
         let b = await r.blob(); const fin = r.headers.get('x-final-url') || (r.url && !/\/api\/img\?/.test(r.url) ? r.url : null);
-        if (!/^image\//.test(b.type)) { const t = await sniff(b); if (!t) { last = 'not a picture (' + (b.type || 'unknown type') + ') — the picture service finds the main picture of a page by itself; if this fails, give the image file url'; continue; } b = new Blob([b], { type: t }); }
+        if (!/^image\//.test(b.type)) { const t = await sniff(b); if (!t) { last = { code: 'img.not_picture_page', params: { type: b.type || 'unknown type' }, message: 'not a picture (' + (b.type || 'unknown type') + ') — the picture service finds the main picture of a page by itself; if this fails, give the image file url' }; continue; } b = new Blob([b], { type: t }); }   // i18n-ignore (English .message)
         if (fin) try { Object.defineProperty(b, '_url', { value: fin }); } catch (e) { }   // the picture a page / Wikimedia link led to: kept as the pack's url
         return b;
-      } catch (e) { last = e.message; }
+      } catch (e) { last = { code: e.code || null, params: e.params || {}, message: e.message }; }
     }
-    throw new Error('Could not download the picture: ' + last);
+    throw coded('Could not download the picture: ' + (last ? last.message : ''), 'img.download_failed', { detail: last ? errText(last) : '' });   // i18n-ignore (English .message; detail in the UI language)
   }
-  function loadImg(src) { return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('the file is not a readable picture')); i.src = src; }); }
+  /** A refused answer of a picture host or of /api/img → { code, params, message }: the picture service answers
+      { error: { code, params, message } } to new clients and plain text (+ x-error-code / x-error-params) to older ones (docs/i18n.md §6). */
+  async function proxyError(r) {
+    let txt = ''; try { txt = await r.text(); } catch (e) { }
+    try { const j = JSON.parse(txt); if (j && j.error && typeof j.error === 'object' && j.error.message) return { code: j.error.code || null, params: j.error.params || {}, message: String(j.error.message).slice(0, 160) }; } catch (e) { }
+    let code = null, params = {}; try { code = r.headers.get('x-error-code'); params = JSON.parse(decodeURIComponent(r.headers.get('x-error-params') || '') || '{}'); } catch (e) { }
+    return txt ? { code, params, message: txt.slice(0, 160) } : { code: 'img.http', params: { status: r.status }, message: 'HTTP ' + r.status };   // i18n-ignore
+  }
+  function loadImg(src) { return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(coded('the file is not a readable picture', 'img.unreadable')); i.src = src; }); }   // i18n-ignore (English .message)
   function encode(img, maxSide, type = 'image/jpeg', q = 0.86) {
     const s = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
     const c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
@@ -151,7 +170,7 @@ window.NoemaClaude = (() => {
   /** → { data (data URI kept for the pack), w, h, mime, preview (base64 JPEG ≤ 1568 px for Claude to look at) } */
   async function webImage(url) {
     const blob = await downloadImage(url); const finalUrl = blob._url || (window.NoemaImgLib ? NoemaImgLib.resolvePictureUrl(url) : url);
-    if (blob.size > 15 * 1024 * 1024) throw new Error('picture larger than 15 MB');
+    if (blob.size > 15 * 1024 * 1024) throw coded('picture larger than 15 MB', 'img.picture_too_large', { max: 15 });   // i18n-ignore (English .message)
     let data = await blobToDataUrl(blob); const img = await loadImg(data);
     let w = img.naturalWidth || 0, h = img.naturalHeight || 0, mime = blob.type;
     if (/svg/.test(mime) && (!w || !h)) { w = 1200; h = 900; }
@@ -172,11 +191,12 @@ window.NoemaClaude = (() => {
         if (got.w && m.w && Math.abs(got.w / got.h - m.w / m.h) > 0.02) console.warn('[pictures] aspect differs for', id);
       } catch (e) { failed.push(id); }
     }
-    if (n) onLog(`🖼️ ${n} web picture(s) embedded`); if (failed.length) onLog(`⚠️ ${failed.length} picture(s) could not be downloaded now — they load from the web when shown: ${failed.join(', ')}`);
+    if (n) onLog('🖼️ ' + CT('err.ui.claude.picturesEmbedded', { n })); if (failed.length) onLog('⚠️ ' + CT('err.ui.claude.picturesFailed', { n: failed.length, ids: failed.join(', ') }));
     return { embedded: n, failed };
   }
 
   /* ---------- the conversation ---------- */
+  /* i18n-ignore-start */   // prompts, tool definitions and messages for Claude: English (docs/i18n.md §5.2, approach 6)
   const today = () => new Date().toISOString().slice(0, 10);
   const SYSTEM = (job = {}) => `You are building a noema-lite subject pack for the user, running inside the noema-lite app through the Claude API (the user is watching a progress screen; they are not technical).
 The noema-pack-builder skill is available in your code-execution container — follow its SKILL.md and both references completely (coverage, quality bar, ≥ 3 picture exercises per picture, all three kinds of pictures). Differences in THIS environment:
@@ -244,6 +264,7 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
     if (pdfAsDocument && files.some(f => /pdf/.test(f.type))) blocks.push({ type: 'text', text: 'Note: the PDFs above are attached as documents (not inside the container): read them directly; for pictures from the PDFs, redraw the important figures with svgkit.' });
     return { role: 'user', content: blocks };
   }
+  /* i18n-ignore-end */
   const fileIdsIn = blocks => {
     const ids = [];
     for (const b of blocks || []) {
@@ -252,14 +273,15 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
     }
     return ids;
   };
+  /** One progress line for a block of Claude's answer (in the UI language; Claude's own text stays as written). */
   const describe = b => {
     if (b.type === 'text') return b.text.trim() ? '💬 ' + b.text.trim().split('\n')[0].slice(0, 220) : '';
-    if (b.type === 'server_tool_use' && b.name === 'web_search') return '🔎 Searching: ' + (b.input?.query || '');
-    if (b.type === 'server_tool_use' && b.name === 'web_fetch') return '📖 Reading: ' + String(b.input?.url || '').replace(/^https?:\/\//, '').slice(0, 90);
-    if (b.type === 'server_tool_use' && /bash/.test(b.name)) { const c = String(b.input?.command || ''); return '🛠️ ' + (/make_pack/.test(c) ? 'Checking and building the pack' : /pdf_text|pdftotext/.test(c) ? 'Reading the PDF' : /extract_images/.test(c) ? 'Finding pictures in the sources' : /svgkit|Diagram|Plot/.test(c) ? 'Drawing diagrams' : /chapters|json\.dump/.test(c) ? 'Writing chapters' : 'Working: ' + c.split('\n')[0].slice(0, 90)); }
-    if (b.type === 'server_tool_use' && /text_editor/.test(b.name)) return '📝 ' + (b.input?.command === 'view' ? 'Reading ' : 'Writing ') + String(b.input?.path || '').split('/').pop();
-    if (b.type === 'tool_use' && b.name === 'noema_web_image') return '🖼️ Fetching a picture: ' + String(b.input?.url || '').split('/').pop().slice(0, 80);
-    if (b.type === 'tool_use' && b.name === 'noema_image_search') return '🔎 Searching pictures: ' + String(b.input?.query || '').slice(0, 80);
+    if (b.type === 'server_tool_use' && b.name === 'web_search') return '🔎 ' + CT('err.ui.claude.searching', { query: b.input?.query || '' });
+    if (b.type === 'server_tool_use' && b.name === 'web_fetch') return '📖 ' + CT('err.ui.claude.reading', { url: String(b.input?.url || '').replace(/^https?:\/\//, '').slice(0, 90) });
+    if (b.type === 'server_tool_use' && /bash/.test(b.name)) { const c = String(b.input?.command || ''); return '🛠️ ' + (/make_pack/.test(c) ? CT('err.ui.claude.building') : /pdf_text|pdftotext/.test(c) ? CT('err.ui.claude.readingPdf') : /extract_images/.test(c) ? CT('err.ui.claude.findingPictures') : /svgkit|Diagram|Plot/.test(c) ? CT('err.ui.claude.drawing') : /chapters|json\.dump/.test(c) ? CT('err.ui.claude.writingChapters') : CT('err.ui.claude.working', { command: c.split('\n')[0].slice(0, 90) })); }
+    if (b.type === 'server_tool_use' && /text_editor/.test(b.name)) return '📝 ' + CT(b.input?.command === 'view' ? 'err.ui.claude.fileReading' : 'err.ui.claude.fileWriting', { file: String(b.input?.path || '').split('/').pop() });
+    if (b.type === 'tool_use' && b.name === 'noema_web_image') return '🖼️ ' + CT('err.ui.claude.fetchingPicture', { file: String(b.input?.url || '').split('/').pop().slice(0, 80) });
+    if (b.type === 'tool_use' && b.name === 'noema_image_search') return '🔎 ' + CT('err.ui.claude.searchingPictures', { query: String(b.input?.query || '').slice(0, 80) });
     return '';
   };
 
@@ -274,12 +296,14 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
       created: Date.now(), status: 'starting', usage: {}, log: [], messages: [], containerId: null, outputIds: [], images: {}, turns: 0, files: [] };
     const log = t => { job.log.push({ t: Date.now(), m: t }); onLog(t); };
     job.skillId = await ensureSkill(key, log);
-    for (const f of files) { log('⬆️ Uploading ' + f.name + '…'); job.files.push({ name: f.name, type: f.type || '', size: f.size, fileId: await uploadFile(key, f) }); }
+    for (const f of files) { log('⬆️ ' + CT('err.ui.claude.uploading', { file: f.name })); job.files.push({ name: f.name, type: f.type || '', size: f.size, fileId: await uploadFile(key, f) }); }
     job.sourceBlobs = [...files];   // kept with the job (this device) → attached to the matching sources at import (👁 preview)
     job.messages.push(firstMessage(job, false)); job.status = 'running';
     await DB.put(job); return job;
   }
 
+  /** A job's error in the UI language (job.error, shown as it is) + what it was (job.errorInfo: code, params). */
+  function setError(job, key, params = {}) { job.error = CT(key, params); job.errorInfo = { code: key.replace(/^err\./, ''), params }; }
   /** Run (or resume) a job until it finishes, needs an answer, hits the budget, or is stopped. */
   async function run(job, key, { onLog = () => { }, onUpdate = () => { }, signal } = {}) {
     const log = t => { if (!t) return; job.log.push({ t: Date.now(), m: t }); if (job.log.length > 400) job.log.splice(0, job.log.length - 400); onLog(t); };
@@ -292,32 +316,32 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
       const results = [];
       for (const b of pending) {
         if (b.name === 'noema_image_search') {
-          try { const r = await imageSearch(b.input); results.push({ type: 'tool_result', tool_use_id: b.id, content: JSON.stringify({ results: r.results.map(x => ({ url: x.url, page: x.page, title: x.title, w: x.w, h: x.h, source: x.source, license: x.license, credit: x.credit })), ...(Object.keys(r.errors || {}).length ? { unavailable: r.errors } : {}), next: 'Check the best candidates with noema_web_image (it shows you the picture).' }) }); log(`   🔎 ${r.results.length} picture(s) for “${String(b.input?.query).slice(0, 60)}”`); }
-          catch (e) { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: 'Image search failed: ' + e.message + ' — use web_search to find pages with pictures, then noema_web_image with the page or image url.' }); }
+          try { const r = await imageSearch(b.input); results.push({ type: 'tool_result', tool_use_id: b.id, content: JSON.stringify({ results: r.results.map(x => ({ url: x.url, page: x.page, title: x.title, w: x.w, h: x.h, source: x.source, license: x.license, credit: x.credit })), ...(Object.keys(r.errors || {}).length ? { unavailable: r.errors } : {}), next: 'Check the best candidates with noema_web_image (it shows you the picture).' }) }); log('   🔎 ' + CT('err.ui.claude.picturesFound', { n: r.results.length, query: String(b.input?.query).slice(0, 60) })); }   // i18n-ignore (the tool result is for Claude)
+          catch (e) { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: 'Image search failed: ' + e.message + ' — use web_search to find pages with pictures, then noema_web_image with the page or image url.' }); }   // i18n-ignore (for Claude)
           continue;
         }
-        if (b.name !== 'noema_web_image') { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: 'Unknown tool' }); continue; }
+        if (b.name !== 'noema_web_image') { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: 'Unknown tool' }); continue; }   // i18n-ignore (for Claude)
         try {
-          const url = String(b.input?.url || ''); if (!/^https?:\/\//.test(url)) throw new Error('url must start with https://');
+          const url = String(b.input?.url || ''); if (!/^https?:\/\//.test(url)) throw coded('url must start with https://', 'img.url_scheme');   // i18n-ignore (English .message: goes to Claude too)
           const got = job.images[url] || await webImage(url);
           job.images[url] = { data: got.data, w: got.w, h: got.h, mime: got.mime, url: got.url };
           const small = Math.max(got.w, got.h) < 800;
           results.push({ type: 'tool_result', tool_use_id: b.id, content: [
-            { type: 'text', text: JSON.stringify({ ok: true, url: got.url || url, w: got.w, h: got.h, mime: got.mime, shown_at: got.pw ? `${got.pw}×${got.ph}` : undefined, note: small ? 'TOO SMALL (< 800 px on the long side): find a larger version or do not use it' : `Register it with "w": ${got.w}, "h": ${got.h}; region coordinates in that size.` }) },
+            { type: 'text', text: JSON.stringify({ ok: true, url: got.url || url, w: got.w, h: got.h, mime: got.mime, shown_at: got.pw ? `${got.pw}×${got.ph}` : undefined, note: small ? 'TOO SMALL (< 800 px on the long side): find a larger version or do not use it' : `Register it with "w": ${got.w}, "h": ${got.h}; region coordinates in that size.` }) },   // i18n-ignore (for Claude)
             ...(got.preview ? [{ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: got.preview } }] : [])] });
-          log(`   ✓ picture ${got.w}×${got.h}${small ? ' (too small)' : ''}`);
-        } catch (e) { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: e.message + ' — try another picture (a direct image url).' }); log('   ✗ ' + e.message); }
+          log('   ✓ ' + CT('err.ui.claude.pictureOk', { w: got.w, h: got.h, small: small ? 'yes' : 'no' }));
+        } catch (e) { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: e.message + ' — try another picture (a direct image url).' }); log('   ✗ ' + errText(e)); }   // i18n-ignore (the tool result is for Claude: English)
       }
       job.messages.push({ role: 'user', content: results }); await save();
       return true;
     };
-    job.status = 'running'; job.error = null; await save(); onUpdate(job);
+    job.status = 'running'; job.error = null; job.errorInfo = null; await save(); onUpdate(job);
     try {
       await runTools();
       for (; ;) {
-        if (signal?.aborted) throw new ApiError('Stopped.', 0, 'aborted');
-        if (job.turns >= (job.maxTurns || 200)) { job.status = 'paused'; job.error = 'Claude has worked for a very long time. Press Resume to let it continue, or Stop.'; break; }
-        if (cost(job.usage, job.model) >= job.budget) { job.status = 'budget'; job.error = `The spending limit of $${job.budget} is reached (≈ $${cost(job.usage, job.model).toFixed(2)} so far). Raise it and press Resume, or stop.`; break; }
+        if (signal?.aborted) throw new ApiError('Stopped.', 0, 'aborted', 'ai.aborted');   // i18n-ignore (English .message)
+        if (job.turns >= (job.maxTurns || 200)) { job.status = 'paused'; setError(job, 'err.ai.job.too_long'); break; }
+        if (cost(job.usage, job.model) >= job.budget) { job.status = 'budget'; setError(job, 'err.ai.job.budget', { limit: usd(job.budget), spent: usd(cost(job.usage, job.model), 2) }); break; }
         const body = { model: job.model, max_tokens: 16000, system: [{ type: 'text', text: SYSTEM(job), cache_control: { type: 'ephemeral' } }],
           container: { ...(job.containerId ? { id: job.containerId } : {}), skills: [{ type: 'custom', skill_id: job.skillId, version: 'latest' }] },
           tools: toolsFor(job), messages: withCache(job.messages) };
@@ -326,15 +350,15 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
         catch (e) {
           // some accounts may not accept PDFs inside the container: attach them as documents instead (once)
           if (e.status === 400 && job.turns === 0 && !job.pdfAsDoc && /container_upload|file type|not supported/i.test(e.message) && job.files.some(f => /pdf/.test(f.type))) {
-            job.pdfAsDoc = true; job.messages[0] = firstMessage(job, true); log('ℹ️ Attaching the PDFs as documents instead'); await save(); continue;
+            job.pdfAsDoc = true; job.messages[0] = firstMessage(job, true); log('ℹ️ ' + CT('err.ui.claude.pdfAsDocuments')); await save(); continue;
           }
           // web search is switched off for some API organisations (Console → Settings → Privacy / Web search): go on without it
           if (e.status === 400 && !job.noSearch && /web.?search/i.test(e.message)) {
-            job.noSearch = true; job.messages.push({ role: 'user', content: [{ type: 'text', text: 'Note from the app: the web_search tool is not available for this API key. For web pictures use direct image URLs you know well (Wikimedia Commons originals on upload.wikimedia.org, OpenStax, NIH, NASA) with noema_web_image.' }] });
-            log('ℹ️ Web search is off for this API key (it can be switched on in the Claude Console) — continuing without it'); await save(); continue;
+            job.noSearch = true; job.messages.push({ role: 'user', content: [{ type: 'text', text: 'Note from the app: the web_search tool is not available for this API key. For web pictures use direct image URLs you know well (Wikimedia Commons originals on upload.wikimedia.org, OpenStax, NIH, NASA) with noema_web_image.' }] });   // i18n-ignore (for Claude)
+            log('ℹ️ ' + CT('err.ui.claude.noWebSearch')); await save(); continue;
           }
-          if (e.status === 400 && job.kind === 'node' && !job.noFetch && /web.?fetch/i.test(e.message)) { job.noFetch = true; log('ℹ️ Web fetch is off for this API key — continuing with web search only'); await save(); continue; }
-          if (e.status === 404 && job.containerId && /container/i.test(e.message)) { job.containerId = null; log('ℹ️ The previous sandbox expired — Claude starts a fresh one and rebuilds from the conversation'); continue; }
+          if (e.status === 400 && job.kind === 'node' && !job.noFetch && /web.?fetch/i.test(e.message)) { job.noFetch = true; log('ℹ️ ' + CT('err.ui.claude.noWebFetch')); await save(); continue; }
+          if (e.status === 404 && job.containerId && /container/i.test(e.message)) { job.containerId = null; log('ℹ️ ' + CT('err.ui.claude.sandboxExpired')); continue; }
           throw e;
         }
         job.turns++;
@@ -350,21 +374,22 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
         await save(); onUpdate(job);
         if (r.stop_reason === 'pause_turn') continue;
         if (r.stop_reason === 'tool_use') { await runTools(); continue; }
-        if (r.stop_reason === 'max_tokens') { job.messages.push({ role: 'user', content: [{ type: 'text', text: 'Continue.' }] }); await save(); continue; }
+        if (r.stop_reason === 'max_tokens') { job.messages.push({ role: 'user', content: [{ type: 'text', text: 'Continue.' }] }); await save(); continue; }   // i18n-ignore (for Claude)
         // end_turn / refusal: is there a pack?
         const pack = await findPack(job, key, log);
         if (pack) { job.status = 'done'; job.result = { subjectId: pack.subject.id }; job.pack = pack; await save(); onUpdate(job); return job; }
         const lastText = content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
-        if (r.stop_reason === 'refusal') { job.status = 'failed'; job.error = 'Claude declined to continue: ' + lastText.slice(0, 400); break; }
-        job.status = 'question'; job.question = lastText || 'Claude stopped without a pack. Tell it what to do next (for example: “Continue and finish the pack”).'; break;
+        if (r.stop_reason === 'refusal') { job.status = 'failed'; setError(job, 'err.ai.job.refused', { detail: lastText.slice(0, 400) }); break; }
+        job.status = 'question'; job.question = lastText || CT('err.ui.claude.noPack'); break;
       }
     } catch (e) {
-      job.status = e.type === 'aborted' ? 'paused' : 'error'; job.error = e.type === 'aborted' ? 'Stopped — press Resume to continue later.' : e.message;
+      job.status = e.type === 'aborted' ? 'paused' : 'error';
+      if (e.type === 'aborted') setError(job, 'err.ai.job.stopped'); else { job.error = errText(e); job.errorInfo = errInfo(e); }
     }
     await save(); onUpdate(job); return job;
   }
   async function answer(job, key, text, opts) {
-    job.messages.push({ role: 'user', content: [{ type: 'text', text: String(text || 'Continue and finish the pack.') }] }); job.question = null;
+    job.messages.push({ role: 'user', content: [{ type: 'text', text: String(text || 'Continue and finish the pack.') }] }); job.question = null;   // i18n-ignore (for Claude)
     return run(job, key, opts);
   }
   async function findPack(job, key, log) {
@@ -379,9 +404,9 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
         if (!(p?.subject?.id && Array.isArray(p.chapters) && p.chapters.length)) continue;
         const files = {}; for (const s of NoemaSrcFiles.packaged(p)) { const f = await b.file(s.file); if (f) files[s.file] = f; }
         job.bundleFiles = files;   // kept with the job (IndexedDB) until the pack is imported
-        log(`📦 Package received: ${meta.filename} (${(blob.size / 1048576).toFixed(1)} MB, ${Object.keys(files).length} source file(s))`);
+        log('📦 ' + CT('err.ui.claude.packageReceived', { file: meta.filename, mb: +(blob.size / 1048576).toFixed(1), n: Object.keys(files).length }));
         await fillWebPictures(p, job.images, log); return p;
-      } catch (e) { log('⚠️ ' + meta.filename + ': ' + e.message); }
+      } catch (e) { log('⚠️ ' + CT('err.ui.claude.fileFailed', { file: meta.filename, error: errText(e) })); }
     }
     // 2. a plain pack (.json)
     for (const meta of metas) {
@@ -389,8 +414,8 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
       if (!/\.json$/i.test(meta?.filename || '')) continue;
       try {
         const r = await api(key, `/v1/files/${id}/content`, { raw: true, retries: 3 }); const p = JSON.parse(await r.text());
-        if (p?.subject?.id && Array.isArray(p.chapters) && p.chapters.length) { log(`📦 Pack received: ${meta.filename} (${Math.round((meta.size_bytes || 0) / 1024)} KB)`); await fillWebPictures(p, job.images, log); return p; }
-      } catch (e) { log('⚠️ ' + meta.filename + ' is not a valid pack: ' + e.message); }
+        if (p?.subject?.id && Array.isArray(p.chapters) && p.chapters.length) { log('📦 ' + CT('err.ui.claude.packReceived', { file: meta.filename, kb: Math.round((meta.size_bytes || 0) / 1024) })); await fillWebPictures(p, job.images, log); return p; }
+      } catch (e) { log('⚠️ ' + CT('err.ui.claude.notAPack', { file: meta.filename, error: errText(e) })); }
     }
     return null;
   }

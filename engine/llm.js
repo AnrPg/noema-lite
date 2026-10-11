@@ -19,6 +19,7 @@ window.NoemaLLM = (() => {
   function pick(acc, pref = 'auto') { const a = available(acc); if (pref !== 'auto' && a[pref]) return pref; return a.claude ? 'claude' : a.gemini ? 'gemini' : null; }
 
   /* ---------- a small JSON-Schema checker (the subset our schemas use) ---------- */
+  /* i18n-ignore-start */   // its findings go back to the model (repair prompts): English
   function check(schema, v, path = '$', out = []) {
     if (!schema || out.length > 40) return out;
     const t = schema.type, at = path;
@@ -35,18 +36,22 @@ window.NoemaLLM = (() => {
     }
     return out;
   }
+  /* i18n-ignore-end */
 
   /* ---------- Claude: a tool call (forced when the model allows it), streamed ----------
      Some models refuse a forced tool_choice ("type tool/any not supported for this model", e.g. models that always
      think). Then the same request is sent with tool_choice auto (the prompt asks for the tool), and — if a model
      even refuses tools — as plain text with the JSON Schema in the prompt. What works is remembered per model. */
-  class LLMError extends Error { constructor(m, status, kind) { super(m); this.status = status; this.kind = kind; } }
+  /** Errors with a stable code (docs/i18n.md §6, err.ai.*): .message stays English (also in Node, the MCP server), the app shows
+      NoemaI18n.err(e) — the same words in the learner's language. */
+  class LLMError extends Error { constructor(m, status, kind, code, params) { super(m); this.status = status; this.kind = kind; this.code = code || null; this.params = params || {}; } }
+  /* i18n-ignore-start */   // below: prompts for the model, and the English .message of each coded error (i18n/errors/en.arb has the same words)
   const MODES = ['forced', 'auto', 'text'];
   const modeKey = m => 'noema-device:claude-json-mode:' + m;
   const modeOf = m => { try { const v = localStorage.getItem(modeKey(m)); return MODES.includes(v) ? v : 'forced'; } catch (e) { return 'forced'; } };
   const setMode = (m, v) => { try { localStorage.setItem(modeKey(m), v); } catch (e) { } };
   async function claudeCall(acc, { model, system, messages, tool, maxTokens = 16000, signal, onProgress }) {
-    const key = keys(acc).claude; if (!key) throw new LLMError('No Claude API key on this device.', 401, 'nokey');
+    const key = keys(acc).claude; if (!key) throw new LLMError('No Claude API key on this device.', 401, 'nokey', 'ai.no_key.device');
     let mode = modeOf(model);
     const bodyFor = md => {
       const b = { model, max_tokens: maxTokens, stream: true, system: [{ type: 'text', text: system + (md === 'text' ? `\n\nAnswer with exactly one JSON object (no prose, no code fence) that matches this JSON Schema:\n${JSON.stringify(tool.input_schema)}` : md === 'auto' ? `\n\nAlways answer by calling the tool "${tool.name}" with the complete result — never in plain text.` : ''), cache_control: { type: 'ephemeral' } }], messages };
@@ -57,7 +62,7 @@ window.NoemaLLM = (() => {
     for (let attempt = 0; ; attempt++) {
       let r;
       try { r = await fetch(CLAUDE() + '/v1/messages', { method: 'POST', signal, headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'content-type': 'application/json' }, body: JSON.stringify(body) }); }
-      catch (e) { if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted'); if (attempt < 5) { await wait(1500 * 2 ** attempt); continue; } throw new LLMError('No connection to Claude: ' + e.message, 0, 'network'); }
+      catch (e) { if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted', 'ai.aborted'); if (attempt < 5) { await wait(1500 * 2 ** attempt); continue; } throw new LLMError('No connection to Claude: ' + e.message, 0, 'network', 'ai.no_connection', { provider: 'Claude', detail: e.message }); }
       if (!r.ok) {
         let m = ''; try { m = (await r.json())?.error?.message || ''; } catch (e) { }
         // the model does not take a forced tool call (or tools at all): fall back, and remember it for this model
@@ -66,7 +71,9 @@ window.NoemaLLM = (() => {
           mode = noTools ? 'text' : 'auto'; setMode(model, mode); body = bodyFor(mode); attempt--; continue;
         }
         if ((r.status === 429 || r.status === 529 || r.status >= 500) && attempt < 6 && !/credit balance/i.test(m)) { const ra = +r.headers.get('retry-after'); await wait(ra > 0 ? Math.min(ra * 1000, 60000) : Math.min(60000, 2000 * 2 ** attempt)); continue; }
-        throw new LLMError(r.status === 401 ? 'The Claude API key was not accepted.' : /credit balance/i.test(m) ? 'Your Claude API account has no credit left (platform.claude.com → Settings → Billing).' : `Claude: ${m || 'HTTP ' + r.status}`, r.status, 'api');
+        if (r.status === 401) throw new LLMError('The Claude API key was not accepted.', r.status, 'api', 'ai.unauthorized_short');
+        if (/credit balance/i.test(m)) throw new LLMError('Your Claude API account has no credit left (platform.claude.com → Settings → Billing).', r.status, 'api', 'ai.no_credit_short');
+        throw new LLMError(`Claude: ${m || 'HTTP ' + r.status}`, r.status, 'api', 'ai.api_claude', { detail: m || 'HTTP ' + r.status });
       }
       // server-sent events: input_json_delta pieces of the tool input
       const reader = r.body.getReader(); const dec = new TextDecoder(); let buf = '', json = '', text = '', usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }, stop = null, n = 0;
@@ -82,11 +89,11 @@ window.NoemaLLM = (() => {
             else if (d.type === 'content_block_delta' && d.delta?.type === 'input_json_delta') { json += d.delta.partial_json || ''; if (onProgress && ++n % 40 === 0) onProgress(json.length); }
             else if (d.type === 'content_block_delta' && d.delta?.type === 'text_delta') { text += d.delta.text || ''; if (onProgress && ++n % 40 === 0) onProgress(text.length); }
             else if (d.type === 'message_delta') { usage.output += d.usage?.output_tokens || 0; stop = d.delta?.stop_reason || stop; }
-            else if (d.type === 'error') throw new LLMError('Claude: ' + (d.error?.message || 'stream error'), 0, d.error?.type === 'overloaded_error' ? 'overloaded' : 'api');
+            else if (d.type === 'error') throw new LLMError('Claude: ' + (d.error?.message || 'stream error'), 0, d.error?.type === 'overloaded_error' ? 'overloaded' : 'api', 'ai.api_claude', { detail: d.error?.message || 'stream error' });
           }
         }
       } catch (e) {
-        if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted');
+        if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted', 'ai.aborted');
         if ((e.kind === 'overloaded' || !(e instanceof LLMError)) && attempt < 5) { await wait(2000 * 2 ** attempt); continue; }
         throw e;
       }
@@ -101,7 +108,7 @@ window.NoemaLLM = (() => {
     const s = settingsOf(acc); return s.model || (s.models || [])[0] || 'gemini-flash-latest';
   }
   async function geminiCall(acc, { model, system, contents, json = true, tools, maxTokens = 65536, signal }) {
-    const key = keys(acc).gemini; if (!key) throw new LLMError('No Gemini key (⚙️ Settings).', 401, 'nokey');
+    const key = keys(acc).gemini; if (!key) throw new LLMError('No Gemini key (⚙️ Settings).', 401, 'nokey', 'ai.no_key.gemini');
     const m = gemModel(acc, model);
     const gc = { temperature: 0.6, maxOutputTokens: maxTokens };
     if (json) gc.responseMimeType = 'application/json';
@@ -110,12 +117,13 @@ window.NoemaLLM = (() => {
     for (let attempt = 0; ; attempt++) {
       let r;
       try { r = await fetch(`${GEMINI()}/models/${m}:generateContent`, { method: 'POST', signal, headers: { 'content-type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body) }); }
-      catch (e) { if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted'); if (attempt < 4) { await wait(1500 * 2 ** attempt); continue; } throw new LLMError('No connection to Gemini: ' + e.message, 0, 'network'); }
+      catch (e) { if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted', 'ai.aborted'); if (attempt < 4) { await wait(1500 * 2 ** attempt); continue; } throw new LLMError('No connection to Gemini: ' + e.message, 0, 'network', 'ai.no_connection', { provider: 'Gemini', detail: e.message }); }
       if (!r.ok) {
         const t = await r.text();
         if (r.status === 400 && /thinking/i.test(t) && gc.thinkingConfig) { delete gc.thinkingConfig; continue; }
         if ((r.status === 429 || r.status >= 500) && attempt < 5) { await wait(Math.min(60000, 4000 * 2 ** attempt)); continue; }
-        throw new LLMError(r.status === 429 ? 'Gemini’s free quota is used up for now (429) — wait a minute or use Claude.' : `Gemini ${r.status}: ${t.slice(0, 200)}`, r.status, 'api');
+        if (r.status === 429) throw new LLMError('Gemini’s free quota is used up for now (429) — wait a minute or use Claude.', r.status, 'api', 'ai.quota');
+        throw new LLMError(`Gemini ${r.status}: ${t.slice(0, 200)}`, r.status, 'api', 'ai.api_gemini', { status: r.status, detail: t.slice(0, 200) });
       }
       const d = await r.json(); const c = d.candidates?.[0];
       const text = (c?.content?.parts || []).map(p => p.text || '').join('');
@@ -132,7 +140,7 @@ window.NoemaLLM = (() => {
     try { return JSON.parse(s); } catch (e) { }
     const a = s.indexOf('{'), b = s.lastIndexOf('}');
     if (a >= 0 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) { } }
-    throw new LLMError('The answer was not valid JSON.', 0, 'json');
+    throw new LLMError('The answer was not valid JSON.', 0, 'json', 'ai.not_json');
   }
 
   /**
@@ -144,12 +152,12 @@ window.NoemaLLM = (() => {
   const modelCache = {};
   async function claudeModel(acc) {
     try { const v = JSON.parse(localStorage.getItem(`noema1:${acc}:a:claudeModel`) || 'null'); if (v) return v; } catch (e) { }
-    const CL = window.NoemaClaude, key = CL?.Key.get(acc); if (!key) throw new LLMError('Add a Claude API key first (⚙️ Settings → Claude).', 401, 'nokey');
+    const CL = window.NoemaClaude, key = CL?.Key.get(acc); if (!key) throw new LLMError('Add a Claude API key first (⚙️ Settings → Claude).', 401, 'nokey', 'ai.no_key.claude');
     if (!modelCache[key]) modelCache[key] = CL.models(key).then(ms => CL.defaultModel(ms)).catch(e => { delete modelCache[key]; throw e; });
     return modelCache[key];
   }
   async function json(o) {
-    const provider = o.provider || pick(o.acc); if (!provider) throw new LLMError('Add a Claude API key or a Gemini key first.', 401, 'nokey');
+    const provider = o.provider || pick(o.acc); if (!provider) throw new LLMError('Add a Claude API key or a Gemini key first.', 401, 'nokey', 'ai.no_key.any');
     if (provider === 'claude' && !o.model) o = { ...o, model: await claudeModel(o.acc) };
     const name = o.name || 'submit';
     const tool = { name, description: o.toolDescription || 'Submit the answer (the whole JSON object) with this tool.', input_schema: o.schema };
@@ -174,8 +182,9 @@ window.NoemaLLM = (() => {
       o.onRepair?.(errs, round);
       history = history.concat({ role: 'assistant', text: last.slice(0, 60000) || '(no answer)' }, { role: 'user', text: `Your answer has these problems:\n- ${errs.slice(0, 30).join('\n- ')}\nFix ALL of them and ${provider === 'claude' && r.mode !== 'text' ? `call the tool "${name}" again with the complete corrected object` : 'return the complete corrected JSON object'}.` });
     }
-    throw new LLMError(`The ${provider === 'claude' ? 'Claude' : 'Gemini'} answer still had problems: ${errs.slice(0, 5).join('; ')}`, 0, 'invalid');
+    throw new LLMError(`The ${provider === 'claude' ? 'Claude' : 'Gemini'} answer still had problems: ${errs.slice(0, 5).join('; ')}`, 0, 'invalid', 'ai.invalid', { provider: provider === 'claude' ? 'Claude' : 'Gemini', problems: errs.slice(0, 5).join('; ') });
   }
+  /* i18n-ignore-end */
 
   /** Gemini + Google Search: a research brief with its sources (for in-browser generation of new material). */
   async function research(acc, { system, prompt, model, signal }) {
