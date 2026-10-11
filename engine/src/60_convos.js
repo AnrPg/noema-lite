@@ -103,11 +103,11 @@ async function generateTitle(cv) {
   if (CV.titling.has(cv.id)) return cv.title;
   CV.titling.add(cv.id);
   try {
-    /* i18n-ignore-start */   // the title prompt (English; it asks for the chat language when one is chosen)
+    /* i18n-ignore-start */   // the title prompt (English; it asks for the learner's reply language — replyLang())
     const transcript = cv.msgs.map(m => (m.role === 'user' ? 'Learner: ' : 'Tutor: ') + m.text).join('\n\n').slice(0, 9000);
     const prompt = `Write the title for this ${TUTOR.domain} tutoring conversation (mode: ${MODE_NAME[cv.mode] || cv.mode}; context: ${cv.ctx?.label || 'whole course'}).
 Rules: 3–8 words; name the specific concept(s) actually discussed, not generic words; canonical ${TUTOR.domain} terminology and capitalization (e.g. ${TUTOR.terminology}); Title Case; optionally "Topic: Angle" form; no quotes, emojis, trailing punctuation, dates, or words like Conversation/Chat/Session/Tutor.
-Reply with the title only.${chatLang() && chatLang() !== COURSE_LANG ? ` Write it in ${langName(chatLang())}.` : ''}
+Reply with the title only.${(r => /^en\b/.test(r.code) && /^en\b/.test(COURSE_LANG) ? '' : ` Write it in ${r.name}.`)(replyLang())}
 
 TRANSCRIPT:
 ${transcript}`;

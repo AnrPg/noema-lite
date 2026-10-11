@@ -192,5 +192,44 @@ window.NoemaLLM = (() => {
     return { text: r.text, sources: r.sources, usage: r.usage };
   }
 
-  return { available, pick, keys, json, research, check, parseJSON, claudeCall, geminiCall, claudeModel, LLMError };
+  /* ---------- the language the AI writes to the learner in (docs/i18n.md §1 and approach 6) ---------- */
+  /* One rule for every AI feature: the learner's choice for the AI conversations (a:settings.chatLang) when set, else the
+     UI language. Course and Roadmap content keep their own language; only what the AI says TO the learner follows this. */
+  /* i18n-ignore-start */   // English words for the prompts
+  const baseOf = code => String(code || 'en').split('-')[0].toLowerCase();
+  /** How to address the learner (docs/i18n.md §2 Address). */
+  const ADDRESS = { el: 'the informal singular (εσύ)', ru: 'the informal singular (ты)', fr: 'the informal singular (tu)', de: 'the informal singular (du)', it: 'the informal singular (tu)', es: 'the informal singular (tú)', pt: 'the informal singular (tu, European Portuguese)', sq: 'the informal singular (ti)', tr: 'the informal singular (sen)', hi: 'the respectful आप', ja: 'the polite です/ます style', zh: '你', ar: 'Modern Standard Arabic and the second person (أنت), with gender-neutral phrasing where possible' };
+  /** A language as a prompt names it: its English name with its endonym, e.g. "Greek (Ελληνικά)"; "English". */
+  function langLabel(code) {
+    const c = String(code || 'en'), b = baseOf(c); if (b === 'en') return 'English';
+    const tag = b === 'ar' ? 'ar' : c;   // ar-EG: the UI speaks Modern Standard Arabic, not "Egyptian Arabic"
+    let en = c, endo = '';
+    try { en = new Intl.DisplayNames(['en'], { type: 'language' }).of(tag) || c; } catch (e) { }
+    try { endo = new Intl.DisplayNames([tag], { type: 'language' }).of(tag) || ''; } catch (e) { }
+    return endo && endo !== en ? `${en} (${endo})` : en;
+  }
+  /** → { code, auto, name, address }. pref: the chatLang setting ('' = automatic); without it, the settings of the account (acc, else the open one) are read.
+      uiLocale: the UI language (default: NoemaI18n.locale). */
+  function replyLang(acc, pref, uiLocale) {
+    if (pref == null && !acc) { try { acc = window.Noema?.account?.id || JSON.parse(localStorage.getItem('noema1:current') || '{}').acc; } catch (e) { } }   // the open account
+    const set = (pref != null ? pref : acc ? settingsOf(acc).chatLang : '') || '';
+    const ui = uiLocale || window.NoemaI18n?.locale || 'en', code = set || (/^(en-XA|ar-XB)$/.test(ui) ? 'en' : ui);
+    return { code, auto: !set, name: langLabel(code), address: ADDRESS[baseOf(code)] || '' };
+  }
+  const sameLang = (a, b) => baseOf(a) === baseOf(b);
+  const addressText = r => r.address ? ` Address the learner with ${r.address}.` : '';
+  /** The LANGUAGE rule of a conversation's instructions ('' for an English learner of English material: the default). */
+  function chatRule(r, content = 'en') {
+    const heads = baseOf(r.code) === 'en' ? '' : ` Write the bold headings your instructions ask for (✅ Answer, 📌 Lesson, 🎓 What you learned, Score …) in ${r.name} too, keeping their emoji.`;
+    if (sameLang(r.code, content)) return baseOf(content) !== 'en' || !r.auto ? `LANGUAGE: reply in ${langLabel(content)} (the language of the course material) unless the learner writes in another language.${heads}${addressText(r)}` : '';
+    return `LANGUAGE: always write to the learner in ${r.name}, although the course material and the notes below are in ${langLabel(content)}. Explain in ${r.name}; when you quote the material, keep the quotation in its own language and add a translation; keep code, formulas and proper names as they are, and give a key technical term in its original form in parentheses the first time it appears (the learner meets it that way in the material).${heads}${addressText(r)} ${r.auto ? 'If the learner writes in another language or asks for one, use that one.' : 'If the learner explicitly asks for another language, use that one.'}`;
+  }
+  /** For JSON answers shown to the learner (grading, feedback, questions): " Write <what> in <language>." ('' for English material and an English learner). */
+  function fieldsRule(r, content = 'en', what = 'every text for the learner') {
+    if (baseOf(r.code) === 'en' && baseOf(content) === 'en') return '';
+    return ` Write ${what} in ${r.name}${sameLang(r.code, content) ? '' : `; give the material's key terms in their original ${langLabel(content)} form in parentheses where it helps`}.${addressText(r)}`;
+  }
+  /* i18n-ignore-end */
+
+  return { available, pick, keys, json, research, check, parseJSON, claudeCall, geminiCall, claudeModel, LLMError, langLabel, replyLang, chatRule, fieldsRule, sameLang };
 })();

@@ -905,8 +905,11 @@ window.NoemaCurriculum.Gen = (() => {
       }
     }
     /* i18n-ignore-start — the prompt and its checks (for the AI) */
+    /* the test talks to the learner: in their reply language (NoemaLLM.replyLang), the step's terms in the Roadmap's language */
+    const testLang = c => { const r = L().replyLang ? L().replyLang(acc) : null, own = C.LANG[c.language] || c.language;
+      return !r || L().sameLang(r.code, c.language) ? own : `${r.name}; the step is studied in ${own}, so give its key terms in that form in parentheses${r.address ? `; address the learner with ${r.address}` : ''}`; };
     const { data } = await L().json({ acc, provider: L().pick(acc, c.provider), system: 'You write rigorous placement tests. Answer only through the requested structure.',
-      prompt: `Write a 10-question multiple-choice placement test (in ${C.LANG[c.language] || c.language}) that only someone who has really mastered “${n.title}” passes — the curriculum goal is ${c.goal}. Cover these chapters evenly, test understanding and application rather than trivia, use plausible distractors, vary the position of the right answer:\n${(n.chapters || []).map(ch => '- ' + ch.title + ': ' + (ch.coverage || []).join('; ')).join('\n')}`,
+      prompt: `Write a 10-question multiple-choice placement test (in ${testLang(c)}) that only someone who has really mastered “${n.title}” passes — the curriculum goal is ${c.goal}. Cover these chapters evenly, test understanding and application rather than trivia, use plausible distractors, vary the position of the right answer:\n${(n.chapters || []).map(ch => '- ' + ch.title + ': ' + (ch.coverage || []).join('; ')).join('\n')}`,
       schema: S_TEST, name: 'submit_test', maxTokens: 8000, validate: d => d.questions.flatMap((q, i) => q.answer < q.options.length ? [] : [`question ${i + 1}: answer index out of range`]) });
     /* i18n-ignore-end */
     return data.questions;

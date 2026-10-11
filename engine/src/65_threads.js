@@ -52,6 +52,8 @@ function tutorStateBlock(ts, directive) {
   if (ts.learnerTurns >= CONVERGE_AFTER && open.length && !directive) dir.push('This conversation is long → converge: resolve the open threads within this or the next reply and give the 🎓 summary.');
   if (!open.length && ts.lessons.length && !directive) dir.push('No thread is open → if the learner asked something new, decide afresh (direct answer or ONE new thread). If they just acknowledged, close with **🎓 What you learned:** instead of starting a new chain.');
   if (ts.missingControl) dir.push('Your previous reply lacked the <noema-state> line — you MUST include it.');
+  const lang = inReplyLang('the "question", "answer" and "lesson" texts of the <noema-state> line (the learner reads them in the thread tracker) and the bold headings');
+  if (lang) dir.push(lang.trim());
   lines.push('DIRECTIVES:', ...(dir.length ? dir.map(d => '- ' + d) : ['- (none)']));
   lines.push(`Next new thread id: ${nextThreadId(ts)}.`);
   return lines.join('\n');
@@ -111,9 +113,9 @@ function threadTracker(key, histLen) {
       ts.lessons.length ? h('button', { class: 'pill c tb-lessons', onclick: () => bar.classList.toggle('open') }, '📌 ' + tE('engine.thr.lessons', { n: ts.lessons.length })) : null,
       ts.threads.length ? h('button', { class: 'iconbtn tb-more', title: tE('engine.thr.showAll'), onclick: () => bar.classList.toggle('open') }, '▾') : null);
   } else add(h('span', { class: 'tb-ic' }, '🎯'), h('div', { class: 'grow tb-txt tiny' }, tE('engine.thr.takeaways')));
-  const actions = h('div', { class: 'tb-actions' },   // the buttons speak the UI language; the message they send is the learner's turn to the AI (a prompt: English)
-    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor('Just tell me the answer, please.', false, { directive: 'tellme' }) }, '💡 ' + tE('engine.thr.tellMe')) : null,   // i18n-ignore
-    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor('Let’s wrap up: give me the answers and what I learned.', false, { directive: 'wrapup' }) }, '🎓 ' + tE('engine.thr.wrapUp')) : null);   // i18n-ignore
+  const actions = h('div', { class: 'tb-actions' },   // the buttons and the message they send (the learner's bubble) speak the UI language; the directive tells the AI what to do
+    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor(tE('engine.aimsg.tellMe'), false, { directive: 'tellme' }) }, '💡 ' + tE('engine.thr.tellMe')) : null,
+    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor(tE('engine.aimsg.wrapUp'), false, { directive: 'wrapup' }) }, '🎓 ' + tE('engine.thr.wrapUp')) : null);
   bar.append(row);
   if (actions.children.length) bar.append(actions);
   if (ts && ts.threads.length) {

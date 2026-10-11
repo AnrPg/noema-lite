@@ -61,7 +61,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   await send('What is a deletion vector?');
   const lastSys = systems[systems.length - 1];
   await p.screenshot({ path: '/tmp/noema_shots/s3_lang.png' });
-  ok(/LANGUAGE: always write to the learner in Greek, although the course material and the notes below are in English/.test(lastSys), 'Ελληνικά → the tutor is told to answer in Greek (the notes stay English)');
+  ok(/LANGUAGE: always write to the learner in Greek \(Ελληνικά\), although the course material and the notes below are in English/.test(lastSys), 'Ελληνικά → the tutor is told to answer in Greek (the notes stay English)');
   ok(await p.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:settings`)).chatLang) === 'el', 'the choice is a setting of the profile (synced like the others)');
   ok(await p.evaluate(() => (s => [s.title, JSON.stringify(s.blocks)].join('|'))(Noema.pack.chapters[4].sections[3])) === packBefore, 'the course material is unchanged');
   const sysJ = []; await ctx.route('**/generativelanguage.googleapis.com/**:generateContent*', async route => { const b = JSON.parse(route.request().postData() || '{}'); sysJ.push(b.systemInstruction?.parts?.[0]?.text || ''); return route.fulfill({ json: { candidates: [{ content: { parts: [{ text: '{"score":70,"verdict":"Σχεδόν","covered":[],"missing":[],"mistakes":[],"feedback":"ok","hit":[0]}' }] } }] } }); });
@@ -71,7 +71,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   await p.click('.accsec summary:has-text("Language of the AI conversations")'); await wait(200);
   ok(await p.locator('.accsec:has-text("Language of the AI conversations") select').inputValue() === 'el' && /stays in its own language/.test(await p.locator('.accsec:has-text("Language of the AI conversations")').innerText()), '⚙️ Settings shows the same choice, and says the material is not translated');
   await p.selectOption('.accsec:has-text("Language of the AI conversations") select', ''); await p.click('button:has-text("Save settings")'); await wait(400);
-  ok(await p.evaluate(() => chatLang()) === '', '“Same as the course” → back to the course language');
+  ok(await p.evaluate(() => chatLang()) === '', '“Automatic” → the app’s language again');
   await p.evaluate(() => openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic')); await wait(200);
   // other modes: wrap-up works without threads
   await p.evaluate(() => { T.mode = 'explain'; T.hist[tutorCtxKey()] = [{ role: 'user', text: 'x', t: 1 }, { role: 'model', text: 'y', t: 2 }]; renderTutor(); }); await wait(200);
@@ -111,6 +111,19 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   ok(await btnSys('Debug simulation', /simulation built on THIS section/, 'debug'), 'section → Debug simulation has its own task');
   ok(await btnSys('Interview me', /Mock interview \/ oral exam on THIS section/, 'interview'), 'section → Interview me has its own task');
   await p.evaluate(() => { closeTutor(); location.hash = '#/'; }); await wait(400);
+  // 🌐 no 🗣 choice → the AI answers in the app's language (docs/i18n.md approach 6); the learner's automatic first messages are in it too
+  for (const [tag, name, addr, bubble] of [['el', 'Greek \\(Ελληνικά\\)', 'εσύ', /^Κάνε μου σωκρατικό διάλογο για: /], ['ru', 'Russian \\(русский\\)', 'ты', /^Начни сократовский диалог на тему: /]]) {
+    await p.evaluate(async tag => { S.settings.chatLang = ''; S.settings.lang = tag; await NoemaI18n.use(tag); T.hist = {}; T.tstate = {}; openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); }, tag); await wait(300);
+    await p.click('.drawer .starters button >> nth=0'); await wait(700);
+    sys = sysNow();
+    ok(new RegExp('LANGUAGE: always write to the learner in ' + name + ', although the course material and the notes below are in English').test(sys) && sys.includes('Address the learner with the informal singular (' + addr + ')'), `${tag} UI → the tutor is told to answer in ${tag} (${addr}), the notes stay English`);
+    ok(new RegExp('Write the "question", "answer" and "lesson" texts .* in ' + name).test(sys), `${tag} UI → TUTOR STATE asks for the thread texts in ${tag}`);
+    ok(bubble.test(await visible()), `${tag} UI → the starter bubble is in ${tag}: ` + (await visible()).slice(0, 60));
+    await p.evaluate(() => aiGrade({ type: 'free', q: 'Q', model: 'M', rubric: ['r'], section: Noema.pack.chapters[0].sections[0].id }, 'my answer'));
+    ok(new RegExp('Write the verdict, covered, missing and mistakes texts in ' + name).test(sysJ.at(-1) || ''), `${tag} UI → the AI feedback on answers is in ${tag}`);
+    await p.evaluate(() => closeTutor());
+  }
+  await p.evaluate(async () => { S.settings.lang = undefined; await NoemaI18n.use('en'); }); await wait(200);
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await b.close(); console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })();

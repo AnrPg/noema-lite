@@ -194,15 +194,175 @@
   "@engine.tutor.chatLangAria": {
     "description": "Screen-reader label of the language picker of the AI conversations."
   },
-  "engine.tutor.chatLangSame": "Same as the course ({lang})",
-  "@engine.tutor.chatLangSame": {
-    "description": "First option of the AI-conversation language picker (after 🗣): the language of the course material. lang = that language’s own name (e.g. English, Ελληνικά).",
+  "engine.tutor.chatLangAuto": "Automatic (the app’s language)",
+  "@engine.tutor.chatLangAuto": {
+    "description": "First option of the AI-conversation language picker (after 🗣): the AI writes in the language the app is shown in."
+  },
+  "engine.tutor.chatLangCourse": "{lang} (the course’s language)",
+  "@engine.tutor.chatLangCourse": {
+    "description": "Option of the AI-conversation language picker (after 🗣): the language of the course material. lang = that language’s own name (e.g. English, Ελληνικά).",
     "placeholders": {
       "lang": {
         "type": "String",
         "example": "English"
       }
     }
+  },
+  "engine.aimsg.startSocratic": "Start a Socratic session on: {topic}. Begin by probing what I already think.",
+  "@engine.aimsg.startSocratic": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Starter button “Socratic” of the tutor. topic = the course or the part of it the tutor is open on.",
+    "placeholders": {
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.aimsg.startQuiz": "Quiz me on {topic}. Focus on certification traps and pitfalls.",
+  "@engine.aimsg.startQuiz": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Starter button “Quiz” of the tutor. topic = the course or the part of it the tutor is open on.",
+    "placeholders": {
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.aimsg.startDebug": "Start a debugging simulation related to: {topic}.",
+  "@engine.aimsg.startDebug": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Starter button “Debug” of the tutor. topic = the course or the part of it the tutor is open on.",
+    "placeholders": {
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.aimsg.startInterview": "Interview me about {topic}.",
+  "@engine.aimsg.startInterview": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Starter button “Interview” of the tutor. topic = the course or the part of it the tutor is open on.",
+    "placeholders": {
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.aimsg.startExplain": "Explain the core idea of {topic} differently from the notes.",
+  "@engine.aimsg.startExplain": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Starter button “Explain” of the tutor. topic = the course or the part of it the tutor is open on.",
+    "placeholders": {
+      "topic": {
+        "type": "String",
+        "example": "Delta Lake"
+      }
+    }
+  },
+  "engine.aimsg.explainItem": "{what, select, paragraph {Explain this paragraph to me: “{text}”} list {Explain this list to me: “{text}”} code_example {Explain this code example to me: “{text}”} figure {Explain this figure to me: “{text}”} diagram {Explain this diagram to me: “{text}”} table {Explain this table to me: “{text}”} note {Explain this note to me: “{text}”} comparison {Explain this comparison to me: “{text}”} process {Explain this process to me: “{text}”} question {Explain this question to me: “{text}”} set_of_questions {Explain this set of questions to me: “{text}”} set_of_terms {Explain this set of terms to me: “{text}”} card {Explain this card to me: “{text}”} term {Explain this term to me: “{text}”} point {Explain this point to me: “{text}”} row_of_the_table {Explain this row of the table to me: “{text}”} section {Explain this section to me: “{text}”} mental_model {Explain this mental model to me: “{text}”} trap {Explain this trap to me: “{text}”} other {Explain this part of the lesson to me: “{text}”}}",
+  "@engine.aimsg.explainItem": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button 💡 “Explain this” on one part of a lesson. what = which kind of part (one branch per kind: translate each with the right article/demonstrative); text = the start of that part (≤ 70 characters).",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "paragraph"
+      },
+      "text": {
+        "type": "String",
+        "example": "Deletion vectors mark deleted rows"
+      }
+    }
+  },
+  "engine.aimsg.exExplain": "{answered, select, yes {I got this exercise wrong (I answered: {given}). Explain it to me differently.} other {I got this exercise wrong. Explain it to me differently.}}",
+  "@engine.aimsg.exExplain": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “💡 Explain differently” after a wrong answer. answered = yes when the learner’s answer is known; given = that answer.",
+    "placeholders": {
+      "answered": {
+        "type": "String",
+        "example": "yes"
+      },
+      "given": {
+        "type": "String",
+        "example": "B. It rewrites the file"
+      }
+    }
+  },
+  "engine.aimsg.exSocratic": "{answered, select, yes {I got this exercise wrong (I answered: {given}). Help me get it — don't just give me the answer.} other {I got this exercise wrong. Help me get it — don't just give me the answer.}}",
+  "@engine.aimsg.exSocratic": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “Help me get it” (Socratic) after a wrong answer. answered = yes when the learner’s answer is known; given = that answer.",
+    "placeholders": {
+      "answered": {
+        "type": "String",
+        "example": "yes"
+      },
+      "given": {
+        "type": "String",
+        "example": "B. It rewrites the file"
+      }
+    }
+  },
+  "engine.aimsg.exHint": "Give me a hint for this exercise — don't tell me the answer.",
+  "@engine.aimsg.exHint": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “Ask <tutor>” on an exercise before answering it."
+  },
+  "engine.aimsg.cardExplain": "Explain this flashcard to me in more depth, with an example.",
+  "@engine.aimsg.cardExplain": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Ask button on a flashcard whose answer is shown."
+  },
+  "engine.aimsg.cardHint": "Give me a hint for this flashcard — don't tell me the answer.",
+  "@engine.aimsg.cardHint": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Ask button on a flashcard whose answer is still hidden."
+  },
+  "engine.aimsg.secSocratic": "Start a Socratic session on \"{title}\". Begin by probing what I already think.",
+  "@engine.aimsg.secSocratic": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “Socratic dialogue on this” under a section. title = the section’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Deletion vectors"
+      }
+    }
+  },
+  "engine.aimsg.secDebug": "Start a debugging simulation related to \"{title}\".",
+  "@engine.aimsg.secDebug": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “Debug simulation” under a section. title = the section’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Deletion vectors"
+      }
+    }
+  },
+  "engine.aimsg.secInterview": "Interview me about \"{title}\".",
+  "@engine.aimsg.secInterview": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “Interview me” under a section. title = the section’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Deletion vectors"
+      }
+    }
+  },
+  "engine.aimsg.pbRoleplay": "Run a debugging simulation based on this playbook: \"{title}\". Give me only the symptom and let me investigate.",
+  "@engine.aimsg.pbRoleplay": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “🎭 Role-play it” on a debugging playbook. title = the playbook’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Slow MERGE"
+      }
+    }
+  },
+  "engine.aimsg.thisFigure": "this figure",
+  "@engine.aimsg.thisFigure": {
+    "description": "Short name of a picture without a description, quoted in the learner’s message “Explain this figure to me: “this figure”” and shown as the tutor’s topic. Lowercase, nominative."
+  },
+  "engine.aimsg.tellMe": "Just tell me the answer, please.",
+  "@engine.aimsg.tellMe": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “💡 Just tell me” of the Socratic thread tracker."
+  },
+  "engine.aimsg.wrapUp": "Let’s wrap up: give me the answers and what I learned.",
+  "@engine.aimsg.wrapUp": {
+    "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “🎓 Wrap up” of the tutor."
   },
   "engine.tutor.history": "Conversation history",
   "@engine.tutor.history": {
@@ -3080,9 +3240,19 @@
   "@engine.acc.secClaudeInfo": {
     "description": "Account menu › ⚙️ Settings: info tooltip of the Claude section."
   },
-  "engine.acc.asCourse": "as the course",
-  "@engine.acc.asCourse": {
-    "description": "Account menu › ⚙️ Settings: status pill: AI conversations in the course’s language. Lowercase."
+  "engine.acc.chatLangAuto": "automatic: {lang}",
+  "@engine.acc.chatLangAuto": {
+    "description": "Account menu › ⚙️ Settings: status pill of “Language of the AI conversations” when it follows the app’s language. lang = that language’s name. Lowercase.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "English"
+      }
+    }
+  },
+  "engine.acc.testReply": "Brick is ready 🦉",
+  "@engine.acc.testReply": {
+    "description": "Account menu › ⚙️ Settings › 🧪 Test: the AI is asked to reply with exactly these words; the reply is shown after ✅. Brick is a name: keep it."
   },
   "engine.acc.secDisplay": "Display & studying",
   "@engine.acc.secDisplay": {

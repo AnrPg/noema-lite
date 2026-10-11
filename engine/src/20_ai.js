@@ -123,21 +123,23 @@ function learnerProfile() {
 }
 const LEARNER = learnerProfile();
 /* i18n-ignore-end */
-/* ---------- the language of the AI conversations (⚙️ Settings): only what the AI writes to the learner — the pack is unchanged ---------- */
-/* i18n-ignore-start */   // endonyms (shown as they are) and English names for the prompts; langRule … MODES[*].sys, INTENT: prompts for the AI
-const CHAT_LANGS = [['en', 'English', 'English'], ['el', 'Ελληνικά', 'Greek'], ['de', 'Deutsch', 'German'], ['fr', 'Français', 'French'], ['es', 'Español', 'Spanish'], ['it', 'Italiano', 'Italian'], ['pt', 'Português', 'Portuguese'], ['nl', 'Nederlands', 'Dutch'], ['pl', 'Polski', 'Polish'], ['ro', 'Română', 'Romanian'], ['bg', 'Български', 'Bulgarian'], ['ru', 'Русский', 'Russian'], ['uk', 'Українська', 'Ukrainian'], ['tr', 'Türkçe', 'Turkish'], ['ar', 'العربية', 'Arabic'], ['he', 'עברית', 'Hebrew'], ['hi', 'हिन्दी', 'Hindi'], ['zh', '中文', 'Chinese'], ['ja', '日本語', 'Japanese'], ['ko', '한국어', 'Korean']];
-const langName = code => (CHAT_LANGS.find(l => l[0] === code) || [])[2] || code;
+/* ---------- the language of the AI conversations: only what the AI writes to the learner — the pack is unchanged ---------- */
+/* One rule for every AI feature (engine/llm.js NoemaLLM.replyLang): the 🗣 choice (S.settings.chatLang, synced with the
+   account) when made, else the UI language; the course's own language stays for its terms and quotations. */
 const COURSE_LANG = SUBJ.language || 'en';
-/** '' = the language of the course (the learner may still write in another one) */
+/** '' = automatic (the app's language) */
 const chatLang = () => S.settings.chatLang || '';
-/** The rule added to every conversation's instructions, read at call time (a change applies to the next answer). */
-function langRule() {
-  const l = chatLang();
-  if (!l || l === COURSE_LANG) return COURSE_LANG !== 'en' || l ? `LANGUAGE: reply in ${langName(COURSE_LANG)} (the language of the course material) unless the learner writes in another language.` : '';
-  return `LANGUAGE: always write to the learner in ${langName(l)}, although the course material and the notes below are in ${langName(COURSE_LANG)}. Translate what you quote or explain from them; keep code, formulas and proper names as they are, and give a key technical term in its original form in parentheses the first time it appears (the learner meets it that way in the material). If the learner explicitly asks for another language, use that one.`;
-}
-/** For the JSON helpers (grading, feedback): which language their human-readable fields are written in. */
-const langFields = what => { const l = chatLang(); return l && l !== COURSE_LANG ? ` Write ${what} in ${langName(l)}.` : ''; };
+/** A language as the prompts name it: "Greek (Ελληνικά)". */
+const langName = code => window.NoemaLLM?.langLabel ? NoemaLLM.langLabel(code) : code;
+/** { code, auto, name, address }: the language the AI writes to the learner in, read at call time (a change applies to the next answer). */
+const replyLang = () => window.NoemaLLM?.replyLang ? NoemaLLM.replyLang(null, chatLang(), uiLang()) : { code: chatLang() || 'en', auto: !chatLang(), name: langName(chatLang() || 'en'), address: '' };
+/** " Write it in Greek (Ελληνικά)." after a directive of the app (WRAP UP, TUTOR STATE) when the learner does not read English. */
+const inReplyLang = (what = 'it') => { const r = replyLang(); return /^en\b/i.test(r.code) ? '' : ` Write ${what} in ${r.name}.`; };   // i18n-ignore (a prompt)
+/** The rule added to every conversation's instructions. */
+const langRule = () => window.NoemaLLM?.chatRule ? NoemaLLM.chatRule(replyLang(), COURSE_LANG) : '';
+/** For the JSON helpers (grading, feedback, questions): which language their human-readable fields are written in. */
+const langFields = what => window.NoemaLLM?.fieldsRule ? NoemaLLM.fieldsRule(replyLang(), COURSE_LANG, what) : '';
+/* i18n-ignore-start */   // MODES[*].sys, INTENT: prompts for the AI
 const FORMAT = `markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
 const STYLE = `Formatting: short turns (max ~120 words unless asked), ${FORMAT}`;
 /** For the free, in-depth explanations: the same rules without the short-turn cap. */
@@ -220,11 +222,11 @@ function explainable(el, get) {
   else el.append(b);
   return el;
 }
-function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {   // i18n-ignore (what: words of the prompt)
+function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {   // i18n-ignore (what: words of the prompt; the learner's message names it in the UI language)
   const plain = String(label || text || '').replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').trim();
   const short = plain.length > 70 ? plain.slice(0, 68).replace(/\s+\S*$/, '') + '…' : plain;
   let hsh = 0; for (const x of String(text || label)) hsh = (hsh * 31 + x.charCodeAt(0)) >>> 0;
-  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`,   // i18n-ignore: the learner's first message to the AI (a prompt; see the report)
+  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', tE('engine.aimsg.explainItem', { what: what.replace(/\s+/g, '_'), text: short }),   // the learner's first message: their bubble, in the UI language (the reply-language rule does the rest)
     { intent: INTENT.item(what) });
 }
 
@@ -270,11 +272,27 @@ function openTutor(ctx, mode, autoMsg, { intent } = {}) {
   else setTimeout(() => $('.composer textarea')?.focus(), 350);
 }
 function closeTutor() { T.open = false; $('.drawer')?.classList.remove('open'); $('.scrim')?.classList.remove('on'); }
+/** 🗣 The choices for the AI conversations: automatic (the app's language), the course's language, every UI language by its
+    endonym (engine/i18n.js LOCALES) and an older choice that is none of them. → [[value, label]] */
+function chatLangChoices() {
+  const endo = c => { const L = (window.NoemaI18n?.LOCALES || []).find(l => l.tag === c); if (L) return L.name; try { const n = new Intl.DisplayNames([c], { type: 'language' }).of(c) || c; return n.charAt(0).toLocaleUpperCase(c) + n.slice(1); } catch (e) { return c; } };
+  const base = c => String(c).split('-')[0].toLowerCase();
+  const out = [['', tE('engine.tutor.chatLangAuto')], [COURSE_LANG, tE('engine.tutor.chatLangCourse', { lang: endo(COURSE_LANG) })]];
+  for (const L of (window.NoemaI18n?.LOCALES || [{ tag: 'en', name: 'English' }])) if (!L.pseudo && L.tag !== COURSE_LANG) out.push([L.tag, L.name]);
+  const cur = chatLang();
+  if (cur && !out.some(([v]) => v === cur) && !out.some(([v]) => v && base(v) === base(cur))) out.push([cur, endo(cur)]);
+  return out;
+}
+/** Is a choice the current one? (an older 'es' / 'pt' / 'zh' / 'ar' matches its UI locale es-ES / pt-PT / zh-Hans / ar-EG) */
+function chatLangIs(v) {
+  const cur = chatLang(); if (v === cur) return true; if (!v || !cur) return false;
+  const ch = chatLangChoices(); if (ch.some(([x]) => x === cur)) return false;
+  return ch.find(([x]) => x && x.split('-')[0].toLowerCase() === cur.split('-')[0].toLowerCase())?.[0] === v;
+}
 /** 🗣 The language picker of the AI conversations (⚙️ Settings and the tutor drawer). */
 function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
   return h('select', { class: cls, title: tE('engine.tutor.chatLangTip'), 'aria-label': tE('engine.tutor.chatLangAria'), onchange: e => { if (persist) { S.settings.chatLang = e.target.value; save(); } onChange?.(e.target.value); } },
-    h('option', { value: '', selected: !chatLang() }, '🗣 ' + tE('engine.tutor.chatLangSame', { lang: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG })),
-    ...CHAT_LANGS.map(([v, l]) => h('option', { value: v, selected: chatLang() === v }, '🗣 ' + l)));
+    ...chatLangChoices().map(([v, l]) => h('option', { value: v, selected: chatLangIs(v) || (!v && !chatLang()), ...(v ? { lang: v } : {}) }, '🗣 ' + l)));
 }
 /** The tutor is the learner's character: its face (engine/art.js), else the subject's emoji. */
 function tutorFace() { const svg = SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : ''; return svg ? h('div', { class: 'avatar face', html: svg }) : h('div', { class: 'avatar' }, TUTOR.avatar); }
@@ -294,13 +312,12 @@ function renderShellTutor(d) {
   const X = SHL(), hist = T.hist[tutorCtxKey()] || [];
   const msgs = h('div', { class: 'msgs' });
   const send = () => { const ta = $('.composer textarea', d); const v = ta.value.trim(); if (v) { ta.value = ''; ta.style.height = 'auto'; sendTutor(v); } };
-  const langMenu = btn => X.popMenu(btn, [{ label: SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: !chatLang() ? '✓' : ' ', run: () => { S.settings.chatLang = ''; save(); renderTutor(); } },
-    ...CHAT_LANGS.map(([v, l]) => ({ label: l, icon: chatLang() === v ? '✓' : ' ', run: () => { S.settings.chatLang = v; save(); renderTutor(); } }))]);
+  const langMenu = btn => X.popMenu(btn, chatLangChoices().map(([v, l]) => ({ label: l, icon: (v ? chatLangIs(v) : !chatLang()) ? '✓' : ' ', run: () => { S.settings.chatLang = v; save(); renderTutor(); } })));
   const more = X.menuButton(() => [
     { label: SL('chatHistory'), icon: 'clock', run: () => SHL().convos() },   // the history is a window in the middle of the screen, every subject grouped by Roadmap and step
     { label: SL('chatNew'), icon: '↺', run: () => { T.showHistory = false; T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } },
     hist.length ? { label: SL('chatExport'), icon: '⬇️', run: () => exportConvo(currentConvo()) } : null,
-    { label: SL('chatLangItem'), sub: chatLang() ? CHAT_LANGS.find(l => l[0] === chatLang())?.[1] : SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: '🗣', run: () => setTimeout(() => langMenu(more.querySelector('button') || more), 0) }], { label: X.L('more') });
+    { label: SL('chatLangItem'), sub: (chatLangChoices().find(([v]) => v && chatLangIs(v)) || chatLangChoices()[0])[1], icon: '🗣', run: () => setTimeout(() => langMenu(more.querySelector('button') || more), 0) }], { label: X.L('more') });
   const modeBtn = h('button', { class: 'ns-modesel', type: 'button', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); const had = modeWrap.querySelector(':scope > .ns-pop'); X.closePops(); if (had) return;
     X.popMenu(modeBtn, Object.keys(MODES).filter(k => MODES[k].chip !== false || T.mode === k).map(k => ({ label: modeName(k), sub: modeSub(k), icon: T.mode === k ? '✓' : ' ', run: () => { T.mode = k; renderTutor(); } }))); } },
     h('b', {}, modeName(T.mode)), modeSub(T.mode) ? h('span', { class: 'sub' }, ' · ' + modeSub(T.mode)) : null, h('span', { class: 'caret', 'aria-hidden': 'true' }, '▾'));
@@ -359,12 +376,12 @@ function renderTutor() {
     const greet = { name: ACCOUNT.name, tutor: TUTOR.name, avatar: TUTOR.avatar, mode: MODES[T.mode].label };
     msgs.append(h('div', { class: 'msg ai' }, md(ACCOUNT.name ? tE('engine.tutor.greet', greet) : tE('engine.tutor.greetAnon', greet))),
       h('div', { class: 'starters' },
-        ...[   // [the button (the learner's words), the mode, the first message sent to the AI (a prompt: English, i18n-ignore)]
-          [`${TUTOR.avatar} ` + tE('engine.tutor.starterSocratic'), 'socratic', `Start a Socratic session on: ${topic}. Begin by probing what I already think.`],   // i18n-ignore
-          ['⚡ ' + tE('engine.tutor.starterQuiz'), 'quiz', `Quiz me on ${topic}. Focus on certification traps and pitfalls.`],   // i18n-ignore
-          ['🔧 ' + tE('engine.tutor.starterDebug'), 'debug', `Start a debugging simulation related to: ${topic}.`],   // i18n-ignore
-          ['🎤 ' + tE('engine.tutor.starterInterview'), 'interview', `Interview me about ${topic}.`],   // i18n-ignore
-          ['💡 ' + tE('engine.tutor.starterExplain'), 'explain', `Explain the core idea of ${topic} differently from the notes.`],   // i18n-ignore
+        ...[   // [the button, the mode, the learner's first message: their bubble, in the UI language — the reply-language rule tells the AI how to answer]
+          [`${TUTOR.avatar} ` + tE('engine.tutor.starterSocratic'), 'socratic', tE('engine.aimsg.startSocratic', { topic })],
+          ['⚡ ' + tE('engine.tutor.starterQuiz'), 'quiz', tE('engine.aimsg.startQuiz', { topic })],
+          ['🔧 ' + tE('engine.tutor.starterDebug'), 'debug', tE('engine.aimsg.startDebug', { topic })],
+          ['🎤 ' + tE('engine.tutor.starterInterview'), 'interview', tE('engine.aimsg.startInterview', { topic })],
+          ['💡 ' + tE('engine.tutor.starterExplain'), 'explain', tE('engine.aimsg.startExplain', { topic })],
         ].map(([l, m, msg]) => h('button', { onclick: () => { T.mode = m; renderTutor(); sendTutor(msg); } }, l))));
   }
   hist.forEach(m => {
@@ -404,7 +421,7 @@ async function sendTutor(text, hidden = false, opts = {}) {
   let system = tutorSystem(intent);
   { const lr = langRule(); if (lr) system += '\n\n' + lr; }
   if (threaded) system += '\n\n' + tutorStateBlock(ts, directive);
-  else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.';   // i18n-ignore
+  else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.' + inReplyLang();   // i18n-ignore
   const contents = hist.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }));
   try {
     const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(splitControl(t).clean || '…')); msgs.scrollTop = msgs.scrollHeight; } });
@@ -442,10 +459,10 @@ async function aiGrade(ex, answer) {
 }
 async function aiQuestion(sec, kind = 'mcq') {
   const schema = { type: 'OBJECT', properties: { q: { type: 'STRING' }, code: { type: 'STRING' }, options: { type: 'ARRAY', items: { type: 'STRING' } }, answer: { type: 'INTEGER' }, why: { type: 'ARRAY', items: { type: 'STRING' } }, explain: { type: 'STRING' } }, required: ['q', 'options', 'answer', 'why', 'explain'] };
-  /* i18n-ignore-start */   // the question prompt (English)
+  /* i18n-ignore-start */   // the question prompt (English; langFields() asks for the learner's language)
   const seen = shuffle(sec._ch.exercises.filter(e => e.section === sec.id)).slice(0, 6).map(e => '- ' + e.q).join('\n');
   const prompt = `Create ONE fresh, tricky multiple-choice question (4 options, exactly one correct) that tests deep understanding of this ${TUTOR.domain} section. Prefer a scenario, a prediction, a debugging decision or a certification trap. Avoid duplicating these existing questions:\n${seen}\n\nSECTION NOTES (only use facts from here):\n${sectionText(sec).slice(0, 9000)}\n\nJSON fields: q (inline markdown with **bold** and \`code\` allowed), code (optional snippet or empty string), options (4 strings), answer (0-3), why (4 short strings: why each option is right/wrong), explain (2-4 sentences that teach).`;
-  const r = await geminiJSON(prompt, 'You write excellent exam questions. Output only JSON.', schema);
+  const r = await geminiJSON(prompt, 'You write excellent exam questions. Output only JSON.' + langFields('q, options, why and explain'), schema);
   /* i18n-ignore-end */
   try { logAI('question', { ctx: { kind: 'section', id: sec.id, label: chTitle(sec._ch.num, sec.title) }, title: tE('engine.log.aiQuestion', { q: String(r.q || '').replace(/[*`_]/g, '').slice(0, 70) }),
     prompt: tE('engine.log.aiQuestionAsk', { title: sec.title }),
