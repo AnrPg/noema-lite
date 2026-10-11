@@ -16,7 +16,6 @@
   "engine.gemini.hiccup": "Gemini a un petit hoquet ({status}). Réessaie dans un instant.",
   "engine.gemini.error": "Erreur Gemini {status} : {detail}",
   "engine.gemini.noKey": "Pas de clé API Gemini. Ouvre ⚙️ Réglages.",
-  "engine.gemini.network": "Erreur réseau — es-tu en ligne ? ({detail})",
   "engine.gemini.emptyBlocked": "Réponse vide de Gemini (bloquée : {reason}).",
   "engine.gemini.empty": "Réponse vide de Gemini.",
   "engine.mode.socratic": "Socratique",

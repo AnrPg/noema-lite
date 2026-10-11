@@ -23,6 +23,10 @@ window.NoemaCurriculum = (() => {
     const F = window.IntlMessageFormat, M = F && (F.IntlMessageFormat || F.default || F);
     try { return M ? String(new M(m, 'en', undefined, { ignoreTag: true }).format(p || {})) : m; } catch (e) { return m; }
   }
+  /** An error's words for the learner: its code's message in the UI language, else its (English) text (docs/i18n.md §6). */
+  const errW = e => window.NoemaI18n ? window.NoemaI18n.err(e) : String((e && e.message) || e);
+  /** What is kept beside a stored error text (c.error, a step's pack.error): its code, so it is shown in the UI language of the moment. */
+  const errInfo = e => e && e.code ? { code: e.code, params: e.params || {}, message: String(e.message || '') } : null;
 
   /* ======================= prompts (adapted from the curriculum design brief) ======================= */
   /* i18n-ignore-start — prompts and JSON schemas for the AI (docs/i18n.md approach 6: English, they ask for the curriculum's language) */
@@ -568,7 +572,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     }
     if (!L().pick(acc, c.provider)) throw new Error(rt('roadmap.build.needKey'));
     const on = (m, extra) => { logTo(c, m); onLog(m, c, extra); }; on.signal = signal;
-    if (L().pick(acc, c.provider) === 'claude' && !c.model) { try { const CL = window.NoemaClaude; const ms = await CL.models(CL.Key.get(acc)); const pref = kvGet(acc, 'claudeModel', ''); c.model = pref && ms.some(m => m.id === pref) ? pref : CL.defaultModel(ms); } catch (e) { throw new Error('Claude: ' + e.message); } }   // ⚙️ Settings → Claude model   // i18n-ignore (a name before the error)
+    if (L().pick(acc, c.provider) === 'claude' && !c.model) { try { const CL = window.NoemaClaude; const ms = await CL.models(CL.Key.get(acc)); const pref = kvGet(acc, 'claudeModel', ''); c.model = pref && ms.some(m => m.id === pref) ? pref : CL.defaultModel(ms); } catch (e) { throw Object.assign(new Error('Claude: ' + e.message), { code: 'ai.api_claude', params: { detail: errW(e) } }); } }   // ⚙️ Settings → Claude model   // i18n-ignore (a name before the error)
     c.status = 'building'; save(acc, c);
     const stages = [['dag', stageDag], ['audit', stageAudit], ['expand', stageExpand], ['plan', stagePlan]];
     try {
@@ -584,7 +588,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
       c.status = 'ready'; c.stage = 'done'; c.title = c.nodes[c.goalId]?.goalTitle || c.title || c.goal;
       on('✅ ' + rt(c.imported ? 'roadmap.build.readyImported' : 'roadmap.build.ready', { n: Object.keys(c.nodes).length }));
     } catch (e) {
-      c.status = e.kind === 'aborted' ? 'paused' : 'failed'; c.error = e.message; on('⚠️ ' + e.message);
+      c.status = e.kind === 'aborted' ? 'paused' : 'failed'; c.error = e.message; c.errorInfo = errInfo(e); on('⚠️ ' + errW(e));
     }
     save(acc, c); return c;
   }
@@ -704,7 +708,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   }
 
   return { DOMAINS, domainOf, packageText, outlineOf, planLocked, PLAN_KEYS, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, stampAfter, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
-    schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART, rt };
+    schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART, rt, errW, errInfo };
 })();
 
 /* ======================= node packs: generation queue (prefetch) + placement test =======================
@@ -714,7 +718,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
    the same node. Claude (API key) → the noema-pack-builder skill job (engine/claude.js, web research);
    otherwise Gemini → engine/packgen.js. */
 window.NoemaCurriculum.Gen = (() => {
-  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare, rt = C.rt;
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare, rt = C.rt, errW = C.errW;
   const TAB = 't' + Math.random().toString(36).slice(2, 9);
   const live = {};            // nodeKey → { msg, at } (in memory: progress lines are not synced)
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });
@@ -784,9 +788,9 @@ window.NoemaCurriculum.Gen = (() => {
       say('✅ ' + rt('roadmap.gen.ready')); window.Noema?.toast?.('🧭 ' + rt('roadmap.gen.readyToStudy', { title: n.title }));
     } catch (e) {
       const stopped = e.kind === 'aborted' || /Stopped/.test(e.message);
-      patchNode(c.id, nid, stopped ? { status: 'paused', error: rt('roadmap.gen.paused') } : { status: 'failed', error: e.message, failedAt: Date.now() });
+      patchNode(c.id, nid, stopped ? { status: 'paused', error: rt('roadmap.gen.paused'), errorInfo: null } : { status: 'failed', error: e.message, errorInfo: C.errInfo(e), failedAt: Date.now() });
       if (!stopped) SH()?.release(acc, c, nid);   // 👥 free for the others again
-      say((stopped ? '⏸️ ' : '⚠️ ') + e.message);
+      say((stopped ? '⏸️ ' : '⚠️ ') + errW(e));
     } finally { clearInterval(hb); lock(c.id, nid, false); ctl = null; }
   }
 
@@ -820,7 +824,7 @@ window.NoemaCurriculum.Gen = (() => {
       if (was) { const cc = C.get(acc, c.id); cc.nodes[nid].assignedAt = new Date().toISOString(); delete cc.nodes[nid].planFrom; C.save(acc, cc); }   // 📦 this subject replaces the one attached to the step
     }
     // 👥 a shared curriculum: everybody gets it (unless somebody else's version was there first — then this one stays mine)
-    if (c.shared && !c.shared.ended && SH()) await SH().contribute(acc, c.id, nid).catch(e => { console.warn('[curriculum] sharing the step failed', e); window.Noema?.toast?.('⚠️ ' + rt('roadmap.gen.shareFailed', { error: e.message }), 6000); patchNode(c.id, nid, { shareError: e.message }); });
+    if (c.shared && !c.shared.ended && SH()) await SH().contribute(acc, c.id, nid).catch(e => { console.warn('[curriculum] sharing the step failed', e); window.Noema?.toast?.('⚠️ ' + rt('roadmap.gen.shareFailed', { error: errW(e) }), 6000); patchNode(c.id, nid, { shareError: e.message }); });
   }
 
   async function viaClaude(c, nid, pid, say) {
@@ -838,7 +842,7 @@ window.NoemaCurriculum.Gen = (() => {
       job = job.status === 'question' && answers < 3 ? await CL.answer(job, apiKey, 'Continue with sensible defaults and finish the pack (do not wait for me).', { onLog: say, signal: ctl.signal }) : await CL.run(job, apiKey, { onLog: say, signal: ctl.signal });   // i18n-ignore (the answer to Claude)
       if (job.status === 'done') { const p = job.pack; if (job.bundleFiles && Object.keys(job.bundleFiles).length) p._bundleFiles = job.bundleFiles; await CL.deleteJob(job.id); return p; }
       if (job.status === 'question' && answers < 3) continue;
-      if (job.status === 'budget') { patchNode(c.id, nid, { status: 'paused', error: job.error, budgetHit: true, cost: CL.cost(job.usage, job.model) }); say('💰 ' + job.error); return null; }
+      if (job.status === 'budget') { patchNode(c.id, nid, { status: 'paused', error: job.error, errorInfo: job.errorInfo || null, budgetHit: true, cost: CL.cost(job.usage, job.model) }); say('💰 ' + job.error); return null; }
       throw Object.assign(new Error(job.error || rt('roadmap.gen.noPack')), { kind: job.status === 'paused' ? 'aborted' : 'api' });
     }
   }
@@ -915,7 +919,7 @@ window.NoemaCurriculum.Gen = (() => {
 
 /* ======================= editing the map ======================= */
 window.NoemaCurriculum.Edit = (() => {
-  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, rt = C.rt;
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, rt = C.rt, errW = C.errW;
   const ROLES = ['foundation', 'intro', 'aspect', 'subtopic', 'related', 'synthesis', 'application'];
   const PART = { foundation: 'prereq', intro: 'core', aspect: 'core', subtopic: 'core', related: 'core', synthesis: 'core', application: 'apps', goal: 'core' };
   const generated = n => ['ready', 'generating'].includes(n?.pack?.status);
@@ -1001,7 +1005,7 @@ window.NoemaCurriculum.Edit = (() => {
     const meta = (await window.Noema?.subjectsFor?.(acc) || []).find(s => s.id === subjectId);
     if (!meta) return { error: rt('roadmap.assign.notInLibrary'), code: 'notInLibrary' };
     if (meta.kind === 'language') return { error: rt('roadmap.assign.language'), code: 'language' };
-    let pack; try { pack = await window.Noema.loadSubject(acc, subjectId); } catch (e) { return { error: e.message || rt('roadmap.assign.loadFailed'), code: 'load' }; }
+    let pack; try { pack = await window.Noema.loadSubject(acc, subjectId); } catch (e) { return { error: (e.message ? errW(e) : '') || rt('roadmap.assign.loadFailed'), code: 'load' }; }
     const chapters = pack?.chapters || []; if (!chapters.length) return { error: rt('roadmap.assign.noChapters'), code: 'empty' };
     c = C.get(acc, cid); n = c.nodes[nid]; const again = assignBlock(c, n); if (again) return { error: assignNo(again), code: again };
     const old = n.pack?.id && !n.pack.assigned && n.pack.id !== subjectId ? n.pack.id : null;

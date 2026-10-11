@@ -17,6 +17,10 @@
   }
   const cloudAcc = acc => { try { const s = window.NoemaCloud?.session?.(); return !!s && acc === 'u_' + s.user.id; } catch (e) { return false; } };
   const toast = (m, ms = 3000) => window.Noema?.toast ? Noema.toast(m, ms) : console.log(m);
+  /** An error's words for the learner: its code's message in the UI language, else its (English) text (docs/i18n.md §6). */
+  const errW = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
+  /** A refused task's error: task.error keeps the English text (the connector, older apps), task.errorInfo { code, params } the learner's words. */
+  const taskErr = t => t.errorInfo && t.errorInfo.code && window.NoemaI18n && NoemaI18n.has('err.' + t.errorInfo.code) ? NoemaI18n.err(t.errorInfo) : t.error;
 
   /* ---------- device + cloud storage of the content ---------- */
   const ownDb = { db: null, open() { if (this.db) return Promise.resolve(this.db); return new Promise((res, rej) => { const r = indexedDB.open('noema-lite', 1); r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); }; r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error); }); } };
@@ -155,7 +159,7 @@
       if (signal?.aborted) break;
       const t = N.langNext(getRec(acc, cid) || { tasks: [] }); if (!t || t.error) break;
       try { await runTask(acc, cid, t.id, { onLog, signal }); }
-      catch (e) { onLog('⚠️ ' + t.id + ': ' + e.message); const rec = getRec(acc, cid), x = N.langTaskById(rec, t.id); if (x && !signal?.aborted) { x.status = 'refused'; x.error = String(e.message).slice(0, 300); putRec(acc, rec); } if (/key|credit|401|Stopped/i.test(e.message)) break; }
+      catch (e) { onLog('⚠️ ' + t.id + ': ' + errW(e)); const rec = getRec(acc, cid), x = N.langTaskById(rec, t.id); if (x && !signal?.aborted) { x.status = 'refused'; x.error = String(e.message).slice(0, 300); x.errorInfo = e.code ? { code: e.code, params: e.params || {} } : null; putRec(acc, rec); } if (/key|credit|401|Stopped/i.test(e.message)) break; }
     }
     return n;
   }
@@ -190,7 +194,7 @@
         try {
           const ctx = ctxs[cid] = ctxs[cid] || await contentFor(acc, rec);
           const errs = N.checkLangAnswer(rec, ctx.data, task, e.data, { peers: task.kind === K.core ? await libraryData() : [] });
-          if (errs.length) { console.warn('[langjobs] answer refused', errs); task.status = 'refused'; task.error = errs.slice(0, 5).join('; '); putRec(acc, rec); }
+          if (errs.length) { console.warn('[langjobs] answer refused', errs); task.status = 'refused'; task.error = errs.slice(0, 5).join('; '); task.errorInfo = null; putRec(acc, rec); }
           else { await applyAndSave(acc, rec, ctx, task, e.data); n++; }
           done.push(r.key);
         } catch (x) { console.warn('[langjobs]', x); }
@@ -277,13 +281,13 @@
           const { record } = await create(acc, opts);
           if (way === 'claude') {
             msg.textContent = '✨ ' + LT('lang.claude.writingCore');
-            try { await runTask(acc, record.id, 'core', { onLog: t => { msg.textContent = t; } }); } catch (e) { msg.textContent = '⚠️ ' + LT('lang.claude.staysQueued', { err: window.NoemaI18n ? NoemaI18n.err(e) : e.message }); }
+            try { await runTask(acc, record.id, 'core', { onLog: t => { msg.textContent = t; } }); } catch (e) { msg.textContent = '⚠️ ' + LT('lang.claude.staysQueued', { err: errW(e) }); }
             close(); onCreated(record); return;
           }
           box.innerHTML = '';
           box.append(h('h2', {}, '✨ ' + LT('lang.claude.waiting', { title: record.title })), h('p', {}, LT('lang.claude.waitingHow')),
             textBox(N.langMessage(record)), h('div', { class: 'row' }, h('button', { class: 'btn', onclick: e => copy(N.langMessage(record), e.currentTarget) }, '📋 ' + LT('lang.claude.copyMsg')), h('button', { class: 'btn primary', onclick: () => { close(); onCreated(record); } }, LT('lang.claude.openCourse'))));
-        } catch (e) { go1.disabled = false; msg.textContent = '⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(e) : e.message); }
+        } catch (e) { go1.disabled = false; msg.textContent = '⚠️ ' + errW(e); }
       } }, '✨ ' + LT('lang.claude.create'));
       box.append(h('h2', {}, '✨ ' + LT('lang.claude.newTitle')), h('p', { class: 'tiny' }, LT('lang.claude.newSub')),
         h('label', { class: 'lj-field' }, h('b', {}, LT('lang.claude.titleLabel')), title),
@@ -329,14 +333,14 @@
       log));
     const open = N.langOpenTasks(rec), past = (rec.tasks || []).filter(t => t.status !== 'queued').slice(-12).reverse();
     v.append(h('h2', { class: 'lx-h2' }, LT('lang.claude.queue')), open.length ? h('div', { class: 'lj-tasks' }, ...open.map(t => taskRow(acc, C, t, say))) : h('p', { class: 'tiny' }, account && !nd.core && !nd.nodes.length ? '🎉 ' + LT('lang.claude.allWritten') : LT('lang.claude.nothingInQueue')));
-    if (past.length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.past') + ' ', h('span', { class: 'tiny' }, LNUM(past.length))), h('ul', { class: 'lx-list' }, ...past.map(t => h('li', { 'data-task': t.id }, STATUS[t.status] || t.status, ' ', h('code', {}, t.id), t.error ? h('div', { class: 'tiny' }, t.error) : null)))));
+    if (past.length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.past') + ' ', h('span', { class: 'tiny' }, LNUM(past.length))), h('ul', { class: 'lx-list' }, ...past.map(t => h('li', { 'data-task': t.id }, STATUS[t.status] || t.status, ' ', h('code', {}, t.id), t.error ? h('div', { class: 'tiny' }, taskErr(t)) : null)))));
     if ((rec.log || []).length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.wrote')), h('ul', { class: 'lx-list' }, ...rec.log.slice(-15).reverse().map(l => h('li', {}, window.NoemaI18n ? NoemaI18n.fmt.date(l.t, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) : new Date(l.t).toLocaleString(), ' — ', l.m)))));
   };
   function taskRow(acc, C, t, say) {
     const row = h('div', { class: 'lx-card lj-task', 'data-task': t.id },
       h('div', { class: 'lj-taskhead' }, h('b', {}, kindLabel[t.kind] || t.kind), ' ', h('code', {}, t.id), t.night ? h('span', { class: 'lx-badge' }, '🌙') : null, t.claimedAt ? h('span', { class: 'lx-badge ctx' }, '✍️ ' + LT('lang.claude.claimedByRun')) : null),
       h('div', { class: 'row' },
-        hasKey(acc) ? h('button', { class: 'btn small primary lj-run', onclick: async e => { e.currentTarget.disabled = true; try { await runTask(acc, C.id, t.id, { onLog: say }); } catch (x) { say('⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(x) : x.message)); } render(); } }, '▶ ' + LT('lang.claude.writeNow')) : null,
+        hasKey(acc) ? h('button', { class: 'btn small primary lj-run', onclick: async e => { e.currentTarget.disabled = true; try { await runTask(acc, C.id, t.id, { onLog: say }); } catch (x) { say('⚠️ ' + errW(x)); } render(); } }, '▶ ' + LT('lang.claude.writeNow')) : null,
         h('button', { class: 'btn small lj-copy', onclick: async e => copy(await copyTask(acc, C.id, t.id), e.currentTarget) }, '📋 ' + LT('lang.claude.copyTask')),
         h('button', { class: 'btn small lj-paste', onclick: () => pasteBox(acc, C, t, row) }, '📥 ' + LT('lang.claude.pasteAnswer'))));
     return row;

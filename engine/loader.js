@@ -274,7 +274,7 @@
     if (window.NoemaCloud && NoemaCloud.session()) {
       let err = null; const p = await NoemaCloud.downloadPack(meta.id).catch(e => { err = e; return null; });
       if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); if (cached) toastL('✨ ' + tr('loader.pack.upToDate', { title: meta.title || meta.id }), 3000); return embedWebPictures(acc, p); }
-      if (cached && err) { console.warn('[noema] the new version could not be downloaded', err); toastL('⚠️ ' + tr('loader.pack.newFailed', { title: meta.title || meta.id, error: err.message || tr('loader.pack.network') }), 7000); }
+      if (cached && err) { console.warn('[noema] the new version could not be downloaded', err); toastL('⚠️ ' + tr('loader.pack.newFailed', { title: meta.title || meta.id, error: (err.message || err.code ? errMsg(err) : '') || tr('loader.pack.network') }), 7000); }
     }
     if (cached) return cached;
     throw new Error(tr('loader.pack.loadFailed', { title: meta.title || meta.id }));
@@ -337,6 +337,8 @@
   const fmtUSD = (x, min = 2) => window.NoemaI18n ? NoemaI18n.fmt.number(x, { style: 'currency', currency: 'USD', minimumFractionDigits: min, maximumFractionDigits: 2 }) : '$' + (min ? x.toFixed(2) : x);   // Claude’s prices are in US dollars
   /** The words for an error a learner reads: a known error code → its translation, else the (English) message (NoemaI18n.err). */
   const errMsg = e => window.NoemaI18n ? NoemaI18n.err(e) : String(e?.message || e);
+  /** A “Create with Claude” job's error in the current UI language: its code (job.errorInfo) when the catalog knows it, else the words stored with it (job.error). */
+  const jobErr = j => j.errorInfo && j.errorInfo.code && window.NoemaI18n && NoemaI18n.has('err.' + j.errorInfo.code) ? NoemaI18n.err(j.errorInfo) : j.error;
   function pickAccount({ closable = false } = {}) {
     return new Promise(resolve => {
       overlay((box, close) => {
@@ -1266,7 +1268,7 @@
           const usd = C.cost(j.usage, j.model), tok = ((j.usage.input || 0) + (j.usage.cacheRead || 0) + (j.usage.cacheWrite || 0) + (j.usage.output || 0));
           money.textContent = tr('loader.cg.p.money', { cost: fmtUSD(usd), budget: fmtUSD(+j.budget || 0, 0), k: Math.round(tok / 1000), turns: j.turns || 0, model: j.model });
           status.className = 'cg-status ' + j.status;
-          status.textContent = { starting: '⏳ ' + tr('loader.cg.preparing'), running: running ? '🧠 ' + tr('loader.cg.p.working') : '⏸️ ' + tr('loader.cg.p.paused'), paused: '⏸️ ' + (j.error || tr('loader.cg.p.paused')), question: '💬 ' + tr('loader.cg.p.question'), budget: '💰 ' + j.error, error: '⚠️ ' + j.error, failed: '❌ ' + j.error, done: '✅ ' + tr('loader.cg.p.done') }[j.status] || j.status;
+          status.textContent = { starting: '⏳ ' + tr('loader.cg.preparing'), running: running ? '🧠 ' + tr('loader.cg.p.working') : '⏸️ ' + tr('loader.cg.p.paused'), paused: '⏸️ ' + (jobErr(j) || tr('loader.cg.p.paused')), question: '💬 ' + tr('loader.cg.p.question'), budget: '💰 ' + jobErr(j), error: '⚠️ ' + jobErr(j), failed: '❌ ' + jobErr(j), done: '✅ ' + tr('loader.cg.p.done') }[j.status] || j.status;
           actions.innerHTML = ''; ask.innerHTML = '';
           if (running) actions.append(el('button', { class: 'btn', onclick: () => ctl?.abort() }, '⏹ ' + tr('loader.cg.p.stop')));
           else if (j.status === 'done') actions.append(el('button', { class: 'btn primary', onclick: async () => { try { const s = await importPack(acc, j.pack, { via: 'claude-api' });

@@ -16,7 +16,6 @@
   "engine.gemini.hiccup": "У Gemini небольшой сбой ({status}). Попробуй ещё раз чуть позже.",
   "engine.gemini.error": "Ошибка Gemini {status}: {detail}",
   "engine.gemini.noKey": "Нет ключа Gemini API. Открой ⚙️ Настройки.",
-  "engine.gemini.network": "Ошибка сети — ты в сети? ({detail})",
   "engine.gemini.emptyBlocked": "Пустой ответ от Gemini (заблокировано: {reason}).",
   "engine.gemini.empty": "Пустой ответ от Gemini.",
   "engine.mode.socratic": "Сократовский",

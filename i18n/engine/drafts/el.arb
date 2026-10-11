@@ -16,7 +16,6 @@
   "engine.gemini.hiccup": "Το Gemini έχει ένα μικρό πρόβλημα ({status}). Δοκίμασε ξανά σε λίγο.",
   "engine.gemini.error": "Σφάλμα Gemini {status}: {detail}",
   "engine.gemini.noKey": "Δεν υπάρχει κλειδί Gemini API. Άνοιξε τις ⚙️ Ρυθμίσεις.",
-  "engine.gemini.network": "Σφάλμα δικτύου — είσαι συνδεδεμένος; ({detail})",
   "engine.gemini.emptyBlocked": "Κενή απάντηση από το Gemini (μπλοκαρίστηκε: {reason}).",
   "engine.gemini.empty": "Κενή απάντηση από το Gemini.",
   "engine.mode.socratic": "Σωκρατικά",

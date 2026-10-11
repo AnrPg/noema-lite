@@ -407,7 +407,7 @@ async function sendTutor(text) {
     const target = (r.data.target || []).filter(x => typeof x === 'string' && x.trim());
     hist.push({ role: 'assistant', text: r.data.reply, target, check: target.map(t => N.checkText(UI.C, c, t, k.R)), t: Date.now() });
     persistTutor(key, ctx, hist, r.provider);
-  } catch (e) { hist.push({ role: 'error', text: e.message || String(e) }); }
+  } catch (e) { hist.push({ role: 'error', text: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || String(e) }); }
   finally { TT.busy = false; if (TT.open && tutorKey(TT.ctx) === key) drawTutor(); }
 }
 /** Keep the conversation with the others (engine/convos.js: IndexedDB, the backup folder, the cloud). */

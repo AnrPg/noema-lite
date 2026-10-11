@@ -102,16 +102,6 @@
   "@engine.gemini.noKey": {
     "description": "Error when the learner uses an AI feature without a Gemini API key."
   },
-  "engine.gemini.network": "Network error — are you online? ({detail})",
-  "@engine.gemini.network": {
-    "description": "Error when Gemini cannot be reached. detail = the browser’s technical message (English).",
-    "placeholders": {
-      "detail": {
-        "type": "String",
-        "example": "Failed to fetch"
-      }
-    }
-  },
   "engine.gemini.emptyBlocked": "Empty answer from Gemini (blocked: {reason}).",
   "@engine.gemini.emptyBlocked": {
     "description": "Error when Gemini answered nothing because its safety filter blocked the request. reason = Gemini’s code (e.g. SAFETY).",
