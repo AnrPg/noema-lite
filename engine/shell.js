@@ -718,7 +718,7 @@ window.NoemaShell = (() => {
     build({ head, body, close, refocus }); refocus(); return close;
   }
   const cvTitle = r => r.title || String(r.messages.find(m => m.role === 'user')?.content || '').replace(/\s+/g, ' ').slice(0, 60) || L('untitled');
-  const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), v = L('mode' + m.charAt(0).toUpperCase() + m.slice(1)); return v.startsWith('sh.') ? m : v; };
+  const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), k = 'mode' + m.charAt(0).toUpperCase() + m.slice(1); return m && window.NoemaI18n?.has('sh.' + k) ? L(k) : m; };   // a mode the catalog does not know: its code (a missing key no longer comes back as the key)
   const cvWhat = r => !r.context || r.context.type === 'course' ? '' : r.context.type === 'exercise' ? L('forExercise') : r.context.label || '';   // a whole-subject chat needs no label (it read like a filter)
   const cvText = t => String(t || '').replace(/<noema-state>[\s\S]*?<\/noema-state>/g, '').trim();
   function cvMd(t) { const d = h('div', { class: 'ns-md' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parse(cvText(t))); else d.textContent = cvText(t); return d; }
