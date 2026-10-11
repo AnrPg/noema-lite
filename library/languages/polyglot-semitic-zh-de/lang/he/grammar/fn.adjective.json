@@ -15,7 +15,7 @@
    "value": "nonverbal"
   }
  ],
- "summary": "A Hebrew adjective comes AFTER its noun and agrees with it in three things: gender, number and definiteness. Every adjective has four forms — masculine and feminine, singular and plural: גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת “big”. The endings are those of the nouns (-ָה or -ֶת or -ִית for the feminine, -ִים and -וֹת for the plural), and what counts is the noun’s grammatical gender, not its ending: שֻׁלְחָנוֹת גְּדוֹלִים “big tables” (a masculine noun with -וֹת), עִיר יָפָה “a beautiful city” (a feminine noun without -ָה). The article decides between a phrase and a sentence. Attributive — “the big house” — repeats the article on the adjective: הַבַּיִת הַגָּדוֹל. Predicative — “the house is big” — leaves the adjective bare, and, as in every Hebrew present-tense sentence, there is no verb “is”: הַבַּיִת גָּדוֹל. So one ה turns a sentence into a phrase. In the past and the future the verb הָיָה appears (הַבַּיִת הָיָה גָּדוֹל). Often the first vowel shortens in the longer forms (גָּדוֹל → גְּדוֹלָה, יָקָר → יְקָרָה); short adjectives double their last letter (קַל → קַלָּה, קָטָן → קְטַנָּה). Feelings of heat and cold, and easy and hard, are said impersonally with לְ: חַם לִי “I’m hot”, קַר לָהּ “she is cold”, קָשֶׁה לִי “it is hard for me” — the adjective stays masculine singular. There are no cases, so nothing else changes.",
+ "summary": "A Hebrew adjective comes AFTER its noun and agrees with it in three things: gender, number and definiteness. Every adjective has four forms — masculine and feminine, singular and plural: גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת “big”. The endings are those of the nouns (-ָה or -ֶת or -ִית for the feminine, -ִים and -וֹת for the plural), and what counts is the noun’s grammatical gender, not its ending: שֻׁלְחָנוֹת גְּדוֹלִים “big tables” (a masculine noun with -וֹת), עִיר יָפָה “a beautiful city” (a feminine noun without -ָה). The article decides between a phrase and a sentence. Attributive — “the big house” — repeats the article on the adjective: הַבַּיִת הַגָּדוֹל. Predicative — “the house is big” — leaves the adjective bare, and, as in every Hebrew present-tense sentence, there is no verb “to be”: הַבַּיִת גָּדוֹל. So one ה turns a sentence into a phrase. In the past and the future the verb הָיָה appears (הַבַּיִת הָיָה גָּדוֹל). Often the first vowel shortens in the longer forms (גָּדוֹל → גְּדוֹלָה, יָקָר → יְקָרָה); short adjectives double their last letter (קַל → קַלָּה, קָטָן → קְטַנָּה). Feelings of heat and cold, and easy and hard, are said impersonally with לְ: חַם לִי “I’m hot”, קַר לָהּ “she is cold”, קָשֶׁה לִי “it is hard for me” — the adjective stays masculine singular. There are no cases, so nothing else changes.",
  "blocks": [
   {
    "t": "table",
@@ -113,7 +113,7 @@
     {
      "title": "Predicative: “the house is big” (a sentence)",
      "points": [
-      "הַבַּיִת גָּדוֹל — the house is big: no article on the adjective, no “is”",
+      "הַבַּיִת גָּדוֹל — the house is big: no article on the adjective, no verb",
       "הַבַּיִת לֹא גָּדוֹל — the house is not big",
       "הַבַּיִת הָיָה גָּדוֹל — the house was big"
      ]
@@ -403,7 +403,7 @@
     "a big house"
    ],
    "answer": "The house is big.",
-   "why": "No article on the adjective = a sentence; Hebrew has no “is” in the present."
+   "why": "No article on the adjective = a sentence; Hebrew has no verb “to be” in the present."
   },
   {
    "q": "“A beautiful city” (עִיר is feminine):",
@@ -480,7 +480,7 @@
   {
    "lang": "zh",
    "fn": "fn.adjective",
-   "note": "Chinese adjectives are verbs: 房子很大 “the house is big” needs no 是, like Hebrew needs no “is”; before a noun they take 的 (很大的房子) and never change."
+   "note": "Chinese adjectives are verbs: 房子很大 “the house is big” needs no 是, as Hebrew needs no verb “to be”; before a noun they take 的 (很大的房子) and never change."
   }
  ],
  "notes": [
@@ -583,6 +583,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut often says “big” or “small” with a suffix inside the noun (iglujuaq “a big house”); Hebrew uses a separate adjective after the noun: בַּיִת גָּדוֹל."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in Italian, the adjective usually follows the noun and agrees in gender and number (la casa grande, le case grandi ~ דִּירָה גְּדוֹלָה, דִּירוֹת גְּדוֹלוֹת). New is the second article: הַבַּיִת הַגָּדוֹל “the big house” — without it the phrase becomes a sentence, הַבַּיִת גָּדוֹל “the house is big”."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese (a casa grande, as casas grandes), the adjective follows the noun and agrees in gender and number. Hebrew also repeats the article on it — הַבַּיִת הַגָּדוֹל “a casa grande” — and leaves it off to make a sentence: הַבַּיִת גָּדוֹל “a casa é grande”."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like Albanian, Hebrew puts the adjective after the noun and makes it agree (djalë i mirë, vajzë e mirë ~ יֶלֶד טוֹב, יַלְדָּה טוֹבָה). Where Albanian adds the linking article i / e, Hebrew repeats the definite article: djali i mirë ~ הַיֶּלֶד הַטּוֹב."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your adjectives have endings that carry gender, number and case at once, Hebrew is simpler: four forms (גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת) and no case. What is new is the place — after the noun — and the repeated article: הַבַּיִת הַגָּדוֹל."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If adjectives in your language stand before the noun and never change, two habits are new: the Hebrew adjective follows the noun, and it copies the noun’s gender, number and article (הַדִּירָה הַגְּדוֹלָה). One ending (־ָה, ־ִים, ־וֹת) carries gender and number together."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If adjectives in your language work like verbs and need no “to be”, the Hebrew present feels familiar: הַבַּיִת גָּדוֹל “the house (is) big”. New: the adjective changes for gender and number, and the article decides between a phrase (הַבַּיִת הַגָּדוֹל) and a sentence."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language expresses qualities with verbs or affixes inside one long word, treat the Hebrew adjective as a separate word after the noun that copies its gender, number and article: הַבַּיִת הַגָּדוֹל, הַדִּירָה הַגְּדוֹלָה."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "In many Semitic languages the adjective follows the noun and agrees with it in gender, number and definiteness; Hebrew does exactly this (הַבַּיִת הַגָּדוֹל), with no case. If your language puts the adjective first, reverse the order in Hebrew."
   }
  ]
 }

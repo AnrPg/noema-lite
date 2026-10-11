@@ -138,11 +138,11 @@
      }
     ],
     "etymology": {
-     "text": "Related to שָׁלָה “to be quiet, tranquil” and שָׁלַו “to be at ease”. Common Northwest Semitic: Phoenician šlm (šalōm), Aramaic שְׁלָמָא (šlāmā), Ugaritic šlm. Cognate with Arabic سلام (salām).",
+     "text": "Related to שָׁלָה “to be quiet, tranquil” and שָׁלַו “to be at ease”. Common Northwest Semitic; cognate with Arabic سلام (salām).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic سَلَام (salām) is the same word: السَّلَامُ عَلَيْكُمْ ~ שָׁלוֹם עֲלֵיכֶם; Turkish selam “hi” comes from the Arabic.",
+     "Arabic سَلَام (salām) is the same word: السَّلَامُ عَلَيْكُمْ ~ שָׁלוֹם עֲלֵיכֶם.",
      "The name שְׁלֹמֹה (Solomon) is built on the same root ש־ל־ם “whole, at peace”."
     ],
     "pitfalls": [
@@ -151,6 +151,13 @@
     ],
     "subtleties": [
      "On the phone Israelis usually answer הַלּוֹ; a call or a letter may open with שָׁלוֹם."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish selam “hi” comes from Arabic سَلَام, the same word as שָׁלוֹם."
+     }
     ]
    }
   },
@@ -615,13 +622,45 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Many languages say goodbye with “seeing again”: German auf Wiedersehen, Russian до свидания, Greek εις το επανιδείν, Turkish görüşürüz, Chinese 再见 (zàijiàn, “again see”)."
+     "German auf Wiedersehen and Chinese 再见 (zàijiàn, “again see”) say goodbye the same way: “seeing (each other) again”."
     ],
     "pitfalls": [
      "Do not confuse it with הַתְרָאָה “a warning, an alert” — the same letters התראה."
     ],
     "subtleties": [
      "On the phone some people joke לְהִשְׁתַּמֵּעַ “to hear each other” instead, since nobody sees anyone."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Built like до свидания: “until seeing (each other)”."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The same picture as the formal εις το επανιδείν: “to seeing again”."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "The same picture as arrivederci: “to see each other again”."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "The same picture as au revoir: “seeing again”."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "The same picture as mirupafshim, “may we see each other well”."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "The same picture as görüşürüz, “we’ll see each other”."
+     }
     ]
    }
   },
@@ -707,13 +746,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Turkish görüşürüz (“we’ll see each other”) it is one verb form: the prefix נִ־ marks “we will”."
+     "It is one verb form: the prefix נִ־ marks “we will” — “we will see each other”."
     ],
     "pitfalls": [
      "It is a verb form and does not change for gender: everyone says נִתְרָאֶה."
     ],
     "subtleties": [
      "A little warmer and more personal than לְהִתְרָאוֹת: it expects a real next meeting."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Like görüşürüz (“we’ll see each other”), it is one verb form with “we” inside: נִתְרָאֶה."
+     }
     ]
    }
   },
@@ -1146,11 +1192,11 @@
      }
     ],
     "etymology": {
-     "text": "From בְּ־ (“in”) + סֵדֶר (“order”), probably a calque of German in Ordnung (alles in Ordnung). Compare Russian в порядке (v porjadke).",
+     "text": "From בְּ־ (“in”) + סֵדֶר (“order”), probably a calque of German in Ordnung (alles in Ordnung).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A word you already own twice: German in Ordnung and Russian в порядке are built exactly like בְּ־סֵדֶר “in order”.",
+     "German in Ordnung is built exactly like בְּ־סֵדֶר “in order”.",
      "סֵדֶר is also the Passover Seder — the “order” of the evening."
     ],
     "pitfalls": [
@@ -1159,6 +1205,13 @@
     ],
     "subtleties": [
      "לֹא בְּסֵדֶר means “not OK” but also “not fair, wrong”: זֶה לֹא בְּסֵדֶר! “that’s not right!”"
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Built exactly like в порядке: בְּ “in” + סֵדֶר “order”."
+     }
     ]
    }
   },
@@ -1249,7 +1302,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek με λένε and Russian меня зовут use the same impersonal “they call me”."
+     "The verb is an impersonal plural, “(they) call me” — no subject is needed, and the form does not change for a man or a woman."
     ],
     "pitfalls": [
      "The question uses אֵיךְ “how”, not מָה: אֵיךְ קוֹרְאִים לְךָ? (“how do they call you?”).",
@@ -1257,6 +1310,18 @@
     ],
     "subtleties": [
      "The same verb קָרָא also means “to read”: קוֹרְאִים סֵפֶר “(they) read a book”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same impersonal “they call me” as με λένε."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same impersonal “they call me” as меня зовут."
+     }
     ]
    }
   },
@@ -1437,7 +1502,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The root נ־ע־ם gives the name נָעֳמִי (Naomi, “my pleasantness”) and Arabic نِعْمَة (“blessing”), which Turkish knows as nimet."
+     "The root נ־ע־ם gives the name נָעֳמִי (Naomi, “my pleasantness”) and Arabic نِعْمَة (“blessing”)."
     ],
     "pitfalls": [
      "Literally “very pleasant” — “to meet you” is understood, not said.",
@@ -1445,6 +1510,13 @@
     ],
     "subtleties": [
      "The usual answer is נָעִים מְאוֹד back, or גַּם לִי “me too”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Arabic نِعْمَة “blessing”, from the same root נ־ע־ם, is Turkish nimet."
+     }
     ]
    }
   },
@@ -1547,13 +1619,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Bible links the name Judah (יְהוּדָה) — the source of “Jew”, German Jude, Greek Ιουδαίος — to this verb: Leah says הַפַּעַם אוֹדֶה אֶת ה׳ “this time I will thank the Lord” (Genesis 29:35)."
+     "The Bible links the name Judah (יְהוּדָה) — the source of the word for “Jew”, German Jude — to this verb: Leah says הַפַּעַם אוֹדֶה אֶת ה׳ “this time I will thank the Lord” (Genesis 29:35)."
     ],
     "pitfalls": [
      "תּוֹדָה רַבָּה, not *תּוֹדָה הַרְבֵּה: רַבָּה is “much”, agreeing with the feminine תּוֹדָה."
     ],
     "subtleties": [
      "The answer is בְּבַקָּשָׁה or עַל לֹא דָּבָר."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek Ιουδαίος comes from the same name, יְהוּדָה."
+     }
     ]
    }
   },
@@ -1689,7 +1768,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word, three jobs — please, you’re welcome, here you are — exactly like German bitte, Russian пожалуйста and Greek παρακαλώ; Turkish and Chinese split them (lütfen / rica ederim; 请 / 不客气)."
+     "One word, three jobs — please, you’re welcome, here you are — exactly like German bitte; Chinese splits them (请 / 不客气)."
     ],
     "pitfalls": [
      "It does not change for gender or number.",
@@ -1697,6 +1776,23 @@
     ],
     "subtleties": [
      "Literally “in request”: בַּקָּשָׁה is “a request”."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "It does the same three jobs as пожалуйста: please, you’re welcome, here you are."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "It does the same three jobs as παρακαλώ: please, you’re welcome, here you are."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish splits what בְּבַקָּשָׁה covers: lütfen “please”, rica ederim “you’re welcome”."
+     }
     ]
    }
   },
@@ -1787,13 +1883,40 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German nichts zu danken, Russian не за что and Greek τίποτα answer thanks the same way: “(it was) for nothing”."
+     "German nichts zu danken answers thanks the same way: “(it was) for nothing”."
     ],
     "pitfalls": [
      "Only an answer to thanks — it never means “please”."
     ],
     "subtleties": [
      "A little more formal and polite than בְּבַקָּשָׁה."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same answer as не за что: “(it was) for nothing”."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same answer as τίποτα: “(it was) nothing”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same answer as de nada: “(it was) for nothing”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same answer as de nada: “(it was) for nothing”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same answer as di niente: “(it was) for nothing”."
+     }
     ]
    }
   },
@@ -1922,7 +2045,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word for “sorry” and “excuse me”, like German Entschuldigung, Greek συγγνώμη and Russian извините; Chinese splits them (对不起 / 请问).",
+     "One word for “sorry” and “excuse me”, like German Entschuldigung; Chinese splits them (对不起 / 请问).",
      "סְלִיחוֹת are the penitential prayers said before Yom Kippur."
     ],
     "pitfalls": [
@@ -1931,6 +2054,18 @@
     ],
     "subtleties": [
      "With a rising voice, סְלִיחָה? means “pardon? say that again”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like συγγνώμη, one word for “sorry” and “excuse me”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like извините, one word for “sorry” and “excuse me”."
+     }
     ]
    }
   },

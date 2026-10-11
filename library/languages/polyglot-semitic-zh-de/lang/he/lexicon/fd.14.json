@@ -115,7 +115,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek counts the same way from Sunday: Δευτέρα “second” is Monday, Τρίτη “third” Tuesday, Τετάρτη, Πέμπτη.",
+     "The week is counted from Sunday: יוֹם רִאשׁוֹן “first day”, יוֹם שֵׁנִי “second day” (Monday), up to יוֹם שִׁשִּׁי.",
      "Arabic too: الْأَحَد “the one” is Sunday, الْإِثْنَيْن “the two” Monday."
     ],
     "pitfalls": [
@@ -124,6 +124,18 @@
     ],
     "subtleties": [
      "Every weekday is a number: רִאשׁוֹן “first”, שֵׁנִי “second” … — only the seventh day has a name, שַׁבָּת."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek counts the same way from Sunday: Δευτέρα “second” is Monday, Τρίτη “third” Tuesday, Τετάρτη, Πέμπτη."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese counts the same way from Sunday: segunda-feira is Monday, terça-feira Tuesday … sexta-feira Friday."
+     }
     ]
    }
   },
@@ -241,7 +253,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek Δευτέρα and Hebrew יוֹם שֵׁנִי both mean “second (day)”.",
+     "יוֹם שֵׁנִי is simply “second (day)” — Monday, counted from Sunday.",
      "Arabic الْإِثْنَيْن “the two” is Monday — the same idea with a cardinal number."
     ],
     "pitfalls": [
@@ -250,6 +262,18 @@
     ],
     "subtleties": [
      "In speech the word יוֹם is often dropped: נִתְרָאֶה בְּשֵׁנִי “see you on Monday”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Δευτέρα and יוֹם שֵׁנִי both mean “second (day)”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "segunda-feira and יוֹם שֵׁנִי both mean “second (day)”."
+     }
     ]
    }
   },
@@ -367,13 +391,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek Τρίτη, Arabic الثُّلَاثَاء and Hebrew שְׁלִישִׁי: Tuesday is “three” in all three."
+     "Arabic الثُّلَاثَاء and Hebrew שְׁלִישִׁי: Tuesday is “three” in both."
     ],
     "pitfalls": [
      "Tuesday is the “third” day (שְׁלִישִׁי), not the “second”: count from Sunday."
     ],
     "subtleties": [
      "Many Jewish weddings are on Tuesday: on the third day of Creation “God saw that it was good” twice (Genesis 1:10 and 1:12)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Τρίτη and שְׁלִישִׁי: Tuesday is “three” in both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "terça-feira and שְׁלִישִׁי: Tuesday is “three” in both."
+     }
     ]
    }
   },
@@ -491,13 +527,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek Τετάρτη, Arabic الْأَرْبِعَاء (from أَرْبَعَة “four”) and Hebrew רְבִיעִי (from אַרְבַּע): Wednesday is “four” in all three."
+     "Arabic الْأَرْبِعَاء (from أَرْبَعَة “four”) and Hebrew רְבִיעִי (from אַרְבַּע): Wednesday is “four” in both."
     ],
     "pitfalls": [
      "The ע at the end of רְבִיעִי is pronounced in careful speech: revi‘i."
     ],
     "subtleties": [
-     "German Mittwoch and Russian среда call it “the middle”; Hebrew just counts: “the fourth”."
+     "German Mittwoch calls it “the middle”; Hebrew just counts: “the fourth”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Τετάρτη and רְבִיעִי: Wednesday is “four” in both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "quarta-feira and רְבִיעִי: Wednesday is “four” in both."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Like Mittwoch, среда is “the middle”; Hebrew just counts: “the fourth”."
+     }
     ]
    }
   },
@@ -616,13 +669,25 @@
     },
     "funFacts": [
      "Arabic الْخَمِيس “Thursday” has the same root as חֲמִישִׁי: “five” (خَمْسَة / חָמֵשׁ).",
-     "Greek Πέμπτη “fifth” is Thursday too."
+     "German Donnerstag is named after a god; Hebrew just counts: “the fifth (day)”."
     ],
     "pitfalls": [
      "Thursday is the fifth day: חֲמִישִׁי “fifth” (from חָמֵשׁ “five”)."
     ],
     "subtleties": [
      "For most Israelis Thursday is the last working day, so Thursday evening is the big night out."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Πέμπτη “fifth” is Thursday too."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "quinta-feira “fifth” is Thursday too."
+     }
     ]
    }
   },
@@ -743,7 +808,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek calls Friday Παρασκευή, “preparation” — for the Sabbath; Arabic الْجُمُعَة “the gathering” (the day of Friday prayer).",
+     "Arabic الْجُمُعَة “the gathering” (the day of Friday prayer).",
      "In Hebrew it is simply “the sixth (day)”, from שֵׁשׁ “six”."
     ],
     "pitfalls": [
@@ -752,6 +817,18 @@
     ],
     "subtleties": [
      "Written in full spelling יום שישי; the vowelled form has a dagesh in the second ש: שִׁשִּׁי."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek calls Friday Παρασκευή, “preparation” — for the Sabbath; Hebrew just counts: “the sixth day”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "sexta-feira “sixth” is Friday, as יוֹם שִׁשִּׁי is."
+     }
     ]
    }
   },
@@ -941,7 +1018,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek Σάββατο, Russian суббота and German Samstag go back to this word; Arabic السَّبْت “Saturday” is its Semitic cousin.",
+     "German Samstag goes back to this word; Arabic السَّبْت “Saturday” is its Semitic cousin.",
      "A sabbatical year (שְׁנַת שַׁבָּתוֹן) is a “Sabbath” of a year — from the same word."
     ],
     "pitfalls": [
@@ -951,6 +1028,38 @@
     "subtleties": [
      "Shabbat starts on Friday at sunset and ends on Saturday night: the Jewish day runs from evening to evening.",
      "מוֹצָאֵי שַׁבָּת “the going-out of Shabbat” is Saturday night — a lively evening in Israeli towns."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Σάββατο comes from this word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "суббота comes from this word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "sabato comes from this word."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "sábado comes from this word."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "sábado comes from this word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "samedi comes from this word."
+     }
     ]
    }
   },
@@ -1445,7 +1554,7 @@
      }
     ],
     "etymology": {
-     "text": "Likely a remnant of the accusative (adverbial “at night”) of לַיִל, from Proto-Semitic *layl-; cognate with Arabic لَيْل (layl), لَيْلَة (layla) and Aramaic לֵילְיָא (Wiktionary).",
+     "text": "Likely a remnant of the accusative (adverbial “at night”) of לַיִל, from Proto-Semitic *layl-; cognate with Arabic لَيْل (layl) and لَيْلَة (layla) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1748,7 +1857,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Arabic ظُهْر (ẓuhr) and Aramaic ṭahrā; a dual, like עַרְבַּיִם “dusk” (Wiktionary).",
+     "text": "Cognate with Arabic ظُهْر (ẓuhr); a dual, like עַרְבַּיִם “dusk” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1856,13 +1965,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “afternoon”, German Nachmittag and Hebrew אַחַר הַצָּהֳרַיִם are all built the same way: “after-noon”."
+     "German Nachmittag and Hebrew אַחַר הַצָּהֳרַיִם are built the same way: “after-noon”."
     ],
     "pitfalls": [
      "No בְּ in front: אַחַר הַצָּהֳרַיִם “in the afternoon” — unlike בַּבֹּקֶר, בָּעֶרֶב."
     ],
     "subtleties": [
      "“This afternoon” is הַיּוֹם אַחַר הַצָּהֳרַיִם."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like “afternoon”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Built exactly like après-midi."
+     }
     ]
    }
   },
@@ -2217,7 +2338,7 @@
      }
     ],
     "etymology": {
-     "text": "Probably a prefixed formation related to אַחַר “hind part, after”; cognate with Aramaic מחר (Wiktionary).",
+     "text": "Probably a prefixed formation related to אַחַר “hind part, after” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2330,11 +2451,11 @@
      }
     ],
     "etymology": {
-     "text": "A form with a prefixed vowel of the now literary תְּמוֹל; compare Aramaic אֶתְמָלִי and Akkadian ittimali (timāli with a prefix) (Wiktionary).",
+     "text": "A form with a prefixed vowel of the now literary תְּמוֹל (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Aramaic אֶתְמָלִי and Akkadian ittimali add the same kind of prefix to the old word for “yesterday” (Wiktionary)."
+     "The literary תְּמוֹל is the older form; אֶתְמוֹל adds a vowel in front — and older Semitic languages did the same (Wiktionary)."
     ],
     "pitfalls": [
      "It needs a past-tense verb or הָיָה “was”: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן.",
@@ -2673,13 +2794,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “in near”: time is spoken of as distance, as in English “in the near future”."
+     "Literally “in near”: time is spoken of as distance."
     ],
     "pitfalls": [
      "Not “near”: קָרוֹב is “near” (lesson 12); בְּקָרוֹב is “soon”."
     ],
     "subtleties": [
      "עוֹד מְעַט and תֵּכֶף are minutes away; בְּקָרוֹב can be days or weeks."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same picture as “in the near future”."
+     }
     ]
    }
   },
@@ -3227,13 +3355,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Built like German manchmal and Greek μερικές φορές: “(some) times”."
+     "Built like German manchmal: “(some) times”."
     ],
     "pitfalls": [
      "פְּעָמִים alone is “times” (שָׁלוֹשׁ פְּעָמִים “three times”); with לְ it becomes “sometimes”."
     ],
     "subtleties": [
      "After לְ the פּ softens: lif‘amim."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Built like μερικές φορές: “(some) times”."
+     }
     ]
    }
   }

@@ -3,7 +3,7 @@
  "lang": "he",
  "name": "Hebrew (Modern)",
  "typology": "fusional",
- "summary": "Modern Hebrew is a Semitic language revived as a spoken mother tongue in the late 19th and 20th centuries and written right to left in a 22-letter consonant alphabet whose vowels are optional points; everyday texts use a full spelling with ו and י and leave many words ambiguous. Its words grow from consonantal roots placed in patterns — seven verb binyanim and many noun mishkalim — and its grammar is built on gender: masculine and feminine in every noun, in “you”, in the present tense (which shows gender and number but not person) and even in the numbers, whose 3–10 forms look reversed. It has a prefixed definite article, and for “a” at most the numeral “one” (אֶחָד), no cases, a construct state for “X of Y”, the object marker אֶת, no present-tense “to be” and no verb “to have”. Small words (and, the, in, to, from, that) are written onto the next word, and the language mixes an ancient literary layer with a direct, informal everyday style that has no polite “you”.",
+ "summary": "Modern Hebrew is a Semitic language revived as a spoken mother tongue in the late 19th and 20th centuries and written right to left in a 22-letter consonant alphabet whose vowels are optional points; everyday texts use a full spelling with ו and י and leave many words ambiguous. Its words grow from consonantal roots placed in patterns — seven verb binyanim and many noun mishkalim — and its grammar is built on gender: masculine and feminine in every noun, in “you”, in the present tense (which shows gender and number but not person) and even in the numbers, whose 3–10 forms look reversed. It has a prefixed definite article, and no indefinite article beyond the numeral “one” (אֶחָד), no cases, a construct state for “X of Y”, the object marker אֶת, no present-tense “to be” and no verb “to have”. Small words (and, the, in, to, from, that) are written onto the next word, and the language mixes an ancient literary layer with a direct, informal everyday style that has no polite “you”.",
  "sources": [
   "Wiktionary (kaikki.org extracts) — as used for the course lexicon",
   "Academy of the Hebrew Language: rules of spelling without niqqud (כְּלָלֵי הַכְּתִיב חֲסַר הַנִּקּוּד, 2017)",
@@ -60,7 +60,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.00 (P4 script module)"
+   "when": "fd.00 (P4 script module)",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "The letter names alef, bet, gimel, dalet are the source of άλφα, βήτα, γάμμα, δέλτα: both alphabets come from the same old Semitic letters."
+    }
+   ]
   },
   {
    "id": "he.script.direction",
@@ -2370,7 +2377,7 @@
   },
   {
    "id": "he.morph.article",
-   "title": "The definite article הַ, and “one” for “a”",
+   "title": "The definite article הַ, and “one” as an indefinite article",
    "area": "morphology",
    "pos": [
     "NOUN",
@@ -3322,7 +3329,7 @@
      "value": "rare"
     }
    ],
-   "what": "New verbs are made from roots and patterns (טִלְפֵּן “phoned”, סִמֵּס “texted”), not by noun + “do”. Only a handful of colloquial expressions use עָשָׂה “did” or נָתַן “gave” with a noun.",
+   "what": "New verbs are made from roots and patterns (טִלְפֵּן “phoned”, סִמֵּס “texted”), not with a helper verb + noun. Only a handful of colloquial expressions use עָשָׂה “did” or נָתַן “gave” with a noun.",
    "examples": [
     {
      "text": "סִמֵּס",
@@ -4000,7 +4007,7 @@
      "value": "nonverbal"
     }
    ],
-   "what": "A present-tense sentence about what something is, what it is like or where it is has no verb: אֲנִי סְטוּדֶנְט “I (am) a student”, הַבַּיִת גָּדוֹל “the house (is) big”, הוּא בַּבַּיִת “he (is) at home”. Identity, quality and location are built the same way, and adjectives do not conjugate. Between two nouns a pronoun agreeing with the subject can stand in for “is” (יֶלֶד הוּא אָדָם). הָיָה appears in the past and future.",
+   "what": "A present-tense sentence about what something is, what it is like or where it is has no verb: אֲנִי סְטוּדֶנְט “I (am) a student”, הַבַּיִת גָּדוֹל “the house (is) big”, הוּא בַּבַּיִת “he (is) at home”. Identity, quality and location are built the same way, and adjectives do not conjugate. Between two nouns a pronoun agreeing with the subject can stand in for a copula (יֶלֶד הוּא אָדָם). הָיָה appears in the past and future.",
    "examples": [
     {
      "text": "אֲנִי סְטוּדֶנְט",
@@ -6045,7 +6052,7 @@
      "value": "present"
     }
    ],
-   "what": "Hebrew shares thousands of roots with the other Semitic languages — Arabic, Aramaic, Amharic, Maltese and others — often with regular sound correspondences: שָׁלוֹם ~ Arabic سَلَام, בַּיִת ~ بَيْت, יוֹם ~ يَوْم, אָכַל ~ أَكَلَ. Many Semitic words also reached other languages through Arabic and Aramaic, so a root may be recognisable in borrowed words.",
+   "what": "Hebrew shares thousands of roots with the other Semitic languages, Arabic among them — often with regular sound correspondences: שָׁלוֹם ~ Arabic سَلَام, בַּיִת ~ بَيْت, יוֹם ~ يَوْم, אָכַל ~ أَكَلَ. Many Semitic words also reached other languages through Arabic, so a root may be recognisable in borrowed words.",
    "examples": [
     {
      "text": "שָׁלוֹם ~ سَلَام",
@@ -6079,7 +6086,24 @@
    },
    "status": "partial",
    "gap": "bridges.json (kind cognate) between ar and he, and the cognate_bridge exercise.",
-   "when": "fd.07, every field"
+   "when": "fd.07, every field",
+   "notes": [
+    {
+     "for": "branch:Semitic",
+     "rel": "same",
+     "text": "If your language is Semitic, you will recognise thousands of Hebrew roots, often through regular sound correspondences: שָׁלוֹם, בַּיִת, יוֹם, אָכַל."
+    },
+    {
+     "for": "am",
+     "rel": "same",
+     "text": "Amharic shares many of these roots: ቤት ~ בַּיִת “house”, ፍሬ ~ פְּרִי “fruit”, አዲስ ~ חָדָשׁ “new”."
+    },
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Many Hindi words of Arabic origin share their roots with Hebrew: किताब ~ כ־ת־ב “write”, सलाम ~ שָׁלוֹם."
+    }
+   ]
   },
   {
    "id": "he.lex.idioms",

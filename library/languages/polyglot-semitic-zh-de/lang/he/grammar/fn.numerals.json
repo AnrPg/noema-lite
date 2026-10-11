@@ -244,7 +244,7 @@
   {
    "t": "callout",
    "kind": "key",
-   "title": "One after, two shortened, “the” in -ֶת",
+   "title": "One after, two shortened, definite in -ֶת",
    "text": "סֵפֶר אֶחָד, מִטָּה אַחַת — one follows the noun. Two before a noun is always שְׁנֵי / שְׁתֵּי. Before a definite masculine noun 3–10 end in -ֶת / -ַת: שְׁלוֹשֶׁת הַיְּלָדִים, עֲשֶׂרֶת הַתַּלְמִידִים."
   },
   {
@@ -552,7 +552,7 @@
   {
    "lang": "de",
    "fn": "fn.numerals",
-   "note": "German has one form for each number (only ein / eine agrees) and puts the unit first (einundzwanzig); Hebrew says עֶשְׂרִים וְאֶחָד, like English twenty-one."
+   "note": "German has one form for each number (only ein / eine agrees) and puts the unit first (einundzwanzig); Hebrew says the ten first: עֶשְׂרִים וְאֶחָד."
   },
   {
    "lang": "zh",
@@ -660,6 +660,51 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut nouns have a singular, a dual and a plural, and the language has its own words for small numbers (atausiq, marruuk, pingasut …), while larger numbers are often borrowed; Hebrew keeps a dual only in a few words and counts every noun with gendered numbers."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian has gender only in uno / una; Hebrew has it in every number 1–19, and for 3–10 the form in -ָה goes with masculine nouns (שְׁלוֹשָׁה סְפָרִים, שָׁלוֹשׁ מִטּוֹת). Twenty-one is ten first in both, but Hebrew adds “and”: ventuno ~ עֶשְׂרִים וְאַחַת."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese has gender in um / uma, dois / duas and the hundreds; Hebrew in every number 1–19. Twenty-one is built exactly like vinte e um — ten, “and”, unit: עֶשְׂרִים וְאֶחָד."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian has gender in tre / tri; Hebrew in every number 1–19 (שְׁלוֹשָׁה / שָׁלוֹשׁ). Twenty-one is built like njëzet e një — ten, “and”, unit: עֶשְׂרִים וְאַחַת."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your numbers agree with the noun only in a few forms, Hebrew goes further: every number 1–19 has a masculine and a feminine form, and for 3–10 the -ָה form goes with masculine nouns."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If the noun stays singular after a number in your language, note that Hebrew uses the plural from two on (שְׁלוֹשָׁה סְפָרִים), and the number agrees with the noun’s gender."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language needs a classifier between number and noun, Hebrew needs none: the number goes straight before the plural noun — but in a masculine or feminine form: שְׁלוֹשָׁה סְפָרִים, שָׁלוֹשׁ מִטּוֹת."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If numbers in your language are verbs or suffixed words, Hebrew numbers are separate words that agree in gender with the noun (שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת); only “one” follows the noun."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The reversed gender of 3–10 (the -ָה form with masculine nouns) is Semitic heritage. Hebrew keeps the noun plural after every number from two, and the dual only in a few words (יוֹמַיִם, מָאתַיִם)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "Twenty-one is said ten first, as in English, but with “and”: עֶשְׂרִים וְאֶחָד “twenty and one”."
   }
  ]
 }

@@ -359,6 +359,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut words agree in number (singular, dual, plural) and case, not in gender; Hebrew agreement is gender and number, plus the article."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in Italian (questo libro, questa lampada, questi libri), demonstratives and pronouns agree in gender and number. In Hebrew the past of “to be” agrees too (הַשֻּׁלְחָן הָיָה / הַמִּטָּה הָיְתָה), and a demonstrative after a definite noun takes the article: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese (este livro, esta mesa, estes livros), demonstratives and pronouns copy gender and number. Hebrew also makes the past of “to be” agree (הוּא הָיָה / הִיא הָיְתָה) and copies the article after a definite noun: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "As in Albanian (ky libër, kjo shtëpi, këta libra), demonstratives agree in gender and number. Hebrew has no case to copy, but copies definiteness instead: הַסֵּפֶר הַזֶּה, both words with the article."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If words in your language agree through endings that also carry case, Hebrew keeps the habit and drops the case: gender and number only, plus the article on a word after a definite noun — הַסֵּפֶר הַזֶּה, הַסְּפָרִים הָאֵלֶּה."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no grammatical gender, agreement is the new habit: every word that points to a noun (זֶה / זֹאת, הוּא / הִיא, הָיָה / הָיְתָה) takes its gender and number. Learn each noun together with its gender."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If words in your language never change for the noun, this is new: Hebrew demonstratives, pronouns and the past of “to be” copy the noun’s gender and number — הַשֻּׁלְחָן הָיָה פֹּה, הַמִּטָּה הָיְתָה שָׁם."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks agreement with affixes inside the verb, Hebrew spreads it over separate words: the demonstrative, the pronoun and the verb each copy the noun’s gender and number (הַכּוֹס הַזֹּאת? הִיא שָׁם)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Agreement in gender and number is familiar from other Semitic languages. Note that Hebrew gives plural things plural agreement — הַסְּפָרִים הָאֵלֶּה, הֵם — never a feminine singular."
   }
  ]
 }

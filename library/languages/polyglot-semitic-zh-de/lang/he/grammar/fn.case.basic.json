@@ -298,6 +298,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has many cases and ergative alignment (the subject of a transitive verb takes its own ending); Hebrew has no cases and treats every subject alike."
+  },
+  {
+   "for": "it",
+   "rel": "same",
+   "text": "As in Italian, nouns have no cases: the role comes from word order and small words. The one extra is אֶת before a definite object (הוּא קוֹרֵא אֶת הַסֵּפֶר). Where Italian pronouns change (io / me / mi), Hebrew uses prepositions with endings: אוֹתִי, לִי."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "Portuguese nouns have no cases either; word order and prepositions do the work, as in Hebrew. The only extra is אֶת, a small word before a definite direct object: vejo o livro ~ אֲנִי רוֹאֶה אֶת הַסֵּפֶר."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian changes the noun’s ending for its role (djali / djalin / djalit); Hebrew never does — הַיֶּלֶד in every role — and uses word order, אֶת before a definite object, and prepositions instead."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your nouns change their ending for every role, stop looking for those endings: a Hebrew noun has one form as subject, object and after a preposition (הַיֶּלֶד, אֶת הַיֶּלֶד, לַיֶּלֶד). Word order, אֶת and prepositions replace the cases."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language adds a case suffix for each role, Hebrew puts small words before the noun instead — אֶת for a definite object, the prefixes לְ, בְּ, מִ for the rest — and the noun itself never changes."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "As in your language, the noun never changes for its role; word order and small words (אֶת and the prefixes לְ, בְּ, מִ) do the work."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your verb carries markers for subject and object, Hebrew shows them outside the verb: by word order (subject first) and by אֶת before a definite object. Only the gender and number of a present-tense verb hint at the subject."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Old Semitic had three case endings (-u, -a, -i); Hebrew lost them, as many modern Semitic languages have. What remains is a marker for the definite direct object, the separate word אֶת."
   }
  ]
 }

@@ -351,6 +351,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has singular, dual and plural endings for every noun (iglu, igluk, iglut); Hebrew has the plural for all nouns and the dual only for a few (יוֹמַיִם, עֵינַיִם)."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian changes the final vowel (libro → libri, casa → case); Hebrew adds -ִים or -וֹת and often changes the stem vowels too (סֵפֶר → סְפָרִים). Some nouns cross over, as l’uovo → le uova does: חַלּוֹן (m.) → חַלּוֹנוֹת."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese adds -s (livro → livros); Hebrew chooses between -ִים and -וֹת, often changes the stem (סֵפֶר → סְפָרִים, בַּיִת → בָּתִּים), and keeps a dual in a few words (יוֹמַיִם)."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "As in Albanian, the plural is learnt with each noun and may change the stem (djalë → djem ~ בַּיִת → בָּתִּים); Hebrew has two main endings, -ִים and -וֹת, and no case forms of the plural."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your plurals depend on the noun and may change the stem, the Hebrew system is familiar: two endings (-ִים, -וֹת), frequent vowel changes, and irregulars to learn with each word."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language has one plural suffix and drops it after numbers, Hebrew differs: two endings, stem changes (סֵפֶר → סְפָרִים), and a plural after every number from two."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your nouns do not change for number, the plural is new and obligatory: סֵפֶר / סְפָרִים — and everything that agrees becomes plural too: הַסְּפָרִים הָאֵלֶּה."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If number in your language is marked mainly on the verb, note that Hebrew marks it on the noun and on every word that agrees: הַסְּפָרִים הָאֵלֶּה הָיוּ פֹּה."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "The masculine and feminine plural endings have relatives across the branch; Hebrew has no broken plurals — only vowel changes in the stem (סֵפֶר → סְפָרִים) — and the dual survives in a few words."
   }
  ]
 }

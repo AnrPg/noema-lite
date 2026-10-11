@@ -146,7 +146,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ḏV- (“this”). Cognates include Aramaic דִּי (dī) and Arabic ذا. Compare also the definite form הַזֶּה (hazé) and Arabic هٰذَا (hāḏā).",
+     "text": "From Proto-Semitic *ḏV- (“this”). Cognate with Arabic ذا. Compare also the definite form הַזֶּה (hazé) and Arabic هٰذَا (hāḏā).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -159,7 +159,7 @@
     ],
     "subtleties": [
      "In casual speech זֶה is used for everything, even feminine and plural things: זֶה עַגְבָנִיָּה, זֶה טָעִים.",
-     "Presenting something far away also uses זֶה: זֶה הַבַּיִת שֶׁלִּי “that (over there) is my house” — Hebrew does not need “that” here."
+     "Presenting something far away also uses זֶה: זֶה הַבַּיִת שֶׁלִּי “that (over there) is my house” — the far demonstrative הַהוּא is not used to present."
     ]
    }
   },
@@ -393,7 +393,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare with Egyptian pj (“this”).",
+     "text": "Of uncertain origin; Wiktionary compares an old Afro-Asiatic demonstrative.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -611,7 +611,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Arabic ثَمَّ (ṯamma), Aramaic תַּמָּה (tammā), תַּמָּן (tammān), Ugaritic ṯm.",
+     "text": "Compare Arabic ثَمَّ (ṯamma).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -622,7 +622,29 @@
      "With motion (“go there”) Hebrew prefers שָׁמָּה or לְשָׁם: אֲנִי הוֹלֵךְ לְשָׁם."
     ],
     "subtleties": [
-     "שָׁם is simply “not here”: Hebrew has no separate “there near you” like Turkish şurada (beside orada)."
+     "שָׁם is simply “not here”: Hebrew has no separate word for “there, near you”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish separates şurada “there, near you” from orada “over there”; שָׁם covers both."
+     },
+     {
+      "for": "ja",
+      "rel": "different",
+      "text": "Japanese separates そこ “there, near you” from あそこ “over there”; שָׁם covers both."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish separates ahí “there, near you” from allí “over there”; שָׁם covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese separates aí “there, near you” from ali / lá “over there”; שָׁם covers both."
+     }
     ]
    }
   }

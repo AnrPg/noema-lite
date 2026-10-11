@@ -167,7 +167,7 @@
   "*הָיִינוּ מְשַׂחֵק — “we” takes the plural: הָיִינוּ מְשַׂחֲקִים.",
   "The construction is optional: כְּשֶׁהָיִיתִי יֶלֶד, שִׂחַקְתִּי בַּחוּץ is also correct.",
   "The negation normally goes before הָיָה: לֹא הָיִינוּ מְשַׂחֲקִים “we didn’t use to play”.",
-  "There is no special word for “used to”: the meaning is in הָיָה + present (or in נָהַג + infinitive)."
+  "There is no special habitual word or ending: the meaning is in הָיָה + present (or in נָהַג + infinitive)."
  ],
  "evidence": {
   "lemmas": [
@@ -351,6 +351,41 @@
    "for": "type:polysynthetic",
    "rel": "different",
    "text": "Polysynthetic languages tend to put habit and duration into suffixes inside one verb word; Hebrew uses two words — the past of הָיָה and the present form: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "הָיִיתִי מְשַׂחֵק corresponds to the imperfetto (giocavo): habits and backgrounds in the past. But in Hebrew it is a two-word construction — the past of הָיָה + the present form — and the plain past is never wrong."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "הָיִיתִי מְשַׂחֵק is close to the imperfeito (brincava) or costumava brincar: habits and backgrounds in the past. Hebrew builds it from two words, and may simply use the past: שִׂחַקְתִּי."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Where Albanian uses the imperfect (luaja jashtë “I used to play outside”), Hebrew builds the meaning: הָיִיתִי מְשַׂחֵק בַּחוּץ — the past of הָיָה + the present form; the plain past is also fine."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has an imperfective past form, Hebrew uses a construction instead: הָיָה (past, with the person) + the present form (gender and number): הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If habit and progress are suffixes on your verb, Hebrew uses two separate words, and both agree with the subject: הִיא הָיְתָה מְשַׂחֶקֶת."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language shows habits with time and frequency words only, Hebrew can do the same (the plain past + כָּל יוֹם) — or use הָיָה + the present form: הָיִיתִי מְשַׂחֵק."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "“Was” + a non-past verb for past habits is a Semitic pattern; Hebrew uses the present form (the participle) after הָיָה: הָיָה מְשַׂחֵק."
   }
  ]
 }

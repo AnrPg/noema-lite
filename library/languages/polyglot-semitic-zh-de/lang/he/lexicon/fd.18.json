@@ -541,7 +541,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Aramaic אֱדַיִן (ʾĕḏáyin, “then, at that time”) and Arabic إِذ (ʔiḏ), إِذَا (ʔiḏā), إِذًا (ʔiḏan) (Wiktionary).",
+     "text": "Cognate with Arabic إِذ (ʔiḏ), إِذَا (ʔiḏā), إِذًا (ʔiḏan) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -651,7 +651,14 @@
      "It is written onto the next word: כְּשֶׁאֲנִי, never *כְּשֶׁ אֲנִי."
     ],
     "subtleties": [
-     "For a future event Hebrew uses the future after כְּשֶׁ: כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up” — unlike English and German."
+     "For a future event Hebrew uses the future after כְּשֶׁ: כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up” — unlike German (wenn ich groß bin)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Unlike “when I grow up” (present), Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל."
+     }
     ]
    }
   },
@@ -794,7 +801,7 @@
    "features": {
     "spelling": "ש"
    },
-   "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out, unlike English “that”. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
+   "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
    "contrasts": [
     {
      "concept": "conj.that",
@@ -902,7 +909,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One letter does the work of English that / which / who and of German dass and der, die, das."
+     "One letter does the work of German dass and der, die, das: “that” and “which, who”."
     ],
     "pitfalls": [
      "It doubles the next letter when it can: שֶׁזֶּה, שֶׁלֹּא — but not before א, ה, ח, ע, ר: שֶׁאֲנִי, שֶׁהוּא.",
@@ -910,6 +917,43 @@
     ],
     "subtleties": [
      "After a preposition it makes a conjunction: לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, לַמְרוֹת שֶׁ “although”, מִשּׁוּם שֶׁ “because”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Unlike English “that”, שֶׁ is never left out: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "One letter does the work of that, which and who."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like que / qui, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like che, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like que, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like que, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian splits что and который; שֶׁ does both jobs."
+     }
     ]
    }
   },

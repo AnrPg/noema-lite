@@ -5,7 +5,7 @@
  "facts": [
   {
    "label": "Family",
-   "value": "Afro-Asiatic › Semitic › Northwest Semitic › Canaanite (with Phoenician). Its closest living relative in this course is Arabic; Aramaic is a close older neighbour."
+   "value": "Afro-Asiatic › Semitic › Northwest Semitic › Canaanite. Its closest living relative in this course is Arabic."
   },
   {
    "label": "Script and direction",
@@ -25,7 +25,7 @@
   },
   {
    "label": "Sounds",
-   "value": "Five vowels (a, e, i, o, u). Stress is mostly on the last syllable. ח and כ are a throaty [χ] as in German Bach; ר is a uvular r like the German or French r. Three letters have a hard and a soft sound: ב bet / vet, כ kaf / khaf, פ pe / fe — a dot inside the letter (dagesh) marks the hard one."
+   "value": "Five vowels (a, e, i, o, u). Stress is mostly on the last syllable. ח and כ are a throaty [χ] as in German Bach; ר is a uvular r like the German r. Three letters have a hard and a soft sound: ב bet / vet, כ kaf / khaf, פ pe / fe — a dot inside the letter (dagesh) marks the hard one."
   }
  ],
  "typology": {
@@ -97,7 +97,7 @@
    ]
   },
   {
-   "title": "“The” but no “a”",
+   "title": "A definite article, no indefinite one",
    "text": "The article הַ marks a definite noun; there is no indefinite article: זֶה סֵפֶר “this is a book”, זֶה הַסֵּפֶר “this is the book”. From lesson 7 a definite direct object also gets the small word אֶת.",
    "typology": [
     {
@@ -183,7 +183,7 @@
     "it does not exist"
    ],
    "answer": "as the prefix הַ on the next word",
-   "why": "הַבַּיִת = the house. There is no word for “a”: בַּיִת = a house."
+   "why": "הַבַּיִת = the house. There is no indefinite article: בַּיִת = a house."
   },
   {
    "q": "Which language of this course is Hebrew’s closest relative?",
@@ -338,6 +338,46 @@
    "for": "cy",
    "rel": "different",
    "text": "Hebrew ב, כ, פ switch between b / v, k / kh, p / f (בַּיִת “house” — בְּבַיִת “in a house”, said bevayit), but this follows the position of the sound in the word, not grammar — it is not a mutation like the Welsh ones."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Easy: two genders, adjectives after the noun, an article that fuses with prepositions (בַּבַּיִת ~ nella casa), and subject pronouns that can be dropped — in Hebrew in the past and future. Different: no present “to be”, no indefinite article, no Lei, and a right-to-left consonant script. Sounds: ח / כ [χ] and the back ר are new, and Hebrew has no double consonants."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Easy: two genders, adjectives after the noun, articles fused with prepositions (בַּבַּיִת ~ na casa), and twenty-one built like vinte e um (עֶשְׂרִים וְאֶחָד). Different: no present “to be” (neither ser nor estar), no indefinite article, no o senhor, and a right-to-left consonant script. Sounds: no nasal vowels; ר is the back r of carro."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Familiar: two genders, adjectives after the noun, dropped subject pronouns (in Hebrew in the past and future), a question particle at the start (a ~ formal הַאִם) and double negation. Different: the article is a prefix, not an ending (libri ~ הַסֵּפֶר), there are no cases, no present “to be” and no polite ju. Sounds: no ë, and ח / כ is a throaty [χ]."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "Hebrew is fusional too, in its own Semitic way: besides endings that carry gender and number at once, it pours roots into vowel patterns (כ־ת־ב: כָּתַב, מִכְתָּב). It has no cases, and no verb “to be” in the present."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "Instead of a chain of suffixes, one per meaning, Hebrew uses prefixes, suffixes and vowel changes inside a consonant root, often with several meanings in one ending (אוֹכֶלֶת: present, feminine, singular). New: gender everywhere, an article, and prepositions before the noun."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "Most of the grammar is new: words change for gender, number and person, nouns have gender, there is an article, and one root takes many shapes (אָכַל, אוֹכֵל, אֹכֶל). Familiar: subject – verb – object order and no verb “to be” in the present."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Hebrew words are shorter and more separate: one verb form carries tense, person, gender and number (אָכַלְתִּי “I ate”), but objects, places and manner are separate words. New words come from roots in patterns, not from long chains."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic you already know the core: consonant roots in patterns, two genders with a -t feminine, a verbless present and person prefixes in the prefix conjugation. Modern Hebrew is simpler in places: no case endings, a reduced dual, and soft gutturals."
   }
  ]
 }

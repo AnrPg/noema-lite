@@ -813,7 +813,14 @@
      "It stands before the noun, and the noun has no article: הַרְבֵּה אֲנָשִׁים, not *הַרְבֵּה הָאֲנָשִׁים."
     ],
     "subtleties": [
-     "One word for English many and much: with a countable noun the noun is plural (הַרְבֵּה סְפָרִים), with a mass noun it stays singular (הַרְבֵּה נְיָר)."
+     "One word for a large number and a large amount: with a countable noun the noun is plural (הַרְבֵּה סְפָרִים), with a mass noun it stays singular (הַרְבֵּה נְיָר)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "One word for both “many” and “much”."
+     }
     ]
    }
   },
@@ -954,7 +961,14 @@
      "Like הַרְבֵּה it does not change and takes no article on the noun after it."
     ],
     "subtleties": [
-     "English separates few (count) and little (mass); מְעַט covers both: מְעַט אֲנָשִׁים, מְעַט זְמַן."
+     "מְעַט covers a small number and a small amount: מְעַט אֲנָשִׁים, מְעַט זְמַן."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "One word for both “few” (count) and “little” (mass)."
+     }
     ]
    }
   },
@@ -1259,7 +1273,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *kʷall- or *kull-; compare Arabic كُلّ (kull), Ge‘ez ኵል (kʷəll), Akkadian kalûm, Classical Syriac ܟܠ (kul). The dictionary form is כֹּל; כָּל (kol) is its construct form, the one used before a noun.",
+     "text": "From Proto-Semitic *kʷall- or *kull-; compare Arabic كُلّ (kull). The dictionary form is כֹּל; כָּל (kol) is its construct form, the one used before a noun.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [

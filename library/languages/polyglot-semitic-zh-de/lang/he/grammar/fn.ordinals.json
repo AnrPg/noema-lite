@@ -607,6 +607,41 @@
    "for": "type:polysynthetic",
    "rel": "different",
    "text": "Polysynthetic languages tend to build ordinals with a suffix on the number stem; Hebrew has ten separate ordinal words (רִאשׁוֹן … עֲשִׂירִי) and above ten uses the cardinal with the article."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian has ordinals for every number (ventesimo) and puts them before the noun (il terzo piano); Hebrew has ten, after the noun (הַקּוֹמָה הַשְּׁלִישִׁית), and above ten the cardinal with the article. Dates use cardinals, and Hebrew even says אֶחָד בְּמַאי, where Italian has il primo maggio."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has ordinals for every number (vigésimo) and usually puts them first (o terceiro andar); Hebrew ordinals follow the noun (הַקּוֹמָה הַשְּׁלִישִׁית) and stop at ten. Dates are cardinals in both: 4 de julho ~ אַרְבָּעָה בְּיוּלִי."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian ordinals follow the noun and agree through the linking article (kati i tretë, dita e tretë), as Hebrew ones follow and agree with the article (הַקּוֹמָה הַשְּׁלִישִׁית). But Hebrew has them only up to ten."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your ordinals go on for ever and decline, Hebrew has only ten (רִאשׁוֹן … עֲשִׂירִי), after the noun and agreeing; above ten, and in dates, cardinals do the job."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language makes every ordinal with one suffix, Hebrew has ten separate ordinal words and none above ten: הַקּוֹמָה הָעֶשְׂרִים “the twentieth floor” uses the plain number."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language makes ordinals with one word before any number, Hebrew has ten ordinal adjectives that follow the noun and agree; above ten it uses the cardinal with the article."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "The first ordinals come from the same roots as the cardinals (שָׁלוֹשׁ → שְׁלִישִׁי, אַרְבַּע → רְבִיעִי), as in other Semitic languages; Hebrew has none above ten and uses the cardinal with the article: הַיּוֹם הָעֶשְׂרִים."
   }
  ]
 }

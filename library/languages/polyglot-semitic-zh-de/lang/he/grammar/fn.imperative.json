@@ -503,6 +503,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has imperative endings for one, two or several people; Hebrew has forms for a man, a woman and a group — no dual."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian, too, does not use the imperative for “don’t” to one person (non andare!); Hebrew uses אַל + the future: אַל תֵּלֵךְ! And Hebrew adds a feminine: לֵךְ (m.), לְכִי (f.), לְכוּ (pl.)."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese says “don’t” with another form, the subjunctive (não vás!); Hebrew does the same with the future: אַל תֵּלֵךְ! There is no formal command like vá: everyone gets לֵךְ / לְכִי / לְכוּ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian has two “not”s — nuk for statements, mos for commands (mos shko!); Hebrew has the same split: לֹא and אַל (אַל תֵּלֵךְ!). But after אַל Hebrew uses the future, and the command changes for a woman: לֵךְ / לְכִי."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your imperative has a singular and a plural (and perhaps a polite form), Hebrew adds a feminine and has no polite one: לֵךְ / לְכִי / לְכוּ. A prohibition uses אַל + the future."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language negates a command with a suffix inside the verb, Hebrew puts a separate word before it, אַל, followed by the future form: אַל תֵּלֵךְ! The command also changes for a man, a woman or a group."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If a command in your language is the bare verb with a softening word, Hebrew changes the verb for the listener (לֵךְ / לְכִי / לְכוּ) and softens with the future or בְּבַקָּשָׁה; “don’t” is אַל, a word of its own."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your imperative carries the addressee and the object in one verb word, Hebrew marks only the addressee’s gender and number (לֵךְ / לְכִי / לְכוּ); the object stays a separate word."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "As in other Semitic languages, the imperative is the prefix form without its prefix (תֵּלֵךְ → לֵךְ), with gendered forms, and a prohibition is a negative word + the prefix form: אַל תֵּלֵךְ."
   }
  ]
 }

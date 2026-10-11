@@ -371,6 +371,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut also separates definite objects: they go with a transitive verb ending, while an indefinite object takes the ending -mik with an intransitive verb; Hebrew marks the definite object with אֶת and leaves the verb alone."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian marks no noun object (mangio la mela); Hebrew puts אֶת before a definite object — אוֹכֵל אֶת הַתַּפּוּחַ — and nothing before an indefinite one. With a pronoun אֶת takes endings, a little like lo / la: אוֹתוֹ, אוֹתָהּ."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese marks no noun object (como a maçã); Hebrew adds אֶת before a definite object only: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ. Object pronouns are אֶת with endings — אוֹתוֹ “o”, אוֹתָהּ “a” — after the verb."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian marks the object with the accusative (pashë djalin) and often echoes a definite object with the clitic e (e pashë djalin); Hebrew marks only a definite object, with the separate word אֶת: רָאִיתִי אֶת הַיֶּלֶד."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language puts every direct object in the accusative, here only definite objects are marked — and by a word, not an ending: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language marks only a definite or specific object with a case suffix, Hebrew does the same with a separate word before the noun: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If word order alone shows the object in your language, keep the order (verb + object) and add אֶת before a definite object: הוּא אוֹכֵל אֶת הַתַּפּוּחַ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your verb carries the object as an affix, Hebrew keeps the object outside the verb: a pronoun object is אֶת with an ending (אוֹתוֹ), a definite noun gets אֶת before it."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Semitic languages mark direct objects by case or by a particle; Hebrew uses the particle אֶת, and only before a definite object: אוֹכֵל אֶת הַתַּפּוּחַ."
   }
  ]
 }

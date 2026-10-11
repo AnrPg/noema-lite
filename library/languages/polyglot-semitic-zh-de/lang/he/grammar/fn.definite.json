@@ -10,7 +10,7 @@
  "summary": "Hebrew marks a definite noun with the prefix ha- (הַ), written onto the noun: בַּיִת “a house” → הַבַּיִת “the house”. There is no indefinite article: a bare noun is indefinite (זֶה סֵפֶר “this is a book”; זֶה הַסֵּפֶר “this is the book”). The article usually doubles the next consonant with a dagesh (הַסֵּפֶר, הַשֻּׁלְחָן, הַמְּנוֹרָה); before the gutturals, which cannot be doubled, its vowel changes: הָ before א, ע, ר (הָאָרוֹן, הָעֵט, הָאִשָּׁה), הַ with no doubling before ה and ח (הַחֶדֶר, הַחַלּוֹן), and הֶ before חָ (הֶחָבֵר). Words that agree with a definite noun after it take the article too (הַסֵּפֶר הַזֶּה; later הַסֵּפֶר הַחָדָשׁ). From lesson 7 a definite direct object is also introduced by אֶת (הוּא קוֹרֵא אֶת הַסֵּפֶר).",
  "procedure": {
   "askYourself": [
-   "Is the thing specific — already known to the listener, or the only one? → add הַ; if not, use the bare noun (there is no “a”).",
+   "Is the thing specific — already known to the listener, or the only one? → add הַ; if not, use the bare noun (there is no indefinite article).",
    "What is the first letter of the noun? א / ע / ר → הָ; ה / ח → הַ without a dagesh; חָ → הֶ; any other letter → הַ + a dagesh in that letter.",
    "Is there a demonstrative (or later an adjective) after the noun? It takes the article too: הַסֵּפֶר הַזֶּה.",
    "Is it a name or a noun with a possessive suffix? → it is already definite: no הַ.",
@@ -154,8 +154,8 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No word for “a”",
-   "text": "Do not translate “a” with אֶחָד / אַחַת (“one”) — that means “one”. “A key” is simply מַפְתֵּחַ."
+   "title": "No indefinite article",
+   "text": "Do not use אֶחָד / אַחַת (“one”) as an indefinite article — it means “one”. “A key” is simply מַפְתֵּחַ."
   },
   {
    "t": "callout",
@@ -296,6 +296,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no articles; Hebrew marks a definite noun with the prefix הַ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like il / la / i / le, but one form for all, written onto the noun: הַבַּיִת, הַדִּירָה, הַבָּתִּים. There is no un / una and no partitive del / della: אֲנִי אוֹכֵל לֶחֶם “mangio (del) pane”."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Like o / a / os / as, but one invariable form written onto the noun. There is no um / uma: סֵפֶר is “um livro”. And as in Portuguese, the article fuses with a preposition: בַּחֶדֶר ~ no quarto."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the definite article at the end of the noun (libri, shtëpia); Hebrew puts it at the front: הַסֵּפֶר, הַבַּיִת. There is no një: a bare noun is indefinite, סֵפֶר “një libër”."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your articles change for gender, number and case, Hebrew’s is simpler: one prefix, הַ, for all. There is no indefinite article — a bare noun means “a …”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no word for “the”, learn to add הַ to every noun the listener can identify and to leave a new one bare: זֶה סֵפֶר “this is a book”, זֶה הַסֵּפֶר “this is the book”."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language leaves definiteness to context or to demonstratives, Hebrew makes it obligatory: הַ on every known noun, and on the words that agree with it (הַסֵּפֶר הַזֶּה)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If definiteness in your language is shown by affixes or demonstratives, Hebrew uses one prefix, הַ, on every definite noun and repeats it on the word that follows: הַבַּיִת הַזֶּה."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Many Semitic languages mark definiteness with a short article — a prefix in some, a suffix in others. Hebrew’s is the prefix הַ, which doubles the next letter (הַשֻּׁלְחָן); there is no indefinite marker at all."
   }
  ]
 }

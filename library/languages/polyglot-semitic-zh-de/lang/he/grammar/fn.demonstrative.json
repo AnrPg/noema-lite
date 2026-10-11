@@ -61,7 +61,7 @@
       "זֶה תַּלְמִיד — this is a pupil",
       "זֹאת תַּלְמִידָה — this is a pupil (f.)",
       "אֵלֶּה תַּלְמִידִים — these are pupils",
-      "no article on זֶה, no verb “is”"
+      "no article on זֶה, no verb"
      ]
     },
     {
@@ -354,6 +354,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut demonstratives distinguish many places (up there, down there, out there, inside …) and whether the thing is seen; Hebrew distinguishes only near (הַזֶּה) and far (הַהוּא)."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian questo / quello stand before the noun (questa casa); Hebrew puts the demonstrative after it, with the article on both: הַדִּירָה הַזֹּאת. To present, זֶה מוֹרֶה works like questo è un insegnante."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese este / esse / aquele stand before the noun (esta casa); Hebrew puts the demonstrative after the noun, with the article on both (הַדִּירָה הַזֹּאת), and has only two distances: הַזֶּה and הַהוּא."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian ai / ajo / ata / ato mean both “he, she, they” and “that, those” — and Hebrew builds “that” from its pronouns too: הַהוּא, הַהִיא, הָהֵם, הָהֵן. But it puts them after the noun, with the article: הָאִשָּׁה הַהִיא “ajo grua”."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your demonstratives agree and stand before the noun, keep the agreement but change the order: noun with the article, then the demonstrative with the article — הַסֵּפֶר הַזֶּה, הַדִּירָה הַזֹּאת."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your demonstratives come first and never change, two things are new: the Hebrew demonstrative follows the noun with the article (הַבַּיִת הַזֶּה), and it agrees in gender and number (הַדִּירָה הַזֹּאת)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your demonstrative comes first, perhaps with a classifier, Hebrew needs no classifier: noun + demonstrative, both with the article (הַסֵּפֶר הַזֶּה) — and the demonstrative agrees with the noun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language has many demonstratives for distance, height or visibility, Hebrew has just two degrees: near (זֶה / זֹאת / אֵלֶּה) and far (הַהוּא / הַהִיא / הָהֵם / הָהֵן)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Semitic demonstratives commonly agree in gender and number. Hebrew puts them after a definite noun and repeats the article: הַבַּיִת הַזֶּה. If yours comes before the noun, reverse the order."
   }
  ]
 }

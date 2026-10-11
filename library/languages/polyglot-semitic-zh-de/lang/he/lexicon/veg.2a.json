@@ -117,7 +117,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic زَنْجَبِيل, Turkish zencefil, German Ingwer and English ginger all go back to the same ancient word (Greek ζιγγίβερις, from a South Asian source).",
+     "Arabic زَنْجَبِيل and German Ingwer go back to the same ancient word, which reached the Mediterranean from South Asia.",
      "The Quran (76:17) names زَنْجَبِيل as the flavour of a drink in paradise."
     ],
     "pitfalls": [
@@ -126,6 +126,28 @@
     ],
     "subtleties": [
      "On spice jars and in recipes the word is זַנְגְּבִיל; on café menus (ginger tea, ginger beer) the English loan ג׳ינג׳ר is very common."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English ginger goes back to the same ancient word."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "It goes back to the word that Greek wrote ζιγγίβερις."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian zenzero goes back to the same ancient word."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish zencefil goes back to the same ancient word, through Arabic."
+     }
     ]
    }
   },
@@ -252,7 +274,7 @@
     },
     "funFacts": [
      "Arabic شَمَر (šamar) is the same word, and Hebrew שָׁמִיר “dill” comes from the same Akkadian source (Wiktionary, Arabic شمر).",
-     "Greek μάραθο(ν) “fennel” gave its name to Marathon — the “fennel field”."
+     "In Modern Hebrew שֻׁמָּר has pushed aside the older native word for fennel, גּוּפְנָן."
     ],
     "pitfalls": [
      "The everyday spelling שומר is the same as שׁוֹמֵר “guard; keeps” — only the vowels or the context tell them apart.",
@@ -260,6 +282,13 @@
     ],
     "subtleties": [
      "The same word names the bulb, the feathery leaves and the seeds (זַרְעֵי שֻׁמָּר) used as a spice."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "μάραθο(ν) “fennel” gave its name to Marathon, the “fennel field”; Hebrew שֻׁמָּר has an eastern origin."
+     }
     ]
    }
   },
@@ -370,13 +399,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Spargel and Greek σπαράγγι come from the same Greek word; Turkish calls it kuşkonmaz, “the bird does not land”."
+     "German Spargel comes from the same Greek word, ἀσπάραγος."
     ],
     "pitfalls": [
      "No plural in everyday use: “I bought asparagus” is קָנִיתִי אַסְפָּרָגוֹס; single spears are גִּבְעוֹלֵי אַסְפָּרָגוֹס."
     ],
     "subtleties": [
      "White asparagus is the same plant, grown covered with soil so that it never sees light."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "σπαράγγι and אַסְפָּרָגוֹס come from the same word, ἀσπάραγος."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish has its own name, kuşkonmaz “the bird does not land”; Hebrew uses the international word."
+     }
     ]
    }
   },
@@ -483,14 +524,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قُلْقَاس (qulqās) is the same word; in some Aramaic dialects it once meant a kind of cardoon or artichoke (Wiktionary).",
-     "The botanical genus Colocasia and the Cypriot Greek κολοκάσι (a Cypriot speciality) are the same ancient word."
+     "Arabic قُلْقَاس (qulqās) is the same word.",
+     "The botanical genus name, Colocasia, is the same ancient word."
     ],
     "pitfalls": [
      "Raw taro contains needle-like crystals (calcium oxalate) that irritate the mouth and the skin: it is always cooked, and peeled with gloves."
     ],
     "subtleties": [
      "A rare word for most Israelis; it lives on in families from Egypt and neighbouring countries and in botany books."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same ancient word as κολοκάσι, the Cypriot speciality."
+     }
     ]
    }
   },
@@ -507,7 +555,7 @@
    "features": {
     "spelling": "שינן",
     "root": {
-     "none": "a modern plant name (built on שֵׁן “tooth”, like French dent-de-lion): no verb root"
+     "none": "a modern plant name (built on שֵׁן “tooth”): no verb root"
     },
     "pattern": {
      "none": "a modern coinage: no pattern"
@@ -596,17 +644,44 @@
     "synonyms": [],
     "synonymsNone": "No true synonym: סַבְיוֹן and מַרְגָּנִית, sometimes given as translations, are other wild plants (groundsel and pimpernel).",
     "etymology": {
-     "text": "Wiktionary has no entry for the noun (the page שינן holds only the verb שִׁנֵּן); its English entry dandelion gives שינן (šinán, m.). English dandelion is from Old French dent de lion, “lion’s tooth”.",
+     "text": "Wiktionary has no entry for the noun (the page שינן holds only the verb שִׁנֵּן); its English entry dandelion gives שינן (šinán, m.).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Most European names mean “lion’s tooth”: French dent-de-lion, German Löwenzahn, English dandelion (Wiktionary)."
+     "German Löwenzahn means “lion’s tooth”; the Hebrew name keeps only the tooth: שֵׁן."
     ],
     "pitfalls": [
      "Same letters as the verb שִׁנֵּן “to memorize” (past tense שינן) — without vowels only the context separates them."
     ],
     "subtleties": [
      "As food, Hebrew usually says עֲלֵי שִׁינָן (dandelion leaves); שִׁינָן alone is the plant."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Like dent-de-lion, the name is built on “tooth”: שֵׁן."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English dandelion is “lion’s tooth”; the Hebrew name keeps only the tooth: שֵׁן."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Like dente di leone, the name is built on “tooth”: שֵׁן."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Like diente de león, the name is built on “tooth”: שֵׁן."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Like dente-de-leão, the name is built on “tooth”: שֵׁן."
+     }
     ]
    }
   },
@@ -718,11 +793,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym in Modern Hebrew.",
     "etymology": {
-     "text": "From Proto-Semitic *lapt-. Cognate with Arabic لِفْت (lift), Classical Syriac ܠܰܦܬܳܐ (laftā) and Akkadian laptu, all “turnip” (Wiktionary, Arabic لفت).",
+     "text": "From Proto-Semitic *lapt-. Cognate with Arabic لِفْت (lift), “turnip” (Wiktionary, Arabic لفت).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One of the oldest Semitic vegetable words: Arabic لِفْت, Syriac ܠܰܦܬܳܐ and Akkadian laptu are the same word.",
+     "One of the oldest Semitic vegetable words: Arabic لِفْت is the same word, and it is attested in the oldest Semitic texts.",
      "The pink pickled turnips of Middle Eastern restaurants get their colour from a slice of beetroot (סֶלֶק) in the jar."
     ],
     "pitfalls": [
@@ -843,7 +918,7 @@
     },
     "funFacts": [
      "The Mishnah (Pesachim 2:6) lists עֻלְשִׁין among the vegetables that can serve as the bitter herb at the Seder, next to חֲזֶרֶת.",
-     "English endive goes back, via Byzantine Greek ἔντυβον and Latin intibus, to Aramaic הִנְדְּבָא — also the source of Arabic هِنْدِبَاء (hindibāʔ) (Wiktionary).",
+     "Arabic هِنْدِبَاء (hindibāʔ) comes from an Aramaic relative of this plant name — the same source as the European word endive (Wiktionary).",
      "Roasted chicory root was a classic coffee substitute (German Zichorienkaffee)."
     ],
     "pitfalls": [
@@ -852,6 +927,23 @@
     ],
     "subtleties": [
      "Hebrew does not separate the two Cichorium salads: עֹלֶשׁ is chicory and endive alike (Wiktionary: “chicory, endive”)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English endive goes back, through Greek and Latin, to the same Aramaic source as Arabic هِنْدِبَاء."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French endive goes back, through Greek and Latin, to the same Aramaic source as Arabic هِنْدِبَاء."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Byzantine ἔντυβον goes back to the same Aramaic source as Arabic هِنْدِبَاء."
+     }
     ]
    }
   },
@@ -954,7 +1046,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek calls it γλιστρίδα and Turkish semizotu (“fat herb”); in Arabic it is رِجْلَة, the same word as Hebrew.",
+     "In Arabic it is رِجْلَة, the same word as Hebrew.",
      "Purslane is one of the richest leafy sources of plant omega-3 fatty acids."
     ],
     "pitfalls": [
@@ -963,6 +1055,18 @@
     "subtleties": [
      "The article takes qamats before ר: הָרְגֵלָה.",
      "Feminine: רְגֵלָה טְרִיָּה (fresh purslane)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek calls it γλιστρίδα; Hebrew רְגֵלָה is the Arabic name."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish calls it semizotu (“fat herb”); Hebrew רְגֵלָה is the Arabic name."
+     }
     ]
    }
   },
@@ -1070,8 +1174,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Hebrew name copies English “Jerusalem artichoke”, whose “Jerusalem” is popularly explained as a corruption of Italian girasole, “sunflower”.",
-     "Other languages: German and Russian Topinambur / топинамбур, Turkish yer elması (“earth apple”)."
+     "The Hebrew name is a calque of the English name; its “Jerusalem” has nothing to do with the city — it is popularly explained as a corruption of girasole, “sunflower”.",
+     "German calls it Topinambur."
     ],
     "pitfalls": [
      "It is not an artichoke and not from Jerusalem: it is the tuber of a sunflower (Helianthus tuberosus).",
@@ -1079,6 +1183,23 @@
     ],
     "subtleties": [
      "On its own, יְרוּשַׁלְמִי means “a Jerusalemite”, and הַיְּרוּשַׁלְמִי can mean the Jerusalem Talmud; in the kitchen the phrase is fixed."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "The “Jerusalem” of the name is popularly explained as a corruption of girasole."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian топинамбур is the German name; Hebrew copies “Jerusalem artichoke”."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish yer elması (“earth apple”) is another picture; Hebrew copies “Jerusalem artichoke”."
+     }
     ]
    }
   },
@@ -1195,7 +1316,7 @@
     },
     "funFacts": [
      "Isaiah 55:13 promises that the myrtle will come up instead of the nettle — the only time סִרְפַּד appears in the Bible.",
-     "Turkish ısırgan (“the biting one”) and German Brennnessel (“burning nettle”) describe the sting; Greek says τσουκνίδα."
+     "German Brennnessel (“burning nettle”) describes the sting."
     ],
     "pitfalls": [
      "The plant stings only raw: cooking or drying removes the sting.",
@@ -1203,6 +1324,18 @@
     ],
     "subtleties": [
      "Mostly used without a plural for the plant as food: מְרַק סִרְפָּד, תֵּה סִרְפָּד."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish ısırgan (“the biting one”) also describes the sting."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek says τσουκνίδα."
+     }
     ]
    }
   },
@@ -1308,12 +1441,12 @@
     "synonyms": [],
     "synonymsNone": "No everyday synonym.",
     "etymology": {
-     "text": "גֶּזֶר “carrot” + לָבָן “white” (from Proto-West Semitic *laban-; cognate with Arabic لَبَن, laban, “milk”). English parsnip is from Latin pastināca (Wiktionary).",
+     "text": "גֶּזֶר “carrot” + לָבָן “white” (from Proto-West Semitic *laban-; cognate with Arabic لَبَن, laban, “milk”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Hebrew לָבָן “white” and Arabic لَبَن (laban) “milk” are the same Semitic word (Wiktionary).",
-     "Latin pastināca also gave German Pastinake and Greek παστινάκη."
+     "German Pastinake comes from Latin pastināca; Hebrew describes the root instead: a “white carrot”."
     ],
     "pitfalls": [
      "Both words agree and both take the article: הַגֶּזֶר הַלָּבָן, הַגְּזָרִים הַלְּבָנִים.",
@@ -1321,6 +1454,18 @@
     ],
     "subtleties": [
      "Literally “white carrot”: Hebrew names the parsnip after its closest everyday relative."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English parsnip is from Latin pastināca; Hebrew describes the root: “white carrot”."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek παστινάκη is the Latin name; Hebrew describes the root: “white carrot”."
+     }
     ]
    }
   },
@@ -1432,7 +1577,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Many languages name the plant after its taste: English sorrel (from Old French sur “sour”), German Sauerampfer, Arabic حُمَّاض (from “sour”)."
+     "German Sauerampfer and Arabic حُمَّاض (from “sour”) name the plant after its sour taste."
     ],
     "pitfalls": [
      "Everyday spelling with ו: חומעה.",
@@ -1440,6 +1585,13 @@
     ],
     "subtleties": [
      "The sourness comes from oxalic acid, so sorrel is eaten in moderation."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English sorrel, from Old French sur “sour”, is named after the taste too."
+     }
     ]
    }
   },
@@ -1560,7 +1712,7 @@
     },
     "funFacts": [
      "In the Mishnah, חֲזֶרֶת was most likely lettuce — the Talmud (Pesachim 39a) equates it with Aramaic חַסָּא; Ashkenazi Jews came to use horseradish, and Modern Hebrew gave the name to it.",
-     "Russian хрен, Yiddish כריין (khreyn) and Ashkenazi kitchens share one Slavic word for it; German says Meerrettich."
+     "German says Meerrettich; in Ashkenazi kitchens it is often called khreyn."
     ],
     "pitfalls": [
      "Feminine: חֲזֶרֶת חֲרִיפָה.",
@@ -1568,6 +1720,13 @@
     ],
     "subtleties": [
      "In shops it is sold ready-grated: red (with beetroot) or white."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The Ashkenazi kitchen name, khreyn, is the same word as хрен."
+     }
     ]
    }
   },
@@ -1670,7 +1829,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English watercress, German Brunnenkresse (“well cress”) and Hebrew “stream rocket” all name the plant after the water it grows in."
+     "German Brunnenkresse (“well cress”) and Hebrew “stream rocket” both name the plant after the water it grows in."
     ],
     "pitfalls": [
      "Already definite: say אֶת גַּרְגִּיר הַנְּחָלִים, never *הַגַּרְגִּיר הַנְּחָלִים.",
@@ -1678,6 +1837,13 @@
     ],
     "subtleties": [
      "נַחַל is a stream or a wadi; Israeli hiking trails are named after נְחָלִים."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like watercress, the Hebrew “stream rocket” is named after the water it grows in."
+     }
     ]
    }
   },
@@ -1788,11 +1954,11 @@
     "synonyms": [],
     "synonymsNone": "No everyday synonym; menus sometimes keep the French name.",
     "etymology": {
-     "text": "Wiktionary (kaikki.org) gives no etymology for this word. It is בָּצָל “onion” in the reduplicated diminutive pattern (compare כְּלַבְלַב “puppy” from כֶּלֶב): “little onion”. English shallot is from French échalote, from Latin ascalonia (cēpa), “onion of Ashkelon” (Wiktionary).",
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word. It is בָּצָל “onion” in the reduplicated diminutive pattern (compare כְּלַבְלַב “puppy” from כֶּלֶב): “little onion”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The European name remembers a city in Israel: Latin ascalonia “of Ashkelon” → French échalote → English shallot — and also English scallion (Wiktionary)."
+     "The European name of the shallot remembers a city in Israel: it means “onion of Ashkelon” (Wiktionary)."
     ],
     "pitfalls": [
      "The plural doubles the ל: בְּצַלְצַלִּים.",
@@ -1800,6 +1966,18 @@
     ],
     "subtleties": [
      "The repeated צַל is a diminutive, as in כְּלַבְלַב “puppy” and חֲתַלְתּוּל “kitten”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English shallot (and scallion) come, through French, from Latin ascalonia “onion of Ashkelon”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French échalote comes from Latin ascalonia, “onion of Ashkelon” — a city in Israel."
+     }
     ]
    }
   },
@@ -1916,13 +2094,30 @@
     },
     "funFacts": [
      "Chard is the same species as beetroot (Beta vulgaris), bred for its leaves instead of its root — hence the botanical name סֶלֶק עָלִים, “leaf beet”.",
-     "Turkish calls it pazı and Greek σέσκουλο."
+     "It is the leaf beet: the same species as סֶלֶק, grown for its leaves."
     ],
     "pitfalls": [
      "A mass noun: מַנְגּוֹלְד טָרִי, no plural in everyday use; the leaves are עֲלֵי מַנְגּוֹלְד."
     ],
     "subtleties": [
-     "Hebrew took the German name; English says (Swiss) chard. Seed packets may add the botanical סֶלֶק עָלִים."
+     "Hebrew took the German name, Mangold. Seed packets may add the botanical סֶלֶק עָלִים."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish calls it pazı; Hebrew took the German name."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek calls it σέσκουλο; Hebrew took the German name."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English says (Swiss) chard; Hebrew took the German name, מַנְגּוֹלְד."
+     }
     ]
    }
   },
@@ -2055,7 +2250,7 @@
     },
     "funFacts": [
      "Arabic جِرْجِير (jirjīr) is the same word, from Aramaic and ultimately Akkadian (Wiktionary).",
-     "English rocket and arugula and Italian rucola come from Latin ērūca (Wiktionary)."
+     "German Rucola comes from Latin ērūca; Hebrew kept its own Semitic name."
     ],
     "pitfalls": [
      "גַּרְגִּיר also means “a grain, a granule” (גַּרְגִּיר אֹרֶז, גַּרְגִּיר חוֹל); the context decides.",
@@ -2063,6 +2258,18 @@
     ],
     "subtleties": [
      "גַּרְגִּיר הַנְּחָלִים (“stream rocket”) is watercress — a different plant."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English rocket and arugula come from Latin ērūca; Hebrew kept its Semitic name."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "rucola comes from Latin ērūca; Hebrew kept its Semitic name."
+     }
     ]
    }
   },
@@ -2293,7 +2500,7 @@
      }
     ],
     "etymology": {
-     "text": "שֹׁרֶשׁ “root” (from Proto-Semitic *šurš-) + סֶלֶרִי “celery” (an international word; Wiktionary has no Hebrew entry for it). English celeriac is celery + -ac (Wiktionary).",
+     "text": "שֹׁרֶשׁ “root” (from Proto-Semitic *šurš-) + סֶלֶרִי “celery” (an international word; Wiktionary has no Hebrew entry for it).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2306,6 +2513,13 @@
     ],
     "subtleties": [
      "In שָׁרְשֵׁי the first vowel is a qamats katan, pronounced o."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Built like celeriac: “root” + “celery”."
+     }
     ]
    }
   },
@@ -2408,7 +2622,7 @@
     "synonyms": [],
     "synonymsNone": "No Hebrew synonym; the Italian name is used.",
     "etymology": {
-     "text": "Wiktionary has no Hebrew entry. Like English radicchio, “borrowed from Italian radicchio” (Wiktionary).",
+     "text": "Wiktionary has no Hebrew entry. Borrowed from Italian radicchio (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2535,14 +2749,31 @@
     },
     "funFacts": [
      "סָגֹל comes from סֶגֶל “violet (the flower)”, while the vowel sign סֶגוֹל comes from Aramaic סְגוֹלָא “cluster” (Wiktionary).",
-     "Turkish can also say mor soğan, “purple onion”, just like Hebrew."
+     "The same noun + colour pattern names many vegetables: בָּצָל לָבָן, בָּצָל יָרֹק, כְּרוּב אָדֹם."
     ],
     "pitfalls": [
      "Both words agree and take the article: הַבָּצָל הַסָּגֹל, הַבְּצָלִים הַסְּגֻלִּים.",
      "Everyday spelling with ו: בצל סגול, בצלים סגולים."
     ],
     "subtleties": [
-     "Hebrew says “purple” (סָגֹל) where English says “red”; בָּצָל לָבָן (white onion) and בָּצָל יָרֹק (spring onion) follow the same noun + colour pattern."
+     "Hebrew calls this onion “purple” (סָגֹל), where German says rote Zwiebel; בָּצָל לָבָן (white onion) and בָּצָל יָרֹק (spring onion) follow the same noun + colour pattern."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish can also say mor soğan, “purple onion”, just like Hebrew."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English says “red onion”; Hebrew says “purple”: בָּצָל סָגֹל."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Russian says красный лук; Hebrew says “purple”: בָּצָל סָגֹל."
+     }
     ]
    }
   }

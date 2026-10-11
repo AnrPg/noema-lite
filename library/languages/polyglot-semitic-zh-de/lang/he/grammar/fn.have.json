@@ -383,6 +383,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut adds a “have” suffix (-qaq-) to the noun of the thing owned and makes it a verb; Hebrew uses separate words: יֵשׁ + לְ + the owner + the thing."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian avere (ho un fratello) has no Hebrew counterpart: Hebrew says “there is to me”, יֵשׁ לִי אָח — close to c’è. In the past the verb agrees with the thing owned: הָיְתָה לִי דִּירָה “avevo un appartamento”."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese ter has no Hebrew counterpart: Hebrew uses its “there is” word, like há — יֵשׁ לִי אָח “there is to me a brother”. The negative is a word of its own: אֵין לִי זְמַן “não tenho tempo”."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian kam is a real verb (kam një vëlla); Hebrew has none and says יֵשׁ לִי אָח “there is to me a brother”. Albanian uses ka “has” also for “there is” (ka një libër); Hebrew uses יֵשׁ for both, with לְ for the owner."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has a verb “to have” with an object, rebuild the sentence: the thing owned is the subject and the owner goes into לְ — יֵשׁ לִי אָח. In the past the verb agrees with the thing: הָיְתָה לִי דִּירָה."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language says “my X exists” or “at me there is X”, Hebrew is close: יֵשׁ לִי אָח “there is to me a brother”, and the negative is a separate word, אֵין: אֵין לִי אָח."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If one word means both “have” and “there is” in your language, Hebrew יֵשׁ does too — but the owner must be marked with לְ: יֵשׁ לִי סֵפֶר “I have a book”, יֵשׁ פֹּה סֵפֶר “there is a book here”."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If possession in your language is an affix on the noun or a verb built from it, Hebrew uses a fixed word for existence, יֵשׁ, and puts the owner into לְ with an ending: יֵשׁ לָנוּ בַּיִת."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Semitic languages commonly have no verb “to have” and use a preposition with the owner’s suffix. Hebrew adds the existential words יֵשׁ / אֵין: יֵשׁ לִי אָח, אֵין לִי אָח."
   }
  ]
 }
