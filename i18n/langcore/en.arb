@@ -1606,6 +1606,48 @@
       }
     }
   },
+  "lc.expl.compareStatement": "{feature}: {value}",
+  "@lc.expl.compareStatement": {
+    "description": "Language course, comparing a grammar point across the languages: a statement the learner matches with the languages it is true for — a feature of the point and its value (both from the course, e.g. “Article position: before the noun”). Explanation language (D19).",
+    "placeholders": {
+      "feature": {
+        "type": "String",
+        "example": "Article position"
+      },
+      "value": {
+        "type": "String",
+        "example": "before the noun"
+      }
+    }
+  },
+  "lc.expl.compareWhy": "{title}: {rows}",
+  "@lc.expl.compareWhy": {
+    "description": "Language course, comparing a grammar point across the languages: the explanation after the answer — the point’s title, then one row per language (lc.expl.compareWhyRow, joined with “ · ”). Explanation language (D19).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "The definite article"
+      },
+      "rows": {
+        "type": "String",
+        "example": "de — German marks it with an article. · el — Greek marks it with an article."
+      }
+    }
+  },
+  "lc.expl.compareWhyRow": "{lang} — {rule}",
+  "@lc.expl.compareWhyRow": {
+    "description": "Language course, the explanation of a comparison: one language’s row — {lang} = its ISO code (e.g. “de”), {rule} = the first sentence of that language’s grammar page for the point. Explanation language (D19).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "de"
+      },
+      "rule": {
+        "type": "String",
+        "example": "German marks it with an article."
+      }
+    }
+  },
   "lc.ui.expand.time": "Add when it happens (a time word).",
   "@lc.ui.expand.time": {
     "description": "Language course, “expand” writing exercise: what the learner adds to a sentence. Imperative."

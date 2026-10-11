@@ -3087,7 +3087,7 @@
         if (cf.langs.some(c => !f.values[c])) continue;   // every value known, or the statement is not asked
         const by = {}; for (const c of cf.langs) (by[f.values[c].value] = by[f.values[c].value] || []).push(c);
         const groups = Object.entries(by);
-        for (const [v, hs] of groups) st.push({ text: `${f.title}: ${f.values[hs[0]].title}`, holds: hs, differs: groups.length > 1, feature: f.feature });
+        for (const [v, hs] of groups) st.push({ text: lcX('lc.expl.compareStatement', { feature: f.title, value: f.values[hs[0]].title }), holds: hs, differs: groups.length > 1, feature: f.feature });
       }
       const sts = {}; for (const r of cf.rows) (sts[r.status] = sts[r.status] || []).push(r.lang);
       if (Object.keys(sts).length > 1) for (const [s, hs] of Object.entries(sts)) st.push({ text: lcX('lc.expl.statusStatement', { status: s }), holds: hs, differs: true, feature: 'status' });
@@ -3095,7 +3095,7 @@
       const pick = [...diff.slice(0, 4)]; if (pick.length < 4 && samek.length) pick.push(samek[0]);
       if (pick.length >= 2 && pick.some(s => s.holds.length < cf.langs.length))
         out.push({ type: 'compare_rule', kind: 'compare', fn: fid, lang: cf.langs[0], langs: cf.langs, title: cf.title, multi: true, statements: shuffled(pick, rng).map(({ text, holds }) => ({ text, holds })),
-          why: `${cf.title}: ` + cf.langs.map(c => `${c} — ${cf.rows.find(r => r.lang === c).first}`).join(' · ') });
+          why: lcX('lc.expl.compareWhy', { title: cf.title, rows: cf.langs.map(c => lcX('lc.expl.compareWhyRow', { lang: c, rule: cf.rows.find(r => r.lang === c).first })).join(' · ') }) });   // i18n-ignore (' · ' joins the rows)
       const firsts = cf.rows.filter(r => r.first);
       if (firsts.length >= 2) out.push({ type: 'compare_rule', kind: 'whose', fn: fid, lang: cf.langs[0], langs: cf.langs, title: cf.title, multi: false,
         statements: shuffled(firsts.map(r => ({ text: mask(r.first), holds: [r.lang] })), rng), why: cf.title });
