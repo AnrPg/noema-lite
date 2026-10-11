@@ -3,3 +3,5 @@ engine.exTag.*
 engine.ex.ok.*
 engine.ex.bad.*
 engine.prac.focus_*
+engine.new.stat_*
+engine.deck.st_*

@@ -31,3 +31,7 @@ function tNodes(key, vars, nodes) {
   for (const [k, node] of Object.entries(nodes || {})) { p[k] = '\u0001' + marks.length + '\u0002'; marks.push(node); }
   return tE(key, p).split(/\u0001(\d+)\u0002/).map((x, j) => j % 2 ? marks[+x] : x).filter(x => x !== '');
 }
+/** A file size in the UI language: "2.4 MB" / "380 KB" (one decimal for MB, as before). */
+const fileSize = bytes => bytes > 1048576
+  ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(bytes / 1048576, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (bytes / 1048576).toFixed(1) })
+  : tE('engine.common.sizeKB', { size: nf(Math.round(bytes / 1024)) });

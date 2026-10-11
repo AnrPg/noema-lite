@@ -1967,5 +1967,509 @@
   "engine.drill.saved": "Saved ✔",
   "@engine.drill.saved": {
     "description": "Toast after rating a drill."
+  },
+  "engine.src.course": "Course",
+  "@engine.src.course": {
+    "description": "Title of the single default source of a subject that lists no sources."
+  },
+  "engine.src.noFile": "No file for this source yet — attach it in its card to preview it here.",
+  "@engine.src.noFile": {
+    "description": "Toast (after 📎) when the learner opens a source that has no file attached."
+  },
+  "engine.src.opening": "Opening…",
+  "@engine.src.opening": {
+    "description": "Toast (after ⏳) while a source file opens."
+  },
+  "engine.src.unavailable": "The file is not available on this device and could not be downloaded.",
+  "@engine.src.unavailable": {
+    "description": "Toast (after ⚠️) when a source file cannot be opened."
+  },
+  "engine.src.chapterAria": "Sources of this chapter",
+  "@engine.src.chapterAria": {
+    "description": "Screen-reader label of the row of source chips under a chapter’s title."
+  },
+  "engine.src.from": "From",
+  "@engine.src.from": {
+    "description": "Small label before the source chips of a chapter (“From: book p. 23 · lecture …”)."
+  },
+  "engine.src.openAtPage": "Open the source at page {page}",
+  "@engine.src.openAtPage": {
+    "description": "Tooltip line (after 👁) of a source chip: open the file at that page.",
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "example": "23"
+      }
+    }
+  },
+  "engine.src.open": "Open the source",
+  "@engine.src.open": {
+    "description": "Tooltip line (after 👁) of a source chip: open the file."
+  },
+  "engine.src.showCard": "Show the source card",
+  "@engine.src.showCard": {
+    "description": "Tooltip line of a source chip when no file is attached: show its card in the Sources menu."
+  },
+  "engine.src.newChapter": "NEW chapter",
+  "@engine.src.newChapter": {
+    "description": "Corner badge (after ✨) on a chapter that came with a new source. “NEW” is stressed."
+  },
+  "engine.src.newContent": "new content",
+  "@engine.src.newContent": {
+    "description": "Corner badge (after ✨) on a chapter that got new material."
+  },
+  "engine.src.new": "new",
+  "@engine.src.new": {
+    "description": "Small badge (after ✨) on a new section, exercise or source. Lowercase."
+  },
+  "engine.src.NEW": "NEW",
+  "@engine.src.NEW": {
+    "description": "Tag (after ✨) on a newly added block of a lesson. Uppercase."
+  },
+  "engine.src.onlyNewLabel": "Only what’s new:",
+  "@engine.src.onlyNewLabel": {
+    "description": "Bold label of the filter banner when only new sources are shown; the source names follow."
+  },
+  "engine.src.filteredLabel": "Filtered:",
+  "@engine.src.filteredLabel": {
+    "description": "Bold label of the filter banner when some sources are hidden; the shown source names follow."
+  },
+  "engine.src.sources": "Sources",
+  "@engine.src.sources": {
+    "description": "Button / heading (after 📚): the sources menu of the subject."
+  },
+  "engine.src.showEverything": "Show everything",
+  "@engine.src.showEverything": {
+    "description": "Button of the filter banner: show all sources again."
+  },
+  "engine.src.showOnlyNew": "Show me only what’s new",
+  "@engine.src.showOnlyNew": {
+    "description": "Button (after ✨) on the subject’s page when new sources arrived."
+  },
+  "engine.new.exercisesTitle": "New exercises",
+  "@engine.new.exercisesTitle": {
+    "description": "Title (after ✨) of a practice round with the new exercises."
+  },
+  "engine.new.srcPages": "{title} (pages {pages})",
+  "@engine.new.srcPages": {
+    "description": "What’s new: a new source and its pages. title = the source, pages = its page range (may be empty).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "ECB lecture notes"
+      },
+      "pages": {
+        "type": "String",
+        "example": "23–42"
+      }
+    }
+  },
+  "engine.new.alreadySeen": "already marked as seen.",
+  "@engine.new.alreadySeen": {
+    "description": "What’s new: added after “ — ” when the latest source is already marked as seen. Lowercase start."
+  },
+  "engine.new.stat_chapters": "{n, plural, one {chapters} other {chapters}}",
+  "@engine.new.stat_chapters": {
+    "description": "Chapters. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_sections": "{n, plural, one {sections} other {sections}}",
+  "@engine.new.stat_sections": {
+    "description": "Sections. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_exercises": "{n, plural, one {exercises} other {exercises}}",
+  "@engine.new.stat_exercises": {
+    "description": "Exercises. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_drills": "{n, plural, one {debug drills} other {debug drills}}",
+  "@engine.new.stat_drills": {
+    "description": "Debug drills. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_flashcards": "{n, plural, one {flashcards} other {flashcards}}",
+  "@engine.new.stat_flashcards": {
+    "description": "Flashcards. Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.stat_traps": "{n, plural, one {traps} other {traps}}",
+  "@engine.new.stat_traps": {
+    "description": "Traps (common pitfalls). Label under a number (n) in the “What’s new” statistics; the number itself is shown above, not in the label. Lowercase. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.filterAll": "Show only new content everywhere",
+  "@engine.new.filterAll": {
+    "description": "Button (after 🔎) on the What’s new page: filter the whole app to the new sources."
+  },
+  "engine.new.practice": "Practice new exercises ({n, number})",
+  "@engine.new.practice": {
+    "description": "Button (after 🎯): a round with the new exercises; n = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.drills": "New debug drills ({n, number})",
+  "@engine.new.drills": {
+    "description": "Button (after 🔧): the new debug drills; n = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.cards": "New flashcards",
+  "@engine.new.cards": {
+    "description": "Button (after 🃏): the new flashcards."
+  },
+  "engine.new.markedSeen": "Marked as seen ✔",
+  "@engine.new.markedSeen": {
+    "description": "Toast after marking new sources as seen."
+  },
+  "engine.new.markSeen": "Mark as seen",
+  "@engine.new.markSeen": {
+    "description": "Button (after ✔): new sources are no longer marked new."
+  },
+  "engine.new.chapters": "New chapters",
+  "@engine.new.chapters": {
+    "description": "Heading on the What’s new page."
+  },
+  "engine.new.chapterN": "Chapter {num}",
+  "@engine.new.chapterN": {
+    "description": "Small label on a chapter card on the What’s new page. num = chapter number.",
+    "placeholders": {
+      "num": {
+        "type": "String",
+        "example": "7"
+      }
+    }
+  },
+  "engine.new.chCounts": "{s, plural, one {# sections} other {# sections}} · {e, plural, one {# exercises} other {# exercises}} · {d, plural, one {# drills} other {# drills}}",
+  "@engine.new.chCounts": {
+    "description": "Counts on a new chapter’s card: sections, exercises, debug drills. (English uses the plural for every number.)",
+    "placeholders": {
+      "s": {
+        "type": "int",
+        "example": "3"
+      },
+      "e": {
+        "type": "int",
+        "example": "3"
+      },
+      "d": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.new.enriched": "Existing sections that got new material",
+  "@engine.new.enriched": {
+    "description": "Heading on the What’s new page."
+  },
+  "engine.new.enrichedNote": "Level-up notes and new exercises were appended — the original text is untouched. New blocks are marked ✨ NEW.",
+  "@engine.new.enrichedNote": {
+    "description": "Note under that heading. “✨ NEW” is the tag engine.src.NEW."
+  },
+  "engine.new.added": "+{blocks, number} blocks · +{ex, number} ex",
+  "@engine.new.added": {
+    "description": "Pill on an enriched section: how many blocks and exercises were added (“ex” = exercises, abbreviated).",
+    "placeholders": {
+      "blocks": {
+        "type": "int",
+        "example": "3"
+      },
+      "ex": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.countAll": "{n, plural, one {# source} other {# sources}} · showing all",
+  "@engine.deck.countAll": {
+    "description": "Header of the Sources menu (after “📚 Sources · ”): how many sources, all shown.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.countSome": "{n, plural, one {# source} other {# sources}} · showing {shown, number}",
+  "@engine.deck.countSome": {
+    "description": "Header of the Sources menu: how many sources and how many are switched on.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "shown": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.all": "All",
+  "@engine.deck.all": {
+    "description": "Filter chip of the Sources menu: all sources on."
+  },
+  "engine.deck.onlyNew": "Only new",
+  "@engine.deck.onlyNew": {
+    "description": "Filter chip (after ✨): only the new sources."
+  },
+  "engine.deck.close": "Close",
+  "@engine.deck.close": {
+    "description": "Tooltip of the ✕ of the Sources menu."
+  },
+  "engine.deck.saving": "Saving “{name}”…",
+  "@engine.deck.saving": {
+    "description": "Toast (after ⬆️) while a source file is saved. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ecb-notes.pdf"
+      }
+    }
+  },
+  "engine.deck.attached": "Attached — tap 👁 to preview it (on every device).",
+  "@engine.deck.attached": {
+    "description": "Toast (after 📎) after attaching a file to a source."
+  },
+  "engine.deck.include": "Include in the app",
+  "@engine.deck.include": {
+    "description": "Tooltip of the on/off switch of a source."
+  },
+  "engine.deck.keepOne": "Keep at least one source on",
+  "@engine.deck.keepOne": {
+    "description": "Toast when the learner tries to switch off the last source."
+  },
+  "engine.deck.pp": "pp. {pages}",
+  "@engine.deck.pp": {
+    "description": "Page range of a source in its card (“pp.” = pages, abbreviated). pages = e.g. 23–42.",
+    "placeholders": {
+      "pages": {
+        "type": "String",
+        "example": "23–42"
+      }
+    }
+  },
+  "engine.deck.preview": "Preview",
+  "@engine.deck.preview": {
+    "description": "Button / tooltip (after 👁): open the source file."
+  },
+  "engine.deck.previewAria": "Preview the source",
+  "@engine.deck.previewAria": {
+    "description": "Screen-reader label of the 👁 button of a source."
+  },
+  "engine.deck.st_chapters": "{n, plural, one {# chapters} other {# chapters}}",
+  "@engine.deck.st_chapters": {
+    "description": "Chapters. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_sections": "{n, plural, one {# sections} other {# sections}}",
+  "@engine.deck.st_sections": {
+    "description": "Sections. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_enriched": "{n, plural, one {# sections enriched} other {# sections enriched}}",
+  "@engine.deck.st_enriched": {
+    "description": "Sections that got material from this source. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_exercises": "{n, plural, one {# exercises} other {# exercises}}",
+  "@engine.deck.st_exercises": {
+    "description": "Exercises. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_drills": "{n, plural, one {# drills} other {# drills}}",
+  "@engine.deck.st_drills": {
+    "description": "Debug drills. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_cards": "{n, plural, one {# cards} other {# cards}}",
+  "@engine.deck.st_cards": {
+    "description": "Flashcards. Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.deck.st_traps": "{n, plural, one {# traps} other {# traps}}",
+  "@engine.deck.st_traps": {
+    "description": "Traps (pitfalls). Pill in a source’s card (after an emoji): how many items come from this source. (English uses the plural for every n.)",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.common.sizeMB": "{size} MB",
+  "@engine.common.sizeMB": {
+    "description": "A file size in megabytes. size = the number, already formatted.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "2.4"
+      }
+    }
+  },
+  "engine.common.sizeKB": "{size} KB",
+  "@engine.common.sizeKB": {
+    "description": "A file size in kilobytes. size = the number, already formatted.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "380"
+      }
+    }
+  },
+  "engine.deck.deviceOnly": "on this device only",
+  "@engine.deck.deviceOnly": {
+    "description": "After a source file’s size: the file is not in the cloud. Lowercase."
+  },
+  "engine.deck.replace": "Replace",
+  "@engine.deck.replace": {
+    "description": "Button (after ↻): attach another file to the source."
+  },
+  "engine.deck.removeConfirm": "Remove the attached file of this source? (The course itself is not changed.)",
+  "@engine.deck.removeConfirm": {
+    "description": "Confirmation before removing a source’s file."
+  },
+  "engine.deck.remove": "Remove file",
+  "@engine.deck.remove": {
+    "description": "Button (after 🗑): remove a source’s file."
+  },
+  "engine.deck.attachInstead": "Attach a file instead",
+  "@engine.deck.attachInstead": {
+    "description": "Button (after 📎) for a web source: attach a file instead of the link."
+  },
+  "engine.deck.inPackage": "{name} came in the subject's package (.noema.zip) — import the package to get it, or attach it",
+  "@engine.deck.inPackage": {
+    "description": "Source card (after 📦): the file is inside the subject’s package. name = file name. Keep “.noema.zip”.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ecb-notes.pdf"
+      }
+    }
+  },
+  "engine.deck.notAttached": "{name} — not attached yet",
+  "@engine.deck.notAttached": {
+    "description": "Source card (after 📄): the source names a file that is not attached. name = file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "ecb-notes.pdf"
+      }
+    }
+  },
+  "engine.deck.noFile": "No file attached",
+  "@engine.deck.noFile": {
+    "description": "Source card: the source has no file."
+  },
+  "engine.deck.attach": "Attach the file",
+  "@engine.deck.attach": {
+    "description": "Button (after 📎): attach the source’s file."
+  },
+  "engine.deck.pages": "Pages {pages}",
+  "@engine.deck.pages": {
+    "description": "Source card: its page range. pages = e.g. 23–42.",
+    "placeholders": {
+      "pages": {
+        "type": "String",
+        "example": "23–42"
+      }
+    }
+  },
+  "engine.deck.added": "added {date}",
+  "@engine.deck.added": {
+    "description": "Source card: when the source was added (a date as written in the pack, or —). Lowercase.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2026-10-01"
+      }
+    }
+  },
+  "engine.deck.also": "(also)",
+  "@engine.deck.also": {
+    "description": "After a chapter in a source card: the chapter also uses this source (not as its main one)."
+  },
+  "engine.deck.noChapter": "No chapter is mapped to this source.",
+  "@engine.deck.noChapter": {
+    "description": "Source card when no chapter uses the source."
+  },
+  "engine.deck.onlyThis": "Only this source",
+  "@engine.deck.onlyThis": {
+    "description": "Button (after 🔎): show only this source in the app."
+  },
+  "engine.deck.markNew": "Mark as new",
+  "@engine.deck.markNew": {
+    "description": "Button (after ↺): mark the source as new again."
+  },
+  "engine.deck.footer": "Turning a source off hides its chapters, sections, appended blocks, exercises, drills, cards and traps everywhere (practice, lightning, search, tutor). Your progress is never deleted. New sources are merged additively — just hand Claude the next PDF.",
+  "@engine.deck.footer": {
+    "description": "Footnote of the Sources menu."
   }
 }
