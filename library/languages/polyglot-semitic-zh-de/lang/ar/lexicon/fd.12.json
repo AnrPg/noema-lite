@@ -15,7 +15,11 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "عَلَيَّ",
+     "عَلَيْهِ"
+    ]
    },
    "translit": "ʿalā",
    "forms": {
@@ -153,7 +157,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "تَحْتِي",
+     "تَحْتَهُ"
+    ]
    },
    "translit": "taḥta",
    "forms": {
@@ -281,7 +289,11 @@
     "kind": "phrase",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "بِجَانِبِي",
+     "بِجَانِبِهِ"
+    ]
    },
    "translit": "bi-jānibi",
    "forms": {
@@ -414,7 +426,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "أَمَامِي",
+     "أَمَامَهُ"
+    ]
    },
    "translit": "ʾamāma",
    "forms": {
@@ -534,7 +550,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "withPronoun": [
+     "خَلْفِي",
+     "خَلْفَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -652,7 +672,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "وَرَائِي",
+     "وَرَاءَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -790,7 +814,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "withPronoun": [
+     "بَيْنِي",
+     "بَيْنَهُ"
+    ]
    },
    "translit": "bayna",
    "forms": {
@@ -922,6 +950,7 @@
     "plurals": [
      {
       "form": "قَرِيبُونَ",
+      "translit": "qarībūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "near (people); relatives are أَقَارِب (the noun قَرِيب)",
@@ -936,7 +965,13 @@
     "elative": "أَقْرَب",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "near to (قَرِيبٌ مِنَ الْبَيْتِ)"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1149,6 +1184,7 @@
     "plurals": [
      {
       "form": "بَعِيدُونَ",
+      "translit": "baʿīdūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1161,7 +1197,13 @@
     "elative": "أَبْعَد",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَنْ",
+      "what": "far from (بَعِيدٌ عَنِ الْمَدِينَةِ); also مِنْ"
+     }
+    ]
    },
    "translit": "baʿīd",
    "forms": {
@@ -1330,7 +1372,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دَاخِلُ",
+      "translit": "dāḫilu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "dāḫil",
@@ -1477,7 +1528,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خَارِجُ",
+      "translit": "ḫāriju"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫārij",
@@ -1632,7 +1692,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "يَسَارُ",
+      "translit": "yasāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "yasār",
@@ -1768,6 +1837,7 @@
     "plurals": [
      {
       "form": "أَيْمَان",
+      "translit": "ʾaymān",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1789,6 +1859,15 @@
       "senses": [
        "s3"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "يَمِينُ",
+      "translit": "yamīnu"
      }
     ]
    },
@@ -1940,6 +2019,7 @@
     "plurals": [
      {
       "form": "مَطَابِخ",
+      "translit": "maṭābiḫ",
       "kind": "broken",
       "pattern": "مَفَاعِل",
       "declension": "diptote",
@@ -1953,7 +2033,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَطْبَخُ",
+      "translit": "maṭbaḫu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "maṭbaḫ",
@@ -2131,6 +2220,7 @@
     "plurals": [
      {
       "form": "حَمَّامَات",
+      "translit": "ḥammāmāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2143,7 +2233,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَمَّامُ",
+      "translit": "ḥammāmu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḥammām",
@@ -2308,6 +2407,7 @@
     "plurals": [
      {
       "form": "غُرَف نَوْم",
+      "translit": "ġuraf nawm",
       "kind": "broken",
       "declension": "triptote",
       "note": "the head noun takes the plural: غُرَفُ نَوْمٍ",
@@ -2320,6 +2420,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: غُرْفَة is in the construct state and نَوْم is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "FEM",
@@ -2441,6 +2547,7 @@
     "plurals": [
      {
       "form": "غُرَف جُلُوس",
+      "translit": "ġuraf julūs",
       "kind": "broken",
       "declension": "triptote",
       "note": "the head noun takes the plural: غُرَفُ جُلُوسٍ",
@@ -2453,6 +2560,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: غُرْفَة is in the construct state and جُلُوس is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "FEM",
@@ -2574,6 +2687,7 @@
     "plurals": [
      {
       "form": "أَرْضِيَّات",
+      "translit": "ʾarḍiyyāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2586,7 +2700,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "أَرْضِيَّةُ",
+      "translit": "ʾarḍiyyatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ʾarḍiyya",
@@ -2720,6 +2843,7 @@
     "plurals": [
      {
       "form": "أَدْرَاج",
+      "translit": "ʾadrāj",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2732,7 +2856,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دَرَجُ",
+      "translit": "daraju"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "daraj",
@@ -2862,6 +2995,7 @@
     "plurals": [
      {
       "form": "رُفُوف",
+      "translit": "rufūf",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -2874,7 +3008,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رَفُّ",
+      "translit": "raffu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "raff",
@@ -2998,6 +3141,7 @@
     "plurals": [
      {
       "form": "كَنَبَات",
+      "translit": "kanabāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3009,7 +3153,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كَنَبَةُ",
+      "translit": "kanabatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "kanaba",
@@ -3147,6 +3300,7 @@
     "plurals": [
      {
       "form": "ثَلَّاجَات",
+      "translit": "ṯallājāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3158,7 +3312,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ثَلَّاجَةُ",
+      "translit": "ṯallājatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ṯallāja",

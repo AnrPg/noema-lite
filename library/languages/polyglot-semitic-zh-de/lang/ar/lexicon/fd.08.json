@@ -34,7 +34,17 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "a frozen verb with past forms only: no present, so no vowel pair"
+    },
+    "imperative": {
+     "none": "a frozen verb: no imperative"
+    },
+    "passive": {
+     "none": "a frozen verb: no passive"
+    },
+    "past1sg": "لَسْتُ"
    },
    "contrasts": [
     {
@@ -328,7 +338,10 @@
      "“I have no car” is not said with لَا: لَيْسَ عِنْدِي سَيَّارَةٌ — the “no” goes on the verbless sentence (لَيْسَ)."
     ]
    },
-   "prefix": false
+   "prefix": false,
+   "features": {
+    "governs": "a present indicative (لَا يَذْهَبُ); the jussive in a prohibition (لَا تَذْهَبْ); an indefinite noun in -a without tanwīn (لَا شَكَّ)"
+   }
   },
   {
    "id": "ar:ma_neg",
@@ -417,7 +430,10 @@
      "In MSA the neutral negation of the past is لَمْ + jussive (لَمْ أَذْهَبْ); مَا + past sounds literary or emphatic."
     ]
    },
-   "prefix": false
+   "prefix": false,
+   "features": {
+    "governs": "a past verb: مَا ذَهَبْتُ"
+   }
   },
   {
    "id": "ar:la_shay",
@@ -511,7 +527,8 @@
       "text": "Built exactly like “no-thing”: لَا + شَيْء."
      }
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:la_ahad",
@@ -598,7 +615,8 @@
     "subtleties": [
      "After لَا أَحَدَ a verb can follow: لَا أَحَدَ يَأْكُلُ (nobody eats) — the verb is masculine singular."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:abadan",
@@ -613,7 +631,8 @@
     "derivedFrom": "أَبَد (eternity), in the accusative",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ʾabadan",
    "ref": {
@@ -889,6 +908,7 @@
     "plurals": [
      {
       "form": "أَشْيَاء",
+      "translit": "ʾašyāʾ",
       "kind": "broken",
       "declension": "diptote",
       "note": "things: a diptote, although it looks like أَفْعَال (grammarians disagree on its measure)",
@@ -901,7 +921,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَيْءُ",
+      "translit": "šayʾu"
+     }
+    ]
    },
    "role": "thing, something; after a negated verb “anything”: لَا أُرِيدُ شَيْئًا = I don’t want anything. Needed for “nothing” with a verb.",
    "gender": "MASC",

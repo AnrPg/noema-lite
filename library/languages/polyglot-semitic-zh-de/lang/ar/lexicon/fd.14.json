@@ -22,6 +22,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ الْأَحَدِ), not the first"
     }
    },
    "gender": "MASC",
@@ -158,6 +164,12 @@
     "declension": "dual",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ الِاثْنَيْنِ), not the first"
     }
    },
    "gender": "MASC",
@@ -289,6 +301,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ الثُّلَاثَاءِ), not the first"
     }
    },
    "gender": "MASC",
@@ -419,6 +437,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ الْأَرْبِعَاءِ), not the first"
     }
    },
    "gender": "MASC",
@@ -550,6 +574,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ الْخَمِيسِ), not the first"
     }
    },
    "gender": "MASC",
@@ -681,6 +711,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ الْجُمُعَةِ), not the first"
     }
    },
    "contrasts": [
@@ -842,6 +878,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a day name with the article: it is the second word of a construct (يَوْمُ السَّبْتِ), not the first"
     }
    },
    "gender": "MASC",
@@ -996,6 +1038,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "gender": "FEM",
@@ -1112,6 +1160,7 @@
     "plurals": [
      {
       "form": "أَيَّام",
+      "translit": "ʾayyām",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1124,7 +1173,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "يَوْمُ",
+      "translit": "yawmu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1301,7 +1359,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "لَيْلُ",
+      "translit": "laylu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1425,6 +1492,7 @@
     "plurals": [
      {
       "form": "لَيَالٍ",
+      "translit": "layālī",
       "kind": "broken",
       "pattern": "فَعَالٍ",
       "declension": "defective",
@@ -1444,6 +1512,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "لَيْلَةُ",
+      "translit": "laylatu"
      }
     ]
    },
@@ -1604,7 +1681,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "صَبَاحُ",
+      "translit": "ṣabāḥu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṣabāḥ",
@@ -1732,7 +1818,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ظُهْرُ",
+      "translit": "ẓuhru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ẓuhr",
@@ -1854,7 +1949,8 @@
     "derivedFrom": "بَعْدَ + الظُّهْر (noon)",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "translit": "baʿda ẓ-ẓuhr",
    "ref": {
@@ -1989,7 +2085,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَسَاءُ",
+      "translit": "masāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "masāʾ",
@@ -2102,7 +2207,8 @@
     "derivedFrom": "الْيَوْم (the day), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "al-yawma",
    "ref": {
@@ -2212,7 +2318,8 @@
     "derivedFrom": "غَد (the morrow), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ġadan",
    "ref": {
@@ -2316,7 +2423,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "ʾamsi",
    "ref": {
@@ -2428,7 +2536,8 @@
     "derivedFrom": "آن (time), definite, in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "al-ʾāna",
    "ref": {
@@ -2534,7 +2643,8 @@
     "derivedFrom": "لَاحِق (following), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "lāḥiqan",
    "ref": {
@@ -2632,7 +2742,8 @@
     "derivedFrom": "قَرِيب (near), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "qarīban",
    "ref": {
@@ -2737,7 +2848,8 @@
     "derivedFrom": "مُبَكِّر (early), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "mubakkiran",
    "ref": {
@@ -2841,7 +2953,8 @@
     "derivedFrom": "مُتَأَخِّر (late), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "mutaʾaḫḫiran",
    "ref": {
@@ -2943,7 +3056,8 @@
     "derivedFrom": "دَائِم (lasting), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "dāʾiman",
    "ref": {
@@ -3048,7 +3162,8 @@
     "derivedFrom": "كَثِير (much), in the accusative",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "contrasts": [
     {
@@ -3178,7 +3293,8 @@
     "derivedFrom": "غَالِب (prevailing), in the accusative",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "contrasts": [
     {
@@ -3296,7 +3412,8 @@
     "derivedFrom": "أَحْيَان (times, plural of حِين), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ʾaḥyānan",
    "ref": {

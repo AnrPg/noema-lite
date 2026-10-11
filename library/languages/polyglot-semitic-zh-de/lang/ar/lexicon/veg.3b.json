@@ -26,7 +26,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كَبَرُ",
+      "translit": "kabaru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "kabar",
@@ -185,6 +194,7 @@
     "plurals": [
      {
       "form": "قِثَّاءَات",
+      "translit": "qiṯṯāʾāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted (plural of قِثَّاءَة)",
@@ -198,7 +208,16 @@
     "unit": "قِثَّاءَة",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قِثَّاءُ",
+      "translit": "qiṯṯāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qiṯṯāʾ",
@@ -354,6 +373,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only مَلْفُوف takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",

@@ -20,6 +20,7 @@
     "plurals": [
      {
       "form": "كِبَار",
+      "translit": "kibār",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -31,6 +32,7 @@
      },
      {
       "form": "كُبَرَاء",
+      "translit": "kubarāʾ",
       "kind": "broken",
       "pattern": "فُعَلَاء",
       "declension": "diptote",
@@ -44,6 +46,9 @@
     "elative": "أَكْبَر",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -286,6 +291,7 @@
     "plurals": [
      {
       "form": "صِغَار",
+      "translit": "ṣiġār",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -299,6 +305,9 @@
     "elative": "أَصْغَر",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -500,6 +509,7 @@
     "plurals": [
      {
       "form": "طِوَال",
+      "translit": "ṭiwāl",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -514,6 +524,9 @@
     "elative": "أَطْوَل",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ṭawīl",
@@ -779,6 +792,7 @@
     "plurals": [
      {
       "form": "قِصَار",
+      "translit": "qiṣār",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -793,6 +807,9 @@
     "elative": "أَقْصَر",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "qaṣīr",
@@ -1001,6 +1018,7 @@
     "plurals": [
      {
       "form": "جَيِّدُونَ",
+      "translit": "jayyidūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1017,6 +1035,12 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "governs": [
+     {
+      "prep": "فِي",
+      "what": "good at (جَيِّدٌ فِي الرِّيَاضِيَّاتِ)"
      }
     ]
    },
@@ -1193,6 +1217,7 @@
     "plurals": [
      {
       "form": "سَيِّئُونَ",
+      "translit": "sayyiʾūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1205,6 +1230,9 @@
     "elative": "أَسْوَأ",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "sayyiʾ",
@@ -1383,6 +1411,7 @@
     "plurals": [
      {
       "form": "جُدُد",
+      "translit": "judud",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -1401,7 +1430,10 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "governs": {
+     "none": "no fixed preposition"
+    }
    },
    "translit": "jadīd",
    "forms": {
@@ -1590,6 +1622,7 @@
     "plurals": [
      {
       "form": "قُدَامَى",
+      "translit": "qudāmā",
       "kind": "broken",
       "pattern": "فُعَالَى",
       "declension": "invariable",
@@ -1600,6 +1633,7 @@
      },
      {
       "form": "قُدَمَاء",
+      "translit": "qudamāʾ",
       "kind": "broken",
       "pattern": "فُعَلَاء",
       "declension": "diptote",
@@ -1613,6 +1647,9 @@
     "elative": "أَقْدَم",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "qadīm",
@@ -1826,6 +1863,7 @@
     "plurals": [
      {
       "form": "شُبَّان",
+      "translit": "šubbān",
       "kind": "broken",
       "pattern": "فُعْلَان",
       "declension": "triptote",
@@ -1848,7 +1886,10 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "governs": {
+     "none": "no fixed preposition"
+    }
    },
    "contrasts": [
     {
@@ -2037,6 +2078,7 @@
     "plurals": [
      {
       "form": "مُسِنُّونَ",
+      "translit": "musinnūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2050,6 +2092,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2215,6 +2260,7 @@
     "plurals": [
      {
       "form": "حَارُّونَ",
+      "translit": "ḥārrūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2228,6 +2274,9 @@
     "elative": "أَحَرّ",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2461,6 +2510,7 @@
     "plurals": [
      {
       "form": "سَاخِنُونَ",
+      "translit": "sāḫinūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2474,6 +2524,9 @@
     "elative": "أَسْخَن",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2664,6 +2717,7 @@
     "plurals": [
      {
       "form": "بَارِدُونَ",
+      "translit": "bāridūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2676,6 +2730,9 @@
     "elative": "أَبْرَد",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "bārid",
@@ -2866,6 +2923,7 @@
     "plurals": [
      {
       "form": "دَافِئُونَ",
+      "translit": "dāfiʾūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2878,6 +2936,9 @@
     "elative": "أَدْفَأ",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -3062,6 +3123,7 @@
     "plurals": [
      {
       "form": "جَمِيلُونَ",
+      "translit": "jamīlūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3074,6 +3136,9 @@
     "elative": "أَجْمَل",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "jamīl",
@@ -3316,6 +3381,7 @@
     "plurals": [
      {
       "form": "قِبَاح",
+      "translit": "qibāḥ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -3329,6 +3395,9 @@
     "elative": "أَقْبَح",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "qabīḥ",
@@ -3514,6 +3583,7 @@
     "plurals": [
      {
       "form": "سَهْلُونَ",
+      "translit": "sahlūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "easy-going (people)",
@@ -3523,6 +3593,7 @@
      },
      {
       "form": "سُهُول",
+      "translit": "suhūl",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -3536,7 +3607,13 @@
     "elative": "أَسْهَل",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "easy for someone (سَهْلٌ عَلَيَّ)"
+     }
+    ]
    },
    "translit": "sahl",
    "forms": {
@@ -3721,6 +3798,7 @@
     "plurals": [
      {
       "form": "صِعَاب",
+      "translit": "ṣiʿāb",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -3734,7 +3812,13 @@
     "elative": "أَصْعَب",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "hard for someone (صَعْبٌ عَلَيْهِ)"
+     }
+    ]
    },
    "translit": "ṣaʿb",
    "forms": {
@@ -3909,6 +3993,7 @@
     "plurals": [
      {
       "form": "رَخِيصُونَ",
+      "translit": "raḫīṣūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3921,6 +4006,9 @@
     "elative": "أَرْخَص",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "raḫīṣ",
@@ -4091,6 +4179,7 @@
     "plurals": [
      {
       "form": "غَالُونَ",
+      "translit": "ġālūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -4103,7 +4192,16 @@
     "elative": "أَغْلَى",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "dear to someone (غَالٍ عَلَيَّ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
    },
    "translit": "ġālī",
    "forms": {
@@ -4280,6 +4378,7 @@
     "plurals": [
      {
       "form": "سُعَدَاء",
+      "translit": "suʿadāʾ",
       "kind": "broken",
       "pattern": "فُعَلَاء",
       "declension": "diptote",
@@ -4293,7 +4392,13 @@
     "elative": "أَسْعَد",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "بِـ",
+      "what": "happy with, glad about (سَعِيدٌ بِلِقَائِكَ)"
+     }
+    ]
    },
    "translit": "saʿīd",
    "forms": {
@@ -4498,6 +4603,7 @@
     "plurals": [
      {
       "form": "حَزِينُونَ",
+      "translit": "ḥazīnūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -4509,7 +4615,13 @@
     "elative": "أَحْزَن",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "sad about, grieving for (حَزِينٌ عَلَى صَدِيقِهِ)"
+     }
+    ]
    },
    "translit": "ḥazīn",
    "forms": {
@@ -4695,6 +4807,7 @@
     "plurals": [
      {
       "form": "مُتْعَبُونَ",
+      "translit": "mutʿabūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -4708,7 +4821,13 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "tired from (مُتْعَبٌ مِنَ الْعَمَلِ)"
+     }
+    ]
    },
    "translit": "mutʿab",
    "forms": {
@@ -4870,6 +4989,7 @@
     "plurals": [
      {
       "form": "جِيَاع",
+      "translit": "jiyāʿ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -4884,6 +5004,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "jāʾiʿ",
@@ -5050,6 +5173,7 @@
     "plurals": [
      {
       "form": "عِطَاش",
+      "translit": "ʿiṭāš",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -5065,6 +5189,9 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ʿaṭšān",
@@ -5241,6 +5368,7 @@
     "plurals": [
      {
       "form": "سِرَاع",
+      "translit": "sirāʿ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -5253,6 +5381,9 @@
     "elative": "أَسْرَع",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "sarīʿ",
@@ -5437,6 +5568,7 @@
     "plurals": [
      {
       "form": "بِطَاء",
+      "translit": "biṭāʾ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -5449,6 +5581,9 @@
     "elative": "أَبْطَأ",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "baṭīʾ",

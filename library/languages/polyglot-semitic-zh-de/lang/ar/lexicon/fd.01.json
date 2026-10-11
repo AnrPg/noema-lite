@@ -1126,7 +1126,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "كُنْ",
+    "passive": {
+     "none": "كَانَ takes a predicate, not an object: no passive"
+    },
+    "past1sg": "كُنْتُ"
    },
    "contrasts": [
     {
@@ -1434,6 +1440,7 @@
     "plurals": [
      {
       "form": "رِجَال",
+      "translit": "rijāl",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -1447,7 +1454,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "اِمْرَأَة",
+      "note": "another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "رَجُلُ",
+      "translit": "rajulu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "rajul",
@@ -1610,6 +1629,7 @@
     "plurals": [
      {
       "form": "نِسَاء",
+      "translit": "nisāʾ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -1621,6 +1641,7 @@
      },
      {
       "form": "نِسْوَة",
+      "translit": "niswa",
       "kind": "broken",
       "pattern": "فِعْلَة",
       "declension": "triptote",
@@ -1635,7 +1656,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "رَجُل",
+      "note": "another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "اِمْرَأَةُ",
+      "translit": "imraʾatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1806,6 +1839,7 @@
     "plurals": [
      {
       "form": "أَوْلَاد",
+      "translit": "ʾawlād",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1820,7 +1854,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "بِنْت",
+      "note": "girl; another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "وَلَدُ",
+      "translit": "waladu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2012,6 +2058,7 @@
     "plurals": [
      {
       "form": "بَنَات",
+      "translit": "banāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2024,7 +2071,23 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "وَلَد",
+      "note": "boy"
+     },
+     {
+      "form": "اِبْن",
+      "note": "son (for “daughter”)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "بِنْتُ",
+      "translit": "bintu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2212,6 +2275,7 @@
     "plurals": [
      {
       "form": "أَطْفَال",
+      "translit": "ʾaṭfāl",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2224,7 +2288,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "طِفْلَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "طِفْلُ",
+      "translit": "ṭiflu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭifl",
@@ -2358,6 +2433,7 @@
     "plurals": [
      {
       "form": "أَشْخَاص",
+      "translit": "ʾašḫāṣ",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2367,6 +2443,7 @@
      },
      {
       "form": "شُخُوص",
+      "translit": "šuḫūṣ",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -2380,7 +2457,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "one word for a man or a woman"
+    },
+    "construct": [
+     {
+      "form": "شَخْصُ",
+      "translit": "šaḫṣu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šaḫṣ",
@@ -2566,7 +2652,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "a plural-only word for people of both sexes"
+    },
+    "construct": [
+     {
+      "form": "نَاسُ",
+      "translit": "nāsu"
+     }
+    ]
    },
    "class": "plt",
    "translit": "nās",
@@ -2696,6 +2791,7 @@
     "plurals": [
      {
       "form": "أَصْدِقَاء",
+      "translit": "ʾaṣdiqāʾ",
       "kind": "broken",
       "pattern": "أَفْعِلَاء",
       "declension": "diptote",
@@ -2708,7 +2804,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "صَدِيقَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "صَدِيقُ",
+      "translit": "ṣadīqu"
+     }
+    ]
    },
    "class": "person",
    "gender": "MASC",
@@ -2927,6 +3035,7 @@
     "plurals": [
      {
       "form": "طُلَّاب",
+      "translit": "ṭullāb",
       "kind": "broken",
       "pattern": "فُعَّال",
       "declension": "triptote",
@@ -2937,6 +3046,7 @@
      },
      {
       "form": "طَلَبَة",
+      "translit": "ṭalaba",
       "kind": "broken",
       "pattern": "فَعَلَة",
       "declension": "triptote",
@@ -2947,6 +3057,7 @@
      },
      {
       "form": "طَالِبُونَ",
+      "translit": "ṭālibūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "seekers, applicants: طَالِبُو اللُّجُوءِ (asylum seekers)",
@@ -2959,7 +3070,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "طَالِبَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "طَالِبُ",
+      "translit": "ṭālibu"
+     }
+    ]
    },
    "class": "person",
    "gender": "MASC",
@@ -3136,6 +3259,7 @@
     "plurals": [
      {
       "form": "مُعَلِّمُونَ",
+      "translit": "muʿallimūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3148,7 +3272,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُعَلِّمَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُعَلِّمُ",
+      "translit": "muʿallimu"
+     }
+    ]
    },
    "class": "person",
    "gender": "MASC",

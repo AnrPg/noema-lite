@@ -1216,7 +1216,8 @@
     "derivedFrom": "بِ + خَيْر (good)",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "translit": "bi-ḫayr",
    "ref": {
@@ -1860,7 +1861,8 @@
     "derivedFrom": "مِنْ + فَضْل (kindness) + ـكَ",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "contrasts": [
     {
@@ -1970,7 +1972,8 @@
     "derivedFrom": "مِنْ + فَضْل (kindness) + ـكِ",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "contrasts": [
     {
@@ -2225,6 +2228,7 @@
     "plurals": [
      {
       "form": "آسِفُونَ",
+      "translit": "ʾāsifūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2239,7 +2243,17 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "what one is sorry about (آسِفٌ عَلَى التَّأْخِيرِ); also لِـ",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2483,7 +2497,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "naʿam",
    "ref": {
@@ -2699,7 +2714,12 @@
      "A first لَا to food or drink is often not taken as final in Arab hospitality — the host may insist; a firm refusal usually repeats it with thanks: لَا، شُكْرًا."
     ]
    },
-   "prefix": false
+   "prefix": false,
+   "features": {
+    "governs": {
+     "none": "an answer word: it stands alone, nothing follows it"
+    }
+   }
   }
  ],
  "absent": []

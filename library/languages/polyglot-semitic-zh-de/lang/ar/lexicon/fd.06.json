@@ -15,7 +15,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "عِنْدِي",
+     "عِنْدَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -259,6 +263,7 @@
     "plurals": [
      {
       "form": "أُسَر",
+      "translit": "ʾusar",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -272,7 +277,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "أُسْرَةُ",
+      "translit": "ʾusratu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -443,6 +457,7 @@
     "plurals": [
      {
       "form": "عَائِلَات",
+      "translit": "ʿāʾilāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -452,6 +467,7 @@
      },
      {
       "form": "عَوَائِل",
+      "translit": "ʿawāʾil",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -466,7 +482,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَائِلَةُ",
+      "translit": "ʿāʾilatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -643,7 +668,17 @@
     "declension": "dual",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "a dual naming father and mother together"
+    },
+    "construct": [
+     {
+      "form": "وَالِدَا",
+      "translit": "wālidā",
+      "note": "a dual: the nūn drops (وَالِدَا الطِّفْلِ)"
+     }
+    ]
    },
    "class": "du",
    "gender": "MASC",
@@ -773,6 +808,7 @@
     "plurals": [
      {
       "form": "أُمَّهَات",
+      "translit": "ʾummahāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -786,7 +822,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "أَب",
+      "note": "another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أُمُّ",
+      "translit": "ʾummu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -976,6 +1024,7 @@
     "plurals": [
      {
       "form": "آبَاء",
+      "translit": "ʾābāʾ",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -990,7 +1039,20 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "أُمّ",
+      "note": "another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أَبُو",
+      "translit": "ʾabū",
+      "note": "one of the five nouns: the case is a long vowel (أَبُو / أَبَا / أَبِي)"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1217,6 +1279,7 @@
     "plurals": [
      {
       "form": "أَبْنَاء",
+      "translit": "ʾabnāʾ",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1228,6 +1291,7 @@
      },
      {
       "form": "بَنُونَ",
+      "translit": "banūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "literary; بَنُو in the names of tribes (بَنُو هَاشِمٍ)",
@@ -1241,7 +1305,22 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "اِبْنَة"
+     },
+     {
+      "form": "بِنْت",
+      "note": "the everyday word for “daughter”"
+     }
+    ],
+    "construct": [
+     {
+      "form": "اِبْنُ",
+      "translit": "ibnu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1424,6 +1503,7 @@
     "plurals": [
      {
       "form": "بَنَات",
+      "translit": "banāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1435,7 +1515,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "اِبْن"
+     }
+    ],
+    "construct": [
+     {
+      "form": "اِبْنَةُ",
+      "translit": "ibnatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1589,6 +1680,7 @@
     "plurals": [
      {
       "form": "إِخْوَة",
+      "translit": "ʾiḫwa",
       "kind": "broken",
       "pattern": "فِعْلَة",
       "declension": "triptote",
@@ -1599,6 +1691,7 @@
      },
      {
       "form": "إِخْوَان",
+      "translit": "ʾiḫwān",
       "kind": "broken",
       "pattern": "فِعْلَان",
       "declension": "triptote",
@@ -1612,7 +1705,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "أُخْت"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أَخُو",
+      "translit": "ʾaḫū",
+      "note": "one of the five nouns: the case is a long vowel (أَخُو / أَخَا / أَخِي)"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -1775,6 +1880,7 @@
     "plurals": [
      {
       "form": "أَخَوَات",
+      "translit": "ʾaḫawāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1787,7 +1893,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "أَخ"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أُخْتُ",
+      "translit": "ʾuḫtu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -1948,6 +2065,7 @@
     "plurals": [
      {
       "form": "أَزْوَاج",
+      "translit": "ʾazwāj",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1961,7 +2079,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "زَوْجَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "زَوْجُ",
+      "translit": "zawju"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -2130,6 +2259,7 @@
     "plurals": [
      {
       "form": "زَوْجَات",
+      "translit": "zawjāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2141,7 +2271,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "زَوْج"
+     }
+    ],
+    "construct": [
+     {
+      "form": "زَوْجَةُ",
+      "translit": "zawjatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2308,6 +2449,7 @@
     "plurals": [
      {
       "form": "رُضَّع",
+      "translit": "ruḍḍaʿ",
       "kind": "broken",
       "pattern": "فُعَّل",
       "declension": "triptote",
@@ -2320,7 +2462,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "رَضِيعَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "رَضِيعُ",
+      "translit": "raḍīʿu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -2476,7 +2629,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "a plural for grandparents of both sexes"
+    },
+    "construct": [
+     {
+      "form": "أَجْدَادُ",
+      "translit": "ʾajdādu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2643,6 +2805,7 @@
     "plurals": [
      {
       "form": "أَجْدَاد",
+      "translit": "ʾajdād",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2653,6 +2816,7 @@
      },
      {
       "form": "جُدُود",
+      "translit": "judūd",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -2666,7 +2830,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "جَدَّة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "جَدُّ",
+      "translit": "jaddu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2847,6 +3022,7 @@
     "plurals": [
      {
       "form": "جَدَّات",
+      "translit": "jaddāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2858,7 +3034,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "جَدّ"
+     }
+    ],
+    "construct": [
+     {
+      "form": "جَدَّةُ",
+      "translit": "jaddatu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -3002,6 +3189,7 @@
     "plurals": [
      {
       "form": "أَحْفَاد",
+      "translit": "ʾaḥfād",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -3015,7 +3203,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "حَفِيدَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "حَفِيدُ",
+      "translit": "ḥafīdu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -3181,6 +3380,7 @@
     "plurals": [
      {
       "form": "حَفِيدَات",
+      "translit": "ḥafīdāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3192,7 +3392,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "حَفِيد"
+     }
+    ],
+    "construct": [
+     {
+      "form": "حَفِيدَةُ",
+      "translit": "ḥafīdatu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -3338,6 +3549,7 @@
     "plurals": [
      {
       "form": "أَعْمَام",
+      "translit": "ʾaʿmām",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -3351,7 +3563,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "عَمَّة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "عَمُّ",
+      "translit": "ʿammu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3540,6 +3763,7 @@
     "plurals": [
      {
       "form": "أَخْوَال",
+      "translit": "ʾaḫwāl",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -3550,6 +3774,7 @@
      },
      {
       "form": "خِيلَان",
+      "translit": "ḫīlān",
       "kind": "broken",
       "pattern": "فِعْلَان",
       "declension": "triptote",
@@ -3563,7 +3788,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "خَالَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "خَالُ",
+      "translit": "ḫālu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3734,6 +3970,7 @@
     "plurals": [
      {
       "form": "عَمَّات",
+      "translit": "ʿammāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3745,7 +3982,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "عَمّ"
+     }
+    ],
+    "construct": [
+     {
+      "form": "عَمَّةُ",
+      "translit": "ʿammatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3891,6 +4139,7 @@
     "plurals": [
      {
       "form": "خَالَات",
+      "translit": "ḫālāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3903,7 +4152,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "خَال"
+     }
+    ],
+    "construct": [
+     {
+      "form": "خَالَةُ",
+      "translit": "ḫālatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -4073,6 +4333,7 @@
     "plurals": [
      {
       "form": "أَقَارِب",
+      "translit": "ʾaqārib",
       "kind": "broken",
       "pattern": "أَفَاعِل",
       "declension": "diptote",
@@ -4083,6 +4344,7 @@
      },
      {
       "form": "أَقْرِبَاء",
+      "translit": "ʾaqribāʾ",
       "kind": "broken",
       "pattern": "أَفْعِلَاء",
       "declension": "diptote",
@@ -4093,6 +4355,7 @@
      },
      {
       "form": "قَرِيبُونَ",
+      "translit": "qarībūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "as the adjective “near” (of people)",
@@ -4105,7 +4368,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "قَرِيبَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "قَرِيبُ",
+      "translit": "qarību"
+     }
+    ]
    },
    "contrasts": [
     {

@@ -22,7 +22,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طُفُولَةُ",
+      "translit": "ṭufūlatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ṭufūla",
@@ -149,6 +158,7 @@
     "plurals": [
      {
       "form": "لُعَب",
+      "translit": "luʿab",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -162,7 +172,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "لُعْبَةُ",
+      "translit": "luʿbatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "luʿba",
@@ -330,7 +349,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "اِلْعَبْ",
+    "passive": [
+     {
+      "past": "لُعِبَ",
+      "present": "يُلْعَبُ"
+     }
+    ],
+    "past1sg": "لَعِبْتُ"
    },
    "translit": "laʿiba",
    "forms": {
@@ -503,7 +531,13 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–a",
+    "imperative": "اِنْشَأْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "نَشَأْتُ"
    },
    "translit": "našaʾa",
    "forms": {
@@ -671,7 +705,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form V: the vowels are fixed by the form"
+    },
+    "imperative": "تَذَكَّرْ",
+    "passive": [
+     {
+      "past": "تُذُكِّرَ",
+      "present": "يُتَذَكَّرُ"
+     }
+    ],
+    "past1sg": "تَذَكَّرْتُ"
    },
    "translit": "taḏakkara",
    "forms": {
@@ -855,7 +900,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "اِنْسَ",
+    "passive": [
+     {
+      "past": "نُسِيَ",
+      "present": "يُنْسَى"
+     }
+    ],
+    "past1sg": "نَسِيتُ"
    },
    "translit": "nasiya",
    "forms": {
@@ -1008,6 +1062,7 @@
     "plurals": [
      {
       "form": "رِيَاض",
+      "translit": "riyāḍ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -1018,6 +1073,7 @@
      },
      {
       "form": "رَوْضَات",
+      "translit": "rawḍāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1034,6 +1090,15 @@
       "senses": [
        "s1"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رَوْضَةُ",
+      "translit": "rawḍatu"
      }
     ]
    },
@@ -1154,6 +1219,7 @@
     "plurals": [
      {
       "form": "جِيرَان",
+      "translit": "jīrān",
       "kind": "broken",
       "pattern": "فِعْلَان",
       "declension": "triptote",
@@ -1166,7 +1232,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "جَارَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "جَارُ",
+      "translit": "jāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jār",

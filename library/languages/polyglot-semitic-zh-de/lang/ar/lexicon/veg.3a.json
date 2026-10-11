@@ -27,7 +27,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُرْكُمُ",
+      "translit": "kurkumu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "kurkum",
@@ -188,7 +197,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حِمْحِمُ",
+      "translit": "ḥimḥimu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḥimḥim",
@@ -355,7 +373,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَرْمَقُ",
+      "translit": "sarmaqu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -506,7 +533,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "وَاسَابِي",
+      "translit": "wāsābī"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "wāsābī",
@@ -618,7 +654,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رَاوَنْدُ",
+      "translit": "rāwandu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "rāwand",
@@ -768,7 +813,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خَوْلَنْجَانُ",
+      "translit": "ḫawlanjānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫawlanjān",
@@ -896,7 +950,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَطَفُ",
+      "translit": "qaṭafu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1027,7 +1090,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "أُشْنَانُ",
+      "translit": "ʾušnānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʾušnān",
@@ -1158,6 +1230,7 @@
     "plurals": [
      {
       "form": "جُمَّارَات",
+      "translit": "jummārāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1171,7 +1244,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جُمَّارُ",
+      "translit": "jummāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jummār",
@@ -1323,7 +1405,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جَرْبُوزُ",
+      "translit": "jarbūzu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jarbūz",

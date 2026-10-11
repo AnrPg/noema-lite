@@ -20,6 +20,7 @@
     "plurals": [
      {
       "form": "أَوَائِل",
+      "translit": "ʾawāʾil",
       "kind": "broken",
       "pattern": "أَفَاعِل",
       "declension": "diptote",
@@ -30,6 +31,7 @@
      },
      {
       "form": "أَوَّلُون",
+      "translit": "ʾawwalūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "the first ones, the ancients",
@@ -44,6 +46,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ʾawwal",
@@ -185,6 +190,7 @@
     "plurals": [
      {
       "form": "ثَانُون",
+      "translit": "ṯānūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -199,6 +205,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ṯānī",
@@ -334,6 +343,7 @@
     "plurals": [
      {
       "form": "ثَالِثُون",
+      "translit": "ṯāliṯūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -348,6 +358,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ṯāliṯ",
@@ -479,6 +492,7 @@
     "plurals": [
      {
       "form": "رَابِعُون",
+      "translit": "rābiʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -493,6 +507,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "rābiʿ",
@@ -621,6 +638,7 @@
     "plurals": [
      {
       "form": "خَامِسُون",
+      "translit": "ḫāmisūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -635,6 +653,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ḫāmis",
@@ -763,6 +784,7 @@
     "plurals": [
      {
       "form": "سَادِسُون",
+      "translit": "sādisūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -777,6 +799,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "sādis",
@@ -904,6 +929,7 @@
     "plurals": [
      {
       "form": "سَابِعُون",
+      "translit": "sābiʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -918,6 +944,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "sābiʿ",
@@ -1045,6 +1074,7 @@
     "plurals": [
      {
       "form": "ثَامِنُون",
+      "translit": "ṯāminūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -1059,6 +1089,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ṯāmin",
@@ -1186,6 +1219,7 @@
     "plurals": [
      {
       "form": "تَاسِعُون",
+      "translit": "tāsiʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -1200,6 +1234,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "tāsiʿ",
@@ -1327,6 +1364,7 @@
     "plurals": [
      {
       "form": "عَاشِرُون",
+      "translit": "ʿāširūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "rare: ordinals are seldom used in the plural",
@@ -1341,6 +1379,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ʿāšir",
@@ -1471,6 +1512,7 @@
     "plurals": [
      {
       "form": "أَخِيرُون",
+      "translit": "ʾaḫīrūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "the last ones; in news style “the latter”",
@@ -1485,6 +1527,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ʾaḫīr",
@@ -1639,6 +1684,7 @@
     "plurals": [
      {
       "form": "أَنْصَاف",
+      "translit": "ʾanṣāf",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1651,7 +1697,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "نِصْفُ",
+      "translit": "niṣfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "niṣf",
@@ -1777,6 +1832,7 @@
     "plurals": [
      {
       "form": "أَرْبَاع",
+      "translit": "ʾarbāʿ",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1789,7 +1845,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رُبْعُ",
+      "translit": "rubʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "rubʿ",
@@ -1909,6 +1974,7 @@
     "plurals": [
      {
       "form": "قُرُون",
+      "translit": "qurūn",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -1921,7 +1987,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَرْنُ",
+      "translit": "qarnu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qarn",
@@ -2044,6 +2119,7 @@
     "plurals": [
      {
       "form": "عُقُود",
+      "translit": "ʿuqūd",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -2057,7 +2133,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَقْدُ",
+      "translit": "ʿaqdu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʿaqd",
@@ -2188,6 +2273,7 @@
     "plurals": [
      {
       "form": "ذِكْرَيَات",
+      "translit": "ḏikrayāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "also “memories, reminiscences”",
@@ -2200,7 +2286,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ذِكْرَى",
+      "translit": "ḏikrā"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḏikrā",

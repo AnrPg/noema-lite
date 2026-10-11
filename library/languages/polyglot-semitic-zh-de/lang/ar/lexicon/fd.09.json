@@ -105,7 +105,10 @@
    "alts": [
     "هَلِ"
    ],
-   "prefix": false
+   "prefix": false,
+   "features": {
+    "governs": "a whole statement, verbal or nominal: هَلْ أَنْتَ طَالِبٌ؟"
+   }
   },
   {
    "id": "ar:a",
@@ -213,6 +216,9 @@
     "subtleties": [
      "هَلْ cannot stand before a negation, أَ can: أَلَا تُحِبُّ الشَّايَ؟ — answer بَلَى (yes, I do) or لَا (no)."
     ]
+   },
+   "features": {
+    "governs": "a whole statement, written joined to its first word (أَتُرِيدُ؟), also before a negation (أَلَيْسَ)"
    }
   },
   {
@@ -438,7 +444,8 @@
     "derivedFrom": "رُبَّ + مَا",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "rubbamā",
    "ref": {
@@ -537,7 +544,8 @@
     "derivedFrom": "حَقّ (truth), in the accusative",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ḥaqqan",
    "ref": {
@@ -663,7 +671,8 @@
     "derivedFrom": "طَبْع (nature), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ṭabʿan",
    "ref": {
@@ -798,7 +807,8 @@
     "derivedFrom": "أَيْض (returning), in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ʾayḍan",
    "ref": {
@@ -898,7 +908,8 @@
     "derivedFrom": "فَ + قَطْ",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "faqaṭ",
    "ref": {
@@ -1017,7 +1028,8 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "role": "Yes — contradicting a negative question or statement (like German doch): أَلَا تُحِبُّ الشَّايَ؟ بَلَى!",
    "translit": "balā",

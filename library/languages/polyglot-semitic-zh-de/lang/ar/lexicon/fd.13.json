@@ -42,7 +42,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–a",
+    "imperative": "اِذْهَبْ",
+    "passive": {
+     "none": "intransitive: no personal passive (ذَهَبَ بِـ “to take away” has the impersonal ذُهِبَ بِهِ)"
+    },
+    "past1sg": "ذَهَبْتُ"
    },
    "translit": "ḏahaba",
    "forms": {
@@ -263,7 +269,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–i",
+    "imperative": "جِئْ",
+    "passive": {
+     "none": "intransitive: no personal passive (جَاءَ بِـ “to bring” has the impersonal جِيءَ بِهِ)"
+    },
+    "past1sg": "جِئْتُ"
    },
    "contrasts": [
     {
@@ -463,6 +475,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "stemVowels": {
+     "none": "an imperative only: no past or present stem"
+    },
+    "imperative": "تَعَالَ",
+    "passive": {
+     "none": "an imperative only: no passive"
+    },
+    "past1sg": {
+     "none": "an imperative only: no past"
     }
    },
    "contrasts": [
@@ -593,7 +615,13 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–i",
+    "imperative": "اِمْشِ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "مَشَيْتُ"
    },
    "translit": "mašā",
    "forms": {
@@ -752,7 +780,13 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُرْكُضْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "رَكَضْتُ"
    },
    "translit": "rakaḍa",
    "forms": {
@@ -910,7 +944,16 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "قُدْ",
+    "passive": [
+     {
+      "past": "قِيدَ",
+      "present": "يُقَادُ"
+     }
+    ],
+    "past1sg": "قُدْتُ"
    },
    "translit": "qāda",
    "forms": {
@@ -1073,7 +1116,15 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form III: the vowels are fixed by the form"
+    },
+    "imperative": "سَافِرْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "سَافَرْتُ"
    },
    "translit": "sāfara",
    "forms": {
@@ -1273,7 +1324,13 @@
        "s3"
       ]
      }
-    ]
+    ],
+    "stemVowels": "a–u",
+    "imperative": "عُدْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "عُدْتُ"
    },
    "contrasts": [
     {
@@ -1485,7 +1542,16 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُدْخُلْ",
+    "passive": [
+     {
+      "past": "دُخِلَ",
+      "present": "يُدْخَلُ"
+     }
+    ],
+    "past1sg": "دَخَلْتُ"
    },
    "translit": "daḫala",
    "forms": {
@@ -1653,7 +1719,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُخْرُجْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "خَرَجْتُ"
    },
    "contrasts": [
     {
@@ -1836,7 +1908,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form III: the vowels are fixed by the form"
+    },
+    "imperative": "غَادِرْ",
+    "passive": [
+     {
+      "past": "غُودِرَ",
+      "present": "يُغَادَرُ"
+     }
+    ],
+    "past1sg": "غَادَرْتُ"
    },
    "contrasts": [
     {
@@ -2019,7 +2102,13 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "stemVowels": "a–i",
+    "imperative": "صِلْ",
+    "passive": {
+     "none": "intransitive: no personal passive in “to arrive” (وُصِلَ / يُوصَلُ belongs to “to join, connect”)"
+    },
+    "past1sg": "وَصَلْتُ"
    },
    "translit": "waṣala",
    "forms": {
@@ -2189,7 +2278,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "اِبْقَ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "بَقِيتُ"
    },
    "translit": "baqiya",
    "forms": {
@@ -2380,7 +2475,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form VIII: the vowels are fixed by the form"
+    },
+    "imperative": "اِنْتَظِرْ",
+    "passive": [
+     {
+      "past": "اُنْتُظِرَ",
+      "present": "يُنْتَظَرُ"
+     }
+    ],
+    "past1sg": "اِنْتَظَرْتُ"
    },
    "translit": "intaẓara",
    "forms": {
@@ -2515,6 +2621,7 @@
     "plurals": [
      {
       "form": "حَافِلَات",
+      "translit": "ḥāfilāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2527,7 +2634,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَافِلَةُ",
+      "translit": "ḥāfilatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḥāfila",
@@ -2671,6 +2787,7 @@
     "plurals": [
      {
       "form": "قِطَارَات",
+      "translit": "qiṭārāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "trains",
@@ -2680,6 +2797,7 @@
      },
      {
       "form": "قُطُر",
+      "translit": "quṭur",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -2693,7 +2811,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قِطَارُ",
+      "translit": "qiṭāru"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2825,6 +2952,7 @@
     "plurals": [
      {
       "form": "طَائِرَات",
+      "translit": "ṭāʾirāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2842,6 +2970,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طَائِرَةُ",
+      "translit": "ṭāʾiratu"
      }
     ]
    },
@@ -2979,6 +3116,7 @@
     "plurals": [
      {
       "form": "سَيَّارَات أُجْرَة",
+      "translit": "sayyārāt ʾujra",
       "kind": "soundFem",
       "declension": "sound",
       "note": "the head noun takes the plural: سَيَّارَاتُ أُجْرَةٍ",
@@ -2991,6 +3129,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: سَيَّارَةُ is in the construct state and أُجْرَة is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "FEM",
@@ -3113,6 +3257,7 @@
     "plurals": [
      {
       "form": "سَيَّارَات",
+      "translit": "sayyārāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3125,7 +3270,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَيَّارَةُ",
+      "translit": "sayyāratu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3264,6 +3418,7 @@
     "plurals": [
      {
       "form": "دَرَّاجَات",
+      "translit": "darrājāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3281,6 +3436,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دَرَّاجَةُ",
+      "translit": "darrājatu"
      }
     ]
    },
@@ -3418,6 +3582,7 @@
     "plurals": [
      {
       "form": "سُفُن",
+      "translit": "sufun",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -3427,6 +3592,7 @@
      },
      {
       "form": "سَفَائِن",
+      "translit": "safāʾin",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -3440,7 +3606,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَفِينَةُ",
+      "translit": "safīnatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3582,6 +3757,7 @@
     "plurals": [
      {
       "form": "قَوَارِب",
+      "translit": "qawārib",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -3594,7 +3770,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَارِبُ",
+      "translit": "qāribu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3732,7 +3917,8 @@
     "derivedFrom": "مَشْي (walking), the maṣdar of مَشَى, in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "mašyan",
    "ref": {
@@ -3841,6 +4027,7 @@
     "plurals": [
      {
       "form": "تَذَاكِر",
+      "translit": "taḏākir",
       "kind": "broken",
       "pattern": "تَفَاعِل",
       "declension": "diptote",
@@ -3854,7 +4041,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "تَذْكِرَةُ",
+      "translit": "taḏkiratu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "taḏkira",

@@ -26,7 +26,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طَمَاطِمُ",
+      "translit": "ṭamāṭimu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭamāṭim",
@@ -146,6 +155,7 @@
     "plurals": [
      {
       "form": "بَصَلَات",
+      "translit": "baṣalāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -160,7 +170,16 @@
     "unit": "بَصَلَة",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَصَلُ",
+      "translit": "baṣalu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "baṣal",
@@ -313,7 +332,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَطَاطِسُ",
+      "translit": "baṭāṭisu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "baṭāṭis",
@@ -425,6 +453,7 @@
     "plurals": [
      {
       "form": "ثُومَات",
+      "translit": "ṯūmāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -438,7 +467,16 @@
     "unit": "ثُومَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ثُومُ",
+      "translit": "ṯūmu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṯūm",
@@ -563,6 +601,7 @@
     "plurals": [
      {
       "form": "خِيَارَات",
+      "translit": "ḫiyārāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -576,7 +615,16 @@
     "unit": "خِيَارَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خِيَارُ",
+      "translit": "ḫiyāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫiyār",
@@ -705,6 +753,7 @@
     "plurals": [
      {
       "form": "بَاذِنْجَانَات",
+      "translit": "bāḏinjānāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -718,7 +767,16 @@
     "unit": "بَاذِنْجَانَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَاذِنْجَانُ",
+      "translit": "bāḏinjānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bāḏinjān",
@@ -892,6 +950,7 @@
     "plurals": [
      {
       "form": "جَزَرَات",
+      "translit": "jazarāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -905,7 +964,16 @@
     "unit": "جَزَرَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جَزَرُ",
+      "translit": "jazaru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jazar",
@@ -1037,6 +1105,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only بَطَاطَا takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "FEM",
@@ -1181,7 +1255,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَازِلَّاءُ",
+      "translit": "bāzillāʾu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "bāzillāʾ",
@@ -1310,7 +1393,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَبَانِخُ",
+      "translit": "sabāniḫu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "sabāniḫ",
@@ -1459,6 +1551,7 @@
     "plurals": [
      {
       "form": "فُجْلَات",
+      "translit": "fujlāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1472,7 +1565,16 @@
     "unit": "فُجْلَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فُجْلُ",
+      "translit": "fujlu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "fujl",
@@ -1589,6 +1691,7 @@
     "plurals": [
      {
       "form": "قَرْعَات",
+      "translit": "qarʿāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1602,7 +1705,16 @@
     "unit": "قَرْعَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَرْعُ",
+      "translit": "qarʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qarʿ",
@@ -1726,6 +1838,7 @@
     "plurals": [
      {
       "form": "خَسَّات",
+      "translit": "ḫassāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1739,7 +1852,16 @@
     "unit": "خَسَّة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خَسُّ",
+      "translit": "ḫassu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫass",
@@ -1863,6 +1985,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فِلْفِل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -2013,7 +2141,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَلْفُوفُ",
+      "translit": "malfūfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "malfūf",
@@ -2130,7 +2267,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَرْنَبِيطُ",
+      "translit": "qarnabīṭu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qarnabīṭ",
@@ -2247,7 +2393,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بْرُوكُلِي",
+      "translit": "brūkulī"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "brūkulī",
@@ -2359,7 +2514,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُرَّاثُ",
+      "translit": "kurrāṯu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "kurrāṯ",
@@ -2477,6 +2641,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فِلْفِل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -2601,7 +2771,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَمَنْدَرُ",
+      "translit": "šamandaru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šamandar",
@@ -2726,7 +2905,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُوسَا",
+      "translit": "kūsā"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "kūsā",
@@ -2844,6 +3032,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فَاصُولِيَا takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "FEM",
@@ -2989,6 +3183,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only بَصَل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -3107,7 +3307,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كَرَفْسُ",
+      "translit": "karafsu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "karafs",
@@ -3231,6 +3440,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ذُرَةُ",
+      "translit": "ḏuratu"
      }
     ]
    },
