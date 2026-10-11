@@ -7,8 +7,8 @@
   "files": [
    {
     "file": "var.woff2",
-    "chars": 1213,
-    "bytes": 84004
+    "chars": 1212,
+    "bytes": 84108
    }
   ]
  },
@@ -20,8 +20,8 @@
   "files": [
    {
     "file": "var.woff2",
-    "chars": 1213,
-    "bytes": 88308
+    "chars": 1212,
+    "bytes": 88516
    }
   ]
  },
@@ -34,7 +34,7 @@
    {
     "file": "var.woff2",
     "chars": 134,
-    "bytes": 10288
+    "bytes": 10292
    }
   ]
  },
@@ -47,7 +47,7 @@
    {
     "file": "var.woff2",
     "chars": 202,
-    "bytes": 79824
+    "bytes": 79772
    }
   ]
  },
@@ -60,17 +60,17 @@
    {
     "file": "0-var.woff2",
     "chars": 1200,
-    "bytes": 277956
+    "bytes": 277700
    },
    {
     "file": "1-var.woff2",
     "chars": 1200,
-    "bytes": 334756
+    "bytes": 334548
    },
    {
     "file": "2-var.woff2",
     "chars": 90,
-    "bytes": 31776
+    "bytes": 31752
    }
   ]
  },
@@ -83,7 +83,7 @@
    {
     "file": "var.woff2",
     "chars": 290,
-    "bytes": 64584
+    "bytes": 64412
    }
   ]
  },
@@ -96,7 +96,7 @@
    {
     "file": "var.woff2",
     "chars": 493,
-    "bytes": 200368
+    "bytes": 200272
    }
   ]
  }

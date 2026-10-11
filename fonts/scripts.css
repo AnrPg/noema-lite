@@ -7,7 +7,7 @@
   font-weight: 400 700;
   font-display: swap;
   src: url(./noto-sans-arabic/var.woff2) format('woff2');
-  unicode-range: U+600-6FF, U+750-77F, U+870-88E, U+890-891, U+898-8FF, U+FB50-FBC2, U+FBD3-FD8F, U+FD92-FDC7, U+FDCF, U+FDF0-FDFF, U+FE70-FE74, U+FE76-FEFC, U+FEFF;
+  unicode-range: U+600-6FF, U+750-77F, U+870-88E, U+890-891, U+898-8FF, U+FB50-FBC2, U+FBD3-FD8F, U+FD92-FDC7, U+FDCF, U+FDF0-FDFF, U+FE70-FE74, U+FE76-FEFC;
 }
 @font-face {
   font-family: 'Noto Naskh Arabic';
@@ -15,7 +15,7 @@
   font-weight: 400 700;
   font-display: swap;
   src: url(./noto-naskh-arabic/var.woff2) format('woff2');
-  unicode-range: U+600-6FF, U+750-77F, U+870-88E, U+890-891, U+898-8FF, U+FB50-FBC2, U+FBD3-FD8F, U+FD92-FDC7, U+FDCF, U+FDF0-FDFF, U+FE70-FE74, U+FE76-FEFC, U+FEFF;
+  unicode-range: U+600-6FF, U+750-77F, U+870-88E, U+890-891, U+898-8FF, U+FB50-FBC2, U+FBD3-FD8F, U+FD92-FDC7, U+FDCF, U+FDF0-FDFF, U+FE70-FE74, U+FE76-FEFC;
 }
 @font-face {
   font-family: 'Noto Sans Hebrew';

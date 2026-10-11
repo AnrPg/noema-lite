@@ -90,7 +90,7 @@ def make(src, cps, dst):
     if 'wght' in axes: lim['wght'] = (max(400, axes['wght'].minValue), min(700, axes['wght'].maxValue))
     if 'wdth' in axes: lim['wdth'] = 100
     if lim: f = instancer.instantiateVariableFont(f, lim)
-    f.flavor = 'woff2'; os.makedirs(os.path.dirname(dst), exist_ok=True); f.save(dst)
+    f.flavor = 'woff2'; f.recalcTimestamp = False; os.makedirs(os.path.dirname(dst), exist_ok=True); f.save(dst)   # reproducible files
     return os.path.getsize(dst)
 
 def main():
