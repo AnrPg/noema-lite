@@ -324,7 +324,14 @@
    },
    "status": "partial",
    "gap": "A short teaching block (fd.00 or fd.05 with lists) and checking that the bank uses 、 in lists; typed answers should accept ASCII punctuation.",
-   "when": "fd.00 / fd.05"
+   "when": "fd.00 / fd.05",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese also uses full-width 。 and 、, but 、 is its ordinary comma; Chinese keeps ，for clauses and 、 only between list items, and titles take 《 》 rather than 『 』."
+    }
+   ]
   },
   {
    "id": "zh.script.direction",
@@ -1068,7 +1075,14 @@
    },
    "status": "partial",
    "gap": "Pronunciation notes in fn.tones / S00 and audio (P9).",
-   "when": "fd.00"
+   "when": "fd.00",
+   "notes": [
+    {
+     "for": "sq",
+     "rel": "similar",
+     "text": "Albanian y is exactly pinyin ü (女 nǚ); the buzzing i of 字 zì, 是 shì and the e of 饿 è have no Albanian match."
+    }
+   ]
   },
   {
    "id": "zh.phon.syllable",
@@ -3334,7 +3348,14 @@
    },
    "status": "partial",
    "gap": "A per-noun place flag (is a place / needs a localizer) to generate and check *在冰箱 is not declared yet.",
-   "when": "fd.12 (field: place)"
+   "when": "fd.12 (field: place)",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese puts a place noun after the noun too: 机の上 ‘on the desk’ ~ 桌子上."
+    }
+   ]
   },
   {
    "id": "zh.syntax.be3",
@@ -4029,7 +4050,14 @@
    },
    "status": "missing",
    "gap": "Lexeme 被, a function with the ‘adversative’ use and a transform active ↔ 被.",
-   "when": "later (core)"
+   "when": "later (core)",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Like the Japanese adversative passive in -(r)are-, 被 is used mainly for unwelcome events: 我的钱包被偷了 ‘my wallet was stolen’."
+    }
+   ]
   },
   {
    "id": "zh.syntax.serial",
@@ -4381,7 +4409,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.18"
+   "when": "fd.18",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese marks ‘when’ and ‘if’ at the end of the clause (…時, …なら), as 的时候 and 的话 do."
+    }
+   ]
   },
   {
    "id": "zh.syntax.adverbs",
@@ -4527,7 +4562,7 @@
   },
   {
    "id": "zh.nom.yi.indef",
-   "title": "一 + measure word as ‘a’",
+   "title": "一 + measure word for a new thing",
    "area": "syntax",
    "pos": [
     "NUM",
@@ -4541,7 +4576,7 @@
      "value": "one"
     }
    ],
-   "what": "One newly introduced thing can be marked with the numeral 一 ‘one’ + measure word, which works as an indefinite ‘a’: 我买了一本书 ‘I bought a book’. After a verb 一 is often dropped in speech (买了本书), and with a non-specific noun, especially after 是, nothing is used (我是老师 ‘I am a teacher’).",
+   "what": "One newly introduced thing can be marked with the numeral 一 ‘one’ + measure word, which works as an indefinite marker: 我买了一本书 ‘I bought a book’. After a verb 一 is often dropped in speech (买了本书), and with a non-specific noun, especially after 是, nothing is used (我是老师 ‘I am a teacher’).",
    "examples": [
     {
      "text": "我买了一本书。",
@@ -5066,7 +5101,14 @@
    },
    "status": "partial",
    "gap": "A structured kin field (lineage, age, sex, in-law) is not declared, so no sense_split / kin-tree exercise can ask ‘your mother’s brother?’; no family-tree picture.",
-   "when": "fd.06"
+   "when": "fd.06",
+   "notes": [
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Hindi also splits uncles and aunts by side and age: चाचा (father’s younger brother) ~ 叔叔, ताऊ (his elder brother) ~ 伯伯, मामा (mother’s brother) ~ 舅舅."
+    }
+   ]
   },
   {
    "id": "zh.lex.relativeage",
@@ -5596,7 +5638,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.16, fd.17"
+   "when": "fd.16, fd.17",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese splits ‘old’ the same way: 年寄り / 老いた for people, 古い for things — 老 vs 旧."
+    }
+   ]
   },
   {
    "id": "zh.sem.rice",
@@ -6432,7 +6481,14 @@
    },
    "status": "partial",
    "gap": "A culture note in fd.05 (numbers) linking the facts, and quiz items.",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese avoids 4 for the same reason: shi 四 sounds like 死 ‘death’."
+    }
+   ]
   },
   {
    "id": "zh.culture.names",
@@ -6486,7 +6542,14 @@
    },
    "status": "partial",
    "gap": "A greetings block on names and 姓 / 叫, and 姓 as a lexeme.",
-   "when": "fd.02"
+   "when": "fd.02",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese also puts the surname first and the title after the name: 田中先生 ~ 王老师."
+    }
+   ]
   },
   {
    "id": "zh.prag.greetings",
@@ -7225,7 +7288,7 @@
      "build_sentence",
      "quiz"
     ],
-    "other": "星期一 … 星期日 lexemes; trap about Greek Δευτέρα"
+    "other": "星期一 … 星期日 lexemes; trap about weekdays counted from Sunday (pitfall + notes)"
    },
    "status": "partial",
    "gap": "The alternatives 周一 … 周日 and 礼拜一 … 礼拜天 (very common in writing and speech) are not recorded as variants.",
@@ -7278,7 +7341,14 @@
    },
    "status": "missing",
    "gap": "A culture block in fd.15 (months and the year) and lexemes 春节, 农历.",
-   "when": "fd.15"
+   "when": "fd.15",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese keeps the twelve animals (干支) but celebrates New Year on 1 January; Chinese 春节 follows the lunar calendar."
+    }
+   ]
   },
   {
    "id": "zh.culture.age",
@@ -7433,7 +7503,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.17"
+   "when": "fd.17",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese 青 ao also covers green and blue (青信号 ‘green light’), like Chinese 青."
+    }
+   ]
   },
   {
    "id": "zh.culture.sinitic",
