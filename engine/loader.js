@@ -587,7 +587,7 @@
       box.append(brandHead('🌍 ' + tr('loader.langs.title'), tr('loader.langs.sub')),
         el('div', { class: 'noema-chips' }, ...[...(REG.languages || []), ...langAccount(acc).map(r => ({ ...r, mine: true }))].map(m => el('button', { class: 'noema-chip', 'data-course': m.id, onclick: () => { close(); onPick(langMeta('lang:' + m.id)); } },
           el('span', { class: 'e' }, (m.courseId || m.id ? langChosen(acc, { languages: m.languages, courseId: m.courseId || m.id }) : m.languages).map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title), m.mine ? el('span', { class: 'o', title: tr('loader.langs.own') }, '🔒') : null))),
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: async () => { try { await loadLangUI(); NoemaLangUI.newCourse(acc, { onCreated: r => { close(); onPick(langMeta('lang:' + r.id)); } }); } catch (e) { toastL('⚠️ ' + errMsg(e), 4000); } } }, '✨ ' + tr('loader.langs.new')), el('button', { class: 'btn small', onclick: close }, tr('loader.close'))));
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: async () => { try { await loadLangUI(); NoemaLangUI.newCourse(acc, { onCreated: r => { studyAdd(acc, r.languages); close(); onPick(langMeta('lang:' + r.id)); } }); } catch (e) { toastL('⚠️ ' + errMsg(e), 4000); } } }, '✨ ' + tr('loader.langs.new')), el('button', { class: 'btn small', onclick: close }, tr('loader.close'))));
     }, { closable: true });
   }
   async function startLanguage(acc, meta) {
@@ -633,6 +633,8 @@
     else { const k = `${P}${acc}:a:settings`, s = jget(k, {}) || {}; s.studyLangs = v; KV.set(k, JSON.stringify(s)); }
     try { dispatchEvent(new CustomEvent('noema:study', { detail: { acc, langs: v } })); } catch (e) { }
   }
+  /** A new course the learner made: its languages are studied (once the learner has answered). */
+  const studyAdd = (acc, codes) => { const st = STUDY(acc); if (st && (codes || []).some(c => !st.includes(c))) putStudy(acc, [...st, ...codes]); };
   /** A language's own name (endonym: Ελληνικά, Deutsch, العربية) and its name in the UI language. */
   function langEndo(code, acc) {
     const cap = (s, loc) => { const a = [...String(s || '')]; return a.length ? a[0].toLocaleUpperCase(loc) + a.slice(1).join('') : ''; };
@@ -709,7 +711,7 @@
   const langOpen = id => window.NoemaShell?.go(langHash(id));
   function langCreate() {
     const acc = KV.acc;
-    loadLangUI().then(() => NoemaLangUI.newCourse(acc, { onCreated: r => langOpen(r.id) })).catch(e => toastL('⚠️ ' + errMsg(e), 4000));
+    loadLangUI().then(() => NoemaLangUI.newCourse(acc, { onCreated: r => { studyAdd(acc, r.languages); langOpen(r.id); } })).catch(e => toastL('⚠️ ' + errMsg(e), 4000));
   }
   /** Choose another course: a sheet with every course. */
   function langChooser() {
@@ -1577,7 +1579,8 @@
   /* ---------------- public API ---------------- */
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV,
-    langStudy: { get: STUDY, set: putStudy, offered: studyOffered, chosen: langChosen, chooser: studyChooser, open: studyOpen },   // D21: the languages the learner studies geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
+    langStudy: { get: STUDY, set: putStudy, offered: studyOffered, chosen: langChosen, chooser: studyChooser, open: studyOpen },   // D21: the languages the learner studies
+    geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
