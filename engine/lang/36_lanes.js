@@ -62,7 +62,7 @@ function laneInfo(c, nid) {
   const others = UI.C.languages.filter(x => x !== c && UI.C.lang[x]?.applies[nid]);
   const body = box => box.append(
     h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).label, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
-    fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + g.status) : null); })) : null,
+    fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + LT('lang.poly.st.' + (['periphrastic', 'absent'].includes(g.status) ? g.status : 'other'), { status: g.status })) : null); })) : null,
     words ? h('p', { class: 'tiny' }, LT('lang.lanes.words', { n: words, lang: info(c).name })) : null,
     others.length ? h('p', { class: 'tiny lx-linfo-oth' }, LT('lang.lanes.alsoIn') + ' ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).label + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, LT('lang.lanes.onlyIn', { lang: info(c).name })),
     h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, LT('lang.home.open'))));
