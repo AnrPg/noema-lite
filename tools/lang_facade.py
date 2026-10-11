@@ -281,10 +281,11 @@ def load_facade(course, loc, texts, out=None):
     return entries, man
 
 
-def coverage(texts, entries):
+def coverage(texts, entries, loc=MASTER):
+    """{tier: {total, done, stale, missing}} — the tiers of the locale (a note for another language is Tier 3 there, §3.1)."""
     cov = {}
     for t in texts:
-        c = cov.setdefault(str(t.tier), {'total': 0, 'done': 0, 'stale': 0, 'missing': 0})
+        c = cov.setdefault(str(tier_of(t, loc)), {'total': 0, 'done': 0, 'stale': 0, 'missing': 0})
         c['total'] += 1
         e = entries.get(t.addr)
         if not e: c['missing'] += 1
@@ -297,7 +298,7 @@ def write_manifest(course, loc, texts, entries, status, notes, out=None):
     lib = out or lib_of(course)
     files = sorted({os.path.relpath(facade_file(course, loc, *t.facade, out=out), lib) for t in texts})
     man = {'format': 'noema.langfacade/v1', 'course': os.path.basename(os.path.abspath(course)), 'locale': loc, 'master': MASTER,
-           'status': status, 'coverage': coverage(texts, entries), 'built': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+           'status': status, 'coverage': coverage(texts, entries, loc), 'built': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
            'files': files, 'notes': notes}
     wjson(manifest_path(course, loc, out), man)
     return man
